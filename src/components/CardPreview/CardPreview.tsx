@@ -1,4 +1,5 @@
 import styles from './CardPreview.module.css';
+
 import {
   CARD_BRAND,
   MASK_START_INDEX,

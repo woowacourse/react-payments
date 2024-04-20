@@ -1,11 +1,12 @@
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
+import Label from '../common/Label/Label';
 
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 import { isEnglishCharacter } from '../../domain/validators';
-import Label from '../common/Label/Label';
+
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 

@@ -1,5 +1,5 @@
-import Master from '../imgs/Mastercard.png';
 import Visa from '../imgs/Visa.png';
+import Master from '../imgs/Mastercard.png';
 
 export const CARD_BRAND = {
   visa: {

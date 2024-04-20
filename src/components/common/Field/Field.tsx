@@ -1,5 +1,6 @@
-import styles from './Field.module.css';
 import React from 'react';
+
+import styles from './Field.module.css';
 
 interface FieldProps {
   title: string;

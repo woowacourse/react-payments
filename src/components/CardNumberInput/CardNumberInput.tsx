@@ -1,10 +1,12 @@
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
+import Label from '../common/Label/Label';
+
+import { hasFourDigit, isInteger } from '../../domain/validators';
 
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
+
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { hasFourDigit, isInteger } from '../../domain/validators';
-import Label from '../common/Label/Label';
 
 interface CardNumberInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;

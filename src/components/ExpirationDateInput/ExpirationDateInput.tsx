@@ -1,5 +1,6 @@
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
+import Label from '../common/Label/Label';
 
 import {
   isInteger,
@@ -8,9 +9,9 @@ import {
   isValidDate,
 } from '../../domain/validators';
 
-import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
-import Label from '../common/Label/Label';
+
+import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
