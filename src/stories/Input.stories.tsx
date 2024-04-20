@@ -4,6 +4,36 @@ import Input from '../components/common/Input/Input';
 const meta = {
   title: 'Input',
   component: Input,
+
+  argTypes: {
+    name: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    isRequired: {
+      table: {
+        disable: true,
+      },
+    },
+    maxLength: {
+      table: {
+        disable: true,
+      },
+    },
+
+    handleChange: {
+      table: {
+        disable: true,
+      },
+    },
+    handleOnBlur: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -16,16 +46,6 @@ export const Default: Story = {
     value: '',
     placeholder: '1234',
     isError: false,
-    maxLength: 4,
-  },
-};
-
-export const Error: Story = {
-  args: {
-    name: 'name',
-    value: 'abcd',
-    placeholder: '1234',
-    isError: true,
     maxLength: 4,
   },
 };

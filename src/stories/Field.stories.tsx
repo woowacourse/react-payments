@@ -5,6 +5,15 @@ import Input from '../components/common/Input/Input';
 const meta = {
   title: 'Field',
   component: Field,
+
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+      control: false,
+    },
+  },
 } satisfies Meta<typeof Field>;
 
 export default meta;
@@ -82,5 +91,10 @@ export const OwnerName: Story = {
         ))}
       </>
     ),
+  },
+  argTypes: {
+    description: {
+      control: false,
+    },
   },
 };
