@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-interface AppLayoutProps {
-  children: React.ReactNode;
-}
+interface AppLayoutProps {}
 
-const AppLayout = ({ children }: AppLayoutProps) => {
+const AppLayout = ({ children }: React.PropsWithChildren<AppLayoutProps>) => {
   return <Layout>{children}</Layout>;
 };
 

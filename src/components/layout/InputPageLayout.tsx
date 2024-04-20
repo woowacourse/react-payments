@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-interface InputPageLayoutProps {
-  children: React.ReactNode;
-}
+interface InputPageLayoutProps {}
 
-const InputPageLayout = ({ children }: InputPageLayoutProps) => {
+const InputPageLayout = ({children}: React.PropsWithChildren<InputPageLayoutProps>) => {
   return <Layout>{children}</Layout>;
 };
 
