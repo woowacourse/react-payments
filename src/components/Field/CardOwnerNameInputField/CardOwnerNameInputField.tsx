@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
+import normalizeSpaces from "../../../utils/normalizeSpaces";
+import filterEnglish from "../../../utils/filterEnglish";
 
 const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
 export default function CardOwnerNameInputField({
@@ -12,23 +14,6 @@ export default function CardOwnerNameInputField({
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const normalizeSpaces = (str: string): string => {
-    return str.replace(/\s+/g, " ").trimStart();
-  };
-
-  const filterEnglish = (str: string) => {
-    return str
-      .split("")
-      .filter((char: string) => {
-        if (
-          char === " " ||
-          (char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90)
-        )
-          return true;
-        return false;
-      })
-      .join("");
-  };
   const handleChange = (e: any) => {
     const onlyEngStr = filterEnglish(e.target.value.toUpperCase());
     const normalizedOwnerName = normalizeSpaces(onlyEngStr);
