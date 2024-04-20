@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const 기본: Story = {
   args: {
     cardNumberState: {},
     expirationDateState: {},
@@ -22,7 +22,7 @@ export const Default: Story = {
   },
 };
 
-export const Fulfilled: Story = {
+export const 전체: Story = {
   args: {
     cardNumberState: { first: 5123, second: 1234, third: 1234, fourth: 1234 },
     expirationDateState: { month: 12, year: 24 },
@@ -34,7 +34,7 @@ export const Fulfilled: Story = {
   },
 };
 
-export const Visa: Story = {
+export const 비자카드: Story = {
   args: {
     cardNumberState: { first: 4123 },
     expirationDateState: {},
@@ -46,7 +46,7 @@ export const Visa: Story = {
   },
 };
 
-export const MasterCard: Story = {
+export const 마스터카드: Story = {
   args: {
     cardNumberState: { first: 5123 },
     expirationDateState: {},
@@ -58,7 +58,7 @@ export const MasterCard: Story = {
   },
 };
 
-export const NormalCard: Story = {
+export const 일반카드: Story = {
   args: {
     cardNumberState: { first: 1111 },
     expirationDateState: {},
@@ -70,7 +70,7 @@ export const NormalCard: Story = {
   },
 };
 
-export const HiddenCardNumber: Story = {
+export const 카드번호_가리기: Story = {
   args: {
     cardNumberState: { third: 5123 },
     expirationDateState: {},

@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const 기본: Story = {
   args: {
     label: '라벨',
     error: '',
@@ -26,7 +26,7 @@ export const Default: Story = {
   },
 };
 
-export const Valid: Story = {
+export const 정상입력: Story = {
   args: {
     label: '라벨',
     error: '',
@@ -41,7 +41,7 @@ export const Valid: Story = {
   },
 };
 
-export const Error: Story = {
+export const 에러상태: Story = {
   args: {
     label: '라벨',
     error: '시모와 쿠키는 숫자가 아닙니다.',

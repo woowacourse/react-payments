@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const 기본: Story = {
   args: {
     placeholder: 'MM',
     value: '',
@@ -19,7 +19,7 @@ export const Default: Story = {
   },
 };
 
-export const Filled: Story = {
+export const 입력상태: Story = {
   args: {
     placeholder: 'MM',
     value: '12',
@@ -28,7 +28,7 @@ export const Filled: Story = {
   },
 };
 
-export const Error: Story = {
+export const 에러상태: Story = {
   args: {
     placeholder: 'MM',
     value: 'aa',

@@ -9,7 +9,7 @@ const { TITLE, CAPTION, LABEL, PLACEHOLDER, ERROR } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
 
 const meta = {
-  title: 'FormField_CardNumber',
+  title: 'FormField_카드번호',
   component: FormField,
 } satisfies Meta<typeof FormField>;
 
@@ -17,7 +17,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardNumberDefault: Story = {
+export const 기본: Story = {
   args: {
     title: TITLE.cardNumber,
     caption: CAPTION.cardNumber,
@@ -34,7 +34,7 @@ export const CardNumberDefault: Story = {
   },
 };
 
-export const CardNumberValid: Story = {
+export const 정상입력: Story = {
   args: {
     title: TITLE.cardNumber,
     caption: CAPTION.cardNumber,
@@ -67,7 +67,7 @@ export const CardNumberValid: Story = {
   },
 };
 
-export const CardNumberTypeError: Story = {
+export const 숫자형식이_아닌경우: Story = {
   args: {
     title: TITLE.cardNumber,
     caption: CAPTION.cardNumber,
@@ -103,7 +103,7 @@ export const CardNumberTypeError: Story = {
   },
 };
 
-export const CardNumberLengthError: Story = {
+export const 카드번호_자리수가_맞지_않은_경우: Story = {
   args: {
     title: TITLE.cardNumber,
     caption: CAPTION.cardNumber,

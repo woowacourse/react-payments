@@ -9,7 +9,7 @@ const { TITLE, LABEL, PLACEHOLDER, ERROR } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
 
 const meta = {
-  title: 'FormField_UserName',
+  title: 'FormField_소유자_이름',
   component: FormField,
 } satisfies Meta<typeof FormField>;
 
@@ -17,7 +17,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const UserNameDefault: Story = {
+export const 기본: Story = {
   args: {
     title: TITLE.userName,
     children: (
@@ -28,7 +28,7 @@ export const UserNameDefault: Story = {
   },
 };
 
-export const UserNameValid: Story = {
+export const 정상입력: Story = {
   args: {
     title: TITLE.userName,
     children: (
@@ -43,23 +43,7 @@ export const UserNameValid: Story = {
   },
 };
 
-export const UserNameLowerCaseTypeError: Story = {
-  args: {
-    title: TITLE.userName,
-    children: (
-      <InputField label={LABEL.userName} error={ERROR.userName}>
-        <Input
-          placeholder={PLACEHOLDER.userName}
-          value="simo cookie"
-          maxLength={MAX_LENGTH.userName}
-          aria-invalid
-        />
-      </InputField>
-    ),
-  },
-};
-
-export const UserNameKoreanTypeError: Story = {
+export const 유저이름에_한글이_들어간_경우: Story = {
   args: {
     title: TITLE.userName,
     children: (
@@ -75,7 +59,7 @@ export const UserNameKoreanTypeError: Story = {
   },
 };
 
-export const UserNameJoinTypeError: Story = {
+export const 유저이름_입력_사이의_공백이_없을경우: Story = {
   args: {
     title: TITLE.userName,
     children: (
