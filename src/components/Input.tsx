@@ -43,7 +43,7 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
       <input
         maxLength={getInputMaxLength(informationDetail)}
         type={isPassword ? 'password' : 'input'}
-        css={inputStyle({ border: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
+        css={inputStyle({ borderColor: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
         placeholder={placeholder}
         onChange={(e) => handleInputChange(e.target.value)}
       ></input>
@@ -51,9 +51,9 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
   );
 }
 
-const inputStyle = ({ border, focusColor }: { border: string; focusColor: string }) => css`
+const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusColor: string }) => css`
   border: 1px solid;
-  border-color: ${border};
+  border-color: ${borderColor};
   border-radius: 4px;
   padding: 8px;
   font-size: 11px;

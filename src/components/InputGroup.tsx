@@ -13,16 +13,13 @@ interface InputGroupType {
 }
 
 function InputGroup({ setState, informationSection }: InputGroupType) {
-  const getType = (informationSection: informationSectionType) => {
-    const getTypeTable = {
-      number: CARD_NUMBER,
-      period: CARD_PERIOD,
-      owner: CARD_OWNER,
-    };
-    return getTypeTable[informationSection];
+  const getTypeTable = {
+    number: CARD_NUMBER,
+    period: CARD_PERIOD,
+    owner: CARD_OWNER,
   };
 
-  const { title, subtitle, label, placeholders } = getType(informationSection);
+  const { title, subtitle, label, placeholders } = getTypeTable[informationSection];
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateState = (value: string, index: number) => {
