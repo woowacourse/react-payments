@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { InputInfo } from '../types/input';
 import Validation from '../domain/InputValidation';
 
-const InputContainer = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid ${(props) => props.color};
-  outline-color: ${(props) => props.color};
-  border-radius: 3px;
-`;
-
 interface Props {
   info: InputInfo;
   index: number;
@@ -45,3 +37,11 @@ export default function Input({
     />
   );
 }
+
+const InputContainer = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid ${(props) => props.color};
+  outline-color: ${(props) => props.color};
+  border-radius: 3px;
+`;

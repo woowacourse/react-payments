@@ -3,12 +3,6 @@ import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import { Card } from '../types/card';
 import InputField from './InputField';
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
 export default function InputForm({
   cardInfo,
   handleInput,
@@ -41,3 +35,9 @@ export default function InputForm({
     </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
