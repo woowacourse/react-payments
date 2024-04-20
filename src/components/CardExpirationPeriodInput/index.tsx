@@ -165,31 +165,29 @@ export default function CardExpirationPeriodInput(
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
-        <div>
-          <div
-            className={styles.inputWrap}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          >
-            <Input
-              name="month"
-              type="number"
-              placeholder={monthPlaceholder}
-              value={cardPeriod.month || undefined}
-              error={error.month || error.availability}
-            />
-            <Input
-              name="year"
-              type="number"
-              placeholder={yearPlaceholder}
-              value={cardPeriod.year || undefined}
-              error={error.year || error.availability}
-            />
-          </div>
-          <InputErrorMessage>
-            {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
-          </InputErrorMessage>
+        <div
+          className={styles.inputWrap}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        >
+          <Input
+            name="month"
+            type="number"
+            placeholder={monthPlaceholder}
+            value={cardPeriod.month || undefined}
+            error={error.month || error.availability}
+          />
+          <Input
+            name="year"
+            type="number"
+            placeholder={yearPlaceholder}
+            value={cardPeriod.year || undefined}
+            error={error.year || error.availability}
+          />
         </div>
+        <InputErrorMessage>
+          {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
+        </InputErrorMessage>
       </CardInput>
     </CardInputContainer>
   );
