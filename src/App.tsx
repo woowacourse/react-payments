@@ -5,35 +5,35 @@ import InputGroup from './components/InputGroup';
 import CardImage from './components/CardImage';
 import { css } from '@emotion/react';
 
+const appContainerStyle = css({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'start',
+  padding: '31px',
+  gap: '45px',
+  width: '376px',
+});
+
+const appStyle = css({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+const appInputStyle = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+  width: '100%',
+});
+
 function App() {
   const [cardNumber, setCardNumber] = useState(['']);
   const [cardPeriod, setCardPeriod] = useState(['']);
   const [cardOwner, setCardOwner] = useState(['']);
-
-  const appContainerStyle = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    padding: 31px;
-    gap: 45px;
-    width: 376px;
-  `;
-
-  const appStyle = css`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const appInputStyle = css`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  `;
 
   return (
     <div css={appStyle}>
