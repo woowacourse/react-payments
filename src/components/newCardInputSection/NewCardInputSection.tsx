@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import * as Styled from "./NewCardInputSection.styles";
+import { ReactNode } from 'react';
+import * as Styled from './NewCardInputSection.styles';
 
 export interface NewCardInputSectionProps {
   label: string;
@@ -9,7 +9,13 @@ export interface NewCardInputSectionProps {
   children: ReactNode;
 }
 
-const NewCardInputSection = ({ label, mainText, subText, errorMessage, children }: NewCardInputSectionProps) => {
+const NewCardInputSection = ({
+  label,
+  mainText,
+  subText,
+  errorMessage,
+  children,
+}: NewCardInputSectionProps) => {
   return (
     <Styled.InputSection>
       <header>
@@ -21,7 +27,9 @@ const NewCardInputSection = ({ label, mainText, subText, errorMessage, children 
           <Styled.Label>{label}</Styled.Label>
           <Styled.InputWrapper>{children}</Styled.InputWrapper>
         </Styled.Form>
-        <Styled.ErrorText>{errorMessage && errorMessage.find((item) => item !== "")}</Styled.ErrorText>
+        <Styled.ErrorText>
+          {errorMessage && errorMessage.find((item) => item !== '')}
+        </Styled.ErrorText>
       </article>
     </Styled.InputSection>
   );

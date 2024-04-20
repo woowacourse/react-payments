@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import CardNumbers, { CardNumberProps } from "./CardNumbers";
+import type { Meta, StoryObj } from '@storybook/react';
+import CardNumbers, { CardNumberProps } from './CardNumbers';
 
 const meta: Meta<CardNumberProps> = {
-  title: "Components/CardNumbers",
+  title: 'Components/CardNumbers',
   component: CardNumbers,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;

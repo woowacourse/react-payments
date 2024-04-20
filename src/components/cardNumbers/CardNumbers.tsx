@@ -1,5 +1,5 @@
-import * as Styled from "./CardNumbers.styles";
-import { MASKING } from "../../constants/setting";
+import * as Styled from './CardNumbers.styles';
+import { MASKING } from '../../constants/setting';
 
 export interface CardNumberProps {
   cardNumbers: number[];
@@ -10,9 +10,15 @@ const CardNumbers = ({ cardNumbers }: CardNumberProps) => {
     <Styled.CardNumbersSection>
       {cardNumbers.map((cardNumber, index) => {
         const isValidNumber = cardNumber !== 0 && !Number.isNaN(cardNumber);
-        const maskedNumber = isValidNumber ? MASKING.repeat(cardNumber.toString().length) : null;
+        const maskedNumber = isValidNumber
+          ? MASKING.repeat(cardNumber.toString().length)
+          : null;
 
-        return <div key={index}>{index > 1 ? maskedNumber : isValidNumber && cardNumber}</div>;
+        return (
+          <div key={index}>
+            {index > 1 ? maskedNumber : isValidNumber && cardNumber}
+          </div>
+        );
       })}
     </Styled.CardNumbersSection>
   );

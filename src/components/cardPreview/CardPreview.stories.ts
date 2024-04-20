@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import CardPreview, { CardPreviewProps } from "./CardPreview";
+import type { Meta, StoryObj } from '@storybook/react';
+import CardPreview, { CardPreviewProps } from './CardPreview';
 
 const meta: Meta<CardPreviewProps> = {
-  title: "Components/CardPreview",
+  title: 'Components/CardPreview',
   component: CardPreview,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -19,7 +19,7 @@ export const Default: Story = {
     cardInfo: {
       cardNumbers: [1234, 5678, 9012, 3456],
       cardExpiration: [12, 23],
-      userName: "John Doe",
+      userName: 'John Doe',
     },
   },
 };
@@ -29,7 +29,7 @@ export const MasterCard: Story = {
     cardInfo: {
       cardNumbers: [5234, 5678, 9012, 3456],
       cardExpiration: [12, 23],
-      userName: "MasterCard User",
+      userName: 'MasterCard User',
     },
   },
 };
@@ -39,7 +39,7 @@ export const Visa: Story = {
     cardInfo: {
       cardNumbers: [4532, 5678, 9012, 3456],
       cardExpiration: [12, 23],
-      userName: "Visa User",
+      userName: 'Visa User',
     },
   },
 };

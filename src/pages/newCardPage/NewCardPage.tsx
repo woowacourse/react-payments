@@ -1,22 +1,30 @@
-import { useState } from "react";
-import Input from "../../components/input/Input";
-import CardPreview from "../../components/cardPreview/CardPreview";
-import { ICardInfo } from "../../types/type";
-import NewCardInputSection from "../../components/newCardInputSection/NewCardInputSection";
-import { NewCardContainer } from "./NewCardPage.styles";
-import { validateCardExpiration, validateCardNumber, validateUserName } from "../../validators/newCardInputValidator";
-import { CARD_EXPIRATION, CARD_NUMBERS, USER_NAME } from "../../constants/setting";
+import { useState } from 'react';
+import Input from '../../components/input/Input';
+import CardPreview from '../../components/cardPreview/CardPreview';
+import { ICardInfo } from '../../types/type';
+import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
+import { NewCardContainer } from './NewCardPage.styles';
+import {
+  validateCardExpiration,
+  validateCardNumber,
+  validateUserName,
+} from '../../validators/newCardInputValidator';
+import {
+  CARD_EXPIRATION,
+  CARD_NUMBERS,
+  USER_NAME,
+} from '../../constants/setting';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
     cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
-    userName: "",
+    userName: '',
   });
   const [errorMessage, setErrorMessage] = useState({
-    cardNumbers: ["", "", "", ""],
-    cardExpiration: ["", ""],
-    userName: [""],
+    cardNumbers: ['', '', '', ''],
+    cardExpiration: ['', ''],
+    userName: [''],
   });
 
   const handleCardNumbersChange = (value: string, index: number) => {
@@ -28,7 +36,7 @@ const NewCardPage = () => {
       cardNumbers: errorMessageCopy,
     });
 
-    if (errorMessageCopy[index] === "") {
+    if (errorMessageCopy[index] === '') {
       const newCardNumbers = [...cardInfo.cardNumbers];
       newCardNumbers[index] = Number(value);
       setCardInfo({
@@ -47,7 +55,7 @@ const NewCardPage = () => {
       cardExpiration: errorMessageCopy,
     });
 
-    if (errorMessageCopy[index] === "") {
+    if (errorMessageCopy[index] === '') {
       const newCardExpiration = [...cardInfo.cardExpiration];
       newCardExpiration[index] = Number(value);
       setCardInfo({
@@ -65,7 +73,7 @@ const NewCardPage = () => {
       userName: [errorMessageCopy],
     });
 
-    if (errorMessageCopy === "") {
+    if (errorMessageCopy === '') {
       setCardInfo({
         ...cardInfo,
         userName: value.toUpperCase(),
@@ -75,9 +83,7 @@ const NewCardPage = () => {
 
   return (
     <NewCardContainer>
-      {/* 프리뷰 */}
       <CardPreview cardInfo={cardInfo}></CardPreview>
-      {/* 입력 - 카드 번호 */}
       <NewCardInputSection
         label={CARD_NUMBERS.LABEL}
         mainText={CARD_NUMBERS.MAIN_TEXT}
@@ -94,7 +100,6 @@ const NewCardPage = () => {
           ></Input>
         ))}
       </NewCardInputSection>
-      {/* 입력 - 유효 기간 */}
       <NewCardInputSection
         label={CARD_EXPIRATION.LABEL}
         mainText={CARD_EXPIRATION.MAIN_TEXT}
@@ -105,13 +110,16 @@ const NewCardPage = () => {
           <Input
             key={index}
             maxLength={CARD_EXPIRATION.MAX_LENGTH}
-            placeholder={index === 0 ? CARD_EXPIRATION.PLACEHOLDER.MONTH : CARD_EXPIRATION.PLACEHOLDER.YEAR}
+            placeholder={
+              index === 0
+                ? CARD_EXPIRATION.PLACEHOLDER.MONTH
+                : CARD_EXPIRATION.PLACEHOLDER.YEAR
+            }
             isError={!!errorMessage.cardExpiration[index]}
             onChange={(e) => handleCardExpirationChange(e.target.value, index)}
           ></Input>
         ))}
       </NewCardInputSection>
-      {/* 입력 - 소유자 이름 */}
       <NewCardInputSection
         label={USER_NAME.LABEL}
         mainText={USER_NAME.MAIN_TEXT}

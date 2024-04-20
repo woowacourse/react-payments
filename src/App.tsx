@@ -1,4 +1,4 @@
-import NewCardPage from "./pages/newCardPage/NewCardPage";
+import NewCardPage from './pages/newCardPage/NewCardPage';
 
 function App() {
   return (

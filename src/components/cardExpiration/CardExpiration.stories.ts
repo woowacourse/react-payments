@@ -1,13 +1,13 @@
-import { Meta, StoryObj } from "@storybook/react";
-import CardExpiration, { CardExpirationProps } from "./CardExpiration"; // 컴포넌트 import
+import { Meta, StoryObj } from '@storybook/react';
+import CardExpiration, { CardExpirationProps } from './CardExpiration'; // 컴포넌트 import
 
 const meta: Meta<CardExpirationProps> = {
-  title: "Components/CardExpiration",
+  title: 'Components/CardExpiration',
   component: CardExpiration,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
