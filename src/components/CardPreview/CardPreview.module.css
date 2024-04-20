@@ -52,11 +52,12 @@
 
 .cardNumber {
   text-align: center;
-  width: 44px;
+  width: 42px;
 }
 
 .mask {
-  font-size: 8px;
+  width: 32px;
+  font-size: 5px;
   letter-spacing: 4px;
 }
 
