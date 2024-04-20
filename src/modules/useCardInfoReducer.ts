@@ -10,28 +10,28 @@ const EDIT_CARD_COLOR = 'card/EDIT_CARD_COLOR' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
 export interface CardPeriod {
-  month: string | undefined;
-  year: string | undefined;
+  month: string | null;
+  year: string | null;
 }
 
-export type CardMark = keyof typeof CARD_MARK | undefined;
+export type CardMark = keyof typeof CARD_MARK | null;
 export type CardColor = keyof typeof CARD_COLOR;
 export interface CardInfo {
-  number: string | undefined;
+  number: string | null;
   mark: CardMark;
   period: CardPeriod;
-  userName: string | undefined;
+  userName: string | null;
   color: CardColor;
 }
 
 const INITIAL_CARD_INFO: CardInfo = {
-  number: undefined,
-  mark: undefined,
+  number: null,
+  mark: null,
   period: {
-    month: undefined,
-    year: undefined,
+    month: null,
+    year: null,
   },
-  userName: undefined,
+  userName: null,
   color: 'default',
 };
 
@@ -51,7 +51,7 @@ const editCardPeriodAction = (period: CardPeriod) => ({
   period,
 });
 
-const editCardUserNameAction = (userName: string | undefined) => ({
+const editCardUserNameAction = (userName: string) => ({
   type: EDIT_CARD_USER_NAME,
   userName,
 });
@@ -112,7 +112,7 @@ export default function useCardInfoReducer() {
     dispatch(editCardPeriodAction(period));
   };
 
-  const editCardUserName = (name: string | undefined) => {
+  const editCardUserName = (name: string) => {
     dispatch(editCardUserNameAction(name));
   };
 

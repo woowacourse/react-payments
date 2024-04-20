@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
 
 import {
   CARD_EXPIRATION,
@@ -7,7 +7,7 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
-import debounceFunc from '../../utils/debounceFunc';
+import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
@@ -22,8 +22,8 @@ interface PeriodError {
 }
 
 interface CardExpirationPeriod {
-  month: number | undefined;
-  year: number | undefined;
+  month: string | null;
+  year: string | null;
 }
 
 interface CardExpirationPeriodFormProps {
@@ -43,8 +43,8 @@ export default function CardExpirationPeriodInput(
   const { length } = CARD_EXPIRATION;
 
   const [cardPeriod, setCardPeriod] = useState<CardExpirationPeriod>({
-    month: undefined,
-    year: undefined,
+    month: null,
+    year: null,
   });
 
   const INITIAL_ERROR = {
@@ -55,89 +55,108 @@ export default function CardExpirationPeriodInput(
   const [error, setError] = useState<PeriodError>(INITIAL_ERROR);
 
   const today = new Date();
-  const year = today.getFullYear() - 2000;
   const year = today.getFullYear() - CENTURY_PREFIX;
   const month = today.getMonth() + 1;
+  // 유효기간 검사
+  /**
+   * month,year을 모두 고려해 현재 기준으로 사용가능한 카드인지 확인하는 함수
+   * @returns
+   */
+  const validateCardExpiry = (newCardPeriod: CardPeriod) => {
+    if (!newCardPeriod.year || !newCardPeriod.month) return;
+    const cardYear = Number(newCardPeriod.year);
+    const isOverYear = cardYear > year;
+    const isOverMonth =
+      cardYear === year && Number(newCardPeriod.month) >= month;
 
-  const validatePeriod = () => {
-    if (!cardPeriod.year || !cardPeriod.month) return;
+    const isValidated = isOverYear || isOverMonth;
 
-    const isOverYear = cardPeriod.year > year;
-    const isOverMonth = cardPeriod.year === year && cardPeriod.month >= month;
-    const isOverPeriod = isOverYear || isOverMonth;
-
-    if (isOverPeriod) {
+    if (isValidated) {
       setError(INITIAL_ERROR);
       return;
     }
 
-    setError({
-      month: true,
-      year: true,
+    setError((prev) => ({
+      ...prev,
       availability: true,
-    });
+    }));
   };
 
-  const validateMonth = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+  const validateMonth = (newCardPeriod: CardPeriod) => {
+    const isValidated = newCardPeriod.month
+      ? CARD_PERIOD_REGEXP.month.test(newCardPeriod.month)
+      : false;
 
-    debounceFunc(() => {
-      setError({
-        month: !isValidated,
-        year: !cardPeriod.year,
-        availability: error.availability,
-      });
-
-      setCardPeriod((prev) => ({
-        ...prev,
-        month: value ? Number(value) : undefined,
-      }));
-    }, 10);
-
+    setError((prev) => ({
+      ...prev,
+      month: !isValidated,
+    }));
   };
 
-  const validateYear = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+  const validateYear = (newCardPeriod: CardPeriod) => {
+    const isValidated = newCardPeriod.year
+      ? CARD_PERIOD_REGEXP.year.test(newCardPeriod.year)
+      : false;
 
-
-    debounceFunc(() => {
-      setError({
-        month: !cardPeriod.month,
-        year: !isValidated,
-        availability: error.availability,
-      });
-      setCardPeriod((prev) => ({
-        ...prev,
-        year: value ? Number(value) : undefined,
-      }));
-    }, 10);
-    const isValidated = CARD_PERIOD_REGEXP.year.test(value);
+    setError((prev) => ({
+      ...prev,
+      year: !isValidated,
+    }));
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const validateCardPeriod = (
+    event: ChangeEvent<HTMLInputElement>,
+    newCardPeriod: CardPeriod,
+  ) => {
     if (!(event.target instanceof HTMLInputElement)) return;
     const { name } = event.target;
 
     if (name === 'month') {
-      validateMonth(event);
-      return;
+      validateMonth(newCardPeriod);
     }
 
-    validateYear(event);
+    if (name === 'year') {
+      validateYear(newCardPeriod);
+    }
+
+    validateCardExpiry(newCardPeriod);
   };
 
-  const convertToTwoDigits = (number: number | undefined) => {
-    if (value.length > MIN_NUMBER_OF_VALUE) return;
+  const updateCardPeriod = (name: string, value: string) => {
+    const newCardPeriod = { ...cardPeriod, [name]: sliceText(value, length) };
+
+    setCardPeriod(newCardPeriod);
+
+    return newCardPeriod;
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (Number.isNaN(value)) return;
+
+    // cardPeriod 업데이트
+    const newCardPeriod = updateCardPeriod(name, value);
+    if (!newCardPeriod) return;
+    // 유효성 검사
+    validateCardPeriod(event, newCardPeriod);
+  };
+  /**
+   * input의 포커스가 나갔을때, value가 한자리 수 이면 앞에 0을 붙여주는 기능
+   * @param event
+   */
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    if (!value || value.length > MIN_NUMBER_OF_VALUE) return;
 
     const text = value !== ZERO ? convertToTwoDigits(Number(value)) : value;
+    updateCardPeriod(name, text);
   };
 
   const handleEditCardPeriod = () => {
     if (error.month || error.year) return;
 
-    const cardMonth = convertToTwoDigits(cardPeriod.month);
-    const cardYear = convertToTwoDigits(cardPeriod.year);
-    editCardPeriod({ month: cardMonth, year: cardYear });
+    editCardPeriod(cardPeriod);
   };
 
   const getErrorMessage = () => {
@@ -151,7 +170,6 @@ export default function CardExpirationPeriodInput(
   };
 
   useEffect(() => {
-    validatePeriod();
     if (cardPeriod.month || cardPeriod.year) {
       handleEditCardPeriod();
     }
@@ -161,19 +179,23 @@ export default function CardExpirationPeriodInput(
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
         <div>
-          <div className={styles.inputWrap} onChange={handleInputChange}>
+          <div
+            className={styles.inputWrap}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          >
             <Input
               name="month"
-              type="text"
+              type="number"
               placeholder={monthPlaceholder}
-              maxLength={length}
+              value={cardPeriod.month || undefined}
               error={error.month || error.availability}
             />
             <Input
               name="year"
-              type="text"
+              type="number"
               placeholder={yearPlaceholder}
-              maxLength={length}
+              value={cardPeriod.year || undefined}
               error={error.year || error.availability}
             />
           </div>

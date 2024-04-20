@@ -8,6 +8,7 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import { CardMark } from '../../modules/useCardInfoReducer';
+import { sliceText } from '../../utils/textChangerUtils';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
@@ -17,6 +18,7 @@ import styles from './style.module.css';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
+type CardNumbers = (number | undefined)[];
 interface CardNumbersInputProps {
   editCardMark: (mark: CardMark) => void;
   editCardNumbers: (number: string) => void;
@@ -24,18 +26,19 @@ interface CardNumbersInputProps {
 
 export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers } = props;
+  const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
 
-  const [validatedNumbers, setValidatedNumbers] = useState<
-    (number | undefined)[]
-  >(Array.from({ length }, () => undefined));
+  const [numbers, setNumbers] = useState<CardNumbers>(() =>
+    Array.from({ length }, () => undefined),
+  );
 
-  const [numbersError, setNumbersError] = useState<boolean[]>(
+  const [numbersError, setNumbersError] = useState<boolean[]>(() =>
     Array.from({ length }, () => false),
   );
 
   const pickCardMark = (): CardMark => {
-    const numberText = validatedNumbers.join('');
+    const numberText = numbers.join('');
 
     if (CARD_MARK_REGEXP.visa.test(numberText)) {
       return 'visa';
@@ -46,53 +49,53 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     return 'etc';
   };
 
-  const changeNumbersError = (newNumbers: (number | undefined)[]) => {
-    const newNumbersError = newNumbers.map((item) => !item);
-
+  const updateNumbersError = (newNumbers: (number | undefined)[]) => {
+    const newNumbersError = newNumbers.map((item) =>
+      !item ? true : !CARD_NUMBER_REGEXP.test(item.toString()),
+    );
     setNumbersError(newNumbersError);
   };
 
-  const changeNumbersState = (index: number, value: string) => {
-    const regex = new RegExp(`^[${startNumber}-${endNumber}]{${length}}$`);
-    const newNumbers = [...validatedNumbers];
-    newNumbers[index] = regex.test(value) ? Number(value) : undefined;
+  const updateNumbers = (index: number, value: string) => {
+    const newNumbers = [...numbers];
+    newNumbers[index] = value ? Number(sliceText(value, length)) : undefined;
 
-    setValidatedNumbers(newNumbers);
-    changeNumbersError(newNumbers);
+    setNumbers(newNumbers);
+
+    return newNumbers;
   };
 
-  const isValidatedCardNumber = () => numbersError.every((i) => !i);
+  const isError = () => numbersError.some((i) => i);
 
-  const validateCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
 
-    changeNumbersState(index, value);
+    const newNumbers = updateNumbers(index, value);
+    updateNumbersError(newNumbers);
   };
 
-  const getErrorMessage = () => {
-    if (!isValidatedCardNumber()) return ERROR_MESSAGE.cardNumber;
-    return undefined;
-  };
+  const getErrorMessage = () =>
+    isError() ? ERROR_MESSAGE.cardNumber : undefined;
 
   useEffect(() => {
-    editCardNumbers(validatedNumbers.join());
+    editCardNumbers(numbers.join());
     editCardMark(pickCardMark());
-  }, [validatedNumbers]);
+  }, [numbers, numbersError]);
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
-        <div className={styles.inputWrap} onChange={validateCardNumber}>
+        <div className={styles.inputWrap} onChange={handleChange}>
           {Array.from({ length }).map((_, index) => (
             <Input
-              placeholder={placeholder}
               name={`${NUMBERS_NAME_PREFIX}${index}`}
-              type="text"
-              maxLength={length}
+              type="number"
+              value={numbers[index]}
               error={numbersError[index]}
+              placeholder={placeholder}
             />
           ))}
         </div>

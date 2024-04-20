@@ -25,7 +25,6 @@ export const CARD_EXPIRATION_PERIOD_FORM_MESSAGE = {
 
 export const CARD_USER_FORM_MESSAGE = {
   title: '카드 소유자 이름을 입력해 주세요',
-  subTitle: '',
   label: '소유자 이름',
   namePlaceholder: '소유자 이름',
 };

@@ -6,7 +6,6 @@ import {
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import debounceFunc from '../../utils/debounceFunc';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
@@ -19,10 +18,10 @@ interface CardUserNameInputProps {
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName } = props;
-  const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
+  const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
-  const [userName, setUserName] = useState<string>();
-  const [error, setError] = useState<boolean>(false);
+  const [userName, setUserName] = useState('');
+  const [error, setError] = useState(false);
 
   const validateName = (name: string) => {
     const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
@@ -37,10 +36,8 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     const { value } = event.target;
     const name = value.toUpperCase();
 
-    debounceFunc(() => {
-      validateName(value);
-      setUserName(name);
-    }, 10);
+    setUserName(name);
+    validateName(value);
   };
 
   const getErrorMessage = () => {
@@ -50,21 +47,23 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
 
   useEffect(() => {
     if (!error || userName === '') {
-      editCardUserName(userName || undefined);
+      // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
+      editCardUserName(userName?.trim() || undefined);
     }
   }, [userName, error]);
 
   return (
-    <CardInputContainer title={title} subTitle={subTitle}>
+    <CardInputContainer title={title}>
       <CardInput label={label}>
         <div>
-          <div className={styles.inputWrap} onChange={handleChange}>
+          <div className={styles.inputWrap}>
             <Input
               style={{ textTransform: 'uppercase' }}
               name="month"
               type="text"
               placeholder={namePlaceholder}
-              maxLength={length}
+              onChange={handleChange}
+              value={userName}
               error={error}
             />
           </div>
