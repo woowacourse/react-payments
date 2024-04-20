@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CardView from '../components/Card';
+import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardView from '../components/Card';
+import CardView from '../components/CardView';
 
 const mockDefaultCardInfo = {
   cardNumber1: '',
