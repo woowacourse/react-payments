@@ -1,5 +1,4 @@
 interface PaymentsInputFieldProps {
-  ref?: React.RefObject<HTMLInputElement>;
   className?: string;
   placeholder?: string;
   maxLength?: number;
