@@ -1,5 +1,5 @@
-export const isValidCardNumbers = (arr: number[][]) => {
-  return arr.every((arr2) => arr2.every((value: number) => !isNaN(value)));
+export const isValidCardNumbers = (number: number) => {
+  return !Number.isNaN(number);
 };
 
 export const isValidOwnerName = (name: string) => {
@@ -7,14 +7,14 @@ export const isValidOwnerName = (name: string) => {
   return regex.test(name);
 };
 
-export const isValidPeriod = ({ month, year }: { month: number; year: number }) => {
+export const isValidPeriod = (number, name) => {
   const now = new Date();
-  const nowYear = Number(now.getFullYear().toString().slice(2));
-  const nowMonth = now.getMonth() + 1;
-  if (isNaN(year) || isNaN(month)) return false;
+  // const nowYear = Number(now.getFullYear().toString().slice(2));
+  // const nowMonth = now.getMonth() + 1;
+  // // if (Number.isNaN(year) || isNaN(month)) return false;
 
-  if (nowYear > year || (nowYear === year && nowMonth > month) || month > 12 || month < 1) {
-    return false;
-  }
+  // // if (nowYear > year || (nowYear === year && nowMonth > month) || month > 12 || month < 1) {
+  // //   return false;
+  // // }
   return true;
 };
