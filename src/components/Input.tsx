@@ -15,23 +15,26 @@ export default function Input({
   isError,
   handleErrorMessage,
 }: Props) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    try {
+      Validation[info.validateType]?.(inputValue);
+      handleErrorMessage('');
+      handleInput(inputValue);
+    } catch (error) {
+      if (error instanceof Error) {
+        handleErrorMessage(error.message);
+      }
+    }
+  };
+
   return (
     <StyledInput
       color={isError ? 'red' : 'grey'}
       type="text"
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
-      onChange={(e) => {
-        try {
-          Validation[info.validateType]?.(e.target.value);
-          handleErrorMessage('');
-          handleInput(e.target.value);
-        } catch (error) {
-          if (error instanceof Error) {
-            handleErrorMessage(error.message);
-          }
-        }
-      }}
+      onChange={handleChange}
     />
   );
 }
