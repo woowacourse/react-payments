@@ -1,12 +1,9 @@
 import "./App.css";
+
 import CardEnrollForm from "./components/CardEnrollForm";
 
 function App() {
-  return (
-    <>
-      <CardEnrollForm></CardEnrollForm>
-    </>
-  );
+  return <CardEnrollForm />;
 }
 
 export default App;

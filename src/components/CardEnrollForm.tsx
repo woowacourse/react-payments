@@ -1,9 +1,9 @@
-import { useState } from "react";
-import CardNumbers from "./CardNumbers";
 import CardExpirationDate from "./CardExpirationDate";
+import CardNumbers from "./CardNumbers";
 import CardOwnerName from "./CardOwnerName";
 import CardPreview from "./CardPreview";
 import styled from "styled-components";
+import { useState } from "react";
 
 const CardEnrollFormContainer = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ export default function CardEnrollForm() {
 
   return (
     <CardEnrollFormContainer>
-      <CardPreview cardInformation={cardInformation}></CardPreview>
+      <CardPreview cardInformation={cardInformation} />
       <CardInformation>
         <CardNumbers
           cardNumber1={cardInformation.cardNumber1}
@@ -49,16 +49,16 @@ export default function CardEnrollForm() {
           cardNumber3={cardInformation.cardNumber3}
           cardNumber4={cardInformation.cardNumber4}
           inputHandler={inputHandler}
-        ></CardNumbers>
+        />
         <CardExpirationDate
           cardExpirationMonth={cardInformation.cardExpirationMonth}
           cardExpirationYear={cardInformation.cardExpirationYear}
           inputHandler={inputHandler}
-        ></CardExpirationDate>
+        />
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
           inputHandler={inputHandler}
-        ></CardOwnerName>
+        />
       </CardInformation>
     </CardEnrollFormContainer>
   );
