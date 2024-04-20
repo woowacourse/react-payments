@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { isValidMonthInput, isValidYearInput } from '../../utils/validator/index';
-import ERROR_MESSAGE from '../../constants/errorMessage';
+import { isValidMonthInput, isValidYearInput } from '@utils/validator';
+import { ERROR_MESSAGE } from '@constants/index';
 
 const initialExpirationDate = { month: '', year: '' };
 const initialExpirationDateError = { isError: { month: false, year: false }, errorMessage: '' };

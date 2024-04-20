@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { isValidCardNumbersInput, isValidCardTypeInput } from '../../utils/validator/inputField/cardNumbers';
-import ERROR_MESSAGE from '../../constants/errorMessage';
-import CARD from '../../constants/card';
+import { isValidCardNumbersInput, isValidCardTypeInput } from '@utils/validator';
+import { CARD, ERROR_MESSAGE } from '@constants/index';
 
 const validCardPrefixes = Object.values(CARD.PREFIXES).flat();
 
