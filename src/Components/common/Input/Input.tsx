@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { ChangeEvent } from "react";
-import { inputStyle, sizeStyles } from "./FormInput.styles";
+import { inputStyle, sizeStyles } from "./Input.styles";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;

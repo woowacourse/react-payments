@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import FormInput from "../FormInput/FormInput";
+import FormInput from "../common/Input/Input";
 import Tooltip from "../Tooltip/Tooltip";
 import { titleCss, descriptionCss, rowStyle } from "./FormField.styles";
 
