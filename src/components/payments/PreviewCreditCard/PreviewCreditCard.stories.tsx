@@ -29,7 +29,11 @@ const meta = {
       description: '소유자 이름',
     },
   },
-
+  args: {
+    cardNumbers: ['', '', '', ''],
+    expiration: { month: '', year: '' },
+    ownerName: '',
+  },
   tags: ['autodocs'],
 } satisfies Meta<typeof PreviewCreditCard>;
 
@@ -38,64 +42,30 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '컴포넌트의 기본 상태',
-      },
-    },
-  },
-
-  args: {
-    cardNumbers: ['', '', '', ''],
-    expiration: { month: '', year: '' },
-    ownerName: '',
+    docs: { description: { story: '컴포넌트의 기본 상태' } },
   },
 };
 
 export const VisaCard: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '비자 카드가 보여지는 상태',
-      },
-    },
+    docs: { description: { story: '비자 카드를 입력했을 때의 상태' } },
   },
 
   args: {
     cardNumbers: ['4123', '1231', '2342', '4535'],
-    expiration: { month: '07', year: '28' },
-    ownerName: 'SONJINYOUNG',
+    expiration: { month: '05', year: '28' },
+    ownerName: 'NAMSUMIN',
   },
 };
 
 export const MasterCard: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '마스터 카드가 보여지는 상태',
-      },
-    },
+    docs: { description: { story: '마스터 카드를 입력했을 때의 상태' } },
   },
 
   args: {
     cardNumbers: ['5012', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
-    ownerName: 'SONJINYOUNG',
-  },
-};
-
-export const NotCard: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: '카드가 없는 상태',
-      },
-    },
-  },
-
-  args: {
-    cardNumbers: ['1234', '3456', '7890', '0000'],
-    expiration: { month: '05', year: '28' },
-    ownerName: 'SONJINYOUNG',
+    ownerName: 'NAMSUMIN',
   },
 };

@@ -4,6 +4,7 @@ import { generateArgTypes } from '@utils/generateArgTypes';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import ERROR_MESSAGE from '../../../constants/errorMessage';
 
 const meta = {
   title: 'Payments/CardNumberTextField',
@@ -32,6 +33,8 @@ const meta = {
     },
   },
   args: {
+    cardNumberError: { isError: false, errorMessage: '' },
+    cardNumbers: ['', '', '', ''],
     onAddCardNumber: fn(),
   },
   tags: ['autodocs'],
@@ -42,45 +45,36 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '컴포넌트의 기본 상태',
-      },
-    },
-  },
-
-  args: {
-    cardNumberError: { isError: false, errorMessage: '' },
-    cardNumbers: ['', '', '', ''],
+    docs: { description: { story: '컴포넌트의 기본 상태' } },
   },
 };
 
-export const Error: Story = {
+export const InvalidValueError: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '에러가 발생했을 때의 상태',
-      },
-    },
+    docs: { description: { story: '유효하지 않은 값을 입력하려고 시도할 떄의 상태' } },
   },
 
   args: {
-    cardNumberError: { isError: true, errorMessage: '카드 번호는 16자리 숫자여야 합니다.' },
-    cardNumbers: ['1234', '', '', ''],
+    cardNumberError: { isError: true, errorMessage: ERROR_MESSAGE.invalidCardNumberInput },
+  },
+};
+
+export const InvalidCardTypeError: Story = {
+  parameters: {
+    docs: { description: { story: '유효하지 않은 카드타입을 입력하려고 시도할 떄의 상태' } },
+  },
+
+  args: {
+    cardNumberError: { isError: true, errorMessage: ERROR_MESSAGE.invalidCardType },
   },
 };
 
 export const Complete: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '완전히 입력되었을 때의 상태',
-      },
-    },
+    docs: { description: { story: '완전히 입력되었을 때의 상태' } },
   },
 
   args: {
-    cardNumberError: { isError: false, errorMessage: '' },
-    cardNumbers: ['1234', '5678', '9999', '2222'],
+    cardNumbers: ['5500', '0000', '0000', '0000'],
   },
 };

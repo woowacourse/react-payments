@@ -1,7 +1,6 @@
 import { generateArgTypes } from '@utils/generateArgTypes';
 import ExpirationDateInput from './ExpirationDateInput';
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 import { fn } from '@storybook/test';
 
 const meta = {
@@ -10,14 +9,6 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  decorators: [
-    (Story, context) => {
-      const [value, setValue] = useState(context.args.value);
-      const onAddExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-
-      return <Story args={{ ...context.args, value, onAddExpirationDate }} />;
-    },
-  ],
   argTypes: {
     value: {
       ...generateArgTypes({ control: 'text' }),
@@ -33,6 +24,9 @@ const meta = {
     },
   },
   args: {
+    value: '',
+    placeholder: 'MM',
+    isError: false,
     onAddExpirationDate: fn(),
   },
   tags: ['autodocs'],
@@ -43,15 +37,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '유효 기간 Input',
-      },
-    },
-  },
-  args: {
-    value: '',
-    placeholder: 'MM',
-    isError: false,
+    docs: { description: { story: '유효 기간 Input' } },
   },
 };

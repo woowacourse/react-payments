@@ -4,6 +4,7 @@ import { generateArgTypes } from '@utils/generateArgTypes';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import ERROR_MESSAGE from '../../../constants/errorMessage';
 
 const meta = {
   title: 'Payments/OwnerNameTextField',
@@ -31,55 +32,39 @@ const meta = {
     },
   },
   args: {
+    ownerName: '',
+    ownerNameError: { isError: false, errorMessage: '' },
     onAddOwnerName: fn(),
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameTextField>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '컴포넌트의 기본 상태',
-      },
-    },
-  },
-
-  args: {
-    ownerName: '',
-    ownerNameError: { isError: false, errorMessage: '' },
+    docs: { description: { story: '컴포넌트의 기본 상태' } },
   },
 };
 
 export const OwnerNameError: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '영문을 입력하지 않았을 때의 상태',
-      },
-    },
+    docs: { description: { story: '영문을 입력하지 않았을 때의 상태' } },
   },
 
   args: {
-    ownerName: 'sonjinyoung',
-    ownerNameError: { isError: true, errorMessage: '카드 소유자 이름은 영문으로 입력해야 합니다.' },
+    ownerNameError: { isError: true, errorMessage: ERROR_MESSAGE.invalidOwnerNameInput },
   },
 };
 
 export const Complete: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '완전히 입력되었을 때의 상태',
-      },
-    },
+    docs: { description: { story: '완전히 입력되었을 때의 상태' } },
   },
 
   args: {
-    ownerName: 'SONJINYOUNG',
-    ownerNameError: { isError: false, errorMessage: '' },
+    ownerName: 'NAMSUMIN',
   },
 };

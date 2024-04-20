@@ -4,6 +4,7 @@ import { generateArgTypes } from '@utils/generateArgTypes';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import ERROR_MESSAGE from '../../../constants/errorMessage';
 
 const meta = {
   title: 'Payments/ExpirationDateTextField',
@@ -35,74 +36,53 @@ const meta = {
     },
   },
   args: {
+    month: '',
+    year: '',
+    expirationDateError: { isError: { month: false, year: false }, errorMessage: '' },
     onAddExpirationDate: fn(),
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateTextField>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: '컴포넌트의 기본 상태',
-      },
-    },
-  },
-
-  args: {
-    month: '',
-    year: '',
-    expirationDateError: { isError: false, errorMessage: '' },
-  },
-};
+export const Default: Story = {};
 
 export const MonthError: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '올바르지 않은 월을 입력했을 때의 상태',
-      },
-    },
+    docs: { description: { story: '유효하지 않은 `월`를 입력하려고 시도할 때의 상태' } },
   },
 
   args: {
-    month: '13',
-    year: '',
-    expirationDateError: { isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' },
+    expirationDateError: {
+      isError: { month: true, year: false },
+      errorMessage: ERROR_MESSAGE.invalidMonthInput,
+    },
   },
 };
 
-export const ExpirationError: Story = {
+export const YearError: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '유효기간이 올바르게 입력하지 않았을 때의 상태',
-      },
-    },
+    docs: { description: { story: '유효하지 않은 `연도`를 입력하려고 시도할 때의 상태' } },
   },
 
   args: {
-    month: '01',
-    year: '24',
-    expirationDateError: { isError: true, errorMessage: '카드 유효기간이 지났습니다.' },
+    expirationDateError: {
+      isError: { month: false, year: true },
+      errorMessage: ERROR_MESSAGE.invalidYearInput,
+    },
   },
 };
 
 export const Complete: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '완전히 입력되었을 때의 상태',
-      },
-    },
+    docs: { description: { story: '올바른 유효기간을 입력한 상태' } },
   },
 
   args: {
-    month: '05',
+    month: '5',
     year: '24',
-    expirationDateError: { isError: false, errorMessage: '' },
   },
 };

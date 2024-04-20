@@ -1,7 +1,6 @@
 import Input from './Input';
 import { generateArgTypes } from '@utils/generateArgTypes';
 
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
@@ -16,16 +15,6 @@ const meta = {
       },
     },
   },
-
-  decorators: [
-    (Story, context) => {
-      const [value, setValue] = useState(context.args.value);
-      const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-
-      return <Story args={{ ...context.args, value, onChange }} />;
-    },
-  ],
-
   argTypes: {
     placeholder: {
       ...generateArgTypes({ control: 'text' }),
@@ -34,13 +23,6 @@ const meta = {
     value: {
       ...generateArgTypes({ control: 'text' }),
       description: '입력한 값',
-    },
-    type: {
-      ...generateArgTypes({ control: 'radio', options: ['text', 'number'] }),
-      description: 'input의 타입',
-      table: {
-        type: { summary: 'InputType' },
-      },
     },
     onChange: {
       ...generateArgTypes({ control: 'function' }),
@@ -51,45 +33,35 @@ const meta = {
       description: '에러 state',
     },
     maxLength: {
-      ...generateArgTypes({ control: 'text' }),
+      ...generateArgTypes({ control: 'number', min: 4, max: 4, step: 0 }),
       description: '입력 가능한 최대 값',
     },
   },
   args: {
+    placeholder: '1234',
+    value: '',
     onChange: fn(),
+    isError: false,
+    maxLength: 4,
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '기본 상태일 때의 Input',
-      },
-    },
-  },
-
-  args: {
-    maxLength: 4,
-    placeholder: '1234',
-    value: '',
+    docs: { description: { story: '기본 상태일 때의 Input' } },
   },
 };
 
 export const Error: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: '에러 상태일 때의 input',
-      },
-    },
+    docs: { description: { story: '에러 상태일 때의 input' } },
   },
   args: {
-    ...Default.args,
     isError: true,
   },
 };

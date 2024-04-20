@@ -32,11 +32,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
-    docs: {
-      description: {
-        story: 'Title, SubTitle, Label, Content가 결합된 컴포넌트',
-      },
-    },
+    docs: { description: { story: 'Title, SubTitle, Label, Content가 결합된 컴포넌트' } },
   },
 
   args: {
