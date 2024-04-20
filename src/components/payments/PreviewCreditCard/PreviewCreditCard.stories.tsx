@@ -78,7 +78,7 @@ export const MasterCard: Story = {
   },
 
   args: {
-    cardNumbers: ['5012', '3456', '7890', '0000'],
+    cardNumbers: ['5112', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
     ownerName: 'SONJINYOUNG',
   },
