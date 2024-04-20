@@ -21,7 +21,7 @@ const CardBrand = ({ ...props }) => {
   const [brand, setBrand] = useState<CardBrand>('Visa');
   const [isBrand, setIsBrand] = useState(false);
 
-  const changBrand = () => {
+  const changeBrand = () => {
     if (REGEX.startsWith4.test(firstCardNumbers)) {
       setBrand('Visa');
       setIsBrand(true);
@@ -34,7 +34,7 @@ const CardBrand = ({ ...props }) => {
   };
 
   useEffect(() => {
-    changBrand();
+    changeBrand();
   }, [firstCardNumbers]);
 
   return <>{isBrand ? <Image src={BRAND_TABLE[brand]} /> : null}</>;
