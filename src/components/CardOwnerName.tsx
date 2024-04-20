@@ -2,6 +2,7 @@ import { LabelText, TitleText } from "../styles/common";
 
 import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
+import isAlphabetOrWhiteSpace from "../utils/isAlphabetOrWhiteSpace";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -24,6 +25,12 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
+const validateOwnerNameOnChange = (inputValue: string) => {
+  if (!isAlphabetOrWhiteSpace(inputValue)) {
+    throw new Error("영문자만 입력할 수 있어요");
+  }
+};
+
 interface CardOwnerNameProps {
   cardOwnerName: string;
   onChange: (inputValue: string) => void;
@@ -35,18 +42,19 @@ export default function CardOwnerName({
 }: CardOwnerNameProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const nameValidator = (name: string) => {
-    const upperName = name.toUpperCase();
-    const pattern: RegExp = /^[A-Z\s]*$/; // 영문자 대문자 또는 공백만 허용
-
-    if (upperName.length !== 0 && !pattern.test(upperName)) {
-      setErrorMessage("영문자만 입력해주세요");
+  const onOwnerNameChange = (inputValue: string) => {
+    try {
+      validateOwnerNameOnChange(inputValue);
+      setErrorMessage("");
+      const upperName = inputValue.toUpperCase();
+      onChange(upperName);
+      return false;
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
       return true;
     }
-
-    onChange(upperName);
-    setErrorMessage("");
-    return false;
   };
 
   return (
@@ -58,7 +66,7 @@ export default function CardOwnerName({
           <Input
             maxLength={15}
             placeholder="JOHN DOE"
-            onChange={(value) => nameValidator(value)}
+            onChange={onOwnerNameChange}
             value={cardOwnerName}
           />
         </InputContainer>
