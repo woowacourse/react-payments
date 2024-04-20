@@ -5,22 +5,30 @@ import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
 import { CARD_CONFIG } from '../constants/system';
 
+const checkCardType = (cardNumber: string) => {
+  const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
+
+  if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return 'visa';
+  if (
+    CARD_CONFIG.MASTER.START <= cardBrandNumber &&
+    cardBrandNumber <= CARD_CONFIG.MASTER.END
+  )
+    return 'master';
+};
+
 interface Props {
   cardInfo: Card;
 }
 
 export default function CardView({ cardInfo }: Props) {
-  const checkCardType = (cardNumber: string) => {
-    const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
-    if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return Visa;
-    if (
-      CARD_CONFIG.MASTER.START <= cardBrandNumber &&
-      cardBrandNumber <= CARD_CONFIG.MASTER.END
-    )
-      return Master;
+  const cardTypeImg = (cardNumber: string) => {
+    const cardType = checkCardType(cardNumber);
+
+    if (cardType === 'visa') return Visa;
+    if (cardType === 'master') return Master;
   };
 
-  const cardImgSrc = checkCardType(cardInfo.cardNumber1);
+  const cardImgSrc = cardTypeImg(cardInfo.cardNumber1);
   return (
     <CardContainer>
       <ImgBox>
