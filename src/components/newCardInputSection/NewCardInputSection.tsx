@@ -2,14 +2,14 @@ import { ReactNode } from "react";
 import * as Styled from "./NewCardInputSection.styled";
 
 export interface NewCardInputSectionProps {
-  label: string;
   mainText: string;
-  subText?: string;
+  subText: string;
+  label: string;
   errorMessage: string[];
   children: ReactNode;
 }
 
-const NewCardInputSection = ({ label, mainText, subText, errorMessage, children }: NewCardInputSectionProps) => {
+const NewCardInputSection = ({ mainText, subText, label, errorMessage, children }: NewCardInputSectionProps) => {
   return (
     <Styled.InputSection>
       <fieldset>

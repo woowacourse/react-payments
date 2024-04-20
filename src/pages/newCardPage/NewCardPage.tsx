@@ -20,8 +20,13 @@ const NewCardPage = () => {
   });
 
   const handleCardNumbersChange = (value: string, index: number) => {
-    const errorMessageCopy = [...errorMessage.cardNumbers];
-    errorMessageCopy[index] = validateCardNumber(value);
+    const updatedCardNumbers = cardInfo.cardNumbers.map((num, i) => {
+      return i === index ? Number(value) : num;
+    });
+
+    const errorMessageCopy = errorMessage.cardNumbers.map((msg, i) => {
+      return i === index ? validateCardNumber(value) : msg;
+    });
 
     setErrorMessage({
       ...errorMessage,
@@ -29,18 +34,21 @@ const NewCardPage = () => {
     });
 
     if (errorMessageCopy[index] === "") {
-      const newCardNumbers = [...cardInfo.cardNumbers];
-      newCardNumbers[index] = Number(value);
       setCardInfo({
         ...cardInfo,
-        cardNumbers: newCardNumbers,
+        cardNumbers: updatedCardNumbers,
       });
     }
   };
 
   const handleCardExpirationChange = (value: string, index: number) => {
-    const errorMessageCopy = [...errorMessage.cardExpiration];
-    errorMessageCopy[index] = validateCardExpiration(value, index);
+    const updatedCardExpiration = cardInfo.cardExpiration.map((num, i) => {
+      return i === index ? Number(value) : num;
+    });
+
+    const errorMessageCopy = errorMessage.cardExpiration.map((msg, i) => {
+      return i === index ? validateCardExpiration(value, index) : msg;
+    });
 
     setErrorMessage({
       ...errorMessage,
@@ -48,11 +56,9 @@ const NewCardPage = () => {
     });
 
     if (errorMessageCopy[index] === "") {
-      const newCardExpiration = [...cardInfo.cardExpiration];
-      newCardExpiration[index] = Number(value);
       setCardInfo({
         ...cardInfo,
-        cardExpiration: newCardExpiration,
+        cardExpiration: updatedCardExpiration,
       });
     }
   };
@@ -80,9 +86,9 @@ const NewCardPage = () => {
 
       {/* 입력 - 카드 번호 */}
       <NewCardInputSection
-        label={FORM_FIELDS.CARD_NUMBERS.LABEL}
         mainText={FORM_FIELDS.CARD_NUMBERS.MAIN_TEXT}
         subText={FORM_FIELDS.CARD_NUMBERS.SUB_TEXT}
+        label={FORM_FIELDS.CARD_NUMBERS.LABEL}
         errorMessage={errorMessage.cardNumbers}
       >
         {cardInfo.cardNumbers.map((_, index) => (
@@ -98,9 +104,9 @@ const NewCardPage = () => {
 
       {/* 입력 - 유효 기간 */}
       <NewCardInputSection
-        label={FORM_FIELDS.CARD_EXPIRATION.LABEL}
         mainText={FORM_FIELDS.CARD_EXPIRATION.MAIN_TEXT}
         subText={FORM_FIELDS.CARD_EXPIRATION.SUB_TEXT}
+        label={FORM_FIELDS.CARD_EXPIRATION.LABEL}
         errorMessage={errorMessage.cardExpiration}
       >
         {cardInfo.cardExpiration.map((_, index) => (
@@ -116,9 +122,9 @@ const NewCardPage = () => {
 
       {/* 입력 - 소유자 이름 */}
       <NewCardInputSection
-        label={FORM_FIELDS.USER_NAME.LABEL}
         mainText={FORM_FIELDS.USER_NAME.MAIN_TEXT}
         subText={FORM_FIELDS.USER_NAME.SUB_TEXT}
+        label={FORM_FIELDS.USER_NAME.LABEL}
         errorMessage={errorMessage.userName}
       >
         <Input
