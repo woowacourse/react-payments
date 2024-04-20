@@ -1,4 +1,4 @@
-import { validateExpirationDate } from '@utils/expiration';
+import { validateExpirationDate } from '@utils/creditCard/expiration';
 import { useState } from 'react';
 
 export const initialExpiration = { month: '', year: '' };

@@ -1,34 +1,59 @@
+import { isCompleteCardNumber, isCompleteCardNumbers } from '@utils/creditCard/cardNumbers';
+import { isContainsNonNumeric } from '@utils/number';
 import { useState } from 'react';
 
 const useChangeCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [cardNumberError, setCardNumberError] = useState({
-    isError: false,
+    errorConditions: [false, false, false, false],
     errorMessage: '',
   });
 
-  const handleCardNumberChange = (index: number, value: string) => {
-    if (/\D/.test(value)) {
-      setCardNumberError({
-        isError: true,
-        errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
+  const handleCardNumberChange = (cardIndex: number, value: string) => {
+    if (isContainsNonNumeric(value)) {
+      setCardNumberError((prevCardNumberError) => {
+        const newErrorConditions = [...prevCardNumberError.errorConditions];
+        newErrorConditions[cardIndex] = true;
+
+        return {
+          errorConditions: newErrorConditions,
+          errorMessage: '숫자만 입력 가능합니다.',
+        };
       });
 
       return;
     }
 
-    const newParts = [...cardNumbers];
+    const newCardNumbers = [...cardNumbers];
+    newCardNumbers[cardIndex] = value;
 
-    newParts[index] = value;
+    if (!isCompleteCardNumber(value)) {
+      setCardNumbers(newCardNumbers);
+      setCardNumberError((prevCardNumberError) => {
+        const newErrorConditions = prevCardNumberError.errorConditions;
+        newErrorConditions[cardIndex] = true;
 
-    const completeCardNumber = newParts.join('');
+        newCardNumbers.forEach((cardNumbers, newCardIndex) => {
+          if (cardIndex !== newCardIndex && cardNumbers === '') newErrorConditions[newCardIndex] = false;
+        });
 
-    const isError = !/^\d{16}$/.test(completeCardNumber);
+        return {
+          errorConditions: newErrorConditions,
+          errorMessage: '카드 번호 4자리를 입력해주세요.',
+        };
+      });
 
-    setCardNumbers(newParts);
+      return;
+    }
+
+    const errorMessage = isCompleteCardNumbers(newCardNumbers) ? '' : '카드 번호는 16자리 숫자여야 합니다.';
+
+    setCardNumbers(newCardNumbers);
     setCardNumberError({
-      isError,
-      errorMessage: isError ? '카드 번호는 16자리 숫자여야 합니다.' : '',
+      errorConditions: isCompleteCardNumbers(newCardNumbers)
+        ? [false, false, false, false]
+        : newCardNumbers.map((cardNumber) => (isCompleteCardNumber(cardNumber) ? false : true)),
+      errorMessage,
     });
   };
 
