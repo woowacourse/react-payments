@@ -35,3 +35,9 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.scr-only {
+  position: absolute;
+  top: -999px;
+  left: -999px;
+}

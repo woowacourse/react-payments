@@ -174,12 +174,14 @@ export default function CardExpirationPeriodInput(
             name="month"
             type="number"
             placeholder={monthPlaceholder}
+            label="카드 유효 기간-월"
             value={cardPeriod.month || undefined}
             error={error.month || error.availability}
           />
           <Input
             name="year"
             type="number"
+            label="카드 유효 기간-연도"
             placeholder={yearPlaceholder}
             value={cardPeriod.year || undefined}
             error={error.year || error.availability}

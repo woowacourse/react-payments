@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useId } from 'react';
 
 import styles from './style.module.css';
 
@@ -10,15 +10,24 @@ export type HandleInputValue = (
 // input의 change event에 대한 핸들러 중복을 막기 위해 props에서 onChange 제거
 
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
+  label: string;
   error: boolean;
 }
 
 function Input(props: InputProps) {
-  const { error, ...reset } = props;
+  const { error, label, ...reset } = props;
+  const inputId = `input-${useId()}`;
 
   const className = `${styles.input} ${error ? styles.error : ''}`;
 
-  return <input className={className} {...reset} />;
+  return (
+    <>
+      <label className="scr-only" htmlFor={inputId}>
+        {label}
+      </label>
+      <input id={inputId} className={className} {...reset} />
+    </>
+  );
 }
 
 export default Input;

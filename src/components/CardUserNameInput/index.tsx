@@ -61,6 +61,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
               style={{ textTransform: 'uppercase' }}
               name="month"
               type="text"
+              label="카드 사용자 이름"
               placeholder={namePlaceholder}
               onChange={handleChange}
               value={userName}

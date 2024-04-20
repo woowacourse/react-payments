@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const InputDefault: Story = {
   args: {
+    label: '라벨',
     error: false,
   },
 };

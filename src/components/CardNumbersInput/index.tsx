@@ -95,6 +95,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
               key={`number_${index}`}
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               type="number"
+              label={`카드 ${index + 1}째 네자리 번호`}
               value={numbers[index]}
               error={numbersError[index]}
               placeholder={placeholder}
