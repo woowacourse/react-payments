@@ -5,16 +5,14 @@ import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
 
-import { CardInfo } from "../PaymentApp";
-
 const Form = ({
   setCardNumbers,
   setExpirationDate,
   setUserName,
 }: {
   setCardNumbers: React.Dispatch<React.SetStateAction<Map<string, string>>>;
-  setExpirationDate: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  setUserName: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  setExpirationDate: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setUserName: React.Dispatch<React.SetStateAction<Map<string, string>>>;
 }) => {
   return (
     <FormWrapper>

@@ -4,17 +4,14 @@ import { useState } from "react";
 import Form from "./Form/Form";
 import CardPreview from "./Card/CardPreview";
 
-export interface ICardInfo {
-  index: string;
-  currentValue: string;
-}
-
 const PaymentApp = () => {
   const [cardNumbers, setCardNumbers] = useState<Map<string, string>>(
     new Map()
   );
-  const [expirationDate, setExpirationDate] = useState<ICardInfo[]>([]);
-  const [userName, setUserName] = useState<ICardInfo[]>([]);
+  const [expirationDate, setExpirationDate] = useState<Map<string, string>>(
+    new Map()
+  );
+  const [userName, setUserName] = useState<Map<string, string>>(new Map());
 
   return (
     <PaymentAppStyled>

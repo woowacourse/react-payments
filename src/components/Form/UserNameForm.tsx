@@ -46,11 +46,12 @@ const UserNameForm = ({
       placeholder={placeholders[index]}
       maxLength={30}
       setErrorMessage={setErrorMessage}
-      setData={setUserName}
+      setData={setUserName ? setUserName : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
       validationRule={(value) => validateName(value)}
+      errorMessageText=""
     />
   ));
 

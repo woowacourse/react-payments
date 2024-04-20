@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormElement from "../common/FormElement";
 
+//TODO: 이름 수정
 import { CardNumberFormProps } from "./CardNumberForm";
 
 const ExpirationDateForm = ({
@@ -27,7 +28,6 @@ const ExpirationDateForm = ({
     return !isNaN(intValue) && intValue >= 24 && intValue <= 29;
   };
 
-  // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
   const updateInputValidity = (index: string, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,

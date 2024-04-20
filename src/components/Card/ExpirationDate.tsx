@@ -1,35 +1,28 @@
 import styled from "styled-components";
-import { CardInfo } from "../PaymentApp";
 
-const ExpirationDate = ({ expirationDate }: { expirationDate: CardInfo[] }) => {
-  const latestNumbers: { [key: number]: string } = {};
-
-  expirationDate.forEach((expirationInfo) => {
-    const index = Number(expirationInfo.index);
-    // NOTE: 각 인덱스의 최신 상태를 가져옴
-    latestNumbers[index] = expirationInfo.currentValue;
-  });
-
-  const latestNumbersKeys: number[] = Object.keys(latestNumbers).map(Number);
+const ExpirationDate = ({
+  expirationDate,
+}: {
+  expirationDate: Map<string, string>;
+}) => {
+  const keyArray = [...expirationDate.keys()];
 
   return (
     <div
       style={{ display: "flex", justifyContent: "flex-start", height: "20px" }}
     >
-      {Object.keys(latestNumbers).length !== 0 && (
-        <>
-          <ExpirationDateStyled key={latestNumbersKeys[0]}>
-            {latestNumbers[latestNumbersKeys[0]]}
-            {latestNumbers[latestNumbersKeys[1]] && (
-              <ExpirationDateStyled>/</ExpirationDateStyled>
-            )}
-          </ExpirationDateStyled>
-          {latestNumbers[latestNumbersKeys[1]] && (
-            <ExpirationDateStyled key={latestNumbersKeys[1]}>
-              {latestNumbers[latestNumbersKeys[1]]}
-            </ExpirationDateStyled>
+      {
+        <ExpirationDateStyled key={keyArray[0]}>
+          {expirationDate.get("0")}
+          {expirationDate.get("1") && (
+            <ExpirationDateStyled>/</ExpirationDateStyled>
           )}
-        </>
+        </ExpirationDateStyled>
+      }
+      {expirationDate.get("1") && (
+        <ExpirationDateStyled key={keyArray[1]}>
+          {expirationDate.get("1")}
+        </ExpirationDateStyled>
       )}
     </div>
   );

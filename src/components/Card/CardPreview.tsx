@@ -5,16 +5,14 @@ import CardLogo from "./CardLogo";
 import ExpirationDate from "./ExpirationDate";
 import UserName from "./UserName";
 
-import { ICardInfo } from "../PaymentApp";
-
 const CardPreview = ({
   cardNumbers,
   expirationDate,
   userName,
 }: {
   cardNumbers: Map<string, string>;
-  expirationDate: ICardInfo[];
-  userName: ICardInfo[];
+  expirationDate: Map<string, string>;
+  userName: Map<string, string>;
 }) => {
   return (
     <>
