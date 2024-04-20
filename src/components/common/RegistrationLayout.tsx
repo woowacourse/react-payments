@@ -18,8 +18,14 @@ export default function RegistrationLayout({
 }: RegistrationLayoutProps) {
   return (
     <Container>
-      <Title>{title}</Title>
-      {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      <Title role="heading" aria-level={1}>
+        {title}
+      </Title>
+      {subtitle && (
+        <Subtitle role="heading" aria-level={2}>
+          {subtitle}
+        </Subtitle>
+      )}
       <Label htmlFor={labelFor}>{labelText}</Label>
       <InputWrapper>{children}</InputWrapper>
     </Container>
@@ -30,20 +36,20 @@ const Container = styled.div`
   margin-top: 10px;
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 `;
 
-export const Subtitle = styled.h2`
+const Subtitle = styled.div`
   font-size: 13px;
   font-weight: 300;
   margin: 10px 0 12px 0;
   color: #8b95a1;
 `;
 
-export const Label = styled.label`
+const Label = styled.label`
   font-size: 15.5px;
   font-weight: 400;
   display: block;
@@ -51,7 +57,7 @@ export const Label = styled.label`
   color: #0a0d13;
 `;
 
-export const InputWrapper = styled.div`
+const InputWrapper = styled.div`
   display: flex;
   width: 440px;
   justify-content: space-between;
