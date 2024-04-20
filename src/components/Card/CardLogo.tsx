@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Visa from "../../assets/Visa.png";
 import MasterCard from "../../assets/Mastercard.png";
 
+import { CARD_TYPE } from "../../constants/card";
 import { CardInfo } from "../PaymentApp";
 
 const CardLogoWrapper = styled.img`
@@ -16,13 +17,17 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
   if (cardNumbers.length === 0) return;
 
   const isVisa = (firstCardNumber: string) => {
-    return firstCardNumber.startsWith("4");
+    const firstDigit = Number(firstCardNumber.slice(0, 1));
+    return firstDigit === CARD_TYPE.visaStart;
   };
 
   const isMasterCard = (firstCardNumber: string) => {
     const firstTwoDigits = Number(firstCardNumber.slice(0, 2));
 
-    return firstTwoDigits >= 51 && firstTwoDigits <= 55;
+    return (
+      firstTwoDigits >= CARD_TYPE.masterCardStart &&
+      firstTwoDigits <= CARD_TYPE.masterCardEnd
+    );
   };
 
   const firstCardNumberObject = cardNumbers
