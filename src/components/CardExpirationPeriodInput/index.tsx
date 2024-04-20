@@ -17,8 +17,8 @@ import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
-import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
+import InputErrorMessage from '../InputErrorMessage';
 
 import styles from './style.module.css';
 
@@ -186,10 +186,9 @@ export default function CardExpirationPeriodInput(
               error={error.year || error.availability}
             />
           </div>
-
-          <FormErrorMessage>
+          <InputErrorMessage>
             {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
-          </FormErrorMessage>
+          </InputErrorMessage>
         </div>
       </CardInput>
     </CardInputContainer>

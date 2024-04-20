@@ -21,6 +21,7 @@ function App() {
     <div id="app">
       <div className="inner">
         <CardPreview cardInfo={cardInfo} />
+
         <form className="form-container">
           <fieldset>
             <CardNumbersInput

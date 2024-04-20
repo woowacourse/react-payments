@@ -11,8 +11,8 @@ import { CardMark } from '../../modules/useCardInfoReducer';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
-import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
+import InputErrorMessage from '../InputErrorMessage';
 
 import styles from './style.module.css';
 
@@ -103,9 +103,9 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
           ))}
         </div>
       </CardInput>
-      <FormErrorMessage>
+      <InputErrorMessage>
         <p> {errorMessage}</p>
-      </FormErrorMessage>
+      </InputErrorMessage>
     </CardInputContainer>
   );
 }

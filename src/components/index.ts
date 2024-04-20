@@ -4,8 +4,8 @@ import CardInputContainer from './CardInputContainer';
 import CardNumbersInput from './CardNumbersInput';
 import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
-import FormErrorMessage from './FormErrorMessage/index';
 import Input from './Input';
+import InputErrorMessage from './InputErrorMessage/index';
 
 export {
   CardExpirationPeriodInput,
@@ -14,6 +14,6 @@ export {
   CardNumbersInput,
   CardPreview,
   CardUserNameInput,
-  FormErrorMessage,
+  InputErrorMessage,
   Input,
 };
