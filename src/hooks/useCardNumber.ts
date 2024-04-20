@@ -10,27 +10,15 @@ const useCardNumber = (initialStates: InitialCardNumberState[]) => {
   const [cardNumbers, setCardNumbers] = useState<InitialCardNumberState[]>(initialStates);
 
   const cardNumbersChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    if (e.target.value !== '' && !validate.isValidDigit(e.target.value)) {
-      setCardNumbers(
-        cardNumbers.map((cardNumber, i) => {
-          if (i === index) {
-            return {
-              ...cardNumber,
-              isError: true,
-            };
-          }
-          return cardNumber;
-        }),
-      );
-      return;
-    }
+    const newValue = e.target.value;
+    const isValid = newValue === '' || validate.isValidDigit(newValue);
 
-    return setCardNumbers(
+    setCardNumbers(
       cardNumbers.map((cardNumber, i) => {
         if (i === index) {
           return {
-            value: e.target.value,
-            isError: false,
+            value: isValid ? newValue : cardNumber.value,
+            isError: !isValid,
           };
         }
         return cardNumber;
