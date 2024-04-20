@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Input from "../../components/input/Input";
 import CardPreview from "../../components/cardPreview/CardPreview";
-import { ICardInfo } from "../../types/type";
+import { CardInfo } from "../../types/type";
 import NewCardInputSection from "../../components/newCardInputSection/NewCardInputSection";
 import { NewCardContainer } from "./NewCardPage.styled";
 import { validateCardExpiration, validateCardNumber, validateUserName } from "../../validators/newCardInputValidator";
 import { FORM_FIELDS } from "../../constants/setting";
 
 const NewCardPage = () => {
-  const [cardInfo, setCardInfo] = useState<ICardInfo>({
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
     userName: "",
