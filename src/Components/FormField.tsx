@@ -41,7 +41,7 @@ const FormFieldComponent: React.FC<Props> = ({ formFieldInfo: { key, title, desc
       <p css={descriptionCss}>{description}</p>
       <label htmlFor="id">{label}</label>
       <div css={rowStyle}>{children}</div>
-      {formErrors[key].errorMessage ? <Tooltip>{formErrors[key].errorMessage}</Tooltip> : <Tooltip>{""}</Tooltip>}
+      <Tooltip>{formErrors[key].errorMessage ?? ""}</Tooltip>
     </div>
   );
 };
