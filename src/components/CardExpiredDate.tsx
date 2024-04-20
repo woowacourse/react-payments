@@ -1,55 +1,44 @@
-import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
-import { useContext, useEffect, useState } from "react";
 import {
-  validateLength,
-  validateMonth,
-  validateYear,
-} from "../domain/validateInput";
+  ERROR_MESSAGE,
+  PAYMENTS_INPUT_MESSAGE,
+  PAYMENTS_MESSAGE,
+} from '../constants/message';
+import { isValidMonth, isValidYear } from '../domain/checkIsValid';
 
-import { CardInfoContext } from "../App";
-import FormItem from "./FormItem";
-import SectionTitle from "./SectionTitle";
-import useInput from "../hooks/useInput";
+import { BOUND } from '../constants/number';
+import FormItem from './FormItem';
+import SectionTitle from './SectionTitle';
+import TextInput from './TextInput';
+import TextInputContainer from './InputContainer';
+import { useEffect } from 'react';
+import useLastValidValue from '../hooks/useLastValidValue';
+import useValidateInput from '../hooks/useValidateInput';
 
-export default function CardExpiredDate() {
-  const [errorMessage, setErrorMessage] = useState("");
+export default function CardExpiredDate({
+  setCardExpiredDate,
+}: {
+  setCardExpiredDate: React.Dispatch<React.SetStateAction<[string, string]>>;
+}) {
+  const {
+    input: month,
+    onChange: monthOnChange,
+    errorMessage: monthErrorMessage,
+  } = useValidateInput(useMonthInputProps);
 
-  const printErrorMessage = (error: unknown) => {
-    if (!(error instanceof Error)) return;
-    setErrorMessage(error.message);
-  };
+  const {
+    input: year,
+    onChange: yearOnChange,
+    errorMessage: yearErrorMessage,
+  } = useValidateInput(useYearInputProps);
 
-  const monthInputProps = {
-    validator: (string: string) => {
-      validateMonth(string);
-      validateLength(string, 2);
-
-      setErrorMessage("");
-    },
-    errorHandler: printErrorMessage,
-  };
-
-  const yearInputProps = {
-    validator: (string: string) => {
-      validateYear(string);
-      validateLength(string, 2);
-
-      setErrorMessage("");
-    },
-    errorHandler: printErrorMessage,
-  };
-
-  const monthInput = useInput(monthInputProps);
-  const yearInput = useInput(yearInputProps);
-  const inputs = [monthInput, yearInput];
-
-  const { setCardExpiredDate } = useContext(CardInfoContext);
+  const errorMessage = useLastValidValue({
+    checkValues: [monthErrorMessage, yearErrorMessage],
+    invalidValues: [''],
+  });
 
   useEffect(() => {
-    // 04/24이후 확인
-    if (setCardExpiredDate)
-      setCardExpiredDate([monthInput.value, yearInput.value]);
-  }, [monthInput.value, yearInput.value]);
+    if (setCardExpiredDate) setCardExpiredDate([month, year]);
+  }, [month, year, setCardExpiredDate]);
 
   return (
     <section>
@@ -61,17 +50,43 @@ export default function CardExpiredDate() {
         labelText={PAYMENTS_INPUT_MESSAGE.expiredDateLabel}
         errorMessage={errorMessage}
       >
-        {inputs.map((input, idx) => (
-          <input
-            key={idx}
-            type="text"
-            maxLength={2}
-            placeholder={PAYMENTS_INPUT_MESSAGE.expiredDatePlaceHolder[idx]}
-            onChange={input.onChangeHandler}
-            value={input.value}
+        <TextInputContainer>
+          <TextInput
+            placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
+            onChange={monthOnChange}
+            value={month}
+            border-color={monthErrorMessage ? 'error' : undefined}
           />
-        ))}
+          <TextInput
+            placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
+            onChange={yearOnChange}
+            value={year}
+            border-color={yearErrorMessage ? 'error' : undefined}
+          />
+        </TextInputContainer>
       </FormItem>
     </section>
   );
 }
+
+const useMonthInputProps = {
+  validatorPropsArray: [
+    {
+      checkIsValid: isValidMonth,
+      shouldReflect: false,
+      errorMessage: ERROR_MESSAGE.wrongMonth,
+    },
+  ],
+  maxLength: BOUND.cardExpiredMonthStringUpper,
+};
+
+const useYearInputProps = {
+  validatorPropsArray: [
+    {
+      checkIsValid: isValidYear,
+      shouldReflect: false,
+      errorMessage: ERROR_MESSAGE.wrongYear,
+    },
+  ],
+  maxLength: BOUND.cardExpiredYearStringUpper,
+};
