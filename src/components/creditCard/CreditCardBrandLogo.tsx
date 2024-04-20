@@ -15,17 +15,17 @@ const CreditCardBrandLogo = (creditCardNumber: CardNumber): JSX.Element | undefi
   const firstTwoNumber = getFirstTwoNumber(creditCardNumber);
   if (!firstTwoNumber) return;
 
-  if (
+  const isVisaCard =
     CARD_THRESHOLD.minimumVisaNumber <= firstTwoNumber &&
-    firstTwoNumber <= CARD_THRESHOLD.maximumVisaNumber
-  )
-    return <CreditCardImg src={VisaCard} alt="비자카드 이미지" />;
+    firstTwoNumber <= CARD_THRESHOLD.maximumVisaNumber;
 
-  if (
+  const isMasterCard =
     CARD_THRESHOLD.minimumMasterCardNumber <= firstTwoNumber &&
-    firstTwoNumber <= CARD_THRESHOLD.maximumMasterCardNumber
-  )
-    return <CreditCardImg src={MasterCard} alt="마스터카드 이미지" />;
+    firstTwoNumber <= CARD_THRESHOLD.maximumMasterCardNumber;
+
+  if (isVisaCard) return <CreditCardImg src={VisaCard} alt="비자카드 이미지" />;
+
+  if (isMasterCard) return <CreditCardImg src={MasterCard} alt="마스터카드 이미지" />;
 };
 
 export default CreditCardBrandLogo;
