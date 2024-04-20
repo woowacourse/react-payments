@@ -11,7 +11,7 @@ const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value,
       id={id}
       maxLength={50}
       type="text"
-      placeholder="JOHN DOE"
+      placeholder="JOHNDOE"
       value={value}
       isError={isError}
       onChange={onAddOwnerName}

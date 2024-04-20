@@ -18,7 +18,7 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ ownerName, onAd
         <OwnerNameInput
           id="ownerName"
           isError={ownerNameError.isError}
-          placeholder={'JOHN DOE'}
+          placeholder={'JOHNDOE'}
           value={ownerName}
           onAddOwnerName={(event) => onAddOwnerName(event.target.value)}
         />
