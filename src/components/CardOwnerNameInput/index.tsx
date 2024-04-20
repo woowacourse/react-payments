@@ -1,23 +1,19 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
 
-import Label from "../common/Label";
-import Input from "../common/Input";
-import { CARD_META_INFO, INPUT_RULES } from "../../constants/card-app";
+import Label from '../common/Label';
+import Input from '../common/Input';
+import { CARD_META_INFO, INPUT_RULES } from '../../constants/card-app';
 
-import { VALIDATION_MESSAGES } from "../../constants/card-app";
+import { VALIDATION_MESSAGES } from '../../constants/card-app';
 
 interface CardOwnerNameInputProps {
   ownerName: string;
   errorCaption: (errorText: string) => JSX.Element;
-  handleCardOwnerNameChange: (value: string) => void;
+  onCardOwnerNameChange: (value: string) => void;
 }
 
-const CardOwnerNameInput = ({
-  ownerName,
-  errorCaption,
-  handleCardOwnerNameChange,
-}: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange: handleCardOwnerNameChange }: CardOwnerNameInputProps) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleInputChange = (value: string) => {
@@ -33,21 +29,19 @@ const CardOwnerNameInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="card-owner">{CARD_META_INFO.cardOwnerName.label}</Label>
+      <Label htmlFor='card-owner'>{CARD_META_INFO.cardOwnerName.label}</Label>
       <Input
-        id="card-owner"
-        type="text"
-        placeholder="JOHN DOE"
+        id='card-owner'
+        type='text'
+        placeholder='JOHN DOE'
         value={ownerName}
-        size="large"
+        size='large'
         isError={isError}
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
       />
-      {isError
-        ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName)
-        : errorCaption("")}
+      {isError ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName) : errorCaption('')}
     </InputField>
   );
 };

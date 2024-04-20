@@ -65,7 +65,7 @@ const NewCardInputPage = () => {
         errorCaption={(errorText: string) => (
           <Caption text={errorText} type="error" />
         )}
-        handleCardNumberChange={handleCardNumberChange}
+        onCardNumberChange={handleCardNumberChange}
       />
 
       <InputTitle text={CARD_META_INFO.expirationDate.query!} />
@@ -75,7 +75,7 @@ const NewCardInputPage = () => {
         errorCaption={(errorText: string) => (
           <Caption text={errorText} type="error" />
         )}
-        handleExpirationDateChange={handleExpirationDateChange}
+        onExpirationDateChange={handleExpirationDateChange}
       />
 
       <InputTitle text={CARD_META_INFO.cardOwnerName.query!} />
@@ -84,7 +84,7 @@ const NewCardInputPage = () => {
         errorCaption={(errorText: string) => (
           <Caption text={errorText} type="error" />
         )}
-        handleCardOwnerNameChange={handleCardOwnerNameChange}
+        onCardOwnerNameChange={handleCardOwnerNameChange}
       />
     </InputPageLayout>
   );

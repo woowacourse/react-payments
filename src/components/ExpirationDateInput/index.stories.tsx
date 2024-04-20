@@ -29,7 +29,7 @@ const meta = {
           args={{
             ...context.args,
             expirationDate,
-            handleExpirationDateChange,
+            onExpirationDateChange: handleExpirationDateChange,
           }}
         />
       );
@@ -40,7 +40,7 @@ const meta = {
 
   args: {
     expirationDate: ["", ""],
-    handleExpirationDateChange: fn(),
+    onExpirationDateChange: fn(),
   },
 } satisfies Meta<typeof ExpirationDateInput>;
 

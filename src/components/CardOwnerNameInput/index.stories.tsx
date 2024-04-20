@@ -21,7 +21,7 @@ const meta = {
 
       return (
         <Story
-          args={{ ...context.args, ownerName, handleCardOwnerNameChange }}
+          args={{ ...context.args, ownerName, onCardOwnerNameChange: handleCardOwnerNameChange }}
         />
       );
     },
@@ -31,7 +31,7 @@ const meta = {
 
   args: {
     ownerName: "",
-    handleCardOwnerNameChange: fn(),
+    onCardOwnerNameChange: fn(),
   },
 } satisfies Meta<typeof CardOwnerNameInput>;
 

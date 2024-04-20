@@ -26,7 +26,7 @@ const meta = {
 
       return (
         <Story
-          args={{ ...context.args, cardNumbers, handleCardNumberChange }}
+          args={{ ...context.args, cardNumbers, onCardNumberChange: handleCardNumberChange }}
         />
       );
     },
@@ -36,7 +36,7 @@ const meta = {
 
   args: {
     cardNumbers: ["", "", "", ""],
-    handleCardNumberChange: fn(),
+    onCardNumberChange: fn(),
   },
 } satisfies Meta<typeof CardNumberInput>;
 
