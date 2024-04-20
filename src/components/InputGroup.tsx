@@ -7,6 +7,34 @@ import { informationSectionType, period } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
+const inputGroupStyle = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+});
+
+const inputTitleStyle = css({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+const labelStyle = css({
+  fontSize: '12px',
+  color: '#0a0d13',
+});
+
+const inputContainerStyle = css({
+  display: 'flex',
+  gap: '8px',
+  flexDirection: 'column',
+  width: '100%',
+});
+
+const inputBoxStyle = css({
+  display: 'flex',
+  gap: '10px',
+});
+
 interface InputGroupType {
   setState: React.Dispatch<React.SetStateAction<string[]>>;
   informationSection: informationSectionType;
@@ -60,33 +88,5 @@ function InputGroup({ setState, informationSection }: InputGroupType) {
     </div>
   );
 }
-
-const inputGroupStyle = css`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const inputTitleStyle = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const labelStyle = css`
-  font-size: 12px;
-  color: #0a0d13;
-`;
-
-const inputContainerStyle = css`
-  display: flex;
-  gap: 8px;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const inputBoxStyle = css`
-  display: flex;
-  gap: 10px;
-`;
 
 export default InputGroup;

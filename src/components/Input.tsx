@@ -4,6 +4,20 @@ import { useState } from 'react';
 import { InformationDetailType } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
+const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusColor: string }) =>
+  css({
+    border: `1px solid ${borderColor}`,
+    borderRadius: '4px',
+    padding: '8px',
+    fontSize: '11px',
+    outline: 'none',
+    width: '100%',
+
+    '&:active, &:focus': {
+      borderColor: `${focusColor}`,
+    },
+  });
+
 interface InputType {
   isPassword: boolean;
   informationDetail: InformationDetailType;
@@ -50,20 +64,5 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
     </>
   );
 }
-
-const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusColor: string }) => css`
-  border: 1px solid;
-  border-color: ${borderColor};
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 11px;
-  outline: none;
-  width: 100%;
-
-  &:active,
-  &:focus {
-    border-color: ${focusColor};
-  }
-`;
 
 export default Input;

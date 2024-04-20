@@ -1,5 +1,21 @@
 import { css } from '@emotion/react';
 
+const titleContainerStyle = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '4px',
+});
+
+const titleStyle = css({
+  fontSize: '18px',
+  fontWeight: 'bold',
+});
+
+const subtitleStyle = css({
+  color: '#8b95a1',
+  fontSize: '9.5px',
+});
+
 interface InputTitlePropsType {
   title: string;
   subtitle?: string;
@@ -13,21 +29,5 @@ function InputTitle({ title, subtitle }: InputTitlePropsType) {
     </div>
   );
 }
-
-const titleContainerStyle = css`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const titleStyle = css`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-const subtitleStyle = css`
-  color: #8b95a1;
-  font-size: 9.5px;
-`;
 
 export default InputTitle;
