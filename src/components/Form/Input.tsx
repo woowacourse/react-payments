@@ -29,7 +29,7 @@ const Input = ({
   const [currentValue, setCurrentValue] = useState("");
   const [isValidInput, setIsValidInput] = useState(true);
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.target.value;
 
     setCurrentValue(currentValue);
