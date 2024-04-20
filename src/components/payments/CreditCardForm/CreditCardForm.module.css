@@ -6,3 +6,9 @@
   margin-top: 78px;
   margin-bottom: 46px;
 }
+
+.textFieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

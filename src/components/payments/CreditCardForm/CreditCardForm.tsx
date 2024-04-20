@@ -5,8 +5,6 @@ import {
   PreviewCreditCard,
 } from '@components/payments';
 
-import { TextFieldStyleContainer } from '@components/layout';
-
 import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
 
@@ -26,7 +24,7 @@ const CreditCardForm: React.FC = () => {
           ownerName={ownerName}
         />
       </div>
-      <TextFieldStyleContainer>
+      <div className={styles.textFieldContainer}>
         <CardNumberTextField
           cardNumbers={cardNumbers}
           onAddCardNumber={handleCardNumberChange}
@@ -43,7 +41,7 @@ const CreditCardForm: React.FC = () => {
           onAddOwnerName={handleOwnerNameChange}
           ownerNameError={ownerNameError}
         />
-      </TextFieldStyleContainer>
+      </div>
     </>
   );
 };
