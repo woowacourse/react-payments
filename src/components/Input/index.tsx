@@ -14,11 +14,11 @@ interface InputProps extends React.HTMLProps<HTMLInputElement> {
 }
 
 function Input(props: InputProps) {
-  const { error } = props;
+  const { error, ...reset } = props;
 
   const className = `${styles.input} ${error ? styles.error : ''}`;
 
-  return <input className={className} {...props} />;
+  return <input className={className} {...reset} />;
 }
 
 export default Input;
