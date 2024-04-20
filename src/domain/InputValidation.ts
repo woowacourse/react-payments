@@ -1,5 +1,6 @@
 import ERROR_MESSAGES from '../constants/error';
 import {
+  CARD_NUMBER_LENGTH,
   DOUBLE_BLANK,
   MONTH_RANGE,
   UPPERCASE_AND_SPACE_ONLY,
@@ -30,11 +31,11 @@ function checkEmpty(n: string) {
   }
 }
 
-// function validateLength(n: string, length: number) {
-//   if (n.length !== length) {
-//     throw new Error(`카드 번호를 ${length}자리씩 입력해주세요.`);
-//   }
-// }
+function validateCardNumberLength(n: string) {
+  if (n.length !== CARD_NUMBER_LENGTH) {
+    throw new Error(ERROR_MESSAGES.INVALID_CARD_NUMBER_LENGTH);
+  }
+}
 
 function validateMonth(n: string) {
   if (checkEmpty(n)) return;
@@ -65,7 +66,7 @@ interface ValidationMap {
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
-    // validateLength(n, 4);
+    validateCardNumberLength(n);
     validateNumber(n);
   },
   month: (n: string) => {

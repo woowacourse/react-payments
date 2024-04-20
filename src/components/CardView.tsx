@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
-import { CARD_CONFIG } from '../constants/system';
+import {
+  CARD_CONFIG,
+  DEFAULT_BLANK,
+  SECRET_NUMBER,
+  SLASH,
+} from '../constants/system';
 
 interface Props {
   cardInfo: Card;
@@ -52,21 +57,21 @@ export default function CardView({ cardInfo }: Props) {
       </ImgBox>
 
       <CardNumbers>
-        <CardNumber> {cardInfo.cardNumbers.cardNumber1} </CardNumber>
-        <CardNumber> {cardInfo.cardNumbers.cardNumber2} </CardNumber>
+        <CardNumber>{cardInfo.cardNumbers.cardNumber1}</CardNumber>
+        <CardNumber>{cardInfo.cardNumbers.cardNumber2}</CardNumber>
         <SecretCardNumber>
-          {'•'.repeat(cardInfo.cardNumbers.cardNumber3.length)}
+          {SECRET_NUMBER.repeat(cardInfo.cardNumbers.cardNumber3.length)}
         </SecretCardNumber>
         <SecretCardNumber>
-          {'•'.repeat(cardInfo.cardNumbers.cardNumber4.length)}
+          {SECRET_NUMBER.repeat(cardInfo.cardNumbers.cardNumber4.length)}
         </SecretCardNumber>
       </CardNumbers>
       <TextBox>
         {formatDate(cardInfo.expiryDate.month)}
-        {cardInfo.expiryDate.year.length > 0 ? ' / ' : ''}
+        {cardInfo.expiryDate.year.length > 0 ? SLASH : DEFAULT_BLANK}
         {formatDate(cardInfo.expiryDate.year)}
       </TextBox>
-      <TextBox> {cardInfo.userName} </TextBox>
+      <TextBox>{cardInfo.userName}</TextBox>
     </CardContainer>
   );
 }

@@ -1,6 +1,8 @@
 export const DOUBLE_BLANK = / {2,}/;
 export const UPPERCASE_AND_SPACE_ONLY = /^[A-Z\s]+$/;
 
+export const CARD_NUMBER_LENGTH = 4;
+
 export const MONTH_RANGE = {
   MIN: 1,
   MAX: 12,
@@ -18,3 +20,14 @@ export const CARD_CONFIG = {
     END: 55,
   },
 };
+
+export const CARD_TYPE = {
+  VISA: 'visa',
+  MASTER: 'master',
+};
+
+export const SECRET_NUMBER = '•';
+
+export const SLASH = '/';
+
+export const DEFAULT_BLANK = '';

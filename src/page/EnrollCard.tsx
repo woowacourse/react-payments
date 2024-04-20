@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
+import { DEFAULT_BLANK } from '../constants/system';
 
 const Page = styled.div`
   width: 100vw;
@@ -28,16 +29,16 @@ const Container = styled.div`
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>({
     cardNumbers: {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
+      cardNumber1: DEFAULT_BLANK,
+      cardNumber2: DEFAULT_BLANK,
+      cardNumber3: DEFAULT_BLANK,
+      cardNumber4: DEFAULT_BLANK,
     },
     expiryDate: {
-      month: '',
-      year: '',
+      month: DEFAULT_BLANK,
+      year: DEFAULT_BLANK,
     },
-    userName: '',
+    userName: DEFAULT_BLANK,
   });
   return (
     <Page>
