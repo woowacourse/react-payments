@@ -30,12 +30,6 @@ function checkEmpty(n: string) {
   }
 }
 
-// function validateLength(n: string, length: number) {
-//   if (n.length !== length) {
-//     throw new Error(`카드 번호를 ${length}자리씩 입력해주세요.`);
-//   }
-// }
-
 function validateMonth(n: string) {
   if (checkEmpty(n)) return;
   const month = Number(n);
@@ -65,7 +59,6 @@ interface ValidationMap {
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
-    // validateLength(n, 4);
     validateNumber(n);
   },
   month: (n: string) => {
