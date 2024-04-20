@@ -1,1 +1,1 @@
-export { isValidMonth as isValidMonthInput, isValidYear as isValidYearInput } from './inputField/expirationDate';
+export { isValidMonthInput, isValidYearInput } from './inputField/expirationDate';
