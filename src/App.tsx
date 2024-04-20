@@ -1,13 +1,10 @@
 import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
 
+import styles from './App.module.css';
+
 function App() {
   return (
-    <div
-      style={{
-        maxWidth: '375px',
-        margin: 'auto',
-      }}
-    >
+    <div className={styles.app}>
       <CreditCardForm />
     </div>
   );
