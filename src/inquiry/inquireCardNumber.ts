@@ -1,5 +1,8 @@
+import CONDITION from '../constants/condition';
+
 const inquireCardNumber = (cardNumber: string) => {
-  const isValidLength = cardNumber.length === 0 || cardNumber.length === 4;
+  const isValidLength =
+    cardNumber.length === CONDITION.TEXT_LENGTH_MIN || cardNumber.length === CONDITION.CARD_NUMBER_LENGTH_MAX;
   const isValidCardNumber = /^\d{4}$/.test(cardNumber);
 
   if (!isValidLength) {

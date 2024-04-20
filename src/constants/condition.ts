@@ -1,0 +1,10 @@
+const CONDITION = {
+  VISA: '4',
+  MASTER_CARD_MIN: 50,
+  MASTER_CARD_MAX: 56,
+  TEXT_LENGTH_MIN: 0,
+  CARD_NUMBER_LENGTH_MAX: 4,
+  DATE_LENGTH_MAX: 2,
+} as const;
+
+export default CONDITION;

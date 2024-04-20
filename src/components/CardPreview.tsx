@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MasterCard from '../../src/assets/images/mastercard.png';
 import VisaCard from '../../src/assets/images/visa.png';
+import CONDITION from '../constants/condition';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -11,9 +12,9 @@ interface CardPreviewProps {
 }
 
 const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewProps) => {
-  const isVisa = cardNumbers.first[0] === '4';
   const firstTwoDigits = Number(cardNumbers.first.slice(0, 2));
-  const isMaster = firstTwoDigits > 50 && firstTwoDigits < 56;
+  const isVisa = cardNumbers.first[0] === CONDITION.VISA;
+  const isMaster = firstTwoDigits > CONDITION.MASTER_CARD_MIN && firstTwoDigits < CONDITION.MASTER_CARD_MAX;
 
   return (
     <CardPreviewLayout>
