@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Input.module.css';
 interface InputProps {
-  name: string;
+  id: string;
   value: string;
   isError: boolean;
   placeholder: string;
@@ -13,7 +13,7 @@ interface InputProps {
 }
 
 export default function Input({
-  name,
+  id,
   value,
   placeholder,
   isError,
@@ -24,7 +24,7 @@ export default function Input({
 }: InputProps) {
   return (
     <input
-      name={name}
+      id={id}
       placeholder={placeholder}
       value={value}
       maxLength={maxLength}

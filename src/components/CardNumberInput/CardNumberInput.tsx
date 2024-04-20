@@ -4,6 +4,7 @@ import Field from '../common/Field/Field';
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 import { hasFourDigit, isInteger } from '../../domain/validators';
+import Label from '../common/Label/Label';
 
 interface CardNumberInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
@@ -64,16 +65,19 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
       {Object.keys(cardNumbers).map((n) => {
         const name = n as keyof CardNumbers;
         return (
-          <Input
-            key={name}
-            name={name}
-            placeholder={CARD_NUMBER.placeholder}
-            value={cardNumbers[name]}
-            isError={isError[name]}
-            handleChange={onChange}
-            handleOnBlur={onBlur}
-            maxLength={Object.keys(cardNumbers).length}
-          />
+          <>
+            <Label htmlFor={name} labelText={name} hideLabel />
+            <Input
+              key={name}
+              id={name}
+              placeholder={CARD_NUMBER.placeholder}
+              value={cardNumbers[name]}
+              isError={isError[name]}
+              handleChange={onChange}
+              handleOnBlur={onBlur}
+              maxLength={4}
+            />
+          </>
         );
       })}
     </Field>

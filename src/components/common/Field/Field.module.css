@@ -19,19 +19,21 @@
   line-height: 14px;
 }
 
-.labelText {
-  color: var(--color-gray-400);
-  font-weight: 500px;
-  font-size: 12px;
-  line-height: 15px;
+.fieldset {
+  display: flex;
+  width: 100%;
+  gap: 10px;
 
   margin: 18px 0 8px;
 }
 
-.inputWrapper {
-  display: flex;
-  width: 100%;
-  gap: 10px;
+.legend {
+  display: block;
+
+  color: var(--color-gray-400);
+  font-weight: 500px;
+  font-size: 12px;
+  line-height: 15px;
 
   margin-bottom: 8px;
 }

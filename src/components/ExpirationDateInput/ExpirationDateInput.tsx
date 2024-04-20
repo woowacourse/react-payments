@@ -10,6 +10,7 @@ import {
 
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
+import Label from '../common/Label/Label';
 
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
@@ -72,20 +73,23 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
       {Object.keys(expirationDate).map((n) => {
         const name = n as keyof ExpirationDate;
         return (
-          <Input
-            key={name}
-            name={name}
-            placeholder={
-              name === 'month'
-                ? EXPIRATION_DATE.placeholder.month
-                : EXPIRATION_DATE.placeholder.year
-            }
-            value={expirationDate[name]}
-            isError={isError[name]}
-            handleChange={onChange}
-            handleOnBlur={onBlur}
-            maxLength={Object.keys(expirationDate).length}
-          />
+          <>
+            <Label htmlFor={name} labelText={name} hideLabel />
+            <Input
+              key={name}
+              id={name}
+              placeholder={
+                name === 'month'
+                  ? EXPIRATION_DATE.placeholder.month
+                  : EXPIRATION_DATE.placeholder.year
+              }
+              value={expirationDate[name]}
+              isError={isError[name]}
+              handleChange={onChange}
+              handleOnBlur={onBlur}
+              maxLength={2}
+            />
+          </>
         );
       })}
     </Field>

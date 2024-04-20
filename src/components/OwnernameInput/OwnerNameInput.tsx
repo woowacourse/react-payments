@@ -5,6 +5,7 @@ import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 import { isEnglishCharacter } from '../../domain/validators';
+import Label from '../common/Label/Label';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -50,17 +51,20 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
       {Object.keys(ownerName).map((n) => {
         const name = n as keyof OwnerName;
         return (
-          <Input
-            key={name}
-            name={name}
-            placeholder={OWNER_NAME.placeholder}
-            value={ownerName[name]}
-            isError={isError[name]}
-            isRequired
-            maxLength={26}
-            handleChange={onChange}
-            handleOnBlur={onBlur}
-          />
+          <>
+            <Label htmlFor={name} labelText={name} hideLabel />
+            <Input
+              key={name}
+              id={name}
+              placeholder={OWNER_NAME.placeholder}
+              value={ownerName[name]}
+              isError={isError[name]}
+              isRequired
+              handleChange={onChange}
+              handleOnBlur={onBlur}
+              maxLength={26}
+            />
+          </>
         );
       })}
     </Field>

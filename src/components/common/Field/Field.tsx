@@ -21,10 +21,14 @@ export default function Field({
       <h2 className={styles.title}>{title}</h2>
       {description && <p className={styles.description}>{description}</p>}
 
-      <label>
+      <fieldset className={styles.fieldset}>
+        <legend className={styles.legend}>{labelText}</legend>
+        {children}
+      </fieldset>
+      {/* <label>
         <p className={styles.labelText}>{labelText}</p>
         <div className={styles.inputWrapper}>{children}</div>
-      </label>
+      </label> */}
 
       <p className={styles.errMsg}>{errMsg}</p>
     </div>
