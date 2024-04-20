@@ -2,8 +2,12 @@ import styled from "styled-components";
 
 import { ReactElement } from "react";
 
-const CardNumber = ({ number }: { number: string | ReactElement[] }) => {
-  return <CardNumberWrapper>{number}</CardNumberWrapper>;
+const CardNumber = ({
+  cardNumber,
+}: {
+  cardNumber: string | ReactElement[];
+}) => {
+  return <CardNumberWrapper>{cardNumber}</CardNumberWrapper>;
 };
 
 const CardNumberWrapper = styled.span`
