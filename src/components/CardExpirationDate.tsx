@@ -1,8 +1,9 @@
-import { useState } from "react";
-import Input from "./Input";
-import { TitleText, CaptionText, LabelText } from "../styles/common";
-import styled from "styled-components";
+import { CaptionText, LabelText, TitleText } from "../styles/common";
+
 import ErrorMessage from "./ErrorMessage";
+import Input from "./Input";
+import styled from "styled-components";
+import { useState } from "react";
 
 const CardDateContainer = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface Props {
+interface CardExpirationDateProps {
   cardExpirationMonth: string;
   cardExpirationYear: string;
   inputHandler: (inputValue: string, inputId: string) => void;
@@ -33,7 +34,7 @@ export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
   inputHandler,
-}: Props) {
+}: CardExpirationDateProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const numberValidator = (numbers: string) => {

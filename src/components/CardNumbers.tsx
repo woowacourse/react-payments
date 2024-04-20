@@ -1,8 +1,9 @@
-import { useState } from "react";
-import Input from "./Input";
-import { TitleText, CaptionText, LabelText } from "../styles/common";
-import styled from "styled-components";
+import { CaptionText, LabelText, TitleText } from "../styles/common";
+
 import ErrorMessage from "./ErrorMessage";
+import Input from "./Input";
+import styled from "styled-components";
+import { useState } from "react";
 
 const CardNumbersContainer = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface Props {
+interface CardNumbersProps {
   cardNumber1: string;
   cardNumber2: string;
   cardNumber3: string;
@@ -35,7 +36,7 @@ export default function CardNumbers({
   cardNumber3,
   cardNumber4,
   inputHandler,
-}: Props) {
+}: CardNumbersProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const numberValidator = (numbers: string) => {

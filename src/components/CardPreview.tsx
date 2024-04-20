@@ -70,11 +70,11 @@ const HiddenNumber = styled.div`
   background: rgba(255, 255, 255, 1);
 `;
 
-interface Props {
+interface CardPreviewProps {
   cardInformation: CardInformation;
 }
 
-export default function CardPreview({ cardInformation }: Props) {
+export default function CardPreview({ cardInformation }: CardPreviewProps) {
   const [cardBrandImg, setCardBrandImg] = useState("");
 
   useEffect(() => {

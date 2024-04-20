@@ -1,8 +1,9 @@
-import { useState } from "react";
-import Input from "./Input";
-import { TitleText, LabelText } from "../styles/common";
-import styled from "styled-components";
+import { LabelText, TitleText } from "../styles/common";
+
 import ErrorMessage from "./ErrorMessage";
+import Input from "./Input";
+import styled from "styled-components";
+import { useState } from "react";
 
 const CardOwnerNameContainer = styled.div`
   display: flex;
@@ -23,12 +24,15 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface Props {
+interface CardOwnerNameProps {
   cardOwnerName: string;
   inputHandler: (inputValue: string, inputId: string) => void;
 }
 
-export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
+export default function CardOwnerName({
+  cardOwnerName,
+  inputHandler,
+}: CardOwnerNameProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const nameValidator = (name: string) => {

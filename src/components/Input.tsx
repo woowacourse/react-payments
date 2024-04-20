@@ -22,7 +22,7 @@ const SInput = styled.input<{
   }
 `;
 
-interface Props {
+interface InputProps {
   type?: string;
   maxLength: number;
   placeholder: string;
@@ -38,7 +38,7 @@ export default function Input({
   onChange,
   onBlur,
   value,
-}: Props) {
+}: InputProps) {
   const [isError, setIsError] = useState(false);
 
   return (

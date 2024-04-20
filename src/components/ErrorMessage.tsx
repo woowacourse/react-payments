@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface Props {
+interface ErrorMessageProps {
   message: string;
 }
 
@@ -14,6 +14,6 @@ const SErrorMessage = styled.div`
   color: rgba(255, 61, 61, 1);
 `;
 
-export default function ErrorMessage({ message }: Props) {
+export default function ErrorMessage({ message }: ErrorMessageProps) {
   return <SErrorMessage>{message}</SErrorMessage>;
 }
