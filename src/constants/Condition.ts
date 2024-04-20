@@ -5,10 +5,10 @@ const MAX_LENGTH = {
 } as const;
 
 const REG_EXP = {
-  cardNumber: /^\d{4}$/,
-  month: /^(0[1-9]|1[0-2])$/,
-  year: /^\d{2}$/,
-  userName: /^[A-Z]+\s[A-Z]+$/,
+  cardNumber: /^\d+$/,
+  month: /^\d+$/,
+  year: /^\d+$/,
+  userName: /^[a-zA-Z\s]*$/,
 } as const;
 
 const CONDITION = {
