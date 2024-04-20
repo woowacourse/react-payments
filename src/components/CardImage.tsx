@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { MASTERCARD, VISA } from '../assets';
 import { isRange } from '../util/isRange';
-import { CARD_INFORMATION } from '../constants/cardInformation';
-import { cardBrand, CardBrandType } from '../types/cardType';
 import { VALIDATION } from '../constants/validation';
+import checkCardBrand from '../util/checkCardBrand';
 
 interface CardImageType {
   cardNumber: string[];
@@ -18,24 +17,13 @@ interface CardImageTableType {
 }
 
 function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
-  const cardBrandType = (): CardBrandType => {
-    const startNumber = Number(cardNumber[0].substring(0, 2));
-    if (cardNumber[0][0] === CARD_INFORMATION.visa) {
-      return cardBrand.visa;
-    }
-    if (!isRange(startNumber, CARD_INFORMATION.masterCard.min, CARD_INFORMATION.masterCard.max)) {
-      return cardBrand.masterCard;
-    }
-    return cardBrand.domesticCard;
-  };
-
   const getCardImage = () => {
     const cardImageTable: CardImageTableType = {
       masterCard: MASTERCARD,
       visa: VISA,
       domesticCard: '',
     };
-    return cardImageTable[cardBrandType()];
+    return cardImageTable[checkCardBrand(cardNumber)];
   };
 
   const imageUrl = getCardImage();
