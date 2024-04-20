@@ -1,4 +1,11 @@
-import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import {
   CARD_EXPIRATION,
@@ -29,6 +36,7 @@ interface CardExpirationPeriod {
 interface CardExpirationPeriodFormProps {
   editCardPeriod: (period: CardPeriod) => void;
 }
+type Period = 'month' | 'year';
 
 const ZERO = '0';
 const CENTURY_PREFIX = 2000;
@@ -52,11 +60,27 @@ export default function CardExpirationPeriodInput(
     year: false,
     availability: false,
   };
+
   const [error, setError] = useState<PeriodError>(INITIAL_ERROR);
 
-  const today = new Date();
-  const year = today.getFullYear() - CENTURY_PREFIX;
-  const month = today.getMonth() + 1;
+  const currentDate = useMemo(() => {
+    const today = new Date();
+
+    return {
+      year: today.getFullYear() - CENTURY_PREFIX,
+      month: today.getMonth() + 1,
+    };
+  }, []);
+
+  const errorMessage = useMemo(() => {
+    const { cardExpirationPeriod } = ERROR_MESSAGE;
+
+    if (error.availability) return cardExpirationPeriod.availability;
+    if (error.month) return cardExpirationPeriod.month;
+    if (error.year) return cardExpirationPeriod.year;
+
+    return undefined;
+  }, [error]);
   // 유효기간 검사
   /**
    * month,year을 모두 고려해 현재 기준으로 사용가능한 카드인지 확인하는 함수
@@ -64,62 +88,38 @@ export default function CardExpirationPeriodInput(
    */
   const validateCardExpiry = (newCardPeriod: CardPeriod) => {
     if (!newCardPeriod.year || !newCardPeriod.month) return;
+
+    const { year, month } = currentDate;
     const cardYear = Number(newCardPeriod.year);
     const isOverYear = cardYear > year;
     const isOverMonth =
       cardYear === year && Number(newCardPeriod.month) >= month;
 
-    const isValidated = isOverYear || isOverMonth;
-
-    if (isValidated) {
-      setError(INITIAL_ERROR);
-      return;
-    }
-
-    setError((prev) => ({
-      ...prev,
-      availability: true,
-    }));
+    return isOverYear || isOverMonth;
   };
 
-  const validateMonth = (newCardPeriod: CardPeriod) => {
-    const isValidated = newCardPeriod.month
-      ? CARD_PERIOD_REGEXP.month.test(newCardPeriod.month)
-      : false;
-
-    setError((prev) => ({
-      ...prev,
-      month: !isValidated,
-    }));
-  };
-
-  const validateYear = (newCardPeriod: CardPeriod) => {
-    const isValidated = newCardPeriod.year
-      ? CARD_PERIOD_REGEXP.year.test(newCardPeriod.year)
-      : false;
-
-    setError((prev) => ({
-      ...prev,
-      year: !isValidated,
-    }));
+  const validateMonthAndYear = (newCardPeriod: CardPeriod, key: Period) => {
+    const value = newCardPeriod[key];
+    if (!value) return;
+    // value 가 ''이거나 정규식을 통과하지 못하면 유효하지 않음
+    return value ? CARD_PERIOD_REGEXP[key].test(value) : false;
   };
 
   const validateCardPeriod = (
     event: ChangeEvent<HTMLInputElement>,
     newCardPeriod: CardPeriod,
   ) => {
-    if (!(event.target instanceof HTMLInputElement)) return;
     const { name } = event.target;
+    if (!(name === 'month' || name === 'year')) return;
 
-    if (name === 'month') {
-      validateMonth(newCardPeriod);
-    }
+    const isValidatedMonthAndYear = validateMonthAndYear(newCardPeriod, name);
+    const isValidatedExpiry = validateCardExpiry(newCardPeriod);
 
-    if (name === 'year') {
-      validateYear(newCardPeriod);
-    }
-
-    validateCardExpiry(newCardPeriod);
+    setError({
+      ...error,
+      [name]: !isValidatedMonthAndYear,
+      availability: !isValidatedExpiry,
+    });
   };
 
   const updateCardPeriod = (name: string, value: string) => {
@@ -136,7 +136,6 @@ export default function CardExpirationPeriodInput(
 
     // cardPeriod 업데이트
     const newCardPeriod = updateCardPeriod(name, value);
-    if (!newCardPeriod) return;
     // 유효성 검사
     validateCardPeriod(event, newCardPeriod);
   };
@@ -146,34 +145,22 @@ export default function CardExpirationPeriodInput(
    */
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
+    // value의 값이 유의미한 값이고, 문자 길이가 2자리 이하일때 value 변경
     if (!value || value.length > MIN_NUMBER_OF_VALUE) return;
 
     const text = value !== ZERO ? convertToTwoDigits(Number(value)) : value;
     updateCardPeriod(name, text);
   };
 
-  const handleEditCardPeriod = () => {
+  const handleEditCardPeriod = useCallback(() => {
     if (error.month || error.year) return;
 
     editCardPeriod(cardPeriod);
-  };
-
-  const getErrorMessage = () => {
-    const { cardExpirationPeriod } = ERROR_MESSAGE;
-
-    if (error.availability) return cardExpirationPeriod.availability;
-    if (error.month) return cardExpirationPeriod.month;
-    if (error.year) return cardExpirationPeriod.year;
-
-    return undefined;
-  };
+  }, [error, cardPeriod, editCardPeriod]);
 
   useEffect(() => {
-    if (cardPeriod.month || cardPeriod.year) {
-      handleEditCardPeriod();
-    }
-  }, [cardPeriod]);
+    handleEditCardPeriod();
+  }, [error, cardPeriod]);
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
@@ -201,9 +188,7 @@ export default function CardExpirationPeriodInput(
           </div>
 
           <FormErrorMessage>
-            {getErrorMessage()
-              ?.split('\n')
-              .map((item) => <p>{item}</p>)}
+            {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
           </FormErrorMessage>
         </div>
       </CardInput>
