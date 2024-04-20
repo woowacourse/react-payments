@@ -78,21 +78,21 @@ export default function CardPreview({ cardInformation }: CardPreviewProps) {
   const [cardBrandImg, setCardBrandImg] = useState("");
 
   useEffect(() => {
-    if (cardInformation.cardNumber1[0] === "4") {
+    if (cardInformation.cardNumbers[0][0] === "4") {
       setCardBrandImg(Visa);
       return;
     }
 
     if (
-      Number(cardInformation.cardNumber1.slice(0, 2)) >= 51 &&
-      Number(cardInformation.cardNumber1.slice(0, 2)) <= 55
+      Number(cardInformation.cardNumbers[0].slice(0, 2)) >= 51 &&
+      Number(cardInformation.cardNumbers[0].slice(0, 2)) <= 55
     ) {
       setCardBrandImg(Mastercard);
       return;
     }
 
     setCardBrandImg("");
-  }, [cardInformation.cardNumber1]);
+  }, [cardInformation.cardNumbers]);
 
   return (
     <CardContainer>
@@ -102,17 +102,17 @@ export default function CardPreview({ cardInformation }: CardPreviewProps) {
       </CardHeader>
       <CardInfoContainer>
         <CardPreviewTextContainer>
-          <PreviewText>{cardInformation.cardNumber1}</PreviewText>
-          <PreviewText>{cardInformation.cardNumber2}</PreviewText>
+          <PreviewText>{cardInformation.cardNumbers[0]}</PreviewText>
+          <PreviewText>{cardInformation.cardNumbers[1]}</PreviewText>
           <HiddenNumberContainer>
-            {Array.from({ length: cardInformation.cardNumber3.length }).map(
+            {Array.from({ length: cardInformation.cardNumbers[2].length }).map(
               (_, index) => (
                 <HiddenNumber key={index} />
               )
             )}
           </HiddenNumberContainer>
           <HiddenNumberContainer>
-            {Array.from({ length: cardInformation.cardNumber4.length }).map(
+            {Array.from({ length: cardInformation.cardNumbers[3].length }).map(
               (_, index) => (
                 <HiddenNumber key={index} />
               )
@@ -121,9 +121,9 @@ export default function CardPreview({ cardInformation }: CardPreviewProps) {
         </CardPreviewTextContainer>
         <CardPreviewTextContainer>
           <div>
-            <PreviewText>{cardInformation.cardExpirationMonth}</PreviewText>
-            {cardInformation.cardExpirationMonth.length === 2 && "/"}
-            <PreviewText>{cardInformation.cardExpirationYear}</PreviewText>
+            <PreviewText>{cardInformation.cardExpiration.month}</PreviewText>
+            {cardInformation.cardExpiration.month.length === 2 && "/"}
+            <PreviewText>{cardInformation.cardExpiration.year}</PreviewText>
           </div>
         </CardPreviewTextContainer>
         <CardPreviewTextContainer>

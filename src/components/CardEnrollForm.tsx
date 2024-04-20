@@ -22,21 +22,35 @@ const CardInformation = styled.div`
 `;
 
 export default function CardEnrollForm() {
-  const [cardInformation, setCardInformation] = useState({
-    cardNumber1: "",
-    cardNumber2: "",
-    cardNumber3: "",
-    cardNumber4: "",
-    cardExpirationMonth: "",
-    cardExpirationYear: "",
+  const [cardInformation, setCardInformation] = useState<CardInformation>({
+    cardNumbers: ["", "", "", ""],
+    cardExpiration: {
+      month: "",
+      year: "",
+    },
     cardOwnerName: "",
   });
 
-  const inputHandler = (inputValue: string, inputId: string) => {
+  const onCardNumbersChange = (inputValue: string, targetIndex: number) => {
+    setCardInformation((prev) => {
+      const cardNumbers: CardInformation["cardNumbers"] = [...prev.cardNumbers];
+      cardNumbers[targetIndex] = inputValue;
+      return { ...prev, cardNumbers };
+    });
+  };
+
+  const onCardExpirationChange = (inputValue: string, targetKey: string) => {
     setCardInformation((prev) => ({
       ...prev,
-      [inputId]: inputValue,
+      cardExpiration: {
+        ...prev.cardExpiration,
+        [targetKey]: inputValue,
+      },
     }));
+  };
+
+  const onCardOwnerNameChange = (inputValue: string) => {
+    setCardInformation((prev) => ({ ...prev, cardOwnerName: inputValue }));
   };
 
   return (
@@ -44,20 +58,16 @@ export default function CardEnrollForm() {
       <CardPreview cardInformation={cardInformation} />
       <CardInformation>
         <CardNumbers
-          cardNumber1={cardInformation.cardNumber1}
-          cardNumber2={cardInformation.cardNumber2}
-          cardNumber3={cardInformation.cardNumber3}
-          cardNumber4={cardInformation.cardNumber4}
-          onChange={inputHandler}
+          cardNumbers={cardInformation.cardNumbers}
+          onChange={onCardNumbersChange}
         />
         <CardExpirationDate
-          cardExpirationMonth={cardInformation.cardExpirationMonth}
-          cardExpirationYear={cardInformation.cardExpirationYear}
-          onChange={inputHandler}
+          cardExpiration={cardInformation.cardExpiration}
+          onChange={onCardExpirationChange}
         />
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
-          onChange={inputHandler}
+          onChange={onCardOwnerNameChange}
         />
       </CardInformation>
     </CardEnrollFormContainer>

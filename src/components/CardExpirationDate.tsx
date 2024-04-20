@@ -25,14 +25,12 @@ const InputContainer = styled.div`
 `;
 
 interface CardExpirationDateProps {
-  cardExpirationMonth: string;
-  cardExpirationYear: string;
+  cardExpiration: CardInformation["cardExpiration"];
   onChange: (inputValue: string, inputId: string) => void;
 }
 
 export default function CardExpirationDate({
-  cardExpirationMonth,
-  cardExpirationYear,
+  cardExpiration,
   onChange,
 }: CardExpirationDateProps) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -107,15 +105,15 @@ export default function CardExpirationDate({
           <Input
             maxLength={2}
             placeholder="MM"
-            onChange={(value) => isValidInput(value, "cardExpirationMonth")}
-            value={cardExpirationMonth}
+            onChange={(value) => isValidInput(value, "month")}
+            value={cardExpiration.month}
             onBlur={isValidMonth}
           />
           <Input
             maxLength={2}
             placeholder="YY"
-            onChange={(value) => isValidInput(value, "cardExpirationYear")}
-            value={cardExpirationYear}
+            onChange={(value) => isValidInput(value, "year")}
+            value={cardExpiration.year}
             onBlur={isValidYear}
           />
         </InputContainer>

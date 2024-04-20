@@ -23,18 +23,12 @@ const InputContainer = styled.div`
 `;
 
 interface CardNumbersProps {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-  onChange: (inputValue: string, inputId: string) => void;
+  cardNumbers: CardInformation["cardNumbers"];
+  onChange: (inputValue: string, targetIndex: number) => void;
 }
 
 export default function CardNumbers({
-  cardNumber1,
-  cardNumber2,
-  cardNumber3,
-  cardNumber4,
+  cardNumbers,
   onChange,
 }: CardNumbersProps) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -57,11 +51,11 @@ export default function CardNumbers({
     return true;
   };
 
-  const isValidInput = (value: string, fieldName: string) => {
+  const isValidInput = (value: string, targetIndex: number) => {
     if (!numberValidator(value)) {
       return true;
     }
-    onChange(value, fieldName);
+    onChange(value, targetIndex);
     return false;
   };
 
@@ -84,31 +78,29 @@ export default function CardNumbers({
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber1")}
-            value={cardNumber1}
+            onChange={(value) => isValidInput(value, 0)}
+            value={cardNumbers[0]}
             onBlur={isValidLength}
           />
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber2")}
-            value={cardNumber2}
+            onChange={(value) => isValidInput(value, 1)}
+            value={cardNumbers[1]}
             onBlur={isValidLength}
           />
           <Input
-            type="password"
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber3")}
-            value={cardNumber3}
+            onChange={(value) => isValidInput(value, 2)}
+            value={cardNumbers[2]}
             onBlur={isValidLength}
           />
           <Input
-            type="password"
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber4")}
-            value={cardNumber4}
+            onChange={(value) => isValidInput(value, 3)}
+            value={cardNumbers[3]}
             onBlur={isValidLength}
           />
         </InputContainer>
