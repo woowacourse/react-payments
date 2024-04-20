@@ -6,10 +6,10 @@
   outline: none;
 }
 
-.isError {
-  border: 1px solid #ff3d3d !important;
+.customInput:focus {
+  border: 1px solid black;
 }
 
-.isFocus {
-  border: 1px solid black;
+.isError {
+  border: 1px solid #ff3d3d !important;
 }
