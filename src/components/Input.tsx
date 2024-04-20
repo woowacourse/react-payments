@@ -1,23 +1,23 @@
 import { css } from '@emotion/react';
 import validateInput from '../validations/validateInput';
 import { useState } from 'react';
-import { DetailSectionType } from '../types/cardType';
+import { InformationDetailType } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 interface InputType {
   isPassword: boolean;
-  type: DetailSectionType;
+  informationDetail: InformationDetailType;
   placeholder: string;
   setState: (s: string) => void;
   setErrorMessage: (message: string) => void;
   keyProp: string;
 }
 
-function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessage }: InputType) {
+function Input({ isPassword, keyProp, informationDetail, placeholder, setState, setErrorMessage }: InputType) {
   const [isError, setIsError] = useState(false);
   const handleInputChange = (value: string) => {
     try {
-      validateInput(value, type);
+      validateInput(value, informationDetail);
       setState(value);
       setErrorMessage('');
       setIsError(false);
@@ -29,20 +29,20 @@ function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessa
     }
   };
 
-  const getInputMaxLength = (type: DetailSectionType): number => {
+  const getInputMaxLength = (inputType: InformationDetailType): number => {
     const maxLengthTable = {
       number: CARD_NUMBER.maxLength,
       owner: CARD_OWNER.maxLength,
       month: CARD_PERIOD.maxLength,
       year: CARD_PERIOD.maxLength,
     };
-    return maxLengthTable[type];
+    return maxLengthTable[inputType];
   };
 
   return (
     <>
       <input
-        maxLength={getInputMaxLength(type)}
+        maxLength={getInputMaxLength(informationDetail)}
         type={isPassword ? 'password' : 'input'}
         css={inputStyle({ border: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
         key={keyProp}

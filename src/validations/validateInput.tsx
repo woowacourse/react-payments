@@ -1,5 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
+import { InformationDetailType } from '../types/cardType';
 import { isRange } from '../util/isRange';
 
 interface ValidateInputTableType {
@@ -9,7 +10,7 @@ interface ValidateInputTableType {
   owner: () => void;
 }
 
-const validateInput = (value: string, section: 'number' | 'month' | 'year' | 'owner') => {
+const validateInput = (value: string, informationDetail: InformationDetailType) => {
   const validateInputTable: ValidateInputTableType = {
     number: () => cardNumberValidated(value),
     month: () => cardMonthValidated(value),
@@ -17,7 +18,7 @@ const validateInput = (value: string, section: 'number' | 'month' | 'year' | 'ow
     owner: () => cardOwnerValidated(value),
   };
 
-  const validateFunction = validateInputTable[section];
+  const validateFunction = validateInputTable[informationDetail];
   validateFunction();
 };
 

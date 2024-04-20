@@ -3,26 +3,26 @@ import InputTitle from './InputTitle';
 import Input from './Input';
 import { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
-import { SectionType, period } from '../types/cardType';
+import { informationSectionType, period } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 interface InputGroupType {
   setState: React.Dispatch<React.SetStateAction<string[]>>;
-  section: SectionType;
+  informationSection: informationSectionType;
 }
 
-function InputGroup({ setState, section }: InputGroupType) {
-  const getType = (section: SectionType) => {
+function InputGroup({ setState, informationSection }: InputGroupType) {
+  const getType = (informationSection: informationSectionType) => {
     const getTypeTable = {
       number: CARD_NUMBER,
       period: CARD_PERIOD,
       owner: CARD_OWNER,
     };
-    return getTypeTable[section];
+    return getTypeTable[informationSection];
   };
 
-  const { title, subtitle, label, placeholders } = getType(section);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { title, subtitle, label, placeholders } = getType(informationSection);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const updateState = (value: string, index: number) => {
     setState((prevState: string[]) => {
@@ -39,7 +39,7 @@ function InputGroup({ setState, section }: InputGroupType) {
       </div>
 
       <div css={inputContainerStyle}>
-        <label css={labelStyle} htmlFor={section}>
+        <label css={labelStyle} htmlFor={informationSection}>
           {label}
         </label>
         <div css={inputBoxStyle}>
@@ -48,8 +48,8 @@ function InputGroup({ setState, section }: InputGroupType) {
             return (
               <Input
                 isPassword={isPassword}
-                keyProp={section + index.toString()}
-                type={section === 'period' ? period[index] : section}
+                keyProp={informationSection + index.toString()}
+                informationDetail={informationSection === 'period' ? period[index] : informationSection}
                 placeholder={placeholder}
                 setState={(s) => updateState(s, index)}
                 setErrorMessage={setErrorMessage}

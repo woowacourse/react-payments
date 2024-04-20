@@ -6,9 +6,9 @@ import CardImage from './components/CardImage';
 import { css } from '@emotion/react';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState<string[]>(['']);
-  const [cardPeriod, setCardPeriod] = useState<string[]>(['']);
-  const [cardOwner, setCardOwner] = useState<string[]>(['']);
+  const [cardNumber, setCardNumber] = useState(['']);
+  const [cardPeriod, setCardPeriod] = useState(['']);
+  const [cardOwner, setCardOwner] = useState(['']);
 
   const appContainerStyle = css`
     display: flex;
@@ -40,9 +40,9 @@ function App() {
       <div css={appContainerStyle}>
         <CardImage cardNumber={cardNumber} cardPeriod={cardPeriod} cardOwner={cardOwner} />
         <form css={appInputStyle}>
-          <InputGroup setState={setCardNumber} section="number" />
-          <InputGroup setState={setCardPeriod} section="period" />
-          <InputGroup setState={setCardOwner} section="owner" />
+          <InputGroup setState={setCardNumber} informationSection="number" />
+          <InputGroup setState={setCardPeriod} informationSection="period" />
+          <InputGroup setState={setCardOwner} informationSection="owner" />
         </form>
       </div>
     </div>
