@@ -2,13 +2,21 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import Input from './Input';
+import FieldTitle from './FieldTitle';
 
 interface Props {
+  title: string;
+  subtitle?: string;
   inputTypes: InputType;
   handleInput: (value: { [key: string]: string }) => void;
 }
 
-export default function InputField({ inputTypes, handleInput }: Props) {
+export default function InputField({
+  title,
+  subtitle,
+  inputTypes,
+  handleInput,
+}: Props) {
   const [values, setValues] = useState<{ [key: string]: string }>({});
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
@@ -36,6 +44,7 @@ export default function InputField({ inputTypes, handleInput }: Props) {
 
   return (
     <Container>
+      <FieldTitle title={title} subtitle={subtitle} />
       <Label>{inputTypes.inputLabel}</Label>
       <InputBox>
         {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
@@ -59,7 +68,7 @@ export default function InputField({ inputTypes, handleInput }: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 120px;
 `;
 
 const Label = styled.p`
