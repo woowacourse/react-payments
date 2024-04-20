@@ -4,21 +4,19 @@ import Validation from '../domain/InputValidation';
 
 interface Props {
   info: InputInfo;
-  index: number;
-  handleInput: (index: number, value: string) => void;
+  handleInput: (value: string) => void;
   isError: boolean | string;
-  handleErrorMessage: (index: number, errorMessage: string) => void;
+  handleErrorMessage: (errorMessage: string) => void;
 }
 
 export default function Input({
   info,
-  index,
   handleInput,
   isError,
   handleErrorMessage,
 }: Props) {
   return (
-    <InputContainer
+    <StyledInput
       color={isError ? 'red' : 'grey'}
       type="text"
       maxLength={info.maxLength}
@@ -26,11 +24,11 @@ export default function Input({
       onChange={(e) => {
         try {
           Validation[info.validateType]?.(e.target.value);
-          handleErrorMessage(index, '');
-          handleInput(index, e.target.value);
+          handleErrorMessage('');
+          handleInput(e.target.value);
         } catch (error) {
           if (error instanceof Error) {
-            handleErrorMessage(index, error.message);
+            handleErrorMessage(error.message);
           }
         }
       }}
@@ -38,10 +36,10 @@ export default function Input({
   );
 }
 
-const InputContainer = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${(props) => props.color};
-  outline-color: ${(props) => props.color};
+  border: 1px solid ${({ color }) => color};
+  outline-color: ${({ color }) => color};
   border-radius: 3px;
 `;

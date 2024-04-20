@@ -27,12 +27,16 @@ const Container = styled.div`
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>({
-    cardNumber1: '',
-    cardNumber2: '',
-    cardNumber3: '',
-    cardNumber4: '',
-    month: '',
-    year: '',
+    cardNumbers: {
+      cardNumber1: '',
+      cardNumber2: '',
+      cardNumber3: '',
+      cardNumber4: '',
+    },
+    expiryDate: {
+      month: '',
+      year: '',
+    },
     userName: '',
   });
   return (

@@ -36,7 +36,7 @@ export default function CardView({ cardInfo }: Props) {
     if (cardType === 'master') return Master;
   };
 
-  const cardImgSrc = getCardImage(cardInfo.cardNumber1);
+  const cardImgSrc = getCardImage(cardInfo.cardNumbers.cardNumber1);
 
   const formatDate = (date: string) => {
     if (date.length === 1) {
@@ -52,19 +52,19 @@ export default function CardView({ cardInfo }: Props) {
       </ImgBox>
 
       <CardNumbers>
-        <CardNumber> {cardInfo.cardNumber1} </CardNumber>
-        <CardNumber> {cardInfo.cardNumber2} </CardNumber>
+        <CardNumber> {cardInfo.cardNumbers.cardNumber1} </CardNumber>
+        <CardNumber> {cardInfo.cardNumbers.cardNumber2} </CardNumber>
         <SecretCardNumber>
-          {'•'.repeat(cardInfo.cardNumber3.length)}
+          {'•'.repeat(cardInfo.cardNumbers.cardNumber3.length)}
         </SecretCardNumber>
         <SecretCardNumber>
-          {'•'.repeat(cardInfo.cardNumber4.length)}
+          {'•'.repeat(cardInfo.cardNumbers.cardNumber4.length)}
         </SecretCardNumber>
       </CardNumbers>
       <TextBox>
-        {formatDate(cardInfo.month)}
-        {cardInfo.year.length > 0 ? ' / ' : ''}
-        {formatDate(cardInfo.year)}
+        {formatDate(cardInfo.expiryDate.month)}
+        {cardInfo.expiryDate.year.length > 0 ? ' / ' : ''}
+        {formatDate(cardInfo.expiryDate.year)}
       </TextBox>
       <TextBox> {cardInfo.userName} </TextBox>
     </CardContainer>

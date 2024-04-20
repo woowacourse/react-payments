@@ -1,32 +1,26 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
-import { Card } from '../types/card';
 import Input from './Input';
-import FieldTitle from './FieldTitle';
 
 interface Props {
-  title: string;
-  subtitle?: string;
   inputTypes: InputType;
-  cardInfo: Card;
-  handleInput: (value: Card) => void;
+  handleInput: (value: { [key: string]: string }) => void;
 }
 
-export default function InputField({
-  title,
-  subtitle,
-  inputTypes,
-  cardInfo,
-  handleInput,
-}: Props) {
+export default function InputField({ inputTypes, handleInput }: Props) {
+  const [values, setValues] = useState<{ [key: string]: string }>({});
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
   const handleUpdateInput = (index: number, value: string) => {
+    setValues({
+      ...values,
+      [inputTypes.inputInfo[index].property]: value,
+    });
     handleInput({
-      ...cardInfo,
+      ...values,
       [inputTypes.inputInfo[index].property]: value,
     });
   };
@@ -42,16 +36,16 @@ export default function InputField({
 
   return (
     <Container>
-      <FieldTitle title={title} subtitle={subtitle} />
       <Label>{inputTypes.inputLabel}</Label>
       <InputBox>
         {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
           <Input
             info={info}
-            index={index}
-            handleInput={handleUpdateInput}
+            handleInput={(value) => handleUpdateInput(index, value)}
             isError={errorMessages[index] !== '' && errorMessages[index]!}
-            handleErrorMessage={handleUpdateErrorMessages}
+            handleErrorMessage={(errorMessage) =>
+              handleUpdateErrorMessages(index, errorMessage)
+            }
           />
         ))}
       </InputBox>
