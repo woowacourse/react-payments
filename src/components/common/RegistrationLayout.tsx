@@ -19,7 +19,7 @@ export default function RegistrationLayout({
   return (
     <Container>
       <Title>{title}</Title>
-      <Subtitle>{subtitle}</Subtitle>
+      {subtitle && <Subtitle>{subtitle}</Subtitle>}
       <Label htmlFor={labelFor}>{labelText}</Label>
       <InputWrapper>{children}</InputWrapper>
     </Container>
