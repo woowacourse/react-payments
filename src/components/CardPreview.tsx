@@ -1,74 +1,96 @@
 /** @jsxImportSource @emotion/react */
-import { CardInfoContext } from "../App";
-import IC_CHIP from "../Images/Ic_chip.png";
-import { css } from "@emotion/react";
-import { matchCardIssuerImgSrc } from "../domain/matchCardIssuer";
-import { useContext } from "react";
 
-const styledCardPreview = css`
-  width: 212px;
-  height: 132px;
-  top: 77px;
-  left: 82px;
-  padding: 10px 17px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 4px;
-  background-color: #333333;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
-`;
+import { COLOR } from '../styles/color';
+import DEFAULT_BLANK_IMAGE from '../Images/blank.png';
+import IC_CHIP from '../Images/Ic_chip.png';
+import MASTERCARD_IMAGE from '../Images/Mastercard.png';
+import VISA_IMAGE from '../Images/Visa.png';
+import { css } from '@emotion/react';
 
-const styledCardHeader = css`
-  height: 22px;
-  display: flex;
-  justify-content: space-between;
+const issuerImg: { [key: string]: string } = {
+  ['Visa']: VISA_IMAGE,
+  ['MasterCard']: MASTERCARD_IMAGE,
+};
 
-  img {
-    width: 32px;
-  }
-`;
+const matchCardIssuerImgSrc = (issuer: string) => {
+  const result = issuerImg[issuer];
+  return result ?? DEFAULT_BLANK_IMAGE;
+};
 
-const styledCardText = css`
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  height: 20px;
-`;
+const styledCardPreview = {
+  width: '212px',
+  height: '132px',
+  top: '77px',
+  left: '82px',
+  padding: '10px 17px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  gap: '10px',
+  borderRadius: '4px',
+  backgroundColor: COLOR.gray2,
+  boxShadow: '3px 3px 3px rgba(0, 0, 0, 0.25)',
+};
 
-const styledCardNumberContainer = css`
-  display: flex;
-  gap: 10px;
-`;
+const styledCardHeader = {
+  height: '22px',
+  display: 'flex',
+  justifyContent: 'space-between',
 
-const styledCardNumber = css`
-  ${styledCardText.styles}
-  width:30px;
-`;
+  '& img': {
+    width: '32px',
+  },
+};
 
-export default function CardPreview() {
-  const { cardIssuer, cardNumbers, cardExpiredDate, cardHolder } =
-    useContext(CardInfoContext).cardInfo;
+const styledCardText = {
+  color: COLOR.white,
+  fontWeight: 500,
+  fontSize: '14px',
+  lineHeight: '20px',
+  height: '20px',
+};
+
+const styledCardNumberContainer = {
+  display: 'flex',
+  gap: '10px',
+};
+
+const styledCardNumber = {
+  width: '30px',
+};
+
+interface cardInfoProps {
+  cardInfo: {
+    cardNumbers: [string, string, string, string];
+    cardIssuer: '' | 'Visa' | 'MasterCard';
+    cardExpiredDate: [string, string];
+    cardHolder: string;
+  };
+}
+
+export default function CardPreview(props: cardInfoProps) {
+  const { cardNumbers, cardIssuer, cardExpiredDate, cardHolder } =
+    props.cardInfo;
 
   return (
-    <section css={styledCardPreview}>
-      <div css={styledCardHeader}>
-        <img src={IC_CHIP} alt="IC Chip" />
+    // eslint-disable-next-line
+    // @ts-ignore
+    <section css={css(styledCardPreview)}>
+      <div css={css(styledCardHeader)}>
+        <img src={IC_CHIP} alt='IC Chip' />
         <img src={matchCardIssuerImgSrc(cardIssuer)} alt={cardIssuer} />
       </div>
       <div css={styledCardNumberContainer}>
         {cardNumbers.map((number, idx) => (
-          <span key={idx} css={styledCardNumber}>
-            {idx < 2 ? number : "*".repeat(number.length)}
+          <span key={idx} css={css(styledCardNumber, styledCardText)}>
+            {idx < 2 ? number : '*'.repeat(number.length)}
           </span>
         ))}
       </div>
-      <div css={styledCardText}>
-        {cardExpiredDate.join("") !== "" ? cardExpiredDate.join("/") : ""}
+      <div css={css(styledCardText)}>
+        {cardExpiredDate.join('') !== '' ? cardExpiredDate.join('/') : ''}
       </div>
-      <div css={styledCardText}>{cardHolder}</div>
+      <div css={css(styledCardText)}>{cardHolder}</div>
     </section>
   );
 }
