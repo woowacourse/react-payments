@@ -5,27 +5,27 @@ import {
   PreviewCreditCard,
 } from '@components/payments';
 
-import { PreviewCreditCardStyleContainer, TextFieldStyleContainer } from '@components/layout';
+import { TextFieldStyleContainer } from '@components/layout';
 
 import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
 
+import styles from './CreditCardForm.module.css';
+
 const CreditCardForm: React.FC = () => {
   const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
-
   const { expiration, expirationError, handleExpirationChange } = useChangeExpiration();
-
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
 
   return (
     <>
-      <PreviewCreditCardStyleContainer>
+      <div className={styles.previewCreditCard}>
         <PreviewCreditCard
           cardNumbers={cardNumbers}
           expiration={expirationError.isError === true ? initialExpiration : expiration}
           ownerName={ownerName}
         />
-      </PreviewCreditCardStyleContainer>
+      </div>
       <TextFieldStyleContainer>
         <CardNumberTextField
           cardNumbers={cardNumbers}
