@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import styles from './style.module.css';
 
 interface CardInputContainerProps {
-  title: string;
-  subTitle: string;
+  title?: string;
+  subTitle?: string;
   /**
    * 커스텀한  CardInput
    */
