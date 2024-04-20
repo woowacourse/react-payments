@@ -27,11 +27,18 @@ interface InputType {
   isPassword: boolean;
   informationDetail: InformationDetailType;
   placeholder: string;
-  setState: (s: string) => void;
+  setState: (value: string) => void;
   setErrorMessage: (message: string) => void;
 }
 
 function Input({ isPassword, informationDetail, placeholder, setState, setErrorMessage }: InputType) {
+  const maxLengthTable = {
+    number: CARD_NUMBER.maxLength,
+    owner: CARD_OWNER.maxLength,
+    month: CARD_PERIOD.maxLength,
+    year: CARD_PERIOD.maxLength,
+  };
+
   const [isError, setIsError] = useState(false);
   const handleInputChange = (value: string) => {
     try {
@@ -47,16 +54,6 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
     }
   };
 
-  const getInputMaxLength = (inputType: InformationDetailType): number => {
-    const maxLengthTable = {
-      number: CARD_NUMBER.maxLength,
-      owner: CARD_OWNER.maxLength,
-      month: CARD_PERIOD.maxLength,
-      year: CARD_PERIOD.maxLength,
-    };
-    return maxLengthTable[inputType];
-  };
-
   const getInputType = () => {
     if (isPassword) return 'password';
     if (informationDetail === 'owner') return 'input';
@@ -66,7 +63,10 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
   return (
     <>
       <input
-        maxLength={getInputMaxLength(informationDetail)}
+        maxLength={maxLengthTable[informationDetail]}
+        onInput={(e) => {
+          if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }}
         type={getInputType()}
         min={0}
         css={inputStyle({ borderColor: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}

@@ -36,7 +36,7 @@ const inputBoxStyle = css({
 });
 
 interface InputGroupType {
-  setState: React.Dispatch<React.SetStateAction<string[]>>;
+  setState: (value: string, index: number) => void;
   informationSection: informationSectionType;
 }
 
@@ -49,14 +49,6 @@ function InputGroup({ setState, informationSection }: InputGroupType) {
 
   const { title, subtitle, label, placeholders } = getTypeTable[informationSection];
   const [errorMessage, setErrorMessage] = useState('');
-
-  const updateState = (value: string, index: number) => {
-    setState((prevState: string[]) => {
-      const updatedState = [...prevState];
-      updatedState[index] = value;
-      return updatedState;
-    });
-  };
 
   return (
     <div css={inputGroupStyle}>
@@ -77,7 +69,7 @@ function InputGroup({ setState, informationSection }: InputGroupType) {
                 key={index}
                 informationDetail={informationSection === 'period' ? period[index] : informationSection}
                 placeholder={placeholder}
-                setState={(s) => updateState(s, index)}
+                setState={(value) => setState(value, index)}
                 setErrorMessage={setErrorMessage}
               />
             );
