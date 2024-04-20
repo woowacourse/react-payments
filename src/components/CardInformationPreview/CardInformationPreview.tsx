@@ -33,23 +33,23 @@ const CardInformationPreview = ({
       </Preview.ImgContainer>
       <Preview.UserInformationContainer>
         <Preview.CardNumberContainer>
-          <Preview.UserInformation $typo={theme.typography.cardNumber}>
+          <Preview.UserInformation $typo={theme.typography.paragraph1}>
             {first}
           </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.cardNumber}>
+          <Preview.UserInformation $typo={theme.typography.paragraph1}>
             {second}
           </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.cardNumber}>
+          <Preview.UserInformation $typo={theme.typography.paragraph1}>
             {CONDITION.hiddenCardNumber.repeat(String(third ?? '').length)}
           </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.cardNumber}>
+          <Preview.UserInformation $typo={theme.typography.paragraph1}>
             {CONDITION.hiddenCardNumber.repeat(String(fourth ?? '').length)}
           </Preview.UserInformation>
         </Preview.CardNumberContainer>
-        <Preview.UserInformation $typo={theme.typography.cardExpirationDate}>
+        <Preview.UserInformation $typo={theme.typography.paragraph2}>
           {`${month ?? ''}${slashViewCondition ? CONDITION.splitSlash : ''}${year ?? ''}`}
         </Preview.UserInformation>
-        <Preview.UserInformation $typo={theme.typography.cardUserName}>
+        <Preview.UserInformation $typo={theme.typography.paragraph2}>
           {userNameState ?? ''}
         </Preview.UserInformation>
       </Preview.UserInformationContainer>

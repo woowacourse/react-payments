@@ -7,9 +7,8 @@ declare module 'styled-components' {
       caption: string;
       label: string;
       input: string;
-      cardNumber: string;
-      cardExpirationDate: string;
-      cardUserName: string;
+      paragraph1: string;
+      paragraph2: string;
     };
     color: {
       white: string;
