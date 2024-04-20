@@ -84,7 +84,7 @@ const ExpirationDateFormSection = ({ ...props }) => {
     }
   };
 
-  const handleOnFocus = (index: number) => {
+  const setFocus = (index: number) => {
     setInputState((prevState) => ({
       ...prevState,
       [index]: {
@@ -94,7 +94,7 @@ const ExpirationDateFormSection = ({ ...props }) => {
     }));
   };
 
-  const handleOnBlur = (index: number) => {
+  const setBlur = (index: number) => {
     setInputState((prevState) => ({
       ...prevState,
       [index]: {
@@ -214,8 +214,8 @@ const ExpirationDateFormSection = ({ ...props }) => {
             value={inputState[0].value}
             hasError={inputState[0].hasError}
             handleValueChange={(e) => handleValueChange(e, 0)}
-            handleOnFocus={() => handleOnFocus(0)}
-            handleOnBlur={() => handleOnBlur(0)}
+            handleOnFocus={() => setFocus(0)}
+            handleOnBlur={() => setBlur(0)}
           />
           <PaymentsInputField
             placeholder="YY"
@@ -223,8 +223,8 @@ const ExpirationDateFormSection = ({ ...props }) => {
             value={inputState[1].value}
             hasError={inputState[1].hasError}
             handleValueChange={(e) => handleValueChange(e, 1)}
-            handleOnFocus={() => handleOnFocus(1)}
-            handleOnBlur={() => handleOnBlur(1)}
+            handleOnFocus={() => setFocus(1)}
+            handleOnBlur={() => setBlur(1)}
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>

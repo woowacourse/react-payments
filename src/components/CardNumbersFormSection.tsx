@@ -77,7 +77,7 @@ const CardNumbersFormSection = ({ ...props }) => {
     }
   };
 
-  const handleOnFocus = (index: number) => {
+  const setFocus = (index: number) => {
     setInputState((prevState) => ({
       ...prevState,
       [index]: {
@@ -87,7 +87,7 @@ const CardNumbersFormSection = ({ ...props }) => {
     }));
   };
 
-  const handleOnBlur = (index: number) => {
+  const setBlur = (index: number) => {
     setInputState((prevState) => ({
       ...prevState,
       [index]: {
@@ -165,8 +165,8 @@ const CardNumbersFormSection = ({ ...props }) => {
                 value={inputState[index].value}
                 hasError={inputState[index].hasError}
                 handleValueChange={(e) => handleValueChange(e, index)}
-                handleOnFocus={() => handleOnFocus(index)}
-                handleOnBlur={() => handleOnBlur(index)}
+                handleOnFocus={() => setFocus(index)}
+                handleOnBlur={() => setBlur(index)}
               />
             ),
           )}

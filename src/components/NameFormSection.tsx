@@ -58,14 +58,14 @@ const NameFormSection = ({ ...props }) => {
     }
   };
 
-  const handleOnFocus = () => {
+  const setFocus = () => {
     setInputState({
       ...inputState,
       hasFocus: true,
     });
   };
 
-  const handleOnBlur = () => {
+  const setBlur = () => {
     setInputState({
       ...inputState,
       hasFocus: false,
@@ -101,8 +101,8 @@ const NameFormSection = ({ ...props }) => {
             value={inputState.value}
             hasError={inputState.hasError}
             handleValueChange={(e) => handleValueChange(e)}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
+            handleOnFocus={setFocus}
+            handleOnBlur={setBlur}
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
