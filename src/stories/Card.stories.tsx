@@ -1,34 +1,47 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardView from '../components/CardView';
+import { Card } from '../types/card';
 
-const mockDefaultCardInfo = {
-  cardNumber1: '',
-  cardNumber2: '',
-  cardNumber3: '',
-  cardNumber4: '',
-  month: '',
-  year: '',
+const mockDefaultCardInfo: Card = {
+  cardNumbers: {
+    cardNumber1: '',
+    cardNumber2: '',
+    cardNumber3: '',
+    cardNumber4: '',
+  },
+  expiryDate: {
+    month: '',
+    year: '',
+  },
   userName: '',
 };
 
-const mockVisaCardInfo = {
-  cardNumber1: '4123',
-  cardNumber2: '1234',
-  cardNumber3: '1234',
-  cardNumber4: '1234',
-  month: '12',
-  year: '29',
-  userName: 'SDF SDF',
+const mockVisaCardInfo: Card = {
+  cardNumbers: {
+    cardNumber1: '4123',
+    cardNumber2: '1234',
+    cardNumber3: '1234',
+    cardNumber4: '1234',
+  },
+  expiryDate: {
+    month: '1',
+    year: '1',
+  },
+  userName: 'HAILEY CHOI',
 };
 
-const mockMasterCardInfo = {
-  cardNumber1: '5111',
-  cardNumber2: '1234',
-  cardNumber3: '1234',
-  cardNumber4: '1234',
-  month: '1',
-  year: '24',
-  userName: 'CRON LEE',
+const mockMasterCardInfo: Card = {
+  cardNumbers: {
+    cardNumber1: '5123',
+    cardNumber2: '1234',
+    cardNumber3: '1234',
+    cardNumber4: '1234',
+  },
+  expiryDate: {
+    month: '12',
+    year: '30',
+  },
+  userName: 'HAILEY CHOI',
 };
 
 const meta = {
@@ -37,11 +50,11 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     cardInfo: {
-      options: ['Default', 'ViSA', 'MASTER_CARD'],
+      options: ['Default', 'Visa', 'Master'],
       mapping: {
         Default: mockDefaultCardInfo,
-        VISA: mockVisaCardInfo,
-        MASTER_CARD: mockMasterCardInfo,
+        Visa: mockVisaCardInfo,
+        Master: mockMasterCardInfo,
       },
     },
   },

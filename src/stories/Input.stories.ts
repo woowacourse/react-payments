@@ -22,7 +22,6 @@ const mockSetErrorMessages = action('setErrorMessages');
 export const Default: Story = {
   args: {
     info: mockInfo.inputInfo[mockIndex],
-    index: mockIndex,
     handleInput: mockHandleInput,
     isError: false,
     handleErrorMessage: mockSetErrorMessages,
