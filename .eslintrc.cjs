@@ -23,6 +23,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'no-useless-return': 'off',
     'consistent-return': 'off',
+    'react/no-array-index-key': 'off',
     //기본 설정
     'react/function-component-definition': [
       2,

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   CARD_MARK_REGEXP,
@@ -37,7 +37,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     Array.from({ length }, () => false),
   );
 
-  const pickCardMark = (): CardMark => {
+  const cardMark = useMemo((): CardMark => {
     const numberText = numbers.join('');
 
     if (CARD_MARK_REGEXP.visa.test(numberText)) {
@@ -47,7 +47,22 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
       return 'master';
     }
     return 'etc';
-  };
+  }, [numbers]);
+
+  const errorMessage = useMemo(() => {
+    const isError = numbersError.some((i) => i);
+    return isError ? ERROR_MESSAGE.cardNumber : undefined;
+  }, [numbersError]);
+
+  const getNewNumbers = useCallback(
+    (index: number, value: string) => {
+      const newNumbers = [...numbers];
+      newNumbers[index] = value ? Number(sliceText(value, length)) : undefined;
+
+      return newNumbers;
+    },
+    [numbers, length],
+  );
 
   const updateNumbersError = (newNumbers: (number | undefined)[]) => {
     const newNumbersError = newNumbers.map((item) =>
@@ -56,34 +71,21 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     setNumbersError(newNumbersError);
   };
 
-  const updateNumbers = (index: number, value: string) => {
-    const newNumbers = [...numbers];
-    newNumbers[index] = value ? Number(sliceText(value, length)) : undefined;
-
-    setNumbers(newNumbers);
-
-    return newNumbers;
-  };
-
-  const isError = () => numbersError.some((i) => i);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
 
-    const newNumbers = updateNumbers(index, value);
+    const newNumbers = getNewNumbers(index, value);
+    setNumbers(newNumbers);
     updateNumbersError(newNumbers);
   };
 
-  const getErrorMessage = () =>
-    isError() ? ERROR_MESSAGE.cardNumber : undefined;
-
   useEffect(() => {
     editCardNumbers(numbers.join());
-    editCardMark(pickCardMark());
-  }, [numbers, numbersError]);
+    editCardMark(cardMark);
+  }, [numbers, cardMark]);
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
@@ -91,6 +93,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
         <div className={styles.inputWrap} onChange={handleChange}>
           {Array.from({ length }).map((_, index) => (
             <Input
+              key={`number_${index}`}
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               type="number"
               value={numbers[index]}
@@ -101,7 +104,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
         </div>
       </CardInput>
       <FormErrorMessage>
-        <p> {getErrorMessage()}</p>
+        <p> {errorMessage}</p>
       </FormErrorMessage>
     </CardInputContainer>
   );
