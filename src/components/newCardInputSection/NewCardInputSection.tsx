@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import * as Styled from './NewCardInputSection.styles';
+import * as Styled from './NewCardInputSection.styled';
 
 export interface NewCardInputSectionProps {
   label: string;
