@@ -4,6 +4,17 @@ interface CardBrand {
   MAX_NUMBER: number;
 }
 
+export const CARD_CONSTRAINTS = {
+  CARD_NUMBERS: {
+    LENGTH: 4,
+  },
+  CARD_EXPIRATION: {
+    LENGTH: 2,
+    MIN_MONTH: 12,
+    MAX_MONTH: 12,
+  },
+};
+
 export const FORM_FIELDS = {
   CARD_NUMBERS: {
     MAIN_TEXT: "결제할 카드 번호를 입력해 주세요",
