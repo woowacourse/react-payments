@@ -1,6 +1,6 @@
 import styles from './TextField.module.css';
 
-const TextFieldContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const TextFieldMain: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <>{children}</>;
 };
 
@@ -20,11 +20,11 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => (
   <div className={styles.textFieldContent}>{children}</div>
 );
 
-const ErrorText: React.FC<{ isError: boolean; errorText: string }> = ({ isError, errorText }) => (
-  <p className={`caption ${styles.textFieldErrorText}`}>{isError ? errorText : ''}</p>
+const ErrorText: React.FC<{ errorText: string }> = ({ errorText }) => (
+  <p className={`caption ${styles.textFieldErrorText}`}>{errorText}</p>
 );
 
-const TextField = Object.assign(TextFieldContainer, {
+const TextField = Object.assign(TextFieldMain, {
   Title,
   SubTitle,
   Label,
