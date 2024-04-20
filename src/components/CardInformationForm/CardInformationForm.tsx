@@ -24,7 +24,7 @@ interface CardInformationFormProps {
   expirationDateState: ExpirationDateState;
   setExpirationDateState: SetExpirationDateState;
   expirationDateErrorState: ExpirationDateErrorState;
-  userNameState?: string;
+  userNameState: string;
   setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isUserNameError: boolean;
 }

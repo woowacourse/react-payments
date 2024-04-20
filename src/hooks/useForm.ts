@@ -3,9 +3,9 @@ import useExpirationDate from './useExpirationDate';
 import useUserName from './useUserName';
 
 interface FormState {
-  cardNumber: Array<number | undefined>;
-  expirationDate: Array<number | undefined>;
-  userName?: string;
+  cardNumber: number[];
+  expirationDate: number[];
+  userName: string;
 }
 
 const useForm = (defaultValues: FormState) => {

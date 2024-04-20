@@ -9,7 +9,7 @@ import CONDITION from '../../constants/Condition';
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberState;
   expirationDateState: ExpirationDateState;
-  userNameState?: string;
+  userNameState: string;
   showImageCondition: ShowImageCondition;
 }
 
