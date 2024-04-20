@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Title = styled.h1`
+const Title = styled.h3`
   color: #000;
   font-size: 18px;
   margin-bottom: 4px;
