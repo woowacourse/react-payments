@@ -26,10 +26,6 @@ export default function Field({
         <legend className={styles.legend}>{labelText}</legend>
         {children}
       </fieldset>
-      {/* <label>
-        <p className={styles.labelText}>{labelText}</p>
-        <div className={styles.inputWrapper}>{children}</div>
-      </label> */}
 
       <p className={styles.errMsg}>{errMsg}</p>
     </div>
