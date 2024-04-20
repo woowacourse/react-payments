@@ -1,15 +1,25 @@
+interface CardNumbers {
+  firstNumbers?: number;
+  secondNumbers?: number;
+  thirdNumbers?: number;
+  fourthNumbers?: number;
+}
+
+interface CardValidityPeriod {
+  month?: number;
+  year?: number;
+}
+
+interface CardOwnerInfo {
+  name?: string;
+}
+
+type CardInfoInputKey = keyof CardNumbers | keyof CardValidityPeriod | keyof CardOwnerInfo;
+
 interface CardInfo {
-  cardNumbers: {
-    firstNumbers: number[];
-    secondNumbers: number[];
-    thirdNumbers: number[];
-    fourthNumbers: number[];
-  };
-  cardValidityPeriod: {
-    month?: number;
-    year?: number;
-  };
-  ownerName?: string;
+  cardNumbers: CardNumbers;
+  cardValidityPeriod: CardValidityPeriod;
+  cardOwnerInfo: CardOwnerInfo;
 }
 
 type InitCardInfoType = {
@@ -23,9 +33,19 @@ type ErrorType = {
 };
 
 interface ErrorState {
-  cardNumbers: ErrorType;
-  cardValidityPeriod: ErrorType;
-  ownerName: ErrorType;
+  cardNumbers: {
+    firstNumbers: ErrorType;
+    secondNumbers: ErrorType;
+    thirdNumbers: ErrorType;
+    fourthNumbers: ErrorType;
+  };
+  cardValidityPeriod: {
+    month: ErrorType;
+    year: ErrorType;
+  };
+  cardOwnerInfo: {
+    name: ErrorType;
+  };
 }
 
 type SizePresetType = "small" | "medium" | "large";

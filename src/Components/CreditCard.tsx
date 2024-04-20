@@ -63,16 +63,15 @@ const formatTwoDigitNumber = (n: number | undefined) => {
 };
 
 const CreditCard = () => {
-  const { cardNumbers, cardValidityPeriod, ownerName } = useContext(CardInfoContext)![0];
+  const { cardNumbers, cardValidityPeriod, cardOwnerInfo } = useContext(CardInfoContext)![0];
 
   const pattern = /^(51|52|53|54)/;
   const { month, year } = cardValidityPeriod!;
-  const cardImage =
-    cardNumbers?.firstNumbers[0] === 4
-      ? visaImage
-      : cardNumbers?.firstNumbers[0] && pattern.test(cardNumbers?.firstNumbers?.join(""))
-        ? masterImage
-        : null;
+  const cardImage = cardNumbers?.firstNumbers?.toString().startsWith("4")
+    ? visaImage
+    : cardNumbers?.firstNumbers && pattern.test(cardNumbers?.firstNumbers?.toString())
+      ? masterImage
+      : null;
 
   return (
     <div css={style}>
@@ -84,7 +83,15 @@ const CreditCard = () => {
         <div css={rowStyle}>
           {Object.values(cardNumbers)?.map((part, index) => (
             <div key={index} css={width42}>
-              {index < 2 ? part.join("") : part.map(() => "*").join("")}
+              {part && index < 2
+                ? part
+                : part
+                  ? part
+                      .toString()
+                      .split("")
+                      .map(() => "*")
+                      .join("")
+                  : ""}
             </div>
           ))}
         </div>
@@ -93,7 +100,7 @@ const CreditCard = () => {
           <span>{(month || year) && "/"}</span>
           <span css={periodStyle}>{formatTwoDigitNumber(year)}</span>
         </div>
-        <div> {ownerName}</div>
+        <div> {cardOwnerInfo.name}</div>
       </section>
     </div>
   );

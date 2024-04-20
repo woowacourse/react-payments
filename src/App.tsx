@@ -9,10 +9,10 @@ const initData: InitCardInfoType[] = [
   {
     key: "cardNumbers",
     initValue: {
-      firstNumbers: [],
-      secondNumbers: [],
-      thirdNumbers: [],
-      fourthNumbers: [],
+      firstNumbers: undefined,
+      secondNumbers: undefined,
+      thirdNumbers: undefined,
+      fourthNumbers: undefined,
     },
   },
   {
@@ -23,8 +23,10 @@ const initData: InitCardInfoType[] = [
     },
   },
   {
-    key: "ownerName",
-    initValue: "",
+    key: "cardOwnerInfo",
+    initValue: {
+      name: undefined,
+    },
   },
 ];
 
@@ -47,10 +49,16 @@ const createCardInfo = (formFields: InitCardInfoType[]): CardInfo => {
 
 const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
   return formFields.reduce((object, props) => {
-    object[props.key] = {
-      errorMessage: "",
-      isError: false,
-    };
+    const { key, initValue } = props;
+    const temp = JSON.parse(JSON.stringify(initValue));
+    const keys = Object.keys(initValue);
+    keys.forEach((key) => {
+      temp[key] = {
+        errorMessage: "",
+        isError: false,
+      };
+    });
+    object[key] = temp;
     return object;
   }, {} as ErrorState);
 };
