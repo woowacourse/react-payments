@@ -10,7 +10,7 @@ import MasterCardImage from './assets/images/mastercard.png';
 import VisaCardImage from './assets/images/visa.png';
 
 import useCardNumber from './hooks/useCardNumber';
-import useInput from './hooks/useInput';
+import useInput, { ValidationType } from './hooks/useInput';
 import validate from './utils/validate';
 
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
@@ -31,60 +31,44 @@ function App() {
   );
   const [cardImageSrc, setCardImageSrc] = useState('');
 
+  const monthOnChangeValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
+      errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
+    },
+  ];
+
+  const nameOnChangeValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isEnglish(state),
+      errorMessage: OWNER_NAME.errorMessage,
+    },
+  ];
+
+  const yearOnChangeValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
+      errorMessage: EXPIRATION_PERIOD.yearErrorMessage,
+    },
+  ];
+
   const {
     inputState: month,
     inputChangeHandler: monthChangeHandler,
     error: monthError,
-    setError: setMonthError,
-  } = useInput();
+  } = useInput(monthOnChangeValidations);
 
   const {
     inputState: year,
     inputChangeHandler: yearChangeHandler,
     error: yearError,
-    setError: setYearError,
-  } = useInput();
+  } = useInput(yearOnChangeValidations);
 
   const {
     inputState: name,
     inputChangeHandler: nameChangeHandler,
     error: nameError,
-    setError: setNameError,
-  } = useInput();
-
-  useEffect(() => {
-    if (
-      month !== '' &&
-      (!validate.isNumberInRange({ min: 1, max: 12, compareNumber: Number(month) }) ||
-        !validate.isValidDigit(month))
-    ) {
-      setMonthError(true);
-
-      return;
-    }
-
-    setMonthError(false);
-  }, [month, monthError]);
-
-  useEffect(() => {
-    if (year !== '' && !validate.isValidDigit(year)) {
-      setYearError(true);
-
-      return;
-    }
-
-    setYearError(false);
-  }, [year, yearError]);
-
-  useEffect(() => {
-    if (name !== '' && !validate.isEnglish(name)) {
-      setNameError(true);
-
-      return;
-    }
-
-    setNameError(false);
-  }, [name, nameError]);
+  } = useInput(nameOnChangeValidations);
 
   useEffect(() => {
     setCardImageSrc('');
@@ -160,7 +144,7 @@ function App() {
                 value={month}
                 maxLength={2}
                 onChange={monthChangeHandler}
-                isError={monthError}
+                isError={monthError.state}
               />
               <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
               <Input
@@ -170,14 +154,14 @@ function App() {
                 maxLength={2}
                 value={year}
                 onChange={yearChangeHandler}
-                isError={yearError}
+                isError={yearError.state}
               />
             </InputSection>
             <S.ErrorWrapper>
               <S.ErrorMessage>
-                {monthError && yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
-                {!monthError && yearError ? EXPIRATION_PERIOD.yearErrorMessage : ''}
-                {monthError && !yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
+                {monthError.state && yearError.state && monthError.message}
+                {!monthError.state && yearError.state && yearError.message}
+                {monthError.state && !yearError.state && monthError.message}
               </S.ErrorMessage>
             </S.ErrorWrapper>
           </S.Wrapper>
@@ -189,14 +173,14 @@ function App() {
                 id="name"
                 maxLength={30}
                 onChange={nameChangeHandler}
-                isError={nameError}
+                isError={nameError.state}
                 placeholder="JOHN DOE"
                 type="text"
-                value={name}
+                value={name.toUpperCase()}
               />
             </InputSection>
             <S.ErrorWrapper>
-              <S.ErrorMessage>{nameError && OWNER_NAME.errorMessage}</S.ErrorMessage>
+              <S.ErrorMessage>{nameError.state && OWNER_NAME.errorMessage}</S.ErrorMessage>
             </S.ErrorWrapper>
           </S.Wrapper>
         </S.CardInfoContainer>
