@@ -1,4 +1,4 @@
-import FormField from "./FormField";
+import FormField from "../FormField/FormField";
 
 interface Props {
   formFiledPropsList: FormFieldInfo[];
@@ -9,7 +9,11 @@ const Form = ({ formFiledPropsList, formErrors }: Props) => {
   return (
     <form>
       {formFiledPropsList.map((formFieldProps, index) => (
-        <FormField key={index} formFieldInfo={formFieldProps} formErrors={formErrors} />
+        <FormField
+          key={index}
+          formFieldInfo={formFieldProps}
+          formErrors={formErrors}
+        />
       ))}
     </form>
   );

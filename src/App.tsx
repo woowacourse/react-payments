@@ -2,9 +2,13 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
 import "./App.css";
-import CreditCard from "./Components/CreditCard";
-import Form from "./Components/Form";
-import { isValidCardNumbers, isValidOwnerName, isValidPeriod } from "./validators";
+import CreditCard from "./Components/CreditCard/CreditCard";
+import Form from "./Components/Form/Form";
+import {
+  isValidCardNumbers,
+  isValidOwnerName,
+  isValidPeriod,
+} from "./validators";
 
 const initData: InitCardInfoType[] = [
   {
@@ -75,7 +79,9 @@ function App() {
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
-            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            const numbersList = inputValues.map((value) =>
+              value.split("").map(Number)
+            );
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
                 ...prev,
@@ -86,11 +92,17 @@ function App() {
                   fourthNumbers: numbersList[3],
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+                cardNumbers: {
+                  isError: true,
+                  errorMessage: "카드번호에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -102,7 +114,9 @@ function App() {
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
-            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            const numbersList = inputValues.map((value) =>
+              value.split("").map(Number)
+            );
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
                 ...prev,
@@ -113,11 +127,17 @@ function App() {
                   fourthNumbers: numbersList[3],
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+                cardNumbers: {
+                  isError: true,
+                  errorMessage: "카드번호에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -129,7 +149,9 @@ function App() {
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
-            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            const numbersList = inputValues.map((value) =>
+              value.split("").map(Number)
+            );
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
                 ...prev,
@@ -140,11 +162,17 @@ function App() {
                   fourthNumbers: numbersList[3],
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+                cardNumbers: {
+                  isError: true,
+                  errorMessage: "카드번호에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -156,7 +184,9 @@ function App() {
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
-            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            const numbersList = inputValues.map((value) =>
+              value.split("").map(Number)
+            );
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
                 ...prev,
@@ -167,11 +197,17 @@ function App() {
                   fourthNumbers: numbersList[3],
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+                cardNumbers: {
+                  isError: true,
+                  errorMessage: "카드번호에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -201,11 +237,17 @@ function App() {
                   year,
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardValidityPeriod: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardValidityPeriod: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardValidityPeriod: { isError: true, errorMessage: "유효기간에 잘못된 입력이 있습니다." },
+                cardValidityPeriod: {
+                  isError: true,
+                  errorMessage: "유효기간에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -226,11 +268,17 @@ function App() {
                   year,
                 },
               }));
-              setFormErrors((prev) => ({ ...prev, cardValidityPeriod: { isError: false, errorMessage: "" } }));
+              setFormErrors((prev) => ({
+                ...prev,
+                cardValidityPeriod: { isError: false, errorMessage: "" },
+              }));
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                cardValidityPeriod: { isError: true, errorMessage: "유효기간에 잘못된 입력이 있습니다." },
+                cardValidityPeriod: {
+                  isError: true,
+                  errorMessage: "유효기간에 잘못된 입력이 있습니다.",
+                },
               }));
             }
           },
@@ -260,7 +308,10 @@ function App() {
             } else {
               setFormErrors((prev) => ({
                 ...prev,
-                ownerName: { isError: true, errorMessage: "카드 소유자 이름은 영어만 입력 가능합니다." },
+                ownerName: {
+                  isError: true,
+                  errorMessage: "카드 소유자 이름은 영어만 입력 가능합니다.",
+                },
               }));
             }
           },
