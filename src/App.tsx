@@ -16,6 +16,7 @@ function App() {
     editCardPeriod,
     editCardUserName,
   } = useCardInfoReducer();
+
   return (
     <div id="app">
       <div className="inner">
