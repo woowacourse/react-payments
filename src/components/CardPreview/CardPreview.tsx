@@ -1,17 +1,9 @@
 import IcChip from '../../asset/IcChip.svg'
 
 import REGEX from '../../constants/regex';
-
-import Visa from '../../asset/Visa.svg';
-import MasterCard from '../../asset/Mastercard.svg';
+import BRAND_TABLE from '../../constants/table';
 
 import * as Styled from './CardPreview.styled'
-
-const BRAND_TABLE: Record<CardBrand, string> = {
-  Visa: Visa,
-  MasterCard: MasterCard,
-  none: ''
-};
 
 const CardPreview = ({ ...props }: CardInfo) => {
   const { cardNumber, cardBrand, expirationMonth, expirationYear, name } = props;
