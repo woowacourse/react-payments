@@ -4,6 +4,7 @@ import Visa from '../asset/Visa.svg';
 import MasterCard from '../asset/Mastercard.svg';
 import { useState } from 'react';
 import REGEX from '../constants/regex';
+import OPTION from '../constants/option';
 
 const Image = styled.img`
   width: 36px;
@@ -23,10 +24,10 @@ const CardBrand = ({ ...props }) => {
 
   const changeBrand = () => {
     if (REGEX.startsWith4.test(firstCardNumbers)) {
-      setBrand('Visa');
+      setBrand(OPTION.cardBrand.visa);
       setIsBrand(true);
     } else if (REGEX.startsWith5155.test(firstCardNumbers)) {
-      setBrand('MasterCard');
+      setBrand(OPTION.cardBrand.masterCard);
       setIsBrand(true);
     } else {
       setIsBrand(false);
