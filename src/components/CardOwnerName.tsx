@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Input from "./Input";
-import { TitleText, LabelText } from "../styles/common";
+import Input from "./atoms/Input";
+import { TitleText, LabelText } from "./atoms/text";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
 
