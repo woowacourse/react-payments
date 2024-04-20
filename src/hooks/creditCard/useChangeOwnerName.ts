@@ -1,17 +1,25 @@
 import { useState } from 'react';
+import { ERROR_MESSAGE } from '@constants/index';
+import { isValidOwnerNameInput } from '@utils/validator';
+
+const initialOwnerNameError = { isError: false, errorMessage: '' };
 
 const useChangeOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
-  const [ownerNameError, setOwnerNameError] = useState({ isError: false, errorMessage: '' });
+  const [ownerNameError, setOwnerNameError] = useState(initialOwnerNameError);
 
   const handleOwnerNameChange = (value: string) => {
-    const error = /^[A-Za-z]{0,}$/.test(value)
-      ? { isError: false, errorMessage: '' }
-      : { isError: true, errorMessage: '카드 소유자 이름은 영문으로 입력해야 합니다.' };
-    setOwnerNameError(error);
+    if (!isValidOwnerNameInput(value)) {
+      setOwnerNameError({
+        isError: true,
+        errorMessage: ERROR_MESSAGE.invalidOwnerNameInput,
+      });
 
-    if (!/^[A-Za-z]{0,}$/.test(value)) return;
+      return;
+    }
+
     setOwnerName(value);
+    setOwnerNameError(initialOwnerNameError);
   };
 
   return { ownerName: ownerName.toUpperCase(), ownerNameError, handleOwnerNameChange };
