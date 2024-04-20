@@ -25,7 +25,7 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '유효기간에 포함된 년도',
     },
-    expirationError: {
+    expirationDateError: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 메시지 및 상태를 포함',
     },
@@ -55,7 +55,7 @@ export const Default: Story = {
   args: {
     month: '',
     year: '',
-    expirationError: { isError: false, errorMessage: '' },
+    expirationDateError: { isError: false, errorMessage: '' },
   },
 };
 
@@ -71,7 +71,7 @@ export const MonthError: Story = {
   args: {
     month: '13',
     year: '',
-    expirationError: { isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' },
+    expirationDateError: { isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' },
   },
 };
 
@@ -87,7 +87,7 @@ export const ExpirationError: Story = {
   args: {
     month: '01',
     year: '24',
-    expirationError: { isError: true, errorMessage: '카드 유효기간이 지났습니다.' },
+    expirationDateError: { isError: true, errorMessage: '카드 유효기간이 지났습니다.' },
   },
 };
 
@@ -103,6 +103,6 @@ export const Complete: Story = {
   args: {
     month: '05',
     year: '24',
-    expirationError: { isError: false, errorMessage: '' },
+    expirationDateError: { isError: false, errorMessage: '' },
   },
 };

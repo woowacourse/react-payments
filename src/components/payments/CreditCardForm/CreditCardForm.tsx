@@ -29,7 +29,7 @@ const CreditCardForm: React.FC = () => {
           month={expiration.month}
           year={expiration.year}
           onAddExpirationDate={handleExpirationChange}
-          expirationError={expirationError}
+          expirationDateError={expirationError}
         />
         <OwnerNameTextField
           ownerName={ownerName}
