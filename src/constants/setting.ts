@@ -1,12 +1,4 @@
-export interface FormField {
-  LABEL: string;
-  MAIN_TEXT: string;
-  SUB_TEXT: string;
-  PLACEHOLDER: string | { MONTH: string; YEAR: string };
-  MAX_LENGTH: number;
-}
-
-export interface CardBrand {
+interface CardBrand {
   NAME: string;
   MIN_NUMBER: number;
   MAX_NUMBER: number;
@@ -40,7 +32,7 @@ export const FORM_FIELDS = {
 
 export const MASKING = "•";
 
-export const CARD_BRAND = {
+export const CARD_BRAND: { [key: string]: CardBrand } = {
   MASTERCARD: {
     NAME: "MasterCard",
     MIN_NUMBER: 51,
