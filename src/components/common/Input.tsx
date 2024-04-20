@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-interface InputProps {
-  [key: string]: any;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
