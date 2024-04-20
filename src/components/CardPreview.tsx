@@ -88,7 +88,7 @@ const BodyWrapper = styled.section`
   flex-direction: column;
   gap: 20px;
   padding-left: 10px;
-  letter-spacing: 2;
+  letter-spacing: 2px;
 `;
 
 const CardNumbersWrapper = styled.div`
