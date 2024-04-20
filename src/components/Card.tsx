@@ -44,7 +44,7 @@ const CardNumbers = styled(TextBox)`
   gap: 10px;
 `;
 
-const Number = styled.div`
+const CardNumber = styled.div`
   width: 100px;
   letter-spacing: 3px;
 `;
@@ -76,8 +76,8 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
         </ImgBox>
 
         <CardNumbers>
-          <Number> {cardInfo.cardNumber1} </Number>
-          <Number> {cardInfo.cardNumber2} </Number>
+          <CardNumber> {cardInfo.cardNumber1} </CardNumber>
+          <CardNumber> {cardInfo.cardNumber2} </CardNumber>
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber3.length)}</SecretNumber>
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber4.length)}</SecretNumber>
         </CardNumbers>
