@@ -67,7 +67,6 @@ export default function InputField({
   };
 
   return (
-    <>
       <Container>
         <FieldTitle title={title} subtitle={subtitle} />
         <Label>{inputTypes.inputLabel}</Label>
@@ -86,6 +85,5 @@ export default function InputField({
           {Object.values(errorMessages).find((message) => message !== '')}
         </ErrorBox>
       </Container>
-    </>
   );
 }
