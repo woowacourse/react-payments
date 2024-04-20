@@ -58,7 +58,7 @@ export const ExpirationDateMonthTypeError: Story = {
             placeholder={PLACEHOLDER.month}
             value="13"
             maxLength={MAX_LENGTH.expirationDate}
-            invalid
+            aria-aria-invalid
           />
           <Input placeholder={PLACEHOLDER.year} value="24" maxLength={MAX_LENGTH.expirationDate} />
         </>
@@ -78,7 +78,7 @@ export const ExpirationDateMonthLengthError: Story = {
             placeholder={PLACEHOLDER.month}
             value="1"
             maxLength={MAX_LENGTH.expirationDate}
-            invalid
+            aria-aria-invalid
           />
           <Input placeholder={PLACEHOLDER.year} value="24" maxLength={MAX_LENGTH.expirationDate} />
         </>
@@ -99,7 +99,7 @@ export const ExpirationDateYearTypeError: Story = {
             placeholder={PLACEHOLDER.year}
             value="2d"
             maxLength={MAX_LENGTH.expirationDate}
-            invalid
+            aria-invalid
           />
         </>
       </InputField>
@@ -119,7 +119,7 @@ export const ExpirationDateYearLengthError: Story = {
             placeholder={PLACEHOLDER.year}
             value="1"
             maxLength={MAX_LENGTH.expirationDate}
-            invalid
+            aria-invalid
           />
         </>
       </InputField>

@@ -78,19 +78,19 @@ export const CardNumberTypeError: Story = {
             placeholder={PLACEHOLDER.cardNumber}
             value="simo"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}
             value="123d"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}
             value="123!"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}
@@ -114,19 +114,19 @@ export const CardNumberLengthError: Story = {
             placeholder={PLACEHOLDER.cardNumber}
             value="123"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}
             value="12"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}
             value="1"
             maxLength={MAX_LENGTH.cardNumber}
-            invalid
+            aria-invalid
           />
           <Input
             placeholder={PLACEHOLDER.cardNumber}

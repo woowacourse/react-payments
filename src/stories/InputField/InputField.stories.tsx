@@ -47,8 +47,8 @@ export const Error: Story = {
     error: '시모와 쿠키는 숫자가 아닙니다.',
     children: (
       <>
-        <Input placeholder="1234" value="simo" invalid />
-        <Input placeholder="5678" value="cookie" invalid />
+        <Input placeholder="1234" value="simo" aria-invalid />
+        <Input placeholder="5678" value="cookie" aria-invalid />
         <Input placeholder="1234" value="1234" />
         <Input placeholder="5678" value="5678" />
       </>

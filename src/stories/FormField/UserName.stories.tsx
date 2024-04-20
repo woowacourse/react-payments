@@ -52,7 +52,7 @@ export const UserNameLowerCaseTypeError: Story = {
           placeholder={PLACEHOLDER.userName}
           value="simo cookie"
           maxLength={MAX_LENGTH.userName}
-          invalid
+          aria-invalid
         />
       </InputField>
     ),
@@ -68,7 +68,7 @@ export const UserNameKoreanTypeError: Story = {
           placeholder={PLACEHOLDER.userName}
           value="시모 쿠키"
           maxLength={MAX_LENGTH.userName}
-          invalid
+          aria-invalid
         />
       </InputField>
     ),
@@ -84,7 +84,7 @@ export const UserNameJoinTypeError: Story = {
           placeholder={PLACEHOLDER.userName}
           value="SIMOCOOKIE"
           maxLength={MAX_LENGTH.userName}
-          invalid
+          aria-invalid
         />
       </InputField>
     ),

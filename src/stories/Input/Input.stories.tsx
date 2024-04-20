@@ -15,7 +15,7 @@ export const Default: Story = {
     placeholder: 'MM',
     value: '',
     maxLength: 2,
-    invalid: false,
+    'aria-invalid': false,
   },
 };
 
@@ -24,7 +24,7 @@ export const Filled: Story = {
     placeholder: 'MM',
     value: '12',
     maxLength: 2,
-    invalid: false,
+    'aria-invalid': false,
   },
 };
 
@@ -33,6 +33,6 @@ export const Error: Story = {
     placeholder: 'MM',
     value: 'aa',
     maxLength: 2,
-    invalid: true,
+    'aria-invalid': true,
   },
 };
