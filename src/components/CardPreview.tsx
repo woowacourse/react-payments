@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import Visa from "../static/Visa.png";
+
 import Mastercard from "../static/Mastercard.png";
+import Visa from "../static/Visa.png";
+import styled from "styled-components";
 
 const CardContainer = styled.div`
   width: 212px;
@@ -70,7 +71,7 @@ const HiddenNumber = styled.div`
 `;
 
 interface Props {
-  cardInformation: TCardInformation;
+  cardInformation: CardInformation;
 }
 
 export default function CardPreview({ cardInformation }: Props) {
