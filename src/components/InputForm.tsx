@@ -20,7 +20,7 @@ export default function InputForm({
   );
 }
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
