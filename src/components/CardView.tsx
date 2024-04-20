@@ -37,6 +37,13 @@ export default function CardView({ cardInfo }: Props) {
   };
 
   const cardImgSrc = getCardImage(cardInfo.cardNumber1);
+
+  const formatDate = (date: string) => {
+    if (date.length === 1) {
+      return `0${date}`;
+    }
+    return date;
+  };
   return (
     <CardContainer>
       <ImgBox>
@@ -55,9 +62,9 @@ export default function CardView({ cardInfo }: Props) {
         </SecretCardNumber>
       </CardNumbers>
       <TextBox>
-        {cardInfo.month.length === 1 ? `0${cardInfo.month}` : cardInfo.month}
+        {formatDate(cardInfo.month)}
         {cardInfo.year.length > 0 ? ' / ' : ''}
-        {cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}
+        {formatDate(cardInfo.year)}
       </TextBox>
       <TextBox> {cardInfo.userName} </TextBox>
     </CardContainer>
@@ -90,7 +97,7 @@ const CardImg = styled.img`
   height: 22px;
 `;
 
-const TextBox = styled.div`
+const TextBox = styled.p`
   display: flex;
   align-items: flex-end;
   height: 30px;
