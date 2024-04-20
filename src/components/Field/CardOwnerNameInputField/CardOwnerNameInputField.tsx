@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useState,
+  FocusEvent,
+} from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
 import normalizeSpaces from "../../../utils/normalizeSpaces";
@@ -14,7 +20,7 @@ export default function CardOwnerNameInputField({
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const onlyEngStr = filterEnglish(e.target.value.toUpperCase());
     const normalizedOwnerName = normalizeSpaces(onlyEngStr);
     if (
@@ -35,8 +41,7 @@ export default function CardOwnerNameInputField({
     setOwnerName(normalizedOwnerName);
   };
 
-  const handleBlur = (e: any) => {
-    console.log("blur");
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
       setErrorMessage("이름을 입력해주세요.");
       return;

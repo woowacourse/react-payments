@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, ChangeEvent } from "react";
 import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
@@ -63,7 +63,7 @@ export default function CardExpirationDateInputField({
     return false;
   };
 
-  const handleMonth = (e: any) => {
+  const handleMonth = (e: ChangeEvent<HTMLInputElement>) => {
     const input = Number(e.target.value);
 
     if (input <= 1 || e.target.value.length >= 2)
@@ -74,7 +74,7 @@ export default function CardExpirationDateInputField({
     checkValidDate({ month: e.target.value });
   };
 
-  const handleYear = (e: any) => {
+  const handleYear = (e: ChangeEvent<HTMLInputElement>) => {
     setDate({ ...date, year: e.target.value });
     checkValidDate({ year: e.target.value });
   };

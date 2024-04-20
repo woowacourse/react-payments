@@ -1,9 +1,9 @@
+import { FocusEvent, InputHTMLAttributes } from "react";
 import styles from "./Input.module.css";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // checkError?: React.ChangeEventHandler<HTMLInputElement>;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
-  onBlur?: (e: any) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function Input(props: InputProps) {
@@ -16,7 +16,7 @@ export default function Input(props: InputProps) {
       onBlur={(e) => {
         if (props.onBlur) {
           props.onBlur(e);
-        } // 넘겨준 블러 함수 사용
+        }
       }}
       onChange={onChange}
     />

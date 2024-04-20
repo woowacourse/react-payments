@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
 
@@ -36,7 +36,7 @@ export default function CardNumbersInputField({
     setErrorMessages(prevErrorMessages.filter(([i]) => i !== index));
   };
 
-  const handleChange = (e: any, index: number) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     if (isNaN(Number(e.target.value)) && e.target.value.length !== 0) {
       setVisibleErrorMessage([index, "숫자를 입력해주세요."]);
       return;
