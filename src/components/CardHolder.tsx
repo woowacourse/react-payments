@@ -1,35 +1,33 @@
-import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
-import { useContext, useEffect, useState } from "react";
+import {
+  ERROR_MESSAGE,
+  PAYMENTS_INPUT_MESSAGE,
+  PAYMENTS_MESSAGE,
+} from '../constants/message';
 
-import { CardInfoContext } from "../App";
-import FormItem from "./FormItem";
-import SectionTitle from "./SectionTitle";
-import useInput from "../hooks/useInput";
-import { validateOnlyEnglishWithSpace } from "../domain/validateInput";
+import { BOUND } from '../constants/number';
+import FormItem from './FormItem';
+import SectionTitle from './SectionTitle';
+import TextInput from './TextInput';
+import TextInputContainer from './InputContainer';
+import { isOnlyEnglishOrSpace } from '../domain/checkIsValid';
+import { useEffect } from 'react';
+import useValidateInput from '../hooks/useValidateInput';
 
-export default function CardHolder() {
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const useInputProps = {
-    validator: (string: string) => {
-      validateOnlyEnglishWithSpace(string);
-
-      setErrorMessage("");
-    },
-    errorHandler: (error: unknown) => {
-      if (!(error instanceof Error)) return;
-      setErrorMessage(error.message);
-    },
-    decorateValue: (string: string) => string.toUpperCase(),
-  };
-
-  const { value: holder, onChangeHandler } = useInput(useInputProps);
-
-  const { setCardHolder } = useContext(CardInfoContext);
+export default function CardHolder({
+  setCardHolder,
+}: {
+  setCardHolder: React.Dispatch<React.SetStateAction<string>>;
+}) {
+  const {
+    input: holder,
+    onChange,
+    errorMessage,
+  } = useValidateInput(useValidateInputProps);
 
   useEffect(() => {
     if (setCardHolder) setCardHolder(holder);
-  }, [holder]);
+  }, [holder, setCardHolder]);
+
   return (
     <section>
       <SectionTitle title={PAYMENTS_MESSAGE.cardHolderTitle} />
@@ -37,16 +35,27 @@ export default function CardHolder() {
         labelText={PAYMENTS_INPUT_MESSAGE.cardHolderLabel}
         errorMessage={errorMessage}
       >
-        {
-          <input
-            type="text"
+        <TextInputContainer>
+          <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
-            maxLength={30}
-            onChange={onChangeHandler}
+            onChange={onChange}
             value={holder}
+            border-color={errorMessage ? 'error' : undefined}
           />
-        }
+        </TextInputContainer>
       </FormItem>
     </section>
   );
 }
+
+const useValidateInputProps = {
+  decorateValue: (string: string) => string.toUpperCase(),
+  validatorPropsArray: [
+    {
+      checkIsValid: isOnlyEnglishOrSpace,
+      shouldReflect: false,
+      errorMessage: ERROR_MESSAGE.notEnglishOrSpace,
+    },
+  ],
+  maxLength: BOUND.cardHolderLengthUpper,
+};
