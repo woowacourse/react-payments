@@ -76,8 +76,8 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
         </ImgBox>
 
         <CardNumbers>
-          <CardNumber> {cardInfo.cardNumber1} </CardNumber>
-          <CardNumber> {cardInfo.cardNumber2} </CardNumber>
+          <CardNumber>{cardInfo.cardNumber1}</CardNumber>
+          <CardNumber>{cardInfo.cardNumber2}</CardNumber>
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber3.length)}</SecretNumber>
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber4.length)}</SecretNumber>
         </CardNumbers>
