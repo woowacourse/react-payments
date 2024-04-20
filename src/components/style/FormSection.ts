@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import STYLE from '../../constants/style';
 
 const FormSection = styled.div`
   display: flex;
@@ -19,16 +20,16 @@ const InputForm = styled.div`
 `;
 
 const Label = styled.div`
-  font-size: 12px;
-  font-weight: 500;
+  font-size: ${STYLE.FONT_SIZE.label};
+  font-weight: ${STYLE.BOLD.label};
   line-height: 15px;
   text-align: left;
-  color: black;
+  color: ${STYLE.COLOR.black};
 `;
 
 const ErrorMessage = styled.div`
   height: 12px;
-  color: #ff3d3d;
+  color: ${STYLE.COLOR.red};
   font-size: 9.5px;
   font-weight: 400;
   line-height: 12px;

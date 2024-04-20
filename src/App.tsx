@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import './App.css';
+import GlobalStyle from './Global.style';
 import MainPage from './components/MainPage';
 
 const Container = styled.div`
@@ -11,9 +11,12 @@ const Container = styled.div`
 
 function App() {
   return (
-    <Container>
-      <MainPage />
-    </Container>
+    <>
+      <GlobalStyle />
+      <Container>
+        <MainPage />
+      </Container>
+    </>
   );
 }
 

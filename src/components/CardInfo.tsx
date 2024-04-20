@@ -1,13 +1,7 @@
-import styled from 'styled-components';
+import Container from './style/CardInfo.style';
 import CardNumbersFormSection from './CardNumbersFormSection';
 import ExpirationDateFormSection from './ExpirationDateFormSection';
 import NameFormSection from './NameFormSection';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
 
 interface ChangeExpirationProps {
   month: string;

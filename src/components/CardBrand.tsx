@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
+import Image from './style/CardBrand.style';
 import Visa from '../asset/Visa.svg';
 import MasterCard from '../asset/Mastercard.svg';
 import { useState } from 'react';
 import REGEX from '../constants/regex';
 import OPTION from '../constants/option';
 
-const Image = styled.img`
-  width: 36px;
-  height: 28px;
-`;
 type Props = 'Visa' | 'MasterCard';
 
 const BRAND_TABLE: Record<Props, string> = {
