@@ -31,3 +31,31 @@ interface CardInfo {
   expirationYear: string;
   name: string;
 }
+
+interface CardNumbersFormSectionProps {
+  changeCardNumber: (cardNumber: string[]) => void;
+}
+
+interface Expiration {
+  month: string;
+  year: string;
+}
+interface ExpirationFormSectionProps {
+  changeExpiration: (expiration: Expiration) => void;
+}
+
+interface NameFormSectionProps {
+  changeName: (name: string) => void;
+}
+
+interface UseCardNumbersFormSectionProps {
+  changeCardNumber: (cardNumber: string[]) => void;
+}
+
+interface UseExpirationFormSectionProps {
+  changeExpiration: (expiration: Expiration) => void;
+}
+
+interface UseNameFormSectionProps {
+  changeName: (name: string) => void;
+}

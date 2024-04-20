@@ -11,8 +11,8 @@ interface ChangeExpirationProps {
 
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
-  const changeCardNumber = (cardNumber: string) => {
-    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber: cardNumber }));
+  const changeCardNumber = (cardNumber: string[]) => {
+    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber }));
   };
 
   const changeExpiration = ({ month, year }: ChangeExpirationProps) => {

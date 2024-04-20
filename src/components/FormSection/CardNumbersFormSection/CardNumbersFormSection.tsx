@@ -1,148 +1,14 @@
-import React, { useEffect, useState } from 'react';
-
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
-import ERROR_MESSAGE from '../../../constants/errorMessage';
 
 import OPTION from '../../../constants/option';
-import REGEX from '../../../constants/regex';
 
 import * as Styled from '../FormSection.styled';
+import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 
-const CardNumbersFormSection = ({ ...props }) => {
-  const { changeCardNumber } = props;
-  const initializeInputFieldState = (length: number) => {
-    const obj: InputStates = {};
-    for (let i = 0; i < length; i++) {
-      obj[i] = {
-        value: '',
-        hasError: false,
-        hasFocus: i === 0,
-        isFilled: false,
-      };
-    }
-    return obj;
-  };
+const CardNumbersFormSection = ({ changeCardNumber }: CardNumbersFormSectionProps) => {
 
-  const [inputState, setInputState] = useState<InputStates>(
-    initializeInputFieldState(OPTION.cardNumberInputCount),
-  );
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const [hasNoFocus, setHasNoFocus] = useState(true);
-
-  const handleValueChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-    const isFilled = newValue.length === OPTION.cardNumberMaxLength;
-
-    if (
-      newValue.length <= OPTION.cardNumberMaxLength &&
-      !REGEX.numbers.test(newValue)
-    ) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, newValue.length - 1),
-          hasError: true,
-        },
-      }));
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
-    } else if (newValue.length > OPTION.cardNumberMaxLength) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, OPTION.cardNumberMaxLength),
-          hasError: false,
-        },
-      }));
-    } else {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue,
-          hasError: false,
-          isFilled: isFilled,
-        },
-      }));
-    }
-  };
-
-  const handleOnFocus = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-  };
-
-  const handleOnBlur = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-  };
-
-  useEffect(() => {
-    changeCardNumber([
-      inputState[0].value,
-      inputState[1].value,
-      inputState[2].value,
-      inputState[3].value,
-    ]);
-    setHasNoFocus(Object.values(inputState).every((field) => !field.hasFocus));
-  }, [inputState]);
-
-  useEffect(() => {
-    resetErrors();
-    if (hasNoFocus) {
-      handleValidate();
-    }
-  }, [hasNoFocus]);
-
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      acc[key] = { ...field, hasError: false };
-      return acc;
-    }, {});
-
-    setInputState(newState);
-    setErrorMessage('');
-  };
-
-  const handleValidate = () => {
-    let hasAnyError = false;
-
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      if (!field.isFilled) {
-        acc[key] = { ...field, hasError: true };
-        hasAnyError = true;
-      } else {
-        acc[key] = field;
-      }
-      return acc;
-    }, {});
-
-    setInputState(newState);
-
-    if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.cardNumberOutOfRange);
-    } else {
-      setErrorMessage('');
-    }
-  };
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ changeCardNumber })
 
   return (
     <Styled.FormSection>
@@ -160,7 +26,7 @@ const CardNumbersFormSection = ({ ...props }) => {
               maxLength={OPTION.cardNumberMaxLength}
               value={inputState[index].value}
               hasError={inputState[index].hasError}
-              handleValueChange={(e) => handleValueChange(e, index)}
+              handleValueChange={(e) => onChange(e, index)}
               handleOnFocus={() => handleOnFocus(index)}
               handleOnBlur={() => handleOnBlur(index)}
             />
