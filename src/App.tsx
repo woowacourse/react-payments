@@ -1,15 +1,18 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
-import InputInfo from './components/InputSection';
+
+import InputSection from './components/InputSection';
 import Input from './components/composables/Input';
-import CreditCard from './components/CreditCard';
-import useCardNumber from './hooks/useCardNumber';
-import useInput from './hooks/useInput';
-import { useEffect, useState } from 'react';
 import Label from './components/composables/Label';
+import CreditCard from './components/CreditCard';
 import MasterCardImage from './assets/images/mastercard.png';
 import VisaCardImage from './assets/images/visa.png';
+
+import useCardNumber from './hooks/useCardNumber';
+import useInput from './hooks/useInput';
 import validate from './utils/validate';
+
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
 
 export const StyledInput = styled.input`
@@ -150,7 +153,7 @@ function App() {
         />
         <CardInfoContainer>
           <Wrapper>
-            <InputInfo
+            <InputSection
               title={CARD_NUMBER.title}
               description={CARD_NUMBER.description}
               inputTitle={CARD_NUMBER.inputTitle}
@@ -173,7 +176,7 @@ function App() {
                   </>
                 );
               })}
-            </InputInfo>
+            </InputSection>
             <ErrorContainer>
               <ErrorMessageSpan>
                 {cardNumbers.some((cardNumber) => cardNumber.isError) && CARD_NUMBER.errorMessage}
@@ -182,7 +185,7 @@ function App() {
           </Wrapper>
 
           <Wrapper>
-            <InputInfo
+            <InputSection
               title={EXPIRATION_PERIOD.title}
               description={EXPIRATION_PERIOD.description}
               inputTitle={EXPIRATION_PERIOD.inputTitle}
@@ -207,7 +210,7 @@ function App() {
                 onChange={yearChangeHandler}
                 isError={yearError}
               />
-            </InputInfo>
+            </InputSection>
             <ErrorContainer>
               <ErrorMessageSpan>
                 {monthError && yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
@@ -218,7 +221,7 @@ function App() {
           </Wrapper>
 
           <Wrapper>
-            <InputInfo title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
+            <InputSection title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
               <Label htmlFor={'name'} />
               <Input
                 id="name"
@@ -229,7 +232,7 @@ function App() {
                 type="text"
                 value={name}
               />
-            </InputInfo>
+            </InputSection>
             <ErrorContainer>
               <ErrorMessageSpan>{nameError && OWNER_NAME.errorMessage}</ErrorMessageSpan>
             </ErrorContainer>
