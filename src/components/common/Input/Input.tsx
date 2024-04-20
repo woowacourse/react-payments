@@ -12,15 +12,7 @@ export interface InputProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input: React.FC<InputProps> = ({
-  id,
-  type = 'text',
-  maxLength = 4,
-  isError = false,
-  placeholder,
-  value,
-  onChange,
-}) => {
+const Input: React.FC<InputProps> = ({ id, maxLength = 4, isError = false, placeholder, value, onChange }) => {
   const errorInputClass = `${isError ? styles.errorInput : ''}`;
 
   return (
@@ -28,7 +20,6 @@ const Input: React.FC<InputProps> = ({
       className={`${styles.inputStyle} ${errorInputClass}`}
       id={id}
       maxLength={maxLength}
-      type={type}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
