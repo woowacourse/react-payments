@@ -3,7 +3,7 @@ import InputTitle from './InputTitle';
 import Input from './Input';
 import { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
-import { informationSectionType, period } from '../types/cardType';
+import { informationSectionType, period } from '../types/card';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 

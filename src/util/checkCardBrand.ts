@@ -1,5 +1,5 @@
 import { CARD_INFORMATION } from '../constants/cardInformation';
-import { CardBrandType, cardBrand } from '../types/cardType';
+import { CardBrandType, cardBrand } from '../types/card';
 import { isRange } from './isRange';
 
 const checkCardBrand = (cardNumber: string[]): CardBrandType => {

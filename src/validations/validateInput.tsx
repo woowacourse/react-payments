@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
-import { InformationDetailType } from '../types/cardType';
+import { InformationDetailType } from '../types/card';
 import { isRange } from '../util/isRange';
 
 interface ValidateInputTableType {

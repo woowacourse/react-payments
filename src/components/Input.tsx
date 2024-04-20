@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import validateInput from '../validations/validateInput';
 import { useState } from 'react';
-import { InformationDetailType } from '../types/cardType';
+import { InformationDetailType } from '../types/card';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusColor: string }) =>
