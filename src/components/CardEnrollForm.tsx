@@ -48,16 +48,16 @@ export default function CardEnrollForm() {
           cardNumber2={cardInformation.cardNumber2}
           cardNumber3={cardInformation.cardNumber3}
           cardNumber4={cardInformation.cardNumber4}
-          inputHandler={inputHandler}
+          onChange={inputHandler}
         />
         <CardExpirationDate
           cardExpirationMonth={cardInformation.cardExpirationMonth}
           cardExpirationYear={cardInformation.cardExpirationYear}
-          inputHandler={inputHandler}
+          onChange={inputHandler}
         />
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
-          inputHandler={inputHandler}
+          onChange={inputHandler}
         />
       </CardInformation>
     </CardEnrollFormContainer>

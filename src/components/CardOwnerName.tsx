@@ -26,12 +26,12 @@ const InputContainer = styled.div`
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
-  inputHandler: (inputValue: string, inputId: string) => void;
+  onChange: (inputValue: string, inputId: string) => void;
 }
 
 export default function CardOwnerName({
   cardOwnerName,
-  inputHandler,
+  onChange,
 }: CardOwnerNameProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -44,7 +44,7 @@ export default function CardOwnerName({
       return true;
     }
 
-    inputHandler(upperName, "cardOwnerName");
+    onChange(upperName, "cardOwnerName");
     setErrorMessage("");
     return false;
   };

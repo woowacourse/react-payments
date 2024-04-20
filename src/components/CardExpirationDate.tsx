@@ -27,13 +27,13 @@ const InputContainer = styled.div`
 interface CardExpirationDateProps {
   cardExpirationMonth: string;
   cardExpirationYear: string;
-  inputHandler: (inputValue: string, inputId: string) => void;
+  onChange: (inputValue: string, inputId: string) => void;
 }
 
 export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
-  inputHandler,
+  onChange,
 }: CardExpirationDateProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -77,7 +77,7 @@ export default function CardExpirationDate({
     if (!numberValidator(value)) {
       return true;
     }
-    inputHandler(value, fieldName);
+    onChange(value, fieldName);
     return false;
   };
 

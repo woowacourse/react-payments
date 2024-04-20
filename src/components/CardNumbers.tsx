@@ -27,7 +27,7 @@ interface CardNumbersProps {
   cardNumber2: string;
   cardNumber3: string;
   cardNumber4: string;
-  inputHandler: (inputValue: string, inputId: string) => void;
+  onChange: (inputValue: string, inputId: string) => void;
 }
 
 export default function CardNumbers({
@@ -35,7 +35,7 @@ export default function CardNumbers({
   cardNumber2,
   cardNumber3,
   cardNumber4,
-  inputHandler,
+  onChange,
 }: CardNumbersProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -61,7 +61,7 @@ export default function CardNumbers({
     if (!numberValidator(value)) {
       return true;
     }
-    inputHandler(value, fieldName);
+    onChange(value, fieldName);
     return false;
   };
 

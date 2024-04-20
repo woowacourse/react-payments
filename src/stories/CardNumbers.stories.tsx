@@ -1,7 +1,7 @@
-import { useState } from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
+
 import CardNumbers from "../components/CardNumbers";
+import { useState } from "react";
 
 const meta: Meta<typeof CardNumbers> = {
   component: CardNumbers,
@@ -40,7 +40,7 @@ export const Default: Story = {
         cardNumber2={cardInformation.cardNumber2}
         cardNumber3={cardInformation.cardNumber3}
         cardNumber4={cardInformation.cardNumber4}
-        inputHandler={inputHandler}
+        onChange={inputHandler}
       />
     );
   },
@@ -52,7 +52,7 @@ export const ErrorWithNotNumber: Story = {
     cardNumber2: "",
     cardNumber3: "",
     cardNumber4: "",
-    inputHandler: (inputValue: string, inputId: string) => {},
+    onChange: (inputValue: string, inputId: string) => {},
   },
   render: ({ ...args }) => {
     return (
@@ -62,7 +62,7 @@ export const ErrorWithNotNumber: Story = {
         cardNumber2={args.cardNumber2}
         cardNumber3={args.cardNumber3}
         cardNumber4={args.cardNumber4}
-        inputHandler={args.inputHandler}
+        onChange={args.onChange}
       />
     );
   },
