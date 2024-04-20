@@ -23,16 +23,15 @@ const now = year + month;
 const ExpirationDateFormSection = ({ ...props }) => {
   const { changeExpiration } = props;
   const initializeInputFieldState = (length: number) => {
-    const obj: InputStates = {};
-    for (let i = 0; i < length; i++) {
-      obj[i] = {
-        value: '',
-        hasError: false,
-        hasFocus: i === 0,
-        isFilled: false,
-      };
-    }
-    return obj;
+    return Array.from({ length }, (_, index) => ({
+      value: '',
+      hasError: false,
+      hasFocus: index === 0,
+      isFilled: false,
+    })).reduce((acc, curr, index) => {
+      acc[index] = curr;
+      return acc;
+    }, {} as InputStates);
   };
 
   const regex = REGEX.allNumbers;

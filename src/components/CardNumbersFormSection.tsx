@@ -18,16 +18,15 @@ import {
 const CardNumbersFormSection = ({ ...props }) => {
   const { changeCardNumber } = props;
   const initializeInputFieldState = (length: number) => {
-    const obj: InputStates = {};
-    for (let i = 0; i < length; i++) {
-      obj[i] = {
-        value: '',
-        hasError: false,
-        hasFocus: i === 0,
-        isFilled: false,
-      };
-    }
-    return obj;
+    return Array.from({ length }, (_, index) => ({
+      value: '',
+      hasError: false,
+      hasFocus: index === 0,
+      isFilled: false,
+    })).reduce((acc, curr, index) => {
+      acc[index] = curr;
+      return acc;
+    }, {} as InputStates);
   };
 
   const [inputState, setInputState] = useState<InputStates>(
@@ -157,18 +156,20 @@ const CardNumbersFormSection = ({ ...props }) => {
       <InputForm>
         <Label>카드번호</Label>
         <InputFieldContainer className="input-field-container">
-          {[...Array(OPTION.cardNumberInputCount)].map((_, index) => (
-            <PaymentsInputField
-              key={index}
-              placeholder="1234"
-              maxLength={OPTION.cardNumberMaxLength}
-              value={inputState[index].value}
-              hasError={inputState[index].hasError}
-              handleValueChange={(e) => handleValueChange(e, index)}
-              handleOnFocus={() => handleOnFocus(index)}
-              handleOnBlur={() => handleOnBlur(index)}
-            />
-          ))}
+          {Array.from({ length: OPTION.cardNumberInputCount }).map(
+            (_, index) => (
+              <PaymentsInputField
+                key={index}
+                placeholder="1234"
+                maxLength={OPTION.cardNumberMaxLength}
+                value={inputState[index].value}
+                hasError={inputState[index].hasError}
+                handleValueChange={(e) => handleValueChange(e, index)}
+                handleOnFocus={() => handleOnFocus(index)}
+                handleOnBlur={() => handleOnBlur(index)}
+              />
+            ),
+          )}
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </InputForm>
