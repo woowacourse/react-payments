@@ -11,7 +11,6 @@ const initializeInputFieldState = (length: number) => {
       value: '',
       hasError: false,
       hasFocus: i === 0,
-      isFilled: false,
     };
   }
   return obj;
@@ -30,8 +29,6 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = event.target.value;
-    const isFilled = newValue.length === OPTION.expirationDateMaxLength;
-
     if (
       newValue.length <= OPTION.expirationDateMaxLength &&
       !REGEX.numbers.test(newValue)
@@ -65,7 +62,6 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
           ...prevState[index],
           value: newValue,
           hasError: false,
-          isFilled: isFilled,
         },
       }), (newState: InputStates) => {
         changeExpiration({ month: newState[0].value, year: newState[1].value })
@@ -110,9 +106,11 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
         0: {
           ...prevState[0],
           value: '0' + prevState[0].value,
-          isFilled: true,
         },
-      }));
+      }), (newState: InputStates) => {
+        setInputState(() => newState);
+        changeExpiration({ month: newState[0].value, year: newState[1].value })
+      });
     } else if (REGEX.zero.test(inputState[0].value)) {
       setInputState((prevState) => ({
         ...prevState,
@@ -120,7 +118,10 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
           ...prevState[0],
           value: OPTION.minMonth,
         },
-      }));
+      }), (newState: InputStates) => {
+        setInputState(() => newState);
+        changeExpiration({ month: newState[0].value, year: newState[1].value })
+      });
     } else if (
       !REGEX.month.test(inputState[0].value) &&
       inputState[0].value.length
@@ -131,7 +132,10 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
           ...prevState[0],
           value: OPTION.maxMonth,
         },
-      }));
+      }), (newState: InputStates) => {
+        setInputState(() => newState);
+        changeExpiration({ month: newState[0].value, year: newState[1].value })
+      });
     }
   };
 
@@ -157,7 +161,7 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
 
     const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
       const field = inputState[Number(key)];
-      if (!field.isFilled) {
+      if (field.value.length !== OPTION.expirationDateMaxLength) {
         acc[Number(key)] = { ...field, hasError: true };
         hasAnyError = true;
       } else {

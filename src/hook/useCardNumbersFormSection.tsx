@@ -11,7 +11,6 @@ const initializeInputFieldState = (length: number) => {
       value: '',
       hasError: false,
       hasFocus: i === 0,
-      isFilled: false,
     };
   }
   return obj;
@@ -25,7 +24,6 @@ const useCardNumbersFormSection = ({ changeCardNumber }: UseCardNumbersFormSecti
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = event.target.value;
-    const isFilled = newValue.length === OPTION.cardNumberMaxLength;
 
     if (
       newValue.length <= OPTION.cardNumberMaxLength &&
@@ -61,7 +59,6 @@ const useCardNumbersFormSection = ({ changeCardNumber }: UseCardNumbersFormSecti
           ...prevState[index],
           value: newValue,
           hasError: false,
-          isFilled: isFilled,
         },
       }),
         (newState: InputStates) => {
@@ -106,7 +103,7 @@ const useCardNumbersFormSection = ({ changeCardNumber }: UseCardNumbersFormSecti
 
     const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
       const field = inputState[Number(key)];
-      if (!field.isFilled) {
+      if (field.value.length !== OPTION.cardNumberMaxLength) {
         acc[Number(key)] = { ...field, hasError: true };
         hasAnyError = true;
       } else {

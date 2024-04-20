@@ -10,7 +10,6 @@ const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
       value: '',
       hasError: false,
       hasFocus: false,
-      isFilled: false,
     }]
   );
   const [errorMessage, setErrorMessage] = useState('');
@@ -42,7 +41,6 @@ const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
         ...prevState[0],
         value: newValue,
         hasError: false,
-        isFilled: true
       },]
       ), (newState: InputStates) => {
         changeName(newState[0].value)

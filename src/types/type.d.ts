@@ -21,7 +21,6 @@ interface InputState {
   value: string;
   hasError: boolean;
   hasFocus: boolean;
-  isFilled: boolean;
 }
 
 type CardBrand = 'Visa' | 'MasterCard' | 'none';
