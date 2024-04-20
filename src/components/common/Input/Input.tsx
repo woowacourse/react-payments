@@ -32,6 +32,6 @@ export default function Input({
       onChange={handleChange}
       onBlur={handleOnBlur}
       className={`${styles.input} ${isError && styles.error}`}
-    ></input>
+    />
   );
 }

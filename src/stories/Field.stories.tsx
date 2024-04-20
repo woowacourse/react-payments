@@ -30,7 +30,7 @@ export const CardNumbers: Story = {
             handleChange={() => 1}
             handleOnBlur={() => 1}
             maxLength={4}
-          ></Input>
+          />
         ))}
       </>
     ),
@@ -56,7 +56,7 @@ export const ExpirationDate: Story = {
             handleChange={() => 1}
             handleOnBlur={() => 1}
             maxLength={4}
-          ></Input>
+          />
         ))}
       </>
     ),
@@ -78,7 +78,7 @@ export const OwnerName: Story = {
             isError={false}
             handleChange={() => 1}
             handleOnBlur={() => 1}
-          ></Input>
+          />
         ))}
       </>
     ),
