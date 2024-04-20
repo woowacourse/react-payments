@@ -105,7 +105,6 @@ const useExpirationDateFormSection = ({ changeExpiration }: UseExpirationFormSec
 
   const formatMonth = () => {
     if (REGEX.oneToNine.test(inputState[0].value)) {
-      console.log(REGEX.oneToNine.test(inputState[0].value))
       setInputState((prevState) => ({
         ...prevState,
         0: {
