@@ -4,18 +4,18 @@ import RegistrationLayout from './common/RegistrationLayout';
 
 interface CardholderNameContainerProps {
   cardholderName: string;
-  setCardholderName: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   updateErrorMessage: () => void;
   errorMessage: string;
 }
 
 const CardholderNameContainer = ({
   cardholderName,
-  setCardholderName,
+  setValue,
   updateErrorMessage,
   errorMessage,
 }: CardholderNameContainerProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardholderName(e.target.value.toUpperCase());
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
 
   return (
     <div>

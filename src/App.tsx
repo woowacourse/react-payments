@@ -8,29 +8,11 @@ import CardNumberContainer from './components/CardNumbersContainer';
 import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
 
-const App = () => {
-  const {
-    value: cardNumbers,
-    generateChangeHandler: generateCardNumbersChangeHandler,
-    generateErrorMessageUpdater: generateCardNumberErrorMessageUpdater,
-    errorMessage: cardNumbersErrorMessage,
-    errorStatus: cardNumbersErrorStatus,
-  } = useInputs(
-    {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    inquireCardNumber,
-  );
+const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 
-  const {
-    value: cardholderName,
-    setValue: setCardholderName,
-    updateErrorMessage: updateCardholderNameErrorMessage,
-    errorMessage: cardholderNameErrorMessage,
-  } = useInput('', inquireCardholderName);
+const App = () => {
+  const { value: cardNumbers, ...cardNumbersInput } = useInputs(INITIAL_CARD_NUMBER, inquireCardNumber);
+  const { value: cardholderName, ...cardholderNameInput } = useInput('', inquireCardholderName);
 
   const {
     value: expiryMonth,
@@ -54,25 +36,14 @@ const App = () => {
         cardholderName={cardholderName}
       />
       <CardInfoWrapper>
-        <CardNumberContainer
-          cardNumbers={cardNumbers}
-          generateChangeHandler={generateCardNumbersChangeHandler}
-          generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
-          errorMessage={cardNumbersErrorMessage}
-          errorStatus={cardNumbersErrorStatus}
-        />
+        <CardNumberContainer cardNumbers={cardNumbers} {...cardNumbersInput} />
         <CardExpiryDateContainer
           expiryDate={{ month: expiryMonth, year: expiryYear }}
           changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
           errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
           errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
         />
-        <CardholderNameContainer
-          cardholderName={cardholderName}
-          setCardholderName={setCardholderName}
-          updateErrorMessage={updateCardholderNameErrorMessage}
-          errorMessage={cardholderNameErrorMessage}
-        />
+        <CardholderNameContainer cardholderName={cardholderName} {...cardholderNameInput} />
       </CardInfoWrapper>
     </AppLayout>
   );
