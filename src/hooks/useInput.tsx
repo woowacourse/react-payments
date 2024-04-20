@@ -1,43 +1,25 @@
-import { NonBlockedInputError } from "../errors/InputError";
-import { useState } from "react";
+import { useState } from 'react';
 
-interface InputProps {
-  validator: (string: string) => void;
-  errorHandler: (error: unknown) => void;
+export interface useInputOption {
   decorateValue?: (string: string) => string;
+  maxLength?: number;
 }
+export default function useInput(option?: useInputOption) {
+  const [input, setInput] = useState('');
 
-export default function useInput({
-  validator,
-  errorHandler,
-  decorateValue = (string: string) => string,
-}: InputProps) {
-  const [value, setValue] = useState("");
+  const { decorateValue = (string: string) => string, maxLength = Infinity } =
+    option ?? {};
 
-  const onChangeErrorHandler = (
-    error: Error,
-    eventTarget: EventTarget & HTMLInputElement
-  ) => {
-    eventTarget.setCustomValidity(error.message);
-    errorHandler(error);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const pureValue = event.target.value;
+    if ((event.nativeEvent as KeyboardEvent).isComposing) return;
 
-    if (error instanceof NonBlockedInputError) {
-      setValue(decorateValue(eventTarget.value));
-    }
-  };
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    try {
-      validator(event.target.value);
-    } catch (error) {
-      onChangeErrorHandler(error as Error, event.target);
+    if (pureValue.length > maxLength) {
       return;
     }
-
-    event.target.setCustomValidity("");
-
-    setValue(decorateValue(event.target.value));
+    const decoratedValue = decorateValue(pureValue);
+    setInput(decoratedValue);
   };
 
-  return { value, onChangeHandler };
+  return { input, onChange };
 }
