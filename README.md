@@ -87,7 +87,9 @@ npm run storybook
 | components | 컴포넌트 (해당 컴포넌트와 이에 대한 스타일, hook을 관리) |
 | constants  | 주요 상수 관리                                           |
 | modules    | 전역 상태 관리                                           |
+| stories    | 스토리북                                                 |
 | styles     | 컴포넌트외의 스타일 관리                                 |
+| utils      | 유틸함수 관리                                            |
 
 <br/>
 <details>
@@ -114,13 +116,12 @@ npm run storybook
  ┣ 📂CardUserNameInput
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
- ┣ 📂FormErrorMessage
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
  ┣ 📂Input
  ┃ ┣ 📜index.tsx
- ┃ ┣ 📜style.module.css
- ┃ ┗ 📜useInput.ts
+ ┃ ┗ 📜style.module.css
+ ┣ 📂InputErrorMessage
+ ┃ ┣ 📜index.tsx
+ ┃ ┗ 📜style.module.css
  ┗ 📜index.ts
 ```
   
