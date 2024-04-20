@@ -15,9 +15,8 @@ interface PaymentsFormTitleProps {
   subTitle?: string;
 }
 
-interface InputStates {
-  [key: string]: InputState;
-}
+type InputStates = InputState[];
+
 interface InputState {
   value: string;
   hasError: boolean;

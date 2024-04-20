@@ -5,7 +5,7 @@ import ERROR_MESSAGE from "../constants/errorMessage";
 import useUpdatePreviewState from "./useUpdatePreviewState";
 
 const initializeInputFieldState = (length: number) => {
-  const obj: InputStates = {};
+  const obj: InputStates = [];
   for (let i = 0; i < length; i++) {
     obj[i] = {
       value: '',
@@ -105,15 +105,15 @@ const useCardNumbersFormSection = ({ changeCardNumber }: UseCardNumbersFormSecti
     let hasAnyError = false;
 
     const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
+      const field = inputState[Number(key)];
       if (!field.isFilled) {
-        acc[key] = { ...field, hasError: true };
+        acc[Number(key)] = { ...field, hasError: true };
         hasAnyError = true;
       } else {
-        acc[key] = field;
+        acc[Number(key)] = field;
       }
       return acc;
-    }, {});
+    }, []);
 
     setInputState(() => newState, (newState: InputStates) => {
       changeCardNumber(Object.values(newState).map(field => field.value));
@@ -128,10 +128,10 @@ const useCardNumbersFormSection = ({ changeCardNumber }: UseCardNumbersFormSecti
 
   const resetErrors = () => {
     const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      acc[key] = { ...field, hasError: false };
+      const field = inputState[Number(key)];
+      acc[Number(key)] = { ...field, hasError: false };
       return acc;
-    }, {});
+    }, []);
 
     setInputState(() => newState, (newState: InputStates) => {
       changeCardNumber(Object.values(newState).map(field => field.value));
