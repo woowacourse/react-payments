@@ -34,9 +34,9 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
         </CardNumbersWrapper>
 
         <ExpiryDateWrapper>
-          <p>{expiryDate.month}</p>
-          <p>{expiryDate.month && '/'}</p>
-          <p>{expiryDate.year}</p>
+          <span>{expiryDate.month}</span>
+          <span>{expiryDate.month && '/'}</span>
+          <span>{expiryDate.year}</span>
         </ExpiryDateWrapper>
 
         <CardholderNameWrapper>
