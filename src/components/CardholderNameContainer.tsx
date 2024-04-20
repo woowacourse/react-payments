@@ -19,14 +19,18 @@ const CardholderNameContainer = ({
 
   return (
     <div>
-      <RegistrationLayout title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
+      <RegistrationLayout
+        title="카드 소유자 이름 입력을 입력해 주세요"
+        labelText="소유자 이름"
+        labelFor="cardholder-name-input"
+      >
         <Input
           id="cardholder-name-input"
           isError={!!errorMessage}
           value={cardholderName}
           onChange={handleChange}
           onBlur={updateErrorMessage}
-          placeholder="카드 소유자 이름을 입력해주세요"
+          placeholder="JOHN DOE"
           width="100%"
           maxLength={100}
         />
