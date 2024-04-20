@@ -13,35 +13,34 @@ const CardLogoWrapper = styled.img`
 `;
 
 const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
-  let cardType = "";
+  if (cardNumbers.length === 0) return;
 
-  if (!cardNumbers || cardNumbers.length === 0) {
-    return;
-  }
+  const isVisa = (firstCardNumber: string) => {
+    return firstCardNumber.startsWith("4");
+  };
+
+  const isMasterCard = (firstCardNumber: string) => {
+    const firstTwoDigits = Number(firstCardNumber.slice(0, 2));
+
+    return firstTwoDigits >= 51 && firstTwoDigits <= 55;
+  };
 
   const firstCardNumberObject = cardNumbers
     .slice()
     .reverse()
     .find((item) => item.index === "0");
-  if (!firstCardNumberObject) {
-    cardType = "";
-  } else {
+
+  if (firstCardNumberObject) {
     const firstCardNumber = firstCardNumberObject.currentValue;
 
-    if (firstCardNumber.startsWith("4")) {
-      cardType = Visa;
+    if (isVisa(firstCardNumber)) {
+      return <CardLogoWrapper src={Visa} />;
     }
 
-    if (firstCardNumber.startsWith("5")) {
-      const firstTwoDigits = firstCardNumber.slice(0, 2);
-      if (Number(firstTwoDigits) >= 51 && Number(firstTwoDigits) <= 55) {
-        cardType = MasterCard;
-      }
+    if (isMasterCard(firstCardNumber)) {
+      return <CardLogoWrapper src={MasterCard} />;
     }
   }
-
-  if (cardType === Visa || cardType === MasterCard)
-    return <CardLogoWrapper src={cardType} />;
 };
 
 export default CardLogo;
