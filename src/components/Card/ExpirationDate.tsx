@@ -5,23 +5,16 @@ const ExpirationDate = ({
 }: {
   expirationDate: Map<string, string>;
 }) => {
-  const keyArray = [...expirationDate.keys()];
+  const month = expirationDate.get("0");
+  const year = expirationDate.get("1");
 
   return (
     <div
       style={{ display: "flex", justifyContent: "flex-start", height: "20px" }}
     >
-      {
-        <ExpirationDateStyled key={keyArray[0]}>
-          {expirationDate.get("0")}
-          {expirationDate.get("1") && (
-            <ExpirationDateStyled>/</ExpirationDateStyled>
-          )}
-        </ExpirationDateStyled>
-      }
-      {expirationDate.get("1") && (
-        <ExpirationDateStyled key={keyArray[1]}>
-          {expirationDate.get("1")}
+      {month && (
+        <ExpirationDateStyled>
+          {month}/{year && <ExpirationDateStyled>{year}</ExpirationDateStyled>}
         </ExpirationDateStyled>
       )}
     </div>
