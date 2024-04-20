@@ -5,6 +5,7 @@ const ERROR_MESSAGES = {
   INVALID_YEAR: '카드의 유효한 유효기간(년도)을 입력해주세요.',
   INVALID_ONLY_NUMBER: '숫자만 입력해주세요.',
   INVALID_ONLY_UPPERCASE: '영대문자로만 입력해주세요.',
+  INVALID_CARD_NUMBER_LENGTH: '카드 번호를 4자리씩 입력해주세요.',
 };
 
 export default ERROR_MESSAGES;
