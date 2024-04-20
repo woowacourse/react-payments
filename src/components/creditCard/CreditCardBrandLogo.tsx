@@ -4,6 +4,10 @@ import styled from "@emotion/styled";
 import VisaCard from "/public/img/Visa.png";
 import MasterCard from "/public/img/Mastercard.png";
 
+interface CreditCardBrandLogoProps {
+  creditCardNumber: CardNumber;
+}
+
 const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
   const twoDigits = 2;
 
@@ -11,7 +15,7 @@ const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => 
     return Number(creditCardNumber.slice(0, 2));
 };
 
-const CreditCardBrandLogo = (creditCardNumber: CardNumber): JSX.Element | undefined => {
+const CreditCardBrandLogo = ({ creditCardNumber }: CreditCardBrandLogoProps) => {
   const firstTwoNumber = getFirstTwoNumber(creditCardNumber);
   if (!firstTwoNumber) return;
 

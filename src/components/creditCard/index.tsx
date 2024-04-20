@@ -4,11 +4,15 @@ import CreditCardInfo from "./CreditCardInfo";
 import { CreditCardProps } from "../../@types/CreditCard";
 
 const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
+  const cardFirstFourNumber = creditCardNumber[0];
+
   return (
     <CreditCardContainer>
       <CreditCardHeader>
         <YellowBox />
-        <BrandLogoBox>{CreditCardBrandLogo(creditCardNumber[0])}</BrandLogoBox>
+        <BrandLogoBox>
+          <CreditCardBrandLogo creditCardNumber={cardFirstFourNumber} />
+        </BrandLogoBox>
       </CreditCardHeader>
       <CreditCardInfo
         creditCardNumber={creditCardNumber}
