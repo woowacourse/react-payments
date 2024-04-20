@@ -10,12 +10,12 @@ type Brand = 'visa' | 'master' | null;
 const getCardbrand = (cardNumbers: CardInfo['cardNumbers']): Brand => {
   const { visa, master } = CARD_BRAND;
 
-  if (cardNumbers[0].startsWith(visa.startNumber.toString())) return 'visa';
+  const visaPrefix = Number(cardNumbers[0].slice(0, 1));
+  const masterPrefix = Number(cardNumbers[0].slice(0, 2));
 
-  if (
-    Number(cardNumbers[0].slice(0, 2)) >= master.startNumber &&
-    Number(cardNumbers[0].slice(0, 2)) <= master.endNumber
-  )
+  if (visaPrefix === visa.startNumber) return 'visa';
+
+  if (masterPrefix >= master.startNumber && masterPrefix <= master.endNumber)
     return 'master';
 
   return null;
