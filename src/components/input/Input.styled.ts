@@ -12,9 +12,17 @@ export const Input = styled.input<InputProps>`
   outline: none;
   border: 1px solid #acacac;
 
+  &:focus {
+    border: 1px solid ${(props) => (props.isError ? "#FF3D3D" : "#000000")};
+  }
+
+  &::placeholder {
+    color: #acacac;
+  }
+
   ${(props) =>
     props.isError &&
     `
-    border-color: red;
+    border-color: #FF3D3D;
   `}
 `;
