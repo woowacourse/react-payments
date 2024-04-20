@@ -5,6 +5,7 @@ import {
   MASK_START_INDEX,
   SYMBOLS,
 } from '../../constants/cardInfo';
+import clsx from 'clsx';
 
 type Brand = 'visa' | 'master' | null;
 
@@ -42,7 +43,7 @@ const CardPreview = ({ cardNumbers, expirationDate, ownerName }: CardInfo) => {
             return (
               <span
                 key={index}
-                className={`${styles.cardNumber} ${isMask && styles.mask}`}
+                className={clsx(styles.cardNumber, { [styles.mask]: isMask })}
               >
                 {index >= MASK_START_INDEX
                   ? SYMBOLS.mask.repeat(cardNumber.length)

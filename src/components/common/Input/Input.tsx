@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './Input.module.css';
+import clsx from 'clsx';
 interface InputProps {
   id: string;
   value: string;
@@ -31,7 +32,7 @@ export default function Input({
       required={isRequired}
       onChange={handleChange}
       onBlur={handleOnBlur}
-      className={`${styles.input} ${isError && styles.error}`}
+      className={clsx(styles.input, { [styles.error]: isError })}
     />
   );
 }

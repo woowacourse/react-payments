@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import styles from './Label.module.css';
 
 interface LabelProps {
@@ -14,7 +15,7 @@ export default function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={`${hideLabel ? styles.hide : styles.label}`}
+      className={clsx(styles.label, { [styles.hide]: hideLabel })}
     >
       {labelText}
     </label>
