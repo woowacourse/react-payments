@@ -27,3 +27,12 @@ export const Default: Story = {
     handleErrorMessage: mockSetErrorMessages,
   },
 };
+
+export const Error: Story = {
+  args: {
+    info: mockInfo.inputInfo[mockIndex],
+    handleInput: mockHandleInput,
+    isError: true,
+    handleErrorMessage: mockSetErrorMessages,
+  },
+};

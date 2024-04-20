@@ -41,28 +41,23 @@ export const Default: Story = {
   },
 };
 
-// export const CARD_NUMBER_FIELD: Story = {
-//   args: {
-//     inputTypes: INPUT_TYPE_CATEGORIES.CARD_NUMBER,
-//     handleInput: mockHandleInput,
-//   },
-// };
+export const CARD_NUMBER_FIELD: Story = {
+  args: {
+    inputTypes: INPUT_TYPE_CATEGORIES.CARD_NUMBER,
+    handleInput: mockHandleInput,
+  },
+};
 
-// export const EXPIRY_DATE_FIELD: Story = {
-//   args: {
-//     title: '카드 유효기간을 입력해 주세요',
-//     subtitle: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-//     inputTypes: INPUT_TYPE_CATEGORIES.EXPIRY_DATE,
-//     cardInfo: mockCardInfo,
-//     handleInput: mockHandleInput,
-//   },
-// };
+export const EXPIRY_DATE_FIELD: Story = {
+  args: {
+    inputTypes: INPUT_TYPE_CATEGORIES.EXPIRY_DATE,
+    handleInput: mockHandleInput,
+  },
+};
 
-// export const USER_NAME_FIELD: Story = {
-//   args: {
-//     title: '카드 소유자 이름을 입력해 주세요',
-//     inputTypes: INPUT_TYPE_CATEGORIES.USER_NAME,
-//     cardInfo: mockCardInfo,
-//     handleInput: mockHandleInput,
-//   },
-// };
+export const USER_NAME_FIELD: Story = {
+  args: {
+    inputTypes: INPUT_TYPE_CATEGORIES.USER_NAME,
+    handleInput: mockHandleInput,
+  },
+};
