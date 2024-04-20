@@ -137,10 +137,11 @@ export default function CardExpirationPeriodInput(
   };
 
   const getErrorMessage = () => {
-    if (error.availability) return ERROR_MESSAGE.cardExpirationPeriod.period;
+    const { cardExpirationPeriod } = ERROR_MESSAGE;
 
-    if (error.month || error.year)
-      return ERROR_MESSAGE.cardExpirationPeriod.number;
+    if (error.availability) return cardExpirationPeriod.availability;
+    if (error.month) return cardExpirationPeriod.month;
+    if (error.year) return cardExpirationPeriod.year;
 
     return undefined;
   };
@@ -172,7 +173,12 @@ export default function CardExpirationPeriodInput(
               error={error.year || error.availability}
             />
           </div>
-          <FormErrorMessage errorMessage={getErrorMessage()} />
+
+          <FormErrorMessage>
+            {getErrorMessage()
+              ?.split('\n')
+              .map((item) => <p>{item}</p>)}
+          </FormErrorMessage>
         </div>
       </CardInput>
     </CardInputContainer>

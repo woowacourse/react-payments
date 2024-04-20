@@ -1,13 +1,14 @@
+import { ReactNode } from 'react';
+
 import styles from './style.module.css';
 
 interface FormErrorMessageProps {
-  errorMessage?: string;
+  children: ReactNode;
 }
-
 function FormErrorMessage(props: FormErrorMessageProps) {
-  const { errorMessage } = props;
+  const { children } = props;
 
-  return <div className={styles.message}>{errorMessage}</div>;
+  return <div className={styles.message}>{children}</div>;
 }
 
 export default FormErrorMessage;

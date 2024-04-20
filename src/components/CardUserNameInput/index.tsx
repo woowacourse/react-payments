@@ -66,7 +66,9 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
               error={error}
             />
           </div>
-          <FormErrorMessage errorMessage={getErrorMessage()} />
+          <FormErrorMessage>
+            <p>{getErrorMessage()}</p>
+          </FormErrorMessage>
         </div>
       </CardInput>
     </CardInputContainer>

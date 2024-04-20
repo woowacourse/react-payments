@@ -96,7 +96,9 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
           ))}
         </div>
       </CardInput>
-      <FormErrorMessage errorMessage={getErrorMessage()} />
+      <FormErrorMessage>
+        <p> {getErrorMessage()}</p>
+      </FormErrorMessage>
     </CardInputContainer>
   );
 }
