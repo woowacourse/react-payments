@@ -3,13 +3,12 @@ import { Card } from '../types/card';
 import InputField from './InputField';
 import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 
-export default function InputForm({
-  cardInfo,
-  handleInput,
-}: {
+interface Props {
   cardInfo: Card;
   handleInput: (value: Card) => void;
-}) {
+}
+
+export default function InputForm({ cardInfo, handleInput }: Props) {
   const handleCardNumberInput = (value: { [key: string]: string }) => {
     handleInput({
       ...cardInfo,
