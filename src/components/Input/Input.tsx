@@ -1,6 +1,6 @@
 import S from "./style";
 
-interface Props extends React.HTMLProps<HTMLInputElement> {
+interface Props extends React.ComponentPropsWithRef<"input"> {
   isError: boolean;
 }
 

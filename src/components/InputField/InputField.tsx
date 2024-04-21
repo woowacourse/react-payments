@@ -1,6 +1,5 @@
 import { ChangeEventHandler, ReactNode } from "react";
 import S from "./style";
-import { findFirstFilledElementIndex } from "../utils/arrayHelper";
 
 interface Props {
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -15,10 +14,12 @@ const InputField = ({ label, errorMessages, children }: Props) => {
       <S.Label>{label}</S.Label>
       <S.InputsWrapper>{children}</S.InputsWrapper>
       <S.ErrorMessageWrapper>
-        {errorMessages[findFirstFilledElementIndex(errorMessages)]}
+        {errorMessages.find((e) => e.length)}
       </S.ErrorMessageWrapper>
     </S.InputFieldWrapper>
   );
 };
 
 export default InputField;
+
+//[findFirstFilledElementIndex(errorMessages)];

@@ -1,36 +1,27 @@
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
-import useInput from "@/hooks/useInput";
 import {
   CARD_BRAND_INFO,
   INPUT_COUNTS,
   MAX_LENGTH,
-  VALID_LENGTH,
 } from "@/constants/condition";
-import { makeStringArray } from "@/components/utils/arrayHelper";
-import {
-  validateExpirationDate,
-  validateOwnerName,
-} from "@/components/utils/validation";
+import useInputs from "@/hooks/useInputs";
+import { makeStringArray } from "@/utils/arrayHelper";
 
 const CardRegisterPage = () => {
-  const cardNumbersState = useInput({
+  const cardNumbersState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
     maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
-    validLength: VALID_LENGTH.CARD_NUMBERS,
   });
 
-  const expiredDateState = useInput({
+  const expiredDateState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
     maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
-    validLength: VALID_LENGTH.EXPIRATION_PERIOD,
-    onBlurValidate: validateExpirationDate,
   });
 
-  const ownerNameState = useInput({
+  const ownerNameState = useInputs({
     initialValue: makeStringArray(1),
-    onChangeValidate: validateOwnerName,
   });
 
   const checkCardBrand = (cardNumbers: string[]) => {
@@ -50,10 +41,10 @@ const CardRegisterPage = () => {
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CreditCardPreview
-          cardType={checkCardBrand(cardNumbersState.input)}
-          cardNumbers={cardNumbersState.input}
-          expirationDate={expiredDateState.input}
-          ownerName={ownerNameState.input[0]}
+          cardType={checkCardBrand(cardNumbersState.inputs)}
+          cardNumbers={cardNumbersState.inputs}
+          expirationDate={expiredDateState.inputs}
+          ownerName={ownerNameState.inputs[0]}
         />
         <CardRegisterForm
           cardNumbersState={cardNumbersState}

@@ -1,5 +1,4 @@
-import { ChangeEvent, FocusEvent } from "react";
-import useInput from "@/hooks/useInput";
+import { ChangeEvent, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
@@ -11,12 +10,19 @@ import {
   INPUT_LABEL,
   PLACEHOLDER,
 } from "@/constants/message";
+import {
+  validateExpirationDate,
+  validateIsValidLength,
+  validateMonth,
+  validateOwnerName,
+} from "@/utils/validation";
+import useInputs from "@/hooks/useInputs";
 import { MAX_LENGTH } from "@/constants/condition";
 
 interface Props {
-  cardNumbersState: ReturnType<typeof useInput>;
-  expiredPeriodState: ReturnType<typeof useInput>;
-  ownerNameState: ReturnType<typeof useInput>;
+  cardNumbersState: ReturnType<typeof useInputs>;
+  expiredPeriodState: ReturnType<typeof useInputs>;
+  ownerNameState: ReturnType<typeof useInputs>;
 }
 
 const CardRegisterForm = ({
@@ -24,23 +30,47 @@ const CardRegisterForm = ({
   expiredPeriodState,
   ownerNameState,
 }: Props) => {
-  const {
-    input: cardNumbers,
-    onChange: onChangeCardNumbers,
-    errorMessages: cardNumbersErrorMessages,
-    onBlur: onBlurCardNumbers,
-  } = cardNumbersState;
+  const { inputs: cardNumbers, onChange: onChangeCardNumbers } =
+    cardNumbersState;
 
-  const {
-    input: expirationPeriod,
-    onChange: onChangeExpirationPeriod,
-    errorMessages: expirationPeriodErrorMessages,
-    onBlur: onBlurExpirationPeriod,
-  } = expiredPeriodState;
+  const { inputs: expirationPeriod, onChange: onChangeExpirationPeriod } =
+    expiredPeriodState;
 
-  const { onChange: onChangeOwnerName, errorMessages: ownerNameErrorMessages } =
-    ownerNameState;
+  const { inputs: ownerName, onChange: onChangeOwnerName } = ownerNameState;
 
+  const [cardNumbersErrorMessages, setCardNumbersErrorMessages] = useState(
+    Array(cardNumbers.length).fill("")
+  );
+  const [expirationPeriodErrorMessages, setExpirationPeriodErrorMessages] =
+    useState(Array(expirationPeriod.length).fill(""));
+  const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState("");
+
+  const handleCardNumberBlur = (index: number) => {
+    const errorMessage = validateIsValidLength(cardNumbers[index], 4);
+    setCardNumbersErrorMessages((messages) => [
+      ...messages.slice(0, index),
+      errorMessage,
+      ...messages.slice(index + 1),
+    ]);
+  };
+
+  const handleExpirationPeriodBlur = (index: number) => {
+    const monthError =
+      index === 0 ? validateMonth(Number(expirationPeriod[index])) : "";
+    const lengthError = validateIsValidLength(expirationPeriod[index], 2);
+    const expiredError = validateExpirationDate(expirationPeriod);
+    const errorMessage = monthError || lengthError || expiredError;
+    setExpirationPeriodErrorMessages((messages) => [
+      ...messages.slice(0, index),
+      errorMessage,
+      ...messages.slice(index + 1),
+    ]);
+  };
+
+  const handleOwnerNameBlur = () => {
+    const errorMessage = validateOwnerName(ownerName[0]);
+    setOwnerNameErrorMessage(errorMessage);
+  };
   return (
     <S.CardFormWrapper>
       {/*카드 번호*/}
@@ -53,18 +83,19 @@ const CardRegisterForm = ({
           label={INPUT_LABEL.CARD_NUMBERS}
           errorMessages={cardNumbersErrorMessages}
         >
-          {cardNumbers.map((_, index) => (
+          {cardNumbers.map((_: string, index: number) => (
             <Input
+              maxLength={20}
               type="number"
               key={index}
               placeholder={PLACEHOLDER.CARD_NUMBERS}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChange={(e) => {
                 onChangeCardNumbers(e, index);
               }}
-              onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurCardNumbers(e, index);
-              }}
-              isError={!!cardNumbersErrorMessages[index].length}
+              onBlur={() => handleCardNumberBlur(index)}
+              isError={
+                !!(cardNumbers[index] && cardNumbersErrorMessages[index].length)
+              }
             />
           ))}
         </InputField>
@@ -78,9 +109,9 @@ const CardRegisterForm = ({
         />
         <InputField
           label={INPUT_LABEL.EXPIRATION_DATE}
-          errorMessages={cardNumbersErrorMessages}
+          errorMessages={expirationPeriodErrorMessages}
         >
-          {expirationPeriod.map((_, index) => (
+          {expirationPeriod.map((_: string, index: number) => (
             <Input
               type="number"
               key={index}
@@ -88,10 +119,15 @@ const CardRegisterForm = ({
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 onChangeExpirationPeriod(e, index);
               }}
-              onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurExpirationPeriod(e, index);
+              onBlur={() => {
+                handleExpirationPeriodBlur(index);
               }}
-              isError={!!expirationPeriodErrorMessages[index].length}
+              isError={
+                !!(
+                  expirationPeriod[index] &&
+                  expirationPeriodErrorMessages[index].length
+                )
+              }
             />
           ))}
         </InputField>
@@ -102,16 +138,19 @@ const CardRegisterForm = ({
         <InputFieldHeader title={INPUT_INFO_TITLE.OWNER_NAME} />
         <InputField
           label={INPUT_LABEL.OWNER_NAME}
-          errorMessages={cardNumbersErrorMessages}
+          errorMessages={[ownerNameErrorMessage]}
         >
           <Input
             placeholder={PLACEHOLDER.OWNER_NAME}
-            isError={!!ownerNameErrorMessages[0].length}
+            isError={!!ownerNameErrorMessage.length}
             type="text"
             maxLength={MAX_LENGTH.OWNER_NAME}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               e.target.value = e.target.value.toUpperCase();
               onChangeOwnerName(e, 0);
+            }}
+            onBlur={() => {
+              handleOwnerNameBlur();
             }}
           />
         </InputField>

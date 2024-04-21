@@ -1,8 +1,7 @@
-import { limitNumberLength } from "@/components/utils/numberHelper";
+import { limitNumberLength } from "@/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
-import { makeStringArray } from "@/components/utils/arrayHelper";
-import { ERROR_MESSAGE } from "@/constants/errorMessage";
+import { makeStringArray } from "@/utils/arrayHelper";
 
 interface Props {
   initialValue: string[];
@@ -12,20 +11,20 @@ interface Props {
   validLength?: number;
 }
 
-const useInput = ({
+const useInputs = ({
   initialValue = [],
   onBlurValidate,
   onChangeValidate,
   maxNumberLength: maxLength,
   validLength,
 }: Props) => {
-  const [input, setInput] = useState<string[]>(initialValue);
+  const [inputs, setInputs] = useState<string[]>(initialValue);
   const [errorMessages, setErrorMessages] = useState(
     makeStringArray(initialValue.length)
   );
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
-    setErrorMessages((prev) => {
+    setErrorMessages((prev: string[]) => {
       const newErrorMessages = [...prev];
       newErrorMessages[index] = errorMessage;
       return newErrorMessages;
@@ -65,7 +64,7 @@ const useInput = ({
       updateErrorMessages("", index);
     }
 
-    setInput((prev) => {
+    setInputs((prev) => {
       const newInput = [...prev];
       newInput[index] = newValue;
       return newInput;
@@ -74,14 +73,14 @@ const useInput = ({
 
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
     if (validLength) {
-      if (input[index].length > 0 && input[index].length !== validLength) {
-        updateErrorMessages(ERROR_MESSAGE.INVALID_LENGTH, index);
+      if (inputs[index].length > 0 && inputs[index].length !== validLength) {
+        updateErrorMessages("유효하지 않은 길이입니다.", index);
         return;
       }
     }
 
     if (onBlurValidate) {
-      const errorMessage = onBlurValidate(input);
+      const errorMessage = onBlurValidate(inputs);
       if (errorMessage.length > 0) {
         updateErrorMessages(errorMessage, index);
       } else {
@@ -93,6 +92,6 @@ const useInput = ({
     updateErrorMessages("", index);
   };
 
-  return { input, onChange, errorMessages, onBlur };
+  return { inputs, onChange, errorMessages, onBlur };
 };
-export default useInput;
+export default useInputs;
