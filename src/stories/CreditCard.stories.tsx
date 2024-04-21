@@ -21,7 +21,7 @@ const meta = {
   ],
   argTypes: {
     cardNumbers: {
-      control: 'text',
+      control: 'object',
       description: '카드 번호 입력 값',
     },
     month: {
@@ -58,7 +58,7 @@ export const Default: Story = {
 
 export const Visa: Story = {
   args: {
-    cardNumbers: ['0000', '0000', '0000', '0000'],
+    cardNumbers: ['4000', '0000', '0000', '0000'],
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',
@@ -68,7 +68,7 @@ export const Visa: Story = {
 
 export const Master: Story = {
   args: {
-    cardNumbers: ['0000', '0000', '0000', '0000'],
+    cardNumbers: ['5100', '0000', '0000', '0000'],
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',
