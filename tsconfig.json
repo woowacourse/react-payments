@@ -21,5 +21,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
+  "exclude": ["**/*.mdx", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
