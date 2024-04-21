@@ -12,19 +12,19 @@ export const CardHeader = styled.div`
   padding: 8px 12px 0;
   display: flex;
   justify-content: space-between;
+`;
 
-  & > div {
-    width: 36px;
-    height: 22px;
-    background: rgba(221, 205, 120, 1);
-    border: 0.5px solid rgba(221, 205, 120, 0.1);
-    border-radius: 4px;
-  }
+export const CardIC = styled.div`
+  width: 36px;
+  height: 22px;
+  background: rgba(221, 205, 120, 1);
+  border: 0.5px solid rgba(221, 205, 120, 0.1);
+  border-radius: 4px;
+`;
 
-  & > img {
-    width: 36px;
-    height: 22px;
-  }
+export const CardBrandImg = styled.img`
+  width: 36px;
+  height: 22px;
 `;
 
 export const CardInfoContainer = styled.div`

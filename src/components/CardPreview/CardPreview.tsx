@@ -11,8 +11,8 @@ export default function CardPreview({ cardInformation }: Props) {
   return (
     <S.CardContainer>
       <S.CardHeader>
-        <div></div>
-        {cardBrandImg && <img src={cardBrandImg}></img>}
+        <S.CardIC></S.CardIC>
+        {cardBrandImg && <S.CardBrandImg src={cardBrandImg}></S.CardBrandImg>}
       </S.CardHeader>
       <S.CardInfoContainer>
         <S.CardPreviewTextContainer>
