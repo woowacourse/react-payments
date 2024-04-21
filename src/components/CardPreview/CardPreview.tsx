@@ -1,15 +1,17 @@
 import styles from './CardPreview.module.css';
+import clsx from 'clsx';
 
 import {
   CARD_BRAND,
   MASK_START_INDEX,
   SYMBOLS,
 } from '../../constants/cardInfo';
-import clsx from 'clsx';
 
-type Brand = 'visa' | 'master' | null;
+type Brand = 'visa' | 'master';
 
-const getCardbrand = (cardNumbers: CardInfo['cardNumbers']): Brand => {
+const getCardbrand = (
+  cardNumbers: CardInfo['cardNumbers']
+): Nullable<Brand> => {
   const { visa, master } = CARD_BRAND;
 
   const visaPrefix = Number(cardNumbers[0].slice(0, 1));
