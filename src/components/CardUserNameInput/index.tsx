@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 
 import {
   CARD_USER,
@@ -21,11 +21,11 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
   const [userName, setUserName] = useState('');
-  const [error, setError] = useState(false);
+  const [nameError, setNameError] = useState(false);
 
   const errorMessage = useMemo(
-    () => (error ? ERROR_MESSAGE.userName : undefined),
-    [error],
+    () => (nameError ? ERROR_MESSAGE.userName : undefined),
+    [nameError],
   );
 
   const validateName = (name: string) => {
@@ -34,23 +34,27 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
       name.trim().length >= CARD_USER.length.min;
     const isValidated = isAlphabeticWithSpaces && isMinimumAlphabetLengthMet;
 
-    setError(!isValidated);
+    return isValidated;
+  };
+
+  const handleEditCardUserName = (error: boolean, name: string) => {
+    if (!error || name === '') {
+      // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
+      editCardUserName(name.trim());
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const name = value.toUpperCase();
-
+    // userName 업데이트
     setUserName(name);
-    validateName(value);
+    // 유효성 검사 진행 후 nameError 업데이트
+    const isValidated = validateName(value);
+    setNameError(!isValidated);
+    // cardInfo 업데이트
+    handleEditCardUserName(!isValidated, name);
   };
-
-  useEffect(() => {
-    if (!error || userName === '') {
-      // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-      editCardUserName(userName?.trim());
-    }
-  }, [userName, error]);
 
   return (
     <CardInputContainer title={title}>
@@ -65,7 +69,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
               placeholder={namePlaceholder}
               onChange={handleChange}
               value={userName}
-              error={error}
+              error={nameError}
             />
           </div>
           <InputErrorMessage>

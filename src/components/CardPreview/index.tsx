@@ -17,11 +17,7 @@ function CardPreview(props: CardPreviewProps) {
   const { cardInfo } = props;
   const { mark, numbers, period, userName, color } = cardInfo;
 
-  const markInfo = useMemo(() => {
-    if (!mark) return;
-
-    return CARD_MARK[mark];
-  }, [mark]);
+  const markInfo = useMemo(() => CARD_MARK[mark || 'etc'], [mark]);
 
   const numberList = useMemo(
     () =>

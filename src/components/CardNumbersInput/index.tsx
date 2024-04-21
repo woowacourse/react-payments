@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import {
   CARD_MARK_REGEXP,
@@ -53,6 +53,10 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     return isError ? ERROR_MESSAGE.cardNumber : undefined;
   }, [numbersError]);
 
+  /**
+   * change 이벤트가 일어난 input의 입력값, index에 따라 변경될 numbers를 계산하고 반환하는 함수
+   *  입력값이 있을 경우 이를 설정한 length에서 자르고 반영함
+   */
   const getNewNumbers = useCallback(
     (index: number, value: string) => {
       const newNumbers = [...numbers];
@@ -63,33 +67,40 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     [numbers, length],
   );
 
+  /**
+   * 카드번호 입력값에 대한 유효성 검사를 진행하고, 검사 결과에 따라 numbersError 상태를 업데이트함
+   * @param newNumbers 유효성 검사를 진행할 대상
+   */
   const updateNumbersError = (newNumbers: (number | undefined)[]) => {
     const newNumbersError = newNumbers.map((item) =>
       !item ? true : !CARD_NUMBER_REGEXP.test(item.toString()),
     );
+
     setNumbersError(newNumbersError);
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  /**
+   * 카드 번호 입력 핸들러, 입력값에 따라 numbers,numbersError,cardInfo 상태를 업데이트함
+   */
+  const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
-
+    // numbers 업데이트
     const newNumbers = getNewNumbers(index, value);
     setNumbers(newNumbers);
+    // numbersError 업데이트
     updateNumbersError(newNumbers);
-  };
-
-  useEffect(() => {
+    // cardInfo 변경
     editCardNumbers(numbers);
     editCardMark(cardMark);
-  }, [numbers, cardMark]);
+  };
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
-        <div className={styles.inputWrap} onChange={handleChange}>
+        <div className={styles.inputWrap} onChange={handleNumberChange}>
           {Array.from({ length }).map((_, index) => (
             <Input
               key={`number_${index}`}

@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  FocusEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { ChangeEvent, FocusEvent, useMemo, useState } from 'react';
 
 import {
   CARD_EXPIRATION,
@@ -61,8 +54,10 @@ export default function CardExpirationPeriodInput(
     availability: false,
   };
 
-  const [error, setError] = useState<PeriodError>(INITIAL_ERROR);
-
+  const [periodError, setPeriodError] = useState<PeriodError>(INITIAL_ERROR);
+  /**
+   * 오늘 기준 연도,월
+   */
   const currentDate = useMemo(() => {
     const today = new Date();
 
@@ -75,13 +70,31 @@ export default function CardExpirationPeriodInput(
   const errorMessage = useMemo(() => {
     const { cardExpirationPeriod } = ERROR_MESSAGE;
 
-    if (error.availability) return cardExpirationPeriod.availability;
-    if (error.month) return cardExpirationPeriod.month;
-    if (error.year) return cardExpirationPeriod.year;
+    if (periodError.availability) return cardExpirationPeriod.availability;
+    if (periodError.month) return cardExpirationPeriod.month;
+    if (periodError.year) return cardExpirationPeriod.year;
 
     return undefined;
-  }, [error]);
-  // 유효기간 검사
+  }, [periodError]);
+
+  /**
+   * 유효기간에 오류가 없을 때 cardInfo의 period 수정하는 함수
+   */
+  const handleEditCardPeriod = (
+    newPeriodError: PeriodError | undefined,
+    newCardPeriod: CardPeriod,
+  ) => {
+    // 유효기간의 오류 확인
+    if (!newPeriodError) return;
+
+    const isErrorInPeriod = Object.entries(newPeriodError).some(
+      ([_, error]) => error,
+    );
+    if (isErrorInPeriod) return;
+    // 오류 없을 시 cardInfo 업데이트
+    editCardPeriod(newCardPeriod);
+  };
+
   /**
    * month,year을 모두 고려해 현재 기준으로 사용가능한 카드인지 확인하는 함수
    * @returns
@@ -98,6 +111,11 @@ export default function CardExpirationPeriodInput(
     return isOverYear || isOverMonth;
   };
 
+  /**
+   * 변경된 month, year의 형식에 대한 유효성 검사
+   * @param newCardPeriod  입력값 변경에 따른 새로운 cardPeriod
+   * @param key change 이벤트가 발생한 input의 name으로, key에 따라 유효성 검사 대상이 정해짐
+   */
   const validateMonthAndYear = (newCardPeriod: CardPeriod, key: Period) => {
     const value = newCardPeriod[key];
     if (!value) return;
@@ -105,70 +123,68 @@ export default function CardExpirationPeriodInput(
     return value ? CARD_PERIOD_REGEXP[key].test(value) : false;
   };
 
-  const validateCardPeriod = (
-    event: ChangeEvent<HTMLInputElement>,
-    newCardPeriod: CardPeriod,
-  ) => {
-    const { name } = event.target;
+  /**
+   * 카드의 기간에 대한 유효성 검사(카드 유효기간(월,연도)와 사용가능성 여부)를 진행한 후 그 값에 따라 periodError 상태를 업데이트함
+   * @param name  change 이벤트가 발생한 input의 name
+   * @param newCardPeriod 입력값 변경에 따른 새로운 cardPeriod
+   * @returns   name 타입이 맞는 경우에는 변경된 periodError 반환하고 그렇지 않은 경우에는 undefined를 반환
+   */
+  const updatePeriodError = (name: string, newCardPeriod: CardPeriod) => {
     if (!(name === 'month' || name === 'year')) return;
 
     const isValidatedMonthAndYear = validateMonthAndYear(newCardPeriod, name);
     const isValidatedExpiry = validateCardExpiry(newCardPeriod);
-
-    setError({
-      ...error,
+    const newPeriodError: PeriodError = {
+      ...periodError,
       [name]: !isValidatedMonthAndYear,
       availability: !isValidatedExpiry,
-    });
+    };
+    setPeriodError(newPeriodError);
+
+    return newPeriodError;
   };
 
-  const updateCardPeriod = (name: string, value: string) => {
+  /**
+   * 변경된 month,year에 대한 입력값을 바탕으로 cardPeriod,periodError,cardInfo의 period를 변경하는 함수
+   * @param name input의 name
+   * @param value 월,연도의 변경된 입력값
+   */
+  const updateCardPeriodAndError = (name: string, value: string) => {
+    // cardPeriod 업데이트
     const newCardPeriod = { ...cardPeriod, [name]: sliceText(value, length) };
-
     setCardPeriod(newCardPeriod);
-
-    return newCardPeriod;
+    // periodError 업데이트
+    const newPeriodError = updatePeriodError(name, newCardPeriod);
+    // cardInfo 업데이트
+    handleEditCardPeriod(newPeriodError, newCardPeriod);
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePeriodChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (Number.isNaN(value)) return;
 
-    // cardPeriod 업데이트
-    const newCardPeriod = updateCardPeriod(name, value);
-    // 유효성 검사
-    validateCardPeriod(event, newCardPeriod);
+    updateCardPeriodAndError(name, value);
   };
   /**
    * input의 포커스가 나갔을때, value가 한자리 수 이면 앞에 0을 붙여주는 기능
    * @param event
    */
-  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+  const handlePeriodBlur = (event: FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     // value의 값이 유의미한 값이고, 문자 길이가 2자리 이하일때 value 변경
     if (!value || value.length > MIN_NUMBER_OF_VALUE) return;
 
     const text = value !== ZERO ? convertToTwoDigits(Number(value)) : value;
-    updateCardPeriod(name, text);
+    updateCardPeriodAndError(name, text);
   };
-
-  const handleEditCardPeriod = useCallback(() => {
-    if (error.month || error.year) return;
-
-    editCardPeriod(cardPeriod);
-  }, [error, cardPeriod, editCardPeriod]);
-
-  useEffect(() => {
-    handleEditCardPeriod();
-  }, [error, cardPeriod]);
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
         <div
           className={styles.inputWrap}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          onChange={handlePeriodChange}
+          onBlur={handlePeriodBlur}
         >
           <Input
             name="month"
@@ -176,7 +192,7 @@ export default function CardExpirationPeriodInput(
             placeholder={monthPlaceholder}
             label="카드 유효 기간-월"
             value={cardPeriod.month || undefined}
-            error={error.month || error.availability}
+            error={periodError.month || periodError.availability}
           />
           <Input
             name="year"
@@ -184,7 +200,7 @@ export default function CardExpirationPeriodInput(
             label="카드 유효 기간-연도"
             placeholder={yearPlaceholder}
             value={cardPeriod.year || undefined}
-            error={error.year || error.availability}
+            error={periodError.year || periodError.availability}
           />
         </div>
         <InputErrorMessage>
