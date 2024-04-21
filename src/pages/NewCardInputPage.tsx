@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import InputPageLayout from "../components/layout/InputPageLayout";
+import InputPageLayout from '../components/layout/InputPageLayout';
 
-import Caption from "../components/common/Caption";
-import InputTitle from "../components/common/InputTitle";
+import Caption from '../components/common/Caption';
+import Title from '../components/common/Title';
 
-import CardPreview from "../components/CardPreview/CardPreview";
-import CardNumberInput from "../components/CardNumberInput";
-import ExpirationDateInput from "../components/ExpirationDateInput";
-import CardOwnerNameInput from "../components/CardOwnerNameInput";
+import CardPreview from '../components/CardPreview/CardPreview';
+import CardNumberInput from '../components/CardNumberInput';
+import ExpirationDateInput from '../components/ExpirationDateInput';
+import CardOwnerNameInput from '../components/CardOwnerNameInput';
 
-import { CARD_META_INFO } from "../constants/card-app";
+import { CARD_META_INFO } from '../constants/card-app';
 
-import { CardInfo } from "../types/card";
+import { CardInfo } from '../types/card';
 
 const NewCardInputPage = () => {
   const [newCardInfo, setNewCardInfo] = useState<CardInfo>({
-    cardNumbers: ["", "", "", ""],
-    expirationDate: ["", ""],
-    cardOwnerName: "",
+    cardNumbers: ['', '', '', ''],
+    expirationDate: ['', ''],
+    cardOwnerName: '',
   });
 
   const handleCardNumberChange = (index: number, value: string) => {
@@ -58,31 +58,31 @@ const NewCardInputPage = () => {
     <InputPageLayout>
       <CardPreview cardInfo={newCardInfo} />
 
-      <InputTitle text={CARD_META_INFO.cardNumbers.query!} />
-      <Caption text={CARD_META_INFO.cardNumbers.caption!} type="input" />
+      <Title content={CARD_META_INFO.cardNumbers.query!} />
+      <Caption text={CARD_META_INFO.cardNumbers.caption!} type='input' />
       <CardNumberInput
         cardNumbers={newCardInfo.cardNumbers}
         errorCaption={(errorText: string) => (
-          <Caption text={errorText} type="error" />
+          <Caption text={errorText} type='error' />
         )}
         onCardNumberChange={handleCardNumberChange}
       />
 
-      <InputTitle text={CARD_META_INFO.expirationDate.query!} />
-      <Caption text={CARD_META_INFO.expirationDate.caption!} type="input" />
+      <Title content={CARD_META_INFO.expirationDate.query!} />
+      <Caption text={CARD_META_INFO.expirationDate.caption!} type='input' />
       <ExpirationDateInput
         expirationDate={newCardInfo.expirationDate}
         errorCaption={(errorText: string) => (
-          <Caption text={errorText} type="error" />
+          <Caption text={errorText} type='error' />
         )}
         onExpirationDateChange={handleExpirationDateChange}
       />
 
-      <InputTitle text={CARD_META_INFO.cardOwnerName.query!} />
+      <Title content={CARD_META_INFO.cardOwnerName.query!} />
       <CardOwnerNameInput
         ownerName={newCardInfo.cardOwnerName}
         errorCaption={(errorText: string) => (
-          <Caption text={errorText} type="error" />
+          <Caption text={errorText} type='error' />
         )}
         onCardOwnerNameChange={handleCardOwnerNameChange}
       />
