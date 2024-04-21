@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface RegistrationLayoutProps {
+export interface InputSectionProps {
   title: string;
   subtitle?: string;
   labelText: string;
@@ -9,13 +9,7 @@ export interface RegistrationLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RegistrationLayout({
-  title,
-  subtitle,
-  labelText,
-  labelFor,
-  children,
-}: RegistrationLayoutProps) {
+export default function InputSection({ title, subtitle, labelText, labelFor, children }: InputSectionProps) {
   return (
     <Container>
       <Title>{title}</Title>

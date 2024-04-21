@@ -1,6 +1,6 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import RegistrationLayout from './common/RegistrationLayout';
+import InputSection from './common/InputSection';
 import { IErrorStatus } from '../validators/index.d';
 
 type MM = string;
@@ -29,7 +29,7 @@ const CardExpiryDateContainer = ({
 
   return (
     <div>
-      <RegistrationLayout
+      <InputSection
         title="카드 유효기간을 입력해 주세요"
         subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         labelText="유효기간"
@@ -55,7 +55,7 @@ const CardExpiryDateContainer = ({
           maxLength={2}
           width="48%"
         />
-      </RegistrationLayout>
+      </InputSection>
       <ErrorWrapper>
         <ErrorText>{monthErrorStatus.errorMessage}</ErrorText>
         <ErrorText>{yearErrorStatus.errorMessage}</ErrorText>

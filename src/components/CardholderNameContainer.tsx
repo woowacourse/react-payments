@@ -1,6 +1,6 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import RegistrationLayout from './common/RegistrationLayout';
+import InputSection from './common/InputSection';
 
 interface CardholderNameContainerProps {
   data: string;
@@ -14,7 +14,7 @@ const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus
 
   return (
     <div>
-      <RegistrationLayout title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
+      <InputSection title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
         <Input
           id="cardholder-name-input"
           isError={errorStatus.isError}
@@ -25,7 +25,7 @@ const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus
           width="100%"
           maxLength={100}
         />
-      </RegistrationLayout>
+      </InputSection>
       <ErrorWrapper>
         <ErrorText>{errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>

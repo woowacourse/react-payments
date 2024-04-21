@@ -1,6 +1,6 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import RegistrationLayout from './common/RegistrationLayout';
+import InputSection from './common/InputSection';
 import getObjectKeys from '../utils/getObjectKeys';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
@@ -31,7 +31,7 @@ export default function CardNumberContainer({
 
   return (
     <div>
-      <RegistrationLayout
+      <InputSection
         title="결제할 카드 번호를 입력해 주세요"
         subtitle="본인 명의의 카드만 결제 가능합니다."
         labelText="카드 번호"
@@ -55,7 +55,7 @@ export default function CardNumberContainer({
             />
           );
         })}
-      </RegistrationLayout>
+      </InputSection>
       <ErrorWrapper>
         <ErrorText>{errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
