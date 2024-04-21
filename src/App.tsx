@@ -13,11 +13,11 @@ const App = () => {
   return (
     <AppLayout>
       <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
-      <CardInfoWrapper>
+      <CardInfoInputWrapper>
         <CardNumbersInputContainer {...cardNumbers} />
         <CardExpiryDateInputContainer {...expiryDate} />
         <CardholderNameInputContainer {...cardholderName} />
-      </CardInfoWrapper>
+      </CardInfoInputWrapper>
     </AppLayout>
   );
 };
@@ -29,7 +29,7 @@ const AppLayout = styled.div`
   padding-top: 60px;
 `;
 
-const CardInfoWrapper = styled.section`
+const CardInfoInputWrapper = styled.section`
   margin-top: 50px;
 `;
 
