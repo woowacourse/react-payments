@@ -1,62 +1,49 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import { ChangeEvent, Dispatch, FocusEvent, FocusEventHandler, SetStateAction, useState } from 'react';
+import Input from '../../common/Input/Input';
+import styles from '../../../App.module.css';
 
-import {
-  CARD_NUMBER_UNIT_PLACEHOLDER,
-  CARD_NUMBER_UNIT_LENGTH,
-} from "../../../constants";
+import { CARD_NUMBER_UNIT_PLACEHOLDER, CARD_NUMBER_UNIT_LENGTH } from '../../../constants/input';
+import { ERROR_MESSAGES } from '../../../constants/errorMessages';
+import useErrorMessages from '../../../hooks/useErrorMessages';
 
-export default function CardNumbersInputField({
-  cardNumbers,
-  setCardNumbers,
-}: {
+type CardNumberInputField = {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
-}) {
-  const [errorMessages, setErrorMessages] = useState<[number, string][]>([]);
-  const [visibleErrorMessage, setVisibleErrorMessage] = useState<
-    [number, string] | []
-  >([]);
+};
 
-  const updateErrorMessage = (index: number, message: string) => {
-    const errorMessageIndex = errorMessages.findIndex(([i, _]) => i === index);
+export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: CardNumberInputField) {
+  const { errorMessages, setErrorMessages } = useErrorMessages(cardNumbers.length);
 
-    if (errorMessageIndex === -1)
-      setErrorMessages([...errorMessages, [index, message]]);
-    else {
-      const updatedErrorMessages = [...errorMessages];
-      updatedErrorMessages[errorMessageIndex] = [index, message];
-      setErrorMessages(updatedErrorMessages);
+  const getErrorMessage = (numberUnit: string) => {
+    if (isNaN(Number(numberUnit)) && numberUnit.length !== 0) {
+      return ERROR_MESSAGES.NOT_NUMBER;
     }
+
+    return '';
   };
 
-  const removeErrorMessage = (index: number) => {
-    const prevErrorMessages = [...errorMessages];
-    setErrorMessages(prevErrorMessages.filter(([i]) => i !== index));
-  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const number = e.target.value;
 
-  const handleChange = (e: any, index: number) => {
-    if (isNaN(Number(e.target.value)) && e.target.value.length !== 0) {
-      setVisibleErrorMessage([index, "숫자를 입력해주세요."]);
-      return;
-    }
+    const errorMessage = getErrorMessage(number);
+    setErrorMessages(errorMessage, index);
 
-    if (e.target.value.length < 4) {
-      updateErrorMessage(index, "4개의 숫자를 입력해주세요.");
-    }
-
-    setVisibleErrorMessage([]);
+    if (errorMessage !== '') return;
 
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
     setCardNumbers(updatedCardNumbers);
-
-    if (e.target.value.length === 4) removeErrorMessage(index);
   };
 
-  const checkError = (index: number): boolean => {
-    return errorMessages.filter(([i]) => i === index).length === 1;
+  const handleInputBlur = (e: FocusEvent<HTMLInputElement>, index: number) => {
+    const number = cardNumbers[index];
+    if (number.length < CARD_NUMBER_UNIT_LENGTH) {
+      setErrorMessages(ERROR_MESSAGES.CARD_NUMBER_UNIT_LENGTH, index);
+
+      return;
+    }
+
+    setErrorMessages('', index);
   };
 
   return (
@@ -69,17 +56,14 @@ export default function CardNumbersInputField({
             placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
             maxLength={CARD_NUMBER_UNIT_LENGTH}
             value={cardNumber}
-            type={i >= cardNumbers.length / 2 ? "password" : "type"}
-            isError={checkError(i)}
+            type={i >= cardNumbers.length / 2 ? 'password' : 'type'}
+            isError={errorMessages[i] !== ''}
+            onBlur={(e) => handleInputBlur(e, i)}
           />
         ))}
       </div>
-      {(visibleErrorMessage.length !== 0 || errorMessages.length !== 0) && (
-        <div className={styles.error_message}>
-          {visibleErrorMessage.length !== 0
-            ? visibleErrorMessage[1]
-            : errorMessages[errorMessages.length - 1][1]}
-        </div>
+      {errorMessages.some((message) => message !== '') && (
+        <div className={styles.error_message}>{errorMessages.find((message) => message !== '')}</div>
       )}
     </>
   );
