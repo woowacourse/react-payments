@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import useInput from '../hooks/useInput';
+import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -17,87 +19,23 @@ import {
 
 const ExpirationDateFormSection = ({ ...props }) => {
   const { changeExpiration } = props;
-  const initializeInputFieldState = (length: number) => {
-    return Array.from({ length }, (_, index) => ({
-      value: '',
-      hasError: false,
-      hasFocus: index === 0,
-      isFilled: false,
-    })).reduce((acc, curr, index) => {
-      acc[index] = curr;
-      return acc;
-    }, {} as InputStates);
-  };
 
-  const regex = REGEX.allNumbers;
-
-  const [inputState, setInputState] = useState<InputStates>(
-    initializeInputFieldState(OPTION.expirationDateInputCount),
-  );
-  const [errorMessage, setErrorMessage] = useState('');
   const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
-
-  const handleValueChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-    const isFilled = newValue.length === OPTION.expirationDateMaxLength;
-
-    if (
-      newValue.length <= OPTION.expirationDateMaxLength &&
-      !regex.test(newValue)
-    ) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, newValue.length - 1),
-          hasError: true,
-        },
-      }));
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
-    } else if (newValue.length > OPTION.expirationDateMaxLength) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, OPTION.expirationDateMaxLength),
-          hasError: false,
-        },
-      }));
-    } else {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue,
-          hasError: false,
-          isFilled: isFilled,
-        },
-      }));
-    }
-  };
-
-  const setFocus = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-  };
-
-  const setBlur = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-  };
+  const {
+    inputState,
+    errorMessage,
+    setInputState,
+    setErrorMessage,
+    handleValueChange,
+    setFocus,
+    setBlur,
+    resetErrors,
+  } = useInput({
+    inputLength: OPTION.expirationDateInputCount,
+    maxLength: OPTION.expirationDateMaxLength,
+    regex: REGEX.allNumbers,
+    errorText: ERROR_MESSAGE.onlyNumber,
+  });
 
   const formatMonth = () => {
     if (REGEX.oneToNine.test(inputState[0].value)) {
@@ -131,35 +69,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
     }
   };
 
-  useEffect(() => {
-    formatMonth();
-  }, [inputState[0].hasFocus]);
-
-  useEffect(() => {
-    changeExpiration({ month: inputState[0].value, year: inputState[1].value });
-    setHasNoAllFocus(
-      Object.values(inputState).every((field) => !field.hasFocus),
-    );
-  }, [inputState]);
-
-  useEffect(() => {
-    resetErrors();
-    if (hasNoAllFocus) {
-      handleValidate();
-    }
-  }, [hasNoAllFocus]);
-
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      acc[key] = { ...field, hasError: false };
-      return acc;
-    }, {});
-
-    setInputState(newState);
-    setErrorMessage('');
-  };
-
   const validateExpired = () => {
     const inputExpirationDate = new Date(
       `20${inputState[1].value}-${inputState[0].value}-01`,
@@ -175,28 +84,29 @@ const ExpirationDateFormSection = ({ ...props }) => {
     }
   };
 
-  const handleValidate = () => {
-    let hasAnyError = false;
+  useEffect(() => {
+    formatMonth();
+  }, [inputState[0].hasFocus]);
 
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      if (!field.isFilled) {
-        acc[key] = { ...field, hasError: true };
-        hasAnyError = true;
-      } else {
-        acc[key] = field;
-      }
-      return acc;
-    }, {});
+  useEffect(() => {
+    changeExpiration({ month: inputState[0].value, year: inputState[1].value });
+    setHasNoAllFocus(
+      Object.values(inputState).every((field) => !field.hasFocus),
+    );
+  }, [inputState]);
 
-    setInputState(newState);
-
-    if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.expiryFormat);
-    } else {
-      validateExpired();
+  useEffect(() => {
+    resetErrors();
+    if (hasNoAllFocus) {
+      validateInputAndSetErrorMessage({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        errorText: ERROR_MESSAGE.expiryFormat,
+        elseValidator: validateExpired,
+      });
     }
-  };
+  }, [hasNoAllFocus]);
 
   return (
     <FormSection>

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import useInput from '../hooks/useInput';
+import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -17,85 +19,23 @@ import {
 
 const CardNumbersFormSection = ({ ...props }) => {
   const { changeCardNumber } = props;
-  const initializeInputFieldState = (length: number) => {
-    return Array.from({ length }, (_, index) => ({
-      value: '',
-      hasError: false,
-      hasFocus: index === 0,
-      isFilled: false,
-    })).reduce((acc, curr, index) => {
-      acc[index] = curr;
-      return acc;
-    }, {} as InputStates);
-  };
 
-  const [inputState, setInputState] = useState<InputStates>(
-    initializeInputFieldState(OPTION.cardNumberInputCount),
-  );
-  const [errorMessage, setErrorMessage] = useState('');
+  const {
+    inputState,
+    errorMessage,
+    setInputState,
+    setErrorMessage,
+    handleValueChange,
+    setFocus,
+    setBlur,
+    resetErrors,
+  } = useInput({
+    inputLength: OPTION.cardNumberInputCount,
+    maxLength: OPTION.cardNumberMaxLength,
+    regex: REGEX.numbers,
+    errorText: ERROR_MESSAGE.onlyNumber,
+  });
   const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
-
-  const handleValueChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-    const isFilled = newValue.length === OPTION.cardNumberMaxLength;
-
-    if (
-      newValue.length <= OPTION.cardNumberMaxLength &&
-      !REGEX.numbers.test(newValue)
-    ) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, newValue.length - 1),
-          hasError: true,
-        },
-      }));
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
-    } else if (newValue.length > OPTION.cardNumberMaxLength) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue.slice(0, OPTION.cardNumberMaxLength),
-          hasError: false,
-        },
-      }));
-    } else {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          value: newValue,
-          hasError: false,
-          isFilled: isFilled,
-        },
-      }));
-    }
-  };
-
-  const setFocus = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-  };
-
-  const setBlur = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-  };
 
   useEffect(() => {
     changeCardNumber([
@@ -112,42 +52,14 @@ const CardNumbersFormSection = ({ ...props }) => {
   useEffect(() => {
     resetErrors();
     if (hasNoAllFocus) {
-      handleValidate();
+      validateInputAndSetErrorMessage({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        errorText: ERROR_MESSAGE.cardNumberOutOfRange,
+      });
     }
   }, [hasNoAllFocus]);
-
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      acc[key] = { ...field, hasError: false };
-      return acc;
-    }, {});
-    setInputState(newState);
-    setErrorMessage('');
-  };
-
-  const handleValidate = () => {
-    let hasAnyError = false;
-
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[key];
-      if (!field.isFilled) {
-        acc[key] = { ...field, hasError: true };
-        hasAnyError = true;
-      } else {
-        acc[key] = field;
-      }
-      return acc;
-    }, {});
-
-    setInputState(newState);
-
-    if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.cardNumberOutOfRange);
-    } else {
-      setErrorMessage('');
-    }
-  };
 
   return (
     <FormSection>

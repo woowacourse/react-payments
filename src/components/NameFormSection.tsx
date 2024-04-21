@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import useInput from '../hooks/useInput';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -23,70 +24,27 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
 const NameFormSection = ({ ...props }) => {
   const { changeName } = props;
 
-  const [inputState, setInputState] = useState<InputState>({
-    value: '',
-    hasError: false,
-    hasFocus: false,
-    isFilled: false,
+  const {
+    inputState,
+    errorMessage,
+    handleValueChange,
+    setFocus,
+    setBlur,
+    resetErrors,
+  } = useInput({
+    inputLength: OPTION.nameInputCount,
+    maxLength: OPTION.nameMaxLength,
+    regex: REGEX.name,
+    errorText: ERROR_MESSAGE.onlyEnglish,
   });
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    const isFilled = newValue.length === OPTION.nameMaxLength;
-
-    if (newValue.length <= OPTION.nameMaxLength && !REGEX.name.test(newValue)) {
-      setInputState({
-        ...inputState,
-        value: newValue.slice(0, newValue.length - 1),
-        hasError: true,
-      });
-      setErrorMessage(ERROR_MESSAGE.onlyEnglish);
-    } else if (newValue.length > OPTION.nameMaxLength) {
-      setInputState({
-        ...inputState,
-        value: newValue.slice(0, OPTION.nameMaxLength),
-        hasError: false,
-      });
-    } else {
-      setInputState({
-        ...inputState,
-        value: newValue,
-        hasError: false,
-        isFilled: isFilled,
-      });
-    }
-  };
-
-  const setFocus = () => {
-    setInputState({
-      ...inputState,
-      hasFocus: true,
-    });
-  };
-
-  const setBlur = () => {
-    setInputState({
-      ...inputState,
-      hasFocus: false,
-    });
-  };
 
   useEffect(() => {
     resetErrors();
-  }, [inputState.hasFocus]);
+  }, [inputState[0].hasFocus]);
 
   useEffect(() => {
-    changeName(inputState.value);
-  }, [inputState.value]);
-
-  const resetErrors = () => {
-    setInputState({
-      ...inputState,
-      hasError: false,
-    });
-    setErrorMessage('');
-  };
+    changeName(inputState[0].value);
+  }, [inputState[0].value]);
 
   return (
     <FormSection>
@@ -98,11 +56,11 @@ const NameFormSection = ({ ...props }) => {
             className="name-form-section"
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
-            value={inputState.value}
-            hasError={inputState.hasError}
-            handleValueChange={(e) => handleValueChange(e)}
-            handleOnFocus={setFocus}
-            handleOnBlur={setBlur}
+            value={inputState[0].value}
+            hasError={inputState[0].hasError}
+            handleValueChange={(e) => handleValueChange(e, 0)}
+            handleOnFocus={() => setFocus(0)}
+            handleOnBlur={() => setBlur(0)}
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
