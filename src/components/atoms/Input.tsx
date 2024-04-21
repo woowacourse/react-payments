@@ -1,19 +1,13 @@
-import { useState } from "react";
+import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
-const SInput = styled.input<{
-  isErrorOnChange: boolean;
-  isErrorOnBlur: boolean;
-}>`
+const SInput = styled.input<{ isError: boolean }>`
   width: 100%;
   height: 15px;
   padding: 8px 15px 8px 8px;
   gap: 8px;
   border: 1px solid
-    ${(props) =>
-      props.isErrorOnChange || props.isErrorOnBlur
-        ? "red"
-        : "rgba(172, 172, 172, 1)"};
+    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
   border-radius: 2px;
   font-family: Inter;
   font-size: 11px;
@@ -26,44 +20,34 @@ const SInput = styled.input<{
   }
 `;
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  handleChange: (inputValue: string) => boolean;
-  handleBlur?: (inputValue: string) => boolean;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  isError: boolean;
+  onChangeInput?: (inputValue: string) => void;
+  onBlurInput?: (inputValue: string) => void;
 }
 
 export default function Input({
   type,
   maxLength,
   placeholder,
-  handleChange,
-  handleBlur,
   value,
+  isError,
+  onChangeInput,
+  onBlurInput,
 }: Props) {
-  const [isErrorOnChange, setIsErrorOnChange] = useState(false);
-  const [isErrorOnBlur, setIsErrorOnBlur] = useState(false);
-
   return (
     <SInput
       type={type ? type : "text"}
       maxLength={maxLength}
       placeholder={placeholder}
+      value={value}
+      isError={isError}
       onChange={(e) => {
-        if (!handleChange) {
-          return;
-        }
-        const isError = handleChange(e.target.value);
-        setIsErrorOnChange(isError);
+        if (onChangeInput) onChangeInput(e.target.value);
       }}
       onBlur={(e) => {
-        if (!handleBlur) {
-          return;
-        }
-        const isError = handleBlur(e.target.value);
-        setIsErrorOnBlur(isError);
+        if (onBlurInput) onBlurInput(e.target.value);
       }}
-      value={value}
-      isErrorOnChange={isErrorOnChange}
-      isErrorOnBlur={isErrorOnBlur}
     ></SInput>
   );
 }

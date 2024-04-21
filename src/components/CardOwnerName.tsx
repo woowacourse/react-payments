@@ -24,15 +24,17 @@ const InputContainer = styled.div`
 `;
 
 interface Props {
-  cardOwnerName: string;
-  inputHandler: (inputValue: string, inputId: string) => void;
+  cardOwnerName: CardInfoValue;
+  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
 }
 
-export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
+export default function CardOwnerName({
+  cardOwnerName,
+  onChangeCardInfo,
+}: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const nameValidator = (name: string) => {
-    const upperName = name.toUpperCase();
+  const isInvalidName = (upperName: string) => {
     const pattern: RegExp = /^[A-Z\s]*$/; // 영문자 대문자 또는 공백만 허용
 
     if (upperName.length !== 0 && !pattern.test(upperName)) {
@@ -40,9 +42,38 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
       return true;
     }
 
-    inputHandler(upperName, "cardOwnerName");
     setErrorMessage("");
     return false;
+  };
+
+  const isInvalidLength = (value: string) => {
+    if (value.length < 1) {
+      setErrorMessage("이름을 입력해주세요");
+      return true;
+    }
+    setErrorMessage("");
+    return false;
+  };
+
+  const onChangeNameInput = (value: string) => {
+    const newCardOwnerName = cardOwnerName;
+    const upperName = value.toUpperCase();
+
+    newCardOwnerName.value = upperName;
+    newCardOwnerName.isError = isInvalidName(upperName);
+
+    onChangeCardInfo(newCardOwnerName, "cardOwnerName");
+  };
+
+  const onBlurNameInput = (value: string) => {
+    const newCardOwnerName = cardOwnerName;
+    const upperName = value.toUpperCase();
+
+    newCardOwnerName.value = upperName;
+    newCardOwnerName.isError =
+      isInvalidName(upperName) || isInvalidLength(upperName);
+
+    onChangeCardInfo(newCardOwnerName, "cardOwnerName");
   };
 
   return (
@@ -54,8 +85,10 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
           <Input
             maxLength={15}
             placeholder="JOHN DOE"
-            handleChange={(value) => nameValidator(value)}
-            value={cardOwnerName}
+            value={cardOwnerName.value}
+            isError={cardOwnerName.isError}
+            onChangeInput={(value) => onChangeNameInput(value)}
+            onBlurInput={(value) => onBlurNameInput(value)}
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>

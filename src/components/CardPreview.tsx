@@ -77,21 +77,21 @@ export default function CardPreview({ cardInformation }: Props) {
   const [cardBrandImg, setCardBrandImg] = useState("");
 
   useEffect(() => {
-    if (cardInformation.cardNumber1[0] === "4") {
+    if (cardInformation.cardNumbers[0].value[0] === "4") {
       setCardBrandImg(Visa);
       return;
     }
 
     if (
-      Number(cardInformation.cardNumber1.slice(0, 2)) >= 51 &&
-      Number(cardInformation.cardNumber1.slice(0, 2)) <= 55
+      Number(cardInformation.cardNumbers[0].value.slice(0, 2)) >= 51 &&
+      Number(cardInformation.cardNumbers[0].value.slice(0, 2)) <= 55
     ) {
       setCardBrandImg(Mastercard);
       return;
     }
 
     setCardBrandImg("");
-  }, [cardInformation.cardNumber1]);
+  }, [cardInformation.cardNumbers]);
 
   return (
     <CardContainer>
@@ -101,32 +101,36 @@ export default function CardPreview({ cardInformation }: Props) {
       </CardHeader>
       <CardInfoContainer>
         <CardPreviewTextContainer>
-          <PreviewText>{cardInformation.cardNumber1}</PreviewText>
-          <PreviewText>{cardInformation.cardNumber2}</PreviewText>
+          <PreviewText>{cardInformation.cardNumbers[0].value}</PreviewText>
+          <PreviewText>{cardInformation.cardNumbers[1].value}</PreviewText>
           <HiddenNumberContainer>
-            {Array.from({ length: cardInformation.cardNumber3.length }).map(
-              (_, index) => (
-                <HiddenNumber key={index} />
-              )
-            )}
+            {Array.from({
+              length: cardInformation.cardNumbers[2].value.length,
+            }).map((_, index) => (
+              <HiddenNumber key={index} />
+            ))}
           </HiddenNumberContainer>
           <HiddenNumberContainer>
-            {Array.from({ length: cardInformation.cardNumber4.length }).map(
-              (_, index) => (
-                <HiddenNumber key={index} />
-              )
-            )}
+            {Array.from({
+              length: cardInformation.cardNumbers[3].value.length,
+            }).map((_, index) => (
+              <HiddenNumber key={index} />
+            ))}
           </HiddenNumberContainer>
         </CardPreviewTextContainer>
         <CardPreviewTextContainer>
           <div>
-            <PreviewText>{cardInformation.cardExpirationMonth}</PreviewText>
-            {cardInformation.cardExpirationMonth.length === 2 && "/"}
-            <PreviewText>{cardInformation.cardExpirationYear}</PreviewText>
+            <PreviewText>
+              {cardInformation.cardExpirationMonth.value}
+            </PreviewText>
+            {cardInformation.cardExpirationMonth.value.length === 2 && "/"}
+            <PreviewText>
+              {cardInformation.cardExpirationYear.value}
+            </PreviewText>
           </div>
         </CardPreviewTextContainer>
         <CardPreviewTextContainer>
-          <PreviewText>{cardInformation.cardOwnerName}</PreviewText>
+          <PreviewText>{cardInformation.cardOwnerName.value}</PreviewText>
         </CardPreviewTextContainer>
       </CardInfoContainer>
     </CardContainer>

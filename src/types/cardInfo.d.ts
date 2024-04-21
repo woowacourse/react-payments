@@ -1,9 +1,11 @@
+type CardInfoValue = {
+  value: string;
+  isError: boolean;
+};
+
 interface TCardInformation {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-  cardExpirationMonth: string;
-  cardExpirationYear: string;
-  cardOwnerName: string;
+  cardNumbers: CardInfoValue[];
+  cardExpirationMonth: CardInfoValue;
+  cardExpirationYear: CardInfoValue;
+  cardOwnerName: CardInfoValue;
 }

@@ -22,53 +22,48 @@ const InputContainer = styled.div`
 `;
 
 interface Props {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-  inputHandler: (inputValue: string, inputId: string) => void;
+  cardNumbers: CardInfoValue[];
+  onChangeCardInfo: (inputValue: CardInfoValue[], inputId: string) => void;
 }
 
-export default function CardNumbers({
-  cardNumber1,
-  cardNumber2,
-  cardNumber3,
-  cardNumber4,
-  inputHandler,
-}: Props) {
+export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const numberValidator = (numbers: string) => {
+  const isInvalidNumber = (numbers: string) => {
     if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
       setErrorMessage("숫자만 입력해주세요");
-      return false;
+      return true;
     }
     setErrorMessage("");
-    return true;
+    return false;
   };
 
-  const lengthValidator = (numbers: string) => {
+  const isInvalidCardNumberLength = (numbers: string) => {
     if (numbers.length !== 4) {
       setErrorMessage("네 자리 수를 입력해주세요");
-      return false;
+      return true;
     }
     setErrorMessage("");
-    return true;
-  };
-
-  const isValidInput = (value: string, fieldName: string) => {
-    if (!numberValidator(value)) {
-      return true;
-    }
-    inputHandler(value, fieldName);
     return false;
   };
 
-  const isValidLength = (value: string) => {
-    if (!lengthValidator(value)) {
-      return true;
-    }
-    return false;
+  const onChangeInput = (cardNumberIdx: number, value: string) => {
+    const newCardNumbers = [...cardNumbers];
+
+    newCardNumbers[cardNumberIdx].value = value;
+    newCardNumbers[cardNumberIdx].isError = isInvalidNumber(value);
+
+    onChangeCardInfo(newCardNumbers, "cardNumbers");
+  };
+
+  const onBlurInput = (cardNumberIdx: number, value: string) => {
+    const newCardNumbers = [...cardNumbers];
+
+    newCardNumbers[cardNumberIdx].value = value;
+    newCardNumbers[cardNumberIdx].isError =
+      isInvalidCardNumberLength(value) || isInvalidNumber(value);
+
+    onChangeCardInfo(newCardNumbers, "cardNumbers");
   };
 
   return (
@@ -80,36 +75,18 @@ export default function CardNumbers({
       <CardNumberBox>
         <LabelText>카드 번호</LabelText>
         <InputContainer>
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            handleChange={(value) => isValidInput(value, "cardNumber1")}
-            value={cardNumber1}
-            handleBlur={isValidLength}
-          />
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            handleChange={(value) => isValidInput(value, "cardNumber2")}
-            value={cardNumber2}
-            handleBlur={isValidLength}
-          />
-          <Input
-            type="password"
-            maxLength={4}
-            placeholder="1234"
-            handleChange={(value) => isValidInput(value, "cardNumber3")}
-            value={cardNumber3}
-            handleBlur={isValidLength}
-          />
-          <Input
-            type="password"
-            maxLength={4}
-            placeholder="1234"
-            handleChange={(value) => isValidInput(value, "cardNumber4")}
-            value={cardNumber4}
-            handleBlur={isValidLength}
-          />
+          {cardNumbers.map((cardNumber, idx) => {
+            return (
+              <Input
+                maxLength={4}
+                placeholder="1234"
+                value={cardNumber.value}
+                isError={cardNumber.isError}
+                onChangeInput={(value) => onChangeInput(idx, value)}
+                onBlurInput={(value) => onBlurInput(idx, value)}
+              />
+            );
+          })}
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
       </CardNumberBox>

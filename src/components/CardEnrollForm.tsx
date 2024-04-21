@@ -23,16 +23,21 @@ const CardInformation = styled.div`
 
 export default function CardEnrollForm() {
   const [cardInformation, setCardInformation] = useState({
-    cardNumber1: "",
-    cardNumber2: "",
-    cardNumber3: "",
-    cardNumber4: "",
-    cardExpirationMonth: "",
-    cardExpirationYear: "",
-    cardOwnerName: "",
+    cardNumbers: [
+      { value: "", isError: false },
+      { value: "", isError: false },
+      { value: "", isError: false },
+      { value: "", isError: false },
+    ],
+    cardExpirationMonth: { value: "", isError: false },
+    cardExpirationYear: { value: "", isError: false },
+    cardOwnerName: { value: "", isError: false },
   });
 
-  const inputHandler = (inputValue: string, inputId: string) => {
+  const onChangeCardInfo = (
+    inputValue: CardInfoValue | CardInfoValue[],
+    inputId: string
+  ) => {
     setCardInformation((prev) => ({
       ...prev,
       [inputId]: inputValue,
@@ -44,20 +49,17 @@ export default function CardEnrollForm() {
       <CardPreview cardInformation={cardInformation}></CardPreview>
       <CardInformation>
         <CardNumbers
-          cardNumber1={cardInformation.cardNumber1}
-          cardNumber2={cardInformation.cardNumber2}
-          cardNumber3={cardInformation.cardNumber3}
-          cardNumber4={cardInformation.cardNumber4}
-          inputHandler={inputHandler}
+          cardNumbers={cardInformation.cardNumbers}
+          onChangeCardInfo={onChangeCardInfo}
         ></CardNumbers>
         <CardExpirationDate
           cardExpirationMonth={cardInformation.cardExpirationMonth}
           cardExpirationYear={cardInformation.cardExpirationYear}
-          inputHandler={inputHandler}
+          onChangeCardInfo={onChangeCardInfo}
         ></CardExpirationDate>
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
-          inputHandler={inputHandler}
+          onChangeCardInfo={onChangeCardInfo}
         ></CardOwnerName>
       </CardInformation>
     </CardEnrollFormContainer>
