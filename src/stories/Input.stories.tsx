@@ -1,7 +1,5 @@
-import { useState } from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-import Input from "../components/Input";
+import Input from "../components/atoms/Input";
 
 const meta: Meta<typeof Input> = {
   component: Input,
@@ -10,59 +8,36 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const DefaultInput: Story = {
+export const CardNumberInput: Story = {
   args: {
-    placeholder: "1234",
-    maxLength: 4,
     type: "string",
+    maxLength: 4,
+    placeholder: "1234",
+    isError: false,
   },
   argTypes: {
-    maxLength: {
-      options: [4, 2],
-      control: { type: "radio" },
-    },
     type: {
       options: ["string", "number"],
+      control: { type: "radio" },
+    },
+    maxLength: {
+      options: [2, 4, 15],
+      control: { type: "radio" },
+    },
+    isError: {
+      options: [true, false],
       control: { type: "radio" },
     },
   },
   render: ({ ...args }) => <Input {...args} />,
 };
 
-const InputWithHooks = ({ ...args }) => {
-  const [value, setValue] = useState("");
-
-  // Sets a change handler to change the input's value
-  const handleOnChange = (inputValue: string) => {
-    setValue(inputValue);
-    return false;
-  };
-
-  // Sets a Blur handler to blur the input element
-  const handleOnBlur = (inputValue: string) => {
-    if (inputValue.length < 4) {
-      return true;
-    }
-    return false;
-  };
-
-  return (
-    <Input
-      type={args.type}
-      maxLength={args.maxLength}
-      placeholder={args.placeholder}
-      onChange={handleOnChange}
-      onBlur={handleOnBlur}
-      value={value}
-    />
-  );
-};
-
-export const NumberInput: Story = {
+export const CardDateInput: Story = {
   args: {
     type: "string",
-    maxLength: 4,
-    placeholder: "1234",
+    maxLength: 2,
+    placeholder: "MM",
+    isError: false,
   },
   argTypes: {
     type: {
@@ -70,9 +45,62 @@ export const NumberInput: Story = {
       control: { type: "radio" },
     },
     maxLength: {
-      options: [4, 2],
+      options: [2, 4, 15],
+      control: { type: "radio" },
+    },
+    isError: {
+      options: [true, false],
       control: { type: "radio" },
     },
   },
-  render: ({ ...args }) => <InputWithHooks {...args} />,
+  render: ({ ...args }) => <Input {...args} />,
+};
+
+export const CardOwnerNameInput: Story = {
+  args: {
+    type: "string",
+    maxLength: 15,
+    placeholder: "JAEWI MYONG",
+    isError: false,
+  },
+  argTypes: {
+    type: {
+      options: ["string", "number"],
+      control: { type: "radio" },
+    },
+    maxLength: {
+      options: [2, 4, 15],
+      control: { type: "radio" },
+    },
+    isError: {
+      options: [true, false],
+      control: { type: "radio" },
+    },
+  },
+  render: ({ ...args }) => <Input {...args} />,
+};
+
+export const ErrorInput: Story = {
+  args: {
+    type: "string",
+    maxLength: 4,
+    placeholder: "1234",
+    value: "abcd",
+    isError: true,
+  },
+  argTypes: {
+    type: {
+      options: ["string", "number"],
+      control: { type: "radio" },
+    },
+    maxLength: {
+      options: [2, 4, 15],
+      control: { type: "radio" },
+    },
+    isError: {
+      options: [true, false],
+      control: { type: "radio" },
+    },
+  },
+  render: ({ ...args }) => <Input {...args} />,
 };
