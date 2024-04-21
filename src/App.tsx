@@ -1,9 +1,9 @@
-import "./App.css";
+import NewCardPage from "./pages/newCardPage/NewCardPage";
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <NewCardPage />
     </>
   );
 }
