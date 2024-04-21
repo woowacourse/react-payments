@@ -1,50 +1,31 @@
 import './App.css';
-import useInput from './hooks/useInput';
-import useInputs from './hooks/useInputs';
 import CardholderNameContainer from './components/CardholderNameContainer';
 import CardExpiryDateContainer from './components/CardExpiryDateContainer';
 import { inquireCardNumber, inquireCardholderName, inquireExpiryMonth, inquireExpiryYear } from './inquiry';
 import CardNumberContainer from './components/CardNumbersContainer';
 import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
+import { useState } from 'react';
+import useValidation from './hooks/useValidation';
+import useValidations from './hooks/useValidations';
 
 const App = () => {
-  const {
-    value: cardNumbers,
-    generateChangeHandler: generateCardNumbersChangeHandler,
-    generateErrorMessageUpdater: generateCardNumberErrorMessageUpdater,
-    errorMessage: cardNumbersErrorMessage,
-    errorStatus: cardNumbersErrorStatus,
-  } = useInputs(
-    {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    inquireCardNumber,
-  );
+  const [cardNumbers, setCardNumbers] = useState({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
+  const cardNumbersValidation = useValidations(cardNumbers, inquireCardNumber);
 
-  const {
-    value: cardholderName,
-    setValue: setCardholderName,
-    updateErrorMessage: updateCardholderNameErrorMessage,
-    errorMessage: cardholderNameErrorMessage,
-  } = useInput('', inquireCardholderName);
+  const [cardholderName, setCardholderName] = useState('');
+  const cardholderNameValidation = useValidation(cardholderName, inquireCardholderName);
 
-  const {
-    value: expiryMonth,
-    handleChange: handleChangeExpiryMonth,
-    updateErrorMessage: updateExpiryMonthErrorMessage,
-    errorMessage: expiryMonthErrorMessage,
-  } = useInput('', inquireExpiryMonth);
+  const [expiryMonth, setExpiryMonth] = useState('');
+  const expiryMonthValidation = useValidation(expiryMonth, inquireExpiryMonth);
 
-  const {
-    value: expiryYear,
-    handleChange: handleChangeExpiryYear,
-    updateErrorMessage: updateExpiryYearErrorMessage,
-    errorMessage: expiryYearErrorMessage,
-  } = useInput('', inquireExpiryYear);
+  const [expiryYear, setExpiryYear] = useState('');
+  const expiryYearValidation = useValidation(expiryYear, inquireExpiryYear);
 
   return (
     <AppLayout>
@@ -54,24 +35,20 @@ const App = () => {
         cardholderName={cardholderName}
       />
       <CardInfoWrapper>
-        <CardNumberContainer
-          cardNumbers={cardNumbers}
-          generateChangeHandler={generateCardNumbersChangeHandler}
-          generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
-          errorMessage={cardNumbersErrorMessage}
-          errorStatus={cardNumbersErrorStatus}
-        />
+        <CardNumberContainer cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} {...cardNumbersValidation} />
         <CardExpiryDateContainer
           expiryDate={{ month: expiryMonth, year: expiryYear }}
-          changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
-          errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
-          errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
+          expiryDateSetter={{ month: setExpiryMonth, year: setExpiryYear }}
+          errorStatus={{ month: expiryMonthValidation.errorStatus, year: expiryYearValidation.errorStatus }}
+          errorStatusUpdater={{
+            month: expiryMonthValidation.updateErrorStatus,
+            year: expiryYearValidation.updateErrorStatus,
+          }}
         />
         <CardholderNameContainer
           cardholderName={cardholderName}
           setCardholderName={setCardholderName}
-          updateErrorMessage={updateCardholderNameErrorMessage}
-          errorMessage={cardholderNameErrorMessage}
+          {...cardholderNameValidation}
         />
       </CardInfoWrapper>
     </AppLayout>

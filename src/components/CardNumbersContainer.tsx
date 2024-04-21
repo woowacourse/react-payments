@@ -6,20 +6,22 @@ type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersContainerProps {
   cardNumbers: Record<CardNumberKey, string>;
-  generateChangeHandler: (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string;
-  errorStatus: Record<string, boolean>;
-  generateErrorMessageUpdater: (targetKey: string) => () => void;
+  setCardNumbers: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
+  errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
+  updateErrorStatus: (key: CardNumberKey) => void;
 }
 
 export default function CardNumberContainer({
   cardNumbers,
-  generateChangeHandler,
-  errorMessage,
+  setCardNumbers,
   errorStatus,
-  generateErrorMessageUpdater,
+  updateErrorStatus,
 }: CardNumbersContainerProps) {
   const arr = ['first', 'second', 'third', 'fourth'] as const;
+  const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardNumbers({ ...cardNumbers, [key]: e.target.value });
+  };
+
   return (
     <div>
       <RegistrationLayout
@@ -36,10 +38,10 @@ export default function CardNumberContainer({
             <Input
               key={key}
               id={`${key}-card-numbers-input`}
-              isError={errorStatus[key]}
+              isError={errorStatus.isError[key]}
               value={cardNumbers[key]}
-              onChange={generateChangeHandler(key)}
-              onBlur={generateErrorMessageUpdater(key)}
+              onChange={generateOnChange(key)}
+              onBlur={() => updateErrorStatus(key)}
               placeholder="1234"
               maxLength={4}
               type={type}
@@ -49,7 +51,7 @@ export default function CardNumberContainer({
         })}
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
+        <ErrorText>{errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );
