@@ -3,6 +3,11 @@ import Input from "./atoms/Input";
 import { TitleText, LabelText } from "./atoms/text";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
+import {
+  executeValidators,
+  isInvalidNameLength,
+  isInvalidOwnerName,
+} from "../utils/validators";
 
 const CardOwnerNameContainer = styled.div`
   display: flex;
@@ -34,45 +39,28 @@ export default function CardOwnerName({
 }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isInvalidName = (upperName: string) => {
-    const pattern: RegExp = /^[A-Z\s]*$/; // 영문자 대문자 또는 공백만 허용
-
-    if (upperName.length !== 0 && !pattern.test(upperName)) {
-      setErrorMessage("영문자만 입력해주세요");
-      return true;
-    }
-
-    setErrorMessage("");
-    return false;
-  };
-
-  const isInvalidLength = (value: string) => {
-    if (value.length < 1) {
-      setErrorMessage("이름을 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
   const onChangeNameInput = (value: string) => {
     const newCardOwnerName = cardOwnerName;
     const upperName = value.toUpperCase();
+    const validateResult = isInvalidOwnerName(upperName);
 
     newCardOwnerName.value = upperName;
-    newCardOwnerName.isError = isInvalidName(upperName);
-
+    newCardOwnerName.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardOwnerName, "cardOwnerName");
   };
 
   const onBlurNameInput = (value: string) => {
     const newCardOwnerName = cardOwnerName;
     const upperName = value.toUpperCase();
+    const validateResult = executeValidators(
+      [isInvalidOwnerName, isInvalidNameLength],
+      value
+    );
 
     newCardOwnerName.value = upperName;
-    newCardOwnerName.isError =
-      isInvalidName(upperName) || isInvalidLength(upperName);
-
+    newCardOwnerName.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardOwnerName, "cardOwnerName");
   };
 

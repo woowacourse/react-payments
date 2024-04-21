@@ -3,6 +3,13 @@ import Input from "./atoms/Input";
 import { TitleText, CaptionText, LabelText } from "./atoms/text";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
+import {
+  executeValidators,
+  isInvalidDateLength,
+  isInvalidMonth,
+  isInvalidNumber,
+  isInvalidYear,
+} from "../utils/validators";
 
 const CardDateContainer = styled.div`
   display: flex;
@@ -36,77 +43,49 @@ export default function CardExpirationDate({
 }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isInvalidNumber = (numbers: string) => {
-    if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
-      setErrorMessage("숫자만 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
-  const isInvalidLength = (numbers: string) => {
-    if (numbers.length !== 2) {
-      setErrorMessage("두 자리 수를 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
-  const isInvalidMonth = (numbers: string) => {
-    if (Number(numbers) < 1 || Number(numbers) > 12) {
-      setErrorMessage("1~12월 중 하나를 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
-  const isInvalidYear = (numbers: string) => {
-    if (Number(numbers) < 24) {
-      setErrorMessage("유효한 년도를 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
   const onChangeMonthInput = (value: string) => {
     const newCardExpirationMonth = cardExpirationMonth;
+    const validateResult = isInvalidNumber(value);
 
     newCardExpirationMonth.value = value;
-    newCardExpirationMonth.isError = isInvalidNumber(value);
-
+    newCardExpirationMonth.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
   };
 
   const onBlurMonthInput = (value: string) => {
     const newCardExpirationMonth = cardExpirationMonth;
+    const validateResult = executeValidators(
+      [isInvalidNumber, isInvalidDateLength, isInvalidMonth],
+      value
+    );
 
     newCardExpirationMonth.value = value;
-    newCardExpirationMonth.isError =
-      isInvalidMonth(value) || isInvalidNumber(value) || isInvalidLength(value);
-
+    newCardExpirationMonth.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
   };
 
   const onChangeYearInput = (value: string) => {
     const newCardExpirationYear = cardExpirationYear;
+    const validateResult = isInvalidNumber(value);
 
     newCardExpirationYear.value = value;
-    newCardExpirationYear.isError = isInvalidNumber(value);
-
+    newCardExpirationYear.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
   };
 
   const onBlurYearInput = (value: string) => {
     const newCardExpirationYear = cardExpirationYear;
+    const validateResult = executeValidators(
+      [isInvalidNumber, isInvalidDateLength, isInvalidYear],
+      value
+    );
 
     newCardExpirationYear.value = value;
-    newCardExpirationYear.isError =
-      isInvalidYear(value) || isInvalidNumber(value) || isInvalidLength(value);
-
+    newCardExpirationYear.isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
   };
 

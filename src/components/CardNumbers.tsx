@@ -3,6 +3,11 @@ import Input from "./atoms/Input";
 import { TitleText, CaptionText, LabelText } from "./atoms/text";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
+import {
+  executeValidators,
+  isInvalidCardNumberLength,
+  isInvalidNumber,
+} from "../utils/validators";
 
 const CardNumbersContainer = styled.div`
   display: flex;
@@ -29,40 +34,26 @@ interface Props {
 export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const isInvalidNumber = (numbers: string) => {
-    if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
-      setErrorMessage("숫자만 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
-  const isInvalidCardNumberLength = (numbers: string) => {
-    if (numbers.length !== 4) {
-      setErrorMessage("네 자리 수를 입력해주세요");
-      return true;
-    }
-    setErrorMessage("");
-    return false;
-  };
-
   const onChangeInput = (cardNumberIdx: number, value: string) => {
     const newCardNumbers = [...cardNumbers];
+    const validateResult = isInvalidNumber(value);
 
     newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError = isInvalidNumber(value);
-
+    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardNumbers, "cardNumbers");
   };
 
   const onBlurInput = (cardNumberIdx: number, value: string) => {
     const newCardNumbers = [...cardNumbers];
+    const validateResult = executeValidators(
+      [isInvalidNumber, isInvalidCardNumberLength],
+      value
+    );
 
     newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError =
-      isInvalidCardNumberLength(value) || isInvalidNumber(value);
-
+    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
+    setErrorMessage(validateResult.message);
     onChangeCardInfo(newCardNumbers, "cardNumbers");
   };
 
