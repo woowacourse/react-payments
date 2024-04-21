@@ -1,6 +1,7 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
+import getObjectKeys from '../utils/getObjectKeys';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -11,13 +12,19 @@ export interface CardNumbersContainerProps {
   updateErrorStatus: (key: CardNumberKey) => void;
 }
 
+const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
+const INPUT_TYPE = {
+  text: 'text',
+  password: 'password',
+};
+
 export default function CardNumberContainer({
   data,
   setData,
   errorStatus,
   updateErrorStatus,
 }: CardNumbersContainerProps) {
-  const arr = ['first', 'second', 'third', 'fourth'] as const;
+  const cardNumbersKeys = getObjectKeys(data);
   const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [key]: e.target.value });
   };
@@ -30,9 +37,8 @@ export default function CardNumberContainer({
         labelText="카드 번호"
         labelFor="first-card-numbers-input"
       >
-        {arr.map(key => {
-          const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
-          const type = PASSWORD_INPUT_KEYS.includes(key) ? 'password' : 'text';
+        {cardNumbersKeys.map(key => {
+          const type = PASSWORD_INPUT_KEYS.includes(key) ? INPUT_TYPE.password : INPUT_TYPE.text;
 
           return (
             <Input
