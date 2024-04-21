@@ -23,7 +23,7 @@ const useInput = ({
   const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
-    const newErrorMessages = [...errorMessage];
+    const newErrorMessages = [...errorMessages];
     newErrorMessages[index] = errorMessage;
     setErrorMessages(newErrorMessages);
   };
