@@ -3,12 +3,12 @@ import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
 import { CardNumberKey } from './types/card';
 import { ErrorDetail } from './types/error';
+import { useMemo } from 'react';
 
 export interface CardNumbersContainerProps {
   cardNumbers: Record<CardNumberKey, string>;
   generateChangeHandler: (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorInfo: Record<CardNumberKey, ErrorDetail>;
-  errorMessage: string;
   generateErrorMessageUpdater: (targetKey: CardNumberKey) => () => void;
 }
 
@@ -19,9 +19,14 @@ export default function CardNumberContainer({
   cardNumbers,
   generateChangeHandler,
   errorInfo,
-  errorMessage,
   generateErrorMessageUpdater,
 }: CardNumbersContainerProps) {
+  const getErrorMessage = useMemo(() => {
+    const errorDetails = Object.values(errorInfo);
+    const firstErrorElement = errorDetails.find(value => value.isError);
+    return firstErrorElement ? firstErrorElement.errorMessage : '';
+  }, [errorInfo]);
+
   return (
     <div>
       <RegistrationLayout
@@ -50,7 +55,7 @@ export default function CardNumberContainer({
         })}
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
+        <ErrorText>{getErrorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );
