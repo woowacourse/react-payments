@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { matchCardIssuer } from '../domain/matchCardIssuer';
 
-interface CardInfo {
-  cardNumbers: [string, string, string, string];
-  cardIssuer: '' | 'Visa' | 'MasterCard';
-  cardExpiredDate: [string, string];
+export type CardNumbers = [string, string, string, string];
+export type CardIssuer = '' | 'Visa' | 'MasterCard';
+export type CardExpiredDate = [string, string];
+export interface CardInfo {
+  cardNumbers: CardNumbers;
+  cardIssuer: CardIssuer;
+  cardExpiredDate: CardExpiredDate;
   cardHolder: string;
 }
 

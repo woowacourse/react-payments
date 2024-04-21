@@ -1,5 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
+import {
+  CardExpiredDate as CardExpiredDateType,
+  CardNumbers as CardNumbersType,
+} from '../hooks/useCardInfo';
 import { Dispatch, SetStateAction } from 'react';
 
 import CardExpiredDate from './CardExpiredDate';
@@ -8,10 +10,8 @@ import CardNumbers from './CardNumbers';
 import styled from '@emotion/styled';
 
 interface props {
-  setCardNumbers: React.Dispatch<
-    React.SetStateAction<[string, string, string, string]>
-  >;
-  setCardExpiredDate: Dispatch<SetStateAction<[string, string]>>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<CardNumbersType>>;
+  setCardExpiredDate: Dispatch<SetStateAction<CardExpiredDateType>>;
   setCardHolder: Dispatch<SetStateAction<string>>;
 }
 export default function CardForm({

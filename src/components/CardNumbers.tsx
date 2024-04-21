@@ -6,6 +6,7 @@ import {
 import { isOnlyDigit, isUpperLength } from '../domain/checkIsValid';
 
 import { BOUND } from '../constants/number';
+import { CardNumbers as CardNumbersType } from '../hooks/useCardInfo';
 import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
@@ -17,9 +18,7 @@ import useValidateInput from '../hooks/useValidateInput';
 export default function CardNumbers({
   setCardNumbers,
 }: {
-  setCardNumbers: React.Dispatch<
-    React.SetStateAction<[string, string, string, string]>
-  >;
+  setCardNumbers: React.Dispatch<React.SetStateAction<CardNumbersType>>;
 }) {
   const firstInput = useValidateInput(useValidatedInputProps);
   const secondInput = useValidateInput(useValidatedInputProps);

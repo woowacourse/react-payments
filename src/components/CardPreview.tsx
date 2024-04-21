@@ -1,4 +1,5 @@
 import { COLOR } from '../styles/color';
+import { CardInfo } from '../hooks/useCardInfo';
 import DEFAULT_BLANK_IMAGE from '../Images/blank.png';
 import IC_CHIP from '../Images/Ic_chip.png';
 import MASTERCARD_IMAGE from '../Images/Mastercard.png';
@@ -14,6 +15,10 @@ const matchCardIssuerImgSrc = (issuer: string) => {
   const result = issuerImg[issuer];
   return result ?? DEFAULT_BLANK_IMAGE;
 };
+
+interface cardInfoProps {
+  cardInfo: CardInfo;
+}
 
 export default function CardPreview(props: cardInfoProps) {
   const { cardNumbers, cardIssuer, cardExpiredDate, cardHolder } =
@@ -81,12 +86,3 @@ const CardNumberContainer = styled.div({
 const CardNumber = styled.span({
   width: '30px',
 });
-
-interface cardInfoProps {
-  cardInfo: {
-    cardNumbers: [string, string, string, string];
-    cardIssuer: '' | 'Visa' | 'MasterCard';
-    cardExpiredDate: [string, string];
-    cardHolder: string;
-  };
-}

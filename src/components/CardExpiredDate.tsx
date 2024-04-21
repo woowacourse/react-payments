@@ -6,6 +6,7 @@ import {
 import { isValidMonth, isValidYear } from '../domain/checkIsValid';
 
 import { BOUND } from '../constants/number';
+import { CardExpiredDate as CardExpiredDateType } from '../hooks/useCardInfo';
 import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
@@ -17,7 +18,7 @@ import useValidateInput from '../hooks/useValidateInput';
 export default function CardExpiredDate({
   setCardExpiredDate,
 }: {
-  setCardExpiredDate: React.Dispatch<React.SetStateAction<[string, string]>>;
+  setCardExpiredDate: React.Dispatch<React.SetStateAction<CardExpiredDateType>>;
 }) {
   const {
     input: month,
