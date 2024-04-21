@@ -1,4 +1,3 @@
-import './App.css';
 import useInput from './hooks/useInput';
 import useInputs from './hooks/useInputs';
 import CardholderNameContainer from './components/CardholderNameContainer';
