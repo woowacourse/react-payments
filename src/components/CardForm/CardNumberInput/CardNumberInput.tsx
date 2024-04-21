@@ -21,7 +21,10 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
   }, [isValid]);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumber(e.target.value)) return;
+    if (!isNumber(e.target.value)) {
+      e.target.value = '';
+      return;
+    }
 
     handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? e.target.value : number)));
   };

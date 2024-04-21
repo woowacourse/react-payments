@@ -4,6 +4,7 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
+import { isNumber, isValidLength, isValidRange } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
@@ -22,34 +23,44 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
     return '';
   }, [isValidMonth, isValidYear]);
 
-  const validateMonth = (month: string) => {
-    if (Number.isNaN(Number(month)) || month.length !== CARD_EXPIRATION.MAX_LENGTH) {
-      return false;
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumber(e.target.value)) {
+      e.target.value = '';
+      return;
     }
 
-    if (Number(month) < CARD_EXPIRATION.MIN_MONTH_RANGE || Number(month) > CARD_EXPIRATION.MAX_MONTH_RANGE) {
-      return false;
+    handleMonth(e.target.value);
+  };
+
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumber(e.target.value)) {
+      e.target.value = '';
+      return;
     }
 
-    return true;
+    handleYear(e.target.value);
   };
 
-  const validateYear = (year: string) => {
-    return !Number.isNaN(Number(year)) && year.length === CARD_EXPIRATION.MAX_LENGTH;
-  };
-
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidMonth = validateMonth(e.target.value);
+  const handleMonthBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newIsValidMonth =
+      isValidRange(e.target.value, CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE) &&
+      isValidLength(e.target.value, 2);
 
     setIsValidMonth(newIsValidMonth);
-    handleMonth(newIsValidMonth ? e.target.value : '');
+
+    if (!newIsValidMonth) {
+      handleMonth('');
+    }
   };
 
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidYear = validateYear(e.target.value);
+  const handleYearBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newIsValidYear = isValidLength(e.target.value, 2);
 
     setIsValidYear(newIsValidYear);
-    handleYear(newIsValidYear ? e.target.value : '');
+
+    if (!newIsValidYear) {
+      handleYear('');
+    }
   };
 
   return (
@@ -60,14 +71,16 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
           type="text"
           placeholder="MM"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
-          onChange={onMonthChange}
+          onChange={handleMonthChange}
+          onBlur={handleMonthBlur}
           isValid={isValidMonth}
         />
         <Input
           type="text"
           placeholder="YY"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
-          onChange={onYearChange}
+          onChange={handleYearChange}
+          onBlur={handleYearBlur}
           isValid={isValidYear}
         />
       </InputField>
