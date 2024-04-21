@@ -1,4 +1,4 @@
-import * as CardInformation from './style';
+import * as Styled from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -40,7 +40,7 @@ const CardInformationForm = ({
   const userNameErrorMessage = userNameState.userNameError ? ERROR.userName : '';
 
   return (
-    <CardInformation.Form>
+    <Styled.CardInformationForm>
       <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>
@@ -106,7 +106,7 @@ const CardInformationForm = ({
           />
         </InputField>
       </FormField>
-    </CardInformation.Form>
+    </Styled.CardInformationForm>
   );
 };
 

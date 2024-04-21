@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const CardInformationPreview = styled.section`
   display: flex;
   flex-direction: column;
   width: 21.2rem;
