@@ -59,16 +59,6 @@ export const InvalidValueError: Story = {
   },
 };
 
-export const InvalidCardTypeError: Story = {
-  parameters: {
-    docs: { description: { story: '유효하지 않은 카드타입을 입력하려고 시도할 떄의 상태' } },
-  },
-
-  args: {
-    cardNumberError: { isError: true, errorMessage: ERROR_MESSAGE.invalidCardType },
-  },
-};
-
 export const Complete: Story = {
   parameters: {
     docs: { description: { story: '완전히 입력되었을 때의 상태' } },
