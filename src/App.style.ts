@@ -4,8 +4,11 @@ export const Container = styled.div`
   padding: 20px 30px;
 
   width: 376px;
-  height: 680px;
-  background-color: beige;
+  height: 700px;
+  background-color: #fff;
+
+  border-radius: 8px;
+  border: 3px solid #000;
 `;
 
 export const CardInfoContainer = styled.div`
