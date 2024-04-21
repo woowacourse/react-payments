@@ -52,7 +52,7 @@ const CardNumberInput = ({
             placeholder="1234"
             value={cardNumbers[index]}
             maxLength={INPUT_RULES.maxCardNumberPartLength}
-            size="small"
+            inputSize="small"
             isError={inputErrors[index]}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />

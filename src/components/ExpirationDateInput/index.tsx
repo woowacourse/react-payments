@@ -55,7 +55,7 @@ const ExpirationDateInput = ({
     handleExpirationDateChange(index, value);
   };
 
-  const hasErrorInput = () => inputErrors.some((error) => error);
+  const hasErrorInput = inputErrors.some((error) => error);
 
   return (
     <InputField>
@@ -68,7 +68,7 @@ const ExpirationDateInput = ({
           placeholder="MM"
           value={expirationDate[0]}
           maxLength={INPUT_RULES.maxExpirationDateLength}
-          size="medium"
+          inputSize="medium"
           isError={inputErrors[0]}
           onChange={(e) => {
             handleInputChange(0, e.target.value);
@@ -80,14 +80,14 @@ const ExpirationDateInput = ({
           placeholder="YY"
           value={expirationDate[1]}
           maxLength={INPUT_RULES.maxExpirationDateLength}
-          size="medium"
+          inputSize="medium"
           isError={inputErrors[1]}
           onChange={(e) => {
             handleInputChange(1, e.target.value);
           }}
         />
       </InputContainer>
-      {hasErrorInput()
+      {hasErrorInput
         ? errorCaption(VALIDATION_MESSAGES.invalidDate)
         : errorCaption("")}
     </InputField>

@@ -39,7 +39,7 @@ const CardOwnerNameInput = ({
         type="text"
         placeholder="JOHN DOE"
         value={ownerName}
-        size="large"
+        inputSize="large"
         isError={isError}
         onChange={(e) => {
           handleInputChange(e.target.value);
