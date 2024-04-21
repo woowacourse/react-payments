@@ -2,16 +2,7 @@ import { useCallback, useState } from 'react';
 import { ErrorDetail } from '../components/types/error';
 import { CardNumberKey } from '../components/types/card';
 import { INITIAL_ERROR_VALUE } from '../constants/error';
-
-const convertArrayIntoObject = <T>(keys: string[], initialValue: T) => {
-  const obj: Record<string, T> = {};
-
-  keys.forEach(key => {
-    obj[key] = initialValue;
-  });
-
-  return obj;
-};
+import { convertArrayIntoObject } from '../utils/util';
 
 const useInputs = <T extends Record<string, string>>(initialValue: T, validate?: (value: string) => ErrorDetail) => {
   const initialErrorStatus = convertArrayIntoObject(Object.keys(initialValue), INITIAL_ERROR_VALUE);
