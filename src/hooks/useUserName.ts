@@ -8,12 +8,11 @@ const useUserName = (defaultValue: string) => {
 
   const changeUpperCase = (value: string) => value.toUpperCase();
 
-  const [userName, setUserName, isUserNameError] = useInput<string>(
-    defaultValue,
-    REG_EXP.userName,
-    userNameCondition,
-    changeUpperCase,
-  );
+  const {
+    value: userName,
+    onChange: setUserName,
+    isError: isUserNameError,
+  } = useInput<string>(defaultValue, REG_EXP.userName, userNameCondition, changeUpperCase);
 
   return {
     userNameState: userName,

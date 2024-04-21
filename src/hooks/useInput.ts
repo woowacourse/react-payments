@@ -27,7 +27,7 @@ const useInput = <T>(
     setIsError(!regExp.test(event.currentTarget.value) || !condition(event.currentTarget.value));
   };
 
-  return [value, onChange, isError] as const;
+  return { value, onChange, isError };
 };
 
 export default useInput;
