@@ -10,6 +10,7 @@ type Story = StoryObj<typeof Input>;
 
 export const CardNumberInput: Story = {
   args: {
+    id: "cardNumber1",
     type: "string",
     maxLength: 4,
     placeholder: "1234",
@@ -34,6 +35,7 @@ export const CardNumberInput: Story = {
 
 export const CardDateInput: Story = {
   args: {
+    id: "cardDate",
     type: "string",
     maxLength: 2,
     placeholder: "MM",
@@ -58,6 +60,7 @@ export const CardDateInput: Story = {
 
 export const CardOwnerNameInput: Story = {
   args: {
+    id: "cardOwnerName",
     type: "string",
     maxLength: 15,
     placeholder: "JAEWI MYONG",
@@ -82,6 +85,7 @@ export const CardOwnerNameInput: Story = {
 
 export const ErrorInput: Story = {
   args: {
+    id: "cardNumber1",
     type: "string",
     maxLength: 4,
     placeholder: "1234",

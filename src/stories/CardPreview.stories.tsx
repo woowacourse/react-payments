@@ -11,13 +11,16 @@ type Story = StoryObj<typeof CardPreview>;
 export const Default: Story = {
   args: {
     cardInformation: {
-      cardNumber1: "",
-      cardNumber2: "",
-      cardNumber3: "",
-      cardNumber4: "",
-      cardExpirationMonth: "",
-      cardExpirationYear: "",
-      cardOwnerName: "",
+      cardNumbers: [
+        { value: "", isError: false },
+        { value: "", isError: false },
+        { value: "", isError: false },
+        { value: "", isError: false },
+        { value: "", isError: false },
+      ],
+      cardExpirationMonth: { value: "", isError: false },
+      cardExpirationYear: { value: "", isError: false },
+      cardOwnerName: { value: "", isError: false },
     },
   },
   render: ({ ...args }) => {
@@ -28,13 +31,16 @@ export const Default: Story = {
 export const Visa: Story = {
   args: {
     cardInformation: {
-      cardNumber1: "4243",
-      cardNumber2: "1234",
-      cardNumber3: "1234",
-      cardNumber4: "1234",
-      cardExpirationMonth: "12",
-      cardExpirationYear: "24",
-      cardOwnerName: "Jaewi Myong",
+      cardNumbers: [
+        { value: "4312", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+      ],
+      cardExpirationMonth: { value: "12", isError: false },
+      cardExpirationYear: { value: "25", isError: false },
+      cardOwnerName: { value: "JAEWI MYONG", isError: false },
     },
   },
   render: ({ ...args }) => {
@@ -45,13 +51,16 @@ export const Visa: Story = {
 export const Master: Story = {
   args: {
     cardInformation: {
-      cardNumber1: "5143",
-      cardNumber2: "1234",
-      cardNumber3: "1234",
-      cardNumber4: "1234",
-      cardExpirationMonth: "12",
-      cardExpirationYear: "24",
-      cardOwnerName: "Jaewi Myong",
+      cardNumbers: [
+        { value: "5112", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+        { value: "1234", isError: false },
+      ],
+      cardExpirationMonth: { value: "12", isError: false },
+      cardExpirationYear: { value: "25", isError: false },
+      cardOwnerName: { value: "JAEWI MYONG", isError: false },
     },
   },
   render: ({ ...args }) => {
