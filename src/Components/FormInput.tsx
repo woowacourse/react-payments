@@ -35,7 +35,13 @@ const CardNumberInput = () => {
   // const setFormErrors = useContext(CardNumberErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardNumbers) => {
-    console.log(`${name}에 입력되었습니다.`);
+    const inputNumber = Number(e.target.value);
+    //TODO: valid 추가하기
+    setNumbers((prev: CardNumbers) => {
+      const numbers = { ...prev };
+      numbers[name] = inputNumber;
+      return numbers;
+    });
   };
 
   return (
@@ -63,7 +69,13 @@ const CardPeriodInput = () => {
   // const setPeriodError = useContext(CardValidityPeriodErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardValidityPeriod) => {
-    console.log(`${name}에 입력되었습니다.`);
+    const inputNumber = Number(e.target.value);
+    //TODO: valid 추가하기
+    setCardPeriod((prev: CardValidityPeriod) => {
+      const period = { ...prev };
+      period[name] = inputNumber;
+      return period;
+    });
   };
   return (
     <>
@@ -91,11 +103,17 @@ const CardOwnerInput = () => {
   // const setFormErrors = useContext(CardOwnerInfoErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardOwnerInfo) => {
-    console.log(`${name}이 입력되었습니다.`);
+    const input = e.target.value;
+    //TODO: valid 추가하기
+    setCardOwner((prev: CardOwnerInfo) => {
+      const ownerInfo = { ...prev };
+      ownerInfo[name] = input;
+      return ownerInfo;
+    });
   };
   return (
     <>
-      {[{ name: "ownerName", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }, index) => (
+      {[{ name: "name", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
