@@ -21,7 +21,7 @@ const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus
           value={data}
           onChange={onChange}
           onBlur={updateErrorStatus}
-          placeholder="카드 소유자 이름을 입력해주세요"
+          placeholder="JOHN DOE"
           width="100%"
           maxLength={100}
         />

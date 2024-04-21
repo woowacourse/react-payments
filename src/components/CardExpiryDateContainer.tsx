@@ -41,7 +41,7 @@ const CardExpiryDateContainer = ({
           value={data.month}
           onChange={onMonthChange}
           onBlur={updateMonthErrorStatus}
-          placeholder="MM"
+          placeholder="01"
           maxLength={2}
           width="48%"
         />
@@ -51,7 +51,7 @@ const CardExpiryDateContainer = ({
           value={data.year}
           onChange={onYearChange}
           onBlur={updateYearErrorStatus}
-          placeholder="YY"
+          placeholder="24"
           maxLength={2}
           width="48%"
         />
