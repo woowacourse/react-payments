@@ -7,10 +7,6 @@ const OPTION = {
   nameMaxLength: 50,
   minMonth: '01',
   maxMonth: '12',
-  cardBrand: {
-    visa: 'Visa',
-    masterCard: 'MasterCard',
-  },
 };
 
 export default OPTION;

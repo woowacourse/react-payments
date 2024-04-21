@@ -4,7 +4,6 @@ import Visa from '../asset/Visa.svg';
 import MasterCard from '../asset/Mastercard.svg';
 import { useState } from 'react';
 import REGEX from '../constants/regex';
-import OPTION from '../constants/option';
 
 type Props = 'Visa' | 'MasterCard';
 
@@ -16,15 +15,15 @@ const BRAND_TABLE: Record<Props, string> = {
 const CardBrand = ({ ...props }) => {
   const { firstCardNumbers } = props;
 
-  const [brand, setBrand] = useState<Props>(OPTION.cardBrand.visa);
+  const [brand, setBrand] = useState<Props>('Visa');
   const [isBrand, setIsBrand] = useState(false);
 
   const changeBrand = () => {
     if (REGEX.startsWith4.test(firstCardNumbers)) {
-      setBrand(OPTION.cardBrand.visa);
+      setBrand('Visa');
       setIsBrand(true);
     } else if (REGEX.startsWith5155.test(firstCardNumbers)) {
-      setBrand(OPTION.cardBrand.masterCard);
+      setBrand('MasterCard');
       setIsBrand(true);
     } else {
       setIsBrand(false);
