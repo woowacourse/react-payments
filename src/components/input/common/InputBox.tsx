@@ -10,6 +10,12 @@ interface InputBoxProps {
   name?: string;
 }
 
+const sizeWidthMap = {
+  small: "23%",
+  medium: "48%",
+  large: "100%",
+};
+
 const InputBox = ({
   inputValue,
   handleChange,
@@ -18,12 +24,6 @@ const InputBox = ({
   isError,
   ...props
 }: InputBoxProps) => {
-  const sizeWidthMap = {
-    small: 23,
-    medium: 48,
-    large: 100,
-  };
-
   const widthPercentage = sizeWidthMap[size];
 
   return (
@@ -31,7 +31,7 @@ const InputBox = ({
       type="text"
       value={inputValue}
       onChange={handleChange}
-      style={{ width: `${widthPercentage}%` }}
+      style={{ width: `${widthPercentage}` }}
       placeholder={placeholder}
       isError={isError}
       {...props}
