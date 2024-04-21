@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormField from "../common/FormField";
 
+import { CARD_NUMBER_FORM, FORM_REGEXP } from "../../constants/form";
+
 export interface CardNumberFormProps {
   labelContent: string;
   inputCount: number;
@@ -28,8 +30,11 @@ const CardNumberForm = ({
     const isAllValid = Object.values(inputValidities).every(
       (isValid) => isValid
     );
+
     setAllInputValid(isAllValid);
-    setErrorMessage(isAllValid ? "" : "모든 필드를 정확하게 입력해주세요.");
+    setErrorMessage(
+      isAllValid ? "" : CARD_NUMBER_FORM.errorMessage.notAllValid
+    );
   }, [inputValidities]);
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
@@ -46,14 +51,14 @@ const CardNumberForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders[index]}
-      maxLength={4}
+      maxLength={CARD_NUMBER_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setCardNumbers ? setCardNumbers : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
-      validationRule={(value) => /^[0-9]{4}$/.test(value)}
-      errorMessageText="숫자 4자리를 입력해주세요."
+      validationRule={(value) => FORM_REGEXP.fourDigitNumber.test(value)}
+      errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
     />
   ));
 

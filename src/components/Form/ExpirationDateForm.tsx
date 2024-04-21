@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormField from "../common/FormField";
 
+import { EXPIRATION_DATE_FORM, FORM_REGEXP } from "../../constants/form";
+
 //TODO: 이름 수정
 import { CardNumberFormProps } from "./CardNumberForm";
 
@@ -18,14 +20,16 @@ const ExpirationDateForm = ({
   const [inputValidities, setInputValidities] = useState({});
 
   const validateMonth = (value: string) => {
-    const regex = /^(0[1-9]|1[0-2]|1[0-9])$/;
-
-    return regex.test(value);
+    return FORM_REGEXP.validMonth.test(value);
   };
 
   const validateYear = (value: string) => {
     const intValue = Number(value);
-    return !isNaN(intValue) && intValue >= 24 && intValue <= 29;
+    return (
+      !isNaN(intValue) &&
+      intValue >= EXPIRATION_DATE_FORM.startYear &&
+      intValue <= EXPIRATION_DATE_FORM.endYear
+    );
   };
 
   const updateInputValidity = (index: string, isValid: boolean) => {
@@ -39,7 +43,9 @@ const ExpirationDateForm = ({
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     setAllInputValid(allValid);
 
-    setErrorMessage(allValid ? "" : "만료 기한을 올바르게 입력해주세요.");
+    setErrorMessage(
+      allValid ? "" : EXPIRATION_DATE_FORM.errorMessage.notAllValid
+    );
   }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -48,7 +54,7 @@ const ExpirationDateForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders[index]}
-      maxLength={2}
+      maxLength={EXPIRATION_DATE_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setExpirationDate ? setExpirationDate : () => {}}
       setAllInputValid={(isValid: boolean) =>
@@ -59,8 +65,8 @@ const ExpirationDateForm = ({
       }
       errorMessageText={
         index === 0
-          ? "01에서 12 사이의 숫자를 입력해주세요."
-          : "24에서 29 사이의 숫자를 입력해주세요."
+          ? EXPIRATION_DATE_FORM.errorMessage.invalidMonth
+          : EXPIRATION_DATE_FORM.errorMessage.invalidYear
       }
     />
   ));

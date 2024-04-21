@@ -5,7 +5,6 @@ import MasterCard from "../../assets/Mastercard.png";
 
 import { CARD_TYPE } from "../../constants/card";
 
-
 const CardLogoWrapper = styled.img`
   width: 36px;
   height: 22px;

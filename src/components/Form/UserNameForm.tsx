@@ -4,6 +4,7 @@ import Input from "./Input";
 import FormElement from "../common/FormField";
 
 import { CardNumberFormProps } from "./CardNumberForm";
+import { USERNAME_FORM, FORM_REGEXP } from "../../constants/form";
 
 const UserNameForm = ({
   labelContent,
@@ -28,13 +29,11 @@ const UserNameForm = ({
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     setAllInputValid(allValid);
-    setErrorMessage(
-      allValid ? "" : "이름은 30자 이하의 영문 대문자여야 합니다."
-    );
+    setErrorMessage(allValid ? "" : USERNAME_FORM.errorMessage.notAllValid);
   }, [inputValidities]);
 
   const validateName = (nameInput: string) => {
-    const regex = /^[A-Z\s]{1,30}$/;
+    const regex = FORM_REGEXP.validUserName;
     return regex.test(nameInput);
   };
 
@@ -44,7 +43,7 @@ const UserNameForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders[index]}
-      maxLength={30}
+      maxLength={USERNAME_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setUserName ? setUserName : () => {}}
       setAllInputValid={(isValid) =>
