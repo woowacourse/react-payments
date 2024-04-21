@@ -29,7 +29,7 @@ const Payments = () => {
 
   const [owner, setOwner, ownerError] = useInput<Owner>({ name: SIGN.empty });
 
-  const concatPeriod = () =>
+  const formatExpirationPeriod = () =>
     expirationPeriod.year.length
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
       : expirationPeriod.month;
@@ -43,7 +43,7 @@ const Payments = () => {
           cardNumber.thirdValue,
           cardNumber.fourthValue,
         ]}
-        expirationPeriod={concatPeriod()}
+        expirationPeriod={formatExpirationPeriod()}
         ownerName={owner.name}
       />
       <InputFormContainer>
