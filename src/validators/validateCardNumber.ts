@@ -6,7 +6,7 @@ const validateCardNumber = (cardNumber: string): IErrorStatus => {
     return { isError: true, errorMessage: '카드 번호는 4자리로 입력해주세요' };
   }
 
-  const isValidCardNumber = /^0{1,4}|[1-9]\d{0,3}$/.test(cardNumber);
+  const isValidCardNumber = /^\d{4}$/.test(cardNumber);
   if (!isValidCardNumber) {
     return { isError: true, errorMessage: '카드 번호는 0000 ~ 9999 사이의 숫자로 입력해주세요' };
   }
