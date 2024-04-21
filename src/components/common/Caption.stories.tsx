@@ -1,21 +1,21 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Caption from "./Caption";
-import { CAPTION } from "../../constants/card-app";
+import { Meta, StoryObj } from '@storybook/react';
+import Caption from './Caption';
+import { CARD_META_INFO } from '../../constants/card-app';
 
 const meta = {
-  title: "Caption",
+  title: 'Caption',
   component: Caption,
 
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
 
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 
   argTypes: {
     type: {
-      control: "radio",
-      options: ["input", "error"],
+      control: 'radio',
+      options: ['input', 'error'],
     },
   },
 } satisfies Meta<typeof Caption>;
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: CAPTION.cardNumberInput,
-    type: "input",
+    text: CARD_META_INFO.cardNumbers.caption!,
+    type: 'input',
   },
 };
