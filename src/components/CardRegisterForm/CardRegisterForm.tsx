@@ -1,11 +1,6 @@
 import { ChangeEvent, FocusEvent } from "react";
 import useInput from "@/hooks/useInput";
-import {
-  PLACE_HOLDER,
-  INPUT_INFO_TITLE,
-  INPUT_INFO_SUBTITLE,
-  INPUT_LABEL,
-} from "@/constants/condition";
+import { PLACE_HOLDER, INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE, INPUT_LABEL } from "@/constants/condition";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
@@ -16,11 +11,7 @@ interface Props {
   ownerNameState: ReturnType<typeof useInput>;
 }
 
-const CardRegisterForm = ({
-  cardNumbersState,
-  expiredPeriodState,
-  ownerNameState,
-}: Props) => {
+const CardRegisterForm = ({ cardNumbersState, expiredPeriodState, ownerNameState }: Props) => {
   const {
     input: cardNumbers,
     onChange: onChangeCardNumbers,
@@ -35,13 +26,9 @@ const CardRegisterForm = ({
     onBlur: onBlurExpirationPeriod,
   } = expiredPeriodState;
 
-  const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } =
-    ownerNameState;
+  const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } = ownerNameState;
 
-  const expirationPlaceholder = [
-    PLACE_HOLDER.EXPIRATION_MONTH,
-    PLACE_HOLDER.EXPIRATION_YEAR,
-  ];
+  const expirationPlaceholder = [PLACE_HOLDER.EXPIRATION_MONTH, PLACE_HOLDER.EXPIRATION_YEAR];
 
   const findFirstErrorMessageIndex = (errorMessages: string[]) => {
     const targetIndex = errorMessages.findIndex((message) => message !== "");
@@ -58,11 +45,7 @@ const CardRegisterForm = ({
         </S.TitleWrapper>
         <InputField
           label={INPUT_LABEL.CARD_NUMBERS}
-          errorMessage={
-            cardNumbersErrorMessages[
-              findFirstErrorMessageIndex(cardNumbersErrorMessages)
-            ]
-          }
+          errorMessage={cardNumbersErrorMessages[findFirstErrorMessageIndex(cardNumbersErrorMessages)]}
         >
           {cardNumbers.map((_, index) => (
             <Input
@@ -75,9 +58,7 @@ const CardRegisterForm = ({
               onBlur={(e: FocusEvent<Element, Element>) => {
                 onBlurCardNumbers(e, index);
               }}
-              isError={
-                findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
-              }
+              isError={findFirstErrorMessageIndex(cardNumbersErrorMessages) === index}
             />
           ))}
         </InputField>
@@ -87,17 +68,11 @@ const CardRegisterForm = ({
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.EXPIRATION_DATE}</S.InputTitle>
-          <S.InputSubtitle>
-            {INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
-          </S.InputSubtitle>
+          <S.InputSubtitle>{INPUT_INFO_SUBTITLE.EXPIRATION_DATE}</S.InputSubtitle>
         </S.TitleWrapper>
         <InputField
           label={INPUT_LABEL.EXPIRATION_DATE}
-          errorMessage={
-            expirationPeriodErrorMessages[
-              findFirstErrorMessageIndex(expirationPeriodErrorMessages)
-            ]
-          }
+          errorMessage={expirationPeriodErrorMessages[findFirstErrorMessageIndex(expirationPeriodErrorMessages)]}
         >
           {expirationPeriod.map((_, index) => (
             <Input
@@ -110,10 +85,7 @@ const CardRegisterForm = ({
               onBlur={(e: FocusEvent<Element, Element>) => {
                 onBlurExpirationPeriod(e, index);
               }}
-              isError={
-                findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
-                index
-              }
+              isError={findFirstErrorMessageIndex(expirationPeriodErrorMessages) === index}
             />
           ))}
         </InputField>

@@ -2,13 +2,14 @@ import { limitNumberLength } from "@/components/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import { Validator } from "@/components/utils/validation";
+import { Validator, validateAll } from "@/components/utils/validation";
 
 type Validate = (input: string[]) => string;
 interface Props {
   initialValue: string[];
   onBlurValidate?: Validate;
   onChangeValidate?: Validate;
+  onBlurValidators?: (inputs: string[]) => Validator[];
   maxNumberLength?: number;
   validLength?: number;
 }
@@ -17,10 +18,11 @@ const useInput = ({
   initialValue = [],
   onBlurValidate = (inputs) => "",
   onChangeValidate = (inputs) => "",
+  onBlurValidators,
   maxNumberLength: maxLength,
   validLength,
 }: Props) => {
-  const [input, setInput] = useState<string[]>(initialValue);
+  const [inputs, setInputs] = useState<string[]>(initialValue);
   const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
@@ -47,9 +49,9 @@ const useInput = ({
       event.target.value = limitNumberLength(event.target.value, maxLength);
     }
 
-    const newInput = [...input];
+    const newInput = [...inputs];
     newInput[index] = event.target.value;
-    setInput(newInput);
+    setInputs(newInput);
 
     const errorMessageOnChange = onChangeValidate(newInput);
     if (errorMessageOnChange) {
@@ -63,16 +65,22 @@ const useInput = ({
     updateErrorMessages("", index);
   };
 
-  const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
-    const errorMessage = onBlurValidateWrapper(input);
-    if (errorMessage.length > 0) {
-      updateErrorMessages(errorMessage, index);
-      return;
-    }
-
-    updateErrorMessages("", index);
+  const waitAllInputCompleteValidator = {
+    validate: (inputs: string[]) => inputs.every((input) => input.length !== 0),
+    errorMessage: "",
+  };
+  const validLengthValidator = {
+    validate: (inputs: string[]) => inputs.every((input) => validLength === undefined || input.length === validLength),
+    errorMessage: "유효하지 않은 길이입니다.",
   };
 
-  return { input, errorMessages, onChange, onBlur };
+  const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
+    const validators: Validator[] = [waitAllInputCompleteValidator, validLengthValidator];
+    if (onBlurValidators !== undefined) validators.push(...onBlurValidators(inputs));
+    const errorMessage = validateAll(validators, inputs);
+    updateErrorMessages(errorMessage, index);
+  };
+
+  return { input: inputs, errorMessages, onChange, onBlur };
 };
 export default useInput;

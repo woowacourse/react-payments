@@ -1,14 +1,26 @@
-export const validateExpirationDate = (date: string[]) => {
+// export const validateExpirationDate = (date: string[]) => {
+//   const [month, year] = date.map(Number);
+//   const { nowMonth, nowYear } = getCurrentDate();
+//   const isOverdue = year < nowYear || (year === nowYear && month < nowMonth);
+
+//   const validators: Validator[] = [
+//     { validate: () => year !== 0 && month !== 0, errorMessage: "" },
+//     { validate: () => month >= 1 && month <= 12, errorMessage: "1~12월 범위의 월을 입력해 주세요." },
+//     { validate: () => !isOverdue, errorMessage: "이미 만료된 카드입니다." },
+//   ];
+//   return validateAll(validators, date);
+// };
+
+export const expirationDateValidators = (date: string[]): Validator[] => {
   const [month, year] = date.map(Number);
   const { nowMonth, nowYear } = getCurrentDate();
   const isOverdue = year < nowYear || (year === nowYear && month < nowMonth);
 
-  const validators: Validator[] = [
+  return [
     { validate: () => year !== 0 && month !== 0, errorMessage: "" },
     { validate: () => month >= 1 && month <= 12, errorMessage: "1~12월 범위의 월을 입력해 주세요." },
     { validate: () => !isOverdue, errorMessage: "이미 만료된 카드입니다." },
   ];
-  return validateAll(validators, date);
 };
 
 export const validateOwnerName = (name: string[]) => {
