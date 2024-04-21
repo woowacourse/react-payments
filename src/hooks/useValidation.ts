@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { IErrorStatus } from '../inquiry/index.d';
+import { IErrorStatus } from '../validators/index.d';
 
 type TValidate = (value: string) => IErrorStatus;
 

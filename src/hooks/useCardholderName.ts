@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import useValidation from './useValidation';
-import { inquireCardholderName } from '../inquiry';
+import { validateCardholderName } from '../validators';
 
 const useCardHolderName = () => {
   const [cardholderName, setCardholderName] = useState('');
-  const { errorStatus, updateErrorStatus } = useValidation(cardholderName, inquireCardholderName);
+  const { errorStatus, updateErrorStatus } = useValidation(cardholderName, validateCardholderName);
 
   return {
     data: cardholderName,

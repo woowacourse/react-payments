@@ -1,6 +1,6 @@
 import { IErrorStatus } from './index.d';
 
-const inquireCardNumber = (cardNumber: string): IErrorStatus => {
+const validateCardNumber = (cardNumber: string): IErrorStatus => {
   const isValidLength = cardNumber.length === 0 || cardNumber.length === 4;
   if (!isValidLength) {
     return { isError: true, errorMessage: '카드 번호는 4자리로 입력해주세요' };
@@ -14,4 +14,4 @@ const inquireCardNumber = (cardNumber: string): IErrorStatus => {
   return { isError: false, errorMessage: '' };
 };
 
-export default inquireCardNumber;
+export default validateCardNumber;

@@ -1,7 +1,7 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
-import { IErrorStatus } from '../inquiry/index.d';
+import { IErrorStatus } from '../validators/index.d';
 
 type MM = string;
 type YY = string;

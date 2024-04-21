@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import useValidation from './useValidation';
-import { inquireExpiryMonth, inquireExpiryYear } from '../inquiry';
+import { validateExpiryMonth, validateExpiryYear } from '../validators';
 
 const useExpiryDate = () => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const { errorStatus: expiryMonthErrorStatus, updateErrorStatus: updateExpiryMonthErrorStatus } = useValidation(
     expiryMonth,
-    inquireExpiryMonth,
+    validateExpiryMonth,
   );
 
   const [expiryYear, setExpiryYear] = useState('');
   const { errorStatus: expiryYearErrorStatus, updateErrorStatus: updateExpiryYearErrorStatus } = useValidation(
     expiryYear,
-    inquireExpiryYear,
+    validateExpiryYear,
   );
 
   return {

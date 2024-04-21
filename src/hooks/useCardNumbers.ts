@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useValidations from './useValidations';
-import { inquireCardNumber } from '../inquiry';
+import { validateCardNumber } from '../validators';
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState({
@@ -9,7 +9,7 @@ const useCardNumbers = () => {
     third: '',
     fourth: '',
   });
-  const { errorStatus, updateErrorStatus } = useValidations(cardNumbers, inquireCardNumber);
+  const { errorStatus, updateErrorStatus } = useValidations(cardNumbers, validateCardNumber);
 
   return {
     data: cardNumbers,
