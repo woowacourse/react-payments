@@ -23,11 +23,9 @@ const useInput = ({
   const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
-    setErrorMessages((prev) => {
-      const newErrorMessages = [...prev];
-      newErrorMessages[index] = errorMessage;
-      return newErrorMessages;
-    });
+    const newErrorMessages = [...errorMessage];
+    newErrorMessages[index] = errorMessage;
+    setErrorMessages(newErrorMessages);
   };
 
   const validateLength: Validate = (inputs) => {
@@ -45,19 +43,14 @@ const useInput = ({
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     if (maxLength) {
-      event.target.value = limitNumberLength({
-        value: event.target.value,
-        maxLength,
-      });
+      event.target.value = limitNumberLength(event.target.value, maxLength);
     }
 
     const newValue = event.target.value;
 
-    setInput((prev) => {
-      const newInput = [...prev];
-      newInput[index] = newValue;
-      return newInput;
-    });
+    const newInput = [...input];
+    newInput[index] = newValue;
+    setInput(newInput);
 
     const errorMessageOnChange = onChangeValidate([newValue]);
     if (errorMessageOnChange) {
