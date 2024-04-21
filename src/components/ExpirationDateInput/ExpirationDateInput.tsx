@@ -1,90 +1,42 @@
 import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
-
-import {
-  isInteger,
-  hasTwoDigit,
-  isValidMonth,
-  isValidDate,
-} from "../../utils/validators";
-
-import { ERRORS, ADD_CARD_FORM_FIELDS } from "../../constants/messages";
-import useAddCardInput from "../../hooks/useAddCardInput";
-
+import { ADD_CARD_FORM_FIELDS } from "../../constants/messages";
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
+import { ChangeEvent, FocusEvent } from "react";
+
 interface ExpirationDateInputProps {
-  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+  expirationDate: {
+    data: Record<string, { value: string; isError: boolean }>;
+    status: { isError: boolean; errorMessage: string };
+  };
+  changeExpirationDate: (event: ChangeEvent<HTMLInputElement>) => void;
+  blurExpirationDate: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
-const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
-  const validateInputOnChange = ({ value }: { value: string }) => {
-    if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
-    }
-    return { isValid: true, errorMsg: "" };
-  };
-
-  const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
-    if (!hasTwoDigit(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotTwoDigit };
-    }
-
-    if (!isValidMonth(expirationDate.month)) {
-      return { isValid: false, errorMsg: ERRORS.inValidMonth };
-    }
-
-    if (!isValidDate(expirationDate)) {
-      return { isValid: false, errorMsg: ERRORS.deprecatedCard };
-    }
-
-    return { isValid: true, errorMsg: "" };
-  };
-
-  const processData = () => {
-    setCardData("expirationDate", Object.values(expirationDate));
-  };
-
-  const {
-    values: expirationDate,
-    errorMessage,
-    isError,
-    onChange,
-    onBlur,
-  } = useAddCardInput<ExpirationDate>({
-    initialValues: {
-      month: "",
-      year: "",
-    },
-    initialErrors: {
-      month: false,
-      year: false,
-    },
-    validateInputOnChange,
-    validateInputOnBlur,
-    processData,
-  });
-
+const ExpirationDateInput = ({
+  expirationDate,
+  changeExpirationDate,
+  blurExpirationDate,
+}: ExpirationDateInputProps) => {
   return (
     <Field
       title={EXPIRATION_DATE.title}
       description={EXPIRATION_DATE.description}
       labelText={EXPIRATION_DATE.labelText}
-      errorMessage={errorMessage}
+      errorMessage={expirationDate.status.errorMessage}
     >
-      {Object.keys(expirationDate).map((name) => (
+      {Object.entries(expirationDate.data).map(([name, { value, isError }]) => (
         <Input
           key={name}
           name={name as keyof ExpirationDate}
           placeholder={
-            name === "month"
-              ? EXPIRATION_DATE.placeholder.month
-              : EXPIRATION_DATE.placeholder.year
+            name === "month" ? EXPIRATION_DATE.placeholder.month : EXPIRATION_DATE.placeholder.year
           }
-          value={expirationDate[name as keyof ExpirationDate]}
-          isError={isError[name as keyof ExpirationDate]}
-          onChange={onChange}
-          onBlur={onBlur}
+          value={value}
+          isError={isError}
+          onChange={changeExpirationDate}
+          onBlur={blurExpirationDate}
           maxLength={2}
         ></Input>
       ))}

@@ -1,5 +1,5 @@
-import Master from '../imgs/Mastercard.png';
-import Visa from '../imgs/Visa.png';
+import Master from "../imgs/Mastercard.png";
+import Visa from "../imgs/Visa.png";
 
 export const CARD_BRAND = {
   visa: {
@@ -16,6 +16,10 @@ export const CARD_BRAND = {
 export const MASK_START_INDEX = 2;
 
 export const SYMBOLS = {
-  mask: '●',
-  slash: '/',
+  mask: "●",
+  slash: "/",
 };
+
+export const CARD_NUMBER_KEYS = ["first", "second", "third", "fourth"] as const;
+export const CARD_EXPIRATION_DATE_KEYS = ["month", "year"] as const;
+export const CARD_OWNERNAME_KEY = ["ownerName"] as const;

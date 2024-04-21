@@ -1,10 +1,10 @@
-import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
+import Input from "../common/Input/Input";
 
 import useAddCardInput from "../../hooks/useAddCardInput";
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from "../../constants/messages";
-import { isCharacter } from "../../utils/validators";
+import { isEnglishCharacter } from "../../utils/validators";
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -12,15 +12,10 @@ interface OwnerNameInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
 }
 
-function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
-  const validateInputOnChange = ({
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
-    if (value !== "" && !isCharacter(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
+const OwnerNameInput = ({ setCardData }: OwnerNameInputProps) => {
+  const validateInputOnChange = ({ value }: { name?: string; value: string }) => {
+    if (value !== "" && !isEnglishCharacter(value)) {
+      return { isValid: false, errorMessage: ERRORS.isNotAlphabet };
     }
     return { isValid: true, errorMessage: "" };
   };
@@ -47,11 +42,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
   });
 
   return (
-    <Field
-      title={OWNER_NAME.title}
-      labelText={OWNER_NAME.labelText}
-      errorMessage={errorMessage}
-    >
+    <Field title={OWNER_NAME.title} labelText={OWNER_NAME.labelText} errorMessage={errorMessage}>
       {Object.keys(ownerName).map((name) => (
         <Input
           key={name}
@@ -66,6 +57,6 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
       ))}
     </Field>
   );
-}
+};
 
 export default OwnerNameInput;

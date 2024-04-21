@@ -5,19 +5,13 @@ type InitialValuesType = CardNumbers | ExpirationDate | OwnerName;
 interface UseAddCardInput<T extends InitialValuesType> {
   initialValues: T;
   initialErrors: Record<keyof T, boolean>;
-  validateInputOnChange: ({
-    name,
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
+  validateInputOnChange: ({ name, value }: { name?: string; value: string }) => {
     isValid: boolean;
-    errorMsg: string;
+    errorMessage: string;
   };
   validateInputOnBlur?: ({ name, value }: { name?: string; value: string }) => {
     isValid: boolean;
-    errorMsg: string;
+    errorMessage: string;
   };
   processData: () => void;
 }
@@ -30,8 +24,7 @@ export default function UseAddCardInput<T extends InitialValuesType>({
   initialErrors,
 }: UseAddCardInput<T>) {
   const [values, setValues] = useState<T>(initialValues);
-  const [isError, setIsError] =
-    useState<Record<keyof T, boolean>>(initialErrors);
+  const [isError, setIsError] = useState<Record<keyof T, boolean>>(initialErrors);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -40,7 +33,7 @@ export default function UseAddCardInput<T extends InitialValuesType>({
     const validation = validateInputOnChange({ name, value });
 
     if (!validation.isValid) {
-      setErrorMessage(validation.errorMsg);
+      setErrorMessage(validation.errorMessage);
       setIsError({ ...isError, [name]: true });
     } else {
       setErrorMessage("");
@@ -58,7 +51,7 @@ export default function UseAddCardInput<T extends InitialValuesType>({
     if (validateInputOnBlur) {
       const validation = validateInputOnBlur({ name, value });
       if (!validation.isValid) {
-        setErrorMessage(validation.errorMsg);
+        setErrorMessage(validation.errorMessage);
         setIsError({ ...isError, [name]: true });
       } else {
         setErrorMessage("");

@@ -1,83 +1,45 @@
 import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
-
-import useAddCardInput from "../../hooks/useAddCardInput";
-import { ADD_CARD_FORM_FIELDS, ERRORS } from "../../constants/messages";
-import { hasFourDigit, isInteger } from "../../utils/validators";
-
-interface CardNumberInputProps {
-  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
-}
-
+import { ADD_CARD_FORM_FIELDS } from "@/constants/messages";
 const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
-export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
-  const validateInputOnChange = ({
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
-    if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
-    }
-    return { isValid: true, errorMsg: "" };
+import { ChangeEvent, FocusEvent } from "react";
+
+interface CardNumberInputProps {
+  cardNumbers: {
+    data: Record<string, { value: string; isError: boolean }>;
+    status: { isError: boolean; errorMessage: string };
   };
+  changeCardNumbers: (event: ChangeEvent<HTMLInputElement>) => void;
+  blurCardNumbers: (event: FocusEvent<HTMLInputElement>) => void;
+}
 
-  const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
-    if (!hasFourDigit(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
-    }
-    return { isValid: true, errorMsg: "" };
-  };
-
-  const processData = () => {
-    setCardData("cardNumbers", Object.values(cardNumbers));
-  };
-
-  const {
-    values: cardNumbers,
-    errorMessage,
-    isError,
-    onChange,
-    onBlur,
-  } = useAddCardInput<CardNumbers>({
-    initialValues: {
-      first: "",
-      second: "",
-      third: "",
-      fourth: "",
-    },
-    initialErrors: {
-      first: false,
-      second: false,
-      third: false,
-      fourth: false,
-    },
-    validateInputOnChange,
-    validateInputOnBlur,
-    processData,
-  });
-
+const CardNumberInput = ({
+  cardNumbers,
+  changeCardNumbers,
+  blurCardNumbers,
+}: CardNumberInputProps) => {
   return (
     <Field
       title={CARD_NUMBER.title}
       description={CARD_NUMBER.description}
       labelText={CARD_NUMBER.labelText}
-      errorMessage={errorMessage}
+      errorMessage={cardNumbers.status.errorMessage}
     >
-      {Object.keys(cardNumbers).map((name) => (
+      {Object.entries(cardNumbers.data).map(([name, { value, isError }]) => (
         <Input
           key={name}
           name={name as keyof CardNumbers}
           placeholder={CARD_NUMBER.placeholder}
-          value={cardNumbers[name as keyof CardNumbers]}
-          isError={isError[name as keyof CardNumbers]}
-          onChange={onChange}
-          onBlur={onBlur}
+          value={value}
+          isError={isError}
+          onChange={changeCardNumbers}
+          onBlur={blurCardNumbers}
           maxLength={4}
         />
       ))}
     </Field>
   );
-}
+};
+
+export default CardNumberInput;
