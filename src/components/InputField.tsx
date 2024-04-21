@@ -8,7 +8,7 @@ interface Props {
   title: string;
   subtitle?: string;
   inputTypes: InputType;
-  handleInput: (value: { [key: string]: string }) => void;
+  handleInput: (value: Record<string, string>) => void;
 }
 
 export default function InputField({
@@ -17,8 +17,8 @@ export default function InputField({
   inputTypes,
   handleInput,
 }: Props) {
-  const [values, setValues] = useState<{ [key: string]: string }>({});
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
+  const [values, setValues] = useState<Record<string, string>>({});
+  const [errorMessages, setErrorMessages] = useState<Record<number, string>>(
     {}
   );
 

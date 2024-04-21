@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function InputForm({ cardInfo, handleInput }: Props) {
-  const handleCardNumberInput = (value: { [key: string]: string }) => {
+  const handleCardNumberInput = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       cardNumbers: {
@@ -19,7 +19,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
     });
   };
 
-  const handleExpiryDateInput = (value: { [key: string]: string }) => {
+  const handleExpiryDateInput = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       expiryDate: {
@@ -29,7 +29,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
     });
   };
 
-  const handleUserNameInput = (value: { [key: string]: string }) => {
+  const handleUserNameInput = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       ...value,
