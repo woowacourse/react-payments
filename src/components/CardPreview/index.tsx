@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import MasterCard from '../../src/assets/images/mastercard.png';
-import VisaCard from '../../src/assets/images/visa.png';
+import CardBrandLogo from './CardBrandLogo';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -11,18 +10,13 @@ interface CardPreviewProps {
 }
 
 const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewProps) => {
-  const isVisa = cardNumbers.first[0] === '4';
-  const firstTwoDigits = Number(cardNumbers.first.slice(0, 2));
-  const isMaster = firstTwoDigits > 50 && firstTwoDigits < 56;
+  const firstTwoDigits = cardNumbers.first.slice(0, 2);
 
   return (
     <CardPreviewLayout>
       <HeaderWrapper>
         <CardMagnetic />
-        <BrandImageWrapper>
-          {isVisa && <StyledImage src={VisaCard} />}
-          {isMaster && <StyledImage src={MasterCard} />}
-        </BrandImageWrapper>
+        <CardBrandLogo firstTwoDigits={firstTwoDigits} />
       </HeaderWrapper>
       <BodyWrapper>
         <CardNumbersWrapper>
@@ -70,17 +64,6 @@ const CardMagnetic = styled.div`
   background-color: #ddcd78;
   width: 50px;
   border-radius: 5px;
-`;
-
-const BrandImageWrapper = styled.div`
-  width: 50px;
-  border-radius: 5px;
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
 
 const BodyWrapper = styled.section`
