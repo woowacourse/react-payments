@@ -12,6 +12,7 @@ import {
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
+import { Fragment } from 'react/jsx-runtime';
 
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
@@ -74,10 +75,9 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
       {Object.keys(expirationDate).map((n) => {
         const name = n as keyof ExpirationDate;
         return (
-          <>
-            <Label key={name} htmlFor={name} labelText={name} hideLabel />
+          <Fragment key={name}>
+            <Label htmlFor={name} labelText={name} hideLabel />
             <Input
-              key={name}
               id={name}
               name={name}
               placeholder={
@@ -91,7 +91,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
               handleOnBlur={onBlur}
               maxLength={2}
             />
-          </>
+          </Fragment>
         );
       })}
     </Field>

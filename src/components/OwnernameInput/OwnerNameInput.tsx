@@ -7,7 +7,7 @@ import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 import { isEnglishCharacter } from '../../domain/validators';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -57,10 +57,9 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
       {Object.keys(ownerName).map((n) => {
         const name = n as keyof OwnerName;
         return (
-          <>
-            <Label key={name} htmlFor={name} labelText={name} hideLabel />
+          <Fragment key={name}>
+            <Label htmlFor={name} labelText={name} hideLabel />
             <Input
-              key={name}
               id={name}
               name={name}
               placeholder={OWNER_NAME.placeholder}
@@ -71,7 +70,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
               handleOnBlur={onBlur}
               maxLength={26}
             />
-          </>
+          </Fragment>
         );
       })}
     </Field>
