@@ -1,9 +1,5 @@
 import styles from './TextField.module.css';
 
-const TextFieldMain: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <>{children}</>;
-};
-
 const Title: React.FC<{ title: string }> = ({ title }) => <p className="title">{title}</p>;
 
 const SubTitle: React.FC<{ subTitle: string }> = ({ subTitle }) => (
@@ -24,12 +20,12 @@ const ErrorText: React.FC<{ errorText: string }> = ({ errorText }) => (
   <p className={`caption ${styles.textFieldErrorText}`}>{errorText}</p>
 );
 
-const TextField = Object.assign(TextFieldMain, {
+const TextField = {
   Title,
   SubTitle,
   Label,
   Content,
   ErrorText,
-});
+};
 
 export default TextField;
