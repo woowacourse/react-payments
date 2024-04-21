@@ -1,5 +1,6 @@
+import { isVisaCard, isMasterCard } from '../../../domain/Card';
 import { Visa, MasterCard, Dot } from '../../../assets';
-import { CARD, CARD_NUMBER } from '../../../constants/Condition';
+import { CARD_NUMBER } from '../../../constants/Condition';
 import * as S from './CardPreview.style';
 
 interface CardPreviewProps {
@@ -10,15 +11,12 @@ interface CardPreviewProps {
 }
 
 function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
-  const handleLogoImage = (cardNumber: string[]) => {
-    if (Number(cardNumber[0].charAt(0)) === CARD.VISA) {
+  const makeCardLogoImage = (cardNumber: string[]) => {
+    if (isVisaCard(cardNumber)) {
       return <img src={Visa} alt="비자 카드" />;
     }
 
-    if (
-      Number(cardNumber[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
-      Number(cardNumber[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
-    ) {
+    if (isMasterCard(cardNumber)) {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
   };
@@ -27,7 +25,7 @@ function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
     <S.Card>
       <S.CardHeader>
         <S.ChipBox />
-        <S.LogoBox>{handleLogoImage(cardNumber)}</S.LogoBox>
+        <S.LogoBox>{makeCardLogoImage(cardNumber)}</S.LogoBox>
       </S.CardHeader>
       <S.CardBody>
         <S.InfoContainer>
