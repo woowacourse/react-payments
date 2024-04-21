@@ -1,11 +1,9 @@
 import "./App.css";
 
+import CardEnrollForm from "./components/CardEnrollForm";
+
 function App() {
-  return (
-    <>
-      <h1>React Payments</h1>
-    </>
-  );
+  return <CardEnrollForm />;
 }
 
 export default App;
