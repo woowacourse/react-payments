@@ -1,39 +1,22 @@
 import styled from "styled-components";
 import CardNumber from "./CardNumber";
-import { CardInfo } from "../PaymentApp";
 
-const CardNumbers = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
-  const latestCardNumbers: { [key: number]: string } = {};
-
-  cardNumbers.forEach((cardInfo) => {
-    const index = Number(cardInfo.index);
-    latestCardNumbers[index] = cardInfo.currentValue;
-  });
-
+const CardNumbers = ({ cardNumbers }: { cardNumbers: string[] }) => {
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "flex-start",
-        gap: "20px",
+        gap: "15px",
+        width: "170px",
         height: "20px",
       }}
     >
-      {Object.entries(latestCardNumbers).map(([index, value]) => {
-        const numericIndex = Number(index);
-        if (value) {
-          return numericIndex <= 1 ? (
-            <CardNumber key={numericIndex} number={value} />
-          ) : (
-            <CardNumber
-              key={numericIndex}
-              number={Array(value.length)
-                .fill(0)
-                .map(() => (
-                  <Dot />
-                ))}
-            />
-          );
+      {cardNumbers.map((cardNumber, index) => {
+        if (index < 2) {
+          return <CardNumber key={index} number={cardNumber} />;
+        } else {
+          return <CardNumber key={index} number={Array(cardNumber.length).fill(<Dot />)} />;
         }
       })}
     </div>
