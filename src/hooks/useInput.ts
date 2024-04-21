@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { ErrorDetail } from '../components/types/error';
+import { INITIAL_ERROR_VALUE } from '../constants/error';
 
-type ErrorMessage = string;
-
-const useInput = (initialValue = '', inquireValidity?: (value: string) => ErrorMessage) => {
+const useInput = (initialValue = '', inquireValidity?: (value: string) => ErrorDetail) => {
   const [value, setValue] = useState(initialValue);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorInfo, setErrorInfo] = useState(INITIAL_ERROR_VALUE);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(() => e.target.value);
@@ -12,7 +12,11 @@ const useInput = (initialValue = '', inquireValidity?: (value: string) => ErrorM
 
   const updateErrorMessage = () => {
     if (inquireValidity) {
-      setErrorMessage(inquireValidity(value));
+      const validationResult = inquireValidity(value);
+
+      setErrorInfo({
+        ...validationResult,
+      });
     }
   };
 
@@ -21,7 +25,7 @@ const useInput = (initialValue = '', inquireValidity?: (value: string) => ErrorM
     setValue,
     handleChange,
     updateErrorMessage,
-    errorMessage,
+    errorInfo,
   };
 };
 
