@@ -1,5 +1,6 @@
 import SIGN from "../constants/sign";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
+import VALIDATE_STATUS, { ValidateStatus } from "../constants/validateStatus";
 
 const ValidatorCondition = {
   checkMaxDigit(value: string, digit: number) {
@@ -24,27 +25,25 @@ const ValidatorCondition = {
 };
 
 const Validator = {
-  checkCreditCardNumber(value: string) {
+  checkCreditCardNumber(value: string): ValidateStatus {
     const maxDigit = 4;
 
-    if (ValidatorCondition.checkMaxDigit(value, maxDigit))
-      return { isError: false, isValid: false };
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return VALIDATE_STATUS.notValid;
 
     if (!ValidatorCondition.checkIsDigit(value)) {
-      return { isError: true, isValid: false };
+      return VALIDATE_STATUS.error;
     }
 
-    return { isError: false, isValid: true };
+    return VALIDATE_STATUS.valid;
   },
 
-  checkCreditExpirationPeriod(value: string, name: string) {
+  checkCreditExpirationPeriod(value: string, name: string): ValidateStatus {
     const maxDigit = 2;
     const limitValue = 12;
 
-    if (ValidatorCondition.checkMaxDigit(value, maxDigit))
-      return { isError: false, isValid: false };
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return VALIDATE_STATUS.notValid;
 
-    if (!ValidatorCondition.checkIsDigit(value)) return { isError: true, isValid: false };
+    if (!ValidatorCondition.checkIsDigit(value)) return VALIDATE_STATUS.error;
 
     const isValidMonth =
       name === CARD_INPUTBOX_NAME.expirationPeriod.month
@@ -52,18 +51,18 @@ const Validator = {
           ValidatorCondition.checkIsNotDoubleZero(value)
         : true;
 
-    if (!isValidMonth) return { isError: true, isValid: false };
+    if (!isValidMonth) return VALIDATE_STATUS.error;
 
-    return { isError: false, isValid: true };
+    return VALIDATE_STATUS.valid;
   },
 
-  checkCreditCardOwner(value: string) {
-    if (ValidatorCondition.checkIsEnglish(value)) return { isError: false, isValid: true };
+  checkCreditCardOwner(value: string): ValidateStatus {
+    if (ValidatorCondition.checkIsEnglish(value)) return VALIDATE_STATUS.valid;
 
-    return { isError: true, isValid: false };
+    return VALIDATE_STATUS.error;
   },
 
-  inputCreditCardInfo(value: string, name: string): { isError: boolean; isValid: boolean } {
+  inputCreditCardInfo(value: string, name: string): ValidateStatus {
     if (Object.keys(CARD_INPUTBOX_NAME.cardNumber).includes(name))
       return this.checkCreditCardNumber(value);
 
@@ -73,7 +72,7 @@ const Validator = {
     if (Object.keys(CARD_INPUTBOX_NAME.owner).includes(name))
       return this.checkCreditCardOwner(value);
 
-    return { isError: false, isValid: false };
+    return VALIDATE_STATUS.notValid; // 예상치 못한 값이 들어오는 경우 유효하지 않는 값으로 처리
   },
 };
 
