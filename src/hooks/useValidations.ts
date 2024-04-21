@@ -13,8 +13,8 @@ const useValidations = <T extends Record<string, string>>(value: T, validate: TV
   const [errorStatus, setErrorStatus] = useState(initialErrorStatus);
 
   const updateErrorStatus = useCallback(
-    (key: keyof T) => {
-      const { isError, errorMessage } = validate(value[key]);
+    (key: keyof T, targetValue = value[key]) => {
+      const { isError, errorMessage } = validate(targetValue);
 
       setErrorStatus({
         isError: { ...errorStatus.isError, [key]: isError },

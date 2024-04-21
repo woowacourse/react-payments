@@ -20,7 +20,7 @@ const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus
           isError={errorStatus.isError}
           value={data}
           onChange={onChange}
-          onBlur={updateErrorStatus}
+          onBlur={() => updateErrorStatus()}
           placeholder="JOHN DOE"
           width="100%"
           maxLength={100}

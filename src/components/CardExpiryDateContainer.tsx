@@ -6,7 +6,7 @@ import { IErrorStatus } from '../validators/index.d';
 type MM = string;
 type YY = string;
 
-type TErrorStatusUpdater = () => void;
+type TErrorStatusUpdater = (value?: string) => void;
 
 interface CardExpiryDateContainerProps {
   data: { month: MM; year: YY };
@@ -27,6 +27,14 @@ const CardExpiryDateContainer = ({
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => setMonth(e.target.value);
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => setYear(e.target.value);
 
+  const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const shouldConvertToTwoDigits = e.target.value.length === 1 && e.target.value !== '0';
+    const month = shouldConvertToTwoDigits ? `0${e.target.value}` : e.target.value;
+
+    setMonth(month);
+    updateMonthErrorStatus(month);
+  };
+
   return (
     <div>
       <InputSection
@@ -40,7 +48,7 @@ const CardExpiryDateContainer = ({
           isError={monthErrorStatus.isError}
           value={data.month}
           onChange={onMonthChange}
-          onBlur={updateMonthErrorStatus}
+          onBlur={onMonthBlur}
           placeholder="01"
           maxLength={2}
           width="48%"
@@ -50,7 +58,7 @@ const CardExpiryDateContainer = ({
           isError={yearErrorStatus.isError}
           value={data.year}
           onChange={onYearChange}
-          onBlur={updateYearErrorStatus}
+          onBlur={() => updateYearErrorStatus()}
           placeholder="24"
           maxLength={2}
           width="48%"
