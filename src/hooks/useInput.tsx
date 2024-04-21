@@ -3,11 +3,11 @@ import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
 
-type validate = (input: string[]) => string;
+type Validate = (input: string[]) => string;
 interface Props {
   initialValue: string[];
-  onBlurValidate?: validate;
-  onChangeValidate?: validate;
+  onBlurValidate?: Validate;
+  onChangeValidate?: Validate;
   maxNumberLength?: number;
   validLength?: number;
 }
@@ -20,9 +20,7 @@ const useInput = ({
   validLength,
 }: Props) => {
   const [input, setInput] = useState<string[]>(initialValue);
-  const [errorMessages, setErrorMessages] = useState(
-    makeStringArray(initialValue.length)
-  );
+  const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
     setErrorMessages((prev) => {
@@ -32,25 +30,20 @@ const useInput = ({
     });
   };
 
-  const validateLength: validate = (inputs) => {
+  const validateLength: Validate = (inputs) => {
     if (validLength === undefined) return "";
-    return inputs.every(
-      (input) => input.length === 0 || input.length === validLength
-    )
+    return inputs.every((input) => input.length === 0 || input.length === validLength)
       ? ""
       : "유효하지 않은 길이입니다.";
   };
 
-  const onBlurValidateWrapper: validate = (inputs) => {
+  const onBlurValidateWrapper: Validate = (inputs) => {
     if (validateLength(inputs).length > 0) return validateLength(inputs);
     if (onBlurValidate(inputs).length > 0) return onBlurValidate(inputs);
     return "";
   };
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
-  ) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     if (maxLength) {
       event.target.value = limitNumberLength({
         value: event.target.value,

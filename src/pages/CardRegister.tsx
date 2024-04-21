@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
-import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
+import CreditCardPreview, { CardType } from "@/components/CreditCardPreview/CreditCardPreview";
 import useInput from "@/hooks/useInput";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import {
-  validateExpirationDate,
-  validateOwnerName,
-} from "@/components/utils/validation";
+import { validateExpirationDate, validateOwnerName } from "@/components/utils/validation";
 
 const CardRegister = () => {
   const cardNumbersState = useInput({
@@ -28,7 +25,7 @@ const CardRegister = () => {
     onChangeValidate: validateOwnerName,
   });
 
-  const checkCardBrand = (cardNumbers: string[]) => {
+  const checkCardBrand = (cardNumbers: string[]): CardType => {
     if (Number(cardNumbers[0][0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
       return "VISA";
     }
@@ -47,9 +44,7 @@ const CardRegister = () => {
         <CreditCardPreview
           cardType={checkCardBrand(cardNumbersState.input)}
           cardNumbers={cardNumbersState.input}
-          expirationDate={
-            expiredDateState.input[0] && expiredDateState.input.join("/")
-          }
+          expirationDate={expiredDateState.input[0] && expiredDateState.input.join("/")}
           ownerName={ownerNameState.input[0]}
         />
         <CardRegisterForm

@@ -6,12 +6,10 @@ import CardRegister from "@/pages/CardRegister";
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <CardRegister />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <CardRegister />
+    </ThemeProvider>
   );
 }
 
