@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { CARD_NUMBER } from "../constants/card-app";
-import visaCard from "../assets/visaCard.png";
-import masterCard from "../assets/masterCard.png";
+import { useState } from 'react';
+import { CARD_NUMBER } from '../constants/card-app';
+import visaCard from '../assets/visaCard.png';
+import masterCard from '../assets/masterCard.png';
 
 const cardImages = {
   visa: visaCard,
@@ -11,7 +11,7 @@ const cardImages = {
 type CardLogo = keyof typeof cardImages;
 
 const useCardLogo = () => {
-  const [cardLogo, setCardLogo] = useState<CardLogo | null>(null);
+  const [cardType, setCardType] = useState<CardLogo | null>(null);
 
   const isVisaCard = (firstPart: string) => {
     return parseInt(firstPart[0], 10) === CARD_NUMBER.visaStartNumber;
@@ -28,23 +28,23 @@ const useCardLogo = () => {
     );
   };
 
-  const handleCardLogo = (firstPart: string): void => {
+  const identifyCardType = (firstPart: string): void => {
     if (isVisaCard(firstPart)) {
-      setCardLogo("visa");
+      setCardType('visa');
       return;
     }
 
     if (isMasterCard(firstPart)) {
-      setCardLogo("master");
+      setCardType('master');
       return;
     }
 
-    setCardLogo(null);
+    setCardType(null);
   };
 
   return {
-    logoPath: cardLogo ? cardImages[cardLogo] : null,
-    handleCardLogo,
+    cardType: cardType ? cardImages[cardType] : null,
+    identifyCardType,
   };
 };
 

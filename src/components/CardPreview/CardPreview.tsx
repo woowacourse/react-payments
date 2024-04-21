@@ -7,7 +7,7 @@ import ExpirationDateDisplay from "./ExpirationDateDisplay";
 
 import { CardInfo } from "../../types/card";
 
-import useCardLogo from "../../hooks/useCardLogo";
+import useCardLogo from "../../hooks/useCardType";
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
@@ -16,17 +16,17 @@ interface CardPreviewProps {
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const { cardNumbers, expirationDate, cardOwnerName: cardOwner } = cardInfo;
 
-  const { logoPath, handleCardLogo } = useCardLogo();
+  const { cardType, identifyCardType } = useCardLogo();
 
   useEffect(() => {
-    handleCardLogo(cardNumbers[0]);
-  }, [cardNumbers, handleCardLogo]);
+    identifyCardType(cardNumbers[0]);
+  }, [cardNumbers, identifyCardType]);
 
   return (
     <StyledCardPreview>
       <CardHeader>
         <CardChip />
-        {logoPath && <CardLogo src={logoPath} />}
+        {cardType && <CardLogo src={cardType} />}
       </CardHeader>
 
       <CardBody>
