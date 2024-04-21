@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-// TODO: 인터페이스 이름 수정
-interface InputProps {
+interface IInputProps {
   index: string;
   type: string;
   placeholder?: string;
@@ -25,7 +24,7 @@ const Input = ({
   setData,
   validationRule,
   errorMessageText,
-}: InputProps) => {
+}: IInputProps) => {
   const [currentValue, setCurrentValue] = useState("");
   const [isValidInput, setIsValidInput] = useState(true);
 
