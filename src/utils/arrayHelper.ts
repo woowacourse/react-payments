@@ -3,8 +3,8 @@ export const makeStringArray = (count: number) => {
 };
 
 export const updatedErrorMessage = (
-  errorMessage: string,
-  messages: string[],
+  errorMessage: string | null,
+  messages: (string | null)[],
   index: number
 ) => {
   return [

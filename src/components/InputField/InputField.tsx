@@ -3,7 +3,7 @@ import S from "./style";
 
 interface Props {
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  errorMessages: string[];
+  errorMessages: (string | null)[];
   children: ReactNode;
   label: string;
 }
@@ -14,7 +14,7 @@ const InputField = ({ label, errorMessages, children }: Props) => {
       <S.Label>{label}</S.Label>
       <S.InputsWrapper>{children}</S.InputsWrapper>
       <S.ErrorMessageWrapper>
-        {errorMessages.find((e) => e.length)}
+        {errorMessages.find((e) => e)}
       </S.ErrorMessageWrapper>
     </S.InputFieldWrapper>
   );

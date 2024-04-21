@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
@@ -12,7 +12,7 @@ import {
 import useInputs from "@/hooks/useInputs";
 import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import { MESSAGE } from "@/constants/message";
-import { makeStringArray, updatedErrorMessage } from "@/utils/arrayHelper";
+import { updatedErrorMessage } from "@/utils/arrayHelper";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs>;
@@ -25,66 +25,68 @@ const CardRegisterForm = ({
   expiredPeriodState,
   ownerNameState,
 }: Props) => {
-  const { inputs: cardNumbers, onChange: onChangeCardNumbers } =
-    cardNumbersState;
+  const {
+    inputs: cardNumbers,
+    onChange: onChangeCardNumbers,
+    errorMessage: cardNumbersErrorMessages,
+    setErrorMessage: setCardNumbersErrorMessages,
+  } = cardNumbersState;
 
-  const { inputs: expirationPeriod, onChange: onChangeExpirationPeriod } =
-    expiredPeriodState;
+  const {
+    inputs: expirationPeriod,
+    onChange: onChangeExpirationPeriod,
+    errorMessage: expirationPeriodErrorMessages,
+    setErrorMessage: setExpirationPeriodErrorMessages,
+  } = expiredPeriodState;
 
-  const { inputs: ownerName, onChange: onChangeOwnerName } = ownerNameState;
+  const {
+    inputs: ownerName,
+    onChange: onChangeOwnerName,
+    errorMessage: ownerNameErrorMessage,
+    setErrorMessage: setOwnerNameErrorMessage,
+  } = ownerNameState;
 
-  const [cardNumbersErrorMessages, setCardNumbersErrorMessages] = useState(
-    makeStringArray(cardNumbers.length)
-  );
+  const onValidateCardNumbers = (index: number) => {
+    if (cardNumbers[index].length) {
+      const errorMessage = validateIsValidLength(
+        cardNumbers[index],
+        VALID_LENGTH.CARD_NUMBERS
+      );
 
-  const [expirationPeriodErrorMessages, setExpirationPeriodErrorMessages] =
-    useState(makeStringArray(expirationPeriod.length));
-
-  const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState("");
-
-  const onBlurValidateCardNumber = (index: number) => {
-    const errorMessage = validateIsValidLength(
-      cardNumbers[index],
-      VALID_LENGTH.CARD_NUMBERS
-    );
-    setCardNumbersErrorMessages((prev) =>
-      updatedErrorMessage(errorMessage, prev, index)
-    );
-  };
-
-  const onBlurValidateExpirationPeriod = (index: number) => {
-    const expiredError = validateExpirationError();
-    setExpirationPeriodErrorMessages(expiredError);
-
-    const monthError =
-      index === 0 ? validateMonth(Number(expirationPeriod[index])) : "";
-
-    const lengthError = validateIsValidLength(
-      expirationPeriod[index],
-      VALID_LENGTH.EXPIRATION_PERIOD
-    );
-
-    const errorMessage = monthError || lengthError;
-
-    setExpirationPeriodErrorMessages((prev) => {
-      return updatedErrorMessage(errorMessage, prev, index);
-    });
-  };
-
-  const validateExpirationError = () => {
-    if (expirationPeriod[0] && expirationPeriod[1]) {
-      const expiredError = validateExpirationDate(expirationPeriod);
-
-      if (expiredError.length) {
-        return [expiredError, expiredError];
-      }
+      return setCardNumbersErrorMessages((prev) =>
+        updatedErrorMessage(errorMessage, prev, index)
+      );
     }
-    return ["", ""];
+    setCardNumbersErrorMessages((prev) =>
+      updatedErrorMessage(null, prev, index)
+    );
   };
 
-  const onBlurValidateOwnerName = () => {
+  const onValidateExpirationPeriod = (index: number) => {
+    if (expirationPeriod[index].length) {
+      const expiredError = validateExpirationDate(expirationPeriod);
+      setExpirationPeriodErrorMessages(expiredError);
+
+      const monthError =
+        index === 0 && validateMonth(Number(expirationPeriod[index]));
+
+      const lengthError = validateIsValidLength(
+        expirationPeriod[index],
+        VALID_LENGTH.EXPIRATION_PERIOD
+      );
+
+      setExpirationPeriodErrorMessages((prev) =>
+        updatedErrorMessage(monthError || lengthError, prev, index)
+      );
+    }
+    setExpirationPeriodErrorMessages((prev) =>
+      updatedErrorMessage(null, prev, index)
+    );
+  };
+
+  const onValidateOwnerName = () => {
     const errorMessage = validateOwnerName(ownerName[0]);
-    setOwnerNameErrorMessage(errorMessage);
+    setOwnerNameErrorMessage(() => [errorMessage]);
   };
 
   return (
@@ -107,9 +109,9 @@ const CardRegisterForm = ({
               onChange={(e) => {
                 onChangeCardNumbers(e, index);
               }}
-              onBlur={() => onBlurValidateCardNumber(index)}
+              onBlur={() => onValidateCardNumbers(index)}
               isError={
-                !!(cardNumbers[index] && cardNumbersErrorMessages[index].length)
+                !!(cardNumbers[index] && cardNumbersErrorMessages[index])
               }
             />
           ))}
@@ -135,12 +137,12 @@ const CardRegisterForm = ({
                 onChangeExpirationPeriod(e, index);
               }}
               onBlur={() => {
-                onBlurValidateExpirationPeriod(index);
+                onValidateExpirationPeriod(index);
               }}
               isError={
                 !!(
                   expirationPeriod[index] &&
-                  expirationPeriodErrorMessages[index].length
+                  expirationPeriodErrorMessages[index]
                 )
               }
             />
@@ -153,11 +155,11 @@ const CardRegisterForm = ({
         <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
         <InputField
           label={MESSAGE.INPUT_LABEL.OWNER_NAME}
-          errorMessages={[ownerNameErrorMessage]}
+          errorMessages={ownerNameErrorMessage}
         >
           <Input
             placeholder={MESSAGE.PLACEHOLDER.OWNER_NAME}
-            isError={!!ownerNameErrorMessage.length}
+            isError={!!ownerNameErrorMessage[0]}
             type="text"
             maxLength={MAX_LENGTH.OWNER_NAME}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -165,7 +167,7 @@ const CardRegisterForm = ({
               onChangeOwnerName(e, 0);
             }}
             onBlur={() => {
-              onBlurValidateOwnerName();
+              onValidateOwnerName();
             }}
           />
         </InputField>
