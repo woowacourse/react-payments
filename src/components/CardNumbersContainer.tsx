@@ -4,6 +4,7 @@ import InputField from './common/InputField';
 import { CardNumberKey } from './types/card';
 import { ErrorDetail } from './types/error';
 import { useMemo } from 'react';
+import { CARD_NUMBER_INDEXES, PASSWORD_INPUT_KEYS } from '../constants/card';
 
 export interface CardNumbersContainerProps {
   cardNumbers: Record<CardNumberKey, string>;
@@ -11,9 +12,6 @@ export interface CardNumbersContainerProps {
   errorInfo: Record<CardNumberKey, ErrorDetail>;
   generateErrorMessageUpdater: (targetKey: CardNumberKey) => () => void;
 }
-
-const CARD_NUMBER_INDEXES: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
-const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
 
 export default function CardNumberContainer({
   cardNumbers,
