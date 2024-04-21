@@ -1,8 +1,12 @@
 import { IErrorStatus } from './index.d';
 
+const EXPIRY_YEAR_LENGTH = 2;
+const MIN_YEAR = 24;
+const MAX_YEAR = 40;
+
 const inquireExpiryYear = (expiryYear: string): IErrorStatus => {
-  const isValidLength = expiryYear.length === 0 || expiryYear.length === 2;
-  const isValidYear = Number(expiryYear) > 23 && Number(expiryYear) < 41;
+  const isValidLength = expiryYear.length === EXPIRY_YEAR_LENGTH;
+  const isValidYear = Number(expiryYear) >= MIN_YEAR && Number(expiryYear) <= MAX_YEAR;
 
   if (!isValidLength) {
     return { isError: true, errorMessage: '년도(年) : 2자리로 입력해주세요' };

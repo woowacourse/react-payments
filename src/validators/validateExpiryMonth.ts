@@ -1,7 +1,9 @@
 import { IErrorStatus } from './index.d';
 
+const EXPIRY_MONTH_LENGTH = 2;
+
 const validateExpiryMonth = (expiryMonth: string): IErrorStatus => {
-  const isValidLength = expiryMonth.length === 0 || expiryMonth.length === 2;
+  const isValidLength = expiryMonth.length === EXPIRY_MONTH_LENGTH;
   const isValidMonth = /^(0[1-9]|1[0-2])$/.test(expiryMonth);
 
   if (!isValidLength) {
