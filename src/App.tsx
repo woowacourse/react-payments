@@ -45,6 +45,20 @@ function App() {
     },
   ];
 
+  const monthOnBlurValidations: ValidationType[] = [
+    twoDigitValidation,
+    {
+      isError: (state: string) =>
+        state !== '' &&
+        !validate.isNumberInRange({
+          min: 1,
+          max: 12,
+          compareNumber: Number(state),
+        }),
+      errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
+    },
+  ];
+
   const yearOnChangeValidations: ValidationType[] = [
     {
       isError: (state: string) => state !== '' && !validate.isValidDigit(state),
@@ -64,7 +78,7 @@ function App() {
     inputChangeHandler: monthChangeHandler,
     inputFocusOutHandler: monthFocusOutHandler,
     error: monthError,
-  } = useInput(monthOnChangeValidations, [twoDigitValidation]);
+  } = useInput(monthOnChangeValidations, monthOnBlurValidations);
 
   const {
     inputState: year,
