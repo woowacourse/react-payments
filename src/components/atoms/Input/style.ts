@@ -6,7 +6,9 @@ export const Input = styled.input<{ isError: boolean }>`
   padding: 8px 15px 8px 8px;
   gap: 8px;
   border: 1px solid
-    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
+    ${(props) =>
+      props.isError ? props.theme.colors.inputError : props.theme.colors.input};
+
   border-radius: 2px;
   font-family: Inter;
   font-size: 11px;
@@ -15,6 +17,6 @@ export const Input = styled.input<{ isError: boolean }>`
   text-align: left;
 
   &::placeholder {
-    color: rgba(172, 172, 172, 1);
+    color: ${({ theme }) => theme.colors.input};
   }
 `;
