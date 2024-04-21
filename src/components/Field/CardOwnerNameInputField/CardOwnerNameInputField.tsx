@@ -14,29 +14,18 @@ type CardOwnerNameInputField = {
 export default function CardOwnerNameInputField({ ownerName, setOwnerName }: CardOwnerNameInputField) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const checkOwnerNameError = ({
-    name,
-    engName,
-    normalizedOwnerName,
-  }: {
-    name: string;
-    engName: string;
-    normalizedOwnerName: string;
-  }) => {
+  const getErrorMessage = (name: string, engName: string, normalizedOwnerName: string) => {
     const isExcessiveWhiteSpace = engName.length > normalizedOwnerName.length;
 
     if (isExcessiveWhiteSpace && normalizedOwnerName.length !== 0) {
-      setErrorMessage(ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE);
-      return true;
+      return ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
     }
 
     if (engName.length < name.length) {
-      setErrorMessage(ERROR_MESSAGES.NOT_ENG);
-      setOwnerName(engName);
-      return true;
+      return ERROR_MESSAGES.NOT_ENG;
     }
 
-    return false;
+    return '';
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +33,9 @@ export default function CardOwnerNameInputField({ ownerName, setOwnerName }: Car
     const engName = filterEnglish(upperCaseName);
     const normalizedOwnerName = normalizeSpaces(engName);
 
-    const isError = checkOwnerNameError({ name: upperCaseName, engName, normalizedOwnerName });
-    if (isError) return;
+    const errorMessage = getErrorMessage(upperCaseName, engName, normalizedOwnerName);
 
-    setErrorMessage('');
+    setErrorMessage(errorMessage);
     setOwnerName(normalizedOwnerName);
   };
 
