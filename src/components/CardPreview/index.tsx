@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CardBrandLogo from './CardBrandLogo';
 import CardNumber from './CardNumberContainer';
+import ExpiryDate from './ExpiryDate';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -26,13 +27,7 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
           <CardNumber data={cardNumbers.third} type="secret" />
           <CardNumber data={cardNumbers.fourth} type="secret" />
         </CardNumbersWrapper>
-
-        <ExpiryDateWrapper>
-          <p>{expiryDate.month}</p>
-          <p>{(expiryDate.month || expiryDate.year) && '/'}</p>
-          <p>{expiryDate.year}</p>
-        </ExpiryDateWrapper>
-
+        <ExpiryDate expiryDate={expiryDate} />
         <CardholderNameWrapper>
           <CardholderNameText>{cardholderName}</CardholderNameText>
         </CardholderNameWrapper>
@@ -82,13 +77,6 @@ const CardNumbersWrapper = styled.div`
   height: 20px;
   margin-top: 20px;
   gap: 20px;
-`;
-
-const ExpiryDateWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  height: 20px;
 `;
 
 const CardholderNameWrapper = styled.div`
