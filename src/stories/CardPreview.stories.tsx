@@ -63,8 +63,8 @@ export const Default: Story = {
       fourth: '1234',
     },
     expiryDate: {
-      month: '11',
-      year: '25',
+      month: 'MM',
+      year: 'YY',
     },
     cardholderName: 'John Doe',
   },
