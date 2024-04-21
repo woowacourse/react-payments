@@ -11,6 +11,8 @@ interface Props {
 }
 
 export default function CardView({ cardInfo }: Props) {
+  const { cardNumbers, expiryDate, userName } = cardInfo;
+
   const getCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
 
@@ -25,7 +27,7 @@ export default function CardView({ cardInfo }: Props) {
     if (cardType === 'master') return Master;
   };
 
-  const cardImgSrc = getCardImage(cardInfo.cardNumbers.cardNumber1);
+  const cardImgSrc = getCardImage(cardNumbers.cardNumber1);
 
   const formatDate = (date: string) => {
     if (date.length === 1) {
@@ -33,6 +35,7 @@ export default function CardView({ cardInfo }: Props) {
     }
     return date;
   };
+
   return (
     <CardContainer>
       <ImgBox>
@@ -41,21 +44,21 @@ export default function CardView({ cardInfo }: Props) {
       </ImgBox>
 
       <CardNumbers>
-        <CardNumber>{cardInfo.cardNumbers.cardNumber1}</CardNumber>
-        <CardNumber>{cardInfo.cardNumbers.cardNumber2}</CardNumber>
+        <CardNumber>{cardNumbers.cardNumber1}</CardNumber>
+        <CardNumber>{cardNumbers.cardNumber2}</CardNumber>
         <SecretCardNumber>
-          {SECRET_NUMBER.repeat(cardInfo.cardNumbers.cardNumber3.length)}
+          {SECRET_NUMBER.repeat(cardNumbers.cardNumber3.length)}
         </SecretCardNumber>
         <SecretCardNumber>
-          {SECRET_NUMBER.repeat(cardInfo.cardNumbers.cardNumber4.length)}
+          {SECRET_NUMBER.repeat(cardNumbers.cardNumber4.length)}
         </SecretCardNumber>
       </CardNumbers>
       <TextBox>
-        {formatDate(cardInfo.expiryDate.month)}
-        {cardInfo.expiryDate.year.length > 0 ? SLASH : DEFAULT_BLANK}
-        {formatDate(cardInfo.expiryDate.year)}
+        {formatDate(expiryDate.month)}
+        {expiryDate.year.length > 0 ? SLASH : DEFAULT_BLANK}
+        {formatDate(expiryDate.year)}
       </TextBox>
-      <TextBox>{cardInfo.userName}</TextBox>
+      <TextBox>{userName}</TextBox>
     </CardContainer>
   );
 }
