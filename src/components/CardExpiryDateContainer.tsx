@@ -1,6 +1,6 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import RegistrationLayout from './common/RegistrationLayout';
+import InputField from './common/InputField';
 import { ErrorDetail } from './types/error';
 
 interface ExpiryDateInfo {
@@ -18,7 +18,7 @@ interface CardExpiryDateContainerProps {
 const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) => {
   return (
     <div>
-      <RegistrationLayout
+      <InputField
         title="카드 유효기간을 입력해 주세요"
         subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         labelText="유효기간"
@@ -44,7 +44,7 @@ const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) 
           maxLength={2}
           width="48%"
         />
-      </RegistrationLayout>
+      </InputField>
       <ErrorWrapper>
         <ErrorText>{month.errorInfo.errorMessage}</ErrorText>
         <ErrorText>{year.errorInfo.errorMessage}</ErrorText>
