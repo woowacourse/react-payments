@@ -64,7 +64,7 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
     <>
       <input
         maxLength={maxLengthTable[informationDetail]}
-        onInput={(e) => {
+        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
           if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
         }}
         type={getInputType()}
