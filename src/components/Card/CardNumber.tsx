@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const CardNumber = ({ number }: { number: string }) => {
-  return <CardNumberWrapper>{number}</CardNumberWrapper>;
+const CardNumber = ({ key, number }: { key: React.Key; number: string | string[] }) => {
+  return <CardNumberWrapper key={key}>{number}</CardNumberWrapper>;
 };
 
 const CardNumberWrapper = styled.span`
@@ -9,6 +9,10 @@ const CardNumberWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
 `;
 
 export default CardNumber;
