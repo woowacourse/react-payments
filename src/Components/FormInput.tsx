@@ -121,7 +121,7 @@ const CardOwnerInput = () => {
           sizePreset="large"
           maxLength={15}
           name={name as keyof CardOwnerInfo}
-          value={cardOwner[name as keyof CardOwnerInfo]}
+          value={cardOwner[name as keyof CardOwnerInfo] ?? ""}
           placeholder={placeholder}
         />
       ))}
