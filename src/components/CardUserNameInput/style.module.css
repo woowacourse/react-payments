@@ -1,0 +1,7 @@
+.inputWrap {
+  width: 100%;
+  input {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}

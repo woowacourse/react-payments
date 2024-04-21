@@ -1,0 +1,15 @@
+.message {
+  height: inherit;
+  min-height: 0.86rem;
+  color: #ff3d3d;
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 0.86rem;
+  p {
+    margin-bottom: 4px;
+    height: 0.86rem;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
