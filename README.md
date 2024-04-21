@@ -100,7 +100,7 @@
 - 카드번호의 세번쨰와 네번째는 '∙'로 변환하여 출력한다.
 - 소유자 이름이 특정 넓이를 넘어갈 경우 말줄임표(...)로 축약한다.
 
-# 📂 파일 구조 설명
+# 📂 파일 구조
 
 ## 파일 트리
 
@@ -118,8 +118,14 @@ src
  ┃ ┣ common
  ┃ ┃ ┣ PaymentsFormTitle.tsx
  ┃ ┃ ┗ PaymentsInputField.tsx
- ┃ ┣ style
- ┃ ┃ ┗ FormSection.tsx
+ ┣ style
+ ┃ ┣ CardBrand.style.ts
+ ┃ ┣ CardInfo.style.ts
+ ┃ ┣ CardPreview.style.ts
+ ┃ ┣ FormSection.ts
+ ┃ ┣ MainPage.style.ts
+ ┃ ┣ PaymentsFormTitle.style.ts
+ ┃ ┗ PaymentsInputField.style.ts
  ┃ ┣ CardBrand.tsx
  ┃ ┣ CardInfo.tsx
  ┃ ┣ CardNumbersFormSection.tsx
@@ -131,6 +137,11 @@ src
  ┃ ┣ errorMessage.ts
  ┃ ┣ option.ts
  ┃ ┗ regex.ts
+ ┃ ┗ style.ts
+ ┣ domains
+ ┃ ┗ validateInputAndSetErrorMessage.tsx
+ ┣ hooks
+ ┃ ┗ useInput.tsx
  ┣ stories
  ┃ ┣ assets
  ┃ ┣ CardNumbersFormSection.stories.tsx
@@ -142,8 +153,8 @@ src
  ┃ ┗ PaymentsInputField.stories.tsx
  ┣ types
  ┃ ┗ type.d.ts
- ┣ App.css
  ┣ App.tsx
+ ┣ Global.style.ts
  ┣ main.tsx
  ┣ reset.css
  ┗ vite-env.d.ts
