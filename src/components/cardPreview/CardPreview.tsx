@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ICardInfo } from '../../types/type';
 import * as Styled from './CardPreview.styled';
 import MasterCardImage from '../../assets/Mastercard.png';
@@ -12,34 +11,20 @@ export interface CardPreviewProps {
 }
 
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const [cardBrand, setCardBrand] = useState('');
-
-  useEffect(() => {
+  const getCardBrandImage = () => {
     const IIN = Math.floor(cardInfo.cardNumbers[0] / 100);
-
     if (
       IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER &&
       IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER
     ) {
-      setCardBrand(CARD_BRAND.MASTERCARD.NAME);
+      return MasterCardImage;
     } else if (
       IIN >= CARD_BRAND.VISA.MIN_NUMBER &&
       IIN <= CARD_BRAND.VISA.MAX_NUMBER
     ) {
-      setCardBrand(CARD_BRAND.VISA.NAME);
+      return VisaImage;
     } else {
-      setCardBrand('');
-    }
-  }, [cardInfo.cardNumbers]);
-
-  const getCardBrandImage = () => {
-    switch (cardBrand) {
-      case CARD_BRAND.MASTERCARD.NAME:
-        return MasterCardImage;
-      case CARD_BRAND.VISA.NAME:
-        return VisaImage;
-      default:
-        return '';
+      return '';
     }
   };
 
@@ -47,11 +32,9 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
     <Styled.CardPreviewContainer>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
-        {cardBrand && (
-          <Styled.CardBrand>
-            <img src={getCardBrandImage()} alt={cardBrand} />
-          </Styled.CardBrand>
-        )}
+        <Styled.CardBrand>
+          <img src={getCardBrandImage()} alt={''} />
+        </Styled.CardBrand>
       </Styled.ChipSection>
       <Styled.CardInfoSection>
         <CardNumbers cardNumbers={cardInfo.cardNumbers} />
