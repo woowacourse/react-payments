@@ -20,10 +20,6 @@
   align-items: center;
 }
 
-.shelf__section {
-  height: 130px;
-}
-
 .horizon__gap__container {
   display: flex;
   gap: 10px;
