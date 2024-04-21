@@ -6,6 +6,7 @@ import {
   CardPreview,
   CardUserNameInput,
 } from './components';
+import useCardNumbersInput from './hooks/useCardNumbersInput';
 import useCardUserNameInput from './hooks/useCardUserNameInput';
 // import useCardInfoReducer from './modules/useCardInfoReducer';
 
@@ -18,20 +19,23 @@ function App() {
   //   editCardUserName,
   // } = useCardInfoReducer();
 
+  const { numbers, numberErrors, handleNumberChange } = useCardNumbersInput(4);
   const { userName, nameError, handleNameChange } = useCardUserNameInput();
 
   return (
     <div id="app">
       <div className="inner">
         <div>{userName}</div>
+        <div>{numbers}</div>
         {/* <CardPreview cardInfo={cardInfo} /> */}
         <form className="form-container">
           <fieldset>
-            {/* <CardNumbersInput
-              editCardMark={editCardMark}
-              editCardNumbers={editCardNumbers}
+            <CardNumbersInput
+              numbers={numbers}
+              numberErrors={numberErrors}
+              onNumberChange={handleNumberChange}
             />
-            <CardExpirationPeriodInput editCardPeriod={editCardPeriod} /> */}
+            {/* <CardExpirationPeriodInput editCardPeriod={editCardPeriod} /> */}
             <CardUserNameInput
               userName={userName}
               nameError={nameError}
