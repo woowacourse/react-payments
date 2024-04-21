@@ -34,10 +34,7 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           onAddExpirationDate={(event) => onAddExpirationDate('year', event.target.value)}
         />
       </TextField.Content>
-      <TextField.ErrorText
-        isError={expirationDateError.isError.month || expirationDateError.isError.year}
-        errorText={expirationDateError.errorMessage}
-      />
+      <TextField.ErrorText errorText={expirationDateError.errorMessage} />
     </section>
   );
 };

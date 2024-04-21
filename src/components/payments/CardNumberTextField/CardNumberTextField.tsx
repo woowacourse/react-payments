@@ -24,7 +24,7 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, 
           />
         ))}
       </TextField.Content>
-      <TextField.ErrorText isError={cardNumberError.isError} errorText={cardNumberError.errorMessage} />
+      <TextField.ErrorText errorText={cardNumberError.errorMessage} />
     </section>
   );
 };

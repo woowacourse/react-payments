@@ -23,7 +23,7 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ ownerName, onAd
           onAddOwnerName={(event) => onAddOwnerName(event.target.value)}
         />
       </TextField.Content>
-      <TextField.ErrorText isError={ownerNameError.isError} errorText={ownerNameError.errorMessage} />
+      <TextField.ErrorText errorText={ownerNameError.errorMessage} />
     </section>
   );
 };
