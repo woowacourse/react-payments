@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import Visa from "../../static/Visa.png";
-import Mastercard from "../../static/Mastercard.png";
+import { getCardBrandImg } from "../../utils/getCardBrand";
 import * as S from "./style";
 
 interface Props {
@@ -8,24 +6,7 @@ interface Props {
 }
 
 export default function CardPreview({ cardInformation }: Props) {
-  const [cardBrandImg, setCardBrandImg] = useState("");
-
-  useEffect(() => {
-    if (cardInformation.cardNumbers[0].value[0] === "4") {
-      setCardBrandImg(Visa);
-      return;
-    }
-
-    if (
-      Number(cardInformation.cardNumbers[0].value.slice(0, 2)) >= 51 &&
-      Number(cardInformation.cardNumbers[0].value.slice(0, 2)) <= 55
-    ) {
-      setCardBrandImg(Mastercard);
-      return;
-    }
-
-    setCardBrandImg("");
-  }, [cardInformation.cardNumbers]);
+  const cardBrandImg = getCardBrandImg(cardInformation.cardNumbers[0].value);
 
   return (
     <S.CardContainer>

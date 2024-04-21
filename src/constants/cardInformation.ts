@@ -8,3 +8,9 @@ export const CARD_INFO = {
 };
 
 export const OWNER_NAME_REG = /^[A-Z\s]*$/; // 영문자 대문자 또는 공백만 허용
+
+export const CARD_BRAND = {
+  VISA: 4,
+  MASTER_START: 51,
+  MASTER_END: 55,
+};
