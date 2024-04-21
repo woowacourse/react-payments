@@ -55,13 +55,13 @@ export default function CardExpiredDate({
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
             onChange={monthOnChange}
             value={month}
-            border-color={monthErrorMessage ? 'error' : undefined}
+            borderColor={monthErrorMessage ? 'error' : undefined}
           />
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
             onChange={yearOnChange}
             value={year}
-            border-color={yearErrorMessage ? 'error' : undefined}
+            borderColor={yearErrorMessage ? 'error' : undefined}
           />
         </TextInputContainer>
       </FormItem>

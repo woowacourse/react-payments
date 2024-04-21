@@ -1,22 +1,25 @@
-/** @jsxImportSource @emotion/react */
-
 import { COLOR } from '../styles/color';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 export interface TextInputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  'border-color'?: 'normal' | 'error';
+  borderColor?: 'normal' | 'error';
 }
 
-const styleA = {
+const borderColors = { normal: COLOR.gray1, error: COLOR.error };
+
+const TextInput = styled.input((props: TextInputProps) => ({
   width: '40px',
   border: '1px solid',
   borderRadius: '2px',
   padding: '8px',
   outline: 'none',
+  borderColor: props.borderColor
+    ? borderColors[props.borderColor] + ' !important'
+    : undefined,
 
   '&::placeholder': {
     color: COLOR.gray1,
@@ -24,21 +27,6 @@ const styleA = {
   '&:focus': {
     border: `1px solid ${COLOR.black}`,
   },
-};
+}));
 
-const borderColors = { normal: COLOR.gray1, error: COLOR.error };
-
-export default function TextInput(inputProps: TextInputProps) {
-  const borderColor = inputProps['border-color'] ?? 'normal';
-
-  const borderStyle = {
-    borderColor: borderColors[borderColor] + ' !important',
-  };
-
-  return (
-    <input
-      {...inputProps}
-      css={css(styleA, inputProps['border-color'] ? borderStyle : undefined)}
-    />
-  );
-}
+export default TextInput;
