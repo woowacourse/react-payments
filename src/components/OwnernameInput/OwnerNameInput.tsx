@@ -1,13 +1,13 @@
-import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
+import Input from '../common/Input/Input';
 import Label from '../common/Label/Label';
 
 import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
 import { isEnglishCharacter } from '../../domain/validators';
 
+import { Fragment } from 'react';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { Fragment, useEffect } from 'react';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -43,10 +43,6 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     validateInputOnChange,
     updateCardData,
   });
-
-  useEffect(() => {
-    console.log(ownerName);
-  }, [ownerName]);
 
   return (
     <Field
