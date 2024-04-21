@@ -1,69 +1,49 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-
 import {
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
-import debounceFunc from '../../utils/debounceFunc';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
+import Input from '../common/Input';
 import FormErrorMessage from '../FormErrorMessage';
-import Input from '../Input';
 
 import styles from './style.module.css';
 
 interface CardUserNameInputProps {
-  editCardUserName: (name: string | undefined) => void;
+  userName: string;
+  nameError: boolean;
+  onNameChange: (value: string) => void;
 }
-export default function CardUserNameInput(props: CardUserNameInputProps) {
-  const { editCardUserName } = props;
+
+export default function CardUserNameInput({
+  userName,
+  nameError,
+  onNameChange,
+}: CardUserNameInputProps) {
   const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
   const { length } = CARD_USER;
 
-  const [userName, setUserName] = useState<string>();
-  const [error, setError] = useState<boolean>(false);
-
-  const validateName = (name: string) => {
-    const regex = new RegExp(`^[a-zA-Z\\s]{1,${length}}$`);
-    const isValidated = regex.test(name);
-
-    setError(!isValidated);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const name = value.toUpperCase();
-
-    debounceFunc(() => {
-      validateName(value);
-      setUserName(name);
-    }, 10);
-  };
-
   const getErrorMessage = () => {
-    if (error) return ERROR_MESSAGE.userName;
-    return;
-  };
-
-  useEffect(() => {
-    if (!error || userName === '') {
-      editCardUserName(userName || undefined);
+    if (!nameError) {
+      return;
     }
-  }, [userName, error]);
+    return ERROR_MESSAGE.userName;
+  };
 
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
         <div>
-          <div className={styles.inputWrap} onChange={handleChange}>
+          <div className={styles.inputWrap}>
             <Input
-              style={{ textTransform: 'uppercase' }}
-              name="month"
               type="text"
-              placeholder={namePlaceholder}
+              name="name"
+              value={userName}
               maxLength={length}
-              error={error}
+              placeholder={namePlaceholder}
+              isError={nameError}
+              onChange={(event) => onNameChange(event.target.value)}
             />
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />
