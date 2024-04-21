@@ -26,15 +26,15 @@ const getCardBrandLogo = (firstTwoDigits: string): LogoImageSrc | null => {
 };
 
 const CardBrandLogo = ({ firstTwoDigits }: ICardBrandLogoProps) => {
-  const logoSrc = getCardBrandLogo(firstTwoDigits);
+  const matchedLogo = getCardBrandLogo(firstTwoDigits);
 
-  if (!logoSrc) {
+  if (!matchedLogo) {
     return null;
   }
 
   return (
     <BrandLogoContainer>
-      <StyledImage src={logoSrc} />
+      <StyledImage src={matchedLogo} />
     </BrandLogoContainer>
   );
 };
