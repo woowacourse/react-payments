@@ -1,16 +1,16 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import {
-  CARD_EXPIRATION,
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
+  INPUT_LENGTH,
 } from '../../constants';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import debounceFunc from '../../utils/debounceFunc';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
+import Input from '../common/Input';
 import FormErrorMessage from '../FormErrorMessage';
-import Input from '../Input';
 
 import styles from './style.module.css';
 
@@ -35,7 +35,6 @@ export default function CardExpirationPeriodInput(
   const { editCardPeriod } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
-  const { length } = CARD_EXPIRATION;
 
   const [cardPeriod, setCardPeriod] = useState<CardExpirationPeriod>({
     month: undefined,
@@ -161,15 +160,15 @@ export default function CardExpirationPeriodInput(
               name="month"
               type="text"
               placeholder={monthPlaceholder}
-              maxLength={length}
               error={error.month || error.availability}
+              maxLength={INPUT_LENGTH.CARD_EXPIRATION}
             />
             <Input
               name="year"
               type="text"
               placeholder={yearPlaceholder}
-              maxLength={length}
               error={error.year || error.availability}
+              maxLength={INPUT_LENGTH.CARD_EXPIRATION}
             />
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />

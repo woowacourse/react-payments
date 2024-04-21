@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import IMAGES from '../../assets/images';
-import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
+import { CARD_COLOR, CARD_MARK, INPUT_LENGTH } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 
 import styles from './style.module.css';
@@ -29,7 +29,7 @@ function CardPreview(props: CardPreviewProps) {
       .split(',')
       .map((item, index) => {
         if (item && index > 1) {
-          return DOT.repeat(CARD_NUMBERS.length);
+          return DOT.repeat(INPUT_LENGTH.CARD_NUMBERS);
         }
         return item;
       })

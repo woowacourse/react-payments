@@ -1,17 +1,9 @@
 import IMAGES from '../assets/images';
 
-export const CARD_NUMBERS = {
-  length: 4,
-  startNumber: 0,
-  endNumber: 9,
-};
-
-export const CARD_EXPIRATION = {
-  length: 2,
-};
-
-export const CARD_USER = {
-  length: 100,
+export const INPUT_LENGTH = {
+  CARD_NUMBERS: 4,
+  CARD_EXPIRATION: 2,
+  CARD_USER: 100,
 };
 
 export const CARD_MARK = {

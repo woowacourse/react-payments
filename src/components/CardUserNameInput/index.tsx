@@ -1,7 +1,7 @@
 import {
-  CARD_USER,
   CARD_USER_FORM_MESSAGE,
   ERROR_MESSAGE,
+  INPUT_LENGTH,
 } from '../../constants';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
@@ -22,7 +22,6 @@ export default function CardUserNameInput({
   onNameChange,
 }: CardUserNameInputProps) {
   const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
-  const { length } = CARD_USER;
 
   const getErrorMessage = () => {
     if (!nameError) {
@@ -40,7 +39,7 @@ export default function CardUserNameInput({
               type="text"
               name="name"
               value={userName}
-              maxLength={length}
+              maxLength={INPUT_LENGTH.CARD_USER}
               placeholder={namePlaceholder}
               isError={nameError}
               onChange={(event) => onNameChange(event.target.value)}
