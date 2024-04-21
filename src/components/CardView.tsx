@@ -3,30 +3,14 @@ import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
-import {
-  CARD_CONFIG,
-  DEFAULT_BLANK,
-  SECRET_NUMBER,
-  SLASH,
-} from '../constants/system';
+import { DEFAULT_BLANK, SECRET_NUMBER, SLASH } from '../constants/system';
+import { isMasterCard, isVisaCard } from '../utils/checkCardType';
 
 interface Props {
   cardInfo: Card;
 }
 
 export default function CardView({ cardInfo }: Props) {
-  const isVisaCard = (cardBrandNumber: number) => {
-    if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return true;
-  };
-
-  const isMasterCard = (cardBrandNumber: number) => {
-    if (
-      CARD_CONFIG.MASTER.START <= cardBrandNumber &&
-      cardBrandNumber <= CARD_CONFIG.MASTER.END
-    )
-      return true;
-  };
-
   const getCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
 
