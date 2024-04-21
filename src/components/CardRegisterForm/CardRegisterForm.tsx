@@ -4,20 +4,15 @@ import Input from "@/components/Input/Input";
 import S from "./style";
 import InputFieldHeader from "../InputFieldHeader/InputFieldHeader";
 import {
-  EXPIRATION_DATE_PLACEHOLDER,
-  INPUT_INFO_SUBTITLE,
-  INPUT_INFO_TITLE,
-  INPUT_LABEL,
-  PLACEHOLDER,
-} from "@/constants/message";
-import {
   validateExpirationDate,
   validateIsValidLength,
   validateMonth,
   validateOwnerName,
 } from "@/utils/validation";
 import useInputs from "@/hooks/useInputs";
-import { MAX_LENGTH } from "@/constants/condition";
+import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
+import { MESSAGE } from "@/constants/message";
+import { makeStringArray, updatedErrorMessage } from "@/utils/arrayHelper";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs>;
@@ -39,60 +34,80 @@ const CardRegisterForm = ({
   const { inputs: ownerName, onChange: onChangeOwnerName } = ownerNameState;
 
   const [cardNumbersErrorMessages, setCardNumbersErrorMessages] = useState(
-    Array(cardNumbers.length).fill("")
+    makeStringArray(cardNumbers.length)
   );
+
   const [expirationPeriodErrorMessages, setExpirationPeriodErrorMessages] =
-    useState(Array(expirationPeriod.length).fill(""));
+    useState(makeStringArray(expirationPeriod.length));
+
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState("");
 
-  const handleCardNumberBlur = (index: number) => {
-    const errorMessage = validateIsValidLength(cardNumbers[index], 4);
-    setCardNumbersErrorMessages((messages) => [
-      ...messages.slice(0, index),
-      errorMessage,
-      ...messages.slice(index + 1),
-    ]);
+  const onBlurValidateCardNumber = (index: number) => {
+    const errorMessage = validateIsValidLength(
+      cardNumbers[index],
+      VALID_LENGTH.CARD_NUMBERS
+    );
+    setCardNumbersErrorMessages((prev) =>
+      updatedErrorMessage(errorMessage, prev, index)
+    );
   };
 
-  const handleExpirationPeriodBlur = (index: number) => {
+  const onBlurValidateExpirationPeriod = (index: number) => {
+    const expiredError = validateExpirationError();
+    setExpirationPeriodErrorMessages(expiredError);
+
     const monthError =
       index === 0 ? validateMonth(Number(expirationPeriod[index])) : "";
-    const lengthError = validateIsValidLength(expirationPeriod[index], 2);
-    const expiredError = validateExpirationDate(expirationPeriod);
-    const errorMessage = monthError || lengthError || expiredError;
-    setExpirationPeriodErrorMessages((messages) => [
-      ...messages.slice(0, index),
-      errorMessage,
-      ...messages.slice(index + 1),
-    ]);
+
+    const lengthError = validateIsValidLength(
+      expirationPeriod[index],
+      VALID_LENGTH.EXPIRATION_PERIOD
+    );
+
+    const errorMessage = monthError || lengthError;
+
+    setExpirationPeriodErrorMessages((prev) => {
+      return updatedErrorMessage(errorMessage, prev, index);
+    });
   };
 
-  const handleOwnerNameBlur = () => {
+  const validateExpirationError = () => {
+    if (expirationPeriod[0] && expirationPeriod[1]) {
+      const expiredError = validateExpirationDate(expirationPeriod);
+
+      if (expiredError.length) {
+        return [expiredError, expiredError];
+      }
+    }
+    return ["", ""];
+  };
+
+  const onBlurValidateOwnerName = () => {
     const errorMessage = validateOwnerName(ownerName[0]);
     setOwnerNameErrorMessage(errorMessage);
   };
+
   return (
     <S.CardFormWrapper>
       {/*카드 번호*/}
       <S.InputFieldWithInfo>
         <InputFieldHeader
-          title={INPUT_INFO_TITLE.CARD_NUMBERS}
-          subTitle={INPUT_INFO_SUBTITLE.CARD_NUMBERS}
+          title={MESSAGE.INPUT_INFO_TITLE.CARD_NUMBERS}
+          subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_NUMBERS}
         />
         <InputField
-          label={INPUT_LABEL.CARD_NUMBERS}
+          label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
           errorMessages={cardNumbersErrorMessages}
         >
           {cardNumbers.map((_: string, index: number) => (
             <Input
-              maxLength={20}
               type="number"
               key={index}
-              placeholder={PLACEHOLDER.CARD_NUMBERS}
+              placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
               onChange={(e) => {
                 onChangeCardNumbers(e, index);
               }}
-              onBlur={() => handleCardNumberBlur(index)}
+              onBlur={() => onBlurValidateCardNumber(index)}
               isError={
                 !!(cardNumbers[index] && cardNumbersErrorMessages[index].length)
               }
@@ -104,23 +119,23 @@ const CardRegisterForm = ({
       {/*유효 기간*/}
       <S.InputFieldWithInfo>
         <InputFieldHeader
-          title={INPUT_INFO_TITLE.EXPIRATION_DATE}
-          subTitle={INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
+          title={MESSAGE.INPUT_INFO_TITLE.EXPIRATION_DATE}
+          subTitle={MESSAGE.INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
         />
         <InputField
-          label={INPUT_LABEL.EXPIRATION_DATE}
+          label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
           errorMessages={expirationPeriodErrorMessages}
         >
           {expirationPeriod.map((_: string, index: number) => (
             <Input
               type="number"
               key={index}
-              placeholder={EXPIRATION_DATE_PLACEHOLDER[index]}
+              placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 onChangeExpirationPeriod(e, index);
               }}
               onBlur={() => {
-                handleExpirationPeriodBlur(index);
+                onBlurValidateExpirationPeriod(index);
               }}
               isError={
                 !!(
@@ -135,13 +150,13 @@ const CardRegisterForm = ({
 
       {/*소유자 이름*/}
       <S.InputFieldWithInfo>
-        <InputFieldHeader title={INPUT_INFO_TITLE.OWNER_NAME} />
+        <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
         <InputField
-          label={INPUT_LABEL.OWNER_NAME}
+          label={MESSAGE.INPUT_LABEL.OWNER_NAME}
           errorMessages={[ownerNameErrorMessage]}
         >
           <Input
-            placeholder={PLACEHOLDER.OWNER_NAME}
+            placeholder={MESSAGE.PLACEHOLDER.OWNER_NAME}
             isError={!!ownerNameErrorMessage.length}
             type="text"
             maxLength={MAX_LENGTH.OWNER_NAME}
@@ -150,7 +165,7 @@ const CardRegisterForm = ({
               onChangeOwnerName(e, 0);
             }}
             onBlur={() => {
-              handleOwnerNameBlur();
+              onBlurValidateOwnerName();
             }}
           />
         </InputField>
