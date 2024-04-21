@@ -4,7 +4,9 @@ import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
 import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
 import CardPreviewBox from '../CardPreview/CardPreview';
 
-import './reset.css';
+import '../../styles/reset.css';
+import '../../styles/common.css';
+
 import * as S from './App.style';
 import { cardNumbersType } from '../../types/cardNumbers';
 

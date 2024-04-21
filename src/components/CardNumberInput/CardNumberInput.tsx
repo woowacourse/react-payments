@@ -51,7 +51,7 @@ function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
 
   return (
     <div>
-      <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
+      <TitleContainer title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다." />
       <InputField label="카드 번호" length={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
