@@ -47,11 +47,13 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
         <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
       </div>
       <S.CardNumberBox>
-        <LabelText>카드 번호</LabelText>
+        <LabelText htmlFor="cardNumber1">카드 번호</LabelText>
         <S.InputContainer>
           {cardNumbers.map((cardNumber, idx) => {
             return (
               <Input
+                id={`cardNumber${idx + 1}`}
+                ariaLabel={`카드번호${idx + 1}`}
                 maxLength={4}
                 placeholder="1234"
                 value={cardNumber.value}

@@ -49,9 +49,10 @@ export default function CardOwnerName({
     <S.CardOwnerNameContainer>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
       <S.CardOwnerNameBox>
-        <LabelText>소유자 이름</LabelText>
+        <LabelText htmlFor="cardOwnerName">소유자 이름</LabelText>
         <S.InputContainer>
           <Input
+            id="cardOwnerName"
             maxLength={15}
             placeholder="JOHN DOE"
             value={cardOwnerName.value}

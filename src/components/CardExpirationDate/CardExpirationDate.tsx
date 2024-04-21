@@ -77,9 +77,11 @@ export default function CardExpirationDate({
         <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
       </div>
       <S.CardDateBox>
-        <LabelText>유효기간</LabelText>
+        <LabelText htmlFor="cardExpirationMonth">유효기간</LabelText>
         <S.InputContainer>
           <Input
+            id="cardExpirationMonth"
+            ariaLabel="유효기간 월"
             maxLength={2}
             placeholder="MM"
             value={cardExpirationMonth.value}
@@ -88,6 +90,8 @@ export default function CardExpirationDate({
             onBlurInput={(value) => onBlurMonthInput(value)}
           />
           <Input
+            id="cardExpirationYear"
+            ariaLabel="유효기간 연도"
             maxLength={2}
             placeholder="YY"
             value={cardExpirationYear.value}

@@ -17,7 +17,7 @@ export const CaptionText = styled.span`
   color: rgba(139, 149, 161, 1);
 `;
 
-export const LabelText = styled.span`
+export const LabelText = styled.label`
   font-family: NotoSansKR, Regular;
   font-size: 12px;
   font-weight: 500;
