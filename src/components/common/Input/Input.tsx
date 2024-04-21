@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './Input.module.css';
 import clsx from 'clsx';
+
 interface InputProps {
   name: string;
   id: string;

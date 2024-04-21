@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import styles from './Label.module.css';
+import clsx from 'clsx';
 
 interface LabelProps {
   htmlFor: string;
