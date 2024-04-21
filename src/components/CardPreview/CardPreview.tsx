@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 
 import CardText from "./CardText";
@@ -7,7 +6,7 @@ import ExpirationDateDisplay from "./ExpirationDateDisplay";
 
 import { CardInfo } from "../../types/card";
 
-import useCardLogo from "../../hooks/useCardLogo";
+import { decideCardLogo } from "./CardPreview.utils";
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
@@ -16,17 +15,13 @@ interface CardPreviewProps {
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const { cardNumbers, expirationDate, cardOwner } = cardInfo;
 
-  const { logoPath, handleCardLogo } = useCardLogo();
-
-  useEffect(() => {
-    handleCardLogo(cardNumbers[0]);
-  }, [cardNumbers, handleCardLogo]);
+  const cardLogo = decideCardLogo(cardNumbers[0]);
 
   return (
     <StyledCardPreview>
       <CardHeader>
         <CardChip />
-        {logoPath && <CardLogo src={logoPath} />}
+        {cardLogo && <CardLogo src={cardLogo} alt="User Card Logo" />}
       </CardHeader>
 
       <CardBody>
