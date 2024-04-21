@@ -4,13 +4,13 @@ import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
 
 const useInput = <T extends object>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);
-  const [inputError, setInputError] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
     const validateStatus = Validator.inputCreditCardInfo(value, name);
-    if (validateStatus === "error") return setInputError(true);
+    if (validateStatus === "error") return setIsError(true);
     if (validateStatus === "notValid") return;
 
     const validValue = name === CARD_INPUTBOX_NAME.owner.name ? value.toUpperCase() : value;
@@ -20,10 +20,10 @@ const useInput = <T extends object>(initialValue: T) => {
       [name]: validValue,
     }));
 
-    setInputError(false);
+    setIsError(false);
   };
 
-  return [inputValue, handleChange, inputError] as const;
+  return [inputValue, handleChange, isError] as const;
 };
 
 export default useInput;
