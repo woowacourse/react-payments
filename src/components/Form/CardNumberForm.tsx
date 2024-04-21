@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Input from "./Input";
-import FormElement from "../common/FormElement";
+import FormField from "../common/FormField";
 
 export interface CardNumberFormProps {
   labelContent: string;
@@ -58,7 +58,7 @@ const CardNumberForm = ({
   ));
 
   return (
-    <FormElement
+    <FormField
       labelContent={labelContent}
       inputs={inputs}
       errorMessage={errorMessage}

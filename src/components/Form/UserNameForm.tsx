@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Input from "./Input";
-import FormElement from "../common/FormElement";
+import FormElement from "../common/FormField";
 
 import { CardNumberFormProps } from "./CardNumberForm";
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Input from "./Input";
-import FormElement from "../common/FormElement";
+import FormField from "../common/FormField";
 
 //TODO: 이름 수정
 import { CardNumberFormProps } from "./CardNumberForm";
@@ -66,7 +66,7 @@ const ExpirationDateForm = ({
   ));
 
   return (
-    <FormElement
+    <FormField
       labelContent={labelContent}
       inputs={inputs}
       errorMessage={errorMessage}
