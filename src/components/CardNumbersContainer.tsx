@@ -5,21 +5,21 @@ import RegistrationLayout from './common/RegistrationLayout';
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersContainerProps {
-  cardNumbers: Record<CardNumberKey, string>;
-  setCardNumbers: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
+  data: Record<CardNumberKey, string>;
+  setData: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
   updateErrorStatus: (key: CardNumberKey) => void;
 }
 
 export default function CardNumberContainer({
-  cardNumbers,
-  setCardNumbers,
+  data,
+  setData,
   errorStatus,
   updateErrorStatus,
 }: CardNumbersContainerProps) {
   const arr = ['first', 'second', 'third', 'fourth'] as const;
   const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumbers({ ...cardNumbers, [key]: e.target.value });
+    setData({ ...data, [key]: e.target.value });
   };
 
   return (
@@ -39,7 +39,7 @@ export default function CardNumberContainer({
               key={key}
               id={`${key}-card-numbers-input`}
               isError={errorStatus.isError[key]}
-              value={cardNumbers[key]}
+              value={data[key]}
               onChange={generateOnChange(key)}
               onBlur={() => updateErrorStatus(key)}
               placeholder="1234"

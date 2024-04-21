@@ -3,19 +3,14 @@ import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
 
 interface CardholderNameContainerProps {
-  cardholderName: string;
-  setCardholderName: React.Dispatch<React.SetStateAction<string>>;
+  data: string;
+  setData: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
   updateErrorStatus: () => void;
 }
 
-const CardholderNameContainer = ({
-  cardholderName,
-  setCardholderName,
-  errorStatus,
-  updateErrorStatus,
-}: CardholderNameContainerProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setCardholderName(e.target.value.toUpperCase());
+const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus }: CardholderNameContainerProps) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value.toUpperCase());
 
   return (
     <div>
@@ -23,7 +18,7 @@ const CardholderNameContainer = ({
         <Input
           id="cardholder-name-input"
           isError={errorStatus.isError}
-          value={cardholderName}
+          value={data}
           onChange={onChange}
           onBlur={updateErrorStatus}
           placeholder="카드 소유자 이름을 입력해주세요"

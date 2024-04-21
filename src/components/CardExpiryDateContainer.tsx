@@ -6,27 +6,26 @@ import { IErrorStatus } from '../inquiry/index.d';
 type MM = string;
 type YY = string;
 
+type TErrorStatusUpdater = () => void;
+
 interface CardExpiryDateContainerProps {
-  expiryDate: { month: MM; year: YY };
-  expiryDateSetter: { month: React.Dispatch<React.SetStateAction<MM>>; year: React.Dispatch<React.SetStateAction<YY>> };
-  errorStatus: {
-    month: IErrorStatus;
-    year: IErrorStatus;
+  data: { month: MM; year: YY };
+  dataSetter: {
+    month: React.Dispatch<React.SetStateAction<string>>;
+    year: React.Dispatch<React.SetStateAction<string>>;
   };
-  errorStatusUpdater: {
-    month: () => void;
-    year: () => void;
-  };
+  errorStatus: { month: IErrorStatus; year: IErrorStatus };
+  errorStatusUpdater: { month: TErrorStatusUpdater; year: TErrorStatusUpdater };
 }
 
 const CardExpiryDateContainer = ({
-  expiryDate,
-  expiryDateSetter,
-  errorStatus,
-  errorStatusUpdater,
+  data,
+  dataSetter: { month: setMonth, year: setYear },
+  errorStatus: { month: monthErrorStatus, year: yearErrorStatus },
+  errorStatusUpdater: { month: updateMonthErrorStatus, year: updateYearErrorStatus },
 }: CardExpiryDateContainerProps) => {
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => expiryDateSetter.month(e.target.value);
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => expiryDateSetter.year(e.target.value);
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => setMonth(e.target.value);
+  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => setYear(e.target.value);
 
   return (
     <div>
@@ -38,28 +37,28 @@ const CardExpiryDateContainer = ({
       >
         <Input
           id="card-expiry-month-input"
-          isError={errorStatus.month.isError}
-          value={expiryDate.month}
+          isError={monthErrorStatus.isError}
+          value={data.month}
           onChange={onMonthChange}
-          onBlur={errorStatusUpdater.month}
+          onBlur={updateMonthErrorStatus}
           placeholder="MM"
           maxLength={2}
           width="48%"
         />
         <Input
           id="card-expiry-year-input"
-          isError={errorStatus.year.isError}
-          value={expiryDate.year}
+          isError={yearErrorStatus.isError}
+          value={data.year}
           onChange={onYearChange}
-          onBlur={errorStatusUpdater.year}
+          onBlur={updateYearErrorStatus}
           placeholder="YY"
           maxLength={2}
           width="48%"
         />
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorStatus.month.errorMessage}</ErrorText>
-        <ErrorText>{errorStatus.year.errorMessage}</ErrorText>
+        <ErrorText>{monthErrorStatus.errorMessage}</ErrorText>
+        <ErrorText>{yearErrorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );
