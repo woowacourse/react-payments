@@ -21,7 +21,7 @@ const CardInformationPreview = ({
 }: CardInformationPreviewProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
-  const isMonthYearAllVisible = monthState.month && yearState.year;
+  const isMonthYearAllVisible = monthState.value && yearState.value;
   const { isVisa, isMasterCard } = cardNumberState.showImageCondition;
 
   return (
@@ -34,23 +34,23 @@ const CardInformationPreview = ({
       <Styled.UserInformationContainer>
         <Styled.CardNumberContainer>
           <Styled.UserInfomation $typo={theme.typography.cardNumber}>
-            {firstState.first}
+            {firstState.value}
           </Styled.UserInfomation>
           <Styled.UserInfomation $typo={theme.typography.cardNumber}>
-            {secondState.second}
+            {secondState.value}
           </Styled.UserInfomation>
           <Styled.UserInfomation $typo={theme.typography.cardNumber}>
-            {CONDITION.hiddenCardNumber.repeat(String(thirdState.third ?? '').length)}
+            {CONDITION.hiddenCardNumber.repeat(String(thirdState.value ?? '').length)}
           </Styled.UserInfomation>
           <Styled.UserInfomation $typo={theme.typography.cardNumber}>
-            {CONDITION.hiddenCardNumber.repeat(String(fourthState.fourth ?? '').length)}
+            {CONDITION.hiddenCardNumber.repeat(String(fourthState.value ?? '').length)}
           </Styled.UserInfomation>
         </Styled.CardNumberContainer>
         <Styled.UserInfomation $typo={theme.typography.cardExpirationDate}>
-          {`${monthState.month ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.year ?? ''}`}
+          {`${monthState.value ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.value ?? ''}`}
         </Styled.UserInfomation>
         <Styled.UserInfomation $typo={theme.typography.cardUserName}>
-          {userNameState.userName ?? ''}
+          {userNameState.value ?? ''}
         </Styled.UserInfomation>
       </Styled.UserInformationContainer>
     </Styled.CardInformationPreview>

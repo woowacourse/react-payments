@@ -1,20 +1,23 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
-import {
-  FirstCardNumberStateType,
-  SecondCardNumberStateType,
-  ThirdCardNumberStateType,
-  FourthCardNumberStateType,
-  ShowImageConditionType,
-} from '../types/Types';
 
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
+interface ShowImageConditionType {
+  isVisa: boolean;
+  isMasterCard: boolean;
+}
+
+interface DetailCardNumberStateType {
+  value: number | undefined;
+  setValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: boolean;
+}
 export interface CardNumberStateType {
-  firstState: FirstCardNumberStateType;
-  secondState: SecondCardNumberStateType;
-  thirdState: ThirdCardNumberStateType;
-  fourthState: FourthCardNumberStateType;
+  firstState: DetailCardNumberStateType;
+  secondState: DetailCardNumberStateType;
+  thirdState: DetailCardNumberStateType;
+  fourthState: DetailCardNumberStateType;
   showImageCondition: ShowImageConditionType;
 }
 
@@ -39,24 +42,24 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
   return {
     cardNumberState: {
       firstState: {
-        first,
-        setFirst,
-        firstError,
+        value: first,
+        setValue: setFirst,
+        error: firstError,
       },
       secondState: {
-        second,
-        setSecond,
-        secondError,
+        value: second,
+        setValue: setSecond,
+        error: secondError,
       },
       thirdState: {
-        third,
-        setThird,
-        thirdError,
+        value: third,
+        setValue: setThird,
+        error: thirdError,
       },
       fourthState: {
-        fourth,
-        setFourth,
-        fourthError,
+        value: fourth,
+        setValue: setFourth,
+        error: fourthError,
       },
       showImageCondition: {
         isVisa: showVisa(first),

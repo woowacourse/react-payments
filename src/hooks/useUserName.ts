@@ -4,15 +4,15 @@ import CONDITION from '../constants/Condition';
 const { REG_EXP } = CONDITION;
 
 export interface UserNameStateType {
-  userName: string | undefined;
-  setUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  userNameError: boolean;
+  value: string | undefined;
+  setValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: boolean;
 }
 
 const useUserName = (defaultValue: string | undefined) => {
   const [userName, setUserName, userNameError] = useInput(defaultValue, REG_EXP.userName);
 
-  return { userNameState: { userName, setUserName, userNameError } };
+  return { userNameState: { value: userName, setValue: setUserName, error: userNameError } };
 };
 
 export default useUserName;

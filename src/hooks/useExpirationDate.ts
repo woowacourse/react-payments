@@ -1,12 +1,16 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
-import { MonthStateType, YearStateType } from '../types/Types';
 
 const { REG_EXP } = CONDITION;
 
+interface DetailExpirationDateStateType {
+  value: number | undefined;
+  setValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: boolean;
+}
 export interface ExpirationDateStateType {
-  monthState: MonthStateType;
-  yearState: YearStateType;
+  monthState: DetailExpirationDateStateType;
+  yearState: DetailExpirationDateStateType;
 }
 
 const useExpirationDate = (defaultValues: Array<number | undefined>) => {
@@ -16,14 +20,14 @@ const useExpirationDate = (defaultValues: Array<number | undefined>) => {
   return {
     expirationDateState: {
       monthState: {
-        month,
-        setMonth,
-        monthError,
+        value: month,
+        setValue: setMonth,
+        error: monthError,
       },
       yearState: {
-        year,
-        setYear,
-        yearError,
+        value: year,
+        setValue: setYear,
+        error: yearError,
       },
     },
   };
