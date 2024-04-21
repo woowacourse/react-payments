@@ -1,11 +1,11 @@
-const convertKeysIntoObject = <T>(keys: string[], defaultValue: T) => {
-  const obj: Record<string, T> = {};
-
-  keys.forEach(key => {
-    obj[key] = defaultValue;
-  });
-
-  return obj;
+const convertKeysIntoObject = <T>(keys: string[], defaultValue: T): Record<string, T> => {
+  return keys.reduce(
+    (resultObj, key) => {
+      resultObj[key] = defaultValue;
+      return resultObj;
+    },
+    {} as Record<string, T>,
+  );
 };
 
 export default convertKeysIntoObject;
