@@ -1,30 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useContext } from "react";
-import { css } from "@emotion/react";
 
-import FormInput from "./FormInput";
-import Tooltip from "./Tooltip";
+import FormInput from "../FormInput";
+import Tooltip from "../Tooltip";
 
-const titleCss = css({
-  fontSize: "18px",
-  fontWeight: "700",
-  lineHeight: "26px",
-  textAlign: "left",
-});
-
-const descriptionCss = css({
-  fontSize: "10px",
-  fontWeight: "400",
-  lineHeight: "14px",
-  textAlign: "left",
-  color: "#8B95A1",
-  marginBottom: "30px",
-});
-
-const rowStyle = css({
-  display: "flex",
-  justifyContent: "space-between",
-});
+import { descriptionCss, rowStyle, titleCss } from "./emotionCss";
 
 interface Props {
   formFieldInfo: FormFieldInfo;
@@ -32,7 +12,6 @@ interface Props {
 }
 
 /**
- *
  * @param param0 내부 children 요소로 input요소를 입력받는다.
  */
 const FormFieldComponent: React.FC<Props> = ({ formFieldInfo: { key, title, description, label }, children }) => {

@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import React, { useContext } from "react";
-import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../App";
-import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "./Form";
+import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
+import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "../Form";
+import { inputStyle } from "./emotionCSS";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
@@ -10,24 +10,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>, name: CardInfoInputKey) => void;
 }
 
-const SIZE: Record<NonNullable<InputProps["sizePreset"]>, "17%" | "43%" | "100%"> = {
-  small: "17%",
-  medium: "43%",
-  large: "100%",
-};
-
 const FormInputCompound: React.FC<InputProps> = ({ sizePreset = "medium", name, onInputChange, ...props }) => {
-  const inputStyle = css({
-    height: "25px",
-    borderRadius: "2px",
-    border: "solid 1px #ACACAC",
-    padding: "8px",
-    width: SIZE[sizePreset],
-    marginTop: "10px",
-    textTransform: "uppercase",
-  });
-
-  return <input {...props} css={inputStyle} onChange={(e) => onInputChange(e, name)} />;
+  return <input {...props} css={inputStyle(sizePreset)} onChange={(e) => onInputChange(e, name)} />;
 };
 
 const CardNumberInput = () => {

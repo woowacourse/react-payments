@@ -1,61 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import masterImage from "../assets/masterImage.png";
-import visaImage from "../assets/visaImage.png";
-import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../App";
 import { useContext } from "react";
 
-const style = css({
-  background: "#333",
-  width: "212px",
-  height: "132px",
-  boxShadow: "3px 3px 5px 0px #00000040",
-  borderRadius: "4px",
-  padding: "8px 17px",
-  color: "#fff",
-  fontSize: "20px",
-  fontWeight: "500",
-  display: "flex",
-  flexDirection: "column",
-  gap: "14px",
-  fontFamily: "Roboto",
-  marginBottom: "20px",
-});
+import masterImage from "../../assets/masterImage.png";
+import visaImage from "../../assets/visaImage.png";
+import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
 
-const logoStyle = css({
-  width: "36px",
-  height: "22px",
-  background: "#DDCD78",
-  borderRadius: "2px",
-});
-
-const rowStyle = css({
-  display: "flex",
-  justifyContent: "space-between",
-  gap: "10px",
-});
-
-const width42 = css({
-  width: "42px",
-});
-
-const cardInfoStyle = css`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  & > div {
-    height: 24px;
-  }
-`;
-
-const periodRowStyle = css({
-  display: "flex",
-  gap: "5px",
-});
-
-const periodStyle = css({
-  width: "20px",
-});
+import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, style, width42 } from "./emotionCss";
 
 const formatTwoDigitNumber = (n: number | undefined) => {
   if (!n) return "";
