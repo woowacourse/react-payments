@@ -4,6 +4,15 @@ import InputDescription from "./InputDescription";
 import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
+export interface ICardFormProps {
+  labelContent: string;
+  inputCount: number;
+  type: string;
+  placeholders: string[];
+  setCardNumbers?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setExpirationDate?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setUserName?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+}
 
 const Form = ({
   setCardNumbers,

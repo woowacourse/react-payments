@@ -5,8 +5,7 @@ import FormField from "../common/FormField";
 
 import { EXPIRATION_DATE_FORM, FORM_REGEXP } from "../../constants/form";
 
-//TODO: 이름 수정
-import { CardNumberFormProps } from "./CardNumberForm";
+import { ICardFormProps } from "./Form";
 
 const ExpirationDateForm = ({
   labelContent,
@@ -14,7 +13,7 @@ const ExpirationDateForm = ({
   type,
   placeholders,
   setExpirationDate,
-}: CardNumberFormProps) => {
+}: ICardFormProps) => {
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});

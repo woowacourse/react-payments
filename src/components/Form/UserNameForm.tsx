@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormElement from "../common/FormField";
 
-import { CardNumberFormProps } from "./CardNumberForm";
+import { ICardFormProps } from "./Form";
 import { USERNAME_FORM, FORM_REGEXP } from "../../constants/form";
 
 const UserNameForm = ({
@@ -12,7 +12,7 @@ const UserNameForm = ({
   type,
   placeholders,
   setUserName,
-}: CardNumberFormProps) => {
+}: ICardFormProps) => {
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});

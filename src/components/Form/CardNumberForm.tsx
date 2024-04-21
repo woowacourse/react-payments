@@ -5,15 +5,7 @@ import FormField from "../common/FormField";
 
 import { CARD_NUMBER_FORM, FORM_REGEXP } from "../../constants/form";
 
-export interface CardNumberFormProps {
-  labelContent: string;
-  inputCount: number;
-  type: string;
-  placeholders: string[];
-  setCardNumbers?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
-  setExpirationDate?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
-  setUserName?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
-}
+import { ICardFormProps } from "./Form";
 
 const CardNumberForm = ({
   labelContent,
@@ -21,7 +13,7 @@ const CardNumberForm = ({
   type,
   placeholders,
   setCardNumbers,
-}: CardNumberFormProps) => {
+}: ICardFormProps) => {
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
