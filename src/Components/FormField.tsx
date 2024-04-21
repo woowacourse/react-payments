@@ -5,8 +5,6 @@ import { css } from "@emotion/react";
 import FormInput from "./FormInput";
 import Tooltip from "./Tooltip";
 
-import { FormErrorContext } from "../App";
-
 const titleCss = css({
   fontSize: "18px",
   fontWeight: "700",
@@ -38,13 +36,6 @@ interface Props {
  * @param param0 내부 children 요소로 input요소를 입력받는다.
  */
 const FormFieldComponent: React.FC<Props> = ({ formFieldInfo: { key, title, description, label }, children }) => {
-  const formErrors = useContext(FormErrorContext)![0];
-  const formErrorDetails = formErrors[key];
-  let errorMessage;
-  Object.entries(formErrorDetails).forEach((formError) => {
-    console.log(formError);
-  });
-
   return (
     <div>
       <h1 css={titleCss}>{title}</h1>

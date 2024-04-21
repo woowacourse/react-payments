@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useContext } from "react";
-import { CardInfoContext, FormErrorContext } from "../App";
-import { isValidCardNumbers, isValidOwnerName, isValidPeriod } from "../validators";
+import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../App";
+import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "./Form";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
@@ -31,26 +31,11 @@ const FormInputCompound: React.FC<InputProps> = ({ sizePreset = "medium", name, 
 };
 
 const CardNumberInput = () => {
-  const [cardInfo, setCardInfo] = useContext(CardInfoContext)!;
-  const setFormErrors = useContext(FormErrorContext)![1];
-  const CATEGORY = "cardNumbers";
-  const cardInfoDetail = cardInfo[CATEGORY] as CardNumbers;
+  const [cardNumbers, setNumbers] = useContext(CardNumbersContext)!;
+  // const setFormErrors = useContext(CardNumberErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardNumbers) => {
-    const numbers = Number(e.target.value);
-    if (isValidCardNumbers(numbers)) {
-      setCardInfo((prev: CardInfo) => {
-        const tempCardInfoDetail = prev[CATEGORY] as CardNumbers;
-        tempCardInfoDetail[name] = numbers;
-        return prev;
-      });
-      // setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
-    } else {
-      // setFormErrors((prev) => ({
-      //   ...prev,
-      //   cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
-      // }));
-    }
+    console.log(`${name}에 입력되었습니다.`);
   };
 
   return (
@@ -64,7 +49,7 @@ const CardNumberInput = () => {
             placeholder="1234"
             maxLength={4}
             name={name as keyof CardNumbers}
-            value={cardInfoDetail[name as keyof CardNumbers]}
+            value={cardNumbers[name as keyof CardNumbers]}
           />
         )
       )}
@@ -73,26 +58,11 @@ const CardNumberInput = () => {
 };
 
 const CardPeriodInput = () => {
-  const [cardInfo, setCardInfo] = useContext(CardInfoContext)!;
-  const setFormErrors = useContext(FormErrorContext)![1];
-  const CATEGORY = "cardValidityPeriod";
-  const cardInfoDetail = cardInfo[CATEGORY] as CardValidityPeriod;
+  const [cardPeriod, setCardPeriod] = useContext(CardValidityPeriodContext)!;
+  // const setPeriodError = useContext(CardValidityPeriodErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardValidityPeriod) => {
-    const inputNumber = Number(e.target.value);
-    if (isValidPeriod(inputNumber, name)) {
-      setCardInfo((prev: CardInfo) => {
-        const tempCardInfoDetail = prev[CATEGORY] as CardValidityPeriod;
-        tempCardInfoDetail[name] = inputNumber;
-        return prev;
-      });
-      // setFormErrors((prev) => ({ ...prev, cardValidityPeriod: { isError: false, errorMessage: "" } }));
-    } else {
-      // setFormErrors((prev) => ({
-      //   ...prev,
-      //   cardValidityPeriod: { isError: true, errorMessage: "유효기간에 잘못된 입력이 있습니다." },
-      // }));
-    }
+    console.log(`${name}에 입력되었습니다.`);
   };
   return (
     <>
@@ -107,7 +77,7 @@ const CardPeriodInput = () => {
           maxLength={2}
           name={name as keyof CardValidityPeriod}
           placeholder={placeholder}
-          value={cardInfoDetail[name as keyof CardValidityPeriod]}
+          value={cardPeriod[name as keyof CardValidityPeriod]}
         />
       ))}
     </>
@@ -115,25 +85,11 @@ const CardPeriodInput = () => {
 };
 
 const CardOwnerInput = () => {
-  const [cardInfo, setCardInfo] = useContext(CardInfoContext)!;
-  const setFormErrors = useContext(FormErrorContext)![1];
-  const CATEGORY = "cardOwnerInfo";
-  const cardInfoDetail = cardInfo[CATEGORY] as CardOwnerInfo;
+  const [cardOwner, setCardOwner] = useContext(CardOwnerInfoContext)!;
+  // const setFormErrors = useContext(CardOwnerInfoErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardOwnerInfo) => {
-    const ownerName = e.target.value.toUpperCase();
-    if (isValidOwnerName(e.target.value) || e.target.value === "") {
-      setCardInfo((prev: CardInfo) => {
-        const tempCardInfoDetail = prev[CATEGORY] as CardOwnerInfo;
-        tempCardInfoDetail[name] = ownerName;
-        return prev;
-      });
-    } else {
-      // setFormErrors((prev) => ({
-      //   ...prev,
-      //   ownerName: { isError: true, errorMessage: "카드 소유자 이름은 영어만 입력 가능합니다." },
-      // }));
-    }
+    console.log(`${name}이 입력되었습니다.`);
   };
   return (
     <>
@@ -144,7 +100,7 @@ const CardOwnerInput = () => {
           sizePreset="large"
           maxLength={15}
           name={name as keyof CardOwnerInfo}
-          value={cardInfoDetail[name as keyof CardOwnerInfo]}
+          value={cardOwner[name as keyof CardOwnerInfo]}
           placeholder={placeholder}
         />
       ))}

@@ -14,6 +14,27 @@ interface CardOwnerInfo {
   name?: string;
 }
 
+type ErrorType = {
+  errorMessage: string;
+  isError: boolean;
+};
+
+interface CardNumbersError {
+  firstNumbers?: ErrorType;
+  secondNumbers?: ErrorType;
+  thirdNumbers?: ErrorType;
+  fourthNumbers?: ErrorType;
+}
+
+interface CardValidityPeriodError {
+  month?: ErrorType;
+  year?: ErrorType;
+}
+
+interface CardOwnerInfoError {
+  name?: ErrorType;
+}
+
 type CardInfoInputKey = keyof CardNumbers | keyof CardValidityPeriod | keyof CardOwnerInfo;
 
 interface CardInfo {
@@ -25,11 +46,6 @@ interface CardInfo {
 type InitCardInfoType = {
   key: keyof CardInfo;
   initValue: ValueOf<CardInfo>;
-};
-
-type ErrorType = {
-  errorMessage: string;
-  isError: boolean;
 };
 
 interface ErrorState {

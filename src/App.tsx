@@ -5,31 +5,6 @@ import "./App.css";
 import CreditCard from "./Components/CreditCard";
 import Form from "./Components/Form";
 
-const initData: InitCardInfoType[] = [
-  {
-    key: "cardNumbers",
-    initValue: {
-      firstNumbers: undefined,
-      secondNumbers: undefined,
-      thirdNumbers: undefined,
-      fourthNumbers: undefined,
-    },
-  },
-  {
-    key: "cardValidityPeriod",
-    initValue: {
-      month: undefined,
-      year: undefined,
-    },
-  },
-  {
-    key: "cardOwnerInfo",
-    initValue: {
-      name: undefined,
-    },
-  },
-];
-
 const mainStyle = css({
   display: "flex",
   flexDirection: "column",
@@ -39,45 +14,45 @@ const mainStyle = css({
   margin: "auto",
 });
 
-const createCardInfo = (formFields: InitCardInfoType[]): CardInfo => {
-  return formFields.reduce((object, props) => {
-    const { key, initValue } = props;
-    object[key] = initValue;
-    return object;
-  }, {} as CardInfo);
+const initCardNumbersValue: CardNumbers = {
+  firstNumbers: undefined,
+  secondNumbers: undefined,
+  thirdNumbers: undefined,
+  fourthNumbers: undefined,
 };
 
-const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
-  return formFields.reduce((object, props) => {
-    const { key, initValue } = props;
-    const temp = JSON.parse(JSON.stringify(initValue));
-    const keys = Object.keys(initValue);
-    keys.forEach((key) => {
-      temp[key] = {
-        errorMessage: "",
-        isError: false,
-      };
-    });
-    object[key] = temp;
-    return object;
-  }, {} as ErrorState);
+const initCardValidityPeriodValue: CardValidityPeriod = {
+  month: undefined,
+  year: undefined,
 };
 
-export const CardInfoContext = createContext<[CardInfo, Dispatch<SetStateAction<CardInfo>>] | null>(null);
-export const FormErrorContext = createContext<[ErrorState, Dispatch<SetStateAction<ErrorState>>] | null>(null);
+const initCardOwnerInfoValue: CardOwnerInfo = {
+  name: undefined,
+};
+
+export const CardNumbersContext = createContext<[CardNumbers, Dispatch<SetStateAction<CardNumbers>>] | null>(null);
+export const CardValidityPeriodContext = createContext<
+  [CardValidityPeriod, Dispatch<SetStateAction<CardValidityPeriod>>] | null
+>(null);
+export const CardOwnerInfoContext = createContext<[CardOwnerInfo, Dispatch<SetStateAction<CardOwnerInfo>>] | null>(
+  null
+);
 
 function App() {
-  const cardInfoStateHook = useState(createCardInfo(initData));
-  const formErrorStateHook = useState(createFormErrors(initData));
+  const cardNumbersState = useState(initCardNumbersValue);
+  const cardValidityPeriodState = useState(initCardValidityPeriodValue);
+  const cardOwnerInfoState = useState(initCardOwnerInfoValue);
 
   return (
     <div css={mainStyle}>
-      <CardInfoContext.Provider value={cardInfoStateHook}>
-        <CreditCard />
-        <FormErrorContext.Provider value={formErrorStateHook}>
-          <Form />
-        </FormErrorContext.Provider>
-      </CardInfoContext.Provider>
+      <CardNumbersContext.Provider value={cardNumbersState}>
+        <CardValidityPeriodContext.Provider value={cardValidityPeriodState}>
+          <CardOwnerInfoContext.Provider value={cardOwnerInfoState}>
+            <CreditCard />
+            <Form />
+          </CardOwnerInfoContext.Provider>
+        </CardValidityPeriodContext.Provider>
+      </CardNumbersContext.Provider>
     </div>
   );
 }
