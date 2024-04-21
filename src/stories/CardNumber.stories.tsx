@@ -12,6 +12,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    number: "1234",
+    cardNumber: "",
+  },
+};
+
+export const WithNumber: Story = {
+  args: {
+    cardNumber: "1234",
   },
 };

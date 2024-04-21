@@ -1,26 +1,27 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CardNumbers from "../components/Card/CardNumbers";
 
-const meta = {
+const meta: Meta = {
   title: "CardNumbers",
   component: CardNumbers,
-} satisfies Meta<typeof CardNumbers>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Args = {
+  cardNumbers: Map<string, string>;
+};
 
-export const Default: Story = {
-  args: {
-    cardNumbers: [
-      { index: 0, currentValue: "4" },
-      { index: 1, currentValue: "5" },
-      { index: 2, currentValue: "6" },
-      { index: 3, currentValue: "7" },
-      { index: 4, currentValue: "8" },
-      { index: 5, currentValue: "9" },
-      { index: 6, currentValue: "0" },
-      { index: 7, currentValue: "1" },
-    ],
-  },
+const Template: StoryFn<Args> = (args) => (
+  <CardNumbers cardNumbers={args.cardNumbers} />
+);
+
+export const Default = Template.bind({});
+Default.args = {
+  cardNumbers: new Map<string, string>([
+    ["0", "4113"],
+    ["1", "5678"],
+    ["2", "9012"],
+    ["3", "3456"],
+  ]),
 };

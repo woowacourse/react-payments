@@ -1,16 +1,14 @@
 import { Meta, StoryFn } from "@storybook/react";
 import ExpirationDate from "../components/Card/ExpirationDate";
-import { CardInfo } from "../components/PaymentApp";
 
 interface ExpirationDateProps {
-  expirationDate: CardInfo[];
+  expirationDate: Map<string, string>;
 }
 
 export default {
   title: "ExpirationDate",
   component: ExpirationDate,
 } as Meta<typeof ExpirationDate>;
-
 
 type ExpirationDateStory = StoryFn<typeof ExpirationDate>;
 
@@ -20,8 +18,8 @@ const Template: ExpirationDateStory = (args: ExpirationDateProps) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  expirationDate: [
-    { index: 0, currentValue: "12" },
-    { index: 1, currentValue: "23" },
-  ],
+  expirationDate: new Map<string, string>([
+    ["0", "11"],
+    ["1", "27"],
+  ]),
 };
