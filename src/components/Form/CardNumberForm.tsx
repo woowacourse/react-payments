@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-
 import Input from "./Input";
 import FormElement from "../common/FormElement";
-
-import { CardInfo } from "../PaymentApp";
 
 export interface CardNumberFormProps {
   labelContent: string;
   inputCount: number;
   type: string;
   placeholders: string[];
-  setCardNumbers?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  setExpirationDate?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  setUserName?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  cardNumbers?: string[];
+  expirationDate?: string[];
+  userName?: string[];
+  setCardNumbers?: React.Dispatch<React.SetStateAction<string[]>>;
+  setExpirationDate?: React.Dispatch<React.SetStateAction<string[]>>;
+  setUserName?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CardNumberForm = ({
@@ -20,15 +20,15 @@ const CardNumberForm = ({
   inputCount,
   type,
   placeholders,
+  cardNumbers,
   setCardNumbers,
 }: CardNumberFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
-  //const [isInputValid, setIsInputValid] = useState(true);
+  const [, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
-  const updateInputValidity = (index: string, isValid: boolean) => {
+  const updateInputValidity = (index: number, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
@@ -45,13 +45,14 @@ const CardNumberForm = ({
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
-      index={index.toString()}
+      index={index}
       type={type}
       placeholder={placeholders[index]}
       maxLength={4}
+      data={cardNumbers || []}
+      setData={setCardNumbers || (() => [])}
       setErrorMessage={setErrorMessage}
-      setData={setCardNumbers ? setCardNumbers : () => {}}
-      setAllInputValid={(isValid) => updateInputValidity(index.toString(), isValid)}
+      setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
       validationRule={(value) => /^[0-9]{4}$/.test(value)}
     />
   ));

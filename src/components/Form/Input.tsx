@@ -1,19 +1,18 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import { CardInfo } from "../PaymentApp";
-
 interface InputProps {
-  index: string;
+  // index: string;
+  index: number;
   type: string;
   placeholder?: string;
   maxLength: number;
+  data: string[];
+  setData: React.Dispatch<React.SetStateAction<string[]>>;
   setErrorMessage: (errorMessage: string) => void;
   setAllInputValid: (isValidInput: boolean) => void;
-  setData: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-
   validationRule: (value: string) => boolean;
-  errorMessageText: string;
+  errorMessageText?: string;
 }
 
 const Input = ({
@@ -21,25 +20,28 @@ const Input = ({
   type,
   placeholder,
   maxLength,
+  data,
+  setData,
   setErrorMessage,
   setAllInputValid,
-  setData,
   validationRule,
   errorMessageText,
 }: InputProps) => {
-  const [currentValue, setCurrentValue] = useState("");
   const [isValidInput, setIsValidInput] = useState(true);
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.target.value;
 
-    setCurrentValue(currentValue);
-
-    const newCardInfo: CardInfo = { index, currentValue };
-    setData((prevCardNumbers) => [...prevCardNumbers, newCardInfo]);
+    setData((prevData) => {
+      const newData = [...prevData];
+      newData[index] = currentValue;
+      return newData;
+    });
 
     if (!validationRule(currentValue)) {
-      setErrorMessage(errorMessageText);
+      if (errorMessageText) {
+        setErrorMessage(errorMessageText);
+      }
       setIsValidInput(false);
       setAllInputValid(false);
     } else {
@@ -56,6 +58,8 @@ const Input = ({
       maxLength={maxLength}
       type={type}
       placeholder={placeholder}
+      key={index}
+      value={data[index]}
     ></InputStyled>
   );
 };
@@ -65,7 +69,6 @@ const InputStyled = styled.input<{ isValidInput: boolean }>`
   border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
   border-radius: 5px;
   padding: 8px;
-  box-sizing: border-box;
 
   &::placeholder {
     font-size: 11px;

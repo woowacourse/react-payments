@@ -5,16 +5,14 @@ import CardLogo from "./CardLogo";
 import ExpirationDate from "./ExpirationDate";
 import UserName from "./UserName";
 
-import { CardInfo } from "../PaymentApp";
-
 const CardPreview = ({
   cardNumbers,
   expirationDate,
   userName,
 }: {
-  cardNumbers: CardInfo[];
-  expirationDate: CardInfo[];
-  userName: CardInfo[];
+  cardNumbers: string[];
+  expirationDate: string[];
+  userName: string[];
 }) => {
   return (
     <>
@@ -23,7 +21,7 @@ const CardPreview = ({
           <ICChip />
           <CardLogo cardNumbers={cardNumbers} />
         </div>
-        <div style={{display: "grid", gap: "8px" }}>
+        <div style={{ display: "grid", gap: "8px", paddingLeft: "5px" }}>
           <CardNumbers cardNumbers={cardNumbers} />
           <ExpirationDate expirationDate={expirationDate} />
           <UserName userName={userName} />
@@ -35,7 +33,7 @@ const CardPreview = ({
 
 const CardFrame = styled.div`
   background: #333333;
-  padding: 10px 15px;
+  padding: 10px 12px;
   width: 202px;
   height: 117px;
   display: grid;
@@ -48,9 +46,7 @@ const ICChip = styled.div`
   background: #ddcd78;
   width: 36px;
   height: 22px;
-  gap: 0px;
   border-radius: 5px;
-  opacity: 0px;
 `;
 
 export default CardPreview;

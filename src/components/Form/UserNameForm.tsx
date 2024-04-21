@@ -10,9 +10,10 @@ const UserNameForm = ({
   inputCount,
   type,
   placeholders,
+  userName,
   setUserName,
 }: CardNumberFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
@@ -28,9 +29,7 @@ const UserNameForm = ({
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     setAllInputValid(allValid);
-    setErrorMessage(
-      allValid ? "" : "이름은 30자 이하의 영문 대문자여야 합니다."
-    );
+    setErrorMessage(allValid ? "" : "이름은 30자 이하의 영문 대문자여야 합니다.");
   }, [inputValidities]);
 
   const validateName = (nameInput: string) => {
@@ -41,26 +40,19 @@ const UserNameForm = ({
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
-      index={index.toString()}
+      index={index}
       type={type}
       placeholder={placeholders[index]}
       maxLength={30}
+      data={userName || []}
+      setData={setUserName || (() => {})}
       setErrorMessage={setErrorMessage}
-      setData={setUserName}
-      setAllInputValid={(isValid) =>
-        updateInputValidity(index.toString(), isValid)
-      }
+      setAllInputValid={(isValid) => updateInputValidity(index.toString(), isValid)}
       validationRule={(value) => validateName(value)}
     />
   ));
 
-  return (
-    <FormElement
-      labelContent={labelContent}
-      inputs={inputs}
-      errorMessage={errorMessage}
-    />
-  );
+  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
 };
 
 export default UserNameForm;

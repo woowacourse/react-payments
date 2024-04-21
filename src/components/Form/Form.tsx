@@ -1,21 +1,26 @@
 import styled from "styled-components";
-
 import InputDescription from "./InputDescription";
 import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
 
-import { CardInfo } from "../PaymentApp";
+interface FormProps {
+  cardNumbers: string[];
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+  expirationDate: string[];
+  setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
+  userName: string[];
+  setUserName: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 const Form = ({
+  cardNumbers,
   setCardNumbers,
+  expirationDate,
   setExpirationDate,
+  userName,
   setUserName,
-}: {
-  setCardNumbers: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  setExpirationDate: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-  setUserName: React.Dispatch<React.SetStateAction<CardInfo[]>>;
-}) => {
+}: FormProps) => {
   return (
     <FormWrapper>
       <div style={{ height: "137px" }}>
@@ -28,6 +33,7 @@ const Form = ({
           inputCount={4}
           type="text"
           placeholders={["1234", "1234", "1234", "1234"]}
+          cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
         ></CardNumberForm>
       </div>
@@ -42,19 +48,19 @@ const Form = ({
           inputCount={2}
           type="text"
           placeholders={["MM", "YY"]}
+          expirationDate={expirationDate}
           setExpirationDate={setExpirationDate}
         ></ExpirationDateForm>
       </div>
 
       <div style={{ height: "137px" }}>
-        <InputDescription
-          title="카드 소유자 이름을 입력해 주세요"
-        ></InputDescription>
+        <InputDescription title="카드 소유자 이름을 입력해 주세요"></InputDescription>
         <UserNameForm
           labelContent="소유자 이름"
           inputCount={1}
           type="text"
           placeholders={["JOHN DOE"]}
+          userName={userName}
           setUserName={setUserName}
         ></UserNameForm>
       </div>

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-
 import Input from "./Input";
 import FormElement from "../common/FormElement";
-
 import { CardNumberFormProps } from "./CardNumberForm";
 
 const ExpirationDateForm = ({
@@ -10,9 +8,10 @@ const ExpirationDateForm = ({
   inputCount,
   type,
   placeholders,
+  expirationDate,
   setExpirationDate,
 }: CardNumberFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
@@ -45,18 +44,15 @@ const ExpirationDateForm = ({
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
-      index={index.toString()}
+      index={index}
       type={type}
       placeholder={placeholders[index]}
       maxLength={2}
+      data={expirationDate || []}
+      setData={setExpirationDate || (() => {})}
       setErrorMessage={setErrorMessage}
-      setData={setExpirationDate ? setExpirationDate : () => {}}
-      setAllInputValid={(isValid: boolean) =>
-        updateInputValidity(index.toString(), isValid)
-      }
-      validationRule={(value) =>
-        index === 0 ? validateMonth(value) : validateYear(value)
-      }
+      setAllInputValid={(isValid: boolean) => updateInputValidity(index.toString(), isValid)}
+      validationRule={(value) => (index === 0 ? validateMonth(value) : validateYear(value))}
       errorMessageText={
         index === 0
           ? "01에서 12 사이의 숫자를 입력해주세요."
@@ -65,13 +61,7 @@ const ExpirationDateForm = ({
     />
   ));
 
-  return (
-    <FormElement
-      labelContent={labelContent}
-      inputs={inputs}
-      errorMessage={errorMessage}
-    />
-  );
+  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
 };
 
 export default ExpirationDateForm;
