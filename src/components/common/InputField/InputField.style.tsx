@@ -6,10 +6,10 @@ export const InputField = styled.fieldset`
   row-gap: 8px;
 `;
 
-export const InputContainer = styled.div<{ $length?: number }>`
+export const InputContainer = styled.div<{ $inputCount?: number }>`
   position: relative;
   display: grid;
-  grid-template-columns: ${(props) => `repeat(${props.$length}, 1fr)`};
+  grid-template-columns: ${(props) => `repeat(${props.$inputCount}, 1fr)`};
   column-gap: 10px;
   width: 100%;
   padding-bottom: 22px;

@@ -1,17 +1,20 @@
 import * as S from './InputField.style';
 
+type StrictPropsWithChildren<P = unknown> = P & {
+  children: React.ReactNode;
+};
+
 interface InputFieldProps {
   label: string;
+  inputCount: number;
   errorMessage?: string;
-  length: number;
-  children: React.ReactNode;
 }
 
-function InputField({ label, errorMessage, length, children }: InputFieldProps) {
+function InputField({ label, errorMessage, inputCount, children }: StrictPropsWithChildren<InputFieldProps>) {
   return (
     <S.InputField>
       <S.InputLabel>{label}</S.InputLabel>
-      <S.InputContainer $length={length}>
+      <S.InputContainer $inputCount={inputCount}>
         {children}
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
       </S.InputContainer>
