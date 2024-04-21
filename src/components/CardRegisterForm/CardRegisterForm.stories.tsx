@@ -3,7 +3,7 @@ import CardRegisterForm from "./CardRegisterForm";
 import useInput from "@/hooks/useInput";
 import { makeStringArray } from "../utils/arrayHelper";
 import { INPUT_COUNTS } from "@/constants/condition";
-import { validateExpirationDate, validateOwnerName } from "../utils/validation";
+import { validateExpirationDate, ownerNameValidators } from "../utils/validation";
 
 const CardRegisterFormWithHook = () => {
   const cardNumbersState = useInput({
@@ -21,7 +21,7 @@ const CardRegisterFormWithHook = () => {
 
   const ownerNameState = useInput({
     initialValue: makeStringArray(1),
-    onChangeValidate: validateOwnerName,
+    onChangeValidators: ownerNameValidators,
   });
 
   return (

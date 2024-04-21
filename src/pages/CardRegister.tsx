@@ -4,7 +4,7 @@ import CreditCardPreview, { CardType } from "@/components/CreditCardPreview/Cred
 import useInput from "@/hooks/useInput";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import { expirationDateValidators, validateOwnerName } from "@/components/utils/validation";
+import { expirationDateValidators, ownerNameValidators } from "@/components/utils/validation";
 
 const CardRegister = () => {
   const cardNumbersState = useInput({
@@ -22,7 +22,7 @@ const CardRegister = () => {
 
   const ownerNameState = useInput({
     initialValue: makeStringArray(1),
-    onChangeValidate: validateOwnerName,
+    onChangeValidators: ownerNameValidators,
   });
 
   const checkCardBrand = (cardNumbers: string[]): CardType => {
