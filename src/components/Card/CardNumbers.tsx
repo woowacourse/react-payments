@@ -12,7 +12,7 @@ const CardNumbers = ({ cardNumbers }: { cardNumbers: Map<string, string> }) => {
       }}
     >
       {Array.from(cardNumbers.entries())
-        .sort()
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
         .map(([index, value]) => {
           if (value) {
             return Number(index) <= 1 ? (
