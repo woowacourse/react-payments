@@ -2,14 +2,19 @@ import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import InputSection from './common/InputSection';
 
-interface CardholderNameContainerProps {
+interface CardholderNameInputContainerProps {
   data: string;
   setData: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
   updateErrorStatus: () => void;
 }
 
-const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus }: CardholderNameContainerProps) => {
+const CardholderNameInputContainer = ({
+  data,
+  setData,
+  errorStatus,
+  updateErrorStatus,
+}: CardholderNameInputContainerProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value.toUpperCase());
 
   return (
@@ -33,4 +38,4 @@ const CardholderNameContainer = ({ data, setData, errorStatus, updateErrorStatus
   );
 };
 
-export default CardholderNameContainer;
+export default CardholderNameInputContainer;

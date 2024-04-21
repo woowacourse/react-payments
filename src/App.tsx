@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import CardholderNameContainer from './components/CardholderNameContainer';
-import CardExpiryDateContainer from './components/CardExpiryDateContainer';
-import CardNumbersContainer from './components/CardNumbersContainer';
+import CardholderNameInputContainer from './components/CardholderNameInputContainer';
+import CardExpiryDateInputContainer from './components/CardExpiryDateInputContainer';
+import CardNumbersInputContainer from './components/CardNumbersInputContainer';
 import CardPreview from './components/CardPreview';
 
 import useCardInfo from './hooks/useCardInfo';
@@ -14,9 +14,9 @@ const App = () => {
     <AppLayout>
       <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
       <CardInfoWrapper>
-        <CardNumbersContainer {...cardNumbers} />
-        <CardExpiryDateContainer {...expiryDate} />
-        <CardholderNameContainer {...cardholderName} />
+        <CardNumbersInputContainer {...cardNumbers} />
+        <CardExpiryDateInputContainer {...expiryDate} />
+        <CardholderNameInputContainer {...cardholderName} />
       </CardInfoWrapper>
     </AppLayout>
   );

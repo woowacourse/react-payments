@@ -5,7 +5,7 @@ import getObjectKeys from '../utils/getObjectKeys';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
-export interface CardNumbersContainerProps {
+export interface CardNumbersInputContainerProps {
   data: Record<CardNumberKey, string>;
   setData: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
@@ -23,7 +23,7 @@ export default function CardNumberContainer({
   setData,
   errorStatus,
   updateErrorStatus,
-}: CardNumbersContainerProps) {
+}: CardNumbersInputContainerProps) {
   const cardNumbersKeys = getObjectKeys(data);
   const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, [key]: e.target.value });

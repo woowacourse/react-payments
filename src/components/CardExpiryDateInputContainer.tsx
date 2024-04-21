@@ -8,7 +8,7 @@ type YY = string;
 
 type TErrorStatusUpdater = (value?: string) => void;
 
-interface CardExpiryDateContainerProps {
+interface CardExpiryDateInputContainerProps {
   data: { month: MM; year: YY };
   dataSetter: {
     month: React.Dispatch<React.SetStateAction<string>>;
@@ -18,12 +18,12 @@ interface CardExpiryDateContainerProps {
   errorStatusUpdater: { month: TErrorStatusUpdater; year: TErrorStatusUpdater };
 }
 
-const CardExpiryDateContainer = ({
+const CardExpiryDateInputContainer = ({
   data,
   dataSetter: { month: setMonth, year: setYear },
   errorStatus: { month: monthErrorStatus, year: yearErrorStatus },
   errorStatusUpdater: { month: updateMonthErrorStatus, year: updateYearErrorStatus },
-}: CardExpiryDateContainerProps) => {
+}: CardExpiryDateInputContainerProps) => {
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => setMonth(e.target.value);
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => setYear(e.target.value);
 
@@ -72,4 +72,4 @@ const CardExpiryDateContainer = ({
   );
 };
 
-export default CardExpiryDateContainer;
+export default CardExpiryDateInputContainer;
