@@ -5,7 +5,7 @@ import { Container } from './styles/App.style';
 
 function App() {
   const { previewProps, formProps } = useForm({
-    cardNumber: [],
+    cardNumbers: [],
     expirationDate: [],
     userName: '',
   });

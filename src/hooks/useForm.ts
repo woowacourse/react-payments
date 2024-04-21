@@ -1,16 +1,16 @@
-import useCardNumber from './useCardNumbers';
+import useCardNumbers from './useCardNumbers';
 import useExpirationDate from './useExpirationDate';
 import useUserName from './useUserName';
 
 interface FormState {
-  cardNumber: number[];
-  expirationDate: number[];
+  cardNumbers: string[];
+  expirationDate: string[];
   userName: string;
 }
 
 const useForm = (defaultValues: FormState) => {
   const { cardNumberState, setCardNumberState, cardNumberErrorState, showImageCondition } =
-    useCardNumber(defaultValues.cardNumber);
+    useCardNumbers(defaultValues.cardNumbers);
   const { expirationDateState, setExpirationDateState, expirationDateErrorState } =
     useExpirationDate(defaultValues.expirationDate);
   const { userNameState, setUserNameState, isUserNameError } = useUserName(defaultValues.userName);

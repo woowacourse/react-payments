@@ -16,9 +16,9 @@ const CONDITION = {
   REG_EXP,
   hiddenCardNumber: '*',
   splitSlash: '/',
-  showVisa: (first: number | undefined) => String(first)[0] === '4',
-  showMasterCard: (first: number | undefined) =>
-    String(first)[0] === '5' && ['1', '2', '3', '4', '5'].includes(String(first)[1]),
+  showVisa: (first: string) => first[0] === '4',
+  showMasterCard: (first: string) =>
+    first[0] === '5' && ['1', '2', '3', '4', '5'].includes(first[1]),
 } as const;
 
 export default CONDITION;

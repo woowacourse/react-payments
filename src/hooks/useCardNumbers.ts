@@ -3,26 +3,26 @@ import CONDITION from '../constants/Condition';
 
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
-const useCardNumbers = (defaultValues: number[]) => {
+const useCardNumbers = (defaultValues: string[]) => {
   const cardLengthCondition = (value: string) => value.length === 4;
 
-  const [first, setFirst, isFirstError] = useInput<number>(
-    defaultValues[0],
+  const [first, setFirst, isFirstError] = useInput<string>(
+    defaultValues[0] ?? '',
     REG_EXP.cardNumber,
     cardLengthCondition,
   );
-  const [second, setSecond, isSecondError] = useInput<number>(
-    defaultValues[1],
+  const [second, setSecond, isSecondError] = useInput<string>(
+    defaultValues[1] ?? '',
     REG_EXP.cardNumber,
     cardLengthCondition,
   );
-  const [third, setThird, isThirdError] = useInput<number>(
-    defaultValues[2],
+  const [third, setThird, isThirdError] = useInput<string>(
+    defaultValues[2] ?? '',
     REG_EXP.cardNumber,
     cardLengthCondition,
   );
-  const [fourth, setFourth, isFourthError] = useInput<number>(
-    defaultValues[3],
+  const [fourth, setFourth, isFourthError] = useInput<string>(
+    defaultValues[3] ?? '',
     REG_EXP.cardNumber,
     cardLengthCondition,
   );

@@ -1,8 +1,8 @@
 export interface CardNumberState {
-  first: number;
-  second: number;
-  third: number;
-  fourth: number;
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
 }
 
 export interface SetCardNumberState {
@@ -20,8 +20,8 @@ export interface CardNumberErrorState {
 }
 
 export interface ExpirationDateState {
-  month: number;
-  year: number;
+  month: string;
+  year: string;
 }
 export interface SetExpirationDateState {
   setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
