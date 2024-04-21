@@ -1,10 +1,9 @@
-import { useState } from "react";
-import styles from "./Input.module.css";
+import { useState } from 'react';
+import styles from './Input.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   // checkError?: React.ChangeEventHandler<HTMLInputElement>;
   isError?: boolean;
-  onBlur?: (e: any) => void;
 }
 
 export default function Input(props: InputProps) {
@@ -13,7 +12,7 @@ export default function Input(props: InputProps) {
 
   return (
     <input
-      className={`${styles.customInput} ${isFocus ? styles.isFocus : ""} ${props.isError ? styles.isError : ""} `}
+      className={`${styles.customInput} ${isFocus ? styles.isFocus : ''} ${props.isError ? styles.isError : ''} `}
       {...rest}
       onFocus={() => setIsFocus(true)}
       onBlur={(e) => {
