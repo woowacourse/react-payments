@@ -3,7 +3,7 @@ type CardInfoValue = {
   isError: boolean;
 };
 
-interface TCardInformation {
+interface CardInformation {
   cardNumbers: CardInfoValue[];
   cardExpirationMonth: CardInfoValue;
   cardExpirationYear: CardInfoValue;

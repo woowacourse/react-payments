@@ -4,7 +4,7 @@ import Mastercard from "../../static/Mastercard.png";
 import * as S from "./style";
 
 interface Props {
-  cardInformation: TCardInformation;
+  cardInformation: CardInformation;
 }
 
 export default function CardPreview({ cardInformation }: Props) {
