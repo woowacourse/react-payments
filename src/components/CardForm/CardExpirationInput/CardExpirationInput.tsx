@@ -43,7 +43,7 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
 
   const handleMonthBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newIsValidMonth =
-      isValidRange(e.target.value, CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE) &&
+      isValidRange(Number(e.target.value), CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE) &&
       isValidLength(e.target.value, 2);
 
     setIsValidMonth(newIsValidMonth);
