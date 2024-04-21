@@ -1,12 +1,12 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
-import { MonthState, YearState } from '../types/Types';
+import { MonthStateType, YearStateType } from '../types/Types';
 
 const { REG_EXP } = CONDITION;
 
-export interface ExpirationDateState {
-  monthState: MonthState;
-  yearState: YearState;
+export interface ExpirationDateStateType {
+  monthState: MonthStateType;
+  yearState: YearStateType;
 }
 
 const useExpirationDate = (defaultValues: Array<number | undefined>) => {

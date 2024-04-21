@@ -1,39 +1,39 @@
-export interface FirstState {
+export interface FirstCardNumberStateType {
   first: number | undefined;
   setFirst: (event: React.ChangeEvent<HTMLInputElement>) => void;
   firstError: boolean;
 }
 
-export interface SecondState {
+export interface SecondCardNumberStateType {
   second: number | undefined;
   setSecond: (event: React.ChangeEvent<HTMLInputElement>) => void;
   secondError: boolean;
 }
 
-export interface ThirdState {
+export interface ThirdCardNumberStateType {
   third: number | undefined;
   setThird: (event: React.ChangeEvent<HTMLInputElement>) => void;
   thirdError: boolean;
 }
 
-export interface FourthState {
+export interface FourthCardNumberStateType {
   fourth: number | undefined;
   setFourth: (event: React.ChangeEvent<HTMLInputElement>) => void;
   fourthError: boolean;
 }
 
-export interface ShowImageCondition {
+export interface ShowImageConditionType {
   isVisa: boolean;
   isMasterCard: boolean;
 }
 
-export interface MonthState {
+export interface MonthStateType {
   month: number | undefined;
   setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
   monthError: boolean;
 }
 
-export interface YearState {
+export interface YearStateType {
   year: number | undefined;
   setYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
   yearError: boolean;

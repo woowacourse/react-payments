@@ -3,7 +3,7 @@ import CONDITION from '../constants/Condition';
 
 const { REG_EXP } = CONDITION;
 
-export interface UserNameState {
+export interface UserNameStateType {
   userName: string | undefined;
   setUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
   userNameError: boolean;

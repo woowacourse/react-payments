@@ -1,21 +1,21 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
 import {
-  FirstState,
-  FourthState,
-  SecondState,
-  ShowImageCondition,
-  ThirdState,
+  FirstCardNumberStateType,
+  SecondCardNumberStateType,
+  ThirdCardNumberStateType,
+  FourthCardNumberStateType,
+  ShowImageConditionType,
 } from '../types/Types';
 
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
-export interface CardNumberState {
-  firstState: FirstState;
-  secondState: SecondState;
-  thirdState: ThirdState;
-  fourthState: FourthState;
-  showImageCondition: ShowImageCondition;
+export interface CardNumberStateType {
+  firstState: FirstCardNumberStateType;
+  secondState: SecondCardNumberStateType;
+  thirdState: ThirdCardNumberStateType;
+  fourthState: FourthCardNumberStateType;
+  showImageCondition: ShowImageConditionType;
 }
 
 const useCardNumber = (defaultValues: Array<number | undefined>) => {

@@ -4,14 +4,14 @@ import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
 import CONDITION from '../../constants/Condition';
-import { CardNumberState } from '../../hooks/useCardNumber';
-import { ExpirationDateState } from '../../hooks/useExpirationDate';
-import { UserNameState } from '../../hooks/useUserName';
+import { CardNumberStateType } from '../../hooks/useCardNumber';
+import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
+import { UserNameStateType } from '../../hooks/useUserName';
 
 interface CardInformationPreviewProps {
-  cardNumberState: CardNumberState;
-  expirationDateState: ExpirationDateState;
-  userNameState: UserNameState;
+  cardNumberState: CardNumberStateType;
+  expirationDateState: ExpirationDateStateType;
+  userNameState: UserNameStateType;
 }
 
 const CardInformationPreview = ({
