@@ -1,34 +1,15 @@
 import { useState } from "react";
-import Input from "./atoms/Input";
-import { TitleText, CaptionText, LabelText } from "./atoms/text";
-import styled from "styled-components";
-import ErrorMessage from "./ErrorMessage";
+import Input from "../atoms/Input";
+import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import {
   executeValidators,
   isInvalidDateLength,
   isInvalidMonth,
   isInvalidNumber,
   isInvalidYear,
-} from "../utils/validators";
-
-const CardDateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 16px;
-`;
-
-const CardDateBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 10px;
-`;
+} from "../../utils/validators";
+import * as S from "./style";
 
 interface Props {
   cardExpirationMonth: CardInfoValue;
@@ -90,14 +71,14 @@ export default function CardExpirationDate({
   };
 
   return (
-    <CardDateContainer>
+    <S.CardDateContainer>
       <div>
         <TitleText>카드 유효기간을 입력해 주세요</TitleText>
         <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
       </div>
-      <CardDateBox>
+      <S.CardDateBox>
         <LabelText>유효기간</LabelText>
-        <InputContainer>
+        <S.InputContainer>
           <Input
             maxLength={2}
             placeholder="MM"
@@ -114,9 +95,9 @@ export default function CardExpirationDate({
             onChangeInput={(value) => onChangeYearInput(value)}
             onBlurInput={(value) => onBlurYearInput(value)}
           />
-        </InputContainer>
+        </S.InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
-      </CardDateBox>
-    </CardDateContainer>
+      </S.CardDateBox>
+    </S.CardDateContainer>
   );
 }

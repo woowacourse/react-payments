@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-interface Props {
-  message: string;
-}
-
-const SErrorMessage = styled.div`
+export const ErrorMessage = styled.div`
   height: 14px;
   font-family: Noto Sans KR;
   font-size: 9.5px;
@@ -13,7 +9,3 @@ const SErrorMessage = styled.div`
   text-align: left;
   color: rgba(255, 61, 61, 1);
 `;
-
-export default function ErrorMessage({ message }: Props) {
-  return <SErrorMessage>{message}</SErrorMessage>;
-}

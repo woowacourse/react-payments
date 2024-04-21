@@ -1,25 +1,9 @@
 import { useState } from "react";
-import CardNumbers from "./CardNumbers";
-import CardExpirationDate from "./CardExpirationDate";
-import CardOwnerName from "./CardOwnerName";
-import CardPreview from "./CardPreview";
-import styled from "styled-components";
-
-const CardEnrollFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 77px;
-`;
-
-const CardInformation = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 376px;
-  padding: 45px 30px;
-  gap: 16px;
-`;
+import CardNumbers from "../CardNumbers/CardNumbers";
+import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
+import CardOwnerName from "../CardOwnerName/CardOwnerName";
+import CardPreview from "../CardPreview/CardPreview";
+import * as S from "./style";
 
 export default function CardEnrollForm() {
   const [cardInformation, setCardInformation] = useState({
@@ -45,9 +29,9 @@ export default function CardEnrollForm() {
   };
 
   return (
-    <CardEnrollFormContainer>
+    <S.CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation}></CardPreview>
-      <CardInformation>
+      <S.CardInformation>
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
           onChangeCardInfo={onChangeCardInfo}
@@ -61,7 +45,7 @@ export default function CardEnrollForm() {
           cardOwnerName={cardInformation.cardOwnerName}
           onChangeCardInfo={onChangeCardInfo}
         ></CardOwnerName>
-      </CardInformation>
-    </CardEnrollFormContainer>
+      </S.CardInformation>
+    </S.CardEnrollFormContainer>
   );
 }

@@ -1,30 +1,13 @@
 import { useState } from "react";
-import Input from "./atoms/Input";
-import { TitleText, CaptionText, LabelText } from "./atoms/text";
-import styled from "styled-components";
-import ErrorMessage from "./ErrorMessage";
+import Input from "../atoms/Input";
+import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import {
   executeValidators,
   isInvalidCardNumberLength,
   isInvalidNumber,
-} from "../utils/validators";
-
-const CardNumbersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const CardNumberBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  gap: 10px;
-`;
+} from "../../utils/validators";
+import * as S from "./style";
 
 interface Props {
   cardNumbers: CardInfoValue[];
@@ -58,14 +41,14 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
   };
 
   return (
-    <CardNumbersContainer>
+    <S.CardNumbersContainer>
       <div>
         <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
         <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
       </div>
-      <CardNumberBox>
+      <S.CardNumberBox>
         <LabelText>카드 번호</LabelText>
-        <InputContainer>
+        <S.InputContainer>
           {cardNumbers.map((cardNumber, idx) => {
             return (
               <Input
@@ -78,9 +61,9 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
               />
             );
           })}
-        </InputContainer>
+        </S.InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
-      </CardNumberBox>
-    </CardNumbersContainer>
+      </S.CardNumberBox>
+    </S.CardNumbersContainer>
   );
 }
