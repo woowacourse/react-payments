@@ -20,7 +20,7 @@ const meta = {
       control: 'array',
       description: '카드 번호 16자리',
     },
-    expiration: {
+    expirationDate: {
       ...generateArgTypes({ control: 'object' }),
       description: '유효기간(YY/MM)',
     },
@@ -31,7 +31,7 @@ const meta = {
   },
   args: {
     cardNumbers: ['', '', '', ''],
-    expiration: { month: '', year: '' },
+    expirationDate: { month: '', year: '' },
     ownerName: '',
   },
   tags: ['autodocs'],
@@ -53,7 +53,7 @@ export const VisaCard: Story = {
 
   args: {
     cardNumbers: ['4123', '1231', '2342', '4535'],
-    expiration: { month: '05', year: '28' },
+    expirationDate: { month: '05', year: '28' },
     ownerName: 'NAMSUMIN',
   },
 };
@@ -65,7 +65,7 @@ export const MasterCard: Story = {
 
   args: {
     cardNumbers: ['5012', '3456', '7890', '0000'],
-    expiration: { month: '05', year: '28' },
+    expirationDate: { month: '05', year: '28' },
     ownerName: 'NAMSUMIN',
   },
 };

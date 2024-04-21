@@ -61,7 +61,6 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  width: 38px;
 }
 
 .cardDetailText {
@@ -74,6 +73,11 @@
   color: var(--grey-100);
 }
 
-.cardNumberText {
+.expirationDateTextBox {
+  display: inline-block;
+  min-width: 20px;
+}
+
+.cardNumberTextBox {
   width: 34px;
 }

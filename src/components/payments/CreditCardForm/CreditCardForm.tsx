@@ -11,13 +11,13 @@ import styles from './CreditCardForm.module.css';
 
 const CreditCardForm: React.FC = () => {
   const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
-  const { expiration, expirationError, handleExpirationChange } = useChangeExpirationDate();
+  const { expirationDate, expirationDateError, handleExpirationChange } = useChangeExpirationDate();
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
 
   return (
     <>
       <div className={styles.previewCreditCardContainer}>
-        <PreviewCreditCard cardNumbers={cardNumbers} expiration={expiration} ownerName={ownerName} />
+        <PreviewCreditCard cardNumbers={cardNumbers} expirationDate={expirationDate} ownerName={ownerName} />
       </div>
       <div className={styles.textFieldContainer}>
         <CardNumberTextField
@@ -26,10 +26,10 @@ const CreditCardForm: React.FC = () => {
           cardNumberError={cardNumberError}
         />
         <ExpirationDateTextField
-          month={expiration.month}
-          year={expiration.year}
+          month={expirationDate.month}
+          year={expirationDate.year}
           onAddExpirationDate={handleExpirationChange}
-          expirationDateError={expirationError}
+          expirationDateError={expirationDateError}
         />
         <OwnerNameTextField
           ownerName={ownerName}

@@ -38,7 +38,7 @@ const useChangeExpirationDate = () => {
     setExpirationDateError(initialExpirationDateError);
   };
 
-  return { expiration: expirationDate, expirationError: expirationDateError, handleExpirationChange };
+  return { expirationDate, expirationDateError, handleExpirationChange };
 };
 
 export default useChangeExpirationDate;
