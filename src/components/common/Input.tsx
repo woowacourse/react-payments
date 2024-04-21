@@ -13,7 +13,7 @@ const inputWidthSize: InputWidthSize = {
   large: '315px',
 } as const;
 
-interface InputProps extends React.ComponentPropsWithRef<'input'> {
+interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   size: InputSize;
   isError: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
