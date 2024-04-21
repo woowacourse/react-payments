@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { CardNumberState } from '../App';
 
 type CreditCardProps = {
-  cardNumbers: CardNumberState[];
+  cardNumbers: string[];
   month: string;
   year: string;
   name: string;
@@ -116,18 +115,18 @@ export default function CreditCard({
         <CardInfoWrapper>
           <NumbersContainer>
             <NumbersWrapper>
-              <Text>{cardNumbers[0].value}</Text>
+              <Text>{cardNumbers[0]}</Text>
             </NumbersWrapper>
             <NumbersWrapper>
-              <Text>{cardNumbers[1].value}</Text>
+              <Text>{cardNumbers[1]}</Text>
             </NumbersWrapper>
             <NumbersWrapper>
-              {Array.from({ length: cardNumbers[2].value.length }).map((_, index) => (
+              {Array.from({ length: cardNumbers[2].length }).map((_, index) => (
                 <Dot key={'third card section' + index} />
               ))}
             </NumbersWrapper>
             <NumbersWrapper>
-              {Array.from({ length: cardNumbers[3].value.length }).map((_, index) => (
+              {Array.from({ length: cardNumbers[3].length }).map((_, index) => (
                 <Dot key={'fourth card section' + index} />
               ))}
             </NumbersWrapper>

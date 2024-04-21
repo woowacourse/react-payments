@@ -48,12 +48,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumbers: [
-      { value: '0000', isError: false },
-      { value: '0000', isError: false },
-      { value: '0000', isError: false },
-      { value: '0000', isError: false },
-    ],
+    cardNumbers: ['0000', '0000', '0000', '0000'],
     month: '00',
     year: '00',
     name: 'JOHN DOE',
@@ -63,12 +58,7 @@ export const Default: Story = {
 
 export const Visa: Story = {
   args: {
-    cardNumbers: [
-      { value: '4321', isError: false },
-      { value: '1234', isError: false },
-      { value: '1234', isError: false },
-      { value: '9876', isError: false },
-    ],
+    cardNumbers: ['0000', '0000', '0000', '0000'],
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',
@@ -78,12 +68,7 @@ export const Visa: Story = {
 
 export const Master: Story = {
   args: {
-    cardNumbers: [
-      { value: '5323', isError: false },
-      { value: '1234', isError: false },
-      { value: '4321', isError: false },
-      { value: '9872', isError: false },
-    ],
+    cardNumbers: ['0000', '0000', '0000', '0000'],
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',

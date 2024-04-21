@@ -97,7 +97,7 @@ function App() {
       <GlobalStyles />
       <S.Container>
         <CreditCard
-          cardNumbers={cardNumbers}
+          cardNumbers={cardNumbers.map(({ value }) => value)}
           month={month}
           year={year}
           name={name}
