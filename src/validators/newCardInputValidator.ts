@@ -1,7 +1,7 @@
 import { CARD_FORM_INPUTS } from '../constants/setting';
 
 export const validateCardNumber = (value: string): string => {
-  if (value !== '' && isNaN(Number(value))) {
+  if (value !== '' && Number.isNaN(Number(value))) {
     return '숫자만 입력 가능합니다.';
   }
   if (
@@ -17,7 +17,7 @@ export const validateCardExpiration = (
   value: string,
   index: number,
 ): string => {
-  if (value !== '' && isNaN(Number(value))) {
+  if (value !== '' && Number.isNaN(Number(value))) {
     return '숫자만 입력 가능합니다.';
   }
   if (
