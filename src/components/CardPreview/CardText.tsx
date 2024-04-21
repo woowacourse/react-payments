@@ -11,12 +11,11 @@ const CardText = ({ text, type }: CardTextProps) => {
 
   return (
     <StyledCardText width={width}>
-      {type === "longText" && text}
-      {type === "text" && text}
-      {type === "password" &&
-        Array.from({ length: text.length }, () => (
-          <StyledEllipse src={ellipse} />
-        ))}
+      {type === "password"
+        ? Array.from({ length: text.length }, () => (
+            <StyledEllipse src={ellipse} />
+          ))
+        : text}
     </StyledCardText>
   );
 };
