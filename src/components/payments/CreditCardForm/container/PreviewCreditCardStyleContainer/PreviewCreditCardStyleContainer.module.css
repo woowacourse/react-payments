@@ -1,0 +1,8 @@
+.creditCardFormContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 78px;
+  margin-bottom: 46px;
+}

@@ -1,0 +1,37 @@
+:root {
+  --grey-100: #ffffff;
+  --grey-200: #acacac;
+  --grey-300: #8b95a1;
+  --grey-400: #0a0d13;
+  --grey-500: #333333;
+  --error: #ff3d3d;
+}
+
+.caption {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: var(--gray-500);
+}
+
+.label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--gray-400);
+}
+
+.app {
+  max-width: 375px;
+  margin: auto;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+}

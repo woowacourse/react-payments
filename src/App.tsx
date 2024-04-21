@@ -1,10 +1,10 @@
-import "./App.css";
+import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
 
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <div className="app">
+      <CreditCardForm />
+    </div>
   );
 }
 

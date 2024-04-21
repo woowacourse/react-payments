@@ -1,0 +1,38 @@
+.inputStyle {
+  padding: 8px;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid var(--grey-200);
+  font-size: 12px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+input::placeholder {
+  color: var(--grey-200);
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--grey-500);
+}
+
+.errorInput {
+  border: 1px solid var(--error);
+}
+
+input.errorInput:focus {
+  border: 1px solid var(--error);
+}
+
+/* 크롬, 사파리, 엣지, 오페라 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 파이어폭스 */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
