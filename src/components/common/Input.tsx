@@ -12,16 +12,17 @@ interface StyledInputProps {
   $isError: boolean;
 }
 
+const LIGHT_GREY = '#acacac';
 const StyledInput = styled.input<StyledInputProps>`
   width: ${props => props.width};
   padding: 10px 7px;
 
-  border: 1.2px solid ${props => (props.$isError ? '#ff3d3d' : '#acacac')};
+  border: 1.2px solid ${props => (props.$isError ? '#ff3d3d' : LIGHT_GREY)};
   border-radius: 5px;
   font-size: 15px;
 
   &::placeholder {
-    color: #acacac;
+    color: ${LIGHT_GREY};
   }
 
   &:focus {
