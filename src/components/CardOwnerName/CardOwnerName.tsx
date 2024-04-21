@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../atoms/Input";
+import Input from "../atoms/Input/Input";
 import { TitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import {
