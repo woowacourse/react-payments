@@ -4,10 +4,11 @@ export const validateExpirationDate = (date: string[]) => {
   const isOverdue = year < nowYear || (year === nowYear && month < nowMonth);
 
   const validators: Validator[] = [
-    { validate: (inputs) => month >= 1 && month <= 12, errorMessage: "1~12월 범위의 월을 입력해 주세요." },
-    { validate: (inputs) => !isOverdue, errorMessage: "이미 만료된 카드입니다." },
+    { validate: () => year !== 0 && month !== 0, errorMessage: "" },
+    { validate: () => month >= 1 && month <= 12, errorMessage: "1~12월 범위의 월을 입력해 주세요." },
+    { validate: () => !isOverdue, errorMessage: "이미 만료된 카드입니다." },
   ];
-  return validate(validators, date);
+  return validateAll(validators, date);
 };
 
 export const validateOwnerName = (name: string[]) => {
@@ -15,7 +16,7 @@ export const validateOwnerName = (name: string[]) => {
     { validate: (inputs) => /^[a-zA-Z\s]*$/.test(inputs[0]), errorMessage: "이름은 영어 대문자로 입력해주세요." },
     { validate: (inputs) => !/\s{2,}/.test(inputs[0]), errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다.." },
   ];
-  return validate(validators, name);
+  return validateAll(validators, name);
 };
 
 const getCurrentDate = () => {
@@ -25,12 +26,12 @@ const getCurrentDate = () => {
   return { nowMonth, nowYear };
 };
 
-interface Validator {
+export interface Validator {
   validate: (inputs: string[]) => boolean;
   errorMessage: string;
 }
 
-const validate = (validators: Validator[], inputs: string[]) => {
+export const validateAll = (validators: Validator[], inputs: string[]) => {
   for (const { validate, errorMessage } of validators) {
     if (!validate(inputs)) return errorMessage;
   }

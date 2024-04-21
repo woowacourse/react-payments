@@ -2,6 +2,7 @@ import { limitNumberLength } from "@/components/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
+import { Validator } from "@/components/utils/validation";
 
 type Validate = (input: string[]) => string;
 interface Props {
@@ -46,19 +47,17 @@ const useInput = ({
       event.target.value = limitNumberLength(event.target.value, maxLength);
     }
 
-    const newValue = event.target.value;
-
     const newInput = [...input];
-    newInput[index] = newValue;
+    newInput[index] = event.target.value;
     setInput(newInput);
 
-    const errorMessageOnChange = onChangeValidate([newValue]);
+    const errorMessageOnChange = onChangeValidate(newInput);
     if (errorMessageOnChange) {
       updateErrorMessages(errorMessageOnChange, index);
       return;
     }
 
-    const errorMessageOnBlur = onBlurValidateWrapper([newValue]);
+    const errorMessageOnBlur = onBlurValidateWrapper(newInput);
     if (errorMessageOnBlur) return;
 
     updateErrorMessages("", index);
