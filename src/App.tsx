@@ -1,10 +1,43 @@
-import "./App.css";
+import './index.css';
+import styles from './App.module.css';
+
+import { useState } from 'react';
+
+import CardPreview from './components/CardPreview/CardPreview';
+import CardNumberInput from './components/CardNumberInput/CardNumberInput';
+import ExpirationDateInput from './components/ExpirationDateInput/ExpirationDateInput';
+import OwnerNameInput from './components/OwnerNameInput/OwnerNameInput';
 
 function App() {
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    cardNumbers: ['', '', '', ''],
+    expirationDate: ['', ''],
+    ownerName: '',
+  });
+
+  const setCardData = (
+    key: keyof CardInfo,
+    newData: CardInfo[keyof CardInfo]
+  ) => {
+    setCardInfo({ ...cardInfo, [key]: newData });
+  };
+
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <div className={styles.app}>
+      <h1 className={styles.title}>카드 추가</h1>
+
+      <CardPreview
+        cardNumbers={cardInfo.cardNumbers}
+        expirationDate={cardInfo.expirationDate}
+        ownerName={cardInfo.ownerName}
+      />
+
+      <form>
+        <CardNumberInput setCardData={setCardData} />
+        <ExpirationDateInput setCardData={setCardData} />
+        <OwnerNameInput setCardData={setCardData} />
+      </form>
+    </div>
   );
 }
 
