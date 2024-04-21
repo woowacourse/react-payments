@@ -17,19 +17,17 @@ const NewCardInputSection = ({
 }: React.PropsWithChildren<NewCardInputSectionProps>) => {
   return (
     <Styled.InputSection>
-      <header>
+      <div>
         <Styled.MainText>{mainText}</Styled.MainText>
         <Styled.Subtext>{subText}</Styled.Subtext>
-      </header>
-      <article>
-        <Styled.Form>
-          <Styled.Label>{label}</Styled.Label>
-          <Styled.InputWrapper>{children}</Styled.InputWrapper>
-        </Styled.Form>
+      </div>
+      <Styled.Form>
+        <Styled.Label>{label}</Styled.Label>
+        <Styled.InputWrapper>{children}</Styled.InputWrapper>
         <Styled.ErrorText>
           {errorMessage && errorMessage.find((item) => item !== '')}
         </Styled.ErrorText>
-      </article>
+      </Styled.Form>
     </Styled.InputSection>
   );
 };
