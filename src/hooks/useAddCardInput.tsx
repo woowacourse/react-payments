@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createObjectWithKeys } from '../utils/createObjectWithKeys';
 
 type InitialValuesType = CardNumbers | ExpirationDate | OwnerName;
 
@@ -9,7 +10,6 @@ export type InputType = {
 
 interface UseAddCardInputProps<T extends InitialValuesType> {
   initialValues: T;
-  initialErrors: Record<keyof T, boolean>;
   validateInputOnChange: ({ name, value }: InputType) => {
     isValid: boolean;
     errorMsg: string;
@@ -22,15 +22,15 @@ interface UseAddCardInputProps<T extends InitialValuesType> {
 }
 
 export default function useAddCardInput<T extends InitialValuesType>({
-  validateInputOnChange,
-  validateInputOnBlur,
-  updateCardData,
   initialValues,
-  initialErrors,
+  validateInputOnBlur,
+  validateInputOnChange,
+  updateCardData,
 }: UseAddCardInputProps<T>) {
   const [values, setValues] = useState<T>(initialValues);
-  const [isError, setIsError] =
-    useState<Record<keyof T, boolean>>(initialErrors);
+  const [isError, setIsError] = useState(
+    createObjectWithKeys(Object.keys(initialValues), false)
+  );
 
   const [errMsg, setErrMsg] = useState('');
 

@@ -16,6 +16,13 @@ interface CardNumberInputProps {
 const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
 export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
+  const initialValues = {
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  };
+
   const validateInputOnChange = ({ value }: InputType) => {
     if (!isInteger(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotInteger };
@@ -41,18 +48,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     onChange,
     onBlur,
   } = useAddCardInput<CardNumbers>({
-    initialValues: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    initialErrors: {
-      first: false,
-      second: false,
-      third: false,
-      fourth: false,
-    },
+    initialValues,
     validateInputOnChange,
     validateInputOnBlur,
     updateCardData,

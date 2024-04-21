@@ -16,6 +16,10 @@ interface OwnerNameInputProps {
 }
 
 function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
+  const initialValues = {
+    ownerName: '',
+  };
+
   const validateInputOnChange = ({ value }: InputType) => {
     if (value !== '' && !isEnglishCharacter(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
@@ -34,12 +38,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     onChange,
     onBlur,
   } = useAddCardInput<OwnerName>({
-    initialValues: {
-      ownerName: '',
-    },
-    initialErrors: {
-      ownerName: false,
-    },
+    initialValues,
     validateInputOnChange,
     updateCardData,
   });

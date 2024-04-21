@@ -21,6 +21,11 @@ interface ExpirationDateInputProps {
 }
 
 const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
+  const initialValues = {
+    month: '',
+    year: '',
+  };
+
   const validateInputOnChange = ({ value }: { value: string }) => {
     if (!isInteger(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotInteger };
@@ -52,14 +57,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     onChange,
     onBlur,
   } = useAddCardInput<ExpirationDate>({
-    initialValues: {
-      month: '',
-      year: '',
-    },
-    initialErrors: {
-      month: false,
-      year: false,
-    },
+    initialValues,
     validateInputOnChange,
     validateInputOnBlur,
     updateCardData,
