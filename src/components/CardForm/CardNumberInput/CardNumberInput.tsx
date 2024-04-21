@@ -13,7 +13,7 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProps) {
-  const [isValid, setIsValid] = useState<boolean[]>([true, true, true, true]);
+  const [isValid, setIsValid] = useState([true, true, true, true]);
 
   const errorMessage = useMemo(() => {
     return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;

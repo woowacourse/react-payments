@@ -11,10 +11,10 @@ import GlobalStyles from './styles/Global.style';
 import * as S from './styles/App.style';
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [month, setMonth] = useState<string>('');
-  const [year, setYear] = useState<string>('');
-  const [owner, setOwner] = useState<string>('');
+  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
+  const [owner, setOwner] = useState('');
 
   const handleCardNumbers = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
