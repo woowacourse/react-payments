@@ -24,6 +24,14 @@ export const FORM_FIELDS = {
     MAX_LENGTH: 4,
   },
 
+  CARD_COMPANY: {
+    MAIN_TEXT: "카드사를 선택해 주세요",
+    SUB_TEXT: "현재 국내 카드사만 가능합니다.",
+    LABEL: "",
+    PLACEHOLDER: "카드사를 선택해주세요",
+    OPTIONS: ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"],
+  },
+
   CARD_EXPIRATION: {
     MAIN_TEXT: "카드 유효기간을 입력해 주세요",
     SUB_TEXT: "월/년도(MMYY)를 순서대로 입력해 주세요.",
@@ -38,6 +46,22 @@ export const FORM_FIELDS = {
     LABEL: "소유자 이름",
     PLACEHOLDER: "JOHN DOE",
     MAX_LENGTH: 21,
+  },
+
+  CVC: {
+    MAIN_TEXT: "CVC 번호를 입력해 주세요",
+    SUB_TEXT: "",
+    LABEL: "CVC",
+    PLACEHOLDER: "숫자 3자리",
+    MAX_LENGTH: 3,
+  },
+
+  PASSWORD: {
+    MAIN_TEXT: "비밀번호를 입력해 주세요",
+    SUB_TEXT: "앞의 2자리를 입력해주세요",
+    LABEL: "비밀번호 앞 2자리",
+    PLACEHOLDER: "",
+    MAX_LENGTH: 2,
   },
 };
 
