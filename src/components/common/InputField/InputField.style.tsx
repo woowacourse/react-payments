@@ -15,15 +15,15 @@ export const InputContainer = styled.div<{ $length?: number }>`
 
 export const InputLabel = styled.legend`
   display: contents;
-  font-size: 12px;
+  font-size: var(--font-size-lg);
   font-weight: 500;
   line-height: 15px;
 `;
 
 export const ErrorMessage = styled.p`
   height: 14px;
-  color: #ff3d3d;
-  font-size: 9.5px;
+  color: var(--error);
+  font-size: var(--font-size-xs);
   font-weight: 400;
   line-height: 13px;
 `;
