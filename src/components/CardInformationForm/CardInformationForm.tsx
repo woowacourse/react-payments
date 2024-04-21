@@ -58,6 +58,7 @@ const CardInformationForm = ({
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>
             <Input
+              aria-label="first-card-numbers"
               placeholder={PLACEHOLDER.cardNumber}
               value={first}
               maxLength={MAX_LENGTH.cardNumber}
@@ -65,6 +66,7 @@ const CardInformationForm = ({
               aria-invalid={isFirstError}
             />
             <Input
+              aria-label="second-card-numbers"
               placeholder={PLACEHOLDER.cardNumber}
               value={second}
               maxLength={MAX_LENGTH.cardNumber}
@@ -72,6 +74,7 @@ const CardInformationForm = ({
               aria-invalid={isSecondError}
             />
             <Input
+              aria-label="third-card-numbers"
               placeholder={PLACEHOLDER.cardNumber}
               value={third}
               maxLength={MAX_LENGTH.cardNumber}
@@ -79,6 +82,7 @@ const CardInformationForm = ({
               aria-invalid={isThirdError}
             />
             <Input
+              aria-label="fourth-card-numbers"
               placeholder={PLACEHOLDER.cardNumber}
               value={fourth}
               maxLength={MAX_LENGTH.cardNumber}
@@ -92,6 +96,7 @@ const CardInformationForm = ({
         <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
           <>
             <Input
+              aria-label="month-expiration"
               placeholder={PLACEHOLDER.month}
               value={month}
               maxLength={MAX_LENGTH.expirationDate}
@@ -99,6 +104,7 @@ const CardInformationForm = ({
               aria-invalid={isMonthError}
             />
             <Input
+              aria-label="year-expiration"
               placeholder={PLACEHOLDER.year}
               value={year}
               maxLength={MAX_LENGTH.expirationDate}
@@ -111,6 +117,7 @@ const CardInformationForm = ({
       <FormField title={TITLE.userName}>
         <InputField label={LABEL.userName} error={userNameErrorMessage}>
           <Input
+            aria-label="userName"
             placeholder={PLACEHOLDER.userName}
             value={userNameState}
             maxLength={MAX_LENGTH.userName}
