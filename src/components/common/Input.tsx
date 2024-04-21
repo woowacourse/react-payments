@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import styled, { CSSProperties } from "styled-components";
 
 type InputSize = "small" | "medium" | "large";
@@ -13,25 +13,19 @@ const inputWidthSize: InputWidthSize = {
   large: "315px",
 } as const;
 
-interface InputProps {
-  id?: string;
-  type: HTMLInputTypeAttribute;
-  placeholder: string;
-  value: string;
-  minLength?: number;
-  maxLength?: number;
-  size: InputSize;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  inputSize: InputSize;
   isError: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ size, isError, onChange, ...props }, ref) => {
+  ({ inputSize, isError, onChange, ...props }, ref) => {
     return (
       <StyledInput
         ref={ref}
         onChange={onChange}
-        width={inputWidthSize[size]}
+        width={inputWidthSize[inputSize]}
         isError={isError}
         {...props}
       />
