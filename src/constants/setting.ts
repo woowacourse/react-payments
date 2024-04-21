@@ -12,6 +12,8 @@ export const CARD_FORM_INPUTS = {
     SUB_TEXT: '월/년도(MMYY)를 순서대로 입력해 주세요.',
     PLACEHOLDER: { MONTH: 'MM', YEAR: 'YY' },
     MAX_LENGTH: 2,
+    MONTH_MAX_NUMBER: 12,
+    MONTH_MIN_NUMBER: 1,
   },
   USER_NAME: {
     LABEL: '소유자 이름',
@@ -19,6 +21,7 @@ export const CARD_FORM_INPUTS = {
     SUB_TEXT: '',
     PLACEHOLDER: 'JOHN DOE',
     MAX_LENGTH: 21,
+    REGEX: /^[a-zA-Z\s]+$/,
   },
 };
 
