@@ -7,10 +7,12 @@ export const InputField = styled.fieldset`
 `;
 
 export const InputContainer = styled.div<{ $length?: number }>`
+  position: relative;
   display: grid;
   grid-template-columns: ${(props) => `repeat(${props.$length}, 1fr)`};
   column-gap: 10px;
   width: 100%;
+  padding-bottom: 22px;
 `;
 
 export const InputLabel = styled.legend`
@@ -21,7 +23,8 @@ export const InputLabel = styled.legend`
 `;
 
 export const ErrorMessage = styled.p`
-  height: 14px;
+  position: absolute;
+  bottom: 0;
   color: ${({ theme }) => theme.color.error};
   font-size: ${({ theme }) => theme.fontSize.sm};
   font-weight: 400;
