@@ -40,7 +40,7 @@ export default function CardHolder({
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
             onChange={onChange}
             value={holder}
-            border-color={errorMessage ? 'error' : undefined}
+            borderColor={errorMessage ? 'error' : undefined}
           />
         </TextInputContainer>
       </FormItem>

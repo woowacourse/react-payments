@@ -1,27 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
+import { COLOR } from '../styles/color';
 import { ReactNode } from 'react';
-import { css } from '@emotion/react';
-
-const errorColor = '#ff3d3d';
-
-const styledTextError = {
-  color: errorColor,
-  fontSize: '9.5px',
-  lineHeight: '13.76px',
-  fontWeight: 400,
-  marginTop: '5px',
-  height: '10px',
-};
-
-const wrappedStyledLabel = css({
-  display: 'flex',
-  flexDirection: 'column',
-  fontSize: '12px',
-  fontWeight: 500,
-  marginTop: '10px',
-  gap: '5px',
-});
+import styled from '@emotion/styled';
 
 interface FormItemProps {
   labelText: string;
@@ -36,11 +17,29 @@ export default function FormItem({
 }: FormItemProps) {
   return (
     <div>
-      <label css={wrappedStyledLabel}>
+      <FormLabel>
         {labelText}
-        <div> {children}</div>
-      </label>
-      <p css={css(styledTextError)}>{errorMessage}</p>
+        {children}
+      </FormLabel>
+      <ErrorText>{errorMessage}</ErrorText>
     </div>
   );
 }
+
+const ErrorText = styled.p({
+  color: COLOR.error,
+  fontSize: '9.5px',
+  lineHeight: '13.76px',
+  fontWeight: 400,
+  marginTop: '5px',
+  height: '10px',
+});
+
+const FormLabel = styled.label({
+  display: 'flex',
+  flexDirection: 'column',
+  fontSize: '12px',
+  fontWeight: 500,
+  marginTop: '10px',
+  gap: '5px',
+});

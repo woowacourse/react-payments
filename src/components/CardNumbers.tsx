@@ -63,7 +63,7 @@ export default function CardNumbers({
               onChange={hook.onChange}
               value={hook.input}
               maxLength={BOUND.cardNumbersOnePartUpper}
-              border-color={hook.errorMessage ? 'error' : undefined}
+              borderColor={hook.errorMessage ? 'error' : undefined}
             />
           ))}
         </TextInputContainer>

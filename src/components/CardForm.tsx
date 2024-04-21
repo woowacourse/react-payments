@@ -5,14 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 import CardExpiredDate from './CardExpiredDate';
 import CardHolder from './CardHolder';
 import CardNumbers from './CardNumbers';
-import { css } from '@emotion/react';
-
-const styledForm = {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '16px',
-};
+import styled from '@emotion/styled';
 
 interface props {
   setCardNumbers: React.Dispatch<
@@ -27,12 +20,17 @@ export default function CardForm({
   setCardHolder,
 }: props) {
   return (
-    // eslint-disable-next-line
-    // @ts-ignore
-    <form css={css(styledForm)}>
+    <CardFormContainer>
       <CardNumbers setCardNumbers={setCardNumbers} />
       <CardExpiredDate setCardExpiredDate={setCardExpiredDate} />
       <CardHolder setCardHolder={setCardHolder} />
-    </form>
+    </CardFormContainer>
   );
 }
+
+const CardFormContainer = styled.form({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+});

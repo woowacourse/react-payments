@@ -1,18 +1,18 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { COLOR } from '../styles/color';
+import styled from '@emotion/styled';
 
-const styledTitle = css`
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 26.06px;
-`;
+const MainTitle = styled.h2({
+  fontSize: '18px',
+  fontWeight: 700,
+  lineHeight: '26.06px',
+});
 
-const styledDescription = css`
-  font-size: 9.5px;
-  font-weight: 400;
-  line-height: 13.76px;
-  color: #8b95a1;
-`;
+const Description = styled.p({
+  fontSize: '9.5px',
+  fontWeight: 400,
+  lineHeight: '13.76px',
+  color: COLOR.gray3,
+});
 
 interface SectionTitleProps {
   title: string;
@@ -24,9 +24,9 @@ export default function SectionTitle({
   description,
 }: SectionTitleProps) {
   return (
-    <div>
-      <h2 css={styledTitle}>{title}</h2>
-      {description && <p css={styledDescription}>{description}</p>}
-    </div>
+    <>
+      <MainTitle>{title}</MainTitle>
+      {description && <Description>{description}</Description>}
+    </>
   );
 }
