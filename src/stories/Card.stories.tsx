@@ -1,20 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardView from '../components/CardView';
 import { Card } from '../types/card';
+import { DEFAULT_CARD } from '../constants/card';
 
-const mockDefaultCardInfo: Card = {
-  cardNumbers: {
-    cardNumber1: '',
-    cardNumber2: '',
-    cardNumber3: '',
-    cardNumber4: '',
-  },
-  expiryDate: {
-    month: '',
-    year: '',
-  },
-  userName: '',
-};
+const mockDefaultCardInfo: Card = DEFAULT_CARD;
 
 const mockVisaCardInfo: Card = {
   cardNumbers: {

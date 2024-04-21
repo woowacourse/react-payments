@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
-import { DEFAULT_BLANK, SECRET_NUMBER, SLASH } from '../constants/system';
+import { SECRET_NUMBER, SLASH } from '../constants/system';
 import { isMasterCard, isVisaCard } from '../utils/checkCardType';
 
 interface Props {
@@ -55,7 +55,7 @@ export default function CardView({ cardInfo }: Props) {
       </CardNumbers>
       <TextBox>
         {formatDate(expiryDate.month)}
-        {expiryDate.year.length > 0 ? SLASH : DEFAULT_BLANK}
+        {expiryDate.year.length > 0 ? SLASH : ''}
         {formatDate(expiryDate.year)}
       </TextBox>
       <TextBox>{userName}</TextBox>

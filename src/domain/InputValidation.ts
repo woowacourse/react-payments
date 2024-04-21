@@ -1,6 +1,5 @@
 import ERROR_MESSAGES from '../constants/error';
 import {
-  CARD_NUMBER_LENGTH,
   DOUBLE_BLANK,
   MONTH_RANGE,
   UPPERCASE_AND_SPACE_ONLY,
@@ -31,12 +30,6 @@ function checkEmpty(n: string) {
   }
 }
 
-function validateCardNumberLength(n: string) {
-  if (n.length !== CARD_NUMBER_LENGTH) {
-    throw new Error(ERROR_MESSAGES.INVALID_CARD_NUMBER_LENGTH);
-  }
-}
-
 function validateMonth(n: string) {
   if (checkEmpty(n)) return;
   const month = Number(n);
@@ -59,15 +52,12 @@ function validateUpperCase(str: string) {
   }
 }
 
-interface ValidationMap {
-  [key: string]: (n: string) => void;
-}
+type ValidationMap = Record<string, (n: string) => void>;
 
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
-    validateCardNumberLength(n);
   },
   month: (n: string) => {
     checkTrimBlank(n);
