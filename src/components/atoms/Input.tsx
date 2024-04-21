@@ -26,21 +26,17 @@ const SInput = styled.input<{
   }
 `;
 
-interface Props {
-  type?: string;
-  maxLength: number;
-  placeholder: string;
-  onChange: (inputValue: string) => boolean;
-  onBlur?: (inputValue: string) => boolean;
-  value: string;
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  handleChange: (inputValue: string) => boolean;
+  handleBlur?: (inputValue: string) => boolean;
 }
 
 export default function Input({
   type,
   maxLength,
   placeholder,
-  onChange,
-  onBlur,
+  handleChange,
+  handleBlur,
   value,
 }: Props) {
   const [isErrorOnChange, setIsErrorOnChange] = useState(false);
@@ -52,17 +48,17 @@ export default function Input({
       maxLength={maxLength}
       placeholder={placeholder}
       onChange={(e) => {
-        if (!onChange) {
+        if (!handleChange) {
           return;
         }
-        const isError = onChange(e.target.value);
+        const isError = handleChange(e.target.value);
         setIsErrorOnChange(isError);
       }}
       onBlur={(e) => {
-        if (!onBlur) {
+        if (!handleBlur) {
           return;
         }
-        const isError = onBlur(e.target.value);
+        const isError = handleBlur(e.target.value);
         setIsErrorOnBlur(isError);
       }}
       value={value}

@@ -54,7 +54,7 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
           <Input
             maxLength={15}
             placeholder="JOHN DOE"
-            onChange={(value) => nameValidator(value)}
+            handleChange={(value) => nameValidator(value)}
             value={cardOwnerName}
           />
         </InputContainer>

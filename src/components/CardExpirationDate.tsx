@@ -106,16 +106,16 @@ export default function CardExpirationDate({
           <Input
             maxLength={2}
             placeholder="MM"
-            onChange={(value) => isValidInput(value, "cardExpirationMonth")}
+            handleChange={(value) => isValidInput(value, "cardExpirationMonth")}
             value={cardExpirationMonth}
-            onBlur={isValidMonth}
+            handleBlur={isValidMonth}
           />
           <Input
             maxLength={2}
             placeholder="YY"
-            onChange={(value) => isValidInput(value, "cardExpirationYear")}
+            handleChange={(value) => isValidInput(value, "cardExpirationYear")}
             value={cardExpirationYear}
-            onBlur={isValidYear}
+            handleBlur={isValidYear}
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>

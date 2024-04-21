@@ -83,32 +83,32 @@ export default function CardNumbers({
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber1")}
+            handleChange={(value) => isValidInput(value, "cardNumber1")}
             value={cardNumber1}
-            onBlur={isValidLength}
+            handleBlur={isValidLength}
           />
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber2")}
+            handleChange={(value) => isValidInput(value, "cardNumber2")}
             value={cardNumber2}
-            onBlur={isValidLength}
+            handleBlur={isValidLength}
           />
           <Input
             type="password"
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber3")}
+            handleChange={(value) => isValidInput(value, "cardNumber3")}
             value={cardNumber3}
-            onBlur={isValidLength}
+            handleBlur={isValidLength}
           />
           <Input
             type="password"
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, "cardNumber4")}
+            handleChange={(value) => isValidInput(value, "cardNumber4")}
             value={cardNumber4}
-            onBlur={isValidLength}
+            handleBlur={isValidLength}
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
