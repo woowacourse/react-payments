@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    section: CARD_NUMBER.type,
+    informationSection: CARD_NUMBER.type,
     setState: () => {},
   },
 };
