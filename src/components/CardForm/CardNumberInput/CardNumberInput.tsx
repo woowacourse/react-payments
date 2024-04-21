@@ -4,6 +4,7 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
+import { isNumber, isValidLength } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
@@ -19,26 +20,20 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
     return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
   }, [isValid]);
 
-  const validateCardNumber = (number: string) => {
-    return !Number.isNaN(Number(number)) && number.length === CARD_NUMBER.MAX_LENGTH;
+  const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumber(e.target.value)) return;
+
+    handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? e.target.value : number)));
   };
 
-  const onCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isInputValid = validateCardNumber(e.target.value);
+  const handleCardNumberBlur = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isInputValid = isValidLength(e.target.value, CARD_NUMBER.MAX_LENGTH);
 
-    setIsValid((prev) => {
-      return prev.map((isValid, index) => (index === inputIndex ? isInputValid : isValid));
-    });
+    setIsValid((prev) => prev.map((isValid, index) => (index === inputIndex ? isInputValid : isValid)));
 
-    handleCardNumbers(
-      cardNumbers.map((number, index) => {
-        if (index === inputIndex) {
-          return isInputValid ? e.target.value : '';
-        }
-
-        return number;
-      }),
-    );
+    if (!isInputValid) {
+      handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? '' : number)));
+    }
   };
 
   return (
@@ -51,7 +46,8 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
-            onChange={onCardNumberChange(index)}
+            onChange={handleCardNumberChange(index)}
+            onBlur={handleCardNumberBlur(index)}
             isValid={isValid[index]}
           />
         ))}
