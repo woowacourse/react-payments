@@ -44,3 +44,11 @@ export const validateOwnerName = (name: string) => {
   }
   return null;
 };
+
+export const makeNewErrorMessages = (
+  messages: (string | null)[],
+  newMessage: string | null,
+  index: number
+) => {
+  return messages.map((message, i) => (i === index ? newMessage : message));
+};

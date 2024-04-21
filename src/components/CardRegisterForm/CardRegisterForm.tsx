@@ -4,6 +4,7 @@ import Input from "@/components/Input/Input";
 import S from "./style";
 import InputFieldHeader from "../InputFieldHeader/InputFieldHeader";
 import {
+  makeNewErrorMessages,
   validateExpirationDate,
   validateIsValidLength,
   validateMonth,
@@ -59,42 +60,26 @@ const CardRegisterForm = ({
   };
 
   const onValidateExpirationPeriod = (index: number) => {
-    if (expirationPeriod[index].length) {
-      const { expiredError, monthError, lengthError } =
-        getExpirationError(index);
-      if (monthError || lengthError) {
-        return setExpirationPeriodErrorMessages((prev) =>
-          makeNewErrorMessages(prev, monthError || lengthError, index)
-        );
-      }
-      if (expiredError) {
-        return setExpirationPeriodErrorMessages(
-          Array(expirationPeriod.length).fill(expiredError)
-        );
-      } else {
-        return setExpirationPeriodErrorMessages(
-          Array(expirationPeriod.length).fill(null)
-        );
-      }
+    const { expiredError, monthError, lengthError } = getExpirationError(index);
+    if (expiredError) {
+      setExpirationPeriodErrorMessages([expiredError, expiredError]);
+    } else {
+      setExpirationPeriodErrorMessages([null, null]);
     }
-    setExpirationPeriodErrorMessages((prev) =>
-      makeNewErrorMessages(prev, null, index)
-    );
-  };
-
-  const makeNewErrorMessages = (
-    messages: (string | null)[],
-    newMessage: string | null,
-    index: number
-  ) => {
-    return messages.map((message, i) => (i === index ? newMessage : message));
+    if (monthError || lengthError) {
+      setExpirationPeriodErrorMessages((prev) =>
+        makeNewErrorMessages(prev, monthError || lengthError, index)
+      );
+    }
+    if (!expirationPeriod[index].length) {
+      setExpirationPeriodErrorMessages((prev) =>
+        makeNewErrorMessages(prev, null, index)
+      );
+    }
   };
 
   const getExpirationError = (index: number) => {
-    const expiredError =
-      expirationPeriod[0] &&
-      expirationPeriod[1] &&
-      validateExpirationDate(expirationPeriod);
+    const expiredError = validateExpirationDate(expirationPeriod);
 
     const monthError =
       index === 0 && validateMonth(Number(expirationPeriod[index]));
