@@ -18,8 +18,8 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
   const [isValidYear, setIsValidYear] = useState(true);
 
   const errorMessage = useMemo(() => {
-    if (!isValidMonth) return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_LENGTH;
-    if (!isValidYear) return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR_LENGTH;
+    if (!isValidMonth) return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH;
+    if (!isValidYear) return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
     return '';
   }, [isValidMonth, isValidYear]);
 
@@ -66,7 +66,7 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
           type="text"
           placeholder="MM"

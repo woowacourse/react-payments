@@ -17,7 +17,7 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
   const [isValid, setIsValid] = useState([true, true, true, true]);
 
   const errorMessage = useMemo(() => {
-    return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
+    return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER;
   }, [isValid]);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <InputField label="카드 번호" length={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="카드 번호" inputCount={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}

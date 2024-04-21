@@ -16,7 +16,7 @@ function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState(true);
 
   const errorMessage = useMemo(() => {
-    return isValid ? '' : ERROR_MESSAGE.INVALID_CARD_OWNER_CHARACTER;
+    return isValid ? '' : ERROR_MESSAGE.INVALID_CARD_OWNER;
   }, [isValid]);
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,7 @@ function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
   return (
     <div>
       <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
-      <InputField label="소유자 이름" length={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="소유자 이름" inputCount={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}

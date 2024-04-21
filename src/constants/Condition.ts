@@ -20,4 +20,4 @@ export const CARD = {
   VISA: 4,
   MIN_MASTER_CARD: 51,
   MAX_MASTER_CARD: 55,
-};
+} as const;
