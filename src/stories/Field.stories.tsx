@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Field from '../components/common/Field/Field';
 import Input from '../components/common/Input/Input';
+import Label from '../components/common/Label/Label';
 
 const meta = {
   title: 'Field',
@@ -30,16 +31,20 @@ export const CardNumbers: Story = {
     children: (
       <>
         {CARD_NUMBERS_FIELDS.map((name, index) => (
-          <Input
-            key={index}
-            name={name}
-            placeholder="1234"
-            value=""
-            isError={false}
-            handleChange={() => 1}
-            handleOnBlur={() => 1}
-            maxLength={4}
-          />
+          <>
+            <Label key={index} htmlFor={name} labelText={name} hideLabel />
+            <Input
+              key={index}
+              id={name}
+              name={name}
+              placeholder="1234"
+              value=""
+              isError={false}
+              handleChange={() => 1}
+              handleOnBlur={() => 1}
+              maxLength={4}
+            />
+          </>
         ))}
       </>
     ),
@@ -56,16 +61,20 @@ export const ExpirationDate: Story = {
     children: (
       <>
         {EXPIRATION_DATE_FIELDS.map((name, index) => (
-          <Input
-            key={index}
-            name={name}
-            placeholder={name === 'month' ? 'MM' : 'YY'}
-            value=""
-            isError={false}
-            handleChange={() => 1}
-            handleOnBlur={() => 1}
-            maxLength={4}
-          />
+          <>
+            <Label key={index} htmlFor={name} labelText={name} hideLabel />
+            <Input
+              key={index}
+              id={name}
+              name={name}
+              placeholder={name === 'month' ? 'MM' : 'YY'}
+              value=""
+              isError={false}
+              handleChange={() => 1}
+              handleOnBlur={() => 1}
+              maxLength={4}
+            />
+          </>
         ))}
       </>
     ),
@@ -79,15 +88,24 @@ export const OwnerName: Story = {
     errMsg: '',
     children: (
       <>
-        {Array.from({ length: 1 }).map(() => (
-          <Input
-            name="ownerName"
-            placeholder="JOHN DOE"
-            value=""
-            isError={false}
-            handleChange={() => 1}
-            handleOnBlur={() => 1}
-          />
+        {Array.from({ length: 1 }).map((_, index) => (
+          <>
+            <Label
+              key={index}
+              htmlFor="ownerName"
+              labelText="ownerName"
+              hideLabel
+            />
+            <Input
+              id="ownerName"
+              name="ownerName"
+              placeholder="JOHN DOE"
+              value=""
+              isError={false}
+              handleChange={() => 1}
+              handleOnBlur={() => 1}
+            />
+          </>
         ))}
       </>
     ),

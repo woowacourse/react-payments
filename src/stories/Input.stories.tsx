@@ -22,6 +22,11 @@ const meta = {
         disable: true,
       },
     },
+    id: {
+      table: {
+        disable: true,
+      },
+    },
 
     handleChange: {
       table: {
@@ -42,6 +47,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    id: 'name',
     name: 'name',
     value: '',
     placeholder: '1234',
