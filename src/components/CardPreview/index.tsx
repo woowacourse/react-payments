@@ -23,8 +23,8 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
         <CardNumbersWrapper>
           <CardNumber data={cardNumbers.first} />
           <CardNumber data={cardNumbers.second} />
-          <CardNumber data={cardNumbers.third} type="password" />
-          <CardNumber data={cardNumbers.fourth} type="password" />
+          <CardNumber data={cardNumbers.third} type="secret" />
+          <CardNumber data={cardNumbers.fourth} type="secret" />
         </CardNumbersWrapper>
 
         <ExpiryDateWrapper>

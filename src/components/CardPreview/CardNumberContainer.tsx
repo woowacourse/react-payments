@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-type TCardNumberType = 'normal' | 'password';
+type TCardNumberType = 'normal' | 'secret';
 
 export interface ICardNumberContainerProps {
   data: string;
@@ -10,7 +10,7 @@ export interface ICardNumberContainerProps {
 const PASSWORD_CHAR = '*' as const;
 const TYPE = {
   normal: 'normal',
-  password: 'password',
+  secret: 'secret',
 } as const;
 
 const getDisplayingCardNumber = (cardNumber: string, type: TCardNumberType) => {
@@ -18,7 +18,7 @@ const getDisplayingCardNumber = (cardNumber: string, type: TCardNumberType) => {
     case TYPE.normal:
       return cardNumber;
 
-    case TYPE.password:
+    case TYPE.secret:
       return PASSWORD_CHAR.repeat(cardNumber.length);
 
     default:
