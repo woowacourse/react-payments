@@ -1,7 +1,7 @@
 import { ErrorDetail } from '../components/types/error';
 import CONDITION from '../constants/condition';
 
-const inquireCardNumber = (cardNumber: string): ErrorDetail => {
+const validateCardNumber = (cardNumber: string): ErrorDetail => {
   const isValidLength =
     cardNumber.length === CONDITION.TEXT_LENGTH_MIN || cardNumber.length === CONDITION.CARD_NUMBER_LENGTH_MAX;
   const isValidCardNumber = /^\d{4}$/.test(cardNumber);
@@ -17,4 +17,4 @@ const inquireCardNumber = (cardNumber: string): ErrorDetail => {
   return { isError: false, errorMessage: '' };
 };
 
-export default inquireCardNumber;
+export default validateCardNumber;

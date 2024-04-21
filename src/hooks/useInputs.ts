@@ -13,10 +13,7 @@ const convertArrayIntoObject = <T>(keys: string[], initialValue: T) => {
   return obj;
 };
 
-const useInputs = <T extends Record<string, string>>(
-  initialValue: T,
-  inquireValidity?: (value: string) => ErrorDetail,
-) => {
+const useInputs = <T extends Record<string, string>>(initialValue: T, validate?: (value: string) => ErrorDetail) => {
   const initialErrorStatus = convertArrayIntoObject(Object.keys(initialValue), INITIAL_ERROR_VALUE);
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState(initialErrorStatus);
@@ -37,8 +34,8 @@ const useInputs = <T extends Record<string, string>>(
   };
 
   const generateErrorMessageUpdater = (key: CardNumberKey) => () => {
-    if (inquireValidity) {
-      const validationResult = inquireValidity(value[key]);
+    if (validate) {
+      const validationResult = validate(value[key]);
 
       setErrorInfo({
         ...errorInfo,

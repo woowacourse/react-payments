@@ -1,6 +1,6 @@
 import { ErrorDetail } from '../components/types/error';
 
-const inquireCardholderName = (cardholderName: string): ErrorDetail => {
+const validateCardholderName = (cardholderName: string): ErrorDetail => {
   const isEnglish = /^[a-zA-Z ]+$/.test(cardholderName);
   if (!isEnglish) {
     return { isError: true, errorMessage: '카드 소유자 이름을 영어로만 입력해주세요' };
@@ -14,4 +14,4 @@ const inquireCardholderName = (cardholderName: string): ErrorDetail => {
   return { isError: false, errorMessage: '' };
 };
 
-export default inquireCardholderName;
+export default validateCardholderName;
