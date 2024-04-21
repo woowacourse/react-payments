@@ -7,6 +7,11 @@ import {
   CARD_NUMBER_UNIT_LENGTH,
 } from "../../../constants";
 
+interface ErrorMessage {
+  index: number;
+  message: string;
+}
+
 export default function CardNumbersInputField({
   cardNumbers,
   setCardNumbers,
@@ -14,31 +19,40 @@ export default function CardNumbersInputField({
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
 }) {
-  const [errorMessages, setErrorMessages] = useState<[number, string][]>([]);
-  const [visibleErrorMessage, setVisibleErrorMessage] = useState<
-    [number, string] | []
+  const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
+    ErrorMessage[]
   >([]);
+  const [nanErrorMessage, setNanErrorMessage] = useState<ErrorMessage | null>(
+    null
+  );
 
   const updateErrorMessage = (index: number, message: string) => {
-    const errorMessageIndex = errorMessages.findIndex(([i, _]) => i === index);
+    const errorMessageIndex = numberLengthErrorMessages.findIndex(
+      (error) => error.index === index
+    );
 
     if (errorMessageIndex === -1)
-      setErrorMessages([...errorMessages, [index, message]]);
+      setNumberLengthErrorMessages([
+        ...numberLengthErrorMessages,
+        { index, message },
+      ]);
     else {
-      const updatedErrorMessages = [...errorMessages];
-      updatedErrorMessages[errorMessageIndex] = [index, message];
-      setErrorMessages(updatedErrorMessages);
+      const updatedErrorMessages = [...numberLengthErrorMessages];
+      updatedErrorMessages[errorMessageIndex] = { index, message };
+      setNumberLengthErrorMessages(updatedErrorMessages);
     }
   };
 
   const removeErrorMessage = (index: number) => {
-    const prevErrorMessages = [...errorMessages];
-    setErrorMessages(prevErrorMessages.filter(([i]) => i !== index));
+    const prevErrorMessages = [...numberLengthErrorMessages];
+    setNumberLengthErrorMessages(
+      prevErrorMessages.filter((error) => error.index !== index)
+    );
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     if (isNaN(Number(e.target.value)) && e.target.value.length !== 0) {
-      setVisibleErrorMessage([index, "숫자를 입력해주세요."]);
+      setNanErrorMessage({ index, message: "숫자를 입력해주세요." });
       return;
     }
 
@@ -46,7 +60,7 @@ export default function CardNumbersInputField({
       updateErrorMessage(index, "4개의 숫자를 입력해주세요.");
     }
 
-    setVisibleErrorMessage([]);
+    setNanErrorMessage(null);
 
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
@@ -56,7 +70,11 @@ export default function CardNumbersInputField({
   };
 
   const checkError = (index: number): boolean => {
-    return errorMessages.filter(([i]) => i === index).length === 1;
+    const numberLengthError = numberLengthErrorMessages.some(
+      (error) => error.index === index
+    );
+    const nanError = nanErrorMessage?.index === index;
+    return numberLengthError || nanError;
   };
 
   return (
@@ -74,11 +92,12 @@ export default function CardNumbersInputField({
           />
         ))}
       </div>
-      {(visibleErrorMessage.length !== 0 || errorMessages.length !== 0) && (
+      {(nanErrorMessage !== null || numberLengthErrorMessages.length !== 0) && (
         <div className={styles.error_message}>
-          {visibleErrorMessage.length !== 0
-            ? visibleErrorMessage[1]
-            : errorMessages[errorMessages.length - 1][1]}
+          {nanErrorMessage !== null
+            ? nanErrorMessage.message
+            : numberLengthErrorMessages[numberLengthErrorMessages.length - 1]
+                .message}
         </div>
       )}
     </>
