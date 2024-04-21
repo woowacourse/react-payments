@@ -10,51 +10,50 @@ interface InputCreditCardNumberProps {
   inputError: boolean;
 }
 
+interface InputboxData {
+  inputValue: string;
+  name: string;
+}
+
 const InputCreditCardNumber = ({
   inputValue,
   handleChange,
   inputError,
 }: InputCreditCardNumberProps) => {
+  const inputboxData: InputboxData[] = [
+    {
+      inputValue: inputValue.firstValue,
+      name: CARD_INPUTBOX_NAME.cardNumber.firstValue,
+    },
+    {
+      inputValue: inputValue.secondValue,
+      name: CARD_INPUTBOX_NAME.cardNumber.secondValue,
+    },
+    {
+      inputValue: inputValue.thirdValue,
+      name: CARD_INPUTBOX_NAME.cardNumber.thirdValue,
+    },
+    {
+      inputValue: inputValue.fourthValue,
+      name: CARD_INPUTBOX_NAME.cardNumber.fourthValue,
+    },
+  ];
+
   return (
     <InputContainer>
-      <InputLabel htmlFor="creditCardNumber">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
+      <InputLabel htmlFor="creditCardNumber1">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
       <InputWrapper>
-        <InputBox
-          inputValue={inputValue.firstValue}
-          handleChange={handleChange}
-          size="small"
-          placeholder="1234"
-          id="creditCardNumber"
-          name={CARD_INPUTBOX_NAME.cardNumber.firstValue}
-          isError={inputError}
-        />
-        <InputBox
-          inputValue={inputValue.secondValue}
-          handleChange={handleChange}
-          size="small"
-          placeholder="1234"
-          id="creditCardNumber"
-          name={CARD_INPUTBOX_NAME.cardNumber.secondValue}
-          isError={inputError}
-        />
-        <InputBox
-          inputValue={inputValue.thirdValue}
-          handleChange={handleChange}
-          size="small"
-          placeholder="1234"
-          id="creditCardNumber"
-          name={CARD_INPUTBOX_NAME.cardNumber.thirdValue}
-          isError={inputError}
-        />
-        <InputBox
-          inputValue={inputValue.fourthValue}
-          handleChange={handleChange}
-          size="small"
-          placeholder="1234"
-          id="creditCardNumber"
-          name={CARD_INPUTBOX_NAME.cardNumber.fourthValue}
-          isError={inputError}
-        />
+        {inputboxData.map((data, idx) => (
+          <InputBox
+            inputValue={data.inputValue}
+            handleChange={handleChange}
+            size="small"
+            placeholder="1234"
+            id={`creditCardNumber${idx + 1}`}
+            name={data.name}
+            isError={inputError}
+          />
+        ))}
       </InputWrapper>
     </InputContainer>
   );

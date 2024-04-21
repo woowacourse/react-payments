@@ -10,33 +10,42 @@ interface InputExpirationPeriodProps {
   inputError: boolean;
 }
 
+interface InputboxData {
+  inputValue: string;
+  name: string;
+}
+
 const InputExpirationPeriod = ({
   inputValue,
   handleChange,
   inputError,
 }: InputExpirationPeriodProps) => {
+  const inputboxData: InputboxData[] = [
+    {
+      inputValue: inputValue.month,
+      name: CARD_INPUTBOX_NAME.expirationPeriod.month,
+    },
+    {
+      inputValue: inputValue.year,
+      name: CARD_INPUTBOX_NAME.expirationPeriod.year,
+    },
+  ];
+
   return (
     <InputContainer>
-      <InputLabel htmlFor="expirationDate">{CARD_FORM_MESSAGE.expirationDate}</InputLabel>
+      <InputLabel htmlFor="expirationDate1">{CARD_FORM_MESSAGE.expirationDate}</InputLabel>
       <InputWrapper>
-        <InputBox
-          inputValue={inputValue.month}
-          handleChange={handleChange}
-          size="medium"
-          placeholder="MM"
-          id="expirationDate"
-          name={CARD_INPUTBOX_NAME.expirationPeriod.month}
-          isError={inputError}
-        />
-        <InputBox
-          inputValue={inputValue.year}
-          handleChange={handleChange}
-          size="medium"
-          placeholder="YY"
-          id="expirationDate"
-          name={CARD_INPUTBOX_NAME.expirationPeriod.year}
-          isError={inputError}
-        />
+        {inputboxData.map((data, idx) => (
+          <InputBox
+            inputValue={data.inputValue}
+            handleChange={handleChange}
+            size="medium"
+            placeholder="MM"
+            id={`expirationDate${idx + 1}`}
+            name={data.name}
+            isError={inputError}
+          />
+        ))}
       </InputWrapper>
     </InputContainer>
   );
