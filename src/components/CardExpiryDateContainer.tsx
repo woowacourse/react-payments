@@ -2,30 +2,20 @@ import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
 import { ErrorDetail } from './types/error';
-import { ExpiryDate } from './types/card';
 
-interface CardExpiryDateContainerProps {
-  expiryDate: ExpiryDate;
-  changeHandler: {
-    month: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    year: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  };
-  errorInfo: {
-    month: ErrorDetail;
-    year: ErrorDetail;
-  };
-  errorMessageUpdater: {
-    month: () => void;
-    year: () => void;
-  };
+interface ExpiryDateInfo {
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateErrorMessage: () => void;
+  errorInfo: ErrorDetail;
 }
 
-const CardExpiryDateContainer = ({
-  expiryDate,
-  changeHandler,
-  errorMessageUpdater,
-  errorInfo,
-}: CardExpiryDateContainerProps) => {
+interface CardExpiryDateContainerProps {
+  month: ExpiryDateInfo;
+  year: ExpiryDateInfo;
+}
+
+const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) => {
   return (
     <div>
       <RegistrationLayout
@@ -36,28 +26,28 @@ const CardExpiryDateContainer = ({
       >
         <Input
           id="card-expiry-month-input"
-          isError={errorInfo.month.isError}
-          value={expiryDate.month}
-          onChange={changeHandler.month}
-          onBlur={errorMessageUpdater.month}
+          isError={month.errorInfo.isError}
+          value={month.value}
+          onChange={month.handleChange}
+          onBlur={month.updateErrorMessage}
           placeholder="MM"
           maxLength={2}
           width="48%"
         />
         <Input
           id="card-expiry-year-input"
-          isError={errorInfo.year.isError}
-          value={expiryDate.year}
-          onChange={changeHandler.year}
-          onBlur={errorMessageUpdater.year}
+          isError={year.errorInfo.isError}
+          value={year.value}
+          onChange={year.handleChange}
+          onBlur={year.updateErrorMessage}
           placeholder="YY"
           maxLength={2}
           width="48%"
         />
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorInfo.month.errorMessage}</ErrorText>
-        <ErrorText>{errorInfo.year.errorMessage}</ErrorText>
+        <ErrorText>{month.errorInfo.errorMessage}</ErrorText>
+        <ErrorText>{year.errorInfo.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

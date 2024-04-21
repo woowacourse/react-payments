@@ -1,48 +1,24 @@
-import useInput from './hooks/useInput';
-import useInputs from './hooks/useInputs';
 import CardholderNameContainer from './components/CardholderNameContainer';
 import CardExpiryDateContainer from './components/CardExpiryDateContainer';
-import { inquireCardNumber, inquireCardholderName, inquireExpiryMonth, inquireExpiryYear } from './inquiry';
 import CardNumberContainer from './components/CardNumbersContainer';
 import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
-
-const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
+import useCardInfo from './hooks/useCardInfo';
 
 const App = () => {
-  const { value: cardNumbers, ...cardNumbersInput } = useInputs(INITIAL_CARD_NUMBER, inquireCardNumber);
-  const { value: cardholderName, ...cardholderNameInput } = useInput('', inquireCardholderName);
-
-  const {
-    value: expiryMonth,
-    handleChange: handleChangeExpiryMonth,
-    updateErrorMessage: updateExpiryMonthErrorMessage,
-    errorInfo: expiryMonthErrorInfo,
-  } = useInput('', inquireExpiryMonth);
-
-  const {
-    value: expiryYear,
-    handleChange: handleChangeExpiryYear,
-    updateErrorMessage: updateExpiryYearErrorMessage,
-    errorInfo: expiryYearErrorInfo,
-  } = useInput('', inquireExpiryYear);
+  const { cardNumberInfo, cardholderNameInfo, expiryDateInfo } = useCardInfo();
 
   return (
     <AppLayout>
       <CardPreview
-        cardNumbers={cardNumbers}
-        expiryDate={{ month: expiryMonth, year: expiryYear }}
-        cardholderName={cardholderName}
+        cardNumbers={cardNumberInfo.value}
+        expiryDate={{ month: expiryDateInfo.month.value, year: expiryDateInfo.year.value }}
+        cardholderName={cardholderNameInfo.value}
       />
       <CardInfoWrapper>
-        <CardNumberContainer cardNumbers={cardNumbers} {...cardNumbersInput} />
-        <CardExpiryDateContainer
-          expiryDate={{ month: expiryMonth, year: expiryYear }}
-          changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
-          errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
-          errorInfo={{ month: expiryMonthErrorInfo, year: expiryYearErrorInfo }}
-        />
-        <CardholderNameContainer cardholderName={cardholderName} {...cardholderNameInput} />
+        <CardNumberContainer cardNumbers={cardNumberInfo.value} {...cardNumberInfo} />
+        <CardExpiryDateContainer {...expiryDateInfo} />
+        <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
       </CardInfoWrapper>
     </AppLayout>
   );
