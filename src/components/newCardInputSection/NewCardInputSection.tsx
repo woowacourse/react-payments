@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React from 'react';
 import * as Styled from './NewCardInputSection.styled';
 
 export interface NewCardInputSectionProps {
@@ -6,7 +6,6 @@ export interface NewCardInputSectionProps {
   mainText: string;
   subText?: string;
   errorMessage: string[];
-  children: ReactNode;
 }
 
 const NewCardInputSection = ({
@@ -15,7 +14,7 @@ const NewCardInputSection = ({
   subText,
   errorMessage,
   children,
-}: NewCardInputSectionProps) => {
+}: React.PropsWithChildren<NewCardInputSectionProps>) => {
   return (
     <Styled.InputSection>
       <header>

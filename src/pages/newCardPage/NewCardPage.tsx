@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from '../../components/input/Input';
 import CardPreview from '../../components/cardPreview/CardPreview';
-import { ICardInfo } from '../../types/type';
+import { ICardInfo, IErrorMessage } from '../../types/type';
 import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
 import { NewCardContainer } from './NewCardPage.styled';
 import {
@@ -21,7 +21,7 @@ const NewCardPage = () => {
     cardExpiration: [0, 0],
     userName: '',
   });
-  const [errorMessage, setErrorMessage] = useState({
+  const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
     cardNumbers: ['', '', '', ''],
     cardExpiration: ['', ''],
     userName: [''],
@@ -33,7 +33,12 @@ const NewCardPage = () => {
 
     setErrorMessage({
       ...errorMessage,
-      cardNumbers: errorMessageCopy,
+      cardNumbers: [
+        errorMessageCopy[0],
+        errorMessageCopy[1],
+        errorMessageCopy[2],
+        errorMessageCopy[3],
+      ],
     });
 
     if (errorMessageCopy[index] === '') {
@@ -41,7 +46,12 @@ const NewCardPage = () => {
       newCardNumbers[index] = Number(value);
       setCardInfo({
         ...cardInfo,
-        cardNumbers: newCardNumbers,
+        cardNumbers: [
+          newCardNumbers[0],
+          newCardNumbers[1],
+          newCardNumbers[2],
+          newCardNumbers[3],
+        ],
       });
     }
   };
@@ -52,7 +62,7 @@ const NewCardPage = () => {
 
     setErrorMessage({
       ...errorMessage,
-      cardExpiration: errorMessageCopy,
+      cardExpiration: [errorMessageCopy[0], errorMessageCopy[1]],
     });
 
     if (errorMessageCopy[index] === '') {
@@ -60,7 +70,7 @@ const NewCardPage = () => {
       newCardExpiration[index] = Number(value);
       setCardInfo({
         ...cardInfo,
-        cardExpiration: newCardExpiration,
+        cardExpiration: [newCardExpiration[0], newCardExpiration[1]],
       });
     }
   };

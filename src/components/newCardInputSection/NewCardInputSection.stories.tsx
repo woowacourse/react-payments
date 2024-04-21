@@ -4,7 +4,7 @@ import NewCardInputSection, {
   NewCardInputSectionProps,
 } from './NewCardInputSection';
 
-const meta: Meta<NewCardInputSectionProps> = {
+const meta: Meta<React.PropsWithChildren<NewCardInputSectionProps>> = {
   title: 'Components/NewCardInputSection',
   component: NewCardInputSection,
   parameters: {
