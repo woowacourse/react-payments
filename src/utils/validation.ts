@@ -19,10 +19,10 @@ export const validateExpirationDate = (input: string[]) => {
     const currentYear = today.getFullYear() - 2000;
 
     if (year < currentYear || (year === currentYear && month < currentMonth)) {
-      return [ERROR_MESSAGE.EXPIRED_CARD_DATE, ERROR_MESSAGE.EXPIRED_CARD_DATE];
+      return ERROR_MESSAGE.EXPIRED_CARD_DATE;
     }
   }
-  return [null, null];
+  return null;
 };
 
 export const validateMonth = (month: number) => {

@@ -12,7 +12,6 @@ import {
 import useInputs from "@/hooks/useInputs";
 import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import { MESSAGE } from "@/constants/message";
-import { updatedErrorMessage } from "@/utils/arrayHelper";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs>;
@@ -47,41 +46,65 @@ const CardRegisterForm = ({
   } = ownerNameState;
 
   const onValidateCardNumbers = (index: number) => {
-    if (cardNumbers[index].length) {
-      const errorMessage = validateIsValidLength(
-        cardNumbers[index],
-        VALID_LENGTH.CARD_NUMBERS
-      );
-
-      return setCardNumbersErrorMessages((prev) =>
-        updatedErrorMessage(errorMessage, prev, index)
-      );
-    }
+    const errorMessage = getCardNumbersError(cardNumbers[index]);
     setCardNumbersErrorMessages((prev) =>
-      updatedErrorMessage(null, prev, index)
+      makeNewErrorMessages(prev, errorMessage, index)
     );
+  };
+
+  const getCardNumbersError = (cardNumber: string) => {
+    return cardNumber.length
+      ? validateIsValidLength(cardNumber, VALID_LENGTH.CARD_NUMBERS)
+      : null;
   };
 
   const onValidateExpirationPeriod = (index: number) => {
     if (expirationPeriod[index].length) {
-      const expiredError = validateExpirationDate(expirationPeriod);
-      setExpirationPeriodErrorMessages(expiredError);
-
-      const monthError =
-        index === 0 && validateMonth(Number(expirationPeriod[index]));
-
-      const lengthError = validateIsValidLength(
-        expirationPeriod[index],
-        VALID_LENGTH.EXPIRATION_PERIOD
-      );
-
-      setExpirationPeriodErrorMessages((prev) =>
-        updatedErrorMessage(monthError || lengthError, prev, index)
-      );
+      const { expiredError, monthError, lengthError } =
+        getExpirationError(index);
+      if (monthError || lengthError) {
+        return setExpirationPeriodErrorMessages((prev) =>
+          makeNewErrorMessages(prev, monthError || lengthError, index)
+        );
+      }
+      if (expiredError) {
+        return setExpirationPeriodErrorMessages(
+          Array(expirationPeriod.length).fill(expiredError)
+        );
+      } else {
+        return setExpirationPeriodErrorMessages(
+          Array(expirationPeriod.length).fill(null)
+        );
+      }
     }
     setExpirationPeriodErrorMessages((prev) =>
-      updatedErrorMessage(null, prev, index)
+      makeNewErrorMessages(prev, null, index)
     );
+  };
+
+  const makeNewErrorMessages = (
+    messages: (string | null)[],
+    newMessage: string | null,
+    index: number
+  ) => {
+    return messages.map((message, i) => (i === index ? newMessage : message));
+  };
+
+  const getExpirationError = (index: number) => {
+    const expiredError =
+      expirationPeriod[0] &&
+      expirationPeriod[1] &&
+      validateExpirationDate(expirationPeriod);
+
+    const monthError =
+      index === 0 && validateMonth(Number(expirationPeriod[index]));
+
+    const lengthError = validateIsValidLength(
+      expirationPeriod[index],
+      VALID_LENGTH.EXPIRATION_PERIOD
+    );
+
+    return { expiredError, monthError, lengthError };
   };
 
   const onValidateOwnerName = () => {
