@@ -4,16 +4,16 @@ import convertKeysIntoObject from '../utils/convertKeysIntoObject';
 
 type TValidate = (value: string) => IErrorStatus;
 
-const useValidations = <T extends Record<string, string>>(value: T, validate: TValidate) => {
+const useValidations = <T extends Record<string, string>>(state: T, validate: TValidate) => {
   const initialErrorStatus = {
-    isError: convertKeysIntoObject(Object.keys(value), false),
+    isError: convertKeysIntoObject(Object.keys(state), false),
     errorMessage: '',
   };
 
   const [errorStatus, setErrorStatus] = useState(initialErrorStatus);
 
   const updateErrorStatus = useCallback(
-    (key: keyof T, targetValue = value[key]) => {
+    (key: keyof T, targetValue = state[key]) => {
       const { isError, errorMessage } = validate(targetValue);
 
       setErrorStatus({
@@ -21,7 +21,7 @@ const useValidations = <T extends Record<string, string>>(value: T, validate: TV
         errorMessage,
       });
     },
-    [value, validate, errorStatus],
+    [state, validate, errorStatus],
   );
 
   return { errorStatus, updateErrorStatus };

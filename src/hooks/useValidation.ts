@@ -3,17 +3,17 @@ import { IErrorStatus } from '../validators/index.d';
 
 type TValidate = (value: string) => IErrorStatus;
 
-const useValidation = (value: string, validate: TValidate) => {
+const useValidation = (state: string, validate: TValidate) => {
   const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
     errorMessage: '',
     isError: false,
   });
 
   const updateErrorStatus = useCallback(
-    (targetValue: string = value) => {
+    (targetValue: string = state) => {
       setErrorStatus(validate(targetValue));
     },
-    [value, validate],
+    [state, validate],
   );
 
   return { errorStatus, updateErrorStatus };
