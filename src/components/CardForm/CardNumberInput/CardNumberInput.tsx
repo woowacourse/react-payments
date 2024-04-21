@@ -8,10 +8,11 @@ import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardNumberInputProps {
-  setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
+  cardNumbers: string[];
+  handleCardNumbers: (cardNumbers: string[]) => void;
 }
 
-function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
+function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProps) {
   const [isValid, setIsValid] = useState<boolean[]>([true, true, true, true]);
 
   const errorMessage = useMemo(() => {
@@ -29,15 +30,15 @@ function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
       return prev.map((isValid, index) => (index === inputIndex ? isInputValid : isValid));
     });
 
-    setCardNumber((prev) => {
-      return prev.map((number, index) => {
+    handleCardNumbers(
+      cardNumbers.map((number, index) => {
         if (index === inputIndex) {
           return isInputValid ? e.target.value : '';
         }
 
         return number;
-      });
-    });
+      }),
+    );
   };
 
   return (

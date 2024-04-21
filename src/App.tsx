@@ -11,22 +11,38 @@ import GlobalStyles from './styles/Global.style';
 import * as S from './styles/App.style';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [month, setMonth] = useState<string>('');
   const [year, setYear] = useState<string>('');
   const [owner, setOwner] = useState<string>('');
+
+  const handleCardNumbers = (cardNumbers: string[]) => {
+    setCardNumbers(cardNumbers);
+  };
+
+  const handleMonth = (month: string) => {
+    setMonth(month);
+  };
+
+  const handleYear = (year: string) => {
+    setYear(year);
+  };
+
+  const handleOwner = (owner: string) => {
+    setOwner(owner);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
       <S.AppLayout>
         <S.CardPreviewBox>
-          <CardPreview cardNumber={cardNumber} month={month} year={year} owner={owner} />
+          <CardPreview cardNumber={cardNumbers} month={month} year={year} owner={owner} />
         </S.CardPreviewBox>
         <S.CardForm>
-          <CardNumberInput setCardNumber={setCardNumber} />
-          <CardExpirationInput setMonth={setMonth} setYear={setYear} />
-          <CardOwnerInput setOwner={setOwner} />
+          <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
+          <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />
+          <CardOwnerInput handleOwner={handleOwner} />
         </S.CardForm>
       </S.AppLayout>
     </ThemeProvider>

@@ -8,11 +8,11 @@ import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardExpirationInputProps {
-  setMonth: React.Dispatch<React.SetStateAction<string>>;
-  setYear: React.Dispatch<React.SetStateAction<string>>;
+  handleMonth: (month: string) => void;
+  handleYear: (year: string) => void;
 }
 
-function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
+function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputProps) {
   const [isValidMonth, setIsValidMonth] = useState<boolean>(true);
   const [isValidYear, setIsValidYear] = useState<boolean>(true);
 
@@ -42,14 +42,14 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
     const newIsValidMonth = validateMonth(e.target.value);
 
     setIsValidMonth(newIsValidMonth);
-    setMonth(newIsValidMonth ? e.target.value : '');
+    handleMonth(newIsValidMonth ? e.target.value : '');
   };
 
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newIsValidYear = validateYear(e.target.value);
 
     setIsValidYear(newIsValidYear);
-    setYear(newIsValidYear ? e.target.value : '');
+    handleYear(newIsValidYear ? e.target.value : '');
   };
 
   return (

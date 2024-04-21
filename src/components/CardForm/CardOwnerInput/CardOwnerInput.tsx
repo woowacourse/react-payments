@@ -8,10 +8,10 @@ import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardOwnerInputProps {
-  setOwner: React.Dispatch<React.SetStateAction<string>>;
+  handleOwner: (owner: string) => void;
 }
 
-function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
+function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -36,7 +36,7 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
     const newIsValid = validateOwner(e.target.value);
 
     setIsValid(newIsValid);
-    setOwner(newIsValid ? e.target.value.toUpperCase() : '');
+    handleOwner(newIsValid ? e.target.value.toUpperCase() : '');
   };
 
   return (
