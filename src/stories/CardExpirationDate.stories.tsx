@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
-import CardExpirationDate from "../components/CardExpirationDate";
+import CardExpirationDate from "../components/CardExpirationDate/CardExpirationDate";
 
 const meta: Meta<typeof CardExpirationDate> = {
   component: CardExpirationDate,

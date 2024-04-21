@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardEnrollForm from "../components/CardEnrollForm";
+import CardEnrollForm from "../components/CardEnrollForm/CardEnrollForm";
 
 const meta: Meta<typeof CardEnrollForm> = {
   component: CardEnrollForm,

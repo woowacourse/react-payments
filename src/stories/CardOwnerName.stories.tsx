@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
-import CardOwnerName from "../components/CardOwnerName";
+import CardOwnerName from "../components/CardOwnerName/CardOwnerName";
 
 const meta: Meta<typeof CardOwnerName> = {
   component: CardOwnerName,
