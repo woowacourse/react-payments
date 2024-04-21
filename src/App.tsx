@@ -36,9 +36,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
       <S.AppLayout>
-        <S.CardPreviewBox>
+        <S.CardPreviewBoxWrapper>
           <CardPreview cardNumber={cardNumbers} month={month} year={year} owner={owner} />
-        </S.CardPreviewBox>
+        </S.CardPreviewBoxWrapper>
         <S.CardForm>
           <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
           <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />

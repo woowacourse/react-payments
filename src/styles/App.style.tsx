@@ -4,7 +4,7 @@ export const AppLayout = styled.main`
   padding: 77px 30px;
 `;
 
-export const CardPreviewBox = styled.section`
+export const CardPreviewBoxWrapper = styled.section`
   display: flex;
   justify-content: center;
   width: 100%;
