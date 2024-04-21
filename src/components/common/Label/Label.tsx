@@ -15,7 +15,7 @@ export default function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={clsx(styles.label, { [styles.hide]: hideLabel })}
+      className={clsx(styles.label, { [styles.srOnly]: hideLabel })}
     >
       {labelText}
     </label>

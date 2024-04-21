@@ -14,7 +14,8 @@ import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 import { Fragment } from 'react/jsx-runtime';
 
-const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
+const { title, description, labelText, placeholder, inputLabelText } =
+  ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
 
 interface ExpirationDateInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
@@ -65,23 +66,21 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
 
   return (
     <Field
-      title={EXPIRATION_DATE.title}
-      description={EXPIRATION_DATE.description}
-      labelText={EXPIRATION_DATE.labelText}
+      title={title}
+      description={description}
+      labelText={labelText}
       errMsg={errMsg}
     >
       {Object.keys(expirationDate).map((n) => {
         const name = n as keyof ExpirationDate;
         return (
           <Fragment key={name}>
-            <Label htmlFor={name} labelText={name} hideLabel />
+            <Label htmlFor={name} labelText={inputLabelText[name]} hideLabel />
             <Input
               id={name}
               name={name}
               placeholder={
-                name === 'month'
-                  ? EXPIRATION_DATE.placeholder.month
-                  : EXPIRATION_DATE.placeholder.year
+                name === 'month' ? placeholder.month : placeholder.year
               }
               value={expirationDate[name]}
               isError={isError[name]}

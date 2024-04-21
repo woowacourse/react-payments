@@ -13,7 +13,8 @@ interface CardNumberInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
 }
 
-const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
+const { title, description, labelText, placeholder, inputLabelText } =
+  ADD_CARD_FORM_FIELDS.CARD_NUMBER;
 
 export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
   const initialValues = {
@@ -56,20 +57,20 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
 
   return (
     <Field
-      title={CARD_NUMBER.title}
-      description={CARD_NUMBER.description}
-      labelText={CARD_NUMBER.labelText}
+      title={title}
+      description={description}
+      labelText={labelText}
       errMsg={errMsg}
     >
       {Object.keys(cardNumbers).map((n) => {
         const name = n as keyof CardNumbers;
         return (
           <Fragment key={name}>
-            <Label htmlFor={name} labelText={name} hideLabel />
+            <Label htmlFor={name} labelText={inputLabelText[name]} hideLabel />
             <Input
               id={name}
               name={name}
-              placeholder={CARD_NUMBER.placeholder}
+              placeholder={placeholder}
               value={cardNumbers[name]}
               isError={isError[name]}
               handleChange={onChange}
