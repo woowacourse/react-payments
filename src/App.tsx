@@ -18,14 +18,14 @@ const App = () => {
     value: expiryMonth,
     handleChange: handleChangeExpiryMonth,
     updateErrorMessage: updateExpiryMonthErrorMessage,
-    errorMessage: expiryMonthErrorMessage,
+    errorInfo: expiryMonthErrorInfo,
   } = useInput('', inquireExpiryMonth);
 
   const {
     value: expiryYear,
     handleChange: handleChangeExpiryYear,
     updateErrorMessage: updateExpiryYearErrorMessage,
-    errorMessage: expiryYearErrorMessage,
+    errorInfo: expiryYearErrorInfo,
   } = useInput('', inquireExpiryYear);
 
   return (
@@ -41,7 +41,7 @@ const App = () => {
           expiryDate={{ month: expiryMonth, year: expiryYear }}
           changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
           errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
-          errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
+          errorInfo={{ month: expiryMonthErrorInfo, year: expiryYearErrorInfo }}
         />
         <CardholderNameContainer cardholderName={cardholderName} {...cardholderNameInput} />
       </CardInfoWrapper>

@@ -1,19 +1,18 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
-
-type MM = string;
-type YY = string;
+import { ErrorDetail } from './types/error';
+import { ExpiryDate } from './types/card';
 
 interface CardExpiryDateContainerProps {
-  expiryDate: { month: MM; year: YY };
+  expiryDate: ExpiryDate;
   changeHandler: {
     month: (e: React.ChangeEvent<HTMLInputElement>) => void;
     year: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
-  errorMessage: {
-    month: string;
-    year: string;
+  errorInfo: {
+    month: ErrorDetail;
+    year: ErrorDetail;
   };
   errorMessageUpdater: {
     month: () => void;
@@ -25,7 +24,7 @@ const CardExpiryDateContainer = ({
   expiryDate,
   changeHandler,
   errorMessageUpdater,
-  errorMessage,
+  errorInfo,
 }: CardExpiryDateContainerProps) => {
   return (
     <div>
@@ -37,7 +36,7 @@ const CardExpiryDateContainer = ({
       >
         <Input
           id="card-expiry-month-input"
-          isError={!!errorMessage.month}
+          isError={errorInfo.month.isError}
           value={expiryDate.month}
           onChange={changeHandler.month}
           onBlur={errorMessageUpdater.month}
@@ -47,7 +46,7 @@ const CardExpiryDateContainer = ({
         />
         <Input
           id="card-expiry-year-input"
-          isError={!!errorMessage.year}
+          isError={errorInfo.year.isError}
           value={expiryDate.year}
           onChange={changeHandler.year}
           onBlur={errorMessageUpdater.year}
@@ -57,8 +56,8 @@ const CardExpiryDateContainer = ({
         />
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorMessage.month}</ErrorText>
-        <ErrorText>{errorMessage.year}</ErrorText>
+        <ErrorText>{errorInfo.month.errorMessage}</ErrorText>
+        <ErrorText>{errorInfo.year.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

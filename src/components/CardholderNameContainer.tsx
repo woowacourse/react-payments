@@ -1,19 +1,20 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
+import { ErrorDetail } from './types/error';
 
 interface CardholderNameContainerProps {
   cardholderName: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   updateErrorMessage: () => void;
-  errorMessage: string;
+  errorInfo: ErrorDetail;
 }
 
 const CardholderNameContainer = ({
   cardholderName,
   setValue,
   updateErrorMessage,
-  errorMessage,
+  errorInfo,
 }: CardholderNameContainerProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
 
@@ -26,7 +27,7 @@ const CardholderNameContainer = ({
       >
         <Input
           id="cardholder-name-input"
-          isError={Boolean(errorMessage)}
+          isError={errorInfo.isError}
           value={cardholderName}
           onChange={handleChange}
           onBlur={updateErrorMessage}
@@ -36,7 +37,7 @@ const CardholderNameContainer = ({
         />
       </RegistrationLayout>
       <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
+        <ErrorText>{errorInfo.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

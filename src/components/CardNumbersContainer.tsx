@@ -1,15 +1,15 @@
 import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import RegistrationLayout from './common/RegistrationLayout';
-
-type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
+import { CardNumberKey } from './types/card';
+import { ErrorDetail } from './types/error';
 
 export interface CardNumbersContainerProps {
   cardNumbers: Record<CardNumberKey, string>;
   generateChangeHandler: (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errorInfo: Record<CardNumberKey, ErrorDetail>;
   errorMessage: string;
-  errorStatus: Record<string, boolean>;
-  generateErrorMessageUpdater: (targetKey: string) => () => void;
+  generateErrorMessageUpdater: (targetKey: CardNumberKey) => () => void;
 }
 
 const CARD_NUMBER_INDEXES: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
@@ -18,8 +18,8 @@ const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
 export default function CardNumberContainer({
   cardNumbers,
   generateChangeHandler,
+  errorInfo,
   errorMessage,
-  errorStatus,
   generateErrorMessageUpdater,
 }: CardNumbersContainerProps) {
   return (
@@ -37,7 +37,7 @@ export default function CardNumberContainer({
             <Input
               key={key}
               id={`${key}-card-numbers-input`}
-              isError={errorStatus[key]}
+              isError={errorInfo[key].isError}
               value={cardNumbers[key]}
               onChange={generateChangeHandler(key)}
               onBlur={generateErrorMessageUpdater(key)}

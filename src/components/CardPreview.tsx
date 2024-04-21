@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import MasterCard from '../../src/assets/images/mastercard.png';
 import VisaCard from '../../src/assets/images/visa.png';
 import CONDITION from '../constants/condition';
-
-type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
+import { CardNumberKey, ExpiryDate } from './types/card';
 
 interface CardPreviewProps {
   cardNumbers: Record<CardNumberKey, string>;
-  expiryDate: { month: string; year: string };
+  expiryDate: ExpiryDate;
   cardholderName: string;
 }
 
