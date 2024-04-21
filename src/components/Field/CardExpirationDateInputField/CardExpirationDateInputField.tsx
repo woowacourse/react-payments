@@ -3,6 +3,11 @@ import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
 
+interface DateError {
+  monthError: string | null;
+  yearError: string | null;
+}
+
 export default function CardExpirationDateInputField({
   date,
   setDate,
@@ -10,11 +15,11 @@ export default function CardExpirationDateInputField({
   date: Record<string, string>;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
 }) {
-  const [errorMessages, setErrorMessages] = useState<Array<[number, string]>>(
-    []
-  );
+  const [errorMessages, setErrorMessages] = useState<DateError>({
+    monthError: null,
+    yearError: null,
+  });
 
-  // 여긴 최신 오류 순서가 아닌 0부터 시작함..
   const checkValidDate = ({
     month = date.month,
     year = date.year,
@@ -22,28 +27,40 @@ export default function CardExpirationDateInputField({
     month?: string;
     year?: string;
   }) => {
-    const updatedErrorMessages: any[] = new Array(Object.keys(date).length)
-      .fill(0)
-      .map(() => []);
+    const updatedErrorMessages: DateError = {
+      monthError: null,
+      yearError: null,
+    };
 
     const isExpiredDate = checkExpired(month, year);
 
-    if (year.length > 0 && year.length < 2)
-      updatedErrorMessages[1] = [1, "유효하지 않은 날짜입니다."];
-    if (isExpiredDate === "INVALID_MONTH")
-      updatedErrorMessages[0] = [0, "이미 만료된 카드입니다."];
-    if (isExpiredDate === "INVALID_YEAR")
-      updatedErrorMessages[1] = [1, "이미 만료된 카드입니다."];
+    if (year.length > 0 && year.length < 2) {
+      updatedErrorMessages.yearError = "유효하지 않은 날짜입니다.";
+    }
 
-    if (isNaN(Number(month)))
-      updatedErrorMessages[0] = [0, "숫자만 입력해주세요."];
-    if (Number(month) <= 0 || Number(month) > 12)
-      updatedErrorMessages[0] = [0, "유효하지 않은 날짜입니다."];
+    if (isExpiredDate === "INVALID_MONTH") {
+      updatedErrorMessages.monthError = "이미 만료된 카드입니다.";
+    }
 
-    if (isNaN(Number(year)))
-      updatedErrorMessages[1] = [1, "숫자만 입력해주세요."];
+    if (isExpiredDate === "INVALID_YEAR") {
+      updatedErrorMessages.yearError = "이미 만료된 카드입니다.";
+    }
 
-    setErrorMessages(updatedErrorMessages.filter((data) => data.length !== 0));
+    if (isNaN(Number(month))) {
+      updatedErrorMessages.monthError = "숫자만 입력해주세요.";
+    }
+    if (Number(month) <= 0 || Number(month) > 12) {
+      updatedErrorMessages.monthError = "유효하지 않은 날짜입니다.";
+    }
+
+    if (isNaN(Number(year))) {
+      updatedErrorMessages.yearError = "숫자만 입력해주세요.";
+    }
+
+    setErrorMessages({
+      monthError: updatedErrorMessages.monthError || null,
+      yearError: updatedErrorMessages.yearError || null,
+    });
   };
 
   const checkExpired = (month: string, year: string) => {
@@ -88,19 +105,23 @@ export default function CardExpirationDateInputField({
           placeholder={DATE_PLACEHOLDER.MONTH}
           maxLength={2}
           value={date.month}
-          isError={errorMessages.filter(([i]) => i === 0).length !== 0}
+          isError={errorMessages?.monthError !== null}
         />
         <Input
           onChange={handleYear}
           placeholder={DATE_PLACEHOLDER.YEAR}
           maxLength={2}
           value={date.year}
-          isError={errorMessages.filter(([i]) => i === 1).length !== 0}
+          isError={errorMessages?.yearError !== null}
         />
       </div>
-      {errorMessages.length !== 0 && (
+      {errorMessages !== null && (
         <div className={styles.error_message}>
-          {errorMessages[errorMessages.length - 1][1]}
+          {(errorMessages?.monthError || errorMessages?.yearError) && (
+            <div className={styles.error_message}>
+              {errorMessages?.monthError || errorMessages?.yearError}
+            </div>
+          )}
         </div>
       )}
     </>

@@ -7,7 +7,7 @@ import {
   CARD_NUMBER_UNIT_LENGTH,
 } from "../../../constants";
 
-interface ErrorMessage {
+interface cardNumberErrorMessage {
   index: number;
   message: string;
 }
@@ -20,11 +20,10 @@ export default function CardNumbersInputField({
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
 }) {
   const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
-    ErrorMessage[]
+    cardNumberErrorMessage[]
   >([]);
-  const [nanErrorMessage, setNanErrorMessage] = useState<ErrorMessage | null>(
-    null
-  );
+  const [nanErrorMessage, setNanErrorMessage] =
+    useState<cardNumberErrorMessage | null>(null);
 
   const updateErrorMessage = (index: number, message: string) => {
     const errorMessageIndex = numberLengthErrorMessages.findIndex(
