@@ -21,9 +21,11 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   text-transform: uppercase;
 `;
 
-const NameFormSection = ({ ...props }) => {
-  const { changeName } = props;
-
+const NameFormSection = ({
+  changeName,
+}: {
+  changeName: (name: string) => void;
+}) => {
   const {
     inputState,
     errorMessage,

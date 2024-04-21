@@ -17,9 +17,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const ExpirationDateFormSection = ({ ...props }) => {
-  const { changeExpiration } = props;
-
+const ExpirationDateFormSection = ({
+  changeExpiration,
+}: {
+  changeExpiration: ({ month, year }: ChangeExpirationProps) => void;
+}) => {
   const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
   const {
     inputState,

@@ -17,9 +17,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const CardNumbersFormSection = ({ ...props }) => {
-  const { changeCardNumber } = props;
-
+const CardNumbersFormSection = ({
+  changeCardNumber,
+}: {
+  changeCardNumber: (cardNumber: string[]) => void;
+}) => {
   const {
     inputState,
     errorMessage,

@@ -3,14 +3,9 @@ import CardNumbersFormSection from './CardNumbersFormSection';
 import ExpirationDateFormSection from './ExpirationDateFormSection';
 import NameFormSection from './NameFormSection';
 
-interface ChangeExpirationProps {
-  month: string;
-  year: string;
-}
-
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
-  const changeCardNumber = (cardNumber: string) => {
+  const changeCardNumber = (cardNumber: string[]) => {
     changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber: cardNumber }));
   };
 

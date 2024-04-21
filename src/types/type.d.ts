@@ -31,3 +31,8 @@ interface CardInfo {
   expirationYear: string;
   name: string;
 }
+
+interface ChangeExpirationProps {
+  month: string;
+  year: string;
+}
