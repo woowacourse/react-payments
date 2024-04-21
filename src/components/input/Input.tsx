@@ -1,30 +1,13 @@
 import * as Styled from './Input.styled';
 
-export interface InputProps {
-  value?: string;
-  maxLength?: number;
-  placeholder?: string;
+export interface InputProps extends React.ComponentPropsWithRef<'input'> {
   isError?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({
-  value,
-  maxLength,
-  placeholder,
-  isError,
-  onChange,
-}: InputProps) => {
+const Input = ({ isError, ...restProps }: InputProps) => {
   return (
     <>
-      <Styled.Input
-        type='text'
-        value={value}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        isError={isError}
-        onChange={onChange}
-      ></Styled.Input>
+      <Styled.Input isError={isError} {...restProps}></Styled.Input>
     </>
   );
 };
