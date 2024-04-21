@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CardBrandLogo from './CardBrandLogo';
+import CardNumber from './CardNumberContainer';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -20,15 +21,15 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
       </HeaderWrapper>
       <BodyWrapper>
         <CardNumbersWrapper>
-          <CardNumberText>{cardNumbers.first}</CardNumberText>
-          <CardNumberText>{cardNumbers.second}</CardNumberText>
-          <CardSecretNumber>{'·'.repeat(cardNumbers.third.length)}</CardSecretNumber>
-          <CardSecretNumber>{'·'.repeat(cardNumbers.fourth.length)}</CardSecretNumber>
+          <CardNumber data={cardNumbers.first} />
+          <CardNumber data={cardNumbers.second} />
+          <CardNumber data={cardNumbers.third} type="password" />
+          <CardNumber data={cardNumbers.fourth} type="password" />
         </CardNumbersWrapper>
 
         <ExpiryDateWrapper>
           <p>{expiryDate.month}</p>
-          <p>{expiryDate.month && '/'}</p>
+          <p>{(expiryDate.month || expiryDate.year) && '/'}</p>
           <p>{expiryDate.year}</p>
         </ExpiryDateWrapper>
 
@@ -81,19 +82,6 @@ const CardNumbersWrapper = styled.div`
   height: 20px;
   margin-top: 20px;
   gap: 20px;
-`;
-
-const CardNumberText = styled.p`
-  display: flex;
-  flex-basis: 25%;
-  height: 20px;
-  font-size: 20px;
-`;
-
-const CardSecretNumber = styled.p`
-  display: flex;
-  flex-basis: 25%;
-  font-size: 28px;
 `;
 
 const ExpiryDateWrapper = styled.div`
