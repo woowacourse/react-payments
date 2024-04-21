@@ -10,7 +10,7 @@ const INITIAL_ERROR_STATE = {
   message: '',
 };
 
-const useInput = (onChangeValidations: ValidationType[]) => {
+const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: ValidationType[]) => {
   const [inputState, setInputState] = useState('');
   const [error, setError] = useState(INITIAL_ERROR_STATE);
 
@@ -31,7 +31,19 @@ const useInput = (onChangeValidations: ValidationType[]) => {
     setInputState(e.target.value);
   };
 
-  return { inputState, inputChangeHandler, error };
+  const inputFocusOutHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (!onBlurValidations) return;
+    const validationResult = onBlurValidations.find(({ isError }) => isError(e.target.value));
+
+    if (validationResult) {
+      setError({
+        state: true,
+        message: validationResult.errorMessage,
+      });
+    }
+  };
+
+  return { inputState, inputChangeHandler, inputFocusOutHandler, error };
 };
 
 export default useInput;

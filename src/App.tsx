@@ -15,33 +15,33 @@ import validate from './utils/validate';
 
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
 
-export type InitialCardNumberState = {
+export type CardNumberState = {
   value: string;
   isError: boolean;
+  errorMessage: string;
 };
 
-const InitialCardNumberState: InitialCardNumberState = {
+const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
   value: '',
   isError: false,
+  errorMessage: '',
 };
 
 function App() {
-  const { cardNumbers, cardNumbersChangeHandler } = useCardNumber(
-    Array.from({ length: 4 }, () => InitialCardNumberState),
+  const { cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } = useCardNumber(
+    Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE),
   );
   const [cardImageSrc, setCardImageSrc] = useState('');
+
+  const twoDigitValidation = {
+    isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+    errorMessage: '2자리 숫자를 입력해주세요.',
+  };
 
   const monthOnChangeValidations: ValidationType[] = [
     {
       isError: (state: string) => state !== '' && !validate.isValidDigit(state),
       errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
-    },
-  ];
-
-  const nameOnChangeValidations: ValidationType[] = [
-    {
-      isError: (state: string) => state !== '' && !validate.isEnglish(state),
-      errorMessage: OWNER_NAME.errorMessage,
     },
   ];
 
@@ -52,17 +52,25 @@ function App() {
     },
   ];
 
+  const nameOnChangeValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isEnglish(state),
+      errorMessage: OWNER_NAME.errorMessage,
+    },
+  ];
+
   const {
     inputState: month,
     inputChangeHandler: monthChangeHandler,
+    inputFocusOutHandler: monthFocusOutHandler,
     error: monthError,
-  } = useInput(monthOnChangeValidations);
+  } = useInput(monthOnChangeValidations, [twoDigitValidation]);
 
   const {
     inputState: year,
     inputChangeHandler: yearChangeHandler,
     error: yearError,
-  } = useInput(yearOnChangeValidations);
+  } = useInput(yearOnChangeValidations, [twoDigitValidation]);
 
   const {
     inputState: name,
@@ -117,6 +125,7 @@ function App() {
                       maxLength={4}
                       value={cardNumber.value}
                       onChange={(e) => cardNumbersChangeHandler(e, index)}
+                      onBlur={(e) => cardNumbersFocusOutHandler(e, index)}
                       isError={cardNumber.isError}
                     />
                   </Fragment>
@@ -125,7 +134,7 @@ function App() {
             </InputSection>
             <S.ErrorWrapper>
               <S.ErrorMessage>
-                {cardNumbers.some((cardNumber) => cardNumber.isError) && CARD_NUMBER.errorMessage}
+                {cardNumbers.find(({ isError }) => isError)?.errorMessage}
               </S.ErrorMessage>
             </S.ErrorWrapper>
           </S.Wrapper>
@@ -145,6 +154,7 @@ function App() {
                 maxLength={2}
                 onChange={monthChangeHandler}
                 isError={monthError.state}
+                onBlur={monthFocusOutHandler}
               />
               <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
               <Input

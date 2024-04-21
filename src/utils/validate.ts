@@ -26,6 +26,10 @@ const validate = {
   isEnglish: (value: string) => {
     return /^[a-zA-Z ]*$/.test(value);
   },
+
+  isSatisfiedLength: (standardLength: number, compareLength: number) => {
+    return standardLength === compareLength;
+  },
 };
 
 export default validate;
