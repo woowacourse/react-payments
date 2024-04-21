@@ -5,10 +5,11 @@ export const Input = styled.input<{ $isValid: boolean }>`
   height: 32px;
   padding: 8px;
   border-radius: 2px;
-  border: 1px solid ${(props) => (props.$isValid ? '#acacac' : '#ff3d3d')};
-  font-size: 11px;
+  border: 1px solid
+    ${(props) => (props.$isValid ? ({ theme }) => theme.color.primary : ({ theme }) => theme.color.error)};
+  font-size: ${({ theme }) => theme.fontSize.base};
 
   &:focus {
-    border-color: ${(props) => (props.$isValid ? '#000' : '#ff3d3d')};
+    border-color: ${(props) => (props.$isValid ? ({ theme }) => theme.color.dark : ({ theme }) => theme.color.error)};
   }
 `;

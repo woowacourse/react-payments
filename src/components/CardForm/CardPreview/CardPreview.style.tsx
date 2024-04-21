@@ -41,7 +41,7 @@ export const InfoBox = styled.p<{ $length?: number }>`
   width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
   height: 20px;
   color: white;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSize.md};
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.08em;
