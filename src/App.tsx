@@ -11,15 +11,9 @@ import {
   CARD_EXPIRATION_DATE_KEYS,
   CARD_OWNERNAME_KEY,
 } from "./constants/cardInfo";
-import { hasFourDigit, isValidDate, isValidMonth } from "./utils/validators";
+import { hasFourDigit, isEnglishCharacter, isValidDate, isValidMonth } from "./utils/validators";
 
 function App() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumbers: ["", "", "", ""],
-    expirationDate: ["", ""],
-    ownerName: "",
-  });
-
   const [cardNumbers, setCardNumbers] = useState({
     data: {
       first: { value: "", isError: false },
@@ -44,11 +38,21 @@ function App() {
     },
   });
 
-  // const [cardPreview, serCardPreview] = useState({
-  //   cardNumbers: { first: "", second: "", third: "", fourth: "" },
-  //   expirationDate: { month: "", year: "" },
-  //   ownerName: "",
-  // });
+  const [ownerName, setOwnerName] = useState({
+    data: {
+      ownerName: { value: "", isError: false },
+    },
+    status: {
+      isError: false,
+      errorMessage: "",
+    },
+  });
+
+  const [cardPreview, setCardPreview] = useState({
+    cardNumbers: { first: "", second: "", third: "", fourth: "" },
+    expirationDate: { month: "", year: "" },
+    ownerName: { ownerName: "" },
+  });
 
   const changeCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target as {
@@ -102,7 +106,10 @@ function App() {
           errorMessage: ERRORS.isNotFourDigit,
         },
       });
+      return;
     }
+
+    setCardPreview({ ...cardPreview, cardNumbers: { ...cardPreview.cardNumbers, [name]: value } });
   };
 
   const changeExpirationDate = (event: ChangeEvent<HTMLInputElement>) => {
@@ -175,20 +182,68 @@ function App() {
             errorMessage: ERRORS.deprecatedCard,
           },
         });
+        return;
       }
     }
+    setCardPreview({
+      ...cardPreview,
+      expirationDate: { ...cardPreview.expirationDate, [name]: value },
+    });
   };
 
-  const setCardData = (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => {
-    setCardInfo({ ...cardInfo, [key]: newData });
+  const changeOwnerName = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target as {
+      name: (typeof CARD_OWNERNAME_KEY)[number];
+      value: string;
+    };
+    if (!CARD_OWNERNAME_KEY.includes(name)) return;
+
+    if (!isEnglishCharacter(value)) {
+      setOwnerName({
+        data: { ownerName: { value: ownerName.data.ownerName.value, isError: true } },
+        status: {
+          isError: true,
+          errorMessage: ERRORS.isNotAlphabet,
+        },
+      });
+      return;
+    }
+
+    setOwnerName({
+      data: { ownerName: { value, isError: false } },
+      status: {
+        isError: false,
+        errorMessage: "",
+      },
+    });
+  };
+
+  const blurOwnerName = (event: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = event.target as {
+      name: (typeof CARD_OWNERNAME_KEY)[number];
+      value: string;
+    };
+    if (!CARD_OWNERNAME_KEY.includes(name)) return;
+
+    setOwnerName({
+      data: { ownerName: { value: value.trim(), isError: false } },
+      status: {
+        isError: false,
+        errorMessage: "",
+      },
+    });
+    setCardPreview({
+      ...cardPreview,
+      ownerName: { ...cardPreview.ownerName, [name]: value },
+    });
   };
 
   return (
     <div className={styles.app}>
       <CardPreview
-        cardNumbers={cardInfo.cardNumbers}
-        expirationDate={cardInfo.expirationDate}
-        ownerName={cardInfo.ownerName}
+        cardNumbers={cardPreview.cardNumbers}
+        expirationDate={cardPreview.expirationDate}
+        ownerName={cardPreview.ownerName}
       />
 
       <form>
@@ -202,7 +257,11 @@ function App() {
           changeExpirationDate={changeExpirationDate}
           blurExpirationDate={blurExpirationDate}
         />
-        <OwnerNameInput setCardData={setCardData} />
+        <OwnerNameInput
+          ownerName={ownerName}
+          changeOwnerName={changeOwnerName}
+          blurOwnerName={blurOwnerName}
+        />
       </form>
     </div>
   );

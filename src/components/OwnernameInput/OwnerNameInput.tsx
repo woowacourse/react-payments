@@ -1,58 +1,35 @@
 import Field from "../layout/Field/Field";
 import Input from "../common/Input/Input";
-
-import useAddCardInput from "../../hooks/useAddCardInput";
-
-import { ADD_CARD_FORM_FIELDS, ERRORS } from "../../constants/messages";
-import { isEnglishCharacter } from "../../utils/validators";
-
+import { ADD_CARD_FORM_FIELDS } from "../../constants/messages";
+import { ChangeEvent, FocusEvent } from "react";
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
 interface OwnerNameInputProps {
-  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+  ownerName: {
+    data: Record<string, { value: string; isError: boolean }>;
+    status: { isError: boolean; errorMessage: string };
+  };
+  changeOwnerName: (event: ChangeEvent<HTMLInputElement>) => void;
+  blurOwnerName: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
-const OwnerNameInput = ({ setCardData }: OwnerNameInputProps) => {
-  const validateInputOnChange = ({ value }: { name?: string; value: string }) => {
-    if (value !== "" && !isEnglishCharacter(value)) {
-      return { isValid: false, errorMessage: ERRORS.isNotAlphabet };
-    }
-    return { isValid: true, errorMessage: "" };
-  };
-
-  const processData = () => {
-    setCardData("ownerName", Object.values(ownerName));
-  };
-
-  const {
-    values: ownerName,
-    errorMessage,
-    isError,
-    onChange,
-    onBlur,
-  } = useAddCardInput<OwnerName>({
-    initialValues: {
-      ownerName: "",
-    },
-    initialErrors: {
-      ownerName: false,
-    },
-    validateInputOnChange,
-    processData,
-  });
-
+const OwnerNameInput = ({ ownerName, changeOwnerName, blurOwnerName }: OwnerNameInputProps) => {
   return (
-    <Field title={OWNER_NAME.title} labelText={OWNER_NAME.labelText} errorMessage={errorMessage}>
-      {Object.keys(ownerName).map((name) => (
+    <Field
+      title={OWNER_NAME.title}
+      labelText={OWNER_NAME.labelText}
+      errorMessage={ownerName.status.errorMessage}
+    >
+      {Object.entries(ownerName.data).map(([name, { value, isError }]) => (
         <Input
           key={name}
-          name={name as keyof OwnerName}
+          name={name}
           placeholder={OWNER_NAME.placeholder}
-          value={ownerName[name as keyof OwnerName]}
-          isError={isError[name as keyof OwnerName]}
+          value={value}
+          isError={isError}
           isRequired={true}
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={changeOwnerName}
+          onBlur={blurOwnerName}
         ></Input>
       ))}
     </Field>
