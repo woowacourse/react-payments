@@ -41,9 +41,10 @@ const CardNumberInput = () => {
   return (
     <>
       {[{ name: "firstNumbers" }, { name: "secondNumbers" }, { name: "thirdNumbers" }, { name: "fourthNumbers" }].map(
-        ({ name }) => (
+        ({ name }, index) => (
           <FormInputCompound
             id={`id-${name}`}
+            key={index}
             onInputChange={(e, name) => onInputChange(e, name as keyof CardNumbers)}
             sizePreset="small"
             placeholder="1234"
@@ -69,9 +70,10 @@ const CardPeriodInput = () => {
       {[
         { name: "month", placeholder: "MM" },
         { name: "year", placeholder: "YY" },
-      ].map(({ name, placeholder }) => (
+      ].map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-period-${name}`}
+          key={index}
           onInputChange={(e, name) => onInputChange(e, name as keyof CardValidityPeriod)}
           sizePreset="medium"
           maxLength={2}
@@ -93,9 +95,10 @@ const CardOwnerInput = () => {
   };
   return (
     <>
-      {[{ name: "ownerName", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }) => (
+      {[{ name: "ownerName", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-owner-${name}`}
+          key={index}
           onInputChange={(e, name) => onInputChange(e, name as keyof CardOwnerInfo)}
           sizePreset="large"
           maxLength={15}
