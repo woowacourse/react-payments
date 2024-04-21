@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const UserName = ({ userName }: { userName: Map<string, string> }) => {
-  const keyArray = [...userName.keys()];
+  const userFullName = userName.get("0");
 
   return (
     <div
@@ -12,11 +12,7 @@ const UserName = ({ userName }: { userName: Map<string, string> }) => {
         height: "20px",
       }}
     >
-      {
-        <UserNameStyled key={keyArray[0]}>
-          {userName.get(keyArray[0])}
-        </UserNameStyled>
-      }
+      {<UserNameStyled>{userFullName}</UserNameStyled>}
     </div>
   );
 };
