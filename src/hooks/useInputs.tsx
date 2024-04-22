@@ -9,9 +9,6 @@ interface Props {
 
 const useInputs = ({ maxNumberLength, initialValue = [] }: Props) => {
   const [inputs, setInputs] = useState<string[]>(initialValue);
-  const [errorMessage, setErrorMessage] = useState<(string | null)[]>(
-    new Array(inputs.length).fill(null)
-  );
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -33,6 +30,6 @@ const useInputs = ({ maxNumberLength, initialValue = [] }: Props) => {
     });
   };
 
-  return { inputs, onChange, errorMessage, setErrorMessage };
+  return { inputs, onChange };
 };
 export default useInputs;
