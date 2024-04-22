@@ -12,7 +12,7 @@ interface CardPreviewProps {
   owner: string;
 }
 
-function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
     if (checkCardBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
@@ -20,6 +20,13 @@ function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
     if (checkCardBrand(cardNumbers[0]) === 'MasterCard') {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
+  };
+
+  const getCardNumberComponent = (number: string, index: number) => {
+    if (index > 1 && !number) return '';
+    if (index <= 1) return `${number} `;
+
+    return Array.from({ length: number.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
   };
 
   return (
@@ -32,13 +39,7 @@ function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
         <S.InfoContainer>
           {cardNumbers.map((number, index) => (
             <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
-              {number
-                ? index <= 1
-                  ? `${number} `
-                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, idx) => (
-                      <img src={Dot} key={idx} alt="dot" />
-                    ))
-                : ''}
+              {getCardNumberComponent(number, index)}
             </S.InfoBox>
           ))}
         </S.InfoContainer>
@@ -48,5 +49,3 @@ function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
     </S.Card>
   );
 }
-
-export default CardPreview;
