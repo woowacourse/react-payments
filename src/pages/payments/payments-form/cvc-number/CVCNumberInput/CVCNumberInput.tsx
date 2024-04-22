@@ -1,6 +1,6 @@
 import { Input, InputProps } from '@components/index';
 
-type CVCNumberInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength' | 'onChange'> & {
+type CVCNumberInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength' | 'onChange' | 'nextRef'> & {
   onAddCVCNumber: React.ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
 };
