@@ -2,6 +2,7 @@ import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import { CARD_BRAND_INFO } from "@/constants/condition";
+import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
 
 export type CardNumberInputType = {
@@ -29,9 +30,7 @@ const CardRegisterPage = () => {
     expirationYear: "",
   });
 
-  const ownerNameState = useInputs({
-    ownerName: "",
-  });
+  const ownerNameState = useInput("");
 
   const checkCardBrand = (cardNumbers: string) => {
     if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
@@ -53,7 +52,7 @@ const CardRegisterPage = () => {
           cardType={checkCardBrand(cardNumbersState.values.cardNumbers1)}
           cardNumbers={cardNumbersState.values}
           expirationDate={expiredDateState.values}
-          ownerName={ownerNameState.values}
+          ownerName={ownerNameState.value}
         />
         <CardRegisterForm
           cardNumbersState={cardNumbersState}

@@ -3,11 +3,16 @@ import useInputs from "@/hooks/useInputs";
 import CardNumbersField from "./components/CardNumbersField/CardNumbersField";
 import ExpirationPeriodField from "./components/ExpirationPeriodField/ExpirationPeriodField";
 import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
+import useInput from "@/hooks/useInput";
+import {
+  CardNumberInputType,
+  ExpirationPeriodInputType,
+} from "@/pages/CardRegisterPage/CardRegisterPage";
 
 interface Props {
-  cardNumbersState: ReturnType<typeof useInputs>;
-  expiredPeriodState: ReturnType<typeof useInputs>;
-  ownerNameState: ReturnType<typeof useInputs>;
+  cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
+  expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
+  ownerNameState: ReturnType<typeof useInput>;
 }
 
 const CardRegisterForm = ({

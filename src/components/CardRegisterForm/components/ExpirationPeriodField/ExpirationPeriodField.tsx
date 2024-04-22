@@ -13,49 +13,69 @@ import {
 } from "@/utils/validation";
 import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import { limitNumberLength } from "@/utils/numberHelper";
+import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
 
 interface Props {
-  expiredPeriodState: ReturnType<typeof useInputs>;
+  expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
 }
 
+const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
+  "expirationMonth",
+  "expirationYear",
+];
+
 const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
-  const { inputs: expirationPeriod, onChange: onChangeExpirationPeriod } =
+  const { values: expirationPeriod, onChange: onChangeExpirationPeriod } =
     expiredPeriodState;
 
-  const [expirationPeriodErrorMessages, setExpirationPeriodErrorMessages] =
-    useState(new Array(INPUT_COUNTS.EXPIRATION_PERIOD).fill(null));
+  const [expirationErrors, setExpirationErrors] = useState(
+    new Array(INPUT_COUNTS.EXPIRATION_PERIOD).fill(null)
+  );
 
   const onValidateExpirationPeriod = (index: number) => {
-    const { expiredError, monthError, lengthError } = getExpirationError(index);
-    if (expiredError) {
-      setExpirationPeriodErrorMessages([expiredError, expiredError]);
-    } else {
-      setExpirationPeriodErrorMessages([null, null]);
-    }
-    if (monthError || lengthError) {
-      setExpirationPeriodErrorMessages((prev) =>
-        makeNewErrorMessages(prev, monthError || lengthError, index)
-      );
-    }
-    if (!expirationPeriod[index].length) {
-      setExpirationPeriodErrorMessages((prev) =>
-        makeNewErrorMessages(prev, null, index)
-      );
+    getExpirationError();
+    getLengthError(index);
+    index === 0 && getMonthError();
+    resetVacantInputError(index);
+  };
+
+  const getMonthError = () => {
+    const monthError = validateMonth(Number(expirationPeriod.expirationMonth));
+
+    if (monthError) {
+      setExpirationErrors((prev) => makeNewErrorMessages(prev, monthError, 0));
     }
   };
 
-  const getExpirationError = (index: number) => {
-    const expiredError = validateExpirationDate(expirationPeriod);
-
-    const monthError =
-      index === 0 && validateMonth(Number(expirationPeriod[index]));
-
+  const getLengthError = (index: number) => {
     const lengthError = validateIsValidLength(
-      expirationPeriod[index],
+      expirationPeriod[EXPIRATION_INPUTS_NAMES[index]],
       VALID_LENGTH.EXPIRATION_PERIOD
     );
 
-    return { expiredError, monthError, lengthError };
+    if (lengthError) {
+      setExpirationErrors((prev) =>
+        makeNewErrorMessages(prev, lengthError, index)
+      );
+    } else {
+      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
+    }
+  };
+
+  const getExpirationError = () => {
+    const expiredError = validateExpirationDate(expirationPeriod);
+
+    if (expiredError) {
+      setExpirationErrors([expiredError, expiredError]);
+    } else {
+      setExpirationErrors([null, null]);
+    }
+  };
+
+  const resetVacantInputError = (index: number) => {
+    if (!expirationPeriod[EXPIRATION_INPUTS_NAMES[index]].length) {
+      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
+    }
   };
 
   return (
@@ -66,30 +86,34 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
       />
       <InputField
         label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
-        errorMessages={expirationPeriodErrorMessages}
+        errorMessages={expirationErrors}
       >
-        {expirationPeriod.map((_: string, index: number) => (
-          <Input
-            type="number"
-            key={index}
-            placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              e.target.value = limitNumberLength({
-                value: e.target.value,
-                maxLength: MAX_LENGTH.EXPIRATION_PERIOD,
-              });
-              onChangeExpirationPeriod(e, index);
-            }}
-            onBlur={() => {
-              onValidateExpirationPeriod(index);
-            }}
-            isError={
-              !!(
-                expirationPeriod[index] && expirationPeriodErrorMessages[index]
-              )
-            }
-          />
-        ))}
+        {new Array(INPUT_COUNTS.EXPIRATION_PERIOD)
+          .fill(0)
+          .map((_: string, index: number) => (
+            <Input
+              type="number"
+              key={index}
+              name={EXPIRATION_INPUTS_NAMES[index]}
+              placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                e.target.value = limitNumberLength({
+                  value: e.target.value,
+                  maxLength: MAX_LENGTH.EXPIRATION_PERIOD,
+                });
+                onChangeExpirationPeriod(e);
+              }}
+              onBlur={() => {
+                onValidateExpirationPeriod(index);
+              }}
+              isError={
+                !!(
+                  expirationPeriod[EXPIRATION_INPUTS_NAMES[index]] &&
+                  expirationErrors[index]
+                )
+              }
+            />
+          ))}
       </InputField>
     </S.InputFieldWithInfo>
   );

@@ -9,7 +9,12 @@ const meta = {
 export default meta;
 
 const cardNumbersState = {
-  inputs: ["", "", "", ""],
+  values: {
+    cardNumbers1: "",
+    cardNumbers2: "",
+    cardNumbers3: "",
+    cardNumbers4: "",
+  },
   onChange: () => {},
 };
 

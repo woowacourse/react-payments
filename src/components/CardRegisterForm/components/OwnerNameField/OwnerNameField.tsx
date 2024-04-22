@@ -1,4 +1,3 @@
-import useInputs from "@/hooks/useInputs";
 import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
 import S from "../../style";
 import { MESSAGE } from "@/constants/message";
@@ -7,13 +6,14 @@ import Input from "@/components/Input/Input";
 import { ChangeEvent, useState } from "react";
 import { validateOwnerName } from "@/utils/validation";
 import { MAX_LENGTH } from "@/constants/condition";
+import useInput from "@/hooks/useInput";
 
 interface Props {
-  ownerNameState: ReturnType<typeof useInputs>;
+  ownerNameState: ReturnType<typeof useInput>;
 }
 
 const OwnerNameField = ({ ownerNameState }: Props) => {
-  const { inputs: ownerName, onChange: onChangeOwnerName } = ownerNameState;
+  const { value: ownerName, onChange: onChangeOwnerName } = ownerNameState;
 
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState<
     string | null
@@ -38,7 +38,7 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             e.target.value = e.target.value.toUpperCase();
-            onChangeOwnerName(e, 0);
+            onChangeOwnerName(e);
           }}
           onBlur={() => {
             onValidateOwnerName();

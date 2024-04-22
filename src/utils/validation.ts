@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE, INVALID_LENGTH } from "@/constants/errorMessage";
+import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
 
 export const validateIsValidLength = (
   newValue: string,
@@ -10,8 +11,10 @@ export const validateIsValidLength = (
   return null;
 };
 
-export const validateExpirationDate = (input: string[]) => {
-  const [month, year] = input.map(Number);
+export const validateExpirationDate = (date: ExpirationPeriodInputType) => {
+  const { expirationMonth, expirationYear } = date;
+  const month = Number(expirationMonth);
+  const year = Number(expirationYear);
 
   if (month && year) {
     const today = new Date();

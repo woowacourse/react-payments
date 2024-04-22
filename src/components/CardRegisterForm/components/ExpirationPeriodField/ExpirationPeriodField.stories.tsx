@@ -9,7 +9,10 @@ const meta = {
 export default meta;
 
 const expiredPeriodState = {
-  inputs: ["", ""],
+  values: {
+    expirationMonth: "",
+    expirationYear: "",
+  },
   onChange: () => {},
 };
 
