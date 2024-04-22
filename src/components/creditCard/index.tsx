@@ -8,7 +8,9 @@ const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCar
     <CreditCardContainer>
       <CreditCardHeader>
         <YellowBox />
-        <BrandLogoBox>{CreditCardBrandLogo(creditCardNumber[0])}</BrandLogoBox>
+        <BrandLogoBox>
+          <CreditCardBrandLogo creditCardNumber={creditCardNumber[0]} />
+        </BrandLogoBox>
       </CreditCardHeader>
       <CreditCardInfo
         creditCardNumber={creditCardNumber}
