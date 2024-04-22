@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { inputWidthSize } from "../../../constants/inputBoxWitdhSize";
 
 interface InputBoxProps {
   inputValue: string;
@@ -18,20 +19,12 @@ const InputBox = ({
   isError,
   ...props
 }: InputBoxProps) => {
-  const sizeWidthMap = {
-    small: 23,
-    medium: 48,
-    large: 100,
-  };
-
-  const widthPercentage = sizeWidthMap[size];
-
   return (
     <Input
       type="text"
       value={inputValue}
       onChange={handleChange}
-      style={{ width: `${widthPercentage}%` }}
+      style={{ width: inputWidthSize[size] }}
       placeholder={placeholder}
       isError={isError}
       {...props}
