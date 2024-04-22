@@ -2,7 +2,11 @@ import { limitNumberLength } from "@/components/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import { Validator, releaseAll, validateAll } from "@/components/utils/validation";
+import {
+  Validator,
+  releaseAll,
+  validateAll,
+} from "@/components/utils/validation";
 
 type Validate = (input: string[]) => string;
 interface Props {
@@ -21,7 +25,9 @@ const useInput = ({
   validLength,
 }: Props) => {
   const [inputs, setInputs] = useState<string[]>(initialValue);
-  const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
+  const [errorMessages, setErrorMessages] = useState(
+    makeStringArray(initialValue.length)
+  );
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
     setErrorMessages((prev) => {
@@ -35,52 +41,47 @@ const useInput = ({
     validate: (inputs: string[]) => inputs.every((input) => input.length !== 0),
     errorMessage: "",
   };
+
   const validLengthValidator = {
-    validate: (inputs: string[]) => inputs.every((input) => validLength === undefined || input.length === validLength),
+    validate: (inputs: string[]) =>
+      inputs.every(
+        (input) =>
+          validLength === undefined ||
+          input.length === 0 ||
+          input.length === validLength
+      ),
     errorMessage: "유효하지 않은 길이입니다.",
   };
 
   const onBlurValidators: Validator[] = [validLengthValidator];
-  if (getOnBlurValidators !== undefined) onBlurValidators.push(...getOnBlurValidators(inputs));
-
-  // const validateLength: Validate = (inputs) => {
-  //   if (validLength === undefined) return "";
-  //   return inputs.every((input) => input.length === 0 || input.length === validLength)
-  //     ? ""
-  //     : "유효하지 않은 길이입니다.";
-  // };
+  if (getOnBlurValidators !== undefined)
+    onBlurValidators.push(...getOnBlurValidators(inputs));
 
   const onChangeValidators: Validator[] = [];
   if (getOnChangeValidators !== undefined) {
     onChangeValidators.push(...getOnChangeValidators(inputs));
   }
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
-    // if (maxLength) {
-    //   event.target.value = limitNumberLength(event.target.value, maxLength);
-    // }
+  const onChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
+    if (maxLength) {
+      event.target.value = limitNumberLength(event.target.value, maxLength);
+    }
 
     const newInput = [...inputs];
     newInput[index] = event.target.value;
     setInputs(newInput);
 
-    const newErrorMessages = releaseAll(onBlurValidators, newInput, errorMessages);
-    // setErrorMessages(newErrorMessages);
-
+    const newErrorMessages = releaseAll(
+      onBlurValidators,
+      newInput,
+      errorMessages
+    );
     const errorMessage = validateAll(onChangeValidators, newInput);
     newErrorMessages[index] = errorMessage;
     setErrorMessages(newErrorMessages);
-
-    // const errorMessageOnChange = onChangeValidate(newInput);
-    // if (errorMessageOnChange) {
-    //   updateErrorMessages(errorMessageOnChange, index);
-    //   return;
-    // }
-
-    // const errorMessageOnBlur = onBlurValidateWrapper(newInput);
-    // if (errorMessageOnBlur) return;
-
-    // updateErrorMessages("", index);
   };
 
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
