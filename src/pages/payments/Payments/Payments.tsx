@@ -8,23 +8,23 @@ import {
   PasswordPrefixTextField,
 } from '@pages/payments';
 import {
-  useChangeCardIssuer,
   useChangeCardNumber,
-  useChangeExpirationDate,
+  useChangeCVCNumber,
   useChangeOwnerName,
+  useChangeCardIssuer,
+  useChangeExpirationDate,
   useChangePasswordPrefix,
 } from '@hooks/payments';
 
 import styles from './Payments.module.css';
-import useChangeCVCNumber from '../../../hooks/payments/useChangeCVCNumber';
 
 const Payments: React.FC = () => {
-  const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
-  const { cvcNumber, cvcNumberError, handleCVCNumberChange } = useChangeCVCNumber();
-  const { passwordPrefix, passwordPrefixError, handlePasswordPrefixChange } = useChangePasswordPrefix();
-  const { expirationDate, expirationDateError, handleExpirationDateChange } = useChangeExpirationDate();
-  const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
   const { cardIssuer, handleCardIssuerChange } = useChangeCardIssuer();
+  const { cvcNumber, cvcNumberError, handleCVCNumberChange } = useChangeCVCNumber();
+  const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+  const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
+  const { expirationDate, expirationDateError, handleExpirationDateChange } = useChangeExpirationDate();
+  const { passwordPrefix, passwordPrefixError, handlePasswordPrefixChange } = useChangePasswordPrefix();
 
   return (
     <>
@@ -44,11 +44,10 @@ const Payments: React.FC = () => {
             onAddCVCNumber={handleCVCNumberChange}
             cvcNumberError={cvcNumberError}
           />
-          <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
-          <CardNumberTextField
-            cardNumbers={cardNumbers}
-            onAddCardNumber={handleCardNumberChange}
-            cardNumberError={cardNumberError}
+          <OwnerNameTextField
+            ownerName={ownerName}
+            onAddOwnerName={handleOwnerNameChange}
+            ownerNameError={ownerNameError}
           />
           <ExpirationDateTextField
             month={expirationDate.month}
@@ -56,10 +55,11 @@ const Payments: React.FC = () => {
             onAddExpirationDate={handleExpirationDateChange}
             expirationDateError={expirationDateError}
           />
-          <OwnerNameTextField
-            ownerName={ownerName}
-            onAddOwnerName={handleOwnerNameChange}
-            ownerNameError={ownerNameError}
+          <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
+          <CardNumberTextField
+            cardNumbers={cardNumbers}
+            onAddCardNumber={handleCardNumberChange}
+            cardNumberError={cardNumberError}
           />
         </form>
       </section>
