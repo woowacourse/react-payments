@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import CardExpiredDate from "./CardExpiredDate";
-import CardHolder from "./CardHolder";
-import CardNumbers from "./CardNumbers";
+import CardExpiredDate, { CardExpiredDateProps } from "./CardExpirationPeriod";
+import CardHolder, { CardHolderProps } from "./CardHolder";
+import CardNumbers, { CardNumbersProps } from "./CardNumbers";
+
 import { css } from "@emotion/react";
 
 const styledForm = css`
@@ -12,12 +13,22 @@ const styledForm = css`
   gap: 16px;
 `;
 
-export default function CardForm() {
+interface CardFormProps {
+  cardNumbers: CardNumbersProps;
+  cardExpirationPeriod: CardExpiredDateProps;
+  cardHolder: CardHolderProps;
+}
+
+export default function CardForm({
+  cardNumbers,
+  cardExpirationPeriod,
+  cardHolder,
+}: CardFormProps) {
   return (
     <form css={styledForm}>
-      <CardNumbers />
-      <CardExpiredDate />
-      <CardHolder />
+      <CardNumbers {...cardNumbers} />
+      <CardExpiredDate {...cardExpirationPeriod} />
+      <CardHolder {...cardHolder} />
     </form>
   );
 }

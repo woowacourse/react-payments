@@ -1,9 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { CardInfoContext } from "../App";
 import IC_CHIP from "../Images/Ic_chip.png";
 import { css } from "@emotion/react";
 import { matchCardIssuerImgSrc } from "../domain/matchCardIssuer";
-import { useContext } from "react";
 
 const styledCardPreview = css`
   width: 212px;
@@ -48,14 +46,23 @@ const styledCardNumber = css`
   width:30px;
 `;
 
-export default function CardPreview() {
-  const { cardIssuer, cardNumbers, cardExpiredDate, cardHolder } =
-    useContext(CardInfoContext).cardInfo;
+interface CardPreviewProps {
+  cardIssuer: "" | "Visa" | "MasterCard";
+  cardNumbers: [string, string, string, string];
+  cardExpirationPeriod: [string, string];
+  cardHolder: string;
+}
 
+export default function CardPreview({
+  cardIssuer,
+  cardNumbers,
+  cardExpirationPeriod,
+  cardHolder,
+}: CardPreviewProps) {
   return (
     <section css={styledCardPreview}>
       <div css={styledCardHeader}>
-        <img src={IC_CHIP} alt="IC Chip" />
+        <img src={IC_CHIP} alt="" />
         <img src={matchCardIssuerImgSrc(cardIssuer)} alt={cardIssuer} />
       </div>
       <div css={styledCardNumberContainer}>
@@ -66,7 +73,9 @@ export default function CardPreview() {
         ))}
       </div>
       <div css={styledCardText}>
-        {cardExpiredDate.join("") !== "" ? cardExpiredDate.join("/") : ""}
+        {cardExpirationPeriod.join("") !== ""
+          ? cardExpirationPeriod.join("/")
+          : ""}
       </div>
       <div css={styledCardText}>{cardHolder}</div>
     </section>
