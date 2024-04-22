@@ -4,12 +4,12 @@ import {
   CardExpirationPeriodInput,
   CardNumbersInput,
   CardPreview,
-  CardUserNameInput,
+  UserNameInput,
 } from './components';
 import { INPUT_LENGTH } from './constants';
 import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
 import useCardNumbersInput from './hooks/useCardNumbersInput';
-import useCardUserNameInput from './hooks/useCardUserNameInput';
+import useUserNameInput from './hooks/useUserNameInput';
 
 function App() {
   const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER } = INPUT_LENGTH;
@@ -20,7 +20,7 @@ function App() {
   const { period, periodErrors, handlePeriodChange } =
     useCardExpirationPeriodInput(CARD_EXPIRATION);
 
-  const { userName, nameError, handleNameChange } = useCardUserNameInput();
+  const { userName, nameError, handleNameChange } = useUserNameInput();
 
   return (
     <div id="app">
@@ -44,7 +44,7 @@ function App() {
               periodErrors={periodErrors}
               onPeriodChange={handlePeriodChange}
             />
-            <CardUserNameInput
+            <UserNameInput
               maxLength={CARD_USER}
               userName={userName}
               nameError={nameError}

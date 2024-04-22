@@ -1,8 +1,11 @@
-import { CARD_NUMBERS_FORM_MESSAGE, ERROR_MESSAGE } from '../../constants';
-import Input from '../common/Input';
-import FormErrorMessage from '../FormErrorMessage';
-import InputContainer from '../InputContainer';
-import InputField from '../InputField';
+import {
+  CARD_NUMBERS_FORM_MESSAGE,
+  ERROR_MESSAGE,
+} from '../../../../constants';
+import Input from '../../../common/Input';
+import InputErrorMessage from '../../InputErrorMessage';
+import InputField from '../../InputField';
+import InputWrap from '../../InputWrap';
 
 import styles from './style.module.css';
 
@@ -14,7 +17,8 @@ interface CardNumbersInputProps {
   numberErrors: boolean[];
   onNumberChange: (value: string, index: number) => void;
 }
-export default function CardNumbersInput({
+
+function CardNumbersInput({
   maxLength,
   numbers,
   numberErrors,
@@ -30,7 +34,7 @@ export default function CardNumbersInput({
   };
 
   return (
-    <InputContainer title={title} subTitle={subTitle}>
+    <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
         <div className={styles.inputWrap}>
           {numbers.map((number, index) => (
@@ -47,7 +51,9 @@ export default function CardNumbersInput({
           ))}
         </div>
       </InputField>
-      <FormErrorMessage errorMessage={getErrorMessage()} />
-    </InputContainer>
+      <InputErrorMessage errorMessage={getErrorMessage()} />
+    </InputWrap>
   );
 }
+
+export default CardNumbersInput;

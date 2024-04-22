@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useCardUserNameInput() {
+function useUserNameInput() {
   const [userName, setUserName] = useState('');
   const [nameError, setNameError] = useState(false);
 
@@ -18,4 +18,4 @@ function useCardUserNameInput() {
   return { userName, nameError, handleNameChange };
 }
 
-export default useCardUserNameInput;
+export default useUserNameInput;

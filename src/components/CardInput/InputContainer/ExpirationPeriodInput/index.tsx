@@ -1,11 +1,11 @@
 import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
-} from '../../constants';
-import Input from '../common/Input';
-import FormErrorMessage from '../FormErrorMessage';
-import InputContainer from '../InputContainer';
-import InputField from '../InputField';
+} from '../../../../constants';
+import Input from '../../../common/Input';
+import InputErrorMessage from '../../InputErrorMessage';
+import InputField from '../../InputField';
+import InputWrap from '../../InputWrap';
 
 import styles from './style.module.css';
 
@@ -27,7 +27,7 @@ type CardExpirationPeriodInputProps = {
   onPeriodChange: (type: 'month' | 'year', value: string) => void;
 };
 
-export default function CardExpirationPeriodInput({
+function CardExpirationPeriodInput({
   maxLength,
   period,
   periodErrors,
@@ -51,7 +51,7 @@ export default function CardExpirationPeriodInput({
   };
 
   return (
-    <InputContainer title={title} subTitle={subTitle}>
+    <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
         <div>
           <div className={styles.inputWrap}>
@@ -74,9 +74,11 @@ export default function CardExpirationPeriodInput({
               onChange={(event) => onPeriodChange('year', event.target.value)}
             />
           </div>
-          <FormErrorMessage errorMessage={getErrorMessage()} />
+          <InputErrorMessage errorMessage={getErrorMessage()} />
         </div>
       </InputField>
-    </InputContainer>
+    </InputWrap>
   );
 }
+
+export default CardExpirationPeriodInput;

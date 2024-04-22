@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 
 import styles from './style.module.css';
 
-interface InputContainerProps {
+interface InputWrapProps {
   title: string;
   subTitle: string;
   children: ReactNode;
 }
 
-function InputContainer(props: InputContainerProps) {
+function InputWrap(props: InputWrapProps) {
   const { title, subTitle, children } = props;
 
   return (
@@ -22,4 +22,4 @@ function InputContainer(props: InputContainerProps) {
   );
 }
 
-export default InputContainer;
+export default InputWrap;

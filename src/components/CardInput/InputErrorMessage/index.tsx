@@ -1,13 +1,13 @@
 import styles from './style.module.css';
 
-interface FormErrorMessageProps {
+interface InputErrorMessageProps {
   errorMessage?: string;
 }
 
-function FormErrorMessage(props: FormErrorMessageProps) {
+function InputErrorMessage(props: InputErrorMessageProps) {
   const { errorMessage } = props;
 
   return <div className={styles.message}>{errorMessage}</div>;
 }
 
-export default FormErrorMessage;
+export default InputErrorMessage;

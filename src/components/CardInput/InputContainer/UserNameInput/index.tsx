@@ -1,8 +1,8 @@
-import { CARD_USER_FORM_MESSAGE, ERROR_MESSAGE } from '../../constants';
-import Input from '../common/Input';
-import FormErrorMessage from '../FormErrorMessage';
-import InputContainer from '../InputContainer';
-import InputField from '../InputField';
+import { CARD_USER_FORM_MESSAGE, ERROR_MESSAGE } from '../../../../constants';
+import Input from '../../../common/Input';
+import InputErrorMessage from '../../InputErrorMessage';
+import InputField from '../../InputField';
+import InputWrap from '../../InputWrap';
 
 import styles from './style.module.css';
 
@@ -13,7 +13,7 @@ interface CardUserNameInputProps {
   onNameChange: (value: string) => void;
 }
 
-export default function CardUserNameInput({
+function UserNameInput({
   maxLength,
   userName,
   nameError,
@@ -29,7 +29,7 @@ export default function CardUserNameInput({
   };
 
   return (
-    <InputContainer title={title} subTitle={subTitle}>
+    <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
         <div>
           <div className={styles.inputWrap}>
@@ -43,9 +43,11 @@ export default function CardUserNameInput({
               onChange={(event) => onNameChange(event.target.value)}
             />
           </div>
-          <FormErrorMessage errorMessage={getErrorMessage()} />
+          <InputErrorMessage errorMessage={getErrorMessage()} />
         </div>
       </InputField>
-    </InputContainer>
+    </InputWrap>
   );
 }
+
+export default UserNameInput;
