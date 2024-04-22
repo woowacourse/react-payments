@@ -1,9 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext } from "react";
-import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
-import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "../Form";
 import { inputStyle } from "./emotionCss";
 import { cardNumbersValidator, cardOwnerValidator, cardPeriodValidator } from "./validator";
+import {
+  CardNumbersContext,
+  CardOwnerInfoContext,
+  CardValidityPeriodContext,
+} from "../../routes/Payments/CardInfoContextProvider";
+import {
+  CardNumberErrorContext,
+  CardOwnerInfoErrorContext,
+  CardValidityPeriodErrorContext,
+} from "../Form/ErrorContextProvider";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;

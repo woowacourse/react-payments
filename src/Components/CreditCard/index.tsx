@@ -3,9 +3,13 @@ import { useContext } from "react";
 
 import masterImage from "../../assets/masterImage.png";
 import visaImage from "../../assets/visaImage.png";
-import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
 
 import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, style, width42 } from "./emotionCss";
+import {
+  CardNumbersContext,
+  CardOwnerInfoContext,
+  CardValidityPeriodContext,
+} from "../../routes/Payments/CardInfoContextProvider";
 
 const formatTwoDigitNumber = (n: number | undefined) => {
   if (!n) return "";
