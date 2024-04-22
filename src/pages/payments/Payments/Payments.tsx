@@ -4,13 +4,16 @@ import {
   ExpirationDateTextField,
   OwnerNameTextField,
   CardIssuerTextField,
+  CVCNumberTextField,
 } from '@pages/payments';
 import { useChangeCardIssuer, useChangeCardNumber, useChangeExpirationDate, useChangeOwnerName } from '@hooks/payments';
 
 import styles from './Payments.module.css';
+import useChangeCVCNumber from '../../../hooks/payments/useChangeCVCNumber';
 
 const Payments: React.FC = () => {
   const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
+  const { cvcNumber, cvcNumberError, handleCVCNumberChange } = useChangeCVCNumber();
   const { expirationDate, expirationDateError, handleExpirationDateChange } = useChangeExpirationDate();
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
   const { cardIssuer, handleCardIssuerChange } = useChangeCardIssuer();
@@ -23,7 +26,12 @@ const Payments: React.FC = () => {
 
       <section>
         <form className={styles.paymentsForm}>
-          <CardIssuerTextField value={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
+          <CVCNumberTextField
+            cvcNumber={cvcNumber}
+            onAddCVCNumber={handleCVCNumberChange}
+            cvcNumberError={cvcNumberError}
+          />
+          <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
           <CardNumberTextField
             cardNumbers={cardNumbers}
             onAddCardNumber={handleCardNumberChange}
