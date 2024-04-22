@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended" // Prettier 권장 설정을 마지막에 추가합니다.
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier" // Prettier 플러그인을 추가합니다.
+  ],
+  "rules": {
+    "prettier/prettier": "error", // Prettier 규칙을 ESLint 규칙 오류로 적용합니다.
+    "import/extensions": "off",
+    "max-depth": ["error", 4], // 이전에는 1이었는데, 이는 매우 제한적인 설정입니다. 일반적으로 더 높은 값을 사용합니다.
+    "lines-between-class-members": "off",
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-explicit-any": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx", ".js", ".jsx"],
+        "paths": ["src"]
+      }
+    }
+  }
+}
