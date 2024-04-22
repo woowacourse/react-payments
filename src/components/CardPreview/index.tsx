@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import CardChip from '../../assets/images/cardChip.png';
 import {
@@ -39,6 +39,9 @@ function CardPreview(props: CardPreviewProps) {
     [numbers],
   );
 
+  useEffect(() => {
+    console.log('cvc', cardInfo.cvc);
+  }, [cardInfo]);
   return (
     <div className={styles.cardPreview}>
       <div

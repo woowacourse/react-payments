@@ -1,11 +1,12 @@
 export const ERROR_MESSAGE = {
-  cardNumber: '4자리 숫자만 입력 가능해요.',
+  cardNumber: '하나의 칸에 4자리 숫자를 입력해주세요.',
   cardExpirationPeriod: {
     month: `1~12까지의 숫자만 입력해주세요 \n 1~9는 앞에 0을 붇일 수 있어요`,
     year: '00~99까지의 숫자만 입력해주세요 \n 1~9는 앞에 0을 붇일 수 있어요',
     availability: '유효한 기간을 입력해주세요.',
   },
   userName: '소유자 이름은 영문과 공백만 가능해요.',
+  cvc: '3자리 숫자를 입력해주세요.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {

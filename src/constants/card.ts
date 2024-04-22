@@ -40,6 +40,10 @@ export const CARD_MARK = {
   },
 };
 
+export const CARD_CVC = {
+  length: 3,
+};
+
 export const CARD_COLOR_ETC = '#6a0680';
 
 export const CARD_COMPANY: Map<string, { name: string; color: string }> =

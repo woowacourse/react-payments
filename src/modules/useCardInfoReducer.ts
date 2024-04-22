@@ -7,6 +7,7 @@ const EDIT_CARD_MARK = 'card/EDIT_CARD_MARK' as const;
 const EDIT_CARD_PERIOD = 'card/EDIT_CARD_PERIOD' as const;
 const EDIT_CARD_USER_NAME = 'card/EDIT_CARD_USER_NAME' as const;
 const EDIT_CARD_COMPANY = 'card/EDIT_CARD_COMPANY' as const;
+const EDIT_CARD_CVC = 'card/EDIT_CARD_CVC' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
 export interface CardPeriod {
@@ -29,6 +30,7 @@ export interface CardInfo {
   period: CardPeriod | null;
   userName: string | null;
   company: CardCompany | null;
+  cvc: string | null;
 }
 
 const INITIAL_CARD_INFO: CardInfo = {
@@ -40,6 +42,7 @@ const INITIAL_CARD_INFO: CardInfo = {
   },
   userName: null,
   company: CARD_COMPANY.get('etc') || null,
+  cvc: null,
 };
 
 // action
@@ -63,13 +66,18 @@ const editCardUserNameAction = (userName: string) => ({
   userName,
 });
 
-const resetCardInfoAction = () => ({
-  type: RESET_CARD_INFO,
-});
-
 const editCardCompanyAction = (companyName: CardCompanyName) => ({
   type: EDIT_CARD_COMPANY,
   company: CARD_COMPANY.get(companyName) || null,
+});
+
+const editCardCVCAction = (cvc: string) => ({
+  type: EDIT_CARD_CVC,
+  cvc,
+});
+
+const resetCardInfoAction = () => ({
+  type: RESET_CARD_INFO,
 });
 
 type CardInfoAction =
@@ -78,6 +86,7 @@ type CardInfoAction =
   | ReturnType<typeof editCardPeriodAction>
   | ReturnType<typeof editCardUserNameAction>
   | ReturnType<typeof editCardCompanyAction>
+  | ReturnType<typeof editCardCVCAction>
   | ReturnType<typeof resetCardInfoAction>;
 
 const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
@@ -97,8 +106,12 @@ const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
     case EDIT_CARD_COMPANY:
       return { ...state, company: action.company };
 
+    case EDIT_CARD_CVC:
+      return { ...state, cvc: action.cvc };
+
     case RESET_CARD_INFO:
       return INITIAL_CARD_INFO;
+
     default:
       return state;
   }
@@ -127,6 +140,10 @@ export default function useCardInfoReducer() {
     dispatch(editCardCompanyAction(companyName));
   };
 
+  const editCardCVC = (cvc: string) => {
+    dispatch(editCardCVCAction(cvc));
+  };
+
   const resetCardInfo = () => {
     dispatch(resetCardInfoAction());
   };
@@ -138,6 +155,7 @@ export default function useCardInfoReducer() {
     editCardPeriod,
     editCardUserName,
     editCardCompany,
+    editCardCVC,
     resetCardInfo,
   };
 }
