@@ -1,17 +1,21 @@
-/**
- * 에러 메세지를 갖는다.
- * 업데이트한다.
- * 가장 최근에 수정된 값을 반환한다.
- */
-
 import { useState } from 'react';
 
-const useErrorMessages = <T extends string = string>(size: number) => {
-  const [errorMessages, setErrorMessages] = useState<T[]>(new Array(size).fill(''));
+type UpdatedErrorMessage<T> = { errorMessage: T; index: number };
+type UpdatedErrorMessages<T> = UpdatedErrorMessage<T>[];
 
-  const handleChangeErrorMessage = (errorMessage: T, index: number) => {
+const useErrorMessages = <T extends string = string>(size: number, initialItem: T) => {
+  const [errorMessages, setErrorMessages] = useState<T[]>(new Array(size).fill(initialItem));
+
+  const handleChangeErrorMessage = (updatedErrorMessagesInput: UpdatedErrorMessages<T> | UpdatedErrorMessage<T>) => {
     const updatedErrorMessages = [...errorMessages];
-    updatedErrorMessages[index] = errorMessage;
+
+    if (Array.isArray(updatedErrorMessagesInput))
+      updatedErrorMessagesInput.forEach(({ errorMessage, index }) => (updatedErrorMessages[index] = errorMessage));
+    else {
+      const { errorMessage, index } = updatedErrorMessagesInput;
+      updatedErrorMessages[index] = errorMessage;
+    }
+
     setErrorMessages(updatedErrorMessages);
   };
 
