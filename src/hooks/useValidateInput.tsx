@@ -16,10 +16,12 @@ export default function useValidateInput({
   validatorPropsArray,
   decorateValue,
   maxLength,
+  setHook,
 }: validatedInputProps) {
   const { input, onChange: inputOnChange } = useInput({
     decorateValue,
     maxLength,
+    setHook,
   });
   const [errorMessage, setErrorMessage] = useState('');
 

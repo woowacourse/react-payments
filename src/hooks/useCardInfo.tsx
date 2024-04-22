@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { matchCardIssuer } from '../domain/matchCardIssuer';
 
@@ -19,23 +19,20 @@ export default function useCardInfo() {
     '',
     '',
   ]);
-  const [cardIssuer, setCardIssuer] = useState<CardInfo['cardIssuer']>('');
+  const cardIssuerRef = useRef<CardIssuer>('');
   const [cardExpiredDate, setCardExpiredDate] = useState<
     CardInfo['cardExpiredDate']
   >(['', '']);
   const [cardHolder, setCardHolder] = useState('');
 
-  const cardInfo = {
+  cardIssuerRef.current = matchCardIssuer(cardNumbers.join(''));
+
+  const cardInfo: CardInfo = {
     cardNumbers,
-    cardIssuer,
+    cardIssuer: cardIssuerRef.current,
     cardExpiredDate,
     cardHolder,
   };
-
-  useEffect(() => {
-    if (setCardIssuer)
-      setCardIssuer(matchCardIssuer(cardNumbers.join('')) ?? '');
-  }, [cardNumbers]);
 
   return {
     cardInfo,

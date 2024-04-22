@@ -11,7 +11,6 @@ import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
-import { useEffect } from 'react';
 import useLastValidValue from '../hooks/useLastValidValue';
 import useValidateInput from '../hooks/useValidateInput';
 
@@ -20,29 +19,58 @@ export default function CardNumbers({
 }: {
   setCardNumbers: React.Dispatch<React.SetStateAction<CardNumbersType>>;
 }) {
-  const firstInput = useValidateInput(useValidatedInputProps);
-  const secondInput = useValidateInput(useValidatedInputProps);
-  const thirdInput = useValidateInput(useValidatedInputProps);
-  const fourthInput = useValidateInput(useValidatedInputProps);
+  const firstInput = useValidateInput({
+    ...useValidatedInputProps,
+    setHook: (first: string) => {
+      setCardNumbers([
+        first,
+        secondInput.input,
+        thirdInput.input,
+        fourthInput.input,
+      ]);
+    },
+  });
+  const secondInput = useValidateInput({
+    ...useValidatedInputProps,
+    setHook: (second: string) => {
+      setCardNumbers([
+        firstInput.input,
+        second,
+        thirdInput.input,
+        fourthInput.input,
+      ]);
+    },
+  });
+  const thirdInput = useValidateInput({
+    ...useValidatedInputProps,
+    setHook: (third: string) => {
+      setCardNumbers([
+        firstInput.input,
+        secondInput.input,
+        third,
+        fourthInput.input,
+      ]);
+    },
+  });
+  const fourthInput = useValidateInput({
+    ...useValidatedInputProps,
+    setHook: (fourth: string) => {
+      setCardNumbers([
+        firstInput.input,
+        secondInput.input,
+        thirdInput.input,
+        fourth,
+      ]);
+    },
+  });
 
   const hooks = [firstInput, secondInput, thirdInput, fourthInput];
-  const inputs = hooks.map(hook => hook.input);
   const errorMessages = hooks.map(hook => hook.errorMessage);
 
   const errorMessage = useLastValidValue({
     checkValues: errorMessages,
     invalidValues: [''],
   });
-
-  useEffect(() => {
-    if (setCardNumbers)
-      setCardNumbers([
-        firstInput.input,
-        secondInput.input,
-        thirdInput.input,
-        fourthInput.input,
-      ]);
-  }, inputs);
 
   return (
     <section>

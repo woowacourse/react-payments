@@ -11,7 +11,6 @@ import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
-import { useEffect } from 'react';
 import useLastValidValue from '../hooks/useLastValidValue';
 import useValidateInput from '../hooks/useValidateInput';
 import useValidator from '../hooks/useValidator';
@@ -25,13 +24,23 @@ export default function CardExpiredDate({
     input: month,
     onChange: monthOnChange,
     errorMessage: monthErrorMessage,
-  } = useValidateInput(useMonthInputProps);
+  } = useValidateInput({
+    ...useMonthInputProps,
+    setHook: (month: string) => {
+      setCardExpiredDate([month, year]);
+    },
+  });
 
   const {
     input: year,
     onChange: yearOnChange,
     errorMessage: yearErrorMessage,
-  } = useValidateInput(useYearInputProps);
+  } = useValidateInput({
+    ...useYearInputProps,
+    setHook: (year: string) => {
+      setCardExpiredDate([month, year]);
+    },
+  });
 
   const isFullFilled = ([month, year]: CardExpiredDateType) => {
     return (
@@ -43,9 +52,10 @@ export default function CardExpiredDate({
   const isExpired = ([month, year]: CardExpiredDateType) => {
     const inputMonth = Number(month);
     const inputYear = Number(year) + 2000;
+    const inputDate = new Date(inputYear, inputMonth);
+
     const nowMonth = new Date().getMonth();
     const nowYear = new Date().getFullYear();
-    const inputDate = new Date(inputYear, inputMonth);
     const nowDate = new Date(nowYear, nowMonth);
 
     return inputDate < nowDate;
@@ -62,10 +72,6 @@ export default function CardExpiredDate({
     checkValues: [monthErrorMessage, yearErrorMessage, invalidExpiredDateError],
     invalidValues: [''],
   });
-
-  useEffect(() => {
-    if (setCardExpiredDate) setCardExpiredDate([month, year]);
-  }, [month, year, setCardExpiredDate]);
 
   return (
     <section>

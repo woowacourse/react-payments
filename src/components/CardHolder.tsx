@@ -10,7 +10,6 @@ import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
 import { isOnlyEnglishOrSpace } from '../domain/checkIsValid';
-import { useEffect } from 'react';
 import useValidateInput from '../hooks/useValidateInput';
 
 export default function CardHolder({
@@ -22,11 +21,7 @@ export default function CardHolder({
     input: holder,
     onChange,
     errorMessage,
-  } = useValidateInput(useValidateInputProps);
-
-  useEffect(() => {
-    if (setCardHolder) setCardHolder(holder);
-  }, [holder, setCardHolder]);
+  } = useValidateInput({ ...useValidateInputProps, setHook: setCardHolder });
 
   return (
     <section>
