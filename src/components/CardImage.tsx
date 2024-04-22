@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { MASTERCARD, VISA } from '../assets';
-import { isRange } from '../util/isRange';
-import { VALIDATION } from '../constants/validation';
 import checkCardBrand from '../util/checkCardBrand';
 import formatCardDisplayNumber from '../util/formatCardDisplayNumber';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
+import formatValue from '../util/formatValue';
 
 const cardContainerStyle = css({
   backgroundColor: '#333333',
@@ -83,18 +82,6 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
 
   const imageUrl = getCardImage();
 
-  const monthFormat = (month: string) => {
-    const monthNumber = Number(month);
-    if (month && !isRange(monthNumber, VALIDATION.singleDigit.min, VALIDATION.singleDigit.max)) {
-      return '0'.repeat(2 - month.length) + month;
-    }
-    return month;
-  };
-
-  const periodFormat = (month: string, year: string) => {
-    if (month) return [monthFormat(month), year].join('/');
-  };
-
   return (
     <div css={cardContainerStyle}>
       {/* 헤더 */}
@@ -111,7 +98,7 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
             },
           )}
         </div>
-        <p css={cardDetailStyle}>{periodFormat(cardPeriod.month, cardPeriod.year)}</p>
+        <p css={cardDetailStyle}>{formatValue.periodFormat(cardPeriod.month, cardPeriod.year)}</p>
         <p css={cardDetailStyle}>{cardOwner}</p>
       </div>
     </div>
