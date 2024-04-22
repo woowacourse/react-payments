@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Card from './Card';
+import { Date } from '../../types/date';
 
 const meta: Meta = {
   title: 'Card',
@@ -10,7 +11,7 @@ export default meta;
 
 type CardProps = {
   cardNumbers: string[];
-  date: Record<string, string>;
+  date: Date;
   ownerName: string;
 };
 

@@ -3,12 +3,13 @@ import { DATE_PLACEHOLDER } from '../../../constants/input';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
 import { checkExpired, checkValidMonth, checkValidYear } from '../../../utils/checkDate';
+import { Date } from '../../../types/date';
 
 export default function CardExpirationDateInputField({
   date,
   setDate,
 }: {
-  date: Record<string, string>;
+  date: Date;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
 }) {
   const [errorMessages, setErrorMessages] = useState(new Array(Object.keys(date).length).fill(''));

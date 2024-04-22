@@ -3,16 +3,9 @@ import Visa from '../../assets/image/Visa.png';
 import MasterCard from '../../assets/image/Mastercard.png';
 import hideNumber from '../../assets/image/CardNumberBlind.svg';
 import { getCardType } from '../../utils/getCardType';
+import { Date } from '../../types/date';
 
-const Card = ({
-  cardNumbers,
-  date,
-  ownerName,
-}: {
-  cardNumbers: string[];
-  date: Record<string, string>;
-  ownerName: string;
-}) => {
+const Card = ({ cardNumbers, date, ownerName }: { cardNumbers: string[]; date: Date; ownerName: string }) => {
   const displayCardLogo = () => {
     const cardStyle = styles.logo;
     const cardType = getCardType(cardNumbers[0]);
