@@ -3,9 +3,11 @@ import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard"
 import CreditCard from "../../components/creditCard";
 import CreditCardForm from "../../components/creditCardForm";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import { CARD_FORM_TYPE } from "../../constants/cardFormType";
 import SIGN from "../../constants/sign";
 import useInput from "../../hooks/useInput";
+import InputCreditCardNumber from "../../components/input/InputCreditCardNumber";
+import InputExpirationPeriod from "../../components/input/InputExpirationPeriod";
+import InputOwnerName from "../../components/input/InputOwnerName";
 
 interface Owner {
   name: string;
@@ -27,7 +29,7 @@ const Payments = () => {
 
   const [owner, setOwner, ownerError] = useInput<Owner>({ name: SIGN.empty });
 
-  const concatPeriod = () =>
+  const formatExpirationPeriod = () =>
     expirationPeriod.year.length
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
       : expirationPeriod.month;
@@ -41,33 +43,35 @@ const Payments = () => {
           cardNumber.thirdValue,
           cardNumber.fourthValue,
         ]}
-        expirationPeriod={concatPeriod()}
+        expirationPeriod={formatExpirationPeriod()}
         ownerName={owner.name}
       />
       <InputFormContainer>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardNumber}
           description={CARD_FORM_MESSAGE.cardNumberDescription}
-          type={CARD_FORM_TYPE.cardNumber}
-          inputValue={cardNumber}
-          handleChange={setCardNumber}
           inputError={cardNumberError}
-        />
+        >
+          <InputCreditCardNumber
+            inputValue={cardNumber}
+            handleChange={setCardNumber}
+            inputError={cardNumberError}
+          />
+        </CreditCardForm>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardExpirationDate}
           description={CARD_FORM_MESSAGE.cardExpirationDateDescription}
-          type={CARD_FORM_TYPE.expirationPeriod}
-          inputValue={expirationPeriod}
-          handleChange={setExpirationPeriod}
           inputError={expirationPeriodError}
-        />
-        <CreditCardForm
-          title={CARD_FORM_MESSAGE.inputCardOwner}
-          type={CARD_FORM_TYPE.owner}
-          inputValue={owner.name}
-          handleChange={setOwner}
-          inputError={ownerError}
-        />
+        >
+          <InputExpirationPeriod
+            inputValue={expirationPeriod}
+            handleChange={setExpirationPeriod}
+            inputError={expirationPeriodError}
+          />
+        </CreditCardForm>
+        <CreditCardForm title={CARD_FORM_MESSAGE.inputCardOwner} inputError={ownerError}>
+          <InputOwnerName inputValue={owner.name} handleChange={setOwner} inputError={ownerError} />
+        </CreditCardForm>
       </InputFormContainer>
     </PaymentsContainer>
   );
