@@ -9,7 +9,7 @@ interface SelectProps {
 
 const Select: React.FC<SelectProps> = ({ value = '', placeholder = '', options, onChange }) => {
   return (
-    <select className={`${textStyle.formItem} ${value ? '' : textStyle.placeholder}`} value={value} onChange={onChange}>
+    <select className={`${textStyle.formItem}`} value={value} onChange={onChange}>
       <option value="" selected disabled hidden>
         {placeholder}
       </option>
