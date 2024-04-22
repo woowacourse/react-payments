@@ -29,6 +29,15 @@ const Card = ({
     if (isVisaCard(cardNumbers[0])) return <img src={MasterCard} className={cardStyle} />;
   };
 
+  const displayExpirationDate = () => {
+    const dateStringList = Object.values(date);
+
+    // 모두 빈 칸이라면 /를 띄우지 않도록
+    if (dateStringList.every((date) => date === '')) return;
+
+    return <span>{dateStringList.join('/')}</span>;
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.ic_chip}></div>
@@ -49,15 +58,8 @@ const Card = ({
           ))}
           <div />
         </div>
-        <div>
-          {Object.values(date).map((date, i) => (
-            <span style={{ color: 'white' }}>
-              {date}
-              {i < Object.values(date).length - 1 && '/'}
-            </span>
-          ))}
-        </div>
-        <span style={{ color: 'white' }}>{ownerName}</span>
+        <div>{displayExpirationDate()}</div>
+        <span>{ownerName}</span>
       </div>
     </div>
   );
