@@ -25,16 +25,15 @@ const isMaster = (cardNumbers?: number) => {
   return cardNumbers && pattern.test(cardNumbers?.toString());
 };
 
+const getCardImage = (number?: number) => {
+  return isVisa(number) ? visaImage : isMaster(number) ? masterImage : null;
+};
+
 const CreditCard = () => {
   const cardNumbers = useContext(CardNumbersContext)![0];
   const { month, year } = useContext(CardValidityPeriodContext)![0];
   const cardOwnerInfo = useContext(CardOwnerInfoContext)![0];
-
-  const cardImage = isVisa(cardNumbers?.firstNumbers)
-    ? visaImage
-    : isMaster(cardNumbers?.firstNumbers)
-      ? masterImage
-      : null;
+  const cardImage = getCardImage(cardNumbers?.firstNumbers);
 
   return (
     <div css={style}>
