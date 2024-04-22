@@ -29,13 +29,13 @@ const CardNumberInput = () => {
       });
       setCardNumberError((prev: CardNumbersError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: true, errorMessage };
+        errors[name] = { isError: false, errorMessage: "" };
         return errors;
       });
     } else {
       setCardNumberError((prev: CardNumbersError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: false, errorMessage: undefined };
+        errors[name] = { isError: true, errorMessage };
         return errors;
       });
     }
@@ -75,13 +75,13 @@ const CardPeriodInput = () => {
       });
       setPeriodError((prev: CardValidityPeriodError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: true, errorMessage };
+        errors[name] = { isError: false, errorMessage: "" };
         return errors;
       });
     } else {
       setPeriodError((prev: CardValidityPeriodError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: false, errorMessage: undefined };
+        errors[name] = { isError: true, errorMessage };
         return errors;
       });
     }
@@ -122,13 +122,13 @@ const CardOwnerInput = () => {
       });
       setOwnerError((prev: CardOwnerInfoError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: true, errorMessage };
+        errors[name] = { isError: false, errorMessage: "" };
         return errors;
       });
     } else {
       setOwnerError((prev: CardOwnerInfoError) => {
         const errors = JSON.parse(JSON.stringify(prev));
-        errors[name] = { isError: false, errorMessage: undefined };
+        errors[name] = { isError: true, errorMessage };
         return errors;
       });
     }
