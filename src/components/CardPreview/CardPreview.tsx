@@ -7,7 +7,7 @@ import BRAND_TABLE from '../../constants/table';
 import * as Styled from './CardPreview.styled'
 
 const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumber, cardBrand, expirationMonth, expirationYear, name } = props;
+  const { cardNumbers, cardBrand, expirationMonth, expirationYear, name } = props;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [animationProps, setAnimationProps] = useState<CardAnimationProps>({
@@ -43,10 +43,10 @@ const CardPreview = ({ ...props }: CardInfo) => {
         {cardBrand !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand]} /> : <></>}
       </Styled.CardHeader>
       <Styled.CardNumbers>
-        <Styled.CardNumber>{cardNumber[0]}</Styled.CardNumber>
-        <Styled.CardNumber>{cardNumber[1]}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumber[2])}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumber[3])}</Styled.CardNumber>
+        <Styled.CardNumber>{cardNumbers[0]}</Styled.CardNumber>
+        <Styled.CardNumber>{cardNumbers[1]}</Styled.CardNumber>
+        <Styled.CardNumber>{secureNumber(cardNumbers[2])}</Styled.CardNumber>
+        <Styled.CardNumber>{secureNumber(cardNumbers[3])}</Styled.CardNumber>
       </Styled.CardNumbers>
       <Styled.CardNameAndExpiration>
         <Styled.CardNameContainer>

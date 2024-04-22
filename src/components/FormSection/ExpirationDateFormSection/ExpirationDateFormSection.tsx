@@ -6,10 +6,14 @@ import OPTION from '../../../constants/option';
 import * as Styled from '../FormSection.styled';
 import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSection';
 
+interface ExpirationFormSectionProps {
+  changeExpiration: (expiration: Expiration) => void;
+  expiration: Expiration;
+}
 
-const ExpirationDateFormSection = ({ changeExpiration }: ExpirationFormSectionProps) => {
+const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationFormSectionProps) => {
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ changeExpiration })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ changeExpiration, expiration })
 
   return (
     <Styled.FormSection>
@@ -23,20 +27,20 @@ const ExpirationDateFormSection = ({ changeExpiration }: ExpirationFormSectionPr
           <PaymentsInputField
             placeholder="MM"
             maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[0].value}
-            hasError={inputState[0].hasError}
-            handleValueChange={(e) => onChange(e, 0)}
-            handleOnFocus={() => handleOnFocus(0)}
-            handleOnBlur={() => handleOnBlur(0)}
+            value={expiration.month}
+            hasError={inputState.month.hasError}
+            handleValueChange={(e) => onChange(e, 'month')}
+            handleOnFocus={() => handleOnFocus('month')}
+            handleOnBlur={() => handleOnBlur('month')}
           />
           <PaymentsInputField
             placeholder="YY"
             maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[1].value}
-            hasError={inputState[1].hasError}
-            handleValueChange={(e) => onChange(e, 1)}
-            handleOnFocus={() => handleOnFocus(1)}
-            handleOnBlur={() => handleOnBlur(1)}
+            value={expiration.year}
+            hasError={inputState.year.hasError}
+            handleValueChange={(e) => onChange(e, 'year')}
+            handleOnFocus={() => handleOnFocus('year')}
+            handleOnBlur={() => handleOnBlur('year')}
           />
         </Styled.InputFieldContainer>
         <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>

@@ -12,7 +12,12 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
     text-transform: uppercase;
   `;
 
-const NameFormSection = ({ changeName }: NameFormSectionProps) => {
+interface NameFormSectionProps {
+  changeName: (name: string) => void;
+  name: string;
+}
+
+const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
 
   const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ changeName })
 
@@ -26,8 +31,8 @@ const NameFormSection = ({ changeName }: NameFormSectionProps) => {
             className="name-form-section"
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
-            value={inputState[0].value}
-            hasError={inputState[0].hasError}
+            value={name}
+            hasError={inputState.errorMessage.length !== 0}
             handleValueChange={(e) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}

@@ -1,14 +1,16 @@
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
-import OPTION from '../../../constants/option';
-
 import * as Styled from '../FormSection.styled';
+
 import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 
-const CardNumbersFormSection = ({ changeCardNumber }: CardNumbersFormSectionProps) => {
+import OPTION from '../../../constants/option';
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ changeCardNumber })
+
+
+const CardNumbersFormSection = ({ changeCardNumbers, value }: CardNumbersFormSectionProps) => {
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ changeCardNumbers, value })
 
   return (
     <Styled.FormSection>
@@ -24,7 +26,7 @@ const CardNumbersFormSection = ({ changeCardNumber }: CardNumbersFormSectionProp
               key={index}
               placeholder="1234"
               maxLength={OPTION.cardNumberMaxLength}
-              value={inputState[index].value}
+              value={value[index]}
               hasError={inputState[index].hasError}
               handleValueChange={(e) => onChange(e, index)}
               handleOnFocus={() => handleOnFocus(index)}

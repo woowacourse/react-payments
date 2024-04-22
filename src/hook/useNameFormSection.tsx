@@ -1,94 +1,39 @@
 import { useState } from "react";
-import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage";
-import useUpdatePreviewState from "./useUpdatePreviewState";
+import ERROR_MESSAGE from "../constants/errorMessage"
 
 const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
-  const [inputState, setInputState] = useUpdatePreviewState(
-    [{
-      value: '',
-      hasError: false,
-      hasFocus: false,
-    }]
-  );
-  const [errorMessage, setErrorMessage] = useState('');
+  const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
+    const inputValue = event.target.value;
 
-    if (newValue.length <= OPTION.nameMaxLength && !REGEX.name.test(newValue)) {
-      setInputState((prevState) => ([
-        {
-          ...prevState[0],
-          value: newValue.slice(0, newValue.length - 1),
-          hasError: true,
-        },]
-      ), (newState: InputStates) => {
-        changeName(newState[0].value)
-      });
-      setErrorMessage(ERROR_MESSAGE.onlyEnglish);
-    } else if (newValue.length > OPTION.nameMaxLength) {
-      setInputState((prevState) => ([{
-        ...prevState[0],
-        value: newValue.slice(0, OPTION.nameMaxLength),
-        hasError: false,
-      }]), (newState: InputStates) => {
-        changeName(newState[0].value)
-      });
-    } else {
-      setInputState((prevState) => ([{
-        ...prevState[0],
-        value: newValue,
-        hasError: false,
-      },]
-      ), (newState: InputStates) => {
-        changeName(newState[0].value)
-      });
+    if (!REGEX.name.test(inputValue) && inputValue.length !== 0) {
+      setInputState({ ...inputState, errorMessage: ERROR_MESSAGE.onlyEnglish })
+      changeName(inputValue.slice(0, -1))
     }
-  };
+    else {
+      setInputState({ ...inputState, errorMessage: '' })
+      changeName(inputValue)
+    }
+  }
 
   const handleOnFocus = () => {
-    setInputState((prevState) => ([{
-      ...prevState[0],
-      hasFocus: true,
-    },]
-    ));
+    setInputState({ ...inputState, hasFocus: true });
 
-    resetErrors();
+    setInputState({ ...inputState, errorMessage: '' })
   };
 
   const handleOnBlur = () => {
-    setInputState((prevState) => ([{
-      ...prevState[0],
-      hasFocus: false,
-    },
-    ]));
+    setInputState({ ...inputState, hasFocus: false })
 
-    if (checkHasNoFocus()) {
-      resetErrors();
+    if (!inputState.hasFocus) {
+      setInputState({ ...inputState, errorMessage: '' })
     }
   };
 
-  const checkHasNoFocus = () => {
-    return Object.values(inputState).every((field) => !field.hasFocus);
-  }
 
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[Number(key)];
-      acc[Number(key)] = { ...field, hasError: false };
-      return acc;
-    }, []);
-
-    setInputState(() => newState, (newState: InputStates) => {
-      changeName(newState[0].value);
-    });
-    setErrorMessage('');
-  };
-
-
-  return [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] as const;
+  return [inputState, onChange, inputState.errorMessage, handleOnFocus, handleOnBlur] as const;
 };
 
 export default useNameFormSection;

@@ -5,30 +5,30 @@ import NameFormSection from '../FormSection/NameFormSection/NameFormSection';
 
 import { Container } from './CardInfo.styled';
 
-interface ChangeExpirationProps {
-  month: string;
-  year: string;
-}
-
 const CardInfo = ({ ...props }) => {
-  const { changeCardInfo } = props;
+  const { setCardInfo, cardInfo } = props;
 
-  const changeCardBrand = (cardNumber: string[]) => {
-    if (startsWithNumberRegex(4).test(cardNumber[0])) {
+  const changeCardBrand = (cardNumber: string) => {
+    if (startsWithNumberRegex(4).test(cardNumber)) {
       return ('Visa');
-    } else if (startsWithNumberRegex(51, 55).test(cardNumber[0])) {
+    } else if (startsWithNumberRegex(51, 55).test(cardNumber)) {
       return ('MasterCard');
     } else {
       return ('none');
     }
   }
 
-  const changeCardNumber = (cardNumber: string[]) => {
-    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber, cardBrand: changeCardBrand(cardNumber) }));
+  const changeCardNumbers = (cardNumber: string, index: number) => {
+    const newCardInfo = [...cardInfo.cardNumbers]
+    newCardInfo[index] = cardNumber
+    setCardInfo((prev: CardInfo) => ({ ...prev, cardNumbers: newCardInfo, }));
+    if (index === 0) {
+      setCardInfo((prev: CardInfo) => ({ ...prev, cardBrand: changeCardBrand(cardNumber) }))
+    }
   };
 
-  const changeExpiration = ({ month, year }: ChangeExpirationProps) => {
-    changeCardInfo((prev: CardInfo) => ({
+  const changeExpiration = ({ month, year }: Expiration) => {
+    setCardInfo((prev: CardInfo) => ({
       ...prev,
       expirationMonth: month,
       expirationYear: year,
@@ -36,14 +36,14 @@ const CardInfo = ({ ...props }) => {
   };
 
   const changeName = (name: string) => {
-    changeCardInfo((prev: CardInfo) => ({ ...prev, name: name }));
+    setCardInfo((prev: CardInfo) => ({ ...prev, name: name }));
   };
 
   return (
     <Container>
-      <CardNumbersFormSection changeCardNumber={changeCardNumber} />
-      <ExpirationDateFormSection changeExpiration={changeExpiration} />
-      <NameFormSection changeName={changeName} />
+      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers} />
+      <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={{ month: cardInfo.expirationMonth, year: cardInfo.expirationYear }} />
+      <NameFormSection changeName={changeName} name={cardInfo.name} />
     </Container>
   );
 };

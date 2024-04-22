@@ -7,21 +7,17 @@ import { MainContainer } from './MainPage.styled';
 
 const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumber: ['', '', '', ''],
+    cardNumbers: ['', '', '', ''],
     cardBrand: 'none',
     expirationMonth: '',
     expirationYear: '',
     name: '',
   });
 
-  const changeCardInfo = (cardInfo: CardInfo) => {
-    setCardInfo(cardInfo);
-  };
-
   return (
     <MainContainer>
       <CardPreview {...cardInfo} />
-      <CardInfo changeCardInfo={changeCardInfo} />
+      <CardInfo setCardInfo={setCardInfo} cardInfo={cardInfo} />
     </MainContainer>
   );
 };
