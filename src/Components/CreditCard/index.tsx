@@ -16,16 +16,23 @@ const formatTwoDigitNumber = (n: number | undefined) => {
   return String(n).padStart(2, "0");
 };
 
+const isVisa = (cardNumbers?: number) => {
+  return cardNumbers?.toString().startsWith("4");
+};
+
+const isMaster = (cardNumbers?: number) => {
+  const pattern = /^(51|52|53|54)/;
+  return cardNumbers && pattern.test(cardNumbers?.toString());
+};
+
 const CreditCard = () => {
   const cardNumbers = useContext(CardNumbersContext)![0];
-  const cardValidityPeriod = useContext(CardValidityPeriodContext)![0];
+  const { month, year } = useContext(CardValidityPeriodContext)![0];
   const cardOwnerInfo = useContext(CardOwnerInfoContext)![0];
 
-  const pattern = /^(51|52|53|54)/;
-  const { month, year } = cardValidityPeriod!;
-  const cardImage = cardNumbers?.firstNumbers?.toString().startsWith("4")
+  const cardImage = isVisa(cardNumbers?.firstNumbers)
     ? visaImage
-    : cardNumbers?.firstNumbers && pattern.test(cardNumbers?.firstNumbers?.toString())
+    : isMaster(cardNumbers?.firstNumbers)
       ? masterImage
       : null;
 
@@ -39,15 +46,7 @@ const CreditCard = () => {
         <div css={rowStyle}>
           {Object.values(cardNumbers)?.map((part, index) => (
             <div key={index} css={width42}>
-              {part && index < 2
-                ? part
-                : part
-                  ? part
-                      .toString()
-                      .split("")
-                      .map(() => "*")
-                      .join("")
-                  : ""}
+              {part && index < 2 ? part : "*".repeat(part?.length ?? 0)}
             </div>
           ))}
         </div>
