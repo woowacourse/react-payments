@@ -3,7 +3,7 @@ import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview, {
   CardType,
 } from "@/components/CreditCardPreview/CreditCardPreview";
-import useInput from "@/hooks/useInput";
+import useInputs from "@/hooks/useInputs";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
 import { makeStringArray } from "@/components/utils/arrayHelper";
 import {
@@ -12,20 +12,20 @@ import {
 } from "@/components/utils/validation";
 
 const CardRegister = () => {
-  const cardNumbersState = useInput({
+  const cardNumbersState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
     maxNumberLength: 4,
     validLength: 4,
   });
 
-  const expiredDateState = useInput({
+  const expiredDateState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
     maxNumberLength: 2,
     validLength: 2,
     onBlurValidators: expirationDateValidators,
   });
 
-  const ownerNameState = useInput({
+  const ownerNameState = useInputs({
     initialValue: makeStringArray(1),
     onChangeValidators: ownerNameValidators,
   });

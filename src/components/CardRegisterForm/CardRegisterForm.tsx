@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent } from "react";
-import useInput from "@/hooks/useInput";
+import useInputs from "@/hooks/useInputs";
 import {
   PLACE_HOLDER,
   INPUT_INFO_TITLE,
@@ -11,9 +11,9 @@ import Input from "@/components/Input/Input";
 import S from "./style";
 
 interface Props {
-  cardNumbersState: ReturnType<typeof useInput>;
-  expiredPeriodState: ReturnType<typeof useInput>;
-  ownerNameState: ReturnType<typeof useInput>;
+  cardNumbersState: ReturnType<typeof useInputs>;
+  expiredPeriodState: ReturnType<typeof useInputs>;
+  ownerNameState: ReturnType<typeof useInputs>;
 }
 
 const CardRegisterForm = ({

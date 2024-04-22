@@ -1,25 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardRegisterForm from "./CardRegisterForm";
-import useInput from "@/hooks/useInput";
+import useInputs from "@/hooks/useInputs";
 import { makeStringArray } from "../utils/arrayHelper";
 import { INPUT_COUNTS } from "@/constants/condition";
-import { validateExpirationDate, ownerNameValidators } from "../utils/validation";
+import {
+  validateExpirationDate,
+  ownerNameValidators,
+} from "../utils/validation";
 
 const CardRegisterFormWithHook = () => {
-  const cardNumbersState = useInput({
+  const cardNumbersState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
     maxNumberLength: 4,
     validLength: 4,
   });
 
-  const expiredDateState = useInput({
+  const expiredDateState = useInputs({
     initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
     maxNumberLength: 2,
     validLength: 2,
     onBlurValidate: validateExpirationDate,
   });
 
-  const ownerNameState = useInput({
+  const ownerNameState = useInputs({
     initialValue: makeStringArray(1),
     onChangeValidators: ownerNameValidators,
   });
