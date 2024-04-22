@@ -63,9 +63,9 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
           <div className={styles.inputWrap}>
             <Input
               style={{ textTransform: 'uppercase' }}
-              name="month"
+              name="name"
               type="text"
-              label="카드 사용자 이름"
+              label={CARD_USER_FORM_MESSAGE.label}
               placeholder={namePlaceholder}
               onChange={handleChange}
               value={userName}
