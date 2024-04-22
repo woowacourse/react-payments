@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 import {
   CARD_CVC,
@@ -8,17 +8,20 @@ import {
 } from '../../constants';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
+import { CardSide } from '../CardPreview';
 import Input from '../Input';
+import InputErrorMessage from '../InputErrorMessage';
 
 import styles from './style.module.css';
-import InputErrorMessage from './../InputErrorMessage/index';
 
 interface CardCVCInputProps {
+  setCardSide: Dispatch<SetStateAction<CardSide>>;
   editCardCVC: (cvc: string) => void;
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const { editCardCVC } = props;
+  const { editCardCVC, setCardSide } = props;
+
   const [cvc, setCVC] = useState('');
   const [cvcError, setCVCError] = useState(false);
 
@@ -49,6 +52,8 @@ function CardCVCInput(props: CardCVCInputProps) {
           error={cvcError}
           type="number"
           onChange={handleChange}
+          onBlur={() => setCardSide('front')}
+          onFocus={() => setCardSide('back')}
           value={cvc}
         />
       </div>

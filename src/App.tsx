@@ -10,6 +10,8 @@ import {
   CardUserNameInput,
 } from './components';
 import useCardInfoReducer from './modules/useCardInfoReducer';
+import { useState } from 'react';
+import { CardSide } from './components/CardPreview';
 
 function App() {
   const {
@@ -22,14 +24,15 @@ function App() {
     editCardCVC,
   } = useCardInfoReducer();
 
+  const [cardSide, setCardSide] = useState<CardSide>('front');
+
   return (
     <div id="app">
       <div className="inner">
-        <CardPreview cardInfo={cardInfo} />
-
+        <CardPreview side={cardSide} cardInfo={cardInfo} />
         <form className="form-container">
           <fieldset>
-            <CardCVCInput editCardCVC={editCardCVC} />
+            <CardCVCInput setCardSide={setCardSide} editCardCVC={editCardCVC} />
             <CardUserNameInput editCardUserName={editCardUserName} />
             <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
             <CardCompanySelect editCardCompany={editCardCompany} />
