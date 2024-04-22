@@ -2,7 +2,8 @@ import styles from './style.module.css';
 
 type InputType = 'text' | 'number';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: InputType;
   name?: string;
   value: string;
@@ -12,28 +13,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function Input({
-  type = 'text',
-  name = '',
-  value,
-  maxLength = 2,
-  placeholder,
-  isError = false,
-  onChange,
-}: InputProps) {
+function Input({ isError = false, ...rest }: InputProps) {
   const className = `${styles.input} ${isError ? styles.error : ''}`;
 
-  return (
-    <input
-      className={className}
-      type={type}
-      name={name}
-      value={value}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={onChange}
-    />
-  );
+  return <input className={className} {...rest} />;
 }
 
 export default Input;
