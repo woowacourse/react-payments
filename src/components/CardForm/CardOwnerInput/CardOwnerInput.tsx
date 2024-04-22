@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
@@ -14,9 +14,10 @@ interface CardOwnerInputProps {
 
 function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const errorMessage = useMemo(() => {
-    return isValid ? '' : ERROR_MESSAGE.INVALID_CARD_OWNER;
+  useEffect(() => {
+    isValid ? setErrorMessage('') : setErrorMessage(ERROR_MESSAGE.INVALID_CARD_OWNER);
   }, [isValid]);
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {

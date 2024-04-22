@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
@@ -15,9 +15,10 @@ interface CardNumberInputProps {
 
 function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProps) {
   const [isValid, setIsValid] = useState([true, true, true, true]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const errorMessage = useMemo(() => {
-    return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER;
+  useEffect(() => {
+    isValid.every(Boolean) ? setErrorMessage('') : setErrorMessage(ERROR_MESSAGE.INVALID_CARD_NUMBER);
   }, [isValid]);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
@@ -16,11 +16,20 @@ interface CardExpirationInputProps {
 function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputProps) {
   const [isValidMonth, setIsValidMonth] = useState(true);
   const [isValidYear, setIsValidYear] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const errorMessage = useMemo(() => {
-    if (!isValidMonth) return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH;
-    if (!isValidYear) return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
-    return '';
+  useEffect(() => {
+    if (!isValidMonth) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_MONTH);
+      return;
+    }
+
+    if (!isValidYear) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_YEAR);
+      return;
+    }
+
+    setErrorMessage('');
   }, [isValidMonth, isValidYear]);
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
