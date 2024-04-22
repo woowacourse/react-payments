@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Base/Input',
+  title: 'Components/Input',
   component: Input,
   parameters: {
     layout: 'centered',

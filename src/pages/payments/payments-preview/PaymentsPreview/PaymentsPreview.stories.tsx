@@ -3,7 +3,7 @@ import { generateArgTypes } from '@utils/storybook/generateArgTypes';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Payments/PreviewCreditCard',
+  title: 'Payments/PaymentsPreview/PaymentsPreview',
   component: PaymentsPreview,
   parameters: {
     layout: 'centered',

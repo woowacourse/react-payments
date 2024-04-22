@@ -7,7 +7,7 @@ import { fn } from '@storybook/test';
 import { ERROR_MESSAGE } from '@constants/index';
 
 const meta = {
-  title: 'Payments/ExpirationDateTextField',
+  title: 'Payments/PaymentsForm/ExpirationDate/ExpirationDateTextField',
   component: ExpirationDateTextField,
   parameters: {
     layout: 'centered',

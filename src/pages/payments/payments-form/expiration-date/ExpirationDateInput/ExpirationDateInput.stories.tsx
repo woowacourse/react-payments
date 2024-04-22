@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Payments/ExpirationDateInput',
+  title: 'Payments/PaymentsForm/ExpirationDate/ExpirationDateInput',
   component: ExpirationDateInput,
   parameters: {
     layout: 'centered',

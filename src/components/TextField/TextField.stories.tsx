@@ -3,7 +3,7 @@ import { CardNumberInput } from '@pages/payments';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Base/TextField',
+  title: 'Components/TextField',
   parameters: {
     layout: 'centered',
     docs: {

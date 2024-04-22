@@ -7,7 +7,7 @@ import { fn } from '@storybook/test';
 import { ERROR_MESSAGE } from '@constants/index';
 
 const meta = {
-  title: 'Payments/CardNumberTextField',
+  title: 'Payments/PaymentsForm/CardNumber/CardNumberTextField',
   component: CardNumberTextField,
   parameters: {
     layout: 'centered',
