@@ -17,14 +17,12 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
     return;
   }
 
-  const firstCardNumber = cardNumbers[0];
-
-  if (firstCardNumber.startsWith("4")) {
+  if (cardNumbers[0].startsWith("4")) {
     cardType = Visa;
   }
 
-  if (firstCardNumber.startsWith("5")) {
-    const firstTwoDigits = firstCardNumber.slice(0, 2);
+  if (cardNumbers[0].startsWith("5")) {
+    const firstTwoDigits = cardNumbers[0].slice(0, 2);
     if (CARD_TYPES.MASTERCARD.includes(Number(firstTwoDigits))) {
       cardType = MasterCard;
     }
