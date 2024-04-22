@@ -16,7 +16,7 @@ export default function CardExpirationDateInputField({
   const { errorMessages, setErrorMessages } = useErrorMessages<string>(Object.keys(date).length, '');
 
   // 여긴 최신 오류 순서가 아닌 0부터 시작함..
-  const checkValidDate = ({ month = date.month, year = date.year }: { month?: string; year?: string }) => {
+  const checkValidDate = ({ month = date.month, year = date.year }) => {
     const isExpiredDate = checkExpired(month, year);
 
     const monthErrorMessage = checkValidMonth(month, isExpiredDate);
