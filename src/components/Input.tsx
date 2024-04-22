@@ -61,19 +61,17 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
   };
 
   return (
-    <>
-      <input
-        maxLength={maxLengthTable[informationDetail]}
-        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-          if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
-        }}
-        type={getInputType()}
-        min={0}
-        css={inputStyle({ borderColor: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
-        placeholder={placeholder}
-        onChange={(e) => handleInputChange(e.target.value)}
-      ></input>
-    </>
+    <input
+      maxLength={maxLengthTable[informationDetail]}
+      onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+      }}
+      type={getInputType()}
+      min={0}
+      css={inputStyle({ borderColor: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
+      placeholder={placeholder}
+      onChange={(e) => handleInputChange(e.target.value)}
+    ></input>
   );
 }
 

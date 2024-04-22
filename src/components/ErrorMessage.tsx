@@ -10,11 +10,7 @@ interface ErrorMessageType {
 }
 
 function ErrorMessage({ value }: ErrorMessageType) {
-  return (
-    <>
-      <p css={errorMessageStyle}>{value}</p>
-    </>
-  );
+  return <p css={errorMessageStyle}>{value}</p>;
 }
 
 export default ErrorMessage;

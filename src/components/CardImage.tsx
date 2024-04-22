@@ -96,28 +96,25 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
   };
 
   return (
-    <>
-      {/* 카드 배경 영역 */}
-      <div css={cardContainerStyle}>
-        {/* 헤더 */}
-        <div css={cardHeaderStyle}>
-          <div css={cardIcStyle}></div>
-          {imageUrl && <img src={imageUrl} css={cardLogoStyle} />}
-        </div>
-        {/* 컨텐츠 */}
-        <div css={cardContentStyle}>
-          <div css={[cardDetailStyle, cardNumberGridStyle]}>
-            {formatCardDisplayNumber(cardNumber, [CARD_DISPLAY_INDEX.third, CARD_DISPLAY_INDEX.fourth]).map(
-              (numbers, index) => {
-                return <p key={index}>{numbers}</p>;
-              },
-            )}
-          </div>
-          <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
-          <p css={cardDetailStyle}>{cardOwner}</p>
-        </div>
+    <div css={cardContainerStyle}>
+      {/* 헤더 */}
+      <div css={cardHeaderStyle}>
+        <div css={cardIcStyle}></div>
+        {imageUrl && <img src={imageUrl} css={cardLogoStyle} />}
       </div>
-    </>
+      {/* 컨텐츠 */}
+      <div css={cardContentStyle}>
+        <div css={[cardDetailStyle, cardNumberGridStyle]}>
+          {formatCardDisplayNumber(cardNumber, [CARD_DISPLAY_INDEX.third, CARD_DISPLAY_INDEX.fourth]).map(
+            (numbers, index) => {
+              return <p key={index}>{numbers}</p>;
+            },
+          )}
+        </div>
+        <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
+        <p css={cardDetailStyle}>{cardOwner}</p>
+      </div>
+    </div>
   );
 }
 
