@@ -8,7 +8,8 @@ export const hasFourDigit = (value: string) => {
 
 export const hasTwoDigit = (value: string) => value.length === 2;
 
-export const isValidMonth = (value: string) => 1 <= Number(value) && Number(value) <= 12;
+export const isValidMonth = (value: string) =>
+  1 <= Number(value) && Number(value) <= 12;
 
 export const isValidDate = ({ year, month }: ExpirationDate) => {
   if (year === "") return true;
@@ -20,6 +21,6 @@ export const isValidDate = ({ year, month }: ExpirationDate) => {
 };
 
 export const isEnglishCharacter = (value: string) => {
-  const regex = /^[a-zA-Z\s]+$/;
+  const regex = /^(?:[a-zA-Z\s]+)?$/;
   return regex.test(value);
 };
