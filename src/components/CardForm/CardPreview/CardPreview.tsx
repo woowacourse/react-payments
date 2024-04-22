@@ -11,14 +11,22 @@ interface CardPreviewProps {
 }
 
 function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
-  const makeCardLogoImage = (cardNumber: string[]) => {
-    if (isVisaCard(cardNumber)) {
+  const makeCardLogoImage = (cardNumbers: string[]) => {
+    if (isVisaCard(cardNumbers)) {
       return <img src={Visa} alt="비자 카드" />;
     }
 
-    if (isMasterCard(cardNumber)) {
+    if (isMasterCard(cardNumbers)) {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
+  };
+
+  const makeCardNumber = (cardNumber: string, index: number) => {
+    return index <= 1 ? `${cardNumber}` : makeMaskedNumber(cardNumber);
+  };
+
+  const makeMaskedNumber = (cardNumber: string) => {
+    return Array.from({ length: cardNumber.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
   };
 
   return (
@@ -31,13 +39,7 @@ function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
         <S.InfoContainer>
           {cardNumber.map((number, index) => (
             <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
-              {number
-                ? index <= 1
-                  ? `${number} `
-                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, idx) => (
-                      <img src={Dot} key={idx} alt="dot" />
-                    ))
-                : ''}
+              {number ? makeCardNumber(number, index) : ''}
             </S.InfoBox>
           ))}
         </S.InfoContainer>
