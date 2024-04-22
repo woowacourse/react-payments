@@ -17,14 +17,13 @@ const InputCreditCardNumber = ({
 }: InputCreditCardNumberProps) => {
   return (
     <InputContainer>
-      <InputLabel htmlFor="creditCardNumber">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
-      <InputWrapper>
+      <InputLabel id="creditCardNumberLabel">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
+      <InputWrapper aria-labelledby="creditCardNumberLabel">
         <InputBox
           inputValue={inputValue.firstValue}
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          id="creditCardNumber"
           name={CARD_INPUTBOX_NAME.cardNumber.firstValue}
           isError={inputError}
         />
@@ -33,7 +32,6 @@ const InputCreditCardNumber = ({
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          id="creditCardNumber"
           name={CARD_INPUTBOX_NAME.cardNumber.secondValue}
           isError={inputError}
         />
@@ -42,7 +40,6 @@ const InputCreditCardNumber = ({
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          id="creditCardNumber"
           name={CARD_INPUTBOX_NAME.cardNumber.thirdValue}
           isError={inputError}
         />
@@ -51,7 +48,6 @@ const InputCreditCardNumber = ({
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          id="creditCardNumber"
           name={CARD_INPUTBOX_NAME.cardNumber.fourthValue}
           isError={inputError}
         />
