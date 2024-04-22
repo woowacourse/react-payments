@@ -37,7 +37,8 @@ const CreditCardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 44px;
+  position: relative;
+  top: 44px;
   padding: 0 12px;
 `;
 
@@ -48,24 +49,24 @@ const CreditCardInfoWrapper = styled.div`
   height: 20px;
 `;
 
-const CreditCardInfoNumber = styled.h3`
+const CreditCardInfoNumber = styled.span`
   width: 42px;
   height: 20px;
   overflow: hidden;
 `;
 
-const CreditCardInfoSymbol = styled.h3`
+const CreditCardInfoSymbol = styled.span`
   font-size: 8px;
   width: 42px;
   height: 20px;
   overflow: hidden;
 `;
 
-const CreditCardExpirationPeriod = styled.h3`
+const CreditCardExpirationPeriod = styled.span`
   height: 20px;
 `;
 
-const CreditCardOwnerInfo = styled.h3`
+const CreditCardOwnerInfo = styled.span`
   width: 100%;
   height: 20px;
   white-space: nowrap;
