@@ -5,7 +5,7 @@ type InputType = 'text' | 'number';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: InputType;
   name?: string;
-  value?: string | number;
+  value: string;
   maxLength?: number;
   placeholder: string;
   isError?: boolean;

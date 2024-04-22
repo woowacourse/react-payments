@@ -1,7 +1,6 @@
 import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
-  INPUT_LENGTH,
 } from '../../constants';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
@@ -22,12 +21,14 @@ type PeriodErrorsState = {
 };
 
 type CardExpirationPeriodInputProps = {
+  maxLength: number;
   period: PeriodState;
   periodErrors: PeriodErrorsState;
   onPeriodChange: (type: 'month' | 'year', value: string) => void;
 };
 
 export default function CardExpirationPeriodInput({
+  maxLength,
   period,
   periodErrors,
   onPeriodChange,
@@ -58,7 +59,7 @@ export default function CardExpirationPeriodInput({
               type="number"
               name="month"
               value={period.month}
-              maxLength={INPUT_LENGTH.CARD_EXPIRATION}
+              maxLength={maxLength}
               placeholder={monthPlaceholder}
               isError={periodErrors.month || periodErrors.expired}
               onChange={(event) => onPeriodChange('month', event.target.value)}
@@ -67,7 +68,7 @@ export default function CardExpirationPeriodInput({
               type="number"
               name="year"
               value={period.year}
-              maxLength={INPUT_LENGTH.CARD_EXPIRATION}
+              maxLength={maxLength}
               placeholder={yearPlaceholder}
               isError={periodErrors.year || periodErrors.expired}
               onChange={(event) => onPeriodChange('year', event.target.value)}

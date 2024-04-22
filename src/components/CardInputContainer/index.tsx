@@ -5,9 +5,6 @@ import styles from './style.module.css';
 interface CardInputContainerProps {
   title: string;
   subTitle: string;
-  /**
-   * 커스텀한  CardInput
-   */
   children: ReactNode;
 }
 

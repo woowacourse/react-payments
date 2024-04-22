@@ -1,8 +1,4 @@
-import {
-  CARD_USER_FORM_MESSAGE,
-  ERROR_MESSAGE,
-  INPUT_LENGTH,
-} from '../../constants';
+import { CARD_USER_FORM_MESSAGE, ERROR_MESSAGE } from '../../constants';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import Input from '../common/Input';
@@ -11,12 +7,14 @@ import FormErrorMessage from '../FormErrorMessage';
 import styles from './style.module.css';
 
 interface CardUserNameInputProps {
+  maxLength: number;
   userName: string;
   nameError: boolean;
   onNameChange: (value: string) => void;
 }
 
 export default function CardUserNameInput({
+  maxLength,
   userName,
   nameError,
   onNameChange,
@@ -39,7 +37,7 @@ export default function CardUserNameInput({
               type="text"
               name="name"
               value={userName}
-              maxLength={INPUT_LENGTH.CARD_USER}
+              maxLength={maxLength}
               placeholder={namePlaceholder}
               isError={nameError}
               onChange={(event) => onNameChange(event.target.value)}

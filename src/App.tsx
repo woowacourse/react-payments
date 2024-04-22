@@ -6,14 +6,18 @@ import {
   CardPreview,
   CardUserNameInput,
 } from './components';
+import { INPUT_LENGTH } from './constants';
 import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
 import useCardNumbersInput from './hooks/useCardNumbersInput';
 import useCardUserNameInput from './hooks/useCardUserNameInput';
 
 function App() {
-  const { numbers, numberErrors, handleNumberChange } = useCardNumbersInput(4);
+  const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER } = INPUT_LENGTH;
+
+  const { numbers, numberErrors, handleNumberChange } =
+    useCardNumbersInput(CARD_NUMBERS);
   const { period, periodErrors, handlePeriodChange } =
-    useCardExpirationPeriodInput(2);
+    useCardExpirationPeriodInput(CARD_EXPIRATION);
   const { userName, nameError, handleNameChange } = useCardUserNameInput();
 
   return (
@@ -27,16 +31,19 @@ function App() {
         <form className="form-container">
           <fieldset>
             <CardNumbersInput
+              maxLength={CARD_NUMBERS}
               numbers={numbers}
               numberErrors={numberErrors}
               onNumberChange={handleNumberChange}
             />
             <CardExpirationPeriodInput
+              maxLength={CARD_EXPIRATION}
               period={period}
               periodErrors={periodErrors}
               onPeriodChange={handlePeriodChange}
             />
             <CardUserNameInput
+              maxLength={CARD_USER}
               userName={userName}
               nameError={nameError}
               onNameChange={handleNameChange}

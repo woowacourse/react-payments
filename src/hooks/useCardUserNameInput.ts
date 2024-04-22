@@ -8,9 +8,9 @@ function useCardUserNameInput() {
     const regex = /^[a-zA-Z\s]*$/;
     const isValidName = regex.test(value);
 
-    if (!isValidName) {
-      return setNameError(!isValidName);
-    }
+    setNameError(!isValidName);
+
+    if (!isValidName) return;
 
     setUserName(value.toUpperCase());
   };

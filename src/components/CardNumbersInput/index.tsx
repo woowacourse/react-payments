@@ -1,8 +1,4 @@
-import {
-  CARD_NUMBERS_FORM_MESSAGE,
-  ERROR_MESSAGE,
-  INPUT_LENGTH,
-} from '../../constants';
+import { CARD_NUMBERS_FORM_MESSAGE, ERROR_MESSAGE } from '../../constants';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import Input from '../common/Input';
@@ -13,11 +9,13 @@ import styles from './style.module.css';
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
 interface CardNumbersInputProps {
-  numbers: number[];
+  maxLength: number;
+  numbers: string[];
   numberErrors: boolean[];
   onNumberChange: (value: string, index: number) => void;
 }
 export default function CardNumbersInput({
+  maxLength,
   numbers,
   numberErrors,
   onNumberChange,
@@ -41,7 +39,7 @@ export default function CardNumbersInput({
               type="number"
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               value={number}
-              maxLength={INPUT_LENGTH.CARD_NUMBERS}
+              maxLength={maxLength}
               placeholder={placeholder}
               isError={numberErrors[index]}
               onChange={(event) => onNumberChange(event.target.value, index)}
