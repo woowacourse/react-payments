@@ -7,6 +7,8 @@ export const CardPreviewContainer = styled.div`
   background: #333333;
   box-shadow: 3px 3px 5px 0px #00000040;
   margin: auto;
+  margin-top: 57px;
+  margin-bottom: 29px;
 `;
 
 export const ChipSection = styled.div`

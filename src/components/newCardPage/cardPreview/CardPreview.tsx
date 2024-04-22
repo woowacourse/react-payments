@@ -1,10 +1,10 @@
-import { CardInfo } from "../../types/type";
+import { CardInfo } from "../../../types/type";
 import * as Styled from "./CardPreview.styled";
-import MasterCardImage from "../../assets/Mastercard.png";
-import VisaImage from "../../assets/Visa.png";
+import MasterCardImage from "../../../assets/Mastercard.png";
+import VisaImage from "../../../assets/Visa.png";
 import CardNumbers from "../cardNumbers/CardNumbers";
 import CardExpiration from "../cardExpiration/CardExpiration";
-import { CARD_BRAND } from "../../constants/setting";
+import { CARD_BRAND } from "../../../constants/setting";
 
 export interface CardPreviewProps {
   cardInfo: CardInfo;

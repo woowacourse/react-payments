@@ -1,5 +1,5 @@
 import * as Styled from "./CardNumbers.styled";
-import { MASKING } from "../../constants/setting";
+import { MASKING } from "../../../constants/setting";
 
 export interface CardNumberProps {
   cardNumbers: number[];
