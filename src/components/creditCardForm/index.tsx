@@ -89,7 +89,7 @@ const DescriptionWrapper = styled.p<{ description?: string }>`
   text-align: left;
   color: rgba(139, 149, 161, 1);
   height: 14px;
-  ${({ description }) => !description && `margin-bottom: 0;`}
+  ${({ description }) => (description ? `margin-bottom: 16px;` : `margin-bottom: 0;`)}
 `;
 
 const ErrorMessage = styled.p`
