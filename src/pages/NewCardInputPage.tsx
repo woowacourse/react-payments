@@ -58,32 +58,26 @@ const NewCardInputPage = () => {
     <InputPageLayout>
       <CardPreview cardInfo={newCardInfo} />
 
-      <Title content={CARD_META_INFO.cardNumbers.query!} />
-      <Caption text={CARD_META_INFO.cardNumbers.caption!} type='input' />
+      <Title content={CARD_META_INFO.cardNumbers.query} />
+      <Caption text={CARD_META_INFO.cardNumbers.caption} type='input' />
       <CardNumberInput
         cardNumbers={newCardInfo.cardNumbers}
-        errorCaption={(errorText: string) => (
-          <Caption text={errorText} type='error' />
-        )}
+        errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
         onCardNumberChange={handleCardNumberChange}
       />
 
-      <Title content={CARD_META_INFO.expirationDate.query!} />
-      <Caption text={CARD_META_INFO.expirationDate.caption!} type='input' />
+      <Title content={CARD_META_INFO.expirationDate.query} />
+      <Caption text={CARD_META_INFO.expirationDate.caption} type='input' />
       <ExpirationDateInput
         expirationDate={newCardInfo.expirationDate}
-        errorCaption={(errorText: string) => (
-          <Caption text={errorText} type='error' />
-        )}
+        errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
         onExpirationDateChange={handleExpirationDateChange}
       />
 
-      <Title content={CARD_META_INFO.cardOwnerName.query!} />
+      <Title content={CARD_META_INFO.cardOwnerName.query} />
       <CardOwnerNameInput
         ownerName={newCardInfo.cardOwnerName}
-        errorCaption={(errorText: string) => (
-          <Caption text={errorText} type='error' />
-        )}
+        errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
         onCardOwnerNameChange={handleCardOwnerNameChange}
       />
     </InputPageLayout>

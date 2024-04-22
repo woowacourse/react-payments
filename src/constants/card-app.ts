@@ -1,9 +1,9 @@
 import { CardInfo } from '../types/card';
 
 interface CardMetaInfo {
-  query?: string;
-  label?: string;
-  caption?: string;
+  query: string;
+  label: string;
+  caption: string;
 }
 
 export const CARD_META_INFO: Record<keyof CardInfo, CardMetaInfo> = {
@@ -20,6 +20,7 @@ export const CARD_META_INFO: Record<keyof CardInfo, CardMetaInfo> = {
   cardOwnerName: {
     query: '카드 소유자 이름을 입력해 주세요.',
     label: '소유자 이름',
+    caption: '',
   },
 };
 
