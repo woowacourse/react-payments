@@ -1,9 +1,21 @@
-import "./App.css";
+import styled from 'styled-components';
+import MainPage from './components/MainPage/MainPage';
+import GlobalStyle from './global.styled';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <GlobalStyle />
+      <Container>
+        <MainPage />
+      </Container>
     </>
   );
 }
