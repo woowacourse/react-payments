@@ -2,6 +2,7 @@ import styles from './Card.module.css';
 import Visa from '../../assets/image/Visa.png';
 import MasterCard from '../../assets/image/Mastercard.png';
 import hideNumber from '../../assets/image/CardNumberBlind.svg';
+import { getCardType } from '../../utils/getCardType';
 
 const Card = ({
   cardNumbers,
@@ -12,21 +13,12 @@ const Card = ({
   date: Record<string, string>;
   ownerName: string;
 }) => {
-  const isVisaCard = (firstCardNumberUnit: string) => {
-    return firstCardNumberUnit.startsWith('4');
-  };
-
-  const isMasterCard = (firstCardNumberUnit: string) => {
-    const startTwoNumber = Number(firstCardNumberUnit.slice(0, 2));
-
-    return startTwoNumber >= 51 && startTwoNumber <= 55;
-  };
-
   const displayCardLogo = () => {
     const cardStyle = styles.logo;
+    const cardType = getCardType(cardNumbers[0]);
 
-    if (isMasterCard(cardNumbers[0])) return <img src={Visa} className={cardStyle} />;
-    if (isVisaCard(cardNumbers[0])) return <img src={MasterCard} className={cardStyle} />;
+    if (cardType === 'VISA') return <img src={Visa} className={cardStyle} />;
+    if (cardType === 'MASTER') return <img src={MasterCard} className={cardStyle} />;
   };
 
   const displayExpirationDate = () => {
