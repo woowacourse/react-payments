@@ -33,6 +33,7 @@ const CardPreview = ({
 
 const CardFrame = styled.div`
   background: #333333;
+  color: white;
   padding: 10px 12px;
   width: 202px;
   height: 117px;

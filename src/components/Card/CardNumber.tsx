@@ -5,7 +5,6 @@ const CardNumber = ({ number }: { number: string | string[] }) => {
 };
 
 const CardNumberWrapper = styled.span`
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
