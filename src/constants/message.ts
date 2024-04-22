@@ -28,3 +28,9 @@ export const CARD_USER_FORM_MESSAGE = {
   label: '소유자 이름',
   namePlaceholder: '소유자 이름',
 };
+
+export const CARD_COMPANY_MESSAGE = {
+  title: '카드사를 선택헤주세요.',
+  subTitle: '현재 국내 카드사만 가능합니다.',
+  label: '카드사',
+};

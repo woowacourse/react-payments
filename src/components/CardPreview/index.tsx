@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import CardChip from '../../assets/images/cardChip.png';
-import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
+import { CARD_COLOR_ETC, CARD_MARK, CARD_NUMBERS } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 
 import styles from './style.module.css';
@@ -15,8 +15,12 @@ const DOT = '·';
 
 function CardPreview(props: CardPreviewProps) {
   const { cardInfo } = props;
-  const { mark, numbers, period, userName, color } = cardInfo;
-
+  const { mark, numbers, period, userName, company } = cardInfo;
+  const cardCompany = useMemo(
+    () =>
+      company?.name === CARD_COMPANY.get('etc')?.name ? '' : company?.name,
+    [company],
+  );
   const markInfo = useMemo(() => CARD_MARK[mark || 'etc'], [mark]);
 
   const numberList = useMemo(
@@ -34,7 +38,7 @@ function CardPreview(props: CardPreviewProps) {
     <div className={styles.cardPreview}>
       <div
         className={styles.cardImg}
-        style={{ backgroundColor: CARD_COLOR[color] }}
+        style={{ backgroundColor: company?.color || CARD_COLOR_ETC }}
       >
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
@@ -42,17 +46,20 @@ function CardPreview(props: CardPreviewProps) {
             <img src={markInfo?.src} alt={markInfo?.alt} />
           </section>
           <section className={styles.info}>
+            <p className={styles.cardCompany}>{cardCompany}</p>
             <div className={styles.cardNumber}>
               {numberList?.map((item, index) => (
                 <span key={`number-${index + 1}`}>{item}</span>
               ))}
             </div>
-            <div className={styles.period}>
-              <span>{period.month}</span>
-              <span>{period.month && period.year ? SLASH : ''}</span>
-              <span>{period.year}</span>
+            <div className={styles.periodAndName}>
+              <div className={styles.period}>
+                <span>{period?.month}</span>
+                <span>{period?.month && period?.year ? SLASH : ''}</span>
+                <span>{period?.year}</span>
+              </div>
+              <div className={styles.user}>{userName}</div>
             </div>
-            <div className={styles.user}>{userName}</div>
           </section>
         </div>
       </div>

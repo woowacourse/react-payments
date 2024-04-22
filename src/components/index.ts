@@ -1,3 +1,4 @@
+import CardCompanySelect from './CardCompanySelect';
 import CardExpirationPeriodInput from './CardExpirationPeriodInput/index';
 import CardInput from './CardInput';
 import CardInputContainer from './CardInputContainer';
@@ -8,6 +9,7 @@ import Input from './Input';
 import InputErrorMessage from './InputErrorMessage/index';
 
 export {
+  CardCompanySelect,
   CardExpirationPeriodInput,
   CardInput,
   CardInputContainer,

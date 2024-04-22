@@ -40,6 +40,73 @@ export const CARD_MARK = {
   },
 };
 
-export const CARD_COLOR = {
-  default: '#333333',
-};
+export const CARD_COLOR_ETC = '#8a8a8a';
+
+export const CARD_COMPANY: Map<string, { name: string; color: string }> =
+  new Map([
+    [
+      'bc',
+      {
+        name: 'BC카드',
+        color: '#F04651',
+      },
+    ],
+    [
+      'sinhan',
+      {
+        name: '신한카드',
+        color: '#0046FF',
+      },
+    ],
+    [
+      'kakao',
+      {
+        name: '카카오뱅크',
+        color: '#FFE600',
+      },
+    ],
+    [
+      'hyundai',
+      {
+        name: '현대카드',
+        color: '#000000',
+      },
+    ],
+    [
+      'wori',
+      {
+        name: '우리카드',
+        color: '#007BC8',
+      },
+    ],
+    [
+      'lotte',
+      {
+        name: '롯데카드',
+        color: '#ED1C24',
+      },
+    ],
+    [
+      'hana',
+      {
+        name: '하나카드',
+        color: '#009490',
+      },
+    ],
+    [
+      'kb',
+      {
+        name: '국민카드',
+        color: '#6A6056',
+      },
+    ],
+    [
+      'etc',
+      {
+        name: '기타',
+        color: CARD_COLOR_ETC,
+      },
+    ],
+  ]);
+
+export const CARD_COMPANY_NAMES = Array.from(CARD_COMPANY.keys());

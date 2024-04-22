@@ -1,6 +1,8 @@
 import './styles/App.css';
+import './styles/global.css';
 import './styles/reset.css';
 import {
+  CardCompanySelect,
   CardExpirationPeriodInput,
   CardNumbersInput,
   CardPreview,
@@ -15,6 +17,7 @@ function App() {
     editCardNumbers,
     editCardPeriod,
     editCardUserName,
+    editCardCompany,
   } = useCardInfoReducer();
 
   return (
@@ -24,12 +27,13 @@ function App() {
 
         <form className="form-container">
           <fieldset>
+            <CardUserNameInput editCardUserName={editCardUserName} />
+            <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
+            <CardCompanySelect editCardCompany={editCardCompany} />
             <CardNumbersInput
               editCardMark={editCardMark}
               editCardNumbers={editCardNumbers}
             />
-            <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
-            <CardUserNameInput editCardUserName={editCardUserName} />
           </fieldset>
         </form>
       </div>

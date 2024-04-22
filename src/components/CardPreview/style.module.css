@@ -7,8 +7,8 @@
   font-family: 'Inter', sans-serif;
 }
 .cardImg {
-  -webkit-box-shadow: 0px 0px 1.1875rem 0.1875rem rgba(70, 70, 70, 0.43);
-  box-shadow: 0px 0px 1.1875rem 0.1875rem rgba(70, 70, 70, 0.43);
+  -webkit-box-shadow: 0px 0px 0.625rem 0.1rem rgba(51, 51, 51, 0.355);
+  box-shadow: 0px 0px 0.625rem 0.1rem rgba(51, 51, 51, 0.355);
   border-radius: 0.3125rem;
   width: 13.25rem;
   height: 8.25rem;
@@ -25,7 +25,7 @@
 .top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.875rem;
   width: 100%;
 
   img {
@@ -39,16 +39,13 @@
   width: 100%;
   color: #ffff;
   font-size: 0.875rem;
-  div {
-    margin-top: 0.6rem;
+  & > div {
+    margin-top: 0.875rem;
     height: 0.875rem;
   }
 }
-
-.user {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.cardCompany {
+  height: 0.875rem;
 }
 
 .cardNumber {
@@ -62,8 +59,12 @@
     text-align: center;
   }
 }
-
+.periodAndName {
+  display: flex;
+  justify-content: space-between;
+}
 .period {
+  margin-top: 0;
   span {
     display: inline-block;
     width: 20px;
@@ -72,4 +73,11 @@
   span:nth-child(2) {
     width: 0.625rem;
   }
+}
+
+.user {
+  margin-top: 0;
+  width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
