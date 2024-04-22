@@ -9,8 +9,7 @@ import {
 } from '../../constants';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import { sliceText } from '../../utils/textChangerUtils';
-import CardInput from '../CardInput';
-import CardInputContainer from '../CardInputContainer';
+import CardInputSection from '../CardInputSection';
 import Input from '../Input';
 import InputErrorMessage from '../InputErrorMessage';
 
@@ -98,25 +97,23 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   };
 
   return (
-    <CardInputContainer title={title} subTitle={subTitle}>
-      <CardInput label={label}>
-        <div className={styles.inputWrap} onChange={handleNumberChange}>
-          {Array.from({ length }).map((_, index) => (
-            <Input
-              key={`number_${index}`}
-              name={`${NUMBERS_NAME_PREFIX}${index}`}
-              type="number"
-              label={`카드 ${index + 1}째 네자리 번호`}
-              value={numbers[index]}
-              error={numbersError[index]}
-              placeholder={placeholder}
-            />
-          ))}
-        </div>
-      </CardInput>
+    <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
+      <div className={styles.inputWrap} onChange={handleNumberChange}>
+        {Array.from({ length }).map((_, index) => (
+          <Input
+            key={`number_${index}`}
+            name={`${NUMBERS_NAME_PREFIX}${index}`}
+            type="number"
+            label={`카드 ${index + 1}째 네자리 번호`}
+            value={numbers[index]}
+            error={numbersError[index]}
+            placeholder={placeholder}
+          />
+        ))}
+      </div>
       <InputErrorMessage>
         <p> {errorMessage}</p>
       </InputErrorMessage>
-    </CardInputContainer>
+    </CardInputSection>
   );
 }

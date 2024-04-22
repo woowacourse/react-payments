@@ -1,7 +1,6 @@
 import CardCompanySelect from './CardCompanySelect';
 import CardExpirationPeriodInput from './CardExpirationPeriodInput/index';
-import CardInput from './CardInput';
-import CardInputContainer from './CardInputContainer';
+import CardInputSection from './CardInputSection';
 import CardNumbersInput from './CardNumbersInput';
 import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
@@ -11,8 +10,7 @@ import InputErrorMessage from './InputErrorMessage/index';
 export {
   CardCompanySelect,
   CardExpirationPeriodInput,
-  CardInput,
-  CardInputContainer,
+  CardInputSection,
   CardNumbersInput,
   CardPreview,
   CardUserNameInput,

@@ -34,3 +34,9 @@ export const CARD_COMPANY_MESSAGE = {
   subTitle: '현재 국내 카드사만 가능합니다.',
   label: '카드사',
 };
+
+export const CARD_CVC_MESSAGE = {
+  title: 'CVC번호를 입력해주세요.',
+  label: 'cvc번호',
+  placeholder: '123',
+};

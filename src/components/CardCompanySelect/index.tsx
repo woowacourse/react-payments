@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useId } from 'react';
 
 import { CARD_COMPANY, CARD_COMPANY_MESSAGE } from '../../constants';
-import CardInputContainer from '../CardInputContainer';
+import CardInputSection from '../CardInputSection';
 
 import styles from './style.module.css';
 
@@ -17,9 +17,10 @@ function CardCompanySelect(props: CardCompanySelectProps) {
     editCardCompany(value);
   };
   return (
-    <CardInputContainer
+    <CardInputSection
       title={CARD_COMPANY_MESSAGE.title}
       subTitle={CARD_COMPANY_MESSAGE.subTitle}
+      childrenLabel={CARD_COMPANY_MESSAGE.label}
     >
       <label className="scr-only" htmlFor={selectId}>
         {CARD_COMPANY_MESSAGE.label}
@@ -36,7 +37,7 @@ function CardCompanySelect(props: CardCompanySelectProps) {
           </option>
         ))}
       </select>
-    </CardInputContainer>
+    </CardInputSection>
   );
 }
 

@@ -6,8 +6,7 @@ import {
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import CardInput from '../CardInput';
-import CardInputContainer from '../CardInputContainer';
+import CardInputSection from '../CardInputSection';
 import Input from '../Input';
 import InputErrorMessage from '../InputErrorMessage';
 
@@ -57,26 +56,22 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   };
 
   return (
-    <CardInputContainer title={title}>
-      <CardInput label={label}>
-        <div>
-          <div className={styles.inputWrap}>
-            <Input
-              style={{ textTransform: 'uppercase' }}
-              name="name"
-              type="text"
-              label={CARD_USER_FORM_MESSAGE.label}
-              placeholder={namePlaceholder}
-              onChange={handleChange}
-              value={userName}
-              error={nameError}
-            />
-          </div>
-          <InputErrorMessage>
-            <p>{errorMessage}</p>
-          </InputErrorMessage>
-        </div>
-      </CardInput>
-    </CardInputContainer>
+    <CardInputSection title={title} childrenLabel={label}>
+      <div className={styles.inputWrap}>
+        <Input
+          style={{ textTransform: 'uppercase' }}
+          name="name"
+          type="text"
+          label={CARD_USER_FORM_MESSAGE.label}
+          placeholder={namePlaceholder}
+          onChange={handleChange}
+          value={userName}
+          error={nameError}
+        />
+      </div>
+      <InputErrorMessage>
+        <p>{errorMessage}</p>
+      </InputErrorMessage>
+    </CardInputSection>
   );
 }

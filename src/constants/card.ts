@@ -40,7 +40,7 @@ export const CARD_MARK = {
   },
 };
 
-export const CARD_COLOR_ETC = '#8a8a8a';
+export const CARD_COLOR_ETC = '#6a0680';
 
 export const CARD_COMPANY: Map<string, { name: string; color: string }> =
   new Map([

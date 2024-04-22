@@ -8,8 +8,7 @@ import {
 } from '../../constants';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
-import CardInput from '../CardInput';
-import CardInputContainer from '../CardInputContainer';
+import CardInputSection from '../CardInputSection';
 import Input from '../Input';
 import InputErrorMessage from '../InputErrorMessage';
 
@@ -179,34 +178,32 @@ export default function CardExpirationPeriodInput(
   };
 
   return (
-    <CardInputContainer title={title} subTitle={subTitle}>
-      <CardInput label={label}>
-        <div
-          className={styles.inputWrap}
-          onChange={handlePeriodChange}
-          onBlur={handlePeriodBlur}
-        >
-          <Input
-            name="month"
-            type="number"
-            placeholder={monthPlaceholder}
-            label="카드 유효 기간-월"
-            value={cardPeriod.month || undefined}
-            error={periodError.month || periodError.availability}
-          />
-          <Input
-            name="year"
-            type="number"
-            label="카드 유효 기간-연도"
-            placeholder={yearPlaceholder}
-            value={cardPeriod.year || undefined}
-            error={periodError.year || periodError.availability}
-          />
-        </div>
-        <InputErrorMessage>
-          {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
-        </InputErrorMessage>
-      </CardInput>
-    </CardInputContainer>
+    <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
+      <div
+        className={styles.inputWrap}
+        onChange={handlePeriodChange}
+        onBlur={handlePeriodBlur}
+      >
+        <Input
+          name="month"
+          type="number"
+          placeholder={monthPlaceholder}
+          label="카드 유효 기간-월"
+          value={cardPeriod.month || undefined}
+          error={periodError.month || periodError.availability}
+        />
+        <Input
+          name="year"
+          type="number"
+          label="카드 유효 기간-연도"
+          placeholder={yearPlaceholder}
+          value={cardPeriod.year || undefined}
+          error={periodError.year || periodError.availability}
+        />
+      </div>
+      <InputErrorMessage>
+        {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
+      </InputErrorMessage>
+    </CardInputSection>
   );
 }

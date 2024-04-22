@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 
 import CardChip from '../../assets/images/cardChip.png';
-import { CARD_COLOR_ETC, CARD_MARK, CARD_NUMBERS } from '../../constants';
+import {
+  CARD_COLOR_ETC,
+  CARD_COMPANY,
+  CARD_MARK,
+  CARD_NUMBERS,
+} from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 
 import styles from './style.module.css';
