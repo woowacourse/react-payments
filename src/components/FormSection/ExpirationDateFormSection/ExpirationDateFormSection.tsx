@@ -6,12 +6,12 @@ import OPTION from '../../../constants/option';
 import * as Styled from '../FormSection.styled';
 import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSection';
 
-interface ExpirationFormSectionProps {
+interface ExpirationDateFormSectionProps {
   changeExpiration: (expiration: Expiration) => void;
   expiration: Expiration;
 }
 
-const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationFormSectionProps) => {
+const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationDateFormSectionProps) => {
 
   const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ changeExpiration, expiration })
 

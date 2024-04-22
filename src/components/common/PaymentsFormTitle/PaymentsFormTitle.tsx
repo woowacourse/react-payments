@@ -1,5 +1,10 @@
 import { TitleContainer, Title, SubTitle } from "./PaymentsFormTitle.styled";
 
+interface PaymentsFormTitleProps {
+  title: string;
+  subTitle?: string;
+}
+
 const PaymentsFormTitle = ({ ...props }: PaymentsFormTitleProps) => {
   return (
     <TitleContainer>

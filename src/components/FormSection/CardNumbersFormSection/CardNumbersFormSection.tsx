@@ -7,7 +7,10 @@ import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 
 import OPTION from '../../../constants/option';
 
-
+interface CardNumbersFormSectionProps {
+  changeCardNumbers: (cardNumber: string, index: number) => void;
+  value: string[];
+}
 
 const CardNumbersFormSection = ({ changeCardNumbers, value }: CardNumbersFormSectionProps) => {
   const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ changeCardNumbers, value })

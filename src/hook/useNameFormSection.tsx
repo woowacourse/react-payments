@@ -2,6 +2,10 @@ import { useState } from "react";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 
+interface UseNameFormSectionProps {
+  changeName: (name: string) => void;
+}
+
 const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 

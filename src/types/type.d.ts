@@ -10,11 +10,6 @@ interface PaymentsInputFieldProps {
   width?: number;
 }
 
-interface PaymentsFormTitleProps {
-  title: string;
-  subTitle?: string;
-}
-
 type InputStates = InputState[];
 
 interface InputState {
@@ -32,35 +27,10 @@ interface CardInfo {
   name: string;
 }
 
-interface CardNumbersFormSectionProps {
-  changeCardNumbers: (cardNumber: string, index: number) => void;
-  value: string[];
-}
-
 interface Expiration {
   [index: string]: string;
   month: string;
   year: string;
-}
-interface ExpirationFormSectionProps {
-  changeExpiration: (expiration: Expiration) => void;
-}
-
-interface NameFormSectionProps {
-  changeName: (name: string) => void;
-}
-
-interface UseCardNumbersFormSectionProps {
-  changeCardNumbers: (cardNumber: string[]) => void;
-  value: string[];
-}
-
-interface UseExpirationFormSectionProps {
-  changeExpiration: (expiration: Expiration) => void;
-}
-
-interface UseNameFormSectionProps {
-  changeName: (name: string) => void;
 }
 
 interface CardAnimationProps {
