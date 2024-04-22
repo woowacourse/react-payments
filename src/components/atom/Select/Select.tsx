@@ -1,6 +1,7 @@
 import textStyle from '@src/styles/textStyle.module.css';
+import styles from './Select.module.css';
 
-interface SelectProps {
+export interface SelectProps {
   value?: string;
   placeholder?: string;
   options: { value: string; text: string }[];
@@ -9,8 +10,8 @@ interface SelectProps {
 
 const Select: React.FC<SelectProps> = ({ value = '', placeholder = '', options, onChange }) => {
   return (
-    <select className={`${textStyle.formItem}`} value={value} onChange={onChange}>
-      <option value="" selected disabled hidden>
+    <select className={`${styles.select} ${textStyle.formItem}`} value={value} onChange={onChange}>
+      <option value="" disabled hidden>
         {placeholder}
       </option>
       {options.map(({ value, text }, index) => (

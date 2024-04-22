@@ -7,7 +7,7 @@
   margin-bottom: 46px;
 }
 
-.textFieldContainer {
+.paymentsForm {
   display: flex;
   flex-direction: column;
   gap: 16px;

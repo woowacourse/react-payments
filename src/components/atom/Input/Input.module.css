@@ -6,6 +6,7 @@
   font-size: 12px;
   flex-grow: 1;
   min-width: 0;
+  box-sizing: border-box;
 }
 
 input::placeholder {

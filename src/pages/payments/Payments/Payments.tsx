@@ -1,5 +1,11 @@
-import { PaymentsPreview, CardNumberTextField, ExpirationDateTextField, OwnerNameTextField } from '@pages/payments';
-import { useChangeCardNumber, useChangeExpirationDate, useChangeOwnerName } from '@hooks/payments';
+import {
+  PaymentsPreview,
+  CardNumberTextField,
+  ExpirationDateTextField,
+  OwnerNameTextField,
+  CardIssuerTextField,
+} from '@pages/payments';
+import { useChangeCardIssuer, useChangeCardNumber, useChangeExpirationDate, useChangeOwnerName } from '@hooks/payments';
 
 import styles from './Payments.module.css';
 
@@ -7,6 +13,7 @@ const Payments: React.FC = () => {
   const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
   const { expirationDate, expirationDateError, handleExpirationDateChange } = useChangeExpirationDate();
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+  const { cardIssuer, handleCardIssuerChange } = useChangeCardIssuer();
 
   return (
     <>
@@ -14,8 +21,9 @@ const Payments: React.FC = () => {
         <PaymentsPreview cardNumbers={cardNumbers} expirationDate={expirationDate} ownerName={ownerName} />
       </section>
 
-      <section className={styles.textFieldContainer}>
-        <form>
+      <section>
+        <form className={styles.paymentsForm}>
+          <CardIssuerTextField value={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
           <CardNumberTextField
             cardNumbers={cardNumbers}
             onAddCardNumber={handleCardNumberChange}

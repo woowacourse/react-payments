@@ -6,3 +6,4 @@ export { default as ExpirationDateInput } from './payments-form/expiration-date/
 export { default as ExpirationDateTextField } from './payments-form/expiration-date/ExpirationDateTextField/ExpirationDateTextField';
 export { default as OwnerNameInput } from './payments-form/owner-name/OwnerNameInput/OwnerNameInput';
 export { default as OwnerNameTextField } from './payments-form/owner-name/OwnerNameTextField/OwnerNameTextField';
+export { default as CardIssuerTextField } from './payments-form/card-issuer/CardIssuerTextField/CardIssuerTextField';
