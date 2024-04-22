@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Components/atom/Select',
+  title: 'Components/atoms/Select',
   component: Select,
   parameters: {
     layout: 'centered',
