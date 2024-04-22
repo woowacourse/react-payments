@@ -5,15 +5,24 @@ export const expirationDateValidators = (date: string[]): Validator[] => {
 
   return [
     { validate: () => year !== 0 && month !== 0, errorMessage: "" },
-    { validate: () => month >= 1 && month <= 12, errorMessage: "1~12월 범위의 월을 입력해 주세요." },
+    {
+      validate: () => month >= 1 && month <= 12,
+      errorMessage: "1~12월 범위의 월을 입력해 주세요.",
+    },
     { validate: () => !isOverdue, errorMessage: "이미 만료된 카드입니다." },
   ];
 };
 
 export const ownerNameValidators = (name: string[]): Validator[] => {
   return [
-    { validate: (inputs) => /^[a-zA-Z\s]*$/.test(inputs[0]), errorMessage: "이름은 영어 대문자로 입력해주세요." },
-    { validate: (inputs) => !/\s{2,}/.test(inputs[0]), errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다.." },
+    {
+      validate: (inputs) => /^[a-zA-Z\s]*$/.test(inputs[0]),
+      errorMessage: "이름은 영어 대문자로 입력해주세요.",
+    },
+    {
+      validate: (inputs) => !/\s{2,}/.test(inputs[0]),
+      errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
+    },
   ];
 };
 
@@ -36,13 +45,24 @@ export const validateAll = (validators: Validator[], inputs: string[]) => {
   return "";
 };
 
-export const releaseAll = (validators: Validator[], inputs: string[], currentErrorMessages: string[]): string[] => {
+export const releaseAll = (
+  validators: Validator[],
+  inputs: string[],
+  currentErrorMessages: string[]
+): string[] => {
   const isValids = validators.map(({ validate }) => validate(inputs));
   const newErrorMessages = [...currentErrorMessages];
-  for (let i = 0; i < isValids.length; i++) {
-    if (isValids[i] && validators[i].errorMessage === currentErrorMessages[i]) {
-      newErrorMessages[i] = "";
+  for (let i = 0; i < currentErrorMessages.length; i++) {
+    for (let j = 0; j < isValids.length; j++) {
+      if (
+        isValids[j] &&
+        validators[j].errorMessage === currentErrorMessages[j]
+      ) {
+        newErrorMessages[i] = "";
+      }
     }
   }
+  console.log(newErrorMessages);
+
   return newErrorMessages;
 };

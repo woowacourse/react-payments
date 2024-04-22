@@ -70,16 +70,16 @@ const useInput = ({
       event.target.value = limitNumberLength(event.target.value, maxLength);
     }
 
-    const newInput = [...inputs];
-    newInput[index] = event.target.value;
-    setInputs(newInput);
+    const newInputs = [...inputs];
+    newInputs[index] = event.target.value;
+    setInputs(newInputs);
 
     const newErrorMessages = releaseAll(
       onBlurValidators,
-      newInput,
+      newInputs,
       errorMessages
     );
-    const errorMessage = validateAll(onChangeValidators, newInput);
+    const errorMessage = validateAll(onChangeValidators, newInputs);
     newErrorMessages[index] = errorMessage;
     setErrorMessages(newErrorMessages);
   };
@@ -89,6 +89,6 @@ const useInput = ({
     updateErrorMessages(errorMessage, index);
   };
 
-  return { input: inputs, errorMessages, onChange, onBlur };
+  return { inputs, errorMessages, onChange, onBlur };
 };
 export default useInput;

@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
-import CreditCardPreview, { CardType } from "@/components/CreditCardPreview/CreditCardPreview";
+import CreditCardPreview, {
+  CardType,
+} from "@/components/CreditCardPreview/CreditCardPreview";
 import useInput from "@/hooks/useInput";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import { expirationDateValidators, ownerNameValidators } from "@/components/utils/validation";
+import {
+  expirationDateValidators,
+  ownerNameValidators,
+} from "@/components/utils/validation";
 
 const CardRegister = () => {
   const cardNumbersState = useInput({
@@ -42,10 +47,12 @@ const CardRegister = () => {
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CreditCardPreview
-          cardType={checkCardBrand(cardNumbersState.input)}
-          cardNumbers={cardNumbersState.input}
-          expirationDate={expiredDateState.input[0] && expiredDateState.input.join("/")}
-          ownerName={ownerNameState.input[0]}
+          cardType={checkCardBrand(cardNumbersState.inputs)}
+          cardNumbers={cardNumbersState.inputs}
+          expirationDate={
+            expiredDateState.inputs[0] && expiredDateState.inputs.join("/")
+          }
+          ownerName={ownerNameState.inputs[0]}
         />
         <CardRegisterForm
           cardNumbersState={cardNumbersState}
