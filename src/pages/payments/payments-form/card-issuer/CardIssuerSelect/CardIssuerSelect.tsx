@@ -1,5 +1,5 @@
-import Select, { SelectProps } from '../../../../../components/atom/Select/Select';
-import CARD from '../../../../../constants/card';
+import { Select, SelectProps } from '@components/index';
+import { CARD } from '@constants/index';
 
 type CardIssuerSelectProps = Omit<SelectProps, 'placeholder' | 'options' | 'onChange'> & {
   onSelectCardIssuer: React.ChangeEventHandler<HTMLSelectElement>;
