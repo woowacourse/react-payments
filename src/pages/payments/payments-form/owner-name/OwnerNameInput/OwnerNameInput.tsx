@@ -1,0 +1,22 @@
+import { Input, InputProps } from '@components/index';
+
+type OwnerNameInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength' | 'onChange'> & {
+  onAddOwnerName: React.ChangeEventHandler<HTMLInputElement>;
+  placeholder: string;
+};
+
+const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value, onAddOwnerName, id }) => {
+  return (
+    <Input
+      id={id}
+      maxLength={50}
+      type="text"
+      placeholder="JOHNDOE"
+      value={value}
+      isError={isError}
+      onChange={onAddOwnerName}
+    />
+  );
+};
+
+export default OwnerNameInput;

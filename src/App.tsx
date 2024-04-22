@@ -1,11 +1,11 @@
-import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
+import { Payments } from '@pages/payments';
 
 import styles from './App.module.css';
 
 function App() {
   return (
     <div className={styles.app}>
-      <CreditCardForm />
+      <Payments />
     </div>
   );
 }
