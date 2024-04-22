@@ -1,6 +1,6 @@
 import useInput from "./useInput";
 import { useState } from "react";
-import { validateOnlyEnglishWithSpace } from "../domain/validateInput";
+import { validateOnlyEnglishWithSpace } from "../domain/validateCardInfo";
 
 export default function useCardHolder() {
   const [errorMessage, setErrorMessage] = useState("");

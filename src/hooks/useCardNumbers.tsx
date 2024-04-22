@@ -1,5 +1,5 @@
 import useInput, { UseInputHookValue } from "./useInput";
-import { validateLength, validateOnlyDigit } from "../domain/validateInput";
+import { validateLength, validateOnlyDigit } from "../domain/validateCardInfo";
 
 import { useState } from "react";
 

@@ -3,7 +3,7 @@ import {
   validateLength,
   validateMonth,
   validateYear,
-} from "../domain/validateInput";
+} from "../domain/validateCardInfo";
 
 import { useState } from "react";
 
