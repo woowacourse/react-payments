@@ -1,10 +1,20 @@
-import "./App.css";
+import CardInformationForm from './components/CardInformationForm/CardInformationForm';
+import CardInformationPreview from './components/CardInformationPreview/CardInformationPreview';
+import useForm from './hooks/useForm';
+import { Container } from './styles/App.style';
 
 function App() {
+  const { previewProps, formProps } = useForm({
+    cardNumbers: [],
+    expirationDate: [],
+    userName: '',
+  });
+
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <Container>
+      <CardInformationPreview {...previewProps} />
+      <CardInformationForm {...formProps} />
+    </Container>
   );
 }
 
