@@ -17,28 +17,18 @@ const meta = {
     },
   },
   argTypes: {
-    month: {
+    value: {
       ...generateArgTypes({ control: 'text' }),
-      description: '유효기간에 포함된 월',
+      description: '카드사',
     },
-    year: {
-      ...generateArgTypes({ control: 'text' }),
-      description: '유효기간에 포함된 년도',
-    },
-    expirationDateError: {
-      ...generateArgTypes({ control: 'object' }),
-      description: '에러 메시지 및 상태를 포함',
-    },
-    onAddExpirationDate: {
+    onSelectCardIssuer: {
       ...generateArgTypes({ control: 'function' }),
-      description: '유효기간을 추가하기 위한 이벤트 핸들러',
+      description: '카드사 변경이벤트 핸들러',
     },
   },
   args: {
-    month: '',
-    year: '',
-    expirationDateError: { isError: { month: false, year: false }, errorMessage: '' },
-    onAddExpirationDate: fn(),
+    value: '',
+    onSelectCardIssuer: fn(),
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof CardIssuerTextField>;
@@ -47,10 +37,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const MonthError: Story = {
+export const Default: Story = {
   parameters: {
-    docs: { description: { story: '유효하지 않은 `월`를 입력하려고 시도할 때의 상태' } },
+    docs: { description: { story: '기본 상태' } },
+  },
+};
+
+export const Selected: Story = {
+  parameters: {
+    docs: { description: { story: '카드사를 선택한 상태' } },
   },
 };
