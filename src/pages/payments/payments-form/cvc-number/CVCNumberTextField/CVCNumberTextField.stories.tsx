@@ -11,7 +11,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: '사용자로부터 소유자 이름 관련 설명 및 입력을 제공하는 컴포넌트',
+        component: 'CVC 번호 입력을 제공하는 컴포넌트',
       },
     },
   },

@@ -8,10 +8,10 @@ export interface OwnerNameTextFieldProps {
   cvcNumberError: { isError: boolean; errorMessage: string };
 }
 
-const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcNumberError, onAddCVCNumber }) => {
+const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcNumberError, onAddCVCNumber }) => {
   return (
     <section>
-      <TextField.Title title="카드 소유자 이름을 입력해 주세요" />
+      <TextField.Title title="CVC 번호를 입력해 주세요" />
       <Spacer space={10} />
       <TextField.Label htmlFor="cvcNumber" labelText="CVC" />
       <TextField.Content>
@@ -28,4 +28,4 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcN
   );
 };
 
-export default OwnerNameTextField;
+export default CVCNumberTextField;
