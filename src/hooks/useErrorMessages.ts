@@ -6,9 +6,10 @@
 
 import { useState } from 'react';
 
-const useErrorMessages = (size: number) => {
-  const [errorMessages, setErrorMessages] = useState(new Array(size).fill(''));
-  const handleChangeErrorMessage = (errorMessage: string, index: number) => {
+const useErrorMessages = <T extends string = string>(size: number) => {
+  const [errorMessages, setErrorMessages] = useState<T[]>(new Array(size).fill(''));
+
+  const handleChangeErrorMessage = (errorMessage: T, index: number) => {
     const updatedErrorMessages = [...errorMessages];
     updatedErrorMessages[index] = errorMessage;
     setErrorMessages(updatedErrorMessages);

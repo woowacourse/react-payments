@@ -12,7 +12,7 @@ type CardNumberInputField = {
 };
 
 export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: CardNumberInputField) {
-  const { errorMessages, setErrorMessages } = useErrorMessages(cardNumbers.length);
+  const { errorMessages, setErrorMessages } = useErrorMessages<string>(cardNumbers.length);
 
   const getErrorMessage = (numberUnit: string) => {
     if (isNaN(Number(numberUnit)) && numberUnit.length !== 0) {
