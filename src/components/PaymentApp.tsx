@@ -5,9 +5,9 @@ import Form from "./Form/Form";
 import CardPreview from "./Card/CardPreview";
 
 const PaymentApp = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-  const [expirationDate, setExpirationDate] = useState<string[]>([]);
-  const [userName, setUserName] = useState<string[]>([]);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(["", "", "", ""]);
+  const [expirationDate, setExpirationDate] = useState<string[]>(["", ""]);
+  const [userName, setUserName] = useState<string[]>([""]);
 
   return (
     <PaymentAppStyled>
