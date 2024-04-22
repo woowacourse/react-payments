@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
+import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import CreditCard from "../../components/creditCard";
 import CreditCardForm from "../../components/creditCardForm";
-import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import { CARD_FORM_TYPE } from "../../constants/cardFormType";
 import SIGN from "../../constants/sign";
+import useInput from "../../hooks/useInput";
 
 interface Owner {
   name: string;

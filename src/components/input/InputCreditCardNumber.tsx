@@ -1,8 +1,8 @@
-import InputBox from "./common/InputBox";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { CardNumberValue } from "../../@types/CreditCard";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
+import InputBox from "./common/InputBox";
 
 interface InputCreditCardNumberProps {
   inputValue: CardNumberValue;

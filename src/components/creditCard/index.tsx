@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
+import { CreditCardProps } from "../../@types/CreditCard";
 import CreditCardBrandLogo from "./CreditCardBrandLogo";
 import CreditCardInfo from "./CreditCardInfo";
-import { CreditCardProps } from "../../@types/CreditCard";
 
 const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
   return (
