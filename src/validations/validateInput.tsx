@@ -3,11 +3,16 @@ import { VALIDATION } from '../constants/validation';
 import { InformationDetailType } from '../types/card';
 import { isRange } from '../util/isRange';
 
+interface ValidateResultType {
+  isError: boolean;
+  message: string;
+}
+
 interface ValidateInputTableType {
-  number: () => void;
-  month: () => void;
-  year: () => void;
-  owner: () => void;
+  number: () => ValidateResultType;
+  month: () => ValidateResultType;
+  year: () => ValidateResultType;
+  owner: () => ValidateResultType;
 }
 
 const validateInput = (value: string, informationDetail: InformationDetailType) => {
@@ -19,19 +24,26 @@ const validateInput = (value: string, informationDetail: InformationDetailType) 
   };
 
   const validateFunction = validateInputTable[informationDetail];
-  validateFunction();
+  return validateFunction();
 };
 
 function cardNumberValidated(value: string) {
   const valueToNumber = Number(value);
-  isNumber(valueToNumber);
-  isNumberCount(value, VALIDATION.cardNumberCount);
+  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isNumberCount(value, VALIDATION.cardNumberCount))
+    return { isError: true, message: ERROR_MESSAGE.inputCount(VALIDATION.cardNumberCount) };
+  return { isError: false, message: '' };
 }
 
 function cardMonthValidated(value: string) {
   const valueToNumber = Number(value);
-  isNumber(valueToNumber);
-  isInRange(valueToNumber, VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max);
+  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isInRange(valueToNumber, VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max))
+    return {
+      isError: true,
+      message: ERROR_MESSAGE.notInRange(VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max),
+    };
+  return { isError: false, message: '' };
 }
 
 function cardYearValidated(value: string) {
@@ -39,25 +51,35 @@ function cardYearValidated(value: string) {
   const now = new Date();
   const year = now.getFullYear();
   const lastTwoDigits = year % 100;
-  isNumber(valueToNumber);
-  isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod);
+  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod))
+    return {
+      isError: true,
+      message: ERROR_MESSAGE.notInRange(lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod),
+    };
+  return { isError: false, message: '' };
 }
 
 function cardOwnerValidated(value: string) {
-  isUpperCaseEnglish(value);
-  isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max);
+  if (!isUpperCaseEnglish(value)) return { isError: true, message: ERROR_MESSAGE.upperCase };
+  if (!isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max))
+    return {
+      isError: true,
+      message: ERROR_MESSAGE.notInRange(VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max),
+    };
+  return { isError: false, message: '' };
 }
 
 function isNumber(value: number) {
   if (isNaN(value)) {
-    throw new Error(ERROR_MESSAGE.notANumber);
+    return false;
   }
   return true;
 }
 
 function isInRange(value: number, min: number, max: number) {
   if (isRange(value, min, max)) {
-    throw new Error(ERROR_MESSAGE.notInRange(min, max));
+    return false;
   }
   return true;
 }
@@ -65,7 +87,7 @@ function isInRange(value: number, min: number, max: number) {
 function isUpperCaseEnglish(value: string) {
   const regex = /^[A-Z]*$/;
   if (!regex.test(value)) {
-    throw new Error(ERROR_MESSAGE.upperCase);
+    return false;
   }
   return true;
 }
@@ -73,7 +95,7 @@ function isUpperCaseEnglish(value: string) {
 function isNumberCount(value: string, count: number) {
   const valueLength = value.length;
   if (valueLength !== count) {
-    throw new Error(ERROR_MESSAGE.inputCount(count));
+    return false;
   }
   return true;
 }
