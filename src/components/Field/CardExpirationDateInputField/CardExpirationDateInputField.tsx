@@ -11,7 +11,7 @@ export default function CardExpirationDateInputField({
   setDate,
 }: {
   date: Date;
-  setDate: Dispatch<SetStateAction<Record<string, string>>>;
+  setDate: Dispatch<SetStateAction<Date>>;
 }) {
   const { errorMessages, setErrorMessages } = useErrorMessages<string>(Object.keys(date).length, '');
 

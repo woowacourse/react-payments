@@ -7,11 +7,12 @@ import CardNumbersInputField from './components/Field/CardNumbersInputField/Card
 import CardExpirationDateInputField from './components/Field/CardExpirationDateInputField/CardExpirationDateInputField';
 import CardOwnerNameInputField from './components/Field/CardOwnerNameInputField/CardOwnerNameInputField';
 import Card from './components/Card/Card';
+import { Date } from './types/date';
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(new Array(CARD_NUMBER_UNIT_LENGTH).fill(''));
 
-  const [date, setDate] = useState<Record<string, string>>({
+  const [date, setDate] = useState<Date>({
     month: '',
     year: '',
   });
