@@ -8,6 +8,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
   isRequired?: boolean;
   maxLength?: number;
+  isPassword?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
 }
@@ -19,11 +20,13 @@ export default function Input({
   isError,
   maxLength,
   isRequired = false,
+  isPassword = false,
   onChange,
   onBlur,
 }: InputProps) {
   return (
     <input
+      type={isPassword ? "password" : "text"}
       name={name}
       placeholder={placeholder}
       value={value}

@@ -10,6 +10,14 @@
   /* CardPreview */
   --color-card-bg: #333;
   --color-card-chip: #ddcd78;
+  --color-BC-background: #f04651;
+  --color-shinhan-background: #0046ff;
+  --color-kakao-background: #ffe600;
+  --color-hyundai-background: #000000;
+  --color-woori-background: #007bc8;
+  --color-lotte-background: #ed1c24;
+  --color-hana-background: #009490;
+  --color-kookmin-background: #6a6056;
 }
 
 * {

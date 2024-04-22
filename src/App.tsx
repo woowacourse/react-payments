@@ -7,12 +7,21 @@ import CardPreview from "@/components/CardPreview/CardPreview";
 import useCardNumbers from "@/hooks/useCardNumbers";
 import useExpirationDate from "@/hooks/useExpirationDate";
 import useOwnerName from "@/hooks/useOwnerName";
+import PasswordInput from "@/components/PasswordInput/PasswordInput";
+import CVCInput from "@/components/CVCInput/CVCInput";
+import CardCompany from "@/components/CardCompany/CardCompany";
 
 const App = () => {
   const { cardNumbers, changeCardNumbers, blurCardNumbers } = useCardNumbers();
   const { expirationDate, changeExpirationDate, blurExpirationDate } =
     useExpirationDate();
   const { ownerName, changeOwnerName, blurOwnerName } = useOwnerName();
+
+  // console.log(
+  //   Object.entries(cardNumbers.data)
+  //     .map(([, { isDone }]) => isDone)
+  //     .every((isDone) => isDone)
+  // );
 
   return (
     <div className={styles.app}>
@@ -47,20 +56,23 @@ const App = () => {
       />
 
       <form>
-        <CardNumberInput
-          cardNumbers={cardNumbers}
-          changeCardNumbers={changeCardNumbers}
-          blurCardNumbers={blurCardNumbers}
+        <CardCompany />
+        <PasswordInput />
+        <CVCInput />
+        <OwnerNameInput
+          ownerName={ownerName}
+          changeOwnerName={changeOwnerName}
+          blurOwnerName={blurOwnerName}
         />
         <ExpirationDateInput
           expirationDate={expirationDate}
           changeExpirationDate={changeExpirationDate}
           blurExpirationDate={blurExpirationDate}
         />
-        <OwnerNameInput
-          ownerName={ownerName}
-          changeOwnerName={changeOwnerName}
-          blurOwnerName={blurOwnerName}
+        <CardNumberInput
+          cardNumbers={cardNumbers}
+          changeCardNumbers={changeCardNumbers}
+          blurCardNumbers={blurCardNumbers}
         />
       </form>
     </div>
