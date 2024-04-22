@@ -53,7 +53,7 @@ export default function UserNameInput({handleInput} : Props) {
       <Input
         key={index}
         type="string"
-        maxLength={2}
+        maxLength={30}
         placeholder={'JOHN DOE'}
         isError = {checkInputError(index)}
         onChange={(e) => handleInputChange(e, 'userName', index)}
