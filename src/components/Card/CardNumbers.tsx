@@ -12,13 +12,10 @@ const CardNumbers = ({ cardNumbers }: { cardNumbers: string[] }) => {
         height: "20px",
       }}
     >
-      {cardNumbers.map((cardNumber, index) => {
-        if (index < 2) {
-          return <CardNumber key={index} number={cardNumber} />;
-        } else {
-          return <CardNumber key={index} number={Array(cardNumber.length).fill(<Dot />)} />;
-        }
-      })}
+      <CardNumber number={cardNumbers[0]} />
+      <CardNumber number={cardNumbers[1]} />
+      <CardNumber number={Array(cardNumbers[2].length).fill(<Dot />)} />
+      <CardNumber number={Array(cardNumbers[3].length).fill(<Dot />)} />
     </div>
   );
 };

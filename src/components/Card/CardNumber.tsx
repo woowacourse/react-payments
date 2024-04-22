@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const CardNumber = ({ key, number }: { key: React.Key; number: string | string[] }) => {
-  return <CardNumberWrapper key={key}>{number}</CardNumberWrapper>;
+const CardNumber = ({ number }: { number: string | string[] }) => {
+  return <CardNumberWrapper>{number}</CardNumberWrapper>;
 };
 
 const CardNumberWrapper = styled.span`
