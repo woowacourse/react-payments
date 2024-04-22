@@ -110,13 +110,6 @@ function App() {
     owner: setCardOwner,
   };
 
-  const getCardState = {
-    number: cardNumber,
-    month: cardPeriod,
-    year: cardPeriod,
-    owner: cardOwner,
-  };
-
   const handleCardError = (isError: boolean, inputSection: InformationDetailType, message: string, index: number) => {
     setIsError((prevState) => {
       if (inputSection === 'number') {
@@ -147,13 +140,15 @@ function App() {
         <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
         <form css={appInputStyle}>
           <InputGroup
-            setState={(value: string, index: number) => handleInputChange({ value, index, inputSection: 'number' })}
+            onInputChange={(value: string, index: number) =>
+              handleInputChange({ value, index, inputSection: 'number' })
+            }
             informationSection="number"
             isError={isError.number}
             errorMessage={cardNumber.errorMessage}
           />
           <InputGroup
-            setState={(value: string, index: number, inputSection?: InformationDetailType) => {
+            onInputChange={(value: string, index: number, inputSection?: InformationDetailType) => {
               if (inputSection) handleInputChange({ value, index, inputSection });
             }}
             informationSection="period"
@@ -161,7 +156,7 @@ function App() {
             errorMessage={cardPeriod.errorMessage}
           />
           <InputGroup
-            setState={(value: string, index: number) => handleInputChange({ value, index, inputSection: 'owner' })}
+            onInputChange={(value: string, index: number) => handleInputChange({ value, index, inputSection: 'owner' })}
             informationSection="owner"
             isError={[isError.owner]}
             errorMessage={cardOwner.errorMessage}

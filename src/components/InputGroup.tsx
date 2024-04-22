@@ -54,13 +54,13 @@ const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusCol
   });
 
 interface InputGroupType {
-  setState: (value: string, index: number, inputSection?: InformationDetailType) => void;
+  onInputChange: (value: string, index: number, inputSection?: InformationDetailType) => void;
   informationSection: informationSectionType;
   isError: boolean[];
   errorMessage: string;
 }
 
-function InputGroup({ setState, informationSection, isError, errorMessage }: InputGroupType) {
+function InputGroup({ onInputChange, informationSection, isError, errorMessage }: InputGroupType) {
   const getTypeTable = {
     number: CARD_NUMBER,
     period: CARD_PERIOD,
@@ -96,7 +96,7 @@ function InputGroup({ setState, informationSection, isError, errorMessage }: Inp
                 maxLength={maxLength}
                 type={getInputType(informationSection, index)}
                 placeholder={placeholder}
-                setState={(value) => setState(value, index, inputSection)}
+                onStateChange={(value) => onInputChange(value, index, inputSection)}
                 inputCss={inputStyle({
                   borderColor: isError[index] ? '#FF3D3D' : '#acacac',
                   focusColor: isError[index] ? '#FF3D3D' : '#000',

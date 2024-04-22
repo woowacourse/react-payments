@@ -4,10 +4,10 @@ import React from 'react';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   inputCss: SerializedStyles;
-  setState: (value: string) => void;
+  onStateChange: (value: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({ inputCss, type, placeholder, setState, maxLength }) => {
+const Input: React.FC<InputProps> = ({ inputCss, type, placeholder, onStateChange, maxLength }) => {
   return (
     <input
       maxLength={maxLength}
@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({ inputCss, type, placeholder, setState, ma
       min={0}
       css={inputCss}
       placeholder={placeholder}
-      onChange={(e) => setState(e.target.value)}
+      onChange={(e) => onStateChange(e.target.value)}
     ></input>
   );
 };
