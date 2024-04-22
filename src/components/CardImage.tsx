@@ -61,8 +61,8 @@ const cardNumberGridStyle = css({
 
 interface CardImageType {
   cardNumber: string[];
-  cardPeriod: string[];
-  cardOwner: string[];
+  cardPeriod: { month: string; year: string };
+  cardOwner: string;
 }
 
 interface CardImageTableType {
@@ -111,7 +111,7 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
             },
           )}
         </div>
-        <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
+        <p css={cardDetailStyle}>{periodFormat(cardPeriod.month, cardPeriod.year)}</p>
         <p css={cardDetailStyle}>{cardOwner}</p>
       </div>
     </div>
