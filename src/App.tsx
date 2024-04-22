@@ -8,7 +8,7 @@ import useCardNumbers from "@/hooks/useCardNumbers";
 import useExpirationDate from "@/hooks/useExpirationDate";
 import useOwnerName from "@/hooks/useOwnerName";
 
-function App() {
+const App = () => {
   const { cardNumbers, changeCardNumbers, blurCardNumbers } = useCardNumbers();
   const { expirationDate, changeExpirationDate, blurExpirationDate } =
     useExpirationDate();
@@ -65,6 +65,6 @@ function App() {
       </form>
     </div>
   );
-}
+};
 
 export default App;

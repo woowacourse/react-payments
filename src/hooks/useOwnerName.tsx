@@ -1,7 +1,7 @@
 import { CARD_OWNERNAME_KEY } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
 import { isEnglishCharacter } from "@/utils/validators";
-import { ChangeEvent, FocusEvent, useState } from "react";
+import { ChangeEvent, FocusEvent, useState, useCallback } from "react";
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState({
@@ -14,40 +14,43 @@ const useOwnerName = () => {
     },
   });
 
-  const changeOwnerName = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target as {
-      name: (typeof CARD_OWNERNAME_KEY)[number];
-      value: string;
-    };
-    if (!CARD_OWNERNAME_KEY.includes(name)) return;
+  const changeOwnerName = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target as {
+        name: (typeof CARD_OWNERNAME_KEY)[number];
+        value: string;
+      };
+      if (!CARD_OWNERNAME_KEY.includes(name)) return;
 
-    if (!isEnglishCharacter(value)) {
-      setOwnerName({
-        data: {
-          ownerName: {
-            value: ownerName.data.ownerName.value,
-            isError: true,
-            isDone: false,
+      if (!isEnglishCharacter(value)) {
+        setOwnerName({
+          data: {
+            ownerName: {
+              value: ownerName.data.ownerName.value,
+              isError: true,
+              isDone: false,
+            },
           },
-        },
+          status: {
+            isError: true,
+            errorMessage: ERRORS.isNotAlphabet,
+          },
+        });
+        return;
+      }
+
+      setOwnerName({
+        data: { ownerName: { value, isError: false, isDone: false } },
         status: {
-          isError: true,
-          errorMessage: ERRORS.isNotAlphabet,
+          isError: false,
+          errorMessage: "",
         },
       });
-      return;
-    }
+    },
+    [ownerName]
+  );
 
-    setOwnerName({
-      data: { ownerName: { value, isError: false, isDone: false } },
-      status: {
-        isError: false,
-        errorMessage: "",
-      },
-    });
-  };
-
-  const blurOwnerName = (event: FocusEvent<HTMLInputElement>) => {
+  const blurOwnerName = useCallback((event: FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target as {
       name: (typeof CARD_OWNERNAME_KEY)[number];
       value: string;
@@ -63,7 +66,7 @@ const useOwnerName = () => {
         errorMessage: "",
       },
     });
-  };
+  }, []);
 
   return {
     ownerName,

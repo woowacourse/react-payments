@@ -69,6 +69,19 @@ const CardPreview = memo(
         </div>
       </div>
     );
+  },
+  (prev, next) => {
+    if (prev.cardNumbers.first !== next.cardNumbers.first) return false;
+    if (prev.cardNumbers.second !== next.cardNumbers.second) return false;
+    if (prev.cardNumbers.third !== next.cardNumbers.third) return false;
+    if (prev.cardNumbers.fourth !== next.cardNumbers.fourth) return false;
+
+    if (prev.expirationDate.month !== next.expirationDate.month) return false;
+    if (prev.expirationDate.year !== next.expirationDate.year) return false;
+
+    if (prev.ownerName.ownerName !== next.ownerName.ownerName) return false;
+
+    return true;
   }
 );
 
