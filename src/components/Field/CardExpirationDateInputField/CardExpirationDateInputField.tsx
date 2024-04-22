@@ -1,9 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { DATE_PLACEHOLDER } from '../../../constants/input';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
 import { checkExpired, checkValidMonth, checkValidYear } from '../../../utils/checkDate';
 import { Date } from '../../../types/date';
+import useErrorMessages from '../../../hooks/useErrorMessages';
 
 export default function CardExpirationDateInputField({
   date,
@@ -12,7 +13,7 @@ export default function CardExpirationDateInputField({
   date: Date;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
 }) {
-  const [errorMessages, setErrorMessages] = useState(new Array(Object.keys(date).length).fill(''));
+  const { errorMessages, setErrorMessages } = useErrorMessages<string>(Object.keys(date).length, '');
 
   // 여긴 최신 오류 순서가 아닌 0부터 시작함..
   const checkValidDate = ({ month = date.month, year = date.year }: { month?: string; year?: string }) => {
@@ -21,7 +22,10 @@ export default function CardExpirationDateInputField({
     const monthErrorMessage = checkValidMonth(month, isExpiredDate);
     const yearErrorMessage = checkValidYear(year, isExpiredDate);
 
-    setErrorMessages([monthErrorMessage, yearErrorMessage]);
+    setErrorMessages([
+      { errorMessage: monthErrorMessage, index: 0 },
+      { errorMessage: yearErrorMessage, index: 1 },
+    ]);
   };
 
   const handleMonth = (e: ChangeEvent<HTMLInputElement>) => {

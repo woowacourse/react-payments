@@ -12,7 +12,7 @@ type CardNumberInputField = {
 };
 
 export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: CardNumberInputField) {
-  const { errorMessages, setErrorMessages } = useErrorMessages<string>(cardNumbers.length);
+  const { errorMessages, setErrorMessages } = useErrorMessages<string>(cardNumbers.length, '');
 
   const getErrorMessage = (numberUnit: string) => {
     if (isNaN(Number(numberUnit)) && numberUnit.length !== 0) {
@@ -26,7 +26,7 @@ export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: C
     const number = e.target.value;
 
     const errorMessage = getErrorMessage(number);
-    setErrorMessages(errorMessage, index);
+    setErrorMessages({ errorMessage: errorMessage, index });
 
     if (errorMessage !== '') return;
 
@@ -38,12 +38,12 @@ export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: C
   const handleInputBlur = (index: number) => {
     const number = cardNumbers[index];
     if (number.length < CARD_NUMBER_UNIT_LENGTH) {
-      setErrorMessages(ERROR_MESSAGES.CARD_NUMBER_UNIT_LENGTH, index);
+      setErrorMessages({ errorMessage: ERROR_MESSAGES.CARD_NUMBER_UNIT_LENGTH, index });
 
       return;
     }
 
-    setErrorMessages('', index);
+    setErrorMessages({ errorMessage: '', index });
   };
 
   return (
