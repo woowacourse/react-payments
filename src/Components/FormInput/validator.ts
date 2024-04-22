@@ -8,6 +8,7 @@ const ERROR_MESSAGES = {
   onlyNumber: "숫자만 입력해주세요.",
   notValidMonth: "유효한 월이 아닙니다",
   under15Length: "최대 15자로 입력해주세요.",
+  onlyEnglish: "영어만 입력해주세요.",
 };
 
 export function cardNumbersValidator(input: string): validatorReturn<number> {
@@ -27,5 +28,6 @@ export function cardPeriodValidator(input: string, category: "month" | "year"): 
 
 export function cardOwnerValidator(input: string): validatorReturn<string> {
   if (input.length > 15) return { isValid: false, message: ERROR_MESSAGES.under15Length };
+  if (!/[a-zA-Z ]/.test(input) && input) return { isValid: false, message: ERROR_MESSAGES.onlyEnglish };
   return { isValid: true, value: input };
 }
