@@ -5,6 +5,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react()],
+  base: "/react-payments/",
   resolve: {
     alias: [
       { find: "@", replacement: resolve(__dirname, "src") },
