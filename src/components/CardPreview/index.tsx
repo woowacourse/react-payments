@@ -1,70 +1,65 @@
-import { useEffect, useState } from 'react';
-
 import IMAGES from '../../assets/images';
-import { CARD_COLOR, CARD_MARK, INPUT_LENGTH } from '../../constants';
-import { CardInfo } from '../../modules/useCardInfoReducer';
+import { CARD_COLOR, CARD_MARK } from '../../constants';
 
 import styles from './style.module.css';
 
 interface CardPreviewProps {
-  cardInfo: CardInfo;
+  cardNumbers: string[];
+  period: {
+    month: string;
+    year: string;
+  };
+  userName: string;
 }
-function CardPreview(props: CardPreviewProps) {
-  const { cardInfo } = props;
-  const { mark, number, period, userName, color } = cardInfo;
-  const SLASH = '/';
-  const DOT = '·';
-  interface MarkInfo {
-    src: string | undefined;
-    alt: string | undefined;
-  }
 
-  const INITIAL_MARK_INFO: MarkInfo = { src: undefined, alt: undefined };
-  const [markInfo, setMarkInfo] = useState<MarkInfo>(INITIAL_MARK_INFO);
-  const [cardNumbers, setCardNumbers] = useState<string>();
-
-  const changeNumberToMasking = () => {
-    if (!number) return;
-    const numberList = number
-      .split(',')
-      .map((item, index) => {
-        if (item && index > 1) {
-          return DOT.repeat(INPUT_LENGTH.CARD_NUMBERS);
+function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
+  const maskCardNumbers = () =>
+    cardNumbers
+      .map((number, index) => {
+        if (index > 1) {
+          return number.replace(/\d/g, '·');
         }
-        return item;
+        return number;
       })
       .join(' ');
 
-    setCardNumbers(numberList);
-  };
+  function getCardCompanyMark(): 'visa' | 'master' | 'etc' {
+    const firstGroup = cardNumbers[0];
+    if (!firstGroup) return 'etc';
 
-  useEffect(() => {
-    if (!mark) {
-      return;
+    const visaRegex = /^4[0-9]{15}$/;
+    const masterCardRegex = /^(5[1-5][0-9]{14})$/;
+
+    const cardNumber = cardNumbers.join('');
+
+    if (visaRegex.test(cardNumber)) {
+      return 'visa';
     }
-    setMarkInfo(CARD_MARK[mark]);
-  }, [mark]);
-
-  useEffect(() => {
-    changeNumberToMasking();
-  }, [number]);
+    if (masterCardRegex.test(cardNumber)) {
+      return 'master';
+    }
+    return 'etc';
+  }
 
   return (
     <div className={styles.cardPreview}>
       <div
         className={styles.cardImg}
-        style={{ backgroundColor: CARD_COLOR[color] }}
+        style={{ backgroundColor: CARD_COLOR.default }}
       >
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
             <img src={IMAGES.cardChip} alt="card chip" />
-            <img src={markInfo.src} alt={markInfo.alt} />
+            <img
+              src={CARD_MARK[getCardCompanyMark()].src}
+              alt={CARD_MARK[getCardCompanyMark()].alt}
+            />
           </section>
           <section className={styles.info}>
-            <div className="card-number">{cardNumbers}</div>
+            <div className="card-number">{maskCardNumbers()}</div>
             <div className="period">
-              {period.month}
-              {period.month && period.year ? SLASH : ''}
+              {period.month && period.month.padStart(2, '0')}
+              {period.month && period.year ? '/' : ''}
               {period.year}
             </div>
             <div className={styles.user}>{userName}</div>

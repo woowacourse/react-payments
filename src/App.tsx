@@ -19,13 +19,11 @@ function App() {
   return (
     <div id="app">
       <div className="inner">
-        <div>
-          {period.month}/{period.year}
-        </div>
-        <div>{numbers}</div>
-        <div>{userName}</div>
-
-        {/* <CardPreview cardInfo={cardInfo} /> */}
+        <CardPreview
+          cardNumbers={numbers}
+          period={period}
+          userName={userName}
+        />
         <form className="form-container">
           <fieldset>
             <CardNumbersInput
