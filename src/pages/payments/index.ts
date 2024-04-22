@@ -16,3 +16,6 @@ export { default as ExpirationDateTextField } from './payments-form/expiration-d
 
 export { default as OwnerNameInput } from './payments-form/owner-name/OwnerNameInput/OwnerNameInput';
 export { default as OwnerNameTextField } from './payments-form/owner-name/OwnerNameTextField/OwnerNameTextField';
+
+export { default as PasswordPrefixInput } from './payments-form/password-prefix/PasswordPrefixInput/PasswordPrefixInput';
+export { default as PasswordPrefixTextField } from './payments-form/password-prefix/PasswordPrefixTextField/PasswordPrefixTextField';
