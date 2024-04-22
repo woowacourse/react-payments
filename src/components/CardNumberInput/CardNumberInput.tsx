@@ -1,66 +1,42 @@
-import { useState, useMemo } from 'react';
 import TitleContainer from '../common/TitleContainer/TitleContainer';
 import InputField from '../common/InputField/InputField';
 import Input from '../common/Input/Input';
 
 import { CARD_NUMBER } from '../../constants/conditions';
-import { ERROR_MESSAGE } from '../../constants/messages';
-import { cardNumbersType } from '../../types/cardNumbers';
+import { cardNumbersValidStatesType } from '../../types/cardNumbers';
 
 interface CardNumberInputProps {
-  setCardNumbers: React.Dispatch<React.SetStateAction<cardNumbersType>>;
+  isCardNumbersValid: { validStates: cardNumbersValidStatesType; errorMessage: string };
+  onChangeCardNumbers: (inputIndex: number, value: string) => void;
 }
 
-type inputValidStatesType = [boolean, boolean, boolean, boolean];
-
-function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
-  const [inputValidStates, setInputValidStates] = useState<inputValidStatesType>([true, true, true, true]);
-
-  const errorMessage = useMemo(() => {
-    return inputValidStates.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
-  }, [inputValidStates]);
-
-  const validateCardNumber = (number: string) => {
-    return !Number.isNaN(Number(number)) && number.length === CARD_NUMBER.MAX_LENGTH;
-  };
-
-  const onCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value = e.target.value.replace(CARD_NUMBER.VALID_REGEX, '');
+function CardNumberInput({ isCardNumbersValid, onChangeCardNumbers }: CardNumberInputProps) {
+  const handleChangeCardNumber = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = e.target.value.replace(CARD_NUMBER.INVALID_CHARS_REGEX, '');
     if (e.target.value.length > CARD_NUMBER.MAX_LENGTH) {
       e.target.value = e.target.value.slice(0, CARD_NUMBER.MAX_LENGTH);
       return;
     }
 
-    const inputValue = e.target.value;
-    const newInputValidState = validateCardNumber(inputValue);
-
-    setInputValidStates((prev): inputValidStatesType => {
-      return prev.map((prevInputValidState, index) => (index === inputIndex ? newInputValidState : prevInputValidState)) as inputValidStatesType;
-    });
-
-    setCardNumbers((prev) => {
-      return prev.map((number, index) => {
-        if (index === inputIndex) {
-          return newInputValidState ? inputValue : '';
-        }
-
-        return number;
-      }) as cardNumbersType;
-    });
+    onChangeCardNumbers(inputIndex, e.target.value);
   };
 
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <InputField label="카드 번호" length={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField
+        label="카드 번호"
+        length={CARD_NUMBER.INPUT_FIELD_COUNT}
+        errorMessage={isCardNumbersValid.errorMessage}
+      >
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}
             type="text"
             placeholder="1234"
             maxLength={CARD_NUMBER.MAX_LENGTH}
-            onChange={onCardNumberChange(index)}
-            isValid={inputValidStates[index]}
+            onChange={handleChangeCardNumber(index)}
+            isValid={isCardNumbersValid.validStates[index]}
           />
         ))}
       </InputField>

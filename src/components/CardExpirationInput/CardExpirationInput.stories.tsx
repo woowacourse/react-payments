@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import CardExpirationInput from './CardExpirationInput';
 
 const meta = {
@@ -12,7 +13,8 @@ type Story = StoryObj<typeof CardExpirationInput>;
 
 export const Default: Story = {
   args: {
-    setMonth: () => {},
-    setYear: () => {},
+    isMonthValid: { isValid: true, errorMessage: '' },
+    isYearValid: { isValid: true, errorMessage: '' },
+    onChangeExpireDate: fn(),
   },
 };

@@ -1,73 +1,59 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
+
 import TitleContainer from '../common/TitleContainer/TitleContainer';
 import InputField from '../common/InputField/InputField';
 import Input from '../common/Input/Input';
 
 import { CARD_EXPIRATION } from '../../constants/conditions';
-import { ERROR_MESSAGE } from '../../constants/messages';
 
 interface CardExpirationInputProps {
-  setMonth: React.Dispatch<React.SetStateAction<string>>;
-  setYear: React.Dispatch<React.SetStateAction<string>>;
+  isMonthValid: { isValid: boolean; errorMessage: string };
+  isYearValid: { isValid: boolean; errorMessage: string };
+  onChangeExpireDate: (month: string, year: string) => void;
 }
 
-function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
-  const [isValidMonth, setIsValidMonth] = useState(true);
-  const [isValidYear, setIsValidYear] = useState(true);
+function CardExpirationInput({ isMonthValid, isYearValid, onChangeExpireDate }: CardExpirationInputProps) {
+  const [expireDate, setExpireDate] = useState({ month: '', year: '' });
 
-  const errorMessage = useMemo(() => {
-    if (!isValidMonth) return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_LENGTH;
-    if (!isValidYear) return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR_LENGTH;
+  const errorMessage = () => {
+    if (isMonthValid.errorMessage !== '') return isMonthValid.errorMessage;
+    if (isYearValid.errorMessage !== '') return isYearValid.errorMessage;
     return '';
-  }, [isValidMonth, isValidYear]);
-
-  const validateMonth = (month: string) => {
-    if (Number.isNaN(Number(month)) || month.length !== CARD_EXPIRATION.MAX_LENGTH) {
-      return false;
-    }
-
-    if (Number(month) < CARD_EXPIRATION.MIN_MONTH_RANGE || Number(month) > CARD_EXPIRATION.MAX_MONTH_RANGE) {
-      return false;
-    }
-
-    return true;
   };
 
-  const validateYear = (year: string) => {
-    return !Number.isNaN(Number(year)) && year.length === CARD_EXPIRATION.MAX_LENGTH;
+  const handleMonthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.value = event.target.value.replace(CARD_EXPIRATION.INVALID_CHARS_REGEX, '');
+    setExpireDate((prevState) => {
+      return { ...prevState, month: event.target.value };
+    });
+    onChangeExpireDate(event.target.value, expireDate.year);
   };
 
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidMonth = validateMonth(e.target.value);
-
-    setIsValidMonth(newIsValidMonth);
-    setMonth(newIsValidMonth ? e.target.value : '');
-  };
-
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidYear = validateYear(e.target.value);
-
-    setIsValidYear(newIsValidYear);
-    setYear(newIsValidYear ? e.target.value : '');
+  const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.value = event.target.value.replace(CARD_EXPIRATION.INVALID_CHARS_REGEX, '');
+    setExpireDate((prevState) => {
+      return { ...prevState, year: event.target.value };
+    });
+    onChangeExpireDate(expireDate.month, event.target.value);
   };
 
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input
           type="text"
           placeholder="MM"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
-          onChange={onMonthChange}
-          isValid={isValidMonth}
+          onChange={handleMonthChange}
+          isValid={isMonthValid.isValid}
         />
         <Input
           type="text"
           placeholder="YY"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
-          onChange={onYearChange}
-          isValid={isValidYear}
+          onChange={handleYearChange}
+          isValid={isYearValid.isValid}
         />
       </InputField>
     </div>
