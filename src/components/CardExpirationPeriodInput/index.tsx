@@ -2,10 +2,10 @@ import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
-import CardInput from '../CardInput';
-import CardInputContainer from '../CardInputContainer';
 import Input from '../common/Input';
 import FormErrorMessage from '../FormErrorMessage';
+import InputContainer from '../InputContainer';
+import InputField from '../InputField';
 
 import styles from './style.module.css';
 
@@ -51,8 +51,8 @@ export default function CardExpirationPeriodInput({
   };
 
   return (
-    <CardInputContainer title={title} subTitle={subTitle}>
-      <CardInput label={label}>
+    <InputContainer title={title} subTitle={subTitle}>
+      <InputField label={label}>
         <div>
           <div className={styles.inputWrap}>
             <Input
@@ -76,7 +76,7 @@ export default function CardExpirationPeriodInput({
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />
         </div>
-      </CardInput>
-    </CardInputContainer>
+      </InputField>
+    </InputContainer>
   );
 }

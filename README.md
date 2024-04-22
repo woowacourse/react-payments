@@ -114,10 +114,10 @@ npm run storybook
  ┣ 📂CardExpirationPeriodInput
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
- ┣ 📂CardInput
+ ┣ 📂InputField
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
- ┣ 📂CardInputContainer
+ ┣ 📂InputContainer
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
  ┣ 📂CardNumbersInput

@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 
 import styles from './style.module.css';
 
-interface CardInputContainerProps {
+interface InputContainerProps {
   title: string;
   subTitle: string;
   children: ReactNode;
 }
 
-function CardInputContainer(props: CardInputContainerProps) {
+function InputContainer(props: InputContainerProps) {
   const { title, subTitle, children } = props;
 
   return (
@@ -22,4 +22,4 @@ function CardInputContainer(props: CardInputContainerProps) {
   );
 }
 
-export default CardInputContainer;
+export default InputContainer;

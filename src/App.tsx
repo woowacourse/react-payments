@@ -16,8 +16,10 @@ function App() {
 
   const { numbers, numberErrors, handleNumberChange } =
     useCardNumbersInput(CARD_NUMBERS);
+
   const { period, periodErrors, handlePeriodChange } =
     useCardExpirationPeriodInput(CARD_EXPIRATION);
+
   const { userName, nameError, handleNameChange } = useCardUserNameInput();
 
   return (

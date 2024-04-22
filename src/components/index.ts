@@ -1,16 +1,16 @@
 import CardExpirationPeriodInput from './CardExpirationPeriodInput/index';
-import CardInput from './CardInput';
-import CardInputContainer from './CardInputContainer';
 import CardNumbersInput from './CardNumbersInput';
 import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
 import Input from './common/Input';
 import FormErrorMessage from './FormErrorMessage/index';
+import InputContainer from './InputContainer';
+import InputField from './InputField';
 
 export {
   CardExpirationPeriodInput,
-  CardInput,
-  CardInputContainer,
+  InputField,
+  InputContainer,
   CardNumbersInput,
   CardPreview,
   CardUserNameInput,

@@ -2,7 +2,7 @@ import { ReactNode, useId } from 'react';
 
 import styles from './style.module.css';
 
-interface CardInputProps {
+interface InputFieldProps {
   label: string;
   /**
    * input 요소들
@@ -10,7 +10,7 @@ interface CardInputProps {
   children: ReactNode;
 }
 
-export default function CardInput(props: CardInputProps) {
+function InputField(props: InputFieldProps) {
   const { label, children } = props;
   const id = useId();
 
@@ -23,3 +23,4 @@ export default function CardInput(props: CardInputProps) {
     </div>
   );
 }
+export default InputField;

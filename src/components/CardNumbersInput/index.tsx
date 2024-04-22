@@ -1,8 +1,8 @@
 import { CARD_NUMBERS_FORM_MESSAGE, ERROR_MESSAGE } from '../../constants';
-import CardInput from '../CardInput';
-import CardInputContainer from '../CardInputContainer';
 import Input from '../common/Input';
 import FormErrorMessage from '../FormErrorMessage';
+import InputContainer from '../InputContainer';
+import InputField from '../InputField';
 
 import styles from './style.module.css';
 
@@ -30,8 +30,8 @@ export default function CardNumbersInput({
   };
 
   return (
-    <CardInputContainer title={title} subTitle={subTitle}>
-      <CardInput label={label}>
+    <InputContainer title={title} subTitle={subTitle}>
+      <InputField label={label}>
         <div className={styles.inputWrap}>
           {numbers.map((number, index) => (
             <Input
@@ -46,8 +46,8 @@ export default function CardNumbersInput({
             />
           ))}
         </div>
-      </CardInput>
+      </InputField>
       <FormErrorMessage errorMessage={getErrorMessage()} />
-    </CardInputContainer>
+    </InputContainer>
   );
 }
