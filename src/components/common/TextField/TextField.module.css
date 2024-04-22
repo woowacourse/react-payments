@@ -1,0 +1,18 @@
+.textFieldSubTitle {
+  margin-top: 4px;
+  margin-bottom: 16px;
+  color: var(--grey-300);
+}
+
+.textFieldContent {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.textFieldErrorText {
+  margin-top: 8px;
+  height: 14px;
+  color: var(--error);
+}

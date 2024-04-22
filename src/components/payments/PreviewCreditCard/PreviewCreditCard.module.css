@@ -1,0 +1,83 @@
+.creditCardContainer {
+  position: relative;
+  width: 212px;
+  height: 132px;
+  background-color: var(--grey-500);
+  padding: 8px 12px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  width: 28px;
+  height: 14px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid rgba(221, 205, 120, 0.1);
+  border-radius: 2px;
+  background-color: var(--grey-100);
+}
+
+.icChip {
+  background-color: #ddcd78;
+}
+
+.creditCard {
+  width: 21px;
+  height: 10px;
+}
+
+.cardDetailContainer {
+  margin: 14px 13px 0 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardNumberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.cardNumber {
+  width: 38px;
+}
+
+.password {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.cardDetailText {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-align: left;
+  color: var(--grey-100);
+}
+
+.expirationDateTextBox {
+  display: inline-block;
+  min-width: 20px;
+}
+
+.cardNumberTextBox {
+  width: 34px;
+}
