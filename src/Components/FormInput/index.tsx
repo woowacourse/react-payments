@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
 import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "../Form";
 import { inputStyle } from "./emotionCss";
-import { cardNumbersValidator } from "./validator";
+import { cardNumbersValidator, cardOwnerValidator, cardPeriodValidator } from "./validator";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
@@ -23,9 +23,9 @@ const CardNumberInput = () => {
     const { isValid, value, message: errorMessage } = cardNumbersValidator(e.target.value);
     if (isValid) {
       setNumbers((prev: CardNumbers) => {
-        const numbers = { ...prev };
-        numbers[name] = value;
-        return numbers;
+        const temp = { ...prev };
+        temp[name] = value;
+        return temp;
       });
       setCardNumberError((prev: CardNumbersError) => {
         const errors = JSON.parse(JSON.stringify(prev));
@@ -63,17 +63,30 @@ const CardNumberInput = () => {
 
 const CardPeriodInput = () => {
   const [cardPeriod, setCardPeriod] = useContext(CardValidityPeriodContext)!;
-  // const setPeriodError = useContext(CardValidityPeriodErrorContext)![1];
+  const setPeriodError = useContext(CardValidityPeriodErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardValidityPeriod) => {
-    const inputNumber = Number(e.target.value);
-    //TODO: valid 추가하기
-    setCardPeriod((prev: CardValidityPeriod) => {
-      const period = { ...prev };
-      period[name] = inputNumber;
-      return period;
-    });
+    const { isValid, value, message: errorMessage } = cardPeriodValidator(e.target.value, name);
+    if (isValid) {
+      setCardPeriod((prev: CardValidityPeriod) => {
+        const temp = { ...prev };
+        temp[name] = value;
+        return temp;
+      });
+      setPeriodError((prev: CardValidityPeriodError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: true, errorMessage };
+        return errors;
+      });
+    } else {
+      setPeriodError((prev: CardValidityPeriodError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: false, errorMessage: undefined };
+        return errors;
+      });
+    }
   };
+
   return (
     <>
       {[
@@ -97,17 +110,30 @@ const CardPeriodInput = () => {
 
 const CardOwnerInput = () => {
   const [cardOwner, setCardOwner] = useContext(CardOwnerInfoContext)!;
-  // const setFormErrors = useContext(CardOwnerInfoErrorContext)![1];
+  const setOwnerError = useContext(CardOwnerInfoErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardOwnerInfo) => {
-    const input = e.target.value;
-    //TODO: valid 추가하기
-    setCardOwner((prev: CardOwnerInfo) => {
-      const ownerInfo = { ...prev };
-      ownerInfo[name] = input;
-      return ownerInfo;
-    });
+    const { isValid, value, message: errorMessage } = cardOwnerValidator(e.target.value);
+    if (isValid) {
+      setCardOwner((prev: CardOwnerInfo) => {
+        const temp = { ...prev };
+        temp[name] = value;
+        return temp;
+      });
+      setOwnerError((prev: CardOwnerInfoError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: true, errorMessage };
+        return errors;
+      });
+    } else {
+      setOwnerError((prev: CardOwnerInfoError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: false, errorMessage: undefined };
+        return errors;
+      });
+    }
   };
+
   return (
     <>
       {[{ name: "name", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }, index) => (
