@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import CardNumberInput from './CardNumberInput';
 
 const meta = {
@@ -12,6 +13,7 @@ type Story = StoryObj<typeof CardNumberInput>;
 
 export const Default: Story = {
   args: {
-    setCardNumbers: () => {},
+    isCardNumbersValid: { validStates: [true, true, true, true], errorMessage: '' },
+    onChangeCardNumbers: fn(),
   },
 };
