@@ -2,7 +2,8 @@
 import React, { useContext } from "react";
 import { CardNumbersContext, CardOwnerInfoContext, CardValidityPeriodContext } from "../../App";
 import { CardNumberErrorContext, CardOwnerInfoErrorContext, CardValidityPeriodErrorContext } from "../Form";
-import { inputStyle } from "./emotionCSS";
+import { inputStyle } from "./emotionCss";
+import { cardNumbersValidator } from "./validator";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
@@ -16,16 +17,28 @@ const FormInputCompound: React.FC<InputProps> = ({ sizePreset = "medium", name, 
 
 const CardNumberInput = () => {
   const [cardNumbers, setNumbers] = useContext(CardNumbersContext)!;
-  // const setFormErrors = useContext(CardNumberErrorContext)![1];
+  const setCardNumberError = useContext(CardNumberErrorContext)![1];
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardNumbers) => {
-    const inputNumber = Number(e.target.value);
-    //TODO: valid 추가하기
-    setNumbers((prev: CardNumbers) => {
-      const numbers = { ...prev };
-      numbers[name] = inputNumber;
-      return numbers;
-    });
+    const { isValid, value, message: errorMessage } = cardNumbersValidator(e.target.value);
+    if (isValid) {
+      setNumbers((prev: CardNumbers) => {
+        const numbers = { ...prev };
+        numbers[name] = value;
+        return numbers;
+      });
+      setCardNumberError((prev: CardNumbersError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: true, errorMessage };
+        return errors;
+      });
+    } else {
+      setCardNumberError((prev: CardNumbersError) => {
+        const errors = JSON.parse(JSON.stringify(prev));
+        errors[name] = { isError: false, errorMessage: undefined };
+        return errors;
+      });
+    }
   };
 
   return (
@@ -40,7 +53,7 @@ const CardNumberInput = () => {
             placeholder="1234"
             maxLength={4}
             name={name as keyof CardNumbers}
-            value={cardNumbers[name as keyof CardNumbers]}
+            value={cardNumbers[name as keyof CardNumbers] || ""}
           />
         )
       )}
