@@ -4,21 +4,24 @@ import FieldTitle from "./FieldTitle";
 import { useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
-import { CardNumbers } from "../types/card";
+import { ExpirationDate } from "../types/card";
 
 interface Props {
-  cardNumber : CardNumbers,
-  handleInput : (cardNumbers: CardNumbers) => void,
+  expirationDate : ExpirationDate,
+  handleInput : (value: ExpirationDate) => void,
 }
-export default function CardNumberInput({cardNumber, handleInput} : Props) {
+export default function ExpirationDateInput({expirationDate, handleInput} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
+  const date = ['month', 'year']
+  const datePlaceHolder = ['MM', 'YY']
+
   const handleUpdateInput = (index: number, value: string) => {
     handleInput({
-      ...cardNumber,
-      [`cardNumber${index+1}`] : value
+      ...expirationDate,
+      [`${date[index]}`] : value
     });
   };
 
@@ -52,16 +55,16 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
 
   return (
     <> 
-      <FieldTitle title="결제할 카드 번호를 입력해 주세요" subtitle="본인 명의의 카드만 결제 가능합니다."/>
-      <InputField label="카드 번호" count={4} errorMessages={errorMessages}>
-      {Array.from({ length: 4 }, (_, index) => (
+      <FieldTitle title="카드 유효기간을 입력해 주세요" subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."/>
+      <InputField label="유효기간" count={2} errorMessages={errorMessages}>
+      {Array.from({ length: 2 }, (_, index) => (
       <Input
         key={index}
         type="string"
-        maxLength={4}
-        placeholder="1234"
+        maxLength={2}
+        placeholder={datePlaceHolder[index]}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'cardNumber', index)}
+        onChange={(e) => handleInputChange(e, date[index], index)}
       />
       ))}
       </InputField>

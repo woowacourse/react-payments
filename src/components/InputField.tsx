@@ -1,15 +1,10 @@
-import { useState } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { InputInfo, InputType } from '../types/input';
-import { Card } from '../types/card';
-import Input from './Input';
-import FieldTitle from './FieldTitle';
-import Validation from '../domain/InputValidation';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 100px;
 `;
 
 const Label = styled.p`
@@ -34,76 +29,29 @@ const ErrorBox = styled.div`
 `;
 
 interface Props {
-  title: string;
-  subtitle?: string;
-  inputTypes: InputType;
-  cardInfo: Card;
-  handleInput: (value: Card) => void;
+  label : string
+  count : number
+  children : ReactNode
+  errorMessages : { [key: number]: string }
 }
 
 export default function InputField({
-  title,
-  subtitle,
-  inputTypes,
-  cardInfo,
-  handleInput,
+  label,
+  children,
+  errorMessages
 }: Props) {
 
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
-    {}
-  );
-  const handleUpdateInput = (index: number, value: string) => {
-    handleInput({
-      ...cardInfo,
-      [inputTypes.inputInfo[index].property]: value,
-    });
-  };
-
-  const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
-    setErrorMessages((prev) => {
-      return {
-        ...prev,
-        [index]: errorMessage,
-      };
-    });
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: InputInfo, index : number) => {
-    try {
-          Validation[info.validateType]?.(e.target.value);
-          handleUpdateErrorMessages(index, '');
-          handleUpdateInput(index, e.target.value);
-        } catch (error) {
-            if (error instanceof Error) {
-            handleUpdateErrorMessages(index, error.message);
-          }
-        }
-  };
-
-  const checkInputError = (index : number) => {
-    if(index in errorMessages){
-      return errorMessages[index] !== '';
-    }
-    return false;
-  }
 
   return (
       <Container>
-        <FieldTitle title={title} subtitle={subtitle} />
-        <Label>{inputTypes.inputLabel}</Label>
+        <Label>{label}</Label>
         <InputBox>
-          {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
-            <Input
-            maxLength={info.maxLength}
-            placeholder={info.placeHolder}
-            onChange={(e) => handleInputChange(e, info, index)}
-            isError={checkInputError(index)}
-          />
-          ))}
-          </InputBox>
+          {children}
+        </InputBox>
         <ErrorBox>
           {Object.values(errorMessages).find((message) => message !== '')}
         </ErrorBox>
       </Container>
   );
 }
+

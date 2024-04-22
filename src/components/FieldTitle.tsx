@@ -19,9 +19,9 @@ interface Props {
 
 export default function FieldTitle({ title, subtitle }: Props) {
   return (
-    <>
+    <div>
       <Title>{title}</Title>
       <SubTitle>{subtitle}</SubTitle>
-    </>
+    </div>
   );
 }

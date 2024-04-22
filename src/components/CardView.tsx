@@ -1,4 +1,4 @@
-import { Card } from '../types/card';
+import { CardInfo } from '../types/card';
 import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
@@ -55,7 +55,7 @@ const SecretNumber = styled.div`
   letter-spacing: 0px;
 `;
 
-export default function CardView({ cardInfo }: { cardInfo: Card }) {
+export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
   const checkCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
     if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return Visa;
@@ -66,7 +66,7 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
       return Master;
   };
 
-  const cardImgSrc = checkCardType(cardInfo.cardNumber1);
+  const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1);
   return (
     <>
       <CardContainer>
@@ -76,15 +76,15 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
         </ImgBox>
 
         <CardNumbers>
-          <CardNumber>{cardInfo.cardNumber1}</CardNumber>
-          <CardNumber>{cardInfo.cardNumber2}</CardNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumber3.length)}</SecretNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumber4.length)}</SecretNumber>
+          <CardNumber>{cardInfo.cardNumbers.cardNumber1}</CardNumber>
+          <CardNumber>{cardInfo.cardNumbers.cardNumber2}</CardNumber>
+          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber3.length)}</SecretNumber>
+          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber4.length)}</SecretNumber>
         </CardNumbers>
         <TextBox>
-          {cardInfo.month.length === 1 ? `0${cardInfo.month}` : cardInfo.month}
-          {cardInfo.year.length > 0 ? ' / ' : ''}
-          {cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}
+          {cardInfo.expirationDate.month.length === 1 ? `0${cardInfo.expirationDate.month}` : cardInfo.expirationDate.month}
+          {cardInfo.expirationDate.year.length > 0 ? ' / ' : ''}
+          {cardInfo.expirationDate.year.length === 1 ? `0${cardInfo.expirationDate.year}` : cardInfo.expirationDate.year}
         </TextBox>
         <TextBox>{cardInfo.userName}</TextBox>
       </CardContainer>

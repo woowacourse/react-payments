@@ -1,8 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
-import { Card } from '../types/card';
+// import { Card } from '../types/card';
+import useCardForm from '../hooks/useCardForm';
 
 const Page = styled.div`
   width: 100vw;
@@ -26,20 +27,20 @@ const Container = styled.div`
 `;
 
 export default function EnrollCard() {
-  const [cardInfo, setCardInfo] = useState<Card>({
-    cardNumber1: '',
-    cardNumber2: '',
-    cardNumber3: '',
-    cardNumber4: '',
-    month: '',
-    year: '',
-    userName: '',
-  });
+  const {
+    cardNumbers,
+    setCardNumbers,
+    expirationDate,
+    setExpirationDate,
+    userName,
+    setUserName,
+  } = useCardForm({});
+  console.log({cardNumbers, expirationDate, userName})
   return (
     <Page>
       <Container>
-        <CardView cardInfo={cardInfo} />
-        <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
+        <CardView cardInfo={{cardNumbers, expirationDate, userName}} />
+        <InputForm cardInfo={{cardNumbers, expirationDate, userName}} handleInput={{setCardNumbers, setExpirationDate, setUserName}} />
       </Container>
     </Page>
   );
