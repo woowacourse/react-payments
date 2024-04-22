@@ -18,7 +18,6 @@ interface PaymentsFormTitleProps {
 type InputStates = InputState[];
 
 interface InputState {
-  value: string;
   hasError: boolean;
   hasFocus: boolean;
 }
@@ -26,7 +25,7 @@ interface InputState {
 type CardBrand = 'Visa' | 'MasterCard' | 'none';
 
 interface CardInfo {
-  cardNumber: [string, string, string, string];
+  cardNumbers: [string, string, string, string];
   cardBrand: CardBrand;
   expirationMonth: string;
   expirationYear: string;
@@ -34,10 +33,12 @@ interface CardInfo {
 }
 
 interface CardNumbersFormSectionProps {
-  changeCardNumber: (cardNumber: string[]) => void;
+  changeCardNumbers: (cardNumber: string, index: number) => void;
+  value: string[];
 }
 
 interface Expiration {
+  [index: string]: string;
   month: string;
   year: string;
 }
@@ -50,7 +51,8 @@ interface NameFormSectionProps {
 }
 
 interface UseCardNumbersFormSectionProps {
-  changeCardNumber: (cardNumber: string[]) => void;
+  changeCardNumbers: (cardNumber: string[]) => void;
+  value: string[];
 }
 
 interface UseExpirationFormSectionProps {
