@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormElement from "../common/FormElement";
+import { FormProps } from "./Form";
 
-export interface CardNumberFormProps {
+export interface CardFormProps extends FormProps {
   labelContent: string;
   inputCount: number;
   type: string;
   placeholders: string[];
-  cardNumbers?: string[];
-  expirationDate?: string[];
-  userName?: string[];
-  setCardNumbers?: React.Dispatch<React.SetStateAction<string[]>>;
-  setExpirationDate?: React.Dispatch<React.SetStateAction<string[]>>;
-  setUserName?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CardNumberForm = ({
@@ -22,7 +17,7 @@ const CardNumberForm = ({
   placeholders,
   cardNumbers,
   setCardNumbers,
-}: CardNumberFormProps) => {
+}: CardFormProps) => {
   const [, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
@@ -51,7 +46,7 @@ const CardNumberForm = ({
       maxLength={4}
       data={cardNumbers || []}
       setData={setCardNumbers || (() => [])}
-      setErrorMessage={setErrorMessage}
+      setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
       setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
       validationRule={(value) => /^[0-9]{4}$/.test(value)}
     />

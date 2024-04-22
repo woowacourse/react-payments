@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-export interface InputDescriptionInterface {
+export interface InputDescriptionProps {
   title: string;
   description?: string;
 }
 
-const InputDescription = ({
-  title,
-  description,
-}: InputDescriptionInterface) => {
+const InputDescription = ({ title, description }: InputDescriptionProps) => {
   return (
     <div>
       <InputDescriptionTitle>{title}</InputDescriptionTitle>
