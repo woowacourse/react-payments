@@ -36,6 +36,13 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+input,
+select {
+  margin: 0.5rem 0px;
+  border: 1px solid #acacac;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
 .scr-only {
   position: absolute;
   top: -999px;

@@ -6,5 +6,5 @@
 }
 
 .error {
-  border-color: #ff3d3d;
+  border-color: var(--error-color);
 }

@@ -18,7 +18,7 @@ function Input(props: InputProps) {
   const { error, label, ...reset } = props;
   const inputId = `input-${useId()}`;
 
-  const className = `${styles.input} ${error ? styles.error : ''}`;
+  const className = `${error ? styles.error : ''}`;
 
   return (
     <>

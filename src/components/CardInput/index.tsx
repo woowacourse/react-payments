@@ -15,7 +15,7 @@ export default function CardInput(props: CardInputProps) {
   const id = useId();
 
   return (
-    <div>
+    <div className={styles.cardInput}>
       <label className={styles.label} htmlFor={id}>
         {label}
       </label>
