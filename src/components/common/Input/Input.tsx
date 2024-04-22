@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styles from './Input.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // checkError?: React.ChangeEventHandler<HTMLInputElement>;
   isError?: boolean;
 }
 
@@ -19,7 +18,7 @@ export default function Input(props: InputProps) {
         setIsFocus(false);
         if (props.onBlur) {
           props.onBlur(e);
-        } // 넘겨준 블러 함수 사용
+        }
       }}
       onChange={onChange}
     />
