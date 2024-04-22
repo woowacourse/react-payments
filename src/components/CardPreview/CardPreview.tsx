@@ -23,9 +23,7 @@ export default function CardPreview({ cardNumbers, month, year, owner }: CardPre
   };
 
   const getCardNumberComponent = (number: string, index: number) => {
-    if (index > 1 && !number) return '';
     if (index <= 1) return `${number} `;
-
     return Array.from({ length: number.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
   };
 
