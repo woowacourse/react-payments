@@ -19,7 +19,7 @@ const TextInputContainer = styled.section((props: InputContainerProps) => ({
   '&>input': {
     flex: '1 !important',
     borderColor: props.childrenBorderColor
-      ? childrenBorderColor[props.childrenBorderColor]
+      ? childrenBorderColor[props.childrenBorderColor] + '!important'
       : undefined,
   },
 }));

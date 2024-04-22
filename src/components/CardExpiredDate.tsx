@@ -14,6 +14,7 @@ import TextInputContainer from './InputContainer';
 import { useEffect } from 'react';
 import useLastValidValue from '../hooks/useLastValidValue';
 import useValidateInput from '../hooks/useValidateInput';
+import useValidator from '../hooks/useValidator';
 
 export default function CardExpiredDate({
   setCardExpiredDate,
@@ -32,8 +33,33 @@ export default function CardExpiredDate({
     errorMessage: yearErrorMessage,
   } = useValidateInput(useYearInputProps);
 
+  const isFullFilled = ([month, year]: CardExpiredDateType) => {
+    return (
+      month.length + year.length ===
+      BOUND.cardExpiredMonthStringUpper + BOUND.cardExpiredYearStringUpper
+    );
+  };
+
+  const isExpired = ([month, year]: CardExpiredDateType) => {
+    const inputMonth = Number(month);
+    const inputYear = Number(year) + 2000;
+    const nowMonth = new Date().getMonth();
+    const nowYear = new Date().getFullYear();
+    const inputDate = new Date(inputYear, inputMonth);
+    const nowDate = new Date(nowYear, nowMonth);
+
+    return inputDate < nowDate;
+  };
+
+  const { errorMessage: invalidExpiredDateError, isError: isUnderMonth } =
+    useValidator(
+      [month, year],
+      (arg: CardExpiredDateType) => !isFullFilled(arg) || !isExpired(arg),
+      ERROR_MESSAGE.wrongExpiredDate
+    );
+
   const errorMessage = useLastValidValue({
-    checkValues: [monthErrorMessage, yearErrorMessage],
+    checkValues: [monthErrorMessage, yearErrorMessage, invalidExpiredDateError],
     invalidValues: [''],
   });
 
@@ -51,7 +77,9 @@ export default function CardExpiredDate({
         labelText={PAYMENTS_INPUT_MESSAGE.expiredDateLabel}
         errorMessage={errorMessage}
       >
-        <TextInputContainer>
+        <TextInputContainer
+          childrenBorderColor={isUnderMonth ? 'error' : undefined}
+        >
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
             onChange={monthOnChange}

@@ -27,4 +27,5 @@ export const ERROR_MESSAGE = {
   notEnglishOrSpace: '영어로 입력해주세요',
   wrongMonth: '올바른 월(01~12)를 입력해주세요',
   wrongYear: '올바른 년도(00~99)를 입력해주세요',
+  wrongExpiredDate: `만료된 유효기간입니다. ${new Date().getMonth().toString().padStart(2, '00')}/${new Date().getUTCFullYear() - 2000} 이전의 유효기간을 입력할 수 없습니다.`,
 };
