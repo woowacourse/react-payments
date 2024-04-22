@@ -1,9 +1,18 @@
+import NewCardInputPage from "./pages/NewCardInputPage";
+
+import AppLayout from "./components/layout/AppLayout";
+
+import GlobalStyle from "./styles/global";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <GlobalStyle />
+
+      <AppLayout>
+        <NewCardInputPage />
+      </AppLayout>
     </>
   );
 }
