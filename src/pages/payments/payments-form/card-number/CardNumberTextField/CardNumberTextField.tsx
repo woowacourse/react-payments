@@ -5,7 +5,7 @@ import { createRef, useRef } from 'react';
 export interface CardNumberTextFieldProps {
   cardNumbers: string[];
   onAddCardNumber: (index: number, value: string) => void;
-  cardNumberError: { isError: boolean; errorMessage: string };
+  cardNumberError: { isError: boolean[]; errorMessage: string };
 }
 
 const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, onAddCardNumber, cardNumberError }) => {
@@ -21,7 +21,7 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, 
           <CardNumberInput
             id={index === 0 ? 'cardNumber' : ''}
             key={index}
-            isError={cardNumberError.isError}
+            isError={cardNumberError.isError[index]}
             value={cardNumber}
             onAddCardNumber={(event) => onAddCardNumber(index, String(event.target.value))}
             ref={inputRefs.current[index]}
