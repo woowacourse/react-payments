@@ -1,6 +1,6 @@
 export const FORM_REGEXP = {
   fourDigitNumber: /^[0-9]{4}$/,
-  validMonth: /^(0[1-9]|1[0-2]|1[0-9])$/,
+  validMonth: /^(0[1-9]|1[0-2])$/,
   validUserName: /^[A-Z\s]{1,30}$/,
 };
 
