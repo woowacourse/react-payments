@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import InputOwnerName from "../input/InputOwnerName";
-import InputExpirationPeriod from "../input/InputExpirationPeriod";
 import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
+import { CARD_FORM_TYPE, FormType } from "../../constants/cardFormType";
 import InputCreditCardNumber from "../input/InputCreditCardNumber";
-import { FormType, CARD_FORM_TYPE } from "../../constants/cardFormType";
+import InputExpirationPeriod from "../input/InputExpirationPeriod";
+import InputOwnerName from "../input/InputOwnerName";
 
 interface CreditCardFormProps {
   title: string;

@@ -1,7 +1,7 @@
-import InputBox from "./common/InputBox";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
+import InputBox from "./common/InputBox";
 
 interface InputOwnerNameProps {
   inputValue: string;

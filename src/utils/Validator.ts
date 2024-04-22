@@ -1,5 +1,5 @@
-import SIGN from "../constants/sign";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
+import SIGN from "../constants/sign";
 
 const ValidatorCondition = {
   checkMaxDigit(value: string, digit: number) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Validator from "../utils/Validator";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
+import Validator from "../utils/Validator";
 
 const useInput = <T extends object>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);

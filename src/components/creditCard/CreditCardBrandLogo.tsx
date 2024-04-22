@@ -1,6 +1,6 @@
+import styled from "@emotion/styled";
 import { CardNumber } from "../../@types/CreditCard";
 import CARD_THRESHOLD from "../../constants/cardThreshold";
-import styled from "@emotion/styled";
 
 const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
   const twoDigits = 2;
