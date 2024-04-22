@@ -10,7 +10,7 @@ interface CardNumberInputProps {
   onChangeCardNumbers: (inputIndex: number, value: string) => void;
 }
 
-function CardNumberInput({ isCardNumbersValid, onChangeCardNumbers }: CardNumberInputProps) {
+export default function CardNumberInput({ isCardNumbersValid, onChangeCardNumbers }: CardNumberInputProps) {
   const handleChangeCardNumber = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value = e.target.value.replace(CARD_NUMBER.INVALID_CHARS_REGEX, '');
     if (e.target.value.length > CARD_NUMBER.MAX_LENGTH) {
@@ -43,5 +43,3 @@ function CardNumberInput({ isCardNumbersValid, onChangeCardNumbers }: CardNumber
     </div>
   );
 }
-
-export default CardNumberInput;

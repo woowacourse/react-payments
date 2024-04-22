@@ -9,7 +9,7 @@ interface CardOwnerInputProps {
   onChangeOwner: (value: string) => void;
 }
 
-function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwnerInputProps) {
+export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwnerInputProps) {
   const handleOwnerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.value = event.target.value.replace(CARD_OWNER.INVALID_CHARS_REGEX, '').toUpperCase();
     onChangeOwner(event.target.value);
@@ -30,5 +30,3 @@ function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwnerInputProps) {
     </div>
   );
 }
-
-export default CardOwnerInput;

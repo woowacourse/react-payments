@@ -11,7 +11,7 @@ import useChangeCardNumbers from '../../hooks/useChangeCardNumbers';
 import useChangeOwner from '../../hooks/useChangeOwner';
 import useChangeExpireDate from '../../hooks/useChangeExpireDate';
 
-function App() {
+export default function App() {
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
   const { owner, ownerValid, handleChangeOwner } = useChangeOwner();
@@ -33,5 +33,3 @@ function App() {
     </S.AppLayout>
   );
 }
-
-export default App;

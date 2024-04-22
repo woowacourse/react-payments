@@ -12,7 +12,11 @@ interface CardExpirationInputProps {
   onChangeExpireDate: (month: string, year: string) => void;
 }
 
-function CardExpirationInput({ isMonthValid, isYearValid, onChangeExpireDate }: CardExpirationInputProps) {
+export default function CardExpirationInput({
+  isMonthValid,
+  isYearValid,
+  onChangeExpireDate,
+}: CardExpirationInputProps) {
   const [expireDate, setExpireDate] = useState({ month: '', year: '' });
 
   const errorMessage = () => {
@@ -59,5 +63,3 @@ function CardExpirationInput({ isMonthValid, isYearValid, onChangeExpireDate }: 
     </div>
   );
 }
-
-export default CardExpirationInput;
