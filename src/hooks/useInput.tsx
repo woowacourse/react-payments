@@ -2,17 +2,24 @@ import { NonBlockedInputError } from "../errors/InputError";
 import { useState } from "react";
 
 interface InputProps {
-  validator: (string: string) => void;
-  errorHandler: (error: unknown) => void;
-  decorateValue?: (string: string) => string;
+  initValue?: string;
+  validator?: (value: string) => void;
+  errorHandler?: (error: unknown) => void;
+  decorateValue?: (value: string) => string;
+}
+
+export interface UseInputHookValue {
+  value: string;
+  onChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function useInput({
-  validator,
-  errorHandler,
-  decorateValue = (string: string) => string,
+  initValue = "",
+  validator = () => {},
+  errorHandler = () => {},
+  decorateValue = (value: string) => value,
 }: InputProps) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initValue);
 
   const onChangeErrorHandler = (
     error: Error,
