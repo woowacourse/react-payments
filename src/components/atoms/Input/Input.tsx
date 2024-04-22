@@ -14,7 +14,7 @@ export interface InputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, maxLength, isError = false, placeholder, value, onChange, nextRef }, ref) => {
+  ({ id, type, maxLength, isError = false, placeholder, value, onChange, nextRef }, ref) => {
     const errorInputClass = `${isError ? styles.errorInput : ''}`;
 
     useEffect(() => {
@@ -27,6 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         className={`${styles.inputStyle} ${errorInputClass}`}
         id={id}
+        type={type}
         maxLength={maxLength}
         placeholder={placeholder}
         value={value}
