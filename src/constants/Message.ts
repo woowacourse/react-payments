@@ -26,7 +26,7 @@ const PLACEHOLDER = {
   cardNumber: '1234',
   month: 'MM',
   year: 'YY',
-  userName: 'LAST_NAME FIRST_NAME',
+  userName: 'JOHN DAE',
 } as const;
 
 const MESSAGE = {
