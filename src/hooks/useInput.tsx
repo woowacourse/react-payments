@@ -84,7 +84,7 @@ const useInput = ({
     setErrorMessages(newErrorMessages);
   };
 
-  const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
+  const onBlur = (index: number) => {
     const errorMessage = validateAll(onBlurValidators, inputs);
     updateErrorMessages(errorMessage, index);
   };

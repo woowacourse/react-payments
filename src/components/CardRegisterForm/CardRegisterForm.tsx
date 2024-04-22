@@ -73,7 +73,7 @@ const CardRegisterForm = ({
                 onChangeCardNumbers(e, index);
               }}
               onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurCardNumbers(e, index);
+                onBlurCardNumbers(index);
               }}
               isError={
                 findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
@@ -108,7 +108,7 @@ const CardRegisterForm = ({
                 onChangeExpirationPeriod(e, index);
               }}
               onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurExpirationPeriod(e, index);
+                onBlurExpirationPeriod(index);
               }}
               isError={
                 findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
