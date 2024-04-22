@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import Input from "../Input/Input";
+import { ReactNode } from "react";
 
 const Label = styled.label`
   font-size: 12px;
   font-weight: 500;
 `;
 
-const InputsWrapper = styled.div`
+const InputsWrapper: React.FC<{
+  children: ReturnType<typeof Input>[] | ReturnType<typeof Input>;
+}> = styled.div`
   display: flex;
   gap: 8px;
   height: 32px;
 `;
 
-const InputFieldWrapper = styled.div`
+const InputFieldWrapper: React.FC<{ children: ReactNode }> = styled.div`
   gap: 8px;
   display: flex;
   flex-direction: column;

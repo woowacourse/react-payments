@@ -56,30 +56,40 @@ const CardRegisterForm = ({
           <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
           <S.InputSubtitle>{INPUT_INFO_SUBTITLE.CARD_NUMBERS}</S.InputSubtitle>
         </S.TitleWrapper>
-        <InputField
-          label={INPUT_LABEL.CARD_NUMBERS}
+        <InputField>
+          {/* label={INPUT_LABEL.CARD_NUMBERS}
           errorMessage={
             cardNumbersErrorMessages[
               findFirstErrorMessageIndex(cardNumbersErrorMessages)
             ]
-          }
-        >
-          {cardNumbers.map((_, index) => (
-            <Input
-              type="number"
-              key={index}
-              placeholder={PLACE_HOLDER.CARD_NUMBERS}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                onChangeCardNumbers(e, index);
-              }}
-              onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurCardNumbers(index);
-              }}
-              isError={
-                findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
-              }
-            />
-          ))}
+          } */}
+
+          <InputField.Label>{INPUT_LABEL.CARD_NUMBERS}</InputField.Label>
+          <InputField.Inputs>
+            {cardNumbers.map((_, index) => (
+              <Input
+                type="number"
+                key={index}
+                placeholder={PLACE_HOLDER.CARD_NUMBERS}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  onChangeCardNumbers(e, index);
+                }}
+                onBlur={(e: FocusEvent<Element, Element>) => {
+                  onBlurCardNumbers(index);
+                }}
+                isError={
+                  findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
+                }
+              />
+            ))}
+          </InputField.Inputs>
+          <InputField.ErrorMessage>
+            {
+              cardNumbersErrorMessages[
+                findFirstErrorMessageIndex(cardNumbersErrorMessages)
+              ]
+            }
+          </InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
 
@@ -91,31 +101,34 @@ const CardRegisterForm = ({
             {INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
           </S.InputSubtitle>
         </S.TitleWrapper>
-        <InputField
-          label={INPUT_LABEL.EXPIRATION_DATE}
-          errorMessage={
-            expirationPeriodErrorMessages[
-              findFirstErrorMessageIndex(expirationPeriodErrorMessages)
-            ]
-          }
-        >
-          {expirationPeriod.map((_, index) => (
-            <Input
-              type="number"
-              key={index}
-              placeholder={expirationPlaceholder[index]}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                onChangeExpirationPeriod(e, index);
-              }}
-              onBlur={(e: FocusEvent<Element, Element>) => {
-                onBlurExpirationPeriod(index);
-              }}
-              isError={
-                findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
-                index
-              }
-            />
-          ))}
+        <InputField>
+          <InputField.Label>{INPUT_LABEL.EXPIRATION_DATE}</InputField.Label>
+          <InputField.Inputs>
+            {expirationPeriod.map((_, index) => (
+              <Input
+                type="number"
+                key={index}
+                placeholder={expirationPlaceholder[index]}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  onChangeExpirationPeriod(e, index);
+                }}
+                onBlur={(e: FocusEvent<Element, Element>) => {
+                  onBlurExpirationPeriod(index);
+                }}
+                isError={
+                  findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
+                  index
+                }
+              />
+            ))}
+          </InputField.Inputs>
+          <InputField.ErrorMessage>
+            {
+              expirationPeriodErrorMessages[
+                findFirstErrorMessageIndex(expirationPeriodErrorMessages)
+              ]
+            }
+          </InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
 
@@ -124,20 +137,23 @@ const CardRegisterForm = ({
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.OWNER_NAME}</S.InputTitle>
         </S.TitleWrapper>
-        <InputField
-          label={INPUT_LABEL.OWNER_NAME}
-          errorMessage={ownerErrorMessages[0]}
-        >
-          <Input
-            placeholder={PLACE_HOLDER.OWNER_NAME}
-            isError={ownerErrorMessages[0] !== ""}
-            type="text"
-            maxLength={30}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              e.target.value = e.target.value.toUpperCase();
-              onChangeOwnerName(e, 0);
-            }}
-          />
+        <InputField>
+          <InputField.Label>{INPUT_LABEL.OWNER_NAME}</InputField.Label>
+          <InputField.Inputs>
+            <InputField.Input
+              placeholder={PLACE_HOLDER.OWNER_NAME}
+              isError={ownerErrorMessages[0] !== ""}
+              type="text"
+              maxLength={30}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                e.target.value = e.target.value.toUpperCase();
+                onChangeOwnerName(e, 0);
+              }}
+            />
+          </InputField.Inputs>
+          <InputField.ErrorMessage>
+            {ownerErrorMessages[0]}
+          </InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
     </S.CardFormWrapper>
