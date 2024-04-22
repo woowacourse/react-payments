@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import InputTitle from '../components/InputTitle';
+import InputTitle from '../components/common/InputTitle';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 const meta = {

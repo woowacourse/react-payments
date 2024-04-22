@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardImage from '../components/CardImage';
+import CardImage from '../components/cardInformationInput/CardImage';
 
 const meta = {
   title: 'CardImage',
@@ -12,23 +12,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumber: ['1134', '1234', '1234', '1234'],
-    cardPeriod: ['01', '25'],
-    cardOwner: ['WOOTECO'],
+    cardNumber: { number_1: '1111', number_2: '1111', number_3: '1111', number_4: '1111' },
+    cardPeriod: { month: '01', year: '12' },
+    cardOwner: { owner: 'woowa' },
   },
 };
 
 export const Visa: Story = {
   args: {
-    cardNumber: ['4234', '1234', '1234', '1234'],
-    cardPeriod: ['01', '25'],
-    cardOwner: ['WOOTECO'],
+    cardNumber: { number_1: '4444', number_2: '4444', number_3: '4444', number_4: '4444' },
+    cardPeriod: { month: '01', year: '12' },
+    cardOwner: { owner: 'woowa' },
   },
 };
 export const MasterCard: Story = {
   args: {
-    cardNumber: ['5134', '1234', '1234', '1234'],
-    cardPeriod: ['01', '25'],
-    cardOwner: ['WOOTECO'],
+    cardNumber: { number_1: '5111', number_2: '1111', number_3: '1111', number_4: '1111' },
+    cardPeriod: { month: '01', year: '12' },
+    cardOwner: { owner: 'woowa' },
   },
 };

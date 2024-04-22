@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ErrorMessage from '../components/ErrorMessage';
+import ErrorMessage from '../components/common/ErrorMessage';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 const meta = {
@@ -12,7 +12,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const CardNumber: Story = {
-  args: {
-    value: ERROR_MESSAGE.notANumber,
-  },
+  args: { error: { owner: ERROR_MESSAGE.notInRange(0, 30) } },
 };
