@@ -17,6 +17,7 @@ export const Default: StoryObj<InputProps> = (args: any) => (
   <CardExpirationDateInputField {...args} date={{ month: 12, year: 24 }} />
 );
 
+Default.args = {};
 // export const ErrorInput: StoryObj<InputProps> = (args: any) => <CardExpirationDateInputField {...args} />;
 
 // ErrorInput.args = {
