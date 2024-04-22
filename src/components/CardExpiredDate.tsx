@@ -61,15 +61,21 @@ export default function CardExpiredDate({
     return inputDate < nowDate;
   };
 
-  const { errorMessage: invalidExpiredDateError, isError: isUnderMonth } =
-    useValidator(
-      [month, year],
-      (arg: CardExpiredDateType) => !isFullFilled(arg) || !isExpired(arg),
-      ERROR_MESSAGE.wrongExpiredDate
-    );
+  const {
+    errorMessage: invalidExpiredDateErrorMessage,
+    isError: isUnderMonth,
+  } = useValidator(
+    [month, year],
+    (arg: CardExpiredDateType) => !isFullFilled(arg) || !isExpired(arg),
+    ERROR_MESSAGE.wrongExpiredDate
+  );
 
   const errorMessage = useLastValidValue({
-    checkValues: [monthErrorMessage, yearErrorMessage, invalidExpiredDateError],
+    checkValues: [
+      monthErrorMessage,
+      yearErrorMessage,
+      invalidExpiredDateErrorMessage,
+    ],
     invalidValues: [''],
   });
 
@@ -91,12 +97,23 @@ export default function CardExpiredDate({
             onChange={monthOnChange}
             value={month}
             borderColor={monthErrorMessage ? 'error' : undefined}
+            aria-invalid={
+              !(
+                monthErrorMessage === '' &&
+                invalidExpiredDateErrorMessage === ''
+              )
+            }
           />
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
             onChange={yearOnChange}
             value={year}
             borderColor={yearErrorMessage ? 'error' : undefined}
+            aria-invalid={
+              !(
+                yearErrorMessage === '' && invalidExpiredDateErrorMessage === ''
+              )
+            }
           />
         </TextInputContainer>
       </FormItem>

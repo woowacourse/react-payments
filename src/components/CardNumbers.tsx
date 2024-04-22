@@ -89,8 +89,8 @@ export default function CardNumbers({
               placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
               onChange={hook.onChange}
               value={hook.input}
-              maxLength={BOUND.cardNumbersOnePartUpper}
               borderColor={hook.errorMessage ? 'error' : undefined}
+              aria-invalid={!(hook.errorMessage === '')}
             />
           ))}
         </TextInputContainer>

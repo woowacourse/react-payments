@@ -36,6 +36,7 @@ export default function CardHolder({
             onChange={onChange}
             value={holder}
             borderColor={errorMessage ? 'error' : undefined}
+            aria-invalid={!(errorMessage === '')}
           />
         </TextInputContainer>
       </FormItem>
