@@ -1,8 +1,9 @@
 import { Visa, MasterCard, Dot } from '../../assets';
 import * as S from './CardPreview.style';
 
-import { CARD_NUMBER, CARD_PREFIX_PATTERNS } from '../../constants/conditions';
+import { CARD_NUMBER } from '../../constants/conditions';
 import { cardNumbersType } from '../../types/cardNumbers';
+import checkCardBrand from '../../utils/checkCardBrand';
 
 interface CardPreviewProps {
   cardNumbers: cardNumbersType;
@@ -13,14 +14,10 @@ interface CardPreviewProps {
 
 function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
-    if (Number(cardNumbers[0].charAt(0)) === CARD_PREFIX_PATTERNS.VISA_PREFIX) {
+    if (checkCardBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
     }
-
-    if (
-      Number(cardNumbers[0].slice(0, 2)) >= CARD_PREFIX_PATTERNS.MASTER_CARD_PREFIX_MIN &&
-      Number(cardNumbers[0].slice(0, 2)) <= CARD_PREFIX_PATTERNS.MASTER_CARD_PREFIX_MAX
-    ) {
+    if (checkCardBrand(cardNumbers[0]) === 'MasterCard') {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
   };
