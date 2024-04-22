@@ -11,7 +11,8 @@ import {
   validateIsValidLength,
   validateMonth,
 } from "@/utils/validation";
-import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
+import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
+import { limitNumberLength } from "@/utils/numberHelper";
 
 interface Props {
   expiredPeriodState: ReturnType<typeof useInputs>;
@@ -73,6 +74,10 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
             key={index}
             placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              e.target.value = limitNumberLength({
+                value: e.target.value,
+                maxLength: MAX_LENGTH.EXPIRATION_PERIOD,
+              });
               onChangeExpirationPeriod(e, index);
             }}
             onBlur={() => {

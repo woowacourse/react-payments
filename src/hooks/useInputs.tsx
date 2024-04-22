@@ -1,35 +1,18 @@
-import { limitNumberLength } from "@/utils/numberHelper";
 import { useState } from "react";
 import React from "react";
 
-interface Props {
-  initialValue: string[];
-  maxNumberLength?: number;
-}
-
-const useInputs = ({ maxNumberLength, initialValue = [] }: Props) => {
-  const [inputs, setInputs] = useState<string[]>(initialValue);
+const useInputs = <T extends object>(initialValue: T) => {
+  const [values, setValues] = useState(initialValue);
 
   const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (maxNumberLength) {
-      event.target.value = limitNumberLength({
-        value: event.target.value,
-        maxLength: maxNumberLength,
-      });
-    }
-
-    const newValue = event.target.value;
-
-    setInputs((prev) => {
-      const newInput = [...prev];
-      newInput[index] = newValue;
-      return newInput;
-    });
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
 
-  return { inputs, onChange };
+  return { values, onChange };
 };
 export default useInputs;

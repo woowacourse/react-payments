@@ -7,9 +7,10 @@ import {
   makeNewErrorMessages,
   validateIsValidLength,
 } from "@/utils/validation";
-import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
+import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import { useState } from "react";
+import { limitNumberLength } from "@/utils/numberHelper";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs>;
@@ -52,6 +53,10 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
             key={index}
             placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
             onChange={(e) => {
+              e.target.value = limitNumberLength({
+                value: e.target.value,
+                maxLength: MAX_LENGTH.CARD_NUMBERS,
+              });
               onChangeCardNumbers(e, index);
             }}
             onBlur={() => onValidateCardNumbers(index)}
