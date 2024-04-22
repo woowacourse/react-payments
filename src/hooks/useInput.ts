@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const useInput = <T>(
   defaultValue: T,
-  regExp: RegExp,
+  regExp: { valid: RegExp; invalid: RegExp },
   condition: (value: string) => boolean,
   additionalEffect: (value: string) => string = (value) => value,
 ) => {
@@ -15,16 +15,18 @@ const useInput = <T>(
   ) => {
     const newValue = event.currentTarget.value;
 
-    if (regExp.test(newValue)) {
+    if (regExp.valid.test(newValue)) {
       setValue(additionalEffect(newValue) as T);
     } else {
-      setValue(newValue.slice(0, newValue.length - 1) as T);
+      setValue(newValue.replace(regExp.invalid, '') as T);
     }
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     preventInvalidInput(event, () => additionalEffect(event.currentTarget.value));
-    setIsError(!regExp.test(event.currentTarget.value) || !condition(event.currentTarget.value));
+    setIsError(
+      !regExp.valid.test(event.currentTarget.value) || !condition(event.currentTarget.value),
+    );
   };
 
   return { value, onChange, isError };
