@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { ReactNode } from "react";
 import { css } from "@emotion/react";
 
 const errorColor = "#ff3d3d";
@@ -52,14 +51,13 @@ const styledInputContainer = css`
 interface FormItemProps {
   labelText: string;
   errorMessage?: string;
-  children: ReactNode;
 }
 
 export default function FormItem({
   labelText,
   errorMessage = "",
   children,
-}: FormItemProps) {
+}: React.PropsWithChildren<FormItemProps>) {
   return (
     <div>
       <label css={styledLabel}>
