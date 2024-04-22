@@ -1,6 +1,6 @@
-import Field from "../components/layout/Field/Field";
-import Input from "../components/common/Input/Input";
-import { ADD_CARD_FORM_FIELDS } from "../constants/messages";
+import Field from "../layout/Field/Field";
+import Input from "../common/Input/Input";
+import { ADD_CARD_FORM_FIELDS } from "../../constants/messages";
 import { ChangeEvent, FocusEvent, memo } from "react";
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
