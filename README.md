@@ -96,48 +96,12 @@ npm run storybook
 
 ## 폴더 및 파일 구조
 
-| 폴더       | 설명                                                     |
-| ---------- | -------------------------------------------------------- |
-| assets     | 사진등 관리                                              |
-| components | 컴포넌트 (해당 컴포넌트와 이에 대한 스타일, hook을 관리) |
-| constants  | 주요 상수 관리                                           |
-| modules    | 전역 상태 관리                                           |
-| styles     | 컴포넌트외의 스타일 관리                                 |
-
-<br/>
-<details>
-  <summary> 🗂️ 컴포넌트  파일 구조 보기</summary>
-  <div markdown="1">
-  
-```
-📦components
- ┣ 📂CardExpirationPeriodInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂InputField
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂InputContainer
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardNumbersInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardPreview
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardUserNameInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂FormErrorMessage
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂Input
- ┃ ┣ 📜index.tsx
- ┃ ┣ 📜style.module.css
- ┃ ┗ 📜useInput.ts
- ┗ 📜index.ts
-```
-  
-  </div>
-</details>
+| 폴더       | 설명                                        |
+| ---------- | ------------------------------------------- |
+| assets     | 사진 등 관리                                |
+| components | 컴포넌트 (해당 컴포넌트와 이에 대한 스타일) |
+| constants  | 주요 상수 관리                              |
+| hooks      | 커스텀 훅 관리                              |
+| modules    | 전역 상태 관리                              |
+| styles     | 컴포넌트 외의 스타일 관리                   |
+| utils      | 유틸 함수 관리                              |
