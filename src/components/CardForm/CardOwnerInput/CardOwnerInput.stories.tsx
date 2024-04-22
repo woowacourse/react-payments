@@ -11,8 +11,4 @@ export default meta;
 
 type Story = StoryObj<typeof CardOwnerInput>;
 
-export const Default: Story = {
-  args: {
-    setOwner: () => {},
-  },
-};
+export const Default: Story = {};

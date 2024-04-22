@@ -11,9 +11,4 @@ export default meta;
 
 type Story = StoryObj<typeof CardExpirationInput>;
 
-export const Default: Story = {
-  args: {
-    setMonth: () => {},
-    setYear: () => {},
-  },
-};
+export const Default: Story = {};

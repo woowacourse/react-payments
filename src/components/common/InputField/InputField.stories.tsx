@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {
     label: '예시',
     errorMessage: '',
-    length: 1,
+    inputCount: 1,
     children: <Input isValid={true} type="text" placeholder="sample" />,
   },
 };
@@ -25,7 +25,7 @@ export const Error: Story = {
   args: {
     label: '예시',
     errorMessage: '잘못된 입력입니다.',
-    length: 1,
+    inputCount: 1,
     children: <Input isValid={false} type="text" placeholder="sample" />,
   },
 };

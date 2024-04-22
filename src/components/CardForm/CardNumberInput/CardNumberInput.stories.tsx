@@ -11,8 +11,4 @@ export default meta;
 
 type Story = StoryObj<typeof CardNumberInput>;
 
-export const Default: Story = {
-  args: {
-    setCardNumber: () => {},
-  },
-};
+export const Default: Story = {};
