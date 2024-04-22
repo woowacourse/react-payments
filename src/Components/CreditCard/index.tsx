@@ -52,7 +52,7 @@ const CreditCard = () => {
           <span>{(month || year) && "/"}</span>
           <span css={periodStyle}>{formatTwoDigitNumber(year)}</span>
         </div>
-        <div> {cardOwnerInfo.name}</div>
+        <div> {cardOwnerInfo.name?.toUpperCase()}</div>
       </section>
     </div>
   );
