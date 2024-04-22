@@ -4,21 +4,28 @@ export interface validatorReturn<T> {
   value?: T;
 }
 
-//TODO: 에러 메세지 수정
+const ERROR_MESSAGES = {
+  onlyNumber: "숫자만 입력해주세요.",
+  notValidMonth: "유효한 월이 아닙니다",
+  under15Length: "최대 15자로 입력해주세요.",
+};
+
 export function cardNumbersValidator(input: string): validatorReturn<number> {
   const number = Number(input);
-  if (Number.isNaN(number)) return { isValid: false, message: "숫자만 입력해주세요." };
+  if (Number.isNaN(number)) return { isValid: false, message: ERROR_MESSAGES.onlyNumber };
   return { isValid: true, value: number };
 }
 
 export function cardPeriodValidator(input: string, category: "month" | "year"): validatorReturn<number> {
   const number = Number(input);
-  if (Number.isNaN(number)) return { isValid: false, message: "숫자만 입력해주세요." };
-  if (category === "month" && (number < 0 || number > 12)) return { isValid: false, message: "유효한 월이 아닙니다" };
+  const monthValid = { min: 0, max: 12 };
+  if (Number.isNaN(number)) return { isValid: false, message: ERROR_MESSAGES.onlyNumber };
+  if (category === "month" && (number < monthValid.min || number > monthValid.max))
+    return { isValid: false, message: ERROR_MESSAGES.notValidMonth };
   return { isValid: true, value: number };
 }
 
 export function cardOwnerValidator(input: string): validatorReturn<string> {
-  if (input.length > 15) return { isValid: false, message: "최대 15자로 입력해주세요." };
+  if (input.length > 15) return { isValid: false, message: ERROR_MESSAGES.under15Length };
   return { isValid: true, value: input };
 }
