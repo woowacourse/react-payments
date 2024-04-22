@@ -4,22 +4,17 @@ import FieldTitle from "./FieldTitle";
 import { useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
-import { CardNumbers } from "../types/card";
 
 interface Props {
-  cardNumber : CardNumbers,
-  handleInput : (cardNumbers: CardNumbers) => void,
+  handleInput : (value: string) => void,
 }
-export default function CardNumberInput({cardNumber, handleInput} : Props) {
+export default function UserNameInput({handleInput} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
-  const handleUpdateInput = (index: number, value: string) => {
-    handleInput({
-      ...cardNumber,
-      [`cardNumber${index+1}`] : value
-    });
+  const handleUpdateInput = (userName: string) => {
+    handleInput(userName);
   };
 
   const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
@@ -35,7 +30,7 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
     try {
           Validation[info]?.(e.target.value);
           handleUpdateErrorMessages(index, '');
-          handleUpdateInput(index, e.target.value);
+          handleUpdateInput(e.target.value);
         } catch (error) {
             if (error instanceof Error) {
             handleUpdateErrorMessages(index, error.message);
@@ -52,16 +47,16 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
 
   return (
     <> 
-      <FieldTitle title="결제할 카드 번호를 입력해 주세요" subtitle="본인 명의의 카드만 결제 가능합니다."/>
-      <InputField label="카드 번호" count={4} errorMessages={errorMessages}>
-      {Array.from({ length: 4 }, (_, index) => (
+      <FieldTitle title="카드 소유자 이름을 입력해 주세요"/>
+      <InputField label="소유자 이름" count={1} errorMessages={errorMessages}>
+      {Array.from({ length: 1 }, (_, index) => (
       <Input
         key={index}
         type="string"
-        maxLength={4}
-        placeholder="1234"
+        maxLength={2}
+        placeholder={'JOHN DOE'}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'cardNumber', index)}
+        onChange={(e) => handleInputChange(e, 'userName', index)}
       />
       ))}
       </InputField>
