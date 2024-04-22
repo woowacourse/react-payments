@@ -1,9 +1,8 @@
 import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
 import { ADD_CARD_FORM_FIELDS } from "@/constants/messages";
-const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
-
 import { ChangeEvent, FocusEvent, memo } from "react";
+const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
 interface CardNumberInputProps {
   cardNumbers: {
