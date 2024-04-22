@@ -2,7 +2,6 @@ import { ChangeEventHandler, ReactNode } from "react";
 import S from "./style";
 
 interface Props {
-  onChange?: ChangeEventHandler<HTMLInputElement>;
   errorMessage: string;
   children: ReactNode;
   label: string;
