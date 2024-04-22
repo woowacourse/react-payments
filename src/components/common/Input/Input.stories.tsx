@@ -5,6 +5,12 @@ import Input from './Input';
 const meta = {
   title: 'Input',
   component: Input,
+  argTypes: {
+    type: {
+      options: ['text', 'number'],
+      control: { type: 'select' },
+    },
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;
