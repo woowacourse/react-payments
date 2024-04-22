@@ -13,6 +13,13 @@ export interface FormProps {
   setUserName?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const Styled = {
+  FormWrapper: styled.form`
+    width: 315px;
+    height: 427px;
+  `,
+};
+
 const Form = ({
   cardNumbers,
   expirationDate,
@@ -22,7 +29,7 @@ const Form = ({
   setUserName,
 }: FormProps) => {
   return (
-    <FormWrapper>
+    <Styled.FormWrapper>
       <div style={{ height: "137px" }}>
         <InputDescription
           title="결제할 카드 번호를 입력해 주세요."
@@ -64,13 +71,8 @@ const Form = ({
           setUserName={setUserName}
         />
       </div>
-    </FormWrapper>
+    </Styled.FormWrapper>
   );
 };
-
-const FormWrapper = styled.form`
-  width: 315px;
-  height: 427px;
-`;
 
 export default Form;

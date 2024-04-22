@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 
 interface InputProps {
-  // index: string;
   index: number;
   type: string;
   placeholder?: string;
@@ -14,6 +13,23 @@ interface InputProps {
   validationRule: (value: string) => boolean;
   errorMessageText?: string;
 }
+
+const Styled = {
+  InputWrapper: styled.input<{ isValidInput: boolean }>`
+    width: 100%;
+    border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
+    border-radius: 5px;
+    padding: 8px;
+
+    &::placeholder {
+      font-size: 11px;
+    }
+
+    &:focus {
+      border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
+    }
+  `,
+};
 
 const Input = ({
   index,
@@ -52,7 +68,7 @@ const Input = ({
   };
 
   return (
-    <InputStyled
+    <Styled.InputWrapper
       isValidInput={isValidInput}
       onChange={inputChangeHandler}
       maxLength={maxLength}
@@ -60,23 +76,8 @@ const Input = ({
       placeholder={placeholder}
       key={index}
       value={data[index]}
-    ></InputStyled>
+    ></Styled.InputWrapper>
   );
 };
-
-const InputStyled = styled.input<{ isValidInput: boolean }>`
-  width: 100%;
-  border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
-  border-radius: 5px;
-  padding: 8px;
-
-  &::placeholder {
-    font-size: 11px;
-  }
-
-  &:focus {
-    border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
-  }
-`;
 
 export default Input;

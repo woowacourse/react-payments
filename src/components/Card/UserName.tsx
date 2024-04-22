@@ -1,10 +1,19 @@
+import styled from "styled-components";
 import CardNumber from "./CardNumber";
+
+const Styled = {
+  UserNameWrapper: styled.div`
+    display: "flex",
+    justifyContent: "flex-start",
+    height: "20px",
+  `,
+};
 
 const UserName = ({ userName }: { userName: string[] }) => {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-start", gap: "20px", height: "20px" }}>
+    <Styled.UserNameWrapper>
       <CardNumber key="userName" number={userName} />
-    </div>
+    </Styled.UserNameWrapper>
   );
 };
 

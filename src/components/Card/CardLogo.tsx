@@ -3,12 +3,14 @@ import Visa from "../../assets/Visa.png";
 import MasterCard from "../../assets/Mastercard.png";
 import { CARD_TYPES } from "../../constants/card";
 
-const CardLogoWrapper = styled.img`
-  width: 36px;
-  height: 22px;
-  gap: 0px;
-  opacity: 0px;
-`;
+const Styled = {
+  CardLogoWrapper: styled.img`
+    width: 36px;
+    height: 22px;
+    gap: 0px;
+    opacity: 0px;
+  `,
+};
 
 const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
   let cardType = "";
@@ -28,7 +30,8 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
     }
   }
 
-  if (cardType === Visa || cardType === MasterCard) return <CardLogoWrapper src={cardType} />;
+  if (cardType === Visa || cardType === MasterCard)
+    return <Styled.CardLogoWrapper src={cardType} />;
 };
 
 export default CardLogo;

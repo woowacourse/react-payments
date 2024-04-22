@@ -15,7 +15,6 @@ const UserNameForm = ({
 }: CardFormProps) => {
   const [, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  // const [inputValidities, setInputValidities] = useState({});
   const [inputValidities, setInputValidities] = useState({});
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트

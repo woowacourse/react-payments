@@ -1,32 +1,33 @@
 import styled from "styled-components";
 import CardNumber from "./CardNumber";
 
-const CardNumbers = ({ cardNumbers }: { cardNumbers: string[] }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "flex-start",
-        gap: "15px",
-        width: "170px",
-        height: "20px",
-      }}
-    >
-      <CardNumber number={cardNumbers[0]} />
-      <CardNumber number={cardNumbers[1]} />
-      <CardNumber number={Array(cardNumbers[2].length).fill(<Dot />)} />
-      <CardNumber number={Array(cardNumbers[3].length).fill(<Dot />)} />
-    </div>
-  );
+const Styled = {
+  CardNumberWrapper: styled.div`
+    display: "flex";
+    justifycontent: "flex-start";
+    gap: "15px";
+    width: "170px";
+    height: "20px";
+  `,
+  Dot: styled.span`
+    display: inline-block;
+    background-color: #fff;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    margin-right: 5px;
+  `,
 };
 
-const Dot = styled.span`
-  display: inline-block;
-  background-color: #fff;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  margin-right: 5px;
-`;
+const CardNumbers = ({ cardNumbers }: { cardNumbers: string[] }) => {
+  return (
+    <Styled.CardNumberWrapper>
+      <CardNumber number={cardNumbers[0]} />
+      <CardNumber number={cardNumbers[1]} />
+      <CardNumber number={Array(cardNumbers[2].length).fill(<Styled.Dot />)} />
+      <CardNumber number={Array(cardNumbers[3].length).fill(<Styled.Dot />)} />
+    </Styled.CardNumberWrapper>
+  );
+};
 
 export default CardNumbers;
