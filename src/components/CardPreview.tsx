@@ -66,6 +66,7 @@ const CardPreviewContainer = styled.section({
   backgroundColor: COLOR.gray2,
   boxShadow: '3px 3px 3px rgba(0, 0, 0, 0.25)',
   ...styledCardText,
+  '&>*': { height: '20px' },
 });
 
 const CardHeader = styled.div({
