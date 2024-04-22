@@ -101,7 +101,7 @@ const CardPeriodInput = () => {
           maxLength={2}
           name={name as keyof CardValidityPeriod}
           placeholder={placeholder}
-          value={cardPeriod[name as keyof CardValidityPeriod]}
+          value={cardPeriod[name as keyof CardValidityPeriod] || ""}
         />
       ))}
     </>
@@ -144,7 +144,7 @@ const CardOwnerInput = () => {
           sizePreset="large"
           maxLength={15}
           name={name as keyof CardOwnerInfo}
-          value={cardOwner[name as keyof CardOwnerInfo] ?? ""}
+          value={cardOwner[name as keyof CardOwnerInfo] || ""}
           placeholder={placeholder}
         />
       ))}

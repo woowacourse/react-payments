@@ -66,16 +66,9 @@ interface ErrorState {
 
 type SizePresetType = "small" | "medium" | "large";
 
-interface InputInfo {
-  name: string;
-  placeholder: string;
-  maxLength: number;
-  onInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-}
-
-interface FormFieldInfo {
-  key: keyof CardInfo;
-  title: string;
-  description?: string;
-  label: string;
-}
+// interface InputInfo {
+//   name: string;
+//   placeholder: string;
+//   maxLength: number;
+//   onInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+// }
