@@ -58,7 +58,7 @@ const CreditCardForm = ({
   return (
     <CreditCardFormContainer>
       <TitleWrapper>{title}</TitleWrapper>
-      <DescriptionWrapper>{description}</DescriptionWrapper>
+      <DescriptionWrapper description={description}>{description}</DescriptionWrapper>{" "}
       {getComponentByType(type, inputValue, handleChange)}
       {inputError && <ErrorMessage>유효한 값을 입력하세요.</ErrorMessage>}
     </CreditCardFormContainer>
@@ -81,17 +81,18 @@ const TitleWrapper = styled.h1`
   margin-bottom: 4px;
 `;
 
-const DescriptionWrapper = styled.h3`
+const DescriptionWrapper = styled.p<{ description?: string }>`
   font-family: Noto Sans KR;
   font-size: 9.5px;
   font-weight: 400;
   line-height: 13.76px;
   text-align: left;
   color: rgba(139, 149, 161, 1);
-  margin-bottom: 16px;
+  height: 14px;
+  ${({ description }) => !description && `margin-bottom: 0;`}
 `;
 
-const ErrorMessage = styled.h3`
+const ErrorMessage = styled.p`
   font-family: Noto Sans KR;
   font-size: 12px;
   font-weight: 400;
