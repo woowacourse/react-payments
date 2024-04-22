@@ -9,7 +9,7 @@ function InputTitle({ title, subtitle }: InputTitlePropsType) {
   return (
     <div css={titleContainerStyle}>
       <h1 css={titleStyle}>{title}</h1>
-      <p css={subtitleStyle}>{subtitle}</p>
+      {subtitle && <p css={subtitleStyle}>{subtitle}</p>}
     </div>
   );
 }

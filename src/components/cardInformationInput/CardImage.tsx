@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-import { MASTERCARD, VISA } from '../assets';
-import { isRange } from '../util/isRange';
-import { CARD_INFORMATION } from '../constants/cardInformation';
-import { cardBrand, CardBrandType } from '../types/cardType';
-import { VALIDATION } from '../constants/validation';
+import { MASTERCARD, VISA } from '../../assets';
+import { CARD_INFORMATION } from '../../constants/cardInformation';
+import { cardBrand, CardBrandType, CardNumberType, OwnerType, PeriodType } from '../../types/cardType';
+import { isValueInRange } from '../../util/isValueInRange';
+import { monthFormat, yearFormat } from '../../util/periodFormat';
 
 interface CardImageType {
-  cardNumber: string[];
-  cardPeriod: string[];
-  cardOwner: string[];
+  cardNumber: CardNumberType;
+  cardPeriod: PeriodType;
+  cardOwner: OwnerType;
 }
 
 interface CardImageTableType {
@@ -19,11 +19,11 @@ interface CardImageTableType {
 
 function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
   const cardBrandType = (): CardBrandType => {
-    const startNumber = Number(cardNumber[0].substring(0, 2));
-    if (cardNumber[0][0] === CARD_INFORMATION.visa) {
+    const startNumber = Number(cardNumber.number_1.substring(0, 2));
+    if (cardNumber.number_1[0] === CARD_INFORMATION.visa) {
       return cardBrand.visa;
     }
-    if (!isRange(startNumber, CARD_INFORMATION.masterCard.min, CARD_INFORMATION.masterCard.max)) {
+    if (isValueInRange(startNumber, CARD_INFORMATION.masterCard.min, CARD_INFORMATION.masterCard.max)) {
       return cardBrand.masterCard;
     }
     return cardBrand.noneImage;
@@ -40,45 +40,34 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
 
   const imageUrl = getCardImage();
 
+  const stringToStar = (value: string) => {
+    return '*'.repeat(value.length);
+  };
+
   const displayNumber = () => {
-    return cardNumber.map((value: string, index: number) => {
-      if (index === 2 || index === 3) {
-        return '*'.repeat(value.length);
-      }
-      return value;
-    });
-  };
-
-  const monthFormat = (month: string) => {
-    const monthNumber = Number(month);
-    if (month && !isRange(monthNumber, VALIDATION.singleDigit.min, VALIDATION.singleDigit.max)) {
-      return '0'.repeat(2 - month.length) + month;
-    }
-    return month;
-  };
-
-  const periodFormat = (month: string, year: string) => {
-    if (month) return [monthFormat(month), year].join('/');
+    const copy = { ...cardNumber };
+    return { ...copy, ['number_3']: stringToStar(copy.number_3), ['number_4']: stringToStar(copy.number_4) };
   };
 
   return (
     <>
-      {/* 카드 배경 영역 */}
       <div css={cardContainerStyle}>
-        {/* 헤더 */}
         <div css={cardHeaderStyle}>
           <div css={cardIcStyle}></div>
           {imageUrl && <img src={imageUrl} css={cardLogoStyle} />}
         </div>
-        {/* 컨텐츠 */}
+
         <div css={cardContentStyle}>
           <div css={[cardDetailStyle, cardNumberGridStyle]}>
-            {displayNumber().map((numbers, index) => {
+            {Object.values(displayNumber()).map((numbers, index) => {
               return <p key={index}>{numbers}</p>;
             })}
           </div>
-          <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
-          <p css={cardDetailStyle}>{cardOwner}</p>
+          <p css={[cardDetailStyle, cardPeriodStyle]}>
+            <p>{monthFormat(cardPeriod.month)}</p>
+            <p>{yearFormat(cardPeriod.year)}</p>
+          </p>
+          <p css={cardDetailStyle}>{cardOwner.owner}</p>
         </div>
       </div>
     </>
@@ -129,7 +118,14 @@ const cardDetailStyle = css`
   font-size: 14px;
   line-height: 20px;
   letter-spacing: inherit;
-  white-space: pre-wrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
+const cardPeriodStyle = css`
+  display: flex;
+  gap: 5px;
 `;
 
 const cardNumberGridStyle = css`
