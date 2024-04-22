@@ -1,37 +1,30 @@
-import { CardIssuerTextField } from '@pages/payments';
-
 import { generateArgTypes } from '@utils/storybook/generateArgTypes';
-
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import CardIssuerSelect from './CardIssuerSelect';
 
 const meta = {
-  title: 'Payments/PaymentsForm/CardIssuer/CardIssuerTextField',
-  component: CardIssuerTextField,
+  title: 'Payments/PaymentsForm/CardIssuer/CardIssuerSelect',
+  component: CardIssuerSelect,
   parameters: {
     layout: 'centered',
-    docs: {
-      description: {
-        component: '카드사를 선택하는 컴포넌트',
-      },
-    },
   },
   argTypes: {
-    cardIssuer: {
+    value: {
       ...generateArgTypes({ control: 'text' }),
-      description: '카드사',
+      description: 'select의 값',
     },
     onSelectCardIssuer: {
-      ...generateArgTypes({ control: 'function' }),
-      description: '카드사 변경이벤트 핸들러',
+      ...generateArgTypes({ control: 'object' }),
+      description: 'CardIssuerSelect의 이벤트 핸들러',
     },
   },
   args: {
-    cardIssuer: '',
+    value: '',
     onSelectCardIssuer: fn(),
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof CardIssuerTextField>;
+} satisfies Meta<typeof CardIssuerSelect>;
 
 export default meta;
 
@@ -49,6 +42,6 @@ export const Selected: Story = {
   },
 
   args: {
-    cardIssuer: '1',
+    value: '1',
   },
 };
