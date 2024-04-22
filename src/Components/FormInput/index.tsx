@@ -9,15 +9,16 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
   name: CardInfoInputKey;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>, name: CardInfoInputKey) => void;
+  isError?: boolean;
 }
 
-const FormInputCompound: React.FC<InputProps> = ({ sizePreset = "medium", name, onInputChange, ...props }) => {
-  return <input {...props} css={inputStyle(sizePreset)} onChange={(e) => onInputChange(e, name)} />;
+const FormInputCompound: React.FC<InputProps> = ({ sizePreset = "medium", name, isError, onInputChange, ...props }) => {
+  return <input {...props} css={inputStyle(sizePreset, isError)} onChange={(e) => onInputChange(e, name)} />;
 };
 
 const CardNumberInput = () => {
   const [cardNumbers, setNumbers] = useContext(CardNumbersContext)!;
-  const setCardNumberError = useContext(CardNumberErrorContext)![1];
+  const [cardNumberError, setCardNumberError] = useContext(CardNumberErrorContext)!;
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardNumbers) => {
     const { isValid, value, message: errorMessage } = cardNumbersValidator(e.target.value);
@@ -49,6 +50,7 @@ const CardNumberInput = () => {
             id={`id-${name}`}
             key={index}
             onInputChange={(e, name) => onInputChange(e, name as keyof CardNumbers)}
+            isError={!!cardNumberError[name as keyof CardNumbersError]?.isError}
             sizePreset="small"
             placeholder="1234"
             maxLength={4}
@@ -63,7 +65,7 @@ const CardNumberInput = () => {
 
 const CardPeriodInput = () => {
   const [cardPeriod, setCardPeriod] = useContext(CardValidityPeriodContext)!;
-  const setPeriodError = useContext(CardValidityPeriodErrorContext)![1];
+  const [periodError, setPeriodError] = useContext(CardValidityPeriodErrorContext)!;
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardValidityPeriod) => {
     const { isValid, value, message: errorMessage } = cardPeriodValidator(e.target.value, name);
@@ -97,6 +99,7 @@ const CardPeriodInput = () => {
           id={`id-period-${name}`}
           key={index}
           onInputChange={(e, name) => onInputChange(e, name as keyof CardValidityPeriod)}
+          isError={!!periodError[name as keyof CardValidityPeriodError]?.isError}
           sizePreset="medium"
           maxLength={2}
           name={name as keyof CardValidityPeriod}
@@ -110,7 +113,7 @@ const CardPeriodInput = () => {
 
 const CardOwnerInput = () => {
   const [cardOwner, setCardOwner] = useContext(CardOwnerInfoContext)!;
-  const setOwnerError = useContext(CardOwnerInfoErrorContext)![1];
+  const [ownerError, setOwnerError] = useContext(CardOwnerInfoErrorContext)!;
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>, name: keyof CardOwnerInfo) => {
     const { isValid, value, message: errorMessage } = cardOwnerValidator(e.target.value);
@@ -141,6 +144,7 @@ const CardOwnerInput = () => {
           id={`id-owner-${name}`}
           key={index}
           onInputChange={(e, name) => onInputChange(e, name as keyof CardOwnerInfo)}
+          isError={!!ownerError[name as keyof CardOwnerInfoError]?.isError}
           sizePreset="large"
           maxLength={15}
           name={name as keyof CardOwnerInfo}

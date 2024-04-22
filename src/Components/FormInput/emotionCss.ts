@@ -6,7 +6,7 @@ const SIZE: Record<NonNullable<SizePresetType>, "17%" | "43%" | "100%"> = {
   large: "100%",
 };
 
-export const inputStyle = (sizePreset: SizePresetType) =>
+export const inputStyle = (sizePreset: SizePresetType, isError: boolean = false) =>
   css({
     height: "25px",
     borderRadius: "2px",
@@ -15,4 +15,7 @@ export const inputStyle = (sizePreset: SizePresetType) =>
     width: SIZE[sizePreset],
     marginTop: "10px",
     textTransform: "uppercase",
+    "&:focus-visible": css({
+      outlineColor: isError ? "#FF3D3D" : "#ACACAC",
+    }),
   });
