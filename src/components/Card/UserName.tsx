@@ -3,9 +3,9 @@ import CardNumber from "./CardNumber";
 
 const Styled = {
   UserNameWrapper: styled.div`
-    display: "flex",
-    justifyContent: "flex-start",
-    height: "20px",
+    display: flex;
+    justifycontent: flex-start;
+    height: 20px;
   `,
 };
 
