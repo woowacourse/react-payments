@@ -13,7 +13,7 @@ type InputProps = {
   isError: boolean;
 };
 
-export const Default: StoryObj<InputProps> = (args: any) => (
+export const Default: StoryObj<InputProps> = () => (
   <CardNumbersInputField cardNumbers={['1234', '2345', '3456', '4567']} setCardNumbers={() => {}} />
 );
 

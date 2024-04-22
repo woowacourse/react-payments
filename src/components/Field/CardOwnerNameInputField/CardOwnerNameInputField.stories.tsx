@@ -13,7 +13,7 @@ type InputProps = {
   isError: boolean;
 };
 
-export const Default: StoryObj<InputProps> = (args: any) => (
+export const Default: StoryObj<InputProps> = () => (
   <CardOwnerNameInputField ownerName={'PAKXE'} setOwnerName={() => {}} />
 );
 

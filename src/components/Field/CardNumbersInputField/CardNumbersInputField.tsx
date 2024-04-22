@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FocusEvent, FocusEventHandler, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
 
@@ -35,7 +35,7 @@ export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: C
     setCardNumbers(updatedCardNumbers);
   };
 
-  const handleInputBlur = (e: FocusEvent<HTMLInputElement>, index: number) => {
+  const handleInputBlur = (index: number) => {
     const number = cardNumbers[index];
     if (number.length < CARD_NUMBER_UNIT_LENGTH) {
       setErrorMessages(ERROR_MESSAGES.CARD_NUMBER_UNIT_LENGTH, index);
@@ -58,7 +58,7 @@ export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: C
             value={cardNumber}
             type={i >= cardNumbers.length / 2 ? 'password' : 'type'}
             isError={errorMessages[i] !== ''}
-            onBlur={(e) => handleInputBlur(e, i)}
+            onBlur={() => handleInputBlur(i)}
           />
         ))}
       </div>

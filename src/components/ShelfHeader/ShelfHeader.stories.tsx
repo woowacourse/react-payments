@@ -13,12 +13,10 @@ type ShelfHeaderProps = {
   description: string;
 };
 
-export const DefaultShelfHeader: StoryObj<ShelfHeaderProps> = (args: any) => (
+export const DefaultShelfHeader: StoryObj<ShelfHeaderProps> = () => (
   <ShelfHeader title='제목' description='설명입니다.' />
 );
 DefaultShelfHeader.args = {};
 
-export const NoDescriptionShelfHeader: StoryObj<ShelfHeaderProps> = (args: any) => (
-  <ShelfHeader title='설명이 없습니다.' />
-);
+export const NoDescriptionShelfHeader: StoryObj<ShelfHeaderProps> = () => <ShelfHeader title='설명이 없습니다.' />;
 NoDescriptionShelfHeader.args = {};
