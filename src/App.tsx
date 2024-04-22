@@ -1,9 +1,10 @@
-import "./App.css";
+import EnrollCard from './page/EnrollCard';
+import './reset.css';
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <EnrollCard />
     </>
   );
 }
