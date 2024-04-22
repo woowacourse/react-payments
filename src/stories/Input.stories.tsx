@@ -12,14 +12,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    index: "0",
+    index: 0,
     type: "text",
-    placeholder: "Placeholder",
+    placeholder: "1234",
     maxLength: 10,
     setErrorMessage: () => {},
     setAllInputValid: () => {},
+    data: [],
     setData: () => {},
-    validationRule: (value) => value.length > 0,
-    errorMessageText: "Error message",
+    validationRule: (value) => /^[0-9]{4}$/.test(value),
+    errorMessageText: "4자리의 숫자를 입력하세요.",
   },
 };

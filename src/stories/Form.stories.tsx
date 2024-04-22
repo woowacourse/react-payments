@@ -8,9 +8,12 @@ export default {
 
 const Template: StoryFn = () => (
   <Form
-    setCardNumbers={() => {}}
-    setExpirationDate={() => {}}
-    setUserName={() => {}}
+    cardNumbers={[]}
+    setCardNumbers={() => []}
+    expirationDate={[]}
+    setExpirationDate={() => []}
+    userName={[]}
+    setUserName={() => []}
   />
 );
 

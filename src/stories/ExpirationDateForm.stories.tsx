@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    labelContent: "Expiration Date",
+    labelContent: "유효기간",
     inputCount: 2,
     type: "text",
     placeholders: ["MM", "YY"],

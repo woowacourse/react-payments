@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    labelContent: "User Name",
+    labelContent: "소유자 이름",
     inputCount: 1,
     type: "text",
     placeholders: ["JOHN DOE"],

@@ -12,16 +12,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumbers: [
-      { index: 0, currentValue: "1234" },
-      { index: 1, currentValue: "5678" },
-      { index: 2, currentValue: "9012" },
-      { index: 3, currentValue: "3456" },
-    ],
-    expirationDate: [
-      { index: 0, currentValue: "12" },
-      { index: 1, currentValue: "25" },
-    ],
-    userName: [{ index: 0, currentValue: "JOHN DOE" }],
+    cardNumbers: ["1234", "5678", "9012", "3456"],
+    expirationDate: ["12", "25"],
+    userName: ["JOHN DOE"],
   },
 };

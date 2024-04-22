@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    labelContent: "Card Number",
+    labelContent: "카드 번호",
     inputCount: 4,
     type: "text",
     placeholders: ["1234", "1234", "1234", "1234"],
