@@ -11,7 +11,8 @@ const CreditCardForm = ({ title, description, children, inputError }: CreditCard
   return (
     <CreditCardFormContainer>
       <TitleWrapper>{title}</TitleWrapper>
-      <DescriptionWrapper description={description}>{description}</DescriptionWrapper> {children}
+      <DescriptionWrapper description={description}>{description}</DescriptionWrapper>
+      {children}
       {inputError && <ErrorMessage>유효한 값을 입력하세요.</ErrorMessage>}
     </CreditCardFormContainer>
   );
