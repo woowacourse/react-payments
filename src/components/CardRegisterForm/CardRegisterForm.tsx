@@ -10,6 +10,7 @@ import {
 import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
 import CVCField from "./components/CVCField/CVCField";
 import PasswordField from "./components/PasswordField/PasswordField";
+import CardTypeSelectField from "./components/CardTypeSelectField/CardTypeSelectField";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -34,7 +35,7 @@ const CardRegisterForm = ({
       <CVCField CVCNumbersState={CVCNumbersState} />
       <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
       <OwnerNameField ownerNameState={ownerNameState} />
-      {/* <CardTypeSelectField cardTypeState={cardTypeState} /> */}
+      <CardTypeSelectField cardTypeState={cardTypeState} />
       <CardNumbersField cardNumbersState={cardNumbersState} />
     </S.CardFormWrapper>
   );

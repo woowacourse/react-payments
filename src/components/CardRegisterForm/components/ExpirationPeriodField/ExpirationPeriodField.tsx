@@ -94,6 +94,7 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
             <Input
               type="number"
               key={index}
+              maxLength={2}
               name={EXPIRATION_INPUTS_NAMES[index]}
               placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {

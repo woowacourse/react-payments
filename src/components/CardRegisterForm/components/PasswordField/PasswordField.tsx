@@ -4,22 +4,37 @@ import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import useInput from "@/hooks/useInput";
+import useShowError from "@/hooks/useShowError";
+import { ChangeEvent } from "react";
+import { VALID_LENGTH } from "@/constants/condition";
 interface Props {
   passwordState: ReturnType<typeof useInput>;
 }
 
 const PasswordField = ({ passwordState }: Props) => {
-  const { value, onChange } = passwordState;
+  const { onChange, error } = passwordState;
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.PASSWORD} />
-      <InputField label={MESSAGE.INPUT_LABEL.PASSWORD} errorMessages={[""]}>
+      <InputField
+        label={MESSAGE.INPUT_LABEL.PASSWORD}
+        errorMessages={[error]}
+        showErrors={showErrors}
+      >
         <Input
+          type="password"
+          maxLength={VALID_LENGTH.PASSWORD}
           placeholder={MESSAGE.PLACEHOLDER.PASSWORD}
-          isError={false}
-          type="text"
-          onChange={() => {}}
-          onBlur={() => {}}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            if (e.target.value.length > e.target.maxLength)
+              e.target.value = e.target.value.slice(0, e.target.maxLength);
+            onChange(e);
+          }}
+          onFocus={onFocusHideErrors}
+          onBlur={onBlurShowErrors}
+          isError={!!error}
         />
       </InputField>
     </S.InputFieldWithInfo>

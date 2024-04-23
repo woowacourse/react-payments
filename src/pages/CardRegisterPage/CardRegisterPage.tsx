@@ -14,6 +14,7 @@ import {
   validateOwnerName,
 } from "@/utils/validation";
 
+//TODO: 타입 파일로 빼기
 export type CardNumberInputType = {
   cardNumbers1: string;
   cardNumbers2: string;
@@ -75,7 +76,9 @@ const CardRegisterPage = () => {
 
   const passwordState = useInput({
     initialValue: "",
-    validates: [(value: string) => validateOwnerName(value)],
+    validates: [
+      (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
+    ],
   });
 
   const checkCardBrand = (cardNumbers: string) => {

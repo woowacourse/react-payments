@@ -11,6 +11,7 @@ export default meta;
 const ownerNameState = {
   value: "",
   onChange: () => {},
+  error: null,
 };
 
 type Story = StoryObj<typeof OwnerNameField>;
