@@ -92,7 +92,7 @@ function App() {
     <S.Container>
       <GlobalStyles />
       <S.CardPreviewWrapper>
-        <CreditCard
+        <CardPreview
           cardNumbers={cardNumbers.map(({ value }) => value)}
           month={month}
           year={year}

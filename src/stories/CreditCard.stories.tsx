@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CreditCard from '../components/CreditCard';
+import CardPreview from '../components/CardPreview/CardPreview';
 import GlobalStyles from '../GlobalStyles';
 import MasterCard from '../assets/images/mastercard.png';
 import VisaCard from '../assets/images/visa.png';
 
 const meta = {
-  title: 'CreditCard',
-  component: CreditCard,
+  title: 'CardPreview',
+  component: CardPreview,
   parameters: {
     layout: 'centered',
   },
@@ -41,7 +41,7 @@ const meta = {
       description: '카드 브랜드 이미지',
     },
   },
-} satisfies Meta<typeof CreditCard>;
+} satisfies Meta<typeof CardPreview>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
