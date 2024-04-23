@@ -4,6 +4,7 @@ import ExpirationDateFormSection from './ExpirationDateFormSection';
 import NameFormSection from './NameFormSection';
 import CardCompanyFormSection from './CardCompanyFormSection';
 import CVCFormSection from './CVCFormSection';
+import PasswordFormSection from './PasswordFormSection';
 
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
@@ -25,6 +26,7 @@ const CardInfo = ({ ...props }) => {
 
   return (
     <Container>
+      <PasswordFormSection></PasswordFormSection>
       <CVCFormSection></CVCFormSection>
       <CardCompanyFormSection></CardCompanyFormSection>
       <CardNumbersFormSection changeCardNumber={changeCardNumber} />

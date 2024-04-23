@@ -17,7 +17,7 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const CVCFormSection = () => {
+const PasswordFormSection = () => {
   const {
     inputState,
     errorMessage,
@@ -28,8 +28,8 @@ const CVCFormSection = () => {
     setBlur,
     resetErrors,
   } = useInput({
-    inputLength: OPTION.cvcInputCount,
-    maxLength: OPTION.cvcMaxLength,
+    inputLength: OPTION.passwordInputCount,
+    maxLength: OPTION.passwordMaxLength,
     regex: REGEX.numbers,
     errorText: ERROR_MESSAGE.onlyNumber,
   });
@@ -41,25 +41,28 @@ const CVCFormSection = () => {
         inputState,
         setInputState,
         setErrorMessage,
-        errorText: ERROR_MESSAGE.cvcOutOfRange,
+        errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
   }, [inputState[0].hasFocus]);
 
   return (
     <FormSection>
-      <PaymentsFormTitle title="CVC 번호를 입력해 주세요" />
+      <PaymentsFormTitle
+        title="비밀번호를 입력해 주세요"
+        subTitle="앞의 2자리를 입력해주세요"
+      />
       <InputForm>
-        <Label>CVC</Label>
+        <Label>비밀번호 앞 2자리</Label>
         <InputFieldContainer className="input-field-container">
           <PaymentsInputField
-            className="cvc-form-section"
-            placeholder="123"
-            maxLength={OPTION.cvcMaxLength}
+            className="password-form-section"
+            maxLength={OPTION.passwordMaxLength}
             value={inputState[0].value}
             hasError={inputState[0].hasError}
             handleValueChange={(e) => handleValueChange(e, 0)}
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
+            type="password"
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
@@ -67,4 +70,5 @@ const CVCFormSection = () => {
     </FormSection>
   );
 };
-export default CVCFormSection;
+
+export default PasswordFormSection;

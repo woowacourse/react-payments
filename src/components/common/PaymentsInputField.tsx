@@ -11,6 +11,7 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
     handleOnFocus,
     className,
     width,
+    type,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
       value={value}
       onChange={handleValueChange}
       width={width}
+      type={type}
     />
   );
 };

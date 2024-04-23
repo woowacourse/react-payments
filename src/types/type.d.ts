@@ -4,6 +4,7 @@ interface PaymentsInputFieldProps {
   maxLength?: number;
   hasError?: boolean;
   value?: string;
+  type?: string;
   handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;

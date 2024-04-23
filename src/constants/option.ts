@@ -7,6 +7,8 @@ const OPTION = {
   nameMaxLength: 50,
   cvcInputCount: 1,
   cvcMaxLength: 3,
+  passwordInputCount: 1,
+  passwordMaxLength: 2,
   minMonth: '01',
   maxMonth: '12',
 };
