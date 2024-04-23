@@ -89,9 +89,9 @@ function App() {
   } = useInput(nameOnChangeValidations);
 
   return (
-    <>
+    <S.Container>
       <GlobalStyles />
-      <S.Container>
+      <S.CardPreviewWrapper>
         <CreditCard
           cardNumbers={cardNumbers.map(({ value }) => value)}
           month={month}
@@ -99,6 +99,7 @@ function App() {
           name={name}
           cardImageSrc={cardImageSrc}
         />
+      </S.CardPreviewWrapper>
       <S.CardInfoContainer>
         <S.Wrapper>
           <InputSection
@@ -191,7 +192,6 @@ function App() {
         </S.Wrapper>
       </S.CardInfoContainer>
     </S.Container>
-    </>
   );
 }
 

@@ -30,7 +30,7 @@ const GlobalStyles = createGlobalStyle`
     user-select: auto;
   }
 
-  input:focus {
+  input:focus, select:focus {
     outline: none;
   }
 

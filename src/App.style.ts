@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 20px 30px;
+  padding: 0 30px 0 31px;
 
-  width: 376px;
+  width: 382px;
   height: 700px;
   background-color: #fff;
 
@@ -11,10 +11,19 @@ export const Container = styled.div`
   border: 3px solid #000;
 `;
 
+export const CardPreviewWrapper = styled.div`
+  width: 100%;
+  padding: 77px 0 45px 0px;
+`;
+
 export const CardInfoContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+
   gap: 16px;
+
+  height: 438px;
+  overflow-y: auto;
 `;
 
 export const ErrorWrapper = styled.div`
