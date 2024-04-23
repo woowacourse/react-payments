@@ -14,3 +14,10 @@ type Union<T> = T[keyof T];
 
 export type CardBrandType = Union<typeof cardBrand>;
 export type PeriodType = typeof PERIOD;
+
+
+export interface InputChangePropsType {
+  value: string;
+  index: number;
+  inputSection?: InformationDetailType;
+}

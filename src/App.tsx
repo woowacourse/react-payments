@@ -4,7 +4,7 @@ import './reset.css';
 import InputGroup from './components/InputGroup';
 import CardImage from './components/CardImage';
 import { css } from '@emotion/react';
-import { InformationDetailType } from './types/card';
+import { InformationDetailType, InputChangePropsType } from './types/card';
 import { CardNumberType, CardOwnerType, CardPeriodType } from './types/state';
 import validateInput from './validations/validateInput';
 import { PERIOD } from './constants/inputInformation';
@@ -33,12 +33,6 @@ const appInputStyle = css({
   gap: '16px',
   width: '100%',
 });
-
-interface HandleCardInputType {
-  value: string;
-  index: number;
-  inputSection: InformationDetailType;
-}
 
 interface HandleCardErrorType {
   isError: boolean;
@@ -96,7 +90,8 @@ function App() {
     owner: handleCardOwner,
   };
 
-  const handleCardInput = ({ value, index, inputSection }: HandleCardInputType) => {
+  const handleCardInput = ({ value, index, inputSection }: InputChangePropsType) => {
+    if (!inputSection) return;
     const setStateFunction = setStateFunctions[inputSection];
     setStateFunction(value, index);
   };
@@ -125,7 +120,9 @@ function App() {
     });
   };
 
-  const handleInputChange = ({ value, index, inputSection }: HandleCardInputType) => {
+  const handleInputChange = ({ value, index, inputSection }: InputChangePropsType) => {
+    if (!inputSection) return;
+
     const { isError, message } = validateInput(value, inputSection);
     handleCardInput({ value, index, inputSection });
     handleCardError({ isError, inputSection, message, index });
@@ -137,7 +134,7 @@ function App() {
         <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
         <form css={appInputStyle}>
           <InputGroup
-            onInputChange={(value: string, index: number) =>
+            onInputChange={({ value, index }: InputChangePropsType) =>
               handleInputChange({ value, index, inputSection: 'number' })
             }
             informationSection="number"
@@ -145,15 +142,17 @@ function App() {
             errorMessage={cardNumber.errorMessage}
           />
           <InputGroup
-            onInputChange={(value: string, index: number, inputSection?: InformationDetailType) => {
-              if (inputSection) handleInputChange({ value, index, inputSection });
+            onInputChange={({ value, index, inputSection }: InputChangePropsType) => {
+              handleInputChange({ value, index, inputSection });
             }}
             informationSection="period"
             isError={[isError.month, isError.year]}
             errorMessage={cardPeriod.errorMessage}
           />
           <InputGroup
-            onInputChange={(value: string, index: number) => handleInputChange({ value, index, inputSection: 'owner' })}
+            onInputChange={({ value, index }: InputChangePropsType) =>
+              handleInputChange({ value, index, inputSection: 'owner' })
+            }
             informationSection="owner"
             isError={[isError.owner]}
             errorMessage={cardOwner.errorMessage}

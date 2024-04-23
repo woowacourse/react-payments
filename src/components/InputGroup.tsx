@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import InputTitle from './InputTitle';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
-import { InformationDetailType, informationSectionType } from '../types/card';
+import { InputChangePropsType, informationSectionType } from '../types/card';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD, PERIOD } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
@@ -54,7 +54,7 @@ const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusCol
   });
 
 interface InputGroupType {
-  onInputChange: (value: string, index: number, inputSection?: InformationDetailType) => void;
+  onInputChange: ({ value, index, inputSection }: InputChangePropsType) => void;
   informationSection: informationSectionType;
   isError: boolean[];
   errorMessage: string;
@@ -96,7 +96,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
                 maxLength={maxLength}
                 type={getInputType(informationSection, index)}
                 placeholder={placeholder}
-                onStateChange={(value) => onInputChange(value, index, inputSection)}
+                onStateChange={(value) => onInputChange({ value, index, inputSection })}
                 inputCss={inputStyle({
                   borderColor: isError[index] ? '#FF3D3D' : '#acacac',
                   focusColor: isError[index] ? '#FF3D3D' : '#000',
