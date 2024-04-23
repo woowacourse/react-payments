@@ -8,4 +8,5 @@ interface CardInformation {
   cardExpirationMonth: CardInfoValue;
   cardExpirationYear: CardInfoValue;
   cardOwnerName: CardInfoValue;
+  cardCompany: CardInfoValue;
 }
