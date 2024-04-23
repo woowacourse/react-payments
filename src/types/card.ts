@@ -20,4 +20,6 @@ export interface Card {
   expiryDate: ExpiryDate;
   userName: string;
   cardCompany: CardCompany;
+  cvc: string;
+  password: string;
 }

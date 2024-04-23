@@ -4,6 +4,7 @@ import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_CARD } from '../constants/card';
+import CardBackView from '../components/CardBackView';
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>(DEFAULT_CARD);
@@ -11,6 +12,7 @@ export default function EnrollCard() {
     <Page>
       <Container>
         <CardView cardInfo={cardInfo} />
+        <CardBackView cvc={cardInfo.cvc} />
         <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
       </Container>
     </Page>

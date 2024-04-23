@@ -16,4 +16,6 @@ export const DEFAULT_CARD: Card = {
     name: '',
     color: '',
   },
+  cvc: '',
+  password: '',
 };

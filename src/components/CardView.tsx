@@ -5,6 +5,7 @@ import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
 import { SECRET_NUMBER, SLASH } from '../constants/system';
 import { isMasterCard, isVisaCard } from '../utils/checkCardType';
+import { CardContainer } from './common/container.style';
 
 interface Props {
   cardInfo: Card;
@@ -37,7 +38,7 @@ export default function CardView({ cardInfo }: Props) {
   };
 
   return (
-    <CardContainer color={cardCompany.color}>
+    <CardFrontContainer color={cardCompany.color}>
       <ImgBox>
         <CardImg src={CardChip} />
         {cardImgSrc && <CardImg src={cardImgSrc} />}
@@ -59,23 +60,14 @@ export default function CardView({ cardInfo }: Props) {
         {formatDate(expiryDate.year)}
       </TextBox>
       <TextBox>{userName}</TextBox>
-    </CardContainer>
+    </CardFrontContainer>
   );
 }
 
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 215px;
-  height: 130px;
+export const CardFrontContainer = styled(CardContainer)`
+  box-sizing: border-box;
   padding: 15px;
-  border-radius: 4px;
   background-color: ${({ color }) => (color ? color : 'black')};
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
 const ImgBox = styled.div`
