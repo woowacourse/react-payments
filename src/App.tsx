@@ -7,6 +7,7 @@ import {
   CardCompanySelect,
   CardCVCInput,
   CardExpirationPeriodInput,
+  CardForm,
   CardNumbersInput,
   CardPassword,
   CardPreview,
@@ -16,36 +17,16 @@ import { CardSide } from './components/CardPreview';
 import useCardInfoReducer from './modules/useCardInfoReducer';
 
 function App() {
-  const {
-    cardInfo,
-    editCardMark,
-    editCardNumbers,
-    editCardPeriod,
-    editCardUserName,
-    editCardCompany,
-    editCardCVC,
-    editCardPassword,
-  } = useCardInfoReducer();
-
+  const cardInfoReducer = useCardInfoReducer();
+  const { cardInfo } = cardInfoReducer;
   const [cardSide, setCardSide] = useState<CardSide>('front');
+  const cardFormProps = { ...cardInfoReducer, setCardSide };
 
   return (
     <div id="app">
       <div className="inner">
         <CardPreview side={cardSide} cardInfo={cardInfo} />
-        <form className="form-container">
-          <fieldset>
-            <CardPassword editCardPassword={editCardPassword} />
-            <CardCVCInput setCardSide={setCardSide} editCardCVC={editCardCVC} />
-            <CardUserNameInput editCardUserName={editCardUserName} />
-            <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
-            <CardCompanySelect editCardCompany={editCardCompany} />
-            <CardNumbersInput
-              editCardMark={editCardMark}
-              editCardNumbers={editCardNumbers}
-            />
-          </fieldset>
-        </form>
+        <CardForm {...cardFormProps} />
       </div>
     </div>
   );

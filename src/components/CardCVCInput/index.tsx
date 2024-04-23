@@ -14,7 +14,7 @@ import Input from '../Input';
 
 import styles from './style.module.css';
 
-interface CardCVCInputProps {
+export interface CardCVCInputProps {
   setCardSide: Dispatch<SetStateAction<CardSide>>;
   editCardCVC: (cvc: string) => void;
 }

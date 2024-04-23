@@ -1,3 +1,6 @@
 :root {
   --error-color: #ff3d3d;
+  --max-width: 480px;
+  --submit-btn-height: 3.25rem;
+  --card-preview-height: calc(15.875rem - 1.1875rem * 2);
 }

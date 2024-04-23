@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(15.875rem - 1.1875rem * 2);
+  height: var(--card-preview-height);
   font-family: 'Inter', sans-serif;
 }
 

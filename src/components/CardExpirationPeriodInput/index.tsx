@@ -9,8 +9,8 @@ import {
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
-import Input from '../Input';
 import ErrorMessage from '../ErrorMessage';
+import Input from '../Input';
 
 import styles from './style.module.css';
 
@@ -25,7 +25,7 @@ interface CardExpirationPeriod {
   year: string | null;
 }
 
-interface CardExpirationPeriodFormProps {
+export interface CardExpirationPeriodFormProps {
   editCardPeriod: (period: CardPeriod) => void;
 }
 type Period = 'month' | 'year';
@@ -85,13 +85,11 @@ export default function CardExpirationPeriodInput(
   ) => {
     // 유효기간의 오류 확인
     if (!newPeriodError) return;
-
-    const isErrorInPeriod = Object.entries(newPeriodError).some(
-      ([_, error]) => error,
-    );
-    if (isErrorInPeriod) return;
-    // 오류 없을 시 cardInfo 업데이트
-    editCardPeriod(newCardPeriod);
+    // 오류가 없는 기간만 업데이트
+    editCardPeriod({
+      month: newPeriodError.month ? null : newCardPeriod.month,
+      year: newPeriodError.year ? null : newCardPeriod.year,
+    });
   };
 
   /**

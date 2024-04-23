@@ -10,14 +10,14 @@ import {
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
-import Input from '../Input';
 import ErrorMessage from '../ErrorMessage';
+import Input from '../Input';
 
 import styles from './style.module.css';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
-interface CardNumbersInputProps {
+export interface CardNumbersInputProps {
   editCardMark: (mark: CardMark) => void;
   editCardNumbers: (numbers: CardNumbers) => void;
 }
@@ -70,12 +70,11 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
    * 카드번호 입력값에 대한 유효성 검사를 진행하고, 검사 결과에 따라 numbersError 상태를 업데이트함
    * @param newNumbers 유효성 검사를 진행할 대상
    */
-  const updateNumbersError = (newNumbers: (number | undefined)[]) => {
+  const checkNumbersError = (newNumbers: (number | undefined)[]) => {
     const newNumbersError = newNumbers.map((item) =>
       !item ? true : !CARD_NUMBER_REGEXP.test(item.toString()),
     );
-
-    setNumbersError(newNumbersError);
+    return newNumbersError;
   };
 
   /**
@@ -90,9 +89,12 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     const newNumbers = getNewNumbers(index, value);
     setNumbers(newNumbers);
     // numbersError 업데이트
-    updateNumbersError(newNumbers);
+    const newNumbersError = checkNumbersError(newNumbers);
+    setNumbersError(newNumbersError);
     // cardInfo 변경
-    editCardNumbers(numbers);
+    editCardNumbers(
+      newNumbersError.map((error, i) => (error ? undefined : newNumbers[i])),
+    );
     editCardMark(cardMark);
   };
 

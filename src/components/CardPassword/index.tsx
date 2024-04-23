@@ -13,7 +13,7 @@ import Input from '../Input';
 
 import styles from './style.module.css';
 
-interface CardPasswordProps {
+export interface CardPasswordProps {
   editCardPassword: (password: string) => void;
 }
 

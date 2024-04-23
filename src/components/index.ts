@@ -2,6 +2,7 @@ import CardBackImg from './CardBackImg';
 import CardCompanySelect from './CardCompanySelect';
 import CardCVCInput from './CardCVCInput/index';
 import CardExpirationPeriodInput from './CardExpirationPeriodInput/index';
+import CardForm from './CardForm';
 import CardFrontImg from './CardFrontImg';
 import CardInputSection from './CardInputSection';
 import CardNumbersInput from './CardNumbersInput';
@@ -17,6 +18,7 @@ export {
   CardCVCInput,
   CardExpirationPeriodInput,
   CardFrontImg,
+  CardForm,
   CardInputSection,
   CardNumbersInput,
   CardUserNameInput,

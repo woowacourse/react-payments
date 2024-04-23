@@ -7,12 +7,12 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import CardInputSection from '../CardInputSection';
-import Input from '../Input';
 import ErrorMessage from '../ErrorMessage';
+import Input from '../Input';
 
 import styles from './style.module.css';
 
-interface CardUserNameInputProps {
+export interface CardUserNameInputProps {
   editCardUserName: (name: string) => void;
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {

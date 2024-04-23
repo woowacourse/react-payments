@@ -18,7 +18,7 @@ import ErrorMessage from '../ErrorMessage';
 import styles from './style.module.css';
 
 const PLACE_HOLDER = 'place_holder';
-interface CardCompanySelectProps {
+export interface CardCompanySelectProps {
   editCardCompany: (companyName: string) => void;
 }
 const BLACK_COLOR_STYLE: CSSProperties = { color: 'inherit' };
