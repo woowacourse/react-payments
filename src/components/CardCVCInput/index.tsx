@@ -10,7 +10,7 @@ import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
 import Input from '../Input';
-import InputErrorMessage from '../InputErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 import styles from './style.module.css';
 
@@ -58,9 +58,9 @@ function CardCVCInput(props: CardCVCInputProps) {
           value={cvc}
         />
       </div>
-      <InputErrorMessage>
+      <ErrorMessage>
         <p>{cvcError ? ERROR_MESSAGE.cvc : ''}</p>
-      </InputErrorMessage>
+      </ErrorMessage>
     </CardInputSection>
   );
 }

@@ -8,7 +8,7 @@ import CardNumbersInput from './CardNumbersInput';
 import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
 import Input from './Input';
-import InputErrorMessage from './InputErrorMessage/index';
+import ErrorMessage from './ErrorMessage/index';
 
 export {
   CardBackImg,
@@ -20,6 +20,6 @@ export {
   CardNumbersInput,
   CardUserNameInput,
   CardPreview,
-  InputErrorMessage,
+  ErrorMessage,
   Input,
 };

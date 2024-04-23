@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 
 import styles from './style.module.css';
 
-interface InputErrorMessageProps {
+interface ErrorMessageProps {
   children: ReactNode;
 }
-function InputErrorMessage(props: InputErrorMessageProps) {
+function ErrorMessage(props: ErrorMessageProps) {
   const { children } = props;
 
   return <div className={styles.message}>{children}</div>;
 }
 
-export default InputErrorMessage;
+export default ErrorMessage;

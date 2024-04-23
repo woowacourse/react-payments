@@ -10,7 +10,7 @@ import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import Input from '../Input';
-import InputErrorMessage from '../InputErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 import styles from './style.module.css';
 
@@ -201,9 +201,9 @@ export default function CardExpirationPeriodInput(
           error={periodError.year || periodError.availability}
         />
       </div>
-      <InputErrorMessage>
+      <ErrorMessage>
         {errorMessage?.split('\n').map((item) => <p>{item}</p>)}
-      </InputErrorMessage>
+      </ErrorMessage>
     </CardInputSection>
   );
 }

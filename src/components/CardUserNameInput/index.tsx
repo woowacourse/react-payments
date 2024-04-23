@@ -8,7 +8,7 @@ import {
 } from '../../constants';
 import CardInputSection from '../CardInputSection';
 import Input from '../Input';
-import InputErrorMessage from '../InputErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 import styles from './style.module.css';
 
@@ -69,9 +69,9 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
           error={nameError}
         />
       </div>
-      <InputErrorMessage>
+      <ErrorMessage>
         <p>{errorMessage}</p>
-      </InputErrorMessage>
+      </ErrorMessage>
     </CardInputSection>
   );
 }
