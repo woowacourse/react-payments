@@ -2,9 +2,21 @@ import InputSection from './common/InputSection';
 import { ErrorText, ErrorWrapper } from '../styles/common';
 import Input from './common/Input';
 
-export interface IPasswordInputContainerProps {}
+export interface IPasswordInputContainerProps {
+  data: string;
+  setData: React.Dispatch<React.SetStateAction<string>>;
+  errorStatus: { errorMessage: string; isError: boolean };
+  updateErrorStatus: (targetValue?: string) => void;
+}
 
-export default function PasswordInputContainer(props: IPasswordInputContainerProps) {
+export default function PasswordInputContainer({
+  data,
+  setData,
+  errorStatus,
+  updateErrorStatus,
+}: IPasswordInputContainerProps) {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value);
+
   return (
     <div>
       <InputSection
@@ -13,10 +25,17 @@ export default function PasswordInputContainer(props: IPasswordInputContainerPro
         labelFor="password"
         labelText="비밀번호 앞 2자리"
       >
-        <Input maxLength={2} type="password" width="100%" />
+        <Input
+          value={data}
+          maxLength={2}
+          type="password"
+          width="100%"
+          onChange={onChange}
+          onBlur={() => updateErrorStatus()}
+        />
       </InputSection>
       <ErrorWrapper>
-        <ErrorText>카드 소유자 이름을 영어로만 입력해주세요</ErrorText>
+        <ErrorText>{errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

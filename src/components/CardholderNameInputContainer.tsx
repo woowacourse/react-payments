@@ -6,7 +6,7 @@ interface CardholderNameInputContainerProps {
   data: string;
   setData: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
-  updateErrorStatus: () => void;
+  updateErrorStatus: (targetValue?: string) => void;
 }
 
 const CardholderNameInputContainer = ({

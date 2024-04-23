@@ -6,7 +6,7 @@ import { IErrorStatus } from '../validators/index.d';
 type MM = string;
 type YY = string;
 
-type TErrorStatusUpdater = (value?: string) => void;
+type TErrorStatusUpdater = (targetValue?: string) => void;
 
 interface CardExpiryDateInputContainerProps {
   data: { month: MM; year: YY };
