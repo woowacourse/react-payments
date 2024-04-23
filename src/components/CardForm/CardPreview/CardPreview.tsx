@@ -11,9 +11,11 @@ interface CardPreviewProps {
   year: string;
   owner: string;
   company: string;
+  cvc: string;
+  isCVCInput: boolean;
 }
 
-function CardPreview({ cardNumber, month, year, owner, company }: CardPreviewProps) {
+function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput }: CardPreviewProps) {
   const makeCardLogoImage = (cardNumbers: string[]) => {
     if (isVisaCard(cardNumbers)) {
       return <img src={Visa} alt="비자 카드" />;
@@ -32,8 +34,14 @@ function CardPreview({ cardNumber, month, year, owner, company }: CardPreviewPro
     return Array.from({ length: cardNumber.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
   };
 
-  return (
-    <S.Card $background={CARD_COMPANY[company]}>
+  return isCVCInput ? (
+    <S.Card $face="back" $background="#D5D5D5">
+      <S.CVCBox>
+        <p>{cvc}</p>
+      </S.CVCBox>
+    </S.Card>
+  ) : (
+    <S.Card $face="front" $background={CARD_COMPANY[company]}>
       <S.CardHeader>
         <S.ChipBox />
         <S.LogoBox>{makeCardLogoImage(cardNumber)}</S.LogoBox>

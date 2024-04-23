@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-export const Card = styled.div<{ $background: string }>`
+export const Card = styled.div<{ $face: string; $background: string }>`
+  position: relative;
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: ${(props) => props.$face === 'front' && '8px 12px'};
   background: ${(props) => (props.$background ? props.$background : ({ theme }) => theme.color.primary.main)};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
@@ -25,6 +26,27 @@ export const ChipBox = styled.div`
 export const LogoBox = styled.div`
   width: 36px;
   height: 22px;
+`;
+
+export const CVCBox = styled.div`
+  position: absolute;
+  bottom: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 24px;
+  background: #cbba64;
+  padding: 0 16px;
+
+  p {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: italic;
+    letter-spacing: 0.15em;
+  }
 `;
 
 export const CardBody = styled.div`

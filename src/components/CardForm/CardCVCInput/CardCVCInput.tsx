@@ -8,11 +8,16 @@ import { isNumber, isValidLength } from '../../../utils/validation';
 
 interface CardCVCInputProps {
   handleCVC: (cvc: string) => void;
+  handleIsCVCInput: (isCVCInput: boolean) => void;
 }
 
-const CardCVCInput = ({ handleCVC }: CardCVCInputProps) => {
+const CardCVCInput = ({ handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const handleCVCFocus = () => {
+    handleIsCVCInput(true);
+  };
 
   const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -35,6 +40,7 @@ const CardCVCInput = ({ handleCVC }: CardCVCInputProps) => {
     setErrorMessage(newIsValid ? '' : 'CVC 번호는 세 자리 숫자여야 합니다.');
 
     handleCVC(newIsValid ? e.target.value : '');
+    handleIsCVCInput(false);
   };
 
   return (
@@ -46,6 +52,7 @@ const CardCVCInput = ({ handleCVC }: CardCVCInputProps) => {
           type="text"
           placeholder="123"
           maxLength={3}
+          onFocus={handleCVCFocus}
           onChange={handleCVCChange}
           onBlur={handleCVCBlur}
         />
