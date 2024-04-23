@@ -1,5 +1,6 @@
 import { startsWithNumberRegex } from '../../util/startsWithNumberRegex';
 import CardNumbersFormSection from '../FormSection/CardNumbersFormSection/CardNumbersFormSection';
+import CompanyDropdownFormSection from '../FormSection/CompanyDropdownFormSection/CompanyDropdownFormSection';
 import ExpirationDateFormSection from '../FormSection/ExpirationDateFormSection/ExpirationDateFormSection';
 import NameFormSection from '../FormSection/NameFormSection/NameFormSection';
 
@@ -16,6 +17,10 @@ const CardInfo = ({ ...props }) => {
     } else {
       return ('none');
     }
+  }
+
+  const changeCompany = (company: CardCompany) => {
+    setCardInfo((prev: CardInfo) => ({ ...prev, cardCompany: company }))
   }
 
   const changeCardNumbers = (cardNumber: string, index: number) => {
@@ -41,9 +46,10 @@ const CardInfo = ({ ...props }) => {
 
   return (
     <Container>
-      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers} />
-      <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={{ month: cardInfo.expirationMonth, year: cardInfo.expirationYear }} />
       <NameFormSection changeName={changeName} name={cardInfo.name} />
+      <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={{ month: cardInfo.expirationMonth, year: cardInfo.expirationYear }} />
+      <CompanyDropdownFormSection changeCompany={changeCompany} company={cardInfo.cardCompany} />
+      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers} />
     </Container>
   );
 };

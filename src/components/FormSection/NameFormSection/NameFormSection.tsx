@@ -33,7 +33,7 @@ const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
             maxLength={OPTION.nameMaxLength}
             value={name}
             hasError={inputState.errorMessage.length !== 0}
-            handleValueChange={(e) => onChange(e)}
+            handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
           />

@@ -9,9 +9,12 @@ const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: ['', '', '', ''],
     cardBrand: 'none',
+    cardCompany: '',
     expirationMonth: '',
     expirationYear: '',
     name: '',
+    cvc: '',
+    password: ','
   });
 
   return (

@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import IcChip from '../../asset/IcChip.svg'
 
 import REGEX from '../../constants/regex';
-import BRAND_TABLE from '../../constants/table';
+import { BRAND_TABLE } from '../../constants/table';
 
 import * as Styled from './CardPreview.styled'
 
 const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumbers, cardBrand, expirationMonth, expirationYear, name } = props;
+  const { cardNumbers, cardBrand, cardCompany, expirationMonth, expirationYear, name, cvc, password } = props;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [animationProps, setAnimationProps] = useState<CardAnimationProps>({
@@ -36,7 +36,7 @@ const CardPreview = ({ ...props }: CardInfo) => {
   };
 
   return (
-    <Styled.Card ref={cardRef} onMouseMove={handleMouseMove} animationProps={animationProps}>
+    <Styled.Card ref={cardRef} onMouseMove={handleMouseMove} animationProps={animationProps} cardCompany={cardCompany}>
       <Styled.Light animationProps={animationProps} />
       <Styled.CardHeader>
         <Styled.Image src={IcChip} />

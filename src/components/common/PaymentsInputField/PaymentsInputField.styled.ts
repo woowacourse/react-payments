@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Input = styled.input<{ hasError?: boolean; width?: number }>`
   font-family: 'Inter', sans-serif;
+  font-size: 11px;
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};
   padding: 8px;
   border-radius: 2px;

@@ -31,7 +31,7 @@ const CardNumbersFormSection = ({ changeCardNumbers, value }: CardNumbersFormSec
               maxLength={OPTION.cardNumberMaxLength}
               value={value[index]}
               hasError={inputState[index].hasError}
-              handleValueChange={(e) => onChange(e, index)}
+              handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, index)}
               handleOnFocus={() => handleOnFocus(index)}
               handleOnBlur={() => handleOnBlur(index)}
             />

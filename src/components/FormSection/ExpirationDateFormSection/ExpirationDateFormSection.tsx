@@ -29,7 +29,7 @@ const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationD
             maxLength={OPTION.expirationDateMaxLength}
             value={expiration.month}
             hasError={inputState.month.hasError}
-            handleValueChange={(e) => onChange(e, 'month')}
+            handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'month')}
             handleOnFocus={() => handleOnFocus('month')}
             handleOnBlur={() => handleOnBlur('month')}
           />
@@ -38,7 +38,7 @@ const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationD
             maxLength={OPTION.expirationDateMaxLength}
             value={expiration.year}
             hasError={inputState.year.hasError}
-            handleValueChange={(e) => onChange(e, 'year')}
+            handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'year')}
             handleOnFocus={() => handleOnFocus('year')}
             handleOnBlur={() => handleOnBlur('year')}
           />

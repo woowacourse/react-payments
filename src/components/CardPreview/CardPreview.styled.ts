@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { CardCompany } from '../../types/type';
+import { COMPANY_TABLE } from '../../constants/table';
 
-export const Card = styled.div<{ animationProps: CardAnimationProps }>`
+export const Card = styled.div<{
+  animationProps: CardAnimationProp;
+  cardCompany: CardCompany;
+}>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,7 +15,12 @@ export const Card = styled.div<{ animationProps: CardAnimationProps }>`
   height: 154px;
   padding: 16px;
   border-radius: 8px;
-  background-color: #333333;
+  color: ${(props) =>
+    props.cardCompany ? COMPANY_TABLE[props.cardCompany].font : 'white'};
+  background-color: ${(props) =>
+    props.cardCompany
+      ? COMPANY_TABLE[props.cardCompany].background
+      : '#333333'};
   box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
   transition:
     transform 0.3s ease,
@@ -61,7 +71,7 @@ export const CardNumber = styled.p`
   font-weight: 500;
   line-height: 15px;
   text-align: left;
-  color: white;
+  color: inherit;
   width: 36px;
 `;
 
@@ -83,7 +93,7 @@ export const NameLabel = styled.p`
   font-weight: 500;
   line-height: 15px;
   text-align: left;
-  color: white;
+  color: inherit;
 `;
 
 export const Name = styled.p`
@@ -93,7 +103,7 @@ export const Name = styled.p`
   font-weight: 500;
   line-height: 15px;
   text-align: left;
-  color: white;
+  color: inherit;
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,7 +122,7 @@ export const ExpirationLabel = styled.p`
   font-weight: 500;
   line-height: 15px;
   text-align: right;
-  color: white;
+  color: inherit;
 `;
 
 export const Expiration = styled.p`
@@ -121,7 +131,7 @@ export const Expiration = styled.p`
   font-weight: 500;
   line-height: 15px;
   text-align: right;
-  color: white;
+  color: inherit;
 `;
 
 export const Image = styled.img`
