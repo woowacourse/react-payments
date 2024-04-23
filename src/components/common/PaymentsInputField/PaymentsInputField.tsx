@@ -1,5 +1,17 @@
 import { Input } from "./PaymentsInputField.styled";
 
+interface PaymentsInputFieldProps {
+  className?: string;
+  placeholder?: string;
+  maxLength?: number;
+  hasError?: boolean;
+  value?: string;
+  handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: number;
+}
+
 const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
   const {
     placeholder,
