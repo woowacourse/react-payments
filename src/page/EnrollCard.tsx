@@ -19,7 +19,7 @@ export default function EnrollCard() {
 
 const Page = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,6 +27,7 @@ const Page = styled.div`
 `;
 
 const Container = styled.div`
+  margin: 50px 0px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
