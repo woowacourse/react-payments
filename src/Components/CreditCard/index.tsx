@@ -54,9 +54,9 @@ const CreditCard = () => {
       </div>
       <section css={cardInfoStyle}>
         <div css={rowStyle}>
-          {Object.values(cardNumbers)?.map((part, index) => (
+          {Object.values(cardNumbers)?.map((cardNumberPart, index) => (
             <div key={index} css={width42}>
-              {part && index < 2 ? part : "*".repeat(part?.length ?? 0)}
+              {cardNumberPart && index < 2 ? cardNumberPart : "*".repeat(cardNumberPart?.length ?? 0)}
             </div>
           ))}
         </div>
