@@ -123,9 +123,11 @@ function App() {
     });
 
     const setErrorFunction = setErrorFunctions[inputSection];
-    setErrorFunction((prevState: any) => {
-      return { ...prevState, errorMessage: message };
-    });
+    setErrorFunction(
+      (prevState: { data: string[] | { month: string; year: string } | string; errorMessage: string }) => {
+        return { ...prevState, errorMessage: message };
+      },
+    );
   };
 
   const handleInputChange = ({ value, index, inputSection }: HandleCardInputType) => {
