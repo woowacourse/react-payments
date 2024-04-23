@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = {
   },
   userName: '소유자 이름은 영문과 공백만 가능해요.',
   cvc: '3자리 숫자를 입력해주세요.',
+  company: '카드사를 선택헤주세요.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {
@@ -34,6 +35,7 @@ export const CARD_COMPANY_MESSAGE = {
   title: '카드사를 선택헤주세요.',
   subTitle: '현재 국내 카드사만 가능합니다.',
   label: '카드사',
+  placeholder: '카드사를 선택해주세요.',
 };
 
 export const CARD_CVC_MESSAGE = {

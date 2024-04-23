@@ -9,8 +9,8 @@ import {
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
-import Input from '../Input';
 import ErrorMessage from '../ErrorMessage';
+import Input from '../Input';
 
 import styles from './style.module.css';
 

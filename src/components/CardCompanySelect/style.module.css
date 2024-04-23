@@ -1,3 +1,18 @@
 .select {
   margin-top: 1rem;
+  margin-top: 0;
+  width: 100%;
+  option:first-child {
+    color: #acacac;
+  }
+  &:has(option:nth-child(1):checked) {
+    color: #acacac;
+  }
+}
+.selectPlaceholder {
+  display: none;
+}
+
+.error {
+  border-color: var(--error-color);
 }

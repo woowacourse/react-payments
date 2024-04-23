@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { CARD_BACK_SIDE_COLOR, CARD_COLOR_ETC } from '../../constants';
+import { CARD_COLOR_ETC } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 import CardBackImg from '../CardBackImg';
 import CardFrontImg from '../CardFrontImg';
