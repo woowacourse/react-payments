@@ -45,6 +45,7 @@ export const CARD_CVC = {
 };
 
 export const CARD_COLOR_ETC = '#6a0680';
+export const CARD_BACK_SIDE_COLOR = '#D5D5D5';
 
 export const CARD_COMPANY: Map<string, { name: string; color: string }> =
   new Map([

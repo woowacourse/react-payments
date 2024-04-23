@@ -1,2 +1,18 @@
-.backView {
+.backImg {
+  width: inherit;
+  height: inherit;
+}
+
+.line {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 84px;
+  background-color: #cbba64;
+  width: inherit;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.cvc {
+  margin-right: 1rem;
+  font-size: 0.875rem;
 }

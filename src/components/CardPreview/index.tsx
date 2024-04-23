@@ -1,6 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React, { useMemo } from 'react';
 
-import { CARD_COLOR_ETC } from '../../constants';
+import { CARD_BACK_SIDE_COLOR, CARD_COLOR_ETC } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 import CardBackImg from '../CardBackImg';
 import CardFrontImg from '../CardFrontImg';
@@ -15,21 +15,26 @@ interface CardPreviewProps {
 
 function CardPreview(props: CardPreviewProps) {
   const { side, cardInfo } = props;
-  const imgStyle = {
-    backgroundColor: cardInfo.company?.color || CARD_COLOR_ETC,
-  };
+  const imgStyle = useMemo(
+    () => ({
+      backgroundColor: cardInfo.company?.color || CARD_COLOR_ETC,
+    }),
+    [cardInfo.company],
+  );
+  const imgClassName = useMemo(
+    () => `${styles.cardImg} ${styles[side]}`,
+    [side],
+  );
 
   return (
     <div className={styles.cardPreview}>
-      <div
-        className={styles.cardImg}
-        style={side === 'front' ? imgStyle : undefined}
-      >
-        {side === 'front' ? (
+      <div className={imgClassName} style={imgStyle}>
+        <div>
           <CardFrontImg cardInfo={cardInfo} />
-        ) : (
+        </div>
+        <div>
           <CardBackImg cvc={cardInfo.cvc} />
-        )}
+        </div>
       </div>
     </div>
   );
