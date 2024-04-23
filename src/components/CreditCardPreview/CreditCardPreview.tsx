@@ -1,16 +1,21 @@
 import S from "./style";
 import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
+import {
+  CardNumberInputType,
+  ExpirationPeriodInputType,
+} from "@/pages/CardRegisterPage/CardRegisterPage";
 import { theme } from "@/style/theme";
 
 export type CardType = "VISA" | "MASTER" | "NONE";
 
 interface Props {
   cardType: CardType;
-  cardNumbers: string[];
-  expirationDate: string[];
+  cardNumbers: CardNumberInputType;
+  expirationDate: ExpirationPeriodInputType;
   ownerName: string;
 }
+
 const CreditCardPreview = ({
   cardType,
   cardNumbers,
@@ -35,7 +40,7 @@ const CreditCardPreview = ({
 
       <S.CreditCardInfo>
         <S.CardNumbers>
-          {cardNumbers.map((number: string, index) => {
+          {Object.values(cardNumbers).map((number: string, index) => {
             const isMasked = index >= 2;
             return isMasked ? (
               <S.Input key={index} type="password" value={number} readOnly />
@@ -51,7 +56,11 @@ const CreditCardPreview = ({
         </S.CardNumbers>
         <S.Input
           type="text"
-          value={expirationDate[0] && expirationDate.join("/")}
+          value={
+            expirationDate.expirationMonth
+              ? `${expirationDate.expirationMonth}/${expirationDate.expirationYear}`
+              : ""
+          }
           readOnly
         ></S.Input>
         <S.Input type="text" value={ownerName} readOnly></S.Input>

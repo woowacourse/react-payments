@@ -6,7 +6,6 @@ import Input from "@/components/Input/Input";
 import { ChangeEvent, useState } from "react";
 import useInputs from "@/hooks/useInputs";
 import {
-  makeNewErrorMessages,
   validateExpirationDate,
   validateIsValidLength,
   validateMonth,
@@ -14,6 +13,7 @@ import {
 import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import { limitNumberLength } from "@/utils/numberHelper";
 import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
+import { ERROR_MESSAGE, INVALID_LENGTH } from "@/constants/errorMessage";
 
 interface Props {
   expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
@@ -28,54 +28,63 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
   const { values: expirationPeriod, onChange: onChangeExpirationPeriod } =
     expiredPeriodState;
 
-  const [expirationErrors, setExpirationErrors] = useState(
-    new Array(INPUT_COUNTS.EXPIRATION_PERIOD).fill(null)
-  );
+  const [expirationErrors, setExpirationErrors] = useState<(string | null)[]>([
+    null,
+    null,
+  ]);
 
   const onValidateExpirationPeriod = (index: number) => {
-    getExpirationError();
-    getLengthError(index);
-    index === 0 && getMonthError();
-    resetVacantInputError(index);
+    setExpirationErrors((prevErrors) => {
+      let newErrors = [...prevErrors];
+      newErrors = validateExpiration(newErrors);
+      newErrors = validateValidMonth(newErrors, index);
+      newErrors = validateLength(newErrors, index);
+      return newErrors;
+    });
   };
 
-  const getMonthError = () => {
-    const monthError = validateMonth(Number(expirationPeriod.expirationMonth));
-
-    if (monthError) {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, monthError, 0));
+  const validateExpiration = (newErrors: (string | null)[]) => {
+    const expirationError = validateExpirationDate(expirationPeriod);
+    if (expirationError) {
+      newErrors = [expirationError, expirationError];
+    } else {
+      newErrors = newErrors.map((error) =>
+        error === ERROR_MESSAGE.EXPIRED_CARD_DATE ? null : error
+      );
     }
+    return newErrors;
   };
 
-  const getLengthError = (index: number) => {
+  const validateLength = (newErrors: (string | null)[], index: number) => {
     const lengthError = validateIsValidLength(
       expirationPeriod[EXPIRATION_INPUTS_NAMES[index]],
       VALID_LENGTH.EXPIRATION_PERIOD
     );
+    if (
+      lengthError &&
+      expirationPeriod[EXPIRATION_INPUTS_NAMES[index]].length
+    ) {
+      newErrors[index] = lengthError;
+    } else {
+      newErrors[index] =
+        newErrors[index] === INVALID_LENGTH(2) ? null : newErrors[index];
+    }
+    return newErrors;
+  };
 
-    if (lengthError) {
-      setExpirationErrors((prev) =>
-        makeNewErrorMessages(prev, lengthError, index)
+  const validateValidMonth = (newErrors: (string | null)[], index: number) => {
+    if (index === 0) {
+      const monthError = validateMonth(
+        Number(expirationPeriod.expirationMonth)
       );
-    } else {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
+      if (monthError) {
+        newErrors[0] = monthError;
+      } else {
+        newErrors[0] =
+          newErrors[0] === ERROR_MESSAGE.INVALID_MONTH ? null : newErrors[0];
+      }
     }
-  };
-
-  const getExpirationError = () => {
-    const expiredError = validateExpirationDate(expirationPeriod);
-
-    if (expiredError) {
-      setExpirationErrors([expiredError, expiredError]);
-    } else {
-      setExpirationErrors([null, null]);
-    }
-  };
-
-  const resetVacantInputError = (index: number) => {
-    if (!expirationPeriod[EXPIRATION_INPUTS_NAMES[index]].length) {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
-    }
+    return newErrors;
   };
 
   return (

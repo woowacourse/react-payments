@@ -1,36 +1,44 @@
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
-import {
-  CARD_BRAND_INFO,
-  INPUT_COUNTS,
-  MAX_LENGTH,
-} from "@/constants/condition";
+import { CARD_BRAND_INFO } from "@/constants/condition";
+import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
-import { makeStringArray } from "@/utils/arrayHelper";
+
+export type CardNumberInputType = {
+  cardNumbers1: string;
+  cardNumbers2: string;
+  cardNumbers3: string;
+  cardNumbers4: string;
+};
+
+export type ExpirationPeriodInputType = {
+  expirationMonth: string;
+  expirationYear: string;
+};
 
 const CardRegisterPage = () => {
-  const cardNumbersState = useInputs({
-    initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
-    maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
+  const cardNumbersState = useInputs<CardNumberInputType>({
+    cardNumbers1: "",
+    cardNumbers2: "",
+    cardNumbers3: "",
+    cardNumbers4: "",
   });
 
-  const expiredDateState = useInputs({
-    initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
-    maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
+  const expiredDateState = useInputs<ExpirationPeriodInputType>({
+    expirationMonth: "",
+    expirationYear: "",
   });
 
-  const ownerNameState = useInputs({
-    initialValue: makeStringArray(1),
-  });
+  const ownerNameState = useInput("");
 
-  const checkCardBrand = (cardNumbers: string[]) => {
-    if (Number(cardNumbers[0][0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
+  const checkCardBrand = (cardNumbers: string) => {
+    if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
       return "VISA";
     }
     if (
-      Number(cardNumbers[0].slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
-      Number(cardNumbers[0].slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
+      Number(cardNumbers.slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
+      Number(cardNumbers.slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
     ) {
       return "MASTER";
     }
@@ -41,10 +49,10 @@ const CardRegisterPage = () => {
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CreditCardPreview
-          cardType={checkCardBrand(cardNumbersState.inputs)}
-          cardNumbers={cardNumbersState.inputs}
-          expirationDate={expiredDateState.inputs}
-          ownerName={ownerNameState.inputs[0]}
+          cardType={checkCardBrand(cardNumbersState.values.cardNumbers1)}
+          cardNumbers={cardNumbersState.values}
+          expirationDate={expiredDateState.values}
+          ownerName={ownerNameState.value}
         />
         <CardRegisterForm
           cardNumbersState={cardNumbersState}
