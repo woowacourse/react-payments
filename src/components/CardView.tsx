@@ -13,7 +13,6 @@ interface Props {
 export default function CardView({ cardInfo }: Props) {
   const { cardNumbers, expiryDate, userName, cardCompany } = cardInfo;
 
-  console.log('cardInfo', cardInfo);
   const getCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
 
@@ -38,7 +37,7 @@ export default function CardView({ cardInfo }: Props) {
   };
 
   return (
-    <CardContainer>
+    <CardContainer color={cardCompany.color}>
       <ImgBox>
         <CardImg src={CardChip} />
         {cardImgSrc && <CardImg src={cardImgSrc} />}
@@ -60,7 +59,6 @@ export default function CardView({ cardInfo }: Props) {
         {formatDate(expiryDate.year)}
       </TextBox>
       <TextBox>{userName}</TextBox>
-      <TextBox>{cardCompany.name}</TextBox>
     </CardContainer>
   );
 }
@@ -73,7 +71,7 @@ const CardContainer = styled.div`
   height: 130px;
   padding: 15px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ color }) => (color ? color : 'black')};
   color: white;
   font-size: 14px;
   font-weight: 500;
