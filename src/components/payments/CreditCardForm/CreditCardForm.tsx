@@ -4,7 +4,7 @@ import {
   OwnerNameTextField,
   PreviewCreditCard,
 } from '@components/payments';
-import CardBrandTextField from '@components/payments/CardBrandTextField/CardBrandTextField';
+import CardBrandTextField from '@components/payments/@cardBrand/CardBrandTextField/CardBrandTextField';
 
 import {
   PreviewCreditCardStyleContainer,

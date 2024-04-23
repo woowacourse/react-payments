@@ -3,7 +3,7 @@ import PreviewCreditCard from '@components/payments/PreviewCreditCard/PreviewCre
 import { generateArgTypes } from '@utils/generateArgTypes';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { CARD_BRAND_MAP } from '@components/payments/CardBrandDropdown/CardBrandDropdown.constant';
+import { CARD_BRAND_MAP } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.constant';
 
 const meta = {
   title: 'Payments/PreviewCreditCard',

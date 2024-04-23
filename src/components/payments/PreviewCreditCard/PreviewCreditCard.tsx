@@ -1,5 +1,5 @@
 import { determineCardLogo } from './PreviewCreditCard.util';
-import { CardBrand } from '@components/payments/CardBrandDropdown/CardBrandDropdown.type';
+import { CardBrand } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.type';
 
 import styles from './PreviewCreditCard.module.css';
 
