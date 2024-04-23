@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Card } from '../types/card';
+import { Card, CardCompany } from '../types/card';
 import InputField from './InputField';
 import INPUT_TYPE_CATEGORIES from '../constants/inputType';
+import SelectCardCompanyField from './SelectCardCompanyField';
 
 interface Props {
   cardInfo: Card;
@@ -9,6 +10,13 @@ interface Props {
 }
 
 export default function InputForm({ cardInfo, handleInput }: Props) {
+  const handleSelectCardCompany = (value: CardCompany) => {
+    handleInput({
+      ...cardInfo,
+      cardCompany: value,
+    });
+  };
+
   const handleCardNumberInput = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
@@ -29,7 +37,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
     });
   };
 
-  const handleUserNameInput = (value: Record<string, string>) => {
+  const handleOneValue = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       ...value,
@@ -38,6 +46,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
 
   return (
     <FormContainer>
+      <SelectCardCompanyField handleSelect={handleSelectCardCompany} />
       <InputField
         title="결제할 카드 번호를 입력해 주세요"
         subtitle="본인 명의의 카드만 결제 가능합니다."
@@ -53,7 +62,17 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
       <InputField
         title="카드 소유자 이름을 입력해 주세요"
         inputTypes={INPUT_TYPE_CATEGORIES.USER_NAME}
-        handleInput={handleUserNameInput}
+        handleInput={handleOneValue}
+      />
+      <InputField
+        title="CVC 번호를 입력해 주세요"
+        inputTypes={INPUT_TYPE_CATEGORIES.CVC}
+        handleInput={handleOneValue}
+      />
+      <InputField
+        title="비밀번호를 입력해 주세요"
+        inputTypes={INPUT_TYPE_CATEGORIES.PASSWORD}
+        handleInput={handleOneValue}
       />
     </FormContainer>
   );
@@ -62,5 +81,5 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 `;

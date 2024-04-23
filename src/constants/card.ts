@@ -12,4 +12,8 @@ export const DEFAULT_CARD: Card = {
     year: '',
   },
   userName: '',
+  cardCompany: {
+    name: '',
+    color: '',
+  },
 };

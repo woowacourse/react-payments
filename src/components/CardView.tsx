@@ -11,8 +11,9 @@ interface Props {
 }
 
 export default function CardView({ cardInfo }: Props) {
-  const { cardNumbers, expiryDate, userName } = cardInfo;
+  const { cardNumbers, expiryDate, userName, cardCompany } = cardInfo;
 
+  console.log('cardInfo', cardInfo);
   const getCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
 
@@ -59,6 +60,7 @@ export default function CardView({ cardInfo }: Props) {
         {formatDate(expiryDate.year)}
       </TextBox>
       <TextBox>{userName}</TextBox>
+      <TextBox>{cardCompany.name}</TextBox>
     </CardContainer>
   );
 }
