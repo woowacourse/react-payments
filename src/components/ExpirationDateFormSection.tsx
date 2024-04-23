@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import { validateExpired, formatMonth } from '../utils/validateExpirationDate';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -39,55 +40,11 @@ const ExpirationDateFormSection = ({
     errorText: ERROR_MESSAGE.onlyNumber,
   });
 
-  const formatMonth = () => {
-    if (REGEX.oneToNine.test(inputState[0].value)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: '0' + prevState[0].value,
-          isFilled: true,
-        },
-      }));
-    } else if (REGEX.zero.test(inputState[0].value)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: OPTION.minMonth,
-        },
-      }));
-    } else if (
-      !REGEX.month.test(inputState[0].value) &&
-      inputState[0].value.length
-    ) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: OPTION.maxMonth,
-        },
-      }));
-    }
-  };
-
-  const validateExpired = () => {
-    const inputExpirationDate = new Date(
-      `20${inputState[1].value}-${inputState[0].value}-01`,
-    );
-    const currentDate = new Date();
-
-    if (inputExpirationDate < currentDate) {
-      inputState[0].hasError = true;
-      inputState[1].hasError = true;
-      setErrorMessage(ERROR_MESSAGE.expiredCard);
-    } else {
-      setErrorMessage('');
-    }
-  };
-
   useEffect(() => {
-    formatMonth();
+    formatMonth({
+      inputState,
+      setInputState,
+    });
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {
@@ -105,7 +62,7 @@ const ExpirationDateFormSection = ({
         setInputState,
         setErrorMessage,
         errorText: ERROR_MESSAGE.expiryFormat,
-        elseValidator: validateExpired,
+        elseValidator: () => validateExpired({ inputState, setErrorMessage }),
       });
     }
   }, [hasNoAllFocus]);
