@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const style = css({
+export const cardPreviewStyle = css({
   background: "#333",
   width: "212px",
   height: "132px",
@@ -13,7 +13,6 @@ export const style = css({
   display: "flex",
   flexDirection: "column",
   gap: "14px",
-  fontFamily: "Roboto",
   marginBottom: "20px",
 });
 
