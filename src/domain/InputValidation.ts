@@ -74,6 +74,14 @@ const Validation: ValidationMap = {
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
+  cvc: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
+  password: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
 };
 
 export default Validation;

@@ -31,7 +31,7 @@ export default function Input({
   return (
     <StyledInput
       color={isError ? 'red' : 'grey'}
-      type="text"
+      type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
       onChange={handleChange}

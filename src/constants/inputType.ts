@@ -1,4 +1,6 @@
-const INPUT_TYPE_CATEGORIES = {
+import { InputType } from '../types/input';
+
+const INPUT_TYPE_CATEGORIES: Record<string, InputType> = {
   CARD_NUMBER: {
     inputLabel: '카드번호',
     inputInfo: Array.from({ length: 4 }, (_, index) => ({
@@ -6,7 +8,6 @@ const INPUT_TYPE_CATEGORIES = {
       validateType: 'cardNumber',
       maxLength: 4,
       placeHolder: '1234',
-      error: '숫자만 입력 가능합니다.',
     })),
   },
   EXPIRY_DATE: {
@@ -34,6 +35,29 @@ const INPUT_TYPE_CATEGORIES = {
         validateType: 'userName',
         maxLength: 30,
         placeHolder: 'JOHN DOE',
+      },
+    ],
+  },
+  CVC: {
+    inputLabel: 'CVC',
+    inputInfo: [
+      {
+        property: 'cvc',
+        validateType: 'cvc',
+        maxLength: 3,
+        placeHolder: '123',
+      },
+    ],
+  },
+  PASSWORD: {
+    inputLabel: '비밀번호 앞 2자리',
+    inputInfo: [
+      {
+        property: 'password',
+        validateType: 'password',
+        maxLength: 2,
+        placeHolder: '',
+        type: 'password',
       },
     ],
   },

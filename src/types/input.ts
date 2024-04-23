@@ -8,4 +8,5 @@ export interface InputInfo {
   validateType: string;
   maxLength: number;
   placeHolder: string;
+  type?: string;
 }
