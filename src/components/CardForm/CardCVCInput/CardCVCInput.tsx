@@ -4,14 +4,51 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-const CardCVCInput = () => {
+import { isNumber, isValidLength } from '../../../utils/validation';
+
+interface CardCVCInputProps {
+  handleCVC: (cvc: string) => void;
+}
+
+const CardCVCInput = ({ handleCVC }: CardCVCInputProps) => {
+  const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumber(e.target.value)) {
+      e.target.value = '';
+      return;
+    }
+
+    if (isValidLength(e.target.value, 3)) {
+      setIsValid(true);
+      setErrorMessage('');
+    }
+
+    handleCVC(e.target.value);
+  };
+
+  const handleCVCBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newIsValid = isNumber(e.target.value) && isValidLength(e.target.value, 3);
+
+    setIsValid(newIsValid);
+    setErrorMessage(newIsValid ? '' : 'CVC 번호는 세 자리 숫자여야 합니다.');
+
+    handleCVC(newIsValid ? e.target.value : '');
+  };
 
   return (
     <div>
       <TitleContainer title="CVC 번호를 입력해 주세요" />
       <InputField label="CVC" inputCount={1} errorMessage={errorMessage}>
-        <Input isValid={true} type="text" placeholder="123" maxLength={3} />
+        <Input
+          isValid={isValid}
+          type="text"
+          placeholder="123"
+          maxLength={3}
+          onChange={handleCVCChange}
+          onBlur={handleCVCBlur}
+        />
       </InputField>
     </div>
   );

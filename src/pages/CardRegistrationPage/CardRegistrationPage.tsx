@@ -57,7 +57,7 @@ const CardRegistrationPage = () => {
         <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />
         <CardOwnerInput handleOwner={handleOwner} />
         <CardCompanyInput company={company} handleCompany={handleCompany} />
-        <CardCVCInput />
+        <CardCVCInput handleCVC={handleCVC} />
         <CardPasswordInput />
       </S.CardForm>
     </S.CardRegistrationPageLayout>
