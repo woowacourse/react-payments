@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import Input from './Input';
 import FieldTitle from './FieldTitle';
+import { FieldContainer } from './common/common.style';
 
 interface Props {
   title: string;
@@ -43,7 +44,7 @@ export default function InputField({
   };
 
   return (
-    <Container>
+    <FieldContainer>
       <FieldTitle title={title} subtitle={subtitle} />
       <Label>{inputTypes.inputLabel}</Label>
       <InputBox>
@@ -61,15 +62,9 @@ export default function InputField({
       <ErrorBox>
         {Object.values(errorMessages).find((message) => message !== '')}
       </ErrorBox>
-    </Container>
+    </FieldContainer>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 120px;
-`;
 
 const Label = styled.p`
   color: var(--Text, #0a0d13);
