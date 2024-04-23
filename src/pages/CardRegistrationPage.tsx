@@ -6,6 +6,7 @@ import CardExpirationInput from '../components/CardForm/CardExpirationInput/Card
 import CardNumberInput from '../components/CardForm/CardNumberInput/CardNumberInput';
 
 import * as S from '../styles/App.style';
+import CardCompanyInput from '../components/CardForm/CardCompanyInput/CardCompanyInput';
 
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -38,6 +39,7 @@ const CardRegistrationPage = () => {
         <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
         <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />
         <CardOwnerInput handleOwner={handleOwner} />
+        <CardCompanyInput />
       </S.CardForm>
     </S.AppLayout>
   );
