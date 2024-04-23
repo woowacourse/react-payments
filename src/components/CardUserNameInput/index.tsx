@@ -1,11 +1,13 @@
 import { ChangeEvent, useMemo, useState } from 'react';
 
 import {
+  CARD_FORM_STEP,
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -14,11 +16,13 @@ import styles from './style.module.css';
 
 export interface CardUserNameInputProps {
   editCardUserName: (name: string) => void;
+  goNextFormStep: (currentStep: number) => void;
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
-  const { editCardUserName } = props;
+  const { editCardUserName, goNextFormStep } = props;
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
   const [userName, setUserName] = useState('');
   const [nameError, setNameError] = useState(false);
 
@@ -37,10 +41,13 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   };
 
   const handleEditCardUserName = (error: boolean, name: string) => {
-    if (!error || name === '') {
-      // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-      editCardUserName(name.trim());
-    }
+    if (error && name) return;
+    const newUserName = name.trim();
+    // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
+    editCardUserName(newUserName);
+
+    // form 다음 단계로 이동
+    if (newUserName) goNextFormStep(CARD_FORM_STEP.userName);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,13 +59,15 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     const isValidated = validateName(value);
     setNameError(!isValidated);
     // cardInfo 업데이트
-    handleEditCardUserName(!isValidated, name);
+
+    handleEditCardUserName(!name || !isValidated, name);
   };
 
   return (
     <CardInputSection title={title} childrenLabel={label}>
       <div className={styles.inputWrap}>
         <Input
+          ref={focusTargetRef}
           style={{ textTransform: 'uppercase' }}
           name="name"
           type="text"

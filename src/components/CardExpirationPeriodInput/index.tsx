@@ -3,9 +3,11 @@ import { ChangeEvent, FocusEvent, useMemo, useState } from 'react';
 import {
   CARD_EXPIRATION,
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
+  CARD_FORM_STEP,
   CARD_PERIOD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
@@ -27,6 +29,7 @@ interface CardExpirationPeriod {
 
 export interface CardExpirationPeriodFormProps {
   editCardPeriod: (period: CardPeriod) => void;
+  goNextFormStep: (currentStep: number) => void;
 }
 type Period = 'month' | 'year';
 
@@ -37,11 +40,11 @@ const MIN_NUMBER_OF_VALUE = 1;
 export default function CardExpirationPeriodInput(
   props: CardExpirationPeriodFormProps,
 ) {
-  const { editCardPeriod } = props;
+  const { editCardPeriod, goNextFormStep } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
   const { length } = CARD_EXPIRATION;
-
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
   const [cardPeriod, setCardPeriod] = useState<CardExpirationPeriod>({
     month: null,
     year: null,
@@ -76,6 +79,15 @@ export default function CardExpirationPeriodInput(
     return undefined;
   }, [periodError]);
 
+  const isNextStepEnabled = (
+    newPeriodError: PeriodError,
+    newCardPeriod: CardPeriod,
+  ) => {
+    const isValidatedPeriod = Object.values(newCardPeriod).every((i) => i);
+    const isNoneError = Object.values(newPeriodError).every((i) => !i);
+
+    return isValidatedPeriod && isNoneError;
+  };
   /**
    * 유효기간에 오류가 없을 때 cardInfo의 period 수정하는 함수
    */
@@ -90,6 +102,8 @@ export default function CardExpirationPeriodInput(
       month: newPeriodError.month ? null : newCardPeriod.month,
       year: newPeriodError.year ? null : newCardPeriod.year,
     });
+    if (isNextStepEnabled(newPeriodError, newCardPeriod))
+      goNextFormStep(CARD_FORM_STEP.period);
   };
 
   /**
@@ -183,6 +197,7 @@ export default function CardExpirationPeriodInput(
         onBlur={handlePeriodBlur}
       >
         <Input
+          ref={focusTargetRef}
           name="month"
           type="number"
           placeholder={monthPlaceholder}

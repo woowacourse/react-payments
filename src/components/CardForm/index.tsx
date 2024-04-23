@@ -1,4 +1,11 @@
-import React, { Dispatch, FormEvent, SetStateAction, useMemo } from 'react';
+import React, {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import { CardInfo } from '../../modules/useCardInfoReducer';
 import CardCompanySelect, {
@@ -18,15 +25,17 @@ import CardUserNameInput, {
 import styles from './style.module.css';
 
 interface CardFormProps
-  extends CardPasswordProps,
-    CardCVCInputProps,
-    CardUserNameInputProps,
-    CardExpirationPeriodFormProps,
-    CardCompanySelectProps,
-    CardNumbersInputProps {
+  extends Omit<CardPasswordProps, 'goNextFormStep'>,
+    Omit<CardCVCInputProps, 'goNextFormStep'>,
+    Omit<CardUserNameInputProps, 'goNextFormStep'>,
+    Omit<CardExpirationPeriodFormProps, 'goNextFormStep'>,
+    Omit<CardCompanySelectProps, 'goNextFormStep'>,
+    Omit<CardNumbersInputProps, 'goNextFormStep'> {
   cardInfo: CardInfo;
   setCardSide: Dispatch<SetStateAction<CardSide>>;
 }
+
+const INITIAL_STEP = 1;
 
 function CardForm(props: CardFormProps) {
   const {
@@ -41,11 +50,21 @@ function CardForm(props: CardFormProps) {
     setCardSide,
   } = props;
 
+  const [formStep, setFormStep] = useState(INITIAL_STEP);
+
+  const goNextFormStep = (currentStep: number) => {
+    setFormStep(currentStep + 1);
+  };
+
+  const resetFormStep = () => {
+    setFormStep(INITIAL_STEP);
+  };
   const isCardCompleted = useMemo(
     () =>
       Object.entries(cardInfo)
         .map(([key, value]) => {
           if (!value) return false;
+          if (key === 'userName') return !!value;
           if (key === 'period') return value.month && value.year;
           if (key === 'numbers')
             return Object.values(value).every((number) => !!number);
@@ -56,23 +75,49 @@ function CardForm(props: CardFormProps) {
 
     [cardInfo],
   );
+
   const handleSubmit = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    // 카드 등록 완료 페이지로 이동
+    resetFormStep();
+    // TODO: 카드 등록 완료 페이지로 이동
   };
 
   return (
     <form className={styles.formContainer}>
       <fieldset className={styles.fieldset}>
-        <CardPassword editCardPassword={editCardPassword} />
-        <CardCVCInput setCardSide={setCardSide} editCardCVC={editCardCVC} />
-        <CardUserNameInput editCardUserName={editCardUserName} />
-        <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
-        <CardCompanySelect editCardCompany={editCardCompany} />
-        <CardNumbersInput
-          editCardMark={editCardMark}
-          editCardNumbers={editCardNumbers}
-        />
+        {formStep === 6 && <CardPassword editCardPassword={editCardPassword} />}
+        {formStep >= 5 && (
+          <CardCVCInput
+            setCardSide={setCardSide}
+            editCardCVC={editCardCVC}
+            goNextFormStep={goNextFormStep}
+          />
+        )}
+        {formStep >= 4 && (
+          <CardUserNameInput
+            editCardUserName={editCardUserName}
+            goNextFormStep={goNextFormStep}
+          />
+        )}
+        {formStep >= 3 && (
+          <CardExpirationPeriodInput
+            editCardPeriod={editCardPeriod}
+            goNextFormStep={goNextFormStep}
+          />
+        )}
+        {formStep >= 2 && (
+          <CardCompanySelect
+            editCardCompany={editCardCompany}
+            goNextFormStep={goNextFormStep}
+          />
+        )}
+        {formStep >= 1 && (
+          <CardNumbersInput
+            editCardMark={editCardMark}
+            editCardNumbers={editCardNumbers}
+            goNextFormStep={goNextFormStep}
+          />
+        )}
       </fieldset>
       {isCardCompleted && (
         <button

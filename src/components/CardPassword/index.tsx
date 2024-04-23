@@ -6,6 +6,7 @@ import {
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -20,6 +21,7 @@ export interface CardPasswordProps {
 function CardPassword(props: CardPasswordProps) {
   const { editCardPassword } = props;
 
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
@@ -35,7 +37,8 @@ function CardPassword(props: CardPasswordProps) {
 
     setPasswordError(!isValidatedPassword);
     // cardInfo 업데이트
-    if (isValidatedPassword) editCardPassword(newPassword);
+    if (!isValidatedPassword) return;
+    editCardPassword(newPassword);
   };
 
   return (
@@ -46,6 +49,7 @@ function CardPassword(props: CardPasswordProps) {
     >
       <div className={styles.inputWrap}>
         <Input
+          ref={focusTargetRef}
           name="password"
           type="password"
           error={passwordError}

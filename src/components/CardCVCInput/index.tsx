@@ -1,11 +1,19 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   CARD_CVC,
   CARD_CVC_MESSAGE,
   CARD_CVC_REGEXP,
+  CARD_FORM_STEP,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
@@ -17,13 +25,15 @@ import styles from './style.module.css';
 export interface CardCVCInputProps {
   setCardSide: Dispatch<SetStateAction<CardSide>>;
   editCardCVC: (cvc: string) => void;
+  goNextFormStep: (currentStep: number) => void;
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const { editCardCVC, setCardSide } = props;
+  const { editCardCVC, setCardSide, goNextFormStep } = props;
 
   const [cvc, setCVC] = useState('');
   const [cvcError, setCVCError] = useState(false);
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
 
   const validateCVC = (text: string) => CARD_CVC_REGEXP.test(text);
 
@@ -36,10 +46,14 @@ function CardCVCInput(props: CardCVCInputProps) {
     const isValidated = validateCVC(newCVC);
     // cvcError 업데이트
     setCVCError(!isValidated);
-    // cardInfo 업데이트
-    if (isValidated) editCardCVC(newCVC);
+    // cardInfo 업데이트 및 form 다음 단계로 이동
+    if (isValidated) {
+      editCardCVC(newCVC);
+      goNextFormStep(CARD_FORM_STEP.cvc);
+    }
   };
 
+  useEffect(() => {}, []);
   return (
     <CardInputSection
       title={CARD_CVC_MESSAGE.title}
@@ -47,6 +61,7 @@ function CardCVCInput(props: CardCVCInputProps) {
     >
       <div className={styles.inputWrap}>
         <Input
+          ref={focusTargetRef}
           label={CARD_CVC_MESSAGE.label}
           placeholder={CARD_CVC_MESSAGE.placeholder}
           error={cvcError}

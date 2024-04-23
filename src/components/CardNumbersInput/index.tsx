@@ -1,12 +1,14 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import {
+  CARD_FORM_STEP,
   CARD_MARK_REGEXP,
   CARD_NUMBER_REGEXP,
   CARD_NUMBERS,
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
@@ -20,13 +22,15 @@ const NUMBERS_NAME_PREFIX = 'numbers_';
 export interface CardNumbersInputProps {
   editCardMark: (mark: CardMark) => void;
   editCardNumbers: (numbers: CardNumbers) => void;
+  goNextFormStep: (currentStep: number) => void;
 }
 
 export default function CardNumbersInput(props: CardNumbersInputProps) {
-  const { editCardMark, editCardNumbers } = props;
+  const { editCardMark, editCardNumbers, goNextFormStep } = props;
   const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
 
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
   const [numbers, setNumbers] = useState<CardNumbers>(() =>
     Array.from({ length }, () => undefined),
   );
@@ -96,6 +100,9 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
       newNumbersError.map((error, i) => (error ? undefined : newNumbers[i])),
     );
     editCardMark(cardMark);
+    // form 다음 단계 이동
+    if (newNumbersError.every((i) => !i))
+      goNextFormStep(CARD_FORM_STEP.numbers);
   };
 
   return (
@@ -103,6 +110,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
       <div className={styles.inputWrap} onChange={handleNumberChange}>
         {Array.from({ length }).map((_, index) => (
           <Input
+            ref={index === 0 ? focusTargetRef : undefined}
             key={`number_${index}`}
             name={`${NUMBERS_NAME_PREFIX}${index}`}
             type="number"

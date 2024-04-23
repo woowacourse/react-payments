@@ -10,8 +10,10 @@ import React, {
 import {
   CARD_COMPANY,
   CARD_COMPANY_MESSAGE,
+  CARD_FORM_STEP,
   ERROR_MESSAGE,
 } from '../../constants';
+import useFocusRef from '../../hooks/useFocusRef';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 
@@ -20,15 +22,16 @@ import styles from './style.module.css';
 const PLACE_HOLDER = 'place_holder';
 export interface CardCompanySelectProps {
   editCardCompany: (companyName: string) => void;
+  goNextFormStep: (currentStep: number) => void;
 }
 const BLACK_COLOR_STYLE: CSSProperties = { color: 'inherit' };
 
 function CardCompanySelect(props: CardCompanySelectProps) {
-  const { editCardCompany } = props;
+  const { editCardCompany, goNextFormStep } = props;
   const [error, setError] = useState(false);
   // 옵션 선택, select focus,blur 여부에 따라 select의 color를 변경하기 위한 상태
   const [selectColorStyle, setSelectColorStyle] = useState<CSSProperties>();
-
+  const { focusTargetRef } = useFocusRef<HTMLSelectElement>();
   const selectClassName = useMemo(
     () => `${styles.select} ${error ? styles.error : ''}`,
     [error],
@@ -39,9 +42,12 @@ function CardCompanySelect(props: CardCompanySelectProps) {
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
-
+    // 오류 업데이트
     setError(false);
+    // cardInfo 변경
     editCardCompany(value);
+    // form 다음 단계로 이동
+    goNextFormStep(CARD_FORM_STEP.company);
   };
 
   const handleBlur = (event: FocusEvent<HTMLSelectElement>) => {
@@ -67,6 +73,7 @@ function CardCompanySelect(props: CardCompanySelectProps) {
         {CARD_COMPANY_MESSAGE.label}
       </label>
       <select
+        ref={focusTargetRef}
         id={selectId}
         className={selectClassName}
         style={selectColorStyle}

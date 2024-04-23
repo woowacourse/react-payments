@@ -2,6 +2,15 @@ import EtcImg from '../assets/images/etc.png';
 import MasterCardImg from '../assets/images/mastercard.jpg';
 import VisaImg from '../assets/images/visa.jpg';
 
+export const CARD_FORM_STEP = {
+  password: 6,
+  cvc: 5,
+  userName: 4,
+  period: 3,
+  company: 2,
+  numbers: 1,
+};
+
 export const CARD_NUMBERS = {
   length: 4,
   startNumber: 0,
