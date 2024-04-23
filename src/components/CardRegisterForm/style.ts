@@ -10,9 +10,17 @@ const InputFieldWithInfo = styled.div`
   gap: 16px;
 `;
 
+const ErrorMessageWrapper = styled.div`
+  font-size: 9.5px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.COLOR.error};
+  height: 14px;
+`;
+
 const S = {
   CardFormWrapper,
   InputFieldWithInfo,
+  ErrorMessageWrapper,
 };
 
 export default S;

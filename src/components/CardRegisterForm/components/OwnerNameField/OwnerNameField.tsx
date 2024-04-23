@@ -3,46 +3,38 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
-import { ChangeEvent, useState } from "react";
-import { validateOwnerName } from "@/utils/validation";
+import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
+import useShowError from "@/hooks/useShowError";
 
 interface Props {
   ownerNameState: ReturnType<typeof useInput>;
 }
 
 const OwnerNameField = ({ ownerNameState }: Props) => {
-  const { value: ownerName, onChange: onChangeOwnerName } = ownerNameState;
-
-  const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState<
-    string | null
-  >(null);
-
-  const onValidateOwnerName = () => {
-    const errorMessage = validateOwnerName(ownerName[0]);
-    setOwnerNameErrorMessage(errorMessage);
-  };
+  const { onChange, error } = ownerNameState;
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
-        errorMessages={[ownerNameErrorMessage]}
+        errorMessages={[error]}
+        showErrors={showErrors}
       >
         <Input
           placeholder={MESSAGE.PLACEHOLDER.OWNER_NAME}
-          isError={!!ownerNameErrorMessage}
+          isError={!!error}
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             e.target.value = e.target.value.toUpperCase();
-            onChangeOwnerName(e);
+            onChange(e);
           }}
-          onBlur={() => {
-            onValidateOwnerName();
-          }}
+          onFocus={onFocusHideErrors}
+          onBlur={onBlurShowErrors}
         />
       </InputField>
     </S.InputFieldWithInfo>

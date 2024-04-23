@@ -3,8 +3,14 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/InputField/InputField";
 import SelectBox from "@/components/SelectBox/SelectBox";
+import useInput from "@/hooks/useInput";
 
-const CardTypeSelectField = () => {
+interface Props {
+  cardTypeState: ReturnType<typeof useInput>;
+}
+const CardTypeSelectField = ({ cardTypeState }: Props) => {
+  const { value, onChange } = cardTypeState;
+  console.log(value, onChange);
   enum CardType {
     "BC카드" = "#F04651",
     "신한카드" = "#0046FF",

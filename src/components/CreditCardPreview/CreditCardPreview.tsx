@@ -1,7 +1,6 @@
 import S from "./style";
 import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
-import { INPUT_COUNTS } from "@/constants/condition";
 import {
   CardNumberInputType,
   ExpirationPeriodInputType,
@@ -16,7 +15,12 @@ interface Props {
   expirationDate: ExpirationPeriodInputType;
   ownerName: string;
 }
-const CreditCardPreview = ({ cardType, expirationDate, ownerName }: Props) => {
+const CreditCardPreview = ({
+  cardType,
+  expirationDate,
+  ownerName,
+  cardNumbers,
+}: Props) => {
   return (
     <S.CardWrapper>
       <S.FlexBox>
@@ -35,7 +39,7 @@ const CreditCardPreview = ({ cardType, expirationDate, ownerName }: Props) => {
 
       <S.CreditCardInfo>
         <S.CardNumbers>
-          {new Array(INPUT_COUNTS.CARD_NUMBERS).map((number: string, index) => {
+          {Object.values(cardNumbers).map((number: string, index) => {
             const isMasked = index >= 2;
             return isMasked ? (
               <S.Input key={index} type="password" value={number} readOnly />

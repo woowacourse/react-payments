@@ -5,24 +5,36 @@ import useInput from "@/hooks/useInput";
 
 const CardRegisterFormWithHook = () => {
   const cardNumbersState = useInputs({
-    cardNumbers1: "",
-    cardNumbers2: "",
-    cardNumbers3: "",
-    cardNumbers4: "",
+    initialValue: {
+      cardNumbers1: "",
+      cardNumbers2: "",
+      cardNumbers3: "",
+      cardNumbers4: "",
+    },
+    validates: [],
   });
 
   const expiredDateState = useInputs({
-    expirationMonth: "",
-    expirationYear: "",
+    initialValue: {
+      expirationMonth: "",
+      expirationYear: "",
+    },
+    validates: [],
   });
 
   const ownerNameState = useInput("");
+  const CVCNumbersState = useInput("");
+  const passwordState = useInput("");
+  const cardTypeState = useInput("");
 
   return (
     <CardRegisterForm
       cardNumbersState={cardNumbersState}
       expiredPeriodState={expiredDateState}
       ownerNameState={ownerNameState}
+      CVCNumbersState={CVCNumbersState}
+      passwordState={passwordState}
+      cardTypeState={cardTypeState}
     />
   );
 };

@@ -22,4 +22,5 @@ export const MAX_LENGTH = {
 export const VALID_LENGTH = {
   CARD_NUMBERS: 4,
   EXPIRATION_PERIOD: 2,
+  CVC_NUMBERS: 3,
 };

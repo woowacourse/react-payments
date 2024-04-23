@@ -3,64 +3,20 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
-import {
-  makeNewErrorMessages,
-  validateIsValidLength,
-} from "@/utils/validation";
-import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
+import { INPUT_COUNTS } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
-import { useState } from "react";
-import { limitNumberLength } from "@/utils/numberHelper";
 import { CardNumberInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
+import useShowError from "@/hooks/useShowError";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
 }
 
-const CARD_NUMBERS_KEYS: (keyof CardNumberInputType)[] = [
-  "cardNumbers1",
-  "cardNumbers2",
-  "cardNumbers3",
-  "cardNumbers4",
-];
+type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
-  const { values: cardNumbers, onChange } = cardNumbersState;
-
-  const [cardNumbersErrors, setCardNumbersErrors] = useState(
-    new Array(INPUT_COUNTS.CARD_NUMBERS).fill(null)
-  );
-
-  // const isError = cardNumbersErrors.every((e) => e === "");
-
-  // setIsInputErrors((prev) => {
-  //   const newInputErrors = [...prev];
-  //   newInputErrors[0] = isError;
-  //   return newInputErrors;
-  // });
-
-  const onValidateCardNumbers = (index: number) => {
-    const errorMessage = getCardNumbersError(
-      cardNumbers[CARD_NUMBERS_KEYS[index]]
-    );
-    setCardNumbersErrors((prev) =>
-      makeNewErrorMessages(prev, errorMessage, index)
-    );
-  };
-
-  const getCardNumbersError = (cardNumber: string) => {
-    return cardNumber.length
-      ? validateIsValidLength(cardNumber, VALID_LENGTH.CARD_NUMBERS)
-      : null;
-  };
-
-  const onChangeNumbers = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value = limitNumberLength({
-      value: e.target.value,
-      maxLength: MAX_LENGTH.CARD_NUMBERS,
-    });
-    onChange(e);
-  };
+  const { onChange, errors } = cardNumbersState;
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
     <S.InputFieldWithInfo>
@@ -69,8 +25,9 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_NUMBERS}
       />
       <InputField
+        showErrors={showErrors}
         label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
-        errorMessages={cardNumbersErrors}
+        errorMessages={Object.values(errors)}
       >
         {new Array(INPUT_COUNTS.CARD_NUMBERS)
           .fill(0)
@@ -79,17 +36,16 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               type="number"
               key={index}
               name={`cardNumbers${index + 1}`}
+              maxLength={4}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
-              onChange={(e) => {
-                onChangeNumbers(e);
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                if (e.target.value.length > e.target.maxLength)
+                  e.target.value = e.target.value.slice(0, e.target.maxLength);
+                onChange(e);
               }}
-              onBlur={() => onValidateCardNumbers(index)}
-              isError={
-                !!(
-                  cardNumbers[CARD_NUMBERS_KEYS[index]] &&
-                  cardNumbersErrors[index]
-                )
-              }
+              onBlur={onBlurShowErrors}
+              onFocus={onFocusHideErrors}
+              isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
             />
           ))}
       </InputField>

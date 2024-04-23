@@ -16,6 +16,12 @@ const cardNumbersState = {
     cardNumbers4: "",
   },
   onChange: () => {},
+  errors: {
+    cardNumbers1: "",
+    cardNumbers2: "",
+    cardNumbers3: "",
+    cardNumbers4: "",
+  },
 };
 
 type Story = StoryObj<typeof CardNumbersField>;
