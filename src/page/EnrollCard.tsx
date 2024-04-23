@@ -5,7 +5,7 @@ import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_CARD } from '../constants/card';
 import CardBackView from '../components/CardBackView';
-import SubmitCard from '../components/SubmitCard';
+import SubmitCardBox from '../components/SubmitCardBox';
 import { Link } from 'react-router-dom';
 import { Page } from '../style/page.style';
 
@@ -20,14 +20,14 @@ export default function EnrollCard() {
         <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
       </Container>
       <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
-        <SubmitCard />
+        <SubmitCardBox />
       </Link>
     </Page>
   );
 }
 
 const Container = styled.div`
-  margin: 50px 0px;
+  margin: 50px 0px 80px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
