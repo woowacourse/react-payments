@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 44px;
+  margin-bottom: 8px;
+}
+
+.none_description {
+  height: 30px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: left;
+}
+
+.description {
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: left;
+  color: #8b95a1;
+}

@@ -1,0 +1,38 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as CardStories from './Card.stories';
+import { Component } from 'react';
+
+<Meta of={CardStories} />
+
+# Card
+
+카드 컴포넌트는 **카드 번호, 유효 기간, 이름**을 받아 카드 모양으로 미리보기를 띄워줍니다.
+
+카드번호가 4로 시작하는 비자 카드인 경우 비자 아이콘을 띄워줍니다.
+
+카드번호가 51~55로 시작하는 마스터 카드인 경우 비자 아이콘을 띄워줍니다.
+
+<br />
+<br />
+
+## Using the Component
+
+```js
+<Card cardNumbers={cardNumbers} date={date} ownerName={ownerName} />
+```
+
+<br />
+
+## Stories
+
+### default
+
+<Canvas of={CardStories.DefaultCard} />
+
+### visa
+
+<Canvas of={CardStories.VisaCard} />
+### master
+
+<Canvas of={CardStories.MasterCard} />

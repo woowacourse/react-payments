@@ -1,0 +1,32 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as ShelfHeaderStories from './ShelfHeader.stories';
+import { Component } from 'react';
+
+<Meta of={ShelfHeaderStories} />
+
+# ShelfHeader
+
+ShelfHeader 컴포넌트는 하위 항목에 대한 설명을 작성할 떄 사용할 수 있습니다.
+제목 말고도 부연 설명이 필요할 때는 description prop를 이용합니다.
+
+<br />
+<br />
+
+## Using the Component
+
+```js
+<ShelfHeader title={title} description={description} />
+```
+
+<br />
+
+## Stories
+
+### default
+
+<Canvas of={ShelfHeaderStories.DefaultShelfHeader} />
+
+### no description
+
+<Canvas of={ShelfHeaderStories.NoDescriptionShelfHeader} />
