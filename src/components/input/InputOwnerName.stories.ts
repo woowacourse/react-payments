@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import InputOwnerName from "./InputOwnerName";
 
 const meta = {
-  title: "InputOwnerName",
+  title: "Payment/InputOwnerName",
   component: InputOwnerName,
   parameters: {
     layout: "centered",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import InputExpirationPeriod from "./InputExpirationPeriod";
 
 const meta = {
-  title: "InputExpirationPeriod",
+  title: "Payment/InputExpirationPeriod",
   component: InputExpirationPeriod,
   parameters: {
     layout: "centered",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CreditCard from ".";
 
 const meta = {
-  title: "CreditCard",
+  title: "Payment/CreditCard",
   component: CreditCard,
   parameters: {
     layout: "centered",

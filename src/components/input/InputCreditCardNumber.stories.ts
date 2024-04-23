@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputCreditCardNumber from "./InputCreditCardNumber";
 
-const meta: Meta = {
-  title: "InputCreditCardNumber",
+const meta = {
+  title: "Payment/InputCreditCardNumber",
   component: InputCreditCardNumber,
   parameters: {
     layout: "centered",
@@ -23,7 +23,7 @@ const meta: Meta = {
       description: "에러 발생 여부",
     },
   },
-};
+} satisfies Meta<typeof InputCreditCardNumber>;
 
 export default meta;
 
