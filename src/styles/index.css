@@ -6,14 +6,18 @@
   --grey-500: #333333;
   --error: #ff3d3d;
 
-  --issuer-bc: #f04651;
-  --issuer-shinhan: #0046ff;
-  --issuer-kakao: #ffe600;
-  --issuer-hyundae: #000000;
-  --issuer-woori: #007bc8;
-  --issuer-lotte: #ed1c24;
-  --issuer-hana: #009490;
-  --issuer-kb: #6a6056;
+  /* Payments Preview */
+  --preview-default: #333333;
+  --preview-back-floor: #d5d5d5;
+  --preview-back-stripe: #cbba64;
+  --preview-issuer-bc: #f04651;
+  --preview-issuer-shinhan: #0046ff;
+  --preview-issuer-kakao: #ffe600;
+  --preview-issuer-hyundae: #000000;
+  --preview-issuer-woori: #007bc8;
+  --preview-issuer-lotte: #ed1c24;
+  --preview-issuer-hana: #009490;
+  --preview-issuer-kb: #6a6056;
 }
 
 .caption {

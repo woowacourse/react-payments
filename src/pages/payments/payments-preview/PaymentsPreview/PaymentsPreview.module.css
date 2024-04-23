@@ -1,33 +1,40 @@
-.creditCardContainer {
-  position: relative;
+.paymentsPreview {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   width: 212px;
   height: 132px;
-  background-color: var(--grey-500);
-  padding: 8px 12px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.frontPreview {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
+  padding: 8px 12px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--preview-default);
+  color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .cardContainer {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0.5px solid rgba(221, 205, 120, 0.1);
   width: 28px;
   height: 14px;
-  padding: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0.5px solid rgba(221, 205, 120, 0.1);
   border-radius: 2px;
-  background-color: var(--grey-100);
 }
 
 .icChip {
@@ -40,10 +47,10 @@
 }
 
 .cardDetailContainer {
-  margin: 14px 13px 0 5px;
   display: flex;
-  flex-direction: column;
   gap: 8px;
+  flex-direction: column;
+  margin: 14px 13px 0 5px;
 }
 
 .cardNumberContainer {
@@ -68,9 +75,8 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  letter-spacing: 0.16em;
   text-align: left;
-  color: var(--grey-100);
+  letter-spacing: 0.16em;
 }
 
 .expirationDateTextBox {
@@ -82,35 +88,55 @@
   width: 34px;
 }
 
-/* 카드사에 따른 스타일 */
-.issuer0 {
-  background-color: var(--issuer-bc);
+.backPreview {
+  width: 100%;
+  height: 100%;
+  background-color: var(--preview-back-floor);
+  color: white;
+  display: flex;
 }
 
-.issuer1 {
-  background-color: var(--issuer-shinhan);
+.magneticStripe {
+  margin-top: 84px;
+  width: 100%;
+  height: 24px;
+  background-color: var(--preview-back-stripe);
 }
 
-.issuer2 {
-  background-color: var(--issuer-kakao);
+.cvcNumber {
+  margin-right: 16px;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: right;
+  letter-spacing: 0.08em;
 }
 
-.issuer3 {
-  background-color: var(--issuer-hyundae);
+/* 조건부 스타일 */
+.bg-issuer0 {
+  background-color: var(--preview-issuer-bc);
 }
-
-.issuer4 {
-  background-color: var(--issuer-woori);
+.bg-issuer1 {
+  background-color: var(--preview-issuer-shinhan);
 }
-
-.issuer5 {
-  background-color: var(--issuer-lotte);
+.bg-issuer2 {
+  background-color: var(--preview-issuer-kakao);
+  color: black;
 }
-
-.issuer6 {
-  background-color: var(--issuer-hana);
+.bg-issuer3 {
+  background-color: var(--preview-issuer-hyundae);
 }
-
-.issuer7 {
-  background-color: var(--issuer-kb);
+.bg-issuer4 {
+  background-color: var(--preview-issuer-woori);
+}
+.bg-issuer5 {
+  background-color: var(--preview-issuer-lotte);
+}
+.bg-issuer6 {
+  background-color: var(--preview-issuer-hana);
+}
+.bg-issuer7 {
+  background-color: var(--preview-issuer-kb);
 }

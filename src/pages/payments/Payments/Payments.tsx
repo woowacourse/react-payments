@@ -32,6 +32,7 @@ const Payments: React.FC = () => {
         <PaymentsPreview
           cardIssuer={cardIssuer}
           cardNumbers={cardNumbers}
+          cvcNumber={cvcNumber}
           expirationDate={expirationDate}
           ownerName={ownerName}
         />

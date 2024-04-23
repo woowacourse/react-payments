@@ -1,6 +1,7 @@
 import { Spacer, TextField } from '@components/index';
 
 import { CVCNumberInput } from '@pages/payments';
+import ID from '../../../../../constants/id';
 
 export interface OwnerNameTextFieldProps {
   cvcNumber: string;
@@ -16,7 +17,7 @@ const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcN
       <TextField.Label htmlFor="cvcNumber" labelText="CVC" />
       <TextField.Content>
         <CVCNumberInput
-          id="cvcNumber"
+          id={ID.payments.cvcNumberInput}
           isError={cvcNumberError.isError}
           placeholder={'123'}
           value={cvcNumber}
