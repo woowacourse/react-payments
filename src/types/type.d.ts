@@ -15,6 +15,12 @@ interface PaymentsFormTitleProps {
   subTitle?: string;
 }
 
+interface PaymentsSelectFieldProps {
+  options: string[];
+  name?: string;
+  placeholder?: string;
+}
+
 interface InputStates {
   [key: string]: InputState;
 }
