@@ -50,6 +50,7 @@ const Input = ({
 
   return (
     <InputStyled
+      currentValue={currentValue}
       isValidInput={isValidInput}
       onChange={inputChangeHandler}
       maxLength={maxLength}
@@ -59,9 +60,14 @@ const Input = ({
   );
 };
 
-const InputStyled = styled.input<{ isValidInput: boolean }>`
+const InputStyled = styled.input<{
+  currentValue: string;
+  isValidInput: boolean;
+}>`
   width: 100%;
-  border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
+  border: 1px solid
+    ${(props) =>
+      props.currentValue !== "" && !props.isValidInput ? "red" : "#acacac"};
   border-radius: 5px;
   padding: 8px;
   box-sizing: border-box;

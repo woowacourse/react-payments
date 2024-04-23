@@ -7,16 +7,30 @@ import { CARD_NUMBER_FORM, FORM_REGEXP } from "../../constants/form";
 
 import { ICardFormProps } from "./Form";
 
+interface InputValidities {
+  [key: string]: boolean;
+}
+
 const CardNumberForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
   setCardNumbers,
+  setAllFormsValid,
+  setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isAllInputValid, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  const [inputValidities, setInputValidities] = useState<InputValidities>(
+    Array.from({ length: inputCount }, () => false).reduce<InputValidities>(
+      (acc, curr, index) => {
+        acc[index.toString()] = curr;
+        return acc;
+      },
+      {} as InputValidities // 초깃값에 InputValidities 타입을 명시적으로 적용해야 에러 x
+    )
+  );
 
   useEffect(() => {
     const isAllValid = Object.values(inputValidities).every(
@@ -24,9 +38,15 @@ const CardNumberForm = ({
     );
 
     setAllInputValid(isAllValid);
+    setAllFormsValid(isAllValid);
+
     setErrorMessage(
       isAllValid ? "" : CARD_NUMBER_FORM.errorMessage.notAllValid
     );
+
+    if (isAllValid) {
+      setIsFormFilledOnce(true);
+    }
   }, [inputValidities]);
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
@@ -49,7 +69,9 @@ const CardNumberForm = ({
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
-      validationRule={(value) => FORM_REGEXP.fourDigitNumber.test(value)}
+      validationRule={(value) =>
+        value.trim() === "" || FORM_REGEXP.fourDigitNumber.test(value)
+      }
       errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
     />
   ));
