@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import useInput from '../hooks/useInput';
+import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -29,6 +30,8 @@ const NameFormSection = ({
   const {
     inputState,
     errorMessage,
+    setInputState,
+    setErrorMessage,
     handleValueChange,
     setFocus,
     setBlur,
@@ -38,10 +41,18 @@ const NameFormSection = ({
     maxLength: OPTION.nameMaxLength,
     regex: REGEX.name,
     errorText: ERROR_MESSAGE.onlyEnglish,
+    betweenMaxLength: true,
   });
 
   useEffect(() => {
     resetErrors();
+    if (!inputState[0].hasFocus)
+      validateInputAndSetErrorMessage({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        errorText: ERROR_MESSAGE.nameOutOfRange,
+      });
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {

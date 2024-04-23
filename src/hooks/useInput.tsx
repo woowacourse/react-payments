@@ -1,16 +1,20 @@
 import { useState } from 'react';
 
+interface Props {
+  inputLength: number;
+  maxLength: number;
+  regex: RegExp;
+  errorText: string;
+  betweenMaxLength?: Boolean | null;
+}
+
 const useInput = ({
   inputLength,
   maxLength,
   regex,
   errorText,
-}: {
-  inputLength: number;
-  maxLength: number;
-  regex: RegExp;
-  errorText: string;
-}) => {
+  betweenMaxLength,
+}: Props) => {
   const initializeInputFieldState = (length: number) => {
     return Array.from({ length }, (_, index) => ({
       value: '',
@@ -42,6 +46,7 @@ const useInput = ({
           ...prevState[index],
           value: newValue.slice(0, newValue.length - 1),
           hasError: true,
+          isFilled: isFilled,
         },
       }));
       setErrorMessage(errorText);
@@ -52,6 +57,17 @@ const useInput = ({
           ...prevState[index],
           value: newValue.slice(0, maxLength),
           hasError: false,
+          isFilled: isFilled,
+        },
+      }));
+    } else if (betweenMaxLength && newValue.length > 0) {
+      setInputState((prevState) => ({
+        ...prevState,
+        [index]: {
+          ...prevState[index],
+          value: newValue,
+          hasError: false,
+          isFilled: true,
         },
       }));
     } else {
