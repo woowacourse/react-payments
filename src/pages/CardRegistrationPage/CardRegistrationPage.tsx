@@ -15,6 +15,9 @@ const CardRegistrationPage = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [owner, setOwner] = useState('');
+  const [company, setCompany] = useState('');
+  const [cvc, setCVC] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleCardNumbers = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
@@ -32,6 +35,18 @@ const CardRegistrationPage = () => {
     setOwner(owner);
   };
 
+  const handleCompany = (company: string) => {
+    setCompany(company);
+  };
+
+  const handleCVC = (cvc: string) => {
+    setCVC(cvc);
+  };
+
+  const handlePassword = (password: string) => {
+    setPassword(password);
+  };
+
   return (
     <S.CardRegistrationPageLayout>
       <S.CardPreviewBoxWrapper>
@@ -41,7 +56,7 @@ const CardRegistrationPage = () => {
         <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
         <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />
         <CardOwnerInput handleOwner={handleOwner} />
-        <CardCompanyInput />
+        <CardCompanyInput company={company} handleCompany={handleCompany} />
         <CardCVCInput />
         <CardPasswordInput />
       </S.CardForm>

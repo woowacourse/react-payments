@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 
@@ -16,25 +16,41 @@ const cardCompanyOptions = [
   '국민카드',
 ];
 
-const CardCompanyInput = () => {
+interface CardCompanyInputProps {
+  company: string;
+  handleCompany: (company: string) => void;
+}
+
+const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
-  const toggleOptionList = () => {
-    setIsOptionOpen(!isOptionOpen);
+  const toggleOptionList = () => setIsOptionOpen(!isOptionOpen);
+  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleCompany(e.target.value);
+    setIsOptionOpen(false);
   };
 
   return (
     <div>
       <TitleContainer title="카드사를 선택해 주세요." subTitle="현재 국내 카드사만 가능합니다." />
       <S.CardCompanyInputContainer>
-        <S.SelectedCardCompanyBox>
-          <p>BC카드</p>
+        <S.SelectedCardCompanyBox $isDefault={company === ''}>
+          <p>{company ? company : '카드사를 선택해 주세요'}</p>
           <button onClick={toggleOptionList}>{isOptionOpen ? <img src={UpIcon} /> : <img src={DownIcon} />}</button>
         </S.SelectedCardCompanyBox>
         {isOptionOpen && (
           <S.CardCompanyOptionList>
-            {cardCompanyOptions.map((option, index) => (
-              <S.CardCompanyOption key={index}>{option}</S.CardCompanyOption>
+            {cardCompanyOptions.map((option) => (
+              <S.CardCompanyOption key={option}>
+                <input
+                  type="radio"
+                  id={option}
+                  value={option}
+                  checked={option === company}
+                  onChange={handleCompanyChange}
+                ></input>
+                <S.CardCompanyOptionLabel htmlFor={option}>{option}</S.CardCompanyOptionLabel>
+              </S.CardCompanyOption>
             ))}
           </S.CardCompanyOptionList>
         )}
