@@ -4,7 +4,15 @@ import { useContext } from "react";
 import masterImage from "../../assets/masterImage.png";
 import visaImage from "../../assets/visaImage.png";
 
-import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, style, width42 } from "./emotionCss";
+import {
+  cardInfoStyle,
+  logoStyle,
+  periodRowStyle,
+  periodStyle,
+  rowStyle,
+  cardPreviewStyle,
+  width42,
+} from "./emotionCss";
 import {
   CardNumbersContext,
   CardOwnerInfoContext,
@@ -26,7 +34,9 @@ const isMaster = (cardNumbers?: number) => {
 };
 
 const getCardImage = (number?: number) => {
-  return isVisa(number) ? visaImage : isMaster(number) ? masterImage : null;
+  if (isVisa(number)) return visaImage;
+  if (isMaster(number)) return masterImage;
+  return null;
 };
 
 const CreditCard = () => {
@@ -36,7 +46,7 @@ const CreditCard = () => {
   const cardImage = getCardImage(cardNumbers?.firstNumbers);
 
   return (
-    <div css={style}>
+    <div css={cardPreviewStyle}>
       <div css={rowStyle}>
         <div css={logoStyle}></div>
         {cardImage ? <img css={logoStyle} src={cardImage} /> : null}
