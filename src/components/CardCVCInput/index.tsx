@@ -33,7 +33,8 @@ function CardCVCInput(props: CardCVCInputProps) {
     const newCVC = sliceText(value, CARD_CVC.length);
     setCVC(newCVC);
     // 유효성 검사
-    const isValidated = validateCVC(cvc);
+    const isValidated = validateCVC(newCVC);
+    console.log('new cvc', newCVC, isValidated);
     // cvcError 업데이트
     setCVCError(!isValidated);
     // cardInfo 업데이트
