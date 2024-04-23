@@ -18,7 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* emotion/react */
+    "jsxImportSource": "@emotion/react",
+    "types": ["@emotion/react/types/css-prop"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
