@@ -27,7 +27,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const cardBrandImage = getCardBrandImage();
 
   return (
-    <Styled.CardPreviewContainer>
+    <Styled.CardPreviewContainer cardCompany={cardInfo.cardCompany}>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
         {cardBrandImage && (
