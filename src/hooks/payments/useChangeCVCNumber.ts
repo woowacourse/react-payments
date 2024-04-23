@@ -16,10 +16,9 @@ const useChangeCVCNumber = () => {
 
     if (value.length === 3) {
       setCVCNumberState({ ...initialState, isSuccess: true });
+    } else {
+      setCVCNumberState(initialState);
     }
-    // else {
-    //   setCVCNumberState(initialState);
-    // }
 
     setCVCNumber(value);
   };

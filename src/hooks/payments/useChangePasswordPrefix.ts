@@ -20,10 +20,9 @@ const useChangePasswordPrefix = () => {
 
     if (value.length === 2) {
       setPasswordPRefixState({ ...initialState, isSuccess: true });
+    } else {
+      setPasswordPRefixState(initialState);
     }
-    // else {
-    //   setPasswordPRefixState(initialState);
-    // }
 
     setPasswordPrefix(value);
   };

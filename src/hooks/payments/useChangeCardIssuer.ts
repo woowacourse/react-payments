@@ -6,7 +6,7 @@ const useChangeCardIssuer = () => {
 
   const handleCardIssuerChange = (value: string) => {
     if (value) setCardIssuerState({ isSuccess: true });
-    // else setCardIssuerState({ isSuccess: false });
+    else setCardIssuerState({ isSuccess: false });
 
     setCardIssuer(value);
   };

@@ -14,17 +14,26 @@ import {
   useChangeCardIssuer,
   useChangeExpirationDate,
   useChangePasswordPrefix,
+  useCheckFlag,
 } from '@hooks/payments';
 
 import styles from './Payments.module.css';
 
 const Payments: React.FC = () => {
-  const { cardIssuer, cardIssuerState, handleCardIssuerChange } = useChangeCardIssuer();
   const { cvcNumber, cvcNumberState, handleCVCNumberChange } = useChangeCVCNumber();
   const { ownerName, ownerNameState, handleOwnerNameChange } = useChangeOwnerName();
+  const { cardIssuer, cardIssuerState, handleCardIssuerChange } = useChangeCardIssuer();
   const { cardNumbers, cardNumberState, handleCardNumberChange } = useChangeCardNumber();
   const { expirationDate, expirationDateState, handleExpirationDateChange } = useChangeExpirationDate();
   const { passwordPrefix, passwordPrefixState, handlePasswordPrefixChange } = useChangePasswordPrefix();
+
+  const [cvcNumberFlag, ownerNameFlag, cardIssuerFlag, cardNumberFlag, expirationDateFlag] = useCheckFlag([
+    cvcNumberState.isSuccess,
+    ownerNameState.isSuccess,
+    cardIssuerState.isSuccess,
+    cardNumberState.isSuccess,
+    expirationDateState.isSuccess,
+  ]);
 
   return (
     <>
@@ -40,28 +49,28 @@ const Payments: React.FC = () => {
 
       <section>
         <form className={styles.paymentsForm}>
-          {cvcNumberState.isSuccess && (
+          {cvcNumberFlag && (
             <PasswordPrefixTextField
               passwordPrefix={passwordPrefix}
               onAddPasswordPrefix={handlePasswordPrefixChange}
               passwordPrefixState={passwordPrefixState}
             />
           )}
-          {ownerNameState.isSuccess && (
+          {ownerNameFlag && (
             <CVCNumberTextField
               cvcNumber={cvcNumber}
               onAddCVCNumber={handleCVCNumberChange}
               cvcNumberState={cvcNumberState}
             />
           )}
-          {expirationDateState.isSuccess && (
+          {expirationDateFlag && (
             <OwnerNameTextField
               ownerName={ownerName}
               onAddOwnerName={handleOwnerNameChange}
               ownerNameState={ownerNameState}
             />
           )}
-          {cardIssuerState.isSuccess && (
+          {cardIssuerFlag && (
             <ExpirationDateTextField
               month={expirationDate.month}
               year={expirationDate.year}
@@ -69,7 +78,7 @@ const Payments: React.FC = () => {
               expirationDateState={expirationDateState}
             />
           )}
-          {cardNumberState.isSuccess && (
+          {cardNumberFlag && (
             <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
           )}
           <CardNumberTextField

@@ -20,10 +20,9 @@ const useChangeOwnerName = () => {
 
     if (value.length > 0) {
       setOwnerNameState({ ...initialState, isSuccess: true });
+    } else {
+      setOwnerNameState(initialState);
     }
-    // else {
-    //   setOwnerNameState(initialState);
-    // }
 
     setOwnerName(value);
   };

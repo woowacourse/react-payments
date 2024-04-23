@@ -6,11 +6,7 @@ const initialState = { isSuccess: false, isError: [false, false, false, false], 
 
 const useChangeCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [cardNumberState, setCardNumberState] = useState({
-    isSuccess: false,
-    isError: [false, false, false, false],
-    errorMessage: '',
-  });
+  const [cardNumberState, setCardNumberState] = useState(initialState);
 
   const handleCardNumberChange = (index: number, value: string) => {
     if (!isValidCardNumbersInput(value)) {
@@ -29,10 +25,9 @@ const useChangeCardNumber = () => {
 
     if (newCardNumbers.every((num) => num.length === 4)) {
       setCardNumberState({ ...initialState, isSuccess: true });
+    } else {
+      setCardNumberState(initialState);
     }
-    // else {
-    //   setCardNumberState(initialState);
-    // }
 
     setCardNumbers(cardNumbers.map((num, i) => (i === index ? value : num)));
   };

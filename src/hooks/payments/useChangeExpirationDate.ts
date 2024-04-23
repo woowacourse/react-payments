@@ -33,10 +33,9 @@ const useChangeExpirationDate = () => {
 
     if (newDate.month.length > 0 && newDate.year.length === 2) {
       setExpirationDateState({ ...initialState, isSuccess: true });
+    } else {
+      setExpirationDateState(initialState);
     }
-    // else {
-    //   setExpirationDateState(initialState);
-    // }
 
     setExpirationDate((prev) => ({ ...prev, [field]: value }));
   };
