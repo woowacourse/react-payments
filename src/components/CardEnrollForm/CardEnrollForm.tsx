@@ -4,6 +4,7 @@ import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
 import CardOwnerName from "../CardOwnerName/CardOwnerName";
 import CardPreview from "../CardPreview/CardPreview";
 import * as S from "./style";
+import CardCompanySelect from "../CardCompanySelect/CardCompanySelect";
 
 export default function CardEnrollForm() {
   const [cardInformation, setCardInformation] = useState({
@@ -16,6 +17,7 @@ export default function CardEnrollForm() {
     cardExpirationMonth: { value: "", isError: false },
     cardExpirationYear: { value: "", isError: false },
     cardOwnerName: { value: "", isError: false },
+    cardCompany: { value: "", isError: false },
   });
 
   const onChangeCardInfo = (
@@ -32,6 +34,10 @@ export default function CardEnrollForm() {
     <S.CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation} />
       <S.CardInformation>
+        <CardCompanySelect
+          cardCompany={cardInformation.cardCompany}
+          onChangeCardInfo={onChangeCardInfo}
+        />
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
           onChangeCardInfo={onChangeCardInfo}
