@@ -109,7 +109,7 @@ function App() {
           cardNumbers={cardNumbers.map(({ value }) => value)}
           month={month}
           year={year}
-          name={name}
+          name={name.toUpperCase()}
           cardImageSrc={cardImageSrc}
           cardColor={CARD_COMPANY_COLOR[cardCompany]}
         />
