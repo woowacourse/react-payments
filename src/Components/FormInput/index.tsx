@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { inputStyle } from "./emotionCss";
 import { cardNumbersValidator, cardOwnerValidator, cardPeriodValidator } from "./validator";
 import {
@@ -165,9 +165,9 @@ const CardOwnerInput = () => {
 };
 
 const FormInput = {
-  CardNumberInput,
-  CardPeriodInput,
-  CardOwnerInput,
+  CardNumberInput: memo(CardNumberInput),
+  CardPeriodInput: memo(CardPeriodInput),
+  CardOwnerInput: memo(CardOwnerInput),
 };
 
 export default FormInput;

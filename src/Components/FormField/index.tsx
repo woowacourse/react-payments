@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useContext } from "react";
+import { memo, useContext } from "react";
 
 import FormInput from "../FormInput";
 import Tooltip from "../Tooltip";
@@ -103,9 +103,9 @@ const CardOwnerField = () => {
 };
 
 const FormField = {
-  CardNumberField,
-  CardValidityPeriodField,
-  CardOwnerField,
+  CardNumberField: memo(CardNumberField),
+  CardValidityPeriodField: memo(CardValidityPeriodField),
+  CardOwnerField: memo(CardOwnerField),
 };
 
 export default FormField;
