@@ -85,7 +85,7 @@ function isInRange(value: number, min: number, max: number) {
 }
 
 function isUpperCaseEnglish(value: string) {
-  const regex = /^[A-Z]*$/;
+  const regex = /^[A-Z\s]*$/;
   if (!regex.test(value)) {
     return false;
   }

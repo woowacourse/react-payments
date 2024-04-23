@@ -22,5 +22,5 @@ export const CARD_OWNER = {
   subtitle: '',
   label: '소유자 이름',
   placeholders: ['WOOTECO'],
-  maxLength: 20,
+  maxLength: 18,
 } as const;
