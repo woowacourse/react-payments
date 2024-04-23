@@ -1,5 +1,7 @@
 import React, { forwardRef, useEffect } from 'react';
 import { InputType } from './Input.type';
+
+import textStyle from '@styles/textStyle.module.css';
 import styles from './Input.module.css';
 
 export interface InputProps {
@@ -25,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <input
-        className={`${styles.inputStyle} ${errorInputClass}`}
+        className={`${textStyle.formItem} ${styles.inputStyle} ${errorInputClass}`}
         id={id}
         type={type}
         maxLength={maxLength}

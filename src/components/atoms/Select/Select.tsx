@@ -1,4 +1,4 @@
-import textStyle from '@src/styles/textStyle.module.css';
+import textStyle from '@styles/textStyle.module.css';
 import styles from './Select.module.css';
 
 export interface SelectProps {

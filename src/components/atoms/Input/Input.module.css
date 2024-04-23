@@ -3,7 +3,6 @@
   height: 32px;
   border-radius: 2px;
   border: 1px solid var(--grey-200);
-  font-size: 12px;
   flex-grow: 1;
   min-width: 0;
   box-sizing: border-box;
