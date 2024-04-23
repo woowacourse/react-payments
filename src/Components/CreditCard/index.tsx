@@ -25,12 +25,13 @@ const formatTwoDigitNumber = (n: number | undefined) => {
 };
 
 const isVisa = (cardNumbers?: number) => {
-  return cardNumbers?.toString().startsWith("4");
+  const VISA_START_NUMBER = 4;
+  return cardNumbers?.toString().startsWith(String(VISA_START_NUMBER));
 };
 
 const isMaster = (cardNumbers?: number) => {
-  const pattern = /^(51|52|53|54)/;
-  return cardNumbers && pattern.test(cardNumbers?.toString());
+  const MASTER_REG_PATTERN = /(51|52|53|54)/;
+  return cardNumbers && MASTER_REG_PATTERN.test(cardNumbers?.toString());
 };
 
 const getCardImage = (number?: number) => {
