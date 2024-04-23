@@ -8,6 +8,7 @@ import {
   CardNumberInputType,
   ExpirationPeriodInputType,
 } from "@/pages/CardRegisterPage/CardRegisterPage";
+import CardTypeSelectField from "./components/CardTypeSelectField/CardTypeSelectField";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -22,9 +23,10 @@ const CardRegisterForm = ({
 }: Props) => {
   return (
     <S.CardFormWrapper>
+      <CardTypeSelectField />
       <CardNumbersField cardNumbersState={cardNumbersState} />
-      <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
-      <OwnerNameField ownerNameState={ownerNameState} />
+      {/* <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
+      <OwnerNameField ownerNameState={ownerNameState} /> */}
     </S.CardFormWrapper>
   );
 };

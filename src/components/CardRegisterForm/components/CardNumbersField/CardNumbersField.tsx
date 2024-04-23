@@ -25,12 +25,19 @@ const CARD_NUMBERS_KEYS: (keyof CardNumberInputType)[] = [
 ];
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
-  const { values: cardNumbers, onChange: onChangeCardNumbers } =
-    cardNumbersState;
+  const { values: cardNumbers, onChange } = cardNumbersState;
 
   const [cardNumbersErrors, setCardNumbersErrors] = useState(
     new Array(INPUT_COUNTS.CARD_NUMBERS).fill(null)
   );
+
+  // const isError = cardNumbersErrors.every((e) => e === "");
+
+  // setIsInputErrors((prev) => {
+  //   const newInputErrors = [...prev];
+  //   newInputErrors[0] = isError;
+  //   return newInputErrors;
+  // });
 
   const onValidateCardNumbers = (index: number) => {
     const errorMessage = getCardNumbersError(
@@ -45,6 +52,14 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
     return cardNumber.length
       ? validateIsValidLength(cardNumber, VALID_LENGTH.CARD_NUMBERS)
       : null;
+  };
+
+  const onChangeNumbers = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value = limitNumberLength({
+      value: e.target.value,
+      maxLength: MAX_LENGTH.CARD_NUMBERS,
+    });
+    onChange(e);
   };
 
   return (
@@ -66,11 +81,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               name={`cardNumbers${index + 1}`}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
               onChange={(e) => {
-                e.target.value = limitNumberLength({
-                  value: e.target.value,
-                  maxLength: MAX_LENGTH.CARD_NUMBERS,
-                });
-                onChangeCardNumbers(e);
+                onChangeNumbers(e);
               }}
               onBlur={() => onValidateCardNumbers(index)}
               isError={
