@@ -1,0 +1,25 @@
+.input {
+  padding: 8px;
+
+  color: var(--color-grey-500);
+
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  border: 1px solid var(--color-grey-200);
+  border-radius: 2px;
+
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--color-grey-200);
+}
+
+.input:focus {
+  outline: 1px solid var(--color-grey-500);
+}
+
+.error {
+  border: 1px solid var(--color-red);
+}

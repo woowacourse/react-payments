@@ -1,0 +1,47 @@
+.field {
+  width: 100%;
+  max-width: 315px;
+}
+
+.title {
+  color: var(--color-grey-500);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 4px;
+}
+
+.description {
+  color: var(--color-grey-300);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  margin-bottom: 16px;
+}
+
+.labelText {
+  color: var(--color-gray-400);
+  font-weight: 500px;
+  font-size: 12px;
+  line-height: 15px;
+
+  margin-bottom: 8px;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+
+  margin-bottom: 8px;
+}
+
+.errorMessage {
+  color: var(--color-red);
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  margin-bottom: 16px;
+
+  height: 14px;
+}
