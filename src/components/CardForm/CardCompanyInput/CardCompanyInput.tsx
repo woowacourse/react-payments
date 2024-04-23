@@ -1,46 +1,9 @@
-import styled from 'styled-components';
+import { useState } from 'react';
+
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 
 import { UpIcon, DownIcon } from '../../../assets';
-import { useState } from 'react';
-
-const CardCompanyInputContainer = styled.div`
-  position: relative;
-  padding-bottom: 22px;
-`;
-
-const SelectedCardCompanyBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 32px;
-  padding: 8px;
-  border-radius: 2px;
-  border: 1px solid ${({ theme }) => theme.color.primary.light};
-  font-size: ${({ theme }) => theme.fontSize.base};
-`;
-
-const CardCompanyOptionList = styled.ul`
-  z-index: 999;
-  position: absolute;
-  top: 38px;
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.color.primary.light};
-  border-radius: 2px;
-  background: #ffffff;
-  font-size: ${({ theme }) => theme.fontSize.base};
-`;
-
-const CardCompanyOption = styled.li`
-  width: 100%;
-  padding: 8px;
-  height: 32px;
-
-  &:hover {
-    background: #eeeeee;
-  }
-`;
+import * as S from './CardCompanyInput.style';
 
 const cardCompanyOptions = [
   'BC카드',
@@ -63,19 +26,19 @@ const CardCompanyInput = () => {
   return (
     <div>
       <TitleContainer title="카드사를 선택해 주세요." subTitle="현재 국내 카드사만 가능합니다." />
-      <CardCompanyInputContainer>
-        <SelectedCardCompanyBox>
+      <S.CardCompanyInputContainer>
+        <S.SelectedCardCompanyBox>
           <p>BC카드</p>
           <button onClick={toggleOptionList}>{isOptionOpen ? <img src={UpIcon} /> : <img src={DownIcon} />}</button>
-        </SelectedCardCompanyBox>
+        </S.SelectedCardCompanyBox>
         {isOptionOpen && (
-          <CardCompanyOptionList>
+          <S.CardCompanyOptionList>
             {cardCompanyOptions.map((option, index) => (
-              <CardCompanyOption key={index}>{option}</CardCompanyOption>
+              <S.CardCompanyOption key={index}>{option}</S.CardCompanyOption>
             ))}
-          </CardCompanyOptionList>
+          </S.CardCompanyOptionList>
         )}
-      </CardCompanyInputContainer>
+      </S.CardCompanyInputContainer>
     </div>
   );
 };
