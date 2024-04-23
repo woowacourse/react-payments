@@ -4,13 +4,15 @@ import styled from 'styled-components';
 type InfoProps = {
   title: string;
   description?: string;
-  inputTitle: string;
+  inputTitle?: string;
 };
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  width: 100%;
 `;
 
 const InputDescriptionContainer = styled.div`
@@ -71,16 +73,14 @@ export default function InputSection({
         <TitleContainer>
           <Title>{title}</Title>
         </TitleContainer>
-        {description ? (
+        {description && (
           <DescriptionContainer>
             <Description>{description}</Description>
           </DescriptionContainer>
-        ) : null}
+        )}
       </InputDescriptionContainer>
       <InputContainer>
-        <div>
-          <Span>{inputTitle}</Span>
-        </div>
+        {inputTitle && <Span>{inputTitle}</Span>}
         <InputWrapper>{children}</InputWrapper>
       </InputContainer>
     </Section>

@@ -4,14 +4,21 @@ import * as S from './App.style';
 
 import InputSection from './components/InputSection';
 import Input from './components/composables/Input';
+import Select from './components/composables/Select';
 import ScreenReaderOnlyLabel from './components/composables/ScreenReaderOnlyLabel';
-import CreditCard from './components/CreditCard';
+import CardPreview from './components/CardPreview/CardPreview';
 
 import useCardNumber from './hooks/useCardNumber';
 import useInput, { ValidationType } from './hooks/useInput';
 import validate from './utils/validate';
 
-import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
+import {
+  CARD_COMPANY,
+  CARD_COMPANY_COLOR,
+  CARD_NUMBER,
+  EXPIRATION_PERIOD,
+  OWNER_NAME,
+} from './constants/cardSection';
 
 export type CardNumberState = {
   value: string;
@@ -26,9 +33,6 @@ const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
 };
 
 function App() {
-  const { cardImageSrc, cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } =
-    useCardNumber(Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE));
-
   const twoDigitValidation = {
     isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
     errorMessage: '2자리 숫자를 입력해주세요.',
@@ -69,6 +73,15 @@ function App() {
     },
   ];
 
+  const { cardImageSrc, cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } =
+    useCardNumber(Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE));
+
+  const {
+    inputState: cardCompany,
+    inputChangeHandler: cardCompanyChangeHandler,
+    error: cardCompanyError,
+  } = useInput([]);
+
   const {
     inputState: month,
     inputChangeHandler: monthChangeHandler,
@@ -98,6 +111,7 @@ function App() {
           year={year}
           name={name}
           cardImageSrc={cardImageSrc}
+          cardColor={CARD_COMPANY_COLOR[cardCompany]}
         />
       </S.CardPreviewWrapper>
       <S.CardInfoContainer>
@@ -133,6 +147,21 @@ function App() {
             <S.ErrorMessage>
               {cardNumbers.find(({ isError }) => isError)?.errorMessage}
             </S.ErrorMessage>
+          </S.ErrorWrapper>
+        </S.Wrapper>
+
+        <S.Wrapper>
+          <InputSection title={CARD_COMPANY.title} description={CARD_COMPANY.description}>
+            <Select
+              options={[...CARD_COMPANY.options]}
+              value={cardCompany}
+              placeholder={CARD_COMPANY.placeholder}
+              isError={cardCompanyError.state}
+              onChange={cardCompanyChangeHandler}
+            />
+          </InputSection>
+          <S.ErrorWrapper>
+            <S.ErrorMessage>{cardCompanyError.state && cardCompanyError.message}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 

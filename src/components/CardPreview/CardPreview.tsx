@@ -6,6 +6,7 @@ type CreditCardProps = {
   year: string;
   name: string;
   cardImageSrc: string;
+  cardColor: string;
 };
 
 export default function CardPreview({
@@ -14,10 +15,11 @@ export default function CardPreview({
   year,
   name,
   cardImageSrc,
+  cardColor,
 }: CreditCardProps) {
   return (
     <S.Container>
-      <S.CardContainer>
+      <S.CardContainer $bgColor={cardColor}>
         <S.CardHeader>
           <S.CardHeaderContentWrapper>
             <S.IcChip />

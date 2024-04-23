@@ -8,8 +8,8 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const CardContainer = styled.div`
-  background-color: #333333;
+export const CardContainer = styled.div<{ $bgColor: string }>`
+  background-color: ${(props) => props.$bgColor ?? '#333333'};
 
   width: 212px;
   height: 132px;
