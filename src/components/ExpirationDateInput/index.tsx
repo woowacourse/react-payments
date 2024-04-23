@@ -13,8 +13,10 @@ interface ExpirationDateInputProps {
   onExpirationDateChange: (index: number, value: string) => void;
 }
 
-const ExpirationDateInput = ({ expirationDate, errorCaption, onExpirationDateChange: handleExpirationDateChange }: ExpirationDateInputProps) => {
-  const [inputErrors, setInputErrors] = useState<boolean[]>(Array.from<boolean>({ length: expirationDate.length }).fill(false));
+const ExpirationDateInput = ({ expirationDate, errorCaption, onExpirationDateChange }: ExpirationDateInputProps) => {
+  const [inputErrors, setInputErrors] = useState<boolean[]>(
+    Array.from<boolean>({ length: expirationDate.length }).fill(false)
+  );
 
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
@@ -43,7 +45,7 @@ const ExpirationDateInput = ({ expirationDate, errorCaption, onExpirationDateCha
       setInputErrors(newErrors);
     }
 
-    handleExpirationDateChange(index, value);
+    onExpirationDateChange(index, value);
   };
 
   const hasErrorInput = () => inputErrors.some((error) => error);

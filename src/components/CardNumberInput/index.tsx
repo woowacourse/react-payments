@@ -13,8 +13,10 @@ interface CardNumberInputProps {
   onCardNumberChange: (index: number, value: string) => void;
 }
 
-const CardNumberInput = ({ cardNumbers, errorCaption, onCardNumberChange: handleCardNumberChange }: CardNumberInputProps) => {
-  const [inputErrors, setInputErrors] = useState<boolean[]>(Array.from<boolean>({ length: cardNumbers.length }).fill(false));
+const CardNumberInput = ({ cardNumbers, errorCaption, onCardNumberChange }: CardNumberInputProps) => {
+  const [inputErrors, setInputErrors] = useState<boolean[]>(
+    Array.from<boolean>({ length: cardNumbers.length }).fill(false)
+  );
 
   const handleInputChange = (index: number, value: string) => {
     const isNumericInput = /^(\d*)$/.test(value);
@@ -29,7 +31,7 @@ const CardNumberInput = ({ cardNumbers, errorCaption, onCardNumberChange: handle
 
     if (!isNumericInput) return;
 
-    handleCardNumberChange(index, value);
+    onCardNumberChange(index, value);
   };
 
   const hasErrorInput = inputErrors.some((error) => error);

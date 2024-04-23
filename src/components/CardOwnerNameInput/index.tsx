@@ -13,7 +13,7 @@ interface CardOwnerNameInputProps {
   onCardOwnerNameChange: (value: string) => void;
 }
 
-const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange: handleCardOwnerNameChange }: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange }: CardOwnerNameInputProps) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleInputChange = (value: string) => {
@@ -24,7 +24,7 @@ const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange: ha
 
     if (!isAlphabetInput || !isValidOwnerName) return;
 
-    handleCardOwnerNameChange(value.toUpperCase());
+    onCardOwnerNameChange(value.toUpperCase());
   };
 
   return (
