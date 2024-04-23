@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AppLayout = styled.main`
+export const CardRegistrationPageLayout = styled.main`
   padding: 77px 30px;
 `;
 

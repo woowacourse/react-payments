@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import CardPreview from '../components/CardForm/CardPreview/CardPreview';
-import CardOwnerInput from '../components/CardForm/CardOwnerInput/CardOwnerInput';
-import CardExpirationInput from '../components/CardForm/CardExpirationInput/CardExpirationInput';
-import CardNumberInput from '../components/CardForm/CardNumberInput/CardNumberInput';
-import CardCompanyInput from '../components/CardForm/CardCompanyInput/CardCompanyInput';
-import CardCVCInput from '../components/CardForm/CardCVCInput/CardCVCInput';
-import CardPasswordInput from '../components/CardForm/CardPasswordInput/CardPasswordInput';
+import CardPreview from '../../components/CardForm/CardPreview/CardPreview';
+import CardOwnerInput from '../../components/CardForm/CardOwnerInput/CardOwnerInput';
+import CardExpirationInput from '../../components/CardForm/CardExpirationInput/CardExpirationInput';
+import CardNumberInput from '../../components/CardForm/CardNumberInput/CardNumberInput';
+import CardCompanyInput from '../../components/CardForm/CardCompanyInput/CardCompanyInput';
+import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
+import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
 
-import * as S from '../styles/App.style';
+import * as S from './CardRegistrationPage.style';
 
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -33,7 +33,7 @@ const CardRegistrationPage = () => {
   };
 
   return (
-    <S.AppLayout>
+    <S.CardRegistrationPageLayout>
       <S.CardPreviewBoxWrapper>
         <CardPreview cardNumber={cardNumbers} month={month} year={year} owner={owner} />
       </S.CardPreviewBoxWrapper>
@@ -45,7 +45,7 @@ const CardRegistrationPage = () => {
         <CardCVCInput />
         <CardPasswordInput />
       </S.CardForm>
-    </S.AppLayout>
+    </S.CardRegistrationPageLayout>
   );
 };
 
