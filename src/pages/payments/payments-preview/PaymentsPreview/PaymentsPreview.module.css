@@ -81,3 +81,36 @@
 .cardNumberTextBox {
   width: 34px;
 }
+
+/* 카드사에 따른 스타일 */
+.issuer0 {
+  background-color: var(--issuer-bc);
+}
+
+.issuer1 {
+  background-color: var(--issuer-shinhan);
+}
+
+.issuer2 {
+  background-color: var(--issuer-kakao);
+}
+
+.issuer3 {
+  background-color: var(--issuer-hyundae);
+}
+
+.issuer4 {
+  background-color: var(--issuer-woori);
+}
+
+.issuer5 {
+  background-color: var(--issuer-lotte);
+}
+
+.issuer6 {
+  background-color: var(--issuer-hana);
+}
+
+.issuer7 {
+  background-color: var(--issuer-kb);
+}

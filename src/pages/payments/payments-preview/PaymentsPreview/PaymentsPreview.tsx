@@ -1,17 +1,19 @@
-import useCreditCardLogo from '@hooks/payments/useCreditCardLogo';
 import { Ellipse } from '@assets/images';
+import useCreditCardLogo from '@hooks/payments/useCreditCardLogo';
+
 import styles from './PaymentsPreview.module.css';
 
 interface PaymentsPreviewProps {
+  cardIssuer: string;
   cardNumbers: string[];
   expirationDate: { year: string; month: string };
   ownerName: string;
 }
 
-const PaymentsPreview: React.FC<PaymentsPreviewProps> = ({ cardNumbers, expirationDate, ownerName }) => {
+const PaymentsPreview: React.FC<PaymentsPreviewProps> = ({ cardIssuer, cardNumbers, expirationDate, ownerName }) => {
   const { month, year } = expirationDate;
-  const cardLogo = useCreditCardLogo(cardNumbers);
   const formattedMonth = month ? month.padStart(2, '0') : '';
+  const cardLogo = useCreditCardLogo(cardNumbers);
 
   const renderPasswordDots = (length: number, keyPrefix: string) =>
     Array.from({ length }, (_, i) => (
@@ -19,7 +21,7 @@ const PaymentsPreview: React.FC<PaymentsPreviewProps> = ({ cardNumbers, expirati
     ));
 
   return (
-    <div className={styles.creditCardContainer}>
+    <div className={`${styles['issuer' + cardIssuer]} ${styles.creditCardContainer}`}>
       <div className={styles.cardContainer}>
         <div className={`${styles.card} ${styles.icChip}`} />
         {cardLogo && (

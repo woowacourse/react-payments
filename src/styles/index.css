@@ -5,6 +5,15 @@
   --grey-400: #0a0d13;
   --grey-500: #333333;
   --error: #ff3d3d;
+
+  --issuer-bc: #f04651;
+  --issuer-shinhan: #0046ff;
+  --issuer-kakao: #ffe600;
+  --issuer-hyundae: #000000;
+  --issuer-woori: #007bc8;
+  --issuer-lotte: #ed1c24;
+  --issuer-hana: #009490;
+  --issuer-kb: #6a6056;
 }
 
 .caption {

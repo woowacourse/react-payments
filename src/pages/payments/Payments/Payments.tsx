@@ -29,7 +29,12 @@ const Payments: React.FC = () => {
   return (
     <>
       <section className={styles.previewCreditCardContainer}>
-        <PaymentsPreview cardNumbers={cardNumbers} expirationDate={expirationDate} ownerName={ownerName} />
+        <PaymentsPreview
+          cardIssuer={cardIssuer}
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
+          ownerName={ownerName}
+        />
       </section>
 
       <section>

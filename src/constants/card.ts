@@ -1,7 +1,7 @@
 const TYPE = {
   visa: 0,
   master: 1,
-} as const;
+};
 
 const TYPE_PREFIXES = {
   [TYPE.visa]: ['4'],
@@ -17,7 +17,7 @@ const ISSUER = {
   LOTTE: 5,
   HANA: 6,
   KB: 7,
-} as const;
+};
 
 const ISSUER_NAME = {
   [ISSUER.BC]: 'BC카드',
@@ -35,6 +35,6 @@ const CARD = {
   TYPE_PREFIXES,
   ISSUER,
   ISSUER_NAME,
-} as const;
+};
 
 export default CARD;
