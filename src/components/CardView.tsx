@@ -5,7 +5,7 @@ import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
 import { SECRET_NUMBER, SLASH } from '../constants/system';
 import { isMasterCard, isVisaCard } from '../utils/checkCardType';
-import { CardContainer } from './common/container.style';
+import { CardContainer } from '../style/container.style';
 
 interface Props {
   cardInfo: Card;

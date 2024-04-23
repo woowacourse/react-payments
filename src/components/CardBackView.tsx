@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardContainer } from './common/container.style';
+import { CardContainer } from '../style/container.style';
 
 interface Props {
   cvc: string;

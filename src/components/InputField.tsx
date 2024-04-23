@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import Input from './Input';
 import FieldTitle from './FieldTitle';
-import { FieldContainer } from './common/container.style';
+import { FieldContainer } from '../style/container.style';
 
 interface Props {
   title: string;

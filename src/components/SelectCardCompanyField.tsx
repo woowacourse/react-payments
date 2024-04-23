@@ -2,7 +2,7 @@ import { CARD_COMPANY_CATEGORIES } from '../constants/cardCompany';
 import { CardCompany } from '../types/card';
 import FieldTitle from './FieldTitle';
 import SelectBox from './SelectBox';
-import { FieldContainer } from './common/container.style';
+import { FieldContainer } from '../style/container.style';
 
 interface Props {
   handleSelect: (value: CardCompany) => void;
