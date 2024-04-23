@@ -22,13 +22,8 @@ const CardRegisterForm = ({
 }: Props) => {
   return (
     <S.CardFormWrapper>
-      {/*카드 번호*/}
       <CardNumbersField cardNumbersState={cardNumbersState} />
-
-      {/*유효 기간*/}
       <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
-
-      {/*소유자 이름*/}
       <OwnerNameField ownerNameState={ownerNameState} />
     </S.CardFormWrapper>
   );
