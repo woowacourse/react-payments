@@ -8,7 +8,7 @@ import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 import OPTION from '../../../constants/option';
 
 interface CardNumbersFormSectionProps {
-  changeCardNumbers: (cardNumber: string, index: number) => void;
+  changeCardNumbers: (cardNumber: string, index: number, isComplete?: boolean) => void;
   value: string[];
 }
 

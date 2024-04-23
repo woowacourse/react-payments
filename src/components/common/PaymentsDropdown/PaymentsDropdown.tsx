@@ -6,7 +6,7 @@ import chevronUp from "../../../asset/chevron-up.svg";
 import PaymentsDropdownOptions from "./PaymentsDropdownOptions";
 
 interface PaymentsDropdownProps<T> {
-  changeOption: (option: T) => void;
+  changeOption: (option: T, isComplete: boolean) => void;
   value: T,
   placeholder: string,
   options: T[]

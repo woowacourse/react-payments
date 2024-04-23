@@ -1,12 +1,14 @@
 import { useState } from "react";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
+import OPTION from "../constants/option";
 
 interface UseCVCFormSectionProps {
-  changeCVC: (cvc: string) => void;
+  changeCVC: (cvc: string, isComplete?: boolean) => void;
+  cvc: string
 }
 
-const useCVCFormSection = ({ changeCVC }: UseCVCFormSectionProps) => {
+const useCVCFormSection = ({ changeCVC, cvc }: UseCVCFormSectionProps) => {
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +35,10 @@ const useCVCFormSection = ({ changeCVC }: UseCVCFormSectionProps) => {
 
     if (!inputState.hasFocus) {
       setInputState({ ...inputState, errorMessage: '' })
+    }
+
+    if (cvc.length === OPTION.cvcMaxLength) {
+      changeCVC(cvc, true)
     }
   };
 

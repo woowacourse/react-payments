@@ -4,7 +4,7 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
 
 interface UseCardNumbersFormSectionProps {
-  changeCardNumbers: (newNumber: string, index: number) => void
+  changeCardNumbers: (newNumber: string, index: number, isComplete?: boolean) => void
   value: string[]
 }
 
@@ -95,6 +95,7 @@ const useCardNumbersFormSection = ({ changeCardNumbers, value }: UseCardNumbersF
       setErrorMessage(ERROR_MESSAGE.cardNumberOutOfRange);
     } else {
       setErrorMessage('');
+      changeCardNumbers(value[3], 3, true)
     }
   };
 

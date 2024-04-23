@@ -4,7 +4,7 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
 
 interface UseExpirationFormSectionProps {
-  changeExpiration: (expiration: Expiration) => void;
+  changeExpiration: (expiration: Expiration, isComplete?: boolean) => void;
   expiration: Expiration;
 }
 
@@ -78,13 +78,15 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
     if (expiration.month.length === 0) return
     if (REGEX.oneToNine.test(expiration.month)) {
       changeExpiration({ month: '0' + expiration.month, year: expiration.year })
-    } else if (REGEX.zero.test(expiration.month)) {
+    }
+    if (REGEX.zero.test(expiration.month)) {
       changeExpiration({ month: OPTION.minMonth, year: expiration.year })
-    } else if (
+    }
+    if (
       !REGEX.month.test(expiration.month)
     ) {
       changeExpiration({ month: OPTION.maxMonth, year: expiration.year })
-    };
+    }
   };
 
   const checkHasNoFocus = () => {
@@ -100,6 +102,7 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
       setErrorMessage(ERROR_MESSAGE.expiredCard);
     } else {
       setErrorMessage('');
+      changeExpiration(expiration, true)
     }
   };
 

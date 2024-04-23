@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { CardCompany } from '../../types/type';
+
 import { COMPANY_TABLE } from '../../constants/table';
 
 export const Card = styled.div<{
-  animationProps: CardAnimationProp;
+  animationProps: CardAnimationProps;
   cardCompany: CardCompany;
 }>`
   position: relative;
@@ -16,10 +16,12 @@ export const Card = styled.div<{
   padding: 16px;
   border-radius: 8px;
   color: ${(props) =>
-    props.cardCompany ? COMPANY_TABLE[props.cardCompany].font : 'white'};
+    props.cardCompany
+      ? COMPANY_TABLE[props.cardCompany as string].font
+      : 'white'};
   background-color: ${(props) =>
     props.cardCompany
-      ? COMPANY_TABLE[props.cardCompany].background
+      ? COMPANY_TABLE[props.cardCompany as string].background
       : '#333333'};
   box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
   transition:

@@ -13,13 +13,13 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   `;
 
 interface NameFormSectionProps {
-  changeName: (name: string) => void;
+  changeName: (name: string, isComplete?: boolean) => void;
   name: string;
 }
 
 const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ changeName })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ changeName, name })
 
   return (
     <Styled.FormSection>

@@ -8,7 +8,7 @@ import * as Styled from './CardPreview.styled'
 import { secureNumber } from '../../util/secureNumber';
 
 const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumbers, cardBrand, cardCompany, expirationMonth, expirationYear, name, cvc, password } = props;
+  const { cardNumbers, cardBrand, cardCompany, expiration, name, cvc, password } = props;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [animationProps, setAnimationProps] = useState<CardAnimationProps>({
@@ -33,26 +33,26 @@ const CardPreview = ({ ...props }: CardInfo) => {
   };
 
   return (
-    <Styled.Card ref={cardRef} onMouseMove={handleMouseMove} animationProps={animationProps} cardCompany={cardCompany}>
+    <Styled.Card ref={cardRef} onMouseMove={handleMouseMove} animationProps={animationProps} cardCompany={cardCompany.value}>
       <Styled.Light animationProps={animationProps} />
       <Styled.CardHeader>
         <Styled.Image src={IcChip} />
-        {cardBrand !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand]} /> : <></>}
+        {cardBrand.value !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand.value]} /> : <></>}
       </Styled.CardHeader>
       <Styled.CardNumbers>
-        <Styled.CardNumber>{cardNumbers[0]}</Styled.CardNumber>
-        <Styled.CardNumber>{cardNumbers[1]}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumbers[2])}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumbers[3])}</Styled.CardNumber>
+        <Styled.CardNumber>{cardNumbers.value[0]}</Styled.CardNumber>
+        <Styled.CardNumber>{cardNumbers.value[1]}</Styled.CardNumber>
+        <Styled.CardNumber>{secureNumber(cardNumbers.value[2])}</Styled.CardNumber>
+        <Styled.CardNumber>{secureNumber(cardNumbers.value[3])}</Styled.CardNumber>
       </Styled.CardNumbers>
       <Styled.CardNameAndExpiration>
         <Styled.CardNameContainer>
           <Styled.NameLabel>NAME</Styled.NameLabel>
-          <Styled.Name>{name}</Styled.Name>
+          <Styled.Name>{name.value}</Styled.Name>
         </Styled.CardNameContainer>
         <Styled.CardExpirationContainer>
           <Styled.ExpirationLabel>EXPIRATION</Styled.ExpirationLabel>
-          <Styled.Expiration>{`${expirationMonth}${expirationMonth ? '/' : ''}${expirationYear}`}</Styled.Expiration>
+          <Styled.Expiration>{`${expiration.value.month}${expiration.value.month ? '/' : ''}${expiration.value.year}`}</Styled.Expiration>
         </Styled.CardExpirationContainer>
       </Styled.CardNameAndExpiration>
     </Styled.Card>

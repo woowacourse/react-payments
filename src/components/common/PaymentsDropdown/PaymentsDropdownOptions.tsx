@@ -2,7 +2,7 @@ import { Container, OptionWrapper, Option } from "./PaymentsDropdownOptions.styl
 
 interface PaymentsDropdownOptionsProps<T> {
   options: T[];
-  changeOption: (option: T) => void;
+  changeOption: (option: T, isComplete: boolean) => void;
   handleIsOpened: () => void;
 }
 
@@ -10,7 +10,7 @@ const PaymentsDropdownOptions = <T extends {}>(props: PaymentsDropdownOptionsPro
   const { options, changeOption, handleIsOpened } = props
 
   const handleOnClick = (value: T) => {
-    changeOption(value);
+    changeOption(value, true);
     handleIsOpened();
   }
 

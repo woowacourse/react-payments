@@ -3,10 +3,11 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 
 interface UseNameFormSectionProps {
-  changeName: (name: string) => void;
+  changeName: (name: string, isComplete?: boolean) => void;
+  name: string
 }
 
-const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
+const useNameFormSection = ({ changeName, name }: UseNameFormSectionProps) => {
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +34,10 @@ const useNameFormSection = ({ changeName }: UseNameFormSectionProps) => {
 
     if (!inputState.hasFocus) {
       setInputState({ ...inputState, errorMessage: '' })
+    }
+
+    if (name.length !== 0) {
+      changeName(name, true)
     }
   };
 

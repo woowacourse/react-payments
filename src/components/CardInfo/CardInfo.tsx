@@ -19,12 +19,12 @@ const CardInfo = (props: CardInfoProps) => {
 
   return (
     <Container>
-      <PasswordFormSection changePassword={changePassword} password={cardInfo.password} />
-      <CVCFormSection changeCVC={changeCVC} cvc={cardInfo.cvc} />
-      <NameFormSection changeName={changeName} name={cardInfo.name} />
-      <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={{ month: cardInfo.expirationMonth, year: cardInfo.expirationYear }} />
-      <CompanyDropdownFormSection changeCompany={changeCompany} company={cardInfo.cardCompany} />
-      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers} />
+      {!cardInfo.cvc.isComplete || <PasswordFormSection changePassword={changePassword} password={cardInfo.password.value} />}
+      {!cardInfo.name.isComplete || <CVCFormSection changeCVC={changeCVC} cvc={cardInfo.cvc.value} />}
+      {!cardInfo.expiration.isComplete || <NameFormSection changeName={changeName} name={cardInfo.name.value} />}
+      {!cardInfo.cardCompany.isComplete || <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={cardInfo.expiration.value} />}
+      {!cardInfo.cardNumbers.isComplete || <CompanyDropdownFormSection changeCompany={changeCompany} company={cardInfo.cardCompany.value} />}
+      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers.value} />
     </Container>
   );
 };

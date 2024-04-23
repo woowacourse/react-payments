@@ -18,37 +18,36 @@ const useCardInfo = (props: UseCardInfoProps) => {
     }
   }
 
-  const changeCompany = (company: CardCompany) => {
-    setCardInfo((prev: CardInfo) => ({ ...prev, cardCompany: company }))
+  const changeCompany = (company: CardCompany, isComplete?: boolean) => {
+    setCardInfo((prev: CardInfo) => ({ ...prev, cardCompany: { value: company, isComplete: isComplete || prev.cardCompany.isComplete } }))
   }
 
-  const changeCardNumbers = (cardNumber: string, index: number) => {
-    const newCardInfo = [...cardInfo.cardNumbers]
+  const changeCardNumbers = (cardNumber: string, index: number, isComplete?: boolean) => {
+    const newCardInfo = [...cardInfo.cardNumbers.value]
     newCardInfo[index] = cardNumber
-    setCardInfo((prev: CardInfo) => ({ ...prev, cardNumbers: newCardInfo } as CardInfo));
+    setCardInfo((prev: CardInfo) => ({ ...prev, cardNumbers: { value: newCardInfo, isComplete: isComplete || prev.cardNumbers.isComplete } } as CardInfo));
     if (index === 0) {
-      setCardInfo((prev: CardInfo) => ({ ...prev, cardBrand: changeCardBrand(cardNumber) }))
+      setCardInfo((prev: CardInfo) => ({ ...prev, cardBrand: { value: changeCardBrand(cardNumber), isComplete: isComplete || prev.cardBrand.isComplete } }))
     }
   };
 
-  const changeExpiration = ({ month, year }: Expiration) => {
+  const changeExpiration = ({ month, year }: Expiration, isComplete?: boolean) => {
     setCardInfo((prev: CardInfo) => ({
       ...prev,
-      expirationMonth: month,
-      expirationYear: year,
+      expiration: { value: { month, year }, isComplete: isComplete || prev.expiration.isComplete }
     }));
   };
 
-  const changeName = (name: string) => {
-    setCardInfo((prev: CardInfo) => ({ ...prev, name: name }));
+  const changeName = (name: string, isComplete?: boolean) => {
+    setCardInfo((prev: CardInfo) => ({ ...prev, name: { value: name, isComplete: isComplete || prev.name.isComplete } }));
   };
 
-  const changeCVC = (cvc: string) => {
-    setCardInfo((prev: CardInfo) => ({ ...prev, cvc: cvc }));
+  const changeCVC = (cvc: string, isComplete?: boolean) => {
+    setCardInfo((prev: CardInfo) => ({ ...prev, cvc: { value: cvc, isComplete: isComplete || prev.cvc.isComplete } }));
   };
 
-  const changePassword = (password: string) => {
-    setCardInfo((prev: CardInfo) => ({ ...prev, password }));
+  const changePassword = (password: string, isComplete?: boolean) => {
+    setCardInfo((prev: CardInfo) => ({ ...prev, password: { value: password, isComplete: isComplete || prev.password.isComplete } }));
   };
 
   return { changeCompany, changeCardNumbers, changeExpiration, changeName, changeCVC, changePassword }

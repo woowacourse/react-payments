@@ -19,7 +19,7 @@ interface CVCFormSectionProps {
 
 const CVCFormSection = ({ changeCVC, cvc }: CVCFormSectionProps) => {
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ changeCVC })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ changeCVC, cvc })
 
   return (
     <Styled.FormSection>

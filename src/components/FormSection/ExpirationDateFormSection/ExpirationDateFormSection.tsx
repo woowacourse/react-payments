@@ -7,7 +7,7 @@ import * as Styled from '../FormSection.styled';
 import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSection';
 
 interface ExpirationDateFormSectionProps {
-  changeExpiration: (expiration: Expiration) => void;
+  changeExpiration: (expiration: Expiration, isComplete?: boolean) => void;
   expiration: Expiration;
 }
 

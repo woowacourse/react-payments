@@ -19,8 +19,10 @@ interface PasswordFormSectionProps {
 
 const PasswordFormSection = ({ changePassword, password }: PasswordFormSectionProps) => {
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = usePasswordFormSection({ changePassword })
-
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = usePasswordFormSection({ changePassword, password })
+  const secureValue = (input: string) => {
+    return '*'.repeat(input.length)
+  }
   return (
     <Styled.FormSection>
       <PaymentsFormTitle title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" />
@@ -31,7 +33,7 @@ const PasswordFormSection = ({ changePassword, password }: PasswordFormSectionPr
             className="password-form-section"
             placeholder="123"
             maxLength={OPTION.passwordMaxLength}
-            value={password}
+            value={secureValue(password)}
             hasError={inputState.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
