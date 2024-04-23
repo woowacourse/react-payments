@@ -105,7 +105,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
             );
           })}
         </div>
-        <ErrorMessage value={errorMessage}></ErrorMessage>
+        <ErrorMessage value={errorMessage} />
       </div>
     </div>
   );

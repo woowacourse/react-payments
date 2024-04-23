@@ -19,7 +19,7 @@ function Input({ inputCss, type, placeholder, onStateChange, maxLength }: InputP
       css={inputCss}
       placeholder={placeholder}
       onChange={(e) => onStateChange(e.target.value)}
-    ></input>
+    />
   );
 }
 
