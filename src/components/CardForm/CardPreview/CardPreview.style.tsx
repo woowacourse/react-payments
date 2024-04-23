@@ -5,7 +5,7 @@ export const Card = styled.div`
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background: #333333;
+  background: ${({ theme }) => theme.color.primary.main};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 

@@ -6,10 +6,11 @@ export const Input = styled.input<{ $isValid: boolean }>`
   padding: 8px;
   border-radius: 2px;
   border: 1px solid
-    ${(props) => (props.$isValid ? ({ theme }) => theme.color.primary : ({ theme }) => theme.color.error)};
+    ${(props) => (props.$isValid ? ({ theme }) => theme.color.primary.light : ({ theme }) => theme.color.error)};
   font-size: ${({ theme }) => theme.fontSize.base};
 
   &:focus {
-    border-color: ${(props) => (props.$isValid ? ({ theme }) => theme.color.dark : ({ theme }) => theme.color.error)};
+    border-color: ${(props) =>
+      props.$isValid ? ({ theme }) => theme.color.primary.dark : ({ theme }) => theme.color.error};
   }
 `;
