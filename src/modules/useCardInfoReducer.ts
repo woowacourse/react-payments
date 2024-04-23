@@ -8,6 +8,7 @@ const EDIT_CARD_PERIOD = 'card/EDIT_CARD_PERIOD' as const;
 const EDIT_CARD_USER_NAME = 'card/EDIT_CARD_USER_NAME' as const;
 const EDIT_CARD_COMPANY = 'card/EDIT_CARD_COMPANY' as const;
 const EDIT_CARD_CVC = 'card/EDIT_CARD_CVC' as const;
+const EDIT_CARD_PASSWORD = 'card/EDIT_CARD_PASSWORD' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
 export interface CardPeriod {
@@ -31,6 +32,7 @@ export interface CardInfo {
   userName: string | null;
   company: CardCompany | null;
   cvc: string | null;
+  password: string | null;
 }
 
 const INITIAL_CARD_INFO: CardInfo = {
@@ -43,6 +45,7 @@ const INITIAL_CARD_INFO: CardInfo = {
   userName: null,
   company: CARD_COMPANY.get('etc') || null,
   cvc: null,
+  password: null,
 };
 
 // action
@@ -76,6 +79,11 @@ const editCardCVCAction = (cvc: string) => ({
   cvc,
 });
 
+const editCardPasswordAction = (password: string) => ({
+  type: EDIT_CARD_PASSWORD,
+  password,
+});
+
 const resetCardInfoAction = () => ({
   type: RESET_CARD_INFO,
 });
@@ -87,6 +95,7 @@ type CardInfoAction =
   | ReturnType<typeof editCardUserNameAction>
   | ReturnType<typeof editCardCompanyAction>
   | ReturnType<typeof editCardCVCAction>
+  | ReturnType<typeof editCardPasswordAction>
   | ReturnType<typeof resetCardInfoAction>;
 
 const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
@@ -108,6 +117,9 @@ const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
 
     case EDIT_CARD_CVC:
       return { ...state, cvc: action.cvc };
+
+    case EDIT_CARD_PASSWORD:
+      return { ...state, password: action.password };
 
     case RESET_CARD_INFO:
       return INITIAL_CARD_INFO;
@@ -144,6 +156,10 @@ export default function useCardInfoReducer() {
     dispatch(editCardCVCAction(cvc));
   };
 
+  const editCardPassword = (password: string) => {
+    dispatch(editCardPasswordAction(password));
+  };
+
   const resetCardInfo = () => {
     dispatch(resetCardInfoAction());
   };
@@ -156,6 +172,7 @@ export default function useCardInfoReducer() {
     editCardUserName,
     editCardCompany,
     editCardCVC,
+    editCardPassword,
     resetCardInfo,
   };
 }

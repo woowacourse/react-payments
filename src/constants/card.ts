@@ -115,3 +115,7 @@ export const CARD_COMPANY: Map<string, { name: string; color: string }> =
   ]);
 
 export const CARD_COMPANY_NAMES = Array.from(CARD_COMPANY.keys());
+
+export const CARD_PASSWORD = {
+  length: 2,
+};

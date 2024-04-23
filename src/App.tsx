@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import './styles/App.css';
 import './styles/global.css';
 import './styles/reset.css';
@@ -6,12 +8,12 @@ import {
   CardCVCInput,
   CardExpirationPeriodInput,
   CardNumbersInput,
+  CardPassword,
   CardPreview,
   CardUserNameInput,
 } from './components';
-import useCardInfoReducer from './modules/useCardInfoReducer';
-import { useState } from 'react';
 import { CardSide } from './components/CardPreview';
+import useCardInfoReducer from './modules/useCardInfoReducer';
 
 function App() {
   const {
@@ -22,6 +24,7 @@ function App() {
     editCardUserName,
     editCardCompany,
     editCardCVC,
+    editCardPassword,
   } = useCardInfoReducer();
 
   const [cardSide, setCardSide] = useState<CardSide>('front');
@@ -32,6 +35,7 @@ function App() {
         <CardPreview side={cardSide} cardInfo={cardInfo} />
         <form className="form-container">
           <fieldset>
+            <CardPassword editCardPassword={editCardPassword} />
             <CardCVCInput setCardSide={setCardSide} editCardCVC={editCardCVC} />
             <CardUserNameInput editCardUserName={editCardUserName} />
             <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />

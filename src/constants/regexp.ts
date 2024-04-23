@@ -1,4 +1,10 @@
-import { CARD_CVC, CARD_MARK, CARD_NUMBERS, CARD_USER } from './card';
+import {
+  CARD_CVC,
+  CARD_MARK,
+  CARD_NUMBERS,
+  CARD_PASSWORD,
+  CARD_USER,
+} from './card';
 
 export const CARD_NUMBER_REGEXP = new RegExp(
   `^[${CARD_NUMBERS.startNumber}-${CARD_NUMBERS.endNumber}]{${CARD_NUMBERS.length}}$`,
@@ -23,3 +29,7 @@ export const CARD_MARK_REGEXP = {
 };
 
 export const CARD_CVC_REGEXP = new RegExp(`^[0-9]{${CARD_CVC.length}}$`);
+
+export const CARD_PASSWORD_REGEXP = new RegExp(
+  `^[0-9]{${CARD_PASSWORD.length}}$`,
+);
