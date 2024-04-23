@@ -5,6 +5,7 @@ import REGEX from '../../constants/regex';
 import { BRAND_TABLE } from '../../constants/table';
 
 import * as Styled from './CardPreview.styled'
+import { secureNumber } from '../../util/secureNumber';
 
 const CardPreview = ({ ...props }: CardInfo) => {
   const { cardNumbers, cardBrand, cardCompany, expirationMonth, expirationYear, name, cvc, password } = props;
@@ -17,10 +18,6 @@ const CardPreview = ({ ...props }: CardInfo) => {
     centerY: 0,
     distance: 0,
   });
-
-  const secureNumber = (number: string) => {
-    return number.replace(REGEX.allNumbers, '∙');
-  };
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (cardRef.current) {

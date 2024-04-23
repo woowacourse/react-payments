@@ -14,7 +14,7 @@ const MainPage = () => {
     expirationYear: '',
     name: '',
     cvc: '',
-    password: ','
+    password: '',
   });
 
   return (
