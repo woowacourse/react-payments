@@ -27,7 +27,7 @@ export const CardNumbers: Story = {
     title: '결제할 카드 번호를 입력해 주세요',
     description: '본인 명의의 카드만 결제 가능합니다.',
     labelText: '카드 번호',
-    errMsg: '',
+    errorMessage: '',
     children: (
       <>
         {CARD_NUMBERS_FIELDS.map((name, index) => (
@@ -57,7 +57,7 @@ export const ExpirationDate: Story = {
     title: '카드 유효기간을 입력해 주세요',
     description: '월/년도(MMYY)를 순서대로 입력해 주세요',
     labelText: '유효기간',
-    errMsg: '',
+    errorMessage: '',
     children: (
       <>
         {EXPIRATION_DATE_FIELDS.map((name, index) => (
@@ -85,7 +85,7 @@ export const OwnerName: Story = {
   args: {
     title: '카드 소유자 이름을 입력해 주세요',
     labelText: '소유자 이름',
-    errMsg: '',
+    errorMessage: '',
     children: (
       <>
         {Array.from({ length: 1 }).map((_, index) => (

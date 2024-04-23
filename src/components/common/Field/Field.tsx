@@ -6,7 +6,7 @@ interface FieldProps {
   title: string;
   description?: string;
   labelText: string;
-  errMsg: string;
+  errorMessage: string;
   children: React.ReactNode;
 }
 
@@ -15,7 +15,7 @@ export default function Field({
   description,
   labelText,
   children,
-  errMsg,
+  errorMessage,
 }: FieldProps) {
   return (
     <div className={styles.field}>
@@ -27,7 +27,7 @@ export default function Field({
         {children}
       </fieldset>
 
-      <p className={styles.errMsg}>{errMsg}</p>
+      <p className={styles.errorMsg}>{errorMessage}</p>
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
 
   const {
     values: cardNumbers,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
@@ -60,7 +60,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
       title={title}
       description={description}
       labelText={labelText}
-      errMsg={errMsg}
+      errorMessage={errorMessage}
     >
       {Object.keys(cardNumbers).map((n) => {
         const name = n as keyof CardNumbers;

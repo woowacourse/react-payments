@@ -34,7 +34,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
 
   const {
     values: ownerName,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
@@ -45,7 +45,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
   });
 
   return (
-    <Field title={title} labelText={labelText} errMsg={errMsg}>
+    <Field title={title} labelText={labelText} errorMessage={errorMessage}>
       {Object.keys(ownerName).map((n) => {
         const name = n as keyof OwnerName;
         return (

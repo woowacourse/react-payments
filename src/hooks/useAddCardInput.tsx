@@ -28,21 +28,20 @@ export default function useAddCardInput<T extends InitialValuesType>({
   updateCardData,
 }: UseAddCardInputProps<T>) {
   const [values, setValues] = useState<T>(initialValues);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isError, setIsError] = useState(
     createObjectWithKeys(Object.keys(initialValues), false)
   );
-
-  const [errMsg, setErrMsg] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const validation = validateInputOnChange({ name, value });
 
     if (!validation.isValid) {
-      setErrMsg(validation.errorMsg);
+      setErrorMessage(validation.errorMsg);
       setIsError({ ...isError, [name]: true });
     } else {
-      setErrMsg('');
+      setErrorMessage('');
       setIsError({ ...isError, [name]: false });
       setValues({
         ...values,
@@ -58,10 +57,10 @@ export default function useAddCardInput<T extends InitialValuesType>({
       const validation = validateInputOnBlur({ name, value });
 
       if (!validation.isValid) {
-        setErrMsg(validation.errorMsg);
+        setErrorMessage(validation.errorMsg);
         setIsError({ ...isError, [name]: true });
       } else {
-        setErrMsg('');
+        setErrorMessage('');
         setIsError({ ...isError, [name]: false });
         updateCardData();
       }
@@ -72,7 +71,7 @@ export default function useAddCardInput<T extends InitialValuesType>({
 
   return {
     values,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
