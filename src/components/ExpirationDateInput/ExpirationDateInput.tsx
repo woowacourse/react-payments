@@ -27,7 +27,7 @@ const ExpirationDateInput = memo(
         errorMessage={expirationDate.status.errorMessage}
       >
         {Object.entries(expirationDate.data).map(
-          ([name, { value, isError }]) => (
+          ([name, { value, isError }], index) => (
             <Input
               key={name}
               name={name as keyof ExpirationDate}
@@ -41,7 +41,8 @@ const ExpirationDateInput = memo(
               onChange={changeExpirationDate}
               onBlur={blurExpirationDate}
               maxLength={2}
-            ></Input>
+              autoFocus={index === 0}
+            />
           )
         )}
       </Field>

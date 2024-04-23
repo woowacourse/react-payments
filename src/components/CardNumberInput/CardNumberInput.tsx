@@ -26,18 +26,21 @@ const CardNumberInput = memo(
         labelText={CARD_NUMBER.labelText}
         errorMessage={cardNumbers.status.errorMessage}
       >
-        {Object.entries(cardNumbers.data).map(([name, { value, isError }]) => (
-          <Input
-            key={name}
-            name={name}
-            placeholder={CARD_NUMBER.placeholder}
-            value={value}
-            isError={isError}
-            onChange={changeCardNumbers}
-            onBlur={blurCardNumbers}
-            maxLength={4}
-          />
-        ))}
+        {Object.entries(cardNumbers.data).map(
+          ([name, { value, isError }], index) => (
+            <Input
+              key={name}
+              name={name}
+              placeholder={CARD_NUMBER.placeholder}
+              value={value}
+              isError={isError}
+              onChange={changeCardNumbers}
+              onBlur={blurCardNumbers}
+              maxLength={4}
+              autoFocus={index === 0}
+            />
+          )
+        )}
       </Field>
     );
   }

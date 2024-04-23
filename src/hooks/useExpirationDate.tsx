@@ -37,9 +37,25 @@ const useExpirationDate = () => {
         });
         return;
       }
+      console.log(
+        isValidDate({
+          year: expirationDate.data.year.value,
+          month: expirationDate.data.month.value,
+        })
+      );
       setExpirationDate({
         ...expirationDate,
-        data: { ...expirationDate.data, [name]: { value, isError: false } },
+        data: {
+          ...expirationDate.data,
+          [name]: {
+            value,
+            isError: false,
+            isDone: isValidDate({
+              year: expirationDate.data.year.value,
+              month: expirationDate.data.month.value,
+            }),
+          },
+        },
         status: {
           isError: false,
           errorMessage: "",

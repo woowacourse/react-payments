@@ -48,7 +48,7 @@ const useCardNumbers = () => {
         ...cardNumbers,
         data: {
           ...cardNumbers.data,
-          [name]: { value, isError: false, isDone: false },
+          [name]: { value, isError: false, isDone: value.length === 4 },
         },
         status: {
           isError: false,

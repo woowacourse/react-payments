@@ -10,18 +10,21 @@ import useOwnerName from "@/hooks/useOwnerName";
 import PasswordInput from "@/components/PasswordInput/PasswordInput";
 import CVCInput from "@/components/CVCInput/CVCInput";
 import CardCompany from "@/components/CardCompany/CardCompany";
+import { ChangeEvent, useRef, useState } from "react";
 
 const App = () => {
   const { cardNumbers, changeCardNumbers, blurCardNumbers } = useCardNumbers();
   const { expirationDate, changeExpirationDate, blurExpirationDate } =
     useExpirationDate();
   const { ownerName, changeOwnerName, blurOwnerName } = useOwnerName();
+  const [cardCompany, setCardCompany] = useState("");
+  const cardCompanyRef = useRef<HTMLSelectElement>(null);
 
-  // console.log(
-  //   Object.entries(cardNumbers.data)
-  //     .map(([, { isDone }]) => isDone)
-  //     .every((isDone) => isDone)
-  // );
+  const changeCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setCardCompany(value);
+    cardCompanyRef.current?.blur();
+  };
 
   return (
     <div className={styles.app}>
@@ -56,19 +59,35 @@ const App = () => {
       />
 
       <form>
-        <CardCompany />
+        {/* 
         <PasswordInput />
-        <CVCInput />
-        <OwnerNameInput
-          ownerName={ownerName}
-          changeOwnerName={changeOwnerName}
-          blurOwnerName={blurOwnerName}
-        />
-        <ExpirationDateInput
-          expirationDate={expirationDate}
-          changeExpirationDate={changeExpirationDate}
-          blurExpirationDate={blurExpirationDate}
-        />
+        <CVCInput /> 
+         */}
+        {Object.entries(expirationDate.data)
+          .map(([, { isDone }]) => isDone)
+          .every((isDone) => isDone) && (
+          <OwnerNameInput
+            ownerName={ownerName}
+            changeOwnerName={changeOwnerName}
+            blurOwnerName={blurOwnerName}
+          />
+        )}
+        {cardCompany !== "" && (
+          <ExpirationDateInput
+            expirationDate={expirationDate}
+            changeExpirationDate={changeExpirationDate}
+            blurExpirationDate={blurExpirationDate}
+          />
+        )}
+        {Object.entries(cardNumbers.data)
+          .map(([, { isDone }]) => isDone)
+          .every((isDone) => isDone) && (
+          <CardCompany
+            cardCompany={cardCompany}
+            cardCompanyRef={cardCompanyRef}
+            changeCardCompany={changeCardCompany}
+          />
+        )}
         <CardNumberInput
           cardNumbers={cardNumbers}
           changeCardNumbers={changeCardNumbers}

@@ -1,4 +1,3 @@
-import React from "react";
 import Field from "@/components/layout/Field/Field";
 import Input from "../common/Input/Input";
 

@@ -19,6 +19,7 @@ export default function Input({
   placeholder,
   isError,
   maxLength,
+  autoFocus = false,
   isRequired = false,
   isPassword = false,
   onChange,
@@ -26,6 +27,7 @@ export default function Input({
 }: InputProps) {
   return (
     <input
+      autoFocus={autoFocus}
       type={isPassword ? "password" : "text"}
       name={name}
       placeholder={placeholder}
