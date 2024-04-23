@@ -3,12 +3,14 @@ const PLACEHOLDER = {
   EXPIRATION_MONTH: "MM",
   EXPIRATION_YEAR: "YY",
   OWNER_NAME: "JOHN DOE",
+  CVC: "123",
 };
 
 const INPUT_LABEL = {
   CARD_NUMBERS: "카드 번호",
   EXPIRATION_DATE: "유효기간",
   OWNER_NAME: "소유자 이름",
+  CVC: "CVC",
 };
 
 const INPUT_INFO_TITLE = {
@@ -16,6 +18,7 @@ const INPUT_INFO_TITLE = {
   EXPIRATION_DATE: "카드 유효기간을 입력해 주세요",
   OWNER_NAME: "카드 소유자 이름을 입력해 주세요",
   CARD_TYPE: "카드사를 선택해 주세요",
+  CVC: "CVC 번호를 입력해 주세요",
 };
 
 const INPUT_INFO_SUBTITLE = {
