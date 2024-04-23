@@ -2,6 +2,7 @@ const STYLE = {
   COLOR: {
     red: '#ff3d3d',
     white: '#ffff',
+    white24: '#F3F3F3',
     black: '#000',
     black50: '#333333',
     gray130: '#8b95a1',

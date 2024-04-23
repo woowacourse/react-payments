@@ -22,6 +22,13 @@ interface PaymentsSelectFieldProps {
   placeholder?: string;
 }
 
+interface ButtonProps {
+  text: string;
+  onClick?: () => void;
+  floating?: boolean;
+  width?: number;
+}
+
 interface InputStates {
   [key: string]: InputState;
 }
