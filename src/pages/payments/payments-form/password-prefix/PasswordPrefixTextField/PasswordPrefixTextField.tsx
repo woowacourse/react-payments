@@ -2,13 +2,13 @@ import { TextField } from '@components/index';
 
 import { PasswordPrefixInput } from '@pages/payments';
 
-export interface OwnerNameTextFieldProps {
+export interface PasswordPrefixTextFieldProps {
   passwordPrefix: string;
   onAddPasswordPrefix: (value: string) => void;
   passwordPrefixError: { isError: boolean; errorMessage: string };
 }
 
-const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({
+const PasswordPrefixTextField: React.FC<PasswordPrefixTextFieldProps> = ({
   passwordPrefix,
   passwordPrefixError,
   onAddPasswordPrefix,
@@ -31,4 +31,4 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({
   );
 };
 
-export default OwnerNameTextField;
+export default PasswordPrefixTextField;
