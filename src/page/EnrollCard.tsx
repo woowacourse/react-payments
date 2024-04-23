@@ -5,9 +5,13 @@ import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_CARD } from '../constants/card';
 import CardBackView from '../components/CardBackView';
+import SubmitCard from '../components/SubmitCard';
+import { Link } from 'react-router-dom';
+import { Page } from '../style/page.style';
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>(DEFAULT_CARD);
+  // const [isSubmit, setIsSubmit] = useState<boolean>(false);
   return (
     <Page>
       <Container>
@@ -15,18 +19,12 @@ export default function EnrollCard() {
         <CardBackView cvc={cardInfo.cvc} />
         <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
       </Container>
+      <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
+        <SubmitCard />
+      </Link>
     </Page>
   );
 }
-
-const Page = styled.div`
-  width: 100vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Container = styled.div`
   margin: 50px 0px;
