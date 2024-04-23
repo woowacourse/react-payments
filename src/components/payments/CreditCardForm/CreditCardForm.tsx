@@ -22,12 +22,16 @@ const CreditCardForm: React.FC = () => {
 
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
 
+  const { cardBrand, isOpen, handleSelectCardBrand, handleToggle } = useCardBrandDropdown();
+
   const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
 
   return (
     <>
       <PreviewCreditCardStyleContainer>
         <PreviewCreditCard
+          isDropdownOpen={isOpen}
+          cardBrand={cardBrand}
           cardNumbers={cardNumbers}
           expiration={expirationError.isError === true ? initialExpiration : expiration}
           ownerName={ownerName}

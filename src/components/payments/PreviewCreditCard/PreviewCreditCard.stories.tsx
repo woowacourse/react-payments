@@ -3,6 +3,7 @@ import PreviewCreditCard from '@components/payments/PreviewCreditCard/PreviewCre
 import { generateArgTypes } from '@utils/generateArgTypes';
 
 import type { Meta, StoryObj } from '@storybook/react';
+import { CARD_BRAND_MAP } from '@components/payments/CardBrandDropdown/CardBrandDropdown.constant';
 
 const meta = {
   title: 'Payments/PreviewCreditCard',
@@ -28,6 +29,14 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '소유자 이름',
     },
+    cardBrand : {
+      ...generateArgTypes({ control: 'radio', options : Object.keys(CARD_BRAND_MAP) }),
+      description: '선택한 카드 브랜드',
+    },
+    isDropdownOpen : {
+      ...generateArgTypes({ control: 'boolean' }),
+      description: '드롭다운 hover에 의해 카드 브랜드가 선택되지 않도록 하기 위한 옵션',
+    }
   },
 
   tags: ['autodocs'],
@@ -46,6 +55,8 @@ export const Default: Story = {
   },
 
   args: {
+    isDropdownOpen : false,
+    cardBrand : '',
     cardNumbers: ['', '', '', ''],
     expiration: { month: '', year: '' },
     ownerName: '',
@@ -62,6 +73,8 @@ export const VisaCard: Story = {
   },
 
   args: {
+    isDropdownOpen : false,
+    cardBrand : '',
     cardNumbers: ['4123', '1231', '2342', '4535'],
     expiration: { month: '07', year: '28' },
     ownerName: 'SONJINYOUNG',
@@ -78,6 +91,8 @@ export const MasterCard: Story = {
   },
 
   args: {
+    isDropdownOpen : false,
+    cardBrand : '',
     cardNumbers: ['5112', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
     ownerName: 'SONJINYOUNG',
@@ -94,8 +109,132 @@ export const NotCard: Story = {
   },
 
   args: {
+    isDropdownOpen : false,
+    cardBrand : '',
     cardNumbers: ['1234', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
     ownerName: 'SONJINYOUNG',
+  },
+};
+
+export const BCCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 BC 카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'bcCard',
+  },
+};
+
+export const HanaCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 하나카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'hanaCard',
+  },
+};
+
+export const HyundaiCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 현대카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'hyundaiCard',
+  },
+};
+
+export const KakaoBank: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 카카오뱅크로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'kakaoBank',
+  },
+};
+
+
+export const KookminCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 국민카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'kookminCard',
+  },
+};
+
+export const LotteCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 롯데카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'lotteCard',
+  },
+};
+
+export const ShinhanCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 신한카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'shinhanCard',
+  },
+};
+
+
+export const WooriCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 우리카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    cardBrand : 'wooriCard',
   },
 };
