@@ -5,10 +5,10 @@ import { createRef, useRef } from 'react';
 export interface CardNumberTextFieldProps {
   cardNumbers: string[];
   onAddCardNumber: (index: number, value: string) => void;
-  cardNumberError: { isError: boolean[]; errorMessage: string };
+  cardNumberState: { isError: boolean[]; errorMessage: string };
 }
 
-const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, onAddCardNumber, cardNumberError }) => {
+const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, onAddCardNumber, cardNumberState }) => {
   const inputRefs = useRef(cardNumbers.map(() => createRef() as React.RefObject<HTMLInputElement>));
 
   return (
@@ -21,7 +21,7 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, 
           <CardNumberInput
             id={index === 0 ? 'cardNumber' : ''}
             key={index}
-            isError={cardNumberError.isError[index]}
+            isError={cardNumberState.isError[index]}
             value={cardNumber}
             onAddCardNumber={(event) => onAddCardNumber(index, String(event.target.value))}
             ref={inputRefs.current[index]}
@@ -29,7 +29,7 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, 
           />
         ))}
       </TextField.Content>
-      <TextField.ErrorText errorText={cardNumberError.errorMessage} />
+      <TextField.ErrorText errorText={cardNumberState.errorMessage} />
     </section>
   );
 };

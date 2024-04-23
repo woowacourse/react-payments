@@ -6,14 +6,14 @@ export interface ExpirationDateTextFieldProps {
   month: string;
   year: string;
   onAddExpirationDate: (field: 'month' | 'year', value: string) => void;
-  expirationDateError: { isError: { month: boolean; year: boolean }; errorMessage: string };
+  expirationDateState: { isError: { month: boolean; year: boolean }; errorMessage: string };
 }
 
 const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   month,
   year,
   onAddExpirationDate,
-  expirationDateError,
+  expirationDateState,
 }) => {
   const inputRefs = useRef(
     Array(2)
@@ -30,7 +30,7 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
         <ExpirationDateInput
           id="expiration"
           placeholder="MM"
-          isError={expirationDateError.isError.month}
+          isError={expirationDateState.isError.month}
           value={month}
           onAddExpirationDate={(event) => onAddExpirationDate('month', event.target.value)}
           ref={inputRefs.current[0]}
@@ -38,13 +38,13 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
         />
         <ExpirationDateInput
           placeholder="YY"
-          isError={expirationDateError.isError.year}
+          isError={expirationDateState.isError.year}
           value={year}
           onAddExpirationDate={(event) => onAddExpirationDate('year', event.target.value)}
           ref={inputRefs.current[1]}
         />
       </TextField.Content>
-      <TextField.ErrorText errorText={expirationDateError.errorMessage} />
+      <TextField.ErrorText errorText={expirationDateState.errorMessage} />
     </section>
   );
 };

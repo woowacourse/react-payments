@@ -22,7 +22,7 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '소유자 이름',
     },
-    ownerNameError: {
+    ownerNameState: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 메시지 및 상태를 포함',
     },
@@ -33,7 +33,7 @@ const meta = {
   },
   args: {
     ownerName: '',
-    ownerNameError: { isError: false, errorMessage: '' },
+    ownerNameState: { isError: false, errorMessage: '' },
     onAddOwnerName: fn(),
   },
   tags: ['autodocs'],
@@ -55,7 +55,7 @@ export const Error: Story = {
   },
 
   args: {
-    ownerNameError: { isError: true, errorMessage: ERROR_MESSAGE.invalidOwnerNameInput },
+    ownerNameState: { isError: true, errorMessage: ERROR_MESSAGE.invalidOwnerNameInput },
   },
 };
 

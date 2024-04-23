@@ -20,7 +20,7 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '비밀번호 앞 2자리',
     },
-    passwordPrefixError: {
+    passwordPrefixState: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 메시지 및 상태를 포함',
     },
@@ -32,7 +32,7 @@ const meta = {
   args: {
     passwordPrefix: '',
     onAddPasswordPrefix: fn(),
-    passwordPrefixError: { isError: false, errorMessage: '' },
+    passwordPrefixState: { isError: false, errorMessage: '' },
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof PasswordPrefixTextField>;
@@ -53,7 +53,7 @@ export const Error: Story = {
   },
 
   args: {
-    passwordPrefixError: { isError: true, errorMessage: ERROR_MESSAGE.invalidPasswordPrefixInput },
+    passwordPrefixState: { isError: true, errorMessage: ERROR_MESSAGE.invalidPasswordPrefixInput },
   },
 };
 

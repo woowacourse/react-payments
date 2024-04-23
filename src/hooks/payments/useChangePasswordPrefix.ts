@@ -2,21 +2,33 @@ import { useState } from 'react';
 import { isValidPasswordPrefixInput } from '@utils/validator';
 import { ERROR_MESSAGE } from '@constants/index';
 
+const initialState = { isSuccess: false, isError: false, errorMessage: '' };
+
 const useChangePasswordPrefix = () => {
   const [passwordPrefix, setPasswordPrefix] = useState('');
-  const [passwordPrefixError, setPasswordPRefixError] = useState({ isError: false, errorMessage: '' });
+  const [passwordPrefixState, setPasswordPRefixState] = useState(initialState);
 
   const handlePasswordPrefixChange = (value: string) => {
     if (!isValidPasswordPrefixInput(value)) {
-      setPasswordPRefixError({ isError: true, errorMessage: ERROR_MESSAGE.invalidPasswordPrefixInput });
+      setPasswordPRefixState((prev) => ({
+        ...prev,
+        isError: true,
+        errorMessage: ERROR_MESSAGE.invalidPasswordPrefixInput,
+      }));
       return;
     }
 
+    if (value.length === 2) {
+      setPasswordPRefixState({ ...initialState, isSuccess: true });
+    }
+    // else {
+    //   setPasswordPRefixState(initialState);
+    // }
+
     setPasswordPrefix(value);
-    setPasswordPRefixError({ isError: false, errorMessage: '' });
   };
 
-  return { passwordPrefix, passwordPrefixError, handlePasswordPrefixChange };
+  return { passwordPrefix, passwordPrefixState, handlePasswordPrefixChange };
 };
 
 export default useChangePasswordPrefix;

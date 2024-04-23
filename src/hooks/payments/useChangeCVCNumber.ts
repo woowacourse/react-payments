@@ -2,21 +2,29 @@ import { useState } from 'react';
 import { isValidCVCNumberInput } from '@utils/validator';
 import { ERROR_MESSAGE } from '@constants/index';
 
+const initialState = { isSuccess: false, isError: false, errorMessage: '' };
+
 const useChangeCVCNumber = () => {
   const [cvcNumber, setCVCNumber] = useState('');
-  const [cvcNumberError, setCVCNumberError] = useState({ isError: false, errorMessage: '' });
+  const [cvcNumberState, setCVCNumberState] = useState(initialState);
 
   const handleCVCNumberChange = (value: string) => {
     if (!isValidCVCNumberInput(value)) {
-      setCVCNumberError({ isError: true, errorMessage: ERROR_MESSAGE.invalidCVCNumberInput });
+      setCVCNumberState((prev) => ({ ...prev, isError: true, errorMessage: ERROR_MESSAGE.invalidCVCNumberInput }));
       return;
     }
 
+    if (value.length === 3) {
+      setCVCNumberState({ ...initialState, isSuccess: true });
+    }
+    // else {
+    //   setCVCNumberState(initialState);
+    // }
+
     setCVCNumber(value);
-    setCVCNumberError({ isError: false, errorMessage: '' });
   };
 
-  return { cvcNumber, cvcNumberError, handleCVCNumberChange };
+  return { cvcNumber, cvcNumberState, handleCVCNumberChange };
 };
 
 export default useChangeCVCNumber;

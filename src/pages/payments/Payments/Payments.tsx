@@ -19,12 +19,12 @@ import {
 import styles from './Payments.module.css';
 
 const Payments: React.FC = () => {
-  const { cardIssuer, handleCardIssuerChange } = useChangeCardIssuer();
-  const { cvcNumber, cvcNumberError, handleCVCNumberChange } = useChangeCVCNumber();
-  const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
-  const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
-  const { expirationDate, expirationDateError, handleExpirationDateChange } = useChangeExpirationDate();
-  const { passwordPrefix, passwordPrefixError, handlePasswordPrefixChange } = useChangePasswordPrefix();
+  const { cardIssuer, cardIssuerState, handleCardIssuerChange } = useChangeCardIssuer();
+  const { cvcNumber, cvcNumberState, handleCVCNumberChange } = useChangeCVCNumber();
+  const { ownerName, ownerNameState, handleOwnerNameChange } = useChangeOwnerName();
+  const { cardNumbers, cardNumberState, handleCardNumberChange } = useChangeCardNumber();
+  const { expirationDate, expirationDateState, handleExpirationDateChange } = useChangeExpirationDate();
+  const { passwordPrefix, passwordPrefixState, handlePasswordPrefixChange } = useChangePasswordPrefix();
 
   return (
     <>
@@ -40,32 +40,42 @@ const Payments: React.FC = () => {
 
       <section>
         <form className={styles.paymentsForm}>
-          <PasswordPrefixTextField
-            passwordPrefix={passwordPrefix}
-            onAddPasswordPrefix={handlePasswordPrefixChange}
-            passwordPrefixError={passwordPrefixError}
-          />
-          <CVCNumberTextField
-            cvcNumber={cvcNumber}
-            onAddCVCNumber={handleCVCNumberChange}
-            cvcNumberError={cvcNumberError}
-          />
-          <OwnerNameTextField
-            ownerName={ownerName}
-            onAddOwnerName={handleOwnerNameChange}
-            ownerNameError={ownerNameError}
-          />
-          <ExpirationDateTextField
-            month={expirationDate.month}
-            year={expirationDate.year}
-            onAddExpirationDate={handleExpirationDateChange}
-            expirationDateError={expirationDateError}
-          />
-          <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
+          {cvcNumberState.isSuccess && (
+            <PasswordPrefixTextField
+              passwordPrefix={passwordPrefix}
+              onAddPasswordPrefix={handlePasswordPrefixChange}
+              passwordPrefixState={passwordPrefixState}
+            />
+          )}
+          {ownerNameState.isSuccess && (
+            <CVCNumberTextField
+              cvcNumber={cvcNumber}
+              onAddCVCNumber={handleCVCNumberChange}
+              cvcNumberState={cvcNumberState}
+            />
+          )}
+          {expirationDateState.isSuccess && (
+            <OwnerNameTextField
+              ownerName={ownerName}
+              onAddOwnerName={handleOwnerNameChange}
+              ownerNameState={ownerNameState}
+            />
+          )}
+          {cardIssuerState.isSuccess && (
+            <ExpirationDateTextField
+              month={expirationDate.month}
+              year={expirationDate.year}
+              onAddExpirationDate={handleExpirationDateChange}
+              expirationDateState={expirationDateState}
+            />
+          )}
+          {cardNumberState.isSuccess && (
+            <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
+          )}
           <CardNumberTextField
             cardNumbers={cardNumbers}
             onAddCardNumber={handleCardNumberChange}
-            cardNumberError={cardNumberError}
+            cardNumberState={cardNumberState}
           />
         </form>
       </section>

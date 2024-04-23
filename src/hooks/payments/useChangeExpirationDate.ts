@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { isValidMonthInput, isValidYearInput } from '@utils/validator';
 import { ERROR_MESSAGE } from '@constants/index';
 
-const initialExpirationDate = { month: '', year: '' };
-const initialExpirationDateError = { isError: { month: false, year: false }, errorMessage: '' };
+const initialValue = { month: '', year: '' };
+const initialState = { isSuccess: false, isError: { month: false, year: false }, errorMessage: '' };
 
 const validators = {
   month: isValidMonthInput,
@@ -16,29 +16,32 @@ const errorMessages = {
 };
 
 const useChangeExpirationDate = () => {
-  const [expirationDate, setExpirationDate] = useState(initialExpirationDate);
-  const [expirationDateError, setExpirationDateError] = useState({
-    isError: { month: false, year: false },
-    errorMessage: '',
-  });
+  const [expirationDate, setExpirationDate] = useState(initialValue);
+  const [expirationDateState, setExpirationDateState] = useState(initialState);
 
   const handleExpirationDateChange = (field: 'month' | 'year', value: string) => {
-    // 유효성 검사 실패
     if (!validators[field](value)) {
-      setExpirationDateError({
-        isError: { ...initialExpirationDateError.isError, [field]: true },
+      setExpirationDateState((prev) => ({
+        ...prev,
+        isError: { ...initialState.isError, [field]: true },
         errorMessage: errorMessages[field],
-      });
-
+      }));
       return;
     }
 
-    // 유효성 검사 통과
+    const newDate = { ...expirationDate, [field]: value };
+
+    if (newDate.month.length > 0 && newDate.year.length === 2) {
+      setExpirationDateState({ ...initialState, isSuccess: true });
+    }
+    // else {
+    //   setExpirationDateState(initialState);
+    // }
+
     setExpirationDate((prev) => ({ ...prev, [field]: value }));
-    setExpirationDateError(initialExpirationDateError);
   };
 
-  return { expirationDate, expirationDateError, handleExpirationDateChange };
+  return { expirationDate, expirationDateState, handleExpirationDateChange };
 };
 
 export default useChangeExpirationDate;

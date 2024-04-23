@@ -26,7 +26,7 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '유효기간에 포함된 년도',
     },
-    expirationDateError: {
+    expirationDateState: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 메시지 및 상태를 포함',
     },
@@ -38,7 +38,7 @@ const meta = {
   args: {
     month: '',
     year: '',
-    expirationDateError: { isError: { month: false, year: false }, errorMessage: '' },
+    expirationDateState: { isError: { month: false, year: false }, errorMessage: '' },
     onAddExpirationDate: fn(),
   },
   tags: ['autodocs'],
@@ -56,7 +56,7 @@ export const MonthError: Story = {
   },
 
   args: {
-    expirationDateError: {
+    expirationDateState: {
       isError: { month: true, year: false },
       errorMessage: ERROR_MESSAGE.invalidMonthInput,
     },
@@ -69,7 +69,7 @@ export const YearError: Story = {
   },
 
   args: {
-    expirationDateError: {
+    expirationDateState: {
       isError: { month: false, year: true },
       errorMessage: ERROR_MESSAGE.invalidYearInput,
     },

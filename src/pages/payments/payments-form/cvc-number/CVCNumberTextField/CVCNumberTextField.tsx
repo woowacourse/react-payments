@@ -6,10 +6,10 @@ import ID from '../../../../../constants/id';
 export interface OwnerNameTextFieldProps {
   cvcNumber: string;
   onAddCVCNumber: (value: string) => void;
-  cvcNumberError: { isError: boolean; errorMessage: string };
+  cvcNumberState: { isError: boolean; errorMessage: string };
 }
 
-const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcNumberError, onAddCVCNumber }) => {
+const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcNumberState, onAddCVCNumber }) => {
   return (
     <section>
       <TextField.Title title="CVC 번호를 입력해 주세요" />
@@ -18,13 +18,13 @@ const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcN
       <TextField.Content>
         <CVCNumberInput
           id={ID.payments.cvcNumberInput}
-          isError={cvcNumberError.isError}
+          isError={cvcNumberState.isError}
           placeholder={'123'}
           value={cvcNumber}
           onAddCVCNumber={(event) => onAddCVCNumber(event.target.value)}
         />
       </TextField.Content>
-      <TextField.ErrorText errorText={cvcNumberError.errorMessage} />
+      <TextField.ErrorText errorText={cvcNumberState.errorMessage} />
     </section>
   );
 };

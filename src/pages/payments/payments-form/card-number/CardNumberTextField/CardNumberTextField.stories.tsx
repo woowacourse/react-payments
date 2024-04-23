@@ -23,7 +23,7 @@ const meta = {
       defaultValue: ['', '', '', ''],
       description: '각 카드 번호들',
     },
-    cardNumberError: {
+    cardNumberState: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 상태 및 에러 메시지를 포함한 객체',
     },
@@ -33,7 +33,7 @@ const meta = {
     },
   },
   args: {
-    cardNumberError: { isError: [false, false, false, false], errorMessage: '' },
+    cardNumberState: { isError: [false, false, false, false], errorMessage: '' },
     cardNumbers: ['', '', '', ''],
     onAddCardNumber: fn(),
   },
@@ -55,7 +55,7 @@ export const InvalidValueError: Story = {
   },
 
   args: {
-    cardNumberError: { isError: [true, false, false, false], errorMessage: ERROR_MESSAGE.invalidCardNumberInput },
+    cardNumberState: { isError: [true, false, false, false], errorMessage: ERROR_MESSAGE.invalidCardNumberInput },
   },
 };
 

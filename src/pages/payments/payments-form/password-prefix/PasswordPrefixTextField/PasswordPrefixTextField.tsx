@@ -5,12 +5,12 @@ import { PasswordPrefixInput } from '@pages/payments';
 export interface PasswordPrefixTextFieldProps {
   passwordPrefix: string;
   onAddPasswordPrefix: (value: string) => void;
-  passwordPrefixError: { isError: boolean; errorMessage: string };
+  passwordPrefixState: { isError: boolean; errorMessage: string };
 }
 
 const PasswordPrefixTextField: React.FC<PasswordPrefixTextFieldProps> = ({
   passwordPrefix,
-  passwordPrefixError,
+  passwordPrefixState,
   onAddPasswordPrefix,
 }) => {
   return (
@@ -21,12 +21,12 @@ const PasswordPrefixTextField: React.FC<PasswordPrefixTextFieldProps> = ({
       <TextField.Content>
         <PasswordPrefixInput
           id="passwordPrefix"
-          isError={passwordPrefixError.isError}
+          isError={passwordPrefixState.isError}
           value={passwordPrefix}
           onAddPasswordPrefix={(event) => onAddPasswordPrefix(event.target.value)}
         />
       </TextField.Content>
-      <TextField.ErrorText errorText={passwordPrefixError.errorMessage} />
+      <TextField.ErrorText errorText={passwordPrefixState.errorMessage} />
     </section>
   );
 };

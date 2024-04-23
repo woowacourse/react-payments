@@ -20,7 +20,7 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: 'CVC 번호',
     },
-    cvcNumberError: {
+    cvcNumberState: {
       ...generateArgTypes({ control: 'object' }),
       description: '에러 메시지 및 상태를 포함',
     },
@@ -32,7 +32,7 @@ const meta = {
   args: {
     cvcNumber: '',
     onAddCVCNumber: fn(),
-    cvcNumberError: { isError: false, errorMessage: '' },
+    cvcNumberState: { isError: false, errorMessage: '' },
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof CVCNumberTextField>;
@@ -53,7 +53,7 @@ export const Error: Story = {
   },
 
   args: {
-    cvcNumberError: { isError: true, errorMessage: ERROR_MESSAGE.invalidCVCNumberInput },
+    cvcNumberState: { isError: true, errorMessage: ERROR_MESSAGE.invalidCVCNumberInput },
   },
 };
 
