@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import InputGroup from '../components/InputGroup';
-import { CARD_NUMBER } from '../constants/inputInformation';
 
 const meta = {
   title: 'InputGroup',
@@ -13,7 +12,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    informationSection: CARD_NUMBER.type,
-    setState: () => {},
+    onInputChange: () => {},
+    informationSection: 'number',
+    isError: [false, false, false, false],
+    errorMessage: '',
   },
 };
