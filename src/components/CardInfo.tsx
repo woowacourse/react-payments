@@ -2,6 +2,8 @@ import Container from './style/CardInfo.style';
 import CardNumbersFormSection from './CardNumbersFormSection';
 import ExpirationDateFormSection from './ExpirationDateFormSection';
 import NameFormSection from './NameFormSection';
+import CardCompanyFormSection from './CardCompanyFormSection';
+import CVCFormSection from './CVCFormSection';
 
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
@@ -23,6 +25,8 @@ const CardInfo = ({ ...props }) => {
 
   return (
     <Container>
+      <CVCFormSection></CVCFormSection>
+      <CardCompanyFormSection></CardCompanyFormSection>
       <CardNumbersFormSection changeCardNumber={changeCardNumber} />
       <ExpirationDateFormSection changeExpiration={changeExpiration} />
       <NameFormSection changeName={changeName} />
