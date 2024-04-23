@@ -5,6 +5,7 @@ import InputGroup from './components/InputGroup';
 import CardImage from './components/CardImage';
 import { css } from '@emotion/react';
 import { InformationDetailType } from './types/card';
+import { CardNumberType, CardOwnerType, CardPeriodType } from './types/state';
 import validateInput from './validations/validateInput';
 
 const appContainerStyle = css({
@@ -38,6 +39,13 @@ interface HandleCardInputType {
   inputSection: InformationDetailType;
 }
 
+interface HandleCardErrorType {
+  isError: boolean;
+  inputSection: InformationDetailType;
+  message: string;
+  index: number;
+}
+
 interface PeriodTableType {
   [key: number]: 'month' | 'year';
   0: 'month';
@@ -45,15 +53,15 @@ interface PeriodTableType {
 }
 
 function App() {
-  const [cardNumber, setCardNumber] = useState<{ data: string[]; errorMessage: string }>({
+  const [cardNumber, setCardNumber] = useState<CardNumberType>({
     data: ['', '', '', ''],
     errorMessage: '',
   });
-  const [cardPeriod, setCardPeriod] = useState<{ data: { month: string; year: string }; errorMessage: string }>({
+  const [cardPeriod, setCardPeriod] = useState<CardPeriodType>({
     data: { month: '', year: '' },
     errorMessage: '',
   });
-  const [cardOwner, setCardOwner] = useState<{ data: string; errorMessage: string }>({ data: '', errorMessage: '' });
+  const [cardOwner, setCardOwner] = useState<CardOwnerType>({ data: '', errorMessage: '' });
 
   const [isError, setIsError] = useState({
     number: [false, false, false, false],
@@ -110,16 +118,15 @@ function App() {
     owner: setCardOwner,
   };
 
-  const handleCardError = (isError: boolean, inputSection: InformationDetailType, message: string, index: number) => {
+  const handleCardError = ({ isError, inputSection, message, index }: HandleCardErrorType) => {
     setIsError((prevState) => {
       if (inputSection === 'number') {
         const updatedState = [...prevState.number];
         updatedState[index] = isError;
         return { ...prevState, number: updatedState };
-      } else {
-        prevState[inputSection] = isError;
-        return { ...prevState, [inputSection]: isError };
       }
+      prevState[inputSection] = isError;
+      return { ...prevState, [inputSection]: isError };
     });
 
     const setErrorFunction = setErrorFunctions[inputSection];
@@ -131,7 +138,7 @@ function App() {
   const handleInputChange = ({ value, index, inputSection }: HandleCardInputType) => {
     const { isError, message } = validateInput(value, inputSection);
     handleCardInput({ value, index, inputSection });
-    handleCardError(isError, inputSection, message, index);
+    handleCardError({ isError, inputSection, message, index });
   };
 
   return (
