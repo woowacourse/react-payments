@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import { InformationDetailType } from './types/card';
 import { CardNumberType, CardOwnerType, CardPeriodType } from './types/state';
 import validateInput from './validations/validateInput';
+import { PERIOD } from './constants/inputInformation';
 
 const appContainerStyle = css({
   display: 'flex',
@@ -46,12 +47,6 @@ interface HandleCardErrorType {
   index: number;
 }
 
-interface PeriodTableType {
-  [key: number]: 'month' | 'year';
-  0: 'month';
-  1: 'year';
-}
-
 function App() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     data: ['', '', '', ''],
@@ -70,11 +65,6 @@ function App() {
     owner: false,
   });
 
-  const periodTable: PeriodTableType = {
-    0: 'month',
-    1: 'year',
-  };
-
   const handleCardNumber = (value: string, index: number) => {
     setCardNumber((prevState) => {
       const { data } = prevState;
@@ -88,7 +78,7 @@ function App() {
     setCardPeriod((prevState) => {
       const { data } = prevState;
       const updatedState = { ...data };
-      updatedState[periodTable[index]] = value;
+      updatedState[PERIOD[index]] = value;
       return { ...prevState, data: updatedState };
     });
   };

@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import InputTitle from './InputTitle';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
-import { InformationDetailType, informationSectionType, period } from '../types/card';
-import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
+import { InformationDetailType, informationSectionType } from '../types/card';
+import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD, PERIOD } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
 const inputGroupStyle = css({
@@ -88,7 +88,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
         </label>
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
-            const inputSection = informationSection === 'period' ? period[index] : informationSection;
+            const inputSection = informationSection === 'period' ? PERIOD[index] : informationSection;
 
             return (
               <Input

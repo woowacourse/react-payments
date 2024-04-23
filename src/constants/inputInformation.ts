@@ -24,3 +24,5 @@ export const CARD_OWNER = {
   placeholders: ['WOOTECO'],
   maxLength: 18,
 } as const;
+
+export const PERIOD = ['month', 'year'] as const;
