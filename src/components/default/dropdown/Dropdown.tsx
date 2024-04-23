@@ -1,7 +1,8 @@
 import { CardCompany } from "../../../types/type";
 import React, { useState } from "react";
 import * as Styled from "./Dropdown.styled";
-import ArrowIcon from "../../../assets/ArrowIcon";
+import UpArrowIcon from "../../../assets/UpArrowIcon.png";
+import DownArrowIcon from "../../../assets/DownArrowIcon.png";
 
 interface DropdownProps {
   selectList: string[];
@@ -30,10 +31,7 @@ const Dropdown = ({ selectList, onChange }: DropdownProps) => {
     >
       <button onClick={toggleDropdown}>
         <div>{selectedItem}</div>
-        <ArrowIcon
-          fill={isOpen ? "#000000" : "#acacac"}
-          rotate={isOpen}
-        />
+        <img src={isOpen ? DownArrowIcon : UpArrowIcon} />
       </button>
       {isOpen && (
         <ul>
