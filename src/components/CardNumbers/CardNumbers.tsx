@@ -53,6 +53,7 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
             return (
               <Input
                 id={`cardNumber${idx + 1}`}
+                key={`cardNumber${idx + 1}`}
                 ariaLabel={`카드번호${idx + 1}`}
                 maxLength={4}
                 placeholder="1234"
@@ -64,7 +65,7 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
             );
           })}
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={errorMessage} />
       </S.CardNumberBox>
     </S.CardNumbersContainer>
   );

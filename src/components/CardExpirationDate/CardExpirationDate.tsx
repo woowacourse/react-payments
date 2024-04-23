@@ -100,7 +100,7 @@ export default function CardExpirationDate({
             onBlurInput={(value) => onBlurYearInput(value)}
           />
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={errorMessage} />
       </S.CardDateBox>
     </S.CardDateContainer>
   );

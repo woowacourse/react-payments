@@ -30,21 +30,21 @@ export default function CardEnrollForm() {
 
   return (
     <S.CardEnrollFormContainer>
-      <CardPreview cardInformation={cardInformation}></CardPreview>
+      <CardPreview cardInformation={cardInformation} />
       <S.CardInformation>
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
           onChangeCardInfo={onChangeCardInfo}
-        ></CardNumbers>
+        />
         <CardExpirationDate
           cardExpirationMonth={cardInformation.cardExpirationMonth}
           cardExpirationYear={cardInformation.cardExpirationYear}
           onChangeCardInfo={onChangeCardInfo}
-        ></CardExpirationDate>
+        />
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
           onChangeCardInfo={onChangeCardInfo}
-        ></CardOwnerName>
+        />
       </S.CardInformation>
     </S.CardEnrollFormContainer>
   );
