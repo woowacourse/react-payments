@@ -33,7 +33,7 @@ const meta = {
     },
   },
   args: {
-    cardNumberError: { isError: false, errorMessage: '' },
+    cardNumberError: { isError: [false, false, false, false], errorMessage: '' },
     cardNumbers: ['', '', '', ''],
     onAddCardNumber: fn(),
   },
@@ -55,7 +55,7 @@ export const InvalidValueError: Story = {
   },
 
   args: {
-    cardNumberError: { isError: true, errorMessage: ERROR_MESSAGE.invalidCardNumberInput },
+    cardNumberError: { isError: [true, false, false, false], errorMessage: ERROR_MESSAGE.invalidCardNumberInput },
   },
 };
 
