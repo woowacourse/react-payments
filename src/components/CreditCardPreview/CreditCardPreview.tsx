@@ -52,7 +52,11 @@ const CreditCardPreview = ({ cardType, expirationDate, ownerName }: Props) => {
         <S.Input
           type="text"
           value={
-            expirationDate.expirationMonth + "/" + expirationDate.expirationYear
+            expirationDate.expirationMonth &&
+            [
+              expirationDate.expirationMonth,
+              expirationDate.expirationYear,
+            ].join("/")
           }
           readOnly
         ></S.Input>
