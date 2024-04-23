@@ -4,15 +4,7 @@ import { useContext } from "react";
 import masterImage from "../../assets/masterImage.png";
 import visaImage from "../../assets/visaImage.png";
 
-import {
-  cardInfoStyle,
-  logoStyle,
-  periodRowStyle,
-  periodStyle,
-  rowStyle,
-  cardPreviewStyle,
-  width42,
-} from "./emotionCss";
+import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, cardPreviewStyle, width42 } from "./style.js";
 import {
   CardNumbersContext,
   CardOwnerInfoContext,

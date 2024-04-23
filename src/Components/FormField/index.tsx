@@ -4,7 +4,7 @@ import { memo, useContext } from "react";
 import FormInput from "../FormInput";
 import Tooltip from "../Tooltip";
 
-import { descriptionCss, rowStyle, titleCss } from "./emotionCss";
+import { descriptionCss, rowStyle, titleCss } from "./style";
 import {
   CardNumberErrorContext,
   CardOwnerInfoErrorContext,

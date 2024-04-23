@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { SetStateAction, memo, useContext } from "react";
-import { inputStyle } from "./emotionCss";
+import { inputStyle } from "./style";
 import { ValidatorType, cardNumbersValidator, cardOwnerValidator, cardPeriodValidator } from "./validator";
 import {
   CardNumbersContext,

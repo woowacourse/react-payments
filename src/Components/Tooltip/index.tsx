@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { tooltipStyle } from "./emotionCss";
+import { tooltipStyle } from "./style";
 
 interface Props {
   children: React.ReactNode;
