@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export const Card = styled.div`
+export const Card = styled.div<{ $background: string }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background: ${({ theme }) => theme.color.primary.main};
+  background: ${(props) => (props.$background ? props.$background : ({ theme }) => theme.color.primary.main)};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 

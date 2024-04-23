@@ -1,6 +1,8 @@
 import { isVisaCard, isMasterCard } from '../../../domain/Card';
+
+import { CARD_NUMBER, CARD_COMPANY } from '../../../constants/Condition';
 import { Visa, MasterCard, Dot } from '../../../assets';
-import { CARD_NUMBER } from '../../../constants/Condition';
+
 import * as S from './CardPreview.style';
 
 interface CardPreviewProps {
@@ -8,9 +10,10 @@ interface CardPreviewProps {
   month: string;
   year: string;
   owner: string;
+  company: string;
 }
 
-function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
+function CardPreview({ cardNumber, month, year, owner, company }: CardPreviewProps) {
   const makeCardLogoImage = (cardNumbers: string[]) => {
     if (isVisaCard(cardNumbers)) {
       return <img src={Visa} alt="비자 카드" />;
@@ -30,7 +33,7 @@ function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
   };
 
   return (
-    <S.Card>
+    <S.Card $background={CARD_COMPANY[company]}>
       <S.CardHeader>
         <S.ChipBox />
         <S.LogoBox>{makeCardLogoImage(cardNumber)}</S.LogoBox>

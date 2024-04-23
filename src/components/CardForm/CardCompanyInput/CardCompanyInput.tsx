@@ -25,6 +25,7 @@ const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => 
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
   const toggleOptionList = () => setIsOptionOpen(!isOptionOpen);
+
   const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleCompany(e.target.value);
     setIsOptionOpen(false);

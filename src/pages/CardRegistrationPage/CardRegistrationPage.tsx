@@ -50,7 +50,7 @@ const CardRegistrationPage = () => {
   return (
     <S.CardRegistrationPageLayout>
       <S.CardPreviewBoxWrapper>
-        <CardPreview cardNumber={cardNumbers} month={month} year={year} owner={owner} />
+        <CardPreview cardNumber={cardNumbers} month={month} year={year} owner={owner} company={company} />
       </S.CardPreviewBoxWrapper>
       <S.CardForm>
         <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
