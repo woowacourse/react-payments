@@ -58,7 +58,7 @@ const CardInformationForm = ({
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>
             <Input
-              aria-label="first-card-numbers"
+              aria-label="첫_번째_카드번호"
               placeholder={PLACEHOLDER.cardNumber}
               value={first}
               maxLength={MAX_LENGTH.cardNumber}
@@ -66,7 +66,7 @@ const CardInformationForm = ({
               aria-invalid={isFirstError}
             />
             <Input
-              aria-label="second-card-numbers"
+              aria-label="두_번째_카드번호"
               placeholder={PLACEHOLDER.cardNumber}
               value={second}
               maxLength={MAX_LENGTH.cardNumber}
@@ -74,7 +74,7 @@ const CardInformationForm = ({
               aria-invalid={isSecondError}
             />
             <Input
-              aria-label="third-card-numbers"
+              aria-label="세_번째_카드번호"
               placeholder={PLACEHOLDER.cardNumber}
               value={third}
               maxLength={MAX_LENGTH.cardNumber}
@@ -82,7 +82,7 @@ const CardInformationForm = ({
               aria-invalid={isThirdError}
             />
             <Input
-              aria-label="fourth-card-numbers"
+              aria-label="네_번째_카드번호"
               placeholder={PLACEHOLDER.cardNumber}
               value={fourth}
               maxLength={MAX_LENGTH.cardNumber}
@@ -96,7 +96,7 @@ const CardInformationForm = ({
         <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
           <>
             <Input
-              aria-label="month-expiration"
+              aria-label="유효기간-월"
               placeholder={PLACEHOLDER.month}
               value={month}
               maxLength={MAX_LENGTH.expirationDate}
@@ -104,7 +104,7 @@ const CardInformationForm = ({
               aria-invalid={isMonthError}
             />
             <Input
-              aria-label="year-expiration"
+              aria-label="유효기간-년도"
               placeholder={PLACEHOLDER.year}
               value={year}
               maxLength={MAX_LENGTH.expirationDate}
@@ -117,7 +117,7 @@ const CardInformationForm = ({
       <FormField title={TITLE.userName}>
         <InputField label={LABEL.userName} error={userNameErrorMessage}>
           <Input
-            aria-label="userName"
+            aria-label="소유자_이름"
             placeholder={PLACEHOLDER.userName}
             value={userNameState}
             maxLength={MAX_LENGTH.userName}
