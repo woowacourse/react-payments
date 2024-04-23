@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Input from "../../components/default/input/Input";
 import CardPreview from "../../components/newCardPage/cardPreview/CardPreview";
-import { CardInfo } from "../../types/type";
+import { CardInfo, CardCompany } from "../../types/type";
 import NewCardInputSection from "../../components/newCardPage/newCardInputSection/NewCardInputSection";
 import * as Styled from "./NewCardPage.styled";
 import { validateCVC, validateCardExpiration, validateCardNumber, validatePassword, validateUserName } from "../../validators/newCardInputValidator";
 import { FORM_FIELDS } from "../../constants/setting";
+import Dropdown from "../../components/default/dropdown/Dropdown";
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -101,6 +102,13 @@ const NewCardPage = () => {
     }
   };
 
+  const handleCardCompanyChange = (value: CardCompany) => {
+    setCardInfo({
+      ...cardInfo,
+      cardCompany: value,
+    });
+  };
+
   const handleUserNameChange = (value: string) => {
     const errorMessageCopy = validateUserName(value);
 
@@ -194,7 +202,10 @@ const NewCardPage = () => {
           label={FORM_FIELDS.CARD_COMPANY.LABEL}
           errorMessage={[""]}
         >
-          <div>드롭다운</div>
+          <Dropdown
+            selectList={FORM_FIELDS.CARD_COMPANY.OPTIONS}
+            onChange={(selectedValue: CardCompany) => handleCardCompanyChange(selectedValue)}
+          />
         </NewCardInputSection>
 
         {/* 입력 - 카드 번호 */}
