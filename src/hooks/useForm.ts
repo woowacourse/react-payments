@@ -23,15 +23,21 @@ const useForm = (defaultValues: FormState) => {
   };
 
   const formProps = {
-    cardNumberState,
-    setCardNumberState,
-    cardNumberErrorState,
-    expirationDateState,
-    setExpirationDateState,
-    expirationDateErrorState,
-    userNameState,
-    setUserNameState,
-    isUserNameError,
+    cardNumbers: {
+      cardNumberState,
+      setCardNumberState,
+      cardNumberErrorState,
+    },
+    expirationDate: {
+      expirationDateState,
+      setExpirationDateState,
+      expirationDateErrorState,
+    },
+    userName: {
+      userNameState,
+      setUserNameState,
+      isUserNameError,
+    },
   };
 
   return { previewProps, formProps };
