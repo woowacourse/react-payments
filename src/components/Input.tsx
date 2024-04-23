@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onStateChange: (value: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({ inputCss, type, placeholder, onStateChange, maxLength }) => {
+function Input({ inputCss, type, placeholder, onStateChange, maxLength }: InputProps) {
   return (
     <input
       maxLength={maxLength}
@@ -21,6 +21,6 @@ const Input: React.FC<InputProps> = ({ inputCss, type, placeholder, onStateChang
       onChange={(e) => onStateChange(e.target.value)}
     ></input>
   );
-};
+}
 
 export default Input;
