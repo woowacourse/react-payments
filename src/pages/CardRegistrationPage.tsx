@@ -6,6 +6,7 @@ import CardExpirationInput from '../components/CardForm/CardExpirationInput/Card
 import CardNumberInput from '../components/CardForm/CardNumberInput/CardNumberInput';
 import CardCompanyInput from '../components/CardForm/CardCompanyInput/CardCompanyInput';
 import CardCVCInput from '../components/CardForm/CardCVCInput/CardCVCInput';
+import CardPasswordInput from '../components/CardForm/CardPasswordInput/CardPasswordInput';
 
 import * as S from '../styles/App.style';
 
@@ -42,6 +43,7 @@ const CardRegistrationPage = () => {
         <CardOwnerInput handleOwner={handleOwner} />
         <CardCompanyInput />
         <CardCVCInput />
+        <CardPasswordInput />
       </S.CardForm>
     </S.AppLayout>
   );
