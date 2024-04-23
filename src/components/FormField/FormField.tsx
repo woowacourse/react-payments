@@ -3,10 +3,9 @@ import * as Form from './style';
 interface FormFieldProps {
   title: string;
   caption?: string;
-  children: JSX.Element;
 }
 
-const FormField = ({ title, caption, children }: FormFieldProps) => {
+const FormField = ({ title, caption, children }: React.PropsWithChildren<FormFieldProps>) => {
   return (
     <Form.Field>
       <Form.TitleContainer>
