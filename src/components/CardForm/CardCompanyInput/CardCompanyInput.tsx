@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 const CardCompanyInputContainer = styled.div`
   position: relative;
+  padding-bottom: 22px;
 `;
 
 const SelectedCardCompanyBox = styled.div`
@@ -21,11 +22,13 @@ const SelectedCardCompanyBox = styled.div`
 `;
 
 const CardCompanyOptionList = styled.ul`
+  z-index: 999;
   position: absolute;
   top: 38px;
   width: 100%;
   border: 1px solid ${({ theme }) => theme.color.primary.light};
   border-radius: 2px;
+  background: #ffffff;
   font-size: ${({ theme }) => theme.fontSize.base};
 `;
 

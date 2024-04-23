@@ -4,9 +4,10 @@ import CardPreview from '../components/CardForm/CardPreview/CardPreview';
 import CardOwnerInput from '../components/CardForm/CardOwnerInput/CardOwnerInput';
 import CardExpirationInput from '../components/CardForm/CardExpirationInput/CardExpirationInput';
 import CardNumberInput from '../components/CardForm/CardNumberInput/CardNumberInput';
+import CardCompanyInput from '../components/CardForm/CardCompanyInput/CardCompanyInput';
+import CardCVCInput from '../components/CardForm/CardCVCInput/CardCVCInput';
 
 import * as S from '../styles/App.style';
-import CardCompanyInput from '../components/CardForm/CardCompanyInput/CardCompanyInput';
 
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -40,6 +41,7 @@ const CardRegistrationPage = () => {
         <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />
         <CardOwnerInput handleOwner={handleOwner} />
         <CardCompanyInput />
+        <CardCVCInput />
       </S.CardForm>
     </S.AppLayout>
   );
