@@ -1,6 +1,6 @@
+import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
-import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import { CARD_BRAND_INFO } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
