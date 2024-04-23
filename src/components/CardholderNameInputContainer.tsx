@@ -3,19 +3,19 @@ import { ErrorWrapper, ErrorText } from '../styles/common';
 import InputSection from './common/InputSection';
 
 interface CardholderNameInputContainerProps {
-  data: string;
-  setData: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
   updateErrorStatus: (targetValue?: string) => void;
 }
 
 const CardholderNameInputContainer = ({
-  data,
-  setData,
+  value,
+  setValue,
   errorStatus,
   updateErrorStatus,
 }: CardholderNameInputContainerProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value.toUpperCase());
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
 
   return (
     <div>
@@ -23,7 +23,7 @@ const CardholderNameInputContainer = ({
         <Input
           id="cardholder-name-input"
           isError={errorStatus.isError}
-          value={data}
+          value={value}
           onChange={onChange}
           onBlur={() => updateErrorStatus()}
           placeholder="JOHN DOE"

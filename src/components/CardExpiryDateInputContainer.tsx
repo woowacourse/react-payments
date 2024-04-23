@@ -9,30 +9,30 @@ type YY = string;
 type TErrorStatusUpdater = (targetValue?: string) => void;
 
 interface CardExpiryDateInputContainerProps {
-  data: { month: MM; year: YY };
-  dataSetter: {
-    month: React.Dispatch<React.SetStateAction<string>>;
-    year: React.Dispatch<React.SetStateAction<string>>;
+  monthControl: {
+    value: MM;
+    setValue: React.Dispatch<React.SetStateAction<string>>;
+    errorStatus: IErrorStatus;
+    updateErrorStatus: TErrorStatusUpdater;
   };
-  errorStatus: { month: IErrorStatus; year: IErrorStatus };
-  errorStatusUpdater: { month: TErrorStatusUpdater; year: TErrorStatusUpdater };
+  yearControl: {
+    value: YY;
+    setValue: React.Dispatch<React.SetStateAction<string>>;
+    errorStatus: IErrorStatus;
+    updateErrorStatus: TErrorStatusUpdater;
+  };
 }
 
-const CardExpiryDateInputContainer = ({
-  data,
-  dataSetter: { month: setMonth, year: setYear },
-  errorStatus: { month: monthErrorStatus, year: yearErrorStatus },
-  errorStatusUpdater: { month: updateMonthErrorStatus, year: updateYearErrorStatus },
-}: CardExpiryDateInputContainerProps) => {
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => setMonth(e.target.value);
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => setYear(e.target.value);
+const CardExpiryDateInputContainer = ({ monthControl, yearControl }: CardExpiryDateInputContainerProps) => {
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => monthControl.setValue(e.target.value);
+  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => yearControl.setValue(e.target.value);
 
   const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const shouldConvertToTwoDigits = e.target.value.length === 1 && e.target.value !== '0';
     const month = shouldConvertToTwoDigits ? `0${e.target.value}` : e.target.value;
 
-    setMonth(month);
-    updateMonthErrorStatus(month);
+    monthControl.setValue(month);
+    monthControl.updateErrorStatus(month);
   };
 
   return (
@@ -45,8 +45,8 @@ const CardExpiryDateInputContainer = ({
       >
         <Input
           id="card-expiry-month-input"
-          isError={monthErrorStatus.isError}
-          value={data.month}
+          isError={monthControl.errorStatus.isError}
+          value={monthControl.value}
           onChange={onMonthChange}
           onBlur={onMonthBlur}
           placeholder="01"
@@ -55,18 +55,18 @@ const CardExpiryDateInputContainer = ({
         />
         <Input
           id="card-expiry-year-input"
-          isError={yearErrorStatus.isError}
-          value={data.year}
+          isError={yearControl.errorStatus.isError}
+          value={yearControl.value}
           onChange={onYearChange}
-          onBlur={() => updateYearErrorStatus()}
+          onBlur={() => yearControl.updateErrorStatus()}
           placeholder="24"
           maxLength={2}
           width="48%"
         />
       </InputSection>
       <ErrorWrapper>
-        <ErrorText>{monthErrorStatus.errorMessage}</ErrorText>
-        <ErrorText>{yearErrorStatus.errorMessage}</ErrorText>
+        <ErrorText>{monthControl.errorStatus.errorMessage}</ErrorText>
+        <ErrorText>{yearControl.errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

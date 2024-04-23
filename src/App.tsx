@@ -14,7 +14,11 @@ const App = () => {
 
   return (
     <AppLayout>
-      <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
+      <CardPreview
+        cardNumbers={cardNumbers.value}
+        expiryDate={{ month: expiryDate.monthControl.value, year: expiryDate.yearControl.value }}
+        cardholderName={cardholderName.value}
+      />
       <CardInfoInputWrapper>
         <PasswordInputContainer {...password} />
         <CvcInputContainer {...cvc} />

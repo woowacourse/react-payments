@@ -3,19 +3,19 @@ import { ErrorText, ErrorWrapper } from '../styles/common';
 import Input from './common/Input';
 
 export interface IPasswordInputContainerProps {
-  data: string;
-  setData: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
   updateErrorStatus: (targetValue?: string) => void;
 }
 
 export default function PasswordInputContainer({
-  data,
-  setData,
+  value,
+  setValue,
   errorStatus,
   updateErrorStatus,
 }: IPasswordInputContainerProps) {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   return (
     <div>
@@ -26,7 +26,7 @@ export default function PasswordInputContainer({
         labelText="비밀번호 앞 2자리"
       >
         <Input
-          value={data}
+          value={value}
           maxLength={2}
           type="password"
           width="100%"

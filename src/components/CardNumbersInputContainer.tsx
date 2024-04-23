@@ -6,8 +6,8 @@ import getObjectKeys from '../utils/getObjectKeys';
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersInputContainerProps {
-  data: Record<CardNumberKey, string>;
-  setData: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
+  value: Record<CardNumberKey, string>;
+  setValue: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
   updateErrorStatus: (key: CardNumberKey) => void;
 }
@@ -19,14 +19,14 @@ const INPUT_TYPE = {
 };
 
 export default function CardNumberContainer({
-  data,
-  setData,
+  value,
+  setValue,
   errorStatus,
   updateErrorStatus,
 }: CardNumbersInputContainerProps) {
-  const cardNumbersKeys = getObjectKeys(data);
+  const cardNumbersKeys = getObjectKeys(value);
   const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [key]: e.target.value });
+    setValue({ ...value, [key]: e.target.value });
   };
 
   return (
@@ -45,7 +45,7 @@ export default function CardNumberContainer({
               key={key}
               id={`${key}-card-numbers-input`}
               isError={errorStatus.isError[key]}
-              value={data[key]}
+              value={value[key]}
               onChange={generateOnChange(key)}
               onBlur={() => updateErrorStatus(key)}
               placeholder="1234"

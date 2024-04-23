@@ -3,14 +3,14 @@ import Input from './common/Input';
 import InputSection from './common/InputSection';
 
 export interface ICvcInputContainerProps {
-  data: string;
-  setData: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
   updateErrorStatus: (targetValue?: string) => void;
 }
 
-const CvcInputContainer = ({ data, setData, errorStatus, updateErrorStatus }: ICvcInputContainerProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setData(e.target.value);
+const CvcInputContainer = ({ value, setValue, errorStatus, updateErrorStatus }: ICvcInputContainerProps) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const CvcInputContainer = ({ data, setData, errorStatus, updateErrorStatus }: IC
         <Input
           placeholder="123"
           maxLength={3}
-          value={data}
+          value={value}
           onChange={onChange}
           onBlur={() => updateErrorStatus()}
           width="100%"

@@ -1,19 +1,33 @@
-import useCvc from './useCvc';
-import useCardNumbers from './useCardNumbers';
-import useCardHolderName from './useCardholderName';
-import useExpiryDate from './useExpiryDate';
-import usePassword from './usePassword';
+import useInput from './useInput';
+import useInputs from './useInputs';
+
+import {
+  validateCardNumber,
+  validateCardholderName,
+  validateExpiryMonth,
+  validateExpiryYear,
+  validateCvc,
+  validatePassword,
+} from '../validators';
+
+const initialCardNumbers = {
+  first: '',
+  second: '',
+  third: '',
+  fourth: '',
+};
 
 const useCardInfo = () => {
-  const cardNumbersControl = useCardNumbers();
-  const expiryDateControl = useExpiryDate();
-  const cardholderNameControl = useCardHolderName();
-  const cvcControl = useCvc();
-  const passwordControl = usePassword();
+  const cardNumbersControl = useInputs(validateCardNumber, initialCardNumbers);
+  const expiryMonthControl = useInput(validateExpiryMonth);
+  const expiryYearControl = useInput(validateExpiryYear);
+  const cardholderNameControl = useInput(validateCardholderName);
+  const cvcControl = useInput(validateCvc);
+  const passwordControl = useInput(validatePassword);
 
   return {
     cardNumbers: cardNumbersControl,
-    expiryDate: expiryDateControl,
+    expiryDate: { monthControl: expiryMonthControl, yearControl: expiryYearControl },
     cardholderName: cardholderNameControl,
     cvc: cvcControl,
     password: passwordControl,
