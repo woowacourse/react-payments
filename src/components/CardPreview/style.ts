@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ cardCompanyColor: string }>`
   width: 212px;
   height: 132px;
-  background: ${({ theme }) => theme.colors.cardPreviewBackground};
+  background: ${(props) => props.cardCompanyColor};
   border-radius: 4px;
   color: ${({ theme }) => theme.colors.cardPreviewText};
 `;

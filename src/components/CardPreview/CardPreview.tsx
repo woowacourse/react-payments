@@ -1,4 +1,5 @@
 import { getCardBrandImg } from "../../utils/getCardBrand";
+import { getCompanyColor } from "../../utils/getCompanyColor";
 import * as S from "./style";
 
 interface Props {
@@ -9,10 +10,12 @@ export default function CardPreview({ cardInformation }: Props) {
   const cardBrandImg = getCardBrandImg(cardInformation.cardNumbers[0].value);
 
   return (
-    <S.CardContainer>
+    <S.CardContainer
+      cardCompanyColor={getCompanyColor(cardInformation.cardCompany.value)}
+    >
       <S.CardHeader>
-        <S.CardIC></S.CardIC>
-        {cardBrandImg && <S.CardBrandImg src={cardBrandImg}></S.CardBrandImg>}
+        <S.CardIC />
+        {cardBrandImg && <S.CardBrandImg src={cardBrandImg} />}
       </S.CardHeader>
       <S.CardInfoContainer>
         <S.CardPreviewTextContainer>
