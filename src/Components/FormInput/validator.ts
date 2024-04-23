@@ -4,6 +4,8 @@ export interface validatorReturn<T> {
   value?: T;
 }
 
+export type ValidatorType<T> = (input: string, name?: "month" | "year") => validatorReturn<T>;
+
 const ERROR_MESSAGES = {
   onlyNumber: "숫자만 입력해주세요.",
   notValidMonth: "유효한 월이 아닙니다",
@@ -17,7 +19,7 @@ export function cardNumbersValidator(input: string): validatorReturn<number> {
   return { isValid: true, value: number };
 }
 
-export function cardPeriodValidator(input: string, category: "month" | "year"): validatorReturn<number> {
+export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn<number> {
   const number = Number(input);
   const monthValid = { min: 0, max: 12 };
   if (Number.isNaN(number)) return { isValid: false, message: ERROR_MESSAGES.onlyNumber };
