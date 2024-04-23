@@ -4,6 +4,7 @@ import {
   OwnerNameTextField,
   PreviewCreditCard,
 } from '@components/payments';
+import CardBrandTextField from '@components/payments/CardBrandTextField/CardBrandTextField';
 
 import {
   PreviewCreditCardStyleContainer,
@@ -11,6 +12,7 @@ import {
 } from '@components/payments/CreditCardForm/container';
 
 import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
+import useCardBrandDropdown from '@hooks/creditCard/useCardBrandDropdown';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
 
 const CreditCardForm: React.FC = () => {
@@ -19,6 +21,8 @@ const CreditCardForm: React.FC = () => {
   const { expiration, expirationError, handleExpirationChange } = useChangeExpiration();
 
   const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+
+  const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
 
   return (
     <>
@@ -30,10 +34,10 @@ const CreditCardForm: React.FC = () => {
         />
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>
-        <CardNumberTextField
-          cardNumbers={cardNumbers}
-          onAddCardNumber={handleCardNumberChange}
-          cardNumberError={cardNumberError}
+        <OwnerNameTextField
+          ownerName={ownerName}
+          onAddOwnerName={handleOwnerNameChange}
+          ownerNameError={ownerNameError}
         />
         <ExpirationDateTextField
           month={expiration.month}
@@ -41,10 +45,17 @@ const CreditCardForm: React.FC = () => {
           onAddExpirationDate={handleExpirationChange}
           expirationError={expirationError}
         />
-        <OwnerNameTextField
-          ownerName={ownerName}
-          onAddOwnerName={handleOwnerNameChange}
-          ownerNameError={ownerNameError}
+        <CardBrandTextField
+          isOpen={isOpen}
+          currentCardBrand={cardBrand}
+          onSelectCardBrand={handleSelectCardBrand}
+          onToggleDropdown={handleToggle}
+        />
+        <CardNumberTextField
+          isCardNumberError={isCardNumberError}
+          cardNumbers={cardNumbers}
+          onAddCardNumber={handleCardNumberChange}
+          cardNumberError={cardNumberError}
         />
       </TextFieldStyleContainer>
     </>

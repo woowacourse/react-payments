@@ -1,14 +1,23 @@
 import TextField from '@components/common/TextField/TextField';
 import CardNumberInput from '@components/payments/CardNumberInput/CardNumberInput';
+import { useFocusInputs, useUUID } from '@hooks/index';
 
 interface CardNumberTextFieldProps {
+  isCardNumberError: boolean;
   cardNumbers: string[];
   onAddCardNumber: (index: number, value: string) => void;
   cardNumberError: { errorConditions: boolean[]; errorMessage: string };
 }
 
-const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, onAddCardNumber, cardNumberError }) => {
-  const isError = cardNumberError.errorConditions.some((errorCondition) => errorCondition);
+const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({
+  isCardNumberError,
+  cardNumbers,
+  onAddCardNumber,
+  cardNumberError,
+}) => {
+  const { inputsRef, focusInputByIndex } = useFocusInputs(cardNumbers.length);
+
+  const { current: uuids } = useUUID(cardNumbers.length);
   return (
     <section>
       <TextField.Title title="결제할 카드 번호를 입력해 주세요" />
@@ -17,15 +26,23 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({ cardNumbers, 
       <TextField.Content>
         {cardNumbers.map((cardNumber, index) => (
           <CardNumberInput
+            key={uuids[index]}
+            refCallback={(element) => {
+              inputsRef.current[index] = element;
+            }}
             id={index === 0 ? 'cardNumber' : ''}
-            key={index}
             isError={cardNumberError.errorConditions[index]}
             value={cardNumber}
-            onAddCardNumber={(event) => onAddCardNumber(index, String(event.target.value))}
+            onAddCardNumber={(event) => {
+              onAddCardNumber(index, String(event.target.value));
+
+              const isMaxLength = event.target.value.replace(/\D/, '').length === event.target.maxLength;
+              if (isMaxLength) focusInputByIndex(index + 1);
+            }}
           />
         ))}
       </TextField.Content>
-      <TextField.ErrorText isError={isError} errorText={cardNumberError.errorMessage} />
+      <TextField.ErrorText isError={isCardNumberError} errorText={cardNumberError.errorMessage} />
     </section>
   );
 };

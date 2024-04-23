@@ -50,6 +50,7 @@ export const Default: Story = {
   },
 
   args: {
+    isCardNumberError: false,
     cardNumberError: { errorConditions: [false, false, false, false], errorMessage: '' },
     cardNumbers: ['', '', '', ''],
   },
@@ -65,6 +66,7 @@ export const Error: Story = {
   },
 
   args: {
+    isCardNumberError: true,
     cardNumberError: {
       errorConditions: [false, true, true, true],
       errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
@@ -83,6 +85,7 @@ export const Complete: Story = {
   },
 
   args: {
+    isCardNumberError: false,
     cardNumberError: { errorConditions: [false, false, false, false], errorMessage: '' },
     cardNumbers: ['1234', '5678', '9999', '2222'],
   },

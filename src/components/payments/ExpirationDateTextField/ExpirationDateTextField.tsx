@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import TextField from '@components/common/TextField/TextField';
 import ExpirationDateInput from '@components/payments/ExpirationDateInput/ExpirationDateInput';
 
@@ -14,6 +16,8 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   onAddExpirationDate,
   expirationError,
 }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <section>
       <TextField.Title title="카드 유효기간을 입력해 주세요" />
@@ -25,9 +29,16 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           placeholder="MM"
           isError={expirationError.isError}
           value={month}
-          onAddExpirationDate={(event) => onAddExpirationDate('month', event.target.value)}
+          onAddExpirationDate={(event) => {
+            onAddExpirationDate('month', event.target.value)
+
+            if(event.target.value.length === event.target.maxLength) inputRef.current?.focus()
+          }}
         />
         <ExpirationDateInput
+          refCallback={(element) => {
+            inputRef.current = element;
+          }}
           placeholder="YY"
           isError={expirationError.isError}
           value={year}

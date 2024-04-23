@@ -1,39 +1,27 @@
-import { InputType } from './Input.type';
-
+import { forwardRef } from 'react';
 import styles from './Input.module.css';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id?: string;
-  type?: InputType;
-  value?: string | number;
   isError?: boolean;
-  maxLength?: number;
-  placeholder: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input: React.FC<InputProps> = ({
-  id,
-  type = 'text',
-  maxLength = 4,
-  isError = false,
-  placeholder,
-  value,
-  onChange,
-}) => {
-  const errorInputClass = `${isError ? styles.errorInput : ''}`;
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ id, type = 'text', maxLength = 4, isError = false, placeholder, value, onChange }, ref) => {
+    const errorInputClass = `${isError ? styles.errorInput : ''}`;
 
-  return (
-    <input
-      className={`${styles.inputStyle} ${errorInputClass}`}
-      id={id}
-      maxLength={maxLength}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
+    return (
+      <input
+        className={`${styles.inputStyle} ${errorInputClass}`}
+        id={id}
+        ref={ref}
+        maxLength={maxLength}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
+    );
+  },
+);
 
 export default Input;
