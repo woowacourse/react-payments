@@ -6,18 +6,18 @@ import CardNumbersInputContainer from './components/CardNumbersInputContainer';
 import CardPreview from './components/CardPreview';
 
 import useCardInfo from './hooks/useCardInfo';
-import CVCInputContainer from './components/CVCInputContainer';
+import CvcInputContainer from './components/CvcInputContainer';
 import PasswordInputContainer from './components/PasswordInputContainer';
 
 const App = () => {
-  const { cardNumbers, expiryDate, cardholderName } = useCardInfo();
+  const { cardNumbers, expiryDate, cardholderName, cvc } = useCardInfo();
 
   return (
     <AppLayout>
       <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
       <CardInfoInputWrapper>
         <PasswordInputContainer />
-        <CVCInputContainer />
+        <CvcInputContainer {...cvc} />
         <CardholderNameInputContainer {...cardholderName} />
         <CardExpiryDateInputContainer {...expiryDate} />
         <CardNumbersInputContainer {...cardNumbers} />

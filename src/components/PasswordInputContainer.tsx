@@ -13,7 +13,7 @@ export default function PasswordInputContainer(props: IPasswordInputContainerPro
         labelFor="password"
         labelText="비밀번호 앞 2자리"
       >
-        <Input maxLength={2} type="password" />
+        <Input maxLength={2} type="password" width="100%" />
       </InputSection>
       <ErrorWrapper>
         <ErrorText>카드 소유자 이름을 영어로만 입력해주세요</ErrorText>
