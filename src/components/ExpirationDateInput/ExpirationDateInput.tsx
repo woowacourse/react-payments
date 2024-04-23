@@ -1,68 +1,66 @@
-import Input from '../common/Input/Input';
+import { Fragment } from 'react/jsx-runtime';
 import Field from '../common/Field/Field';
+import Input from '../common/Input/Input';
 import Label from '../common/Label/Label';
 
 import {
-  isInteger,
   hasTwoDigit,
-  isValidMonth,
+  isInteger,
   isValidDate,
+  isValidMonth,
 } from '../../domain/validators';
 
-import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
-
-import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
-import { Fragment } from 'react/jsx-runtime';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
+import { CustomInputHandlerProps } from '../../hooks/useAddCardFormField';
+import { validateInput } from '../../utils/validateInput';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
 
 interface ExpirationDateInputProps {
-  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+  expirationDate: ExpirationDate;
+  errorMessage: string;
+  isError: Record<string, boolean>;
+  onChange: (props: CustomInputHandlerProps<ExpirationDate>) => void;
+  onBlur: (props: CustomInputHandlerProps<ExpirationDate>) => void;
 }
 
-const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
-  const initialValues = {
-    month: '',
-    year: '',
+const ExpirationDateInput = ({
+  expirationDate,
+  errorMessage,
+  isError,
+  onChange,
+  onBlur,
+}: ExpirationDateInputProps) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as ExpirationDateKey;
+
+    const validations = [
+      { test: isInteger, errorMessage: ERRORS.isNotInteger },
+    ];
+    const result = validateInput(value, validations);
+    onChange({ ...result, name, value });
   };
 
-  const validateInputOnChange = ({ value }: { value: string }) => {
-    if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotInteger };
-    }
-    return { isValid: true, errorMsg: '' };
-  };
+  const handleOnBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as ExpirationDateKey;
 
-  const validateInputOnBlur = ({ value }: InputType) => {
-    if (!hasTwoDigit(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotTwoDigit };
-    }
-    if (!isValidMonth(expirationDate.month)) {
-      return { isValid: false, errorMsg: ERRORS.inValidMonth };
-    }
-    if (!isValidDate(expirationDate)) {
-      return { isValid: false, errorMsg: ERRORS.deprecatedCard };
-    }
-    return { isValid: true, errorMsg: '' };
+    const validations = [
+      { test: hasTwoDigit, errorMessage: ERRORS.isNotTwoDigit },
+      {
+        test: () => isValidMonth(expirationDate.month),
+        errorMessage: ERRORS.inValidMonth,
+      },
+      {
+        test: () => isValidDate(expirationDate),
+        errorMessage: ERRORS.deprecatedCard,
+      },
+    ];
+    const result = validateInput(value, validations);
+    onBlur({ ...result, name, value });
   };
-
-  const updateCardData = () => {
-    setCardData('expirationDate', Object.values(expirationDate));
-  };
-
-  const {
-    values: expirationDate,
-    errorMessage,
-    isError,
-    onChange,
-    onBlur,
-  } = useAddCardInput<ExpirationDate>({
-    initialValues,
-    validateInputOnChange,
-    validateInputOnBlur,
-    updateCardData,
-  });
 
   return (
     <Field
@@ -84,8 +82,8 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
               }
               value={expirationDate[name]}
               isError={isError[name]}
-              handleChange={onChange}
-              handleOnBlur={onBlur}
+              handleChange={handleOnChange}
+              handleOnBlur={handleOnBlur}
               maxLength={2}
             />
           </Fragment>

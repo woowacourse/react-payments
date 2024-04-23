@@ -24,3 +24,7 @@ export const isEnglishCharacter = (value: string) => {
   const regex = /^[a-zA-Z\s]+$/;
   return regex.test(value);
 };
+
+export const isNotEmptyString = (value: string) => {
+  return value !== '';
+};

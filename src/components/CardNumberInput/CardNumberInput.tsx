@@ -1,59 +1,51 @@
-import Input from '../common/Input/Input';
+import { Fragment } from 'react/jsx-runtime';
 import Field from '../common/Field/Field';
+import Input from '../common/Input/Input';
 import Label from '../common/Label/Label';
 
 import { hasFourDigit, isInteger } from '../../domain/validators';
 
-import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
-
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { Fragment } from 'react/jsx-runtime';
+import { CustomInputHandlerProps } from '../../hooks/useAddCardFormField';
+import { validateInput } from '../../utils/validateInput';
 
 interface CardNumberInputProps {
-  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+  cardNumbers: CardNumbers;
+  errorMessage: string;
+  isError: Record<string, boolean>;
+  onChange: (props: CustomInputHandlerProps<CardNumbers>) => void;
+  onBlur: (props: CustomInputHandlerProps<CardNumbers>) => void;
 }
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CARD_NUMBER;
 
-export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
-  const initialValues = {
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
+export default function CardNumberInput({
+  cardNumbers,
+  errorMessage,
+  isError,
+  onChange,
+  onBlur,
+}: CardNumberInputProps) {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as CardNumbersKey;
+
+    const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
+    const result = validateInput(value, validators);
+    onChange({ ...result, name, value });
   };
 
-  const validateInputOnChange = ({ value }: InputType) => {
-    if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotInteger };
-    }
-    return { isValid: true, errorMsg: '' };
-  };
+  const handleOnBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as CardNumbersKey;
 
-  const validateInputOnBlur = ({ value }: InputType) => {
-    if (!hasFourDigit(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
-    }
-    return { isValid: true, errorMsg: '' };
+    const validators = [
+      { test: hasFourDigit, errorMessage: ERRORS.isNotFourDigit },
+    ];
+    const result = validateInput(value, validators);
+    onBlur({ ...result, name, value });
   };
-
-  const updateCardData = () => {
-    setCardData('cardNumbers', Object.values(cardNumbers));
-  };
-
-  const {
-    values: cardNumbers,
-    errorMessage,
-    isError,
-    onChange,
-    onBlur,
-  } = useAddCardInput<CardNumbers>({
-    initialValues,
-    validateInputOnChange,
-    validateInputOnBlur,
-    updateCardData,
-  });
 
   return (
     <Field
@@ -73,8 +65,8 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
               placeholder={placeholder}
               value={cardNumbers[name]}
               isError={isError[name]}
-              handleChange={onChange}
-              handleOnBlur={onBlur}
+              handleChange={handleOnChange}
+              handleOnBlur={handleOnBlur}
               maxLength={4}
             />
           </Fragment>

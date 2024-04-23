@@ -8,9 +8,10 @@ import {
 } from '../../constants/cardInfo';
 
 type Brand = 'visa' | 'master';
+type CardPreviewProps = Record<keyof CardInfo, string[]>;
 
 const getCardbrand = (
-  cardNumbers: CardInfo['cardNumbers']
+  cardNumbers: CardPreviewProps['cardNumbers']
 ): Nullable<Brand> => {
   const { visa, master } = CARD_BRAND;
 
@@ -25,7 +26,14 @@ const getCardbrand = (
   return null;
 };
 
-const CardPreview = ({ cardNumbers, expirationDate, ownerName }: CardInfo) => {
+const CardPreview = ({
+  cardNumbers,
+  expirationDate,
+  ownerName,
+  cardIssuer,
+  cvc,
+  password,
+}: CardPreviewProps) => {
   const brand = getCardbrand(cardNumbers);
 
   return (
