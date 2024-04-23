@@ -13,13 +13,14 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   `;
 
 interface PasswordFormSectionProps {
-  changePassword: (name: string) => void;
-  password: string;
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const PasswordFormSection = ({ changePassword, password }: PasswordFormSectionProps) => {
+const PasswordFormSection = (props: PasswordFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = usePasswordFormSection({ changePassword, password })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = usePasswordFormSection({ cardInfo, dispatchCardInfo })
   const secureValue = (input: string) => {
     return '*'.repeat(input.length)
   }
@@ -33,7 +34,7 @@ const PasswordFormSection = ({ changePassword, password }: PasswordFormSectionPr
             className="password-form-section"
             placeholder="123"
             maxLength={OPTION.passwordMaxLength}
-            value={secureValue(password)}
+            value={secureValue(cardInfo.password.value)}
             hasError={inputState.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}

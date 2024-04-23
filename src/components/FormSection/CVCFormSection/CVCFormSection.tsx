@@ -13,13 +13,14 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   `;
 
 interface CVCFormSectionProps {
-  changeCVC: (name: string) => void;
-  cvc: string;
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const CVCFormSection = ({ changeCVC, cvc }: CVCFormSectionProps) => {
+const CVCFormSection = (props: CVCFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ changeCVC, cvc })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -31,7 +32,7 @@ const CVCFormSection = ({ changeCVC, cvc }: CVCFormSectionProps) => {
             className="cvc-form-section"
             placeholder="123"
             maxLength={OPTION.cvcMaxLength}
-            value={cvc}
+            value={cardInfo.cvc.value}
             hasError={inputState.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}

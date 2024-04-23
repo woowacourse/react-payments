@@ -19,6 +19,22 @@ interface CardInfo {
   password: { value: string; isComplete: boolean };
 }
 
+type CardInfoAction =
+  | { type: 'SET_CARD_NUMBERS_VALUE'; value: string[] }
+  | { type: 'SET_CARD_NUMBERS_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_BRAND_VALUE'; value: CardBrand }
+  | { type: 'SET_CARD_BRAND_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_COMPANY_VALUE'; value: CardCompany }
+  | { type: 'SET_CARD_COMPANY_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_EXPIRATION_VALUE'; value: Expiration }
+  | { type: 'SET_CARD_EXPIRATION_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_NAME_VALUE'; value: string }
+  | { type: 'SET_CARD_NAME_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_CVC_VALUE'; value: string }
+  | { type: 'SET_CARD_CVC_COMPLETED'; value: boolean }
+  | { type: 'SET_CARD_PASSWORD_VALUE'; value: string }
+  | { type: 'SET_CARD_PASSWORD_COMPLETED'; value: boolean };
+
 interface Expiration {
   [index: string]: string;
   month: string;

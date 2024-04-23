@@ -4,8 +4,8 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
 
 interface UseExpirationFormSectionProps {
-  changeExpiration: (expiration: Expiration, isComplete?: boolean) => void;
-  expiration: Expiration;
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 interface ExpirationInputState {
@@ -21,7 +21,8 @@ const year = nowDate.getFullYear().toString().slice(2, 4);
 const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
 const now = year + month;
 
-const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpirationFormSectionProps) => {
+const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
   const [inputState, setInputState] = useState<ExpirationInputState>({ month: { hasError: false, hasFocus: false }, year: { hasError: false, hasFocus: false } });
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,9 +38,9 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
         }
       }))
       setErrorMessage(ERROR_MESSAGE.onlyNumber);
-      changeExpiration({ ...expiration, [index]: inputValue.slice(0, -1) })
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue.slice(0, -1) } })
     } else {
-      changeExpiration({ ...expiration, [index]: inputValue })
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue } })
     }
   }
 
@@ -75,17 +76,15 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
   };
 
   const formatMonth = () => {
-    if (expiration.month.length === 0) return
-    if (REGEX.oneToNine.test(expiration.month)) {
-      changeExpiration({ month: '0' + expiration.month, year: expiration.year })
-    }
-    if (REGEX.zero.test(expiration.month)) {
-      changeExpiration({ month: OPTION.minMonth, year: expiration.year })
-    }
-    if (
-      !REGEX.month.test(expiration.month)
+    if (cardInfo.expiration.value.month.length === 0) return
+    if (REGEX.oneToNine.test(cardInfo.expiration.value.month)) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: '0' + cardInfo.expiration.value.month, year: cardInfo.expiration.value.year } })
+    } else if (REGEX.zero.test(cardInfo.expiration.value.month)) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: OPTION.minMonth, year: cardInfo.expiration.value.year } })
+    } else if (
+      !REGEX.month.test(cardInfo.expiration.value.month)
     ) {
-      changeExpiration({ month: OPTION.maxMonth, year: expiration.year })
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: OPTION.maxMonth, year: cardInfo.expiration.value.year } })
     }
   };
 
@@ -94,7 +93,7 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
   }
 
   const validateExpired = () => {
-    const expireDate = +(expiration.year + expiration.month);
+    const expireDate = +(cardInfo.expiration.value.year + cardInfo.expiration.value.month);
     const nowDate = +now;
 
     if (nowDate - expireDate > 0) {
@@ -102,19 +101,19 @@ const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpir
       setErrorMessage(ERROR_MESSAGE.expiredCard);
     } else {
       setErrorMessage('');
-      changeExpiration(expiration, true)
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
     }
   };
 
   const handleValidate = () => {
-    if (expiration.month.length + expiration.year.length === 0) return
+    if (cardInfo.expiration.value.month.length + cardInfo.expiration.value.year.length === 0) return
     let hasAnyError = false;
 
-    if (expiration.month.length !== OPTION.expirationDateMaxLength) {
+    if (cardInfo.expiration.value.month.length !== OPTION.expirationDateMaxLength) {
       setInputState({ ...inputState, month: { ...inputState[month], hasError: true } });
       hasAnyError = true;
     }
-    if (expiration.year.length !== OPTION.expirationDateMaxLength) {
+    if (cardInfo.expiration.value.year.length !== OPTION.expirationDateMaxLength) {
       setInputState({ ...inputState, year: { ...inputState[year], hasError: true } });
       hasAnyError = true;
     }

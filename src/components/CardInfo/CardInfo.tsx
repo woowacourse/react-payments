@@ -10,21 +10,20 @@ import { Container } from './CardInfo.styled';
 
 interface CardInfoProps {
   cardInfo: CardInfo
-  setCardInfo: React.Dispatch<React.SetStateAction<CardInfo>>
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 const CardInfo = (props: CardInfoProps) => {
-  const { setCardInfo, cardInfo } = props;
-  const { changeCompany, changeCardNumbers, changeExpiration, changeName, changeCVC, changePassword } = useCardInfo({ cardInfo, setCardInfo });
+  const { cardInfo, dispatchCardInfo } = props;
 
   return (
     <Container>
-      {!cardInfo.cvc.isComplete || <PasswordFormSection changePassword={changePassword} password={cardInfo.password.value} />}
-      {!cardInfo.name.isComplete || <CVCFormSection changeCVC={changeCVC} cvc={cardInfo.cvc.value} />}
-      {!cardInfo.expiration.isComplete || <NameFormSection changeName={changeName} name={cardInfo.name.value} />}
-      {!cardInfo.cardCompany.isComplete || <ExpirationDateFormSection changeExpiration={changeExpiration} expiration={cardInfo.expiration.value} />}
-      {!cardInfo.cardNumbers.isComplete || <CompanyDropdownFormSection changeCompany={changeCompany} company={cardInfo.cardCompany.value} />}
-      <CardNumbersFormSection changeCardNumbers={changeCardNumbers} value={cardInfo.cardNumbers.value} />
+      {!cardInfo.cvc.isComplete || <PasswordFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.name.isComplete || <CVCFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.expiration.isComplete || <NameFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.cardCompany.isComplete || <ExpirationDateFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.cardNumbers.isComplete || <CompanyDropdownFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      <CardNumbersFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />
     </Container>
   );
 };

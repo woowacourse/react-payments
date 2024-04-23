@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 import OPTION from "../constants/option";
+import cardInfoReducer from "../store/cardInfoReducer";
 
 interface UseCVCFormSectionProps {
-  changeCVC: (cvc: string, isComplete?: boolean) => void;
-  cvc: string
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>;
 }
 
-const useCVCFormSection = ({ changeCVC, cvc }: UseCVCFormSectionProps) => {
+const useCVCFormSection = (props: UseCVCFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
+  // const [cardInfo, action] = useReducer(cardInfoReducer, )
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,11 +19,11 @@ const useCVCFormSection = ({ changeCVC, cvc }: UseCVCFormSectionProps) => {
 
     if (!REGEX.numbers.test(inputValue) && inputValue.length !== 0) {
       setInputState({ ...inputState, errorMessage: ERROR_MESSAGE.onlyNumber })
-      changeCVC(inputValue.slice(0, -1))
+      dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value: inputValue.slice(0, -1) })
     }
     else {
       setInputState({ ...inputState, errorMessage: '' })
-      changeCVC(inputValue)
+      dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value: inputValue })
     }
   }
 
@@ -37,8 +40,8 @@ const useCVCFormSection = ({ changeCVC, cvc }: UseCVCFormSectionProps) => {
       setInputState({ ...inputState, errorMessage: '' })
     }
 
-    if (cvc.length === OPTION.cvcMaxLength) {
-      changeCVC(cvc, true)
+    if (cardInfo.cvc.value.length === OPTION.cvcMaxLength) {
+      dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
     }
   };
 

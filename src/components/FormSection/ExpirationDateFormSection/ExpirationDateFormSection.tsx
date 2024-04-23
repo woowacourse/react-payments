@@ -7,13 +7,14 @@ import * as Styled from '../FormSection.styled';
 import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSection';
 
 interface ExpirationDateFormSectionProps {
-  changeExpiration: (expiration: Expiration, isComplete?: boolean) => void;
-  expiration: Expiration;
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationDateFormSectionProps) => {
+const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ changeExpiration, expiration })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -27,7 +28,7 @@ const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationD
           <PaymentsInputField
             placeholder="MM"
             maxLength={OPTION.expirationDateMaxLength}
-            value={expiration.month}
+            value={cardInfo.expiration.value.month}
             hasError={inputState.month.hasError}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'month')}
             handleOnFocus={() => handleOnFocus('month')}
@@ -36,7 +37,7 @@ const ExpirationDateFormSection = ({ changeExpiration, expiration }: ExpirationD
           <PaymentsInputField
             placeholder="YY"
             maxLength={OPTION.expirationDateMaxLength}
-            value={expiration.year}
+            value={cardInfo.expiration.value.year}
             hasError={inputState.year.hasError}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'year')}
             handleOnFocus={() => handleOnFocus('year')}

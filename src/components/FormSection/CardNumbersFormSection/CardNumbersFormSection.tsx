@@ -8,12 +8,13 @@ import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 import OPTION from '../../../constants/option';
 
 interface CardNumbersFormSectionProps {
-  changeCardNumbers: (cardNumber: string, index: number, isComplete?: boolean) => void;
-  value: string[];
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const CardNumbersFormSection = ({ changeCardNumbers, value }: CardNumbersFormSectionProps) => {
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ changeCardNumbers, value })
+const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -29,7 +30,7 @@ const CardNumbersFormSection = ({ changeCardNumbers, value }: CardNumbersFormSec
               key={index}
               placeholder="1234"
               maxLength={OPTION.cardNumberMaxLength}
-              value={value[index]}
+              value={cardInfo.cardNumbers.value[index]}
               hasError={inputState[index].hasError}
               handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, index)}
               handleOnFocus={() => handleOnFocus(index)}

@@ -3,11 +3,12 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 
 interface UseNameFormSectionProps {
-  changeName: (name: string, isComplete?: boolean) => void;
-  name: string
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const useNameFormSection = ({ changeName, name }: UseNameFormSectionProps) => {
+const useNameFormSection = (props: UseNameFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,11 +16,11 @@ const useNameFormSection = ({ changeName, name }: UseNameFormSectionProps) => {
 
     if (!REGEX.name.test(inputValue) && inputValue.length !== 0) {
       setInputState({ ...inputState, errorMessage: ERROR_MESSAGE.onlyEnglish })
-      changeName(inputValue.slice(0, -1))
+      dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value: inputValue.slice(0, -1) })
     }
     else {
       setInputState({ ...inputState, errorMessage: '' })
-      changeName(inputValue)
+      dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value: inputValue })
     }
   }
 
@@ -36,8 +37,8 @@ const useNameFormSection = ({ changeName, name }: UseNameFormSectionProps) => {
       setInputState({ ...inputState, errorMessage: '' })
     }
 
-    if (name.length !== 0) {
-      changeName(name, true)
+    if (cardInfo.name.value.length !== 0) {
+      dispatchCardInfo({ type: 'SET_CARD_NAME_COMPLETED', value: true })
     }
   };
 

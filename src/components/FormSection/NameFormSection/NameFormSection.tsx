@@ -13,13 +13,14 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   `;
 
 interface NameFormSectionProps {
-  changeName: (name: string, isComplete?: boolean) => void;
-  name: string;
+  cardInfo: CardInfo;
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
+const NameFormSection = (props: NameFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ changeName, name })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -31,7 +32,7 @@ const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
             className="name-form-section"
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
-            value={name}
+            value={cardInfo.name.value}
             hasError={inputState.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
