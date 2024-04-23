@@ -9,14 +9,14 @@ const useInputs = <T extends Record<string, string>>(initialValue: T, validate?:
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState(initialErrorStatus);
 
-  const generateChangeHandler = (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
     setValue({
       ...value,
-      [targetKey]: e.target.value,
+      [name]: e.target.value,
     });
   };
 
-  const generateErrorMessageUpdater = (key: CardNumberKey) => () => {
+  const handleBlur = (key: CardNumberKey) => {
     if (validate) {
       const validationResult = validate(value[key]);
 
@@ -32,8 +32,8 @@ const useInputs = <T extends Record<string, string>>(initialValue: T, validate?:
   return {
     value,
     setValue,
-    generateChangeHandler,
-    generateErrorMessageUpdater,
+    handleChange,
+    handleBlur,
     errorInfo,
   };
 };

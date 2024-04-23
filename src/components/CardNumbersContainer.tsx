@@ -8,16 +8,16 @@ import { CARD_NUMBER_INDEXES, PASSWORD_INPUT_KEYS } from '../constants/card';
 
 export interface CardNumbersContainerProps {
   cardNumbers: Record<CardNumberKey, string>;
-  generateChangeHandler: (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void;
   errorInfo: Record<CardNumberKey, ErrorDetail>;
-  generateErrorMessageUpdater: (targetKey: CardNumberKey) => () => void;
+  handleBlur: (targetKey: CardNumberKey) => void;
 }
 
 export default function CardNumberContainer({
   cardNumbers,
-  generateChangeHandler,
+  handleChange,
   errorInfo,
-  generateErrorMessageUpdater,
+  handleBlur,
 }: CardNumbersContainerProps) {
   const getErrorMessage = useMemo(() => {
     const errorDetails = Object.values(errorInfo);
@@ -42,8 +42,8 @@ export default function CardNumberContainer({
               id={`${key}-card-numbers-input`}
               isError={errorInfo[key].isError}
               value={cardNumbers[key]}
-              onChange={generateChangeHandler(key)}
-              onBlur={generateErrorMessageUpdater(key)}
+              onChange={e => handleChange(e, key)}
+              onBlur={() => handleBlur(key)}
               placeholder="1234"
               maxLength={4}
               type={type}
