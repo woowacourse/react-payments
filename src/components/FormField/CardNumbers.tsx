@@ -37,6 +37,7 @@ const CardNumbers = ({
           maxLength={MAX_LENGTH.cardNumber}
           onChange={setFirst}
           aria-invalid={isFirstError}
+          autoFocus
         />
         <Input
           aria-label="두_번째_카드번호"
