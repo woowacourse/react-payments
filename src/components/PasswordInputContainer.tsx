@@ -33,6 +33,7 @@ export default function PasswordInputContainer({ value, setValue, errorStatus }:
           width="100%"
           onChange={onChange}
           onBlur={bringErrorStatus}
+          placeholder="12"
         />
       </InputSection>
       <ErrorWrapper>
