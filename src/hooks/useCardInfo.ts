@@ -27,7 +27,7 @@ const useCardInfo = () => {
 
   return {
     cardNumbers: cardNumbersControl,
-    expiryDate: { monthControl: expiryMonthControl, yearControl: expiryYearControl },
+    expiryDate: { month: expiryMonthControl, year: expiryYearControl },
     cardholderName: cardholderNameControl,
     cvc: cvcControl,
     password: passwordControl,

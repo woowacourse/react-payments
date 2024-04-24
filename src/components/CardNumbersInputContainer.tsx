@@ -2,6 +2,7 @@ import Input from './common/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import InputSection from './common/InputSection';
 import getObjectKeys from '../utils/getObjectKeys';
+import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -9,7 +10,7 @@ export interface CardNumbersInputContainerProps {
   value: Record<CardNumberKey, string>;
   setValue: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
-  updateErrorStatus: (key: CardNumberKey) => void;
+  register: (key: CardNumberKey) => { value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void };
 }
 
 const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
@@ -18,16 +19,14 @@ const INPUT_TYPE = {
   password: 'password',
 };
 
-export default function CardNumberContainer({
-  value,
-  setValue,
-  errorStatus,
-  updateErrorStatus,
-}: CardNumbersInputContainerProps) {
+export default function CardNumbersContainer({ value, errorStatus, register }: CardNumbersInputContainerProps) {
+  const {
+    displayingErrorStatus: { isError, errorMessage },
+    bringErrorStatus,
+  } = useDisplayingErrorStatus(errorStatus);
+
   const cardNumbersKeys = getObjectKeys(value);
-  const generateOnChange = (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, [key]: e.target.value });
-  };
+  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -42,12 +41,12 @@ export default function CardNumberContainer({
 
           return (
             <Input
+              {...register(key)}
               key={key}
               id={`${key}-card-numbers-input`}
-              isError={errorStatus.isError[key]}
+              isError={isError[key]}
               value={value[key]}
-              onChange={generateOnChange(key)}
-              onBlur={() => updateErrorStatus(key)}
+              onBlur={onBlur}
               placeholder="1234"
               maxLength={4}
               type={type}
@@ -57,7 +56,7 @@ export default function CardNumberContainer({
         })}
       </InputSection>
       <ErrorWrapper>
-        <ErrorText>{errorStatus.errorMessage}</ErrorText>
+        <ErrorText>{errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

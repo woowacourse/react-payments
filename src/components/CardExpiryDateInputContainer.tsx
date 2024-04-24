@@ -1,39 +1,61 @@
+import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 import Input from './common/Input';
-import { ErrorWrapper, ErrorText } from '../styles/common';
 import InputSection from './common/InputSection';
+import { ErrorWrapper, ErrorText } from '../styles/common';
 import { IErrorStatus } from '../validators/index.d';
+import { validateExpiryMonth } from '../validators';
 
 type MM = string;
 type YY = string;
 
-type TErrorStatusUpdater = (targetValue?: string) => void;
+const formatMonth = (month: MM): { isFormatted: boolean; value: string } => {
+  const isNumber = /^\d$/.test(month);
+  if (month.length === 1 && month !== '0' && isNumber) {
+    return { isFormatted: true, value: `0${month}` };
+  }
+
+  return { isFormatted: false, value: month };
+};
 
 interface CardExpiryDateInputContainerProps {
-  monthControl: {
+  month: {
     value: MM;
     setValue: React.Dispatch<React.SetStateAction<string>>;
     errorStatus: IErrorStatus;
-    updateErrorStatus: TErrorStatusUpdater;
   };
-  yearControl: {
+  year: {
     value: YY;
     setValue: React.Dispatch<React.SetStateAction<string>>;
     errorStatus: IErrorStatus;
-    updateErrorStatus: TErrorStatusUpdater;
   };
 }
 
-const CardExpiryDateInputContainer = ({ monthControl, yearControl }: CardExpiryDateInputContainerProps) => {
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => monthControl.setValue(e.target.value);
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => yearControl.setValue(e.target.value);
+const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {
+  const {
+    displayingErrorStatus: { errorMessage: monthErrorMessage, isError: isMonthError },
+    bringErrorStatus: bringMonthErrorStatus,
+  } = useDisplayingErrorStatus(month.errorStatus);
+  const {
+    displayingErrorStatus: { errorMessage: yearErrorMessage, isError: isYearError },
+    bringErrorStatus: bringYearErrorStatus,
+  } = useDisplayingErrorStatus(year.errorStatus);
+
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => month.setValue(e.target.value);
+  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => year.setValue(e.target.value);
 
   const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const shouldConvertToTwoDigits = e.target.value.length === 1 && e.target.value !== '0';
-    const month = shouldConvertToTwoDigits ? `0${e.target.value}` : e.target.value;
+    const { isFormatted, value } = formatMonth(e.target.value);
 
-    monthControl.setValue(month);
-    monthControl.updateErrorStatus(month);
+    month.setValue(value);
+
+    const isValidAfterFormatting = isFormatted && validateExpiryMonth(value);
+    if (isValidAfterFormatting) {
+      return;
+    }
+
+    bringMonthErrorStatus();
   };
+  const onYearBlur = () => bringYearErrorStatus();
 
   return (
     <div>
@@ -45,8 +67,8 @@ const CardExpiryDateInputContainer = ({ monthControl, yearControl }: CardExpiryD
       >
         <Input
           id="card-expiry-month-input"
-          isError={monthControl.errorStatus.isError}
-          value={monthControl.value}
+          isError={isMonthError}
+          value={month.value}
           onChange={onMonthChange}
           onBlur={onMonthBlur}
           placeholder="01"
@@ -55,18 +77,18 @@ const CardExpiryDateInputContainer = ({ monthControl, yearControl }: CardExpiryD
         />
         <Input
           id="card-expiry-year-input"
-          isError={yearControl.errorStatus.isError}
-          value={yearControl.value}
+          isError={isYearError}
+          value={year.value}
           onChange={onYearChange}
-          onBlur={() => yearControl.updateErrorStatus()}
+          onBlur={onYearBlur}
           placeholder="24"
           maxLength={2}
           width="48%"
         />
       </InputSection>
       <ErrorWrapper>
-        <ErrorText>{monthControl.errorStatus.errorMessage}</ErrorText>
-        <ErrorText>{yearControl.errorStatus.errorMessage}</ErrorText>
+        <ErrorText>{monthErrorMessage}</ErrorText>
+        <ErrorText>{yearErrorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );

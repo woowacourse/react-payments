@@ -16,7 +16,7 @@ const App = () => {
     <AppLayout>
       <CardPreview
         cardNumbers={cardNumbers.value}
-        expiryDate={{ month: expiryDate.monthControl.value, year: expiryDate.yearControl.value }}
+        expiryDate={{ month: expiryDate.month.value, year: expiryDate.year.value }}
         cardholderName={cardholderName.value}
       />
       <CardInfoInputWrapper>

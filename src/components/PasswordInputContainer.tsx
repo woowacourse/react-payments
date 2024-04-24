@@ -1,21 +1,22 @@
 import InputSection from './common/InputSection';
 import { ErrorText, ErrorWrapper } from '../styles/common';
 import Input from './common/Input';
+import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 
 export interface IPasswordInputContainerProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   errorStatus: { errorMessage: string; isError: boolean };
-  updateErrorStatus: (targetValue?: string) => void;
 }
 
-export default function PasswordInputContainer({
-  value,
-  setValue,
-  errorStatus,
-  updateErrorStatus,
-}: IPasswordInputContainerProps) {
+export default function PasswordInputContainer({ value, setValue, errorStatus }: IPasswordInputContainerProps) {
+  const {
+    displayingErrorStatus: { errorMessage, isError },
+    bringErrorStatus,
+  } = useDisplayingErrorStatus(errorStatus);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -26,16 +27,17 @@ export default function PasswordInputContainer({
         labelText="비밀번호 앞 2자리"
       >
         <Input
+          isError={isError}
           value={value}
           maxLength={2}
           type="password"
           width="100%"
           onChange={onChange}
-          onBlur={() => updateErrorStatus()}
+          onBlur={onBlur}
         />
       </InputSection>
       <ErrorWrapper>
-        <ErrorText>{errorStatus.errorMessage}</ErrorText>
+        <ErrorText>{errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );
