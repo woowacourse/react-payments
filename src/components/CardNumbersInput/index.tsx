@@ -29,8 +29,9 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers, goNextFormStep } = props;
   const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
+  const FIRST_INPUT_INDEX = 0;
 
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
+  const { focusTargetRef } = useFocusRef<HTMLInputElement>(FIRST_INPUT_INDEX);
   const [numbers, setNumbers] = useState<CardNumbers>(() =>
     Array.from({ length }, () => undefined),
   );
@@ -107,10 +108,13 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
 
   return (
     <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
-      <div className={styles.inputWrap} onChange={handleNumberChange}>
+      <div
+        className={styles.inputWrap}
+        ref={focusTargetRef}
+        onChange={handleNumberChange}
+      >
         {Array.from({ length }).map((_, index) => (
           <Input
-            ref={index === 0 ? focusTargetRef : undefined}
             key={`number_${index}`}
             name={`${NUMBERS_NAME_PREFIX}${index}`}
             type="number"
