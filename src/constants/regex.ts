@@ -4,6 +4,7 @@ const INPUT_REGEX = {
     year: /^[0-9]{2}$/,
   },
   userName: /^[a-zA-Z\s]*$/,
+  CVCNumber: /^\d{3}$/,
 };
 
 export default INPUT_REGEX;

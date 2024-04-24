@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = {
   },
   userName: '소유자 이름은 영문과 공백만 입력 가능합니다.',
   cardIssuer: '카드사를 선택해 주세요.',
+  CVCNumber: 'CVC 번호는 3자리 숫자만 입력 가능합니다.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {
@@ -46,4 +47,11 @@ export const CARD_ISSUER_FORM_MESSAGE = {
     '하나카드',
     '국민카드',
   ],
+};
+
+export const CARD_CVC_FORM_MESSAGE = {
+  title: 'CVC 번호를 입력해 주세요',
+  subTitle: '',
+  label: 'CVC',
+  placeholder: '123',
 };

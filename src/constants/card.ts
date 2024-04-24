@@ -4,6 +4,7 @@ export const INPUT_LENGTH = {
   CARD_NUMBERS: 4,
   CARD_EXPIRATION: 2,
   CARD_USER: 100,
+  CARD_CVC: 3,
 };
 
 export const CARD_MARK = {
