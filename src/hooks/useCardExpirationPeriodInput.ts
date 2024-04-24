@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import INPUT_REGEX from '../constants/regex';
+
 const useCardExpirationPeriodInput = (maxLength: number) => {
   const [period, setPeriod] = useState({ month: '', year: '' });
   const [periodErrors, setPeriodError] = useState({
@@ -8,12 +10,9 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
     expired: false,
   });
 
-  const validateMonth = (value: string) => {
-    const inputMonth = parseInt(value, 10);
-    return inputMonth >= 1 && inputMonth <= 12;
-  };
+  const validateMonth = (value: string) => INPUT_REGEX.period.month.test(value);
 
-  const validateYear = (value: string) => /^[0-9]{2}$/.test(value);
+  const validateYear = (value: string) => INPUT_REGEX.period.year.test(value);
 
   const validateExpiration = (month: string, year: string) => {
     const currentYear = new Date().getFullYear() % 100;
