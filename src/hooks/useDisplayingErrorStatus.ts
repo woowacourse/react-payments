@@ -16,14 +16,14 @@ const useDisplayingErrorStatus = <T extends IAbstractErrorStatus>(origin: T) => 
     const isBoolean = typeof origin.isError === 'boolean';
 
     if (isBoolean) {
-      const displayingErrorExists = Object.values(origin.isError).some(isError => isError);
-      const originErrorNotExists = Object.values(origin.isError).every(isError => !isError);
-      const errorDisappeared = displayingErrorExists && originErrorNotExists;
+      const errorDisappeared = displayingErrorStatus.isError && !origin.isError;
       if (errorDisappeared) {
         bringErrorStatus();
       }
     } else {
-      const errorDisappeared = displayingErrorStatus.isError && !origin.isError;
+      const displayingErrorExists = Object.values(origin.isError).some(isError => isError);
+      const originErrorNotExists = Object.values(origin.isError).every(isError => !isError);
+      const errorDisappeared = displayingErrorExists && originErrorNotExists;
       if (errorDisappeared) {
         bringErrorStatus();
       }
