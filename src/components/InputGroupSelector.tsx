@@ -2,9 +2,15 @@ import { css } from '@emotion/react';
 import ErrorMessage from './ErrorMessage';
 import InputTitle from './InputTitle';
 import { InputChangePropsType, informationSectionType } from '../types/card';
-import { CARD_CVC, CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER } from '../constants/inputInformation';
+import {
+  CARD_CVC,
+  CARD_NUMBER,
+  CARD_OWNER,
+  CARD_PASSWORD,
+  CARD_PERIOD,
+  CARD_PROVIDER,
+} from '../constants/inputInformation';
 import Selector from './Selector';
-import { CARD_PROVIDER_SELECT } from '../constants/cardInformation';
 
 const inputGroupStyle = css({
   display: 'flex',
@@ -37,18 +43,18 @@ const inputBoxStyle = css({
 interface InputGroupType {
   onInputChange: ({ value, index, inputSection }: InputChangePropsType) => void;
   informationSection: informationSectionType;
-  // isError: boolean[];
+  isError: boolean[];
   errorMessage: string;
 }
 
-// function InputGroupSelector({ onInputChange, informationSection, isError, errorMessage }: InputGroupType) {
-function InputGroupSelector({ onInputChange, errorMessage, informationSection }: InputGroupType) {
+function InputGroupSelector({ onInputChange, isError, errorMessage, informationSection }: InputGroupType) {
   const getTypeTable = {
     number: CARD_NUMBER,
     period: CARD_PERIOD,
     owner: CARD_OWNER,
     provider: CARD_PROVIDER,
     cvc: CARD_CVC,
+    password: CARD_PASSWORD,
   };
 
   const { title, subtitle } = getTypeTable[informationSection];
@@ -63,7 +69,7 @@ function InputGroupSelector({ onInputChange, errorMessage, informationSection }:
         <div css={inputBoxStyle}>
           <Selector onInputChange={(provider: string) => onInputChange({ value: provider, index: 0 })} />
         </div>
-        <ErrorMessage value={errorMessage} />
+        {isError && <ErrorMessage value={errorMessage} />}
       </div>
     </div>
   );

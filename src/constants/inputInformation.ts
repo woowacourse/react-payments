@@ -43,4 +43,13 @@ export const CARD_CVC = {
   maxLength: 3,
 } as const;
 
+export const CARD_PASSWORD = {
+  type: 'password',
+  title: '비밀번호를 입력해 주세요',
+  subtitle: '비밀번호 앞 2자리를 입력해주세요',
+  label: '비밀번호 앞 2자리',
+  placeholders: [''],
+  maxLength: 2,
+} as const;
+
 export const PERIOD = ['month', 'year'] as const;

@@ -3,7 +3,15 @@ import InputTitle from './InputTitle';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
 import { InputChangePropsType, informationSectionType } from '../types/card';
-import { CARD_CVC, CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER, PERIOD } from '../constants/inputInformation';
+import {
+  CARD_CVC,
+  CARD_NUMBER,
+  CARD_OWNER,
+  CARD_PASSWORD,
+  CARD_PERIOD,
+  CARD_PROVIDER,
+  PERIOD,
+} from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
 const inputGroupStyle = css({
@@ -67,12 +75,16 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
     owner: CARD_OWNER,
     provider: CARD_PROVIDER,
     cvc: CARD_CVC,
+    password: CARD_PASSWORD,
   };
 
   const { title, subtitle, label, placeholders, maxLength } = getTypeTable[informationSection];
 
   const getInputType = (type: informationSectionType, index: number) => {
-    if (type === 'number' && (index === CARD_DISPLAY_INDEX.third || index === CARD_DISPLAY_INDEX.fourth))
+    if (
+      type === 'password' ||
+      (type === 'number' && (index === CARD_DISPLAY_INDEX.third || index === CARD_DISPLAY_INDEX.fourth))
+    )
       return 'password';
     if (type === 'number' || type === 'period') return 'number';
     return 'input';
@@ -107,7 +119,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
             );
           })}
         </div>
-        <ErrorMessage value={errorMessage} />
+        {isError && <ErrorMessage value={errorMessage} />}
       </div>
     </div>
   );

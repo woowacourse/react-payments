@@ -1,4 +1,12 @@
-import { CARD_CVC, CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER, PERIOD } from '../constants/inputInformation';
+import {
+  CARD_CVC,
+  CARD_NUMBER,
+  CARD_OWNER,
+  CARD_PASSWORD,
+  CARD_PERIOD,
+  CARD_PROVIDER,
+  PERIOD,
+} from '../constants/inputInformation';
 
 export type CardDetailType = typeof CARD_NUMBER | typeof CARD_PERIOD | typeof CARD_OWNER;
 export type informationSectionType =
@@ -6,9 +14,10 @@ export type informationSectionType =
   | typeof CARD_PERIOD.type
   | typeof CARD_OWNER.type
   | typeof CARD_PROVIDER.type
-  | typeof CARD_CVC.type;
+  | typeof CARD_CVC.type
+  | typeof CARD_PASSWORD.type;
 
-export type InformationDetailType = 'number' | 'owner' | 'month' | 'year' | 'provider' | 'cvc';
+export type InformationDetailType = 'number' | 'owner' | 'month' | 'year' | 'provider' | 'cvc' | 'password';
 
 export const cardBrand = {
   visa: 'visa',

@@ -55,6 +55,7 @@ function App() {
   const [cardOwner, setCardOwner] = useState<CardOwnerType>({ data: '', errorMessage: '' });
   const [cardProvider, setCardProvider] = useState<CardOwnerType>({ data: '', errorMessage: '' });
   const [cardCvc, setCardCvc] = useState<CardOwnerType>({ data: '', errorMessage: '' });
+  const [cardPassword, setCardPassword] = useState<CardOwnerType>({ data: '', errorMessage: '' });
 
   const [inputError, setInputError] = useState({
     number: [true, true, true, true],
@@ -63,6 +64,7 @@ function App() {
     owner: true,
     provider: true,
     cvc: true,
+    password: true,
   });
 
   // const isCompleted = useCompleted(inputError);
@@ -104,6 +106,12 @@ function App() {
     });
   };
 
+  const handleCardPassword = (value: string) => {
+    setCardCvc((prevState) => {
+      return { ...prevState, data: value };
+    });
+  };
+
   const setStateFunctions = {
     number: handleCardNumber,
     month: handleCardPeriod,
@@ -111,6 +119,7 @@ function App() {
     owner: handleCardOwner,
     provider: handleCardProvider,
     cvc: handleCardCvc,
+    password: handleCardPassword,
   };
 
   const handleCardInput = ({ value, index, inputSection }: InputChangePropsType) => {
@@ -126,6 +135,7 @@ function App() {
     owner: setCardOwner,
     provider: setCardProvider,
     cvc: setCardCvc,
+    password: setCardPassword,
   };
 
   const handleCardError = ({ isError, inputSection, message, index }: HandleCardErrorType) => {
@@ -158,6 +168,17 @@ function App() {
       <div css={appContainerStyle}>
         <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
         <form css={appInputStyle}>
+          {/* 비밀번호 */}
+          {!inputError.cvc && (
+            <InputGroup
+              onInputChange={({ value, index }: InputChangePropsType) =>
+                handleInputChange({ value, index, inputSection: 'password' })
+              }
+              informationSection="password"
+              isError={[inputError.password]}
+              errorMessage={cardPassword.errorMessage}
+            />
+          )}
           {/* CVC */}
           {!inputError.owner && (
             <InputGroup
@@ -198,6 +219,7 @@ function App() {
                 handleInputChange({ value, index, inputSection: 'provider' })
               }
               informationSection="provider"
+              isError={[inputError.provider]}
               errorMessage={cardProvider.errorMessage}
             />
           )}

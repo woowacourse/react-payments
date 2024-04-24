@@ -22,6 +22,7 @@ interface ValidateInputTableType {
   owner: () => ValidateResultType;
   provider: () => ValidateResultType;
   cvc: () => ValidateResultType;
+  password: () => ValidateResultType;
 }
 
 const validateInput = (value: string, informationDetail: InformationDetailType) => {
@@ -32,6 +33,7 @@ const validateInput = (value: string, informationDetail: InformationDetailType) 
     owner: () => cardOwnerValidated(value),
     provider: () => cardProviderValidated(value),
     cvc: () => cardCvcValidated(value),
+    password: () => cardPasswordValidated(value),
   };
 
   const validateFunction = validateInputTable[informationDetail];
@@ -94,6 +96,13 @@ function cardProviderValidated(value: string) {
 function cardCvcValidated(value: string) {
   if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
   if (!isNumberCount(value, VALIDATION.cvcNumberCount)) return { isError: true, message: ERROR_MESSAGE.invalidCvc };
+  return { isError: false, message: '' };
+}
+
+function cardPasswordValidated(value: string) {
+  if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isNumberCount(value, VALIDATION.passwordNumberCount))
+    return { isError: true, message: ERROR_MESSAGE.inputCount(VALIDATION.passwordNumberCount) };
   return { isError: false, message: '' };
 }
 
