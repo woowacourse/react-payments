@@ -38,6 +38,11 @@ const CardInformationForm = ({
     firstState.error || secondState.error || thirdState.error || fourthState.error;
   const isExpirationDateError = monthState.error || yearState.error;
 
+  const isCardSelectedAppearedCondition = isCardNumberFilled && !isCardNumberError;
+  const isExpirationDateAppearedCondition = isCardSelectedAppearedCondition && isCardSelected;
+  const isUserNameAppearedCondition =
+    isExpirationDateAppearedCondition && isExpirationDateFilled && !isExpirationDateError;
+
   const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
   const expirationErrorMessage = monthState.error ? ERROR.month : yearState.error ? ERROR.year : '';
   const userNameErrorMessage = userNameState.error ? ERROR.userName : '';
@@ -55,7 +60,7 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
-      {isExpirationDateFilled && !isExpirationDateError && (
+      {isUserNameAppearedCondition && (
         <FormField title={TITLE.userName}>
           <InputField label={LABEL.userName} error={userNameErrorMessage}>
             <Input
@@ -68,7 +73,7 @@ const CardInformationForm = ({
           </InputField>
         </FormField>
       )}
-      {isCardSelected && (
+      {isExpirationDateAppearedCondition && (
         <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
           <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
             <>
@@ -90,7 +95,7 @@ const CardInformationForm = ({
           </InputField>
         </FormField>
       )}
-      {isCardNumberFilled && !isCardNumberError && (
+      {isCardSelectedAppearedCondition && (
         <FormField title={TITLE.cardSelect} caption={CAPTION.cardSelect}>
           <Dropdown
             optionArray={OPTION.cardSelect}
