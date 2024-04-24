@@ -43,10 +43,10 @@ const FormFieldComponent: React.FC<Props> = ({
 
 const CardNumberField = () => {
   const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
-  const categoryHasError =
-    (Object.keys(cardNumberError).find((category) => {
-      return cardNumberError[category as keyof CardNumbersError]?.errorMessage;
-    }) as keyof CardNumbersError) || undefined;
+  const cardNumberErrorKeys = Object.keys(cardNumberError) as (keyof CardNumbersError)[];
+  const categoryHasError = cardNumberErrorKeys.find((category) => {
+    return cardNumberError[category]?.errorMessage;
+  });
 
   return (
     <FormFieldComponent
@@ -64,10 +64,10 @@ const CardNumberField = () => {
 
 const CardValidityPeriodField = () => {
   const cardPeriodError = useContextWrapper(CardValidityPeriodErrorContext)[0];
-  const categoryHasError =
-    (Object.keys(cardPeriodError).find((category) => {
-      return cardPeriodError[category as keyof CardValidityPeriodError]?.errorMessage;
-    }) as keyof CardValidityPeriodError) || undefined;
+  const cardPeriodErrorKeys = Object.keys(cardPeriodError) as (keyof CardValidityPeriodError)[];
+  const categoryHasError = cardPeriodErrorKeys.find((category) => {
+    return cardPeriodError[category]?.errorMessage;
+  });
 
   return (
     <FormFieldComponent
@@ -85,10 +85,11 @@ const CardValidityPeriodField = () => {
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
-  const categoryHasError =
-    (Object.keys(cardOwnerError).find((category) => {
-      return cardOwnerError[category as keyof CardOwnerInfoError]?.errorMessage;
-    }) as keyof CardOwnerInfoError) || undefined;
+  const cardOwnerErrorKeys = Object.keys(cardOwnerError) as (keyof CardOwnerInfoError)[];
+  const categoryHasError = cardOwnerErrorKeys.find((category) => {
+    return cardOwnerError[category]?.errorMessage;
+  });
+
   return (
     <FormFieldComponent
       formFieldInfo={{
