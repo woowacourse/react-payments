@@ -1,5 +1,6 @@
 import { CaptionText, LabelText, TitleText } from "../styles/common";
 
+import { CardInformation } from "../types/cardInformation";
 import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isNumericString from "../utils/isNumericString";

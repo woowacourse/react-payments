@@ -6,6 +6,7 @@ export const TitleText = styled.h2`
   font-weight: 700;
   line-height: 26.06px;
   text-align: left;
+  margin-bottom: 0;
 `;
 
 export const CaptionText = styled.span`

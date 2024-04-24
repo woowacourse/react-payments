@@ -1,4 +1,7 @@
+import { CardInformation, CardIssuer } from "../types/cardInformation";
+
 import CardExpirationDate from "./CardExpirationDate";
+import CardIssuerSelect from "./CardIssuerSelect";
 import CardNumbers from "./CardNumbers";
 import CardOwnerName from "./CardOwnerName";
 import CardPreview from "./CardPreview";
@@ -12,7 +15,7 @@ const CardEnrollFormContainer = styled.div`
   padding-top: 77px;
 `;
 
-const CardInformation = styled.div`
+const CardInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -23,6 +26,7 @@ const CardInformation = styled.div`
 
 export default function CardEnrollForm() {
   const [cardInformation, setCardInformation] = useState<CardInformation>({
+    cardIssuer: "",
     cardNumbers: ["", "", "", ""],
     cardExpiration: {
       month: "",
@@ -30,6 +34,10 @@ export default function CardEnrollForm() {
     },
     cardOwnerName: "",
   });
+
+  const onCardIssuerChange = (inputValue: CardIssuer) => {
+    setCardInformation((prev) => ({ ...prev, cardIssuer: inputValue }));
+  };
 
   const onCardNumbersChange = (inputValue: string, targetIndex: number) => {
     setCardInformation((prev) => {
@@ -56,7 +64,8 @@ export default function CardEnrollForm() {
   return (
     <CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation} />
-      <CardInformation>
+      <CardInformationContainer>
+        <CardIssuerSelect onChange={onCardIssuerChange} />
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
           onChange={onCardNumbersChange}
@@ -69,7 +78,7 @@ export default function CardEnrollForm() {
           cardOwnerName={cardInformation.cardOwnerName}
           onChange={onCardOwnerNameChange}
         />
-      </CardInformation>
+      </CardInformationContainer>
     </CardEnrollFormContainer>
   );
 }
