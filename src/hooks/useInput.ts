@@ -33,6 +33,9 @@ const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: Val
 
   const inputFocusOutHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (!onBlurValidations) return;
+    const onChangeValidationResult = onChangeValidations.find(({ isError }) =>
+      isError(e.target.value),
+    );
     const validationResult = onBlurValidations.find(({ isError }) => isError(e.target.value));
 
     if (validationResult) {
@@ -40,6 +43,10 @@ const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: Val
         state: true,
         message: validationResult.errorMessage,
       });
+    }
+
+    if (!onChangeValidationResult) {
+      setError(INITIAL_ERROR_STATE);
     }
   };
 
