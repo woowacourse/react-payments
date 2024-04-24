@@ -6,6 +6,7 @@ import { ICardInfo, IErrorMessage } from '../../types/type';
 import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
 import { NewCardContainer } from './NewCardPage.styled';
 import {
+  validateCVC,
   validateCardExpiration,
   validateCardNumber,
   validateUserName,
@@ -18,11 +19,13 @@ const NewCardPage = () => {
     cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
     userName: '',
+    cvc: '',
   });
   const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
     cardNumbers: ['', '', '', ''],
     cardExpiration: ['', ''],
     userName: [''],
+    cvc: [''],
   });
 
   const handleCardNumbersChange = (value: string, index: number) => {
@@ -96,6 +99,22 @@ const NewCardPage = () => {
     }
   };
 
+  const handleCVCChange = (value: string) => {
+    const errorMessageCopy = validateCVC(value);
+
+    setErrorMessage({
+      ...errorMessage,
+      cvc: [errorMessageCopy],
+    });
+
+    if (errorMessageCopy === '') {
+      setCardInfo({
+        ...cardInfo,
+        cvc: value,
+      });
+    }
+  };
+
   return (
     <NewCardContainer>
       <CardPreview cardInfo={cardInfo}></CardPreview>
@@ -158,6 +177,21 @@ const NewCardPage = () => {
           placeholder={CARD_FORM_INPUTS.USER_NAME.PLACEHOLDER}
           isError={!!errorMessage.userName[0]}
           onChange={(e) => handleUserNameChange(e.target.value)}
+        ></Input>
+      </NewCardInputSection>
+      {/* CVC */}
+      <NewCardInputSection
+        label={CARD_FORM_INPUTS.CVC.LABEL}
+        mainText={CARD_FORM_INPUTS.CVC.MAIN_TEXT}
+        subText={CARD_FORM_INPUTS.CVC.SUB_TEXT}
+        errorMessage={errorMessage.cvc}
+      >
+        <Input
+          value={cardInfo.cvc}
+          maxLength={CARD_FORM_INPUTS.CVC.MAX_LENGTH}
+          placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
+          isError={!!errorMessage.cvc[0]}
+          onChange={(e) => handleCVCChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
     </NewCardContainer>

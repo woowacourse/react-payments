@@ -35,9 +35,16 @@ export const CARD_FORM_INPUTS = {
     LABEL: '소유자 이름',
     MAIN_TEXT: '카드 소유자 이름을 입력해 주세요',
     SUB_TEXT: '',
-    PLACEHOLDER: 'JOHN DOE',
+    PLACEHOLDER: 'SUNDAY',
     MAX_LENGTH: 21,
     REGEX: /^[a-zA-Z\s]+$/,
+  },
+  CVC: {
+    LABEL: 'CVC',
+    MAIN_TEXT: 'CVC 번호를 입력해 주세요',
+    SUB_TEXT: '',
+    PLACEHOLDER: '123',
+    MAX_LENGTH: 3,
   },
 };
 
