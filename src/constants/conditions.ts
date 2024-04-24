@@ -37,9 +37,9 @@ export const CARD_OWNER = {
   MAX_LENGTH: 30,
 } as const;
 
-export const CARD_PREFIX_PATTERNS = {
+export const CARD_GLOBAL_BRAND_PREFIX_PATTERNS = {
   /**
-   * 카드 번호의 패턴에 따른 카드사 식별 규칙을 정합니다.
+   * 카드 번호의 패턴에 따른 글로벌 카드사 식별 규칙을 정합니다.
    *
    * - VISA : 4로 시작하는 카드 번호
    * - Master Card : 51 ~ 55 사이의 숫자로 시작하는 카드 번호
@@ -47,4 +47,15 @@ export const CARD_PREFIX_PATTERNS = {
   VISA_PREFIX: 4,
   MASTER_CARD_PREFIX_MIN: 51,
   MASTER_CARD_PREFIX_MAX: 55,
+} as const;
+
+export const CARD_BRANDS = {
+  BC_CARD: 'BC카드',
+  SHINHAN_CARD: '신한카드',
+  KAKAOBANK: '카카오뱅크',
+  HYUNDAI_CARD: '현대카드',
+  WOORI_CARD: '우리카드',
+  LOTTE_CARD: '롯데카드',
+  HANA_CARD: '하나카드',
+  KOOKMIN_CARD: '국민카드',
 } as const;
