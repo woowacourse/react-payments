@@ -65,30 +65,37 @@ const CardNumberInput = () => {
   const [cardNumbers, setData] = useContext(CardNumbersContext)!;
   const [cardNumberError, setError] = useContext(CardNumberErrorContext)!;
 
+  type InputInfoList = { name: keyof CardNumbers };
+
+  const InputInfoList: InputInfoList[] = [
+    { name: "firstNumbers" },
+    { name: "secondNumbers" },
+    { name: "thirdNumbers" },
+    { name: "fourthNumbers" },
+  ];
+
   return (
     <>
-      {[{ name: "firstNumbers" }, { name: "secondNumbers" }, { name: "thirdNumbers" }, { name: "fourthNumbers" }].map(
-        ({ name }, index) => (
-          <FormInputCompound<CardNumbers>
-            id={`id-${name}`}
-            key={index}
-            onInputChange={(e) =>
-              onInputChange<CardNumbers, CardNumbersError, number>(e, {
-                name: name as keyof CardNumbers,
-                setData,
-                setError,
-                validator: cardNumbersValidator,
-              })
-            }
-            isError={!!cardNumberError[name as keyof CardNumbersError]?.isError}
-            sizePreset="small"
-            placeholder="1234"
-            maxLength={4}
-            name={name as keyof CardNumbers}
-            value={cardNumbers[name as keyof CardNumbers] || ""}
-          />
-        )
-      )}
+      {InputInfoList.map(({ name }, index) => (
+        <FormInputCompound<CardNumbers>
+          id={`id-${name}`}
+          key={index}
+          onInputChange={(e) =>
+            onInputChange<CardNumbers, CardNumbersError, number>(e, {
+              name: name,
+              setData,
+              setError,
+              validator: cardNumbersValidator,
+            })
+          }
+          isError={!!cardNumberError[name as keyof CardNumbersError]?.isError}
+          sizePreset="small"
+          placeholder="1234"
+          maxLength={4}
+          name={name}
+          value={cardNumbers[name] ?? ""}
+        />
+      ))}
     </>
   );
 };
@@ -97,29 +104,33 @@ const CardPeriodInput = () => {
   const [cardPeriod, setData] = useContext(CardValidityPeriodContext)!;
   const [periodError, setError] = useContext(CardValidityPeriodErrorContext)!;
 
+  type InputInfoList = { name: keyof CardValidityPeriod; placeholder: string };
+
+  const InputInfoList: InputInfoList[] = [
+    { name: "month", placeholder: "MM" },
+    { name: "year", placeholder: "YY" },
+  ];
+
   return (
     <>
-      {[
-        { name: "month", placeholder: "MM" },
-        { name: "year", placeholder: "YY" },
-      ].map(({ name, placeholder }, index) => (
+      {InputInfoList.map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-period-${name}`}
           key={index}
           onInputChange={(e) =>
             onInputChange<CardValidityPeriod, CardValidityPeriodError, number>(e, {
-              name: name as keyof CardValidityPeriod,
+              name,
               setData,
               setError,
               validator: cardPeriodValidator,
             })
           }
-          isError={!!periodError[name as keyof CardValidityPeriodError]?.isError}
+          isError={!!periodError[name]?.isError}
           sizePreset="medium"
           maxLength={2}
           name={name as keyof CardValidityPeriod}
           placeholder={placeholder}
-          value={cardPeriod[name as keyof CardValidityPeriod] ?? ""}
+          value={cardPeriod[name] ?? ""}
         />
       ))}
     </>
@@ -130,25 +141,29 @@ const CardOwnerInput = () => {
   const [cardOwner, setData] = useContext(CardOwnerInfoContext)!;
   const [ownerError, setError] = useContext(CardOwnerInfoErrorContext)!;
 
+  type InputInfoList = { name: keyof CardOwnerInfo; placeholder: string };
+
+  const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO" }];
+
   return (
     <>
-      {[{ name: "name", placeholder: "PARK JEONG-WOO" }].map(({ name, placeholder }, index) => (
+      {InputInfoList.map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
           onInputChange={(e) =>
             onInputChange<CardOwnerInfo, CardOwnerInfoError, string>(e, {
-              name: name as keyof CardOwnerInfo,
+              name,
               setData,
               setError,
               validator: cardOwnerValidator,
             })
           }
-          isError={!!ownerError[name as keyof CardOwnerInfoError]?.isError}
+          isError={!!ownerError[name]?.isError}
           sizePreset="large"
           maxLength={15}
-          name={name as keyof CardOwnerInfo}
-          value={cardOwner[name as keyof CardOwnerInfo] || ""}
+          name={name}
+          value={cardOwner[name] ?? ""}
           placeholder={placeholder}
         />
       ))}
