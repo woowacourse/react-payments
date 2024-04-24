@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {
-  validateOwnerNameLength,
-  validateUpperCase,
-} from "../../utils/validators";
+import { isOwnerNameLength, isUpperCase } from "../../utils/validators";
 import useInput from "../../hooks/useInput";
 import * as S from "./style";
 
@@ -19,8 +16,8 @@ export default function CardOwnerName({
   onChangeCardInfo,
 }: Props) {
   const { value, onChange, onBlur, validateMessage } = useInput("", {
-    validateOnChange: [validateUpperCase],
-    validateOnBlur: [validateUpperCase, validateOwnerNameLength],
+    validateOnChange: [isUpperCase],
+    validateOnBlur: [isUpperCase, isOwnerNameLength],
   });
 
   useEffect(() => {

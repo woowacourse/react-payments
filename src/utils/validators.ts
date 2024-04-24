@@ -61,7 +61,7 @@ export const isInvalidYear = (value: string) => {
   return { isError: false, message: "" };
 };
 
-export const validateUpperCase = (name: string) => {
+export const isUpperCase = (name: string) => {
   const pattern: RegExp = OWNER_NAME_REG;
 
   if (name.length !== 0 && !pattern.test(name)) {
@@ -70,7 +70,7 @@ export const validateUpperCase = (name: string) => {
   return "";
 };
 
-export const validateOwnerNameLength = (name: string) => {
+export const isOwnerNameLength = (name: string) => {
   if (name.length < 1 && name.length > CARD_INFO.NAME_LENGTH) {
     return ERROR.CARD_NAME_LENGTH;
   }
