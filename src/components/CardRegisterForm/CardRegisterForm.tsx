@@ -6,7 +6,7 @@ import {
   INPUT_INFO_SUBTITLE,
   INPUT_LABEL,
 } from "@/constants/condition";
-import InputField from "@/components/InputField/InputField";
+import InputField from "@/components/common/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
 
