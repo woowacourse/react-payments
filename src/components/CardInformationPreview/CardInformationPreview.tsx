@@ -1,4 +1,3 @@
-import * as Styled from './style';
 import magnetic from '../../assets/image/magnetic.svg';
 import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
@@ -9,6 +8,14 @@ import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
 import { UserNameStateType } from '../../hooks/useUserName';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import MESSAGE from '../../constants/Message';
+import {
+  StyledCardImg,
+  StyledCardInformationPreview,
+  StyledCardNumberContainer,
+  StyledImgContainer,
+  StyledUserInfomation,
+  StyledUserInformationContainer,
+} from './style';
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberStateType;
   expirationDateState: ExpirationDateStateType;
@@ -44,35 +51,35 @@ const CardInformationPreview = ({
   const { isVisa, isMasterCard } = cardNumberState.showImageCondition;
 
   return (
-    <Styled.CardInformationPreview $selectedCardColor={selectedCardColor(selectedCardState.value)}>
-      <Styled.ImgContainer>
-        <Styled.CardImg src={magnetic} alt="magnetic" />
-        {isVisa && <Styled.CardImg src={visa} alt="visa" />}
-        {isMasterCard && <Styled.CardImg src={masterCard} alt="masterCard" />}
-      </Styled.ImgContainer>
-      <Styled.UserInformationContainer>
-        <Styled.CardNumberContainer>
-          <Styled.UserInfomation $typo={theme.typography.cardNumber}>
+    <StyledCardInformationPreview $selectedCardColor={selectedCardColor(selectedCardState.value)}>
+      <StyledImgContainer>
+        <StyledCardImg src={magnetic} alt="magnetic" />
+        {isVisa && <StyledCardImg src={visa} alt="visa" />}
+        {isMasterCard && <StyledCardImg src={masterCard} alt="masterCard" />}
+      </StyledImgContainer>
+      <StyledUserInformationContainer>
+        <StyledCardNumberContainer>
+          <StyledUserInfomation $typo={theme.typography.cardNumber}>
             {firstState.value}
-          </Styled.UserInfomation>
-          <Styled.UserInfomation $typo={theme.typography.cardNumber}>
+          </StyledUserInfomation>
+          <StyledUserInfomation $typo={theme.typography.cardNumber}>
             {secondState.value}
-          </Styled.UserInfomation>
-          <Styled.UserInfomation $typo={theme.typography.cardNumber}>
+          </StyledUserInfomation>
+          <StyledUserInfomation $typo={theme.typography.cardNumber}>
             {CONDITION.hiddenCardNumber.repeat(String(thirdState.value ?? '').length)}
-          </Styled.UserInfomation>
-          <Styled.UserInfomation $typo={theme.typography.cardNumber}>
+          </StyledUserInfomation>
+          <StyledUserInfomation $typo={theme.typography.cardNumber}>
             {CONDITION.hiddenCardNumber.repeat(String(fourthState.value ?? '').length)}
-          </Styled.UserInfomation>
-        </Styled.CardNumberContainer>
-        <Styled.UserInfomation $typo={theme.typography.cardExpirationDate}>
+          </StyledUserInfomation>
+        </StyledCardNumberContainer>
+        <StyledUserInfomation $typo={theme.typography.cardExpirationDate}>
           {`${monthState.value ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.value ?? ''}`}
-        </Styled.UserInfomation>
-        <Styled.UserInfomation $typo={theme.typography.cardUserName}>
+        </StyledUserInfomation>
+        <StyledUserInfomation $typo={theme.typography.cardUserName}>
           {userNameState.value ?? ''}
-        </Styled.UserInfomation>
-      </Styled.UserInformationContainer>
-    </Styled.CardInformationPreview>
+        </StyledUserInfomation>
+      </StyledUserInformationContainer>
+    </StyledCardInformationPreview>
   );
 };
 

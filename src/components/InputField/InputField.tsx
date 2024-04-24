@@ -1,4 +1,4 @@
-import * as Styled from './style';
+import { StyledError, StyledInputField, StyledInputs, StyledLabel } from './style';
 
 interface InputFieldProps {
   label: string;
@@ -8,11 +8,11 @@ interface InputFieldProps {
 
 const InputField = ({ label, error, children }: InputFieldProps) => {
   return (
-    <Styled.InputField>
-      <Styled.Label>{label}</Styled.Label>
-      <Styled.Inputs>{children}</Styled.Inputs>
-      <Styled.Error>{error}</Styled.Error>
-    </Styled.InputField>
+    <StyledInputField>
+      <StyledLabel>{label}</StyledLabel>
+      <StyledInputs>{children}</StyledInputs>
+      <StyledError>{error}</StyledError>
+    </StyledInputField>
   );
 };
 

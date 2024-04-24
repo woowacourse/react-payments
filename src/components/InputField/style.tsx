@@ -1,24 +1,24 @@
 import styled from 'styled-components';
 
-export const InputField = styled.div`
+export const StyledInputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
 `;
 
-export const Label = styled.label`
+export const StyledLabel = styled.label`
   ${(props) => props.theme.typography.label};
   color: ${(props) => props.theme.color.black};
 `;
 
-export const Inputs = styled.div`
+export const StyledInputs = styled.div`
   display: flex;
   gap: 1rem;
   width: 100%;
 `;
 
-export const Error = styled.span`
+export const StyledError = styled.span`
   ${(props) => props.theme.typography.caption};
   color: ${(props) => props.theme.color.red};
 `;

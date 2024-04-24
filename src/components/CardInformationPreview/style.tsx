@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardInformationPreview = styled.section<{ $selectedCardColor: string }>`
+export const StyledCardInformationPreview = styled.section<{ $selectedCardColor: string }>`
   display: flex;
   flex-direction: column;
 
@@ -14,7 +14,7 @@ export const CardInformationPreview = styled.section<{ $selectedCardColor: strin
   border-radius: 0.4rem;
 `;
 
-export const ImgContainer = styled.div`
+export const StyledImgContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,12 +22,12 @@ export const ImgContainer = styled.div`
   width: 100%;
 `;
 
-export const CardImg = styled.img`
+export const StyledCardImg = styled.img`
   width: 3.6rem;
   height: 2.2rem;
 `;
 
-export const UserInformationContainer = styled.div`
+export const StyledUserInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -37,7 +37,7 @@ export const UserInformationContainer = styled.div`
   margin: 1.4rem 1.3rem 0.4rem 0.5rem;
 `;
 
-export const CardNumberContainer = styled.div`
+export const StyledCardNumberContainer = styled.div`
   flex: 1;
   display: flex;
   gap: 1rem;
@@ -45,7 +45,7 @@ export const CardNumberContainer = styled.div`
   width: 100%;
 `;
 
-export const UserInfomation = styled.div<{ $typo: string }>`
+export const StyledUserInfomation = styled.div<{ $typo: string }>`
   flex: 1;
 
   ${(props) => props.$typo};

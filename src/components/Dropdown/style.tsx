@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledDropdown = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
   width: 100%;
 `;
 
 export const StyledSelect = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   height: 3.2rem;
   padding: 0.8rem;
@@ -31,9 +28,14 @@ export const StyledSelectImage = styled.div<{ $isOpen: boolean }>`
 `;
 
 export const StyledOptions = styled.ul`
-  width: 100%;
+  position: absolute;
+
+  width: 31.2rem;
+  margin-top: 0.5rem;
   border: 0.1rem solid ${(props) => props.theme.color.lightGray};
   border-radius: 0.2rem;
+
+  background-color: ${(props) => props.theme.color.white};
 `;
 
 export const StyledOption = styled.li`
@@ -41,7 +43,7 @@ export const StyledOption = styled.li`
   padding: 0.8rem;
 
   ${(props) => props.theme.typography.dropDown};
-  color: ${(props) => props.theme.color.lightGray};
+  color: ${(props) => props.theme.color.charcoalGray};
 
   cursor: pointer;
 `;
