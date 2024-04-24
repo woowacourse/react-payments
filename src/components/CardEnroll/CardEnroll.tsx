@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CardNumbers from "../CardNumbers/CardNumbers";
 import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
 import CardOwnerName from "../CardOwnerName/CardOwnerName";
@@ -6,7 +6,7 @@ import CardPreview from "../CardPreview/CardPreview";
 import * as S from "./style";
 import CardCompanySelect from "../CardCompanySelect/CardCompanySelect";
 
-export default function CardEnrollForm() {
+export default function CardEnroll() {
   const [cardInformation, setCardInformation] = useState({
     cardNumbers: [
       { value: "", isError: false },
@@ -30,10 +30,14 @@ export default function CardEnrollForm() {
     }));
   };
 
+  const onSubmitCardInfo = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <S.CardEnrollFormContainer>
+    <S.CardEnrollContainer>
       <CardPreview cardInformation={cardInformation} />
-      <S.CardInformation>
+      <S.CardForm onSubmit={onSubmitCardInfo}>
         <CardCompanySelect
           cardCompany={cardInformation.cardCompany}
           onChangeCardInfo={onChangeCardInfo}
@@ -51,7 +55,8 @@ export default function CardEnrollForm() {
           cardOwnerName={cardInformation.cardOwnerName}
           onChangeCardInfo={onChangeCardInfo}
         />
-      </S.CardInformation>
-    </S.CardEnrollFormContainer>
+        <button type="submit">확인</button>
+      </S.CardForm>
+    </S.CardEnrollContainer>
   );
 }

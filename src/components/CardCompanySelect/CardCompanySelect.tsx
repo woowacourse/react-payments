@@ -28,7 +28,7 @@ export default function CardCompanySelect({
         <TitleText>카드사를 선택해 주세요</TitleText>
         <CaptionText>현재 국내 카드사만 가능합니다.</CaptionText>
       </div>
-      <S.Select onChange={onChangeSelect} defaultValue={""}>
+      <S.Select name="cardCompany" onChange={onChangeSelect} defaultValue={""}>
         <option key={"default"} value="">
           카드사를 선택해주세요.
         </option>
