@@ -94,6 +94,7 @@ function App() {
   const {
     inputState: year,
     inputChangeHandler: yearChangeHandler,
+    inputFocusOutHandler: yearFocusOutHandler,
     error: yearError,
   } = useInput(yearOnChangeValidations, [
     {
@@ -242,6 +243,7 @@ function App() {
               maxLength={2}
               value={year}
               onChange={yearChangeHandler}
+              onBlur={yearFocusOutHandler}
               isError={yearError.state}
             />
           </InputSection>
