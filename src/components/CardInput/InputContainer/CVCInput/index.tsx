@@ -4,7 +4,7 @@ import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
 import InputWrap from '../../InputWrap';
 
-// import styles from './style.module.css';
+import styles from './style.module.css';
 
 interface CVCInputProps {
   maxLength: number;
@@ -32,17 +32,17 @@ function CVCInput({
     <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
         <div>
-          {/* <div className={styles.inputWrap}> */}
-          <Input
-            type="number"
-            name="name"
-            value={CVCNumber}
-            maxLength={maxLength}
-            placeholder={placeholder}
-            isError={CVCNumberError}
-            onChange={(event) => onCVCNumberChange(event.target.value)}
-          />
-          {/* </div> */}
+          <div className={styles.inputWrap}>
+            <Input
+              type="number"
+              name="CVC"
+              value={CVCNumber}
+              maxLength={maxLength}
+              placeholder={placeholder}
+              isError={CVCNumberError}
+              onChange={(event) => onCVCNumberChange(event.target.value)}
+            />
+          </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />
         </div>
       </InputField>
