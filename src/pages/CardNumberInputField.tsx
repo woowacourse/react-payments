@@ -1,21 +1,24 @@
 import React from "react";
 import InputField from "../components/InputField/InputField";
 import useInputField, { IndividualValidator } from "@/hooks/useInputField";
+import useValidation from "@/hooks/useValidation";
+import useInput from "@/hooks/useInput";
 
 const VALID_LENGTH = 4;
 const INPUTS_COUNT = 4;
-const CardNumberInputField = ({ validationStates }: { validationStates: ReturnType<typeof useInputField> }) => {
-  // const individualValidators: IndividualValidator[] = [
-  //   {
-  //     errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-  //     validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
-  //   },
-  //   {
-  //     errorMessage: `입력은 숫자형이어야합니다.`,
-  //     validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
-  //   },
-  // ];
-  // const validationStates = useInputField({ individualValidators, length: INPUTS_COUNT });
+const individualValidators: IndividualValidator[] = [
+  {
+    errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
+    validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
+  },
+  {
+    errorMessage: `입력은 숫자형이어야합니다.`,
+    validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
+  },
+];
+
+const CardNumberInputFieldCopy = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
 
   return (
     <InputField>
@@ -40,4 +43,4 @@ const CardNumberInputField = ({ validationStates }: { validationStates: ReturnTy
   );
 };
 
-export default CardNumberInputField;
+export default CardNumberInputFieldCopy;

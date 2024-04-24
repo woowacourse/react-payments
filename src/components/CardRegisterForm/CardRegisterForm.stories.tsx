@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardRegisterForm from "./CardRegisterForm";
-import useInputs from "@/hooks/useInputs";
+
 import { makeStringArray } from "../utils/arrayHelper";
 import { INPUT_COUNTS } from "@/constants/condition";
 
