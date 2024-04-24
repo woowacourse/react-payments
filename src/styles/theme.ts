@@ -56,14 +56,25 @@ const theme: DefaultTheme = {
   },
   color: {
     white: '#ffffff',
-    black: '#000000',
     red: '#FF3D3D',
     gray: '#8B95A1',
     lightGray: '#ACACAC',
     darkGray: '#333333',
+    magenta: '#f04651',
+    blue: '#0046FF',
+    yellow: '#FFE600',
+    black: '#000000',
+    brightBlue: '#007BC8',
+    orange: '#ED1C24',
+    teal: '#009490',
+    brownishGray: '#6A6056',
     magnetic: '#DDCD78',
     dropShadow: '#00000040',
   },
 };
+
+// - BC카드 -
+
+// - 국민카드 -
 
 export default theme;
