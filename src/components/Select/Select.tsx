@@ -9,7 +9,7 @@ interface Option {
 
 interface SelectProps {
   value: string | null;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
+  onChange: React.Dispatch<React.SetStateAction<string | null>>;
   placeholder: string;
   options: Option[];
 }
@@ -44,8 +44,9 @@ const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
         {options.map((option, index) => (
           <Styled.Option
             key={index}
-            value={option.value}
-            onChange={(event) => onChange(event.currentTarget.value + '')}
+            onClick={(event) => {
+              onChange(event.currentTarget.textContent + '');
+            }}
           >
             {option.label}
           </Styled.Option>
