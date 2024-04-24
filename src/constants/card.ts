@@ -1,3 +1,4 @@
+ step2
 const TYPE = {
   visa: 0,
   master: 1,
