@@ -8,7 +8,7 @@
   justify-content: flex-end;
   margin-top: 84px;
   background-color: #cbba64;
-  width: inherit;
+  width: var(--card-width);
   height: 1.5rem;
   line-height: 1.5rem;
 }
