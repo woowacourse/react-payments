@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 
 interface IInputProps {
   index: string;
@@ -12,53 +12,63 @@ interface IInputProps {
 
   validationRule: (value: string) => boolean;
   errorMessageText: string;
+  setFocusedInputIndex?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Input = ({
-  index,
-  type,
-  placeholder,
-  maxLength,
-  setErrorMessage,
-  setAllInputValid,
-  setData,
-  validationRule,
-  errorMessageText,
-}: IInputProps) => {
-  const [currentValue, setCurrentValue] = useState("");
-  const [isValidInput, setIsValidInput] = useState(true);
+const Input = forwardRef<HTMLInputElement, IInputProps>(
+  (
+    {
+      index,
+      type,
+      placeholder,
+      maxLength,
+      setErrorMessage,
+      setAllInputValid,
+      setData,
+      validationRule,
+      errorMessageText,
+      setFocusedInputIndex,
+    },
+    ref
+  ) => {
+    const [currentValue, setCurrentValue] = useState("");
+    const [isValidInput, setIsValidInput] = useState(true);
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentValue = e.target.value;
+    const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
 
-    setCurrentValue(currentValue);
+      setCurrentValue(value);
 
-    setData((prevCardNumbers) =>
-      new Map(prevCardNumbers).set(index, currentValue)
+      setData((prevData) => new Map(prevData).set(index, value));
+
+      if (!validationRule(value)) {
+        setErrorMessage(errorMessageText);
+        setIsValidInput(false);
+        setAllInputValid(false);
+      } else {
+        setErrorMessage("");
+        setIsValidInput(true);
+        setAllInputValid(true);
+
+        if (setFocusedInputIndex && value.length === maxLength) {
+          setFocusedInputIndex(index);
+        }
+      }
+    };
+
+    return (
+      <InputStyled
+        ref={ref}
+        currentValue={currentValue}
+        isValidInput={isValidInput}
+        onChange={inputChangeHandler}
+        maxLength={maxLength}
+        type={type}
+        placeholder={placeholder}
+      />
     );
-
-    if (!validationRule(currentValue)) {
-      setErrorMessage(errorMessageText);
-      setIsValidInput(false);
-      setAllInputValid(false);
-    } else {
-      setErrorMessage("");
-      setIsValidInput(true);
-      setAllInputValid(true);
-    }
-  };
-
-  return (
-    <InputStyled
-      currentValue={currentValue}
-      isValidInput={isValidInput}
-      onChange={inputChangeHandler}
-      maxLength={maxLength}
-      type={type}
-      placeholder={placeholder}
-    ></InputStyled>
-  );
-};
+  }
+);
 
 const InputStyled = styled.input<{
   currentValue: string;

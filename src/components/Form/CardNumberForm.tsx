@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Input from "./Input";
 import FormField from "../common/FormField";
@@ -20,6 +20,7 @@ const CardNumberForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
+  const [focusedInputIndex, setFocusedInputIndex] = useState("-1");
   const [isAllInputValid, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState<InputValidities>(
@@ -28,9 +29,25 @@ const CardNumberForm = ({
         acc[index.toString()] = curr;
         return acc;
       },
-      {} as InputValidities // 초깃값에 InputValidities 타입을 명시적으로 적용해야 에러 x
+      {} as InputValidities
     )
   );
+
+  const focusToNextInput = () => {
+    const curIdx = focusedInputIndex;
+    const nextInputRef = inputRefs.current[Number(curIdx) + 1];
+    if (nextInputRef) {
+      nextInputRef.focus();
+    }
+  };
+
+  const setInputRef = (element: HTMLInputElement, index: number) => {
+    inputRefs.current[index] = element;
+  };
+
+  useEffect(() => {
+    inputRefs.current = inputRefs.current.slice(0, inputCount);
+  }, [inputCount]);
 
   useEffect(() => {
     const isAllValid = Object.values(inputValidities).every(
@@ -39,6 +56,8 @@ const CardNumberForm = ({
 
     setAllInputValid(isAllValid);
     setAllFormsValid(isAllValid);
+
+    focusToNextInput();
 
     setErrorMessage(
       isAllValid ? "" : CARD_NUMBER_FORM.errorMessage.notAllValid
@@ -57,12 +76,15 @@ const CardNumberForm = ({
     }));
   };
 
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
+      ref={(element) => setInputRef(element as HTMLInputElement, index)}
       index={index.toString()}
       type={type}
-      placeholder={placeholders[index]}
+      placeholder={placeholders ? placeholders[index] : ""}
       maxLength={CARD_NUMBER_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setCardNumbers ? setCardNumbers : () => {}}
@@ -73,6 +95,7 @@ const CardNumberForm = ({
         value.trim() === "" || FORM_REGEXP.fourDigitNumber.test(value)
       }
       errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
+      setFocusedInputIndex={setFocusedInputIndex}
     />
   ));
 
