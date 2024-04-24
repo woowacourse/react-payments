@@ -4,7 +4,8 @@ import CONDITION from '../constants/Condition';
 const { REG_EXP } = CONDITION;
 
 const useExpirationDate = (defaultValues: string[]) => {
-  const monthCondition = (value: string) => Number(value) >= 1 && Number(value) <= 12;
+  const monthCondition = (value: string) =>
+    Number(value) >= 1 && Number(value) <= 12 && value.length >= 2;
   const yearCondition = (value: string) => value.length === 2;
 
   const {
