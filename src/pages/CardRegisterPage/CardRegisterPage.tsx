@@ -1,14 +1,11 @@
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
-import {
-  CARD_BRAND_INFO,
-  MAX_LENGTH,
-  VALID_LENGTH,
-} from "@/constants/condition";
+import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
 import {
+  checkCardBrand,
   validateIsValidLength,
   validateMonth,
   validateOwnerName,
@@ -69,19 +66,6 @@ const CardRegisterPage = () => {
       (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
     ],
   });
-
-  const checkCardBrand = (cardNumbers: string) => {
-    if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
-      return "VISA";
-    }
-    if (
-      Number(cardNumbers.slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
-      Number(cardNumbers.slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
-    ) {
-      return "MASTER";
-    }
-    return "NONE";
-  };
 
   return (
     <S.CardRegisterWrapper>

@@ -1,5 +1,5 @@
 import { ValidationStatus } from "@/utils/validation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 const useInput = ({ initialValue, validates }: Props) => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<ValidationStatus | null>(null);
+  const [isError, setIsError] = useState(true);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,10 +39,14 @@ const useInput = ({ initialValue, validates }: Props) => {
     setValue(event.target.value);
   };
 
-  // useEffect(() => {
-  //   console.log("aa");
-  // }, [value]);
+  useEffect(() => {
+    if (!error) {
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
+  }, [error, value]);
 
-  return { value, onChange, error };
+  return { value, onChange, error, isError };
 };
 export default useInput;

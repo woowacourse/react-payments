@@ -11,9 +11,7 @@ interface Props<T> {
   ) => { isValid: boolean; type: ValidationStatus } | null)[];
   maxNumberLength?: number;
 }
-//validation => all 둘 다 쓴다.
-//index =>
-//
+
 const useInputs = <T extends object>({
   initialValue,
   validates,
@@ -21,6 +19,8 @@ const useInputs = <T extends object>({
 }: Props<T>) => {
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
+  const [isError, setIsError] = useState(true);
+
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -45,16 +45,23 @@ const useInputs = <T extends object>({
     });
 
     if (allValid) {
-      newErrors[name as keyof T] = null;
+      delete newErrors[name as keyof T];
     }
 
     setValues((values) => ({ ...values, [name]: newValue }));
     setErrors(newErrors);
   };
 
-  useEffect(() => {}, [values]);
+  useEffect(() => {
+    if (
+      !Object.keys(errors).length &&
+      Object.values(values).every((value) => value)
+    ) {
+      setIsError(false);
+    }
+  }, [errors, values]);
 
-  return { values, errors, setErrors, onChange };
+  return { values, errors, setErrors, onChange, isError };
 };
 
 export default useInputs;

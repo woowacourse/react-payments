@@ -1,16 +1,17 @@
 import S from "./style";
 import useInputs from "@/hooks/useInputs";
-import CardNumbersField from "./components/CardNumbersField/CardNumbersField";
-import ExpirationPeriodField from "./components/ExpirationPeriodField/ExpirationPeriodField";
-import useInput from "@/hooks/useInput";
-import {
+import CardNumbersField, {
   CardNumberInputType,
+} from "./components/CardNumbersField/CardNumbersField";
+import ExpirationPeriodField, {
   ExpirationPeriodInputType,
-} from "@/pages/CardRegisterPage/CardRegisterPage";
+} from "./components/ExpirationPeriodField/ExpirationPeriodField";
+import useInput from "@/hooks/useInput";
 import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
 import CVCField from "./components/CVCField/CVCField";
 import PasswordField from "./components/PasswordField/PasswordField";
 import CardTypeSelectField from "./components/CardTypeSelectField/CardTypeSelectField";
+import { useEffect, useState } from "react";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -29,13 +30,24 @@ const CardRegisterForm = ({
   passwordState,
   cardTypeState,
 }: Props) => {
+  const [step, setStep] = useState(1);
+  const cardNumbersError = cardNumbersState.isError;
+
+  useEffect(() => {
+    if (!cardNumbersError) {
+      setStep(2);
+    }
+  }, [cardNumbersError]);
+
   return (
     <S.CardFormWrapper>
-      <PasswordField passwordState={passwordState} />
-      <CVCField CVCNumbersState={CVCNumbersState} />
-      <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
-      <OwnerNameField ownerNameState={ownerNameState} />
-      <CardTypeSelectField cardTypeState={cardTypeState} />
+      {step >= 3 && <PasswordField passwordState={passwordState} />}
+      {step >= 3 && <CVCField CVCNumbersState={CVCNumbersState} />}
+      {step >= 3 && (
+        <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
+      )}
+      {step >= 3 && <OwnerNameField ownerNameState={ownerNameState} />}
+      {step >= 2 && <CardTypeSelectField cardTypeState={cardTypeState} />}
       <CardNumbersField cardNumbersState={cardNumbersState} />
     </S.CardFormWrapper>
   );

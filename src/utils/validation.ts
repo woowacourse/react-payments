@@ -1,4 +1,4 @@
-import { VALID_LENGTH } from "@/constants/condition";
+import { CARD_BRAND_INFO, VALID_LENGTH } from "@/constants/condition";
 
 export enum ValidationStatus {
   INVALID_LENGTH = "INVALID_LENGTH",
@@ -64,4 +64,17 @@ export const makeNewErrorMessages = (
   index: number
 ) => {
   return messages.map((message, i) => (i === index ? newMessage : message));
+};
+
+export const checkCardBrand = (cardNumbers: string) => {
+  if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
+    return "VISA";
+  }
+  if (
+    Number(cardNumbers.slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
+    Number(cardNumbers.slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
+  ) {
+    return "MASTER";
+  }
+  return "NONE";
 };
