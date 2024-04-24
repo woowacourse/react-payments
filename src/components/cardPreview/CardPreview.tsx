@@ -29,7 +29,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   };
 
   return (
-    <Styled.CardPreviewContainer>
+    <Styled.CardPreviewContainer cardCompany={cardInfo.cardCompany}>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
         <Styled.CardBrand>
