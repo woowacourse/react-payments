@@ -14,6 +14,10 @@ export const isUpperLength = (string: string, length: number) => {
   return string.length >= length;
 };
 
+export const isSameLength = (string: string, length: number) => {
+  return string.length === length;
+};
+
 export const isValidMonth = (string: string) => {
   return /^$|^(0[1-9]|1[0-2]|0|1)$/.test(string);
 };

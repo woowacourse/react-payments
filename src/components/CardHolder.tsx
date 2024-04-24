@@ -1,5 +1,6 @@
 import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from '../constants/message';
 
+import { BOUND } from '../constants/number';
 import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
@@ -11,7 +12,7 @@ interface props {
 }
 
 export default function CardHolder({
-  validateInput: { inputValue: holder, onChange, errorMessage },
+  validateInput: { onChange, errorMessage },
 }: props) {
   const isError = Boolean(errorMessage);
   return (
@@ -25,9 +26,10 @@ export default function CardHolder({
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
             onChange={onChange}
-            value={holder}
+            maxLength={BOUND.cardHolderLengthUpper}
             borderColor={isError ? 'error' : undefined}
             aria-invalid={!isError}
+            style={{ textTransform: 'uppercase' }}
           />
         </TextInputContainer>
       </FormItem>

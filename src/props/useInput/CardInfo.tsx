@@ -1,7 +1,7 @@
 import {
   isOnlyDigit,
   isOnlyEnglishOrSpace,
-  isUpperLength,
+  isSameLength,
   isValidMonth,
   isValidYear,
 } from '../../domain/checkIsValid';
@@ -15,11 +15,9 @@ const CardInfo = {
     validatorPropsArray: [
       {
         checkIsValid: isOnlyEnglishOrSpace,
-        shouldReflect: false,
         errorMessage: ERROR_MESSAGE.notEnglishOrSpace,
       },
     ],
-    maxLength: BOUND.cardHolderLengthUpper,
   },
 
   expiredDate: {
@@ -27,21 +25,17 @@ const CardInfo = {
       validatorPropsArray: [
         {
           checkIsValid: isValidMonth,
-          shouldReflect: false,
           errorMessage: ERROR_MESSAGE.wrongMonth,
         },
       ],
-      maxLength: BOUND.cardExpiredMonthStringUpper,
     },
     year: {
       validatorPropsArray: [
         {
           checkIsValid: isValidYear,
-          shouldReflect: false,
           errorMessage: ERROR_MESSAGE.wrongYear,
         },
       ],
-      maxLength: BOUND.cardExpiredYearStringUpper,
     },
   },
 
@@ -49,13 +43,11 @@ const CardInfo = {
     validatorPropsArray: [
       {
         checkIsValid: isOnlyDigit,
-        shouldReflect: false,
         errorMessage: ERROR_MESSAGE.notDigit,
       },
       {
         checkIsValid: (string: string) =>
-          isUpperLength(string, BOUND.cardNumbersOnePartUpper),
-        shouldReflect: true,
+          isSameLength(string, BOUND.cardNumbersOnePartUpper),
         errorMessage: `${BOUND.cardNumbersOnePartUpper}${ERROR_MESSAGE.invalidLengthTail}`,
       },
     ],
