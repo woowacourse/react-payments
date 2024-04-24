@@ -8,7 +8,8 @@ export const Input = styled.input<{ $isValid: boolean }>`
   border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-200)' : 'var(--error)')};
   font-size: var(--font-size-md);
 
+  &:hover,
   &:focus {
-    border-color: ${(props) => (props.$isValid ? 'var(--grey-500)' : 'var(--error)')};
+    border-color: ${(props) => (props.$isValid ? 'var(--grey-600)' : 'var(--error)')};
   }
 `;
