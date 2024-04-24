@@ -6,7 +6,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  margin-top: 64px;
+  padding-top: 64px;
+  box-sizing: border-box;
   height: 100vh;
 `;
 
