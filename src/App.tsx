@@ -10,6 +10,7 @@ import validateInput from './validations/validateInput';
 import { PERIOD } from './constants/inputInformation';
 import useCompleted from './hooks/useCompleted';
 import InputGroupSelector from './components/InputGroupSelector';
+import FormButton from './components/FormButton';
 
 const appContainerStyle = css({
   display: 'flex',
@@ -67,8 +68,7 @@ function App() {
     password: true,
   });
 
-  // const isCompleted = useCompleted(inputError);
-  // console.log(isCompleted);
+  const isCompleted = useCompleted(inputError);
 
   const handleCardNumber = (value: string, index: number) => {
     setCardNumber((prevState) => {
@@ -233,6 +233,7 @@ function App() {
             errorMessage={cardNumber.errorMessage}
           />
         </form>
+        {isCompleted && <FormButton value="확인" />}
       </div>
     </div>
   );
