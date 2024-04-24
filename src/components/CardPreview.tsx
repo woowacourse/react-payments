@@ -2,21 +2,23 @@ import styled from 'styled-components';
 import MasterCard from '../../src/assets/images/mastercard.png';
 import VisaCard from '../../src/assets/images/visa.png';
 import CONDITION from '../constants/condition';
-import { CardNumberKey, ExpiryDate } from './types/card';
+import { CARD_TYPE, CardNumberKey, ExpiryDate } from './types/card';
+import { CARD_COLOR } from '../constants/card';
 
 interface CardPreviewProps {
   cardNumbers: Record<CardNumberKey, string>;
   expiryDate: ExpiryDate;
   cardholderName: string;
+  cardType: CARD_TYPE;
 }
 
-const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewProps) => {
+const CardPreview = ({ cardNumbers, expiryDate, cardholderName, cardType }: CardPreviewProps) => {
   const firstTwoDigits = Number(cardNumbers.first.slice(0, 2));
-  const isVisa = cardNumbers.first[0] === CONDITION.VISA;
   const isMaster = firstTwoDigits > CONDITION.MASTER_CARD_MIN && firstTwoDigits < CONDITION.MASTER_CARD_MAX;
+  const isVisa = cardNumbers.first[0] === CONDITION.VISA;
 
   return (
-    <CardPreviewLayout>
+    <CardPreviewLayout $cardType={cardType}>
       <HeaderWrapper>
         <CardMagnetic />
         <BrandImageWrapper>
@@ -46,13 +48,17 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
   );
 };
 
-const CardPreviewLayout = styled.div`
+interface LayoutProps {
+  $cardType: CARD_TYPE;
+}
+
+const CardPreviewLayout = styled.div<LayoutProps>`
   display: flex;
   flex-direction: column;
   width: 320px;
   height: 200px;
 
-  background-color: #333333;
+  background-color: ${props => CARD_COLOR[props.$cardType]};
   padding: 16px 20px 20px;
   border-radius: 8px;
 
