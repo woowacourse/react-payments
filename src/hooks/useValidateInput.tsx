@@ -12,16 +12,18 @@ interface validatedInputProps extends useInputOption {
   validatorPropsArray: validatorProps[];
 }
 
+export interface ValidateInput {
+  inputValue: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
+}
+
 export default function useValidateInput({
   validatorPropsArray,
   decorateValue,
-  maxLength,
-  setHook,
 }: validatedInputProps) {
-  const { input, onChange: inputOnChange } = useInput({
+  const { inputValue: inputValue, onChange: inputOnChange } = useInput({
     decorateValue,
-    maxLength,
-    setHook,
   });
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,7 +34,6 @@ export default function useValidateInput({
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    if (maxLength && maxLength < newValue.length) return;
     const { willChange, errorMessage } = arrangedValidatorPropsArray.reduce(
       (obj, props) => {
         // 만약 이전에 reflect가 안되는 에러가 발생했다면(!obj.willChange !== newValue), 더 이상 validate를 진행하지 않음
@@ -51,5 +52,5 @@ export default function useValidateInput({
     setErrorMessage(errorMessage);
   };
 
-  return { input, onChange, errorMessage };
+  return { inputValue, onChange, errorMessage };
 }
