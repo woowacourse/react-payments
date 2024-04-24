@@ -1,7 +1,8 @@
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
+import PaymentsDropdown from '../../common/PaymentsDropdown/PaymentsDropdown';
 
 import * as Styled from '../FormSection.styled';
-import PaymentsDropdown from '../../common/PaymentsDropdown/PaymentsDropdown';
+
 import { COMPANY_TABLE } from '../../../constants/table';
 
 interface CompanyDropdownFormSectionProps {

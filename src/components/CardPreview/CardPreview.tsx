@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react';
-import IcChip from '../../asset/IcChip.svg'
-
-import REGEX from '../../constants/regex';
-import { BRAND_TABLE } from '../../constants/table';
 
 import * as Styled from './CardPreview.styled'
+
+import IcChip from '../../asset/IcChip.svg'
+
+import { BRAND_TABLE } from '../../constants/table';
+
 import { secureNumber } from '../../util/secureNumber';
 
 interface CardPreviewProps {

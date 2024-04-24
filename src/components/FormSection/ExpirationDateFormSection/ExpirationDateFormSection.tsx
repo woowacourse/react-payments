@@ -1,10 +1,11 @@
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
-import OPTION from '../../../constants/option';
-
 import * as Styled from '../FormSection.styled';
+
 import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSection';
+
+import OPTION from '../../../constants/option';
 
 interface ExpirationDateFormSectionProps {
   cardInfo: CardInfo;
@@ -14,7 +15,7 @@ interface ExpirationDateFormSectionProps {
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo })
+  const [inputState, onChange, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -44,7 +45,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
             handleOnBlur={() => handleOnBlur('year')}
           />
         </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+        <Styled.ErrorMessage>{cardInfo.expiration.errorMessage}</Styled.ErrorMessage>
       </Styled.InputForm>
     </Styled.FormSection>
   );

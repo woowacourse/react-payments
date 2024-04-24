@@ -14,7 +14,7 @@ interface CardNumbersFormSectionProps {
 
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ cardInfo, dispatchCardInfo })
+  const [inputState, onChange, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -38,7 +38,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
             />
           ))}
         </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+        <Styled.ErrorMessage>{cardInfo.cardNumbers.errorMessage}</Styled.ErrorMessage>
       </Styled.InputForm>
     </Styled.FormSection>
   );

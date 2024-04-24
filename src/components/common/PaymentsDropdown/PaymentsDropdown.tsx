@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { Container, DropdownContainer, Img, Preview, PreviewContainer } from "./PaymentsDropdown.styled"
+import PaymentsDropdownOptions from "./PaymentsDropdownOptions";
 
 import chevronDown from "../../../asset/chevron-down.svg";
 import chevronUp from "../../../asset/chevron-up.svg";
-import PaymentsDropdownOptions from "./PaymentsDropdownOptions";
 
 interface PaymentsDropdownProps<T> {
   changeOption: (option: T) => void;

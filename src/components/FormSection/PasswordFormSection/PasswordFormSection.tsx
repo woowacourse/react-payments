@@ -20,7 +20,7 @@ interface PasswordFormSectionProps {
 const PasswordFormSection = (props: PasswordFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = usePasswordFormSection({ cardInfo, dispatchCardInfo })
+  const [onChange, handleOnFocus, handleOnBlur] = usePasswordFormSection({ cardInfo, dispatchCardInfo })
   const secureValue = (input: string) => {
     return '*'.repeat(input.length)
   }
@@ -35,13 +35,13 @@ const PasswordFormSection = (props: PasswordFormSectionProps) => {
             placeholder="123"
             maxLength={OPTION.passwordMaxLength}
             value={secureValue(cardInfo.password.value)}
-            hasError={inputState.errorMessage.length !== 0}
+            hasError={cardInfo.password.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
           />
         </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+        <Styled.ErrorMessage>{cardInfo.password.errorMessage}</Styled.ErrorMessage>
       </Styled.InputForm>
     </Styled.FormSection>
   );

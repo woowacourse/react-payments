@@ -1,4 +1,3 @@
-import useCardInfo from '../../hook/useCardInfo';
 import CVCFormSection from '../FormSection/CVCFormSection/CVCFormSection';
 import CardNumbersFormSection from '../FormSection/CardNumbersFormSection/CardNumbersFormSection';
 import CompanyDropdownFormSection from '../FormSection/CompanyDropdownFormSection/CompanyDropdownFormSection';

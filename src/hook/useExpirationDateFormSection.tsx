@@ -24,7 +24,6 @@ const now = year + month;
 const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const [inputState, setInputState] = useState<ExpirationInputState>({ month: { hasError: false, hasFocus: false }, year: { hasError: false, hasFocus: false } });
-  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: ExpirationInputType) => {
     const inputValue = event.target.value;
@@ -37,7 +36,7 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
           hasError: true,
         }
       }))
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.onlyNumber })
       dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue.slice(0, -1) } })
     } else {
       dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue } })
@@ -98,9 +97,9 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
 
     if (nowDate - expireDate > 0) {
       setInputState({ month: { ...inputState.month, hasError: true }, year: { ...inputState.month, hasError: true } });
-      setErrorMessage(ERROR_MESSAGE.expiredCard);
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.expiredCard })
     } else {
-      setErrorMessage('');
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: '' })
       dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
     }
   };
@@ -119,7 +118,7 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
 
     if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.expiryFormat);
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.expirationFormat })
     } else {
       validateExpired();
     }
@@ -127,11 +126,11 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
 
   const resetErrors = () => {
     setInputState({ month: { ...inputState.month, hasError: false }, year: { ...inputState.month, hasError: false } });
-    setErrorMessage('');
+    dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: '' })
   };
 
 
-  return [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] as const;
+  return [inputState, onChange, handleOnFocus, handleOnBlur] as const;
 };
 
 export default useExpirationDateFormSection;

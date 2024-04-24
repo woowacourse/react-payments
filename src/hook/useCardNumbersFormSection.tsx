@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
-import { startsWithNumberRegex } from "../util/startsWithNumberRegex";
 
 interface UseCardNumbersFormSectionProps {
   cardInfo: CardInfo;
@@ -23,7 +22,6 @@ const initializeInputFieldState = (length: number) => {
 const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const [inputState, setInputState] = useState(initializeInputFieldState(OPTION.cardNumberInputCount));
-  const [errorMessage, setErrorMessage] = useState('');
 
   const checkBrand = (inputValue: string) => {
     if (REGEX.visaCard.test(inputValue)) {
@@ -33,14 +31,11 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
     } else {
       dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'none' })
     }
-
-    console.log(cardInfo.cardBrand.value)
   }
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = event.target.value;
     const newNumbers = [...cardInfo.cardNumbers.value]
-    if (index === 0) checkBrand(inputValue);
 
     if (!REGEX.numbers.test(inputValue)) {
       setInputState((prevState) => ({
@@ -50,7 +45,7 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
           hasError: true,
         }
       }))
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
+      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: ERROR_MESSAGE.onlyNumber });
       newNumbers[index] = inputValue.slice(0, -1)
       dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: newNumbers })
     } else {
@@ -58,6 +53,8 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
       newNumbers[index] = inputValue
       dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: newNumbers })
     }
+    if (index === 0) checkBrand(newNumbers[0]);
+
   }
 
   const handleOnFocus = (index: number) => {
@@ -110,9 +107,9 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
     setInputState(newState);
 
     if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.cardNumberOutOfRange);
+      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: ERROR_MESSAGE.cardNumberOutOfRange });
     } else {
-      setErrorMessage('');
+      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: '' });
       dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
     }
   };
@@ -126,10 +123,10 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
 
     setInputState(newState);
 
-    setErrorMessage('');
+    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: '' });
   };
 
-  return [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] as const
+  return [inputState, onChange, handleOnFocus, handleOnBlur] as const
 }
 
 export default useCardNumbersFormSection;

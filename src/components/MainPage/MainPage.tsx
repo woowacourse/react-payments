@@ -7,13 +7,13 @@ import { MainContainer } from './MainPage.styled';
 import cardInfoReducer from '../../store/cardInfoReducer';
 
 const INITIAL_CARD_INFO_STATE: CardInfo = {
-  cardNumbers: { value: ['', '', '', ''], isComplete: false },
-  cardBrand: { value: 'none', isComplete: false },
-  cardCompany: { value: '', isComplete: false },
-  expiration: { value: { month: '', year: '' }, isComplete: false },
-  name: { value: '', isComplete: false },
-  cvc: { value: '', isComplete: false },
-  password: { value: '', isComplete: false },
+  cardNumbers: { value: ['', '', '', ''], isComplete: false, errorMessage: '' },
+  cardBrand: { value: 'none', isComplete: false, errorMessage: '' },
+  cardCompany: { value: '', isComplete: false, errorMessage: '' },
+  expiration: { value: { month: '', year: '' }, isComplete: false, errorMessage: '' },
+  name: { value: '', isComplete: false, errorMessage: '' },
+  cvc: { value: '', isComplete: false, errorMessage: '' },
+  password: { value: '', isComplete: false, errorMessage: '' },
 }
 
 const MainPage = () => {

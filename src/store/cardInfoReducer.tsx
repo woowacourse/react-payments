@@ -14,6 +14,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
         }
       }
 
+    case 'SET_CARD_NUMBERS_ERROR_MESSAGE':
+      return {
+        ...state, cardNumbers: {
+          ...state.cardNumbers, errorMessage: action.value
+        }
+      }
+
     case 'SET_CARD_BRAND_VALUE':
       return {
         ...state, cardBrand: {
@@ -25,6 +32,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
       return {
         ...state, cardBrand: {
           ...state.cardBrand, isComplete: action.value
+        }
+      }
+
+    case 'SET_CARD_BRAND_ERROR_MESSAGE':
+      return {
+        ...state, cardBrand: {
+          ...state.cardBrand, errorMessage: action.value
         }
       }
 
@@ -42,6 +56,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
         }
       }
 
+    case 'SET_CARD_COMPANY_ERROR_MESSAGE':
+      return {
+        ...state, cardCompany: {
+          ...state.cardCompany, errorMessage: action.value
+        }
+      }
+
     case 'SET_CARD_EXPIRATION_VALUE':
       return {
         ...state, expiration: {
@@ -53,6 +74,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
       return {
         ...state, expiration: {
           ...state.expiration, isComplete: action.value
+        }
+      }
+
+    case 'SET_CARD_EXPIRATION_ERROR_MESSAGE':
+      return {
+        ...state, expiration: {
+          ...state.expiration, errorMessage: action.value
         }
       }
 
@@ -70,6 +98,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
         }
       }
 
+    case 'SET_CARD_NAME_ERROR_MESSAGE':
+      return {
+        ...state, name: {
+          ...state.name, errorMessage: action.value
+        }
+      }
+
     case 'SET_CARD_CVC_VALUE':
       return {
         ...state, cvc: {
@@ -84,6 +119,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
         }
       }
 
+    case 'SET_CARD_CVC_ERROR_MESSAGE':
+      return {
+        ...state, cvc: {
+          ...state.cvc, errorMessage: action.value
+        }
+      }
+
     case 'SET_CARD_PASSWORD_VALUE':
       return {
         ...state, password: {
@@ -95,6 +137,13 @@ const cardInfoReducer = (state: CardInfo, action: CardInfoAction) => {
       return {
         ...state, password: {
           ...state.password, isComplete: action.value
+        }
+      }
+
+    case 'SET_CARD_PASSWORD_ERROR_MESSAGE':
+      return {
+        ...state, password: {
+          ...state.password, errorMessage: action.value
         }
       }
 

@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
-import OPTION from '../../../constants/option';
-
+import styled from 'styled-components';
 import * as Styled from '../FormSection.styled';
+
 import useNameFormSection from '../../../hook/useNameFormSection';
+
+import OPTION from '../../../constants/option';
 
 const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
     text-transform: uppercase;
@@ -20,7 +20,7 @@ interface NameFormSectionProps {
 const NameFormSection = (props: NameFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo })
+  const [onChange, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo })
 
   return (
     <Styled.FormSection>
@@ -33,13 +33,13 @@ const NameFormSection = (props: NameFormSectionProps) => {
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
             value={cardInfo.name.value}
-            hasError={inputState.errorMessage.length !== 0}
+            hasError={cardInfo.name.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
           />
         </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+        <Styled.ErrorMessage>{cardInfo.name.errorMessage}</Styled.ErrorMessage>
       </Styled.InputForm>
     </Styled.FormSection>
   );

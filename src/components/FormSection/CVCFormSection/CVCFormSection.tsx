@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
-import OPTION from '../../../constants/option';
-
+import styled from 'styled-components';
 import * as Styled from '../FormSection.styled';
+
 import useCVCFormSection from '../../../hook/useCVCFormSection';
+
+import OPTION from '../../../constants/option';
 
 const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
     text-transform: uppercase;
@@ -21,7 +21,7 @@ interface CVCFormSectionProps {
 const CVCFormSection = (props: CVCFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, handleCardState } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ cardInfo, dispatchCardInfo, handleCardState })
+  const [onChange, handleOnFocus, handleOnBlur] = useCVCFormSection({ cardInfo, dispatchCardInfo, handleCardState })
 
   return (
     <Styled.FormSection>
@@ -34,13 +34,13 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
             placeholder="123"
             maxLength={OPTION.cvcMaxLength}
             value={cardInfo.cvc.value}
-            hasError={inputState.errorMessage.length !== 0}
+            hasError={cardInfo.cvc.errorMessage.length !== 0}
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
           />
         </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+        <Styled.ErrorMessage>{cardInfo.cvc.errorMessage}</Styled.ErrorMessage>
       </Styled.InputForm>
     </Styled.FormSection>
   );
