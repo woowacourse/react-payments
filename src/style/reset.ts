@@ -14,6 +14,14 @@ const resetStyle = css`
     display: none;
   }
 
+  body {
+    -ms-overflow-style: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   input {
     box-shadow: none;
     outline: none;

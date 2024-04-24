@@ -30,20 +30,22 @@ const CardRegisterForm = ({
   passwordState,
   cardTypeState,
 }: Props) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const cardNumbersError = cardNumbersState.isError;
 
   useEffect(() => {
     if (!cardNumbersError) {
-      setStep(2);
+      if (step < 2) {
+        setStep(2);
+      }
     }
   }, [cardNumbersError]);
 
   return (
     <S.CardFormWrapper>
-      {step >= 3 && <PasswordField passwordState={passwordState} />}
-      {step >= 3 && <CVCField CVCNumbersState={CVCNumbersState} />}
-      {step >= 3 && (
+      {step >= 6 && <PasswordField passwordState={passwordState} />}
+      {step >= 5 && <CVCField CVCNumbersState={CVCNumbersState} />}
+      {step >= 4 && (
         <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
       )}
       {step >= 3 && <OwnerNameField ownerNameState={ownerNameState} />}

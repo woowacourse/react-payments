@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const CardFormWrapper = styled.div`
   width: 315px;
+  height: 60vh;
+  overflow: scroll;
 `;
 
 const InputFieldWithInfo = styled.div`
