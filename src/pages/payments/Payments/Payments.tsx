@@ -20,8 +20,11 @@ import {
 
 import styles from './Payments.module.css';
 import { Spacer } from '../../../components/index';
+import { useNavigate } from 'react-router-dom';
 
 const Payments: React.FC = () => {
+  const navigate = useNavigate();
+
   const { cvcNumber, cvcNumberState, handleCVCNumberChange } = useChangeCVCNumber();
   const { ownerName, ownerNameState, handleOwnerNameChange } = useChangeOwnerName();
   const { cardIssuer, cardIssuerState, handleCardIssuerChange } = useChangeCardIssuer();
@@ -107,6 +110,12 @@ const Payments: React.FC = () => {
                 label="확인"
                 onClickSubmitButton={(e) => {
                   e.preventDefault();
+                  navigate('/submit', {
+                    state: {
+                      firstCardNumber: cardNumbers[0],
+                      cardIssuer,
+                    },
+                  });
 
                   /* Write Validation Logic, If Needed. */
                   /* Write Submit Logic, If Needed. */

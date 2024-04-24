@@ -1,0 +1,25 @@
+.submitContainer {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 188px;
+  margin: auto;
+}
+
+.complete {
+  width: 76px;
+  height: 76px;
+}
+
+.message {
+  height: 100px;
+  font-family: Noto Sans KR;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 36.2px;
+  color: var(--submit-message-text);
+  text-align: center;
+}

@@ -1,0 +1,12 @@
+.button {
+  border: 0;
+  width: 320px;
+  height: 44px;
+  background-color: var(--submit-confirm-button);
+  font-family: Noto Sans KR;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.72px;
+  color: var(--submit-confirm-button-text);
+  text-align: center;
+}
