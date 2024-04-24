@@ -4,9 +4,10 @@ import CardNumberContainer from './components/CardNumbersContainer';
 import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
 import useCardInfo from './hooks/useCardInfo';
+import CardCompanyContainer from './components/CardCompanyContainer';
 
 const App = () => {
-  const { cardNumberInfo, cardholderNameInfo, expiryDateInfo } = useCardInfo();
+  const { cardNumberInfo, cardholderNameInfo, expiryDateInfo, cardCompanyInfo } = useCardInfo();
 
   return (
     <AppLayout>
@@ -14,8 +15,10 @@ const App = () => {
         cardNumbers={cardNumberInfo.value}
         expiryDate={{ month: expiryDateInfo.month.value, year: expiryDateInfo.year.value }}
         cardholderName={cardholderNameInfo.value}
+        cardType={cardCompanyInfo.value}
       />
       <CardInfoWrapper>
+        <CardCompanyContainer cardCompany={cardCompanyInfo.value} {...cardCompanyInfo} />
         <CardNumberContainer cardNumbers={cardNumberInfo.value} {...cardNumberInfo} />
         <CardExpiryDateContainer {...expiryDateInfo} />
         <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
