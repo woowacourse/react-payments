@@ -5,6 +5,7 @@ import CardPreview from '../CardPreview/CardPreview';
 
 import { MainContainer } from './MainPage.styled';
 import cardInfoReducer from '../../store/cardInfoReducer';
+import PaymentsBottomFixedButton from '../common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
 
 const INITIAL_CARD_INFO_STATE: CardInfo = {
   cardNumbers: { value: ['', '', '', ''], isComplete: false, errorMessage: '' },
@@ -24,11 +25,16 @@ const MainPage = () => {
     setCardState(cardState)
   }
 
+  const showSubmitButton = cardInfo.password.isComplete && Object.values(cardInfo).map((info) => info.errorMessage).every((errorMessage) => errorMessage.length === 0)
+
   return (
-    <MainContainer>
-      <CardPreview cardInfo={cardInfo} cardState={cardState} setCardState={setCardState} />
-      <CardInfo cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />
-    </MainContainer>
+    <>
+      {!showSubmitButton || <PaymentsBottomFixedButton text="확인" onClick={() => { }} />}
+      <MainContainer>
+        <CardPreview cardInfo={cardInfo} cardState={cardState} setCardState={setCardState} />
+        <CardInfo cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />
+      </MainContainer>
+    </>
   );
 };
 

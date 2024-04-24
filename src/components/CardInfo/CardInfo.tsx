@@ -4,6 +4,7 @@ import CompanyDropdownFormSection from '../FormSection/CompanyDropdownFormSectio
 import ExpirationDateFormSection from '../FormSection/ExpirationDateFormSection/ExpirationDateFormSection';
 import NameFormSection from '../FormSection/NameFormSection/NameFormSection';
 import PasswordFormSection from '../FormSection/PasswordFormSection/PasswordFormSection';
+import PaymentsBottomFixedButton from '../common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
 
 import { Container } from './CardInfo.styled';
 
