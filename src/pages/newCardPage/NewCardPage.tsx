@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Input from '../../components/input/Input';
+import Input from '../../components/common/input/Input';
+import Select from '../../components/common/select/Select';
 import CardPreview from '../../components/cardPreview/CardPreview';
 import { ICardInfo, IErrorMessage } from '../../types/type';
 import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
@@ -13,6 +14,7 @@ import { CARD_FORM_INPUTS } from '../../constants/setting';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
+    cardCompany: '',
     cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
     userName: '',
@@ -50,6 +52,13 @@ const NewCardPage = () => {
         ],
       });
     }
+  };
+
+  const handleCardCompanyChange = (value: string) => {
+    setCardInfo({
+      ...cardInfo,
+      cardCompany: value,
+    });
   };
 
   const handleCardExpirationChange = (value: string, index: number) => {
@@ -105,6 +114,17 @@ const NewCardPage = () => {
             onChange={(e) => handleCardNumbersChange(e.target.value, index)}
           ></Input>
         ))}
+      </NewCardInputSection>
+      <NewCardInputSection
+        label={CARD_FORM_INPUTS.CARD_COMPANY.LABEL}
+        mainText={CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT}
+        subText={CARD_FORM_INPUTS.CARD_COMPANY.SUB_TEXT}
+      >
+        <Select
+          options={CARD_FORM_INPUTS.CARD_COMPANY.OPTIONS}
+          onChange={(e) => handleCardCompanyChange(e.target.value)}
+          value={cardInfo.cardCompany}
+        ></Select>
       </NewCardInputSection>
       <NewCardInputSection
         label={CARD_FORM_INPUTS.CARD_EXPIRATION.LABEL}

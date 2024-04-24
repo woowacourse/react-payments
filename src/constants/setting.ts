@@ -6,6 +6,22 @@ export const CARD_FORM_INPUTS = {
     PLACEHOLDER: '1234',
     MAX_LENGTH: 4,
   },
+  CARD_COMPANY: {
+    LABEL: '카드사',
+    MAIN_TEXT: '카드사를 선택해 주세요',
+    SUB_TEXT: '현재 국내 카드사만 가능합니다.',
+    OPTIONS: [
+      '카드사를 선택해 주세요',
+      'BC카드',
+      '신한카드',
+      '카카오뱅크',
+      '현대카드',
+      '우리카드',
+      '롯데카드',
+      '하나카드',
+      '국민카드',
+    ],
+  },
   CARD_EXPIRATION: {
     LABEL: '유효 기간',
     MAIN_TEXT: '카드 유효기간을 입력해 주세요',

@@ -5,7 +5,7 @@ export interface NewCardInputSectionProps {
   label: string;
   mainText: string;
   subText?: string;
-  errorMessage: string[];
+  errorMessage?: string[];
 }
 
 const NewCardInputSection = ({

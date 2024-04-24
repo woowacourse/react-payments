@@ -1,4 +1,5 @@
 export interface ICardInfo {
+  cardCompany: string;
   cardNumbers: [number, number, number, number];
   cardExpiration: [number, number];
   userName: string;
