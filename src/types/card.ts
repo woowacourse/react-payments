@@ -1,4 +1,4 @@
-import { CARD_COLOR } from '../../constants/card';
+import { CARD_COLOR } from '../constants/card';
 
 type MM = string;
 type YY = string;

@@ -1,4 +1,4 @@
-import { ErrorDetail } from '../components/types/error';
+import { ErrorDetail } from '../types/error';
 import CONDITION from '../constants/condition';
 
 const validateCardNumber = (cardNumber: string): ErrorDetail => {

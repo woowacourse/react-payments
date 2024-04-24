@@ -1,5 +1,5 @@
 import { ErrorText, ErrorWrapper } from '../styles/common';
-import { ErrorDetail } from './types/error';
+import { ErrorDetail } from '../types/error';
 import Dropdown from './common/Dropdown';
 import DropdownField from './common/DropdownField';
 

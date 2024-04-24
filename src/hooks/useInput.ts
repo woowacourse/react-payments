@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ErrorDetail } from '../components/types/error';
+import { ErrorDetail } from '../types/error';
 import useError from './useError';
 
 interface ValidateProps {

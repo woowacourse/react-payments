@@ -4,7 +4,7 @@ import useExpiryYear from './useExpiryYear';
 import useCardholderName from './useCardholderName';
 import validateCardNumber from '../validator/validateCardNumber';
 import useSelect from './useSelect';
-import { CARD_TYPE } from '../components/types/card';
+import { CARD_TYPE } from '../types/card';
 import useInput from './useInput';
 import validateNumber from '../validator/validateNumber';
 import validateCardPassword from '../validator/validateCardPassword';
