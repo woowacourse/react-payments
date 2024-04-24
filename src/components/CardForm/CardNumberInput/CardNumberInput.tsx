@@ -7,6 +7,7 @@ import useInputs from '../../../hooks/useInputs';
 import { isNumber } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
+import { useState } from 'react';
 
 interface CardNumberInputProps {
   cardNumbers: string[];
@@ -15,12 +16,20 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
+  const [isClicked, setIsClicked] = useState([false, false, false, false]);
   const { value: cardNumbersInput, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
+    }
+
+    if (!isClicked[inputIndex]) {
+      const newIsClicked = [...isClicked];
+      newIsClicked[inputIndex] = true;
+
+      setIsClicked(newIsClicked);
     }
 
     onCardNumbersInputChange(e, inputIndex);
@@ -32,7 +41,11 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <InputField label="카드 번호" inputCount={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField
+        label="카드 번호"
+        inputCount={CARD_NUMBER.INPUT_FIELD_COUNT}
+        errorMessage={isClicked.some(Boolean) ? errorMessage : ''}
+      >
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}
@@ -41,7 +54,7 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
             placeholder="1234"
             value={cardNumbersInput[index]}
             onChange={handleCardNumberChange(index)}
-            isValid={isValid[index]}
+            isValid={isClicked[index] ? isValid[index] : true}
           />
         ))}
       </InputField>

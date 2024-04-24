@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -16,6 +18,9 @@ interface CardExpirationInputProps {
 }
 
 function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: CardExpirationInputProps) {
+  const [isMonthClicked, setIsMonthClicked] = useState(false);
+  const [isYearClicked, setIsYearClicked] = useState(false);
+
   const { value: monthInput, onChange: onMonthInputChange } = useInput(month);
   const { value: yearInput, onChange: onYearInputChange } = useInput(year);
 
@@ -24,6 +29,8 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       e.target.value = '';
       return;
     }
+
+    if (!isMonthClicked) setIsMonthClicked(true);
 
     onMonthInputChange(e);
     handleMonth(e.target.value);
@@ -34,6 +41,8 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       e.target.value = '';
       return;
     }
+
+    if (!isYearClicked) setIsYearClicked(true);
 
     onYearInputChange(e);
     handleYear(e.target.value);
@@ -48,14 +57,18 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField
+        label="유효기간"
+        inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT}
+        errorMessage={isMonthClicked || isYearClicked ? errorMessage : ''}
+      >
         <Input
           type="text"
           placeholder="MM"
           value={monthInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
-          isValid={isValid[0]}
+          isValid={isMonthClicked ? isValid[0] : true}
         />
         <Input
           type="text"
@@ -63,7 +76,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
           value={yearInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
-          isValid={isValid[1]}
+          isValid={isYearClicked ? isValid[1] : true}
         />
       </InputField>
     </div>

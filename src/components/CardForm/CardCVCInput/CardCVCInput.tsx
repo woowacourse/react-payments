@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -13,6 +15,7 @@ interface CardCVCInputProps {
 }
 
 const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
+  const [isClicked, setIsClicked] = useState(false);
   const { value: cvcInput, onChange: onCVCInputChange } = useInput(cvc);
 
   const handleCVCFocus = () => {
@@ -25,6 +28,8 @@ const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInpu
       return;
     }
 
+    if (!isClicked) setIsClicked(true);
+
     onCVCInputChange(e);
     handleCVC(e.target.value);
   };
@@ -34,9 +39,9 @@ const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInpu
   return (
     <div>
       <TitleContainer title="CVC 번호를 입력해 주세요" />
-      <InputField label="CVC" inputCount={1} errorMessage={errorMessage}>
+      <InputField label="CVC" inputCount={1} errorMessage={isClicked ? errorMessage : ''}>
         <Input
-          isValid={isValid}
+          isValid={isClicked ? isValid : true}
           type="text"
           placeholder="123"
           value={cvcInput}

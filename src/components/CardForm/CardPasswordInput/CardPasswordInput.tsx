@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -12,6 +14,7 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordInputProps) => {
+  const [isClicked, setIsClicked] = useState(false);
   const { value: passwordInput, onChange: onPasswordInputChange } = useInput(password);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +22,8 @@ const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordIn
       e.target.value = '';
       return;
     }
+
+    if (!isClicked) setIsClicked(true);
 
     onPasswordInputChange(e);
     handlePassword(e.target.value);
@@ -29,9 +34,9 @@ const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordIn
   return (
     <div>
       <TitleContainer title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해 주세요." />
-      <InputField label="비밀번호 앞 2자리" inputCount={1} errorMessage={errorMessage}>
+      <InputField label="비밀번호 앞 2자리" inputCount={1} errorMessage={isClicked ? errorMessage : ''}>
         <Input
-          isValid={isValid}
+          isValid={isClicked ? isValid : true}
           type="password"
           placeholder="비밀번호를 입력하세요"
           value={passwordInput}
