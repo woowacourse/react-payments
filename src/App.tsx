@@ -8,8 +8,9 @@ import Input from './components/composables/Input';
 import Select from './components/composables/Select';
 import ScreenReaderOnlyLabel from './components/composables/ScreenReaderOnlyLabel';
 import CardPreview from './components/CardPreview/CardPreview';
-import useCardNumbers from './hooks/useCardNumbers';
 import useInput from './hooks/useInput';
+import useCardNumbers from './hooks/useCardNumbers';
+import useExpirationDate from './hooks/useExpirationDate';
 import validate from './utils/validate';
 
 import {
@@ -31,20 +32,6 @@ export type CardNumberState = {
 function App() {
   const [isFlip, setIsFlip] = useState(false);
 
-  const monthValidations: ValidationType[] = [
-    {
-      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
-      errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
-    },
-  ];
-
-  const yearValidations: ValidationType[] = [
-    {
-      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
-      errorMessage: EXPIRATION_PERIOD.yearErrorMessage,
-    },
-  ];
-
   const nameValidations: ValidationType[] = [
     {
       isError: (state: string) => state !== '' && !validate.isEnglish(state),
@@ -62,41 +49,7 @@ function App() {
     errorMessage: cardCompanyErrorMessage,
   } = useInput<HTMLSelectElement>([]);
 
-  const {
-    inputState: month,
-    inputChangeHandler: monthChangeHandler,
-    inputOnBlurHandler: monthOnBlurHandler,
-    isError: isMonthError,
-    errorMessage: monthErrorMessage,
-  } = useInput<HTMLInputElement>(monthValidations, [
-    {
-      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-      errorMessage: '2자리 숫자를 입력해주세요.',
-    },
-    {
-      isError: (state: string) =>
-        state !== '' &&
-        !validate.isNumberInRange({
-          min: 1,
-          max: 12,
-          compareNumber: Number(state),
-        }),
-      errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
-    },
-  ]);
-
-  const {
-    inputState: year,
-    inputChangeHandler: yearChangeHandler,
-    inputOnBlurHandler: yearOnBlurHandler,
-    isError: isYearError,
-    errorMessage: yearErrorMessage,
-  } = useInput<HTMLInputElement>(yearValidations, [
-    {
-      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-      errorMessage: '2자리 숫자를 입력해주세요.',
-    },
-  ]);
+  const { month, year } = useExpirationDate();
 
   const {
     inputState: name,
@@ -155,8 +108,8 @@ function App() {
         <CardPreview
           isFlip={isFlip}
           cardNumbers={cardNumbersArray.map(({ inputState }) => inputState)}
-          month={month}
-          year={year}
+          month={month.inputState}
+          year={year.inputState}
           name={name.toUpperCase()}
           cvc={cvc}
           cardImageSrc={cardImageSrc}
@@ -231,11 +184,11 @@ function App() {
               id={'month'}
               placeholder={'MM'}
               type="text"
-              value={month}
+              value={month.inputState}
               maxLength={2}
-              onChange={monthChangeHandler}
-              onBlur={monthOnBlurHandler}
-              isError={isMonthError}
+              onChange={month.inputChangeHandler}
+              onBlur={month.inputOnBlurHandler}
+              isError={month.isError}
             />
             <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
             <Input
@@ -243,17 +196,17 @@ function App() {
               placeholder={'YY'}
               type="text"
               maxLength={2}
-              value={year}
-              onChange={yearChangeHandler}
-              onBlur={yearOnBlurHandler}
-              isError={isYearError}
+              value={year.inputState}
+              onChange={year.inputChangeHandler}
+              onBlur={year.inputOnBlurHandler}
+              isError={year.isError}
             />
           </InputSection>
           <S.ErrorWrapper>
             <S.ErrorMessage>
-              {isMonthError && isYearError && monthErrorMessage}
-              {!isMonthError && isYearError && yearErrorMessage}
-              {isMonthError && !isYearError && monthErrorMessage}
+              {month.isError && year.isError && month.errorMessage}
+              {!month.isError && year.isError && year.errorMessage}
+              {month.isError && !year.isError && month.errorMessage}
             </S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
