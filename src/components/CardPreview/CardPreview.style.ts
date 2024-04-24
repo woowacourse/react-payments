@@ -23,8 +23,10 @@ export const CardContainer = styled.div<{ $bgColor: string }>`
     width: 100%;
     height: 100%;
 
+    box-shadow: 3px 3px 5px 0px #00000040;
+
     backface-visibility: hidden;
-    transition: transform 1.5s ease-in-out;
+    transition: transform 1.2s ease-in-out;
     background-color: ${(props) => props.$bgColor ?? '#333333'};
   }
 `;
@@ -48,11 +50,22 @@ export const Back = styled.div<{ $isFlip: boolean }>`
 `;
 
 export const MagneticStripe = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
   width: 100%;
   height: 24px;
 
+  padding: 2px 16px;
+
   margin-bottom: 24px;
   background-color: #cbba64;
+`;
+
+export const CVCNumber = styled.span`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #fff;
 `;
 
 export const NumbersContainer = styled.div`

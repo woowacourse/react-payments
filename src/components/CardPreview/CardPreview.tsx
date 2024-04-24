@@ -58,7 +58,7 @@ export default function CardPreview({
         </S.Front>
         <S.Back $isFlip={isFlip}>
           <S.MagneticStripe>
-            <span>{cvc}</span>
+            <S.CVCNumber>{cvc}</S.CVCNumber>
           </S.MagneticStripe>
         </S.Back>
       </S.CardContainer>
