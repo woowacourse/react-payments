@@ -5,5 +5,6 @@ export const ERROR = {
   NOT_NUMBER: "숫자만 입력해주세요",
   NOT_MONTH: "1~12월 중 하나를 입력해주세요",
   NOT_YEAR: "유효한 년도를 입력해주세요",
-  NOT_ALPHABET: "영문자만 입력해주세요",
+  NOT_ALPHABET: "영문자 대문자만 입력해주세요",
+  EMPTY_INPUT: "값을 입력해주세요",
 };
