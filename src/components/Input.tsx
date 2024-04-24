@@ -4,6 +4,7 @@ import Validation from '../domain/InputValidation';
 import { forwardRef } from 'react';
 
 interface Props {
+  value: string;
   info: InputInfo;
   handleInput: (value: string) => void;
   isError: boolean;
@@ -12,7 +13,8 @@ interface Props {
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { info, handleInput, isError, handleErrorMessage, onNext } = props;
+  const { value, info, handleInput, isError, handleErrorMessage, onNext } =
+    props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -22,6 +24,7 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
       handleInput(inputValue);
     } catch (error) {
       if (error instanceof Error) {
+        console.log(error);
         handleErrorMessage(error.message);
       }
     }
@@ -33,6 +36,7 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   return (
     <StyledInput
+      value={value}
       color={isError ? 'red' : 'grey'}
       type={info.type || 'text'}
       maxLength={info.maxLength}

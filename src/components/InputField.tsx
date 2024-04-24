@@ -59,6 +59,7 @@ export default function InputField({
           <Input
             key={index}
             ref={(ref) => (inputRefs.current[index] = ref as HTMLInputElement)}
+            value={values[info.property] || ''}
             info={info}
             handleInput={(value: string) => handleUpdateInput(index, value)}
             isError={!!errorMessages[index]}
