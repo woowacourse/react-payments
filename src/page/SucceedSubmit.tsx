@@ -10,7 +10,7 @@ export default function SucceedSubmit() {
   console.log(cardNumbers, cardCompany);
 
   return (
-    <Page>
+    <CenterPage>
       <Container>
         <Img src={Check} alt="check" />
         <TextBox>
@@ -21,9 +21,14 @@ export default function SucceedSubmit() {
           <Button> 확인 </Button>
         </Link>
       </Container>
-    </Page>
+    </CenterPage>
   );
 }
+
+const CenterPage = styled(Page)`
+  height: 100vh;
+  justify-content: center;
+`;
 
 const Container = styled.div`
   display: flex;
