@@ -4,9 +4,9 @@ import Payments from "./routes/Payments";
 
 function App() {
   return (
-    <div>
+    <>
       <Payments />
-    </div>
+    </>
   );
 }
 
