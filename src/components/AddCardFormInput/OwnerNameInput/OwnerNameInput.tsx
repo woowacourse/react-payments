@@ -10,18 +10,9 @@ import {
 } from '../../../domain/validators';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.OWNER_NAME;
-
-interface OwnerNameInputProps {
-  values: OwnerName;
-  errorMessage: string;
-  isError: Record<string, boolean>;
-  onChange: (props: CustomInputHandlerProps<OwnerName>) => void;
-  onBlur: (props: CustomInputHandlerProps<OwnerName>) => void;
-}
 
 function OwnerNameInput({
   values: ownerName,
@@ -29,7 +20,7 @@ function OwnerNameInput({
   isError,
   onChange,
   onBlur,
-}: OwnerNameInputProps) {
+}: InputProps<OwnerName>) {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const name = event.target.name as OwnerNameKey;

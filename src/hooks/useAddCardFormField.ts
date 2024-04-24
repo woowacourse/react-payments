@@ -9,13 +9,6 @@ type InitialValuesType =
   | CVC
   | Password;
 
-export interface CustomInputHandlerProps<T> {
-  isValid: boolean;
-  errorMessage: string;
-  name: keyof T;
-  value: string;
-}
-
 interface UseAddCardFormFieldProps<T extends InitialValuesType> {
   initialValues: T;
 }

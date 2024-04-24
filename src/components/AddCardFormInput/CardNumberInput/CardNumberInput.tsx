@@ -6,16 +6,7 @@ import Label from '../../common/Label/Label';
 import { hasFourDigit, isInteger } from '../../../domain/validators';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
 import { validateInput } from '../../../utils/validateInput';
-
-interface CardNumberInputProps {
-  values: CardNumbers;
-  errorMessage: string;
-  isError: Record<string, boolean>;
-  onChange: (props: CustomInputHandlerProps<CardNumbers>) => void;
-  onBlur: (props: CustomInputHandlerProps<CardNumbers>) => void;
-}
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CARD_NUMBER;
@@ -26,7 +17,7 @@ export default function CardNumberInput({
   isError,
   onChange,
   onBlur,
-}: CardNumberInputProps) {
+}: InputProps<CardNumbers>) {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const name = event.target.name as CardNumbersKey;

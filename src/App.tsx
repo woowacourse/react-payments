@@ -11,18 +11,20 @@ import CardIssuerInput from './components/AddCardFormInput/CardIssuerInput/CardI
 import { INITIAL_VALUES } from './constants/form';
 
 function App() {
-  const { cardNumbers, expirationDate, ownerName, cardIssuer } = INITIAL_VALUES;
   const cardNumbersProps = useFormField<CardNumbers>({
-    initialValues: cardNumbers,
+    initialValues: INITIAL_VALUES.cardNumbers,
   });
   const expirationDateProps = useFormField<ExpirationDate>({
-    initialValues: expirationDate,
+    initialValues: INITIAL_VALUES.expirationDate,
   });
   const ownerNameProps = useFormField<OwnerName>({
-    initialValues: ownerName,
+    initialValues: INITIAL_VALUES.ownerName,
   });
   const cardIssuerProps = useFormField<CardIssuer>({
-    initialValues: cardIssuer,
+    initialValues: INITIAL_VALUES.cardIssuer,
+  });
+  const CVCProps = useFormField<CVC>({
+    initialValues: INITIAL_VALUES.cvc,
   });
 
   return (

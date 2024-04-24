@@ -11,19 +11,10 @@ import {
 } from '../../../domain/validators';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
 import { validateInput } from '../../../utils/validateInput';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
-
-interface ExpirationDateInputProps {
-  values: ExpirationDate;
-  errorMessage: string;
-  isError: Record<string, boolean>;
-  onChange: (props: CustomInputHandlerProps<ExpirationDate>) => void;
-  onBlur: (props: CustomInputHandlerProps<ExpirationDate>) => void;
-}
 
 const ExpirationDateInput = ({
   values: expirationDate,
@@ -31,7 +22,7 @@ const ExpirationDateInput = ({
   isError,
   onChange,
   onBlur,
-}: ExpirationDateInputProps) => {
+}: InputProps<ExpirationDate>) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const name = event.target.name as ExpirationDateKey;

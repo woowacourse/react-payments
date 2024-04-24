@@ -7,19 +7,10 @@ import Select from '../../common/Select/Select';
 import { validateInput } from '../../../utils/validateInput';
 import { isNotEmptyString } from '../../../domain/validators';
 
-import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 
 const { title, description, inputLabelText, defaultText, options } =
   ADD_CARD_FORM_FIELDS.CARD_ISSUER;
-
-interface CardIssueInputProps {
-  values: CardIssuer;
-  errorMessage: string;
-  isError: Record<string, boolean>;
-  onChange: (props: CustomInputHandlerProps<CardIssuer>) => void;
-  onBlur: (props: CustomInputHandlerProps<CardIssuer>) => void;
-}
 
 export default function CardIssuerInput({
   values: cardIssuer,
@@ -27,7 +18,7 @@ export default function CardIssuerInput({
   isError,
   onChange,
   onBlur,
-}: CardIssueInputProps) {
+}: InputProps<CardIssuer>) {
   const handleOnSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     const name = event.target.name as CardIssuerKey;

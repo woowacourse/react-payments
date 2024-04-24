@@ -18,4 +18,12 @@ export const INITIAL_VALUES = {
   cardIssuer: {
     cardIssuer: '',
   },
+
+  cvc: {
+    cvc: '',
+  },
+
+  password: {
+    password: '',
+  },
 };
