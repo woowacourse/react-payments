@@ -1,6 +1,6 @@
 export interface ICardInfo {
   cardCompany: string;
-  cardNumbers: [number, number, number, number];
+  cardNumbers: [string, string, string, string];
   cardExpiration: [number, number];
   userName: string;
   cvc: string;
@@ -9,6 +9,7 @@ export interface ICardInfo {
 
 export interface IErrorMessage {
   cardNumbers: [string, string, string, string];
+  cardCompany: [string];
   cardExpiration: [string, string];
   userName: [string];
   cvc: [string];

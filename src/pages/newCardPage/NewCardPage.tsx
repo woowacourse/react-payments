@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../../components/common/input/Input';
 import Select from '../../components/common/select/Select';
 import CardPreview from '../../components/cardPreview/CardPreview';
@@ -16,8 +16,8 @@ import { CARD_FORM_INPUTS } from '../../constants/setting';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
+    cardNumbers: ['', '', '', ''],
     cardCompany: '',
-    cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
     userName: '',
     cvc: '',
@@ -25,11 +25,17 @@ const NewCardPage = () => {
   });
   const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
     cardNumbers: ['', '', '', ''],
+    cardCompany: [''],
     cardExpiration: ['', ''],
     userName: [''],
     cvc: [''],
     password: [''],
   });
+  const [creationStage, setCreationStage] = useState(1);
+
+  useEffect(() => {
+    updateCardCompanyVisibility();
+  }, [cardInfo.cardNumbers]);
 
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
@@ -47,7 +53,7 @@ const NewCardPage = () => {
 
     if (errorMessageCopy[index] === '') {
       const newCardNumbers = [...cardInfo.cardNumbers];
-      newCardNumbers[index] = Number(value);
+      newCardNumbers[index] = value;
       setCardInfo({
         ...cardInfo,
         cardNumbers: [
@@ -57,6 +63,19 @@ const NewCardPage = () => {
           newCardNumbers[3],
         ],
       });
+    }
+  };
+
+  const updateCardCompanyVisibility = () => {
+    const isAllEntered = cardInfo.cardNumbers.every(
+      (element) => element.length === 4,
+    );
+    const isValidValue = errorMessage.cardNumbers.every(
+      (element) => element === '',
+    );
+
+    if (isAllEntered && isValidValue && creationStage < 2) {
+      setCreationStage(creationStage + 1);
     }
   };
 
@@ -99,6 +118,7 @@ const NewCardPage = () => {
         ...cardInfo,
         userName: value.toUpperCase(),
       });
+      setCreationStage(creationStage + 1);
     }
   };
 
@@ -115,6 +135,7 @@ const NewCardPage = () => {
         ...cardInfo,
         cvc: value,
       });
+      setCreationStage(creationStage + 1);
     }
   };
 
@@ -131,6 +152,7 @@ const NewCardPage = () => {
         ...cardInfo,
         password: value,
       });
+      setCreationStage(creationStage + 1);
     }
   };
 
@@ -153,17 +175,19 @@ const NewCardPage = () => {
           ></Input>
         ))}
       </NewCardInputSection>
-      <NewCardInputSection
-        label={CARD_FORM_INPUTS.CARD_COMPANY.LABEL}
-        mainText={CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT}
-        subText={CARD_FORM_INPUTS.CARD_COMPANY.SUB_TEXT}
-      >
-        <Select
-          options={CARD_FORM_INPUTS.CARD_COMPANY.OPTIONS}
-          onChange={(e) => handleCardCompanyChange(e.target.value)}
-          value={cardInfo.cardCompany}
-        ></Select>
-      </NewCardInputSection>
+      {creationStage === 2 && (
+        <NewCardInputSection
+          label={CARD_FORM_INPUTS.CARD_COMPANY.LABEL}
+          mainText={CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT}
+          subText={CARD_FORM_INPUTS.CARD_COMPANY.SUB_TEXT}
+        >
+          <Select
+            options={CARD_FORM_INPUTS.CARD_COMPANY.OPTIONS}
+            onChange={(e) => handleCardCompanyChange(e.target.value)}
+            value={cardInfo.cardCompany}
+          ></Select>
+        </NewCardInputSection>
+      )}
       <NewCardInputSection
         label={CARD_FORM_INPUTS.CARD_EXPIRATION.LABEL}
         mainText={CARD_FORM_INPUTS.CARD_EXPIRATION.MAIN_TEXT}
@@ -198,7 +222,6 @@ const NewCardPage = () => {
           onChange={(e) => handleUserNameChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
-      {/* CVC */}
       <NewCardInputSection
         label={CARD_FORM_INPUTS.CVC.LABEL}
         mainText={CARD_FORM_INPUTS.CVC.MAIN_TEXT}
@@ -213,7 +236,6 @@ const NewCardPage = () => {
           onChange={(e) => handleCVCChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
-      {/* 비밀번호 */}
       <NewCardInputSection
         label={CARD_FORM_INPUTS.PASSWORD.LABEL}
         mainText={CARD_FORM_INPUTS.PASSWORD.MAIN_TEXT}
