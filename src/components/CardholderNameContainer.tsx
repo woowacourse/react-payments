@@ -5,19 +5,17 @@ import { ErrorDetail } from './types/error';
 
 interface CardholderNameContainerProps {
   cardholderName: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateErrorMessage: () => void;
   errorInfo: ErrorDetail;
 }
 
 const CardholderNameContainer = ({
   cardholderName,
-  setValue,
+  handleChange,
   updateErrorMessage,
   errorInfo,
 }: CardholderNameContainerProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
-
   return (
     <div>
       <InputField
