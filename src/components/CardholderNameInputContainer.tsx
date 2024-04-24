@@ -16,7 +16,6 @@ const CardholderNameInputContainer = ({ value, setValue, errorStatus }: Cardhold
   } = useDisplayingErrorStatus(errorStatus);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
-  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -26,7 +25,7 @@ const CardholderNameInputContainer = ({ value, setValue, errorStatus }: Cardhold
           isError={isError}
           value={value}
           onChange={onChange}
-          onBlur={onBlur}
+          onBlur={bringErrorStatus}
           placeholder="JOHN DOE"
           width="100%"
           maxLength={100}

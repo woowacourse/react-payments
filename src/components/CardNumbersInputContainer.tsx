@@ -26,7 +26,6 @@ export default function CardNumbersContainer({ value, errorStatus, register }: C
   } = useDisplayingErrorStatus(errorStatus);
 
   const cardNumbersKeys = getObjectKeys(value);
-  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -46,7 +45,7 @@ export default function CardNumbersContainer({ value, errorStatus, register }: C
               id={`${key}-card-numbers-input`}
               isError={isError[key]}
               value={value[key]}
-              onBlur={onBlur}
+              onBlur={bringErrorStatus}
               placeholder="1234"
               maxLength={4}
               type={type}

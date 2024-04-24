@@ -16,7 +16,6 @@ const CvcInputContainer = ({ value, setValue, errorStatus }: ICvcInputContainerP
   } = useDisplayingErrorStatus(errorStatus);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -27,7 +26,7 @@ const CvcInputContainer = ({ value, setValue, errorStatus }: ICvcInputContainerP
           maxLength={3}
           value={value}
           onChange={onChange}
-          onBlur={onBlur}
+          onBlur={bringErrorStatus}
           width="100%"
         />
       </InputSection>

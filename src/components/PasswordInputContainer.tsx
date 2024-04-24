@@ -16,7 +16,6 @@ export default function PasswordInputContainer({ value, setValue, errorStatus }:
   } = useDisplayingErrorStatus(errorStatus);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  const onBlur = () => bringErrorStatus();
 
   return (
     <div>
@@ -33,7 +32,7 @@ export default function PasswordInputContainer({ value, setValue, errorStatus }:
           type="password"
           width="100%"
           onChange={onChange}
-          onBlur={onBlur}
+          onBlur={bringErrorStatus}
         />
       </InputSection>
       <ErrorWrapper>
