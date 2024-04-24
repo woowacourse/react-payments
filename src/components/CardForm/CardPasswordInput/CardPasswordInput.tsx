@@ -1,22 +1,18 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isNumber, isValidLength } from '../../../utils/validation';
+import { isNumber } from '../../../utils/validation';
 import useInput from '../../../hooks/useInput';
 
 interface CardPasswordInputProps {
   password: string;
+  isValid: boolean;
   handlePassword: (password: string) => void;
 }
 
-const CardPasswordInput = ({ password, handlePassword }: CardPasswordInputProps) => {
+const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordInputProps) => {
   const { value: passwordInput, onChange: onPasswordInputChange } = useInput(password);
-
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -24,22 +20,11 @@ const CardPasswordInput = ({ password, handlePassword }: CardPasswordInputProps)
       return;
     }
 
-    if (isValidLength(e.target.value, 2)) {
-      setIsValid(true);
-      setErrorMessage('');
-    }
-
+    onPasswordInputChange(e);
     handlePassword(e.target.value);
   };
 
-  const handlePasswordBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValid = isNumber(e.target.value) && isValidLength(e.target.value, 2);
-
-    setIsValid(newIsValid);
-    setErrorMessage(newIsValid ? '' : '두 자리 숫자여야 합니다.');
-
-    handlePassword(newIsValid ? e.target.value : '');
-  };
+  const errorMessage = isValid ? '' : '두 자리 숫자여야 합니다.';
 
   return (
     <div>
@@ -51,8 +36,7 @@ const CardPasswordInput = ({ password, handlePassword }: CardPasswordInputProps)
           placeholder="비밀번호를 입력하세요"
           value={passwordInput}
           maxLength={2}
-          onChange={onPasswordInputChange}
-          onBlur={handlePasswordBlur}
+          onChange={handlePasswordChange}
         />
       </InputField>
     </div>

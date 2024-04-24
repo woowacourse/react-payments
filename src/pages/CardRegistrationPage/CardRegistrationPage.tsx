@@ -16,11 +16,8 @@ import useValidatedInput from '../../hooks/useValidatedInput';
 
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  // const [month, setMonth] = useState('');
-  // const [year, setYear] = useState('');
-  const [company, setCompany] = useState('');
-  const [cvc, setCVC] = useState('');
-  const [password, setPassword] = useState('');
+  const [isCVCInput, setIsCVCInput] = useState(false);
+  const [inputComponentIndex, setInputComponentIndex] = useState(5);
 
   const validateMonth = (month: string) =>
     isValidLength(month, 2) &&
@@ -30,6 +27,12 @@ const CardRegistrationPage = () => {
 
   const validateOwner = (owner: string) =>
     isValidForm(owner, CARD_OWNER.VALID_REGEX) && isValidRange(owner.length, 1, CARD_OWNER.MAX_LENGTH);
+
+  const validateCVC = (cvc: string) => isValidLength(cvc, 3);
+
+  const validatePassword = (password: string) => isValidLength(password, 2);
+
+  const { value: company, handleValue: handleCompany } = useValidatedInput({ defaultValue: '' });
 
   const {
     value: month,
@@ -49,26 +52,21 @@ const CardRegistrationPage = () => {
     handleValue: handleOwner,
   } = useValidatedInput({ defaultValue: '', validateFunction: validateOwner });
 
-  const [isCVCInput, setIsCVCInput] = useState(false);
-  const [inputComponentIndex, setInputComponentIndex] = useState(5);
+  const {
+    value: cvc,
+    isValid: isCVCValid,
+    handleValue: handleCVC,
+  } = useValidatedInput({ defaultValue: '', validateFunction: validateCVC });
+
+  const {
+    value: password,
+    isValid: isPasswordValid,
+    handleValue: handlePassword,
+  } = useValidatedInput({ defaultValue: '', validateFunction: validatePassword });
 
   const handleCardNumbers = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
     handleInputComponentIndex(4);
-  };
-
-  const handleCompany = (company: string) => {
-    setCompany(company);
-    handleInputComponentIndex(3);
-  };
-
-  const handleCVC = (cvc: string) => {
-    setCVC(cvc);
-    handleInputComponentIndex(0);
-  };
-
-  const handlePassword = (password: string) => {
-    setPassword(password);
   };
 
   const handleIsCVCInput = (isCVCInput: boolean) => {
@@ -113,8 +111,8 @@ const CardRegistrationPage = () => {
         />
       </S.CardPreviewBoxWrapper>
       <S.CardForm>
-        <CardPasswordInput password={password} handlePassword={handlePassword} />
-        <CardCVCInput cvc={cvc} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
+        <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />
+        <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
         <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />
         <CardExpirationInput
           month={month}

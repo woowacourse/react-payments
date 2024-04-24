@@ -1,20 +1,19 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isNumber, isValidLength } from '../../../utils/validation';
+import { isNumber } from '../../../utils/validation';
+import useInput from '../../../hooks/useInput';
 
 interface CardCVCInputProps {
   cvc: string;
+  isValid: boolean;
   handleCVC: (cvc: string) => void;
   handleIsCVCInput: (isCVCInput: boolean) => void;
 }
 
-const CardCVCInput = ({ cvc, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
+  const { value: cvcInput, onChange: onCVCInputChange } = useInput(cvc);
 
   const handleCVCFocus = () => {
     handleIsCVCInput(true);
@@ -26,23 +25,11 @@ const CardCVCInput = ({ cvc, handleCVC, handleIsCVCInput }: CardCVCInputProps) =
       return;
     }
 
-    if (isValidLength(e.target.value, 3)) {
-      setIsValid(true);
-      setErrorMessage('');
-    }
-
+    onCVCInputChange(e);
     handleCVC(e.target.value);
   };
 
-  const handleCVCBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValid = isNumber(e.target.value) && isValidLength(e.target.value, 3);
-
-    setIsValid(newIsValid);
-    setErrorMessage(newIsValid ? '' : 'CVC 번호는 세 자리 숫자여야 합니다.');
-
-    handleCVC(newIsValid ? e.target.value : '');
-    handleIsCVCInput(false);
-  };
+  const errorMessage = isValid ? '' : 'CVC 번호는 세 자리 숫자여야 합니다.';
 
   return (
     <div>
@@ -52,11 +39,10 @@ const CardCVCInput = ({ cvc, handleCVC, handleIsCVCInput }: CardCVCInputProps) =
           isValid={isValid}
           type="text"
           placeholder="123"
-          value={cvc}
+          value={cvcInput}
           maxLength={3}
           onFocus={handleCVCFocus}
           onChange={handleCVCChange}
-          onBlur={handleCVCBlur}
         />
       </InputField>
     </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface useValidatedInputProps {
   defaultValue: string;
-  validateFunction: (value: string) => boolean;
+  validateFunction?: (value: string) => boolean;
 }
 
 const useValidatedInput = ({ defaultValue, validateFunction }: useValidatedInputProps) => {
@@ -10,10 +10,14 @@ const useValidatedInput = ({ defaultValue, validateFunction }: useValidatedInput
   const [isValid, setIsValid] = useState(true);
 
   const handleValue = (newValue: string) => {
-    const newIsValid = validateFunction(newValue);
+    if (validateFunction !== undefined) {
+      const newIsValid = validateFunction(newValue);
 
-    setIsValid(newIsValid);
-    setValue(newIsValid ? newValue : '');
+      setIsValid(newIsValid);
+      setValue(newIsValid ? newValue : '');
+    } else {
+      setValue(newValue);
+    }
   };
 
   return { value, isValid, handleValue };
