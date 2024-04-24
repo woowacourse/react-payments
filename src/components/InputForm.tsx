@@ -5,8 +5,10 @@ import { CardInfo, CardNumbers, ExpirationDate } from '../types/card';
 import CardNumberInput from './CardNumberInput';
 import ExpirationDateInput from './ExpirationDateInput';
 import UserNameInput from './UserNameInput';
+import { useState } from 'react';
+import { ShowComponents } from '../types/showCompents';
 
-const FormContainer = styled.form`
+const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -25,14 +27,16 @@ export default function InputForm({
   cardInfo: CardInfo;
   handleInput: HandleInput
 }) {
+  const [showComponent, setShowComponent] = useState<ShowComponents>({cardNumberInput : true, expirationDateInput: false, userNameInput: false})
   return (
     <FormContainer>
-      <CardNumberInput
+      {showComponent.userNameInput && <UserNameInput handleInput={setUserName}/>}  
+      {showComponent.expirationDateInput && <ExpirationDateInput expirationDate={expirationDate} handleInput={setExpirationDate} handleShowComponent = {setShowComponent}/>}
+      {showComponent.cardNumberInput && <CardNumberInput
         cardNumber={cardNumbers}
         handleInput={setCardNumbers}
-      />
-      <ExpirationDateInput expirationDate={expirationDate} handleInput={setExpirationDate}/>
-      <UserNameInput handleInput={setUserName}/>    
+        handleShowComponent = {setShowComponent}
+      />}
     </FormContainer>
   );
 }

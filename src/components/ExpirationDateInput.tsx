@@ -1,22 +1,41 @@
 // import styled from "styled-components";
 import Input from "./Input";
 import FieldTitle from "./FieldTitle";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
 import { ExpirationDate } from "../types/card";
+import { ShowComponents } from "../types/showCompents";
 
 interface Props {
   expirationDate : ExpirationDate,
   handleInput : (value: ExpirationDate) => void,
+  handleShowComponent : Dispatch<SetStateAction<ShowComponents>>
 }
-export default function ExpirationDateInput({expirationDate, handleInput} : Props) {
+export default function ExpirationDateInput({expirationDate, handleInput, handleShowComponent} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
+  useEffect(() => {
+    const checkCompleteInput = () => {
+      const arr = Object.values(errorMessages)
+      if(arr.length === 2){
+        return arr.every(value => value === '');
+      }
+      return false;
+    }
+    if(checkCompleteInput()) {
+      handleShowComponent((prev) => ({
+        ...prev,
+        userNameInput: true,
+      }));
+    }
+  }, [errorMessages, handleShowComponent]); 
+
   const date = ['month', 'year']
   const datePlaceHolder = ['MM', 'YY']
+
 
   const handleUpdateInput = (index: number, value: string) => {
     handleInput({
@@ -34,14 +53,15 @@ export default function ExpirationDateInput({expirationDate, handleInput} : Prop
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number, maxLength : number) => {
     try {
-          Validation[info]?.(e.target.value);
+          Validation[info]?.(e.target.value, maxLength);
           handleUpdateErrorMessages(index, '');
           handleUpdateInput(index, e.target.value);
         } catch (error) {
             if (error instanceof Error) {
             handleUpdateErrorMessages(index, error.message);
+            console.log(error)
           }
         }
   };
@@ -64,7 +84,7 @@ export default function ExpirationDateInput({expirationDate, handleInput} : Prop
         maxLength={2}
         placeholder={datePlaceHolder[index]}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, date[index], index)}
+        onChange={(e) => handleInputChange(e, date[index], index, 2)}
       />
       ))}
       </InputField>

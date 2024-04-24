@@ -6,6 +6,11 @@ import {
   YEAR_RANGE,
 } from '../constants/system';
 
+function checkMaxLength (n : string, maxLength : number){
+  if(n.length !== maxLength){
+    throw new Error(`${maxLength} 자리를 입력해주세요.`);
+  }
+}
 function checkTrimBlank(n: string) {
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
@@ -53,28 +58,32 @@ function validateUpperCase(str: string) {
 }
 
 interface ValidationMap {
-  [key: string]: (n: string) => void;
+  [key: string]: (n: string, maxLength:number) => void;
 }
 
 const Validation: ValidationMap = {
-  cardNumber: (n: string) => {
+  cardNumber: (n: string, maxLength:number) => {
     checkTrimBlank(n);
     validateNumber(n);
+    checkMaxLength(n, maxLength);
   },
-  month: (n: string) => {
+  month: (n: string, maxLength:number) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateMonth(n);
+    checkMaxLength(n, maxLength);
   },
-  year: (n: string) => {
+  year: (n: string, maxLength:number) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateYear(n);
+    checkMaxLength(n, maxLength);
   },
-  userName: (n: string) => {
+  userName: (n: string, maxLength:number) => {
     checkTrimBlank(n);
     checkDoubleBlank(n);
     validateUpperCase(n);
+    checkMaxLength(n, maxLength);
   },
 };
 

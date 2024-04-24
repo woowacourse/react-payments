@@ -1,19 +1,39 @@
 // import styled from "styled-components";
 import Input from "./Input";
 import FieldTitle from "./FieldTitle";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
 import { CardNumbers } from "../types/card";
+import { ShowComponents } from "../types/showCompents";
 
 interface Props {
   cardNumber : CardNumbers,
   handleInput : (cardNumbers: CardNumbers) => void,
+  handleShowComponent : Dispatch<SetStateAction<ShowComponents>>
 }
-export default function CardNumberInput({cardNumber, handleInput} : Props) {
+export default function CardNumberInput({cardNumber, handleInput, handleShowComponent} : Props) {
+
+  
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
+
+  useEffect(() => {
+    const checkCompleteInput = () => {
+      const arr = Object.values(errorMessages)
+      if(arr.length === 4){
+        return arr.every(value => value === '');
+      }
+      return false;
+    }
+    if(checkCompleteInput()) {
+      handleShowComponent((prev) => ({
+        ...prev,
+        expirationDateInput: true,
+      }));
+    }
+  }, [errorMessages, handleShowComponent]); 
 
   const handleUpdateInput = (index: number, value: string) => {
     handleInput({
@@ -31,9 +51,12 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number) => {
+    
+  
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number, maxLength: number) => {
     try {
-          Validation[info]?.(e.target.value);
+          Validation[info]?.(e.target.value, maxLength);
           handleUpdateErrorMessages(index, '');
           handleUpdateInput(index, e.target.value);
         } catch (error) {
@@ -42,6 +65,7 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
           }
         }
   };
+
 
   const checkInputError = (index : number) => {
     if(index in errorMessages){
@@ -61,7 +85,7 @@ export default function CardNumberInput({cardNumber, handleInput} : Props) {
         maxLength={4}
         placeholder="1234"
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'cardNumber', index)}
+        onChange={(e) => handleInputChange(e, 'cardNumber', index, 4)}
       />
       ))}
       </InputField>

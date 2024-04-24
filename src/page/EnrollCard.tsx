@@ -14,7 +14,7 @@ const Page = styled.div`
   align-items: center;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ export default function EnrollCard() {
     userName,
     setUserName,
   } = useCardForm({});
-  console.log({cardNumbers, expirationDate, userName})
+
   return (
     <Page>
       <Container>
