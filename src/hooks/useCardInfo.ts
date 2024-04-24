@@ -3,6 +3,8 @@ import useExpiryMonth from './useExpiryMonth';
 import useExpiryYear from './useExpiryYear';
 import useCardholderName from './useCardholderName';
 import validateCardNumber from '../validator/validateCardNumber';
+import useSelect from './useSelect';
+import { CARD_TYPE } from '../components/types/card';
 
 const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 
@@ -12,7 +14,14 @@ const useCardInfo = () => {
   const expiryYear = useExpiryYear();
   const cardholderNameInfo = useCardholderName();
 
-  return { cardNumberInfo, cardholderNameInfo, expiryDateInfo: { month: expiryMonth, year: expiryYear } };
+  const cardCompanyInfo = useSelect<CARD_TYPE>('');
+
+  return {
+    cardNumberInfo,
+    cardholderNameInfo,
+    expiryDateInfo: { month: expiryMonth, year: expiryYear },
+    cardCompanyInfo,
+  };
 };
 
 export default useCardInfo;
