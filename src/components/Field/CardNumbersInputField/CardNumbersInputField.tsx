@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 
 import {
   CARD_NUMBER_UNIT_PLACEHOLDER,

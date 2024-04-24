@@ -6,7 +6,7 @@ import {
   FocusEvent,
 } from "react";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 import normalizeSpaces from "../../../utils/normalizeSpaces";
 import filterEnglish from "../../../utils/filterEnglish";
 

@@ -1,15 +1,15 @@
-import styles from "./App.module.css";
-import Form from "./components/common/Form/Form";
-import { useEffect, useState } from "react";
-import ShelfSection from "./components/common/ShelfSection/ShelfSection";
-import CardNumbersInputField from "./components/Field/CardNumbersInputField/CardNumbersInputField";
-import CardExpirationDateInputField from "./components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
-import CardOwnerNameInputField from "./components/Field/CardOwnerNameInputField/CardOwnerNameInputField";
-import Card from "./components/Card/Card";
-import { CARD_NUMBER_UNIT_LENGTH } from "./constants";
-import SubmitButton from "./components/\bButton/SubmitButton";
+import styles from "./CardInputPage.module.css";
+import Form from "../../components/common/Form/Form";
+import { useState } from "react";
+import ShelfSection from "../../components/common/ShelfSection/ShelfSection";
+import CardNumbersInputField from "../../components/Field/CardNumbersInputField/CardNumbersInputField";
+import CardExpirationDateInputField from "../../components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
+import CardOwnerNameInputField from "../../components/Field/CardOwnerNameInputField/CardOwnerNameInputField";
+import Card from "../../components/Card/Card";
+import { CARD_NUMBER_UNIT_LENGTH } from "../../constants";
+import SubmitButton from "../../components/\bButton/SubmitButton";
 
-function App() {
+function CardInputPage() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(() =>
     new Array(CARD_NUMBER_UNIT_LENGTH).fill("")
   );
@@ -61,4 +61,4 @@ function App() {
   );
 }
 
-export default App;
+export default CardInputPage;

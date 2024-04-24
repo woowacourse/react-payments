@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState, ChangeEvent } from "react";
 import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 
 interface DateError {
   monthError: string | null;
