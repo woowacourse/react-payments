@@ -27,6 +27,8 @@ import * as S from './CardRegistrationPage.style';
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
 
+  const handleIsCVCInput = (isCVCInput: boolean) => setIsCVCInput(isCVCInput);
+
   const { cardNumbers, isCardNumbersValid, handleCardNumbers } = useValidatedCardNumbers();
   const { value: month, isValid: isMonthValid, handleValue: handleMonth } = useValidatedInput(validateMonth);
   const { value: year, isValid: isYearValid, handleValue: handleYear } = useValidatedInput(validateYear);
@@ -49,10 +51,6 @@ const CardRegistrationPage = () => {
   ];
 
   const { inputComponentIndex } = useMoveNextInput(5, validationList);
-
-  const handleIsCVCInput = (isCVCInput: boolean) => {
-    setIsCVCInput(isCVCInput);
-  };
 
   const inputComponentList = [
     <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />,

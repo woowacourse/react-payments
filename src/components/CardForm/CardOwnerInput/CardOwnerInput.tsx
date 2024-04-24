@@ -2,9 +2,10 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
+import useInput from '../../../hooks/useInput';
+
 import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
-import useInput from '../../../hooks/useInput';
 
 interface CardOwnerInputProps {
   owner: string;

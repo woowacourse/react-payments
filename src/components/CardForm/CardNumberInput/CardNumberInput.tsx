@@ -2,6 +2,8 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
+import useInputs from '../../../hooks/useCardNumber';
+
 import { isNumber } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
@@ -13,12 +15,15 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
+  const { value: cardNumbersInput, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
+
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
     }
 
+    onCardNumbersInputChange(e, inputIndex);
     handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? e.target.value : number)));
   };
 
@@ -34,6 +39,7 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
+            value={cardNumbersInput[index]}
             onChange={handleCardNumberChange(index)}
             isValid={isValid[index]}
           />
