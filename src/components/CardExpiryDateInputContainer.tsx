@@ -1,21 +1,11 @@
-import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 import Input from './common/Input';
 import InputSection from './common/InputSection';
 import { ErrorWrapper, ErrorText } from '../styles/common';
 import { IErrorStatus } from '../validators/index.d';
-import { validateExpiryMonth } from '../validators';
+import useExpiryDate from '../hooks/useExpiryDate';
 
 type MM = string;
 type YY = string;
-
-const formatMonth = (month: MM): { isFormatted: boolean; value: string } => {
-  const isNumber = /^\d$/.test(month);
-  if (month.length === 1 && month !== '0' && isNumber) {
-    return { isFormatted: true, value: `0${month}` };
-  }
-
-  return { isFormatted: false, value: month };
-};
 
 interface CardExpiryDateInputContainerProps {
   month: {
@@ -32,30 +22,15 @@ interface CardExpiryDateInputContainerProps {
 
 const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {
   const {
-    displayingErrorStatus: { errorMessage: monthErrorMessage, isError: isMonthError },
-    bringErrorStatus: bringMonthErrorStatus,
-  } = useDisplayingErrorStatus(month.errorStatus);
-  const {
-    displayingErrorStatus: { errorMessage: yearErrorMessage, isError: isYearError },
-    bringErrorStatus: bringYearErrorStatus,
-  } = useDisplayingErrorStatus(year.errorStatus);
-
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => month.setValue(e.target.value);
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => year.setValue(e.target.value);
-
-  const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { isFormatted, value } = formatMonth(e.target.value);
-
-    month.setValue(value);
-
-    const isValidAfterFormatting = isFormatted && validateExpiryMonth(value);
-    if (isValidAfterFormatting) {
-      return;
-    }
-
-    bringMonthErrorStatus();
-  };
-  const onYearBlur = () => bringYearErrorStatus();
+    onMonthChange,
+    onYearChange,
+    onMonthBlur,
+    onYearBlur,
+    monthErrorMessage,
+    yearErrorMessage,
+    isMonthError,
+    isYearError,
+  } = useExpiryDate({ month, year });
 
   return (
     <div>
