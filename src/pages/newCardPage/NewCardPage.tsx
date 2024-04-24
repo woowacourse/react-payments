@@ -19,7 +19,7 @@ const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
     cardNumbers: ['', '', '', ''],
     cardCompany: '',
-    cardExpiration: [0, 0],
+    cardExpiration: ['', ''],
     userName: '',
     cvc: '',
     password: '',
@@ -41,6 +41,10 @@ const NewCardPage = () => {
   useEffect(() => {
     updateCardExpirationVisibility();
   }, [cardInfo.cardCompany]);
+
+  useEffect(() => {
+    updateUserNameVisibility();
+  }, [cardInfo.cardExpiration]);
 
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
@@ -115,11 +119,25 @@ const NewCardPage = () => {
 
     if (errorMessageCopy[index] === '') {
       const newCardExpiration = [...cardInfo.cardExpiration];
-      newCardExpiration[index] = Number(value);
+      newCardExpiration[index] = value;
+
       setCardInfo({
         ...cardInfo,
         cardExpiration: [newCardExpiration[0], newCardExpiration[1]],
       });
+    }
+  };
+
+  const updateUserNameVisibility = () => {
+    const isAllEntered = cardInfo.cardExpiration.every(
+      (element) => element.length == 2,
+    );
+    const isValidValue = errorMessage.cardExpiration.every(
+      (element) => element === '',
+    );
+
+    if (isAllEntered && isValidValue && creationStage < 4) {
+      setCreationStage(creationStage + 1);
     }
   };
 
