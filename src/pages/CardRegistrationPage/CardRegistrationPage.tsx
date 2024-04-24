@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import CardPreview from '../../components/CardForm/CardPreview/CardPreview';
 import CardOwnerInput from '../../components/CardForm/CardOwnerInput/CardOwnerInput';
@@ -26,6 +27,7 @@ import * as S from './CardRegistrationPage.style';
 
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
   const handleIsCVCInput = (isCVCInput: boolean) => setIsCVCInput(isCVCInput);
 
@@ -49,6 +51,21 @@ const CardRegistrationPage = () => {
     isCVCValid,
     isPasswordValid,
   ];
+
+  useEffect(() => {
+    if (!isPasswordValid) return;
+
+    const validationList = [
+      isAllValid(isCardNumbersValid),
+      isCompanyValid,
+      isAllValid([isMonthValid, isYearValid]),
+      isOwnerValid,
+      isCVCValid,
+      isPasswordValid,
+    ];
+
+    validationList.every(Boolean) ? setIsButtonActive(true) : setIsButtonActive(false);
+  }, [isCardNumbersValid, isCompanyValid, isMonthValid, isYearValid, isOwnerValid, isCVCValid, isPasswordValid]);
 
   const { inputComponentIndex } = useMoveNextInput(5, validationList);
 
@@ -74,20 +91,27 @@ const CardRegistrationPage = () => {
   };
 
   return (
-    <S.CardRegistrationPageLayout>
-      <S.CardPreviewBoxWrapper>
-        <CardPreview
-          cardNumber={cardNumbers}
-          month={month}
-          year={year}
-          owner={owner}
-          company={company}
-          cvc={cvc}
-          isCVCInput={isCVCInput}
-        />
-      </S.CardPreviewBoxWrapper>
-      <S.CardForm>{makeInputComponentList(inputComponentIndex)}</S.CardForm>
-    </S.CardRegistrationPageLayout>
+    <div>
+      <S.CardRegistrationContainer>
+        <S.CardPreviewBoxWrapper>
+          <CardPreview
+            cardNumber={cardNumbers}
+            month={month}
+            year={year}
+            owner={owner}
+            company={company}
+            cvc={cvc}
+            isCVCInput={isCVCInput}
+          />
+        </S.CardPreviewBoxWrapper>
+        <S.CardForm>{makeInputComponentList(inputComponentIndex)}</S.CardForm>
+      </S.CardRegistrationContainer>
+      {isButtonActive && (
+        <Link to={`/complete?number=${encodeURIComponent(cardNumbers[0])}&company=${encodeURIComponent(company)}`}>
+          <S.SubmitButton>확인</S.SubmitButton>
+        </Link>
+      )}
+    </div>
   );
 };
 

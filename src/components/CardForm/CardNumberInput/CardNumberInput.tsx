@@ -2,7 +2,7 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import useInputs from '../../../hooks/useCardNumber';
+import useInputs from '../../../hooks/useInputs';
 
 import { isNumber } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
