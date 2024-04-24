@@ -1,5 +1,5 @@
 import { COLOR } from '../styles/color';
-import { CardInfo } from '../hooks/useCardInfo';
+import { CardInfo } from '../type';
 import DEFAULT_BLANK_IMAGE from '../Images/blank.png';
 import IC_CHIP from '../Images/Ic_chip.png';
 import MASTERCARD_IMAGE from '../Images/Mastercard.png';
