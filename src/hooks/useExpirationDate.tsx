@@ -1,7 +1,15 @@
 import { CARD_EXPIRATION_DATE_KEYS } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
+import { isAllDone } from "@/utils/input";
 import { isValidDate, isValidMonth } from "@/utils/validators";
-import { ChangeEvent, FocusEvent, useState, useCallback } from "react";
+import {
+  ChangeEvent,
+  FocusEvent,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from "react";
 
 const useExpirationDate = () => {
   const [expirationDate, setExpirationDate] = useState({
@@ -14,6 +22,16 @@ const useExpirationDate = () => {
       errorMessage: "",
     },
   });
+  const [nextInput, setShowNextInput] = useState<boolean>(false);
+
+  const monthRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isAllDone(expirationDate.data)) {
+      setShowNextInput(true);
+    }
+  }, [expirationDate.data]);
 
   const changeExpirationDate = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -37,12 +55,7 @@ const useExpirationDate = () => {
         });
         return;
       }
-      console.log(
-        isValidDate({
-          year: expirationDate.data.year.value,
-          month: expirationDate.data.month.value,
-        })
-      );
+
       setExpirationDate({
         ...expirationDate,
         data: {
@@ -50,10 +63,7 @@ const useExpirationDate = () => {
           [name]: {
             value,
             isError: false,
-            isDone: isValidDate({
-              year: expirationDate.data.year.value,
-              month: expirationDate.data.month.value,
-            }),
+            isDone: false,
           },
         },
         status: {
@@ -61,6 +71,11 @@ const useExpirationDate = () => {
           errorMessage: "",
         },
       });
+
+      if (value.length === 2) {
+        if (name === "month") yearRef.current?.focus();
+        else if (name === "year") yearRef.current?.blur();
+      }
     },
     [expirationDate]
   );
@@ -80,7 +95,7 @@ const useExpirationDate = () => {
             data: {
               ...expirationDate.data,
               month: {
-                value: expirationDate.data[name].value,
+                value,
                 isError: true,
                 isDone: false,
               },
@@ -95,7 +110,7 @@ const useExpirationDate = () => {
       } else if (name === "year") {
         if (
           !isValidDate({
-            year: expirationDate.data.year.value,
+            year: value,
             month: expirationDate.data.month.value,
           })
         ) {
@@ -108,7 +123,7 @@ const useExpirationDate = () => {
                 isDone: false,
               },
               year: {
-                value: expirationDate.data.year.value,
+                value,
                 isError: true,
                 isDone: false,
               },
@@ -125,14 +140,20 @@ const useExpirationDate = () => {
         ...expirationDate,
         data: {
           ...expirationDate.data,
-          [name]: { ...expirationDate.data[name], isDone: true },
+          [name]: { value, isDone: true, isError: false },
         },
       });
     },
     [expirationDate]
   );
 
-  return { expirationDate, changeExpirationDate, blurExpirationDate };
+  return {
+    expirationDate,
+    changeExpirationDate,
+    blurExpirationDate,
+    nextInput,
+    refs: { monthRef, yearRef },
+  };
 };
 
 export default useExpirationDate;

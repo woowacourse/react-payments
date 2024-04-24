@@ -13,10 +13,27 @@ import CardCompany from "@/components/CardCompany/CardCompany";
 import { ChangeEvent, useRef, useState } from "react";
 
 const App = () => {
-  const { cardNumbers, changeCardNumbers, blurCardNumbers } = useCardNumbers();
-  const { expirationDate, changeExpirationDate, blurExpirationDate } =
-    useExpirationDate();
-  const { ownerName, changeOwnerName, blurOwnerName } = useOwnerName();
+  const {
+    cardNumbers,
+    changeCardNumbers,
+    blurCardNumbers,
+    refs: cardNumbersRefs,
+    nextInput: cardNumbersNextInput,
+  } = useCardNumbers();
+  const {
+    expirationDate,
+    changeExpirationDate,
+    blurExpirationDate,
+    refs: expirationDateRefs,
+    nextInput: expirationDateNextInput,
+  } = useExpirationDate();
+  const {
+    ownerName,
+    changeOwnerName,
+    refs: ownerNameRefs,
+    nextInput: ownerNameNextInput,
+    handleKeyDown: ownerNameHandleKeyDown,
+  } = useOwnerName();
   const [cardCompany, setCardCompany] = useState("");
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
 
@@ -57,31 +74,26 @@ const App = () => {
             : "",
         }}
       />
-
       <form>
-        {/* 
-        <PasswordInput />
-        <CVCInput /> 
-         */}
-        {Object.entries(expirationDate.data)
-          .map(([, { isDone }]) => isDone)
-          .every((isDone) => isDone) && (
+        {/* <PasswordInput /> */}
+        {ownerNameNextInput && <CVCInput />}
+        {
           <OwnerNameInput
             ownerName={ownerName}
             changeOwnerName={changeOwnerName}
-            blurOwnerName={blurOwnerName}
+            refs={ownerNameRefs}
+            onKeyDown={ownerNameHandleKeyDown}
           />
-        )}
-        {cardCompany !== "" && (
+        }
+        {/* {
           <ExpirationDateInput
             expirationDate={expirationDate}
             changeExpirationDate={changeExpirationDate}
             blurExpirationDate={blurExpirationDate}
+            refs={expirationDateRefs}
           />
-        )}
-        {Object.entries(cardNumbers.data)
-          .map(([, { isDone }]) => isDone)
-          .every((isDone) => isDone) && (
+        } */}
+        {/* {cardNumbersNextInput && (
           <CardCompany
             cardCompany={cardCompany}
             cardCompanyRef={cardCompanyRef}
@@ -92,7 +104,8 @@ const App = () => {
           cardNumbers={cardNumbers}
           changeCardNumbers={changeCardNumbers}
           blurCardNumbers={blurCardNumbers}
-        />
+          refs={CardNumbersRefs}
+        /> */}
       </form>
     </div>
   );

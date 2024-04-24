@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, memo } from "react";
+import { ChangeEvent, FocusEvent, RefObject, memo } from "react";
 import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
 import { ADD_CARD_FORM_FIELDS } from "../../constants/messages";
@@ -11,6 +11,10 @@ interface ExpirationDateInputProps {
   };
   changeExpirationDate: (event: ChangeEvent<HTMLInputElement>) => void;
   blurExpirationDate: (event: FocusEvent<HTMLInputElement>) => void;
+  refs: {
+    monthRef: RefObject<HTMLInputElement>;
+    yearRef: RefObject<HTMLInputElement>;
+  };
 }
 
 const ExpirationDateInput = memo(
@@ -18,6 +22,7 @@ const ExpirationDateInput = memo(
     expirationDate,
     changeExpirationDate,
     blurExpirationDate,
+    refs,
   }: ExpirationDateInputProps) => {
     return (
       <Field
@@ -30,7 +35,7 @@ const ExpirationDateInput = memo(
           ([name, { value, isError }], index) => (
             <Input
               key={name}
-              name={name as keyof ExpirationDate}
+              name={name}
               placeholder={
                 name === "month"
                   ? EXPIRATION_DATE.placeholder.month
@@ -38,6 +43,7 @@ const ExpirationDateInput = memo(
               }
               value={value}
               isError={isError}
+              inputRef={Object.values(refs)[index]}
               onChange={changeExpirationDate}
               onBlur={blurExpirationDate}
               maxLength={2}

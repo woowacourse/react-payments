@@ -1,4 +1,10 @@
-import { HTMLAttributes, ChangeEvent, FocusEvent } from "react";
+import {
+  HTMLAttributes,
+  ChangeEvent,
+  FocusEvent,
+  RefObject,
+  KeyboardEvent,
+} from "react";
 
 import styles from "./Input.module.css";
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
@@ -9,8 +15,10 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   isRequired?: boolean;
   maxLength?: number;
   isPassword?: boolean;
+  inputRef?: RefObject<HTMLInputElement>;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export default function Input({
@@ -19,11 +27,13 @@ export default function Input({
   placeholder,
   isError,
   maxLength,
+  inputRef,
   autoFocus = false,
   isRequired = false,
   isPassword = false,
   onChange,
   onBlur,
+  onKeyDown,
 }: InputProps) {
   return (
     <input
@@ -34,8 +44,10 @@ export default function Input({
       value={value}
       maxLength={maxLength}
       required={isRequired}
+      ref={inputRef}
       onChange={onChange}
       onBlur={onBlur}
+      onKeyDown={onKeyDown}
       className={`${styles.input} ${isError && styles.error}`}
     ></input>
   );

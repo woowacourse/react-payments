@@ -1,7 +1,15 @@
-import { ChangeEvent, useState, useCallback, FocusEvent } from "react";
+import {
+  ChangeEvent,
+  useState,
+  useCallback,
+  FocusEvent,
+  useRef,
+  useEffect,
+} from "react";
 import { CARD_NUMBER_KEYS } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
 import { hasFourDigit } from "@/utils/validators";
+import { isAllDone } from "@/utils/input";
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState({
@@ -16,6 +24,18 @@ const useCardNumbers = () => {
       errorMessage: "",
     },
   });
+
+  const [nextInput, setShowNextInput] = useState<boolean>(false);
+  const firstRef = useRef<HTMLInputElement>(null);
+  const secondRef = useRef<HTMLInputElement>(null);
+  const thirdRef = useRef<HTMLInputElement>(null);
+  const fourthRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isAllDone(cardNumbers.data)) {
+      setShowNextInput(true);
+    }
+  }, [cardNumbers.data]);
 
   const changeCardNumbers = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +64,7 @@ const useCardNumbers = () => {
         return;
       }
 
-      setCardNumbers({
+      setCardNumbers((cardNumbers) => ({
         ...cardNumbers,
         data: {
           ...cardNumbers.data,
@@ -52,9 +72,16 @@ const useCardNumbers = () => {
         },
         status: {
           isError: false,
+          showNextInput: false,
           errorMessage: "",
         },
-      });
+      }));
+
+      if (value.length === 4) {
+        if (name === "first") secondRef.current?.focus();
+        else if (name === "second") thirdRef.current?.focus();
+        else if (name === "third") fourthRef.current?.focus();
+      }
     },
     [cardNumbers]
   );
@@ -80,19 +107,17 @@ const useCardNumbers = () => {
         });
         return;
       }
-
-      setCardNumbers({
-        ...cardNumbers,
-        data: {
-          ...cardNumbers.data,
-          [name]: { value, isError: false, isDone: true },
-        },
-      });
     },
     [cardNumbers]
   );
 
-  return { cardNumbers, changeCardNumbers, blurCardNumbers };
+  return {
+    cardNumbers,
+    nextInput,
+    changeCardNumbers,
+    blurCardNumbers,
+    refs: { firstRef, secondRef, thirdRef, fourthRef },
+  };
 };
 
 export default useCardNumbers;

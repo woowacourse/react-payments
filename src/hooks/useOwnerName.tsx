@@ -1,7 +1,15 @@
 import { CARD_OWNERNAME_KEY } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
+import { isAllDone } from "@/utils/input";
 import { isEnglishCharacter } from "@/utils/validators";
-import { ChangeEvent, FocusEvent, useState, useCallback } from "react";
+import {
+  ChangeEvent,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  KeyboardEvent,
+} from "react";
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState({
@@ -13,6 +21,34 @@ const useOwnerName = () => {
       errorMessage: "",
     },
   });
+
+  const [nextInput, setShowNextInput] = useState<boolean>(false);
+  const ownerNameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isAllDone(ownerName.data)) {
+      setShowNextInput(true);
+    }
+  }, [ownerName.data]);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setOwnerName({
+        data: {
+          ownerName: {
+            value: ownerName.data.ownerName.value,
+            isError: false,
+            isDone: true,
+          },
+        },
+        status: {
+          isError: false,
+          errorMessage: "",
+        },
+      });
+      ownerNameRef.current?.blur();
+    }
+  };
 
   const changeOwnerName = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,28 +86,12 @@ const useOwnerName = () => {
     [ownerName]
   );
 
-  const blurOwnerName = useCallback((event: FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target as {
-      name: (typeof CARD_OWNERNAME_KEY)[number];
-      value: string;
-    };
-    if (!CARD_OWNERNAME_KEY.includes(name)) return;
-
-    setOwnerName({
-      data: {
-        ownerName: { value: value.trim(), isError: false, isDone: true },
-      },
-      status: {
-        isError: false,
-        errorMessage: "",
-      },
-    });
-  }, []);
-
   return {
     ownerName,
     changeOwnerName,
-    blurOwnerName,
+    handleKeyDown,
+    nextInput,
+    refs: { ownerNameRef },
   };
 };
 

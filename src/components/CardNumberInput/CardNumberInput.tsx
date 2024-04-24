@@ -1,7 +1,7 @@
 import Input from "../common/Input/Input";
 import Field from "../layout/Field/Field";
 import { ADD_CARD_FORM_FIELDS } from "@/constants/messages";
-import { ChangeEvent, FocusEvent, memo } from "react";
+import { ChangeEvent, FocusEvent, RefObject, memo } from "react";
 const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
 interface CardNumberInputProps {
@@ -11,6 +11,12 @@ interface CardNumberInputProps {
   };
   changeCardNumbers: (event: ChangeEvent<HTMLInputElement>) => void;
   blurCardNumbers: (event: FocusEvent<HTMLInputElement>) => void;
+  refs: {
+    firstRef: RefObject<HTMLInputElement>;
+    secondRef: RefObject<HTMLInputElement>;
+    thirdRef: RefObject<HTMLInputElement>;
+    fourthRef: RefObject<HTMLInputElement>;
+  };
 }
 
 const CardNumberInput = memo(
@@ -18,6 +24,7 @@ const CardNumberInput = memo(
     cardNumbers,
     changeCardNumbers,
     blurCardNumbers,
+    refs,
   }: CardNumberInputProps) => {
     return (
       <Field
@@ -34,6 +41,7 @@ const CardNumberInput = memo(
               placeholder={CARD_NUMBER.placeholder}
               value={value}
               isError={isError}
+              inputRef={Object.values(refs)[index]}
               onChange={changeCardNumbers}
               onBlur={blurCardNumbers}
               maxLength={4}
