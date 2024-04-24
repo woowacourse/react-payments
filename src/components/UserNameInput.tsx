@@ -1,12 +1,13 @@
 // import styled from "styled-components";
 import Input from "./Input";
 import FieldTitle from "./FieldTitle";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
+import { ExpirationDate, UserName } from "../types/card";
 
 interface Props {
-  handleInput : (value: string) => void,
+  handleInput : Dispatch<SetStateAction<UserName>>,
 }
 export default function UserNameInput({handleInput} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(

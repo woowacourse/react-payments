@@ -8,24 +8,26 @@ import { CardNumbers } from "../types/card";
 import { ShowComponents } from "../types/showCompents";
 
 interface Props {
-  cardNumber : CardNumbers,
-  handleInput : (cardNumbers: CardNumbers) => void,
+  cardNumbers : CardNumbers,
+  handleInput : Dispatch<SetStateAction<CardNumbers>>
   handleShowComponent : Dispatch<SetStateAction<ShowComponents>>
 }
-export default function CardNumberInput({cardNumber, handleInput, handleShowComponent} : Props) {
-
-  
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
-    {}
-  );
+export default function CardNumberInput({cardNumbers, handleInput, handleShowComponent} : Props) {
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   useEffect(() => {
+    const messages = Object.values(cardNumbers).map(value => value.errorMessage);
+    setErrorMessages(messages);
+  }, [cardNumbers]);
+  useEffect(() => {
     const checkCompleteInput = () => {
-      const arr = Object.values(errorMessages)
-      if(arr.length === 4){
-        return arr.every(value => value === '');
-      }
-      return false;
+      const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
+        if(!cur.isError && cur.value !== '' && cur.value.length === 4){
+          return pre + 1;
+        }
+        return pre;
+      }, 0)
+      return isNotAllError === 4
     }
     if(checkCompleteInput()) {
       handleShowComponent((prev) => ({
@@ -33,20 +35,32 @@ export default function CardNumberInput({cardNumber, handleInput, handleShowComp
         expirationDateInput: true,
       }));
     }
-  }, [errorMessages, handleShowComponent]); 
+  }, [cardNumbers, handleShowComponent]); 
 
   const handleUpdateInput = (index: number, value: string) => {
-    handleInput({
-      ...cardNumber,
-      [`cardNumber${index+1}`] : value
+
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    handleInput((prevState : CardNumbers) => {
+      return {
+        ...prevState,
+        [cardKey]: {
+          ...prevState.cardNumber1,
+          value : value
+        },
+      };
     });
   };
 
-  const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
-    setErrorMessages((prev) => {
+  const handleUpdateErrorMessages = (index: number, errorMessage: string, isError: boolean) => {
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    handleInput((prevState : CardNumbers) => {
       return {
-        ...prev,
-        [index]: errorMessage,
+        ...prevState,
+        [cardKey]: {
+          ...prevState[cardKey],
+          errorMessage: errorMessage,
+          isError: isError 
+        },
       };
     });
   };
@@ -57,21 +71,29 @@ export default function CardNumberInput({cardNumber, handleInput, handleShowComp
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number, maxLength: number) => {
     try {
           Validation[info]?.(e.target.value, maxLength);
-          handleUpdateErrorMessages(index, '');
+          handleUpdateErrorMessages(index, '', false);
           handleUpdateInput(index, e.target.value);
         } catch (error) {
             if (error instanceof Error) {
-            handleUpdateErrorMessages(index, error.message);
+            handleUpdateErrorMessages(index, error.message, true);
           }
         }
   };
 
+  // const showErrorMessage = () => {
+  //   console.log(cardNumbers)
+  //   Object.values(cardNumbers).find(value => {
+  //     if(value.isError){
+  //       return value.errorMessage;
+  //     }
+  //   })
+  //   return ''
+  // }
+
 
   const checkInputError = (index : number) => {
-    if(index in errorMessages){
-      return errorMessages[index] !== '';
-    }
-    return false;
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    return cardNumbers[cardKey].isError;
   }
 
   return (

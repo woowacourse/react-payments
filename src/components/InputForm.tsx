@@ -5,7 +5,7 @@ import { CardInfo, CardNumbers, ExpirationDate } from '../types/card';
 import CardNumberInput from './CardNumberInput';
 import ExpirationDateInput from './ExpirationDateInput';
 import UserNameInput from './UserNameInput';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { ShowComponents } from '../types/showCompents';
 
 const FormContainer = styled.div`
@@ -15,8 +15,8 @@ const FormContainer = styled.div`
 `;
 
 interface HandleInput {
-  setCardNumbers: (value: CardNumbers) => void;
-  setExpirationDate: (value: ExpirationDate) => void;
+  setCardNumbers: Dispatch<SetStateAction<CardNumbers>>
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>
   setUserName: (value: string) => void;
 }
 
@@ -33,7 +33,7 @@ export default function InputForm({
       {showComponent.userNameInput && <UserNameInput handleInput={setUserName}/>}  
       {showComponent.expirationDateInput && <ExpirationDateInput expirationDate={expirationDate} handleInput={setExpirationDate} handleShowComponent = {setShowComponent}/>}
       {showComponent.cardNumberInput && <CardNumberInput
-        cardNumber={cardNumbers}
+        cardNumbers={cardNumbers}
         handleInput={setCardNumbers}
         handleShowComponent = {setShowComponent}
       />}

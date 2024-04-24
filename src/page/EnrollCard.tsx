@@ -41,10 +41,8 @@ export default function EnrollCard() {
   const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
   useEffect(() => {
     try {
-      
       validateCarNumbers(cardNumbers);
       validateExpirationDate(expirationDate);
-      
       setSubmitButtonFlag(true);
     } catch (error) {
       console.log(error);

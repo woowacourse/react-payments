@@ -66,7 +66,7 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
       return Master;
   };
 
-  const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1);
+  const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1.value);
   return (
     <>
       <CardContainer>
@@ -76,17 +76,17 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
         </ImgBox>
 
         <CardNumbers>
-          <CardNumber>{cardInfo.cardNumbers.cardNumber1}</CardNumber>
-          <CardNumber>{cardInfo.cardNumbers.cardNumber2}</CardNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber3.length)}</SecretNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber4.length)}</SecretNumber>
+          <CardNumber>{cardInfo.cardNumbers.cardNumber1.value}</CardNumber>
+          <CardNumber>{cardInfo.cardNumbers.cardNumber2.value}</CardNumber>
+          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber3.value.length)}</SecretNumber>
+          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber4.value.length)}</SecretNumber>
         </CardNumbers>
         <TextBox>
-          {cardInfo.expirationDate.month.length === 1 ? `0${cardInfo.expirationDate.month}` : cardInfo.expirationDate.month}
-          {cardInfo.expirationDate.year.length > 0 ? ' / ' : ''}
-          {cardInfo.expirationDate.year.length === 1 ? `0${cardInfo.expirationDate.year}` : cardInfo.expirationDate.year}
+          {cardInfo.expirationDate.month.value.length === 1 ? `0${cardInfo.expirationDate.month.value}` : cardInfo.expirationDate.month.value}
+          {cardInfo.expirationDate.year.value.length > 0 ? ' / ' : ''}
+          {cardInfo.expirationDate.year.value.length === 1 ? `0${cardInfo.expirationDate.year.value}` : cardInfo.expirationDate.year.value}
         </TextBox>
-        <TextBox>{cardInfo.userName}</TextBox>
+        <TextBox>{cardInfo.userName.userName.value}</TextBox>
       </CardContainer>
     </>
   );

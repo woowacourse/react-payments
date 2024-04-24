@@ -13,7 +13,6 @@ function checkMaxLength (n : string, maxLength : number){
   }
 }
 function checkTrimBlank(n: string) {
-  console.log(n);
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
@@ -68,7 +67,7 @@ const Validation: ValidationMap = {
   cardNumber: (n: string, maxLength:number) => {
     checkTrimBlank(n);
     validateNumber(n);
-    checkMaxLength(n, maxLength);
+    // checkMaxLength(n, maxLength);
   },
   month: (n: string, maxLength:number) => {
     checkTrimBlank(n);
@@ -91,18 +90,28 @@ const Validation: ValidationMap = {
 };
 
 export const validateCarNumbers = (cardNumbers : CardNumbers) => {
-  const values = Object.values(cardNumbers)
-  values.forEach(cardNumber => {
-    Validation['cardNumber'](cardNumber, 4)
-  });
+  const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
+    if(!cur.isError && cur.value !== '' && cur.value.length === 4){
+      return pre + 1;
+    }
+    return pre;
+  }, 0)
+  if(isNotAllError !== 4){
+    throw new Error('')
+  }
 }
 
 
 export const validateExpirationDate = (expirationDate : ExpirationDate) => {
-  const values = Object.entries(expirationDate);
-  values.forEach(([key, value]) => {
-    Validation[key](value, 2)
-  });
+  const isNotAllError = Object.values(expirationDate).reduce((pre, cur) => {
+    if(!cur.isError && cur.value !== '' && cur.value.length === 2){
+      return pre + 1;
+    }
+    return pre;
+  }, 0)
+  if(isNotAllError !== 2){
+    throw new Error('')
+  }
 }
 
 
