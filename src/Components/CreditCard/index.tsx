@@ -20,19 +20,19 @@ const formatTwoDigitNumber = (n: number | undefined) => {
   return String(n).padStart(2, "0");
 };
 
-const isVisa = (cardNumbers?: number) => {
+const isVisa = (cardNumber?: string) => {
   const VISA_START_NUMBER = 4;
-  return cardNumbers?.toString().startsWith(String(VISA_START_NUMBER));
+  return cardNumber && cardNumber.startsWith(String(VISA_START_NUMBER));
 };
 
-const isMaster = (cardNumbers?: number) => {
+const isMaster = (cardNumber?: string) => {
   const MASTER_REG_PATTERN = /(51|52|53|54)/;
-  return cardNumbers && MASTER_REG_PATTERN.test(cardNumbers?.toString());
+  return cardNumber && MASTER_REG_PATTERN.test(cardNumber);
 };
 
-const getCardImage = (number?: number) => {
-  if (isVisa(number)) return visaImage;
-  if (isMaster(number)) return masterImage;
+const getCardImage = (string?: string) => {
+  if (isVisa(string)) return visaImage;
+  if (isMaster(string)) return masterImage;
   return null;
 };
 

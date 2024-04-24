@@ -1,8 +1,8 @@
 interface CardNumbers {
-  firstNumbers?: number;
-  secondNumbers?: number;
-  thirdNumbers?: number;
-  fourthNumbers?: number;
+  firstNumbers?: string;
+  secondNumbers?: string;
+  thirdNumbers?: string;
+  fourthNumbers?: string;
 }
 
 interface CardValidityPeriod {

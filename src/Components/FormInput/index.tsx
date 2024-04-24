@@ -81,7 +81,7 @@ const CardNumberInput = () => {
           id={`id-${name}`}
           key={index}
           onInputChange={(e) =>
-            onInputChange<CardNumbers, CardNumbersError, number>(e, {
+            onInputChange<CardNumbers, CardNumbersError, string>(e, {
               name: name,
               setData,
               setError,
