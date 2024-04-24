@@ -1,6 +1,16 @@
 import { ErrorDetail } from '../components/types/error';
 import CONDITION from '../constants/condition';
 
+const validateNumber = (value: string) => {
+  const isNumber = !isNaN(Number(value));
+
+  if (!isNumber) {
+    return { isError: true, errorMessage: '숫자를 입력해주세요' };
+  }
+
+  return { isError: false, errorMessage: '' };
+};
+
 const validateExpiryMonth = (expiryMonth: string): ErrorDetail => {
   const isValidLength =
     expiryMonth.length === CONDITION.TEXT_LENGTH_MIN || expiryMonth.length === CONDITION.DATE_LENGTH_MAX;
@@ -17,4 +27,4 @@ const validateExpiryMonth = (expiryMonth: string): ErrorDetail => {
   return { isError: false, errorMessage: '' };
 };
 
-export default validateExpiryMonth;
+export { validateNumber, validateExpiryMonth };
