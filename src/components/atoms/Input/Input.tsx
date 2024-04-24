@@ -4,8 +4,6 @@ import * as S from "./style";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
   ariaLabel?: string;
-  onChangeInput?: (inputValue: string) => void;
-  onBlurInput?: (inputValue: string) => void;
 }
 
 export default function Input({
@@ -16,8 +14,8 @@ export default function Input({
   value,
   ariaLabel,
   isError,
-  onChangeInput,
-  onBlurInput,
+  onChange,
+  onBlur,
 }: Props) {
   return (
     <S.Input
@@ -28,12 +26,8 @@ export default function Input({
       value={value}
       aria-label={ariaLabel}
       isError={isError}
-      onChange={(e) => {
-        if (onChangeInput) onChangeInput(e.target.value);
-      }}
-      onBlur={(e) => {
-        if (onBlurInput) onBlurInput(e.target.value);
-      }}
-    ></S.Input>
+      onChange={onChange}
+      onBlur={onBlur}
+    />
   );
 }
