@@ -1,0 +1,27 @@
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 23.125rem;
+  height: 100%;
+}
+.btn {
+  border-radius: 0.3125rem;
+  background-color: #333333;
+  width: inherit;
+  height: 2.5rem;
+  color: #ffff;
+}
+.message {
+  margin-bottom: 1.5625rem;
+  width: inherit;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: center;
+}
+.checkMark {
+  margin: 0 auto 1.5625rem auto;
+  width: 4.75rem;
+  height: 4.75rem;
+}

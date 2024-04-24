@@ -117,7 +117,7 @@ export const CARD_COMPANY: Map<string, { name: string; color: string }> =
     [
       'etc',
       {
-        name: '기타',
+        name: '기타 카드',
         color: CARD_COLOR_ETC,
       },
     ],

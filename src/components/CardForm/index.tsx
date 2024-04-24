@@ -85,6 +85,7 @@ function CardForm(props: CardFormProps) {
 
   const handleClickOfSubmitBtn = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    console.log('cardinfo', cardInfo);
     // 페이지 이동
     navigateToPage({ state: cardInfo });
     // reset
