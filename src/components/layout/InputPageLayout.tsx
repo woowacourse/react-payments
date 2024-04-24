@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 interface InputPageLayoutProps {}
 
-const InputPageLayout = ({children}: React.PropsWithChildren<InputPageLayoutProps>) => {
+const InputPageLayout = ({ children }: React.PropsWithChildren<InputPageLayoutProps>) => {
   return <Layout>{children}</Layout>;
 };
 
@@ -20,4 +20,6 @@ const Layout = styled.main`
   background-color: #ffffff;
 
   border-radius: 8px;
+
+  overflow-y: scroll;
 `;
