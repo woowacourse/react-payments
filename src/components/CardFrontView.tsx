@@ -81,7 +81,7 @@ const CardImg = styled.img`
   height: 22px;
 `;
 
-const TextBox = styled.div`
+const TextBox = styled.span`
   display: flex;
   align-items: flex-end;
   height: 30px;
