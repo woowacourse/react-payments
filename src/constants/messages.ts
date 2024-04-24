@@ -68,11 +68,23 @@ const CARD_ISSUER = {
     { value: '하나카드', text: '하나카드' },
     { value: '국민카드', text: '국민카드' },
   ],
-};
+} as const;
+
+const CVC = {
+  title: 'CVC 번호를 입력해 주세요',
+  labelText: 'CVC',
+
+  placeholder: '123',
+
+  inputLabelText: {
+    cvc: 'cvc 번호',
+  },
+} as const;
 
 export const ADD_CARD_FORM_FIELDS = {
   CARD_NUMBER,
   EXPIRATION_DATE,
   OWNER_NAME,
   CARD_ISSUER,
+  CVC,
 } as const;

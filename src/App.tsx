@@ -9,6 +9,7 @@ import OwnerNameInput from './components/AddCardFormInput/OwnerNameInput/OwnerNa
 import CardIssuerInput from './components/AddCardFormInput/CardIssuerInput/CardIssuerInput';
 
 import { INITIAL_VALUES } from './constants/form';
+import CVCInput from './components/AddCardFormInput/CVCInput/CVCInput';
 
 function App() {
   const cardNumbersProps = useFormField<CardNumbers>({
@@ -23,7 +24,7 @@ function App() {
   const cardIssuerProps = useFormField<CardIssuer>({
     initialValues: INITIAL_VALUES.cardIssuer,
   });
-  const CVCProps = useFormField<CVC>({
+  const cvcProps = useFormField<CVC>({
     initialValues: INITIAL_VALUES.cvc,
   });
 
@@ -41,6 +42,7 @@ function App() {
       />
 
       <form>
+        <CVCInput {...cvcProps} />
         <OwnerNameInput {...ownerNameProps} />
         <ExpirationDateInput {...expirationDateProps} />
         <CardIssuerInput {...cardIssuerProps} />
