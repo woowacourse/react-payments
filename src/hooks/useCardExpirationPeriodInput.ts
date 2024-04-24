@@ -21,13 +21,10 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
     const inputYear = parseInt(year, 10);
     const inputMonth = parseInt(month, 10);
 
-    if (
+    return !(
       inputYear < currentYear ||
       (inputYear === currentYear && inputMonth < currentMonth)
-    ) {
-      return false;
-    }
-    return true;
+    );
   };
 
   const handlePeriodChange = (type: 'month' | 'year', value: string) => {
