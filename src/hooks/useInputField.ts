@@ -1,4 +1,7 @@
-import useInputWithValidation, { Validator } from "./useInputWithValidation";
+import useInputWithValidation, {
+  Validator as InidividualValidator,
+  Validator,
+} from "./useInputWithValidation";
 
 export const enum ValidatorType {
   Individual = "individual",
@@ -7,34 +10,30 @@ export const enum ValidatorType {
 
 export type VariousValidator = IndividualValidator | OverallValidator;
 
-export interface IndividualValidator extends Validator {
-  type: ValidatorType.Individual;
+export interface IndividualValidator {
+  validate: (input: string) => boolean;
+  errorMessage: string;
   index: number[];
 }
 export interface OverallValidator {
   validate: (inputs: string[]) => boolean;
-  type: ValidatorType.Overall;
+  errorMessage: string;
 }
 
-const filterIndividualValidators = (validators: VariousValidator[]) =>
-  validators
-    .filter((v) => v.type === ValidatorType.Individual)
-    .map((v) => v as IndividualValidator);
+interface useInputFieldProps {
+  individualValidators?: IndividualValidator[];
+  overallValidators?: OverallValidator[];
+  length: number;
+}
+const useInputField = ({
+  individualValidators,
 
-const filterOverallValidators = (validators: VariousValidator[]) =>
-  validators
-    .filter((v) => v.type === ValidatorType.Overall)
-    .map((v) => v as OverallValidator);
-
-const makeIndividualValidators = (
-  validators: VariousValidator[],
-  length: number
-) => {
-  const inidividualValidators = filterIndividualValidators(validators);
-  const overallValidators = filterOverallValidators(validators);
-
+  length,
+}: useInputFieldProps) => {
   const result: Validator[][] = Array.from({ length }).map(() => []);
-  inidividualValidators.forEach((v) => {
+
+  if (individualValidators === undefined) return [];
+  individualValidators.forEach((v) => {
     v.index.forEach((i) => {
       result[i].push({
         validate: v.validate,
@@ -42,18 +41,8 @@ const makeIndividualValidators = (
       });
     });
   });
-  return result;
-};
 
-const useInputField = (
-  individualValidators: VariousValidator[],
-  length: number
-) => {
-  const inidividualValidators = makeIndividualValidators(
-    individualValidators,
-    length
-  );
-  return inidividualValidators.map((v: Validator[]) =>
+  return result.map((v: InidividualValidator[]) =>
     useInputWithValidation("", v)
   );
 };

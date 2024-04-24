@@ -4,48 +4,29 @@ import useInputWithValidation from "@/hooks/useInputWithValidation";
 import useInputField, {
   IndividualValidator,
   ValidatorType,
-  VariousValidator,
 } from "@/hooks/useInputField";
 
 const VALID_LENGTH = 2;
 const INPUTS_COUNT = 2;
 const ExpirationDateInputField = () => {
-  const validators2 = [
+  const newValidator: IndividualValidator[] = [
+    {
+      errorMessage: "월은 1~12의 범위여야합니다.",
+      validate: (month: string) =>
+        month === "" || (Number(month) >= 1 && Number(month) <= 12),
+      index: [0],
+    },
     {
       errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
       validate: (input: string) =>
         input.length === 0 || input.length === VALID_LENGTH,
-    },
-  ];
-  const validators = [
-    ...validators2,
-    {
-      errorMessage: "월은 1~12의 범위여야합니다.",
-      validate: (month: string) =>
-        month === "" || (Number(month) >= 1 && Number(month) <= 12),
-    },
-  ];
-  const v = [validators, validators2];
-  const newValidator: VariousValidator[] = [
-    {
-      errorMessage: "월은 1~12의 범위여야합니다.",
-      validate: (month: string) =>
-        month === "" || (Number(month) >= 1 && Number(month) <= 12),
-      type: ValidatorType.Individual,
-      index: [0],
-    },
-    {
-      errorMessage: "길이는 ${VALID_LENGTH}여야합니다.",
-      validate: (input: string) =>
-        input.length === 0 || input.length === VALID_LENGTH,
-      type: ValidatorType.Individual,
       index: [0, 1],
     },
   ];
-  const newValidationStates = useInputField(newValidator, INPUTS_COUNT);
-  const new0ValidationStates = Array.from({ length: INPUTS_COUNT }).map(
-    (_, i) => useInputWithValidation("", v[i])
-  );
+  const newValidationStates = useInputField({
+    individualValidators: newValidator,
+    length: INPUTS_COUNT,
+  });
 
   return (
     <InputField>
