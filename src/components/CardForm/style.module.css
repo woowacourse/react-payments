@@ -1,7 +1,6 @@
 .formContainer {
   position: relative;
   box-sizing: border-box;
-  padding: 5%;
   height: calc(100vh - var(--card-preview-height));
   fieldset {
     height: calc(100% - var(--submit-btn-height) - 1rem);
@@ -11,10 +10,10 @@
 .submitBtn {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: calc(var(--layout-padding) * -1);
   margin-top: 1rem;
   background-color: #333333;
-  width: var(--max-width);
+  width: var(--layout-max-width);
   height: var(--submit-btn-height);
   color: #f3f3f3;
 }

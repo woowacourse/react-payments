@@ -1,33 +1,25 @@
-import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
+import { Layout } from './components';
+import { PATH } from './constants';
 import './styles/App.css';
 import './styles/global.css';
 import './styles/reset.css';
-import {
-  CardCompanySelect,
-  CardCVCInput,
-  CardExpirationPeriodInput,
-  CardForm,
-  CardNumbersInput,
-  CardPassword,
-  CardPreview,
-  CardUserNameInput,
-} from './components';
-import { CardSide } from './components/CardPreview';
-import useCardInfoReducer from './modules/useCardInfoReducer';
+import { CardEnrollmentConfirmation, CardEnrollmentPage, Home } from './pages';
 
 function App() {
-  const cardInfoReducer = useCardInfoReducer();
-  const { cardInfo } = cardInfoReducer;
-  const [cardSide, setCardSide] = useState<CardSide>('front');
-  const cardFormProps = { ...cardInfoReducer, setCardSide };
-
   return (
     <div id="app">
-      <div className="inner">
-        <CardPreview side={cardSide} cardInfo={cardInfo} />
-        <CardForm {...cardFormProps} />
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path={PATH.cardEnrollment} element={<CardEnrollmentPage />} />
+          <Route
+            path={PATH.cardConfirmation}
+            element={<CardEnrollmentConfirmation />}
+          />
+          <Route path="/*" element={<Home />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

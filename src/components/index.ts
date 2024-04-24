@@ -11,6 +11,7 @@ import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
 import ErrorMessage from './ErrorMessage/index';
 import Input from './Input';
+import Layout from './Layout';
 
 export {
   CardBackImg,
@@ -26,4 +27,5 @@ export {
   CardPreview,
   ErrorMessage,
   Input,
+  Layout,
 };

@@ -1,0 +1,6 @@
+.layout {
+  box-sizing: border-box;
+  padding: var(--layout-padding);
+  width: var(--layout-max-width);
+  height: 100vh;
+}
