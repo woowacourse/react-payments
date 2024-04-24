@@ -17,7 +17,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const CVCFormSection = () => {
+const CVCFormSection = ({
+  changeCVC,
+}: {
+  changeCVC: (cvc: string) => void;
+}) => {
   const {
     inputState,
     errorMessage,
@@ -44,6 +48,10 @@ const CVCFormSection = () => {
         errorText: ERROR_MESSAGE.cvcOutOfRange,
       });
   }, [inputState[0].hasFocus]);
+
+  useEffect(() => {
+    changeCVC(inputState[0].value);
+  }, [inputState[0].value]);
 
   return (
     <FormSection>

@@ -9,6 +9,10 @@ import PasswordFormSection from './PasswordFormSection';
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
 
+  const changeCVC = (cvc: string) => {
+    changeCardInfo((prev: CardInfo) => ({ ...prev, cvc: cvc }));
+  };
+
   const changeCardCompany = (cardCompany: string) => {
     changeCardInfo((prev: CardInfo) => ({ ...prev, cardCompany: cardCompany }));
   };
@@ -32,7 +36,7 @@ const CardInfo = ({ ...props }) => {
   return (
     <Container>
       <PasswordFormSection></PasswordFormSection>
-      <CVCFormSection></CVCFormSection>
+      <CVCFormSection changeCVC={changeCVC}></CVCFormSection>
       <CardCompanyFormSection
         changeCardCompany={changeCardCompany}
       ></CardCompanyFormSection>
