@@ -1,8 +1,16 @@
 import styled from "styled-components";
 
 const ErrorMessage = ({ errorMessage }: { errorMessage: string }) => {
-  return <ErrorMessageStyled>{errorMessage}</ErrorMessageStyled>;
+  return (
+    <ErrorMessageContainer isVisible={!!errorMessage}>
+      <ErrorMessageStyled>{errorMessage}</ErrorMessageStyled>
+    </ErrorMessageContainer>
+  );
 };
+
+const ErrorMessageContainer = styled.div<{ isVisible: boolean }>`
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+`;
 
 const ErrorMessageStyled = styled.p`
   color: red;

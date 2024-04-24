@@ -5,17 +5,21 @@ import CardLogo from "./CardLogo";
 import ExpirationDate from "./ExpirationDate";
 import UserName from "./UserName";
 
+import { CARD_COMPANY } from "../../constants/card";
+
 const CardPreview = ({
   cardNumbers,
   expirationDate,
   userName,
+  cardCompany,
 }: {
   cardNumbers: Map<string, string>;
   expirationDate: Map<string, string>;
   userName: Map<string, string>;
+  cardCompany: string;
 }) => {
   return (
-    <CardFrame>
+    <CardFrame cardCompany={cardCompany}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <ICChip />
         <CardLogo cardNumbers={cardNumbers} />
@@ -29,9 +33,12 @@ const CardPreview = ({
   );
 };
 
-const CardFrame = styled.div`
+const CardFrame = styled.div<{ cardCompany: string }>`
   color: white;
-  background: #333333;
+  ${({ cardCompany }) => {
+    const { color } = CARD_COMPANY[cardCompany] || { color: "#333333" };
+    return `background: ${color};`;
+  }}
   padding: 10px 15px;
   width: 202px;
   height: 117px;
@@ -43,6 +50,7 @@ const CardFrame = styled.div`
 
 const ICChip = styled.div`
   background: #ddcd78;
+
   width: 36px;
   height: 22px;
   gap: 0px;

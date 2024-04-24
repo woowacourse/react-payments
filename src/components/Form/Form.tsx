@@ -6,14 +6,18 @@ import InputDescription from "./InputDescription";
 import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
+import CardCompanyForm from "./CardCompanyForm";
+
+// TODO: 이름 수정 - ICardInputFormProps
 export interface ICardFormProps {
   labelContent: string;
   inputCount: number;
   type: string;
-  placeholders: string[];
+  placeholders?: string[];
   setCardNumbers?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setUserName?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setCardCompany?: React.Dispatch<React.SetStateAction<string>>;
 
   setAllFormsValid: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFormFilledOnce: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,14 +27,28 @@ const Form = ({
   setCardNumbers,
   setExpirationDate,
   setUserName,
+  setCardCompany,
 }: {
   setCardNumbers: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setUserName: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setCardCompany: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [isAllCardNumberValid, setIsAllCardNumberValid] = useState(false);
   const [isCardNumberFormFilledOnce, setIsCardNumberFormFilledOnce] =
     useState(false);
+
+  const [isCardCompanySelected, setIsCardCompanySelected] = useState(false);
+  const [isCardCompanySelectedOnce, setIsCardCompanySelectedOnce] =
+    useState(false);
+
+  const [isAllExpirationDateValid, setIsAllExpirationDateValid] =
+    useState(false);
+  const [isExpirationDateFilledOnce, setIsExpirationDateFilledOnce] =
+    useState(false);
+
+  const [isUserNameValid, setIsUserNameValid] = useState(false);
+  const [isUserNameFilledOnce, setIsUserNameFilledOnce] = useState(false);
 
   return (
     <FormWrapper>
@@ -53,6 +71,20 @@ const Form = ({
       {isCardNumberFormFilledOnce && (
         <div style={{ height: "137px" }}>
           <InputDescription
+            title="카드사를 선택해 주세요"
+            description="현재 국내 카드사만 가능합니다."
+          ></InputDescription>
+          <CardCompanyForm
+            setCardCompany={setCardCompany}
+            setAllFormsValid={setIsCardCompanySelected}
+            setIsFormFilledOnce={setIsCardCompanySelectedOnce}
+          ></CardCompanyForm>
+        </div>
+      )}
+
+      {isCardCompanySelectedOnce && (
+        <div style={{ height: "170px" }}>
+          <InputDescription
             title="카드 유효기간을 입력해 주세요"
             description="월/년도(MMYY)를 순서대로 입력해 주세요."
           ></InputDescription>
@@ -62,27 +94,33 @@ const Form = ({
             type="text"
             placeholders={["MM", "YY"]}
             setExpirationDate={setExpirationDate}
+            setAllFormsValid={setIsAllExpirationDateValid}
+            setIsFormFilledOnce={setIsAllExpirationDateValid}
           ></ExpirationDateForm>
         </div>
       )}
 
-      {/* <div style={{ height: "137px" }}>
-        <InputDescription title="카드 소유자 이름을 입력해 주세요"></InputDescription>
-        <UserNameForm
-          labelContent="소유자 이름"
-          inputCount={1}
-          type="text"
-          placeholders={["JOHN DOE"]}
-          setUserName={setUserName}
-        ></UserNameForm>
-      </div> */}
+      {/* {isExpirationDateFilledOnce && (
+        <div style={{ height: "137px" }}>
+          <InputDescription title="카드 소유자 이름을 입력해 주세요"></InputDescription>
+          <UserNameForm
+            labelContent="소유자 이름"
+            inputCount={1}
+            type="text"
+            placeholders={["JOHN DOE"]}
+            setUserName={setUserName}
+            setAllFormsValid={setIsUserNameValid}
+            setIsFormFilledOnce={setIsUserNameFilledOnce}
+          ></UserNameForm>
+        </div>
+      )} */}
     </FormWrapper>
   );
 };
 
 const FormWrapper = styled.form`
   width: 315px;
-  height: fit-content;
+  height: max-content;
   display: flex;
   flex-direction: column-reverse;
 `;
