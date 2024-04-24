@@ -8,7 +8,7 @@ import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
 interface Props {
-  passwordState: ReturnType<typeof useInput>;
+  passwordState: ReturnType<typeof useInput<string>>;
 }
 
 const PasswordField = ({ passwordState }: Props) => {

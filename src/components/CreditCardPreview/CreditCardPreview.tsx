@@ -1,36 +1,38 @@
 import S from "./style";
 import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
-import {
-  CardNumberInputType,
-  ExpirationPeriodInputType,
-} from "@/pages/CardRegisterPage/CardRegisterPage";
 import { theme } from "@/style/theme";
-
-export type CardType = "VISA" | "MASTER" | "NONE";
+import { CardNumberInputType } from "../CardRegisterForm/components/CardNumbersField/CardNumbersField";
+import { ExpirationPeriodInputType } from "../CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
+import { checkCardBrand } from "@/utils/validation";
+import { CardType, CardTypeColor } from "@/constants/cardType";
 
 interface Props {
-  cardType: CardType;
+  cardType: CardType | null;
   cardNumbers: CardNumberInputType;
   expirationDate: ExpirationPeriodInputType;
-  ownerName: string;
+  ownerName: string | null;
 }
+
 const CreditCardPreview = ({
-  cardType,
   expirationDate,
   ownerName,
   cardNumbers,
+  cardType,
 }: Props) => {
+  const cardTypeLogo = checkCardBrand(cardNumbers.cardNumbers1);
+  const cardTypeColor = cardType ? CardTypeColor[cardType] : null;
+
   return (
-    <S.CardWrapper>
+    <S.CardWrapper $cardTypeColor={cardTypeColor}>
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
 
-        {cardType === "VISA" ? (
+        {cardTypeLogo === "VISA" ? (
           <S.LogoBox color={theme.COLOR.white}>
             <VisaLogo />
           </S.LogoBox>
-        ) : cardType === "MASTER" ? (
+        ) : cardTypeLogo === "MASTER" ? (
           <S.LogoBox color={theme.COLOR.white}>
             <MasterLogo />
           </S.LogoBox>
@@ -64,7 +66,11 @@ const CreditCardPreview = ({
           }
           readOnly
         ></S.Input>
-        <S.Input type="text" value={ownerName} readOnly></S.Input>
+        <S.Input
+          type="text"
+          value={ownerName ? ownerName : ""}
+          readOnly
+        ></S.Input>
       </S.CreditCardInfo>
     </S.CardWrapper>
   );

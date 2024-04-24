@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CardRegisterForm from "./CardRegisterForm";
 import useInputs from "@/hooks/useInputs";
 import useInput from "@/hooks/useInput";
+import { CardType } from "@/constants/cardType";
 
 const CardRegisterFormWithHook = () => {
   const cardNumbersState = useInputs({
@@ -22,10 +23,13 @@ const CardRegisterFormWithHook = () => {
     validates: [],
   });
 
-  const ownerNameState = useInput("");
-  const CVCNumbersState = useInput("");
-  const passwordState = useInput("");
-  const cardTypeState = useInput("");
+  const ownerNameState = useInput({ initialValue: "", validates: [] });
+  const CVCNumbersState = useInput({ initialValue: "", validates: [] });
+  const passwordState = useInput({ initialValue: "", validates: [] });
+  const cardTypeState = useInput<CardType | null>({
+    initialValue: null,
+    validates: [],
+  });
 
   return (
     <CardRegisterForm

@@ -4,31 +4,40 @@ import UpArrow from "@/assets/upArrow.svg?react";
 import DownArrow from "@/assets/downArrow.svg?react";
 import { MESSAGE } from "@/constants/message";
 
-const SelectBox = <T extends []>({ optionArr }: { optionArr: T }) => {
+const SelectBox = <T extends string>({
+  optionArr,
+  setValue,
+  value,
+}: {
+  value: T | null;
+  optionArr: (T | null)[];
+  setValue: React.Dispatch<React.SetStateAction<T | null>>;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<keyof T | string>(
-    MESSAGE.INPUT_INFO_TITLE.CARD_TYPE
-  );
 
-  const onClickSelectOption = (option: keyof T) => {
-    setSelectedValue(option);
+  const onClickSelectOption = (option: T) => {
+    setValue(option);
     setIsOpen(false);
   };
 
   return (
     <S.SelectWrapper>
       <S.SelectedOptionBox
+        $isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}
-        selected={!(selectedValue === MESSAGE.INPUT_INFO_TITLE.CARD_TYPE)}
+        selected={!!value}
       >
-        <span>{selectedValue as string}</span>
+        <span>{value || MESSAGE.INPUT_INFO_TITLE.CARD_TYPE}</span>
         {isOpen ? <DownArrow /> : <UpArrow />}
       </S.SelectedOptionBox>
       {isOpen && (
         <S.OptionsWrapper>
           {optionArr.map((option, index) => {
             return (
-              <S.Option key={index} onClick={() => onClickSelectOption(option)}>
+              <S.Option
+                key={index}
+                onClick={() => onClickSelectOption(option!)}
+              >
                 {option}
               </S.Option>
             );

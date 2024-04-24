@@ -9,7 +9,7 @@ import useInput from "@/hooks/useInput";
 import useShowError from "@/hooks/useShowError";
 
 interface Props {
-  ownerNameState: ReturnType<typeof useInput>;
+  ownerNameState: ReturnType<typeof useInput<string>>;
 }
 
 const OwnerNameField = ({ ownerNameState }: Props) => {

@@ -2,8 +2,8 @@ import { ValidationStatus } from "@/utils/validation";
 import { useEffect, useState } from "react";
 import React from "react";
 
-interface Props {
-  initialValue: string;
+interface Props<T> {
+  initialValue: T;
   validates: ((value: string) => {
     isValid: boolean;
     type: ValidationStatus;
@@ -11,8 +11,8 @@ interface Props {
   maxNumberLength?: number;
 }
 
-const useInput = ({ initialValue, validates }: Props) => {
-  const [value, setValue] = useState(initialValue);
+const useInput = <T,>({ initialValue, validates }: Props<T>) => {
+  const [value, setValue] = useState<T>(initialValue);
   const [error, setError] = useState<ValidationStatus | null>(null);
   const [isError, setIsError] = useState(true);
 
@@ -33,10 +33,9 @@ const useInput = ({ initialValue, validates }: Props) => {
       if (allValid) {
         newError = null;
       }
-      setError(newError);
     });
-
-    setValue(event.target.value);
+    setError(newError);
+    setValue(event.target.value as T);
   };
 
   useEffect(() => {
@@ -47,6 +46,6 @@ const useInput = ({ initialValue, validates }: Props) => {
     }
   }, [error, value]);
 
-  return { value, onChange, error, isError };
+  return { value, onChange, error, isError, setValue };
 };
 export default useInput;

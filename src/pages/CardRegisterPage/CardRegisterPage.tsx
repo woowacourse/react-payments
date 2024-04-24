@@ -5,13 +5,13 @@ import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
 import {
-  checkCardBrand,
   validateIsValidLength,
   validateMonth,
   validateOwnerName,
 } from "@/utils/validation";
 import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
+import { CardType } from "@/constants/cardType";
 
 const CardRegisterPage = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -48,19 +48,19 @@ const CardRegisterPage = () => {
     validates: [(value: string) => validateOwnerName(value)],
   });
 
-  const cardTypeState = useInput({
-    initialValue: "",
+  const cardTypeState = useInput<CardType | null>({
+    initialValue: null,
     validates: [(value: string) => validateOwnerName(value)],
   });
 
-  const CVCNumbersState = useInput({
+  const CVCNumbersState = useInput<string>({
     initialValue: "",
     validates: [
       (value: string) => validateIsValidLength(value, VALID_LENGTH.CVC_NUMBERS),
     ],
   });
 
-  const passwordState = useInput({
+  const passwordState = useInput<string>({
     initialValue: "",
     validates: [
       (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
@@ -71,7 +71,7 @@ const CardRegisterPage = () => {
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CreditCardPreview
-          cardType={checkCardBrand(cardNumbersState.values.cardNumbers1)}
+          cardType={cardTypeState.value}
           cardNumbers={cardNumbersState.values}
           expirationDate={expiredDateState.values}
           ownerName={ownerNameState.value}

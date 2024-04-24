@@ -9,7 +9,7 @@ import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
 
 interface Props {
-  CVCNumbersState: ReturnType<typeof useInput>;
+  CVCNumbersState: ReturnType<typeof useInput<string>>;
 }
 
 const CVCField = ({ CVCNumbersState }: Props) => {

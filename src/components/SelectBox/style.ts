@@ -11,11 +11,12 @@ const Option = styled.div`
   width: 100%;
 `;
 
-const SelectedOptionBox = styled.div<{ selected: boolean }>`
+const SelectedOptionBox = styled.div<{ selected: boolean; $isOpen: boolean }>`
   height: 31px;
   width: 100%;
   padding: 8px;
-  border: 1px solid black;
+  border: 1px solid
+    ${({ theme, $isOpen }) => ($isOpen ? "black" : theme.COLOR["grey-2"])};
   border-radius: 3px;
   display: flex;
   align-items: center;
