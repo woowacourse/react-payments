@@ -3,78 +3,51 @@ import {
   PAYMENTS_INPUT_MESSAGE,
   PAYMENTS_MESSAGE,
 } from '../constants/message';
-import { isValidMonth, isValidYear } from '../domain/checkIsValid';
 
 import { BOUND } from '../constants/number';
-import { CardExpiredDate as CardExpiredDateType } from '../hooks/useCardInfo';
 import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
+import { ValidateInput } from '../hooks/useValidateInput';
 import useLastValidValue from '../hooks/useLastValidValue';
-import useValidateInput from '../hooks/useValidateInput';
-import useValidator from '../hooks/useValidator';
 
-export default function CardExpiredDate({
-  setCardExpiredDate,
-}: {
-  setCardExpiredDate: React.Dispatch<React.SetStateAction<CardExpiredDateType>>;
-}) {
-  const {
-    input: month,
-    onChange: monthOnChange,
-    errorMessage: monthErrorMessage,
-  } = useValidateInput({
-    ...useMonthInputProps,
-    setHook: (month: string) => {
-      setCardExpiredDate([month, year]);
-    },
-  });
+interface props {
+  monthValidateInput: ValidateInput;
+  yearValidateInput: ValidateInput;
+}
 
-  const {
-    input: year,
-    onChange: yearOnChange,
-    errorMessage: yearErrorMessage,
-  } = useValidateInput({
-    ...useYearInputProps,
-    setHook: (year: string) => {
-      setCardExpiredDate([month, year]);
-    },
-  });
+export default function ExpiredDate({
+  monthValidateInput,
+  yearValidateInput,
+}: props) {
+  const isValidMonth = monthValidateInput.errorMessage === '';
+  const isValidYear = yearValidateInput.errorMessage === '';
 
-  const isFullFilled = ([month, year]: CardExpiredDateType) => {
-    return (
-      month.length + year.length ===
-      BOUND.cardExpiredMonthStringUpper + BOUND.cardExpiredYearStringUpper
-    );
-  };
+  const isFullFilled =
+    monthValidateInput.inputValue.length ===
+      BOUND.cardExpiredMonthStringUpper &&
+    yearValidateInput.inputValue.length === BOUND.cardExpiredYearStringUpper;
 
-  const isExpired = ([month, year]: CardExpiredDateType) => {
-    const inputMonth = Number(month);
-    const inputYear = Number(year) + 2000;
-    const inputDate = new Date(inputYear, inputMonth);
+  const inputMonth = Number(monthValidateInput.inputValue);
+  const inputYear = Number(yearValidateInput.inputValue) + 2000;
+  const inputDate = new Date(inputYear, inputMonth);
+  const nowMonth = new Date().getMonth();
+  const nowYear = new Date().getFullYear();
+  const nowDate = new Date(nowYear, nowMonth);
 
-    const nowMonth = new Date().getMonth();
-    const nowYear = new Date().getFullYear();
-    const nowDate = new Date(nowYear, nowMonth);
+  const isExpired = inputDate < nowDate;
 
-    return inputDate < nowDate;
-  };
+  const isFullFilledAndExpired = isFullFilled && isExpired;
+  const isFullFilledAndExpiredErrorMessage = isFullFilledAndExpired
+    ? ERROR_MESSAGE.wrongExpiredDate
+    : '';
 
-  const {
-    errorMessage: invalidExpiredDateErrorMessage,
-    isError: isUnderMonth,
-  } = useValidator(
-    [month, year],
-    (arg: CardExpiredDateType) => !isFullFilled(arg) || !isExpired(arg),
-    ERROR_MESSAGE.wrongExpiredDate
-  );
-
-  const errorMessage = useLastValidValue({
+  const totalErrorMessage = useLastValidValue({
     checkValues: [
-      monthErrorMessage,
-      yearErrorMessage,
-      invalidExpiredDateErrorMessage,
+      monthValidateInput.errorMessage,
+      yearValidateInput.errorMessage,
+      isFullFilledAndExpiredErrorMessage,
     ],
     invalidValues: [''],
   });
@@ -87,58 +60,27 @@ export default function CardExpiredDate({
       />
       <FormItem
         labelText={PAYMENTS_INPUT_MESSAGE.expiredDateLabel}
-        errorMessage={errorMessage}
+        errorMessage={totalErrorMessage}
       >
         <TextInputContainer
-          childrenBorderColor={isUnderMonth ? 'error' : undefined}
+          childrenBorderColor={isFullFilledAndExpired ? 'error' : undefined}
         >
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
-            onChange={monthOnChange}
-            value={month}
-            borderColor={monthErrorMessage ? 'error' : undefined}
-            aria-invalid={
-              !(
-                monthErrorMessage === '' &&
-                invalidExpiredDateErrorMessage === ''
-              )
-            }
+            onChange={monthValidateInput.onChange}
+            value={monthValidateInput.inputValue}
+            borderColor={isValidMonth ? undefined : 'error'}
+            aria-invalid={!(isValidMonth && !isFullFilledAndExpired)}
           />
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
-            onChange={yearOnChange}
-            value={year}
-            borderColor={yearErrorMessage ? 'error' : undefined}
-            aria-invalid={
-              !(
-                yearErrorMessage === '' && invalidExpiredDateErrorMessage === ''
-              )
-            }
+            onChange={yearValidateInput.onChange}
+            value={yearValidateInput.inputValue}
+            borderColor={isValidYear ? undefined : 'error'}
+            aria-invalid={!(isValidYear && !isFullFilledAndExpired)}
           />
         </TextInputContainer>
       </FormItem>
     </section>
   );
 }
-
-const useMonthInputProps = {
-  validatorPropsArray: [
-    {
-      checkIsValid: isValidMonth,
-      shouldReflect: false,
-      errorMessage: ERROR_MESSAGE.wrongMonth,
-    },
-  ],
-  maxLength: BOUND.cardExpiredMonthStringUpper,
-};
-
-const useYearInputProps = {
-  validatorPropsArray: [
-    {
-      checkIsValid: isValidYear,
-      shouldReflect: false,
-      errorMessage: ERROR_MESSAGE.wrongYear,
-    },
-  ],
-  maxLength: BOUND.cardExpiredYearStringUpper,
-};
