@@ -17,7 +17,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const PasswordFormSection = () => {
+const PasswordFormSection = ({
+  changePassword,
+}: {
+  changePassword: (password: string) => void;
+}) => {
   const {
     inputState,
     errorMessage,
@@ -44,6 +48,10 @@ const PasswordFormSection = () => {
         errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
   }, [inputState[0].hasFocus]);
+
+  useEffect(() => {
+    changePassword(inputState[0].value);
+  }, [inputState[0].value]);
 
   return (
     <FormSection>
