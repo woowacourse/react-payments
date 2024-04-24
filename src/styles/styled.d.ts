@@ -19,6 +19,16 @@ declare module 'styled-components' {
       darkGray: string;
       magnetic: string;
       dropShadow: string;
+      brand: {
+        bc: string;
+        shinhan: string;
+        kakao: string;
+        hyundai: string;
+        woori: string;
+        lotte: string;
+        hana: string;
+        kookmin: string;
+      };
     };
   }
 }
