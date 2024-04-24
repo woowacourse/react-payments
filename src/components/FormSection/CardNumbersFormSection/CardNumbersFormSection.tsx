@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
@@ -14,7 +16,8 @@ interface CardNumbersFormSectionProps {
 
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
-  const [inputState, onChange, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ cardInfo, dispatchCardInfo })
+  const refs = useRef(new Array(OPTION.cardNumberInputCount).fill(null));
+  const [inputState, onChange, handleOnFocus, handleOnBlur] = useCardNumbersFormSection({ cardInfo, dispatchCardInfo, refs })
 
   return (
     <Styled.FormSection>
@@ -27,6 +30,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
         <Styled.InputFieldContainer className="input-field-container">
           {[...Array(OPTION.cardNumberInputCount)].map((_, index) => (
             <PaymentsInputField
+              ref={(input) => refs.current[index] = input}
               key={index}
               placeholder="1234"
               maxLength={OPTION.cardNumberMaxLength}

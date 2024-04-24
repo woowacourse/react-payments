@@ -1,48 +1,41 @@
-import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
-import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
+import { useRef } from 'react';
 
-import styled from 'styled-components';
-import * as Styled from '../FormSection.styled';
+import FormSection from '../FormSection';
+import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
 import useNameFormSection from '../../../hook/useNameFormSection';
 
 import OPTION from '../../../constants/option';
-
-const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
-    text-transform: uppercase;
-  `;
+import styled from 'styled-components';
 
 interface NameFormSectionProps {
   cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
+const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
+text-transform: uppercase`
+
 const NameFormSection = (props: NameFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
+  const ref = useRef<HTMLInputElement>(null)
+  const [onChange, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo, ref })
 
-  const [onChange, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo })
+  const NameForm = (
+    <PaymentsInputFieldUppercase
+      className="name-form-section"
+      placeholder="FAMILY / GIVEN"
+      maxLength={OPTION.nameMaxLength}
+      value={cardInfo.name.value}
+      hasError={cardInfo.name.errorMessage.length !== 0}
+      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
+      handleOnFocus={handleOnFocus}
+      handleOnBlur={handleOnBlur}
+      autoFocus={true}
+    />)
 
   return (
-    <Styled.FormSection>
-      <PaymentsFormTitle title="카드 소유자 이름을 입력해 주세요" />
-      <Styled.InputForm>
-        <Styled.Label>소유자 이름</Styled.Label>
-        <Styled.InputFieldContainer className="input-field-container">
-          <PaymentsInputFieldUppercase
-            className="name-form-section"
-            placeholder="FAMILY / GIVEN"
-            maxLength={OPTION.nameMaxLength}
-            value={cardInfo.name.value}
-            hasError={cardInfo.name.errorMessage.length !== 0}
-            handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-            autoFocus={true}
-          />
-        </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{cardInfo.name.errorMessage}</Styled.ErrorMessage>
-      </Styled.InputForm>
-    </Styled.FormSection>
+    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={cardInfo.name.errorMessage} Children={NameForm} />
   );
 };
 

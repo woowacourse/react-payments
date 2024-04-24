@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
@@ -14,8 +16,8 @@ interface ExpirationDateFormSectionProps {
 
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
-
-  const [inputState, onChange, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo })
+  const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
+  const [inputState, onChange, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
 
   return (
     <Styled.FormSection>
@@ -27,6 +29,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         <Styled.Label>유효기간</Styled.Label>
         <Styled.InputFieldContainer className="input-field-container">
           <PaymentsInputField
+            ref={(input) => refs.current[0] = input}
             placeholder="MM"
             maxLength={OPTION.expirationDateMaxLength}
             value={cardInfo.expiration.value.month}
@@ -37,6 +40,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
             autoFocus={true}
           />
           <PaymentsInputField
+            ref={(input) => refs.current[1] = input}
             placeholder="YY"
             maxLength={OPTION.expirationDateMaxLength}
             value={cardInfo.expiration.value.year}

@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
+import useFocusNext from "./useFocusNext";
 
 interface UseExpirationFormSectionProps {
   cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
+  refs: React.MutableRefObject<HTMLInputElement[]>
 }
 
 interface ExpirationInputState {
@@ -22,8 +24,9 @@ const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
 const now = year + month;
 
 const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo, refs } = props
   const [inputState, setInputState] = useState<ExpirationInputState>({ month: { hasError: false, hasFocus: false }, year: { hasError: false, hasFocus: false } });
+  const { focusNext } = useFocusNext(refs);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: ExpirationInputType) => {
     const inputValue = event.target.value;
@@ -43,6 +46,16 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
   }
 
+  useEffect(() => {
+    const focusedRef = refs.current.find((ref) => ref === document.activeElement);
+    if (!focusedRef) return;
+    if (focusedRef.value.length === OPTION.expirationDateMaxLength) {
+      focusNext();
+    }
+    if (refs.current.every((ref) => ref.value.length === OPTION.expirationDateMaxLength)) {
+      handleValidate();
+    }
+  }, [cardInfo.expiration.value])
 
   const handleOnFocus = (index: ExpirationInputType) => {
     setInputState((prevState) => ({

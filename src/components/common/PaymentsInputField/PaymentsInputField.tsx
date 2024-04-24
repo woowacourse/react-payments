@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Input } from "./PaymentsInputField.styled";
 
 interface PaymentsInputFieldProps {
@@ -13,7 +14,7 @@ interface PaymentsInputFieldProps {
   autoFocus?: boolean
 }
 
-const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
+const PaymentsInputField = forwardRef<HTMLInputElement, PaymentsInputFieldProps>((props, ref) => {
   const {
     placeholder,
     maxLength,
@@ -35,6 +36,7 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
 
   return (
     <Input
+      ref={ref}
       className={className}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
@@ -48,6 +50,6 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
       onKeyDown={(e) => handleKeyDownEnter(e)}
     />
   );
-};
+});
 
 export default PaymentsInputField;

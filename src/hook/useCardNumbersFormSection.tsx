@@ -1,11 +1,13 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
+import useFocusNext from "./useFocusNext";
 
 interface UseCardNumbersFormSectionProps {
   cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
+  refs: React.MutableRefObject<HTMLInputElement[]>
 }
 
 const initializeInputFieldState = (length: number) => {
@@ -20,8 +22,9 @@ const initializeInputFieldState = (length: number) => {
 };
 
 const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo, refs } = props
   const [inputState, setInputState] = useState(initializeInputFieldState(OPTION.cardNumberInputCount));
+  const { focusNext } = useFocusNext(refs);
 
   const checkBrand = (inputValue: string) => {
     if (REGEX.visaCard.test(inputValue)) {
@@ -54,8 +57,18 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
       dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: newNumbers })
     }
     if (index === 0) checkBrand(newNumbers[0]);
-
   }
+
+  useEffect(() => {
+    const focusedRef = refs.current.find((ref) => ref === document.activeElement);
+    if (!focusedRef) return;
+    if (focusedRef.value.length === OPTION.cardNumberMaxLength) {
+      focusNext();
+    }
+    if (refs.current.every((ref) => ref.value.length === OPTION.cardNumberMaxLength)) {
+      handleValidate();
+    }
+  }, [cardInfo.cardNumbers.value])
 
   const handleOnFocus = (index: number) => {
     setInputState((prevState) => ({
