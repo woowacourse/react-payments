@@ -1,3 +1,18 @@
+export const makeValidLengthValidator = (validLength: number) => ({
+  validate: (inputs: string[]) =>
+    inputs.every(
+      (input) =>
+        validLength === undefined ||
+        input.length === 0 ||
+        input.length === validLength
+    ),
+  errorMessage: "유효하지 않은 길이입니다.",
+});
+
+export const makeValidateValidLength =
+  (validLength: number) => (input: string) =>
+    input.length === 0 || input.length === validLength;
+
 export const expirationDateValidators = (date: string[]): Validator[] => {
   const [month, year] = date.map(Number);
   const { nowMonth, nowYear } = getCurrentDate();
