@@ -30,9 +30,9 @@
 }
 
 .dropdownMenuContainer {
-  padding-left: 0px;
+  padding: 0px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 57px);
   border-radius: 6px;
   border: 1px solid var(--grey-200);
 }

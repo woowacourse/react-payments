@@ -49,7 +49,7 @@ const Option: OptionType = ({ isSelected, onSelectOption, onHoverOption, childre
   return (
     <li
       className={`${styles.dropdownOption} ${selectedStyleClass}`}
-      onMouseMove={onHoverOption}
+      onMouseEnter={onHoverOption}
       onClick={onSelectOption}
     >
       {children}
