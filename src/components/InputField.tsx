@@ -1,15 +1,17 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import { Input } from './Input';
 import FieldTitle from './FieldTitle';
 import { FieldContainer } from '../style/container.style';
+import { useInputField } from '../hooks/useInputField';
 
 interface Props {
   title: string;
   subtitle?: string;
   inputTypes: InputType;
   handleInput: (value: Record<string, string>) => void;
+  handleNext: () => void;
 }
 
 export default function InputField({
@@ -17,37 +19,27 @@ export default function InputField({
   subtitle,
   inputTypes,
   handleInput,
+  handleNext,
 }: Props) {
-  const [values, setValues] = useState<Record<string, string>>({});
-  const [errorMessages, setErrorMessages] = useState<Record<number, string>>(
-    {}
-  );
+  const { values, errorMessages, updateInputValue, updateErrorMessage } =
+    useInputField();
+
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const handleUpdateInput = (index: number, value: string) => {
-    setValues({
-      ...values,
-      [inputTypes.inputInfo[index].property]: value,
-    });
-    handleInput({
-      ...values,
-      [inputTypes.inputInfo[index].property]: value,
-    });
-  };
+  useEffect(() => {
+    if (inputRefs.current) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
 
   const handleInputNext = (index: number) => {
-    if (index < inputTypes.inputInfo.length - 1) {
+    if (index < inputTypes.inputInfo.length - 1 && inputRefs.current) {
       inputRefs.current[index + 1].focus();
     }
-  };
 
-  const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
-    setErrorMessages((prev) => {
-      return {
-        ...prev,
-        [index]: errorMessage,
-      };
-    });
+    if (index === inputTypes.inputInfo.length - 1) {
+      handleNext();
+    }
   };
 
   return (
@@ -61,10 +53,16 @@ export default function InputField({
             ref={(ref) => (inputRefs.current[index] = ref as HTMLInputElement)}
             value={values[info.property] || ''}
             info={info}
-            handleInput={(value: string) => handleUpdateInput(index, value)}
+            handleInput={(value: string) => {
+              updateInputValue(info.property, value);
+              handleInput({
+                ...values,
+                [info.property]: value,
+              });
+            }}
             isError={!!errorMessages[index]}
             handleErrorMessage={(errorMessage: string) =>
-              handleUpdateErrorMessages(index, errorMessage)
+              updateErrorMessage(index, errorMessage)
             }
             onNext={() => handleInputNext(index)}
           />

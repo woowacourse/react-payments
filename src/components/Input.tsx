@@ -18,6 +18,7 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+    console.log('d', inputValue, 'af');
     try {
       Validation[info.validateType]?.(inputValue);
       handleErrorMessage('');
@@ -34,15 +35,22 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onNext();
+    }
+  };
+
   return (
     <StyledInput
+      ref={ref}
       value={value}
       color={isError ? 'red' : 'grey'}
       type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
       onChange={handleChange}
-      ref={ref}
+      onKeyDown={handleKeyDown}
     />
   );
 });
