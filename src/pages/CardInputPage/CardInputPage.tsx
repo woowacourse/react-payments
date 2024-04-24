@@ -1,6 +1,7 @@
 import styles from "./CardInputPage.module.css";
 import Form from "../../components/common/Form/Form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ShelfSection from "../../components/common/ShelfSection/ShelfSection";
 import CardNumbersInputField from "../../components/Field/CardNumbersInputField/CardNumbersInputField";
 import CardExpirationDateInputField from "../../components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
@@ -23,6 +24,8 @@ function CardInputPage() {
   const [isCompletedSections, setIsCompletedSections] = useState<boolean[]>(
     () => new Array(5).fill(false)
   );
+
+  const navigate = useNavigate();
 
   return (
     <main className={styles.background}>
@@ -55,7 +58,10 @@ function CardInputPage() {
             />
           </ShelfSection>
         </Form>
-        <SubmitButton isCompletedSections={isCompletedSections}></SubmitButton>
+        <SubmitButton
+          isCompletedSections={isCompletedSections}
+          onClick={() => navigate("/card-added")}
+        ></SubmitButton>
       </section>
     </main>
   );
