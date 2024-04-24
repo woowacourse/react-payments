@@ -9,15 +9,45 @@ import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
 
 import * as S from './CardRegistrationPage.style';
+import { CARD_OWNER, CARD_EXPIRATION } from '../../constants/Condition';
+import { isValidForm, isValidRange, isValidLength } from '../../utils/validation';
+
+import useValidatedInput from '../../hooks/useValidatedInput';
 
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [owner, setOwner] = useState('');
+  // const [month, setMonth] = useState('');
+  // const [year, setYear] = useState('');
   const [company, setCompany] = useState('');
   const [cvc, setCVC] = useState('');
   const [password, setPassword] = useState('');
+
+  const validateMonth = (month: string) =>
+    isValidLength(month, 2) &&
+    isValidRange(Number(month), CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE);
+
+  const validateYear = (year: string) => isValidLength(year, 2);
+
+  const validateOwner = (owner: string) =>
+    isValidForm(owner, CARD_OWNER.VALID_REGEX) && isValidRange(owner.length, 1, CARD_OWNER.MAX_LENGTH);
+
+  const {
+    value: month,
+    isValid: isMonthValid,
+    handleValue: handleMonth,
+  } = useValidatedInput({ defaultValue: '', validateFunction: validateMonth });
+
+  const {
+    value: year,
+    isValid: isYearValid,
+    handleValue: handleYear,
+  } = useValidatedInput({ defaultValue: '', validateFunction: validateYear });
+
+  const {
+    value: owner,
+    isValid: isOwnerValid,
+    handleValue: handleOwner,
+  } = useValidatedInput({ defaultValue: '', validateFunction: validateOwner });
 
   const [isCVCInput, setIsCVCInput] = useState(false);
   const [inputComponentIndex, setInputComponentIndex] = useState(5);
@@ -30,20 +60,6 @@ const CardRegistrationPage = () => {
   const handleCompany = (company: string) => {
     setCompany(company);
     handleInputComponentIndex(3);
-  };
-
-  const handleMonth = (month: string) => {
-    setMonth(month);
-  };
-
-  const handleYear = (year: string) => {
-    setYear(year);
-    handleInputComponentIndex(2);
-  };
-
-  const handleOwner = (owner: string) => {
-    setOwner(owner);
-    handleInputComponentIndex(1);
   };
 
   const handleCVC = (cvc: string) => {
@@ -62,20 +78,26 @@ const CardRegistrationPage = () => {
   const handleInputComponentIndex = (nextIndex: number) =>
     nextIndex < inputComponentIndex && setInputComponentIndex(nextIndex);
 
-  const inputComponentList = [
-    <CardPasswordInput password={password} handlePassword={handlePassword} />,
-    <CardCVCInput cvc={cvc} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
-    <CardOwnerInput owner={owner} handleOwner={handleOwner} />,
-    <CardExpirationInput month={month} year={year} handleMonth={handleMonth} handleYear={handleYear} />,
-    <CardCompanyInput company={company} handleCompany={handleCompany} />,
-    <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />,
-  ];
+  // const inputComponentList = [
+  //   <CardPasswordInput password={password} handlePassword={handlePassword} />,
+  //   <CardCVCInput cvc={cvc} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
+  //   <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />,
+  //   <CardExpirationInput
+  //     month={month}
+  //     year={year}
+  //     isValid={[isMonthValid, isYearValid]}
+  //     handleMonth={handleMonth}
+  //     handleYear={handleYear}
+  //   />,
+  //   <CardCompanyInput company={company} handleCompany={handleCompany} />,
+  //   <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />,
+  // ];
 
-  const makeInputComponentList = (inputComponentIndex: number) => {
-    return inputComponentList
-      .filter((_, index) => index >= inputComponentIndex)
-      .map((inputComponent, index) => React.cloneElement(inputComponent, { key: index }));
-  };
+  // const makeInputComponentList = (inputComponentIndex: number) => {
+  //   return inputComponentList
+  //     .filter((_, index) => index >= inputComponentIndex)
+  //     .map((inputComponent, index) => React.cloneElement(inputComponent, { key: index }));
+  // };
 
   return (
     <S.CardRegistrationPageLayout>
@@ -90,7 +112,20 @@ const CardRegistrationPage = () => {
           isCVCInput={isCVCInput}
         />
       </S.CardPreviewBoxWrapper>
-      <S.CardForm>{makeInputComponentList(inputComponentIndex)}</S.CardForm>
+      <S.CardForm>
+        <CardPasswordInput password={password} handlePassword={handlePassword} />
+        <CardCVCInput cvc={cvc} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
+        <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />
+        <CardExpirationInput
+          month={month}
+          year={year}
+          isValid={[isMonthValid, isYearValid]}
+          handleMonth={handleMonth}
+          handleYear={handleYear}
+        />
+        <CardCompanyInput company={company} handleCompany={handleCompany} />
+        <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
+      </S.CardForm>
     </S.CardRegistrationPageLayout>
   );
 };

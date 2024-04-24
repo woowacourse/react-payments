@@ -1,21 +1,22 @@
-import useInput from './useInput';
-import useValidation from './useValidation';
+import { useState } from 'react';
 
 interface useValidatedInputProps {
   defaultValue: string;
-  message: string;
   validateFunction: (value: string) => boolean;
 }
 
-const useValidatedInput = ({ defaultValue, message, validateFunction }: useValidatedInputProps) => {
-  const { value, onChange } = useInput(defaultValue);
-  const { isValid, errorMessage } = useValidation({
-    value,
-    message,
-    validateFunction,
-  });
+const useValidatedInput = ({ defaultValue, validateFunction }: useValidatedInputProps) => {
+  const [value, setValue] = useState(defaultValue);
+  const [isValid, setIsValid] = useState(true);
 
-  return { value, onChange, isValid, errorMessage };
+  const handleValue = (newValue: string) => {
+    const newIsValid = validateFunction(newValue);
+
+    setIsValid(newIsValid);
+    setValue(newIsValid ? newValue : '');
+  };
+
+  return { value, isValid, handleValue };
 };
 
 export default useValidatedInput;

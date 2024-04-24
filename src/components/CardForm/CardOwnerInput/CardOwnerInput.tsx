@@ -1,34 +1,26 @@
-import { useState, useEffect } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isValidForm, isValidRange } from '../../../utils/validation';
 import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
+import useInput from '../../../hooks/useInput';
 
 interface CardOwnerInputProps {
   owner: string;
+  isValid: boolean;
   handleOwner: (owner: string) => void;
 }
 
-function CardOwnerInput({ owner, handleOwner }: CardOwnerInputProps) {
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    isValid ? setErrorMessage('') : setErrorMessage(ERROR_MESSAGE.INVALID_CARD_OWNER);
-  }, [isValid]);
+function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
+  const { value: ownerInput, onChange: onOwnerInputChange } = useInput(owner);
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValid =
-      isValidForm(e.target.value, CARD_OWNER.VALID_REGEX) &&
-      isValidRange(e.target.value.length, 1, CARD_OWNER.MAX_LENGTH);
-
-    setIsValid(newIsValid);
-    handleOwner(newIsValid ? e.target.value.toUpperCase() : '');
+    onOwnerInputChange(e);
+    handleOwner(e.target.value.toUpperCase());
   };
+
+  const errorMessage = isValid ? '' : ERROR_MESSAGE.INVALID_CARD_OWNER;
 
   return (
     <div>
@@ -38,7 +30,7 @@ function CardOwnerInput({ owner, handleOwner }: CardOwnerInputProps) {
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="STEVEN KING"
-          value={owner}
+          value={ownerInput}
           onChange={handleOwnerChange}
           isValid={isValid}
         />

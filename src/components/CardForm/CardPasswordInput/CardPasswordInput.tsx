@@ -5,6 +5,7 @@ import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
 import { isNumber, isValidLength } from '../../../utils/validation';
+import useInput from '../../../hooks/useInput';
 
 interface CardPasswordInputProps {
   password: string;
@@ -12,6 +13,8 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ password, handlePassword }: CardPasswordInputProps) => {
+  const { value: passwordInput, onChange: onPasswordInputChange } = useInput(password);
+
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -46,9 +49,9 @@ const CardPasswordInput = ({ password, handlePassword }: CardPasswordInputProps)
           isValid={isValid}
           type="password"
           placeholder="비밀번호를 입력하세요"
-          value={password}
+          value={passwordInput}
           maxLength={2}
-          onChange={handlePasswordChange}
+          onChange={onPasswordInputChange}
           onBlur={handlePasswordBlur}
         />
       </InputField>

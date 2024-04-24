@@ -1,38 +1,23 @@
-import { useState, useEffect } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isNumber, isValidLength, isValidRange } from '../../../utils/validation';
+import useInput from '../../../hooks/useInput';
+import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardExpirationInputProps {
   month: string;
   year: string;
+  isValid: [boolean, boolean];
   handleMonth: (month: string) => void;
   handleYear: (year: string) => void;
 }
 
-function CardExpirationInput({ month, year, handleMonth, handleYear }: CardExpirationInputProps) {
-  const [isValidMonth, setIsValidMonth] = useState(true);
-  const [isValidYear, setIsValidYear] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    if (!isValidMonth) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_MONTH);
-      return;
-    }
-
-    if (!isValidYear) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_YEAR);
-      return;
-    }
-
-    setErrorMessage('');
-  }, [isValidMonth, isValidYear]);
+function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: CardExpirationInputProps) {
+  const { value: monthInput, onChange: onMonthInputChange } = useInput(month);
+  const { value: yearInput, onChange: onYearInputChange } = useInput(year);
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -40,6 +25,7 @@ function CardExpirationInput({ month, year, handleMonth, handleYear }: CardExpir
       return;
     }
 
+    onMonthInputChange(e);
     handleMonth(e.target.value);
   };
 
@@ -49,30 +35,15 @@ function CardExpirationInput({ month, year, handleMonth, handleYear }: CardExpir
       return;
     }
 
+    onYearInputChange(e);
     handleYear(e.target.value);
   };
 
-  const handleMonthBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidMonth =
-      isValidRange(Number(e.target.value), CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE) &&
-      isValidLength(e.target.value, 2);
-
-    setIsValidMonth(newIsValidMonth);
-
-    if (!newIsValidMonth) {
-      handleMonth('');
-    }
-  };
-
-  const handleYearBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidYear = isValidLength(e.target.value, 2);
-
-    setIsValidYear(newIsValidYear);
-
-    if (!newIsValidYear) {
-      handleYear('');
-    }
-  };
+  const errorMessage = isValid.every(Boolean)
+    ? ''
+    : isValid[0]
+      ? ERROR_MESSAGE.INVALID_EXPIRATION_YEAR
+      : ERROR_MESSAGE.INVALID_EXPIRATION_MONTH;
 
   return (
     <div>
@@ -81,20 +52,18 @@ function CardExpirationInput({ month, year, handleMonth, handleYear }: CardExpir
         <Input
           type="text"
           placeholder="MM"
-          value={month}
+          value={monthInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
-          onBlur={handleMonthBlur}
-          isValid={isValidMonth}
+          isValid={isValid[0]}
         />
         <Input
           type="text"
           placeholder="YY"
-          value={year}
+          value={yearInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
-          onBlur={handleYearBlur}
-          isValid={isValidYear}
+          isValid={isValid[1]}
         />
       </InputField>
     </div>
