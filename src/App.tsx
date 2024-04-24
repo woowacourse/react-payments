@@ -8,6 +8,8 @@ import { InformationDetailType, InputChangePropsType } from './types/card';
 import { CardNumberType, CardOwnerType, CardPeriodType } from './types/state';
 import validateInput from './validations/validateInput';
 import { PERIOD } from './constants/inputInformation';
+import useCompleted from './hooks/useCompleted';
+import InputGroupSelector from './components/InputGroupSelector';
 
 const appContainerStyle = css({
   display: 'flex',
@@ -51,13 +53,18 @@ function App() {
     errorMessage: '',
   });
   const [cardOwner, setCardOwner] = useState<CardOwnerType>({ data: '', errorMessage: '' });
+  const [cardProvider, setCardProvider] = useState<CardOwnerType>({ data: '', errorMessage: '' });
 
-  const [isError, setIsError] = useState({
-    number: [false, false, false, false],
-    month: false,
-    year: false,
-    owner: false,
+  const [inputError, setInputError] = useState({
+    number: [true, true, true, true],
+    month: true,
+    year: true,
+    owner: true,
+    provider: true,
   });
+
+  // const isCompleted = useCompleted(inputError);
+  // console.log(isCompleted);
 
   const handleCardNumber = (value: string, index: number) => {
     setCardNumber((prevState) => {
@@ -83,11 +90,18 @@ function App() {
     });
   };
 
+  const handleCardProvider = (value: string) => {
+    setCardProvider((prevState) => {
+      return { ...prevState, data: value };
+    });
+  };
+
   const setStateFunctions = {
     number: handleCardNumber,
     month: handleCardPeriod,
     year: handleCardPeriod,
     owner: handleCardOwner,
+    provider: handleCardProvider,
   };
 
   const handleCardInput = ({ value, index, inputSection }: InputChangePropsType) => {
@@ -101,10 +115,11 @@ function App() {
     month: setCardPeriod,
     year: setCardPeriod,
     owner: setCardOwner,
+    provider: setCardProvider,
   };
 
   const handleCardError = ({ isError, inputSection, message, index }: HandleCardErrorType) => {
-    setIsError((prevState) => {
+    setInputError((prevState) => {
       if (inputSection === 'number') {
         const updatedState = [...prevState.number];
         updatedState[index] = isError;
@@ -133,29 +148,46 @@ function App() {
       <div css={appContainerStyle}>
         <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
         <form css={appInputStyle}>
+          {/* 카드 소유자 */}
+          {!inputError.month && !inputError.year && (
+            <InputGroup
+              onInputChange={({ value, index }: InputChangePropsType) =>
+                handleInputChange({ value, index, inputSection: 'owner' })
+              }
+              informationSection="owner"
+              isError={[inputError.owner]}
+              errorMessage={cardOwner.errorMessage}
+            />
+          )}
+          {/* 유효기간 */}
+          {!inputError.provider && (
+            <InputGroup
+              onInputChange={({ value, index, inputSection }: InputChangePropsType) => {
+                handleInputChange({ value, index, inputSection });
+              }}
+              informationSection="period"
+              isError={[inputError.month, inputError.year]}
+              errorMessage={cardPeriod.errorMessage}
+            />
+          )}
+          {/* 카드사 */}
+          {!inputError.number.some((error: boolean) => error) && (
+            <InputGroupSelector
+              onInputChange={({ value, index }: InputChangePropsType) =>
+                handleInputChange({ value, index, inputSection: 'provider' })
+              }
+              informationSection="provider"
+              errorMessage={cardProvider.errorMessage}
+            />
+          )}
+          {/* 카드 번호 */}
           <InputGroup
             onInputChange={({ value, index }: InputChangePropsType) =>
               handleInputChange({ value, index, inputSection: 'number' })
             }
             informationSection="number"
-            isError={isError.number}
+            isError={inputError.number}
             errorMessage={cardNumber.errorMessage}
-          />
-          <InputGroup
-            onInputChange={({ value, index, inputSection }: InputChangePropsType) => {
-              handleInputChange({ value, index, inputSection });
-            }}
-            informationSection="period"
-            isError={[isError.month, isError.year]}
-            errorMessage={cardPeriod.errorMessage}
-          />
-          <InputGroup
-            onInputChange={({ value, index }: InputChangePropsType) =>
-              handleInputChange({ value, index, inputSection: 'owner' })
-            }
-            informationSection="owner"
-            isError={[isError.owner]}
-            errorMessage={cardOwner.errorMessage}
           />
         </form>
       </div>

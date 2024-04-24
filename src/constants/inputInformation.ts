@@ -25,4 +25,10 @@ export const CARD_OWNER = {
   maxLength: 18,
 } as const;
 
+export const CARD_PROVIDER = {
+  type: 'provider',
+  title: '카드사를 선택해 주세요',
+  subtitle: '현재 국내 카드사만 가능합니다.',
+} as const;
+
 export const PERIOD = ['month', 'year'] as const;

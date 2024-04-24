@@ -1,3 +1,4 @@
+import { CARD_PROVIDER_SELECT } from '../constants/cardInformation';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
 import { InformationDetailType } from '../types/card';
@@ -13,6 +14,7 @@ interface ValidateInputTableType {
   month: () => ValidateResultType;
   year: () => ValidateResultType;
   owner: () => ValidateResultType;
+  provider: () => ValidateResultType;
 }
 
 const validateInput = (value: string, informationDetail: InformationDetailType) => {
@@ -21,6 +23,7 @@ const validateInput = (value: string, informationDetail: InformationDetailType) 
     month: () => cardMonthValidated(value),
     year: () => cardYearValidated(value),
     owner: () => cardOwnerValidated(value),
+    provider: () => cardProviderValidated(value),
   };
 
   const validateFunction = validateInputTable[informationDetail];
@@ -68,6 +71,19 @@ function cardOwnerValidated(value: string) {
       message: ERROR_MESSAGE.notInRange(VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max),
     };
   return { isError: false, message: '' };
+}
+
+function cardProviderValidated(value: string) {
+  if ((typeof CARD_PROVIDER_SELECT).includes(value)) {
+    return {
+      isError: true,
+      message: '카드사를 선택해주세요.',
+    };
+  }
+  return {
+    isError: false,
+    message: '',
+  };
 }
 
 function isNumber(value: number) {
