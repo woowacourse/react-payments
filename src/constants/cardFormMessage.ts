@@ -13,6 +13,13 @@ const CARD_FORM_MESSAGE = {
   inputCardType: "카드사를 선택해 주세요",
   domasticCardOnly: "현재 국내 카드사만 가능합니다.",
   inputCardTypePlaceholder: "카드사를 선택해주세요",
+
+  inputCvc: "CVC 번호를 입력해 주세요",
+  cvc: "CVC",
+
+  inputCardPasswrod: "비밀번호를 입력해 주세요",
+  cardPasswordDescription: "앞의 2자리를 입력해주세요",
+  twoDigitPassword: "비밀번호 앞 2자리",
 };
 
 export default CARD_FORM_MESSAGE;
