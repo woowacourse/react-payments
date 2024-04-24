@@ -6,8 +6,12 @@ import Input from "@/components/Input/Input";
 import { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS } from "@/constants/condition";
-import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
 import useShowError from "@/hooks/useShowError";
+
+export type ExpirationPeriodInputType = {
+  expirationMonth: string;
+  expirationYear: string;
+};
 
 interface Props {
   expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
@@ -22,61 +26,6 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
   const { onChange, errors } = expiredPeriodState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
-  // const onValidateExpirationPeriod = (index: number) => {
-  //   setExpirationErrors((prevErrors) => {
-  //     let newErrors = [...prevErrors];
-  //     newErrors = validateExpiration(newErrors);
-  //     newErrors = validateValidMonth(newErrors, index);
-  //     newErrors = validateLength(newErrors, index);
-  //     return newErrors;
-  //   });
-  // };
-
-  // const validateExpiration = (newErrors: (string | null)[]) => {
-  //   const expirationError = validateExpirationDate(expirationPeriod);
-  //   if (expirationError) {
-  //     newErrors = [expirationError, expirationError];
-  //   } else {
-  //     newErrors = newErrors.map((error) =>
-  //       error === ERROR_MESSAGE.EXPIRED_CARD_DATE ? null : error
-  //     );
-  //   }
-  //   return newErrors;
-  // };
-
-  // const validateLength = (newErrors: (string | null)[], index: number) => {
-  //   const lengthError = validateIsValidLength(
-  //     expirationPeriod[EXPIRATION_INPUTS_NAMES[index]],
-  //     VALID_LENGTH.EXPIRATION_PERIOD
-  //   );
-  //   if (
-  //     lengthError &&
-  //     expirationPeriod[EXPIRATION_INPUTS_NAMES[index]].length
-  //   ) {
-  //     newErrors[index] = lengthError;
-  //   } else {
-  //     newErrors[index] =
-  //       newErrors[index] === INVALID_LENGTH(2) ? null : newErrors[index];
-  //   }
-  //   return newErrors;
-  // };
-
-  // const validateValidMonth = (newErrors: (string | null)[], index: number) => {
-  //   if (index === 0) {
-  //     const monthError = validateMonth(
-  //       Number(expirationPeriod.expirationMonth)
-  //     );
-  //     if (monthError) {
-  //       newErrors[0] = monthError;
-  //     } else {
-  //       newErrors[0] =
-  //         newErrors[0] === ERROR_MESSAGE.INVALID_MONTH ? null : newErrors[0];
-  //     }
-  //   }
-  //   return newErrors;
-  // };
-
-  console.log(";aa", errors);
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader

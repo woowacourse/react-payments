@@ -1,5 +1,4 @@
 import { VALID_LENGTH } from "@/constants/condition";
-import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
 
 export enum ValidationStatus {
   INVALID_LENGTH = "INVALID_LENGTH",
@@ -19,8 +18,9 @@ export const validateIsValidLength = (
   return { type: ValidationStatus.INVALID_LENGTH, isValid: true };
 };
 
-export const validateExpirationDate = (date: ExpirationPeriodInputType) => {
-  const { expirationMonth, expirationYear } = date;
+export const validateExpirationDate = (date: string[]) => {
+  const [expirationMonth, expirationYear] = date;
+
   const month = Number(expirationMonth);
   const year = Number(expirationYear);
 

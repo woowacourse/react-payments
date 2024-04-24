@@ -1,8 +1,8 @@
 const SelectBox = ({ optionArr }: { optionArr: string[] }) => {
   return (
     <select>
-      {optionArr.map((option) => {
-        return <option>{option}</option>;
+      {optionArr.map((option, index) => {
+        return <option key={index}>{option}</option>;
       })}
     </select>
   );

@@ -1,17 +1,19 @@
 import { limitNumberLength } from "@/utils/numberHelper";
 import { ValidationStatus } from "@/utils/validation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 interface Props<T> {
   initialValue: T;
   validates: ((
-    value: string,
+    value: string[],
     currentName: string
   ) => { isValid: boolean; type: ValidationStatus } | null)[];
   maxNumberLength?: number;
 }
-
+//validation => all 둘 다 쓴다.
+//index =>
+//
 const useInputs = <T extends object>({
   initialValue,
   validates,
@@ -35,7 +37,7 @@ const useInputs = <T extends object>({
     let allValid = true;
 
     validates.forEach((validate) => {
-      const errorResult = validate(newValue, name);
+      const errorResult = validate([event.target.value], name);
       if (errorResult && !errorResult.isValid) {
         newErrors[name as keyof T] = errorResult.type;
         allValid = false;
@@ -50,7 +52,9 @@ const useInputs = <T extends object>({
     setErrors(newErrors);
   };
 
-  return { values, errors, onChange };
+  useEffect(() => {}, [values]);
+
+  return { values, errors, setErrors, onChange };
 };
 
 export default useInputs;

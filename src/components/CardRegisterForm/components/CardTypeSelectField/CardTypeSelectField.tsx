@@ -10,7 +10,6 @@ interface Props {
 }
 const CardTypeSelectField = ({ cardTypeState }: Props) => {
   const { value, onChange } = cardTypeState;
-  console.log(value, onChange);
   enum CardType {
     "BC카드" = "#F04651",
     "신한카드" = "#0046FF",

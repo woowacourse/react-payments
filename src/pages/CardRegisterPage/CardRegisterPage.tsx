@@ -13,19 +13,8 @@ import {
   validateMonth,
   validateOwnerName,
 } from "@/utils/validation";
-
-//TODO: 타입 파일로 빼기
-export type CardNumberInputType = {
-  cardNumbers1: string;
-  cardNumbers2: string;
-  cardNumbers3: string;
-  cardNumbers4: string;
-};
-
-export type ExpirationPeriodInputType = {
-  expirationMonth: string;
-  expirationYear: string;
-};
+import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
+import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 
 const CardRegisterPage = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -36,8 +25,8 @@ const CardRegisterPage = () => {
       cardNumbers4: "",
     },
     validates: [
-      (value: string) =>
-        validateIsValidLength(value, VALID_LENGTH.CARD_NUMBERS),
+      (value: string[]) =>
+        validateIsValidLength(value[0], VALID_LENGTH.CARD_NUMBERS),
     ],
     maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
   });
@@ -45,9 +34,9 @@ const CardRegisterPage = () => {
   const expiredDateState = useInputs<ExpirationPeriodInputType>({
     initialValue: { expirationMonth: "", expirationYear: "" },
     validates: [
-      (value: string) =>
-        validateIsValidLength(value, VALID_LENGTH.EXPIRATION_PERIOD),
-      (value: string, name: string) => {
+      (value: string[]) =>
+        validateIsValidLength(value[0], VALID_LENGTH.EXPIRATION_PERIOD),
+      (value: string[], name: string) => {
         if (name === "expirationMonth") {
           return validateMonth(Number(value));
         }

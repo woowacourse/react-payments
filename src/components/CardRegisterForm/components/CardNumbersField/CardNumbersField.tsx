@@ -5,8 +5,15 @@ import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
-import { CardNumberInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
 import useShowError from "@/hooks/useShowError";
+import { useEffect } from "react";
+
+export type CardNumberInputType = {
+  cardNumbers1: string;
+  cardNumbers2: string;
+  cardNumbers3: string;
+  cardNumbers4: string;
+};
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -15,8 +22,16 @@ interface Props {
 type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
-  const { onChange, errors } = cardNumbersState;
+  const { onChange, errors, values } = cardNumbersState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+
+  useEffect(() => {
+    console.log("values", values);
+  }, [values]);
+
+  useEffect(() => {
+    console.log("errors", errors);
+  }, [errors]);
 
   return (
     <S.InputFieldWithInfo>

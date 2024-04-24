@@ -38,6 +38,10 @@ const useInput = ({ initialValue, validates }: Props) => {
     setValue(event.target.value);
   };
 
+  // useEffect(() => {
+  //   console.log("aa");
+  // }, [value]);
+
   return { value, onChange, error };
 };
 export default useInput;
