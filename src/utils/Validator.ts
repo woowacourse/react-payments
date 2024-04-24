@@ -62,6 +62,24 @@ const Validator = {
     return VALIDATE_STATUS.error;
   },
 
+  checkCreditCardCvc(value: string): ValidateStatus {
+    const maxDigit = 3;
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return VALIDATE_STATUS.notValid;
+
+    if (!ValidatorCondition.checkIsDigit(value)) return VALIDATE_STATUS.error;
+
+    return VALIDATE_STATUS.valid;
+  },
+
+  checkCreditCardPassword(value: string): ValidateStatus {
+    const maxDigit = 2;
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return VALIDATE_STATUS.notValid;
+
+    if (!ValidatorCondition.checkIsDigit(value)) return VALIDATE_STATUS.error;
+
+    return VALIDATE_STATUS.valid;
+  },
+
   inputCreditCardInfo(value: string, name: string): ValidateStatus {
     if (Object.keys(CARD_INPUTBOX_NAME.cardNumber).includes(name))
       return this.checkCreditCardNumber(value);
@@ -71,6 +89,11 @@ const Validator = {
 
     if (Object.keys(CARD_INPUTBOX_NAME.owner).includes(name))
       return this.checkCreditCardOwner(value);
+
+    if (CARD_INPUTBOX_NAME.info.cvc === name) return this.checkCreditCardCvc(value);
+
+    if (CARD_INPUTBOX_NAME.authentication.password === name)
+      return this.checkCreditCardPassword(value);
 
     return VALIDATE_STATUS.notValid; // 예상치 못한 값이 들어오는 경우 유효하지 않는 값으로 처리
   },
