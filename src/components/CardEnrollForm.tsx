@@ -5,6 +5,7 @@ import { CardIssuer } from "../constants/cardIssuers";
 import CardIssuerSelect from "./CardIssuerSelect";
 import CardNumbers from "./CardNumbers";
 import CardOwnerName from "./CardOwnerName";
+import CardPasswordInput from "./CardPasswordInput";
 import CardPreview from "./CardPreview";
 import styled from "styled-components";
 import { useState } from "react";
@@ -35,6 +36,7 @@ export default function CardEnrollForm() {
     },
     cardOwnerName: "",
     cardCVC: "",
+    cardPassword: "",
   });
 
   const [isCVCFocused, setIsCVCFocused] = useState(false);
@@ -69,10 +71,18 @@ export default function CardEnrollForm() {
     setCardInformation((prev) => ({ ...prev, cardCVC: inputValue }));
   };
 
+  const onCardPasswordChange = (inputValue: string) => {
+    setCardInformation((prev) => ({ ...prev, cardPassword: inputValue }));
+  };
+
   return (
     <CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation} isFlipped={isCVCFocused} />
       <CardInformationContainer>
+        <CardPasswordInput
+          cardPassword={cardInformation.cardPassword}
+          onChange={onCardPasswordChange}
+        />
         <CardCVCInput
           cardCVC={cardInformation.cardCVC}
           onChange={onCardCVCChange}

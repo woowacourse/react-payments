@@ -23,20 +23,20 @@ const SInput = styled.input<{
 `;
 
 interface InputProps {
-  type?: string;
   maxLength: number;
-  placeholder: string;
   value: string;
+  type?: string;
+  placeholder?: string;
   onChange: (inputValue: string) => boolean;
   onBlur?: (inputValue: string) => boolean;
   onFocus?: () => void;
 }
 
 export default function Input({
-  type,
   maxLength,
-  placeholder,
   value,
+  type,
+  placeholder,
   onChange,
   onBlur,
   onFocus,

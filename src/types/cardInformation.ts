@@ -9,4 +9,5 @@ export interface CardInformation {
   };
   cardOwnerName: string;
   cardCVC: string;
+  cardPassword: string;
 }
