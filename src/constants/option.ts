@@ -9,6 +9,7 @@ const OPTION = {
   cvcMaxLength: 3,
   passwordInputCount: 1,
   passwordMaxLength: 2,
+  cardCompanyInputCount: 1,
   minMonth: '01',
   maxMonth: '12',
 };

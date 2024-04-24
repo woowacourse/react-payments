@@ -17,9 +17,14 @@ interface PaymentsFormTitleProps {
 }
 
 interface PaymentsSelectFieldProps {
-  options: string[];
+  options: string[][];
   name?: string;
   placeholder?: string;
+  hasError?: boolean;
+  value?: string;
+  handleValueChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleOnFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+  handleOnBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
 interface ButtonProps {
@@ -34,19 +39,32 @@ interface InputStates {
 }
 interface InputState {
   value: string;
-  hasError: boolean;
   hasFocus: boolean;
-  isFilled: boolean;
+  hasError: boolean;
+  isFilled?: boolean;
 }
 
 interface CardInfo {
+  cardCompany: typeof CardCompany | null;
   cardNumber: [string, string, string, string];
   expirationMonth: string;
   expirationYear: string;
   name: string;
+  cvc: string;
+  password: string;
 }
 
 interface ChangeExpirationProps {
   month: string;
   year: string;
 }
+
+type CardCompany =
+  | 'BC'
+  | 'shinhan'
+  | 'kakao'
+  | 'hyundai'
+  | 'woori'
+  | 'lotte'
+  | 'kebhana'
+  | 'kbstar';
