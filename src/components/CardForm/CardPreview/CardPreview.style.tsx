@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const wave = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
 
 export const Card = styled.div<{ $face: string; $background: string }>`
   position: relative;
@@ -6,7 +18,13 @@ export const Card = styled.div<{ $face: string; $background: string }>`
   height: 132px;
   border-radius: 4px;
   padding: ${(props) => props.$face === 'front' && '8px 12px'};
-  background: ${(props) => (props.$background ? props.$background : ({ theme }) => theme.color.primary.main)};
+  animation: ${wave} 4s ease infinite;
+  background: ${(props) =>
+    props.$background
+      ? `linear-gradient(-45deg, ${props.$background}, ${props.$background}80, ${props.$background}, ${props.$background}80)`
+      : ({ theme }) => theme.color.primary.main};
+  background-size: 400% 400%;
+
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 
