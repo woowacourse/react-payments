@@ -6,6 +6,7 @@
   --grey-500: #333333;
   --error: #ff3d3d;
   --dropdown-option: #4f4f4f;
+  --cvc-card: #d5d5d5;
 }
 
 .caption {
@@ -31,6 +32,8 @@
 .app {
   max-width: 375px;
   margin: auto;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body {

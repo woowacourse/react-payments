@@ -2,9 +2,18 @@ import Input, { InputProps } from '@components/common/Input/Input';
 
 type CVCNumberInputProps = Omit<InputProps, 'type' | 'maxLength' | 'onChange'> & {
   onAddCVCNumber: React.ChangeEventHandler<HTMLInputElement>;
+  refCallback: (inputElement: HTMLInputElement) => void;
+  onFocusCVCNumberField?: () => void;
 };
 
-const CVCNumberInput: React.FC<CVCNumberInputProps> = ({ isError = false, value, id, onAddCVCNumber }) => {
+const CVCNumberInput: React.FC<CVCNumberInputProps> = ({
+  isError = false,
+  value,
+  id,
+  onAddCVCNumber,
+  onFocusCVCNumberField,
+  refCallback,
+}) => {
   return (
     <Input
       maxLength={3}
@@ -14,6 +23,9 @@ const CVCNumberInput: React.FC<CVCNumberInputProps> = ({ isError = false, value,
       value={value}
       isError={isError}
       onChange={onAddCVCNumber}
+      onFocus={onFocusCVCNumberField}
+      onBlur={onFocusCVCNumberField}
+      ref={refCallback}
     />
   );
 };

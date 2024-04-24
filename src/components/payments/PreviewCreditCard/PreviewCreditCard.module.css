@@ -112,3 +112,23 @@
 .cardNumberText {
   width: 34px;
 }
+
+.cvcCard {
+  background-color: var(--cvc-card);
+  position: relative;
+  padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-align: right;
+  font-weight: 500;
+  color: var(--grey-100);
+}
+
+.cvcNumberContainer {
+  width: calc(100% - 32px);
+  padding: 2px 16px;
+  position: absolute;
+  bottom: 24px;
+  background-color: #cbba64;
+}

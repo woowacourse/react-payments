@@ -19,27 +19,36 @@ import useCardBrandDropdown from '@hooks/creditCard/useCardBrandDropdown';
 import useChangeCVCNumber from '@hooks/creditCard/useChangeCVCNumber';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
 import useChangePassword from '@hooks/creditCard/useChangeCardPassword';
+import { CARD_BRAND_MAP } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.constant';
+import { isCardBrandName } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.util';
+import useMovePage from '@hooks/useMovePage';
 
 const CreditCardForm: React.FC = () => {
   const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
 
-  const {
-    cardBrand,
-    isOpen: isDropdownOpen,
-    isCardBrandCompleted,
-    handleSelectCardBrand,
-    handleToggle,
-  } = useCardBrandDropdown();
+  const { cardBrand, isDropdownOpen, isCardBrandCompleted, handleSelectCardBrand, handleToggle } =
+    useCardBrandDropdown();
 
   const { isExpirationCompleted, expiration, expirationError, handleExpirationChange } = useChangeExpiration();
 
   const { isOwnerNameCompleted, ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
 
-  const { isCVCNumberCompleted, cvcNumber, cvcError, handleChangeCVCNumber } = useChangeCVCNumber();
+  const {
+    isCVCNumberCompleted,
+    isFocusedCVCNumber,
+    cvcNumber,
+    cvcError,
+    handleChangeCVCNumber,
+    handleChangeCVCNumberFocus,
+  } = useChangeCVCNumber();
 
   const { cardPassword, cardPasswordError, handleChangePassword } = useChangePassword();
 
+  const handleMovePage = useMovePage();
+
   const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
+
+  const targetCardBrand = isCardBrandName(cardBrand) ? CARD_BRAND_MAP[cardBrand] : '';
 
   const isMountButton =
     cardNumbers.length === 4 &&
@@ -59,6 +68,8 @@ const CreditCardForm: React.FC = () => {
     <>
       <PreviewCreditCardStyleContainer>
         <PreviewCreditCard
+          cvcNumber={cvcNumber}
+          isFocusedCVCNumber={isFocusedCVCNumber}
           isCardBrandChange={cardBrand !== ''}
           cardBrand={cardBrand}
           cardNumbers={cardNumbers}
@@ -74,8 +85,13 @@ const CreditCardForm: React.FC = () => {
             onAddCardPassword={handleChangePassword}
           />
         )}
-        {isOwnerNameCompleted && (
-          <CVCNumberTextField cvcNumber={cvcNumber} cvcError={cvcError} onAddCVCNumber={handleChangeCVCNumber} />
+        {ownerName.length > 1 && isOwnerNameCompleted && (
+          <CVCNumberTextField
+            cvcNumber={cvcNumber}
+            cvcError={cvcError}
+            onFocusCVCNumberField={handleChangeCVCNumberFocus}
+            onAddCVCNumber={handleChangeCVCNumber}
+          />
         )}
         {isExpirationCompleted && (
           <OwnerNameTextField
@@ -108,7 +124,16 @@ const CreditCardForm: React.FC = () => {
         />
       </TextFieldStyleContainer>
       {isMountButton && (
-        <Button isFloating onClick={() => {}} size="large">
+        <Button
+          isFloating
+          onClick={() => {
+            handleMovePage('/card-register-complete', {
+              cardPassword,
+              cardBrand: targetCardBrand,
+            });
+          }}
+          size="large"
+        >
           확인
         </Button>
       )}

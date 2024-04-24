@@ -6,7 +6,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, type = 'text', maxLength = 4, isError = false, placeholder, value, onChange }, ref) => {
+  ({ id, type = 'text', maxLength = 4, isError = false, placeholder, value, onChange, onFocus }, ref) => {
     const errorInputClass = `${isError ? styles.errorInput : ''}`;
 
     return (
@@ -19,6 +19,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onBlur={onFocus}
+        onFocus={onFocus}
       />
     );
   },

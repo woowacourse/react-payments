@@ -1,3 +1,5 @@
+import useToggle from '@hooks/useToggle';
+
 import { isContainsNonNumeric } from '@utils/number';
 import { useState } from 'react';
 
@@ -18,7 +20,16 @@ const useChangeCVCNumber = () => {
     if (cvcNumber.length === 3) setIsCVCNumberCompleted(true);
   };
 
-  return { isCVCNumberCompleted, cvcNumber, cvcError, handleChangeCVCNumber };
+  const { isToggle, handleToggle } = useToggle(false);
+
+  return {
+    isCVCNumberCompleted,
+    cvcNumber,
+    cvcError,
+    isFocusedCVCNumber: isToggle,
+    handleChangeCVCNumber,
+    handleChangeCVCNumberFocus: handleToggle,
+  };
 };
 
 export default useChangeCVCNumber;
