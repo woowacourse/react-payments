@@ -37,6 +37,7 @@ const InputExpirationPeriod = ({
       <InputWrapper>
         {inputboxData.map((data, idx) => (
           <InputBox
+            key={`expirationDate${idx + 1}`}
             inputValue={data.inputValue}
             handleChange={handleChange}
             size="medium"

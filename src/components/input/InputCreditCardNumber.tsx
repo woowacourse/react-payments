@@ -45,6 +45,7 @@ const InputCreditCardNumber = ({
       <InputWrapper>
         {inputboxData.map((data, idx) => (
           <InputBox
+            key={`creditCardNumber${idx + 1}`}
             inputValue={data.inputValue}
             handleChange={handleChange}
             size="small"
