@@ -1,20 +1,20 @@
-import { useEffect } from "react";
-import styled from "styled-components";
+import { useEffect } from 'react';
+import styled from 'styled-components';
 
-import CardText from "./CardText";
-import CardNumberDisplay from "./CardNumberDisplay";
-import ExpirationDateDisplay from "./ExpirationDateDisplay";
+import CardText from './CardText';
+import CardNumberDisplay from './CardNumberDisplay';
+import ExpirationDateDisplay from './ExpirationDateDisplay';
 
-import { CardInfo } from "../../types/card";
+import { CardInfo } from '../../types/card';
 
-import useCardLogo from "../../hooks/useCardType";
+import useCardLogo from '../../hooks/useCardType';
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
 }
 
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const { cardNumbers, expirationDate, cardOwnerName: cardOwner } = cardInfo;
+  const { cardNumbers, expirationDate, cardOwnerName } = cardInfo;
 
   const { cardType, identifyCardType } = useCardLogo();
 
@@ -32,7 +32,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
         <ExpirationDateDisplay expirationDate={expirationDate} />
-        <CardText type="longText" text={cardOwner} />
+        <CardText type='longText' text={cardOwnerName} />
       </CardBody>
     </StyledCardPreview>
   );
@@ -77,7 +77,7 @@ const CardBody = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding-left: 17px;
+  padding: 0px 0px 17px 17px;
 
   row-gap: 8px;
 `;

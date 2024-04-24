@@ -10,8 +10,8 @@ const InputPageLayout = ({ children }: React.PropsWithChildren<InputPageLayoutPr
 export default InputPageLayout;
 
 const Layout = styled.main`
-  padding: 18px 32px;
-  width: 315px;
+  padding: 18px 32px 0px 32px;
+  width: 376px;
   height: 43.75rem;
 
   display: flex;
@@ -20,6 +20,4 @@ const Layout = styled.main`
   background-color: #ffffff;
 
   border-radius: 8px;
-
-  overflow-y: scroll;
 `;
