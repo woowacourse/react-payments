@@ -8,6 +8,7 @@ interface InputBoxProps {
   isError: boolean;
   id?: string;
   name?: string;
+  type?: string;
 }
 
 const sizeWidthMap = {
