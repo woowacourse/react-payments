@@ -26,9 +26,9 @@ export default function UserNameInput({handleInput} : Props) {
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number, maxLength : number) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number) => {
     try {
-          Validation[info]?.(e.target.value, maxLength);
+          Validation[info]?.(e.target.value, 0);
           handleUpdateErrorMessages(index, '');
           handleUpdateInput(e.target.value);
         } catch (error) {
@@ -56,7 +56,7 @@ export default function UserNameInput({handleInput} : Props) {
         maxLength={30}
         placeholder={'JOHN DOE'}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'userName', index, 30)}
+        onChange={(e) => handleInputChange(e, 'userName', index)}
       />
       ))}
       </InputField>

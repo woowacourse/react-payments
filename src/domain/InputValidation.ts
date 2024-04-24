@@ -5,6 +5,7 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from '../constants/system';
+import { CardNumbers, ExpirationDate } from '../types/card';
 
 function checkMaxLength (n : string, maxLength : number){
   if(n.length !== maxLength){
@@ -12,6 +13,7 @@ function checkMaxLength (n : string, maxLength : number){
   }
 }
 function checkTrimBlank(n: string) {
+  console.log(n);
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
@@ -58,6 +60,7 @@ function validateUpperCase(str: string) {
 }
 
 interface ValidationMap {
+  
   [key: string]: (n: string, maxLength:number) => void;
 }
 
@@ -79,12 +82,28 @@ const Validation: ValidationMap = {
     validateYear(n);
     checkMaxLength(n, maxLength);
   },
-  userName: (n: string, maxLength:number) => {
+  userName: (n: string, maxLength = 0) => {
     checkTrimBlank(n);
     checkDoubleBlank(n);
     validateUpperCase(n);
-    checkMaxLength(n, maxLength);
   },
+
 };
+
+export const validateCarNumbers = (cardNumbers : CardNumbers) => {
+  const values = Object.values(cardNumbers)
+  values.forEach(cardNumber => {
+    Validation['cardNumber'](cardNumber, 4)
+  });
+}
+
+
+export const validateExpirationDate = (expirationDate : ExpirationDate) => {
+  const values = Object.entries(expirationDate);
+  values.forEach(([key, value]) => {
+    Validation[key](value, 2)
+  });
+}
+
 
 export default Validation;

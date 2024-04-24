@@ -14,6 +14,11 @@ export interface CardInfo {
   userName : string;
 }
 
+interface State {
+  value: string
+  errorMessage?: string
+}
+
 export interface CardNumbers {
   cardNumber1: string;
   cardNumber2: string;
