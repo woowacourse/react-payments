@@ -5,16 +5,18 @@ import {
   CardIssuerInput,
   CardNumbersInput,
   CardPreview,
+  CVCInput,
   UserNameInput,
 } from './components';
 import { INPUT_LENGTH } from './constants';
 import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
 import useCardIssuerInput from './hooks/useCardIssuerInput';
 import useCardNumbersInput from './hooks/useCardNumbersInput';
+import useCVCInput from './hooks/useCVCInput';
 import useUserNameInput from './hooks/useUserNameInput';
 
 function App() {
-  const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER } = INPUT_LENGTH;
+  const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER, CARD_CVC } = INPUT_LENGTH;
 
   const { numbers, numberErrors, handleNumberChange } =
     useCardNumbersInput(CARD_NUMBERS);
@@ -30,6 +32,8 @@ function App() {
     handleCardIssuerChange,
     handleBlurCardIssuerSelect,
   } = useCardIssuerInput();
+
+  const { CVCNumber, CVCNumberError, handleCVCNumberChange } = useCVCInput(3);
 
   return (
     <div id="app">
@@ -64,6 +68,12 @@ function App() {
               cardIssuerError={cardIssuerError}
               onCardIssuerChange={handleCardIssuerChange}
               onBlurCardIssuerSelect={handleBlurCardIssuerSelect}
+            />
+            <CVCInput
+              maxLength={CARD_CVC}
+              CVCNumber={CVCNumber}
+              CVCNumberError={CVCNumberError}
+              onCVCNumberChange={handleCVCNumberChange}
             />
           </fieldset>
         </form>

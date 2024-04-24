@@ -1,5 +1,6 @@
 import CardIssuerInput from './CardInput/InputContainer/CardIssuerInput';
 import CardNumbersInput from './CardInput/InputContainer/CardNumbersInput';
+import CVCInput from './CardInput/InputContainer/CVCInput';
 import CardExpirationPeriodInput from './CardInput/InputContainer/ExpirationPeriodInput/index';
 import UserNameInput from './CardInput/InputContainer/UserNameInput';
 import InputErrorMessage from './CardInput/InputErrorMessage/index';
@@ -20,4 +21,5 @@ export {
   InputErrorMessage,
   Input,
   Select,
+  CVCInput,
 };
