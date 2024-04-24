@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 
-import { ADD_CARD_FORM_FIELDS } from '../../../constants/messages';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import Field from '../../common/Field/Field';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { isInteger, isValidCVC } from '../../../domain/validators';
+import { validateInput } from '../../../utils/validateInput';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CVC;
@@ -15,9 +17,25 @@ export default function CVCInput({
   onChange,
   onBlur,
 }: InputProps<CVC>) {
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as CVCKey;
 
-  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {};
+    const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
+    const result = validateInput(value, validators);
+    onChange({ ...result, name, value });
+  };
+
+  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const name = event.target.name as CVCKey;
+
+    const validators = [
+      { test: isValidCVC, errorMessage: ERRORS.isNotThreeDigit },
+    ];
+    const result = validateInput(value, validators);
+    onBlur({ ...result, name, value });
+  };
 
   return (
     <Field title={title} labelText={labelText} errorMessage={errorMessage}>
@@ -35,7 +53,7 @@ export default function CVCInput({
               isRequired
               handleChange={handleOnChange}
               handleOnBlur={handleOnBlur}
-              maxLength={26}
+              maxLength={3}
             />
           </Fragment>
         );

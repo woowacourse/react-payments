@@ -28,3 +28,7 @@ export const isEnglishCharacter = (value: string) => {
 export const isNotEmptyString = (value: string) => {
   return value !== '';
 };
+
+export const isValidCVC = (value: string) => {
+  return value.length === 3;
+};

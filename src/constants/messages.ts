@@ -1,7 +1,8 @@
 export const ERRORS = {
   isNotInteger: '숫자만 입력 가능합니다.',
-  isNotFourDigit: '4자리 숫자를 입력해 주세요.',
   isNotTwoDigit: '2자리 숫자를 입력해 주세요.',
+  isNotThreeDigit: '3자리 숫자를 입력해 주세요.',
+  isNotFourDigit: '4자리 숫자를 입력해 주세요.',
   inValidMonth: '1에서 12사이의 숫자를 입력해 주세요.',
   deprecatedCard: '만료된 카드는 사용할 수 없습니다.',
   isNotAlphabet: '알파벳만 입력 가능합니다.',
@@ -81,10 +82,23 @@ const CVC = {
   },
 } as const;
 
+const PASSWORD = {
+  title: '비밀번호를 입력해 주세요',
+  description: '앞의 2자리를 입력해주세요',
+  labelText: '비밀번호 앞 2자리',
+
+  placeholder: '',
+
+  inputLabelText: {
+    password: '카드 비밀번호 앞 2자리',
+  },
+} as const;
+
 export const ADD_CARD_FORM_FIELDS = {
   CARD_NUMBER,
   EXPIRATION_DATE,
   OWNER_NAME,
   CARD_ISSUER,
   CVC,
+  PASSWORD,
 } as const;
