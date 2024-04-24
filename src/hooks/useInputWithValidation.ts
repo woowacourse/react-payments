@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useInput2, { ActionType } from "./useInput2";
 
-interface Validator {
+export interface Validator {
   validate: (input: string) => boolean;
   errorMessage: string;
 }
@@ -18,15 +18,21 @@ const useInputWithValidation = (
     });
 
   useEffect(() => {
+    const isValid = validators.every(({ validate }) =>
+      validate(inputState.value)
+    );
+    if (isValid) {
+      dispatch({
+        type: ActionType.RESET_ERROR,
+      });
+      return;
+    }
+
     validators.forEach(({ validate, errorMessage }) => {
       if (!validate(inputState.value)) {
         dispatch({
           type: ActionType.SET_ERROR,
           errorMessage,
-        });
-      } else {
-        dispatch({
-          type: ActionType.RESET_ERROR,
         });
       }
     });

@@ -2,22 +2,25 @@ import React from "react";
 import InputField from "./common/InputField/InputField";
 import useInputWithValidation from "@/hooks/useInputWithValidation";
 
-const VALID_LENGTH = 4;
-const INPUTS_COUNT = 4;
-const CardNumberInputField = () => {
+const VALID_LENGTH = 30;
+const INPUTS_COUNT = 1;
+const ExpirationDateInputField = () => {
   const validationStates = Array.from({ length: INPUTS_COUNT }).map(() =>
     useInputWithValidation("", [
       {
-        errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-        validate: (input: string) =>
-          input.length === 0 || input.length === VALID_LENGTH,
+        validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
+        errorMessage: "이름은 영어 대문자로 입력해주세요.",
+      },
+      {
+        validate: (input: string) => !/\s{2,}/.test(input),
+        errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
       },
     ])
   );
 
   return (
     <InputField>
-      <InputField.Label>카드번호</InputField.Label>
+      <InputField.Label>소유자 이름</InputField.Label>
       <InputField.Inputs>
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
@@ -41,4 +44,4 @@ const CardNumberInputField = () => {
   );
 };
 
-export default CardNumberInputField;
+export default ExpirationDateInputField;

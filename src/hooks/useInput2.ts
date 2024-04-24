@@ -1,15 +1,23 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
 export enum ActionType {
   SET_VALUE = "SET_VALUE",
   SET_ERROR = "SET_ERROR",
   RESET_ERROR = "RESET_ERROR",
 }
-interface Action {
-  type: ActionType;
-  value?: string;
-  errorMessage?: string;
+
+interface SetValueAction {
+  type: ActionType.SET_VALUE;
+  value: string;
 }
+interface SetErrorAction {
+  type: ActionType.SET_ERROR;
+  errorMessage: string;
+}
+interface ResetErrorAction {
+  type: ActionType.RESET_ERROR;
+}
+type Action = SetValueAction | SetErrorAction | ResetErrorAction;
 
 interface InputState {
   value: string;
@@ -22,14 +30,12 @@ const useInput2 = (initialValue: string) => {
       case ActionType.SET_VALUE:
         return {
           ...state,
-          value: action.value ?? "[useInput]은 값을 action 인자로 필요합니다.",
+          value: action.value,
         };
       case ActionType.SET_ERROR:
         return {
           ...state,
-          errorMessage:
-            action.errorMessage ??
-            "[useInput]은 에러메세지를 action 인자로 필요합니다.",
+          errorMessage: action.errorMessage,
           isValid: false,
         };
       case ActionType.RESET_ERROR:
