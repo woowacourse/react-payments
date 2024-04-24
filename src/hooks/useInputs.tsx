@@ -2,11 +2,7 @@ import { limitNumberLength } from "@/components/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
-import {
-  Validator,
-  releaseAll,
-  validateAll,
-} from "@/components/utils/validation";
+import { Validator, releaseAll, validateAll } from "@/components/utils/validation";
 
 type Validate = (input: string[]) => string;
 interface Props {
@@ -25,9 +21,7 @@ const useInputs = ({
   validLength,
 }: Props) => {
   const [inputs, setInputs] = useState<string[]>(initialValue);
-  const [errorMessages, setErrorMessages] = useState(
-    makeStringArray(initialValue.length)
-  );
+  const [errorMessages, setErrorMessages] = useState(makeStringArray(initialValue.length));
 
   const updateErrorMessages = (errorMessage: string, index: number) => {
     setErrorMessages((prev) => {
@@ -44,28 +38,19 @@ const useInputs = ({
 
   const validLengthValidator = {
     validate: (inputs: string[]) =>
-      inputs.every(
-        (input) =>
-          validLength === undefined ||
-          input.length === 0 ||
-          input.length === validLength
-      ),
+      inputs.every((input) => validLength === undefined || input.length === 0 || input.length === validLength),
     errorMessage: "유효하지 않은 길이입니다.",
   };
 
   const onBlurValidators: Validator[] = [validLengthValidator];
-  if (getOnBlurValidators !== undefined)
-    onBlurValidators.push(...getOnBlurValidators(inputs));
+  if (getOnBlurValidators !== undefined) onBlurValidators.push(...getOnBlurValidators(inputs));
 
   const onChangeValidators: Validator[] = [];
   if (getOnChangeValidators !== undefined) {
     onChangeValidators.push(...getOnChangeValidators(inputs));
   }
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index: number
-  ) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     if (maxLength) {
       event.target.value = limitNumberLength(event.target.value, maxLength);
     }
@@ -74,14 +59,14 @@ const useInputs = ({
     newInputs[index] = event.target.value;
     setInputs(newInputs);
 
-    const newErrorMessages = releaseAll(
-      onBlurValidators,
-      newInputs,
-      errorMessages
-    );
+    const newErrorMessages = releaseAll(onBlurValidators, newInputs, errorMessages);
     const errorMessage = validateAll(onChangeValidators, newInputs);
-    newErrorMessages[index] = errorMessage;
-    setErrorMessages(newErrorMessages);
+
+    if (errorMessage !== "") {
+      setErrorMessages(errorMessages.map(() => errorMessage));
+    } else {
+      setErrorMessages(newErrorMessages);
+    }
   };
 
   const onBlur = (index: number) => {

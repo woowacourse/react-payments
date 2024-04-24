@@ -28,6 +28,7 @@ const ExpirationDateInputField = () => {
             isError={!validationStates[index].inputState.isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
+              event.target.value = event.target.value.toUpperCase();
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
@@ -35,10 +36,7 @@ const ExpirationDateInputField = () => {
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce(
-          (prev, cur) => prev || cur.inputState.errorMessage,
-          ""
-        )}
+        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );
