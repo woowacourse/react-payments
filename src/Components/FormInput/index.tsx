@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { SetStateAction, memo, useContext } from "react";
+import React, { SetStateAction, memo } from "react";
 import { inputStyle } from "./style";
 import { ValidatorType, cardNumbersValidator, cardOwnerValidator, cardPeriodValidator } from "./validator";
 import {
@@ -12,6 +12,7 @@ import {
   CardOwnerInfoErrorContext,
   CardValidityPeriodErrorContext,
 } from "../Form/ErrorContextProvider";
+import useContextWrapper from "../../hooks/useContextWrapper";
 
 interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
@@ -62,8 +63,8 @@ const onInputChange = <T, U, V>(
 };
 
 const CardNumberInput = () => {
-  const [cardNumbers, setData] = useContext(CardNumbersContext)!;
-  const [cardNumberError, setError] = useContext(CardNumberErrorContext)!;
+  const [cardNumbers, setData] = useContextWrapper(CardNumbersContext)!;
+  const [cardNumberError, setError] = useContextWrapper(CardNumberErrorContext)!;
 
   type InputInfoList = { name: keyof CardNumbers };
 
@@ -101,8 +102,8 @@ const CardNumberInput = () => {
 };
 
 const CardPeriodInput = () => {
-  const [cardPeriod, setData] = useContext(CardValidityPeriodContext)!;
-  const [periodError, setError] = useContext(CardValidityPeriodErrorContext)!;
+  const [cardPeriod, setData] = useContextWrapper(CardValidityPeriodContext)!;
+  const [periodError, setError] = useContextWrapper(CardValidityPeriodErrorContext)!;
 
   type InputInfoList = { name: keyof CardValidityPeriod; placeholder: string };
 
@@ -138,8 +139,8 @@ const CardPeriodInput = () => {
 };
 
 const CardOwnerInput = () => {
-  const [cardOwner, setData] = useContext(CardOwnerInfoContext)!;
-  const [ownerError, setError] = useContext(CardOwnerInfoErrorContext)!;
+  const [cardOwner, setData] = useContextWrapper(CardOwnerInfoContext)!;
+  const [ownerError, setError] = useContextWrapper(CardOwnerInfoErrorContext)!;
 
   type InputInfoList = { name: keyof CardOwnerInfo; placeholder: string };
 

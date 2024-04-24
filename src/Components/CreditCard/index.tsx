@@ -1,6 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { useContext } from "react";
-
 import masterImage from "../../assets/masterImage.png";
 import visaImage from "../../assets/visaImage.png";
 
@@ -10,6 +8,8 @@ import {
   CardOwnerInfoContext,
   CardValidityPeriodContext,
 } from "../../routes/Payments/CardInfoContextProvider";
+
+import useContextWrapper from "../../hooks/useContextWrapper.js";
 
 /**
  * @param n 1~2 자리 숫자가 들어온다.
@@ -37,9 +37,9 @@ const getCardImage = (string?: string) => {
 };
 
 const CreditCard = () => {
-  const cardNumbers = useContext(CardNumbersContext)![0];
-  const { month, year } = useContext(CardValidityPeriodContext)![0];
-  const cardOwnerInfo = useContext(CardOwnerInfoContext)![0];
+  const cardNumbers = useContextWrapper(CardNumbersContext)![0];
+  const { month, year } = useContextWrapper(CardValidityPeriodContext)![0];
+  const cardOwnerInfo = useContextWrapper(CardOwnerInfoContext)![0];
   const cardImage = getCardImage(cardNumbers?.firstNumbers);
 
   return (
