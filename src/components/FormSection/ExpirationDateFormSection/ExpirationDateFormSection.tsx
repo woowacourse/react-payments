@@ -34,6 +34,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'month')}
             handleOnFocus={() => handleOnFocus('month')}
             handleOnBlur={() => handleOnBlur('month')}
+            autoFocus={true}
           />
           <PaymentsInputField
             placeholder="YY"

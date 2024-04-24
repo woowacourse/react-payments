@@ -35,6 +35,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
               handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, index)}
               handleOnFocus={() => handleOnFocus(index)}
               handleOnBlur={() => handleOnBlur(index)}
+              autoFocus={index === 0}
             />
           ))}
         </Styled.InputFieldContainer>

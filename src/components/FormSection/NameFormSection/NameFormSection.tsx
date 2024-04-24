@@ -37,6 +37,7 @@ const NameFormSection = (props: NameFormSectionProps) => {
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
+            autoFocus={true}
           />
         </Styled.InputFieldContainer>
         <Styled.ErrorMessage>{cardInfo.name.errorMessage}</Styled.ErrorMessage>

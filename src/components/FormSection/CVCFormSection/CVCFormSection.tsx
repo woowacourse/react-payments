@@ -38,6 +38,7 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
             handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
             handleOnFocus={handleOnFocus}
             handleOnBlur={handleOnBlur}
+            autoFocus={true}
           />
         </Styled.InputFieldContainer>
         <Styled.ErrorMessage>{cardInfo.cvc.errorMessage}</Styled.ErrorMessage>

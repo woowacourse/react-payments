@@ -10,7 +10,7 @@ interface PaymentsInputFieldProps {
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: number;
-  autoFocus: boolean
+  autoFocus?: boolean
 }
 
 const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
