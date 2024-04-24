@@ -1,12 +1,7 @@
 import { ChangeEvent, FocusEvent } from "react";
 import useInputs from "@/hooks/useInputs";
-import {
-  PLACE_HOLDER,
-  INPUT_INFO_TITLE,
-  INPUT_INFO_SUBTITLE,
-  INPUT_LABEL,
-} from "@/constants/condition";
-import InputField from "@/components/common/InputField/InputField";
+import { PLACE_HOLDER, INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE, INPUT_LABEL } from "@/constants/condition";
+import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
 
@@ -16,11 +11,7 @@ interface Props {
   ownerNameState: ReturnType<typeof useInputs>;
 }
 
-const CardRegisterForm = ({
-  cardNumbersState,
-  expiredPeriodState,
-  ownerNameState,
-}: Props) => {
+const CardRegisterForm = ({ cardNumbersState, expiredPeriodState, ownerNameState }: Props) => {
   const {
     inputs: cardNumbers,
     onChange: onChangeCardNumbers,
@@ -35,13 +26,9 @@ const CardRegisterForm = ({
     onBlur: onBlurExpirationPeriod,
   } = expiredPeriodState;
 
-  const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } =
-    ownerNameState;
+  const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } = ownerNameState;
 
-  const expirationPlaceholder = [
-    PLACE_HOLDER.EXPIRATION_MONTH,
-    PLACE_HOLDER.EXPIRATION_YEAR,
-  ];
+  const expirationPlaceholder = [PLACE_HOLDER.EXPIRATION_MONTH, PLACE_HOLDER.EXPIRATION_YEAR];
 
   const findFirstErrorMessageIndex = (errorMessages: string[]) => {
     const targetIndex = errorMessages.findIndex((message) => message !== "");
@@ -77,18 +64,12 @@ const CardRegisterForm = ({
                 onBlur={(e: FocusEvent<Element, Element>) => {
                   onBlurCardNumbers(index);
                 }}
-                isError={
-                  findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
-                }
+                isError={findFirstErrorMessageIndex(cardNumbersErrorMessages) === index}
               />
             ))}
           </InputField.Inputs>
           <InputField.ErrorMessage>
-            {
-              cardNumbersErrorMessages[
-                findFirstErrorMessageIndex(cardNumbersErrorMessages)
-              ]
-            }
+            {cardNumbersErrorMessages[findFirstErrorMessageIndex(cardNumbersErrorMessages)]}
           </InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
@@ -97,9 +78,7 @@ const CardRegisterForm = ({
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.EXPIRATION_DATE}</S.InputTitle>
-          <S.InputSubtitle>
-            {INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
-          </S.InputSubtitle>
+          <S.InputSubtitle>{INPUT_INFO_SUBTITLE.EXPIRATION_DATE}</S.InputSubtitle>
         </S.TitleWrapper>
         <InputField>
           <InputField.Label>{INPUT_LABEL.EXPIRATION_DATE}</InputField.Label>
@@ -115,19 +94,12 @@ const CardRegisterForm = ({
                 onBlur={(e: FocusEvent<Element, Element>) => {
                   onBlurExpirationPeriod(index);
                 }}
-                isError={
-                  findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
-                  index
-                }
+                isError={findFirstErrorMessageIndex(expirationPeriodErrorMessages) === index}
               />
             ))}
           </InputField.Inputs>
           <InputField.ErrorMessage>
-            {
-              expirationPeriodErrorMessages[
-                findFirstErrorMessageIndex(expirationPeriodErrorMessages)
-              ]
-            }
+            {expirationPeriodErrorMessages[findFirstErrorMessageIndex(expirationPeriodErrorMessages)]}
           </InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
@@ -151,9 +123,7 @@ const CardRegisterForm = ({
               }}
             />
           </InputField.Inputs>
-          <InputField.ErrorMessage>
-            {ownerErrorMessages[0]}
-          </InputField.ErrorMessage>
+          <InputField.ErrorMessage>{ownerErrorMessages[0]}</InputField.ErrorMessage>
         </InputField>
       </S.InputFieldWithInfo>
     </S.CardFormWrapper>

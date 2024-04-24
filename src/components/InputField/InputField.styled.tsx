@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Input from "../../Input/Input";
+import Input from "../Input/Input";
 import { ReactNode } from "react";
 
 const Label = styled.label`

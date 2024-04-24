@@ -1,7 +1,4 @@
-import useInputWithValidation, {
-  Validator as InidividualValidator,
-  Validator,
-} from "./useInputWithValidation";
+import useInputWithValidation, { Validator } from "./useInputWithValidation";
 
 export const enum ValidatorType {
   Individual = "individual",
@@ -13,7 +10,7 @@ export type VariousValidator = IndividualValidator | OverallValidator;
 export interface IndividualValidator {
   validate: (input: string) => boolean;
   errorMessage: string;
-  index: number[];
+  index?: number[];
 }
 export interface OverallValidator {
   validate: (inputs: string[]) => boolean;
@@ -31,20 +28,21 @@ const useInputField = ({
   length,
 }: useInputFieldProps) => {
   const result: Validator[][] = Array.from({ length }).map(() => []);
+  const a: Validator[] = [];
 
+  const range = Array.from({ length }).map((_, i) => i);
   if (individualValidators === undefined) return [];
   individualValidators.forEach((v) => {
-    v.index.forEach((i) => {
-      result[i].push({
-        validate: v.validate,
-        errorMessage: v.errorMessage,
+    v.index ??
+      range.forEach((i) => {
+        result[i].push({
+          validate: v.validate,
+          errorMessage: v.errorMessage,
+        });
       });
-    });
   });
 
-  return result.map((v: InidividualValidator[]) =>
-    useInputWithValidation("", v)
-  );
+  return result.map((v) => useInputWithValidation("", v));
 };
 
 export default useInputField;

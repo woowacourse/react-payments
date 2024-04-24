@@ -1,22 +1,21 @@
 import React from "react";
-import InputField from "./common/InputField/InputField";
-import useInputWithValidation from "@/hooks/useInputWithValidation";
+import InputField from "../components/InputField/InputField";
+import useInputField, { IndividualValidator } from "@/hooks/useInputField";
 
 const VALID_LENGTH = 30;
 const INPUTS_COUNT = 1;
 const ExpirationDateInputField = () => {
-  const validationStates = Array.from({ length: INPUTS_COUNT }).map(() =>
-    useInputWithValidation("", [
-      {
-        validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
-        errorMessage: "이름은 영어 대문자로 입력해주세요.",
-      },
-      {
-        validate: (input: string) => !/\s{2,}/.test(input),
-        errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
-      },
-    ])
-  );
+  const validators: IndividualValidator[] = [
+    {
+      validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
+      errorMessage: "이름은 영어 대문자로 입력해주세요.",
+    },
+    {
+      validate: (input: string) => !/\s{2,}/.test(input),
+      errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
+    },
+  ];
+  const validationStates = useInputField({ individualValidators: validators, length: INPUTS_COUNT });
 
   return (
     <InputField>

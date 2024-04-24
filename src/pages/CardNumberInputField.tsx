@@ -1,19 +1,21 @@
 import React from "react";
-import InputField from "./common/InputField/InputField";
-import useInputWithValidation from "@/hooks/useInputWithValidation";
+import InputField from "../components/InputField/InputField";
+import useInputField, { IndividualValidator } from "@/hooks/useInputField";
 
 const VALID_LENGTH = 4;
 const INPUTS_COUNT = 4;
 const CardNumberInputField = () => {
-  const validationStates = Array.from({ length: INPUTS_COUNT }).map(() =>
-    useInputWithValidation("", [
-      {
-        errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-        validate: (input: string) =>
-          input.length === 0 || input.length === VALID_LENGTH,
-      },
-    ])
-  );
+  const individualValidators: IndividualValidator[] = [
+    {
+      errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
+      validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
+    },
+    {
+      errorMessage: `입력은 숫자형이어야합니다.`,
+      validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
+    },
+  ];
+  const validationStates = useInputField({ individualValidators, length: INPUTS_COUNT });
 
   return (
     <InputField>
@@ -32,10 +34,7 @@ const CardNumberInputField = () => {
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce(
-          (prev, cur) => prev || cur.inputState.errorMessage,
-          ""
-        )}
+        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

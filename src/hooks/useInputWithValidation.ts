@@ -6,10 +6,7 @@ export interface Validator {
   errorMessage: string;
 }
 
-const useInputWithValidation = (
-  initialValue: string,
-  validators: Validator[]
-) => {
+const useInputWithValidation = (initialValue: string, validators: Validator[]) => {
   const [inputState, dispatch] = useInput2(initialValue);
   const setValue = (value: string) =>
     dispatch({
@@ -18,9 +15,7 @@ const useInputWithValidation = (
     });
 
   useEffect(() => {
-    const isValid = validators.every(({ validate }) =>
-      validate(inputState.value)
-    );
+    const isValid = validators.every(({ validate }) => validate(inputState.value));
     if (isValid) {
       dispatch({
         type: ActionType.RESET_ERROR,

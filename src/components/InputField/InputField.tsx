@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import S from "./InputField.styled";
-import Input from "../../Input/Input";
+import Input from "../Input/Input";
 
 interface Props {
   errorMessage: string;
