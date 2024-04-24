@@ -85,7 +85,7 @@ function cardProviderValidated(value: string) {
   if ((typeof CARD_PROVIDER_SELECT).includes(value)) {
     return {
       isError: true,
-      message: '카드사를 선택해주세요.',
+      message: ERROR_MESSAGE.invalidProvider,
     };
   }
   return { isError: false, message: '' };
@@ -93,12 +93,12 @@ function cardProviderValidated(value: string) {
 
 function cardCvcValidated(value: string) {
   if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
-  if (!isNumberCount(value, 3)) return { isError: true, message: '올바른 CVC 번호를 입력해 주세요.' };
+  if (!isNumberCount(value, VALIDATION.cvcNumberCount)) return { isError: true, message: ERROR_MESSAGE.invalidCvc };
   return { isError: false, message: '' };
 }
 
 function isNumber(value: string) {
-  const regex = /^[0-9]*$/;
+  const regex = VALIDATION.numberRegex;
   if (!regex.test(value)) {
     return false;
   }
@@ -113,7 +113,7 @@ function isInRange({ value, min, max }: IsInRangeType) {
 }
 
 function isUpperCaseEnglish(value: string) {
-  const regex = /^[A-Z\s]*$/;
+  const regex = VALIDATION.upperCaseRegex;
   if (!regex.test(value)) {
     return false;
   }

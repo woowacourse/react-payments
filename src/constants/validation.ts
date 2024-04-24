@@ -13,4 +13,7 @@ export const VALIDATION = {
     min: 1,
     max: 9,
   },
+  cvcNumberCount: 3,
+  numberRegex: /^[0-9]*$/,
+  upperCaseRegex: /^[A-Z\s]*$/,
 };
