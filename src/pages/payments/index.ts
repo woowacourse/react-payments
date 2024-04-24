@@ -19,3 +19,5 @@ export { default as OwnerNameTextField } from './payments-form/owner-name/OwnerN
 
 export { default as PasswordPrefixInput } from './payments-form/password-prefix/PasswordPrefixInput/PasswordPrefixInput';
 export { default as PasswordPrefixTextField } from './payments-form/password-prefix/PasswordPrefixTextField/PasswordPrefixTextField';
+
+export { default as SubmitButton } from './payments-form/SubmitButton/SubmitButton';

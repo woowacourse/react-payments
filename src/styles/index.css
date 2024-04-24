@@ -18,6 +18,10 @@
   --preview-issuer-lotte: #ed1c24;
   --preview-issuer-hana: #009490;
   --preview-issuer-kb: #6a6056;
+
+  /* Payments Form */
+  --payments-submit-button: #333333;
+  --payments-submit-button-text: white;
 }
 
 .caption {

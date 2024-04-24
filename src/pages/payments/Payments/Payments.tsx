@@ -6,6 +6,7 @@ import {
   CardIssuerTextField,
   CVCNumberTextField,
   PasswordPrefixTextField,
+  SubmitButton,
 } from '@pages/payments';
 import {
   useChangeCardNumber,
@@ -18,6 +19,7 @@ import {
 } from '@hooks/payments';
 
 import styles from './Payments.module.css';
+import { Spacer } from '../../../components/index';
 
 const Payments: React.FC = () => {
   const { cvcNumber, cvcNumberState, handleCVCNumberChange } = useChangeCVCNumber();
@@ -27,13 +29,19 @@ const Payments: React.FC = () => {
   const { expirationDate, expirationDateState, handleExpirationDateChange } = useChangeExpirationDate();
   const { passwordPrefix, passwordPrefixState, handlePasswordPrefixChange } = useChangePasswordPrefix();
 
-  const [cvcNumberFlag, ownerNameFlag, cardIssuerFlag, cardNumberFlag, expirationDateFlag] = useCheckFlag([
+  const successStates = [
     cvcNumberState.isSuccess,
     ownerNameState.isSuccess,
     cardIssuerState.isSuccess,
     cardNumberState.isSuccess,
     expirationDateState.isSuccess,
-  ]);
+    passwordPrefixState.isSuccess,
+  ];
+
+  const [cvcNumberFlag, ownerNameFlag, cardIssuerFlag, cardNumberFlag, expirationDateFlag] =
+    useCheckFlag(successStates);
+
+  const isSuccessEntirely = successStates.every((predicate) => predicate);
 
   return (
     <>
@@ -56,6 +64,7 @@ const Payments: React.FC = () => {
               passwordPrefixState={passwordPrefixState}
             />
           )}
+
           {ownerNameFlag && (
             <CVCNumberTextField
               cvcNumber={cvcNumber}
@@ -63,6 +72,7 @@ const Payments: React.FC = () => {
               cvcNumberState={cvcNumberState}
             />
           )}
+
           {expirationDateFlag && (
             <OwnerNameTextField
               ownerName={ownerName}
@@ -70,6 +80,7 @@ const Payments: React.FC = () => {
               ownerNameState={ownerNameState}
             />
           )}
+
           {cardIssuerFlag && (
             <ExpirationDateTextField
               month={expirationDate.month}
@@ -78,14 +89,31 @@ const Payments: React.FC = () => {
               expirationDateState={expirationDateState}
             />
           )}
+
           {cardNumberFlag && (
             <CardIssuerTextField cardIssuer={cardIssuer} onSelectCardIssuer={handleCardIssuerChange} />
           )}
+
           <CardNumberTextField
             cardNumbers={cardNumbers}
             onAddCardNumber={handleCardNumberChange}
             cardNumberState={cardNumberState}
           />
+
+          {isSuccessEntirely && (
+            <>
+              <Spacer space={52} />
+              <SubmitButton
+                label="확인"
+                onClickSubmitButton={(e) => {
+                  e.preventDefault();
+
+                  /* Write Validation Logic, If Needed. */
+                  /* Write Submit Logic, If Needed. */
+                }}
+              />
+            </>
+          )}
         </form>
       </section>
     </>
