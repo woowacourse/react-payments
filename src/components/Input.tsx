@@ -26,18 +26,20 @@ interface InputProps {
   type?: string;
   maxLength: number;
   placeholder: string;
+  value: string;
   onChange: (inputValue: string) => boolean;
   onBlur?: (inputValue: string) => boolean;
-  value: string;
+  onFocus?: () => void;
 }
 
 export default function Input({
   type,
   maxLength,
   placeholder,
+  value,
   onChange,
   onBlur,
-  value,
+  onFocus,
 }: InputProps) {
   const [isError, setIsError] = useState(false);
 
@@ -60,6 +62,7 @@ export default function Input({
         const isError = onBlur(e.target.value);
         setIsError(isError);
       }}
+      onFocus={onFocus}
       value={value}
       isError={isError}
     ></SInput>

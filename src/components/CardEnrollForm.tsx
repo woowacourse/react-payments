@@ -1,6 +1,7 @@
-import { CardInformation, CardIssuer } from "../types/cardInformation";
-
+import CardCVCInput from "./CardCVCInput";
 import CardExpirationDate from "./CardExpirationDate";
+import { CardInformation } from "../types/cardInformation";
+import { CardIssuer } from "../constants/cardIssuers";
 import CardIssuerSelect from "./CardIssuerSelect";
 import CardNumbers from "./CardNumbers";
 import CardOwnerName from "./CardOwnerName";
@@ -26,18 +27,17 @@ const CardInformationContainer = styled.div`
 
 export default function CardEnrollForm() {
   const [cardInformation, setCardInformation] = useState<CardInformation>({
-    cardIssuer: "",
     cardNumbers: ["", "", "", ""],
+    cardIssuer: "",
     cardExpiration: {
       month: "",
       year: "",
     },
     cardOwnerName: "",
+    cardCVC: "",
   });
 
-  const onCardIssuerChange = (inputValue: CardIssuer) => {
-    setCardInformation((prev) => ({ ...prev, cardIssuer: inputValue }));
-  };
+  const [isCVCFocused, setIsCVCFocused] = useState(false);
 
   const onCardNumbersChange = (inputValue: string, targetIndex: number) => {
     setCardInformation((prev) => {
@@ -45,6 +45,10 @@ export default function CardEnrollForm() {
       cardNumbers[targetIndex] = inputValue;
       return { ...prev, cardNumbers };
     });
+  };
+
+  const onCardIssuerChange = (inputValue: CardIssuer) => {
+    setCardInformation((prev) => ({ ...prev, cardIssuer: inputValue }));
   };
 
   const onCardExpirationChange = (inputValue: string, targetKey: string) => {
@@ -61,10 +65,20 @@ export default function CardEnrollForm() {
     setCardInformation((prev) => ({ ...prev, cardOwnerName: inputValue }));
   };
 
+  const onCardCVCChange = (inputValue: string) => {
+    setCardInformation((prev) => ({ ...prev, cardCVC: inputValue }));
+  };
+
   return (
     <CardEnrollFormContainer>
-      <CardPreview cardInformation={cardInformation} />
+      <CardPreview cardInformation={cardInformation} isFlipped={isCVCFocused} />
       <CardInformationContainer>
+        <CardCVCInput
+          cardCVC={cardInformation.cardCVC}
+          onChange={onCardCVCChange}
+          onFocus={() => setIsCVCFocused(true)}
+          onBlur={() => setIsCVCFocused(false)}
+        />
         <CardIssuerSelect onChange={onCardIssuerChange} />
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
