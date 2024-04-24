@@ -6,7 +6,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+import useMoveToPage from '../../hooks/useMoveToPage';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 import CardCompanySelect, {
   CardCompanySelectProps,
@@ -33,6 +35,7 @@ interface CardFormProps
     Omit<CardNumbersInputProps, 'goNextFormStep'> {
   cardInfo: CardInfo;
   setCardSide: Dispatch<SetStateAction<CardSide>>;
+  resetCardInfo: () => void;
 }
 
 const INITIAL_STEP = 1;
@@ -47,18 +50,18 @@ function CardForm(props: CardFormProps) {
     editCardPassword,
     editCardPeriod,
     editCardUserName,
+    resetCardInfo,
     setCardSide,
   } = props;
 
+  const location = useLocation();
+  const { navigateToPage } = useMoveToPage('cardConfirmation');
   const [formStep, setFormStep] = useState(INITIAL_STEP);
 
   const goNextFormStep = (currentStep: number) => {
     setFormStep(currentStep + 1);
   };
 
-  const resetFormStep = () => {
-    setFormStep(INITIAL_STEP);
-  };
   const isCardCompleted = useMemo(
     () =>
       Object.entries(cardInfo)
@@ -76,11 +79,34 @@ function CardForm(props: CardFormProps) {
     [cardInfo],
   );
 
-  const handleSubmit = (event: FormEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    resetFormStep();
-    // TODO: 카드 등록 완료 페이지로 이동
+  const resetFormStep = () => {
+    setFormStep(INITIAL_STEP);
   };
+
+  const handleClickOfSubmitBtn = (event: FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    // 페이지 이동
+    navigateToPage({ state: cardInfo });
+    // reset
+    resetFormStep();
+    resetCardInfo();
+  };
+
+  /**
+   * URL 변경 시 실행될 함수
+   */
+  const cleanUpURL = () => {
+    const { search } = location;
+    // 쿼리 문자열이 있는 경우
+    if (search) {
+      const newURL = window.location.origin + window.location.pathname;
+      window.history.replaceState(null, '', newURL);
+    }
+  };
+
+  useEffect(() => {
+    cleanUpURL();
+  }, []);
 
   return (
     <form className={styles.formContainer}>
@@ -123,7 +149,7 @@ function CardForm(props: CardFormProps) {
         <button
           className={styles.submitBtn}
           type="submit"
-          onSubmit={handleSubmit}
+          onClick={handleClickOfSubmitBtn}
         >
           확인
         </button>
