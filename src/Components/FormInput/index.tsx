@@ -89,7 +89,7 @@ const CardNumberInput = () => {
               validator: cardNumbersValidator,
             })
           }
-          isError={!!cardNumberError[name as keyof CardNumbersError]?.isError}
+          isError={!!cardNumberError[name]?.isError}
           sizePreset="small"
           placeholder="1234"
           maxLength={4}
@@ -172,10 +172,13 @@ const CardOwnerInput = () => {
   );
 };
 
+// const CardIssuerInput
+
 const FormInput = {
   CardNumberInput: memo(CardNumberInput),
   CardPeriodInput: memo(CardPeriodInput),
   CardOwnerInput: memo(CardOwnerInput),
+  // CardIssuerInput: memo(CardIssuerInput),
 };
 
 export default FormInput;
