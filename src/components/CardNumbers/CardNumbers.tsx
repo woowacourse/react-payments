@@ -1,12 +1,8 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {
-  executeValidators,
-  isInvalidCardNumberLength,
-  isInvalidNumber,
-} from "../../utils/validators";
+import useCardNumberInput from "../../hooks/useCardNumber";
 import * as S from "./style";
 
 interface Props {
@@ -15,30 +11,25 @@ interface Props {
 }
 
 export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
-  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    cardNumber1,
+    cardNumber2,
+    cardNumber3,
+    cardNumber4,
+    validateMessage,
+  } = useCardNumberInput();
+  const inputCardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
-  const onChangeInput = (cardNumberIdx: number, value: string) => {
-    const newCardNumbers = [...cardNumbers];
-    const validateResult = isInvalidNumber(value);
+  useEffect(() => {
+    const newCardNumber = cardNumbers;
 
-    newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardNumbers, "cardNumbers");
-  };
+    newCardNumber.forEach((cardNumber, idx) => {
+      cardNumber.value = inputCardNumbers[idx].value;
+      cardNumber.isError = inputCardNumbers[idx].validateMessage !== "";
+    });
 
-  const onBlurInput = (cardNumberIdx: number, value: string) => {
-    const newCardNumbers = [...cardNumbers];
-    const validateResult = executeValidators(
-      [isInvalidNumber, isInvalidCardNumberLength],
-      value
-    );
-
-    newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardNumbers, "cardNumbers");
-  };
+    onChangeCardInfo(newCardNumber, "cardNumber");
+  }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4, validateMessage]);
 
   return (
     <S.CardNumbersContainer>
@@ -59,13 +50,13 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
                 placeholder="1234"
                 value={cardNumber.value}
                 isError={cardNumber.isError}
-                onChangeInput={(value) => onChangeInput(idx, value)}
-                onBlurInput={(value) => onBlurInput(idx, value)}
+                onChange={inputCardNumbers[idx].onChange}
+                onBlur={inputCardNumbers[idx].onBlur}
               />
             );
           })}
         </S.InputContainer>
-        <ErrorMessage message={errorMessage} />
+        <ErrorMessage message={validateMessage} />
       </S.CardNumberBox>
     </S.CardNumbersContainer>
   );
