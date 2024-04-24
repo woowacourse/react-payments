@@ -1,17 +1,16 @@
 import React from "react";
 import InputField from "./common/InputField/InputField";
 import useInputWithValidation from "@/hooks/useInputWithValidation";
-import {
-  makeValidLengthValidator,
-  makeValidateValidLength,
-} from "./utils/validation";
 
+const VALID_LENGTH = 4;
+const INPUTS_COUNT = 4;
 const CardNumberInputField = () => {
-  const validationStates = Array.from({ length: 4 }).map(() =>
+  const validationStates = Array.from({ length: INPUTS_COUNT }).map(() =>
     useInputWithValidation("", [
       {
         errorMessage: "길이는 4여야합니다.",
-        validate: (input: string) => input.length === 0 || input.length === 4,
+        validate: (input: string) =>
+          input.length === 0 || input.length === VALID_LENGTH,
       },
     ])
   );
@@ -20,11 +19,12 @@ const CardNumberInputField = () => {
     <InputField>
       <InputField.Label>카드번호</InputField.Label>
       <InputField.Inputs>
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
             key={index}
             isError={!validationStates[index].inputState.isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.value.length > VALID_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
