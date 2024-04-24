@@ -27,7 +27,7 @@ export const CardPreviewContainer = styled.div<CardPreviewContainerProps>`
   background: ${(props) => (props.cardCompany ? TYPE_COMPANY[props.cardCompany] : "#333333")};
   box-shadow: 3px 3px 5px 0px #00000040;
   margin: auto;
-  margin-top: 57px;
+  margin-top: 77px;
   margin-bottom: 29px;
 `;
 

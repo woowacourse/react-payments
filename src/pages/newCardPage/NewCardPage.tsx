@@ -310,6 +310,7 @@ const NewCardPage = () => {
           ))}
         </NewCardInputSection>
       </Styled.InputSection>
+      {Object.values(validationStatus).every((field) => field.isValid) && <Styled.Button>확인</Styled.Button>}
     </Styled.NewCardContainer>
   );
 };
