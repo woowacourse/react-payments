@@ -38,7 +38,7 @@ export default function CardExpirationPeriodInput(
   const { editCardPeriod, goNextFormStep } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
+  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
   const [cardPeriod, setCardPeriod] = useState<CardPeriod>({
     month: null,
     year: null,
@@ -191,9 +191,9 @@ export default function CardExpirationPeriodInput(
         className={styles.inputWrap}
         onChange={handlePeriodChange}
         onBlur={handlePeriodBlur}
+        ref={focusTargetRef}
       >
         <Input
-          ref={focusTargetRef}
           name="month"
           type="text"
           maxLength={CARD_EXPIRATION.length}

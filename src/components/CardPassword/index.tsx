@@ -21,7 +21,7 @@ export interface CardPasswordProps {
 function CardPassword(props: CardPasswordProps) {
   const { editCardPassword } = props;
 
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
+  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
@@ -47,9 +47,8 @@ function CardPassword(props: CardPasswordProps) {
       subTitle={CARD_PASSWORD_MESSAGE.subTitle}
       childrenLabel={CARD_PASSWORD_MESSAGE.label}
     >
-      <div className={styles.inputWrap}>
+      <div ref={focusTargetRef} className={styles.inputWrap}>
         <Input
-          ref={focusTargetRef}
           name="password"
           type="password"
           error={passwordError}

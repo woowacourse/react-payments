@@ -7,6 +7,7 @@ import {
   CARD_NUMBERS,
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
+  FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
@@ -28,7 +29,6 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers, goNextFormStep } = props;
   const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
-  const FIRST_INPUT_INDEX = 0;
 
   const { focusTargetRef } = useFocusRef<HTMLInputElement>(FIRST_INPUT_INDEX);
   const [numbers, setNumbers] = useState<CardNumbers>(() =>

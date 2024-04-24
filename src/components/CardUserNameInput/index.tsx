@@ -6,6 +6,7 @@ import {
   CARD_USER_FORM_MESSAGE,
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
+  FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import CardInputSection from '../CardInputSection';
@@ -22,7 +23,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName, goNextFormStep } = props;
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
+  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
   const [userName, setUserName] = useState('');
   const [nameError, setNameError] = useState(false);
 
@@ -65,9 +66,8 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
 
   return (
     <CardInputSection title={title} childrenLabel={label}>
-      <div className={styles.inputWrap}>
+      <div ref={focusTargetRef} className={styles.inputWrap}>
         <Input
-          ref={focusTargetRef}
           style={{ textTransform: 'uppercase' }}
           name="name"
           type="text"

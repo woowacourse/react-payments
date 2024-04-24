@@ -1,7 +1,7 @@
-const PATH = {
+export const PATH = {
   base: '/react-payments/dist/',
   cardEnrollment: 'card/enrollment',
   cardConfirmation: 'card/confirmation',
 };
 
-export default PATH;
+export const FIRST_INPUT_INDEX = 0;
