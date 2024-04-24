@@ -4,27 +4,27 @@ import { CARD_META_INFO } from '../../constants/card-app';
 import { LowerArrow, UpperArrow } from './Arrows';
 
 interface DropdownProps {
+  value: string;
   options: string[];
+  onSelect: (value: string) => void;
 }
 
-const Dropdown = ({ options }: DropdownProps) => {
+const Dropdown = ({ value, options, onSelect }: DropdownProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleDropdownClick = () => {
     setIsOpened((prev) => !prev);
   };
 
   const handleOptionSelect = (value: string) => {
-    setSelectedOption(value);
+    onSelect(value);
+    setIsOpened(false);
   };
 
   return (
     <DropdownContainer>
       <StyledDropdown onClick={handleDropdownClick}>
-        <DropdownText selectedOption={selectedOption}>
-          {selectedOption === '' ? CARD_META_INFO.cardCompany.query : selectedOption}
-        </DropdownText>
+        <DropdownText selectedOption={value}>{value === '' ? CARD_META_INFO.cardCompany.query : value}</DropdownText>
         {isOpened ? <LowerArrow /> : <UpperArrow />}
       </StyledDropdown>
       {isOpened && (
