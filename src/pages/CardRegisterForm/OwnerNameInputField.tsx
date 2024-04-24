@@ -1,28 +1,27 @@
 import React from "react";
-import InputField from "../components/InputField/InputField";
-import useInputField, { IndividualValidator } from "@/hooks/useInputField";
-import useValidation from "@/hooks/useValidation";
+import InputField from "../../components/InputField/InputField";
+import { IndividualValidator } from "@/hooks/useInputField";
 import useInput from "@/hooks/useInput";
+import useValidation from "@/hooks/useValidation";
 
-const VALID_LENGTH = 4;
-const INPUTS_COUNT = 4;
+const VALID_LENGTH = 30;
+const INPUTS_COUNT = 1;
 const individualValidators: IndividualValidator[] = [
   {
-    errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-    validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
+    validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
+    errorMessage: "이름은 영어 대문자로 입력해주세요.",
   },
   {
-    errorMessage: `입력은 숫자형이어야합니다.`,
-    validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
+    validate: (input: string) => !/\s{2,}/.test(input),
+    errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
   },
 ];
 
-const CardNumberInputFieldCopy = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
   const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
-
   return (
     <InputField>
-      <InputField.Label>카드번호</InputField.Label>
+      <InputField.Label>소유자 이름</InputField.Label>
       <InputField.Inputs>
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
@@ -30,6 +29,7 @@ const CardNumberInputFieldCopy = ({ reduceds }: { reduceds: ReturnType<typeof us
             isError={!validationStates[index].inputState.isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
+              event.target.value = event.target.value.toUpperCase();
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
@@ -43,4 +43,4 @@ const CardNumberInputFieldCopy = ({ reduceds }: { reduceds: ReturnType<typeof us
   );
 };
 
-export default CardNumberInputFieldCopy;
+export default OwnerNameInputField;

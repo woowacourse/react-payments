@@ -1,6 +1,7 @@
 export const INPUT_COUNTS = {
   CARD_NUMBERS: 4,
   EXPIRATION_DATE: 2,
+  OWNER_NAME: 1,
 };
 
 export const PLACE_HOLDER = {
