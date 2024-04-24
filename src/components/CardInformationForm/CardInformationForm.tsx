@@ -29,11 +29,14 @@ const CardInformationForm = ({
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
 
-  const isCardNumberError =
-    firstState.error || secondState.error || thirdState.error || fourthState.error;
-
   const isCardNumberFilled =
     firstState.value && secondState.value && thirdState.value && fourthState.value;
+  const isCardSelected = selectedCardState.value;
+  const isExpirationDateFilled = monthState.value && yearState.value;
+
+  const isCardNumberError =
+    firstState.error || secondState.error || thirdState.error || fourthState.error;
+  const isExpirationDateError = monthState.error || yearState.error;
 
   const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
   const expirationErrorMessage = monthState.error ? ERROR.month : yearState.error ? ERROR.year : '';
@@ -52,6 +55,41 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
+      {isExpirationDateFilled && !isExpirationDateError && (
+        <FormField title={TITLE.userName}>
+          <InputField label={LABEL.userName} error={userNameErrorMessage}>
+            <Input
+              placeholder={PLACEHOLDER.userName}
+              value={userNameState.value}
+              maxLength={MAX_LENGTH.userName}
+              onChange={userNameState.setValue}
+              invalid={userNameState.error}
+            />
+          </InputField>
+        </FormField>
+      )}
+      {isCardSelected && (
+        <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
+          <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
+            <>
+              <Input
+                placeholder={PLACEHOLDER.month}
+                value={monthState.value}
+                maxLength={MAX_LENGTH.expirationDate}
+                onChange={monthState.setValue}
+                invalid={monthState.error}
+              />
+              <Input
+                placeholder={PLACEHOLDER.year}
+                value={yearState.value}
+                maxLength={MAX_LENGTH.expirationDate}
+                onChange={yearState.setValue}
+                invalid={yearState.error}
+              />
+            </>
+          </InputField>
+        </FormField>
+      )}
       {isCardNumberFilled && !isCardNumberError && (
         <FormField title={TITLE.cardSelect} caption={CAPTION.cardSelect}>
           <Dropdown
@@ -64,37 +102,6 @@ const CardInformationForm = ({
       <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>{cardNumberInputs}</>
-        </InputField>
-      </FormField>
-      <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
-        <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
-          <>
-            <Input
-              placeholder={PLACEHOLDER.month}
-              value={monthState.value}
-              maxLength={MAX_LENGTH.expirationDate}
-              onChange={monthState.setValue}
-              invalid={monthState.error}
-            />
-            <Input
-              placeholder={PLACEHOLDER.year}
-              value={yearState.value}
-              maxLength={MAX_LENGTH.expirationDate}
-              onChange={yearState.setValue}
-              invalid={yearState.error}
-            />
-          </>
-        </InputField>
-      </FormField>
-      <FormField title={TITLE.userName}>
-        <InputField label={LABEL.userName} error={userNameErrorMessage}>
-          <Input
-            placeholder={PLACEHOLDER.userName}
-            value={userNameState.value}
-            maxLength={MAX_LENGTH.userName}
-            onChange={userNameState.setValue}
-            invalid={userNameState.error}
-          />
         </InputField>
       </FormField>
     </StyledCardInformationForm>
