@@ -12,7 +12,7 @@ export default function CardView({ cardInfo }: Props) {
 
   useEffect(() => {
     if (cardInfo.cvc) setShowBack(true);
-    else setShowBack(false);
+    if (cardInfo.cvc.length === 3) setShowBack(false);
   }, [cardInfo.cvc]);
 
   return (
