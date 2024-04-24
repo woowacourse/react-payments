@@ -1,11 +1,12 @@
 import Input, { InputProps } from '@components/common/Input/Input';
 
 type OwnerNameInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength' | 'onChange'> & {
-  onAddOwnerName: React.ChangeEventHandler<HTMLInputElement>;
   placeholder: string;
+  onAddOwnerName: React.ChangeEventHandler<HTMLInputElement>;
+  refCallback?: (inputElement: HTMLInputElement) => void;
 };
 
-const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value, onAddOwnerName, id }) => {
+const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value, onAddOwnerName, id, refCallback }) => {
   return (
     <Input
       id={id}
@@ -14,6 +15,7 @@ const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value,
       placeholder="JOHN DOE"
       value={value}
       isError={isError}
+      ref={refCallback}
       onChange={onAddOwnerName}
     />
   );

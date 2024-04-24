@@ -1,6 +1,7 @@
 import { Spacer, TextField } from '@components/common';
 
 import OwnerNameInput from '@components/payments/@ownerName/OwnerNameInput/OwnerNameInput';
+import { useEffect, useRef } from 'react';
 
 interface OwnerNameTextFieldProps {
   ownerName: string;
@@ -9,6 +10,12 @@ interface OwnerNameTextFieldProps {
 }
 
 const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ ownerName, onAddOwnerName, ownerNameError }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <section>
       <TextField.Title title="카드 소유자 이름을 입력해 주세요" />
@@ -16,6 +23,9 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ ownerName, onAd
       <TextField.Label htmlFor="ownerName" labelText="소유자 이름" />
       <TextField.Content>
         <OwnerNameInput
+          refCallback={(element) => {
+            inputRef.current = element;
+          }}
           id="ownerName"
           isError={ownerNameError.isError}
           placeholder={'JOHN DOE'}

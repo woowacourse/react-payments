@@ -1,21 +1,20 @@
 import { useState } from 'react';
 
-import useToggle from '@hooks/useToggle';
-
 import { CardBrand } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.type';
+import useToggle from '@hooks/useToggle';
 
 const useCardBrandDropdown = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand | ''>('');
   const [isCardBrandCompleted, setIsCardBrandCompleted] = useState(false);
+
+  const { isToggle, handleToggle } = useToggle(true);
 
   const handleSelectCardBrand = (card: CardBrand) => {
     setCardBrand(card);
     setIsCardBrandCompleted(true);
   };
 
-  const { isOpen, handleToggle } = useToggle();
-
-  return { isCardBrandCompleted, cardBrand, handleSelectCardBrand, isOpen, handleToggle };
+  return { isCardBrandCompleted, cardBrand, handleSelectCardBrand, isDropdownOpen: isToggle, handleToggle };
 };
 
 export default useCardBrandDropdown;

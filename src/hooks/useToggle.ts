@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
-const useToggle = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleToggle = () => setIsOpen(!isOpen);
+const useToggle = (initialValue: boolean) => {
+  const [isToggle, setIsToggle] = useState(initialValue);
+
+  const handleToggle = () => setIsToggle(!isToggle);
 
   return {
-    isOpen,
+    isToggle,
     handleToggle,
   };
 };

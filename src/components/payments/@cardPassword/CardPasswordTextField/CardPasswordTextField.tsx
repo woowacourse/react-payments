@@ -1,4 +1,5 @@
 import TextField from '@components/common/TextField/TextField';
+import { useEffect, useRef } from 'react';
 import CardPasswordInput from '@components/payments/@cardPassword/CardPasswordInput/CardPasswordInput';
 
 interface CardPasswordTextFieldProps {
@@ -12,6 +13,12 @@ const CardPasswordTextField: React.FC<CardPasswordTextFieldProps> = ({
   cardPasswordError,
   onAddCardPassword,
 }) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <section>
       <TextField.Title title="비밀번호를 입력해 주세요" />
@@ -23,6 +30,9 @@ const CardPasswordTextField: React.FC<CardPasswordTextFieldProps> = ({
           id="cardPassword"
           value={cardPassword}
           onAddCardPassword={(event) => onAddCardPassword(event.target.value)}
+          refCallback={(element) => {
+            inputRef.current = element;
+          }}
         />
       </TextField.Content>
       <TextField.ErrorText isError={cardPasswordError.isError} errorText={cardPasswordError.errorMessage} />

@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
 
 import TextField from '@components/common/TextField/TextField';
 import ExpirationDateInput from '@components/payments/@expiration/ExpirationDateInput/ExpirationDateInput';
+import useFocusInputs from '@hooks/useFocusInputs';
 
 interface ExpirationDateTextFieldProps {
   month: string;
@@ -16,7 +17,11 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   onAddExpirationDate,
   expirationError,
 }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { inputsRef, focusInputByIndex } = useFocusInputs(2);
+
+  useEffect(() => {
+    inputsRef.current[0]?.focus();
+  }, [inputsRef]);
 
   return (
     <section>
@@ -25,6 +30,9 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
       <TextField.Label htmlFor="expiration" labelText="유효 기간" />
       <TextField.Content>
         <ExpirationDateInput
+          refCallback={(element) => {
+            inputsRef.current[0] = element;
+          }}
           id="expiration"
           placeholder="MM"
           isError={expirationError.isError}
@@ -32,12 +40,12 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           onAddExpirationDate={(event) => {
             onAddExpirationDate('month', event.target.value);
 
-            if (event.target.value.length === event.target.maxLength) inputRef.current?.focus();
+            if (event.target.value.length === event.target.maxLength) focusInputByIndex(1);
           }}
         />
         <ExpirationDateInput
           refCallback={(element) => {
-            inputRef.current = element;
+            inputsRef.current[1] = element;
           }}
           placeholder="YY"
           isError={expirationError.isError}
