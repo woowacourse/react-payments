@@ -10,7 +10,8 @@ import useOwnerName from "@/hooks/useOwnerName";
 import PasswordInput from "@/components/PasswordInput/PasswordInput";
 import CVCInput from "@/components/CVCInput/CVCInput";
 import CardCompany from "@/components/CardCompany/CardCompany";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState, KeyboardEvent } from "react";
+import { ERRORS } from "@/constants/messages";
 
 const App = () => {
   const {
@@ -36,11 +37,41 @@ const App = () => {
   } = useOwnerName();
   const [cardCompany, setCardCompany] = useState("");
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
+  const [CVC, setCVC] = useState({
+    value: "",
+    isError: false,
+    errorMessage: "",
+    isDone: false,
+  });
+  const [CVCShowNextInput, setCVCShowNextInput] = useState<boolean>(false);
 
   const changeCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setCardCompany(value);
     cardCompanyRef.current?.blur();
+  };
+
+  const CVCHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setCVCShowNextInput(true);
+    }
+  };
+
+  const changeCVC = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    if (Number.isInteger(Number(value))) {
+      setCVC({
+        ...CVC,
+        value,
+        isDone: value.length === 3,
+      });
+      return;
+    }
+    setCVC({
+      ...CVC,
+      isError: true,
+      errorMessage: ERRORS.isNotInteger,
+    });
   };
 
   return (
@@ -75,8 +106,15 @@ const App = () => {
         }}
       />
       <form>
-        {/* <PasswordInput /> */}
-        {ownerNameNextInput && <CVCInput />}
+        {CVCShowNextInput && <PasswordInput />}
+        {
+          <CVCInput
+            CVC={CVC}
+            changeCVC={changeCVC}
+            onKeyDown={CVCHandleKeyDown}
+          />
+        }
+        {/* {ownerNameNextInput && <CVCInput CVC={CVC} changeCVC={changeCVC} />}
         {
           <OwnerNameInput
             ownerName={ownerName}
@@ -84,7 +122,7 @@ const App = () => {
             refs={ownerNameRefs}
             onKeyDown={ownerNameHandleKeyDown}
           />
-        }
+        } */}
         {/* {
           <ExpirationDateInput
             expirationDate={expirationDate}

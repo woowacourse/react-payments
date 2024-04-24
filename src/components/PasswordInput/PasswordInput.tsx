@@ -11,11 +11,12 @@ const PasswordInput = () => {
     >
       <Input
         name="password"
-        value="12321"
+        value=""
         placeholder=""
         isError={false}
         maxLength={2}
         isPassword={true}
+        autoFocus
       />
     </Field>
   );
