@@ -28,7 +28,9 @@ const meta = {
     },
   },
   args: {
+    cardIssuer: '',
     cardNumbers: ['', '', '', ''],
+    cvcNumber: '',
     expirationDate: { month: '', year: '' },
     ownerName: '',
   },
