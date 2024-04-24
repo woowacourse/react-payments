@@ -9,7 +9,6 @@ import useNameFormSection from '../../../hook/useNameFormSection';
 import OPTION from '../../../constants/option';
 
 interface NameFormSectionProps {
-  cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
@@ -17,25 +16,23 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
 text-transform: uppercase`
 
 const NameFormSection = (props: NameFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
-  const ref = useRef<HTMLInputElement>(null)
-  const [onChange, handleOnFocus, handleOnBlur] = useNameFormSection({ cardInfo, dispatchCardInfo, ref })
+  const { dispatchCardInfo } = props
+  const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
+  const { value, error, handleChange } = useNameFormSection({ dispatchCardInfo, ref })
 
   const NameForm = (
     <PaymentsInputFieldUppercase
       className="name-form-section"
       placeholder="FAMILY / GIVEN"
       maxLength={OPTION.nameMaxLength}
-      value={cardInfo.name.value}
-      hasError={cardInfo.name.errorMessage.length !== 0}
-      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-      handleOnFocus={handleOnFocus}
-      handleOnBlur={handleOnBlur}
+      value={value}
+      hasError={error.length !== 0}
+      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
       autoFocus={true}
     />)
 
   return (
-    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={cardInfo.name.errorMessage} Children={NameForm} />
+    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={error} Children={NameForm} />
   );
 };
 
