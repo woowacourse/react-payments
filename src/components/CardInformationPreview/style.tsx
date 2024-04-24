@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const Container = styled.section<{ $brandColor: string }>`
   width: 21.2rem;
   height: 13.2rem;
   padding: 0.8rem 1.2rem;
-  background-color: ${(props) => props.theme.color.darkGray};
+  background-color: ${(props) => props.$brandColor};
   box-shadow: 0.3rem 0.3rem 0.5rem 0rem ${(props) => props.theme.color.dropShadow};
   border-radius: 0.4rem;
 `;

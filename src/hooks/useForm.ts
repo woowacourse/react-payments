@@ -23,6 +23,7 @@ const useForm = (defaultValues: FormState) => {
     expirationDateState,
     userNameState,
     showImageCondition,
+    cardBrandState,
   };
 
   const formProps = {
