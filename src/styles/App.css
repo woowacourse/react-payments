@@ -38,3 +38,12 @@ select {
   top: -999px;
   left: -999px;
 }
+
+a,
+a:active,
+a:visited,
+a:link {
+  cursor: pointer; /* 커서 모양을 포인터로 변경 */
+  color: inherit; /* 링크 색상을 부모 요소의 색상으로 상속 */
+  text-decoration: none; /* 링크에 밑줄 제거 */
+}

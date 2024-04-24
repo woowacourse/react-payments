@@ -1,2 +1,21 @@
 .home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--layout-padding);
+  width: var(--layout-max-width);
+  height: 100vh;
+}
+
+.linkGroup {
+  font-weight: bold;
+  text-align: center;
+  a {
+    padding: 0.875rem 0.625rem;
+  }
+  a:hover {
+    border-radius: 0.625rem;
+    background-color: hsl(41, 91%, 86%);
+  }
 }

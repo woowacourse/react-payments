@@ -8,7 +8,9 @@ import styles from './style.module.css';
 export default function Home() {
   return (
     <div className={styles.home}>
-      <Link to={PATH.cardEnrollment}>카드 등록하러 가기</Link>
+      <div className={styles.linkGroup}>
+        <Link to={PATH.cardEnrollment}>💳 카드 등록하러 가기</Link>
+      </div>
     </div>
   );
 }
