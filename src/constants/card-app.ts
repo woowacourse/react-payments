@@ -50,7 +50,11 @@ export const CARD_COMPANIES = [
   '국민카드',
 ];
 
-export const CARD_COLOR = {
+interface CardColor {
+  [key: string]: string;
+}
+
+export const CARD_COLOR: CardColor = {
   BC카드: '#f04651',
   신한카드: '#0046FF',
   카카오뱅크: '#FFE600',
