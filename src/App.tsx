@@ -1,9 +1,9 @@
-import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
+import Router from './router';
 
 function App() {
   return (
     <div className="app">
-      <CreditCardForm />
+      <Router />
     </div>
   );
 }

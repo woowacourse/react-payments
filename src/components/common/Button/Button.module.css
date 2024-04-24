@@ -1,6 +1,7 @@
 .baseButton {
   background-color: var(--grey-500);
   color: var(--grey-100);
+  cursor: pointer;
 }
 
 .buttonMedium {
