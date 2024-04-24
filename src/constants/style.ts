@@ -7,6 +7,17 @@ const STYLE = {
     black50: '#333333',
     gray130: '#8b95a1',
     gray170: '#acacac',
+    yellow20: '#CBBA64',
+    cardBack: '#D5D5D5',
+
+    BC: '#F04651',
+    shinhan: '#0046FF',
+    kakao: '#FFE600',
+    hyundai: '#000000',
+    woori: '#007BC8',
+    lotte: '#ED1C24',
+    kebhana: '#009490',
+    kbstar: '#6A6056',
   },
 
   FONT_SIZE: {

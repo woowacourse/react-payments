@@ -6,10 +6,13 @@ import CardPreview from './CardPreview';
 
 const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
+    cardCompany: null,
     cardNumber: ['', '', '', ''],
     expirationMonth: '',
     expirationYear: '',
     name: '',
+    cvc: '',
+    password: '',
   });
 
   const changeCardInfo = (cardInfo: CardInfo) => {
