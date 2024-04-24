@@ -60,6 +60,7 @@ const theme: DefaultTheme = {
     gray: '#8B95A1',
     lightGray: '#ACACAC',
     darkGray: '#333333',
+    charcoalGray: '#4f4f4f',
     magenta: '#f04651',
     blue: '#0046FF',
     yellow: '#FFE600',
