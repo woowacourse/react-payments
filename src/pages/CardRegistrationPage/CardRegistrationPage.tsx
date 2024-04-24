@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CardPreview from '../../components/CardForm/CardPreview/CardPreview';
 import CardOwnerInput from '../../components/CardForm/CardOwnerInput/CardOwnerInput';
@@ -7,59 +7,39 @@ import CardNumberInput from '../../components/CardForm/CardNumberInput/CardNumbe
 import CardCompanyInput from '../../components/CardForm/CardCompanyInput/CardCompanyInput';
 import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
-
-import * as S from './CardRegistrationPage.style';
-import { CARD_OWNER, CARD_EXPIRATION } from '../../constants/Condition';
-import { isValidForm, isValidRange, isValidLength } from '../../utils/validation';
-
 import useValidatedInput from '../../hooks/useValidatedInput';
 import useValidatedCardNumbers from '../../hooks/useValidatedCardNumbers';
+
+import { validateMonth, validateYear, validateOwner, validateCVC, validatePassword } from '../../domain/Card';
+
+import * as S from './CardRegistrationPage.style';
 
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
   // const [inputComponentIndex, setInputComponentIndex] = useState(5);
 
   const { cardNumbers, isCardNumbersValid, handleCardNumbers } = useValidatedCardNumbers();
-
-  const validateMonth = (month: string) =>
-    isValidLength(month, 2) &&
-    isValidRange(Number(month), CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE);
-
-  const validateYear = (year: string) => isValidLength(year, 2);
-
-  const validateOwner = (owner: string) =>
-    isValidForm(owner, CARD_OWNER.VALID_REGEX) && isValidRange(owner.length, 1, CARD_OWNER.MAX_LENGTH);
-
-  const validateCVC = (cvc: string) => isValidLength(cvc, 3);
-
-  const validatePassword = (password: string) => isValidLength(password, 2);
-
   const { value: company, handleValue: handleCompany } = useValidatedInput({ defaultValue: '' });
-
   const {
     value: month,
     isValid: isMonthValid,
     handleValue: handleMonth,
   } = useValidatedInput({ defaultValue: '', validateFunction: validateMonth });
-
   const {
     value: year,
     isValid: isYearValid,
     handleValue: handleYear,
   } = useValidatedInput({ defaultValue: '', validateFunction: validateYear });
-
   const {
     value: owner,
     isValid: isOwnerValid,
     handleValue: handleOwner,
   } = useValidatedInput({ defaultValue: '', validateFunction: validateOwner });
-
   const {
     value: cvc,
     isValid: isCVCValid,
     handleValue: handleCVC,
   } = useValidatedInput({ defaultValue: '', validateFunction: validateCVC });
-
   const {
     value: password,
     isValid: isPasswordValid,
