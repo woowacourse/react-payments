@@ -9,6 +9,7 @@ import {
   validateCVC,
   validateCardExpiration,
   validateCardNumber,
+  validatePassword,
   validateUserName,
 } from '../../validators/newCardInputValidator';
 import { CARD_FORM_INPUTS } from '../../constants/setting';
@@ -20,12 +21,14 @@ const NewCardPage = () => {
     cardExpiration: [0, 0],
     userName: '',
     cvc: '',
+    password: '',
   });
   const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
     cardNumbers: ['', '', '', ''],
     cardExpiration: ['', ''],
     userName: [''],
     cvc: [''],
+    password: [''],
   });
 
   const handleCardNumbersChange = (value: string, index: number) => {
@@ -115,6 +118,22 @@ const NewCardPage = () => {
     }
   };
 
+  const handlePasswordChange = (value: string) => {
+    const erroMessageCopy = validatePassword(value);
+
+    setErrorMessage({
+      ...errorMessage,
+      password: [erroMessageCopy],
+    });
+
+    if (erroMessageCopy === '') {
+      setCardInfo({
+        ...cardInfo,
+        password: value,
+      });
+    }
+  };
+
   return (
     <NewCardContainer>
       <CardPreview cardInfo={cardInfo}></CardPreview>
@@ -192,6 +211,22 @@ const NewCardPage = () => {
           placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
           isError={!!errorMessage.cvc[0]}
           onChange={(e) => handleCVCChange(e.target.value)}
+        ></Input>
+      </NewCardInputSection>
+      {/* 비밀번호 */}
+      <NewCardInputSection
+        label={CARD_FORM_INPUTS.PASSWORD.LABEL}
+        mainText={CARD_FORM_INPUTS.PASSWORD.MAIN_TEXT}
+        subText={CARD_FORM_INPUTS.PASSWORD.SUB_TEXT}
+        errorMessage={errorMessage.password}
+      >
+        <Input
+          type='password'
+          value={cardInfo.password}
+          maxLength={CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}
+          placeholder={CARD_FORM_INPUTS.PASSWORD.PLACEHOLDER}
+          isError={!!errorMessage.password[0]}
+          onChange={(e) => handlePasswordChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
     </NewCardContainer>

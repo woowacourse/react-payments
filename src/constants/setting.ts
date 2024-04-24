@@ -46,9 +46,16 @@ export const CARD_FORM_INPUTS = {
     PLACEHOLDER: '123',
     MAX_LENGTH: 3,
   },
+  PASSWORD: {
+    LABEL: '비밀번호 앞 2자리',
+    MAIN_TEXT: '비밀번호를 입력해 주세요',
+    SUB_TEXT: '앞의 2자리를 입력해주세요',
+    PLACEHOLDER: '**',
+    MAX_LENGTH: 2,
+  },
 };
 
-export const MASKING = '•';
+export const CARD_NUMBERS_MASKING = '•';
 
 export const CARD_BRAND = {
   MASTERCARD: {

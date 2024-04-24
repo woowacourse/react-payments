@@ -4,6 +4,7 @@ export interface ICardInfo {
   cardExpiration: [number, number];
   userName: string;
   cvc: string;
+  password: string;
 }
 
 export interface IErrorMessage {
@@ -11,4 +12,5 @@ export interface IErrorMessage {
   cardExpiration: [string, string];
   userName: [string];
   cvc: [string];
+  password: [string];
 }

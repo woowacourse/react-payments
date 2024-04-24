@@ -54,3 +54,10 @@ export const validateCVC = (value: string): string => {
   }
   return '';
 };
+
+export const validatePassword = (value: string): string => {
+  if (value !== '' && Number.isNaN(Number(value))) {
+    return '숫자만 입력 가능합니다.';
+  }
+  return '';
+};
