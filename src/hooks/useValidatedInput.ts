@@ -1,13 +1,8 @@
 import { useState } from 'react';
 
-interface useValidatedInputProps {
-  defaultValue: string;
-  validateFunction?: (value: string) => boolean;
-}
-
-const useValidatedInput = ({ defaultValue, validateFunction }: useValidatedInputProps) => {
+const useValidatedInput = (validateFunction: (value: string) => boolean, defaultValue: string = '') => {
   const [value, setValue] = useState(defaultValue);
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   const handleValue = (newValue: string) => {
     if (validateFunction !== undefined) {

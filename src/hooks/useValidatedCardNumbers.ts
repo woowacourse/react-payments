@@ -5,7 +5,7 @@ import { isValidLength } from '../utils/validation';
 
 const useValidatedCardNumbers = (defaultValue = ['', '', '', '']) => {
   const [cardNumbers, setCardNumbers] = useState(defaultValue);
-  const [isValid, setIsValid] = useState([true, true, true, true]);
+  const [isValid, setIsValid] = useState([false, false, false, false]);
 
   const validateCardNumber = (cardNumber: string) => isValidLength(cardNumber, CARD_NUMBER.MAX_LENGTH);
 
