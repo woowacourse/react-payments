@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import {
-  executeValidators,
-  isInvalidNameLength,
-  isInvalidOwnerName,
+  validateOwnerNameLength,
+  validateUpperCase,
 } from "../../utils/validators";
+import useInput from "../../hooks/useInput";
 import * as S from "./style";
 
 interface Props {
@@ -18,32 +18,21 @@ export default function CardOwnerName({
   cardOwnerName,
   onChangeCardInfo,
 }: Props) {
-  const [errorMessage, setErrorMessage] = useState("");
+  const { value, onChange, onBlur, validateMessage } = useInput("", {
+    validateOnChange: [validateUpperCase],
+    validateOnBlur: [validateUpperCase, validateOwnerNameLength],
+  });
 
-  const onChangeNameInput = (value: string) => {
+  useEffect(() => {
     const newCardOwnerName = cardOwnerName;
-    const upperName = value.toUpperCase();
-    const validateResult = isInvalidOwnerName(upperName);
 
-    newCardOwnerName.value = upperName;
-    newCardOwnerName.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
+    newCardOwnerName.value = value;
+    newCardOwnerName.isError = validateMessage !== "";
+
     onChangeCardInfo(newCardOwnerName, "cardOwnerName");
-  };
-
-  const onBlurNameInput = (value: string) => {
-    const newCardOwnerName = cardOwnerName;
-    const upperName = value.toUpperCase();
-    const validateResult = executeValidators(
-      [isInvalidOwnerName, isInvalidNameLength],
-      value
-    );
-
-    newCardOwnerName.value = upperName;
-    newCardOwnerName.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardOwnerName, "cardOwnerName");
-  };
+  }, [value, validateMessage]);
+  // TODO: useEffect를 대체할 방법은 없을까? 부수 효과가 아닌데 effect 사용이 적절한가?
+  // validateMessage를 넣은 이유는 빈 칸인 상태에서 blur 시, 에러메시지가 바뀌지만 isError가 안바뀌어서
 
   return (
     <S.CardOwnerNameContainer>
@@ -57,11 +46,11 @@ export default function CardOwnerName({
             placeholder="JOHN DOE"
             value={cardOwnerName.value}
             isError={cardOwnerName.isError}
-            onChangeInput={(value) => onChangeNameInput(value)}
-            onBlurInput={(value) => onBlurNameInput(value)}
+            onChange={onChange}
+            onBlur={onBlur}
           />
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={validateMessage} />
       </S.CardOwnerNameBox>
     </S.CardOwnerNameContainer>
   );

@@ -61,18 +61,18 @@ export const isInvalidYear = (value: string) => {
   return { isError: false, message: "" };
 };
 
-export const isInvalidOwnerName = (upperName: string) => {
+export const validateUpperCase = (name: string) => {
   const pattern: RegExp = OWNER_NAME_REG;
 
-  if (upperName.length !== 0 && !pattern.test(upperName)) {
-    return { isError: true, message: ERROR.NOT_ALPHABET };
+  if (name.length !== 0 && !pattern.test(name)) {
+    return ERROR.NOT_ALPHABET;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidNameLength = (value: string) => {
-  if (value.length < 1 && value.length > CARD_INFO.NAME_LENGTH) {
-    return { isError: true, message: ERROR.CARD_NAME_LENGTH };
+export const validateOwnerNameLength = (name: string) => {
+  if (name.length < 1 && name.length > CARD_INFO.NAME_LENGTH) {
+    return ERROR.CARD_NAME_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
