@@ -9,14 +9,50 @@ export const Container = styled.div`
 `;
 
 export const CardContainer = styled.div<{ $bgColor: string }>`
-  background-color: ${(props) => props.$bgColor ?? '#333333'};
+  position: relative;
 
   width: 212px;
   height: 132px;
 
+  perspective: 500px;
+  transform-style: preserve-3d;
+
+  & > div {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    backface-visibility: hidden;
+    transition: transform 1.5s ease-in-out;
+    background-color: ${(props) => props.$bgColor ?? '#333333'};
+  }
+`;
+
+export const Front = styled.div<{ $isFlip: boolean }>`
   padding: 8px 12px;
 
   border-radius: 4px;
+
+  transform: ${(props) => props.$isFlip && 'rotateY(180deg)'};
+`;
+
+export const Back = styled.div<{ $isFlip: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  border-radius: 4px;
+
+  transform: ${(props) => !props.$isFlip && 'rotateY(-180deg)'};
+`;
+
+export const MagneticStripe = styled.div`
+  width: 100%;
+  height: 24px;
+
+  margin-bottom: 24px;
+  background-color: #cbba64;
 `;
 
 export const NumbersContainer = styled.div`

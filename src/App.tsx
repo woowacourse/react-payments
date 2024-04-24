@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import GlobalStyles from './GlobalStyles';
 import * as S from './App.style';
 
@@ -16,6 +16,7 @@ import {
   CARD_COMPANY,
   CARD_COMPANY_COLOR,
   CARD_NUMBER,
+  CVC_NUMBER,
   EXPIRATION_PERIOD,
   OWNER_NAME,
 } from './constants/cardSection';
@@ -33,6 +34,8 @@ const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
 };
 
 function App() {
+  const [isFlip, setIsFlip] = useState(false);
+
   const twoDigitValidation = {
     isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
     errorMessage: '2자리 숫자를 입력해주세요.',
@@ -101,20 +104,43 @@ function App() {
     error: nameError,
   } = useInput(nameOnChangeValidations);
 
+  const {
+    inputState: cvc,
+    inputChangeHandler: cvcChangeHandler,
+    inputFocusOutHandler: cvcFocusOutHandler,
+    error: cvcError,
+  } = useInput(
+    [
+      {
+        isError: (state: string) => state !== '' && !validate.isValidDigit(state),
+        errorMessage: '문자 입력은 불가능합니다.',
+      },
+    ],
+    [
+      {
+        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
+        errorMessage: '3자리 숫자를 입력해주세요.',
+      },
+    ],
+  );
+
   return (
     <S.Container>
       <GlobalStyles />
       <S.CardPreviewWrapper>
         <CardPreview
+          isFlip={isFlip}
           cardNumbers={cardNumbers.map(({ value }) => value)}
           month={month}
           year={year}
           name={name.toUpperCase()}
+          cvc={cvc}
           cardImageSrc={cardImageSrc}
           cardColor={CARD_COMPANY_COLOR[cardCompany]}
         />
       </S.CardPreviewWrapper>
       <S.CardInfoContainer>
+        {/* 카드 번호 입력 */}
         <S.Wrapper>
           <InputSection
             title={CARD_NUMBER.title}
@@ -150,6 +176,7 @@ function App() {
           </S.ErrorWrapper>
         </S.Wrapper>
 
+        {/* 카드사 선택 */}
         <S.Wrapper>
           <InputSection title={CARD_COMPANY.title} description={CARD_COMPANY.description}>
             <Select
@@ -165,6 +192,7 @@ function App() {
           </S.ErrorWrapper>
         </S.Wrapper>
 
+        {/* 유효기간 입력 */}
         <S.Wrapper>
           <InputSection
             title={EXPIRATION_PERIOD.title}
@@ -202,6 +230,7 @@ function App() {
           </S.ErrorWrapper>
         </S.Wrapper>
 
+        {/* 카드 소유자 입력 */}
         <S.Wrapper>
           <InputSection title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
             <ScreenReaderOnlyLabel htmlFor={'name'} description={'이름 입력'} />
@@ -217,6 +246,33 @@ function App() {
           </InputSection>
           <S.ErrorWrapper>
             <S.ErrorMessage>{nameError.state && OWNER_NAME.errorMessage}</S.ErrorMessage>
+          </S.ErrorWrapper>
+        </S.Wrapper>
+
+        {/* CVC 번호 입력 */}
+        {/* TODO: 아이디 등 매직넘버 문자열 상수화 */}
+        <S.Wrapper>
+          <InputSection title={CVC_NUMBER.title} inputTitle={CVC_NUMBER.inputTitle}>
+            <ScreenReaderOnlyLabel htmlFor={'cvc'} description={'CVC 번호 입력'} />
+            <Input
+              id="cvc"
+              maxLength={3}
+              onChange={cvcChangeHandler}
+              onBlur={(e) => {
+                cvcFocusOutHandler(e);
+                setIsFlip(false);
+              }}
+              isError={cvcError.state}
+              placeholder={CVC_NUMBER.placeholder}
+              onFocus={() => {
+                setIsFlip(true);
+              }}
+              type="text"
+              value={cvc}
+            />
+          </InputSection>
+          <S.ErrorWrapper>
+            <S.ErrorMessage>{cvcError.state && cvcError.message}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
       </S.CardInfoContainer>

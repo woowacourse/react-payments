@@ -3,6 +3,7 @@ import styled from 'styled-components';
 type InputProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   type: 'text' | 'number' | 'email' | 'password' | 'tel';
   placeholder: string;
@@ -28,6 +29,7 @@ const StyledInput = styled.input<{ $isError: boolean }>`
 export default function Input({
   value,
   onChange,
+  onFocus,
   onBlur,
   type,
   placeholder,
@@ -39,6 +41,7 @@ export default function Input({
     <StyledInput
       value={value}
       onChange={onChange}
+      onFocus={onFocus}
       onBlur={onBlur}
       type={type}
       maxLength={maxLength}

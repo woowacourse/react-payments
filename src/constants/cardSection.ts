@@ -42,3 +42,9 @@ export const OWNER_NAME = Object.freeze({
   inputTitle: '소유자 이름',
   errorMessage: '영문 대문자만 입력 가능합니다.',
 });
+
+export const CVC_NUMBER = Object.freeze({
+  title: 'CVC 번호를 입력해주세요',
+  inputTitle: 'CVC',
+  placeholder: '123',
+});

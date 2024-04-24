@@ -24,6 +24,10 @@ export const CardInfoContainer = styled.div`
 
   height: 438px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ErrorWrapper = styled.div`
