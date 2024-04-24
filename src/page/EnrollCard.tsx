@@ -4,7 +4,6 @@ import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_CARD } from '../constants/card';
-import CardBackView from '../components/CardBackView';
 import SubmitCardBox from '../components/SubmitCardBox';
 import { Link } from 'react-router-dom';
 import { Page } from '../style/page.style';
@@ -16,7 +15,6 @@ export default function EnrollCard() {
     <Page>
       <Container>
         <CardView cardInfo={cardInfo} />
-        <CardBackView cvc={cardInfo.cvc} />
         <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
       </Container>
       <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
