@@ -13,13 +13,20 @@ const useDisplayingErrorStatus = <T extends IAbstractErrorStatus>(origin: T) => 
   }, [origin]);
 
   useEffect(() => {
-    const isNotError = !origin.isError || Object.values(origin.isError).every(isError => !isError);
+    const isBoolean = typeof origin.isError === 'boolean';
 
-    const errorDoesNotExists = isNotError && !origin.errorMessage;
-
-    const errorDisappears = displayingErrorStatus.isError && errorDoesNotExists;
-    if (errorDisappears) {
-      bringErrorStatus();
+    if (isBoolean) {
+      const displayingErrorExists = Object.values(origin.isError).some(isError => isError);
+      const originErrorNotExists = Object.values(origin.isError).every(isError => !isError);
+      const errorDisappeared = displayingErrorExists && originErrorNotExists;
+      if (errorDisappeared) {
+        bringErrorStatus();
+      }
+    } else {
+      const errorDisappeared = displayingErrorStatus.isError && !origin.isError;
+      if (errorDisappeared) {
+        bringErrorStatus();
+      }
     }
   }, [displayingErrorStatus.isError, origin, bringErrorStatus]);
 
