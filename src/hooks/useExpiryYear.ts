@@ -1,5 +1,6 @@
 import useInput from './useInput';
-import { validateExpiryYear, validateNumber } from '../validator/validateExpiryYear';
+import validateExpiryYear from '../validator/validateExpiryYear';
+import validateNumber from '../validator/validateNumber';
 
 const useExpiryYear = () => {
   const { value, handleChange, errorInfo, updateErrorMessage } = useInput('', {
