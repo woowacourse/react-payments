@@ -3,12 +3,16 @@ import { CardCompany } from '../types/card';
 
 interface Props {
   options: CardCompany[];
+  selectedOption: string;
   onChange: (value: CardCompany) => void;
 }
 
-export default function SelectBox({ options, onChange }: Props) {
+export default function SelectBox({
+  options,
+  selectedOption,
+  onChange,
+}: Props) {
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     const selectedOption = options.find(
       (option) => option.name === e.target.value
     );
@@ -16,10 +20,11 @@ export default function SelectBox({ options, onChange }: Props) {
       onChange(selectedOption);
     }
   };
+
   return (
-    <Select onChange={handleSelect}>
-      <option disabled hidden selected>
-        카드사를 선택해주세요
+    <Select onChange={handleSelect} defaultValue="defaultSelected">
+      <option value="defaultSelected" disabled hidden>
+        {selectedOption}
       </option>
       {options.map((option) => (
         <option key={option.name} value={option.name}>
