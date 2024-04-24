@@ -38,15 +38,15 @@ const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: Val
     );
     const validationResult = onBlurValidations.find(({ isError }) => isError(e.target.value));
 
+    if (!onChangeValidationResult) {
+      setError(INITIAL_ERROR_STATE);
+    }
+
     if (validationResult) {
       setError({
         state: true,
         message: validationResult.errorMessage,
       });
-    }
-
-    if (!onChangeValidationResult) {
-      setError(INITIAL_ERROR_STATE);
     }
   };
 
