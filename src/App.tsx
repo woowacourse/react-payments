@@ -54,6 +54,7 @@ function App() {
   });
   const [cardOwner, setCardOwner] = useState<CardOwnerType>({ data: '', errorMessage: '' });
   const [cardProvider, setCardProvider] = useState<CardOwnerType>({ data: '', errorMessage: '' });
+  const [cardCvc, setCardCvc] = useState<CardOwnerType>({ data: '', errorMessage: '' });
 
   const [inputError, setInputError] = useState({
     number: [true, true, true, true],
@@ -61,6 +62,7 @@ function App() {
     year: true,
     owner: true,
     provider: true,
+    cvc: true,
   });
 
   // const isCompleted = useCompleted(inputError);
@@ -96,12 +98,19 @@ function App() {
     });
   };
 
+  const handleCardCvc = (value: string) => {
+    setCardCvc((prevState) => {
+      return { ...prevState, data: value };
+    });
+  };
+
   const setStateFunctions = {
     number: handleCardNumber,
     month: handleCardPeriod,
     year: handleCardPeriod,
     owner: handleCardOwner,
     provider: handleCardProvider,
+    cvc: handleCardCvc,
   };
 
   const handleCardInput = ({ value, index, inputSection }: InputChangePropsType) => {
@@ -116,6 +125,7 @@ function App() {
     year: setCardPeriod,
     owner: setCardOwner,
     provider: setCardProvider,
+    cvc: setCardCvc,
   };
 
   const handleCardError = ({ isError, inputSection, message, index }: HandleCardErrorType) => {
@@ -148,6 +158,17 @@ function App() {
       <div css={appContainerStyle}>
         <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
         <form css={appInputStyle}>
+          {/* CVC */}
+          {!inputError.owner && (
+            <InputGroup
+              onInputChange={({ value, index }: InputChangePropsType) =>
+                handleInputChange({ value, index, inputSection: 'cvc' })
+              }
+              informationSection="cvc"
+              isError={[inputError.cvc]}
+              errorMessage={cardCvc.errorMessage}
+            />
+          )}
           {/* 카드 소유자 */}
           {!inputError.month && !inputError.year && (
             <InputGroup

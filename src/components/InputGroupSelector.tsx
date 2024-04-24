@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import ErrorMessage from './ErrorMessage';
 import InputTitle from './InputTitle';
 import { InputChangePropsType, informationSectionType } from '../types/card';
-import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER } from '../constants/inputInformation';
+import { CARD_CVC, CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER } from '../constants/inputInformation';
 import Selector from './Selector';
 import { CARD_PROVIDER_SELECT } from '../constants/cardInformation';
 
@@ -48,6 +48,7 @@ function InputGroupSelector({ onInputChange, errorMessage, informationSection }:
     period: CARD_PERIOD,
     owner: CARD_OWNER,
     provider: CARD_PROVIDER,
+    cvc: CARD_CVC,
   };
 
   const { title, subtitle } = getTypeTable[informationSection];

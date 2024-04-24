@@ -29,6 +29,18 @@ export const CARD_PROVIDER = {
   type: 'provider',
   title: '카드사를 선택해 주세요',
   subtitle: '현재 국내 카드사만 가능합니다.',
+  label: '',
+  placeholders: [''],
+  maxLength: 0,
+} as const;
+
+export const CARD_CVC = {
+  type: 'cvc',
+  title: 'CVC 번호를 입력해 주세요',
+  subtitle: '',
+  label: 'CVC',
+  placeholders: ['123'],
+  maxLength: 3,
 } as const;
 
 export const PERIOD = ['month', 'year'] as const;

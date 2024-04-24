@@ -3,7 +3,7 @@ import InputTitle from './InputTitle';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
 import { InputChangePropsType, informationSectionType } from '../types/card';
-import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD, PERIOD } from '../constants/inputInformation';
+import { CARD_CVC, CARD_NUMBER, CARD_OWNER, CARD_PERIOD, CARD_PROVIDER, PERIOD } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
 const inputGroupStyle = css({
@@ -65,6 +65,8 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
     number: CARD_NUMBER,
     period: CARD_PERIOD,
     owner: CARD_OWNER,
+    provider: CARD_PROVIDER,
+    cvc: CARD_CVC,
   };
 
   const { title, subtitle, label, placeholders, maxLength } = getTypeTable[informationSection];

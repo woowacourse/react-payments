@@ -9,12 +9,19 @@ interface ValidateResultType {
   message: string;
 }
 
+interface IsInRangeType {
+  value: number;
+  min: number;
+  max: number;
+}
+
 interface ValidateInputTableType {
   number: () => ValidateResultType;
   month: () => ValidateResultType;
   year: () => ValidateResultType;
   owner: () => ValidateResultType;
   provider: () => ValidateResultType;
+  cvc: () => ValidateResultType;
 }
 
 const validateInput = (value: string, informationDetail: InformationDetailType) => {
@@ -24,6 +31,7 @@ const validateInput = (value: string, informationDetail: InformationDetailType) 
     year: () => cardYearValidated(value),
     owner: () => cardOwnerValidated(value),
     provider: () => cardProviderValidated(value),
+    cvc: () => cardCvcValidated(value),
   };
 
   const validateFunction = validateInputTable[informationDetail];
@@ -31,17 +39,16 @@ const validateInput = (value: string, informationDetail: InformationDetailType) 
 };
 
 function cardNumberValidated(value: string) {
-  const valueToNumber = Number(value);
-  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
   if (!isNumberCount(value, VALIDATION.cardNumberCount))
     return { isError: true, message: ERROR_MESSAGE.inputCount(VALIDATION.cardNumberCount) };
   return { isError: false, message: '' };
 }
 
 function cardMonthValidated(value: string) {
+  if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
   const valueToNumber = Number(value);
-  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
-  if (!isInRange(valueToNumber, VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max))
+  if (!isInRange({ value: valueToNumber, min: VALIDATION.cardMonthRange.min, max: VALIDATION.cardMonthRange.max }))
     return {
       isError: true,
       message: ERROR_MESSAGE.notInRange(VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max),
@@ -50,12 +57,13 @@ function cardMonthValidated(value: string) {
 }
 
 function cardYearValidated(value: string) {
+  if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+
   const valueToNumber = Number(value);
   const now = new Date();
   const year = now.getFullYear();
   const lastTwoDigits = year % 100;
-  if (!isNumber(valueToNumber)) return { isError: true, message: ERROR_MESSAGE.notANumber };
-  if (!isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod))
+  if (!isInRange({ value: valueToNumber, min: lastTwoDigits, max: lastTwoDigits + VALIDATION.maximumYearPeriod }))
     return {
       isError: true,
       message: ERROR_MESSAGE.notInRange(lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod),
@@ -65,7 +73,7 @@ function cardYearValidated(value: string) {
 
 function cardOwnerValidated(value: string) {
   if (!isUpperCaseEnglish(value)) return { isError: true, message: ERROR_MESSAGE.upperCase };
-  if (!isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max))
+  if (!isInRange({ value: value.length, min: VALIDATION.cardOwnerLength.min, max: VALIDATION.cardOwnerLength.max }))
     return {
       isError: true,
       message: ERROR_MESSAGE.notInRange(VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max),
@@ -80,20 +88,24 @@ function cardProviderValidated(value: string) {
       message: '카드사를 선택해주세요.',
     };
   }
-  return {
-    isError: false,
-    message: '',
-  };
+  return { isError: false, message: '' };
 }
 
-function isNumber(value: number) {
-  if (isNaN(value)) {
+function cardCvcValidated(value: string) {
+  if (!isNumber(value)) return { isError: true, message: ERROR_MESSAGE.notANumber };
+  if (!isNumberCount(value, 3)) return { isError: true, message: '올바른 CVC 번호를 입력해 주세요.' };
+  return { isError: false, message: '' };
+}
+
+function isNumber(value: string) {
+  const regex = /^[0-9]*$/;
+  if (!regex.test(value)) {
     return false;
   }
   return true;
 }
 
-function isInRange(value: number, min: number, max: number) {
+function isInRange({ value, min, max }: IsInRangeType) {
   if (isRange(value, min, max)) {
     return false;
   }
