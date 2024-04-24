@@ -15,7 +15,6 @@ export default function SelectCardCompanyField({ handleSelect }: Props) {
     handleSelect({
       ...value,
     });
-    console.log('select', value);
   };
 
   return (
@@ -25,7 +24,11 @@ export default function SelectCardCompanyField({ handleSelect }: Props) {
           title="카드사를 선택해 주세요"
           subtitle="현재 국내 카드사만 가능합니다."
         />
-        <SelectBox options={cardCompanies} onChange={handleSelectCardCompany} />
+        <SelectBox
+          options={cardCompanies}
+          selectedOption="카드사를 선택해주세요"
+          onChange={handleSelectCardCompany}
+        />
       </FieldContainer>
     </>
   );
