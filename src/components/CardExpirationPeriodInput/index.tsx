@@ -9,7 +9,7 @@ import {
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
-import { convertToTwoDigits, sliceText } from '../../utils/textChangerUtils';
+import { convertToTwoDigits } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -20,11 +20,6 @@ interface PeriodError {
   month: boolean;
   year: boolean;
   availability: boolean;
-}
-
-interface CardExpirationPeriod {
-  month: string | null;
-  year: string | null;
 }
 
 export interface CardExpirationPeriodFormProps {
@@ -43,9 +38,8 @@ export default function CardExpirationPeriodInput(
   const { editCardPeriod, goNextFormStep } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
-  const { length } = CARD_EXPIRATION;
   const { focusTargetRef } = useFocusRef<HTMLInputElement>();
-  const [cardPeriod, setCardPeriod] = useState<CardExpirationPeriod>({
+  const [cardPeriod, setCardPeriod] = useState<CardPeriod>({
     month: null,
     year: null,
   });
@@ -162,7 +156,10 @@ export default function CardExpirationPeriodInput(
    */
   const updateCardPeriodAndError = (name: string, value: string) => {
     // cardPeriod 업데이트
-    const newCardPeriod = { ...cardPeriod, [name]: sliceText(value, length) };
+    const newCardPeriod = {
+      ...cardPeriod,
+      [name]: value,
+    };
     setCardPeriod(newCardPeriod);
     // periodError 업데이트
     const newPeriodError = updatePeriodError(name, newCardPeriod);
@@ -172,7 +169,6 @@ export default function CardExpirationPeriodInput(
 
   const handlePeriodChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (Number.isNaN(value)) return;
 
     updateCardPeriodAndError(name, value);
   };
@@ -199,18 +195,20 @@ export default function CardExpirationPeriodInput(
         <Input
           ref={focusTargetRef}
           name="month"
-          type="number"
+          type="text"
+          maxLength={CARD_EXPIRATION.length}
           placeholder={monthPlaceholder}
           label="카드 유효 기간-월"
-          value={cardPeriod.month || undefined}
+          value={cardPeriod.month?.toString() || undefined}
           error={periodError.month || periodError.availability}
         />
         <Input
           name="year"
-          type="number"
+          type="text"
           label="카드 유효 기간-연도"
           placeholder={yearPlaceholder}
-          value={cardPeriod.year || undefined}
+          maxLength={CARD_EXPIRATION.length}
+          value={cardPeriod.year?.toString() || undefined}
           error={periodError.year || periodError.availability}
         />
       </div>

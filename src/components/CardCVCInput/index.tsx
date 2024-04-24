@@ -14,7 +14,6 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
-import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
 import ErrorMessage from '../ErrorMessage';
@@ -40,15 +39,14 @@ function CardCVCInput(props: CardCVCInputProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     // cvc 업데이트
-    const newCVC = sliceText(value, CARD_CVC.length);
-    setCVC(newCVC);
+    setCVC(value);
     // 유효성 검사
-    const isValidated = validateCVC(newCVC);
+    const isValidated = validateCVC(value);
     // cvcError 업데이트
     setCVCError(!isValidated);
     // cardInfo 업데이트 및 form 다음 단계로 이동
     if (isValidated) {
-      editCardCVC(newCVC);
+      editCardCVC(value);
       goNextFormStep(CARD_FORM_STEP.cvc);
     }
   };
@@ -65,7 +63,8 @@ function CardCVCInput(props: CardCVCInputProps) {
           label={CARD_CVC_MESSAGE.label}
           placeholder={CARD_CVC_MESSAGE.placeholder}
           error={cvcError}
-          type="number"
+          type="text"
+          maxLength={CARD_CVC.length}
           onChange={handleChange}
           onBlur={() => setCardSide('front')}
           onFocus={() => setCardSide('back')}

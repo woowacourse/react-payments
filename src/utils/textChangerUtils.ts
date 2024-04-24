@@ -1,3 +1,5 @@
+import { NUMBER_CHANGE_REGEXP } from '../constants';
+
 /**
  * 숫자가 한자리인 경우 앞에 0을 붙이는 함수
  */

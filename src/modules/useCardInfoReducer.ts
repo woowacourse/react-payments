@@ -17,7 +17,7 @@ export interface CardPeriod {
 }
 
 export type CardMark = keyof typeof CARD_MARK | null;
-export type CardNumbers = (number | undefined)[];
+export type CardNumbers = (string | undefined)[];
 export type CardCompanyName = (typeof CARD_COMPANY_NAMES)[number];
 
 export type CardCompany = {

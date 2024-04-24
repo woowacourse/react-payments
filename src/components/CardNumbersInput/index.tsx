@@ -10,7 +10,6 @@ import {
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
-import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -64,7 +63,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   const getNewNumbers = useCallback(
     (index: number, value: string) => {
       const newNumbers = [...numbers];
-      newNumbers[index] = value ? Number(sliceText(value, length)) : undefined;
+      newNumbers[index] = value || undefined;
 
       return newNumbers;
     },
@@ -75,7 +74,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
    * 카드번호 입력값에 대한 유효성 검사를 진행하고, 검사 결과에 따라 numbersError 상태를 업데이트함
    * @param newNumbers 유효성 검사를 진행할 대상
    */
-  const checkNumbersError = (newNumbers: (number | undefined)[]) => {
+  const checkNumbersError = (newNumbers: CardNumbers) => {
     const newNumbersError = newNumbers.map((item) =>
       !item ? true : !CARD_NUMBER_REGEXP.test(item.toString()),
     );
@@ -89,6 +88,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
+
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
     // numbers 업데이트
     const newNumbers = getNewNumbers(index, value);
@@ -117,9 +117,10 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
           <Input
             key={`number_${index}`}
             name={`${NUMBERS_NAME_PREFIX}${index}`}
-            type="number"
+            type="text"
+            maxLength={CARD_NUMBERS.length}
             label={`카드 ${index + 1}째 네자리 번호`}
-            value={numbers[index]}
+            value={numbers[index]?.toString()}
             error={numbersError[index]}
             placeholder={placeholder}
           />
