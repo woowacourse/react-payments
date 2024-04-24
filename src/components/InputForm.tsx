@@ -8,9 +8,14 @@ import useInputForm from '../hooks/useInputForm';
 interface Props {
   cardInfo: Card;
   handleInput: (value: Card) => void;
+  handleSubmit: (value: boolean) => void;
 }
 
-export default function InputForm({ cardInfo, handleInput }: Props) {
+export default function InputForm({
+  cardInfo,
+  handleInput,
+  handleSubmit,
+}: Props) {
   const {
     step,
     handleOneValue,
@@ -18,7 +23,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
     handleSelectCardCompany,
     handleCardNumberInput,
     handleNext,
-  } = useInputForm({ cardInfo, handleInput });
+  } = useInputForm({ cardInfo, handleInput, handleSubmit });
 
   return (
     <FormContainer>
@@ -70,7 +75,7 @@ export default function InputForm({ cardInfo, handleInput }: Props) {
         title="결제할 카드 번호를 입력해 주세요"
         subtitle="본인 명의의 카드만 결제 가능합니다."
         inputTypes={INPUT_TYPE_CATEGORIES.CARD_NUMBER}
-        handleInput={handleCardNumberInput}
+        handleInput={(value) => handleCardNumberInput(0, value)}
         handleNext={handleNext}
       />
     </FormContainer>

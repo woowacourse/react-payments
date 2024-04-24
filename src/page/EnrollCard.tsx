@@ -10,15 +10,19 @@ import { Page } from '../style/page.style';
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>(DEFAULT_CARD);
-  // const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [canSubmit, setCanSubmit] = useState<boolean>(false);
   return (
     <Page>
       <Container>
         <CardView cardInfo={cardInfo} />
-        <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
+        <InputForm
+          cardInfo={cardInfo}
+          handleInput={setCardInfo}
+          handleSubmit={setCanSubmit}
+        />
       </Container>
       <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
-        <SubmitCardBox />
+        {canSubmit && <SubmitCardBox />}
       </Link>
     </Page>
   );

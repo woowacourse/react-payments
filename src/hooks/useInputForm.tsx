@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CompleteValidation from '../domain/CompleteValidation';
 import { Card, CardCompany } from '../types/card';
-// import debounceFunc from '../utils/debounceFunc';
 
 interface InputFormProps {
   cardInfo: Card;
   handleInput: (value: Card) => void;
+  handleSubmit: (value: boolean) => void;
 }
 
-const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
+const useInputForm = ({
+  cardInfo,
+  handleInput,
+  handleSubmit,
+}: InputFormProps) => {
   const [step, setStep] = useState<boolean[]>([
+    false,
     false,
     false,
     false,
@@ -17,12 +22,26 @@ const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
     false,
   ]);
 
-  const handleStep = (index: number) => {
+  useEffect(() => {
+    console.log('step', step);
+
+    if (step.every((value) => value === true)) {
+      handleSubmit(true);
+    } else {
+      handleSubmit(false);
+    }
+  }, [step, handleSubmit]);
+
+  const handleStep = (index: number, next: boolean = true) => {
+    console.log('index', index);
+    console.log('step forward', step);
     setStep((prev) => {
       const newStep = [...prev];
-      newStep[index] = true;
+      newStep[index] = next;
       return newStep;
     });
+
+    console.log('step behind', step);
   };
 
   const handleOneValue = (value: Record<string, string>) => {
@@ -30,12 +49,6 @@ const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
       ...cardInfo,
       ...value,
     });
-
-    console.log('handleOneValue', value);
-    // debounceFunc(() => handleStep(step.indexOf(false)));
-    // if (keydown === 'Enter') {
-    //   handleStep(step.indexOf(false));
-    // }
   };
 
   const handleExpiryDateInput = (value: Record<string, string>) => {
@@ -47,7 +60,7 @@ const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
       },
     });
     if (CompleteValidation['expiryDate']?.(value)) {
-      handleStep(2);
+      handleStep(step.indexOf(false));
     }
   };
 
@@ -56,10 +69,13 @@ const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
       ...cardInfo,
       cardCompany: value,
     });
-    handleStep(1);
+    handleStep(step.indexOf(false));
   };
 
-  const handleCardNumberInput = (value: Record<string, string>) => {
+  const handleCardNumberInput = (
+    step: number,
+    value: Record<string, string>
+  ) => {
     handleInput({
       ...cardInfo,
       cardNumbers: {
@@ -68,12 +84,15 @@ const useInputForm = ({ cardInfo, handleInput }: InputFormProps) => {
       },
     });
     if (CompleteValidation['cardNumbers']?.(value)) {
-      handleStep(0);
+      console.log('통과!', step);
+      handleStep(step);
+    } else {
+      console.log('stop');
+      handleStep(step, false);
     }
   };
 
   const handleNext = () => {
-    console.log('handleNext');
     handleStep(step.indexOf(false));
   };
 
