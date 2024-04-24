@@ -9,11 +9,13 @@ import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardExpirationInputProps {
+  month: string;
+  year: string;
   handleMonth: (month: string) => void;
   handleYear: (year: string) => void;
 }
 
-function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputProps) {
+function CardExpirationInput({ month, year, handleMonth, handleYear }: CardExpirationInputProps) {
   const [isValidMonth, setIsValidMonth] = useState(true);
   const [isValidYear, setIsValidYear] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -79,6 +81,7 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
         <Input
           type="text"
           placeholder="MM"
+          value={month}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
           onBlur={handleMonthBlur}
@@ -87,6 +90,7 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
         <Input
           type="text"
           placeholder="YY"
+          value={year}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
           onBlur={handleYearBlur}

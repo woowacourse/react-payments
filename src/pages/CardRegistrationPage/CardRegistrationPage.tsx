@@ -63,10 +63,10 @@ const CardRegistrationPage = () => {
     nextIndex < inputComponentIndex && setInputComponentIndex(nextIndex);
 
   const inputComponentList = [
-    <CardPasswordInput handlePassword={handlePassword} />,
-    <CardCVCInput handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
-    <CardOwnerInput handleOwner={handleOwner} />,
-    <CardExpirationInput handleMonth={handleMonth} handleYear={handleYear} />,
+    <CardPasswordInput password={password} handlePassword={handlePassword} />,
+    <CardCVCInput cvc={cvc} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
+    <CardOwnerInput owner={owner} handleOwner={handleOwner} />,
+    <CardExpirationInput month={month} year={year} handleMonth={handleMonth} handleYear={handleYear} />,
     <CardCompanyInput company={company} handleCompany={handleCompany} />,
     <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />,
   ];

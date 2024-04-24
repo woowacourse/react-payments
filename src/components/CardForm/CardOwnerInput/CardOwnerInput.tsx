@@ -9,10 +9,11 @@ import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardOwnerInputProps {
+  owner: string;
   handleOwner: (owner: string) => void;
 }
 
-function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
+function CardOwnerInput({ owner, handleOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,6 +38,7 @@ function CardOwnerInput({ handleOwner }: CardOwnerInputProps) {
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="STEVEN KING"
+          value={owner}
           onChange={handleOwnerChange}
           isValid={isValid}
         />

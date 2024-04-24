@@ -50,6 +50,7 @@ function CardNumberInput({ cardNumbers, handleCardNumbers }: CardNumberInputProp
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
+            value={cardNumbers[index]}
             onChange={handleCardNumberChange(index)}
             onBlur={handleCardNumberBlur(index)}
             isValid={isValid[index]}

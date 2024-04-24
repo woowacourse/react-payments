@@ -7,11 +7,12 @@ import Input from '../../common/Input/Input';
 import { isNumber, isValidLength } from '../../../utils/validation';
 
 interface CardCVCInputProps {
+  cvc: string;
   handleCVC: (cvc: string) => void;
   handleIsCVCInput: (isCVCInput: boolean) => void;
 }
 
-const CardCVCInput = ({ handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
+const CardCVCInput = ({ cvc, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -51,6 +52,7 @@ const CardCVCInput = ({ handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
           isValid={isValid}
           type="text"
           placeholder="123"
+          value={cvc}
           maxLength={3}
           onFocus={handleCVCFocus}
           onChange={handleCVCChange}
