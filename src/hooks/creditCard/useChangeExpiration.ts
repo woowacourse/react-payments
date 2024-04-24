@@ -7,9 +7,10 @@ export const initialExpiration = { month: '', year: '' };
 const useChangeExpiration = () => {
   const [expiration, setExpiration] = useState(initialExpiration);
   const [expirationError, setExpirationError] = useState({ isError: false, errorMessage: '' });
+  const [isExpirationCompleted, setIsExpirationCompleted] = useState(false);
 
   const handleExpirationChange = (field: 'month' | 'year', value: string) => {
-    if (!isContainsNonNumeric(value)) {
+    if (isContainsNonNumeric(value)) {
       setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
       return;
     }
@@ -19,9 +20,11 @@ const useChangeExpiration = () => {
 
     setExpiration(newExpiration);
     setExpirationError(error);
+
+    if (!error.isError) setIsExpirationCompleted(true);
   };
 
-  return { expiration, expirationError, handleExpirationChange };
+  return { isExpirationCompleted, expiration, expirationError, handleExpirationChange };
 };
 
 export default useChangeExpiration;

@@ -5,6 +5,7 @@ import {
   PreviewCreditCard,
 } from '@components/payments';
 import CardBrandTextField from '@components/payments/@cardBrand/CardBrandTextField/CardBrandTextField';
+import CardPasswordTextField from '@components/payments/@cardPassword/CardPasswordTextField/CardPasswordTextField';
 
 import {
   PreviewCreditCardStyleContainer,
@@ -13,16 +14,29 @@ import {
 
 import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
 import useCardBrandDropdown from '@hooks/creditCard/useCardBrandDropdown';
+import useChangeCVCNumber from '@hooks/creditCard/useChangeCVCNumber';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
+import useChangePassword from '@hooks/creditCard/useChangeCardPassword';
+import CVCNumberTextField from '@components/payments/@cvcNumber/CVCNumberTextField/CVCNumberTextField';
 
 const CreditCardForm: React.FC = () => {
-  const { cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
+  const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
 
-  const { expiration, expirationError, handleExpirationChange } = useChangeExpiration();
+  const {
+    cardBrand,
+    isOpen: isDropdownOpen,
+    isCardBrandCompleted,
+    handleSelectCardBrand,
+    handleToggle,
+  } = useCardBrandDropdown();
 
-  const { ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+  const { isExpirationCompleted, expiration, expirationError, handleExpirationChange } = useChangeExpiration();
 
-  const { cardBrand, isOpen, handleSelectCardBrand, handleToggle } = useCardBrandDropdown();
+  const { isOwnerNameCompleted, ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+
+  const { isCVCNumberCompleted, cvcNumber, cvcError, handleChangeCVCNumber } = useChangeCVCNumber();
+
+  const { cardPassword, cardPasswordError, handleChangePassword } = useChangePassword();
 
   const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
 
@@ -30,7 +44,7 @@ const CreditCardForm: React.FC = () => {
     <>
       <PreviewCreditCardStyleContainer>
         <PreviewCreditCard
-          isDropdownOpen={isOpen}
+          isCardBrandChange={cardBrand !== ''}
           cardBrand={cardBrand}
           cardNumbers={cardNumbers}
           expiration={expirationError.isError === true ? initialExpiration : expiration}
@@ -38,23 +52,39 @@ const CreditCardForm: React.FC = () => {
         />
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>
-        <OwnerNameTextField
-          ownerName={ownerName}
-          onAddOwnerName={handleOwnerNameChange}
-          ownerNameError={ownerNameError}
-        />
-        <ExpirationDateTextField
-          month={expiration.month}
-          year={expiration.year}
-          onAddExpirationDate={handleExpirationChange}
-          expirationError={expirationError}
-        />
-        <CardBrandTextField
-          isOpen={isOpen}
-          currentCardBrand={cardBrand}
-          onSelectCardBrand={handleSelectCardBrand}
-          onToggleDropdown={handleToggle}
-        />
+        {isCVCNumberCompleted && (
+          <CardPasswordTextField
+            cardPassword={cardPassword}
+            cardPasswordError={cardPasswordError}
+            onAddCardPassword={handleChangePassword}
+          />
+        )}
+        {isOwnerNameCompleted && (
+          <CVCNumberTextField cvcNumber={cvcNumber} cvcError={cvcError} onAddCVCNumber={handleChangeCVCNumber} />
+        )}
+        {isExpirationCompleted && (
+          <OwnerNameTextField
+            ownerName={ownerName}
+            onAddOwnerName={handleOwnerNameChange}
+            ownerNameError={ownerNameError}
+          />
+        )}
+        {!isDropdownOpen && isCardBrandCompleted && (
+          <ExpirationDateTextField
+            month={expiration.month}
+            year={expiration.year}
+            onAddExpirationDate={handleExpirationChange}
+            expirationError={expirationError}
+          />
+        )}
+        {isCardNumberCompleted && (
+          <CardBrandTextField
+            isOpen={isDropdownOpen}
+            currentCardBrand={cardBrand}
+            onSelectCardBrand={handleSelectCardBrand}
+            onToggleDropdown={handleToggle}
+          />
+        )}
         <CardNumberTextField
           isCardNumberError={isCardNumberError}
           cardNumbers={cardNumbers}

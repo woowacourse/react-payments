@@ -8,6 +8,7 @@ const useChangeCardNumber = () => {
     errorConditions: [false, false, false, false],
     errorMessage: '',
   });
+  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
 
   const handleCardNumberChange = (cardIndex: number, value: string) => {
     if (isContainsNonNumeric(value)) {
@@ -55,9 +56,11 @@ const useChangeCardNumber = () => {
         : newCardNumbers.map((cardNumber) => (isCompleteCardNumber(cardNumber) ? false : true)),
       errorMessage,
     });
+
+    if (isCompleteCardNumbers(newCardNumbers)) setIsCardNumberCompleted(true);
   };
 
-  return { cardNumbers, cardNumberError, handleCardNumberChange };
+  return { cardNumbers, isCardNumberCompleted, cardNumberError, handleCardNumberChange };
 };
 
 export default useChangeCardNumber;
