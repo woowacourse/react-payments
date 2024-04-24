@@ -7,6 +7,7 @@ const useInput = <T extends object>(initialValue: T) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target !== e.currentTarget) return;
     const { value, name } = e.target;
 
     const validateStatus = Validator.inputCreditCardInfo(value, name);
