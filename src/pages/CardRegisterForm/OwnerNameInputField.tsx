@@ -1,12 +1,12 @@
 import React from "react";
 import InputField from "../../components/InputField/InputField";
-import { IndividualValidator } from "@/hooks/useInputField";
+import { Validator } from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
 import useValidation from "@/hooks/useValidation";
 
 const VALID_LENGTH = 30;
 const INPUTS_COUNT = 1;
-const individualValidators: IndividualValidator[] = [
+const individualValidators: Validator[] = [
   {
     validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
     errorMessage: "이름은 영어 대문자로 입력해주세요.",

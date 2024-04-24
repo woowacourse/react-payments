@@ -31,6 +31,7 @@ const CardRegisterForm = ({ cardNumbersReduceds, expirationDateReduceds, ownerNa
         </S.TitleWrapper>
         <ExpirationDateInputField reduceds={expirationDateReduceds} />
       </S.InputFieldWithInfo>
+      
       {/*소유자 이름*/}
       <S.InputFieldWithInfo>
         <S.TitleWrapper>

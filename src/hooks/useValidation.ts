@@ -4,6 +4,7 @@ import useInput, { ActionType } from "./useInput";
 export interface Validator {
   validate: (input: string) => boolean;
   errorMessage: string;
+  index?: number[];
 }
 
 const useValidation = (reduced: ReturnType<typeof useInput>, validators: Validator[]) => {

@@ -1,12 +1,12 @@
 import React from "react";
 import InputField from "../../components/InputField/InputField";
-import useInputField, { IndividualValidator } from "@/hooks/useInputField";
+import { Validator } from "@/hooks/useValidation";
 import useValidation from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
 
 const VALID_LENGTH = 2;
 const INPUTS_COUNT = 2;
-const individualValidators: IndividualValidator[] = [
+const individualValidators: Validator[] = [
   {
     errorMessage: "월은 1~12의 범위여야합니다.",
     validate: (month: string) => month === "" || (Number(month) >= 1 && Number(month) <= 12),
