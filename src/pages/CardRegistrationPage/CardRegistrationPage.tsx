@@ -13,11 +13,13 @@ import { CARD_OWNER, CARD_EXPIRATION } from '../../constants/Condition';
 import { isValidForm, isValidRange, isValidLength } from '../../utils/validation';
 
 import useValidatedInput from '../../hooks/useValidatedInput';
+import useValidatedCardNumbers from '../../hooks/useValidatedCardNumbers';
 
 const CardRegistrationPage = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [isCVCInput, setIsCVCInput] = useState(false);
-  const [inputComponentIndex, setInputComponentIndex] = useState(5);
+  // const [inputComponentIndex, setInputComponentIndex] = useState(5);
+
+  const { cardNumbers, isCardNumbersValid, handleCardNumbers } = useValidatedCardNumbers();
 
   const validateMonth = (month: string) =>
     isValidLength(month, 2) &&
@@ -64,17 +66,12 @@ const CardRegistrationPage = () => {
     handleValue: handlePassword,
   } = useValidatedInput({ defaultValue: '', validateFunction: validatePassword });
 
-  const handleCardNumbers = (cardNumbers: string[]) => {
-    setCardNumbers(cardNumbers);
-    handleInputComponentIndex(4);
-  };
-
   const handleIsCVCInput = (isCVCInput: boolean) => {
     setIsCVCInput(isCVCInput);
   };
 
-  const handleInputComponentIndex = (nextIndex: number) =>
-    nextIndex < inputComponentIndex && setInputComponentIndex(nextIndex);
+  // const handleInputComponentIndex = (nextIndex: number) =>
+  //   nextIndex < inputComponentIndex && setInputComponentIndex(nextIndex);
 
   // const inputComponentList = [
   //   <CardPasswordInput password={password} handlePassword={handlePassword} />,
@@ -122,7 +119,7 @@ const CardRegistrationPage = () => {
           handleYear={handleYear}
         />
         <CardCompanyInput company={company} handleCompany={handleCompany} />
-        <CardNumberInput cardNumbers={cardNumbers} handleCardNumbers={handleCardNumbers} />
+        <CardNumberInput cardNumbers={cardNumbers} isValid={isCardNumbersValid} handleCardNumbers={handleCardNumbers} />
       </S.CardForm>
     </S.CardRegistrationPageLayout>
   );
