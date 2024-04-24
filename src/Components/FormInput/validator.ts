@@ -22,7 +22,7 @@ export function cardNumbersValidator(input: string): validatorReturn<string> {
   return { isValid: true, value: input };
 }
 
-export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn<number> {
+export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn<string> {
   const number = Number(input);
   const monthValid = { min: 0, max: 12 };
 
@@ -32,7 +32,7 @@ export function cardPeriodValidator(input: string, category?: "month" | "year"):
   if (category === "month" && (number < monthValid.min || number > monthValid.max)) {
     return { isValid: false, message: ERROR_MESSAGES.notValidMonth };
   }
-  return { isValid: true, value: number };
+  return { isValid: true, value: input };
 }
 
 export function cardOwnerValidator(input: string): validatorReturn<string> {
