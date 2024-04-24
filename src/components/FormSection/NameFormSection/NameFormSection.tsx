@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import styled from 'styled-components';
 
 import FormSection from '../FormSection';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
@@ -6,7 +7,6 @@ import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputFie
 import useNameFormSection from '../../../hook/useNameFormSection';
 
 import OPTION from '../../../constants/option';
-import styled from 'styled-components';
 
 interface NameFormSectionProps {
   cardInfo: CardInfo;
