@@ -8,6 +8,7 @@ function App() {
     cardNumbers: [],
     expirationDate: [],
     userName: '',
+    cardBrand: null,
   });
 
   return (

@@ -1,7 +1,7 @@
 import * as Field from './style';
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
   error?: string;
 }
 

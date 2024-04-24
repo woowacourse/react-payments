@@ -39,6 +39,7 @@ export const Options = styled.ul<{ $isShow: boolean }>`
 
   border: 0.1rem solid ${(props) => props.theme.color.lightGray};
   border-radius: 0.3rem;
+  background-color: ${(props) => props.theme.color.white};
 `;
 
 export const Option = styled.li`

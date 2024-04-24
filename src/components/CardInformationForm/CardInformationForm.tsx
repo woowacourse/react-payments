@@ -1,5 +1,5 @@
 import { Form } from './style';
-import { CardNumbersField, ExpirationDateField, UserNameField } from '../FormField';
+import { CardBrandField, CardNumbersField, ExpirationDateField, UserNameField } from '../FormField';
 
 import {
   CardNumberErrorState,
@@ -26,16 +26,22 @@ interface CardInformationFormProps {
     setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isUserNameError: boolean;
   };
+  cardBrand: {
+    cardBrandState: string | null;
+    setCardBrandState: React.Dispatch<React.SetStateAction<string | null>>;
+  };
 }
 
 const CardInformationForm = ({
   cardNumbers,
   expirationDate,
   userName,
+  cardBrand,
 }: CardInformationFormProps) => {
   return (
     <Form>
       <CardNumbersField {...cardNumbers} />
+      <CardBrandField {...cardBrand} />
       <ExpirationDateField {...expirationDate} />
       <UserNameField {...userName} />
     </Form>
