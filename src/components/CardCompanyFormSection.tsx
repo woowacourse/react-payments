@@ -39,8 +39,6 @@ const CardCompanyFormSection = ({
     changeCardCompany(inputState[0].value);
   }, [inputState[0].value]);
 
-  console.log(inputState);
-
   return (
     <FormSection>
       <PaymentsFormTitle
