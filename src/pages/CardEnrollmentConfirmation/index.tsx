@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import CheckMark from '../../assets/images/checkMark.svg';
@@ -7,6 +7,7 @@ import { CARD_COMPANY } from '../../constants';
 import useMoveToPage from '../../hooks/useMoveToPage';
 
 import styles from './style.module.css';
+import { CardSide } from '../../components/CardPreview';
 
 const CARD = '카드';
 
@@ -15,16 +16,6 @@ function CardEnrollmentConfirmation() {
   const { navigateToPage } = useMoveToPage('cardEnrollment');
 
   const { state: data } = location.state;
-
-  // const data: CardInfo = {
-  //   userName: 'BADA',
-  //   numbers: [1234, 1234, 1234, 1234],
-  //   mark: 'etc',
-  //   period: { month: '01', year: '25' },
-  //   company: CARD_COMPANY.get('sinhan') || null,
-  //   cvc: '123',
-  //   password: '12',
-  // };
 
   const handleClick = () => {
     navigateToPage();
@@ -39,7 +30,9 @@ function CardEnrollmentConfirmation() {
 
   return (
     <div className={styles.confirmation}>
-      <CardPreview cardInfo={data} side="front" />
+      <div className={styles.cardPreviewContainer}>
+        <CardPreview cardInfo={data} side="front" />
+      </div>
       <section className={styles.message}>
         <img className={styles.checkMark} src={CheckMark} alt="check mark" />
         <p>{data.numbers?.[0]}로 시작하는</p>

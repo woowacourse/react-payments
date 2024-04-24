@@ -13,8 +13,8 @@
 
 .cardImg {
   display: inline-grid;
+  position: relative;
   transform: perspective(800px) rotateY(0deg);
-  transform-style: preserve-3d;
   transition: transform 1s;
   -webkit-box-shadow: 0px 0px 0.625rem 0.1rem rgba(51, 51, 51, 0.355);
   box-shadow: 0px 0px 0.625rem 0.1rem rgba(51, 51, 51, 0.355);

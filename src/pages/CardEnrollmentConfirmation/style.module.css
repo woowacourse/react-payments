@@ -25,3 +25,15 @@
   width: 4.75rem;
   height: 4.75rem;
 }
+.cardPreviewContainer {
+  animation: bounce 2s linear infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0); /* 시작과 끝에서 튀는 위치 */
+  }
+  50% {
+    transform: translateY(-20px); /* 최고 높이 */
+  }
+}
