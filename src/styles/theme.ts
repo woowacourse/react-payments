@@ -26,6 +26,12 @@ const theme: DefaultTheme = {
       font-weight: 400;
       line-height: 1.488rem;
     `,
+    dropDown: `
+    font-family: 'Inter';
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.488rem;
+    `,
     cardNumber: `
       font-family: Inter;
       font-size: 1.4rem;

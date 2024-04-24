@@ -7,6 +7,7 @@ declare module 'styled-components' {
       caption: string;
       label: string;
       input: string;
+      dropDown: string;
       cardNumber: string;
       cardExpirationDate: string;
       cardUserName: string;
