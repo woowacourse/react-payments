@@ -37,8 +37,9 @@ export default function CardNumbers({ partValidateInputs }: props) {
               key={idx}
               placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
               onChange={validateInput.onChange}
-              value={validateInput.inputValue}
-              borderColor={validateInput.errorMessage ? 'error' : undefined}
+              borderColor={
+                validateInput.errorMessage === '' ? undefined : 'error'
+              }
               aria-invalid={!(validateInput.errorMessage === '')}
               maxLength={BOUND.cardNumbersOnePartUpper}
             />

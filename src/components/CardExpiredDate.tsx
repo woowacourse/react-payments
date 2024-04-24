@@ -68,14 +68,14 @@ export default function ExpiredDate({
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
             onChange={monthValidateInput.onChange}
-            value={monthValidateInput.inputValue}
+            maxLength={BOUND.cardExpiredMonthStringUpper}
             borderColor={isValidMonth ? undefined : 'error'}
             aria-invalid={!(isValidMonth && !isFullFilledAndExpired)}
           />
           <TextInput
             placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
             onChange={yearValidateInput.onChange}
-            value={yearValidateInput.inputValue}
+            maxLength={BOUND.cardExpiredYearStringUpper}
             borderColor={isValidYear ? undefined : 'error'}
             aria-invalid={!(isValidYear && !isFullFilledAndExpired)}
           />
