@@ -1,4 +1,4 @@
-import S from "./style";
+import S from "./Input.styled";
 
 interface Props extends React.HTMLProps<HTMLInputElement> {
   isError: boolean;

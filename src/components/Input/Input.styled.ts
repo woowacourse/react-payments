@@ -5,6 +5,10 @@ const InputBox = styled.input<{ $isError: boolean }>`
   border: 1px solid
     ${({ theme, $isError }) =>
       $isError ? theme.COLOR.error : theme.COLOR["grey-2"]};
+  &:focus {
+    border: 1px solid
+      ${({ theme, $isError }) => ($isError ? theme.COLOR.error : "black")};
+  }
 
   padding: 8px;
   border-radius: 2px;
@@ -12,10 +16,6 @@ const InputBox = styled.input<{ $isError: boolean }>`
   font-weight: 400;
   opacity: 0.8;
   min-width: 10px;
-
-  &:focus {
-    border: 1px solid black;
-  }
 `;
 
 const S = {
