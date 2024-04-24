@@ -13,6 +13,12 @@ export const validateCardNumber = (value: string): string => {
   return '';
 };
 
+export const validateCardCompany = (value: string): string => {
+  if (value === CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT)
+    return CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT;
+  return '';
+};
+
 export const validateCardExpiration = (
   value: string,
   index: number,

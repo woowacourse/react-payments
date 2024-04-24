@@ -7,6 +7,7 @@ import NewCardInputSection from '../../components/newCardInputSection/NewCardInp
 import { NewCardContainer } from './NewCardPage.styled';
 import {
   validateCVC,
+  validateCardCompany,
   validateCardExpiration,
   validateCardNumber,
   validatePassword,
@@ -36,6 +37,10 @@ const NewCardPage = () => {
   useEffect(() => {
     updateCardCompanyVisibility();
   }, [cardInfo.cardNumbers]);
+
+  useEffect(() => {
+    updateCardExpirationVisibility();
+  }, [cardInfo.cardCompany]);
 
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
@@ -80,10 +85,23 @@ const NewCardPage = () => {
   };
 
   const handleCardCompanyChange = (value: string) => {
+    const errorMessageCopy = validateCardCompany(value);
+
+    setErrorMessage({
+      ...errorMessage,
+      userName: [errorMessageCopy],
+    });
+
     setCardInfo({
       ...cardInfo,
       cardCompany: value,
     });
+  };
+
+  const updateCardExpirationVisibility = () => {
+    if (cardInfo.cardCompany !== '' && creationStage < 3) {
+      setCreationStage(creationStage + 1);
+    }
   };
 
   const handleCardExpirationChange = (value: string, index: number) => {
@@ -175,7 +193,7 @@ const NewCardPage = () => {
           ></Input>
         ))}
       </NewCardInputSection>
-      {creationStage === 2 && (
+      {creationStage >= 2 && (
         <NewCardInputSection
           label={CARD_FORM_INPUTS.CARD_COMPANY.LABEL}
           mainText={CARD_FORM_INPUTS.CARD_COMPANY.MAIN_TEXT}
@@ -188,69 +206,79 @@ const NewCardPage = () => {
           ></Select>
         </NewCardInputSection>
       )}
-      <NewCardInputSection
-        label={CARD_FORM_INPUTS.CARD_EXPIRATION.LABEL}
-        mainText={CARD_FORM_INPUTS.CARD_EXPIRATION.MAIN_TEXT}
-        subText={CARD_FORM_INPUTS.CARD_EXPIRATION.SUB_TEXT}
-        errorMessage={errorMessage.cardExpiration}
-      >
-        {cardInfo.cardExpiration.map((_, index) => (
+      {creationStage >= 3 && (
+        <NewCardInputSection
+          label={CARD_FORM_INPUTS.CARD_EXPIRATION.LABEL}
+          mainText={CARD_FORM_INPUTS.CARD_EXPIRATION.MAIN_TEXT}
+          subText={CARD_FORM_INPUTS.CARD_EXPIRATION.SUB_TEXT}
+          errorMessage={errorMessage.cardExpiration}
+        >
+          {cardInfo.cardExpiration.map((_, index) => (
+            <Input
+              key={index}
+              maxLength={CARD_FORM_INPUTS.CARD_EXPIRATION.MAX_LENGTH}
+              placeholder={
+                index === 0
+                  ? CARD_FORM_INPUTS.CARD_EXPIRATION.PLACEHOLDER.MONTH
+                  : CARD_FORM_INPUTS.CARD_EXPIRATION.PLACEHOLDER.YEAR
+              }
+              isError={!!errorMessage.cardExpiration[index]}
+              onChange={(e) =>
+                handleCardExpirationChange(e.target.value, index)
+              }
+            ></Input>
+          ))}
+        </NewCardInputSection>
+      )}
+      {creationStage >= 4 && (
+        <NewCardInputSection
+          label={CARD_FORM_INPUTS.USER_NAME.LABEL}
+          mainText={CARD_FORM_INPUTS.USER_NAME.MAIN_TEXT}
+          subText={CARD_FORM_INPUTS.USER_NAME.SUB_TEXT}
+          errorMessage={errorMessage.userName}
+        >
           <Input
-            key={index}
-            maxLength={CARD_FORM_INPUTS.CARD_EXPIRATION.MAX_LENGTH}
-            placeholder={
-              index === 0
-                ? CARD_FORM_INPUTS.CARD_EXPIRATION.PLACEHOLDER.MONTH
-                : CARD_FORM_INPUTS.CARD_EXPIRATION.PLACEHOLDER.YEAR
-            }
-            isError={!!errorMessage.cardExpiration[index]}
-            onChange={(e) => handleCardExpirationChange(e.target.value, index)}
+            value={cardInfo.userName}
+            maxLength={CARD_FORM_INPUTS.USER_NAME.MAX_LENGTH}
+            placeholder={CARD_FORM_INPUTS.USER_NAME.PLACEHOLDER}
+            isError={!!errorMessage.userName[0]}
+            onChange={(e) => handleUserNameChange(e.target.value)}
           ></Input>
-        ))}
-      </NewCardInputSection>
-      <NewCardInputSection
-        label={CARD_FORM_INPUTS.USER_NAME.LABEL}
-        mainText={CARD_FORM_INPUTS.USER_NAME.MAIN_TEXT}
-        subText={CARD_FORM_INPUTS.USER_NAME.SUB_TEXT}
-        errorMessage={errorMessage.userName}
-      >
-        <Input
-          value={cardInfo.userName}
-          maxLength={CARD_FORM_INPUTS.USER_NAME.MAX_LENGTH}
-          placeholder={CARD_FORM_INPUTS.USER_NAME.PLACEHOLDER}
-          isError={!!errorMessage.userName[0]}
-          onChange={(e) => handleUserNameChange(e.target.value)}
-        ></Input>
-      </NewCardInputSection>
-      <NewCardInputSection
-        label={CARD_FORM_INPUTS.CVC.LABEL}
-        mainText={CARD_FORM_INPUTS.CVC.MAIN_TEXT}
-        subText={CARD_FORM_INPUTS.CVC.SUB_TEXT}
-        errorMessage={errorMessage.cvc}
-      >
-        <Input
-          value={cardInfo.cvc}
-          maxLength={CARD_FORM_INPUTS.CVC.MAX_LENGTH}
-          placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
-          isError={!!errorMessage.cvc[0]}
-          onChange={(e) => handleCVCChange(e.target.value)}
-        ></Input>
-      </NewCardInputSection>
-      <NewCardInputSection
-        label={CARD_FORM_INPUTS.PASSWORD.LABEL}
-        mainText={CARD_FORM_INPUTS.PASSWORD.MAIN_TEXT}
-        subText={CARD_FORM_INPUTS.PASSWORD.SUB_TEXT}
-        errorMessage={errorMessage.password}
-      >
-        <Input
-          type='password'
-          value={cardInfo.password}
-          maxLength={CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}
-          placeholder={CARD_FORM_INPUTS.PASSWORD.PLACEHOLDER}
-          isError={!!errorMessage.password[0]}
-          onChange={(e) => handlePasswordChange(e.target.value)}
-        ></Input>
-      </NewCardInputSection>
+        </NewCardInputSection>
+      )}
+      {creationStage >= 5 && (
+        <NewCardInputSection
+          label={CARD_FORM_INPUTS.CVC.LABEL}
+          mainText={CARD_FORM_INPUTS.CVC.MAIN_TEXT}
+          subText={CARD_FORM_INPUTS.CVC.SUB_TEXT}
+          errorMessage={errorMessage.cvc}
+        >
+          <Input
+            value={cardInfo.cvc}
+            maxLength={CARD_FORM_INPUTS.CVC.MAX_LENGTH}
+            placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
+            isError={!!errorMessage.cvc[0]}
+            onChange={(e) => handleCVCChange(e.target.value)}
+          ></Input>
+        </NewCardInputSection>
+      )}
+      {creationStage >= 6 && (
+        <NewCardInputSection
+          label={CARD_FORM_INPUTS.PASSWORD.LABEL}
+          mainText={CARD_FORM_INPUTS.PASSWORD.MAIN_TEXT}
+          subText={CARD_FORM_INPUTS.PASSWORD.SUB_TEXT}
+          errorMessage={errorMessage.password}
+        >
+          <Input
+            type='password'
+            value={cardInfo.password}
+            maxLength={CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}
+            placeholder={CARD_FORM_INPUTS.PASSWORD.PLACEHOLDER}
+            isError={!!errorMessage.password[0]}
+            onChange={(e) => handlePasswordChange(e.target.value)}
+          ></Input>
+        </NewCardInputSection>
+      )}
     </NewCardContainer>
   );
 };
