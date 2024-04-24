@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 
 import CardInfo from '../CardInfo/CardInfo';
 import CardPreview from '../CardPreview/CardPreview';
@@ -18,11 +18,16 @@ const INITIAL_CARD_INFO_STATE: CardInfo = {
 
 const MainPage = () => {
   const [cardInfo, dispatchCardInfo] = useReducer(cardInfoReducer, INITIAL_CARD_INFO_STATE);
+  const [cardState, setCardState] = useState<CardState>('front');
+
+  const handleCardState = (cardState: CardState) => {
+    setCardState(cardState)
+  }
 
   return (
     <MainContainer>
-      <CardPreview {...cardInfo} />
-      <CardInfo cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />
+      <CardPreview cardInfo={cardInfo} cardState={cardState} setCardState={setCardState} />
+      <CardInfo cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />
     </MainContainer>
   );
 };

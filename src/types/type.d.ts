@@ -1,3 +1,5 @@
+type CardState = 'front' | 'back';
+
 type InputStates = InputState[];
 
 interface InputState {

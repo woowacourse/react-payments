@@ -15,12 +15,13 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
 interface CVCFormSectionProps {
   cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
+  handleCardState: (cardState: CardState) => void;
 }
 
 const CVCFormSection = (props: CVCFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo, handleCardState } = props
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ cardInfo, dispatchCardInfo })
+  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useCVCFormSection({ cardInfo, dispatchCardInfo, handleCardState })
 
   return (
     <Styled.FormSection>

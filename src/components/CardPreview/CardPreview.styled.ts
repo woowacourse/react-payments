@@ -4,8 +4,37 @@ import { COMPANY_TABLE } from '../../constants/table';
 
 export const Card = styled.div<{
   animationProps: CardAnimationProps;
+  cardState: CardState;
+}>`
+  display: inline-grid;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
+
+  transform: rotateY(${(props) => (props.cardState === 'back' ? 180 : 0)}deg);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05) perspective(1200px)
+      rotate3d(
+        ${(props) => -props.animationProps.centerY / 100},
+        ${(props) => props.animationProps.centerX / 100},
+        0,
+        ${(props) => props.animationProps.distance / 7}deg
+      )
+      rotateY(${(props) => (props.cardState === 'back' ? 180 : 0)}deg);
+    box-shadow: rgba(0, 0, 0, 0.35)
+      ${(props) => 16 - props.animationProps.left / 10}px
+      ${(props) => 24 - props.animationProps.top / 10}px 32px;
+  }
+`;
+
+export const CardBackground = styled.div<{
   cardCompany: CardCompany;
 }>`
+  grid-area: 1 / 1 / 1 / 1;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,22 +52,15 @@ export const Card = styled.div<{
     props.cardCompany
       ? COMPANY_TABLE[props.cardCompany as string].background
       : '#333333'};
-  box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+
+  transition: transform 0.3s;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
 
   &:hover {
-    transform: scale(1.05) perspective(1200px)
-      rotate3d(
-        ${(props) => -props.animationProps.centerY / 100},
-        ${(props) => props.animationProps.centerX / 100},
-        0,
-        ${(props) => props.animationProps.distance / 7}deg
-      );
-    box-shadow: rgba(0, 0, 0, 0.35)
-      ${(props) => 16 - props.animationProps.left / 10}px
-      ${(props) => 24 - props.animationProps.top / 10}px 32px;
+    transform: perspective(800px) rotateY(0deg);
   }
 `;
 
@@ -139,4 +161,63 @@ export const Expiration = styled.p`
 export const Image = styled.img`
   width: 36px;
   height: 28px;
+`;
+
+export const BackCardBackground = styled.div<{
+  cardCompany: CardCompany;
+}>`
+  grid-area: 1 / 1 / 1 / 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  box-sizing: border-box;
+  width: 246px;
+  height: 154px;
+  border-radius: 8px;
+  color: white;
+  background-color: #000000;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+`;
+
+export const BackMagnetic = styled.div<{
+  cardCompany: CardCompany;
+}>`
+  width: 100%;
+  height: 32px;
+  background-color: ${(props) =>
+    props.cardCompany
+      ? COMPANY_TABLE[props.cardCompany as string].background + 77
+      : '#333333'};
+  margin-top: 32px;
+`;
+
+export const CVCContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 16px;
+  margin-top: 16px;
+`;
+
+export const CVCLabel = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: right;
+  color: inherit;
+`;
+
+export const CVC = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: right;
+  color: inherit;
 `;

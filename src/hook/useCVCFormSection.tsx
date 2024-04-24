@@ -7,10 +7,11 @@ import cardInfoReducer from "../store/cardInfoReducer";
 interface UseCVCFormSectionProps {
   cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>;
+  handleCardState: (cardState: CardState) => void;
 }
 
 const useCVCFormSection = (props: UseCVCFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo, handleCardState } = props
   // const [cardInfo, action] = useReducer(cardInfoReducer, )
   const [inputState, setInputState] = useState({ hasFocus: false, errorMessage: '' })
 
@@ -31,6 +32,8 @@ const useCVCFormSection = (props: UseCVCFormSectionProps) => {
     setInputState({ ...inputState, hasFocus: true });
 
     setInputState({ ...inputState, errorMessage: '' })
+
+    handleCardState('back')
   };
 
   const handleOnBlur = () => {
@@ -43,6 +46,8 @@ const useCVCFormSection = (props: UseCVCFormSectionProps) => {
     if (cardInfo.cvc.value.length === OPTION.cvcMaxLength) {
       dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
     }
+
+    handleCardState('front')
   };
 
 

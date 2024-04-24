@@ -7,8 +7,15 @@ import { BRAND_TABLE } from '../../constants/table';
 import * as Styled from './CardPreview.styled'
 import { secureNumber } from '../../util/secureNumber';
 
-const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumbers, cardBrand, cardCompany, expiration, name, cvc, password } = props;
+interface CardPreviewProps {
+  cardInfo: CardInfo;
+  cardState: CardState;
+  setCardState: React.Dispatch<React.SetStateAction<CardState>>
+}
+
+const CardPreview = (props: CardPreviewProps) => {
+  const { cardInfo, cardState, setCardState } = props
+  const { cardNumbers, cardBrand, cardCompany, expiration, name, cvc, password } = cardInfo;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [animationProps, setAnimationProps] = useState<CardAnimationProps>({
@@ -31,32 +38,42 @@ const CardPreview = ({ ...props }: CardInfo) => {
       setAnimationProps({ left, top, centerX, centerY, distance })
     }
   };
-
   return (
-    <Styled.Card ref={cardRef} onMouseMove={handleMouseMove} animationProps={animationProps} cardCompany={cardCompany.value}>
-      <Styled.Light animationProps={animationProps} />
-      <Styled.CardHeader>
-        <Styled.Image src={IcChip} />
-        {cardBrand.value !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand.value]} /> : <></>}
-      </Styled.CardHeader>
-      <Styled.CardNumbers>
-        <Styled.CardNumber>{cardNumbers.value[0]}</Styled.CardNumber>
-        <Styled.CardNumber>{cardNumbers.value[1]}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumbers.value[2])}</Styled.CardNumber>
-        <Styled.CardNumber>{secureNumber(cardNumbers.value[3])}</Styled.CardNumber>
-      </Styled.CardNumbers>
-      <Styled.CardNameAndExpiration>
-        <Styled.CardNameContainer>
-          <Styled.NameLabel>NAME</Styled.NameLabel>
-          <Styled.Name>{name.value}</Styled.Name>
-        </Styled.CardNameContainer>
-        <Styled.CardExpirationContainer>
-          <Styled.ExpirationLabel>EXPIRATION</Styled.ExpirationLabel>
-          <Styled.Expiration>{`${expiration.value.month}${expiration.value.month ? '/' : ''}${expiration.value.year}`}</Styled.Expiration>
-        </Styled.CardExpirationContainer>
-      </Styled.CardNameAndExpiration>
+    <Styled.Card animationProps={animationProps} cardState={cardState} onClick={() => setCardState(cardState === 'front' ? 'back' : 'front')}>
+      <Styled.CardBackground ref={cardRef} onMouseMove={handleMouseMove} cardCompany={cardCompany.value} onClick={() => setCardState('back')}>
+        <Styled.Light animationProps={animationProps} />
+        <Styled.CardHeader>
+          <Styled.Image src={IcChip} />
+          {cardBrand.value !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand.value]} /> : <></>}
+        </Styled.CardHeader>
+        <Styled.CardNumbers>
+          <Styled.CardNumber>{cardNumbers.value[0]}</Styled.CardNumber>
+          <Styled.CardNumber>{cardNumbers.value[1]}</Styled.CardNumber>
+          <Styled.CardNumber>{secureNumber(cardNumbers.value[2])}</Styled.CardNumber>
+          <Styled.CardNumber>{secureNumber(cardNumbers.value[3])}</Styled.CardNumber>
+        </Styled.CardNumbers>
+        <Styled.CardNameAndExpiration>
+          <Styled.CardNameContainer>
+            <Styled.NameLabel>NAME</Styled.NameLabel>
+            <Styled.Name>{name.value}</Styled.Name>
+          </Styled.CardNameContainer>
+          <Styled.CardExpirationContainer>
+            <Styled.ExpirationLabel>EXPIRATION</Styled.ExpirationLabel>
+            <Styled.Expiration>{`${expiration.value.month}${expiration.value.month ? '/' : ''}${expiration.value.year}`}</Styled.Expiration>
+          </Styled.CardExpirationContainer>
+        </Styled.CardNameAndExpiration>
+      </Styled.CardBackground>
+      <Styled.BackCardBackground ref={cardRef} onMouseMove={handleMouseMove} cardCompany={cardCompany.value} onClick={() => setCardState('front')}>
+        <Styled.Light animationProps={animationProps} />
+        <Styled.BackMagnetic cardCompany={cardCompany.value} />
+        <Styled.CVCContainer>
+          <Styled.CVCLabel>CVC</Styled.CVCLabel>
+          <Styled.CVC>{cvc.value}</Styled.CVC>
+        </Styled.CVCContainer>
+      </Styled.BackCardBackground>
+
     </Styled.Card>
-  );
+  )
 };
 
 export default CardPreview;
