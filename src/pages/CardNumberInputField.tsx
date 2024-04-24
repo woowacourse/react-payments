@@ -4,18 +4,18 @@ import useInputField, { IndividualValidator } from "@/hooks/useInputField";
 
 const VALID_LENGTH = 4;
 const INPUTS_COUNT = 4;
-const CardNumberInputField = () => {
-  const individualValidators: IndividualValidator[] = [
-    {
-      errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-      validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
-    },
-    {
-      errorMessage: `입력은 숫자형이어야합니다.`,
-      validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
-    },
-  ];
-  const validationStates = useInputField({ individualValidators, length: INPUTS_COUNT });
+const CardNumberInputField = ({ validationStates }: { validationStates: ReturnType<typeof useInputField> }) => {
+  // const individualValidators: IndividualValidator[] = [
+  //   {
+  //     errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
+  //     validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
+  //   },
+  //   {
+  //     errorMessage: `입력은 숫자형이어야합니다.`,
+  //     validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
+  //   },
+  // ];
+  // const validationStates = useInputField({ individualValidators, length: INPUTS_COUNT });
 
   return (
     <InputField>
