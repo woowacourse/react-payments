@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useInput2, { ActionType } from "./useInput2";
+import useInput, { ActionType } from "./useInput";
 
 export interface Validator {
   validate: (input: string) => boolean;
@@ -7,7 +7,7 @@ export interface Validator {
 }
 
 const useInputWithValidation = (initialValue: string, validators: Validator[]) => {
-  const [inputState, dispatch] = useInput2(initialValue);
+  const [inputState, dispatch] = useInput(initialValue);
   const setValue = (value: string) =>
     dispatch({
       type: ActionType.SET_VALUE,

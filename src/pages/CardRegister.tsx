@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview, { CardType } from "@/components/CreditCardPreview/CreditCardPreview";
-import useInputs from "@/hooks/useInputs";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
-import { makeStringArray } from "@/components/utils/arrayHelper";
-import { expirationDateValidators, ownerNameValidators } from "@/components/utils/validation";
 import useInputField, { IndividualValidator } from "@/hooks/useInputField";
 const cardNumberValidators: IndividualValidator[] = [
   {
-    errorMessage: `길이는 4여야합니다.`,
-    validate: (input: string) => input.length === 0 || input.length === 4,
+    errorMessage: `길이는 ${INPUT_COUNTS.CARD_NUMBERS}여야합니다.`,
+    validate: (input: string) => input.length === 0 || input.length === INPUT_COUNTS.CARD_NUMBERS,
   },
   {
     errorMessage: `입력은 숫자형이어야합니다.`,
@@ -35,7 +32,7 @@ const expirationValidator: IndividualValidator[] = [
   },
   {
     errorMessage: `길이는 2여야합니다.`,
-    validate: (input: string) => input.length === 0 || input.length === 2,
+    validate: (input: string) => input.length === 0 || input.length === INPUT_COUNTS.EXPIRATION_DATE,
     index: [0, 1],
   },
   {

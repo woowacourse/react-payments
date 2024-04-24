@@ -24,7 +24,7 @@ interface InputState {
   errorMessage: string;
   isValid: boolean;
 }
-const useInput2 = (initialValue: string) => {
+const useInput = (initialValue: string) => {
   const inputReducer = (state: InputState, action: Action) => {
     switch (action.type) {
       case ActionType.SET_VALUE:
@@ -51,4 +51,4 @@ const useInput2 = (initialValue: string) => {
   });
 };
 
-export default useInput2;
+export default useInput;

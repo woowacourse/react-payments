@@ -14,7 +14,7 @@ const CardRegisterFormWithHook = () => {
   });
 
   const expiredDateState = useInputs({
-    initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
+    initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_DATE),
     maxNumberLength: 2,
     validLength: 2,
     onBlurValidators: expirationDateValidators,

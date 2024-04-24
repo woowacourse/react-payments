@@ -28,7 +28,6 @@ const useInputField = ({
   length,
 }: useInputFieldProps) => {
   const result: Validator[][] = Array.from({ length }).map(() => []);
-  const a: Validator[] = [];
 
   const range = Array.from({ length }).map((_, i) => i);
   if (individualValidators === undefined) return [];
