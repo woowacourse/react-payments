@@ -6,6 +6,7 @@ import {
   CARD_FORM_STEP,
   CARD_PERIOD_REGEXP,
   ERROR_MESSAGE,
+  FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
@@ -96,6 +97,7 @@ export default function CardExpirationPeriodInput(
       month: newPeriodError.month ? null : newCardPeriod.month,
       year: newPeriodError.year ? null : newCardPeriod.year,
     });
+    // 다음 입력 필드로 이동
     if (isNextStepEnabled(newPeriodError, newCardPeriod))
       goNextFormStep(CARD_FORM_STEP.period);
   };

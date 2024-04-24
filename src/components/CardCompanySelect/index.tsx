@@ -46,7 +46,7 @@ function CardCompanySelect(props: CardCompanySelectProps) {
     setError(false);
     // cardInfo 변경
     editCardCompany(value);
-    // form 다음 단계로 이동
+    // 다음 입력 필드로 이동
     goNextFormStep(CARD_FORM_STEP.company);
   };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import CheckMark from '../../assets/images/checkMark.svg';
@@ -7,7 +7,6 @@ import { CARD_COMPANY } from '../../constants';
 import useMoveToPage from '../../hooks/useMoveToPage';
 
 import styles from './style.module.css';
-import { CardSide } from '../../components/CardPreview';
 
 const CARD = '카드';
 
@@ -17,7 +16,7 @@ function CardEnrollmentConfirmation() {
 
   const { state: data } = location.state;
 
-  const handleClick = () => {
+  const handleBtnClick = () => {
     navigateToPage();
   };
 
@@ -38,7 +37,7 @@ function CardEnrollmentConfirmation() {
         <p>{data.numbers?.[0]}로 시작하는</p>
         <p>{cardCompanyName}가 등록되었어요.</p>
       </section>
-      <button className={styles.btn} type="button" onClick={handleClick}>
+      <button className={styles.btn} type="button" onClick={handleBtnClick}>
         확인
       </button>
     </div>

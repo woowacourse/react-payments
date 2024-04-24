@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   FormEvent,
   SetStateAction,
@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import useMoveToPage from '../../hooks/useMoveToPage';
 import { CardInfo } from '../../modules/useCardInfoReducer';
@@ -61,11 +61,14 @@ function CardForm(props: CardFormProps) {
   const goNextFormStep = (currentStep: number) => {
     setFormStep(currentStep + 1);
   };
-
-  const isCardCompleted = useMemo(
+  /**
+   * 카드 정보 입력이 왼료되었는지 확인
+   */
+  const isCardEnrollmentCompleted = useMemo(
     () =>
       Object.entries(cardInfo)
         .map(([key, value]) => {
+          // value의 타입에 따라서 입력 완료 검사 진행
           if (!value) return false;
           if (key === 'userName') return !!value;
           if (key === 'period') return value.month && value.year;
@@ -85,16 +88,16 @@ function CardForm(props: CardFormProps) {
 
   const handleClickOfSubmitBtn = (event: FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log('cardinfo', cardInfo);
-    // 페이지 이동
+    // 카드 등록 완료 페이지로 이동
     navigateToPage({ state: cardInfo });
-    // reset
+    // form, cardInfo 초기화
     resetFormStep();
     resetCardInfo();
   };
 
   /**
-   * URL 변경 시 실행될 함수
+   * url 변경 시 실행될 함수
+   * 카드 등록 페이지로 돌아오거나 새로고침 시 url에 form의 입력 필드의 값들이 포함되는 오류를 수정하기 위해 사용
    */
   const cleanUpURL = () => {
     const { search } = location;
@@ -146,7 +149,7 @@ function CardForm(props: CardFormProps) {
           />
         )}
       </fieldset>
-      {isCardCompleted && (
+      {isCardEnrollmentCompleted && (
         <button
           className={styles.submitBtn}
           type="submit"

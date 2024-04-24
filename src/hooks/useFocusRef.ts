@@ -15,7 +15,6 @@ function useFocusRef<T extends HTMLElement>(childIndex?: number) {
   };
 
   useEffect(() => {
-    console.log('f', focusTargetRef.current);
     focusOnTarget();
   }, [focusTargetRef.current]);
 

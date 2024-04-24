@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import {
   CARD_PASSWORD,
   CARD_PASSWORD_MESSAGE,
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
+  FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
 import { sliceText } from '../../utils/textChangerUtils';
@@ -25,17 +26,16 @@ function CardPassword(props: CardPasswordProps) {
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
-  const isValidate = (text: string) => CARD_PASSWORD_REGEXP.test(text);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     // password 업데이트
     const newPassword = sliceText(value, CARD_PASSWORD.length);
     setPassword(newPassword);
-    // 오류 업데이트
-    const isValidatedPassword = isValidate(newPassword);
 
+    // 오류 업데이트
+    const isValidatedPassword = CARD_PASSWORD_REGEXP.test(newPassword);
     setPasswordError(!isValidatedPassword);
+
     // cardInfo 업데이트
     if (!isValidatedPassword) return;
     editCardPassword(newPassword);
@@ -55,7 +55,7 @@ function CardPassword(props: CardPasswordProps) {
           label={CARD_PASSWORD_MESSAGE.label}
           placeholder={CARD_PASSWORD_MESSAGE.placeholder}
           value={password}
-          onChange={handleChange}
+          onChange={handlePasswordChange}
         />
       </div>
       <ErrorMessage>

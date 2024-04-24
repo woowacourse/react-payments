@@ -1,4 +1,4 @@
-import { ReactNode, useId } from 'react';
+import { ReactNode } from 'react';
 
 import styles from './style.module.css';
 
@@ -14,7 +14,6 @@ interface CardInputSectionProps {
 
 function CardInputSection(props: CardInputSectionProps) {
   const { title, subTitle, childrenLabel, children } = props;
-  const id = useId();
 
   return (
     <section className={styles.inputSection}>
@@ -23,12 +22,8 @@ function CardInputSection(props: CardInputSectionProps) {
         <p className={styles.subtitle}>{subTitle}</p>
       </div>
       <div className={styles.cardInputContainer}>
-        <label className={styles.label} htmlFor={id}>
-          {childrenLabel}
-        </label>
-        <div id={id} aria-description="input-group">
-          {children}
-        </div>
+        <p className={styles.label}>{childrenLabel}</p>
+        <div aria-description="input-group">{children}</div>
       </div>
     </section>
   );

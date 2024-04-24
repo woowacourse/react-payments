@@ -1,7 +1,6 @@
-import React, { ChangeEvent, useEffect, useId, useMemo } from 'react';
+import React, { ChangeEvent, useId, useMemo } from 'react';
 
 import styles from './style.module.css';
-import { CARD_PASSWORD_MESSAGE } from '../../constants';
 
 export type InputValue = string | number | readonly string[] | undefined;
 export type HandleInputValue = (

@@ -1,7 +1,7 @@
 .formContainer {
   position: relative;
   box-sizing: border-box;
-  height: calc(100vh - var(--card-preview-height));
+  height: calc(100vh - var(--card-preview-height) - var(--layout-padding));
   fieldset {
     height: calc(100% - var(--submit-btn-height) - 1rem);
     overflow: auto;

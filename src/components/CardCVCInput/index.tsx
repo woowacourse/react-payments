@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 import {
   CARD_CVC,
@@ -36,7 +30,7 @@ function CardCVCInput(props: CardCVCInputProps) {
 
   const validateCVC = (text: string) => CARD_CVC_REGEXP.test(text);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCVCChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     // cvc 업데이트
     setCVC(value);
@@ -51,7 +45,6 @@ function CardCVCInput(props: CardCVCInputProps) {
     }
   };
 
-  useEffect(() => {}, []);
   return (
     <CardInputSection
       title={CARD_CVC_MESSAGE.title}
@@ -65,7 +58,7 @@ function CardCVCInput(props: CardCVCInputProps) {
           error={cvcError}
           type="text"
           maxLength={CARD_CVC.length}
-          onChange={handleChange}
+          onChange={handleCVCChange}
           onBlur={() => setCardSide('front')}
           onFocus={() => setCardSide('back')}
           value={cvc}

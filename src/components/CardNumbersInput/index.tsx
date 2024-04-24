@@ -48,6 +48,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     if (CARD_MARK_REGEXP.master.test(numberText)) {
       return 'master';
     }
+
     return 'etc';
   }, [numbers]);
 
@@ -81,6 +82,15 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     return newNumbersError;
   };
 
+  const updateCardInfoAboutNumbers = (
+    newNumbersError: boolean[],
+    newNumbers: CardNumbers,
+  ) => {
+    editCardNumbers(
+      newNumbersError.map((error, i) => (error ? undefined : newNumbers[i])),
+    );
+    editCardMark(cardMark);
+  };
   /**
    * 카드 번호 입력 핸들러, 입력값에 따라 numbers,numbersError,cardInfo 상태를 업데이트함
    */
@@ -88,19 +98,19 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
-
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
+
     // numbers 업데이트
     const newNumbers = getNewNumbers(index, value);
     setNumbers(newNumbers);
+
     // numbersError 업데이트
     const newNumbersError = checkNumbersError(newNumbers);
     setNumbersError(newNumbersError);
+
     // cardInfo 변경
-    editCardNumbers(
-      newNumbersError.map((error, i) => (error ? undefined : newNumbers[i])),
-    );
-    editCardMark(cardMark);
+    updateCardInfoAboutNumbers(newNumbersError, newNumbers);
+
     // form 다음 단계 이동
     if (newNumbersError.every((i) => !i))
       goNextFormStep(CARD_FORM_STEP.numbers);
