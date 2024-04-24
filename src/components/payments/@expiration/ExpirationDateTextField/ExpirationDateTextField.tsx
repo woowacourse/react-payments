@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import TextField from '@components/common/TextField/TextField';
-import ExpirationDateInput from '@components/payments/ExpirationDateInput/ExpirationDateInput';
+import ExpirationDateInput from '@components/payments/@expiration/ExpirationDateInput/ExpirationDateInput';
 
 interface ExpirationDateTextFieldProps {
   month: string;
@@ -30,9 +30,9 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           isError={expirationError.isError}
           value={month}
           onAddExpirationDate={(event) => {
-            onAddExpirationDate('month', event.target.value)
+            onAddExpirationDate('month', event.target.value);
 
-            if(event.target.value.length === event.target.maxLength) inputRef.current?.focus()
+            if (event.target.value.length === event.target.maxLength) inputRef.current?.focus();
           }}
         />
         <ExpirationDateInput

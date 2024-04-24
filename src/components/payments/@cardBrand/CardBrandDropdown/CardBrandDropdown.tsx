@@ -2,12 +2,12 @@ import Dropdown from '@components/common/Dropdown/Dropdown';
 
 import type { CardBrand } from './CardBrandDropdown.type';
 import { CARD_BRAND_MAP } from './CardBrandDropdown.constant';
-import { isCardBrandName } from '@components/payments/CardBrandDropdown/CardBrandDropdown.util';
+import { isCardBrandName } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.util';
 
 export interface CardBrandDropdownProps {
   isOpen: boolean;
-  onToggleDropdown: () => void;
   currentCardBrand: CardBrand | '';
+  onToggleDropdown: () => void;
   onSelectCardBrand: (card: CardBrand) => void;
 }
 
@@ -17,7 +17,7 @@ const CardBrandDropdown: React.FC<CardBrandDropdownProps> = ({
   currentCardBrand,
   onSelectCardBrand,
 }) => {
-  const targetCardBrand = currentCardBrand ?  CARD_BRAND_MAP[currentCardBrand] : ''
+  const targetCardBrand = currentCardBrand ? CARD_BRAND_MAP[currentCardBrand] : '';
   return (
     <Dropdown isOpen={isOpen} onToggleDropdown={onToggleDropdown}>
       <Dropdown.Trigger value={targetCardBrand} placeholder="카드사를 선택하세요" />
@@ -27,7 +27,9 @@ const CardBrandDropdown: React.FC<CardBrandDropdownProps> = ({
             key={cardBrand}
             isSelected={currentCardBrand === cardKey}
             onHoverOption={() => {
-              if (isCardBrandName(cardKey)) onSelectCardBrand(cardKey);
+              if (isCardBrandName(cardKey)) {
+                onSelectCardBrand(cardKey);
+              }
             }}
             onSelectOption={() => {
               if (isCardBrandName(cardKey)) onSelectCardBrand(cardKey);

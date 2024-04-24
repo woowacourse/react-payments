@@ -1,4 +1,4 @@
-import ExpirationDateTextField from '@components/payments/ExpirationDateTextField/ExpirationDateTextField';
+import ExpirationDateTextField from '@components/payments/@expiration/ExpirationDateTextField/ExpirationDateTextField';
 
 import { generateArgTypes } from '@utils/generateArgTypes';
 

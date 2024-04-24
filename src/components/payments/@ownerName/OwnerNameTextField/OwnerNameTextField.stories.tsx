@@ -1,4 +1,4 @@
-import OwnerNameTextField from '@components/payments/OwnerNameTextField/OwnerNameTextField';
+import OwnerNameTextField from '@components/payments/@ownerName/OwnerNameTextField/OwnerNameTextField';
 
 import { generateArgTypes } from '@utils/generateArgTypes';
 

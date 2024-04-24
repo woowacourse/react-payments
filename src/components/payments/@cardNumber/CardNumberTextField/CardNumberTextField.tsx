@@ -1,5 +1,6 @@
 import TextField from '@components/common/TextField/TextField';
-import CardNumberInput from '@components/payments/CardNumberInput/CardNumberInput';
+import CardNumberInput from '@components/payments/@cardNumber/CardNumberInput/CardNumberInput';
+
 import { useFocusInputs, useUUID } from '@hooks/index';
 
 interface CardNumberTextFieldProps {

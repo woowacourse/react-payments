@@ -1,4 +1,6 @@
-import CardBrandDropdown, { CardBrandDropdownProps } from '@components/payments/CardBrandDropdown/CardBrandDropdown';
+import CardBrandDropdown, {
+  CardBrandDropdownProps,
+} from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown';
 
 import { Spacer, TextField } from '@components/common';
 

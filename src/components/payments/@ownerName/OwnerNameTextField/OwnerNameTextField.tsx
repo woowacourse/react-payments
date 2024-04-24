@@ -1,6 +1,6 @@
 import { Spacer, TextField } from '@components/common';
 
-import OwnerNameInput from '@components/payments/OwnerNameInput/OwnerNameInput';
+import OwnerNameInput from '@components/payments/@ownerName/OwnerNameInput/OwnerNameInput';
 
 interface OwnerNameTextFieldProps {
   ownerName: string;
