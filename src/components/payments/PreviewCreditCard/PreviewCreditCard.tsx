@@ -6,14 +6,20 @@ import styles from './PreviewCreditCard.module.css';
 import { Ellipse } from '@assets/images';
 
 interface PreviewCreditCardProps {
-  isDropdownOpen : boolean
+  isCardBrandChange: boolean;
   cardBrand: CardBrand | '';
   cardNumbers: string[];
   expiration: { year: string; month: string };
   ownerName: string;
 }
 
-const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ isDropdownOpen, cardNumbers, expiration, ownerName, cardBrand }) => {
+const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({
+  isCardBrandChange,
+  cardNumbers,
+  expiration,
+  ownerName,
+  cardBrand,
+}) => {
   const [firstCardNumbers, secondCardNumbers, thirdCardNumbers, fourthCardNumbers] = cardNumbers;
   const { month, year } = expiration;
 
@@ -22,7 +28,7 @@ const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ isDropdownOpen, c
   const formattedMonth = month.length === 1 ? month.padStart(2, '0') : month;
 
   return (
-    <div className={`${styles.creditCardContainer} ${!isDropdownOpen && styles[cardBrand]}`}>
+    <div className={`${styles.creditCardContainer} ${isCardBrandChange ? styles[cardBrand] : ''}`}>
       <div>
         <div className={styles.cardContainer}>
           <div className={`${styles.card} ${styles.icChip}`} />

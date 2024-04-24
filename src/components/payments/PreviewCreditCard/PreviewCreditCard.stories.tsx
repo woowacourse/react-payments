@@ -29,14 +29,14 @@ const meta = {
       ...generateArgTypes({ control: 'text' }),
       description: '소유자 이름',
     },
-    cardBrand : {
-      ...generateArgTypes({ control: 'radio', options : Object.keys(CARD_BRAND_MAP) }),
+    cardBrand: {
+      ...generateArgTypes({ control: 'radio', options: Object.keys(CARD_BRAND_MAP) }),
       description: '선택한 카드 브랜드',
     },
-    isDropdownOpen : {
+    isCardBrandChange: {
       ...generateArgTypes({ control: 'boolean' }),
-      description: '드롭다운 hover에 의해 카드 브랜드가 선택되지 않도록 하기 위한 옵션',
-    }
+      description: '지정된 카드 브랜드를 보여줄지의 여부',
+    },
   },
 
   tags: ['autodocs'],
@@ -55,8 +55,8 @@ export const Default: Story = {
   },
 
   args: {
-    isDropdownOpen : false,
-    cardBrand : '',
+    isCardBrandChange: false,
+    cardBrand: '',
     cardNumbers: ['', '', '', ''],
     expiration: { month: '', year: '' },
     ownerName: '',
@@ -73,8 +73,8 @@ export const VisaCard: Story = {
   },
 
   args: {
-    isDropdownOpen : false,
-    cardBrand : '',
+    isCardBrandChange: false,
+    cardBrand: '',
     cardNumbers: ['4123', '1231', '2342', '4535'],
     expiration: { month: '07', year: '28' },
     ownerName: 'SONJINYOUNG',
@@ -91,8 +91,8 @@ export const MasterCard: Story = {
   },
 
   args: {
-    isDropdownOpen : false,
-    cardBrand : '',
+    isCardBrandChange: false,
+    cardBrand: '',
     cardNumbers: ['5112', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
     ownerName: 'SONJINYOUNG',
@@ -109,8 +109,8 @@ export const NotCard: Story = {
   },
 
   args: {
-    isDropdownOpen : false,
-    cardBrand : '',
+    isCardBrandChange: false,
+    cardBrand: '',
     cardNumbers: ['1234', '3456', '7890', '0000'],
     expiration: { month: '05', year: '28' },
     ownerName: 'SONJINYOUNG',
@@ -128,7 +128,8 @@ export const BCCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'bcCard',
+    isCardBrandChange: true,
+    cardBrand: 'bcCard',
   },
 };
 
@@ -143,7 +144,8 @@ export const HanaCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'hanaCard',
+    isCardBrandChange: true,
+    cardBrand: 'hanaCard',
   },
 };
 
@@ -158,7 +160,8 @@ export const HyundaiCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'hyundaiCard',
+    isCardBrandChange: true,
+    cardBrand: 'hyundaiCard',
   },
 };
 
@@ -173,10 +176,10 @@ export const KakaoBank: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'kakaoBank',
+    isCardBrandChange: true,
+    cardBrand: 'kakaoBank',
   },
 };
-
 
 export const KookminCard: Story = {
   parameters: {
@@ -189,7 +192,8 @@ export const KookminCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'kookminCard',
+    isCardBrandChange: true,
+    cardBrand: 'kookminCard',
   },
 };
 
@@ -204,7 +208,8 @@ export const LotteCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'lotteCard',
+    isCardBrandChange: true,
+    cardBrand: 'lotteCard',
   },
 };
 
@@ -219,10 +224,10 @@ export const ShinhanCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'shinhanCard',
+    isCardBrandChange: true,
+    cardBrand: 'shinhanCard',
   },
 };
-
 
 export const WooriCard: Story = {
   parameters: {
@@ -235,6 +240,7 @@ export const WooriCard: Story = {
 
   args: {
     ...Default.args,
-    cardBrand : 'wooriCard',
+    isCardBrandChange: true,
+    cardBrand: 'wooriCard',
   },
 };
