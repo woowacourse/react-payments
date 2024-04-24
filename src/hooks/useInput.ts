@@ -24,9 +24,15 @@ const useInput = <T>(
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     preventInvalidInput(event, () => santizeValue(event.currentTarget.value));
-    setIsError(
-      !regExp.valid.test(event.currentTarget.value) || !condition(event.currentTarget.value),
-    );
+    const isError =
+      !regExp.valid.test(event.currentTarget.value) || !condition(event.currentTarget.value);
+
+    setIsError(isError);
+
+    const nextSibling = event.target.nextElementSibling as HTMLElement;
+    if (!isError && nextSibling) {
+      nextSibling.focus();
+    }
   };
 
   return { value, onChange, isError };
