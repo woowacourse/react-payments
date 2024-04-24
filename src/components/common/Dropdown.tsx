@@ -73,7 +73,6 @@ const SelectOptions = styled.ul<OptionProps>`
   width: 100%;
   overflow: hidden;
 
-  padding: 8px;
   border-radius: 8px;
   background-color: white;
   color: black;
@@ -82,10 +81,11 @@ const SelectOptions = styled.ul<OptionProps>`
 
 const Option = styled.li`
   font-size: 14px;
-  padding: 10px;
-  transition: background-color 0.2s ease-in;
+  padding: 12px;
+  color: #4f4f4f;
+  transition: background-color 0.1s ease-in;
   &:hover {
-    background-color: lightgray;
+    background-color: rgba(200, 200, 200, 0.4);
   }
 `;
 
