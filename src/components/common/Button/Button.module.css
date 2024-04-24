@@ -1,0 +1,23 @@
+.baseButton {
+  background-color: var(--grey-500);
+  color: var(--grey-100);
+}
+
+.buttonMedium {
+  width: 320px;
+  height: 44px;
+}
+
+.buttonLarge {
+  width: 375px;
+  height: 52px;
+}
+
+.floatingButton {
+  position: fixed;
+  bottom: 0;
+}
+
+.buttonBorder {
+  border-radius: 6px;
+}

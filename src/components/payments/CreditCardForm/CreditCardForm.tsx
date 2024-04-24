@@ -6,6 +6,8 @@ import {
 } from '@components/payments';
 import CardBrandTextField from '@components/payments/@cardBrand/CardBrandTextField/CardBrandTextField';
 import CardPasswordTextField from '@components/payments/@cardPassword/CardPasswordTextField/CardPasswordTextField';
+import CVCNumberTextField from '@components/payments/@cvcNumber/CVCNumberTextField/CVCNumberTextField';
+import Button from '@components/common/Button/Button';
 
 import {
   PreviewCreditCardStyleContainer,
@@ -17,7 +19,6 @@ import useCardBrandDropdown from '@hooks/creditCard/useCardBrandDropdown';
 import useChangeCVCNumber from '@hooks/creditCard/useChangeCVCNumber';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
 import useChangePassword from '@hooks/creditCard/useChangeCardPassword';
-import CVCNumberTextField from '@components/payments/@cvcNumber/CVCNumberTextField/CVCNumberTextField';
 
 const CreditCardForm: React.FC = () => {
   const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
@@ -39,6 +40,20 @@ const CreditCardForm: React.FC = () => {
   const { cardPassword, cardPasswordError, handleChangePassword } = useChangePassword();
 
   const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
+
+  const isMountButton =
+    cardNumbers.length === 4 &&
+    !isCardNumberError &&
+    cardBrand !== '' &&
+    !isDropdownOpen &&
+    (expiration.month + expiration.year).length === 4 &&
+    !expirationError.isError &&
+    ownerName.length > 1 &&
+    !ownerNameError.isError &&
+    cvcNumber.length === 3 &&
+    !cvcError.isError &&
+    cardPassword.length === 2 &&
+    !cardPasswordError.isError;
 
   return (
     <>
@@ -92,6 +107,11 @@ const CreditCardForm: React.FC = () => {
           cardNumberError={cardNumberError}
         />
       </TextFieldStyleContainer>
+      {isMountButton && (
+        <Button isFloating onClick={() => {}} size="large">
+          확인
+        </Button>
+      )}
     </>
   );
 };
