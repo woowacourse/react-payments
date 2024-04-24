@@ -28,9 +28,9 @@ const CardRegister = () => {
       <S.FlexWrapper>
         <CreditCardPreview
           cardType={checkCardBrand(inputsOf(cardNumbersReduceds))}
-          cardNumbers={inputsOf(expirationDateReduceds)}
+          cardNumbers={inputsOf(cardNumbersReduceds)}
           expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
-          ownerName={inputsOf(expirationDateReduceds)[0]}
+          ownerName={inputsOf(ownerNameReduceds)[0]}
         />
         <CardRegisterForm
           cardNumbersReduceds={cardNumbersReduceds}
