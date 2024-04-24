@@ -10,7 +10,6 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({ children, onClick, size = 'medium', isFloating }) => {
   const buttonSizeStyleClass = `button${generateUpperCase(size)}`;
 
-  console.log(buttonSizeStyleClass);
   const floatingButtonStyleClass = isFloating ? 'floatingButton' : 'buttonBorder';
   return (
     <button
