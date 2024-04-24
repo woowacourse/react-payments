@@ -3,7 +3,7 @@ import * as S from './CardPreview.style';
 
 import { CARD_NUMBER } from '../../constants/conditions';
 import { cardNumbersType } from '../../types/cardNumbers';
-import checkCardBrand from '../../utils/checkCardBrand';
+import checkCardGlobalBrand from '../../utils/checkCardGlobalBrand';
 
 interface CardPreviewProps {
   cardNumbers: cardNumbersType;
@@ -14,10 +14,10 @@ interface CardPreviewProps {
 
 export default function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
-    if (checkCardBrand(cardNumbers[0]) === 'Visa') {
+    if (checkCardGlobalBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
     }
-    if (checkCardBrand(cardNumbers[0]) === 'MasterCard') {
+    if (checkCardGlobalBrand(cardNumbers[0]) === 'MasterCard') {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
   };
