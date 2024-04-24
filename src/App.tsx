@@ -19,6 +19,7 @@ import {
   CVC_NUMBER,
   EXPIRATION_PERIOD,
   OWNER_NAME,
+  PASSWORD,
 } from './constants/cardSection';
 
 export type CardNumberState = {
@@ -36,11 +37,6 @@ const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
 function App() {
   const [isFlip, setIsFlip] = useState(false);
 
-  const twoDigitValidation = {
-    isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-    errorMessage: '2자리 숫자를 입력해주세요.',
-  };
-
   const monthOnChangeValidations: ValidationType[] = [
     {
       isError: (state: string) => state !== '' && !validate.isValidDigit(state),
@@ -49,7 +45,10 @@ function App() {
   ];
 
   const monthOnBlurValidations: ValidationType[] = [
-    twoDigitValidation,
+    {
+      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+      errorMessage: '2자리 숫자를 입력해주세요.',
+    },
     {
       isError: (state: string) =>
         state !== '' &&
@@ -96,7 +95,12 @@ function App() {
     inputState: year,
     inputChangeHandler: yearChangeHandler,
     error: yearError,
-  } = useInput(yearOnChangeValidations, [twoDigitValidation]);
+  } = useInput(yearOnChangeValidations, [
+    {
+      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+      errorMessage: '2자리 숫자를 입력해주세요.',
+    },
+  ]);
 
   const {
     inputState: name,
@@ -120,6 +124,26 @@ function App() {
       {
         isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
         errorMessage: '3자리 숫자를 입력해주세요.',
+      },
+    ],
+  );
+
+  const {
+    inputState: password,
+    inputChangeHandler: passwordChangeHandler,
+    inputFocusOutHandler: passwordFocusOutHandler,
+    error: passwordError,
+  } = useInput(
+    [
+      {
+        isError: (state: string) => state !== '' && !validate.isValidDigit(state),
+        errorMessage: '숫자만 입력 가능합니다.',
+      },
+    ],
+    [
+      {
+        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+        errorMessage: '2자리 숫자를 입력해주세요.',
       },
     ],
   );
@@ -273,6 +297,26 @@ function App() {
           </InputSection>
           <S.ErrorWrapper>
             <S.ErrorMessage>{cvcError.state && cvcError.message}</S.ErrorMessage>
+          </S.ErrorWrapper>
+        </S.Wrapper>
+
+        {/* 비밀번호 입력 */}
+        <S.Wrapper>
+          <InputSection title={PASSWORD.title} inputTitle={PASSWORD.inputTitle}>
+            <ScreenReaderOnlyLabel htmlFor={'password'} description={'비밀번호 입력'} />
+            <Input
+              id="password"
+              maxLength={2}
+              onChange={passwordChangeHandler}
+              onFocus={passwordFocusOutHandler}
+              isError={passwordError.state}
+              placeholder={PASSWORD.placeholder}
+              type="password"
+              value={password}
+            />
+          </InputSection>
+          <S.ErrorWrapper>
+            <S.ErrorMessage>{passwordError.state && passwordError.message}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
       </S.CardInfoContainer>

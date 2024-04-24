@@ -48,3 +48,10 @@ export const CVC_NUMBER = Object.freeze({
   inputTitle: 'CVC',
   placeholder: '123',
 });
+
+export const PASSWORD = Object.freeze({
+  title: '비밀번호를 입력해 주세요',
+  description: '앞의 2자리를 입력해주세요.',
+  inputTitle: '비밀번호 앞 2자리',
+  placeholder: '**',
+});
