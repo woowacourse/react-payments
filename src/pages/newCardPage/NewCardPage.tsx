@@ -46,6 +46,10 @@ const NewCardPage = () => {
     updateUserNameVisibility();
   }, [cardInfo.cardExpiration]);
 
+  useEffect(() => {
+    updateCVCVisibility();
+  }, [cardInfo.userName]);
+
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
     errorMessageCopy[index] = validateCardNumber(value);
@@ -154,6 +158,11 @@ const NewCardPage = () => {
         ...cardInfo,
         userName: value.toUpperCase(),
       });
+    }
+  };
+
+  const updateCVCVisibility = () => {
+    if (cardInfo.userName !== '' && creationStage < 5) {
       setCreationStage(creationStage + 1);
     }
   };
@@ -171,7 +180,6 @@ const NewCardPage = () => {
         ...cardInfo,
         cvc: value,
       });
-      setCreationStage(creationStage + 1);
     }
   };
 
@@ -188,7 +196,6 @@ const NewCardPage = () => {
         ...cardInfo,
         password: value,
       });
-      setCreationStage(creationStage + 1);
     }
   };
 
