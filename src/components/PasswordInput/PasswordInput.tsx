@@ -1,7 +1,13 @@
 import Field from "@/components/layout/Field/Field";
 import Input from "../common/Input/Input";
+import { ChangeEvent } from "react";
 
-const PasswordInput = () => {
+interface PasswordInputProps {
+  password: { value: string; isDone: boolean };
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const PasswordInput = ({ password, onChange }: PasswordInputProps) => {
   return (
     <Field
       title="비밀번호를 입력해 주세요"
@@ -11,12 +17,12 @@ const PasswordInput = () => {
     >
       <Input
         name="password"
-        value=""
-        placeholder=""
-        isError={false}
+        value={password.value}
+        placeholder="비밀번호"
         maxLength={2}
         isPassword={true}
         autoFocus
+        onChange={onChange}
       />
     </Field>
   );

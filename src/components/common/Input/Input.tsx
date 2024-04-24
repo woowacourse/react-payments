@@ -1,17 +1,11 @@
-import {
-  HTMLAttributes,
-  ChangeEvent,
-  FocusEvent,
-  RefObject,
-  KeyboardEvent,
-} from "react";
+import { HTMLAttributes, ChangeEvent, FocusEvent, RefObject, KeyboardEvent } from "react";
 
 import styles from "./Input.module.css";
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
   name: string;
   value: string;
-  isError: boolean;
   placeholder: string;
+  isError?: boolean;
   isRequired?: boolean;
   maxLength?: number;
   isPassword?: boolean;
@@ -25,9 +19,9 @@ export default function Input({
   name,
   value,
   placeholder,
-  isError,
   maxLength,
   inputRef,
+  isError = false,
   autoFocus = false,
   isRequired = false,
   isPassword = false,

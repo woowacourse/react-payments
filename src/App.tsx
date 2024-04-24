@@ -10,7 +10,8 @@ import useOwnerName from "@/hooks/useOwnerName";
 import PasswordInput from "@/components/PasswordInput/PasswordInput";
 import CVCInput from "@/components/CVCInput/CVCInput";
 import CardCompany from "@/components/CardCompany/CardCompany";
-import { ChangeEvent, useRef, useState, KeyboardEvent } from "react";
+import SubmitButton from "./components/SubmitButton/SubmitButton";
+import { ChangeEvent, useRef, useState, KeyboardEvent, FormEvent } from "react";
 import { ERRORS } from "@/constants/messages";
 
 const App = () => {
@@ -44,6 +45,19 @@ const App = () => {
     isDone: false,
   });
   const [CVCShowNextInput, setCVCShowNextInput] = useState<boolean>(false);
+  const [password, setPassword] = useState({
+    value: "",
+    isDone: false,
+  });
+
+  const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setPassword({
+      ...password,
+      value,
+      isDone: value.length === 2,
+    });
+  };
 
   const changeCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -53,16 +67,24 @@ const App = () => {
 
   const CVCHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setCVCShowNextInput(true);
+      event.preventDefault();
+      if (CVC.value.length === 3) {
+        setCVCShowNextInput(true);
+      } else {
+        setCVC({ ...CVC, isError: true, errorMessage: "세 자리 숫자를 입력해주세요" });
+      }
     }
   };
 
   const changeCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+
     if (Number.isInteger(Number(value))) {
       setCVC({
         ...CVC,
         value,
+        isError: false,
+        errorMessage: "",
         isDone: value.length === 3,
       });
       return;
@@ -74,46 +96,30 @@ const App = () => {
     });
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <div className={styles.app}>
       <CardPreview
         cardNumbers={{
-          first: cardNumbers.data.first.isDone
-            ? cardNumbers.data.first.value
-            : "",
-          second: cardNumbers.data.second.isDone
-            ? cardNumbers.data.second.value
-            : "",
-          third: cardNumbers.data.third.isDone
-            ? cardNumbers.data.third.value
-            : "",
-          fourth: cardNumbers.data.fourth.isDone
-            ? cardNumbers.data.fourth.value
-            : "",
+          first: cardNumbers.data.first.isDone ? cardNumbers.data.first.value : "",
+          second: cardNumbers.data.second.isDone ? cardNumbers.data.second.value : "",
+          third: cardNumbers.data.third.isDone ? cardNumbers.data.third.value : "",
+          fourth: cardNumbers.data.fourth.isDone ? cardNumbers.data.fourth.value : "",
         }}
         expirationDate={{
-          month: expirationDate.data.month.isDone
-            ? expirationDate.data.month.value
-            : "",
-          year: expirationDate.data.year.isDone
-            ? expirationDate.data.year.value
-            : "",
+          month: expirationDate.data.month.isDone ? expirationDate.data.month.value : "",
+          year: expirationDate.data.year.isDone ? expirationDate.data.year.value : "",
         }}
         ownerName={{
-          ownerName: ownerName.data.ownerName.isDone
-            ? ownerName.data.ownerName.value
-            : "",
+          ownerName: ownerName.data.ownerName.isDone ? ownerName.data.ownerName.value : "",
         }}
       />
-      <form>
-        {CVCShowNextInput && <PasswordInput />}
-        {
-          <CVCInput
-            CVC={CVC}
-            changeCVC={changeCVC}
-            onKeyDown={CVCHandleKeyDown}
-          />
-        }
+      <form onSubmit={handleSubmit}>
+        {CVCShowNextInput && <PasswordInput password={password} onChange={changePassword} />}
+        {<CVCInput CVC={CVC} changeCVC={changeCVC} onKeyDown={CVCHandleKeyDown} />}
         {/* {ownerNameNextInput && <CVCInput CVC={CVC} changeCVC={changeCVC} />}
         {
           <OwnerNameInput
@@ -144,6 +150,7 @@ const App = () => {
           blurCardNumbers={blurCardNumbers}
           refs={CardNumbersRefs}
         /> */}
+        {CVCShowNextInput && <SubmitButton />}
       </form>
     </div>
   );

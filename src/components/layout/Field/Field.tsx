@@ -4,8 +4,8 @@ import React from "react";
 interface FieldProps {
   title: string;
   description?: string;
-  labelText: string;
-  errorMessage: string;
+  labelText?: string;
+  errorMessage?: string;
   children: React.ReactNode;
 }
 

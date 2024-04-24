@@ -12,14 +12,14 @@ const CVCInput = ({ CVC, changeCVC, onKeyDown }: CVCInputProps) => {
   return (
     <Field
       title="CVC 번호를 입력해 주세요"
-      labelText="입력 완료 후 엔터 키를 입력해주세요"
+      description="세자리 숫자를 입력한 후 엔터 키를 입력해주세요"
       errorMessage={CVC.errorMessage}
     >
       <Input
         name="CVC"
         value={CVC.value}
         placeholder="CVC"
-        isError={false}
+        isError={CVC.isError}
         maxLength={3}
         autoFocus={true}
         onChange={changeCVC}
