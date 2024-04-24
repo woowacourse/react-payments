@@ -9,11 +9,15 @@ interface ExpiryDateControl {
   month: {
     value: MM;
     setValue: React.Dispatch<React.SetStateAction<string>>;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validateValue: () => void;
     errorStatus: IErrorStatus;
   };
   year: {
     value: YY;
     setValue: React.Dispatch<React.SetStateAction<string>>;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validateValue: () => void;
     errorStatus: IErrorStatus;
   };
 }
@@ -37,9 +41,6 @@ const useExpiryDate = ({ month, year }: ExpiryDateControl) => {
     bringErrorStatus: bringYearErrorStatus,
   } = useDisplayingErrorStatus(year.errorStatus);
 
-  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => month.setValue(e.target.value);
-  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => year.setValue(e.target.value);
-
   const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { isFormatted, value } = formatMonth(e.target.value);
 
@@ -55,8 +56,8 @@ const useExpiryDate = ({ month, year }: ExpiryDateControl) => {
   const onYearBlur = () => bringYearErrorStatus();
 
   return {
-    onMonthChange,
-    onYearChange,
+    onMonthChange: month.onChange,
+    onYearChange: year.onChange,
     onMonthBlur,
     onYearBlur,
     isMonthError,

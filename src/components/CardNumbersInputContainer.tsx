@@ -9,8 +9,9 @@ type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 export interface CardNumbersInputContainerProps {
   value: Record<CardNumberKey, string>;
   setValue: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
+  generateOnChange: (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateValue: (key: CardNumberKey, value: string) => void;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
-  register: (key: CardNumberKey) => { value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void };
 }
 
 const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
@@ -19,7 +20,7 @@ const INPUT_TYPE = {
   password: 'password',
 };
 
-export default function CardNumbersContainer({ value, errorStatus, register }: CardNumbersInputContainerProps) {
+export default function CardNumbersContainer({ value, generateOnChange, errorStatus }: CardNumbersInputContainerProps) {
   const {
     displayingErrorStatus: { isError, errorMessage },
     bringErrorStatus,
@@ -40,7 +41,7 @@ export default function CardNumbersContainer({ value, errorStatus, register }: C
 
           return (
             <Input
-              {...register(key)}
+              onChange={generateOnChange(key)}
               key={key}
               id={`${key}-card-numbers-input`}
               isError={isError[key]}

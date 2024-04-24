@@ -21,7 +21,7 @@ const useDisplayingErrorStatus = <T extends IAbstractErrorStatus>(origin: T) => 
         bringErrorStatus();
       }
     } else {
-      const displayingErrorExists = Object.values(origin.isError).some(isError => isError);
+      const displayingErrorExists = Object.values(displayingErrorStatus.isError).some(isError => isError);
       const originErrorNotExists = Object.values(origin.isError).every(isError => !isError);
       const errorDisappeared = displayingErrorExists && originErrorNotExists;
       if (errorDisappeared) {

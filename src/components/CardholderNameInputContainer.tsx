@@ -6,16 +6,26 @@ import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 interface CardholderNameInputContainerProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateValue: (targetValue: string) => void;
   errorStatus: { errorMessage: string; isError: boolean };
 }
 
-const CardholderNameInputContainer = ({ value, setValue, errorStatus }: CardholderNameInputContainerProps) => {
+const CardholderNameInputContainer = ({
+  value,
+  setValue,
+  validateValue,
+  errorStatus,
+}: CardholderNameInputContainerProps) => {
   const {
     displayingErrorStatus: { isError, errorMessage },
     bringErrorStatus,
   } = useDisplayingErrorStatus(errorStatus);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validateValue(e.target.value);
+    setValue(e.target.value.toUpperCase());
+  };
 
   return (
     <div>

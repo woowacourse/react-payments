@@ -6,16 +6,16 @@ import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 export interface IPasswordInputContainerProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateValue: () => void;
   errorStatus: { errorMessage: string; isError: boolean };
 }
 
-export default function PasswordInputContainer({ value, setValue, errorStatus }: IPasswordInputContainerProps) {
+export default function PasswordInputContainer({ value, onChange, errorStatus }: IPasswordInputContainerProps) {
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
   } = useDisplayingErrorStatus(errorStatus);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   return (
     <div>

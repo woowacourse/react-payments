@@ -9,9 +9,12 @@ const useValidation = (state: string, validate: TValidate) => {
     isError: false,
   });
 
-  const validateValue = useCallback(() => {
-    setErrorStatus(validate(state));
-  }, [state, validate]);
+  const validateValue = useCallback(
+    (targetValue = state) => {
+      setErrorStatus(validate(targetValue));
+    },
+    [state, validate],
+  );
 
   return { errorStatus, validateValue };
 };

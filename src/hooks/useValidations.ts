@@ -16,6 +16,7 @@ const useValidations = <T extends Record<string, string>>(state: T, validate: TV
     (key: keyof T, targetValue: string = state[key]) => {
       const { isError, errorMessage } = validate(targetValue);
 
+      console.log(targetValue);
       setErrorStatus({
         isError: { ...errorStatus.isError, [key]: isError },
         errorMessage,

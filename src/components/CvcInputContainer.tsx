@@ -6,16 +6,16 @@ import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
 export interface ICvcInputContainerProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateValue: () => void;
   errorStatus: { errorMessage: string; isError: boolean };
 }
 
-const CvcInputContainer = ({ value, setValue, errorStatus }: ICvcInputContainerProps) => {
+const CvcInputContainer = ({ value, onChange, errorStatus }: ICvcInputContainerProps) => {
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
   } = useDisplayingErrorStatus(errorStatus);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   return (
     <div>

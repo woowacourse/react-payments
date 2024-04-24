@@ -10,12 +10,16 @@ type YY = string;
 interface CardExpiryDateInputContainerProps {
   month: {
     value: MM;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: React.Dispatch<React.SetStateAction<MM>>;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validateValue: () => void;
     errorStatus: IErrorStatus;
   };
   year: {
     value: YY;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    setValue: React.Dispatch<React.SetStateAction<YY>>;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validateValue: () => void;
     errorStatus: IErrorStatus;
   };
 }
