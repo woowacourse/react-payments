@@ -4,26 +4,24 @@ import { CARD_OPTIONS } from '../../constants/card';
 import ArrowUp from '../../assets/images/arrow_up.svg?react';
 import ArrowDown from '../../assets/images/arrow_down.svg?react';
 
-const Dropdown = ({ options }: { options: typeof CARD_OPTIONS }) => {
-  const [currentValue, setCurrentValue] = useState<string>('');
-  const [isOpen, setIsOpen] = useState(false);
+interface DropdownProps {
+  value: string;
+  handleChange: (e: React.MouseEvent<HTMLLIElement>) => void;
+}
 
-  const handleClickOption = (e: React.MouseEvent<HTMLLIElement>) => {
-    const target = e.target as HTMLLIElement;
-    if (!target.dataset.value) return;
-    setCurrentValue(target.dataset.value);
-  };
+const Dropdown = ({ value, handleChange }: DropdownProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <SelectBox $show={isOpen} onClick={() => setIsOpen(prev => !prev)}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Label>{currentValue || '선택해주세요'} </Label>
+      <LabelWrapper>
+        <SelectedText $value={value}>{value || '선택해주세요'} </SelectedText>
         {isOpen ? <ArrowUp /> : <ArrowDown />}
-      </div>
+      </LabelWrapper>
       {isOpen && (
         <SelectOptions $show={isOpen}>
-          {options.map(data => (
-            <Option key={data.value} data-value={data.value} onClick={handleClickOption}>
+          {CARD_OPTIONS.map(data => (
+            <Option key={data.value} data-value={data.value} onClick={handleChange}>
               {data.label}
             </Option>
           ))}
@@ -37,6 +35,10 @@ interface OptionProps {
   $show: boolean;
 }
 
+interface SelectedTextProps {
+  $value: string;
+}
+
 const SelectBox = styled.div<OptionProps>`
   position: relative;
   width: 100%;
@@ -48,12 +50,19 @@ const SelectBox = styled.div<OptionProps>`
   cursor: pointer;
 `;
 
-const Label = styled.label`
+const LabelWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SelectedText = styled.span<SelectedTextProps>`
   font-size: 14px;
   margin-left: 4px;
   text-align: center;
   user-select: none;
   cursor: pointer;
+  color: ${props => (props.$value ? 'black' : '#acacac')};
 `;
 
 const SelectOptions = styled.ul<OptionProps>`
