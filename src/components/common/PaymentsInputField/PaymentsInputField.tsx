@@ -10,6 +10,7 @@ interface PaymentsInputFieldProps {
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: number;
+  autoFocus: boolean
 }
 
 const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
@@ -23,7 +24,14 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
     handleOnFocus,
     className,
     width,
+    autoFocus
   } = props;
+
+  const handleKeyDownEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur()
+    }
+  }
 
   return (
     <Input
@@ -36,6 +44,8 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
       value={value}
       onChange={handleValueChange}
       width={width}
+      autoFocus={autoFocus}
+      onKeyDown={(e) => handleKeyDownEnter(e)}
     />
   );
 };
