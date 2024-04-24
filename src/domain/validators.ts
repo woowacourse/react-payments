@@ -32,3 +32,7 @@ export const isNotEmptyString = (value: string) => {
 export const isValidCVC = (value: string) => {
   return value.length === 3;
 };
+
+export const isValidPassword = (value: string) => {
+  return value.length === 2;
+};

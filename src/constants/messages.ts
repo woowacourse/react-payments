@@ -8,6 +8,7 @@ export const ERRORS = {
   isNotAlphabet: '알파벳만 입력 가능합니다.',
   invalidOwnerName: '이름을 입력해 주세요.',
   invalidCardIssuer: '카드사를 입력해 주세요.',
+  invalidPassword: '비밀번호를 입력해 주세요.',
 } as const;
 
 const CARD_NUMBER = {

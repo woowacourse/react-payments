@@ -11,6 +11,7 @@ interface InputProps {
   isError: boolean;
   isRequired?: boolean;
   maxLength?: number;
+  type?: 'text' | 'password';
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -19,6 +20,7 @@ export default function Input({
   name,
   id,
   value,
+  type = 'text',
   placeholder,
   maxLength,
   isError,
@@ -28,8 +30,9 @@ export default function Input({
 }: InputProps) {
   return (
     <input
-      name={name}
       id={id}
+      name={name}
+      type={type}
       placeholder={placeholder}
       value={value}
       maxLength={maxLength}
