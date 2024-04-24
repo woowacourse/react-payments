@@ -1,29 +1,29 @@
-import {
-  CardExpiredDate as CardExpiredDateType,
-  CardNumbers as CardNumbersType,
-} from '../hooks/useCardInfo';
-import { Dispatch, SetStateAction } from 'react';
-
-import CardExpiredDate from './CardExpiredDate';
 import CardHolder from './CardHolder';
 import CardNumbers from './CardNumbers';
+import ExpiredDate from './CardExpiredDate';
+import { ValidateInput } from '../hooks/useValidateInput';
 import styled from '@emotion/styled';
 
 interface props {
-  setCardNumbers: React.Dispatch<React.SetStateAction<CardNumbersType>>;
-  setCardExpiredDate: Dispatch<SetStateAction<CardExpiredDateType>>;
-  setCardHolder: Dispatch<SetStateAction<string>>;
+  cardNumberValidateInputs: ValidateInput[];
+  expiredDateMonthValidateInput: ValidateInput;
+  expiredDateYearValidateInput: ValidateInput;
+  cardHolderValidateInput: ValidateInput;
 }
 export default function CardForm({
-  setCardNumbers,
-  setCardExpiredDate,
-  setCardHolder,
+  cardNumberValidateInputs,
+  expiredDateMonthValidateInput,
+  expiredDateYearValidateInput,
+  cardHolderValidateInput,
 }: props) {
   return (
     <CardFormContainer>
-      <CardNumbers setCardNumbers={setCardNumbers} />
-      <CardExpiredDate setCardExpiredDate={setCardExpiredDate} />
-      <CardHolder setCardHolder={setCardHolder} />
+      <CardNumbers partValidateInputs={cardNumberValidateInputs} />
+      <ExpiredDate
+        monthValidateInput={expiredDateMonthValidateInput}
+        yearValidateInput={expiredDateYearValidateInput}
+      />
+      <CardHolder validateInput={cardHolderValidateInput} />
     </CardFormContainer>
   );
 }

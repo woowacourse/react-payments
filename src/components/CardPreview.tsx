@@ -21,8 +21,12 @@ interface cardInfoProps {
 }
 
 export default function CardPreview(props: cardInfoProps) {
-  const { cardNumbers, cardIssuer, cardExpiredDate, cardHolder } =
-    props.cardInfo;
+  const {
+    cardNumbers,
+    cardIssuer,
+    expiredDate: cardExpiredDate,
+    cardHolder,
+  } = props.cardInfo;
 
   return (
     <CardPreviewContainer>

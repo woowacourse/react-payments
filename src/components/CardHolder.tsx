@@ -1,28 +1,19 @@
-import {
-  ERROR_MESSAGE,
-  PAYMENTS_INPUT_MESSAGE,
-  PAYMENTS_MESSAGE,
-} from '../constants/message';
+import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from '../constants/message';
 
-import { BOUND } from '../constants/number';
 import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
-import { isOnlyEnglishOrSpace } from '../domain/checkIsValid';
-import useValidateInput from '../hooks/useValidateInput';
+import { ValidateInput } from '../hooks/useValidateInput';
+
+interface props {
+  validateInput: ValidateInput;
+}
 
 export default function CardHolder({
-  setCardHolder,
-}: {
-  setCardHolder: React.Dispatch<React.SetStateAction<string>>;
-}) {
-  const {
-    input: holder,
-    onChange,
-    errorMessage,
-  } = useValidateInput({ ...useValidateInputProps, setHook: setCardHolder });
-
+  validateInput: { inputValue: holder, onChange, errorMessage },
+}: props) {
+  const isError = Boolean(errorMessage);
   return (
     <section>
       <SectionTitle title={PAYMENTS_MESSAGE.cardHolderTitle} />
@@ -35,23 +26,11 @@ export default function CardHolder({
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
             onChange={onChange}
             value={holder}
-            borderColor={errorMessage ? 'error' : undefined}
-            aria-invalid={!(errorMessage === '')}
+            borderColor={isError ? 'error' : undefined}
+            aria-invalid={!isError}
           />
         </TextInputContainer>
       </FormItem>
     </section>
   );
 }
-
-const useValidateInputProps = {
-  decorateValue: (string: string) => string.toUpperCase(),
-  validatorPropsArray: [
-    {
-      checkIsValid: isOnlyEnglishOrSpace,
-      shouldReflect: false,
-      errorMessage: ERROR_MESSAGE.notEnglishOrSpace,
-    },
-  ],
-  maxLength: BOUND.cardHolderLengthUpper,
-};
