@@ -6,6 +6,7 @@ export const ERROR_MESSAGE = {
     expired: '유효 기간이 만료되었습니다. 유효한 기간을 입력해 주세요.',
   },
   userName: '소유자 이름은 영문과 공백만 입력 가능합니다.',
+  cardIssuer: '카드사를 선택해 주세요.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {

@@ -19,7 +19,7 @@ function UserNameInput({
   nameError,
   onNameChange,
 }: CardUserNameInputProps) {
-  const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
+  const { title, subTitle, label, placeholder } = CARD_USER_FORM_MESSAGE;
 
   const getErrorMessage = () => {
     if (!nameError) {
@@ -38,7 +38,7 @@ function UserNameInput({
               name="name"
               value={userName}
               maxLength={maxLength}
-              placeholder={namePlaceholder}
+              placeholder={placeholder}
               isError={nameError}
               onChange={(event) => onNameChange(event.target.value)}
             />

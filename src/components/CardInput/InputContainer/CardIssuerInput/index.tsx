@@ -1,5 +1,6 @@
-import { CARD_ISSUER_FORM_MESSAGE } from '../../../../constants';
+import { CARD_ISSUER_FORM_MESSAGE, ERROR_MESSAGE } from '../../../../constants';
 import Select from '../../../common/Select';
+import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
 import InputWrap from '../../InputWrap';
 
@@ -8,7 +9,7 @@ import styles from './style.module.css';
 interface CardIssuerInputProps {
   cardIssuerError: boolean;
   onCardIssuerChange: (value: string) => void;
-  onBlurCardIssuerSelect: () => boolean;
+  onBlurCardIssuerSelect: () => void;
 }
 
 function CardIssuerInput({
@@ -18,6 +19,13 @@ function CardIssuerInput({
 }: CardIssuerInputProps) {
   const { title, subTitle, label, placeholder, options } =
     CARD_ISSUER_FORM_MESSAGE;
+
+  const getErrorMessage = () => {
+    if (!cardIssuerError) {
+      return;
+    }
+    return ERROR_MESSAGE.cardIssuer;
+  };
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -32,6 +40,7 @@ function CardIssuerInput({
           />
         </div>
       </InputField>
+      <InputErrorMessage errorMessage={getErrorMessage()} />
     </InputWrap>
   );
 }

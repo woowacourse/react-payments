@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useCardIssuer() {
+function useCardIssuerInput() {
   const [cardIssuer, setCardIssuer] = useState('');
   const [cardIssuerError, setCardIssuerError] = useState(false);
 
@@ -22,4 +22,4 @@ function useCardIssuer() {
   };
 }
 
-export default useCardIssuer;
+export default useCardIssuerInput;

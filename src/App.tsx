@@ -9,7 +9,7 @@ import {
 } from './components';
 import { INPUT_LENGTH } from './constants';
 import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
-import useCardIssuerInput from './hooks/useCardIssuer';
+import useCardIssuerInput from './hooks/useCardIssuerInput';
 import useCardNumbersInput from './hooks/useCardNumbersInput';
 import useUserNameInput from './hooks/useUserNameInput';
 
