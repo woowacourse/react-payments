@@ -37,9 +37,9 @@ const getCardImage = (string?: string) => {
 };
 
 const CreditCard = () => {
-  const cardNumbers = useContextWrapper(CardNumbersContext)![0];
-  const { month, year } = useContextWrapper(CardValidityPeriodContext)![0];
-  const cardOwnerInfo = useContextWrapper(CardOwnerInfoContext)![0];
+  const cardNumbers = useContextWrapper(CardNumbersContext)[0];
+  const { month, year } = useContextWrapper(CardValidityPeriodContext)[0];
+  const cardOwnerInfo = useContextWrapper(CardOwnerInfoContext)[0];
   const cardImage = getCardImage(cardNumbers?.firstNumbers);
 
   return (
