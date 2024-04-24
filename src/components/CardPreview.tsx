@@ -1,20 +1,10 @@
-import { CardInformation, CardIssuer } from "../types/cardInformation";
+import { CardIssuer, cardIssuerMapper } from "../constants/cardIssuers";
 import { useEffect, useState } from "react";
 
+import { CardInformation } from "../types/cardInformation";
 import Mastercard from "../static/Mastercard.png";
 import Visa from "../static/Visa.png";
 import styled from "styled-components";
-
-const cardIssuerColorMapper: Record<CardIssuer, string> = {
-  "bc-card": "rgba(240, 70, 81, 1)",
-  "shinhan-card": "rgba(0, 70, 255, 1)",
-  "kakaobank-card": "rgba(255, 230, 0, 1)",
-  "hyundai-card": "rgba(0, 0, 0, 1)",
-  "woori-card": "rgba(0, 123, 200, 1)",
-  "lotte-card": "rgba(237, 28, 36, 1)",
-  "hana-card": "rgba(0, 148, 144, 1)",
-  "kb-card": "rgba(106, 96, 86, 1)",
-};
 
 const CardContainer = styled.div<{
   cardIssuer: CardIssuer | "";
@@ -24,7 +14,7 @@ const CardContainer = styled.div<{
   background: ${(props) =>
     props.cardIssuer === ""
       ? "rgba(51, 51, 51, 1)"
-      : cardIssuerColorMapper[props.cardIssuer]};
+      : cardIssuerMapper[props.cardIssuer].color};
   border-radius: 4px;
   color: rgba(255, 255, 255, 1);
 `;
