@@ -22,43 +22,43 @@ export const executeValidators = (
   return result;
 };
 
-export const isInvalidNumber = (value: string) => {
+export const isCardNumber = (value: string) => {
   if (value.length !== 0 && !Number.isInteger(Number(value))) {
-    return { isError: true, message: ERROR.NOT_NUMBER };
+    return ERROR.NOT_NUMBER;
   }
 
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidCardNumberLength = (value: string) => {
+export const isCardNumberLength = (value: string) => {
   if (value.length !== CARD_INFO.NUMBER_LENGTH) {
-    return { isError: true, message: ERROR.CARD_NUMBER_LENGTH };
+    return ERROR.CARD_NUMBER_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidDateLength = (value: string) => {
+export const isCardDateLength = (value: string) => {
   if (value.length !== CARD_INFO.DATE_LENGTH) {
-    return { isError: true, message: ERROR.CARD_DATE_LENGTH };
+    return ERROR.CARD_DATE_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidMonth = (value: string) => {
+export const isCardMonth = (value: string) => {
   if (
     Number(value) < CARD_INFO.MONTH_START ||
     Number(value) > CARD_INFO.MONTH_END
   ) {
-    return { isError: true, message: ERROR.NOT_MONTH };
+    return ERROR.NOT_MONTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidYear = (value: string) => {
+export const isCardYear = (value: string) => {
   if (Number(value) < CARD_INFO.VALID_YEAR) {
-    return { isError: true, message: ERROR.NOT_YEAR };
+    return ERROR.NOT_YEAR;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
 export const isUpperCase = (name: string) => {
