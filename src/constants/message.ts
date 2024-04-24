@@ -27,5 +27,22 @@ export const CARD_USER_FORM_MESSAGE = {
   title: '카드 소유자 이름을 입력해 주세요',
   subTitle: '',
   label: '소유자 이름',
-  namePlaceholder: '소유자 이름',
+  placeholder: '소유자 이름',
+};
+
+export const CARD_ISSUER_FORM_MESSAGE = {
+  title: '카드사를 선택해 주세요',
+  subTitle: '현재 국내 카드사만 가능합니다.',
+  label: '',
+  placeholder: '카드사를 선택해주세요',
+  options: [
+    'BC카드',
+    '신한카드',
+    '카카오뱅크',
+    '현대카드',
+    '우리카드',
+    '롯데카드',
+    '하나카드',
+    '국민카드',
+  ],
 };
