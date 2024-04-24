@@ -1,12 +1,13 @@
 import styles from "./App.module.css";
 import Form from "./components/common/Form/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShelfSection from "./components/common/ShelfSection/ShelfSection";
 import CardNumbersInputField from "./components/Field/CardNumbersInputField/CardNumbersInputField";
 import CardExpirationDateInputField from "./components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
 import CardOwnerNameInputField from "./components/Field/CardOwnerNameInputField/CardOwnerNameInputField";
 import Card from "./components/Card/Card";
 import { CARD_NUMBER_UNIT_LENGTH } from "./constants";
+import SubmitButton from "./components/\bButton/SubmitButton";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(() =>
@@ -17,8 +18,11 @@ function App() {
     month: "",
     year: "",
   });
-
   const [ownerName, setOwnerName] = useState<string>("");
+
+  const [isCompletedSections, setIsCompletedSections] = useState<boolean[]>(
+    () => new Array(5).fill(false)
+  );
 
   return (
     <main className={styles.background}>
@@ -32,6 +36,8 @@ function App() {
             <CardNumbersInputField
               cardNumbers={cardNumbers}
               setCardNumbers={setCardNumbers}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
             />
           </ShelfSection>
 
@@ -49,6 +55,7 @@ function App() {
             />
           </ShelfSection>
         </Form>
+        <SubmitButton isCompletedSections={isCompletedSections}></SubmitButton>
       </section>
     </main>
   );

@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../App.module.css";
 
@@ -7,7 +13,7 @@ import {
   CARD_NUMBER_UNIT_LENGTH,
 } from "../../../constants";
 
-interface cardNumberErrorMessage {
+interface CardNumberErrorMessage {
   index: number;
   message: string;
 }
@@ -15,15 +21,19 @@ interface cardNumberErrorMessage {
 export default function CardNumbersInputField({
   cardNumbers,
   setCardNumbers,
+  isCompletedSections,
+  setIsCompletedSections,
 }: {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  isCompletedSections: boolean[];
+  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
-    cardNumberErrorMessage[]
+    CardNumberErrorMessage[]
   >([]);
   const [nanErrorMessage, setNanErrorMessage] =
-    useState<cardNumberErrorMessage | null>(null);
+    useState<CardNumberErrorMessage | null>(null);
 
   const updateErrorMessage = (index: number, message: string) => {
     const errorMessageIndex = numberLengthErrorMessages.findIndex(
@@ -57,16 +67,24 @@ export default function CardNumbersInputField({
 
     if (e.target.value.length < 4) {
       updateErrorMessage(index, "4개의 숫자를 입력해주세요.");
+    } else {
+      removeErrorMessage(index);
     }
 
     setNanErrorMessage(null);
 
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
-    setCardNumbers(updatedCardNumbers);
-
-    if (e.target.value.length === 4) removeErrorMessage(index);
+    setCardNumbers(updatedCardNumbers); // 여기서만 사용
   };
+
+  useEffect(() => {
+    const updatedIsCompletedSections = [...isCompletedSections];
+    updatedIsCompletedSections[0] = cardNumbers.every(
+      (num) => num.length === 4
+    );
+    setIsCompletedSections(updatedIsCompletedSections);
+  }, [cardNumbers, setIsCompletedSections]); // cardNumbers와 setIsCompletedSections를 의존성으로 추가
 
   const checkError = (index: number): boolean => {
     const numberLengthError = numberLengthErrorMessages.some(
@@ -82,6 +100,7 @@ export default function CardNumbersInputField({
       <div className={styles.horizon__gap__container}>
         {cardNumbers.map((cardNumber, i) => (
           <Input
+            key={i}
             onChange={(e) => handleChange(e, i)}
             placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
             maxLength={CARD_NUMBER_UNIT_LENGTH}
