@@ -8,8 +8,7 @@ import Input from './components/composables/Input';
 import Select from './components/composables/Select';
 import ScreenReaderOnlyLabel from './components/composables/ScreenReaderOnlyLabel';
 import CardPreview from './components/CardPreview/CardPreview';
-
-import useCardNumber from './hooks/useCardNumber';
+import useCardNumbers from './hooks/useCardNumbers';
 import useInput from './hooks/useInput';
 import validate from './utils/validate';
 
@@ -27,12 +26,6 @@ export type CardNumberState = {
   value: string;
   isError: boolean;
   errorMessage: string;
-};
-
-const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
-  value: '',
-  isError: false,
-  errorMessage: '',
 };
 
 function App() {
@@ -59,8 +52,7 @@ function App() {
     },
   ];
 
-  const { cardImageSrc, cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } =
-    useCardNumber(Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE));
+  const { cardImageSrc, cardNumbersArray } = useCardNumbers();
 
   const {
     inputState: cardCompany,
@@ -101,8 +93,8 @@ function App() {
     errorMessage: yearErrorMessage,
   } = useInput<HTMLInputElement>(yearValidations, [
     {
-    isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-    errorMessage: '2자리 숫자를 입력해주세요.',
+      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+      errorMessage: '2자리 숫자를 입력해주세요.',
     },
   ]);
 
@@ -128,10 +120,10 @@ function App() {
       },
     ],
     [
-    {
-      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
-      errorMessage: '3자리 숫자를 입력해주세요.',
-    },
+      {
+        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
+        errorMessage: '3자리 숫자를 입력해주세요.',
+      },
     ],
   );
 
@@ -149,10 +141,10 @@ function App() {
       },
     ],
     [
-    {
-      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-      errorMessage: '2자리 숫자를 입력해주세요.',
-    },
+      {
+        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+        errorMessage: '2자리 숫자를 입력해주세요.',
+      },
     ],
   );
 
@@ -162,7 +154,7 @@ function App() {
       <S.CardPreviewWrapper>
         <CardPreview
           isFlip={isFlip}
-          cardNumbers={cardNumbers.map(({ value }) => value)}
+          cardNumbers={cardNumbersArray.map(({ inputState }) => inputState)}
           month={month}
           year={year}
           name={name.toUpperCase()}
@@ -179,23 +171,25 @@ function App() {
             description={CARD_NUMBER.description}
             inputTitle={CARD_NUMBER.inputTitle}
           >
-            {cardNumbers.map((cardNumber, index) => {
-              const uniqueId = 'cardNumbers' + index;
+            {cardNumbersArray.map((cardNumbers, index) => {
+              const { inputState, isError, inputChangeHandler, inputOnBlurHandler } = cardNumbers;
+              const section = index + 1;
+
               return (
-                <Fragment key={uniqueId}>
+                <Fragment key={index}>
                   <ScreenReaderOnlyLabel
-                    htmlFor={uniqueId}
-                    description={`카드 번호 ${index + 1}번째 입력 섹션`}
+                    htmlFor={'cardNumbers' + section}
+                    description={`카드 번호 ${section}번째 입력 섹션`}
                   />
                   <Input
-                    id={uniqueId}
+                    id={'cardNumbers' + section}
                     placeholder="1234"
                     type="text"
                     maxLength={4}
-                    value={cardNumber.value}
-                    onChange={(e) => cardNumbersChangeHandler(e, index)}
-                    onBlur={(e) => cardNumbersFocusOutHandler(e, index)}
-                    isError={cardNumber.isError}
+                    value={inputState}
+                    onChange={inputChangeHandler}
+                    onBlur={inputOnBlurHandler}
+                    isError={isError}
                   />
                 </Fragment>
               );
@@ -203,7 +197,7 @@ function App() {
           </InputSection>
           <S.ErrorWrapper>
             <S.ErrorMessage>
-              {cardNumbers.find(({ isError }) => isError)?.errorMessage}
+              {cardNumbersArray.find(({ isError }) => isError)?.errorMessage}
             </S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
