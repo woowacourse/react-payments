@@ -1,4 +1,4 @@
-import * as Styled from './style';
+import { StyledCardInformationForm } from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -7,20 +7,24 @@ import CONDITION from '../../constants/Condition';
 import { CardNumberStateType } from '../../hooks/useCardNumber';
 import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
 import { UserNameStateType } from '../../hooks/useUserName';
+import Dropdown from '../Dropdown/Dropdown';
+import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 
-const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
+const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER, OPTION } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
 
 interface CardInformationFormProps {
   cardNumberState: CardNumberStateType;
   expirationDateState: ExpirationDateStateType;
   userNameState: UserNameStateType;
+  selectedCardState: SelectedCardStateType;
 }
 
 const CardInformationForm = ({
   cardNumberState,
   expirationDateState,
   userNameState,
+  selectedCardState,
 }: CardInformationFormProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
@@ -44,11 +48,18 @@ const CardInformationForm = ({
   ));
 
   return (
-    <Styled.CardInformationForm>
+    <StyledCardInformationForm>
       <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>{cardNumberInputs}</>
         </InputField>
+      </FormField>
+      <FormField title={TITLE.cardSelect} caption={CAPTION.cardSelect}>
+        <Dropdown
+          optionArray={OPTION.cardSelect}
+          selectText={TITLE.cardSelect}
+          selectedOptionState={selectedCardState}
+        />
       </FormField>
       <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
         <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
@@ -81,7 +92,7 @@ const CardInformationForm = ({
           />
         </InputField>
       </FormField>
-    </Styled.CardInformationForm>
+    </StyledCardInformationForm>
   );
 };
 
