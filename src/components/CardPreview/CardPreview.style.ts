@@ -27,7 +27,7 @@ export const CardContainer = styled.div<{ $bgColor: string }>`
 
     backface-visibility: hidden;
     transition: transform 1.2s ease-in-out;
-    background-color: ${(props) => props.$bgColor ?? '#333333'};
+    background-color: ${(props) => props.$bgColor || '#333333'};
   }
 `;
 

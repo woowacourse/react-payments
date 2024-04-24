@@ -19,7 +19,7 @@ export default function CardPreview({
   name,
   cvc,
   cardImageSrc,
-  cardColor,
+  cardColor = '',
 }: CreditCardProps) {
   return (
     <S.Container>
