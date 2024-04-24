@@ -1,16 +1,16 @@
 import { Fragment } from 'react/jsx-runtime';
-import Field from '../common/Field/Field';
-import Input from '../common/Input/Input';
-import Label from '../common/Label/Label';
+import Field from '../../common/Field/Field';
+import Input from '../../common/Input/Input';
+import Label from '../../common/Label/Label';
 
-import { hasFourDigit, isInteger } from '../../domain/validators';
+import { hasFourDigit, isInteger } from '../../../domain/validators';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { CustomInputHandlerProps } from '../../hooks/useAddCardFormField';
-import { validateInput } from '../../utils/validateInput';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
+import { validateInput } from '../../../utils/validateInput';
 
 interface CardNumberInputProps {
-  cardNumbers: CardNumbers;
+  values: CardNumbers;
   errorMessage: string;
   isError: Record<string, boolean>;
   onChange: (props: CustomInputHandlerProps<CardNumbers>) => void;
@@ -21,7 +21,7 @@ const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CARD_NUMBER;
 
 export default function CardNumberInput({
-  cardNumbers,
+  values: cardNumbers,
   errorMessage,
   isError,
   onChange,

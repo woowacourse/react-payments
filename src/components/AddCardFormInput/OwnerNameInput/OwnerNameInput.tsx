@@ -1,19 +1,22 @@
 import { Fragment } from 'react';
-import Field from '../common/Field/Field';
-import Input from '../common/Input/Input';
-import Label from '../common/Label/Label';
+import Field from '../../common/Field/Field';
+import Input from '../../common/Input/Input';
+import Label from '../../common/Label/Label';
 
-import { isNotEmptyString, isEnglishCharacter } from '../../domain/validators';
+import { validateInput } from '../../../utils/validateInput';
+import {
+  isNotEmptyString,
+  isEnglishCharacter,
+} from '../../../domain/validators';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { CustomInputHandlerProps } from '../../hooks/useAddCardFormField';
-import { validateInput } from '../../utils/validateInput';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.OWNER_NAME;
 
 interface OwnerNameInputProps {
-  ownerName: OwnerName;
+  values: OwnerName;
   errorMessage: string;
   isError: Record<string, boolean>;
   onChange: (props: CustomInputHandlerProps<OwnerName>) => void;
@@ -21,7 +24,7 @@ interface OwnerNameInputProps {
 }
 
 function OwnerNameInput({
-  ownerName,
+  values: ownerName,
   errorMessage,
   isError,
   onChange,
@@ -58,7 +61,7 @@ function OwnerNameInput({
   return (
     <Field title={title} labelText={labelText} errorMessage={errorMessage}>
       {Object.keys(ownerName).map((n) => {
-        const name = n as keyof OwnerName;
+        const name = n as OwnerNameKey;
         return (
           <Fragment key={name}>
             <Label htmlFor={name} labelText={inputLabelText[name]} hideLabel />

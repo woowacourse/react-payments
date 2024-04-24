@@ -7,8 +7,8 @@ interface InputProps {
   name: string;
   id: string;
   value: string;
-  isError: boolean;
   placeholder: string;
+  isError: boolean;
   isRequired?: boolean;
   maxLength?: number;
   handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -20,9 +20,9 @@ export default function Input({
   id,
   value,
   placeholder,
-  isError,
   maxLength,
-  isRequired = false,
+  isError,
+  isRequired,
   handleChange,
   handleOnBlur,
 }: InputProps) {

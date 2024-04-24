@@ -1,24 +1,24 @@
 import { Fragment } from 'react/jsx-runtime';
-import Field from '../common/Field/Field';
-import Input from '../common/Input/Input';
-import Label from '../common/Label/Label';
+import Field from '../../common/Field/Field';
+import Input from '../../common/Input/Input';
+import Label from '../../common/Label/Label';
 
 import {
   hasTwoDigit,
   isInteger,
   isValidDate,
   isValidMonth,
-} from '../../domain/validators';
+} from '../../../domain/validators';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { CustomInputHandlerProps } from '../../hooks/useAddCardFormField';
-import { validateInput } from '../../utils/validateInput';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import { CustomInputHandlerProps } from '../../../hooks/useAddCardFormField';
+import { validateInput } from '../../../utils/validateInput';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
 
 interface ExpirationDateInputProps {
-  expirationDate: ExpirationDate;
+  values: ExpirationDate;
   errorMessage: string;
   isError: Record<string, boolean>;
   onChange: (props: CustomInputHandlerProps<ExpirationDate>) => void;
@@ -26,7 +26,7 @@ interface ExpirationDateInputProps {
 }
 
 const ExpirationDateInput = ({
-  expirationDate,
+  values: expirationDate,
   errorMessage,
   isError,
   onChange,

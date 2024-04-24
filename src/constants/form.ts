@@ -14,4 +14,8 @@ export const INITIAL_VALUES = {
   ownerName: {
     ownerName: '',
   },
+
+  cardIssuer: {
+    cardIssuer: '',
+  },
 };

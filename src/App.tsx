@@ -2,24 +2,27 @@ import './index.css';
 import styles from './App.module.css';
 
 import useFormField from './hooks/useAddCardFormField';
-import CardNumberInput from './components/CardNumberInput/CardNumberInput';
+import CardNumberInput from './components/AddCardFormInput/CardNumberInput/CardNumberInput';
 import CardPreview from './components/CardPreview/CardPreview';
-import ExpirationDateInput from './components/ExpirationDateInput/ExpirationDateInput';
-import OwnerNameInput from './components/OwnerNameInput/OwnerNameInput';
+import ExpirationDateInput from './components/AddCardFormInput/ExpirationDateInput/ExpirationDateInput';
+import OwnerNameInput from './components/AddCardFormInput/OwnerNameInput/OwnerNameInput';
+import CardIssuerInput from './components/AddCardFormInput/CardIssuerInput/CardIssuerInput';
 
 import { INITIAL_VALUES } from './constants/form';
 
 function App() {
-  const { values: cardNumbers, ...cardNumbersProps } =
-    useFormField<CardNumbers>({
-      initialValues: INITIAL_VALUES.cardNumbers,
-    });
-  const { values: expirationDate, ...expirationDateProps } =
-    useFormField<ExpirationDate>({
-      initialValues: INITIAL_VALUES.expirationDate,
-    });
-  const { values: ownerName, ...ownerNameProps } = useFormField<OwnerName>({
-    initialValues: INITIAL_VALUES.ownerName,
+  const { cardNumbers, expirationDate, ownerName, cardIssuer } = INITIAL_VALUES;
+  const cardNumbersProps = useFormField<CardNumbers>({
+    initialValues: cardNumbers,
+  });
+  const expirationDateProps = useFormField<ExpirationDate>({
+    initialValues: expirationDate,
+  });
+  const ownerNameProps = useFormField<OwnerName>({
+    initialValues: ownerName,
+  });
+  const cardIssuerProps = useFormField<CardIssuer>({
+    initialValues: cardIssuer,
   });
 
   return (
@@ -27,18 +30,19 @@ function App() {
       <h1 className={styles.title}>카드 추가</h1>
 
       <CardPreview
-        cardNumbers={Object.values(cardNumbers)}
-        expirationDate={Object.values(expirationDate)}
-        ownerName={Object.values({})}
-        cardIssuer={Object.values({})}
+        cardNumbers={Object.values(cardNumbersProps.values)}
+        expirationDate={Object.values(expirationDateProps.values)}
+        ownerName={Object.values(ownerNameProps.values)}
+        cardIssuer={Object.values(cardIssuerProps.values)}
         cvc={Object.values({})}
         password={Object.values({})}
       />
 
       <form>
-        <CardNumberInput {...{ cardNumbers, ...cardNumbersProps }} />
-        <ExpirationDateInput {...{ expirationDate, ...expirationDateProps }} />
-        <OwnerNameInput {...{ ownerName, ...ownerNameProps }} />
+        <OwnerNameInput {...ownerNameProps} />
+        <ExpirationDateInput {...expirationDateProps} />
+        <CardIssuerInput {...cardIssuerProps} />
+        <CardNumberInput {...cardNumbersProps} />
       </form>
     </div>
   );

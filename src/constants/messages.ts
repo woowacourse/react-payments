@@ -6,6 +6,7 @@ export const ERRORS = {
   deprecatedCard: '만료된 카드는 사용할 수 없습니다.',
   isNotAlphabet: '알파벳만 입력 가능합니다.',
   invalidOwnerName: '이름을 입력해 주세요.',
+  invalidCardIssuer: '카드사를 입력해 주세요.',
 } as const;
 
 const CARD_NUMBER = {
@@ -50,8 +51,28 @@ const OWNER_NAME = {
   },
 } as const;
 
+const CARD_ISSUER = {
+  title: '카드사를 선택해 주세요',
+  description: '현재 국내 카드사만 가능합니다.',
+
+  inputLabelText: { cardIssuer: '카드사' },
+
+  defaultText: '카드사를 선택해 주세요',
+  options: [
+    { value: 'BC카드', text: 'BC카드' },
+    { value: '신한카드', text: '신한카드' },
+    { value: '카카오뱅크', text: '카카오뱅크' },
+    { value: '현대카드', text: '현대카드' },
+    { value: '우리카드', text: '우리카드' },
+    { value: '롯데카드', text: '롯데카드' },
+    { value: '하나카드', text: '하나카드' },
+    { value: '국민카드', text: '국민카드' },
+  ],
+};
+
 export const ADD_CARD_FORM_FIELDS = {
   CARD_NUMBER,
   EXPIRATION_DATE,
   OWNER_NAME,
+  CARD_ISSUER,
 } as const;

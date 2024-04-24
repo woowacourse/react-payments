@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { createObjectWithKeys } from '../utils/createObjectWithKeys';
 
-type InitialValuesType = CardNumbers | ExpirationDate | OwnerName;
+type InitialValuesType =
+  | CardNumbers
+  | ExpirationDate
+  | OwnerName
+  | CardIssuer
+  | CVC
+  | Password;
 
 export interface CustomInputHandlerProps<T> {
   isValid: boolean;
