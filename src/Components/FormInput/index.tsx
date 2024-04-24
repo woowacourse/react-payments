@@ -83,7 +83,7 @@ const CardNumberInput = () => {
           key={index}
           onInputChange={(e) =>
             onInputChange<CardNumbers, CardNumbersError, string>(e, {
-              name: name,
+              name,
               setData,
               setError,
               validator: cardNumbersValidator,
