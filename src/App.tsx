@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import useCardInfo from './hooks/useCardInfo';
 import CardCompanyContainer from './components/CardCompanyContainer';
 import CardCVCContainer from './components/CardCVCContainer';
+import CardPasswordContainer from './components/CardPasswordContainer';
 
 const App = () => {
-  const { cardNumberInfo, cardCompanyInfo, expiryDateInfo, cardholderNameInfo, cardCVCInfo } = useCardInfo();
+  const { cardNumberInfo, cardCompanyInfo, expiryDateInfo, cardholderNameInfo, cardCVCInfo, cardPasswordInfo } =
+    useCardInfo();
 
   return (
     <AppLayout>
@@ -19,6 +21,7 @@ const App = () => {
         cardType={cardCompanyInfo.value}
       />
       <CardInfoWrapper>
+        <CardPasswordContainer password={cardPasswordInfo.value} {...cardPasswordInfo} />
         <CardCVCContainer cvc={cardCVCInfo.value} {...cardCVCInfo} />
         <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
         <CardExpiryDateContainer {...expiryDateInfo} />
