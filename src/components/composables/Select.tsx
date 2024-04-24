@@ -31,7 +31,7 @@ type SelectType = {
   placeholder: string;
   isError: boolean;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onBlur?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 };
 
 export default function Select({

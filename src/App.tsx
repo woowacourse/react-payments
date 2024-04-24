@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import GlobalStyles from './GlobalStyles';
 import * as S from './App.style';
+import { ValidationType } from './hooks/useValidations';
 
 import InputSection from './components/InputSection';
 import Input from './components/composables/Input';
@@ -9,7 +10,7 @@ import ScreenReaderOnlyLabel from './components/composables/ScreenReaderOnlyLabe
 import CardPreview from './components/CardPreview/CardPreview';
 
 import useCardNumber from './hooks/useCardNumber';
-import useInput, { ValidationType } from './hooks/useInput';
+import useInput from './hooks/useInput';
 import validate from './utils/validate';
 
 import {
@@ -37,14 +38,45 @@ const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
 function App() {
   const [isFlip, setIsFlip] = useState(false);
 
-  const monthOnChangeValidations: ValidationType[] = [
+  const monthValidations: ValidationType[] = [
     {
       isError: (state: string) => state !== '' && !validate.isValidDigit(state),
       errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
     },
   ];
 
-  const monthOnBlurValidations: ValidationType[] = [
+  const yearValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
+      errorMessage: EXPIRATION_PERIOD.yearErrorMessage,
+    },
+  ];
+
+  const nameValidations: ValidationType[] = [
+    {
+      isError: (state: string) => state !== '' && !validate.isEnglish(state),
+      errorMessage: OWNER_NAME.errorMessage,
+    },
+  ];
+
+  const { cardImageSrc, cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } =
+    useCardNumber(Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE));
+
+  const {
+    inputState: cardCompany,
+    inputChangeHandler: cardCompanyChangeHandler,
+    inputOnBlurHandler: cardCompanyOnBlurHandler,
+    isError: isCardCompanyError,
+    errorMessage: cardCompanyErrorMessage,
+  } = useInput<HTMLSelectElement>([]);
+
+  const {
+    inputState: month,
+    inputChangeHandler: monthChangeHandler,
+    inputOnBlurHandler: monthOnBlurHandler,
+    isError: isMonthError,
+    errorMessage: monthErrorMessage,
+  } = useInput<HTMLInputElement>(monthValidations, [
     {
       isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
       errorMessage: '2자리 숫자를 입력해주세요.',
@@ -59,62 +91,36 @@ function App() {
         }),
       errorMessage: EXPIRATION_PERIOD.monthErrorMessage,
     },
-  ];
-
-  const yearOnChangeValidations: ValidationType[] = [
-    {
-      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
-      errorMessage: EXPIRATION_PERIOD.yearErrorMessage,
-    },
-  ];
-
-  const nameOnChangeValidations: ValidationType[] = [
-    {
-      isError: (state: string) => state !== '' && !validate.isEnglish(state),
-      errorMessage: OWNER_NAME.errorMessage,
-    },
-  ];
-
-  const { cardImageSrc, cardNumbers, cardNumbersChangeHandler, cardNumbersFocusOutHandler } =
-    useCardNumber(Array.from({ length: 4 }, () => INITIAL_CARD_NUMBER_STATE));
-
-  const {
-    inputState: cardCompany,
-    inputChangeHandler: cardCompanyChangeHandler,
-    error: cardCompanyError,
-  } = useInput([]);
-
-  const {
-    inputState: month,
-    inputChangeHandler: monthChangeHandler,
-    inputFocusOutHandler: monthFocusOutHandler,
-    error: monthError,
-  } = useInput(monthOnChangeValidations, monthOnBlurValidations);
+  ]);
 
   const {
     inputState: year,
     inputChangeHandler: yearChangeHandler,
-    inputFocusOutHandler: yearFocusOutHandler,
-    error: yearError,
-  } = useInput(yearOnChangeValidations, [
+    inputOnBlurHandler: yearOnBlurHandler,
+    isError: isYearError,
+    errorMessage: yearErrorMessage,
+  } = useInput<HTMLInputElement>(yearValidations, [
     {
-      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-      errorMessage: '2자리 숫자를 입력해주세요.',
+    isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+    errorMessage: '2자리 숫자를 입력해주세요.',
     },
   ]);
 
   const {
     inputState: name,
     inputChangeHandler: nameChangeHandler,
-    error: nameError,
-  } = useInput(nameOnChangeValidations);
+    inputOnBlurHandler: nameOnBlurHandler,
+    isError: isNameError,
+    errorMessage: nameErrorMessage,
+  } = useInput<HTMLInputElement>(nameValidations);
 
   const {
     inputState: cvc,
     inputChangeHandler: cvcChangeHandler,
-    inputFocusOutHandler: cvcFocusOutHandler,
-    error: cvcError,
-  } = useInput(
+    inputOnBlurHandler: cvcOnBlurHandler,
+    isError: isCvcError,
+    errorMessage: cvcErrorMessage,
+  } = useInput<HTMLInputElement>(
     [
       {
         isError: (state: string) => state !== '' && !validate.isValidDigit(state),
@@ -122,18 +128,19 @@ function App() {
       },
     ],
     [
-      {
-        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
-        errorMessage: '3자리 숫자를 입력해주세요.',
-      },
+    {
+      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(3, state.length),
+      errorMessage: '3자리 숫자를 입력해주세요.',
+    },
     ],
   );
 
   const {
     inputState: password,
     inputChangeHandler: passwordChangeHandler,
-    inputFocusOutHandler: passwordFocusOutHandler,
-    error: passwordError,
+    inputOnBlurHandler: passwordOnBlurHandler,
+    isError: isPasswordError,
+    errorMessage: passwordErrorMessage,
   } = useInput(
     [
       {
@@ -142,10 +149,10 @@ function App() {
       },
     ],
     [
-      {
-        isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
-        errorMessage: '2자리 숫자를 입력해주세요.',
-      },
+    {
+      isError: (state: string) => state !== '' && !validate.isSatisfiedLength(2, state.length),
+      errorMessage: '2자리 숫자를 입력해주세요.',
+    },
     ],
   );
 
@@ -208,12 +215,13 @@ function App() {
               options={[...CARD_COMPANY.options]}
               value={cardCompany}
               placeholder={CARD_COMPANY.placeholder}
-              isError={cardCompanyError.state}
+              isError={isCardCompanyError}
               onChange={cardCompanyChangeHandler}
+              onBlur={cardCompanyOnBlurHandler}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{cardCompanyError.state && cardCompanyError.message}</S.ErrorMessage>
+            <S.ErrorMessage>{isCardCompanyError && cardCompanyErrorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -232,8 +240,8 @@ function App() {
               value={month}
               maxLength={2}
               onChange={monthChangeHandler}
-              isError={monthError.state}
-              onBlur={monthFocusOutHandler}
+              onBlur={monthOnBlurHandler}
+              isError={isMonthError}
             />
             <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
             <Input
@@ -243,15 +251,15 @@ function App() {
               maxLength={2}
               value={year}
               onChange={yearChangeHandler}
-              onBlur={yearFocusOutHandler}
-              isError={yearError.state}
+              onBlur={yearOnBlurHandler}
+              isError={isYearError}
             />
           </InputSection>
           <S.ErrorWrapper>
             <S.ErrorMessage>
-              {monthError.state && yearError.state && monthError.message}
-              {!monthError.state && yearError.state && yearError.message}
-              {monthError.state && !yearError.state && monthError.message}
+              {isMonthError && isYearError && monthErrorMessage}
+              {!isMonthError && isYearError && yearErrorMessage}
+              {isMonthError && !isYearError && monthErrorMessage}
             </S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
@@ -264,14 +272,15 @@ function App() {
               id="name"
               maxLength={30}
               onChange={nameChangeHandler}
-              isError={nameError.state}
+              onBlur={nameOnBlurHandler}
+              isError={isNameError}
               placeholder="JOHN DOE"
               type="text"
               value={name.toUpperCase()}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{nameError.state && OWNER_NAME.errorMessage}</S.ErrorMessage>
+            <S.ErrorMessage>{isNameError && nameErrorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -285,10 +294,10 @@ function App() {
               maxLength={3}
               onChange={cvcChangeHandler}
               onBlur={(e) => {
-                cvcFocusOutHandler(e);
+                cvcOnBlurHandler(e);
                 setIsFlip(false);
               }}
-              isError={cvcError.state}
+              isError={isCvcError}
               placeholder={CVC_NUMBER.placeholder}
               onFocus={() => {
                 setIsFlip(true);
@@ -298,7 +307,7 @@ function App() {
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{cvcError.state && cvcError.message}</S.ErrorMessage>
+            <S.ErrorMessage>{isCvcError && cvcErrorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -310,15 +319,15 @@ function App() {
               id="password"
               maxLength={2}
               onChange={passwordChangeHandler}
-              onFocus={passwordFocusOutHandler}
-              isError={passwordError.state}
+              onBlur={passwordOnBlurHandler}
+              isError={isPasswordError}
               placeholder={PASSWORD.placeholder}
               type="password"
               value={password}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{passwordError.state && passwordError.message}</S.ErrorMessage>
+            <S.ErrorMessage>{isPasswordError && passwordErrorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
       </S.CardInfoContainer>

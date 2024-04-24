@@ -1,56 +1,32 @@
 import { useState } from 'react';
+import useValidations, { ValidationType } from './useValidations';
 
-export type ValidationType = {
-  isError: (state: string) => boolean;
-  errorMessage: string;
-};
-
-const INITIAL_ERROR_STATE = {
-  state: false,
-  message: '',
-};
-
-const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: ValidationType[]) => {
+const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
+  onChangeValidations: ValidationType[],
+  onBlurValidations?: ValidationType[],
+) => {
   const [inputState, setInputState] = useState('');
-  const [error, setError] = useState(INITIAL_ERROR_STATE);
+  const { isError, errorMessage, validate } = useValidations();
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const validationResult = onChangeValidations.find(({ isError }) => isError(e.target.value));
+  const inputChangeHandler = (e: React.ChangeEvent<T>) => {
+    const result = validate(e.target.value, onChangeValidations);
 
-    if (validationResult) {
-      setError({
-        state: true,
-        message: validationResult.errorMessage,
-      });
+    if (!result) {
       setInputState(inputState);
-
       return;
     }
 
-    setError(INITIAL_ERROR_STATE);
     setInputState(e.target.value);
   };
 
-  const inputFocusOutHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+  const inputOnBlurHandler = (e: React.FocusEvent<T>) => {
+    validate(e.target.value, onChangeValidations);
+
     if (!onBlurValidations) return;
-    const onChangeValidationResult = onChangeValidations.find(({ isError }) =>
-      isError(e.target.value),
-    );
-    const validationResult = onBlurValidations.find(({ isError }) => isError(e.target.value));
-
-    if (!onChangeValidationResult) {
-      setError(INITIAL_ERROR_STATE);
-    }
-
-    if (validationResult) {
-      setError({
-        state: true,
-        message: validationResult.errorMessage,
-      });
-    }
+    validate(e.target.value, onBlurValidations);
   };
 
-  return { inputState, inputChangeHandler, inputFocusOutHandler, error };
+  return { inputState, inputChangeHandler, inputOnBlurHandler, isError, errorMessage };
 };
 
 export default useInput;
