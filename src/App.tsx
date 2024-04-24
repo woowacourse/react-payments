@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react';
 import GlobalStyles from './GlobalStyles';
 import * as S from './App.style';
-import { ValidationType } from './hooks/useValidations';
 
 import InputSection from './components/InputSection';
 import Input from './components/composables/Input';
@@ -32,40 +31,17 @@ export type CardNumberState = {
 function App() {
   const [isFlip, setIsFlip] = useState(false);
 
-  const nameValidations: ValidationType[] = [
+  const { cardImageSrc, cardNumbersArray } = useCardNumbers();
+  const cardCompany = useInput<HTMLSelectElement>([]);
+  const { month, year } = useExpirationDate();
+  const name = useInput<HTMLInputElement>([
     {
       isError: (state: string) => state !== '' && !validate.isEnglish(state),
       errorMessage: OWNER_NAME.errorMessage,
     },
-  ];
+  ]);
 
-  const { cardImageSrc, cardNumbersArray } = useCardNumbers();
-
-  const {
-    inputState: cardCompany,
-    inputChangeHandler: cardCompanyChangeHandler,
-    inputOnBlurHandler: cardCompanyOnBlurHandler,
-    isError: isCardCompanyError,
-    errorMessage: cardCompanyErrorMessage,
-  } = useInput<HTMLSelectElement>([]);
-
-  const { month, year } = useExpirationDate();
-
-  const {
-    inputState: name,
-    inputChangeHandler: nameChangeHandler,
-    inputOnBlurHandler: nameOnBlurHandler,
-    isError: isNameError,
-    errorMessage: nameErrorMessage,
-  } = useInput<HTMLInputElement>(nameValidations);
-
-  const {
-    inputState: cvc,
-    inputChangeHandler: cvcChangeHandler,
-    inputOnBlurHandler: cvcOnBlurHandler,
-    isError: isCvcError,
-    errorMessage: cvcErrorMessage,
-  } = useInput<HTMLInputElement>(
+  const cvc = useInput<HTMLInputElement>(
     [
       {
         isError: (state: string) => state !== '' && !validate.isValidDigit(state),
@@ -80,13 +56,7 @@ function App() {
     ],
   );
 
-  const {
-    inputState: password,
-    inputChangeHandler: passwordChangeHandler,
-    inputOnBlurHandler: passwordOnBlurHandler,
-    isError: isPasswordError,
-    errorMessage: passwordErrorMessage,
-  } = useInput(
+  const password = useInput(
     [
       {
         isError: (state: string) => state !== '' && !validate.isValidDigit(state),
@@ -107,13 +77,13 @@ function App() {
       <S.CardPreviewWrapper>
         <CardPreview
           isFlip={isFlip}
-          cardNumbers={cardNumbersArray.map(({ inputState }) => inputState)}
-          month={month.inputState}
-          year={year.inputState}
-          name={name.toUpperCase()}
-          cvc={cvc}
+          cardNumbers={cardNumbersArray.map(({ value }) => value)}
+          month={month.value}
+          year={year.value}
+          name={name.value.toUpperCase()}
+          cvc={cvc.value}
           cardImageSrc={cardImageSrc}
-          cardColor={CARD_COMPANY_COLOR[cardCompany]}
+          cardColor={CARD_COMPANY_COLOR[cardCompany.value]}
         />
       </S.CardPreviewWrapper>
       <S.CardInfoContainer>
@@ -125,7 +95,7 @@ function App() {
             inputTitle={CARD_NUMBER.inputTitle}
           >
             {cardNumbersArray.map((cardNumbers, index) => {
-              const { inputState, isError, inputChangeHandler, inputOnBlurHandler } = cardNumbers;
+              const { value, isError, onChangeHandler, onBlurHandler } = cardNumbers;
               const section = index + 1;
 
               return (
@@ -139,9 +109,9 @@ function App() {
                     placeholder="1234"
                     type="text"
                     maxLength={4}
-                    value={inputState}
-                    onChange={inputChangeHandler}
-                    onBlur={inputOnBlurHandler}
+                    value={value}
+                    onChange={onChangeHandler}
+                    onBlur={onBlurHandler}
                     isError={isError}
                   />
                 </Fragment>
@@ -160,15 +130,15 @@ function App() {
           <InputSection title={CARD_COMPANY.title} description={CARD_COMPANY.description}>
             <Select
               options={[...CARD_COMPANY.options]}
-              value={cardCompany}
+              value={cardCompany.value}
               placeholder={CARD_COMPANY.placeholder}
-              isError={isCardCompanyError}
-              onChange={cardCompanyChangeHandler}
-              onBlur={cardCompanyOnBlurHandler}
+              isError={cardCompany.isError}
+              onChange={cardCompany.onChangeHandler}
+              onBlur={cardCompany.onBlurHandler}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{isCardCompanyError && cardCompanyErrorMessage}</S.ErrorMessage>
+            <S.ErrorMessage>{cardCompany.isError && cardCompany.errorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -184,10 +154,10 @@ function App() {
               id={'month'}
               placeholder={'MM'}
               type="text"
-              value={month.inputState}
+              value={month.value}
               maxLength={2}
-              onChange={month.inputChangeHandler}
-              onBlur={month.inputOnBlurHandler}
+              onChange={month.onChangeHandler}
+              onBlur={month.onBlurHandler}
               isError={month.isError}
             />
             <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
@@ -196,9 +166,9 @@ function App() {
               placeholder={'YY'}
               type="text"
               maxLength={2}
-              value={year.inputState}
-              onChange={year.inputChangeHandler}
-              onBlur={year.inputOnBlurHandler}
+              value={year.value}
+              onChange={year.onChangeHandler}
+              onBlur={year.onBlurHandler}
               isError={year.isError}
             />
           </InputSection>
@@ -218,16 +188,16 @@ function App() {
             <Input
               id="name"
               maxLength={30}
-              onChange={nameChangeHandler}
-              onBlur={nameOnBlurHandler}
-              isError={isNameError}
+              onChange={name.onChangeHandler}
+              onBlur={name.onBlurHandler}
+              isError={name.isError}
               placeholder="JOHN DOE"
               type="text"
-              value={name.toUpperCase()}
+              value={name.value.toUpperCase()}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{isNameError && nameErrorMessage}</S.ErrorMessage>
+            <S.ErrorMessage>{name.isError && name.errorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -239,22 +209,22 @@ function App() {
             <Input
               id="cvc"
               maxLength={3}
-              onChange={cvcChangeHandler}
+              onChange={cvc.onChangeHandler}
               onBlur={(e) => {
-                cvcOnBlurHandler(e);
+                cvc.onBlurHandler(e);
                 setIsFlip(false);
               }}
-              isError={isCvcError}
+              isError={cvc.isError}
               placeholder={CVC_NUMBER.placeholder}
               onFocus={() => {
                 setIsFlip(true);
               }}
               type="text"
-              value={cvc}
+              value={cvc.value}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{isCvcError && cvcErrorMessage}</S.ErrorMessage>
+            <S.ErrorMessage>{cvc.isError && cvc.errorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
 
@@ -265,16 +235,16 @@ function App() {
             <Input
               id="password"
               maxLength={2}
-              onChange={passwordChangeHandler}
-              onBlur={passwordOnBlurHandler}
-              isError={isPasswordError}
+              onChange={password.onChangeHandler}
+              onBlur={password.onBlurHandler}
+              isError={password.isError}
               placeholder={PASSWORD.placeholder}
               type="password"
-              value={password}
+              value={password.value}
             />
           </InputSection>
           <S.ErrorWrapper>
-            <S.ErrorMessage>{isPasswordError && passwordErrorMessage}</S.ErrorMessage>
+            <S.ErrorMessage>{password.isError && password.errorMessage}</S.ErrorMessage>
           </S.ErrorWrapper>
         </S.Wrapper>
       </S.CardInfoContainer>

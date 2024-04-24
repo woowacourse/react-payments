@@ -5,28 +5,28 @@ const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
   onChangeValidations: ValidationType[],
   onBlurValidations?: ValidationType[],
 ) => {
-  const [inputState, setInputState] = useState('');
+  const [value, setValue] = useState('');
   const { isError, errorMessage, validate } = useValidations();
 
-  const inputChangeHandler = (e: React.ChangeEvent<T>) => {
+  const onChangeHandler = (e: React.ChangeEvent<T>) => {
     const result = validate(e.target.value, onChangeValidations);
 
     if (!result) {
-      setInputState(inputState);
+      setValue(value);
       return;
     }
 
-    setInputState(e.target.value);
+    setValue(e.target.value);
   };
 
-  const inputOnBlurHandler = (e: React.FocusEvent<T>) => {
+  const onBlurHandler = (e: React.FocusEvent<T>) => {
     validate(e.target.value, onChangeValidations);
 
     if (!onBlurValidations) return;
     validate(e.target.value, onBlurValidations);
   };
 
-  return { inputState, inputChangeHandler, inputOnBlurHandler, isError, errorMessage };
+  return { value, onChangeHandler, onBlurHandler, isError, errorMessage };
 };
 
 export default useInput;

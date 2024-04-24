@@ -6,6 +6,7 @@ import { ValidationType } from './useValidations';
 import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
 
+// TODO: 상수화
 const cardNumbersValidations: ValidationType[] = [
   {
     isError: (value: string) => value !== '' && !validate.isValidDigit(value),
@@ -33,7 +34,7 @@ const useCardNumbers = () => {
   const [cardImageSrc, setCardImageSrc] = useState('');
 
   useEffect(() => {
-    const cardNumbersString = cardNumbersArray.map(({ inputState }) => inputState).join('');
+    const cardNumbersString = cardNumbersArray.map(({ value }) => value).join('');
 
     if (cardImageSrc && VALID_CARD_NUMBERS_LENGTH !== cardNumbersString.length) {
       setCardImageSrc('');
@@ -48,7 +49,7 @@ const useCardNumbers = () => {
         setCardImageSrc(MasterCardImage);
       }
     }
-  }, [...cardNumbersArray.map(({ inputState }) => inputState)]);
+  }, [...cardNumbersArray.map(({ value }) => value)]);
 
   return { cardImageSrc, cardNumbersArray };
 };
