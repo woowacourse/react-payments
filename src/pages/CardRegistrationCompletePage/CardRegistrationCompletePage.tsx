@@ -1,19 +1,27 @@
+import { Link, useSearchParams } from 'react-router-dom';
 import { Check } from '../../assets';
 
 import * as S from './CardRegistrationCompletePage.style';
 
 const CardRegistrationCompletePage = () => {
+  const [searchParams] = useSearchParams();
+
+  const cardNumber = searchParams.get('number');
+  const cardCompany = searchParams.get('company');
+
   return (
     <S.CardRegistrationCompleteLayout>
       <S.CheckBox>
         <img src={Check} />
       </S.CheckBox>
       <S.CardRegistrationMessage>
-        1234로 시작하는
+        {cardNumber}로 시작하는
         <br />
-        BC카드가 등록되었어요.
+        {cardCompany}가 등록되었어요.
       </S.CardRegistrationMessage>
-      <S.ConfirmButton type="button">확인</S.ConfirmButton>
+      <Link to="/">
+        <S.ConfirmButton type="button">확인</S.ConfirmButton>
+      </Link>
     </S.CardRegistrationCompleteLayout>
   );
 };
