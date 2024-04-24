@@ -3,6 +3,8 @@ import Select from '../../../common/Select';
 import InputField from '../../InputField';
 import InputWrap from '../../InputWrap';
 
+import styles from './style.module.css';
+
 interface CardIssuerInputProps {
   cardIssuerError: boolean;
   onCardIssuerChange: (value: string) => void;
@@ -20,13 +22,15 @@ function CardIssuerInput({
   return (
     <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
-        <Select
-          options={options}
-          placeholder={placeholder}
-          isError={cardIssuerError}
-          onChange={(event) => onCardIssuerChange(event.target.value)}
-          onBlur={onBlurCardIssuerSelect}
-        />
+        <div className={styles.selectWrap}>
+          <Select
+            options={options}
+            placeholder={placeholder}
+            isError={cardIssuerError}
+            onChange={(event) => onCardIssuerChange(event.target.value)}
+            onBlur={onBlurCardIssuerSelect}
+          />
+        </div>
       </InputField>
     </InputWrap>
   );
