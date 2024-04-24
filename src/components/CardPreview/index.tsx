@@ -10,9 +10,15 @@ interface CardPreviewProps {
     year: string;
   };
   userName: string;
+  cardIssuer: string;
 }
 
-function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
+function CardPreview({
+  cardNumbers,
+  period,
+  userName,
+  cardIssuer,
+}: CardPreviewProps) {
   const maskCardNumbers = () =>
     cardNumbers
       .map((number, index) => {
@@ -45,7 +51,11 @@ function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
     <div className={styles.cardPreview}>
       <div
         className={styles.cardImg}
-        style={{ backgroundColor: CARD_COLOR.default }}
+        style={{
+          backgroundColor: cardIssuer
+            ? CARD_COLOR[cardIssuer]
+            : CARD_COLOR['기본'],
+        }}
       >
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
@@ -59,8 +69,8 @@ function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
             <div className="card-number">{maskCardNumbers()}</div>
             <div className="period">
               {period.month && period.month.padStart(2, '0')}
-              {period.month && period.year ? '/' : ''}
-              {period.year}
+              {period.month ? '/' : ''}
+              {period.year && period.year.padStart(2, '0')}
             </div>
             <div className={styles.user}>{userName}</div>
           </section>

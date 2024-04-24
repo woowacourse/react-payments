@@ -38,6 +38,7 @@ function App() {
           cardNumbers={numbers}
           period={period}
           userName={userName}
+          cardIssuer={cardIssuer}
         />
         <form className="form-container">
           <fieldset>
