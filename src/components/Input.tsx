@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 import { InputInfo } from '../types/input';
 import Validation from '../domain/InputValidation';
+import { forwardRef } from 'react';
 
 interface Props {
   info: InputInfo;
   handleInput: (value: string) => void;
   isError: boolean;
   handleErrorMessage: (errorMessage: string) => void;
+  onNext: () => void;
 }
 
-export default function Input({
-  info,
-  handleInput,
-  isError,
-  handleErrorMessage,
-}: Props) {
+export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
+  const { info, handleInput, isError, handleErrorMessage, onNext } = props;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     try {
@@ -26,6 +25,10 @@ export default function Input({
         handleErrorMessage(error.message);
       }
     }
+
+    if (inputValue.length === info.maxLength) {
+      onNext();
+    }
   };
 
   return (
@@ -35,9 +38,10 @@ export default function Input({
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
       onChange={handleChange}
+      ref={ref}
     />
   );
-}
+});
 
 const StyledInput = styled.input`
   width: 100%;

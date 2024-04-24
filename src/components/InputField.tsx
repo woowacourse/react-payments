@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
-import Input from './Input';
+import { Input } from './Input';
 import FieldTitle from './FieldTitle';
 import { FieldContainer } from '../style/container.style';
 
@@ -22,6 +22,7 @@ export default function InputField({
   const [errorMessages, setErrorMessages] = useState<Record<number, string>>(
     {}
   );
+  const inputRefs = useRef<HTMLInputElement[]>([]);
 
   const handleUpdateInput = (index: number, value: string) => {
     setValues({
@@ -32,6 +33,12 @@ export default function InputField({
       ...values,
       [inputTypes.inputInfo[index].property]: value,
     });
+  };
+
+  const handleInputNext = (index: number) => {
+    if (index < inputTypes.inputInfo.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
   };
 
   const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
@@ -50,12 +57,15 @@ export default function InputField({
       <InputBox>
         {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
           <Input
+            key={index}
+            ref={(ref) => (inputRefs.current[index] = ref as HTMLInputElement)}
             info={info}
-            handleInput={(value) => handleUpdateInput(index, value)}
+            handleInput={(value: string) => handleUpdateInput(index, value)}
             isError={!!errorMessages[index]}
-            handleErrorMessage={(errorMessage) =>
+            handleErrorMessage={(errorMessage: string) =>
               handleUpdateErrorMessages(index, errorMessage)
             }
+            onNext={() => handleInputNext(index)}
           />
         ))}
       </InputBox>
