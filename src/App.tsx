@@ -5,9 +5,10 @@ import CardPreview from './components/CardPreview';
 import styled from 'styled-components';
 import useCardInfo from './hooks/useCardInfo';
 import CardCompanyContainer from './components/CardCompanyContainer';
+import CardCVCContainer from './components/CardCVCContainer';
 
 const App = () => {
-  const { cardNumberInfo, cardholderNameInfo, expiryDateInfo, cardCompanyInfo } = useCardInfo();
+  const { cardNumberInfo, cardCompanyInfo, expiryDateInfo, cardholderNameInfo, cardCVCInfo } = useCardInfo();
 
   return (
     <AppLayout>
@@ -18,10 +19,11 @@ const App = () => {
         cardType={cardCompanyInfo.value}
       />
       <CardInfoWrapper>
+        <CardCVCContainer cvc={cardCVCInfo.value} {...cardCVCInfo} />
+        <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
+        <CardExpiryDateContainer {...expiryDateInfo} />
         <CardCompanyContainer cardCompany={cardCompanyInfo.value} {...cardCompanyInfo} />
         <CardNumberContainer cardNumbers={cardNumberInfo.value} {...cardNumberInfo} />
-        <CardExpiryDateContainer {...expiryDateInfo} />
-        <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
       </CardInfoWrapper>
     </AppLayout>
   );

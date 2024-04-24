@@ -5,6 +5,10 @@ import useCardholderName from './useCardholderName';
 import validateCardNumber from '../validator/validateCardNumber';
 import useSelect from './useSelect';
 import { CARD_TYPE } from '../components/types/card';
+import useInput from './useInput';
+import validateNumber from '../validator/validateNumber';
+import validateCardPassword from '../validator/validateCardPassword';
+import validateCVC from '../validator/validateCVC';
 
 const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 
@@ -15,12 +19,22 @@ const useCardInfo = () => {
   const cardholderNameInfo = useCardholderName();
 
   const cardCompanyInfo = useSelect<CARD_TYPE>('');
+  const cardPasswordInfo = useInput('', {
+    onChange: validateNumber,
+    onBlur: validateCardPassword,
+  });
+  const cardCVCInfo = useInput('', {
+    onChange: validateNumber,
+    onBlur: validateCVC,
+  });
 
   return {
     cardNumberInfo,
-    cardholderNameInfo,
-    expiryDateInfo: { month: expiryMonth, year: expiryYear },
     cardCompanyInfo,
+    expiryDateInfo: { month: expiryMonth, year: expiryYear },
+    cardholderNameInfo,
+    cardCVCInfo,
+    cardPasswordInfo,
   };
 };
 
