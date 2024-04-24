@@ -5,7 +5,8 @@ import GlobalStyle from './global.styled';
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  margin-top: 64px;
   height: 100vh;
 `;
 
