@@ -4,7 +4,7 @@ const EXPIRY_YEAR_LENGTH = 2;
 const MIN_YEAR = 24;
 const MAX_YEAR = 40;
 
-const inquireExpiryYear = (expiryYear: string): IErrorStatus => {
+const validateExpiryYear = (expiryYear: string): IErrorStatus => {
   const isValidLength = expiryYear.length === EXPIRY_YEAR_LENGTH;
   const isValidYear = Number(expiryYear) >= MIN_YEAR && Number(expiryYear) <= MAX_YEAR;
 
@@ -19,4 +19,4 @@ const inquireExpiryYear = (expiryYear: string): IErrorStatus => {
   return { isError: false, errorMessage: '' };
 };
 
-export default inquireExpiryYear;
+export default validateExpiryYear;
