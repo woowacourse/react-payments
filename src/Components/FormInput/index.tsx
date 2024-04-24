@@ -119,7 +119,7 @@ const CardPeriodInput = () => {
           id={`id-period-${name}`}
           key={index}
           onInputChange={(e) =>
-            onInputChange<CardValidityPeriod, CardValidityPeriodError, number>(e, {
+            onInputChange<CardValidityPeriod, CardValidityPeriodError, string>(e, {
               name,
               setData,
               setError,
@@ -172,13 +172,13 @@ const CardOwnerInput = () => {
   );
 };
 
-// const CardIssuerInput
+const CardIssuerInput = () => {};
 
 const FormInput = {
   CardNumberInput: memo(CardNumberInput),
   CardPeriodInput: memo(CardPeriodInput),
   CardOwnerInput: memo(CardOwnerInput),
-  // CardIssuerInput: memo(CardIssuerInput),
+  CardIssuerInput: memo(CardIssuerInput),
 };
 
 export default FormInput;

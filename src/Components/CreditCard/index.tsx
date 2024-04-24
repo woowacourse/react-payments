@@ -15,9 +15,9 @@ import useContextWrapper from "../../hooks/useContextWrapper.js";
  * @param n 1~2 자리 숫자가 들어온다.
  * @returns 0일경우 빈 문자열, 1자리 숫자가 들어올 경우 앞에 숫자 앞에 "0"을 붙인 문자열을 반환, 2자리 숫자가 들어올 경우 숫자를 문자열로 반환
  */
-const formatTwoDigitNumber = (n: number | undefined) => {
+const formatTwoDigitNumber = (n: string | undefined) => {
   if (!n) return "";
-  return String(n).padStart(2, "0");
+  return n.padStart(2, "0");
 };
 
 const isVisa = (cardNumber?: string) => {
