@@ -6,7 +6,7 @@ import Input from "@/components/_common/Input/Input";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useShowError from "@/hooks/useShowError";
-import { useRef } from "react";
+import useInputRefs from "@/hooks/useRefArr";
 
 export type CardNumberInputType = {
   cardNumbers1: string;
@@ -24,28 +24,10 @@ type CardNumberKeys = keyof CardNumberInputType;
 const CardNumbersField = ({ cardNumbersState }: Props) => {
   const { onChange, errors } = cardNumbersState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
-
-  const inputRefs = useRef<(HTMLInputElement | null)[]>(
-    new Array(INPUT_COUNTS.CARD_NUMBERS)
+  const { inputRefs, onFocusNextInput } = useInputRefs(
+    INPUT_COUNTS.CARD_NUMBERS,
+    onChange
   );
-
-  console.log("inputRef", inputRefs);
-
-  const onFocusNextInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    console.log("index", index);
-    if (e.target.value.length === e.target.maxLength) {
-      onChange(e);
-      const nextIndex = index + 1;
-      if (nextIndex < INPUT_COUNTS.CARD_NUMBERS) {
-        inputRefs.current[nextIndex]?.focus();
-      }
-    } else {
-      onChange(e);
-    }
-  };
 
   return (
     <S.InputFieldWithInfo>
