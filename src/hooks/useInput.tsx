@@ -11,6 +11,7 @@ interface InputProps {
 export interface UseInputHookValue {
   value: string;
   onChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
 }
 
 export default function useInput({
@@ -20,12 +21,14 @@ export default function useInput({
   decorateValue = (value: string) => value,
 }: InputProps) {
   const [value, setValue] = useState(initValue);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeErrorHandler = (
     error: Error,
     eventTarget: EventTarget & HTMLInputElement
   ) => {
     eventTarget.setCustomValidity(error.message);
+    setErrorMessage(error.message);
     errorHandler(error);
 
     if (error instanceof NonBlockedInputError) {
@@ -36,6 +39,7 @@ export default function useInput({
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       validator(event.target.value);
+      setErrorMessage("");
     } catch (error) {
       onChangeErrorHandler(error as Error, event.target);
       return;
@@ -46,5 +50,5 @@ export default function useInput({
     setValue(decorateValue(event.target.value));
   };
 
-  return { value, onChangeHandler };
+  return { value, errorMessage, onChangeHandler };
 }

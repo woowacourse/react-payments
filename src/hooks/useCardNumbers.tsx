@@ -1,21 +1,11 @@
 import useInput, { UseInputHookValue } from "./useInput";
 import { validateLength, validateOnlyDigit } from "../domain/validateCardInfo";
 
-import { useState } from "react";
-
 export default function useCardNumbers() {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const useInputProps = {
     validator: (string: string) => {
       validateOnlyDigit(string);
       validateLength(string, 4);
-
-      setErrorMessage("");
-    },
-    errorHandler: (error: unknown) => {
-      if (!(error instanceof Error)) return;
-      setErrorMessage(error.message);
     },
   };
 
@@ -31,5 +21,5 @@ export default function useCardNumbers() {
     UseInputHookValue,
   ] = [firstInput, secondInput, thirdInput, fourthInput];
 
-  return { cardNumberInputs, errorMessage };
+  return { cardNumberInputs };
 }
