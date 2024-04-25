@@ -7,6 +7,7 @@ import { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useShowError from "@/hooks/useShowError";
+import useInputRefs from "@/hooks/useInputRefs";
 
 export type ExpirationPeriodInputType = {
   expirationMonth: string;
@@ -26,6 +27,11 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
   const { onChange, errors } = expiredPeriodState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
+  const { inputRefs, onFocusNextInput } = useInputRefs(
+    INPUT_COUNTS.CARD_NUMBERS,
+    onChange
+  );
+
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader
@@ -41,6 +47,8 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
           .fill(0)
           .map((_: string, index: number) => (
             <Input
+              autoFocus={index === 0}
+              ref={(el) => (inputRefs.current[index] = el)}
               type="number"
               key={index}
               maxLength={2}
@@ -49,7 +57,7 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 if (e.target.value.length > e.target.maxLength)
                   e.target.value = e.target.value.slice(0, e.target.maxLength);
-                onChange(e);
+                onFocusNextInput(e, index);
               }}
               onBlur={onBlurShowErrors}
               onFocus={onFocusHideErrors}

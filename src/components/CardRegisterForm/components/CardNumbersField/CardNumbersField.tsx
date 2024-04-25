@@ -6,7 +6,7 @@ import Input from "@/components/_common/Input/Input";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useShowError from "@/hooks/useShowError";
-import useInputRefs from "@/hooks/useRefArr";
+import useInputRefs from "@/hooks/useInputRefs";
 
 export type CardNumberInputType = {
   cardNumbers1: string;
@@ -44,6 +44,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
           .fill(0)
           .map((_: string, index: number) => (
             <Input
+              autoFocus={index === 0}
               ref={(el) => (inputRefs.current[index] = el)}
               type="number"
               key={index}

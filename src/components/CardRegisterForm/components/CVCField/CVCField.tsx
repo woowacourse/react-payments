@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CVCField = ({ CVCNumbersState }: Props) => {
-  const { onChange, error } = CVCNumbersState;
+  const { onChange, error, isError } = CVCNumbersState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
@@ -21,10 +21,11 @@ const CVCField = ({ CVCNumbersState }: Props) => {
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.CVC} />
       <InputField
         label={MESSAGE.INPUT_LABEL.CVC}
-        errorMessages={[error]}
+        errorMessages={error}
         showErrors={showErrors}
       >
         <Input
+          autoFocus={true}
           type="number"
           maxLength={VALID_LENGTH.CVC_NUMBERS}
           name={"cvc"}
@@ -36,7 +37,7 @@ const CVCField = ({ CVCNumbersState }: Props) => {
           }}
           onBlur={onBlurShowErrors}
           onFocus={onFocusHideErrors}
-          isError={!!error}
+          isError={isError}
         />
       </InputField>
     </S.InputFieldWithInfo>

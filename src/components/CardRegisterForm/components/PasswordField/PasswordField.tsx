@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PasswordField = ({ passwordState }: Props) => {
-  const { onChange, error } = passwordState;
+  const { onChange, error, isError } = passwordState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
@@ -20,10 +20,11 @@ const PasswordField = ({ passwordState }: Props) => {
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.PASSWORD} />
       <InputField
         label={MESSAGE.INPUT_LABEL.PASSWORD}
-        errorMessages={[error]}
+        errorMessages={error}
         showErrors={showErrors}
       >
         <Input
+          autoFocus={true}
           type="password"
           maxLength={VALID_LENGTH.PASSWORD}
           placeholder={MESSAGE.PLACEHOLDER.PASSWORD}
@@ -34,7 +35,7 @@ const PasswordField = ({ passwordState }: Props) => {
           }}
           onFocus={onFocusHideErrors}
           onBlur={onBlurShowErrors}
-          isError={!!error}
+          isError={isError}
         />
       </InputField>
     </S.InputFieldWithInfo>

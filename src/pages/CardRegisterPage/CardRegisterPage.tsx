@@ -4,6 +4,8 @@ import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import useInputs from "@/hooks/useInputs";
 import {
+  validateDoubleSpace,
+  validateEnterRequired,
   validateIsValidLength,
   validateMonth,
   validateOwnerName,
@@ -50,7 +52,11 @@ const CardRegisterPage = () => {
 
   const ownerNameState = useInput({
     initialValue: "",
-    validates: [(value: string) => validateOwnerName(value)],
+    validates: [
+      (value: string) => validateOwnerName(value),
+      (value: string) => validateDoubleSpace(value),
+      () => validateEnterRequired(),
+    ],
   });
 
   const cardTypeState = useInput<CardType | null>({
@@ -83,6 +89,17 @@ const CardRegisterPage = () => {
     });
   };
 
+  const completedArr = [
+    !cardNumbersState.isError,
+    !!cardTypeState.value?.length,
+    !expiredDateState.isError,
+    !ownerNameState.isError,
+    !CVCNumbersState.isError,
+    !passwordState.isError,
+  ];
+
+  const allPassed = completedArr.every((isCompleted) => isCompleted === true);
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
@@ -103,9 +120,10 @@ const CardRegisterPage = () => {
           passwordState={passwordState}
           step={step}
           setStep={setStep}
+          completedArr={completedArr}
         />
       </S.FlexWrapper>
-      {step === 7 && (
+      {step === 7 && allPassed && (
         <BasicButton
           borderType="square"
           position="bottom"

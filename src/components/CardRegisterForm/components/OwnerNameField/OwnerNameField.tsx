@@ -7,28 +7,37 @@ import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import useShowError from "@/hooks/useShowError";
+import { ValidationStatus } from "@/utils/validation";
 
 interface Props {
   ownerNameState: ReturnType<typeof useInput<string>>;
 }
 
 const OwnerNameField = ({ ownerNameState }: Props) => {
-  const { onChange, error } = ownerNameState;
+  const { onChange, error, setError, isError } = ownerNameState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
-  const onEnterCompleted = () => {};
+  const onEnterCompleted = () => {
+    setError((prev) => {
+      if (prev.includes(ValidationStatus.ENTER_REQUIRED)) {
+        return [...prev].filter((e) => e !== ValidationStatus.ENTER_REQUIRED);
+      }
+      return prev;
+    });
+  };
 
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
-        errorMessages={[error]}
+        errorMessages={error}
         showErrors={showErrors}
       >
         <Input
+          autoFocus={true}
           placeholder={MESSAGE.PLACEHOLDER.OWNER_NAME}
-          isError={!!error}
+          isError={isError}
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +45,10 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
             onChange(e);
           }}
           onFocus={onFocusHideErrors}
-          onBlur={onBlurShowErrors}
+          onBlur={() => {
+            onEnterCompleted();
+            onBlurShowErrors();
+          }}
           onKeyDown={onEnterCompleted}
         />
       </InputField>

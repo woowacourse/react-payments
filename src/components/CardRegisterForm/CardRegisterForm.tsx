@@ -23,6 +23,7 @@ interface Props {
   cardTypeState: ReturnType<typeof useInput<CardType | null>>;
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  completedArr: boolean[];
 }
 
 const CardRegisterForm = ({
@@ -32,18 +33,10 @@ const CardRegisterForm = ({
   CVCNumbersState,
   passwordState,
   cardTypeState,
+  completedArr,
   step,
   setStep,
 }: Props) => {
-  const completedArr = [
-    !cardNumbersState.isError,
-    cardTypeState.value,
-    !expiredPeriodState.isError,
-    !ownerNameState.isError,
-    !CVCNumbersState.isError,
-    !passwordState.isError,
-  ];
-
   useEffect(() => {
     if (completedArr[step - 1] && step <= completedArr.length) {
       setStep((prev) => prev + 1);

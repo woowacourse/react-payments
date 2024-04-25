@@ -3,12 +3,14 @@ import { ValidationStatus } from "@/utils/validation";
 import { useEffect, useState } from "react";
 import React from "react";
 
+export type ValidateFuncWithPropsType = (
+  value: string[],
+  currentName: string
+) => { isValid: boolean; type: ValidationStatus } | null;
+
 interface Props<T> {
   initialValue: T;
-  validates: ((
-    value: string[],
-    currentName: string
-  ) => { isValid: boolean; type: ValidationStatus } | null)[];
+  validates: ValidateFuncWithPropsType[];
   maxNumberLength?: number;
 }
 

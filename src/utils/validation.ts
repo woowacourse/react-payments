@@ -6,6 +6,7 @@ export enum ValidationStatus {
   INVALID_MONTH = "INVALID_MONTH",
   NAME_SHOULD_BE_CAPITAL = "NAME_SHOULD_BE_CAPITAL",
   DOUBLE_SPACE = "DOUBLE_SPACE",
+  ENTER_REQUIRED = "ENTER_REQUIRED",
 }
 
 export const validateIsValidLength = (
@@ -51,11 +52,15 @@ export const validateOwnerName = (name: string) => {
   if (!alphabetRegex.test(name)) {
     return { type: ValidationStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
   }
+  return { type: ValidationStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
+};
+
+export const validateDoubleSpace = (name: string) => {
   const doubleSpaceRegex = /\s{2,}/;
   if (doubleSpaceRegex.test(name)) {
     return { type: ValidationStatus.DOUBLE_SPACE, isValid: false };
   }
-  return { type: ValidationStatus.INVALID_MONTH, isValid: true };
+  return { type: ValidationStatus.DOUBLE_SPACE, isValid: true };
 };
 
 export const makeNewErrorMessages = (
@@ -77,4 +82,8 @@ export const checkCardBrand = (cardNumbers: string) => {
     return "MASTER";
   }
   return "NONE";
+};
+
+export const validateEnterRequired = () => {
+  return { type: ValidationStatus.ENTER_REQUIRED, isValid: false };
 };

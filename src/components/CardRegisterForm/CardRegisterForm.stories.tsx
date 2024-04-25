@@ -44,6 +44,7 @@ const CardRegisterFormWithHook = () => {
       cardTypeState={cardTypeState}
       step={step}
       setStep={setStep}
+      completedArr={[]}
     />
   );
 };
