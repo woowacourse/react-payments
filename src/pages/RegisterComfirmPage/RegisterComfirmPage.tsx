@@ -1,5 +1,5 @@
 import { MESSAGE } from "@/constants/message";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import S from "./style";
 import CheckConfirmIcon from "@/assets/ConfirmCheck.svg?react";
 import BasicButton from "@/components/_common/BasicButton/BasicButton";
@@ -7,7 +7,13 @@ import { theme } from "@/style/theme";
 
 const RegisterComfirmPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { startNumbers, cardType } = location.state;
+
+  const onMoveRegisterPage = () => {
+    navigate("/");
+  };
+
   return (
     <S.ConfirmWrapper>
       <S.ConfirmCheckIconCircle>
@@ -24,6 +30,7 @@ const RegisterComfirmPage = () => {
         disabled={false}
         backgroundColor={theme.COLOR["grey-3"]}
         position="basic"
+        onClick={onMoveRegisterPage}
       >
         확인
       </BasicButton>

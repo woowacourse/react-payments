@@ -1,5 +1,6 @@
 import { FlexCenter } from "@/style/common";
 import styled from "styled-components";
+import { fadeInAnimation } from "@/style/common";
 
 const ConfirmWrapper = styled.div`
   font-size: 25px;
@@ -16,6 +17,7 @@ const ConfirmCheckIconCircle = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.COLOR["grey-3"]};
   ${FlexCenter}
+  ${fadeInAnimation}
 `;
 
 const ConfirmMessageWrapper = styled.div`
