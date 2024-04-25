@@ -5,22 +5,12 @@ import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
-import { ValidateInput } from '../hooks/useValidateInput';
-import useLastValidValue from '../hooks/useLastValidValue';
+import { UseCardNumbers } from '../hooks/useCardNumbers';
 
 interface props {
-  partValidateInputs: ValidateInput[];
+  useCardNumbers: UseCardNumbers;
 }
-export default function CardNumbers({ partValidateInputs }: props) {
-  const errorMessages = partValidateInputs.map(
-    validateInput => validateInput.errorMessage
-  );
-
-  const errorMessage = useLastValidValue({
-    checkValues: errorMessages,
-    invalidValues: [''],
-  });
-
+export default function CardNumbers({ useCardNumbers }: props) {
   return (
     <section>
       <SectionTitle
@@ -29,18 +19,18 @@ export default function CardNumbers({ partValidateInputs }: props) {
       />
       <FormItem
         labelText={PAYMENTS_INPUT_MESSAGE.cardNumberLabel}
-        errorMessage={errorMessage}
+        errorMessage={useCardNumbers.errorMessage}
       >
         <TextInputContainer>
-          {partValidateInputs.map((validateInput, idx) => (
+          {useCardNumbers.cardNumberOnChanges.map((onChange, idx) => (
             <TextInput
               key={idx}
               placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
-              onChange={validateInput.onChange}
+              onChange={onChange}
               borderColor={
-                validateInput.errorMessage === '' ? undefined : 'error'
+                useCardNumbers.isValidNumberParts[idx] ? undefined : 'error'
               }
-              aria-invalid={!(validateInput.errorMessage === '')}
+              aria-invalid={!useCardNumbers.isValidNumberParts[idx]}
               maxLength={BOUND.cardNumbersOnePartUpper}
             />
           ))}

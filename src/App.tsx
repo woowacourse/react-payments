@@ -1,72 +1,43 @@
 import './App.css';
 
+import { CardExpiredDate, CardNumbers } from './type';
+
 import BottomButton from './components/BottomButton';
 import { COLOR } from './styles/color';
 import CardForm from './components/CardForm';
-import CardInfoProps from './props/useInput/CardInfo';
 import CardPreview from './components/CardPreview';
 import { matchCardIssuer } from './domain/matchCardIssuer';
 import styled from '@emotion/styled';
-import useValidateInput from './hooks/useValidateInput';
+import useCardExpiredDate from './hooks/useCardExpiredDate';
+import useCardHolder from './hooks/useCardHolder';
+import useCardNumbers from './hooks/useCardNumbers';
 
 function App() {
-  const firstCardNumberValidateInput = useValidateInput(
-    CardInfoProps.cardNumberPart
-  );
-  const secondCardNumberValidateInput = useValidateInput(
-    CardInfoProps.cardNumberPart
-  );
-  const thirdCardNumberValidateInput = useValidateInput(
-    CardInfoProps.cardNumberPart
-  );
-  const fourthCardNumberValidateInput = useValidateInput(
-    CardInfoProps.cardNumberPart
-  );
-
-  const expiredDateMonthValidateInput = useValidateInput(
-    CardInfoProps.expiredDate.month
-  );
-  const expiredDateYearValidateInput = useValidateInput(
-    CardInfoProps.expiredDate.year
-  );
-
-  const cardHolderValidateInput = useValidateInput(CardInfoProps.cardHolder);
-
-  const cardNumberInputs = [
-    firstCardNumberValidateInput,
-    secondCardNumberValidateInput,
-    thirdCardNumberValidateInput,
-    fourthCardNumberValidateInput,
-  ];
-
-  const cardNumbers = cardNumberInputs.map(
-    validateInput => validateInput.inputValue
-  ) as [string, string, string, string];
-  const cardIssuer = matchCardIssuer(cardNumbers.join(''));
+  const cardNumbers = useCardNumbers();
+  const cardExpiredDate = useCardExpiredDate();
+  const cardHolder = useCardHolder();
+  const cardIssuer = matchCardIssuer(cardNumbers.cardNumbers.join(''));
 
   const cardInfo = {
-    cardNumbers,
+    cardNumbers: cardNumbers.cardNumbers as CardNumbers,
     cardIssuer,
-    expiredDate: [
-      expiredDateMonthValidateInput.inputValue,
-      expiredDateYearValidateInput.inputValue,
-    ] as [string, string],
-    cardHolder: cardHolderValidateInput.inputValue,
+    expiredDate: cardExpiredDate.expiredDate as CardExpiredDate,
+    cardHolder: cardHolder.holder,
   };
 
+  const isValid =
+    cardNumbers.isValid && cardExpiredDate.isValid && cardHolder.isValid;
+
   return (
-    <div style={{ width: '376px' }}>
-      <Payments>
-        <CardPreview cardInfo={cardInfo} />
-        <CardForm
-          cardNumberValidateInputs={cardNumberInputs}
-          expiredDateMonthValidateInput={expiredDateMonthValidateInput}
-          expiredDateYearValidateInput={expiredDateYearValidateInput}
-          cardHolderValidateInput={cardHolderValidateInput}
-        />
-      </Payments>
-      {<BottomButton>안녕</BottomButton>}
-    </div>
+    <Payments>
+      <CardPreview cardInfo={cardInfo} />
+      <CardForm
+        useCardNumbers={cardNumbers}
+        useCardExpiredDate={cardExpiredDate}
+        useCardHolder={cardHolder}
+      />
+      {isValid && <BottomButton>확인</BottomButton>}
+    </Payments>
   );
 }
 

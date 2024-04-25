@@ -2,6 +2,7 @@ import { COLOR } from '../styles/color';
 import styled from '@emotion/styled';
 
 const BottomButton = styled.button({
+  position: 'absolute',
   bottom: 0,
   left: 0,
   width: '100%',

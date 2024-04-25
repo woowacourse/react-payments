@@ -1,29 +1,26 @@
 import CardHolder from './CardHolder';
 import CardNumbers from './CardNumbers';
 import ExpiredDate from './CardExpiredDate';
-import { ValidateInput } from '../hooks/useValidateInput';
+import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
+import { UseCardHolder } from '../hooks/useCardHolder';
+import { UseCardNumbers } from '../hooks/useCardNumbers';
 import styled from '@emotion/styled';
 
 interface props {
-  cardNumberValidateInputs: ValidateInput[];
-  expiredDateMonthValidateInput: ValidateInput;
-  expiredDateYearValidateInput: ValidateInput;
-  cardHolderValidateInput: ValidateInput;
+  useCardNumbers: UseCardNumbers;
+  useCardExpiredDate: UseCardExpiredDate;
+  useCardHolder: UseCardHolder;
 }
 export default function CardForm({
-  cardNumberValidateInputs,
-  expiredDateMonthValidateInput,
-  expiredDateYearValidateInput,
-  cardHolderValidateInput,
+  useCardNumbers,
+  useCardExpiredDate,
+  useCardHolder,
 }: props) {
   return (
     <CardFormContainer>
-      <CardNumbers partValidateInputs={cardNumberValidateInputs} />
-      <ExpiredDate
-        monthValidateInput={expiredDateMonthValidateInput}
-        yearValidateInput={expiredDateYearValidateInput}
-      />
-      <CardHolder validateInput={cardHolderValidateInput} />
+      <CardNumbers useCardNumbers={useCardNumbers} />
+      <ExpiredDate useCardExpiredDate={useCardExpiredDate} />
+      <CardHolder useCardHolder={useCardHolder} />
     </CardFormContainer>
   );
 }
