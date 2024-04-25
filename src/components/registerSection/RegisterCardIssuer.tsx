@@ -5,7 +5,6 @@ import InputSection from './InputSection';
 import { CARD_ISSUER } from '../../constants/cardSection';
 import { forwardRef } from 'react';
 import INITIAL_CARD_ISSUER_INFO from '../../constants/initialCardIssuerInfo';
-import Select from '../composables/Select';
 
 type RegisterCardIssuerProps = {
   onChange: React.ChangeEventHandler<HTMLSelectElement>;

@@ -17,7 +17,7 @@ function Register({ children, step }: PropsWithChildren<RegisterComponentProps>)
   return <>{validElements.reverse()}</>;
 }
 
-function Step({ name, children }: PropsWithChildren<StepProps>) {
+function Step({ children }: PropsWithChildren<StepProps>) {
   return <>{children}</>;
 }
 

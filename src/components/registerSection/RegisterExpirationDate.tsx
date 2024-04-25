@@ -22,7 +22,7 @@ type RegisterExpirationDateProps = {
 };
 
 const RegisterExpirationDate = forwardRef<HTMLInputElement, RegisterExpirationDateProps>(
-  (props, ref) => {
+  (props) => {
     const {
       month,
       monthError,
