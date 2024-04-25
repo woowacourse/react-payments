@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../../components/InputField/InputField";
 import { Validator } from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
@@ -13,8 +13,12 @@ const individualValidators: Validator[] = [
     errorMessage: "숫자로 입력해주세요.",
   },
 ];
+interface CVCInputProps {
+  reduceds: ReturnType<typeof useInput>[];
+  setIsFocused?: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const CVCInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+const CVCInputField = ({ reduceds, setIsFocused = () => {} }: CVCInputProps) => {
   const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
   return (
     <InputField>
@@ -29,6 +33,12 @@ const CVCInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
+            onBlur={() => {
+              setIsFocused(false);
+            }}
+            onFocus={() => {
+              setIsFocused(true);
+            }}
           ></InputField.Input>
         ))}
       </InputField.Inputs>

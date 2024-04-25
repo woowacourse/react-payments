@@ -3,7 +3,7 @@ import S from "./CreditCardPreviewRear.styled";
 interface Props {
   CVC: string;
 }
-const CreditCardPreview = ({ CVC }: Props) => {
+const CreditCardPreviewRear = ({ CVC }: Props) => {
   return (
     <S.CreditCard>
       <S.CVCInfo>
@@ -13,4 +13,4 @@ const CreditCardPreview = ({ CVC }: Props) => {
   );
 };
 
-export default CreditCardPreview;
+export default CreditCardPreviewRear;

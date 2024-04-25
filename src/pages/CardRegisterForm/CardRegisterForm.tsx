@@ -13,6 +13,7 @@ interface Props {
   ownerNameReduceds: ReturnType<typeof useInput>[];
   CVCReduceds: ReturnType<typeof useInput>[];
   passwordReduceds: ReturnType<typeof useInput>[];
+  setIsCVCFocused?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardRegisterForm = ({
@@ -20,6 +21,7 @@ const CardRegisterForm = ({
   expirationDateReduceds,
   ownerNameReduceds,
   CVCReduceds,
+  setIsCVCFocused,
   passwordReduceds,
 }: Props) => {
   return (
@@ -55,7 +57,7 @@ const CardRegisterForm = ({
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.CVC}</S.InputTitle>
         </S.TitleWrapper>
-        <CVCInputField reduceds={CVCReduceds} />
+        <CVCInputField reduceds={CVCReduceds} setIsFocused={setIsCVCFocused} />
       </S.InputFieldWithInfo>
 
       {/* 비밀번호 앞 2자리 */}

@@ -3,6 +3,8 @@ import CardRegisterForm from "@/pages/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview, { CardBrand } from "@/components/CreditCardPreview/CreditCardPreview";
 import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
+import { useState } from "react";
+import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
 
 const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced[0].value);
 
@@ -25,21 +27,27 @@ const CardRegister = () => {
   const CVCReduceds = Array.from({ length: INPUT_COUNTS.CVC }).map(() => useInput(""));
   const passwordReduceds = Array.from({ length: INPUT_COUNTS.PASSWORD }).map(() => useInput(""));
 
+  const [isCVCFocused, setIsCVCFocused] = useState(false);
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
-        <CreditCardPreview
-          cardBrand={checkCardBrand(inputsOf(cardNumbersReduceds))}
-          cardNumbers={inputsOf(cardNumbersReduceds)}
-          expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
-          ownerName={inputsOf(ownerNameReduceds)[0]}
-        />
+        {!isCVCFocused && (
+          <CreditCardPreview
+            cardBrand={checkCardBrand(inputsOf(cardNumbersReduceds))}
+            cardNumbers={inputsOf(cardNumbersReduceds)}
+            expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
+            ownerName={inputsOf(ownerNameReduceds)[0]}
+          />
+        )}
+        {isCVCFocused && <CreditCardPreviewRear CVC={CVCReduceds[0][0].value} />}
+
         <CardRegisterForm
           cardNumbersReduceds={cardNumbersReduceds}
           expirationDateReduceds={expirationDateReduceds}
           ownerNameReduceds={ownerNameReduceds}
           CVCReduceds={CVCReduceds}
           passwordReduceds={passwordReduceds}
+          setIsCVCFocused={setIsCVCFocused}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>
