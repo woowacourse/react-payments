@@ -62,6 +62,14 @@ const CardForm: React.FC = () => {
     setIsSelectedCardCompleted(isCompleted);
   };
 
+  const handleExpiryMonthCompleted = (isCompleted: boolean) => {
+    setIsExpiryMontthCompleted(isCompleted);
+  };
+
+  const handleExpiryYearCompleted = (isCompleted: boolean) => {
+    setIsExpiryYearCompleted(isCompleted);
+  };
+
   return (
     <form>
       <CardPreview
@@ -71,6 +79,18 @@ const CardForm: React.FC = () => {
         cardholderName={cardholderName}
         cardCompany={selectedCard}
       />
+
+      {isExpiryMonthCompleted && isExpiryYearCompleted && (
+        <CardInput
+          title="카드 소유자 이름을 입력해 주세요"
+          label="카드 소유자 이름"
+        >
+          <CardOwnerNameInput
+            value={cardholderName}
+            onChange={handleCardholderNameChange}
+          />
+        </CardInput>
+      )}
 
       {isSelectedCardCompleted && (
         <CardInput
@@ -83,6 +103,8 @@ const CardForm: React.FC = () => {
             year={expiryYear}
             onMonthChange={handleExpiryMonthChange}
             onYearChange={handleExpiryYearChange}
+            setExpiryMonthCompleted={handleExpiryMonthCompleted}
+            setExpiryYearCompleted={handleExpiryYearCompleted}
           />
         </CardInput>
       )}
@@ -117,15 +139,7 @@ const CardForm: React.FC = () => {
 
       
 
-      <CardInput
-        title="카드 소유자 이름을 입력해 주세요"
-        label="카드 소유자 이름"
-      >
-        <CardOwnerNameInput
-          value={cardholderName}
-          onChange={handleCardholderNameChange}
-        />
-      </CardInput>
+   
 
    
 

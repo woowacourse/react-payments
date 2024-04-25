@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExpiryInputWrapper } from "./ExpiryInput.styles";
 import Input from "../common/Input/Input";
 import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
@@ -8,6 +8,8 @@ interface ExpiryInputProps {
   year: string;
   onMonthChange: (value: string) => void;
   onYearChange: (value: string) => void;
+  setExpiryMonthCompleted: (isCompletd: boolean) => void;
+  setExpiryYearCompleted: (isCompletd: boolean) => void;
 }
 
 const ExpiryInput: React.FC<ExpiryInputProps> = ({
@@ -15,12 +17,22 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
   year,
   onMonthChange,
   onYearChange,
+  setExpiryMonthCompleted,
+  setExpiryYearCompleted,
 }) => {
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleValidate = (isValid: boolean) => {
     setIsValid(isValid);
+  };
+
+  const handleMonthChange = (inputValue: string) => {
+    onMonthChange(inputValue);
+  };
+
+  const handleYearChange = (inputValue: string) => {
+    onYearChange(inputValue);
   };
 
   const monthValidator = (value: string) => {
@@ -40,6 +52,14 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
     setErrorMessage("");
     return true;
   };
+
+  useEffect(() => {
+    if (isValid && month && year) {
+      console.log("month", month, "year", year);
+      setExpiryMonthCompleted(true);
+      setExpiryYearCompleted(true);
+    }
+  }, [isValid, month, year]);
 
   const yearValidator = (value: string) => {
     const currentYear = Number(new Date().getFullYear().toString().slice(2));
@@ -65,7 +85,7 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
     <ExpiryInputWrapper>
       <Input
         value={month}
-        onChange={onMonthChange}
+        onChange={(month) => handleMonthChange(month)}
         onValidate={(isValid) => handleValidate(isValid)}
         maxLength={2}
         placeholder="MM"
@@ -74,7 +94,7 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
       />
       <Input
         value={year}
-        onChange={onYearChange}
+        onChange={(year) => handleYearChange(year)}
         onValidate={(isValid) => handleValidate(isValid)}
         maxLength={2}
         placeholder="YY"
