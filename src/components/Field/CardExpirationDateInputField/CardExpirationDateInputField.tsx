@@ -119,6 +119,10 @@ export default function CardExpirationDateInputField({
       setDate({ ...date, month: e.target.value.padStart(2, "0") });
 
     checkValidDate({ month: e.target.value });
+
+    if (e.target.value.length === 2 && e.target.nextSibling) {
+      (e.target.nextSibling as HTMLInputElement).focus();
+    }
   };
 
   const handleYear = (e: ChangeEvent<HTMLInputElement>) => {

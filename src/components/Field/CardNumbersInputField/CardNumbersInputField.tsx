@@ -79,7 +79,11 @@ export default function CardNumbersInputField({
 
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
-    setCardNumbers(updatedCardNumbers); // 여기서만 사용
+    setCardNumbers(updatedCardNumbers);
+
+    if (e.target.value.length === 4 && e.target.nextSibling) {
+      (e.target.nextSibling as HTMLInputElement).focus();
+    }
   };
 
   useEffect(() => {
