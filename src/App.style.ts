@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 0 30px 0 31px;
-
   width: 382px;
   height: 700px;
   background-color: #fff;
 
   border-radius: 8px;
   border: 3px solid #000;
+`;
+
+export const SubContainer = styled.div`
+  width: 100%;
+  height: 642px;
+
+  padding: 0 30px 0 31px;
 `;
 
 export const CardPreviewWrapper = styled.div`
@@ -22,7 +27,7 @@ export const CardInfoContainer = styled.div`
 
   gap: 16px;
 
-  height: 438px;
+  max-height: 392px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -46,4 +51,26 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+`;
+
+export const SubmitContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 52px;
+
+  border-radius: 0px 0px 4px 4px;
+`;
+
+export const SubmitButton = styled.button`
+  width: 100%;
+  height: 100%;
+
+  color: #f3f3f3;
+  font-weight: 700;
+  font-size: 1rem;
+
+  background-color: #333333;
 `;
