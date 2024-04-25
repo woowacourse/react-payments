@@ -1,4 +1,4 @@
-import { InitialCardNumberState } from '../../hooks/useCardNumber';
+import { InitialCardNumberState } from 'types';
 import MasterCardImage from '../../assets/images/mastercard.png';
 import VisaCardImage from '../../assets/images/visa.png';
 import * as S from './creditCard.style';
@@ -34,7 +34,7 @@ export default function CreditCard({
           </S.CardHeaderContentWrapper>
           <S.CardHeaderContentWrapper>
             {cardBrandImageSrc ? (
-              <S.CardBrand src={cardBrandImageSrc} alt={'cardBrandImage'} />
+              <S.CardBrand src={cardBrandImageSrc} alt={`${cardBrand} 카드`} />
             ) : null}
           </S.CardHeaderContentWrapper>
         </S.CardHeader>
