@@ -3,20 +3,26 @@ import styled from 'styled-components';
 import CardPreview from '../components/CardPreview';
 import CardInfoForm from '../components/CardInfoForm';
 import useCardInfo from '../hooks/useCardInfo/useCardInfo';
+import { useState } from 'react';
 
 const CardRegisterPage = () => {
   const { control, completionStatus } = useCardInfo();
+  const [isCardFront, setIsCardFront] = useState(true);
+
   const { cardNumbers, expiryDate, cardholderName, cvc } = control;
 
   return (
     <Container>
       <CardPreview
+        isFront={isCardFront}
+        cardType={0}
         cardNumbers={cardNumbers.value}
         expiryDate={{ month: expiryDate.month.value, year: expiryDate.year.value }}
         cardholderName={cardholderName.value}
+        cvc={cvc.value}
       />
       <CardInfoFormWrapper>
-        <CardInfoForm cardInfoControl={control} completionStatus={completionStatus} />
+        <CardInfoForm cardInfoControl={control} completionStatus={completionStatus} setIsCardFront={setIsCardFront} />
       </CardInfoFormWrapper>
     </Container>
   );

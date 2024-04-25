@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import MasterCardLogo from '../../../src/assets/images/mastercard.png';
-import VisaCardLogo from '../../../src/assets/images/visa.png';
+import MasterCardLogo from '../../../../src/assets/images/mastercard.png';
+import VisaCardLogo from '../../../../src/assets/images/visa.png';
 
 interface ICardBrandLogoProps {
   firstTwoDigits: string;

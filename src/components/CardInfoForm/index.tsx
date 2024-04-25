@@ -1,22 +1,25 @@
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
 import SequenceContainer from '../common/SequenceContainer';
 import CardNumbersInputContainer from './CardNumbersInputContainer';
 import CardExpiryDateInputContainer from './CardExpiryDateInputContainer';
 import CardholderNameInputContainer from './CardholderNameInputContainer';
 import CvcInputContainer from './CvcInputContainer';
 import PasswordInputContainer from './PasswordInputContainer';
+import ROUTE_PATH from '../../pages/constants/routePath';
+
+import getObjectValues from '../../utils/getObjectValues';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
-import styled from 'styled-components';
-import getObjectValues from '../../utils/getObjectValues';
-import { useNavigate } from 'react-router-dom';
-import ROUTE_PATH from '../../pages/constants/routePath';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
   completionStatus: ICardInfoCompletionStatus;
+  setIsCardFront?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CardInfoForm({ cardInfoControl, completionStatus }: ICardInfoFormProps) {
+export default function CardInfoForm({ cardInfoControl, completionStatus, setIsCardFront }: ICardInfoFormProps) {
   const navigate = useNavigate();
   const { cardNumbers, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
@@ -39,7 +42,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus }: ICar
           <CardNumbersInputContainer {...cardNumbers} />,
           <CardExpiryDateInputContainer {...expiryDate} />,
           <CardholderNameInputContainer {...cardholderName} />,
-          <CvcInputContainer {...cvc} />,
+          <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />,
           <PasswordInputContainer {...password} />,
         ]}
       />

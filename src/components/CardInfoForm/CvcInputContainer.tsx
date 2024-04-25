@@ -9,13 +9,23 @@ export interface ICvcInputContainerProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateValue: (targetValue: string) => void;
   errorStatus: { errorMessage: string; isError: boolean };
+  setIsCardFront?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CvcInputContainer = ({ value, onChange, errorStatus }: ICvcInputContainerProps) => {
+const CvcInputContainer = ({ value, onChange, errorStatus, setIsCardFront }: ICvcInputContainerProps) => {
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
   } = useDisplayingErrorStatus(errorStatus);
+
+  const onFocus = () => setIsCardFront && setIsCardFront(false);
+  const onBlur = () => {
+    bringErrorStatus();
+
+    if (setIsCardFront) {
+      setIsCardFront(true);
+    }
+  };
 
   return (
     <div>
@@ -26,7 +36,8 @@ const CvcInputContainer = ({ value, onChange, errorStatus }: ICvcInputContainerP
           maxLength={3}
           value={value}
           onChange={onChange}
-          onBlur={bringErrorStatus}
+          onFocus={onFocus}
+          onBlur={onBlur}
           width="100%"
         />
       </InputSection>
