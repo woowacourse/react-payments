@@ -9,13 +9,15 @@ import { CardInfo } from '../../types/card';
 
 import useCardLogo from '../../hooks/useCardType';
 import { CARD_COLOR } from '../../constants/card-app';
+import CardCVCNumberDisplay from './CardCVCNumberDisplay';
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
+  isCardFront: boolean;
 }
 
-const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const { cardNumbers, expirationDate, cardOwnerName, cardCompany } = cardInfo;
+const CardPreview = ({ cardInfo, isCardFront }: CardPreviewProps) => {
+  const { cardNumbers, expirationDate, cardOwnerName, cardCompany, cardCVCNumber } = cardInfo;
 
   const { cardType, identifyCardType } = useCardLogo();
 
@@ -24,24 +26,35 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   }, [cardNumbers, identifyCardType]);
 
   return (
-    <StyledCardPreview company={cardCompany}>
-      <CardHeader>
-        <CardChip />
-        {cardType && <CardLogo src={cardType} />}
-      </CardHeader>
+    <>
+      {isCardFront && (
+        <CardFront company={cardCompany}>
+          <CardHeader>
+            <CardChip />
+            {cardType && <CardLogo src={cardType} />}
+          </CardHeader>
 
-      <CardBody>
-        <CardNumberDisplay cardNumbers={cardNumbers} />
-        <ExpirationDateDisplay expirationDate={expirationDate} />
-        <CardText type='longText' text={cardOwnerName} />
-      </CardBody>
-    </StyledCardPreview>
+          <CardBody>
+            <CardNumberDisplay cardNumbers={cardNumbers} />
+            <ExpirationDateDisplay expirationDate={expirationDate} />
+            <CardText type='longText' text={cardOwnerName} />
+          </CardBody>
+        </CardFront>
+      )}
+      {!isCardFront && (
+        <CardBack>
+          <CardCVCLine>
+            <CardCVCNumberDisplay cardCVCNumber={cardCVCNumber} />
+          </CardCVCLine>
+        </CardBack>
+      )}
+    </>
   );
 };
 
 export default CardPreview;
 
-const StyledCardPreview = styled.div<{ company: string }>`
+const CardFront = styled.div<{ company: string }>`
   height: 132px;
   width: 212px;
 
@@ -51,8 +64,8 @@ const StyledCardPreview = styled.div<{ company: string }>`
   box-shadow: 3px 3px 5px 0px #00000040;
 
   margin: 0 auto;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 50px;
+  margin-bottom: 40px;
 `;
 
 const CardHeader = styled.div`
@@ -81,4 +94,34 @@ const CardBody = styled.div`
   padding: 0px 0px 17px 17px;
 
   row-gap: 8px;
+`;
+
+const CardBack = styled.div`
+  position: relative;
+
+  height: 132px;
+  width: 212px;
+
+  color: #ffffff;
+  border-radius: 4px;
+  background-color: #d5d5d5;
+  box-shadow: 3px 3px 5px 0px #00000040;
+
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 40px;
+`;
+
+const CardCVCLine = styled.div`
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+
+  height: 24px;
+  width: 212px;
+
+  top: 84px;
+
+  background-color: #cbba64;
 `;

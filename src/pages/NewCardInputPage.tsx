@@ -116,7 +116,9 @@ const NewCardInputPage = () => {
 
   return (
     <InputPageLayout>
-      <CardPreview cardInfo={newCardInfo} />
+      <CardContainer>
+        <CardPreview cardInfo={newCardInfo} isCardFront={true} />
+      </CardContainer>
 
       <InputContainer>
         <Title content={CARD_META_INFO.cardNumbers.query} />
@@ -165,6 +167,15 @@ const NewCardInputPage = () => {
     </InputPageLayout>
   );
 };
+
+const CardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 315px;
+  height: 280px;
+`;
 
 const InputContainer = styled.div`
   display: flex;

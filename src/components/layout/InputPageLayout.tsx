@@ -12,7 +12,7 @@ export default InputPageLayout;
 const Layout = styled.main`
   padding: 18px 32px 0px 32px;
   width: 376px;
-  height: 43.75rem;
+  height: 700px;
 
   display: flex;
   flex-direction: column;
