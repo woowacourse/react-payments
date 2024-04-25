@@ -26,6 +26,12 @@ const theme: DefaultTheme = {
       font-weight: 400;
       line-height: 1.488rem;
     `,
+    button: `
+      font-family: Noto Sans KR;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 2.172rem;
+    `,
     paragraph1: `
       font-family: Inter;
       font-size: 1.4rem;

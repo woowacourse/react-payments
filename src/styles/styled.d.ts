@@ -7,6 +7,7 @@ declare module 'styled-components' {
       caption: string;
       label: string;
       input: string;
+      button: string;
       paragraph1: string;
       paragraph2: string;
     };
