@@ -10,10 +10,7 @@ export default function SubmitButton({
 }) {
   const allSectionsCompleted = isCompletedSections[0];
   return allSectionsCompleted ? (
-    <Button
-      onClick={onClick}
-      classes={[styles.primary, styles.submit].join(" ")}
-    >
+    <Button onClick={onClick} classNames={[styles.primary, styles.submit]}>
       확인
     </Button>
   ) : null;

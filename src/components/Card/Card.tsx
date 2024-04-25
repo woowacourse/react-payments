@@ -7,10 +7,12 @@ import styles from "./Card.module.css";
 
 const Card = ({
   cardNumbers,
+  cardCompanyName,
   date,
   ownerName,
 }: {
   cardNumbers: string[];
+  cardCompanyName: string;
   date: Record<string, string>;
   ownerName: string;
 }) => {

@@ -1,0 +1,16 @@
+.item {
+  list-style: none;
+  font-family: Inter;
+  font-size: 14px;
+  padding: 7px;
+}
+
+.list {
+  padding: 5px 0 5px 0;
+  width: 398px;
+  border-radius: 4px;
+  border: 1px solid black;
+  margin-top: 5px;
+  background-color: white;
+  position: relative;
+}
