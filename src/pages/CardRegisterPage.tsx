@@ -14,23 +14,31 @@ import useFormValidation from '../hooks/useForm/useFormValidation';
 const CardRegisterPage = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/register', { state: { cardNumber: cardNumberInfo.value.first, cardCompany: cardCompanyInfo.value } });
+  const handleClickNextPage = () => {
+    navigate('/register', {
+      state: { cardNumber: cardNumberInfo.value.first, cardCompany: cardCompanyInfo.value },
+    });
   };
 
-  const { cardNumberInfo, cardCompanyInfo, expiryDateInfo, cardholderNameInfo, cardCVCInfo, cardPasswordInfo } =
-    useCardInfo();
+  const cardInfo = useCardInfo();
+  const { validationStatus, isCardFormValid } = useFormValidation(cardInfo);
+  const { ...formStatus } = validationStatus;
 
-  const { validationStatus, isCardFormValid } = useFormValidation({
+  const {
     cardNumberInfo,
     cardCompanyInfo,
     expiryDateInfo,
     cardholderNameInfo,
     cardCVCInfo,
     cardPasswordInfo,
-  });
+  } = cardInfo;
 
-  const { cardNumberForm, cardCompanyForm, expiryDateForm, cardholderNameForm, cvcForm } = validationStatus;
+  const validPasswordSection = formStatus.cvc.isValid || formStatus.cvc.isOpen;
+  const validCVCSection = formStatus.cardholderName.isValid || formStatus.cardholderName.isOpen;
+  const validCardholderNameSection =
+    formStatus.cardholderName.isValid || formStatus.cardholderName.isOpen;
+  const validExpiryDateSection = formStatus.cardCompany.isValid || formStatus.cardCompany.isOpen;
+  const validCardCompanySection = formStatus.cardNumber.isValid || formStatus.cardNumber.isOpen;
 
   return (
     <AppLayout>
@@ -43,22 +51,23 @@ const CardRegisterPage = () => {
         isCardFront={cardCVCInfo.isCardFront}
       />
       <CardInfoWrapper>
-        {(cvcForm.isValid || cvcForm.isOpen) && (
+        {validPasswordSection && (
           <CardPasswordContainer password={cardPasswordInfo.value} {...cardPasswordInfo} />
         )}
-        {(cardholderNameForm.isValid || cardholderNameForm.isOpen) && (
-          <CardCVCContainer cvc={cardCVCInfo.value} {...cardCVCInfo} />
+        {validCVCSection && <CardCVCContainer cvc={cardCVCInfo.value} {...cardCVCInfo} />}
+        {validCardholderNameSection && (
+          <CardholderNameContainer
+            cardholderName={cardholderNameInfo.value}
+            {...cardholderNameInfo}
+          />
         )}
-        {(expiryDateForm.isValid || expiryDateForm.isOpen) && (
-          <CardholderNameContainer cardholderName={cardholderNameInfo.value} {...cardholderNameInfo} />
-        )}
-        {(cardCompanyForm.isValid || cardCompanyForm.isOpen) && <CardExpiryDateContainer {...expiryDateInfo} />}
-        {(cardNumberForm.isValid || cardNumberForm.isOpen) && (
+        {validExpiryDateSection && <CardExpiryDateContainer {...expiryDateInfo} />}
+        {validCardCompanySection && (
           <CardCompanyContainer cardCompany={cardCompanyInfo.value} {...cardCompanyInfo} />
         )}
         <CardNumberContainer cardNumbers={cardNumberInfo.value} {...cardNumberInfo} />
       </CardInfoWrapper>
-      {isCardFormValid && <SubmitButton onClick={handleClick}>확인</SubmitButton>}
+      {isCardFormValid && <SubmitButton onClick={handleClickNextPage}>확인</SubmitButton>}
     </AppLayout>
   );
 };
