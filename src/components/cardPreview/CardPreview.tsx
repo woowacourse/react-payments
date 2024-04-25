@@ -12,7 +12,7 @@ export interface CardPreviewProps {
 
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const getCardBrandImage = () => {
-    const IIN = Math.floor(cardInfo.cardNumbers[0] / 100);
+    const IIN = Math.floor(Number(cardInfo.cardNumbers[0]) / 100);
     if (
       IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER &&
       IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER
