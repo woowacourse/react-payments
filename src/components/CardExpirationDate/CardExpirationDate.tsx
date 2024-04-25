@@ -9,31 +9,48 @@ interface Props {
   cardExpirationMonth: CardInfoValue;
   cardExpirationYear: CardInfoValue;
   onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
+  onNext: () => void;
 }
 
 export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
   onChangeCardInfo,
+  onNext,
 }: Props) {
   const { cardMonth, cardYear, validateMessage } = useCardDateInput();
 
   useEffect(() => {
-    const newCardExpirationMonth = cardExpirationMonth;
+    // useEffect exhaustive-deps warning
+    const isMonthChanged =
+      cardExpirationMonth.value !== cardMonth.value ||
+      cardExpirationMonth.isError !== (cardMonth.validateMessage !== "");
 
-    newCardExpirationMonth.value = cardMonth.value;
-    newCardExpirationMonth.isError = cardMonth.validateMessage !== "";
+    if (isMonthChanged) {
+      const newCardExpirationMonth = cardExpirationMonth;
 
-    onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
+      newCardExpirationMonth.value = cardMonth.value;
+      newCardExpirationMonth.isError = cardMonth.validateMessage !== "";
+
+      onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
+      onNext();
+    }
   }, [cardMonth, validateMessage]);
 
   useEffect(() => {
-    const newCardExpirationYear = cardExpirationYear;
+    const isYearChanged =
+      cardExpirationYear.value !== cardYear.value ||
+      cardExpirationYear.isError !== (cardYear.validateMessage !== "");
 
-    newCardExpirationYear.value = cardYear.value;
-    newCardExpirationYear.isError = cardYear.validateMessage !== "";
+    if (isYearChanged) {
+      const newCardExpirationYear = cardExpirationYear;
 
-    onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
+      newCardExpirationYear.value = cardYear.value;
+      newCardExpirationYear.isError = cardYear.validateMessage !== "";
+
+      onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
+      onNext();
+    }
   }, [cardYear, validateMessage]);
 
   return (

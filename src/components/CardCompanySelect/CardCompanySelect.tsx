@@ -5,11 +5,13 @@ import * as S from "./style";
 interface Props {
   cardCompany: CardInfoValue;
   onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
+  onNext: () => void;
 }
 
 export default function CardCompanySelect({
   cardCompany,
   onChangeCardInfo,
+  onNext,
 }: Props) {
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -17,6 +19,7 @@ export default function CardCompanySelect({
 
     newSelectValue.value = value;
     onChangeCardInfo(newSelectValue, "cardCompany");
+    onNext();
   };
   const cardCompanies = Object.values(CARD_COMPANIES).map(
     (company) => company.name

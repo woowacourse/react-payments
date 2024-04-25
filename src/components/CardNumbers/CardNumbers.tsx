@@ -8,9 +8,14 @@ import * as S from "./style";
 interface Props {
   cardNumbers: CardInfoValue[];
   onChangeCardInfo: (inputValue: CardInfoValue[], inputId: string) => void;
+  onNext: () => void;
 }
 
-export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
+export default function CardNumbers({
+  cardNumbers,
+  onChangeCardInfo,
+  onNext,
+}: Props) {
   const {
     cardNumber1,
     cardNumber2,
@@ -21,20 +26,22 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
   const inputCardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
   useEffect(() => {
-    // useEffect depth
+    // useEffect exhaustive-deps warning
     const isChanged = cardNumbers.some(
       (card, idx) =>
         card.value !== inputCardNumbers[idx].value ||
         card.isError !== (inputCardNumbers[idx].validateMessage !== "")
     );
+
     if (isChanged) {
       const newCardNumbers = cardNumbers.map((card, idx) => ({
         ...card,
         value: inputCardNumbers[idx].value,
         isError: inputCardNumbers[idx].validateMessage !== "",
       }));
-      console.log(newCardNumbers);
+
       onChangeCardInfo(newCardNumbers, "cardNumbers");
+      onNext();
     }
   }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4]);
 

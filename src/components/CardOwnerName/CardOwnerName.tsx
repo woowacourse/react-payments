@@ -9,11 +9,13 @@ import * as S from "./style";
 interface Props {
   cardOwnerName: CardInfoValue;
   onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
+  onNext: () => void;
 }
 
 export default function CardOwnerName({
   cardOwnerName,
   onChangeCardInfo,
+  onNext,
 }: Props) {
   const { value, onChange, onBlur, validateMessage } = useInput("", {
     validateOnChange: [isUpperCase],
@@ -27,6 +29,7 @@ export default function CardOwnerName({
     newCardOwnerName.isError = validateMessage !== "";
 
     onChangeCardInfo(newCardOwnerName, "cardOwnerName");
+    onNext();
   }, [value, validateMessage]);
   // TODO: useEffect를 대체할 방법은 없을까? 부수 효과가 아닌데 effect 사용이 적절한가?
   // validateMessage를 넣은 이유는 빈 칸인 상태에서 blur 시, 에러메시지가 바뀌지만 isError가 안바뀌어서
