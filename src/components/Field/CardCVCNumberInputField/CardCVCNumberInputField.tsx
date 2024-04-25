@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent } from 'react';
 import { CVC_LENGTH } from '../../../constants/input';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
