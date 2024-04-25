@@ -8,23 +8,7 @@ import {
 } from '../../constants/cardInfo';
 
 import useFlipCard from '../../hooks/useFlipCard';
-
-type Brand = 'visa' | 'master';
-const getCardbrand = (
-  cardNumbers: CardPreviewProps['cardNumbers']
-): Nullable<Brand> => {
-  const { visa, master } = CARD_BRAND;
-
-  const visaPrefix = Number(cardNumbers[0].slice(0, 1));
-  const masterPrefix = Number(cardNumbers[0].slice(0, 2));
-
-  if (visaPrefix === visa.startNumber) return 'visa';
-
-  if (masterPrefix >= master.startNumber && masterPrefix <= master.endNumber)
-    return 'master';
-
-  return null;
-};
+import { getCardBrand } from '../../domain/getCardBrand';
 
 type CardPreviewProps = Record<keyof CardInfo, string[]>;
 export default function CardPreview({
@@ -63,7 +47,7 @@ type FrontSideProps = Pick<
   'cardNumbers' | 'expirationDate' | 'ownerName' | 'cardIssuer'
 >;
 function FrontSide({ cardNumbers, expirationDate, ownerName }: FrontSideProps) {
-  const brand = getCardbrand(cardNumbers);
+  const brand = getCardBrand(cardNumbers);
 
   return (
     <>
