@@ -6,6 +6,8 @@ import ExpiryInput from "../ExpiryInput/ExpiryInput";
 import CardOwnerNameInput from "../CardOwnerNameInput/CardOwnerNameInput";
 import SelectBox from "../CardCompanySelector/CardCompanySelector";
 import CardCVCInput from "../CardCVCInput/CardCVCInput";
+import Button from "../common/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const CardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState("");
@@ -26,6 +28,8 @@ const CardForm: React.FC = () => {
   const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
 
+  const navigate = useNavigate();
+
   const isAllCompleted =
     isCardCVCCompleted &&
     isCardholderNameCompleted &&
@@ -37,6 +41,15 @@ const CardForm: React.FC = () => {
     const filteredValue = value.replace(/\D/g, "");
     const formattedValue = filteredValue.replace(/(\d{4})/g, "$1 ").trim();
     setCardNumber(formattedValue);
+  };
+
+  const handleOnClick = () => {
+    navigate("/enrollmentCompleted", {
+      state: {
+        cardCompany: selectedCard,
+        cardFirstPartNumbers: cardNumber.slice(0, 4),
+      },
+    });
   };
 
   const handleExpiryMonthChange = (value: string) => {
@@ -188,7 +201,7 @@ const CardForm: React.FC = () => {
         />
       </CardInput>
 
-      {isAllCompleted && <button>확인</button>}
+      {isAllCompleted && <Button onClick={handleOnClick}>확인</Button>}
     </form>
   );
 };
