@@ -26,6 +26,10 @@ const validate = {
   isEnglish: (value: string) => {
     return /^[a-zA-Z ]*$/.test(value);
   },
+
+  isEmptyValue: (value: string) => {
+    return value.length === 0;
+  },
 };
 
 export default validate;
