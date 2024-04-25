@@ -1,6 +1,6 @@
-import Input from "@/components/Input/Input";
-import InputField from "@/components/InputField/InputField";
-import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
+import Input from "@/components/_common/Input/Input";
+import InputField from "@/components/_common/InputField/InputField";
+import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import { MESSAGE } from "@/constants/message";
 import S from "../../style";
 import useInput from "@/hooks/useInput";

@@ -1,8 +1,8 @@
 import S from "../../style";
-import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
+import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import { MESSAGE } from "@/constants/message";
-import InputField from "@/components/InputField/InputField";
-import Input from "@/components/Input/Input";
+import InputField from "@/components/_common/InputField/InputField";
+import Input from "@/components/_common/Input/Input";
 import useInput from "@/hooks/useInput";
 import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";

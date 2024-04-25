@@ -1,8 +1,8 @@
-import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
+import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import S from "../../style";
 import { MESSAGE } from "@/constants/message";
-import InputField from "@/components/InputField/InputField";
-import SelectBox from "@/components/SelectBox/SelectBox";
+import InputField from "@/components/_common/InputField/InputField";
+import SelectBox from "@/components/_common/SelectBox/SelectBox";
 import useInput from "@/hooks/useInput";
 import { CardType, CardTypeColor } from "@/constants/cardType";
 

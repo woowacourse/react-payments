@@ -1,3 +1,4 @@
+import { FlexCenter } from "@/style/common";
 import { styled, css } from "styled-components";
 
 const CardWrapper = styled.div<{ $cardTypeColor: string | null }>`
@@ -65,6 +66,30 @@ const Input = styled.input<{ $center?: boolean }>`
   flex-shrink: 1;
 `;
 
-const S = { FlexBox, CardWrapper, CreditCardInfo, CardNumbers, Input, LogoBox };
+const CardCVCPart = styled.div`
+  height: 24px;
+  width: 212px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: ${({ theme }) => theme.COLOR["gold-2"]};
+  margin-top: 75px;
+  font-size: 14px;
+`;
+
+const CVCNumberBox = styled.span`
+  width: 45px;
+  ${FlexCenter}
+`;
+
+const S = {
+  FlexBox,
+  CardWrapper,
+  CreditCardInfo,
+  CardNumbers,
+  Input,
+  CardCVCPart,
+  LogoBox,
+  CVCNumberBox,
+};
 
 export default S;

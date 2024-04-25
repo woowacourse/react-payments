@@ -31,6 +31,9 @@ const CardRegisterFormWithHook = () => {
     validates: [],
   });
 
+  const step = 1;
+  const setStep = () => {};
+
   return (
     <CardRegisterForm
       cardNumbersState={cardNumbersState}
@@ -39,6 +42,8 @@ const CardRegisterFormWithHook = () => {
       CVCNumbersState={CVCNumbersState}
       passwordState={passwordState}
       cardTypeState={cardTypeState}
+      step={step}
+      setStep={setStep}
     />
   );
 };

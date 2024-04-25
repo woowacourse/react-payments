@@ -5,7 +5,8 @@ const COLOR = {
   "grey-4": "#c9c9c9",
   "grey-5": "#D5D5D5", //카드 뒷면
   error: "#ff3d3d",
-  gold: "#DDCD78",
+  gold: "#DDCD78", //카드 프리뷰 칩
+  "gold-2": "#CBBA64", //카드 프리뷰 뒷변 CVC 부분
 };
 
 export const theme = {
