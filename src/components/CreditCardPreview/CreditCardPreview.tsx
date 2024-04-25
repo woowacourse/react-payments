@@ -3,30 +3,25 @@ import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
 import { theme } from "@/style/theme";
 
-export type CardType = "VISA" | "MASTER" | "NONE";
+export type CardBrand = "VISA" | "MASTER" | "NONE";
 
 interface Props {
-  cardType: CardType;
+  cardBrand: CardBrand;
   cardNumbers: string[];
   expirationDate: string;
   ownerName: string;
 }
-const CreditCardPreview = ({
-  cardType,
-  cardNumbers,
-  expirationDate,
-  ownerName,
-}: Props) => {
+const CreditCardPreview = ({ cardBrand, cardNumbers, expirationDate, ownerName }: Props) => {
   return (
     <S.CardWrapper>
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
 
-        {cardType === "VISA" ? (
+        {cardBrand === "VISA" ? (
           <S.LogoBox color={theme.COLOR.white}>
             <VisaLogo />
           </S.LogoBox>
-        ) : cardType === "MASTER" ? (
+        ) : cardBrand === "MASTER" ? (
           <S.LogoBox color={theme.COLOR.white}>
             <MasterLogo />
           </S.LogoBox>
