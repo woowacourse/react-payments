@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
-import { CARD_COLOR_ETC, CARD_COMPANY } from '../../constants';
+import { CARD_COLOR_ETC } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 import CardBackImg from '../CardBackImg';
 import CardFrontImg from '../CardFrontImg';
