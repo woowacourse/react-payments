@@ -1,7 +1,7 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
-import { MAX_NAME_LENGTH, OWNER_NAME_PLACEHOLDER } from '../../../constants/input';
+import { MAX_NAME_LENGTH, MIN_NAME_LENGTH, OWNER_NAME_PLACEHOLDER } from '../../../constants/input';
 
 type CardOwnerNameInputField = {
   ownerName: string;
@@ -10,6 +10,14 @@ type CardOwnerNameInputField = {
 };
 
 export default function CardOwnerNameInputField({ ownerName, handleOwnerName, errorMessage }: CardOwnerNameInputField) {
+  const handleEnterKey = (handleOwnerName: (e: ChangeEvent<HTMLInputElement>, isKeyEnter: boolean) => void) => {
+    return (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        handleOwnerName(event as unknown as ChangeEvent<HTMLInputElement>, true);
+      }
+    };
+  };
+
   return (
     <>
       <div className={styles.label}>소유자 이름</div>
@@ -22,9 +30,13 @@ export default function CardOwnerNameInputField({ ownerName, handleOwnerName, er
           maxLength={MAX_NAME_LENGTH}
           value={ownerName}
           onBlur={handleOwnerName}
+          onKeyDown={handleEnterKey(handleOwnerName)}
         />
       </div>
       {errorMessage !== '' && <div className={styles.error_message}>{errorMessage}</div>}
+      {ownerName.length >= MIN_NAME_LENGTH && errorMessage === '' && (
+        <div className={styles.info_message}>입력 완료시 enter를 눌러주세요</div>
+      )}
     </>
   );
 }
