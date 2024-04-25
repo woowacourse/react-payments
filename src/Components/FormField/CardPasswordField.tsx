@@ -1,15 +1,15 @@
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { CardOwnerInfoErrorContext } from "../Form/ErrorContextProvider";
+import { CardPasswordErrorContext } from "../Form/ErrorContextProvider";
 import CardPasswordInput from "../FormInput/CardPasswordInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 
 const CardPasswordField = () => {
-  //   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
-  //   const cardOwnerErrorKeys = Object.keys(cardOwnerError) as (keyof CardOwnerInfoError)[];
-  //   const categoryHasError = cardOwnerErrorKeys.find((category) => {
-  //     return cardOwnerError[category]?.errorMessage;
-  //   });
+  const cardPasswordError = useContextWrapper(CardPasswordErrorContext)[0];
+  const cardPasswordErrorKeys = Object.keys(cardPasswordError) as (keyof CardPasswordError)[];
+  const categoryHasError = cardPasswordErrorKeys.find((category) => {
+    return cardPasswordError[category]?.errorMessage;
+  });
 
   return (
     <FormFieldComponent
@@ -18,7 +18,7 @@ const CardPasswordField = () => {
         description: "앞의 2자리를 입력해주세요.",
         label: "비밀번호 앞 2자리",
       }}
-      errorMessage={undefined}
+      errorMessage={categoryHasError ? cardPasswordError[categoryHasError].errorMessage : undefined}
     >
       <CardPasswordInput />
     </FormFieldComponent>

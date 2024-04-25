@@ -1,15 +1,15 @@
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { CardOwnerInfoErrorContext } from "../Form/ErrorContextProvider";
+import { CardCVCErrorContext } from "../Form/ErrorContextProvider";
 import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 
 const CardCVCField = () => {
-  //   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
-  //   const cardOwnerErrorKeys = Object.keys(cardOwnerError) as (keyof CardOwnerInfoError)[];
-  //   const categoryHasError = cardOwnerErrorKeys.find((category) => {
-  //     return cardOwnerError[category]?.errorMessage;
-  //   });
+  const cardCVCError = useContextWrapper(CardCVCErrorContext)[0];
+  const cardCVCErrorKeys = Object.keys(cardCVCError) as (keyof CardCVCError)[];
+  const categoryHasError = cardCVCErrorKeys.find((category) => {
+    return cardCVCError[category]?.errorMessage;
+  });
 
   return (
     <FormFieldComponent
@@ -18,7 +18,7 @@ const CardCVCField = () => {
         description: "",
         label: "CVC",
       }}
-      errorMessage={undefined}
+      errorMessage={categoryHasError ? cardCVCError[categoryHasError].errorMessage : undefined}
     >
       <CardCVCInput />
     </FormFieldComponent>
