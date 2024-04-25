@@ -50,6 +50,7 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
             onBlurShowErrors();
           }}
           onKeyDown={onEnterCompleted}
+          style={{ textTransform: "uppercase" }}
         />
       </InputField>
     </S.InputFieldWithInfo>

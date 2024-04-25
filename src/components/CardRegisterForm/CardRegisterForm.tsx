@@ -16,7 +16,9 @@ import { CardType } from "@/constants/cardType";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
-  expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
+  expirationPeriodState: ReturnType<
+    typeof useInputs<ExpirationPeriodInputType>
+  >;
   ownerNameState: ReturnType<typeof useInput<string>>;
   CVCNumbersState: ReturnType<typeof useInput<string>>;
   passwordState: ReturnType<typeof useInput<string>>;
@@ -28,7 +30,7 @@ interface Props {
 
 const CardRegisterForm = ({
   cardNumbersState,
-  expiredPeriodState,
+  expirationPeriodState,
   ownerNameState,
   CVCNumbersState,
   passwordState,
@@ -49,7 +51,7 @@ const CardRegisterForm = ({
       {step >= 5 && <CVCField CVCNumbersState={CVCNumbersState} />}
       {step >= 4 && <OwnerNameField ownerNameState={ownerNameState} />}
       {step >= 3 && (
-        <ExpirationPeriodField expiredPeriodState={expiredPeriodState} />
+        <ExpirationPeriodField expirationPeriodState={expirationPeriodState} />
       )}
       {step >= 2 && <CardTypeSelectField cardTypeState={cardTypeState} />}
       <CardNumbersField cardNumbersState={cardNumbersState} />

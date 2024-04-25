@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CardRegisterWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,6 @@ const CardRegisterWrapper = styled.div`
 
 const FlexWrapper = styled.div`
   width: 375px;
-  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;

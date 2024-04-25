@@ -60,6 +60,8 @@ const useInputs = <T extends object>({
       Object.values(values).every((value) => value)
     ) {
       setIsError(false);
+    } else {
+      setIsError(true);
     }
   }, [errors, values]);
 

@@ -15,7 +15,9 @@ export type ExpirationPeriodInputType = {
 };
 
 interface Props {
-  expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
+  expirationPeriodState: ReturnType<
+    typeof useInputs<ExpirationPeriodInputType>
+  >;
 }
 
 const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
@@ -23,8 +25,8 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
   "expirationYear",
 ];
 
-const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
-  const { onChange, errors } = expiredPeriodState;
+const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
+  const { onChange, errors } = expirationPeriodState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
