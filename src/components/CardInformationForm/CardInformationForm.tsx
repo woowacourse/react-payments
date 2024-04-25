@@ -10,9 +10,11 @@ import { UserNameStateType } from '../../hooks/useUserName';
 import Dropdown from '../Dropdown/Dropdown';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import { CVCStateType } from '../../hooks/useCVC';
+import { useState } from 'react';
+import { PasswordStateType } from '../../hooks/usePassword';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER, OPTION } = MESSAGE;
-const { MAX_LENGTH } = CONDITION;
+const { MAX_LENGTH, CARD_INFORMATION_APPEARED } = CONDITION;
 
 interface CardInformationFormProps {
   cardNumberState: CardNumberStateType;
@@ -20,6 +22,7 @@ interface CardInformationFormProps {
   userNameState: UserNameStateType;
   selectedCardState: SelectedCardStateType;
   cvcState: CVCStateType;
+  passwordState: PasswordStateType;
 }
 
 const CardInformationForm = ({
@@ -28,9 +31,13 @@ const CardInformationForm = ({
   userNameState,
   selectedCardState,
   cvcState,
+  passwordState,
 }: CardInformationFormProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
+  const [appearedCondition, setAppearedCondition] = useState<number>(
+    CARD_INFORMATION_APPEARED.cardNumber,
+  );
 
   const isCardNumberFilled =
     firstState.value && secondState.value && thirdState.value && fourthState.value;
@@ -38,24 +45,39 @@ const CardInformationForm = ({
   const isExpirationDateFilled = monthState.value && yearState.value;
   const isUserNameFilled = userNameState.value;
   const isCVCFilled = cvcState.value;
+  const isPasswordFilled = passwordState.value;
 
   const isCardNumberError =
     firstState.error || secondState.error || thirdState.error || fourthState.error;
   const isExpirationDateError = monthState.error || yearState.error;
   const isUserNameError = userNameState.error;
   const isCVCError = cvcState.error;
-
-  const isCardSelectedAppearedCondition = isCardNumberFilled && !isCardNumberError;
-  const isExpirationDateAppearedCondition = isCardSelectedAppearedCondition && isCardSelected;
-  const isUserNameAppearedCondition =
-    isExpirationDateAppearedCondition && isExpirationDateFilled && !isExpirationDateError;
-  const isCVCAppearedCondition =
-    isUserNameAppearedCondition && isUserNameFilled && !isUserNameError;
+  const isPasswordError = passwordState.error;
 
   const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
   const expirationErrorMessage = monthState.error ? ERROR.month : yearState.error ? ERROR.year : '';
   const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
   const cvcErrorMessage = isCVCError ? ERROR.cvc : '';
+  const passwordErrorMessage = isPasswordError ? ERROR.password : '';
+
+  const isCardSelectedAppearedCondition =
+    appearedCondition >= CARD_INFORMATION_APPEARED.selectedCard;
+  const isExpirationDateAppearedCondition =
+    appearedCondition >= CARD_INFORMATION_APPEARED.expirationDate;
+  const isUserNameAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.userName;
+  const isCVCAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.cvc;
+  const isPasswordAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.password;
+
+  if (isCardNumberFilled && !isCardNumberError && !isCardSelectedAppearedCondition)
+    setAppearedCondition(CARD_INFORMATION_APPEARED.selectedCard);
+  if (isCardSelected && !isExpirationDateAppearedCondition)
+    setAppearedCondition(CARD_INFORMATION_APPEARED.expirationDate);
+  if (isExpirationDateFilled && !isExpirationDateError && !isUserNameAppearedCondition)
+    setAppearedCondition(CARD_INFORMATION_APPEARED.userName);
+  if (isUserNameFilled && !isUserNameError && !isCVCAppearedCondition)
+    setAppearedCondition(CARD_INFORMATION_APPEARED.cvc);
+  if (isCVCFilled && !isCVCError && !isPasswordAppearedCondition)
+    setAppearedCondition(CARD_INFORMATION_APPEARED.password);
 
   const cardNumberStates = [firstState, secondState, thirdState, fourthState];
   const cardNumberInputs = cardNumberStates.map((state) => (
@@ -70,6 +92,20 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
+      {isPasswordAppearedCondition && (
+        <FormField title={TITLE.password} caption={CAPTION.password}>
+          <InputField label={LABEL.password} error={passwordErrorMessage}>
+            <Input
+              placeholder={PLACEHOLDER.password}
+              value={passwordState.value}
+              maxLength={MAX_LENGTH.password}
+              onChange={passwordState.setValue}
+              invalid={passwordState.error}
+              type="password"
+            />
+          </InputField>
+        </FormField>
+      )}
       {isCVCAppearedCondition && (
         <FormField title={TITLE.cvc}>
           <InputField label={LABEL.cvc} error={cvcErrorMessage}>
