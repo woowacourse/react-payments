@@ -1,6 +1,6 @@
-import { InitialCardNumberState } from '../hooks/useCardNumber';
-import MasterCardImage from '../assets/images/mastercard.png';
-import VisaCardImage from '../assets/images/visa.png';
+import { InitialCardNumberState } from '../../hooks/useCardNumber';
+import MasterCardImage from '../../assets/images/mastercard.png';
+import VisaCardImage from '../../assets/images/visa.png';
 import * as S from './creditCard.style';
 
 type CreditCardProps = {
@@ -9,17 +9,25 @@ type CreditCardProps = {
   year: string;
   name: string;
   cardBrand: 'none' | 'Visa' | 'MasterCard';
+  backgroundColor: string;
 };
 
 const DATE_SEPARATOR = '/';
 
-export default function CreditCard({ cardNumbers, month, year, name, cardBrand }: CreditCardProps) {
+export default function CreditCard({
+  cardNumbers,
+  month,
+  year,
+  name,
+  cardBrand,
+  backgroundColor,
+}: CreditCardProps) {
   const cardBrandImageSrc =
     cardBrand === 'MasterCard' ? MasterCardImage : cardBrand === 'Visa' ? VisaCardImage : '';
 
   return (
     <S.Container>
-      <S.CardContainer>
+      <S.CardContainer $backgroundColor={backgroundColor} $padding={'8px 12px'}>
         <S.CardHeader>
           <S.CardHeaderContentWrapper>
             <S.IcChip />
