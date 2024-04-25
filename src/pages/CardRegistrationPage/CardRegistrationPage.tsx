@@ -10,7 +10,7 @@ import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
 
 import useValidatedInput from '../../hooks/useValidatedInput';
-import useValidatedCardNumbers from '../../hooks/useValidatedCardNumbers';
+import useValidatedInputs from '../../hooks/useValidatedInputs';
 import useMoveNextInput from '../../hooks/useMoveNextInput';
 
 import { isAllValid } from '../../utils/validation';
@@ -21,6 +21,7 @@ import {
   validateOwner,
   validateCVC,
   validatePassword,
+  validateCardNumber,
 } from '../../domain/Card';
 
 import * as S from './CardRegistrationPage.style';
@@ -31,7 +32,6 @@ const CardRegistrationPage = () => {
 
   const handleIsCVCInput = (isCVCInput: boolean) => setIsCVCInput(isCVCInput);
 
-  const { cardNumbers, isCardNumbersValid, handleCardNumbers } = useValidatedCardNumbers();
   const { value: month, isValid: isMonthValid, handleValue: handleMonth } = useValidatedInput(validateMonth);
   const { value: year, isValid: isYearValid, handleValue: handleYear } = useValidatedInput(validateYear);
   const { value: owner, isValid: isOwnerValid, handleValue: handleOwner } = useValidatedInput(validateOwner);
@@ -42,6 +42,11 @@ const CardRegistrationPage = () => {
     isValid: isPasswordValid,
     handleValue: handlePassword,
   } = useValidatedInput(validatePassword);
+  const {
+    values: cardNumbers,
+    isValid: isCardNumbersValid,
+    handleValues: handleCardNumbers,
+  } = useValidatedInputs(validateCardNumber, ['', '', '', '']);
 
   const validationList = [
     isAllValid(isCardNumbersValid),

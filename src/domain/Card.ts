@@ -1,4 +1,4 @@
-import { CARD, CARD_EXPIRATION, CARD_OWNER } from '../constants/Condition';
+import { CARD, CARD_NUMBER, CARD_EXPIRATION, CARD_OWNER } from '../constants/Condition';
 import { isNotEmpty, isValidForm, isValidLength, isValidRange } from '../utils/validation';
 
 export const isVisaCard = (cardNumbers: string[]) => {
@@ -11,6 +11,8 @@ export const isMasterCard = (cardNumbers: string[]) => {
     Number(cardNumbers[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
   );
 };
+
+export const validateCardNumber = (cardNumber: string) => isValidLength(cardNumber, CARD_NUMBER.MAX_LENGTH);
 
 export const validateCompany = (company: string) => isNotEmpty(company);
 
