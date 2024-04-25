@@ -3,10 +3,15 @@ import S from "./style";
 
 const CardPreviewBack = ({ CVCNumbers }: { CVCNumbers: string }) => {
   return (
-    <S.CardInner $cardTypeColor={theme.COLOR["grey-5"]} isFront={false}>
+    <S.CardInner $cardTypeColor={theme.COLOR["grey-5"]} $isFront={false}>
       <S.CardCVCPart>
         <S.CVCNumberBox>
-          <S.Input type="text" value={CVCNumbers} readOnly></S.Input>
+          <S.Input
+            isWhite={false}
+            type="text"
+            value={CVCNumbers}
+            readOnly
+          ></S.Input>
         </S.CVCNumberBox>
       </S.CardCVCPart>
     </S.CardInner>

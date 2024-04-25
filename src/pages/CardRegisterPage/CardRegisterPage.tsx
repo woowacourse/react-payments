@@ -30,7 +30,7 @@ const CardRegisterPage = () => {
     });
   };
 
-  const completedArr = [
+  const stepPassedArr = [
     !cardNumbersState.isError,
     !!cardTypeState.value?.length,
     !expirationPeriodState.isError,
@@ -39,7 +39,7 @@ const CardRegisterPage = () => {
     !passwordState.isError,
   ];
 
-  const allPassed = completedArr.every((isCompleted) => isCompleted === true);
+  const allPassed = stepPassedArr.every((isCompleted) => isCompleted === true);
 
   return (
     <S.CardRegisterWrapper>
@@ -56,7 +56,7 @@ const CardRegisterPage = () => {
           {...cardRegister}
           step={step}
           setStep={setStep}
-          completedArr={completedArr}
+          stepPassedArr={stepPassedArr}
         />
       </S.FlexWrapper>
       {step === 7 && allPassed && (

@@ -49,6 +49,13 @@ const useCardRegister = () => {
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],
+    onChangeFunc: (value: string) => {
+      const alphabetRegex = /^[a-zA-Z\s]*$/;
+      if (!alphabetRegex.test(value)) {
+        return value.slice(0, -1);
+      }
+      return value;
+    },
   });
 
   const cardTypeState = useInput<CardType | null>({

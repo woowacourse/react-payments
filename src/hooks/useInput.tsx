@@ -6,9 +6,10 @@ interface Props<T> {
     isValid: boolean;
     type: string;
   })[];
+  onChangeFunc?: (value: string) => string;
 }
 
-const useInput = <T,>({ initialValue, validates }: Props<T>) => {
+const useInput = <T,>({ initialValue, validates, onChangeFunc }: Props<T>) => {
   const [value, setValue] = useState<T>(initialValue);
   const [error, setError] = useState<string[]>([]);
   const [isError, setIsError] = useState(true);
@@ -17,6 +18,11 @@ const useInput = <T,>({ initialValue, validates }: Props<T>) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const newValue = event.target.value;
+
+    if (onChangeFunc) {
+      event.target.value = onChangeFunc(newValue);
+    }
+
     const newErrors = validates
       .map((validate) => validate(newValue))
       .filter((result) => !result.isValid)

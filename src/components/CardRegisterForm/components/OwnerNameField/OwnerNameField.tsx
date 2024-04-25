@@ -6,7 +6,6 @@ import Input from "@/components/_common/Input/Input";
 import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
-import useShowError from "@/hooks/useShowError";
 import { ValidationStatus } from "@/utils/validation";
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 
 const OwnerNameField = ({ ownerNameState }: Props) => {
   const { onChange, error, setError, isError } = ownerNameState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const onEnterCompleted = () => {
     setError((prev) => {
@@ -31,8 +29,12 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
-        errorMessages={error}
-        showErrors={showErrors}
+        errorMessages={[
+          error.includes(ValidationStatus.NAME_SHOULD_BE_CAPITAL)
+            ? ValidationStatus.NAME_SHOULD_BE_CAPITAL
+            : null,
+        ]}
+        showErrors={true}
       >
         <Input
           autoFocus={true}
@@ -44,13 +46,10 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
             e.target.value = e.target.value.toUpperCase();
             onChange(e);
           }}
-          onFocus={onFocusHideErrors}
           onBlur={() => {
             onEnterCompleted();
-            onBlurShowErrors();
           }}
           onKeyDown={onEnterCompleted}
-          style={{ textTransform: "uppercase" }}
         />
       </InputField>
     </S.InputFieldWithInfo>

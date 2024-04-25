@@ -44,17 +44,14 @@ const CardPreview = ({
 
   return (
     <S.CardWrapper>
-      <S.CardOuter isFront={isFront} onClick={onFlipCard}>
-        {/* {isFront ? ( */}
+      <S.CardOuter $isFront={isFront} onClick={onFlipCard}>
         <CardPreviewFront
           cardType={cardType}
           expirationDate={expirationDate}
           ownerName={ownerName}
           cardNumbers={cardNumbers}
         />
-        {/* ) : ( */}
         <CardPreviewBack CVCNumbers={CVCNumbers} />
-        {/* )} */}
       </S.CardOuter>
     </S.CardWrapper>
   );
