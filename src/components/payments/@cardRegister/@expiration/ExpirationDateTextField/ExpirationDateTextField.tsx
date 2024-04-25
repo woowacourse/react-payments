@@ -15,7 +15,7 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   onAddExpirationDate,
   expirationError,
 }) => {
-  const { inputsRef, focusInputByIndex } = useFocusInputs(2);
+  const { handleAddInputsInRef, focusInputByIndex } = useFocusInputs(2);
 
   return (
     <section>
@@ -24,13 +24,11 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
       <TextField.Label htmlFor="expiration" labelText="유효 기간" />
       <TextField.Content>
         <ExpirationDateInput
-          refCallback={(element) => {
-            inputsRef.current[0] = element;
-          }}
           id="expiration"
           placeholder="MM"
           isError={expirationError.isError}
           value={month}
+          refCallback={(element) => handleAddInputsInRef(element, 0)}
           onAddExpirationDate={(event) => {
             onAddExpirationDate('month', event.target.value);
 
@@ -38,12 +36,10 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           }}
         />
         <ExpirationDateInput
-          refCallback={(element) => {
-            inputsRef.current[1] = element;
-          }}
           placeholder="YY"
           isError={expirationError.isError}
           value={year}
+          refCallback={(element) => handleAddInputsInRef(element, 1)}
           onAddExpirationDate={(event) => onAddExpirationDate('year', event.target.value)}
         />
       </TextField.Content>
