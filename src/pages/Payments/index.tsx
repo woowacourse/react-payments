@@ -8,6 +8,8 @@ import useInput from "../../hooks/useInput";
 import InputCreditCardNumber from "../../components/input/InputCreditCardNumber";
 import InputExpirationPeriod from "../../components/input/InputExpirationPeriod";
 import InputOwnerName from "../../components/input/InputOwnerName";
+import InputCreditCardCompany from "../../components/input/InputCreditCardCompany";
+import { useState } from "react";
 
 interface Owner {
   name: string;
@@ -29,6 +31,20 @@ const Payments = () => {
 
   const [owner, setOwner, ownerError] = useInput<Owner>({ name: SIGN.empty });
 
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const [cardCompanyError, setCardCompanyError] = useState(false);
+
+  const handleCompanyFocus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCompany(e.target.value);
+    setCardCompanyError(e.target.value === "");
+  };
+
+  const handleCompanyBlur = () => {
+    if (!selectedCompany) {
+      setCardCompanyError(true);
+    }
+  };
+
   const formatExpirationPeriod = () =>
     expirationPeriod.year.length
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
@@ -45,8 +61,20 @@ const Payments = () => {
         ]}
         expirationPeriod={formatExpirationPeriod()}
         ownerName={owner.name}
+        selectedCompany={selectedCompany}
       />
       <InputFormContainer>
+        <CreditCardForm
+          title={CARD_FORM_MESSAGE.inputCardCompany}
+          description={CARD_FORM_MESSAGE.cardCompanyDescription}
+          inputError={cardCompanyError}
+        >
+          <InputCreditCardCompany
+            selectedCompany={selectedCompany}
+            handleChange={handleCompanyFocus}
+            onBlur={handleCompanyBlur}
+          />
+        </CreditCardForm>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardNumber}
           description={CARD_FORM_MESSAGE.cardNumberDescription}

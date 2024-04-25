@@ -7,12 +7,13 @@ interface dropdownProps {
   }[];
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur: () => void;
 }
 
-const Dropdown = ({ options, value, onChange }: dropdownProps) => {
+const Dropdown = ({ options, value, onChange, onBlur }: dropdownProps) => {
   return (
     <>
-      <SelectContainer value={value} onChange={onChange}>
+      <SelectContainer value={value} onChange={onChange} onBlur={onBlur}>
         <option value="" disabled hidden selected>
           카드사를 선택해주세요.
         </option>

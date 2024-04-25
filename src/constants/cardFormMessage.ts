@@ -9,6 +9,9 @@ const CARD_FORM_MESSAGE = {
 
   inputCardOwner: "카드 소유자 이름을 입력해 주세요",
   cardOwner: "소유자 이름",
+
+  inputCardCompany: "카드사를 선택해주세요.",
+  cardCompanyDescription: "현재 국내 카드사만 가능합니다.",
 };
 
 export default CARD_FORM_MESSAGE;
