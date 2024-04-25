@@ -20,6 +20,8 @@ import useCreditCardForm from '@hooks/creditCard/useCreditCardForm';
 
 import { isValidOwnerName } from '@domain/creditCard';
 
+import { ROUTE_ENDPOINT_MAP } from '@routes/constant';
+
 const CreditCardForm: React.FC = () => {
   const {
     formState: { cardBrand, cardNumbers, cardPassword, cvcNumber, ownerName, expiration },
@@ -28,7 +30,7 @@ const CreditCardForm: React.FC = () => {
     formHandlers,
   } = useCreditCardForm();
 
-  const handleMovePage = useMovePage('/card-register-complete', {
+  const handleMovePage = useMovePage(ROUTE_ENDPOINT_MAP.cardRegisterComplete, {
     cardPassword,
     cardBrand: isCardBrandName(cardBrand) ? CARD_BRAND_MAP[cardBrand] : '',
   });

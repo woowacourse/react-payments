@@ -29,7 +29,9 @@
       "@constants/*": ["constants/*"],
       "@types/*": ["types/*"],
       "@hooks/*": ["hooks/*"],
-      "@domain/*": ["domain/*"]
+      "@domain/*": ["domain/*"],
+      "@routes/*": ["routes/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": ["src"],
