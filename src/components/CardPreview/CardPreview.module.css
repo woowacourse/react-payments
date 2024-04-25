@@ -2,7 +2,7 @@
   background-color: var(--color-card-bg);
   border-radius: 4px;
 
-  max-width: fit-content;
+  width: 212px;
   height: 132px;
 
   box-shadow: 3px 3px 5px 0px #00000040;

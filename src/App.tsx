@@ -1,7 +1,7 @@
 import './index.css';
 import styles from './App.module.css';
 
-import useFormField from './hooks/useAddCardFormField';
+import useAddCardFormField from './hooks/useAddCardFormField';
 import CardNumberInput from './components/AddCardFormInput/CardNumberInput/CardNumberInput';
 import CardPreview from './components/CardPreview/CardPreview';
 import ExpirationDateInput from './components/AddCardFormInput/ExpirationDateInput/ExpirationDateInput';
@@ -13,22 +13,23 @@ import CVCInput from './components/AddCardFormInput/CVCInput/CVCInput';
 import PasswordInput from './components/AddCardFormInput/PasswordInput/PasswordInput';
 
 function App() {
-  const cardNumbersProps = useFormField<CardNumbers>({
+  // TODO: useAddCardFormField에 isFocus prop 두기?? 아무튼 조건부 렌더링으로..
+  const cardNumbersProps = useAddCardFormField<CardNumbers>({
     initialValues: INITIAL_VALUES.cardNumbers,
   });
-  const expirationDateProps = useFormField<ExpirationDate>({
+  const expirationDateProps = useAddCardFormField<ExpirationDate>({
     initialValues: INITIAL_VALUES.expirationDate,
   });
-  const ownerNameProps = useFormField<OwnerName>({
+  const ownerNameProps = useAddCardFormField<OwnerName>({
     initialValues: INITIAL_VALUES.ownerName,
   });
-  const cardIssuerProps = useFormField<CardIssuer>({
+  const cardIssuerProps = useAddCardFormField<CardIssuer>({
     initialValues: INITIAL_VALUES.cardIssuer,
   });
-  const cvcProps = useFormField<CVC>({
+  const cvcProps = useAddCardFormField<CVC>({
     initialValues: INITIAL_VALUES.cvc,
   });
-  const passwordProps = useFormField<Password>({
+  const passwordProps = useAddCardFormField<Password>({
     initialValues: INITIAL_VALUES.password,
   });
 
@@ -41,8 +42,8 @@ function App() {
         expirationDate={Object.values(expirationDateProps.values)}
         ownerName={Object.values(ownerNameProps.values)}
         cardIssuer={Object.values(cardIssuerProps.values)}
-        cvc={Object.values({})}
-        password={Object.values({})}
+        cvc={Object.values(cvcProps.values)}
+        password={Object.values(passwordProps.values)}
       />
 
       <form>

@@ -1,15 +1,15 @@
-import styles from './CardPreview.module.css';
 import clsx from 'clsx';
+import styles from './CardPreview.module.css';
 
 import {
   CARD_BRAND,
   MASK_START_INDEX,
   SYMBOLS,
 } from '../../constants/cardInfo';
+import useFlipCard from '../../hooks/useFlipCard';
+import { useEffect, useState } from 'react';
 
 type Brand = 'visa' | 'master';
-type CardPreviewProps = Record<keyof CardInfo, string[]>;
-
 const getCardbrand = (
   cardNumbers: CardPreviewProps['cardNumbers']
 ): Nullable<Brand> => {
@@ -26,18 +26,44 @@ const getCardbrand = (
   return null;
 };
 
-const CardPreview = ({
+type CardPreviewProps = Record<keyof CardInfo, string[]>;
+export default function CardPreview({
   cardNumbers,
   expirationDate,
   ownerName,
   cardIssuer,
   cvc,
-  password,
-}: CardPreviewProps) => {
+}: CardPreviewProps) {
+  const { isFrontSide, flipCard } = useFlipCard({
+    frontDeps: [cardNumbers, expirationDate, ownerName, cardIssuer],
+    backDeps: [cvc],
+  });
+
+  return (
+    <div className={styles.container} onClick={flipCard}>
+      {isFrontSide ? (
+        <FrontSide
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
+          ownerName={ownerName}
+          cardIssuer={cardIssuer}
+        />
+      ) : (
+        <BackSide cvc={cvc} />
+      )}
+    </div>
+  );
+}
+
+type FrontSideProps = Pick<
+  CardPreviewProps,
+  'cardNumbers' | 'expirationDate' | 'ownerName' | 'cardIssuer'
+>;
+function FrontSide({ cardNumbers, expirationDate, ownerName }: FrontSideProps) {
   const brand = getCardbrand(cardNumbers);
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.cardHeader}>
         <div className={styles.chip} />
         {brand && (
@@ -70,8 +96,11 @@ const CardPreview = ({
 
         <div className={styles.ownerName}>{ownerName}</div>
       </div>
-    </div>
+    </>
   );
-};
+}
 
-export default CardPreview;
+type BackSideProps = Pick<CardPreviewProps, 'cvc'>;
+function BackSide({ cvc }: BackSideProps) {
+  return <></>;
+}
