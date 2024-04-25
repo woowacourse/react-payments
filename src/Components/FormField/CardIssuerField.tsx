@@ -5,11 +5,11 @@ import CardIssuerInput from "../FormInput/CardIssuerInput";
 import FormFieldComponent from "./FormFieldComponent";
 
 const CardIssuerField = () => {
-  const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
-  const cardNumberErrorKeys = Object.keys(cardNumberError) as (keyof CardNumbersError)[];
-  const categoryHasError = cardNumberErrorKeys.find((category) => {
-    return cardNumberError[category]?.errorMessage;
-  });
+  // const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
+  // const cardNumberErrorKeys = Object.keys(cardNumberError) as (keyof CardNumbersError)[];
+  // const categoryHasError = cardNumberErrorKeys.find((category) => {
+  //   return cardNumberError[category]?.errorMessage;
+  // });
 
   return (
     <FormFieldComponent
@@ -18,7 +18,7 @@ const CardIssuerField = () => {
         description: "현재 국내 카드사만 가능합니다.",
         label: "",
       }}
-      errorMessage={categoryHasError ? cardNumberError[categoryHasError]?.errorMessage : undefined}
+      errorMessage={undefined}
     >
       <CardIssuerInput />
     </FormFieldComponent>
