@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CompletedCheck from '../assets/images/completed_check.svg?react';
+import CompletedButton from '../components/CompletedButton';
 
 const CardRegisterCompletedPage = () => {
   const navigate = useNavigate();
@@ -11,13 +12,15 @@ const CardRegisterCompletedPage = () => {
     <RegisterLayout>
       {data && (
         <CompletedTextWrapper>
-          <CompletedCheck />
+          <CheckImageWrapper>
+            <CompletedCheck />
+          </CheckImageWrapper>
           <RegisterText>
             {data.cardNumber}로 시작하는
             <br />
             {data.cardCompany}가 등록되었어요.
           </RegisterText>
-          <StyledButton onClick={() => navigate(-1)}>확인</StyledButton>
+          <CompletedButton onClick={() => navigate(-1)}>확인</CompletedButton>
         </CompletedTextWrapper>
       )}
     </RegisterLayout>
@@ -47,18 +50,17 @@ const CompletedTextWrapper = styled.div`
   gap: 40px;
 `;
 
-const StyledButton = styled.button`
-  width: 100%;
-  height: 52px;
-  background-color: #333333;
-  color: #f3f3f3;
-  font-weight: 700;
-  font-size: 16px;
-  bottom: 0;
-  transition: background-color 0.2s ease-in;
+const CheckImageWrapper = styled.div`
+  #check-mark {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: draw 1s forwards;
+  }
 
-  &:hover {
-    background-color: lightgray;
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 `;
 
