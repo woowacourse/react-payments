@@ -7,8 +7,9 @@ const STYLE = {
     black50: '#333333',
     gray130: '#8b95a1',
     gray170: '#acacac',
-    yellow20: '#CBBA64',
-    cardBack: '#D5D5D5',
+    yellow203: '#CBBA64',
+    yellow240: '#f0d74f',
+    yellow245: '#f5e697',
 
     BC: '#F04651',
     shinhan: '#0046FF',

@@ -42,10 +42,7 @@ const CardPreview = ({ ...props }: CardInfo) => {
   ]);
 
   return (
-    <CP.Card
-      cardCompany={showCVC ? 'cardBack' : cardCompany}
-      onClick={handleShowCVC}
-    >
+    <CP.Card cardCompany={cardCompany} onClick={handleShowCVC}>
       {showCVC ? (
         <CP.CVC>{cvc}</CP.CVC>
       ) : (

@@ -103,8 +103,14 @@ export const CVC = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: ${STYLE.COLOR.yellow20};
-  color: ${STYLE.COLOR.white};
+  background-color: ${STYLE.COLOR.yellow203};
+  background: linear-gradient(
+    to right,
+    ${STYLE.COLOR.yellow203},
+    ${STYLE.COLOR.yellow240},
+    ${STYLE.COLOR.yellow245}
+  );
+  color: ${STYLE.COLOR.yellow203};
   font-weight: ${STYLE.BOLD.label};
   height: 25%;
   width: 246px;
