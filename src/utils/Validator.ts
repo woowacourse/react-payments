@@ -37,7 +37,7 @@ const Validator = {
     return { isError: false, isValid: true };
   },
 
-  checkCreditExpirationPeriod(value: string, name: string) {
+  checkCreditCardExpirationPeriod(value: string, name: string) {
     const maxDigit = 2;
     const limitValue = 12;
 
@@ -63,15 +63,28 @@ const Validator = {
     return { isError: true, isValid: false };
   },
 
+  checkCreditCardCVC(value: string) {
+    const maxDigit = 3;
+
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit))
+      return { isError: false, isValid: false };
+
+    if (!ValidatorCondition.checkIsDigit(value)) return { isError: true, isValid: false };
+
+    return { isError: false, isValid: true };
+  },
+
   inputCreditCardInfo(value: string, name: string): { isError: boolean; isValid: boolean } {
     if (Object.keys(CARD_INPUTBOX_NAME.cardNumber).includes(name))
       return this.checkCreditCardNumber(value);
 
     if (Object.keys(CARD_INPUTBOX_NAME.expirationPeriod).includes(name))
-      return this.checkCreditExpirationPeriod(value, name);
+      return this.checkCreditCardExpirationPeriod(value, name);
 
     if (Object.keys(CARD_INPUTBOX_NAME.owner).includes(name))
       return this.checkCreditCardOwner(value);
+
+    if (Object.keys(CARD_INPUTBOX_NAME.cvc).includes(name)) return this.checkCreditCardCVC(value);
 
     return { isError: false, isValid: false };
   },
