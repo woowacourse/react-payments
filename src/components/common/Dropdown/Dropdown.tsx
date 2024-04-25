@@ -1,4 +1,4 @@
-import { useDropdownContext, DropdownProvider } from '@components/common/Dropdown/provider/DropdownProvider';
+import { useDropdownContext, DropdownProvider } from './provider/DropdownProvider';
 
 import { ArrowDown, ArrowUp } from '@assets/images';
 
