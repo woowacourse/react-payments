@@ -51,7 +51,6 @@ export const Default: Story = {
   },
   args: {
     value: '',
-    placeholder: 'JOHN DOE',
     isError: false,
   },
 };
