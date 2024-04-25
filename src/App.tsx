@@ -17,7 +17,9 @@ function App() {
             path={PATH.cardConfirmation}
             element={<CardEnrollmentConfirmation />}
           />
+          <Route index element={<Home />} />
         </Route>
+
         <Route path="/*" element={<Home />} />
       </Routes>
     </div>
