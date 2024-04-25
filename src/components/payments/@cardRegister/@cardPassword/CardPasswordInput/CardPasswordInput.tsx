@@ -6,18 +6,8 @@ type CardNumberInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength
   refCallback: (inputElement: HTMLInputElement) => void;
 };
 
-const CardPasswordInput: React.FC<CardNumberInputProps> = ({ id, value, isError, onAddCardPassword, refCallback }) => {
-  return (
-    <Input
-      maxLength={2}
-      type="password"
-      id={id}
-      value={value}
-      isError={isError}
-      onChange={onAddCardPassword}
-      ref={refCallback}
-    />
-  );
+const CardPasswordInput: React.FC<CardNumberInputProps> = ({ onAddCardPassword, refCallback, ...rest }) => {
+  return <Input maxLength={2} type="password" onChange={onAddCardPassword} ref={refCallback} {...rest} />;
 };
 
 export default CardPasswordInput;
