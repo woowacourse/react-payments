@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const StyledDropdown = styled.div`
+  position: relative;
+
   width: 100%;
 `;
 
 export const StyledSelect = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: space-between;
-  position: relative;
 
   height: 3.2rem;
   padding: 0.8rem;
@@ -30,7 +31,7 @@ export const StyledSelectImage = styled.div<{ $isOpen: boolean }>`
 export const StyledOptions = styled.ul`
   position: absolute;
 
-  width: 31.2rem;
+  width: 100%;
   margin-top: 0.5rem;
   border: 0.1rem solid ${(props) => props.theme.color.lightGray};
   border-radius: 0.2rem;
