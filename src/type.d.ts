@@ -1,5 +1,6 @@
 export type CardNumbers = [string, string, string, string];
 export type CardIssuer =
+  | ''
   | 'BcCard'
   | 'ShinhanCard'
   | 'KakaoBank'

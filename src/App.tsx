@@ -6,20 +6,20 @@ import PATH from './constants/path';
 import { Path } from './type';
 import PayMents from './components/Payments';
 import WrongAccess from './components/WrongAccess';
-import { matchCardIssuer } from './domain/matchCardIssuer';
 import styled from '@emotion/styled';
 import useCardExpiredDate from './hooks/useCardExpiredDate';
 import useCardHolder from './hooks/useCardHolder';
+import useCardIssuer from './hooks/useCardIssuer';
 import useCardNumbers from './hooks/useCardNumbers';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 export default function App() {
-  const [lastPath, setLastPath] = useState<Path | null>(null);
+  const lastPath = useRef<Path>();
 
   const cardNumbers = useCardNumbers();
   const cardExpiredDate = useCardExpiredDate();
   const cardHolder = useCardHolder();
-  const cardIssuer = matchCardIssuer(cardNumbers.cardNumbers.join(''));
+  const cardIssuer = useCardIssuer();
 
   const resetCardInfo = () => {
     cardNumbers.initValue();
@@ -31,9 +31,9 @@ export default function App() {
       useCardNumbers={cardNumbers}
       useCardExpiredDate={cardExpiredDate}
       useCardHolder={cardHolder}
-      cardIssuer={cardIssuer}
+      useCardIssuer={cardIssuer}
       setPath={() => {
-        setLastPath(PATH.payments);
+        lastPath.current = PATH.payments;
       }}
     />
   );
@@ -44,7 +44,7 @@ export default function App() {
       element={
         <CompletePaymentRegister
           start={cardNumbers.cardNumbers[0]}
-          issuer={cardIssuer}
+          issuer={cardIssuer.issuer}
           resetCardInfo={resetCardInfo}
         />
       }
@@ -52,7 +52,7 @@ export default function App() {
   );
 
   const wrongAccessElement = (
-    <WrongAccess setLastPath={() => setLastPath(PATH.wrongAccess)} />
+    <WrongAccess setLastPath={() => (lastPath.current = PATH.wrongAccess)} />
   );
 
   return (
@@ -61,7 +61,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={paymentsElement}></Route>
           <Route path={PATH.payments} element={paymentsElement}></Route>
-          {lastPath === PATH.payments && completePaymentRoute}
+          {lastPath.current === PATH.payments && completePaymentRoute}
           <Route path='*' element={wrongAccessElement}></Route>
         </Routes>
       </BrowserRouter>
