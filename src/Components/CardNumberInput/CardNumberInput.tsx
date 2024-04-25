@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../common/Input/Input";
 import { CardNumberInputWrapper, Dd, Tooltip } from "./CardNumberInput.styles";
 
@@ -22,6 +22,10 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
     newInputValues[index] = inputValue;
     setInputValues(newInputValues);
     onChange(newInputValues.join(" "));
+
+    if (inputValue.length === 4 && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
   const handleValidate = (index: number, isValid: boolean) => {
@@ -48,12 +52,15 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
     setCompleted(isCompleted);
   }, [inputValues, isValid]);
 
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
   return (
     <CardNumberInputWrapper>
       <Dd>
         {[0, 1, 2, 3].map((index) => (
           <div key={index}>
             <Input
+              ref={(el) => (inputRefs.current[index] = el)}
               value={inputValues[index]}
               onChange={(inputValue) => handleChange(index, inputValue)}
               onValidate={(isValid) => handleValidate(index, isValid)}

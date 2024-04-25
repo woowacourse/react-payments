@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ExpiryInputWrapper } from "./ExpiryInput.styles";
 import Input from "../common/Input/Input";
 import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
@@ -22,6 +22,7 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
 }) => {
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleValidate = (isValid: boolean) => {
     setIsValid(isValid);
@@ -29,6 +30,10 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
 
   const handleMonthChange = (inputValue: string) => {
     onMonthChange(inputValue);
+
+    if (inputValue.length === 2) {
+      inputRefs.current[1]?.focus();
+    }
   };
 
   const handleYearChange = (inputValue: string) => {
@@ -86,6 +91,7 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
   return (
     <ExpiryInputWrapper>
       <Input
+        ref={(el) => (inputRefs.current[0] = el)}
         value={month}
         onChange={(month) => handleMonthChange(month)}
         onValidate={(isValid) => handleValidate(isValid)}
@@ -95,6 +101,7 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
         validator={(value) => monthValidator(value)}
       />
       <Input
+        ref={(el) => (inputRefs.current[1] = el)}
         value={year}
         onChange={(year) => handleYearChange(year)}
         onValidate={(isValid) => handleValidate(isValid)}
