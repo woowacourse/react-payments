@@ -2,14 +2,14 @@
 import masterImage from "../../assets/masterImage.png";
 import visaImage from "../../assets/visaImage.png";
 
-import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, cardPreviewStyle, width42 } from "./style.js";
+import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, cardPreviewStyle, width42 } from "./style";
 import {
   CardNumbersContext,
   CardOwnerInfoContext,
   CardValidityPeriodContext,
 } from "../../routes/Payments/CardInfoContextProvider";
 
-import useContextWrapper from "../../hooks/useContextWrapper.js";
+import useContextWrapper from "../../hooks/useContextWrapper";
 
 /**
  * @param n 1~2 자리 숫자가 들어온다.
