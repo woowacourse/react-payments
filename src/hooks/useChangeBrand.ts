@@ -21,8 +21,8 @@ export default function useChangeBrand() {
 }
 
 function validateCardBrand(value: string) {
-  const cardBrands = Object.values(CARD_BRANDS);
-  if (!cardBrands.includes(value as (typeof cardBrands)[number])) {
+  const cardBrands = Object.keys(CARD_BRANDS);
+  if (!cardBrands.includes(value)) {
     return {
       isValid: false,
       errorMessage: ERROR_MESSAGE.INVALID_CARD_BRAND,

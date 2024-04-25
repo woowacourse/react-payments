@@ -15,7 +15,7 @@ type Story = StoryObj<typeof SelectBox>;
 
 export const Default: Story = {
   args: {
-    optionValues: Object.values(CARD_BRANDS),
+    optionValues: Object.keys(CARD_BRANDS),
     isValid: true,
     placeholder: '카드사를 선택해주세요.',
     onChange: fn(),

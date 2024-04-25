@@ -36,7 +36,6 @@ export default function SelectBox({ optionValues, isValid, placeholder, onChange
             return (
               <S.SelectOption
                 key={value}
-                value={value}
                 $isSelected={value === selectedValue}
                 onClick={() => handleOptionValue(value)}
               >

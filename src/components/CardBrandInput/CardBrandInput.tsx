@@ -11,10 +11,6 @@ interface CardBrandInputProps {
 
 export default function CardBrandInput({ isBrandValid, onChangeBrand }: CardBrandInputProps) {
   const handleChangeBrand = (value: string) => {
-    const cardBrands = Object.values(CARD_BRANDS);
-    if (!cardBrands.includes(value as (typeof cardBrands)[number])) {
-      return;
-    }
     onChangeBrand(value);
   };
 
@@ -23,7 +19,7 @@ export default function CardBrandInput({ isBrandValid, onChangeBrand }: CardBran
       <TitleContainer title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다." />
       <InputField errorMessage={isBrandValid.errorMessage}>
         <SelectBox
-          optionValues={Object.values(CARD_BRANDS) as string[]}
+          optionValues={Object.keys(CARD_BRANDS)}
           isValid={isBrandValid.isValid}
           placeholder={'카드사를 선택해주세요.'}
           onChange={handleChangeBrand}
