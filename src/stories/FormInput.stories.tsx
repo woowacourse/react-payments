@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import FormInput from "../Components/common/Input/Input";
+import Input from "../Components/common/Input/Input";
 
 const meta = {
   title: "Components/FormInput",
-  component: FormInput,
+  component: Input,
   argTypes: {},
-} satisfies Meta<typeof FormInput>;
+} satisfies Meta<typeof Input>;
 
 export default meta;
 

@@ -1,15 +1,10 @@
 interface CardInfo {
-  cardNumbers: {
-    firstNumbers: number[];
-    secondNumbers: number[];
-    thirdNumbers: number[];
-    fourthNumbers: number[];
+  cardNumbers: number[];
+  cardExpire: {
+    month: number;
+    year: number;
   };
-  cardValidityPeriod: {
-    month?: number;
-    year?: number;
-  };
-  ownerName?: string;
+  cardOwnerName?: string;
 }
 
 type InitCardInfoType = {
@@ -34,7 +29,10 @@ interface InputInfo {
   name: string;
   placeholder: string;
   maxLength: number;
-  onInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
 }
 
 interface FormFieldInfo {
