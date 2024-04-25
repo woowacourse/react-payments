@@ -21,11 +21,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/*  input 커스텀 - Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 input,
 select {
   margin: 0.5rem 0px;
@@ -33,6 +28,7 @@ select {
   border-radius: 6px;
   padding: 0.5rem;
 }
+
 .scr-only {
   position: absolute;
   top: -999px;

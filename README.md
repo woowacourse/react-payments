@@ -2,9 +2,9 @@
 
 ## 배포
 
-[🌟스토리북 페이지 바로가기](https://6620c65c99e8a4a3cde004a4-tvwukitxhr.chromatic.com/)
+[🌟스토리북 페이지 바로가기](https://6620c65c99e8a4a3cde004a4-rliiebajsf.chromatic.com/)
 
-[🌟배포 페이지 바로가기](https://badahertz52.github.io/react-payments/distt)
+[🌟배포 페이지 바로가기](https://badahertz52.github.io/react-payments/dist/)
 
 ## 구현
 
