@@ -7,5 +7,6 @@ export const StyledCardInformationForm = styled.form`
   overflow: auto;
 
   width: 100%;
+  height: 40rem;
   max-height: 40rem;
 `;
