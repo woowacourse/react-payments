@@ -1,4 +1,4 @@
-import { StyledCardInformationForm } from './style';
+import { StyledCardInformationForm, StyledSubmitButton } from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -60,6 +60,12 @@ const CardInformationForm = ({
   const cvcErrorMessage = isCVCError ? ERROR.cvc : '';
   const passwordErrorMessage = isPasswordError ? ERROR.password : '';
 
+  const isCardNumberValid = isCardNumberFilled && !isCardNumberError;
+  const isExpirationDateValid = isExpirationDateFilled && !isExpirationDateError;
+  const isUserNameValid = isUserNameFilled && !isUserNameError;
+  const isCVCValid = isCVCFilled && !isCVCError;
+  const isPasswordValid = isPasswordFilled && !isPasswordError;
+
   const isCardSelectedAppearedCondition =
     appearedCondition >= CARD_INFORMATION_APPEARED.selectedCard;
   const isExpirationDateAppearedCondition =
@@ -67,16 +73,23 @@ const CardInformationForm = ({
   const isUserNameAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.userName;
   const isCVCAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.cvc;
   const isPasswordAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.password;
+  const isSubmitButtonAppearedCondition =
+    isCardNumberValid &&
+    isCardSelected &&
+    isExpirationDateValid &&
+    isUserNameValid &&
+    isCVCValid &&
+    isPasswordValid;
 
-  if (isCardNumberFilled && !isCardNumberError && !isCardSelectedAppearedCondition)
+  if (isCardNumberValid && !isCardSelectedAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.selectedCard);
   if (isCardSelected && !isExpirationDateAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.expirationDate);
-  if (isExpirationDateFilled && !isExpirationDateError && !isUserNameAppearedCondition)
+  if (isExpirationDateValid && !isUserNameAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.userName);
-  if (isUserNameFilled && !isUserNameError && !isCVCAppearedCondition)
+  if (isUserNameValid && !isCVCAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.cvc);
-  if (isCVCFilled && !isCVCError && !isPasswordAppearedCondition)
+  if (isCVCValid && !isPasswordAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.password);
 
   const cardNumberStates = [firstState, secondState, thirdState, fourthState];
@@ -92,6 +105,7 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
+      {isSubmitButtonAppearedCondition && <StyledSubmitButton>확인</StyledSubmitButton>}
       {isPasswordAppearedCondition && (
         <FormField title={TITLE.password} caption={CAPTION.password}>
           <InputField label={LABEL.password} error={passwordErrorMessage}>
