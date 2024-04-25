@@ -16,8 +16,9 @@ import {
   SetCardNumberState,
   SetExpirationDateState,
 } from '../../types/Types';
+import useCreateNextField from '../../hooks/useCreateNextField';
 
-interface CardInformationFormProps {
+export interface CardInformationFormProps {
   cardNumbers: {
     cardNumberState: CardNumberState;
     setCardNumberState: SetCardNumberState;
@@ -50,22 +51,46 @@ interface CardInformationFormProps {
   };
 }
 
-const CardInformationForm = ({
-  cardNumbers,
-  expirationDate,
-  userName,
-  cardBrand,
-  cvcNumber,
-  password,
-}: CardInformationFormProps) => {
+const CardInformationForm = (props: CardInformationFormProps) => {
+  const { isFieldShowCount, showNextFieldOnLastElementBlur } = useCreateNextField();
+  const { cardNumbers, expirationDate, userName, cardBrand, cvcNumber, password } = props;
+
+  const fields: Array<React.ReactNode> = [
+    <CardNumbersField
+      key={0}
+      {...cardNumbers}
+      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
+    />,
+    <CardBrandField
+      key={1}
+      {...cardBrand}
+      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
+    />,
+    <ExpirationDateField
+      key={2}
+      {...expirationDate}
+      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
+    />,
+    <UserNameField
+      key={3}
+      {...userName}
+      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
+    />,
+    <CVCNumberField
+      key={4}
+      {...cvcNumber}
+      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
+    />,
+    <PasswordField key={5} {...password} />,
+  ];
+
   return (
     <Form>
-      <CardNumbersField {...cardNumbers} />
-      <CardBrandField {...cardBrand} />
-      <ExpirationDateField {...expirationDate} />
-      <UserNameField {...userName} />
-      <CVCNumberField {...cvcNumber} />
-      <PasswordField {...password} />
+      {fields.map((field, index) => {
+        if (isFieldShowCount >= index) {
+          return field;
+        }
+      })}
     </Form>
   );
 };

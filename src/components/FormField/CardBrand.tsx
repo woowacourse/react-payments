@@ -3,12 +3,14 @@ import FormField from './FormField';
 import InputField from '../InputField/InputField';
 import MESSAGE from '../../constants/Message';
 import Select from '../Select/Select';
+import { ShowNextFieldOnLastElementBlurParams } from '../../hooks/useCreateNextField';
 
 const { TITLE, CAPTION, PLACEHOLDER } = MESSAGE;
 
 interface CardNumbersProps {
   cardBrandState: string | null;
   setCardBrandState: React.Dispatch<React.SetStateAction<string | null>>;
+  showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
 }
 
 const options = [
@@ -22,13 +24,26 @@ const options = [
   { label: '국민카드', value: '국민카드' },
 ];
 
-const CardBrand = ({ cardBrandState, setCardBrandState }: CardNumbersProps) => {
+const CardBrand = ({
+  cardBrandState,
+  setCardBrandState,
+  showNextFieldOnLastElementBlur,
+}: CardNumbersProps) => {
+  const onChange = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    setCardBrandState(event.currentTarget.textContent + '');
+    showNextFieldOnLastElementBlur({
+      isFill: event.currentTarget.textContent !== null,
+      isFieldError: event.currentTarget.textContent === null,
+      nextIndex: 2,
+    });
+  };
+
   return (
     <FormField title={TITLE.cardBrand} caption={CAPTION.cardBrand}>
       <InputField>
         <Select
           value={cardBrandState}
-          onChange={setCardBrandState}
+          onChange={(event) => onChange(event)}
           placeholder={PLACEHOLDER.cardBrand}
           options={options}
         />

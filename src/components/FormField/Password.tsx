@@ -25,6 +25,7 @@ const Password = ({ passwordState, setPasswordState, isPasswordError }: Password
           maxLength={MAX_LENGTH.password}
           onChange={setPasswordState}
           aria-invalid={isPasswordError}
+          autoFocus
         />
       </InputField>
     </FormField>

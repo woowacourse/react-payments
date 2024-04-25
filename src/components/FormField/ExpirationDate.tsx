@@ -8,6 +8,7 @@ import {
   ExpirationDateState,
   SetExpirationDateState,
 } from '../../types/Types';
+import { ShowNextFieldOnLastElementBlurParams } from '../../hooks/useCreateNextField';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
@@ -16,17 +17,21 @@ interface ExpirationDateProps {
   expirationDateState: ExpirationDateState;
   setExpirationDateState: SetExpirationDateState;
   expirationDateErrorState: ExpirationDateErrorState;
+  showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
 }
 const ExpirationDate = ({
   expirationDateState,
   setExpirationDateState,
   expirationDateErrorState,
+  showNextFieldOnLastElementBlur,
 }: ExpirationDateProps) => {
   const { month, year } = expirationDateState;
   const { setMonth, setYear } = setExpirationDateState;
   const { isMonthError, isYearError } = expirationDateErrorState;
 
   const expirationErrorMessage = isMonthError ? ERROR.month : isYearError ? ERROR.year : '';
+  const isFill =
+    month.length === MAX_LENGTH.expirationDate && year.length === MAX_LENGTH.expirationDate;
 
   return (
     <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
@@ -38,6 +43,7 @@ const ExpirationDate = ({
           maxLength={MAX_LENGTH.expirationDate}
           onChange={setMonth}
           aria-invalid={isMonthError}
+          autoFocus
         />
         <Input
           aria-label="유효기간-년도"
@@ -46,6 +52,13 @@ const ExpirationDate = ({
           maxLength={MAX_LENGTH.expirationDate}
           onChange={setYear}
           aria-invalid={isYearError}
+          onBlur={() => {
+            showNextFieldOnLastElementBlur({
+              isFill,
+              isFieldError: expirationErrorMessage !== '',
+              nextIndex: 3,
+            });
+          }}
         />
       </InputField>
     </FormField>

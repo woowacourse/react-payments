@@ -9,7 +9,7 @@ interface Option {
 
 interface SelectProps {
   value: string | null;
-  onChange: React.Dispatch<React.SetStateAction<string | null>>;
+  onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   placeholder: string;
   options: Option[];
 }
@@ -42,12 +42,7 @@ const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
       <ArrowIcon isActive={isShowOptions} />
       <Styled.Options $isShow={isShowOptions}>
         {options.map((option, index) => (
-          <Styled.Option
-            key={index}
-            onClick={(event) => {
-              onChange(event.currentTarget.textContent + '');
-            }}
-          >
+          <Styled.Option key={index} onClick={(event) => onChange(event)}>
             {option.label}
           </Styled.Option>
         ))}
