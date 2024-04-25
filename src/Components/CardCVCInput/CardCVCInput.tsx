@@ -2,26 +2,19 @@ import React, { useState } from "react";
 import Input from "../common/Input/Input";
 import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
 
-interface CardOwnerNameInputProps {
+interface CardCVCInputProps {
   value: string;
   onChange: (value: string) => void;
-  // setIsValid: () => void;
 }
 
-const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
-  value,
-  onChange,
-  // setIsValid,
-}) => {
+const CardCVCInput: React.FC<CardCVCInputProps> = ({ value, onChange }) => {
   const [inputValues, setInputValues] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (inputValue: string) => {
-    console.log("owner name inputValue", inputValue);
-    if (validator(inputValue)) {
-      onChange(inputValue.toUpperCase());
-    }
+    setInputValues(inputValue);
+    onChange(inputValue);
   };
 
   const handleValidate = (isValid: boolean) => {
@@ -29,9 +22,15 @@ const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
   };
 
   const validator = (value: string) => {
-    if (!/^[A-Za-z\s]*$/.test(value)) {
+    if (!/^\d*$/.test(value)) {
       setIsValid(false);
-      setErrorMessage("카드 소유자 이름은 영어로만 입력해 주세요");
+      setErrorMessage("CVC 번호는 숫자만 입력 가능합니다.");
+      return false;
+    }
+
+    if (value.length !== 2) {
+      setIsValid(false);
+      setErrorMessage("CVC 번호는 2자리여야 합니다.");
       return false;
     }
 
@@ -43,11 +42,12 @@ const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
   return (
     <>
       <Input
-        value={value}
-        onChange={(inputValues) => handleChange(inputValues)}
+        value={inputValues}
+        onChange={(inputValue) => handleChange(inputValue)}
         onValidate={(isValid) => handleValidate(isValid)}
-        placeholder="JOHN DOE"
+        placeholder="123"
         size="large"
+        maxLength={2}
         validator={(value) => validator(value)}
       />
       <Tooltip>{!isValid ? errorMessage : ""}</Tooltip>
@@ -55,4 +55,4 @@ const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
   );
 };
 
-export default CardOwnerNameInput;
+export default CardCVCInput;

@@ -5,6 +5,7 @@ import CardNumberInput from "../CardNumberInput/CardNumberInput";
 import ExpiryInput from "../ExpiryInput/ExpiryInput";
 import CardOwnerNameInput from "../CardOwnerNameInput/CardOwnerNameInput";
 import SelectBox from "../CardCompanySelector/CardCompanySelector";
+import CardCVCInput from "../CardCVCInput/CardCVCInput";
 
 const CardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState("");
@@ -12,6 +13,7 @@ const CardForm: React.FC = () => {
   const [expiryMonth, setExpiryMonth] = useState("");
   const [expiryYear, setExpiryYear] = useState("");
   const [cardholderName, setCardholderName] = useState("");
+  const [cardCVC, setCardCVC] = useState("");
 
   const handleCardNumberChange = (value: string) => {
     const filteredValue = value.replace(/\D/g, "");
@@ -37,6 +39,12 @@ const CardForm: React.FC = () => {
 
   const handleSelect = (value: CardCompany | "") => {
     setSelectedCard(value);
+  };
+
+  const handleCardCVC = (value: string) => {
+    console.log("handleCardCVC value", value);
+    setCardCVC(value);
+    console.log("handleCardCVC cardCVC", cardCVC);
   };
 
   return (
@@ -92,6 +100,10 @@ const CardForm: React.FC = () => {
           <SelectBox onSelect={handleSelect} />
           <p>선택한 카드사: {selectedCard}</p>
         </div>
+      </CardInput>
+
+      <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
+        <CardCVCInput value={cardCVC} onChange={handleCardCVC} />
       </CardInput>
     </form>
   );
