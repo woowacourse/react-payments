@@ -50,6 +50,10 @@ const NewCardPage = () => {
     updateCVCVisibility();
   }, [cardInfo.userName]);
 
+  useEffect(() => {
+    updatePasswordVisibility();
+  }, [cardInfo.cvc]);
+
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
     errorMessageCopy[index] = validateCardNumber(value);
@@ -183,6 +187,12 @@ const NewCardPage = () => {
     }
   };
 
+  const updatePasswordVisibility = () => {
+    if (cardInfo.cvc !== '' && creationStage < 6) {
+      setCreationStage(creationStage + 1);
+    }
+  };
+
   const handlePasswordChange = (value: string) => {
     const erroMessageCopy = validatePassword(value);
 
@@ -279,7 +289,6 @@ const NewCardPage = () => {
           errorMessage={errorMessage.cvc}
         >
           <Input
-            value={cardInfo.cvc}
             maxLength={CARD_FORM_INPUTS.CVC.MAX_LENGTH}
             placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
             isError={!!errorMessage.cvc[0]}
