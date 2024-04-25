@@ -12,7 +12,7 @@ const CardRegistrationCompletePage = () => {
   return (
     <S.CardRegistrationCompleteLayout>
       <S.CheckBox>
-        <img src={Check} />
+        <img src={Check} alt="등록 완료" />
       </S.CheckBox>
       <S.CardRegistrationMessage>
         {cardNumber}로 시작하는

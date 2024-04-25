@@ -35,9 +35,11 @@ const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => 
     <div>
       <TitleContainer title="카드사를 선택해 주세요." subTitle="현재 국내 카드사만 가능합니다." />
       <S.CardCompanyInputContainer>
-        <S.SelectedCardCompanyBox $isDefault={company === ''}>
-          <p>{company ? company : '카드사를 선택해 주세요'}</p>
-          <button onClick={toggleOptionList}>{isOptionOpen ? <img src={UpIcon} /> : <img src={DownIcon} />}</button>
+        <S.SelectedCardCompanyBox $isDefault={!company}>
+          <p>{company || '카드사를 선택해 주세요'}</p>
+          <button onClick={toggleOptionList}>
+            <img src={isOptionOpen ? UpIcon : DownIcon} alt={isOptionOpen ? '옵션 닫기' : '옵션 열기'} />
+          </button>
         </S.SelectedCardCompanyBox>
         {isOptionOpen && (
           <S.CardCompanyOptionList>

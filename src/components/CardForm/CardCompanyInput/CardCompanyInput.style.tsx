@@ -33,7 +33,7 @@ export const CardCompanyOptionList = styled.ul`
   font-size: ${({ theme }) => theme.fontSize.base};
 `;
 
-export const CardCompanyOption = styled.div`
+export const CardCompanyOption = styled.li`
   width: 100%;
   height: 32px;
 

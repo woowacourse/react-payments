@@ -16,11 +16,8 @@ interface CardCVCInputProps {
 
 const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { value: cvcInput, onChange: onCVCInputChange } = useInput(cvc);
 
-  const handleCVCFocus = () => {
-    handleIsCVCInput(true);
-  };
+  const { value: cvcInput, onChange: onCVCInputChange } = useInput(cvc);
 
   const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -46,7 +43,8 @@ const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInpu
           placeholder="123"
           value={cvcInput}
           maxLength={3}
-          onFocus={handleCVCFocus}
+          onFocus={() => handleIsCVCInput(true)}
+          onBlur={() => handleIsCVCInput(false)}
           onChange={handleCVCChange}
         />
       </InputField>
