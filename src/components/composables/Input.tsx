@@ -1,28 +1,27 @@
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 import * as S from './input.style';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  isError: boolean;
+  isError?: boolean;
 }
 
-export default function Input({
-  value,
-  onChange,
-  type,
-  placeholder,
-  id,
-  isError,
-  maxLength,
-}: InputProps) {
-  return (
-    <S.Input
-      value={value}
-      onChange={onChange}
-      type={type}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      id={id}
-      $isError={isError}
-    />
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ value, onChange, type, placeholder, id, isError, maxLength, onKeyDown, onBlur }, ref) => {
+    return (
+      <S.Input
+        ref={ref}
+        value={value}
+        onChange={onChange}
+        type={type}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        id={id}
+        onKeyDown={onKeyDown}
+        $isError={isError}
+        onBlur={onBlur}
+      />
+    );
+  },
+);
+
+export default Input;

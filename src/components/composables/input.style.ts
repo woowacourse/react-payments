@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const Input = styled.input<{ isError: boolean }>`
+export const Input = styled.input<{ $isError: boolean }>`
   border: 1px solid #acacac;
   padding: 8px;
   font-size: 0.6875rem;
@@ -10,6 +10,6 @@ export const Input = styled.input<{ isError: boolean }>`
   flex: 1;
 
   &:focus {
-    border: 1px solid ${(props) => (props.isError ? '#ff3d3d' : '#000')};
+    border: 1px solid ${(props) => (props.$isError ? '#ff3d3d' : '#000')};
   }
 `;
