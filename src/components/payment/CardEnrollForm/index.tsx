@@ -27,10 +27,10 @@ const CardInformationContainer = styled.div`
 
 export default function CardEnrollForm() {
   const {
+    cardInformation,
+
     isCvcFocused,
     isReadyForSubmit,
-
-    cardInformation,
 
     cardPassword,
     cardCvc,
@@ -43,45 +43,16 @@ export default function CardEnrollForm() {
   return (
     <CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation} isFlipped={isCvcFocused} />
+
       <CardInformationContainer>
-        <CardPasswordInput
-          cardPassword={cardPassword.valueState}
-          errorState={cardPassword.errorState}
-          onChange={cardPassword.onCardPasswordChange}
-          onBlur={cardPassword.onCardPasswordBlur}
-        />
-        <CardCvcInput
-          cardCvc={cardCvc.valueState}
-          errorState={cardCvc.errorState}
-          onChange={cardCvc.onCardCvcChange}
-          onBlur={cardCvc.onCardCvcBlur}
-          onFocus={cardCvc.onCardCvcFocus}
-        />
-        <CardNumbersInput
-          cardNumbers={cardNumbers.valueState}
-          errorState={cardNumbers.errorState}
-          onChange={cardNumbers.onCardNumberChange}
-          onBlur={cardNumbers.onCardNumberBlur}
-        />
-        <CardExpirationDateInput
-          cardExpiration={cardExpiration.valueState}
-          errorState={cardExpiration.errorState}
-          onChange={cardExpiration.onExpirationChange}
-          onBlur={cardExpiration.onExpirationBlur}
-        />
-        <CardOwnerNameInput
-          cardOwnerName={cardOwnerName.valueState}
-          errorState={cardOwnerName.errorState}
-          onChange={cardOwnerName.onOwnerNameChange}
-          onBlur={cardOwnerName.onOwnerNameBlur}
-        />
-        <CardIssuerSelect
-          cardIssuer={cardIssuer.valueState}
-          errorState={cardIssuer.errorState}
-          onChange={cardIssuer.onCardIssuerChange}
-          onBlur={cardIssuer.onCardIssuerBlur}
-        />
+        <CardPasswordInput {...cardPassword} />
+        <CardCvcInput {...cardCvc} />
+        <CardNumbersInput {...cardNumbers} />
+        <CardExpirationDateInput {...cardExpiration} />
+        <CardOwnerNameInput {...cardOwnerName} />
+        <CardIssuerSelect {...cardIssuer} />
       </CardInformationContainer>
+
       <FormSubmitButton disabled={!isReadyForSubmit} />
     </CardEnrollFormContainer>
   );

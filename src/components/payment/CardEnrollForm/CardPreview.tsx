@@ -1,7 +1,8 @@
 import { CardIssuer, cardIssuerMapper } from "../../../constants/cardIssuers";
 import { useEffect, useState } from "react";
 
-import { CardInformation } from "../../../types/cardInformation";
+import { CardInformationValueState } from "../../../hooks/useCardEnrollForm";
+import { CardNumbers } from "../../../hooks/useCardNumbers";
 import Mastercard from "../../../static/Mastercard.png";
 import Visa from "../../../static/Visa.png";
 import styled from "styled-components";
@@ -107,11 +108,11 @@ const CvcText = styled.span`
   margin-right: 16px;
 `;
 
-const isVisaCard = (cardNumbers: CardInformation["cardNumbers"]) => {
+const isVisaCard = (cardNumbers: CardNumbers) => {
   return isNumberStartWith(cardNumbers[0], "4");
 };
 
-const isMasterCard = (cardNumbers: CardInformation["cardNumbers"]) => {
+const isMasterCard = (cardNumbers: CardNumbers) => {
   return (
     ["51", "52", "53", "54", "55"].filter((startingNumber) =>
       isNumberStartWith(cardNumbers[0], startingNumber)
@@ -125,7 +126,7 @@ const isNumberStartWith = (targetNumber: string, startNumber: string) => {
 };
 
 interface CardPreviewProps {
-  cardInformation: CardInformation;
+  cardInformation: CardInformationValueState;
   isFlipped: boolean;
 }
 

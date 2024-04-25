@@ -1,7 +1,9 @@
 import { CaptionText, LabelText, TitleText } from "../../../styles/common";
+import {
+  CardNumbers,
+  CardNumbersErrorState,
+} from "../../../hooks/useCardNumbers";
 
-import { CardInformation } from "../../../types/cardInformation";
-import { CardNumbersErrorState } from "../../../hooks/useCardInformationErrorState";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
@@ -23,8 +25,8 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface CardNumbersInputProps {
-  cardNumbers: CardInformation["cardNumbers"];
+export interface CardNumbersInputProps {
+  valueState: CardNumbers;
   errorState: CardNumbersErrorState;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -37,7 +39,7 @@ interface CardNumbersInputProps {
 }
 
 export default function CardNumbersInput({
-  cardNumbers,
+  valueState,
   errorState,
   onChange,
   onBlur,
@@ -54,7 +56,7 @@ export default function CardNumbersInput({
           <Input
             maxLength={4}
             placeholder="1234"
-            value={cardNumbers[0]}
+            value={valueState[0]}
             isError={errorState.isError[0]}
             onChange={(event) => onChange(event, 0)}
             onBlur={(event) => onBlur(event, 0)}
@@ -62,7 +64,7 @@ export default function CardNumbersInput({
           <Input
             maxLength={4}
             placeholder="1234"
-            value={cardNumbers[1]}
+            value={valueState[1]}
             isError={errorState.isError[1]}
             onChange={(event) => onChange(event, 1)}
             onBlur={(event) => onBlur(event, 1)}
@@ -71,7 +73,7 @@ export default function CardNumbersInput({
             maxLength={4}
             placeholder="1234"
             type="password"
-            value={cardNumbers[2]}
+            value={valueState[2]}
             isError={errorState.isError[2]}
             onChange={(event) => onChange(event, 2)}
             onBlur={(event) => onBlur(event, 2)}
@@ -80,7 +82,7 @@ export default function CardNumbersInput({
             maxLength={4}
             placeholder="1234"
             type="password"
-            value={cardNumbers[3]}
+            value={valueState[3]}
             isError={errorState.isError[3]}
             onChange={(event) => onChange(event, 3)}
             onBlur={(event) => onBlur(event, 3)}

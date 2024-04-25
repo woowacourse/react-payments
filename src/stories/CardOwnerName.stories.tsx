@@ -12,11 +12,11 @@ type Story = StoryObj<typeof CardOwnerNameInput>;
 
 export const Default: Story = {
   args: {
-    cardOwnerName: "",
+    valueState: "",
   },
   render: ({ ...args }) => {
     const [cardInformation, setCardInformation] = useState({
-      cardOwnerName: args.cardOwnerName,
+      cardOwnerName: args.valueState,
     });
 
     const inputHandler = (inputValue: string, inputId: string) => {
@@ -29,7 +29,7 @@ export const Default: Story = {
     return (
       <CardOwnerNameInput
         {...args}
-        cardOwnerName={cardInformation.cardOwnerName}
+        valueState={cardInformation.cardOwnerName}
         onChange={inputHandler}
       />
     );

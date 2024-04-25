@@ -1,5 +1,6 @@
 import { LabelText, TitleText } from "../../../styles/common";
 
+import { CardCvcErrorState } from "../../../hooks/useCardCvc";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
@@ -23,16 +24,16 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface CardCvcInputProps {
-  cardCvc: string;
-  errorState: { isError: boolean; errorMessage: string };
+export interface CardCvcInputProps {
+  valueState: string;
+  errorState: CardCvcErrorState;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus: () => void;
 }
 
 export default function CardCvcInput({
-  cardCvc,
+  valueState,
   errorState,
   onChange,
   onBlur,
@@ -49,7 +50,7 @@ export default function CardCvcInput({
           <Input
             maxLength={4}
             placeholder="123"
-            value={cardCvc}
+            value={valueState}
             isError={errorState.isError}
             onChange={onChange}
             onBlur={onBlur}

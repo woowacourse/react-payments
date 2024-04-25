@@ -5,6 +5,7 @@ import {
 } from "../../../constants/cardIssuers";
 import { CaptionText, TitleText } from "../../../styles/common";
 
+import { CardIssuerErrorState } from "../../../hooks/useCardIssuer";
 import ErrorMessage from "../../common/ErrorMessage";
 import Select from "../../common/Select";
 import styled from "styled-components";
@@ -27,9 +28,9 @@ const cardIssuerOptions = CARD_ISSUERS.map((cardIssuer) => ({
   label: cardIssuerMapper[cardIssuer].label,
 }));
 
-interface CardIssuerSelectProps {
-  cardIssuer: CardIssuer | "";
-  errorState: { isError: boolean; errorMessage: string };
+export interface CardIssuerSelectProps {
+  valueState: CardIssuer | "";
+  errorState: CardIssuerErrorState;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }

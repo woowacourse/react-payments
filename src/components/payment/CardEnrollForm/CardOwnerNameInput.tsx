@@ -1,5 +1,6 @@
 import { LabelText, TitleText } from "../../../styles/common";
 
+import { CardOwnerNameErrorState } from "../../../hooks/useCardOwnerName";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
@@ -23,15 +24,15 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface CardOwnerNameInputProps {
-  cardOwnerName: string;
-  errorState: { isError: boolean; errorMessage: string };
+export interface CardOwnerNameInputProps {
+  valueState: string;
+  errorState: CardOwnerNameErrorState;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function CardOwnerNameInput({
-  cardOwnerName,
+  valueState,
   errorState,
   onChange,
   onBlur,
@@ -45,7 +46,7 @@ export default function CardOwnerNameInput({
           <Input
             maxLength={15}
             placeholder="JOHN DOE"
-            value={cardOwnerName}
+            value={valueState}
             isError={errorState.isError}
             onChange={onChange}
             onBlur={onBlur}

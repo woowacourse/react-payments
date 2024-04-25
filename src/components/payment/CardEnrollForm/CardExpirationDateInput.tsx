@@ -1,6 +1,10 @@
 import { CaptionText, LabelText, TitleText } from "../../../styles/common";
+import {
+  CardExpiration,
+  CardExpirationErrorState,
+  CardExpirationKeys,
+} from "../../../hooks/useCardExpiration";
 
-import { CardInformation } from "../../../types/cardInformation";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
@@ -24,24 +28,21 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface CardExpirationDateInputProps {
-  cardExpiration: CardInformation["cardExpiration"];
-  errorState: {
-    isError: { month: boolean; year: boolean };
-    errorMessage: string;
-  };
+export interface CardExpirationDateInputProps {
+  valueState: CardExpiration;
+  errorState: CardExpirationErrorState;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement>,
-    targetKey: "month" | "year"
+    targetKey: CardExpirationKeys
   ) => void;
   onBlur: (
     event: React.FocusEvent<HTMLInputElement>,
-    targetKey: "month" | "year"
+    targetKey: CardExpirationKeys
   ) => void;
 }
 
 export default function CardExpirationDateInput({
-  cardExpiration,
+  valueState,
   errorState,
   onChange,
   onBlur,
@@ -58,7 +59,7 @@ export default function CardExpirationDateInput({
           <Input
             maxLength={2}
             placeholder="MM"
-            value={cardExpiration.month}
+            value={valueState.month}
             isError={errorState.isError.month}
             onChange={(event) => onChange(event, "month")}
             onBlur={(event) => onBlur(event, "month")}
@@ -66,7 +67,7 @@ export default function CardExpirationDateInput({
           <Input
             maxLength={2}
             placeholder="YY"
-            value={cardExpiration.year}
+            value={valueState.year}
             isError={errorState.isError.year}
             onChange={(event) => onChange(event, "year")}
             onBlur={(event) => onBlur(event, "year")}
