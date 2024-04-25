@@ -2,11 +2,36 @@ import styled from 'styled-components';
 import { CARD_COLOR } from '../../constants/card';
 import { CARD_TYPE } from '../../types/card';
 
-interface LayoutProps {
+interface FrontCardPreviewLayoutProps {
   $cardType: CARD_TYPE;
 }
 
-export const CardPreviewLayout = styled.div<LayoutProps>`
+interface CardPreviewLayoutProps {
+  $isFront: boolean;
+}
+
+export const CardPreviewLayout = styled.div<CardPreviewLayoutProps>`
+  width: 320px;
+  height: 200px;
+  perspective: 1000px;
+
+  & > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 1s;
+  }
+
+  & > :first-child {
+    transform: ${props => (props.$isFront ? 'rotateY(0deg)' : 'rotateY(180deg)')};
+  }
+  & > :last-child {
+    transform: ${props => (props.$isFront ? 'rotateY(-180deg)' : 'rotateY(0deg)')};
+  }
+`;
+
+export const FrontCardPreviewLayout = styled.div<FrontCardPreviewLayoutProps>`
   display: flex;
   flex-direction: column;
   width: 320px;

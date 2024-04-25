@@ -21,7 +21,7 @@ const FrontCardPreview = ({
   cardType,
 }: FrontCardPreviewProps) => {
   return (
-    <S.CardPreviewLayout $cardType={cardType}>
+    <S.FrontCardPreviewLayout $cardType={cardType}>
       <S.HeaderWrapper>
         <S.CardMagnetic />
         <S.BrandImageWrapper>
@@ -47,7 +47,7 @@ const FrontCardPreview = ({
           <S.CardholderNameText>{cardholderName}</S.CardholderNameText>
         </S.CardholderNameWrapper>
       </S.BodyWrapper>
-    </S.CardPreviewLayout>
+    </S.FrontCardPreviewLayout>
   );
 };
 
