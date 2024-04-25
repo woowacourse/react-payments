@@ -9,7 +9,6 @@ export type ValidatorType = (input: string, name?: "month" | "year") => validato
 const ERROR_MESSAGES = {
   ONLY_NUMBER: "숫자만 입력해주세요.",
   NOT_VALID_MONTH: "유효한 월이 아닙니다",
-  ONLY_UNDER_15_LENGTH: "최대 15자로 입력해주세요.",
   ONLY_ENGLISH: "영어만 입력해주세요.",
 };
 
@@ -40,9 +39,6 @@ const isEnglish = (input: string) => {
 };
 
 export function cardOwnerValidator(input: string): validatorReturn {
-  if (input.length > 15) {
-    return { isValid: false, message: ERROR_MESSAGES.ONLY_UNDER_15_LENGTH };
-  }
   if (input && !isEnglish(input)) {
     return { isValid: false, message: ERROR_MESSAGES.ONLY_ENGLISH };
   }
@@ -50,11 +46,17 @@ export function cardOwnerValidator(input: string): validatorReturn {
 }
 
 export function cardCVCValidator(input: string) {
-  //TODO: CVC Valid 빌드
+  const number = Number(input);
+  if (Number.isNaN(number)) {
+    return { isValid: false, message: ERROR_MESSAGES.ONLY_NUMBER };
+  }
   return { isValid: true, value: input };
 }
 
 export function cardPasswordValidator(input: string) {
-  //TODO: Password Valid 빌드
+  const number = Number(input);
+  if (Number.isNaN(number)) {
+    return { isValid: false, message: ERROR_MESSAGES.ONLY_NUMBER };
+  }
   return { isValid: true, value: input };
 }
