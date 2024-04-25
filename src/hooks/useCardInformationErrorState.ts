@@ -23,7 +23,7 @@ interface CardOwnerNameErrorState {
   errorMessage: string;
 }
 
-interface CardCVCErrorState {
+interface CardCvcErrorState {
   isError: boolean;
   errorMessage: string;
 }
@@ -38,7 +38,7 @@ export interface CardInformationErrorState {
   cardIssuer: CardIssuerErrorState;
   cardExpiration: CardExpirationErrorState;
   cardOwnerName: CardOwnerNameErrorState;
-  cardCVC: CardCVCErrorState;
+  cardCvc: CardCvcErrorState;
   cardPassword: CardPasswordErrorState;
 }
 
@@ -54,7 +54,7 @@ const useCardInformationErrorState = () => {
       errorMessage: "",
     },
     cardOwnerName: { isError: false, errorMessage: "" },
-    cardCVC: { isError: false, errorMessage: "" },
+    cardCvc: { isError: false, errorMessage: "" },
     cardPassword: { isError: false, errorMessage: "" },
   });
 
@@ -98,13 +98,13 @@ const useCardInformationErrorState = () => {
     }));
   };
 
-  const updateCVCErrorState = ({
+  const updateCvcErrorState = ({
     isError,
     errorMessage,
-  }: CardCVCErrorState) => {
+  }: CardCvcErrorState) => {
     setErrorState((prev) => ({
       ...prev,
-      cardCVC: { isError, errorMessage },
+      cardCvc: { isError, errorMessage },
     }));
   };
 
@@ -124,7 +124,7 @@ const useCardInformationErrorState = () => {
     updateCardIssuerErrorState,
     updateCardExpirationErrorState,
     updateCardOwnerNameErrorState,
-    updateCVCErrorState,
+    updateCvcErrorState,
     updatePasswordErrorState,
   };
 };

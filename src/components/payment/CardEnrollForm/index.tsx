@@ -1,4 +1,4 @@
-import CardCVCInput from "./CardCVCInput";
+import CardCvcInput from "./CardCvcInput";
 import CardExpirationDateInput from "./CardExpirationDateInput";
 import CardIssuerSelect from "./CardIssuerSelect";
 import CardNumbersInput from "./CardNumbersInput";
@@ -27,13 +27,13 @@ const CardInformationContainer = styled.div`
 
 export default function CardEnrollForm() {
   const {
-    isCVCFocused,
+    isCvcFocused,
     isReadyForSubmit,
 
     cardInformation,
 
     cardPassword,
-    cardCVC,
+    cardCvc,
     cardNumbers,
     cardExpiration,
     cardOwnerName,
@@ -42,7 +42,7 @@ export default function CardEnrollForm() {
 
   return (
     <CardEnrollFormContainer>
-      <CardPreview cardInformation={cardInformation} isFlipped={isCVCFocused} />
+      <CardPreview cardInformation={cardInformation} isFlipped={isCvcFocused} />
       <CardInformationContainer>
         <CardPasswordInput
           cardPassword={cardPassword.valueState}
@@ -50,12 +50,12 @@ export default function CardEnrollForm() {
           onChange={cardPassword.onCardPasswordChange}
           onBlur={cardPassword.onCardPasswordBlur}
         />
-        <CardCVCInput
-          cardCVC={cardCVC.valueState}
-          errorState={cardCVC.errorState}
-          onChange={cardCVC.onCardCVCChange}
-          onBlur={cardCVC.onCardCVCBlur}
-          onFocus={cardCVC.onCardCVCFocus}
+        <CardCvcInput
+          cardCvc={cardCvc.valueState}
+          errorState={cardCvc.errorState}
+          onChange={cardCvc.onCardCvcChange}
+          onBlur={cardCvc.onCardCvcBlur}
+          onFocus={cardCvc.onCardCvcFocus}
         />
         <CardNumbersInput
           cardNumbers={cardNumbers.valueState}

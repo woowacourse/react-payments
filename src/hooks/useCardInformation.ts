@@ -11,7 +11,7 @@ const useCardInformation = () => {
       year: "",
     },
     cardOwnerName: "",
-    cardCVC: "",
+    cardCvc: "",
     cardPassword: "",
   });
 
@@ -41,8 +41,8 @@ const useCardInformation = () => {
     setCardInformation((prev) => ({ ...prev, cardOwnerName: inputValue }));
   };
 
-  const setCardCVC = (inputValue: string) => {
-    setCardInformation((prev) => ({ ...prev, cardCVC: inputValue }));
+  const setCardCvc = (inputValue: string) => {
+    setCardInformation((prev) => ({ ...prev, cardCvc: inputValue }));
   };
 
   const setCardPassword = (inputValue: string) => {
@@ -55,7 +55,7 @@ const useCardInformation = () => {
     setCardIssuer,
     setCardExpiration,
     setCardOwnerName,
-    setCardCVC,
+    setCardCvc,
     setCardPassword,
   };
 };

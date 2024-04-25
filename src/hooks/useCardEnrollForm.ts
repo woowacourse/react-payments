@@ -23,13 +23,13 @@ const validateCardPasswordOnBlur = (inputValue: string) => {
 
 // ---
 
-const validateCardCVCOnChange = (inputValue: string) => {
+const validateCardCvcOnChange = (inputValue: string) => {
   if (!isNumericString(inputValue)) {
     throw new Error("CVC는 숫자만 입력할 수 있어요");
   }
 };
 
-const validateCardCVCOnblur = (inputValue: string) => {
+const validateCardCvcOnblur = (inputValue: string) => {
   if (!(inputValue.length === 3 || inputValue.length === 4)) {
     throw new Error("CVC는 세 자리 또는 네 자리 숫자로 입력해 주세요");
   }
@@ -110,9 +110,9 @@ const validateCardIssuerOnBlur = (inputValue: string) => {
 
 const useCardEnrollForm = () => {
   const {
-    flag: isCVCFocused,
-    setTrue: setIsCVCFocused,
-    setFalse: setCVCBlurred,
+    flag: isCvcFocused,
+    setTrue: setIsCvcFocused,
+    setFalse: setCvcBlurred,
   } = useBoolean(false);
 
   const {
@@ -121,7 +121,7 @@ const useCardEnrollForm = () => {
     setCardIssuer,
     setCardExpiration,
     setCardOwnerName,
-    setCardCVC,
+    setCardCvc,
     setCardPassword,
   } = useCardInformation();
 
@@ -131,7 +131,7 @@ const useCardEnrollForm = () => {
     updateCardIssuerErrorState,
     updateCardExpirationErrorState,
     updateCardOwnerNameErrorState,
-    updateCVCErrorState,
+    updateCvcErrorState,
     updatePasswordErrorState,
   } = useCardInformationErrorState();
 
@@ -141,7 +141,7 @@ const useCardEnrollForm = () => {
   ]);
 
   return {
-    isCVCFocused,
+    isCvcFocused,
     isReadyForSubmit,
 
     cardInformation,
@@ -180,33 +180,33 @@ const useCardEnrollForm = () => {
       },
     },
 
-    cardCVC: {
-      valueState: cardInformation.cardCVC,
-      errorState: cardInformationErrorState.cardCVC,
-      onCardCVCChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+    cardCvc: {
+      valueState: cardInformation.cardCvc,
+      errorState: cardInformationErrorState.cardCvc,
+      onCardCvcChange: (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
-          validateCardCVCOnChange(event.target.value);
-          setCardCVC(event.target.value);
-          updateCVCErrorState({ isError: false, errorMessage: "" });
+          validateCardCvcOnChange(event.target.value);
+          setCardCvc(event.target.value);
+          updateCvcErrorState({ isError: false, errorMessage: "" });
         } catch (error) {
           if (error instanceof Error) {
-            updateCVCErrorState({ isError: true, errorMessage: error.message });
+            updateCvcErrorState({ isError: true, errorMessage: error.message });
           }
         }
       },
-      onCardCVCBlur: (event: React.FocusEvent<HTMLInputElement>) => {
-        setCVCBlurred();
+      onCardCvcBlur: (event: React.FocusEvent<HTMLInputElement>) => {
+        setCvcBlurred();
         try {
-          validateCardCVCOnblur(event.target.value);
-          updateCVCErrorState({ isError: false, errorMessage: "" });
+          validateCardCvcOnblur(event.target.value);
+          updateCvcErrorState({ isError: false, errorMessage: "" });
         } catch (error) {
           if (error instanceof Error) {
-            updateCVCErrorState({ isError: true, errorMessage: error.message });
+            updateCvcErrorState({ isError: true, errorMessage: error.message });
           }
         }
       },
-      onCardCVCFocus: () => {
-        setIsCVCFocused();
+      onCardCvcFocus: () => {
+        setIsCvcFocused();
       },
     },
 

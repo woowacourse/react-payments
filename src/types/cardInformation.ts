@@ -8,6 +8,6 @@ export interface CardInformation {
     year: string;
   };
   cardOwnerName: string;
-  cardCVC: string;
+  cardCvc: string;
   cardPassword: string;
 }

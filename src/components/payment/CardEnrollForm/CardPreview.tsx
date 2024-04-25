@@ -154,7 +154,7 @@ export default function CardPreview({
       {isFlipped ? (
         <CardBack>
           <CvcWrapper>
-            <CvcText>{cardInformation.cardCVC}</CvcText>
+            <CvcText>{cardInformation.cardCvc}</CvcText>
           </CvcWrapper>
         </CardBack>
       ) : (

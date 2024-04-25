@@ -4,14 +4,14 @@ import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
 
-const CardCVCInputContainer = styled.div`
+const CardCvcInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 16px;
 `;
 
-const CardCVCInputBox = styled.div`
+const CardCvcInputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -23,33 +23,33 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-interface CardCVCInputProps {
-  cardCVC: string;
+interface CardCvcInputProps {
+  cardCvc: string;
   errorState: { isError: boolean; errorMessage: string };
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus: () => void;
 }
 
-export default function CardCVCInput({
-  cardCVC,
+export default function CardCvcInput({
+  cardCvc,
   errorState,
   onChange,
   onBlur,
   onFocus,
-}: CardCVCInputProps) {
+}: CardCvcInputProps) {
   return (
-    <CardCVCInputContainer>
+    <CardCvcInputContainer>
       <div>
         <TitleText>CVC 번호를 입력해 주세요</TitleText>
       </div>
-      <CardCVCInputBox>
+      <CardCvcInputBox>
         <LabelText>CVC</LabelText>
         <InputContainer>
           <Input
             maxLength={4}
             placeholder="123"
-            value={cardCVC}
+            value={cardCvc}
             isError={errorState.isError}
             onChange={onChange}
             onBlur={onBlur}
@@ -59,7 +59,7 @@ export default function CardCVCInput({
         {errorState.isError && (
           <ErrorMessage message={errorState.errorMessage} />
         )}
-      </CardCVCInputBox>
-    </CardCVCInputContainer>
+      </CardCvcInputBox>
+    </CardCvcInputContainer>
   );
 }
