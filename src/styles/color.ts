@@ -7,4 +7,13 @@ export const COLOR = {
   black: '#000000',
   white: '#ffffff',
   semiWhite: '#f3f3f3',
+
+  bc: '#f04651',
+  shinhan: '#0046ff',
+  kakao: '#ffe600',
+  hyundai: '#000000',
+  woori: '#007bc8',
+  lotte: '#ed1c24',
+  hana: '#009490',
+  kb: '#6a6056',
 };
