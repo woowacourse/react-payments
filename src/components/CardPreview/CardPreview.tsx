@@ -6,8 +6,8 @@ import {
   MASK_START_INDEX,
   SYMBOLS,
 } from '../../constants/cardInfo';
+
 import useFlipCard from '../../hooks/useFlipCard';
-import { useEffect, useState } from 'react';
 
 type Brand = 'visa' | 'master';
 const getCardbrand = (
@@ -40,7 +40,10 @@ export default function CardPreview({
   });
 
   return (
-    <div className={styles.container} onClick={flipCard}>
+    <div
+      className={clsx(styles.container, { [styles.backSide]: !isFrontSide })}
+      onClick={flipCard}
+    >
       {isFrontSide ? (
         <FrontSide
           cardNumbers={cardNumbers}
@@ -102,5 +105,9 @@ function FrontSide({ cardNumbers, expirationDate, ownerName }: FrontSideProps) {
 
 type BackSideProps = Pick<CardPreviewProps, 'cvc'>;
 function BackSide({ cvc }: BackSideProps) {
-  return <></>;
+  return (
+    <>
+      <div className={styles.cvc}>{cvc}</div>
+    </>
+  );
 }
