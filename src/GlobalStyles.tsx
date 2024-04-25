@@ -14,10 +14,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     width: 100vw;
     height: auto;
     min-height: 100vh;
