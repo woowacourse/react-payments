@@ -1,13 +1,22 @@
 import InputField from "@/components/InputField/InputField";
-import React from "react";
+import { Company, companyNames } from "@/constants/condition";
+import React, { FormEvent } from "react";
 
-const comapnyList = ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"];
-const CardCompanyInputField = () => {
+interface CardCompanyInputFieldProp {
+  setCardCompany?: React.Dispatch<React.SetStateAction<Company>>;
+}
+const CardCompanyInputField = ({ setCardCompany }: CardCompanyInputFieldProp) => {
   return (
     <InputField>
       <InputField.Inputs>
-        <InputField.Select>
-          {comapnyList.map((companyName) => (
+        <InputField.Select
+          onChange={(e: FormEvent<HTMLSelectElement>) => {
+            if (setCardCompany === undefined) return;
+            const { value } = e.target as HTMLSelectElement;
+            setCardCompany(value as Company);
+          }}
+        >
+          {companyNames.map((companyName) => (
             <option>{companyName}</option>
           ))}
         </InputField.Select>

@@ -1,4 +1,4 @@
-import { INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE } from "@/constants/condition";
+import { INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE, Company } from "@/constants/condition";
 import S from "./CardRegisterForm.styled";
 import CardNumberInputField from "@/pages/CardRegisterForm/CardNumberInputField";
 import ExpirationDateInputField from "@/pages/CardRegisterForm/ExpirationDateInputField";
@@ -15,6 +15,7 @@ interface Props {
   CVCReduceds: ReturnType<typeof useInput>[];
   passwordReduceds: ReturnType<typeof useInput>[];
   setIsCVCFocused?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCardCompany?: React.Dispatch<React.SetStateAction<Company>>;
 }
 
 const CardRegisterForm = ({
@@ -22,8 +23,9 @@ const CardRegisterForm = ({
   expirationDateReduceds,
   ownerNameReduceds,
   CVCReduceds,
-  setIsCVCFocused,
   passwordReduceds,
+  setIsCVCFocused,
+  setCardCompany,
 }: Props) => {
   return (
     <S.CardFormWrapper>
@@ -42,7 +44,7 @@ const CardRegisterForm = ({
           <S.InputTitle>{INPUT_INFO_TITLE.CARD_COMPANY}</S.InputTitle>
           <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_COMPANY}</S.InputSubTitle>
         </S.TitleWrapper>
-        <CardCompanyInputField />
+        <CardCompanyInputField setCardCompany={setCardCompany} />
       </S.InputFieldWithInfo>
 
       {/* 유효 기간 */}

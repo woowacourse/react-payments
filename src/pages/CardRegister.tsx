@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/pages/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview, { CardBrand } from "@/components/CreditCardPreview/CreditCardPreview";
-import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
+import { CARD_BRAND_INFO, Company, INPUT_COUNTS, companyColor, companyNames } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { useState } from "react";
 import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
@@ -26,7 +26,7 @@ const CardRegister = () => {
   const ownerNameReduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
   const CVCReduceds = Array.from({ length: INPUT_COUNTS.CVC }).map(() => useInput(""));
   const passwordReduceds = Array.from({ length: INPUT_COUNTS.PASSWORD }).map(() => useInput(""));
-
+  const [cardCompany, setCardCompany] = useState<Company>("BC카드");
   const [isCVCFocused, setIsCVCFocused] = useState(false);
   return (
     <S.CardRegisterWrapper>
@@ -37,7 +37,7 @@ const CardRegister = () => {
             cardNumbers={inputsOf(cardNumbersReduceds)}
             expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
             ownerName={inputsOf(ownerNameReduceds)[0]}
-            cardCompany="BC카드"
+            cardCompany={cardCompany}
           />
         )}
         {isCVCFocused && <CreditCardPreviewRear CVC={CVCReduceds[0][0].value} />}
@@ -49,6 +49,7 @@ const CardRegister = () => {
           CVCReduceds={CVCReduceds}
           passwordReduceds={passwordReduceds}
           setIsCVCFocused={setIsCVCFocused}
+          setCardCompany={setCardCompany}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>
