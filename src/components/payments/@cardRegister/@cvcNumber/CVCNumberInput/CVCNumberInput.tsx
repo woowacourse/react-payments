@@ -7,25 +7,21 @@ type CVCNumberInputProps = Omit<InputProps, 'type' | 'maxLength' | 'onChange'> &
 };
 
 const CVCNumberInput: React.FC<CVCNumberInputProps> = ({
-  isError = false,
-  value,
-  id,
   onAddCVCNumber,
   onFocusCVCNumberField,
   refCallback,
+  ...rest
 }) => {
   return (
     <Input
       maxLength={3}
       type="text"
       placeholder={'CVCNumber 번호를 입력해주세요'}
-      id={id}
-      value={value}
-      isError={isError}
       onChange={onAddCVCNumber}
       onFocus={onFocusCVCNumberField}
       onBlur={onFocusCVCNumberField}
       ref={refCallback}
+      {...rest}
     />
   );
 };
