@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import useFocusNext from './useFocusNext';
-import ERROR_MESSAGE from '../constants/errorMessage';
 
 interface UseMultiFormSectionProps {
   refs: React.MutableRefObject<HTMLInputElement[]>;
@@ -63,6 +62,10 @@ const useMultiFormSection = (props: UseMultiFormSectionProps) => {
 
     if (newValues[index].length === maxLength) {
       focusNext();
+    }
+    if (newValues.every(newValue => newValue.length === maxLength)) {
+      const focusedRef = refs.current.find(element => document.activeElement === element)
+      focusedRef?.blur();
     }
   };
 

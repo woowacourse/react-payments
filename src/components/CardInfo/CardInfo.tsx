@@ -4,7 +4,6 @@ import CompanyDropdownFormSection from '../FormSection/CompanyDropdownFormSectio
 import ExpirationDateFormSection from '../FormSection/ExpirationDateFormSection/ExpirationDateFormSection';
 import NameFormSection from '../FormSection/NameFormSection/NameFormSection';
 import PasswordFormSection from '../FormSection/PasswordFormSection/PasswordFormSection';
-import PaymentsBottomFixedButton from '../common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
 
 import { Container } from './CardInfo.styled';
 
@@ -19,12 +18,12 @@ const CardInfo = (props: CardInfoProps) => {
 
   return (
     <Container>
-      {!cardInfo.cvc.isComplete || <PasswordFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
-      {!cardInfo.name.isComplete || <CVCFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />}
-      {!cardInfo.expiration.isComplete || <NameFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
-      {!cardInfo.cardCompany.isComplete || <ExpirationDateFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.cvc.isComplete || <PasswordFormSection dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.name.isComplete || <CVCFormSection dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />}
+      {!cardInfo.expiration.isComplete || <NameFormSection dispatchCardInfo={dispatchCardInfo} />}
+      {!cardInfo.cardCompany.isComplete || <ExpirationDateFormSection dispatchCardInfo={dispatchCardInfo} />}
       {!cardInfo.cardNumbers.isComplete || <CompanyDropdownFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />}
-      <CardNumbersFormSection cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} />
+      <CardNumbersFormSection dispatchCardInfo={dispatchCardInfo} />
     </Container>
   );
 };

@@ -8,14 +8,13 @@ import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSec
 import OPTION from '../../../constants/option';
 
 interface ExpirationDateFormSectionProps {
-  cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo } = props
+  const { dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
-  const [inputState, onChange, handleOnFocus, handleOnBlur] = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
+  const { values, error, hasErrors, handleChange } = useExpirationDateFormSection({ dispatchCardInfo, refs })
 
   const ExpirationDateForm = (
     <>
@@ -23,22 +22,18 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         ref={(input) => refs.current[0] = input}
         placeholder="MM"
         maxLength={OPTION.expirationDateMaxLength}
-        value={cardInfo.expiration.value.month}
-        hasError={inputState.month.hasError}
-        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'month')}
-        handleOnFocus={() => handleOnFocus('month')}
-        handleOnBlur={() => handleOnBlur('month')}
+        value={values[0]}
+        hasError={hasErrors[0]}
+        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 0)}
         autoFocus={true}
       />
       <PaymentsInputField
         ref={(input) => refs.current[1] = input}
         placeholder="YY"
         maxLength={OPTION.expirationDateMaxLength}
-        value={cardInfo.expiration.value.year}
-        hasError={inputState.year.hasError}
-        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, 'year')}
-        handleOnFocus={() => handleOnFocus('year')}
-        handleOnBlur={() => handleOnBlur('year')}
+        value={values[1]}
+        hasError={hasErrors[1]}
+        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 1)}
       />
     </>)
 
@@ -46,7 +41,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
     <FormSection title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요."
       label="유효기간"
-      errorMessage={cardInfo.expiration.errorMessage}
+      errorMessage={error}
       Children={ExpirationDateForm} />
   );
 };

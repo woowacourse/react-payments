@@ -11,7 +11,7 @@ const INITIAL_CARD_INFO_STATE: CardInfo = {
   cardNumbers: { value: ['', '', '', ''], isComplete: false, errorMessage: '' },
   cardBrand: { value: 'none', isComplete: false, errorMessage: '' },
   cardCompany: { value: '', isComplete: false, errorMessage: '' },
-  expiration: { value: { month: '', year: '' }, isComplete: false, errorMessage: '' },
+  expiration: { value: ['', ''], isComplete: false, errorMessage: '' },
   name: { value: '', isComplete: false, errorMessage: '' },
   cvc: { value: '', isComplete: false, errorMessage: '' },
   password: { value: '', isComplete: false, errorMessage: '' },

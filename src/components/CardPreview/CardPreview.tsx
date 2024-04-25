@@ -60,7 +60,7 @@ const CardPreview = (props: CardPreviewProps) => {
           </Styled.CardNameContainer>
           <Styled.CardExpirationContainer>
             <Styled.ExpirationLabel>EXPIRATION</Styled.ExpirationLabel>
-            <Styled.Expiration>{`${expiration.value.month}${expiration.value.month ? '/' : ''}${expiration.value.year}`}</Styled.Expiration>
+            <Styled.Expiration>{`${expiration.value[0]}${expiration.value[0] ? '/' : ''}${expiration.value[1]}`}</Styled.Expiration>
           </Styled.CardExpirationContainer>
         </Styled.CardNameAndExpiration>
       </Styled.CardBackground>

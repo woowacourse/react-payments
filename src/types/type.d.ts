@@ -13,7 +13,7 @@ type CardCompany = keyof typeof COMPANY_TABLE;
 
 interface CardInfo {
   cardNumbers: {
-    value: [string, string, string, string];
+    value: string[];
     isComplete: boolean;
     errorMessage: string;
   };
@@ -23,7 +23,11 @@ interface CardInfo {
     isComplete: boolean;
     errorMessage: string;
   };
-  expiration: { value: Expiration; isComplete: boolean; errorMessage: string };
+  expiration: {
+    value: string[];
+    isComplete: boolean;
+    errorMessage: string;
+  };
   name: { value: string; isComplete: boolean; errorMessage: string };
   cvc: { value: string; isComplete: boolean; errorMessage: string };
   password: { value: string; isComplete: boolean; errorMessage: string };
@@ -39,7 +43,7 @@ type CardInfoAction =
   | { type: 'SET_CARD_COMPANY_VALUE'; value: CardCompany }
   | { type: 'SET_CARD_COMPANY_COMPLETED'; value: boolean }
   | { type: 'SET_CARD_COMPANY_ERROR_MESSAGE'; value: string }
-  | { type: 'SET_CARD_EXPIRATION_VALUE'; value: Expiration }
+  | { type: 'SET_CARD_EXPIRATION_VALUE'; value: string[] }
   | { type: 'SET_CARD_EXPIRATION_COMPLETED'; value: boolean }
   | { type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE'; value: string }
   | { type: 'SET_CARD_NAME_VALUE'; value: string }

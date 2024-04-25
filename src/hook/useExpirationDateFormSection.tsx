@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
-import useFocusNext from "./useFocusNext";
+import useMultiFormSection from "./useMultiFormSection";
 
 interface UseExpirationFormSectionProps {
-  cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   refs: React.MutableRefObject<HTMLInputElement[]>
 }
-
-interface ExpirationInputState {
-  [key: string]: InputState;
-  month: InputState;
-  year: InputState;
-}
-
-type ExpirationInputType = 'month' | 'year'
 
 const nowDate = new Date();
 const year = nowDate.getFullYear().toString().slice(2, 4);
@@ -24,126 +15,74 @@ const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
 const now = year + month;
 
 const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo, refs } = props
-  const [inputState, setInputState] = useState<ExpirationInputState>({ month: { hasError: false, hasFocus: false }, year: { hasError: false, hasFocus: false } });
-  const { focusNext } = useFocusNext(refs);
+  const { dispatchCardInfo, refs } = props;
+  const [hasErrors, setHasErrors] = useState(new Array(refs.current.length).fill(false))
+  const [error, setError] = useState('');
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: ExpirationInputType) => {
-    const inputValue = event.target.value;
+  const validateCardExpiration = (values: string[]) => {
+    if (values.every(value => value.length === 0)) return
+    const newHasErrors = [...hasErrors];
+    let anyError = false;
 
-    if (!REGEX.numbers.test(inputValue)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          hasError: true,
-        }
-      }))
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.onlyNumber })
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue.slice(0, -1) } })
-    } else {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { ...cardInfo.expiration.value, [index]: inputValue } })
-    }
-  }
+    values.forEach((value, index) => {
+      if (value.length !== OPTION.expirationDateMaxLength) {
+        newHasErrors[index] = true;
+        anyError = true;
+      } else {
+        newHasErrors[index] = false;
+      }
+    });
 
-  useEffect(() => {
-    const focusedRef = refs.current.find((ref) => ref === document.activeElement);
-    if (!focusedRef) return;
-    if (focusedRef.value.length === OPTION.expirationDateMaxLength) {
-      focusNext();
-    }
-    if (refs.current.every((ref) => ref.value.length === OPTION.expirationDateMaxLength)) {
-      handleValidate();
-    }
-  }, [cardInfo.expiration.value])
+    setHasErrors(newHasErrors);
 
-  const handleOnFocus = (index: ExpirationInputType) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-    resetErrors();
-  };
-
-  const handleOnBlur = (index: ExpirationInputType) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-
-    if (index === 'month') {
-      formatMonth();
-    }
-
-    if (checkHasNoFocus()) {
-      resetErrors();
-      handleValidate();
-    }
-  };
-
-  const formatMonth = () => {
-    if (cardInfo.expiration.value.month.length === 0) return
-    if (REGEX.oneToNine.test(cardInfo.expiration.value.month)) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: '0' + cardInfo.expiration.value.month, year: cardInfo.expiration.value.year } })
-    } else if (REGEX.zero.test(cardInfo.expiration.value.month)) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: OPTION.minMonth, year: cardInfo.expiration.value.year } })
-    } else if (
-      !REGEX.month.test(cardInfo.expiration.value.month)
-    ) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: { month: OPTION.maxMonth, year: cardInfo.expiration.value.year } })
-    }
-  };
-
-  const checkHasNoFocus = () => {
-    return Object.values(inputState).every((field) => !field.hasFocus);
-  }
-
-  const validateExpired = () => {
-    const expireDate = +(cardInfo.expiration.value.year + cardInfo.expiration.value.month);
-    const nowDate = +now;
-
-    if (nowDate - expireDate > 0) {
-      setInputState({ month: { ...inputState.month, hasError: true }, year: { ...inputState.month, hasError: true } });
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.expiredCard })
-    } else {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: '' })
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
-    }
-  };
-
-  const handleValidate = () => {
-    if (cardInfo.expiration.value.month.length + cardInfo.expiration.value.year.length === 0) return
-    let hasAnyError = false;
-
-    if (cardInfo.expiration.value.month.length !== OPTION.expirationDateMaxLength) {
-      setInputState({ ...inputState, month: { ...inputState[month], hasError: true } });
-      hasAnyError = true;
-    }
-    if (cardInfo.expiration.value.year.length !== OPTION.expirationDateMaxLength) {
-      setInputState({ ...inputState, year: { ...inputState[year], hasError: true } });
-      hasAnyError = true;
-    }
-
-    if (hasAnyError) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: ERROR_MESSAGE.expirationFormat })
+    if (anyError) {
+      setError(ERROR_MESSAGE.expirationFormat);
     } else {
       validateExpired();
     }
   };
 
-  const resetErrors = () => {
-    setInputState({ month: { ...inputState.month, hasError: false }, year: { ...inputState.month, hasError: false } });
-    dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE', value: '' })
+  const formatMonth = () => {
+    console.log(values[0])
+    if (values[0].length === 0) return
+    if (REGEX.oneToNine.test(values[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + values[0], values[1]] })
+    } else if (REGEX.zero.test(values[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.minMonth, values[1]] })
+    } else if (
+      !REGEX.month.test(values[0])
+    ) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.maxMonth, values[1]] })
+    }
   };
 
+  const { values, handleChange } = useMultiFormSection({
+    refs: refs,
+    initialValue: new Array(OPTION.expirationDateInputCount).fill(''),
+    regex: REGEX.numbers,
+    errorMessage: ERROR_MESSAGE.onlyNumber,
+    maxLength: OPTION.expirationDateMaxLength,
+    dispatchCardInfo: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: values }),
+    setError: setError,
+    hasErrors: hasErrors,
+    setHasErrors: setHasErrors,
+    validate: validateCardExpiration,
+  });
 
-  return [inputState, onChange, handleOnFocus, handleOnBlur] as const;
-};
+  const validateExpired = () => {
+    const expireDate = +(values[1] + values[0]);
+    const nowDate = +now;
+
+    if (nowDate - expireDate > 0) {
+      setHasErrors([true, true])
+      setError(ERROR_MESSAGE.expiredCard)
+    } else {
+      setError('')
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
+    }
+  }
+
+  return { values, error, hasErrors, handleChange } as const
+}
 
 export default useExpirationDateFormSection;

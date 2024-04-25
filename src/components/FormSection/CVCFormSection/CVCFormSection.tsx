@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import FormSection from '../FormSection';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
