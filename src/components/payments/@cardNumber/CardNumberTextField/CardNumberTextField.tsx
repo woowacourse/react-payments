@@ -2,7 +2,6 @@ import TextField from '@components/common/TextField/TextField';
 import CardNumberInput from '@components/payments/@cardNumber/CardNumberInput/CardNumberInput';
 
 import { useFocusInputs, useUUID } from '@hooks/index';
-import { useEffect } from 'react';
 
 interface CardNumberTextFieldProps {
   isCardNumberError: boolean;
@@ -18,10 +17,6 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({
   cardNumberError,
 }) => {
   const { inputsRef, focusInputByIndex } = useFocusInputs(cardNumbers.length);
-
-  useEffect(() => {
-    inputsRef.current[0]?.focus();
-  }, [inputsRef]);
 
   const { current: uuids } = useUUID(cardNumbers.length);
   return (

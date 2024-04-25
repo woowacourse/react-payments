@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useFocusInputs = (focusCount: number) => {
   const inputsRef = useRef<(HTMLInputElement | null)[]>(Array.from({ length: focusCount }, () => null));
@@ -11,6 +11,10 @@ const useFocusInputs = (focusCount: number) => {
 
     inputElement.focus();
   };
+
+  useEffect(() => {
+    inputsRef.current[0]?.focus();
+  }, [inputsRef]);
 
   return {
     inputsRef,

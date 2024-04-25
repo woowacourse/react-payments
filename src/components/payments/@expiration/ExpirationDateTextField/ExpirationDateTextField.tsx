@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import TextField from '@components/common/TextField/TextField';
 import ExpirationDateInput from '@components/payments/@expiration/ExpirationDateInput/ExpirationDateInput';
 import useFocusInputs from '@hooks/useFocusInputs';
@@ -18,10 +16,6 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   expirationError,
 }) => {
   const { inputsRef, focusInputByIndex } = useFocusInputs(2);
-
-  useEffect(() => {
-    inputsRef.current[0]?.focus();
-  }, [inputsRef]);
 
   return (
     <section>
