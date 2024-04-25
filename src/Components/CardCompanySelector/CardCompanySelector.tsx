@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type SelectBoxProps = {
   onSelect: (value: CardCompany | "") => void;
+  setCompleted: (isValid: boolean) => void;
 };
 
 const options = [
@@ -15,7 +16,7 @@ const options = [
   "국민카드",
 ];
 
-const SelectBox: React.FC<SelectBoxProps> = ({ onSelect }) => {
+const SelectBox: React.FC<SelectBoxProps> = ({ onSelect, setCompleted }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -23,6 +24,11 @@ const SelectBox: React.FC<SelectBoxProps> = ({ onSelect }) => {
     setSelectedValue(value);
     onSelect(value);
   };
+
+  useEffect(() => {
+    const isCompleted = selectedValue !== "";
+    setCompleted(isCompleted);
+  }, [selectedValue]);
 
   return (
     <select value={selectedValue} onChange={handleChange}>

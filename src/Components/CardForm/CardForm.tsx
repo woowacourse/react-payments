@@ -58,6 +58,10 @@ const CardForm: React.FC = () => {
     setIsCardNumberCompleted(isCompleted);
   };
 
+  const handleSelectedCardCompleted = (isCompleted: boolean) => {
+    setIsSelectedCardCompleted(isCompleted);
+  };
+
   return (
     <form>
       <CardPreview
@@ -67,6 +71,34 @@ const CardForm: React.FC = () => {
         cardholderName={cardholderName}
         cardCompany={selectedCard}
       />
+
+      {isSelectedCardCompleted && (
+        <CardInput
+          title="카드 유효기간을 입력해 주세요"
+          label="유효기간"
+          description="월/년도(MMYY)를 순서대로 입력해 주세요"
+        >
+          <ExpiryInput
+            month={expiryMonth}
+            year={expiryYear}
+            onMonthChange={handleExpiryMonthChange}
+            onYearChange={handleExpiryYearChange}
+          />
+        </CardInput>
+      )}
+
+      {isCardNumberCompleted && (
+        <CardInput
+          title="카드사를 선택해 주세요"
+          description="현재 국내 카드사만 가능합니다."
+          label="카드 소유자 이름"
+        >
+          <SelectBox
+            onSelect={handleSelect}
+            setCompleted={handleSelectedCardCompleted}
+          />
+        </CardInput>
+      )}
 
       <CardInput
         title="결제할 카드 번호를 입력해 주세요"
@@ -80,29 +112,10 @@ const CardForm: React.FC = () => {
           setCompleted={handleCardNumberCompleted}
         />
       </CardInput>
-      {isCardNumberCompleted && (
-        <CardInput
-          title="카드사를 선택해 주세요"
-          description="현재 국내 카드사만 가능합니다."
-          label="카드 소유자 이름"
-        >
-          <SelectBox onSelect={handleSelect} />
-        </CardInput>
-      )}
+
       {/* 
 
-        <CardInput
-          title="카드 유효기간을 입력해 주세요"
-          label="유효기간"
-          description="월/년도(MMYY)를 순서대로 입력해 주세요"
-        >
-          <ExpiryInput
-            month={expiryMonth}
-            year={expiryYear}
-            onMonthChange={handleExpiryMonthChange}
-            onYearChange={handleExpiryYearChange}
-          />
-        </CardInput>
+      
 
       <CardInput
         title="카드 소유자 이름을 입력해 주세요"
