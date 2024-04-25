@@ -1,8 +1,8 @@
-import Input from '../common/Input';
-import InputSection from '../common/InputSection';
-import { ErrorWrapper, ErrorText } from '../../styles/common';
-import { IErrorStatus } from '../../validators/index.d';
-import useExpiryDate from '../../hooks/useCardInfo/useExpiryDate';
+import Input from '../../common/Input';
+import InputContainer from '../../common/InputContainer';
+import { ErrorWrapper, ErrorText } from '../../../styles/common';
+import { IErrorStatus } from '../../../validators/index.d';
+import useExpiryDate from '../../../hooks/useCardInfo/useExpiryDate';
 
 type MM = string;
 type YY = string;
@@ -38,7 +38,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
 
   return (
     <div>
-      <InputSection
+      <InputContainer
         title="카드 유효기간을 입력해 주세요"
         subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         labelText="유효기간"
@@ -64,7 +64,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           maxLength={2}
           width="48%"
         />
-      </InputSection>
+      </InputContainer>
       <ErrorWrapper>
         <ErrorText>{monthErrorMessage}</ErrorText>
         <ErrorText>{yearErrorMessage}</ErrorText>

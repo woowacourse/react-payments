@@ -1,7 +1,7 @@
-import Input from '../common/Input';
-import { ErrorWrapper, ErrorText } from '../../styles/common';
-import InputSection from '../common/InputSection';
-import useDisplayingErrorStatus from '../../hooks/useDisplayingErrorStatus';
+import Input from '../../common/Input';
+import { ErrorWrapper, ErrorText } from '../../../styles/common';
+import InputContainer from '../../common/InputContainer';
+import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 
 interface CardholderNameInputContainerProps {
   value: string;
@@ -29,7 +29,7 @@ const CardholderNameInputContainer = ({
 
   return (
     <div>
-      <InputSection title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
+      <InputContainer title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
         <Input
           id="cardholder-name-input"
           isError={isError}
@@ -40,7 +40,7 @@ const CardholderNameInputContainer = ({
           width="100%"
           maxLength={100}
         />
-      </InputSection>
+      </InputContainer>
       <ErrorWrapper>
         <ErrorText>{errorMessage}</ErrorText>
       </ErrorWrapper>

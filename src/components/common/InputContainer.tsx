@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface InputSectionProps {
+export interface InputContainerProps {
   title: string;
   subtitle?: string;
   labelText: string;
@@ -9,7 +9,7 @@ export interface InputSectionProps {
   children: React.ReactNode;
 }
 
-export default function InputSection({ title, subtitle, labelText, labelFor, children }: InputSectionProps) {
+export default function InputContainer({ title, subtitle, labelText, labelFor, children }: InputContainerProps) {
   return (
     <Container>
       <Title>{title}</Title>

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import SequenceContainer from '../common/SequenceContainer';
-import CardNumbersInputContainer from './CardNumbersInputContainer';
-import CardExpiryDateInputContainer from './CardExpiryDateInputContainer';
-import CardholderNameInputContainer from './CardholderNameInputContainer';
-import CvcInputContainer from './CvcInputContainer';
-import PasswordInputContainer from './PasswordInputContainer';
+import CardNumbersInputContainer from './InputContainers/CardNumbersInputContainer';
+import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputContainer';
+import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
+import CvcInputContainer from './InputContainers/CvcInputContainer';
+import PasswordInputContainer from './InputContainers/PasswordInputContainer';
 import ROUTE_PATH from '../../pages/constants/routePath';
 
 import getObjectValues from '../../utils/getObjectValues';
