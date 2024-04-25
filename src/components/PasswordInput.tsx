@@ -4,28 +4,28 @@ import FieldTitle from "./FieldTitle";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
-import { CVC } from "../types/card";
+import { Password } from "../types/card";
 import { ShowComponents } from "../types/showCompents";
 
 interface Props {
-  CVC : CVC
-  handleInput : Dispatch<SetStateAction<CVC>>,
+  password : Password
+  handleInput : Dispatch<SetStateAction<Password>>,
   handleShowComponent : Dispatch<SetStateAction<ShowComponents>>,
 }
-export default function CVCInput({CVC, handleInput, handleShowComponent} : Props) {
+export default function PasswordInput({password, handleInput, handleShowComponent} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
   useEffect(() => {
-    const messages = Object.values(CVC).map(value => value.errorMessage);
+    const messages = Object.values(password).map(value => value.errorMessage);
     setErrorMessages(messages);
-  }, [CVC]);
+  }, [password]);
 
   useEffect(() => {
     const checkCompleteInput = () => {
-      const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
-        if(!cur.isError && cur.value !== '' && cur.value.length === 3){
+      const isNotAllError = Object.values(password).reduce((pre, cur) => {
+        if(!cur.isError && cur.value !== '' && cur.value.length === 2){
           return pre + 1;
         }
         return pre;
@@ -35,15 +35,15 @@ export default function CVCInput({CVC, handleInput, handleShowComponent} : Props
     if(checkCompleteInput()) {
       handleShowComponent((prev) => ({
         ...prev,
-        passwordInput: true,
+        passWordInput: true,
       }));
     }
-  }, [CVC, handleShowComponent]); 
+  }, [password, handleShowComponent]); 
 
   const handleUpdateInput = (index: number, value: string) => {
 
-    const cardKey = 'CVC' as keyof CVC;
-    handleInput((prevState : CVC) => {
+    const cardKey = 'password' as keyof Password;
+    handleInput((prevState : Password) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -55,8 +55,8 @@ export default function CVCInput({CVC, handleInput, handleShowComponent} : Props
   };
 
   const handleUpdateErrorMessages = (index: number, errorMessage: string, isError: boolean) => {
-    const cardKey = 'CVC' as keyof CVC;
-    handleInput((prevState : CVC) => {
+    const cardKey = 'password' as keyof Password;
+    handleInput((prevState : Password) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -84,22 +84,22 @@ export default function CVCInput({CVC, handleInput, handleShowComponent} : Props
   };
 
   const checkInputError = (index : number) => {
-    const cardKey = 'CVC' as keyof CVC;
-    return CVC[cardKey].isError;
+    const cardKey = 'password' as keyof Password;
+    return password[cardKey].isError;
   }
 
   return (
     <> 
-      <FieldTitle title="CVC 번호를 입력해 주세요"/>
-      <InputField label="CVC" count={1} errorMessages={errorMessages}>
+      <FieldTitle title="비밀번호를 입력해 주세요 " subtitle="앞의 2자리를 입력해주세요"/>
+      <InputField label="비밀번호 앞 2자리" count={1} errorMessages={errorMessages}>
       {Array.from({ length: 1 }, (_, index) => (
       <Input
         key={index}
         type="string"
-        maxLength={3}
-        placeholder={'123'}
+        maxLength={2}
+        placeholder={'**'}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'CVC', index, 3)}
+        onChange={(e) => handleInputChange(e, 'password', index, 3)}
       />
       ))}
       </InputField>

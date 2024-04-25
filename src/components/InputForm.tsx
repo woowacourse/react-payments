@@ -6,6 +6,7 @@ import {
   CardNumbers,
   CVC,
   ExpirationDate,
+  Password,
   UserName,
 } from "../types/card";
 // import InputField from './InputField';
@@ -16,6 +17,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { ShowComponents } from "../types/showCompents";
 import CardDropDown from "./CardDropDown";
 import CVCInput from "./CVCInput";
+import PasswordInput from './PassWordInput'
 
 const FormContainer = styled.div`
   display: flex;
@@ -30,16 +32,18 @@ interface HandleInput {
   setCardBrand: Dispatch<SetStateAction<CardBrand>>;
 
   setCVC: Dispatch<SetStateAction<CVC>>;
+  setPassword : Dispatch<SetStateAction<Password>>;
 }
 
 export default function InputForm({
-  cardInfo: { cardNumbers, expirationDate, userName, cardBrand, CVC },
+  cardInfo: { cardNumbers, expirationDate, userName, cardBrand, CVC, password },
   handleInput: {
     setCardNumbers,
     setExpirationDate,
     setUserName,
     setCardBrand,
     setCVC,
+    setPassword,
   },
 }: {
   cardInfo: CardInfo;
@@ -51,9 +55,17 @@ export default function InputForm({
     expirationDateInput: false,
     userNameInput: false,
     CVCInput: false,
+    passwordInput: false
   });
   return (
     <FormContainer>
+      {showComponent.passwordInput && (
+        <PasswordInput
+          password={password}
+          handleInput={setPassword}
+          handleShowComponent={setShowComponent}
+        />
+      )}
       {showComponent.CVCInput && (
         <CVCInput
           CVC={CVC}

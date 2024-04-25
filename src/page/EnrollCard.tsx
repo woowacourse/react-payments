@@ -5,7 +5,8 @@ import InputForm from '../components/InputForm';
 // import { Card } from '../types/card';
 import useCardForm from '../hooks/useCardForm';
 import { useEffect, useState } from 'react';
-import { validateCarNumbers, validateExpirationDate, validateUserName } from '../domain/InputValidation';
+import { validateCarNumbers, validateCVC, validateExpirationDate, validatePassword, validateUserName } from '../domain/InputValidation';
+import BottomButton from '../components/BottomButton';
 
 
 const Page = styled.div`
@@ -40,8 +41,15 @@ export default function EnrollCard() {
     cardBrand,
     setCardBrand,
     CVC,
-    setCVC
+    setCVC,
+    password,
+    setPassword
   } = useCardForm({});
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+  };
 
   const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
   useEffect(() => {
@@ -49,19 +57,20 @@ export default function EnrollCard() {
       validateCarNumbers(cardNumbers);
       validateExpirationDate(expirationDate);
       validateUserName(userName);
+      validateCVC(CVC);
+      validatePassword(password);
       setSubmitButtonFlag(true);
     } catch (error) {
       setSubmitButtonFlag(false);
     }
-    console.log(cardBrand)
-  }, [cardNumbers, expirationDate, userName, cardBrand])
+  }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password])
 
   return (
     <Page>
-      <Container>
-        <CardView cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC}} />
-        <InputForm cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC}} handleInput={{setCardNumbers, setExpirationDate, setUserName, setCardBrand, setCVC}} />
-        {submitButtonFlag && <button>제출</button>}
+      <Container onSubmit={handleSubmit}>
+        <CardView cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC, password}} />
+        <InputForm cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC, password}} handleInput={{setCardNumbers, setExpirationDate, setUserName, setCardBrand, setCVC, setPassword}} />
+        {submitButtonFlag && <BottomButton value={'제출'}></BottomButton>}
       </Container>
     </Page>
   );

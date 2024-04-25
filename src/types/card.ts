@@ -1,19 +1,10 @@
-export interface Card {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-  month: string;
-  year: string;
-  userName: string;
-}
-
 export interface CardInfo {
   cardNumbers : CardNumbers;
   expirationDate : ExpirationDate;
   userName : UserName;
   cardBrand : CardBrand;
   CVC : CVC;
+  password: Password;
 }
 
 export interface State {
@@ -44,4 +35,8 @@ export interface CardBrand{
 
 export interface CVC {
   CVC : State
+}
+
+export interface Password{
+  password : State
 }
