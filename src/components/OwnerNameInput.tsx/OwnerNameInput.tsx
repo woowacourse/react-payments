@@ -6,39 +6,42 @@ const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
 interface OwnerNameInputProps {
   ownerName: {
-    data: Record<string, { value: string; isError: boolean }>;
-    status: { isError: boolean; errorMessage: string };
+    value: string;
+    isError: boolean;
+    isDone: boolean;
+    errorMessage: string;
   };
   changeOwnerName: (event: ChangeEvent<HTMLInputElement>) => void;
-  refs: { ownerNameRef: RefObject<HTMLInputElement> };
+  ownerNameRef: RefObject<HTMLInputElement>;
   onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const OwnerNameInput = memo(
-  ({ ownerName, changeOwnerName, refs, onKeyDown }: OwnerNameInputProps) => {
+  ({
+    ownerName,
+    changeOwnerName,
+    ownerNameRef,
+    onKeyDown,
+  }: OwnerNameInputProps) => {
     return (
       <Field
         title={OWNER_NAME.title}
         description="입력 완료 후 엔터 키를 눌러주세요"
         labelText={OWNER_NAME.labelText}
-        errorMessage={ownerName.status.errorMessage}
+        errorMessage={ownerName.errorMessage}
       >
-        {Object.entries(ownerName.data).map(
-          ([name, { value, isError }], index) => (
-            <Input
-              key={name}
-              name={name}
-              placeholder={OWNER_NAME.placeholder}
-              value={value}
-              inputRef={Object.values(refs)[index]}
-              isError={isError}
-              isRequired={true}
-              autoFocus={true}
-              onChange={changeOwnerName}
-              onKeyDown={onKeyDown}
-            ></Input>
-          )
-        )}
+        <Input
+          key="ownerName"
+          name="ownerName"
+          placeholder={OWNER_NAME.placeholder}
+          value={ownerName.value}
+          inputRef={ownerNameRef}
+          isError={ownerName.isError}
+          isRequired={true}
+          autoFocus={true}
+          onChange={changeOwnerName}
+          onKeyDown={onKeyDown}
+        ></Input>
       </Field>
     );
   }

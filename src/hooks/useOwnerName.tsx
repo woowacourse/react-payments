@@ -1,6 +1,5 @@
 import { CARD_OWNERNAME_KEY } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
-import { isAllDone } from "@/utils/input";
 import { isEnglishCharacter } from "@/utils/validators";
 import {
   ChangeEvent,
@@ -13,38 +12,26 @@ import {
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState({
-    data: {
-      ownerName: { value: "", isError: false, isDone: false },
-    },
-    status: {
-      isError: false,
-      errorMessage: "",
-    },
+    value: "",
+    isError: false,
+    isDone: false,
+    errorMessage: "",
   });
 
-  const [nextInput, setShowNextInput] = useState<boolean>(false);
+  const [ownerNameNextInput, setOwnerNameNextInput] = useState<boolean>(false);
   const ownerNameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (isAllDone(ownerName.data)) {
-      setShowNextInput(true);
+    if (ownerName.isDone) {
+      setOwnerNameNextInput(true);
     }
-  }, [ownerName.data]);
+  }, [ownerName.isDone]);
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && ownerName.data.ownerName.value !== "") {
+  const ownerNameHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && ownerName.value !== "") {
       setOwnerName({
-        data: {
-          ownerName: {
-            value: ownerName.data.ownerName.value,
-            isError: false,
-            isDone: true,
-          },
-        },
-        status: {
-          isError: false,
-          errorMessage: "",
-        },
+        ...ownerName,
+        isDone: true,
       });
       ownerNameRef.current?.blur();
     }
@@ -60,27 +47,17 @@ const useOwnerName = () => {
 
       if (!isEnglishCharacter(value)) {
         setOwnerName({
-          data: {
-            ownerName: {
-              value: ownerName.data.ownerName.value,
-              isError: true,
-              isDone: false,
-            },
-          },
-          status: {
-            isError: true,
-            errorMessage: ERRORS.isNotAlphabet,
-          },
+          ...ownerName,
+          isError: true,
+          errorMessage: ERRORS.isNotAlphabet,
         });
         return;
       }
-
       setOwnerName({
-        data: { ownerName: { value, isError: false, isDone: false } },
-        status: {
-          isError: false,
-          errorMessage: "",
-        },
+        ...ownerName,
+        value,
+        isError: false,
+        errorMessage: "",
       });
     },
     [ownerName]
@@ -89,9 +66,9 @@ const useOwnerName = () => {
   return {
     ownerName,
     changeOwnerName,
-    handleKeyDown,
-    nextInput,
-    refs: { ownerNameRef },
+    ownerNameHandleKeyDown,
+    ownerNameNextInput,
+    ownerNameRef,
   };
 };
 

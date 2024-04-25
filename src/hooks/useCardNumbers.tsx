@@ -25,7 +25,8 @@ const useCardNumbers = () => {
     },
   });
 
-  const [nextInput, setShowNextInput] = useState<boolean>(false);
+  const [cardNumbersNextInput, setCardNumbersNextInput] =
+    useState<boolean>(false);
   const firstRef = useRef<HTMLInputElement>(null);
   const secondRef = useRef<HTMLInputElement>(null);
   const thirdRef = useRef<HTMLInputElement>(null);
@@ -33,7 +34,7 @@ const useCardNumbers = () => {
 
   useEffect(() => {
     if (isAllDone(cardNumbers.data)) {
-      setShowNextInput(true);
+      setCardNumbersNextInput(true);
     }
   }, [cardNumbers.data]);
 
@@ -113,10 +114,10 @@ const useCardNumbers = () => {
 
   return {
     cardNumbers,
-    nextInput,
+    cardNumbersNextInput,
     changeCardNumbers,
     blurCardNumbers,
-    refs: { firstRef, secondRef, thirdRef, fourthRef },
+    cardNumbersRefs: { firstRef, secondRef, thirdRef, fourthRef },
   };
 };
 

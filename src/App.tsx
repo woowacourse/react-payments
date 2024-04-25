@@ -1,30 +1,34 @@
 import "./index.css";
 import styles from "./App.module.css";
-import CardNumberInput from "@/components/CardNumberInput/CardNumberInput";
-import ExpirationDateInput from "@/components/ExpirationDateInput/ExpirationDateInput";
-import OwnerNameInput from "@/components/OwnerNameInput.tsx/OwnerNameInput";
-import CardPreview from "@/components/CardPreview/CardPreview";
-import useCardNumbers from "@/hooks/useCardNumbers";
-import useExpirationDate from "@/hooks/useExpirationDate";
-import useOwnerName from "@/hooks/useOwnerName";
-import PasswordInput from "@/components/PasswordInput/PasswordInput";
-import CVCInput from "@/components/CVCInput/CVCInput";
-import CardCompany from "@/components/CardCompany/CardCompany";
-import SubmitButton from "./components/SubmitButton/SubmitButton";
 import { FormEvent } from "react";
 import { isAllDone } from "./utils/input";
-import useCVC from "./hooks/useCVC";
-import useCardCompany from "./hooks/useCardCompany";
-import usePassword from "./hooks/usePassword";
 import { useNavigate } from "react-router-dom";
+import {
+  useCardNumbers,
+  useCardCompany,
+  useCVC,
+  useExpirationDate,
+  useOwnerName,
+  usePassword,
+} from "@/hooks";
+import {
+  CardCompany,
+  CardNumberInput,
+  CardPreview,
+  CVCInput,
+  ExpirationDateInput,
+  OwnerNameInput,
+  PasswordInput,
+  SubmitButton,
+} from "@/components";
 
 const App = () => {
   const {
     cardNumbers,
     changeCardNumbers,
     blurCardNumbers,
-    refs: cardNumbersRefs,
-    nextInput: cardNumbersNextInput,
+    cardNumbersRefs,
+    cardNumbersNextInput,
   } = useCardNumbers();
   const {
     expirationDate,
@@ -36,9 +40,9 @@ const App = () => {
   const {
     ownerName,
     changeOwnerName,
-    refs: ownerNameRefs,
-    nextInput: ownerNameNextInput,
-    handleKeyDown: ownerNameHandleKeyDown,
+    ownerNameRef,
+    ownerNameNextInput,
+    ownerNameHandleKeyDown,
   } = useOwnerName();
   const {
     CVC,
@@ -91,9 +95,7 @@ const App = () => {
             : "",
         }}
         ownerName={{
-          ownerName: ownerName.data.ownerName.isDone
-            ? ownerName.data.ownerName.value
-            : "",
+          ownerName: ownerName.isDone ? ownerName.value : "",
         }}
       />
       <form onSubmit={handleSubmit}>
@@ -113,7 +115,7 @@ const App = () => {
           <OwnerNameInput
             ownerName={ownerName}
             changeOwnerName={changeOwnerName}
-            refs={ownerNameRefs}
+            ownerNameRef={ownerNameRef}
             onKeyDown={ownerNameHandleKeyDown}
           />
         )}
@@ -141,7 +143,7 @@ const App = () => {
         {isAllDone(cardNumbers.data) &&
           cardCompany &&
           isAllDone(expirationDate.data) &&
-          isAllDone(ownerName.data) &&
+          ownerName.isDone &&
           CVC.isDone &&
           password.isDone && <SubmitButton />}
       </form>
