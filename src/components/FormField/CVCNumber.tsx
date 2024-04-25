@@ -12,7 +12,7 @@ interface CVCNumberProps {
   cvcNumberState: string;
   setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isCVCNumberError: boolean;
-  toggleIsFocusCVCPreview: React.DispatchWithoutAction;
+  setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
   showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
 }
 
@@ -20,13 +20,13 @@ const CVCNumber = ({
   cvcNumberState,
   setCVCNumberState,
   isCVCNumberError,
-  toggleIsFocusCVCPreview,
+  setIsFocusCVCPreview,
   showNextFieldOnLastElementBlur,
 }: CVCNumberProps) => {
   const isFill = cvcNumberState.length === MAX_LENGTH.cvcNumber;
 
   const onBlur = () => {
-    toggleIsFocusCVCPreview();
+    setIsFocusCVCPreview(false);
     showNextFieldOnLastElementBlur({
       isFill,
       isFieldError: isCVCNumberError,
@@ -39,7 +39,7 @@ const CVCNumber = ({
       <InputField label={LABEL.cvcNumber} error={isCVCNumberError ? ERROR.cvcNumber : ''}>
         <Input
           onBlur={onBlur}
-          onFocus={toggleIsFocusCVCPreview}
+          onFocus={() => setIsFocusCVCPreview(true)}
           aria-label="소유자_이름"
           placeholder={PLACEHOLDER.cvcNumber}
           value={cvcNumberState}

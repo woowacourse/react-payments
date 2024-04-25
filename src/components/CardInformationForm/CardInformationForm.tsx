@@ -42,7 +42,7 @@ export interface CardInformationFormProps {
     cvcNumberState: string;
     setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isCVCNumberError: boolean;
-    toggleIsFocusCVCPreview: React.DispatchWithoutAction;
+    setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
   };
   password: {
     passwordState: string;
