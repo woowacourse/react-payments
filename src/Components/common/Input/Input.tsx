@@ -9,6 +9,7 @@ interface InputProps {
   placeholder?: string;
   size?: "small" | "medium" | "large";
   validator?: (value: string) => boolean;
+  onEnter?: () => void; // 엔터 키 이벤트 핸들러 추가
 }
 
 const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   size = "medium",
   validator,
+  onEnter, // 엔터 키 이벤트 핸들러 추가
 }) => {
   const [isValid, setIsValid] = useState(true);
   const [inputSize, _] = useState(size);
@@ -34,12 +36,19 @@ const Input: React.FC<InputProps> = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && onEnter) {
+      onEnter();
+    }
+  };
+
   return (
     <InputWrapper size={inputSize} isValid={isValid}>
       <input
         type="text"
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown} // 엔터 키 이벤트 핸들러 추가
         maxLength={maxLength}
         placeholder={placeholder}
       />

@@ -70,6 +70,10 @@ const CardForm: React.FC = () => {
     setIsExpiryYearCompleted(isCompleted);
   };
 
+  const handleCardOwnerNameCompleted = (isCompleted: boolean) => {
+    setIsCardholderNameCompleted(isCompleted);
+  };
+
   return (
     <form>
       <CardPreview
@@ -80,6 +84,12 @@ const CardForm: React.FC = () => {
         cardCompany={selectedCard}
       />
 
+      {isCardholderNameCompleted && (
+        <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
+          <CardCVCInput value={cardCVC} onChange={handleCardCVC} />
+        </CardInput>
+      )}
+
       {isExpiryMonthCompleted && isExpiryYearCompleted && (
         <CardInput
           title="카드 소유자 이름을 입력해 주세요"
@@ -88,6 +98,7 @@ const CardForm: React.FC = () => {
           <CardOwnerNameInput
             value={cardholderName}
             onChange={handleCardholderNameChange}
+            setCompleted={handleCardOwnerNameCompleted}
           />
         </CardInput>
       )}
@@ -143,9 +154,7 @@ const CardForm: React.FC = () => {
 
    
 
-      <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
-        <CardCVCInput value={cardCVC} onChange={handleCardCVC} />
-      </CardInput> */}
+      */}
     </form>
   );
 };

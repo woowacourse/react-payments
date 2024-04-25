@@ -5,19 +5,18 @@ import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
 interface CardOwnerNameInputProps {
   value: string;
   onChange: (value: string) => void;
+  setCompleted: (isCompleted: boolean) => void;
 }
 
 const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
   value,
   onChange,
-  // setIsValid,
+  setCompleted,
 }) => {
-  const [inputValues, setInputValues] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (inputValue: string) => {
-    console.log("owner name inputValue", inputValue);
     if (validator(inputValue)) {
       onChange(inputValue.toUpperCase());
     }
@@ -39,15 +38,24 @@ const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
     return true;
   };
 
+  const handleEnter = () => {
+    if (value && isValid) {
+      setCompleted(true);
+    } else {
+      setCompleted(false);
+    }
+  };
+
   return (
     <>
       <Input
         value={value}
-        onChange={(inputValues) => handleChange(inputValues)}
+        onChange={(inputValue) => handleChange(inputValue)}
         onValidate={(isValid) => handleValidate(isValid)}
         placeholder="JOHN DOE"
         size="large"
         validator={(value) => validator(value)}
+        onEnter={handleEnter}
       />
       <Tooltip>{!isValid ? errorMessage : ""}</Tooltip>
     </>
