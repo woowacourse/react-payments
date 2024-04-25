@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import {
-  CardStyle,
+  Card,
+  // CardStyle,
   Password,
   cardNumberStyle,
   cardNumbersStyle,
@@ -14,6 +15,7 @@ interface CardPreviewProps {
   expiryMonth: string;
   expiryYear: string;
   cardholderName: string;
+  cardCompany: CardCompany | "";
 }
 
 const getCardLogoOption = (cardNumber: string) => {
@@ -33,13 +35,15 @@ const CardPreview: React.FC<CardPreviewProps> = ({
   expiryMonth,
   expiryYear,
   cardholderName,
+  cardCompany,
 }) => {
   const formattedCardNumber = cardNumber.replace(/\d{4}(?=.)/g, "$& ");
   const dd = formattedCardNumber.split("  ");
   const option = getCardLogoOption(cardNumber);
 
   return (
-    <article css={CardStyle}>
+    // <article css={CardStyle}>
+    <Card cardCompany={cardCompany}>
       <div css={logoDiv}>
         <CardLogo option="default" />
         <CardLogo option={option} />
@@ -49,14 +53,16 @@ const CardPreview: React.FC<CardPreviewProps> = ({
         <div css={cardNumberStyle}>{dd[0]}</div>
         <div css={cardNumberStyle}>{dd[1]}</div>
         <div css={cardNumberStyle}>
-          {Array.from({ length: dd[2].length }, () => {
-            return <Password />;
-          })}
+          {dd[2] &&
+            Array.from({ length: dd[2].length }, () => {
+              return <Password />;
+            })}
         </div>
         <div css={cardNumberStyle}>
-          {Array.from({ length: dd[3].length }, () => {
-            return <Password />;
-          })}
+          {dd[3] &&
+            Array.from({ length: dd[3].length }, () => {
+              return <Password />;
+            })}
         </div>
       </div>
 
@@ -66,7 +72,9 @@ const CardPreview: React.FC<CardPreviewProps> = ({
         {expiryYear}
       </div>
       <div>{cardholderName}</div>
-    </article>
+    </Card>
+
+    // </article>
   );
 };
 

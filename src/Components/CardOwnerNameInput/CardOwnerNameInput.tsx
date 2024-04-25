@@ -5,11 +5,13 @@ import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
 interface CardOwnerNameInputProps {
   value: string;
   onChange: (value: string) => void;
+  // setIsValid: () => void;
 }
 
 const CardOwnerNameInput: React.FC<CardOwnerNameInputProps> = ({
   value,
   onChange,
+  // setIsValid,
 }) => {
   const [inputValues, setInputValues] = useState("");
   const [isValid, setIsValid] = useState(true);
