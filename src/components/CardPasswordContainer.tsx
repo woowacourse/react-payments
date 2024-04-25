@@ -34,6 +34,7 @@ const CardPasswordContainer = ({
           maxLength={2}
           type="password"
           placeholder="••"
+          autoFocus={true}
         />
       </InputField>
       <ErrorWrapper>

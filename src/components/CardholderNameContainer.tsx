@@ -32,6 +32,7 @@ const CardholderNameContainer = ({
           placeholder="JOHN DOE"
           width="100%"
           maxLength={100}
+          autoFocus={true}
         />
       </InputField>
       <ErrorWrapper>
