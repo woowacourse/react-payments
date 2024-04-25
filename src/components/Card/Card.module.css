@@ -72,3 +72,35 @@
   align-items: center;
   justify-content: start;
 }
+.BC {
+  background-color: rgba(240, 70, 81, 1);
+}
+
+.shinhan {
+  background-color: rgba(0, 70, 255, 1);
+}
+
+.kakao {
+  background-color: rgba(255, 230, 0, 1);
+  color: black;
+}
+
+.hyundai {
+  background-color: #000000;
+}
+
+.woori {
+  background-color: #007bc8;
+}
+
+.lotte {
+  background-color: #ed1c24;
+}
+
+.hana {
+  background-color: #009490;
+}
+
+.kookmin {
+  background-color: #6a6056;
+}
