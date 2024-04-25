@@ -53,11 +53,16 @@ const useExpirationDate = () => {
     setIsValid(isValidDate(date.month, date.year));
   }, [date.month, date.year, errorMessages]);
 
+  const reset = () => {
+    setDate(initialDateValue);
+  };
+
   return {
     value: date,
     handleExpirationDateChange,
     errorMessages,
     isValid,
+    reset,
   };
 };
 

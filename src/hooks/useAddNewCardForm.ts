@@ -8,6 +8,15 @@ import useShowCase from './useShowCase';
 import { useEffect } from 'react';
 import { CardCompany } from '../types/cardCompany';
 
+const initialShowCaseValue = {
+  [FORM_ITEM_NAME_LIST.CARD_NUMBERS]: true,
+  [FORM_ITEM_NAME_LIST.CARD_COMPANY]: false,
+  [FORM_ITEM_NAME_LIST.EXPIRATION_DATE]: false,
+  [FORM_ITEM_NAME_LIST.OWNER_NAME]: false,
+  [FORM_ITEM_NAME_LIST.CVC_NUMBERS]: false,
+  [FORM_ITEM_NAME_LIST.PASSWORD]: false,
+};
+
 const useAddNewCardForm = () => {
   const cardNumbers = useCardNumbers();
   const expirationDate = useExpirationDate();
@@ -17,19 +26,22 @@ const useAddNewCardForm = () => {
     setValue: setCVCNumbers,
     errorMessage: CVCNumbersErrorMessage,
     isValid: isValidCVCNumbers,
+    reset: resetCVCNumbers,
   } = useNumberInput(3);
   const {
     value: password,
     setValue: setPassword,
     errorMessage: passwordErrorMessage,
     isValid: isValidPassword,
+    reset: resetPassword,
   } = useNumberInput(2);
   const {
     selected: cardCompany,
     handleSelect: handleSelectCardCompany,
     errorMessage: cardCompanyErrorMessage,
+    reset: resetCardCompany,
   } = useDropdown<CardCompany>();
-  const { showCase, addItemToShowCase } = useShowCase();
+  const { showCase, addItemToShowCase, resetShowCase } = useShowCase(initialShowCaseValue);
 
   const completeList = {
     [FORM_ITEM_NAME_LIST.CARD_NUMBERS]: cardNumbers.isValid,
@@ -70,6 +82,17 @@ const useAddNewCardForm = () => {
     if (isValidCVCNumbers) addItemToShowCase('password');
   }, [isValidCVCNumbers]);
 
+  const clearForm = () => {
+    cardNumbers.reset();
+    expirationDate.reset();
+    ownerName.reset();
+    resetCardCompany();
+    resetCVCNumbers();
+    resetPassword();
+
+    resetShowCase();
+  };
+
   return {
     values: {
       [FORM_ITEM_NAME_LIST.CARD_NUMBERS]: cardNumbers.value,
@@ -90,6 +113,7 @@ const useAddNewCardForm = () => {
     handlers,
     showCase,
     completeList,
+    clearForm,
   };
 };
 

@@ -59,11 +59,16 @@ const useCardNumbers = () => {
     setIsValid(isFilledAllUnit(cardNumbers));
   }, [cardNumbers, errorMessages]);
 
+  const reset = () => {
+    setCardNumbers(new Array(CARD_NUMBERS_UNIT_LENGTH).fill(''));
+  };
+
   return {
     value: cardNumbers,
     handleCardNumbersChange,
     errorMessages,
     isValid,
+    reset,
   };
 };
 

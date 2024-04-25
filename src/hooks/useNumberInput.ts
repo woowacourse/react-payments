@@ -31,7 +31,11 @@ const useNumberInput = (maxLength: number) => {
     setIsValid(value.length >= maxLength);
   }, [value]);
 
-  return { value, setValue: handleValueChange, errorMessage, isValid };
+  const reset = () => {
+    setValue('');
+  };
+
+  return { value, setValue: handleValueChange, errorMessage, isValid, reset };
 };
 
 export default useNumberInput;

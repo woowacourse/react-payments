@@ -37,11 +37,16 @@ const useOwnerName = () => {
     if (isKeyEnter) setIsValid(true);
   };
 
+  const reset = () => {
+    setOwnerName('');
+  };
+
   return {
     value: ownerName,
     errorMessage,
     handleOwnerNameChange,
     isValid,
+    reset,
   };
 };
 

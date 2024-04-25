@@ -17,10 +17,15 @@ const useDropdown = <T>() => {
     setSelected(selected);
   };
 
+  const reset = () => {
+    setSelected(null);
+  };
+
   return {
     selected,
     handleSelect,
     errorMessage,
+    reset,
   };
 };
 
