@@ -17,6 +17,8 @@ const Layout = styled.main`
   display: flex;
   flex-direction: column;
 
+  position: relative;
+
   background-color: #ffffff;
 
   border-radius: 8px;
