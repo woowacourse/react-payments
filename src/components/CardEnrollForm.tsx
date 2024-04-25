@@ -61,6 +61,21 @@ export default function CardEnrollForm() {
   const [isReadyForSubmit, setIsReadForSubmit] = useState(false);
 
   useEffect(() => {
+    const isFilledAll = Object.values(cardInformation).every(
+      (cardInformationValue) => {
+        if (typeof cardInformationValue === "string") {
+          return cardInformationValue.length > 0;
+        }
+        if (Array.isArray(cardInformationValue)) {
+          return cardInformationValue.some((el) => el.length > 0);
+        }
+        return (
+          cardInformationValue.month.length > 0 ||
+          cardInformationValue.year.length > 0
+        );
+      }
+    );
+
     const isExistError = Object.values(errorState).some(({ isError }) => {
       if (typeof isError === "boolean") {
         return isError;
@@ -71,7 +86,7 @@ export default function CardEnrollForm() {
       return isError.month || isError.year;
     });
 
-    setIsReadForSubmit(!isExistError);
+    setIsReadForSubmit(isFilledAll && !isExistError);
   }, [cardInformation, errorState]);
 
   const onCardNumbersChange = (inputValue: string, targetIndex: number) => {
