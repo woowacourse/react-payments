@@ -23,7 +23,7 @@ const CardOwnerInput = memo(() => {
           id={`id-owner-${name}`}
           key={index}
           onInputChange={(e) =>
-            onInputChange<CardOwnerInfo, CardOwnerInfoError, string>(e, {
+            onInputChange<CardOwnerInfo, CardOwnerInfoError>(e, {
               name,
               setData,
               setError,

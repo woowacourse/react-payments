@@ -28,7 +28,7 @@ const CardNumberInput = memo(() => {
           id={`id-${name}`}
           key={index}
           onInputChange={(e) =>
-            onInputChange<CardNumbers, CardNumbersError, string>(e, {
+            onInputChange<CardNumbers, CardNumbersError>(e, {
               name,
               setData,
               setError,

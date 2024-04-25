@@ -1,16 +1,16 @@
 import { SetStateAction } from "react";
 import { ValidatorType } from "./validator";
 
-interface ChangeProps<T, U, V> {
+interface ChangeProps<T, U> {
   name: keyof T;
   setData: React.Dispatch<SetStateAction<T>>;
   setError: React.Dispatch<SetStateAction<U>>;
-  validator: ValidatorType<V>;
+  validator: ValidatorType;
 }
 
-const onInputChange = <T, U, V>(
+const onInputChange = <T, U>(
   e: React.ChangeEvent<HTMLInputElement>,
-  { name, setData, setError, validator }: ChangeProps<T, U, V>
+  { name, setData, setError, validator }: ChangeProps<T, U>
 ) => {
   const {
     isValid,

@@ -1,10 +1,10 @@
-export interface validatorReturn<T> {
+export interface validatorReturn {
   isValid: boolean;
   message?: string;
-  value?: T;
+  value?: string;
 }
 
-export type ValidatorType<T> = (input: string, name?: "month" | "year") => validatorReturn<T>;
+export type ValidatorType = (input: string, name?: "month" | "year") => validatorReturn;
 
 const ERROR_MESSAGES = {
   ONLY_NUMBER: "숫자만 입력해주세요.",
@@ -13,7 +13,7 @@ const ERROR_MESSAGES = {
   ONLY_ENGLISH: "영어만 입력해주세요.",
 };
 
-export function cardNumbersValidator(input: string): validatorReturn<string> {
+export function cardNumbersValidator(input: string): validatorReturn {
   const number = Number(input);
 
   if (Number.isNaN(number)) {
@@ -22,7 +22,7 @@ export function cardNumbersValidator(input: string): validatorReturn<string> {
   return { isValid: true, value: input };
 }
 
-export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn<string> {
+export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn {
   const number = Number(input);
   const VALID_MONTH = { MIN: 0, MAX: 12 };
 
@@ -39,12 +39,17 @@ const isEnglish = (input: string) => {
   return /^[a-zA-Z]+$/.test(input);
 };
 
-export function cardOwnerValidator(input: string): validatorReturn<string> {
+export function cardOwnerValidator(input: string): validatorReturn {
   if (input.length > 15) {
     return { isValid: false, message: ERROR_MESSAGES.ONLY_UNDER_15_LENGTH };
   }
   if (input && !isEnglish(input)) {
     return { isValid: false, message: ERROR_MESSAGES.ONLY_ENGLISH };
   }
+  return { isValid: true, value: input };
+}
+
+export function cardCVCValidator(input: string) {
+  //TODO: CVC Valid 빌드
   return { isValid: true, value: input };
 }

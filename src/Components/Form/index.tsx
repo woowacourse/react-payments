@@ -1,3 +1,4 @@
+import CardCVCField from "../FormField/CardCVCField";
 import CardIssuerField from "../FormField/CardIssuerField";
 import CardNumberField from "../FormField/CardNumberField";
 import CardOwnerField from "../FormField/CardOwnerField";
@@ -8,6 +9,7 @@ const Form = () => {
   return (
     <form>
       <ErrorContextProvider>
+        <CardCVCField />
         <CardOwnerField />
         <CardValidityPeriodField />
         <CardIssuerField />

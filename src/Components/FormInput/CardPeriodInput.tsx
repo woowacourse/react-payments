@@ -26,7 +26,7 @@ const CardPeriodInput = memo(() => {
           id={`id-period-${name}`}
           key={index}
           onInputChange={(e) =>
-            onInputChange<CardValidityPeriod, CardValidityPeriodError, string>(e, {
+            onInputChange<CardValidityPeriod, CardValidityPeriodError>(e, {
               name,
               setData,
               setError,
