@@ -16,6 +16,7 @@ import { isAllDone } from "./utils/input";
 import useCVC from "./hooks/useCVC";
 import useCardCompany from "./hooks/useCardCompany";
 import usePassword from "./hooks/usePassword";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const {
@@ -50,10 +51,15 @@ const App = () => {
   } = useCVC();
   const { cardCompany, cardCompanyRef, changeCardCompany } = useCardCompany();
   const { password, changePassword } = usePassword();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(cardCompany, cardNumbers.data.first.value);
+    const params = {
+      cardCompany,
+      firstCardNumber: cardNumbers.data.first.value,
+    };
+    navigate(`/react-payments/submit`, { state: { ...params } });
   };
 
   return (
