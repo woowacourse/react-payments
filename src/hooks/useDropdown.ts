@@ -7,7 +7,7 @@ const useDropdown = <T>() => {
   const [errorMessage, setErrorMessages] = useState<string>('');
 
   // 드롭다운을 선택하지 않으면 오류가 난다.
-  const handleSelect = (selected: T) => {
+  const handleSelect = (selected: T | null) => {
     if (selected === null) {
       setErrorMessages(ERROR_MESSAGES.NO_SELECT);
       return;
