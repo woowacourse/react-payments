@@ -75,3 +75,8 @@ type ErrorType = {
 };
 
 type SizePresetType = "small" | "medium" | "large";
+
+type FormRenderOrder = {
+  index: number;
+  step: "cardNumbers" | "cardIssuer" | "cardPeriod" | "cardOwner" | "cardCVC" | "cardPassword";
+};
