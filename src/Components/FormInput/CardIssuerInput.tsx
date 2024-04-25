@@ -1,14 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { Dispatch, useEffect, useState } from "react";
-
-const inputContainerStyle = css({
-  position: "relative",
-});
-
-const inputStyle = css({
-  display: "none",
-});
+import { buttonStyle, categoryStyle, disappear, inputContainerStyle, listStyle, optionsStyle } from "./style";
 
 const CARD_ISSUERS = ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"];
 
@@ -34,10 +26,10 @@ const OptionBox = ({ setIsClicked }: { setIsClicked: Dispatch<React.SetStateActi
   }, []);
 
   return (
-    <ul>
+    <ul css={optionsStyle}>
       {CARD_ISSUERS.map((cardIssuer, index) => (
-        <li key={index}>
-          <button value={cardIssuer} onClick={(e: EventType) => handleOptionClick(e)}>
+        <li key={index} css={listStyle}>
+          <button css={categoryStyle} value={cardIssuer} onClick={(e: EventType) => handleOptionClick(e)}>
             {cardIssuer}
           </button>
         </li>
@@ -56,8 +48,11 @@ const CardIssuerInput = () => {
 
   return (
     <div css={inputContainerStyle}>
-      <input id="id-issuer-value" css={inputStyle} />
-      <button onClick={(e) => handleClick(e)}>입력이 잘 될까요?</button>
+      <input id="id-issuer-value" css={disappear} />
+      <button css={buttonStyle} onClick={(e) => handleClick(e)}>
+        <div>카드사 입력하기</div>
+        <div>{isCLicked ? "🔼" : "🔽"}</div>
+      </button>
       {isCLicked ? <OptionBox setIsClicked={setIsClicked} /> : null}
     </div>
   );
