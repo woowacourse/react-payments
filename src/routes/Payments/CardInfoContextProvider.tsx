@@ -38,6 +38,9 @@ export const CardOwnerInfoContext = createContext<[CardOwnerInfo, Dispatch<SetSt
 export const CardIssuerContext = createContext<[CardIssuer, Dispatch<SetStateAction<CardIssuer>>] | null>(null);
 export const CardCVCContext = createContext<[CardCVC, Dispatch<SetStateAction<CardCVC>>] | null>(null);
 export const CardPasswordContext = createContext<[CardPassword, Dispatch<SetStateAction<CardPassword>>] | null>(null);
+export const CardUIHeadOrTailContext = createContext<
+  [CardUIHeadOrTail, Dispatch<SetStateAction<CardUIHeadOrTail>>] | null
+>(null);
 
 const CardInfoContextProvider = ({ children }: { children: React.ReactNode }) => {
   const cardNumbersState = useState(initCardNumbersValue);
@@ -46,6 +49,7 @@ const CardInfoContextProvider = ({ children }: { children: React.ReactNode }) =>
   const cardIssuerState = useState(initCardIssuer);
   const cardCVCState = useState(initCardCVC);
   const cardPasswordState = useState(initCardPassword);
+  const cardUIHeadOrTailState = useState<CardUIHeadOrTail>({ value: "head" });
 
   return (
     <CardNumbersContext.Provider value={cardNumbersState}>
@@ -53,7 +57,11 @@ const CardInfoContextProvider = ({ children }: { children: React.ReactNode }) =>
         <CardOwnerInfoContext.Provider value={cardOwnerInfoState}>
           <CardIssuerContext.Provider value={cardIssuerState}>
             <CardCVCContext.Provider value={cardCVCState}>
-              <CardPasswordContext.Provider value={cardPasswordState}>{children}</CardPasswordContext.Provider>
+              <CardPasswordContext.Provider value={cardPasswordState}>
+                <CardUIHeadOrTailContext.Provider value={cardUIHeadOrTailState}>
+                  {children}
+                </CardUIHeadOrTailContext.Provider>
+              </CardPasswordContext.Provider>
             </CardCVCContext.Provider>
           </CardIssuerContext.Provider>
         </CardOwnerInfoContext.Provider>

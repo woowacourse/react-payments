@@ -36,6 +36,10 @@ interface CardPassword {
   value?: string;
 }
 
+interface CardUIHeadOrTail {
+  value?: "head" | "tail";
+}
+
 type ErrorType = {
   errorMessage: string;
   isError: boolean;
@@ -68,11 +72,6 @@ interface CardCVCError {
 interface CardPasswordError {
   value: ErrorType;
 }
-
-type ErrorType = {
-  errorMessage: string;
-  isError: boolean;
-};
 
 type SizePresetType = "small" | "medium" | "large";
 
