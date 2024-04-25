@@ -29,29 +29,20 @@ const ErrorBox = styled.div`
 `;
 
 interface Props {
-  label : string
-  count : number
-  children : ReactNode
-  errorMessages : { [key: number]: string }
+  label: string;
+  count: number;
+  children: ReactNode;
+  errorMessages: { [key: number]: string };
 }
 
-export default function InputField({
-  label,
-  children,
-  errorMessages
-}: Props) {
-
-
+export default function InputField({ label, children, errorMessages }: Props) {
   return (
-      <Container>
-        <Label>{label}</Label>
-        <InputBox>
-          {children}
-        </InputBox>
-        <ErrorBox>
-          {Object.values(errorMessages).find((message) => message !== '')}
-        </ErrorBox>
-      </Container>
+    <Container>
+      <Label>{label}</Label>
+      <InputBox>{children}</InputBox>
+      <ErrorBox>
+        {Object.values(errorMessages).find((message) => message !== '')}
+      </ErrorBox>
+    </Container>
   );
 }
-

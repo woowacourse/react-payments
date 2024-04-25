@@ -33,22 +33,20 @@ const BackCardContainer = styled.div`
   position: relative;
 `;
 
-
 const CVCBox = styled.div`
   display: flex;
   flex-direction: row-reverse;
   position: absolute;
   width: 100%;
   height: 30px;
-  background-color: #CBBA64;
-  color: #FFFFFF;
+  background-color: #cbba64;
+  color: #ffffff;
   font-weight: bold;
-	align-items : center;
+  align-items: center;
   bottom: 30px;
   padding-right: 16px;
   box-sizing: border-box;
-
-`
+`;
 
 const ImgBox = styled.div`
   display: flex;
@@ -98,19 +96,20 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
 
   const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1.value);
 
-  
-    if(cardInfo.CVC.CVC.value.length > 0 && cardInfo.CVC.CVC.value.length < 3){
-      return (
-        <>
-          <BackCardContainer color={'#D5D5D5'}>
-            <CVCBox>{cardInfo.CVC.CVC.value}</CVCBox>
-          </BackCardContainer>
-        </>
-      );
-    }
+  if (cardInfo.CVC.CVC.value.length > 0 && cardInfo.CVC.CVC.value.length < 3) {
+    return (
+      <>
+        <BackCardContainer color={'#D5D5D5'}>
+          <CVCBox>{cardInfo.CVC.CVC.value}</CVCBox>
+        </BackCardContainer>
+      </>
+    );
+  }
   return (
     <>
-      <FrontCardContainer color={CARD_BRAND[cardInfo.cardBrand.cardBrand.value] || '#333333'}>
+      <FrontCardContainer
+        color={CARD_BRAND[cardInfo.cardBrand.cardBrand.value] || '#333333'}
+      >
         <ImgBox>
           <CardImg src={CardChip} />
           {cardImgSrc && <CardImg src={cardImgSrc} />}
@@ -119,17 +118,24 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
         <CardNumbers>
           <CardNumber>{cardInfo.cardNumbers.cardNumber1.value}</CardNumber>
           <CardNumber>{cardInfo.cardNumbers.cardNumber2.value}</CardNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber3.value.length)}</SecretNumber>
-          <SecretNumber>{'•'.repeat(cardInfo.cardNumbers.cardNumber4.value.length)}</SecretNumber>
+          <SecretNumber>
+            {'•'.repeat(cardInfo.cardNumbers.cardNumber3.value.length)}
+          </SecretNumber>
+          <SecretNumber>
+            {'•'.repeat(cardInfo.cardNumbers.cardNumber4.value.length)}
+          </SecretNumber>
         </CardNumbers>
         <TextBox>
-          {cardInfo.expirationDate.month.value.length === 1 ? `0${cardInfo.expirationDate.month.value}` : cardInfo.expirationDate.month.value}
+          {cardInfo.expirationDate.month.value.length === 1
+            ? `0${cardInfo.expirationDate.month.value}`
+            : cardInfo.expirationDate.month.value}
           {cardInfo.expirationDate.year.value.length > 0 ? ' / ' : ''}
-          {cardInfo.expirationDate.year.value.length === 1 ? `0${cardInfo.expirationDate.year.value}` : cardInfo.expirationDate.year.value}
+          {cardInfo.expirationDate.year.value.length === 1
+            ? `0${cardInfo.expirationDate.year.value}`
+            : cardInfo.expirationDate.year.value}
         </TextBox>
         <TextBox>{cardInfo.userName.userName.value}</TextBox>
       </FrontCardContainer>
     </>
   );
 }
-

@@ -1,3 +1,3 @@
 export interface ShowComponents {
-  [key: string] : boolean
+  [key: string]: boolean;
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 // import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import {
   CardBrand,
@@ -8,16 +8,16 @@ import {
   ExpirationDate,
   Password,
   UserName,
-} from "../types/card";
+} from '../types/card';
 // import InputField from './InputField';
-import CardNumberInput from "./CardNumberInput";
-import ExpirationDateInput from "./ExpirationDateInput";
-import UserNameInput from "./UserNameInput";
-import { Dispatch, SetStateAction, useState } from "react";
-import { ShowComponents } from "../types/showCompents";
-import CardDropDown from "./CardDropDown";
-import CVCInput from "./CVCInput";
-import PasswordInput from './PassWordInput'
+import CardNumberInput from './CardNumberInput';
+import ExpirationDateInput from './ExpirationDateInput';
+import UserNameInput from './UserNameInput';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { ShowComponents } from '../types/showCompents';
+import CardDropDown from './CardDropDown';
+import CVCInput from './CVCInput';
+import PasswordInput from './PassWordInput';
 
 const FormContainer = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ interface HandleInput {
   setCardBrand: Dispatch<SetStateAction<CardBrand>>;
 
   setCVC: Dispatch<SetStateAction<CVC>>;
-  setPassword : Dispatch<SetStateAction<Password>>;
+  setPassword: Dispatch<SetStateAction<Password>>;
 }
 
 export default function InputForm({
@@ -55,7 +55,7 @@ export default function InputForm({
     expirationDateInput: false,
     userNameInput: false,
     CVCInput: false,
-    passwordInput: false
+    passwordInput: false,
   });
   return (
     <FormContainer>

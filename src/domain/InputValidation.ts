@@ -5,10 +5,16 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from '../constants/system';
-import { CardNumbers, CVC, ExpirationDate, Password, UserName } from '../types/card';
+import {
+  CardNumbers,
+  CVC,
+  ExpirationDate,
+  Password,
+  UserName,
+} from '../types/card';
 
-function checkMaxLength (n : string, maxLength : number){
-  if(n.length !== maxLength){
+function checkMaxLength(n: string, maxLength: number) {
+  if (n.length !== maxLength) {
     throw new Error(`${maxLength} 자리를 입력해주세요.`);
   }
 }
@@ -59,23 +65,22 @@ function validateUpperCase(str: string) {
 }
 
 interface ValidationMap {
-  
-  [key: string]: (n: string, maxLength:number) => void;
+  [key: string]: (n: string, maxLength: number) => void;
 }
 
 const Validation: ValidationMap = {
-  cardNumber: (n: string, maxLength:number) => {
+  cardNumber: (n: string, maxLength: number) => {
     checkTrimBlank(n);
     validateNumber(n);
     // checkMaxLength(n, maxLength);
   },
-  month: (n: string, maxLength:number) => {
+  month: (n: string, maxLength: number) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateMonth(n);
     checkMaxLength(n, maxLength);
   },
-  year: (n: string, maxLength:number) => {
+  year: (n: string, maxLength: number) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateYear(n);
@@ -86,76 +91,74 @@ const Validation: ValidationMap = {
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
-  CVC: (n: string, maxLength:number) => {
+  CVC: (n: string, maxLength: number) => {
     checkTrimBlank(n);
     validateNumber(n);
   },
 
-  password: (n: string, maxLength:number) => {
+  password: (n: string, maxLength: number) => {
     checkTrimBlank(n);
     validateNumber(n);
   },
-
 };
 
-export const validateCarNumbers = (cardNumbers : CardNumbers) => {
+export const validateCarNumbers = (cardNumbers: CardNumbers) => {
   const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
-    if(!cur.isError && cur.value !== '' && cur.value.length === 4){
+    if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
       return pre + 1;
     }
     return pre;
-  }, 0)
-  if(isNotAllError !== 4){
-    throw new Error('')
+  }, 0);
+  if (isNotAllError !== 4) {
+    throw new Error('');
   }
-}
+};
 
-
-export const validateExpirationDate = (expirationDate : ExpirationDate) => {
+export const validateExpirationDate = (expirationDate: ExpirationDate) => {
   const isNotAllError = Object.values(expirationDate).reduce((pre, cur) => {
-    if(!cur.isError && cur.value !== '' && cur.value.length === 2){
+    if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
       return pre + 1;
     }
     return pre;
-  }, 0)
-  if(isNotAllError !== 2){
-    throw new Error('')
+  }, 0);
+  if (isNotAllError !== 2) {
+    throw new Error('');
   }
-}
+};
 
-export const validateUserName = (userName : UserName) => {
+export const validateUserName = (userName: UserName) => {
   const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-    if(!cur.isError && cur.value !== '' && cur.value.length > 3){
+    if (!cur.isError && cur.value !== '' && cur.value.length > 3) {
       return pre + 1;
     }
     return pre;
-  }, 0)
-  if(isNotAllError !== 1){
-    throw new Error('')
+  }, 0);
+  if (isNotAllError !== 1) {
+    throw new Error('');
   }
-}
-export const validateCVC = (CVC : CVC) => {
+};
+export const validateCVC = (CVC: CVC) => {
   const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
-    if(!cur.isError && cur.value !== '' && cur.value.length === 3){
+    if (!cur.isError && cur.value !== '' && cur.value.length === 3) {
       return pre + 1;
     }
     return pre;
-  }, 0)
-  if(isNotAllError !== 1){
-    throw new Error('')
+  }, 0);
+  if (isNotAllError !== 1) {
+    throw new Error('');
   }
-}
+};
 
-export const validatePassword = (password : Password) => {
+export const validatePassword = (password: Password) => {
   const isNotAllError = Object.values(password).reduce((pre, cur) => {
-    if(!cur.isError && cur.value !== '' && cur.value.length === 2){
+    if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
       return pre + 1;
     }
     return pre;
-  }, 0)
-  if(isNotAllError !== 1){
-    throw new Error('')
+  }, 0);
+  if (isNotAllError !== 1) {
+    throw new Error('');
   }
-}
+};
 
 export default Validation;
