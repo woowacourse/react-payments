@@ -12,14 +12,32 @@ const wave = keyframes`
   }
 `;
 
-export const Card = styled.div<{ $face: string; $background: string }>`
-  position: relative;
+export const CardContainer = styled.div`
   width: 212px;
   height: 132px;
+  perspective: 1000px;
+`;
+
+export const CardInner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+`;
+
+export const CardFront = styled.div<{ $isCVCInput: boolean; $background: string }>`
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
-  padding: ${(props) => props.$face === 'front' && '8px 12px'};
+  padding: 8px 12px;
   animation: ${(props) =>
-    props.$face === 'front' &&
     props.$background &&
     css`
       ${wave} 4s ease infinite
@@ -29,7 +47,18 @@ export const Card = styled.div<{ $face: string; $background: string }>`
       ? `linear-gradient(-60deg, ${props.$background}, ${props.$background}90, ${props.$background}, ${props.$background}90)`
       : ({ theme }) => theme.color.primary.main};
   background-size: 400% 400%;
+  transform: ${(props) => (props.$isCVCInput ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+  box-shadow: 3px 3px 5px 0px #00000040;
+`;
 
+export const CardBack = styled.div<{ $isCVCInput: boolean }>`
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: #d5d5d5;
+  transform: ${(props) => (props.$isCVCInput ? 'rotateY(0deg)' : 'rotateY(180deg)')};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 
