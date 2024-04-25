@@ -14,18 +14,20 @@ const CreditCard = styled.div`
 
 const CVCInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-  display: flex;
-  justify-content: center;
-  width: 170px;
-  margin-top: 10px;
-  gap: 10px;
+  justify-content: right;
+  background: #cbba64;
+  height: 24px;
+  position: relative;
+  margin-top: 84px;
+  width: 100%;
 `;
 
-const Input = styled.input<{ $center?: boolean }>`
-  width: 50px;
+const Input = styled.div<{ $center?: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 16px;
+  flex-shrink: 1;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.16em;

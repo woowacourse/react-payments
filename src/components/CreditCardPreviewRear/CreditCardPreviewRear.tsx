@@ -6,19 +6,9 @@ interface Props {
 const CreditCardPreview = ({ CVC }: Props) => {
   return (
     <S.CreditCard>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "right",
-          background: "#CBBA64",
-          height: "24px",
-          position: "relative",
-          marginTop: "84px",
-          width: "100%",
-        }}
-      >
-        <S.Input type="text" value={CVC} readOnly></S.Input>
-      </div>
+      <S.CVCInfo>
+        <S.Input>{CVC}</S.Input>
+      </S.CVCInfo>
     </S.CreditCard>
   );
 };
