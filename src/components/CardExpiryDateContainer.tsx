@@ -8,6 +8,7 @@ interface ExpiryDateInfo {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateErrorMessage: () => void;
   errorInfo: ErrorDetail;
+  inputRef: React.RefObject<HTMLInputElement>;
 }
 
 interface CardExpiryDateContainerProps {
@@ -34,6 +35,7 @@ const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) 
           maxLength={2}
           width="48%"
           autoFocus={true}
+          ref={month.inputRef}
         />
         <Input
           id="card-expiry-year-input"
@@ -44,6 +46,7 @@ const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) 
           placeholder="YY"
           maxLength={2}
           width="48%"
+          ref={year.inputRef}
         />
       </InputField>
       <ErrorWrapper>

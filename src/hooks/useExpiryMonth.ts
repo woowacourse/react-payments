@@ -3,7 +3,7 @@ import validateExpiryMonth from '../validator/validateExpiryMonth';
 import validateNumber from '../validator/validateNumber';
 
 const useExpiryMonth = () => {
-  const { value, handleChange, errorInfo, updateErrorMessage } = useInput('', {
+  const { value, handleChange, errorInfo, updateErrorMessage, inputRef } = useInput('', {
     onChange: validateNumber,
     onBlur: validateExpiryMonth,
   });
@@ -13,6 +13,7 @@ const useExpiryMonth = () => {
     handleChange,
     errorInfo,
     updateErrorMessage,
+    inputRef,
   };
 };
 
