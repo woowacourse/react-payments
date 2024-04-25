@@ -1,6 +1,7 @@
 import './styles/App.css';
 import './styles/reset.css';
 import {
+  CardBack,
   CardExpirationPeriodInput,
   CardFront,
   CardIssuerInput,
@@ -9,11 +10,13 @@ import {
   UserNameInput,
 } from './components';
 import { INPUT_LENGTH } from './constants';
-import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
-import useCardIssuerInput from './hooks/useCardIssuerInput';
-import useCardNumbersInput from './hooks/useCardNumbersInput';
-import useCVCInput from './hooks/useCVCInput';
-import useUserNameInput from './hooks/useUserNameInput';
+import {
+  useCardExpirationPeriodInput,
+  useCardIssuerInput,
+  useCardNumbersInput,
+  useCVCInput,
+  useUserNameInput,
+} from './hooks';
 
 function App() {
   const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER, CARD_CVC } = INPUT_LENGTH;
@@ -33,17 +36,27 @@ function App() {
     handleBlurCardIssuerSelect,
   } = useCardIssuerInput();
 
-  const { CVCNumber, CVCNumberError, handleCVCNumberChange } = useCVCInput(3);
+  const {
+    CVCNumber,
+    CVCNumberError,
+    showCardBack,
+    handleCVCNumberChange,
+    handleShowCardBack,
+  } = useCVCInput(3);
 
   return (
     <div id="app">
       <div className="inner">
-        <CardFront
-          cardNumbers={numbers}
-          period={period}
-          userName={userName}
-          cardIssuer={cardIssuer}
-        />
+        {showCardBack ? (
+          <CardBack CVCNumber={CVCNumber} />
+        ) : (
+          <CardFront
+            cardNumbers={numbers}
+            period={period}
+            userName={userName}
+            cardIssuer={cardIssuer}
+          />
+        )}
         <form className="form-container">
           <fieldset>
             <CardNumbersInput
@@ -74,6 +87,8 @@ function App() {
               CVCNumber={CVCNumber}
               CVCNumberError={CVCNumberError}
               onCVCNumberChange={handleCVCNumberChange}
+              onFocus={handleShowCardBack}
+              onBlur={handleShowCardBack}
             />
           </fieldset>
         </form>

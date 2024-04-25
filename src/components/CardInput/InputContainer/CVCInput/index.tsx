@@ -11,6 +11,8 @@ interface CVCInputProps {
   CVCNumber: string;
   CVCNumberError: boolean;
   onCVCNumberChange: (value: string) => void;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
 function CVCInput({
@@ -18,6 +20,8 @@ function CVCInput({
   CVCNumber,
   CVCNumberError,
   onCVCNumberChange,
+  onFocus,
+  onBlur,
 }: CVCInputProps) {
   const { title, subTitle, label, placeholder } = CARD_CVC_FORM_MESSAGE;
 
@@ -41,6 +45,8 @@ function CVCInput({
               placeholder={placeholder}
               isError={CVCNumberError}
               onChange={(event) => onCVCNumberChange(event.target.value)}
+              onFocus={onFocus}
+              onBlur={onBlur}
             />
           </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />

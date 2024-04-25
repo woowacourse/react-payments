@@ -1,7 +1,7 @@
 import styles from './style.module.css';
 
 interface CardBackProps {
-  CVCNumber: number;
+  CVCNumber: string;
 }
 
 function CardBack({ CVCNumber }: CardBackProps) {

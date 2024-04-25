@@ -6,6 +6,7 @@ import UserNameInput from './CardInput/InputContainer/UserNameInput';
 import InputErrorMessage from './CardInput/InputErrorMessage/index';
 import InputField from './CardInput/InputField';
 import InputWrap from './CardInput/InputWrap';
+import CardBack from './CardPreview/CardBack';
 import CardFront from './CardPreview/CardFront';
 import Input from './common/Input';
 import Select from './common/Select';
@@ -22,4 +23,5 @@ export {
   Input,
   Select,
   CVCInput,
+  CardBack,
 };
