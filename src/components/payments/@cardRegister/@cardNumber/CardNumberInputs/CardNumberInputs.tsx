@@ -2,13 +2,13 @@ import { CardNumberTextFieldProps } from '@components/payments/@cardRegister/@ca
 
 import CardNumberInput from '@components/payments/@cardRegister/@cardNumber/CardNumberInput/CardNumberInput';
 
-import { useFocusInputs, useUUID } from '@hooks/index';
+import { useAutofocusElements, useUUID } from '@hooks/index';
 
 const CardNumberInputs: React.FC<
   Pick<CardNumberTextFieldProps, 'cardNumbers' | 'onAddCardNumber' | 'cardNumberError'>
 > = ({ cardNumbers, onAddCardNumber, cardNumberError }) => {
   const { current: uuids } = useUUID(cardNumbers.length);
-  const { handleAddInputsInRef, focusInputByIndex } = useFocusInputs(cardNumbers.length);
+  const { handleAddElementsInRef, focusElementByIndex } = useAutofocusElements<HTMLInputElement>(cardNumbers.length);
 
   return (
     <>
@@ -18,10 +18,10 @@ const CardNumberInputs: React.FC<
           id={index === 0 ? 'cardNumber' : ''}
           isError={cardNumberError.errorConditions[index]}
           value={cardNumber}
-          refCallback={(element) => handleAddInputsInRef(element, index)}
+          refCallback={(element) => handleAddElementsInRef(element, index)}
           onAddCardNumber={(event) => {
             onAddCardNumber(index, event.target.value);
-            if (event.target.value.replace(/\D/g, '').length === event.target.maxLength) focusInputByIndex(index + 1);
+            if (event.target.value.replace(/\D/g, '').length === event.target.maxLength) focusElementByIndex(index + 1);
           }}
         />
       ))}

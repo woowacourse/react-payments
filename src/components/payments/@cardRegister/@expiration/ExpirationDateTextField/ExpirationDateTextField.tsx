@@ -1,6 +1,6 @@
 import TextField from '@components/common/TextField/TextField';
 import ExpirationDateInput from '@components/payments/@cardRegister/@expiration/ExpirationDateInput/ExpirationDateInput';
-import useFocusInputs from '@hooks/useFocusInputs';
+import useAutofocusElements from '@hooks/useAutofocusElements';
 
 interface ExpirationDateTextFieldProps {
   month: string;
@@ -15,7 +15,7 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
   onAddExpirationDate,
   expirationError,
 }) => {
-  const { handleAddInputsInRef, focusInputByIndex } = useFocusInputs(2);
+  const { handleAddElementsInRef, focusElementByIndex } = useAutofocusElements<HTMLInputElement>(2);
 
   return (
     <section>
@@ -28,18 +28,18 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
           placeholder="MM"
           isError={expirationError.isError}
           value={month}
-          refCallback={(element) => handleAddInputsInRef(element, 0)}
+          refCallback={(element) => handleAddElementsInRef(element, 0)}
           onAddExpirationDate={(event) => {
             onAddExpirationDate('month', event.target.value);
 
-            if (event.target.value.length === event.target.maxLength) focusInputByIndex(1);
+            if (event.target.value.length === event.target.maxLength) focusElementByIndex(1);
           }}
         />
         <ExpirationDateInput
           placeholder="YY"
           isError={expirationError.isError}
           value={year}
-          refCallback={(element) => handleAddInputsInRef(element, 1)}
+          refCallback={(element) => handleAddElementsInRef(element, 1)}
           onAddExpirationDate={(event) => onAddExpirationDate('year', event.target.value)}
         />
       </TextField.Content>

@@ -1,2 +1,2 @@
-export { default as useFocusInputs } from './useFocusInputs';
+export { default as useAutofocusElements } from './useAutofocusElements';
 export { default as useUUID } from './useUUID';
