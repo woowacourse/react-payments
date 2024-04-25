@@ -3,16 +3,18 @@ import * as S from './CardPreview.style';
 
 import { CARD_NUMBER } from '../../constants/conditions';
 import { cardNumbersType } from '../../types/cardNumbers';
+import { cardBrandsType } from '../../types/cardBrands';
 import checkCardGlobalBrand from '../../utils/checkCardGlobalBrand';
 
 interface CardPreviewProps {
   cardNumbers: cardNumbersType;
+  brand: cardBrandsType;
   month: string;
   year: string;
   owner: string;
 }
 
-export default function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, brand, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
     if (checkCardGlobalBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
@@ -28,7 +30,7 @@ export default function CardPreview({ cardNumbers, month, year, owner }: CardPre
   };
 
   return (
-    <S.Card>
+    <S.Card $brand={brand}>
       <S.CardHeader>
         <S.ChipBox />
         <S.LogoBox>{handleLogoImage(cardNumbers)}</S.LogoBox>

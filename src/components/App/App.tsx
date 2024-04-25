@@ -19,7 +19,13 @@ export default function App() {
   return (
     <S.AppLayout>
       <S.CardPreviewBox>
-        <CardPreviewBox cardNumbers={cardNumbers} month={expireDate.month} year={expireDate.year} owner={owner} />
+        <CardPreviewBox
+          cardNumbers={cardNumbers}
+          brand={brand}
+          month={expireDate.month}
+          year={expireDate.year}
+          owner={owner}
+        />
       </S.CardPreviewBox>
       <S.CardForm>
         <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />

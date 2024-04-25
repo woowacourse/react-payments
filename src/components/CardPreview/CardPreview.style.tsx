@@ -1,12 +1,18 @@
 import styled from 'styled-components';
+import { cardBrandsType } from '../../types/cardBrands';
+import { CARD_BRANDS } from '../../constants/conditions';
 
-export const Card = styled.div`
+export const Card = styled.div<{ $brand: cardBrandsType }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background: var(--grey-500);
+  background-color: ${(props) => {
+    if (!props.$brand) return 'var(--grey-500)';
+    return CARD_BRANDS[props.$brand].color;
+  }};
   box-shadow: 3px 3px 5px 0px var(--card-shadow);
+  transition: 0.3s ease;
 `;
 
 export const CardHeader = styled.header`
@@ -25,6 +31,7 @@ export const ChipBox = styled.div`
 export const LogoBox = styled.div`
   width: 36px;
   height: 22px;
+  text-align: right;
 `;
 
 export const CardBody = styled.div`
