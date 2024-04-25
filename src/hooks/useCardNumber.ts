@@ -1,6 +1,6 @@
 import { useRef, useState, RefObject, useEffect } from 'react';
 import validate from '../utils/validate';
-import { CARD_NUMBER } from '../constants/cardSection';
+import { MAX_LENGTH } from '../constants/cardSection';
 import { InitialCardNumberState } from 'types';
 
 type UseCardNumberHookProps = {
@@ -57,21 +57,21 @@ const useCardNumber = ({
 
     const totalCardNumbers = newCardNumbers.map((card) => card.value).join('');
 
-    if (totalCardNumbers.length === CARD_NUMBER.TOTAL_MAX_LENGTH) {
+    if (totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER) {
       handleCardBrandImage(totalCardNumbers);
     }
 
     setCardNumbers(newCardNumbers);
 
-    if (isCompleted && totalCardNumbers.length < CARD_NUMBER.TOTAL_MAX_LENGTH) {
+    if (isCompleted && totalCardNumbers.length < MAX_LENGTH.TOTAL_CARD_NUMBER) {
       setIsCompleted(false);
     }
 
-    if (isValid && newValue.length === CARD_NUMBER.INDIVIDUAL_MAX_LENGTH && index < 3) {
+    if (isValid && newValue.length === MAX_LENGTH.INDIVIDUAL_CARD_NUMBER && index < 3) {
       refs[index + 1].current?.focus();
     }
 
-    if (totalCardNumbers.length === CARD_NUMBER.TOTAL_MAX_LENGTH) {
+    if (totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER) {
       if (isValidCurrentStep) {
         nextStepHandler();
       }

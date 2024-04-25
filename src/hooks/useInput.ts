@@ -61,13 +61,11 @@ const useInput = ({
         !isCompleted &&
         nextStepHandler &&
         !validate.isEmptyValue(inputValue) &&
-        isValidCurrentStep &&
-        !inputValue
+        isValidCurrentStep
       ) {
         nextStepHandler();
+        setIsCompleted(true);
       }
-
-      setIsCompleted(true);
     }
   };
 

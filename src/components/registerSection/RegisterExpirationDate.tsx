@@ -1,4 +1,4 @@
-import { MAX_LENGTH } from '../../App';
+import { MAX_LENGTH } from '../../constants/cardSection';
 import * as S from '../../app.style';
 import { EXPIRATION_PERIOD } from '../../constants/cardSection';
 import { Input } from '../composables/input.style';

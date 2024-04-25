@@ -2,7 +2,7 @@ import InputSection from './InputSection';
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
-import { MAX_LENGTH } from '../../App';
+import { MAX_LENGTH } from '../../constants/cardSection';
 import { forwardRef } from 'react';
 import { CARD_CVC } from '../../constants/cardSection';
 import { RegisterStepProps } from 'types';

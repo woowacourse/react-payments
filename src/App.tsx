@@ -19,6 +19,7 @@ import REGISTER_STEP from './constants/registerStep';
 import { InitialCardNumberState } from 'types';
 import useDetectComplete from './hooks/useDetectComplete';
 import PAGE_ROUTES from './constants/routes';
+import { MAX_LENGTH } from './constants/cardSection';
 
 const initialCardNumberState: InitialCardNumberState = {
   value: '',
@@ -30,15 +31,6 @@ const CARD_NUMBER_LENGTH = 4;
 const MONTH = Object.freeze({
   MIN: 1,
   MAX: 12,
-});
-
-export const MAX_LENGTH = Object.freeze({
-  CARD_NUMBERS: 4,
-  MONTH: 2,
-  YEAR: 2,
-  NAME: 30,
-  CVC: 3,
-  PASSWORD: 2,
 });
 
 function App() {

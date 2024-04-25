@@ -4,7 +4,7 @@ import InputSection from './InputSection';
 import { PASSWORD } from '../../constants/cardSection';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
-import { MAX_LENGTH } from '../../App';
+import { MAX_LENGTH } from '../../constants/cardSection';
 import { RegisterStepProps } from 'types';
 
 const RegisterPassword = forwardRef<HTMLInputElement, Partial<RegisterStepProps>>((props, ref) => {

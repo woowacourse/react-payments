@@ -3,7 +3,7 @@ import Input from '../composables/Input';
 import Label from '../composables/Label';
 import InputSection from './InputSection';
 import { forwardRef } from 'react';
-import { MAX_LENGTH } from '../../App';
+import { MAX_LENGTH } from '../../constants/cardSection';
 import { OWNER_NAME } from '../../constants/cardSection';
 import { RegisterStepProps } from 'types';
 

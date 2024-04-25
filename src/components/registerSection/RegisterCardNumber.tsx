@@ -2,10 +2,10 @@ import * as S from '../../app.style';
 import InputSection from './InputSection';
 import { CARD_NUMBER } from '../../constants/cardSection';
 import { InitialCardNumberState } from 'types';
-import { Fragment, forwardRef, RefObject } from 'react';
+import { Fragment, RefObject } from 'react';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
-import { MAX_LENGTH } from '../../App';
+import { MAX_LENGTH } from '../../constants/cardSection';
 
 type RegisterCardNumberProps = {
   cardNumbers: InitialCardNumberState[];
@@ -13,9 +13,11 @@ type RegisterCardNumberProps = {
   refs: RefObject<HTMLInputElement>[];
 };
 
-const RegisterCardNumber = forwardRef<HTMLInputElement, RegisterCardNumberProps>((props, ref) => {
-  const { cardNumbers, cardNumbersChangeHandler, refs } = props;
-
+const RegisterCardNumber = ({
+  cardNumbers,
+  cardNumbersChangeHandler,
+  refs,
+}: RegisterCardNumberProps) => {
   return (
     <S.Wrapper>
       <InputSection
@@ -33,7 +35,7 @@ const RegisterCardNumber = forwardRef<HTMLInputElement, RegisterCardNumberProps>
                 ref={refs[index]}
                 placeholder="1234"
                 type="text"
-                maxLength={MAX_LENGTH.CARD_NUMBERS}
+                maxLength={MAX_LENGTH.INDIVIDUAL_CARD_NUMBER}
                 value={cardNumber.value}
                 onChange={(e) => cardNumbersChangeHandler(e, index)}
                 isError={cardNumber.isError}
@@ -49,6 +51,6 @@ const RegisterCardNumber = forwardRef<HTMLInputElement, RegisterCardNumberProps>
       </S.ErrorContainer>
     </S.Wrapper>
   );
-});
+};
 
 export default RegisterCardNumber;

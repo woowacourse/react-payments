@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MAX_LENGTH } from '../App';
-import { CARD_NUMBER } from '../constants/cardSection';
+import { MAX_LENGTH } from '../constants/cardSection';
 import { UseDetectCompleteHookProps, InitialCardNumberState } from 'types';
 
 const useDetectComplete = ({
@@ -21,7 +20,7 @@ const useDetectComplete = ({
     if (
       month.length === MAX_LENGTH.MONTH &&
       year.length === MAX_LENGTH.YEAR &&
-      totalCardNumbers.length === CARD_NUMBER.TOTAL_MAX_LENGTH &&
+      totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER &&
       cvc.length === MAX_LENGTH.CVC &&
       password.length === MAX_LENGTH.PASSWORD &&
       name.length
