@@ -22,6 +22,7 @@ const NameFormSection = (props: NameFormSectionProps) => {
 
   const NameForm = (
     <PaymentsInputFieldUppercase
+      ref={ref}
       className="name-form-section"
       placeholder="FAMILY / GIVEN"
       maxLength={OPTION.nameMaxLength}

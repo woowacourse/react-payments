@@ -7,13 +7,13 @@ interface UseFormSectionProps {
   errorMessage: string;
   maxLength?: number;
   dispatchCardInfo: (value: string) => void
+  setError: (error: string) => void
 }
 
 const useFormSection = (props: UseFormSectionProps) => {
-  const { ref, initialValue, regex, errorMessage, maxLength, dispatchCardInfo } = props
+  const { ref, initialValue, regex, errorMessage, maxLength, dispatchCardInfo, setError } = props
 
   const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -35,7 +35,7 @@ const useFormSection = (props: UseFormSectionProps) => {
     }
   }, [value]);
 
-  return { value, error, handleChange };
+  return { value, handleChange };
 };
 
 export default useFormSection;
