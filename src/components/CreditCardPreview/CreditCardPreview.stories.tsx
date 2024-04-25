@@ -16,5 +16,6 @@ export const Default: Story = {
     cardNumbers: ["1234", "1234", "1234", "1234"],
     expirationDate: "04/18",
     ownerName: "",
+    cardCompany: "BC카드",
   },
 };
