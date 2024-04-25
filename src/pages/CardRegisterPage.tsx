@@ -1,4 +1,4 @@
-import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
+import CreditCardForm from '@components/payments/@cardRegister/@creditCard/CreditCardForm/CreditCardForm';
 
 const CardRegisterPage = () => {
   return <CreditCardForm />;

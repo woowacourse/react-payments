@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CardBrand } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.type';
+import { CardBrand } from '@components/payments/@cardRegister/@cardBrand/CardBrandDropdown/CardBrandDropdown.type';
 import useToggle from '@hooks/useToggle';
 
 const useCardBrandDropdown = () => {
