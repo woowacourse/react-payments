@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Validator from "../utils/Validator";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
+import { CreditCardSpecificValue } from "../@types/CreditCard";
 
-const useInput = <T extends object>(initialValue: T) => {
+const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+
+  useEffect(() => setIsComplete(Validator.inputCreditCardIsComplete(inputValue)), [inputValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
@@ -24,7 +28,7 @@ const useInput = <T extends object>(initialValue: T) => {
     setIsError(false);
   };
 
-  return [inputValue, handleChange, isError] as const;
+  return [inputValue, handleChange, isError, isComplete] as const;
 };
 
 export default useInput;
