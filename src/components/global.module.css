@@ -1,3 +1,14 @@
+:root {
+  --bc-color: #f04651;
+  --shinhan-color: #eb001b;
+  --kakao-color: #ffe600;
+  --hyundai-color: #0046ff;
+  --woori-color: #007bc8;
+  --lotte-color: #ed1c24;
+  --hana-color: #009490;
+  --kookmin-color: #6a6056;
+}
+
 .horizon__gap__container {
   display: flex;
   gap: 10px;
