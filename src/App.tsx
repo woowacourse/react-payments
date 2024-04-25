@@ -1,5 +1,7 @@
 import './App.css';
 
+import BottomButton from './components/BottomButton';
+import { COLOR } from './styles/color';
 import CardForm from './components/CardForm';
 import CardInfoProps from './props/useInput/CardInfo';
 import CardPreview from './components/CardPreview';
@@ -53,30 +55,36 @@ function App() {
   };
 
   return (
-    <Payments>
-      <CardPreview cardInfo={cardInfo} />
-      <CardForm
-        cardNumberValidateInputs={cardNumberInputs}
-        expiredDateMonthValidateInput={expiredDateMonthValidateInput}
-        expiredDateYearValidateInput={expiredDateYearValidateInput}
-        cardHolderValidateInput={cardHolderValidateInput}
-      />
-    </Payments>
+    <div style={{ width: '376px' }}>
+      <Payments>
+        <CardPreview cardInfo={cardInfo} />
+        <CardForm
+          cardNumberValidateInputs={cardNumberInputs}
+          expiredDateMonthValidateInput={expiredDateMonthValidateInput}
+          expiredDateYearValidateInput={expiredDateYearValidateInput}
+          cardHolderValidateInput={cardHolderValidateInput}
+        />
+      </Payments>
+      {<BottomButton>안녕</BottomButton>}
+    </div>
   );
 }
 
 export default App;
 
 const Payments = styled.section({
-  width: '315px',
+  position: 'relative',
+  width: '376px',
+  height: '700px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '30px',
+  overflowY: 'scroll',
 
-  margin: 'auto',
-  marginTop: '30px',
-  padding: '100px',
-  backgroundColor: 'white',
+  backgroundColor: COLOR.white,
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 });

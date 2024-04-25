@@ -5,4 +5,5 @@ export const COLOR = {
   gray3: '#8b95a1',
   black: '#000000',
   white: '#ffffff',
+  semiWhite: '#f3f3f3',
 };
