@@ -1,5 +1,5 @@
-import MasterCard from '../../src/assets/images/mastercard.png';
-import VisaCard from '../../src/assets/images/visa.png';
+import MasterCard from '../../../src/assets/images/mastercard.png';
+import VisaCard from '../../../src/assets/images/visa.png';
 import CONDITION from '../../constants/condition';
 import { CARD_TYPE, CardNumberKey, ExpiryDate } from '../../types/card';
 import * as S from './CardPreview.styled';
