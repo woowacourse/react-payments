@@ -1,10 +1,10 @@
 import { styled, css } from "styled-components";
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<{ $background: string }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.COLOR["grey-3"]};
+  background-color: ${({ theme, $background }) => ($background ? $background : theme.COLOR["grey-3"])};
   margin-top: 65px;
   padding: 8px 12px;
   display: flex;

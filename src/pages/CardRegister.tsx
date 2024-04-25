@@ -37,6 +37,7 @@ const CardRegister = () => {
             cardNumbers={inputsOf(cardNumbersReduceds)}
             expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
             ownerName={inputsOf(ownerNameReduceds)[0]}
+            cardCompany="BC카드"
           />
         )}
         {isCVCFocused && <CreditCardPreviewRear CVC={CVCReduceds[0][0].value} />}
