@@ -6,3 +6,12 @@ export interface CardInfo {
   cardCVCNumber: string;
   cardPassword: string;
 }
+
+export interface CardFormValidity {
+  cardNumbers: boolean;
+  expirationDate: boolean;
+  cardOwnerName: boolean;
+  cardCompany: boolean;
+  cardCVCNumber: boolean;
+  cardPassword: boolean;
+}
