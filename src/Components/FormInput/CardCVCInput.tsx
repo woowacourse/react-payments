@@ -20,7 +20,7 @@ const CardCVCInput = memo(() => {
     <>
       {InputInfoList.map(({ name, placeholder }, index) => (
         <FormInputCompound
-          id={`id-owner-${name}`}
+          id={`id-cvc-${name}`}
           key={index}
           onInputChange={(e) =>
             onInputChange<CardCVC, CardCVCError>(e, {

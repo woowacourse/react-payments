@@ -56,7 +56,7 @@ const CardIssuerInput = () => {
 
   return (
     <div css={inputContainerStyle}>
-      <input css={inputStyle} />
+      <input id="id-issuer-value" css={inputStyle} />
       <button onClick={(e) => handleClick(e)}>입력이 잘 될까요?</button>
       {isCLicked ? <OptionBox setIsClicked={setIsClicked} /> : null}
     </div>

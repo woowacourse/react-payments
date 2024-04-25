@@ -25,7 +25,7 @@ const CardNumberInput = memo(() => {
     <>
       {InputInfoList.map(({ name }, index) => (
         <FormInputCompound<CardNumbers>
-          id={`id-${name}`}
+          id={`id-numbers-${name}`}
           key={index}
           onInputChange={(e) =>
             onInputChange<CardNumbers, CardNumbersError>(e, {
