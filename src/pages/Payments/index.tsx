@@ -11,6 +11,7 @@ import InputOwnerName from "../../components/input/InputOwnerName";
 import InputCreditCardCompany from "../../components/input/InputCreditCardCompany";
 import { useState } from "react";
 import InputCVCNumber from "../../components/input/InputCVCNumber";
+import CreditCardBack from "../../components/creditCard/CreditCardBack";
 
 interface Owner {
   name: string;
@@ -57,22 +58,42 @@ const Payments = () => {
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
       : expirationPeriod.month;
 
+  const [showCardBack, setShowCardBack] = useState(false);
+
+  const handleCardClick = () => {
+    setShowCardBack((preState) => !preState);
+  };
+
   return (
     <PaymentsContainer>
-      <CreditCard
-        creditCardNumber={[
-          cardNumber.firstValue,
-          cardNumber.secondValue,
-          cardNumber.thirdValue,
-          cardNumber.fourthValue,
-        ]}
-        expirationPeriod={formatExpirationPeriod()}
-        ownerName={owner.name}
-        selectedCompany={selectedCompany}
-      />
+      {showCardBack ? (
+        <CreditCardBack cvcNumber={cvc.number} />
+      ) : (
+        <CreditCard
+          creditCardNumber={[
+            cardNumber.firstValue,
+            cardNumber.secondValue,
+            cardNumber.thirdValue,
+            cardNumber.fourthValue,
+          ]}
+          expirationPeriod={formatExpirationPeriod()}
+          ownerName={owner.name}
+          selectedCompany={selectedCompany}
+        />
+      )}
+
       <InputFormContainer>
-        <CreditCardForm title={CARD_FORM_MESSAGE.inputCardCVC} inputError={cvcError}>
-          <InputCVCNumber inputValue={cvc.number} handleChange={setCVC} inputError={cvcError} />
+        <CreditCardForm
+          title={CARD_FORM_MESSAGE.inputCardCVC}
+          inputError={cvcError}
+          onClick={handleCardClick}
+        >
+          <InputCVCNumber
+            inputValue={cvc.number}
+            handleChange={setCVC}
+            inputError={cvcError}
+            onClick={handleCardClick}
+          />
         </CreditCardForm>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardCompany}

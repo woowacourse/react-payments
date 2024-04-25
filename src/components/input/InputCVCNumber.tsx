@@ -7,11 +7,12 @@ interface InputCVCNumberProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputError: boolean;
+  onClick: () => void;
 }
 
-const InputCVCNumber = ({ inputValue, handleChange, inputError }: InputCVCNumberProps) => {
+const InputCVCNumber = ({ inputValue, handleChange, inputError, onClick }: InputCVCNumberProps) => {
   return (
-    <InputContainer>
+    <InputContainer onClick={onClick}>
       <InputLabel htmlFor="cvcNumber">{CARD_FORM_MESSAGE.inputCardCVC}</InputLabel>
       <InputBox
         inputValue={inputValue}

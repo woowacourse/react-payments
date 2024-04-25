@@ -5,6 +5,7 @@ interface CreditCardFormProps {
   description?: string;
   inputError: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const CreditCardForm = ({ title, description, children, inputError }: CreditCardFormProps) => {
