@@ -1,5 +1,5 @@
 import { MouseEvent, useEffect } from "react";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import CardCompanyDropdownList from "../../common/Dropdown/CardCompanyDropdownList";
 import CardDropdownHeadButton from "../../Button/CardDropdownHeadButton";
 import useDetectClose from "../../../hooks/useDetectClose";
@@ -20,11 +20,15 @@ export default function CardCompanySelectField({
   setCardCompanyName,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   cardCompanyName: string;
   setCardCompanyName: Dispatch<SetStateAction<string>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useDetectClose(ref, false);
@@ -32,9 +36,15 @@ export default function CardCompanySelectField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[1] = cardCompanyName != "";
+    const currentState = cardCompanyName != "";
+    updatedIsCompletedSections[1] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-  }, [cardCompanyName, setIsCompletedSections]);
+    const updatedIsOpenForm = [...isOpenForm];
+    if (currentState === true) {
+      updatedIsOpenForm[2] = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [cardCompanyName]);
 
   return (
     <div ref={ref}>

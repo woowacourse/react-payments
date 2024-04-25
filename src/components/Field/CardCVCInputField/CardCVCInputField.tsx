@@ -15,11 +15,15 @@ export default function CardCVCInputField({
   setCardCVC,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   cardCVC: string;
   setCardCVC: Dispatch<SetStateAction<string>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -43,9 +47,15 @@ export default function CardCVCInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[4] = cardCVC.length == 3;
+    const currentState = cardCVC.length == 3;
+    updatedIsCompletedSections[4] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-  }, [cardCVC, setIsCompletedSections]);
+    const updatedIsOpenForm = [...isOpenForm];
+    if (currentState === true) {
+      updatedIsOpenForm[5] = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [cardCVC]);
 
   return (
     <>

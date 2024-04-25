@@ -19,11 +19,15 @@ export default function CardExpirationDateInputField({
   setDate,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   date: Record<string, string>;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessages, setErrorMessages] = useState<DateError>({
     monthError: null,
@@ -75,13 +79,19 @@ export default function CardExpirationDateInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[2] =
+    const currentState =
       date.month.length == 2 &&
       date.year.length == 2 &&
       !errorMessages.monthError &&
       !errorMessages.yearError;
+    updatedIsCompletedSections[2] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-  }, [date, setIsCompletedSections]);
+    const updatedIsOpenForm = [...isOpenForm];
+    if (currentState === true) {
+      updatedIsOpenForm[3] = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [date]);
 
   const checkExpired = (month: string, year: string) => {
     if (year.length < 2 || month.length < 2) return false;

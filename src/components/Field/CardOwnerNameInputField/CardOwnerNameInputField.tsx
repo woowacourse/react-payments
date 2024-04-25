@@ -17,11 +17,15 @@ export default function CardOwnerNameInputField({
   setOwnerName,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   ownerName: string;
   setOwnerName: Dispatch<SetStateAction<string>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -56,9 +60,15 @@ export default function CardOwnerNameInputField({
   };
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[3] = ownerName.length != 0;
+    const currentState = ownerName.length != 0;
+    updatedIsCompletedSections[3] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-  }, [ownerName, setIsCompletedSections]);
+    const updatedIsOpenForm = [...isOpenForm];
+    if (currentState === true) {
+      updatedIsOpenForm[4] = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [ownerName]);
 
   return (
     <>

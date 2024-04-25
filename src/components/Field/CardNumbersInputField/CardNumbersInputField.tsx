@@ -23,11 +23,15 @@ export default function CardNumbersInputField({
   setCardNumbers,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
     CardNumberErrorMessage[]
@@ -80,11 +84,15 @@ export default function CardNumbersInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[0] = cardNumbers.every(
-      (num) => num.length === 4
-    );
+    const currentState = cardNumbers.every((num) => num.length === 4);
+    updatedIsCompletedSections[0] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-  }, [cardNumbers, setIsCompletedSections]); // cardNumbers와 setIsCompletedSections를 의존성으로 추가
+    const updatedIsOpenForm = [...isOpenForm];
+    if (currentState === true) {
+      updatedIsOpenForm[1] = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [cardNumbers]);
 
   const checkError = (index: number): boolean => {
     const numberLengthError = numberLengthErrorMessages.some(

@@ -14,11 +14,15 @@ export default function CardPasswordInput({
   setCardPassword,
   isCompletedSections,
   setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   cardPassword: string;
   setCardPassword: Dispatch<SetStateAction<string>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isOpenForm: boolean[];
+  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
