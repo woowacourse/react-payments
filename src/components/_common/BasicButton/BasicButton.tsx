@@ -1,16 +1,21 @@
 import React, { PropsWithChildren } from "react";
 import S from "./style";
 
-export type BasicButtonProps = {
+export type ButtonBorderType = "square" | "round";
+
+export type ButtonPosition = "bottom";
+
+type BasicButtonProps = {
   padding?: number;
   fontSize: number;
-  width: number;
+  width?: number;
   height: number;
-  borderRadius?: number;
+  borderType: ButtonBorderType;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   textColor?: string;
   disabled: boolean;
   backgroundColor: string;
+  position: ButtonPosition;
 };
 
 const BasicButton = ({
@@ -18,6 +23,9 @@ const BasicButton = ({
   width,
   height,
   disabled,
+  backgroundColor,
+  borderType,
+  position,
   ...props
 }: PropsWithChildren<BasicButtonProps>) => {
   return (
@@ -25,6 +33,9 @@ const BasicButton = ({
       width={width}
       height={height}
       disabled={disabled}
+      $backgroundColor={backgroundColor}
+      $borderType={borderType}
+      position={position}
       {...props}
     >
       {children}

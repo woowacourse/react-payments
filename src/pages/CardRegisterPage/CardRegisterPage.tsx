@@ -95,12 +95,15 @@ const CardRegisterPage = () => {
         />
       </S.FlexWrapper>
       <BasicButton
+        borderType="square"
+        position="bottom"
         fontSize={15}
-        width={100}
         height={52}
         disabled={true}
         backgroundColor={theme.COLOR["grey-3"]}
-      />
+      >
+        확인
+      </BasicButton>
     </S.CardRegisterWrapper>
   );
 };

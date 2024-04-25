@@ -1,21 +1,36 @@
 import styled from "styled-components";
-import type { BasicButtonProps } from "./BasicButton"; //비활성화시 색상
 import { FlexCenter } from "@/style/common";
+import { ButtonBorderType, ButtonPosition } from "./BasicButton";
+
+export type BasicButtonProps = {
+  padding?: number;
+  fontSize: number;
+  width?: number;
+  height: number;
+  borderRadius?: number;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  textColor?: string;
+  disabled: boolean;
+  $backgroundColor: string;
+  $borderType: ButtonBorderType;
+  position: ButtonPosition;
+};
 
 const ButtonWrapper = styled.button<BasicButtonProps>`
-  width: ${({ width }) => width}px;
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
   height: ${({ height }) => height}px;
   color: ${({ textColor }) => (textColor ? textColor : "white")};
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  border-radius: ${({ borderRadius, width }) =>
-    borderRadius ? borderRadius : width / 2}px;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   font-size: ${({ fontSize }) => fontSize}px;
   ${FlexCenter};
-
+  border-radius: ${({ $borderType }) =>
+    $borderType === "round" ? "5px" : "0"};
   :disabled {
     background-color: grey;
     color: white;
   }
+  position: ${({ position }) => position === "bottom" && "absolute"};
+  bottom: ${({ position }) => position === "bottom" && "0"};
 `;
 
 const S = {
