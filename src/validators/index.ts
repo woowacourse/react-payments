@@ -4,6 +4,7 @@ import validateExpiryYear from './validateExpiryYear';
 import validateCardNumber from './validateCardNumber';
 import validateCvc from './validateCvc';
 import validatePassword from './validatePassword';
+import validateCardType from './validateCardType';
 
 export {
   validateCardholderName,
@@ -12,4 +13,5 @@ export {
   validateCardNumber,
   validateCvc,
   validatePassword,
+  validateCardType,
 };

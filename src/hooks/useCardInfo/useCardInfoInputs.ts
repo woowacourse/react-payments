@@ -5,8 +5,8 @@ import {
   validateExpiryMonth,
   validateExpiryYear,
   validatePassword,
+  validateCardType,
 } from '../../validators';
-import validateCardType from '../../validators/validateCardType';
 import useInput, { IInputControl } from '../useInput';
 import useInputs, { IInputsControl } from '../useInputs';
 
