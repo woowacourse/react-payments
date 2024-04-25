@@ -147,6 +147,7 @@ const Payments = () => {
         ]}
         expirationPeriod={formatExpirationPeriod()}
         ownerName={owner.name}
+        selectedCard={selected}
       />
 
       <InputFormContainer>

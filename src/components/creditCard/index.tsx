@@ -2,12 +2,19 @@ import styled from "@emotion/styled";
 import CreditCardBrandLogo from "./CreditCardBrandLogo";
 import CreditCardInfo from "./CreditCardInfo";
 import { CreditCardProps } from "../../@types/CreditCard";
+import CARD_COLOR from "../../constants/cardColor";
 
-const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
+const CreditCard = ({
+  creditCardNumber,
+  expirationPeriod,
+  ownerName,
+  selectedCard,
+}: CreditCardProps) => {
   const cardFirstFourNumber = creditCardNumber[0];
+  const cardColor = selectedCard ? CARD_COLOR[selectedCard] : "rgba(51, 51, 51, 1)";
 
   return (
-    <CreditCardContainer>
+    <CreditCardContainer cardColor={cardColor}>
       <CreditCardHeader>
         <YellowBox />
         <BrandLogoBox>
@@ -25,11 +32,11 @@ const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCar
 
 export default CreditCard;
 
-const CreditCardContainer = styled.div`
+const CreditCardContainer = styled.div<{ cardColor: string }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: rgba(51, 51, 51, 1);
+  background: ${(props) => props.cardColor};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
