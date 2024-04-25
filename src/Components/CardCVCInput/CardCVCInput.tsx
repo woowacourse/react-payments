@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../common/Input/Input";
 import { Tooltip } from "../CardNumberInput/CardNumberInput.styles";
 
 interface CardCVCInputProps {
   value: string;
   onChange: (value: string) => void;
+  setCompleted: (isCompleted: boolean) => void;
 }
 
-const CardCVCInput: React.FC<CardCVCInputProps> = ({ value, onChange }) => {
+const CardCVCInput: React.FC<CardCVCInputProps> = ({
+  value,
+  onChange,
+  setCompleted,
+}) => {
   const [inputValues, setInputValues] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,6 +43,14 @@ const CardCVCInput: React.FC<CardCVCInputProps> = ({ value, onChange }) => {
     setErrorMessage("");
     return true;
   };
+
+  useEffect(() => {
+    if (inputValues && isValid) {
+      setCompleted(true);
+    } else {
+      setCompleted(false);
+    }
+  }, [inputValues, isValid]);
 
   return (
     <>

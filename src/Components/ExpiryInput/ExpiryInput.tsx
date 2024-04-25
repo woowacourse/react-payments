@@ -55,9 +55,11 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
 
   useEffect(() => {
     if (isValid && month && year) {
-      console.log("month", month, "year", year);
       setExpiryMonthCompleted(true);
       setExpiryYearCompleted(true);
+    } else {
+      setExpiryMonthCompleted(false);
+      setExpiryYearCompleted(false);
     }
   }, [isValid, month, year]);
 

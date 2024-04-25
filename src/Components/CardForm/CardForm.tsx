@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardPreview from "../CardPreview/CardPreview";
 import CardInput from "../CardInput/CardInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
@@ -13,7 +13,7 @@ const CardForm: React.FC = () => {
   const [selectedCard, setSelectedCard] = useState<CardCompany | "">("");
   const [isSelectedCardCompleted, setIsSelectedCardCompleted] = useState(false);
   const [expiryMonth, setExpiryMonth] = useState("");
-  const [isExpiryMonthCompleted, setIsExpiryMontthCompleted] = useState(false);
+  const [isExpiryMonthCompleted, setIsExpiryMonthCompleted] = useState(false);
   const [expiryYear, setExpiryYear] = useState("");
   const [isExpiryYearCompleted, setIsExpiryYearCompleted] = useState(false);
   const [cardholderName, setCardholderName] = useState("");
@@ -21,6 +21,17 @@ const CardForm: React.FC = () => {
     useState(false);
   const [cardCVC, setCardCVC] = useState("");
   const [isCardCVCCompleted, setIsCardCVCCompleted] = useState(false);
+  const [showCardCVCInput, setShowCardCVCInput] = useState(false);
+  const [showExpiryInput, setShowExpiryInput] = useState(false);
+  const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
+  const [showSelectBox, setShowSelectBox] = useState(false);
+
+  const isAllCompleted =
+    isCardCVCCompleted &&
+    isCardholderNameCompleted &&
+    isExpiryYearCompleted &&
+    isSelectedCardCompleted &&
+    isCardNumberCompleted;
 
   const handleCardNumberChange = (value: string) => {
     const filteredValue = value.replace(/\D/g, "");
@@ -63,16 +74,44 @@ const CardForm: React.FC = () => {
   };
 
   const handleExpiryMonthCompleted = (isCompleted: boolean) => {
-    setIsExpiryMontthCompleted(isCompleted);
+    setIsExpiryMonthCompleted(isCompleted);
   };
 
   const handleExpiryYearCompleted = (isCompleted: boolean) => {
     setIsExpiryYearCompleted(isCompleted);
   };
 
-  const handleCardOwnerNameCompleted = (isCompleted: boolean) => {
+  const handleCardholderNameCompleted = (isCompleted: boolean) => {
     setIsCardholderNameCompleted(isCompleted);
   };
+
+  const handleCardCVCCompleted = (isCompleted: boolean) => {
+    setIsCardCVCCompleted(isCompleted);
+  };
+
+  useEffect(() => {
+    if (isCardholderNameCompleted) {
+      setShowCardCVCInput(true);
+    }
+  }, [isCardholderNameCompleted]);
+
+  useEffect(() => {
+    if (isExpiryMonthCompleted && isExpiryYearCompleted) {
+      setShowCardOwnerNameInput(true);
+    }
+  }, [isExpiryMonthCompleted, isExpiryYearCompleted]);
+
+  useEffect(() => {
+    if (isSelectedCardCompleted) {
+      setShowExpiryInput(true);
+    }
+  }, [isSelectedCardCompleted]);
+
+  useEffect(() => {
+    if (isCardNumberCompleted) {
+      setShowSelectBox(true);
+    }
+  }, [isCardNumberCompleted]);
 
   return (
     <form>
@@ -84,13 +123,17 @@ const CardForm: React.FC = () => {
         cardCompany={selectedCard}
       />
 
-      {isCardholderNameCompleted && (
+      {showCardCVCInput && (
         <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
-          <CardCVCInput value={cardCVC} onChange={handleCardCVC} />
+          <CardCVCInput
+            value={cardCVC}
+            onChange={handleCardCVC}
+            setCompleted={handleCardCVCCompleted}
+          />
         </CardInput>
       )}
 
-      {isExpiryMonthCompleted && isExpiryYearCompleted && (
+      {showCardOwnerNameInput && (
         <CardInput
           title="카드 소유자 이름을 입력해 주세요"
           label="카드 소유자 이름"
@@ -98,12 +141,12 @@ const CardForm: React.FC = () => {
           <CardOwnerNameInput
             value={cardholderName}
             onChange={handleCardholderNameChange}
-            setCompleted={handleCardOwnerNameCompleted}
+            setCompleted={handleCardholderNameCompleted}
           />
         </CardInput>
       )}
 
-      {isSelectedCardCompleted && (
+      {showExpiryInput && (
         <CardInput
           title="카드 유효기간을 입력해 주세요"
           label="유효기간"
@@ -120,7 +163,7 @@ const CardForm: React.FC = () => {
         </CardInput>
       )}
 
-      {isCardNumberCompleted && (
+      {showSelectBox && (
         <CardInput
           title="카드사를 선택해 주세요"
           description="현재 국내 카드사만 가능합니다."
@@ -141,20 +184,11 @@ const CardForm: React.FC = () => {
         <CardNumberInput
           value={cardNumber}
           onChange={handleCardNumberChange}
-          // setIsValid={setCardNumberIsValid}
           setCompleted={handleCardNumberCompleted}
         />
       </CardInput>
 
-      {/* 
-
-      
-
-   
-
-   
-
-      */}
+      {isAllCompleted && <button>확인</button>}
     </form>
   );
 };
