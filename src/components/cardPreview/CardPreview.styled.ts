@@ -91,3 +91,31 @@ export const CardholderNameText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
+export const BackCardPreviewLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 200px;
+
+  background-color: #d5d5d5;
+  border-radius: 8px;
+
+  color: white;
+  box-shadow: 3px 3px 5px 0px #00000040;
+`;
+
+export const BlankBox = styled.div`
+  flex-basis: 60%;
+`;
+
+export const CVCWrapper = styled.div`
+  background-color: #cbba64;
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 20px;
+  letter-spacing: 3px;
+  padding-right: 20px;
+`;
