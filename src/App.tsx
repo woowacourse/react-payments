@@ -1,10 +1,14 @@
-import "./App.css";
+import { ThemeProvider } from "styled-components";
+import { theme } from "@/style/theme";
+import GlobalStyles from "@/style/global";
+import CardRegister from "@/pages/CardRegister";
 
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <CardRegister />
+    </ThemeProvider>
   );
 }
 
