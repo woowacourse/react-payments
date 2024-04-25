@@ -302,28 +302,33 @@ export default function CardRegister() {
           )}
         </S.CardInfoContainer>
       </S.SubContainer>
-      <S.SubmitContainer>
-        {!cardNumbersArray[0].isError &&
-          cardNumbersArray[0].value &&
-          !cardNumbersArray[1].isError &&
-          cardNumbersArray[1].value &&
-          !cardNumbersArray[2].isError &&
-          cardNumbersArray[2].value &&
-          !cardNumbersArray[3].isError &&
-          cardNumbersArray[3].value &&
-          !cardCompany.isError &&
-          cardCompany.value &&
-          !month.isError &&
-          month.value &&
-          !year.isError &&
-          year.value &&
-          !name.isError &&
-          name.value &&
-          !cvc.isError &&
-          cvc.value &&
-          !password.isError &&
-          password.value && <S.SubmitButton>확인</S.SubmitButton>}
-      </S.SubmitContainer>
+      {!cardNumbersArray[0].isError &&
+        cardNumbersArray[0].value &&
+        !cardNumbersArray[1].isError &&
+        cardNumbersArray[1].value &&
+        !cardNumbersArray[2].isError &&
+        cardNumbersArray[2].value &&
+        !cardNumbersArray[3].isError &&
+        cardNumbersArray[3].value &&
+        !cardCompany.isError &&
+        cardCompany.value &&
+        !month.isError &&
+        month.value &&
+        !year.isError &&
+        year.value &&
+        !name.isError &&
+        name.value &&
+        !cvc.isError &&
+        cvc.value &&
+        !password.isError &&
+        password.value && (
+          <S.ConfirmLink
+            to="/confirm"
+            state={{ cardNumber: cardNumbersArray[0].value, cardCompany: cardCompany.value }}
+          >
+            확인
+          </S.ConfirmLink>
+        )}
     </>
   );
 }

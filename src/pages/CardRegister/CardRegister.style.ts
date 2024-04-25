@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const SubContainer = styled.div`
@@ -18,7 +19,7 @@ export const CardInfoContainer = styled.div`
 
   gap: 16px;
 
-  max-height: 392px;
+  max-height: 387px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -44,24 +45,18 @@ export const Wrapper = styled.div`
   gap: 8px;
 `;
 
-export const SubmitContainer = styled.div`
+export const ConfirmLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   height: 52px;
-
-  border-radius: 0px 0px 4px 4px;
-`;
-
-export const SubmitButton = styled.button`
-  width: 100%;
-  height: 100%;
 
   color: #f3f3f3;
   font-weight: 700;
   font-size: 1rem;
+
+  border-radius: 0px 0px 4px 4px;
 
   background-color: #333333;
 `;
