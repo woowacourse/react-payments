@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import CardholderNameContainer from './components/CardholderNameContainer';
-import CardExpiryDateContainer from './components/CardExpiryDateContainer';
-import CardNumberContainer from './components/CardNumbersContainer';
-import CardPreview from './components/cardPreview/CardPreview';
-import CardCompanyContainer from './components/CardCompanyContainer';
-import CardCVCContainer from './components/CardCVCContainer';
-import CardPasswordContainer from './components/CardPasswordContainer';
-import SubmitButton from './components/SubmitButton';
-import useCardInfo from './hooks/useCardInfo';
-import useFormValidation from './hooks/useForm/useFormValidation';
+import CardholderNameContainer from '../components/CardholderNameContainer';
+import CardExpiryDateContainer from '../components/CardExpiryDateContainer';
+import CardNumberContainer from '../components/CardNumbersContainer';
+import CardPreview from '../components/cardPreview/CardPreview';
+import CardCompanyContainer from '../components/CardCompanyContainer';
+import CardCVCContainer from '../components/CardCVCContainer';
+import CardPasswordContainer from '../components/CardPasswordContainer';
+import SubmitButton from '../components/SubmitButton';
+import useCardInfo from '../hooks/useCardInfo';
+import useFormValidation from '../hooks/useForm/useFormValidation';
 
-const App = () => {
+const CardRegisterPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -78,4 +78,4 @@ const CardInfoWrapper = styled.section`
   height: calc(100vh - 310px);
 `;
 
-export default App;
+export default CardRegisterPage;
