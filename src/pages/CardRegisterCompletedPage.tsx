@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CompletedCheck from '../assets/images/completed_check.svg?react';
-import CompletedButton from '../components/CompletedButton';
+import CompletedButton from '../components/common/button/CompletedButton';
 
 const CardRegisterCompletedPage = () => {
   const navigate = useNavigate();
