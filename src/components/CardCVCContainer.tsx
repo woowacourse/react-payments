@@ -1,6 +1,6 @@
 import Input from './common/input/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputField from './inputField/InputField';
+import InputField from './common/inputField/InputField';
 import { ErrorDetail } from '../types/error';
 
 interface CardCVCContainerProps {

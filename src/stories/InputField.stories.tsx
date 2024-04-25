@@ -1,6 +1,6 @@
 /* eslint-disable storybook/prefer-pascal-case */
 import { Meta, StoryObj } from '@storybook/react';
-import InputField from '../components/inputField/InputField';
+import InputField from '../components/common/inputField/InputField';
 import Input from '../components/common/input/Input';
 import { CARD_NUMBER_INDEXES, PASSWORD_INPUT_KEYS } from '../constants/card';
 
