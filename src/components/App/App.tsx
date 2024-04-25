@@ -3,20 +3,29 @@ import CardBrandInput from '../CardBrandInput/CardBrandInput';
 import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
 import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
 import CardCVCInput from '../CardCVCInput/CardCVCInput';
+import CardPINInput from '../CardPINInput/CardPINInput';
 import CardPreviewBox from '../CardPreview/CardPreview';
 
-import { useChangeCardNumbers, useChangeBrand, useChangeExpireDate, useChangeOwner, useChangeCVC } from '../../hooks';
+import {
+  useChangeCardNumbers,
+  useChangeBrand,
+  useChangeExpireDate,
+  useChangeOwner,
+  useChangeCVC,
+  useChangePIN,
+} from '../../hooks';
 
 import '../../styles/reset.css';
 import '../../styles/common.css';
 import * as S from './App.style';
 
 export default function App() {
-  const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { brand, brandValid, handleChangeBrand } = useChangeBrand();
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
   const { owner, ownerValid, handleChangeOwner } = useChangeOwner();
+  const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
+  const { PIN, PINValid, handleChangePIN } = useChangePIN();
 
   return (
     <S.AppLayout>
@@ -31,6 +40,7 @@ export default function App() {
         />
       </S.CardPreviewBox>
       <S.CardForm>
+        <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />
         <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} />
         <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
         <CardExpirationInput
