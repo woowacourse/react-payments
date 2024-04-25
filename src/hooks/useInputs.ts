@@ -9,7 +9,7 @@ interface IMultipleFieldsErrorStatus {
   errorMessage: string;
 }
 
-export interface IUseInputsReturn {
+export interface IInputsControl {
   value: Record<string, string>;
   setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   generateOnChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +17,7 @@ export interface IUseInputsReturn {
   validateValue: (key: string, value: string) => void;
 }
 
-const useInputs = (validate: TValidate, initialValue: Record<string, string>): IUseInputsReturn => {
+const useInputs = (validate: TValidate, initialValue: Record<string, string>): IInputsControl => {
   const [value, setValue] = useState<Record<string, string>>(initialValue);
   const { errorStatus, validateValue } = useValidations(value, validate);
 

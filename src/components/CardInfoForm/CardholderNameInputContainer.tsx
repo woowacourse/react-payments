@@ -1,7 +1,7 @@
-import Input from './common/Input';
-import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputSection from './common/InputSection';
-import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
+import Input from '../common/Input';
+import { ErrorWrapper, ErrorText } from '../../styles/common';
+import InputSection from '../common/InputSection';
+import useDisplayingErrorStatus from '../../hooks/useDisplayingErrorStatus';
 
 interface CardholderNameInputContainerProps {
   value: string;

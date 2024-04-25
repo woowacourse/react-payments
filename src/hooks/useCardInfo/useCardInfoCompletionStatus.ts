@@ -1,16 +1,24 @@
 import { useMemo } from 'react';
-import { IUseInputReturn } from '../useInput';
-import { IUseInputsReturn } from '../useInputs';
+import { IInputControl } from '../useInput';
+import { IInputsControl } from '../useInputs';
 
 interface CardInfoControl {
-  cardNumbers: IUseInputsReturn;
+  cardNumbers: IInputsControl;
   expiryDate: {
-    month: IUseInputReturn;
-    year: IUseInputReturn;
+    month: IInputControl;
+    year: IInputControl;
   };
-  cardholderName: IUseInputReturn;
-  cvc: IUseInputReturn;
-  password: IUseInputReturn;
+  cardholderName: IInputControl;
+  cvc: IInputControl;
+  password: IInputControl;
+}
+
+export interface ICardInfoCompletionStatus {
+  isCardNumbersCompleted: boolean;
+  isExpiryDateCompleted: boolean;
+  isCardholderNameCompleted: boolean;
+  isCvcCompleted: boolean;
+  isPasswordCompleted: boolean;
 }
 
 const useCardInfoCompletionStatus = ({
@@ -19,7 +27,7 @@ const useCardInfoCompletionStatus = ({
   cardholderName,
   cvc,
   password,
-}: CardInfoControl) => {
+}: CardInfoControl): ICardInfoCompletionStatus => {
   const isCardNumbersCompleted = useMemo(
     () =>
       Object.values(cardNumbers.value).every(v => v) && Object.values(cardNumbers.errorStatus.isError).every(v => !v),

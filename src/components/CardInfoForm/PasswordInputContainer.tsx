@@ -1,7 +1,7 @@
-import InputSection from './common/InputSection';
-import { ErrorText, ErrorWrapper } from '../styles/common';
-import Input from './common/Input';
-import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
+import InputSection from '../common/InputSection';
+import { ErrorText, ErrorWrapper } from '../../styles/common';
+import Input from '../common/Input';
+import useDisplayingErrorStatus from '../../hooks/useDisplayingErrorStatus';
 
 export interface IPasswordInputContainerProps {
   value: string;

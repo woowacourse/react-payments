@@ -1,12 +1,17 @@
-import useCardInfoInputs from './useCardInfoInputs';
-import useCardInfoCompletionStatus from './useCardInfoCompletionStatus';
+import useCardInfoInputs, { ICardInfoInputsControl } from './useCardInfoInputs';
+import useCardInfoCompletionStatus, { ICardInfoCompletionStatus } from './useCardInfoCompletionStatus';
 
-const useCardInfo = () => {
+interface IUseCardInfoReturn {
+  control: ICardInfoInputsControl;
+  completionStatus: ICardInfoCompletionStatus;
+}
+
+const useCardInfo = (): IUseCardInfoReturn => {
   const cardInfoControl = useCardInfoInputs();
   const completionStatus = useCardInfoCompletionStatus(cardInfoControl);
 
   return {
-    cardInfoControl,
+    control: cardInfoControl,
     completionStatus,
   };
 };

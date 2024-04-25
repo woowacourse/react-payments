@@ -6,8 +6,16 @@ import {
   validateExpiryYear,
   validatePassword,
 } from '../../validators';
-import useInput from '../useInput';
-import useInputs from '../useInputs';
+import useInput, { IInputControl } from '../useInput';
+import useInputs, { IInputsControl } from '../useInputs';
+
+export interface ICardInfoInputsControl {
+  cardNumbers: IInputsControl;
+  expiryDate: { month: IInputControl; year: IInputControl };
+  cardholderName: IInputControl;
+  cvc: IInputControl;
+  password: IInputControl;
+}
 
 const initialCardNumbers = {
   first: '',
@@ -16,7 +24,7 @@ const initialCardNumbers = {
   fourth: '',
 };
 
-const useCardInfoInputs = () => {
+const useCardInfoInputs = (): ICardInfoInputsControl => {
   const cardNumbersControl = useInputs(validateCardNumber, initialCardNumbers);
   const expiryMonthControl = useInput(validateExpiryMonth);
   const expiryYearControl = useInput(validateExpiryYear);

@@ -1,8 +1,8 @@
-import Input from './common/Input';
-import InputSection from './common/InputSection';
-import { ErrorWrapper, ErrorText } from '../styles/common';
-import { IErrorStatus } from '../validators/index.d';
-import useExpiryDate from '../hooks/useCardInfo/useExpiryDate';
+import Input from '../common/Input';
+import InputSection from '../common/InputSection';
+import { ErrorWrapper, ErrorText } from '../../styles/common';
+import { IErrorStatus } from '../../validators/index.d';
+import useExpiryDate from '../../hooks/useCardInfo/useExpiryDate';
 
 type MM = string;
 type YY = string;

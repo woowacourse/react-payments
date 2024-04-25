@@ -1,8 +1,8 @@
-import Input from './common/Input';
-import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputSection from './common/InputSection';
-import getObjectKeys from '../utils/getObjectKeys';
-import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
+import Input from '../common/Input';
+import { ErrorWrapper, ErrorText } from '../../styles/common';
+import InputSection from '../common/InputSection';
+import getObjectKeys from '../../utils/getObjectKeys';
+import useDisplayingErrorStatus from '../../hooks/useDisplayingErrorStatus';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 

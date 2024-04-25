@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 type TValidate = (value: string) => IErrorStatus;
 
-export interface IUseInputReturn {
+export interface IInputControl {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +12,7 @@ export interface IUseInputReturn {
   errorStatus: IErrorStatus;
 }
 
-const useInput = (validate: TValidate, initialValue: string = ''): IUseInputReturn => {
+const useInput = (validate: TValidate, initialValue: string = ''): IInputControl => {
   const [value, setValue] = useState(initialValue);
   const { errorStatus, validateValue } = useValidation(value, validate);
 

@@ -1,7 +1,7 @@
-import { ErrorText, ErrorWrapper } from '../styles/common';
-import Input from './common/Input';
-import InputSection from './common/InputSection';
-import useDisplayingErrorStatus from '../hooks/useDisplayingErrorStatus';
+import { ErrorText, ErrorWrapper } from '../../styles/common';
+import Input from '../common/Input';
+import InputSection from '../common/InputSection';
+import useDisplayingErrorStatus from '../../hooks/useDisplayingErrorStatus';
 
 export interface ICvcInputContainerProps {
   value: string;
