@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 const useInputs = (defaultValue: string[]) => {
-  const [value, setValue] = useState(defaultValue);
-  const [isClicked, setIsClicked] = useState(() => Array.from({ length: defaultValue.length }).map(() => false));
+  const [values, setValues] = useState(defaultValue);
+  const [isClicked, setIsClicked] = useState(defaultValue.map(() => false));
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isClicked[index]) {
@@ -12,13 +12,13 @@ const useInputs = (defaultValue: string[]) => {
       setIsClicked(newIsClicked);
     }
 
-    const newValue = [...value];
-    newValue[index] = e.target.value;
+    const newValues = [...values];
+    newValues[index] = e.target.value;
 
-    setValue(newValue);
+    setValues(newValues);
   };
 
-  return { value, isClicked, onChange };
+  return { values, isClicked, onChange };
 };
 
 export default useInputs;

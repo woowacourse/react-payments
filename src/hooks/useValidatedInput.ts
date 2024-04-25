@@ -5,14 +5,10 @@ const useValidatedInput = (validateFunction: (value: string) => boolean, default
   const [isValid, setIsValid] = useState(false);
 
   const handleValue = (newValue: string) => {
-    if (validateFunction !== undefined) {
-      const newIsValid = validateFunction(newValue);
+    const newIsValid = validateFunction(newValue);
 
-      setIsValid(newIsValid);
-      setValue(newIsValid ? newValue : '');
-    } else {
-      setValue(newValue);
-    }
+    setIsValid(newIsValid);
+    setValue(newIsValid ? newValue : '');
   };
 
   return { value, isValid, handleValue };

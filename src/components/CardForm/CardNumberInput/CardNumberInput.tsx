@@ -16,7 +16,7 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
-  const { value: cardNumbersInput, isClicked, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
+  const { values: cardNumbersInput, isClicked, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
   const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
