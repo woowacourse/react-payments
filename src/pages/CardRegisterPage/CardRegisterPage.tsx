@@ -13,6 +13,8 @@ import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/compone
 import { CardType } from "@/constants/cardType";
 import CardPreview from "@/components/CreditCardPreview/CardPreview";
 import { useState } from "react";
+import BasicButton from "@/components/_common/BasicButton/BasicButton";
+import { theme } from "@/style/theme";
 
 const CardRegisterPage = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -92,6 +94,13 @@ const CardRegisterPage = () => {
           setStep={setStep}
         />
       </S.FlexWrapper>
+      <BasicButton
+        fontSize={15}
+        width={100}
+        height={52}
+        disabled={true}
+        backgroundColor={theme.COLOR["grey-3"]}
+      />
     </S.CardRegisterWrapper>
   );
 };
