@@ -33,12 +33,14 @@ const CardRegisterPage = () => {
     cardPasswordInfo,
   } = cardInfo;
 
-  const validPasswordSection = formStatus.cvc.isValid || formStatus.cvc.isOpen;
-  const validCVCSection = formStatus.cardholderName.isValid || formStatus.cardholderName.isOpen;
-  const validCardholderNameSection =
-    formStatus.cardholderName.isValid || formStatus.cardholderName.isOpen;
-  const validExpiryDateSection = formStatus.cardCompany.isValid || formStatus.cardCompany.isOpen;
-  const validCardCompanySection = formStatus.cardNumber.isValid || formStatus.cardNumber.isOpen;
+  const isSectionValid = (section: keyof typeof formStatus) =>
+    formStatus[section].isValid || formStatus[section].isOpen;
+
+  const validPasswordSection = isSectionValid('cvc');
+  const validCVCSection = isSectionValid('cardholderName');
+  const validCardholderNameSection = isSectionValid('expiryDate');
+  const validExpiryDateSection = isSectionValid('cardCompany');
+  const validCardCompanySection = isSectionValid('cardNumber');
 
   return (
     <AppLayout>
