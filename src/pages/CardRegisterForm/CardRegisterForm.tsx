@@ -6,6 +6,7 @@ import OwnerNameInputField from "@/pages/CardRegisterForm/OwnerNameInputField";
 import useInput from "@/hooks/useInput";
 import PasswordInputField from "./PasswordInputField";
 import CVCInputField from "./CVCInputField";
+import CardCompanyInputField from "./CardCompanyInputField";
 
 interface Props {
   cardNumbersReduceds: ReturnType<typeof useInput>[];
@@ -33,6 +34,15 @@ const CardRegisterForm = ({
           <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_NUMBERS}</S.InputSubTitle>
         </S.TitleWrapper>
         <CardNumberInputField reduceds={cardNumbersReduceds} />
+      </S.InputFieldWithInfo>
+
+      {/* 카드회사명 */}
+      <S.InputFieldWithInfo>
+        <S.TitleWrapper>
+          <S.InputTitle>{INPUT_INFO_TITLE.CARD_COMPANY}</S.InputTitle>
+          <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_COMPANY}</S.InputSubTitle>
+        </S.TitleWrapper>
+        <CardCompanyInputField />
       </S.InputFieldWithInfo>
 
       {/* 유효 기간 */}
