@@ -5,9 +5,14 @@ import InputForm from '../components/InputForm';
 // import { Card } from '../types/card';
 import useCardForm from '../hooks/useCardForm';
 import { useEffect, useState } from 'react';
-import { validateCarNumbers, validateCVC, validateExpirationDate, validatePassword, validateUserName } from '../domain/InputValidation';
+import {
+  validateCarNumbers,
+  validateCVC,
+  validateExpirationDate,
+  validatePassword,
+  validateUserName,
+} from '../domain/InputValidation';
 import BottomButton from '../components/BottomButton';
-
 
 const Page = styled.div`
   width: 100vw;
@@ -18,7 +23,7 @@ const Page = styled.div`
 `;
 
 const Container = styled.form`
-  margin : 50px;
+  margin: 50px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -43,12 +48,11 @@ export default function EnrollCard() {
     CVC,
     setCVC,
     password,
-    setPassword
+    setPassword,
   } = useCardForm({});
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
+    event.preventDefault();
   };
 
   const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
@@ -63,13 +67,39 @@ export default function EnrollCard() {
     } catch (error) {
       setSubmitButtonFlag(false);
     }
-  }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password])
+  }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password]);
 
   return (
     <Page>
       <Container onSubmit={handleSubmit}>
-        <CardView cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC, password}} />
-        <InputForm cardInfo={{cardNumbers, expirationDate, userName, cardBrand, CVC, password}} handleInput={{setCardNumbers, setExpirationDate, setUserName, setCardBrand, setCVC, setPassword}} />
+        <CardView
+          cardInfo={{
+            cardNumbers,
+            expirationDate,
+            userName,
+            cardBrand,
+            CVC,
+            password,
+          }}
+        />
+        <InputForm
+          cardInfo={{
+            cardNumbers,
+            expirationDate,
+            userName,
+            cardBrand,
+            CVC,
+            password,
+          }}
+          handleInput={{
+            setCardNumbers,
+            setExpirationDate,
+            setUserName,
+            setCardBrand,
+            setCVC,
+            setPassword,
+          }}
+        />
         {submitButtonFlag && <BottomButton value={'제출'}></BottomButton>}
       </Container>
     </Page>
