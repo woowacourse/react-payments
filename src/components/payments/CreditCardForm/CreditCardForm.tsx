@@ -22,6 +22,14 @@ import useChangePassword from '@hooks/creditCard/useChangeCardPassword';
 import { CARD_BRAND_MAP } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.constant';
 import { isCardBrandName } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.util';
 import useMovePage from '@hooks/useMovePage';
+import {
+  isCompletedInputCVCNumber,
+  isCompletedInputCardBrand,
+  isCompletedInputCardNumber,
+  isCompletedInputCardPassword,
+  isCompletedInputExpiration,
+  isCompletedInputOwnerName,
+} from '@domain/creditCard';
 
 const CreditCardForm: React.FC = () => {
   const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
@@ -51,30 +59,24 @@ const CreditCardForm: React.FC = () => {
   const targetCardBrand = isCardBrandName(cardBrand) ? CARD_BRAND_MAP[cardBrand] : '';
 
   const isMountButton =
-    cardNumbers.length === 4 &&
-    !isCardNumberError &&
-    cardBrand !== '' &&
-    !isDropdownOpen &&
-    (expiration.month + expiration.year).length === 4 &&
-    !expirationError.isError &&
-    ownerName.length > 1 &&
-    !ownerNameError.isError &&
-    cvcNumber.length === 3 &&
-    !cvcError.isError &&
-    cardPassword.length === 2 &&
-    !cardPasswordError.isError;
+    isCompletedInputCardNumber(cardNumbers, isCardNumberError) &&
+    isCompletedInputCardBrand(cardBrand, isDropdownOpen) &&
+    isCompletedInputExpiration(expiration, expirationError) &&
+    isCompletedInputOwnerName(ownerName, ownerNameError) &&
+    isCompletedInputCVCNumber(cvcNumber, cvcError) &&
+    isCompletedInputCardPassword(cardPassword, cardPasswordError);
 
   return (
     <>
       <PreviewCreditCardStyleContainer>
         <PreviewCreditCard
           cvcNumber={cvcNumber}
-          isFocusedCVCNumber={isFocusedCVCNumber}
-          isCardBrandChange={cardBrand !== ''}
           cardBrand={cardBrand}
           cardNumbers={cardNumbers}
           expiration={expirationError.isError === true ? initialExpiration : expiration}
           ownerName={ownerName}
+          isFocusedCVCNumber={isFocusedCVCNumber}
+          isCardBrandChange={cardBrand !== ''}
         />
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>

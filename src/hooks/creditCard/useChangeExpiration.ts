@@ -1,4 +1,4 @@
-import { validateExpirationDate } from '@utils/creditCard/expiration';
+import { isValidExpirationDate } from '@domain/creditCard/expiration';
 import { isContainsNonNumeric } from '@utils/number';
 import { useState } from 'react';
 
@@ -16,7 +16,7 @@ const useChangeExpiration = () => {
     }
 
     const newExpiration = { ...expiration, [field]: value };
-    const error = validateExpirationDate(newExpiration.month, newExpiration.year);
+    const error = isValidExpirationDate(newExpiration.month, newExpiration.year);
 
     setExpiration(newExpiration);
     setExpirationError(error);

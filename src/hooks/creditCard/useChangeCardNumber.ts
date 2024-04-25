@@ -1,4 +1,4 @@
-import { isCompleteCardNumber, isCompleteCardNumbers } from '@utils/creditCard/cardNumbers';
+import { isFulledCardNumber, isFulledCardNumbers } from '@domain/creditCard/cardNumbers';
 import { isContainsNonNumeric } from '@utils/number';
 import { useState } from 'react';
 
@@ -28,7 +28,7 @@ const useChangeCardNumber = () => {
     const newCardNumbers = [...cardNumbers];
     newCardNumbers[cardIndex] = value;
 
-    if (!isCompleteCardNumber(value)) {
+    if (!isFulledCardNumber(value)) {
       setCardNumbers(newCardNumbers);
       setCardNumberError((prevCardNumberError) => {
         const newErrorConditions = prevCardNumberError.errorConditions;
@@ -47,17 +47,17 @@ const useChangeCardNumber = () => {
       return;
     }
 
-    const errorMessage = isCompleteCardNumbers(newCardNumbers) ? '' : '카드 번호는 16자리 숫자여야 합니다.';
+    const errorMessage = isFulledCardNumbers(newCardNumbers) ? '' : '카드 번호는 16자리 숫자여야 합니다.';
 
     setCardNumbers(newCardNumbers);
     setCardNumberError({
-      errorConditions: isCompleteCardNumbers(newCardNumbers)
+      errorConditions: isFulledCardNumbers(newCardNumbers)
         ? [false, false, false, false]
-        : newCardNumbers.map((cardNumber) => (isCompleteCardNumber(cardNumber) ? false : true)),
+        : newCardNumbers.map((cardNumber) => (isFulledCardNumber(cardNumber) ? false : true)),
       errorMessage,
     });
 
-    if (isCompleteCardNumbers(newCardNumbers)) setIsCardNumberCompleted(true);
+    if (isFulledCardNumbers(newCardNumbers)) setIsCardNumberCompleted(true);
   };
 
   return { cardNumbers, isCardNumberCompleted, cardNumberError, handleCardNumberChange };

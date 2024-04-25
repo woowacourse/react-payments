@@ -4,7 +4,7 @@ const calculateLastDayOfMonth = (month: string, year: string) => {
   return lastDayOfMonth;
 };
 
-export const validateExpirationDate = (month: string, year: string) => {
+export const isValidExpirationDate = (month: string, year: string) => {
   const formattedMonth = Number(month);
 
   if (formattedMonth < 1 || formattedMonth > 12) {
@@ -20,4 +20,11 @@ export const validateExpirationDate = (month: string, year: string) => {
   }
 
   return { isError: false, errorMessage: '' };
+};
+
+export const isCompletedInputExpiration = (
+  expiration: { month: string; year: string },
+  expirationError: { isError: boolean; errorMessage: string },
+) => {
+  return (expiration.month + expiration.year).length === 4 && !expirationError.isError;
 };
