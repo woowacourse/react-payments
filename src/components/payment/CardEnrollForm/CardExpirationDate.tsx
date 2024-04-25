@@ -1,9 +1,9 @@
-import { CaptionText, LabelText, TitleText } from "../styles/common";
+import { CaptionText, LabelText, TitleText } from "../../../styles/common";
 
-import { CardInformation } from "../types/cardInformation";
-import ErrorMessage from "./ErrorMessage";
-import Input from "./Input";
-import isNumericString from "../utils/isNumericString";
+import { CardInformation } from "../../../types/cardInformation";
+import ErrorMessage from "../../common/ErrorMessage";
+import Input from "../../common/Input";
+import isNumericString from "../../../utils/isNumericString";
 import styled from "styled-components";
 
 const CardDateContainer = styled.div`

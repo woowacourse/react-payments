@@ -1,9 +1,9 @@
-import { CaptionText, LabelText, TitleText } from "../styles/common";
+import { CaptionText, LabelText, TitleText } from "../../../styles/common";
 
-import { CardInformation } from "../types/cardInformation";
-import ErrorMessage from "./ErrorMessage";
-import Input from "./Input";
-import isNumericString from "../utils/isNumericString";
+import { CardInformation } from "../../../types/cardInformation";
+import ErrorMessage from "../../common/ErrorMessage";
+import Input from "../../common/Input";
+import isNumericString from "../../../utils/isNumericString";
 import styled from "styled-components";
 
 const CardNumbersContainer = styled.div`
@@ -35,7 +35,7 @@ const validateCardNumberOnBlur = (inputValue: string) => {
   }
 };
 
-interface CardNumbersProps {
+interface CardNumbersInputProps {
   cardNumbers: CardInformation["cardNumbers"];
   errorState: {
     isError: boolean[];
@@ -51,12 +51,12 @@ interface CardNumbersProps {
   }) => void;
 }
 
-export default function CardNumbers({
+export default function CardNumbersInput({
   cardNumbers,
   errorState,
   onChange,
   updateErrorState,
-}: CardNumbersProps) {
+}: CardNumbersInputProps) {
   const onCardNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     targetCardNumberIndex: number

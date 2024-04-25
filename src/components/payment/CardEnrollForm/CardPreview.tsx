@@ -1,9 +1,9 @@
-import { CardIssuer, cardIssuerMapper } from "../constants/cardIssuers";
+import { CardIssuer, cardIssuerMapper } from "../../../constants/cardIssuers";
 import { useEffect, useState } from "react";
 
-import { CardInformation } from "../types/cardInformation";
-import Mastercard from "../static/Mastercard.png";
-import Visa from "../static/Visa.png";
+import { CardInformation } from "../../../types/cardInformation";
+import Mastercard from "../../../static/Mastercard.png";
+import Visa from "../../../static/Visa.png";
 import styled from "styled-components";
 
 const CardContainer = styled.div`

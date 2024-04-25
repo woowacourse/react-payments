@@ -1,8 +1,8 @@
-import { LabelText, TitleText } from "../styles/common";
+import { LabelText, TitleText } from "../../../styles/common";
 
-import ErrorMessage from "./ErrorMessage";
-import Input from "./Input";
-import isAlphabetOrWhiteSpace from "../utils/isAlphabetOrWhiteSpace";
+import ErrorMessage from "../../common/ErrorMessage";
+import Input from "../../common/Input";
+import isAlphabetOrWhiteSpace from "../../../utils/isAlphabetOrWhiteSpace";
 import styled from "styled-components";
 
 const CardOwnerNameContainer = styled.div`

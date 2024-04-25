@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import CardNumbers from "../components/CardNumbers";
+import CardNumbersInput from "../components/payment/CardEnrollForm/CardNumbersInput";
 import { useState } from "react";
 
-const meta: Meta<typeof CardNumbers> = {
-  component: CardNumbers,
+const meta: Meta<typeof CardNumbersInput> = {
+  component: CardNumbersInput,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardNumbers>;
+type Story = StoryObj<typeof CardNumbersInput>;
 
 export const Default: Story = {
   // args: {
@@ -34,7 +34,7 @@ export const Default: Story = {
     };
 
     return (
-      <CardNumbers
+      <CardNumbersInput
         {...args}
         cardNumber1={cardInformation.cardNumber1}
         cardNumber2={cardInformation.cardNumber2}
@@ -56,7 +56,7 @@ export const ErrorWithNotNumber: Story = {
   },
   render: ({ ...args }) => {
     return (
-      <CardNumbers
+      <CardNumbersInput
         {...args}
         cardNumber1={args.cardNumber1}
         cardNumber2={args.cardNumber2}
@@ -77,7 +77,7 @@ export const ErrorWithFourDigits: Story = {
   },
   render: ({ ...args }) => {
     return (
-      <CardNumbers
+      <CardNumbersInput
         {...args}
         cardNumber1={args.cardNumber1}
         cardNumber2={args.cardNumber2}

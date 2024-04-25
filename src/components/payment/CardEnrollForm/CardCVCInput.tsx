@@ -1,8 +1,8 @@
-import { LabelText, TitleText } from "../styles/common";
+import { LabelText, TitleText } from "../../../styles/common";
 
-import ErrorMessage from "./ErrorMessage";
-import Input from "./Input";
-import isNumericString from "../utils/isNumericString";
+import ErrorMessage from "../../common/ErrorMessage";
+import Input from "../../common/Input";
+import isNumericString from "../../../utils/isNumericString";
 import styled from "styled-components";
 
 const CardCVCInputContainer = styled.div`

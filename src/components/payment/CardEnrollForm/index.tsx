@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 import CardCVCInput from "./CardCVCInput";
 import CardExpirationDate from "./CardExpirationDate";
-import { CardInformation } from "../types/cardInformation";
-import { CardIssuer } from "../constants/cardIssuers";
+import { CardInformation } from "../../../types/cardInformation";
+import { CardIssuer } from "../../../constants/cardIssuers";
 import CardIssuerSelect from "./CardIssuerSelect";
-import CardNumbers from "./CardNumbers";
+import CardNumbersInput from "./CardNumbersInput";
 import CardOwnerName from "./CardOwnerName";
 import CardPasswordInput from "./CardPasswordInput";
 import CardPreview from "./CardPreview";
@@ -219,7 +219,7 @@ export default function CardEnrollForm() {
           onFocus={() => setIsCVCFocused(true)}
           updateErrorState={updateCVCErrorState}
         />
-        <CardNumbers
+        <CardNumbersInput
           cardNumbers={cardInformation.cardNumbers}
           errorState={errorState.cardNumbers}
           onChange={onCardNumbersChange}

@@ -3,11 +3,11 @@ import {
   CardIssuer,
   cardIssuerMapper,
   isCardIssuer,
-} from "../constants/cardIssuers";
-import { CaptionText, TitleText } from "../styles/common";
+} from "../../../constants/cardIssuers";
+import { CaptionText, TitleText } from "../../../styles/common";
 
-import ErrorMessage from "./ErrorMessage";
-import Select from "./Select";
+import ErrorMessage from "../../common/ErrorMessage";
+import Select from "../../common/Select";
 import styled from "styled-components";
 
 const CardIssuerContainer = styled.div`

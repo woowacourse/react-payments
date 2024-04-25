@@ -1,7 +1,7 @@
-import { useState } from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-import Input from "../components/Input";
+
+import Input from "../components/common/Input";
+import { useState } from "react";
 
 const meta: Meta<typeof Input> = {
   component: Input,
