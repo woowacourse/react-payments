@@ -9,6 +9,8 @@ import { UserNameStateType } from '../../hooks/useUserName';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import MESSAGE from '../../constants/Message';
 import {
+  StyledCVC,
+  StyledCVCContainer,
   StyledCardImg,
   StyledCardInformationPreview,
   StyledCardNumberContainer,
@@ -16,11 +18,14 @@ import {
   StyledUserInfomation,
   StyledUserInformationContainer,
 } from './style';
+import { CVCStateType } from '../../hooks/useCVC';
+
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberStateType;
   expirationDateState: ExpirationDateStateType;
   userNameState: UserNameStateType;
   selectedCardState: SelectedCardStateType;
+  cvcState: CVCStateType;
 }
 
 const { OPTION } = MESSAGE;
@@ -44,42 +49,64 @@ const CardInformationPreview = ({
   expirationDateState,
   userNameState,
   selectedCardState,
+  cvcState,
 }: CardInformationPreviewProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
   const isMonthYearAllVisible = monthState.value && yearState.value;
   const { isVisa, isMasterCard } = cardNumberState.showImageCondition;
 
+  const isBackOfCardAppearedCondition = cvcState.isFocus;
+
   return (
-    <StyledCardInformationPreview $selectedCardColor={selectedCardColor(selectedCardState.value)}>
-      <StyledImgContainer>
-        <StyledCardImg src={magnetic} alt="magnetic" />
-        {isVisa && <StyledCardImg src={visa} alt="visa" />}
-        {isMasterCard && <StyledCardImg src={masterCard} alt="masterCard" />}
-      </StyledImgContainer>
-      <StyledUserInformationContainer>
-        <StyledCardNumberContainer>
-          <StyledUserInfomation $typo={theme.typography.cardNumber}>
-            {firstState.value}
-          </StyledUserInfomation>
-          <StyledUserInfomation $typo={theme.typography.cardNumber}>
-            {secondState.value}
-          </StyledUserInfomation>
-          <StyledUserInfomation $typo={theme.typography.cardNumber}>
-            {CONDITION.hiddenCardNumber.repeat(String(thirdState.value ?? '').length)}
-          </StyledUserInfomation>
-          <StyledUserInfomation $typo={theme.typography.cardNumber}>
-            {CONDITION.hiddenCardNumber.repeat(String(fourthState.value ?? '').length)}
-          </StyledUserInfomation>
-        </StyledCardNumberContainer>
-        <StyledUserInfomation $typo={theme.typography.cardExpirationDate}>
-          {`${monthState.value ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.value ?? ''}`}
-        </StyledUserInfomation>
-        <StyledUserInfomation $typo={theme.typography.cardUserName}>
-          {userNameState.value ?? ''}
-        </StyledUserInfomation>
-      </StyledUserInformationContainer>
-    </StyledCardInformationPreview>
+    <>
+      {isBackOfCardAppearedCondition && (
+        <StyledCardInformationPreview
+          $isBackOfCard={cvcState.isFocus}
+          $selectedCardColor={theme.color.brightGray}
+          onClick={() => cvcState.setIsFocus((prev) => !prev)}
+        >
+          <StyledCVCContainer>
+            <StyledCVC>{cvcState.value}</StyledCVC>
+          </StyledCVCContainer>
+        </StyledCardInformationPreview>
+      )}
+      {!isBackOfCardAppearedCondition && (
+        <StyledCardInformationPreview
+          $isBackOfCard={cvcState.isFocus}
+          $selectedCardColor={selectedCardColor(selectedCardState.value)}
+          onClick={() => cvcState.setIsFocus((prev) => !prev)}
+        >
+          <StyledImgContainer>
+            <StyledCardImg src={magnetic} alt="magnetic" />
+            {isVisa && <StyledCardImg src={visa} alt="visa" />}
+            {isMasterCard && <StyledCardImg src={masterCard} alt="masterCard" />}
+          </StyledImgContainer>
+          <StyledUserInformationContainer>
+            <StyledCardNumberContainer>
+              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+                {firstState.value}
+              </StyledUserInfomation>
+              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+                {secondState.value}
+              </StyledUserInfomation>
+              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+                {CONDITION.hiddenCardNumber.repeat(String(thirdState.value ?? '').length)}
+              </StyledUserInfomation>
+              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+                {CONDITION.hiddenCardNumber.repeat(String(fourthState.value ?? '').length)}
+              </StyledUserInfomation>
+            </StyledCardNumberContainer>
+            <StyledUserInfomation $typo={theme.typography.cardExpirationDate}>
+              {`${monthState.value ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.value ?? ''}`}
+            </StyledUserInfomation>
+            <StyledUserInfomation $typo={theme.typography.cardUserName}>
+              {userNameState.value ?? ''}
+            </StyledUserInfomation>
+          </StyledUserInformationContainer>
+        </StyledCardInformationPreview>
+      )}
+    </>
   );
 };
 
