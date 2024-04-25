@@ -10,8 +10,9 @@ function useCardIssuerInput() {
 
   const handleBlurCardIssuerSelect = () => {
     if (cardIssuer === '') {
-      setCardIssuerError(true);
+      return setCardIssuerError(true);
     }
+    return setCardIssuerError(false);
   };
 
   return {
