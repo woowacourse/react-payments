@@ -37,7 +37,7 @@ interface CardPassword {
 }
 
 interface CardUIHeadOrTail {
-  value?: "head" | "tail";
+  value: "head" | "tail";
 }
 
 type ErrorType = {

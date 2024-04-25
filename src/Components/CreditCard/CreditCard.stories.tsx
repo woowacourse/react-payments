@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import CreditCard from "./";
+import CreditCard from "./CreditCardHead";
 import {
   CardNumbersContext,
   CardOwnerInfoContext,

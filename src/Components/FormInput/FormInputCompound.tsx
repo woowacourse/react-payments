@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { LegacyRef, forwardRef } from "react";
 import { inputStyle } from "./style";
 
 interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,8 +9,18 @@ interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-function FormInputCompound<T>({ sizePreset = "medium", name, isError, onInputChange, ...props }: InputProps<T>) {
-  return <input {...props} css={inputStyle(sizePreset, isError)} onChange={(e) => onInputChange(e, name as keyof T)} />;
-}
+const FormInputCompound = forwardRef(function FormInputCompound<T>(
+  { sizePreset = "medium", name, isError, onInputChange, ...props }: InputProps<T>,
+  ref?: LegacyRef<HTMLInputElement>
+) {
+  return (
+    <input
+      ref={ref}
+      {...props}
+      css={inputStyle(sizePreset, isError)}
+      onChange={(e) => onInputChange(e, name as keyof T)}
+    />
+  );
+});
 
 export default FormInputCompound;
