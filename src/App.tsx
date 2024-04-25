@@ -1,10 +1,12 @@
 import "./App.css";
 
+import Payments from "./routes/Payments";
+
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <div>
+      <Payments />
+    </div>
   );
 }
 
