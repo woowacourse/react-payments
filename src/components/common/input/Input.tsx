@@ -5,9 +5,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ isError = false, ...rest }: InputProps, ref) => {
-  return <StyledInput $isError={isError} ref={ref} {...rest} />;
-});
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ isError = false, ...rest }: InputProps, ref) => {
+    return <StyledInput $isError={isError} ref={ref} {...rest} />;
+  },
+);
 
 interface StyledInputProps {
   $isError: boolean;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { CARD_OPTIONS } from '../../constants/card';
+import { CARD_OPTIONS } from '../../../constants/card';
 import ArrowUp from '../../assets/images/arrow_up.svg?react';
 import ArrowDown from '../../assets/images/arrow_down.svg?react';
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface SubmitButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 

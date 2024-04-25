@@ -9,7 +9,13 @@ export interface InputFieldProps {
   children: React.ReactNode;
 }
 
-export default function InputField({ title, subtitle, labelText, labelFor, children }: InputFieldProps) {
+export default function InputField({
+  title,
+  subtitle,
+  labelText,
+  labelFor,
+  children,
+}: InputFieldProps) {
   return (
     <Container>
       <Title role="heading" aria-level={1}>
