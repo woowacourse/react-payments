@@ -13,7 +13,10 @@ import validateCVC from '../validator/validateCVC';
 const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 
 const useCardInfo = () => {
-  const cardNumberInfo = useInputs(INITIAL_CARD_NUMBER, validateCardNumber);
+  const cardNumberInfo = useInputs(INITIAL_CARD_NUMBER, {
+    onChange: validateNumber,
+    onBlur: validateCardNumber,
+  });
   const expiryMonth = useExpiryMonth();
   const expiryYear = useExpiryYear();
   const cardholderNameInfo = useCardholderName();
