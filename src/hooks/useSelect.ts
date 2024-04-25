@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { UseSelectReturnType } from '../types/hooks';
 
-const useSelect = <T>(initialValue: T) => {
+const useSelect = <T>(initialValue: T): UseSelectReturnType<T> => {
   const [value, setValue] = useState<T>(initialValue);
 
   const handleChange = (e: React.MouseEvent<HTMLLIElement>) => {

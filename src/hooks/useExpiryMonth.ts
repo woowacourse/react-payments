@@ -1,8 +1,9 @@
 import useInput from './useInput';
 import validateExpiryMonth from '../validator/validateExpiryMonth';
 import validateNumber from '../validator/validateNumber';
+import { UseExpiryDateReturnType } from '../types/hooks';
 
-const useExpiryMonth = () => {
+const useExpiryMonth = (): UseExpiryDateReturnType => {
   const { value, handleChange, errorInfo, updateErrorMessage, inputRef } = useInput('', {
     onChange: validateNumber,
     onBlur: validateExpiryMonth,
