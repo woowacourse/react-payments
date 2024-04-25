@@ -109,7 +109,6 @@ const CardRegisterPage = () => {
         <BasicButton
           borderType="square"
           position="bottom"
-          fontSize={15}
           height={52}
           disabled={step !== 7}
           backgroundColor={theme.COLOR["grey-3"]}

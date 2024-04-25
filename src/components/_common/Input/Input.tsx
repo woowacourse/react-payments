@@ -1,13 +1,20 @@
 import S from "./style";
-
+import { forwardRef } from "react";
 interface Props extends React.HTMLProps<HTMLInputElement> {
   isError: boolean;
 }
 
-const Input = ({ isError, ...restProps }: Props) => {
-  return (
-    <S.InputBox $isError={isError} maxLength={2} {...restProps}></S.InputBox>
-  );
-};
+const Input = forwardRef<HTMLInputElement, Props>(
+  ({ isError, ...restProps }, ref) => {
+    return (
+      <S.InputBox
+        ref={ref}
+        $isError={isError}
+        maxLength={2}
+        {...restProps}
+      ></S.InputBox>
+    );
+  }
+);
 
 export default Input;
