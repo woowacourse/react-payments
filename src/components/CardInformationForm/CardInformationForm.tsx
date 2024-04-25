@@ -93,13 +93,14 @@ const CardInformationForm = ({
     setAppearedCondition(CARD_INFORMATION_APPEARED.password);
 
   const cardNumberStates = [firstState, secondState, thirdState, fourthState];
-  const cardNumberInputs = cardNumberStates.map((state) => (
+  const cardNumberInputs = cardNumberStates.map((state, index) => (
     <Input
       placeholder={PLACEHOLDER.cardNumber}
       value={state.value}
       maxLength={MAX_LENGTH.cardNumber}
       onChange={state.setValue}
       invalid={state.error}
+      autoFocus={index === 0 ? true : undefined}
     />
   ));
 
@@ -116,6 +117,7 @@ const CardInformationForm = ({
               onChange={passwordState.setValue}
               invalid={passwordState.error}
               type="password"
+              autoFocus
             />
           </InputField>
         </FormField>
@@ -131,6 +133,7 @@ const CardInformationForm = ({
               invalid={cvcState.error}
               onFocus={() => cvcState.setIsFocus(true)}
               onBlur={() => cvcState.setIsFocus(false)}
+              autoFocus
             />
           </InputField>
         </FormField>
@@ -144,6 +147,7 @@ const CardInformationForm = ({
               maxLength={MAX_LENGTH.userName}
               onChange={userNameState.setValue}
               invalid={userNameState.error}
+              autoFocus
             />
           </InputField>
         </FormField>
@@ -158,6 +162,7 @@ const CardInformationForm = ({
                 maxLength={MAX_LENGTH.expirationDate}
                 onChange={monthState.setValue}
                 invalid={monthState.error}
+                autoFocus
               />
               <Input
                 placeholder={PLACEHOLDER.year}
