@@ -1,19 +1,25 @@
 import Input from '../Input/Input';
 import styles from '../../../App.module.css';
 import dropDownStyles from './DropDown.module.css';
-import { COMPANY_LIST, CardCompany } from '../../../types/cardCompany';
 import { useState } from 'react';
 import arrow from '../../../assets/image/arrow.svg';
 
-type DropDown = {
-  itemList: Record<CardCompany, string>;
+type DropDown<T extends string | number | symbol> = {
+  itemList: Record<T, string>;
   placeholder?: string;
-  selected: CardCompany;
-  handleSelectItem: (selected: string) => void;
+  selected: T | null;
+  handleSelectItem: (selected: T | null) => void;
   isError: boolean;
 };
 
-const DropDown = ({ itemList, placeholder, handleSelectItem, selected, isError }: DropDown) => {
+// TODO: 타입 제거
+const DropDown = <T extends string | number | symbol>({
+  itemList,
+  placeholder,
+  handleSelectItem,
+  selected,
+  isError,
+}: DropDown<T>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleIsOpen = () => {
@@ -29,11 +35,11 @@ const DropDown = ({ itemList, placeholder, handleSelectItem, selected, isError }
           handleIsOpen();
 
           // 열려있는 상태에서 아무것도 선택하지 않고 닫을 때
-          if (isOpen) handleSelectItem('');
+          if (isOpen) handleSelectItem(null);
         }}>
         <Input
           readOnly
-          value={selected ? COMPANY_LIST[selected] : ''}
+          value={selected ? itemList[selected] : ''}
           placeholder={placeholder}
           isError={isError && !isOpen}
         />
@@ -41,7 +47,7 @@ const DropDown = ({ itemList, placeholder, handleSelectItem, selected, isError }
       </div>
       {isOpen && (
         <ul className={dropDownStyles.dropdown}>
-          {Object.entries(itemList).map(([key, value]) => (
+          {(Object.entries(itemList) as [T, string][]).map(([key, value]) => (
             <li>
               <button
                 onClick={() => {
