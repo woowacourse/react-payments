@@ -16,6 +16,12 @@ const DOT = '·';
 function CardFrontImg(props: CardFrontImgProps) {
   const { cardInfo } = props;
   const { mark, numbers, period, userName, company } = cardInfo;
+
+  const fontStyle = useMemo(() => {
+    const isNeedBlackFont = company?.name === CARD_COMPANY.get('kakao')?.name;
+    return { color: isNeedBlackFont ? '#322C2B' : 'inherit' };
+  }, [company]);
+
   const cardCompany = useMemo(
     () =>
       company?.name === CARD_COMPANY.get('etc')?.name ? '' : company?.name,
@@ -40,7 +46,7 @@ function CardFrontImg(props: CardFrontImgProps) {
         <img src={CardChip} alt="card chip" />
         <img src={markInfo?.src} alt={markInfo?.alt} />
       </section>
-      <section className={styles.info}>
+      <section className={styles.info} style={fontStyle}>
         <p className={styles.cardCompany}>{cardCompany}</p>
         <div className={styles.cardNumber}>
           {numberList?.map((item, index) => (
