@@ -2,5 +2,38 @@
   border-radius: 4px;
   width: 230px;
   height: 132px;
+  background-color: var(--color-card-bg);
   box-shadow: 3px 3px 5px 0px #00000040;
+}
+
+.BC카드 {
+  background-color: var(--color-BC-background);
+}
+
+.신한카드 {
+  background-color: var(--color-shinhan-background);
+}
+
+.카카오뱅크 {
+  background-color: var(--color-kakao-background);
+}
+
+.현대카드 {
+  background-color: var(--color-hyundai-background);
+}
+
+.우리카드 {
+  background-color: var(--color-woori-background);
+}
+
+.롯데카드 {
+  background-color: var(--color-lotte-background);
+}
+
+.하나카드 {
+  background-color: var(--color-hana-background);
+}
+
+.국민카드 {
+  background-color: var(--color-kookmin-background);
 }

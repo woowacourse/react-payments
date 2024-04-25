@@ -21,7 +21,7 @@ const SubmitPage = () => {
         <span>{firstCardNumber}로 시작하는</span>
         <span>{cardCompany}가 등록되었어요.</span>
       </div>
-      <button className={styles.confirmButton} onClick={handleClick}>
+      <button autoFocus className={styles.confirmButton} onClick={handleClick}>
         확인
       </button>
     </div>

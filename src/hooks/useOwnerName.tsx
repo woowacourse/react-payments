@@ -32,7 +32,7 @@ const useOwnerName = () => {
   }, [ownerName.data]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && ownerName.data.ownerName.value !== "") {
       setOwnerName({
         data: {
           ownerName: {
