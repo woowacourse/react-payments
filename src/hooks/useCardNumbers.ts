@@ -7,30 +7,27 @@ import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
 
 // TODO: 상수화
-const cardNumbersValidations: ValidationType[] = [
-  {
-    isError: (value: string) => value !== '' && !validate.isValidDigit(value),
-    errorMessage: '숫자만 입력할 수 있습니다.',
-  },
-];
+const inputLimitValidation: ValidationType = {
+  isError: (value: string) => value !== '' && !validate.isValidDigit(value),
+  errorMessage: '숫자만 입력할 수 있습니다.',
+};
 
-const exactLengthValidations: ValidationType[] = [
+const onBlurValidations: ValidationType[] = [
   {
-    isError: (state: string) => state !== '' && !validate.isSatisfiedLength(4, state.length),
+    isError: (value: string) => !validate.isSatisfiedLength(4, value.length),
     errorMessage: '4자리 숫자를 입력해주세요.',
   },
 ];
 
 const VALID_CARD_NUMBERS_LENGTH = 16;
 
-const useCardNumbers = () => {
+const useCardNumbers = <T extends HTMLInputElement>() => {
   const cardNumbersArray = [
-    useInput(cardNumbersValidations, exactLengthValidations),
-    useInput(cardNumbersValidations, exactLengthValidations),
-    useInput(cardNumbersValidations, exactLengthValidations),
-    useInput(cardNumbersValidations, exactLengthValidations),
+    useInput<T>(inputLimitValidation, onBlurValidations),
+    useInput<T>(inputLimitValidation, onBlurValidations),
+    useInput<T>(inputLimitValidation, onBlurValidations),
+    useInput<T>(inputLimitValidation, onBlurValidations),
   ];
-
   const [cardImageSrc, setCardImageSrc] = useState('');
 
   useEffect(() => {
@@ -49,7 +46,12 @@ const useCardNumbers = () => {
         setCardImageSrc(MasterCardImage);
       }
     }
-  }, [...cardNumbersArray.map(({ value }) => value)]);
+  }, [
+    cardNumbersArray[0].value,
+    cardNumbersArray[1].value,
+    cardNumbersArray[2].value,
+    cardNumbersArray[3].value,
+  ]);
 
   return { cardImageSrc, cardNumbersArray };
 };

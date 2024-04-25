@@ -1,32 +1,29 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useValidations, { ValidationType } from './useValidations';
 
 const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
-  onChangeValidations: ValidationType[],
-  onBlurValidations?: ValidationType[],
+  inputLimitValidation?: ValidationType,
+  validations?: ValidationType[],
 ) => {
   const [value, setValue] = useState('');
   const { isError, errorMessage, validate } = useValidations();
+  const ref = useRef<T>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<T>) => {
-    const result = validate(e.target.value, onChangeValidations);
-
-    if (!result) {
+    if (inputLimitValidation && !validate(e.target.value, [inputLimitValidation])) {
       setValue(value);
       return;
     }
 
+    if (validations) validate(e.target.value, validations);
     setValue(e.target.value);
   };
 
   const onBlurHandler = (e: React.FocusEvent<T>) => {
-    validate(e.target.value, onChangeValidations);
-
-    if (!onBlurValidations) return;
-    validate(e.target.value, onBlurValidations);
+    if (validations) validate(e.target.value, validations);
   };
 
-  return { value, onChangeHandler, onBlurHandler, isError, errorMessage };
+  return { ref, value, onChangeHandler, onBlurHandler, isError, errorMessage };
 };
 
 export default useInput;
