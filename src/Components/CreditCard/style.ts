@@ -1,20 +1,32 @@
 import { css } from "@emotion/react";
 
-export const cardPreviewStyle = css({
-  background: "#333",
-  width: "212px",
-  height: "132px",
-  boxShadow: "3px 3px 5px 0px #00000040",
-  borderRadius: "4px",
-  padding: "8px 17px",
-  color: "#fff",
-  fontSize: "20px",
-  fontWeight: "500",
-  display: "flex",
-  flexDirection: "column",
-  gap: "14px",
-  margin: "20px",
-});
+const CardBackgroundColor: Record<CardIssuerCategory, string> = {
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: "#6A6056",
+};
+
+export const cardPreviewStyle = (cardIssuer?: CardIssuerCategory) =>
+  css({
+    background: cardIssuer ? CardBackgroundColor[cardIssuer] : "#333",
+    width: "212px",
+    height: "132px",
+    boxShadow: "3px 3px 5px 0px #00000040",
+    borderRadius: "4px",
+    padding: "8px 17px",
+    color: "#fff",
+    fontSize: "20px",
+    fontWeight: "500",
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+    margin: "20px",
+  });
 
 export const logoStyle = css({
   width: "36px",

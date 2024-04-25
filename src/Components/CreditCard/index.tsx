@@ -4,6 +4,7 @@ import visaImage from "../../assets/visaImage.png";
 
 import { cardInfoStyle, logoStyle, periodRowStyle, periodStyle, rowStyle, cardPreviewStyle, width42 } from "./style";
 import {
+  CardIssuerContext,
   CardNumbersContext,
   CardOwnerInfoContext,
   CardValidityPeriodContext,
@@ -40,10 +41,12 @@ const CreditCard = () => {
   const cardNumbers = useContextWrapper(CardNumbersContext)[0];
   const { month, year } = useContextWrapper(CardValidityPeriodContext)[0];
   const cardOwnerInfo = useContextWrapper(CardOwnerInfoContext)[0];
+  const cardIssuer = useContextWrapper(CardIssuerContext)[0];
+
   const cardImage = getCardImage(cardNumbers?.firstNumbers);
 
   return (
-    <div css={cardPreviewStyle}>
+    <div css={cardPreviewStyle(cardIssuer.name)}>
       <div css={rowStyle}>
         <div css={logoStyle}></div>
         {cardImage ? <img css={logoStyle} src={cardImage} /> : null}
