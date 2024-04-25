@@ -1,9 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import InputSection from '../components/InputSection';
-import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from '../constants/cardSection';
+import InputSection from '../components/registerSection/InputSection';
+import {
+  CARD_NUMBER,
+  EXPIRATION_PERIOD,
+  OWNER_NAME,
+  CARD_CVC,
+  PASSWORD,
+  CARD_ISSUER,
+} from '../constants/cardSection';
 
 const meta = {
-  title: 'InputSection',
+  title: 'Register/InputSection',
   component: InputSection,
   tags: ['autodocs'],
   argTypes: {
@@ -48,5 +55,29 @@ export const OwnerName: Story = {
     title: OWNER_NAME.title,
     inputTitle: OWNER_NAME.inputTitle,
     children: <></>,
+  },
+};
+
+export const CVC: Story = {
+  args: {
+    title: CARD_CVC.title,
+    inputTitle: CARD_CVC.inputTitle,
+    children: <></>,
+  },
+};
+
+export const Password: Story = {
+  args: {
+    title: PASSWORD.title,
+    description: PASSWORD.description,
+    inputTitle: PASSWORD.inputTitle,
+    children: <></>,
+  },
+};
+
+export const CardIssuer: Story = {
+  args: {
+    title: CARD_ISSUER.title,
+    inputTitle: CARD_ISSUER.inputTitle,
   },
 };
