@@ -41,7 +41,7 @@ const EXPIRATION_DATE_PLACEHOLDER = [
 const REGISTER_CONFIRM_NUMBERS = (startNumbers: number) =>
   `${startNumbers}로 시작하는`;
 const REGISTER_CONFIRM_CARDTYPE = (cardType: CardType) =>
-  `${cardType}카드가 등록되었어요.`;
+  `${cardType === "카카오뱅크" ? "카카오뱅크 카드" : cardType}가 등록되었어요.`;
 
 export const MESSAGE = {
   PLACEHOLDER,

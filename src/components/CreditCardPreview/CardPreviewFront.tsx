@@ -24,7 +24,7 @@ const CardPreviewFront = ({
   const cardTypeColor = cardType ? CardTypeColor[cardType] : null;
 
   return (
-    <S.CardWrapper $cardTypeColor={cardTypeColor}>
+    <S.CardInner $cardTypeColor={cardTypeColor} isFront={true}>
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
 
@@ -72,7 +72,7 @@ const CardPreviewFront = ({
           readOnly
         ></S.Input>
       </S.CreditCardInfo>
-    </S.CardWrapper>
+    </S.CardInner>
   );
 };
 

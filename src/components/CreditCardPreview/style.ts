@@ -1,18 +1,47 @@
 import { FlexCenter } from "@/style/common";
 import { styled, css } from "styled-components";
 
-const CardWrapper = styled.div<{ $cardTypeColor: string | null }>`
+const CardWrapper = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: ${({ theme, $cardTypeColor }) =>
-    $cardTypeColor ? $cardTypeColor : theme.COLOR["grey-3"]};
   margin-top: 65px;
-  padding: 8px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 4px 4px 4px ${({ theme }) => theme.COLOR["grey-2"]};
+  perspective: 1000px;
+`;
+
+const CardOuter = styled.div<{ isFront: boolean }>`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  transform: ${({ isFront }) =>
+    isFront ? "rotateY(0deg)" : "rotateY(180deg)"};
+  cursor: pointer;
+  box-shadow: ${({ isFront, theme }) =>
+    isFront
+      ? `4px 4px 4px ${theme.COLOR["grey-2"]}`
+      : `-4px 4px 4px ${theme.COLOR["grey-2"]}`};
+  border-radius: 4px;
+`;
+
+const CardInner = styled.div<{
+  $cardTypeColor: string | null;
+  isFront: boolean;
+}>`
+  width: 100%;
+  height: 100%;
+  padding: ${({ isFront }) => (isFront ? "8px 12px" : "0")};
+  background-color: ${({ theme, $cardTypeColor }) =>
+    $cardTypeColor ? $cardTypeColor : theme.COLOR["grey-3"]};
+  border-radius: 4px;
+  position: absolute;
+  backface-visibility: hidden;
+  transform: ${({ isFront }) =>
+    !isFront ? "rotateY(180deg)" : "rotateY(0deg)"};
 `;
 
 const CreditCardInfo = styled.div`
@@ -90,6 +119,8 @@ const S = {
   CardCVCPart,
   LogoBox,
   CVCNumberBox,
+  CardInner,
+  CardOuter,
 };
 
 export default S;
