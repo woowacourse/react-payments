@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Input from '../../components/common/input/Input';
 import Select from '../../components/common/select/Select';
 import { ICardInfo, IErrorMessage } from '../../types/type';
@@ -60,7 +60,18 @@ const NewCardPage = () => {
     updateFormSubmitBtnVisibility();
   }, [cardInfo.password]);
 
-  const handleCardNumbersChange = (value: string, index: number) => {
+  const focusNextInput = (currentInput: HTMLInputElement) => {
+    const nextInput = currentInput.nextSibling as HTMLInputElement | null;
+    if (nextInput && nextInput instanceof HTMLInputElement) {
+      nextInput.focus();
+    }
+  };
+
+  const handleCardNumbersChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const { value } = event.target;
     const errorMessageCopy = [...errorMessage.cardNumbers];
     errorMessageCopy[index] = validateCardNumber(value);
 
@@ -88,6 +99,10 @@ const NewCardPage = () => {
           newCardNumbers[3],
         ],
       });
+
+      if (value.length === 4) {
+        focusNextInput(event.target);
+      }
     }
   };
 
@@ -126,7 +141,11 @@ const NewCardPage = () => {
     }
   };
 
-  const handleCardExpirationChange = (value: string, index: number) => {
+  const handleCardExpirationChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const { value } = event.target;
     const errorMessageCopy = [...errorMessage.cardExpiration];
     errorMessageCopy[index] = validateCardExpiration(value, index);
 
@@ -145,6 +164,10 @@ const NewCardPage = () => {
         ...cardInfo,
         cardExpiration: [newCardExpiration[0], newCardExpiration[1]],
       });
+
+      if (value.length === 2) {
+        focusNextInput(event.target);
+      }
     }
   };
 
@@ -256,7 +279,7 @@ const NewCardPage = () => {
             maxLength={CARD_FORM_INPUTS.CARD_NUMBERS.MAX_LENGTH}
             placeholder={CARD_FORM_INPUTS.CARD_NUMBERS.PLACEHOLDER}
             isError={!!errorMessage.cardNumbers[index]}
-            onChange={(e) => handleCardNumbersChange(e.target.value, index)}
+            onChange={(event) => handleCardNumbersChange(event, index)}
           ></Input>
         ))}
       </NewCardInputSection>
@@ -282,6 +305,7 @@ const NewCardPage = () => {
         >
           {cardInfo.cardExpiration.map((_, index) => (
             <Input
+              autoFocus={index === 0}
               key={index}
               maxLength={CARD_FORM_INPUTS.CARD_EXPIRATION.MAX_LENGTH}
               placeholder={
@@ -290,9 +314,7 @@ const NewCardPage = () => {
                   : CARD_FORM_INPUTS.CARD_EXPIRATION.PLACEHOLDER.YEAR
               }
               isError={!!errorMessage.cardExpiration[index]}
-              onChange={(e) =>
-                handleCardExpirationChange(e.target.value, index)
-              }
+              onChange={(event) => handleCardExpirationChange(event, index)}
             ></Input>
           ))}
         </NewCardInputSection>
@@ -306,6 +328,7 @@ const NewCardPage = () => {
         >
           <Input
             value={cardInfo.userName}
+            autoFocus
             maxLength={CARD_FORM_INPUTS.USER_NAME.MAX_LENGTH}
             placeholder={CARD_FORM_INPUTS.USER_NAME.PLACEHOLDER}
             isError={!!errorMessage.userName[0]}
@@ -337,6 +360,7 @@ const NewCardPage = () => {
         >
           <Input
             type='password'
+            autoFocus
             maxLength={CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}
             placeholder={CARD_FORM_INPUTS.PASSWORD.PLACEHOLDER}
             isError={!!errorMessage.password[0]}
