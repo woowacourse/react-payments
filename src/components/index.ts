@@ -2,6 +2,7 @@ import CardIssuerInput from './CardInput/InputContainer/CardIssuerInput';
 import CardNumbersInput from './CardInput/InputContainer/CardNumbersInput';
 import CVCInput from './CardInput/InputContainer/CVCInput';
 import CardExpirationPeriodInput from './CardInput/InputContainer/ExpirationPeriodInput/index';
+import PasswordInput from './CardInput/InputContainer/PasswordInput';
 import UserNameInput from './CardInput/InputContainer/UserNameInput';
 import InputErrorMessage from './CardInput/InputErrorMessage/index';
 import InputField from './CardInput/InputField';
@@ -24,4 +25,5 @@ export {
   Select,
   CVCInput,
   CardBack,
+  PasswordInput,
 };

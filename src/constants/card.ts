@@ -1,10 +1,11 @@
 import IMAGES from '../assets/images';
 
 export const INPUT_LENGTH = {
-  CARD_NUMBERS: 4,
-  CARD_EXPIRATION: 2,
-  CARD_USER: 100,
-  CARD_CVC: 3,
+  cardNumbers: 4,
+  cardExpiration: 2,
+  cardUser: 100,
+  cardCVC: 3,
+  cardPassword: 2,
 };
 
 export const CARD_MARK = {

@@ -7,10 +7,10 @@ import {
   CardIssuerInput,
   CardNumbersInput,
   CVCInput,
+  PasswordInput,
   UserNameInput,
 } from './components';
-import PasswordInput from './components/CardInput/InputContainer/PasswordInput';
-import { Password } from './components/CardInput/InputContainer/PasswordInput/PasswordInput.stories';
+import Button from './components/common/Button';
 import { INPUT_LENGTH } from './constants';
 import {
   useCardExpirationPeriodInput,
@@ -22,13 +22,14 @@ import {
 } from './hooks';
 
 function App() {
-  const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER, CARD_CVC } = INPUT_LENGTH;
+  const { cardNumbers, cardExpiration, cardUser, cardCVC, cardPassword } =
+    INPUT_LENGTH;
 
   const { numbers, numberErrors, handleNumberChange } =
-    useCardNumbersInput(CARD_NUMBERS);
+    useCardNumbersInput(cardNumbers);
 
   const { period, periodErrors, handlePeriodChange } =
-    useCardExpirationPeriodInput(CARD_EXPIRATION);
+    useCardExpirationPeriodInput(cardExpiration);
 
   const { userName, nameError, handleNameChange } = useUserNameInput();
 
@@ -49,6 +50,23 @@ function App() {
 
   const { password, passwordError, handlePasswordChange } = usePasswordInput(2);
 
+  /**
+   * 확인 버튼
+   */
+  const errors = [
+    numberErrors,
+    periodErrors,
+    nameError,
+    cardIssuerError,
+    CVCNumberError,
+    passwordError,
+  ];
+
+  const inputs = [numbers, period, userName, cardIssuer, CVCNumber, password];
+
+  const isError = errors.some((error) => error === true);
+  const isBlank = inputs.some((input) => input === '');
+
   return (
     <div id="app">
       <div className="inner">
@@ -65,19 +83,19 @@ function App() {
         <form className="form-container">
           <fieldset>
             <CardNumbersInput
-              maxLength={CARD_NUMBERS}
+              maxLength={cardUser}
               numbers={numbers}
               numberErrors={numberErrors}
               onNumberChange={handleNumberChange}
             />
             <CardExpirationPeriodInput
-              maxLength={CARD_EXPIRATION}
+              maxLength={cardExpiration}
               period={period}
               periodErrors={periodErrors}
               onPeriodChange={handlePeriodChange}
             />
             <UserNameInput
-              maxLength={CARD_USER}
+              maxLength={cardUser}
               userName={userName}
               nameError={nameError}
               onNameChange={handleNameChange}
@@ -88,7 +106,7 @@ function App() {
               onBlurCardIssuerSelect={handleBlurCardIssuerSelect}
             />
             <CVCInput
-              maxLength={CARD_CVC}
+              maxLength={cardCVC}
               CVCNumber={CVCNumber}
               CVCNumberError={CVCNumberError}
               onCVCNumberChange={handleCVCNumberChange}
@@ -96,11 +114,13 @@ function App() {
               onBlur={handleShowCardBack}
             />
             <PasswordInput
+              maxLength={cardPassword}
               password={password}
               passwordError={passwordError}
               onPasswordChange={handlePasswordChange}
             />
           </fieldset>
+          {!isError && !isBlank && <Button onClick={() => {}}>확인</Button>}
         </form>
       </div>
     </div>
