@@ -29,7 +29,7 @@ export default function CardForm({
 }
 
 const CardFormContainer = styled.form({
-  width: '100%',
+  width: '315px',
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
