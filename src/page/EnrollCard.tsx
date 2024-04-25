@@ -5,18 +5,19 @@ import InputForm from '../components/InputForm';
 // import { Card } from '../types/card';
 import useCardForm from '../hooks/useCardForm';
 import { useEffect, useState } from 'react';
-import { validateCarNumbers, validateExpirationDate } from '../domain/InputValidation';
+import { validateCarNumbers, validateExpirationDate, validateUserName } from '../domain/InputValidation';
+import CardDropDown from '../components/CardDropDown';
 
 const Page = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 const Container = styled.form`
+  margin : 50px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -36,6 +37,8 @@ export default function EnrollCard() {
     setExpirationDate,
     userName,
     setUserName,
+    cardBrand,
+    setCardBrand,
   } = useCardForm({});
 
   const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
@@ -43,18 +46,19 @@ export default function EnrollCard() {
     try {
       validateCarNumbers(cardNumbers);
       validateExpirationDate(expirationDate);
+      validateUserName(userName);
       setSubmitButtonFlag(true);
     } catch (error) {
-      console.log(error);
       setSubmitButtonFlag(false);
     }
-  }, [cardNumbers, expirationDate, userName])
+    console.log(cardBrand)
+  }, [cardNumbers, expirationDate, userName, cardBrand])
 
   return (
     <Page>
       <Container>
-        <CardView cardInfo={{cardNumbers, expirationDate, userName}} />
-        <InputForm cardInfo={{cardNumbers, expirationDate, userName}} handleInput={{setCardNumbers, setExpirationDate, setUserName}} />
+        <CardView cardInfo={{cardNumbers, expirationDate, userName, cardBrand}} />
+        <InputForm cardInfo={{cardNumbers, expirationDate, userName, cardBrand}} handleInput={{setCardNumbers, setExpirationDate, setUserName, setCardBrand}} />
         {submitButtonFlag && <button>제출</button>}
       </Container>
     </Page>

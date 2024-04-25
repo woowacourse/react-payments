@@ -4,6 +4,7 @@ import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
 import { CARD_CONFIG } from '../constants/system';
+import { CARD_BRAND } from '../constants/cardBrand';
 
 const CardContainer = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const CardContainer = styled.div`
   height: 130px;
   padding: 15px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${(props) => props.color};
   color: white;
   font-size: 14px;
   font-weight: 500;
@@ -69,7 +70,7 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
   const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1.value);
   return (
     <>
-      <CardContainer>
+      <CardContainer color={CARD_BRAND[cardInfo.cardBrand.cardBrand.value] || '#333333'}>
         <ImgBox>
           <CardImg src={CardChip} />
           {cardImgSrc && <CardImg src={cardImgSrc} />}

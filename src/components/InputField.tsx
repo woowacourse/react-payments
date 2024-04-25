@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100px;
+  /* height: 100px; */
 `;
 
 const Label = styled.p`
@@ -17,7 +17,7 @@ const InputBox = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 2rem;
+  /* height: 2rem; */
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 8px;

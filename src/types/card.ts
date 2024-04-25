@@ -12,6 +12,7 @@ export interface CardInfo {
   cardNumbers : CardNumbers;
   expirationDate : ExpirationDate;
   userName : UserName;
+  cardBrand : CardBrand;
 }
 
 export interface State {
@@ -35,5 +36,9 @@ export interface ExpirationDate {
 
 export interface UserName { 
   userName : State
+}
+
+export interface CardBrand{
+  cardBrand : State
 }
 
