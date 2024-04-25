@@ -42,31 +42,24 @@ const CardRegisterPage = () => {
   const validExpiryDateSection = isSectionValid('cardCompany');
   const validCardCompanySection = isSectionValid('cardNumber');
 
+  const previewProps = {
+    cardNumbers: cardNumberInfo.value,
+    expiryDate: { month: expiryDateInfo.month.value, year: expiryDateInfo.year.value },
+    cardholderName: cardholderNameInfo.value,
+    cardType: cardCompanyInfo.value,
+    cvc: cardCVCInfo.value,
+    isCardFront: cardCVCInfo.isCardFront,
+  };
+
   return (
     <AppLayout>
-      <CardPreview
-        cardNumbers={cardNumberInfo.value}
-        expiryDate={{ month: expiryDateInfo.month.value, year: expiryDateInfo.year.value }}
-        cardholderName={cardholderNameInfo.value}
-        cardType={cardCompanyInfo.value}
-        cvc={cardCVCInfo.value}
-        isCardFront={cardCVCInfo.isCardFront}
-      />
+      <CardPreview {...previewProps} />
       <CardInfoWrapper>
-        {validPasswordSection && (
-          <CardPasswordContainer password={cardPasswordInfo.value} {...cardPasswordInfo} />
-        )}
-        {validCVCSection && <CardCVCContainer cvc={cardCVCInfo.value} {...cardCVCInfo} />}
-        {validCardholderNameSection && (
-          <CardholderNameContainer
-            cardholderName={cardholderNameInfo.value}
-            {...cardholderNameInfo}
-          />
-        )}
+        {validPasswordSection && <CardPasswordContainer {...cardPasswordInfo} />}
+        {validCVCSection && <CardCVCContainer {...cardCVCInfo} />}
+        {validCardholderNameSection && <CardholderNameContainer {...cardholderNameInfo} />}
         {validExpiryDateSection && <CardExpiryDateContainer {...expiryDateInfo} />}
-        {validCardCompanySection && (
-          <CardCompanyContainer cardCompany={cardCompanyInfo.value} {...cardCompanyInfo} />
-        )}
+        {validCardCompanySection && <CardCompanyContainer {...cardCompanyInfo} />}
         <CardNumberContainer cardNumbers={cardNumberInfo.value} {...cardNumberInfo} />
       </CardInfoWrapper>
       {isCardFormValid && <SubmitButton onClick={handleClickNextPage}>확인</SubmitButton>}

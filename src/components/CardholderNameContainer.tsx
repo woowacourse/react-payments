@@ -4,7 +4,7 @@ import InputField from './common/InputField';
 import { ErrorDetail } from '../types/error';
 
 interface CardholderNameContainerProps {
-  cardholderName: string;
+  value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   handleBlur: () => void;
@@ -12,7 +12,7 @@ interface CardholderNameContainerProps {
 }
 
 const CardholderNameContainer = ({
-  cardholderName,
+  value,
   handleChange,
   handleBlur,
   handleKeyDown,
@@ -28,7 +28,7 @@ const CardholderNameContainer = ({
         <Input
           id="cardholder-name-input"
           isError={errorInfo.isError}
-          value={cardholderName}
+          value={value}
           onChange={handleChange}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}

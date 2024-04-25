@@ -4,14 +4,14 @@ import InputField from './common/InputField';
 import { ErrorDetail } from '../types/error';
 
 interface CardPasswordContainerProps {
-  password: string;
+  value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateErrorMessage: () => void;
   errorInfo: ErrorDetail;
 }
 
 const CardPasswordContainer = ({
-  password,
+  value,
   handleChange,
   updateErrorMessage,
   errorInfo,
@@ -27,7 +27,7 @@ const CardPasswordContainer = ({
         <Input
           id="card-password-input"
           isError={errorInfo.isError}
-          value={password}
+          value={value}
           onChange={handleChange}
           onBlur={updateErrorMessage}
           width="100%"
