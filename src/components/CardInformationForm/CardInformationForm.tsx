@@ -1,5 +1,11 @@
 import { Form } from './style';
-import { CardBrandField, CardNumbersField, ExpirationDateField, UserNameField } from '../FormField';
+import {
+  CVCNumberField,
+  CardBrandField,
+  CardNumbersField,
+  ExpirationDateField,
+  UserNameField,
+} from '../FormField';
 
 import {
   CardNumberErrorState,
@@ -30,6 +36,11 @@ interface CardInformationFormProps {
     cardBrandState: string | null;
     setCardBrandState: React.Dispatch<React.SetStateAction<string | null>>;
   };
+  cvcNumber: {
+    cvcNumberState: string;
+    setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isCVCNumberError: boolean;
+  };
 }
 
 const CardInformationForm = ({
@@ -37,6 +48,7 @@ const CardInformationForm = ({
   expirationDate,
   userName,
   cardBrand,
+  cvcNumber,
 }: CardInformationFormProps) => {
   return (
     <Form>
@@ -44,6 +56,7 @@ const CardInformationForm = ({
       <CardBrandField {...cardBrand} />
       <ExpirationDateField {...expirationDate} />
       <UserNameField {...userName} />
+      <CVCNumberField {...cvcNumber} />
     </Form>
   );
 };

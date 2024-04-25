@@ -9,6 +9,7 @@ function App() {
     expirationDate: [],
     userName: '',
     cardBrand: null,
+    cvcNumber: '',
   });
 
   return (

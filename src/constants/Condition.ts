@@ -2,6 +2,7 @@ const MAX_LENGTH = {
   cardNumber: 4,
   expirationDate: 2,
   userName: 20,
+  cvcNumber: 3,
 } as const;
 
 const REG_EXP = {
@@ -20,6 +21,10 @@ const REG_EXP = {
   userName: {
     valid: /^[a-zA-Z\s]+$/,
     invalid: /[^a-zA-Z\s]+/,
+  },
+  cvcNumber: {
+    valid: /^\d+$/,
+    invalid: /[^\d+$]/g,
   },
 } as const;
 

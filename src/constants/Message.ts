@@ -3,6 +3,7 @@ const TITLE = {
   expirationDate: '카드 유효기간을 입력해 주세요',
   userName: '카드 소유자 이름을 입력해 주세요',
   cardBrand: '카드사를 선택해 주세요',
+  cvcNumber: 'CVC 번호를 입력해 주세요',
 } as const;
 
 const CAPTION = {
@@ -15,6 +16,7 @@ const LABEL = {
   cardNumber: '카드 번호',
   expirationDate: '유효기간',
   userName: '소유자 이름',
+  cvcNumber: 'cvc',
 } as const;
 
 const ERROR = {
@@ -22,6 +24,7 @@ const ERROR = {
   month: '01~12 사이의 숫자를 입력해주세요.',
   year: '2자리 숫자를 입력해주세요.',
   userName: '성과 이름을 띄어쓰기를 포함한 대문자로만 입력해주세요.',
+  cvcNumber: 'CVC 숫자는 3자리 숫자이어야합니다.',
 } as const;
 
 const PLACEHOLDER = {
@@ -30,6 +33,7 @@ const PLACEHOLDER = {
   year: 'YY',
   userName: 'JOHN DAE',
   cardBrand: '카드사를 선택해주세요',
+  cvcNumber: 'CVC 숫자를 입력해주세요.',
 } as const;
 
 const MESSAGE = {

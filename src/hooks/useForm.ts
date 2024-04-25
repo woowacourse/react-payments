@@ -1,3 +1,4 @@
+import useCVCNumber from './useCVCNumber';
 import useCardBrand from './useCardBrand';
 import useCardNumbers from './useCardNumbers';
 import useExpirationDate from './useExpirationDate';
@@ -8,6 +9,7 @@ interface FormState {
   expirationDate: string[];
   userName: string;
   cardBrand: null;
+  cvcNumber: string;
 }
 
 const useForm = (defaultValues: FormState) => {
@@ -17,6 +19,9 @@ const useForm = (defaultValues: FormState) => {
     useExpirationDate(defaultValues.expirationDate);
   const { userNameState, setUserNameState, isUserNameError } = useUserName(defaultValues.userName);
   const { cardBrandState, setCardBrandState } = useCardBrand(defaultValues.cardBrand);
+  const { cvcNumberState, setCVCNumberState, isCVCNumberError } = useCVCNumber(
+    defaultValues.cvcNumber,
+  );
 
   const previewProps = {
     cardNumberState,
@@ -45,6 +50,11 @@ const useForm = (defaultValues: FormState) => {
     cardBrand: {
       cardBrandState,
       setCardBrandState,
+    },
+    cvcNumber: {
+      cvcNumberState,
+      setCVCNumberState,
+      isCVCNumberError,
     },
   };
 
