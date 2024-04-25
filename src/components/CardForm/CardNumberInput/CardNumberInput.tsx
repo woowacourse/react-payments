@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -18,22 +16,13 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
-  const [isClicked, setIsClicked] = useState([false, false, false, false]);
-
-  const { value: cardNumbersInput, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
+  const { value: cardNumbersInput, isClicked, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
   const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
-    }
-
-    if (!isClicked[inputIndex]) {
-      const newIsClicked = [...isClicked];
-      newIsClicked[inputIndex] = true;
-
-      setIsClicked(newIsClicked);
     }
 
     onCardNumbersInputChange(e, inputIndex);

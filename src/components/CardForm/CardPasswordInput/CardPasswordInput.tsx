@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -14,16 +12,13 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordInputProps) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const { value: passwordInput, onChange: onPasswordInputChange } = useInput(password);
+  const { value: passwordInput, isClicked, onChange: onPasswordInputChange } = useInput(password);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
     }
-
-    if (!isClicked) setIsClicked(true);
 
     onPasswordInputChange(e);
     handlePassword(e.target.value);

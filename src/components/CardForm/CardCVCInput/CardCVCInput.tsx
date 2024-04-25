@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -15,17 +13,13 @@ interface CardCVCInputProps {
 }
 
 const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInputProps) => {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const { value: cvcInput, onChange: onCVCInputChange } = useInput(cvc);
+  const { value: cvcInput, isClicked, onChange: onCVCInputChange } = useInput(cvc);
 
   const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
     }
-
-    if (!isClicked) setIsClicked(true);
 
     onCVCInputChange(e);
     handleCVC(e.target.value);

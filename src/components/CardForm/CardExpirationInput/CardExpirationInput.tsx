@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -20,19 +18,18 @@ interface CardExpirationInputProps {
 }
 
 function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: CardExpirationInputProps) {
-  const [isClicked, setIsClicked] = useState([false, false]);
+  const { value: monthInput, isClicked: isMonthClicked, onChange: onMonthInputChange } = useInput(month);
+  const { value: yearInput, isClicked: isYearClicked, onChange: onYearInputChange } = useInput(year);
 
-  const { value: monthInput, onChange: onMonthInputChange } = useInput(month);
-  const { value: yearInput, onChange: onYearInputChange } = useInput(year);
   const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
+
+  const isClicked = [isMonthClicked, isYearClicked];
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
       return;
     }
-
-    if (!isClicked[0]) setIsClicked((prev) => [true, prev[1]]);
 
     onMonthInputChange(e);
     handleMonth(e.target.value);
@@ -45,8 +42,6 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       e.target.value = '';
       return;
     }
-
-    if (!isClicked[1]) setIsClicked((prev) => [prev[0], true]);
 
     onYearInputChange(e);
     handleYear(e.target.value);

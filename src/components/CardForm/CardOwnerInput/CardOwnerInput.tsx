@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
@@ -16,12 +14,9 @@ interface CardOwnerInputProps {
 }
 
 function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
-  const [isClicked, setIsClicked] = useState(false);
-  const { value: ownerInput, onChange: onOwnerInputChange } = useInput(owner);
+  const { value: ownerInput, isClicked, onChange: onOwnerInputChange } = useInput(owner);
 
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isClicked) setIsClicked(true);
-
     onOwnerInputChange(e);
     handleOwner(e.target.value.toUpperCase());
   };
