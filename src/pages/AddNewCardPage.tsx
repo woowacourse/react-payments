@@ -7,17 +7,12 @@ import CardOwnerNameInputField from '../components/Field/CardOwnerNameInputField
 import CardPasswordInputField from '../components/Field/CardPasswordInputField/CardPasswordInputField';
 import ShelfHeader from '../components/ShelfHeader/ShelfHeader';
 import ShelfSection from '../components/ShelfSection/ShelfSection';
+import BottomButton from '../components/common/BottomButton/BottomButton';
 import useAddNewCardForm from '../hooks/useAddNewCardForm';
 
 const AddNewCardPage = () => {
   const { values, errorMessage, handlers, showCase, completeList } = useAddNewCardForm();
-  /**
-   * 이러면 모든 유효성 검사(옳지 않더라도)에서 showcase가실행되게 된다.
-   *
-   * 그럼 어떻게 아는가?
-   *
-   * errorMessage가 다 비어있다면 showCase를 실행해야한다.
-   */
+
   return (
     <div>
       <CardPreview
@@ -87,6 +82,7 @@ const AddNewCardPage = () => {
           />
         </ShelfSection>
       )}
+      <div>{Object.values(completeList).every((isValid) => isValid === true) && <BottomButton name='확인' />}</div>
     </div>
   );
 };
