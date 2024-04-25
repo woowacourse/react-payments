@@ -15,6 +15,7 @@ export default function CardExpirationDateInputField({
   handleExpirationDateChange,
   errorMessages,
 }: CardExpirationDateInputField) {
+  // TODO: 단일 ref로 변경
   const inputRefs = useRef<HTMLInputElement[] | null[]>([]);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function CardExpirationDateInputField({
       <div className={styles.label}>유효기간</div>
       <div className={styles.horizon__gap__container}>
         <Input
-          ref={(e) => (inputRefs.current[0] = e)}
+          autoFocus
           onChange={handleExpirationDateChange('month')}
           placeholder={DATE_PLACEHOLDER.MONTH}
           maxLength={2}
