@@ -36,7 +36,7 @@ const validateOwnerNameOnBlur = (inputValue: string) => {
   }
 };
 
-interface CardOwnerNameProps {
+interface CardOwnerNameInputProps {
   cardOwnerName: string;
   errorState: { isError: boolean; errorMessage: string };
   onChange: (inputValue: string) => void;
@@ -49,12 +49,12 @@ interface CardOwnerNameProps {
   }) => void;
 }
 
-export default function CardOwnerName({
+export default function CardOwnerNameInput({
   cardOwnerName,
   errorState,
   onChange,
   updateErrorState,
-}: CardOwnerNameProps) {
+}: CardOwnerNameInputProps) {
   const onOwnerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       validateOwnerNameOnChange(event.target.value);

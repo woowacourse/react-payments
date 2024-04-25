@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import CardExpirationDate from "../components/payment/CardEnrollForm/CardExpirationDate";
+import CardExpirationDateInput from "../components/payment/CardEnrollForm/CardExpirationDateInput";
 import { useState } from "react";
 
-const meta: Meta<typeof CardExpirationDate> = {
-  component: CardExpirationDate,
+const meta: Meta<typeof CardExpirationDateInput> = {
+  component: CardExpirationDateInput,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardExpirationDate>;
+type Story = StoryObj<typeof CardExpirationDateInput>;
 
 export const Default: Story = {
   render: ({ ...args }) => {
@@ -25,7 +25,7 @@ export const Default: Story = {
     };
 
     return (
-      <CardExpirationDate
+      <CardExpirationDateInput
         {...args}
         cardExpirationMonth={cardInformation.cardExpirationMonth}
         cardExpirationYear={cardInformation.cardExpirationYear}

@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import CardOwnerName from "../components/payment/CardEnrollForm/CardOwnerName";
+import CardOwnerNameInput from "../components/payment/CardEnrollForm/CardOwnerNameInput";
 import { useState } from "react";
 
-const meta: Meta<typeof CardOwnerName> = {
-  component: CardOwnerName,
+const meta: Meta<typeof CardOwnerNameInput> = {
+  component: CardOwnerNameInput,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardOwnerName>;
+type Story = StoryObj<typeof CardOwnerNameInput>;
 
 export const Default: Story = {
   args: {
@@ -27,7 +27,7 @@ export const Default: Story = {
     };
 
     return (
-      <CardOwnerName
+      <CardOwnerNameInput
         {...args}
         cardOwnerName={cardInformation.cardOwnerName}
         onChange={inputHandler}

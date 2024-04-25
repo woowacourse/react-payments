@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import CardCVCInput from "./CardCVCInput";
-import CardExpirationDate from "./CardExpirationDate";
+import CardExpirationDateInput from "./CardExpirationDateInput";
 import { CardInformation } from "../../../types/cardInformation";
 import { CardIssuer } from "../../../constants/cardIssuers";
 import CardIssuerSelect from "./CardIssuerSelect";
 import CardNumbersInput from "./CardNumbersInput";
-import CardOwnerName from "./CardOwnerName";
+import CardOwnerNameInput from "./CardOwnerNameInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardPreview from "./CardPreview";
 import FormSubmitButton from "./FormSubmitButton";
@@ -225,13 +225,13 @@ export default function CardEnrollForm() {
           onChange={onCardNumbersChange}
           updateErrorState={updateCardNumbersErrorState}
         />
-        <CardExpirationDate
+        <CardExpirationDateInput
           cardExpiration={cardInformation.cardExpiration}
           errorState={errorState.cardExpiration}
           onChange={onCardExpirationChange}
           updateErrorState={updateCardExpirationErrorState}
         />
-        <CardOwnerName
+        <CardOwnerNameInput
           cardOwnerName={cardInformation.cardOwnerName}
           errorState={errorState.cardOwnerName}
           onChange={onCardOwnerNameChange}

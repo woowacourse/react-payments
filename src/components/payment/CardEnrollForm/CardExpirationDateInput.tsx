@@ -57,7 +57,7 @@ const validateExpirationYearOnBlur = (expirationYear: string) => {
   }
 };
 
-interface CardExpirationDateProps {
+interface CardExpirationDateInputProps {
   cardExpiration: CardInformation["cardExpiration"];
   errorState: {
     isError: { month: boolean; year: boolean };
@@ -73,12 +73,12 @@ interface CardExpirationDateProps {
   }) => void;
 }
 
-export default function CardExpirationDate({
+export default function CardExpirationDateInput({
   cardExpiration,
   errorState,
   onChange,
   updateErrorState,
-}: CardExpirationDateProps) {
+}: CardExpirationDateInputProps) {
   const onExpirationMonthChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
