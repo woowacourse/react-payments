@@ -46,6 +46,7 @@ const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInpu
           onFocus={() => handleIsCVCInput(true)}
           onBlur={() => handleIsCVCInput(false)}
           onChange={handleCVCChange}
+          autoFocus
         />
       </InputField>
     </div>

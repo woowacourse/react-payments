@@ -12,7 +12,7 @@ export const CardPreviewBoxWrapper = styled.section`
 
 export const CardForm = styled.section`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   row-gap: 16px;
   margin-top: 45px;
 `;

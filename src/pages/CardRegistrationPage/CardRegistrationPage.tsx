@@ -54,7 +54,7 @@ const CardRegistrationPage = () => {
     isPasswordValid,
   ];
 
-  const { inputComponentIndex } = useMoveNextInput(5, validationList);
+  const { inputComponentIndex } = useMoveNextInput(0, validationList);
 
   const isButtonActive = validationList.every(Boolean);
 
@@ -62,9 +62,8 @@ const CardRegistrationPage = () => {
 
   const renderInputComponents = (inputComponentIndex: number) => {
     const inputComponents = [
-      <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />,
-      <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
-      <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />,
+      <CardNumberInput cardNumbers={cardNumbers} isValid={isCardNumbersValid} handleCardNumbers={handleCardNumbers} />,
+      <CardCompanyInput company={company} handleCompany={handleCompany} />,
       <CardExpirationInput
         month={month}
         year={year}
@@ -72,12 +71,13 @@ const CardRegistrationPage = () => {
         handleMonth={handleMonth}
         handleYear={handleYear}
       />,
-      <CardCompanyInput company={company} handleCompany={handleCompany} />,
-      <CardNumberInput cardNumbers={cardNumbers} isValid={isCardNumbersValid} handleCardNumbers={handleCardNumbers} />,
+      <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />,
+      <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
+      <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />,
     ];
 
     return inputComponents
-      .filter((_, index) => index >= inputComponentIndex)
+      .filter((_, index) => index <= inputComponentIndex)
       .map((component, index) => React.cloneElement(component, { key: index }));
   };
 

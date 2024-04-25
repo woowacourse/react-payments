@@ -42,6 +42,7 @@ const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordIn
           value={passwordInput}
           maxLength={2}
           onChange={handlePasswordChange}
+          autoFocus
         />
       </InputField>
     </div>

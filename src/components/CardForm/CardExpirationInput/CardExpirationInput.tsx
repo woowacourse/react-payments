@@ -69,6 +69,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
           isValid={isMonthClicked ? isValid[0] : true}
+          autoFocus
         />
         <Input
           type="text"

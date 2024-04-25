@@ -43,6 +43,7 @@ function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
           value={ownerInput}
           onChange={handleOwnerChange}
           isValid={isClicked ? isValid : true}
+          autoFocus
         />
       </InputField>
     </div>

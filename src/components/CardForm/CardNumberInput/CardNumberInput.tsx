@@ -55,6 +55,7 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
             value={cardNumbersInput[index]}
             onChange={handleCardNumberChange(index)}
             isValid={isClicked[index] ? isValid[index] : true}
+            autoFocus={index === 0}
           />
         ))}
       </InputField>
