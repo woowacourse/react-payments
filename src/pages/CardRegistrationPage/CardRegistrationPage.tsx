@@ -11,7 +11,7 @@ import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardP
 
 import useValidatedInput from '../../hooks/useValidatedInput';
 import useValidatedInputs from '../../hooks/useValidatedInputs';
-import useMoveNextInput from '../../hooks/useMoveNextInput';
+import useAutoMoveIndex from '../../hooks/useAutoMoveIndex';
 
 import {
   validateCompany,
@@ -54,7 +54,7 @@ const CardRegistrationPage = () => {
     isPasswordValid,
   ];
 
-  const { inputComponentIndex } = useMoveNextInput(0, validationList);
+  const { moveIndex } = useAutoMoveIndex(0, validationList);
 
   const isButtonActive = validationList.every(Boolean);
 
@@ -75,16 +75,14 @@ const CardRegistrationPage = () => {
           />
         </S.CardPreviewBoxWrapper>
         <S.CardForm>
-          {inputComponentIndex >= 5 && (
+          {moveIndex >= 5 && (
             <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />
           )}
-          {inputComponentIndex >= 4 && (
+          {moveIndex >= 4 && (
             <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
           )}
-          {inputComponentIndex >= 3 && (
-            <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />
-          )}
-          {inputComponentIndex >= 2 && (
+          {moveIndex >= 3 && <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />}
+          {moveIndex >= 2 && (
             <CardExpirationInput
               month={month}
               year={year}
@@ -93,7 +91,7 @@ const CardRegistrationPage = () => {
               handleYear={handleYear}
             />
           )}
-          {inputComponentIndex >= 1 && <CardCompanyInput company={company} handleCompany={handleCompany} />}
+          {moveIndex >= 1 && <CardCompanyInput company={company} handleCompany={handleCompany} />}
           <CardNumberInput
             cardNumbers={cardNumbers}
             isValid={isCardNumbersValid}

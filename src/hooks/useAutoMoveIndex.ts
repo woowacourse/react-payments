@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useMoveNextInput = (defaultIndex: number, validationList: boolean[]) => {
+const useAutoMoveIndex = (defaultIndex: number, validationList: boolean[]) => {
   const [index, setIndex] = useState(defaultIndex);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ const useMoveNextInput = (defaultIndex: number, validationList: boolean[]) => {
 
   const handleIndex = (nextIndex: number) => nextIndex > index && setIndex(nextIndex);
 
-  return { inputComponentIndex: index, handleInputComponentIndex: handleIndex };
+  return { moveIndex: index };
 };
 
-export default useMoveNextInput;
+export default useAutoMoveIndex;
