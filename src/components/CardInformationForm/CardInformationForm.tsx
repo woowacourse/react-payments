@@ -40,6 +40,7 @@ interface CardInformationFormProps {
     cvcNumberState: string;
     setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isCVCNumberError: boolean;
+    toggleIsFocusCVCPreview: React.DispatchWithoutAction;
   };
 }
 

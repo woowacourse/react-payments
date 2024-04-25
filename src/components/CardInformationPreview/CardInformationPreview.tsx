@@ -12,6 +12,8 @@ interface CardInformationPreviewProps {
   userNameState: string;
   showImageCondition: ShowImageCondition;
   cardBrandState: string | null;
+  cvcNumberState: string;
+  isFocusCVCPreview: boolean;
 }
 
 const CARD_BRAND_BACKGROUND: Record<string, string> = {
@@ -32,6 +34,8 @@ const CardInformationPreview = ({
   userNameState,
   showImageCondition,
   cardBrandState,
+  cvcNumberState,
+  isFocusCVCPreview,
 }: CardInformationPreviewProps) => {
   const { first, second, third, fourth } = cardNumberState;
   const { month, year } = expirationDateState;
@@ -39,34 +43,44 @@ const CardInformationPreview = ({
   const { visaShowCondition, masterCardShowCondition } = showImageCondition;
 
   return (
-    <Preview.Container $brandColor={CARD_BRAND_BACKGROUND[cardBrandState ?? 'default']}>
-      <Preview.ImgContainer>
-        <Preview.CardImg src={magnetic} alt="" />
-        {masterCardShowCondition && <Preview.CardImg src={masterCard} alt="masterCard" />}
-        {visaShowCondition && <Preview.CardImg src={visa} alt="visa" />}
-      </Preview.ImgContainer>
-      <Preview.UserInformationContainer>
-        <Preview.CardNumberContainer>
-          <Preview.UserInformation $typo={theme.typography.paragraph1}>
-            {first}
+    <Preview.Container>
+      <Preview.CardFront
+        $brandColor={CARD_BRAND_BACKGROUND[cardBrandState ?? 'default']}
+        $isFocusCVCPreview={isFocusCVCPreview}
+      >
+        <Preview.ImgContainer>
+          <Preview.CardImg src={magnetic} alt="" />
+          {masterCardShowCondition && <Preview.CardImg src={masterCard} alt="masterCard" />}
+          {visaShowCondition && <Preview.CardImg src={visa} alt="visa" />}
+        </Preview.ImgContainer>
+        <Preview.UserInformationContainer>
+          <Preview.CardNumberContainer>
+            <Preview.UserInformation $typo={theme.typography.paragraph1}>
+              {first}
+            </Preview.UserInformation>
+            <Preview.UserInformation $typo={theme.typography.paragraph1}>
+              {second}
+            </Preview.UserInformation>
+            <Preview.UserInformation $typo={theme.typography.paragraph1}>
+              {CONDITION.hiddenCardNumber.repeat(String(third ?? '').length)}
+            </Preview.UserInformation>
+            <Preview.UserInformation $typo={theme.typography.paragraph1}>
+              {CONDITION.hiddenCardNumber.repeat(String(fourth ?? '').length)}
+            </Preview.UserInformation>
+          </Preview.CardNumberContainer>
+          <Preview.UserInformation $typo={theme.typography.paragraph2}>
+            {`${month ?? ''}${slashViewCondition ? CONDITION.splitSlash : ''}${year ?? ''}`}
           </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.paragraph1}>
-            {second}
+          <Preview.UserInformation $typo={theme.typography.paragraph2}>
+            {userNameState ?? ''}
           </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.paragraph1}>
-            {CONDITION.hiddenCardNumber.repeat(String(third ?? '').length)}
-          </Preview.UserInformation>
-          <Preview.UserInformation $typo={theme.typography.paragraph1}>
-            {CONDITION.hiddenCardNumber.repeat(String(fourth ?? '').length)}
-          </Preview.UserInformation>
-        </Preview.CardNumberContainer>
-        <Preview.UserInformation $typo={theme.typography.paragraph2}>
-          {`${month ?? ''}${slashViewCondition ? CONDITION.splitSlash : ''}${year ?? ''}`}
-        </Preview.UserInformation>
-        <Preview.UserInformation $typo={theme.typography.paragraph2}>
-          {userNameState ?? ''}
-        </Preview.UserInformation>
-      </Preview.UserInformationContainer>
+        </Preview.UserInformationContainer>
+      </Preview.CardFront>
+      <Preview.CardBack $isFocusCVCPreview={isFocusCVCPreview}>
+        <Preview.CVCNumber $brandColor={CARD_BRAND_BACKGROUND[cardBrandState ?? 'default']}>
+          {cvcNumberState}
+        </Preview.CVCNumber>
+      </Preview.CardBack>
     </Preview.Container>
   );
 };

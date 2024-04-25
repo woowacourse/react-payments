@@ -19,9 +19,13 @@ const useForm = (defaultValues: FormState) => {
     useExpirationDate(defaultValues.expirationDate);
   const { userNameState, setUserNameState, isUserNameError } = useUserName(defaultValues.userName);
   const { cardBrandState, setCardBrandState } = useCardBrand(defaultValues.cardBrand);
-  const { cvcNumberState, setCVCNumberState, isCVCNumberError } = useCVCNumber(
-    defaultValues.cvcNumber,
-  );
+  const {
+    cvcNumberState,
+    setCVCNumberState,
+    isCVCNumberError,
+    isFocusCVCPreview,
+    toggleIsFocusCVCPreview,
+  } = useCVCNumber(defaultValues.cvcNumber);
 
   const previewProps = {
     cardNumberState,
@@ -29,6 +33,8 @@ const useForm = (defaultValues: FormState) => {
     userNameState,
     showImageCondition,
     cardBrandState,
+    cvcNumberState,
+    isFocusCVCPreview,
   };
 
   const formProps = {
@@ -55,6 +61,7 @@ const useForm = (defaultValues: FormState) => {
       cvcNumberState,
       setCVCNumberState,
       isCVCNumberError,
+      toggleIsFocusCVCPreview,
     },
   };
 

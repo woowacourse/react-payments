@@ -11,13 +11,21 @@ interface CVCNumberProps {
   cvcNumberState: string;
   setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isCVCNumberError: boolean;
+  toggleIsFocusCVCPreview: React.DispatchWithoutAction;
 }
 
-const CVCNumber = ({ cvcNumberState, setCVCNumberState, isCVCNumberError }: CVCNumberProps) => {
+const CVCNumber = ({
+  cvcNumberState,
+  setCVCNumberState,
+  isCVCNumberError,
+  toggleIsFocusCVCPreview,
+}: CVCNumberProps) => {
   return (
     <FormField title={TITLE.cvcNumber}>
       <InputField label={LABEL.cvcNumber} error={isCVCNumberError ? ERROR.cvcNumber : ''}>
         <Input
+          onBlur={toggleIsFocusCVCPreview}
+          onFocus={toggleIsFocusCVCPreview}
           aria-label="소유자_이름"
           placeholder={PLACEHOLDER.cvcNumber}
           value={cvcNumberState}
