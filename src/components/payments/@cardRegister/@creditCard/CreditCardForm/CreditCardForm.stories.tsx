@@ -2,6 +2,8 @@ import CreditCardForm from '@components/payments/@cardRegister/@creditCard/Credi
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { BrowserRouter } from 'react-router-dom';
+
 const meta = {
   title: 'Payments/CreditCardForm',
   component: CreditCardForm,
@@ -13,7 +15,15 @@ const meta = {
       },
     },
   },
-
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <div className="app">
+          <Story />
+        </div>
+      </BrowserRouter>
+    ),
+  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof CreditCardForm>;
 
