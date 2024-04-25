@@ -1,4 +1,4 @@
-import { CardExpiredDate, CardIssuer, CardNumbers } from '../type';
+import { CardExpiredDate, CardNumbers } from '../type';
 
 import BottomButton from './BottomButton';
 import CardForm from './CardForm';
@@ -6,6 +6,7 @@ import CardPreview from './CardPreview';
 import { Link } from 'react-router-dom';
 import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
 import { UseCardHolder } from '../hooks/useCardHolder';
+import { UseCardIssuer } from '../hooks/useCardIssuer';
 import { UseCardNumbers } from '../hooks/useCardNumbers';
 import styled from '@emotion/styled';
 
@@ -13,21 +14,21 @@ interface Props {
   useCardNumbers: UseCardNumbers;
   useCardExpiredDate: UseCardExpiredDate;
   useCardHolder: UseCardHolder;
-  cardIssuer: CardIssuer;
+  useCardIssuer: UseCardIssuer;
   setPath: () => void;
 }
 
-function PayMents({
+function Payments({
   useCardNumbers,
   useCardExpiredDate,
   useCardHolder,
-  cardIssuer,
+  useCardIssuer,
   setPath,
 }: Props) {
   setPath();
   const cardInfo = {
     cardNumbers: useCardNumbers.cardNumbers as CardNumbers,
-    cardIssuer,
+    cardIssuer: useCardIssuer.issuer,
     expiredDate: useCardExpiredDate.expiredDate as CardExpiredDate,
     cardHolder: useCardHolder.holder,
   };
@@ -43,6 +44,7 @@ function PayMents({
         useCardNumbers={useCardNumbers}
         useCardExpiredDate={useCardExpiredDate}
         useCardHolder={useCardHolder}
+        useCardIssuer={useCardIssuer}
       />
       {isValid && (
         <Link to='/complete-payment-register'>
@@ -53,7 +55,7 @@ function PayMents({
   );
 }
 
-export default PayMents;
+export default Payments;
 
 const PaymentsContainer = styled.section({
   position: 'relative',
