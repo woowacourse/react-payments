@@ -1,13 +1,21 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 // import INPUT_TYPE_CATEGORIES from '../constants/inputType';
-import { CardBrand, CardInfo, CardNumbers, ExpirationDate, UserName } from '../types/card';
+import {
+  CardBrand,
+  CardInfo,
+  CardNumbers,
+  CVC,
+  ExpirationDate,
+  UserName,
+} from "../types/card";
 // import InputField from './InputField';
-import CardNumberInput from './CardNumberInput';
-import ExpirationDateInput from './ExpirationDateInput';
-import UserNameInput from './UserNameInput';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { ShowComponents } from '../types/showCompents';
-import CardDropDown from './CardDropDown';
+import CardNumberInput from "./CardNumberInput";
+import ExpirationDateInput from "./ExpirationDateInput";
+import UserNameInput from "./UserNameInput";
+import { Dispatch, SetStateAction, useState } from "react";
+import { ShowComponents } from "../types/showCompents";
+import CardDropDown from "./CardDropDown";
+import CVCInput from "./CVCInput";
 
 const FormContainer = styled.div`
   display: flex;
@@ -16,31 +24,71 @@ const FormContainer = styled.div`
 `;
 
 interface HandleInput {
-  setCardNumbers: Dispatch<SetStateAction<CardNumbers>>
-  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>
-  setUserName: Dispatch<SetStateAction<UserName>>
-  setCardBrand : Dispatch<SetStateAction<CardBrand>>
+  setCardNumbers: Dispatch<SetStateAction<CardNumbers>>;
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
+  setUserName: Dispatch<SetStateAction<UserName>>;
+  setCardBrand: Dispatch<SetStateAction<CardBrand>>;
 
+  setCVC: Dispatch<SetStateAction<CVC>>;
 }
 
 export default function InputForm({
-  cardInfo : {cardNumbers, expirationDate, userName, cardBrand},
-  handleInput : {setCardNumbers, setExpirationDate, setUserName, setCardBrand},
+  cardInfo: { cardNumbers, expirationDate, userName, cardBrand, CVC },
+  handleInput: {
+    setCardNumbers,
+    setExpirationDate,
+    setUserName,
+    setCardBrand,
+    setCVC,
+  },
 }: {
   cardInfo: CardInfo;
-  handleInput: HandleInput
+  handleInput: HandleInput;
 }) {
-  const [showComponent, setShowComponent] = useState<ShowComponents>({cardNumberInput : true, cardDropDown:false, expirationDateInput: false, userNameInput: false})
+  const [showComponent, setShowComponent] = useState<ShowComponents>({
+    cardNumberInput: true,
+    cardDropDown: false,
+    expirationDateInput: false,
+    userNameInput: false,
+    CVCInput: false,
+  });
   return (
     <FormContainer>
-      {showComponent.userNameInput && <UserNameInput userName = {userName} handleInput={setUserName} handleShowComponent = {setShowComponent}/>}  
-      {showComponent.expirationDateInput && <ExpirationDateInput expirationDate={expirationDate} handleInput={setExpirationDate} handleShowComponent = {setShowComponent}/>}
-      {showComponent.cardDropDown && <CardDropDown cardBrand={cardBrand} handleInput = {setCardBrand} handleShowComponent = {setShowComponent}/>}
-      {showComponent.cardNumberInput && <CardNumberInput
-        cardNumbers={cardNumbers}
-        handleInput={setCardNumbers}
-        handleShowComponent = {setShowComponent}
-      />}
+      {showComponent.CVCInput && (
+        <CVCInput
+          CVC={CVC}
+          handleInput={setCVC}
+          handleShowComponent={setShowComponent}
+        />
+      )}
+      {showComponent.userNameInput && (
+        <UserNameInput
+          userName={userName}
+          handleInput={setUserName}
+          handleShowComponent={setShowComponent}
+        />
+      )}
+      {showComponent.expirationDateInput && (
+        <ExpirationDateInput
+          expirationDate={expirationDate}
+          handleInput={setExpirationDate}
+          handleShowComponent={setShowComponent}
+        />
+      )}
+      {showComponent.cardDropDown && (
+        <CardDropDown
+          cardBrand={cardBrand}
+          handleInput={setCardBrand}
+          handleShowComponent={setShowComponent}
+        />
+      )}
+      {showComponent.cardNumberInput && (
+        <CardNumberInput
+          cardNumbers={cardNumbers}
+          handleInput={setCardNumbers}
+          handleShowComponent={setShowComponent}
+        />
+      )}
     </FormContainer>
   );
 }

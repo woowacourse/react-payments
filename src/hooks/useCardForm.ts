@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { CardNumbers, ExpirationDate, UserName } from '../types/card';
+import { CardNumbers, CVC, ExpirationDate, UserName } from '../types/card';
 
 // 커스텀 훅 정의
-export default function useCardForm({initCardNumber1 = '', initCardNumber2 = '', initCardNumber3 = '', initCardNumber4 = '', initExpirationDate = { month: '', year: ''}, initUserName = '', initCardBrand = ''}) {
+export default function useCardForm({initCardNumber1 = '', initCardNumber2 = '', initCardNumber3 = '', initCardNumber4 = '', initExpirationDate = { month: '', year: ''}, initUserName = '', initCardBrand = '', initCVC = ''}) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     cardNumber1: {value : initCardNumber1, errorMessage: '', isError : false},
     cardNumber2: {value : initCardNumber2, errorMessage: '', isError : false},
@@ -22,6 +22,10 @@ export default function useCardForm({initCardNumber1 = '', initCardNumber2 = '',
     cardBrand : {value: initCardBrand , errorMessage: '', isError: false}
   });
 
+  const [CVC, setCVC] = useState<CVC>({
+    CVC : {value: initCVC , errorMessage: '', isError: false}
+  });
+
   return {
     cardNumbers,
     setCardNumbers,
@@ -30,7 +34,8 @@ export default function useCardForm({initCardNumber1 = '', initCardNumber2 = '',
     userName,
     setUserName,
     cardBrand,
-    setCardBrand
-
+    setCardBrand,
+    CVC,
+    setCVC
   };
 }

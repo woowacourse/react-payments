@@ -5,7 +5,7 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from '../constants/system';
-import { CardNumbers, ExpirationDate, UserName } from '../types/card';
+import { CardNumbers, CVC, ExpirationDate, UserName } from '../types/card';
 
 function checkMaxLength (n : string, maxLength : number){
   if(n.length !== maxLength){
@@ -86,6 +86,10 @@ const Validation: ValidationMap = {
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
+  CVC: (n: string, maxLength:number) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
 
 };
 
@@ -125,6 +129,16 @@ export const validateUserName = (userName : UserName) => {
     throw new Error('')
   }
 }
-
+export const validateCVC = (CVC : CVC) => {
+  const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
+    if(!cur.isError && cur.value !== '' && cur.value.length === 3){
+      return pre + 1;
+    }
+    return pre;
+  }, 0)
+  if(isNotAllError !== 1){
+    throw new Error('')
+  }
+}
 
 export default Validation;

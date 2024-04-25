@@ -4,28 +4,28 @@ import FieldTitle from "./FieldTitle";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
-import { UserName } from "../types/card";
+import { CVC } from "../types/card";
 import { ShowComponents } from "../types/showCompents";
 
 interface Props {
-  userName : UserName
-  handleInput : Dispatch<SetStateAction<UserName>>,
+  CVC : CVC
+  handleInput : Dispatch<SetStateAction<CVC>>,
   handleShowComponent : Dispatch<SetStateAction<ShowComponents>>,
 }
-export default function UserNameInput({userName, handleInput, handleShowComponent} : Props) {
+export default function CVCInput({CVC, handleInput, handleShowComponent} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
   useEffect(() => {
-    const messages = Object.values(userName).map(value => value.errorMessage);
+    const messages = Object.values(CVC).map(value => value.errorMessage);
     setErrorMessages(messages);
-  }, [userName]);
+  }, [CVC]);
 
   useEffect(() => {
     const checkCompleteInput = () => {
-      const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-        if(!cur.isError && cur.value !== '' && cur.value.length === 4){
+      const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
+        if(!cur.isError && cur.value !== '' && cur.value.length === 3){
           return pre + 1;
         }
         return pre;
@@ -35,15 +35,15 @@ export default function UserNameInput({userName, handleInput, handleShowComponen
     if(checkCompleteInput()) {
       handleShowComponent((prev) => ({
         ...prev,
-        CVCInput: true,
+        passWordInput: true,
       }));
     }
-  }, [userName, handleShowComponent]); 
+  }, [CVC, handleShowComponent]); 
 
   const handleUpdateInput = (index: number, value: string) => {
 
-    const cardKey = 'userName' as keyof UserName;
-    handleInput((prevState : UserName) => {
+    const cardKey = 'CVC' as keyof CVC;
+    handleInput((prevState : CVC) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -55,8 +55,8 @@ export default function UserNameInput({userName, handleInput, handleShowComponen
   };
 
   const handleUpdateErrorMessages = (index: number, errorMessage: string, isError: boolean) => {
-    const cardKey = 'userName' as keyof UserName;
-    handleInput((prevState : UserName) => {
+    const cardKey = 'CVC' as keyof CVC;
+    handleInput((prevState : CVC) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -84,22 +84,22 @@ export default function UserNameInput({userName, handleInput, handleShowComponen
   };
 
   const checkInputError = (index : number) => {
-    const cardKey = 'userName' as keyof UserName;
-    return userName[cardKey].isError;
+    const cardKey = 'CVC' as keyof CVC;
+    return CVC[cardKey].isError;
   }
 
   return (
     <> 
-      <FieldTitle title="카드 소유자 이름을 입력해 주세요"/>
-      <InputField label="소유자 이름" count={1} errorMessages={errorMessages}>
+      <FieldTitle title="CVC 번호를 입력해 주세요"/>
+      <InputField label="CVC" count={1} errorMessages={errorMessages}>
       {Array.from({ length: 1 }, (_, index) => (
       <Input
         key={index}
         type="string"
-        maxLength={30}
-        placeholder={'JOHN DOE'}
+        maxLength={3}
+        placeholder={'123'}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'userName', index, 30)}
+        onChange={(e) => handleInputChange(e, 'CVC', index, 3)}
       />
       ))}
       </InputField>
