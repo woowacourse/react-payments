@@ -1,12 +1,13 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-const Input = ({ isError = false, ...rest }: InputProps) => {
-  return <StyledInput $isError={isError} {...rest} />;
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(({ isError = false, ...rest }: InputProps, ref) => {
+  return <StyledInput $isError={isError} ref={ref} {...rest} />;
+});
 
 interface StyledInputProps {
   $isError: boolean;
