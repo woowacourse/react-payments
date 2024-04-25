@@ -11,7 +11,7 @@ const createOptionEl = (values: string[], contents?: string[]) => {
   const optionElements = values.map((value, index) => {
     const content = contents ? contents[index] : value;
 
-    return <option value={value}>{content}</option>;
+    return <Option value={value}>{content}</Option>;
   });
 
   return optionElements;
@@ -31,11 +31,24 @@ const Dropdown = ({
   };
 
   return (
-    <select onChange={onChangeHandler}>
-      <option value="">카드사를 선택해주세요</option>
+    <Select onChange={onChangeHandler}>
+      <Option value="">카드사를 선택해주세요</Option>
       {createOptionEl(values, contents)}
-    </select>
+    </Select>
   );
 };
+
+const Select = styled.select`
+  padding: 7px 5px;
+  width: 100%;
+  border-radius: 5px;
+`;
+
+const Option = styled.option`
+  margin-top: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+`;
 
 export default Dropdown;
