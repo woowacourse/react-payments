@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 type InputProps = {
@@ -5,10 +6,12 @@ type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   type: 'text' | 'number' | 'email' | 'password' | 'tel';
   placeholder: string;
   id: string;
   isError: boolean;
+  isAutoFocus?: boolean;
   maxLength?: number;
 };
 
@@ -26,23 +29,30 @@ const StyledInput = styled.input<{ $isError: boolean }>`
   }
 `;
 
-export default function Input({
-  value,
-  onChange,
-  onFocus,
-  onBlur,
-  type,
-  placeholder,
-  id,
-  isError,
-  maxLength,
-}: InputProps) {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const {
+    value,
+    onChange,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    isAutoFocus,
+    type,
+    placeholder,
+    id,
+    isError,
+    maxLength,
+  } = props;
+
   return (
     <StyledInput
+      autoFocus={isAutoFocus}
+      ref={ref}
       value={value}
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
+      onKeyDown={onKeyDown}
       type={type}
       maxLength={maxLength}
       placeholder={placeholder}
@@ -50,4 +60,6 @@ export default function Input({
       $isError={isError}
     />
   );
-}
+});
+
+export default Input;

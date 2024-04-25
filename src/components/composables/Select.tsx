@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const StyledSelect = styled.select<{ $isError: boolean }>`
@@ -34,16 +35,18 @@ type SelectType = {
   onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 };
 
-export default function Select({
-  value,
-  placeholder = '',
-  isError,
-  options,
-  onChange,
-  onBlur,
-}: SelectType) {
+const Select = forwardRef<HTMLSelectElement, SelectType>((props, ref) => {
+  const { value, placeholder = '', isError, options, onChange, onBlur } = props;
   return (
-    <StyledSelect onBlur={onBlur} onChange={onChange} value={value} $isError={isError} required>
+    <StyledSelect
+      autoFocus
+      ref={ref}
+      onBlur={onBlur}
+      onChange={onChange}
+      value={value}
+      $isError={isError}
+      required
+    >
       <Placeholder value="">{placeholder}</Placeholder>
       {options.map((option) => (
         <option key={option} value={option}>
@@ -52,4 +55,5 @@ export default function Select({
       ))}
     </StyledSelect>
   );
-}
+});
+export default Select;
