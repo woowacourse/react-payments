@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-import styles from './Input.module.css';
 import clsx from 'clsx';
+import styles from './Input.module.css';
 
 interface InputProps {
   name: string;
@@ -16,20 +16,24 @@ interface InputProps {
   handleOnBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export default function Input({
-  name,
-  id,
-  value,
-  type = 'text',
-  placeholder,
-  maxLength,
-  isError,
-  isRequired,
-  handleChange,
-  handleOnBlur,
-}: InputProps) {
+const Input = forwardRef(function Input(
+  {
+    name,
+    id,
+    value,
+    type = 'text',
+    placeholder,
+    maxLength,
+    isError,
+    isRequired,
+    handleChange,
+    handleOnBlur,
+  }: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   return (
     <input
+      ref={ref}
       id={id}
       name={name}
       type={type}
@@ -42,4 +46,6 @@ export default function Input({
       className={clsx(styles.input, { [styles.error]: isError })}
     />
   );
-}
+});
+
+export default Input;

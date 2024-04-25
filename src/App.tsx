@@ -13,7 +13,6 @@ import CVCInput from './components/AddCardFormInput/CVCInput/CVCInput';
 import PasswordInput from './components/AddCardFormInput/PasswordInput/PasswordInput';
 
 function App() {
-  // TODO: useAddCardFormField에 isFocus prop 두기?? 아무튼 조건부 렌더링으로..
   const cardNumbersProps = useAddCardFormField<CardNumbers>({
     initialValues: INITIAL_VALUES.cardNumbers,
   });
@@ -47,11 +46,17 @@ function App() {
       />
 
       <form>
-        <PasswordInput {...passwordProps} />
-        <CVCInput {...cvcProps} />
-        <OwnerNameInput {...ownerNameProps} />
-        <ExpirationDateInput {...expirationDateProps} />
-        <CardIssuerInput {...cardIssuerProps} />
+        {cvcProps.isFormFilled && <PasswordInput {...passwordProps} />}
+        {ownerNameProps.isFormFilled && <CVCInput {...cvcProps} />}
+        {expirationDateProps.isFormFilled && (
+          <OwnerNameInput {...ownerNameProps} />
+        )}
+        {cardIssuerProps.isFormFilled && (
+          <ExpirationDateInput {...expirationDateProps} />
+        )}
+        {cardNumbersProps.isFormFilled && (
+          <CardIssuerInput {...cardIssuerProps} />
+        )}
         <CardNumberInput {...cardNumbersProps} />
       </form>
     </div>

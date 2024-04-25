@@ -11,7 +11,7 @@ export const hasTwoDigit = (value: string) => value.length === 2;
 export const isValidMonth = (value: string) =>
   1 <= Number(value) && Number(value) <= 12;
 
-export const isValidDate = ({ year, month }: ExpirationDate) => {
+export const isValidDate = ({ year = '', month = '' }: ExpirationDate) => {
   if (year === '') return true;
 
   const currentDate = new Date();

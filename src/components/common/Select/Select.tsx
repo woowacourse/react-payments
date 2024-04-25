@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import clsx from 'clsx';
 import styles from './Select.module.css';
@@ -21,17 +21,21 @@ interface SelectProps {
   handleOnBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
-export default function Select({
-  options,
-  defaultText,
-  isError,
-  isRequired = true,
-  handleSelect,
-  handleOnBlur,
-  ...rest
-}: SelectProps) {
+const Select = forwardRef(function Select(
+  {
+    options,
+    defaultText,
+    isError,
+    isRequired = true,
+    handleSelect,
+    handleOnBlur,
+    ...rest
+  }: SelectProps,
+  ref: React.ForwardedRef<HTMLSelectElement>
+) {
   return (
     <select
+      ref={ref}
       className={clsx(styles.select, { [styles.error]: isError })}
       required={isRequired}
       onChange={handleSelect}
@@ -50,4 +54,6 @@ export default function Select({
       ))}
     </select>
   );
-}
+});
+
+export default Select;

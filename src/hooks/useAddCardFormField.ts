@@ -18,7 +18,10 @@ export default function useAddCardFormField<T extends InitialValuesType>({
 }: UseAddCardFormFieldProps<T>) {
   const [values, setValues] = useState<T>(initialValues);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isError, setIsError] = useState(
+  const [isError, setIsError] = useState(() =>
+    createObjectWithKeys(Object.keys(initialValues), false)
+  );
+  const [isComplete, setIsComplete] = useState(() =>
     createObjectWithKeys(Object.keys(initialValues), false)
   );
 
@@ -31,10 +34,10 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     if (!isValid) {
       setErrorMessage(errorMessage);
       setIsError({ ...isError, [name]: true });
+      setIsComplete({ ...isComplete, [name]: false });
     } else {
       setErrorMessage('');
       setIsError({ ...isError, [name]: false });
-
       setValues({
         ...values,
         [name]: name === 'ownerName' ? value.toUpperCase() : value,
@@ -53,6 +56,7 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     } else {
       setErrorMessage('');
       setIsError({ ...isError, [name]: false });
+      setIsComplete({ ...isComplete, [name]: true });
     }
   };
 
@@ -60,6 +64,7 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     values,
     errorMessage,
     isError,
+    isFormFilled: Object.values(isComplete).every((isComplete) => isComplete),
     onChange,
     onBlur,
   };

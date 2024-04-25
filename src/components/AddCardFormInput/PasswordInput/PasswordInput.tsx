@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 
 import Label from '../../common/Label/Label';
 import Field from '../../common/Field/Field';
@@ -12,6 +12,7 @@ import {
   isInteger,
   isNotEmptyString,
 } from '../../../domain/validators';
+import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 
 const { title, description, labelText, inputLabelText, placeholder } =
   ADD_CARD_FORM_FIELDS.PASSWORD;
@@ -23,6 +24,11 @@ export default function PasswordInput({
   onChange,
   onBlur,
 }: InputProps<Password>) {
+  const {
+    refs: [ref],
+    moveToNextInput,
+  } = useFormFieldFocus([useRef<HTMLInputElement>(null)]);
+
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const name = event.target.name as PasswordKey;
@@ -30,6 +36,8 @@ export default function PasswordInput({
     const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
     const result = validateInput(value, validators);
     onChange({ ...result, name, value });
+
+    if (value.length === ref.current?.maxLength) moveToNextInput();
   };
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -58,6 +66,7 @@ export default function PasswordInput({
           hideLabel
         />
         <Input
+          ref={ref}
           id="password"
           name="password"
           type="password"
