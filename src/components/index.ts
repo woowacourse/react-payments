@@ -12,6 +12,7 @@ import CardUserNameInput from './CardUserNameInput';
 import ErrorMessage from './ErrorMessage/index';
 import Input from './Input';
 import Layout from './Layout';
+import Select from './Select/index';
 
 export {
   CardBackImg,
@@ -28,4 +29,5 @@ export {
   ErrorMessage,
   Input,
   Layout,
+  Select,
 };
