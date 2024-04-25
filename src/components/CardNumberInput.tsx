@@ -32,7 +32,7 @@ export default function CardNumberInput({cardNumbers, handleInput, handleShowCom
     if(checkCompleteInput()) {
       handleShowComponent((prev) => ({
         ...prev,
-        expirationDateInput: true,
+        cardDropDown: true,
       }));
     }
   }, [cardNumbers, handleShowComponent]); 
@@ -44,7 +44,7 @@ export default function CardNumberInput({cardNumbers, handleInput, handleShowCom
       return {
         ...prevState,
         [cardKey]: {
-          ...prevState.cardNumber1,
+          ...prevState[cardKey],
           value : value
         },
       };
@@ -79,17 +79,6 @@ export default function CardNumberInput({cardNumbers, handleInput, handleShowCom
           }
         }
   };
-
-  // const showErrorMessage = () => {
-  //   console.log(cardNumbers)
-  //   Object.values(cardNumbers).find(value => {
-  //     if(value.isError){
-  //       return value.errorMessage;
-  //     }
-  //   })
-  //   return ''
-  // }
-
 
   const checkInputError = (index : number) => {
     const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
