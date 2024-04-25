@@ -12,10 +12,13 @@ const usePassword = (defaultValue: string) => {
     isError: isPasswordError,
   } = useInput<string>(defaultValue, REG_EXP.password, passwordCondition);
 
+  const isFieldError = isPasswordError;
+
   return {
     passwordState,
     setPasswordState,
     isPasswordError,
+    isFieldError,
   };
 };
 

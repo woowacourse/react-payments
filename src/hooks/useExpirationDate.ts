@@ -19,6 +19,8 @@ const useExpirationDate = (defaultValues: string[]) => {
     isError: isYearError,
   } = useInput<string>(defaultValues[1] ?? '', REG_EXP.year, yearCondition);
 
+  const isFieldError = isMonthError || isYearError;
+
   return {
     expirationDateState: {
       month,
@@ -31,6 +33,7 @@ const useExpirationDate = (defaultValues: string[]) => {
     expirationDateErrorState: {
       isMonthError,
       isYearError,
+      isFieldError,
     },
   };
 };

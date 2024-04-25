@@ -27,6 +27,8 @@ const useCardNumbers = (defaultValues: string[]) => {
     isError: isFourthError,
   } = useInput<string>(defaultValues[3] ?? '', REG_EXP.cardNumber, cardLengthCondition);
 
+  const isFieldError = isFirstError || isSecondError || isThirdError || isFourthError;
+
   return {
     cardNumberState: {
       first,
@@ -45,6 +47,7 @@ const useCardNumbers = (defaultValues: string[]) => {
       isSecondError,
       isThirdError,
       isFourthError,
+      isFieldError,
     },
     showImageCondition: {
       visaShowCondition: showVisa(first),
