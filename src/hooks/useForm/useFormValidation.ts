@@ -62,6 +62,11 @@ const useFormValidation = ({
     passwordForm.isValid;
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      cardNumberForm: { ...prev.cardNumberForm, isValid: isCardNumberValid },
+    }));
+
     if (isCardNumberValid) {
       setValidationStatus(prev => ({
         ...prev,
@@ -71,6 +76,11 @@ const useFormValidation = ({
   }, [isCardNumberValid]);
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      cardCompanyForm: { ...prev.cardCompanyForm, isValid: isCardCompanyValid },
+    }));
+
     if (isCardCompanyValid) {
       setValidationStatus(prev => ({
         ...prev,
@@ -80,6 +90,11 @@ const useFormValidation = ({
   }, [isCardCompanyValid]);
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      expiryDateForm: { ...prev.expiryDateForm, isValid: isExpiryDateValid },
+    }));
+
     if (isExpiryDateValid) {
       setValidationStatus(prev => ({
         ...prev,
@@ -89,6 +104,11 @@ const useFormValidation = ({
   }, [isExpiryDateValid]);
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      cardholderNameForm: { ...prev.cardholderNameForm, isValid: isCardholderNameValid },
+    }));
+
     if (isCardholderNameValid) {
       setValidationStatus(prev => ({
         ...prev,
@@ -98,6 +118,11 @@ const useFormValidation = ({
   }, [isCardholderNameValid]);
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      cvcForm: { ...prev.cvcForm, isValid: isCardCVCValid },
+    }));
+
     if (isCardCVCValid) {
       setValidationStatus(prev => ({
         ...prev,
@@ -107,6 +132,11 @@ const useFormValidation = ({
   }, [isCardCVCValid]);
 
   useEffect(() => {
+    setValidationStatus(prev => ({
+      ...prev,
+      passwordForm: { ...prev.passwordForm, isValid: isPasswordValid },
+    }));
+
     if (isPasswordValid) {
       setValidationStatus(prev => ({
         ...prev,
