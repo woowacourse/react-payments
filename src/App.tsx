@@ -5,14 +5,19 @@ import CardExpiryDateInputContainer from './components/CardExpiryDateInputContai
 import CardNumbersInputContainer from './components/CardNumbersInputContainer';
 import CardPreview from './components/CardPreview';
 
-import useCardInfo from './hooks/useCardInfo';
+import useCardInfo from './hooks/useCardInfo/useCardInfo';
 import CvcInputContainer from './components/CvcInputContainer';
 import PasswordInputContainer from './components/PasswordInputContainer';
 import SequenceContainer from './components/common/SequenceContainer';
 
 const App = () => {
-  const { cardNumbers, expiryDate, cardholderName, cvc, password, isFieldsCompleted } = useCardInfo();
-  const isSubmitable = isFieldsCompleted.every(v => v);
+  const {
+    cardInfoControl: { cardNumbers, expiryDate, cardholderName, cvc, password },
+    completionStatus,
+  } = useCardInfo();
+
+  const completionFlags = Object.values(completionStatus);
+  const isSubmitable = completionFlags.every(v => v);
 
   return (
     <AppLayout>
@@ -24,7 +29,7 @@ const App = () => {
       <CardInfoInputWrapper>
         {isSubmitable && <button>Submit</button>}
         <SequenceContainer
-          predicates={isFieldsCompleted}
+          predicates={completionFlags}
           componentQueue={[
             <CardNumbersInputContainer {...cardNumbers} />,
             <CardExpiryDateInputContainer {...expiryDate} />,

@@ -1,10 +1,18 @@
 import useValidation from './useValidation';
 import { IErrorStatus } from '../validators/index.d';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 type TValidate = (value: string) => IErrorStatus;
 
-const useInput = (validate: TValidate, initialValue: string = '') => {
+export interface IUseInputReturn {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateValue: (targetValue: string) => void;
+  errorStatus: IErrorStatus;
+}
+
+const useInput = (validate: TValidate, initialValue: string = ''): IUseInputReturn => {
   const [value, setValue] = useState(initialValue);
   const { errorStatus, validateValue } = useValidation(value, validate);
 

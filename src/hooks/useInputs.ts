@@ -4,7 +4,20 @@ import { useState } from 'react';
 
 type TValidate = (value: string) => IErrorStatus;
 
-const useInputs = (validate: TValidate, initialValue: Record<string, string>) => {
+interface IMultipleFieldsErrorStatus {
+  isError: Record<string, boolean>;
+  errorMessage: string;
+}
+
+export interface IUseInputsReturn {
+  value: Record<string, string>;
+  setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  generateOnChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errorStatus: IMultipleFieldsErrorStatus;
+  validateValue: (key: string, value: string) => void;
+}
+
+const useInputs = (validate: TValidate, initialValue: Record<string, string>): IUseInputsReturn => {
   const [value, setValue] = useState<Record<string, string>>(initialValue);
   const { errorStatus, validateValue } = useValidations(value, validate);
 
