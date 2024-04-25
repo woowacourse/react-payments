@@ -1,4 +1,11 @@
+export const DATE = {
+  YEAR: 'year',
+  MONTH: 'month',
+} as const;
+
 export type Date = {
-  month: string;
-  year: string;
+  [DATE.YEAR]: string;
+  [DATE.MONTH]: string;
 };
+
+export type DateItem = typeof DATE.MONTH | typeof DATE.YEAR;
