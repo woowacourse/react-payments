@@ -66,7 +66,7 @@ Performance
 
 ### Component
 
-- [ ] 카드사 드롭다운 컴포넌트 FormInput.CardIssuerInput
+- [x] 카드사 드롭다운 컴포넌트 FormInput.CardIssuerInput
 - [ ] cvc 입력 컴포넌트 FormInput.CardCVCInput
 - [ ] 확인 버튼 컴포넌트 CheckButton
       렌더링 조건
