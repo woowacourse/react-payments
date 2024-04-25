@@ -38,10 +38,10 @@ const validateCardCVCOnblur = (inputValue: string) => {
 
 interface CardCVCInputProps {
   cardCVC: string;
-  onChange: (inputValue: string) => void;
-  onFocus: () => void;
-  onBlur: () => void;
   errorState: { isError: boolean; errorMessage: string };
+  onChange: (inputValue: string) => void;
+  onBlur: () => void;
+  onFocus: () => void;
   updateErrorState: ({
     isError,
     errorMessage,
@@ -53,37 +53,33 @@ interface CardCVCInputProps {
 
 export default function CardCVCInput({
   cardCVC,
-  onChange,
-  onFocus,
-  onBlur,
   errorState,
+  onChange,
+  onBlur,
+  onFocus,
   updateErrorState,
 }: CardCVCInputProps) {
-  const onCardCVCChange = (inputValue: string) => {
+  const onCardCVCChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      validateCardCVCOnChange(inputValue);
+      validateCardCVCOnChange(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      onChange(inputValue);
-      return false;
+      onChange(event.target.value);
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
-  const onCardCVCBlur = (inputValue: string) => {
+  const onCardCVCBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     onBlur();
     try {
-      validateCardCVCOnblur(inputValue);
+      validateCardCVCOnblur(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
@@ -103,6 +99,7 @@ export default function CardCVCInput({
             maxLength={4}
             placeholder="123"
             value={cardCVC}
+            isError={errorState.isError}
             onChange={onCardCVCChange}
             onBlur={onCardCVCBlur}
             onFocus={onCardCVCFocus}

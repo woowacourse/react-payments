@@ -49,7 +49,7 @@ export default function CardEnrollForm() {
     cardExpiration: {
       isError: {
         month: false,
-        year: true,
+        year: false,
       },
       errorMessage: "",
     },
@@ -72,7 +72,7 @@ export default function CardEnrollForm() {
     });
 
     setIsReadForSubmit(!isExistError);
-  }, [errorState]);
+  }, [cardInformation, errorState]);
 
   const onCardNumbersChange = (inputValue: string, targetIndex: number) => {
     setCardInformation((prev) => {
@@ -192,40 +192,40 @@ export default function CardEnrollForm() {
       <CardInformationContainer>
         <CardPasswordInput
           cardPassword={cardInformation.cardPassword}
-          onChange={onCardPasswordChange}
           errorState={errorState.cardPassword}
+          onChange={onCardPasswordChange}
           updateErrorState={updatePasswordErrorState}
         />
         <CardCVCInput
           cardCVC={cardInformation.cardCVC}
-          onChange={onCardCVCChange}
-          onFocus={() => setIsCVCFocused(true)}
-          onBlur={() => setIsCVCFocused(false)}
           errorState={errorState.cardCVC}
+          onChange={onCardCVCChange}
+          onBlur={() => setIsCVCFocused(false)}
+          onFocus={() => setIsCVCFocused(true)}
           updateErrorState={updateCVCErrorState}
         />
         <CardNumbers
           cardNumbers={cardInformation.cardNumbers}
-          onChange={onCardNumbersChange}
           errorState={errorState.cardNumbers}
+          onChange={onCardNumbersChange}
           updateErrorState={updateCardNumbersErrorState}
         />
         <CardExpirationDate
           cardExpiration={cardInformation.cardExpiration}
-          onChange={onCardExpirationChange}
           errorState={errorState.cardExpiration}
+          onChange={onCardExpirationChange}
           updateErrorState={updateCardExpirationErrorState}
         />
         <CardOwnerName
           cardOwnerName={cardInformation.cardOwnerName}
-          onChange={onCardOwnerNameChange}
           errorState={errorState.cardOwnerName}
+          onChange={onCardOwnerNameChange}
           updateErrorState={updateCardOwnerNameErrorState}
         />
         <CardIssuerSelect
           cardIssuer={cardInformation.cardIssuer}
-          onChange={onCardIssuerChange}
           errorState={errorState.cardIssuer}
+          onChange={onCardIssuerChange}
           updateErrorState={updateCardIssuerErrorState}
         />
       </CardInformationContainer>

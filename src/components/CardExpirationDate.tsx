@@ -59,11 +59,11 @@ const validateExpirationYearOnBlur = (expirationYear: string) => {
 
 interface CardExpirationDateProps {
   cardExpiration: CardInformation["cardExpiration"];
-  onChange: (inputValue: string, inputId: string) => void;
   errorState: {
     isError: { month: boolean; year: boolean };
     errorMessage: string;
   };
+  onChange: (inputValue: string, inputId: string) => void;
   updateErrorState: ({
     isError,
     errorMessage,
@@ -75,109 +75,81 @@ interface CardExpirationDateProps {
 
 export default function CardExpirationDate({
   cardExpiration,
-  onChange,
   errorState,
+  onChange,
   updateErrorState,
 }: CardExpirationDateProps) {
-  const onExpirationMonthChange = (inputValue: string) => {
+  const onExpirationMonthChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     try {
-      validateExpirationMonthOnChange(inputValue);
+      validateExpirationMonthOnChange(event.target.value);
       updateErrorState({
-        isError: {
-          month: false,
-          year: errorState.isError.year,
-        },
+        isError: { ...errorState.isError, month: false },
         errorMessage: "",
       });
-      onChange(inputValue, "month");
-      return false;
+      onChange(event.target.value, "month");
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({
-          isError: {
-            month: true,
-            year: errorState.isError.year,
-          },
+          isError: { ...errorState.isError, month: true },
           errorMessage: error.message,
         });
       }
-      return true;
     }
   };
 
-  const onExpirationYearChange = (inputValue: string) => {
+  const onExpirationYearChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     try {
-      validateExpirationYearOnChange(inputValue);
+      validateExpirationYearOnChange(event.target.value);
       updateErrorState({
-        isError: {
-          month: errorState.isError.month,
-          year: false,
-        },
+        isError: { ...errorState.isError, year: false },
         errorMessage: "",
       });
-      onChange(inputValue, "year");
-      return false;
+      onChange(event.target.value, "year");
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({
-          isError: {
-            month: errorState.isError.month,
-            year: true,
-          },
+          isError: { ...errorState.isError, year: true },
           errorMessage: error.message,
         });
       }
-      return true;
     }
   };
 
-  const onExpirationMonthBlur = (inputValue: string) => {
+  const onExpirationMonthBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     try {
-      validateExpirationMonthOnBlur(inputValue);
+      validateExpirationMonthOnBlur(event.target.value);
       updateErrorState({
-        isError: {
-          month: false,
-          year: errorState.isError.year,
-        },
+        isError: { ...errorState.isError, month: false },
         errorMessage: "",
       });
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({
-          isError: {
-            month: true,
-            year: errorState.isError.year,
-          },
+          isError: { ...errorState.isError, month: true },
           errorMessage: error.message,
         });
       }
-      return true;
     }
   };
 
-  const onExpirationYearBlur = (inputValue: string) => {
+  const onExpirationYearBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     try {
-      validateExpirationYearOnBlur(inputValue);
+      validateExpirationYearOnBlur(event.target.value);
       updateErrorState({
-        isError: {
-          month: errorState.isError.month,
-          year: false,
-        },
+        isError: { ...errorState.isError, year: false },
         errorMessage: "",
       });
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({
-          isError: {
-            month: errorState.isError.month,
-            year: true,
-          },
+          isError: { ...errorState.isError, year: true },
           errorMessage: error.message,
         });
       }
-      return true;
     }
   };
 
@@ -193,15 +165,17 @@ export default function CardExpirationDate({
           <Input
             maxLength={2}
             placeholder="MM"
-            onChange={onExpirationMonthChange}
             value={cardExpiration.month}
+            isError={errorState.isError.month}
+            onChange={onExpirationMonthChange}
             onBlur={onExpirationMonthBlur}
           />
           <Input
             maxLength={2}
             placeholder="YY"
-            onChange={onExpirationYearChange}
             value={cardExpiration.year}
+            isError={errorState.isError.year}
+            onChange={onExpirationYearChange}
             onBlur={onExpirationYearBlur}
           />
         </InputContainer>

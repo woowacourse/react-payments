@@ -38,8 +38,8 @@ const validateOwnerNameOnBlur = (inputValue: string) => {
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
-  onChange: (inputValue: string) => void;
   errorState: { isError: boolean; errorMessage: string };
+  onChange: (inputValue: string) => void;
   updateErrorState: ({
     isError,
     errorMessage,
@@ -51,35 +51,31 @@ interface CardOwnerNameProps {
 
 export default function CardOwnerName({
   cardOwnerName,
-  onChange,
   errorState,
+  onChange,
   updateErrorState,
 }: CardOwnerNameProps) {
-  const onOwnerNameChange = (inputValue: string) => {
+  const onOwnerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      validateOwnerNameOnChange(inputValue);
+      validateOwnerNameOnChange(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      const upperName = inputValue.toUpperCase();
+      const upperName = event.target.value.toUpperCase();
       onChange(upperName);
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
-  const onOwnerNameBlur = (inputValue: string) => {
+  const onOwnerNameBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     try {
-      validateOwnerNameOnBlur(inputValue);
+      validateOwnerNameOnBlur(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
@@ -93,6 +89,7 @@ export default function CardOwnerName({
             maxLength={15}
             placeholder="JOHN DOE"
             value={cardOwnerName}
+            isError={errorState.isError}
             onChange={onOwnerNameChange}
             onBlur={onOwnerNameBlur}
           />

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 const SInput = styled.input<{
   isError: boolean;
@@ -27,8 +26,9 @@ interface InputProps {
   value: string;
   type?: string;
   placeholder?: string;
-  onChange: (inputValue: string) => boolean;
-  onBlur?: (inputValue: string) => boolean;
+  isError: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
 }
 
@@ -37,31 +37,18 @@ export default function Input({
   value,
   type,
   placeholder,
+  isError,
   onChange,
   onBlur,
   onFocus,
 }: InputProps) {
-  const [isError, setIsError] = useState(false);
-
   return (
     <SInput
       type={type ? type : "text"}
       maxLength={maxLength}
       placeholder={placeholder}
-      onChange={(e) => {
-        if (!onChange) {
-          return;
-        }
-        const isError = onChange(e.target.value);
-        setIsError(isError);
-      }}
-      onBlur={(e) => {
-        if (!onBlur) {
-          return;
-        }
-        const isError = onBlur(e.target.value);
-        setIsError(isError);
-      }}
+      onChange={onChange}
+      onBlur={onBlur}
       onFocus={onFocus}
       value={value}
       isError={isError}

@@ -30,8 +30,8 @@ const cardIssuerOptions = CARD_ISSUERS.map((cardIssuer) => ({
 
 interface CardIssuerSelectProps {
   cardIssuer: CardIssuer | "";
-  onChange: (inputValue: CardIssuer) => void;
   errorState: { isError: boolean; errorMessage: string };
+  onChange: (inputValue: CardIssuer) => void;
   updateErrorState: ({
     isError,
     errorMessage,
@@ -43,8 +43,8 @@ interface CardIssuerSelectProps {
 
 export default function CardIssuerSelect({
   cardIssuer,
-  onChange,
   errorState,
+  onChange,
   updateErrorState,
 }: CardIssuerSelectProps) {
   const onCardIssuerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

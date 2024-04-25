@@ -55,30 +55,26 @@ export default function CardPasswordInput({
   onChange,
   updateErrorState,
 }: CardPasswordInputProps) {
-  const onCardPasswordChange = (inputValue: string) => {
+  const onCardPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      validateCardPasswordOnChange(inputValue);
+      validateCardPasswordOnChange(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      onChange(inputValue);
-      return false;
+      onChange(event.target.value);
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
-  const onCardPasswordBlur = (inputValue: string) => {
+  const onCardPasswordBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     try {
-      validateCardPasswordOnBlur(inputValue);
+      validateCardPasswordOnBlur(event.target.value);
       updateErrorState({ isError: false, errorMessage: "" });
-      return false;
     } catch (error) {
       if (error instanceof Error) {
         updateErrorState({ isError: true, errorMessage: error.message });
       }
-      return true;
     }
   };
 
@@ -95,6 +91,7 @@ export default function CardPasswordInput({
             maxLength={2}
             type="password"
             value={cardPassword}
+            isError={errorState.isError}
             onChange={onCardPasswordChange}
             onBlur={onCardPasswordBlur}
           />
