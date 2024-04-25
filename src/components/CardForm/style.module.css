@@ -11,7 +11,6 @@
 .submitBtn {
   position: absolute;
   bottom: 0;
-  /* left: calc(var(--layout-padding) * -1); */
   margin-top: 1rem;
   background-color: #333333;
   width: var(--layout-max-width);
