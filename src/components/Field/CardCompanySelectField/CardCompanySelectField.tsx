@@ -3,9 +3,8 @@ import DropDown from '../../common/DropDown/DropDown';
 import styles from '../../../App.module.css';
 
 type CardCompanySelectField = {
-  cardCompany: CardCompany;
-  handleSelectCardCompany: (selected: string) => void;
-
+  cardCompany: CardCompany | null;
+  handleSelectCardCompany: (selected: CardCompany | null) => void;
   errorMessage: string;
 };
 
