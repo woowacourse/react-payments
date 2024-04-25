@@ -23,4 +23,6 @@ export const StyledSubmitButton = styled.button`
 
   ${(props) => props.theme.typography.submitButton}
   color: ${(props) => props.theme.color.white};
+
+  cursor: pointer;
 `;
