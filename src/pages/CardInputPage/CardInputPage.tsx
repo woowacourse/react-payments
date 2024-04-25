@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import ShelfSection from "../../components/common/ShelfSection/ShelfSection";
 import Card from "../../components/Card/Card";
 import { CARD_NUMBER_UNIT_LENGTH } from "../../constants";
-import SubmitButton from "../../components/\bButton/SubmitButton";
+import SubmitButton from "../../components/Button/SubmitButton";
 import CardNumbersInputField from "../../components/Field/CardNumbersInputField/CardNumbersInputField";
 import CardExpirationDateInputField from "../../components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
 import CardOwnerNameInputField from "../../components/Field/CardOwnerNameInputField/CardOwnerNameInputField";
 import CardCompanySelectField from "../../components/Field/CardCompanySelectField/CardCompanySelectField";
+import CardCVCInputField from "../../components/Field/CardCVCInputField/CardCVCInputField";
+import CardPasswordInput from "../../components/Field/CardPasswordInput/CardPasswordInput";
 
 function CardInputPage() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(() =>
@@ -24,6 +26,10 @@ function CardInputPage() {
   });
   const [ownerName, setOwnerName] = useState<string>("");
 
+  const [cardCVC, setCardCVC] = useState<string>("");
+
+  const [cardPassword, setCardPassword] = useState<string>("");
+
   const [isCompletedSections, setIsCompletedSections] = useState<boolean[]>(
     () => new Array(5).fill(false)
   );
@@ -34,6 +40,7 @@ function CardInputPage() {
     navigate("/card-added", {
       state: {
         firstFourCardNumber: cardNumbers[0],
+        cardCompanyName: cardCompanyName,
       },
     });
   };
@@ -48,10 +55,33 @@ function CardInputPage() {
           ownerName={ownerName}
         />
         <Form>
+          <ShelfSection
+            title="비밀번호를 입력해 주세요"
+            description="앞의 두자리를 입력해주세요."
+          >
+            <CardPasswordInput
+              cardPassword={cardPassword}
+              setCardPassword={setCardPassword}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
+            ></CardPasswordInput>
+          </ShelfSection>
+
+          <ShelfSection title="CVC 번호를 입력해 주세요">
+            <CardCVCInputField
+              cardCVC={cardCVC}
+              setCardCVC={setCardCVC}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
+            ></CardCVCInputField>
+          </ShelfSection>
+
           <ShelfSection title="카드 소유자 이름을 입력해주세요">
             <CardOwnerNameInputField
               ownerName={ownerName}
               setOwnerName={setOwnerName}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
             />
           </ShelfSection>
 
@@ -59,7 +89,12 @@ function CardInputPage() {
             title="카드 유효기간을 입력해 주세요"
             description="월/년도(MMYY)를 순서대로 입력해 주세요."
           >
-            <CardExpirationDateInputField date={date} setDate={setDate} />
+            <CardExpirationDateInputField
+              date={date}
+              setDate={setDate}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
+            />
           </ShelfSection>
 
           <ShelfSection
@@ -69,6 +104,8 @@ function CardInputPage() {
             <CardCompanySelectField
               cardCompanyName={cardCompanyName}
               setCardCompanyName={setCardCompanyName}
+              isCompletedSections={isCompletedSections}
+              setIsCompletedSections={setIsCompletedSections}
             ></CardCompanySelectField>
           </ShelfSection>
 

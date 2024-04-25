@@ -1,7 +1,7 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import CardCompanyDropdownList from "../../common/Dropdown/CardCompanyDropdownList";
-import CardDropdownHeadButton from "../../\bButton/CardDropdownHeadButton";
+import CardDropdownHeadButton from "../../Button/CardDropdownHeadButton";
 import useDetectClose from "../../../hooks/useDetectClose";
 
 const COMPANY_LIST = [
@@ -18,13 +18,23 @@ const COMPANY_LIST = [
 export default function CardCompanySelectField({
   cardCompanyName,
   setCardCompanyName,
+  isCompletedSections,
+  setIsCompletedSections,
 }: {
   cardCompanyName: string;
   setCardCompanyName: Dispatch<SetStateAction<string>>;
+  isCompletedSections: boolean[];
+  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useDetectClose(ref, false);
   const companyList = COMPANY_LIST;
+
+  useEffect(() => {
+    const updatedIsCompletedSections = [...isCompletedSections];
+    updatedIsCompletedSections[1] = cardCompanyName != "";
+    setIsCompletedSections(updatedIsCompletedSections);
+  }, [cardCompanyName, setIsCompletedSections]);
 
   return (
     <div ref={ref}>

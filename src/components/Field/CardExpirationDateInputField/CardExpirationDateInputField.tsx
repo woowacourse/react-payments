@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useState, ChangeEvent } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  ChangeEvent,
+  useEffect,
+} from "react";
 import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
@@ -11,9 +17,13 @@ interface DateError {
 export default function CardExpirationDateInputField({
   date,
   setDate,
+  isCompletedSections,
+  setIsCompletedSections,
 }: {
   date: Record<string, string>;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
+  isCompletedSections: boolean[];
+  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessages, setErrorMessages] = useState<DateError>({
     monthError: null,
@@ -62,6 +72,16 @@ export default function CardExpirationDateInputField({
       yearError: updatedErrorMessages.yearError || null,
     });
   };
+
+  useEffect(() => {
+    const updatedIsCompletedSections = [...isCompletedSections];
+    updatedIsCompletedSections[2] =
+      date.month.length == 2 &&
+      date.year.length == 2 &&
+      !errorMessages.monthError &&
+      !errorMessages.yearError;
+    setIsCompletedSections(updatedIsCompletedSections);
+  }, [date, setIsCompletedSections]);
 
   const checkExpired = (month: string, year: string) => {
     if (year.length < 2 || month.length < 2) return false;

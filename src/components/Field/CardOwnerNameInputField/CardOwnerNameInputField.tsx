@@ -4,6 +4,7 @@ import {
   SetStateAction,
   useState,
   FocusEvent,
+  useEffect,
 } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
@@ -14,9 +15,13 @@ const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
 export default function CardOwnerNameInputField({
   ownerName,
   setOwnerName,
+  isCompletedSections,
+  setIsCompletedSections,
 }: {
   ownerName: string;
   setOwnerName: Dispatch<SetStateAction<string>>;
+  isCompletedSections: boolean[];
+  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -49,6 +54,11 @@ export default function CardOwnerNameInputField({
 
     setErrorMessage("");
   };
+  useEffect(() => {
+    const updatedIsCompletedSections = [...isCompletedSections];
+    updatedIsCompletedSections[3] = ownerName.length != 0;
+    setIsCompletedSections(updatedIsCompletedSections);
+  }, [ownerName, setIsCompletedSections]);
 
   return (
     <>
