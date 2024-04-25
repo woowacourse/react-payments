@@ -3,14 +3,7 @@ import { ErrorWrapper, ErrorText } from '../../../styles/common';
 import InputContainer from '../../common/InputContainer';
 import getObjectKeys from '../../../utils/getObjectKeys';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
-
-type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
-
-export interface CardNumbersInputContainerProps {
-  value: Record<CardNumberKey, string>;
-  generateOnChange: (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
-}
+import { IInputsControl } from '../../../hooks/useInputs';
 
 const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
 const INPUT_TYPE = {
@@ -18,7 +11,7 @@ const INPUT_TYPE = {
   password: 'password',
 };
 
-export default function CardNumbersContainer({ value, generateOnChange, errorStatus }: CardNumbersInputContainerProps) {
+export default function CardNumbersContainer({ value, generateOnChange, errorStatus }: IInputsControl) {
   const {
     displayingErrorStatus: { isError, errorMessage },
     bringErrorStatus,

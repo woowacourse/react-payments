@@ -1,27 +1,12 @@
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 import { ErrorWrapper, ErrorText } from '../../../styles/common';
-import { IErrorStatus } from '../../../validators/index.d';
 import useExpiryDate from '../../../hooks/useExpiryDate';
-
-type MM = string;
-type YY = string;
+import { IInputControl } from '../../../hooks/useInput';
 
 interface CardExpiryDateInputContainerProps {
-  month: {
-    value: MM;
-    setValue: React.Dispatch<React.SetStateAction<MM>>;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    validateValue: (targetValue: string) => void;
-    errorStatus: IErrorStatus;
-  };
-  year: {
-    value: YY;
-    setValue: React.Dispatch<React.SetStateAction<YY>>;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    validateValue: (targetValue: string) => void;
-    errorStatus: IErrorStatus;
-  };
+  month: IInputControl;
+  year: IInputControl;
 }
 
 const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {

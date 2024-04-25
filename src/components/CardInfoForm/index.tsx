@@ -7,21 +7,22 @@ import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputC
 import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
 import CvcInputContainer from './InputContainers/CvcInputContainer';
 import PasswordInputContainer from './InputContainers/PasswordInputContainer';
+import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
 import ROUTE_PATH from '../../pages/constants/routePath';
 
 import getObjectValues from '../../utils/getObjectValues';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
-import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
   completionStatus: ICardInfoCompletionStatus;
-  setIsCardFront?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function CardInfoForm({ cardInfoControl, completionStatus, setIsCardFront }: ICardInfoFormProps) {
   const navigate = useNavigate();
+
   const { cardNumbers, cardType, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
   const completionFlags = getObjectValues<boolean>(completionStatus);

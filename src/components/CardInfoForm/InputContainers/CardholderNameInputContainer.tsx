@@ -2,20 +2,9 @@ import Input from '../../common/Input';
 import { ErrorWrapper, ErrorText } from '../../../styles/common';
 import InputContainer from '../../common/InputContainer';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
+import { IInputControl } from '../../../hooks/useInput';
 
-interface CardholderNameInputContainerProps {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  validateValue: (targetValue: string) => void;
-  errorStatus: { errorMessage: string; isError: boolean };
-}
-
-const CardholderNameInputContainer = ({
-  value,
-  setValue,
-  validateValue,
-  errorStatus,
-}: CardholderNameInputContainerProps) => {
+const CardholderNameInputContainer = ({ value, setValue, validateValue, errorStatus }: IInputControl) => {
   const {
     displayingErrorStatus: { isError, errorMessage },
     bringErrorStatus,

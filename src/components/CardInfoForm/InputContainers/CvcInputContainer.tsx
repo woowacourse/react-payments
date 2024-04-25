@@ -2,27 +2,27 @@ import { ErrorText, ErrorWrapper } from '../../../styles/common';
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
+import { IInputControl } from '../../../hooks/useInput';
 
 export interface ICvcInputContainerProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorStatus: { errorMessage: string; isError: boolean };
-  setIsCardFront?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CvcInputContainer = ({ value, onChange, errorStatus, setIsCardFront }: ICvcInputContainerProps) => {
+const CvcInputContainer = ({
+  value,
+  onChange,
+  errorStatus,
+  setIsCardFront,
+}: IInputControl & ICvcInputContainerProps) => {
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
   } = useDisplayingErrorStatus(errorStatus);
 
-  const onFocus = () => setIsCardFront && setIsCardFront(false);
+  const onFocus = () => setIsCardFront(false);
   const onBlur = () => {
     bringErrorStatus();
-
-    if (setIsCardFront) {
-      setIsCardFront(true);
-    }
+    setIsCardFront(true);
   };
 
   return (

@@ -2,14 +2,9 @@ import InputContainer from '../../common/InputContainer';
 import { ErrorText, ErrorWrapper } from '../../../styles/common';
 import Input from '../../common/Input';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
+import { IInputControl } from '../../../hooks/useInput';
 
-export interface IPasswordInputContainerProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorStatus: { errorMessage: string; isError: boolean };
-}
-
-export default function PasswordInputContainer({ value, onChange, errorStatus }: IPasswordInputContainerProps) {
+export default function PasswordInputContainer({ value, onChange, errorStatus }: IInputControl) {
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
