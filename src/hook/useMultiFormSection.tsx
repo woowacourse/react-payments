@@ -49,7 +49,7 @@ const useMultiFormSection = (props: UseMultiFormSectionProps) => {
 
     if (!regex.test(value) && value.length !== 0) {
       setError(errorMessage);
-      newValues[index] = value.slice(0, -1)
+      newValues[index] = value.split('').filter(char => regex.test(char)).join('')
       setIndexError(index);
     } else {
       setError('');

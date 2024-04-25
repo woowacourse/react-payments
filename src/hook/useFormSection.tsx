@@ -19,7 +19,7 @@ const useFormSection = (props: UseFormSectionProps) => {
     const { value } = e.target;
     if (!regex.test(value) && value.length !== 0) {
       setError(errorMessage);
-      setValue(value.slice(0, -1));
+      setValue(value.split('').filter(char => regex.test(char)).join(''));
     } else {
       setError('');
       setValue(value);
