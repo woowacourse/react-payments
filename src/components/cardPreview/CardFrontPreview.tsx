@@ -6,11 +6,11 @@ import CardNumbers from '../cardNumbers/CardNumbers';
 import CardExpiration from '../cardExpiration/CardExpiration';
 import { CARD_BRAND } from '../../constants/setting';
 
-export interface CardPreviewProps {
+export interface CardFrontPreviewProps {
   cardInfo: ICardInfo;
 }
 
-const CardPreview = ({ cardInfo }: CardPreviewProps) => {
+const CardFrontPreview = ({ cardInfo }: CardFrontPreviewProps) => {
   const getCardBrandImage = () => {
     const IIN = Math.floor(Number(cardInfo.cardNumbers[0]) / 100);
     if (
@@ -29,7 +29,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   };
 
   return (
-    <Styled.CardPreviewContainer cardCompany={cardInfo.cardCompany}>
+    <Styled.CardPreviewContainer cardBackground={cardInfo.cardCompany}>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
         <Styled.CardBrand>
@@ -48,4 +48,4 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   );
 };
 
-export default CardPreview;
+export default CardFrontPreview;

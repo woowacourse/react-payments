@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Input from '../../components/common/input/Input';
 import Select from '../../components/common/select/Select';
-import CardPreview from '../../components/cardPreview/CardPreview';
 import { ICardInfo, IErrorMessage } from '../../types/type';
 import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
 import { NewCardContainer } from './NewCardPage.styled';
@@ -14,6 +13,8 @@ import {
   validateUserName,
 } from '../../validators/newCardInputValidator';
 import { CARD_FORM_INPUTS } from '../../constants/setting';
+import CardFrontPreview from '../../components/cardPreview/CardFrontPreview';
+import CardBackPreview from '../../components/cardPreview/cardBackPreview';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -33,6 +34,7 @@ const NewCardPage = () => {
     password: [''],
   });
   const [creationStage, setCreationStage] = useState(1);
+  const [preview, setPreview] = useState('front');
 
   useEffect(() => {
     updateCardCompanyVisibility();
@@ -61,6 +63,8 @@ const NewCardPage = () => {
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
     errorMessageCopy[index] = validateCardNumber(value);
+
+    setPreview('front');
 
     setErrorMessage({
       ...errorMessage,
@@ -103,6 +107,8 @@ const NewCardPage = () => {
   const handleCardCompanyChange = (value: string) => {
     const errorMessageCopy = validateCardCompany(value);
 
+    setPreview('front');
+
     setErrorMessage({
       ...errorMessage,
       userName: [errorMessageCopy],
@@ -123,6 +129,8 @@ const NewCardPage = () => {
   const handleCardExpirationChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardExpiration];
     errorMessageCopy[index] = validateCardExpiration(value, index);
+
+    setPreview('front');
 
     setErrorMessage({
       ...errorMessage,
@@ -155,6 +163,7 @@ const NewCardPage = () => {
 
   const handleUserNameChange = (value: string) => {
     const errorMessageCopy = validateUserName(value);
+    setPreview('front');
 
     setErrorMessage({
       ...errorMessage,
@@ -177,6 +186,7 @@ const NewCardPage = () => {
 
   const handleCVCChange = (value: string) => {
     const errorMessageCopy = validateCVC(value);
+    setPreview('back');
 
     setErrorMessage({
       ...errorMessage,
@@ -199,6 +209,7 @@ const NewCardPage = () => {
 
   const handlePasswordChange = (value: string) => {
     const erroMessageCopy = validatePassword(value);
+    setPreview('front');
 
     setErrorMessage({
       ...errorMessage,
@@ -231,7 +242,8 @@ const NewCardPage = () => {
 
   return (
     <NewCardContainer>
-      <CardPreview cardInfo={cardInfo}></CardPreview>
+      {preview === 'front' && <CardFrontPreview cardInfo={cardInfo} />}
+      {preview === 'back' && <CardBackPreview cvc={cardInfo.cvc} />}
       <NewCardInputSection
         label={CARD_FORM_INPUTS.CARD_NUMBERS.LABEL}
         mainText={CARD_FORM_INPUTS.CARD_NUMBERS.MAIN_TEXT}
