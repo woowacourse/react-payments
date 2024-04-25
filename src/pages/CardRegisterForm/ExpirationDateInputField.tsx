@@ -39,6 +39,7 @@ const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof us
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
+            placeholder={index === 0 ? "MM" : "YY"}
           ></InputField.Input>
         ))}
       </InputField.Inputs>

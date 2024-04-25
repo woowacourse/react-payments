@@ -33,6 +33,7 @@ const CardNumberInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInp
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
+            placeholder="1234"
           ></InputField.Input>
         ))}
       </InputField.Inputs>
