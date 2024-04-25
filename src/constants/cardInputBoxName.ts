@@ -14,6 +14,10 @@ const CARD_INPUTBOX_NAME = {
   owner: {
     name: "name",
   },
+
+  cvc: {
+    number: "number",
+  },
 };
 
 export default CARD_INPUTBOX_NAME;

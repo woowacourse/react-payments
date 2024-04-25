@@ -12,6 +12,9 @@ const CARD_FORM_MESSAGE = {
 
   inputCardCompany: "카드사를 선택해주세요.",
   cardCompanyDescription: "현재 국내 카드사만 가능합니다.",
+
+  inputCardCVC: "CVC 번호를 입력해 주세요.",
+  cardCVC: "CVC",
 };
 
 export default CARD_FORM_MESSAGE;

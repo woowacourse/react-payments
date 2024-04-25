@@ -10,9 +10,14 @@ import InputExpirationPeriod from "../../components/input/InputExpirationPeriod"
 import InputOwnerName from "../../components/input/InputOwnerName";
 import InputCreditCardCompany from "../../components/input/InputCreditCardCompany";
 import { useState } from "react";
+import InputCVCNumber from "../../components/input/InputCVCNumber";
 
 interface Owner {
   name: string;
+}
+
+interface CVC {
+  number: string;
 }
 
 const Payments = () => {
@@ -45,6 +50,8 @@ const Payments = () => {
     }
   };
 
+  const [cvc, setCVC, cvcError] = useInput<CVC>({ number: SIGN.empty });
+
   const formatExpirationPeriod = () =>
     expirationPeriod.year.length
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
@@ -64,6 +71,9 @@ const Payments = () => {
         selectedCompany={selectedCompany}
       />
       <InputFormContainer>
+        <CreditCardForm title={CARD_FORM_MESSAGE.inputCardCVC} inputError={cvcError}>
+          <InputCVCNumber inputValue={cvc.number} handleChange={setCVC} inputError={cvcError} />
+        </CreditCardForm>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardCompany}
           description={CARD_FORM_MESSAGE.cardCompanyDescription}
