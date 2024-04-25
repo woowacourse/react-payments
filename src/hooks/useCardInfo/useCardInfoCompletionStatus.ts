@@ -13,7 +13,11 @@ interface CardInfoControl {
   password: IInputControl;
 }
 
-export interface ICardInfoCompletionStatus {
+interface DynamicObject<T> {
+  [key: string]: T;
+}
+
+export interface ICardInfoCompletionStatus extends DynamicObject<boolean> {
   isCardNumbersCompleted: boolean;
   isExpiryDateCompleted: boolean;
   isCardholderNameCompleted: boolean;

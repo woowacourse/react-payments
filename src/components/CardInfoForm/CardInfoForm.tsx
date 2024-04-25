@@ -7,6 +7,9 @@ import PasswordInputContainer from './PasswordInputContainer';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
 import styled from 'styled-components';
+import getObjectValues from '../../utils/getObjectValues';
+import { useNavigate } from 'react-router-dom';
+import ROUTE_PATH from '../../pages/constants/routePath';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
@@ -14,15 +17,22 @@ export interface ICardInfoFormProps {
 }
 
 export default function CardInfoForm({ cardInfoControl, completionStatus }: ICardInfoFormProps) {
+  const navigate = useNavigate();
   const { cardNumbers, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
-  const completionFlags = Object.values(completionStatus);
-  const isSubmitable = completionFlags.every(v => v);
+  const completionFlags = getObjectValues<boolean>(completionStatus);
+  const isSubmitable = true || completionFlags.every((v: boolean) => v);
+
+  const onSubmit = () => {
+    if (isSubmitable) {
+      navigate(ROUTE_PATH.cardRegisterComplete);
+    }
+  };
 
   return (
     <form>
       <SequenceContainer
-        predicates={completionFlags}
+        completionFlagQueue={completionFlags}
         componentQueue={[
           <CardNumbersInputContainer {...cardNumbers} />,
           <CardExpiryDateInputContainer {...expiryDate} />,
@@ -31,7 +41,11 @@ export default function CardInfoForm({ cardInfoControl, completionStatus }: ICar
           <PasswordInputContainer {...password} />,
         ]}
       />
-      {isSubmitable && <SubmitButton type="button">확인</SubmitButton>}
+      {isSubmitable && (
+        <SubmitButton onClick={onSubmit} type="button">
+          확인
+        </SubmitButton>
+      )}
     </form>
   );
 }
