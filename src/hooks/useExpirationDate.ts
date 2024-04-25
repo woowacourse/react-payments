@@ -45,10 +45,13 @@ const useExpirationDate = () => {
   };
 
   useEffect(() => {
-    if (errorMessages.some((msg) => msg !== '')) return;
+    if (errorMessages.some((msg) => msg !== '')) {
+      setIsValid(false);
+      return;
+    }
 
     setIsValid(isValidDate(date.month, date.year));
-  }, [date, errorMessages]);
+  }, [date.month, date.year, errorMessages]);
 
   return {
     value: date,
