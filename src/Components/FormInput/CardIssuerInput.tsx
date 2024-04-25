@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { Dispatch, useEffect, useState } from "react";
 import { buttonStyle, categoryStyle, disappear, inputContainerStyle, listStyle, optionsStyle } from "./style";
+import useContextWrapper from "../../hooks/useContextWrapper";
+import { CardIssuerContext } from "../../routes/Payments/CardInfoContextProvider";
 
 const CARD_ISSUERS = ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"];
 
@@ -12,13 +14,21 @@ interface EventType extends React.MouseEvent<HTMLButtonElement> {
   target: EventTargetWithValue;
 }
 
-const OptionBox = ({ setIsClicked }: { setIsClicked: Dispatch<React.SetStateAction<boolean>> }) => {
+interface OptionBoxProps {
+  setIsClicked: Dispatch<React.SetStateAction<boolean>>;
+  setCardIssuer: Dispatch<React.SetStateAction<CardIssuer>>;
+}
+
+const OptionBox: React.FC<OptionBoxProps> = ({ setIsClicked, setCardIssuer }) => {
   const handleOptionClick = (e: EventType) => {
     e.preventDefault();
     const issuer = e.target.value! as CardIssuerCategory;
-    console.log(issuer);
     setIsClicked(false);
-    //TODO: 카드사 등록
+    setCardIssuer((prev) => {
+      const temp = { ...prev };
+      temp.name = issuer;
+      return temp;
+    });
   };
 
   useEffect(() => {
@@ -40,6 +50,7 @@ const OptionBox = ({ setIsClicked }: { setIsClicked: Dispatch<React.SetStateActi
 
 const CardIssuerInput = () => {
   const [isCLicked, setIsClicked] = useState(false);
+  const [cardIssuer, setCardIssuer] = useContextWrapper(CardIssuerContext);
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
@@ -50,10 +61,10 @@ const CardIssuerInput = () => {
     <div css={inputContainerStyle}>
       <input id="id-issuer-value" css={disappear} />
       <button css={buttonStyle} onClick={(e) => handleClick(e)}>
-        <div>카드사 입력하기</div>
+        <div>{cardIssuer.name ?? "카드사를 선택해주세요."}</div>
         <div>{isCLicked ? "🔼" : "🔽"}</div>
       </button>
-      {isCLicked ? <OptionBox setIsClicked={setIsClicked} /> : null}
+      {isCLicked ? <OptionBox setIsClicked={setIsClicked} setCardIssuer={setCardIssuer} /> : null}
     </div>
   );
 };
