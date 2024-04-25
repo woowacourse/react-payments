@@ -1,6 +1,8 @@
+import { CreditCardSpecificValue } from "./../@types/CreditCard";
 import SIGN from "../constants/sign";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
 import VALIDATE_STATUS, { ValidateStatus } from "../constants/validateStatus";
+import CARD_INPUT_LENGTH from "../constants/cardInputLength";
 
 const ValidatorCondition = {
   checkMaxDigit(value: string, digit: number) {
@@ -96,6 +98,12 @@ const Validator = {
       return this.checkCreditCardPassword(value);
 
     return VALIDATE_STATUS.notValid; // 예상치 못한 값이 들어오는 경우 유효하지 않는 값으로 처리
+  },
+
+  inputCreditCardIsComplete(value: CreditCardSpecificValue): boolean {
+    return Object.entries(value).every(([key, val]) => {
+      return CARD_INPUT_LENGTH[key as keyof CreditCardSpecificValue] === val.length;
+    });
   },
 };
 
