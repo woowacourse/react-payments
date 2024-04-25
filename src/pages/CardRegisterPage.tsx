@@ -12,7 +12,7 @@ const CardRegisterPage = () => {
   const { cardNumbers, expiryDate, cardholderName, cvc } = control;
 
   return (
-    <Container>
+    <PageContainer>
       <CardPreview
         isFront={isCardFront}
         cardType={0}
@@ -24,11 +24,11 @@ const CardRegisterPage = () => {
       <CardInfoFormWrapper>
         <CardInfoForm cardInfoControl={control} completionStatus={completionStatus} setIsCardFront={setIsCardFront} />
       </CardInfoFormWrapper>
-    </Container>
+    </PageContainer>
   );
 };
 
-const Container = styled.div`
+const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

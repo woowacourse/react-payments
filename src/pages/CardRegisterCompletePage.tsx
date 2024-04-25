@@ -23,16 +23,16 @@ export default function CardRegisterCompletePage() {
   }
 
   return (
-    <Container>
+    <PageContainer>
       <CompletionIcon src={CompletionIconSrc} alt="카드 등록 완료 이미지" />
       <CompletionText>{cardNumberPrefix}로 시작하는</CompletionText>
       <CompletionText>{cardType}가 등록되었어요.</CompletionText>
       <ConfirmButton onClick={onClickConfirmButton}>확인</ConfirmButton>
-    </Container>
+    </PageContainer>
   );
 }
 
-const Container = styled.div`
+const PageContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
