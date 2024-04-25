@@ -13,3 +13,5 @@ export interface ExpirationDate {
 export interface OwnerName {
   ownerName: string;
 }
+
+export type Brand = "visa" | "master" | null;

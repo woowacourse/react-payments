@@ -13,4 +13,9 @@
 
 .container:hover {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.container:focus {
+  text-decoration: underline;
 }

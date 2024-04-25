@@ -11,8 +11,11 @@ import PasswordInput from "@/components/PasswordInput/PasswordInput";
 import CVCInput from "@/components/CVCInput/CVCInput";
 import CardCompany from "@/components/CardCompany/CardCompany";
 import SubmitButton from "./components/SubmitButton/SubmitButton";
-import { ChangeEvent, useRef, useState, KeyboardEvent, FormEvent } from "react";
-import { ERRORS } from "@/constants/messages";
+import { FormEvent } from "react";
+import { isAllDone } from "./utils/input";
+import useCVC from "./hooks/useCVC";
+import useCardCompany from "./hooks/useCardCompany";
+import usePassword from "./hooks/usePassword";
 
 const App = () => {
   const {
@@ -36,121 +39,105 @@ const App = () => {
     nextInput: ownerNameNextInput,
     handleKeyDown: ownerNameHandleKeyDown,
   } = useOwnerName();
-  const [cardCompany, setCardCompany] = useState("");
-  const cardCompanyRef = useRef<HTMLSelectElement>(null);
-  const [CVC, setCVC] = useState({
-    value: "",
-    isError: false,
-    errorMessage: "",
-    isDone: false,
-  });
-  const [CVCShowNextInput, setCVCShowNextInput] = useState<boolean>(false);
-  const [password, setPassword] = useState({
-    value: "",
-    isDone: false,
-  });
-
-  const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setPassword({
-      ...password,
-      value,
-      isDone: value.length === 2,
-    });
-  };
-
-  const changeCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    setCardCompany(value);
-    cardCompanyRef.current?.blur();
-  };
-
-  const CVCHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      if (CVC.value.length === 3) {
-        setCVCShowNextInput(true);
-      } else {
-        setCVC({ ...CVC, isError: true, errorMessage: "세 자리 숫자를 입력해주세요" });
-      }
-    }
-  };
-
-  const changeCVC = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    if (Number.isInteger(Number(value))) {
-      setCVC({
-        ...CVC,
-        value,
-        isError: false,
-        errorMessage: "",
-        isDone: value.length === 3,
-      });
-      return;
-    }
-    setCVC({
-      ...CVC,
-      isError: true,
-      errorMessage: ERRORS.isNotInteger,
-    });
-  };
+  const {
+    CVC,
+    CVCShowNextInput,
+    CVCHandleKeyDown,
+    changeCVC,
+    isFocus,
+    focusCVC,
+    blurCVC,
+  } = useCVC();
+  const { cardCompany, cardCompanyRef, changeCardCompany } = useCardCompany();
+  const { password, changePassword } = usePassword();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(cardCompany, cardNumbers.data.first.value);
   };
 
   return (
     <div className={styles.app}>
       <CardPreview
+        face={isFocus ? "front" : "back"}
+        CVC={CVC.value}
+        cardCompany={cardCompany}
         cardNumbers={{
-          first: cardNumbers.data.first.isDone ? cardNumbers.data.first.value : "",
-          second: cardNumbers.data.second.isDone ? cardNumbers.data.second.value : "",
-          third: cardNumbers.data.third.isDone ? cardNumbers.data.third.value : "",
-          fourth: cardNumbers.data.fourth.isDone ? cardNumbers.data.fourth.value : "",
+          first: cardNumbers.data.first.isDone
+            ? cardNumbers.data.first.value
+            : "",
+          second: cardNumbers.data.second.isDone
+            ? cardNumbers.data.second.value
+            : "",
+          third: cardNumbers.data.third.isDone
+            ? cardNumbers.data.third.value
+            : "",
+          fourth: cardNumbers.data.fourth.isDone
+            ? cardNumbers.data.fourth.value
+            : "",
         }}
         expirationDate={{
-          month: expirationDate.data.month.isDone ? expirationDate.data.month.value : "",
-          year: expirationDate.data.year.isDone ? expirationDate.data.year.value : "",
+          month: expirationDate.data.month.isDone
+            ? expirationDate.data.month.value
+            : "",
+          year: expirationDate.data.year.isDone
+            ? expirationDate.data.year.value
+            : "",
         }}
         ownerName={{
-          ownerName: ownerName.data.ownerName.isDone ? ownerName.data.ownerName.value : "",
+          ownerName: ownerName.data.ownerName.isDone
+            ? ownerName.data.ownerName.value
+            : "",
         }}
       />
       <form onSubmit={handleSubmit}>
-        {CVCShowNextInput && <PasswordInput password={password} onChange={changePassword} />}
-        {<CVCInput CVC={CVC} changeCVC={changeCVC} onKeyDown={CVCHandleKeyDown} />}
-        {/* {ownerNameNextInput && <CVCInput CVC={CVC} changeCVC={changeCVC} />}
-        {
+        {CVCShowNextInput && (
+          <PasswordInput password={password} onChange={changePassword} />
+        )}
+        {ownerNameNextInput && (
+          <CVCInput
+            CVC={CVC}
+            onChange={changeCVC}
+            onKeyDown={CVCHandleKeyDown}
+            onFocus={focusCVC}
+            onBlur={blurCVC}
+          />
+        )}
+        {expirationDateNextInput && (
           <OwnerNameInput
             ownerName={ownerName}
             changeOwnerName={changeOwnerName}
             refs={ownerNameRefs}
             onKeyDown={ownerNameHandleKeyDown}
           />
-        } */}
-        {/* {
+        )}
+        {cardCompany && (
           <ExpirationDateInput
             expirationDate={expirationDate}
             changeExpirationDate={changeExpirationDate}
             blurExpirationDate={blurExpirationDate}
             refs={expirationDateRefs}
           />
-        } */}
-        {/* {cardNumbersNextInput && (
+        )}
+        {
           <CardCompany
             cardCompany={cardCompany}
             cardCompanyRef={cardCompanyRef}
             changeCardCompany={changeCardCompany}
           />
-        )}
+        }
         <CardNumberInput
           cardNumbers={cardNumbers}
           changeCardNumbers={changeCardNumbers}
           blurCardNumbers={blurCardNumbers}
-          refs={CardNumbersRefs}
-        /> */}
-        {CVCShowNextInput && <SubmitButton />}
+          refs={cardNumbersRefs}
+        />
+        {isAllDone(cardNumbers.data) &&
+          cardCompany &&
+          isAllDone(expirationDate.data) &&
+          isAllDone(ownerName.data) &&
+          CVC.isDone &&
+          password.isDone && <SubmitButton />}
       </form>
     </div>
   );

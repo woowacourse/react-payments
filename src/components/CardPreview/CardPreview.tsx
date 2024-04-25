@@ -4,35 +4,38 @@ import {
   MASK_START_INDEX,
   SYMBOLS,
 } from "../../constants/cardInfo";
-type Brand = "visa" | "master" | null;
 import { memo } from "react";
+import { getCardbrand } from "@/utils/card";
 
 interface CardPreviewProps {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
   expirationDate: { month: string; year: string };
   ownerName: { ownerName: string };
+  cardCompany: string;
+  CVC: string;
+  face: "front" | "back";
 }
 
-const getCardbrand = (firstCardNumber: string): Brand => {
-  const { visa, master } = CARD_BRAND;
-
-  if (firstCardNumber.startsWith(visa.startNumber.toString())) return "visa";
-
-  if (
-    Number(firstCardNumber.slice(0, 2)) >= master.startNumber &&
-    Number(firstCardNumber.slice(0, 2)) <= master.endNumber
-  )
-    return "master";
-
-  return null;
+const getCardCompanyClass = (cardCompany: string) => {
+  // console.log(cardCompany);
+  return styles[cardCompany];
 };
 
 const CardPreview = memo(
-  ({ cardNumbers, expirationDate, ownerName }: CardPreviewProps) => {
+  ({
+    cardNumbers,
+    expirationDate,
+    ownerName,
+    cardCompany,
+    CVC,
+    face,
+  }: CardPreviewProps) => {
     const brand = getCardbrand(cardNumbers.first);
+    const cardCompanyClass = getCardCompanyClass(cardCompany);
+    console.log(CVC, face);
 
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} ${cardCompanyClass}`}>
         <div className={styles.cardHeader}>
           <div className={styles.chip} />
           {brand && (
@@ -80,6 +83,9 @@ const CardPreview = memo(
     if (prev.expirationDate.year !== next.expirationDate.year) return false;
 
     if (prev.ownerName.ownerName !== next.ownerName.ownerName) return false;
+
+    if (prev.CVC !== next.CVC) return false;
+    if (prev.cardCompany !== next.cardCompany) return false;
 
     return true;
   }

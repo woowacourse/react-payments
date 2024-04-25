@@ -4,11 +4,19 @@ import Input from "@/components/common/Input/Input";
 
 interface CVCInputProps {
   CVC: { value: string; isError: boolean; errorMessage: string };
-  changeCVC: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
-const CVCInput = ({ CVC, changeCVC, onKeyDown }: CVCInputProps) => {
+const CVCInput = ({
+  CVC,
+  onChange,
+  onKeyDown,
+  onFocus,
+  onBlur,
+}: CVCInputProps) => {
   return (
     <Field
       title="CVC 번호를 입력해 주세요"
@@ -22,8 +30,10 @@ const CVCInput = ({ CVC, changeCVC, onKeyDown }: CVCInputProps) => {
         isError={CVC.isError}
         maxLength={3}
         autoFocus={true}
-        onChange={changeCVC}
+        onChange={onChange}
         onKeyDown={onKeyDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </Field>
   );

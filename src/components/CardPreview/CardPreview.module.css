@@ -67,3 +67,35 @@
 .ownerName {
   height: 20px;
 }
+
+.BC카드 {
+  background-color: var(--color-BC-background);
+}
+
+.신한카드 {
+  background-color: var(--color-shinhan-background);
+}
+
+.카카오뱅크 {
+  background-color: var(--color-kakao-background);
+}
+
+.현대카드 {
+  background-color: var(--color-hyundai-background);
+}
+
+.우리카드 {
+  background-color: var(--color-woori-background);
+}
+
+.롯데카드 {
+  background-color: var(--color-lotte-background);
+}
+
+.하나카드 {
+  background-color: var(--color-hana-background);
+}
+
+.국민카드 {
+  background-color: var(--color-kookmin-background);
+}
