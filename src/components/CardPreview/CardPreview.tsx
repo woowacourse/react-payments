@@ -3,6 +3,7 @@ import styles from './CardPreview.module.css';
 
 import {
   CARD_BRAND,
+  CARD_ISSUER_SELECTOR,
   MASK_START_INDEX,
   SYMBOLS,
 } from '../../constants/cardInfo';
@@ -23,9 +24,13 @@ export default function CardPreview({
     backDeps: [cvc],
   });
 
+  const cardIssuerClass = CARD_ISSUER_SELECTOR.get(cardIssuer[0]) as string;
+
   return (
     <div
-      className={clsx(styles.container, { [styles.backSide]: !isFrontSide })}
+      className={clsx(styles.container, styles[cardIssuerClass], {
+        [styles.backSide]: !isFrontSide,
+      })}
       onClick={flipCard}
     >
       {isFrontSide ? (

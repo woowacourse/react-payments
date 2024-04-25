@@ -12,6 +12,16 @@
   --color-card-bg-back: #d5d5d5;
   --color-card-chip: #ddcd78;
   --color-card-bg-cvc: #cbba64;
+
+  /* Card Issuer Brand Colors */
+  --color-bc: #f04651;
+  --color-shinhan: #0046ff;
+  --color-kakao: #ffe600;
+  --color-hyundai: #000000;
+  --color-woori: #007bc8;
+  --color-lotte: #ed1c24;
+  --color-hana: #009490;
+  --color-kookmin: #6a6056;
 }
 
 * {

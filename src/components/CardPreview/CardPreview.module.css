@@ -17,10 +17,48 @@
   color: var(--color-grey-100);
 }
 
+/* background color */
+.default {
+  background-color: var(--color-card-bg);
+}
+
+.bc {
+  background-color: var(--color-bc);
+}
+
+.shinhan {
+  background-color: var(--color-shinhan);
+}
+
+.kakao {
+  background-color: var(--color-kakao);
+}
+
+.hyundai {
+  background-color: var(--color-hyundai);
+}
+
+.woori {
+  background-color: var(--color-woori);
+}
+
+.lotte {
+  background-color: var(--color-lotte);
+}
+
+.hana {
+  background-color: var(--color-hana);
+}
+
+.kookmin {
+  background-color: var(--color-kookmin);
+}
+
 .backSide {
   background-color: var(--color-card-bg-back);
 }
 
+/* components */
 .cardHeader {
   display: flex;
   justify-content: space-between;
