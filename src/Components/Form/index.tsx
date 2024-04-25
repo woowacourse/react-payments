@@ -5,17 +5,20 @@ import CardOwnerField from "../FormField/CardOwnerField";
 import CardPasswordField from "../FormField/CardPasswordField";
 import CardValidityPeriodField from "../FormField/CardValidityPeriodField";
 import FormContextProvider from "./FormContextProvider";
+import FormRefContextProvider from "./FormRefContextProvider";
 
 const Form = () => {
   return (
     <form>
       <FormContextProvider>
-        <CardPasswordField />
-        <CardCVCField />
-        <CardOwnerField />
-        <CardValidityPeriodField />
-        <CardIssuerField />
-        <CardNumberField />
+        <FormRefContextProvider>
+          <CardPasswordField />
+          <CardCVCField />
+          <CardOwnerField />
+          <CardValidityPeriodField />
+          <CardIssuerField />
+          <CardNumberField />
+        </FormRefContextProvider>
       </FormContextProvider>
     </form>
   );
