@@ -20,7 +20,7 @@ export const InputSection = styled.div`
     display: none;
   }
   & > :last-child {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 `;
 
