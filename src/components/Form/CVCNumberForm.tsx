@@ -3,34 +3,25 @@ import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormField from "../common/FormField";
 
-import { EXPIRATION_DATE_FORM, FORM_REGEXP } from "../../constants/form";
-
 import { ICardFormProps } from "./Form";
 
-const ExpirationDateForm = ({
+const CVCNumberForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
-  setExpirationDate,
   setAllFormsValid,
   setIsFormFilledOnce,
+  setIsFrontCardPreview,
+  setCVCNumber,
 }: ICardFormProps) => {
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  const [inputValidities, setInputValidities] = useState({ 0: false });
 
-  const validateMonth = (value: string) => {
-    return value !== "" && FORM_REGEXP.validMonth.test(value);
-  };
-
-  const validateYear = (value: string) => {
-    const intValue = Number(value);
-    return (
-      !isNaN(intValue) &&
-      intValue >= EXPIRATION_DATE_FORM.startYear &&
-      intValue <= EXPIRATION_DATE_FORM.endYear
-    );
+  const validateCVCNumber = (value: string) => {
+    const REGEXP = /[0-9]{3}/;
+    return value !== "" && REGEXP.test(value);
   };
 
   const updateInputValidity = (index: string, isValid: boolean) => {
@@ -42,16 +33,13 @@ const ExpirationDateForm = ({
 
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
-    const allFilled = Object.keys(inputValidities).length === inputCount;
 
-    setAllInputValid(allValid && allFilled);
-    setAllFormsValid(allValid && allFilled);
+    setAllInputValid(allValid);
+    setAllFormsValid(allValid);
 
-    setErrorMessage(
-      allValid && allFilled ? "" : EXPIRATION_DATE_FORM.errorMessage.notAllValid
-    );
+    setErrorMessage(allValid ? "" : "CVC 번호는 3자리 숫자입니다.");
 
-    if (allValid && allFilled) {
+    if (allValid) {
       setIsFormFilledOnce(true);
     }
   }, [inputValidities]);
@@ -62,19 +50,21 @@ const ExpirationDateForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
-      maxLength={EXPIRATION_DATE_FORM.maxInputLength}
+      maxLength={3}
       setErrorMessage={setErrorMessage}
-      setData={setExpirationDate ? setExpirationDate : () => {}}
+      setData={setCVCNumber ? setCVCNumber : () => {}}
       setAllInputValid={(isValid: boolean) =>
         updateInputValidity(index.toString(), isValid)
       }
       validationRule={(value) =>
-        index === 0 ? validateMonth(value) : validateYear(value)
+        value.trim() === "" || validateCVCNumber(value)
       }
-      errorMessageText={
-        index === 0
-          ? EXPIRATION_DATE_FORM.errorMessage.invalidMonth
-          : EXPIRATION_DATE_FORM.errorMessage.invalidYear
+      errorMessageText={""}
+      onFocus={() =>
+        setIsFrontCardPreview ? setIsFrontCardPreview(false) : () => {}
+      }
+      onBlur={() =>
+        setIsFrontCardPreview ? setIsFrontCardPreview(true) : () => {}
       }
     />
   ));
@@ -88,4 +78,4 @@ const ExpirationDateForm = ({
   );
 };
 
-export default ExpirationDateForm;
+export default CVCNumberForm;

@@ -4,14 +4,13 @@ import Input from "./Input";
 import FormElement from "../common/FormField";
 
 import { ICardFormProps } from "./Form";
-import { USERNAME_FORM, FORM_REGEXP } from "../../constants/form";
 
-const UserNameForm = ({
+const PasswordForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
-  setUserName,
+  setPassword,
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
@@ -38,12 +37,13 @@ const UserNameForm = ({
       setIsFormFilledOnce(true);
     }
 
-    setErrorMessage(allValid ? "" : USERNAME_FORM.errorMessage.notAllValid);
+    setErrorMessage(allValid ? "" : "비밀번호는 숫자 2자리입니다.");
   }, [inputValidities]);
 
-  const validateName = (nameInput: string) => {
-    const regex = FORM_REGEXP.validUserName;
-    return regex.test(nameInput);
+  const validatePassword = (passwordInput: string) => {
+    console.log("pwdINput: " + passwordInput);
+    const regex = /[0-9]{2}/;
+    return regex.test(passwordInput);
   };
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -52,13 +52,13 @@ const UserNameForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
-      maxLength={USERNAME_FORM.maxInputLength}
+      maxLength={2}
       setErrorMessage={setErrorMessage}
-      setData={setUserName ? setUserName : () => {}}
+      setData={setPassword ? setPassword : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
-      validationRule={(value) => value.trim() === "" || validateName(value)}
+      validationRule={(value) => value.trim() === "" || validatePassword(value)}
       errorMessageText=""
     />
   ));
@@ -72,4 +72,4 @@ const UserNameForm = ({
   );
 };
 
-export default UserNameForm;
+export default PasswordForm;

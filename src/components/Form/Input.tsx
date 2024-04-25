@@ -13,6 +13,8 @@ interface IInputProps {
   validationRule: (value: string) => boolean;
   errorMessageText: string;
   setFocusedInputIndex?: React.Dispatch<React.SetStateAction<string>>;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(
@@ -28,6 +30,9 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
       validationRule,
       errorMessageText,
       setFocusedInputIndex,
+
+      onFocus,
+      onBlur,
     },
     ref
   ) => {
@@ -61,10 +66,12 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
         ref={ref}
         currentValue={currentValue}
         isValidInput={isValidInput}
-        onChange={inputChangeHandler}
         maxLength={maxLength}
         type={type}
         placeholder={placeholder}
+        onChange={inputChangeHandler}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     );
   }

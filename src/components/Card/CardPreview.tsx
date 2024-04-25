@@ -40,10 +40,11 @@ const CardFrame = styled.div<{ cardCompany: string }>`
     return `background: ${color};`;
   }}
   padding: 10px 15px;
-  width: 202px;
-  height: 117px;
+  width: 232px;
+  height: 137px;
   display: grid;
   gap: 10px;
+  box-sizing: border-box;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
 `;

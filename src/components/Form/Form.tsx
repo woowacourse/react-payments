@@ -7,6 +7,7 @@ import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
 import CardCompanyForm from "./CardCompanyForm";
+import CVCNumberForm from "./CVCNumberForm";
 
 // TODO: 이름 수정 - ICardInputFormProps
 export interface ICardFormProps {
@@ -18,7 +19,10 @@ export interface ICardFormProps {
   setExpirationDate?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setUserName?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setCardCompany?: React.Dispatch<React.SetStateAction<string>>;
+  setCVCNumber?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setPassword?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
 
+  setIsFrontCardPreview?: React.Dispatch<React.SetStateAction<boolean>>;
   setAllFormsValid: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFormFilledOnce: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -28,11 +32,17 @@ const Form = ({
   setExpirationDate,
   setUserName,
   setCardCompany,
+  setCVCNumber,
+  setPassword,
+  setIsFrontCardPreview,
 }: {
   setCardNumbers: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setUserName: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setCardCompany: React.Dispatch<React.SetStateAction<string>>;
+  setCVCNumber: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setPassword: React.Dispatch<React.SetStateAction<Map<string, string>>>;
+  setIsFrontCardPreview: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [isAllCardNumberValid, setIsAllCardNumberValid] = useState(false);
   const [isCardNumberFormFilledOnce, setIsCardNumberFormFilledOnce] =
@@ -50,9 +60,12 @@ const Form = ({
   const [isUserNameValid, setIsUserNameValid] = useState(false);
   const [isUserNameFilledOnce, setIsUserNameFilledOnce] = useState(false);
 
+  const [isCVCNumberValid, setIsCVCNumberValid] = useState(false);
+  const [isCVCNumberFilledOnce, setIsCVCNumberFilledOnce] = useState(false);
+
   return (
     <FormWrapper>
-      <div style={{ height: "137px" }}>
+      <div style={{ height: "170px" }}>
         <InputDescription
           title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
@@ -95,13 +108,13 @@ const Form = ({
             placeholders={["MM", "YY"]}
             setExpirationDate={setExpirationDate}
             setAllFormsValid={setIsAllExpirationDateValid}
-            setIsFormFilledOnce={setIsAllExpirationDateValid}
+            setIsFormFilledOnce={setIsExpirationDateFilledOnce}
           ></ExpirationDateForm>
         </div>
       )}
 
-      {/* {isExpirationDateFilledOnce && (
-        <div style={{ height: "137px" }}>
+      {isExpirationDateFilledOnce && (
+        <div style={{ height: "170px" }}>
           <InputDescription title="카드 소유자 이름을 입력해 주세요"></InputDescription>
           <UserNameForm
             labelContent="소유자 이름"
@@ -113,7 +126,23 @@ const Form = ({
             setIsFormFilledOnce={setIsUserNameFilledOnce}
           ></UserNameForm>
         </div>
-      )} */}
+      )}
+
+      {isUserNameFilledOnce && (
+        <div style={{ height: "170px" }}>
+          <InputDescription title="CVC 번호를 입력해 주세요"></InputDescription>
+          <CVCNumberForm
+            labelContent="CVC"
+            inputCount={1}
+            type="text"
+            placeholders={["123"]}
+            setCVCNumber={setCVCNumber}
+            setAllFormsValid={setIsCVCNumberValid}
+            setIsFormFilledOnce={setIsCVCNumberFilledOnce}
+            setIsFrontCardPreview={setIsFrontCardPreview}
+          ></CVCNumberForm>
+        </div>
+      )}
     </FormWrapper>
   );
 };
@@ -123,6 +152,23 @@ const FormWrapper = styled.form`
   height: max-content;
   display: flex;
   flex-direction: column-reverse;
+  overflow-y: auto;
+  max-height: 500px;
+  padding: 10px 30px;
+`;
+
+const SubmitButton = styled.button`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); // 화면 중앙 정렬
+  width: 315px;
+  height: 50px;
+  background-color: #333333;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 `;
 
 export default Form;
