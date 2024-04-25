@@ -10,24 +10,6 @@ import ErrorMessage from "../../common/ErrorMessage";
 import Select from "../../common/Select";
 import styled from "styled-components";
 
-const CardIssuerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-`;
-
-const CardIssuerBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const cardIssuerOptions = CARD_ISSUERS.map((cardIssuer) => ({
-  value: cardIssuer,
-  label: cardIssuerMapper[cardIssuer].label,
-}));
-
 export interface CardIssuerSelectProps {
   valueState: CardIssuer | "";
   errorState: CardIssuerErrorState;
@@ -61,3 +43,21 @@ export default function CardIssuerSelect({
     </CardIssuerContainer>
   );
 }
+
+const CardIssuerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+`;
+
+const CardIssuerBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const cardIssuerOptions = CARD_ISSUERS.map((cardIssuer) => ({
+  value: cardIssuer,
+  label: cardIssuerMapper[cardIssuer].label,
+}));

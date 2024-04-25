@@ -9,25 +9,6 @@ import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
 
-const CardDateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 16px;
-`;
-
-const CardDateBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 10px;
-`;
-
 export interface CardExpirationDateInputProps {
   valueState: CardExpiration;
   errorState: CardExpirationErrorState;
@@ -78,3 +59,22 @@ export default function CardExpirationDateInput({
     </CardDateContainer>
   );
 }
+
+const CardDateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+`;
+
+const CardDateBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 10px;
+`;

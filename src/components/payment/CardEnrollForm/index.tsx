@@ -9,22 +9,6 @@ import FormSubmitButton from "./FormSubmitButton";
 import styled from "styled-components";
 import useCardEnrollForm from "../../../hooks/useCardEnrollForm";
 
-const CardEnrollFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 77px;
-`;
-
-const CardInformationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 376px;
-  padding: 45px 30px;
-  gap: 16px;
-`;
-
 export default function CardEnrollForm() {
   const {
     cardInformation,
@@ -57,3 +41,19 @@ export default function CardEnrollForm() {
     </CardEnrollFormContainer>
   );
 }
+
+const CardEnrollFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 77px;
+`;
+
+const CardInformationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 376px;
+  padding: 45px 30px;
+  gap: 16px;
+`;

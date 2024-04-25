@@ -7,6 +7,90 @@ import Visa from "../../../static/Visa.png";
 import isNumberStartWith from "../../../utils/isNumberStartWith";
 import styled from "styled-components";
 
+const isVisaCard = (cardNumbers: CardNumbers) => {
+  return isNumberStartWith(cardNumbers[0], "4");
+};
+
+const isMasterCard = (cardNumbers: CardNumbers) => {
+  return (
+    ["51", "52", "53", "54", "55"].filter((startingNumber) =>
+      isNumberStartWith(cardNumbers[0], startingNumber)
+    ).length > 0
+  );
+};
+
+interface CardPreviewProps {
+  cardInformation: CardInformationValueState;
+  isFlipped: boolean;
+}
+
+export default function CardPreview({
+  cardInformation,
+  isFlipped,
+}: CardPreviewProps) {
+  const cardBrandImg = isVisaCard(cardInformation.cardNumbers)
+    ? Visa
+    : isMasterCard(cardInformation.cardNumbers)
+      ? Mastercard
+      : null;
+
+  return (
+    <CardContainer>
+      {isFlipped ? (
+        <CardBack>
+          <CvcWrapper>
+            <CvcText>{cardInformation.cardCvc}</CvcText>
+          </CvcWrapper>
+        </CardBack>
+      ) : (
+        <CardFront cardIssuer={cardInformation.cardIssuer}>
+          <FrontHeader>
+            <IcChip></IcChip>
+            {cardBrandImg && (
+              <PaymentCompanyLogo
+                src={cardBrandImg}
+                alt="Payment Company Logo"
+              />
+            )}
+          </FrontHeader>
+          <CardInfoContainer>
+            <PreviewTextContainer>
+              <PreviewText>{cardInformation.cardNumbers[0]}</PreviewText>
+              <PreviewText>{cardInformation.cardNumbers[1]}</PreviewText>
+              <HiddenNumberContainer>
+                {Array.from({
+                  length: cardInformation.cardNumbers[2].length,
+                }).map((_, index) => (
+                  <HiddenNumber key={index} />
+                ))}
+              </HiddenNumberContainer>
+              <HiddenNumberContainer>
+                {Array.from({
+                  length: cardInformation.cardNumbers[3].length,
+                }).map((_, index) => (
+                  <HiddenNumber key={index} />
+                ))}
+              </HiddenNumberContainer>
+            </PreviewTextContainer>
+            <PreviewTextContainer>
+              <div>
+                <PreviewText>
+                  {cardInformation.cardExpiration.month}
+                </PreviewText>
+                {cardInformation.cardExpiration.month.length === 2 && "/"}
+                <PreviewText>{cardInformation.cardExpiration.year}</PreviewText>
+              </div>
+            </PreviewTextContainer>
+            <PreviewTextContainer>
+              <PreviewText>{cardInformation.cardOwnerName}</PreviewText>
+            </PreviewTextContainer>
+          </CardInfoContainer>
+        </CardFront>
+      )}
+    </CardContainer>
+  );
+}
+
 const CardContainer = styled.div`
   width: 212px;
   height: 132px;
@@ -107,87 +191,3 @@ const CvcWrapper = styled.div`
 const CvcText = styled.span`
   margin-right: 16px;
 `;
-
-const isVisaCard = (cardNumbers: CardNumbers) => {
-  return isNumberStartWith(cardNumbers[0], "4");
-};
-
-const isMasterCard = (cardNumbers: CardNumbers) => {
-  return (
-    ["51", "52", "53", "54", "55"].filter((startingNumber) =>
-      isNumberStartWith(cardNumbers[0], startingNumber)
-    ).length > 0
-  );
-};
-
-interface CardPreviewProps {
-  cardInformation: CardInformationValueState;
-  isFlipped: boolean;
-}
-
-export default function CardPreview({
-  cardInformation,
-  isFlipped,
-}: CardPreviewProps) {
-  const cardBrandImg = isVisaCard(cardInformation.cardNumbers)
-    ? Visa
-    : isMasterCard(cardInformation.cardNumbers)
-      ? Mastercard
-      : null;
-
-  return (
-    <CardContainer>
-      {isFlipped ? (
-        <CardBack>
-          <CvcWrapper>
-            <CvcText>{cardInformation.cardCvc}</CvcText>
-          </CvcWrapper>
-        </CardBack>
-      ) : (
-        <CardFront cardIssuer={cardInformation.cardIssuer}>
-          <FrontHeader>
-            <IcChip></IcChip>
-            {cardBrandImg && (
-              <PaymentCompanyLogo
-                src={cardBrandImg}
-                alt="Payment Company Logo"
-              />
-            )}
-          </FrontHeader>
-          <CardInfoContainer>
-            <PreviewTextContainer>
-              <PreviewText>{cardInformation.cardNumbers[0]}</PreviewText>
-              <PreviewText>{cardInformation.cardNumbers[1]}</PreviewText>
-              <HiddenNumberContainer>
-                {Array.from({
-                  length: cardInformation.cardNumbers[2].length,
-                }).map((_, index) => (
-                  <HiddenNumber key={index} />
-                ))}
-              </HiddenNumberContainer>
-              <HiddenNumberContainer>
-                {Array.from({
-                  length: cardInformation.cardNumbers[3].length,
-                }).map((_, index) => (
-                  <HiddenNumber key={index} />
-                ))}
-              </HiddenNumberContainer>
-            </PreviewTextContainer>
-            <PreviewTextContainer>
-              <div>
-                <PreviewText>
-                  {cardInformation.cardExpiration.month}
-                </PreviewText>
-                {cardInformation.cardExpiration.month.length === 2 && "/"}
-                <PreviewText>{cardInformation.cardExpiration.year}</PreviewText>
-              </div>
-            </PreviewTextContainer>
-            <PreviewTextContainer>
-              <PreviewText>{cardInformation.cardOwnerName}</PreviewText>
-            </PreviewTextContainer>
-          </CardInfoContainer>
-        </CardFront>
-      )}
-    </CardContainer>
-  );
-}

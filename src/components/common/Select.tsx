@@ -1,18 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledSelect = styled.select<{
-  isError: boolean;
-}>`
-  padding: 8px;
-  background: white;
-  color: black;
-  border: 1px solid
-    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
-  border-radius: 4px;
-  width: 100%;
-`;
-
 interface Option {
   value: string;
   label: string;
@@ -27,14 +15,14 @@ export interface SelectProps {
   onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
-const Select = ({
+export default function Select({
   placeholder,
   defaultValue = "",
   options,
   isError,
   onChange,
   onBlur,
-}: SelectProps) => {
+}: SelectProps) {
   return (
     <StyledSelect
       defaultValue={defaultValue}
@@ -54,6 +42,16 @@ const Select = ({
       ))}
     </StyledSelect>
   );
-};
+}
 
-export default Select;
+const StyledSelect = styled.select<{
+  isError: boolean;
+}>`
+  padding: 8px;
+  background: white;
+  color: black;
+  border: 1px solid
+    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
+  border-radius: 4px;
+  width: 100%;
+`;

@@ -8,23 +8,6 @@ import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
 
-const CardNumbersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const CardNumberBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
 export interface CardNumbersInputProps {
   valueState: CardNumbers;
   errorState: CardNumbersErrorState;
@@ -95,3 +78,20 @@ export default function CardNumbersInput({
     </CardNumbersContainer>
   );
 }
+
+const CardNumbersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CardNumberBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
