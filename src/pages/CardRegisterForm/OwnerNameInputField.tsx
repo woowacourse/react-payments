@@ -3,9 +3,10 @@ import InputField from "../../components/InputField/InputField";
 import { Validator } from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
 import useValidation from "@/hooks/useValidation";
+import { INPUT_COUNTS } from "@/constants/condition";
 
 const VALID_LENGTH = 30;
-const INPUTS_COUNT = 1;
+const INPUTS_COUNT = INPUT_COUNTS.OWNER_NAME;
 const individualValidators: Validator[] = [
   {
     validate: (input: string) => /^[a-zA-Z\s]*$/.test(input),
@@ -17,8 +18,14 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+const OwnerNameInputField = ({
+  reduceds,
+}: {
+  reduceds: ReturnType<typeof useInput>[];
+}) => {
+  const validationStates = reduceds.map((reduced) =>
+    useValidation(reduced, individualValidators)
+  );
   return (
     <InputField>
       <InputField.Label>소유자 이름</InputField.Label>
@@ -37,7 +44,10 @@ const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInpu
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce(
+          (prev, cur) => prev || cur.inputState.errorMessage,
+          ""
+        )}
       </InputField.ErrorMessage>
     </InputField>
   );

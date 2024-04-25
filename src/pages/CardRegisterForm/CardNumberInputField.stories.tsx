@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardNumberInputField from "./CardNumberInputField";
 import useInput from "@/hooks/useInput";
+import { INPUT_COUNTS } from "@/constants/condition";
 
 const meta = {
   title: "CardNumberInputField",
@@ -12,7 +13,9 @@ export default meta;
 type Story = StoryObj<typeof CardNumberInputField>;
 
 const CardNumberInputFieldWithHook = () => {
-  const reduceds = Array.from({ length: 4 }).map(() => useInput(""));
+  const reduceds = Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map(() =>
+    useInput("")
+  );
   return <CardNumberInputField reduceds={reduceds} />;
 };
 

@@ -3,18 +3,21 @@ import InputField from "../../components/InputField/InputField";
 import { Validator } from "@/hooks/useValidation";
 import useValidation from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
+import { INPUT_COUNTS } from "@/constants/condition";
 
-const VALID_LENGTH = 2;
-const INPUTS_COUNT = 2;
+const VALID_LENGTH = INPUT_COUNTS.EXPIRATION_DATE;
+const INPUTS_COUNT = INPUT_COUNTS.EXPIRATION_DATE;
 const individualValidators: Validator[] = [
   {
     errorMessage: "월은 1~12의 범위여야합니다.",
-    validate: (month: string) => month === "" || (Number(month) >= 1 && Number(month) <= 12),
+    validate: (month: string) =>
+      month === "" || (Number(month) >= 1 && Number(month) <= 12),
     index: [0],
   },
   {
     errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-    validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
+    validate: (input: string) =>
+      input.length === 0 || input.length === VALID_LENGTH,
     index: [0, 1],
   },
   {
@@ -23,8 +26,14 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+const ExpirationDateInputField = ({
+  reduceds,
+}: {
+  reduceds: ReturnType<typeof useInput>[];
+}) => {
+  const validationStates = reduceds.map((reduced) =>
+    useValidation(reduced, individualValidators)
+  );
   return (
     <InputField>
       <InputField.Label>유효기간</InputField.Label>
@@ -42,7 +51,10 @@ const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof us
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce(
+          (prev, cur) => prev || cur.inputState.errorMessage,
+          ""
+        )}
       </InputField.ErrorMessage>
     </InputField>
   );
