@@ -61,7 +61,8 @@ const useInput = ({
         !isCompleted &&
         nextStepHandler &&
         !validate.isEmptyValue(inputValue) &&
-        isValidCurrentStep
+        isValidCurrentStep &&
+        !inputValue
       ) {
         nextStepHandler();
       }

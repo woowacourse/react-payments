@@ -47,6 +47,6 @@ export const ButtonContainer = styled.div`
   right: 0;
   left: 0;
   width: 376px;
-  margin: 17px auto;
+  margin: 0px auto;
   height: 52px;
 `;

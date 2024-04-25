@@ -4,7 +4,8 @@ import * as S from './confirmPage.style';
 import ConfirmButton from './components/ConfirmButton';
 import ConfirmImageIcon from './components/ConfirmImageIcon';
 import CompleteText from './components/CompleteText';
-import NotFoundPage from '../notFound/NotFoundPage';
+import NotFoundPage from '../error/NotFoundPage';
+import PAGE_ROUTES from '../../constants/routes';
 
 export default function ConfirmPage() {
   const location = useLocation();
@@ -16,7 +17,7 @@ export default function ConfirmPage() {
   const cardIssuer = state?.cardIssuer ?? '기본 카드 발급자';
 
   const goToHomePage = () => {
-    navigate('/');
+    navigate(PAGE_ROUTES.MAIN);
   };
 
   return (

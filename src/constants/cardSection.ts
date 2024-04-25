@@ -30,7 +30,7 @@ export const CARD_ISSUER = Object.freeze({
   inputTitle: '현재 국내 카드사만 가능합니다.',
 });
 
-export const CVC = Object.freeze({
+export const CARD_CVC = Object.freeze({
   title: 'CVC 번호를 입력해 주세요.',
   inputTitle: 'CVC',
   errorMessage: '숫자 3개를 입력해 주세요',

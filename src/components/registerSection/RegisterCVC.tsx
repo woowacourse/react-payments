@@ -4,7 +4,7 @@ import Input from '../composables/Input';
 import Label from '../composables/Label';
 import { MAX_LENGTH } from '../../App';
 import { forwardRef } from 'react';
-import { CVC } from '../../constants/cardSection';
+import { CARD_CVC } from '../../constants/cardSection';
 import { RegisterStepProps } from 'types';
 
 const RegisterCVC = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref) => {
@@ -12,7 +12,7 @@ const RegisterCVC = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref)
 
   return (
     <S.Wrapper>
-      <InputSection title={CVC.title} inputTitle={CVC.inputTitle}>
+      <InputSection title={CARD_CVC.title} inputTitle={CARD_CVC.inputTitle}>
         <Label htmlFor={'cvc'} />
         <Input
           id={'cvc'}
@@ -28,7 +28,7 @@ const RegisterCVC = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref)
         />
       </InputSection>
       <S.ErrorContainer>
-        <S.ErrorMessageSpan>{isError && CVC.errorMessage}</S.ErrorMessageSpan>
+        <S.ErrorMessageSpan>{isError && CARD_CVC.errorMessage}</S.ErrorMessageSpan>
       </S.ErrorContainer>
     </S.Wrapper>
   );

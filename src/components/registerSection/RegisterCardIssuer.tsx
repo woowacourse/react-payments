@@ -1,5 +1,4 @@
 import * as S from '../../app.style';
-import Option from '../composables/Option';
 import Label from '../composables/Label';
 import InputSection from './InputSection';
 import { CARD_ISSUER } from '../../constants/cardSection';
@@ -20,7 +19,11 @@ const RegisterCardIssuer = forwardRef<HTMLSelectElement, RegisterCardIssuerProps
         <Label htmlFor={'cardIssuer'} />
         <Select ref={ref} onChange={onChange} id={'cardIssuer'}>
           {INITIAL_CARD_ISSUER_INFO.map((cardIssuer) => {
-            return <Option key={cardIssuer.id} text={cardIssuer.issuer} value={cardIssuer.value} />;
+            return (
+              <option key={cardIssuer.id} value={cardIssuer.value}>
+                {cardIssuer.issuer}
+              </option>
+            );
           })}
         </Select>
       </InputSection>

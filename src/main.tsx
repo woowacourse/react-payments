@@ -3,16 +3,19 @@ import App from './App';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ConfirmPage from './pages/confirm/ConfirmPage';
-import NotFoundPage from './pages/notFound/NotFoundPage';
+import NotFoundPage from './pages/error/NotFoundPage';
+import ErrorPage from './pages/error/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/confirm',
     element: <ConfirmPage />,
+    errorElement: <ErrorPage />,
   },
 
   { path: '*', element: <NotFoundPage /> },

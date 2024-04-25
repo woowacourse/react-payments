@@ -18,6 +18,7 @@ import CvcCard from './components/cards/CvcCard';
 import REGISTER_STEP from './constants/registerStep';
 import { InitialCardNumberState } from 'types';
 import useDetectComplete from './hooks/useDetectComplete';
+import PAGE_ROUTES from './constants/routes';
 
 const initialCardNumberState: InitialCardNumberState = {
   value: '',
@@ -165,7 +166,7 @@ function App() {
   });
 
   const handleNavigateToConfirmPage = () => {
-    navigate('/confirm', {
+    navigate(PAGE_ROUTES.CONFIRM, {
       state: {
         isSucceed: true,
         cardNumbers: cardNumbers[0].value,
