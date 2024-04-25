@@ -7,9 +7,10 @@ import { CARD_CVC } from '../../constants/conditions';
 interface CardCVCInputProps {
   isCVCValid: { isValid: boolean; errorMessage: string };
   onChangeCVC: (value: string) => void;
+  onChangeFocusCVC: (isFocus: boolean) => void;
 }
 
-export default function CardCVCInput({ isCVCValid, onChangeCVC }: CardCVCInputProps) {
+export default function CardCVCInput({ isCVCValid, onChangeCVC, onChangeFocusCVC }: CardCVCInputProps) {
   const handleChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value = e.target.value.replace(CARD_CVC.INVALID_CHARS_REGEX, '');
     if (e.target.value.length > CARD_CVC.MAX_LENGTH) {
@@ -18,6 +19,10 @@ export default function CardCVCInput({ isCVCValid, onChangeCVC }: CardCVCInputPr
     }
 
     onChangeCVC(e.target.value);
+  };
+
+  const handleChangeFocusCVC = (e: React.FocusEvent<HTMLInputElement>) => {
+    onChangeFocusCVC(e.type === 'focus');
   };
 
   return (
@@ -29,6 +34,8 @@ export default function CardCVCInput({ isCVCValid, onChangeCVC }: CardCVCInputPr
           placeholder="123"
           maxLength={CARD_CVC.MAX_LENGTH}
           onChange={handleChangeCVC}
+          onFocus={handleChangeFocusCVC}
+          onBlur={handleChangeFocusCVC}
           isValid={isCVCValid.isValid}
         />
       </InputField>

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import CardBrandInput from '../CardBrandInput/CardBrandInput';
 import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
@@ -25,7 +27,13 @@ export default function App() {
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
   const { owner, ownerValid, handleChangeOwner } = useChangeOwner();
   const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
-  const { PIN, PINValid, handleChangePIN } = useChangePIN();
+  const { PINValid, handleChangePIN } = useChangePIN();
+
+  const [showCardBackside, setShowCardBackside] = useState(false);
+
+  const handleShowCardBackside = (isCVCFocus: boolean) => {
+    setShowCardBackside(isCVCFocus);
+  };
 
   return (
     <S.AppLayout>
@@ -37,11 +45,13 @@ export default function App() {
           year={expireDate.year}
           owner={owner}
           CVC={CVC}
+          showCardBackside={showCardBackside}
         />
       </S.CardPreviewBox>
+
       <S.CardForm>
         <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />
-        <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} />
+        <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} onChangeFocusCVC={handleShowCardBackside} />
         <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
         <CardExpirationInput
           isMonthValid={expireMonthValid}

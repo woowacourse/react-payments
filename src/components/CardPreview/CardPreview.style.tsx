@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { cardBrandsType } from '../../types/cardBrands';
 import { CARD_BRANDS } from '../../constants/conditions';
 
-export const Card = styled.div<{ $brand: cardBrandsType }>`
+export const CardFrontside = styled.div<{ $brand: cardBrandsType }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
@@ -47,7 +47,7 @@ export const InfoBox = styled.p<{ $length?: number }>`
   align-items: center;
   width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
   height: 20px;
-  color: white;
+  color: var(--grey-100);
   font-size: var(--font-size-xl);
   font-weight: 500;
   line-height: 20px;
@@ -63,4 +63,32 @@ export const InfoBox = styled.p<{ $length?: number }>`
 export const InfoContainer = styled.div`
   display: flex;
   column-gap: 5px;
+`;
+
+export const CardBackside = styled.div`
+  position: relative;
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  padding: 0;
+  background-color: var(--card-backside-bg);
+  box-shadow: 3px 3px 5px 0px var(--card-shadow);
+  transition: 0.3s ease;
+  vertical-align: bottom;
+`;
+
+export const CVCBox = styled.div`
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  height: 24px;
+  background-color: var(--card-cvc-bg);
+  padding: 2px 16px;
+  text-align: right;
+
+  color: var(--grey-100);
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0.08em;
 `;

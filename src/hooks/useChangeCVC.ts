@@ -11,8 +11,6 @@ export default function useChangeCVC() {
     const isValidCVC = validateCVC(value);
     setCVCValid(isValidCVC);
 
-    if (!isValidCVC.isValid && value !== '') return;
-
     setCVC(value);
   };
 

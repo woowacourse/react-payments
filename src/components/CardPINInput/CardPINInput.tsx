@@ -24,7 +24,12 @@ export default function CardPINInput({ isPINValid, onChangePIN }: CardPINInputPr
     <div>
       <TitleContainer title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" />
       <InputField label="비밀번호 앞 2자리" errorMessage={isPINValid.errorMessage}>
-        <Input type="text" maxLength={CARD_PIN.MAX_LENGTH} onChange={handleChangePIN} isValid={isPINValid.isValid} />
+        <Input
+          type="password"
+          maxLength={CARD_PIN.MAX_LENGTH}
+          onChange={handleChangePIN}
+          isValid={isPINValid.isValid}
+        />
       </InputField>
     </div>
   );

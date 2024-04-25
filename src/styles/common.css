@@ -9,6 +9,8 @@
   --card-chip: #ddcd78;
   --card-chip-border: #ddcd781a;
   --card-shadow: #00000040;
+  --card-backside-bg: #00000040;
+  --card-cvc-bg: #cbba64;
 
   --selectbox-hover-bg: #f3f3f3;
   --error: #ff3d3d;
