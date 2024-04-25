@@ -4,6 +4,7 @@ import {
   CardBrandField,
   CardNumbersField,
   ExpirationDateField,
+  PasswordField,
   UserNameField,
 } from '../FormField';
 
@@ -42,6 +43,11 @@ interface CardInformationFormProps {
     isCVCNumberError: boolean;
     toggleIsFocusCVCPreview: React.DispatchWithoutAction;
   };
+  password: {
+    passwordState: string;
+    setPasswordState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isPasswordError: boolean;
+  };
 }
 
 const CardInformationForm = ({
@@ -50,6 +56,7 @@ const CardInformationForm = ({
   userName,
   cardBrand,
   cvcNumber,
+  password,
 }: CardInformationFormProps) => {
   return (
     <Form>
@@ -58,6 +65,7 @@ const CardInformationForm = ({
       <ExpirationDateField {...expirationDate} />
       <UserNameField {...userName} />
       <CVCNumberField {...cvcNumber} />
+      <PasswordField {...password} />
     </Form>
   );
 };

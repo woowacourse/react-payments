@@ -2,6 +2,7 @@ import useCVCNumber from './useCVCNumber';
 import useCardBrand from './useCardBrand';
 import useCardNumbers from './useCardNumbers';
 import useExpirationDate from './useExpirationDate';
+import usePassword from './usePassword';
 import useUserName from './useUserName';
 
 interface FormState {
@@ -10,6 +11,7 @@ interface FormState {
   userName: string;
   cardBrand: null;
   cvcNumber: string;
+  password: string;
 }
 
 const useForm = (defaultValues: FormState) => {
@@ -26,6 +28,7 @@ const useForm = (defaultValues: FormState) => {
     isFocusCVCPreview,
     toggleIsFocusCVCPreview,
   } = useCVCNumber(defaultValues.cvcNumber);
+  const { passwordState, setPasswordState, isPasswordError } = usePassword(defaultValues.password);
 
   const previewProps = {
     cardNumberState,
@@ -62,6 +65,11 @@ const useForm = (defaultValues: FormState) => {
       setCVCNumberState,
       isCVCNumberError,
       toggleIsFocusCVCPreview,
+    },
+    password: {
+      passwordState,
+      setPasswordState,
+      isPasswordError,
     },
   };
 

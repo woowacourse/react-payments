@@ -3,6 +3,7 @@ const MAX_LENGTH = {
   expirationDate: 2,
   userName: 20,
   cvcNumber: 3,
+  password: 2,
 } as const;
 
 const REG_EXP = {
@@ -23,6 +24,10 @@ const REG_EXP = {
     invalid: /[^a-zA-Z\s]+/,
   },
   cvcNumber: {
+    valid: /^\d+$/,
+    invalid: /[^\d+$]/g,
+  },
+  password: {
     valid: /^\d+$/,
     invalid: /[^\d+$]/g,
   },

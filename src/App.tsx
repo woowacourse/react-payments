@@ -10,6 +10,7 @@ function App() {
     userName: '',
     cardBrand: null,
     cvcNumber: '',
+    password: '',
   });
 
   return (
