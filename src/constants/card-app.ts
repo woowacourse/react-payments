@@ -87,3 +87,8 @@ export const INPUT_RULES = {
   maxCardCVCNumberLength: 3,
   maxCardPasswordLength: 2,
 };
+
+export const URL = {
+  defaultPage: '/react-payments/dist/',
+  submitPage: '/react-payments/dist/submit',
+};
