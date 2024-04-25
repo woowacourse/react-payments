@@ -8,7 +8,7 @@ import {
   CardNumberErrorContext,
   CardOwnerInfoErrorContext,
   CardValidityPeriodErrorContext,
-} from "../../Form/ErrorContextProvider";
+} from "../../Form/FormContextProvider";
 import FormInput from "../FormInputCompound";
 
 interface Props {

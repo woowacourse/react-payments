@@ -54,7 +54,7 @@ export const FormRenderOrderContext = createContext<
   [FormRenderOrder, Dispatch<SetStateAction<FormRenderOrder>>] | null
 >(null);
 
-const ErrorContextProvider = ({ children }: { children: React.ReactNode }) => {
+const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
   const cardNumberErrorState = useState(initCardNumbersError);
   const cardValidityPeriodErrorState = useState(initCardValidityPeriod);
   const cardOwnerInfoErrorState = useState(initCardOwnerInfo);
@@ -86,4 +86,4 @@ const ErrorContextProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default ErrorContextProvider;
+export default FormContextProvider;

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardNumberErrorContext } from "../Form/ErrorContextProvider";
+import { CardNumberErrorContext } from "../Form/FormContextProvider";
 
 import FormInputCompound from "./FormInputCompound";
 
@@ -24,7 +24,7 @@ const CardNumberInput = memo(() => {
   return (
     <>
       {InputInfoList.map(({ name }, index) => (
-        <FormInputCompound<CardNumbers>
+        <FormInputCompound
           id={`id-numbers-${name}`}
           key={index}
           onInputChange={(e) =>

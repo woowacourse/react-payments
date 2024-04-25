@@ -1,7 +1,7 @@
 import { memo } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardValidityPeriodContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardValidityPeriodErrorContext } from "../Form/ErrorContextProvider";
+import { CardValidityPeriodErrorContext } from "../Form/FormContextProvider";
 
 import FormInputCompound from "./FormInputCompound";
 

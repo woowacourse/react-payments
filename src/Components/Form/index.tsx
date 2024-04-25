@@ -4,19 +4,19 @@ import CardNumberField from "../FormField/CardNumberField";
 import CardOwnerField from "../FormField/CardOwnerField";
 import CardPasswordField from "../FormField/CardPasswordField";
 import CardValidityPeriodField from "../FormField/CardValidityPeriodField";
-import ErrorContextProvider from "./ErrorContextProvider";
+import FormContextProvider from "./FormContextProvider";
 
 const Form = () => {
   return (
     <form>
-      <ErrorContextProvider>
+      <FormContextProvider>
         <CardPasswordField />
         <CardCVCField />
         <CardOwnerField />
         <CardValidityPeriodField />
         <CardIssuerField />
         <CardNumberField />
-      </ErrorContextProvider>
+      </FormContextProvider>
     </form>
   );
 };

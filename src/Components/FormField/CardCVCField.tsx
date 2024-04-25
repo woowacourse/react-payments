@@ -1,5 +1,5 @@
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { CardCVCErrorContext } from "../Form/ErrorContextProvider";
+import { CardCVCErrorContext } from "../Form/FormContextProvider";
 import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
