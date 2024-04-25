@@ -14,15 +14,11 @@ export default function CardPasswordInput({
   setCardPassword,
   isCompletedSections,
   setIsCompletedSections,
-  isOpenForm,
-  setIsOpenForm,
 }: {
   cardPassword: string;
   setCardPassword: Dispatch<SetStateAction<string>>;
   isCompletedSections: boolean[];
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -49,7 +45,7 @@ export default function CardPasswordInput({
     updatedIsCompletedSections[5] = cardPassword.length == 2;
     setIsCompletedSections(updatedIsCompletedSections);
     console.log(isCompletedSections);
-  }, [cardPassword, setIsCompletedSections]);
+  }, [cardPassword]);
 
   return (
     <>
