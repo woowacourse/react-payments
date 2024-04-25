@@ -21,16 +21,12 @@ function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
     handleOwner(e.target.value.toUpperCase());
   };
 
-  const errorMessage = isValid ? '' : ERROR_MESSAGE.INVALID_CARD_OWNER;
+  const errorMessage = isClicked && !isValid ? ERROR_MESSAGE.INVALID_CARD_OWNER : '';
 
   return (
     <div>
       <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
-      <InputField
-        label="소유자 이름"
-        inputCount={CARD_OWNER.INPUT_FIELD_COUNT}
-        errorMessage={isClicked ? errorMessage : ''}
-      >
+      <InputField label="소유자 이름" inputCount={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}

@@ -20,7 +20,6 @@ interface CardExpirationInputProps {
 function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: CardExpirationInputProps) {
   const { value: monthInput, isClicked: isMonthClicked, onChange: onMonthInputChange } = useInput(month);
   const { value: yearInput, isClicked: isYearClicked, onChange: onYearInputChange } = useInput(year);
-
   const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
   const isClicked = [isMonthClicked, isYearClicked];

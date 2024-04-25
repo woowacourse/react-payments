@@ -25,12 +25,12 @@ const CardCVCInput = ({ cvc, isValid, handleCVC, handleIsCVCInput }: CardCVCInpu
     handleCVC(e.target.value);
   };
 
-  const errorMessage = isValid ? '' : 'CVC 번호는 세 자리 숫자여야 합니다.';
+  const errorMessage = isClicked && !isValid ? 'CVC 번호는 세 자리 숫자여야 합니다.' : '';
 
   return (
     <div>
       <TitleContainer title="CVC 번호를 입력해 주세요" />
-      <InputField label="CVC" inputCount={1} errorMessage={isClicked ? errorMessage : ''}>
+      <InputField label="CVC" inputCount={1} errorMessage={errorMessage}>
         <Input
           isValid={isClicked ? isValid : true}
           type="text"

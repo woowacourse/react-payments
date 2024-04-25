@@ -24,12 +24,12 @@ const CardPasswordInput = ({ password, isValid, handlePassword }: CardPasswordIn
     handlePassword(e.target.value);
   };
 
-  const errorMessage = isValid ? '' : '두 자리 숫자여야 합니다.';
+  const errorMessage = isClicked && !isValid ? '두 자리 숫자여야 합니다.' : '';
 
   return (
     <div>
       <TitleContainer title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해 주세요." />
-      <InputField label="비밀번호 앞 2자리" inputCount={1} errorMessage={isClicked ? errorMessage : ''}>
+      <InputField label="비밀번호 앞 2자리" inputCount={1} errorMessage={errorMessage}>
         <Input
           isValid={isClicked ? isValid : true}
           type="password"

@@ -88,7 +88,7 @@ export const CVCBox = styled.div`
   align-items: center;
   width: 100%;
   height: 24px;
-  background: #cbba64;
+  background: repeating-linear-gradient(45deg, #cbba64, #cbba64 10px, #cbba6480 10px, #cbba6480 20px);
   padding: 0 16px;
 
   p {
