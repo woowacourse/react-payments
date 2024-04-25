@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 import {
   CARD_CVC,
@@ -8,6 +8,7 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
+import useInput from '../../hooks/useInput';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
 import ErrorMessage from '../ErrorMessage';
@@ -24,25 +25,40 @@ export interface CardCVCInputProps {
 function CardCVCInput(props: CardCVCInputProps) {
   const { editCardCVC, setCardSide, goNextFormStep } = props;
 
-  const [cvc, setCVC] = useState('');
-  const [cvcError, setCVCError] = useState(false);
   const { focusTargetRef } = useFocusRef<HTMLInputElement>();
 
-  const validateCVC = (text: string) => CARD_CVC_REGEXP.test(text);
+  const validateCVC = (text: string) => ({
+    newError: !CARD_CVC_REGEXP.test(text),
+  });
+
+  const updateCardCVC = (value: string, error: boolean) => {
+    if (!error) editCardCVC(value);
+  };
+
+  /**
+   * 오류가 없을 경우, 다음 입력 필드 단계로 이동
+   * @param error
+   */
+  const handleGoNextFormStep = (error: boolean) => {
+    if (error) return;
+    // UI에 cvc 가 나오고 다음 단계로 넘어감
+    setTimeout(() => {
+      goNextFormStep(CARD_FORM_STEP.cvc);
+    }, 1000);
+  };
+
+  const { value, setValue, error } = useInput<string, boolean>({
+    initialValue: '',
+    initialError: false,
+    validateValue: validateCVC,
+    updatedInfo: updateCardCVC,
+    handleGoNextFormStep,
+  });
 
   const handleCVCChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const targetValue = event.target.value;
     // cvc 업데이트
-    setCVC(value);
-    // 유효성 검사
-    const isValidated = validateCVC(value);
-    // cvcError 업데이트
-    setCVCError(!isValidated);
-    // cardInfo 업데이트 및 form 다음 단계로 이동
-    if (isValidated) {
-      editCardCVC(value);
-      goNextFormStep(CARD_FORM_STEP.cvc);
-    }
+    setValue(targetValue);
   };
 
   return (
@@ -55,17 +71,17 @@ function CardCVCInput(props: CardCVCInputProps) {
           ref={focusTargetRef}
           label={CARD_CVC_MESSAGE.label}
           placeholder={CARD_CVC_MESSAGE.placeholder}
-          error={cvcError}
+          error={error}
           type="text"
           maxLength={CARD_CVC.length}
           onChange={handleCVCChange}
           onBlur={() => setCardSide('front')}
           onFocus={() => setCardSide('back')}
-          value={cvc}
+          value={value}
         />
       </div>
       <ErrorMessage>
-        <p>{cvcError ? ERROR_MESSAGE.cvc : ''}</p>
+        <p>{error ? ERROR_MESSAGE.cvc : ''}</p>
       </ErrorMessage>
     </CardInputSection>
   );

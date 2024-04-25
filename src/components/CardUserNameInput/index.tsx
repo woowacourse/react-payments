@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 
 import {
   CARD_FORM_STEP,
@@ -9,6 +9,7 @@ import {
   FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
+import useInput from '../../hooks/useInput';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -24,13 +25,6 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
   const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
-  const [userName, setUserName] = useState('');
-  const [nameError, setNameError] = useState(false);
-
-  const errorMessage = useMemo(
-    () => (nameError ? ERROR_MESSAGE.userName : undefined),
-    [nameError],
-  );
 
   const validateName = (name: string) => {
     const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
@@ -38,34 +32,44 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
       name.trim().length >= CARD_USER.length.min;
     const isValidated = isAlphabeticWithSpaces && isMinimumAlphabetLengthMet;
 
-    return isValidated;
+    return { newError: !isValidated };
+  };
+
+  const updateCardUserName = (name: string, error: boolean) => {
+    const isChangeableName = !name || !error;
+
+    if (!isChangeableName) return;
+    const newUserName = name.trim();
+    // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
+    editCardUserName(newUserName);
   };
 
   /**
-   * 사용자 이름과 오류 여부에 따라 cardInfo의 userName 업데이트와 다음 입력 필드 단계를 진행하는 함수
+   * 오류가 없을 경우, 다음 입력 필드 단계로 이동
+   * @param error
    */
-  const updateCardInfoUserName = (error: boolean, name: string) => {
-    if (error && name) return;
-    const newUserName = name.trim();
-
-    // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-    editCardUserName(newUserName);
-
+  const handleGoNextFormStep = (error: boolean) => {
     // 다음 입력 필드로 이동
-    if (newUserName) goNextFormStep(CARD_FORM_STEP.userName);
+    if (!error) goNextFormStep(CARD_FORM_STEP.userName);
   };
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const name = value.toUpperCase();
-    // userName 업데이트
-    setUserName(name);
-    // 유효성 검사 진행 후 nameError 업데이트
-    const isValidated = validateName(value);
-    setNameError(!isValidated);
+  const { value, setValue, error } = useInput<string, boolean>({
+    initialValue: '',
+    initialError: false,
+    validateValue: validateName,
+    updatedInfo: updateCardUserName,
+    handleGoNextFormStep,
+  });
 
-    // cardInfo 업데이트 및 다음 입력 단게 진행
-    updateCardInfoUserName(!name || !isValidated, name);
+  const errorMessage = useMemo(
+    () => (error ? ERROR_MESSAGE.userName : undefined),
+    [error],
+  );
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.value.toUpperCase();
+    // userName 업데이트
+    setValue(name);
   };
 
   return (
@@ -78,8 +82,8 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
           label={CARD_USER_FORM_MESSAGE.label}
           placeholder={namePlaceholder}
           onChange={handleNameChange}
-          value={userName}
-          error={nameError}
+          value={value}
+          error={error}
         />
       </div>
       <ErrorMessage>

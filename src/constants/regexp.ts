@@ -33,5 +33,3 @@ export const CARD_CVC_REGEXP = new RegExp(`^[0-9]{${CARD_CVC.length}}$`);
 export const CARD_PASSWORD_REGEXP = new RegExp(
   `^[0-9]{${CARD_PASSWORD.length}}$`,
 );
-
-export const NUMBER_CHANGE_REGEXP = /[eE-]/g;

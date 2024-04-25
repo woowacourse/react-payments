@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import {
   CARD_PASSWORD,
@@ -8,6 +8,7 @@ import {
   FIRST_INPUT_INDEX,
 } from '../../constants';
 import useFocusRef from '../../hooks/useFocusRef';
+import useInput from '../../hooks/useInput';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -23,22 +24,28 @@ function CardPassword(props: CardPasswordProps) {
   const { editCardPassword } = props;
 
   const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
+
+  const validateValue = (value: string) => {
+    const newError = !CARD_PASSWORD_REGEXP.test(value);
+    return { newError };
+  };
+
+  const updateCardPassword = (value: string, error: boolean) => {
+    if (!error) return;
+    editCardPassword(value);
+  };
+
+  const { value, setValue, error } = useInput<string, boolean>({
+    initialValue: '',
+    initialError: false,
+    validateValue,
+    updatedInfo: updateCardPassword,
+  });
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
     // password 업데이트
-    const newPassword = sliceText(value, CARD_PASSWORD.length);
-    setPassword(newPassword);
-
-    // 오류 업데이트
-    const isValidatedPassword = CARD_PASSWORD_REGEXP.test(newPassword);
-    setPasswordError(!isValidatedPassword);
-
-    // cardInfo 업데이트
-    if (!isValidatedPassword) return;
-    editCardPassword(newPassword);
+    const newPassword = sliceText(event.target.value, CARD_PASSWORD.length);
+    setValue(newPassword);
   };
 
   return (
@@ -51,15 +58,15 @@ function CardPassword(props: CardPasswordProps) {
         <Input
           name="password"
           type="password"
-          error={passwordError}
+          error={error}
           label={CARD_PASSWORD_MESSAGE.label}
           placeholder={CARD_PASSWORD_MESSAGE.placeholder}
-          value={password}
+          value={value}
           onChange={handlePasswordChange}
         />
       </div>
       <ErrorMessage>
-        <p>{passwordError ? ERROR_MESSAGE.password : ''}</p>
+        <p>{error ? ERROR_MESSAGE.password : ''}</p>
       </ErrorMessage>
     </CardInputSection>
   );
