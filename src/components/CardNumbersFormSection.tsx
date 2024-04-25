@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 
@@ -37,7 +37,25 @@ const CardNumbersFormSection = ({
     regex: REGEX.numbers,
     errorText: ERROR_MESSAGE.onlyNumber,
   });
+
   const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const handleInputChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (e.target.value.length === OPTION.cardNumberMaxLength) {
+      if (inputRefs[index].current) {
+        inputRefs[index + 1].current?.focus();
+      }
+    }
+  };
 
   useEffect(() => {
     changeCardNumber([
@@ -80,9 +98,12 @@ const CardNumbersFormSection = ({
                 maxLength={OPTION.cardNumberMaxLength}
                 value={inputState[index].value}
                 hasError={inputState[index].hasError}
-                handleValueChange={(e) => handleValueChange(e, index)}
+                handleValueChange={(e) => {
+                  handleValueChange(e, index), handleInputChange(index, e);
+                }}
                 handleOnFocus={() => setFocus(index)}
                 handleOnBlur={() => setBlur(index)}
+                ref={inputRefs[index]}
               />
             ),
           )}

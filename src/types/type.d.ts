@@ -5,10 +5,11 @@ interface PaymentsInputFieldProps {
   hasError?: boolean;
   value?: string;
   type?: string;
+  width?: number;
   handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  width?: number;
+  ref?: React.RefObject<HTMLInputElement>[];
 }
 
 interface PaymentsFormTitleProps {

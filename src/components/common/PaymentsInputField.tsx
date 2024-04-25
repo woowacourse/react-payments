@@ -1,6 +1,10 @@
+import { forwardRef } from 'react';
 import Input from '../style/PaymentsInputField.style';
 
-const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
+const PaymentsInputField = forwardRef<
+  HTMLInputElement,
+  PaymentsInputFieldProps
+>((props, ref) => {
   const {
     placeholder,
     maxLength,
@@ -26,8 +30,9 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
       onChange={handleValueChange}
       width={width}
       type={type}
+      ref={ref}
     />
   );
-};
+});
 
 export default PaymentsInputField;

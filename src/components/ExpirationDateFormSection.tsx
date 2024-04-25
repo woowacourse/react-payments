@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 import { validateExpired, formatMonth } from '../utils/validateExpirationDate';
@@ -23,7 +23,6 @@ const ExpirationDateFormSection = ({
 }: {
   changeExpiration: ({ month, year }: ChangeExpirationProps) => void;
 }) => {
-  const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
   const {
     inputState,
     errorMessage,
@@ -39,6 +38,23 @@ const ExpirationDateFormSection = ({
     regex: REGEX.allNumbers,
     errorText: ERROR_MESSAGE.onlyNumber,
   });
+
+  const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const handleInputChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (e.target.value.length === OPTION.expirationDateMaxLength) {
+      if (inputRefs[index].current) {
+        inputRefs[index + 1].current?.focus();
+      }
+    }
+  };
 
   useEffect(() => {
     formatMonth({
@@ -76,24 +92,21 @@ const ExpirationDateFormSection = ({
       <InputForm>
         <Label>유효기간</Label>
         <InputFieldContainer className="input-field-container">
-          <PaymentsInputField
-            placeholder="MM"
-            maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[0].value}
-            hasError={inputState[0].hasError}
-            handleValueChange={(e) => handleValueChange(e, 0)}
-            handleOnFocus={() => setFocus(0)}
-            handleOnBlur={() => setBlur(0)}
-          />
-          <PaymentsInputField
-            placeholder="YY"
-            maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[1].value}
-            hasError={inputState[1].hasError}
-            handleValueChange={(e) => handleValueChange(e, 1)}
-            handleOnFocus={() => setFocus(1)}
-            handleOnBlur={() => setBlur(1)}
-          />
+          {['MM', 'YY'].map((placeholderText, index) => (
+            <PaymentsInputField
+              key={index}
+              placeholder={placeholderText}
+              maxLength={OPTION.cardNumberMaxLength}
+              value={inputState[index].value}
+              hasError={inputState[index].hasError}
+              handleValueChange={(e) => {
+                handleValueChange(e, index), handleInputChange(index, e);
+              }}
+              handleOnFocus={() => setFocus(index)}
+              handleOnBlur={() => setBlur(index)}
+              ref={inputRefs[index]}
+            />
+          ))}
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </InputForm>
