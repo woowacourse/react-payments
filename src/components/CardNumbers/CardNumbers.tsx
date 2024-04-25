@@ -21,15 +21,22 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
   const inputCardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
   useEffect(() => {
-    const newCardNumber = cardNumbers;
-
-    newCardNumber.forEach((cardNumber, idx) => {
-      cardNumber.value = inputCardNumbers[idx].value;
-      cardNumber.isError = inputCardNumbers[idx].validateMessage !== "";
-    });
-
-    onChangeCardInfo(newCardNumber, "cardNumber");
-  }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4, validateMessage]);
+    // useEffect depth
+    const isChanged = cardNumbers.some(
+      (card, idx) =>
+        card.value !== inputCardNumbers[idx].value ||
+        card.isError !== (inputCardNumbers[idx].validateMessage !== "")
+    );
+    if (isChanged) {
+      const newCardNumbers = cardNumbers.map((card, idx) => ({
+        ...card,
+        value: inputCardNumbers[idx].value,
+        isError: inputCardNumbers[idx].validateMessage !== "",
+      }));
+      console.log(newCardNumbers);
+      onChangeCardInfo(newCardNumbers, "cardNumbers");
+    }
+  }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4]);
 
   return (
     <S.CardNumbersContainer>
