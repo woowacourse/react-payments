@@ -8,39 +8,11 @@ import CardPreview from './components/CardPreview';
 import useCardInfo from './hooks/useCardInfo';
 import CvcInputContainer from './components/CvcInputContainer';
 import PasswordInputContainer from './components/PasswordInputContainer';
-import { useEffect, useMemo, useState } from 'react';
+import SequenceContainer from './components/common/SequenceContainer';
 
 const App = () => {
-  const { cardNumbers, expiryDate, cardholderName, cvc, password } = useCardInfo();
-  const [stage, setStage] = useState(0);
-
-  const predicates = useMemo(
-    () => [
-      Object.values(cardNumbers.value).every(v => v) && Object.values(cardNumbers.errorStatus.isError).every(v => !v),
-
-      expiryDate.month.value &&
-        !expiryDate.month.errorStatus.isError &&
-        expiryDate.year.value &&
-        !expiryDate.year.errorStatus.isError,
-
-      cardholderName.value && !cardholderName.errorStatus.isError,
-
-      cvc.value && !cvc.errorStatus.isError,
-    ],
-    [cardNumbers, expiryDate, cardholderName, cvc],
-  );
-
-  useEffect(() => {
-    if (stage === 0 && predicates[0]) {
-      setStage(1);
-    } else if (stage === 1 && predicates[1]) {
-      setStage(2);
-    } else if (stage === 2 && predicates[2]) {
-      setStage(3);
-    } else if (stage === 3 && predicates[3]) {
-      setStage(4);
-    }
-  }, [predicates, stage]);
+  const { cardNumbers, expiryDate, cardholderName, cvc, password, isFieldsCompleted } = useCardInfo();
+  const isSubmitable = isFieldsCompleted.every(v => v);
 
   return (
     <AppLayout>
@@ -50,11 +22,17 @@ const App = () => {
         cardholderName={cardholderName.value}
       />
       <CardInfoInputWrapper>
-        {stage >= 4 && <PasswordInputContainer {...password} />}
-        {stage >= 3 && <CvcInputContainer {...cvc} />}
-        {stage >= 0 && <CardholderNameInputContainer {...cardholderName} />}
-        {stage >= 0 && <CardExpiryDateInputContainer {...expiryDate} />}
-        <CardNumbersInputContainer {...cardNumbers} />
+        {isSubmitable && <button>Submit</button>}
+        <SequenceContainer
+          predicates={isFieldsCompleted}
+          componentQueue={[
+            <CardNumbersInputContainer {...cardNumbers} />,
+            <CardExpiryDateInputContainer {...expiryDate} />,
+            <CardholderNameInputContainer {...cardholderName} />,
+            <CvcInputContainer {...cvc} />,
+            <PasswordInputContainer {...password} />,
+          ]}
+        />
       </CardInfoInputWrapper>
     </AppLayout>
   );
