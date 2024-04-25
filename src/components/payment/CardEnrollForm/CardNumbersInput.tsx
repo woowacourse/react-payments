@@ -1,6 +1,7 @@
 import { CaptionText, LabelText, TitleText } from "../../../styles/common";
 
 import { CardInformation } from "../../../types/cardInformation";
+import { CardNumbersErrorState } from "../../../hooks/useCardInformationErrorState";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import isNumericString from "../../../utils/isNumericString";
@@ -37,18 +38,9 @@ const validateCardNumberOnBlur = (inputValue: string) => {
 
 interface CardNumbersInputProps {
   cardNumbers: CardInformation["cardNumbers"];
-  errorState: {
-    isError: boolean[];
-    errorMessage: string;
-  };
+  errorState: CardNumbersErrorState;
   onChange: (inputValue: string, targetIndex: number) => void;
-  updateErrorState: ({
-    isError,
-    errorMessage,
-  }: {
-    isError: boolean[];
-    errorMessage: string;
-  }) => void;
+  updateErrorState: ({ isError, errorMessage }: CardNumbersErrorState) => void;
 }
 
 export default function CardNumbersInput({
@@ -66,7 +58,7 @@ export default function CardNumbersInput({
       updateErrorState({
         isError: errorState.isError.map((isError, index) =>
           index === targetCardNumberIndex ? false : isError
-        ),
+        ) as CardNumbersErrorState["isError"],
         errorMessage: "",
       });
       onChange(event.target.value, targetCardNumberIndex);
@@ -75,7 +67,7 @@ export default function CardNumbersInput({
         updateErrorState({
           isError: errorState.isError.map((isError, index) =>
             index === targetCardNumberIndex ? true : isError
-          ),
+          ) as CardNumbersErrorState["isError"],
           errorMessage: error.message,
         });
       }
@@ -91,7 +83,7 @@ export default function CardNumbersInput({
       updateErrorState({
         isError: errorState.isError.map((isError, index) =>
           index === targetCardNumberIndex ? false : isError
-        ),
+        ) as CardNumbersErrorState["isError"],
         errorMessage: "",
       });
     } catch (error) {
@@ -99,7 +91,7 @@ export default function CardNumbersInput({
         updateErrorState({
           isError: errorState.isError.map((isError, index) =>
             index === targetCardNumberIndex ? true : isError
-          ),
+          ) as CardNumbersErrorState["isError"],
           errorMessage: error.message,
         });
       }
