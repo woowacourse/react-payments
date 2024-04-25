@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import CardPreview from '../components/CardPreview';
-import CardInfoForm from '../components/CardInfoForm/CardInfoForm';
+import CardInfoForm from '../components/CardInfoForm';
 import useCardInfo from '../hooks/useCardInfo/useCardInfo';
 
 const CardRegisterPage = () => {

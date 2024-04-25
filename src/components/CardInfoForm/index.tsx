@@ -21,11 +21,13 @@ export default function CardInfoForm({ cardInfoControl, completionStatus }: ICar
   const { cardNumbers, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
   const completionFlags = getObjectValues<boolean>(completionStatus);
-  const isSubmitable = true || completionFlags.every((v: boolean) => v);
+  const isSubmitable = completionFlags.every((v: boolean) => v);
 
   const onSubmit = () => {
     if (isSubmitable) {
-      navigate(ROUTE_PATH.cardRegisterComplete);
+      navigate(ROUTE_PATH.cardRegisterComplete, {
+        state: { cardNumberPrefix: cardNumbers.value.first, cardType: 'XX카드' },
+      });
     }
   };
 
