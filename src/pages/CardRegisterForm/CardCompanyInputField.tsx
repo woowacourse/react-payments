@@ -15,10 +15,16 @@ const CardCompanyInputField = ({ setCardCompany }: CardCompanyInputFieldProp) =>
             const { value } = e.target as HTMLSelectElement;
             setCardCompany(value as Company);
           }}
+          required
         >
-          {companyNames.map((companyName) => (
-            <option>{companyName}</option>
-          ))}
+          <>
+            <option value="" selected disabled style={{ display: "none" }}>
+              카드사를 선택해주세요
+            </option>
+            {companyNames.map((companyName) => (
+              <option>{companyName}</option>
+            ))}
+          </>
         </InputField.Select>
       </InputField.Inputs>
       <InputField.ErrorMessage></InputField.ErrorMessage>
