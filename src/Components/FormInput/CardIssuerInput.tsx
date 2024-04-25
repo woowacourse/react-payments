@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { Dispatch, useEffect, useState } from "react";
 
 const inputContainerStyle = css({
-  position: "absolute",
+  position: "relative",
 });
 
 const inputStyle = css({

@@ -13,7 +13,7 @@ export const cardPreviewStyle = css({
   display: "flex",
   flexDirection: "column",
   gap: "14px",
-  marginBottom: "20px",
+  margin: "20px",
 });
 
 export const logoStyle = css({
