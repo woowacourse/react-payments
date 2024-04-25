@@ -1,54 +1,67 @@
 /** @jsxImportSource @emotion/react */
 import "./App.css";
 
-import CardForm from "./components/CardForm";
+import CardExpirationPeriod from "./components/CardExpirationPeriod";
+import CardHolder from "./components/CardHolder";
+import CardIssuer from "./components/CardIssuer";
+import CardNumbers from "./components/CardNumbers";
 import CardPreview from "./components/CardPreview";
-import { css } from "@emotion/react";
-import { matchCardIssuer } from "./domain/matchCardIssuer";
+import { matchCardType } from "./domain/matchCardIssuer";
 import useCardExpirationPeriod from "./hooks/useCardExpirationPeriod";
 import useCardHolder from "./hooks/useCardHolder";
 import useCardNumbers from "./hooks/useCardNumbers";
+import { useState } from "react";
 
-const styledCardInfoContainer = css`
-  width: 315px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
+const styledCardInfoContainer = {
+  width: "315px",
+  display: "flex",
+  flexDirection: "column" as const,
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "30px",
 
-  margin: auto;
-  margin-top: 50px;
-`;
+  margin: "auto",
+  marginTop: "50px",
+};
+
+const styledForm = {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: "16px",
+};
 
 function App() {
-  const cardNumbers = useCardNumbers();
-  const cardExpirationPeriod = useCardExpirationPeriod();
-  const cardHolder = useCardHolder();
+  const { cardNumberInputs } = useCardNumbers();
+  const [cardIssuer, setCardIssuer] = useState("");
+  const { expirationPeriodInputs } = useCardExpirationPeriod();
+  const { holderInput } = useCardHolder();
 
-  const cardNumbersValue = cardNumbers.cardNumberInputs.map(
+  const cardNumbersValue = cardNumberInputs.map((input) => input.value) as [
+    string,
+    string,
+    string,
+    string,
+  ];
+
+  const cardExpirationPeriodValue = expirationPeriodInputs.map(
     (input) => input.value
-  ) as [string, string, string, string];
-
-  const cardExpirationPeriodValue =
-    cardExpirationPeriod.expirationPeriodInputs.map((input) => input.value) as [
-      string,
-      string,
-    ];
+  ) as [string, string];
 
   return (
     <div css={styledCardInfoContainer}>
       <CardPreview
-        cardIssuer={matchCardIssuer(cardNumbersValue.join(""))}
+        cardType={matchCardType(cardNumbersValue.join(""))}
         cardNumbers={cardNumbersValue}
         cardExpirationPeriod={cardExpirationPeriodValue}
-        cardHolder={cardHolder.holderInput.value}
+        cardHolder={holderInput.value}
       />
-      <CardForm
-        cardNumbers={cardNumbers}
-        cardExpirationPeriod={cardExpirationPeriod}
-        cardHolder={cardHolder}
-      />
+      <form css={styledForm}>
+        <CardHolder holderInput={holderInput} />
+        <CardExpirationPeriod expirationPeriodInputs={expirationPeriodInputs} />
+        <CardIssuer value={cardIssuer} setValue={setCardIssuer} />
+        <CardNumbers cardNumberInputs={cardNumberInputs} />
+      </form>
     </div>
   );
 }
