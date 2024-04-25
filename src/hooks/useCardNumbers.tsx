@@ -49,21 +49,20 @@ export default function useCardNumbers() {
     cardNumbers.join('').length ===
       BOUND.cardNumbersOnePartUpper * cardNumberInputs.length &&
     cardNumbersErrorMessage === undefined;
-  console.log(
-    'cardNumber',
-    cardNumbers.join('').length,
-    BOUND.cardNumbersOnePartUpper * cardNumberInputs.length
-  );
+
+  const initValue = () => {
+    cardNumberInputs.forEach(el => el.initValue());
+  };
 
   return {
     cardNumbers,
     cardNumberOnChanges: cardNumberInputs.map(input => input.onChange),
     errorMessage: cardNumbersErrorMessage,
-    isValidNumbers: cardNumbersErrorMessage === undefined,
     isValidNumberParts: cardNumberInputs.map(
       input => input.errorMessage === ''
     ),
     isValid,
+    initValue,
   };
 }
 
@@ -71,6 +70,7 @@ export interface UseCardNumbers {
   cardNumbers: string[];
   cardNumberOnChanges: ((event: React.ChangeEvent<HTMLInputElement>) => void)[];
   errorMessage: string | undefined;
-  isValidNumbers: boolean;
+  isValid: boolean;
   isValidNumberParts: boolean[];
+  initValue: () => void;
 }

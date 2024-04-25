@@ -68,6 +68,10 @@ export default function useCardExpiredDate() {
 
   const isValid = totalErrorMessage === undefined && isFullFilled;
 
+  const initValue = () => {
+    monthValidateInput.initValue();
+    yearValidateInput.initValue();
+  };
   return {
     expiredDate: [monthValidateInput.inputValue, yearValidateInput.inputValue],
     monthOnChange: monthValidateInput.onChange,
@@ -77,6 +81,7 @@ export default function useCardExpiredDate() {
     isValidYear,
     isFullFilled,
     errorMessage: totalErrorMessage,
+    initValue,
   };
 }
 
@@ -89,4 +94,5 @@ export interface UseCardExpiredDate {
   isValidYear: boolean;
   isFullFilled: boolean;
   errorMessage: string | undefined;
+  initValue: () => void;
 }

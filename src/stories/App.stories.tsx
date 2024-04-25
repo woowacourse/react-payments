@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import App from "../App";
+import type { Meta, StoryObj } from '@storybook/react';
+import PayMents from '../components/Payments';
 
 const meta = {
-  title: "App",
-  component: App,
-} satisfies Meta<typeof App>;
+  title: 'App',
+  component: PayMents,
+} satisfies Meta<typeof PayMents>;
 
 export default meta;
 
