@@ -3,14 +3,15 @@ import { CardCompany } from '../types/cardCompany';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 const useCardCompany = () => {
-  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
+  const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleCardCompanyChange = (cardCompany: CardCompany | '') => {
-    if (cardCompany.length === 0) {
+  const handleCardCompanyChange = (cardCompany: CardCompany | null) => {
+    if (cardCompany === null) {
       setErrorMessage(ERROR_MESSAGES.EMPTY);
       return;
     }
+
     setCardCompany(cardCompany);
   };
 
