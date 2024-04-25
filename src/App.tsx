@@ -59,7 +59,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <CardPreview
-        face={isFocus ? "front" : "back"}
+        face={isFocus ? "back" : "front"}
         CVC={CVC.value}
         cardCompany={cardCompany}
         cardNumbers={{
@@ -119,13 +119,13 @@ const App = () => {
             refs={expirationDateRefs}
           />
         )}
-        {
+        {cardNumbersNextInput && (
           <CardCompany
             cardCompany={cardCompany}
             cardCompanyRef={cardCompanyRef}
             changeCardCompany={changeCardCompany}
           />
-        }
+        )}
         <CardNumberInput
           cardNumbers={cardNumbers}
           changeCardNumbers={changeCardNumbers}

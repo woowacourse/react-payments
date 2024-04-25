@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: #d5d5d5;
+  border-radius: inherit;
+}
+
+.CVC {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  top: 84px;
+  height: 24px;
+  background-color: #cbba64;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: right;
+  padding: 0 12px;
+}
