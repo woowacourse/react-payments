@@ -53,3 +53,8 @@ export function cardCVCValidator(input: string) {
   //TODO: CVC Valid 빌드
   return { isValid: true, value: input };
 }
+
+export function cardPasswordValidator(input: string) {
+  //TODO: Password Valid 빌드
+  return { isValid: true, value: input };
+}
