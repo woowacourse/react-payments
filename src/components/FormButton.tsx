@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 const buttonStyle = css({
   backgroundColor: '#333333',
@@ -18,11 +19,10 @@ interface FormButtonType {
 }
 
 function FormButton({ value }: FormButtonType) {
-  const handlePage = () => {};
   return (
-    <button onClick={handlePage} css={buttonStyle}>
-      {value}
-    </button>
+    <Link to="/completed">
+      <button css={buttonStyle}>{value}</button>
+    </Link>
   );
 }
 
