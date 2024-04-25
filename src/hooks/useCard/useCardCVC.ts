@@ -1,8 +1,8 @@
-import useInput from './useInput';
-import validateNumber from '../validator/validateNumber';
-import validateCVC from '../validator/validateCVC';
+import useInput from '../useInput';
+import validateNumber from '../../validator/validateNumber';
+import validateCVC from '../../validator/validateCVC';
 import { useState } from 'react';
-import { UseCVCReturnType } from '../types/hooks';
+import { UseCVCReturnType } from '../../types/hooks';
 
 const useCardCVC = (): UseCVCReturnType => {
   const { value, setValue, errorInfo, setErrorInfo, updateErrorMessage } = useInput('', {

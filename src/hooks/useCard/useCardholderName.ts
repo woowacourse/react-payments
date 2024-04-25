@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { validateCardholderName, validateEnglish } from '../validator/validateCardholderName';
-import useInput from './useInput';
-import { UseCardholderNameReturnType } from '../types/hooks';
+import { validateCardholderName, validateEnglish } from '../../validator/validateCardholderName';
+import useInput from '../useInput';
+import { UseCardholderNameReturnType } from '../../types/hooks';
 
 const useCardholderName = (): UseCardholderNameReturnType => {
   const { value, setValue, errorInfo, setErrorInfo, updateErrorMessage } = useInput('', {

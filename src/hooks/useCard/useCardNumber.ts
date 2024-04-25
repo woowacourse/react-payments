@@ -1,8 +1,8 @@
-import { CardNumberKey } from '../types/card';
-import { UseCardNumberReturnType } from '../types/hooks';
-import validateCardNumber from '../validator/validateCardNumber';
-import validateNumber from '../validator/validateNumber';
-import useInputs from './useInputs';
+import { CardNumberKey } from '../../types/card';
+import { UseCardNumberReturnType } from '../../types/hooks';
+import validateCardNumber from '../../validator/validateCardNumber';
+import validateNumber from '../../validator/validateNumber';
+import useInputs from '../useInputs';
 
 const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 

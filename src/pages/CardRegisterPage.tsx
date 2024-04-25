@@ -7,8 +7,8 @@ import CardPreview from '../components/cardPreview/CardPreview';
 import CardCompanyContainer from '../components/CardCompanyContainer';
 import CardCVCContainer from '../components/CardCVCContainer';
 import CardPasswordContainer from '../components/CardPasswordContainer';
-import SubmitButton from '../components/SubmitButton';
-import useCardInfo from '../hooks/useCardInfo';
+import SubmitButton from '../components/common/button/SubmitButton';
+import useCardInfo from '../hooks/useCard/useCardInfo';
 import useFormValidation from '../hooks/useForm/useFormValidation';
 
 const CardRegisterPage = () => {
