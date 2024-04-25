@@ -5,20 +5,16 @@ import SectionTitle from "./SectionTitle";
 import { UseInputHookValue } from "../hooks/useInput";
 
 export interface CardHolderProps {
-  errorMessage: string;
   holderInput: UseInputHookValue;
 }
 
-export default function CardHolder({
-  holderInput,
-  errorMessage,
-}: CardHolderProps) {
+export default function CardHolder({ holderInput }: CardHolderProps) {
   return (
     <section>
       <SectionTitle title={PAYMENTS_MESSAGE.cardHolderTitle} />
       <FormItem
         labelText={PAYMENTS_INPUT_MESSAGE.cardHolderLabel}
-        errorMessage={errorMessage}
+        errorMessage={holderInput.errorMessage}
       >
         {
           <input
@@ -27,6 +23,7 @@ export default function CardHolder({
             maxLength={30}
             onChange={holderInput.onChangeHandler}
             value={holderInput.value}
+            autoFocus
           />
         }
       </FormItem>
