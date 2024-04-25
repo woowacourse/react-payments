@@ -1,4 +1,3 @@
-import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
@@ -12,6 +11,8 @@ import {
 import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import { CardType } from "@/constants/cardType";
+import CardPreview from "@/components/CreditCardPreview/CardPreview";
+import { useState } from "react";
 
 const CardRegisterPage = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -67,14 +68,18 @@ const CardRegisterPage = () => {
     ],
   });
 
+  const [step, setStep] = useState<number>(1);
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
-        <CreditCardPreview
+        <CardPreview
           cardType={cardTypeState.value}
           cardNumbers={cardNumbersState.values}
           expirationDate={expiredDateState.values}
           ownerName={ownerNameState.value}
+          CVCNumbers={CVCNumbersState.value}
+          step={step}
         />
         <CardRegisterForm
           cardNumbersState={cardNumbersState}
@@ -83,6 +88,8 @@ const CardRegisterPage = () => {
           cardTypeState={cardTypeState}
           CVCNumbersState={CVCNumbersState}
           passwordState={passwordState}
+          step={step}
+          setStep={setStep}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>

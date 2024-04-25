@@ -32,6 +32,10 @@ const OptionsWrapper = styled.div`
   border-radius: 5px;
   position: relative !important;
   background-color: white;
+
+  :hover {
+    background-color: ${({ theme }) => theme.COLOR["grey-4"]};
+  }
 `;
 
 const S = {

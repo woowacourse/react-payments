@@ -1,7 +1,7 @@
 import { useState } from "react";
 import S from "./style";
-import UpArrow from "@/assets/upArrow.svg?react";
-import DownArrow from "@/assets/downArrow.svg?react";
+import UpArrow from "@/assets/UpArrow.svg?react";
+import DownArrow from "@/assets/DownArrow.svg?react";
 import { MESSAGE } from "@/constants/message";
 
 const SelectBox = <T extends string>({

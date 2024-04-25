@@ -14,7 +14,7 @@ interface Props {
   ownerName: string | null;
 }
 
-const CreditCardPreview = ({
+const CardPreviewFront = ({
   expirationDate,
   ownerName,
   cardNumbers,
@@ -29,11 +29,11 @@ const CreditCardPreview = ({
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
 
         {cardTypeLogo === "VISA" ? (
-          <S.LogoBox color={theme.COLOR.white}>
+          <S.LogoBox color={theme.COLOR["grey-4"]}>
             <VisaLogo />
           </S.LogoBox>
         ) : cardTypeLogo === "MASTER" ? (
-          <S.LogoBox color={theme.COLOR.white}>
+          <S.LogoBox color={theme.COLOR["grey-4"]}>
             <MasterLogo />
           </S.LogoBox>
         ) : null}
@@ -76,4 +76,4 @@ const CreditCardPreview = ({
   );
 };
 
-export default CreditCardPreview;
+export default CardPreviewFront;

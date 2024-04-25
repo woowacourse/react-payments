@@ -61,7 +61,7 @@ const useInputs = <T extends object>({
     }
   }, [errors, values]);
 
-  return { values, errors, onChange, isError, setValues };
+  return { values, setValues, errors, onChange, isError, setErrors };
 };
 
 export default useInputs;

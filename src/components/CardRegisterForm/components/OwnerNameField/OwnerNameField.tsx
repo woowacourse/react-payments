@@ -16,6 +16,8 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
   const { onChange, error } = ownerNameState;
   const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
+  const onEnterCompleted = () => {};
+
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
@@ -35,6 +37,7 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
           }}
           onFocus={onFocusHideErrors}
           onBlur={onBlurShowErrors}
+          onKeyDown={onEnterCompleted}
         />
       </InputField>
     </S.InputFieldWithInfo>

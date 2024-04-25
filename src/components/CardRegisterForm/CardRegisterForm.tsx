@@ -11,7 +11,7 @@ import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
 import CVCField from "./components/CVCField/CVCField";
 import PasswordField from "./components/PasswordField/PasswordField";
 import CardTypeSelectField from "./components/CardTypeSelectField/CardTypeSelectField";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CardType } from "@/constants/cardType";
 
 interface Props {
@@ -21,6 +21,8 @@ interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
   passwordState: ReturnType<typeof useInput<string>>;
   cardTypeState: ReturnType<typeof useInput<CardType | null>>;
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const CardRegisterForm = ({
@@ -30,23 +32,23 @@ const CardRegisterForm = ({
   CVCNumbersState,
   passwordState,
   cardTypeState,
+  step,
+  setStep,
 }: Props) => {
-  const [step, setStep] = useState<number>(1);
-  const cardNumbersError = cardNumbersState.isError;
-
-  const changeStep = (newStep: number) => {
-    if (!cardNumbersError) {
-      if (step < newStep) {
-        setStep(newStep);
-      }
-    }
-  };
+  const completedArr = [
+    !cardNumbersState.isError,
+    cardTypeState.value,
+    !expiredPeriodState.isError,
+    !ownerNameState.isError,
+    !CVCNumbersState.isError,
+    !passwordState.isError,
+  ];
 
   useEffect(() => {
-    if (!cardNumbersError || !cardTypeState.isError) {
-      changeStep(step + 1);
+    if (completedArr[step - 1] && step < completedArr.length) {
+      setStep((prev) => prev + 1);
     }
-  }, [cardNumbersError, cardTypeState]);
+  }, [step, ...completedArr]);
 
   return (
     <S.CardFormWrapper>

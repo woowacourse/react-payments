@@ -12,6 +12,8 @@ const ownerNameState = {
   value: "",
   onChange: () => {},
   error: null,
+  isError: false,
+  setValue: () => {},
 };
 
 type Story = StoryObj<typeof OwnerNameField>;

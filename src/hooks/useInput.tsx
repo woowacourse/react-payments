@@ -39,13 +39,13 @@ const useInput = <T,>({ initialValue, validates }: Props<T>) => {
   };
 
   useEffect(() => {
-    if (!error) {
+    if (!error && value) {
       setIsError(false);
     } else {
       setIsError(true);
     }
   }, [error, value]);
 
-  return { value, onChange, error, isError, setValue };
+  return { value, setValue, onChange, error, setError, isError };
 };
 export default useInput;

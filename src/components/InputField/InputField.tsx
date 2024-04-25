@@ -22,5 +22,3 @@ const InputField = ({ label, errorMessages, showErrors, children }: Props) => {
 };
 
 export default InputField;
-
-//[findFirstFilledElementIndex(errorMessages)];

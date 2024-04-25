@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CreditCardPreview from "./CreditCardPreview";
+import CardPreviewFront from "./CardPreviewFront";
 
 const meta = {
   title: "CreditCardPreview",
-  component: CreditCardPreview,
-} satisfies Meta<typeof CreditCardPreview>;
+  component: CardPreviewFront,
+} satisfies Meta<typeof CardPreviewFront>;
 
 export default meta;
 
@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardType: "MASTER",
+    cardType: "BC카드",
     cardNumbers: {
       cardNumbers1: "1234",
       cardNumbers2: "1234",

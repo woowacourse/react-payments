@@ -12,7 +12,7 @@ interface Props {
 const CardTypeSelectField = ({ cardTypeState }: Props) => {
   const { value, setValue } = cardTypeState;
 
-  const CardTypeNames = [...(Object.keys(CardTypeColor) as CardType[]), null];
+  const CardTypeNames = [...(Object.keys(CardTypeColor) as CardType[])];
 
   return (
     <S.InputFieldWithInfo>
