@@ -1,7 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { memo } from "react";
-
-import FormInput from "../FormInput";
 import Tooltip from "../Tooltip";
 
 import { descriptionCss, rowStyle, titleCss } from "./style";
@@ -10,7 +8,11 @@ import {
   CardOwnerInfoErrorContext,
   CardValidityPeriodErrorContext,
 } from "../Form/ErrorContextProvider";
+
 import useContextWrapper from "../../hooks/useContextWrapper";
+import CardNumberInput from "../FormInput/CardNumberInput";
+import CardPeriodInput from "../FormInput/CardPeriodInput";
+import CardOwnerInput from "../FormInput/CardOwnerInput";
 
 interface Props {
   formFieldInfo: {
@@ -57,7 +59,7 @@ const CardNumberField = () => {
       }}
       errorMessage={categoryHasError ? cardNumberError[categoryHasError]?.errorMessage : undefined}
     >
-      <FormInput.CardNumberInput />
+      <CardNumberInput />
     </FormFieldComponent>
   );
 };
@@ -78,7 +80,7 @@ const CardValidityPeriodField = () => {
       }}
       errorMessage={categoryHasError ? cardPeriodError[categoryHasError]?.errorMessage : undefined}
     >
-      <FormInput.CardPeriodInput />
+      <CardPeriodInput />
     </FormFieldComponent>
   );
 };
@@ -99,7 +101,7 @@ const CardOwnerField = () => {
       }}
       errorMessage={categoryHasError ? cardOwnerError[categoryHasError]?.errorMessage : undefined}
     >
-      <FormInput.CardOwnerInput />
+      <CardOwnerInput />
     </FormFieldComponent>
   );
 };

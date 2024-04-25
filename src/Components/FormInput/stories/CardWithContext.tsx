@@ -9,7 +9,7 @@ import {
   CardOwnerInfoErrorContext,
   CardValidityPeriodErrorContext,
 } from "../../Form/ErrorContextProvider";
-import FormInput from "..";
+import FormInput from "../FormInputCompound";
 
 interface Props {
   children: React.ReactNode;
