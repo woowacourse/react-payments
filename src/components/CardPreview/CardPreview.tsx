@@ -8,13 +8,14 @@ import ExpirationDateDisplay from './ExpirationDateDisplay';
 import { CardInfo } from '../../types/card';
 
 import useCardLogo from '../../hooks/useCardType';
+import { CARD_COLOR } from '../../constants/card-app';
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
 }
 
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const { cardNumbers, expirationDate, cardOwnerName } = cardInfo;
+  const { cardNumbers, expirationDate, cardOwnerName, cardCompany } = cardInfo;
 
   const { cardType, identifyCardType } = useCardLogo();
 
@@ -23,7 +24,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   }, [cardNumbers, identifyCardType]);
 
   return (
-    <StyledCardPreview>
+    <StyledCardPreview company={cardCompany}>
       <CardHeader>
         <CardChip />
         {cardType && <CardLogo src={cardType} />}
@@ -40,13 +41,13 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const StyledCardPreview = styled.div`
+const StyledCardPreview = styled.div<{ company: string }>`
   height: 132px;
   width: 212px;
 
   color: #ffffff;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ company }) => (company ? CARD_COLOR[company] : '#333333')};
   box-shadow: 3px 3px 5px 0px #00000040;
 
   margin: 0 auto;
