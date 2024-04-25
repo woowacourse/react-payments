@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardPreview from '../../components/CardForm/CardPreview/CardPreview';
@@ -60,27 +60,6 @@ const CardRegistrationPage = () => {
 
   const handleIsCVCInput = (isCVCInput: boolean) => setIsCVCInput(isCVCInput);
 
-  const renderInputComponents = (inputComponentIndex: number) => {
-    const inputComponents = [
-      <CardNumberInput cardNumbers={cardNumbers} isValid={isCardNumbersValid} handleCardNumbers={handleCardNumbers} />,
-      <CardCompanyInput company={company} handleCompany={handleCompany} />,
-      <CardExpirationInput
-        month={month}
-        year={year}
-        isValid={[isMonthValid, isYearValid]}
-        handleMonth={handleMonth}
-        handleYear={handleYear}
-      />,
-      <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />,
-      <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />,
-      <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />,
-    ];
-
-    return inputComponents
-      .filter((_, index) => index <= inputComponentIndex)
-      .map((component, index) => React.cloneElement(component, { key: index }));
-  };
-
   return (
     <div>
       <S.CardRegistrationContainer>
@@ -95,7 +74,32 @@ const CardRegistrationPage = () => {
             isCVCInput={isCVCInput}
           />
         </S.CardPreviewBoxWrapper>
-        <S.CardForm>{renderInputComponents(inputComponentIndex)}</S.CardForm>
+        <S.CardForm>
+          {inputComponentIndex >= 5 && (
+            <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />
+          )}
+          {inputComponentIndex >= 4 && (
+            <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
+          )}
+          {inputComponentIndex >= 3 && (
+            <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />
+          )}
+          {inputComponentIndex >= 2 && (
+            <CardExpirationInput
+              month={month}
+              year={year}
+              isValid={[isMonthValid, isYearValid]}
+              handleMonth={handleMonth}
+              handleYear={handleYear}
+            />
+          )}
+          {inputComponentIndex >= 1 && <CardCompanyInput company={company} handleCompany={handleCompany} />}
+          <CardNumberInput
+            cardNumbers={cardNumbers}
+            isValid={isCardNumbersValid}
+            handleCardNumbers={handleCardNumbers}
+          />
+        </S.CardForm>
       </S.CardRegistrationContainer>
       {isButtonActive && (
         <Link to={`/complete?number=${encodeURIComponent(cardNumbers[0])}&company=${encodeURIComponent(company)}`}>
