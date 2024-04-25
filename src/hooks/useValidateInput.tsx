@@ -11,17 +11,22 @@ interface validatedInputProps extends useInputOption {
   validatorPropsArray: validatorProps[];
 }
 
-export interface ValidateInput {
+export interface UseValidateInput {
   inputValue: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
+  initValue: () => void;
 }
 
 export default function useValidateInput({
   decorateValue,
   validatorPropsArray,
 }: validatedInputProps) {
-  const { inputValue: inputValue, onChange: inputOnChange } = useInput({
+  const {
+    inputValue: inputValue,
+    onChange: inputOnChange,
+    initValue,
+  } = useInput({
     decorateValue,
   });
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,5 +44,5 @@ export default function useValidateInput({
     setErrorMessage(errorObj.errorMessage);
   };
 
-  return { inputValue, onChange, errorMessage };
+  return { inputValue, onChange, errorMessage, initValue };
 }

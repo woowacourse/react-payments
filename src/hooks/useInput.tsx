@@ -6,6 +6,7 @@ export interface useInputOption {
 export default function useInput(option?: useInputOption) {
   const [inputValue, setInput] = useState('');
 
+  const initValue = () => setInput('');
   const { decorateValue = (string: string) => string } = option ?? {};
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,5 +16,5 @@ export default function useInput(option?: useInputOption) {
     setInput(decoratedValue);
   };
 
-  return { inputValue, onChange };
+  return { inputValue, onChange, initValue };
 }

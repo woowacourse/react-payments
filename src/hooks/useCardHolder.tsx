@@ -22,6 +22,7 @@ export default function useCardHolder() {
     holder: validateInput.inputValue,
     errorMessage: validateInput.errorMessage,
     isValid,
+    initValue: validateInput.initValue,
   };
 }
 
@@ -30,4 +31,5 @@ export interface UseCardHolder {
   holder: string;
   errorMessage: string;
   isValid: boolean;
+  initValue: () => void;
 }

@@ -1,5 +1,14 @@
 export type CardNumbers = [string, string, string, string];
-export type CardIssuer = '' | 'Visa' | 'MasterCard';
+export type CardIssuer =
+  | 'BcCard'
+  | 'ShinhanCard'
+  | 'KakaoBank'
+  | 'HyndaiCard'
+  | 'WooriCard'
+  | 'LotteCard'
+  | 'HanaCard'
+  | 'KBCard';
+
 export type CardExpiredDate = [string, string];
 export interface CardInfo {
   cardNumbers: CardNumbers;
@@ -7,3 +16,5 @@ export interface CardInfo {
   expiredDate: CardExpiredDate;
   cardHolder: string;
 }
+
+export type Path = '/payments' | '/wrong-access' | '/complete-payment-register';

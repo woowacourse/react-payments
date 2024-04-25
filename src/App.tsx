@@ -1,61 +1,84 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { CardExpiredDate, CardNumbers } from './type';
-
-import BottomButton from './components/BottomButton';
 import { COLOR } from './styles/color';
-import CardForm from './components/CardForm';
-import CardPreview from './components/CardPreview';
+import CompletePaymentRegister from './components/CompletePaymentsRegister';
+import PATH from './constants/path';
+import { Path } from './type';
+import PayMents from './components/Payments';
+import WrongAccess from './components/WrongAccess';
 import { matchCardIssuer } from './domain/matchCardIssuer';
 import styled from '@emotion/styled';
 import useCardExpiredDate from './hooks/useCardExpiredDate';
 import useCardHolder from './hooks/useCardHolder';
 import useCardNumbers from './hooks/useCardNumbers';
+import { useState } from 'react';
 
-function App() {
+export default function App() {
+  const [lastPath, setLastPath] = useState<Path | null>(null);
+
   const cardNumbers = useCardNumbers();
   const cardExpiredDate = useCardExpiredDate();
   const cardHolder = useCardHolder();
   const cardIssuer = matchCardIssuer(cardNumbers.cardNumbers.join(''));
 
-  const cardInfo = {
-    cardNumbers: cardNumbers.cardNumbers as CardNumbers,
-    cardIssuer,
-    expiredDate: cardExpiredDate.expiredDate as CardExpiredDate,
-    cardHolder: cardHolder.holder,
+  const resetCardInfo = () => {
+    cardNumbers.initValue();
+    cardExpiredDate.initValue();
+    cardHolder.initValue();
   };
+  const paymentsElement = (
+    <PayMents
+      useCardNumbers={cardNumbers}
+      useCardExpiredDate={cardExpiredDate}
+      useCardHolder={cardHolder}
+      cardIssuer={cardIssuer}
+      setPath={() => {
+        setLastPath(PATH.payments);
+      }}
+    />
+  );
 
-  const isValid =
-    cardNumbers.isValid && cardExpiredDate.isValid && cardHolder.isValid;
+  const completePaymentRoute = (
+    <Route
+      path={PATH.completePaymentsRegister}
+      element={
+        <CompletePaymentRegister
+          start={cardNumbers.cardNumbers[0]}
+          issuer={cardIssuer}
+          resetCardInfo={resetCardInfo}
+        />
+      }
+    ></Route>
+  );
+
+  const wrongAccessElement = (
+    <WrongAccess setLastPath={() => setLastPath(PATH.wrongAccess)} />
+  );
 
   return (
-    <Payments>
-      <CardPreview cardInfo={cardInfo} />
-      <CardForm
-        useCardNumbers={cardNumbers}
-        useCardExpiredDate={cardExpiredDate}
-        useCardHolder={cardHolder}
-      />
-      {isValid && <BottomButton>확인</BottomButton>}
-    </Payments>
+    <AppWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={paymentsElement}></Route>
+          <Route path={PATH.payments} element={paymentsElement}></Route>
+          {lastPath === PATH.payments && completePaymentRoute}
+          <Route path='*' element={wrongAccessElement}></Route>
+        </Routes>
+      </BrowserRouter>
+    </AppWrapper>
   );
 }
-
-export default App;
-
-const Payments = styled.section({
-  position: 'relative',
-  width: '376px',
-  height: '700px',
+const AppWrapper = styled.div({
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   alignItems: 'center',
-  gap: '30px',
-  overflowY: 'scroll',
+  paddingTop: '50px',
+  '&>*': {
+    width: '376px',
+    height: '700px',
 
-  backgroundColor: COLOR.white,
-  '&::-webkit-scrollbar': {
-    display: 'none',
+    backgroundColor: COLOR.white,
   },
 });
