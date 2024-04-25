@@ -18,6 +18,7 @@ const PaymentApp = () => {
   );
   const [userName, setUserName] = useState<Map<string, string>>(new Map());
   const [CVCNumber, setCVCNumber] = useState<Map<string, string>>(new Map());
+  const [password, setPassword] = useState<Map<string, string>>(new Map());
 
   return (
     <PaymentAppStyled>
@@ -39,6 +40,7 @@ const PaymentApp = () => {
         setCardCompany={setCardCompany}
         setCVCNumber={setCVCNumber}
         setIsFrontCardPreview={setIsFrontCardPreview}
+        setPassword={setPassword}
       />
     </PaymentAppStyled>
   );

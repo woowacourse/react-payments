@@ -8,6 +8,7 @@ import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
 import CardCompanyForm from "./CardCompanyForm";
 import CVCNumberForm from "./CVCNumberForm";
+import PasswordForm from "./PasswordForm";
 
 // TODO: 이름 수정 - ICardInputFormProps
 export interface ICardFormProps {
@@ -62,6 +63,9 @@ const Form = ({
 
   const [isCVCNumberValid, setIsCVCNumberValid] = useState(false);
   const [isCVCNumberFilledOnce, setIsCVCNumberFilledOnce] = useState(false);
+
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isPasswordFilledOnce, setIsPasswordFilledOnce] = useState(false);
 
   return (
     <FormWrapper>
@@ -141,6 +145,23 @@ const Form = ({
             setIsFormFilledOnce={setIsCVCNumberFilledOnce}
             setIsFrontCardPreview={setIsFrontCardPreview}
           ></CVCNumberForm>
+        </div>
+      )}
+
+      {isCVCNumberFilledOnce && (
+        <div style={{ height: "170px" }}>
+          <InputDescription
+            title="비밀번호를 입력해 주세요"
+            description="앞의 2자리를 입력해주세요"
+          ></InputDescription>
+          <PasswordForm
+            labelContent="비밀번호 앞 2자리"
+            inputCount={1}
+            type="password"
+            setPassword={setPassword}
+            setAllFormsValid={setIsPasswordValid}
+            setIsFormFilledOnce={setIsPasswordFilledOnce}
+          ></PasswordForm>
         </div>
       )}
     </FormWrapper>

@@ -41,7 +41,6 @@ const PasswordForm = ({
   }, [inputValidities]);
 
   const validatePassword = (passwordInput: string) => {
-    console.log("pwdINput: " + passwordInput);
     const regex = /[0-9]{2}/;
     return regex.test(passwordInput);
   };
