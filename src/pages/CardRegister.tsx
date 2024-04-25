@@ -22,6 +22,8 @@ const CardRegister = () => {
   const cardNumbersReduceds = Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map(() => useInput(""));
   const expirationDateReduceds = Array.from({ length: INPUT_COUNTS.EXPIRATION_DATE }).map(() => useInput(""));
   const ownerNameReduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
+  const CVCReduceds = Array.from({ length: INPUT_COUNTS.CVC }).map(() => useInput(""));
+  const passwordReduceds = Array.from({ length: INPUT_COUNTS.PASSWORD }).map(() => useInput(""));
 
   return (
     <S.CardRegisterWrapper>
@@ -36,6 +38,8 @@ const CardRegister = () => {
           cardNumbersReduceds={cardNumbersReduceds}
           expirationDateReduceds={expirationDateReduceds}
           ownerNameReduceds={ownerNameReduceds}
+          CVCReduceds={CVCReduceds}
+          passwordReduceds={passwordReduceds}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>

@@ -22,7 +22,7 @@ const InputTitle = styled.h3`
   text-align: left;
 `;
 
-const InputSubtitle = styled.h4`
+const InputSubTitle = styled.h4`
   font-size: 9.5px;
   font-weight: 400;
   text-align: left;
@@ -32,7 +32,7 @@ const InputSubtitle = styled.h4`
 const S = {
   CardFormWrapper,
   InputTitle,
-  InputSubtitle,
+  InputSubTitle,
   InputFieldWithInfo,
   TitleWrapper,
 };

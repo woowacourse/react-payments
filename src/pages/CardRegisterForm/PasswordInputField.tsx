@@ -7,7 +7,7 @@ import { INPUT_COUNTS } from "@/constants/condition";
 
 const VALID_LENGTH = 2;
 const MAX_LENGTH = VALID_LENGTH;
-const LABEL = "비밀번호";
+const LABEL = "비밀번호 앞 2자리";
 const INPUTS_COUNT = INPUT_COUNTS.OWNER_NAME;
 const individualValidators: Validator[] = [
   {
