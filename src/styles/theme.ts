@@ -53,11 +53,19 @@ const theme: DefaultTheme = {
       line-height: 2rem;
       letter-spacing: 0.08rem;
     `,
+    cardCVC: `
+      font-family: Inter;
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 2rem;
+      letter-spacing: 0.08rem;
+    `,
   },
   color: {
     white: '#ffffff',
     red: '#FF3D3D',
     gray: '#8B95A1',
+    brightGray: '#d5d5d5',
     lightGray: '#ACACAC',
     darkGray: '#333333',
     charcoalGray: '#4f4f4f',
@@ -69,6 +77,7 @@ const theme: DefaultTheme = {
     orange: '#ED1C24',
     teal: '#009490',
     brownishGray: '#6A6056',
+    ocher: '#cbba64',
     magnetic: '#DDCD78',
     dropShadow: '#00000040',
   },

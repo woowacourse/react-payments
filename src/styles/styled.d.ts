@@ -11,12 +11,14 @@ declare module 'styled-components' {
       cardNumber: string;
       cardExpirationDate: string;
       cardUserName: string;
+      cardCVC: string;
     };
     color: {
       white: string;
       black: string;
       gray: string;
       red: string;
+      brightGray: string;
       lightGray: string;
       darkGray: string;
       charcoalGray: string;
@@ -28,6 +30,7 @@ declare module 'styled-components' {
       orange: string;
       teal: string;
       brownishGray: string;
+      ocher: string;
       magnetic: string;
       dropShadow: string;
     };
