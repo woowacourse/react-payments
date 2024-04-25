@@ -1,18 +1,22 @@
-import { CardInfo } from "../../../types/type";
 import * as Styled from "./CardPreview.styled";
 import MasterCardImage from "../../../assets/Mastercard.png";
 import VisaImage from "../../../assets/Visa.png";
 import CardNumbers from "../cardNumbers/CardNumbers";
 import CardExpiration from "../cardExpiration/CardExpiration";
 import { CARD_BRAND } from "../../../constants/setting";
+import { CardCompany } from "../../../types/type";
 
-export interface CardPreviewProps {
-  cardInfo: CardInfo;
+interface CardPreview {
+  cvc: number;
+  userName: string;
+  cardExpiration: number[];
+  cardCompany: CardCompany;
+  cardNumbers: number[];
 }
 
-const CardPreview = ({ cardInfo }: CardPreviewProps) => {
+const CardPreview = ({ cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreview) => {
   const getCardBrandImage = () => {
-    const IIN = Math.floor(cardInfo.cardNumbers[0] / 100);
+    const IIN = Math.floor(cardNumbers[0] / 100);
     let cardBrandImage = "";
 
     if (IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER && IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER) {
@@ -27,7 +31,7 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const cardBrandImage = getCardBrandImage();
 
   return (
-    <Styled.CardPreviewContainer cardCompany={cardInfo.cardCompany}>
+    <Styled.CardPreviewContainer cardCompany={cardCompany}>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
         {cardBrandImage && (
@@ -40,12 +44,12 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
         )}
       </Styled.ChipSection>
       <Styled.CardInfoSection>
-        <CardNumbers cardNumbers={cardInfo.cardNumbers} />
+        <CardNumbers cardNumbers={cardNumbers} />
         <CardExpiration
-          month={cardInfo.cardExpiration[0]}
-          year={cardInfo.cardExpiration[1]}
+          month={cardExpiration[0]}
+          year={cardExpiration[1]}
         />
-        <div>{cardInfo.userName && cardInfo.userName}</div>
+        <div>{userName && userName}</div>
       </Styled.CardInfoSection>
     </Styled.CardPreviewContainer>
   );
