@@ -1,13 +1,15 @@
+import { useState } from 'react';
+
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
 import useInputs from '../../../hooks/useInputs';
+import useAutoFocus from '../../../hooks/useAutoFocus';
 
 import { isNumber } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
-import { useState } from 'react';
 
 interface CardNumberInputProps {
   cardNumbers: string[];
@@ -17,7 +19,9 @@ interface CardNumberInputProps {
 
 function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
   const [isClicked, setIsClicked] = useState([false, false, false, false]);
+
   const { value: cardNumbersInput, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
+  const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -34,6 +38,8 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
 
     onCardNumbersInputChange(e, inputIndex);
     handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? e.target.value : number)));
+
+    moveToNextInput(e.target.value, inputIndex);
   };
 
   const errorMessage = isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER;
@@ -49,6 +55,7 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}
+            ref={setRef(index)}
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"

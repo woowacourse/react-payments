@@ -5,6 +5,8 @@ import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
 import useInput from '../../../hooks/useInput';
+import useAutoFocus from '../../../hooks/useAutoFocus';
+
 import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
@@ -23,6 +25,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
 
   const { value: monthInput, onChange: onMonthInputChange } = useInput(month);
   const { value: yearInput, onChange: onYearInputChange } = useInput(year);
+  const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -34,6 +37,8 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
 
     onMonthInputChange(e);
     handleMonth(e.target.value);
+
+    moveToNextInput(e.target.value, 0);
   };
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +69,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       >
         <Input
           type="text"
+          ref={setRef(0)}
           placeholder="MM"
           value={monthInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
@@ -73,6 +79,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
         />
         <Input
           type="text"
+          ref={setRef(1)}
           placeholder="YY"
           value={yearInput}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
