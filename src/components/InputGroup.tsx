@@ -14,6 +14,7 @@ import {
 } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 import Selector from './Selector';
+import { useState } from 'react';
 
 const inputGroupStyle = css({
   display: 'flex',
@@ -103,6 +104,17 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
     return 'input';
   };
 
+  const [isClicked, setIsClicked] = useState(new Array(placeholders.length).fill(false));
+
+  const handleClicked = (index: number) => {
+    if (isClicked[index]) return;
+    setIsClicked((prevState) => {
+      const updatedState = [...prevState];
+      updatedState[index] = true;
+      return updatedState;
+    });
+  };
+
   return (
     <div css={inputGroupStyle}>
       <div css={inputTitleStyle}>
@@ -136,9 +148,10 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
                 placeholder={placeholder}
                 onStateChange={(value) => onInputChange({ value, index, inputSection })}
                 inputCss={inputStyle({
-                  borderColor: isError[index] ? '#FF3D3D' : '#acacac',
-                  focusColor: isError[index] ? '#FF3D3D' : '#000',
+                  borderColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#acacac',
+                  focusColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#000',
                 })}
+                onClick={() => handleClicked(index)}
               />
             );
           })}
