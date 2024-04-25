@@ -42,16 +42,15 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
     moveToNextInput(e.target.value, inputIndex);
   };
 
-  const errorMessage = isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER;
+  const errorMessage =
+    isClicked.some(Boolean) && !isValid.every(Boolean) && JSON.stringify(isClicked) !== JSON.stringify(isValid)
+      ? ERROR_MESSAGE.INVALID_CARD_NUMBER
+      : '';
 
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <InputField
-        label="카드 번호"
-        inputCount={CARD_NUMBER.INPUT_FIELD_COUNT}
-        errorMessage={isClicked.some(Boolean) ? errorMessage : ''}
-      >
+      <InputField label="카드 번호" inputCount={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}

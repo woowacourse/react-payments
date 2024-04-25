@@ -26,21 +26,12 @@ function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput 
     }
   };
 
-  const makeCardNumber = (cardNumber: string, index: number) => {
-    return index <= 1 ? `${cardNumber}` : makeMaskedNumber(cardNumber);
-  };
+  const makeMaskedNumber = (length: number) =>
+    Array.from({ length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
 
-  const makeMaskedNumber = (cardNumber: string) => {
-    return Array.from({ length: cardNumber.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
-  };
+  const renderCardNumber = (number: string, index: number) => (index <= 1 ? number : makeMaskedNumber(number.length));
 
-  return isCVCInput ? (
-    <S.Card $face="back" $background="#D5D5D5">
-      <S.CVCBox>
-        <p>{cvc}</p>
-      </S.CVCBox>
-    </S.Card>
-  ) : (
+  const renderCardFront = () => (
     <S.Card $face="front" $background={CARD_COMPANY[company]}>
       <S.CardHeader>
         <S.ChipBox />
@@ -50,7 +41,7 @@ function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput 
         <S.InfoContainer>
           {cardNumber.map((number, index) => (
             <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
-              {number ? makeCardNumber(number, index) : ''}
+              {number ? renderCardNumber(number, index) : ''}
             </S.InfoBox>
           ))}
         </S.InfoContainer>
@@ -59,6 +50,16 @@ function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput 
       </S.CardBody>
     </S.Card>
   );
+
+  const renderCardBack = () => (
+    <S.Card $face="back" $background="#D5D5D5">
+      <S.CVCBox>
+        <p>{cvc}</p>
+      </S.CVCBox>
+    </S.Card>
+  );
+
+  return isCVCInput ? renderCardBack() : renderCardFront();
 }
 
 export default CardPreview;
