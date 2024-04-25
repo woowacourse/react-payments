@@ -54,6 +54,10 @@ const NewCardPage = () => {
     updatePasswordVisibility();
   }, [cardInfo.cvc]);
 
+  useEffect(() => {
+    updateFormSubmitBtnVisibility();
+  }, [cardInfo.password]);
+
   const handleCardNumbersChange = (value: string, index: number) => {
     const errorMessageCopy = [...errorMessage.cardNumbers];
     errorMessageCopy[index] = validateCardNumber(value);
@@ -209,6 +213,22 @@ const NewCardPage = () => {
     }
   };
 
+  const updateFormSubmitBtnVisibility = () => {
+    if (cardInfo.password !== '' && creationStage < 7) {
+      setCreationStage(creationStage + 1);
+    }
+  };
+
+  const isAllValidInput = () => {
+    const isCardInfoValid = Object.values(cardInfo).every(
+      (value) => value !== '',
+    );
+    const isErrorMessageValid = Object.values(errorMessage).every((errors) =>
+      errors.every((error: string) => error === ''),
+    );
+    return isCardInfoValid && isErrorMessageValid;
+  };
+
   return (
     <NewCardContainer>
       <CardPreview cardInfo={cardInfo}></CardPreview>
@@ -305,7 +325,6 @@ const NewCardPage = () => {
         >
           <Input
             type='password'
-            value={cardInfo.password}
             maxLength={CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}
             placeholder={CARD_FORM_INPUTS.PASSWORD.PLACEHOLDER}
             isError={!!errorMessage.password[0]}
@@ -313,6 +332,7 @@ const NewCardPage = () => {
           ></Input>
         </NewCardInputSection>
       )}
+      {isAllValidInput() && <button>확인</button>}
     </NewCardContainer>
   );
 };
