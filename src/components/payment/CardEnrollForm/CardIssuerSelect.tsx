@@ -2,7 +2,6 @@ import {
   CARD_ISSUERS,
   CardIssuer,
   cardIssuerMapper,
-  isCardIssuer,
 } from "../../../constants/cardIssuers";
 import { CaptionText, TitleText } from "../../../styles/common";
 
@@ -31,42 +30,15 @@ const cardIssuerOptions = CARD_ISSUERS.map((cardIssuer) => ({
 interface CardIssuerSelectProps {
   cardIssuer: CardIssuer | "";
   errorState: { isError: boolean; errorMessage: string };
-  onChange: (inputValue: CardIssuer) => void;
-  updateErrorState: ({
-    isError,
-    errorMessage,
-  }: {
-    isError: boolean;
-    errorMessage: string;
-  }) => void;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
 export default function CardIssuerSelect({
-  cardIssuer,
   errorState,
   onChange,
-  updateErrorState,
+  onBlur,
 }: CardIssuerSelectProps) {
-  const onCardIssuerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!isCardIssuer(event.target.value)) {
-      return;
-    }
-    onChange(event.target.value);
-    updateErrorState({
-      isError: false,
-      errorMessage: "",
-    });
-  };
-
-  const onCardIssuerBlur = () => {
-    if (cardIssuer === "") {
-      updateErrorState({
-        isError: true,
-        errorMessage: "카드사를 선택해 주세요",
-      });
-    }
-  };
-
   return (
     <CardIssuerContainer>
       <div>
@@ -78,8 +50,8 @@ export default function CardIssuerSelect({
           placeholder="카드사를 선택해주세요"
           options={cardIssuerOptions}
           isError={errorState.isError}
-          onChange={onCardIssuerChange}
-          onBlur={onCardIssuerBlur}
+          onChange={onChange}
+          onBlur={onBlur}
         />
         {errorState.isError && (
           <ErrorMessage message={errorState.errorMessage} />

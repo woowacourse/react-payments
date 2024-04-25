@@ -7,10 +7,7 @@ import CardPasswordInput from "./CardPasswordInput";
 import CardPreview from "./CardPreview";
 import FormSubmitButton from "./FormSubmitButton";
 import styled from "styled-components";
-import useBoolean from "../../../hooks/useBoolean";
-import useCardInformation from "../../../hooks/useCardInformation";
-import useCardInformationErrorState from "../../../hooks/useCardInformationErrorState";
-import useReadyForSubmit from "../../../hooks/useReadyForSubmit";
+import useCardEnrollForm from "../../../hooks/useCardEnrollForm";
 
 const CardEnrollFormContainer = styled.div`
   display: flex;
@@ -30,74 +27,59 @@ const CardInformationContainer = styled.div`
 
 export default function CardEnrollForm() {
   const {
+    isCVCFocused,
+    isReadyForSubmit,
+
     cardInformation,
-    setCardNumbers,
-    setCardIssuer,
-    setCardExpiration,
-    setCardOwnerName,
-    setCardCVC,
-    setCardPassword,
-  } = useCardInformation();
 
-  const {
-    errorState,
-    updateCardNumbersErrorState,
-    updateCardIssuerErrorState,
-    updateCardExpirationErrorState,
-    updateCardOwnerNameErrorState,
-    updateCVCErrorState,
-    updatePasswordErrorState,
-  } = useCardInformationErrorState();
-
-  const { isReadyForSubmit } = useReadyForSubmit([cardInformation, errorState]);
-
-  const {
-    flag: isCVCFocused,
-    setTrue: setCVCFocused,
-    setFalse: setCVCBlur,
-  } = useBoolean(false);
+    cardPassword,
+    cardCVC,
+    cardNumbers,
+    cardExpiration,
+    cardOwnerName,
+    cardIssuer,
+  } = useCardEnrollForm();
 
   return (
     <CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation} isFlipped={isCVCFocused} />
       <CardInformationContainer>
         <CardPasswordInput
-          cardPassword={cardInformation.cardPassword}
-          errorState={errorState.cardPassword}
-          onChange={setCardPassword}
-          updateErrorState={updatePasswordErrorState}
+          cardPassword={cardPassword.valueState}
+          errorState={cardPassword.errorState}
+          onChange={cardPassword.onCardPasswordChange}
+          onBlur={cardPassword.onCardPasswordBlur}
         />
         <CardCVCInput
-          cardCVC={cardInformation.cardCVC}
-          errorState={errorState.cardCVC}
-          onChange={setCardCVC}
-          onBlur={setCVCBlur}
-          onFocus={setCVCFocused}
-          updateErrorState={updateCVCErrorState}
+          cardCVC={cardCVC.valueState}
+          errorState={cardCVC.errorState}
+          onChange={cardCVC.onCardCVCChange}
+          onBlur={cardCVC.onCardCVCBlur}
+          onFocus={cardCVC.onCardCVCFocus}
         />
         <CardNumbersInput
-          cardNumbers={cardInformation.cardNumbers}
-          errorState={errorState.cardNumbers}
-          onChange={setCardNumbers}
-          updateErrorState={updateCardNumbersErrorState}
+          cardNumbers={cardNumbers.valueState}
+          errorState={cardNumbers.errorState}
+          onChange={cardNumbers.onCardNumberChange}
+          onBlur={cardNumbers.onCardNumberBlur}
         />
         <CardExpirationDateInput
-          cardExpiration={cardInformation.cardExpiration}
-          errorState={errorState.cardExpiration}
-          onChange={setCardExpiration}
-          updateErrorState={updateCardExpirationErrorState}
+          cardExpiration={cardExpiration.valueState}
+          errorState={cardExpiration.errorState}
+          onChange={cardExpiration.onExpirationChange}
+          onBlur={cardExpiration.onExpirationBlur}
         />
         <CardOwnerNameInput
-          cardOwnerName={cardInformation.cardOwnerName}
-          errorState={errorState.cardOwnerName}
-          onChange={setCardOwnerName}
-          updateErrorState={updateCardOwnerNameErrorState}
+          cardOwnerName={cardOwnerName.valueState}
+          errorState={cardOwnerName.errorState}
+          onChange={cardOwnerName.onOwnerNameChange}
+          onBlur={cardOwnerName.onOwnerNameBlur}
         />
         <CardIssuerSelect
-          cardIssuer={cardInformation.cardIssuer}
-          errorState={errorState.cardIssuer}
-          onChange={setCardIssuer}
-          updateErrorState={updateCardIssuerErrorState}
+          cardIssuer={cardIssuer.valueState}
+          errorState={cardIssuer.errorState}
+          onChange={cardIssuer.onCardIssuerChange}
+          onBlur={cardIssuer.onCardIssuerBlur}
         />
       </CardInformationContainer>
       <FormSubmitButton disabled={!isReadyForSubmit} />

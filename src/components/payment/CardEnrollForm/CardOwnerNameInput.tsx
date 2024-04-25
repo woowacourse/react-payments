@@ -2,7 +2,6 @@ import { LabelText, TitleText } from "../../../styles/common";
 
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
-import isAlphabetOrWhiteSpace from "../../../utils/isAlphabetOrWhiteSpace";
 import styled from "styled-components";
 
 const CardOwnerNameContainer = styled.div`
@@ -24,61 +23,19 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-const validateOwnerNameOnChange = (inputValue: string) => {
-  if (!isAlphabetOrWhiteSpace(inputValue)) {
-    throw new Error("영문자만 입력할 수 있어요");
-  }
-};
-
-const validateOwnerNameOnBlur = (inputValue: string) => {
-  if (inputValue.length === 0) {
-    throw new Error("카드 소유자 이름을 입력해 주세요");
-  }
-};
-
 interface CardOwnerNameInputProps {
   cardOwnerName: string;
   errorState: { isError: boolean; errorMessage: string };
-  onChange: (inputValue: string) => void;
-  updateErrorState: ({
-    isError,
-    errorMessage,
-  }: {
-    isError: boolean;
-    errorMessage: string;
-  }) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function CardOwnerNameInput({
   cardOwnerName,
   errorState,
   onChange,
-  updateErrorState,
+  onBlur,
 }: CardOwnerNameInputProps) {
-  const onOwnerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    try {
-      validateOwnerNameOnChange(event.target.value);
-      updateErrorState({ isError: false, errorMessage: "" });
-      const upperName = event.target.value.toUpperCase();
-      onChange(upperName);
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({ isError: true, errorMessage: error.message });
-      }
-    }
-  };
-
-  const onOwnerNameBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    try {
-      validateOwnerNameOnBlur(event.target.value);
-      updateErrorState({ isError: false, errorMessage: "" });
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({ isError: true, errorMessage: error.message });
-      }
-    }
-  };
-
   return (
     <CardOwnerNameContainer>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
@@ -90,8 +47,8 @@ export default function CardOwnerNameInput({
             placeholder="JOHN DOE"
             value={cardOwnerName}
             isError={errorState.isError}
-            onChange={onOwnerNameChange}
-            onBlur={onOwnerNameBlur}
+            onChange={onChange}
+            onBlur={onBlur}
           />
         </InputContainer>
         {errorState.isError && (

@@ -119,7 +119,7 @@ const useCardInformationErrorState = () => {
   };
 
   return {
-    errorState,
+    cardInformationErrorState: errorState,
     updateCardNumbersErrorState,
     updateCardIssuerErrorState,
     updateCardExpirationErrorState,

@@ -36,7 +36,6 @@ const useReadyForSubmit = ([cardInformation, errorState]: dependencies) => {
   const { flag: isReadyForSubmit, setFlag: setIsReadyForSubmit } = useBoolean();
 
   useEffect(() => {
-    console.log(132213213);
     setIsReadyForSubmit(
       isAllFilled(cardInformation) && !isExistError(errorState)
     );

@@ -2,7 +2,6 @@ import { CaptionText, LabelText, TitleText } from "../../../styles/common";
 
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
-import isNumericString from "../../../utils/isNumericString";
 import styled from "styled-components";
 
 const CardPassInputContainer = styled.div`
@@ -24,60 +23,19 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-const validateCardPasswordOnChange = (inputValue: string) => {
-  if (!isNumericString(inputValue)) {
-    throw new Error("비밀번호는 숫자만 입력할 수 있어요");
-  }
-};
-
-const validateCardPasswordOnBlur = (inputValue: string) => {
-  if (inputValue.length !== 2) {
-    throw new Error("비밀번호는 두 자리 숫자로 입력해 주세요");
-  }
-};
-
 interface CardPasswordInputProps {
   cardPassword: string;
   errorState: { isError: boolean; errorMessage: string };
-  onChange: (inputValue: string) => void;
-  updateErrorState: ({
-    isError,
-    errorMessage,
-  }: {
-    isError: boolean;
-    errorMessage: string;
-  }) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function CardPasswordInput({
   cardPassword,
   errorState,
   onChange,
-  updateErrorState,
+  onBlur,
 }: CardPasswordInputProps) {
-  const onCardPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    try {
-      validateCardPasswordOnChange(event.target.value);
-      updateErrorState({ isError: false, errorMessage: "" });
-      onChange(event.target.value);
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({ isError: true, errorMessage: error.message });
-      }
-    }
-  };
-
-  const onCardPasswordBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    try {
-      validateCardPasswordOnBlur(event.target.value);
-      updateErrorState({ isError: false, errorMessage: "" });
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({ isError: true, errorMessage: error.message });
-      }
-    }
-  };
-
   return (
     <CardPassInputContainer>
       <div>
@@ -92,8 +50,8 @@ export default function CardPasswordInput({
             type="password"
             value={cardPassword}
             isError={errorState.isError}
-            onChange={onCardPasswordChange}
-            onBlur={onCardPasswordBlur}
+            onChange={onChange}
+            onBlur={onBlur}
           />
         </InputContainer>
         {errorState.isError && (

@@ -4,7 +4,6 @@ import { CardInformation } from "../../../types/cardInformation";
 import { CardNumbersErrorState } from "../../../hooks/useCardInformationErrorState";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
-import isNumericString from "../../../utils/isNumericString";
 import styled from "styled-components";
 
 const CardNumbersContainer = styled.div`
@@ -24,80 +23,25 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
-const validateCardNumberOnChange = (inputValue: string) => {
-  if (!isNumericString(inputValue)) {
-    throw new Error("카드 번호는 숫자만 입력할 수 있어요");
-  }
-};
-
-const validateCardNumberOnBlur = (inputValue: string) => {
-  if (inputValue.length !== 4) {
-    throw new Error("네 자리 수를 입력해주세요");
-  }
-};
-
 interface CardNumbersInputProps {
   cardNumbers: CardInformation["cardNumbers"];
   errorState: CardNumbersErrorState;
-  onChange: (inputValue: string, targetIndex: number) => void;
-  updateErrorState: ({ isError, errorMessage }: CardNumbersErrorState) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    targetIndex: number
+  ) => void;
+  onBlur: (
+    event: React.FocusEvent<HTMLInputElement>,
+    targetCardNumberIndex: number
+  ) => void;
 }
 
 export default function CardNumbersInput({
   cardNumbers,
   errorState,
   onChange,
-  updateErrorState,
+  onBlur,
 }: CardNumbersInputProps) {
-  const onCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    targetCardNumberIndex: number
-  ) => {
-    try {
-      validateCardNumberOnChange(event.target.value);
-      updateErrorState({
-        isError: errorState.isError.map((isError, index) =>
-          index === targetCardNumberIndex ? false : isError
-        ) as CardNumbersErrorState["isError"],
-        errorMessage: "",
-      });
-      onChange(event.target.value, targetCardNumberIndex);
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({
-          isError: errorState.isError.map((isError, index) =>
-            index === targetCardNumberIndex ? true : isError
-          ) as CardNumbersErrorState["isError"],
-          errorMessage: error.message,
-        });
-      }
-    }
-  };
-
-  const onCardNumberBlur = (
-    event: React.FocusEvent<HTMLInputElement>,
-    targetCardNumberIndex: number
-  ) => {
-    try {
-      validateCardNumberOnBlur(event.target.value);
-      updateErrorState({
-        isError: errorState.isError.map((isError, index) =>
-          index === targetCardNumberIndex ? false : isError
-        ) as CardNumbersErrorState["isError"],
-        errorMessage: "",
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState({
-          isError: errorState.isError.map((isError, index) =>
-            index === targetCardNumberIndex ? true : isError
-          ) as CardNumbersErrorState["isError"],
-          errorMessage: error.message,
-        });
-      }
-    }
-  };
-
   return (
     <CardNumbersContainer>
       <div>
@@ -107,17 +51,40 @@ export default function CardNumbersInput({
       <CardNumberBox>
         <LabelText>카드 번호</LabelText>
         <InputContainer>
-          {cardNumbers.map((cardNumber, index) => (
-            <Input
-              key={index}
-              maxLength={4}
-              placeholder="1234"
-              value={cardNumber}
-              isError={errorState.isError[index]}
-              onChange={(event) => onCardNumberChange(event, index)}
-              onBlur={(event) => onCardNumberBlur(event, index)}
-            />
-          ))}
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            value={cardNumbers[0]}
+            isError={errorState.isError[0]}
+            onChange={(event) => onChange(event, 0)}
+            onBlur={(event) => onBlur(event, 0)}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            value={cardNumbers[1]}
+            isError={errorState.isError[1]}
+            onChange={(event) => onChange(event, 1)}
+            onBlur={(event) => onBlur(event, 1)}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            type="password"
+            value={cardNumbers[2]}
+            isError={errorState.isError[2]}
+            onChange={(event) => onChange(event, 2)}
+            onBlur={(event) => onBlur(event, 2)}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            type="password"
+            value={cardNumbers[3]}
+            isError={errorState.isError[3]}
+            onChange={(event) => onChange(event, 3)}
+            onBlur={(event) => onBlur(event, 3)}
+          />
         </InputContainer>
         {errorState.isError && (
           <ErrorMessage message={errorState.errorMessage} />
