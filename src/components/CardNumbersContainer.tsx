@@ -1,6 +1,6 @@
 import Input from './common/input/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputField from './common/input/InputField';
+import InputField from './inputField/InputField';
 import { CardNumberKey } from '../types/card';
 import { ErrorDetail } from '../types/error';
 import { useMemo } from 'react';

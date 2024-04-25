@@ -1,6 +1,6 @@
 import Input from './common/input/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputField from './common/input/InputField';
+import InputField from './inputField/InputField';
 import { ErrorDetail } from '../types/error';
 
 interface CardPasswordContainerProps {

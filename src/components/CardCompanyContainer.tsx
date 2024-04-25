@@ -1,7 +1,7 @@
 import { ErrorText, ErrorWrapper } from '../styles/common';
 import { ErrorDetail } from '../types/error';
 import Dropdown from './common/dropdown/Dropdown';
-import DropdownField from './common/dropdown/DropdownField';
+import DropdownField from './common/dropdownField/DropdownField';
 
 interface CardCompanyContainerProps {
   value: string;
