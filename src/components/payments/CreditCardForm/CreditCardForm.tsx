@@ -4,6 +4,7 @@ import {
   OwnerNameTextField,
   PreviewCreditCard,
 } from '@components/payments';
+
 import CardBrandTextField from '@components/payments/@cardBrand/CardBrandTextField/CardBrandTextField';
 import CardPasswordTextField from '@components/payments/@cardPassword/CardPasswordTextField/CardPasswordTextField';
 import CVCNumberTextField from '@components/payments/@cvcNumber/CVCNumberTextField/CVCNumberTextField';
@@ -14,128 +15,92 @@ import {
   TextFieldStyleContainer,
 } from '@components/payments/CreditCardForm/container';
 
-import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
-import useCardBrandDropdown from '@hooks/creditCard/useCardBrandDropdown';
-import useChangeCVCNumber from '@hooks/creditCard/useChangeCVCNumber';
-import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
-import useChangePassword from '@hooks/creditCard/useChangeCardPassword';
 import { CARD_BRAND_MAP } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.constant';
 import { isCardBrandName } from '@components/payments/@cardBrand/CardBrandDropdown/CardBrandDropdown.util';
+
 import useMovePage from '@hooks/useMovePage';
-import {
-  isCompletedInputCVCNumber,
-  isCompletedInputCardBrand,
-  isCompletedInputCardNumber,
-  isCompletedInputCardPassword,
-  isCompletedInputExpiration,
-  isCompletedInputOwnerName,
-} from '@domain/creditCard';
+import useCreditCardForm from '@hooks/creditCard/useCreditCardForm';
+
+import { isValidOwnerName } from '@domain/creditCard';
 
 const CreditCardForm: React.FC = () => {
-  const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
-
-  const { cardBrand, isDropdownOpen, isCardBrandCompleted, handleSelectCardBrand, handleToggle } =
-    useCardBrandDropdown();
-
-  const { isExpirationCompleted, expiration, expirationError, handleExpirationChange } = useChangeExpiration();
-
-  const { isOwnerNameCompleted, ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
-
   const {
-    isCVCNumberCompleted,
-    isFocusedCVCNumber,
+    formState: { cardBrand, cardNumbers, cardPassword, cvcNumber, ownerName, expiration },
+    formErrors: { cvcError, expirationError, ownerNameError, cardNumberError, cardPasswordError },
+    formInteractionState,
+    formHandlers,
+  } = useCreditCardForm();
+
+  const handleMovePage = useMovePage('/card-register-complete', {
+    cardPassword,
+    cardBrand: isCardBrandName(cardBrand) ? CARD_BRAND_MAP[cardBrand] : '',
+  });
+
+  const previewCreditCardProps = {
     cvcNumber,
-    cvcError,
-    handleChangeCVCNumber,
-    handleChangeCVCNumberFocus,
-  } = useChangeCVCNumber();
+    cardBrand,
+    cardNumbers,
+    expiration,
+    ownerName,
+    isFocusedCVCNumber: formInteractionState.isFocusedCVCNumber,
+    isCardBrandChange: cardBrand !== '',
+  };
 
-  const { cardPassword, cardPasswordError, handleChangePassword } = useChangePassword();
+  const cardPasswordTextFieldProps = {
+    cardPassword,
+    cardPasswordError,
+    onAddCardPassword: formHandlers.handleChangePassword,
+  };
 
-  const handleMovePage = useMovePage();
+  const cvcNumberTextFieldProps = {
+    cvcNumber: cvcNumber,
+    cvcError: cvcError,
+    onFocusCVCNumberField: formHandlers.handleChangeCVCNumberFocus,
+    onAddCVCNumber: formHandlers.handleChangeCVCNumber,
+  };
 
-  const isCardNumberError = cardNumberError.errorConditions.some((errorCondition) => errorCondition === true);
+  const ownerNameTextFieldProps = { ownerName, ownerNameError, onAddOwnerName: formHandlers.handleOwnerNameChange };
 
-  const targetCardBrand = isCardBrandName(cardBrand) ? CARD_BRAND_MAP[cardBrand] : '';
+  const expirationDateTextFieldProps = {
+    month: expiration.month,
+    year: expiration.year,
+    onAddExpirationDate: formHandlers.handleExpirationChange,
+    expirationError: expirationError,
+  };
 
-  const isMountButton =
-    isCompletedInputCardNumber(cardNumbers, isCardNumberError) &&
-    isCompletedInputCardBrand(cardBrand, isDropdownOpen) &&
-    isCompletedInputExpiration(expiration, expirationError) &&
-    isCompletedInputOwnerName(ownerName, ownerNameError) &&
-    isCompletedInputCVCNumber(cvcNumber, cvcError) &&
-    isCompletedInputCardPassword(cardPassword, cardPasswordError);
+  const cardBrandTextFieldProps = {
+    isOpen: formInteractionState.isDropdownOpen,
+    currentCardBrand: cardBrand,
+    onSelectCardBrand: formHandlers.handleSelectCardBrand,
+    onToggleDropdown: formHandlers.handleToggle,
+  };
+
+  const cardNumberTextFieldProps = {
+    isCardNumberError: formInteractionState.isCardNumberError,
+    cardNumbers: cardNumbers,
+    onAddCardNumber: formHandlers.handleCardNumberChange,
+    cardNumberError: cardNumberError,
+  };
 
   return (
     <>
       <PreviewCreditCardStyleContainer>
-        <PreviewCreditCard
-          cvcNumber={cvcNumber}
-          cardBrand={cardBrand}
-          cardNumbers={cardNumbers}
-          expiration={expirationError.isError === true ? initialExpiration : expiration}
-          ownerName={ownerName}
-          isFocusedCVCNumber={isFocusedCVCNumber}
-          isCardBrandChange={cardBrand !== ''}
-        />
+        <PreviewCreditCard {...previewCreditCardProps} />
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>
-        {isCVCNumberCompleted && (
-          <CardPasswordTextField
-            cardPassword={cardPassword}
-            cardPasswordError={cardPasswordError}
-            onAddCardPassword={handleChangePassword}
-          />
+        {formInteractionState.isCVCNumberCompleted && <CardPasswordTextField {...cardPasswordTextFieldProps} />}
+        {isValidOwnerName(ownerName) && formInteractionState.isOwnerNameCompleted && (
+          <CVCNumberTextField {...cvcNumberTextFieldProps} />
         )}
-        {ownerName.length > 1 && isOwnerNameCompleted && (
-          <CVCNumberTextField
-            cvcNumber={cvcNumber}
-            cvcError={cvcError}
-            onFocusCVCNumberField={handleChangeCVCNumberFocus}
-            onAddCVCNumber={handleChangeCVCNumber}
-          />
+        {formInteractionState.isExpirationCompleted && <OwnerNameTextField {...ownerNameTextFieldProps} />}
+        {!formInteractionState.isDropdownOpen && formInteractionState.isCardBrandCompleted && (
+          <ExpirationDateTextField {...expirationDateTextFieldProps} />
         )}
-        {isExpirationCompleted && (
-          <OwnerNameTextField
-            ownerName={ownerName}
-            onAddOwnerName={handleOwnerNameChange}
-            ownerNameError={ownerNameError}
-          />
-        )}
-        {!isDropdownOpen && isCardBrandCompleted && (
-          <ExpirationDateTextField
-            month={expiration.month}
-            year={expiration.year}
-            onAddExpirationDate={handleExpirationChange}
-            expirationError={expirationError}
-          />
-        )}
-        {isCardNumberCompleted && (
-          <CardBrandTextField
-            isOpen={isDropdownOpen}
-            currentCardBrand={cardBrand}
-            onSelectCardBrand={handleSelectCardBrand}
-            onToggleDropdown={handleToggle}
-          />
-        )}
-        <CardNumberTextField
-          isCardNumberError={isCardNumberError}
-          cardNumbers={cardNumbers}
-          onAddCardNumber={handleCardNumberChange}
-          cardNumberError={cardNumberError}
-        />
+        {formInteractionState.isCardNumberCompleted && <CardBrandTextField {...cardBrandTextFieldProps} />}
+        <CardNumberTextField {...cardNumberTextFieldProps} />
       </TextFieldStyleContainer>
-      {isMountButton && (
-        <Button
-          isFloating
-          onClick={() => {
-            handleMovePage('/card-register-complete', {
-              cardPassword,
-              cardBrand: targetCardBrand,
-            });
-          }}
-          size="large"
-        >
+      {formInteractionState.isMountButton && (
+        <Button isFloating onClick={() => handleMovePage()} size="large">
           확인
         </Button>
       )}
