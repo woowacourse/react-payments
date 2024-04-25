@@ -35,7 +35,7 @@ export function cardPeriodValidator(input: string, category?: "month" | "year"):
 }
 
 const isEnglish = (input: string) => {
-  return /^[a-zA-Z]+$/.test(input);
+  return /^[a-zA-Z ]+$/.test(input);
 };
 
 export function cardOwnerValidator(input: string): validatorReturn {
