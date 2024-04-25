@@ -10,6 +10,8 @@ interface InputProps {
   size?: "small" | "medium" | "large";
   validator?: (value: string) => boolean;
   onEnter?: () => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,6 +25,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       size = "medium",
       validator,
       onEnter,
+      onBlur,
+      onFocus,
     },
     ref
   ) => {
@@ -56,6 +60,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onKeyDown={handleKeyDown}
           maxLength={maxLength}
           placeholder={placeholder}
+          onBlur={onBlur}
+          onFocus={onFocus}
         />
       </InputWrapper>
     );

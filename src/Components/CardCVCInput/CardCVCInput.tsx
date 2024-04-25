@@ -6,12 +6,16 @@ interface CardCVCInputProps {
   value: string;
   onChange: (value: string) => void;
   setCompleted: (isCompleted: boolean) => void;
+  handleOnBlur: () => void;
+  handleOnFocus: () => void;
 }
 
 const CardCVCInput: React.FC<CardCVCInputProps> = ({
   value,
   onChange,
   setCompleted,
+  handleOnBlur,
+  handleOnFocus,
 }) => {
   const [inputValues, setInputValues] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -62,6 +66,8 @@ const CardCVCInput: React.FC<CardCVCInputProps> = ({
         size="large"
         maxLength={2}
         validator={(value) => validator(value)}
+        onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
       />
       <Tooltip>{!isValid ? errorMessage : ""}</Tooltip>
     </>

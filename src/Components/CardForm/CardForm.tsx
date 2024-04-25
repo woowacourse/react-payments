@@ -27,6 +27,7 @@ const CardForm: React.FC = () => {
   const [showExpiryInput, setShowExpiryInput] = useState(false);
   const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
+  const [isOnCVCInput, setIsOnCVCInput] = useState(false);
 
   const navigate = useNavigate();
 
@@ -130,10 +131,12 @@ const CardForm: React.FC = () => {
     <form>
       <CardPreview
         cardNumber={cardNumber}
+        cardCVC={cardCVC}
         expiryMonth={expiryMonth}
         expiryYear={expiryYear}
         cardholderName={cardholderName}
         cardCompany={selectedCard}
+        isFront={isOnCVCInput}
       />
 
       {showCardCVCInput && (
@@ -142,6 +145,8 @@ const CardForm: React.FC = () => {
             value={cardCVC}
             onChange={handleCardCVC}
             setCompleted={handleCardCVCCompleted}
+            handleOnBlur={() => setIsOnCVCInput(false)}
+            handleOnFocus={() => setIsOnCVCInput(true)}
           />
         </CardInput>
       )}

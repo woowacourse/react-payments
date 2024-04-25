@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import {
-  Card,
-  // CardStyle,
+  CVCStyle,
   Password,
   cardNumberStyle,
   cardNumbersStyle,
   logoDiv,
+  CardFront,
+  CardWrapper,
+  CardBack,
 } from "./CardPreview.styles";
 import CardLogo from "../common/CardLogo/CardLogo";
 
@@ -16,6 +18,8 @@ interface CardPreviewProps {
   expiryYear: string;
   cardholderName: string;
   cardCompany: CardCompany | "";
+  cardCVC: string;
+  isFront: boolean;
 }
 
 const getCardLogoOption = (cardNumber: string) => {
@@ -36,45 +40,50 @@ const CardPreview: React.FC<CardPreviewProps> = ({
   expiryYear,
   cardholderName,
   cardCompany,
+  cardCVC,
+  isFront,
 }) => {
   const formattedCardNumber = cardNumber.replace(/\d{4}(?=.)/g, "$& ");
   const dd = formattedCardNumber.split("  ");
   const option = getCardLogoOption(cardNumber);
+  const isFrontValue = isFront;
 
   return (
-    // <article css={CardStyle}>
-    <Card cardCompany={cardCompany}>
-      <div css={logoDiv}>
-        <CardLogo option="default" />
-        <CardLogo option={option} />
-      </div>
-
-      <div css={cardNumbersStyle}>
-        <div css={cardNumberStyle}>{dd[0]}</div>
-        <div css={cardNumberStyle}>{dd[1]}</div>
-        <div css={cardNumberStyle}>
-          {dd[2] &&
-            Array.from({ length: dd[2].length }, () => {
-              return <Password />;
-            })}
+    <CardWrapper className={!isFrontValue ? "front" : "back"}>
+      <CardFront cardCompany={cardCompany}>
+        <div css={logoDiv}>
+          <CardLogo option="default" />
+          <CardLogo option={option} />
         </div>
-        <div css={cardNumberStyle}>
-          {dd[3] &&
-            Array.from({ length: dd[3].length }, () => {
-              return <Password />;
-            })}
+
+        <div css={cardNumbersStyle}>
+          <div css={cardNumberStyle}>{dd[0]}</div>
+          <div css={cardNumberStyle}>{dd[1]}</div>
+          <div css={cardNumberStyle}>
+            {dd[2] &&
+              Array.from({ length: dd[2].length }, () => {
+                return <Password />;
+              })}
+          </div>
+          <div css={cardNumberStyle}>
+            {dd[3] &&
+              Array.from({ length: dd[3].length }, () => {
+                return <Password />;
+              })}
+          </div>
         </div>
-      </div>
 
-      <div>
-        {expiryMonth}
-        {expiryMonth && "/"}
-        {expiryYear}
-      </div>
-      <div>{cardholderName}</div>
-    </Card>
-
-    // </article>
+        <div>
+          {expiryMonth}
+          {expiryMonth && "/"}
+          {expiryYear}
+        </div>
+        <div>{cardholderName}</div>
+      </CardFront>
+      <CardBack>
+        <div css={CVCStyle}>{cardCVC ? cardCVC : ""}</div>
+      </CardBack>
+    </CardWrapper>
   );
 };
 

@@ -24,21 +24,8 @@ const getCardBackgroundColor = (cardCompany: CardCompany | "") => {
   }
 };
 
-// export const CardStyle = css({
-//   display: "flex",
-//   flexDirection: "column",
-//   gap: "10px",
-//   width: "212px",
-//   height: "132px",
-//   backgroundColor: {(cardCompany)=>getCardBackgroundColor(cardCompany)},
-//   color: "#fff",
-//   borderRadius: "4px",
-//   boxShadow: "3px 3px 5px 0px #00000040",
-//   padding: "12px 8px",
-// });
-
 interface CardProps {
-  cardCompany: CardCompany | "";
+  cardCompany?: CardCompany | "";
   children?: React.ReactNode;
 }
 
@@ -48,11 +35,23 @@ export const Card = styled.div<CardProps>`
   gap: 10px;
   width: 212px;
   height: 132px;
-  background-color: ${({ cardCompany }) => getCardBackgroundColor(cardCompany)};
+  background-color: ${({ cardCompany }) =>
+    cardCompany ? getCardBackgroundColor(cardCompany) : "#D5D5D5"};
   color: #fff;
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
   padding: 12px 8px;
+  position: relative;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  &.front {
+    transform: rotateY(0deg);
+  }
+
+  &.back {
+    transform: rotateY(180deg);
+  }
 `;
 
 export const logoDiv = css({
@@ -79,4 +78,64 @@ export const Password = styled.div`
   height: 4px;
   background: #ffffff;
   border-radius: 100%;
+`;
+
+export const CVCStyle = css({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  width: "200px",
+  height: "24px",
+  marginBottom: "24px",
+  backgroundColor: "#CBBA64",
+  fontStyle: "italic",
+  position: "absolute",
+  bottom: "12px",
+  paddingRight: "12px",
+  left: 0,
+});
+
+export const CardWrapper = styled.div`
+  position: relative;
+  width: 212px;
+  height: 132px;
+  perspective: 1000px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+
+  &.front {
+    transform: rotateY(0deg);
+  }
+
+  &.back {
+    transform: rotateY(180deg);
+  }
+`;
+
+export const CardFront = styled.div<CardProps>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: ${({ cardCompany }) =>
+    cardCompany ? getCardBackgroundColor(cardCompany) : "#333"};
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px #00000040;
+  padding: 12px 8px;
+`;
+
+export const CardBack = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background-color: #d5d5d5;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px #00000040;
+  color: #fff;
 `;
