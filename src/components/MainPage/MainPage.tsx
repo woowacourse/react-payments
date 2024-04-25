@@ -8,13 +8,13 @@ import cardInfoReducer from '../../store/cardInfoReducer';
 import PaymentsBottomFixedButton from '../common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
 
 const INITIAL_CARD_INFO_STATE: CardInfo = {
-  cardNumbers: { value: ['', '', '', ''], isComplete: false, errorMessage: '' },
-  cardBrand: { value: 'none', isComplete: false, errorMessage: '' },
-  cardCompany: { value: '', isComplete: false, errorMessage: '' },
-  expiration: { value: ['', ''], isComplete: false, errorMessage: '' },
-  name: { value: '', isComplete: false, errorMessage: '' },
-  cvc: { value: '', isComplete: false, errorMessage: '' },
-  password: { value: '', isComplete: false, errorMessage: '' },
+  cardNumbers: { value: ['', '', '', ''], isComplete: false },
+  cardBrand: { value: 'none', isComplete: false },
+  cardCompany: { value: '', isComplete: false },
+  expiration: { value: ['', ''], isComplete: false },
+  name: { value: '', isComplete: false },
+  cvc: { value: '', isComplete: false },
+  password: { value: '', isComplete: false },
 }
 
 const MainPage = () => {
@@ -25,7 +25,7 @@ const MainPage = () => {
     setCardState(cardState)
   }
 
-  const showSubmitButton = cardInfo.password.isComplete && Object.values(cardInfo).map((info) => info.errorMessage).every((errorMessage) => errorMessage.length === 0)
+  const showSubmitButton = true
 
   return (
     <>
