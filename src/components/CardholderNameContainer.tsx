@@ -6,14 +6,16 @@ import { ErrorDetail } from '../types/error';
 interface CardholderNameContainerProps {
   cardholderName: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateErrorMessage: () => void;
+  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
   errorInfo: ErrorDetail;
 }
 
 const CardholderNameContainer = ({
   cardholderName,
   handleChange,
-  updateErrorMessage,
+  handleBlur,
+  handleKeyDown,
   errorInfo,
 }: CardholderNameContainerProps) => {
   return (
@@ -28,7 +30,8 @@ const CardholderNameContainer = ({
           isError={errorInfo.isError}
           value={cardholderName}
           onChange={handleChange}
-          onBlur={updateErrorMessage}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
           placeholder="JOHN DOE"
           width="100%"
           maxLength={100}

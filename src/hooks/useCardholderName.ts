@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { validateCardholderName, validateEnglish } from '../validator/validateCardholderName';
 import useInput from './useInput';
 
@@ -6,6 +7,7 @@ const useCardholderName = () => {
     onChange: validateEnglish,
     onBlur: validateCardholderName,
   });
+  const [isEnter, setIsEnter] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const validationResult = validateEnglish(e.target.value);
@@ -14,11 +16,27 @@ const useCardholderName = () => {
     setValue(e.target.value.toUpperCase());
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const errorStatus = updateErrorMessage();
+      if (errorStatus.isError) return;
+      setIsEnter(true);
+    }
+  };
+
+  const handleBlur = () => {
+    const errorStatus = updateErrorMessage();
+    if (errorStatus.isError) return;
+    setIsEnter(true);
+  };
+
   return {
     value,
     handleChange,
     errorInfo,
-    updateErrorMessage,
+    handleBlur,
+    isEnter,
+    handleKeyDown,
   };
 };
 

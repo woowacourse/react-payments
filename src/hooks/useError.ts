@@ -16,6 +16,8 @@ const useError = (value: string, validator: ValidatorProps) => {
     setErrorInfo({
       ...validationResult,
     });
+
+    return validationResult;
   };
 
   return {
