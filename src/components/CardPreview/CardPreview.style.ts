@@ -16,6 +16,7 @@ export const CardContainer = styled.div<{ $bgColor: string }>`
 
   perspective: 500px;
   transform-style: preserve-3d;
+  color: ${(props) => (props.$bgColor === '#FFE600' ? '#1E1E1E' : '#fff')};
 
   & > div {
     position: absolute;
@@ -65,7 +66,6 @@ export const MagneticStripe = styled.div`
 export const CVCNumber = styled.span`
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: #fff;
 `;
 
 export const NumbersContainer = styled.div`
@@ -83,17 +83,16 @@ export const NumbersWrapper = styled.div`
 `;
 
 export const Text = styled.span`
-  color: #fff;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
 `;
 
-export const Dot = styled.span`
+export const Dot = styled.span<{ $bgColor: string }>`
   width: 4px;
   height: 4px;
 
-  background-color: #fff;
+  background-color: ${(props) => (props.$bgColor === '#FFE600' ? '#1E1E1E' : '#fff')};
   border-radius: 50%;
 `;
 

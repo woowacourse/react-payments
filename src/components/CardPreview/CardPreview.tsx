@@ -43,12 +43,12 @@ export default function CardPreview({
               </S.NumbersWrapper>
               <S.NumbersWrapper>
                 {Array.from({ length: cardNumbers[2].length }).map((_, index) => (
-                  <S.Dot key={'third card section' + index} />
+                  <S.Dot $bgColor={cardColor} key={'third card section' + index} />
                 ))}
               </S.NumbersWrapper>
               <S.NumbersWrapper>
                 {Array.from({ length: cardNumbers[3].length }).map((_, index) => (
-                  <S.Dot key={'fourth card section' + index} />
+                  <S.Dot $bgColor={cardColor} key={'fourth card section' + index} />
                 ))}
               </S.NumbersWrapper>
             </S.NumbersContainer>
