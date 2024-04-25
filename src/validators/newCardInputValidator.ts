@@ -64,8 +64,8 @@ export const validateCVC = (value: string): string => {
     return '숫자만 입력 가능합니다.';
   }
 
-  if (value !== '' && value.length < 3) {
-    return '3자리를 입력해주세요.';
+  if (value !== '' && value.length < CARD_FORM_INPUTS.CVC.MAX_LENGTH) {
+    return `${CARD_FORM_INPUTS.CVC.MAX_LENGTH}자리를 입력해주세요.`;
   }
 
   return '';
@@ -74,6 +74,10 @@ export const validateCVC = (value: string): string => {
 export const validatePassword = (value: string): string => {
   if (value !== '' && Number.isNaN(Number(value))) {
     return '숫자만 입력 가능합니다.';
+  }
+
+  if (value !== '' && value.length < CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH) {
+    return `${CARD_FORM_INPUTS.PASSWORD.MAX_LENGTH}자리를 입력해주세요.`;
   }
 
   return '';
