@@ -35,7 +35,7 @@ export interface CardInfo {
   password: string | null;
 }
 
-const INITIAL_CARD_INFO: CardInfo = {
+export const INITIAL_CARD_INFO: CardInfo = {
   numbers: null,
   mark: null,
   period: {

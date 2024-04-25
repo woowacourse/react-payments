@@ -46,6 +46,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-css-order": "^2.1.2",
     "storybook": "^8.0.8",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }

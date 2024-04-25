@@ -6,7 +6,7 @@ import CardForm from './CardForm';
 import CardFrontImg from './CardFrontImg';
 import CardInputSection from './CardInputSection';
 import CardNumbersInput from './CardNumbersInput';
-import CardPassword from './CardPassword';
+import CardPasswordInput from './CardPasswordInput';
 import CardPreview from './CardPreview';
 import CardUserNameInput from './CardUserNameInput';
 import ErrorMessage from './ErrorMessage/index';
@@ -24,7 +24,7 @@ export {
   CardInputSection,
   CardNumbersInput,
   CardUserNameInput,
-  CardPassword,
+  CardPasswordInput,
   CardPreview,
   ErrorMessage,
   Input,

@@ -4,7 +4,7 @@ import styles from './style.module.css';
 
 function Layout() {
   return (
-    <div className={styles.layout}>
+    <div id="layout" className={styles.layout}>
       <Outlet />
     </div>
   );

@@ -1,4 +1,7 @@
 :root {
+  --card-preview-height: calc(15.875rem - 1.1875rem * 2);
+  --card-width: 13.25rem;
+  --card-height: 8.25rem;
   --card-img-z-index: 2;
 }
 

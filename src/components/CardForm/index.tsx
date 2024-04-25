@@ -18,7 +18,9 @@ import CardExpirationPeriodInput, {
   CardExpirationPeriodFormProps,
 } from '../CardExpirationPeriodInput';
 import CardNumbersInput, { CardNumbersInputProps } from '../CardNumbersInput';
-import CardPassword, { CardPasswordProps } from '../CardPassword';
+import CardPasswordInput, {
+  CardPasswordInputProps,
+} from '../CardPasswordInput';
 import { CardSide } from '../CardPreview';
 import CardUserNameInput, {
   CardUserNameInputProps,
@@ -27,7 +29,7 @@ import CardUserNameInput, {
 import styles from './style.module.css';
 
 interface CardFormProps
-  extends Omit<CardPasswordProps, 'goNextFormStep'>,
+  extends Omit<CardPasswordInputProps, 'goNextFormStep'>,
     Omit<CardCVCInputProps, 'goNextFormStep'>,
     Omit<CardUserNameInputProps, 'goNextFormStep'>,
     Omit<CardExpirationPeriodFormProps, 'goNextFormStep'>,
@@ -81,6 +83,20 @@ function CardForm(props: CardFormProps) {
 
     [cardInfo],
   );
+  /**
+   * layout이 적용되는 지 여부에 따라 btn의 위치 조정
+   */
+  const btnStyle = useMemo(() => {
+    const $layout = document.getElementById('layout');
+    // 스토리북의 경우 layout이 적용되지 않음
+    if (!$layout) return { left: 0 };
+    const computedStyle = window.getComputedStyle($layout, null);
+    const leftPadding = computedStyle.getPropertyValue('padding-left');
+
+    return {
+      left: `-${leftPadding}`,
+    };
+  }, [isCardEnrollmentCompleted]);
 
   const resetFormStep = () => {
     setFormStep(INITIAL_STEP);
@@ -115,7 +131,9 @@ function CardForm(props: CardFormProps) {
   return (
     <form className={styles.formContainer}>
       <fieldset className={styles.fieldset}>
-        {formStep === 6 && <CardPassword editCardPassword={editCardPassword} />}
+        {formStep === 6 && (
+          <CardPasswordInput editCardPassword={editCardPassword} />
+        )}
         {formStep >= 5 && (
           <CardCVCInput
             setCardSide={setCardSide}
@@ -153,6 +171,7 @@ function CardForm(props: CardFormProps) {
         <button
           className={styles.submitBtn}
           type="submit"
+          style={btnStyle}
           onClick={handleClickOfSubmitBtn}
         >
           확인

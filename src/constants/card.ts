@@ -123,6 +123,10 @@ export const CARD_COMPANY: Map<string, { name: string; color: string }> =
     ],
   ]);
 
+export const ETC_CARD_COMPANY = {
+  name: '키타카드',
+  color: CARD_COLOR_ETC,
+};
 export const CARD_COMPANY_NAMES = Array.from(CARD_COMPANY.keys());
 
 export const CARD_PASSWORD = {

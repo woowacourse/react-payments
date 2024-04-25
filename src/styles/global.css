@@ -3,7 +3,4 @@
   --layout-max-width: 480px;
   --layout-padding: 30px;
   --submit-btn-height: 3.25rem;
-  --card-preview-height: calc(15.875rem - 1.1875rem * 2);
-  --card-width: 13.25rem;
-  --card-height: 8.25rem;
 }

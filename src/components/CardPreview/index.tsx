@@ -8,7 +8,7 @@ import CardFrontImg from '../CardFrontImg';
 import styles from './style.module.css';
 
 export type CardSide = 'front' | 'back';
-interface CardPreviewProps {
+export interface CardPreviewProps {
   side: CardSide;
   cardInfo: CardInfo;
 }

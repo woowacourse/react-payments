@@ -16,11 +16,11 @@ import Input from '../Input';
 
 import styles from './style.module.css';
 
-export interface CardPasswordProps {
+export interface CardPasswordInputProps {
   editCardPassword: (password: string) => void;
 }
 
-function CardPassword(props: CardPasswordProps) {
+function CardPasswordInput(props: CardPasswordInputProps) {
   const { editCardPassword } = props;
 
   const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
@@ -72,4 +72,4 @@ function CardPassword(props: CardPasswordProps) {
   );
 }
 
-export default CardPassword;
+export default CardPasswordInput;
