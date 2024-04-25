@@ -12,7 +12,7 @@ const cardList: CardListElement[] = [
   { issuer: "MasterCard", startingNumbers: ["51", "52", "53", "54", "55"] },
 ];
 
-export const matchCardIssuer = (cardNumber: string) => {
+export const matchCardType = (cardNumber: string) => {
   const matchedStartingNumber = (startingNumber: string) =>
     cardNumber.slice(0, startingNumber.length) === startingNumber;
 
@@ -26,12 +26,12 @@ export const matchCardIssuer = (cardNumber: string) => {
   return matchedCardInfo?.issuer ?? "";
 };
 
-const issuerImg: { [key: string]: string } = {
+const cardTypeImg: { [key: string]: string } = {
   ["Visa"]: VISA_IMAGE,
   ["MasterCard"]: MASTERCARD_IMAGE,
 };
 
-export const matchCardIssuerImgSrc = (issuer: string) => {
-  const result = issuerImg[issuer];
+export const matchCardTypeImgSrc = (issuer: string) => {
+  const result = cardTypeImg[issuer];
   return result ?? DEFAULT_BLANK_IMAGE;
 };

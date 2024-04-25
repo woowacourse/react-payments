@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import IC_CHIP from "../Images/Ic_chip.png";
 import { css } from "@emotion/react";
-import { matchCardIssuerImgSrc } from "../domain/matchCardIssuer";
+import { matchCardTypeImgSrc } from "../domain/matchCardIssuer";
 
 const styledCardPreview = css`
   width: 212px;
@@ -47,14 +47,14 @@ const styledCardNumber = css`
 `;
 
 interface CardPreviewProps {
-  cardIssuer: "" | "Visa" | "MasterCard";
+  cardType: "" | "Visa" | "MasterCard";
   cardNumbers: [string, string, string, string];
   cardExpirationPeriod: [string, string];
   cardHolder: string;
 }
 
 export default function CardPreview({
-  cardIssuer,
+  cardType,
   cardNumbers,
   cardExpirationPeriod,
   cardHolder,
@@ -63,7 +63,7 @@ export default function CardPreview({
     <section css={styledCardPreview}>
       <div css={styledCardHeader}>
         <img src={IC_CHIP} alt="" />
-        <img src={matchCardIssuerImgSrc(cardIssuer)} alt={cardIssuer} />
+        <img src={matchCardTypeImgSrc(cardType)} alt={cardType} />
       </div>
       <div css={styledCardNumberContainer}>
         {cardNumbers.map((number, idx) => (
