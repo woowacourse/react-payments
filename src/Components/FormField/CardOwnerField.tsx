@@ -14,9 +14,9 @@ const CardOwnerField = () => {
   return (
     <FormFieldComponent
       formFieldInfo={{
-        title: "카드 유효기간을 입력해 주세요",
-        description: "월/년도(MM/YY)를 순서대로 입력해 주세요.",
-        label: "유효기간",
+        title: "카드 소유자 이름을 입력해 주세요",
+        description: "",
+        label: "소유자 이름",
       }}
       errorMessage={categoryHasError ? cardOwnerError[categoryHasError]?.errorMessage : undefined}
     >

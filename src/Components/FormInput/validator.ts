@@ -35,11 +35,15 @@ export function cardPeriodValidator(input: string, category?: "month" | "year"):
   return { isValid: true, value: input };
 }
 
+const isEnglish = (input: string) => {
+  return /^[a-zA-Z]+$/.test(input);
+};
+
 export function cardOwnerValidator(input: string): validatorReturn<string> {
   if (input.length > 15) {
     return { isValid: false, message: ERROR_MESSAGES.ONLY_UNDER_15_LENGTH };
   }
-  if (!/[a-zA-Z ]/.test(input) && input) {
+  if (input && !isEnglish(input)) {
     return { isValid: false, message: ERROR_MESSAGES.ONLY_ENGLISH };
   }
   return { isValid: true, value: input };
