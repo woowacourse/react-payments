@@ -45,7 +45,7 @@ const CardRegisterForm = ({
   ];
 
   useEffect(() => {
-    if (completedArr[step - 1] && step < completedArr.length) {
+    if (completedArr[step - 1] && step <= completedArr.length) {
       setStep((prev) => prev + 1);
     }
   }, [step, ...completedArr]);

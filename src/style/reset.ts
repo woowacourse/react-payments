@@ -6,6 +6,10 @@ const resetStyle = css`
     padding: 0;
   }
 
+  div {
+    white-space: "pre-wrap";
+  }
+
   input[type="password"] {
     letter-spacing: 4px;
   }

@@ -14,7 +14,10 @@ const expiredPeriodState = {
     expirationYear: "",
   },
   onChange: () => {},
-  errors: "",
+  errors: {},
+  setValues: () => {},
+  isError: false,
+  setErrors: () => {},
 };
 
 type Story = StoryObj<typeof ExpirationPeriodField>;

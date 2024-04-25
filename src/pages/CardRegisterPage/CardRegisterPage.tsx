@@ -15,8 +15,10 @@ import CardPreview from "@/components/CreditCardPreview/CardPreview";
 import { useState } from "react";
 import BasicButton from "@/components/_common/BasicButton/BasicButton";
 import { theme } from "@/style/theme";
+import { useNavigate } from "react-router-dom";
 
 const CardRegisterPage = () => {
+  const navigate = useNavigate();
   const cardNumbersState = useInputs<CardNumberInputType>({
     initialValue: {
       cardNumbers1: "",
@@ -72,6 +74,15 @@ const CardRegisterPage = () => {
 
   const [step, setStep] = useState<number>(1);
 
+  const onSubmitCardInfo = () => {
+    navigate("/confirm", {
+      state: {
+        startNumbers: cardNumbersState.values.cardNumbers1,
+        cardType: cardTypeState.value,
+      },
+    });
+  };
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
@@ -94,16 +105,19 @@ const CardRegisterPage = () => {
           setStep={setStep}
         />
       </S.FlexWrapper>
-      <BasicButton
-        borderType="square"
-        position="bottom"
-        fontSize={15}
-        height={52}
-        disabled={true}
-        backgroundColor={theme.COLOR["grey-3"]}
-      >
-        확인
-      </BasicButton>
+      {step === 7 && (
+        <BasicButton
+          borderType="square"
+          position="bottom"
+          fontSize={15}
+          height={52}
+          disabled={step !== 7}
+          backgroundColor={theme.COLOR["grey-3"]}
+          onClick={onSubmitCardInfo}
+        >
+          확인
+        </BasicButton>
+      )}
     </S.CardRegisterWrapper>
   );
 };

@@ -3,11 +3,10 @@ import S from "./style";
 
 export type ButtonBorderType = "square" | "round";
 
-export type ButtonPosition = "bottom";
+export type ButtonPosition = "bottom" | "basic";
 
 type BasicButtonProps = {
   padding?: number;
-  fontSize: number;
   width?: number;
   height: number;
   borderType: ButtonBorderType;

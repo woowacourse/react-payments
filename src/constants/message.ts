@@ -1,3 +1,5 @@
+import { CardType } from "./cardType";
+
 const PLACEHOLDER = {
   CARD_NUMBERS: "1234",
   EXPIRATION_MONTH: "MM",
@@ -36,10 +38,17 @@ const EXPIRATION_DATE_PLACEHOLDER = [
   PLACEHOLDER.EXPIRATION_YEAR,
 ];
 
+const REGISTER_CONFIRM_NUMBERS = (startNumbers: number) =>
+  `${startNumbers}로 시작하는`;
+const REGISTER_CONFIRM_CARDTYPE = (cardType: CardType) =>
+  `${cardType}카드가 등록되었어요.`;
+
 export const MESSAGE = {
   PLACEHOLDER,
   INPUT_LABEL,
   INPUT_INFO_TITLE,
   INPUT_INFO_SUBTITLE,
   EXPIRATION_DATE_PLACEHOLDER,
+  REGISTER_CONFIRM_NUMBERS,
+  REGISTER_CONFIRM_CARDTYPE,
 };

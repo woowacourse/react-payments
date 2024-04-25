@@ -22,6 +22,9 @@ const cardNumbersState = {
     cardNumbers3: "",
     cardNumbers4: "",
   },
+  setValues: () => {},
+  isError: false,
+  setErrors: () => {},
 };
 
 type Story = StoryObj<typeof CardNumbersField>;
