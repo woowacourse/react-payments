@@ -5,7 +5,7 @@ import Validation from '../utils/Validation';
 
 export default function useChangeCVC() {
   const [CVC, setCVC] = useState('');
-  const [CVCValid, setCVCValid] = useState({ isValid: true, errorMessage: '' });
+  const [CVCValid, setCVCValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
 
   const handleChangeCVC = (value: string) => {
     const isValidCVC = validateCVC(value);
@@ -19,7 +19,7 @@ export default function useChangeCVC() {
 
 function validateCVC(value: string) {
   if (Validation.isNumeric(value) && Validation.hasLength(value, CARD_CVC.MAX_LENGTH)) {
-    return { isValid: true, errorMessage: '' };
+    return { isValid: true, isCompleted: true, errorMessage: '' };
   }
-  return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CVC };
+  return { isValid: false, isCompleted: false, errorMessage: ERROR_MESSAGE.INVALID_CVC };
 }

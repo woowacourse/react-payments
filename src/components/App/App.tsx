@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import CardBrandInput from '../CardBrandInput/CardBrandInput';
@@ -21,6 +21,15 @@ import '../../styles/reset.css';
 import '../../styles/common.css';
 import * as S from './App.style';
 
+enum CardInputStep {
+  CardNumbers,
+  Brand,
+  ExpireDate,
+  Owner,
+  CVC,
+  PIN,
+}
+
 export default function App() {
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { brand, brandValid, handleChangeBrand } = useChangeBrand();
@@ -30,10 +39,36 @@ export default function App() {
   const { PINValid, handleChangePIN } = useChangePIN();
 
   const [showCardBackside, setShowCardBackside] = useState(false);
+  const [currentInputStep, setCurrentInputStep] = useState(CardInputStep.CardNumbers);
 
   const handleShowCardBackside = (isCVCFocus: boolean) => {
     setShowCardBackside(isCVCFocus);
   };
+
+  useEffect(() => {
+    const inputValidationResults = {
+      [CardInputStep.CardNumbers]: cardNumbersValid.isCompleted,
+      [CardInputStep.Brand]: brandValid.isCompleted,
+      [CardInputStep.ExpireDate]: expireMonthValid.isCompleted && expireYearValid.isCompleted,
+      [CardInputStep.Owner]: ownerValid.isCompleted,
+      [CardInputStep.CVC]: CVCValid.isCompleted,
+      [CardInputStep.PIN]: PINValid.isCompleted,
+    };
+
+    const lastCompletedStep = Object.values(inputValidationResults).lastIndexOf(true);
+    if (lastCompletedStep === currentInputStep) {
+      setCurrentInputStep(lastCompletedStep + 1);
+    }
+  }, [
+    currentInputStep,
+    cardNumbersValid.isCompleted,
+    brandValid.isCompleted,
+    expireMonthValid.isCompleted,
+    expireYearValid.isCompleted,
+    ownerValid.isCompleted,
+    CVCValid.isCompleted,
+    PINValid.isCompleted,
+  ]);
 
   return (
     <S.AppLayout>
@@ -50,16 +85,31 @@ export default function App() {
       </S.CardPreviewBox>
 
       <S.CardForm>
-        <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />
-        <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} onChangeFocusCVC={handleShowCardBackside} />
-        <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
-        <CardExpirationInput
-          isMonthValid={expireMonthValid}
-          isYearValid={expireYearValid}
-          onChangeExpireDate={handleChangeDate}
-        />
-        <CardBrandInput isBrandValid={brandValid} onChangeBrand={handleChangeBrand} />
-        <CardNumberInput isCardNumbersValid={cardNumbersValid} onChangeCardNumbers={handleChangeCardNumbers} />
+        {currentInputStep >= CardInputStep.PIN && <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />}
+
+        {currentInputStep >= CardInputStep.CVC && (
+          <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} onChangeFocusCVC={handleShowCardBackside} />
+        )}
+
+        {currentInputStep >= CardInputStep.Owner && (
+          <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
+        )}
+
+        {currentInputStep >= CardInputStep.ExpireDate && (
+          <CardExpirationInput
+            isMonthValid={expireMonthValid}
+            isYearValid={expireYearValid}
+            onChangeExpireDate={handleChangeDate}
+          />
+        )}
+
+        {currentInputStep >= CardInputStep.Brand && (
+          <CardBrandInput isBrandValid={brandValid} onChangeBrand={handleChangeBrand} />
+        )}
+
+        {currentInputStep >= CardInputStep.CardNumbers && (
+          <CardNumberInput isCardNumbersValid={cardNumbersValid} onChangeCardNumbers={handleChangeCardNumbers} />
+        )}
       </S.CardForm>
     </S.AppLayout>
   );

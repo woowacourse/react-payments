@@ -5,14 +5,11 @@ import Validation from '../utils/Validation';
 
 export default function useChangePIN() {
   const [PIN, setPIN] = useState('');
-  const [PINValid, setPINValid] = useState({ isValid: true, errorMessage: '' });
+  const [PINValid, setPINValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
 
   const handleChangePIN = (value: string) => {
     const isValidPIN = validatePIN(value);
     setPINValid(isValidPIN);
-
-    if (!isValidPIN.isValid && value !== '') return;
-
     setPIN(value);
   };
 
@@ -21,7 +18,7 @@ export default function useChangePIN() {
 
 function validatePIN(value: string) {
   if (Validation.isNumeric(value) && Validation.hasLength(value, CARD_PIN.MAX_LENGTH)) {
-    return { isValid: true, errorMessage: '' };
+    return { isValid: true, isCompleted: true, errorMessage: '' };
   }
-  return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_PIN };
+  return { isValid: false, isCompleted: false, errorMessage: ERROR_MESSAGE.INVALID_PIN };
 }

@@ -8,6 +8,7 @@ export default function useChangeCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<cardNumbersType>(['', '', '', '']);
   const [cardNumbersValid, setCardNumbersValid] = useState<cardNumbersValidType>({
     validStates: [true, true, true, true],
+    isCompleted: false,
     errorMessage: '',
   });
 
@@ -22,7 +23,11 @@ export default function useChangeCardNumbers() {
     const newErrorMessage = isAllInputsValid ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
 
     setCardNumbersValid(() => {
-      return { validStates: newCardNumbersValidStates, errorMessage: newErrorMessage };
+      const isCompleted =
+        isAllInputsValid &&
+        cardNumbers.map((prevNumber, index) => (index === inputIndex ? value : prevNumber)).join('').length ===
+          CARD_NUMBER.TOTAL_LENGTH;
+      return { validStates: newCardNumbersValidStates, isCompleted, errorMessage: newErrorMessage };
     });
 
     setCardNumbers((prev) => {

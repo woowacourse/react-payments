@@ -5,14 +5,11 @@ import Validation from '../utils/Validation';
 
 export default function useChangeOwner() {
   const [owner, setOwner] = useState('');
-  const [ownerValid, setOwnerValid] = useState({ isValid: true, errorMessage: '' });
+  const [ownerValid, setOwnerValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
 
   const handleChangeOwner = (value: string) => {
     const isValidOwner = validateOwner(value);
     setOwnerValid(isValidOwner);
-
-    if (!isValidOwner.isValid && value !== '') return;
-
     setOwner(value);
   };
 
@@ -21,12 +18,14 @@ export default function useChangeOwner() {
 
 function validateOwner(value: string) {
   if (!Validation.isEnglishWithSpace(value)) {
-    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CARD_OWNER_CHARACTER };
+    return { isValid: false, isCompleted: false, errorMessage: ERROR_MESSAGE.INVALID_CARD_OWNER_CHARACTER };
   }
 
   if (value.length > CARD_OWNER.MAX_LENGTH) {
-    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CARD_OWNER_LENGTH };
+    return { isValid: false, isCompleted: false, errorMessage: ERROR_MESSAGE.INVALID_CARD_OWNER_LENGTH };
   }
 
-  return { isValid: true, errorMessage: '' };
+  const isCompleted = Validation.isNotEmpty(value);
+
+  return { isValid: true, isCompleted, errorMessage: '' };
 }
