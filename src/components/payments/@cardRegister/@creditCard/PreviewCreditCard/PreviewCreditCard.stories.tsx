@@ -55,6 +55,8 @@ export const Default: Story = {
   },
 
   args: {
+    isFocusedCVCNumber: false,
+    cvcNumber: '',
     isCardBrandChange: false,
     cardBrand: '',
     cardNumbers: ['', '', '', ''],
@@ -73,6 +75,8 @@ export const VisaCard: Story = {
   },
 
   args: {
+    isFocusedCVCNumber: false,
+    cvcNumber: '',
     isCardBrandChange: false,
     cardBrand: '',
     cardNumbers: ['4123', '1231', '2342', '4535'],
@@ -91,6 +95,8 @@ export const MasterCard: Story = {
   },
 
   args: {
+    isFocusedCVCNumber: false,
+    cvcNumber: '',
     isCardBrandChange: false,
     cardBrand: '',
     cardNumbers: ['5112', '3456', '7890', '0000'],
@@ -109,6 +115,8 @@ export const NotCard: Story = {
   },
 
   args: {
+    isFocusedCVCNumber: false,
+    cvcNumber: '',
     isCardBrandChange: false,
     cardBrand: '',
     cardNumbers: ['1234', '3456', '7890', '0000'],
@@ -242,5 +250,21 @@ export const WooriCard: Story = {
     ...Default.args,
     isCardBrandChange: true,
     cardBrand: 'wooriCard',
+  },
+};
+
+export const CVCCard: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: '카드 브랜드를 우리카드로 선택했을 때',
+      },
+    },
+  },
+
+  args: {
+    ...Default.args,
+    isFocusedCVCNumber: true,
+    cvcNumber: '123',
   },
 };
