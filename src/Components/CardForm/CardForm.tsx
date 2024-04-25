@@ -9,11 +9,18 @@ import CardCVCInput from "../CardCVCInput/CardCVCInput";
 
 const CardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState("");
+  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
   const [selectedCard, setSelectedCard] = useState<CardCompany | "">("");
+  const [isSelectedCardCompleted, setIsSelectedCardCompleted] = useState(false);
   const [expiryMonth, setExpiryMonth] = useState("");
+  const [isExpiryMonthCompleted, setIsExpiryMontthCompleted] = useState(false);
   const [expiryYear, setExpiryYear] = useState("");
+  const [isExpiryYearCompleted, setIsExpiryYearCompleted] = useState(false);
   const [cardholderName, setCardholderName] = useState("");
+  const [isCardholderNameCompleted, setIsCardholderNameCompleted] =
+    useState(false);
   const [cardCVC, setCardCVC] = useState("");
+  const [isCardCVCCompleted, setIsCardCVCCompleted] = useState(false);
 
   const handleCardNumberChange = (value: string) => {
     const filteredValue = value.replace(/\D/g, "");
@@ -47,6 +54,10 @@ const CardForm: React.FC = () => {
     console.log("handleCardCVC cardCVC", cardCVC);
   };
 
+  const handleCardNumberCompleted = (isCompleted: boolean) => {
+    setIsCardNumberCompleted(isCompleted);
+  };
+
   return (
     <form>
       <CardPreview
@@ -66,21 +77,32 @@ const CardForm: React.FC = () => {
           value={cardNumber}
           onChange={handleCardNumberChange}
           // setIsValid={setCardNumberIsValid}
+          setCompleted={handleCardNumberCompleted}
         />
       </CardInput>
+      {isCardNumberCompleted && (
+        <CardInput
+          title="카드사를 선택해 주세요"
+          description="현재 국내 카드사만 가능합니다."
+          label="카드 소유자 이름"
+        >
+          <SelectBox onSelect={handleSelect} />
+        </CardInput>
+      )}
+      {/* 
 
-      <CardInput
-        title="카드 유효기간을 입력해 주세요"
-        label="유효기간"
-        description="월/년도(MMYY)를 순서대로 입력해 주세요"
-      >
-        <ExpiryInput
-          month={expiryMonth}
-          year={expiryYear}
-          onMonthChange={handleExpiryMonthChange}
-          onYearChange={handleExpiryYearChange}
-        />
-      </CardInput>
+        <CardInput
+          title="카드 유효기간을 입력해 주세요"
+          label="유효기간"
+          description="월/년도(MMYY)를 순서대로 입력해 주세요"
+        >
+          <ExpiryInput
+            month={expiryMonth}
+            year={expiryYear}
+            onMonthChange={handleExpiryMonthChange}
+            onYearChange={handleExpiryYearChange}
+          />
+        </CardInput>
 
       <CardInput
         title="카드 소유자 이름을 입력해 주세요"
@@ -92,19 +114,11 @@ const CardForm: React.FC = () => {
         />
       </CardInput>
 
-      <CardInput
-        title="카드 소유자 이름을 입력해 주세요"
-        label="카드 소유자 이름"
-      >
-        <div>
-          <SelectBox onSelect={handleSelect} />
-          <p>선택한 카드사: {selectedCard}</p>
-        </div>
-      </CardInput>
+   
 
       <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
         <CardCVCInput value={cardCVC} onChange={handleCardCVC} />
-      </CardInput>
+      </CardInput> */}
     </form>
   );
 };

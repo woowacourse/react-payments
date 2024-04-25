@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../common/Input/Input";
 import { CardNumberInputWrapper, Dd, Tooltip } from "./CardNumberInput.styles";
 
 interface CardNumberInputProps {
   value: string;
   onChange: (value: string) => void;
+  setCompleted: (isValid: boolean) => void;
 }
 
 const CardNumberInput: React.FC<CardNumberInputProps> = ({
   value,
   onChange,
+  setCompleted,
 }) => {
   const [inputValues, setInputValues] = useState<string[]>(Array(4).fill(""));
   const [isValid, setIsValid] = useState(true);
@@ -28,21 +30,23 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
 
   const validator = (value: string) => {
     if (!/^\d*$/.test(value)) {
-      setIsValid(false);
       setErrorMessage("카드 번호는 숫자만 입력 가능합니다.");
       return false;
     }
 
     if (value.length !== 4) {
-      setIsValid(false);
-      setErrorMessage("카드 번호는 4자리여야합니다.");
+      setErrorMessage("카드 번호는 4자리여야 합니다.");
       return false;
     }
 
-    setIsValid(true);
     setErrorMessage("");
     return true;
   };
+
+  useEffect(() => {
+    const isCompleted = inputValues.join("").length === 16 && isValid;
+    setCompleted(isCompleted);
+  }, [inputValues, isValid]);
 
   return (
     <CardNumberInputWrapper>
