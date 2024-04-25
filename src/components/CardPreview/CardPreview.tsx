@@ -12,9 +12,10 @@ interface CardPreviewProps {
   month: string;
   year: string;
   owner: string;
+  CVC: string;
 }
 
-export default function CardPreview({ cardNumbers, brand, month, year, owner }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, brand, month, year, owner, CVC }: CardPreviewProps) {
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
     if (checkCardGlobalBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;

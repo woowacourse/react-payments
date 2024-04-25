@@ -2,15 +2,17 @@ import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import CardBrandInput from '../CardBrandInput/CardBrandInput';
 import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
 import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
+import CardCVCInput from '../CardCVCInput/CardCVCInput';
 import CardPreviewBox from '../CardPreview/CardPreview';
 
-import { useChangeCardNumbers, useChangeBrand, useChangeExpireDate, useChangeOwner } from '../../hooks';
+import { useChangeCardNumbers, useChangeBrand, useChangeExpireDate, useChangeOwner, useChangeCVC } from '../../hooks';
 
 import '../../styles/reset.css';
 import '../../styles/common.css';
 import * as S from './App.style';
 
 export default function App() {
+  const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { brand, brandValid, handleChangeBrand } = useChangeBrand();
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
@@ -25,9 +27,11 @@ export default function App() {
           month={expireDate.month}
           year={expireDate.year}
           owner={owner}
+          CVC={CVC}
         />
       </S.CardPreviewBox>
       <S.CardForm>
+        <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} />
         <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
         <CardExpirationInput
           isMonthValid={expireMonthValid}
