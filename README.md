@@ -27,7 +27,7 @@
 
 #### 레이아웃
 
-<img  src="./readmeImages/step2_layout.png" height="400px"/>
+<img  src="./readmeImages/step2_layout.png" height="400px" alt="step2 레이아웃"/>
 
 ## 빌드 및 스토리북 테스트
 
