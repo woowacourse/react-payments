@@ -4,6 +4,17 @@ export const Container = styled.section`
   position: relative;
   width: 21.2rem;
   height: 13.2rem;
+  perspective: 100rem;
+`;
+
+export const Inner = styled.div<{ $isFocusCVCPreview: boolean }>`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+
+  transform: ${(props) => (props.$isFocusCVCPreview ? 'rotateY(180deg)' : 'rotateY(0deg)')};
 `;
 
 export const CardFront = styled.div<{ $isFocusCVCPreview: boolean; $brandColor: string }>`
@@ -16,8 +27,10 @@ export const CardFront = styled.div<{ $isFocusCVCPreview: boolean; $brandColor: 
   box-shadow: 0.3rem 0.3rem 0.5rem 0rem ${(props) => props.theme.color.dropShadow};
   border-radius: 0.4rem;
 
-  z-index: ${(props) => (props.$isFocusCVCPreview ? -1 : 2)};
+  /* z-index: ${(props) => (props.$isFocusCVCPreview ? -1 : 2)}; */
   background-color: ${(props) => props.$brandColor};
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
 `;
 
 export const CardBack = styled.div<{ $isFocusCVCPreview: boolean }>`
@@ -29,8 +42,10 @@ export const CardBack = styled.div<{ $isFocusCVCPreview: boolean }>`
   box-shadow: 0.3rem 0.3rem 0.5rem 0rem ${(props) => props.theme.color.dropShadow};
   border-radius: 0.4rem;
 
-  z-index: ${(props) => (props.$isFocusCVCPreview ? 2 : -1)};
+  /* z-index: ${(props) => (props.$isFocusCVCPreview ? 2 : -1)}; */
   background-color: ${(props) => props.theme.color.lightGray};
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
 `;
 
 export const CVCNumber = styled.p<{ $brandColor: string }>`

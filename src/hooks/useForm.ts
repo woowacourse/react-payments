@@ -40,6 +40,7 @@ const useForm = (defaultValues: FormState) => {
     cardBrandState,
     cvcNumberState,
     isFocusCVCPreview,
+    setIsFocusCVCPreview,
   };
 
   const isFormError =
