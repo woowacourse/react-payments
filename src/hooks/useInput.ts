@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ErrorDetail } from '../types/error';
 import useError from './useError';
 
@@ -10,12 +10,28 @@ interface ValidatorProps {
 const useInput = (initialValue = '', validator: ValidatorProps) => {
   const [value, setValue] = useState(initialValue);
   const { errorInfo, setErrorInfo, updateErrorMessage } = useError(value, validator);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validator.onChange(e.target.value);
-    setErrorInfo({ ...validationResult });
-    if (validationResult.isError) return;
+    const onChangeValidationResult = validator.onChange(e.target.value);
+    if (e.target.value.length === e.target.maxLength && !onChangeValidationResult.isError) {
+      const onBlurValidationResult = validateLastInput(e.target.value);
+      if (onBlurValidationResult.isError) return;
+      if (inputRef.current?.nextSibling) {
+        (inputRef.current?.nextSibling as HTMLInputElement).focus();
+      }
+    }
+
+    setErrorInfo({ ...onChangeValidationResult });
+    if (onChangeValidationResult.isError) return;
     setValue(e.target.value);
+  };
+
+  const validateLastInput = (value: string) => {
+    const validationResult = validator.onBlur(value);
+    setErrorInfo({ ...validationResult });
+    setValue(value);
+    return validationResult;
   };
 
   return {
@@ -25,6 +41,7 @@ const useInput = (initialValue = '', validator: ValidatorProps) => {
     errorInfo,
     setErrorInfo,
     updateErrorMessage,
+    inputRef,
   };
 };
 
