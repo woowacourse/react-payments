@@ -14,7 +14,7 @@ import {
   useChangeCardPassword,
   useChangeExpiration,
   useChangeOwnerName,
-} from '@components/payments/@creditCard/hooks';
+} from '@hooks/creditCard';
 
 const useCreditCardForm = () => {
   const { isCardNumberCompleted, cardNumbers, cardNumberError, handleCardNumberChange } = useChangeCardNumber();
