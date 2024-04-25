@@ -5,7 +5,6 @@ import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
-import { useState } from "react";
 
 const CardNumbersContainer = styled.div`
   display: flex;
@@ -39,36 +38,79 @@ const validateCardNumberOnBlur = (inputValue: string) => {
 interface CardNumbersProps {
   cardNumbers: CardInformation["cardNumbers"];
   onChange: (inputValue: string, targetIndex: number) => void;
+  errorState: {
+    isError: boolean[];
+    errorMessage: string;
+  };
+  updateErrorState: ({
+    isError,
+    errorMessage,
+  }: {
+    isError: boolean[];
+    errorMessage: string;
+  }) => void;
 }
 
 export default function CardNumbers({
   cardNumbers,
   onChange,
+  errorState,
+  updateErrorState,
 }: CardNumbersProps) {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const onCardNumberChange = (inputValue: string, cardNumberIndex: number) => {
     try {
       validateCardNumberOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: errorState.isError.map((isError, index) => {
+          if (index === cardNumberIndex) {
+            return false;
+          }
+          return isError;
+        }),
+        errorMessage: "",
+      });
       onChange(inputValue, cardNumberIndex);
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: errorState.isError.map((isError, index) => {
+            if (index === cardNumberIndex) {
+              return true;
+            }
+            return isError;
+          }),
+          errorMessage: error.message,
+        });
       }
       return true;
     }
   };
 
-  const onCardNumberBlur = (inputValue: string) => {
+  const onCardNumberBlur = (inputValue: string, cardNumberIndex: number) => {
     try {
       validateCardNumberOnBlur(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: errorState.isError.map((isError, index) => {
+          if (index === cardNumberIndex) {
+            return false;
+          }
+          return isError;
+        }),
+        errorMessage: "",
+      });
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: errorState.isError.map((isError, index) => {
+            if (index === cardNumberIndex) {
+              return true;
+            }
+            return isError;
+          }),
+          errorMessage: error.message,
+        });
       }
       return true;
     }
@@ -88,31 +130,33 @@ export default function CardNumbers({
             placeholder="1234"
             onChange={(value) => onCardNumberChange(value, 0)}
             value={cardNumbers[0]}
-            onBlur={onCardNumberBlur}
+            onBlur={(value) => onCardNumberBlur(value, 0)}
           />
           <Input
             maxLength={4}
             placeholder="1234"
             onChange={(value) => onCardNumberChange(value, 1)}
             value={cardNumbers[1]}
-            onBlur={onCardNumberBlur}
+            onBlur={(value) => onCardNumberBlur(value, 1)}
           />
           <Input
             maxLength={4}
             placeholder="1234"
             onChange={(value) => onCardNumberChange(value, 2)}
             value={cardNumbers[2]}
-            onBlur={onCardNumberBlur}
+            onBlur={(value) => onCardNumberBlur(value, 2)}
           />
           <Input
             maxLength={4}
             placeholder="1234"
             onChange={(value) => onCardNumberChange(value, 3)}
             value={cardNumbers[3]}
-            onBlur={onCardNumberBlur}
+            onBlur={(value) => onCardNumberBlur(value, 3)}
           />
         </InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        {errorState.isError && (
+          <ErrorMessage message={errorState.errorMessage} />
+        )}
       </CardNumberBox>
     </CardNumbersContainer>
   );

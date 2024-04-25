@@ -4,7 +4,6 @@ import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
-import { useState } from "react";
 
 const CardCVCInputContainer = styled.div`
   display: flex;
@@ -42,6 +41,14 @@ interface CardCVCInputProps {
   onChange: (inputValue: string) => void;
   onFocus: () => void;
   onBlur: () => void;
+  errorState: { isError: boolean; errorMessage: string };
+  updateErrorState: ({
+    isError,
+    errorMessage,
+  }: {
+    isError: boolean;
+    errorMessage: string;
+  }) => void;
 }
 
 export default function CardCVCInput({
@@ -49,18 +56,18 @@ export default function CardCVCInput({
   onChange,
   onFocus,
   onBlur,
+  errorState,
+  updateErrorState,
 }: CardCVCInputProps) {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const onCardCVCChange = (inputValue: string) => {
     try {
       validateCardCVCOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({ isError: false, errorMessage: "" });
       onChange(inputValue);
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({ isError: true, errorMessage: error.message });
       }
       return true;
     }
@@ -70,11 +77,11 @@ export default function CardCVCInput({
     onBlur();
     try {
       validateCardCVCOnblur(inputValue);
-      setErrorMessage("");
+      updateErrorState({ isError: false, errorMessage: "" });
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({ isError: true, errorMessage: error.message });
       }
       return true;
     }
@@ -101,7 +108,9 @@ export default function CardCVCInput({
             onFocus={onCardCVCFocus}
           />
         </InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        {errorState.isError && (
+          <ErrorMessage message={errorState.errorMessage} />
+        )}
       </CardCVCInputBox>
     </CardCVCInputContainer>
   );

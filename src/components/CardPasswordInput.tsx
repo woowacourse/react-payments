@@ -4,7 +4,6 @@ import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
-import { useState } from "react";
 
 const CardPassInputContainer = styled.div`
   display: flex;
@@ -39,24 +38,32 @@ const validateCardPasswordOnBlur = (inputValue: string) => {
 
 interface CardPasswordInputProps {
   cardPassword: string;
+  errorState: { isError: boolean; errorMessage: string };
   onChange: (inputValue: string) => void;
+  updateErrorState: ({
+    isError,
+    errorMessage,
+  }: {
+    isError: boolean;
+    errorMessage: string;
+  }) => void;
 }
 
 export default function CardPasswordInput({
   cardPassword,
+  errorState,
   onChange,
+  updateErrorState,
 }: CardPasswordInputProps) {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const onCardPasswordChange = (inputValue: string) => {
     try {
       validateCardPasswordOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({ isError: false, errorMessage: "" });
       onChange(inputValue);
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({ isError: true, errorMessage: error.message });
       }
       return true;
     }
@@ -65,11 +72,11 @@ export default function CardPasswordInput({
   const onCardPasswordBlur = (inputValue: string) => {
     try {
       validateCardPasswordOnBlur(inputValue);
-      setErrorMessage("");
+      updateErrorState({ isError: false, errorMessage: "" });
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({ isError: true, errorMessage: error.message });
       }
       return true;
     }
@@ -92,7 +99,9 @@ export default function CardPasswordInput({
             onBlur={onCardPasswordBlur}
           />
         </InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        {errorState.isError && (
+          <ErrorMessage message={errorState.errorMessage} />
+        )}
       </CardPasswordInputBox>
     </CardPassInputContainer>
   );

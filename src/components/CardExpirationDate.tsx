@@ -5,7 +5,6 @@ import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
-import { useState } from "react";
 
 const CardDateContainer = styled.div`
   display: flex;
@@ -58,28 +57,49 @@ const validateExpirationYearOnBlur = (expirationYear: string) => {
   }
 };
 
-// ---
-
 interface CardExpirationDateProps {
   cardExpiration: CardInformation["cardExpiration"];
   onChange: (inputValue: string, inputId: string) => void;
+  errorState: {
+    isError: { month: boolean; year: boolean };
+    errorMessage: string;
+  };
+  updateErrorState: ({
+    isError,
+    errorMessage,
+  }: {
+    isError: { month: boolean; year: boolean };
+    errorMessage: string;
+  }) => void;
 }
 
 export default function CardExpirationDate({
   cardExpiration,
   onChange,
+  errorState,
+  updateErrorState,
 }: CardExpirationDateProps) {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const onExpirationMonthChange = (inputValue: string) => {
     try {
       validateExpirationMonthOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: {
+          month: false,
+          year: errorState.isError.year,
+        },
+        errorMessage: "",
+      });
       onChange(inputValue, "month");
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: {
+            month: true,
+            year: errorState.isError.year,
+          },
+          errorMessage: error.message,
+        });
       }
       return true;
     }
@@ -88,12 +108,24 @@ export default function CardExpirationDate({
   const onExpirationYearChange = (inputValue: string) => {
     try {
       validateExpirationYearOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: {
+          month: errorState.isError.month,
+          year: false,
+        },
+        errorMessage: "",
+      });
       onChange(inputValue, "year");
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: {
+            month: errorState.isError.month,
+            year: true,
+          },
+          errorMessage: error.message,
+        });
       }
       return true;
     }
@@ -102,11 +134,23 @@ export default function CardExpirationDate({
   const onExpirationMonthBlur = (inputValue: string) => {
     try {
       validateExpirationMonthOnBlur(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: {
+          month: false,
+          year: errorState.isError.year,
+        },
+        errorMessage: "",
+      });
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: {
+            month: true,
+            year: errorState.isError.year,
+          },
+          errorMessage: error.message,
+        });
       }
       return true;
     }
@@ -115,11 +159,23 @@ export default function CardExpirationDate({
   const onExpirationYearBlur = (inputValue: string) => {
     try {
       validateExpirationYearOnBlur(inputValue);
-      setErrorMessage("");
+      updateErrorState({
+        isError: {
+          month: errorState.isError.month,
+          year: false,
+        },
+        errorMessage: "",
+      });
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({
+          isError: {
+            month: errorState.isError.month,
+            year: true,
+          },
+          errorMessage: error.message,
+        });
       }
       return true;
     }
@@ -149,7 +205,7 @@ export default function CardExpirationDate({
             onBlur={onExpirationYearBlur}
           />
         </InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={errorState.errorMessage} />
       </CardDateBox>
     </CardDateContainer>
   );

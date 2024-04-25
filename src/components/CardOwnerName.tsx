@@ -4,7 +4,6 @@ import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
 import isAlphabetOrWhiteSpace from "../utils/isAlphabetOrWhiteSpace";
 import styled from "styled-components";
-import { useState } from "react";
 
 const CardOwnerNameContainer = styled.div`
   display: flex;
@@ -31,27 +30,54 @@ const validateOwnerNameOnChange = (inputValue: string) => {
   }
 };
 
+const validateOwnerNameOnBlur = (inputValue: string) => {
+  if (inputValue.length === 0) {
+    throw new Error("카드 소유자 이름을 입력해 주세요");
+  }
+};
+
 interface CardOwnerNameProps {
   cardOwnerName: string;
   onChange: (inputValue: string) => void;
+  errorState: { isError: boolean; errorMessage: string };
+  updateErrorState: ({
+    isError,
+    errorMessage,
+  }: {
+    isError: boolean;
+    errorMessage: string;
+  }) => void;
 }
 
 export default function CardOwnerName({
   cardOwnerName,
   onChange,
+  errorState,
+  updateErrorState,
 }: CardOwnerNameProps) {
-  const [errorMessage, setErrorMessage] = useState("");
-
   const onOwnerNameChange = (inputValue: string) => {
     try {
       validateOwnerNameOnChange(inputValue);
-      setErrorMessage("");
+      updateErrorState({ isError: false, errorMessage: "" });
       const upperName = inputValue.toUpperCase();
       onChange(upperName);
       return false;
     } catch (error) {
       if (error instanceof Error) {
-        setErrorMessage(error.message);
+        updateErrorState({ isError: true, errorMessage: error.message });
+      }
+      return true;
+    }
+  };
+
+  const onOwnerNameBlur = (inputValue: string) => {
+    try {
+      validateOwnerNameOnBlur(inputValue);
+      updateErrorState({ isError: false, errorMessage: "" });
+      return false;
+    } catch (error) {
+      if (error instanceof Error) {
+        updateErrorState({ isError: true, errorMessage: error.message });
       }
       return true;
     }
@@ -66,11 +92,14 @@ export default function CardOwnerName({
           <Input
             maxLength={15}
             placeholder="JOHN DOE"
-            onChange={onOwnerNameChange}
             value={cardOwnerName}
+            onChange={onOwnerNameChange}
+            onBlur={onOwnerNameBlur}
           />
         </InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        {errorState.isError && (
+          <ErrorMessage message={errorState.errorMessage} />
+        )}
       </CardOwnerNameBox>
     </CardOwnerNameContainer>
   );
