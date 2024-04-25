@@ -18,3 +18,29 @@ export interface ExpirationPeriodValue {
   month: string;
   year: string;
 }
+
+export interface OwnerValue {
+  name: string;
+}
+
+export interface InfoValue {
+  cvc: string;
+}
+
+export interface AuthenticationValue {
+  password: string;
+}
+
+export type CreditCardSpecificValue =
+  | CardNumberValue
+  | ExpirationPeriodValue
+  | OwnerValue
+  | InfoValue
+  | AuthenticationValue;
+
+export interface CreditCardAllValues
+  extends CardNumberValue,
+    ExpirationPeriodValue,
+    OwnerValue,
+    InfoValue,
+    AuthenticationValue {}
