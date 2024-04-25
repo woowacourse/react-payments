@@ -2,17 +2,17 @@ import { useState } from 'react';
 import { ErrorDetail } from '../types/error';
 import useError from './useError';
 
-interface ValidateProps {
+interface ValidatorProps {
   onChange: (value: string) => ErrorDetail;
   onBlur: (value: string) => ErrorDetail;
 }
 
-const useInput = (initialValue = '', validate: ValidateProps) => {
+const useInput = (initialValue = '', validator: ValidatorProps) => {
   const [value, setValue] = useState(initialValue);
-  const { errorInfo, setErrorInfo, updateErrorMessage } = useError(value, validate);
+  const { errorInfo, setErrorInfo, updateErrorMessage } = useError(value, validator);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validate.onChange(e.target.value);
+    const validationResult = validator.onChange(e.target.value);
     setErrorInfo({ ...validationResult });
     if (validationResult.isError) return;
     setValue(e.target.value);

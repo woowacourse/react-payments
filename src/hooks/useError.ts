@@ -2,22 +2,20 @@ import { useState } from 'react';
 import { ErrorDetail } from '../types/error';
 import { INITIAL_ERROR_VALUE } from '../constants/error';
 
-interface ValidateProps {
+interface ValidatorProps {
   onChange: (value: string) => ErrorDetail;
   onBlur: (value: string) => ErrorDetail;
 }
 
-const useError = (value: string, validate: ValidateProps) => {
+const useError = (value: string, validator: ValidatorProps) => {
   const [errorInfo, setErrorInfo] = useState(INITIAL_ERROR_VALUE);
 
   const updateErrorMessage = () => {
-    if (validate) {
-      const validationResult = validate.onBlur(value);
+    const validationResult = validator.onBlur(value);
 
-      setErrorInfo({
-        ...validationResult,
-      });
-    }
+    setErrorInfo({
+      ...validationResult,
+    });
   };
 
   return {
