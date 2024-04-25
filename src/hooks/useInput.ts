@@ -24,26 +24,8 @@ interface InputState {
   errorMessage: string;
   isValid: boolean;
 }
+
 const useInput = (initialValue: string) => {
-  const inputReducer = (state: InputState, action: Action) => {
-    switch (action.type) {
-      case ActionType.SET_VALUE:
-        return {
-          ...state,
-          value: action.value,
-        };
-      case ActionType.SET_ERROR:
-        return {
-          ...state,
-          errorMessage: action.errorMessage,
-          isValid: false,
-        };
-      case ActionType.RESET_ERROR:
-        return { ...state, errorMessage: "", isValid: true };
-      default:
-        return state;
-    }
-  };
   return useReducer(inputReducer, {
     value: initialValue,
     errorMessage: "",
@@ -51,4 +33,23 @@ const useInput = (initialValue: string) => {
   });
 };
 
+const inputReducer = (state: InputState, action: Action) => {
+  switch (action.type) {
+    case ActionType.SET_VALUE:
+      return {
+        ...state,
+        value: action.value,
+      };
+    case ActionType.SET_ERROR:
+      return {
+        ...state,
+        errorMessage: action.errorMessage,
+        isValid: false,
+      };
+    case ActionType.RESET_ERROR:
+      return { ...state, errorMessage: "", isValid: true };
+    default:
+      return state;
+  }
+};
 export default useInput;
