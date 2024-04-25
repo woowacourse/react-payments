@@ -1,49 +1,23 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
 
-import { CARD_NUMBER_UNIT_PLACEHOLDER, CARD_NUMBER_UNIT_LENGTH } from '../../../constants/input';
-import { ERROR_MESSAGES } from '../../../constants/errorMessages';
-import useErrorMessages from '../../../hooks/useErrorMessages';
+import { CARD_NUMBER_UNIT_PLACEHOLDER, CARD_NUMBERS_UNIT_LENGTH } from '../../../constants/input';
 
 type CardNumberInputField = {
   cardNumbers: string[];
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  handleCardNumbers: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMessages: string[];
 };
 
-export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: CardNumberInputField) {
-  const { errorMessages, setErrorMessages } = useErrorMessages<string>(cardNumbers.length, '');
+// TODO: 엔터하면 넘어가는걸로 통일하는게 좋을 것 같음.
+export default function CardNumbersInputField({ cardNumbers, handleCardNumbers, errorMessages }: CardNumberInputField) {
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]); // ref를 배열로 관리
 
-  const getErrorMessage = (numberUnit: string) => {
-    if (isNaN(Number(numberUnit)) && numberUnit.length !== 0) {
-      return ERROR_MESSAGES.NOT_NUMBER;
+  const handleFocus = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    if (e.target.value.length === CARD_NUMBERS_UNIT_LENGTH && index !== cardNumbers.length - 1) {
+      inputRefs.current[index + 1]?.focus(); // TODO: 제거가 가능한가?
     }
-
-    return '';
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    const number = e.target.value;
-
-    const errorMessage = getErrorMessage(number);
-    setErrorMessages({ errorMessage: errorMessage, index });
-
-    if (errorMessage !== '') return;
-
-    const updatedCardNumbers = [...cardNumbers];
-    updatedCardNumbers[index] = e.target.value;
-    setCardNumbers(updatedCardNumbers);
-  };
-
-  const handleInputBlur = (index: number) => {
-    const number = cardNumbers[index];
-    if (number.length < CARD_NUMBER_UNIT_LENGTH) {
-      setErrorMessages({ errorMessage: ERROR_MESSAGES.CARD_NUMBER_UNIT_LENGTH, index });
-
-      return;
-    }
-
-    setErrorMessages({ errorMessage: '', index });
   };
 
   return (
@@ -52,13 +26,17 @@ export default function CardNumbersInputField({ cardNumbers, setCardNumbers }: C
       <div className={styles.horizon__gap__container}>
         {cardNumbers.map((cardNumber, i) => (
           <Input
-            onChange={(e) => handleChange(e, i)}
+            ref={(el) => (inputRefs.current[i] = el)}
+            onChange={(e) => {
+              handleFocus(e, i);
+              handleCardNumbers(i)(e);
+            }}
             placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
-            maxLength={CARD_NUMBER_UNIT_LENGTH}
+            maxLength={CARD_NUMBERS_UNIT_LENGTH}
             value={cardNumber}
             type={i >= cardNumbers.length / 2 ? 'password' : 'type'}
             isError={errorMessages[i] !== ''}
-            onBlur={() => handleInputBlur(i)}
+            onBlur={handleCardNumbers(i)}
           />
         ))}
       </div>
