@@ -12,6 +12,7 @@ declare module 'styled-components' {
       cardExpirationDate: string;
       cardUserName: string;
       cardCVC: string;
+      submitButton: string;
     };
     color: {
       white: string;

@@ -60,6 +60,12 @@ const theme: DefaultTheme = {
       line-height: 2rem;
       letter-spacing: 0.08rem;
     `,
+    submitButton: `
+      font-family: Noto Sans KR;
+      font-weight: 700;
+      font-size: 1.6rem;
+      line-height: 1.2rem;
+    `,
   },
   color: {
     white: '#ffffff',
