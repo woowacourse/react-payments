@@ -5,25 +5,8 @@ type CardNumberInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength
   onAddCardNumber: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const CardNumberInput: React.FC<CardNumberInputProps> = ({
-  isError = false,
-  value,
-  id,
-  onAddCardNumber,
-  refCallback,
-}) => {
-  return (
-    <Input
-      maxLength={4}
-      placeholder="1234"
-      type="text"
-      id={id}
-      value={value}
-      isError={isError}
-      ref={refCallback}
-      onChange={onAddCardNumber}
-    />
-  );
+const CardNumberInput: React.FC<CardNumberInputProps> = (props) => {
+  return <Input maxLength={4} placeholder="1234" {...props} />;
 };
 
 export default CardNumberInput;
