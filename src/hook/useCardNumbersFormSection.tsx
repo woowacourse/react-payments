@@ -1,145 +1,57 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
+import useMultiFormSection from "./useMultiFormSection"
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
-import useFocusNext from "./useFocusNext";
 
 interface UseCardNumbersFormSectionProps {
-  cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   refs: React.MutableRefObject<HTMLInputElement[]>
 }
 
-const initializeInputFieldState = (length: number) => {
-  const obj: InputStates = [];
-  for (let i = 0; i < length; i++) {
-    obj[i] = {
-      hasError: false,
-      hasFocus: i === 0,
-    };
-  }
-  return obj;
-};
-
 const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo, refs } = props
-  const [inputState, setInputState] = useState(initializeInputFieldState(OPTION.cardNumberInputCount));
-  const { focusNext } = useFocusNext(refs);
+  const { dispatchCardInfo, refs } = props;
+  const [hasErrors, setHasErrors] = useState(new Array(refs.current.length).fill(false))
+  const [error, setError] = useState('');
 
-  const checkBrand = (inputValue: string) => {
-    if (REGEX.visaCard.test(inputValue)) {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'Visa' })
-    } else if (REGEX.masterCard.test(inputValue)) {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'MasterCard' })
-    } else {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'none' })
-    }
-  }
+  const validateCardNumbers = (values: string[]) => {
+    if (values.every(value => value.length === 0)) return
+    const newHasErrors = [...hasErrors];
+    let anyError = false;
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = event.target.value;
-    const newNumbers = [...cardInfo.cardNumbers.value]
-
-    if (!REGEX.numbers.test(inputValue)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          hasError: true,
-        }
-      }))
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: ERROR_MESSAGE.onlyNumber });
-      newNumbers[index] = inputValue.slice(0, -1)
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: newNumbers })
-    } else {
-      resetErrors();
-      newNumbers[index] = inputValue
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: newNumbers })
-    }
-    if (index === 0) checkBrand(newNumbers[0]);
-  }
-
-  useEffect(() => {
-    const focusedRef = refs.current.find((ref) => ref === document.activeElement);
-    if (!focusedRef) return;
-    if (focusedRef.value.length === OPTION.cardNumberMaxLength) {
-      focusNext();
-    }
-    if (refs.current.every((ref) => ref.value.length === OPTION.cardNumberMaxLength)) {
-      handleValidate();
-    }
-  }, [cardInfo.cardNumbers.value])
-
-  const handleOnFocus = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-
-    resetErrors();
-  };
-
-  const handleOnBlur = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-
-    if (checkHasNoFocus()) {
-      resetErrors();
-      handleValidate();
-    }
-  };
-
-  const checkHasNoFocus = () => {
-    return Object.values(inputState).every((field) => !field.hasFocus);
-  }
-
-  const handleValidate = () => {
-    if (cardInfo.cardNumbers.value.reduce((prev, current) => prev + current, '') === '') return
-
-    let hasAnyError = false;
-
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = cardInfo.cardNumbers.value[Number(key)];
-      if (field.length !== OPTION.cardNumberMaxLength) {
-        acc[Number(key)] = { ...acc[Number(key)], hasError: true };
-        hasAnyError = true;
+    values.forEach((value, index) => {
+      if (value.length !== OPTION.cardNumberMaxLength) {
+        newHasErrors[index] = true;
+        anyError = true;
       } else {
-        acc[Number(key)] = { ...acc[Number(key)], hasError: false };
+        newHasErrors[index] = false;
       }
-      return acc;
-    }, []);
+    });
 
-    setInputState(newState);
+    setHasErrors(newHasErrors);
 
-    if (hasAnyError) {
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: ERROR_MESSAGE.cardNumberOutOfRange });
+    if (anyError) {
+      setError(ERROR_MESSAGE.cardNumberOutOfRange);
     } else {
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: '' });
+      setError('');
       dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
     }
   };
 
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[Number(key)];
-      acc[Number(key)] = { ...field, hasError: false };
-      return acc;
-    }, []);
+  const { values, handleChange } = useMultiFormSection({
+    refs: refs,
+    initialValue: new Array(OPTION.cardNumberMaxLength).fill(''),
+    regex: REGEX.numbers,
+    errorMessage: ERROR_MESSAGE.onlyNumber,
+    maxLength: OPTION.cardNumberMaxLength,
+    dispatchCardInfo: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values }),
+    setError: setError,
+    hasErrors: hasErrors,
+    setHasErrors: setHasErrors,
+    validate: validateCardNumbers,
+  });
 
-    setInputState(newState);
-
-    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_ERROR_MESSAGE', value: '' });
-  };
-
-  return [inputState, onChange, handleOnFocus, handleOnBlur] as const
+  return { values, error, hasErrors, handleChange } as const
 }
 
 export default useCardNumbersFormSection;
