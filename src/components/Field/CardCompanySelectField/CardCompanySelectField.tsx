@@ -1,6 +1,5 @@
-import React, { MouseEvent } from "react";
+import { MouseEvent } from "react";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import styles from "./CardCompanySelectField.module.css";
 import CardCompanyDropdownList from "../../common/Dropdown/CardCompanyDropdownList";
 import CardDropdownHeadButton from "../../\bButton/CardDropdownHeadButton";
 import useDetectClose from "../../../hooks/useDetectClose";
