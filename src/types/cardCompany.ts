@@ -1,6 +1,6 @@
 export type CardCompany = 'BC' | 'SHINHAN' | 'KAKAO' | 'HYUNDAI' | 'WOORI' | 'LOTTE' | 'HANA' | 'KOOKMIN';
 
-export const COMPANY_LIST = {
+export const COMPANY_LIST: Record<CardCompany, string> = {
   BC: 'BC카드',
   SHINHAN: '신한카드',
   KAKAO: '카카오뱅크',
