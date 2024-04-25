@@ -7,7 +7,6 @@ import { PERIOD } from '../constants/inputInformation';
 import validateInput from '../validations/validateInput';
 import CardImage from '../components/CardImage';
 import InputGroup from '../components/InputGroup';
-import InputGroupSelector from '../components/InputGroupSelector';
 import { useNavigate } from 'react-router-dom';
 
 const appContainerStyle = css({
@@ -226,7 +225,7 @@ function CardRegister() {
         )}
         {/* 카드사 */}
         {!inputError.number.some((error: boolean) => error) && (
-          <InputGroupSelector
+          <InputGroup
             onInputChange={({ value, index }: InputChangePropsType) =>
               handleInputChange({ value, index, inputSection: 'provider' })
             }

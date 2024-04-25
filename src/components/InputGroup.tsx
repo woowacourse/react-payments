@@ -13,6 +13,7 @@ import {
   PERIOD,
 } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
+import Selector from './Selector';
 
 const inputGroupStyle = css({
   display: 'flex',
@@ -38,6 +39,18 @@ const inputContainerStyle = css({
 });
 
 const inputBoxStyle = css({
+  display: 'flex',
+  gap: '10px',
+});
+
+const selectorContainerStyle = css({
+  display: 'flex',
+  gap: '8px',
+  flexDirection: 'column',
+  width: '100%',
+});
+
+const selectorBoxStyle = css({
   display: 'flex',
   gap: '10px',
 });
@@ -83,7 +96,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
   const getInputType = (type: informationSectionType, index: number) => {
     if (
       type === 'password' ||
-      (type === 'number' && (index === CARD_DISPLAY_INDEX.third || index === CARD_DISPLAY_INDEX.fourth))
+      (type === 'number' && [CARD_DISPLAY_INDEX.third, CARD_DISPLAY_INDEX.fourth].includes(index))
     )
       return 'password';
     if (type === 'number' || type === 'period') return 'number';
@@ -103,6 +116,17 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
             const inputSection = informationSection === 'period' ? PERIOD[index] : informationSection;
+
+            if (informationSection === 'provider') {
+              return (
+                <div css={selectorContainerStyle} key={index}>
+                  <div css={selectorBoxStyle}>
+                    <Selector onInputChange={(provider: string) => onInputChange({ value: provider, index: 0 })} />
+                  </div>
+                  {isError && <ErrorMessage value={errorMessage} />}
+                </div>
+              );
+            }
 
             return (
               <Input
