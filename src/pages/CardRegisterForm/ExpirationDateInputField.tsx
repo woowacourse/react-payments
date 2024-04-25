@@ -10,14 +10,12 @@ const INPUTS_COUNT = INPUT_COUNTS.EXPIRATION_DATE;
 const individualValidators: Validator[] = [
   {
     errorMessage: "월은 1~12의 범위여야합니다.",
-    validate: (month: string) =>
-      month === "" || (Number(month) >= 1 && Number(month) <= 12),
+    validate: (month: string) => month === "" || (Number(month) >= 1 && Number(month) <= 12),
     index: [0],
   },
   {
     errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
-    validate: (input: string) =>
-      input.length === 0 || input.length === VALID_LENGTH,
+    validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
     index: [0, 1],
   },
   {
@@ -26,14 +24,8 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const ExpirationDateInputField = ({
-  reduceds,
-}: {
-  reduceds: ReturnType<typeof useInput>[];
-}) => {
-  const validationStates = reduceds.map((reduced) =>
-    useValidation(reduced, individualValidators)
-  );
+const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
   return (
     <InputField>
       <InputField.Label>유효기간</InputField.Label>
@@ -47,14 +39,12 @@ const ExpirationDateInputField = ({
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
+            placeholder={index === 0 ? "MM" : "YY"}
           ></InputField.Input>
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce(
-          (prev, cur) => prev || cur.inputState.errorMessage,
-          ""
-        )}
+        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

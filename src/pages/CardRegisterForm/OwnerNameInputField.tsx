@@ -34,6 +34,7 @@ const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInpu
               validationStates[index].setValue(event.target.value);
             }}
             value={validationStates[index].inputState.value}
+            placeholder="JOHN DOE"
           ></InputField.Input>
         ))}
       </InputField.Inputs>
