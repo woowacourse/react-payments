@@ -1,49 +1,91 @@
 // import styled from "styled-components";
 import Input from "./Input";
 import FieldTitle from "./FieldTitle";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Validation from "../domain/InputValidation";
 import InputField from './InputField';
-import { ExpirationDate, UserName } from "../types/card";
+import { UserName } from "../types/card";
+import { ShowComponents } from "../types/showCompents";
 
 interface Props {
+  userName : UserName
   handleInput : Dispatch<SetStateAction<UserName>>,
+  handleShowComponent : Dispatch<SetStateAction<ShowComponents>>,
 }
-export default function UserNameInput({handleInput} : Props) {
+export default function UserNameInput({userName, handleInput, handleShowComponent} : Props) {
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
 
-  const handleUpdateInput = (userName: string) => {
-    handleInput(userName);
-  };
+  useEffect(() => {
+    const messages = Object.values(userName).map(value => value.errorMessage);
+    setErrorMessages(messages);
+  }, [userName]);
 
-  const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
-    setErrorMessages((prev) => {
-      return {
+  useEffect(() => {
+    const checkCompleteInput = () => {
+      const isNotAllError = Object.values(userName).reduce((pre, cur) => {
+        if(!cur.isError && cur.value !== '' && cur.value.length === 4){
+          return pre + 1;
+        }
+        return pre;
+      }, 0)
+      return isNotAllError === 4
+    }
+    if(checkCompleteInput()) {
+      handleShowComponent((prev) => ({
         ...prev,
-        [index]: errorMessage,
+        userNameInput: true,
+      }));
+    }
+  }, [userName, handleShowComponent]); 
+
+  const handleUpdateInput = (index: number, value: string) => {
+
+    const cardKey = 'userName' as keyof UserName;
+    handleInput((prevState : UserName) => {
+      return {
+        ...prevState,
+        [cardKey]: {
+          ...prevState[cardKey],
+          value : value
+        },
       };
     });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number) => {
+  const handleUpdateErrorMessages = (index: number, errorMessage: string, isError: boolean) => {
+    const cardKey = 'userName' as keyof UserName;
+    handleInput((prevState : UserName) => {
+      return {
+        ...prevState,
+        [cardKey]: {
+          ...prevState[cardKey],
+          errorMessage: errorMessage,
+          isError: isError 
+        },
+      };
+    });
+  };
+
+    
+  
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: string, index : number, maxLength: number) => {
     try {
-          Validation[info]?.(e.target.value, 0);
-          handleUpdateErrorMessages(index, '');
-          handleUpdateInput(e.target.value);
+          Validation[info]?.(e.target.value, maxLength);
+          handleUpdateErrorMessages(index, '', false);
+          handleUpdateInput(index, e.target.value);
         } catch (error) {
             if (error instanceof Error) {
-            handleUpdateErrorMessages(index, error.message);
+            handleUpdateErrorMessages(index, error.message, true);
           }
         }
   };
 
   const checkInputError = (index : number) => {
-    if(index in errorMessages){
-      return errorMessages[index] !== '';
-    }
-    return false;
+    const cardKey = 'userName' as keyof UserName;
+    return userName[cardKey].isError;
   }
 
   return (
@@ -57,7 +99,7 @@ export default function UserNameInput({handleInput} : Props) {
         maxLength={30}
         placeholder={'JOHN DOE'}
         isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'userName', index)}
+        onChange={(e) => handleInputChange(e, 'userName', index, 30)}
       />
       ))}
       </InputField>
