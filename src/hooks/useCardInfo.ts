@@ -8,7 +8,7 @@ import { CARD_TYPE } from '../types/card';
 import useInput from './useInput';
 import validateNumber from '../validator/validateNumber';
 import validateCardPassword from '../validator/validateCardPassword';
-import validateCVC from '../validator/validateCVC';
+import useCardCVC from './useCardCVC';
 
 const INITIAL_CARD_NUMBER = { first: '', second: '', third: '', fourth: '' };
 
@@ -26,10 +26,7 @@ const useCardInfo = () => {
     onChange: validateNumber,
     onBlur: validateCardPassword,
   });
-  const cardCVCInfo = useInput('', {
-    onChange: validateNumber,
-    onBlur: validateCVC,
-  });
+  const cardCVCInfo = useCardCVC();
 
   return {
     cardNumberInfo,

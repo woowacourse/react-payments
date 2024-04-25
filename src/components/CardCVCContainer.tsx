@@ -6,11 +6,12 @@ import { ErrorDetail } from '../types/error';
 interface CardCVCContainerProps {
   cvc: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateErrorMessage: () => void;
+  handleBlur: () => void;
   errorInfo: ErrorDetail;
+  setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CardCVCContainer = ({ cvc, handleChange, updateErrorMessage, errorInfo }: CardCVCContainerProps) => {
+const CardCVCContainer = ({ cvc, handleChange, handleBlur, errorInfo, setIsCardFront }: CardCVCContainerProps) => {
   return (
     <div>
       <InputField title="CVC 번호를 입력해 주세요" labelText="CVC" labelFor="cvc-input">
@@ -19,7 +20,8 @@ const CardCVCContainer = ({ cvc, handleChange, updateErrorMessage, errorInfo }: 
           isError={errorInfo.isError}
           value={cvc}
           onChange={handleChange}
-          onBlur={updateErrorMessage}
+          onBlur={handleBlur}
+          onFocus={() => setIsCardFront(false)}
           placeholder="123"
           width="100%"
           maxLength={4}
