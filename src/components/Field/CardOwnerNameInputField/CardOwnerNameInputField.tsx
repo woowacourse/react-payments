@@ -63,9 +63,9 @@ export default function CardOwnerNameInputField({
           onBlur={handleBlur}
         />
       </div>
-      {errorMessage !== "" && (
-        <div className={styles.error_message}>{errorMessage}</div>
-      )}
+      <div className={styles.error_message}>
+        {errorMessage !== "" && errorMessage}
+      </div>
     </>
   );
 }

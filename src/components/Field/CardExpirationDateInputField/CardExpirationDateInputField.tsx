@@ -115,15 +115,16 @@ export default function CardExpirationDateInputField({
           isError={errorMessages?.yearError !== null}
         />
       </div>
-      {errorMessages !== null && (
+      {
         <div className={styles.error_message}>
-          {(errorMessages?.monthError || errorMessages?.yearError) && (
-            <div className={styles.error_message}>
-              {errorMessages?.monthError || errorMessages?.yearError}
-            </div>
-          )}
+          {errorMessages !== null &&
+            (errorMessages?.monthError || errorMessages?.yearError) && (
+              <div className={styles.error_message}>
+                {errorMessages?.monthError || errorMessages?.yearError}
+              </div>
+            )}
         </div>
-      )}
+      }
     </>
   );
 }

@@ -110,14 +110,20 @@ export default function CardNumbersInputField({
           />
         ))}
       </div>
-      {(nanErrorMessage !== null || numberLengthErrorMessages.length !== 0) && (
+      {
         <div className={styles.error_message}>
-          {nanErrorMessage !== null
-            ? nanErrorMessage.message
-            : numberLengthErrorMessages[numberLengthErrorMessages.length - 1]
-                .message}
+          {(nanErrorMessage !== null ||
+            numberLengthErrorMessages.length !== 0) && (
+            <>
+              {nanErrorMessage !== null
+                ? nanErrorMessage.message
+                : numberLengthErrorMessages[
+                    numberLengthErrorMessages.length - 1
+                  ].message}
+            </>
+          )}
         </div>
-      )}
+      }
     </>
   );
 }
