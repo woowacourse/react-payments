@@ -1,10 +1,10 @@
 import { CardIssuer, cardIssuerMapper } from "../../../constants/cardIssuers";
-import { useEffect, useState } from "react";
 
 import { CardInformationValueState } from "../../../hooks/useCardEnrollForm";
 import { CardNumbers } from "../../../hooks/useCardNumbers";
 import Mastercard from "../../../static/Mastercard.png";
 import Visa from "../../../static/Visa.png";
+import isNumberStartWith from "../../../utils/isNumberStartWith";
 import styled from "styled-components";
 
 const CardContainer = styled.div`
@@ -120,11 +120,6 @@ const isMasterCard = (cardNumbers: CardNumbers) => {
   );
 };
 
-const isNumberStartWith = (targetNumber: string, startNumber: string) => {
-  const lengthOfStartNumber = startNumber.length;
-  return targetNumber.slice(0, lengthOfStartNumber) === startNumber;
-};
-
 interface CardPreviewProps {
   cardInformation: CardInformationValueState;
   isFlipped: boolean;
@@ -134,21 +129,11 @@ export default function CardPreview({
   cardInformation,
   isFlipped,
 }: CardPreviewProps) {
-  const [cardBrandImg, setCardBrandImg] = useState("");
-
-  useEffect(() => {
-    if (isVisaCard(cardInformation.cardNumbers)) {
-      setCardBrandImg(Visa);
-      return;
-    }
-
-    if (isMasterCard(cardInformation.cardNumbers)) {
-      setCardBrandImg(Mastercard);
-      return;
-    }
-
-    setCardBrandImg("");
-  }, [cardInformation.cardNumbers]);
+  const cardBrandImg = isVisaCard(cardInformation.cardNumbers)
+    ? Visa
+    : isMasterCard(cardInformation.cardNumbers)
+      ? Mastercard
+      : null;
 
   return (
     <CardContainer>
@@ -166,7 +151,7 @@ export default function CardPreview({
               <PaymentCompanyLogo
                 src={cardBrandImg}
                 alt="Payment Company Logo"
-              ></PaymentCompanyLogo>
+              />
             )}
           </FrontHeader>
           <CardInfoContainer>
