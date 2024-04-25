@@ -9,7 +9,7 @@ interface InputState {
 
 type CardBrand = 'Visa' | 'MasterCard' | 'none';
 
-type CardCompany = keyof typeof COMPANY_TABLE;
+type CardCompany = keyof COMPANY_TABLE;
 
 interface CardInfo {
   cardNumbers: {

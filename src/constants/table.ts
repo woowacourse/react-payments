@@ -7,7 +7,11 @@ export const BRAND_TABLE: Record<CardBrand, string> = {
   none: '',
 };
 
-export const COMPANY_TABLE: Record<string, Record<string, string>> = {
+export interface ICompanyTable {
+  [key: string]: Record<string, string>;
+}
+
+export const COMPANY_TABLE: ICompanyTable = {
   BC카드: { background: '#F04651', font: '#FFFFFF' },
   신한카드: { background: '#0046FF', font: '#FFFFFF' },
   카카오뱅크: { background: '#FFE600', font: '#333333' },
