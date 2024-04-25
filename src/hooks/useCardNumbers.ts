@@ -51,7 +51,10 @@ const useCardNumbers = () => {
   };
 
   useEffect(() => {
-    if (errorMessages.some((msg) => msg !== '')) return;
+    if (errorMessages.some((msg) => msg !== '')) {
+      setIsValid(false);
+      return;
+    }
 
     setIsValid(isFilledAllUnit(cardNumbers));
   }, [cardNumbers, errorMessages]);
