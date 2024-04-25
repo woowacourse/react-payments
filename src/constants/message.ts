@@ -8,6 +8,7 @@ export const ERROR_MESSAGE = {
   userName: '소유자 이름은 영문과 공백만 입력 가능합니다.',
   cardIssuer: '카드사를 선택해 주세요.',
   CVCNumber: 'CVC 번호는 3자리 숫자만 입력 가능합니다.',
+  password: '비밀번호는 2자리 숫자만 입력 가능합니다.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {
@@ -54,4 +55,11 @@ export const CARD_CVC_FORM_MESSAGE = {
   subTitle: '',
   label: 'CVC',
   placeholder: '123',
+};
+
+export const CARD_PASSWORD_FORM_MESSAGE = {
+  title: '비밀번호를 입력해 주세요',
+  subTitle: '앞의 2자리를 입력해주세요',
+  label: '비밀번호 앞 2자리',
+  placeholder: '**',
 };

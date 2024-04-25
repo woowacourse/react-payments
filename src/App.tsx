@@ -9,12 +9,15 @@ import {
   CVCInput,
   UserNameInput,
 } from './components';
+import PasswordInput from './components/CardInput/InputContainer/PasswordInput';
+import { Password } from './components/CardInput/InputContainer/PasswordInput/PasswordInput.stories';
 import { INPUT_LENGTH } from './constants';
 import {
   useCardExpirationPeriodInput,
   useCardIssuerInput,
   useCardNumbersInput,
   useCVCInput,
+  usePasswordInput,
   useUserNameInput,
 } from './hooks';
 
@@ -43,6 +46,8 @@ function App() {
     handleCVCNumberChange,
     handleShowCardBack,
   } = useCVCInput(3);
+
+  const { password, passwordError, handlePasswordChange } = usePasswordInput(2);
 
   return (
     <div id="app">
@@ -89,6 +94,11 @@ function App() {
               onCVCNumberChange={handleCVCNumberChange}
               onFocus={handleShowCardBack}
               onBlur={handleShowCardBack}
+            />
+            <PasswordInput
+              password={password}
+              passwordError={passwordError}
+              onPasswordChange={handlePasswordChange}
             />
           </fieldset>
         </form>

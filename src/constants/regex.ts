@@ -5,6 +5,7 @@ const INPUT_REGEX = {
   },
   userName: /^[a-zA-Z\s]*$/,
   CVCNumber: /^\d{3}$/,
+  password: /^\d{2}$/,
 };
 
 export default INPUT_REGEX;
