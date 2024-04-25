@@ -9,6 +9,7 @@ import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
 import { UserNameStateType } from '../../hooks/useUserName';
 import Dropdown from '../Dropdown/Dropdown';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
+import { CVCStateType } from '../../hooks/useCVC';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER, OPTION } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
@@ -18,6 +19,7 @@ interface CardInformationFormProps {
   expirationDateState: ExpirationDateStateType;
   userNameState: UserNameStateType;
   selectedCardState: SelectedCardStateType;
+  cvcState: CVCStateType;
 }
 
 const CardInformationForm = ({
@@ -25,6 +27,7 @@ const CardInformationForm = ({
   expirationDateState,
   userNameState,
   selectedCardState,
+  cvcState,
 }: CardInformationFormProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
@@ -33,19 +36,26 @@ const CardInformationForm = ({
     firstState.value && secondState.value && thirdState.value && fourthState.value;
   const isCardSelected = selectedCardState.value;
   const isExpirationDateFilled = monthState.value && yearState.value;
+  const isUserNameFilled = userNameState.value;
+  const isCVCFilled = cvcState.value;
 
   const isCardNumberError =
     firstState.error || secondState.error || thirdState.error || fourthState.error;
   const isExpirationDateError = monthState.error || yearState.error;
+  const isUserNameError = userNameState.error;
+  const isCVCError = cvcState.error;
 
   const isCardSelectedAppearedCondition = isCardNumberFilled && !isCardNumberError;
   const isExpirationDateAppearedCondition = isCardSelectedAppearedCondition && isCardSelected;
   const isUserNameAppearedCondition =
     isExpirationDateAppearedCondition && isExpirationDateFilled && !isExpirationDateError;
+  const isCVCAppearedCondition =
+    isUserNameAppearedCondition && isUserNameFilled && !isUserNameError;
 
   const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
   const expirationErrorMessage = monthState.error ? ERROR.month : yearState.error ? ERROR.year : '';
-  const userNameErrorMessage = userNameState.error ? ERROR.userName : '';
+  const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
+  const cvcErrorMessage = isCVCError ? ERROR.cvc : '';
 
   const cardNumberStates = [firstState, secondState, thirdState, fourthState];
   const cardNumberInputs = cardNumberStates.map((state) => (
@@ -60,6 +70,21 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
+      {isCVCAppearedCondition && (
+        <FormField title={TITLE.cvc}>
+          <InputField label={LABEL.cvc} error={cvcErrorMessage}>
+            <Input
+              placeholder={PLACEHOLDER.cvc}
+              value={cvcState.value}
+              maxLength={MAX_LENGTH.cvc}
+              onChange={cvcState.setValue}
+              invalid={cvcState.error}
+              onFocus={() => cvcState.setIsFocus(true)}
+              onBlur={() => cvcState.setIsFocus(false)}
+            />
+          </InputField>
+        </FormField>
+      )}
       {isUserNameAppearedCondition && (
         <FormField title={TITLE.userName}>
           <InputField label={LABEL.userName} error={userNameErrorMessage}>
