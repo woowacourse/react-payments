@@ -1,12 +1,11 @@
 import CardPreviewBack from './CardPreviewBack';
 import CardPreviewFront from './CardPreviewFront';
-import { CardType } from './cardPreview.styles';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface ICardPreviewProps {
   isFront: boolean;
-  cardType: CardType;
+  cardType: string;
   cardNumbers: Record<CardNumberKey, string>;
   expiryDate: { month: string; year: string };
   cardholderName: string;

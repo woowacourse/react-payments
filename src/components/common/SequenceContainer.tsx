@@ -19,14 +19,14 @@ export default function SequenceContainer({ completionFlagQueue, componentQueue 
     }
   }, [completionFlagQueue, stage]);
 
-  const visibleElements = childrenElements.reduce<ReactNode[]>((result, child, index) => {
-    const isVisibleElement = stage >= index;
+  const visibleComponents = childrenElements.reduce<ReactNode[]>((result, child, index) => {
+    const isVisible = stage >= index;
 
-    if (isVisibleElement) {
+    if (isVisible) {
       return [child, ...result];
     }
     return result;
   }, []);
 
-  return <>{visibleElements}</>;
+  return <>{visibleComponents}</>;
 }

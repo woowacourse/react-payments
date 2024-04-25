@@ -12,6 +12,7 @@ import ROUTE_PATH from '../../pages/constants/routePath';
 import getObjectValues from '../../utils/getObjectValues';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
+import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
@@ -21,7 +22,7 @@ export interface ICardInfoFormProps {
 
 export default function CardInfoForm({ cardInfoControl, completionStatus, setIsCardFront }: ICardInfoFormProps) {
   const navigate = useNavigate();
-  const { cardNumbers, expiryDate, cardholderName, cvc, password } = cardInfoControl;
+  const { cardNumbers, cardType, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
   const completionFlags = getObjectValues<boolean>(completionStatus);
   const isSubmitable = completionFlags.every((v: boolean) => v);
@@ -29,7 +30,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
   const onSubmit = () => {
     if (isSubmitable) {
       navigate(ROUTE_PATH.cardRegisterComplete, {
-        state: { cardNumberPrefix: cardNumbers.value.first, cardType: 'XX카드' },
+        state: { cardNumberPrefix: cardNumbers.value.first, cardType: cardType.value },
       });
     }
   };
@@ -40,6 +41,7 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
         completionFlagQueue={completionFlags}
         componentQueue={[
           <CardNumbersInputContainer {...cardNumbers} />,
+          <CardTypeSelectContainer {...cardType} />,
           <CardExpiryDateInputContainer {...expiryDate} />,
           <CardholderNameInputContainer {...cardholderName} />,
           <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />,

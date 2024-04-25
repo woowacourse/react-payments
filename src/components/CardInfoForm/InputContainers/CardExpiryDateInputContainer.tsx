@@ -2,7 +2,7 @@ import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
 import { ErrorWrapper, ErrorText } from '../../../styles/common';
 import { IErrorStatus } from '../../../validators/index.d';
-import useExpiryDate from '../../../hooks/useCardInfo/useExpiryDate';
+import useExpiryDate from '../../../hooks/useExpiryDate';
 
 type MM = string;
 type YY = string;

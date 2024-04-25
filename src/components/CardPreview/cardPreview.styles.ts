@@ -1,20 +1,18 @@
+import { CARD_COLOR, CardType } from '../../constants/cardType';
+
 import styled from 'styled-components';
 
-const CARD_COLOR = {
-  0: '#333333',
-  1: '#f3f3f3',
-} as const;
+const DEFAULT_CARD_COLOR = '#333333';
 
-export type CardType = keyof typeof CARD_COLOR;
-
-export const CardPreviewContainer = styled.div<{ cardType?: CardType }>`
+export const CardPreviewContainer = styled.div<{ $cardType?: string }>`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 320px;
   height: 200px;
 
-  background-color: ${({ cardType = 0 }) => CARD_COLOR[cardType]};
+  background-color: ${({ $cardType }) =>
+    $cardType ? CARD_COLOR[$cardType as CardType] || DEFAULT_CARD_COLOR : DEFAULT_CARD_COLOR};
 
   border-radius: 8px;
 

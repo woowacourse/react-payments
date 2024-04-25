@@ -4,6 +4,7 @@ import { IInputsControl } from '../useInputs';
 
 interface CardInfoControl {
   cardNumbers: IInputsControl;
+  cardType: IInputControl<HTMLSelectElement>;
   expiryDate: {
     month: IInputControl;
     year: IInputControl;
@@ -19,6 +20,7 @@ interface DynamicObject<T> {
 
 export interface ICardInfoCompletionStatus extends DynamicObject<boolean> {
   isCardNumbersCompleted: boolean;
+  isCardTypeCompleted: boolean;
   isExpiryDateCompleted: boolean;
   isCardholderNameCompleted: boolean;
   isCvcCompleted: boolean;
@@ -27,6 +29,7 @@ export interface ICardInfoCompletionStatus extends DynamicObject<boolean> {
 
 const useCardInfoCompletionStatus = ({
   cardNumbers,
+  cardType,
   expiryDate: { month: expiryMonth, year: expiryYear },
   cardholderName,
   cvc,
@@ -37,6 +40,7 @@ const useCardInfoCompletionStatus = ({
       Object.values(cardNumbers.value).every(v => v) && Object.values(cardNumbers.errorStatus.isError).every(v => !v),
     [cardNumbers],
   );
+  const isCardTypeCompleted = useMemo(() => Boolean(cardType.value) && !cardType.errorStatus.isError, [cardType]);
   const isExpiryDateCompleted = useMemo(
     () =>
       Boolean(expiryMonth.value) &&
@@ -54,6 +58,7 @@ const useCardInfoCompletionStatus = ({
 
   return {
     isCardNumbersCompleted,
+    isCardTypeCompleted,
     isExpiryDateCompleted,
     isCardholderNameCompleted,
     isCvcCompleted,

@@ -4,19 +4,21 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 type TValidate = (value: string) => IErrorStatus;
 
-export interface IInputControl {
+type InputRelatedElement = HTMLInputElement | HTMLSelectElement;
+
+export interface IInputControl<T = HTMLInputElement> {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<T>) => void;
   validateValue: (targetValue: string) => void;
   errorStatus: IErrorStatus;
 }
 
-const useInput = (validate: TValidate, initialValue: string = ''): IInputControl => {
+const useInput = <T extends InputRelatedElement>(validate: TValidate, initialValue: string = ''): IInputControl<T> => {
   const [value, setValue] = useState(initialValue);
   const { errorStatus, validateValue } = useValidation(value, validate);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<T>) => {
     validateValue(e.target.value);
     setValue(e.target.value);
   };

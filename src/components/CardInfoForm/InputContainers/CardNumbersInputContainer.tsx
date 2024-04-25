@@ -8,9 +8,7 @@ type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersInputContainerProps {
   value: Record<CardNumberKey, string>;
-  setValue: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   generateOnChange: (key: CardNumberKey) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  validateValue: (key: CardNumberKey, value: string) => void;
   errorStatus: { isError: Record<CardNumberKey, boolean>; errorMessage: string };
 }
 

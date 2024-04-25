@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export interface InputContainerProps {
   title: string;
   subtitle?: string;
-  labelText: string;
-  labelFor: string;
+  labelText?: string;
+  labelFor?: string;
   children: React.ReactNode;
 }
 
@@ -13,8 +13,8 @@ export default function InputContainer({ title, subtitle, labelText, labelFor, c
   return (
     <Container>
       <Title>{title}</Title>
-      <Subtitle>{subtitle}</Subtitle>
-      <Label htmlFor={labelFor}>{labelText}</Label>
+      {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      {labelText && <Label htmlFor={labelFor}>{labelText}</Label>}
       <InputWrapper>{children}</InputWrapper>
     </Container>
   );
@@ -33,7 +33,7 @@ const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 13px;
   font-weight: 300;
-  margin: 10px 0 12px 0;
+  margin: 10px 0 24px 0;
   color: #8b95a1;
 `;
 
@@ -41,7 +41,7 @@ export const Label = styled.label`
   font-size: 15.5px;
   font-weight: 400;
   display: block;
-  margin-top: 24px;
+  /* margin-top: 24px; */
   color: #0a0d13;
 `;
 

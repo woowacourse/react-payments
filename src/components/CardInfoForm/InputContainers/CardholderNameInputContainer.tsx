@@ -6,7 +6,6 @@ import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 interface CardholderNameInputContainerProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateValue: (targetValue: string) => void;
   errorStatus: { errorMessage: string; isError: boolean };
 }

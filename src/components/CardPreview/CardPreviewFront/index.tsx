@@ -5,9 +5,8 @@ import CardNumber from './CardNumberContainer';
 import ExpiryDate from './ExpiryDate';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
-
 interface CardPreviewFrontProps {
-  cardType: S.CardType;
+  cardType: string;
   cardNumbers: Record<CardNumberKey, string>;
   expiryDate: { month: string; year: string };
   cardholderName: string;
@@ -17,7 +16,7 @@ const CardPreviewFront = ({ cardType, cardNumbers, expiryDate, cardholderName }:
   const firstTwoDigits = cardNumbers.first.slice(0, 2);
 
   return (
-    <S.CardPreviewContainer cardType={cardType}>
+    <S.CardPreviewContainer $cardType={cardType}>
       <S.CardPreviewFrontWrapper>
         <S.HeaderWrapper>
           <S.CardMagnetic />

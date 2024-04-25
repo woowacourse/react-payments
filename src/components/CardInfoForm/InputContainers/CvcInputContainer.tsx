@@ -5,9 +5,7 @@ import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 
 export interface ICvcInputContainerProps {
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  validateValue: (targetValue: string) => void;
   errorStatus: { errorMessage: string; isError: boolean };
   setIsCardFront?: React.Dispatch<React.SetStateAction<boolean>>;
 }
