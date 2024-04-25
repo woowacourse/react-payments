@@ -5,14 +5,14 @@ import FormItem from './FormItem';
 import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
-import { ValidateInput } from '../hooks/useValidateInput';
+import { UseCardHolder } from '../hooks/useCardHolder';
 
 interface props {
-  validateInput: ValidateInput;
+  useCardHolder: UseCardHolder;
 }
 
 export default function CardHolder({
-  validateInput: { onChange, errorMessage },
+  useCardHolder: { errorMessage, onChange },
 }: props) {
   const isError = Boolean(errorMessage);
   return (
