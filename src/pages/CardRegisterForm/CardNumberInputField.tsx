@@ -3,7 +3,7 @@ import InputField from "../../components/InputField/InputField";
 import { Validator } from "@/hooks/useValidation";
 import useValidation from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
-import { INPUT_COUNTS } from "@/constants/condition";
+import { INPUT_COUNTS, INPUT_LABEL } from "@/constants/condition";
 
 const VALID_LENGTH = INPUT_COUNTS.CARD_NUMBERS;
 const individualValidators: Validator[] = [
@@ -12,7 +12,7 @@ const individualValidators: Validator[] = [
     validate: (input: string) => input.length === 0 || input.length === VALID_LENGTH,
   },
   {
-    errorMessage: `입력은 숫자형이어야합니다.`,
+    errorMessage: `숫자만 입력 가능합니다.`,
     validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
   },
 ];
@@ -22,7 +22,7 @@ const CardNumberInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInp
 
   return (
     <InputField>
-      <InputField.Label>카드번호</InputField.Label>
+      <InputField.Label>{INPUT_LABEL.CARD_NUMBERS}</InputField.Label>
       <InputField.Inputs>
         {Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map((_, index) => (
           <InputField.Input

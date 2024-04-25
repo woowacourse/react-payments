@@ -14,7 +14,7 @@ const individualValidators: Validator[] = [
   },
   {
     validate: (input: string) => !/\s{2,}/.test(input),
-    errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다..",
+    errorMessage: "이름의 공백은 2회이상 연속되지 않아야 합니다.",
   },
 ];
 

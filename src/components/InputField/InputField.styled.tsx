@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import Input from "../Input/Input";
 import { ReactNode } from "react";
-
 const Label = styled.label`
   font-size: 12px;
   font-weight: 500;
 `;
 
-const InputsWrapper: React.FC<{
+const Inputs: React.FC<{
   children: ReturnType<typeof Input>[] | ReturnType<typeof Input>;
 }> = styled.div`
   display: flex;
@@ -15,7 +14,7 @@ const InputsWrapper: React.FC<{
   height: 32px;
 `;
 
-const InputFieldWrapper: React.FC<{
+const InputField: React.FC<{
   children: ReactNode | ReactNode[];
 }> = styled.div`
   gap: 8px;
@@ -23,13 +22,18 @@ const InputFieldWrapper: React.FC<{
   flex-direction: column;
 `;
 
-const ErrorMessageWrapper = styled.div`
+const ErrorMessage = styled.div`
   font-size: 9.5px;
   font-weight: 400;
   color: ${({ theme }) => theme.COLOR.error};
   height: 14px;
 `;
 
-const S = { Label, InputsWrapper, ErrorMessageWrapper, InputFieldWrapper };
+const S = {
+  Label,
+  Inputs,
+  ErrorMessage,
+  InputField,
+};
 
 export default S;

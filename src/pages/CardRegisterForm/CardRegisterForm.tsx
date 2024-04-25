@@ -4,7 +4,6 @@ import CardNumberInputField from "@/pages/CardRegisterForm/CardNumberInputField"
 import ExpirationDateInputField from "@/pages/CardRegisterForm/ExpirationDateInputField";
 import OwnerNameInputField from "@/pages/CardRegisterForm/OwnerNameInputField";
 import useInput from "@/hooks/useInput";
-import InputFieldWithTitleTemplate from "./InputFieldWithTitleTemplate";
 
 interface Props {
   cardNumbersReduceds: ReturnType<typeof useInput>[];
@@ -16,7 +15,6 @@ const CardRegisterForm = ({ cardNumbersReduceds, expirationDateReduceds, ownerNa
   return (
     <S.CardFormWrapper>
       {/*카드 번호*/}
-
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
@@ -38,7 +36,6 @@ const CardRegisterForm = ({ cardNumbersReduceds, expirationDateReduceds, ownerNa
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.OWNER_NAME}</S.InputTitle>
-          <S.InputSubtitle></S.InputSubtitle>
         </S.TitleWrapper>
         <OwnerNameInputField reduceds={ownerNameReduceds} />
       </S.InputFieldWithInfo>
