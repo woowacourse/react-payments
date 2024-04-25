@@ -2,9 +2,9 @@ import './styles/App.css';
 import './styles/reset.css';
 import {
   CardExpirationPeriodInput,
+  CardFront,
   CardIssuerInput,
   CardNumbersInput,
-  CardPreview,
   CVCInput,
   UserNameInput,
 } from './components';
@@ -38,7 +38,7 @@ function App() {
   return (
     <div id="app">
       <div className="inner">
-        <CardPreview
+        <CardFront
           cardNumbers={numbers}
           period={period}
           userName={userName}

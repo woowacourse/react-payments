@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import CardPreview from './index';
+import CardFront from './index';
 
-const meta: Meta<typeof CardPreview> = {
-  title: 'CardPreview',
-  component: CardPreview,
+const meta: Meta<typeof CardFront> = {
+  title: 'CardPreview/Front',
+  component: CardFront,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof CardPreview>;
+type Story = StoryObj<typeof CardFront>;
 
 export const VisaCard: Story = {
   args: {

@@ -1,9 +1,9 @@
-import IMAGES from '../../assets/images';
-import { CARD_COLOR, CARD_MARK } from '../../constants';
+import IMAGES from '../../../assets/images';
+import { CARD_COLOR, CARD_MARK } from '../../../constants';
 
 import styles from './style.module.css';
 
-interface CardPreviewProps {
+interface CardFrontProps {
   cardNumbers: string[];
   period: {
     month: string;
@@ -13,12 +13,12 @@ interface CardPreviewProps {
   cardIssuer: string;
 }
 
-function CardPreview({
+function CardFront({
   cardNumbers,
   period,
   userName,
   cardIssuer,
-}: CardPreviewProps) {
+}: CardFrontProps) {
   const maskCardNumbers = () =>
     cardNumbers
       .map((number, index) => {
@@ -48,16 +48,16 @@ function CardPreview({
   }
 
   return (
-    <div className={styles.cardPreview}>
+    <div className={styles.cardContainer}>
       <div
-        className={styles.cardImg}
+        className={styles.cardBox}
         style={{
           backgroundColor: cardIssuer
             ? CARD_COLOR[cardIssuer]
             : CARD_COLOR['기본'],
         }}
       >
-        <div className={styles.cardImgInner}>
+        <div className={styles.cardWrap}>
           <section className={styles.top}>
             <img src={IMAGES.cardChip} alt="card chip" />
             <img
@@ -65,7 +65,7 @@ function CardPreview({
               alt={CARD_MARK[getCardCompanyMark()].alt}
             />
           </section>
-          <section className={styles.info}>
+          <section className={styles.cardInfo}>
             <div className="card-number">{maskCardNumbers()}</div>
             <div className="period">
               {period.month && period.month.padStart(2, '0')}
@@ -80,4 +80,4 @@ function CardPreview({
   );
 }
 
-export default CardPreview;
+export default CardFront;

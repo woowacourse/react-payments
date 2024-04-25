@@ -6,7 +6,7 @@ import UserNameInput from './CardInput/InputContainer/UserNameInput';
 import InputErrorMessage from './CardInput/InputErrorMessage/index';
 import InputField from './CardInput/InputField';
 import InputWrap from './CardInput/InputWrap';
-import CardPreview from './CardPreview';
+import CardFront from './CardPreview/CardFront';
 import Input from './common/Input';
 import Select from './common/Select';
 
@@ -16,7 +16,7 @@ export {
   InputField,
   InputWrap,
   CardNumbersInput,
-  CardPreview,
+  CardFront,
   UserNameInput,
   InputErrorMessage,
   Input,
