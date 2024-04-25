@@ -36,6 +36,8 @@ const StyledTitle = styled.h1<{
   font-weight: ${(props) => props.fontWeight || 700};
   line-height: ${(props) => props.lineHeight || '26px'};
   margin-bottom: ${(props) => props.marginBottom || '4px'};
+
+  white-space: pre-line;
 `;
 
 export default Title;
