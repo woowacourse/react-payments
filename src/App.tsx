@@ -16,9 +16,9 @@ const App = () => {
         expiryDate={{ month: expiryDate.month.value, year: expiryDate.year.value }}
         cardholderName={cardholderName.value}
       />
-      <CardInfoInputWrapper>
+      <CardInfoFormWrapper>
         <CardInfoForm cardInfoControl={control} completionStatus={completionStatus} />
-      </CardInfoInputWrapper>
+      </CardInfoFormWrapper>
     </AppLayout>
   );
 };
@@ -30,8 +30,9 @@ const AppLayout = styled.div`
   padding-top: 60px;
 `;
 
-const CardInfoInputWrapper = styled.section`
+const CardInfoFormWrapper = styled.section`
   margin-top: 50px;
+  margin-bottom: 70px;
 `;
 
 export default App;
