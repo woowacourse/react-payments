@@ -15,7 +15,7 @@ const Dropdown = ({ value, handleChange }: DropdownProps) => {
   return (
     <SelectBox $show={isOpen} onClick={() => setIsOpen(prev => !prev)}>
       <LabelWrapper>
-        <SelectedText $value={value}>{value || '선택해주세요'} </SelectedText>
+        <SelectedText $value={value}>{value || '선택해주세요'}</SelectedText>
         {isOpen ? <ArrowDown /> : <ArrowUp />}
       </LabelWrapper>
       {isOpen && (

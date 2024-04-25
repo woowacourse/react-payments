@@ -23,7 +23,7 @@ const CardCVCContainer = ({ cvc, handleChange, updateErrorMessage, errorInfo }: 
           placeholder="123"
           width="100%"
           maxLength={4}
-          type="password"
+          autoFocus={true}
         />
       </InputField>
       <ErrorWrapper>
