@@ -12,8 +12,10 @@ export interface InputContainerProps {
 export default function InputContainer({ title, subtitle, labelText, labelFor, children }: InputContainerProps) {
   return (
     <Container>
-      <Title>{title}</Title>
-      {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      <UpperWrapper>
+        <Title>{title}</Title>
+        {subtitle && <Subtitle>{subtitle}</Subtitle>}
+      </UpperWrapper>
       {labelText && <Label htmlFor={labelFor}>{labelText}</Label>}
       <InputWrapper>{children}</InputWrapper>
     </Container>
@@ -22,6 +24,10 @@ export default function InputContainer({ title, subtitle, labelText, labelFor, c
 
 const Container = styled.div`
   margin-top: 10px;
+`;
+
+const UpperWrapper = styled.div`
+  margin-bottom: 24px;
 `;
 
 const Title = styled.h1`
@@ -33,7 +39,7 @@ const Title = styled.h1`
 export const Subtitle = styled.h2`
   font-size: 13px;
   font-weight: 300;
-  margin: 10px 0 24px 0;
+  margin-top: 10px;
   color: #8b95a1;
 `;
 
