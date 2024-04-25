@@ -8,7 +8,7 @@ import validateInput from '../validations/validateInput';
 import CardImage from '../components/CardImage';
 import InputGroup from '../components/InputGroup';
 import InputGroupSelector from '../components/InputGroupSelector';
-import FormButton from '../components/FormButton';
+import { useNavigate } from 'react-router-dom';
 
 const appContainerStyle = css({
   display: 'flex',
@@ -17,7 +17,6 @@ const appContainerStyle = css({
   alignItems: 'start',
   padding: '31px',
   gap: '45px',
-  width: '376px',
 });
 
 const appInputStyle = css({
@@ -25,6 +24,19 @@ const appInputStyle = css({
   flexDirection: 'column',
   gap: '16px',
   width: '100%',
+});
+
+const buttonStyle = css({
+  backgroundColor: '#333333',
+  width: '100%',
+  fontWeight: 'bold',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  minHeight: '5%',
+  fontSize: '16px',
+  color: '#F3F3F3',
+  padding: '30px auto',
 });
 
 interface HandleCardErrorType {
@@ -35,6 +47,8 @@ interface HandleCardErrorType {
 }
 
 function CardRegister() {
+  const navigate = useNavigate();
+
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     data: ['', '', '', ''],
     errorMessage: '',
@@ -153,6 +167,15 @@ function CardRegister() {
     handleCardError({ isError, inputSection, message, index });
   };
 
+  const handlePage = () => {
+    navigate('/completed', {
+      state: {
+        cardStartNumber: cardNumber.data[0],
+        cardProvider: cardProvider.data,
+      },
+    });
+  };
+
   return (
     <div css={appContainerStyle}>
       <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
@@ -222,7 +245,11 @@ function CardRegister() {
           errorMessage={cardNumber.errorMessage}
         />
       </form>
-      {isCompleted && <FormButton value="확인" />}
+      {isCompleted && (
+        <button css={buttonStyle} onClick={() => handlePage()}>
+          확인
+        </button>
+      )}
     </div>
   );
 }
