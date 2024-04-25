@@ -1,6 +1,8 @@
-import TextField from '@components/common/TextField/TextField';
-import CVCNumberInput from '@components/payments/@cardRegister/@cvcNumber/CVCNumberInput/CVCNumberInput';
-import { useEffect, useRef } from 'react';
+import { TextField } from '@components/common';
+
+import { CVCNumberInput } from '@components/payments/@cardRegister';
+
+import useFocus from '@hooks/useFocus';
 
 interface CVCNumberTextFieldProps {
   cvcNumber: string;
@@ -15,11 +17,7 @@ const CVCNumberTextField: React.FC<CVCNumberTextFieldProps> = ({
   onAddCVCNumber,
   onFocusCVCNumberField,
 }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  const handleAddInputElementInRef = useFocus();
 
   return (
     <section>
@@ -30,9 +28,7 @@ const CVCNumberTextField: React.FC<CVCNumberTextFieldProps> = ({
           isError={cvcError.isError}
           id="cvc"
           value={cvcNumber}
-          refCallback={(element) => {
-            inputRef.current = element;
-          }}
+          refCallback={handleAddInputElementInRef}
           onAddCVCNumber={(event) => onAddCVCNumber(event.target.value)}
           onFocusCVCNumberField={onFocusCVCNumberField}
         />

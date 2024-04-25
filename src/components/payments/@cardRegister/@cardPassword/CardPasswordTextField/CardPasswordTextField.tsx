@@ -1,6 +1,8 @@
-import TextField from '@components/common/TextField/TextField';
-import { useEffect, useRef } from 'react';
-import CardPasswordInput from '@components/payments/@cardRegister/@cardPassword/CardPasswordInput/CardPasswordInput';
+import { CardPasswordInput } from '@components/payments/@cardRegister';
+
+import { TextField } from '@components/common';
+
+import useFocus from '@hooks/useFocus';
 
 interface CardPasswordTextFieldProps {
   cardPassword: string;
@@ -13,11 +15,7 @@ const CardPasswordTextField: React.FC<CardPasswordTextFieldProps> = ({
   cardPasswordError,
   onAddCardPassword,
 }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  const handleAddInputElementInRef = useFocus();
 
   return (
     <section>
@@ -30,9 +28,7 @@ const CardPasswordTextField: React.FC<CardPasswordTextFieldProps> = ({
           id="cardPassword"
           value={cardPassword}
           onAddCardPassword={(event) => onAddCardPassword(event.target.value)}
-          refCallback={(element) => {
-            inputRef.current = element;
-          }}
+          refCallback={handleAddInputElementInRef}
         />
       </TextField.Content>
       <TextField.ErrorText isError={cardPasswordError.isError} errorText={cardPasswordError.errorMessage} />
