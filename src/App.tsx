@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       element: <ErrorPage />,
     },
   ],
-  { basename: '/react-payments/dist' }
+  { basename: '/react-payments/dist/' }
 );
 
 function App() {
