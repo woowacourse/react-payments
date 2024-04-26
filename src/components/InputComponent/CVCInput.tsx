@@ -1,6 +1,6 @@
 // import styled from "styled-components";
 import Input from './Input';
-import FieldTitle from './FieldTitle';
+import FieldTitle from '../FieldTitle';
 import React, {
   Dispatch,
   SetStateAction,
@@ -8,18 +8,18 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import Validation from '../domain/InputValidation';
+import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
-import { Password } from '../types/card';
-import { ShowComponents } from '../types/showComponents';
+import { CVC } from '../../types/card';
+import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
-  password: Password;
-  handleInput: Dispatch<SetStateAction<Password>>;
+  CVC: CVC;
+  handleInput: Dispatch<SetStateAction<CVC>>;
   handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
 }
-export default function PasswordInput({
-  password,
+export default function CVCInput({
+  CVC,
   handleInput,
   handleShowComponent,
 }: Props) {
@@ -30,9 +30,9 @@ export default function PasswordInput({
     Array.from({ length: 1 }, () => React.createRef<HTMLInputElement>())
   );
   useEffect(() => {
-    const messages = Object.values(password).map((value) => value.errorMessage);
+    const messages = Object.values(CVC).map((value) => value.errorMessage);
     setErrorMessages(messages);
-  }, [password]);
+  }, [CVC]);
 
   useEffect(() => {
     inputRefs.current[0].current?.focus();
@@ -40,8 +40,8 @@ export default function PasswordInput({
 
   useEffect(() => {
     const checkCompleteInput = () => {
-      const isNotAllError = Object.values(password).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
+      const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
+        if (!cur.isError && cur.value !== '' && cur.value.length === 3) {
           return pre + 1;
         }
         return pre;
@@ -51,14 +51,14 @@ export default function PasswordInput({
     if (checkCompleteInput()) {
       handleShowComponent((prev) => ({
         ...prev,
-        passWordInput: true,
+        passwordInput: true,
       }));
     }
-  }, [password, handleShowComponent]);
+  }, [CVC, handleShowComponent]);
 
   const handleUpdateInput = (value: string) => {
-    const cardKey = 'password' as keyof Password;
-    handleInput((prevState: Password) => {
+    const cardKey = 'CVC' as keyof CVC;
+    handleInput((prevState: CVC) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -73,8 +73,8 @@ export default function PasswordInput({
     errorMessage: string,
     isError: boolean
   ) => {
-    const cardKey = 'password' as keyof Password;
-    handleInput((prevState: Password) => {
+    const cardKey = 'CVC' as keyof CVC;
+    handleInput((prevState: CVC) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -88,7 +88,7 @@ export default function PasswordInput({
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    info: string,
+    info: string
   ) => {
     try {
       Validation[info]?.(e.target.value);
@@ -102,18 +102,15 @@ export default function PasswordInput({
   };
 
   const checkInputError = () => {
-    const cardKey = 'password' as keyof Password;
-    return password[cardKey].isError;
+    const cardKey = 'CVC' as keyof CVC;
+    return CVC[cardKey].isError;
   };
 
   return (
     <>
-      <FieldTitle
-        title='비밀번호를 입력해 주세요 '
-        subtitle='앞의 2자리를 입력해주세요'
-      />
+      <FieldTitle title='CVC 번호를 입력해 주세요' />
       <InputField
-        label='비밀번호 앞 2자리'
+        label='CVC'
         count={1}
         errorMessages={errorMessages}
       >
@@ -121,11 +118,11 @@ export default function PasswordInput({
           <Input
             key={index}
             type='string'
-            maxLength={2}
-            value={password['password' as keyof Password].value }
-            placeholder={'**'}
+            maxLength={3}
+            value={CVC[`CVC` as keyof CVC].value}
+            placeholder={'123'}
             isError={checkInputError()}
-            onChange={(e) => handleInputChange(e, 'password')}
+            onChange={(e) => handleInputChange(e, 'CVC')}
             inputRef={inputRef}
           />
         ))}

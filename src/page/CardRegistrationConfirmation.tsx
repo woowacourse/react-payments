@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Check from '../assets/image/check.png';
 import BottomButton from "../components/Button";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Page = styled.div`
   width: 100vw;

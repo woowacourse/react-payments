@@ -1,8 +1,6 @@
-// import { useState } from 'react';
 import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
-// import { Card } from '../types/card';
 import useCardForm from '../hooks/useCardForm';
 import { useEffect, useState } from 'react';
 import {

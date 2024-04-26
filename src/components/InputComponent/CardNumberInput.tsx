@@ -1,68 +1,65 @@
 // import styled from "styled-components";
 import Input from './Input';
-import FieldTitle from './FieldTitle';
+import FieldTitle from '../FieldTitle';
 import React, {
   Dispatch,
   SetStateAction,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
-import Validation from '../domain/InputValidation';
+import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
-import { ExpirationDate } from '../types/card';
-import { ShowComponents } from '../types/showComponents';
+import { CardNumbers } from '../../types/card';
+import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
-  expirationDate: ExpirationDate;
-  handleInput: Dispatch<SetStateAction<ExpirationDate>>;
+  cardNumbers: CardNumbers;
+  handleInput: Dispatch<SetStateAction<CardNumbers>>;
   handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
 }
-export default function ExpirationDateInput({
-  expirationDate,
+export default function CardNumberInput({
+  cardNumbers,
   handleInput,
   handleShowComponent,
 }: Props) {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const inputRefs = useRef<Array<React.RefObject<HTMLInputElement>>>(
-    Array.from({ length: 2 }, () => React.createRef<HTMLInputElement>())
+    Array.from({ length: 4 }, () => React.createRef<HTMLInputElement>())
   );
 
-  useEffect(() => {
-    const messages = Object.values(expirationDate).map(
+  useLayoutEffect(() => {
+    const messages = Object.values(cardNumbers).map(
       (value) => value.errorMessage
     );
     setErrorMessages(messages);
-  }, [expirationDate]);
+  }, [cardNumbers]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     inputRefs.current[0].current?.focus();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const checkCompleteInput = () => {
-      const isNotAllError = Object.values(expirationDate).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
+      const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
+        if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
           return pre + 1;
         }
         return pre;
       }, 0);
-      return isNotAllError === 2;
+      return isNotAllError === 4;
     };
     if (checkCompleteInput()) {
       handleShowComponent((prev) => ({
         ...prev,
-        userNameInput: true,
+        cardDropDown: true,
       }));
     }
-  }, [expirationDate, handleShowComponent]);
-
-  const date = ['month', 'year'];
-  const datePlaceHolder = ['MM', 'YY'];
+  }, [cardNumbers, handleShowComponent]);
 
   const handleUpdateInput = (index: number, value: string) => {
-    const cardKey = date[index] as keyof ExpirationDate;
-    handleInput((prevState: ExpirationDate) => {
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    handleInput((prevState: CardNumbers) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -78,8 +75,8 @@ export default function ExpirationDateInput({
     errorMessage: string,
     isError: boolean
   ) => {
-    const cardKey = date[index] as keyof ExpirationDate;
-    handleInput((prevState: ExpirationDate) => {
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    handleInput((prevState: CardNumbers) => {
       return {
         ...prevState,
         [cardKey]: {
@@ -100,41 +97,44 @@ export default function ExpirationDateInput({
       Validation[info]?.(e.target.value);
       handleUpdateErrorMessages(index, '', false);
       handleUpdateInput(index, e.target.value);
+      const nextIndex = index + 1;
+      if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
+        inputRefs.current[nextIndex].current?.focus();
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateErrorMessages(index, error.message, true);
       }
     }
-    const nextIndex = index + 1;
-    if (e.target.value.length === 2 && nextIndex < inputRefs.current.length) {
-      inputRefs.current[nextIndex].current?.focus();
-    }
   };
 
   const checkInputError = (index: number) => {
-    const cardKey = date[index] as keyof ExpirationDate;
-    return expirationDate[cardKey].isError;
+    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
+    return cardNumbers[cardKey].isError;
   };
+
   return (
     <>
       <FieldTitle
-        title='카드 유효기간을 입력해 주세요'
-        subtitle='월/년도(MMYY)를 순서대로 입력해 주세요.'
+        title='결제할 카드 번호를 입력해 주세요'
+        subtitle='본인 명의의 카드만 결제 가능합니다.'
       />
       <InputField
-        label='유효기간'
-        count={2}
+        label='카드 번호'
+        count={4}
         errorMessages={errorMessages}
       >
         {inputRefs.current.map((inputRef, index) => (
           <Input
             key={index}
-            type='string'
-            maxLength={2}
-            value={expirationDate[date[index] as keyof ExpirationDate].value}
-            placeholder={datePlaceHolder[index]}
+            type='text'
+            value={
+              cardNumbers[`cardNumber${index + 1}` as keyof CardNumbers].value
+            }
+            maxLength={4}
+            placeholder='1234'
             isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, date[index], index)}
+            onChange={(e) => handleInputChange(e, 'cardNumber', index)}
             inputRef={inputRef}
           />
         ))}

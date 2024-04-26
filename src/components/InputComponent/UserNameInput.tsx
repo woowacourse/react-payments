@@ -1,6 +1,6 @@
 // import styled from "styled-components";
 import Input from './Input';
-import FieldTitle from './FieldTitle';
+import FieldTitle from '../FieldTitle';
 import React, {
   Dispatch,
   SetStateAction,
@@ -8,10 +8,10 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import Validation from '../domain/InputValidation';
+import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
-import { UserName } from '../types/card';
-import { ShowComponents } from '../types/showComponents';
+import { UserName } from '../../types/card';
+import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
   userName: UserName;

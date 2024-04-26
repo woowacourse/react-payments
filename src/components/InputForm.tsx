@@ -10,14 +10,14 @@ import {
   UserName,
 } from '../types/card';
 // import InputField from './InputField';
-import CardNumberInput from './CardNumberInput';
-import ExpirationDateInput from './ExpirationDateInput';
-import UserNameInput from './UserNameInput';
+import CardNumberInput from './InputComponent/CardNumberInput';
+import ExpirationDateInput from './InputComponent/ExpirationDateInput';
+import UserNameInput from './InputComponent/UserNameInput';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { ShowComponents } from '../types/showComponents';
 import CardDropDown from './CardDropDown';
-import CVCInput from './CVCInput';
-import PasswordInput from './PasswordInput';
+import CVCInput from './InputComponent/CVCInput';
+import PasswordInput from './InputComponent/PasswordInput';
 
 const FormContainer = styled.div`
   display: flex;
