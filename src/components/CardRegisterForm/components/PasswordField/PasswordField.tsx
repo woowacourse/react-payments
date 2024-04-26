@@ -7,14 +7,14 @@ import useInput from "@/hooks/useInput";
 import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
+import { sliceOverMaxLength } from "@/utils/view";
 interface Props {
   passwordState: ReturnType<typeof useInput<string>>;
 }
 
 const PasswordField = ({ passwordState }: Props) => {
   const { onChange, error, isError } = passwordState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } =
-    useShowError(error);
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
     <S.InputFieldWithInfo>
@@ -30,8 +30,7 @@ const PasswordField = ({ passwordState }: Props) => {
           maxLength={VALID_LENGTH.PASSWORD}
           placeholder={MESSAGE.PLACEHOLDER.PASSWORD}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.value.length > e.target.maxLength)
-              e.target.value = e.target.value.slice(0, e.target.maxLength);
+            sliceOverMaxLength(e, VALID_LENGTH.PASSWORD);
             onChange(e);
           }}
           onFocus={onFocusHideErrors}

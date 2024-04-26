@@ -5,9 +5,10 @@ import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
 import { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
-import { INPUT_COUNTS } from "@/constants/condition";
+import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
 import useShowError from "@/hooks/useShowError";
 import useInputRefs from "@/hooks/useInputRefs";
+import { sliceOverMaxLength } from "@/utils/view";
 
 export type ExpirationPeriodInputType = {
   expirationMonth: string;
@@ -27,9 +28,7 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
 
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors } = expirationPeriodState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError(
-    Object.keys(errors)
-  );
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
@@ -55,12 +54,10 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
               ref={(el) => (inputRefs.current[index] = el)}
               type="number"
               key={index}
-              maxLength={2}
               name={EXPIRATION_INPUTS_NAMES[index]}
               placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                if (e.target.value.length > e.target.maxLength)
-                  e.target.value = e.target.value.slice(0, e.target.maxLength);
+                sliceOverMaxLength(e, VALID_LENGTH.EXPIRATION_PERIOD);
                 onFocusNextInput(e, index);
               }}
               onBlur={onBlurShowErrors}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useShowError = (errors: string[] | null) => {
+const useShowError = () => {
   const [showErrors, setShowErrors] = useState(false);
 
   const onBlurShowErrors = () => {
@@ -8,14 +8,14 @@ const useShowError = (errors: string[] | null) => {
   };
 
   const onFocusHideErrors = () => {
-    if (Array.isArray(errors) && errors.length > 0) {
-      setShowErrors(true);
-    } else {
-      setShowErrors(false);
-    }
+    setShowErrors(false);
   };
 
-  return { showErrors, onBlurShowErrors, onFocusHideErrors };
+  return {
+    showErrors,
+    onBlurShowErrors,
+    onFocusHideErrors,
+  };
 };
 
 export default useShowError;

@@ -1,8 +1,7 @@
 import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import useInputs from "./useInputs";
-import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
+import { VALID_LENGTH } from "@/constants/condition";
 import {
-  sliceInvalidValueWithRegex,
   validateDoubleSpace,
   validateEnterRequired,
   validateIsNumber,
@@ -13,7 +12,6 @@ import {
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "./useInput";
 import { CardType } from "@/constants/cardType";
-import { REGEX } from "@/constants/regex";
 
 const useCardRegister = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -28,8 +26,6 @@ const useCardRegister = () => {
         validateIsValidLength(value, VALID_LENGTH.CARD_NUMBERS),
       (value: string) => validateIsNumber(value),
     ],
-    onChangeFunc: (value: string) =>
-      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   const expirationPeriodState = useInputs<ExpirationPeriodInputType>({
@@ -37,11 +33,9 @@ const useCardRegister = () => {
     validates: [
       (value: string) =>
         validateIsValidLength(value, VALID_LENGTH.EXPIRATION_PERIOD),
-      (value: string, name: string) => {
-        return name === "expirationMonth" ? validateMonth(Number(value)) : null;
-      },
+      (value: string, name: string) =>
+        name === "expirationMonth" ? validateMonth(Number(value)) : null,
     ],
-    maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
   });
 
   const ownerNameState = useInput({
@@ -51,13 +45,10 @@ const useCardRegister = () => {
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],
-    onChangeFunc: (value: string) =>
-      sliceInvalidValueWithRegex(value, REGEX.CAPITAL_LETTERS),
   });
 
   const cardTypeState = useInput<CardType | null>({
     initialValue: null,
-    validates: [(value: string) => validateOwnerName(value)],
   });
 
   const CVCNumbersState = useInput<string>({
@@ -66,8 +57,6 @@ const useCardRegister = () => {
       (value: string) => validateIsValidLength(value, VALID_LENGTH.CVC_NUMBERS),
       (value: string) => validateIsNumber(value),
     ],
-    onChangeFunc: (value: string) =>
-      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   const passwordState = useInput<string>({
@@ -76,8 +65,6 @@ const useCardRegister = () => {
       (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
       (value: string) => validateIsNumber(value),
     ],
-    onChangeFunc: (value: string) =>
-      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   return {

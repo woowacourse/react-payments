@@ -7,7 +7,7 @@ const CardPreviewBack = ({ CVCNumbers }: { CVCNumbers: string }) => {
       <S.CardCVCPart>
         <S.CVCNumberBox>
           <S.Input
-            isWhite={false}
+            $isWhite={false}
             type="text"
             value={CVCNumbers}
             readOnly

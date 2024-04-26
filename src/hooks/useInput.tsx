@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 
 interface Props<T> {
   initialValue: T;
-  validates: ((value: string) => {
+  validates?: ((value: string) => {
     isValid: boolean;
     type: string;
   })[];
-  onChangeFunc?: (value: string) => string;
 }
 
-const useInput = <T,>({ initialValue, validates, onChangeFunc }: Props<T>) => {
+const useInput = <T,>({ initialValue, validates }: Props<T>) => {
   const [value, setValue] = useState<T>(initialValue);
   const [error, setError] = useState<string[]>([]);
   const [isError, setIsError] = useState(true);
@@ -19,16 +18,14 @@ const useInput = <T,>({ initialValue, validates, onChangeFunc }: Props<T>) => {
   ) => {
     const newValue = event.target.value;
 
-    if (onChangeFunc) {
-      event.target.value = onChangeFunc(newValue);
+    if (validates) {
+      const newErrors = validates
+        .map((validate) => validate(newValue))
+        .filter((result) => !result.isValid)
+        .map((result) => result.type);
+      setError(newErrors);
     }
 
-    const newErrors = validates
-      .map((validate) => validate(newValue))
-      .filter((result) => !result.isValid)
-      .map((result) => result.type);
-
-    setError(newErrors);
     setValue(newValue as T);
   };
 

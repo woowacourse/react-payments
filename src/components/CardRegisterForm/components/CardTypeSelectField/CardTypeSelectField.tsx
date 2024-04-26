@@ -9,6 +9,7 @@ import { CardType, CardTypeColor } from "@/constants/cardType";
 interface Props {
   cardTypeState: ReturnType<typeof useInput<CardType | null>>;
 }
+
 const CardTypeSelectField = ({ cardTypeState }: Props) => {
   const { value, setValue } = cardTypeState;
 

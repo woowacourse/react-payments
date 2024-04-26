@@ -10,7 +10,6 @@ export type ValidateFuncWithPropsType = (
 interface Props<T> {
   initialValue: T;
   validates: ValidateFuncWithPropsType[];
-  maxNumberLength?: number;
   onChangeFunc?: (value: string) => string;
 }
 
@@ -22,7 +21,6 @@ const useInputs = <T extends object>({
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
   const [isError, setIsError] = useState(true);
-  // const [isCurrentInputError, setIsCurrentInputError] = useState(false);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,7 +46,6 @@ const useInputs = <T extends object>({
       delete newErrors[name as keyof T];
     }
 
-    // setIsCurrentInputError(!allValid);
     setValues((values) => ({ ...values, [name]: newValue }));
     setErrors(newErrors);
   };
@@ -71,7 +68,6 @@ const useInputs = <T extends object>({
     onChange,
     isError,
     setErrors,
-    // isCurrentInputError,
   };
 };
 

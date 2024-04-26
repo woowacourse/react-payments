@@ -3,11 +3,12 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
-import { INPUT_COUNTS } from "@/constants/condition";
+import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useShowError from "@/hooks/useShowError";
 import useInputRefs from "@/hooks/useInputRefs";
-import { sliceOverMaxLength } from "@/utils/view";
+import { sliceInvalidValueWithRegex, sliceOverMaxLength } from "@/utils/view";
+import { REGEX } from "@/constants/regex";
 
 export type CardNumberInputType = {
   cardNumbers1: string;
@@ -24,9 +25,7 @@ type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
   const { onChange, errors } = cardNumbersState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError(
-    Object.values(errors) as string[]
-  );
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
@@ -52,11 +51,12 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               ref={(el) => (inputRefs.current[index] = el)}
               type="number"
               key={index}
+              maxLength={VALID_LENGTH.CARD_NUMBERS}
               name={`cardNumbers${index + 1}`}
-              maxLength={4}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                sliceOverMaxLength(e);
+                sliceInvalidValueWithRegex(e, REGEX.NUMBERS);
+                sliceOverMaxLength(e, VALID_LENGTH.CARD_NUMBERS);
                 onFocusNextInput(e, index);
               }}
               onFocus={onFocusHideErrors}

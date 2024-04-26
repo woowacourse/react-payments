@@ -14,8 +14,6 @@ export const CARD_BRAND_INFO = {
 };
 
 export const MAX_LENGTH = {
-  CARD_NUMBERS: 4,
-  EXPIRATION_PERIOD: 2,
   OWNER_NAME: 30,
 };
 

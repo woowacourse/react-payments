@@ -99,10 +99,3 @@ export const validateIsNumber = (value: string) => {
   }
   return { type: ErrorStatus.IS_NOT_NUMBER, isValid: true };
 };
-
-export const sliceInvalidValueWithRegex = (value: string, regex: RegExp) => {
-  if (!regex.test(value)) {
-    return value.slice(0, -1);
-  }
-  return value;
-};
