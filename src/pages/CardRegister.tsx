@@ -5,9 +5,10 @@ import { CardNumberType, CardOwnerType, CardPeriodType } from '../types/state';
 import useCompleted from '../hooks/useCompleted';
 import { PERIOD } from '../constants/inputInformation';
 import validateInput from '../validations/validateInput';
-import CardImage from '../components/CardImage';
+import CardFrontImage from '../components/CardFrontImage';
 import InputGroup from '../components/InputGroup';
 import { useNavigate } from 'react-router-dom';
+import CardBackImage from '../components/CardBackImage';
 
 const appContainerStyle = css({
   display: 'flex',
@@ -110,7 +111,7 @@ function CardRegister() {
   };
 
   const handleCardPassword = (value: string) => {
-    setCardCvc((prevState) => {
+    setCardPassword((prevState) => {
       return { ...prevState, data: value };
     });
   };
@@ -175,12 +176,38 @@ function CardRegister() {
     });
   };
 
+  const [ownerOnBlur, setOwnerOnBlur] = useState(false);
+  const [cvcOnBlur, setCvcOnBlur] = useState(false);
+  const [cvcOnFocus, setCvcOnFocus] = useState(false);
+
+  const handleCvcOnBlur = () => {
+    setCvcOnBlur(true);
+  };
+
+  const handleOwnerOnBlur = () => {
+    setOwnerOnBlur(true);
+    setCvcOnFocus(false);
+  };
+
+  const handleCvcOnFocus = () => {
+    setCvcOnFocus(true);
+  };
+
   return (
     <div css={appContainerStyle}>
-      <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} cardProvider={cardProvider.data} />
+      {!inputError.owner && !cvcOnBlur && cvcOnFocus ? (
+        <CardBackImage cardCvc={cardCvc.data} />
+      ) : (
+        <CardFrontImage
+          cardNumber={cardNumber.data}
+          cardPeriod={cardPeriod.data}
+          cardOwner={cardOwner.data}
+          cardProvider={cardProvider.data}
+        />
+      )}
       <form css={appInputStyle}>
         {/* 비밀번호 */}
-        {!inputError.cvc && (
+        {!inputError.cvc && cvcOnBlur && (
           <InputGroup
             onInputChange={({ value, index }: InputChangePropsType) =>
               handleInputChange({ value, index, inputSection: 'password' })
@@ -191,7 +218,7 @@ function CardRegister() {
           />
         )}
         {/* CVC */}
-        {!inputError.owner && (
+        {!inputError.owner && ownerOnBlur && (
           <InputGroup
             onInputChange={({ value, index }: InputChangePropsType) =>
               handleInputChange({ value, index, inputSection: 'cvc' })
@@ -199,6 +226,8 @@ function CardRegister() {
             informationSection="cvc"
             isError={[inputError.cvc]}
             errorMessage={cardCvc.errorMessage}
+            onBlur={() => handleCvcOnBlur()}
+            onFocus={() => handleCvcOnFocus()}
           />
         )}
         {/* 카드 소유자 */}
@@ -210,6 +239,7 @@ function CardRegister() {
             informationSection="owner"
             isError={[inputError.owner]}
             errorMessage={cardOwner.errorMessage}
+            onBlur={() => handleOwnerOnBlur()}
           />
         )}
         {/* 유효기간 */}

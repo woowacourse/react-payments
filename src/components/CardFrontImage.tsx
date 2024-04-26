@@ -12,7 +12,7 @@ const cardContainerStyle = (backgroundColor: string) =>
     height: '132px',
     borderRadius: '4px',
     boxSizing: 'border-box',
-    boxShadow: '3px 3px 5px 0px',
+    boxShadow: '3px 3px 5px 0px rgba(0, 0, 0, 0.25)',
     padding: '8px 12px',
     display: 'flex',
     flexDirection: 'column',
@@ -59,7 +59,7 @@ const cardNumberGridStyle = css({
   justifyContent: 'center',
 });
 
-interface CardImageType {
+interface CardFrontImageType {
   cardNumber: string[];
   cardPeriod: { month: string; year: string };
   cardOwner: string;
@@ -72,7 +72,7 @@ interface CardImageTableType {
   domesticCard: string;
 }
 
-function CardImage({ cardNumber, cardPeriod, cardOwner, cardProvider }: CardImageType) {
+function CardFrontImage({ cardNumber, cardPeriod, cardOwner, cardProvider }: CardFrontImageType) {
   const getCardImage = () => {
     const cardImageTable: CardImageTableType = {
       masterCard: MASTERCARD,
@@ -124,4 +124,4 @@ function CardImage({ cardNumber, cardPeriod, cardOwner, cardProvider }: CardImag
   );
 }
 
-export default CardImage;
+export default CardFrontImage;

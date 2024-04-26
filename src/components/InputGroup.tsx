@@ -68,9 +68,11 @@ interface InputGroupType {
   informationSection: informationSectionType;
   isError: boolean[];
   errorMessage: string;
+  onBlur?: () => void;
+  onFocus?: () => void;
 }
 
-function InputGroup({ onInputChange, informationSection, isError, errorMessage }: InputGroupType) {
+function InputGroup({ onInputChange, informationSection, isError, errorMessage, onBlur, onFocus }: InputGroupType) {
   const getTypeTable = {
     number: CARD_NUMBER,
     period: CARD_PERIOD,
@@ -140,6 +142,8 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
                   focusColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#000',
                 })}
                 onClick={() => handleClicked(index)}
+                onBlur={onBlur}
+                onFocus={onFocus}
               />
             );
           })}

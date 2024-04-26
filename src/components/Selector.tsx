@@ -12,7 +12,6 @@ const selectorContainerStyle = css({
 const selectorBoxStyle = (borderColor: string) =>
   css({
     display: 'flex',
-    // flexDirection: 'column',
     width: '100%',
     height: '31px',
     border: `1px solid ${borderColor}`,
