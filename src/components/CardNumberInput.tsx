@@ -4,7 +4,6 @@ import FieldTitle from './FieldTitle';
 import React, {
   Dispatch,
   SetStateAction,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -12,7 +11,7 @@ import React, {
 import Validation from '../domain/InputValidation';
 import InputField from './InputField';
 import { CardNumbers } from '../types/card';
-import { ShowComponents } from '../types/showCompents';
+import { ShowComponents } from '../types/showComponents';
 
 interface Props {
   cardNumbers: CardNumbers;
@@ -92,22 +91,20 @@ export default function CardNumberInput({
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string,
-    index: number,
-    maxLength: number
+    index: number
   ) => {
     try {
-      Validation[info]?.(e.target.value, maxLength);
+      Validation[info]?.(e.target.value);
       handleUpdateErrorMessages(index, '', false);
       handleUpdateInput(index, e.target.value);
+      const nextIndex = index + 1;
+      if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
+        inputRefs.current[nextIndex].current?.focus();
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateErrorMessages(index, error.message, true);
       }
-    }
-
-    const nextIndex = index + 1;
-    if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
-      inputRefs.current[nextIndex].current?.focus();
     }
   };
 
@@ -131,11 +128,13 @@ export default function CardNumberInput({
           <Input
             key={index}
             type='text'
-            value = {cardNumbers[`cardNumber${index + 1}` as keyof CardNumbers].value}
+            value={
+              cardNumbers[`cardNumber${index + 1}` as keyof CardNumbers].value
+            }
             maxLength={4}
             placeholder='1234'
             isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, 'cardNumber', index, 4)}
+            onChange={(e) => handleInputChange(e, 'cardNumber', index)}
             inputRef={inputRef}
           />
         ))}

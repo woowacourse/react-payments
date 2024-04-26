@@ -11,7 +11,7 @@ import React, {
 import Validation from '../domain/InputValidation';
 import InputField from './InputField';
 import { ExpirationDate } from '../types/card';
-import { ShowComponents } from '../types/showCompents';
+import { ShowComponents } from '../types/showComponents';
 
 interface Props {
   expirationDate: ExpirationDate;
@@ -94,11 +94,10 @@ export default function ExpirationDateInput({
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string,
-    index: number,
-    maxLength: number
+    index: number
   ) => {
     try {
-      Validation[info]?.(e.target.value, maxLength);
+      Validation[info]?.(e.target.value);
       handleUpdateErrorMessages(index, '', false);
       handleUpdateInput(index, e.target.value);
     } catch (error) {
@@ -132,10 +131,10 @@ export default function ExpirationDateInput({
             key={index}
             type='string'
             maxLength={2}
-            value={expirationDate[date[index]as keyof ExpirationDate].value }
+            value={expirationDate[date[index] as keyof ExpirationDate].value}
             placeholder={datePlaceHolder[index]}
             isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, date[index], index, 2)}
+            onChange={(e) => handleInputChange(e, date[index], index)}
             inputRef={inputRef}
           />
         ))}

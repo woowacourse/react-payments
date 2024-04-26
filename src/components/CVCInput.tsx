@@ -11,7 +11,7 @@ import React, {
 import Validation from '../domain/InputValidation';
 import InputField from './InputField';
 import { CVC } from '../types/card';
-import { ShowComponents } from '../types/showCompents';
+import { ShowComponents } from '../types/showComponents';
 
 interface Props {
   CVC: CVC;
@@ -56,7 +56,7 @@ export default function CVCInput({
     }
   }, [CVC, handleShowComponent]);
 
-  const handleUpdateInput = (index: number, value: string) => {
+  const handleUpdateInput = (value: string) => {
     const cardKey = 'CVC' as keyof CVC;
     handleInput((prevState: CVC) => {
       return {
@@ -70,7 +70,6 @@ export default function CVCInput({
   };
 
   const handleUpdateErrorMessages = (
-    index: number,
     errorMessage: string,
     isError: boolean
   ) => {
@@ -89,22 +88,20 @@ export default function CVCInput({
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    info: string,
-    index: number,
-    maxLength: number
+    info: string
   ) => {
     try {
-      Validation[info]?.(e.target.value, maxLength);
-      handleUpdateErrorMessages(index, '', false);
-      handleUpdateInput(index, e.target.value);
+      Validation[info]?.(e.target.value);
+      handleUpdateErrorMessages('', false);
+      handleUpdateInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(index, error.message, true);
+        handleUpdateErrorMessages(error.message, true);
       }
     }
   };
 
-  const checkInputError = (index: number) => {
+  const checkInputError = () => {
     const cardKey = 'CVC' as keyof CVC;
     return CVC[cardKey].isError;
   };
@@ -122,10 +119,10 @@ export default function CVCInput({
             key={index}
             type='string'
             maxLength={3}
-            value = {CVC[`CVC` as keyof CVC].value}
+            value={CVC[`CVC` as keyof CVC].value}
             placeholder={'123'}
-            isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, 'CVC', index, 3)}
+            isError={checkInputError()}
+            onChange={(e) => handleInputChange(e, 'CVC')}
             inputRef={inputRef}
           />
         ))}

@@ -11,7 +11,7 @@ import React, {
 import Validation from '../domain/InputValidation';
 import InputField from './InputField';
 import { UserName } from '../types/card';
-import { ShowComponents } from '../types/showCompents';
+import { ShowComponents } from '../types/showComponents';
 
 interface Props {
   userName: UserName;
@@ -58,7 +58,7 @@ export default function UserNameInput({
   //   }
   // }, [userName, handleShowComponent]);
 
-  const handleUpdateInput = (index: number, value: string) => {
+  const handleUpdateInput = (value: string) => {
     const cardKey = 'userName' as keyof UserName;
     handleInput((prevState: UserName) => {
       return {
@@ -72,7 +72,6 @@ export default function UserNameInput({
   };
 
   const handleUpdateErrorMessages = (
-    index: number,
     errorMessage: string,
     isError: boolean
   ) => {
@@ -92,16 +91,14 @@ export default function UserNameInput({
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string,
-    index: number,
-    maxLength: number
   ) => {
     try {
-      Validation[info]?.(e.target.value, maxLength);
-      handleUpdateErrorMessages(index, '', false);
-      handleUpdateInput(index, e.target.value);
+      Validation[info]?.(e.target.value);
+      handleUpdateErrorMessages('', false);
+      handleUpdateInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(index, error.message, true);
+        handleUpdateErrorMessages(error.message, true);
       }
     }
   };
@@ -126,7 +123,7 @@ export default function UserNameInput({
     }
   };
 
-  const checkInputError = (index: number) => {
+  const checkInputError = () => {
     const cardKey = 'userName' as keyof UserName;
     return userName[cardKey].isError;
   };
@@ -146,8 +143,8 @@ export default function UserNameInput({
             maxLength={30}
             value={userName['userName' as keyof UserName].value }
             placeholder={'JOHN DOE'}
-            isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, 'userName', index, 30)}
+            isError={checkInputError()}
+            onChange={(e) => handleInputChange(e, 'userName')}
             onKeyDown={(e) => handleKeyDown(e)}
             inputRef={inputRef}
           />

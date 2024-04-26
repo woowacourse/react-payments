@@ -11,7 +11,7 @@ import React, {
 import Validation from '../domain/InputValidation';
 import InputField from './InputField';
 import { Password } from '../types/card';
-import { ShowComponents } from '../types/showCompents';
+import { ShowComponents } from '../types/showComponents';
 
 interface Props {
   password: Password;
@@ -56,7 +56,7 @@ export default function PasswordInput({
     }
   }, [password, handleShowComponent]);
 
-  const handleUpdateInput = (index: number, value: string) => {
+  const handleUpdateInput = (value: string) => {
     const cardKey = 'password' as keyof Password;
     handleInput((prevState: Password) => {
       return {
@@ -70,7 +70,6 @@ export default function PasswordInput({
   };
 
   const handleUpdateErrorMessages = (
-    index: number,
     errorMessage: string,
     isError: boolean
   ) => {
@@ -90,21 +89,19 @@ export default function PasswordInput({
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string,
-    index: number,
-    maxLength: number
   ) => {
     try {
-      Validation[info]?.(e.target.value, maxLength);
-      handleUpdateErrorMessages(index, '', false);
-      handleUpdateInput(index, e.target.value);
+      Validation[info]?.(e.target.value);
+      handleUpdateErrorMessages('', false);
+      handleUpdateInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(index, error.message, true);
+        handleUpdateErrorMessages(error.message, true);
       }
     }
   };
 
-  const checkInputError = (index: number) => {
+  const checkInputError = () => {
     const cardKey = 'password' as keyof Password;
     return password[cardKey].isError;
   };
@@ -127,8 +124,8 @@ export default function PasswordInput({
             maxLength={2}
             value={password['password' as keyof Password].value }
             placeholder={'**'}
-            isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, 'password', index, 3)}
+            isError={checkInputError()}
+            onChange={(e) => handleInputChange(e, 'password')}
             inputRef={inputRef}
           />
         ))}
