@@ -9,6 +9,10 @@ const ValidatorCondition = {
     return value.length > digit;
   },
 
+  checkEqualLength(value: string, digit: number) {
+    return value.length === digit;
+  },
+
   checkIsDigit(value: string) {
     return /^\d* ?\d*$/.test(value);
   },
@@ -96,6 +100,15 @@ const Validator = {
 
     if (CARD_INPUTBOX_NAME.authentication.password === name)
       return this.checkCreditCardPassword(value);
+
+    return VALIDATE_STATUS.notValid; // 예상치 못한 값이 들어오는 경우 유효하지 않는 값으로 처리
+  },
+
+  blurCreditCardInfo(value: string, name: string): Omit<ValidateStatus, "error"> {
+    const maxDigit = CARD_INPUT_LENGTH[name as keyof CreditCardSpecificValue];
+
+    if (name === CARD_INPUTBOX_NAME.owner.name) return VALIDATE_STATUS.valid;
+    if (ValidatorCondition.checkEqualLength(value, maxDigit)) return VALIDATE_STATUS.valid;
 
     return VALIDATE_STATUS.notValid; // 예상치 못한 값이 들어오는 경우 유효하지 않는 값으로 처리
   },

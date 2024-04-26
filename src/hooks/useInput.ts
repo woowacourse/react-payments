@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Validator from "../utils/Validator";
 import { CreditCardAllValues, CreditCardSpecificValue } from "../@types/CreditCard";
+import normalizeValue from "../utils/normalizeValue";
 
 const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);
@@ -30,7 +31,21 @@ const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
     setIsError(false);
   };
 
-  return [inputValue, handleChange, isError, isComplete] as const;
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    const newValue = normalizeValue(value, name);
+
+    const validateStatus = Validator.blurCreditCardInfo(newValue, name);
+    if (validateStatus === "notValid") return setIsError(true);
+
+    setInputValue((prevState) => ({
+      ...prevState,
+      [name]: newValue,
+    }));
+  };
+
+  return [inputValue, handleChange, handleBlur, isError, isComplete] as const;
 };
 
 export default useInput;
