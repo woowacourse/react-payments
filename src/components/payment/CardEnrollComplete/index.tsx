@@ -1,7 +1,10 @@
 import CompleteImg from "../../../static/Complete.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function CardEnrollComplete() {
+  const navigate = useNavigate();
+
   return (
     <CardEnrollCompleteWrapper>
       <CompleteContainer>
@@ -10,7 +13,9 @@ export default function CardEnrollComplete() {
           <div>5511로 시작하는</div>
           <div>BC카드가 등록되었어요.</div>
         </SuccessMessage>
-        <GoBackButton>확인</GoBackButton>
+        <GoBackButton onClick={() => navigate("/card-enroll-form")}>
+          확인
+        </GoBackButton>
       </CompleteContainer>
     </CardEnrollCompleteWrapper>
   );

@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-export interface FormSubmitButtonProps {
-  disabled: boolean;
+interface FormSubmitButtonProps {
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function FormSubmitButton({ disabled }: FormSubmitButtonProps) {
-  if (disabled) {
-    return;
-  }
-  return <SubmitButton>확인</SubmitButton>;
+export default function FormSubmitButton({ onClick }: FormSubmitButtonProps) {
+  return <SubmitButton onClick={onClick}>확인</SubmitButton>;
 }
 
 const SubmitButton = styled.button`

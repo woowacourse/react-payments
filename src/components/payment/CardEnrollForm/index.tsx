@@ -8,8 +8,11 @@ import CardPreview from "./CardPreview";
 import FormSubmitButton from "./FormSubmitButton";
 import styled from "styled-components";
 import useCardEnrollForm from "../../../hooks/useCardEnrollForm";
+import { useNavigate } from "react-router-dom";
 
 export default function CardEnrollForm() {
+  const navigate = useNavigate();
+
   const {
     cardInformation,
 
@@ -37,7 +40,9 @@ export default function CardEnrollForm() {
         <CardIssuerSelect {...cardIssuer} />
       </CardInformationContainer>
 
-      <FormSubmitButton disabled={!isReadyForSubmit} />
+      {isReadyForSubmit && (
+        <FormSubmitButton onClick={() => navigate("/card-enroll-complete")} />
+      )}
     </CardEnrollFormContainer>
   );
 }
