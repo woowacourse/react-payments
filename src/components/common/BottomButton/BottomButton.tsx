@@ -1,13 +1,21 @@
+import { ButtonHTMLAttributes } from 'react';
 import styles from './BottomButton.module.css';
+import { ButtonType } from '../../../types/buttonType';
 
-type BottomButton = {
+interface BottomButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   name: string;
-  type?: 'confirm';
-};
+  buttonType?: ButtonType;
+}
 
 // TODO: 컬러는 css로 분리
-const BottomButton = ({ name, type = 'confirm' }: BottomButton) => {
-  return <button className={`${styles['bottom-button']} ${styles[type]}`}>{name}</button>;
+const BottomButton = (props: BottomButton) => {
+  const { name, buttonType = 'confirm', ...rest } = props;
+
+  return (
+    <button {...rest} className={`${styles['bottom-button']} ${styles[buttonType]}`}>
+      {name}
+    </button>
+  );
 };
 
 export default BottomButton;
