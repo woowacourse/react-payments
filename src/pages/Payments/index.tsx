@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import CreditCard from "../../components/creditCard";
+import CreditCardFront from "../../components/creditCard/front";
 import CreditCardForm from "../../components/creditCardForm";
 import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
@@ -20,6 +20,8 @@ import useSelect from "../../hooks/useSelect";
 import InputCVC from "../../components/input/InputCVC";
 import InputPassword from "../../components/input/InputPassword";
 import useCurrentIndex from "../../hooks/useCurrentIndex";
+import { useState } from "react";
+import CreditCardBack from "../../components/creditCard/back";
 
 interface CreditCardForms {
   title: string;
@@ -51,6 +53,8 @@ const Payments = () => {
     useInput<AuthenticationValue>({
       password: SIGN.empty,
     });
+
+  const [isCvcFocus, setIsCvcFocus] = useState(false);
 
   const currentIndex = useCurrentIndex(
     cardNumberIsComplete,
@@ -119,7 +123,13 @@ const Payments = () => {
       description: "",
       inputError: infoError,
       childComponent: (
-        <InputCVC inputValue={info.cvc} handleChange={setInfo} inputError={infoError} />
+        <InputCVC
+          inputValue={info.cvc}
+          handleChange={setInfo}
+          inputError={infoError}
+          onFocus={() => setIsCvcFocus(true)}
+          onBlur={() => setIsCvcFocus(false)}
+        />
       ),
     },
     {
@@ -138,17 +148,21 @@ const Payments = () => {
 
   return (
     <PaymentsContainer>
-      <CreditCard
-        creditCardNumber={[
-          cardNumber.firstValue,
-          cardNumber.secondValue,
-          cardNumber.thirdValue,
-          cardNumber.fourthValue,
-        ]}
-        expirationPeriod={formatExpirationPeriod()}
-        ownerName={owner.name}
-        selectedCard={selected}
-      />
+      {!isCvcFocus ? (
+        <CreditCardFront
+          creditCardNumber={[
+            cardNumber.firstValue,
+            cardNumber.secondValue,
+            cardNumber.thirdValue,
+            cardNumber.fourthValue,
+          ]}
+          expirationPeriod={formatExpirationPeriod()}
+          ownerName={owner.name}
+          selectedCard={selected}
+        />
+      ) : (
+        <CreditCardBack cvcNumber={info.cvc} />
+      )}
 
       <InputFormContainer>
         {creditCardForms.map((formData, idx) => {
@@ -159,6 +173,7 @@ const Payments = () => {
               title={formData.title}
               description={formData.description}
               inputError={formData.inputError}
+              key={formData.title}
             >
               {formData.childComponent}
             </CreditCardForm>

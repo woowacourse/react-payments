@@ -9,6 +9,8 @@ interface InputBoxProps {
   id?: string;
   name?: string;
   type?: string;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 const sizeWidthMap = {

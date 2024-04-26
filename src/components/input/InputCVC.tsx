@@ -7,9 +7,11 @@ interface InputCvcProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputError: boolean;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
-const InputCvc = ({ inputValue, handleChange, inputError }: InputCvcProps) => {
+const InputCvc = ({ inputValue, handleChange, inputError, onFocus, onBlur }: InputCvcProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="cvcNumber">{CARD_FORM_MESSAGE.cvc}</InputLabel>
@@ -21,6 +23,8 @@ const InputCvc = ({ inputValue, handleChange, inputError }: InputCvcProps) => {
         id="cvcNumber"
         name={CARD_INPUTBOX_NAME.info.cvc}
         isError={inputError}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </InputContainer>
   );
