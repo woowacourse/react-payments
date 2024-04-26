@@ -38,8 +38,9 @@ export default function App() {
   const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
   const { PINValid, handleChangePIN } = useChangePIN();
 
-  const [showCardBackside, setShowCardBackside] = useState(false);
   const [currentInputStep, setCurrentInputStep] = useState(CardInputStep.CardNumbers);
+  const [showCardBackside, setShowCardBackside] = useState(false);
+  const [allInputsCompleted, setAllInputsCompleted] = useState(false);
 
   const handleShowCardBackside = (isCVCFocus: boolean) => {
     setShowCardBackside(isCVCFocus);
@@ -59,6 +60,8 @@ export default function App() {
     if (lastCompletedStep === currentInputStep) {
       setCurrentInputStep(lastCompletedStep + 1);
     }
+
+    setAllInputsCompleted(Object.values(inputValidationResults).every((result) => result === true));
   }, [
     currentInputStep,
     cardNumbersValid.isCompleted,
@@ -110,6 +113,8 @@ export default function App() {
         {currentInputStep >= CardInputStep.CardNumbers && (
           <CardNumberInput isCardNumbersValid={cardNumbersValid} onChangeCardNumbers={handleChangeCardNumbers} />
         )}
+
+        {allInputsCompleted && <S.CardFormSubmitButton type="submit">확인</S.CardFormSubmitButton>}
       </S.CardForm>
     </S.AppLayout>
   );
