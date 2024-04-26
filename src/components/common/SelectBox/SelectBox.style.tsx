@@ -13,9 +13,9 @@ export const SelectButton = styled.button<{ $isValid: boolean; $isOpened: boolea
   height: 32px;
   padding: 8px;
   border-radius: 2px;
-  border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-200)' : 'var(--error)')};
+  border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-300)' : 'var(--error)')};
   font-size: var(--font-size-md);
-  color: ${(props) => (props.$isSelected ? 'var(--grey-600)' : 'var(--grey-200)')};
+  color: ${(props) => (props.$isSelected ? 'var(--grey-700)' : 'var(--grey-300)')};
 
   &:hover {
     cursor: pointer;
@@ -23,7 +23,7 @@ export const SelectButton = styled.button<{ $isValid: boolean; $isOpened: boolea
 
   &:hover,
   &:focus {
-    border-color: ${(props) => (props.$isValid ? 'var(--grey-600)' : 'var(--error)')};
+    border-color: ${(props) => (props.$isValid ? 'var(--grey-700)' : 'var(--error)')};
   }
 
   &::after {
@@ -47,21 +47,21 @@ export const SelectOptionBox = styled.ul`
   width: 100%;
 
   border-radius: 2px;
-  border: 1px solid var(--grey-200);
+  border: 1px solid var(--grey-300);
   background: var(--grey-100);
 `;
 
 export const SelectOption = styled.li<{ $isSelected: boolean }>`
   font-weight: 400;
   font-size: var(--font-size-md);
-  color: var(--grey-400);
+  color: var(--grey-500);
   display: block;
   padding: 9px 11px;
-  background: ${(props) => (props.$isSelected ? 'var(--selectbox-hover-bg)' : 'var(--grey-100)')};
+  background: ${(props) => (props.$isSelected ? 'var(--grey-200)' : 'var(--grey-100)')};
 
   &:hover,
   &:focus {
     cursor: pointer;
-    background: var(--selectbox-hover-bg);
+    background: var(--grey-200);
   }
 `;

@@ -1,10 +1,11 @@
 :root {
   --grey-100: #ffffff;
-  --grey-200: #acacac;
-  --grey-300: #8b95a1;
-  --grey-400: #4f4f4f;
-  --grey-500: #333333;
-  --grey-600: #000000;
+  --grey-200: #f3f3f3;
+  --grey-300: #acacac;
+  --grey-400: #8b95a1;
+  --grey-500: #4f4f4f;
+  --grey-600: #333333;
+  --grey-700: #000000;
 
   --card-chip: #ddcd78;
   --card-chip-border: #ddcd781a;
@@ -12,7 +13,6 @@
   --card-backside-bg: #00000040;
   --card-cvc-bg: #cbba64;
 
-  --selectbox-hover-bg: #f3f3f3;
   --error: #ff3d3d;
 
   --font-size-xs: 9.5px;

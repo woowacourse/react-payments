@@ -5,11 +5,11 @@ export const Input = styled.input<{ $isValid: boolean }>`
   height: 32px;
   padding: 8px;
   border-radius: 2px;
-  border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-200)' : 'var(--error)')};
+  border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-300)' : 'var(--error)')};
   font-size: var(--font-size-md);
 
   &:hover,
   &:focus {
-    border-color: ${(props) => (props.$isValid ? 'var(--grey-600)' : 'var(--error)')};
+    border-color: ${(props) => (props.$isValid ? 'var(--grey-700)' : 'var(--error)')};
   }
 `;

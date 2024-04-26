@@ -8,7 +8,7 @@ export const CardFrontside = styled.div<{ $brand: cardBrandsType }>`
   border-radius: 4px;
   padding: 8px 12px;
   background-color: ${(props) => {
-    if (!props.$brand) return 'var(--grey-500)';
+    if (!props.$brand) return 'var(--grey-600)';
     return CARD_BRANDS[props.$brand].color;
   }};
   box-shadow: 3px 3px 5px 0px var(--card-shadow);
