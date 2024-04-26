@@ -89,6 +89,7 @@ const PasswordFormSection = ({
         <InputFieldContainer className="input-field-container">
           <PaymentsInputField
             className="password-form-section"
+            placeholder="••"
             maxLength={OPTION.passwordMaxLength}
             value={inputState[0].value}
             hasError={inputState[0].hasError}
