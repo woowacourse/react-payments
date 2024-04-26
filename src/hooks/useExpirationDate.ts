@@ -1,4 +1,5 @@
 import { EXPIRATION_PERIOD } from '../constants/cardSection';
+import { MAX_LENGTH } from '../constants/rules';
 import validate from '../utils/validate';
 import useInput from './useInput';
 import { ValidationType } from './useValidations';
@@ -27,8 +28,9 @@ const monthValidations: ValidationType[] = [
 
 const yearValidations: ValidationType[] = [
   {
-    isError: (state: string) => !validate.isSatisfiedLength(2, state.length),
-    errorMessage: '2자리 숫자를 입력해주세요.',
+    isError: (state: string) =>
+      !validate.isSatisfiedLength(MAX_LENGTH.expirationDate, state.length),
+    errorMessage: `${MAX_LENGTH.expirationDate}자리 숫자를 입력해주세요.`,
   },
 ];
 

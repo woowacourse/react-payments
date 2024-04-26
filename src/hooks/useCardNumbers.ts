@@ -5,6 +5,7 @@ import { ValidationType } from './useValidations';
 
 import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
+import { MAX_LENGTH } from '../constants/rules';
 
 // TODO: 상수화
 const inputLimitValidation: ValidationType = {
@@ -14,8 +15,8 @@ const inputLimitValidation: ValidationType = {
 
 const onBlurValidations: ValidationType[] = [
   {
-    isError: (value: string) => !validate.isSatisfiedLength(4, value.length),
-    errorMessage: '4자리 숫자를 입력해주세요.',
+    isError: (value: string) => !validate.isSatisfiedLength(MAX_LENGTH.cardNumbers, value.length),
+    errorMessage: `${MAX_LENGTH.cardNumbers}자리 숫자를 입력해주세요.`,
   },
 ];
 

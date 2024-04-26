@@ -4,6 +4,7 @@ import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
   month: UseInputReturn<HTMLInputElement>;
@@ -12,6 +13,18 @@ interface Props {
 }
 
 export default function ExpirationDateInput({ month, year, setNextContentDisplay }: Props) {
+  const goYearStep = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === MAX_LENGTH.expirationDate) {
+      year.ref.current?.focus();
+    }
+  };
+
+  const goNextStep = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 2) {
+      setNextContentDisplay(true);
+    }
+  };
+
   return (
     <S.Wrapper>
       <InputSection
@@ -27,12 +40,10 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
           placeholder={'MM'}
           type="text"
           value={month.value}
-          maxLength={2}
+          maxLength={MAX_LENGTH.expirationDate}
           onChange={(e) => {
             month.onChangeHandler(e);
-            if (e.target.value.length === 2) {
-              year.ref.current?.focus();
-            }
+            goYearStep(e);
           }}
           onBlur={month.onBlurHandler}
           isError={month.isError}
@@ -43,13 +54,11 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
           id={'year'}
           placeholder={'YY'}
           type="text"
-          maxLength={2}
+          maxLength={MAX_LENGTH.expirationDate}
           value={year.value}
           onChange={(e) => {
             year.onChangeHandler(e);
-            if (e.target.value.length === 2) {
-              setNextContentDisplay(true);
-            }
+            goNextStep(e);
           }}
           onBlur={year.onBlurHandler}
           isError={year.isError}

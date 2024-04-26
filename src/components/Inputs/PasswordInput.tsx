@@ -4,6 +4,7 @@ import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
   password: UseInputReturn<HTMLInputElement>;
@@ -18,7 +19,7 @@ export default function PasswordInput({ password }: Props) {
           isAutoFocus={true}
           ref={password.ref}
           id="password"
-          maxLength={2}
+          maxLength={MAX_LENGTH.password}
           onChange={password.onChangeHandler}
           onBlur={password.onBlurHandler}
           isError={password.isError}

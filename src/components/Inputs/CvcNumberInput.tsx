@@ -4,6 +4,7 @@ import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
   cvc: UseInputReturn<HTMLInputElement>;
@@ -12,6 +13,12 @@ interface Props {
 }
 
 export default function CvcNumberInput({ cvc, setNextContentDisplay, setIsFlip }: Props) {
+  const goNextStep = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === MAX_LENGTH.cvcNumber) {
+      setNextContentDisplay(true);
+    }
+  };
+
   return (
     <S.Wrapper>
       <InputSection title={CVC_NUMBER.title} inputTitle={CVC_NUMBER.inputTitle}>
@@ -20,12 +27,10 @@ export default function CvcNumberInput({ cvc, setNextContentDisplay, setIsFlip }
           isAutoFocus={true}
           ref={cvc.ref}
           id="cvc"
-          maxLength={3}
+          maxLength={MAX_LENGTH.cvcNumber}
           onChange={(e) => {
             cvc.onChangeHandler(e);
-            if (e.target.value.length === 3) {
-              setNextContentDisplay(true);
-            }
+            goNextStep(e);
           }}
           onBlur={(e) => {
             cvc.onBlurHandler(e);

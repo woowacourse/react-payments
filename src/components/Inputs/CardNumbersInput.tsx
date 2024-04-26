@@ -5,6 +5,7 @@ import InputSection from '../InputSection';
 import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
 import Input from '../composables/Input';
 import { UseInputReturn } from '../../hooks/useInput';
+import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
   cardNumbersArray: UseInputReturn<HTMLInputElement>[];
@@ -12,6 +13,16 @@ interface Props {
 }
 
 export default function CardNumbersInput({ cardNumbersArray, setNextContentDisplay }: Props) {
+  const goNextStep = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    if (e.target.value.length === MAX_LENGTH.cardNumbers) {
+      if (cardNumbersArray.length - 1 !== index) {
+        cardNumbersArray[index + 1].ref.current?.focus();
+      } else {
+        setNextContentDisplay(true);
+      }
+    }
+  };
+
   return (
     <S.Wrapper>
       <InputSection
@@ -34,17 +45,11 @@ export default function CardNumbersInput({ cardNumbersArray, setNextContentDispl
                 id={'cardNumbers' + section}
                 placeholder="1234"
                 type="text"
-                maxLength={4}
+                maxLength={MAX_LENGTH.cardNumbers}
                 value={value}
                 onChange={(e) => {
                   onChangeHandler(e);
-                  if (e.target.value.length === 4) {
-                    if (cardNumbersArray.length - 1 !== index) {
-                      cardNumbersArray[index + 1].ref.current?.focus();
-                    } else {
-                      setNextContentDisplay(true);
-                    }
-                  }
+                  goNextStep(e, index);
                 }}
                 onBlur={onBlurHandler}
                 isError={isError}

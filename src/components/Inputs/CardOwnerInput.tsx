@@ -4,6 +4,7 @@ import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
   name: UseInputReturn<HTMLInputElement>;
@@ -11,6 +12,12 @@ interface Props {
 }
 
 export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
+  const goNextStep = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setNextContentDisplay(true);
+    }
+  };
+
   return (
     <S.Wrapper>
       <InputSection title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
@@ -19,13 +26,9 @@ export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
           isAutoFocus={true}
           ref={name.ref}
           id="name"
-          maxLength={30}
+          maxLength={MAX_LENGTH.ownerName}
           onChange={name.onChangeHandler}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              setNextContentDisplay(true);
-            }
-          }}
+          onKeyDown={goNextStep}
           onBlur={name.onBlurHandler}
           isError={name.isError}
           placeholder="JOHN DOE"

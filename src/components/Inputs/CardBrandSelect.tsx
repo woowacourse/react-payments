@@ -10,6 +10,12 @@ interface Props {
 }
 
 export default function CardBrandSelect({ cardCompany, setNextContentDisplay }: Props) {
+  const goNextStep = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value !== '') {
+      setNextContentDisplay(true);
+    }
+  };
+
   return (
     <S.Wrapper>
       <InputSection title={CARD_COMPANY.title} description={CARD_COMPANY.description}>
@@ -21,9 +27,7 @@ export default function CardBrandSelect({ cardCompany, setNextContentDisplay }: 
           isError={cardCompany.isError}
           onChange={(e) => {
             cardCompany.onChangeHandler(e);
-            if (e.target.value !== '') {
-              setNextContentDisplay(true);
-            }
+            goNextStep(e);
           }}
           onBlur={cardCompany.onBlurHandler}
         />

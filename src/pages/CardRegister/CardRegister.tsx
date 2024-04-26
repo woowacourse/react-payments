@@ -14,6 +14,7 @@ import ExpirationDateInput from '../../components/Inputs/ExpirationDateInput';
 import CardOwnerInput from '../../components/Inputs/CardOwnerInput';
 import CvcNumberInput from '../../components/Inputs/CvcNumberInput';
 import PasswordInput from '../../components/Inputs/PasswordInput';
+import { MAX_LENGTH } from '../../constants/rules';
 
 export type CardNumberState = {
   value: string;
@@ -44,8 +45,8 @@ export default function CardRegister() {
     },
     [
       {
-        isError: (state: string) => !validate.isSatisfiedLength(3, state.length),
-        errorMessage: '3자리 숫자를 입력해주세요.',
+        isError: (state: string) => !validate.isSatisfiedLength(MAX_LENGTH.cvcNumber, state.length),
+        errorMessage: `${MAX_LENGTH.cvcNumber}자리 숫자를 입력해주세요.`,
       },
     ],
   );
@@ -57,8 +58,8 @@ export default function CardRegister() {
     },
     [
       {
-        isError: (state: string) => !validate.isSatisfiedLength(2, state.length),
-        errorMessage: '2자리 숫자를 입력해주세요.',
+        isError: (state: string) => !validate.isSatisfiedLength(MAX_LENGTH.password, state.length),
+        errorMessage: `${MAX_LENGTH.password}자리 숫자를 입력해주세요.`,
       },
     ],
   );
