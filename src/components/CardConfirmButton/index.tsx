@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 interface CardConfirmButtonProps {
+  content: string;
   onClick: () => void;
 }
 
-const CardConfirmButton = ({ onClick }: CardConfirmButtonProps) => {
-  return <StyledButton onClick={onClick}>확인</StyledButton>;
+const CardConfirmButton = ({ content, onClick }: CardConfirmButtonProps) => {
+  return <StyledButton onClick={onClick}>{content}</StyledButton>;
 };
 
 const StyledButton = styled.button`
