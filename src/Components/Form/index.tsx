@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { useNavigate } from "react-router-dom";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { FormRenderOrderContext } from "../../routes/Payments";
 import SubmitButton from "../Button/SubmitButton";
@@ -19,10 +20,11 @@ import useIsCardInfoValid from "./useIsValid";
 const Form = () => {
   const renderOrder = useContextWrapper(FormRenderOrderContext)[0];
   const isValid = useIsCardInfoValid();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.firstNumbers.value);
+    navigate(`/landing_arrival/${e.target.firstNumbers.value}`);
   };
 
   return (
