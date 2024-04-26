@@ -89,7 +89,7 @@ export const INPUT_RULES = {
 };
 
 export const URL = {
-  defaultPage: '/react-payments/dist/',
-  submitPage: '/react-payments/dist/submit',
-  errorPage: '/react-payments/dist/error',
+  defaultPage: '/',
+  submitPage: '/submit',
+  errorPage: '/error',
 };
