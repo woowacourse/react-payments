@@ -1,17 +1,28 @@
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { CardInformationValueState } from "../../../hooks/useCardEnrollForm";
 import CompleteImg from "../../../static/Complete.png";
+import { cardIssuerMapper } from "../../../constants/cardIssuers";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 export default function CardEnrollComplete() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { cardInformation }: { cardInformation: CardInformationValueState } =
+    location.state;
 
   return (
     <CardEnrollCompleteWrapper>
       <CompleteContainer>
         <CheckmarkIcon src={CompleteImg} alt="complete-image"></CheckmarkIcon>
         <SuccessMessage>
-          <div>5511로 시작하는</div>
-          <div>BC카드가 등록되었어요.</div>
+          <div>{cardInformation.cardNumbers[0]}로 시작하는</div>
+          <div>
+            {cardInformation.cardIssuer &&
+              cardIssuerMapper[cardInformation.cardIssuer].text}
+            가 등록되었어요.
+          </div>
         </SuccessMessage>
         <GoBackButton onClick={() => navigate("/card-enroll-form")}>
           확인

@@ -41,7 +41,11 @@ export default function CardEnrollForm() {
       </CardInformationContainer>
 
       {isReadyForSubmit && (
-        <FormSubmitButton onClick={() => navigate("/card-enroll-complete")} />
+        <FormSubmitButton
+          onClick={() =>
+            navigate("/card-enroll-complete", { state: { cardInformation } })
+          }
+        />
       )}
     </CardEnrollFormContainer>
   );
