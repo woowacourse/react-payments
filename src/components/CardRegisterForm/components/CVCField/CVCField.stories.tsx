@@ -5,7 +5,7 @@ import { validateIsNumber, validateIsValidLength } from "@/utils/validation";
 import { VALID_LENGTH } from "@/constants/condition";
 
 const meta = {
-  title: "CVCField",
+  title: "CardRegisterForm/CVCField",
   component: CVCField,
 } satisfies Meta<typeof CVCField>;
 

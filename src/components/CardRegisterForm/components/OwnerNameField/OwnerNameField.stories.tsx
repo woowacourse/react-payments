@@ -4,11 +4,11 @@ import useInput from "@/hooks/useInput";
 import {
   validateDoubleSpace,
   validateEnterRequired,
-  validateOwnerName,
+  validateIsEnglish,
 } from "@/utils/validation";
 
 const meta = {
-  title: "OwnerNameField",
+  title: "CardRegisterForm/OwnerNameField",
   component: OwnerNameField,
 } satisfies Meta<typeof OwnerNameField>;
 
@@ -18,7 +18,7 @@ const OwnerNameFieldWithHook = () => {
   const ownerNameState = useInput({
     initialValue: "",
     validates: [
-      (value: string) => validateOwnerName(value),
+      (value: string) => validateIsEnglish(value),
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],

@@ -6,16 +6,16 @@ interface Props {
   errorMessages: (string | null)[];
   children: ReactNode;
   label?: string;
-  showErrors?: boolean;
+  // showErrors?: boolean;
 }
 
-const InputField = ({ label, errorMessages, showErrors, children }: Props) => {
+const InputField = ({ label, errorMessages, children }: Props) => {
   return (
     <S.InputFieldWrapper>
       {label && <S.Label>{label}</S.Label>}
       <S.InputsWrapper>{children}</S.InputsWrapper>
       <S.ErrorMessageWrapper>
-        {showErrors && errorMessages.find((e) => e)}
+        {errorMessages.find((e) => e)}
       </S.ErrorMessageWrapper>
     </S.InputFieldWrapper>
   );

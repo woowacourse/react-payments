@@ -39,7 +39,6 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
             ? ErrorStatus.NAME_SHOULD_BE_CAPITAL
             : null,
         ]}
-        showErrors={true}
       >
         <Input
           autoFocus={true}
@@ -48,12 +47,9 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
-            changeValueToUpperCase(e);
             onChange(e);
-          }}
-          onBlur={() => {
-            onEnterCompleted();
+            changeValueToUpperCase(e);
+            sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
           }}
           onKeyDown={onEnterCompleted}
         />

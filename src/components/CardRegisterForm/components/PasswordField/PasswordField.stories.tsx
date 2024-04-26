@@ -5,7 +5,7 @@ import { VALID_LENGTH } from "@/constants/condition";
 import PasswordField from "./PasswordField";
 
 const meta = {
-  title: "PasswordField",
+  title: "CardRegisterForm/PasswordField",
   component: PasswordField,
 } satisfies Meta<typeof PasswordField>;
 

@@ -4,7 +4,7 @@ import useInput from "@/hooks/useInput";
 import { CardType } from "@/constants/cardType";
 
 const meta = {
-  title: "CardTypeSelectField",
+  title: "CardRegisterForm/CardTypeSelectField",
   component: CardTypeSelectField,
 } satisfies Meta<typeof CardTypeSelectField>;
 

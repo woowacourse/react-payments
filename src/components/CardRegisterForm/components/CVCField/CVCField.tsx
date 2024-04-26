@@ -4,7 +4,6 @@ import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHe
 import { MESSAGE } from "@/constants/message";
 import S from "../../style";
 import useInput from "@/hooks/useInput";
-import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
 import { sliceOverMaxLength } from "@/utils/view";
@@ -15,16 +14,11 @@ interface Props {
 
 const CVCField = ({ CVCNumbersState }: Props) => {
   const { onChange, error, isError } = CVCNumbersState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.CVC} />
-      <InputField
-        label={MESSAGE.INPUT_LABEL.CVC}
-        errorMessages={error}
-        showErrors={showErrors}
-      >
+      <InputField label={MESSAGE.INPUT_LABEL.CVC} errorMessages={error}>
         <Input
           autoFocus={true}
           type="number"
@@ -35,8 +29,6 @@ const CVCField = ({ CVCNumbersState }: Props) => {
             sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
             onChange(e);
           }}
-          onFocus={onFocusHideErrors}
-          onBlur={onBlurShowErrors}
           isError={isError}
         />
       </InputField>

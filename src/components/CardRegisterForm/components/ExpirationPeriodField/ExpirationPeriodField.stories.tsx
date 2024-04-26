@@ -7,7 +7,7 @@ import useInputs from "@/hooks/useInputs";
 import { VALID_LENGTH } from "@/constants/condition";
 
 const meta = {
-  title: "ExpirationPeriodField",
+  title: "CardRegisterForm/ExpirationPeriodField",
   component: ExpirationPeriodField,
 } satisfies Meta<typeof ExpirationPeriodField>;
 

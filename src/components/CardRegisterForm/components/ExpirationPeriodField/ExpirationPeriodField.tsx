@@ -6,7 +6,6 @@ import Input from "@/components/_common/Input/Input";
 import { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
-import useShowError from "@/hooks/useShowError";
 import useInputRefs from "@/hooks/useInputRefs";
 import { sliceOverMaxLength } from "@/utils/view";
 
@@ -28,7 +27,6 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
 
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors } = expirationPeriodState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
@@ -42,7 +40,6 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
       />
       <InputField
-        showErrors={showErrors}
         label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
         errorMessages={Object.values(errors)}
       >
@@ -60,8 +57,6 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
                 sliceOverMaxLength(e, VALID_LENGTH.EXPIRATION_PERIOD);
                 onFocusNextInput(e, index);
               }}
-              onBlur={onBlurShowErrors}
-              onFocus={onFocusHideErrors}
               isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}
             />
           ))}

@@ -4,10 +4,10 @@ import { VALID_LENGTH } from "@/constants/condition";
 import {
   validateDoubleSpace,
   validateEnterRequired,
+  validateIsEnglish,
   validateIsNumber,
   validateIsValidLength,
   validateMonth,
-  validateOwnerName,
 } from "@/utils/validation";
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "./useInput";
@@ -41,7 +41,7 @@ const useCardRegister = () => {
   const ownerNameState = useInput({
     initialValue: "",
     validates: [
-      (value: string) => validateOwnerName(value),
+      (value: string) => validateIsEnglish(value),
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],

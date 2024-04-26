@@ -4,7 +4,6 @@ import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
 import useInput from "@/hooks/useInput";
-import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
 import { sliceOverMaxLength } from "@/utils/view";
@@ -14,16 +13,10 @@ interface Props {
 
 const PasswordField = ({ passwordState }: Props) => {
   const { onChange, error, isError } = passwordState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
-
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.PASSWORD} />
-      <InputField
-        label={MESSAGE.INPUT_LABEL.PASSWORD}
-        errorMessages={error}
-        showErrors={showErrors}
-      >
+      <InputField label={MESSAGE.INPUT_LABEL.PASSWORD} errorMessages={error}>
         <Input
           autoFocus={true}
           type="password"
@@ -33,8 +26,6 @@ const PasswordField = ({ passwordState }: Props) => {
             sliceOverMaxLength(e, VALID_LENGTH.PASSWORD);
             onChange(e);
           }}
-          onFocus={onFocusHideErrors}
-          onBlur={onBlurShowErrors}
           isError={isError}
         />
       </InputField>

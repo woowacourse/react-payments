@@ -12,7 +12,6 @@ export enum ErrorStatus {
   IS_NOT_NUMBER = "숫자로 입력해야 합니다.",
 }
 
-//TODO: 공통 적이지 않은 것이 유틸로 들어가도 되나?
 export const validateIsValidLength = (
   newValue: string,
   validLength: number
@@ -49,14 +48,6 @@ export const validateMonth = (month: number) => {
     return { type: ErrorStatus.INVALID_MONTH, isValid: false };
   }
   return { type: ErrorStatus.INVALID_MONTH, isValid: true };
-};
-
-export const validateOwnerName = (name: string) => {
-  const alphabetRegex = /^[a-zA-Z\s]*$/;
-  if (!alphabetRegex.test(name)) {
-    return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
-  }
-  return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
 };
 
 export const validateDoubleSpace = (name: string) => {
@@ -98,4 +89,12 @@ export const validateIsNumber = (value: string) => {
     return { type: ErrorStatus.IS_NOT_NUMBER, isValid: false };
   }
   return { type: ErrorStatus.IS_NOT_NUMBER, isValid: true };
+};
+
+export const validateIsEnglish = (name: string) => {
+  const alphabetRegex = REGEX.CAPITAL_LETTERS;
+  if (!alphabetRegex.test(name)) {
+    return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
+  }
+  return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
 };

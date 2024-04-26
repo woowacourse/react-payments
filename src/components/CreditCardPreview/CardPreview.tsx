@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardPreviewFront from "./CardPreviewFront";
 import CardPreviewBack from "./CardPreviewBack";
 import { CardType } from "@/constants/cardType";
@@ -32,6 +32,10 @@ const CardPreview = ({
   const onFlipCard = () => {
     setIsFront((prev) => !prev);
   };
+
+  useEffect(() => {
+    setIsFront(isFrontShow);
+  }, [isFrontShow]);
 
   return (
     <S.CardWrapper>

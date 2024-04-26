@@ -41,7 +41,6 @@ const CardRegisterPage = () => {
   ];
 
   const allPassed = stepPassedArr.every((isCompleted) => isCompleted === true);
-
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
@@ -51,7 +50,7 @@ const CardRegisterPage = () => {
           expirationDate={expirationPeriodState.values}
           ownerName={ownerNameState.value}
           CVCNumbers={CVCNumbersState.value}
-          isFrontShow={step === 5}
+          isFrontShow={step !== 5}
         />
         <CardRegisterForm
           {...cardRegister}
