@@ -1,8 +1,10 @@
-import { ErrorText, ErrorWrapper } from '../../../styles/common';
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
+
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
+
+import { ErrorText, ErrorWrapper } from '../../../styles/common';
 
 export interface ICvcInputContainerProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;

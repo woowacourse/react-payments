@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import CardPreview from '../components/CardPreview';
 import CardInfoForm from '../components/CardInfoForm';
+
 import useCardInfo from '../hooks/useCardInfo';
-import { useState } from 'react';
 
 const CardRegisterPage = () => {
   const { control, completionStatus } = useCardInfo();

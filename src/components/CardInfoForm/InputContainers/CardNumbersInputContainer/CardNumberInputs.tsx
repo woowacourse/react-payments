@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 import Input from '../../../common/Input';
+
 import useFocusOnInitialRender from '../../../../hooks/useFocusOnInitialRender';
-import getObjectKeys from '../../../../utils/getObjectKeys';
 import useRefs from '../../../../hooks/useRefs';
+import getObjectKeys from '../../../../utils/getObjectKeys';
 
 const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
 const INPUT_TYPE = {

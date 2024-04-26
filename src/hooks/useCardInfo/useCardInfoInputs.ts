@@ -1,3 +1,5 @@
+import useInput, { IInputControl } from '../useInput';
+import useInputs, { IInputsControl } from '../useInputs';
 import {
   validateCardNumber,
   validateCardholderName,
@@ -7,8 +9,6 @@ import {
   validatePassword,
   validateCardType,
 } from '../../validators';
-import useInput, { IInputControl } from '../useInput';
-import useInputs, { IInputsControl } from '../useInputs';
 
 export interface ICardInfoInputsControl {
   cardNumbers: IInputsControl;

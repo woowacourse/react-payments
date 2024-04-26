@@ -1,9 +1,10 @@
 import InputContainer from '../../common/InputContainer';
-import { ErrorText, ErrorWrapper } from '../../../styles/common';
 import Input from '../../common/Input';
+
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
+import { ErrorText, ErrorWrapper } from '../../../styles/common';
 
 export default function PasswordInputContainer({ value, onChange, errorStatus }: IInputControl) {
   const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();

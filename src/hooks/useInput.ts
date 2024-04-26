@@ -1,6 +1,6 @@
 import useValidation from './useValidation';
 import { IErrorStatus } from '../validators/index.d';
-import { Dispatch, SetStateAction, useState, useRef } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 type TValidate = (value: string) => IErrorStatus;
 

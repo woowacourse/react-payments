@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import ROUTE_PATH from '../constants/routePath';
 
 export default function ErrorPage() {

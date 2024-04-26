@@ -1,8 +1,9 @@
-import { ErrorWrapper, ErrorText } from '../../../../styles/common';
+import CardNumberInputs from './CardNumberInputs';
 import InputContainer from '../../../common/InputContainer';
+
 import useDisplayingErrorStatus from '../../../../hooks/useDisplayingErrorStatus';
 import { IInputsControl } from '../../../../hooks/useInputs';
-import CardNumberInputs from './CardNumberInputs';
+import { ErrorWrapper, ErrorText } from '../../../../styles/common';
 
 export default function CardNumbersContainer({ value, generateOnChange, errorStatus }: IInputsControl) {
   const {

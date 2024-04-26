@@ -1,9 +1,10 @@
 import Input from '../../common/Input';
-import { ErrorWrapper, ErrorText } from '../../../styles/common';
 import InputContainer from '../../common/InputContainer';
+
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
-import { IInputControl } from '../../../hooks/useInput';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
+import { IInputControl } from '../../../hooks/useInput';
+import { ErrorWrapper, ErrorText } from '../../../styles/common';
 
 const CardholderNameInputContainer = ({ value, setValue, validateValue, errorStatus }: IInputControl) => {
   const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();

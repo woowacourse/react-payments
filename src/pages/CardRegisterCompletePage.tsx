@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import CompletionIconSrc from '../assets/images/completion-icon.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ROUTE_PATH from './constants/routePath';
 import ErrorPage from './common/ErrorPage';
+import CompletionIconSrc from '../assets/images/completion-icon.png';
 
 interface ICardRegisterCompletePageState {
   cardNumberPrefix: string;

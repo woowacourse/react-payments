@@ -7,12 +7,12 @@ import CardholderNameInputContainer from './InputContainers/CardholderNameInputC
 import CvcInputContainer from './InputContainers/CvcInputContainer';
 import PasswordInputContainer from './InputContainers/PasswordInputContainer';
 import CardTypeSelectContainer from './InputContainers/CardTypeSelectContainer';
-import ROUTE_PATH from '../../pages/constants/routePath';
 
-import getObjectValues from '../../utils/getObjectValues';
+import useSequence from '../../hooks/useSequence';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
-import useSequence from '../../hooks/useSequence';
+import getObjectValues from '../../utils/getObjectValues';
+import ROUTE_PATH from '../../pages/constants/routePath';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;

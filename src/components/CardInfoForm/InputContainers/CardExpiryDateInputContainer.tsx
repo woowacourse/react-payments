@@ -1,10 +1,12 @@
+import { useRef } from 'react';
+
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
-import { ErrorWrapper, ErrorText } from '../../../styles/common';
+
 import useExpiryDate from '../../../hooks/useExpiryDate';
 import { IInputControl } from '../../../hooks/useInput';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
-import { useRef } from 'react';
+import { ErrorWrapper, ErrorText } from '../../../styles/common';
 
 const MONTH_LENGTH = 2;
 

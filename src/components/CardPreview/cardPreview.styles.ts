@@ -1,6 +1,6 @@
-import { CARD_COLOR, CardType } from '../../constants/cardType';
-
 import styled from 'styled-components';
+
+import { CARD_COLOR, CardType } from '../../constants/cardType';
 
 const DEFAULT_CARD_COLOR = '#333333';
 

@@ -1,8 +1,8 @@
-import * as S from '../cardPreview.styles';
-
 import CardBrandLogo from './CardBrandLogo';
 import CardNumber from './CardNumberContainer';
 import ExpiryDate from './ExpiryDate';
+
+import * as S from '../cardPreview.styles';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 interface CardPreviewFrontProps {
