@@ -6,7 +6,8 @@ const meta = {
   component: CardPreview,
   argTypes: {
     cardNumbers: {
-      description: '• Visa: 4로 시작하는 16자리 숫자 <br /> • MasterCard: 51~55로 시작하는 16자리 숫자',
+      description:
+        '• Visa: 4로 시작하는 16자리 숫자 <br /> • MasterCard: 51~55로 시작하는 16자리 숫자',
       options: {
         default: {
           first: '1234',
@@ -47,6 +48,8 @@ const meta = {
       },
       control: { type: 'select' },
     },
+
+    cvc: { control: { type: 'text', maxLength: 4 } },
   },
 } satisfies Meta<typeof CardPreview>;
 
@@ -67,5 +70,8 @@ export const Default: Story = {
       year: 'YY',
     },
     cardholderName: 'John Doe',
+    isCardFront: true,
+    cardType: '',
+    cvc: '123',
   },
 };
