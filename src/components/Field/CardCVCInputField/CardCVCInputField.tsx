@@ -17,6 +17,7 @@ export default function CardCVCInputField({
   setIsCompletedSections,
   isOpenForm,
   setIsOpenForm,
+  setIsCardPreviewFront,
 }: {
   cardCVC: string;
   setCardCVC: Dispatch<SetStateAction<string>>;
@@ -24,6 +25,7 @@ export default function CardCVCInputField({
   setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
   isOpenForm: boolean[];
   setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  setIsCardPreviewFront: Dispatch<SetStateAction<boolean>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -36,7 +38,12 @@ export default function CardCVCInputField({
     setCardCVC(e.target.value);
   };
 
+  const handleFocus = () => {
+    setIsCardPreviewFront(false);
+  };
+
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    setIsCardPreviewFront(true);
     if (e.target.value.length < 3) {
       setErrorMessage("CVC를 정확히 입력해주세요.");
       return;
@@ -63,6 +70,7 @@ export default function CardCVCInputField({
       <div className={styles.horizon__gap__container}>
         <Input
           onChange={handleChange}
+          onFocus={handleFocus}
           isError={errorMessage.length !== 0}
           placeholder={CVC_PLACEHOLDER}
           maxLength={3}
