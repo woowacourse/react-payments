@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useId, useMemo } from 'react';
+import React, {
+  ChangeEvent,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 import styles from './style.module.css';
 
@@ -12,20 +18,27 @@ export type HandleInputValue = (
 interface InputProps extends React.HTMLProps<HTMLInputElement> {
   label: string;
   error: boolean;
+  isFocus?: boolean;
 }
 
 function Input(props: InputProps) {
-  const { error, label, ...reset } = props;
+  const { error, label, isFocus, ...reset } = props;
   const inputId = `input-${useId()}`;
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const className = useMemo(() => `${error ? styles.error : ''}`, [error]);
+
+  useLayoutEffect(() => {
+    if (isFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocus]);
 
   return (
     <>
       <label className="scr-only" htmlFor={inputId}>
         {label}
       </label>
-      <input id={inputId} className={className} {...reset} />
+      <input id={inputId} className={className} ref={inputRef} {...reset} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import {
   CARD_FORM_STEP,
@@ -7,9 +7,7 @@ import {
   CARD_NUMBERS,
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
-  FIRST_INPUT_INDEX,
 } from '../../constants';
-import useFocusRef from '../../hooks/useFocusRef';
 import useInput from '../../hooks/useInput';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import CardInputSection from '../CardInputSection';
@@ -31,8 +29,8 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers, goNextFormStep } = props;
   const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
+  const [focusIndex, setFocusIndex] = useState(0);
 
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>(FIRST_INPUT_INDEX);
   /**
    * 카드 번호에 따라 카드 마크(visa,master,etc)를 반환하는 함수
    * @param numbers 카드 번호
@@ -116,15 +114,15 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     // numbers 업데이트
     const newNumbers = getNewNumbers(index, event.target.value);
     setValue(newNumbers);
+
+    if (event.target.value.length === CARD_NUMBERS.length) {
+      setFocusIndex(index >= length - 1 ? index : index + 1);
+    }
   };
 
   return (
     <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
-      <div
-        className={styles.inputWrap}
-        ref={focusTargetRef}
-        onChange={handleNumberChange}
-      >
+      <div className={styles.inputWrap} onChange={handleNumberChange}>
         {Array.from({ length }).map((_, index) => (
           <Input
             key={`number_${index}`}
@@ -135,6 +133,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
             value={value[index]?.toString()}
             error={error[index]}
             placeholder={placeholder}
+            isFocus={focusIndex === index}
           />
         ))}
       </div>

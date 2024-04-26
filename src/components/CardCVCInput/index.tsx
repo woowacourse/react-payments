@@ -7,7 +7,6 @@ import {
   CARD_FORM_STEP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useFocusRef from '../../hooks/useFocusRef';
 import useInput from '../../hooks/useInput';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
@@ -24,8 +23,6 @@ export interface CardCVCInputProps {
 
 function CardCVCInput(props: CardCVCInputProps) {
   const { editCardCVC, setCardSide, goNextFormStep } = props;
-
-  const { focusTargetRef } = useFocusRef<HTMLInputElement>();
 
   const validateCVC = (text: string) => ({
     newError: !CARD_CVC_REGEXP.test(text),
@@ -68,7 +65,6 @@ function CardCVCInput(props: CardCVCInputProps) {
     >
       <div className={styles.inputWrap}>
         <Input
-          ref={focusTargetRef}
           label={CARD_CVC_MESSAGE.label}
           placeholder={CARD_CVC_MESSAGE.placeholder}
           error={error}
@@ -78,6 +74,7 @@ function CardCVCInput(props: CardCVCInputProps) {
           onBlur={() => setCardSide('front')}
           onFocus={() => setCardSide('back')}
           value={value}
+          isFocus
         />
       </div>
       <ErrorMessage>

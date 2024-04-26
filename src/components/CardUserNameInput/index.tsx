@@ -6,9 +6,7 @@ import {
   CARD_USER_FORM_MESSAGE,
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
-  FIRST_INPUT_INDEX,
 } from '../../constants';
-import useFocusRef from '../../hooks/useFocusRef';
 import useInput from '../../hooks/useInput';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -23,8 +21,6 @@ export interface CardUserNameInputProps {
 export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName, goNextFormStep } = props;
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
-
-  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
 
   const validateName = (name: string) => {
     const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
@@ -74,7 +70,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
 
   return (
     <CardInputSection title={title} childrenLabel={label}>
-      <div ref={focusTargetRef} className={styles.inputWrap}>
+      <div className={styles.inputWrap}>
         <Input
           style={{ textTransform: 'uppercase' }}
           name="name"
@@ -84,6 +80,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
           onChange={handleNameChange}
           value={value}
           error={error}
+          isFocus
         />
       </div>
       <ErrorMessage>

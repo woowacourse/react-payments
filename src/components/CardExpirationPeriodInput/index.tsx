@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, useMemo } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useMemo, useState } from 'react';
 
 import {
   CARD_EXPIRATION,
@@ -6,9 +6,7 @@ import {
   CARD_FORM_STEP,
   CARD_PERIOD_REGEXP,
   ERROR_MESSAGE,
-  FIRST_INPUT_INDEX,
 } from '../../constants';
-import useFocusRef from '../../hooks/useFocusRef';
 import useInput from '../../hooks/useInput';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits } from '../../utils/textChangerUtils';
@@ -39,8 +37,7 @@ export default function CardExpirationPeriodInput(
   const { editCardPeriod, goNextFormStep } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
-  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
-
+  const [focusIndex, setFocusIndex] = useState(0);
   const INITIAL_ERROR: PeriodError = {
     month: false,
     year: false,
@@ -190,13 +187,16 @@ export default function CardExpirationPeriodInput(
     changeCardPeriodValue(name, text);
   };
 
+  useEffect(() => {
+    setFocusIndex(error.month ? 0 : 1);
+  }, [error]);
+
   return (
     <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
       <div
         className={styles.inputWrap}
         onChange={handlePeriodChange}
         onBlur={handlePeriodBlur}
-        ref={focusTargetRef}
       >
         <Input
           name="month"
@@ -206,6 +206,7 @@ export default function CardExpirationPeriodInput(
           label="카드 유효 기간-월"
           value={value.month?.toString() || undefined}
           error={error.month || error.availability}
+          isFocus={focusIndex === 0}
         />
         <Input
           name="year"
@@ -215,6 +216,7 @@ export default function CardExpirationPeriodInput(
           maxLength={CARD_EXPIRATION.length}
           value={value.year?.toString() || undefined}
           error={error.year || error.availability}
+          isFocus={focusIndex === 1}
         />
       </div>
       <ErrorMessage>

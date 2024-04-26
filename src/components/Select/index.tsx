@@ -4,11 +4,11 @@ import React, {
   FocusEvent,
   ReactNode,
   useId,
+  useLayoutEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
-
-import useFocusRef from '../../hooks/useFocusRef';
 
 import styles from './style.module.css';
 
@@ -39,7 +39,7 @@ function Select(props: SelectProps) {
   // 옵션 선택, select focus,blur 여부에 따라 select의 color를 변경하기 위한 상태
   const [selectColorStyle, setSelectColorStyle] = useState<CSSProperties>();
   const selectId = `card-company-select-${useId()}`;
-  const { focusTargetRef } = useFocusRef<HTMLSelectElement>();
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const selectClassName = useMemo(
     () => `${styles.select} ${error ? styles.error : ''}`,
@@ -58,13 +58,16 @@ function Select(props: SelectProps) {
     if (extraFocusHandler) extraFocusHandler(event);
   };
 
+  useLayoutEffect(() => {
+    selectRef.current?.focus();
+  }, []);
   return (
     <>
       <label className="scr-only" htmlFor={selectId}>
         {label}
       </label>
       <select
-        ref={focusTargetRef}
+        ref={selectRef}
         id={selectId}
         className={selectClassName}
         style={selectColorStyle}

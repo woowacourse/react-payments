@@ -5,9 +5,7 @@ import {
   CARD_PASSWORD_MESSAGE,
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
-  FIRST_INPUT_INDEX,
 } from '../../constants';
-import useFocusRef from '../../hooks/useFocusRef';
 import useInput from '../../hooks/useInput';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
@@ -22,8 +20,6 @@ export interface CardPasswordInputProps {
 
 function CardPasswordInput(props: CardPasswordInputProps) {
   const { editCardPassword } = props;
-
-  const { focusTargetRef } = useFocusRef<HTMLDivElement>(FIRST_INPUT_INDEX);
 
   const validateValue = (value: string) => {
     const newError = !CARD_PASSWORD_REGEXP.test(value);
@@ -54,7 +50,7 @@ function CardPasswordInput(props: CardPasswordInputProps) {
       subTitle={CARD_PASSWORD_MESSAGE.subTitle}
       childrenLabel={CARD_PASSWORD_MESSAGE.label}
     >
-      <div ref={focusTargetRef} className={styles.inputWrap}>
+      <div className={styles.inputWrap}>
         <Input
           name="password"
           type="password"
@@ -63,6 +59,7 @@ function CardPasswordInput(props: CardPasswordInputProps) {
           placeholder={CARD_PASSWORD_MESSAGE.placeholder}
           value={value}
           onChange={handlePasswordChange}
+          isFocus
         />
       </div>
       <ErrorMessage>
