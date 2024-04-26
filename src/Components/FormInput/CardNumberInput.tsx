@@ -7,7 +7,6 @@ import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 import { cardNumbersValidator } from "./validator";
 
 import FormInputCompound from "./FormInputCompound";
-import onInputChange from "./onInputChange";
 
 interface InputInfoList {
   name: keyof CardNumbers;
@@ -34,16 +33,9 @@ const CardNumberInput = memo(() => {
         <FormInputCompound
           id={`id-numbers-${name}`}
           key={index}
-          onInputChange={(e) =>
-            onInputChange<CardNumbers, CardNumbersError>(e, {
-              name,
-              setData,
-              setError,
-              validator: cardNumbersValidator,
-              maxLength: 4,
-              nextRef,
-            })
-          }
+          setData={setData}
+          setError={setError}
+          changeValidator={cardNumbersValidator}
           isError={!!cardNumberError[name]?.isError}
           sizePreset="small"
           placeholder="1234"

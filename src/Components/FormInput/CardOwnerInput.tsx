@@ -5,7 +5,6 @@ import { CardOwnerInfoContext } from "../../routes/Payments/CardInfoContextProvi
 import { CardOwnerInfoErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import { cardOwnerValidator } from "./validator";
-import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
 import { CardOwnerInputContext } from "../Form/FormRefContextProvider";
 
@@ -27,14 +26,9 @@ const CardOwnerInput = memo(() => {
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
-          onInputChange={(e) => {
-            onInputChange<CardOwnerInfo, CardOwnerInfoError>(e, {
-              name,
-              setData,
-              setError,
-              validator: cardOwnerValidator,
-            });
-          }}
+          setData={setData}
+          setError={setError}
+          changeValidator={cardOwnerValidator}
           isError={!!ownerError[name]?.isError}
           sizePreset="large"
           maxLength={15}

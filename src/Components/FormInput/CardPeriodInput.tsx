@@ -6,7 +6,6 @@ import { CardValidityPeriodErrorContext } from "../../routes/Payments/FormContex
 import FormInputCompound from "./FormInputCompound";
 
 import { cardPeriodValidator } from "./validator";
-import onInputChange from "./onInputChange";
 import { CardOwnerInputContext, CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 
 interface InputInfo {
@@ -33,16 +32,9 @@ const CardPeriodInput = memo(() => {
         <FormInputCompound
           id={`id-period-${name}`}
           key={index}
-          onInputChange={(e) =>
-            onInputChange<CardValidityPeriod, CardValidityPeriodError>(e, {
-              name,
-              setData,
-              setError,
-              validator: cardPeriodValidator,
-              maxLength: 2,
-              nextRef,
-            })
-          }
+          setData={setData}
+          setError={setError}
+          changeValidator={cardPeriodValidator}
           isError={!!periodError[name]?.isError}
           sizePreset="medium"
           maxLength={2}

@@ -5,7 +5,6 @@ import { CardPasswordContext } from "../../routes/Payments/CardInfoContextProvid
 import { CardPasswordErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import { cardPasswordValidator } from "./validator";
-import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
 import { CardPasswordInputContext } from "../Form/FormRefContextProvider";
 
@@ -27,14 +26,9 @@ const CardPasswordInput = memo(() => {
         <FormInputCompound
           id={`id-password-${name}`}
           key={index}
-          onInputChange={(e) =>
-            onInputChange<CardPassword, CardPasswordError>(e, {
-              name,
-              setData,
-              setError,
-              validator: cardPasswordValidator,
-            })
-          }
+          setData={setData}
+          setError={setError}
+          changeValidator={cardPasswordValidator}
           isError={!!passwordError[name]?.isError}
           sizePreset="large"
           maxLength={2}

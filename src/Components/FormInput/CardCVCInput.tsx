@@ -6,7 +6,6 @@ import { CardCVCErrorContext } from "../../routes/Payments/FormContextProvider";
 import { CardCVCInputContext, CardPasswordInputContext } from "../Form/FormRefContextProvider";
 import { cardCVCValidator } from "./validator";
 
-import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
 
 interface InputInfoList {
@@ -58,16 +57,9 @@ const CardCVCInput = memo(() => {
         <FormInputCompound
           id={`id-cvc-${name}`}
           key={index}
-          onInputChange={(e) =>
-            onInputChange<CardCVC, CardCVCError>(e, {
-              name,
-              setData,
-              setError,
-              validator: cardCVCValidator,
-              maxLength: 3,
-              nextRef,
-            })
-          }
+          setData={setData}
+          setError={setError}
+          changeValidator={cardCVCValidator}
           isError={!!cardCVCError[name]?.isError}
           sizePreset="large"
           maxLength={3}
