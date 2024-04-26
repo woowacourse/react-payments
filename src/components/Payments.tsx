@@ -4,10 +4,12 @@ import BottomButton from './BottomButton';
 import CardForm from './CardForm';
 import CardPreview from './CardPreview';
 import { Link } from 'react-router-dom';
+import { UseCardCVC } from '../hooks/useCardCVC';
 import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
 import { UseCardHolder } from '../hooks/useCardHolder';
 import { UseCardIssuer } from '../hooks/useCardIssuer';
 import { UseCardNumbers } from '../hooks/useCardNumbers';
+import { UseCardPasswordHead } from '../hooks/useCardPasswordHead';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -15,6 +17,8 @@ interface Props {
   useCardExpiredDate: UseCardExpiredDate;
   useCardHolder: UseCardHolder;
   useCardIssuer: UseCardIssuer;
+  useCardCVC: UseCardCVC;
+  useCardPasswordHead: UseCardPasswordHead;
   setPath: () => void;
 }
 
@@ -23,6 +27,8 @@ function Payments({
   useCardExpiredDate,
   useCardHolder,
   useCardIssuer,
+  useCardCVC,
+  useCardPasswordHead,
   setPath,
 }: Props) {
   setPath();
@@ -36,7 +42,9 @@ function Payments({
   const isValid =
     useCardNumbers.isValid &&
     useCardExpiredDate.isValid &&
-    useCardHolder.isValid;
+    useCardHolder.isValid &&
+    useCardCVC.isValid &&
+    useCardPasswordHead.isValid;
   return (
     <PaymentsContainer>
       <CardPreview cardInfo={cardInfo} />
@@ -45,6 +53,8 @@ function Payments({
         useCardExpiredDate={useCardExpiredDate}
         useCardHolder={useCardHolder}
         useCardIssuer={useCardIssuer}
+        useCardCVC={useCardCVC}
+        useCardPasswordHead={useCardPasswordHead}
       />
       {isValid && (
         <Link to='/complete-payment-register'>

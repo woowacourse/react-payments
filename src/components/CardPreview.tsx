@@ -1,21 +1,8 @@
 import { COLOR } from '../styles/color';
 import { CardInfo } from '../type';
-import DEFAULT_BLANK_IMAGE from '../Images/blank.png';
 import { HTMLProps } from 'react';
 import IC_CHIP from '../Images/Ic_chip.png';
-import MASTERCARD_IMAGE from '../Images/Mastercard.png';
-import VISA_IMAGE from '../Images/Visa.png';
 import styled from '@emotion/styled';
-
-const issuerImg: { [key: string]: string } = {
-  ['Visa']: VISA_IMAGE,
-  ['MasterCard']: MASTERCARD_IMAGE,
-};
-
-const matchCardIssuerImgSrc = (issuer: string) => {
-  const result = issuerImg[issuer];
-  return result ?? DEFAULT_BLANK_IMAGE;
-};
 
 interface cardInfoProps {
   cardInfo: CardInfo;
@@ -49,7 +36,6 @@ export default function CardPreview(props: cardInfoProps) {
     <CardPreviewContainer backgroundColor={colorMatcher[cardIssuer]}>
       <CardHeader>
         <img src={IC_CHIP} alt='IC Chip' />
-        <img src={matchCardIssuerImgSrc(cardIssuer)} alt={cardIssuer} />
       </CardHeader>
       <CardNumberContainer>
         {cardNumbers.map((number, idx) => (
@@ -89,6 +75,7 @@ const CardPreviewContainer = styled.section<CardPreviewContainerProps>(
       backgroundColor: props.backgroundColor ?? COLOR.gray2,
       boxShadow: '3px 3px 3px rgba(0, 0, 0, 0.25)',
       ...styledCardText,
+      color: props.backgroundColor === COLOR.kakao ? COLOR.kb : COLOR.white,
       '&>*': { height: '20px' },
     };
   }
@@ -111,4 +98,5 @@ const CardNumberContainer = styled.div({
 
 const CardNumber = styled.span({
   width: '30px',
+  marginRight: '10px',
 });

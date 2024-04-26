@@ -23,7 +23,7 @@ export default function useValidateInput({
   validatorPropsArray,
 }: validatedInputProps) {
   const {
-    inputValue: inputValue,
+    inputValue,
     onChange: inputOnChange,
     initValue,
   } = useInput({
