@@ -60,11 +60,17 @@ const theme: DefaultTheme = {
       line-height: 2rem;
       letter-spacing: 0.08rem;
     `,
-    submitButton: `
+    button: `
       font-family: Noto Sans KR;
       font-weight: 700;
       font-size: 1.6rem;
       line-height: 1.2rem;
+    `,
+    phrase: `
+      font-family: Noto Sans KR;
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 3.62rem;
     `,
   },
   color: {
@@ -86,6 +92,7 @@ const theme: DefaultTheme = {
     ocher: '#cbba64',
     magnetic: '#DDCD78',
     dropShadow: '#00000040',
+    darkNavy: '#353c49',
   },
 };
 
