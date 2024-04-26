@@ -4,6 +4,8 @@ import Input from '../../common/Input/Input';
 
 import type { InputType } from '../../../hooks/useInput';
 import { isNumber } from '../../../utils/validation';
+import { CARD_CVC } from '../../../constants/Condition';
+import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardCVCInputProps {
   cvc: InputType;
@@ -20,18 +22,18 @@ const CardCVCInput = ({ cvc, handleIsCVCInput }: CardCVCInputProps) => {
     cvc.handleValue(e.target.value);
   };
 
-  const errorMessage = cvc.isClicked && !cvc.isValid ? 'CVC 번호는 세 자리 숫자여야 합니다.' : '';
+  const errorMessage = cvc.isClicked && !cvc.isValid ? ERROR_MESSAGE.INVALID_CARD_CVC : '';
 
   return (
     <div>
       <TitleContainer title="CVC 번호를 입력해 주세요" />
-      <InputField label="CVC" inputCount={1} errorMessage={errorMessage}>
+      <InputField label="CVC" inputCount={CARD_CVC.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
           isValid={cvc.isClicked ? cvc.isValid : true}
           type="text"
           placeholder="123"
           value={cvc.value}
-          maxLength={3}
+          maxLength={CARD_CVC.MAX_LENGTH}
           onFocus={() => handleIsCVCInput(true)}
           onBlur={() => handleIsCVCInput(false)}
           onChange={handleCVCChange}
