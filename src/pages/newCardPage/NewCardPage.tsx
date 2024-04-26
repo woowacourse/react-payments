@@ -15,6 +15,7 @@ import {
 import { CARD_FORM_INPUTS } from '../../constants/setting';
 import CardFrontPreview from '../../components/cardPreview/CardFrontPreview';
 import CardBackPreview from '../../components/cardPreview/cardBackPreview';
+import Button from '../../components/common/button/Button';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -368,7 +369,7 @@ const NewCardPage = () => {
           ></Input>
         </NewCardInputSection>
       )}
-      {isAllValidInput() && <button>확인</button>}
+      {isAllValidInput() && <Button text='확인'></Button>}
     </NewCardContainer>
   );
 };
