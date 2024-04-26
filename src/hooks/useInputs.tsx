@@ -1,23 +1,23 @@
-import { limitNumberLength } from "@/utils/numberHelper";
-import { ValidationStatus } from "@/utils/validation";
+import { ErrorStatus } from "@/utils/validation";
 import { useEffect, useState } from "react";
 import React from "react";
 
 export type ValidateFuncWithPropsType = (
-  value: string[],
+  value: string,
   currentName: string
-) => { isValid: boolean; type: ValidationStatus } | null;
+) => { isValid: boolean; type: ErrorStatus } | null;
 
 interface Props<T> {
   initialValue: T;
   validates: ValidateFuncWithPropsType[];
   maxNumberLength?: number;
+  onChangeFunc?: (value: string) => string;
 }
 
 const useInputs = <T extends object>({
   initialValue,
   validates,
-  maxNumberLength,
+  onChangeFunc,
 }: Props<T>) => {
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
@@ -27,19 +27,16 @@ const useInputs = <T extends object>({
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    let newValue = value;
-    if (maxNumberLength) {
-      newValue = limitNumberLength({
-        value: value,
-        maxLength: maxNumberLength,
-      });
-    }
+    const newValue = value;
 
+    if (onChangeFunc) {
+      event.target.value = onChangeFunc(newValue);
+    }
     const newErrors = { ...errors };
     let allValid = true;
 
     validates.forEach((validate) => {
-      const errorResult = validate([event.target.value], name);
+      const errorResult = validate(event.target.value, name);
       if (errorResult && !errorResult.isValid) {
         newErrors[name as keyof T] = errorResult.type;
         allValid = false;
@@ -49,7 +46,6 @@ const useInputs = <T extends object>({
     if (allValid) {
       delete newErrors[name as keyof T];
     }
-
     setValues((values) => ({ ...values, [name]: newValue }));
     setErrors(newErrors);
   };

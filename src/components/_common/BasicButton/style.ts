@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexCenter } from "@/style/common";
+import { flexCenter } from "@/style/common";
 import { ButtonBorderType, ButtonPosition } from "./BasicButton";
 
 export type BasicButtonProps = {
@@ -21,7 +21,7 @@ const ButtonWrapper = styled.button<BasicButtonProps>`
   color: ${({ textColor }) => (textColor ? textColor : "white")};
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   font-size: 15px;
-  ${FlexCenter};
+  ${flexCenter};
   border-radius: ${({ $borderType }) =>
     $borderType === "round" ? "5px" : "0"};
   :disabled {

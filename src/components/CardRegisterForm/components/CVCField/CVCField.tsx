@@ -14,7 +14,8 @@ interface Props {
 
 const CVCField = ({ CVCNumbersState }: Props) => {
   const { onChange, error, isError } = CVCNumbersState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } =
+    useShowError(error);
 
   return (
     <S.InputFieldWithInfo>
@@ -35,8 +36,8 @@ const CVCField = ({ CVCNumbersState }: Props) => {
               e.target.value = e.target.value.slice(0, e.target.maxLength);
             onChange(e);
           }}
-          onBlur={onBlurShowErrors}
           onFocus={onFocusHideErrors}
+          onBlur={onBlurShowErrors}
           isError={isError}
         />
       </InputField>

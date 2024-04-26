@@ -8,7 +8,7 @@ const meta = {
 
 export default meta;
 
-const expiredPeriodState = {
+const expirationPeriodState = {
   values: {
     expirationMonth: "",
     expirationYear: "",
@@ -24,6 +24,6 @@ type Story = StoryObj<typeof ExpirationPeriodField>;
 
 export const Default: Story = {
   args: {
-    expiredPeriodState,
+    expirationPeriodState,
   },
 };

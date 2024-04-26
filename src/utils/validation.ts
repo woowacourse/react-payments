@@ -1,22 +1,26 @@
 import { CARD_BRAND_INFO, VALID_LENGTH } from "@/constants/condition";
+import { REGEX } from "@/constants/regex";
 
-export enum ValidationStatus {
-  INVALID_LENGTH = "INVALID_LENGTH",
-  EXPIRED_CARD_DATE = "EXPIRED_CARD_DATE",
-  INVALID_MONTH = "INVALID_MONTH",
-  NAME_SHOULD_BE_CAPITAL = "NAME_SHOULD_BE_CAPITAL",
-  DOUBLE_SPACE = "DOUBLE_SPACE",
-  ENTER_REQUIRED = "ENTER_REQUIRED",
+export enum ErrorStatus {
+  INVALID_LENGTH = "길이가 유효하지 않습니다.",
+  EXPIRED_CARD_DATE = "이미 만료된 카드입니다.",
+  INVALID_MONTH = "유효한 달이 아닙니다.",
+  NAME_SHOULD_BE_CAPITAL = "이름은 영어 대문자로만 입력할 수 있습니다.",
+  DOUBLE_SPACE = "스페이스를 두번 이상 입력할 수 없습니다.",
+  ENTER_REQUIRED = "엔터를 쳐야 합니다.",
+  CVC_NUMBER = "cvc는 이름으로 입력해야 합니다.",
+  IS_NOT_NUMBER = "숫자로 입력해야 합니다.",
 }
 
+//TODO: 공통 적이지 않은 것이 유틸로 들어가도 되나?
 export const validateIsValidLength = (
   newValue: string,
   validLength: number
 ) => {
   if (newValue.length !== validLength && newValue.length) {
-    return { type: ValidationStatus.INVALID_LENGTH, isValid: false };
+    return { type: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
-  return { type: ValidationStatus.INVALID_LENGTH, isValid: true };
+  return { type: ErrorStatus.INVALID_LENGTH, isValid: true };
 };
 
 export const validateExpirationDate = (date: string[]) => {
@@ -34,33 +38,33 @@ export const validateExpirationDate = (date: string[]) => {
     const currentYear = today.getFullYear() - 2000;
 
     if (year < currentYear || (year === currentYear && month < currentMonth)) {
-      return { type: ValidationStatus.EXPIRED_CARD_DATE, isValid: false };
+      return { type: ErrorStatus.EXPIRED_CARD_DATE, isValid: false };
     }
   }
-  return { type: ValidationStatus.EXPIRED_CARD_DATE, isValid: true };
+  return { type: ErrorStatus.EXPIRED_CARD_DATE, isValid: true };
 };
 
 export const validateMonth = (month: number) => {
   if (month < 1 || month > 12) {
-    return { type: ValidationStatus.INVALID_MONTH, isValid: false };
+    return { type: ErrorStatus.INVALID_MONTH, isValid: false };
   }
-  return { type: ValidationStatus.INVALID_MONTH, isValid: true };
+  return { type: ErrorStatus.INVALID_MONTH, isValid: true };
 };
 
 export const validateOwnerName = (name: string) => {
   const alphabetRegex = /^[a-zA-Z\s]*$/;
   if (!alphabetRegex.test(name)) {
-    return { type: ValidationStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
+    return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
   }
-  return { type: ValidationStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
+  return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
 };
 
 export const validateDoubleSpace = (name: string) => {
   const doubleSpaceRegex = /\s{2,}/;
   if (doubleSpaceRegex.test(name)) {
-    return { type: ValidationStatus.DOUBLE_SPACE, isValid: false };
+    return { type: ErrorStatus.DOUBLE_SPACE, isValid: false };
   }
-  return { type: ValidationStatus.DOUBLE_SPACE, isValid: true };
+  return { type: ErrorStatus.DOUBLE_SPACE, isValid: true };
 };
 
 export const makeNewErrorMessages = (
@@ -85,5 +89,20 @@ export const checkCardBrand = (cardNumbers: string) => {
 };
 
 export const validateEnterRequired = () => {
-  return { type: ValidationStatus.ENTER_REQUIRED, isValid: false };
+  return { type: ErrorStatus.ENTER_REQUIRED, isValid: false };
+};
+
+export const validateIsNumber = (value: string) => {
+  const numbersRegex = REGEX.NUMBERS;
+  if (!numbersRegex.test(value)) {
+    return { type: ErrorStatus.IS_NOT_NUMBER, isValid: false };
+  }
+  return { type: ErrorStatus.IS_NOT_NUMBER, isValid: true };
+};
+
+export const sliceInvalidValueWithRegex = (value: string, regex: RegExp) => {
+  if (!regex.test(value)) {
+    return value.slice(0, -1);
+  }
+  return value;
 };

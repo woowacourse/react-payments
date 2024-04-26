@@ -12,14 +12,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const FlexCenter = css`
+export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const fadeInAnimation = css`
-  animation: fadeInAnimation 0.6s ease-out forwards;
+  animation: fadeInAnimation 1s ease-out forwards;
   @keyframes fadeInAnimation {
     from {
       opacity: 0;

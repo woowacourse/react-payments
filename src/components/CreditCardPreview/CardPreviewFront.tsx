@@ -26,7 +26,7 @@ const CardPreviewFront = ({
   return (
     <S.CardInner $cardTypeColor={cardTypeColor} $isFront={true}>
       <S.FlexBox>
-        <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
+        <S.LogoBox color={theme.COLOR["gold-1"]}></S.LogoBox>
 
         {cardTypeLogo === "VISA" ? (
           <S.LogoBox color={theme.COLOR["grey-4"]}>
@@ -45,7 +45,7 @@ const CardPreviewFront = ({
             const isMasked = index >= 2;
             return isMasked ? (
               <S.Input
-                isWhite={cardType !== "카카오뱅크"}
+                $isWhite={cardType !== "카카오뱅크"}
                 key={index}
                 type="password"
                 value={number}
@@ -53,7 +53,7 @@ const CardPreviewFront = ({
               />
             ) : (
               <S.Input
-                isWhite={cardType !== "카카오뱅크"}
+                $isWhite={cardType !== "카카오뱅크"}
                 key={index}
                 type="text"
                 value={number}
@@ -63,7 +63,7 @@ const CardPreviewFront = ({
           })}
         </S.CardNumbers>
         <S.Input
-          isWhite={cardType !== "카카오뱅크"}
+          $isWhite={cardType !== "카카오뱅크"}
           type="text"
           value={
             expirationDate.expirationMonth &&
@@ -75,7 +75,7 @@ const CardPreviewFront = ({
           readOnly
         ></S.Input>
         <S.Input
-          isWhite={cardType !== "카카오뱅크"}
+          $isWhite={cardType !== "카카오뱅크"}
           type="text"
           value={ownerName ? ownerName : ""}
           readOnly

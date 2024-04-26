@@ -23,7 +23,10 @@ type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
   const { onChange, errors } = cardNumbersState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError(
+    Object.values(errors) as string[]
+  );
+
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
@@ -56,8 +59,8 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
                   e.target.value = e.target.value.slice(0, e.target.maxLength);
                 onFocusNextInput(e, index);
               }}
-              onBlur={onBlurShowErrors}
               onFocus={onFocusHideErrors}
+              onBlur={onBlurShowErrors}
               isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
             />
           ))}

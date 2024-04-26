@@ -27,7 +27,9 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
 
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors } = expirationPeriodState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError(
+    Object.keys(errors)
+  );
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,

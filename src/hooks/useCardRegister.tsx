@@ -2,8 +2,10 @@ import { CardNumberInputType } from "@/components/CardRegisterForm/components/Ca
 import useInputs from "./useInputs";
 import { MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import {
+  sliceInvalidValueWithRegex,
   validateDoubleSpace,
   validateEnterRequired,
+  validateIsNumber,
   validateIsValidLength,
   validateMonth,
   validateOwnerName,
@@ -11,6 +13,7 @@ import {
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "./useInput";
 import { CardType } from "@/constants/cardType";
+import { REGEX } from "@/constants/regex";
 
 const useCardRegister = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -21,22 +24,22 @@ const useCardRegister = () => {
       cardNumbers4: "",
     },
     validates: [
-      (value: string[]) =>
-        validateIsValidLength(value[0], VALID_LENGTH.CARD_NUMBERS),
+      (value: string) =>
+        validateIsValidLength(value, VALID_LENGTH.CARD_NUMBERS),
+      (value: string) => validateIsNumber(value),
     ],
-    maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
+
+    onChangeFunc: (value: string) =>
+      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   const expirationPeriodState = useInputs<ExpirationPeriodInputType>({
     initialValue: { expirationMonth: "", expirationYear: "" },
     validates: [
-      (value: string[]) =>
-        validateIsValidLength(value[0], VALID_LENGTH.EXPIRATION_PERIOD),
-      (value: string[], name: string) => {
-        if (name === "expirationMonth") {
-          return validateMonth(Number(value));
-        }
-        return null;
+      (value: string) =>
+        validateIsValidLength(value, VALID_LENGTH.EXPIRATION_PERIOD),
+      (value: string, name: string) => {
+        return name === "expirationMonth" ? validateMonth(Number(value)) : null;
       },
     ],
     maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
@@ -49,13 +52,8 @@ const useCardRegister = () => {
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],
-    onChangeFunc: (value: string) => {
-      const alphabetRegex = /^[a-zA-Z\s]*$/;
-      if (!alphabetRegex.test(value)) {
-        return value.slice(0, -1);
-      }
-      return value;
-    },
+    onChangeFunc: (value: string) =>
+      sliceInvalidValueWithRegex(value, REGEX.CAPITAL_LETTERS),
   });
 
   const cardTypeState = useInput<CardType | null>({
@@ -67,14 +65,20 @@ const useCardRegister = () => {
     initialValue: "",
     validates: [
       (value: string) => validateIsValidLength(value, VALID_LENGTH.CVC_NUMBERS),
+      (value: string) => validateIsNumber(value),
     ],
+    onChangeFunc: (value: string) =>
+      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   const passwordState = useInput<string>({
     initialValue: "",
     validates: [
       (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
+      (value: string) => validateIsNumber(value),
     ],
+    onChangeFunc: (value: string) =>
+      sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
 
   return {

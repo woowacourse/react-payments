@@ -1,4 +1,4 @@
-import { FlexCenter } from "@/style/common";
+import { flexCenter } from "@/style/common";
 import { styled, css } from "styled-components";
 
 const CardWrapper = styled.div`
@@ -80,7 +80,7 @@ const LogoBox = styled.div<{ color: string }>`
   align-items: center;
 `;
 
-const Input = styled.input<{ $center?: boolean; isWhite: boolean }>`
+const Input = styled.input<{ $center?: boolean; $isWhite: boolean }>`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -90,7 +90,7 @@ const Input = styled.input<{ $center?: boolean; isWhite: boolean }>`
       text-align: center;
     `}
   background-color: transparent;
-  color: ${({ isWhite }) => (isWhite ? "white" : "black")};
+  color: ${({ $isWhite }) => ($isWhite ? "white" : "black")};
   width: 100%;
   flex-shrink: 1;
 `;
@@ -107,7 +107,7 @@ const CardCVCPart = styled.div`
 
 const CVCNumberBox = styled.span`
   width: 45px;
-  ${FlexCenter}
+  ${flexCenter}
 `;
 
 const S = {

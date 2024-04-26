@@ -37,14 +37,14 @@ const CardRegisterFormWithHook = () => {
   return (
     <CardRegisterForm
       cardNumbersState={cardNumbersState}
-      expiredPeriodState={expiredDateState}
+      expirationPeriodState={expiredDateState}
       ownerNameState={ownerNameState}
       CVCNumbersState={CVCNumbersState}
       passwordState={passwordState}
       cardTypeState={cardTypeState}
       step={step}
       setStep={setStep}
-      completedArr={[]}
+      stepPassedArr={[]}
     />
   );
 };

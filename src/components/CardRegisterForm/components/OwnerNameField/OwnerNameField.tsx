@@ -6,7 +6,7 @@ import Input from "@/components/_common/Input/Input";
 import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
-import { ValidationStatus } from "@/utils/validation";
+import { ErrorStatus } from "@/utils/validation";
 
 interface Props {
   ownerNameState: ReturnType<typeof useInput<string>>;
@@ -17,8 +17,8 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
 
   const onEnterCompleted = () => {
     setError((prev) => {
-      if (prev.includes(ValidationStatus.ENTER_REQUIRED)) {
-        return [...prev].filter((e) => e !== ValidationStatus.ENTER_REQUIRED);
+      if (prev.includes(ErrorStatus.ENTER_REQUIRED)) {
+        return [...prev].filter((e) => e !== ErrorStatus.ENTER_REQUIRED);
       }
       return prev;
     });
@@ -30,8 +30,8 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
         errorMessages={[
-          error.includes(ValidationStatus.NAME_SHOULD_BE_CAPITAL)
-            ? ValidationStatus.NAME_SHOULD_BE_CAPITAL
+          error.includes(ErrorStatus.NAME_SHOULD_BE_CAPITAL)
+            ? ErrorStatus.NAME_SHOULD_BE_CAPITAL
             : null,
         ]}
         showErrors={true}

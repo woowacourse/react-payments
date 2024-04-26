@@ -13,7 +13,8 @@ interface Props {
 
 const PasswordField = ({ passwordState }: Props) => {
   const { onChange, error, isError } = passwordState;
-  const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
+  const { showErrors, onBlurShowErrors, onFocusHideErrors } =
+    useShowError(error);
 
   return (
     <S.InputFieldWithInfo>
