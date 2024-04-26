@@ -37,6 +37,7 @@ const FormInputCompound = forwardRef(function FormInputCompound<T>(
     <input
       ref={ref}
       {...props}
+      name={name}
       css={inputStyle(sizePreset, isError)}
       onChange={(e) => onInputChange(e, name as keyof T)}
     />
