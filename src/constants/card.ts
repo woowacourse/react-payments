@@ -19,3 +19,12 @@ export const DEFAULT_CARD: Card = {
   cvc: '',
   password: '',
 };
+
+export const DEFAULT_CARD_BOOLEAN = {
+  cardNumbers: false,
+  cardCompany: false,
+  expiryDate: false,
+  userName: false,
+  cvc: false,
+  password: false,
+};
