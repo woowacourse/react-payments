@@ -44,7 +44,10 @@ const useInput = ({
         ...prevState,
         [index]: {
           ...prevState[index],
-          value: newValue.slice(0, newValue.length - 1),
+          value: newValue
+            .split('')
+            .filter((char) => regex.test(char))
+            .join(''),
           hasError: true,
           isFilled: isFilled,
         },
