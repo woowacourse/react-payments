@@ -12,7 +12,8 @@ import {
   validatePassword,
   validateUserName,
 } from '../domain/InputValidation';
-import BottomButton from '../components/BottomButton';
+import BottomButton from '../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Page = styled.div`
   width: 100vw;
@@ -50,9 +51,13 @@ export default function EnrollCard() {
     password,
     setPassword,
   } = useCardForm({});
-
+const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    navigate("/CardRegistrationConfirmation", { state: { ...cardNumbers,  ...cardBrand} });
+  
+    
+
   };
 
   const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
@@ -100,7 +105,7 @@ export default function EnrollCard() {
             setPassword,
           }}
         />
-        {submitButtonFlag && <BottomButton value={'제출'}></BottomButton>}
+        {submitButtonFlag && <BottomButton value={'제출'} layoutType='bottom'></BottomButton>}
       </Container>
     </Page>
   );
