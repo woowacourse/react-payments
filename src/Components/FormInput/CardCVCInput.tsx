@@ -2,7 +2,7 @@ import { memo, useEffect } from "react";
 
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardCVCContext, CardUIHeadOrTailContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardCVCErrorContext } from "../Form/FormContextProvider";
+import { CardCVCErrorContext } from "../../routes/Payments/FormContextProvider";
 import { CardCVCInputContext, CardPasswordInputContext } from "../Form/FormRefContextProvider";
 import { cardCVCValidator } from "./validator";
 

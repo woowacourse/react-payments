@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { CardPasswordErrorContext } from "../Form/FormContextProvider";
+import { CardPasswordErrorContext } from "../../routes/Payments/FormContextProvider";
 import CardPasswordInput from "../FormInput/CardPasswordInput";
 
 import FormFieldComponent from "./FormFieldComponent";

@@ -2,7 +2,7 @@ import { memo } from "react";
 
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardNumberErrorContext } from "../Form/FormContextProvider";
+import { CardNumberErrorContext } from "../../routes/Payments/FormContextProvider";
 import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 import { cardNumbersValidator } from "./validator";
 

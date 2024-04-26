@@ -5,6 +5,7 @@ import CardInfoContextProvider from "./CardInfoContextProvider";
 import CreditCard from "../../components/CreditCard";
 import Form from "../../components/Form";
 import { Dispatch, SetStateAction, createContext, useState } from "react";
+import FormContextProvider from "./FormContextProvider";
 
 const mainStyle = css({
   display: "flex",
@@ -26,14 +27,16 @@ const Payments = () => {
   });
 
   return (
-    <CardInfoContextProvider>
-      <FormRenderOrderContext.Provider value={formRenderOrderState}>
-        <div css={mainStyle}>
-          <CreditCard />
-          <Form />
-        </div>
-      </FormRenderOrderContext.Provider>
-    </CardInfoContextProvider>
+    <div css={mainStyle}>
+      <CardInfoContextProvider>
+        <CreditCard />
+        <FormContextProvider>
+          <FormRenderOrderContext.Provider value={formRenderOrderState}>
+            <Form />
+          </FormRenderOrderContext.Provider>
+        </FormContextProvider>
+      </CardInfoContextProvider>
+    </div>
   );
 };
 
