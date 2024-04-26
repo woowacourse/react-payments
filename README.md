@@ -75,7 +75,7 @@ Performance
 - [x] 모든 컴포넌트 렌더링
 - [x] Validator 작성
 - [x] cardPreview 연결
-- [ ] 컴포넌트 렌더링에 조건 달기
+- [x] 컴포넌트 렌더링에 조건 달기
 - [ ] 이벤트 달기
   - [ ] Submit 이벤트
   - [ ] FocusOut 이벤트
