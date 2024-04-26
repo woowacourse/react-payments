@@ -44,18 +44,6 @@ const inputBoxStyle = css({
   gap: '10px',
 });
 
-const selectorContainerStyle = css({
-  display: 'flex',
-  gap: '8px',
-  flexDirection: 'column',
-  width: '100%',
-});
-
-const selectorBoxStyle = css({
-  display: 'flex',
-  gap: '10px',
-});
-
 const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusColor: string }) =>
   css({
     border: `1px solid ${borderColor}`,
@@ -131,12 +119,12 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
 
             if (informationSection === 'provider') {
               return (
-                <div css={selectorContainerStyle} key={index}>
-                  <div css={selectorBoxStyle}>
-                    <Selector onInputChange={(provider: string) => onInputChange({ value: provider, index: 0 })} />
-                  </div>
-                  {isError && <ErrorMessage value={errorMessage} />}
-                </div>
+                <Selector
+                  key={index}
+                  onInputChange={(provider: string) => onInputChange({ value: provider, index: 0 })}
+                  isError={isError}
+                  errorMessage={errorMessage}
+                />
               );
             }
 
