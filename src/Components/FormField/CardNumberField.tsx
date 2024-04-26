@@ -6,6 +6,7 @@ import CardNumberInput from "../FormInput/CardNumberInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
 import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 
 const CardNumberField = () => {
   const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
@@ -16,6 +17,7 @@ const CardNumberField = () => {
 
   const cardNumbers = useContextWrapper(CardNumbersContext)[0];
   const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const firstInput = useContextWrapper(CardNumberInputsContext)[0];
 
   useEffect(() => {
     if (
@@ -32,6 +34,10 @@ const CardNumberField = () => {
       });
     }
   }, [cardNumbers, setRenderOrder]);
+
+  useEffect(() => {
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent

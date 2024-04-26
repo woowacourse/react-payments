@@ -7,7 +7,7 @@ import FormInputCompound from "./FormInputCompound";
 
 import { cardPeriodValidator } from "./validator";
 import onInputChange from "./onInputChange";
-import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
+import { CardOwnerInputContext, CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 
 interface InputInfo {
   name: keyof CardValidityPeriod;
@@ -20,10 +20,11 @@ const CardPeriodInput = memo(() => {
   const [cardPeriod, setData] = useContextWrapper(CardValidityPeriodContext);
   const [periodError, setError] = useContextWrapper(CardValidityPeriodErrorContext);
   const [firstRef, secondRef] = useContextWrapper(CardPeriodInputsContext);
+  const nextFieldRef = useContextWrapper(CardOwnerInputContext)[0];
 
   const InputInfoList: InputInfo[] = [
     { name: "month", placeholder: "MM", ref: firstRef, nextRef: secondRef },
-    { name: "year", placeholder: "YY", ref: secondRef },
+    { name: "year", placeholder: "YY", ref: secondRef, nextRef: nextFieldRef },
   ];
 
   return (

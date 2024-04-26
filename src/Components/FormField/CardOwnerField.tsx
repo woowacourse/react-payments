@@ -6,7 +6,7 @@ import { CardOwnerInfoErrorContext } from "../Form/FormContextProvider";
 
 import CardOwnerInput from "../FormInput/CardOwnerInput";
 import FormFieldComponent from "./FormFieldComponent";
-import { CardOwnerInputContext } from "../Form/FormRefContextProvider";
+import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
@@ -19,6 +19,9 @@ const CardOwnerField = () => {
   const cardOwnerInput = useContextWrapper(CardOwnerInputContext)[0];
   const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
+  const firstInput = useContextWrapper(CardOwnerInputContext)[0];
+  const nextFieldInput = useContextWrapper(CardCVCInputContext)[0];
+
   const ENTER_KEY_CODE = 13;
   useEffect(() => {
     cardOwnerInput.current?.addEventListener("keydown", (e) => {
@@ -29,9 +32,14 @@ const CardOwnerField = () => {
           }
           return prev;
         });
+        nextFieldInput.current?.focus();
       }
     });
-  }, [cardOwner, cardOwnerInput, setRenderOrder]);
+  }, [cardOwner, cardOwnerInput, setRenderOrder, nextFieldInput]);
+
+  useEffect(() => {
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent

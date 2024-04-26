@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { FormRenderOrderContext } from "../../routes/Payments";
@@ -24,7 +26,7 @@ const CardIssuerField = () => {
         return prev;
       });
     }
-  }, [cardIssuer]);
+  }, [cardIssuer, setRenderOrder]);
 
   return (
     <FormFieldComponent

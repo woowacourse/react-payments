@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardPasswordErrorContext } from "../Form/FormContextProvider";
 import CardPasswordInput from "../FormInput/CardPasswordInput";
 
 import FormFieldComponent from "./FormFieldComponent";
+import { CardPasswordInputContext } from "../Form/FormRefContextProvider";
 
 const CardPasswordField = () => {
   const cardPasswordError = useContextWrapper(CardPasswordErrorContext)[0];
@@ -10,6 +12,12 @@ const CardPasswordField = () => {
   const categoryHasError = cardPasswordErrorKeys.find((category) => {
     return cardPasswordError[category]?.errorMessage;
   });
+
+  const firstInput = useContextWrapper(CardPasswordInputContext)[0];
+
+  useEffect(() => {
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent

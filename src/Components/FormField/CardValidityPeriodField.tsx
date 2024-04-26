@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { FormRenderOrderContext } from "../../routes/Payments";
@@ -6,6 +8,7 @@ import { CardValidityPeriodErrorContext } from "../Form/FormContextProvider";
 
 import CardPeriodInput from "../FormInput/CardPeriodInput";
 import FormFieldComponent from "./FormFieldComponent";
+import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 
 const CardValidityPeriodField = () => {
   const cardPeriodError = useContextWrapper(CardValidityPeriodErrorContext)[0];
@@ -16,6 +19,7 @@ const CardValidityPeriodField = () => {
 
   const cardPeriod = useContextWrapper(CardValidityPeriodContext)[0];
   const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   useEffect(() => {
     if (cardPeriod.month?.length === 2 && cardPeriod.year?.length === 2) {
@@ -27,6 +31,10 @@ const CardValidityPeriodField = () => {
       });
     }
   }, [cardPeriod, setRenderOrder]);
+
+  useEffect(() => {
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent

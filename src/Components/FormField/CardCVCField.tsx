@@ -6,6 +6,7 @@ import { CardCVCErrorContext } from "../Form/FormContextProvider";
 import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
+import { CardCVCInputContext } from "../Form/FormRefContextProvider";
 
 const CardCVCField = () => {
   const cardCVCError = useContextWrapper(CardCVCErrorContext)[0];
@@ -17,6 +18,8 @@ const CardCVCField = () => {
   const cardCVC = useContextWrapper(CardCVCContext)[0];
   const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
+  const firstInput = useContextWrapper(CardCVCInputContext)[0];
+
   useEffect(() => {
     if (cardCVC.value?.length === 3) {
       setRenderOrder((prev) => {
@@ -27,6 +30,10 @@ const CardCVCField = () => {
       });
     }
   }, [cardCVC, setRenderOrder]);
+
+  useEffect(() => {
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent
