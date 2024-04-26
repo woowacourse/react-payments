@@ -21,7 +21,6 @@ const CardPreview = memo(
     CVC,
     face,
   }: CardPreviewProps) => {
-    console.log(face === "front", cardCompany, styles[cardCompany]);
     return (
       <div
         className={`${styles.container} ${face === "front" ? styles[cardCompany] : ""}`}

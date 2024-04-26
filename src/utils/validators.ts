@@ -1,3 +1,5 @@
+import { ExpirationDate } from "@/types/card";
+
 export const isInteger = (value: string) => {
   return Number.isInteger(Number(value));
 };
@@ -12,7 +14,7 @@ export const isValidMonth = (value: string) =>
   1 <= Number(value) && Number(value) <= 12;
 
 export const isValidDate = ({ year, month }: ExpirationDate) => {
-  if (year === "") return true;
+  if (year === "" || month === "") return false;
 
   const currentDate = new Date();
   const inputDate = new Date(Number(year) + 2000, Number(month));
