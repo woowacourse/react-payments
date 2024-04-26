@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputInfo } from '../types/input';
-import Validation from '../domain/InputValidation';
-import { validateLength } from '../domain/CompleteValidation';
+import { InputValidation, validateLength } from '../domain/InputValidation';
+import { ENTER_KEY } from '../constants/system';
 
 interface Props {
   info: InputInfo;
@@ -20,7 +20,7 @@ export const useInput = ({
 
   const handleValidation = (inputValue: string) => {
     try {
-      Validation[info.validateType]?.(inputValue);
+      InputValidation[info.validateType]?.(inputValue);
       handleInput(inputValue);
       handleErrorMessage('');
 
@@ -52,11 +52,10 @@ export const useInput = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === ENTER_KEY) {
       try {
         validateLength(value, info.minLength);
-        Validation[info.validateType]?.(value);
-        // TOOD 고민해보자
+        InputValidation[info.validateType]?.(value);
         onNext();
       } catch (error) {
         if (error instanceof Error) {
