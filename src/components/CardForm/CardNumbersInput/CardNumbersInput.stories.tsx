@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardNumberInput from './CardNumberInput';
+import CardNumbersInput from './CardNumbersInput';
 import { validateCardNumber } from '../../../domain/Card';
 import useInputs from '../../../hooks/useInputs';
 
 const meta = {
-  title: 'component/CardNumberInput',
-  component: CardNumberInput,
+  title: 'component/CardNumbersInput',
+  component: CardNumbersInput,
   parameters: {
     controls: { exclude: 'cardNumbers' },
   },
   decorators: [
     () => {
       const cardNumbers = useInputs(validateCardNumber, ['', '', '', '']);
-      return <CardNumberInput cardNumbers={cardNumbers} />;
+      return <CardNumbersInput cardNumbers={cardNumbers} />;
     },
   ],
-} satisfies Meta<typeof CardNumberInput>;
+} satisfies Meta<typeof CardNumbersInput>;
 
 export default meta;
 
-type Story = StoryObj<typeof CardNumberInput>;
+type Story = StoryObj<typeof CardNumbersInput>;
 
 export const Default: Story = {};

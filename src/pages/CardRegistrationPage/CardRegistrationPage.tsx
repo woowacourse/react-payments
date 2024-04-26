@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CardPreview from '../../components/CardForm/CardPreview/CardPreview';
 import CardOwnerInput from '../../components/CardForm/CardOwnerInput/CardOwnerInput';
 import CardExpirationInput from '../../components/CardForm/CardExpirationInput/CardExpirationInput';
-import CardNumberInput from '../../components/CardForm/CardNumberInput/CardNumberInput';
+import CardNumbersInput from '../../components/CardForm/CardNumbersInput/CardNumbersInput';
 import CardCompanyInput from '../../components/CardForm/CardCompanyInput/CardCompanyInput';
 import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
@@ -58,7 +58,7 @@ const CardRegistrationPage = () => {
         {moveIndex >= 3 && <CardOwnerInput owner={owner} />}
         {moveIndex >= 2 && <CardExpirationInput month={month} year={year} />}
         {moveIndex >= 1 && <CardCompanyInput company={company} />}
-        <CardNumberInput cardNumbers={cardNumbers} />
+        <CardNumbersInput cardNumbers={cardNumbers} />
       </S.CardForm>
     );
   };

@@ -8,11 +8,11 @@ import { isNumber } from '../../../utils/validation';
 import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
-interface CardNumberInputProps {
+interface CardNumbersInputProps {
   cardNumbers: InputsType;
 }
 
-function CardNumberInput({ cardNumbers }: CardNumberInputProps) {
+function CardNumbersInput({ cardNumbers }: CardNumbersInputProps) {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,4 +58,4 @@ function CardNumberInput({ cardNumbers }: CardNumberInputProps) {
   );
 }
 
-export default CardNumberInput;
+export default CardNumbersInput;
