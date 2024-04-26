@@ -1,4 +1,4 @@
-import { StyledCardInformationForm, StyledSubmitButton } from './style';
+import { StyledCardInformationForm } from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -12,6 +12,8 @@ import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import { CVCStateType } from '../../hooks/useCVC';
 import { useState } from 'react';
 import { PasswordStateType } from '../../hooks/usePassword';
+import { useNavigate } from 'react-router-dom';
+import Button from '../Button/Button';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER, OPTION } = MESSAGE;
 const { MAX_LENGTH, CARD_INFORMATION_APPEARED } = CONDITION;
@@ -33,6 +35,8 @@ const CardInformationForm = ({
   cvcState,
   passwordState,
 }: CardInformationFormProps) => {
+  const navigate = useNavigate();
+
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
   const [appearedCondition, setAppearedCondition] = useState<number>(
@@ -106,7 +110,19 @@ const CardInformationForm = ({
 
   return (
     <StyledCardInformationForm>
-      {isSubmitButtonAppearedCondition && <StyledSubmitButton>확인</StyledSubmitButton>}
+      {isSubmitButtonAppearedCondition && (
+        <Button
+          label={LABEL.button}
+          onClick={() => {
+            navigate('/registration', {
+              state: {
+                firstValue: firstState.value,
+                selectedCardValue: selectedCardState.value,
+              },
+            });
+          }}
+        />
+      )}
       {isPasswordAppearedCondition && (
         <FormField title={TITLE.password} caption={CAPTION.password}>
           <InputField label={LABEL.password} error={passwordErrorMessage}>
