@@ -10,24 +10,27 @@ import CardSubmitPage from './pages/CardSubmitPage';
 import { URL } from './constants/card-app';
 import ErrorPage from './pages/ErrorPage';
 
-const router = createBrowserRouter([
-  {
-    path: URL.defaultPage,
-    element: <NewCardInputPage />,
-  },
-  {
-    path: URL.submitPage,
-    element: <CardSubmitPage />,
-  },
-  {
-    path: URL.errorPage,
-    element: <ErrorPage />,
-  },
-  {
-    path: '*',
-    element: <ErrorPage />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <NewCardInputPage />,
+    },
+    {
+      path: '/submit',
+      element: <CardSubmitPage />,
+    },
+    {
+      path: '/error',
+      element: <ErrorPage />,
+    },
+    {
+      path: '/*',
+      element: <ErrorPage />,
+    },
+  ],
+  { basename: URL.defaultPage }
+);
 
 function App() {
   return (
