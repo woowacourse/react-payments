@@ -4,9 +4,10 @@ import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardCVCContext, CardUIHeadOrTailContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardCVCErrorContext } from "../../routes/Payments/FormContextProvider";
 import { CardCVCInputContext, CardPasswordInputContext } from "../Form/FormRefContextProvider";
-import { cardCVCValidator } from "./validator";
+import { cardCVCValidator } from "./validator/changeValidator";
 
 import FormInputCompound from "./FormInputCompound";
+import { cardCVCBlurValidator } from "./validator/blurValidator";
 
 interface InputInfoList {
   name: keyof CardCVC;
@@ -60,6 +61,7 @@ const CardCVCInput = memo(() => {
           setData={setData}
           setError={setError}
           changeValidator={cardCVCValidator}
+          blurValidator={cardCVCBlurValidator}
           isError={!!cardCVCError[name]?.isError}
           sizePreset="large"
           maxLength={3}

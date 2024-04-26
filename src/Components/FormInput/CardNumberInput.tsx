@@ -4,9 +4,10 @@ import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardNumberErrorContext } from "../../routes/Payments/FormContextProvider";
 import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
-import { cardNumbersValidator } from "./validator";
+import { cardNumbersValidator } from "./validator/changeValidator";
 
 import FormInputCompound from "./FormInputCompound";
+import { cardNumberBlurValidator } from "./validator/blurValidator";
 
 interface InputInfoList {
   name: keyof CardNumbers;
@@ -36,6 +37,7 @@ const CardNumberInput = memo(() => {
           setData={setData}
           setError={setError}
           changeValidator={cardNumbersValidator}
+          blurValidator={cardNumberBlurValidator}
           isError={!!cardNumberError[name]?.isError}
           sizePreset="small"
           placeholder="1234"
