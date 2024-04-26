@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 import { validateExpired, formatMonth } from '../utils/validateExpirationDate';
+import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
 
 import ERROR_MESSAGE from '../constants/errorMessage';
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 
 import {
@@ -20,8 +21,10 @@ import {
 
 const ExpirationDateFormSection = ({
   changeExpiration,
+  changeIsValid,
 }: {
   changeExpiration: ({ month, year }: ChangeExpirationProps) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
     inputState,
@@ -79,6 +82,10 @@ const ExpirationDateFormSection = ({
         setErrorMessage,
         errorText: ERROR_MESSAGE.expiryFormat,
         elseValidator: () => validateExpired({ inputState, setErrorMessage }),
+      });
+      changeIsValid({
+        state: 'expirationDate',
+        isValid: checkError(inputState),
       });
     }
   }, [hasNoAllFocus]);

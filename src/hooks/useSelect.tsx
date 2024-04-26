@@ -11,6 +11,7 @@ const useSelect = ({ inputLength }: Props) => {
       value: '',
       hasError: false,
       hasFocus: index === 0,
+      isFilled: false,
     })).reduce((acc, curr, index) => {
       acc[index] = curr;
       return acc;
@@ -32,6 +33,7 @@ const useSelect = ({ inputLength }: Props) => {
       [index]: {
         ...prevState[index],
         value: newValue,
+        isFilled: true,
       },
     }));
   };

@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
 import ERROR_MESSAGE from '../constants/errorMessage';
 
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 
 import {
@@ -19,8 +20,10 @@ import {
 
 const CardNumbersFormSection = ({
   changeCardNumber,
+  changeIsValid,
 }: {
   changeCardNumber: (cardNumber: string[]) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
     inputState,
@@ -77,6 +80,11 @@ const CardNumbersFormSection = ({
         setInputState,
         setErrorMessage,
         errorText: ERROR_MESSAGE.cardNumberOutOfRange,
+      });
+
+      changeIsValid({
+        state: 'cardNumber',
+        isValid: checkError(inputState),
       });
     }
   }, [hasNoAllFocus]);

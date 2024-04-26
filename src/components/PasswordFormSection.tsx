@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
 
 import ERROR_MESSAGE from '../constants/errorMessage';
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 
 import {
@@ -19,8 +20,10 @@ import {
 
 const PasswordFormSection = ({
   changePassword,
+  changeIsValid,
 }: {
   changePassword: (password: string) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
     inputState,
@@ -52,6 +55,13 @@ const PasswordFormSection = ({
   useEffect(() => {
     changePassword(inputState[0].value);
   }, [inputState[0].value]);
+
+  useEffect(() => {
+    changeIsValid({
+      state: 'password',
+      isValid: checkError(inputState),
+    });
+  }, [!inputState[0].hasFocus]);
 
   return (
     <FormSection>

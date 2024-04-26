@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import useSelect from '../hooks/useSelect';
+import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsSelectField from './common/PaymentsSelectField';
 
 import ERROR_MESSAGE from '../constants/errorMessage';
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 
 import {
   FormSection,
@@ -15,14 +16,15 @@ import {
 
 const CardCompanyFormSection = ({
   changeCardCompany,
+  changeIsValid,
 }: {
   changeCardCompany: (password: string) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
-  const { inputState, handleValueChange, setFocus, setBlur, resetErrors } =
-    useSelect({
-      inputLength: OPTION.cardCompanyInputCount,
-      errorText: ERROR_MESSAGE.notChoiceCardCompany,
-    });
+  const { inputState, handleValueChange, setFocus, setBlur } = useSelect({
+    inputLength: OPTION.cardCompanyInputCount,
+    errorText: ERROR_MESSAGE.notChoiceCardCompany,
+  });
 
   const options = [
     ['BC카드', 'BC'],
@@ -38,6 +40,13 @@ const CardCompanyFormSection = ({
   useEffect(() => {
     changeCardCompany(inputState[0].value);
   }, [inputState[0].value]);
+
+  useEffect(() => {
+    changeIsValid({
+      state: 'cardCompany',
+      isValid: checkError(inputState),
+    });
+  }, [!inputState[0].hasFocus]);
 
   return (
     <FormSection>
