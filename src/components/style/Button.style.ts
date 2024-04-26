@@ -9,7 +9,15 @@ const ButtonStyle = styled.button<{ floating?: boolean; width?: number }>`
   border: none;
   padding: 18px 0;
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};
-  border-radius: ${(props) => (!props.floating ? '5px' : 'none')};
+  border-radius: ${(props) => (!props.floating ? '5px' : '0')};
+  cursor: pointer;
+  ${(props) =>
+    props.floating
+      ? `   z-index: 1;
+    position: fixed;
+    bottom: 0;
+    max-width:375px;`
+      : ''};
 `;
 
 export default ButtonStyle;

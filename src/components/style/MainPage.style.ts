@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 import STYLE from '../../constants/style';
 
-const Main = styled.div`
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 5% 0;
+  width: 100vw;
+`;
+
+export const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,5 +20,3 @@ const Main = styled.div`
   height: fit-content;
   background-color: ${STYLE.COLOR.white};
 `;
-
-export default Main;

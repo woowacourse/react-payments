@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import useRender from '../hooks/useRender';
 
 import Container from './style/CardInfo.style';
@@ -20,8 +21,13 @@ interface Props {
   password: boolean;
 }
 
+const stepList = Object.values(STEP);
+
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
+  const { renderComponent, setRender } = useRender({
+    children: stepList,
+  });
 
   const [isValid, setIsValid] = useState<Props>({
     cardCompany: false,
@@ -31,13 +37,6 @@ const CardInfo = ({ ...props }) => {
     cvc: false,
     password: false,
   });
-
-  const stepList = Object.values(STEP);
-
-  const { renderComponent, setRender } = useRender({
-    children: stepList,
-  });
-
   const [step, setStep] = useState(0);
 
   const changeIsValid = ({ state, isValid }: isValidProps) => {
@@ -80,16 +79,26 @@ const CardInfo = ({ ...props }) => {
     changeCardInfo((prev: CardInfo) => ({ ...prev, name: name }));
   };
 
+  const navigateConfirmPage = () => {
+    return <Link to={`/register-confirm`}></Link>;
+  };
+
   return (
     <Container>
-      <CardNumbersFormSection
-        changeCardNumber={changeCardNumber}
-        changeIsValid={changeIsValid}
-      />
+      {step >= 5 && (
+        <PasswordFormSection
+          changePassword={changePassword}
+          changeIsValid={changeIsValid}
+        />
+      )}
 
-      {step >= 1 && (
-        <CardCompanyFormSection
-          changeCardCompany={changeCardCompany}
+      {step >= 4 && (
+        <CVCFormSection changeCVC={changeCVC} changeIsValid={changeIsValid} />
+      )}
+
+      {step >= 3 && (
+        <NameFormSection
+          changeName={changeName}
           changeIsValid={changeIsValid}
         />
       )}
@@ -101,24 +110,22 @@ const CardInfo = ({ ...props }) => {
         />
       )}
 
-      {step >= 3 && (
-        <NameFormSection
-          changeName={changeName}
-          changeIsValid={changeIsValid}
-        />
-      )}
-      {step >= 4 && (
-        <CVCFormSection changeCVC={changeCVC} changeIsValid={changeIsValid} />
-      )}
-      {step >= 5 && (
-        <PasswordFormSection
-          changePassword={changePassword}
+      {step >= 1 && (
+        <CardCompanyFormSection
+          changeCardCompany={changeCardCompany}
           changeIsValid={changeIsValid}
         />
       )}
 
+      <CardNumbersFormSection
+        changeCardNumber={changeCardNumber}
+        changeIsValid={changeIsValid}
+      />
+
       {Object.values(isValid).every((state) => state) && (
-        <Button text="확인" floating />
+        <Link to={`/register-confirm`}>
+          <Button text="확인" floating onClick={navigateConfirmPage} />
+        </Link>
       )}
     </Container>
   );
