@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { checkLength } from '../domain/CompleteValidation';
 import { InputType } from '../types/input';
+import { checkLength } from '../domain/InputValidation';
 
 interface Props {
   inputTypes: InputType;
@@ -28,11 +28,9 @@ export const useInputField = ({ inputTypes, handleComplete }: Props) => {
       Object.values(values).every((value, index) =>
         checkLength(value, inputTypes.inputInfo[index].minLength)
       )
-    ) {
+    )
       return true;
-    } else {
-      return false;
-    }
+    else return false;
   };
 
   const updateInputValue = (property: string, value: string) => {

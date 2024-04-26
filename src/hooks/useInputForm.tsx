@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import CompleteValidation from '../domain/CompleteValidation';
 import { Card, CardCompany } from '../types/card';
+import { DEFAULT_CARD_BOOLEAN } from '../constants/card';
 
 interface InputFormProps {
   cardInfo: Card;
@@ -13,35 +13,24 @@ const useInputForm = ({
   handleInput,
   handleSubmit,
 }: InputFormProps) => {
-  const [step, setStep] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [complete, setComplete] =
+    useState<Record<string, boolean>>(DEFAULT_CARD_BOOLEAN);
 
   useEffect(() => {
-    console.log('step', step);
-
-    if (step.every((value) => value === true)) {
+    if (Object.values(complete).every((value) => value === true)) {
       handleSubmit(true);
     } else {
       handleSubmit(false);
     }
-  }, [step, handleSubmit]);
+  }, [complete]);
 
-  const handleStep = (index: number, next: boolean = true) => {
-    console.log('index', index);
-    console.log('step forward', step);
-    setStep((prev) => {
-      const newStep = [...prev];
-      newStep[index] = next;
-      return newStep;
+  const handleComplete = (str: string, isComplete: boolean) => {
+    setComplete((prev) => {
+      return {
+        ...prev,
+        [str]: isComplete,
+      };
     });
-
-    console.log('step behind', step);
   };
 
   const handleOneValue = (value: Record<string, string>) => {
@@ -59,9 +48,6 @@ const useInputForm = ({
         ...value,
       },
     });
-    if (CompleteValidation['expiryDate']?.(value)) {
-      handleStep(step.indexOf(false));
-    }
   };
 
   const handleSelectCardCompany = (value: CardCompany) => {
@@ -69,13 +55,9 @@ const useInputForm = ({
       ...cardInfo,
       cardCompany: value,
     });
-    handleStep(step.indexOf(false));
   };
 
-  const handleCardNumberInput = (
-    step: number,
-    value: Record<string, string>
-  ) => {
+  const handleCardNumberInput = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       cardNumbers: {
@@ -83,26 +65,14 @@ const useInputForm = ({
         ...value,
       },
     });
-    if (CompleteValidation['cardNumbers']?.(value)) {
-      console.log('통과!', step);
-      handleStep(step);
-    } else {
-      console.log('stop');
-      handleStep(step, false);
-    }
-  };
-
-  const handleNext = () => {
-    handleStep(step.indexOf(false));
   };
 
   return {
-    step,
     handleOneValue,
     handleExpiryDateInput,
     handleSelectCardCompany,
     handleCardNumberInput,
-    handleNext,
+    handleComplete,
   };
 };
 
