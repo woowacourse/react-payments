@@ -40,7 +40,7 @@ const CVCNumber = ({
         <Input
           onBlur={onBlur}
           onFocus={() => setIsFocusCVCPreview(true)}
-          aria-label="소유자_이름"
+          aria-label="카드인증값(CVC)"
           placeholder={PLACEHOLDER.cvcNumber}
           value={cvcNumberState}
           maxLength={MAX_LENGTH.cvcNumber}

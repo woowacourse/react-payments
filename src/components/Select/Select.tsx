@@ -8,13 +8,14 @@ interface Option {
 }
 
 interface SelectProps {
+  label: string;
   value: string | null;
   onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   placeholder: string;
   options: Option[];
 }
 
-const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
+const Select = ({ label, placeholder, options, value, onChange }: SelectProps) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [isShowOptions, setIsShowOptions] = useState(false);
 
@@ -35,7 +36,12 @@ const Select = ({ placeholder, options, value, onChange }: SelectProps) => {
   }, [selectRef]);
 
   return (
-    <Styled.Select $isActive={isShowOptions} ref={selectRef} onClick={toggleIsShowOptions}>
+    <Styled.Select
+      aria-label={label}
+      $isActive={isShowOptions}
+      ref={selectRef}
+      onClick={toggleIsShowOptions}
+    >
       <Styled.CurrentSelected $unSelected={value === null}>
         {value ?? placeholder}
       </Styled.CurrentSelected>

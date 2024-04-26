@@ -42,6 +42,7 @@ const CardBrand = ({
     <FormField title={TITLE.cardBrand} caption={CAPTION.cardBrand}>
       <InputField>
         <Select
+          label="카드브랜드"
           value={cardBrandState}
           onChange={(event) => onChange(event)}
           placeholder={PLACEHOLDER.cardBrand}
