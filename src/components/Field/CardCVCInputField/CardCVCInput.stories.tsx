@@ -1,5 +1,3 @@
-// CardCVCInputField.stories.tsx
-
 import { useState } from "react";
 import { StoryFn, Meta } from "@storybook/react";
 
