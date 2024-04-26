@@ -1,4 +1,4 @@
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 import ERROR_MESSAGE from '../constants/errorMessage';
 

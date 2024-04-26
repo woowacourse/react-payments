@@ -1,4 +1,4 @@
-const OPTION = {
+export const OPTION = {
   cardNumberInputCount: 4,
   cardNumberMaxLength: 4,
   expirationDateInputCount: 2,
@@ -14,4 +14,11 @@ const OPTION = {
   maxMonth: '12',
 };
 
-export default OPTION;
+export const STEP = {
+  cardNumber: 'cardNumber',
+  cardCompany: 'cardCompany',
+  expirationDate: 'expirationDate',
+  name: 'name',
+  cvc: 'cvc',
+  password: 'password',
+};

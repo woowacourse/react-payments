@@ -60,6 +60,11 @@ interface ChangeExpirationProps {
   year: string;
 }
 
+interface isValidProps {
+  state: string;
+  isValid: boolean;
+}
+
 type CardCompany =
   | 'BC'
   | 'shinhan'
@@ -69,3 +74,11 @@ type CardCompany =
   | 'lotte'
   | 'kebhana'
   | 'kbstar';
+
+type Step =
+  | 'cardCompany'
+  | 'cardNumber'
+  | 'expirationDate'
+  | 'name'
+  | 'cvc'
+  | 'password';
