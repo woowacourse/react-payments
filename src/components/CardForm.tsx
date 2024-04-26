@@ -20,14 +20,25 @@ export default function CardForm({
   useCardHolder,
   useCardIssuer,
 }: props) {
-  return (
-    <CardFormContainer>
-      <CardNumbers useCardNumbers={useCardNumbers} />
-      <ExpiredDate useCardExpiredDate={useCardExpiredDate} />
-      <CardIssuer useCardIssuer={useCardIssuer} />
-      <CardHolder useCardHolder={useCardHolder} />
-    </CardFormContainer>
-  );
+  const states = [
+    useCardHolder,
+    useCardExpiredDate,
+    useCardIssuer,
+    useCardNumbers,
+  ];
+
+  const elements = [
+    <CardHolder key={'cardHolder'} useCardHolder={useCardHolder} />,
+    <ExpiredDate key={'expiredDate'} useCardExpiredDate={useCardExpiredDate} />,
+    <CardIssuer key={'cardIssuer'} useCardIssuer={useCardIssuer} />,
+    <CardNumbers key={'cardNumbers'} useCardNumbers={useCardNumbers} />,
+  ];
+
+  const lastValidIndex = states.findIndex(state => state.isValid);
+
+  const sliceIndex =
+    lastValidIndex === -1 ? -1 : Math.max(lastValidIndex - 1, 0);
+  return <CardFormContainer>{elements.slice(sliceIndex)}</CardFormContainer>;
 }
 
 const CardFormContainer = styled.form({
@@ -35,4 +46,9 @@ const CardFormContainer = styled.form({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
+  overflowY: 'scroll',
+
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
