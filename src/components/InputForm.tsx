@@ -4,6 +4,7 @@ import InputField from './InputField';
 import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import SelectCardCompanyField from './SelectCardCompanyField';
 import useInputForm from '../hooks/useInputForm';
+import useStep from '../hooks/useStep';
 
 interface Props {
   cardInfo: Card;
@@ -17,66 +18,80 @@ export default function InputForm({
   handleSubmit,
 }: Props) {
   const {
-    step,
     handleOneValue,
     handleExpiryDateInput,
     handleSelectCardCompany,
     handleCardNumberInput,
-    handleNext,
+    handleComplete,
   } = useInputForm({ cardInfo, handleInput, handleSubmit });
+
+  const { step, handleNext } = useStep();
 
   return (
     <FormContainer>
-      {step[4] && (
+      {step['password'] && (
         <InputField
           title="비밀번호를 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.PASSWORD}
           handleInput={handleOneValue}
-          handleNext={handleNext}
+          handleNext={() => handleNext('')}
+          handleComplete={(isComplete: boolean) =>
+            handleComplete('password', isComplete)
+          }
         />
       )}
-      {step[3] && (
+      {step['cvc'] && (
         <InputField
           title="CVC 번호를 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.CVC}
           handleInput={handleOneValue}
-          handleNext={handleNext}
+          handleNext={() => handleNext('password')}
+          handleComplete={(isComplete: boolean) =>
+            handleComplete('cvc', isComplete)
+          }
         />
       )}
-      {step[2] && (
+      {step['userName'] && (
         <InputField
           title="카드 소유자 이름을 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.USER_NAME}
           handleInput={handleOneValue}
-          handleNext={handleNext}
+          handleNext={() => handleNext('cvc')}
+          handleComplete={(isComplete: boolean) =>
+            handleComplete('userName', isComplete)
+          }
         />
       )}
-      {/* {step[0] && (
-        <UserNameField
-          // inputTypes={INPUT_TYPE_CATEGORIES.USER_NAME}
-          handleInput={handleOneValue}
-          handleNext={handleNext}
-        />
-      )} */}
-      {step[1] && (
+      {step['expiryDate'] && (
         <InputField
-          // inputRefs={inputFieldRefs2}
           title="카드 유효기간을 입력해 주세요"
           subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
           inputTypes={INPUT_TYPE_CATEGORIES.EXPIRY_DATE}
           handleInput={handleExpiryDateInput}
-          handleNext={handleNext}
+          handleNext={() => handleNext('userName')}
+          handleComplete={(isComplete: boolean) =>
+            handleComplete('expiryDate', isComplete)
+          }
         />
       )}
-      {step[0] && (
-        <SelectCardCompanyField handleSelect={handleSelectCardCompany} />
+      {step['cardCompany'] && (
+        <SelectCardCompanyField
+          handleSelect={handleSelectCardCompany}
+          handleNext={() => handleNext('expiryDate')}
+          handleComplete={(isComplete: boolean) =>
+            handleComplete('cardCompany', isComplete)
+          }
+        />
       )}
       <InputField
         title="결제할 카드 번호를 입력해 주세요"
         subtitle="본인 명의의 카드만 결제 가능합니다."
         inputTypes={INPUT_TYPE_CATEGORIES.CARD_NUMBER}
-        handleInput={(value) => handleCardNumberInput(0, value)}
-        handleNext={handleNext}
+        handleInput={handleCardNumberInput}
+        handleNext={() => handleNext('cardCompany')}
+        handleComplete={(isComplete: boolean) =>
+          handleComplete('cardNumbers', isComplete)
+        }
       />
     </FormContainer>
   );
