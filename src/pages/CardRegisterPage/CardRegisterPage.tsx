@@ -51,7 +51,7 @@ const CardRegisterPage = () => {
           expirationDate={expirationPeriodState.values}
           ownerName={ownerNameState.value}
           CVCNumbers={CVCNumbersState.value}
-          step={step}
+          isFrontShow={step === 5}
         />
         <CardRegisterForm
           {...cardRegister}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CardPreviewFront from "./CardPreviewFront";
 import CardPreviewBack from "./CardPreviewBack";
 import { CardType } from "@/constants/cardType";
@@ -12,12 +12,11 @@ interface FrontProps {
   expirationDate: ExpirationPeriodInputType;
   ownerName: string | null;
   CVCNumbers: string;
-  step: number;
+  isFrontShow: boolean;
 }
 
 interface BackProps {
   CVCNumbers: string;
-  step: number;
 }
 
 const CardPreview = ({
@@ -26,21 +25,13 @@ const CardPreview = ({
   cardNumbers,
   cardType,
   CVCNumbers,
-  step,
+  isFrontShow,
 }: FrontProps & BackProps) => {
-  const [isFront, setIsFront] = useState(true);
+  const [isFront, setIsFront] = useState(isFrontShow);
 
   const onFlipCard = () => {
     setIsFront((prev) => !prev);
   };
-  //TODO: 스텝별로 상수화하기
-  useEffect(() => {
-    if (step === 5) {
-      setIsFront(false);
-    } else {
-      setIsFront(true);
-    }
-  }, [step]);
 
   return (
     <S.CardWrapper>

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPreviewFront from "./CardPreviewFront";
+import CardPreview from "./CardPreview";
 
 const meta = {
   title: "CreditCardPreview",
-  component: CardPreviewFront,
-} satisfies Meta<typeof CardPreviewFront>;
+  component: CardPreview,
+} satisfies Meta<typeof CardPreview>;
 
 export default meta;
 
@@ -24,5 +24,7 @@ export const Default: Story = {
       expirationYear: "25",
     },
     ownerName: "RIAN OH",
+    CVCNumbers: "123",
+    isFrontShow: true,
   },
 };
