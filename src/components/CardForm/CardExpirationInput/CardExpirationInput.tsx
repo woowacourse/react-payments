@@ -3,11 +3,10 @@ import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
 import useAutoFocus from '../../../hooks/useAutoFocus';
-
+import { InputType } from '../../../hooks/useInput';
 import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
-import { InputType } from '../../../hooks/useInput';
 
 interface CardExpirationInputProps {
   month: InputType;

@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 
-import { InputType } from '../../../hooks/useInput';
-
-import { UpIcon, DownIcon } from '../../../assets';
+import type { InputType } from '../../../hooks/useInput';
 import { CARD_COMPANY } from '../../../constants/Condition';
+import { UpIcon, DownIcon } from '../../../assets';
 
 import * as S from './CardCompanyInput.style';
 

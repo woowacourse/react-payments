@@ -2,8 +2,8 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
+import type { InputType } from '../../../hooks/useInput';
 import { isNumber } from '../../../utils/validation';
-import { InputType } from '../../../hooks/useInput';
 
 interface CardCVCInputProps {
   cvc: InputType;

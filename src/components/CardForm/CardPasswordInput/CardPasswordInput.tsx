@@ -2,8 +2,8 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isNumber } from '../../../utils/validation';
 import { InputType } from '../../../hooks/useInput';
+import { isNumber } from '../../../utils/validation';
 
 interface CardPasswordInputProps {
   password: InputType;
