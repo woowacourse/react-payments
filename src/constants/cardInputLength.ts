@@ -11,7 +11,7 @@ const CARD_INPUT_LENGTH: Record<keyof CreditCardAllValues, number> = {
 
   name: 1,
 
-  cvc: 2,
+  cvc: 3,
 
   password: 2,
 };
