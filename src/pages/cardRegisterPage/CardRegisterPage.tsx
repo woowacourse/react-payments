@@ -49,6 +49,7 @@ const CardRegisterPage = () => {
     cardType: cardCompanyInfo.value,
     cvc: cardCVCInfo.value,
     isCardFront: cardCVCInfo.isCardFront,
+    setIsCardFront: cardCVCInfo.setIsCardFront,
   };
 
   return (

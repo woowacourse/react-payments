@@ -14,13 +14,14 @@ export const CardPreviewLayout = styled.div<CardPreviewLayoutProps>`
   width: 320px;
   height: 200px;
   perspective: 1000px;
+  cursor: pointer;
 
   & > div {
     width: 100%;
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
-    transition: transform 1s;
+    transition: transform 2s;
   }
 
   & > :first-child {

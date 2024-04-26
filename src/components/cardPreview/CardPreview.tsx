@@ -11,6 +11,7 @@ interface CardPreviewProps {
   cardType: CARD_TYPE;
   cvc: string;
   isCardFront: boolean;
+  setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardPreview = ({
@@ -20,6 +21,7 @@ const CardPreview = ({
   cardType,
   cvc,
   isCardFront,
+  setIsCardFront,
 }: CardPreviewProps) => {
   const firstTwoDigits = Number(cardNumbers.first.slice(0, 2));
   const isMaster =
@@ -27,7 +29,7 @@ const CardPreview = ({
   const isVisa = cardNumbers.first.startsWith(CONDITION.VISA);
 
   return (
-    <CardPreviewLayout $isFront={isCardFront}>
+    <CardPreviewLayout $isFront={isCardFront} onClick={() => setIsCardFront(!isCardFront)}>
       <FrontCardPreview
         isVisa={isVisa}
         isMaster={isMaster}
