@@ -48,5 +48,10 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
+  },
   "homepage": "https://greetings1012.github.io/react-payments/"
 }
