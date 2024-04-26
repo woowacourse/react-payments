@@ -3,7 +3,7 @@ import { CARD_BRAND } from '../constants/cardBrand';
 import { CardBrand } from '../types/card';
 import { ShowComponents } from '../types/showComponents';
 import FieldTitle from './FieldTitle';
-import InputField from './InputField';
+import InputField from './InputComponent/InputField';
 import styled from 'styled-components';
 import arrow_bottom from '../assets/image/arrow-bottom.svg';
 import arrow_top from '../assets/image/arrow-top.svg';
@@ -76,6 +76,7 @@ export default function CardDropDown({
       ...prev,
       expirationDateInput: true,
     }));
+    setView(!view);
     setSelected(brandName);
   };
 
