@@ -6,6 +6,7 @@ const ERROR_MESSAGES = {
   INVALID_ONLY_NUMBER: '숫자만 입력해주세요.',
   INVALID_ONLY_UPPERCASE: '영대문자로만 입력해주세요.',
   INVALID_CARD_NUMBER_LENGTH: '카드 번호를 4자리씩 입력해주세요.',
+  INVALID_LENGTH: '정보가 모두 입력되지 않았습니다.',
 };
 
 export default ERROR_MESSAGES;
