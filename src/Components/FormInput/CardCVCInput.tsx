@@ -74,6 +74,7 @@ const CardCVCInput = memo(() => {
           value={cardCVC.value ?? ""}
           placeholder={placeholder}
           ref={inputRef}
+          nextRef={nextRef}
         />
       ))}
     </>

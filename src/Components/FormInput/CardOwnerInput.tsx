@@ -45,6 +45,7 @@ const CardOwnerInput = memo(() => {
           value={cardOwner[name] ?? ""}
           placeholder={placeholder}
           ref={ownerInputRef}
+          nextRef={nextRef}
         />
       ))}
     </>

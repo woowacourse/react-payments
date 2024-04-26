@@ -51,6 +51,7 @@ const CardNumberInput = memo(() => {
           name={name}
           value={cardNumbers[name] ?? ""}
           ref={ref}
+          nextRef={nextRef}
         />
       ))}
     </>

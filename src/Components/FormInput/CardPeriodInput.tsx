@@ -49,6 +49,7 @@ const CardPeriodInput = memo(() => {
           name={name as keyof CardValidityPeriod}
           placeholder={placeholder}
           value={cardPeriod[name] ?? ""}
+          nextRef={nextRef}
           ref={ref}
         />
       ))}
