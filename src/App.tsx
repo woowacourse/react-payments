@@ -4,7 +4,7 @@ import CardAddedPage from "./pages/CardAddedPage/CardAddedPage";
 
 export default function App() {
   return (
-    <BrowserRouter basename="/react-payments/dist">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<CardInputPage />}></Route>
         <Route path="/card-added" element={<CardAddedPage />}></Route>
