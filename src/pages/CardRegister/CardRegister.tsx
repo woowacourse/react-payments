@@ -5,16 +5,17 @@ import CardPreview from '../../components/CardPreview/CardPreview';
 import useInput from '../../hooks/useInput';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpirationDate from '../../hooks/useExpirationDate';
-import validate from '../../utils/validate';
 
-import { CARD_COMPANY_COLOR, OWNER_NAME } from '../../constants/cardSection';
+import { CARD_COMPANY_COLOR } from '../../constants/cardSection';
 import CardNumbersInput from '../../components/Inputs/CardNumbersInput';
 import CardBrandSelect from '../../components/Inputs/CardBrandSelect';
 import ExpirationDateInput from '../../components/Inputs/ExpirationDateInput';
 import CardOwnerInput from '../../components/Inputs/CardOwnerInput';
 import CvcNumberInput from '../../components/Inputs/CvcNumberInput';
 import PasswordInput from '../../components/Inputs/PasswordInput';
-import { MAX_LENGTH } from '../../constants/rules';
+import useCvcNumber from '../../hooks/useCvcNumber';
+import usePassword from '../../hooks/usePassword';
+import useName from '../../hooks/useName';
 
 export type CardNumberState = {
   value: string;
@@ -33,36 +34,9 @@ export default function CardRegister() {
   const { cardImageSrc, cardNumbersArray } = useCardNumbers<HTMLInputElement>();
   const cardCompany = useInput<HTMLSelectElement>();
   const { month, year } = useExpirationDate();
-  const name = useInput<HTMLInputElement>({
-    isError: (state: string) => state !== '' && !validate.isEnglish(state),
-    errorMessage: OWNER_NAME.errorMessage,
-  });
-
-  const cvc = useInput<HTMLInputElement>(
-    {
-      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
-      errorMessage: '문자 입력은 불가능합니다.',
-    },
-    [
-      {
-        isError: (state: string) => !validate.isSatisfiedLength(MAX_LENGTH.cvcNumber, state.length),
-        errorMessage: `${MAX_LENGTH.cvcNumber}자리 숫자를 입력해주세요.`,
-      },
-    ],
-  );
-
-  const password = useInput<HTMLInputElement>(
-    {
-      isError: (state: string) => state !== '' && !validate.isValidDigit(state),
-      errorMessage: '숫자만 입력 가능합니다.',
-    },
-    [
-      {
-        isError: (state: string) => !validate.isSatisfiedLength(MAX_LENGTH.password, state.length),
-        errorMessage: `${MAX_LENGTH.password}자리 숫자를 입력해주세요.`,
-      },
-    ],
-  );
+  const name = useName();
+  const cvc = useCvcNumber();
+  const password = usePassword();
 
   return (
     <>
@@ -103,7 +77,6 @@ export default function CardRegister() {
           {nameDisplay && <CardOwnerInput name={name} setNextContentDisplay={setCvcDisplay} />}
 
           {/* CVC 번호 입력 */}
-          {/* TODO: 아이디 등 매직넘버 문자열 상수화 */}
           {cvcDisplay && (
             <CvcNumberInput
               cvc={cvc}
