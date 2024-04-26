@@ -9,4 +9,5 @@ interface CardInformation {
   cardExpirationYear: CardInfoValue;
   cardOwnerName: CardInfoValue;
   cardCompany: CardInfoValue;
+  cardCVC: CardInfoValue;
 }

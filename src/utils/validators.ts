@@ -76,3 +76,10 @@ export const isOwnerNameLength = (name: string) => {
   }
   return "";
 };
+
+export const isCardCVCLength = (value: string) => {
+  if (value.length !== CARD_INFO.CVC_LENGTH) {
+    return ERROR.CARD_CVC_LENGTH;
+  }
+  return "";
+};
