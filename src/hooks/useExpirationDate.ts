@@ -12,11 +12,13 @@ const useExpirationDate = (defaultValues: string[]) => {
     value: month,
     onChange: setMonth,
     isError: isMonthError,
+    clear: monthClear,
   } = useInput<string>(defaultValues[0] ?? '', REG_EXP.month, monthCondition);
   const {
     value: year,
     onChange: setYear,
     isError: isYearError,
+    clear: yearClear,
   } = useInput<string>(defaultValues[1] ?? '', REG_EXP.year, yearCondition);
 
   const isFieldError = isMonthError || isYearError;
@@ -34,6 +36,10 @@ const useExpirationDate = (defaultValues: string[]) => {
       isMonthError,
       isYearError,
       isFieldError,
+    },
+    resetExpirationDate: () => {
+      monthClear();
+      yearClear();
     },
   };
 };

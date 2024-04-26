@@ -15,12 +15,23 @@ interface FormState {
 }
 
 const useForm = (defaultValues: FormState) => {
-  const { cardNumberState, setCardNumberState, cardNumberErrorState, showImageCondition } =
-    useCardNumbers(defaultValues.cardNumbers);
-  const { expirationDateState, setExpirationDateState, expirationDateErrorState } =
-    useExpirationDate(defaultValues.expirationDate);
-  const { userNameState, setUserNameState, isUserNameError } = useUserName(defaultValues.userName);
-  const { cardBrandState, setCardBrandState, isCardBrandError } = useCardBrand(
+  const {
+    cardNumberState,
+    setCardNumberState,
+    cardNumberErrorState,
+    showImageCondition,
+    resetCardNumbers,
+  } = useCardNumbers(defaultValues.cardNumbers);
+  const {
+    expirationDateState,
+    setExpirationDateState,
+    expirationDateErrorState,
+    resetExpirationDate,
+  } = useExpirationDate(defaultValues.expirationDate);
+  const { userNameState, setUserNameState, isUserNameError, resetUserName } = useUserName(
+    defaultValues.userName,
+  );
+  const { cardBrandState, setCardBrandState, isCardBrandError, resetCardBrand } = useCardBrand(
     defaultValues.cardBrand,
   );
   const {
@@ -29,8 +40,20 @@ const useForm = (defaultValues: FormState) => {
     isCVCNumberError,
     isFocusCVCPreview,
     setIsFocusCVCPreview,
+    resetCVCNumber,
   } = useCVCNumber(defaultValues.cvcNumber);
-  const { passwordState, setPasswordState, isPasswordError } = usePassword(defaultValues.password);
+  const { passwordState, setPasswordState, isPasswordError, resetPassword } = usePassword(
+    defaultValues.password,
+  );
+
+  const resetForm = () => {
+    resetCardNumbers();
+    resetCardBrand();
+    resetExpirationDate();
+    resetCVCNumber();
+    resetUserName();
+    resetPassword();
+  };
 
   const previewProps = {
     cardNumberState,
@@ -88,7 +111,21 @@ const useForm = (defaultValues: FormState) => {
     },
   };
 
-  return { previewProps, formProps, isFormError };
+  const formValues = {
+    cardNumbers: [
+      cardNumberState.first,
+      cardNumberState.second,
+      cardNumberState.third,
+      cardNumberState.fourth,
+    ],
+    expirationDate: [expirationDateState.month, expirationDateState.year],
+    userName: userNameState,
+    cardBrand: cardBrandState,
+    cvcNumber: cvcNumberState,
+    password: passwordState,
+  };
+
+  return { previewProps, formProps, isFormError, resetForm, formValues };
 };
 
 export default useForm;

@@ -35,7 +35,11 @@ const useInput = <T>(
     }
   };
 
-  return { value, onChange, isError };
+  const clear = () => {
+    setValue('' as T);
+  };
+
+  return { value, onChange, isError, clear };
 };
 
 export default useInput;

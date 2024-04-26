@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm';
 import * as Styled from './style';
 
 const CardRegisterForm = () => {
-  const { previewProps, formProps, isFormError } = useForm({
+  const { previewProps, formProps, isFormError, resetForm, formValues } = useForm({
     cardNumbers: [],
     expirationDate: [],
     userName: '',
@@ -16,13 +16,13 @@ const CardRegisterForm = () => {
 
   return (
     <>
-      <Styled.Container>
+      <Styled.Container id="card-register-form">
         <CardInformationPreview {...previewProps} />
         <CardInformationForm {...formProps} />
       </Styled.Container>
       {!isFormError && (
         <Styled.Submit>
-          <Button label="확인" />
+          <Button form="card-register-form" label="확인" />
         </Styled.Submit>
       )}
     </>

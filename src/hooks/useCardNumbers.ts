@@ -10,21 +10,25 @@ const useCardNumbers = (defaultValues: string[]) => {
     value: first,
     onChange: setFirst,
     isError: isFirstError,
+    clear: firstClear,
   } = useInput<string>(defaultValues[0] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: second,
     onChange: setSecond,
     isError: isSecondError,
+    clear: secondClear,
   } = useInput<string>(defaultValues[1] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: third,
     onChange: setThird,
     isError: isThirdError,
+    clear: thirdClear,
   } = useInput<string>(defaultValues[2] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: fourth,
     onChange: setFourth,
     isError: isFourthError,
+    clear: fourthClear,
   } = useInput<string>(defaultValues[3] ?? '', REG_EXP.cardNumber, cardLengthCondition);
 
   const isFieldError = isFirstError || isSecondError || isThirdError || isFourthError;
@@ -52,6 +56,12 @@ const useCardNumbers = (defaultValues: string[]) => {
     showImageCondition: {
       visaShowCondition: showVisa(first),
       masterCardShowCondition: showMasterCard(first),
+    },
+    resetCardNumbers: () => {
+      firstClear();
+      secondClear();
+      thirdClear();
+      fourthClear();
     },
   };
 };
