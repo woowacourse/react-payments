@@ -60,7 +60,7 @@ const CardIssuerInput = () => {
 
   return (
     <div css={inputContainerStyle}>
-      <input id="id-issuer-value" css={disappear} />
+      <input id="id-issuer-value" css={disappear} name="cardIssuer" value={cardIssuer.name} />
       <button css={buttonStyle} onClick={(e) => handleClick(e)}>
         <div>{cardIssuer.name ?? "카드사를 선택해주세요."}</div>
         <div>{isCLicked ? "🔼" : "🔽"}</div>

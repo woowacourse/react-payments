@@ -12,13 +12,13 @@ import {
 } from "./style";
 
 const LandingArrival = () => {
-  const { params } = useParams();
+  const { cardNumbers, cardIssuer } = useParams();
   const navigate = useNavigate();
-  console.log(params);
 
-  const handleClick = () => {
-    navigate("/");
-  };
+  if (!cardNumbers && !cardIssuer) {
+    //TODO: error page handling
+    return <div>something wrong</div>;
+  }
 
   return (
     <div css={containerStyle}>
@@ -29,10 +29,10 @@ const LandingArrival = () => {
           </div>
         </div>
         <div css={descriptionStyle}>
-          <div>{}로 시작하는</div>
-          <div>{}등록되었어요.</div>
+          <div>{cardNumbers}로 시작하는</div>
+          <div>{cardIssuer}가 등록되었어요.</div>
         </div>
-        <button onClick={handleClick} css={arrivalButtonStyle}>
+        <button onClick={() => navigate("/")} css={arrivalButtonStyle}>
           확인
         </button>
       </div>

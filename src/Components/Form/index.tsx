@@ -24,7 +24,8 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/landing_arrival/${e.target.firstNumbers.value}`);
+    const target = e.target;
+    navigate(`/landing_arrival/${target.firstNumbers.value}/${target.cardIssuer.value}`);
   };
 
   return (
