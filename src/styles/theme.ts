@@ -2,6 +2,12 @@ import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   typography: {
+    heading: `
+      font-family: Noto Sans KR;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 3.62rem;    
+    `,
     title: `
       font-family: Noto Sans KR;
       font-weight: 700;

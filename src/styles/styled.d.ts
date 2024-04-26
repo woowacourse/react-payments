@@ -3,6 +3,7 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     typography: {
+      heading: string;
       title: string;
       caption: string;
       label: string;
