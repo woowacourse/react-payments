@@ -24,6 +24,7 @@ const BackCardContainer = styled.div`
   display: flex;
   width: 215px;
   height: 130px;
+  padding: 15px;
   border-radius: 4px;
   background-color: ${(props) => props.color};
   color: white;
@@ -37,6 +38,7 @@ const CVCBox = styled.div`
   display: flex;
   flex-direction: row-reverse;
   position: absolute;
+  left: 0;
   width: 100%;
   height: 30px;
   background-color: #cbba64;
