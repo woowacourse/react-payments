@@ -16,7 +16,7 @@ const ExpirationDateForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [focusedInputIndex, setFocusedInputIndex] = useState("-1");
+  const [focusedInputIndex, setFocusedInputIndex] = useState("0");
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
@@ -45,8 +45,13 @@ const ExpirationDateForm = ({
 
   const focusToNextInput = () => {
     const curIdx = focusedInputIndex;
+    const curInputRef = inputRefs.current[Number(curIdx)] as HTMLInputElement;
     const nextInputRef = inputRefs.current[Number(curIdx) + 1];
-    if (nextInputRef) {
+
+    if (
+      curInputRef.value.length === EXPIRATION_DATE_FORM.maxInputLength &&
+      nextInputRef
+    ) {
       nextInputRef.focus();
     }
   };

@@ -20,7 +20,7 @@ const CardNumberForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [focusedInputIndex, setFocusedInputIndex] = useState("-1");
+  const [focusedInputIndex, setFocusedInputIndex] = useState("0");
   const [isAllInputValid, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState<InputValidities>(
@@ -35,8 +35,13 @@ const CardNumberForm = ({
 
   const focusToNextInput = () => {
     const curIdx = focusedInputIndex;
+    const curInputRef = inputRefs.current[Number(curIdx)] as HTMLInputElement;
     const nextInputRef = inputRefs.current[Number(curIdx) + 1];
-    if (nextInputRef) {
+
+    if (
+      curInputRef.value.length === CARD_NUMBER_FORM.maxInputLength &&
+      nextInputRef
+    ) {
       nextInputRef.focus();
     }
   };
