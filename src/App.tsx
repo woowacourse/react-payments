@@ -6,8 +6,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CardRegisterPage />} />
-        <Route path="/register" element={<CardRegisterCompletedPage />} />
+        <Route path="/react-payments/" element={<CardRegisterPage />} />
+        <Route path="/react-payments/register" element={<CardRegisterCompletedPage />} />
       </Routes>
     </BrowserRouter>
   );
