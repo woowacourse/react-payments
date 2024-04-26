@@ -5,7 +5,7 @@ import { validatePassword } from '../../../domain/Card';
 import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardPasswordInput',
+  title: 'component/CardPasswordInput',
   component: CardPasswordInput,
   parameters: {
     controls: { exclude: 'password' },

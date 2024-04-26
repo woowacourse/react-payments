@@ -5,7 +5,7 @@ import { validateMonth, validateYear } from '../../../domain/Card';
 import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardExpirationInput',
+  title: 'component/CardExpirationInput',
   component: CardExpirationInput,
   parameters: {
     controls: { exclude: ['month', 'year'] },

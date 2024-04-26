@@ -4,7 +4,7 @@ import InputField from './InputField';
 import Input from '../Input/Input';
 
 const meta = {
-  title: 'InputField',
+  title: 'component/common/InputField',
   component: InputField,
   parameters: {
     controls: { exclude: 'children' },

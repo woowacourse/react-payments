@@ -5,7 +5,7 @@ import { validateCardNumber } from '../../../domain/Card';
 import useInputs from '../../../hooks/useInputs';
 
 const meta = {
-  title: 'CardNumberInput',
+  title: 'component/CardNumberInput',
   component: CardNumberInput,
   parameters: {
     controls: { exclude: 'cardNumbers' },

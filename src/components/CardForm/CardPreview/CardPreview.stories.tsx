@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from './CardPreview';
 
 const meta = {
-  title: 'CardPreview',
+  title: 'component/CardPreview',
   component: CardPreview,
   parameters: {
     controls: { exclude: 'isCVCInput' },

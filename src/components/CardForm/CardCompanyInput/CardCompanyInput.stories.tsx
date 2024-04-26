@@ -5,7 +5,7 @@ import { validateCompany } from '../../../domain/Card';
 import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardCompanyInput',
+  title: 'component/CardCompanyInput',
   component: CardCompanyInput,
   parameters: {
     controls: { exclude: 'company' },

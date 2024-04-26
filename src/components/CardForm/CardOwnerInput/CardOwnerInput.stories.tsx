@@ -5,7 +5,7 @@ import { validateOwner } from '../../../domain/Card';
 import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardOwnerInput',
+  title: 'component/CardOwnerInput',
   component: CardOwnerInput,
   parameters: {
     controls: { exclude: 'owner' },

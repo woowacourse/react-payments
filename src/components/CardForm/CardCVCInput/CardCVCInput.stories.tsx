@@ -5,7 +5,7 @@ import { validateCVC } from '../../../domain/Card';
 import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardCVCInput',
+  title: 'component/CardCVCInput',
   component: CardCVCInput,
   parameters: {
     controls: { exclude: ['cvc', 'handleIsCVCInput'] },

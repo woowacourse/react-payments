@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import CardRegistrationCompletePage from './CardRegistrationCompletePage';
 
 const meta = {
-  title: 'CardRegistrationCompletePage',
+  title: 'page/CardRegistrationCompletePage',
   component: CardRegistrationCompletePage,
   decorators: [
     (Story) => (
