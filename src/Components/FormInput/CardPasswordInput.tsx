@@ -7,12 +7,17 @@ import { CardPasswordErrorContext } from "../Form/FormContextProvider";
 import { cardPasswordValidator } from "./validator";
 import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
+import { CardPasswordInputContext } from "../Form/FormRefContextProvider";
+
+interface InputInfoList {
+  name: keyof CardPassword;
+  placeholder: string;
+}
 
 const CardPasswordInput = memo(() => {
   const [cardPassword, setData] = useContextWrapper(CardPasswordContext);
   const [passwordError, setError] = useContextWrapper(CardPasswordErrorContext);
-
-  type InputInfoList = { name: keyof CardPassword; placeholder: string };
+  const inputRef = useContextWrapper(CardPasswordInputContext)[0];
 
   const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "12" }];
 
@@ -37,6 +42,7 @@ const CardPasswordInput = memo(() => {
           value={cardPassword.value ?? ""}
           placeholder={placeholder}
           type="password"
+          ref={inputRef}
         />
       ))}
     </>

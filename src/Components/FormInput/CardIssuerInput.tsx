@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { Dispatch, useEffect, useState } from "react";
+import { Dispatch, useState } from "react";
 import { buttonStyle, categoryStyle, disappear, inputContainerStyle, listStyle, optionsStyle } from "./style";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardIssuerContext } from "../../routes/Payments/CardInfoContextProvider";
+import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 
 const CARD_ISSUERS = ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"];
 
@@ -20,6 +21,8 @@ interface OptionBoxProps {
 }
 
 const OptionBox: React.FC<OptionBoxProps> = ({ setIsClicked, setCardIssuer }) => {
+  const [ref] = useContextWrapper(CardPeriodInputsContext);
+
   const handleOptionClick = (e: EventType) => {
     e.preventDefault();
     const issuer = e.target.value! as CardIssuerCategory;
@@ -29,11 +32,9 @@ const OptionBox: React.FC<OptionBoxProps> = ({ setIsClicked, setCardIssuer }) =>
       temp.name = issuer;
       return temp;
     });
-  };
 
-  useEffect(() => {
-    //TODO: 요소 밖 클릭시 setIsClicked false값 넣기. 클린업 함수로 이벤트 삭제도 해주기.
-  }, []);
+    ref.current?.focus();
+  };
 
   return (
     <ul css={optionsStyle}>

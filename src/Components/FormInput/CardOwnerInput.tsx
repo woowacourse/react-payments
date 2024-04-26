@@ -7,18 +7,25 @@ import { CardOwnerInfoErrorContext } from "../Form/FormContextProvider";
 import { cardOwnerValidator } from "./validator";
 import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
+import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
+
+interface InputInfoList {
+  name: keyof CardOwnerInfo;
+  placeholder: string;
+  nextRef: React.MutableRefObject<HTMLInputElement | null>;
+}
 
 const CardOwnerInput = memo(() => {
   const [cardOwner, setData] = useContextWrapper(CardOwnerInfoContext);
   const [ownerError, setError] = useContextWrapper(CardOwnerInfoErrorContext);
+  const ownerInputRef = useContextWrapper(CardOwnerInputContext)[0];
+  const nextRef = useContextWrapper(CardCVCInputContext)[0];
 
-  type InputInfoList = { name: keyof CardOwnerInfo; placeholder: string };
-
-  const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO" }];
+  const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO", nextRef }];
 
   return (
     <>
-      {InputInfoList.map(({ name, placeholder }, index) => (
+      {InputInfoList.map(({ name, placeholder, nextRef }, index) => (
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
@@ -28,6 +35,7 @@ const CardOwnerInput = memo(() => {
               setData,
               setError,
               validator: cardOwnerValidator,
+              nextRef,
             })
           }
           isError={!!ownerError[name]?.isError}
@@ -36,6 +44,7 @@ const CardOwnerInput = memo(() => {
           name={name}
           value={cardOwner[name] ?? ""}
           placeholder={placeholder}
+          ref={ownerInputRef}
         />
       ))}
     </>

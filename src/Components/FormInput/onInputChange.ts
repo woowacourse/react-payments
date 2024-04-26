@@ -6,7 +6,7 @@ interface ChangeProps<T, U> {
   setData: React.Dispatch<SetStateAction<T>>;
   setError: React.Dispatch<SetStateAction<U>>;
   validator: ValidatorType;
-  maxLength: number;
+  maxLength?: number;
   nextRef?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
@@ -39,7 +39,7 @@ const onInputChange = <T, U>(
     });
   }
 
-  if (value?.length === maxLength) {
+  if (maxLength && value?.length === maxLength) {
     nextRef?.current?.focus();
   }
 };

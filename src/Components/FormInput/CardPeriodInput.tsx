@@ -7,21 +7,29 @@ import FormInputCompound from "./FormInputCompound";
 
 import { cardPeriodValidator } from "./validator";
 import onInputChange from "./onInputChange";
+import { CardOwnerInputContext, CardPeriodInputsContext } from "../Form/FormRefContextProvider";
+
+interface InputInfo {
+  name: keyof CardValidityPeriod;
+  placeholder: string;
+  ref: React.MutableRefObject<HTMLInputElement | null>;
+  nextRef?: React.MutableRefObject<HTMLInputElement | null>;
+}
 
 const CardPeriodInput = memo(() => {
   const [cardPeriod, setData] = useContextWrapper(CardValidityPeriodContext);
   const [periodError, setError] = useContextWrapper(CardValidityPeriodErrorContext);
+  const [firstRef, secondRef] = useContextWrapper(CardPeriodInputsContext);
+  const [nextFirstRef] = useContextWrapper(CardOwnerInputContext);
 
-  type InputInfoList = { name: keyof CardValidityPeriod; placeholder: string };
-
-  const InputInfoList: InputInfoList[] = [
-    { name: "month", placeholder: "MM" },
-    { name: "year", placeholder: "YY" },
+  const InputInfoList: InputInfo[] = [
+    { name: "month", placeholder: "MM", ref: firstRef, nextRef: secondRef },
+    { name: "year", placeholder: "YY", ref: secondRef, nextRef: nextFirstRef },
   ];
 
   return (
     <>
-      {InputInfoList.map(({ name, placeholder }, index) => (
+      {InputInfoList.map(({ name, placeholder, ref, nextRef }, index) => (
         <FormInputCompound
           id={`id-period-${name}`}
           key={index}
@@ -31,6 +39,8 @@ const CardPeriodInput = memo(() => {
               setData,
               setError,
               validator: cardPeriodValidator,
+              maxLength: 2,
+              nextRef,
             })
           }
           isError={!!periodError[name]?.isError}
@@ -39,6 +49,7 @@ const CardPeriodInput = memo(() => {
           name={name as keyof CardValidityPeriod}
           placeholder={placeholder}
           value={cardPeriod[name] ?? ""}
+          ref={ref}
         />
       ))}
     </>
