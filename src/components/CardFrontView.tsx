@@ -6,6 +6,7 @@ import Master from '../assets/image/Mastercard.png';
 import { SECRET_NUMBER, SLASH } from '../constants/system';
 import { isMasterCard, isVisaCard } from '../utils/checkCardType';
 import { CardContainer } from '../style/container.style';
+import { formatDate } from '../utils/formatDate';
 
 interface Props {
   cardInfo: Card;
@@ -29,14 +30,6 @@ export default function CardFrontView({ cardInfo }: Props) {
   };
 
   const cardImgSrc = getCardImage(cardNumbers.cardNumber1);
-
-  const formatDate = (date: string) => {
-    if (date.length === 1) {
-      return `0${date}`;
-    }
-    return date;
-  };
-
   return (
     <CardFrontContainer color={cardCompany.color}>
       <ImgBox>
