@@ -22,3 +22,14 @@ export const STEP = {
   cvc: 'cvc',
   password: 'password',
 };
+
+export const CARD_COMPANY = [
+  ['BC카드', 'BC'],
+  ['신한카드', 'shinhan'],
+  ['카카오뱅크', 'kakao'],
+  ['현대카드', 'hyundai'],
+  ['우리카드', 'woori'],
+  ['롯데카드', 'lotte'],
+  ['하나카드', 'kebhana'],
+  ['국민카드', 'kbstar'],
+];
