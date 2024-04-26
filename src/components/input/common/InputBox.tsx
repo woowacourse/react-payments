@@ -46,7 +46,8 @@ const InputBox = ({
 export default InputBox;
 
 const Input = styled.input<{ isError: boolean }>`
-  border: 1.01px solid rgba(172, 172, 172, 1);
+  border: 1.01px solid
+    ${(props) => (props.isError ? "rgba(255, 61, 61, 1)" : "rgba(172, 172, 172, 1)")};
   height: 32px;
   padding: 8px;
   border-radius: 2px;
@@ -60,9 +61,5 @@ const Input = styled.input<{ isError: boolean }>`
 
   ::placeholder {
     color: rgba(172, 172, 172, 1);
-  }
-
-  &:focus {
-    border: 1.01px solid ${(props) => (props.isError ? "rgba(255, 61, 61, 1)" : "rgba(0, 0, 0, 1)")};
   }
 `;
