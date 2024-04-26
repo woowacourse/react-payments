@@ -3,7 +3,8 @@ import Form from "../../components/common/Form/Form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShelfSection from "../../components/common/ShelfSection/ShelfSection";
-import Card from "../../components/Card/Card";
+import CardFrontPreview from "../../components/Card/CardFrontPreview";
+import CardBackPreview from "../../components/Card/CardBackPreview";
 import { CARD_NUMBER_UNIT_LENGTH } from "../../constants";
 import SubmitButton from "../../components/Button/SubmitButton";
 import CardNumbersInputField from "../../components/Field/CardNumbersInputField/CardNumbersInputField";
@@ -43,6 +44,8 @@ function CardInputPage() {
     () => new Array(5).fill(false)
   );
 
+  const [isCardPreviewFront, setIsCardPreviewFront] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   const handleCardAdded = () => {
@@ -57,12 +60,16 @@ function CardInputPage() {
   return (
     <main className={styles.background}>
       <section className={styles.layout}>
-        <Card
-          cardNumbers={cardNumbers}
-          cardCompanyName={cardCompanyName}
-          date={date}
-          ownerName={ownerName}
-        />
+        {isCardPreviewFront ? (
+          <CardFrontPreview
+            cardNumbers={cardNumbers}
+            cardCompanyName={cardCompanyName}
+            date={date}
+            ownerName={ownerName}
+          />
+        ) : (
+          <CardBackPreview cardCVC={cardCVC}></CardBackPreview>
+        )}
         <Form>
           {isOpenForm[5] && (
             <ShelfSection
@@ -87,6 +94,7 @@ function CardInputPage() {
                 setIsCompletedSections={setIsCompletedSections}
                 isOpenForm={isOpenForm}
                 setIsOpenForm={setIsOpenForm}
+                setIsCardPreviewFront={setIsCardPreviewFront}
               ></CardCVCInputField>
             </ShelfSection>
           )}

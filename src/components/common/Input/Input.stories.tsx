@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Input from "./Input";
 
 const meta: Meta = {
-  title: "Input",
+  title: "components/Input",
   component: Input,
 };
 
