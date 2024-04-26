@@ -10,6 +10,7 @@ const InputContainer = styled.input`
 interface Props {
   type?: string;
   maxLength: number;
+  value: string;
   placeholder: string;
   isError?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,6 +20,7 @@ interface Props {
 export default function Input({
   type = 'string',
   maxLength,
+  value,
   placeholder,
   isError = false,
   onChange,
@@ -30,6 +32,7 @@ export default function Input({
       color={isError ? 'red' : 'grey'}
       type={type}
       maxLength={maxLength}
+      value={value}
       placeholder={placeholder}
       onChange={onChange}
       onKeyDown={onKeyDown}
