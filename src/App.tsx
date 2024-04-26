@@ -1,11 +1,9 @@
 import "./App.css";
-import PaymentApp from "./components/PaymentApp";
-
-
+import Router from "./Router";
 function App() {
   return (
     <>
-      <PaymentApp />
+      <Router />
     </>
   );
 }

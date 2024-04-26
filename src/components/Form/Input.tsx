@@ -43,7 +43,6 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
       const value = e.target.value;
 
       setCurrentValue(value);
-
       setData((prevData) => new Map(prevData).set(index, value));
 
       if (!validationRule(value)) {
@@ -94,7 +93,7 @@ const InputStyled = styled.input<{
   }
 
   &:focus {
-    border: 1px solid ${(props) => (props.isValidInput ? "#acacac" : "red")};
+    border: 1px solid ${(props) => (props.$isValidInput ? "#acacac" : "red")};
   }
 `;
 

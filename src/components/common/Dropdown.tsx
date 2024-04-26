@@ -5,6 +5,7 @@ interface IDropdownProps {
   contents: string[];
   setData: React.Dispatch<React.SetStateAction<string>>;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const createOptionEl = (values: string[], contents?: string[]) => {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import InputDescription from "./InputDescription";
 import ExpirationDateForm from "./ExpirationDateForm";
@@ -36,6 +37,7 @@ const Form = ({
   setCVCNumber,
   setPassword,
   setIsFrontCardPreview,
+  onSubmit,
 }: {
   setCardNumbers: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<Map<string, string>>>;
@@ -44,6 +46,7 @@ const Form = ({
   setCVCNumber: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setPassword: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setIsFrontCardPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
   const [isAllFormValid, setIsAllFormValid] = useState(false);
 
@@ -186,7 +189,13 @@ const Form = ({
           </div>
         )}
       </FormWrapper>
-      {isAllFormValid && <SubmitButton>확인</SubmitButton>}
+      {isAllFormValid && (
+        <Link to="/registered">
+          <SubmitButton type="submit" onClick={onSubmit}>
+            확인
+          </SubmitButton>
+        </Link>
+      )}
     </>
   );
 };
@@ -205,8 +214,8 @@ const SubmitButton = styled.button`
   position: fixed;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%); // 화면 중앙 정렬
-  width: 315px;
+  transform: translateX(-50%);
+  width: 380px;
   height: 50px;
   background-color: #333333;
   color: white;
