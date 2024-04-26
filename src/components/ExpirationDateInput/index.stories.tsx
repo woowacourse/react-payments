@@ -1,57 +1,51 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Caption from "../common/Caption";
-import { useState } from "react";
-import { fn } from "@storybook/test";
-import ExpirationDateInput from ".";
+import React, { useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+
+import ExpirationDateInput from '.';
 
 const meta = {
-  title: "ExpirationDateInput",
+  title: 'ExpirationDateInput',
   component: ExpirationDateInput,
-
-  parameters: {
-    layout: "centered",
-  },
-
   decorators: [
-    (Story, context) => {
-      const [expirationDate, setExpirationDate] = useState(["", ""]);
-      const handleExpirationDateChange = (index: number, value: string) => {
-        setExpirationDate((prevDate) => {
-          const updatedExpirationDate = [...prevDate];
-          updatedExpirationDate[index] = value;
+    (Story) => {
+      const [expirationDate, setExpirationDate] = useState(['', '']);
+      const [expirationDateErrors, setExpirationDateErrors] = useState([false, false]);
 
-          return updatedExpirationDate;
-        });
+      const handleExpirationDateChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const value = e.target.value;
+        const newDates = [...expirationDate];
+        newDates[index] = value;
+        setExpirationDate(newDates);
+
+        const errors = [...expirationDateErrors];
+        errors[index] = value.length !== 2;
+        setExpirationDateErrors(errors);
       };
 
       return (
         <Story
           args={{
-            ...context.args,
             expirationDate,
+            expirationDateErrors,
             onExpirationDateChange: handleExpirationDateChange,
           }}
         />
       );
     },
   ],
-
-  tags: ["autodocs"],
-
-  args: {
-    expirationDate: ["", ""],
-    onExpirationDateChange: fn(),
+  parameters: {
+    layout: 'centered',
   },
+  args: {
+    expirationDate: ['', ''],
+    expirationDateErrors: [false, false],
+    onExpirationDateChange: action('onExpirationDateChange'),
+  },
+
+  tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
-    errorCaption: (errorText: string) => (
-      <Caption text={errorText} type="error" />
-    ),
-  },
-};
+export const Default: StoryObj<typeof meta> = {};

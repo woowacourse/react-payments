@@ -1,43 +1,42 @@
-import { Meta, StoryObj } from "@storybook/react";
-import CardNumberInput from ".";
-import Caption from "../common/Caption";
-import { useState } from "react";
-import { fn } from "@storybook/test";
+import React, { useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+
+import CardNumberInput from '.';
+import { fn } from '@storybook/test';
 
 const meta = {
-  title: "CardNumberInput",
+  title: 'CardNumberInput',
   component: CardNumberInput,
-
-  parameters: {
-    layout: "centered",
-  },
-
   decorators: [
-    (Story, context) => {
-      const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-      const handleCardNumberChange = (index: number, value: string) => {
-        setCardNumbers((prevNumbers) => {
-          const updatedCardNumbers = [...prevNumbers];
-          updatedCardNumbers[index] = value;
+    (Story) => {
+      const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+      const [cardNumberErrors, setCardNumberErrors] = useState([false, false, false, false]);
 
-          return updatedCardNumbers;
-        });
+      const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const newNumbers = [...cardNumbers];
+        newNumbers[index] = e.target.value;
+
+        const newErrors = [...cardNumberErrors];
+        newErrors[index] = !/^\d*$/.test(e.target.value) || e.target.value.length > 4;
+        setCardNumbers(newNumbers);
+        setCardNumberErrors(newErrors);
       };
 
-      return (
-        <Story
-          args={{ ...context.args, cardNumbers, onCardNumberChange: handleCardNumberChange }}
-        />
-      );
+      return <Story {...{ cardNumbers, cardNumberErrors, onCardNumberChange: handleCardNumberChange }} />;
     },
   ],
 
-  tags: ["autodocs"],
+  parameters: {
+    layout: 'centered',
+  },
 
   args: {
-    cardNumbers: ["", "", "", ""],
+    cardNumbers: ['', '', '', ''],
+    cardNumberErrors: [false, false, false, false],
     onCardNumberChange: fn(),
   },
+
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
@@ -46,8 +45,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    errorCaption: (errorText: string) => (
-      <Caption text={errorText} type="error" />
-    ),
+    cardNumbers: ['1234', '1234', '1234', '1234'],
+    cardNumberErrors: [false, false, false, false],
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    cardNumbers: ['1234', '123', 'abcd', '1234'],
+    cardNumberErrors: [false, false, true, false],
   },
 };
