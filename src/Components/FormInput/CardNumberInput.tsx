@@ -1,29 +1,36 @@
 import { memo } from "react";
+
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardNumberErrorContext } from "../Form/FormContextProvider";
+import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
+import { cardNumbersValidator } from "./validator";
 
 import FormInputCompound from "./FormInputCompound";
-
-import { cardNumbersValidator } from "./validator";
 import onInputChange from "./onInputChange";
+
+interface InputInfoList {
+  name: keyof CardNumbers;
+  ref: React.MutableRefObject<HTMLInputElement | null>;
+  nextRef?: React.MutableRefObject<HTMLInputElement | null>;
+}
 
 const CardNumberInput = memo(() => {
   const [cardNumbers, setData] = useContextWrapper(CardNumbersContext);
   const [cardNumberError, setError] = useContextWrapper(CardNumberErrorContext);
 
-  type InputInfoList = { name: keyof CardNumbers };
+  const [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef] = useContextWrapper(CardNumberInputsContext);
 
   const InputInfoList: InputInfoList[] = [
-    { name: "firstNumbers" },
-    { name: "secondNumbers" },
-    { name: "thirdNumbers" },
-    { name: "fourthNumbers" },
+    { name: "firstNumbers", ref: firstInputRef, nextRef: secondInputRef },
+    { name: "secondNumbers", ref: secondInputRef, nextRef: thirdInputRef },
+    { name: "thirdNumbers", ref: thirdInputRef, nextRef: fourthInputRef },
+    { name: "fourthNumbers", ref: fourthInputRef },
   ];
 
   return (
     <>
-      {InputInfoList.map(({ name }, index) => (
+      {InputInfoList.map(({ name, ref, nextRef }, index) => (
         <FormInputCompound
           id={`id-numbers-${name}`}
           key={index}
@@ -33,6 +40,8 @@ const CardNumberInput = memo(() => {
               setData,
               setError,
               validator: cardNumbersValidator,
+              maxLength: 4,
+              nextRef,
             })
           }
           isError={!!cardNumberError[name]?.isError}
@@ -41,6 +50,7 @@ const CardNumberInput = memo(() => {
           maxLength={4}
           name={name}
           value={cardNumbers[name] ?? ""}
+          ref={ref}
         />
       ))}
     </>

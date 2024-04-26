@@ -6,11 +6,13 @@ interface ChangeProps<T, U> {
   setData: React.Dispatch<SetStateAction<T>>;
   setError: React.Dispatch<SetStateAction<U>>;
   validator: ValidatorType;
+  maxLength: number;
+  nextRef?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 const onInputChange = <T, U>(
   e: React.ChangeEvent<HTMLInputElement>,
-  { name, setData, setError, validator }: ChangeProps<T, U>
+  { name, setData, setError, validator, maxLength, nextRef }: ChangeProps<T, U>
 ) => {
   const {
     isValid,
@@ -35,6 +37,10 @@ const onInputChange = <T, U>(
       errors[name] = { isError: true, errorMessage };
       return errors;
     });
+  }
+
+  if (value?.length === maxLength) {
+    nextRef?.current?.focus();
   }
 };
 
