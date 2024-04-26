@@ -36,3 +36,8 @@ export interface ShowImageCondition {
   visaShowCondition: boolean;
   masterCardShowCondition: boolean;
 }
+
+export interface SuccessCardInfoState {
+  firstCardNumbers: string;
+  cardBrand: string;
+}
