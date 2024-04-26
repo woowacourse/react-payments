@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { InputInfo } from '../types/input';
-import Validation from '../domain/InputValidation';
 import { forwardRef } from 'react';
+import { useInput } from '../hooks/useInput';
 
 interface Props {
-  value: string;
   info: InputInfo;
   handleInput: (value: string) => void;
   isError: boolean;
@@ -13,52 +12,27 @@ interface Props {
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { value, info, handleInput, isError, handleErrorMessage, onNext } =
-    props;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    console.log('d', inputValue, 'af');
-    try {
-      Validation[info.validateType]?.(inputValue);
-      handleErrorMessage('');
-      handleInput(inputValue);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error);
-        handleErrorMessage(error.message);
-      }
-    }
-
-    if (inputValue.length === info.maxLength) {
-      onNext();
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onNext();
-    }
-  };
+  const { info, isError } = props;
+  const { handleChange, handleBlur, handleKeyDown } = useInput(props);
 
   return (
     <StyledInput
       ref={ref}
-      value={value}
-      color={isError ? 'red' : 'grey'}
+      error={isError}
       type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
       onChange={handleChange}
+      onBlur={handleBlur}
       onKeyDown={handleKeyDown}
     />
   );
 });
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ error?: boolean }>`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${({ color }) => color};
-  outline-color: ${({ color }) => color};
+  border: 1px solid ${({ error }) => (error ? 'red' : 'grey')};
+  outline-color: ${({ error }) => (error ? 'red' : 'grey')};
   border-radius: 3px;
 `;
