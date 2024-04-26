@@ -12,6 +12,7 @@ interface InputProps {
   onEnter?: () => void;
   onBlur?: () => void;
   onFocus?: () => void;
+  type?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -27,6 +28,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onEnter,
       onBlur,
       onFocus,
+      type,
     },
     ref
   ) => {
@@ -54,7 +56,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <InputWrapper size={inputSize} isValid={isValid}>
         <input
           ref={ref}
-          type="text"
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
@@ -62,6 +63,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           placeholder={placeholder}
           onBlur={onBlur}
           onFocus={onFocus}
+          type={type ? type : "text"}
         />
       </InputWrapper>
     );

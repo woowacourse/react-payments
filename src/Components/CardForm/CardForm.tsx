@@ -8,6 +8,7 @@ import SelectBox from "../CardCompanySelector/CardCompanySelector";
 import CardCVCInput from "../CardCVCInput/CardCVCInput";
 import Button from "../common/Button/Button";
 import { useNavigate } from "react-router-dom";
+import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
 
 const CardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState("");
@@ -22,12 +23,15 @@ const CardForm: React.FC = () => {
   const [isCardholderNameCompleted, setIsCardholderNameCompleted] =
     useState(false);
   const [cardCVC, setCardCVC] = useState("");
+  const [cardPassword, setCardPassword] = useState("");
   const [isCardCVCCompleted, setIsCardCVCCompleted] = useState(false);
   const [showCardCVCInput, setShowCardCVCInput] = useState(false);
   const [showExpiryInput, setShowExpiryInput] = useState(false);
   const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
+  const [showCardPasswordInput, setShowCardPasswordInput] = useState(false);
   const [isOnCVCInput, setIsOnCVCInput] = useState(false);
+  const [isCardPasswordCompleted, setIsCardPasswordCompleted] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,7 +40,8 @@ const CardForm: React.FC = () => {
     isCardholderNameCompleted &&
     isExpiryYearCompleted &&
     isSelectedCardCompleted &&
-    isCardNumberCompleted;
+    isCardNumberCompleted &&
+    isCardPasswordCompleted;
 
   const handleCardNumberChange = (value: string) => {
     const filteredValue = value.replace(/\D/g, "");
@@ -74,9 +79,12 @@ const CardForm: React.FC = () => {
   };
 
   const handleCardCVC = (value: string) => {
-    console.log("handleCardCVC value", value);
     setCardCVC(value);
-    console.log("handleCardCVC cardCVC", cardCVC);
+  };
+
+  const handleCardPasswordChange = (value: string) => {
+    setCardPassword(value);
+    console.log("cardPassword", cardPassword);
   };
 
   const handleCardNumberCompleted = (isCompleted: boolean) => {
@@ -103,6 +111,10 @@ const CardForm: React.FC = () => {
     setIsCardCVCCompleted(isCompleted);
   };
 
+  const handleCardPasswordCompleted = (isCompleted: boolean) => {
+    setIsCardPasswordCompleted(isCompleted);
+  };
+
   useEffect(() => {
     if (isCardholderNameCompleted) {
       setShowCardCVCInput(true);
@@ -116,6 +128,12 @@ const CardForm: React.FC = () => {
   }, [isExpiryMonthCompleted, isExpiryYearCompleted]);
 
   useEffect(() => {
+    if (isCardCVCCompleted) {
+      setShowCardPasswordInput(true);
+    }
+  }, [isCardCVCCompleted]);
+
+  useEffect(() => {
     if (isSelectedCardCompleted) {
       setShowExpiryInput(true);
     }
@@ -126,6 +144,12 @@ const CardForm: React.FC = () => {
       setShowSelectBox(true);
     }
   }, [isCardNumberCompleted]);
+
+  useEffect(() => {
+    if (isCardCVCCompleted) {
+      setShowCardPasswordInput(true);
+    }
+  }, [isCardCVCCompleted]);
 
   return (
     <form>
@@ -138,6 +162,20 @@ const CardForm: React.FC = () => {
         cardCompany={selectedCard}
         isFront={isOnCVCInput}
       />
+
+      {showCardPasswordInput && (
+        <CardInput
+          title="비밀번호를 입력해 주세요"
+          label="비밀번호 앞 2자리"
+          description="앞의 2자리를 입력해주세요"
+        >
+          <CardPasswordInput
+            value={cardNumber}
+            onChange={handleCardPasswordChange}
+            setCompleted={handleCardPasswordCompleted}
+          />
+        </CardInput>
+      )}
 
       {showCardCVCInput && (
         <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
