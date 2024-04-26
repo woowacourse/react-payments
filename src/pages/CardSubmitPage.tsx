@@ -5,12 +5,21 @@ import Title from '../components/common/Title';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CardConfirmButton from '../components/CardConfirmButton';
 import { URL } from '../constants/card-app';
+import { useEffect } from 'react';
 
 const CardSubmitPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { startNumber, cardCompany } = location.state;
+  const { startNumber, cardCompany } = location.state || { startNumber: null, cardCompany: null };
+
+  useEffect(() => {
+    if (startNumber === null || cardCompany === null) {
+      navigate(URL.errorPage, {
+        replace: true,
+      });
+    }
+  }, [startNumber, cardCompany, navigate]);
 
   const content = `${startNumber}로 시작하는
   ${cardCompany}가 등록되었어요.`;
@@ -29,7 +38,7 @@ const CardSubmitPage = () => {
         <TextField>
           <Title content={content} fontSize={'25px'} fontWeight={'700'} lineHeight={'36px'} />
         </TextField>
-        <CardConfirmButton onClick={handleConfirmButtonClick} />
+        <CardConfirmButton content={'확인'} onClick={handleConfirmButtonClick} />
       </SubmitContainer>
     </SubmitPageLayout>
   );

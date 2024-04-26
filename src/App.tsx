@@ -8,23 +8,24 @@ import GlobalStyle from './styles/global';
 import './App.css';
 import CardSubmitPage from './pages/CardSubmitPage';
 import { URL } from './constants/card-app';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: URL.defaultPage,
-    element: (
-      <AppLayout>
-        <NewCardInputPage />
-      </AppLayout>
-    ),
+    element: <NewCardInputPage />,
   },
   {
     path: URL.submitPage,
-    element: (
-      <AppLayout>
-        <CardSubmitPage />
-      </AppLayout>
-    ),
+    element: <CardSubmitPage />,
+  },
+  {
+    path: URL.errorPage,
+    element: <ErrorPage />,
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ]);
 
@@ -32,7 +33,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <RouterProvider router={router} />
+      <AppLayout>
+        <RouterProvider router={router} />
+      </AppLayout>
     </>
   );
 }
