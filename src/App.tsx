@@ -6,7 +6,7 @@ import useExpirationDate from './hooks/useExpirationDate';
 import usePasswordState from './hooks/usePassword';
 import useSelectedCardState from './hooks/useSelectedCardState';
 import useUserName from './hooks/useUserName';
-import { StyledContainer } from './styles/App.style';
+import { StyledAppContainer } from './styles/App.style';
 
 function App() {
   const { cardNumberState } = useCardNumber([]);
@@ -26,10 +26,10 @@ function App() {
   };
 
   return (
-    <StyledContainer>
+    <StyledAppContainer>
       <CardInformationPreview {...cardInformationProps} />
       <CardInformationForm {...cardInformationProps} />
-    </StyledContainer>
+    </StyledAppContainer>
   );
 }
 
