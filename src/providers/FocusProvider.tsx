@@ -27,7 +27,7 @@ interface FocusProvider {
 }
 
 export const FocusProvider = ({ children }: FocusProvider) => {
-  const [focusedInputId, setFocusedInputId] = useState<string | null>(null);
+  const [focusedInputId, setFocusedInputId] = useState<ValidFocusName | null>(null);
 
   // context의 value로 상태 및 업데이트 함수를 제공합니다.
   return <FocusContext.Provider value={{ focusedInputId, setFocusedInputId }}>{children}</FocusContext.Provider>;
