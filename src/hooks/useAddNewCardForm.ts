@@ -82,6 +82,7 @@ const useAddNewCardForm = () => {
     if (isValidCVCNumbers) addItemToShowCase('password');
   }, [isValidCVCNumbers]);
 
+  // TODO: reset 로직 롤백(정보를 컨텍스트로 유지한다면 필요하겠지만 지금은 필요가 없음)
   const clearForm = () => {
     cardNumbers.reset();
     expirationDate.reset();
