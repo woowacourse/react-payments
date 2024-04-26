@@ -2,7 +2,7 @@ import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface CardExpirationState {
-  value: number[];
+  value: string[];
   errorMessage: string[];
   isNextVisible: boolean;
   isValid: boolean;
@@ -10,7 +10,7 @@ interface CardExpirationState {
 
 function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<HTMLInputElement>, index: number) => void] {
   const [cardExpirationState, setCardExpirationState] = useState<CardExpirationState>({
-    value: [0, 0],
+    value: ["", ""],
     errorMessage: ["", ""],
     isNextVisible: false,
     isValid: false,
@@ -18,10 +18,11 @@ function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<H
 
   const handleCardExpirationChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
+    const cardExpirationValid = /^[0-9]]*/.test(value);
 
-    const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? Number(value) : num));
+    const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? value : num));
     const errorMessage = cardExpirationState.errorMessage.map((msg, i) => (i === index ? validators.cardExpiration(value, index) : msg));
-    const isValid = updatedCardExpiration.every((number) => number !== 0) && errorMessage.every((message) => !message);
+    const isValid = updatedCardExpiration.every((number) => number.length === 2) && errorMessage.every((message) => !message);
     const isNextVisible = cardExpirationState.isNextVisible || isValid;
 
     if (!errorMessage[index] && index < updatedCardExpiration.length - 1) {
@@ -30,6 +31,15 @@ function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<H
         nextInput.focus();
       }
     }
+
+    setCardExpirationState((prevState) => ({
+      ...prevState,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+
+    if (!cardExpirationValid) return;
 
     setCardExpirationState((prevState) => ({
       ...prevState,

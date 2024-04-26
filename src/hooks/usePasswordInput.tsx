@@ -2,7 +2,7 @@ import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface PasswordState {
-  value: number;
+  value: string;
   errorMessage: string[];
   isNextVisible: boolean;
   isValid: boolean;
@@ -10,20 +10,31 @@ interface PasswordState {
 
 function usePasswordInput(): [PasswordState, (value: string) => void] {
   const [passwordState, setPasswordState] = useState<PasswordState>({
-    value: 0,
+    value: "",
     errorMessage: [""],
     isNextVisible: false,
     isValid: false,
   });
 
   const handlePasswordChange = (value: string) => {
+    const isPasswordValid = /^[0-9]*$/.test(value);
+
     const errorMessage = [validators.password(value)];
     const isValid = !!value && errorMessage[0] === "";
     const isNextVisible = passwordState.isNextVisible || isValid;
 
     setPasswordState((prevState) => ({
       ...prevState,
-      value: isValid ? Number(value) : prevState.value,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+
+    if (!isPasswordValid) return;
+
+    setPasswordState((prevState) => ({
+      ...prevState,
+      value: value,
       errorMessage,
       isNextVisible,
       isValid,

@@ -54,6 +54,7 @@ const NewCardPage = () => {
           >
             <Input
               type="password"
+              value={passwordState.value}
               maxLength={FORM_FIELDS.PASSWORD.MAX_LENGTH}
               placeholder={FORM_FIELDS.PASSWORD.PLACEHOLDER}
               isError={!!passwordState.errorMessage[0]}
@@ -72,6 +73,7 @@ const NewCardPage = () => {
             errorMessage={cvcState.errorMessage}
           >
             <Input
+              value={cvcState.value}
               maxLength={FORM_FIELDS.CVC.MAX_LENGTH}
               placeholder={FORM_FIELDS.CVC.PLACEHOLDER}
               isError={!!cvcState.errorMessage[0]}
@@ -114,6 +116,7 @@ const NewCardPage = () => {
             {cardExpirationState.value.map((_, index) => (
               <Input
                 key={index}
+                value={cardExpirationState.value[index]}
                 maxLength={FORM_FIELDS.CARD_EXPIRATION.MAX_LENGTH}
                 placeholder={index === 0 ? FORM_FIELDS.CARD_EXPIRATION.PLACEHOLDER.MONTH : FORM_FIELDS.CARD_EXPIRATION.PLACEHOLDER.YEAR}
                 isError={!!cardExpirationState.errorMessage[index]}
@@ -149,6 +152,7 @@ const NewCardPage = () => {
           {cardNumbersState.value.map((_, index) => (
             <Input
               key={index}
+              value={cardNumbersState.value[index]}
               maxLength={FORM_FIELDS.CARD_NUMBERS.MAX_LENGTH}
               placeholder={FORM_FIELDS.CARD_NUMBERS.PLACEHOLDER}
               isError={!!cardNumbersState.errorMessage[index]}

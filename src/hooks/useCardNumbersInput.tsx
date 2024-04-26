@@ -2,7 +2,7 @@ import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface CardNumbersState {
-  value: number[];
+  value: string[];
   errorMessage: string[];
   isNextVisible: boolean;
   isValid: boolean;
@@ -10,7 +10,7 @@ interface CardNumbersState {
 
 function useCardNumbersInput(): [CardNumbersState, (e: React.ChangeEvent<HTMLInputElement>, index: number) => void] {
   const [cardNumbersState, setCardNumbersState] = useState<CardNumbersState>({
-    value: [0, 0, 0, 0],
+    value: ["", "", "", ""],
     errorMessage: ["", "", "", ""],
     isNextVisible: false,
     isValid: false,
@@ -18,10 +18,11 @@ function useCardNumbersInput(): [CardNumbersState, (e: React.ChangeEvent<HTMLInp
 
   const handleCardNumbersChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
+    const cardNumbersValid = /^[0-9]*$/.test(value);
 
-    const updatedCardNumbers = cardNumbersState.value.map((num, i) => (i === index ? Number(value) : num));
+    const updatedCardNumbers = cardNumbersState.value.map((num, i) => (i === index ? value : num));
     const errorMessage = cardNumbersState.errorMessage.map((msg, i) => (i === index ? validators.cardNumbers(value) : msg));
-    const isValid = updatedCardNumbers.every((number) => number !== 0) && errorMessage.every((message) => !message);
+    const isValid = updatedCardNumbers.every((number) => number.length === 4) && errorMessage.every((message) => !message);
     const isNextVisible = cardNumbersState.isNextVisible || isValid;
 
     if (value && !errorMessage[index] && index < updatedCardNumbers.length - 1) {
@@ -30,6 +31,15 @@ function useCardNumbersInput(): [CardNumbersState, (e: React.ChangeEvent<HTMLInp
         nextInput.focus();
       }
     }
+
+    setCardNumbersState((prevState) => ({
+      ...prevState,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+
+    if (!cardNumbersValid) return;
 
     setCardNumbersState((prevState) => ({
       ...prevState,

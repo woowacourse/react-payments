@@ -17,10 +17,19 @@ function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.
   });
 
   const handleUserNameChange = (value: string) => {
+    const userNameValid = /^[a-zA-Z\s]*$/.test(value);
     const errorMessage = [validators.userName(value)];
+
     setUserNameState((prevState) => ({
       ...prevState,
-      value: value && !errorMessage[0] ? value.toUpperCase() : prevState.value,
+      errorMessage,
+    }));
+
+    if (!userNameValid) return;
+
+    setUserNameState((prevState) => ({
+      ...prevState,
+      value: value.toUpperCase(),
       errorMessage,
     }));
   };

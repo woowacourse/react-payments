@@ -16,7 +16,6 @@ function useCardCompanyInput(): [CardCompanyState, (value: string) => void] {
     isValid: false,
   });
 
-  // Function to handle changes in Card Company input
   const handleCardCompanyChange = (value: string) => {
     const errorMessage = [""];
     const isValid = !!value;

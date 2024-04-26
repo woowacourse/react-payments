@@ -8,16 +8,16 @@ import { CardCompany } from "../../../types/type";
 
 interface CardPreview {
   isCardFlipped: boolean;
-  cvc: number;
+  cvc: string;
   userName: string;
-  cardExpiration: number[];
+  cardExpiration: string[];
   cardCompany: CardCompany;
-  cardNumbers: number[];
+  cardNumbers: string[];
 }
 
 const CardPreview = ({ isCardFlipped, cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreview) => {
   const getCardBrandImage = () => {
-    const IIN = Math.floor(cardNumbers[0] / 100);
+    const IIN = Math.floor(Number(cardNumbers[0]) / 100);
     let cardBrandImage = "";
 
     if (IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER && IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER) {
