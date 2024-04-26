@@ -11,7 +11,11 @@ const createOptionEl = (values: string[], contents?: string[]) => {
   const optionElements = values.map((value, index) => {
     const content = contents ? contents[index] : value;
 
-    return <Option value={value}>{content}</Option>;
+    return (
+      <Option key={index} value={value}>
+        {content}
+      </Option>
+    );
   });
 
   return optionElements;
