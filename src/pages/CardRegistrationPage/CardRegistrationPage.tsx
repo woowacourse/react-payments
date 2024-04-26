@@ -48,9 +48,30 @@ const CardRegistrationPage = () => {
 
   const { moveIndex } = useAutoMoveIndex(0, validationList);
 
-  const isButtonActive = validationList.every(Boolean);
-
   const handleIsCVCInput = (isCVCInput: boolean) => setIsCVCInput(isCVCInput);
+
+  const renderCardForm = (moveIndex: number) => {
+    return (
+      <S.CardForm>
+        {moveIndex >= 5 && <CardPasswordInput password={password} />}
+        {moveIndex >= 4 && <CardCVCInput cvc={cvc} handleIsCVCInput={handleIsCVCInput} />}
+        {moveIndex >= 3 && <CardOwnerInput owner={owner} />}
+        {moveIndex >= 2 && <CardExpirationInput month={month} year={year} />}
+        {moveIndex >= 1 && <CardCompanyInput company={company} />}
+        <CardNumberInput cardNumbers={cardNumbers} />
+      </S.CardForm>
+    );
+  };
+
+  const renderSubmitButton = () => {
+    const submitUrl = `/complete?number=${encodeURIComponent(cardNumbers.values[0])}&company=${encodeURIComponent(company.value)}`;
+
+    return (
+      <Link to={submitUrl}>
+        <S.SubmitButton>확인</S.SubmitButton>
+      </Link>
+    );
+  };
 
   return (
     <div>
@@ -66,22 +87,9 @@ const CardRegistrationPage = () => {
             isCVCInput={isCVCInput}
           />
         </S.CardPreviewBoxWrapper>
-        <S.CardForm>
-          {moveIndex >= 5 && <CardPasswordInput password={password} />}
-          {moveIndex >= 4 && <CardCVCInput cvc={cvc} handleIsCVCInput={handleIsCVCInput} />}
-          {moveIndex >= 3 && <CardOwnerInput owner={owner} />}
-          {moveIndex >= 2 && <CardExpirationInput month={month} year={year} />}
-          {moveIndex >= 1 && <CardCompanyInput company={company} />}
-          <CardNumberInput cardNumbers={cardNumbers} />
-        </S.CardForm>
+        <S.CardForm>{renderCardForm(moveIndex)}</S.CardForm>
       </S.CardRegistrationContainer>
-      {isButtonActive && (
-        <Link
-          to={`/complete?number=${encodeURIComponent(cardNumbers.values[0])}&company=${encodeURIComponent(company.value)}`}
-        >
-          <S.SubmitButton>확인</S.SubmitButton>
-        </Link>
-      )}
+      {validationList.every(Boolean) && renderSubmitButton()}
     </div>
   );
 };
