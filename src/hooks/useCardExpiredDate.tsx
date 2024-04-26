@@ -27,7 +27,7 @@ const checkIsExpired = (month: string, year: string) => {
   const inputMonth = Number(month);
   const inputYear = Number(year) + 2000;
   const inputDate = new Date(inputYear, inputMonth);
-  const nowMonth = new Date().getMonth();
+  const nowMonth = new Date().getMonth() + 1;
   const nowYear = new Date().getFullYear();
   const nowDate = new Date(nowYear, nowMonth);
 
