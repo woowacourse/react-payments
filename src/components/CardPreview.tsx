@@ -63,14 +63,13 @@ const CardPreviewContainer = styled.section<CardPreviewContainerProps>(
   props => {
     return {
       width: '212px',
-      height: '132px',
+      minHeight: '100px',
       top: '77px',
       left: '82px',
       padding: '10px 17px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      gap: '10px',
       borderRadius: '4px',
       backgroundColor: props.backgroundColor ?? COLOR.gray2,
       boxShadow: '3px 3px 3px rgba(0, 0, 0, 0.25)',
