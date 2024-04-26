@@ -1,12 +1,11 @@
-import React from "react";
 import styles from "./CardPreviewFront.module.css";
 import { CARD_BRAND, MASK_START_INDEX, SYMBOLS } from "@/constants/cardInfo";
 import { getCardbrand } from "@/utils/card";
 
 interface CardPreviewFrontProps {
-  cardNumbers: { first: string; second: string; third: string; fourth: string };
-  expirationDate: { month: string; year: string };
-  ownerName: { ownerName: string };
+  cardNumbers: Record<string, string>;
+  expirationDate: Record<string, string>;
+  ownerName: string;
 }
 
 const CardPreviewFront = ({
@@ -46,7 +45,7 @@ const CardPreviewFront = ({
           {`${expirationDate.month}${(expirationDate.month || expirationDate.year) && SYMBOLS.slash}${expirationDate.year}`}
         </div>
 
-        <div className={styles.ownerName}>{ownerName.ownerName}</div>
+        <div className={styles.ownerName}>{ownerName}</div>
       </div>
     </div>
   );

@@ -14,3 +14,16 @@ export const getCardbrand = (firstCardNumber: string): Brand => {
 
   return null;
 };
+
+export const getPreviewData = (
+  inputState: Record<
+    string,
+    { value: string; isError: boolean; isDone: boolean }
+  >
+) => {
+  const object: { [key: string]: string } = {};
+  for (const [key, { value, isDone }] of Object.entries(inputState)) {
+    object[key] = isDone ? value : "";
+  }
+  return object;
+};

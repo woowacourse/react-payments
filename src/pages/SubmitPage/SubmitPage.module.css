@@ -23,7 +23,7 @@
   height: 77px;
   border-radius: 50%;
   background-color: #333333;
-  animation: slideIn 1s forwards;
+  animation: slideIn 2s forwards;
 }
 
 @keyframes slideIn {

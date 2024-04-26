@@ -4,9 +4,9 @@ import CardPreviewFront from "@/components/CardPreviewFront/CardPreviewFront";
 import CardPreviewBack from "@/components/CardPreviewBack/CardPreviewBack";
 
 interface CardPreviewProps {
-  cardNumbers: { first: string; second: string; third: string; fourth: string };
-  expirationDate: { month: string; year: string };
-  ownerName: { ownerName: string };
+  cardNumbers: Record<string, string>;
+  expirationDate: Record<string, string>;
+  ownerName: string;
   cardCompany: string;
   CVC: string;
   face: "front" | "back";
@@ -46,7 +46,7 @@ const CardPreview = memo(
     if (prev.expirationDate.month !== next.expirationDate.month) return false;
     if (prev.expirationDate.year !== next.expirationDate.year) return false;
 
-    if (prev.ownerName.ownerName !== next.ownerName.ownerName) return false;
+    if (prev.ownerName !== next.ownerName) return false;
 
     if (prev.CVC !== next.CVC) return false;
     if (prev.cardCompany !== next.cardCompany) return false;

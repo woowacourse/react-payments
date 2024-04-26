@@ -5,10 +5,7 @@ import { ChangeEvent, FocusEvent, RefObject, memo } from "react";
 const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
 interface CardNumberInputProps {
-  cardNumbers: {
-    data: Record<string, { value: string; isError: boolean }>;
-    status: { isError: boolean; errorMessage: string };
-  };
+  cardNumbers: Record<string, { value: string; isError: boolean }>;
   changeCardNumbers: (event: ChangeEvent<HTMLInputElement>) => void;
   blurCardNumbers: (event: FocusEvent<HTMLInputElement>) => void;
   refs: {
@@ -17,6 +14,7 @@ interface CardNumberInputProps {
     thirdRef: RefObject<HTMLInputElement>;
     fourthRef: RefObject<HTMLInputElement>;
   };
+  errorMessage: string;
 }
 
 const CardNumberInput = memo(
@@ -25,15 +23,16 @@ const CardNumberInput = memo(
     changeCardNumbers,
     blurCardNumbers,
     refs,
+    errorMessage,
   }: CardNumberInputProps) => {
     return (
       <Field
         title={CARD_NUMBER.title}
         description={CARD_NUMBER.description}
         labelText={CARD_NUMBER.labelText}
-        errorMessage={cardNumbers.status.errorMessage}
+        errorMessage={errorMessage}
       >
-        {Object.entries(cardNumbers.data).map(
+        {Object.entries(cardNumbers).map(
           ([name, { value, isError }], index) => (
             <Input
               key={name}

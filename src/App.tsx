@@ -21,6 +21,7 @@ import {
   PasswordInput,
   SubmitButton,
 } from "@/components";
+import { getPreviewData } from "@/utils/card";
 
 const App = () => {
   const {
@@ -29,12 +30,13 @@ const App = () => {
     blurCardNumbers,
     cardNumbersRefs,
     cardNumbersNextInput,
+    errorMessage: cardNumbersErrorMessage,
   } = useCardNumbers();
   const {
     expirationDate,
     changeExpirationDate,
-    blurExpirationDate,
     refs: expirationDateRefs,
+    errorMessage: expirationDateErrorMessage,
     nextInput: expirationDateNextInput,
   } = useExpirationDate();
   const {
@@ -61,7 +63,7 @@ const App = () => {
     event.preventDefault();
     const params = {
       cardCompany,
-      firstCardNumber: cardNumbers.data.first.value,
+      firstCardNumber: cardNumbers.first.value,
     };
     navigate(`/react-payments/submit`, { state: { ...params } });
   };
@@ -72,31 +74,12 @@ const App = () => {
         face={isFocus ? "back" : "front"}
         CVC={CVC.value}
         cardCompany={cardCompany}
-        cardNumbers={{
-          first: cardNumbers.data.first.isDone
-            ? cardNumbers.data.first.value
-            : "",
-          second: cardNumbers.data.second.isDone
-            ? cardNumbers.data.second.value
-            : "",
-          third: cardNumbers.data.third.isDone
-            ? cardNumbers.data.third.value
-            : "",
-          fourth: cardNumbers.data.fourth.isDone
-            ? cardNumbers.data.fourth.value
-            : "",
-        }}
+        cardNumbers={getPreviewData(cardNumbers)}
         expirationDate={{
-          month: expirationDate.data.month.isDone
-            ? expirationDate.data.month.value
-            : "",
-          year: expirationDate.data.year.isDone
-            ? expirationDate.data.year.value
-            : "",
+          month: expirationDate.month.isDone ? expirationDate.month.value : "",
+          year: expirationDate.year.isDone ? expirationDate.year.value : "",
         }}
-        ownerName={{
-          ownerName: ownerName.isDone ? ownerName.value : "",
-        }}
+        ownerName={ownerName.isDone ? ownerName.value : ""}
       />
       <form onSubmit={handleSubmit}>
         {CVCShowNextInput && (
@@ -119,14 +102,14 @@ const App = () => {
             onKeyDown={ownerNameHandleKeyDown}
           />
         )}
-        {cardCompany && (
+        {
           <ExpirationDateInput
+            errorMessage={expirationDateErrorMessage}
             expirationDate={expirationDate}
             changeExpirationDate={changeExpirationDate}
-            blurExpirationDate={blurExpirationDate}
             refs={expirationDateRefs}
           />
-        )}
+        }
         {cardNumbersNextInput && (
           <CardCompany
             cardCompany={cardCompany}
@@ -136,13 +119,14 @@ const App = () => {
         )}
         <CardNumberInput
           cardNumbers={cardNumbers}
+          errorMessage={cardNumbersErrorMessage}
           changeCardNumbers={changeCardNumbers}
           blurCardNumbers={blurCardNumbers}
           refs={cardNumbersRefs}
         />
-        {isAllDone(cardNumbers.data) &&
+        {isAllDone(cardNumbers) &&
           cardCompany &&
-          isAllDone(expirationDate.data) &&
+          isAllDone(expirationDate) &&
           ownerName.isDone &&
           CVC.isDone &&
           password.isDone && <SubmitButton />}
