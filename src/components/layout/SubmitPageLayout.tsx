@@ -7,8 +7,6 @@ const SubmitPageLayout = ({ children }: React.PropsWithChildren<SubmitPageLayout
   return <Layout>{children}</Layout>;
 };
 
-export default SubmitPageLayout;
-
 const Layout = styled.main`
   padding: 18px 32px 0px 32px;
   width: 376px;
@@ -23,3 +21,5 @@ const Layout = styled.main`
 
   border-radius: 8px;
 `;
+
+export default SubmitPageLayout;
