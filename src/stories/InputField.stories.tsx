@@ -97,3 +97,44 @@ export const 카드소유자_입력_레이아웃: Story = {
     ),
   },
 };
+
+export const CVC_입력_레이아웃: Story = {
+  args: {
+    title: 'CVC 번호를 입력해 주세요',
+    labelText: 'cvc',
+    labelFor: 'cvc-input',
+    children: (
+      <Input
+        id="cvc-input"
+        isError={false}
+        value=""
+        onChange={() => ''}
+        onBlur={() => ''}
+        placeholder="123"
+        width="100%"
+        maxLength={4}
+      />
+    ),
+  },
+};
+
+export const 카드_비밀번호_입력_레이아웃: Story = {
+  args: {
+    title: '비밀번호를 입력해 주세요',
+    subtitle: '앞의 2자리를 입력해주세요',
+    labelText: '비밀번호 앞 2자리',
+    labelFor: 'password-input',
+    children: (
+      <Input
+        id="password-input"
+        isError={false}
+        value=""
+        onChange={() => ''}
+        onBlur={() => ''}
+        placeholder="••"
+        width="100%"
+        maxLength={100}
+      />
+    ),
+  },
+};
