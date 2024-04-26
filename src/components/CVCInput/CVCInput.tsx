@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 import Field from "@/components/layout/Field/Field";
 import Input from "@/components/common/Input/Input";
 

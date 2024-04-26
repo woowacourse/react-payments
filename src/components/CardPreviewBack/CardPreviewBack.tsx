@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./CardPreviewBack.module.css";
 
 const CardPreviewBack = ({ CVC }: { CVC: string }) => {
