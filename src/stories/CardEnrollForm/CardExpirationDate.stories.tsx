@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import CardExpirationDateInput from "../components/payment/CardEnrollForm/CardExpirationDateInput";
+import CardExpirationDateInput from "../../components/payment/CardEnrollForm/CardExpirationDateInput";
 import { useState } from "react";
 
 const meta: Meta<typeof CardExpirationDateInput> = {

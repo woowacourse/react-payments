@@ -1,6 +1,6 @@
 import FormSubmitButton, {
   FormSubmitButtonProps,
-} from "../components/payment/CardEnrollForm/FormSubmitButton";
+} from "../../components/payment/CardEnrollForm/FormSubmitButton";
 import { Meta, Story } from "@storybook/react";
 
 export default {

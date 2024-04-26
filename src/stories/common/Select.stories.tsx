@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react";
-import Select, { SelectProps } from "../components/common/Select";
+import Select, { SelectProps } from "../../components/common/Select";
 
 export default {
   title: "Components/Select",

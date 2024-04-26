@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 
-import CardIssuerSelect from "../components/payment/CardEnrollForm/CardIssuerSelect";
+import CardIssuerSelect from "../../components/payment/CardEnrollForm/CardIssuerSelect";
 
 export default {
   title: "Components/CardIssuerSelect",

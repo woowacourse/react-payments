@@ -1,4 +1,4 @@
-import CardCvcInput from "../components/payment/CardEnrollForm/CardCVCInput";
+import CardCvcInput from "../../components/payment/CardEnrollForm/CardCvcInput";
 import { Meta } from "@storybook/react";
 
 export default {

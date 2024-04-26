@@ -1,4 +1,4 @@
-import CardPasswordInput from "../components/payment/CardEnrollForm/CardPasswordInput";
+import CardPasswordInput from "../../components/payment/CardEnrollForm/CardPasswordInput";
 import { Meta } from "@storybook/react";
 
 export default {
