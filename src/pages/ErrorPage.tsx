@@ -1,7 +1,6 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import CHECK_IMG from '../../assets/images/check.png';
-import { Link, useLocation } from 'react-router-dom';
-import ErrorPage from '../ErrorPage';
+import ERROR_IMG from '../assets/images/error.png';
 
 const Container = styled.div`
   display: flex;
@@ -52,23 +51,14 @@ const StyledLink = styled(Link)`
   color: #ffffff;
 `;
 
-export default function RegisterConfirm() {
-  const { state } = useLocation();
-
-  if (!state) {
-    return <ErrorPage />;
-  }
-
+export default function ErrorPage() {
   return (
     <Container>
       <ImageWrapper>
-        <Image src={CHECK_IMG} />
+        <Image src={ERROR_IMG} />
       </ImageWrapper>
-      <Text>
-        {state.cardNumber}로 시작하는 <br />
-        {state.cardCompany}가 등록되었어요.
-      </Text>
-      <StyledLink to="/">확인</StyledLink>
+      <Text>잘못된 페이지 접근입니다!</Text>
+      <StyledLink to="/">카드 등록하러 가기</StyledLink>
     </Container>
   );
 }

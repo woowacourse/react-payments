@@ -12,8 +12,8 @@ interface Props {
 }
 
 export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
-  const goNextStep = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const goNextStep = (e: React.KeyboardEvent<HTMLInputElement>, value: string) => {
+    if (value !== '' && e.key === 'Enter') {
       setNextContentDisplay(true);
     }
   };
@@ -28,7 +28,7 @@ export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
           id="name"
           maxLength={MAX_LENGTH.ownerName}
           onChange={name.onChangeHandler}
-          onKeyDown={goNextStep}
+          onKeyDown={(e) => goNextStep(e, name.value)}
           onBlur={name.onBlurHandler}
           isError={name.isError}
           placeholder="JOHN DOE"
