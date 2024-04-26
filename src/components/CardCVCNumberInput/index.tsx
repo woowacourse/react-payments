@@ -1,28 +1,22 @@
 import styled from 'styled-components';
 import Label from '../common/Label';
 import Input from '../common/Input';
-import { CARD_META_INFO, INPUT_RULES, VALIDATION_MESSAGES } from '../../constants/card-app';
-import { useState } from 'react';
+import { CARD_META_INFO, VALIDATION_MESSAGES } from '../../constants/card-app';
+import { errorCaption } from '../../utils/errorCaption';
 
 interface CardCVCNumberInputProps {
   cardCVCNumber: string;
-  errorCaption: (errorText: string) => JSX.Element;
+  cardCVCNumberError: boolean;
   onCardCVCNumberChange: (value: string) => void;
+  onFocusChange: () => void;
 }
 
-const CardCVCNumberInput = ({ cardCVCNumber, errorCaption, onCardCVCNumberChange }: CardCVCNumberInputProps) => {
-  const [isError, setIsError] = useState<boolean>(false);
-
-  const handleInputChange = (value: string) => {
-    const isNumberInput = /^[0-9]*$/.test(value);
-    const isValidCVCNumber = value.length <= INPUT_RULES.maxCardCVCNumberLength;
-
-    setIsError(!isNumberInput);
-    if (!isNumberInput || !isValidCVCNumber) return;
-
-    onCardCVCNumberChange(value);
-  };
-
+const CardCVCNumberInput = ({
+  cardCVCNumber,
+  cardCVCNumberError,
+  onCardCVCNumberChange,
+  onFocusChange,
+}: CardCVCNumberInputProps) => {
   return (
     <InputField>
       <Label htmlFor='card-owner'>{CARD_META_INFO.cardCVCNumber.label}</Label>
@@ -32,12 +26,15 @@ const CardCVCNumberInput = ({ cardCVCNumber, errorCaption, onCardCVCNumberChange
         placeholder='123'
         value={cardCVCNumber}
         size='large'
-        isError={isError}
+        isError={cardCVCNumberError}
         onChange={(e) => {
-          handleInputChange(e.target.value);
+          onCardCVCNumberChange(e.target.value);
         }}
+        onFocus={onFocusChange}
+        onBlur={onFocusChange}
+        autoFocus
       />
-      {isError ? errorCaption(VALIDATION_MESSAGES.invalidCVCNumber) : errorCaption('')}
+      {cardCVCNumberError ? errorCaption(VALIDATION_MESSAGES.invalidCVCNumber) : errorCaption('')}
     </InputField>
   );
 };
