@@ -22,6 +22,7 @@ export default function CardBrandInput({ isBrandValid, onChangeBrand }: CardBran
           optionValues={Object.keys(CARD_BRANDS)}
           isValid={isBrandValid.isValid}
           placeholder={'카드사를 선택해주세요.'}
+          autoFocus={true}
           onChange={handleChangeBrand}
         />
       </InputField>

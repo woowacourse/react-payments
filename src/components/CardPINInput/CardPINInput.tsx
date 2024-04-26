@@ -29,6 +29,7 @@ export default function CardPINInput({ isPINValid, onChangePIN }: CardPINInputPr
           maxLength={CARD_PIN.MAX_LENGTH}
           onChange={handleChangePIN}
           isValid={isPINValid.isValid}
+          autoFocus
         />
       </InputField>
     </div>

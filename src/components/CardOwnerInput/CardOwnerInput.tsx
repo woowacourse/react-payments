@@ -25,6 +25,7 @@ export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwne
           placeholder="SEONGJIN HONG"
           onChange={handleOwnerInput}
           isValid={isOwnerValid.isValid}
+          autoFocus
         />
       </InputField>
     </div>

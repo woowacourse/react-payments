@@ -37,6 +37,7 @@ export default function CardCVCInput({ isCVCValid, onChangeCVC, onChangeFocusCVC
           onFocus={handleChangeFocusCVC}
           onBlur={handleChangeFocusCVC}
           isValid={isCVCValid.isValid}
+          autoFocus
         />
       </InputField>
     </div>

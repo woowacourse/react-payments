@@ -5,10 +5,11 @@ interface SelectBoxProps {
   optionValues: string[];
   isValid: boolean;
   placeholder?: string;
+  autoFocus?: boolean;
   onChange: (value: string) => void;
 }
 
-export default function SelectBox({ optionValues, isValid, placeholder, onChange }: SelectBoxProps) {
+export default function SelectBox({ optionValues, isValid, placeholder, autoFocus, onChange }: SelectBoxProps) {
   const [isOpened, setIsOpened] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -27,6 +28,7 @@ export default function SelectBox({ optionValues, isValid, placeholder, onChange
         $isOpened={isOpened}
         $isSelected={selectedValue !== ''}
         onClick={handleOptionBox}
+        autoFocus={autoFocus ?? false}
       >
         {selectedValue === '' ? placeholder : selectedValue}
       </S.SelectButton>
