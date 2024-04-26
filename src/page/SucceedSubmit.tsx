@@ -7,7 +7,6 @@ import { Page } from '../style/page.style';
 export default function SucceedSubmit() {
   const location = useLocation();
   const { cardNumbers, cardCompany } = location.state.cardInfo;
-  console.log(cardNumbers, cardCompany);
 
   return (
     <CenterPage>
