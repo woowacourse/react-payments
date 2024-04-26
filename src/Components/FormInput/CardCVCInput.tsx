@@ -3,7 +3,7 @@ import { memo, useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardCVCContext, CardUIHeadOrTailContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardCVCErrorContext } from "../Form/FormContextProvider";
-import { CardCVCInputContext } from "../Form/FormRefContextProvider";
+import { CardCVCInputContext, CardPasswordInputContext } from "../Form/FormRefContextProvider";
 import { cardCVCValidator } from "./validator";
 
 import onInputChange from "./onInputChange";
@@ -21,6 +21,8 @@ const CardCVCInput = memo(() => {
   const inputRef = useContextWrapper(CardCVCInputContext)[0];
 
   const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "CVC" }];
+
+  const nextRef = useContextWrapper(CardPasswordInputContext)[0];
 
   useEffect(() => {
     const focusInEvent = () => {
@@ -63,6 +65,7 @@ const CardCVCInput = memo(() => {
               setError,
               validator: cardCVCValidator,
               maxLength: 3,
+              nextRef,
             })
           }
           isError={!!cardCVCError[name]?.isError}
@@ -72,6 +75,7 @@ const CardCVCInput = memo(() => {
           value={cardCVC.value ?? ""}
           placeholder={placeholder}
           ref={inputRef}
+          nextRef={nextRef}
         />
       ))}
     </>
