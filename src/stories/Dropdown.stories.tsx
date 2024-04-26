@@ -26,7 +26,7 @@ export default meta;
 
 type Story = StoryObj<typeof Dropdown>;
 
-export const 카드사_선택_레이아웃: Story = {
+export const 드랍다운: Story = {
   args: {
     value: '',
   },
