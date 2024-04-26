@@ -6,16 +6,23 @@ import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 interface InputOwnerNameProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
 }
 
-const InputOwnerName = ({ inputValue, handleChange, inputError }: InputOwnerNameProps) => {
+const InputOwnerName = ({
+  inputValue,
+  handleChange,
+  handleBlur,
+  inputError,
+}: InputOwnerNameProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="ownerName">{CARD_FORM_MESSAGE.cardOwner}</InputLabel>
       <InputBox
-        inputValue={inputValue}
+        inputValue={inputValue.toUpperCase()}
         handleChange={handleChange}
+        onBlur={handleBlur}
         size="large"
         placeholder="JOHN DOE"
         id="ownerName"

@@ -6,10 +6,11 @@ import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 interface InputCvcProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
 }
 
-const InputPassword = ({ inputValue, handleChange, inputError }: InputCvcProps) => {
+const InputPassword = ({ inputValue, handleChange, handleBlur, inputError }: InputCvcProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="password">{CARD_FORM_MESSAGE.twoDigitPassword}</InputLabel>
@@ -17,6 +18,7 @@ const InputPassword = ({ inputValue, handleChange, inputError }: InputCvcProps) 
         type="password"
         inputValue={inputValue}
         handleChange={handleChange}
+        onBlur={handleBlur}
         size="large"
         placeholder="카드 비밀번호"
         id="password"

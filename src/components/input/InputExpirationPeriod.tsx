@@ -7,6 +7,7 @@ import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 interface InputExpirationPeriodProps {
   inputValue: ExpirationPeriodValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
 }
 
@@ -18,6 +19,7 @@ interface InputboxData {
 const InputExpirationPeriod = ({
   inputValue,
   handleChange,
+  handleBlur,
   inputError,
 }: InputExpirationPeriodProps) => {
   const inputboxData: InputboxData[] = [
@@ -40,6 +42,7 @@ const InputExpirationPeriod = ({
             key={`expirationDate${idx + 1}`}
             inputValue={data.inputValue}
             handleChange={handleChange}
+            onBlur={handleBlur}
             size="medium"
             placeholder="MM"
             id={`expirationDate${idx + 1}`}

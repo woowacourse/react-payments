@@ -10,8 +10,7 @@ interface InputBoxProps {
   name?: string;
   type?: string;
   autoFocus?: boolean;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
 }
 
 const sizeWidthMap = {
