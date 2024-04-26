@@ -7,9 +7,7 @@ import FormInputCompound from "./FormInputCompound";
 
 import { cardPeriodValidator } from "./validator";
 import onInputChange from "./onInputChange";
-import { CardOwnerInputContext, CardPeriodInputsContext } from "../Form/FormRefContextProvider";
-
-import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 
 interface InputInfo {
   name: keyof CardValidityPeriod;
@@ -22,12 +20,10 @@ const CardPeriodInput = memo(() => {
   const [cardPeriod, setData] = useContextWrapper(CardValidityPeriodContext);
   const [periodError, setError] = useContextWrapper(CardValidityPeriodErrorContext);
   const [firstRef, secondRef] = useContextWrapper(CardPeriodInputsContext);
-  const [nextFirstRef] = useContextWrapper(CardOwnerInputContext);
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
   const InputInfoList: InputInfo[] = [
     { name: "month", placeholder: "MM", ref: firstRef, nextRef: secondRef },
-    { name: "year", placeholder: "YY", ref: secondRef, nextRef: nextFirstRef },
+    { name: "year", placeholder: "YY", ref: secondRef },
   ];
 
   return (
@@ -41,12 +37,9 @@ const CardPeriodInput = memo(() => {
               name,
               setData,
               setError,
-              setRenderOrder,
               validator: cardPeriodValidator,
               maxLength: 2,
               nextRef,
-              isLastInput: index === InputInfoList.length - 1,
-              step: 2,
             })
           }
           isError={!!periodError[name]?.isError}

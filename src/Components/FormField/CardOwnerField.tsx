@@ -11,6 +11,8 @@ const CardOwnerField = () => {
     return cardOwnerError[category]?.errorMessage;
   });
 
+  //TODO: 하위 input들의 Ref를 받고, Value들을 검증해서, 다음 렌더링으로 옮겨간다.
+
   return (
     <FormFieldComponent
       formFieldInfo={{

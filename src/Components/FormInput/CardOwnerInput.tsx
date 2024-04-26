@@ -7,28 +7,23 @@ import { CardOwnerInfoErrorContext } from "../Form/FormContextProvider";
 import { cardOwnerValidator } from "./validator";
 import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
-import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
-
-import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardOwnerInputContext } from "../Form/FormRefContextProvider";
 
 interface InputInfoList {
   name: keyof CardOwnerInfo;
   placeholder: string;
-  nextRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 const CardOwnerInput = memo(() => {
   const [cardOwner, setData] = useContextWrapper(CardOwnerInfoContext);
   const [ownerError, setError] = useContextWrapper(CardOwnerInfoErrorContext);
   const ownerInputRef = useContextWrapper(CardOwnerInputContext)[0];
-  const nextRef = useContextWrapper(CardCVCInputContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
-  const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO", nextRef }];
+  const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO" }];
 
   return (
     <>
-      {InputInfoList.map(({ name, placeholder, nextRef }, index) => (
+      {InputInfoList.map(({ name, placeholder }, index) => (
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
@@ -37,11 +32,7 @@ const CardOwnerInput = memo(() => {
               name,
               setData,
               setError,
-              setRenderOrder,
               validator: cardOwnerValidator,
-              nextRef,
-              isLastInput: index === InputInfoList.length - 1,
-              step: 3,
             });
           }}
           isError={!!ownerError[name]?.isError}
@@ -51,7 +42,6 @@ const CardOwnerInput = memo(() => {
           value={cardOwner[name] ?? ""}
           placeholder={placeholder}
           ref={ownerInputRef}
-          nextRef={nextRef}
         />
       ))}
     </>

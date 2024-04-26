@@ -3,13 +3,11 @@ import { memo, useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardCVCContext, CardUIHeadOrTailContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardCVCErrorContext } from "../Form/FormContextProvider";
-import { CardCVCInputContext, CardPasswordInputContext } from "../Form/FormRefContextProvider";
+import { CardCVCInputContext } from "../Form/FormRefContextProvider";
 import { cardCVCValidator } from "./validator";
 
 import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
-
-import { FormRenderOrderContext } from "../../routes/Payments";
 
 interface InputInfoList {
   name: keyof CardCVC;
@@ -21,8 +19,6 @@ const CardCVCInput = memo(() => {
   const [cardCVCError, setError] = useContextWrapper(CardCVCErrorContext);
   const setCardHeadOrTail = useContextWrapper(CardUIHeadOrTailContext)[1];
   const inputRef = useContextWrapper(CardCVCInputContext)[0];
-  const nextRef = useContextWrapper(CardPasswordInputContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
   const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "CVC" }];
 
@@ -65,12 +61,8 @@ const CardCVCInput = memo(() => {
               name,
               setData,
               setError,
-              setRenderOrder,
               validator: cardCVCValidator,
               maxLength: 3,
-              nextRef,
-              isLastInput: index === InputInfoList.length - 1,
-              step: 4,
             })
           }
           isError={!!cardCVCError[name]?.isError}
@@ -80,7 +72,6 @@ const CardCVCInput = memo(() => {
           value={cardCVC.value ?? ""}
           placeholder={placeholder}
           ref={inputRef}
-          nextRef={nextRef}
         />
       ))}
     </>

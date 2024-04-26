@@ -9,8 +9,6 @@ import { cardNumbersValidator } from "./validator";
 import FormInputCompound from "./FormInputCompound";
 import onInputChange from "./onInputChange";
 
-import { FormRenderOrderContext } from "../../routes/Payments";
-
 interface InputInfoList {
   name: keyof CardNumbers;
   ref: React.MutableRefObject<HTMLInputElement | null>;
@@ -22,7 +20,6 @@ const CardNumberInput = memo(() => {
   const [cardNumberError, setError] = useContextWrapper(CardNumberErrorContext);
 
   const [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef] = useContextWrapper(CardNumberInputsContext);
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
   const InputInfoList: InputInfoList[] = [
     { name: "firstNumbers", ref: firstInputRef, nextRef: secondInputRef },
@@ -42,12 +39,9 @@ const CardNumberInput = memo(() => {
               name,
               setData,
               setError,
-              setRenderOrder,
               validator: cardNumbersValidator,
               maxLength: 4,
               nextRef,
-              isLastInput: index === InputInfoList.length - 1,
-              step: 0,
             })
           }
           isError={!!cardNumberError[name]?.isError}
