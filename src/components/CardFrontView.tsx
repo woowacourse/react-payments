@@ -23,13 +23,15 @@ export default function CardFrontView({ cardInfo }: Props) {
   };
 
   const getCardImage = (cardNumber: string) => {
-    const cardType = getCardType(cardNumber);
+    if (cardNumber.length < 2) return;
 
+    const cardType = getCardType(cardNumber);
     if (cardType === 'visa') return Visa;
     if (cardType === 'master') return Master;
   };
 
   const cardImgSrc = getCardImage(cardNumbers.cardNumber1);
+
   return (
     <CardFrontContainer color={cardCompany.color}>
       <ImgBox>
