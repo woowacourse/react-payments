@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
+import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardOwnerInfoContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardOwnerInfoErrorContext } from "../Form/FormContextProvider";
 
 import CardOwnerInput from "../FormInput/CardOwnerInput";
 import FormFieldComponent from "./FormFieldComponent";
+import { CardOwnerInputContext } from "../Form/FormRefContextProvider";
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
@@ -11,7 +15,23 @@ const CardOwnerField = () => {
     return cardOwnerError[category]?.errorMessage;
   });
 
-  //TODO: 하위 input들의 Ref를 받고, Value들을 검증해서, 다음 렌더링으로 옮겨간다.
+  const cardOwner = useContextWrapper(CardOwnerInfoContext)[0];
+  const cardOwnerInput = useContextWrapper(CardOwnerInputContext)[0];
+  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+
+  const ENTER_KEY_CODE = 13;
+  useEffect(() => {
+    cardOwnerInput.current?.addEventListener("keydown", (e) => {
+      if (e.keyCode === ENTER_KEY_CODE && cardOwner.name) {
+        setRenderOrder((prev) => {
+          if (prev.index === 3) {
+            return { index: 4, step: "cardCVC" };
+          }
+          return prev;
+        });
+      }
+    });
+  }, [cardOwner, cardOwnerInput, setRenderOrder]);
 
   return (
     <FormFieldComponent

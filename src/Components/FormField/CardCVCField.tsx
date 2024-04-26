@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
+import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardCVCContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardCVCErrorContext } from "../Form/FormContextProvider";
 import CardCVCInput from "../FormInput/CardCVCInput";
 
@@ -10,6 +13,20 @@ const CardCVCField = () => {
   const categoryHasError = cardCVCErrorKeys.find((category) => {
     return cardCVCError[category]?.errorMessage;
   });
+
+  const cardCVC = useContextWrapper(CardCVCContext)[0];
+  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+
+  useEffect(() => {
+    if (cardCVC.value?.length === 3) {
+      setRenderOrder((prev) => {
+        if (prev.index === 4) {
+          return { index: 5, step: "cardPassword" };
+        }
+        return prev;
+      });
+    }
+  }, [cardCVC, setRenderOrder]);
 
   return (
     <FormFieldComponent

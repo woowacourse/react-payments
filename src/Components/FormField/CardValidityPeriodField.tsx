@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
+import { FormRenderOrderContext } from "../../routes/Payments";
+import { CardValidityPeriodContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardValidityPeriodErrorContext } from "../Form/FormContextProvider";
 
 import CardPeriodInput from "../FormInput/CardPeriodInput";
@@ -10,6 +13,20 @@ const CardValidityPeriodField = () => {
   const categoryHasError = cardPeriodErrorKeys.find((category) => {
     return cardPeriodError[category]?.errorMessage;
   });
+
+  const cardPeriod = useContextWrapper(CardValidityPeriodContext)[0];
+  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+
+  useEffect(() => {
+    if (cardPeriod.month?.length === 2 && cardPeriod.year?.length === 2) {
+      setRenderOrder((prev) => {
+        if (prev.index === 2) {
+          return { index: 3, step: "cardOwner" };
+        }
+        return prev;
+      });
+    }
+  }, [cardPeriod, setRenderOrder]);
 
   return (
     <FormFieldComponent
