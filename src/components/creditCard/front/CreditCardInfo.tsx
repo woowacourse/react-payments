@@ -28,7 +28,7 @@ const CreditCardInfo = ({ creditCardNumber, expirationPeriod, ownerName }: Credi
     <CreditCardInfoContainer>
       <CreditCardInfoWrapper>{maskedCreditCardNumber}</CreditCardInfoWrapper>
       <CreditCardExpirationPeriod>{expirationPeriod}</CreditCardExpirationPeriod>
-      <CreditCardOwnerInfo>{ownerName}</CreditCardOwnerInfo>
+      <CreditCardOwnerInfo>{ownerName.toUpperCase()}</CreditCardOwnerInfo>
     </CreditCardInfoContainer>
   );
 };

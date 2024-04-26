@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Validator from "../utils/Validator";
-import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
 import { CreditCardSpecificValue } from "../@types/CreditCard";
 
 const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
@@ -18,11 +17,9 @@ const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
     if (validateStatus === "error") return setIsError(true);
     if (validateStatus === "notValid") return;
 
-    const validValue = name === CARD_INPUTBOX_NAME.owner.name ? value.toUpperCase() : value;
-
     setInputValue((prevState) => ({
       ...prevState,
-      [name]: validValue,
+      [name]: value,
     }));
 
     setIsError(false);
