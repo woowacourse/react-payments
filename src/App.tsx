@@ -75,10 +75,7 @@ const App = () => {
         CVC={CVC.value}
         cardCompany={cardCompany}
         cardNumbers={getPreviewData(cardNumbers)}
-        expirationDate={{
-          month: expirationDate.month.isDone ? expirationDate.month.value : "",
-          year: expirationDate.year.isDone ? expirationDate.year.value : "",
-        }}
+        expirationDate={getPreviewData(expirationDate)}
         ownerName={ownerName.isDone ? ownerName.value : ""}
       />
       <form onSubmit={handleSubmit}>
