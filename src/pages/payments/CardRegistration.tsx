@@ -23,6 +23,8 @@ import useCurrentIndex from "../../hooks/useCurrentIndex";
 import { useEffect, useState } from "react";
 import CreditCardBack from "../../components/creditCard/back";
 import CARD_INPUT_LENGTH from "../../constants/cardInputLength";
+import Button from "../../components/button/common";
+import { useNavigate } from "react-router-dom";
 
 interface CreditCardForms {
   title: string;
@@ -53,7 +55,7 @@ const CardRegistration = () => {
     year: SIGN.empty,
   });
 
-  const [owner, setOwner, blurOwner, ownerError, ownerIsComplete] = useInput<OwnerValue>({
+  const [owner, setOwner, blurOwner, ownerError] = useInput<OwnerValue>({
     name: SIGN.empty,
   });
   const [info, setInfo, blurInfo, infoError, infoIsComplete] = useInput<InfoValue>({
@@ -75,10 +77,20 @@ const CardRegistration = () => {
     cardNumberIsComplete,
     !!selected,
     expirationPeriodIsComplete,
-    ownerIsComplete,
+    !!owner.name,
     infoIsComplete,
     authenticationComplete
   );
+
+  const isFormComplete =
+    cardNumberIsComplete &&
+    !!selected &&
+    expirationPeriodIsComplete &&
+    !!owner.name &&
+    infoIsComplete &&
+    authenticationComplete;
+
+  const router = useNavigate();
 
   useEffect(() => {
     if (info.cvc) setShowBack(true);
@@ -207,6 +219,21 @@ const CardRegistration = () => {
           );
         })}
       </InputFormContainer>
+      {isFormComplete && (
+        <ButtonWrapper>
+          <Button
+            content="확인"
+            onClick={() =>
+              router("/register/success", {
+                state: {
+                  selectedCard: selected,
+                  cardNumber: cardNumber.firstValue,
+                },
+              })
+            }
+          />
+        </ButtonWrapper>
+      )}
     </PaymentsContainer>
   );
 };
@@ -214,7 +241,7 @@ const CardRegistration = () => {
 export default CardRegistration;
 
 const PaymentsContainer = styled.div`
-  padding-top: 5%;
+  padding: 5% 0 10%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -227,4 +254,10 @@ const InputFormContainer = styled.div`
   margin-top: 45px;
   display: flex;
   gap: 16px;
+`;
+
+const ButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 `;
