@@ -8,13 +8,10 @@ const meta: Meta = {
 
 export default meta;
 
-type InputProps = {
-  value: string;
-  isError: boolean;
-};
+type InputProps = {};
 
 export const Default: StoryObj<InputProps> = () => (
-  <CardOwnerNameInputField ownerName={'PAKXE'} setOwnerName={() => {}} />
+  <CardOwnerNameInputField ownerName={'PAKXE'} handleOwnerName={() => {}} errorMessage='' />
 );
 
 Default.args = {};

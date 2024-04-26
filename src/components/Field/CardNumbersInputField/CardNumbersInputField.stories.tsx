@@ -14,14 +14,11 @@ type InputProps = {
 };
 
 export const Default: StoryObj<InputProps> = () => (
-  <CardNumbersInputField cardNumbers={['1234', '2345', '3456', '4567']} setCardNumbers={() => {}} />
+  <CardNumbersInputField
+    cardNumbers={['1234', '2345', '3456', '4567']}
+    handleCardNumbers={() => () => {}}
+    errorMessages={['', '', '', '']}
+  />
 );
 
 Default.args = {};
-
-// export const ErrorInput: StoryObj<InputProps> = (args: any) => <CardExpirationDateInputField {...args} />;
-
-// ErrorInput.args = {
-//   value: '이건 에러',
-//   isError: true,
-// };

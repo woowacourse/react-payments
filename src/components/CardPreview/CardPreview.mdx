@@ -19,7 +19,13 @@ import { Component } from 'react';
 ## Using the Component
 
 ```js
-<CardPreview cardNumbers={cardNumbers} date={date} ownerName={ownerName} />
+<CardPreview
+  cardNumbers={cardNumbers}
+  date={date}
+  ownerName={ownerName}
+  cardCompany={cardCompany}
+  CVCNumbers={CVCNumbers}
+/>
 ```
 
 <br />
@@ -36,3 +42,7 @@ import { Component } from 'react';
 ### master
 
 <Canvas of={CardPreviewStories.MasterCard} />
+
+### defaultCardWithCardCompany
+
+<Canvas of={CardPreviewStories.DefaultCardWithCardCompany} />
