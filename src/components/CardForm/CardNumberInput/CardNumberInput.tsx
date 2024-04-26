@@ -2,7 +2,7 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import type { InputsType } from '../../../hooks/useValidatedInputs';
+import type { InputsType } from '../../../hooks/useInputs';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 
 import { isNumber } from '../../../utils/validation';

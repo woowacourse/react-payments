@@ -4,7 +4,7 @@ import Input from '../../common/Input/Input';
 
 import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
-import { InputType } from '../../../hooks/useValidatedInput';
+import { InputType } from '../../../hooks/useInput';
 
 interface CardOwnerInputProps {
   owner: InputType;

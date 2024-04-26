@@ -3,7 +3,7 @@ import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
 import { isNumber } from '../../../utils/validation';
-import { InputType } from '../../../hooks/useValidatedInput';
+import { InputType } from '../../../hooks/useInput';
 
 interface CardCVCInputProps {
   cvc: InputType;

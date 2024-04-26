@@ -1,16 +1,25 @@
 import { useState } from 'react';
 
-const useInput = (defaultValue: string) => {
+export interface InputType {
+  value: string;
+  isValid: boolean;
+  isClicked: boolean;
+  handleValue: (newValue: string) => void;
+}
+
+const useInput = (validateFunction: (value: string) => boolean, defaultValue: string = '') => {
   const [value, setValue] = useState(defaultValue);
+  const [isValid, setIsValid] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValue = (newValue: string) => {
     if (!isClicked) setIsClicked(true);
 
-    setValue(e.target.value);
+    setIsValid(validateFunction(newValue));
+    setValue(newValue);
   };
 
-  return { value, isClicked, onChange };
+  return { value, isValid, isClicked, handleValue };
 };
 
 export default useInput;

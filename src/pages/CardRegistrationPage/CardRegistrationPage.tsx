@@ -9,8 +9,8 @@ import CardCompanyInput from '../../components/CardForm/CardCompanyInput/CardCom
 import CardCVCInput from '../../components/CardForm/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../../components/CardForm/CardPasswordInput/CardPasswordInput';
 
-import useValidatedInput from '../../hooks/useValidatedInput';
-import useValidatedInputs from '../../hooks/useValidatedInputs';
+import useInput from '../../hooks/useInput';
+import useInputs from '../../hooks/useInputs';
 import useAutoMoveIndex from '../../hooks/useAutoMoveIndex';
 
 import {
@@ -29,13 +29,13 @@ import * as S from './CardRegistrationPage.style';
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
 
-  const month = useValidatedInput(validateMonth);
-  const year = useValidatedInput(validateYear);
-  const owner = useValidatedInput(validateOwner);
-  const cvc = useValidatedInput(validateCVC);
-  const company = useValidatedInput(validateCompany);
-  const password = useValidatedInput(validatePassword);
-  const cardNumbers = useValidatedInputs(validateCardNumber, ['', '', '', '']);
+  const month = useInput(validateMonth);
+  const year = useInput(validateYear);
+  const owner = useInput(validateOwner);
+  const cvc = useInput(validateCVC);
+  const company = useInput(validateCompany);
+  const password = useInput(validatePassword);
+  const cardNumbers = useInputs(validateCardNumber, ['', '', '', '']);
 
   const validationList = [
     isAllValid(cardNumbers.isValid),

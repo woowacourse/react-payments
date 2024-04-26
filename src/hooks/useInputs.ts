@@ -1,10 +1,18 @@
 import { useState } from 'react';
 
-const useInputs = (defaultValue: string[]) => {
+export interface InputsType {
+  values: string[];
+  isValid: boolean[];
+  isClicked: boolean[];
+  handleValues: (newValues: string[], index: number) => void;
+}
+
+const useInputs = (validateFunction: (value: string) => boolean, defaultValue: string[]) => {
   const [values, setValues] = useState(defaultValue);
+  const [isValid, setIsValid] = useState(defaultValue.map(() => false));
   const [isClicked, setIsClicked] = useState(defaultValue.map(() => false));
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleValues = (newValues: string[], index: number) => {
     if (!isClicked[index]) {
       const newIsClicked = [...isClicked];
       newIsClicked[index] = true;
@@ -12,13 +20,11 @@ const useInputs = (defaultValue: string[]) => {
       setIsClicked(newIsClicked);
     }
 
-    const newValues = [...values];
-    newValues[index] = e.target.value;
-
+    setIsValid(newValues.map((value) => validateFunction(value)));
     setValues(newValues);
   };
 
-  return { values, isClicked, onChange };
+  return { values, isValid, isClicked, handleValues };
 };
 
 export default useInputs;

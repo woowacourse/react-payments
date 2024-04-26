@@ -7,7 +7,7 @@ import useAutoFocus from '../../../hooks/useAutoFocus';
 import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
-import { InputType } from '../../../hooks/useValidatedInput';
+import { InputType } from '../../../hooks/useInput';
 
 interface CardExpirationInputProps {
   month: InputType;
