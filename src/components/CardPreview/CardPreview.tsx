@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { Visa, MasterCard, Dot } from '../../assets';
 import * as S from './CardPreview.style';
 
@@ -25,6 +27,16 @@ export default function CardPreview({
   CVC,
   showCardBackside,
 }: CardPreviewProps) {
+  const [logoImage, setLogoImage] = useState<JSX.Element | null>(null);
+
+  useEffect(() => {
+    if (cardNumbers[0].length < 1) setLogoImage(null);
+    if (logoImage === null && cardNumbers[0].length >= 1 && cardNumbers[0].length <= 2) {
+      const logo = handleLogoImage(cardNumbers);
+      setLogoImage(logo);
+    }
+  }, [logoImage, cardNumbers]);
+
   const handleLogoImage = (cardNumbers: cardNumbersType) => {
     if (checkCardGlobalBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
@@ -32,6 +44,7 @@ export default function CardPreview({
     if (checkCardGlobalBrand(cardNumbers[0]) === 'MasterCard') {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
+    return null;
   };
 
   const getCardNumberComponent = (number: string, index: number) => {
@@ -45,7 +58,7 @@ export default function CardPreview({
         <S.CardFrontside $brand={brand}>
           <S.CardHeader>
             <S.ChipBox />
-            <S.LogoBox>{handleLogoImage(cardNumbers)}</S.LogoBox>
+            <S.LogoBox>{logoImage}</S.LogoBox>
           </S.CardHeader>
           <S.CardBody>
             <S.InfoContainer>
