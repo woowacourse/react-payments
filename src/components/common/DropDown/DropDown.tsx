@@ -28,7 +28,7 @@ const DropDown = <T extends string | number | symbol>({
 
   // TODO: 리펙터링
   return (
-    <>
+    <div className={styles.wrapper}>
       <div
         className={styles.horizon__gap__container}
         onClick={() => {
@@ -60,7 +60,7 @@ const DropDown = <T extends string | number | symbol>({
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 
