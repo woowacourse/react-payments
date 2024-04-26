@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputField from "../../components/InputField/InputField";
 import { Validator } from "@/hooks/useValidation";
 import useInput from "@/hooks/useInput";
@@ -19,7 +19,7 @@ interface CVCInputProps {
 }
 
 const CVCInputField = ({ reduceds, setIsFocused = () => {} }: CVCInputProps) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+  const validationStates = [useValidation(reduceds[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>CVC</InputField.Label>

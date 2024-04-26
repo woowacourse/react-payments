@@ -12,7 +12,7 @@ const INPUTS_COUNT = INPUT_COUNTS.OWNER_NAME;
 const individualValidators: Validator[] = [];
 
 const PasswordInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+  const validationStates = [useValidation(reduceds[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>{LABEL}</InputField.Label>

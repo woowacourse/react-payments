@@ -19,7 +19,7 @@ const individualValidators: Validator[] = [
 ];
 
 const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+  const validationStates = [useValidation(reduceds[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>소유자 이름</InputField.Label>

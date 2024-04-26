@@ -18,7 +18,12 @@ const individualValidators: Validator[] = [
 ];
 
 const CardNumberInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+  const validationStates = [
+    useValidation(reduceds[0], individualValidators),
+    useValidation(reduceds[1], individualValidators),
+    useValidation(reduceds[2], individualValidators),
+    useValidation(reduceds[3], individualValidators),
+  ];
 
   return (
     <InputField>

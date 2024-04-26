@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/pages/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview, { CardBrand } from "@/components/CreditCardPreview/CreditCardPreview";
-import { CARD_BRAND_INFO, Company, INPUT_COUNTS, companyColor, companyNames } from "@/constants/condition";
+import { CARD_BRAND_INFO, Company } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { useState } from "react";
 import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
@@ -21,11 +21,11 @@ const checkCardBrand = (cardNumbers: string[]): CardBrand => {
   return "NONE";
 };
 const CardRegister = () => {
-  const cardNumbersReduceds = Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map(() => useInput(""));
-  const expirationDateReduceds = Array.from({ length: INPUT_COUNTS.EXPIRATION_DATE }).map(() => useInput(""));
-  const ownerNameReduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
-  const CVCReduceds = Array.from({ length: INPUT_COUNTS.CVC }).map(() => useInput(""));
-  const passwordReduceds = Array.from({ length: INPUT_COUNTS.PASSWORD }).map(() => useInput(""));
+  const cardNumbersReduceds = [useInput(""), useInput(""), useInput(""), useInput("")];
+  const expirationDateReduceds = [useInput(""), useInput("")];
+  const ownerNameReduceds = [useInput("")];
+  const CVCReduceds = [useInput("")];
+  const passwordReduceds = [useInput("")];
   const [cardCompany, setCardCompany] = useState<Company>("BC카드");
   const [isCVCFocused, setIsCVCFocused] = useState(false);
   return (

@@ -32,7 +32,7 @@ const useValidation = (reduced: ReturnType<typeof useInput>, validators: Validat
         });
       }
     });
-  }, [inputState.value]);
+  }, [inputState.value, validators, dispatch]);
 
   return { inputState, setValue };
 };
