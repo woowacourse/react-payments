@@ -12,12 +12,6 @@ import {
   Password,
   UserName,
 } from '../types/card';
-
-function checkMaxLength(n: string, maxLength: number) {
-  if (n.length !== maxLength) {
-    throw new Error(`${maxLength} 자리를 입력해주세요.`);
-  }
-}
 function checkTrimBlank(n: string) {
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
@@ -65,38 +59,38 @@ function validateUpperCase(str: string) {
 }
 
 interface ValidationMap {
-  [key: string]: (n: string, maxLength: number) => void;
+  [key: string]: (n: string) => void;
 }
 
 const Validation: ValidationMap = {
-  cardNumber: (n: string, maxLength: number) => {
+  cardNumber: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
     // checkMaxLength(n, maxLength);
   },
-  month: (n: string, maxLength: number) => {
+  month: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateMonth(n);
-    checkMaxLength(n, maxLength);
+    // checkMaxLength(n, maxLength);
   },
-  year: (n: string, maxLength: number) => {
+  year: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateYear(n);
-    checkMaxLength(n, maxLength);
+    // checkMaxLength(n, maxLength);
   },
-  userName: (n: string, maxLength = 0) => {
+  userName: (n: string) => {
     checkTrimBlank(n);
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
-  CVC: (n: string, maxLength: number) => {
+  CVC: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
   },
 
-  password: (n: string, maxLength: number) => {
+  password: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
   },
