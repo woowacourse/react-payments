@@ -34,7 +34,7 @@ const CompleteAddNewCardPage = () => {
   }, []);
 
   const handleConfirm = () => {
-    navigate('/add-new-card');
+    navigate('/');
   };
 
   const validatedCardCompany = (cardCompany: string) => {

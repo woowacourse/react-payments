@@ -11,7 +11,7 @@ function App() {
         <div className={styles.layout}>
           <FocusProvider>
             <Routes>
-              <Route path='/add-new-card' element={<AddNewCardPage />} />
+              <Route path='/' element={<AddNewCardPage />} />
               <Route path='/complete-add-new-card' element={<CompleteAddNewCardPage />} />
             </Routes>
           </FocusProvider>
