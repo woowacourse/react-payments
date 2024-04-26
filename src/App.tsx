@@ -4,6 +4,7 @@ import CardRegisterCompleted from './pages/CardRegisterCompleted';
 import './reset.css';
 import { css } from '@emotion/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFound from './pages/NotFound';
 
 const appStyle = css({
   display: 'flex',
@@ -21,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CardRegister />}></Route>
           <Route path="/completed" element={<CardRegisterCompleted />}></Route>
-          {/* <Route path="*" element={<NotFound />}></Route> */}
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
