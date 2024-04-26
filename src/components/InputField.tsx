@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import { Input } from './Input';
 import FieldTitle from './FieldTitle';
 import { FieldContainer } from '../style/container.style';
 import { useInputField } from '../hooks/useInputField';
+import useNextRef from '../hooks/useNextRef';
 
 interface Props {
   title: string;
@@ -12,6 +12,7 @@ interface Props {
   inputTypes: InputType;
   handleInput: (value: Record<string, string>) => void;
   handleNext: () => void;
+  handleComplete: (isComplete: boolean) => void;
 }
 
 export default function InputField({
@@ -20,27 +21,11 @@ export default function InputField({
   inputTypes,
   handleInput,
   handleNext,
+  handleComplete,
 }: Props) {
   const { values, errorMessages, updateInputValue, updateErrorMessage } =
-    useInputField();
-
-  const inputRefs = useRef<HTMLInputElement[]>([]);
-
-  useEffect(() => {
-    if (inputRefs.current) {
-      inputRefs.current[0].focus();
-    }
-  }, []);
-
-  const handleInputNext = (index: number) => {
-    if (index < inputTypes.inputInfo.length - 1 && inputRefs.current) {
-      inputRefs.current[index + 1].focus();
-    }
-
-    if (index === inputTypes.inputInfo.length - 1) {
-      handleNext();
-    }
-  };
+    useInputField({ inputTypes, handleComplete });
+  const { inputRefs, handleInputNext } = useNextRef({ inputTypes, handleNext });
 
   return (
     <FieldContainer>
@@ -51,7 +36,6 @@ export default function InputField({
           <Input
             key={index}
             ref={(ref) => (inputRefs.current[index] = ref as HTMLInputElement)}
-            value={values[info.property] || ''}
             info={info}
             handleInput={(value: string) => {
               updateInputValue(info.property, value);

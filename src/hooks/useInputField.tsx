@@ -1,10 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { checkLength } from '../domain/CompleteValidation';
+import { InputType } from '../types/input';
 
-export const useInputField = () => {
+interface Props {
+  inputTypes: InputType;
+  handleComplete: (isCompleted: boolean) => void;
+}
+
+export const useInputField = ({ inputTypes, handleComplete }: Props) => {
   const [values, setValues] = useState<Record<string, string>>({});
   const [errorMessages, setErrorMessages] = useState<Record<number, string>>(
     {}
   );
+
+  useEffect(() => {
+    if (isCompleted()) {
+      handleComplete(true);
+    } else {
+      handleComplete(false);
+    }
+  }, [errorMessages]);
+
+  const isCompleted = () => {
+    if (
+      Object.keys(values).length === inputTypes.inputInfo.length &&
+      Object.values(errorMessages).every((message) => message === '') &&
+      Object.values(values).every((value, index) =>
+        checkLength(value, inputTypes.inputInfo[index].minLength)
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const updateInputValue = (property: string, value: string) => {
     setValues((prevValues) => ({
