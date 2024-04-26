@@ -7,6 +7,7 @@ import { CARD_BRAND } from "../../../constants/setting";
 import { CardCompany } from "../../../types/type";
 
 interface CardPreview {
+  isCardFlipped: boolean;
   cvc: number;
   userName: string;
   cardExpiration: number[];
@@ -14,7 +15,7 @@ interface CardPreview {
   cardNumbers: number[];
 }
 
-const CardPreview = ({ cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreview) => {
+const CardPreview = ({ isCardFlipped, cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreview) => {
   const getCardBrandImage = () => {
     const IIN = Math.floor(cardNumbers[0] / 100);
     let cardBrandImage = "";
@@ -31,26 +32,34 @@ const CardPreview = ({ cvc, userName, cardExpiration, cardCompany, cardNumbers }
   const cardBrandImage = getCardBrandImage();
 
   return (
-    <Styled.CardPreviewContainer cardCompany={cardCompany}>
-      <Styled.ChipSection>
-        <Styled.ICChip></Styled.ICChip>
-        {cardBrandImage && (
-          <Styled.CardBrand>
-            <img
-              src={cardBrandImage}
-              alt={"카드 브랜드 이미지"}
+    <Styled.CardPreviewContainer>
+      {!isCardFlipped ? (
+        <Styled.FrontCard cardCompany={cardCompany}>
+          <Styled.ChipSection>
+            <Styled.ICChip></Styled.ICChip>
+            {cardBrandImage && (
+              <Styled.CardBrand>
+                <img
+                  src={cardBrandImage}
+                  alt={"카드 브랜드 이미지"}
+                />
+              </Styled.CardBrand>
+            )}
+          </Styled.ChipSection>
+          <Styled.CardInfoSection>
+            <CardNumbers cardNumbers={cardNumbers} />
+            <CardExpiration
+              month={cardExpiration[0]}
+              year={cardExpiration[1]}
             />
-          </Styled.CardBrand>
-        )}
-      </Styled.ChipSection>
-      <Styled.CardInfoSection>
-        <CardNumbers cardNumbers={cardNumbers} />
-        <CardExpiration
-          month={cardExpiration[0]}
-          year={cardExpiration[1]}
-        />
-        <div>{userName && userName}</div>
-      </Styled.CardInfoSection>
+            <div>{userName && userName}</div>
+          </Styled.CardInfoSection>
+        </Styled.FrontCard>
+      ) : (
+        <Styled.BackCard>
+          <Styled.CVC>{cvc}</Styled.CVC>
+        </Styled.BackCard>
+      )}
     </Styled.CardPreviewContainer>
   );
 };

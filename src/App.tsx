@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/react-payments/"
+            path="/react-payments"
             element={<NewCardPage />}
           />
           <Route

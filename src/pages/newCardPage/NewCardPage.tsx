@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/default/input/Input";
 import Dropdown from "../../components/default/dropdown/Dropdown";
@@ -15,6 +16,8 @@ import useCardNumbersInput from "../../hooks/useCardNumbersInput";
 
 const NewCardPage = () => {
   const navigate = useNavigate();
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
+
   const [passwordState, handlePasswordChange] = usePasswordInput();
   const [cvcState, handleCvcChange] = useCvcInput();
   const [userNameState, handleUserNameChange, handleKeyDown] = useUserNameInput();
@@ -32,6 +35,7 @@ const NewCardPage = () => {
     <Styled.NewCardContainer>
       {/* 프리뷰 */}
       <CardPreview
+        isCardFlipped={isCardFlipped}
         cvc={cvcState.value}
         userName={userNameState.value}
         cardExpiration={cardExpirationState.value}
@@ -72,6 +76,8 @@ const NewCardPage = () => {
               placeholder={FORM_FIELDS.CVC.PLACEHOLDER}
               isError={!!cvcState.errorMessage[0]}
               onChange={(e) => handleCvcChange(e.target.value)}
+              onFocus={() => setIsCardFlipped(!isCardFlipped)}
+              onBlur={() => setIsCardFlipped(!isCardFlipped)}
               autoFocus
             ></Input>
           </NewCardInputSection>

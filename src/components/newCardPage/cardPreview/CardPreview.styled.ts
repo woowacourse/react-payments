@@ -16,7 +16,13 @@ interface CardPreviewContainerProps {
   cardCompany: CardCompany;
 }
 
-export const CardPreviewContainer = styled.div<CardPreviewContainerProps>`
+export const CardPreviewContainer = styled.div`
+  width: 100%;
+  height: 238px;
+`;
+
+// 카드 앞면
+export const FrontCard = styled.div<CardPreviewContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -77,4 +83,31 @@ export const CardInfoSection = styled.div`
   div {
     height: 20px;
   }
+`;
+
+// 카드 뒷면
+
+export const BackCard = styled.div`
+  position: relative;
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px #00000040;
+  margin: auto;
+  margin-top: 77px;
+  margin-bottom: 29px;
+  background: #d5d5d5;
+`;
+
+export const CVC = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 24px;
+  margin-top: 84px;
+  padding: 0 16px;
+  background: #cbba64;
+  color: #ffffff;
+  text-align: right;
+  line-height: 24px;
 `;
