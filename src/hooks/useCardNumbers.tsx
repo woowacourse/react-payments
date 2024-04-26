@@ -57,7 +57,7 @@ export default function useCardNumbers() {
   return {
     cardNumbers,
     cardNumberOnChanges: cardNumberInputs.map(input => input.onChange),
-    errorMessage: cardNumbersErrorMessage,
+    errorMessage: cardNumbersErrorMessage ?? '',
     isValidNumberParts: cardNumberInputs.map(
       input => input.errorMessage === ''
     ),
@@ -69,7 +69,7 @@ export default function useCardNumbers() {
 export interface UseCardNumbers {
   cardNumbers: string[];
   cardNumberOnChanges: ((event: React.ChangeEvent<HTMLInputElement>) => void)[];
-  errorMessage: string | undefined;
+  errorMessage: string;
   isValid: boolean;
   isValidNumberParts: boolean[];
   initValue: () => void;
