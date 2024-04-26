@@ -1,9 +1,9 @@
-import Payments from "./pages/Payments";
+import CardRegistration from "./pages/cardRegistration";
 
 import "./App.css";
 
 function App() {
-  return <Payments />;
+  return <CardRegistration />;
 }
 
 export default App;

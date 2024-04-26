@@ -20,8 +20,9 @@ import useSelect from "../../hooks/useSelect";
 import InputCVC from "../../components/input/InputCVC";
 import InputPassword from "../../components/input/InputPassword";
 import useCurrentIndex from "../../hooks/useCurrentIndex";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreditCardBack from "../../components/creditCard/back";
+import CARD_INPUT_LENGTH from "../../constants/cardInputLength";
 
 interface CreditCardForms {
   title: string;
@@ -30,8 +31,8 @@ interface CreditCardForms {
   childComponent: JSX.Element;
 }
 
-const Payments = () => {
-  const [cardNumber, setCardNumber, cardNumberError, cardNumberIsComplete] =
+const CardRegistration = () => {
+  const [cardNumber, setCardNumber, blurCardNumber, cardNumberError, cardNumberIsComplete] =
     useInput<CardNumberValue>({
       firstValue: SIGN.empty,
       secondValue: SIGN.empty,
@@ -41,20 +42,34 @@ const Payments = () => {
 
   const { isDropdown, handleDropdown, selected, handleSelected } = useSelect<CardType>();
 
-  const [expirationPeriod, setExpirationPeriod, expirationPeriodError, expirationPeriodIsComplete] =
-    useInput<ExpirationPeriodValue>({
-      month: SIGN.empty,
-      year: SIGN.empty,
-    });
+  const [
+    expirationPeriod,
+    setExpirationPeriod,
+    blurExpirationPeriod,
+    expirationPeriodError,
+    expirationPeriodIsComplete,
+  ] = useInput<ExpirationPeriodValue>({
+    month: SIGN.empty,
+    year: SIGN.empty,
+  });
 
-  const [owner, setOwner, ownerError, ownerIsComplete] = useInput<OwnerValue>({ name: SIGN.empty });
-  const [info, setInfo, infoError, infoIsComplete] = useInput<InfoValue>({ cvc: SIGN.empty });
-  const [authentication, setAuthentication, authenticationError, authenticationComplete] =
-    useInput<AuthenticationValue>({
-      password: SIGN.empty,
-    });
+  const [owner, setOwner, blurOwner, ownerError, ownerIsComplete] = useInput<OwnerValue>({
+    name: SIGN.empty,
+  });
+  const [info, setInfo, blurInfo, infoError, infoIsComplete] = useInput<InfoValue>({
+    cvc: SIGN.empty,
+  });
+  const [
+    authentication,
+    setAuthentication,
+    blurAuthentication,
+    authenticationError,
+    authenticationComplete,
+  ] = useInput<AuthenticationValue>({
+    password: SIGN.empty,
+  });
 
-  const [isCvcFocus, setIsCvcFocus] = useState(false);
+  const [showBack, setShowBack] = useState(false);
 
   const currentIndex = useCurrentIndex(
     cardNumberIsComplete,
@@ -64,6 +79,11 @@ const Payments = () => {
     infoIsComplete,
     authenticationComplete
   );
+
+  useEffect(() => {
+    if (info.cvc) setShowBack(true);
+    if (info.cvc.length === CARD_INPUT_LENGTH.cvc) setShowBack(false);
+  }, [info.cvc]);
 
   const formatExpirationPeriod = () =>
     expirationPeriod.year.length
@@ -79,6 +99,7 @@ const Payments = () => {
         <InputCreditCardNumber
           inputValue={cardNumber}
           handleChange={setCardNumber}
+          handleBlur={blurCardNumber}
           inputError={cardNumberError}
         />
       ),
@@ -106,6 +127,7 @@ const Payments = () => {
         <InputExpirationPeriod
           inputValue={expirationPeriod}
           handleChange={setExpirationPeriod}
+          handleBlur={blurExpirationPeriod}
           inputError={expirationPeriodError}
         />
       ),
@@ -115,7 +137,12 @@ const Payments = () => {
       description: "",
       inputError: ownerError,
       childComponent: (
-        <InputOwnerName inputValue={owner.name} handleChange={setOwner} inputError={ownerError} />
+        <InputOwnerName
+          inputValue={owner.name}
+          handleChange={setOwner}
+          handleBlur={blurOwner}
+          inputError={ownerError}
+        />
       ),
     },
     {
@@ -126,9 +153,8 @@ const Payments = () => {
         <InputCVC
           inputValue={info.cvc}
           handleChange={setInfo}
+          handleBlur={blurInfo}
           inputError={infoError}
-          onFocus={() => setIsCvcFocus(true)}
-          onBlur={() => setIsCvcFocus(false)}
         />
       ),
     },
@@ -140,6 +166,7 @@ const Payments = () => {
         <InputPassword
           inputValue={authentication.password}
           handleChange={setAuthentication}
+          handleBlur={blurAuthentication}
           inputError={authenticationError}
         />
       ),
@@ -148,7 +175,7 @@ const Payments = () => {
 
   return (
     <PaymentsContainer>
-      {!isCvcFocus ? (
+      {!showBack ? (
         <CreditCardFront
           creditCardNumber={[
             cardNumber.firstValue,
@@ -184,7 +211,7 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+export default CardRegistration;
 
 const PaymentsContainer = styled.div`
   padding-top: 5%;
