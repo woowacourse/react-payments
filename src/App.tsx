@@ -16,8 +16,10 @@ function App() {
 
   return (
     <Styled.Container>
-      <CardInformationPreview {...previewProps} />
-      <CardInformationForm {...formProps} />
+      <Styled.FormInner>
+        <CardInformationPreview {...previewProps} />
+        <CardInformationForm {...formProps} />
+      </Styled.FormInner>
       {!isFormError && (
         <Styled.Submit>
           <Button label="확인" />
