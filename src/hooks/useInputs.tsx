@@ -22,6 +22,7 @@ const useInputs = <T extends object>({
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
   const [isError, setIsError] = useState(true);
+  // const [isCurrentInputError, setIsCurrentInputError] = useState(false);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -46,6 +47,8 @@ const useInputs = <T extends object>({
     if (allValid) {
       delete newErrors[name as keyof T];
     }
+
+    // setIsCurrentInputError(!allValid);
     setValues((values) => ({ ...values, [name]: newValue }));
     setErrors(newErrors);
   };
@@ -61,7 +64,15 @@ const useInputs = <T extends object>({
     }
   }, [errors, values]);
 
-  return { values, setValues, errors, onChange, isError, setErrors };
+  return {
+    values,
+    setValues,
+    errors,
+    onChange,
+    isError,
+    setErrors,
+    // isCurrentInputError,
+  };
 };
 
 export default useInputs;

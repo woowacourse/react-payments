@@ -4,6 +4,7 @@ import S from "./style";
 import CheckConfirmIcon from "@/assets/ConfirmCheck.svg?react";
 import BasicButton from "@/components/_common/BasicButton/BasicButton";
 import { theme } from "@/style/theme";
+import { ROUTE_URL } from "@/constants/url";
 
 const RegisterComfirmPage = () => {
   const location = useLocation();
@@ -11,7 +12,7 @@ const RegisterComfirmPage = () => {
   const { startNumbers, cardType } = location.state;
 
   const onMoveRegisterPage = () => {
-    navigate("/");
+    navigate(ROUTE_URL.HOME);
   };
 
   return (

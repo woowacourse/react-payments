@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useShowError = (errors: string[] | string | null) => {
+const useShowError = (errors: string[] | null) => {
   const [showErrors, setShowErrors] = useState(false);
 
   const onBlurShowErrors = () => {
@@ -8,10 +8,7 @@ const useShowError = (errors: string[] | string | null) => {
   };
 
   const onFocusHideErrors = () => {
-    if (
-      (Array.isArray(errors) && errors.length > 0) ||
-      (typeof errors === "string" && errors)
-    ) {
+    if (Array.isArray(errors) && errors.length > 0) {
       setShowErrors(true);
     } else {
       setShowErrors(false);

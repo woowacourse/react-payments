@@ -7,6 +7,7 @@ import useInput from "@/hooks/useInput";
 import useShowError from "@/hooks/useShowError";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
+import { sliceOverMaxLength } from "@/utils/view";
 
 interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
@@ -32,8 +33,7 @@ const CVCField = ({ CVCNumbersState }: Props) => {
           name={"cvc"}
           placeholder={MESSAGE.PLACEHOLDER.CVC}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.value.length > e.target.maxLength)
-              e.target.value = e.target.value.slice(0, e.target.maxLength);
+            sliceOverMaxLength(e);
             onChange(e);
           }}
           onFocus={onFocusHideErrors}

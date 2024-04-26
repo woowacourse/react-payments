@@ -6,6 +6,7 @@ import BasicButton from "@/components/_common/BasicButton/BasicButton";
 import { theme } from "@/style/theme";
 import { useNavigate } from "react-router-dom";
 import useCardRegister from "@/hooks/useCardRegister";
+import { ROUTE_URL } from "@/constants/url";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const CardRegisterPage = () => {
   const [step, setStep] = useState<number>(1);
 
   const onSubmitCardInfo = () => {
-    navigate("/confirm", {
+    navigate(ROUTE_URL.REGISTER_CONFIRM, {
       state: {
         startNumbers: cardNumbersState.values.cardNumbers1,
         cardType: cardTypeState.value,

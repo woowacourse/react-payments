@@ -7,6 +7,7 @@ import { INPUT_COUNTS } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useShowError from "@/hooks/useShowError";
 import useInputRefs from "@/hooks/useInputRefs";
+import { sliceOverMaxLength } from "@/utils/view";
 
 export type CardNumberInputType = {
   cardNumbers1: string;
@@ -55,8 +56,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               maxLength={4}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                if (e.target.value.length > e.target.maxLength)
-                  e.target.value = e.target.value.slice(0, e.target.maxLength);
+                sliceOverMaxLength(e);
                 onFocusNextInput(e, index);
               }}
               onFocus={onFocusHideErrors}

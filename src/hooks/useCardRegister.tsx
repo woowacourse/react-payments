@@ -28,7 +28,6 @@ const useCardRegister = () => {
         validateIsValidLength(value, VALID_LENGTH.CARD_NUMBERS),
       (value: string) => validateIsNumber(value),
     ],
-
     onChangeFunc: (value: string) =>
       sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
   });
