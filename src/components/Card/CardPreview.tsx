@@ -19,7 +19,7 @@ const CardPreview = ({
   cardCompany: string;
 }) => {
   return (
-    <CardFrame cardCompany={cardCompany}>
+    <CardFrame $cardCompany={cardCompany}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <ICChip />
         <CardLogo cardNumbers={cardNumbers} />
@@ -33,10 +33,10 @@ const CardPreview = ({
   );
 };
 
-const CardFrame = styled.div<{ cardCompany: string }>`
+const CardFrame = styled.div<{ $cardCompany: string }>`
   color: white;
-  ${({ cardCompany }) => {
-    const { color } = CARD_COMPANY[cardCompany] || { color: "#333333" };
+  ${({ $cardCompany }) => {
+    const { color } = CARD_COMPANY[$cardCompany] || { color: "#333333" };
     return `background: ${color};`;
   }}
   padding: 10px 15px;

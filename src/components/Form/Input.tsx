@@ -64,8 +64,8 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
     return (
       <InputStyled
         ref={ref}
-        currentValue={currentValue}
-        isValidInput={isValidInput}
+        $currentValue={currentValue}
+        $isValidInput={isValidInput}
         maxLength={maxLength}
         type={type}
         placeholder={placeholder}
@@ -78,13 +78,13 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
 );
 
 const InputStyled = styled.input<{
-  currentValue: string;
-  isValidInput: boolean;
+  $currentValue: string;
+  $isValidInput: boolean;
 }>`
   width: 100%;
   border: 1px solid
     ${(props) =>
-      props.currentValue !== "" && !props.isValidInput ? "red" : "#acacac"};
+      props.$currentValue !== "" && !props.$isValidInput ? "red" : "#acacac"};
   border-radius: 5px;
   padding: 8px;
   box-sizing: border-box;

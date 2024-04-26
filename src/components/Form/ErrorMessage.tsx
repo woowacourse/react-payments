@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const ErrorMessage = ({ errorMessage }: { errorMessage: string }) => {
   return (
-    <ErrorMessageContainer isVisible={!!errorMessage}>
+    <ErrorMessageContainer $isVisible={!!errorMessage}>
       <ErrorMessageStyled>{errorMessage}</ErrorMessageStyled>
     </ErrorMessageContainer>
   );
 };
 
-const ErrorMessageContainer = styled.div<{ isVisible: boolean }>`
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+const ErrorMessageContainer = styled.div<{ $isVisible: boolean }>`
+  visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
 `;
 
 const ErrorMessageStyled = styled.p`
