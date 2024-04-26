@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createObjectWithKeys } from '../utils/createObjectWithKeys';
 
 type InitialValuesType =
@@ -11,10 +11,12 @@ type InitialValuesType =
 
 interface UseAddCardFormFieldProps<T extends InitialValuesType> {
   initialValues: T;
+  visibility?: boolean;
 }
 
 export default function useAddCardFormField<T extends InitialValuesType>({
   initialValues,
+  visibility = false,
 }: UseAddCardFormFieldProps<T>) {
   const [values, setValues] = useState<T>(initialValues);
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,6 +26,8 @@ export default function useAddCardFormField<T extends InitialValuesType>({
   const [isComplete, setIsComplete] = useState(() =>
     createObjectWithKeys(Object.keys(initialValues), false)
   );
+  const [isFieldComplete, setIsFieldComplete] = useState(false);
+  const [showNextField, setShowNextField] = useState(visibility);
 
   const onChange = ({
     isValid,
@@ -60,11 +64,26 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     }
   };
 
+  useEffect(() => {
+    const isFieldFilled = Object.values(isComplete).every(
+      (isComplete) => isComplete
+    );
+    const isFieldValid = Object.values(isError).every((isError) => !isError);
+    setIsFieldComplete(isFieldFilled && isFieldValid);
+  }, [isComplete, isError]);
+
+  useEffect(() => {
+    if (!showNextField) {
+      setShowNextField(isFieldComplete);
+    }
+  }, [isFieldComplete]);
+
   return {
     values,
     errorMessage,
     isError,
-    isFormFilled: Object.values(isComplete).every((isComplete) => isComplete),
+    showNextField,
+    isFieldComplete,
     onChange,
     onBlur,
   };

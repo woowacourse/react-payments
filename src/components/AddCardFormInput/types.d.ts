@@ -9,7 +9,7 @@ interface InputProps<T> {
   values: T;
   errorMessage: string;
   isError: Record<string, boolean>;
-  isFormFilled: boolean;
+  isFieldComplete: boolean;
   onChange: (props: CustomInputHandlerProps<T>) => void;
   onBlur: (props: CustomInputHandlerProps<T>) => void;
 }

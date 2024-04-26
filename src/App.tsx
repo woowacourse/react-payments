@@ -1,16 +1,16 @@
-import './index.css';
 import styles from './App.module.css';
+import './index.css';
 
-import useAddCardFormField from './hooks/useAddCardFormField';
+import CardIssuerInput from './components/AddCardFormInput/CardIssuerInput/CardIssuerInput';
 import CardNumberInput from './components/AddCardFormInput/CardNumberInput/CardNumberInput';
-import CardPreview from './components/CardPreview/CardPreview';
 import ExpirationDateInput from './components/AddCardFormInput/ExpirationDateInput/ExpirationDateInput';
 import OwnerNameInput from './components/AddCardFormInput/OwnerNameInput/OwnerNameInput';
-import CardIssuerInput from './components/AddCardFormInput/CardIssuerInput/CardIssuerInput';
+import CardPreview from './components/CardPreview/CardPreview';
+import useAddCardFormField from './hooks/useAddCardFormField';
 
-import { INITIAL_VALUES } from './constants/form';
 import CVCInput from './components/AddCardFormInput/CVCInput/CVCInput';
 import PasswordInput from './components/AddCardFormInput/PasswordInput/PasswordInput';
+import { INITIAL_VALUES } from './constants/form';
 
 function App() {
   const cardNumbersProps = useAddCardFormField<CardNumbers>({
@@ -46,15 +46,15 @@ function App() {
       />
 
       <form>
-        {cvcProps.isFormFilled && <PasswordInput {...passwordProps} />}
-        {ownerNameProps.isFormFilled && <CVCInput {...cvcProps} />}
-        {expirationDateProps.isFormFilled && (
+        {cvcProps.showNextField && <PasswordInput {...passwordProps} />}
+        {ownerNameProps.showNextField && <CVCInput {...cvcProps} />}
+        {expirationDateProps.showNextField && (
           <OwnerNameInput {...ownerNameProps} />
         )}
-        {cardIssuerProps.isFormFilled && (
+        {cardIssuerProps.showNextField && (
           <ExpirationDateInput {...expirationDateProps} />
         )}
-        {cardNumbersProps.isFormFilled && (
+        {cardNumbersProps.showNextField && (
           <CardIssuerInput {...cardIssuerProps} />
         )}
         <CardNumberInput {...cardNumbersProps} />

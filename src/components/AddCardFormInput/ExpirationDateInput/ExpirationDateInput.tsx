@@ -10,10 +10,10 @@ import {
   isValidMonth,
 } from '../../../domain/validators';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import { validateInput } from '../../../utils/validateInput';
-import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 import { useRef } from 'react';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+import { validateInput } from '../../../utils/validateInput';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
