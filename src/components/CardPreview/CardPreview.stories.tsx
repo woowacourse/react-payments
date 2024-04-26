@@ -141,3 +141,129 @@ export const EnterYearOnly: Story = {
     isCardFront: true,
   },
 };
+
+export const CVCNumber: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: false,
+  },
+};
+
+export const BCCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: 'BC카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const ShinhanCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '신한카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const KakaoBank: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '카카오뱅크',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const HyundaiCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '현대카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const WooriCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '우리카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const LotteCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '롯데카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const HanaCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '하나카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
+
+export const KookminCard: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['', '25'],
+      cardOwnerName: 'CHULMIN PARK',
+      cardCompany: '국민카드',
+      cardCVCNumber: '123',
+      cardPassword: '12',
+    },
+    isCardFront: true,
+  },
+};
