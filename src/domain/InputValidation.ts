@@ -66,19 +66,16 @@ const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
-    // checkMaxLength(n, maxLength);
   },
   month: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateMonth(n);
-    // checkMaxLength(n, maxLength);
   },
   year: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
     validateYear(n);
-    // checkMaxLength(n, maxLength);
   },
   userName: (n: string) => {
     checkTrimBlank(n);

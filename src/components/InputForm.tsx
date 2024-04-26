@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import {
   CardBrand,
   CardInfo,
@@ -9,7 +8,6 @@ import {
   Password,
   UserName,
 } from '../types/card';
-// import InputField from './InputField';
 import CardNumberInput from './InputComponent/CardNumberInput';
 import ExpirationDateInput from './InputComponent/ExpirationDateInput';
 import UserNameInput from './InputComponent/UserNameInput';
