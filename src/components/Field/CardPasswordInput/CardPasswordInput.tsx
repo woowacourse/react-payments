@@ -55,6 +55,7 @@ export default function CardPasswordInput({
           onChange={handleChange}
           isError={errorMessage.length !== 0}
           maxLength={2}
+          autoFocus
           value={cardPassword}
           onBlur={handleBlur}
           type="password"

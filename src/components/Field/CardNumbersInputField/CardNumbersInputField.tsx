@@ -117,6 +117,7 @@ export default function CardNumbersInputField({
             placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
             maxLength={CARD_NUMBER_UNIT_LENGTH}
             value={cardNumber}
+            autoFocus={i == 0}
             type={i >= cardNumbers.length / 2 ? "password" : "type"}
             isError={checkError(i)}
           />

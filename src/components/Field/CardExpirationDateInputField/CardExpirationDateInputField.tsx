@@ -120,7 +120,10 @@ export default function CardExpirationDateInputField({
 
     checkValidDate({ month: e.target.value });
 
-    if (e.target.value.length === 2 && e.target.nextSibling) {
+    if (
+      (e.target.value.length === 2 && e.target.nextSibling) ||
+      Number(e.target.value) > 2
+    ) {
       (e.target.nextSibling as HTMLInputElement).focus();
     }
   };
@@ -139,6 +142,7 @@ export default function CardExpirationDateInputField({
           placeholder={DATE_PLACEHOLDER.MONTH}
           maxLength={2}
           value={date.month}
+          autoFocus
           isError={errorMessages?.monthError !== null}
         />
         <Input

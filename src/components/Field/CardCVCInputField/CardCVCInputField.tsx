@@ -66,6 +66,7 @@ export default function CardCVCInputField({
           isError={errorMessage.length !== 0}
           placeholder={CVC_PLACEHOLDER}
           maxLength={3}
+          autoFocus
           value={cardCVC}
           onBlur={handleBlur}
         />

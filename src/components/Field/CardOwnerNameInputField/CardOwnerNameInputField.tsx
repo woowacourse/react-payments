@@ -59,15 +59,25 @@ export default function CardOwnerNameInputField({
     setErrorMessage("");
   };
   useEffect(() => {
+    const currentState = ownerName.length !== 0;
     const updatedIsCompletedSections = [...isCompletedSections];
-    const currentState = ownerName.length != 0;
     updatedIsCompletedSections[3] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-    const updatedIsOpenForm = [...isOpenForm];
-    if (currentState === true) {
-      updatedIsOpenForm[4] = true;
-    }
-    setIsOpenForm(updatedIsOpenForm);
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        const updatedIsOpenForm = [...isOpenForm];
+        if (currentState === true) {
+          updatedIsOpenForm[4] = true;
+        }
+        setIsOpenForm(updatedIsOpenForm);
+      }
+    };
+
+    window.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+    };
   }, [ownerName]);
 
   return (
@@ -78,7 +88,8 @@ export default function CardOwnerNameInputField({
           onChange={handleChange}
           isError={errorMessage.length !== 0}
           placeholder={OWNER_NAME_PLACEHOLDER}
-          maxLength={26} // 비자 21자, 마스터카드 26자!
+          autoFocus
+          maxLength={26}
           value={ownerName}
           onBlur={handleBlur}
         />
