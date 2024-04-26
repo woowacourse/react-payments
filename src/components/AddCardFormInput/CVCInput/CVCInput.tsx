@@ -1,12 +1,12 @@
-import React, { Fragment, useRef } from 'react';
-
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import React, { Fragment } from 'react';
 import Field from '../../common/Field/Field';
-import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { isInteger, isValidCVC } from '../../../domain/validators';
-import { validateInput } from '../../../utils/validateInput';
+import Label from '../../common/Label/Label';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+
+import { validateInput } from '../../../utils/validateInput';
+import { isInteger, isValidCVC } from '../../../domain/validators';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CVC;
@@ -22,7 +22,7 @@ export default function CVCInput({
   const {
     refs: [ref],
     moveToNextInput,
-  } = useFormFieldFocus([useRef<HTMLInputElement>(null)]);
+  } = useFormFieldFocus<HTMLInputElement>();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

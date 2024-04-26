@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export default function useFormFieldFocus<T extends HTMLElement>(
-  refs: Array<React.RefObject<T>>
+  length: number = 1
 ) {
+  const refs = Array.from({ length }).map(() => React.createRef<T>());
+
   const moveToNextInput = (index: number = 0) => {
     const [curInput, nextInput] = refs.slice(index, index + 2);
 

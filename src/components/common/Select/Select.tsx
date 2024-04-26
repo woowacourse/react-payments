@@ -9,7 +9,7 @@ interface Option {
 }
 
 interface SelectProps {
-  options: Option[];
+  options: readonly Option[];
   defaultText: string;
 
   name: string;

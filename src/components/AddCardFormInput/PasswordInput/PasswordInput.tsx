@@ -1,8 +1,8 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 
-import Label from '../../common/Label/Label';
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
+import Label from '../../common/Label/Label';
 
 import { validateInput } from '../../../utils/validateInput';
 
@@ -27,7 +27,7 @@ export default function PasswordInput({
   const {
     refs: [ref],
     moveToNextInput,
-  } = useFormFieldFocus([useRef<HTMLInputElement>(null)]);
+  } = useFormFieldFocus<HTMLInputElement>();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

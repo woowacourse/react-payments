@@ -10,7 +10,6 @@ import {
   isValidMonth,
 } from '../../../domain/validators';
 
-import { useRef } from 'react';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 import { validateInput } from '../../../utils/validateInput';
@@ -26,10 +25,7 @@ const ExpirationDateInput = ({
   onChange,
   onBlur,
 }: InputProps<ExpirationDate>) => {
-  const { refs, moveToNextInput } = useFormFieldFocus([
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ]);
+  const { refs, moveToNextInput } = useFormFieldFocus<HTMLInputElement>(2);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

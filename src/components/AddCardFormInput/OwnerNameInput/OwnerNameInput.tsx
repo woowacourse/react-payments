@@ -1,13 +1,13 @@
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 
-import { validateInput } from '../../../utils/validateInput';
 import {
-  isNotEmptyString,
   isEnglishCharacter,
+  isNotEmptyString,
 } from '../../../domain/validators';
+import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
@@ -25,7 +25,7 @@ function OwnerNameInput({
   const {
     refs: [ref],
     moveToNextInput,
-  } = useFormFieldFocus([useRef<HTMLInputElement>(null)]);
+  } = useFormFieldFocus<HTMLInputElement>();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

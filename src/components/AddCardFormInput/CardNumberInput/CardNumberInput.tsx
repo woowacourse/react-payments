@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
@@ -6,8 +5,8 @@ import Label from '../../common/Label/Label';
 
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 
-import { validateInput } from '../../../utils/validateInput';
 import { hasFourDigit, isInteger } from '../../../domain/validators';
+import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 
@@ -22,12 +21,7 @@ export default function CardNumberInput({
   onChange,
   onBlur,
 }: InputProps<CardNumbers>) {
-  const { refs, moveToNextInput } = useFormFieldFocus([
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ]);
+  const { refs, moveToNextInput } = useFormFieldFocus(4);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

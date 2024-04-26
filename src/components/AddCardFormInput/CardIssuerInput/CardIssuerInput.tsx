@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment } from 'react';
 
 import Field from '../../common/Field/Field';
 import Label from '../../common/Label/Label';
@@ -23,7 +23,7 @@ export default function CardIssuerInput({
   const {
     refs: [ref],
     moveToNextInput,
-  } = useFormFieldFocus([useRef<HTMLSelectElement>(null)]);
+  } = useFormFieldFocus<HTMLSelectElement>();
 
   const handleOnSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
