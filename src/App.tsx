@@ -1,25 +1,23 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
-import { useState } from 'react';
-import { CARD_NUMBERS_UNIT_LENGTH } from './constants/input';
-import { Date } from './types/date';
-import AddNewCardPage from './pages/AddNewCardPage';
+import AddNewCardPage from './pages/AddNewCardPage/AddNewCardPage.js';
 import { FocusProvider } from './providers/FocusProvider.js';
+import CompleteAddNewCardPage from './pages/CompleteAddNewCardPage/CompleteAddNewCardPage.js';
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(new Array(CARD_NUMBERS_UNIT_LENGTH).fill(''));
-
-  const [date, setDate] = useState<Date>({
-    month: '',
-    year: '',
-  });
-
-  const [ownerName, setOwnerName] = useState<string>('');
   return (
-    <main className={styles.background}>
-      <FocusProvider>
-        <AddNewCardPage />
-      </FocusProvider>
-    </main>
+    <BrowserRouter>
+      <main className={styles.background}>
+        <div className={styles.layout}>
+          <FocusProvider>
+            <Routes>
+              <Route path='/add-new-card' element={<AddNewCardPage />} />
+              <Route path='/complete-add-new-card' element={<CompleteAddNewCardPage />} />
+            </Routes>
+          </FocusProvider>
+        </div>
+      </main>
+    </BrowserRouter>
   );
 }
 
