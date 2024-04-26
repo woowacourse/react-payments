@@ -17,7 +17,7 @@ import styles from './style.module.css';
 
 export interface CardCVCInputProps {
   setCardSide: Dispatch<SetStateAction<CardSide>>;
-  editCardCVC: (cvc: string) => void;
+  editCardCVC: (cvc: string | null) => void;
   goNextFormStep: (currentStep: number) => void;
 }
 
@@ -29,7 +29,7 @@ function CardCVCInput(props: CardCVCInputProps) {
   });
 
   const updateCardCVC = (value: string, error: boolean) => {
-    if (!error) editCardCVC(value);
+    editCardCVC(error ? null : value);
   };
 
   /**

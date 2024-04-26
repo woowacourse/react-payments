@@ -15,7 +15,7 @@ import Input from '../Input';
 import styles from './style.module.css';
 
 export interface CardPasswordInputProps {
-  editCardPassword: (password: string) => void;
+  editCardPassword: (password: string | null) => void;
 }
 
 function CardPasswordInput(props: CardPasswordInputProps) {
@@ -27,8 +27,7 @@ function CardPasswordInput(props: CardPasswordInputProps) {
   };
 
   const updateCardPassword = (value: string, error: boolean) => {
-    if (!error) return;
-    editCardPassword(value);
+    editCardPassword(error ? null : value);
   };
 
   const { value, setValue, error } = useInput<string, boolean>({

@@ -64,22 +64,22 @@ const editCardPeriodAction = (period: CardPeriod) => ({
   period,
 });
 
-const editCardUserNameAction = (userName: string) => ({
+const editCardUserNameAction = (userName: string | null) => ({
   type: EDIT_CARD_USER_NAME,
   userName,
 });
 
-const editCardCompanyAction = (companyName: CardCompanyName) => ({
+const editCardCompanyAction = (companyName: CardCompanyName | null) => ({
   type: EDIT_CARD_COMPANY,
-  company: CARD_COMPANY.get(companyName) || null,
+  company: companyName ? CARD_COMPANY.get(companyName) || null : null,
 });
 
-const editCardCVCAction = (cvc: string) => ({
+const editCardCVCAction = (cvc: string | null) => ({
   type: EDIT_CARD_CVC,
   cvc,
 });
 
-const editCardPasswordAction = (password: string) => ({
+const editCardPasswordAction = (password: string | null) => ({
   type: EDIT_CARD_PASSWORD,
   password,
 });
@@ -144,19 +144,19 @@ export default function useCardInfoReducer() {
     dispatch(editCardPeriodAction(period));
   };
 
-  const editCardUserName = (name: string) => {
+  const editCardUserName = (name: string | null) => {
     dispatch(editCardUserNameAction(name));
   };
 
-  const editCardCompany = (companyName: CardCompanyName) => {
+  const editCardCompany = (companyName: CardCompanyName | null) => {
     dispatch(editCardCompanyAction(companyName));
   };
 
-  const editCardCVC = (cvc: string) => {
+  const editCardCVC = (cvc: string | null) => {
     dispatch(editCardCVCAction(cvc));
   };
 
-  const editCardPassword = (password: string) => {
+  const editCardPassword = (password: string | null) => {
     dispatch(editCardPasswordAction(password));
   };
 

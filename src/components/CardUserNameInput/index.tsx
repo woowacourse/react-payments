@@ -15,7 +15,7 @@ import Input from '../Input';
 import styles from './style.module.css';
 
 export interface CardUserNameInputProps {
-  editCardUserName: (name: string) => void;
+  editCardUserName: (name: string | null) => void;
   goNextFormStep: (currentStep: number) => void;
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
@@ -33,11 +33,9 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
 
   const updateCardUserName = (name: string, error: boolean) => {
     const isChangeableName = !name || !error;
-
-    if (!isChangeableName) return;
     const newUserName = name.trim();
     // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-    editCardUserName(newUserName);
+    editCardUserName(isChangeableName ? newUserName : null);
   };
 
   /**
