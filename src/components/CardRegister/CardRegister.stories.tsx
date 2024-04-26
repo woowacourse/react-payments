@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import App from './App';
+import CardRegister from './CardRegister';
 
 const meta = {
-  title: 'App',
-  component: App,
+  title: 'CardRegister',
+  component: CardRegister,
   tags: ['autodocs'],
-} satisfies Meta<typeof App>;
+} satisfies Meta<typeof CardRegister>;
 
 export default meta;
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import CardBrandInput from '../CardBrandInput/CardBrandInput';
@@ -17,11 +18,13 @@ import {
   useChangePIN,
 } from '../../hooks';
 
+import ENDPOINTS from '../../constants/endpoints';
+
 import '../../styles/reset.css';
 import '../../styles/common.css';
-import * as S from './App.style';
+import * as S from './CardRegister.style';
 
-enum CardInputStep {
+enum CARD_INPUT_STEP {
   CardNumbers,
   Brand,
   ExpireDate,
@@ -30,7 +33,7 @@ enum CardInputStep {
   PIN,
 }
 
-export default function App() {
+export default function CardRegister() {
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { brand, brandValid, handleChangeBrand } = useChangeBrand();
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
@@ -38,22 +41,30 @@ export default function App() {
   const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
   const { PINValid, handleChangePIN } = useChangePIN();
 
-  const [currentInputStep, setCurrentInputStep] = useState(CardInputStep.CardNumbers);
+  const [currentInputStep, setCurrentInputStep] = useState(CARD_INPUT_STEP.CardNumbers);
   const [showCardBackside, setShowCardBackside] = useState(false);
   const [allInputsCompleted, setAllInputsCompleted] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleShowCardBackside = (isCVCFocus: boolean) => {
     setShowCardBackside(isCVCFocus);
   };
 
+  const handleSubmitCardForm = () => {
+    navigate(ENDPOINTS.cardRegisterComplete, {
+      state: { firstFourCardNumberDigits: cardNumbers[0], brand },
+    });
+  };
+
   useEffect(() => {
     const inputValidationResults = {
-      [CardInputStep.CardNumbers]: cardNumbersValid.isCompleted,
-      [CardInputStep.Brand]: brandValid.isCompleted,
-      [CardInputStep.ExpireDate]: expireMonthValid.isCompleted && expireYearValid.isCompleted,
-      [CardInputStep.Owner]: ownerValid.isCompleted,
-      [CardInputStep.CVC]: CVCValid.isCompleted,
-      [CardInputStep.PIN]: PINValid.isCompleted,
+      [CARD_INPUT_STEP.CardNumbers]: cardNumbersValid.isCompleted,
+      [CARD_INPUT_STEP.Brand]: brandValid.isCompleted,
+      [CARD_INPUT_STEP.ExpireDate]: expireMonthValid.isCompleted && expireYearValid.isCompleted,
+      [CARD_INPUT_STEP.Owner]: ownerValid.isCompleted,
+      [CARD_INPUT_STEP.CVC]: CVCValid.isCompleted,
+      [CARD_INPUT_STEP.PIN]: PINValid.isCompleted,
     };
 
     const lastCompletedStep = Object.values(inputValidationResults).lastIndexOf(true);
@@ -88,17 +99,19 @@ export default function App() {
       </S.CardPreviewBox>
 
       <S.CardForm>
-        {currentInputStep >= CardInputStep.PIN && <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />}
+        {currentInputStep >= CARD_INPUT_STEP.PIN && (
+          <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />
+        )}
 
-        {currentInputStep >= CardInputStep.CVC && (
+        {currentInputStep >= CARD_INPUT_STEP.CVC && (
           <CardCVCInput isCVCValid={CVCValid} onChangeCVC={handleChangeCVC} onChangeFocusCVC={handleShowCardBackside} />
         )}
 
-        {currentInputStep >= CardInputStep.Owner && (
+        {currentInputStep >= CARD_INPUT_STEP.Owner && (
           <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
         )}
 
-        {currentInputStep >= CardInputStep.ExpireDate && (
+        {currentInputStep >= CARD_INPUT_STEP.ExpireDate && (
           <CardExpirationInput
             isMonthValid={expireMonthValid}
             isYearValid={expireYearValid}
@@ -106,15 +119,15 @@ export default function App() {
           />
         )}
 
-        {currentInputStep >= CardInputStep.Brand && (
+        {currentInputStep >= CARD_INPUT_STEP.Brand && (
           <CardBrandInput isBrandValid={brandValid} onChangeBrand={handleChangeBrand} />
         )}
 
-        {currentInputStep >= CardInputStep.CardNumbers && (
+        {currentInputStep >= CARD_INPUT_STEP.CardNumbers && (
           <CardNumberInput isCardNumbersValid={cardNumbersValid} onChangeCardNumbers={handleChangeCardNumbers} />
         )}
 
-        {allInputsCompleted && <S.CardFormSubmitButton type="submit">확인</S.CardFormSubmitButton>}
+        {allInputsCompleted && <S.CardFormSubmitButton onClick={handleSubmitCardForm}>확인</S.CardFormSubmitButton>}
       </S.CardForm>
     </S.AppLayout>
   );
