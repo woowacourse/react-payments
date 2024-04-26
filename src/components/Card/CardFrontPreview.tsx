@@ -2,9 +2,9 @@ import MASTERCARD_IMAGE from "../../assets/image/Mastercard.png";
 import VISA_IMAGE from "../../assets/image/Visa.png";
 import CARD_NUMBER_BLIND_IMAGE from "../../assets/image/CardNumberBlind.svg";
 import checkCardType from "../../utils/checkCardType";
-import styles from "./Card.module.css";
+import styles from "./CardPreview.module.css";
 
-const Card = ({
+const CardFrontPreview = ({
   cardNumbers,
   cardCompanyName,
   date,
@@ -47,7 +47,7 @@ const Card = ({
 
   const cardCompanyClass = getCardCompanyClass(cardCompanyName);
   return (
-    <div className={`${styles.card} ${cardCompanyClass}`}>
+    <div className={`${styles.card_front} ${cardCompanyClass}`}>
       <div className={styles.ic_chip}></div>
       <div className={styles.chip__logo__wrapper}>
         <div className={styles.chip}></div>
@@ -82,4 +82,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default CardFrontPreview;
