@@ -1,115 +1,54 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 import InputPageLayout from '../components/layout/InputPageLayout';
-
 import Caption from '../components/common/Caption';
 import Title from '../components/common/Title';
-
+import Dropdown from '../components/common/Dropdown';
 import CardPreview from '../components/CardPreview/CardPreview';
+import CardSubmitButton from '../components/CardSubmitButton';
 import CardNumberInput from '../components/CardNumberInput';
+
+import { CARD_COMPANIES, CARD_META_INFO, URL } from '../constants/card-app';
+
+import useCardNumberInput from '../hooks/useCardNumberInput';
+import useExpirationDateInput from '../hooks/useExpirationDateInput';
+import useCardOwnerNameInput from '../hooks/useCardOwnerNameInput';
+import useCardCVCNumberInput from '../hooks/useCardCVCNumberInput';
+import useCardPasswordInput from '../hooks/useCardPasswordInput';
+
 import ExpirationDateInput from '../components/ExpirationDateInput';
 import CardOwnerNameInput from '../components/CardOwnerNameInput';
-
-import { CARD_COMPANIES, CARD_META_INFO } from '../constants/card-app';
-
-import { CardFormValidity, CardInfo } from '../types/card';
-import Dropdown from '../components/common/Dropdown';
 import CardCVCNumberInput from '../components/CardCVCNumberInput';
 import CardPasswordInput from '../components/CardPasswordInput';
-import { styled } from 'styled-components';
-import CardSubmitButton from '../components/CardSubmitButton';
-import { useNavigate } from 'react-router-dom';
-import { URL } from './../constants/card-app';
 
 const NewCardInputPage = () => {
-  const [newCardInfo, setNewCardInfo] = useState<CardInfo>({
-    cardNumbers: ['', '', '', ''],
-    expirationDate: ['', ''],
-    cardOwnerName: '',
-    cardCompany: '',
-    cardCVCNumber: '',
-    cardPassword: '',
-  });
-
-  const [isSectionValid, setIsSectionValid] = useState<CardFormValidity>({
-    cardNumbers: false,
-    expirationDate: false,
-    cardOwnerName: false,
-    cardCompany: false,
-    cardCVCNumber: false,
-    cardPassword: false,
-  });
-
-  const isFormValid = Object.values(isSectionValid).every((section) => section === true);
-
-  const handleCardNumberChange = (index: number, value: string) => {
-    const updatedCardNumbers = [...newCardInfo.cardNumbers];
-    updatedCardNumbers[index] = value;
-
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        cardNumbers: updatedCardNumbers,
-      };
-    });
-  };
-
-  const handleExpirationDateChange = (index: number, value: string) => {
-    const updatedExpirationDate = [...newCardInfo.expirationDate];
-    updatedExpirationDate[index] = value;
-
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        expirationDate: updatedExpirationDate,
-      };
-    });
-  };
-
-  const handleCardOwnerNameChange = (value: string) => {
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        cardOwnerName: value,
-      };
-    });
-  };
-
-  const handleCardCompanyChange = (value: string) => {
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        cardCompany: value,
-      };
-    });
-  };
-
-  const handleCardCVCNumberChange = (value: string) => {
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        cardCVCNumber: value,
-      };
-    });
-  };
-
-  const handleCardPasswordChange = (value: string) => {
-    setNewCardInfo((prev) => {
-      return {
-        ...prev,
-        cardPassword: value,
-      };
-    });
-  };
-
   const navigate = useNavigate();
+
+  const { cardNumberState, handleCardNumberChange } = useCardNumberInput();
+  const { expirationDateState, handleExpirationDateChange } = useExpirationDateInput();
+  const { cardOwnerNameState, handleCardOwnerNameChange, updateValue } = useCardOwnerNameInput();
+  const [cardCompany, setCardCompany] = useState('');
+  const { cardCVCNumberState, handleCardCVCNumberChange } = useCardCVCNumberInput();
+  const { cardPasswordState, handleCardPasswordChange } = useCardPasswordInput();
+
+  const [isCardFront, setIsCardFront] = useState<boolean>(true);
+
+  const isFormComplete =
+    cardNumberState.isComplete &&
+    cardCompany !== '' &&
+    expirationDateState.isComplete &&
+    cardOwnerNameState.isComplete &&
+    cardCVCNumberState.isComplete &&
+    cardPasswordState.isComplete;
 
   const handleInputFormSubmit = () => {
     navigate(URL.submitPage, {
       replace: true,
       state: {
-        startNumber: newCardInfo.cardNumbers[0],
-        cardCompany: newCardInfo.cardCompany,
+        startNumber: cardNumberState.value[0],
+        cardCompany: cardCompany,
       },
     });
   };
@@ -117,53 +56,85 @@ const NewCardInputPage = () => {
   return (
     <InputPageLayout>
       <CardContainer>
-        <CardPreview cardInfo={newCardInfo} isCardFront={true} />
+        <CardPreview
+          cardInfo={{
+            cardNumbers: cardNumberState.value,
+            expirationDate: expirationDateState.value,
+            cardOwnerName: cardOwnerNameState.value,
+            cardCompany,
+            cardCVCNumber: cardCVCNumberState.value,
+            cardPassword: cardPasswordState.value,
+          }}
+          isCardFront={isCardFront}
+        />
       </CardContainer>
 
       <InputContainer>
+        {cardCVCNumberState.isNextVisible && (
+          <>
+            <Title content={CARD_META_INFO.cardPassword.query} />
+            <Caption text={CARD_META_INFO.cardPassword.caption} type='input' />
+            <CardPasswordInput
+              cardPassword={cardPasswordState.value}
+              cardPasswordError={cardPasswordState.error}
+              onCardPasswordChange={handleCardPasswordChange}
+            />
+          </>
+        )}
+
+        {cardOwnerNameState.isNextVisible && (
+          <>
+            <Title content={CARD_META_INFO.cardCVCNumber.query} />
+            <CardCVCNumberInput
+              cardCVCNumber={cardCVCNumberState.value}
+              cardCVCNumberError={cardCVCNumberState.error}
+              onCardCVCNumberChange={handleCardCVCNumberChange}
+              onFocusChange={() => setIsCardFront((prev) => !prev)}
+            />
+          </>
+        )}
+
+        {expirationDateState.isNextVisible && (
+          <>
+            <Title content={CARD_META_INFO.cardOwnerName.query} />
+            <CardOwnerNameInput
+              cardOwnerName={cardOwnerNameState.value}
+              cardOwnerNameError={cardOwnerNameState.error}
+              onCardOwnerNameChange={updateValue}
+              onPressEnter={handleCardOwnerNameChange}
+            />
+          </>
+        )}
+
+        {cardCompany !== '' && (
+          <>
+            <Title content={CARD_META_INFO.expirationDate.query} />
+            <Caption text={CARD_META_INFO.expirationDate.caption} type='input' />
+            <ExpirationDateInput
+              expirationDate={expirationDateState.value}
+              expirationDateErrors={expirationDateState.error}
+              onExpirationDateChange={handleExpirationDateChange}
+            />
+          </>
+        )}
+
+        {cardNumberState.isNextVisible && (
+          <>
+            <Title content={CARD_META_INFO.cardCompany.query} />
+            <Caption text={CARD_META_INFO.cardCompany.caption} type='input' />
+            <Dropdown value={cardCompany} options={CARD_COMPANIES} onSelect={(e) => setCardCompany(e)} />
+          </>
+        )}
+
         <Title content={CARD_META_INFO.cardNumbers.query} />
         <Caption text={CARD_META_INFO.cardNumbers.caption} type='input' />
         <CardNumberInput
-          cardNumbers={newCardInfo.cardNumbers}
-          errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
+          cardNumbers={cardNumberState.value}
+          cardNumberErrors={cardNumberState.error}
           onCardNumberChange={handleCardNumberChange}
         />
-
-        <Title content={CARD_META_INFO.expirationDate.query} />
-        <Caption text={CARD_META_INFO.expirationDate.caption} type='input' />
-        <ExpirationDateInput
-          expirationDate={newCardInfo.expirationDate}
-          errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
-          onExpirationDateChange={handleExpirationDateChange}
-        />
-
-        <Title content={CARD_META_INFO.cardOwnerName.query} />
-        <CardOwnerNameInput
-          ownerName={newCardInfo.cardOwnerName}
-          errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
-          onCardOwnerNameChange={handleCardOwnerNameChange}
-        />
-
-        <Title content={CARD_META_INFO.cardCompany.query} />
-        <Caption text={CARD_META_INFO.cardCompany.caption} type='input' />
-        <Dropdown value={newCardInfo.cardCompany} options={CARD_COMPANIES} onSelect={handleCardCompanyChange} />
-
-        <Title content={CARD_META_INFO.cardCVCNumber.query} />
-        <CardCVCNumberInput
-          cardCVCNumber={newCardInfo.cardCVCNumber}
-          errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
-          onCardCVCNumberChange={handleCardCVCNumberChange}
-        />
-
-        <Title content={CARD_META_INFO.cardPassword.query} />
-        <Caption text={CARD_META_INFO.cardPassword.caption} type='input' />
-        <CardPasswordInput
-          cardPassword={newCardInfo.cardPassword}
-          errorCaption={(errorText: string) => <Caption text={errorText} type='error' />}
-          onCardPasswordChange={handleCardPasswordChange}
-        />
       </InputContainer>
-      <CardSubmitButton isDisplay={isFormValid} onInputFormSubmit={handleInputFormSubmit} />
+      <CardSubmitButton isDisplay={isFormComplete} onInputFormSubmit={handleInputFormSubmit} />
     </InputPageLayout>
   );
 };
@@ -174,7 +145,7 @@ const CardContainer = styled.div`
   align-items: center;
 
   width: 315px;
-  height: 280px;
+  height: 240px;
 `;
 
 const InputContainer = styled.div`
@@ -182,6 +153,7 @@ const InputContainer = styled.div`
   flex-direction: column;
 
   width: 315px;
+  height: 460px;
 
   overflow-y: scroll;
 `;
