@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface CvcState {
@@ -16,22 +16,19 @@ function useCvcInput(): [CvcState, (value: string) => void] {
     isValid: false,
   });
 
-  const handleCvcChange = useCallback(
-    (value: string) => {
-      const errorMessage = [validators.cvc(value)];
-      const isValid = !!value && errorMessage[0] === "";
-      const isNextVisible = cvcState.isNextVisible || isValid;
+  const handleCvcChange = (value: string) => {
+    const errorMessage = [validators.cvc(value)];
+    const isValid = !!value && errorMessage[0] === "";
+    const isNextVisible = cvcState.isNextVisible || isValid;
 
-      setCvcState((prevState) => ({
-        ...prevState,
-        value: isValid ? Number(value) : prevState.value,
-        errorMessage,
-        isNextVisible,
-        isValid,
-      }));
-    },
-    [cvcState]
-  );
+    setCvcState((prevState) => ({
+      ...prevState,
+      value: isValid ? Number(value) : prevState.value,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+  };
 
   return [cvcState, handleCvcChange];
 }

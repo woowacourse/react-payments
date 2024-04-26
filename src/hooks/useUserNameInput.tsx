@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface UserNameState {
@@ -16,35 +16,28 @@ function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.
     isValid: false,
   });
 
-  const handleUserNameChange = useCallback(
-    (value: string) => {
-      const errorMessage = [validators.userName(value)];
+  const handleUserNameChange = (value: string) => {
+    const errorMessage = [validators.userName(value)];
+    setUserNameState((prevState) => ({
+      ...prevState,
+      value: value && !errorMessage[0] ? value.toUpperCase() : prevState.value,
+      errorMessage,
+    }));
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const isValid = !!userNameState.value && !userNameState.errorMessage[0];
+      const isNextVisible = userNameState.isNextVisible || isValid;
 
       setUserNameState((prevState) => ({
         ...prevState,
-        value: value && !errorMessage[0] ? value.toUpperCase() : prevState.value,
-        errorMessage,
+        isValid,
+        isNextVisible,
       }));
-    },
-    [userNameState]
-  );
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        const isValid = !!userNameState.value && !userNameState.errorMessage[0];
-        const isNextVisible = userNameState.isNextVisible || isValid;
-
-        setUserNameState((prevState) => ({
-          ...prevState,
-          isValid,
-          isNextVisible,
-        }));
-      }
-    },
-    [userNameState]
-  );
+    }
+  };
 
   return [userNameState, handleUserNameChange, handleKeyDown];
 }

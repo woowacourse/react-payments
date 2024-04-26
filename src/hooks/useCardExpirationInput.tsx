@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import validators from "../validators/newCardInputValidator";
 
 interface CardExpirationState {
@@ -16,32 +16,29 @@ function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<H
     isValid: false,
   });
 
-  const handleCardExpirationChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-      const value = e.target.value;
+  const handleCardExpirationChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const value = e.target.value;
 
-      const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? Number(value) : num));
-      const errorMessage = cardExpirationState.errorMessage.map((msg, i) => (i === index ? validators.cardExpiration(value, index) : msg));
-      const isValid = updatedCardExpiration.every((number) => number !== 0) && errorMessage.every((message) => !message);
-      const isNextVisible = cardExpirationState.isNextVisible || isValid;
+    const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? Number(value) : num));
+    const errorMessage = cardExpirationState.errorMessage.map((msg, i) => (i === index ? validators.cardExpiration(value, index) : msg));
+    const isValid = updatedCardExpiration.every((number) => number !== 0) && errorMessage.every((message) => !message);
+    const isNextVisible = cardExpirationState.isNextVisible || isValid;
 
-      if (!errorMessage[index] && index < updatedCardExpiration.length - 1) {
-        const nextInput = e.target.nextSibling;
-        if (nextInput && nextInput instanceof HTMLInputElement) {
-          nextInput.focus();
-        }
+    if (!errorMessage[index] && index < updatedCardExpiration.length - 1) {
+      const nextInput = e.target.nextSibling;
+      if (nextInput && nextInput instanceof HTMLInputElement) {
+        nextInput.focus();
       }
+    }
 
-      setCardExpirationState((prevState) => ({
-        ...prevState,
-        value: updatedCardExpiration,
-        errorMessage,
-        isNextVisible,
-        isValid,
-      }));
-    },
-    [cardExpirationState]
-  );
+    setCardExpirationState((prevState) => ({
+      ...prevState,
+      value: updatedCardExpiration,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+  };
 
   return [cardExpirationState, handleCardExpirationChange];
 }

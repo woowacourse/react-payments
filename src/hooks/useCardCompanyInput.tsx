@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { CardCompany } from "../types/type";
 
 interface CardCompanyState {
@@ -16,22 +16,20 @@ function useCardCompanyInput(): [CardCompanyState, (value: string) => void] {
     isValid: false,
   });
 
-  const handleCardCompanyChange = useCallback(
-    (value: string) => {
-      const errorMessage = [""];
-      const isValid = !!value;
-      const isNextVisible = cardCompanyState.isNextVisible || isValid;
+  // Function to handle changes in Card Company input
+  const handleCardCompanyChange = (value: string) => {
+    const errorMessage = [""];
+    const isValid = !!value;
+    const isNextVisible = cardCompanyState.isNextVisible || isValid;
 
-      setCardCompanyState((prevState) => ({
-        ...prevState,
-        value: value as CardCompany,
-        errorMessage,
-        isNextVisible,
-        isValid,
-      }));
-    },
-    [cardCompanyState]
-  );
+    setCardCompanyState((prevState) => ({
+      ...prevState,
+      value: value as CardCompany,
+      errorMessage,
+      isNextVisible,
+      isValid,
+    }));
+  };
 
   return [cardCompanyState, handleCardCompanyChange];
 }
