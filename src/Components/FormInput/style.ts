@@ -14,7 +14,7 @@ export const inputStyle = (sizePreset: SizePresetType, isError: boolean = false)
   css({
     height: "25px",
     borderRadius: "2px",
-    border: `solid 1px ${NORMAL_COLOR}`,
+    border: `solid 1px ${isError ? HIGHLIGHT_COLOR : NORMAL_COLOR}`,
     padding: "8px",
     width: SIZE[sizePreset],
     marginTop: "10px",

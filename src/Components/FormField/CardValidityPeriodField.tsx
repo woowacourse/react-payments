@@ -22,6 +22,7 @@ const CardValidityPeriodField = () => {
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   useEffect(() => {
+    //TODO: 날짜 유효성 검사
     if (cardPeriod.month?.length === 2 && cardPeriod.year?.length === 2) {
       setRenderOrder((prev) => {
         if (prev.index === 2) {

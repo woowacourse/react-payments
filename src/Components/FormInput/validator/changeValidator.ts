@@ -4,7 +4,7 @@ export interface validatorReturn {
   value?: string;
 }
 
-export type ValidatorType = (input: string, name?: "month" | "year") => validatorReturn;
+export type ValidatorType = (input: string, name?: string) => validatorReturn;
 
 const ERROR_MESSAGES = {
   ONLY_NUMBER: "숫자만 입력해주세요.",

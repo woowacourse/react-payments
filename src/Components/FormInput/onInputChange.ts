@@ -14,11 +14,7 @@ const onInputChange = <T, U>(
   e: React.ChangeEvent<HTMLInputElement>,
   { name, setData, setError, validator, maxLength, nextRef }: ChangeProps<T, U>
 ) => {
-  const {
-    isValid,
-    value,
-    message: errorMessage,
-  } = validator(e.target.value, name === "month" || name === "year" ? name : undefined);
+  const { isValid, value, message: errorMessage } = validator(e.target.value, name as string);
 
   if (isValid && name) {
     setData((prev: T) => {

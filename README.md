@@ -76,9 +76,9 @@ Performance
 - [x] Validator 작성
 - [x] cardPreview 연결
 - [x] 컴포넌트 렌더링에 조건 달기
-- [ ] 이벤트 달기
+- [x] 이벤트 달기
   - [x] Submit 이벤트
-  - [ ] blur 이벤트
+  - [x] blur 이벤트
 
 ### State
 
@@ -103,10 +103,10 @@ Performance
 - [x] cvc 입력 컴포넌트 FormInput.CardCVCInput
 - [x] 확인 버튼 컴포넌트 CheckButton
       렌더링 조건
-  - [ ] input Value가 없을 때
-  - [ ] 에러가 있을 때
-  - [ ] 비자, 마스터 카드가 아닌경우
-  - [ ] 16자리 숫자가 아닌경우
+  - [x] input Value가 없을 때
+  - [x] 에러가 있을 때
+  - [x] 비자, 마스터 카드가 아닌경우
+  - [x] 16자리 숫자가 아닌경우
   - [ ] 유효기간이 만료되었을 경우
 
 ### step
