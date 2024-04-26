@@ -53,7 +53,7 @@ interface SelectorType {
 function Selector({ onInputChange, isError, errorMessage }: SelectorType) {
   const [listOpened, setListOpened] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState(CARD_PROVIDER_DEFAULT);
-  const handleListOpened = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleListOpened = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
     setListOpened((prevState) => !prevState);
     const target = e.target as HTMLDivElement;
 
