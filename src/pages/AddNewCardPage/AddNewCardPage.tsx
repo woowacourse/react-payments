@@ -1,20 +1,31 @@
-import CardPreview from '../components/CardPreview/CardPreview';
-import CardCVCNumberInputField from '../components/Field/CardCVCNumberInputField/CardCVCNumberInputField';
-import CardCompanySelectField from '../components/Field/CardCompanySelectField/CardCompanySelectField';
-import CardExpirationDateInputField from '../components/Field/CardExpirationDateInputField/CardExpirationDateInputField';
-import CardNumbersInputField from '../components/Field/CardNumbersInputField/CardNumbersInputField';
-import CardOwnerNameInputField from '../components/Field/CardOwnerNameInputField/CardOwnerNameInputField';
-import CardPasswordInputField from '../components/Field/CardPasswordInputField/CardPasswordInputField';
-import ShelfHeader from '../components/ShelfHeader/ShelfHeader';
-import ShelfSection from '../components/ShelfSection/ShelfSection';
-import BottomButton from '../components/common/BottomButton/BottomButton';
-import useAddNewCardForm from '../hooks/useAddNewCardForm';
+import { useNavigate } from 'react-router-dom';
+import CardPreview from '../../components/CardPreview/CardPreview';
+import CardCVCNumberInputField from '../../components/Field/CardCVCNumberInputField/CardCVCNumberInputField';
+import CardCompanySelectField from '../../components/Field/CardCompanySelectField/CardCompanySelectField';
+import CardExpirationDateInputField from '../../components/Field/CardExpirationDateInputField/CardExpirationDateInputField';
+import CardNumbersInputField from '../../components/Field/CardNumbersInputField/CardNumbersInputField';
+import CardOwnerNameInputField from '../../components/Field/CardOwnerNameInputField/CardOwnerNameInputField';
+import CardPasswordInputField from '../../components/Field/CardPasswordInputField/CardPasswordInputField';
+import ShelfHeader from '../../components/ShelfHeader/ShelfHeader';
+import ShelfSection from '../../components/ShelfSection/ShelfSection';
+import BottomButton from '../../components/common/BottomButton/BottomButton';
+import useAddNewCardForm from '../../hooks/useAddNewCardForm';
+import Form from '../../components/common/Form/Form';
 
 const AddNewCardPage = () => {
   const { values, errorMessage, handlers, showCase, completeList } = useAddNewCardForm();
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    navigate(`/complete-add-new-card`, {
+      state: {
+        firstCardNumberUnit: values.cardNumbers[0],
+        cardCompany: values.cardCompany,
+      },
+    });
+  };
 
   return (
-    <div>
+    <Form>
       <CardPreview
         cardNumbers={values.cardNumbers}
         expirationDate={values.expirationDate}
@@ -82,8 +93,12 @@ const AddNewCardPage = () => {
           />
         </ShelfSection>
       )}
-      <div>{Object.values(completeList).every((isValid) => isValid === true) && <BottomButton name='확인' />}</div>
-    </div>
+      <>
+        {Object.values(completeList).every((isValid) => isValid === true) && (
+          <BottomButton name='확인' onClick={handleSubmit} />
+        )}
+      </>
+    </Form>
   );
 };
 
