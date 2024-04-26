@@ -1,5 +1,6 @@
 import { COLOR } from '../styles/color';
 import { CardIssuer as CardIssuerType } from '../type';
+import { HTMLProps } from 'react';
 import ISSUER_KOREAN from '../constants/issuerKorean';
 import SectionTitle from './SectionTitle';
 import { UseCardIssuer } from '../hooks/useCardIssuer';
@@ -43,17 +44,11 @@ export default function CardIssuer({
             onFocus={onFocus}
             onBlur={onBlur}
           />
-          <img
+          <DropDownImg
             src={dropdown}
-            alt={'dropdown'}
-            style={{
-              position: 'relative',
-              top: '-25px',
-              left: '294px',
-              pointerEvents: 'none',
-              transform: `rotate(${isFocus ? 180 : 0}deg)`,
-            }}
-          ></img>
+            alt='dropdown'
+            isFocus={isFocus}
+          ></DropDownImg>
         </div>
 
         <OptionContainer isVisible={isFocus}>
@@ -86,6 +81,7 @@ const OptionContainer = styled.div<OptionContainerProps>(props => {
     borderRadius: '5.31px',
     backgroundColor: COLOR.white,
     margin: '0px',
+    marginTop: '5px',
   };
 });
 
@@ -99,4 +95,20 @@ const SelectBox = styled.input({
   padding: '8px',
   cursor: 'default',
   marginTop: '5px',
+  '&:focus-visible': {
+    border: '1px solid',
+    borderColor: COLOR.black,
+    outline: 'none',
+  },
 });
+
+interface DropDownImgProps extends HTMLProps<HTMLImageElement> {
+  isFocus: boolean;
+}
+const DropDownImg = styled.img<DropDownImgProps>(props => ({
+  position: 'relative',
+  top: '-25px',
+  left: '294px',
+  pointerEvents: 'none',
+  transform: `rotate(${props.isFocus ? 180 : 0}deg)`,
+}));

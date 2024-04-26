@@ -22,7 +22,7 @@ export default function useCardIssuer() {
     'WooriCard',
   ];
 
-  const { value, onClicks } = useRadio(options);
+  const { value, onClicks, initValue } = useRadio(options);
   const { isFocus, onFocus, onBlur } = useIsFocus();
 
   return {
@@ -32,5 +32,6 @@ export default function useCardIssuer() {
     isFocus,
     onFocus,
     onBlur,
+    initValue,
   };
 }

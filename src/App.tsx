@@ -25,6 +25,7 @@ export default function App() {
     cardNumbers.initValue();
     cardExpiredDate.initValue();
     cardHolder.initValue();
+    cardIssuer.initValue();
   };
   const paymentsElement = (
     <PayMents
@@ -78,6 +79,8 @@ const AppWrapper = styled.div({
   '&>*': {
     width: '376px',
     height: '700px',
+    boxSizing: 'border-box',
+    position: 'relative',
 
     backgroundColor: COLOR.white,
   },

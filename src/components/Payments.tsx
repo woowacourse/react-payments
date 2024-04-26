@@ -62,11 +62,9 @@ const PaymentsContainer = styled.section({
 
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   gap: '30px',
-  overflowY: 'scroll',
-  '&::-webkit-scrollbar': {
-    display: 'none',
-  },
+  padding: '50px',
+  paddingBottom: '0px',
 });
