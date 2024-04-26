@@ -1,7 +1,5 @@
-import { COMPANY_LIST } from '../types/cardCompany';
+import { COMPANY_LIST, CardCompany } from '../types/cardCompany';
 
-export default function isCardCompany(value: string) {
-  const cardCompanyValues = Object.values(COMPANY_LIST);
-
-  return cardCompanyValues.includes(value);
+export function isCardCompany(value: string): value is CardCompany {
+  return Object.keys(COMPANY_LIST).includes(value);
 }
