@@ -1,24 +1,30 @@
 import { useState } from 'react';
 
+export interface InputsType {
+  values: string[];
+  isValid: boolean[];
+  isClicked: boolean[];
+  handleValues: (newValues: string[], index: number) => void;
+}
+
 const useValidatedInputs = (validateFunction: (value: string) => boolean, defaultValue: string[]) => {
   const [values, setValues] = useState(defaultValue);
   const [isValid, setIsValid] = useState(defaultValue.map(() => false));
+  const [isClicked, setIsClicked] = useState(defaultValue.map(() => false));
 
-  const handleValues = (newValues: string[]) => {
-    const newIsValid = [...isValid];
+  const handleValues = (newValues: string[], index: number) => {
+    if (!isClicked[index]) {
+      const newIsClicked = [...isClicked];
+      newIsClicked[index] = true;
 
-    const updatedValues = newValues.map((value, index) => {
-      const isValid = validateFunction(value);
-      newIsValid[index] = isValid;
+      setIsClicked(newIsClicked);
+    }
 
-      return isValid ? value : '';
-    });
-
-    setIsValid(newIsValid);
-    setValues(updatedValues);
+    setIsValid(newValues.map((value) => validateFunction(value)));
+    setValues(newValues);
   };
 
-  return { values, isValid, handleValues };
+  return { values, isValid, isClicked, handleValues };
 };
 
 export default useValidatedInputs;

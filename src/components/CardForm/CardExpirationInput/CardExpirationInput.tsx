@@ -2,27 +2,23 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import useInput from '../../../hooks/useInput';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 
 import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
+import { InputType } from '../../../hooks/useValidatedInput';
 
 interface CardExpirationInputProps {
-  month: string;
-  year: string;
-  isValid: [boolean, boolean];
-  handleMonth: (month: string) => void;
-  handleYear: (year: string) => void;
+  month: InputType;
+  year: InputType;
 }
 
-function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: CardExpirationInputProps) {
-  const { value: monthInput, isClicked: isMonthClicked, onChange: onMonthInputChange } = useInput(month);
-  const { value: yearInput, isClicked: isYearClicked, onChange: onYearInputChange } = useInput(year);
+function CardExpirationInput({ month, year }: CardExpirationInputProps) {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
-  const isClicked = [isMonthClicked, isYearClicked];
+  const isValid = [month.isValid, year.isValid];
+  const isClicked = [month.isClicked, year.isClicked];
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -30,8 +26,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       return;
     }
 
-    onMonthInputChange(e);
-    handleMonth(e.target.value);
+    month.handleValue(e.target.value);
 
     moveToNextInput(e.target.value, 0);
   };
@@ -42,8 +37,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
       return;
     }
 
-    onYearInputChange(e);
-    handleYear(e.target.value);
+    year.handleValue(e.target.value);
   };
 
   const errorMessage =
@@ -61,7 +55,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
           type="text"
           ref={setRef(0)}
           placeholder="MM"
-          value={monthInput}
+          value={month.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
           isValid={isClicked[0] ? isValid[0] : true}
@@ -71,7 +65,7 @@ function CardExpirationInput({ month, year, isValid, handleMonth, handleYear }: 
           type="text"
           ref={setRef(1)}
           placeholder="YY"
-          value={yearInput}
+          value={year.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
           isValid={isClicked[1] ? isValid[1] : true}

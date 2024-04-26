@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 
+import { InputType } from '../../../hooks/useValidatedInput';
+
 import { UpIcon, DownIcon } from '../../../assets';
 import { CARD_COMPANY } from '../../../constants/Condition';
 
 import * as S from './CardCompanyInput.style';
 
 interface CardCompanyInputProps {
-  company: string;
-  handleCompany: (company: string) => void;
+  company: InputType;
 }
 
-const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => {
+const CardCompanyInput = ({ company }: CardCompanyInputProps) => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
   const toggleOptionList = () => setIsOptionOpen(!isOptionOpen);
 
   const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleCompany(e.target.value);
+    company.handleValue(e.target.value);
     setIsOptionOpen(false);
   };
 
@@ -26,8 +27,8 @@ const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => 
     <div>
       <TitleContainer title="카드사를 선택해 주세요." subTitle="현재 국내 카드사만 가능합니다." />
       <S.CardCompanyInputContainer>
-        <S.SelectedCardCompanyBox $isDefault={!company}>
-          <p>{company || '카드사를 선택해 주세요'}</p>
+        <S.SelectedCardCompanyBox $isDefault={!company.value}>
+          <p>{company.value || '카드사를 선택해 주세요'}</p>
           <button onClick={toggleOptionList}>
             <img src={isOptionOpen ? UpIcon : DownIcon} alt={isOptionOpen ? '옵션 닫기' : '옵션 열기'} />
           </button>
@@ -40,7 +41,7 @@ const CardCompanyInput = ({ company, handleCompany }: CardCompanyInputProps) => 
                   type="radio"
                   id={option}
                   value={option}
-                  checked={option === company}
+                  checked={option === company.value}
                   onChange={handleCompanyChange}
                 ></input>
                 <S.CardCompanyOptionLabel htmlFor={option}>{option}</S.CardCompanyOptionLabel>

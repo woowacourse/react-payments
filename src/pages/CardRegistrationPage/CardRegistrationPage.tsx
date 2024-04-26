@@ -29,29 +29,21 @@ import * as S from './CardRegistrationPage.style';
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
 
-  const { value: month, isValid: isMonthValid, handleValue: handleMonth } = useValidatedInput(validateMonth);
-  const { value: year, isValid: isYearValid, handleValue: handleYear } = useValidatedInput(validateYear);
-  const { value: owner, isValid: isOwnerValid, handleValue: handleOwner } = useValidatedInput(validateOwner);
-  const { value: cvc, isValid: isCVCValid, handleValue: handleCVC } = useValidatedInput(validateCVC);
-  const { value: company, isValid: isCompanyValid, handleValue: handleCompany } = useValidatedInput(validateCompany);
-  const {
-    value: password,
-    isValid: isPasswordValid,
-    handleValue: handlePassword,
-  } = useValidatedInput(validatePassword);
-  const {
-    values: cardNumbers,
-    isValid: isCardNumbersValid,
-    handleValues: handleCardNumbers,
-  } = useValidatedInputs(validateCardNumber, ['', '', '', '']);
+  const month = useValidatedInput(validateMonth);
+  const year = useValidatedInput(validateYear);
+  const owner = useValidatedInput(validateOwner);
+  const cvc = useValidatedInput(validateCVC);
+  const company = useValidatedInput(validateCompany);
+  const password = useValidatedInput(validatePassword);
+  const cardNumbers = useValidatedInputs(validateCardNumber, ['', '', '', '']);
 
   const validationList = [
-    isAllValid(isCardNumbersValid),
-    isCompanyValid,
-    isAllValid([isMonthValid, isYearValid]),
-    isOwnerValid,
-    isCVCValid,
-    isPasswordValid,
+    isAllValid(cardNumbers.isValid),
+    company.isValid,
+    isAllValid([month.isValid, year.isValid]),
+    owner.isValid,
+    cvc.isValid,
+    password.isValid,
   ];
 
   const { moveIndex } = useAutoMoveIndex(0, validationList);
@@ -65,42 +57,28 @@ const CardRegistrationPage = () => {
       <S.CardRegistrationContainer>
         <S.CardPreviewBoxWrapper>
           <CardPreview
-            cardNumber={cardNumbers}
-            month={month}
-            year={year}
-            owner={owner}
-            company={company}
-            cvc={cvc}
+            cardNumber={cardNumbers.values}
+            month={month.value}
+            year={year.value}
+            owner={owner.value}
+            company={company.value}
+            cvc={cvc.value}
             isCVCInput={isCVCInput}
           />
         </S.CardPreviewBoxWrapper>
         <S.CardForm>
-          {moveIndex >= 5 && (
-            <CardPasswordInput password={password} isValid={isPasswordValid} handlePassword={handlePassword} />
-          )}
-          {moveIndex >= 4 && (
-            <CardCVCInput cvc={cvc} isValid={isCVCValid} handleCVC={handleCVC} handleIsCVCInput={handleIsCVCInput} />
-          )}
-          {moveIndex >= 3 && <CardOwnerInput owner={owner} isValid={isOwnerValid} handleOwner={handleOwner} />}
-          {moveIndex >= 2 && (
-            <CardExpirationInput
-              month={month}
-              year={year}
-              isValid={[isMonthValid, isYearValid]}
-              handleMonth={handleMonth}
-              handleYear={handleYear}
-            />
-          )}
-          {moveIndex >= 1 && <CardCompanyInput company={company} handleCompany={handleCompany} />}
-          <CardNumberInput
-            cardNumbers={cardNumbers}
-            isValid={isCardNumbersValid}
-            handleCardNumbers={handleCardNumbers}
-          />
+          {moveIndex >= 5 && <CardPasswordInput password={password} />}
+          {moveIndex >= 4 && <CardCVCInput cvc={cvc} handleIsCVCInput={handleIsCVCInput} />}
+          {moveIndex >= 3 && <CardOwnerInput owner={owner} />}
+          {moveIndex >= 2 && <CardExpirationInput month={month} year={year} />}
+          {moveIndex >= 1 && <CardCompanyInput company={company} />}
+          <CardNumberInput cardNumbers={cardNumbers} />
         </S.CardForm>
       </S.CardRegistrationContainer>
       {isButtonActive && (
-        <Link to={`/complete?number=${encodeURIComponent(cardNumbers[0])}&company=${encodeURIComponent(company)}`}>
+        <Link
+          to={`/complete?number=${encodeURIComponent(cardNumbers.values[0])}&company=${encodeURIComponent(company.value)}`}
+        >
           <S.SubmitButton>확인</S.SubmitButton>
         </Link>
       )}

@@ -2,7 +2,7 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import useInputs from '../../../hooks/useInputs';
+import type { InputsType } from '../../../hooks/useValidatedInputs';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 
 import { isNumber } from '../../../utils/validation';
@@ -10,13 +10,10 @@ import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardNumberInputProps {
-  cardNumbers: string[];
-  isValid: boolean[];
-  handleCardNumbers: (cardNumbers: string[]) => void;
+  cardNumbers: InputsType;
 }
 
-function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumberInputProps) {
-  const { values: cardNumbersInput, isClicked, onChange: onCardNumbersInputChange } = useInputs(cardNumbers);
+function CardNumberInput({ cardNumbers }: CardNumberInputProps) {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,14 +22,18 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
       return;
     }
 
-    onCardNumbersInputChange(e, inputIndex);
-    handleCardNumbers(cardNumbers.map((number, index) => (index === inputIndex ? e.target.value : number)));
+    cardNumbers.handleValues(
+      cardNumbers.values.map((number, index) => (index === inputIndex ? e.target.value : number)),
+      inputIndex,
+    );
 
     moveToNextInput(e.target.value, inputIndex);
   };
 
   const errorMessage =
-    isClicked.some(Boolean) && !isValid.every(Boolean) && JSON.stringify(isClicked) !== JSON.stringify(isValid)
+    cardNumbers.isClicked.some(Boolean) &&
+    !cardNumbers.isValid.every(Boolean) &&
+    JSON.stringify(cardNumbers.isClicked) !== JSON.stringify(cardNumbers.isValid)
       ? ERROR_MESSAGE.INVALID_CARD_NUMBER
       : '';
 
@@ -47,9 +48,9 @@ function CardNumberInput({ cardNumbers, isValid, handleCardNumbers }: CardNumber
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
-            value={cardNumbersInput[index]}
+            value={cardNumbers.values[index]}
             onChange={handleCardNumberChange(index)}
-            isValid={isClicked[index] ? isValid[index] : true}
+            isValid={cardNumbers.isClicked[index] ? cardNumbers.isValid[index] : true}
             autoFocus={index === 0}
           />
         ))}

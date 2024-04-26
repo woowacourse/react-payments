@@ -2,26 +2,20 @@ import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import useInput from '../../../hooks/useInput';
-
 import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
+import { InputType } from '../../../hooks/useValidatedInput';
 
 interface CardOwnerInputProps {
-  owner: string;
-  isValid: boolean;
-  handleOwner: (owner: string) => void;
+  owner: InputType;
 }
 
-function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
-  const { value: ownerInput, isClicked, onChange: onOwnerInputChange } = useInput(owner);
-
+function CardOwnerInput({ owner }: CardOwnerInputProps) {
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onOwnerInputChange(e);
-    handleOwner(e.target.value.toUpperCase());
+    owner.handleValue(e.target.value.toUpperCase());
   };
 
-  const errorMessage = isClicked && !isValid ? ERROR_MESSAGE.INVALID_CARD_OWNER : '';
+  const errorMessage = owner.isClicked && !owner.isValid ? ERROR_MESSAGE.INVALID_CARD_OWNER : '';
 
   return (
     <div>
@@ -31,9 +25,9 @@ function CardOwnerInput({ owner, isValid, handleOwner }: CardOwnerInputProps) {
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="STEVEN KING"
-          value={ownerInput}
+          value={owner.value}
           onChange={handleOwnerChange}
-          isValid={isClicked ? isValid : true}
+          isValid={owner.isClicked ? owner.isValid : true}
           autoFocus
         />
       </InputField>
