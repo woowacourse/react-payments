@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import CreditCardBrandLogo from "./CreditCardBrandLogo";
 import CreditCardInfo from "./CreditCardInfo";
-import { CreditCardProps } from "../../@types/CreditCard";
-import CARD_COLOR from "../../constants/cardColor";
+import { CreditCardProps } from "../../../@types/CreditCard";
+import CARD_COLOR from "../../../constants/cardColor";
 
-const CreditCard = ({
+const CreditCardFront = ({
   creditCardNumber,
   expirationPeriod,
   ownerName,
@@ -30,7 +30,7 @@ const CreditCard = ({
   );
 };
 
-export default CreditCard;
+export default CreditCardFront;
 
 const CreditCardContainer = styled.div<{ cardColor: string }>`
   width: 212px;

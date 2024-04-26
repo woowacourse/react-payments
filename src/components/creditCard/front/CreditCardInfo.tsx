@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { CreditCardProps, CreditCardNumber } from "../../@types/CreditCard";
-import replaceToMaskingNumber from "../../utils/replaceToMaskingNumber";
+import { CreditCardProps, CreditCardNumber } from "../../../@types/CreditCard";
+import replaceToMaskingNumber from "../../../utils/replaceToMaskingNumber";
 import { useMemo } from "react";
 
 const maskLastEightDigits = (creditCardNumber: CreditCardNumber) => {
