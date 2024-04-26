@@ -14,6 +14,10 @@ export const Default: Story = {
   args: {
     name: 'select-box',
     placeholder: '선택해주세요',
-    options: ['value1', 'value2', 'value3'],
+    options: [
+      ['value1', '1'],
+      ['value2', '2'],
+      ['value3', '3'],
+    ],
   },
 };
