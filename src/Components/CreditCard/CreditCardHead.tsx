@@ -27,7 +27,9 @@ const isVisa = (cardNumber?: string) => {
 };
 
 const isMaster = (cardNumber?: string) => {
-  const MASTER_REG_PATTERN = /(51|52|53|54)/;
+  const MASTER_CARD_START_NUMBER_LIST = [51, 52, 53, 54];
+  const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}`);
+  console.log(MASTER_REG_PATTERN);
   return cardNumber && MASTER_REG_PATTERN.test(cardNumber);
 };
 
