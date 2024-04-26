@@ -1,60 +1,39 @@
-import { useState } from 'react';
-
+import styled from 'styled-components';
 import Label from '../common/Label';
 import Input from '../common/Input';
-import { CARD_META_INFO, INPUT_RULES } from '../../constants/card-app';
 
-import styled from 'styled-components';
-import { VALIDATION_MESSAGES } from '../../constants/card-app';
+import { CARD_META_INFO, INPUT_RULES, VALIDATION_MESSAGES } from '../../constants/card-app';
+import { errorCaption } from '../../utils/errorCaption';
 
 interface CardNumberInputProps {
   cardNumbers: string[];
-  errorCaption: (text: string) => JSX.Element;
-  onCardNumberChange: (index: number, value: string) => void;
+  cardNumberErrors: boolean[];
+  onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 }
 
-const CardNumberInput = ({ cardNumbers, errorCaption, onCardNumberChange }: CardNumberInputProps) => {
-  const [inputErrors, setInputErrors] = useState<boolean[]>(
-    Array.from<boolean>({ length: cardNumbers.length }).fill(false)
-  );
-
-  const handleInputChange = (index: number, value: string) => {
-    const isNumericInput = /^(\d*)$/.test(value);
-    const isValidateCardNumber = value.length === 4;
-
-    setInputErrors((prevErrors) => {
-      const newPrevErrors = [...prevErrors];
-      newPrevErrors[index] = !isNumericInput || !isValidateCardNumber;
-
-      return newPrevErrors;
-    });
-
-    if (!isNumericInput) return;
-
-    onCardNumberChange(index, value);
-  };
-
-  const hasErrorInput = inputErrors.some((error) => error);
+const CardNumberInput = ({ cardNumbers, cardNumberErrors, onCardNumberChange }: CardNumberInputProps) => {
+  const hasError = cardNumberErrors.some((error) => error);
 
   return (
     <InputField>
-      <Label htmlFor='card-number'>{CARD_META_INFO.cardNumbers.label}</Label>
+      <Label htmlFor='card-number-0'>{CARD_META_INFO.cardNumbers.label}</Label>
       <InputContainer>
         {Array.from({ length: cardNumbers.length }, (_, index) => (
           <Input
             key={`input-${index}`}
-            id={index === 0 ? 'card-number' : ''}
+            id={`card-number-${index}`}
             type='text'
             placeholder='1234'
             value={cardNumbers[index]}
             maxLength={INPUT_RULES.maxCardNumberPartLength}
             size='small'
-            isError={inputErrors[index]}
-            onChange={(e) => handleInputChange(index, e.target.value)}
+            isError={cardNumberErrors[index]}
+            onChange={(e) => onCardNumberChange(e, index)}
+            autoFocus={index === 0}
           />
         ))}
       </InputContainer>
-      {hasErrorInput ? errorCaption(VALIDATION_MESSAGES.onlyNumbersAllowed) : errorCaption('')}
+      {hasError ? errorCaption(VALIDATION_MESSAGES.onlyNumbersAllowed) : errorCaption('')}
     </InputField>
   );
 };
