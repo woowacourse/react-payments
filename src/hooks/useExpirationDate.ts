@@ -32,6 +32,10 @@ const yearValidations: ValidationType[] = [
       !validate.isSatisfiedLength(MAX_LENGTH.expirationDate, state.length),
     errorMessage: `${MAX_LENGTH.expirationDate}자리 숫자를 입력해주세요.`,
   },
+  {
+    isError: (state: string) => !validate.isOverYear(Number(state)),
+    errorMessage: '유효기간이 만료된 카드입니다.',
+  },
 ];
 
 const useExpirationDate = () => {
