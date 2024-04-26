@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const useInput = <T>(defaultValue: T, condition: RegExp) => {
   const [value, setValue] = useState<T>(defaultValue);
