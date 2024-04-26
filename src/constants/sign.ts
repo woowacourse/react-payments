@@ -1,7 +1,7 @@
 const SIGN = {
   empty: "",
   slash: "/",
-  mask: "●",
+  dotMask: "●",
   doubleZero: "00",
 };
 

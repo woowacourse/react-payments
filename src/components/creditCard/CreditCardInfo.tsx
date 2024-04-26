@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { CreditCardNumber, CreditCardProps } from "../../@types/CreditCard";
-import replaceToMaskingNumber from "../../utils/replaceToMaskingNumber";
+import replaceToMaskingNumber from "../../utils/replaceToDot";
 
 const maskLastEightDigits = (creditCardNumber: CreditCardNumber) => {
   const lastEightIndex = [2, 3];
