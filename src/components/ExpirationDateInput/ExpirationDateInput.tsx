@@ -8,7 +8,6 @@ interface ExpirationDateInputProps {
   expirationDate: Record<string, { value: string; isError: boolean }>;
   errorMessage: string;
   changeExpirationDate: (event: ChangeEvent<HTMLInputElement>) => void;
-  // blurExpirationDate: (event: FocusEvent<HTMLInputElement>) => void;
   refs: {
     monthRef: RefObject<HTMLInputElement>;
     yearRef: RefObject<HTMLInputElement>;
