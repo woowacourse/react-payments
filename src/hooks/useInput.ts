@@ -19,8 +19,6 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
 
-      setValue(newValue);
-
       if (validateOnChange) {
         validateOnChange.map((func) => {
           const errorMessage = func(newValue);
@@ -29,6 +27,7 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
             setValidateMessage(errorMessage);
             return;
           }
+          setValue(newValue);
           setValidateMessage("");
           return;
         });
@@ -62,7 +61,6 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
 
   return {
     value,
-    setValue,
     onChange,
     onBlur,
     validateMessage,
