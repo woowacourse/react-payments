@@ -8,7 +8,7 @@ interface Option {
 }
 
 interface SelectProps {
-  label: string;
+  label?: string;
   value: string | null;
   onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   placeholder: string;
