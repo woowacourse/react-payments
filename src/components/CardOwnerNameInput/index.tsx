@@ -1,30 +1,29 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 import Label from '../common/Label';
 import Input from '../common/Input';
-import { CARD_META_INFO, INPUT_RULES } from '../../constants/card-app';
+import { CARD_META_INFO } from '../../constants/card-app';
 
 import { VALIDATION_MESSAGES } from '../../constants/card-app';
+import { errorCaption } from '../../utils/errorCaption';
 
 interface CardOwnerNameInputProps {
-  ownerName: string;
-  errorCaption: (errorText: string) => JSX.Element;
+  cardOwnerName: string;
+  cardOwnerNameError: boolean;
   onCardOwnerNameChange: (value: string) => void;
+  onPressEnter: (value: string) => void;
 }
 
-const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange }: CardOwnerNameInputProps) => {
-  const [isError, setIsError] = useState<boolean>(false);
-
-  const handleInputChange = (value: string) => {
-    const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
-    const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
-
-    setIsError(!isAlphabetInput || !isValidOwnerName);
-
-    if (!isAlphabetInput || !isValidOwnerName) return;
-
-    onCardOwnerNameChange(value.toUpperCase());
+const CardOwnerNameInput = ({
+  cardOwnerName,
+  cardOwnerNameError,
+  onCardOwnerNameChange,
+  onPressEnter,
+}: CardOwnerNameInputProps) => {
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>, value: string) => {
+    if (e.key === 'Enter') {
+      onPressEnter(value);
+    }
   };
 
   return (
@@ -34,19 +33,17 @@ const CardOwnerNameInput = ({ ownerName, errorCaption, onCardOwnerNameChange }: 
         id='card-owner'
         type='text'
         placeholder='JOHN DOE'
-        value={ownerName}
+        value={cardOwnerName}
         size='large'
-        isError={isError}
-        onChange={(e) => {
-          handleInputChange(e.target.value);
-        }}
+        isError={cardOwnerNameError}
+        onChange={(e) => onCardOwnerNameChange(e.target.value)}
+        onKeyDown={(e) => handleEnter(e, e.currentTarget.value)}
+        autoFocus
       />
-      {isError ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName) : errorCaption('')}
+      {cardOwnerNameError ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName) : errorCaption('')}
     </InputField>
   );
 };
-
-export default CardOwnerNameInput;
 
 const InputField = styled.section`
   height: 77px;
@@ -59,3 +56,5 @@ const InputField = styled.section`
   margin-top: 16px;
   margin-bottom: 16px;
 `;
+
+export default CardOwnerNameInput;
