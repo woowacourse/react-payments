@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CreditCardBack from ".";
+import Button from ".";
 
 const meta = {
-  title: "Payment/CreditCardBack",
-  component: CreditCardBack,
+  title: "Payment/Button",
+  component: Button,
   parameters: {
     layout: "centered",
     docs: {
@@ -13,11 +13,17 @@ const meta = {
     },
   },
   argTypes: {
-    cvcNumber: {
-      description: "카드 cvc 번호",
+    content: {
+      description: "버튼 텍스트",
+    },
+    onClick: {
+      description: "버튼 클릭 시 실행될 콜백",
+    },
+    styles: {
+      description: "버튼의 추가 스타일",
     },
   },
-} satisfies Meta<typeof CreditCardBack>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 
@@ -27,12 +33,13 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: "신용카드",
+        story: "공통 버튼",
       },
     },
   },
 
   args: {
-    cvcNumber: "462",
+    content: "입력",
+    onClick: () => {},
   },
 };

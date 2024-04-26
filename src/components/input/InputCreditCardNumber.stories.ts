@@ -19,6 +19,9 @@ const meta = {
     handleChange: {
       description: "카드 번호 핸들러",
     },
+    handleBlur: {
+      description: "카드 번호 블러 핸들러",
+    },
     inputError: {
       description: "에러 발생 여부",
     },
@@ -46,6 +49,7 @@ export const Default: Story = {
       fourthValue: "",
     },
     handleChange: () => {},
+    handleBlur: () => {},
     inputError: false,
   },
 };

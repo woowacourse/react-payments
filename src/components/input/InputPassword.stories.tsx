@@ -21,6 +21,9 @@ const meta = {
     handleChange: {
       description: "패스워드 핸들러",
     },
+    handleBlur: {
+      description: "패스워드 블러 핸들러",
+    },
     inputError: {
       description: "에러 발생 여부",
     },
@@ -43,6 +46,7 @@ export const Default: Story = {
   args: {
     inputValue: "",
     handleChange: () => {},
+    handleBlur: () => {},
     inputError: false,
   },
 };

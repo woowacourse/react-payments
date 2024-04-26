@@ -21,6 +21,9 @@ const meta = {
     handleChange: {
       description: "CVC 번호 핸들러",
     },
+    handleBlur: {
+      description: "CVC 번호 블러 핸들러",
+    },
     inputError: {
       description: "에러 발생 여부",
     },
@@ -43,6 +46,7 @@ export const Default: Story = {
   args: {
     inputValue: "",
     handleChange: () => {},
+    handleBlur: () => {},
     inputError: false,
   },
 };
