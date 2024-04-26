@@ -2,7 +2,7 @@ name: 'React-payments deployment'
 
 on:
   push:
-    branches: ['step1']
+    branches: ['step2']
 
   workflow_dispatch:
 
