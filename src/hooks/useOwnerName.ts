@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react';
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 import filterEnglish from '../utils/filterEnglish';
 import normalizeSpaces from '../utils/normalizeSpaces';
-import { MIN_NAME_LENGTH } from '../constants/input';
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState<string>('');

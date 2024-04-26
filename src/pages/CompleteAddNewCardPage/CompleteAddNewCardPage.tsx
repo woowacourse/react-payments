@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import checkCircle from '../../assets/image/checkCircle.svg';
 import Button from '../../components/common/Button/Button';
 import { COMPANY_LIST, CardCompany } from '../../types/cardCompany';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FORM_ITEM_NAME_LIST, FormItem } from '../constants/addNewCardFormItemNameList';
+import { FormItem } from '../constants/addNewCardFormItemNameList';
 
 // 쇼케이스에 보여질 것인지 아닌지를 다루는 훅
 
