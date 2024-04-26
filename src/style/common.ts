@@ -1,6 +1,5 @@
 import { css, createGlobalStyle } from "styled-components";
 
-// 전역 스타일로 @keyframes 정의
 export const GlobalStyles = createGlobalStyle`
   @keyframes fadeInAnimation {
     from {

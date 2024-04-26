@@ -8,8 +8,6 @@ import useInputs from "@/hooks/useInputs";
 import useInputRefs from "@/hooks/useInputRefs";
 import { sliceInvalidValueWithRegex, sliceOverMaxLength } from "@/utils/view";
 import { REGEX } from "@/constants/regex";
-// import useShowError from "@/hooks/useShowError";
-
 export type CardNumberInputType = {
   cardNumbers1: string;
   cardNumbers2: string;
@@ -25,7 +23,6 @@ type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
   const { onChange, errors } = cardNumbersState;
-  // const { showErrors, onBlurShowErrors, onFocusHideErrors } = useShowError();
 
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
@@ -39,7 +36,6 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_NUMBERS}
       />
       <InputField
-        // showErrors={showErrors}
         label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
         errorMessages={Object.values(errors)}
       >
@@ -60,8 +56,6 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
                 onFocusNextInput(e, index);
               }}
               isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
-              // onBlur={onBlurShowErrors}
-              // onFocus={onFocusHideErrors}
             />
           ))}
       </InputField>

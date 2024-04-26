@@ -6,7 +6,6 @@ interface Props {
   errorMessages: (string | null)[];
   children: ReactNode;
   label?: string;
-  // showErrors?: boolean;
 }
 
 const InputField = ({ label, errorMessages, children }: Props) => {
