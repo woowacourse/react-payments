@@ -4,6 +4,7 @@ interface UseFlipCardProps {
   frontDeps: Array<React.ComponentState>;
   backDeps: Array<React.ComponentState>;
 }
+
 export default function useFlipCard({ frontDeps, backDeps }: UseFlipCardProps) {
   const [isFrontSide, setFrontSide] = useState(true);
 
@@ -11,7 +12,6 @@ export default function useFlipCard({ frontDeps, backDeps }: UseFlipCardProps) {
     setFrontSide((prev) => !prev);
   };
 
-  // TODO: JSON.stringify 써도 되는지 물어보기
   useEffect(() => {
     setFrontSide(false);
   }, [JSON.stringify(backDeps)]);
