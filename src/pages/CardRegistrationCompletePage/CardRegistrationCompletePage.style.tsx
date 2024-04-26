@@ -34,4 +34,5 @@ export const ConfirmButton = styled.button`
   color: #ffffff;
   font-size: ${({ theme }) => theme.fontSize.md};
   text-align: center;
+  cursor: pointer;
 `;

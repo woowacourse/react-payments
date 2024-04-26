@@ -68,7 +68,7 @@ const CardRegistrationPage = () => {
 
     return (
       <Link to={submitUrl}>
-        <S.SubmitButton>확인</S.SubmitButton>
+        <S.SubmitButton type="button">확인</S.SubmitButton>
       </Link>
     );
   };

@@ -15,6 +15,7 @@ export const SelectedCardCompanyBox = styled.div<{ $isDefault: boolean }>`
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.color.primary.light};
   font-size: ${({ theme }) => theme.fontSize.base};
+  cursor: pointer;
 
   p {
     color: ${(props) =>
@@ -36,6 +37,7 @@ export const CardCompanyOptionList = styled.ul`
 export const CardCompanyOption = styled.li`
   width: 100%;
   height: 32px;
+  cursor: pointer;
 
   &:hover {
     background: #eeeeee;
