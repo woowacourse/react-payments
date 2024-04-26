@@ -27,6 +27,7 @@ export default function CardPasswordHead({
       >
         <TextInputContainer>
           <TextInput
+            type='password'
             placeholder={PAYMENTS_INPUT_MESSAGE.cardPasswordHeadPlaceHolder}
             onChange={onChange}
             maxLength={BOUND.cardPasswordHeadUpper}

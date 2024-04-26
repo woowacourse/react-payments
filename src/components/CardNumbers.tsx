@@ -25,6 +25,7 @@ export default function CardNumbers({ useCardNumbers }: props) {
           {useCardNumbers.cardNumberOnChanges.map((onChange, idx) => (
             <TextInput
               key={idx}
+              type={idx < 2 ? 'text' : 'password'}
               placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
               onChange={onChange}
               borderColor={
