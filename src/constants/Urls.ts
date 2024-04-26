@@ -1,5 +1,5 @@
 const URLS = {
-  base: '/react-payments',
+  base: '/react-payments/',
   register: '',
   success: 'success',
   error: 'error',
