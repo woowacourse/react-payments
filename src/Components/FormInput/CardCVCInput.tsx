@@ -9,6 +9,8 @@ import { cardCVCValidator } from "./validator";
 import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
 
+import { FormRenderOrderContext } from "../../routes/Payments";
+
 interface InputInfoList {
   name: keyof CardCVC;
   placeholder: string;
@@ -20,6 +22,7 @@ const CardCVCInput = memo(() => {
   const setCardHeadOrTail = useContextWrapper(CardUIHeadOrTailContext)[1];
   const inputRef = useContextWrapper(CardCVCInputContext)[0];
   const nextRef = useContextWrapper(CardPasswordInputContext)[0];
+  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
   const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "CVC" }];
 
@@ -62,9 +65,12 @@ const CardCVCInput = memo(() => {
               name,
               setData,
               setError,
+              setRenderOrder,
               validator: cardCVCValidator,
               maxLength: 3,
               nextRef,
+              isLastInput: index === InputInfoList.length - 1,
+              step: 4,
             })
           }
           isError={!!cardCVCError[name]?.isError}

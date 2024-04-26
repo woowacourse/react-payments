@@ -5,14 +5,17 @@ interface ChangeProps<T, U> {
   name: keyof T;
   setData: React.Dispatch<SetStateAction<T>>;
   setError: React.Dispatch<SetStateAction<U>>;
+  setRenderOrder: React.Dispatch<SetStateAction<FormRenderOrder>>;
   validator: ValidatorType;
   maxLength?: number;
   nextRef?: React.MutableRefObject<HTMLInputElement | null>;
+  isLastInput?: boolean;
+  step?: number;
 }
 
 const onInputChange = <T, U>(
   e: React.ChangeEvent<HTMLInputElement>,
-  { name, setData, setError, validator, maxLength, nextRef }: ChangeProps<T, U>
+  { name, setData, setError, validator, maxLength, setRenderOrder, nextRef, isLastInput, step }: ChangeProps<T, U>
 ) => {
   const {
     isValid,
@@ -41,6 +44,14 @@ const onInputChange = <T, U>(
 
   if (maxLength && value?.length === maxLength) {
     nextRef?.current?.focus();
+    if (isLastInput) {
+      setRenderOrder((prev) => {
+        if (prev.index === step && isLastInput) {
+          return { ...prev, index: prev.index + 1 };
+        }
+        return prev;
+      });
+    }
   }
 };
 

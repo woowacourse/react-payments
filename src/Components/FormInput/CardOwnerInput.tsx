@@ -9,6 +9,8 @@ import onInputChange from "./onInputChange";
 import FormInputCompound from "./FormInputCompound";
 import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
 
+import { FormRenderOrderContext } from "../../routes/Payments";
+
 interface InputInfoList {
   name: keyof CardOwnerInfo;
   placeholder: string;
@@ -20,6 +22,7 @@ const CardOwnerInput = memo(() => {
   const [ownerError, setError] = useContextWrapper(CardOwnerInfoErrorContext);
   const ownerInputRef = useContextWrapper(CardOwnerInputContext)[0];
   const nextRef = useContextWrapper(CardCVCInputContext)[0];
+  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
 
   const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO", nextRef }];
 
@@ -29,15 +32,18 @@ const CardOwnerInput = memo(() => {
         <FormInputCompound
           id={`id-owner-${name}`}
           key={index}
-          onInputChange={(e) =>
+          onInputChange={(e) => {
             onInputChange<CardOwnerInfo, CardOwnerInfoError>(e, {
               name,
               setData,
               setError,
+              setRenderOrder,
               validator: cardOwnerValidator,
               nextRef,
-            })
-          }
+              isLastInput: index === InputInfoList.length - 1,
+              step: 3,
+            });
+          }}
           isError={!!ownerError[name]?.isError}
           sizePreset="large"
           maxLength={15}

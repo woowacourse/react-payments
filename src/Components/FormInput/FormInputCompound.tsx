@@ -8,6 +8,7 @@ interface InputProps<T> extends React.InputHTMLAttributes<HTMLInputElement> {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>, name?: keyof T) => void;
   isError?: boolean;
   nextRef?: React.MutableRefObject<HTMLInputElement | null>;
+  maxLength: number;
 }
 
 const ENTER_KEY_CODE = 13;
