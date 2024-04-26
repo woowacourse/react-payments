@@ -14,7 +14,7 @@ const PasswordForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({
     0: false,
@@ -30,14 +30,15 @@ const PasswordForm = ({
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
 
-    setAllInputValid(allValid);
     setAllFormsValid(allValid);
 
     if (allValid) {
       setIsFormFilledOnce(true);
     }
 
-    setErrorMessage(allValid ? "" : "비밀번호는 숫자 2자리입니다.");
+    setErrorMessage(
+      allValid || !isGotInputOnce ? "" : "비밀번호는 숫자 2자리입니다."
+    );
   }, [inputValidities]);
 
   const validatePassword = (passwordInput: string) => {
@@ -59,6 +60,7 @@ const PasswordForm = ({
       }
       validationRule={(value) => value.trim() === "" || validatePassword(value)}
       errorMessageText=""
+      onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
     />
   ));
 

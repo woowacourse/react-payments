@@ -15,7 +15,7 @@ const UserNameForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({
     0: false,
@@ -31,14 +31,15 @@ const UserNameForm = ({
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
 
-    setAllInputValid(allValid);
     setAllFormsValid(allValid);
 
     if (allValid) {
       setIsFormFilledOnce(true);
     }
 
-    setErrorMessage(allValid ? "" : USERNAME_FORM.errorMessage.notAllValid);
+    setErrorMessage(
+      allValid || !isGotInputOnce ? "" : USERNAME_FORM.errorMessage.notAllValid
+    );
   }, [inputValidities]);
 
   const validateName = (nameInput: string) => {
@@ -60,6 +61,7 @@ const UserNameForm = ({
       }
       validationRule={(value) => value.trim() === "" || validateName(value)}
       errorMessageText=""
+      onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
     />
   ));
 

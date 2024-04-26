@@ -20,8 +20,8 @@ const CardNumberForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
+  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
   const [focusedInputIndex, setFocusedInputIndex] = useState("0");
-  const [isAllInputValid, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState<InputValidities>(
     Array.from({ length: inputCount }, () => false).reduce<InputValidities>(
@@ -59,13 +59,14 @@ const CardNumberForm = ({
       (isValid) => isValid
     );
 
-    setAllInputValid(isAllValid);
     setAllFormsValid(isAllValid);
 
     focusToNextInput();
 
     setErrorMessage(
-      isAllValid ? "" : CARD_NUMBER_FORM.errorMessage.notAllValid
+      isAllValid || !isGotInputOnce
+        ? ""
+        : CARD_NUMBER_FORM.errorMessage.fourDigits
     );
 
     if (isAllValid) {
@@ -97,10 +98,11 @@ const CardNumberForm = ({
         updateInputValidity(index.toString(), isValid)
       }
       validationRule={(value) =>
-        value.trim() === "" || FORM_REGEXP.fourDigitNumber.test(value)
+        value === "" || FORM_REGEXP.fourDigitNumber.test(value)
       }
       errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
       setFocusedInputIndex={setFocusedInputIndex}
+      onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
     />
   ));
 

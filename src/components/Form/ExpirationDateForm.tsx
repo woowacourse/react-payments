@@ -16,8 +16,8 @@ const ExpirationDateForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
+  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
   const [focusedInputIndex, setFocusedInputIndex] = useState("0");
-  const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
@@ -64,13 +64,14 @@ const ExpirationDateForm = ({
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     const allFilled = Object.keys(inputValidities).length === inputCount;
 
-    setAllInputValid(allValid && allFilled);
     setAllFormsValid(allValid && allFilled);
 
     focusToNextInput();
 
     setErrorMessage(
-      allValid && allFilled ? "" : EXPIRATION_DATE_FORM.errorMessage.notAllValid
+      (allValid && allFilled) || !isGotInputOnce
+        ? ""
+        : EXPIRATION_DATE_FORM.errorMessage.notAllValid
     );
 
     if (allValid && allFilled) {
@@ -100,6 +101,7 @@ const ExpirationDateForm = ({
           : EXPIRATION_DATE_FORM.errorMessage.invalidYear
       }
       setFocusedInputIndex={setFocusedInputIndex}
+      onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
     />
   ));
 

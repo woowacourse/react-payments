@@ -15,7 +15,7 @@ const CVCNumberForm = ({
   setIsFrontCardPreview,
   setCVCNumber,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({ 0: false });
 
@@ -32,14 +32,17 @@ const CVCNumberForm = ({
   };
 
   useEffect(() => {
-    const allValid = Object.values(inputValidities).every((isValid) => isValid);
+    const isAllValid = Object.values(inputValidities).every(
+      (isValid) => isValid
+    );
 
-    setAllInputValid(allValid);
-    setAllFormsValid(allValid);
+    setAllFormsValid(isAllValid);
 
-    setErrorMessage(allValid ? "" : "CVC 번호는 3자리 숫자입니다.");
+    setErrorMessage(
+      isAllValid || !isGotInputOnce ? "" : "CVC 번호는 3자리 숫자입니다."
+    );
 
-    if (allValid) {
+    if (isAllValid) {
       setIsFormFilledOnce(true);
     }
   }, [inputValidities]);
@@ -60,9 +63,10 @@ const CVCNumberForm = ({
         value.trim() === "" || validateCVCNumber(value)
       }
       errorMessageText={""}
-      onFocus={() =>
-        setIsFrontCardPreview ? setIsFrontCardPreview(false) : () => {}
-      }
+      onFocus={() => {
+        setIsFrontCardPreview ? setIsFrontCardPreview(false) : () => {};
+        setIsGotInputOnce ? setIsGotInputOnce(true) : () => {};
+      }}
       onBlur={() =>
         setIsFrontCardPreview ? setIsFrontCardPreview(true) : () => {}
       }
