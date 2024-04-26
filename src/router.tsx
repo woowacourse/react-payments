@@ -3,6 +3,7 @@ import App from './App';
 import CardRegisterForm from './pages/CardRegisterForm/CardRegisterForm';
 import SuccessRegister from './pages/SuccessRegister/SuccessRegister';
 import URLS from './constants/Urls';
+import Fallback from './pages/fallback/Fallback';
 
 const router = createBrowserRouter(
   [
@@ -17,6 +18,10 @@ const router = createBrowserRouter(
         {
           path: URLS.success,
           element: <SuccessRegister />,
+        },
+        {
+          path: '*',
+          element: <Fallback />,
         },
       ],
     },
