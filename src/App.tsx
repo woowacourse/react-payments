@@ -7,7 +7,6 @@ import AppLayout from './components/layout/AppLayout';
 import GlobalStyle from './styles/global';
 import './App.css';
 import CardSubmitPage from './pages/CardSubmitPage';
-import { URL } from './constants/card-app';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter(
