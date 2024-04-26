@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
 import checkError from '../domains/checkError';
+import validateAndCheckError from '../domains/validateAndCheckError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -41,15 +41,31 @@ const CVCFormSection = ({
     errorText: ERROR_MESSAGE.onlyNumber,
   });
 
-  useEffect(() => {
-    resetErrors();
-    if (!inputState[0].hasFocus)
-      validateInputAndSetErrorMessage({
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'cvc',
         errorText: ERROR_MESSAGE.cvcOutOfRange,
       });
+    }
+  };
+
+  useEffect(() => {
+    resetErrors();
+    if (!inputState[0].hasFocus) {
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'cvc',
+        errorText: ERROR_MESSAGE.cvcOutOfRange,
+      });
+    }
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {
@@ -78,6 +94,7 @@ const CVCFormSection = ({
             handleValueChange={(e) => handleValueChange(e, 0)}
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
+            onEnter={(e) => handleKeyPress(e)}
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>

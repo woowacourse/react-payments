@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import validateAndCheckError from '../domains/validateAndCheckError';
 import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
@@ -47,13 +47,28 @@ const NameFormSection = ({
     betweenMaxLength: true,
   });
 
-  useEffect(() => {
-    resetErrors();
-    if (!inputState[0].hasFocus)
-      validateInputAndSetErrorMessage({
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'name',
+        errorText: ERROR_MESSAGE.nameOutOfRange,
+      });
+    }
+  };
+
+  useEffect(() => {
+    resetErrors();
+    if (!inputState[0].hasFocus)
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'name',
         errorText: ERROR_MESSAGE.nameOutOfRange,
       });
   }, [inputState[0].hasFocus]);
@@ -84,6 +99,7 @@ const NameFormSection = ({
             handleValueChange={(e) => handleValueChange(e, 0)}
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
+            onEnter={(e) => handleKeyPress(e)}
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import validateAndCheckError from '../domains/validateAndCheckError';
 import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
@@ -41,13 +41,28 @@ const PasswordFormSection = ({
     errorText: ERROR_MESSAGE.onlyNumber,
   });
 
-  useEffect(() => {
-    resetErrors();
-    if (!inputState[0].hasFocus)
-      validateInputAndSetErrorMessage({
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'password',
+        errorText: ERROR_MESSAGE.passwordOutOfRange,
+      });
+    }
+  };
+
+  useEffect(() => {
+    resetErrors();
+    if (!inputState[0].hasFocus)
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'password',
         errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
   }, [inputState[0].hasFocus]);
@@ -80,6 +95,7 @@ const PasswordFormSection = ({
             handleValueChange={(e) => handleValueChange(e, 0)}
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
+            onEnter={(e) => handleKeyPress(e)}
             type="password"
           />
         </InputFieldContainer>

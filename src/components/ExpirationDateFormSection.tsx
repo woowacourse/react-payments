@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import validateAndCheckError from '../domains/validateAndCheckError';
 import { validateExpired, formatMonth } from '../utils/validateExpirationDate';
-import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -59,6 +58,20 @@ const ExpirationDateFormSection = ({
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'expirationDate',
+        errorText: ERROR_MESSAGE.expiryFormat,
+        elseValidator: () => validateExpired({ inputState, setErrorMessage }),
+      });
+    }
+  };
+
   useEffect(() => {
     formatMonth({
       inputState,
@@ -76,16 +89,14 @@ const ExpirationDateFormSection = ({
   useEffect(() => {
     resetErrors();
     if (hasNoAllFocus) {
-      validateInputAndSetErrorMessage({
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'expirationDate',
         errorText: ERROR_MESSAGE.expiryFormat,
         elseValidator: () => validateExpired({ inputState, setErrorMessage }),
-      });
-      changeIsValid({
-        state: 'expirationDate',
-        isValid: checkError(inputState),
       });
     }
   }, [hasNoAllFocus]);
@@ -111,6 +122,7 @@ const ExpirationDateFormSection = ({
               }}
               handleOnFocus={() => setFocus(index)}
               handleOnBlur={() => setBlur(index)}
+              onEnter={(e) => handleKeyPress(e)}
               ref={inputRefs[index]}
             />
           ))}

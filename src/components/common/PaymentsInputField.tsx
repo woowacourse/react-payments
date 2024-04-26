@@ -13,6 +13,7 @@ const PaymentsInputField = forwardRef<
     handleValueChange,
     handleOnBlur,
     handleOnFocus,
+    onEnter,
     className,
     width,
     type,
@@ -20,6 +21,7 @@ const PaymentsInputField = forwardRef<
 
   return (
     <Input
+      onKeyDown={onEnter}
       className={className}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}

@@ -9,6 +9,7 @@ interface PaymentsInputFieldProps {
   handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   ref?: React.RefObject<HTMLInputElement>[];
 }
 
