@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import Validator from "../utils/Validator";
-import { CreditCardSpecificValue } from "../@types/CreditCard";
+import { CreditCardAllValues, CreditCardSpecificValue } from "../@types/CreditCard";
 
 const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);
   const [isError, setIsError] = useState<boolean>(false);
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
-  useEffect(() => setIsComplete(Validator.inputCreditCardIsComplete(inputValue)), [inputValue]);
+  useEffect(() => {
+    setIsComplete(Validator.inputCreditCardIsComplete(inputValue));
+  }, [inputValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
@@ -21,6 +23,9 @@ const useInput = <T extends CreditCardSpecificValue>(initialValue: T) => {
       ...prevState,
       [name]: value,
     }));
+
+    if (Validator.inputIsFilled(value.length, name as keyof CreditCardAllValues))
+      (e.target.nextSibling as HTMLElement)?.focus();
 
     setIsError(false);
   };

@@ -21,6 +21,7 @@ const InputOwnerName = ({ inputValue, handleChange, inputError }: InputOwnerName
         id="ownerName"
         name={CARD_INPUTBOX_NAME.owner.name}
         isError={inputError}
+        autoFocus
       />
     </InputContainer>
   );

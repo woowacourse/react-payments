@@ -53,6 +53,7 @@ const InputCreditCardNumber = ({
             id={`creditCardNumber${idx + 1}`}
             name={data.name}
             isError={inputError}
+            autoFocus={idx === 0}
           />
         ))}
       </InputWrapper>

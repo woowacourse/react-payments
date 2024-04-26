@@ -22,6 +22,7 @@ const InputPassword = ({ inputValue, handleChange, inputError }: InputCvcProps) 
         id="password"
         name={CARD_INPUTBOX_NAME.authentication.password}
         isError={inputError}
+        autoFocus
       />
     </InputContainer>
   );

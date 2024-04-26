@@ -25,6 +25,7 @@ const InputCvc = ({ inputValue, handleChange, inputError, onFocus, onBlur }: Inp
         isError={inputError}
         onFocus={onFocus}
         onBlur={onBlur}
+        autoFocus
       />
     </InputContainer>
   );

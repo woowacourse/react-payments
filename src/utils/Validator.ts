@@ -1,4 +1,4 @@
-import { CreditCardSpecificValue } from "./../@types/CreditCard";
+import { CreditCardAllValues, CreditCardSpecificValue } from "./../@types/CreditCard";
 import SIGN from "../constants/sign";
 import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
 import VALIDATE_STATUS, { ValidateStatus } from "../constants/validateStatus";
@@ -104,6 +104,10 @@ const Validator = {
     return Object.entries(value).every(([key, val]) => {
       return CARD_INPUT_LENGTH[key as keyof CreditCardSpecificValue] === val.length;
     });
+  },
+
+  inputIsFilled(inputLength: number, name: keyof CreditCardAllValues) {
+    return CARD_INPUT_LENGTH[name] === inputLength;
   },
 };
 

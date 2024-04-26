@@ -9,6 +9,7 @@ interface InputBoxProps {
   id?: string;
   name?: string;
   type?: string;
+  autoFocus?: boolean;
   onFocus?: () => void;
   onBlur?: () => void;
 }

@@ -45,6 +45,7 @@ const InputExpirationPeriod = ({
             id={`expirationDate${idx + 1}`}
             name={data.name}
             isError={inputError}
+            autoFocus={idx === 0}
           />
         ))}
       </InputWrapper>
