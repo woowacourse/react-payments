@@ -1,7 +1,8 @@
 import { CardIssuer, isCardIssuer } from "../constants/cardIssuers";
+import { useEffect, useState } from "react";
 
 import { CardIssuerSelectProps } from "../components/payment/CardEnrollForm/CardIssuerSelect";
-import { useState } from "react";
+import useBoolean from "./common/useBoolean";
 
 const validateCardIssuerOnBlur = (inputValue: string) => {
   if (inputValue === "") {
@@ -14,12 +15,19 @@ export interface CardIssuerErrorState {
   errorMessage: string;
 }
 
-const useCardIssuer = (): CardIssuerSelectProps => {
+interface UseCardIssuerReturnType {
+  isDone: boolean;
+  cardIssuerSelectProps: CardIssuerSelectProps;
+}
+
+const useCardIssuer = (): UseCardIssuerReturnType => {
   const [valueState, setValueState] = useState<CardIssuer | "">("");
   const [errorState, setErrorState] = useState<CardIssuerErrorState>({
     isError: false,
     errorMessage: "",
   });
+
+  const { flag: isDone, setTrue: updateDone } = useBoolean();
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (!isCardIssuer(event.target.value)) {
@@ -39,11 +47,23 @@ const useCardIssuer = (): CardIssuerSelectProps => {
     }
   };
 
+  useEffect(() => {
+    if (isDone) {
+      return;
+    }
+    if (valueState !== "") {
+      updateDone();
+    }
+  }, [valueState]);
+
   return {
-    valueState,
-    errorState,
-    onChange,
-    onBlur,
+    isDone,
+    cardIssuerSelectProps: {
+      valueState,
+      errorState,
+      onChange,
+      onBlur,
+    },
   };
 };
 

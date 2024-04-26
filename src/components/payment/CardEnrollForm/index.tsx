@@ -16,28 +16,43 @@ export default function CardEnrollForm() {
   const {
     cardInformation,
 
-    isCvcFocused,
+    isCardCvcInputFocused,
     isReadyForSubmit,
 
-    cardPassword,
-    cardCvc,
-    cardNumbers,
-    cardExpiration,
-    cardOwnerName,
-    cardIssuer,
+    dynamicInputUiFlag,
+
+    cardPasswordInputProps,
+    cardCvcInputProps,
+    cardOwnerNameInputProps,
+    cardExpirationDateInputProps,
+    cardIssuerSelectProps,
+    cardNumbersInputProps,
   } = useCardEnrollForm();
 
   return (
     <CardEnrollFormContainer>
-      <CardPreview cardInformation={cardInformation} isFlipped={isCvcFocused} />
+      <CardPreview
+        cardInformation={cardInformation}
+        isFlipped={isCardCvcInputFocused}
+      />
 
       <CardInformationContainer>
-        <CardPasswordInput {...cardPassword} />
-        <CardCvcInput {...cardCvc} />
-        <CardNumbersInput {...cardNumbers} />
-        <CardExpirationDateInput {...cardExpiration} />
-        <CardOwnerNameInput {...cardOwnerName} />
-        <CardIssuerSelect {...cardIssuer} />
+        {dynamicInputUiFlag.isCardCvcInputDone && (
+          <CardPasswordInput {...cardPasswordInputProps} />
+        )}
+        {dynamicInputUiFlag.isCardOwnerNameInputDone && (
+          <CardCvcInput {...cardCvcInputProps} />
+        )}
+        {dynamicInputUiFlag.isCardExpirationDateInputDone && (
+          <CardOwnerNameInput {...cardOwnerNameInputProps} />
+        )}
+        {dynamicInputUiFlag.isCardIssuerInputDone && (
+          <CardExpirationDateInput {...cardExpirationDateInputProps} />
+        )}
+        {dynamicInputUiFlag.isCardNumbersInputDone && (
+          <CardIssuerSelect {...cardIssuerSelectProps} />
+        )}
+        <CardNumbersInput {...cardNumbersInputProps} />
       </CardInformationContainer>
 
       {isReadyForSubmit && (

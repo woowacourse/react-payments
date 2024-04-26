@@ -33,29 +33,39 @@ export interface CardInformationErrorState {
 }
 
 const useCardEnrollForm = () => {
-  const cardNumbers = useCardNumbers();
-  const cardIssuer = useCardIssuer();
-  const cardExpiration = useCardExpiration();
-  const cardOwnerName = useCardOwnerName();
-  const { isFocused: isCvcFocused, ...cardCvc } = useCardCvc();
-  const cardPassword = useCardPassword();
+  const cardPasswordInputProps = useCardPassword();
+  const {
+    isFocused: isCardCvcInputFocused,
+    isDone: isCardCvcInputDone,
+    cardCvcInputProps,
+  } = useCardCvc();
+  const { isDone: isCardOwnerNameInputDone, cardOwnerNameInputProps } =
+    useCardOwnerName();
+  const {
+    isDone: isCardExpirationDateInputDone,
+    cardExpirationDateInputProps,
+  } = useCardExpiration();
+  const { isDone: isCardIssuerInputDone, cardIssuerSelectProps } =
+    useCardIssuer();
+  const { isDone: isCardNumbersInputDone, cardNumbersInputProps } =
+    useCardNumbers();
 
   const cardInformationValueState: CardInformationValueState = {
-    cardPassword: cardPassword.valueState,
-    cardCvc: cardCvc.valueState,
-    cardNumbers: cardNumbers.valueState,
-    cardExpiration: cardExpiration.valueState,
-    cardOwnerName: cardOwnerName.valueState,
-    cardIssuer: cardIssuer.valueState,
+    cardPassword: cardPasswordInputProps.valueState,
+    cardCvc: cardCvcInputProps.valueState,
+    cardOwnerName: cardOwnerNameInputProps.valueState,
+    cardExpiration: cardExpirationDateInputProps.valueState,
+    cardIssuer: cardIssuerSelectProps.valueState,
+    cardNumbers: cardNumbersInputProps.valueState,
   };
 
   const cardInformationErrorState: CardInformationErrorState = {
-    cardPassword: cardPassword.errorState,
-    cardCvc: cardCvc.errorState,
-    cardNumbers: cardNumbers.errorState,
-    cardExpiration: cardExpiration.errorState,
-    cardOwnerName: cardOwnerName.errorState,
-    cardIssuer: cardIssuer.errorState,
+    cardPassword: cardPasswordInputProps.errorState,
+    cardCvc: cardCvcInputProps.errorState,
+    cardOwnerName: cardOwnerNameInputProps.errorState,
+    cardExpiration: cardExpirationDateInputProps.errorState,
+    cardIssuer: cardIssuerSelectProps.errorState,
+    cardNumbers: cardNumbersInputProps.errorState,
   };
 
   const isReadyForSubmit = useIsReadyForSubmit([
@@ -64,17 +74,25 @@ const useCardEnrollForm = () => {
   ]);
 
   return {
-    isCvcFocused,
+    cardInformation: cardInformationValueState,
+
+    isCardCvcInputFocused,
     isReadyForSubmit,
 
-    cardPassword,
-    cardCvc,
-    cardNumbers,
-    cardExpiration,
-    cardOwnerName,
-    cardIssuer,
+    dynamicInputUiFlag: {
+      isCardNumbersInputDone,
+      isCardIssuerInputDone,
+      isCardExpirationDateInputDone,
+      isCardOwnerNameInputDone,
+      isCardCvcInputDone,
+    },
 
-    cardInformation: cardInformationValueState,
+    cardPasswordInputProps,
+    cardCvcInputProps,
+    cardOwnerNameInputProps,
+    cardExpirationDateInputProps,
+    cardIssuerSelectProps,
+    cardNumbersInputProps,
   };
 };
 

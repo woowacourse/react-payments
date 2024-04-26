@@ -16,17 +16,12 @@ export interface CardExpirationDateInputProps {
     event: React.ChangeEvent<HTMLInputElement>,
     targetKey: CardExpirationKeys
   ) => void;
-  onBlur: (
-    event: React.FocusEvent<HTMLInputElement>,
-    targetKey: CardExpirationKeys
-  ) => void;
 }
 
 export default function CardExpirationDateInput({
   valueState,
   errorState,
   onChange,
-  onBlur,
 }: CardExpirationDateInputProps) {
   return (
     <CardDateContainer>
@@ -43,7 +38,6 @@ export default function CardExpirationDateInput({
             value={valueState.month}
             isError={errorState.isError.month}
             onChange={(event) => onChange(event, "month")}
-            onBlur={(event) => onBlur(event, "month")}
           />
           <Input
             maxLength={2}
@@ -51,7 +45,6 @@ export default function CardExpirationDateInput({
             value={valueState.year}
             isError={errorState.isError.year}
             onChange={(event) => onChange(event, "year")}
-            onBlur={(event) => onBlur(event, "year")}
           />
         </InputContainer>
         <ErrorMessage message={errorState.errorMessage} />

@@ -20,8 +20,10 @@ export interface CardCvcErrorState {
   errorMessage: string;
 }
 
-interface UseCardCvcReturnType extends CardCvcInputProps {
+interface UseCardCvcReturnType {
   isFocused: boolean;
+  isDone: boolean;
+  cardCvcInputProps: CardCvcInputProps;
 }
 
 const useCardCvc = (): UseCardCvcReturnType => {
@@ -31,6 +33,8 @@ const useCardCvc = (): UseCardCvcReturnType => {
     isError: false,
     errorMessage: "",
   });
+
+  const { flag: isDone, setTrue: updateDone } = useBoolean();
 
   const {
     flag: isFocused,
@@ -56,6 +60,7 @@ const useCardCvc = (): UseCardCvcReturnType => {
     try {
       validateOnblur(event.target.value);
       setErrorState({ isError: false, errorMessage: "" });
+      updateDone();
     } catch (error) {
       if (error instanceof Error) {
         setErrorState({ isError: true, errorMessage: error.message });
@@ -69,12 +74,14 @@ const useCardCvc = (): UseCardCvcReturnType => {
 
   return {
     isFocused,
-
-    valueState,
-    errorState,
-    onChange,
-    onBlur,
-    onFocus,
+    isDone,
+    cardCvcInputProps: {
+      valueState,
+      errorState,
+      onChange,
+      onBlur,
+      onFocus,
+    },
   };
 };
 

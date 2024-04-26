@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+
 import { CardNumbersInputProps } from "../components/payment/CardEnrollForm/CardNumbersInput";
 import isNumericString from "../utils/isNumericString";
-import { useState } from "react";
+import useBoolean from "./common/useBoolean";
 
 const validateOnChange = (inputValue: string) => {
   if (!isNumericString(inputValue)) {
@@ -21,13 +23,20 @@ export interface CardNumbersErrorState {
   errorMessage: string;
 }
 
-const useCardNumbers = (): CardNumbersInputProps => {
+interface UseCardNumbersReturnType {
+  isDone: boolean;
+  cardNumbersInputProps: CardNumbersInputProps;
+}
+
+const useCardNumbers = (): UseCardNumbersReturnType => {
   const [valueState, setValueState] = useState<CardNumbers>(["", "", "", ""]);
 
   const [errorState, setErrorState] = useState<CardNumbersErrorState>({
     isError: [false, false, false, false],
     errorMessage: "",
   });
+
+  const { flag: isDone, setTrue: updateDone } = useBoolean();
 
   const updateValueState = (inputValue: string, targetIndex: number) => {
     setValueState((prev) => {
@@ -79,11 +88,23 @@ const useCardNumbers = (): CardNumbersInputProps => {
     }
   };
 
+  useEffect(() => {
+    if (isDone) {
+      return;
+    }
+    if (valueState.every((value) => value.length === 4)) {
+      updateDone();
+    }
+  }, [valueState]);
+
   return {
-    valueState,
-    errorState,
-    onChange,
-    onBlur,
+    isDone,
+    cardNumbersInputProps: {
+      valueState,
+      errorState,
+      onChange,
+      onBlur,
+    },
   };
 };
 
