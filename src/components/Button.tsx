@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const BottomButtonBox = styled.button`
-background-color: black;
-color: #FFFFFF;
+  background-color: black;
+  color: #ffffff;
   position: fixed;
   width: 100%;
   height: 10%;
@@ -12,22 +12,21 @@ color: #FFFFFF;
 
 const DefaultButtonBox = styled.button`
   background-color: black;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
   height: 50px;
-`
+`;
 
 interface Props {
   value: string;
   layoutType?: string;
-  onClick? : (e? :  React.MouseEvent<HTMLElement>) => void
+  onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function BottomButton({ value, layoutType, onClick }: Props) {
-  if(layoutType === 'bottom'){
+  if (layoutType === 'bottom') {
     return <BottomButtonBox onClick={onClick}>{value}</BottomButtonBox>;
   } else {
-    return <DefaultButtonBox onClick = {onClick}>{value}</DefaultButtonBox>;
+    return <DefaultButtonBox onClick={onClick}>{value}</DefaultButtonBox>;
   }
-  
 }
