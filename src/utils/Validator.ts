@@ -74,6 +74,17 @@ const Validator = {
     return { isError: false, isValid: true };
   },
 
+  checkCreditCardPassword(value: string) {
+    const maxDigit = 2;
+
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit))
+      return { isError: false, isValid: false };
+
+    if (!ValidatorCondition.checkIsDigit(value)) return { isError: true, isValid: false };
+
+    return { isError: false, isValid: true };
+  },
+
   inputCreditCardInfo(value: string, name: string): { isError: boolean; isValid: boolean } {
     if (Object.keys(CARD_INPUTBOX_NAME.cardNumber).includes(name))
       return this.checkCreditCardNumber(value);
@@ -85,6 +96,9 @@ const Validator = {
       return this.checkCreditCardOwner(value);
 
     if (Object.keys(CARD_INPUTBOX_NAME.cvc).includes(name)) return this.checkCreditCardCVC(value);
+
+    if (Object.keys(CARD_INPUTBOX_NAME.password).includes(name))
+      return this.checkCreditCardPassword(value);
 
     return { isError: false, isValid: false };
   },

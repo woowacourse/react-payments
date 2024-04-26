@@ -18,6 +18,10 @@ const CARD_INPUTBOX_NAME = {
   cvc: {
     number: "number",
   },
+
+  password: {
+    number: "number",
+  },
 };
 
 export default CARD_INPUTBOX_NAME;

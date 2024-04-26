@@ -12,12 +12,17 @@ import InputCreditCardCompany from "../../components/input/InputCreditCardCompan
 import { useState } from "react";
 import InputCVCNumber from "../../components/input/InputCVCNumber";
 import CreditCardBack from "../../components/creditCard/CreditCardBack";
+import InputCardPassword from "../../components/input/InputCardPassword";
 
 interface Owner {
   name: string;
 }
 
 interface CVC {
+  number: string;
+}
+
+interface Password {
   number: string;
 }
 
@@ -53,6 +58,8 @@ const Payments = () => {
 
   const [cvc, setCVC, cvcError] = useInput<CVC>({ number: SIGN.empty });
 
+  const [password, setPassword, passwordError] = useInput<Password>({ number: SIGN.empty });
+
   const formatExpirationPeriod = () =>
     expirationPeriod.year.length
       ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
@@ -83,6 +90,17 @@ const Payments = () => {
       )}
 
       <InputFormContainer>
+        <CreditCardForm
+          title={CARD_FORM_MESSAGE.inputCardPassword}
+          description={CARD_FORM_MESSAGE.cardPasswordDescription}
+          inputError={passwordError}
+        >
+          <InputCardPassword
+            inputValue={password.number}
+            handleChange={setPassword}
+            inputError={passwordError}
+          />
+        </CreditCardForm>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardCVC}
           inputError={cvcError}

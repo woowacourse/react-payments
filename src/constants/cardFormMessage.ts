@@ -15,6 +15,10 @@ const CARD_FORM_MESSAGE = {
 
   inputCardCVC: "CVC 번호를 입력해 주세요.",
   cardCVC: "CVC",
+
+  inputCardPassword: "비밀번호를 입력해 주세요.",
+  cardPasswordDescription: "앞의 2자리를 입력해 주세요.",
+  cardPassword: "비밀번호 앞 2자리",
 };
 
 export default CARD_FORM_MESSAGE;
