@@ -27,3 +27,5 @@ export const CARD_TYPE = {
 export const SECRET_NUMBER = '•';
 
 export const SLASH = ' / ';
+
+export const ENTER_KEY = 'Enter';
