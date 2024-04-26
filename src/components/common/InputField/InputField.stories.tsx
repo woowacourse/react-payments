@@ -6,6 +6,9 @@ import Input from '../Input/Input';
 const meta = {
   title: 'InputField',
   component: InputField,
+  parameters: {
+    controls: { exclude: 'children' },
+  },
 } satisfies Meta<typeof InputField>;
 
 export default meta;
