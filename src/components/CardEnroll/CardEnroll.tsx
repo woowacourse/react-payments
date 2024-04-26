@@ -2,9 +2,10 @@ import { FormEvent, useState } from "react";
 import CardNumbers from "../CardNumbers/CardNumbers";
 import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
 import CardOwnerName from "../CardOwnerName/CardOwnerName";
-import CardPreview from "../CardPreview/CardPreview";
+import CardPreview from "../CardPreview";
 import CardCompanySelect from "../CardCompanySelect/CardCompanySelect";
 import * as S from "./style";
+import CardCVC from "../CardCVC/CardCVC";
 
 const initialCardInfo = {
   cardNumbers: [
@@ -17,14 +18,8 @@ const initialCardInfo = {
   cardExpirationYear: { value: "", isError: false },
   cardOwnerName: { value: "", isError: false },
   cardCompany: { value: "", isError: false },
+  cardCVC: { value: "", isError: false },
 };
-
-type cardFormStep =
-  | "cardNumbers"
-  | "cardDates"
-  | "cardCompany"
-  | "cardOwnerName"
-  | "submit";
 
 const isComplete = (info: CardInformation) => {
   // step 넘어가는 것과 submitButton 활성화 체크를 위한 메서드
@@ -35,6 +30,7 @@ const isComplete = (info: CardInformation) => {
     cardExpirationYear,
     cardOwnerName,
     cardCompany,
+    cardCVC,
   } = info;
 
   const cardNumbersComplete = cardNumbers.every(
@@ -48,18 +44,20 @@ const isComplete = (info: CardInformation) => {
   const cardOwnerNameComplete =
     cardOwnerName.value !== "" && !cardOwnerName.isError;
   const cardCompanyComplete = cardCompany.value !== "" && !cardCompany.isError;
+  const cardCVCComplete = cardCVC.value !== "" && !cardCVC.isError;
 
   return {
     cardNumbersComplete,
     cardExpirationComplete,
     cardOwnerNameComplete,
     cardCompanyComplete,
+    cardCVCComplete,
   };
 };
 
 export default function CardEnroll() {
   const [cardInformation, setCardInformation] = useState(initialCardInfo);
-  const [step, setStep] = useState([true, false, false, false, false]);
+  const [step, setStep] = useState([true, false, false, false, false, false]);
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
   const [submitButton, setSubmitButton] = useState(false);
 
@@ -82,7 +80,6 @@ export default function CardEnroll() {
 
     newStep[index] = true;
     setStep(newStep);
-    console.log(step);
   };
 
   const handleNext = (currentStep: string) => {
@@ -92,7 +89,8 @@ export default function CardEnroll() {
       completionStatus.cardNumbersComplete === true &&
       completionStatus.cardCompanyComplete === true &&
       completionStatus.cardExpirationComplete === true &&
-      completionStatus.cardOwnerNameComplete === true
+      completionStatus.cardOwnerNameComplete === true &&
+      completionStatus.cardCVCComplete === true
     ) {
       setSubmitButton(true);
     } else {
@@ -112,6 +110,9 @@ export default function CardEnroll() {
       case "cardOwnerName":
         if (completionStatus.cardOwnerNameComplete) changeNextStep(4);
         break;
+      case "cardCVC":
+        if (completionStatus.cardCVCComplete) changeNextStep(5);
+        break;
       default:
         changeNextStep(0);
     }
@@ -124,11 +125,25 @@ export default function CardEnroll() {
         previewStatus={previewStatus}
       />
       <S.CardForm onSubmit={onSubmitCardInfo}>
+        {step[5] && <div>hi</div>}
+        {step[4] && (
+          <CardCVC
+            cardCVC={cardInformation.cardCVC}
+            onChangeCardInfo={onChangeCardInfo}
+            onNext={() => {
+              handleNext("cardCVC");
+              setPreviewStatus("front");
+            }}
+          />
+        )}
         {step[3] && (
           <CardOwnerName
             cardOwnerName={cardInformation.cardOwnerName}
             onChangeCardInfo={onChangeCardInfo}
-            onNext={() => handleNext("cardOwnerName")}
+            onNext={() => {
+              handleNext("cardOwnerName");
+              setPreviewStatus("back");
+            }}
           />
         )}
         {step[2] && (
