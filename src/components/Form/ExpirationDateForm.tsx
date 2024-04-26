@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Input from "./Input";
 import FormField from "../common/FormField";
@@ -16,9 +16,12 @@ const ExpirationDateForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
+  const [focusedInputIndex, setFocusedInputIndex] = useState("-1");
   const [isAllInputValid, setAllInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
+
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const validateMonth = (value: string) => {
     return value !== "" && FORM_REGEXP.validMonth.test(value);
@@ -40,12 +43,26 @@ const ExpirationDateForm = ({
     }));
   };
 
+  const focusToNextInput = () => {
+    const curIdx = focusedInputIndex;
+    const nextInputRef = inputRefs.current[Number(curIdx) + 1];
+    if (nextInputRef) {
+      nextInputRef.focus();
+    }
+  };
+
+  const setInputRef = (element: HTMLInputElement, index: number) => {
+    inputRefs.current[index] = element;
+  };
+
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     const allFilled = Object.keys(inputValidities).length === inputCount;
 
     setAllInputValid(allValid && allFilled);
     setAllFormsValid(allValid && allFilled);
+
+    focusToNextInput();
 
     setErrorMessage(
       allValid && allFilled ? "" : EXPIRATION_DATE_FORM.errorMessage.notAllValid
@@ -60,6 +77,7 @@ const ExpirationDateForm = ({
     <Input
       key={index}
       index={index.toString()}
+      ref={(element) => setInputRef(element as HTMLInputElement, index)}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
       maxLength={EXPIRATION_DATE_FORM.maxInputLength}
@@ -76,6 +94,7 @@ const ExpirationDateForm = ({
           ? EXPIRATION_DATE_FORM.errorMessage.invalidMonth
           : EXPIRATION_DATE_FORM.errorMessage.invalidYear
       }
+      setFocusedInputIndex={setFocusedInputIndex}
     />
   ));
 
