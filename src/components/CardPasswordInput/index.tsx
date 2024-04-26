@@ -1,28 +1,16 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { CARD_META_INFO, INPUT_RULES, VALIDATION_MESSAGES } from '../../constants/card-app';
+import { CARD_META_INFO, VALIDATION_MESSAGES } from '../../constants/card-app';
 import Label from '../common/Label';
 import Input from '../common/Input';
+import { errorCaption } from '../../utils/errorCaption';
 
 interface CardPasswordInputProps {
   cardPassword: string;
-  errorCaption: (errorText: string) => JSX.Element;
+  cardPasswordError: boolean;
   onCardPasswordChange: (value: string) => void;
 }
 
-const CardPasswordInput = ({ cardPassword, errorCaption, onCardPasswordChange }: CardPasswordInputProps) => {
-  const [isError, setIsError] = useState<boolean>(false);
-
-  const handleInputChange = (value: string) => {
-    const isNumberInput = /^[0-9]*$/.test(value);
-    const isValidCardPassword = value.length <= INPUT_RULES.maxCardPasswordLength;
-
-    setIsError(!isNumberInput);
-    if (!isNumberInput || !isValidCardPassword) return;
-
-    onCardPasswordChange(value);
-  };
-
+const CardPasswordInput = ({ cardPassword, cardPasswordError, onCardPasswordChange }: CardPasswordInputProps) => {
   return (
     <InputField>
       <Label htmlFor='card-password'>{CARD_META_INFO.cardPassword.label}</Label>
@@ -32,12 +20,13 @@ const CardPasswordInput = ({ cardPassword, errorCaption, onCardPasswordChange }:
         placeholder='••'
         value={cardPassword}
         size='large'
-        isError={isError}
+        isError={cardPasswordError}
         onChange={(e) => {
-          handleInputChange(e.target.value);
+          onCardPasswordChange(e.target.value);
         }}
+        autoFocus
       />
-      {isError ? errorCaption(VALIDATION_MESSAGES.invalidPassword) : errorCaption('')}
+      {cardPasswordError ? errorCaption(VALIDATION_MESSAGES.invalidPassword) : errorCaption('')}
     </InputField>
   );
 };
