@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import SequenceContainer from '../common/SequenceContainer';
 import CardNumbersInputContainer from './InputContainers/CardNumbersInputContainer';
 import CardExpiryDateInputContainer from './InputContainers/CardExpiryDateInputContainer';
 import CardholderNameInputContainer from './InputContainers/CardholderNameInputContainer';
@@ -13,6 +12,7 @@ import ROUTE_PATH from '../../pages/constants/routePath';
 import getObjectValues from '../../utils/getObjectValues';
 import { ICardInfoInputsControl } from '../../hooks/useCardInfo/useCardInfoInputs';
 import { ICardInfoCompletionStatus } from '../../hooks/useCardInfo/useCardInfoCompletionStatus';
+import useSequence from '../../hooks/useSequence';
 
 export interface ICardInfoFormProps {
   cardInfoControl: ICardInfoInputsControl;
@@ -24,6 +24,8 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
   const navigate = useNavigate();
 
   const { cardNumbers, cardType, expiryDate, cardholderName, cvc, password } = cardInfoControl;
+
+  const sequence = useSequence(getObjectValues<boolean>(completionStatus));
 
   const completionFlags = getObjectValues<boolean>(completionStatus);
   const isSubmitable = completionFlags.every((v: boolean) => v);
@@ -38,17 +40,12 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
 
   return (
     <form>
-      <SequenceContainer
-        completionFlagQueue={completionFlags}
-        componentQueue={[
-          <CardNumbersInputContainer {...cardNumbers} />,
-          <CardTypeSelectContainer {...cardType} />,
-          <CardExpiryDateInputContainer {...expiryDate} />,
-          <CardholderNameInputContainer {...cardholderName} />,
-          <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />,
-          <PasswordInputContainer {...password} />,
-        ]}
-      />
+      {sequence >= 5 && <PasswordInputContainer {...password} />}
+      {sequence >= 4 && <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />}
+      {sequence >= 3 && <CardholderNameInputContainer {...cardholderName} />}
+      {sequence >= 2 && <CardExpiryDateInputContainer {...expiryDate} />}
+      {sequence >= 1 && <CardTypeSelectContainer {...cardType} />}
+      <CardNumbersInputContainer {...cardNumbers} />
       {isSubmitable && (
         <SubmitButton onClick={onSubmit} type="button">
           확인
