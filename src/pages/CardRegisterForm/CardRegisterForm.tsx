@@ -8,12 +8,13 @@ import PasswordInputField from "./PasswordInputField";
 import CVCInputField from "./CVCInputField";
 import CardCompanyInputField from "./CardCompanyInputField";
 
+type Reduceds = ReturnType<typeof useInput>[];
 interface Props {
-  cardNumbersReduceds: ReturnType<typeof useInput>[];
-  expirationDateReduceds: ReturnType<typeof useInput>[];
-  ownerNameReduceds: ReturnType<typeof useInput>[];
-  CVCReduceds: ReturnType<typeof useInput>[];
-  passwordReduceds: ReturnType<typeof useInput>[];
+  cardNumbersReduceds: Reduceds;
+  expirationDateReduceds: Reduceds;
+  ownerNameReduceds: Reduceds;
+  CVCReduceds: Reduceds;
+  passwordReduceds: Reduceds;
   setIsCVCFocused?: React.Dispatch<React.SetStateAction<boolean>>;
   setCardCompany?: React.Dispatch<React.SetStateAction<Company>>;
 }
@@ -27,9 +28,19 @@ const CardRegisterForm = ({
   setIsCVCFocused,
   setCardCompany,
 }: Props) => {
+  const reducedsCollection: Reduceds[] = [
+    cardNumbersReduceds,
+    expirationDateReduceds,
+    ownerNameReduceds,
+    CVCReduceds,
+    passwordReduceds,
+  ];
+  const isValid = (reduceds: Reduceds) => reduceds.every((reduced) => reduced[0].isValid);
+  const isValidTo = (index: number) => reducedsCollection.slice(0, index + 1).every((reduceds) => isValid(reduceds));
   return (
     <S.CardFormWrapper>
       {/* 카드 번호 */}
+
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
@@ -39,14 +50,15 @@ const CardRegisterForm = ({
       </S.InputFieldWithInfo>
 
       {/* 카드회사명 */}
-      <S.InputFieldWithInfo>
-        <S.TitleWrapper>
-          <S.InputTitle>{INPUT_INFO_TITLE.CARD_COMPANY}</S.InputTitle>
-          <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_COMPANY}</S.InputSubTitle>
-        </S.TitleWrapper>
-        <CardCompanyInputField setCardCompany={setCardCompany} />
-      </S.InputFieldWithInfo>
-
+      {isValidTo(0) && (
+        <S.InputFieldWithInfo>
+          <S.TitleWrapper>
+            <S.InputTitle>{INPUT_INFO_TITLE.CARD_COMPANY}</S.InputTitle>
+            <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_COMPANY}</S.InputSubTitle>
+          </S.TitleWrapper>
+          <CardCompanyInputField setCardCompany={setCardCompany} />
+        </S.InputFieldWithInfo>
+      )}
       {/* 유효 기간 */}
       <S.InputFieldWithInfo>
         <S.TitleWrapper>
