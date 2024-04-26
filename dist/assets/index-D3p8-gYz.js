@@ -210,4 +210,4 @@ Error generating stack: `+o.message+`
   background-color: #333333;
   color: white;
   font-size: 16px;
-`;function Ug(){return _.jsx(A0,{children:_.jsxs(P0,{children:[_.jsx(su,{path:"/",element:_.jsx(zg,{})}),_.jsx(su,{path:"/addSucceed",element:_.jsx(jg,{})})]})})}function Vg(){return _.jsx(_.Fragment,{children:_.jsx(Ug,{})})}hi.createRoot(document.getElementById("root")).render(_.jsx(qt.StrictMode,{children:_.jsx(Vg,{})}));
+`;function Ug(){return _.jsx(A0,{basename:"/react-payments/dist",children:_.jsxs(P0,{children:[_.jsx(su,{path:"/",element:_.jsx(zg,{})}),_.jsx(su,{path:"/addSucceed",element:_.jsx(jg,{})})]})})}function Vg(){return _.jsx(_.Fragment,{children:_.jsx(Ug,{})})}hi.createRoot(document.getElementById("root")).render(_.jsx(qt.StrictMode,{children:_.jsx(Vg,{})}));

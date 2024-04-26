@@ -4,7 +4,7 @@ import SucceedSubmit from './page/SucceedSubmit';
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments/dist">
       <Routes>
         <Route path="/" element={<EnrollCard />} />
         <Route path="/addSucceed" element={<SucceedSubmit />} />
