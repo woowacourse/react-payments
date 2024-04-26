@@ -132,6 +132,7 @@ export default function ExpirationDateInput({
             key={index}
             type='string'
             maxLength={2}
+            value={expirationDate[date[index]as keyof ExpirationDate].value }
             placeholder={datePlaceHolder[index]}
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, date[index], index, 2)}

@@ -125,6 +125,7 @@ export default function PasswordInput({
             key={index}
             type='string'
             maxLength={2}
+            value={password['password' as keyof Password].value }
             placeholder={'**'}
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'password', index, 3)}

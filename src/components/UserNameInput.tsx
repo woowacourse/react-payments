@@ -144,6 +144,7 @@ export default function UserNameInput({
             key={index}
             type='string'
             maxLength={30}
+            value={userName['userName' as keyof UserName].value }
             placeholder={'JOHN DOE'}
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'userName', index, 30)}

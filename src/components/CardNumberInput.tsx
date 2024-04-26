@@ -5,6 +5,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -28,18 +29,18 @@ export default function CardNumberInput({
     Array.from({ length: 4 }, () => React.createRef<HTMLInputElement>())
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const messages = Object.values(cardNumbers).map(
       (value) => value.errorMessage
     );
     setErrorMessages(messages);
   }, [cardNumbers]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     inputRefs.current[0].current?.focus();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
         if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
@@ -126,20 +127,11 @@ export default function CardNumberInput({
         count={4}
         errorMessages={errorMessages}
       >
-        {/* {Array.from({ length: 4 }, (_, index) => (
-      <Input
-        key={index}
-        type="string"
-        maxLength={4}
-        placeholder="1234"
-        isError = {checkInputError(index)}
-        onChange={(e) => handleInputChange(e, 'cardNumber', index, 4)}
-      />
-      ))} */}
         {inputRefs.current.map((inputRef, index) => (
           <Input
             key={index}
             type='text'
+            value = {cardNumbers[`cardNumber${index + 1}` as keyof CardNumbers].value}
             maxLength={4}
             placeholder='1234'
             isError={checkInputError(index)}

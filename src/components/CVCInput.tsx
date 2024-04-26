@@ -122,6 +122,7 @@ export default function CVCInput({
             key={index}
             type='string'
             maxLength={3}
+            value = {CVC[`CVC` as keyof CVC].value}
             placeholder={'123'}
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'CVC', index, 3)}
