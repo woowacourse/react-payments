@@ -3,6 +3,11 @@
   font-family: Inter;
   font-size: 14px;
   padding: 7px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: lightgray;
 }
 
 .list {

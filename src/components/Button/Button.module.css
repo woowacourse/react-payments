@@ -32,6 +32,7 @@
   border-radius: 4px;
   text-align: left;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .dropdown_head:focus {

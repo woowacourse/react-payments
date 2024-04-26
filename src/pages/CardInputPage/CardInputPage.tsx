@@ -92,7 +92,10 @@ function CardInputPage() {
           )}
 
           {isOpenForm[3] && (
-            <ShelfSection title="카드 소유자 이름을 입력해주세요">
+            <ShelfSection
+              title="카드 소유자 이름을 입력해주세요"
+              description="엔터를 눌러 입력을 완료할 수 있습니다."
+            >
               <CardOwnerNameInputField
                 ownerName={ownerName}
                 setOwnerName={setOwnerName}
