@@ -8,7 +8,7 @@ interface CardExpirationState {
   isValid: boolean;
 }
 
-function useCardExpirationInput(): [CardExpirationState, (value: string, index: number) => void] {
+function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<HTMLInputElement>, index: number) => void] {
   const [cardExpirationState, setCardExpirationState] = useState<CardExpirationState>({
     value: [0, 0],
     errorMessage: ["", ""],
@@ -17,11 +17,20 @@ function useCardExpirationInput(): [CardExpirationState, (value: string, index: 
   });
 
   const handleCardExpirationChange = useCallback(
-    (value: string, index: number) => {
+    (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+      const value = e.target.value;
+
       const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? Number(value) : num));
       const errorMessage = cardExpirationState.errorMessage.map((msg, i) => (i === index ? validators.cardExpiration(value, index) : msg));
       const isValid = updatedCardExpiration.every((number) => number !== 0) && errorMessage.every((message) => !message);
       const isNextVisible = cardExpirationState.isNextVisible || isValid;
+
+      if (!errorMessage[index] && index < updatedCardExpiration.length - 1) {
+        const nextInput = e.target.nextSibling;
+        if (nextInput && nextInput instanceof HTMLInputElement) {
+          nextInput.focus();
+        }
+      }
 
       setCardExpirationState((prevState) => ({
         ...prevState,

@@ -10,6 +10,7 @@ const validators = {
     }
     return "";
   },
+
   cvc(value: string): string {
     if (value && isNaN(Number(value))) {
       return "숫자만 입력 가능합니다.";
@@ -19,12 +20,14 @@ const validators = {
     }
     return "";
   },
+
   userName(value: string): string {
     if (value && !/^[a-zA-Z\s]+$/.test(value)) {
       return "영어만 입력 가능합니다.";
     }
     return "";
   },
+
   cardExpiration(value: string, index: number): string {
     if (value && isNaN(Number(value))) {
       return "숫자만 입력 가능합니다.";
@@ -37,12 +40,16 @@ const validators = {
     }
     return "";
   },
+
   cardNumbers(value: string): string {
     if (value && isNaN(Number(value))) {
       return "숫자만 입력 가능합니다.";
     }
     if (value && value.length !== CARD_CONSTRAINTS.CARD_NUMBERS.LENGTH) {
       return `숫자 ${CARD_CONSTRAINTS.CARD_NUMBERS.LENGTH}자리를 입력해주세요.`;
+    }
+    if (value && Number(value) === 0) {
+      return `카드 번호는 0이 될 수 없습니다.`;
     }
     return "";
   },

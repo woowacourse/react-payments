@@ -8,7 +8,7 @@ interface UserNameState {
   isValid: boolean;
 }
 
-function useUserNameInput(): [UserNameState, (value: string) => void] {
+function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.KeyboardEvent<HTMLInputElement>) => void] {
   const [userNameState, setUserNameState] = useState<UserNameState>({
     value: "",
     errorMessage: [""],
@@ -19,21 +19,34 @@ function useUserNameInput(): [UserNameState, (value: string) => void] {
   const handleUserNameChange = useCallback(
     (value: string) => {
       const errorMessage = [validators.userName(value)];
-      const isValid = !!value && errorMessage[0] === "";
-      const isNextVisible = userNameState.isNextVisible || isValid;
 
       setUserNameState((prevState) => ({
         ...prevState,
-        value: isValid ? value.toUpperCase() : prevState.value,
+        value: value && !errorMessage[0] ? value.toUpperCase() : prevState.value,
         errorMessage,
-        isNextVisible,
-        isValid,
       }));
     },
     [userNameState]
   );
 
-  return [userNameState, handleUserNameChange];
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const isValid = !!userNameState.value && !userNameState.errorMessage[0];
+        const isNextVisible = userNameState.isNextVisible || isValid;
+
+        setUserNameState((prevState) => ({
+          ...prevState,
+          isValid,
+          isNextVisible,
+        }));
+      }
+    },
+    [userNameState]
+  );
+
+  return [userNameState, handleUserNameChange, handleKeyDown];
 }
 
 export default useUserNameInput;

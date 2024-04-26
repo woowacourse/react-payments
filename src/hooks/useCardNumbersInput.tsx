@@ -8,7 +8,7 @@ interface CardNumbersState {
   isValid: boolean;
 }
 
-function useCardNumbersInput(): [CardNumbersState, (value: string, index: number) => void] {
+function useCardNumbersInput(): [CardNumbersState, (e: React.ChangeEvent<HTMLInputElement>, index: number) => void] {
   const [cardNumbersState, setCardNumbersState] = useState<CardNumbersState>({
     value: [0, 0, 0, 0],
     errorMessage: ["", "", "", ""],
@@ -17,11 +17,20 @@ function useCardNumbersInput(): [CardNumbersState, (value: string, index: number
   });
 
   const handleCardNumbersChange = useCallback(
-    (value: string, index: number) => {
+    (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+      const value = e.target.value;
+
       const updatedCardNumbers = cardNumbersState.value.map((num, i) => (i === index ? Number(value) : num));
       const errorMessage = cardNumbersState.errorMessage.map((msg, i) => (i === index ? validators.cardNumbers(value) : msg));
       const isValid = updatedCardNumbers.every((number) => number !== 0) && errorMessage.every((message) => !message);
       const isNextVisible = cardNumbersState.isNextVisible || isValid;
+
+      if (value && !errorMessage[index] && index < updatedCardNumbers.length - 1) {
+        const nextInput = e.target.nextSibling;
+        if (nextInput && nextInput instanceof HTMLInputElement) {
+          nextInput.focus();
+        }
+      }
 
       setCardNumbersState((prevState) => ({
         ...prevState,

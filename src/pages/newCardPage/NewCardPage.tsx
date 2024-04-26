@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/default/input/Input";
-import CardPreview from "../../components/newCardPage/cardPreview/CardPreview";
-import { CardCompany } from "../../types/type";
-import NewCardInputSection from "../../components/newCardPage/newCardInputSection/NewCardInputSection";
-import * as Styled from "./NewCardPage.styled";
-import { FORM_FIELDS } from "../../constants/setting";
 import Dropdown from "../../components/default/dropdown/Dropdown";
+import CardPreview from "../../components/newCardPage/cardPreview/CardPreview";
+import NewCardInputSection from "../../components/newCardPage/newCardInputSection/NewCardInputSection";
+import { CardCompany } from "../../types/type";
+import { FORM_FIELDS } from "../../constants/setting";
+import * as Styled from "./NewCardPage.styled";
 import usePasswordInput from "../../hooks/usePasswordInput";
 import useCvcInput from "../../hooks/useCvcInput";
 import useUserNameInput from "../../hooks/useUserNameInput";
@@ -17,11 +17,16 @@ const NewCardPage = () => {
   const navigate = useNavigate();
   const [passwordState, handlePasswordChange] = usePasswordInput();
   const [cvcState, handleCvcChange] = useCvcInput();
-  const [userNameState, handleUserNameChange] = useUserNameInput();
+  const [userNameState, handleUserNameChange, handleKeyDown] = useUserNameInput();
   const [cardExpirationState, handleCardExpirationChange] = useCardExpirationInput();
   const [cardCompanyState, handleCardCompanyChange] = useCardCompanyInput();
   const [cardNumbersState, handleCardNumbersChange] = useCardNumbersInput();
+
   const isFormValid = passwordState.isValid && cvcState.isValid && userNameState.isValid && cardExpirationState.isValid && cardCompanyState.isValid && cardNumbersState.isValid;
+
+  const handleConfirmClick = () => {
+    navigate("/react-payments/confirmCardRegistration", { state: { cardFirstNumber: cardNumbersState.value[0], cardCompany: cardCompanyState.value } });
+  };
 
   return (
     <Styled.NewCardContainer>
@@ -33,6 +38,7 @@ const NewCardPage = () => {
         cardCompany={cardCompanyState.value}
         cardNumbers={cardNumbersState.value}
       ></CardPreview>
+
       <Styled.InputSection>
         {/* 입력 - 비밀번호 */}
         {cvcState.isNextVisible && (
@@ -47,7 +53,8 @@ const NewCardPage = () => {
               maxLength={FORM_FIELDS.PASSWORD.MAX_LENGTH}
               placeholder={FORM_FIELDS.PASSWORD.PLACEHOLDER}
               isError={!!passwordState.errorMessage[0]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e.target.value)}
+              onChange={(e) => handlePasswordChange(e.target.value)}
+              autoFocus
             ></Input>
           </NewCardInputSection>
         )}
@@ -64,7 +71,8 @@ const NewCardPage = () => {
               maxLength={FORM_FIELDS.CVC.MAX_LENGTH}
               placeholder={FORM_FIELDS.CVC.PLACEHOLDER}
               isError={!!cvcState.errorMessage[0]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCvcChange(e.target.value)}
+              onChange={(e) => handleCvcChange(e.target.value)}
+              autoFocus
             ></Input>
           </NewCardInputSection>
         )}
@@ -82,7 +90,9 @@ const NewCardPage = () => {
               maxLength={FORM_FIELDS.USER_NAME.MAX_LENGTH}
               placeholder={FORM_FIELDS.USER_NAME.PLACEHOLDER}
               isError={!!userNameState.errorMessage[0]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUserNameChange(e.target.value)}
+              onChange={(e) => handleUserNameChange(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoFocus
             ></Input>
           </NewCardInputSection>
         )}
@@ -101,7 +111,8 @@ const NewCardPage = () => {
                 maxLength={FORM_FIELDS.CARD_EXPIRATION.MAX_LENGTH}
                 placeholder={index === 0 ? FORM_FIELDS.CARD_EXPIRATION.PLACEHOLDER.MONTH : FORM_FIELDS.CARD_EXPIRATION.PLACEHOLDER.YEAR}
                 isError={!!cardExpirationState.errorMessage[index]}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCardExpirationChange(e.target.value, index)}
+                onChange={(e) => handleCardExpirationChange(e, index)}
+                autoFocus={index === 0}
               ></Input>
             ))}
           </NewCardInputSection>
@@ -135,12 +146,13 @@ const NewCardPage = () => {
               maxLength={FORM_FIELDS.CARD_NUMBERS.MAX_LENGTH}
               placeholder={FORM_FIELDS.CARD_NUMBERS.PLACEHOLDER}
               isError={!!cardNumbersState.errorMessage[index]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleCardNumbersChange(e.target.value, index)}
+              onChange={(e) => handleCardNumbersChange(e, index)}
+              autoFocus={index === 0}
             ></Input>
           ))}
         </NewCardInputSection>
       </Styled.InputSection>
-      {isFormValid && <Styled.Button onClick={() => navigate("/react-payments/confirmCardRegistration", { state: { cardFirstNumber: cardNumbersState.value[0], cardCompany: cardCompanyState.value } })}>확인</Styled.Button>}
+      {isFormValid && <Styled.Button onClick={handleConfirmClick}>확인</Styled.Button>}
     </Styled.NewCardContainer>
   );
 };
