@@ -1,5 +1,14 @@
-import { useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import useValidations, { ValidationType } from './useValidations';
+
+export interface UseInputReturn<T> {
+  ref: RefObject<T>;
+  value: string;
+  onChangeHandler: (e: React.ChangeEvent<T>) => void;
+  onBlurHandler: (e: React.FocusEvent<T>) => void;
+  isError: boolean;
+  errorMessage: string;
+}
 
 const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
   inputLimitValidation?: ValidationType,
