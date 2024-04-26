@@ -4,6 +4,7 @@ export const StyledInputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
   width: 100%;
 `;
 
@@ -15,6 +16,7 @@ export const StyledLabel = styled.label`
 export const StyledInputs = styled.div`
   display: flex;
   gap: 1rem;
+
   width: 100%;
 `;
 

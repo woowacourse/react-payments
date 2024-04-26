@@ -75,7 +75,6 @@ export const StyledCVCContainer = styled.div`
 
 export const StyledCVC = styled.p`
   width: 2rem;
-
   margin-right: 1.6rem;
 
   ${(props) => props.theme.typography.cardCVC};
