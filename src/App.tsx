@@ -7,10 +7,12 @@ import { Path } from './type';
 import PayMents from './components/Payments';
 import WrongAccess from './components/WrongAccess';
 import styled from '@emotion/styled';
+import useCardCVC from './hooks/useCardCVC';
 import useCardExpiredDate from './hooks/useCardExpiredDate';
 import useCardHolder from './hooks/useCardHolder';
 import useCardIssuer from './hooks/useCardIssuer';
 import useCardNumbers from './hooks/useCardNumbers';
+import useCardPasswordHead from './hooks/useCardPasswordHead';
 import { useRef } from 'react';
 
 export default function App() {
@@ -20,12 +22,16 @@ export default function App() {
   const cardExpiredDate = useCardExpiredDate();
   const cardHolder = useCardHolder();
   const cardIssuer = useCardIssuer();
+  const cardCVC = useCardCVC();
+  const cardPasswordHead = useCardPasswordHead();
 
   const resetCardInfo = () => {
     cardNumbers.initValue();
     cardExpiredDate.initValue();
     cardHolder.initValue();
     cardIssuer.initValue();
+    cardCVC.initValue();
+    cardPasswordHead.initValue();
   };
   const paymentsElement = (
     <PayMents
@@ -33,6 +39,8 @@ export default function App() {
       useCardExpiredDate={cardExpiredDate}
       useCardHolder={cardHolder}
       useCardIssuer={cardIssuer}
+      useCardCVC={cardCVC}
+      useCardPasswordHead={cardPasswordHead}
       setPath={() => {
         lastPath.current = PATH.payments;
       }}

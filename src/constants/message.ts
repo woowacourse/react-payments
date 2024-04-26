@@ -6,6 +6,11 @@ export const PAYMENTS_MESSAGE = {
   cardNumberDescription: '본인 명의의 카드만 결제 가능합니다.',
 
   cardHolderTitle: '카드 소유자 이름을 입력해 주세요',
+
+  cardCVCTitle: 'CVC 번호를 입력해 주세요',
+
+  cardPasswordHeadTitle: '비밀번호를 입력해 주세요',
+  cardPasswordHeadDescription: '앞의 2자리를 입력해주세요',
 };
 
 export const PAYMENTS_INPUT_MESSAGE = {
@@ -19,6 +24,12 @@ export const PAYMENTS_INPUT_MESSAGE = {
 
   cardHolderLabel: '소유자 이름',
   cardHolderPlaceHolder: 'SEUNGHA CHA',
+
+  cardCVCLabel: 'CVC',
+  cardCVCPlaceholder: '123',
+
+  cardPasswordHeadLabel: '비밀번호 앞 2자리',
+  cardPasswordHeadPlaceHolder: '12',
 };
 
 export const ERROR_MESSAGE = {
