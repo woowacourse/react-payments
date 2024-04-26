@@ -3,7 +3,9 @@ import S from "./Select.styled";
 
 type TypeOrArray<T> = T | T[];
 interface SelectProp extends React.HTMLProps<HTMLSelectElement> {
-  children: TypeOrArray<ReactElement<any, JSXElementConstructor<HTMLOptionElement>>>;
+  children: TypeOrArray<
+    ReactElement<JSXElementConstructor<HTMLSelectElement>, JSXElementConstructor<HTMLOptionElement>>
+  >;
 }
 
 const Select = ({ children, ...restProps }: SelectProp) => {
