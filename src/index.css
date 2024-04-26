@@ -6,9 +6,10 @@
   --color-grey-500: #000000;
 
   --color-red: #ff3d3d;
+  --color-primitive: #333;
 
   /* CardPreview */
-  --color-card-bg: #333;
+  --color-card-bg: var(--color-primitive);
   --color-card-bg-back: #d5d5d5;
   --color-card-chip: #ddcd78;
   --color-card-bg-cvc: #cbba64;
@@ -62,9 +63,20 @@ fieldset {
   min-width: 0;
 }
 
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
+
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+
+  width: 100vw;
+  height: 100vh;
 }

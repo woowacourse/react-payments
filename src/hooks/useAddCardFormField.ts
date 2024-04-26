@@ -27,7 +27,7 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     createObjectWithKeys(Object.keys(initialValues), false)
   );
   const [isFieldComplete, setIsFieldComplete] = useState(false);
-  const [showNextField, setShowNextField] = useState(visibility);
+  const [showNextStep, setShowNextStep] = useState(visibility);
 
   const onChange = ({
     isValid,
@@ -73,8 +73,8 @@ export default function useAddCardFormField<T extends InitialValuesType>({
   }, [isComplete, isError]);
 
   useEffect(() => {
-    if (!showNextField) {
-      setShowNextField(isFieldComplete);
+    if (!showNextStep) {
+      setShowNextStep(isFieldComplete);
     }
   }, [isFieldComplete]);
 
@@ -82,7 +82,7 @@ export default function useAddCardFormField<T extends InitialValuesType>({
     values,
     errorMessage,
     isError,
-    showNextField,
+    showNextStep,
     isFieldComplete,
     onChange,
     onBlur,
