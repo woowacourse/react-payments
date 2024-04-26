@@ -18,7 +18,7 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
   return (
     <StyledInput
       ref={ref}
-      error={isError}
+      $error={isError}
       type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
@@ -29,10 +29,10 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
   );
 });
 
-const StyledInput = styled.input<{ error?: boolean }>`
+const StyledInput = styled.input<{ $error: boolean }>`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${({ error }) => (error ? 'red' : 'grey')};
-  outline-color: ${({ error }) => (error ? 'red' : 'grey')};
+  border: 1px solid ${({ $error }) => ($error ? 'red' : 'grey')};
+  outline-color: ${({ $error }) => ($error ? 'red' : 'grey')};
   border-radius: 3px;
 `;
