@@ -177,7 +177,7 @@ function CardRegister() {
 
   return (
     <div css={appContainerStyle}>
-      <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} />
+      <CardImage cardNumber={cardNumber.data} cardPeriod={cardPeriod.data} cardOwner={cardOwner.data} cardProvider={cardProvider.data} />
       <form css={appInputStyle}>
         {/* 비밀번호 */}
         {!inputError.cvc && (
