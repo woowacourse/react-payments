@@ -2,25 +2,28 @@ import { css } from '@emotion/react';
 import { MouseEvent, useState } from 'react';
 import { CARD_PROVIDER_SELECT, CARD_PROVIDER_DEFAULT } from '../constants/cardInformation';
 import ErrorMessage from './ErrorMessage';
+import { DOWN_ARROW, UP_ARROW } from '../assets';
 
 const selectorContainerStyle = css({
   width: '100%',
   position: 'relative',
 });
 
-const selectorBoxStyle = css({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  height: '31px',
-  border: '1px solid #ACACAC',
-  borderRadius: '2.6px',
-  padding: '8px',
-  boxSizing: 'border-box',
-  fontSize: '10px',
-  lineHeight: '10px',
-  justifyContent: 'center',
-});
+const selectorBoxStyle = (borderColor: string) =>
+  css({
+    display: 'flex',
+    // flexDirection: 'column',
+    width: '100%',
+    height: '31px',
+    border: `1px solid ${borderColor}`,
+    borderRadius: '2.6px',
+    padding: '8px',
+    boxSizing: 'border-box',
+    fontSize: '10px',
+    lineHeight: '10px',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  });
 
 const listContainerStyle = css({
   backgroundColor: '#FFFFFF',
@@ -35,6 +38,11 @@ const listContainerStyle = css({
 const listItemStyle = css({
   padding: '8px 10px',
   fontSize: '10px',
+});
+
+const arrowImgStyle = css({
+  width: '7.6px',
+  height: '3.8px',
 });
 
 interface SelectorType {
@@ -59,8 +67,9 @@ function Selector({ onInputChange, isError, errorMessage }: SelectorType) {
 
   return (
     <div css={selectorContainerStyle} onClick={(e) => handleListOpened(e)}>
-      <div css={selectorBoxStyle} id="selected">
+      <div css={selectorBoxStyle(listOpened ? '#000000' : '#ACACAC')} id="selected">
         {selectedProvider}
+        <img src={listOpened ? DOWN_ARROW : UP_ARROW} css={arrowImgStyle} />
       </div>
       {listOpened && (
         <div css={listContainerStyle}>
