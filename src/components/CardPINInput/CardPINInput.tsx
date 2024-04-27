@@ -26,6 +26,8 @@ export default function CardPINInput({ isPINValid, onChangePIN }: CardPINInputPr
       <InputField label="비밀번호 앞 2자리" errorMessage={isPINValid.errorMessage}>
         <Input
           type="password"
+          inputMode="numeric"
+          pattern="[0-9]*"
           maxLength={CARD_PIN.MAX_LENGTH}
           onChange={handleChangePIN}
           isValid={isPINValid.isValid}

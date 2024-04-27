@@ -31,6 +31,8 @@ export default function CardCVCInput({ isCVCValid, onChangeCVC, onChangeFocusCVC
       <InputField label="CVC" errorMessage={isCVCValid.errorMessage}>
         <Input
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="123"
           maxLength={CARD_CVC.MAX_LENGTH}
           onChange={handleChangeCVC}

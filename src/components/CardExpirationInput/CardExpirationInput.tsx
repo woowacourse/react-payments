@@ -55,6 +55,8 @@ export default function CardExpirationInput({
         <Input
           ref={setInputRef(0)}
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="MM"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
@@ -64,6 +66,8 @@ export default function CardExpirationInput({
         <Input
           ref={setInputRef(1)}
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="YY"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}

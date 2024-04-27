@@ -43,6 +43,8 @@ export default function CardNumberInput({ isCardNumbersValid, onChangeCardNumber
             key={index}
             ref={setInputRef(index)}
             type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             placeholder="1234"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             onChange={handleChangeCardNumber(index)}
