@@ -10,11 +10,11 @@ import ExpirationDateInput from '../AddCardFormInput/ExpirationDateInput/Expirat
 import OwnerNameInput from '../AddCardFormInput/OwnerNameInput/OwnerNameInput';
 import PasswordInput from '../AddCardFormInput/PasswordInput/PasswordInput';
 import CardPreview from '../CardPreview/CardPreview';
+import Button from '../common/Button/Button';
 
 import { useNavigate } from 'react-router-dom';
 import { useAddCardFormContext } from '../../context/AddCardFormContext';
 import useAddCardFormField from '../../hooks/useAddCardFormField';
-import Button from '../common/Button/Button';
 
 export default function AddCardForm() {
   const { findStep, curStep, isFormValid } = useAddCardFormContext();
@@ -42,7 +42,10 @@ export default function AddCardForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isFormValid) navigate('/confirm');
+    if (isFormValid)
+      navigate(
+        `/confirm/${cardNumbersProps.values.first}/${cardIssuerProps.values.cardIssuer}`
+      );
   };
 
   return (

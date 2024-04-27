@@ -6,14 +6,14 @@ interface ButtonProps {
   text: string;
   theme: 'submit' | 'confirm';
   type: 'submit' | 'reset' | 'button';
-  isActive: boolean;
+  isActive?: boolean;
   onClick: (e: React.MouseEvent) => void;
 }
 
 export default function Button({
   text,
   theme,
-  isActive,
+  isActive = true,
   ...props
 }: ButtonProps) {
   return (

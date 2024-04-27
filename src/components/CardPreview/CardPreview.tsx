@@ -52,7 +52,7 @@ type FrontSideProps = Pick<
   'cardNumbers' | 'expirationDate' | 'ownerName' | 'cardIssuer'
 >;
 function FrontSide({ cardNumbers, expirationDate, ownerName }: FrontSideProps) {
-  const brand = getCardBrand(cardNumbers);
+  const brand = getCardBrand(cardNumbers.join(''));
 
   return (
     <>

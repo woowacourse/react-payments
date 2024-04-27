@@ -18,6 +18,11 @@
   margin-left: -20px;
 }
 
+.confirm {
+  width: 320px;
+  border-radius: 5px;
+}
+
 .active {
   background-color: var(--color-primitive);
 }
