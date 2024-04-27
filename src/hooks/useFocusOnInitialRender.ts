@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useFocusOnInitialRender = <T extends HTMLElement>() => {
-  const [isRendered, setIsRendered] = useState(false);
   const focusTargetRef = useRef<T>(null);
 
   useEffect(() => {
-    if (!isRendered && focusTargetRef.current) {
+    if (focusTargetRef.current) {
       focusTargetRef.current.focus();
-      setIsRendered(true);
     }
   }, []);
 

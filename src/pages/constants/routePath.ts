@@ -1,5 +1,5 @@
 const IS_PRODUCTION = true;
-const BASE_URL = IS_PRODUCTION ? '/dist/index.html' : '';
+const BASE_URL = IS_PRODUCTION ? '' : '';
 
 const ROUTE_PATH = {
   cardRegister: BASE_URL + '/',
