@@ -6,7 +6,7 @@ import CardExpiration from "../cardExpiration/CardExpiration";
 import { CARD_BRAND } from "../../../constants/setting";
 import { CardCompany } from "../../../types/type";
 
-interface CardPreview {
+export interface CardPreviewProps {
   isCardFlipped: boolean;
   cvc: string;
   userName: string;
@@ -15,7 +15,7 @@ interface CardPreview {
   cardNumbers: string[];
 }
 
-const CardPreview = ({ isCardFlipped, cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreview) => {
+const CardPreview = ({ isCardFlipped, cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreviewProps) => {
   const getCardBrandImage = () => {
     const IIN = Math.floor(Number(cardNumbers[0]) / 100);
     let cardBrandImage = "";
