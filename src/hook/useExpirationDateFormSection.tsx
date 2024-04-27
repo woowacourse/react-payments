@@ -48,16 +48,16 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
   }, [document.activeElement])
 
   const formatMonth = () => {
-    if (cardInfo.expiration.value[0].length === 0) return
-    if (REGEX.oneToNine.test(cardInfo.expiration.value[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + cardInfo.expiration.value[0], cardInfo.expiration.value[1]] })
-    } else if (REGEX.zero.test(cardInfo.expiration.value[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.minMonth, cardInfo.expiration.value[1]] })
-    } else if (
-      !REGEX.month.test(cardInfo.expiration.value[0])
-    ) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.maxMonth, cardInfo.expiration.value[1]] })
-    }
+    if (cardInfo.expiration.value[0].length === 2)
+      if (REGEX.oneToNine.test(cardInfo.expiration.value[0])) {
+        dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + cardInfo.expiration.value[0], cardInfo.expiration.value[1]] })
+      } else if (REGEX.zero.test(cardInfo.expiration.value[0])) {
+        dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.minMonth, cardInfo.expiration.value[1]] })
+      } else if (
+        !REGEX.month.test(cardInfo.expiration.value[0])
+      ) {
+        dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.maxMonth, cardInfo.expiration.value[1]] })
+      }
   };
 
   const { handleChange } = useMultiFormSection({
