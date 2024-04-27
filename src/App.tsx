@@ -5,7 +5,6 @@ import ConfirmCardRegistration from "./pages/confirmCardRegistration/confirmCard
 function App() {
   return (
     <>
-      {/* <NewCardPage /> */}
       <BrowserRouter>
         <Routes>
           <Route
