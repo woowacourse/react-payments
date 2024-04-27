@@ -7,11 +7,16 @@ export const CardFrontside = styled.div<{ $brand: cardBrandsType }>`
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background-color: ${(props) => {
-    if (!props.$brand) return 'var(--grey-600)';
-    return CARD_BRANDS[props.$brand].color;
-  }};
+  background-color: ${(props) => props.$brand ? CARD_BRANDS[props.$brand].color : 'var(--grey-600)'};
   box-shadow: 3px 3px 5px 0px var(--card-shadow);
+
+  color: ${(props) => props.$brand === CARD_BRANDS.카카오뱅크.name ? 'var(--grey-700)' : 'var(--grey-100)'};
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  word-break: break-all;
+
   transition: 0.3s ease;
 `;
 
@@ -47,12 +52,6 @@ export const InfoBox = styled.p<{ $length?: number }>`
   align-items: center;
   width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
   height: 20px;
-  color: var(--grey-100);
-  font-size: var(--font-size-xl);
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.08em;
-  word-break: break-all;
 
   img {
     width: 4px;

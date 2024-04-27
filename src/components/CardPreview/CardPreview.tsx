@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { Visa, MasterCard, Dot } from '../../assets';
+import { Visa, MasterCard, Dot, DotBlack } from '../../assets';
 import * as S from './CardPreview.style';
 
-import { CARD_NUMBER } from '../../constants/conditions';
+import { CARD_BRANDS, CARD_NUMBER } from '../../constants/conditions';
 import { cardNumbersType } from '../../types/cardNumbers';
 import { cardBrandsType } from '../../types/cardBrands';
 import checkCardGlobalBrand from '../../utils/checkCardGlobalBrand';
@@ -49,7 +49,10 @@ export default function CardPreview({
 
   const getCardNumberComponent = (number: string, index: number) => {
     if (index <= 1) return `${number} `;
-    return Array.from({ length: number.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
+    return Array.from({ length: number.length }).map((_, idx) => {
+      const img = brand && brand === CARD_BRANDS.카카오뱅크.name ? DotBlack : Dot;
+      return <img src={img} key={idx} alt="dot" />
+    });
   };
 
   return (
