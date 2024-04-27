@@ -1,3 +1,6 @@
+import { MAX_LENGTH } from '@/constants/cardSection';
+import { RegisterFieldInfos, InitialCardNumberState } from '@/types';
+
 const validate = {
   isNumberInRange: ({
     min,
@@ -29,6 +32,24 @@ const validate = {
 
   isEmptyValue: (value: string) => {
     return value.length === 0;
+  },
+
+  isValidAllFormStates: ({ cardNumbers, month, year, cvc, password, name }: RegisterFieldInfos) => {
+    const totalCardNumbers = cardNumbers
+      .map((cardNumber: InitialCardNumberState) => cardNumber.value)
+      .join('');
+
+    if (
+      month.length === MAX_LENGTH.MONTH &&
+      year.length === MAX_LENGTH.YEAR &&
+      totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER &&
+      cvc.length === MAX_LENGTH.CVC &&
+      password.length === MAX_LENGTH.PASSWORD &&
+      name.length
+    ) {
+      return true;
+    }
+    return false;
   },
 };
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MAX_LENGTH } from '../constants/cardSection';
-import { UseDetectCompleteHookProps, InitialCardNumberState } from 'types';
+import { RegisterFieldInfos } from '@/types';
+import validate from '../utils/validate';
 
 const useDetectComplete = ({
   cardNumbers,
@@ -9,22 +9,11 @@ const useDetectComplete = ({
   cvc,
   password,
   name,
-}: UseDetectCompleteHookProps) => {
+}: RegisterFieldInfos) => {
   const [isValidAllFormStates, setIsValidAllFormStates] = useState(false);
 
   useEffect(() => {
-    const totalCardNumbers = cardNumbers
-      .map((cardNumber: InitialCardNumberState) => cardNumber.value)
-      .join('');
-
-    if (
-      month.length === MAX_LENGTH.MONTH &&
-      year.length === MAX_LENGTH.YEAR &&
-      totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER &&
-      cvc.length === MAX_LENGTH.CVC &&
-      password.length === MAX_LENGTH.PASSWORD &&
-      name.length
-    ) {
+    if (validate.isValidAllFormStates({ cardNumbers, month, year, cvc, password, name })) {
       setIsValidAllFormStates(true);
 
       return;
