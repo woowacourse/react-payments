@@ -19,7 +19,7 @@ const CardPasswordInput = memo(() => {
   const [passwordError, setError] = useContextWrapper(CardPasswordErrorContext);
   const inputRef = useContextWrapper(CardPasswordInputContext)[0];
 
-  const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "12" }];
+  const InputInfoList: InputInfoList[] = [{ name: "value", placeholder: "**" }];
 
   return (
     <>

@@ -42,7 +42,7 @@ export const isIssuerValid = ({ name }: CardIssuer, { name: nameError }: CardIss
 
 const PERIOD_ERROR_MESSAGE = {
   NOT_VALID_YEAR: "잘못된 년도를 입력하셨습니다. 유효한 년도를 입력해주세요.",
-  NOT_VALID_MONTH: "잘못된 월을 입력하셨습니다. 우효한 월을 입력해주세요.",
+  NOT_VALID_MONTH: "잘못된 월을 입력하셨습니다. 유효한 월을 입력해주세요.",
 };
 
 export const isPeriodValid = (
@@ -59,7 +59,7 @@ export const isPeriodValid = (
 
   if (month?.length === 2 && year?.length === 2 && !monthError?.isError && !yearError?.isError) {
     if (currentYear === Number(year) && currentMonth > Number(month)) {
-      return { isValid: false, name: "month", errorMessage: PERIOD_ERROR_MESSAGE.NOT_VALID_YEAR };
+      return { isValid: false, name: "month", errorMessage: PERIOD_ERROR_MESSAGE.NOT_VALID_MONTH };
     }
     return { isValid: true };
   }
