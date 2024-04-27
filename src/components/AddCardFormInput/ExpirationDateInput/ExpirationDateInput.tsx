@@ -62,8 +62,8 @@ const ExpirationDateInput = ({
       {
         test: () =>
           isValidDate({
-            month: refs[0].current?.value,
-            year: refs[1].current?.value,
+            month: refs[0].current?.value ?? '',
+            year: refs[1].current?.value ?? '',
           }),
         errorMessage: ERRORS.deprecatedCard,
       },
