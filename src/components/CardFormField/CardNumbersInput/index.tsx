@@ -7,13 +7,13 @@ import {
   CARD_NUMBERS_FORM_MESSAGE,
   CardStep,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useCardInput, useNextFormStep } from '../../hooks';
-import { CardNumbers } from '../../modules/useCardInfoReducer';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../../hooks';
+import { CardNumbers } from '../../../modules/useCardInfoReducer';
 import CardInputSection from '../CardInputSection';
-import ErrorMessage from '../ErrorMessage';
-import Input from '../Input';
+import ErrorMessage from '../../ErrorMessage';
+import Input from '../../Input';
 
 import styles from './style.module.css';
 

@@ -7,12 +7,12 @@ import {
   CardStep,
   ENTER_KEY,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useCardInput, useNextFormStep } from '../../hooks';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../../hooks';
 import CardInputSection from '../CardInputSection';
-import ErrorMessage from '../ErrorMessage';
-import Input from '../Input';
+import ErrorMessage from '../../ErrorMessage';
+import Input from '../../Input';
 
 import styles from './style.module.css';
 

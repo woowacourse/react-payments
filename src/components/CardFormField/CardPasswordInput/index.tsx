@@ -5,13 +5,13 @@ import {
   CARD_PASSWORD_MESSAGE,
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useCardInput } from '../../hooks';
-import { sliceText } from '../../utils/textChangerUtils';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useCardInput } from '../../../hooks';
+import { sliceText } from '../../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
-import ErrorMessage from '../ErrorMessage';
-import Input from '../Input';
+import ErrorMessage from '../../ErrorMessage';
+import Input from '../../Input';
 
 import styles from './style.module.css';
 

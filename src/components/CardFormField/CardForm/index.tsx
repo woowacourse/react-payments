@@ -8,13 +8,13 @@ import {
   useState,
 } from 'react';
 
-import { CardStep, NUMBER_OF_CARD_FORM_STEP } from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
+import { CardStep, NUMBER_OF_CARD_FORM_STEP } from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
 import {
   useCalculateCompletedCardInfo,
   useCleanURL,
   useMoveToPage,
-} from '../../hooks';
+} from '../../../hooks';
 import CardCompanySelect from '../CardCompanySelect';
 import CardCVCInput from '../CardCVCInput';
 import CardExpirationPeriodInput from '../CardExpirationPeriodInput';
@@ -40,25 +40,6 @@ function CardForm() {
   const goNextFormStep = (currentStep: CardStep) => {
     setOpenFormFields((prev) => [...prev, currentStep]);
   };
-  /**
-   * 카드 정보 입력이 왼료되었는지 확인
-   */
-  // const isCardEnrollmentCompleted = useMemo(() => {
-  //   if (!cardFormContext) return;
-
-  //   return Object.entries(cardFormContext?.cardInfo)
-  //     .map(([key, value]) => {
-  //       // value의 타입에 따라서 입력 완료 검사 진행
-  //       if (!value) return false;
-  //       if (key === 'userName') return !!value;
-  //       if (key === 'period') return value.month && value.year;
-  //       if (key === 'numbers')
-  //         return Object.values(value).every((number) => !!number);
-
-  //       return !!value;
-  //     })
-  //     .every((i) => i);
-  // }, [cardFormContext?.cardInfo]);
 
   const isCardEnrollmentCompleted = useMemo(
     () => NUMBER_OF_CARD_FORM_STEP === numberOfCompletedCardInfo,

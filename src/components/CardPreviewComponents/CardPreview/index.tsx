@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react';
 
-import { CARD_COLOR_ETC } from '../../constants';
-import { CardInfo } from '../../modules/useCardInfoReducer';
+import { CARD_COLOR_ETC } from '../../../constants';
+import { CardInfo } from '../../../modules/useCardInfoReducer';
 import CardBackside from '../CardBackside';
 import CardFrontside from '../CardFrontside';
 

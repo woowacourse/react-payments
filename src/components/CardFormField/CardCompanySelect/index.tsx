@@ -5,12 +5,12 @@ import {
   CARD_COMPANY_MESSAGE,
   CardStep,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useNextFormStep } from '../../hooks';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useNextFormStep } from '../../../hooks';
+import ErrorMessage from '../../ErrorMessage';
+import Select from '../../Select';
 import CardInputSection from '../CardInputSection';
-import ErrorMessage from '../ErrorMessage';
-import Select from '../Select';
 
 const PLACE_HOLDER = 'place_holder';
 export interface CardCompanySelectProps {

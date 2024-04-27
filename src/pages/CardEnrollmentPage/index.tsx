@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { CardForm, CardPreview, ProgressBar } from '../../components';
-import { CardSide } from '../../components/CardPreview';
+import { CardSide } from '../../components/CardPreviewComponents/CardPreview';
 import { NUMBER_OF_CARD_FORM_STEP } from '../../constants';
 import CardFormContext, {
   CardFormContextType,

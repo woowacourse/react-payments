@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-import { CardSide } from '../components/CardPreview';
+import { CardSide } from '../components/CardPreviewComponents/CardPreview';
 import { UseCardInfoReducerReturn } from '../modules/useCardInfoReducer';
 
 export interface CardFormContextType extends UseCardInfoReducerReturn {

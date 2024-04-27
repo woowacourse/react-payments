@@ -13,14 +13,14 @@ import {
   CARD_PERIOD_REGEXP,
   CardStep,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useCardInput, useNextFormStep } from '../../hooks';
-import { CardPeriod } from '../../modules/useCardInfoReducer';
-import { convertToTwoDigits } from '../../utils/textChangerUtils';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../../hooks';
+import { CardPeriod } from '../../../modules/useCardInfoReducer';
+import { convertToTwoDigits } from '../../../utils/textChangerUtils';
+import ErrorMessage from '../../ErrorMessage';
+import Input from '../../Input';
 import CardInputSection from '../CardInputSection';
-import ErrorMessage from '../ErrorMessage';
-import Input from '../Input';
 
 import styles from './style.module.css';
 

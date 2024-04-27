@@ -139,6 +139,7 @@ npm run storybook
 | assets     | 사진등 관리                                                       |
 | components | 컴포넌트 (해당 컴포넌트와 이에 대한 스타일, hook을 관리)          |
 | constants  | 주요 상수 관리                                                    |
+| context    | context 관리                                                      |
 | hooks      | 커스텀 훅 관리(단, 전역 상태에 대한 커스텀 훅은 modules에서 관리) |
 | modules    | 전역 상태 관리                                                    |
 | pages      | 페이지 관리                                                       |
@@ -153,50 +154,27 @@ npm run storybook
   
 ```
 📦components
- ┣ 📂CardBackSide
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardCompanySelect
+ ┣ 📂CardFormField
+ ┃ ┣ 📂CardCompanySelect
+ ┃ ┣ 📂CardCVCInput
+ ┃ ┣ 📂CardExpirationPeriodInput
+ ┃ ┣ 📂CardForm
+ ┃ ┣ 📂CardInputSection
+ ┃ ┣ 📂CardNumbersInput
+ ┃ ┣ 📂CardPasswordInput
+ ┃ ┣ 📂CardUserNameInput
  ┃ ┗ 📜index.tsx
- ┣ 📂CardCVCInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardExpirationPeriodInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardForm
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardFrontside
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardInputSection
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardNumbersInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardPasswordInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardPreview
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
- ┣ 📂CardUserNameInput
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
+ ┣ 📂CardPreviewComponents
+ ┃ ┣ 📂CardBackside
+ ┃ ┣ 📂CardFrontside
+ ┃ ┣ 📂CardPreview
+ ┃ ┗ 📜index.tsx
  ┣ 📂ErrorMessage
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
  ┣ 📂Input
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
  ┣ 📂Layout
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
+ ┣ 📂PageLinkSection
+ ┣ 📂ProgressBar
  ┣ 📂Select
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
  ┗ 📜index.ts
 ```
   
@@ -210,14 +188,27 @@ npm run storybook
 ```
 📦pages
  ┣ 📂CardEnrollmentConfirmation
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
  ┣ 📂CardEnrollmentPage
- ┃ ┗ 📜index.tsx
  ┣ 📂Home
- ┃ ┣ 📜index.tsx
- ┃ ┗ 📜style.module.css
+ ┣ 📂NonePage
  ┗ 📜index.tsx
+```
+  
+  </div>
+</details>
+
+<details>
+  <summary>🗂️ hooks 파일 구조 보기</summary>
+  <div markdown="1">
+  
+```
+📦hooks
+ ┣ 📜index.ts
+ ┣ 📜useCalculateCompletedCardInfo.ts
+ ┣ 📜useCardInput.ts
+ ┣ 📜useCleanURL.ts
+ ┣ 📜useMoveToPage.ts
+ ┗ 📜useNextFormStep.ts
 ```
   
   </div>

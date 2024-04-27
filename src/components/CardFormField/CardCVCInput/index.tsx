@@ -6,13 +6,13 @@ import {
   CARD_CVC_REGEXP,
   CardStep,
   ERROR_MESSAGE,
-} from '../../constants';
-import CardFormContext from '../../contexts/CardFormContext';
-import { useCardInput, useNextFormStep } from '../../hooks';
+} from '../../../constants';
+import CardFormContext from '../../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../../hooks';
+import { CardSide } from '../../CardPreviewComponents/CardPreview';
+import ErrorMessage from '../../ErrorMessage';
+import Input from '../../Input';
 import CardInputSection from '../CardInputSection';
-import { CardSide } from '../CardPreview';
-import ErrorMessage from '../ErrorMessage';
-import Input from '../Input';
 
 import styles from './style.module.css';
 
