@@ -10,12 +10,25 @@ import {
   isPasswordLength,
   isUpperCase,
 } from "../utils/validators";
-import useInput from "./useInput";
+import useInput, { UseInputReturn } from "./useInput";
 import useSelect from "./useSelect";
 import useFocus from "./useFocus";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../constants/path";
 import { CARD_INFO } from "../constants/cardInformation";
+import { CardCompanyType } from "../components/CardCompanySelect/CardCompanySelect";
+
+export type CardNumbersType = UseInputReturn[];
+
+export interface CardInformation {
+  cardNumbers: CardNumbersType;
+  cardExpirationMonth: UseInputReturn;
+  cardExpirationYear: UseInputReturn;
+  cardOwnerName: UseInputReturn;
+  cardCompany: CardCompanyType;
+  cardCVC: UseInputReturn;
+  cardPassword: UseInputReturn;
+}
 
 const useCardForm = () => {
   const [step, setStep] = useState([

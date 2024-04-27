@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { CARD_INFO } from "../constants/cardInformation";
+import { CardInformation } from './useCardForm';
 
 const useFocus = (
   step: boolean[],

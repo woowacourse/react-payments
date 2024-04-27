@@ -1,4 +1,5 @@
 import { CARD_INFO } from "../../constants/cardInformation";
+import { UseInputReturn } from '../../hooks/useInput';
 import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, CaptionText, LabelText } from "../atoms/text";

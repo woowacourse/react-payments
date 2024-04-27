@@ -9,6 +9,14 @@ interface UseInputOptions {
   validateOnBlur?: ValidationFunction[];
 }
 
+export interface UseInputReturn {
+  value: string;
+  ref: React.Ref;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  validateMessage: string;
+}
+
 const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
   const [value, setValue] = useState(initValue);
   const [validateMessage, setValidateMessage] = useState("");

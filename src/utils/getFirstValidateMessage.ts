@@ -1,3 +1,5 @@
+import { UseInputReturn } from '../hooks/useInput';
+
 export const getFirstValidateMessage = (
   CardInformationObjects: UseInputReturn[]
 ) => {

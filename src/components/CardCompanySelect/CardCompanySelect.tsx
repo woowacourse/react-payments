@@ -2,6 +2,12 @@ import { CARD_COMPANIES } from "../../constants/cardInformation";
 import { CaptionText, SubTitleText } from "../atoms/text";
 import * as S from "./style";
 
+export type CardCompanyType = {
+  value: string;
+  ref: React.Ref;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
 interface Props {
   cardCompany: CardCompanyType;
 }
