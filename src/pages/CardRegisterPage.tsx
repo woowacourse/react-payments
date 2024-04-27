@@ -13,7 +13,7 @@ const CardRegisterPage = () => {
   const { cardNumbers, cardType, expiryDate, cardholderName, cvc } = control;
 
   return (
-    <PageContainer>
+    <S.PageContainer>
       <CardPreview
         isFront={isCardFront}
         cardType={cardType.value}
@@ -22,23 +22,25 @@ const CardRegisterPage = () => {
         cardholderName={cardholderName.value}
         cvc={cvc.value}
       />
-      <CardInfoFormWrapper>
+      <S.CardInfoFormWrapper>
         <CardInfoForm cardInfoControl={control} completionStatus={completionStatus} setIsCardFront={setIsCardFront} />
-      </CardInfoFormWrapper>
-    </PageContainer>
+      </S.CardInfoFormWrapper>
+    </S.PageContainer>
   );
 };
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
-`;
+const S = {
+  PageContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+  `,
 
-const CardInfoFormWrapper = styled.section`
-  margin-top: 50px;
-  margin-bottom: 70px;
-`;
+  CardInfoFormWrapper: styled.section`
+    margin-top: 50px;
+    margin-bottom: 70px;
+  `,
+};
 
 export default CardRegisterPage;

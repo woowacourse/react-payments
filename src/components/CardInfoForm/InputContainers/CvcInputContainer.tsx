@@ -4,7 +4,7 @@ import InputContainer from '../../common/InputContainer';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
 
-import { ErrorText, ErrorWrapper } from '../../../styles/common';
+import * as S from '../../../styles/common';
 
 export interface ICvcInputContainerProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,9 +41,9 @@ const CvcInputContainer = ({
           width="100%"
         />
       </InputContainer>
-      <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
-      </ErrorWrapper>
+      <S.ErrorWrapper>
+        <S.ErrorText>{errorMessage}</S.ErrorText>
+      </S.ErrorWrapper>
     </div>
   );
 };

@@ -34,21 +34,22 @@ const CardBrandLogo = ({ firstTwoDigits }: ICardBrandLogoProps) => {
   }
 
   return (
-    <BrandLogoContainer>
-      <StyledImage src={matchedLogo} />
-    </BrandLogoContainer>
+    <S.BrandLogoContainer>
+      <S.StyledImage src={matchedLogo} />
+    </S.BrandLogoContainer>
   );
 };
 
-const BrandLogoContainer = styled.div`
-  width: 50px;
-  border-radius: 5px;
-`;
-
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
+const S = {
+  BrandLogoContainer: styled.div`
+    width: 50px;
+    border-radius: 5px;
+  `,
+  StyledImage: styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  `,
+};
 
 export default CardBrandLogo;

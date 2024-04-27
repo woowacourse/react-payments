@@ -4,7 +4,7 @@ import Input from '../../common/Input';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
-import { ErrorText, ErrorWrapper } from '../../../styles/common';
+import * as S from '../../../styles/common';
 
 export default function PasswordInputContainer({ value, onChange, errorStatus }: IInputControl) {
   const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
@@ -33,9 +33,9 @@ export default function PasswordInputContainer({ value, onChange, errorStatus }:
           placeholder="12"
         />
       </InputContainer>
-      <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
-      </ErrorWrapper>
+      <S.ErrorWrapper>
+        <S.ErrorText>{errorMessage}</S.ErrorText>
+      </S.ErrorWrapper>
     </div>
   );
 }

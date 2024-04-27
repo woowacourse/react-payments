@@ -11,14 +11,16 @@ const cardTypeOptions = getObjectKeys(CARD_TYPE).map(cardType => ({ value: cardT
 
 export default function CardTypeSelectContainer({ value, onChange }: IInputControl<HTMLSelectElement>) {
   return (
-    <Container>
+    <S.Container>
       <InputContainer title="카드사를 선택해 주세요" subtitle="현재 국내 카드사만 가능합니다.">
         <Select placeholder="카드사를 선택해 주세요" value={value} onChange={onChange} options={cardTypeOptions} />
       </InputContainer>
-    </Container>
+    </S.Container>
   );
 }
 
-const Container = styled.div`
-  margin-bottom: 44px;
-`;
+const S = {
+  Container: styled.div`
+    margin-bottom: 44px;
+  `,
+};

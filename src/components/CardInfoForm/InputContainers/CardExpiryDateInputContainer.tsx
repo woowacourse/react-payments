@@ -6,7 +6,7 @@ import InputContainer from '../../common/InputContainer';
 import useExpiryDate from '../../../hooks/useExpiryDate';
 import { IInputControl } from '../../../hooks/useInput';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
-import { ErrorWrapper, ErrorText } from '../../../styles/common';
+import * as S from '../../../styles/common';
 
 const MONTH_LENGTH = 2;
 
@@ -66,10 +66,10 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           width="48%"
         />
       </InputContainer>
-      <ErrorWrapper>
-        <ErrorText>{monthErrorMessage}</ErrorText>
-        <ErrorText>{yearErrorMessage}</ErrorText>
-      </ErrorWrapper>
+      <S.ErrorWrapper>
+        <S.ErrorText>{monthErrorMessage}</S.ErrorText>
+        <S.ErrorText>{yearErrorMessage}</S.ErrorText>
+      </S.ErrorWrapper>
     </div>
   );
 };

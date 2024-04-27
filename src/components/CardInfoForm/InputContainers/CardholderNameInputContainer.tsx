@@ -4,7 +4,7 @@ import InputContainer from '../../common/InputContainer';
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
 import { IInputControl } from '../../../hooks/useInput';
-import { ErrorWrapper, ErrorText } from '../../../styles/common';
+import * as S from '../../../styles/common';
 
 const CardholderNameInputContainer = ({ value, setValue, validateValue, errorStatus }: IInputControl) => {
   const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
@@ -33,9 +33,9 @@ const CardholderNameInputContainer = ({ value, setValue, validateValue, errorSta
           maxLength={100}
         />
       </InputContainer>
-      <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
-      </ErrorWrapper>
+      <S.ErrorWrapper>
+        <S.ErrorText>{errorMessage}</S.ErrorText>
+      </S.ErrorWrapper>
     </div>
   );
 };

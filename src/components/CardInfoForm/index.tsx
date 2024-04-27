@@ -47,22 +47,24 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
       {sequence >= 1 && <CardTypeSelectContainer {...cardType} />}
       <CardNumbersInputContainer {...cardNumbers} />
       {isSubmitable && (
-        <SubmitButton onClick={onSubmit} type="button">
+        <S.SubmitButton onClick={onSubmit} type="button">
           확인
-        </SubmitButton>
+        </S.SubmitButton>
       )}
     </form>
   );
 }
 
-const SubmitButton = styled.button`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #333333;
-  color: #f3f3f3;
-  padding: 20px 0;
+const S = {
+  SubmitButton: styled.button`
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333333;
+    color: #f3f3f3;
+    padding: 20px 0;
 
-  left: 0;
-  font-size: 1.1rem;
-`;
+    left: 0;
+    font-size: 1.1rem;
+  `,
+};

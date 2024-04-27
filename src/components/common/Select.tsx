@@ -13,7 +13,7 @@ export interface ISelectProps extends React.SelectHTMLAttributes<HTMLSelectEleme
 
 export default function Select({ placeholder, options, ...rest }: ISelectProps) {
   return (
-    <StyledSelect {...rest}>
+    <S.Select {...rest}>
       {placeholder && (
         <option value="" disabled>
           {placeholder}
@@ -26,19 +26,21 @@ export default function Select({ placeholder, options, ...rest }: ISelectProps) 
           </option>
         );
       })}
-    </StyledSelect>
+    </S.Select>
   );
 }
 
-const StyledSelect = styled.select<React.SelectHTMLAttributes<HTMLSelectElement>>`
-  width: 100%;
-  height: 40px;
-  padding: 10px 7px;
-  border: 1px solid #acacac;
-  border-radius: 4px;
-  font-size: 15.5px;
-  font-weight: 400;
+const S = {
+  Select: styled.select<React.SelectHTMLAttributes<HTMLSelectElement>>`
+    width: 100%;
+    height: 40px;
+    padding: 10px 7px;
+    border: 1px solid #acacac;
+    border-radius: 4px;
+    font-size: 15.5px;
+    font-weight: 400;
 
-  cursor: pointer;
-  color: ${({ value }) => (value ? '#000000' : '#acacac')};
-`;
+    cursor: pointer;
+    color: ${({ value }) => (value ? '#000000' : '#acacac')};
+  `,
+};
