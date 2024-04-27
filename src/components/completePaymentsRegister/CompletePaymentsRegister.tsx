@@ -4,7 +4,7 @@ import { CardIssuer } from '../../type';
 import ISSUER_KOREAN from '../../constants/issuerKorean';
 import { Link } from 'react-router-dom';
 import PATH from '../../constants/path';
-import registerComplete from '../Images/register_complete.png';
+import registerComplete from '../../Images/register_complete.png';
 import styled from '@emotion/styled';
 
 interface Props {
