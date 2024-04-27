@@ -45,7 +45,7 @@ export const isPeriodValid = (
   { month: monthError, year: yearError }: CardValidityPeriodError
 ) => {
   //TODO: 날짜 유효성 검사
-  if (month && year && !monthError?.isError && !yearError?.isError) {
+  if (month?.length === 2 && year?.length === 2 && !monthError?.isError && !yearError?.isError) {
     return true;
   }
   return false;
