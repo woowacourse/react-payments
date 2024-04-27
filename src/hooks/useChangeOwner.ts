@@ -13,14 +13,14 @@ export default function useChangeOwner() {
     setOwner(value);
   };
 
-  const handleBlurOwner = () => {
+  const handleSubmitOwner = () => {
     const isCompleted = Validation.isNotEmpty(owner);
     setOwnerValid((prevState) => {
       return { ...prevState, isCompleted }
     });
   }
 
-  return { owner, ownerValid, handleChangeOwner, handleBlurOwner };
+  return { owner, ownerValid, handleChangeOwner, handleSubmitOwner };
 }
 
 function validateOwner(value: string) {

@@ -37,7 +37,7 @@ export default function CardRegister() {
   const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
   const { brand, brandValid, handleChangeBrand } = useChangeBrand();
   const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
-  const { owner, ownerValid, handleChangeOwner, handleBlurOwner } = useChangeOwner();
+  const { owner, ownerValid, handleChangeOwner, handleSubmitOwner } = useChangeOwner();
   const { CVC, CVCValid, handleChangeCVC } = useChangeCVC();
   const { PINValid, handleChangePIN } = useChangePIN();
 
@@ -108,7 +108,7 @@ export default function CardRegister() {
         )}
 
         {currentInputStep >= CARD_INPUT_STEP.Owner && (
-          <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} onBlurOwner={handleBlurOwner} />
+          <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} onSubmitOwner={handleSubmitOwner} />
         )}
 
         {currentInputStep >= CARD_INPUT_STEP.ExpireDate && (
