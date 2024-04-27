@@ -3,6 +3,7 @@ import useMultiFormSection from "./useMultiFormSection"
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
+import { Mastercard } from "../stories/CardPreview.stories";
 
 interface UseCardNumbersFormSectionProps {
   dispatchCardInfo: React.Dispatch<CardInfoAction>
@@ -38,13 +39,24 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
     }
   };
 
+  const dispatchCardNumbersAndBrand = (values: string[]) => {
+    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values })
+    if (REGEX.masterCard.test(values[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'MasterCard' })
+    } else if (REGEX.visaCard.test(values[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'Visa' })
+    } else {
+      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'none' })
+    }
+  }
+
   const { values, handleChange } = useMultiFormSection({
     refs: refs,
     initialValue: new Array(OPTION.cardNumberMaxLength).fill(''),
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.cardNumberMaxLength,
-    dispatchCardInfo: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values }),
+    dispatchCardInfo: dispatchCardNumbersAndBrand,
     setError: setError,
     hasErrors: hasErrors,
     setHasErrors: setHasErrors,
