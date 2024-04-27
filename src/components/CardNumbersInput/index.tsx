@@ -8,7 +8,7 @@ import {
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
-import useInput from '../../hooks/useInput';
+import useCardInput from '../../hooks/useCardInput';
 import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -78,7 +78,10 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     if (error.every((i) => !i)) goNextFormStep(CARD_FORM_STEP.numbers);
   };
 
-  const { value, setValue, error } = useInput<CardNumbers, CardNumbersError>({
+  const { value, setValue, error } = useCardInput<
+    CardNumbers,
+    CardNumbersError
+  >({
     initialValue: Array.from({ length }, () => undefined),
     initialError: Array.from({ length }, () => false),
     validateValue: checkNumbersError,

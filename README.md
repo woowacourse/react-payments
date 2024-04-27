@@ -153,7 +153,7 @@ npm run storybook
   
 ```
 📦components
- ┣ 📂CardBackImg
+ ┣ 📂CardBackSide
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
  ┣ 📂CardCompanySelect
@@ -167,7 +167,7 @@ npm run storybook
  ┣ 📂CardForm
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
- ┣ 📂CardFrontImg
+ ┣ 📂CardFrontside
  ┃ ┣ 📜index.tsx
  ┃ ┗ 📜style.module.css
  ┣ 📂CardInputSection

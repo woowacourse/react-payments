@@ -6,7 +6,7 @@ import {
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useInput from '../../hooks/useInput';
+import useCardInput from '../../hooks/useCardInput';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -30,7 +30,7 @@ function CardPasswordInput(props: CardPasswordInputProps) {
     editCardPassword(error ? null : value);
   };
 
-  const { value, setValue, error } = useInput<string, boolean>({
+  const { value, setValue, error } = useCardInput<string, boolean>({
     initialValue: '',
     initialError: false,
     validateValue,

@@ -2,8 +2,8 @@ import { useMemo, useRef } from 'react';
 
 import { CARD_COLOR_ETC } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
-import CardBackImg from '../CardBackImg';
-import CardFrontImg from '../CardFrontImg';
+import CardBackSide from '../CardBackSide';
+import CardFrontside from '../CardFrontside';
 
 import styles from './style.module.css';
 
@@ -33,10 +33,10 @@ function CardPreview(props: CardPreviewProps) {
     <div className={styles.cardPreview}>
       <div ref={imgRef} className={imgClassName} style={imgStyle}>
         <div>
-          <CardFrontImg cardInfo={cardInfo} />
+          <CardFrontside cardInfo={cardInfo} />
         </div>
         <div>
-          <CardBackImg cvc={cardInfo.cvc} />
+          <CardBackSide cvc={cardInfo.cvc} />
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import styles from './style.module.css';
 
-export interface CardBackImgProps {
+export interface CardBackSideProps {
   cvc: string | null;
 }
-function CardBackImg(props: CardBackImgProps) {
+function CardBackside(props: CardBackSideProps) {
   const { cvc } = props;
   return (
-    <div className={styles.backImg}>
+    <div className={styles.cardBackside}>
       <div className={styles.line}>
         <div className={styles.cvc}>{cvc}</div>
       </div>
@@ -14,4 +14,4 @@ function CardBackImg(props: CardBackImgProps) {
   );
 }
 
-export default CardBackImg;
+export default CardBackside;

@@ -7,7 +7,7 @@ import {
   CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useInput from '../../hooks/useInput';
+import useCardInput from '../../hooks/useCardInput';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -47,7 +47,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     if (!error) goNextFormStep(CARD_FORM_STEP.userName);
   };
 
-  const { value, setValue, error } = useInput<string, boolean>({
+  const { value, setValue, error } = useCardInput<string, boolean>({
     initialValue: '',
     initialError: false,
     validateValue: validateName,

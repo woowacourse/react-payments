@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function useInput<V, E>(props: {
+function useCardInput<V, E>(props: {
   initialValue: V;
   initialError: E;
   validateValue: (value: V) => { newError: E };
@@ -44,4 +44,4 @@ function useInput<V, E>(props: {
   return { value, setValue, error };
 }
 
-export default useInput;
+export default useCardInput;

@@ -7,7 +7,7 @@ import {
   CARD_FORM_STEP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useInput from '../../hooks/useInput';
+import useCardInput from '../../hooks/useCardInput';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
 import ErrorMessage from '../ErrorMessage';
@@ -44,7 +44,7 @@ function CardCVCInput(props: CardCVCInputProps) {
     }, 1000);
   };
 
-  const { value, setValue, error } = useInput<string, boolean>({
+  const { value, setValue, error } = useCardInput<string, boolean>({
     initialValue: '',
     initialError: false,
     validateValue: validateCVC,

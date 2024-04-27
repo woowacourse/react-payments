@@ -6,14 +6,14 @@ import { CardInfo } from '../../modules/useCardInfoReducer';
 
 import styles from './style.module.css';
 
-export interface CardFrontImgProps {
+export interface CardFrontsideProps {
   cardInfo: CardInfo;
 }
 
 const SLASH = '/';
 const DOT = '·';
 
-function CardFrontImg(props: CardFrontImgProps) {
+function CardFrontside(props: CardFrontsideProps) {
   const { cardInfo } = props;
   const { mark, numbers, period, userName, company } = cardInfo;
 
@@ -41,7 +41,7 @@ function CardFrontImg(props: CardFrontImgProps) {
   );
 
   return (
-    <div className={styles.cardFrontImg}>
+    <div className={styles.cardFrontside}>
       <section className={styles.top}>
         <img src={CardChip} alt="card chip" />
         <img src={markInfo?.src} alt={markInfo?.alt} />
@@ -66,4 +66,4 @@ function CardFrontImg(props: CardFrontImgProps) {
   );
 }
 
-export default CardFrontImg;
+export default CardFrontside;

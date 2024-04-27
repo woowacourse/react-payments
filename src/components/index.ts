@@ -1,9 +1,9 @@
-import CardBackImg from './CardBackImg';
+import CardBackside from './CardBackside';
 import CardCompanySelect from './CardCompanySelect';
 import CardCVCInput from './CardCVCInput/index';
 import CardExpirationPeriodInput from './CardExpirationPeriodInput/index';
 import CardForm from './CardForm';
-import CardFrontImg from './CardFrontImg';
+import CardFrontside from './CardFrontside';
 import CardInputSection from './CardInputSection';
 import CardNumbersInput from './CardNumbersInput';
 import CardPasswordInput from './CardPasswordInput';
@@ -15,11 +15,11 @@ import Layout from './Layout';
 import Select from './Select/index';
 
 export {
-  CardBackImg,
+  CardBackside,
   CardCompanySelect,
   CardCVCInput,
   CardExpirationPeriodInput,
-  CardFrontImg,
+  CardFrontside,
   CardForm,
   CardInputSection,
   CardNumbersInput,

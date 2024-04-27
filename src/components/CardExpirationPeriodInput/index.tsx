@@ -7,7 +7,7 @@ import {
   CARD_PERIOD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useInput from '../../hooks/useInput';
+import useCardInput from '../../hooks/useCardInput';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
@@ -135,7 +135,7 @@ export default function CardExpirationPeriodInput(
     return { newError: newPeriodError };
   };
 
-  const { value, setValue, error } = useInput<CardPeriod, PeriodError>({
+  const { value, setValue, error } = useCardInput<CardPeriod, PeriodError>({
     initialValue: INITIAL_VALUE,
     initialError: INITIAL_ERROR,
     validateValue: validateCardPeriod,
