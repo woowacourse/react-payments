@@ -1,6 +1,7 @@
 :root {
   --error-color: #ff3d3d;
   --layout-max-width: 480px;
+  --layout-mobile-width: calc(100vw);
   --layout-padding: 30px;
   --submit-btn-height: 3.25rem;
 }

@@ -4,3 +4,10 @@
   width: var(--layout-max-width);
   height: 100vh;
 }
+
+@media screen and (max-width: 480px) {
+  .layout {
+    padding: 10px 14px;
+    width: var(--layout-mobile-width);
+  }
+}

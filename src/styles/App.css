@@ -43,3 +43,9 @@ a:link {
   color: inherit; /* 링크 색상을 부모 요소의 색상으로 상속 */
   text-decoration: none; /* 링크에 밑줄 제거 */
 }
+
+@media screen and (max-width: 480px) {
+  #app {
+    max-width: 100vw;
+  }
+}

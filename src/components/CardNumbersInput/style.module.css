@@ -7,3 +7,11 @@
     width: 20%;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .inputWrap {
+    input {
+      width: calc(20% - 0.625rem);
+    }
+  }
+}

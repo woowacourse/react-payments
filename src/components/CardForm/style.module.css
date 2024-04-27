@@ -18,3 +18,9 @@
   height: var(--submit-btn-height);
   color: #f3f3f3;
 }
+
+@media screen and (max-width: 480px) {
+  .submitBtn {
+    width: var(--layout-mobile-width);
+  }
+}

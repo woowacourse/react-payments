@@ -31,3 +31,9 @@
   font-size: 0.75rem;
   line-height: 0.9375rem;
 }
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 1rem;
+  }
+}

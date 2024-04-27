@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   margin: auto;
-  width: 23.125rem;
+  width: 100%;
   height: 100%;
 }
 .btn {
