@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface UseFormSectionProps {
   value: string;
   ref: React.MutableRefObject<HTMLInputElement>;
-  initialValue: string;
   regex: RegExp;
   errorMessage: string;
   maxLength?: number;

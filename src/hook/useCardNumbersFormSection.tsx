@@ -5,12 +5,13 @@ import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 
 interface UseCardNumbersFormSectionProps {
+  cardInfo: CardInfo,
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   refs: React.MutableRefObject<HTMLInputElement[]>
 }
 
 const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
-  const { dispatchCardInfo, refs } = props;
+  const { cardInfo, dispatchCardInfo, refs } = props;
   const [hasErrors, setHasErrors] = useState(new Array(refs.current.length).fill(false))
   const [error, setError] = useState('');
 
@@ -49,9 +50,9 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
     }
   }
 
-  const { values, handleChange } = useMultiFormSection({
+  const { handleChange } = useMultiFormSection({
+    values: cardInfo.cardNumbers.value,
     refs: refs,
-    initialValue: new Array(OPTION.cardNumberMaxLength).fill(''),
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.cardNumberMaxLength,
@@ -62,7 +63,7 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
     validate: validateCardNumbers,
   });
 
-  return { values, error, hasErrors, handleChange } as const
+  return { error, hasErrors, handleChange } as const
 }
 
 export default useCardNumbersFormSection;

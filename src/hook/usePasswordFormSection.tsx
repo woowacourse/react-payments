@@ -18,7 +18,6 @@ const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
   const { handleChange } = useFormSection({
     value: cardInfo.password.value,
     ref: ref,
-    initialValue: '',
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.passwordMaxLength,

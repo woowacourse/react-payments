@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import useFocusNext from './useFocusNext';
 
 interface UseMultiFormSectionProps {
+  values: string[];
   refs: React.MutableRefObject<HTMLInputElement[]>;
-  initialValue: string[];
   regex: RegExp;
   errorMessage: string;
   maxLength?: number;
@@ -15,16 +15,17 @@ interface UseMultiFormSectionProps {
 }
 
 const useMultiFormSection = (props: UseMultiFormSectionProps) => {
-  const { refs, initialValue, regex, errorMessage, maxLength, dispatchCardInfo, setError, hasErrors, setHasErrors, validate } = props
+  const { values, refs, regex, errorMessage, maxLength, dispatchCardInfo, setError, hasErrors, setHasErrors, validate } = props
 
-  const [values, setValues] = useState(initialValue);
   const { focusNext } = useFocusNext(refs);
 
   useEffect(() => {
     if (refs.current) {
       refs.current.forEach((element, index) => {
         element.onfocus = () => { resetIndexError(index) };
-        element.onblur = () => { resetIndexError(index) };
+        element.onblur = () => {
+          resetIndexError(index)
+        };
       })
 
       return () => {
@@ -59,7 +60,6 @@ const useMultiFormSection = (props: UseMultiFormSectionProps) => {
       resetIndexError(index);
     }
 
-    setValues(newValues);
     dispatchCardInfo(newValues);
 
     if (newValues[index].length === maxLength) {

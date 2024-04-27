@@ -16,7 +16,6 @@ const useNameFormSection = (props: UseNameFormSectionProps) => {
   const { handleChange } = useFormSection({
     value: cardInfo.name.value,
     ref: ref,
-    initialValue: '',
     regex: REGEX.name,
     errorMessage: ERROR_MESSAGE.onlyEnglish,
     dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value }),

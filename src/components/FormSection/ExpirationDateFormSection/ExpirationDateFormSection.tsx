@@ -15,7 +15,7 @@ interface ExpirationDateFormSectionProps {
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
-  const { values, error, hasErrors, handleChange } = useExpirationDateFormSection({ dispatchCardInfo, refs })
+  const { error, hasErrors, handleChange } = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
 
   const ExpirationDateForm = (
     <>
@@ -23,7 +23,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         ref={(input) => refs.current[0] = input}
         placeholder="MM"
         maxLength={OPTION.expirationDateMaxLength}
-        value={values[0]}
+        value={cardInfo.expiration.value[0]}
         hasError={hasErrors[0]}
         handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 0)}
         autoFocus={true}
@@ -32,7 +32,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         ref={(input) => refs.current[1] = input}
         placeholder="YY"
         maxLength={OPTION.expirationDateMaxLength}
-        value={values[1]}
+        value={cardInfo.expiration.value[1]}
         hasError={hasErrors[1]}
         handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 1)}
       />

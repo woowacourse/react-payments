@@ -19,7 +19,6 @@ const useCVCFormSection = (props: UseCVCFormSectionProps) => {
   const { handleChange } = useFormSection({
     value: cardInfo.cvc.value,
     ref: ref,
-    initialValue: '',
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.cvcMaxLength,

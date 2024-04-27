@@ -15,7 +15,7 @@ interface CardNumbersFormSectionProps {
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.cardNumberInputCount).fill(null));
-  const { values, error, hasErrors, handleChange } = useCardNumbersFormSection({ dispatchCardInfo, refs })
+  const { error, hasErrors, handleChange } = useCardNumbersFormSection({ cardInfo, dispatchCardInfo, refs })
 
   const CardNumbersForm = (
     <>
@@ -25,7 +25,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
           key={index}
           placeholder="1234"
           maxLength={OPTION.cardNumberMaxLength}
-          value={values[index]}
+          value={cardInfo.cardNumbers.value[index]}
           hasError={hasErrors[index]}
           handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, index)}
           autoFocus={index === 0}

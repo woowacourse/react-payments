@@ -5,6 +5,7 @@ import ERROR_MESSAGE from "../constants/errorMessage";
 import useMultiFormSection from "./useMultiFormSection";
 
 interface UseExpirationFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   refs: React.MutableRefObject<HTMLInputElement[]>
 }
@@ -15,7 +16,7 @@ const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
 const now = year + month;
 
 const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
-  const { dispatchCardInfo, refs } = props;
+  const { cardInfo, dispatchCardInfo, refs } = props;
   const [hasErrors, setHasErrors] = useState(new Array(refs.current.length).fill(false))
   const [error, setError] = useState('');
 
@@ -42,8 +43,8 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
   };
 
-  const formatMonth = () => {
-    console.log(values[0])
+  const formatMonth = (values: string[]) => {
+    // console.log(values)
     if (values[0].length === 0) return
     if (REGEX.oneToNine.test(values[0])) {
       dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + values[0], values[1]] })
@@ -56,9 +57,9 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
   };
 
-  const { values, handleChange } = useMultiFormSection({
+  const { handleChange } = useMultiFormSection({
+    values: cardInfo.expiration.value,
     refs: refs,
-    initialValue: new Array(OPTION.expirationDateInputCount).fill(''),
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.expirationDateMaxLength,
@@ -70,7 +71,7 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
   });
 
   const validateExpired = () => {
-    const expireDate = +(values[1] + values[0]);
+    const expireDate = +(cardInfo.expiration.value[1] + cardInfo.expiration.value[0]);
     const nowDate = +now;
 
     if (nowDate - expireDate > 0) {
@@ -82,7 +83,7 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
   }
 
-  return { values, error, hasErrors, handleChange } as const
+  return { error, hasErrors, handleChange } as const
 }
 
 export default useExpirationDateFormSection;
