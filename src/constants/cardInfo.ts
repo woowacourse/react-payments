@@ -20,7 +20,6 @@ export const SYMBOLS = {
   slash: '/',
 };
 
-// TODO: Map의 key를 CardIssuers로 바꾸기..
 export const CARD_ISSUER_SELECTOR = new Map<string, CSSModuleClasses[string]>([
   ['BC카드', 'bc'],
   ['신한카드', 'shinhan'],
