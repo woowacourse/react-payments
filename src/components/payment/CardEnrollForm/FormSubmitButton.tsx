@@ -9,6 +9,8 @@ export default function FormSubmitButton({ onClick }: FormSubmitButtonProps) {
 }
 
 const SubmitButton = styled.button`
+  position: fixed;
+  bottom: 0;
   width: 100%;
   padding: 16px 0;
   border: none;
