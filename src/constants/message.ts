@@ -6,7 +6,7 @@ export const ERROR_MESSAGE = {
     expired: '유효 기간이 만료되었습니다. 유효한 기간을 입력해 주세요.',
   },
   userName: '소유자 이름은 영문과 공백만 입력 가능합니다.',
-  cardIssuer: '카드사를 선택해 주세요.',
+  cardCompany: '카드사를 선택해 주세요.',
   CVCNumber: 'CVC 번호는 3자리 숫자만 입력 가능합니다.',
   password: '비밀번호는 2자리 숫자만 입력 가능합니다.',
 };
@@ -33,7 +33,7 @@ export const CARD_USER_FORM_MESSAGE = {
   placeholder: '소유자 이름',
 };
 
-export const CARD_ISSUER_FORM_MESSAGE = {
+export const CARD_COMPANY_FORM_MESSAGE = {
   title: '카드사를 선택해 주세요',
   subTitle: '현재 국내 카드사만 가능합니다.',
   label: '',

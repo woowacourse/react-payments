@@ -10,14 +10,14 @@ interface CardFrontProps {
     year: string;
   };
   userName: string;
-  cardIssuer: string;
+  cardCompany: string;
 }
 
 function CardFront({
   cardNumbers,
   period,
   userName,
-  cardIssuer,
+  cardCompany,
 }: CardFrontProps) {
   const maskCardNumbers = () =>
     cardNumbers
@@ -52,8 +52,8 @@ function CardFront({
       <div
         className={styles.cardBox}
         style={{
-          backgroundColor: cardIssuer
-            ? CARD_COLOR[cardIssuer]
+          backgroundColor: cardCompany
+            ? CARD_COLOR[cardCompany]
             : CARD_COLOR['기본'],
         }}
       >

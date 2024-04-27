@@ -1,4 +1,4 @@
-import CardIssuerInput from './CardInput/InputContainer/CardIssuerInput';
+import CardCompanyInput from './CardInput/InputContainer/CardCompanyInput';
 import CardNumbersInput from './CardInput/InputContainer/CardNumbersInput';
 import CVCInput from './CardInput/InputContainer/CVCInput';
 import CardExpirationPeriodInput from './CardInput/InputContainer/ExpirationPeriodInput/index';
@@ -13,7 +13,7 @@ import Input from './common/Input';
 import Select from './common/Select';
 
 export {
-  CardIssuerInput,
+  CardCompanyInput,
   CardExpirationPeriodInput,
   InputField,
   InputWrap,

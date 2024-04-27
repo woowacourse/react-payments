@@ -1,4 +1,7 @@
-import { CARD_ISSUER_FORM_MESSAGE, ERROR_MESSAGE } from '../../../../constants';
+import {
+  CARD_COMPANY_FORM_MESSAGE,
+  ERROR_MESSAGE,
+} from '../../../../constants';
 import Select from '../../../common/Select';
 import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
@@ -6,25 +9,25 @@ import InputWrap from '../../InputWrap';
 
 import styles from './style.module.css';
 
-interface CardIssuerInputProps {
-  cardIssuerError: boolean;
-  onCardIssuerChange: (value: string) => void;
-  onBlurCardIssuerSelect: () => void;
+interface CardCompanyInputProps {
+  cardCompanyError: boolean;
+  onCardCompanyChange: (value: string) => void;
+  onBlurCardCompanySelect: () => void;
 }
 
-function CardIssuerInput({
-  cardIssuerError,
-  onCardIssuerChange,
-  onBlurCardIssuerSelect,
-}: CardIssuerInputProps) {
+function CardCompanyInput({
+  cardCompanyError,
+  onCardCompanyChange,
+  onBlurCardCompanySelect,
+}: CardCompanyInputProps) {
   const { title, subTitle, label, placeholder, options } =
-    CARD_ISSUER_FORM_MESSAGE;
+    CARD_COMPANY_FORM_MESSAGE;
 
   const getErrorMessage = () => {
-    if (!cardIssuerError) {
+    if (!cardCompanyError) {
       return;
     }
-    return ERROR_MESSAGE.cardIssuer;
+    return ERROR_MESSAGE.cardCompany;
   };
 
   return (
@@ -34,10 +37,10 @@ function CardIssuerInput({
           <Select
             options={options}
             placeholder={placeholder}
-            isError={cardIssuerError}
+            isError={cardCompanyError}
             autoFocus
-            onChange={(event) => onCardIssuerChange(event.target.value)}
-            onBlur={onBlurCardIssuerSelect}
+            onChange={(event) => onCardCompanyChange(event.target.value)}
+            onBlur={onBlurCardCompanySelect}
           />
         </div>
       </InputField>
@@ -46,4 +49,4 @@ function CardIssuerInput({
   );
 }
 
-export default CardIssuerInput;
+export default CardCompanyInput;

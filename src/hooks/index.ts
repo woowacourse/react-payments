@@ -1,5 +1,5 @@
+import useCardCompanyInput from './useCardCompanyInput';
 import useCardExpirationPeriodInput from './useCardExpirationPeriodInput';
-import useCardIssuerInput from './useCardIssuerInput';
 import useCardNumbersInput from './useCardNumbersInput';
 import useCVCInput from './useCVCInput';
 import usePasswordInput from './usePasswordInput';
@@ -7,7 +7,7 @@ import useUserNameInput from './useUserNameInput';
 
 export {
   useCardExpirationPeriodInput,
-  useCardIssuerInput,
+  useCardCompanyInput,
   useCardNumbersInput,
   useCVCInput,
   useUserNameInput,
