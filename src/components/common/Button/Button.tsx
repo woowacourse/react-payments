@@ -1,4 +1,4 @@
-import { generateUpperCase } from '@utils/string';
+import { convertPascalCase } from '@utils/string/string';
 
 import styles from './Button.module.css';
 
@@ -8,7 +8,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({ children, onClick, size = 'medium', isFloating }) => {
-  const buttonSizeStyleClass = `button${generateUpperCase(size)}`;
+  const buttonSizeStyleClass = `button${convertPascalCase(size)}`;
 
   const floatingButtonStyleClass = isFloating ? 'floatingButton' : 'buttonBorder';
   return (
