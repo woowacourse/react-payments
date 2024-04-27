@@ -37,7 +37,7 @@ function checkEmpty(n: string) {
 }
 
 function validateMonth(n: string) {
-  if (checkEmpty(n)) return;
+  if (checkEmpty(n) || n === '0') return;
   const month = Number(n);
   if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
     throw new Error(ERROR_MESSAGES.INVALID_MONTH);
