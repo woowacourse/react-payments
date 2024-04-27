@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-interface AddCardFormContextType {
+export interface AddCardFormContextType {
   findStep: (name: CardInfoKeys) => number;
   curStep: number;
   setCurStep: React.Dispatch<React.SetStateAction<number>>;
@@ -8,7 +8,8 @@ interface AddCardFormContextType {
   setFormValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddCardFormContext = createContext<AddCardFormContextType>(null);
+const AddCardFormContext =
+  createContext<Nullable<AddCardFormContextType>>(null);
 
 export function AddCardFormProvider({
   children,

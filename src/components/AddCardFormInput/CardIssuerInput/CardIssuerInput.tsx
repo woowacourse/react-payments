@@ -9,7 +9,10 @@ import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
-import { useAddCardFormContext } from '../../../context/AddCardFormContext';
+import {
+  AddCardFormContextType,
+  useAddCardFormContext,
+} from '../../../context/AddCardFormContext';
 
 const { title, description, inputLabelText, defaultText, options } =
   ADD_CARD_FORM_FIELDS.CARD_ISSUER;
@@ -23,7 +26,7 @@ export default function CardIssuerInput({
   onBlur,
 }: InputProps<CardIssuer>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext();
+    useAddCardFormContext() as AddCardFormContextType;
 
   const {
     refs: [ref],

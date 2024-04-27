@@ -13,7 +13,10 @@ import {
   isNotEmptyString,
 } from '../../../domain/validators';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
-import { useAddCardFormContext } from '../../../context/AddCardFormContext';
+import {
+  AddCardFormContextType,
+  useAddCardFormContext,
+} from '../../../context/AddCardFormContext';
 
 const { title, description, labelText, inputLabelText, placeholder } =
   ADD_CARD_FORM_FIELDS.PASSWORD;
@@ -27,7 +30,7 @@ export default function PasswordInput({
   onBlur,
 }: InputProps<Password>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext();
+    useAddCardFormContext() as AddCardFormContextType;
 
   const {
     refs: [ref],
