@@ -14,16 +14,16 @@ interface CardExpiryDateInputContainerProps {
 }
 
 const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContainerProps) => {
-  const secondInputRef = useRef<HTMLInputElement>(null);
+  const yearInputRef = useRef<HTMLInputElement>(null);
 
-  const focusSecondInput = () => secondInputRef.current?.focus();
+  const focusYearInput = () => yearInputRef.current?.focus();
 
-  const onFirstInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     month.setValue(value);
     const isFilled = value.length === MONTH_LENGTH;
     if (isFilled) {
-      focusSecondInput();
+      focusYearInput();
     }
   };
 
@@ -39,7 +39,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           id="card-expiry-month-input"
           isError={month.errorStatus.isError}
           value={month.value}
-          onChange={onFirstInputChange}
+          onChange={onMonthChange}
           onBlur={month.onBlur}
           placeholder="01"
           maxLength={2}
@@ -47,7 +47,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           autoFocus={true}
         />
         <Input
-          ref={secondInputRef}
+          ref={yearInputRef}
           id="card-expiry-year-input"
           isError={year.errorStatus.isError}
           value={year.value}
