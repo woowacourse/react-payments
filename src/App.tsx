@@ -22,16 +22,10 @@ import {
 } from './hooks';
 
 function App() {
-  const { cardNumbers, cardExpiration, cardUser, cardCVC, cardPassword } =
-    INPUT_LENGTH;
+  const { cardNumber, cardExpiration, cardCVC, cardPassword } = INPUT_LENGTH;
 
-  const { numbers, numberErrors, handleNumberChange } =
-    useCardNumbersInput(cardNumbers);
-
-  const { period, periodErrors, handlePeriodChange } =
-    useCardExpirationPeriodInput(cardExpiration);
-
-  const { userName, nameError, handleNameChange } = useUserNameInput();
+  const { numbers, numberErrors, isCardNumbersAllFilled, handleNumberChange } =
+    useCardNumbersInput(cardNumber);
 
   const {
     cardIssuer,
@@ -40,13 +34,25 @@ function App() {
     handleBlurCardIssuerSelect,
   } = useCardIssuerInput();
 
+  const { period, periodErrors, isPeriodAllFilled, handlePeriodChange } =
+    useCardExpirationPeriodInput(cardExpiration);
+
   const {
     CVCNumber,
     CVCNumberError,
+    isCVCNumberFilled,
     showCardBack,
     handleCVCNumberChange,
     handleShowCardBack,
   } = useCVCInput(3);
+
+  const {
+    userName,
+    nameError,
+    isUserNameFilled,
+    handleNameChange,
+    handleNameInputEnter,
+  } = useUserNameInput();
 
   const { password, passwordError, handlePasswordChange } = usePasswordInput(2);
 
@@ -82,42 +88,52 @@ function App() {
         )}
         <form className="form-container">
           <fieldset>
+            {isCVCNumberFilled && (
+              <PasswordInput
+                maxLength={cardPassword}
+                password={password}
+                passwordError={passwordError}
+                onPasswordChange={handlePasswordChange}
+              />
+            )}
+            {isUserNameFilled && (
+              <CVCInput
+                maxLength={cardCVC}
+                CVCNumber={CVCNumber}
+                CVCNumberError={CVCNumberError}
+                onCVCNumberChange={handleCVCNumberChange}
+                onFocus={handleShowCardBack}
+                onBlur={handleShowCardBack}
+              />
+            )}
+            {isPeriodAllFilled && (
+              <UserNameInput
+                userName={userName}
+                nameError={nameError}
+                onNameChange={handleNameChange}
+                onNameInputEnter={handleNameInputEnter}
+              />
+            )}
+            {cardIssuer && (
+              <CardExpirationPeriodInput
+                maxLength={cardExpiration}
+                period={period}
+                periodErrors={periodErrors}
+                onPeriodChange={handlePeriodChange}
+              />
+            )}
+            {isCardNumbersAllFilled && (
+              <CardIssuerInput
+                cardIssuerError={cardIssuerError}
+                onCardIssuerChange={handleCardIssuerChange}
+                onBlurCardIssuerSelect={handleBlurCardIssuerSelect}
+              />
+            )}
             <CardNumbersInput
-              maxLength={cardUser}
+              maxLength={cardNumber}
               numbers={numbers}
               numberErrors={numberErrors}
               onNumberChange={handleNumberChange}
-            />
-            <CardExpirationPeriodInput
-              maxLength={cardExpiration}
-              period={period}
-              periodErrors={periodErrors}
-              onPeriodChange={handlePeriodChange}
-            />
-            <UserNameInput
-              maxLength={cardUser}
-              userName={userName}
-              nameError={nameError}
-              onNameChange={handleNameChange}
-            />
-            <CardIssuerInput
-              cardIssuerError={cardIssuerError}
-              onCardIssuerChange={handleCardIssuerChange}
-              onBlurCardIssuerSelect={handleBlurCardIssuerSelect}
-            />
-            <CVCInput
-              maxLength={cardCVC}
-              CVCNumber={CVCNumber}
-              CVCNumberError={CVCNumberError}
-              onCVCNumberChange={handleCVCNumberChange}
-              onFocus={handleShowCardBack}
-              onBlur={handleShowCardBack}
-            />
-            <PasswordInput
-              maxLength={cardPassword}
-              password={password}
-              passwordError={passwordError}
-              onPasswordChange={handlePasswordChange}
             />
           </fieldset>
           {!isError && !isBlank && <Button onClick={() => {}}>확인</Button>}

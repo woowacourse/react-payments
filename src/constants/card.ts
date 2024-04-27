@@ -1,9 +1,8 @@
 import IMAGES from '../assets/images';
 
 export const INPUT_LENGTH = {
-  cardNumbers: 4,
+  cardNumber: 4,
   cardExpiration: 2,
-  cardUser: 100,
   cardCVC: 3,
   cardPassword: 2,
 };

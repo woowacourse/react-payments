@@ -7,17 +7,17 @@ import InputWrap from '../../InputWrap';
 import styles from './style.module.css';
 
 interface CardUserNameInputProps {
-  maxLength: number;
   userName: string;
   nameError: boolean;
   onNameChange: (value: string) => void;
+  onNameInputEnter: (Event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 function UserNameInput({
-  maxLength,
   userName,
   nameError,
   onNameChange,
+  onNameInputEnter,
 }: CardUserNameInputProps) {
   const { title, subTitle, label, placeholder } = CARD_USER_FORM_MESSAGE;
 
@@ -37,10 +37,10 @@ function UserNameInput({
               type="text"
               name="name"
               value={userName}
-              maxLength={maxLength}
               placeholder={placeholder}
               isError={nameError}
               onChange={(event) => onNameChange(event.target.value)}
+              onKeyDown={onNameInputEnter}
             />
           </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />

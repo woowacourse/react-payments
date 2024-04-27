@@ -5,6 +5,7 @@ import INPUT_REGEX from '../constants/regex';
 function useCVCInput(maxLength: number) {
   const [CVCNumber, setCVCNumber] = useState('');
   const [CVCNumberError, setCVCNumberError] = useState(false);
+  const [isCVCNumberFilled, setIsCVCNumberFilled] = useState(false);
   const [showCardBack, setShowCardBack] = useState(false);
 
   const handleCVCNumberChange = (value: string) => {
@@ -12,6 +13,12 @@ function useCVCInput(maxLength: number) {
 
     setCVCNumber(trimmedValue);
     setCVCNumberError(!INPUT_REGEX.CVCNumber.test(trimmedValue));
+
+    if (!isCVCNumberFilled) {
+      if (trimmedValue.length === maxLength) {
+        setIsCVCNumberFilled(true);
+      }
+    }
   };
 
   const handleShowCardBack = () => {
@@ -21,6 +28,7 @@ function useCVCInput(maxLength: number) {
   return {
     CVCNumber,
     CVCNumberError,
+    isCVCNumberFilled,
     showCardBack,
     handleCVCNumberChange,
     handleShowCardBack,

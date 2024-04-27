@@ -9,6 +9,7 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
     year: false,
     expired: false,
   });
+  const [isPeriodAllFilled, setIsPeriodAllFilled] = useState(false);
 
   const validateMonth = (value: string) => INPUT_REGEX.period.month.test(value);
 
@@ -43,11 +44,19 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
       const isExpired = !validateExpiration(newPeriod.month, newPeriod.year);
       setPeriodError((prevErrors) => ({ ...prevErrors, expired: isExpired }));
 
+      if (!isPeriodAllFilled) {
+        const allFilled =
+          newPeriod.month.length === 2 && newPeriod.year.length === 2;
+
+        if (allFilled) {
+          setIsPeriodAllFilled(true);
+        }
+      }
       return newPeriod;
     });
   };
 
-  return { period, periodErrors, handlePeriodChange };
+  return { period, periodErrors, handlePeriodChange, isPeriodAllFilled };
 };
 
 export default useCardExpirationPeriodInput;
