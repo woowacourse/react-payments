@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-export const TitleText = styled.h2`
+export const TitleText = styled.h1`
+  font-family: NotoSansKR, Regular;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+`;
+
+export const SubTitleText = styled.h2`
   font-family: NotoSansKR, Regular;
   font-size: 18px;
   font-weight: 700;
