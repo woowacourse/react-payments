@@ -18,9 +18,10 @@ export default function CardPreview({
   ownerName,
   cardIssuer,
   cvc,
+  password,
 }: CardPreviewProps) {
   const { isFrontSide, flipCard } = useFlipCard({
-    frontDeps: [cardNumbers, expirationDate, ownerName, cardIssuer],
+    frontDeps: [cardNumbers, expirationDate, ownerName, cardIssuer, password],
     backDeps: [cvc],
   });
 
