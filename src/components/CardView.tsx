@@ -1,8 +1,8 @@
 import { CardInfo } from '../types/card';
 import styled from 'styled-components';
-import CardChip from '../assets/image/cardChip.png';
-import Visa from '../assets/image/Visa.png';
-import Master from '../assets/image/Mastercard.png';
+import CardChip from '../assets/image/cardclip.svg';
+import Visa from '../assets/image/VISA.svg';
+import Master from '../assets/image/MasterCard.svg';
 import { CARD_CONFIG } from '../constants/system';
 import { CARD_BRAND } from '../constants/cardBrand';
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Check from '../assets/image/check.png';
+import Check from '../assets/image/check.svg';
 import BottomButton from "../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 
