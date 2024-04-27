@@ -6,6 +6,7 @@ import './styles/App.css';
 import './styles/global.css';
 import './styles/reset.css';
 import { CardEnrollmentConfirmation, CardEnrollmentPage, Home } from './pages';
+import NonePage from './pages/NonePage/index';
 
 function App() {
   return (
@@ -19,8 +20,7 @@ function App() {
           />
           <Route index element={<Home />} />
         </Route>
-
-        <Route path="/*" element={<Home />} />
+        <Route path="/*" element={<NonePage />} />
       </Routes>
     </div>
   );

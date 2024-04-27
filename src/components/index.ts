@@ -12,6 +12,7 @@ import CardUserNameInput from './CardUserNameInput';
 import ErrorMessage from './ErrorMessage/index';
 import Input from './Input';
 import Layout from './Layout';
+import PageLinkSection from './PageLinkSection/index';
 import Select from './Select/index';
 
 export {
@@ -29,5 +30,6 @@ export {
   ErrorMessage,
   Input,
   Layout,
+  PageLinkSection,
   Select,
 };

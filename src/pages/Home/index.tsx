@@ -1,16 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import ThePlanet from '../../assets/images/행성이.png';
+import { PageLinkSection } from '../../components';
 import { PATH } from '../../constants';
 
 import styles from './style.module.css';
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.home}>
-      <div className={styles.linkGroup}>
-        <Link to={PATH.cardEnrollment}>💳 카드 등록하러 가기</Link>
-      </div>
+      <section className={styles.greeting}>
+        <img src={ThePlanet} alt="행성이" />
+        <p>안녕하세요. 우테코 월렛입니다.</p>
+        <p>카드를 등록하시고 싶다면 아래 버튼을 클릭해주세요.</p>
+      </section>
+      <PageLinkSection>
+        <Link to={PATH.cardEnrollment}>💳 카드 등록페이지로 이동하기</Link>
+      </PageLinkSection>
     </div>
   );
 }
+
+export default React.memo(Home);

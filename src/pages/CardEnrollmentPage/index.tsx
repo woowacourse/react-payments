@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 
-import { CardForm, CardPreview } from '../../components';
+import { CardForm, CardPreview, ProgressBar } from '../../components';
 import { CardSide } from '../../components/CardPreview';
+import { NUMBER_OF_CARD_FORM_STEP } from '../../constants';
 import CardFormContext, {
   CardFormContextType,
 } from '../../contexts/CardFormContext';
+import { useCalculateCompletedCardInfo } from '../../hooks';
 import useCardInfoReducer from '../../modules/useCardInfoReducer';
 
 function CardEnrollmentPage() {
@@ -16,8 +18,16 @@ function CardEnrollmentPage() {
     [cardInfo],
   );
 
+  const { numberOfCompletedCardInfo } = useCalculateCompletedCardInfo({
+    cardInfo,
+  });
+
   return (
     <>
+      <ProgressBar
+        numberOfTotalStep={NUMBER_OF_CARD_FORM_STEP}
+        currentStep={numberOfCompletedCardInfo}
+      />
       <CardPreview side={cardSide} cardInfo={cardInfo} />
       <CardFormContext.Provider value={cardFormContextValue}>
         <CardForm />
