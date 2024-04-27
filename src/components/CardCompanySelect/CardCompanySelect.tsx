@@ -22,7 +22,7 @@ export default function CardCompanySelect({ cardCompany }: Props) {
         onChange={cardCompany.onChange}
         defaultValue={""}
       >
-        <option key={"default"} value="">
+        <option key={"default"} value="" disabled>
           카드사를 선택해주세요.
         </option>
         {cardCompanies.map((cardCompany) => {
