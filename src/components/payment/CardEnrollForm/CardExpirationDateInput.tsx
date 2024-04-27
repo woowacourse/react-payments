@@ -4,6 +4,7 @@ import {
   CardExpirationErrorState,
   CardExpirationKeys,
 } from "../../../hooks/useCardExpiration";
+import { useEffect, useRef } from "react";
 
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
@@ -23,6 +24,33 @@ export default function CardExpirationDateInput({
   errorState,
   onChange,
 }: CardExpirationDateInputProps) {
+  const firstInputRef = useRef<HTMLInputElement>(null);
+  const secondInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    firstInputRef.current?.focus();
+  }, []);
+
+  const onInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    targetKey: CardExpirationKeys
+  ) => {
+    const { value } = event.target;
+
+    if (value.length < 2) {
+      onChange(event, targetKey);
+      return;
+    }
+    if (targetKey === "month") {
+      onChange(event, targetKey);
+      secondInputRef.current?.focus();
+      return;
+    }
+    if (targetKey === "year") {
+      onChange(event, targetKey);
+    }
+  };
+
   return (
     <CardDateContainer>
       <div>
@@ -33,18 +61,20 @@ export default function CardExpirationDateInput({
         <LabelText>유효기간</LabelText>
         <InputContainer>
           <Input
+            ref={firstInputRef}
             maxLength={2}
             placeholder="MM"
             value={valueState.month}
             isError={errorState.isError.month}
-            onChange={(event) => onChange(event, "month")}
+            onChange={(event) => onInputChange(event, "month")}
           />
           <Input
+            ref={secondInputRef}
             maxLength={2}
             placeholder="YY"
             value={valueState.year}
             isError={errorState.isError.year}
-            onChange={(event) => onChange(event, "year")}
+            onChange={(event) => onInputChange(event, "year")}
           />
         </InputContainer>
         <ErrorMessage message={errorState.errorMessage} />

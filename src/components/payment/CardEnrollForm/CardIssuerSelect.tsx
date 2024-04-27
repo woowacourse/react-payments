@@ -4,6 +4,7 @@ import {
   cardIssuerMapper,
 } from "../../../constants/cardIssuers";
 import { CaptionText, TitleText } from "../../../styles/common";
+import { useEffect, useRef } from "react";
 
 import { CardIssuerErrorState } from "../../../hooks/useCardIssuer";
 import ErrorMessage from "../../common/ErrorMessage";
@@ -22,6 +23,12 @@ export default function CardIssuerSelect({
   onChange,
   onBlur,
 }: CardIssuerSelectProps) {
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    selectRef.current?.focus();
+  }, []);
+
   return (
     <CardIssuerContainer>
       <div>
@@ -30,6 +37,7 @@ export default function CardIssuerSelect({
       </div>
       <CardIssuerBox>
         <Select
+          ref={selectRef}
           placeholder="카드사를 선택해주세요"
           options={cardIssuerOptions}
           isError={errorState.isError}

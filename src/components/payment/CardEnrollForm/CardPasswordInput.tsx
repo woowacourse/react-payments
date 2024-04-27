@@ -1,4 +1,5 @@
 import { CaptionText, LabelText, TitleText } from "../../../styles/common";
+import { useEffect, useRef } from "react";
 
 import { CardPasswordErrorState } from "../../../hooks/useCardPassword";
 import ErrorMessage from "../../common/ErrorMessage";
@@ -18,6 +19,12 @@ export default function CardPasswordInput({
   onChange,
   onBlur,
 }: CardPasswordInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <CardPassInputContainer>
       <div>
@@ -28,6 +35,7 @@ export default function CardPasswordInput({
         <LabelText>비밀번호 앞 2자리</LabelText>
         <InputContainer>
           <Input
+            ref={inputRef}
             maxLength={2}
             type="password"
             value={valueState}

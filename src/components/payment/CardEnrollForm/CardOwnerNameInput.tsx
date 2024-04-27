@@ -1,4 +1,5 @@
 import { LabelText, TitleText } from "../../../styles/common";
+import { useEffect, useRef } from "react";
 
 import { CardOwnerNameErrorState } from "../../../hooks/useCardOwnerName";
 import ErrorMessage from "../../common/ErrorMessage";
@@ -18,6 +19,12 @@ export default function CardOwnerNameInput({
   onChange,
   onBlur,
 }: CardOwnerNameInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <CardOwnerNameContainer>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
@@ -25,6 +32,7 @@ export default function CardOwnerNameInput({
         <LabelText>소유자 이름</LabelText>
         <InputContainer>
           <Input
+            ref={inputRef}
             maxLength={15}
             placeholder="JOHN DOE"
             value={valueState}

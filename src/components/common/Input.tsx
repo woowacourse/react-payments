@@ -1,39 +1,32 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-interface InputProps {
-  maxLength: number;
-  value: string;
-  type?: string;
-  placeholder?: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: () => void;
 }
 
-export default function Input({
-  maxLength,
-  value,
-  type,
-  placeholder,
-  isError,
-  onChange,
-  onBlur,
-  onFocus,
-}: InputProps) {
-  return (
-    <SInput
-      type={type ? type : "text"}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={onChange}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      value={value}
-      isError={isError}
-    ></SInput>
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { type, maxLength, placeholder, value, isError, onChange, onBlur, onFocus },
+    ref
+  ) => {
+    return (
+      <SInput
+        type={type ? type : "text"}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        value={value}
+        isError={isError}
+        onChange={onChange}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        ref={ref}
+      ></SInput>
+    );
+  }
+);
+
+export default Input;
 
 const SInput = styled.input<{
   isError: boolean;

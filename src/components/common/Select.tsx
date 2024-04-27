@@ -1,4 +1,5 @@
-import React from "react";
+import React, { forwardRef } from "react";
+
 import styled from "styled-components";
 
 interface Option {
@@ -6,43 +7,42 @@ interface Option {
   label: string;
 }
 
-export interface SelectProps {
+export interface SelectProps
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
-  defaultValue?: string;
   options: ReadonlyArray<Option>;
   isError: boolean;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
-export default function Select({
-  placeholder,
-  defaultValue = "",
-  options,
-  isError,
-  onChange,
-  onBlur,
-}: SelectProps) {
-  return (
-    <StyledSelect
-      defaultValue={defaultValue}
-      isError={isError}
-      onChange={onChange}
-      onBlur={onBlur}
-    >
-      {placeholder && (
-        <option value={defaultValue} disabled hidden>
-          {placeholder}
-        </option>
-      )}
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </StyledSelect>
-  );
-}
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  (
+    { placeholder, defaultValue = "", options, isError, onChange, onBlur },
+    ref
+  ) => {
+    return (
+      <StyledSelect
+        ref={ref}
+        defaultValue={defaultValue}
+        isError={isError}
+        onChange={onChange}
+        onBlur={onBlur}
+      >
+        {placeholder && (
+          <option value={defaultValue} disabled hidden>
+            {placeholder}
+          </option>
+        )}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </StyledSelect>
+    );
+  }
+);
+
+export default Select;
 
 const StyledSelect = styled.select<{
   isError: boolean;
