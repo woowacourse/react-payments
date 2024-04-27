@@ -12,7 +12,7 @@ import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 import { isPeriodValid } from "../Form/useIsValid";
 
 const CardValidityPeriodField = () => {
-  const cardPeriodError = useContextWrapper(CardValidityPeriodErrorContext)[0];
+  const [cardPeriodError, setCardPeriodError] = useContextWrapper(CardValidityPeriodErrorContext);
   const cardPeriodErrorKeys = Object.keys(cardPeriodError) as (keyof CardValidityPeriodError)[];
   const categoryHasError = cardPeriodErrorKeys.find((category) => {
     return cardPeriodError[category]?.errorMessage;
@@ -23,7 +23,8 @@ const CardValidityPeriodField = () => {
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   useEffect(() => {
-    if (isPeriodValid(cardPeriod, cardPeriodError)) {
+    const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
+    if (isValid) {
       setRenderOrder((prev) => {
         if (prev.index === 2) {
           return { index: 3, step: "cardOwner" };
@@ -31,7 +32,15 @@ const CardValidityPeriodField = () => {
         return prev;
       });
     }
-  }, [cardPeriod, setRenderOrder, cardPeriodError]);
+    if (!isValid && name) {
+      setCardPeriodError((prev) => {
+        const temp = { ...prev };
+        temp[name].isError = false;
+        temp[name].errorMessage = errorMessage ?? "";
+        return temp;
+      });
+    }
+  }, [cardPeriod, setRenderOrder, cardPeriodError, setCardPeriodError]);
 
   useEffect(() => {
     firstInput.current?.focus();

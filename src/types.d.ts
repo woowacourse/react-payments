@@ -53,8 +53,8 @@ interface CardNumbersError {
 }
 
 interface CardValidityPeriodError {
-  month?: ErrorType;
-  year?: ErrorType;
+  month: ErrorType;
+  year: ErrorType;
 }
 
 interface CardOwnerInfoError {

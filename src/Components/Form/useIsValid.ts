@@ -40,15 +40,31 @@ export const isIssuerValid = ({ name }: CardIssuer, { name: nameError }: CardIss
   return false;
 };
 
+const PERIOD_ERROR_MESSAGE = {
+  NOT_VALID_YEAR: "잘못된 년도를 입력하셨습니다. 유효한 년도를 입력해주세요.",
+  NOT_VALID_MONTH: "잘못된 월을 입력하셨습니다. 우효한 월을 입력해주세요.",
+};
+
 export const isPeriodValid = (
   { month, year }: CardValidityPeriod,
   { month: monthError, year: yearError }: CardValidityPeriodError
-) => {
-  //TODO: 날짜 유효성 검사
-  if (month?.length === 2 && year?.length === 2 && !monthError?.isError && !yearError?.isError) {
-    return true;
+): { isValid: boolean; name?: "year" | "month"; errorMessage?: string } => {
+  const currentDate = new Date(Date.now());
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = Number(currentDate.getFullYear().toString().slice(2));
+
+  if (currentYear > Number(year)) {
+    return { isValid: false, name: "year", errorMessage: PERIOD_ERROR_MESSAGE.NOT_VALID_YEAR };
   }
-  return false;
+
+  if (month?.length === 2 && year?.length === 2 && !monthError?.isError && !yearError?.isError) {
+    if (currentYear === Number(year) && currentMonth > Number(month)) {
+      return { isValid: false, name: "month", errorMessage: PERIOD_ERROR_MESSAGE.NOT_VALID_YEAR };
+    }
+    return { isValid: true };
+  }
+
+  return { isValid: false };
 };
 
 export const isOwnerValid = ({ name }: CardOwnerInfo, { name: errorName }: CardOwnerInfoError) => {
