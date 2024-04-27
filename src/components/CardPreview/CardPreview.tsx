@@ -45,7 +45,6 @@ const CardPreview = memo(
 
     if (prev.expirationDate.month !== next.expirationDate.month) return false;
     if (prev.expirationDate.year !== next.expirationDate.year) return false;
-
     if (prev.ownerName !== next.ownerName) return false;
 
     if (prev.CVC !== next.CVC) return false;
