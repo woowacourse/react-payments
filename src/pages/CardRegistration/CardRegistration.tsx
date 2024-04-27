@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as S from './CardRegister.style';
+import * as S from './CardRegistration.style';
 
 import CardPreview from '../../components/CardPreview/CardPreview';
 import useInput from '../../hooks/useInput';
@@ -23,7 +23,7 @@ export type CardNumberState = {
   errorMessage: string;
 };
 
-export default function CardRegister() {
+export default function CardRegistration() {
   const [isFlip, setIsFlip] = useState(false);
   const [cardBrandDisplay, setCardBrandDisplay] = useState(false);
   const [expirationDateDisplay, setExpirationDateDisplay] = useState(false);

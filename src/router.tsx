@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CardRegister from './pages/CardRegister/CardRegister';
-import RegisterConfirm from './pages/RegisterConfirm/RegisterConfirm';
+import CardRegistration from './pages/CardRegistration/CardRegistration';
+import RegistrationConfirm from './pages/RegistrationConfirm/RegistrationConfirm';
 import GeneralLayout from './components/GeneralLayout';
 
 export const router = createBrowserRouter([
@@ -10,11 +10,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <CardRegister />,
+        element: <CardRegistration />,
       },
       {
         path: 'confirm',
-        element: <RegisterConfirm />,
+        element: <RegistrationConfirm />,
       },
     ],
   },

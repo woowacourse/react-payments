@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardRegister from '../../pages/CardRegister/CardRegister';
+import CardRegistration from '../../pages/CardRegistration/CardRegistration';
 import GlobalStyles from '../../GlobalStyles';
 
 const meta = {
-  title: 'pages/CardRegister',
-  component: CardRegister,
+  title: 'pages/CardRegistration',
+  component: CardRegistration,
   parameters: {
     layout: 'centered',
   },
@@ -16,7 +16,7 @@ const meta = {
       </>
     ),
   ],
-} satisfies Meta<typeof CardRegister>;
+} satisfies Meta<typeof CardRegistration>;
 
 export default meta;
 

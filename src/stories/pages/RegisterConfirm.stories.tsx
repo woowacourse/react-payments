@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import GlobalStyles from '../../GlobalStyles';
-import RegisterConfirm from '../../pages/RegisterConfirm/RegisterConfirm';
+import RegistrationConfirm from '../../pages/RegistrationConfirm/RegistrationConfirm';
 import { MemoryRouter } from 'react-router-dom';
 
 const meta = {
-  title: 'pages/RegisterConfirm',
-  component: RegisterConfirm,
+  title: 'pages/RegistrationConfirm',
+  component: RegistrationConfirm,
   parameters: {
     layout: 'centered',
   },
@@ -25,7 +25,7 @@ const meta = {
       );
     },
   ],
-} satisfies Meta<typeof RegisterConfirm>;
+} satisfies Meta<typeof RegistrationConfirm>;
 
 export default meta;
 

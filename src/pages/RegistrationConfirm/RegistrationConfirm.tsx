@@ -52,7 +52,7 @@ const StyledLink = styled(Link)`
   color: #ffffff;
 `;
 
-export default function RegisterConfirm() {
+export default function RegistrationConfirm() {
   const { state } = useLocation();
 
   if (!state) {
