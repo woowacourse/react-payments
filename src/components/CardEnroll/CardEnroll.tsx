@@ -74,7 +74,11 @@ export default function CardEnroll() {
         )}
         {step[1] && <CardCompanySelect cardCompany={cardCompany} />}
         {step[0] && <CardNumbers cardNumbers={cardNumbers} />}
-        <FormButton type="submit" disabled={!isCompleted}>
+        <FormButton
+          type="submit"
+          disabled={!isCompleted}
+          style={{ display: step[6] ? "block" : "none" }}
+        >
           확인
         </FormButton>
       </S.CardForm>
