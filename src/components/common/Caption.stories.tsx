@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Caption from "./Caption";
-import { CAPTION } from "../../constants/card-app";
+import { CARD_FORM_ATTRIBUTES } from "../../constants/card-app";
 
 const meta = {
   title: "Caption",
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: CAPTION.cardNumberInput,
+    text: CARD_FORM_ATTRIBUTES.cardNumbers.caption,
     type: "input",
   },
 };
