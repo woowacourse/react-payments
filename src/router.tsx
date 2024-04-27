@@ -1,17 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import CardFormSuccessPage from "./pages/CardFormSuccessPage";
+import CardAddFormProvider from "./components/providers/CardAddFormProvider";
+
 import CardFormPage from "./pages/CardFormPage";
+import CardFormSuccessPage from "./pages/CardFormSuccessPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CardFormPage />,
+    element: (
+      <CardAddFormProvider>
+        <CardFormPage />
+      </CardAddFormProvider>
+    ),
   },
   {
     path: "/complete",
-    element: <CardFormSuccessPage />,
+    element: (
+      <CardAddFormProvider>
+        <CardFormSuccessPage />
+      </CardAddFormProvider>
+    ),
   },
   {
     path: "*",

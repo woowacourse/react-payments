@@ -1,4 +1,6 @@
-import NewCardInputPage from "./pages/NewCardInputPage";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+``;
 
 import AppLayout from "./components/layout/AppLayout";
 
@@ -11,7 +13,7 @@ function App() {
       <GlobalStyle />
 
       <AppLayout>
-        <NewCardInputPage />
+        <RouterProvider router={router} />
       </AppLayout>
     </>
   );
