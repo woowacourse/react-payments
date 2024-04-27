@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardEnroll from "../components/CardEnroll/CardEnroll";
+import CardEnrollForm from "../components/CardEnrollForm/CardEnrollForm";
 
-const meta: Meta<typeof CardEnroll> = {
-  component: CardEnroll,
+const meta: Meta<typeof CardEnrollForm> = {
+  component: CardEnrollForm,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardEnroll>;
+type Story = StoryObj<typeof CardEnrollForm>;
 
 export const Default: Story = {
   render: () => {
-    return <CardEnroll />;
+    return <CardEnrollForm />;
   },
 };

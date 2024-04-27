@@ -11,7 +11,7 @@ import CardPassword from "../CardPassword/CardPassword";
 import { FormButton } from "../FormButton/FormButton";
 import { useNavigate } from "react-router-dom";
 
-export default function CardEnroll() {
+export default function CardEnrollForm() {
   const navigate = useNavigate();
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
   const {

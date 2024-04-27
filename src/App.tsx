@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import CardEnroll from "./components/CardEnroll/CardEnroll";
-import NotFound from "./pages/NotFound";
+import CardEnroll from "./pages/CardEnroll";
 import ConfirmCardEnroll from "./pages/ConfirmCardEnroll";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
