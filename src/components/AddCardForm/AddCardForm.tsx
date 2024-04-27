@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './AddCardForm.module.css';
 
 import { INITIAL_VALUES } from '../../constants/form';
 
-import CardPreview from '../CardPreview/CardPreview';
-import PasswordInput from '../AddCardFormInput/PasswordInput/PasswordInput';
 import CVCInput from '../AddCardFormInput/CVCInput/CVCInput';
-import OwnerNameInput from '../AddCardFormInput/OwnerNameInput/OwnerNameInput';
-import ExpirationDateInput from '../AddCardFormInput/ExpirationDateInput/ExpirationDateInput';
 import CardIssuerInput from '../AddCardFormInput/CardIssuerInput/CardIssuerInput';
 import CardNumberInput from '../AddCardFormInput/CardNumberInput/CardNumberInput';
+import ExpirationDateInput from '../AddCardFormInput/ExpirationDateInput/ExpirationDateInput';
+import OwnerNameInput from '../AddCardFormInput/OwnerNameInput/OwnerNameInput';
+import PasswordInput from '../AddCardFormInput/PasswordInput/PasswordInput';
+import CardPreview from '../CardPreview/CardPreview';
 
 import { useNavigate } from 'react-router-dom';
+import { useAddCardFormContext } from '../../context/AddCardFormContext';
 import useAddCardFormField from '../../hooks/useAddCardFormField';
 import Button from '../common/Button/Button';
 
 export default function AddCardForm() {
-  const [isFormValid, setFormValid] = useState(false);
+  const { findStep, curStep, isFormValid } = useAddCardFormContext();
 
   const cardNumbersProps = useAddCardFormField<CardNumbers>({
     initialValues: INITIAL_VALUES.cardNumbers,
@@ -44,25 +45,6 @@ export default function AddCardForm() {
     if (isFormValid) navigate('/confirm');
   };
 
-  useEffect(() => {
-    setFormValid(
-      () =>
-        cardNumbersProps.isFieldComplete &&
-        expirationDateProps.isFieldComplete &&
-        ownerNameProps.isFieldComplete &&
-        cardIssuerProps.isFieldComplete &&
-        cvcProps.isFieldComplete &&
-        passwordProps.isFieldComplete
-    );
-  }, [
-    cardNumbersProps,
-    expirationDateProps,
-    ownerNameProps,
-    cardIssuerProps,
-    cvcProps,
-    passwordProps,
-  ]);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.srOnly}>카드 추가</h1>
@@ -77,20 +59,14 @@ export default function AddCardForm() {
       />
 
       <form onSubmit={handleSubmit}>
-        {cvcProps.showNextStep && <PasswordInput {...passwordProps} />}
-        {ownerNameProps.showNextStep && <CVCInput {...cvcProps} />}
-        {expirationDateProps.showNextStep && (
-          <OwnerNameInput {...ownerNameProps} />
-        )}
-        {cardIssuerProps.showNextStep && (
-          <ExpirationDateInput {...expirationDateProps} />
-        )}
-        {cardNumbersProps.showNextStep && (
-          <CardIssuerInput {...cardIssuerProps} />
-        )}
+        <PasswordInput {...passwordProps} />
+        <CVCInput {...cvcProps} />
+        <OwnerNameInput {...ownerNameProps} />
+        <ExpirationDateInput {...expirationDateProps} />
+        <CardIssuerInput {...cardIssuerProps} />
         <CardNumberInput {...cardNumbersProps} />
 
-        {passwordProps.showNextStep && (
+        {curStep >= findStep('password') && (
           <Button
             isActive={isFormValid}
             type="submit"

@@ -8,7 +8,9 @@ import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 import { hasFourDigit, isInteger } from '../../../domain/validators';
 import { validateInput } from '../../../utils/validateInput';
 
+import { useEffect } from 'react';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CARD_NUMBER;
@@ -18,10 +20,14 @@ export default function CardNumberInput({
   values: cardNumbers,
   errorMessage,
   isError,
+  isFieldComplete,
   onChange,
   onBlur,
 }: InputProps<CardNumbers>) {
-  const { refs, moveToNextInput } = useFormFieldFocus(4);
+  const { findStep, curStep, setCurStep, setFormValid } =
+    useAddCardFormContext();
+
+  const { refs, moveToNextInput } = useFormFieldFocus<HTMLInputElement>(4);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -48,32 +54,46 @@ export default function CardNumberInput({
     onBlur({ ...result, name, value });
   };
 
+  useEffect(() => {
+    setFormValid(isFieldComplete);
+
+    if (isFieldComplete && curStep <= findStep('cardNumbers')) {
+      setCurStep((prev) => prev + 1);
+    }
+  }, [isFieldComplete]);
+
   return (
-    <Field
-      title={title}
-      description={description}
-      labelText={labelText}
-      errorMessage={errorMessage}
-    >
-      {Object.keys(cardNumbers).map((n, index) => {
-        const name = n as keyof CardNumbers;
-        return (
-          <Fragment key={name}>
-            <Label htmlFor={name} labelText={inputLabelText[name]} hideLabel />
-            <Input
-              ref={refs[index]}
-              id={name}
-              name={name}
-              placeholder={placeholder}
-              value={cardNumbers[name]}
-              isError={isError[name]}
-              handleChange={handleOnChange}
-              handleOnBlur={handleOnBlur}
-              maxLength={MAX_LENGTH}
-            />
-          </Fragment>
-        );
-      })}
-    </Field>
+    curStep >= findStep('cardNumbers') && (
+      <Field
+        title={title}
+        description={description}
+        labelText={labelText}
+        errorMessage={errorMessage}
+      >
+        {Object.keys(cardNumbers).map((n, index) => {
+          const name = n as keyof CardNumbers;
+          return (
+            <Fragment key={name}>
+              <Label
+                htmlFor={name}
+                labelText={inputLabelText[name]}
+                hideLabel
+              />
+              <Input
+                ref={refs[index]}
+                id={name}
+                name={name}
+                placeholder={placeholder}
+                value={cardNumbers[name]}
+                isError={isError[name]}
+                handleChange={handleOnChange}
+                handleOnBlur={handleOnBlur}
+                maxLength={MAX_LENGTH}
+              />
+            </Fragment>
+          );
+        })}
+      </Field>
+    )
   );
 }

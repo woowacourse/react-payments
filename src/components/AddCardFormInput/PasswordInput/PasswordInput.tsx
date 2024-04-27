@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
@@ -13,6 +13,7 @@ import {
   isNotEmptyString,
 } from '../../../domain/validators';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 
 const { title, description, labelText, inputLabelText, placeholder } =
   ADD_CARD_FORM_FIELDS.PASSWORD;
@@ -21,9 +22,13 @@ export default function PasswordInput({
   values: password,
   errorMessage,
   isError,
+  isFieldComplete,
   onChange,
   onBlur,
 }: InputProps<Password>) {
+  const { findStep, curStep, setCurStep, setFormValid } =
+    useAddCardFormContext();
+
   const {
     refs: [ref],
     moveToNextInput,
@@ -52,33 +57,43 @@ export default function PasswordInput({
     onBlur({ ...result, name, value });
   };
 
+  useEffect(() => {
+    setFormValid(isFieldComplete);
+
+    if (isFieldComplete && curStep <= findStep('password')) {
+      setCurStep((prev) => prev + 1);
+    }
+  }, [isFieldComplete]);
+
   return (
-    <Field
-      title={title}
-      description={description}
-      labelText={labelText}
-      errorMessage={errorMessage}
-    >
-      <Fragment key="password">
-        <Label
-          htmlFor="password"
-          labelText={inputLabelText.password}
-          hideLabel
-        />
-        <Input
-          ref={ref}
-          id="password"
-          name="password"
-          type="password"
-          value={password.password}
-          isError={isError.password}
-          placeholder={placeholder}
-          isRequired
-          handleChange={handleOnChange}
-          handleOnBlur={handleOnBlur}
-          maxLength={2}
-        />
-      </Fragment>
-    </Field>
+    curStep >= findStep('password') && (
+      <Field
+        title={title}
+        description={description}
+        labelText={labelText}
+        errorMessage={errorMessage}
+      >
+        <Fragment key="password">
+          <Label
+            htmlFor="password"
+            labelText={inputLabelText.password}
+            hideLabel
+          />
+          <Input
+            ref={ref}
+            id="password"
+            name="password"
+            type="password"
+            value={password.password}
+            isError={isError.password}
+            placeholder={placeholder}
+            isRequired
+            handleChange={handleOnChange}
+            handleOnBlur={handleOnBlur}
+            maxLength={2}
+          />
+        </Fragment>
+      </Field>
+    )
   );
 }

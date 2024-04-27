@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
@@ -11,6 +11,7 @@ import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.OWNER_NAME;
@@ -19,9 +20,13 @@ function OwnerNameInput({
   values: ownerName,
   errorMessage,
   isError,
+  isFieldComplete,
   onChange,
   onBlur,
 }: InputProps<OwnerName>) {
+  const { findStep, curStep, setCurStep, setFormValid } =
+    useAddCardFormContext();
+
   const {
     refs: [ref],
     moveToNextInput,
@@ -57,28 +62,38 @@ function OwnerNameInput({
     if (result.isValid) moveToNextInput();
   };
 
+  useEffect(() => {
+    setFormValid(isFieldComplete);
+
+    if (isFieldComplete && curStep <= findStep('ownerName')) {
+      setCurStep((prev) => prev + 1);
+    }
+  }, [isFieldComplete]);
+
   return (
-    <Field title={title} labelText={labelText} errorMessage={errorMessage}>
-      <Fragment key="ownerName">
-        <Label
-          htmlFor="ownerName"
-          labelText={inputLabelText.ownerName}
-          hideLabel
-        />
-        <Input
-          ref={ref}
-          id="ownerName"
-          name="ownerName"
-          placeholder={placeholder}
-          value={ownerName.ownerName}
-          isError={isError.ownerName}
-          isRequired
-          handleChange={handleOnChange}
-          handleOnBlur={handleOnBlur}
-          maxLength={26}
-        />
-      </Fragment>
-    </Field>
+    curStep >= findStep('ownerName') && (
+      <Field title={title} labelText={labelText} errorMessage={errorMessage}>
+        <Fragment key="ownerName">
+          <Label
+            htmlFor="ownerName"
+            labelText={inputLabelText.ownerName}
+            hideLabel
+          />
+          <Input
+            ref={ref}
+            id="ownerName"
+            name="ownerName"
+            placeholder={placeholder}
+            value={ownerName.ownerName}
+            isError={isError.ownerName}
+            isRequired
+            handleChange={handleOnChange}
+            handleOnBlur={handleOnBlur}
+            maxLength={26}
+          />
+        </Fragment>
+      </Field>
+    )
   );
 }
 

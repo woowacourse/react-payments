@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 import Field from '../../common/Field/Field';
 import Label from '../../common/Label/Label';
@@ -9,6 +9,7 @@ import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 
 const { title, description, inputLabelText, defaultText, options } =
   ADD_CARD_FORM_FIELDS.CARD_ISSUER;
@@ -17,9 +18,13 @@ export default function CardIssuerInput({
   values: cardIssuer,
   errorMessage,
   isError,
+  isFieldComplete,
   onChange,
   onBlur,
 }: InputProps<CardIssuer>) {
+  const { findStep, curStep, setCurStep, setFormValid } =
+    useAddCardFormContext();
+
   const {
     refs: [ref],
     moveToNextInput,
@@ -45,27 +50,41 @@ export default function CardIssuerInput({
     onBlur({ ...result, name, value });
   };
 
+  useEffect(() => {
+    setFormValid(isFieldComplete);
+
+    if (isFieldComplete && curStep <= findStep('cardIssuer')) {
+      setCurStep((prev) => prev + 1);
+    }
+  }, [isFieldComplete]);
+
   return (
-    <Field title={title} description={description} errorMessage={errorMessage}>
-      <Fragment key="cardIssuer">
-        <Label
-          htmlFor="cardIssuer"
-          labelText={inputLabelText.cardIssuer}
-          hideLabel
-        />
-        <Select
-          ref={ref}
-          name="cardIssuer"
-          id="cardIssuer"
-          value={cardIssuer.cardIssuer}
-          defaultText={defaultText}
-          options={options}
-          isError={isError.cardIssuer}
-          isRequired
-          handleSelect={handleOnSelect}
-          handleOnBlur={handleOnBlur}
-        />
-      </Fragment>
-    </Field>
+    curStep >= findStep('cardIssuer') && (
+      <Field
+        title={title}
+        description={description}
+        errorMessage={errorMessage}
+      >
+        <Fragment key="cardIssuer">
+          <Label
+            htmlFor="cardIssuer"
+            labelText={inputLabelText.cardIssuer}
+            hideLabel
+          />
+          <Select
+            ref={ref}
+            name="cardIssuer"
+            id="cardIssuer"
+            value={cardIssuer.cardIssuer}
+            defaultText={defaultText}
+            options={options}
+            isError={isError.cardIssuer}
+            isRequired
+            handleSelect={handleOnSelect}
+            handleOnBlur={handleOnBlur}
+          />
+        </Fragment>
+      </Field>
+    )
   );
 }
