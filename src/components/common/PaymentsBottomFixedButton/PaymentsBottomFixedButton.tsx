@@ -1,4 +1,5 @@
-import { ButtonText, FixedButton, FixedButtonContainer } from "./PaymentsBottomFixedButton.styled"
+import PaymentsButton from "../PaymentsButton/PaymentsButton";
+import { FixedButtonContainer } from "./PaymentsBottomFixedButton.styled"
 
 interface PaymentsBottomFixedButtonProps {
   text: string;
@@ -6,13 +7,10 @@ interface PaymentsBottomFixedButtonProps {
 }
 
 const PaymentsBottomFixedButton = (props: PaymentsBottomFixedButtonProps) => {
-  const { text, onClick } = props
 
   return (
     <FixedButtonContainer>
-      <FixedButton onClick={onClick}>
-        <ButtonText>{text}</ButtonText>
-      </FixedButton>
+      <PaymentsButton {...props} />
     </FixedButtonContainer>
 
   )
