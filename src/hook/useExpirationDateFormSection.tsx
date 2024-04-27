@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage";
@@ -43,17 +43,20 @@ const useExpirationDateFormSection = (props: UseExpirationFormSectionProps) => {
     }
   };
 
-  const formatMonth = (values: string[]) => {
-    // console.log(values)
-    if (values[0].length === 0) return
-    if (REGEX.oneToNine.test(values[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + values[0], values[1]] })
-    } else if (REGEX.zero.test(values[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.minMonth, values[1]] })
+  useEffect(() => {
+    formatMonth()
+  }, [document.activeElement])
+
+  const formatMonth = () => {
+    if (cardInfo.expiration.value[0].length === 0) return
+    if (REGEX.oneToNine.test(cardInfo.expiration.value[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: ['0' + cardInfo.expiration.value[0], cardInfo.expiration.value[1]] })
+    } else if (REGEX.zero.test(cardInfo.expiration.value[0])) {
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.minMonth, cardInfo.expiration.value[1]] })
     } else if (
-      !REGEX.month.test(values[0])
+      !REGEX.month.test(cardInfo.expiration.value[0])
     ) {
-      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.maxMonth, values[1]] })
+      dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: [OPTION.maxMonth, cardInfo.expiration.value[1]] })
     }
   };
 
