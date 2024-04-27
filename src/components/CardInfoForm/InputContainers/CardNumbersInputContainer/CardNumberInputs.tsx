@@ -33,12 +33,14 @@ export default function CardNumberInputs({
       {cardNumberKeys.map((key, index) => {
         const type = PASSWORD_INPUT_KEYS.includes(key) ? INPUT_TYPE.password : INPUT_TYPE.text;
 
-        const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-          generateOnChange(key)(e);
+        const handleChange = generateOnChange(key);
+        const focusNextInput = () => getRefWithIndex(index + 1)?.focus();
 
+        const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          handleChange(e);
           const isFilled = e.target.value.length === CARD_NUMBER_LENGTH;
           if (isFilled) {
-            getRefWithIndex(index + 1)?.focus();
+            focusNextInput();
           }
         };
 
