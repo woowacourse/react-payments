@@ -13,7 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardExpirationPeriodInputDefault: Story = {
   args: {
-    editCardPeriod: () => {},
     goNextFormStep: () => {},
   },
 };

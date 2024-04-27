@@ -13,7 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardCompanySelectDefault: Story = {
   args: {
-    editCardCompany: () => {},
     goNextFormStep: () => {},
   },
 };

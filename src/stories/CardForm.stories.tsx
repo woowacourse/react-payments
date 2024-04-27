@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { CardForm } from '../components';
-import { INITIAL_CARD_INFO } from '../modules/useCardInfoReducer';
 
-const meta = {
+const meta: Meta = {
   title: 'Form',
   component: CardForm,
   decorators: [
@@ -14,23 +14,14 @@ const meta = {
       </MemoryRouter>
     ),
   ],
-} satisfies Meta<typeof CardForm>;
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const CardFormDefault: Story = {
-  args: {
-    cardInfo: INITIAL_CARD_INFO,
-    editCardCVC: () => {},
-    editCardCompany: () => {},
-    editCardMark: () => {},
-    editCardNumbers: () => {},
-    editCardPassword: () => {},
-    editCardPeriod: () => {},
-    editCardUserName: () => {},
-    resetCardInfo: () => {},
-    setCardSide: () => {},
-  },
+  args: {},
 };
+
+CardFormDefault.args = {};

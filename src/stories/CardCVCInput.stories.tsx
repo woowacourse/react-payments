@@ -13,8 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardCVCInputDefault: Story = {
   args: {
-    setCardSide: () => {},
-    editCardCVC: () => {},
     goNextFormStep: () => {},
   },
 };
