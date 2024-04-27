@@ -7,7 +7,7 @@ import CardEnrollForm from "./components/payment/CardEnrollForm";
 
 const router = createBrowserRouter([
   {
-    path: "card-enroll-form",
+    path: "/",
     element: <CardEnrollForm />,
   },
   {

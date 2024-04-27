@@ -1,11 +1,19 @@
+import { Meta, StoryObj } from "@storybook/react";
+
 import CardPasswordInput from "../../components/payment/CardEnrollForm/CardPasswordInput";
-import { Meta } from "@storybook/react";
+import useCardPassword from "../../hooks/useCardPassword";
 
-export default {
-  title: "Components/CardPasswordInput",
+const meta: Meta<typeof CardPasswordInput> = {
   component: CardPasswordInput,
-} as Meta;
+};
+export default meta;
 
-const Template = () => <CardPasswordInput />;
+type Story = StoryObj<typeof CardPasswordInput>;
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: () => {
+    const cardPasswordInputProps = useCardPassword();
+
+    return <CardPasswordInput {...cardPasswordInputProps} />;
+  },
+};

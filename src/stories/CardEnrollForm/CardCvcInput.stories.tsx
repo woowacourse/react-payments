@@ -1,11 +1,19 @@
+import { Meta, StoryObj } from "@storybook/react";
+
 import CardCvcInput from "../../components/payment/CardEnrollForm/CardCvcInput";
-import { Meta } from "@storybook/react";
+import useCardCvc from "../../hooks/useCardCvc";
 
-export default {
-  title: "Components/CardCvcInput",
+const meta: Meta<typeof CardCvcInput> = {
   component: CardCvcInput,
-} as Meta;
+};
+export default meta;
 
-const Template = () => <CardCvcInput />;
+type Story = StoryObj<typeof CardCvcInput>;
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: () => {
+    const { cardCvcInputProps } = useCardCvc();
+
+    return <CardCvcInput {...cardCvcInputProps} />;
+  },
+};

@@ -1,19 +1,23 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import Select, { SelectProps } from "../../components/common/Select";
 
-export default {
-  title: "Components/Select",
+const meta: Meta<typeof Select> = {
   component: Select,
-} as Meta;
+};
+export default meta;
 
-const Template: Story<SelectProps> = (args) => <Select {...args} />;
+type Story = StoryObj<typeof Select>;
 
-export const Default = Template.bind({});
-Default.args = {
+const args: SelectProps = {
   options: [
     { value: "visa", label: "Visa" },
     { value: "mastercard", label: "MasterCard" },
     { value: "amex", label: "American Express" },
   ],
-  onChange: (event) => console.log(event.target.value),
+  placeholder: "story test!!",
+  isError: false,
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) =>
+    console.log(event.target.value),
 };
+
+export const Default: Story = { args };

@@ -1,12 +1,19 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import CardIssuerSelect from "../../components/payment/CardEnrollForm/CardIssuerSelect";
+import useCardIssuer from "../../hooks/useCardIssuer";
 
-export default {
-  title: "Components/CardIssuerSelect",
+const meta: Meta<typeof CardIssuerSelect> = {
   component: CardIssuerSelect,
-} as Meta;
+};
+export default meta;
 
-const Template: Story = () => <CardIssuerSelect />;
+type Story = StoryObj<typeof CardIssuerSelect>;
 
-export const Default = Template.bind({});
+export const Default: Story = {
+  render: () => {
+    const { cardIssuerSelectProps } = useCardIssuer();
+
+    return <CardIssuerSelect {...cardIssuerSelectProps} />;
+  },
+};

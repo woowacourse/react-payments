@@ -1,23 +1,32 @@
-import FormSubmitButton, {
-  FormSubmitButtonProps,
-} from "../../components/payment/CardEnrollForm/FormSubmitButton";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
-export default {
-  title: "Components/FormSubmitButton",
-  component: FormSubmitButton,
-} as Meta;
+import FormSubmitButton from "../../components/payment/CardEnrollForm/FormSubmitButton";
 
-const Template: Story<FormSubmitButtonProps> = (args) => (
-  <FormSubmitButton {...args} />
-);
-
-export const Enabled = Template.bind({});
-Enabled.args = {
-  disabled: false,
+const Decorator = (Story: StoryFn) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Story />
+    </div>
+  );
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
+const meta: Meta<typeof FormSubmitButton> = {
+  component: FormSubmitButton,
+  decorators: [Decorator],
+};
+export default meta;
+
+type Story = StoryObj<typeof FormSubmitButton>;
+
+export const Default: Story = {
+  args: {
+    onClick: () => alert("clicked!"),
+  },
 };

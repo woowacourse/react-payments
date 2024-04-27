@@ -5,12 +5,24 @@ import CompleteImg from "../../../static/Complete.png";
 import { cardIssuerMapper } from "../../../constants/cardIssuers";
 import styled from "styled-components";
 
+const getDummyData = (): CardInformationValueState => {
+  return {
+    cardNumbers: ["1234", "0000", "0000", "0000"],
+    cardIssuer: "kb-card",
+    cardExpiration: { month: "00", year: "00" },
+    cardOwnerName: "",
+    cardCvc: "",
+    cardPassword: "",
+  };
+};
+
 export default function CardEnrollComplete() {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { cardInformation }: { cardInformation: CardInformationValueState } =
-    location.state;
+
+  const cardInformation: CardInformationValueState =
+    location.state?.cardInformation || getDummyData();
 
   return (
     <CardEnrollCompleteWrapper>
@@ -24,9 +36,7 @@ export default function CardEnrollComplete() {
             가 등록되었어요.
           </div>
         </SuccessMessage>
-        <GoBackButton onClick={() => navigate("/card-enroll-form")}>
-          확인
-        </GoBackButton>
+        <GoBackButton onClick={() => navigate("/")}>확인</GoBackButton>
       </CompleteContainer>
     </CardEnrollCompleteWrapper>
   );
