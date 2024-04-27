@@ -2,10 +2,12 @@ import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
 import { isValueInRange } from '../util/isValueInRange';
 
-export function cardNumberValidated(value: string) {
-  const valueToNumber = Number(value);
-  isNumber(valueToNumber);
-  isNumberCount(value, VALIDATION.cardNumberCount);
+export function cardNumberValidated(count: number) {
+  return (value: string) => {
+    const valueToNumber = Number(value);
+    isNumber(valueToNumber);
+    isNumberCount(value, count);
+  };
 }
 
 export function cardPeriodValidated(name: 'year' | 'month') {
@@ -50,7 +52,7 @@ function isInRange(value: number, min: number, max: number) {
 }
 
 function isUpperCaseEnglish(value: string) {
-  const regex = /^[A-Za-z]*$/;
+  const regex = /^[A-Z]*$/;
   if (!regex.test(value)) {
     throw new Error(ERROR_MESSAGE.upperCase);
   }
