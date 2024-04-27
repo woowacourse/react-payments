@@ -1,6 +1,7 @@
-import { InitialCardNumberState } from 'types';
+import { InitialCardNumberState } from '@/types';
 import MasterCardImage from '../../assets/images/mastercard.png';
 import VisaCardImage from '../../assets/images/visa.png';
+import * as C from './index.style';
 import * as S from './creditCard.style';
 
 type CreditCardProps = {
@@ -26,8 +27,8 @@ export default function CreditCard({
     cardBrand === 'MasterCard' ? MasterCardImage : cardBrand === 'Visa' ? VisaCardImage : '';
 
   return (
-    <S.Container>
-      <S.CardContainer $backgroundColor={backgroundColor} $padding={'8px 12px'}>
+    <C.Container>
+      <C.CardContainer $backgroundColor={backgroundColor} $padding={'8px 12px'}>
         <S.CardHeader>
           <S.CardHeaderContentWrapper>
             <S.IcChip />
@@ -60,7 +61,7 @@ export default function CreditCard({
           <S.Text>{month + `${month || year ? DATE_SEPARATOR : ''}` + year}</S.Text>
           <S.Text>{name}</S.Text>
         </S.CardInfoWrapper>
-      </S.CardContainer>
-    </S.Container>
+      </C.CardContainer>
+    </C.Container>
   );
 }

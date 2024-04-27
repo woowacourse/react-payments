@@ -1,27 +1,5 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 50px;
-  margin-bottom: 45px;
-
-  width: 100%;
-`;
-
-export const CardContainer = styled.div<{ $backgroundColor: string; $padding: string }>`
-  background-color: ${(props) =>
-    props.$backgroundColor !== '' ? props.$backgroundColor : '#333333'};
-  width: 212px;
-  height: 132px;
-  padding: ${(props) => (props.$padding ? props.$padding : '0')};
-  border-radius: 4px;
-  position: relative;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-`;
-
 export const NumbersContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -80,19 +58,4 @@ export const CardInfoWrapper = styled.div`
   gap: 8px;
   margin-top: 14px;
   margin-left: 5px;
-`;
-
-export const CvcNumberWrapper = styled.div<{ $backgroundColor: string; $padding: string }>`
-  background-color: ${(props) =>
-    props.$backgroundColor !== '' ? props.$backgroundColor : '#333333'};
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  margin-bottom: 24px;
-`;
-
-export const CvcNumberText = styled(Text)`
-  margin-right: 16px;
 `;
