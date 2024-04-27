@@ -29,7 +29,7 @@ const CVCInput = ({
         placeholder="CVC"
         isError={CVC.isError}
         maxLength={3}
-        autoFocus={true}
+        autoFocus
         onChange={onChange}
         onKeyDown={onKeyDown}
         onFocus={onFocus}
