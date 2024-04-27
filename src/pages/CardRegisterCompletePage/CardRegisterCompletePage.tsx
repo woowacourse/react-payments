@@ -23,7 +23,7 @@ export default function CardRegisterCompletePage() {
   return (
     <S.Container>
       <S.SuccessIcon />
-      {successMessage}
+      <S.SuccessDescription>{successMessage}</S.SuccessDescription>
       <S.CompleteButton onClick={handleClickCompleteButton}>확인</S.CompleteButton>
     </S.Container>
   );

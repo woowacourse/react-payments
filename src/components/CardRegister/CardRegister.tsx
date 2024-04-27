@@ -98,7 +98,7 @@ export default function CardRegister() {
         />
       </S.CardPreviewBox>
 
-      <S.CardForm>
+      <S.CardForm className="card-form">
         {currentInputStep >= CARD_INPUT_STEP.PIN && (
           <CardPINInput isPINValid={PINValid} onChangePIN={handleChangePIN} />
         )}

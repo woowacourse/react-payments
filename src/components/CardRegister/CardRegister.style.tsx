@@ -17,6 +17,11 @@ export const CardForm = styled.section`
   flex-direction: column;
   row-gap: 16px;
   margin-top: 45px;
+
+  & > div {
+    position: relative;
+    animation: fade-in 1s;
+  }
 `;
 
 export const CardFormSubmitButton = styled.button`

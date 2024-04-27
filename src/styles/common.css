@@ -35,3 +35,15 @@ body {
     'Roboto',
     sans-serif;
 }
+
+@keyframes fade-in {
+  from {
+    top: -5px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}

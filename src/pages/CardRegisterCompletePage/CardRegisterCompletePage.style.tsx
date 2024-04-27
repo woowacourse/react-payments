@@ -3,7 +3,8 @@ import { Success } from '../../assets';
 
 export const Container = styled.main`
   display: flex;
-  height: 100vh;
+  height: 85vh;
+  margin: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -14,12 +15,24 @@ export const Container = styled.main`
   font-size: 24px;
   line-height: 36px;
   text-align: center;
+
+  & * {
+    position: relative;
+    animation: fade-in 1s;
+  }
 `;
 
 export const SuccessIcon = styled.div`
   width: 76px;
   height: 76px;
   background: url("${Success}") no-repeat;
+  position: relative;
+  animation: fade-in 1s;
+`;
+
+export const SuccessDescription = styled.p`
+  position: relative;
+  animation: fade-in 1s forwards;
 `;
 
 export const CompleteButton = styled.button`
@@ -32,6 +45,11 @@ export const CompleteButton = styled.button`
   font-weight: 700;
   text-align: center;
   transition: 0.3s ease;
+  opacity: 0;
+
+  position: relative;
+  animation: fade-in 1s forwards;
+  animation-delay: 0.3s;
 
   &:hover {
     cursor: pointer;
