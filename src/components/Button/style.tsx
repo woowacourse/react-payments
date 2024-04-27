@@ -10,4 +10,8 @@ export const Button = styled.button`
   color: ${(props) => props.theme.color.white};
 
   cursor: pointer;
+
+  &:active {
+    background-color: ${(props) => props.theme.color.lightGray};
+  }
 `;
