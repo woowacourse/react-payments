@@ -9,8 +9,10 @@ import CardCVC from "../CardCVC/CardCVC";
 import useCardForm from "../../hooks/useCardForm";
 import CardPassword from "../CardPassword/CardPassword";
 import { FormButton } from "../FormButton/FormButton";
+import { useNavigate } from "react-router-dom";
 
 export default function CardEnroll() {
+  const navigate = useNavigate();
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
   const {
     step,
@@ -33,7 +35,12 @@ export default function CardEnroll() {
 
   const onSubmitCardInfo = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("submit");
+    navigate("/confirm", {
+      state: {
+        cardCompany: cardCompany.value,
+        firstCardNumber: cardNumbers[0].value,
+      },
+    });
   };
 
   return (
