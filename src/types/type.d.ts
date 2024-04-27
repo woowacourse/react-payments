@@ -1,3 +1,5 @@
+type ButtonSize = 'full' | 'l' | 'm' | 's';
+
 type CardState = 'front' | 'back';
 
 type InputStates = InputState[];
