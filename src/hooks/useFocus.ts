@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { CARD_INFO } from "../constants/cardInformation";
 
 const useFocus = (
   step: boolean[],
@@ -27,7 +28,10 @@ const useFocus = (
 
   useEffect(() => {
     cardNumbers.forEach((cardNumber, idx) => {
-      if (cardNumber.value.length === 4 && idx < cardNumbers.length - 1) {
+      if (
+        cardNumber.value.length === CARD_INFO.NUMBER_LENGTH &&
+        idx < cardNumbers.length - 1
+      ) {
         cardNumbers[idx + 1].ref.current?.focus();
       }
     });
@@ -40,7 +44,7 @@ const useFocus = (
 
   /** 카드 번호 -> 카드 회사 선택 */
   useEffect(() => {
-    if (cardNumbers[3].value.length === 4) {
+    if (cardNumbers[3].value.length === CARD_INFO.NUMBER_LENGTH) {
       cardCompany.ref.current?.focus();
     }
   }, [cardCompany.value, cardExpirationMonth.ref, step[1]]);
@@ -54,21 +58,21 @@ const useFocus = (
 
   /** 유효기간 월 -> 유효기간 년도*/
   useEffect(() => {
-    if (cardExpirationMonth.value.length === 2) {
+    if (cardExpirationMonth.value.length === CARD_INFO.DATE_LENGTH) {
       cardExpirationYear.ref.current?.focus();
     }
   }, [cardExpirationMonth.value]);
 
   /** 카드 유효기간 -> 카드 주인 이름 */
   useEffect(() => {
-    if (cardExpirationYear.value.length === 2) {
+    if (cardExpirationYear.value.length === CARD_INFO.DATE_LENGTH) {
       cardOwnerName.ref.current?.focus();
     }
   }, [cardExpirationYear.value, cardOwnerName.ref, step[3]]);
 
   /** 카드 cvc -> 비밀번호 */
   useEffect(() => {
-    if (cardCVC.value.length === 3) {
+    if (cardCVC.value.length === CARD_INFO.CVC_LENGTH) {
       cardPassword.ref.current?.focus();
     }
   }, [cardCVC.value, cardPassword.ref, step[5]]);

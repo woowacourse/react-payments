@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../../constants/cardInformation";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -17,7 +18,7 @@ export default function CardOwnerName({ cardOwnerName }: Props) {
           <Input
             id="cardOwnerName"
             ref={cardOwnerName.ref}
-            maxLength={15}
+            maxLength={CARD_INFO.NAME_LENGTH}
             placeholder="JOHN DOE"
             value={cardOwnerName.value}
             isError={cardOwnerName.validateMessage !== ""}

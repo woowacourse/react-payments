@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../../constants/cardInformation";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -23,7 +24,7 @@ export default function CardCVC({
           <Input
             id="cardCVC"
             ref={cardCVC.ref}
-            maxLength={3}
+            maxLength={CARD_INFO.CVC_LENGTH}
             placeholder="123"
             value={cardCVC.value}
             isError={cardCVC.validateMessage !== ""}

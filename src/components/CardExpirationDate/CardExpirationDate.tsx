@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../../constants/cardInformation";
 import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
@@ -31,7 +32,7 @@ export default function CardExpirationDate({
             id="cardExpirationMonth"
             ref={cardExpirationMonth.ref}
             ariaLabel="유효기간 월"
-            maxLength={2}
+            maxLength={CARD_INFO.DATE_LENGTH}
             placeholder="MM"
             value={cardExpirationMonth.value}
             isError={cardExpirationMonth.validateMessage !== ""}
@@ -42,7 +43,7 @@ export default function CardExpirationDate({
             id="cardExpirationYear"
             ref={cardExpirationYear.ref}
             ariaLabel="유효기간 연도"
-            maxLength={2}
+            maxLength={CARD_INFO.DATE_LENGTH}
             placeholder="YY"
             value={cardExpirationYear.value}
             isError={cardExpirationYear.validateMessage !== ""}

@@ -14,6 +14,8 @@ import useInput from "./useInput";
 import useSelect from "./useSelect";
 import useFocus from "./useFocus";
 import { useNavigate } from "react-router-dom";
+import { PATH } from "../constants/path";
+import { CARD_INFO } from "../constants/cardInformation";
 
 const useCardForm = () => {
   const [step, setStep] = useState([
@@ -79,7 +81,7 @@ const useCardForm = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/confirm", {
+    navigate(PATH.CONFIRM, {
       state: {
         cardCompany: cardCompany.value,
         firstCardNumber: cardNumbers[0].value,
@@ -96,13 +98,18 @@ const useCardForm = () => {
 
   useEffect(() => {
     const cardNumbersCompleted = cardNumbers.every(
-      (cn) => cn.value.length === 4 && cn.validateMessage === ""
+      (cn) =>
+        cn.value.length === CARD_INFO.NUMBER_LENGTH && cn.validateMessage === ""
     );
     const cardCompanyCompleted = cardCompany.value !== "";
     const cardExpirationDateCompleted = [
       cardExpirationMonth,
       cardExpirationYear,
-    ].every((date) => date.value.length === 2 && date.validateMessage === "");
+    ].every(
+      (date) =>
+        date.value.length === CARD_INFO.DATE_LENGTH &&
+        date.validateMessage === ""
+    );
     const cardOwnerNameCompleted =
       cardOwnerName.value !== "" && cardOwnerName.validateMessage === "";
     const cardCVCCompleted =

@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../../constants/cardInformation";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, LabelText, CaptionText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -19,7 +20,7 @@ export default function CardPassword({ cardPassword }: Props) {
             id="cardPassword"
             ref={cardPassword.ref}
             type="password"
-            maxLength={2}
+            maxLength={CARD_INFO.PASSWORD_LENGTH}
             placeholder=""
             value={cardPassword.value}
             isError={cardPassword.validateMessage !== ""}

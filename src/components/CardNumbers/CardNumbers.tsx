@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../../constants/cardInformation";
 import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
@@ -27,7 +28,7 @@ export default function CardNumbers({ cardNumbers }: Props) {
                 id={`cardNumber${idx + 1}`}
                 key={`cardNumber${idx + 1}`}
                 ariaLabel={`카드번호${idx + 1}`}
-                maxLength={4}
+                maxLength={CARD_INFO.NUMBER_LENGTH}
                 placeholder="1234"
                 value={cardNumber.value}
                 isError={cardNumber.validateMessage !== ""}
