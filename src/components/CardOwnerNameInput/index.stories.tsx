@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Meta, StoryObj } from '@storybook/react'; // 경로는 실제 파일 구조에 맞게 조정해야 함
+import { Meta, StoryObj } from '@storybook/react';
 import CardOwnerNameInput from '.';
 import { fn } from '@storybook/test';
 
