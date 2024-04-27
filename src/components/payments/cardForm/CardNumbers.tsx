@@ -1,12 +1,15 @@
-import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from '../constants/message';
+import {
+  PAYMENTS_INPUT_MESSAGE,
+  PAYMENTS_MESSAGE,
+} from '../../../constants/message';
 import { useRef, useState } from 'react';
 
-import { BOUND } from '../constants/number';
-import FormItem from './FormItem';
-import SectionTitle from './SectionTitle';
-import TextInput from './TextInput';
-import TextInputContainer from './InputContainer';
-import { UseCardNumbers } from '../hooks/useCardNumbers';
+import { BOUND } from '../../../constants/number';
+import FormItem from '../../FormItem';
+import SectionTitle from '../../SectionTitle';
+import TextInput from '../../TextInput';
+import TextInputContainer from '../../InputContainer';
+import { UseCardNumbers } from '../../../hooks/payments/useCardNumbers';
 
 interface props {
   useCardNumbers: UseCardNumbers;

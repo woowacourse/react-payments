@@ -1,18 +1,18 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { COLOR } from './styles/color';
-import CompletePaymentRegister from './components/CompletePaymentsRegister';
+import CompletePaymentRegister from './components/CompletePaymentsRegister/CompletePaymentsRegister';
 import PATH from './constants/path';
 import { Path } from './type';
-import PayMents from './components/Payments';
-import WrongAccess from './components/WrongAccess';
+import PayMents from './components/payments/Payments';
+import WrongAccess from './components/wrongAccess/WrongAccess';
 import styled from '@emotion/styled';
-import useCardCVC from './hooks/useCardCVC';
-import useCardExpiredDate from './hooks/useCardExpiredDate';
-import useCardHolder from './hooks/useCardHolder';
-import useCardIssuer from './hooks/useCardIssuer';
-import useCardNumbers from './hooks/useCardNumbers';
-import useCardPasswordHead from './hooks/useCardPasswordHead';
+import useCardCVC from './hooks/payments/useCardCVC';
+import useCardExpiredDate from './hooks/payments/useCardExpiredDate';
+import useCardHolder from './hooks/payments/useCardHolder';
+import useCardIssuer from './hooks/payments/useCardIssuer';
+import useCardNumbers from './hooks/payments/useCardNumbers';
+import useCardPasswordHead from './hooks/payments/useCardPasswordHead';
 import { useRef } from 'react';
 
 export default function App() {

@@ -1,9 +1,9 @@
-import { COLOR } from '../styles/color';
-import { CardIssuer as CardIssuerType } from '../type';
+import { COLOR } from '../../../styles/color';
+import { CardIssuer as CardIssuerType } from '../../../type';
 import { HTMLProps } from 'react';
-import ISSUER_KOREAN from '../constants/issuerKorean';
-import SectionTitle from './SectionTitle';
-import { UseCardIssuer } from '../hooks/useCardIssuer';
+import ISSUER_KOREAN from '../../../constants/issuerKorean';
+import SectionTitle from '../../SectionTitle';
+import { UseCardIssuer } from '../../../hooks/payments/useCardIssuer';
 import dropdown from '../Images/dropdown.svg';
 import styled from '@emotion/styled';
 

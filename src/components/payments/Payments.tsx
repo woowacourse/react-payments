@@ -1,15 +1,15 @@
-import { CardExpiredDate, CardNumbers } from '../type';
+import { CardExpiredDate, CardNumbers } from '../../type';
 
-import BottomButton from './BottomButton';
-import CardForm from './CardForm';
+import BottomButton from '../BottomButton';
+import CardForm from './cardForm/CardForm';
 import CardPreview from './CardPreview';
 import { Link } from 'react-router-dom';
-import { UseCardCVC } from '../hooks/useCardCVC';
-import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
-import { UseCardHolder } from '../hooks/useCardHolder';
-import { UseCardIssuer } from '../hooks/useCardIssuer';
-import { UseCardNumbers } from '../hooks/useCardNumbers';
-import { UseCardPasswordHead } from '../hooks/useCardPasswordHead';
+import { UseCardCVC } from '../../hooks/payments/useCardCVC';
+import { UseCardExpiredDate } from '../../hooks/payments/useCardExpiredDate';
+import { UseCardHolder } from '../../hooks/payments/useCardHolder';
+import { UseCardIssuer } from '../../hooks/payments/useCardIssuer';
+import { UseCardNumbers } from '../../hooks/payments/useCardNumbers';
+import { UseCardPasswordHead } from '../../hooks/payments/useCardPasswordHead';
 import styled from '@emotion/styled';
 
 interface Props {

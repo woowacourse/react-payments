@@ -1,5 +1,5 @@
-import { COLOR } from '../styles/color';
-import { CardInfo } from '../type';
+import { COLOR } from '../../styles/color';
+import { CardInfo } from '../../type';
 import { HTMLProps } from 'react';
 import IC_CHIP from '../Images/Ic_chip.png';
 import styled from '@emotion/styled';
