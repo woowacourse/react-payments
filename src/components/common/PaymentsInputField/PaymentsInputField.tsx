@@ -11,7 +11,8 @@ interface PaymentsInputFieldProps {
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: number;
-  autoFocus?: boolean
+  autoFocus?: boolean;
+  type?: string
 }
 
 const PaymentsInputField = forwardRef<HTMLInputElement, PaymentsInputFieldProps>((props, ref) => {
@@ -25,7 +26,8 @@ const PaymentsInputField = forwardRef<HTMLInputElement, PaymentsInputFieldProps>
     handleOnFocus,
     className,
     width,
-    autoFocus
+    autoFocus,
+    type,
   } = props;
 
   const handleKeyDownEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -48,6 +50,7 @@ const PaymentsInputField = forwardRef<HTMLInputElement, PaymentsInputFieldProps>
       width={width}
       autoFocus={autoFocus}
       onKeyDown={(e) => handleKeyDownEnter(e)}
+      type={type}
     />
   );
 });

@@ -26,6 +26,7 @@ const PasswordFormSection = (props: PasswordFormSectionProps) => {
       hasError={error.length !== 0}
       handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
       autoFocus={true}
+      type='password'
     />
   )
 
