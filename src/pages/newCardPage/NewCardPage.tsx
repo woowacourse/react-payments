@@ -16,6 +16,7 @@ import CardFrontPreview from '../../components/cardPreview/CardFrontPreview';
 import CardBackPreview from '../../components/cardPreview/cardBackPreview';
 import Button from '../../components/common/button/Button';
 import * as Styled from './NewCardPage.styled';
+import { useNavigate } from 'react-router-dom';
 
 const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -36,6 +37,7 @@ const NewCardPage = () => {
   });
   const [creationStage, setCreationStage] = useState(1);
   const [preview, setPreview] = useState('front');
+  const navigate = useNavigate();
 
   useEffect(() => {
     updateCardCompanyVisibility();
@@ -265,7 +267,12 @@ const NewCardPage = () => {
   };
 
   const navigateToRegistrationCompletePage = () => {
-    console.log('d');
+    navigate('/registration-complete', {
+      state: {
+        cardFirstFourDigits: cardInfo.cardNumbers[0],
+        cardCompany: cardInfo.cardCompany,
+      },
+    });
   };
 
   return (
