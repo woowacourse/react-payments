@@ -2,7 +2,6 @@ import CardPreviewBack from "./CardPreviewBack/CardPreviewBack";
 import CardPreviewFront from "./CardPreviewFront/CardPreviewFront";
 
 interface Props {
-  // cardInformation: CardInformation;
   cardNumbers: string[];
   cardCompany: string;
   cardExpirationMonth: string;

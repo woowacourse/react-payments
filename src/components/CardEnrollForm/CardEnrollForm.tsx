@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import CardNumbers from "../CardNumbers/CardNumbers";
 import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
 import CardOwnerName from "../CardOwnerName/CardOwnerName";
@@ -9,10 +9,8 @@ import CardCVC from "../CardCVC/CardCVC";
 import useCardForm from "../../hooks/useCardForm";
 import CardPassword from "../CardPassword/CardPassword";
 import { FormButton } from "../FormButton/FormButton";
-import { useNavigate } from "react-router-dom";
 
 export default function CardEnrollForm() {
-  const navigate = useNavigate();
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
   const {
     step,
@@ -24,6 +22,7 @@ export default function CardEnrollForm() {
     cardCVC,
     cardPassword,
     isCompleted,
+    handleSubmit,
   } = useCardForm();
 
   const handlePreviewOnFocus = () => {
@@ -31,16 +30,6 @@ export default function CardEnrollForm() {
   };
   const handlePreviewOnBlur = () => {
     setPreviewStatus("front");
-  };
-
-  const onSubmitCardInfo = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    navigate("/confirm", {
-      state: {
-        cardCompany: cardCompany.value,
-        firstCardNumber: cardNumbers[0].value,
-      },
-    });
   };
 
   return (
@@ -56,7 +45,7 @@ export default function CardEnrollForm() {
         cardCVC={cardCVC.value}
         previewStatus={previewStatus}
       />
-      <S.CardForm onSubmit={onSubmitCardInfo}>
+      <S.CardForm onSubmit={handleSubmit}>
         {step[5] && <CardPassword cardPassword={cardPassword} />}
         {step[4] && (
           <CardCVC

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import {
   isCardCVCLength,
   isCardDateLength,
@@ -13,6 +13,7 @@ import {
 import useInput from "./useInput";
 import useSelect from "./useSelect";
 import useFocus from "./useFocus";
+import { useNavigate } from "react-router-dom";
 
 const useCardForm = () => {
   const [step, setStep] = useState([
@@ -25,6 +26,7 @@ const useCardForm = () => {
     false,
   ]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const navigate = useNavigate();
 
   const cardNumber1 = useInput("", {
     validateOnChange: [isCardNumber, isCardNumberLength],
@@ -74,6 +76,16 @@ const useCardForm = () => {
     validateOnChange: [isCardNumber, isPasswordLength],
     validateOnBlur: [isCardNumber, isPasswordLength],
   });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate("/confirm", {
+      state: {
+        cardCompany: cardCompany.value,
+        firstCardNumber: cardNumbers[0].value,
+      },
+    });
+  };
 
   const changeNextStep = (index: number) => {
     const newStep = [...step];
@@ -172,6 +184,7 @@ const useCardForm = () => {
     cardCVC,
     cardPassword,
     isCompleted,
+    handleSubmit,
   };
 };
 
