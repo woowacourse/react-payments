@@ -16,6 +16,7 @@ export default function Input({
   isError,
   onChange,
   onBlur,
+  onFocus,
 }: Props) {
   return (
     <S.Input
@@ -28,6 +29,7 @@ export default function Input({
       isError={isError}
       onChange={onChange}
       onBlur={onBlur}
+      onFocus={onFocus}
     />
   );
 }

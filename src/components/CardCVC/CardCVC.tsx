@@ -5,9 +5,15 @@ import * as S from "./style";
 
 interface Props {
   cardCVC: UseInputReturn;
+  handlePreviewOnFocus: () => void;
+  handlePreviewOnBlur: () => void;
 }
 
-export default function CardCVC({ cardCVC }: Props) {
+export default function CardCVC({
+  cardCVC,
+  handlePreviewOnFocus,
+  handlePreviewOnBlur,
+}: Props) {
   return (
     <S.CardOwnerNameContainer>
       <TitleText>CVC</TitleText>
@@ -21,7 +27,11 @@ export default function CardCVC({ cardCVC }: Props) {
             value={cardCVC.value}
             isError={cardCVC.validateMessage !== ""}
             onChange={cardCVC.onChange}
-            onBlur={cardCVC.onBlur}
+            onBlur={(e) => {
+              cardCVC.onBlur(e);
+              handlePreviewOnBlur();
+            }}
+            onFocus={handlePreviewOnFocus}
           />
         </S.InputContainer>
         <ErrorMessage message={cardCVC.validateMessage || ""} />

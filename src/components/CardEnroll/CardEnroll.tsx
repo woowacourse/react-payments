@@ -21,6 +21,13 @@ export default function CardEnroll() {
     cardCVC,
   } = useCardForm();
 
+  const handlePreviewOnFocus = () => {
+    setPreviewStatus("back");
+  };
+  const handlePreviewOnBlur = () => {
+    setPreviewStatus("front");
+  };
+
   const onSubmitCardInfo = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -39,7 +46,13 @@ export default function CardEnroll() {
         previewStatus={previewStatus}
       />
       <S.CardForm onSubmit={onSubmitCardInfo}>
-        {step[4] && <CardCVC cardCVC={cardCVC} />}
+        {step[4] && (
+          <CardCVC
+            cardCVC={cardCVC}
+            handlePreviewOnFocus={handlePreviewOnFocus}
+            handlePreviewOnBlur={handlePreviewOnBlur}
+          />
+        )}
         {step[3] && <CardOwnerName cardOwnerName={cardOwnerName} />}
         {step[2] && (
           <CardExpirationDate
