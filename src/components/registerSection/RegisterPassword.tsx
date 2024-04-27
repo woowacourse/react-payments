@@ -1,13 +1,12 @@
-import { forwardRef } from 'react';
 import * as S from '../../app.style';
 import InputSection from './InputSection';
-import { PASSWORD } from '../../constants/cardSection';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
-import { MAX_LENGTH } from '../../constants/cardSection';
-import { RegisterStepProps } from 'types';
+import { MAX_LENGTH, PASSWORD } from '@/constants/cardSection';
+import { RegisterFieldProps } from '@/types';
+import { forwardRef } from 'react';
 
-const RegisterPassword = forwardRef<HTMLInputElement, Partial<RegisterStepProps>>((props, ref) => {
+const RegisterPassword = forwardRef<HTMLInputElement, Partial<RegisterFieldProps>>((props, ref) => {
   const { value, onChange, isError, onBlur } = props;
 
   return (

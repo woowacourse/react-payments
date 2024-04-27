@@ -2,13 +2,12 @@ import InputSection from './InputSection';
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
-import { MAX_LENGTH } from '../../constants/cardSection';
+import { MAX_LENGTH, CARD_CVC } from '../../constants/cardSection';
+import { RegisterFieldProps } from '@/types';
 import { forwardRef } from 'react';
-import { CARD_CVC } from '../../constants/cardSection';
-import { RegisterStepProps } from 'types';
 
-const RegisterCVC = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref) => {
-  const { value, onChange, isError, onEnter, onBlur } = props;
+const RegisterCVC = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
+  const { value, onChange, isError, onKeyDown, onBlur } = props;
 
   return (
     <S.Wrapper>
@@ -22,7 +21,7 @@ const RegisterCVC = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref)
           maxLength={MAX_LENGTH.CVC}
           onChange={onChange}
           isError={isError}
-          onKeyDown={onEnter}
+          onKeyDown={onKeyDown}
           ref={ref}
           onBlur={onBlur}
         />

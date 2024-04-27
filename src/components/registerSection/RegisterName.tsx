@@ -2,13 +2,13 @@ import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
 import InputSection from './InputSection';
+import { MAX_LENGTH, OWNER_NAME } from '@/constants/cardSection';
+import { RegisterFieldProps } from '@/types';
 import { forwardRef } from 'react';
-import { MAX_LENGTH } from '../../constants/cardSection';
-import { OWNER_NAME } from '../../constants/cardSection';
-import { RegisterStepProps } from 'types';
 
-const RegisterName = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref) => {
-  const { onChange, value, onEnter, isError, onBlur } = props;
+const RegisterName = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
+  const { onChange, value, onKeyDown, isError, onBlur } = props;
+
   return (
     <S.Wrapper>
       <InputSection title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
@@ -22,7 +22,7 @@ const RegisterName = forwardRef<HTMLInputElement, RegisterStepProps>((props, ref
           type="text"
           ref={ref}
           value={value}
-          onKeyDown={onEnter}
+          onKeyDown={onKeyDown}
           onBlur={onBlur}
         />
       </InputSection>

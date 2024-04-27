@@ -2,13 +2,11 @@ import * as S from '../../app.style';
 import * as Styled from './registerCardIssuer.style';
 import Label from '../composables/Label';
 import InputSection from './InputSection';
-import { CARD_ISSUER } from '../../constants/cardSection';
-import { forwardRef } from 'react';
-import INITIAL_CARD_ISSUER_INFO from '../../constants/initialCardIssuerInfo';
+import { CARD_ISSUER } from '@/constants/cardSection';
+import { forwardRef, SelectHTMLAttributes } from 'react';
+import INITIAL_CARD_ISSUER_INFO from '@/constants/allCardIssuerInfo';
 
-type RegisterCardIssuerProps = {
-  onChange: React.ChangeEventHandler<HTMLSelectElement>;
-};
+interface RegisterCardIssuerProps extends SelectHTMLAttributes<HTMLSelectElement> {}
 
 const RegisterCardIssuer = forwardRef<HTMLSelectElement, RegisterCardIssuerProps>((props, ref) => {
   const { onChange } = props;

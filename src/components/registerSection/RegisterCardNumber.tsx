@@ -1,11 +1,10 @@
 import * as S from '../../app.style';
 import InputSection from './InputSection';
-import { CARD_NUMBER } from '../../constants/cardSection';
-import { InitialCardNumberState } from 'types';
+import { InitialCardNumberState } from '@/types';
 import { Fragment, RefObject } from 'react';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
-import { MAX_LENGTH } from '../../constants/cardSection';
+import { MAX_LENGTH, CARD_NUMBER } from '@/constants/cardSection';
 
 type RegisterCardNumberProps = {
   cardNumbers: InitialCardNumberState[];
