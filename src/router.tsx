@@ -3,19 +3,24 @@ import CardRegistration from './pages/CardRegistration/CardRegistration';
 import RegistrationConfirm from './pages/RegistrationConfirm/RegistrationConfirm';
 import GeneralLayout from './components/GeneralLayout';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <GeneralLayout />,
+      children: [
+        {
+          path: '',
+          element: <CardRegistration />,
+        },
+        {
+          path: 'confirm',
+          element: <RegistrationConfirm />,
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <GeneralLayout />,
-    children: [
-      {
-        path: '',
-        element: <CardRegistration />,
-      },
-      {
-        path: 'confirm',
-        element: <RegistrationConfirm />,
-      },
-    ],
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);
