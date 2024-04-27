@@ -9,6 +9,7 @@ import { CardValidityPeriodErrorContext } from "../../routes/Payments/FormContex
 import CardPeriodInput from "../FormInput/CardPeriodInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
+import { isPeriodValid } from "../Form/useIsValid";
 
 const CardValidityPeriodField = () => {
   const cardPeriodError = useContextWrapper(CardValidityPeriodErrorContext)[0];
@@ -22,8 +23,7 @@ const CardValidityPeriodField = () => {
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   useEffect(() => {
-    //TODO: 날짜 유효성 검사
-    if (cardPeriod.month?.length === 2 && cardPeriod.year?.length === 2) {
+    if (isPeriodValid(cardPeriod, cardPeriodError)) {
       setRenderOrder((prev) => {
         if (prev.index === 2) {
           return { index: 3, step: "cardOwner" };
@@ -31,7 +31,7 @@ const CardValidityPeriodField = () => {
         return prev;
       });
     }
-  }, [cardPeriod, setRenderOrder]);
+  }, [cardPeriod, setRenderOrder, cardPeriodError]);
 
   useEffect(() => {
     firstInput.current?.focus();

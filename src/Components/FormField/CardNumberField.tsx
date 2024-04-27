@@ -8,6 +8,8 @@ import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvide
 import { FormRenderOrderContext } from "../../routes/Payments";
 import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 
+import { isNumberValid } from "../Form/useIsValid";
+
 const CardNumberField = () => {
   const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
   const cardNumberErrorKeys = Object.keys(cardNumberError) as (keyof CardNumbersError)[];
@@ -20,12 +22,7 @@ const CardNumberField = () => {
   const firstInput = useContextWrapper(CardNumberInputsContext)[0];
 
   useEffect(() => {
-    if (
-      cardNumbers.firstNumbers?.length === 4 &&
-      cardNumbers.secondNumbers?.length === 4 &&
-      cardNumbers.thirdNumbers?.length === 4 &&
-      cardNumbers.fourthNumbers?.length === 4
-    ) {
+    if (isNumberValid(cardNumbers, cardNumberError)) {
       setRenderOrder((prev) => {
         if (prev.index < 1) {
           return { index: 1, step: "cardIssuer" };

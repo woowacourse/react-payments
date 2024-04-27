@@ -17,7 +17,7 @@ import {
   CardValidityPeriodErrorContext,
 } from "../../routes/Payments/FormContextProvider";
 
-const isNumberValid = (cardNumbers: CardNumbers, numberError: CardNumbersError) => {
+export const isNumberValid = (cardNumbers: CardNumbers, numberError: CardNumbersError) => {
   if (
     cardNumbers.firstNumbers?.length === 4 &&
     cardNumbers.secondNumbers?.length === 4 &&
@@ -33,38 +33,39 @@ const isNumberValid = (cardNumbers: CardNumbers, numberError: CardNumbersError) 
   return false;
 };
 
-const isIssuerValid = ({ name }: CardIssuer, { name: nameError }: CardIssuerError) => {
+export const isIssuerValid = ({ name }: CardIssuer, { name: nameError }: CardIssuerError) => {
   if (name && !nameError.isError) {
     return true;
   }
   return false;
 };
 
-const isPeriodValid = (
+export const isPeriodValid = (
   { month, year }: CardValidityPeriod,
   { month: monthError, year: yearError }: CardValidityPeriodError
 ) => {
+  //TODO: 날짜 유효성 검사
   if (month && year && !monthError?.isError && !yearError?.isError) {
     return true;
   }
   return false;
 };
 
-const isOwnerValid = ({ name }: CardOwnerInfo, { name: errorName }: CardOwnerInfoError) => {
+export const isOwnerValid = ({ name }: CardOwnerInfo, { name: errorName }: CardOwnerInfoError) => {
   if (name && !errorName?.isError) {
     return true;
   }
   return false;
 };
 
-const isCVCValid = ({ value }: CardCVC, { value: valueError }: CardCVCError) => {
+export const isCVCValid = ({ value }: CardCVC, { value: valueError }: CardCVCError) => {
   if (value?.length === 3 && !valueError.isError) {
     return true;
   }
   return false;
 };
 
-const isPasswordValid = ({ value }: CardPassword, { value: valueError }: CardPasswordError) => {
+export const isPasswordValid = ({ value }: CardPassword, { value: valueError }: CardPasswordError) => {
   if (value?.length === 2 && !valueError.isError) {
     return true;
   }

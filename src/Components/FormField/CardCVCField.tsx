@@ -7,6 +7,7 @@ import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext } from "../Form/FormRefContextProvider";
+import { isCVCValid } from "../Form/useIsValid";
 
 const CardCVCField = () => {
   const cardCVCError = useContextWrapper(CardCVCErrorContext)[0];
@@ -21,7 +22,7 @@ const CardCVCField = () => {
   const firstInput = useContextWrapper(CardCVCInputContext)[0];
 
   useEffect(() => {
-    if (cardCVC.value?.length === 3) {
+    if (isCVCValid(cardCVC, cardCVCError)) {
       setRenderOrder((prev) => {
         if (prev.index === 4) {
           return { index: 5, step: "cardPassword" };
@@ -29,7 +30,7 @@ const CardCVCField = () => {
         return prev;
       });
     }
-  }, [cardCVC, setRenderOrder]);
+  }, [cardCVC, setRenderOrder, cardCVCError]);
 
   useEffect(() => {
     firstInput.current?.focus();

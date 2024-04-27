@@ -7,6 +7,7 @@ import { CardOwnerInfoErrorContext } from "../../routes/Payments/FormContextProv
 import CardOwnerInput from "../FormInput/CardOwnerInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
+import { isOwnerValid } from "../Form/useIsValid";
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
@@ -24,18 +25,20 @@ const CardOwnerField = () => {
 
   const ENTER_KEY_CODE = 13;
   useEffect(() => {
-    cardOwnerInput.current?.addEventListener("keydown", (e) => {
-      if (e.keyCode === ENTER_KEY_CODE && cardOwner.name) {
-        setRenderOrder((prev) => {
-          if (prev.index === 3) {
-            return { index: 4, step: "cardCVC" };
-          }
-          return prev;
-        });
-        nextFieldInput.current?.focus();
-      }
-    });
-  }, [cardOwner, cardOwnerInput, setRenderOrder, nextFieldInput]);
+    if (isOwnerValid(cardOwner, cardOwnerError)) {
+      cardOwnerInput.current?.addEventListener("keydown", (e) => {
+        if (e.keyCode === ENTER_KEY_CODE && cardOwner.name) {
+          setRenderOrder((prev) => {
+            if (prev.index === 3) {
+              return { index: 4, step: "cardCVC" };
+            }
+            return prev;
+          });
+          nextFieldInput.current?.focus();
+        }
+      });
+    }
+  }, [cardOwner, cardOwnerInput, setRenderOrder, nextFieldInput, cardOwnerError]);
 
   useEffect(() => {
     firstInput.current?.focus();
