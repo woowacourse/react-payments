@@ -23,9 +23,8 @@ const useFormSection = (props: UseFormSectionProps) => {
     } else {
       setError('');
       setValue(value);
+      dispatchCardInfo(value);
     }
-
-    dispatchCardInfo(value);
   };
 
   useEffect(() => {
