@@ -23,6 +23,8 @@ export const SubmitButton: Story = {
   args: {
     text: '확인',
     theme: 'submit',
+    type: 'submit',
+    onClick: () => {},
     isActive: true,
   },
 };
@@ -34,6 +36,8 @@ export const ConfirmButton: Story = {
   args: {
     text: '확인',
     theme: 'default',
+    type: 'button',
+    onClick: () => {},
     isActive: true,
   },
 };
