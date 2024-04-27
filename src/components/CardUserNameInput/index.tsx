@@ -1,13 +1,14 @@
-import { ChangeEvent, useMemo } from 'react';
+import { ChangeEvent, useContext, useMemo } from 'react';
 
 import {
-  CARD_FORM_STEP,
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
   CARD_USER_NAME_REGEXP,
+  CardStep,
   ERROR_MESSAGE,
 } from '../../constants';
-import useCardInput from '../../hooks/useCardInput';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../hooks';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -15,12 +16,14 @@ import Input from '../Input';
 import styles from './style.module.css';
 
 export interface CardUserNameInputProps {
-  editCardUserName: (name: string | null) => void;
-  goNextFormStep: (currentStep: number) => void;
+  goNextFormStep: (currentStep: CardStep) => void;
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
-  const { editCardUserName, goNextFormStep } = props;
+  const { goNextFormStep } = props;
   const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
+
+  const cardFormContext = useContext(CardFormContext);
+  const { nextFormStep } = useNextFormStep({ currentCardStep: 'userName' });
 
   const validateName = (name: string) => {
     const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
@@ -32,10 +35,12 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   };
 
   const updateCardUserName = (name: string, error: boolean) => {
+    if (!cardFormContext) return;
+
     const isChangeableName = !name || !error;
     const newUserName = name.trim();
     // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-    editCardUserName(isChangeableName ? newUserName : null);
+    cardFormContext.editCardUserName(isChangeableName ? newUserName : null);
   };
 
   /**
@@ -44,7 +49,9 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
    */
   const handleGoNextFormStep = (error: boolean) => {
     // 다음 입력 필드로 이동
-    if (!error) goNextFormStep(CARD_FORM_STEP.userName);
+    if (error) return;
+    if (!nextFormStep) return;
+    goNextFormStep(nextFormStep);
   };
 
   const { value, setValue, error } = useCardInput<string, boolean>({

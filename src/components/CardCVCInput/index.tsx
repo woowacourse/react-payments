@@ -1,13 +1,14 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import {
   CARD_CVC,
   CARD_CVC_MESSAGE,
   CARD_CVC_REGEXP,
-  CARD_FORM_STEP,
+  CardStep,
   ERROR_MESSAGE,
 } from '../../constants';
-import useCardInput from '../../hooks/useCardInput';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../hooks';
 import CardInputSection from '../CardInputSection';
 import { CardSide } from '../CardPreview';
 import ErrorMessage from '../ErrorMessage';
@@ -16,20 +17,22 @@ import Input from '../Input';
 import styles from './style.module.css';
 
 export interface CardCVCInputProps {
-  setCardSide: Dispatch<SetStateAction<CardSide>>;
-  editCardCVC: (cvc: string | null) => void;
-  goNextFormStep: (currentStep: number) => void;
+  goNextFormStep: (currentStep: CardStep) => void;
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const { editCardCVC, setCardSide, goNextFormStep } = props;
+  const { goNextFormStep } = props;
+
+  const cardFormContext = useContext(CardFormContext);
+  const { nextFormStep } = useNextFormStep({ currentCardStep: 'cvc' });
 
   const validateCVC = (text: string) => ({
     newError: !CARD_CVC_REGEXP.test(text),
   });
 
   const updateCardCVC = (value: string, error: boolean) => {
-    editCardCVC(error ? null : value);
+    if (!cardFormContext) return;
+    cardFormContext.editCardCVC(error ? null : value);
   };
 
   /**
@@ -38,10 +41,11 @@ function CardCVCInput(props: CardCVCInputProps) {
    */
   const handleGoNextFormStep = (error: boolean) => {
     if (error) return;
+    if (!nextFormStep) return;
     // UI에 cvc 가 나오고 다음 단계로 넘어감
     setTimeout(() => {
-      goNextFormStep(CARD_FORM_STEP.cvc);
-    }, 1000);
+      goNextFormStep(nextFormStep);
+    }, 800);
   };
 
   const { value, setValue, error } = useCardInput<string, boolean>({
@@ -58,6 +62,11 @@ function CardCVCInput(props: CardCVCInputProps) {
     setValue(targetValue);
   };
 
+  const handleCVCFocus = (cardSide: CardSide) => {
+    if (!cardFormContext) return;
+    cardFormContext.setCardSide(cardSide);
+  };
+
   return (
     <CardInputSection
       title={CARD_CVC_MESSAGE.title}
@@ -71,8 +80,8 @@ function CardCVCInput(props: CardCVCInputProps) {
           type="text"
           maxLength={CARD_CVC.length}
           onChange={handleCVCChange}
-          onBlur={() => setCardSide('front')}
-          onFocus={() => setCardSide('back')}
+          onBlur={() => handleCVCFocus('front')}
+          onFocus={() => handleCVCFocus('back')}
           value={value}
           isFocus
         />

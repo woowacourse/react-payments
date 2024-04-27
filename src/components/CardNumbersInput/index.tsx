@@ -1,15 +1,16 @@
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
 
 import {
-  CARD_FORM_STEP,
   CARD_MARK_REGEXP,
   CARD_NUMBER_REGEXP,
   CARD_NUMBERS,
   CARD_NUMBERS_FORM_MESSAGE,
+  CardStep,
   ERROR_MESSAGE,
 } from '../../constants';
-import useCardInput from '../../hooks/useCardInput';
-import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../hooks';
+import { CardNumbers } from '../../modules/useCardInfoReducer';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Input from '../Input';
@@ -20,17 +21,18 @@ const NUMBERS_NAME_PREFIX = 'numbers_';
 
 type CardNumbersError = boolean[];
 export interface CardNumbersInputProps {
-  editCardMark: (mark: CardMark) => void;
-  editCardNumbers: (numbers: CardNumbers) => void;
-  goNextFormStep: (currentStep: number) => void;
+  goNextFormStep: (currentStep: CardStep) => void;
 }
 
 export default function CardNumbersInput(props: CardNumbersInputProps) {
-  const { editCardMark, editCardNumbers, goNextFormStep } = props;
+  const { goNextFormStep } = props;
+
   const { length } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
-  const [focusIndex, setFocusIndex] = useState(0);
 
+  const cardFormContext = useContext(CardFormContext);
+  const [focusIndex, setFocusIndex] = useState(0);
+  const { nextFormStep } = useNextFormStep({ currentCardStep: 'numbers' });
   /**
    * 카드 번호에 따라 카드 마크(visa,master,etc)를 반환하는 함수
    * @param numbers 카드 번호
@@ -65,8 +67,12 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   };
 
   const updateCardNumbers = (numbers: CardNumbers, error: CardNumbersError) => {
+    if (!cardFormContext) return;
+    const { editCardMark, editCardNumbers } = cardFormContext;
+
     const cardMark = getCardMark(numbers);
     const cardNumbers = error.map((e, i) => (e ? undefined : numbers[i]));
+
     editCardMark(cardMark);
     editCardNumbers(cardNumbers);
   };
@@ -75,7 +81,9 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
    * @param error
    */
   const handleGoNextFormStep = (error: CardNumbersError) => {
-    if (error.every((i) => !i)) goNextFormStep(CARD_FORM_STEP.numbers);
+    if (error.some((i) => i)) return;
+    if (!nextFormStep) return;
+    goNextFormStep(nextFormStep);
   };
 
   const { value, setValue, error } = useCardInput<

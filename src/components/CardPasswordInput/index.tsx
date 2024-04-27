@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import {
   CARD_PASSWORD,
@@ -6,7 +6,8 @@ import {
   CARD_PASSWORD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
-import useCardInput from '../../hooks/useCardInput';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useCardInput } from '../../hooks';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
@@ -14,12 +15,8 @@ import Input from '../Input';
 
 import styles from './style.module.css';
 
-export interface CardPasswordInputProps {
-  editCardPassword: (password: string | null) => void;
-}
-
-function CardPasswordInput(props: CardPasswordInputProps) {
-  const { editCardPassword } = props;
+function CardPasswordInput() {
+  const cardFormContext = useContext(CardFormContext);
 
   const validateValue = (value: string) => {
     const newError = !CARD_PASSWORD_REGEXP.test(value);
@@ -27,7 +24,8 @@ function CardPasswordInput(props: CardPasswordInputProps) {
   };
 
   const updateCardPassword = (value: string, error: boolean) => {
-    editCardPassword(error ? null : value);
+    if (!cardFormContext) return;
+    cardFormContext.editCardPassword(error ? null : value);
   };
 
   const { value, setValue, error } = useCardInput<string, boolean>({

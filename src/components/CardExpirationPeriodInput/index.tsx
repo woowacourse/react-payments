@@ -1,13 +1,21 @@
-import { ChangeEvent, FocusEvent, useEffect, useMemo, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 import {
   CARD_EXPIRATION,
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
-  CARD_FORM_STEP,
   CARD_PERIOD_REGEXP,
+  CardStep,
   ERROR_MESSAGE,
 } from '../../constants';
-import useCardInput from '../../hooks/useCardInput';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useCardInput, useNextFormStep } from '../../hooks';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import { convertToTwoDigits } from '../../utils/textChangerUtils';
 import CardInputSection from '../CardInputSection';
@@ -23,8 +31,7 @@ interface PeriodError {
 }
 
 export interface CardExpirationPeriodFormProps {
-  editCardPeriod: (period: CardPeriod) => void;
-  goNextFormStep: (currentStep: number) => void;
+  goNextFormStep: (currentStep: CardStep) => void;
 }
 
 const ZERO = '0';
@@ -34,9 +41,12 @@ const MIN_NUMBER_OF_VALUE = 1;
 export default function CardExpirationPeriodInput(
   props: CardExpirationPeriodFormProps,
 ) {
-  const { editCardPeriod, goNextFormStep } = props;
+  const { goNextFormStep } = props;
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
+
+  const cardFormContext = useContext(CardFormContext);
+  const { nextFormStep } = useNextFormStep({ currentCardStep: 'period' });
   const [focusIndex, setFocusIndex] = useState(0);
   const INITIAL_ERROR: PeriodError = {
     month: false,
@@ -64,7 +74,7 @@ export default function CardExpirationPeriodInput(
    */
   const updateCardPeriod = (value: CardPeriod, error: PeriodError) => {
     // 오류가 없는 기간만 업데이트
-    editCardPeriod({
+    cardFormContext?.editCardPeriod({
       month: error.month ? null : value.month,
       year: error.year ? null : value.year,
     });
@@ -83,7 +93,11 @@ export default function CardExpirationPeriodInput(
    * @param error
    */
   const handleGoNextFormStep = (error: PeriodError) => {
-    if (isNextStepEnabled(error)) goNextFormStep(CARD_FORM_STEP.period);
+    if (!nextFormStep) return;
+
+    if (isNextStepEnabled(error)) {
+      goNextFormStep(nextFormStep);
+    }
   };
 
   /**

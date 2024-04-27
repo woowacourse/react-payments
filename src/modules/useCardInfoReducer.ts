@@ -176,3 +176,5 @@ export default function useCardInfoReducer() {
     resetCardInfo,
   };
 }
+
+export type UseCardInfoReducerReturn = ReturnType<typeof useCardInfoReducer>;

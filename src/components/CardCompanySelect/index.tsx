@@ -1,35 +1,41 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, useContext, useState } from 'react';
 
 import {
   CARD_COMPANY,
   CARD_COMPANY_MESSAGE,
-  CARD_FORM_STEP,
+  CardStep,
   ERROR_MESSAGE,
 } from '../../constants';
+import CardFormContext from '../../contexts/CardFormContext';
+import { useNextFormStep } from '../../hooks';
 import CardInputSection from '../CardInputSection';
 import ErrorMessage from '../ErrorMessage';
 import Select from '../Select';
 
 const PLACE_HOLDER = 'place_holder';
 export interface CardCompanySelectProps {
-  editCardCompany: (companyName: string) => void;
-  goNextFormStep: (currentStep: number) => void;
+  goNextFormStep: (currentStep: CardStep) => void;
 }
 
 function CardCompanySelect(props: CardCompanySelectProps) {
-  const { editCardCompany, goNextFormStep } = props;
+  const { goNextFormStep } = props;
+
+  const cardFormContext = useContext(CardFormContext);
   const [error, setError] = useState(false);
+  const { nextFormStep } = useNextFormStep({ currentCardStep: 'company' });
 
   const isSelectedCompany = (option: string) => option !== PLACE_HOLDER;
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (!cardFormContext) return;
     const { value } = event.target;
     // 오류 업데이트
     setError(false);
     // cardInfo 변경
-    editCardCompany(value);
+    cardFormContext.editCardCompany(value);
     // 다음 입력 필드로 이동
-    goNextFormStep(CARD_FORM_STEP.company);
+    if (!nextFormStep) return;
+    goNextFormStep(nextFormStep);
   };
 
   const handleBlur = (event: FocusEvent<HTMLSelectElement>) => {
