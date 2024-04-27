@@ -1,4 +1,13 @@
-const INITIAL_CARD_ISSUER_INFO = Object.freeze([
+import { AllCardIssuer, CardIssuerBackgroundColor } from '@/types';
+
+type InitialCardIssuerInfo = {
+  id: number;
+  issuer: AllCardIssuer;
+  value: string;
+  backgroundColor: CardIssuerBackgroundColor;
+};
+
+const All_CARD_ISSUER_INFO: InitialCardIssuerInfo[] = [
   {
     id: 1,
     issuer: 'BC카드',
@@ -47,6 +56,6 @@ const INITIAL_CARD_ISSUER_INFO = Object.freeze([
     value: 'kb',
     backgroundColor: 'rgba(106, 96, 86, 1)',
   },
-]);
+];
 
-export default INITIAL_CARD_ISSUER_INFO;
+export default All_CARD_ISSUER_INFO;
