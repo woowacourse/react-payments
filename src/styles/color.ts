@@ -4,9 +4,11 @@ export const COLOR = {
   gray2: '#333333',
   gray3: '#8b95a1',
   gray4: '#353c49',
+  gray5: '#d5d5d5',
   black: '#000000',
   white: '#ffffff',
   semiWhite: '#f3f3f3',
+  yellow: '#cbba64',
 
   bc: '#f04651',
   shinhan: '#0046ff',

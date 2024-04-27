@@ -88,6 +88,10 @@ export default function useCardIssuer() {
       if (event.key === 'Escape') {
         optionContainerOnBlur();
       }
+
+      if (event.key === 'Tab') {
+        event.preventDefault();
+      }
     };
   });
 
@@ -111,7 +115,6 @@ export default function useCardIssuer() {
     selectOnBlur: () => {
       setIsTouched(true);
       optionContainerOnBlur();
-      isValid.current = true;
     },
     initValue: () => {
       initValue();

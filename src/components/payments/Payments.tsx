@@ -1,8 +1,11 @@
 import { CardExpiredDate, CardNumbers } from '../../type';
+import { ChangeEvent, useState } from 'react';
 
 import BottomButton from '../BottomButton';
+import CardBack from './CardBack';
 import CardForm from './cardForm/CardForm';
 import CardPreview from './CardPreview';
+import ID from '../../constants/id';
 import { Link } from 'react-router-dom';
 import { UseCardCVC } from '../../hooks/payments/useCardCVC';
 import { UseCardExpiredDate } from '../../hooks/payments/useCardExpiredDate';
@@ -32,6 +35,7 @@ function Payments({
   setPath,
 }: Props) {
   setPath();
+  const [isChangeAfterCVC, setIsCVCChange] = useState(false);
   const cardInfo = {
     cardNumbers: useCardNumbers.cardNumbers as CardNumbers,
     cardIssuer: useCardIssuer.issuer,
@@ -47,8 +51,20 @@ function Payments({
     useCardPasswordHead.isValid;
 
   return (
-    <PaymentsContainer>
-      <CardPreview cardInfo={cardInfo} />
+    <PaymentsContainer
+      onChange={(event: ChangeEvent<HTMLElement>) => {
+        if (event.target.id === ID.cvcInput) {
+          return setIsCVCChange(true);
+        }
+        setIsCVCChange(false);
+      }}
+    >
+      {isChangeAfterCVC ? (
+        <CardBack cvc={useCardCVC.cardCVC} />
+      ) : (
+        <CardPreview cardInfo={cardInfo} />
+      )}
+
       <CardForm
         useCardNumbers={useCardNumbers}
         useCardExpiredDate={useCardExpiredDate}
