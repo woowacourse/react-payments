@@ -1,9 +1,9 @@
-import { isOnlyDigit, isSameLength } from '../domain/checkIsValid';
+import { isOnlyDigit, isSameLength } from '../../domain/checkIsValid';
 
-import { BOUND } from '../constants/number';
-import { ERROR_MESSAGE } from '../constants/message';
+import { BOUND } from '../../constants/number';
+import { ERROR_MESSAGE } from '../../constants/message';
 import { useState } from 'react';
-import useValidateInput from './useValidateInput';
+import useValidateInput from '../useValidateInput';
 
 const validateInputProps = {
   validatorPropsArray: [
@@ -13,17 +13,20 @@ const validateInputProps = {
     },
     {
       checkIsValid: (string: string) =>
-        isSameLength(string, BOUND.cardCVCUpper),
-      errorMessage: `${BOUND.cardCVCUpper}${ERROR_MESSAGE.invalidLengthTail}`,
+        isSameLength(string, BOUND.cardPasswordHeadUpper),
+      errorMessage: `${BOUND.cardPasswordHeadUpper}${ERROR_MESSAGE.invalidLengthTail}`,
     },
   ],
 };
 
-export default function useCardCVC() {
-  const [isTouched, setIsTouched] = useState(false);
+export default function useCardPasswordHead() {
   const validateInput = useValidateInput(validateInputProps);
 
-  const isValid = isTouched && validateInput.errorMessage === '';
+  const [isTouched, setIsTouched] = useState(false);
+
+  const isValid =
+    validateInput.inputValue.length === BOUND.cardPasswordHeadUpper &&
+    validateInput.errorMessage === '';
 
   return {
     cardCVC: validateInput.inputValue,
@@ -35,13 +38,13 @@ export default function useCardCVC() {
     isValid,
     isTouched,
     initValue: () => {
-      validateInput.initValue();
       setIsTouched(false);
+      validateInput.initValue();
     },
   };
 }
 
-export interface UseCardCVC {
+export interface UseCardPasswordHead {
   cardCVC: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;

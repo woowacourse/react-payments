@@ -1,11 +1,14 @@
-import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from '../constants/message';
+import {
+  PAYMENTS_INPUT_MESSAGE,
+  PAYMENTS_MESSAGE,
+} from '../../../constants/message';
 
-import { BOUND } from '../constants/number';
-import FormItem from './FormItem';
-import SectionTitle from './SectionTitle';
-import TextInput from './TextInput';
-import TextInputContainer from './InputContainer';
-import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
+import { BOUND } from '../../../constants/number';
+import FormItem from '../../FormItem';
+import SectionTitle from '../../SectionTitle';
+import TextInput from '../../TextInput';
+import TextInputContainer from '../../InputContainer';
+import { UseCardExpiredDate } from '../../../hooks/payments/useCardExpiredDate';
 import { useRef } from 'react';
 
 interface props {

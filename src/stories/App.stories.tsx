@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PayMents from '../components/Payments';
+import PayMents from '../components/payments/Payments';
 
 const meta = {
   title: 'App',

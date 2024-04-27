@@ -1,7 +1,7 @@
-import { ERROR_MESSAGE } from '../constants/message';
-import { isOnlyEnglishOrSpace } from '../domain/checkIsValid';
+import { ERROR_MESSAGE } from '../../constants/message';
+import { isOnlyEnglishOrSpace } from '../../domain/checkIsValid';
 import { useState } from 'react';
-import useValidateInput from './useValidateInput';
+import useValidateInput from '../useValidateInput';
 
 const cardHolderValidateInputProps = {
   decorateValue: (string: string) => string.toUpperCase(),

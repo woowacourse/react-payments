@@ -4,12 +4,12 @@ import CardIssuer from './CardIssuer';
 import CardNumbers from './CardNumbers';
 import CardPasswordHead from './CardPasswordHead';
 import ExpiredDate from './CardExpiredDate';
-import { UseCardCVC } from '../hooks/useCardCVC';
-import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
-import { UseCardHolder } from '../hooks/useCardHolder';
-import { UseCardIssuer } from '../hooks/useCardIssuer';
-import { UseCardNumbers } from '../hooks/useCardNumbers';
-import { UseCardPasswordHead } from '../hooks/useCardPasswordHead';
+import { UseCardCVC } from '../../../hooks/payments/useCardCVC';
+import { UseCardExpiredDate } from '../../../hooks/payments/useCardExpiredDate';
+import { UseCardHolder } from '../../../hooks/payments/useCardHolder';
+import { UseCardIssuer } from '../../../hooks/payments/useCardIssuer';
+import { UseCardNumbers } from '../../../hooks/payments/useCardNumbers';
+import { UseCardPasswordHead } from '../../../hooks/payments/useCardPasswordHead';
 import styled from '@emotion/styled';
 
 interface props {
