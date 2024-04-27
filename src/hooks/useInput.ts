@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent, FocusEvent } from "react";
+import { useState, useCallback, ChangeEvent, FocusEvent, useRef } from "react";
 import { ERROR } from "../constants/message";
 
 // validateMessage가 error message를 반환하도록
@@ -12,6 +12,7 @@ interface UseInputOptions {
 const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
   const [value, setValue] = useState(initValue);
   const [validateMessage, setValidateMessage] = useState("");
+  const ref = useRef<HTMLInputElement>(null);
 
   const { validateOnChange, validateOnBlur } = options;
 
@@ -59,6 +60,7 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
 
   return {
     value,
+    ref,
     onChange,
     onBlur,
     validateMessage,

@@ -26,6 +26,7 @@ export default function CardNumbers({ cardNumbers }: Props) {
           {cardNumbers.map((cardNumber, idx) => {
             return (
               <Input
+                ref={cardNumbers[idx].ref}
                 id={`cardNumber${idx + 1}`}
                 key={`cardNumber${idx + 1}`}
                 ariaLabel={`카드번호${idx + 1}`}

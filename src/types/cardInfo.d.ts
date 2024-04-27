@@ -1,27 +1,24 @@
-type CardInfoValue = {
+type CardNumbersType = UseInputReturn[];
+type CardCompanyType = {
   value: string;
-  isError: boolean;
+  ref: React.Ref;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 interface CardInformation {
-  cardNumbers: CardInfoValue[];
-  cardExpirationMonth: CardInfoValue;
-  cardExpirationYear: CardInfoValue;
-  cardOwnerName: CardInfoValue;
-  cardCompany: CardInfoValue;
-  cardCVC: CardInfoValue;
+  cardNumbers: CardNumbersType;
+  cardExpirationMonth: UseInputReturn;
+  cardExpirationYear: UseInputReturn;
+  cardOwnerName: UseInputReturn;
+  cardCompany: CardCompanyType;
+  cardCVC: UseInputReturn;
+  cardPassword: UseInputReturn;
 }
 
 interface UseInputReturn {
   value: string;
+  ref: React.Ref;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   validateMessage: string;
 }
-
-type CardNumbersType = UseInputReturn[];
-
-type CardCompanyType = {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-};

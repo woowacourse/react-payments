@@ -12,6 +12,7 @@ import {
 } from "../utils/validators";
 import useInput from "./useInput";
 import useSelect from "./useSelect";
+import useFocus from "./useFocus";
 
 const useCardForm = () => {
   const [step, setStep] = useState([
@@ -150,6 +151,16 @@ const useCardForm = () => {
     cardCVC,
     cardPassword,
   ]);
+
+  useFocus(step, {
+    cardNumbers,
+    cardCompany,
+    cardExpirationMonth,
+    cardExpirationYear,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+  });
 
   return {
     step,

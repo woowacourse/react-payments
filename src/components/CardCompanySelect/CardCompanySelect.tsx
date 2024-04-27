@@ -18,6 +18,7 @@ export default function CardCompanySelect({ cardCompany }: Props) {
         <CaptionText>현재 국내 카드사만 가능합니다.</CaptionText>
       </div>
       <S.Select
+        ref={cardCompany.ref}
         name="cardCompany"
         onChange={cardCompany.onChange}
         defaultValue={""}

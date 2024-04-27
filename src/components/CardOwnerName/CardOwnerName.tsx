@@ -16,6 +16,7 @@ export default function CardOwnerName({ cardOwnerName }: Props) {
         <S.InputContainer>
           <Input
             id="cardOwnerName"
+            ref={cardOwnerName.ref}
             maxLength={15}
             placeholder="JOHN DOE"
             value={cardOwnerName.value}

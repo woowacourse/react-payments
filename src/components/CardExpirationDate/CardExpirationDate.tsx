@@ -29,6 +29,7 @@ export default function CardExpirationDate({
         <S.InputContainer>
           <Input
             id="cardExpirationMonth"
+            ref={cardExpirationMonth.ref}
             ariaLabel="유효기간 월"
             maxLength={2}
             placeholder="MM"
@@ -39,6 +40,7 @@ export default function CardExpirationDate({
           />
           <Input
             id="cardExpirationYear"
+            ref={cardExpirationYear.ref}
             ariaLabel="유효기간 연도"
             maxLength={2}
             placeholder="YY"

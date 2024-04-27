@@ -17,6 +17,7 @@ export default function CardPassword({ cardPassword }: Props) {
         <S.InputContainer>
           <Input
             id="cardPassword"
+            ref={cardPassword.ref}
             type="password"
             maxLength={2}
             placeholder=""

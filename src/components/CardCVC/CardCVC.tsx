@@ -22,6 +22,7 @@ export default function CardCVC({
         <S.InputContainer>
           <Input
             id="cardCVC"
+            ref={cardCVC.ref}
             maxLength={3}
             placeholder="123"
             value={cardCVC.value}
