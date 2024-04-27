@@ -1,78 +1,34 @@
-import styled from "styled-components";
+import useCardAddForm from "../../hooks/useCardAddForm";
+import useFocusField from "../../hooks/useFieldFocus";
 
-import CardText from "./CardText";
-import CardNumberDisplay from "./CardNumberDisplay";
-import ExpirationDateDisplay from "./ExpirationDateDisplay";
+import Card from "./components";
 
-import { CardInfo } from "../../types/card";
+import { CARD_COMPANY_COLOR } from "../../constants/card-app";
 
-import { decideCardLogo } from "./CardPreview.utils";
+const CardPreview = () => {
+  const { formState } = useCardAddForm();
+  const { isFocused: isCvcFieldFocused } = useFocusField("cvc-number");
 
-interface CardPreviewProps {
-  cardInfo: CardInfo;
-}
-
-const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const { cardNumbers, expirationDate, cardOwner } = cardInfo;
-
-  const cardLogo = decideCardLogo(cardNumbers[0]);
+  const cardColor = CARD_COMPANY_COLOR[formState.cardCompany.value.cardCompany];
 
   return (
-    <StyledCardPreview>
-      <CardHeader>
-        <CardChip />
-        {cardLogo && <CardLogo src={cardLogo} alt="User Card Logo" />}
-      </CardHeader>
-
-      <CardBody>
-        <CardNumberDisplay cardNumbers={cardNumbers} />
-        <ExpirationDateDisplay expirationDate={expirationDate} />
-        <CardText type="longText" text={cardOwner} />
-      </CardBody>
-    </StyledCardPreview>
+    <>
+      {isCvcFieldFocused ? (
+        <Card cardColor="#D5D5D5">
+          <Card.CVCLine value={formState.cvcNumber.value} />
+        </Card>
+      ) : (
+        <Card cardColor={cardColor}>
+          <Card.CardHeader value={formState.cardNumbers.value} />
+          <Card.CardBody>
+            <Card.CardNumber value={formState.cardNumbers.value} />
+            <Card.ExpirationDate value={formState.expirationDate.value} />
+            <Card.CardOwner value={formState.ownerName.value} />
+          </Card.CardBody>
+        </Card>
+      )}
+    </>
   );
 };
 
 export default CardPreview;
-
-const StyledCardPreview = styled.div`
-  height: 132px;
-  width: 212px;
-
-  color: #ffffff;
-  border-radius: 4px;
-  background-color: #333333;
-  box-shadow: 3px 3px 5px 0px #00000040;
-
-  margin: 0 auto;
-  margin-top: 60px;
-  margin-bottom: 60px;
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 12px;
-`;
-
-const CardChip = styled.div`
-  height: 22px;
-  width: 36px;
-
-  border-radius: 4px;
-  background-color: #ddcd78;
-`;
-
-const CardLogo = styled.img`
-  height: 22px;
-  width: 36px;
-`;
-
-const CardBody = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding-left: 17px;
-
-  row-gap: 8px;
-`;

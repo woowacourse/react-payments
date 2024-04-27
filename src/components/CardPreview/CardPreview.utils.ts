@@ -1,6 +1,11 @@
+import { validateCardNumbersInputCompleted } from "../../validators/cardAddFormValidator";
+
 import { visaCard } from "../../assets/image";
 import { masterCard } from "../../assets/image";
+
 import { CARD_NUMBER } from "../../constants/card-app";
+
+import { CardNumberKeys } from "../../types/card";
 
 const isVisaCard = (cardNumber: string) => {
   return parseInt(cardNumber[0], 10) === CARD_NUMBER.visaStartNumber;
@@ -17,10 +22,12 @@ const isMasterCard = (cardNumber: string) => {
   );
 };
 
-export const decideCardLogo = (cardNumber: string) => {
-  if (isVisaCard(cardNumber)) return visaCard;
+export const decideCardLogo = (value: Record<CardNumberKeys, string>) => {
+  if (!validateCardNumbersInputCompleted(value)) return null;
 
-  if (isMasterCard(cardNumber)) return masterCard;
+  if (isVisaCard(value.first)) return visaCard;
+
+  if (isMasterCard(value.first)) return masterCard;
 
   return null;
 };
