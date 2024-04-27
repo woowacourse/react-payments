@@ -1,9 +1,9 @@
-import NewCardPage from './pages/newCardPage/NewCardPage';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <NewCardPage />
+      <Outlet />
     </>
   );
 }
