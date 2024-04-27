@@ -54,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
         setIsValidInput(true);
         setAllInputValid(true);
 
-        if (setFocusedInputIndex && value.length === maxLength) {
+        if (setFocusedInputIndex) {
           setFocusedInputIndex(index);
         }
       }

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import Input from "./Input";
 import FormField from "../common/FormField";
+import useInputFocus from "../../hooks/useInputFocus";
 
 import { EXPIRATION_DATE_FORM, FORM_REGEXP } from "../../constants/form";
 
@@ -17,11 +18,13 @@ const ExpirationDateForm = ({
   setIsFormFilledOnce,
 }: ICardFormProps) => {
   const [isGotInputOnce, setIsGotInputOnce] = useState(false);
-  const [focusedInputIndex, setFocusedInputIndex] = useState("0");
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const { inputRefs, focusNextInput, setFocusedIndex } = useInputFocus(
+    inputCount,
+    EXPIRATION_DATE_FORM.maxInputLength
+  );
 
   const validateMonth = (value: string) => {
     return value !== "" && FORM_REGEXP.validMonth.test(value);
@@ -43,19 +46,6 @@ const ExpirationDateForm = ({
     }));
   };
 
-  const focusToNextInput = () => {
-    const curIdx = focusedInputIndex;
-    const curInputRef = inputRefs.current[Number(curIdx)] as HTMLInputElement;
-    const nextInputRef = inputRefs.current[Number(curIdx) + 1];
-
-    if (
-      curInputRef.value.length === EXPIRATION_DATE_FORM.maxInputLength &&
-      nextInputRef
-    ) {
-      nextInputRef.focus();
-    }
-  };
-
   const setInputRef = (element: HTMLInputElement, index: number) => {
     inputRefs.current[index] = element;
   };
@@ -65,8 +55,7 @@ const ExpirationDateForm = ({
     const allFilled = Object.keys(inputValidities).length === inputCount;
 
     setAllFormsValid(allValid && allFilled);
-
-    focusToNextInput();
+    focusNextInput();
 
     setErrorMessage(
       (allValid && allFilled) || !isGotInputOnce
@@ -100,7 +89,7 @@ const ExpirationDateForm = ({
           ? EXPIRATION_DATE_FORM.errorMessage.invalidMonth
           : EXPIRATION_DATE_FORM.errorMessage.invalidYear
       }
-      setFocusedInputIndex={setFocusedInputIndex}
+      setFocusedInputIndex={setFocusedIndex}
       onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
     />
   ));
