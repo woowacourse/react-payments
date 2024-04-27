@@ -29,6 +29,7 @@ export default function CardCVC({
             maxLength={BOUND.cardCVCUpper}
             borderColor={isError ? 'error' : undefined}
             aria-invalid={isError}
+            tabIndex={9}
           />
         </TextInputContainer>
       </FormItem>

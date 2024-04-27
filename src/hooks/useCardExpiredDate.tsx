@@ -3,6 +3,7 @@ import { isValidMonth, isValidYear } from '../domain/checkIsValid';
 import { BOUND } from '../constants/number';
 import { ERROR_MESSAGE } from '../constants/message';
 import useLastValidValue from './useLastValidValue';
+import { useState } from 'react';
 import useValidateInput from './useValidateInput';
 
 const monthValidateInputProps = {
@@ -39,8 +40,11 @@ export default function useCardExpiredDate() {
 
   const yearValidateInput = useValidateInput(yearValidateInputProps);
 
-  const isValidMonth = monthValidateInput.errorMessage === '';
-  const isValidYear = yearValidateInput.errorMessage === '';
+  const [isTouchedMonth, setIsTouchedMonth] = useState(false);
+  const [isTouchedYear, setIsTouchedYear] = useState(false);
+
+  const isValidMonth = monthValidateInput.errorMessage === '' && isTouchedMonth;
+  const isValidYear = yearValidateInput.errorMessage === '' && isTouchedYear;
 
   const isExpired = checkIsExpired(
     monthValidateInput.inputValue,
@@ -66,20 +70,33 @@ export default function useCardExpiredDate() {
     invalidValues: [''],
   });
 
-  const isValid = totalErrorMessage === undefined && isFullFilled;
+  const isValid =
+    totalErrorMessage === undefined && isTouchedMonth && isTouchedYear;
 
   const initValue = () => {
     monthValidateInput.initValue();
     yearValidateInput.initValue();
+    setIsTouchedMonth(false);
+    setIsTouchedYear(false);
   };
+
   return {
     expiredDate: [monthValidateInput.inputValue, yearValidateInput.inputValue],
-    monthOnChange: monthValidateInput.onChange,
-    yearOnChange: yearValidateInput.onChange,
+    monthOnChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsTouchedMonth(true);
+      monthValidateInput.onChange(event);
+    },
+    yearOnChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsTouchedYear(true);
+      yearValidateInput.onChange(event);
+    },
     isValid,
     isValidMonth,
     isValidYear,
     isFullFilled,
+    isTouched: isTouchedMonth && isTouchedYear,
+    isTouchedMonth,
+    isTouchedYear,
     errorMessage: totalErrorMessage,
     initValue,
   };
@@ -93,6 +110,9 @@ export interface UseCardExpiredDate {
   isValidMonth: boolean;
   isValidYear: boolean;
   isFullFilled: boolean;
+  isTouched: boolean;
+  isTouchedMonth: boolean;
+  isTouchedYear: boolean;
   errorMessage: string | undefined;
   initValue: () => void;
 }

@@ -54,7 +54,9 @@ export default function CardForm({
   const sliceIndex =
     lastValidIndex === -1 ? -1 : Math.max(lastValidIndex - 1, 0);
 
-  return <CardFormContainer>{elements.slice(sliceIndex)}</CardFormContainer>;
+  const children = elements.slice(sliceIndex);
+
+  return <CardFormContainer>{children}</CardFormContainer>;
 }
 
 const CardFormContainer = styled.form({

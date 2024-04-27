@@ -2,6 +2,7 @@ import { isOnlyDigit, isSameLength } from '../domain/checkIsValid';
 
 import { BOUND } from '../constants/number';
 import { ERROR_MESSAGE } from '../constants/message';
+import { useState } from 'react';
 import useValidateInput from './useValidateInput';
 
 const validateInputProps = {
@@ -21,16 +22,25 @@ const validateInputProps = {
 export default function useCardPasswordHead() {
   const validateInput = useValidateInput(validateInputProps);
 
+  const [isTouched, setIsTouched] = useState(false);
+
   const isValid =
     validateInput.inputValue.length === BOUND.cardPasswordHeadUpper &&
     validateInput.errorMessage === '';
 
   return {
     cardCVC: validateInput.inputValue,
-    onChange: validateInput.onChange,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsTouched(true);
+      validateInput.onChange(event);
+    },
     errorMessage: validateInput.errorMessage,
     isValid,
-    initValue: validateInput.initValue,
+    isTouched,
+    initValue: () => {
+      setIsTouched(false);
+      validateInput.initValue();
+    },
   };
 }
 
@@ -39,5 +49,6 @@ export interface UseCardPasswordHead {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
   isValid: boolean;
+  isTouched: boolean;
   initValue: () => void;
 }

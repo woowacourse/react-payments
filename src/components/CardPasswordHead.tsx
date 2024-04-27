@@ -33,6 +33,8 @@ export default function CardPasswordHead({
             maxLength={BOUND.cardPasswordHeadUpper}
             borderColor={isError ? 'error' : undefined}
             aria-invalid={isError}
+            autoFocus
+            tabIndex={10}
           />
         </TextInputContainer>
       </FormItem>

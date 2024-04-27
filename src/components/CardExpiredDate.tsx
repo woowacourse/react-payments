@@ -6,6 +6,7 @@ import SectionTitle from './SectionTitle';
 import TextInput from './TextInput';
 import TextInputContainer from './InputContainer';
 import { UseCardExpiredDate } from '../hooks/useCardExpiredDate';
+import { useRef } from 'react';
 
 interface props {
   useCardExpiredDate: UseCardExpiredDate;
@@ -17,7 +18,36 @@ export default function ExpiredDate({ useCardExpiredDate }: props) {
     isValidMonth,
     isValidYear,
     isFullFilled,
+    isTouchedMonth,
+    isTouchedYear,
   } = useCardExpiredDate;
+  const yearRef = useRef<HTMLInputElement>(null);
+
+  const monthElement = (
+    <TextInput
+      placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
+      onChange={useCardExpiredDate.monthOnChange}
+      maxLength={BOUND.cardExpiredMonthStringUpper}
+      borderColor={!isTouchedMonth || isValidMonth ? undefined : 'error'}
+      aria-invalid={!((!isTouchedMonth || isValidMonth) && isValidExpiredDate)}
+      autoFocus
+      tabIndex={6}
+    />
+  );
+
+  const yearElement = (
+    <TextInput
+      placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
+      onChange={useCardExpiredDate.yearOnChange}
+      maxLength={BOUND.cardExpiredYearStringUpper}
+      borderColor={!isTouchedYear || isValidYear ? undefined : 'error'}
+      aria-invalid={!((!isTouchedYear || isValidYear) && !isValidExpiredDate)}
+      ref={yearRef}
+      tabIndex={7}
+    />
+  );
+
+  if (isValidMonth && !isValidYear) yearRef.current?.focus();
   return (
     <section>
       <SectionTitle
@@ -35,20 +65,8 @@ export default function ExpiredDate({ useCardExpiredDate }: props) {
               : undefined
           }
         >
-          <TextInput
-            placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
-            onChange={useCardExpiredDate.monthOnChange}
-            maxLength={BOUND.cardExpiredMonthStringUpper}
-            borderColor={isValidMonth ? undefined : 'error'}
-            aria-invalid={!(isValidMonth && isValidExpiredDate)}
-          />
-          <TextInput
-            placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
-            onChange={useCardExpiredDate.yearOnChange}
-            maxLength={BOUND.cardExpiredYearStringUpper}
-            borderColor={isValidYear ? undefined : 'error'}
-            aria-invalid={!(isValidYear && !isValidExpiredDate)}
-          />
+          {monthElement}
+          {yearElement}
         </TextInputContainer>
       </FormItem>
     </section>

@@ -28,7 +28,9 @@ export default function CompletePaymentRegister({
           <p>{cardIssuerKorean}가 등록되었어요.</p>
         </CompleteSpan>
         <Link to={PATH.payments}>
-          <Button onClick={resetCardInfo}>확인</Button>
+          <Button onClick={resetCardInfo} autoFocus>
+            확인
+          </Button>
         </Link>
       </CompleteContentsContainer>
     </CompleteWrapper>

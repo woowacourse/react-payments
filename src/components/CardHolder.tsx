@@ -30,6 +30,8 @@ export default function CardHolder({
             borderColor={isError ? 'error' : undefined}
             aria-invalid={!isError}
             style={{ textTransform: 'uppercase' }}
+            autoFocus
+            tabIndex={8}
           />
         </TextInputContainer>
       </FormItem>

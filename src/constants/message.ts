@@ -33,10 +33,10 @@ export const PAYMENTS_INPUT_MESSAGE = {
 };
 
 export const ERROR_MESSAGE = {
-  notDigit: '올바른 숫자(0~9)를 입력해주세요',
+  notDigit: '올바른 숫자를 입력해주세요',
   invalidLengthTail: '자리를 입력해주세요',
-  notEnglishOrSpace: '영어로 입력해주세요',
+  notEnglishOrSpace: '영어를 입력해주세요(영어 사이 한 칸의 공백문자는 허용)',
   wrongMonth: '올바른 월(01~12)를 입력해주세요',
-  wrongYear: '올바른 년도(00~99)를 입력해주세요',
+  wrongYear: '올바른 년도를 입력해주세요',
   wrongExpiredDate: `만료된 유효기간입니다. ${(new Date().getMonth() + 1).toString().padStart(2, '00')}/${new Date().getUTCFullYear() - 2000} 이전의 유효기간을 입력할 수 없습니다.`,
 };
