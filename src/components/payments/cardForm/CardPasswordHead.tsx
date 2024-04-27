@@ -5,6 +5,7 @@ import {
 
 import { BOUND } from '../../../constants/number';
 import FormItem from '../../FormItem';
+import ID from '../../../constants/id';
 import SectionTitle from '../../SectionTitle';
 import TextInput from '../../TextInput';
 import TextInputContainer from '../../InputContainer';
@@ -38,6 +39,7 @@ export default function CardPasswordHead({
             aria-invalid={isError}
             autoFocus
             tabIndex={10}
+            id={ID.passwordHeadInput}
           />
         </TextInputContainer>
       </FormItem>

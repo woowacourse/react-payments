@@ -44,9 +44,8 @@ export default function CardIssuer({
       onMouseDown={optionOnMouseDowns[idx]}
       onFocus={optionOnFocuses[idx]}
       onKeyDown={optionOnKeyDowns[idx]}
-      onBlur={selectOnBlur}
       ref={refs[idx]}
-      tabIndex={0}
+      tabIndex={5}
     >
       {ISSUER_KOREAN[issuer]}
     </Option>
@@ -65,6 +64,7 @@ export default function CardIssuer({
             placeholder={'카드사를 선택해주세요'}
             value={issuer === '' ? issuer : ISSUER_KOREAN[issuer]}
             onFocus={selectOnFocus}
+            onBlur={selectOnBlur}
             autoFocus
             tabIndex={5}
           />
