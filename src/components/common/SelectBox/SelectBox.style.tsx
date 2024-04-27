@@ -34,7 +34,7 @@ export const SelectButton = styled.button<{ $isValid: boolean; $isOpened: boolea
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    background-image: url(${(props) => (props.$isOpened ? SelectButtonArrowDown : SelectButtonArrowUp)});
+    background-image: url("${(props) => (props.$isOpened ? SelectButtonArrowDown : SelectButtonArrowUp)}");
     background-repeat: no-repeat;
     background-position: center;
   }

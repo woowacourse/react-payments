@@ -19,7 +19,7 @@ export const Container = styled.main`
 export const SuccessIcon = styled.div`
   width: 76px;
   height: 76px;
-  background: url(${Success}) no-repeat;
+  background: url("${Success}") no-repeat;
 `;
 
 export const CompleteButton = styled.button`
