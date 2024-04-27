@@ -1,6 +1,6 @@
 import CardInfo from '../components/CardInfo';
 import CardPreview from '../components/CardPreview';
-import * as M from '../components/style/MainPage.style';
+import * as M from './style/MainPage.style';
 import { useContext } from 'react';
 import { CardInfoContext } from '../context/CardInfoContext';
 

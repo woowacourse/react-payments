@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { CardInfoContext } from '../context/CardInfoContext';
 
 import Button from '../components/common/Button';
-import * as CF from '../components/style/ConfirmPage.style';
+import * as CF from './style/ConfirmPage.style';
 import Confirm from '../asset/Confirm.svg';
 import { CARD_COMPANY } from '../constants/option';
 import { initialCardInfoContext } from '../context/CardInfoContext';
