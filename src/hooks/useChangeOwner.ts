@@ -13,7 +13,14 @@ export default function useChangeOwner() {
     setOwner(value);
   };
 
-  return { owner, ownerValid, handleChangeOwner };
+  const handleBlurOwner = () => {
+    const isCompleted = Validation.isNotEmpty(owner);
+    setOwnerValid((prevState) => {
+      return { ...prevState, isCompleted }
+    });
+  }
+
+  return { owner, ownerValid, handleChangeOwner, handleBlurOwner };
 }
 
 function validateOwner(value: string) {
@@ -25,7 +32,5 @@ function validateOwner(value: string) {
     return { isValid: false, isCompleted: false, errorMessage: ERROR_MESSAGE.INVALID_CARD_OWNER_LENGTH };
   }
 
-  const isCompleted = Validation.isNotEmpty(value);
-
-  return { isValid: true, isCompleted, errorMessage: '' };
+  return { isValid: true, isCompleted: false, errorMessage: '' };
 }

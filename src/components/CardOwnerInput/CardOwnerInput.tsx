@@ -7,13 +7,18 @@ import { CARD_OWNER } from '../../constants/conditions';
 interface CardOwnerInputProps {
   isOwnerValid: { isValid: boolean; errorMessage: string };
   onChangeOwner: (value: string) => void;
+  onBlurOwner: () => void;
 }
 
-export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwnerInputProps) {
+export default function CardOwnerInput({ isOwnerValid, onChangeOwner, onBlurOwner }: CardOwnerInputProps) {
   const handleOwnerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.value = event.target.value.replace(CARD_OWNER.INVALID_CHARS_REGEX, '').toUpperCase();
     onChangeOwner(event.target.value);
   };
+
+  const handleOwnerBlur = () => {
+    onBlurOwner();
+  }
 
   return (
     <div>
@@ -24,6 +29,7 @@ export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwne
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="SEONGJIN HONG"
           onChange={handleOwnerInput}
+          onBlur={handleOwnerBlur}
           isValid={isOwnerValid.isValid}
           autoFocus
         />
