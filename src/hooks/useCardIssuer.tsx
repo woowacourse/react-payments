@@ -84,6 +84,10 @@ export default function useCardIssuer() {
         event.preventDefault();
         refs[Math.min(idx + 1, options.length - 1)].current?.focus();
       }
+
+      if (event.key === 'Escape') {
+        optionContainerOnBlur();
+      }
     };
   });
 
