@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Field from '../components/common/Field/Field';
 import Input from '../components/common/Input/Input';
 import Label from '../components/common/Label/Label';
+import { Fragment } from 'react';
+import Select from '../components/common/Select/Select';
 
 const meta = {
   title: 'Field',
@@ -87,27 +89,121 @@ export const OwnerName: Story = {
     labelText: '소유자 이름',
     errorMessage: '',
     children: (
-      <>
-        {Array.from({ length: 1 }).map((_, index) => (
-          <>
-            <Label
-              key={index}
-              htmlFor="ownerName"
-              labelText="ownerName"
-              hideLabel
-            />
-            <Input
-              id="ownerName"
-              name="ownerName"
-              placeholder="JOHN DOE"
-              value=""
-              isError={false}
-              handleChange={() => 1}
-              handleOnBlur={() => 1}
-            />
-          </>
-        ))}
-      </>
+      <Fragment>
+        <Label htmlFor="ownerName" labelText="ownerName" hideLabel />
+        <Input
+          id="ownerName"
+          name="ownerName"
+          placeholder="JOHN DOE"
+          value=""
+          isError={false}
+          handleChange={() => 1}
+          handleOnBlur={() => 1}
+        />
+      </Fragment>
+    ),
+  },
+  argTypes: {
+    description: {
+      control: false,
+    },
+  },
+};
+
+const options = [
+  { value: 'BC카드', text: 'BC카드' },
+  { value: '신한카드', text: '신한카드' },
+  { value: '카카오뱅크', text: '카카오뱅크' },
+  { value: '현대카드', text: '현대카드' },
+  { value: '우리카드', text: '우리카드' },
+  { value: '롯데카드', text: '롯데카드' },
+  { value: '하나카드', text: '하나카드' },
+  { value: '국민카드', text: '국민카드' },
+];
+export const CardIssuer: Story = {
+  args: {
+    title: '카드사를 선택해 주세요',
+    description: '카드사를 선택해 주세요',
+    errorMessage: '',
+    children: (
+      <Fragment>
+        <Label htmlFor="cardIssuer" labelText="카드사" hideLabel />
+        <Select
+          name="cardIssuer"
+          id="cardIssuer"
+          value=""
+          defaultText="카드사를 선택해 주세요"
+          options={options}
+          isError={false}
+          isRequired
+          handleSelect={() => 1}
+          handleOnBlur={() => 1}
+        />
+      </Fragment>
+    ),
+  },
+  argTypes: {
+    description: {
+      control: false,
+    },
+  },
+};
+
+export const CVC: Story = {
+  args: {
+    title: 'CVC 번호를 입력해 주세요',
+    labelText: 'CVC',
+    errorMessage: '',
+    children: (
+      <Fragment>
+        <Label htmlFor="cvc" labelText="cvc 번호" hideLabel />
+        <Input
+          id="cvc"
+          name="cvc"
+          placeholder="123"
+          value=""
+          isError={false}
+          isRequired
+          handleChange={() => 1}
+          handleOnBlur={() => 1}
+          maxLength={3}
+        />
+      </Fragment>
+    ),
+  },
+  argTypes: {
+    description: {
+      control: false,
+    },
+  },
+};
+
+export const Password = {
+  args: {
+    title: '비밀번호를 입력해 주세요',
+    description: '앞의 2자리를 입력해주세요',
+    labelText: '비밀번호 앞 2자리',
+    errorMessage: '',
+    children: (
+      <Fragment key="password">
+        <Label
+          htmlFor="password"
+          labelText="카드 비밀번호 앞 2자리"
+          hideLabel
+        />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          value="12"
+          isError={false}
+          placeholder=""
+          isRequired
+          handleChange={() => 1}
+          handleOnBlur={() => 1}
+          maxLength={2}
+        />
+      </Fragment>
     ),
   },
   argTypes: {
