@@ -14,7 +14,7 @@ export interface IInputsControl {
   setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   generateOnChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorStatus: IMultipleFieldsErrorStatus;
-  validateValue: (key: string, value: string) => void;
+  validateValue: (key: string) => void;
 }
 
 const useInputs = (validate: TValidate, initialValue: Record<string, string>): IInputsControl => {
@@ -22,7 +22,6 @@ const useInputs = (validate: TValidate, initialValue: Record<string, string>): I
   const { errorStatus, validateValue } = useValidations(value, validate);
 
   const generateOnChange = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    validateValue(key, e.target.value);
     setValue({ ...value, [key]: e.target.value });
   };
 

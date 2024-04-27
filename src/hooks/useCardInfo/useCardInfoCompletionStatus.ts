@@ -1,7 +1,15 @@
-import { useMemo } from 'react';
-
 import { IInputControl } from '../useInput';
 import { IInputsControl } from '../useInputs';
+import getObjectValues from '../../utils/getObjectValues';
+import {
+  validateCardNumber,
+  validateCardType,
+  validateCardholderName,
+  validateCvc,
+  validateExpiryMonth,
+  validateExpiryYear,
+  validatePassword,
+} from '../../validators';
 
 interface CardInfoControl {
   cardNumbers: IInputsControl;
@@ -36,26 +44,23 @@ const useCardInfoCompletionStatus = ({
   cvc,
   password,
 }: CardInfoControl): ICardInfoCompletionStatus => {
-  const isCardNumbersCompleted = useMemo(
-    () =>
-      Object.values(cardNumbers.value).every(v => v) && Object.values(cardNumbers.errorStatus.isError).every(v => !v),
-    [cardNumbers],
-  );
-  const isCardTypeCompleted = useMemo(() => Boolean(cardType.value) && !cardType.errorStatus.isError, [cardType]);
-  const isExpiryDateCompleted = useMemo(
-    () =>
-      Boolean(expiryMonth.value) &&
-      !expiryMonth.errorStatus.isError &&
-      Boolean(expiryYear.value) &&
-      !expiryYear.errorStatus.isError,
-    [expiryMonth, expiryYear],
-  );
-  const isCardholderNameCompleted = useMemo(
-    () => Boolean(cardholderName.value) && !cardholderName.errorStatus.isError,
-    [cardholderName],
-  );
-  const isCvcCompleted = useMemo(() => Boolean(cvc.value) && !cvc.errorStatus.isError, [cvc]);
-  const isPasswordCompleted = useMemo(() => Boolean(password.value) && !password.errorStatus.isError, [password]);
+  const cardNumbersValue = cardNumbers.value;
+  const cardTypeValue = cardType.value;
+  const expiryMonthValue = expiryMonth.value;
+  const expiryYearValue = expiryYear.value;
+  const cardholderNameValue = cardholderName.value;
+  const cvcValue = cvc.value;
+  const passwordValue = password.value;
+
+  const isCardNumbersCompleted = getObjectValues<string>(cardNumbersValue)
+    .map(number => !validateCardNumber(number).isError)
+    .every(v => v);
+  const isCardTypeCompleted = !validateCardType(cardTypeValue).isError;
+  const isExpiryDateCompleted =
+    !validateExpiryMonth(expiryMonthValue).isError && !validateExpiryYear(expiryYearValue).isError;
+  const isCardholderNameCompleted = !validateCardholderName(cardholderNameValue).isError;
+  const isCvcCompleted = !validateCvc(cvcValue).isError;
+  const isPasswordCompleted = !validatePassword(passwordValue).isError;
 
   return {
     isCardNumbersCompleted,

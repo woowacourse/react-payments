@@ -1,7 +1,5 @@
 import Input from '../../common/Input';
 import InputContainer from '../../common/InputContainer';
-
-import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
 
 import * as S from '../../../styles/common';
@@ -13,17 +11,13 @@ export interface ICvcInputContainerProps {
 const CvcInputContainer = ({
   value,
   onChange,
+  validateValue,
   errorStatus,
   setIsCardFront,
 }: IInputControl & ICvcInputContainerProps) => {
-  const {
-    displayingErrorStatus: { errorMessage, isError },
-    bringErrorStatus,
-  } = useDisplayingErrorStatus(errorStatus);
-
   const onFocus = () => setIsCardFront(false);
-  const onBlur = () => {
-    bringErrorStatus();
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateValue(e.target.value);
     setIsCardFront(true);
   };
 
@@ -31,7 +25,7 @@ const CvcInputContainer = ({
     <div>
       <InputContainer title="CVC 번호를 입력해 주세요" labelFor="CVC" labelText="CVC">
         <Input
-          isError={isError}
+          isError={errorStatus.isError}
           placeholder="123"
           maxLength={3}
           value={value}
@@ -42,7 +36,7 @@ const CvcInputContainer = ({
         />
       </InputContainer>
       <S.ErrorWrapper>
-        <S.ErrorText>{errorMessage}</S.ErrorText>
+        <S.ErrorText>{errorStatus.errorMessage}</S.ErrorText>
       </S.ErrorWrapper>
     </div>
   );

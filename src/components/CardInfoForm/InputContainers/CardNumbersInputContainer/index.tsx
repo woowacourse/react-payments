@@ -1,16 +1,10 @@
 import CardNumberInputs from './CardNumberInputs';
 import InputContainer from '../../../common/InputContainer';
 
-import useDisplayingErrorStatus from '../../../../hooks/useDisplayingErrorStatus';
 import { IInputsControl } from '../../../../hooks/useInputs';
 import { ErrorWrapper, ErrorText } from '../../../../styles/common';
 
-export default function CardNumbersContainer({ value, generateOnChange, errorStatus }: IInputsControl) {
-  const {
-    displayingErrorStatus: { isError, errorMessage },
-    bringErrorStatus,
-  } = useDisplayingErrorStatus(errorStatus);
-
+export default function CardNumbersContainer({ value, generateOnChange, validateValue, errorStatus }: IInputsControl) {
   return (
     <div>
       <InputContainer
@@ -21,13 +15,13 @@ export default function CardNumbersContainer({ value, generateOnChange, errorSta
       >
         <CardNumberInputs
           cardNumbers={value}
-          isError={isError}
-          onBlur={bringErrorStatus}
+          isError={errorStatus.isError}
+          validateValue={validateValue}
           generateOnChange={generateOnChange}
         />
       </InputContainer>
       <ErrorWrapper>
-        <ErrorText>{errorMessage}</ErrorText>
+        <ErrorText>{errorStatus.errorMessage}</ErrorText>
       </ErrorWrapper>
     </div>
   );
