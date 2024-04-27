@@ -33,7 +33,7 @@ const validate = {
 
   isOverYear: (year: number) => {
     const currentYear = Number(new Date().getFullYear().toString().slice(2));
-    console.log(currentYear, year);
+
     return currentYear <= year;
   },
 };
