@@ -26,6 +26,15 @@ const CardCompanyFormSection = ({
     errorText: ERROR_MESSAGE.notChoiceCardCompany,
   });
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLSelectElement>) => {
+    if (event.key === 'Enter') {
+      changeIsValid({
+        state: 'cardCompany',
+        isValid: checkError(inputState),
+      });
+    }
+  };
+
   useEffect(() => {
     changeCardCompany(inputState[0].value);
   }, [inputState[0].value]);
@@ -54,6 +63,7 @@ const CardCompanyFormSection = ({
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
             handleValueChange={(e) => handleValueChange(e, 0)}
+            onEnter={(e) => handleKeyPress(e)}
           ></PaymentsSelectField>
         </InputFieldContainer>
       </InputForm>

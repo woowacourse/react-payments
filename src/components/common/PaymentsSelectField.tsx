@@ -10,6 +10,7 @@ const PaymentsSelectField = ({ ...props }: PaymentsSelectFieldProps) => {
     handleValueChange,
     handleOnBlur,
     handleOnFocus,
+    onEnter,
   } = props;
 
   return (
@@ -20,6 +21,7 @@ const PaymentsSelectField = ({ ...props }: PaymentsSelectFieldProps) => {
       onChange={handleValueChange}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
+      onKeyDown={onEnter}
       required
     >
       <option value="" disabled selected>

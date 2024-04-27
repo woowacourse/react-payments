@@ -27,6 +27,7 @@ interface PaymentsSelectFieldProps {
   handleValueChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnFocus?: (e: React.FocusEvent<HTMLSelectElement>) => void;
   handleOnBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
+  onEnter?: (e: React.KeyboardEvent<HTMLSelectElement>) => void;
 }
 
 interface ButtonProps {
