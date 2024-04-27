@@ -14,6 +14,7 @@ function Select({
   isError = false,
   onChange,
   onBlur,
+  ...rest
 }: SelectProps) {
   const className = `${styles.select} ${isError ? styles.error : ''}`;
 
@@ -23,6 +24,7 @@ function Select({
       defaultValue=""
       onChange={onChange}
       onBlur={onBlur}
+      {...rest}
     >
       {placeholder && (
         <option value="" disabled>

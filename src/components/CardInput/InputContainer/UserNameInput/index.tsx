@@ -41,6 +41,7 @@ function UserNameInput({
               isError={nameError}
               onChange={(event) => onNameChange(event.target.value)}
               onKeyDown={onNameInputEnter}
+              autoFocus
             />
           </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />

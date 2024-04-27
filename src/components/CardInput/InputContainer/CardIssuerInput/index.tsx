@@ -35,6 +35,7 @@ function CardIssuerInput({
             options={options}
             placeholder={placeholder}
             isError={cardIssuerError}
+            autoFocus
             onChange={(event) => onCardIssuerChange(event.target.value)}
             onBlur={onBlurCardIssuerSelect}
           />

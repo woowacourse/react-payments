@@ -44,6 +44,7 @@ function PasswordInput({
               placeholder={placeholder}
               isError={passwordError}
               onChange={(event) => onPasswordChange(event.target.value)}
+              autoFocus
             />
           </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />

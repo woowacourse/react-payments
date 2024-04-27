@@ -47,6 +47,7 @@ function CVCInput({
               onChange={(event) => onCVCNumberChange(event.target.value)}
               onFocus={onFocus}
               onBlur={onBlur}
+              autoFocus
             />
           </div>
           <InputErrorMessage errorMessage={getErrorMessage()} />
