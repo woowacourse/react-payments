@@ -11,7 +11,6 @@ import CardCompanyForm from "./CardCompanyForm";
 import CVCNumberForm from "./CVCNumberForm";
 import PasswordForm from "./PasswordForm";
 
-// TODO: 이름 수정 - ICardInputFormProps
 export interface ICardFormProps {
   labelContent: string;
   inputCount: number;
