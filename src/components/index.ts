@@ -1,23 +1,10 @@
-import CardCompany from "./CardCompany/CardCompany";
-import CardNumberInput from "./CardNumberInput/CardNumberInput";
-import CardPreview from "./CardPreview/CardPreview";
-import CardPreviewBack from "./CardPreviewBack/CardPreviewBack";
-import CardPreviewFront from "./CardPreviewFront/CardPreviewFront";
-import CVCInput from "./CVCInput/CVCInput";
-import ExpirationDateInput from "./ExpirationDateInput/ExpirationDateInput";
-import OwnerNameInput from "./OwnerNameInput.tsx/OwnerNameInput";
-import PasswordInput from "./PasswordInput/PasswordInput";
-import SubmitButton from "./SubmitButton/SubmitButton";
-
-export {
-  CardCompany,
-  CardNumberInput,
-  CardPreview,
-  CardPreviewBack,
-  CardPreviewFront,
-  CVCInput,
-  ExpirationDateInput,
-  OwnerNameInput,
-  PasswordInput,
-  SubmitButton,
-};
+export { default as CardCompany } from "./CardCompany/CardCompany";
+export { default as CardNumberInput } from "./CardNumberInput/CardNumberInput";
+export { default as CardPreview } from "./CardPreview/CardPreview";
+export { default as CardPreviewBack } from "./CardPreviewBack/CardPreviewBack";
+export { default as CardPreviewFront } from "./CardPreviewFront/CardPreviewFront";
+export { default as CVCInput } from "./CVCInput/CVCInput";
+export { default as ExpirationDateInput } from "./ExpirationDateInput/ExpirationDateInput";
+export { default as OwnerNameInput } from "./OwnerNameInput.tsx/OwnerNameInput";
+export { default as PasswordInput } from "./PasswordInput/PasswordInput";
+export { default as SubmitButton } from "./SubmitButton/SubmitButton";
