@@ -38,8 +38,8 @@ const errorDefault: ErrorType = {
 const defaultArgs = {
   cardNumbersValue: { firstNumbers: "0000", secondNumbers: "1234", thirdNumbers: "1234", fourthNumbers: "1234" },
   cardPeriodValue: {
-    month: 12,
-    year: 12,
+    month: "12",
+    year: "12",
   },
   cardOwnerValue: { name: "PARK JEONG WOO" },
   cardNumbersError: {

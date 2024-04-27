@@ -9,7 +9,10 @@ import {
   CardOwnerInfoErrorContext,
   CardValidityPeriodErrorContext,
 } from "../../../routes/Payments/FormContextProvider";
-import FormInput from "../FormInputCompound";
+
+import CardNumberInput from "../CardNumberInput";
+import CardPeriodInput from "../CardPeriodInput";
+import CardOwnerInput from "../CardOwnerInput";
 
 interface Props {
   children: React.ReactNode;
@@ -50,17 +53,17 @@ const CardWithContextCompound: React.FC<Props> = ({
 const CardWithContext: Record<"CardNumberInput" | "CardPeriodInput" | "CardOwnerInput", React.FC<Props>> = {
   CardNumberInput: (props) => (
     <CardWithContextCompound {...props}>
-      <FormInput.CardNumberInput />
+      <CardNumberInput />
     </CardWithContextCompound>
   ),
   CardPeriodInput: (props) => (
     <CardWithContextCompound {...props}>
-      <FormInput.CardPeriodInput />
+      <CardPeriodInput />
     </CardWithContextCompound>
   ),
   CardOwnerInput: (props) => (
     <CardWithContextCompound {...props}>
-      <FormInput.CardOwnerInput />
+      <CardOwnerInput />
     </CardWithContextCompound>
   ),
 };

@@ -17,12 +17,25 @@ import { formStyle } from "./style";
 
 import useIsCardInfoValid from "./useIsValid";
 
+interface Target extends EventTarget {
+  firstNumbers: {
+    value: string;
+  };
+  cardIssuer: {
+    value: string;
+  };
+}
+
+interface FormEvent extends React.FormEvent<HTMLFormElement> {
+  target: Target;
+}
+
 const Form = () => {
   const renderOrder = useContextWrapper(FormRenderOrderContext)[0];
   const isValid = useIsCardInfoValid();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const target = e.target;
     navigate(`/landing_arrival/${target.firstNumbers.value}/${target.cardIssuer.value}`);

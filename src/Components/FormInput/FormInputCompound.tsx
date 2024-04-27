@@ -2,15 +2,15 @@
 import React, { SetStateAction, forwardRef, useEffect } from "react";
 import { inputStyle } from "./style";
 import onInputChange from "./onInputChange";
-import { ChangeValidatorType } from "./validator/changeValidator";
+import { ValidatorType } from "./validator/changeValidator";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   sizePreset?: SizePresetType;
   name: string;
   setData: React.Dispatch<SetStateAction<any>>;
   setError: React.Dispatch<SetStateAction<any>>;
-  changeValidator: ChangeValidatorType;
-  blurValidator: ChangeValidatorType;
+  changeValidator: ValidatorType;
+  blurValidator: ValidatorType;
   isError?: boolean;
   nextRef?: React.MutableRefObject<HTMLInputElement | null>;
   maxLength: number;

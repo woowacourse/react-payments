@@ -21,7 +21,7 @@ export function cardNumbersValidator(input: string): validatorReturn {
   return { isValid: true, value: input };
 }
 
-export function cardPeriodValidator(input: string, category?: "month" | "year"): validatorReturn {
+export function cardPeriodValidator(input: string, category?: string): validatorReturn {
   const number = Number(input);
   const VALID_MONTH = { MIN: 0, MAX: 12 };
 
