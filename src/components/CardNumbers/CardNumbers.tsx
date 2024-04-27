@@ -1,3 +1,4 @@
+import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -8,11 +9,7 @@ interface Props {
 }
 
 export default function CardNumbers({ cardNumbers }: Props) {
-  const errorMessage = cardNumbers
-    .map((cardNumber) => {
-      return cardNumber.validateMessage;
-    })
-    .find((msg) => msg !== "");
+  const errorMessage = getFirstValidateMessage(cardNumbers);
 
   return (
     <S.CardNumbersContainer>

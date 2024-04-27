@@ -1,3 +1,4 @@
+import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
 import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -12,11 +13,10 @@ export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
 }: Props) {
-  const errorMessage = [cardExpirationMonth, cardExpirationYear]
-    .map((date) => {
-      return date.validateMessage;
-    })
-    .find((msg) => msg !== "");
+  const errorMessage = getFirstValidateMessage([
+    cardExpirationMonth,
+    cardExpirationYear,
+  ]);
 
   return (
     <S.CardDateContainer>
