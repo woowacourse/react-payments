@@ -4,7 +4,7 @@ import * as Styled from "./Dropdown.styled";
 import UpArrowIcon from "../../../assets/UpArrowIcon.png";
 import DownArrowIcon from "../../../assets/DownArrowIcon.png";
 
-interface DropdownProps {
+export interface DropdownProps {
   selectList: string[];
   onChange: (selectedValue: CardCompany) => void;
 }

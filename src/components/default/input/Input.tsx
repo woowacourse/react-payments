@@ -17,4 +17,4 @@ const Input = ({ isError, ref, ...restProps }: InputProps) => {
   );
 };
 
-export default React.forwardRef(Input);
+export default Input;
