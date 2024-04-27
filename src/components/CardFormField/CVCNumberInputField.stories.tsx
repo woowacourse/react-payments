@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import FormProviderDecorator from "./FormProviderDecorator";
 import CVCNumberInputField from "./CVCNumberInputFiled";
+import CardPreview from "../CardPreview/CardPreview";
 
 const meta = {
   title: "CVCNumberInputField",
@@ -16,6 +17,7 @@ const meta = {
     (Story) => {
       return (
         <FormProviderDecorator>
+          <CardPreview />
           <Story />
         </FormProviderDecorator>
       );
