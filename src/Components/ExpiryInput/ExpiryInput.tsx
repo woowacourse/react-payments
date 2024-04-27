@@ -89,29 +89,31 @@ const ExpiryInput: React.FC<ExpiryInputProps> = ({
   };
 
   return (
-    <ExpiryInputWrapper>
-      <Input
-        ref={(el) => (inputRefs.current[0] = el)}
-        value={month}
-        onChange={(month) => handleMonthChange(month)}
-        onValidate={(isValid) => handleValidate(isValid)}
-        maxLength={2}
-        placeholder="MM"
-        size="medium"
-        validator={(value) => monthValidator(value)}
-      />
-      <Input
-        ref={(el) => (inputRefs.current[1] = el)}
-        value={year}
-        onChange={(year) => handleYearChange(year)}
-        onValidate={(isValid) => handleValidate(isValid)}
-        maxLength={2}
-        placeholder="YY"
-        size="medium"
-        validator={(value) => yearValidator(value)}
-      />
+    <>
+      <ExpiryInputWrapper>
+        <Input
+          ref={(el) => (inputRefs.current[0] = el)}
+          value={month}
+          onChange={(month) => handleMonthChange(month)}
+          onValidate={(isValid) => handleValidate(isValid)}
+          maxLength={2}
+          placeholder="MM"
+          size="medium"
+          validator={(value) => monthValidator(value)}
+        />
+        <Input
+          ref={(el) => (inputRefs.current[1] = el)}
+          value={year}
+          onChange={(year) => handleYearChange(year)}
+          onValidate={(isValid) => handleValidate(isValid)}
+          maxLength={2}
+          placeholder="YY"
+          size="medium"
+          validator={(value) => yearValidator(value)}
+        />
+      </ExpiryInputWrapper>
       <Tooltip>{!isValid ? errorMessage : ""}</Tooltip>
-    </ExpiryInputWrapper>
+    </>
   );
 };
 

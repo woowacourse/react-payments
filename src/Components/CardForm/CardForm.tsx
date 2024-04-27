@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useEffect, useState } from "react";
 import CardPreview from "../CardPreview/CardPreview";
 import CardInput from "../CardInput/CardInput";
@@ -9,6 +11,7 @@ import CardCVCInput from "../CardCVCInput/CardCVCInput";
 import Button from "../common/Button/Button";
 import { useNavigate } from "react-router-dom";
 import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
+import { CardFormWrapper, FormStyle } from "./CardForm.style";
 
 const CardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState("");
@@ -152,7 +155,7 @@ const CardForm: React.FC = () => {
   }, [isCardCVCCompleted]);
 
   return (
-    <form>
+    <CardFormWrapper>
       <CardPreview
         cardNumber={cardNumber}
         cardCVC={cardCVC}
@@ -162,90 +165,91 @@ const CardForm: React.FC = () => {
         cardCompany={selectedCard}
         isFront={isOnCVCInput}
       />
+      <form css={FormStyle}>
+        {showCardPasswordInput && (
+          <CardInput
+            title="비밀번호를 입력해 주세요"
+            label="비밀번호 앞 2자리"
+            description="앞의 2자리를 입력해주세요"
+          >
+            <CardPasswordInput
+              value={cardNumber}
+              onChange={handleCardPasswordChange}
+              setCompleted={handleCardPasswordCompleted}
+            />
+          </CardInput>
+        )}
 
-      {showCardPasswordInput && (
+        {showCardCVCInput && (
+          <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
+            <CardCVCInput
+              value={cardCVC}
+              onChange={handleCardCVC}
+              setCompleted={handleCardCVCCompleted}
+              handleOnBlur={() => setIsOnCVCInput(false)}
+              handleOnFocus={() => setIsOnCVCInput(true)}
+            />
+          </CardInput>
+        )}
+
+        {showCardOwnerNameInput && (
+          <CardInput
+            title="카드 소유자 이름을 입력해 주세요"
+            label="카드 소유자 이름"
+          >
+            <CardOwnerNameInput
+              value={cardholderName}
+              onChange={handleCardholderNameChange}
+              setCompleted={handleCardholderNameCompleted}
+            />
+          </CardInput>
+        )}
+
+        {showExpiryInput && (
+          <CardInput
+            title="카드 유효기간을 입력해 주세요"
+            label="유효기간"
+            description="월/년도(MMYY)를 순서대로 입력해 주세요"
+          >
+            <ExpiryInput
+              month={expiryMonth}
+              year={expiryYear}
+              onMonthChange={handleExpiryMonthChange}
+              onYearChange={handleExpiryYearChange}
+              setExpiryMonthCompleted={handleExpiryMonthCompleted}
+              setExpiryYearCompleted={handleExpiryYearCompleted}
+            />
+          </CardInput>
+        )}
+
+        {showSelectBox && (
+          <CardInput
+            title="카드사를 선택해 주세요"
+            description="현재 국내 카드사만 가능합니다."
+            label="카드 소유자 이름"
+          >
+            <SelectBox
+              onSelect={handleSelect}
+              setCompleted={handleSelectedCardCompleted}
+            />
+          </CardInput>
+        )}
+
         <CardInput
-          title="비밀번호를 입력해 주세요"
-          label="비밀번호 앞 2자리"
-          description="앞의 2자리를 입력해주세요"
+          title="결제할 카드 번호를 입력해 주세요"
+          label="카드 번호"
+          description="본인 명의의 카드만 결제 가능합니다"
         >
-          <CardPasswordInput
+          <CardNumberInput
             value={cardNumber}
-            onChange={handleCardPasswordChange}
-            setCompleted={handleCardPasswordCompleted}
+            onChange={handleCardNumberChange}
+            setCompleted={handleCardNumberCompleted}
           />
         </CardInput>
-      )}
 
-      {showCardCVCInput && (
-        <CardInput title="CVC 번호를 입력해 주세요" label="CVC">
-          <CardCVCInput
-            value={cardCVC}
-            onChange={handleCardCVC}
-            setCompleted={handleCardCVCCompleted}
-            handleOnBlur={() => setIsOnCVCInput(false)}
-            handleOnFocus={() => setIsOnCVCInput(true)}
-          />
-        </CardInput>
-      )}
-
-      {showCardOwnerNameInput && (
-        <CardInput
-          title="카드 소유자 이름을 입력해 주세요"
-          label="카드 소유자 이름"
-        >
-          <CardOwnerNameInput
-            value={cardholderName}
-            onChange={handleCardholderNameChange}
-            setCompleted={handleCardholderNameCompleted}
-          />
-        </CardInput>
-      )}
-
-      {showExpiryInput && (
-        <CardInput
-          title="카드 유효기간을 입력해 주세요"
-          label="유효기간"
-          description="월/년도(MMYY)를 순서대로 입력해 주세요"
-        >
-          <ExpiryInput
-            month={expiryMonth}
-            year={expiryYear}
-            onMonthChange={handleExpiryMonthChange}
-            onYearChange={handleExpiryYearChange}
-            setExpiryMonthCompleted={handleExpiryMonthCompleted}
-            setExpiryYearCompleted={handleExpiryYearCompleted}
-          />
-        </CardInput>
-      )}
-
-      {showSelectBox && (
-        <CardInput
-          title="카드사를 선택해 주세요"
-          description="현재 국내 카드사만 가능합니다."
-          label="카드 소유자 이름"
-        >
-          <SelectBox
-            onSelect={handleSelect}
-            setCompleted={handleSelectedCardCompleted}
-          />
-        </CardInput>
-      )}
-
-      <CardInput
-        title="결제할 카드 번호를 입력해 주세요"
-        label="카드 번호"
-        description="본인 명의의 카드만 결제 가능합니다"
-      >
-        <CardNumberInput
-          value={cardNumber}
-          onChange={handleCardNumberChange}
-          setCompleted={handleCardNumberCompleted}
-        />
-      </CardInput>
-
-      {isAllCompleted && <Button onClick={handleOnClick}>확인</Button>}
-    </form>
+        {isAllCompleted && <Button onClick={handleOnClick}>확인</Button>}
+      </form>
+    </CardFormWrapper>
   );
 };
 

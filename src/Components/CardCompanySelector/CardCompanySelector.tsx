@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
+import { InputWrapper } from "../common/Input/Input.styles";
 
 type SelectBoxProps = {
   onSelect: (value: CardCompany | "") => void;
@@ -31,14 +33,16 @@ const SelectBox: React.FC<SelectBoxProps> = ({ onSelect, setCompleted }) => {
   }, [selectedValue]);
 
   return (
-    <select value={selectedValue} onChange={handleChange}>
-      <option value="">카드사를 선택하세요</option>
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+    <InputWrapper size="large" isValid={true}>
+      <select value={selectedValue} onChange={handleChange}>
+        <option value="">카드사를 선택하세요</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </InputWrapper>
   );
 };
 

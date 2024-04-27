@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
+import { CardInputWrapper } from "./CardInput.styles";
 
 interface CardInputProps {
   title: string;
@@ -7,13 +9,19 @@ interface CardInputProps {
   children: React.ReactNode;
 }
 
-const CardInput: React.FC<CardInputProps> = ({ title, label, children }) => {
+const CardInput: React.FC<CardInputProps> = ({
+  title,
+  description,
+  label,
+  children,
+}) => {
   return (
-    <div>
+    <CardInputWrapper>
       <h1>{title}</h1>
+      {description && <p>{description}</p>}
       <label>{label}</label>
       {children}
-    </div>
+    </CardInputWrapper>
   );
 };
 

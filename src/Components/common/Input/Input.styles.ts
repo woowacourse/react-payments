@@ -8,18 +8,19 @@ interface InputWrapperProps {
 const getInputWidth = (size: "small" | "medium" | "large") => {
   switch (size) {
     case "small":
-      return "100px";
+      return "71.25px";
     case "medium":
-      return "200px";
+      return "152.5px";
     case "large":
-      return "300px";
+      return "315px";
     default:
-      return "200px";
+      return "152.5px";
   }
 };
 
 export const InputWrapper = styled.div<InputWrapperProps>`
-  input {
+  input,
+  select {
     width: ${({ size }) => getInputWidth(size)};
     padding: 8px;
     border: 1px solid ${({ isValid }) => (isValid ? "#ccc" : "red")};
@@ -28,6 +29,6 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   }
 
   input:focus {
-    outline: none;
+    outline: ${({ isValid }) => (isValid ? "solid 1px #000" : "none")};
   }
 `;
