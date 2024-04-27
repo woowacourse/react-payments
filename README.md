@@ -2,7 +2,7 @@
 
 ## 배포
 
-[🌟스토리북 페이지 바로가기](https://6620c65c99e8a4a3cde004a4-cumpnlibwt.chromatic.com/)
+[🌟스토리북 페이지 바로가기](https://6620c65c99e8a4a3cde004a4-xouuwbafxc.chromatic.com/)
 
 [🌟배포 페이지 바로가기](https://badahertz52.github.io/react-payments/dist/)
 
@@ -27,7 +27,7 @@
 
 #### 레이아웃
 
-<img  src="./readmeImages/step2_layout.png" height="400px" alt="step2 레이아웃"/>
+<img  src="./readmeImages/step2_layout.jpg" height="400px" alt="step2 레이아웃"/>
 
 ## 빌드 및 스토리북 테스트
 
