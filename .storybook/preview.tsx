@@ -3,6 +3,7 @@ import type { Preview } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/GlobalStyle";
 import theme from "../src/styles/theme";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 
 const preview: Preview = {
   parameters: {
@@ -19,10 +20,12 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Story />
-    </ThemeProvider>
+    <MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Story />
+      </ThemeProvider>
+    </MemoryRouter>
   ),
 ];
 
