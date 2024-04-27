@@ -1,5 +1,5 @@
-const IS_PRODUCTION = true;
-const BASE_URL = IS_PRODUCTION ? '' : '';
+const IS_PRODUCTION = false;
+const BASE_URL = IS_PRODUCTION ? '/react-payments/dist' : '';
 
 const ROUTE_PATH = {
   cardRegister: BASE_URL + '/',
