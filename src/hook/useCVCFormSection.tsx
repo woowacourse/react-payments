@@ -6,28 +6,18 @@ import OPTION from "../constants/option";
 import { useEffect, useState } from "react";
 
 interface UseCVCFormSectionProps {
+  cardInfo: CardInfo;
   dispatchCardInfo: React.Dispatch<CardInfoAction>;
   handleCardState: (cardState: CardState) => void;
   ref: React.MutableRefObject<HTMLInputElement>
 }
 
 const useCVCFormSection = (props: UseCVCFormSectionProps) => {
-  const { dispatchCardInfo, handleCardState, ref } = props
+  const { cardInfo, dispatchCardInfo, handleCardState, ref } = props
   const [error, setError] = useState('')
 
-  const validateCVC = (value: string) => {
-    if (value.length === OPTION.cvcMaxLength) {
-      dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
-    } else {
-      setError(ERROR_MESSAGE.cvcFormat);
-    }
-  }
-
-  useEffect(() => {
-    handleCardState('back')
-  }, [])
-
-  const { value, handleChange } = useFormSection({
+  const { handleChange } = useFormSection({
+    value: cardInfo.cvc.value,
     ref: ref,
     initialValue: '',
     regex: REGEX.numbers,
@@ -37,6 +27,14 @@ const useCVCFormSection = (props: UseCVCFormSectionProps) => {
     setError: setError,
   });
 
+  const validateCVC = (value: string) => {
+    if (value.length === OPTION.cvcMaxLength) {
+      dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
+    } else {
+      setError(ERROR_MESSAGE.cvcFormat);
+    }
+  }
+
   if (ref.current) {
     ref.current.onfocus = () => {
       handleCardState('back')
@@ -45,11 +43,16 @@ const useCVCFormSection = (props: UseCVCFormSectionProps) => {
     ref.current.onblur = () => {
       handleCardState('front')
       setError('');
-      validateCVC(value);
+      validateCVC(cardInfo.cvc.value);
     };
   }
 
-  return { value, error, handleChange };
+  useEffect(() => {
+    handleCardState('back')
+  }, [])
+
+
+  return { error, handleChange };
 };
 
 export default useCVCFormSection;

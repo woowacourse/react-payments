@@ -8,14 +8,15 @@ import useCVCFormSection from '../../../hook/useCVCFormSection';
 import OPTION from '../../../constants/option';
 
 interface CVCFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   handleCardState: (cardState: CardState) => void
 }
 
 const CVCFormSection = (props: CVCFormSectionProps) => {
-  const { dispatchCardInfo, handleCardState } = props
+  const { cardInfo, dispatchCardInfo, handleCardState } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { value, error, handleChange } = useCVCFormSection({ dispatchCardInfo, handleCardState, ref })
+  const { error, handleChange } = useCVCFormSection({ cardInfo, dispatchCardInfo, handleCardState, ref })
 
   const CVCForm = (
     <PaymentsInputField
@@ -23,7 +24,7 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
       className="cvc-form-section"
       placeholder="123"
       maxLength={OPTION.cvcMaxLength}
-      value={value}
+      value={cardInfo.cvc.value}
       hasError={error.length !== 0}
       handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
       autoFocus={true}

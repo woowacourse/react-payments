@@ -8,11 +8,12 @@ import useExpirationDateFormSection from '../../../hook/useExpirationDateFormSec
 import OPTION from '../../../constants/option';
 
 interface ExpirationDateFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
-  const { dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
   const { values, error, hasErrors, handleChange } = useExpirationDateFormSection({ dispatchCardInfo, refs })
 

@@ -8,11 +8,12 @@ import OPTION from '../../../constants/option';
 import FormSection from '../FormSection';
 
 interface CardNumbersFormSectionProps {
+  cardInfo: CardInfo,
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
-  const { dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.cardNumberInputCount).fill(null));
   const { values, error, hasErrors, handleChange } = useCardNumbersFormSection({ dispatchCardInfo, refs })
 

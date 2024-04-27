@@ -21,17 +21,19 @@ const useMultiFormSection = (props: UseMultiFormSectionProps) => {
   const { focusNext } = useFocusNext(refs);
 
   useEffect(() => {
-    refs.current.forEach((element, index) => {
-      element.onfocus = () => { resetIndexError(index) };
-      element.onblur = () => { resetIndexError(index) };
-    })
+    if (refs.current) {
+      refs.current.forEach((element, index) => {
+        element.onfocus = () => { resetIndexError(index) };
+        element.onblur = () => { resetIndexError(index) };
+      })
 
-    return () => {
-      refs.current.forEach((element) => {
-        element.onfocus = null;
-        element.onblur = null;
-      });
-    };
+      return () => {
+        refs.current.forEach((element) => {
+          element.onfocus = null;
+          element.onblur = null;
+        });
+      };
+    }
   }, [])
 
   const isAnyFocused = refs.current.some(element => element === document.activeElement);

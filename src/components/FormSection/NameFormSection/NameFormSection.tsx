@@ -9,6 +9,7 @@ import useNameFormSection from '../../../hook/useNameFormSection';
 import OPTION from '../../../constants/option';
 
 interface NameFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
@@ -16,9 +17,9 @@ const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
 text-transform: uppercase`
 
 const NameFormSection = (props: NameFormSectionProps) => {
-  const { dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { value, error, handleChange } = useNameFormSection({ dispatchCardInfo, ref })
+  const { error, handleChange } = useNameFormSection({ cardInfo, dispatchCardInfo, ref })
 
   const NameForm = (
     <PaymentsInputFieldUppercase
@@ -26,7 +27,7 @@ const NameFormSection = (props: NameFormSectionProps) => {
       className="name-form-section"
       placeholder="FAMILY / GIVEN"
       maxLength={OPTION.nameMaxLength}
-      value={value}
+      value={cardInfo.name.value}
       hasError={error.length !== 0}
       handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
       autoFocus={true}

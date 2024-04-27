@@ -8,13 +8,14 @@ import usePasswordFormSection from '../../../hook/usePasswordFormSection';
 import OPTION from '../../../constants/option';
 
 interface PasswordFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
 const PasswordFormSection = (props: PasswordFormSectionProps) => {
-  const { dispatchCardInfo } = props
+  const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { value, error, handleChange } = usePasswordFormSection({ dispatchCardInfo, ref })
+  const { error, handleChange } = usePasswordFormSection({ cardInfo, dispatchCardInfo, ref })
 
   const PasswordForm = (
     <PaymentsInputField
@@ -22,7 +23,7 @@ const PasswordFormSection = (props: PasswordFormSectionProps) => {
       className="password-form-section"
       placeholder="12"
       maxLength={OPTION.passwordMaxLength}
-      value={value}
+      value={cardInfo.password.value}
       hasError={error.length !== 0}
       handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
       autoFocus={true}

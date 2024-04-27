@@ -6,23 +6,17 @@ import OPTION from "../constants/option";
 import { useState } from "react";
 
 interface UsePasswordFormSectionProps {
+  cardInfo: CardInfo
   dispatchCardInfo: React.Dispatch<CardInfoAction>
   ref: React.MutableRefObject<HTMLInputElement>
 }
 
 const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
-  const { dispatchCardInfo, ref } = props
+  const { cardInfo, dispatchCardInfo, ref } = props
   const [error, setError] = useState('')
 
-  const validatePassword = (value: string) => {
-    if (value.length === OPTION.passwordMaxLength) {
-      dispatchCardInfo({ type: 'SET_CARD_PASSWORD_COMPLETED', value: true })
-    } else {
-      setError(ERROR_MESSAGE.passwordFormat);
-    }
-  }
-
-  const { value, handleChange } = useFormSection({
+  const { handleChange } = useFormSection({
+    value: cardInfo.password.value,
     ref: ref,
     initialValue: '',
     regex: REGEX.numbers,
@@ -32,17 +26,25 @@ const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
     setError: setError
   });
 
+  const validatePassword = (value: string) => {
+    if (value.length === OPTION.passwordMaxLength) {
+      dispatchCardInfo({ type: 'SET_CARD_PASSWORD_COMPLETED', value: true })
+    } else {
+      setError(ERROR_MESSAGE.passwordFormat);
+    }
+  }
+
   if (ref.current) {
     ref.current.onfocus = () => {
       setError('');
     };
     ref.current.onblur = () => {
       setError('');
-      validatePassword(value);
+      validatePassword(cardInfo.password.value);
     };
   }
 
-  return { value, error, handleChange };
+  return { error, handleChange };
 };
 
 export default usePasswordFormSection;
