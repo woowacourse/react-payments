@@ -128,11 +128,13 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
           </SecretNumber>
         </CardNumbers>
         <TextBox>
-          {cardInfo.expirationDate.month.value.length === 1
+          {cardInfo.expirationDate.month.value.length === 1 &&
+          cardInfo.expirationDate.month.value !== '0'
             ? `0${cardInfo.expirationDate.month.value}`
             : cardInfo.expirationDate.month.value}
           {cardInfo.expirationDate.year.value.length > 0 ? ' / ' : ''}
-          {cardInfo.expirationDate.year.value.length === 1
+          {cardInfo.expirationDate.year.value.length === 1 &&
+          cardInfo.expirationDate.year.value !== '0'
             ? `0${cardInfo.expirationDate.year.value}`
             : cardInfo.expirationDate.year.value}
         </TextBox>
