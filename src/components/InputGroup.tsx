@@ -14,7 +14,7 @@ import {
 } from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 import Selector from './Selector';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const inputGroupStyle = css({
   display: 'flex',
@@ -104,6 +104,7 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage, 
       return updatedState;
     });
   };
+  const inputRefs = useRef(Array(placeholders.length).fill(null));
 
   return (
     <div css={inputGroupStyle}>
@@ -141,9 +142,13 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage, 
                   borderColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#acacac',
                   focusColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#000',
                 })}
-                onClick={() => handleClicked(index)}
+                onHandleClicked={() => handleClicked(index)}
                 onBlur={onBlur}
                 onFocus={onFocus}
+                autoFocus={index === 0}
+                ref={(ref) => {
+                  inputRefs.current[index] = ref;
+                }}
               />
             );
           })}
