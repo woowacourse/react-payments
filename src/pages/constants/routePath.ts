@@ -1,4 +1,5 @@
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/dist/index.html' : '';
+const IS_PRODUCTION = false;
+const BASE_URL = IS_PRODUCTION ? '/dist/index.html' : '';
 
 const ROUTE_PATH = {
   cardRegister: BASE_URL + '/',
