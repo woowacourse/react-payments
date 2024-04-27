@@ -202,8 +202,8 @@ export default function CardExpirationPeriodInput(
   };
 
   useEffect(() => {
-    setFocusIndex(error.month ? 0 : 1);
-  }, [error]);
+    setFocusIndex(error.month || value.month?.length === 1 ? 0 : 1);
+  }, [error, value]);
 
   return (
     <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>

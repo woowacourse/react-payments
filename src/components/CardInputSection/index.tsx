@@ -4,7 +4,7 @@ import styles from './style.module.css';
 
 interface CardInputSectionProps {
   title?: string;
-  subTitle?: string;
+  subTitle?: string | ReactNode;
   childrenLabel?: string;
   /**
    * input 요소들

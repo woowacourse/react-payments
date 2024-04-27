@@ -1,10 +1,11 @@
-import { ChangeEvent, useContext, useMemo } from 'react';
+import { ChangeEvent, KeyboardEvent, useContext, useMemo } from 'react';
 
 import {
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
   CARD_USER_NAME_REGEXP,
   CardStep,
+  ENTER_KEY,
   ERROR_MESSAGE,
 } from '../../constants';
 import CardFormContext from '../../contexts/CardFormContext';
@@ -20,7 +21,7 @@ export interface CardUserNameInputProps {
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { goNextFormStep } = props;
-  const { title, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
+  const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
 
   const cardFormContext = useContext(CardFormContext);
   const { nextFormStep } = useNextFormStep({ currentCardStep: 'userName' });
@@ -54,7 +55,10 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     goNextFormStep(nextFormStep);
   };
 
-  const { value, setValue, error } = useCardInput<string, boolean>({
+  const { value, setValue, error, setIsBlockNextStep } = useCardInput<
+    string,
+    boolean
+  >({
     initialValue: '',
     initialError: false,
     validateValue: validateName,
@@ -67,6 +71,11 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     [error],
   );
 
+  const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
+    const { code } = event;
+    setIsBlockNextStep(code !== ENTER_KEY);
+  };
+
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value.toUpperCase();
     // userName 업데이트
@@ -74,7 +83,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
   };
 
   return (
-    <CardInputSection title={title} childrenLabel={label}>
+    <CardInputSection title={title} subTitle={subTitle} childrenLabel={label}>
       <div className={styles.inputWrap}>
         <Input
           style={{ textTransform: 'uppercase' }}
@@ -83,6 +92,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
           label={CARD_USER_FORM_MESSAGE.label}
           placeholder={namePlaceholder}
           onChange={handleNameChange}
+          onKeyUp={handleKeyUp}
           value={value}
           error={error}
           isFocus

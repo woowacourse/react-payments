@@ -4,4 +4,6 @@ export const PATH = {
   cardConfirmation: 'card/confirmation',
 };
 
+export const ENTER_KEY = 'Enter';
+
 export const FIRST_INPUT_INDEX = 0;
