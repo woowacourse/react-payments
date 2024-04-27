@@ -6,7 +6,7 @@ import { ErrorCardType } from '../../types/cardType';
 interface InputGroupType {
   title: string;
   subtitle?: string;
-  label: string;
+  label?: string;
   error?: ErrorCardType;
   children: React.ReactNode;
 }
