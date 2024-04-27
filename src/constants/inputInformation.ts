@@ -8,6 +8,15 @@ export const CARD_NUMBER = {
   maxLength: 4,
 } as const;
 
+export const CARD_ISSUER = {
+  name: 'issuer',
+  title: '카드사를 선택해 주세요',
+  subtitle: '현재 국내 카드사만 가능합니다.',
+  placeholder: '카드사를 선택해주세요',
+  options: ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'],
+  optionValues: ['bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kookmin'],
+};
+
 export const CARD_PERIOD = {
   names: ['month', 'year'],
   type: 'period',
@@ -26,4 +35,24 @@ export const CARD_OWNER = {
   label: '소유자 이름',
   placeholders: ['WOOTECO'],
   maxLength: 30,
+} as const;
+
+export const CARD_CVC = {
+  names: ['cvc'],
+  type: 'cvc',
+  title: 'CVC 번호를 입력해 주세요',
+  subtitle: '',
+  label: 'CVC',
+  placeholders: ['123'],
+  maxLength: 3,
+} as const;
+
+export const CARD_PASSWORD = {
+  names: ['password'],
+  type: 'password',
+  title: '비밀번호를 입력해 주세요',
+  subtitle: '앞의 2자리를 입력해주세요',
+  label: '비밀번호 앞 2자리',
+  placeholders: ['**'],
+  maxLength: 2,
 } as const;
