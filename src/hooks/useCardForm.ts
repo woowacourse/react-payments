@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   isCardCVCLength,
+  isCardDateLength,
   isCardMonth,
   isCardNumber,
   isCardNumberLength,
@@ -23,24 +24,25 @@ const useCardForm = () => {
     false,
     false,
   ]);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const cardNumber1 = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isCardNumberLength],
     validateOnBlur: [isCardNumber, isCardNumberLength],
   });
 
   const cardNumber2 = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isCardNumberLength],
     validateOnBlur: [isCardNumber, isCardNumberLength],
   });
 
   const cardNumber3 = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isCardNumberLength],
     validateOnBlur: [isCardNumber, isCardNumberLength],
   });
 
   const cardNumber4 = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isCardNumberLength],
     validateOnBlur: [isCardNumber, isCardNumberLength],
   });
 
@@ -49,27 +51,27 @@ const useCardForm = () => {
   const cardCompany = useSelect();
 
   const cardExpirationMonth = useInput("", {
-    validateOnChange: [isCardNumber],
-    validateOnBlur: [isCardNumber, isCardMonth],
+    validateOnChange: [isCardNumber, isCardMonth, isCardDateLength],
+    validateOnBlur: [isCardNumber, isCardMonth, isCardDateLength],
   });
 
   const cardExpirationYear = useInput("", {
-    validateOnChange: [isCardNumber],
-    validateOnBlur: [isCardNumber, isCardYear],
+    validateOnChange: [isCardNumber, isCardYear, isCardDateLength],
+    validateOnBlur: [isCardNumber, isCardYear, isCardDateLength],
   });
 
   const cardOwnerName = useInput("", {
-    validateOnChange: [isUpperCase],
+    validateOnChange: [isUpperCase, isOwnerNameLength],
     validateOnBlur: [isUpperCase, isOwnerNameLength],
   });
 
   const cardCVC = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isCardCVCLength],
     validateOnBlur: [isCardNumber, isCardCVCLength],
   });
 
   const cardPassword = useInput("", {
-    validateOnChange: [isCardNumber],
+    validateOnChange: [isCardNumber, isPasswordLength],
     validateOnBlur: [isCardNumber, isPasswordLength],
   });
 
@@ -114,7 +116,33 @@ const useCardForm = () => {
     if (!step[6] && cardPasswordCompleted) {
       changeNextStep(6);
     }
+
+    if (
+      step[6] &&
+      cardNumbersCompleted &&
+      cardCompanyCompleted &&
+      cardExpirationDateCompleted &&
+      cardOwnerNameCompleted &&
+      cardCVCCompleted &&
+      cardPasswordCompleted
+    ) {
+      setIsCompleted(true);
+    }
+    if (
+      step[6] &&
+      !(
+        cardNumbersCompleted &&
+        cardCompanyCompleted &&
+        cardExpirationDateCompleted &&
+        cardOwnerNameCompleted &&
+        cardCVCCompleted &&
+        cardPasswordCompleted
+      )
+    ) {
+      setIsCompleted(false);
+    }
   }, [
+    step,
     cardNumbers,
     cardCompany,
     cardExpirationMonth,
@@ -122,7 +150,6 @@ const useCardForm = () => {
     cardOwnerName,
     cardCVC,
     cardPassword,
-    step,
   ]);
 
   // useEffect(() => {
@@ -150,6 +177,7 @@ const useCardForm = () => {
     cardOwnerName,
     cardCVC,
     cardPassword,
+    isCompleted,
     // numbersErrorMessage,
   };
 };

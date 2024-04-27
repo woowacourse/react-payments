@@ -20,17 +20,16 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
       const newValue = e.target.value;
 
       if (validateOnChange) {
-        validateOnChange.map((func) => {
+        for (const func of validateOnChange) {
           const errorMessage = func(newValue);
-
           if (errorMessage !== "") {
+            setValue(newValue);
             setValidateMessage(errorMessage);
             return;
           }
-          setValue(newValue);
-          setValidateMessage("");
-          return;
-        });
+        }
+        setValue(newValue);
+        setValidateMessage("");
       }
     },
     [validateOnChange]
@@ -46,14 +45,13 @@ const useInput = (initValue: string = "", options: UseInputOptions = {}) => {
         return;
       }
       if (validateOnBlur) {
-        validateOnBlur.map((func) => {
+        for (const func of validateOnBlur) {
           const errorMessage = func(newValue);
-
           if (errorMessage !== "") {
             setValidateMessage(errorMessage);
-            return;
+            return; // 에러 발생 시 반복 중단
           }
-        });
+        }
       }
     },
     [validateOnBlur]

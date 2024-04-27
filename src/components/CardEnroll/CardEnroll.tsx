@@ -11,7 +11,6 @@ import CardPassword from "../CardPassword/CardPassword";
 
 export default function CardEnroll() {
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
-  const [submitButton, setSubmitButton] = useState(false);
   const {
     step,
     cardNumbers,
@@ -21,6 +20,7 @@ export default function CardEnroll() {
     cardOwnerName,
     cardCVC,
     cardPassword,
+    isCompleted,
   } = useCardForm();
 
   const handlePreviewOnFocus = () => {
@@ -65,7 +65,7 @@ export default function CardEnroll() {
         )}
         {step[1] && <CardCompanySelect cardCompany={cardCompany} />}
         {step[0] && <CardNumbers cardNumbers={cardNumbers} />}
-        <button type="submit" disabled={!step[6]}>
+        <button type="submit" disabled={!isCompleted}>
           확인
         </button>
       </S.CardForm>
