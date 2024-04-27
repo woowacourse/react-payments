@@ -10,7 +10,6 @@ function App() {
         <Routes>
           <Route path="/" element={<CardInformationInputPage />}></Route>
           <Route path="/complete" element={<CompleteSubmitFormPage />}></Route>
-          <Route path="*" element={<div>not found</div>}></Route>
         </Routes>
       </BrowserRouter>
     </>
