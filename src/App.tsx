@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { COLOR } from './styles/color';
-import CompletePaymentRegister from './components/CompletePaymentsRegister/CompletePaymentsRegister';
+import CompletePaymentRegister from './components/completePaymentsRegister/CompletePaymentsRegister';
 import PATH from './constants/path';
 import { Path } from './type';
 import PayMents from './components/payments/Payments';

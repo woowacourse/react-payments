@@ -4,7 +4,7 @@ import { HTMLProps } from 'react';
 import ISSUER_KOREAN from '../../../constants/issuerKorean';
 import SectionTitle from '../../SectionTitle';
 import { UseCardIssuer } from '../../../hooks/payments/useCardIssuer';
-import dropdown from '../Images/dropdown.svg';
+import dropdown from '../../../Images/dropdown.svg';
 import styled from '@emotion/styled';
 
 interface OptionContainerProps extends React.HTMLProps<HTMLDivElement> {

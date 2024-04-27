@@ -3,7 +3,7 @@ import { COLOR } from '../../styles/color';
 import { Link } from 'react-router-dom';
 import PATH from '../../constants/path';
 import styled from '@emotion/styled';
-import wrongCat from '../Images/wrong_cat.png';
+import wrongCat from '../../Images/wrong_cat.png';
 
 interface Props {
   setLastPath: () => void;
