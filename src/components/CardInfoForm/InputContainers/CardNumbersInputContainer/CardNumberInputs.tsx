@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import Input from '../../../common/Input';
 
-import useFocusOnInitialRender from '../../../../hooks/useFocusOnInitialRender';
 import useRefs from '../../../../hooks/useRefs';
 import getObjectKeys from '../../../../utils/getObjectKeys';
 
@@ -21,7 +20,6 @@ export interface ICardNumberInputsProps {
 }
 
 export default function CardNumberInputs({ cardNumbers, isError, onBlur, generateOnChange }: ICardNumberInputsProps) {
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
   const cardNumberKeys = getObjectKeys(cardNumbers);
   const { getRefWithIndex, generateRefWithIndex } = useRefs<HTMLInputElement>(cardNumberKeys.length);
 
@@ -29,7 +27,7 @@ export default function CardNumberInputs({ cardNumbers, isError, onBlur, generat
     <>
       {cardNumberKeys.map((key, index) => {
         const type = PASSWORD_INPUT_KEYS.includes(key) ? INPUT_TYPE.password : INPUT_TYPE.text;
-        const refConfig = { ref: index === 0 ? initialFocusTargetRef : generateRefWithIndex(index) };
+        const refConfig = { ref: index === 0 ? null : generateRefWithIndex(index) };
 
         const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           generateOnChange(key)(e);
@@ -52,6 +50,7 @@ export default function CardNumberInputs({ cardNumbers, isError, onBlur, generat
             maxLength={4}
             type={type}
             width="23%"
+            autoFocus={index === 0}
             {...refConfig}
           />
         );

@@ -5,7 +5,6 @@ import InputContainer from '../../common/InputContainer';
 
 import useExpiryDate from '../../../hooks/useExpiryDate';
 import { IInputControl } from '../../../hooks/useInput';
-import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
 import * as S from '../../../styles/common';
 
 const MONTH_LENGTH = 2;
@@ -26,7 +25,6 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
     isMonthError,
     isYearError,
   } = useExpiryDate({ month, year });
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
   const secondInputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -38,7 +36,6 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
         labelFor="card-expiry-month-input"
       >
         <Input
-          ref={initialFocusTargetRef}
           id="card-expiry-month-input"
           isError={isMonthError}
           value={month.value}
@@ -53,6 +50,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           placeholder="01"
           maxLength={2}
           width="48%"
+          autoFocus={true}
         />
         <Input
           ref={secondInputRef}

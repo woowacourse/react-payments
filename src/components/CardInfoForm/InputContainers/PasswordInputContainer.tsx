@@ -3,11 +3,9 @@ import Input from '../../common/Input';
 
 import useDisplayingErrorStatus from '../../../hooks/useDisplayingErrorStatus';
 import { IInputControl } from '../../../hooks/useInput';
-import useFocusOnInitialRender from '../../../hooks/useFocusOnInitialRender';
 import * as S from '../../../styles/common';
 
 export default function PasswordInputContainer({ value, onChange, errorStatus }: IInputControl) {
-  const initialFocusTargetRef = useFocusOnInitialRender<HTMLInputElement>();
   const {
     displayingErrorStatus: { errorMessage, isError },
     bringErrorStatus,
@@ -22,7 +20,6 @@ export default function PasswordInputContainer({ value, onChange, errorStatus }:
         labelText="비밀번호 앞 2자리"
       >
         <Input
-          ref={initialFocusTargetRef}
           isError={isError}
           value={value}
           maxLength={2}
@@ -31,6 +28,7 @@ export default function PasswordInputContainer({ value, onChange, errorStatus }:
           onChange={onChange}
           onBlur={bringErrorStatus}
           placeholder="12"
+          autoFocus={true}
         />
       </InputContainer>
       <S.ErrorWrapper>
