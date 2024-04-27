@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import Input from "./Input";
 import FormField from "../common/FormField";
+import { FORM_REGEXP } from "../../constants/form";
+import { CVC_NUMBER_FORM } from "../../constants/form";
 
 import { ICardFormProps } from "./Form";
 
@@ -20,8 +22,7 @@ const CVCNumberForm = ({
   const [inputValidities, setInputValidities] = useState({ 0: false });
 
   const validateCVCNumber = (value: string) => {
-    const REGEXP = /[0-9]{3}/;
-    return value !== "" && REGEXP.test(value);
+    return FORM_REGEXP.validCVCNumber.test(value);
   };
 
   const updateInputValidity = (index: string, isValid: boolean) => {
@@ -39,7 +40,9 @@ const CVCNumberForm = ({
     setAllFormsValid(isAllValid);
 
     setErrorMessage(
-      isAllValid || !isGotInputOnce ? "" : "CVC 번호는 3자리 숫자입니다."
+      isAllValid || !isGotInputOnce
+        ? ""
+        : CVC_NUMBER_FORM.errorMessage.notThreeDigits
     );
 
     if (isAllValid) {
@@ -53,7 +56,7 @@ const CVCNumberForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
-      maxLength={3}
+      maxLength={CVC_NUMBER_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setCVCNumber ? setCVCNumber : () => {}}
       setAllInputValid={(isValid: boolean) =>

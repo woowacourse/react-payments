@@ -4,6 +4,7 @@ import Dropdown from "../common/Dropdown";
 import FormField from "../common/FormField";
 
 import { CARD_COMPANY } from "../../constants/card";
+import { CARD_COMPANY_FORM } from "../../constants/form";
 
 const CardCompanyForm = ({
   setCardCompany,
@@ -25,7 +26,10 @@ const CardCompanyForm = ({
       setAllFormsValid(true);
       setIsFormFilledOnce(true);
     } else {
-      if (isGotInputOnce) setErrorMessage("카드사를 선택해 주세요.");
+      if (isGotInputOnce) {
+        setErrorMessage(CARD_COMPANY_FORM.errorMessage.notSelected);
+      }
+
       setAllFormsValid(false);
     }
   }, [isSelected]);

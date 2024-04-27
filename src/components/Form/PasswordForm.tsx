@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import Input from "./Input";
 import FormElement from "../common/FormField";
+import { FORM_REGEXP } from "../../constants/form";
+import { PASSWORD_FORM } from "../../constants/form";
 
 import { ICardFormProps } from "./Form";
 
@@ -37,13 +39,12 @@ const PasswordForm = ({
     }
 
     setErrorMessage(
-      allValid || !isGotInputOnce ? "" : "비밀번호는 숫자 2자리입니다."
+      allValid || !isGotInputOnce ? "" : PASSWORD_FORM.errorMessage.notTwoDigits
     );
   }, [inputValidities]);
 
   const validatePassword = (passwordInput: string) => {
-    const regex = /[0-9]{2}/;
-    return regex.test(passwordInput);
+    return FORM_REGEXP.validPassword.test(passwordInput);
   };
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -52,7 +53,7 @@ const PasswordForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
-      maxLength={2}
+      maxLength={PASSWORD_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setPassword ? setPassword : () => {}}
       setAllInputValid={(isValid) =>
