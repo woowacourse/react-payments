@@ -25,9 +25,8 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
 
   const { cardNumbers, cardType, expiryDate, cardholderName, cvc, password } = cardInfoControl;
 
-  const sequence = useSequence(getObjectValues<boolean>(completionStatus));
-
   const completionFlags = getObjectValues<boolean>(completionStatus);
+  const sequence = useSequence(completionFlags);
   const isSubmitable = completionFlags.every((v: boolean) => v);
 
   const onSubmit = () => {
