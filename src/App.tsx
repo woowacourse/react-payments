@@ -1,13 +1,11 @@
-import AddCardForm from './components/AddCardForm/AddCardForm';
-import { AddCardFormProvider } from './context/AddCardFormContext';
 import './index.css';
+
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <AddCardFormProvider>
-        <AddCardForm />
-      </AddCardFormProvider>
+    <div className="app">
+      <Outlet />
     </div>
   );
 }

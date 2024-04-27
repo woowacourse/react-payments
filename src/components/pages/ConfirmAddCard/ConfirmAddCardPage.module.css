@@ -5,6 +5,8 @@
   align-items: center;
   gap: 25px;
 
+  width: fit-content;
+  height: 100%;
   margin: auto;
 }
 

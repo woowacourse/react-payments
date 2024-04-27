@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 interface ButtonProps {
   text: string;
-  theme: 'submit' | 'confirm';
+  theme: 'submit' | 'default';
   type: 'submit' | 'reset' | 'button';
   isActive?: boolean;
   onClick: (e: React.MouseEvent) => void;
@@ -20,7 +20,7 @@ export default function Button({
     <button
       className={clsx(styles.button, {
         [styles.submit]: theme === 'submit',
-        [styles.confirm]: theme === 'confirm',
+        [styles.default]: theme === 'default',
         [styles.active]: isActive,
       })}
       {...props}
