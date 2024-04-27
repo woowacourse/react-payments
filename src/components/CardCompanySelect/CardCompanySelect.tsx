@@ -1,5 +1,5 @@
 import { CARD_COMPANIES } from "../../constants/cardInformation";
-import { CaptionText, TitleText } from "../atoms/text";
+import { CaptionText, SubTitleText } from "../atoms/text";
 import * as S from "./style";
 
 interface Props {
@@ -14,7 +14,7 @@ export default function CardCompanySelect({ cardCompany }: Props) {
   return (
     <S.Wrapper>
       <div>
-        <TitleText>카드사를 선택해 주세요</TitleText>
+        <SubTitleText>카드사를 선택해 주세요</SubTitleText>
         <CaptionText>현재 국내 카드사만 가능합니다.</CaptionText>
       </div>
       <S.Select

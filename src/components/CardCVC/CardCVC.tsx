@@ -1,5 +1,5 @@
 import Input from "../atoms/Input/Input";
-import { TitleText, LabelText } from "../atoms/text";
+import { SubTitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as S from "./style";
 
@@ -16,7 +16,7 @@ export default function CardCVC({
 }: Props) {
   return (
     <S.CardOwnerNameContainer>
-      <TitleText>CVC</TitleText>
+      <SubTitleText>CVC</SubTitleText>
       <S.CardOwnerNameBox>
         <LabelText htmlFor="cardCVC">CVC</LabelText>
         <S.InputContainer>

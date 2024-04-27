@@ -1,5 +1,5 @@
 import Input from "../atoms/Input/Input";
-import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as S from "./style";
 
@@ -17,7 +17,7 @@ export default function CardNumbers({ cardNumbers }: Props) {
   return (
     <S.CardNumbersContainer>
       <div>
-        <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
+        <SubTitleText>결제할 카드 번호를 입력해 주세요</SubTitleText>
         <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
       </div>
       <S.CardNumberBox>

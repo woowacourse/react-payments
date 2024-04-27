@@ -1,5 +1,5 @@
 import Input from "../atoms/Input/Input";
-import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as S from "./style";
 
@@ -21,7 +21,7 @@ export default function CardExpirationDate({
   return (
     <S.CardDateContainer>
       <div>
-        <TitleText>카드 유효기간을 입력해 주세요</TitleText>
+        <SubTitleText>카드 유효기간을 입력해 주세요</SubTitleText>
         <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
       </div>
       <S.CardDateBox>
