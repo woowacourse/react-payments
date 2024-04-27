@@ -1,4 +1,4 @@
-const IS_PRODUCTION = false;
+const IS_PRODUCTION = true;
 const BASE_URL = IS_PRODUCTION ? '/dist/index.html' : '';
 
 const ROUTE_PATH = {
