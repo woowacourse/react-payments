@@ -18,14 +18,14 @@ function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<H
 
   const handleCardExpirationChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-    const cardExpirationValid = /^[0-9]]*/.test(value);
+    const cardExpirationValid = /^[0-9]*$/.test(value);
 
     const updatedCardExpiration = cardExpirationState.value.map((num, i) => (i === index ? value : num));
     const errorMessage = cardExpirationState.errorMessage.map((msg, i) => (i === index ? validators.cardExpiration(value, index) : msg));
     const isValid = updatedCardExpiration.every((number) => number.length === 2) && errorMessage.every((message) => !message);
     const isNextVisible = cardExpirationState.isNextVisible || isValid;
 
-    if (!errorMessage[index] && index < updatedCardExpiration.length - 1) {
+    if (value && !errorMessage[index] && index < updatedCardExpiration.length - 1) {
       const nextInput = e.target.nextSibling;
       if (nextInput && nextInput instanceof HTMLInputElement) {
         nextInput.focus();
