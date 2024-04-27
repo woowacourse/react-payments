@@ -61,7 +61,6 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
 const ExpirationDate = ({ expirationDate }: { expirationDate: Date }) => {
   const dateStringList = Object.values(expirationDate);
 
-  // 모두 빈 칸이라면 /를 띄우지 않도록
   if (dateStringList.every((date) => date === '')) return;
 
   return <span>{dateStringList.join('/')}</span>;
