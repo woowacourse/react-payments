@@ -40,6 +40,7 @@ export const Default: Story = {
     placeholder: '1234',
     onStateChange: () => {},
     maxLength: 4,
+    onHandleClicked: () => {},
   },
 };
 
@@ -53,5 +54,6 @@ export const Error: Story = {
     placeholder: '1234',
     onStateChange: () => {},
     maxLength: 4,
+    onHandleClicked: () => {},
   },
 };
