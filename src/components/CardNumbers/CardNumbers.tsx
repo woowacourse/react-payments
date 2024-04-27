@@ -1,49 +1,18 @@
-import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import useCardNumberInput from "../../hooks/useCardNumber";
 import * as S from "./style";
 
 interface Props {
-  cardNumbers: CardInfoValue[];
-  onChangeCardInfo: (inputValue: CardInfoValue[], inputId: string) => void;
-  onNext: () => void;
+  cardNumbers: CardNumbersType;
 }
 
-export default function CardNumbers({
-  cardNumbers,
-  onChangeCardInfo,
-  onNext,
-}: Props) {
-  const {
-    cardNumber1,
-    cardNumber2,
-    cardNumber3,
-    cardNumber4,
-    validateMessage,
-  } = useCardNumberInput();
-  const inputCardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
-
-  useEffect(() => {
-    // useEffect exhaustive-deps warning
-    const isChanged = cardNumbers.some(
-      (card, idx) =>
-        card.value !== inputCardNumbers[idx].value ||
-        card.isError !== (inputCardNumbers[idx].validateMessage !== "")
-    );
-
-    if (isChanged) {
-      const newCardNumbers = cardNumbers.map((card, idx) => ({
-        ...card,
-        value: inputCardNumbers[idx].value,
-        isError: inputCardNumbers[idx].validateMessage !== "",
-      }));
-
-      onChangeCardInfo(newCardNumbers, "cardNumbers");
-      onNext();
-    }
-  }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4]);
+export default function CardNumbers({ cardNumbers }: Props) {
+  const errorMessage = cardNumbers
+    .map((cardNumber) => {
+      return cardNumber.validateMessage;
+    })
+    .find((msg) => msg !== "");
 
   return (
     <S.CardNumbersContainer>
@@ -63,14 +32,14 @@ export default function CardNumbers({
                 maxLength={4}
                 placeholder="1234"
                 value={cardNumber.value}
-                isError={cardNumber.isError}
-                onChange={inputCardNumbers[idx].onChange}
-                onBlur={inputCardNumbers[idx].onBlur}
+                isError={cardNumber.validateMessage !== ""}
+                onChange={cardNumber.onChange}
+                onBlur={cardNumber.onBlur}
               />
             );
           })}
         </S.InputContainer>
-        <ErrorMessage message={validateMessage} />
+        <ErrorMessage message={errorMessage || ""} />
       </S.CardNumberBox>
     </S.CardNumbersContainer>
   );

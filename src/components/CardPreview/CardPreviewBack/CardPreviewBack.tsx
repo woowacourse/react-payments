@@ -1,14 +1,14 @@
 import * as S from "./style";
 
 interface Props {
-  cardInformation: CardInformation;
+  cardCVC: string;
 }
 
-export default function CardPreviewBack({ cardInformation }: Props) {
+export default function CardPreviewBack({ cardCVC }: Props) {
   return (
     <S.CardContainer>
       <S.CardCVCContainer>
-        <S.PreviewText>{cardInformation.cardCVC.value}</S.PreviewText>
+        <S.PreviewText>{cardCVC}</S.PreviewText>
       </S.CardCVCContainer>
     </S.CardContainer>
   );

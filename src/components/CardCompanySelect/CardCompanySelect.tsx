@@ -3,24 +3,10 @@ import { CaptionText, TitleText } from "../atoms/text";
 import * as S from "./style";
 
 interface Props {
-  cardCompany: CardInfoValue;
-  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
-  onNext: () => void;
+  cardCompany: CardCompanyType;
 }
 
-export default function CardCompanySelect({
-  cardCompany,
-  onChangeCardInfo,
-  onNext,
-}: Props) {
-  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    const newSelectValue = cardCompany;
-
-    newSelectValue.value = value;
-    onChangeCardInfo(newSelectValue, "cardCompany");
-    onNext();
-  };
+export default function CardCompanySelect({ cardCompany }: Props) {
   const cardCompanies = Object.values(CARD_COMPANIES).map(
     (company) => company.name
   );
@@ -31,7 +17,11 @@ export default function CardCompanySelect({
         <TitleText>카드사를 선택해 주세요</TitleText>
         <CaptionText>현재 국내 카드사만 가능합니다.</CaptionText>
       </div>
-      <S.Select name="cardCompany" onChange={onChangeSelect} defaultValue={""}>
+      <S.Select
+        name="cardCompany"
+        onChange={cardCompany.onChange}
+        defaultValue={""}
+      >
         <option key={"default"} value="">
           카드사를 선택해주세요.
         </option>

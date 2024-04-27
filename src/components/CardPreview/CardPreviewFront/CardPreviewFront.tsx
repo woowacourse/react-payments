@@ -3,34 +3,42 @@ import { getCompanyColor } from "../../../utils/getCompanyColor";
 import * as S from "./style";
 
 interface Props {
-  cardInformation: CardInformation;
+  cardNumbers: string[];
+  cardCompany: string;
+  cardExpirationMonth: string;
+  cardExpirationYear: string;
+  cardOwnerName: string;
 }
 
-export default function CardPreviewFront({ cardInformation }: Props) {
-  const cardBrandImg = getCardBrandImg(cardInformation.cardNumbers[0].value);
+export default function CardPreviewFront({
+  cardNumbers,
+  cardCompany,
+  cardExpirationMonth,
+  cardExpirationYear,
+  cardOwnerName,
+}: Props) {
+  const cardBrandImg = getCardBrandImg(cardNumbers[0]);
 
   return (
-    <S.CardContainer
-      cardCompanyColor={getCompanyColor(cardInformation.cardCompany.value)}
-    >
+    <S.CardContainer cardCompanyColor={getCompanyColor(cardCompany)}>
       <S.CardHeader>
         <S.CardIC />
         {cardBrandImg && <S.CardBrandImg src={cardBrandImg} />}
       </S.CardHeader>
       <S.CardInfoContainer>
         <S.CardPreviewTextContainer>
-          <S.PreviewText>{cardInformation.cardNumbers[0].value}</S.PreviewText>
-          <S.PreviewText>{cardInformation.cardNumbers[1].value}</S.PreviewText>
+          <S.PreviewText>{cardNumbers[0]}</S.PreviewText>
+          <S.PreviewText>{cardNumbers[1]}</S.PreviewText>
           <S.HiddenNumberContainer>
             {Array.from({
-              length: cardInformation.cardNumbers[2].value.length,
+              length: cardNumbers[2].length,
             }).map((_, index) => (
               <S.HiddenNumber key={index} />
             ))}
           </S.HiddenNumberContainer>
           <S.HiddenNumberContainer>
             {Array.from({
-              length: cardInformation.cardNumbers[3].value.length,
+              length: cardNumbers[3].length,
             }).map((_, index) => (
               <S.HiddenNumber key={index} />
             ))}
@@ -38,17 +46,13 @@ export default function CardPreviewFront({ cardInformation }: Props) {
         </S.CardPreviewTextContainer>
         <S.CardPreviewTextContainer>
           <div>
-            <S.PreviewText>
-              {cardInformation.cardExpirationMonth.value}
-            </S.PreviewText>
-            {cardInformation.cardExpirationMonth.value.length === 2 && "/"}
-            <S.PreviewText>
-              {cardInformation.cardExpirationYear.value}
-            </S.PreviewText>
+            <S.PreviewText>{cardExpirationMonth}</S.PreviewText>
+            {cardExpirationMonth.length === 2 && "/"}
+            <S.PreviewText>{cardExpirationYear}</S.PreviewText>
           </div>
         </S.CardPreviewTextContainer>
         <S.CardPreviewTextContainer>
-          <S.PreviewText>{cardInformation.cardOwnerName.value}</S.PreviewText>
+          <S.PreviewText>{cardOwnerName}</S.PreviewText>
         </S.CardPreviewTextContainer>
       </S.CardInfoContainer>
     </S.CardContainer>

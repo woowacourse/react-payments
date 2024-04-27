@@ -1,33 +1,13 @@
-import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { isCardCVCLength, isCardNumber } from "../../utils/validators";
-import useInput from "../../hooks/useInput";
 import * as S from "./style";
 
 interface Props {
-  cardCVC: CardInfoValue;
-  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
-  onNext: () => void;
+  cardCVC: UseInputReturn;
 }
 
-export default function CardCVC({ cardCVC, onChangeCardInfo, onNext }: Props) {
-  const { value, onChange, onBlur, validateMessage } = useInput("", {
-    validateOnChange: [isCardNumber],
-    validateOnBlur: [isCardNumber, isCardCVCLength],
-  });
-
-  useEffect(() => {
-    const newCardCVC = cardCVC;
-
-    newCardCVC.value = value;
-    newCardCVC.isError = validateMessage !== "";
-
-    onChangeCardInfo(newCardCVC, "cardCVC");
-    onNext();
-  }, [value, validateMessage]);
-
+export default function CardCVC({ cardCVC }: Props) {
   return (
     <S.CardOwnerNameContainer>
       <TitleText>CVC</TitleText>
@@ -39,12 +19,12 @@ export default function CardCVC({ cardCVC, onChangeCardInfo, onNext }: Props) {
             maxLength={3}
             placeholder="123"
             value={cardCVC.value}
-            isError={cardCVC.isError}
-            onChange={onChange}
-            onBlur={onBlur}
+            isError={cardCVC.validateMessage !== ""}
+            onChange={cardCVC.onChange}
+            onBlur={cardCVC.onBlur}
           />
         </S.InputContainer>
-        <ErrorMessage message={validateMessage} />
+        <ErrorMessage message={cardCVC.validateMessage || ""} />
       </S.CardOwnerNameBox>
     </S.CardOwnerNameContainer>
   );

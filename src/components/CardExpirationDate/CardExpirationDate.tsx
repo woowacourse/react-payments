@@ -1,57 +1,22 @@
-import { useEffect } from "react";
 import Input from "../atoms/Input/Input";
 import { TitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import * as S from "./style";
-import useCardDateInput from "../../hooks/useCardDateInput";
 
 interface Props {
-  cardExpirationMonth: CardInfoValue;
-  cardExpirationYear: CardInfoValue;
-  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
-  onNext: () => void;
+  cardExpirationMonth: UseInputReturn;
+  cardExpirationYear: UseInputReturn;
 }
 
 export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
-  onChangeCardInfo,
-  onNext,
 }: Props) {
-  const { cardMonth, cardYear, validateMessage } = useCardDateInput();
-
-  useEffect(() => {
-    // useEffect exhaustive-deps warning
-    const isMonthChanged =
-      cardExpirationMonth.value !== cardMonth.value ||
-      cardExpirationMonth.isError !== (cardMonth.validateMessage !== "");
-
-    if (isMonthChanged) {
-      const newCardExpirationMonth = cardExpirationMonth;
-
-      newCardExpirationMonth.value = cardMonth.value;
-      newCardExpirationMonth.isError = cardMonth.validateMessage !== "";
-
-      onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
-      onNext();
-    }
-  }, [cardMonth, validateMessage]);
-
-  useEffect(() => {
-    const isYearChanged =
-      cardExpirationYear.value !== cardYear.value ||
-      cardExpirationYear.isError !== (cardYear.validateMessage !== "");
-
-    if (isYearChanged) {
-      const newCardExpirationYear = cardExpirationYear;
-
-      newCardExpirationYear.value = cardYear.value;
-      newCardExpirationYear.isError = cardYear.validateMessage !== "";
-
-      onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
-      onNext();
-    }
-  }, [cardYear, validateMessage]);
+  const errorMessage = [cardExpirationMonth, cardExpirationYear]
+    .map((date) => {
+      return date.validateMessage;
+    })
+    .find((msg) => msg !== "");
 
   return (
     <S.CardDateContainer>
@@ -68,9 +33,9 @@ export default function CardExpirationDate({
             maxLength={2}
             placeholder="MM"
             value={cardExpirationMonth.value}
-            isError={cardExpirationMonth.isError}
-            onChange={cardMonth.onChange}
-            onBlur={cardMonth.onBlur}
+            isError={cardExpirationMonth.validateMessage !== ""}
+            onChange={cardExpirationMonth.onChange}
+            onBlur={cardExpirationMonth.onBlur}
           />
           <Input
             id="cardExpirationYear"
@@ -78,12 +43,12 @@ export default function CardExpirationDate({
             maxLength={2}
             placeholder="YY"
             value={cardExpirationYear.value}
-            isError={cardExpirationYear.isError}
-            onChange={cardYear.onChange}
-            onBlur={cardYear.onBlur}
+            isError={cardExpirationYear.validateMessage !== ""}
+            onChange={cardExpirationYear.onChange}
+            onBlur={cardExpirationYear.onBlur}
           />
         </S.InputContainer>
-        <ErrorMessage message={validateMessage} />
+        <ErrorMessage message={errorMessage || ""} />
       </S.CardDateBox>
     </S.CardDateContainer>
   );
