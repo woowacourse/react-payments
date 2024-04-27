@@ -1,7 +1,11 @@
+// CardExpirationPeriodInput.tsx
+import React, { useEffect, useRef } from 'react';
+
 import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../../../constants';
+import useAutoFocus from '../../../../hooks/useAutoFocus';
 import Input from '../../../common/Input';
 import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
@@ -35,6 +39,13 @@ function CardExpirationPeriodInput({
 }: CardExpirationPeriodInputProps) {
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
+  const { setElementRef, focusElementAtIndex } = useAutoFocus(maxLength);
+
+  useEffect(() => {
+    if (period.month.length === maxLength) {
+      focusElementAtIndex(1);
+    }
+  }, [period.month]);
 
   const getErrorMessage = () => {
     if (periodErrors.month) {
@@ -56,6 +67,7 @@ function CardExpirationPeriodInput({
         <div>
           <div className={styles.inputWrap}>
             <Input
+              ref={(element) => setElementRef(element, 0)}
               type="number"
               name="month"
               value={period.month}
@@ -65,6 +77,7 @@ function CardExpirationPeriodInput({
               onChange={(event) => onPeriodChange('month', event.target.value)}
             />
             <Input
+              ref={(element) => setElementRef(element, 1)}
               type="number"
               name="year"
               value={period.year}
