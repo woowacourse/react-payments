@@ -8,6 +8,7 @@ import * as S from "./style";
 import CardCVC from "../CardCVC/CardCVC";
 import useCardForm from "../../hooks/useCardForm";
 import CardPassword from "../CardPassword/CardPassword";
+import { FormButton } from "../FormButton/FormButton";
 
 export default function CardEnroll() {
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
@@ -32,6 +33,7 @@ export default function CardEnroll() {
 
   const onSubmitCardInfo = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log("submit");
   };
 
   return (
@@ -65,9 +67,9 @@ export default function CardEnroll() {
         )}
         {step[1] && <CardCompanySelect cardCompany={cardCompany} />}
         {step[0] && <CardNumbers cardNumbers={cardNumbers} />}
-        <button type="submit" disabled={!isCompleted}>
+        <FormButton type="submit" disabled={!isCompleted}>
           확인
-        </button>
+        </FormButton>
       </S.CardForm>
     </S.CardEnrollContainer>
   );

@@ -6,6 +6,7 @@ const theme = {
     cardPreviewICBorder: "rgba(221, 205, 120, 0.1)",
     input: "rgba(172, 172, 172, 1)",
     inputError: "rgba(255, 61, 61, 1)",
+    button: "rgba(51, 51, 51, 1)",
   },
   cardThemeColor: {
     default: "rgba(172, 172, 172, 1)",

@@ -14,7 +14,6 @@ import useInput from "./useInput";
 import useSelect from "./useSelect";
 
 const useCardForm = () => {
-  // const [numbersErrorMessage, setNumbersErrorMessage] = useState("");
   const [step, setStep] = useState([
     true,
     false,
@@ -152,22 +151,6 @@ const useCardForm = () => {
     cardPassword,
   ]);
 
-  // useEffect(() => {
-  //   const messages = [
-  //     cardNumber1.validateMessage,
-  //     cardNumber2.validateMessage,
-  //     cardNumber3.validateMessage,
-  //     cardNumber4.validateMessage,
-  //   ];
-  //   const firstErrorMessage = messages.find((msg) => msg !== "");
-  //   setNumbersErrorMessage(firstErrorMessage || "");
-  // }, [
-  //   cardNumber1.validateMessage,
-  //   cardNumber2.validateMessage,
-  //   cardNumber3.validateMessage,
-  //   cardNumber4.validateMessage,
-  // ]);
-
   return {
     step,
     cardNumbers,
@@ -178,7 +161,6 @@ const useCardForm = () => {
     cardCVC,
     cardPassword,
     isCompleted,
-    // numbersErrorMessage,
   };
 };
 
