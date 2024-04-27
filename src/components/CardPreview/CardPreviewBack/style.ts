@@ -7,6 +7,7 @@ export const CardContainer = styled.div`
   background: rgba(213, 213, 213, 1);
   border-radius: 4px;
   color: ${({ theme }) => theme.colors.cardPreviewText};
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const CardCVCContainer = styled.div`
