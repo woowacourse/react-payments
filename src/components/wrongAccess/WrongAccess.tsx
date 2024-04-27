@@ -7,10 +7,12 @@ import wrongCat from '../../Images/wrong_cat.png';
 
 interface Props {
   setLastPath: () => void;
+  resetCardInfo: () => void;
 }
 
-export default function WrongAccess({ setLastPath }: Props) {
+export default function WrongAccess({ setLastPath, resetCardInfo }: Props) {
   setLastPath();
+  resetCardInfo();
   return (
     <CompleteWrapper>
       <CompleteContentsContainer>
