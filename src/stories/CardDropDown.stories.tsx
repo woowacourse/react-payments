@@ -25,7 +25,7 @@ export const DropdownClicked = {
     view: true, // Simulate dropdown being open by default
     selected: '카드사를 선택해주세요',
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement } : {canvasElement : HTMLElement}) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByText('카드사를 선택해주세요'));
   },
@@ -36,7 +36,7 @@ export const ItemSelected = {
     ...Template.args,
     selected: 'BC카드',
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement } : {canvasElement : HTMLElement}) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByText('카드사를 선택해주세요'));
     await userEvent.click(canvas.getByText('BC카드')); // Simulating item selection

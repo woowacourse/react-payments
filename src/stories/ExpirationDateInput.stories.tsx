@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import ExpirationDateInput from '../components/InputComponent/ExpirationDateInput';
 import { action } from '@storybook/addon-actions';
-import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 
 export default {
   title: 'Components/ExpirationDateInput',

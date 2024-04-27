@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CardNumberInput from '../components/InputComponent/CardNumberInput';
 import { action } from '@storybook/addon-actions';
-import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 
 export default {
   title: 'Components/CardNumberInput',
