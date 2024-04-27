@@ -1,0 +1,12 @@
+.background {
+  border-radius: 10px;
+  background-color: #e9e9e9;
+  width: 100%;
+  height: 0.5rem;
+}
+.bar {
+  transition: width ease 1s;
+  border-radius: 10px;
+  background-color: #acaaaa;
+  height: 100%;
+}

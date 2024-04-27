@@ -43,7 +43,7 @@ export const INITIAL_CARD_INFO: CardInfo = {
     year: null,
   },
   userName: null,
-  company: CARD_COMPANY.get('etc') || null,
+  company: null,
   cvc: null,
   password: null,
 };

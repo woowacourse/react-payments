@@ -11,6 +11,8 @@ export const CARD_FORM_STEP = {
   numbers: 1,
 };
 
+export const NUMBER_OF_CARD_FORM_STEP = Object.keys(CARD_FORM_STEP).length;
+
 export type CardStep = keyof typeof CARD_FORM_STEP;
 
 export const CARD_NUMBERS = {

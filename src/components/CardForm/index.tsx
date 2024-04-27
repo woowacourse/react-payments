@@ -8,9 +8,13 @@ import {
   useState,
 } from 'react';
 
-import { CardStep } from '../../constants';
+import { CardStep, NUMBER_OF_CARD_FORM_STEP } from '../../constants';
 import CardFormContext from '../../contexts/CardFormContext';
-import { useCleanURL, useMoveToPage } from '../../hooks';
+import {
+  useCalculateCompletedCardInfo,
+  useCleanURL,
+  useMoveToPage,
+} from '../../hooks';
 import CardCompanySelect from '../CardCompanySelect';
 import CardCVCInput from '../CardCVCInput';
 import CardExpirationPeriodInput from '../CardExpirationPeriodInput';
@@ -24,7 +28,12 @@ function CardForm() {
   const cardFormContext = useContext(CardFormContext);
 
   const { navigateToPage } = useMoveToPage('cardConfirmation');
+  const { numberOfCompletedCardInfo } = useCalculateCompletedCardInfo({
+    cardInfo: cardFormContext?.cardInfo,
+  });
+
   const [openFormFields, setOpenFormFields] = useState<CardStep[]>(['numbers']);
+
   const layoutRef = useRef<HTMLElement>();
   useCleanURL();
 
@@ -34,22 +43,27 @@ function CardForm() {
   /**
    * 카드 정보 입력이 왼료되었는지 확인
    */
-  const isCardEnrollmentCompleted = useMemo(() => {
-    if (!cardFormContext) return;
+  // const isCardEnrollmentCompleted = useMemo(() => {
+  //   if (!cardFormContext) return;
 
-    return Object.entries(cardFormContext?.cardInfo)
-      .map(([key, value]) => {
-        // value의 타입에 따라서 입력 완료 검사 진행
-        if (!value) return false;
-        if (key === 'userName') return !!value;
-        if (key === 'period') return value.month && value.year;
-        if (key === 'numbers')
-          return Object.values(value).every((number) => !!number);
+  //   return Object.entries(cardFormContext?.cardInfo)
+  //     .map(([key, value]) => {
+  //       // value의 타입에 따라서 입력 완료 검사 진행
+  //       if (!value) return false;
+  //       if (key === 'userName') return !!value;
+  //       if (key === 'period') return value.month && value.year;
+  //       if (key === 'numbers')
+  //         return Object.values(value).every((number) => !!number);
 
-        return !!value;
-      })
-      .every((i) => i);
-  }, [cardFormContext?.cardInfo]);
+  //       return !!value;
+  //     })
+  //     .every((i) => i);
+  // }, [cardFormContext?.cardInfo]);
+
+  const isCardEnrollmentCompleted = useMemo(
+    () => NUMBER_OF_CARD_FORM_STEP === numberOfCompletedCardInfo,
+    [numberOfCompletedCardInfo],
+  );
 
   /**
    * layout이 적용되는 지 여부에 따라 btn의 위치 조정
