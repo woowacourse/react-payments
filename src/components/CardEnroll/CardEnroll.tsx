@@ -7,6 +7,7 @@ import CardCompanySelect from "../CardCompanySelect/CardCompanySelect";
 import * as S from "./style";
 import CardCVC from "../CardCVC/CardCVC";
 import useCardForm from "../../hooks/useCardForm";
+import CardPassword from "../CardPassword/CardPassword";
 
 export default function CardEnroll() {
   const [previewStatus, setPreviewStatus] = useState<"front" | "back">("front");
@@ -19,6 +20,7 @@ export default function CardEnroll() {
     cardExpirationYear,
     cardOwnerName,
     cardCVC,
+    cardPassword,
   } = useCardForm();
 
   const handlePreviewOnFocus = () => {
@@ -46,6 +48,7 @@ export default function CardEnroll() {
         previewStatus={previewStatus}
       />
       <S.CardForm onSubmit={onSubmitCardInfo}>
+        {step[5] && <CardPassword cardPassword={cardPassword} />}
         {step[4] && (
           <CardCVC
             cardCVC={cardCVC}
@@ -62,7 +65,7 @@ export default function CardEnroll() {
         )}
         {step[1] && <CardCompanySelect cardCompany={cardCompany} />}
         {step[0] && <CardNumbers cardNumbers={cardNumbers} />}
-        <button type="submit" disabled={!submitButton}>
+        <button type="submit" disabled={!step[6]}>
           확인
         </button>
       </S.CardForm>

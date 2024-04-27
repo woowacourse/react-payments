@@ -83,3 +83,10 @@ export const isCardCVCLength = (value: string) => {
   }
   return "";
 };
+
+export const isPasswordLength = (value: string) => {
+  if (value.length !== CARD_INFO.PASSWORD_LENGTH) {
+    return ERROR.CARD_PASSWORD_LENGTH;
+  }
+  return "";
+};

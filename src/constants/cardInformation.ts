@@ -6,6 +6,7 @@ export const CARD_INFO = {
   MONTH_END: 12,
   VALID_YEAR: 24,
   CVC_LENGTH: 3,
+  PASSWORD_LENGTH: 2,
 };
 
 export const OWNER_NAME_REG = /^[A-Z\s]*$/; // 영문자 대문자 또는 공백만 허용

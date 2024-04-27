@@ -6,6 +6,7 @@ import {
   isCardNumberLength,
   isCardYear,
   isOwnerNameLength,
+  isPasswordLength,
   isUpperCase,
 } from "../utils/validators";
 import useInput from "./useInput";
@@ -13,7 +14,15 @@ import useSelect from "./useSelect";
 
 const useCardForm = () => {
   // const [numbersErrorMessage, setNumbersErrorMessage] = useState("");
-  const [step, setStep] = useState([true, false, false, false, false, false]);
+  const [step, setStep] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const cardNumber1 = useInput("", {
     validateOnChange: [isCardNumber],
@@ -59,6 +68,11 @@ const useCardForm = () => {
     validateOnBlur: [isCardNumber, isCardCVCLength],
   });
 
+  const cardPassword = useInput("", {
+    validateOnChange: [isCardNumber],
+    validateOnBlur: [isCardNumber, isPasswordLength],
+  });
+
   const changeNextStep = (index: number) => {
     const newStep = [...step];
 
@@ -79,6 +93,8 @@ const useCardForm = () => {
       cardOwnerName.value !== "" && cardOwnerName.validateMessage === "";
     const cardCVCCompleted =
       cardCVC.value !== "" && cardCVC.validateMessage === "";
+    const cardPasswordCompleted =
+      cardPassword.value !== "" && cardPassword.validateMessage === "";
 
     if (!step[1] && cardNumbersCompleted) {
       changeNextStep(1);
@@ -95,7 +111,19 @@ const useCardForm = () => {
     if (!step[5] && cardCVCCompleted) {
       changeNextStep(5);
     }
-  }, [cardNumbers, cardCompany, cardExpirationMonth, cardExpirationYear, step]);
+    if (!step[6] && cardPasswordCompleted) {
+      changeNextStep(6);
+    }
+  }, [
+    cardNumbers,
+    cardCompany,
+    cardExpirationMonth,
+    cardExpirationYear,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+    step,
+  ]);
 
   // useEffect(() => {
   //   const messages = [
@@ -121,6 +149,7 @@ const useCardForm = () => {
     cardExpirationYear,
     cardOwnerName,
     cardCVC,
+    cardPassword,
     // numbersErrorMessage,
   };
 };
