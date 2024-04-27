@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const BottomButtonBox = styled.button`
   background-color: black;
   color: #ffffff;
-  position: fixed;
+  position: sticky;
   width: 100%;
   height: 10%;
   bottom: 0;
