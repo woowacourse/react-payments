@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { COLOR } from './styles/color';
 import CompletePaymentRegister from './components/completePaymentsRegister/CompletePaymentsRegister';
@@ -62,19 +62,22 @@ export default function App() {
   );
 
   const wrongAccessElement = (
-    <WrongAccess setLastPath={() => (lastPath.current = PATH.wrongAccess)} />
+    <WrongAccess
+      setLastPath={() => (lastPath.current = PATH.wrongAccess)}
+      resetCardInfo={resetCardInfo}
+    />
   );
 
   return (
     <AppWrapper>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
-          <Route path='/' element={paymentsElement}></Route>
+          <Route path='/#' element={paymentsElement}></Route>
           <Route path={PATH.payments} element={paymentsElement}></Route>
           {lastPath.current === PATH.payments && completePaymentRoute}
           <Route path='*' element={wrongAccessElement}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppWrapper>
   );
 }

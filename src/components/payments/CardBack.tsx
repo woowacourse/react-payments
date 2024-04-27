@@ -9,7 +9,7 @@ interface Props {
 export default function CardBack({ cvc }: Props) {
   return (
     <CardPreviewContainer>
-      <Magnetic>{cvc}</Magnetic>
+      <Magnetic>{cvc === '' ? '' : cvc}</Magnetic>
     </CardPreviewContainer>
   );
 }
@@ -29,6 +29,7 @@ const CardPreviewContainer = styled.section<CardPreviewContainerProps>({
   color: COLOR.white,
 });
 const Magnetic = styled.div({
+  minHeight: '20px',
   boxSizing: 'border-box',
   position: 'relative',
   backgroundColor: COLOR.yellow,
