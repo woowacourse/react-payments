@@ -4,27 +4,27 @@ import {
   cardIssuerMapper,
 } from "../../../constants/cardIssuers";
 import { CaptionText, TitleText } from "../../../styles/common";
-import { useEffect, useRef } from "react";
 
 import { CardIssuerErrorState } from "../../../hooks/useCardIssuer";
 import ErrorMessage from "../../common/ErrorMessage";
 import Select from "../../common/Select";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export interface CardIssuerSelectProps {
   valueState: CardIssuer | "";
   errorState: CardIssuerErrorState;
+  selectRef: React.RefObject<HTMLSelectElement>;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
 export default function CardIssuerSelect({
   errorState,
+  selectRef,
   onChange,
   onBlur,
 }: CardIssuerSelectProps) {
-  const selectRef = useRef<HTMLSelectElement>(null);
-
   useEffect(() => {
     selectRef.current?.focus();
   }, []);

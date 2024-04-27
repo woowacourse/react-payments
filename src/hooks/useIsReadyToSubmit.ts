@@ -37,7 +37,7 @@ const isExistError = (cardInformationErrorState: CardInformationErrorState) => {
 
 type dependencies = [CardInformationValueState, CardInformationErrorState];
 
-const useIsReadyForSubmit = ([
+const useIsReadyToSubmit = ([
   cardInformationValueState,
   cardInformationErrorState,
 ]: dependencies) => {
@@ -53,4 +53,4 @@ const useIsReadyForSubmit = ([
   return isReadyForSubmit;
 };
 
-export default useIsReadyForSubmit;
+export default useIsReadyToSubmit;

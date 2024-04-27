@@ -1,14 +1,15 @@
 import { LabelText, TitleText } from "../../../styles/common";
-import { useEffect, useRef } from "react";
 
 import { CardCvcErrorState } from "../../../hooks/useCardCvc";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export interface CardCvcInputProps {
   valueState: string;
   errorState: CardCvcErrorState;
+  inputRef: React.RefObject<HTMLInputElement>;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus: () => void;
@@ -17,12 +18,11 @@ export interface CardCvcInputProps {
 export default function CardCvcInput({
   valueState,
   errorState,
+  inputRef,
   onChange,
   onBlur,
   onFocus,
 }: CardCvcInputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     inputRef.current?.focus();
   }, []);

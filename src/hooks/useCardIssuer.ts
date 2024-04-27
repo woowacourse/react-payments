@@ -1,5 +1,5 @@
 import { CardIssuer, isCardIssuer } from "../constants/cardIssuers";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CardIssuerSelectProps } from "../components/payment/CardEnrollForm/CardIssuerSelect";
 import useBoolean from "./common/useBoolean";
@@ -16,7 +16,7 @@ export interface CardIssuerErrorState {
 }
 
 interface UseCardIssuerReturnType {
-  isDone: boolean;
+  isDoneThisStep: boolean;
   cardIssuerSelectProps: CardIssuerSelectProps;
 }
 
@@ -27,7 +27,9 @@ const useCardIssuer = (): UseCardIssuerReturnType => {
     errorMessage: "",
   });
 
-  const { flag: isDone, setTrue: updateDone } = useBoolean();
+  const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
+
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (!isCardIssuer(event.target.value)) {
@@ -48,19 +50,20 @@ const useCardIssuer = (): UseCardIssuerReturnType => {
   };
 
   useEffect(() => {
-    if (isDone) {
+    if (isDoneThisStep) {
       return;
     }
-    if (valueState !== "") {
+    if (isCardIssuer(valueState)) {
       updateDone();
     }
   }, [valueState]);
 
   return {
-    isDone,
+    isDoneThisStep,
     cardIssuerSelectProps: {
       valueState,
       errorState,
+      selectRef: selectRef,
       onChange,
       onBlur,
     },

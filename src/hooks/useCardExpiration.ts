@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CardExpirationDateInputProps } from "../components/payment/CardEnrollForm/CardExpirationDateInput";
 import isNumericString from "../utils/isNumericString";
@@ -56,6 +56,11 @@ export interface CardExpiration {
   year: string;
 }
 
+export type CardExpirationRefs = [
+  React.RefObject<HTMLInputElement>,
+  React.RefObject<HTMLInputElement>,
+];
+
 export interface CardExpirationErrorState {
   isError: {
     month: boolean;
@@ -65,7 +70,7 @@ export interface CardExpirationErrorState {
 }
 
 interface UseCardExpirationReturnType {
-  isDone: boolean;
+  isDoneThisStep: boolean;
   cardExpirationDateInputProps: CardExpirationDateInputProps;
 }
 const useCardExpiration = (): UseCardExpirationReturnType => {
@@ -82,9 +87,17 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
     errorMessage: "",
   });
 
-  const { flag: isDone, setTrue: updateDone } = useBoolean();
+  const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
 
-  const updateValueState = (inputValue: string, targetKey: string) => {
+  const inputRefs: CardExpirationRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const updateValueState = (
+    inputValue: string,
+    targetKey: CardExpirationKeys
+  ) => {
     setValueState((prev) => ({
       ...prev,
       [targetKey]: inputValue,
@@ -93,7 +106,7 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
 
   const updateErrorState = (
     inputValue: boolean,
-    targetKey: string,
+    targetKey: CardExpirationKeys,
     errorMessage: string
   ) => {
     setErrorState((prev) => ({
@@ -102,24 +115,37 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
     }));
   };
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+  const moveFocusNextFieldIfCompleted = (
+    inputValue: string,
     targetKey: CardExpirationKeys
   ) => {
-    try {
-      validateToBlock[targetKey](event.target.value);
-      updateValueState(event.target.value, targetKey);
-      validateToInform[targetKey](event.target.value);
-      updateErrorState(false, targetKey, "");
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState(true, targetKey, error.message);
-      }
+    if (inputValue.length < 2 || targetKey === "year") {
+      return;
+    }
+    if (targetKey === "month") {
+      inputRefs[1].current?.focus();
     }
   };
 
+  const onChange =
+    (targetKey: CardExpirationKeys) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        const { value } = event.target;
+        validateToBlock[targetKey](value);
+        updateValueState(value, targetKey);
+        validateToInform[targetKey](value);
+        updateErrorState(false, targetKey, "");
+        moveFocusNextFieldIfCompleted(value, targetKey);
+      } catch (error) {
+        if (error instanceof Error) {
+          updateErrorState(true, targetKey, error.message);
+        }
+      }
+    };
+
   useEffect(() => {
-    if (isDone) {
+    if (isDoneThisStep) {
       return;
     }
     if (valueState.month === "" || valueState.year === "") {
@@ -132,10 +158,11 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
   }, [valueState, errorState]);
 
   return {
-    isDone,
+    isDoneThisStep,
     cardExpirationDateInputProps: {
       valueState,
       errorState,
+      inputRefs,
       onChange,
     },
   };

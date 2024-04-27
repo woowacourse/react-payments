@@ -3,53 +3,32 @@ import {
   CardExpiration,
   CardExpirationErrorState,
   CardExpirationKeys,
+  CardExpirationRefs,
 } from "../../../hooks/useCardExpiration";
-import { useEffect, useRef } from "react";
 
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export interface CardExpirationDateInputProps {
   valueState: CardExpiration;
   errorState: CardExpirationErrorState;
+  inputRefs: CardExpirationRefs;
   onChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
     targetKey: CardExpirationKeys
-  ) => void;
+  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CardExpirationDateInput({
   valueState,
   errorState,
+  inputRefs,
   onChange,
 }: CardExpirationDateInputProps) {
-  const firstInputRef = useRef<HTMLInputElement>(null);
-  const secondInputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
-    firstInputRef.current?.focus();
+    inputRefs[0].current?.focus();
   }, []);
-
-  const onInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    targetKey: CardExpirationKeys
-  ) => {
-    const { value } = event.target;
-
-    if (value.length < 2) {
-      onChange(event, targetKey);
-      return;
-    }
-    if (targetKey === "month") {
-      onChange(event, targetKey);
-      secondInputRef.current?.focus();
-      return;
-    }
-    if (targetKey === "year") {
-      onChange(event, targetKey);
-    }
-  };
 
   return (
     <CardDateContainer>
@@ -61,20 +40,20 @@ export default function CardExpirationDateInput({
         <LabelText>유효기간</LabelText>
         <InputContainer>
           <Input
-            ref={firstInputRef}
+            ref={inputRefs[0]}
             maxLength={2}
             placeholder="MM"
             value={valueState.month}
             isError={errorState.isError.month}
-            onChange={(event) => onInputChange(event, "month")}
+            onChange={onChange("month")}
           />
           <Input
-            ref={secondInputRef}
+            ref={inputRefs[1]}
             maxLength={2}
             placeholder="YY"
             value={valueState.year}
             isError={errorState.isError.year}
-            onChange={(event) => onInputChange(event, "year")}
+            onChange={onChange("year")}
           />
         </InputContainer>
         <ErrorMessage message={errorState.errorMessage} />

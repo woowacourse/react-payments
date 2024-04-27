@@ -1,14 +1,15 @@
 import { LabelText, TitleText } from "../../../styles/common";
-import { useEffect, useRef } from "react";
 
 import { CardOwnerNameErrorState } from "../../../hooks/useCardOwnerName";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export interface CardOwnerNameInputProps {
   valueState: string;
   errorState: CardOwnerNameErrorState;
+  inputRef: React.RefObject<HTMLInputElement>;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -16,11 +17,10 @@ export interface CardOwnerNameInputProps {
 export default function CardOwnerNameInput({
   valueState,
   errorState,
+  inputRef,
   onChange,
   onBlur,
 }: CardOwnerNameInputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     inputRef.current?.focus();
   }, []);

@@ -17,7 +17,7 @@ export default function CardEnrollForm() {
     cardInformation,
 
     isCardCvcInputFocused,
-    isReadyForSubmit,
+    isReadyToSubmit,
 
     dynamicInputUiFlag,
 
@@ -37,25 +37,25 @@ export default function CardEnrollForm() {
       />
 
       <CardInformationContainer>
-        {dynamicInputUiFlag.isCardCvcInputDone && (
+        {dynamicInputUiFlag.isReadyToRenderCardPassword && (
           <CardPasswordInput {...cardPasswordInputProps} />
         )}
-        {dynamicInputUiFlag.isCardOwnerNameInputDone && (
+        {dynamicInputUiFlag.isReadyToRenderCardCvc && (
           <CardCvcInput {...cardCvcInputProps} />
         )}
-        {dynamicInputUiFlag.isCardExpirationDateInputDone && (
+        {dynamicInputUiFlag.isReadyToRenderCardOwnerName && (
           <CardOwnerNameInput {...cardOwnerNameInputProps} />
         )}
-        {dynamicInputUiFlag.isCardIssuerInputDone && (
+        {dynamicInputUiFlag.isReadyToRenderCardExpiration && (
           <CardExpirationDateInput {...cardExpirationDateInputProps} />
         )}
-        {dynamicInputUiFlag.isCardNumbersInputDone && (
+        {dynamicInputUiFlag.isReadyToRenderCardIssuer && (
           <CardIssuerSelect {...cardIssuerSelectProps} />
         )}
         <CardNumbersInput {...cardNumbersInputProps} />
       </CardInformationContainer>
 
-      {isReadyForSubmit && (
+      {isReadyToSubmit && (
         <FormSubmitButton
           onClick={() =>
             navigate("/card-enroll-complete", { state: { cardInformation } })

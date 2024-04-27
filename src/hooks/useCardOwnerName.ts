@@ -1,7 +1,8 @@
+import { useRef, useState } from "react";
+
 import { CardOwnerNameInputProps } from "../components/payment/CardEnrollForm/CardOwnerNameInput";
 import isAlphabetOrWhiteSpace from "../utils/isAlphabetOrWhiteSpace";
 import useBoolean from "./common/useBoolean";
-import { useState } from "react";
 
 const validateOwnerNameOnChange = (inputValue: string) => {
   if (!isAlphabetOrWhiteSpace(inputValue)) {
@@ -21,7 +22,7 @@ export interface CardOwnerNameErrorState {
 }
 
 interface UseCardOwnerNameReturnType {
-  isDone: boolean;
+  isDoneThisStep: boolean;
   cardOwnerNameInputProps: CardOwnerNameInputProps;
 }
 
@@ -33,7 +34,9 @@ const useCardOwnerName = (): UseCardOwnerNameReturnType => {
     errorMessage: "",
   });
 
-  const { flag: isDone, setTrue: updateDone } = useBoolean();
+  const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -61,10 +64,11 @@ const useCardOwnerName = (): UseCardOwnerNameReturnType => {
   };
 
   return {
-    isDone,
+    isDoneThisStep,
     cardOwnerNameInputProps: {
       valueState,
       errorState,
+      inputRef,
       onChange,
       onBlur,
     },

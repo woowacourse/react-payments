@@ -1,7 +1,8 @@
+import { useRef, useState } from "react";
+
 import { CardCvcInputProps } from "../components/payment/CardEnrollForm/CardCvcInput";
 import isNumericString from "../utils/isNumericString";
 import useBoolean from "./common/useBoolean";
-import { useState } from "react";
 
 const validateOnChange = (inputValue: string) => {
   if (!isNumericString(inputValue)) {
@@ -22,7 +23,7 @@ export interface CardCvcErrorState {
 
 interface UseCardCvcReturnType {
   isFocused: boolean;
-  isDone: boolean;
+  isDoneThisStep: boolean;
   cardCvcInputProps: CardCvcInputProps;
 }
 
@@ -34,7 +35,9 @@ const useCardCvc = (): UseCardCvcReturnType => {
     errorMessage: "",
   });
 
-  const { flag: isDone, setTrue: updateDone } = useBoolean();
+  const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const {
     flag: isFocused,
@@ -74,10 +77,11 @@ const useCardCvc = (): UseCardCvcReturnType => {
 
   return {
     isFocused,
-    isDone,
+    isDoneThisStep,
     cardCvcInputProps: {
       valueState,
       errorState,
+      inputRef,
       onChange,
       onBlur,
       onFocus,

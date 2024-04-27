@@ -1,14 +1,15 @@
 import { CaptionText, LabelText, TitleText } from "../../../styles/common";
-import { useEffect, useRef } from "react";
 
 import { CardPasswordErrorState } from "../../../hooks/useCardPassword";
 import ErrorMessage from "../../common/ErrorMessage";
 import Input from "../../common/Input";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 export interface CardPasswordInputProps {
   valueState: string;
   errorState: CardPasswordErrorState;
+  inputRef: React.RefObject<HTMLInputElement>;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -16,11 +17,10 @@ export interface CardPasswordInputProps {
 export default function CardPasswordInput({
   valueState,
   errorState,
+  inputRef,
   onChange,
   onBlur,
 }: CardPasswordInputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     inputRef.current?.focus();
   }, []);

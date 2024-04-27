@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CardNumbersInputProps } from "../components/payment/CardEnrollForm/CardNumbersInput";
 import isNumericString from "../utils/isNumericString";
@@ -16,7 +16,26 @@ const validateOnBlur = (inputValue: string) => {
   }
 };
 
+const isAllInputCompleted = (inputValues: string[]) => {
+  return inputValues.every((value) => value.length === 4);
+};
+
+const isInputCompleted = (inputValue: string) => {
+  return inputValue.length === 4;
+};
+
+const isLastInputElement = (index: number) => {
+  return index === 3;
+};
+
 export type CardNumbers = [string, string, string, string];
+
+export type CardNumberRefs = [
+  React.RefObject<HTMLInputElement>,
+  React.RefObject<HTMLInputElement>,
+  React.RefObject<HTMLInputElement>,
+  React.RefObject<HTMLInputElement>,
+];
 
 export interface CardNumbersErrorState {
   isError: [boolean, boolean, boolean, boolean];
@@ -24,7 +43,7 @@ export interface CardNumbersErrorState {
 }
 
 interface UseCardNumbersReturnType {
-  isDone: boolean;
+  isDoneThisStep: boolean;
   cardNumbersInputProps: CardNumbersInputProps;
 }
 
@@ -36,7 +55,14 @@ const useCardNumbers = (): UseCardNumbersReturnType => {
     errorMessage: "",
   });
 
-  const { flag: isDone, setTrue: updateDone } = useBoolean();
+  const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
+
+  const inputRefs: CardNumberRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   const updateValueState = (inputValue: string, targetIndex: number) => {
     setValueState((prev) => {
@@ -59,49 +85,58 @@ const useCardNumbers = (): UseCardNumbersReturnType => {
     }));
   };
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+  const moveFocusNextFieldIfCompleted = (
+    inputValue: string,
     targetIndex: number
   ) => {
-    try {
-      validateOnChange(event.target.value);
-      updateValueState(event.target.value, targetIndex);
-      updateErrorState(false, targetIndex, "");
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState(true, targetIndex, error.message);
-      }
-    }
-  };
-
-  const onBlur = (
-    event: React.FocusEvent<HTMLInputElement>,
-    targetIndex: number
-  ) => {
-    try {
-      validateOnBlur(event.target.value);
-      updateErrorState(false, targetIndex, "");
-    } catch (error) {
-      if (error instanceof Error) {
-        updateErrorState(true, targetIndex, error.message);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isDone) {
+    if (!isInputCompleted(inputValue) || isLastInputElement(targetIndex)) {
       return;
     }
-    if (valueState.every((value) => value.length === 4)) {
+    inputRefs[targetIndex + 1].current?.focus();
+  };
+
+  const onChange =
+    (targetIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        const { value } = event.target;
+        validateOnChange(value);
+        updateValueState(value, targetIndex);
+        updateErrorState(false, targetIndex, "");
+        moveFocusNextFieldIfCompleted(value, targetIndex);
+      } catch (error) {
+        if (error instanceof Error) {
+          updateErrorState(true, targetIndex, error.message);
+        }
+      }
+    };
+
+  const onBlur =
+    (targetIndex: number) => (event: React.FocusEvent<HTMLInputElement>) => {
+      try {
+        validateOnBlur(event.target.value);
+        updateErrorState(false, targetIndex, "");
+      } catch (error) {
+        if (error instanceof Error) {
+          updateErrorState(true, targetIndex, error.message);
+        }
+      }
+    };
+
+  useEffect(() => {
+    if (isDoneThisStep) {
+      return;
+    }
+    if (isAllInputCompleted(valueState)) {
       updateDone();
     }
   }, [valueState]);
 
   return {
-    isDone,
+    isDoneThisStep,
     cardNumbersInputProps: {
       valueState,
       errorState,
+      inputRefs,
       onChange,
       onBlur,
     },

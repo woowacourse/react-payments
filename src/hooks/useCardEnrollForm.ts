@@ -12,7 +12,7 @@ import useCardOwnerName, { CardOwnerNameErrorState } from "./useCardOwnerName";
 import useCardPassword, { CardPasswordErrorState } from "./useCardPassword";
 
 import { CardIssuer } from "../constants/cardIssuers";
-import useIsReadyForSubmit from "./useIsReadyForSubmit";
+import useIsReadyToSubmit from "./useIsReadyToSubmit";
 
 export interface CardInformationValueState {
   cardNumbers: CardNumbers;
@@ -36,18 +36,20 @@ const useCardEnrollForm = () => {
   const cardPasswordInputProps = useCardPassword();
   const {
     isFocused: isCardCvcInputFocused,
-    isDone: isCardCvcInputDone,
+    isDoneThisStep: isReadyToRenderCardPassword,
     cardCvcInputProps,
   } = useCardCvc();
-  const { isDone: isCardOwnerNameInputDone, cardOwnerNameInputProps } =
+  const { isDoneThisStep: isReadyToRenderCardCvc, cardOwnerNameInputProps } =
     useCardOwnerName();
   const {
-    isDone: isCardExpirationDateInputDone,
+    isDoneThisStep: isReadyToRenderCardOwnerName,
     cardExpirationDateInputProps,
   } = useCardExpiration();
-  const { isDone: isCardIssuerInputDone, cardIssuerSelectProps } =
-    useCardIssuer();
-  const { isDone: isCardNumbersInputDone, cardNumbersInputProps } =
+  const {
+    isDoneThisStep: isReadyToRenderCardExpiration,
+    cardIssuerSelectProps,
+  } = useCardIssuer();
+  const { isDoneThisStep: isReadyToRenderCardIssuer, cardNumbersInputProps } =
     useCardNumbers();
 
   const cardInformationValueState: CardInformationValueState = {
@@ -68,7 +70,7 @@ const useCardEnrollForm = () => {
     cardNumbers: cardNumbersInputProps.errorState,
   };
 
-  const isReadyForSubmit = useIsReadyForSubmit([
+  const isReadyToSubmit = useIsReadyToSubmit([
     cardInformationValueState,
     cardInformationErrorState,
   ]);
@@ -77,14 +79,14 @@ const useCardEnrollForm = () => {
     cardInformation: cardInformationValueState,
 
     isCardCvcInputFocused,
-    isReadyForSubmit,
+    isReadyToSubmit,
 
     dynamicInputUiFlag: {
-      isCardNumbersInputDone,
-      isCardIssuerInputDone,
-      isCardExpirationDateInputDone,
-      isCardOwnerNameInputDone,
-      isCardCvcInputDone,
+      isReadyToRenderCardIssuer,
+      isReadyToRenderCardExpiration,
+      isReadyToRenderCardOwnerName,
+      isReadyToRenderCardCvc,
+      isReadyToRenderCardPassword,
     },
 
     cardPasswordInputProps,

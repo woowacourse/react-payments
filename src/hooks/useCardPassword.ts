@@ -1,6 +1,7 @@
+import { useRef, useState } from "react";
+
 import { CardPasswordInputProps } from "../components/payment/CardEnrollForm/CardPasswordInput";
 import isNumericString from "../utils/isNumericString";
-import { useState } from "react";
 
 const validateOnChange = (inputValue: string) => {
   if (!isNumericString(inputValue)) {
@@ -26,6 +27,8 @@ const useCardPassword = (): CardPasswordInputProps => {
     isError: false,
     errorMessage: "",
   });
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -61,6 +64,7 @@ const useCardPassword = (): CardPasswordInputProps => {
   return {
     valueState,
     errorState,
+    inputRef,
     onChange,
     onBlur,
   };
