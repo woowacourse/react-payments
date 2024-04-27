@@ -1,12 +1,16 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useReducer, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import CardInfo from '../CardInfo/CardInfo';
-import CardPreview from '../CardPreview/CardPreview';
+import CardInfo from '../../components/CardInfo/CardInfo';
+import CardPreview from '../../components/CardPreview/CardPreview';
+import PaymentsBottomFixedButton from '../../components/common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
 
-import { MainContainer } from './MainPage.styled';
+import { MainContainer } from './RegisterCardInfo.styled';
+
 import cardInfoReducer from '../../store/cardInfoReducer';
-import PaymentsBottomFixedButton from '../common/PaymentsBottomFixedButton/PaymentsBottomFixedButton';
+
 import OPTION from '../../constants/option';
+import PATH from '../../constants/path';
 
 const INITIAL_CARD_INFO_STATE: CardInfo = {
   cardNumbers: { value: ['', '', '', ''], isComplete: false },
@@ -28,7 +32,7 @@ const COMPLETE_CONDITION = {
   password: (value: string) => value.length === OPTION.passwordMaxLength,
 }
 
-const MainPage = () => {
+const RegisterCardInfo = () => {
   const [cardInfo, dispatchCardInfo] = useReducer(cardInfoReducer, INITIAL_CARD_INFO_STATE);
   const [cardState, setCardState] = useState<CardState>('front');
 
@@ -48,9 +52,15 @@ const MainPage = () => {
     );
   }
 
+  const navigate = useNavigate();
+
+  const navigateToComplete = () => {
+    navigate(PATH.registerComplete, { state: cardInfo });
+  };
+
   return (
     <>
-      {!showSubmitButton(cardInfo) || <PaymentsBottomFixedButton text="확인" onClick={() => { }} />}
+      {!showSubmitButton(cardInfo) || <PaymentsBottomFixedButton text="확인" onClick={navigateToComplete} />}
       <MainContainer>
         <CardPreview cardInfo={cardInfo} cardState={cardState} setCardState={setCardState} />
         <CardInfo cardInfo={cardInfo} dispatchCardInfo={dispatchCardInfo} handleCardState={handleCardState} />
@@ -59,4 +69,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default RegisterCardInfo;

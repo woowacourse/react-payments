@@ -2,8 +2,7 @@ import React, { useState } from "react"
 import useMultiFormSection from "./useMultiFormSection"
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage";
-import { Mastercard } from "../stories/CardPreview.stories";
+import ERROR_MESSAGE from "../constants/errorMessage"
 
 interface UseCardNumbersFormSectionProps {
   dispatchCardInfo: React.Dispatch<CardInfoAction>

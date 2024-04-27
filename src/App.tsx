@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import MainPage from './components/MainPage/MainPage';
 import GlobalStyle from './global.styled';
+import { Outlet } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -11,12 +11,12 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-function App() {
+const App = () => {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <MainPage />
+        <Outlet />
       </Container>
     </>
   );
