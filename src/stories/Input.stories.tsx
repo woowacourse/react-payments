@@ -12,11 +12,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    handleOnChange: () => {},
     name: 'month',
     placeholder: 'MM',
-    setValue: () => {},
     maxLength: 2,
-    validation: () => {},
-    handleError: () => {},
   },
 };

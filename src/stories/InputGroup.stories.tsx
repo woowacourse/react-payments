@@ -18,12 +18,10 @@ export const Default: Story = {
     label: CARD_NUMBER.label,
     subtitle: CARD_NUMBER.subtitle,
     children: Input({
+      handleOnChange: () => {},
       name: 'month',
       placeholder: 'MM',
-      setValue: () => {},
       maxLength: 2,
-      validation: () => {},
-      handleError: () => {},
     }),
   },
 };
