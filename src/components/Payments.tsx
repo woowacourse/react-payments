@@ -45,6 +45,7 @@ function Payments({
     useCardHolder.isValid &&
     useCardCVC.isValid &&
     useCardPasswordHead.isValid;
+
   return (
     <PaymentsContainer>
       <CardPreview cardInfo={cardInfo} />
@@ -58,7 +59,9 @@ function Payments({
       />
       {isValid && (
         <Link to='/complete-payment-register'>
-          <BottomButton>확인</BottomButton>
+          <BottomButton tabIndex={11} autoFocus>
+            확인
+          </BottomButton>
         </Link>
       )}
     </PaymentsContainer>

@@ -1,5 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/message';
 import { isOnlyEnglishOrSpace } from '../domain/checkIsValid';
+import { useState } from 'react';
 import useValidateInput from './useValidateInput';
 
 const cardHolderValidateInputProps = {
@@ -14,15 +15,28 @@ const cardHolderValidateInputProps = {
 
 export default function useCardHolder() {
   const validateInput = useValidateInput(cardHolderValidateInputProps);
+  const [isTouched, setIsTouched] = useState(false);
+  const [lastEventTargetValue, setLastEventTargetValue] = useState('');
+
   const isValid =
-    validateInput.inputValue.length > 0 && validateInput.errorMessage === '';
+    isTouched &&
+    validateInput.inputValue.length > 0 &&
+    lastEventTargetValue.length > 0;
 
   return {
-    onChange: validateInput.onChange,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsTouched(true);
+      validateInput.onChange(event);
+      setLastEventTargetValue(event.target.value);
+    },
     holder: validateInput.inputValue,
     errorMessage: validateInput.errorMessage,
     isValid,
-    initValue: validateInput.initValue,
+    isTouched,
+    initValue: () => {
+      validateInput.initValue();
+      setIsTouched(false);
+    },
   };
 }
 
@@ -31,5 +45,6 @@ export interface UseCardHolder {
   holder: string;
   errorMessage: string;
   isValid: boolean;
+  isTouched: boolean;
   initValue: () => void;
 }

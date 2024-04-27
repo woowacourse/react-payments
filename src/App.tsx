@@ -33,6 +33,7 @@ export default function App() {
     cardCVC.initValue();
     cardPasswordHead.initValue();
   };
+
   const paymentsElement = (
     <PayMents
       useCardNumbers={cardNumbers}
@@ -84,6 +85,7 @@ const AppWrapper = styled.div({
   flexDirection: 'column',
   alignItems: 'center',
   paddingTop: '50px',
+  overflow: 'hidden',
   '&>*': {
     width: '376px',
     height: '700px',

@@ -2,6 +2,7 @@ import { isOnlyDigit, isSameLength } from '../domain/checkIsValid';
 
 import { BOUND } from '../constants/number';
 import { ERROR_MESSAGE } from '../constants/message';
+import { useState } from 'react';
 import useValidateInput from './useValidateInput';
 
 const validateInputProps = {
@@ -19,18 +20,24 @@ const validateInputProps = {
 };
 
 export default function useCardCVC() {
+  const [isTouched, setIsTouched] = useState(false);
   const validateInput = useValidateInput(validateInputProps);
 
-  const isValid =
-    validateInput.inputValue.length === BOUND.cardCVCUpper &&
-    validateInput.errorMessage === '';
+  const isValid = isTouched && validateInput.errorMessage === '';
 
   return {
     cardCVC: validateInput.inputValue,
-    onChange: validateInput.onChange,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsTouched(true);
+      validateInput.onChange(event);
+    },
     errorMessage: validateInput.errorMessage,
     isValid,
-    initValue: validateInput.initValue,
+    isTouched,
+    initValue: () => {
+      validateInput.initValue();
+      setIsTouched(false);
+    },
   };
 }
 
@@ -39,5 +46,6 @@ export interface UseCardCVC {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
   isValid: boolean;
+  isTouched: boolean;
   initValue: () => void;
 }

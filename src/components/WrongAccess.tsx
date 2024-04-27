@@ -18,7 +18,7 @@ export default function WrongAccess({ setLastPath }: Props) {
         <CompleteSpan>날 다시 보러 와준거냥?</CompleteSpan>
         고양이를 보려던게 아니시라면... <p>잘못된 접근인 것 같네요.</p>
         <Link to={PATH.payments}>
-          <Button>메인화면으로</Button>
+          <Button autoFocus>메인화면으로</Button>
         </Link>
       </CompleteContentsContainer>
     </CompleteWrapper>
