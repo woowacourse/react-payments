@@ -1,5 +1,4 @@
-// CardExpirationPeriodInput.tsx
-import React, { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,

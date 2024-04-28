@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,

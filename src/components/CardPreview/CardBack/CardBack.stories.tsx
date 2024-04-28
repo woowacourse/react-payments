@@ -13,6 +13,6 @@ type Story = StoryObj<typeof CardBack>;
 
 export const Default: Story = {
   args: {
-    CVCNumber: 123,
+    CVCNumber: '123',
   },
 };
