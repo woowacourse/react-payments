@@ -24,7 +24,8 @@ const useCreditCardForm = () => {
 
   const { isExpirationCompleted, expiration, expirationError, handleExpirationChange } = useChangeExpiration();
 
-  const { isOwnerNameCompleted, ownerName, ownerNameError, handleOwnerNameChange } = useChangeOwnerName();
+  const { isOwnerNameCompleted, ownerName, ownerNameError, handleOwnerNameChange, handleEnterOwnerNameInput } =
+    useChangeOwnerName();
 
   const {
     isCVCNumberCompleted,
@@ -43,7 +44,7 @@ const useCreditCardForm = () => {
     isCompletedInputCardNumber(cardNumbers, isCardNumberError) &&
     isCompletedInputCardBrand(cardBrand, isDropdownOpen) &&
     isCompletedInputExpiration(expiration, expirationError) &&
-    isCompletedInputOwnerName(ownerName, ownerNameError) &&
+    isCompletedInputOwnerName(ownerNameError) &&
     isCompletedInputCVCNumber(cvcNumber, cvcError) &&
     isCompletedInputCardPassword(cardPassword, cardPasswordError);
 
@@ -70,6 +71,7 @@ const useCreditCardForm = () => {
       handleToggle,
       handleExpirationChange,
       handleOwnerNameChange,
+      handleEnterOwnerNameInput,
     },
   };
 };

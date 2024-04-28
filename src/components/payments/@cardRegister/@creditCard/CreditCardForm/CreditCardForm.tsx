@@ -18,8 +18,6 @@ import { isCardBrandName } from '@components/payments/@cardRegister/@cardBrand/C
 import useMovePage from '@hooks/useMovePage';
 import useCreditCardForm from '@hooks/creditCard/useCreditCardForm';
 
-import { isValidOwnerName } from '@domain/creditCard';
-
 import { ROUTE_ENDPOINT_MAP } from '@routes/constant';
 
 const CreditCardForm: React.FC = () => {
@@ -58,7 +56,12 @@ const CreditCardForm: React.FC = () => {
     onAddCVCNumber: formHandlers.handleChangeCVCNumber,
   };
 
-  const ownerNameTextFieldProps = { ownerName, ownerNameError, onAddOwnerName: formHandlers.handleOwnerNameChange };
+  const ownerNameTextFieldProps = {
+    ownerName,
+    ownerNameError,
+    onAddOwnerName: formHandlers.handleOwnerNameChange,
+    onKeyDown: formHandlers.handleEnterOwnerNameInput,
+  };
 
   const expirationDateTextFieldProps = {
     month: expiration.month,
@@ -88,9 +91,7 @@ const CreditCardForm: React.FC = () => {
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>
         {formInteractionState.isCVCNumberCompleted && <CardPasswordTextField {...cardPasswordTextFieldProps} />}
-        {isValidOwnerName(ownerName) && formInteractionState.isOwnerNameCompleted && (
-          <CVCNumberTextField {...cvcNumberTextFieldProps} />
-        )}
+        {formInteractionState.isOwnerNameCompleted && <CVCNumberTextField {...cvcNumberTextFieldProps} />}
         {formInteractionState.isExpirationCompleted && <OwnerNameTextField {...ownerNameTextFieldProps} />}
         {!formInteractionState.isDropdownOpen && formInteractionState.isCardBrandCompleted && (
           <ExpirationDateTextField {...expirationDateTextFieldProps} />

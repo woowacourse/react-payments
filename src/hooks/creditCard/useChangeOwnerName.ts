@@ -17,11 +17,19 @@ const useChangeOwnerName = () => {
     if (!isValidName) return;
 
     setOwnerName(value);
-
-    if (!newOwnerNameError.isError) setIsOwnerNameCompleted(true);
   };
 
-  return { isOwnerNameCompleted, ownerName: ownerName.toUpperCase(), ownerNameError, handleOwnerNameChange };
+  const handleEnterOwnerNameInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') setIsOwnerNameCompleted(true);
+  };
+
+  return {
+    isOwnerNameCompleted,
+    ownerName: ownerName.toUpperCase(),
+    ownerNameError,
+    handleOwnerNameChange,
+    handleEnterOwnerNameInput,
+  };
 };
 
 export default useChangeOwnerName;

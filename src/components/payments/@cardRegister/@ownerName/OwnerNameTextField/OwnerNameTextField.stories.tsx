@@ -32,6 +32,7 @@ const meta = {
   },
   args: {
     onAddOwnerName: fn(),
+    onKeyDown: fn(),
   },
   tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameTextField>;
