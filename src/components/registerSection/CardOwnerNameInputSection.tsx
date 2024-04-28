@@ -1,7 +1,7 @@
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
-import InputSection from '../composables/InputSection';
+import InputSection from './InputSection';
 import { MAX_LENGTH, OWNER_NAME } from '@/constants/cardSection';
 import { RegisterFieldProps } from '@/types';
 import { forwardRef, useCallback } from 'react';

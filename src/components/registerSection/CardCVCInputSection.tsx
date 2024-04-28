@@ -1,4 +1,4 @@
-import InputSection from '../composables/InputSection';
+import InputSection from './InputSection';
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';

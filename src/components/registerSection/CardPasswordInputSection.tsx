@@ -1,5 +1,5 @@
 import * as S from '../../app.style';
-import InputSection from '../composables/InputSection';
+import InputSection from './InputSection';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
 import { MAX_LENGTH, PASSWORD } from '@/constants/cardSection';

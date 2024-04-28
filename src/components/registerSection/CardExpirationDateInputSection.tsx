@@ -2,7 +2,7 @@ import * as S from '../../app.style';
 import { MAX_LENGTH, EXPIRATION_PERIOD } from '@/constants/cardSection';
 import { Input } from '../composables/input.style';
 import Label from '../composables/Label';
-import InputSection from '../composables/InputSection';
+import InputSection from './InputSection';
 import { forwardRef, RefObject, useCallback, useRef } from 'react';
 
 type RegisterExpirationDateProps = {

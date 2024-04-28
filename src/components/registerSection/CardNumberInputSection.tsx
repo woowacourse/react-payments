@@ -1,5 +1,5 @@
 import * as S from '../../app.style';
-import InputSection from '../composables/InputSection';
+import InputSection from './InputSection';
 import { InitialCardNumberState } from '@/types';
 import { Fragment, RefObject } from 'react';
 import Label from '../composables/Label';
