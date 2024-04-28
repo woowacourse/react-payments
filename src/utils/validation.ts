@@ -2,14 +2,13 @@ import { CARD_BRAND_INFO, VALID_LENGTH } from "@/constants/condition";
 import { REGEX } from "@/constants/regex";
 
 export enum ErrorStatus {
-  INVALID_LENGTH = "길이가 유효하지 않습니다.",
-  EXPIRED_CARD_DATE = "이미 만료된 카드입니다.",
-  INVALID_MONTH = "유효한 달이 아닙니다.",
-  NAME_SHOULD_BE_CAPITAL = "이름은 영어 대문자로만 입력할 수 있습니다.",
-  DOUBLE_SPACE = "스페이스를 두번 이상 입력할 수 없습니다.",
-  ENTER_REQUIRED = "엔터를 쳐야 합니다.",
-  CVC_NUMBER = "cvc는 이름으로 입력해야 합니다.",
-  IS_NOT_NUMBER = "숫자로 입력해야 합니다.",
+  INVALID_LENGTH = "invalidLength",
+  EXPIRED_CARD_DATE = "expiredCardDate",
+  INVALID_MONTH = "invalidMonth",
+  NAME_SHOULD_BE_CAPITAL = "nameCapital",
+  DOUBLE_SPACE = "doubleSpace",
+  ENTER_REQUIRED = "enter",
+  IS_NOT_NUMBER = "is_not_number",
 }
 
 export const validateIsValidLength = (
@@ -19,7 +18,7 @@ export const validateIsValidLength = (
   if (newValue.length !== validLength && newValue.length) {
     return { type: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
-  return { type: ErrorStatus.INVALID_LENGTH, isValid: true };
+  return { isValid: true };
 };
 
 export const validateExpirationDate = (date: string[]) => {
@@ -40,14 +39,14 @@ export const validateExpirationDate = (date: string[]) => {
       return { type: ErrorStatus.EXPIRED_CARD_DATE, isValid: false };
     }
   }
-  return { type: ErrorStatus.EXPIRED_CARD_DATE, isValid: true };
+  return { isValid: true };
 };
 
 export const validateMonth = (month: number) => {
   if (month < 1 || month > 12) {
     return { type: ErrorStatus.INVALID_MONTH, isValid: false };
   }
-  return { type: ErrorStatus.INVALID_MONTH, isValid: true };
+  return { isValid: true };
 };
 
 export const validateDoubleSpace = (name: string) => {
@@ -55,15 +54,27 @@ export const validateDoubleSpace = (name: string) => {
   if (doubleSpaceRegex.test(name)) {
     return { type: ErrorStatus.DOUBLE_SPACE, isValid: false };
   }
-  return { type: ErrorStatus.DOUBLE_SPACE, isValid: true };
+  return { isValid: true };
 };
 
-export const makeNewErrorMessages = (
-  messages: (string | null)[],
-  newMessage: string | null,
-  index: number
-) => {
-  return messages.map((message, i) => (i === index ? newMessage : message));
+export const validateEnterRequired = () => {
+  return { type: ErrorStatus.ENTER_REQUIRED, isValid: false };
+};
+
+export const validateIsNumber = (value: string) => {
+  const numbersRegex = REGEX.NUMBERS;
+  if (!numbersRegex.test(value)) {
+    return { type: ErrorStatus.IS_NOT_NUMBER, isValid: false };
+  }
+  return { isValid: true };
+};
+
+export const validateIsEnglish = (name: string) => {
+  const alphabetRegex = REGEX.CAPITAL_LETTERS;
+  if (!alphabetRegex.test(name)) {
+    return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
+  }
+  return { isValid: true };
 };
 
 export const checkCardBrand = (cardNumbers: string) => {
@@ -77,24 +88,4 @@ export const checkCardBrand = (cardNumbers: string) => {
     return "MASTER";
   }
   return "NONE";
-};
-
-export const validateEnterRequired = () => {
-  return { type: ErrorStatus.ENTER_REQUIRED, isValid: false };
-};
-
-export const validateIsNumber = (value: string) => {
-  const numbersRegex = REGEX.NUMBERS;
-  if (!numbersRegex.test(value)) {
-    return { type: ErrorStatus.IS_NOT_NUMBER, isValid: false };
-  }
-  return { type: ErrorStatus.IS_NOT_NUMBER, isValid: true };
-};
-
-export const validateIsEnglish = (name: string) => {
-  const alphabetRegex = REGEX.CAPITAL_LETTERS;
-  if (!alphabetRegex.test(name)) {
-    return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
-  }
-  return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: true };
 };

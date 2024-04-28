@@ -4,7 +4,7 @@ interface Props<T> {
   initialValue: T;
   validates?: ((value: string) => {
     isValid: boolean;
-    type: string;
+    type?: string;
   })[];
 }
 
@@ -23,7 +23,8 @@ const useInput = <T,>({ initialValue, validates }: Props<T>) => {
         .map((validate) => validate(newValue))
         .filter((result) => !result.isValid)
         .map((result) => result.type);
-      setError(newErrors);
+
+      setError(newErrors as string[]);
     }
 
     setValue(newValue as T);

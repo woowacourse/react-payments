@@ -6,7 +6,8 @@ import Input from "@/components/_common/Input/Input";
 import useInput from "@/hooks/useInput";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
-import { sliceOverMaxLength } from "@/utils/view";
+import { sliceInvalidValueWithRegex, sliceOverMaxLength } from "@/utils/view";
+import { REGEX } from "@/constants/regex";
 interface Props {
   passwordState: ReturnType<typeof useInput<string>>;
 }
@@ -23,6 +24,7 @@ const PasswordField = ({ passwordState }: Props) => {
           maxLength={VALID_LENGTH.PASSWORD}
           placeholder={MESSAGE.PLACEHOLDER.PASSWORD}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            sliceInvalidValueWithRegex(e, REGEX.NUMBERS);
             sliceOverMaxLength(e, VALID_LENGTH.PASSWORD);
             onChange(e);
           }}

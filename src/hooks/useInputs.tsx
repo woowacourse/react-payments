@@ -5,7 +5,7 @@ import React from "react";
 export type ValidateFuncWithPropsType = (
   value: string,
   currentName: string
-) => { isValid: boolean; type: ErrorStatus } | null;
+) => { isValid: boolean; type?: ErrorStatus } | null;
 
 interface Props<T> {
   initialValue: T;
