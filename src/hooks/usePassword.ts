@@ -16,7 +16,7 @@ const usePasswordState = (defaultValues: number | undefined) => {
   const [password, setPassword, isPasswordError] = useInput(defaultValues, REG_EXP.password);
 
   const passwordErrorMessage = isPasswordError ? ERROR.password : '';
-  const isPasswordValid = password && !isPasswordError;
+  const isPasswordValid = password !== undefined && !isPasswordError;
 
   return {
     passwordState: {

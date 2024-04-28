@@ -16,7 +16,7 @@ const useUserName = (defaultValue: string | undefined) => {
   const [userName, setUserName, isUserNameError] = useInput(defaultValue, REG_EXP.userName);
 
   const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
-  const isUserNameValid = userName && !isUserNameError;
+  const isUserNameValid = userName !== '' && !isUserNameError;
 
   return {
     userNameState: {

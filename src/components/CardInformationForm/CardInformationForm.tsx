@@ -1,18 +1,18 @@
 import * as Styled from './style';
+import { CardNumberStateType } from '../../hooks/useCardNumber';
+import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
+import { UserNameStateType } from '../../hooks/useUserName';
+import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
+import { CVCStateType } from '../../hooks/useCVC';
+import { PasswordStateType } from '../../hooks/usePassword';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
 import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
-import { CardNumberStateType } from '../../hooks/useCardNumber';
-import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
-import { UserNameStateType } from '../../hooks/useUserName';
 import Dropdown from '../Dropdown/Dropdown';
-import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
-import { CVCStateType } from '../../hooks/useCVC';
-import { useState } from 'react';
-import { PasswordStateType } from '../../hooks/usePassword';
-import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 
 const { TITLE, CAPTION, LABEL, PLACEHOLDER, OPTION } = MESSAGE;
@@ -21,8 +21,8 @@ const { MAX_LENGTH, CARD_INFORMATION_APPEARED } = CONDITION;
 interface CardInformationFormProps {
   cardNumberState: CardNumberStateType;
   expirationDateState: ExpirationDateStateType;
-  userNameState: UserNameStateType;
   selectedCardState: SelectedCardStateType;
+  userNameState: UserNameStateType;
   cvcState: CVCStateType;
   passwordState: PasswordStateType;
 }
@@ -30,8 +30,8 @@ interface CardInformationFormProps {
 const CardInformationForm = ({
   cardNumberState,
   expirationDateState,
-  userNameState,
   selectedCardState,
+  userNameState,
   cvcState,
   passwordState,
 }: CardInformationFormProps) => {

@@ -45,7 +45,7 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
   const isCardNumberFilled = first && second && third && fourth;
   const isCardNumberError = isFirstError || isSecondError || isThirdError || isFourthError;
   const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
-  const isCardNumberValid = isCardNumberFilled && !isCardNumberError;
+  const isCardNumberValid = isCardNumberFilled !== undefined && !isCardNumberError;
 
   return {
     cardNumberState: {

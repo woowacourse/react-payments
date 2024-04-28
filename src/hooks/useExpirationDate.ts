@@ -24,7 +24,7 @@ const useExpirationDate = (defaultValues: Array<number | undefined>) => {
   const isExpirationDateFilled = month && year;
   const isExpirationDateError = isMonthError || isYearError;
   const expirationErrorMessage = isMonthError ? ERROR.month : isYearError ? ERROR.year : '';
-  const isExpirationDateValid = isExpirationDateFilled && !isExpirationDateError;
+  const isExpirationDateValid = isExpirationDateFilled !== undefined && !isExpirationDateError;
 
   return {
     expirationDateState: {

@@ -20,7 +20,7 @@ const useCVCState = (defaultValues: number | undefined) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   const cvcErrorMessage = isCVCError ? ERROR.cvc : '';
-  const isCVCValid = cvc && !isCVCError;
+  const isCVCValid = cvc !== undefined && !isCVCError;
 
   return {
     cvcState: {
