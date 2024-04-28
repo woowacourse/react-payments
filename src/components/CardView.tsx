@@ -86,6 +86,10 @@ const SecretNumber = styled.div`
 `;
 
 export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
+  const cvcValue = cardInfo.CVC.CVC.value;
+  const monthValue = cardInfo.expirationDate.month.value;
+  const yearValue = cardInfo.expirationDate.year.value;
+
   const checkCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
     if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return Visa;
@@ -98,11 +102,11 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
 
   const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1.value);
 
-  if (cardInfo.CVC.CVC.value.length > 0 && cardInfo.CVC.CVC.value.length < 3) {
+  if (cvcValue.length > 0 && cvcValue.length < 3) {
     return (
       <>
         <BackCardContainer color={'#D5D5D5'}>
-          <CVCBox>{cardInfo.CVC.CVC.value}</CVCBox>
+          <CVCBox>{cvcValue}</CVCBox>
         </BackCardContainer>
       </>
     );
@@ -128,15 +132,15 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
           </SecretNumber>
         </CardNumbers>
         <TextBox>
-          {cardInfo.expirationDate.month.value.length === 1 &&
-          cardInfo.expirationDate.month.value !== '0'
-            ? `0${cardInfo.expirationDate.month.value}`
-            : cardInfo.expirationDate.month.value}
-          {cardInfo.expirationDate.year.value.length > 0 ? ' / ' : ''}
-          {cardInfo.expirationDate.year.value.length === 1 &&
-          cardInfo.expirationDate.year.value !== '0'
-            ? `0${cardInfo.expirationDate.year.value}`
-            : cardInfo.expirationDate.year.value}
+          {monthValue.length === 1 &&
+          monthValue !== '0'
+            ? `0${monthValue}`
+            : monthValue}
+          {yearValue.length > 0 ? ' / ' : ''}
+          {yearValue.length === 1 &&
+          yearValue !== '0'
+            ? `0${yearValue}`
+            : yearValue}
         </TextBox>
         <TextBox>{cardInfo.userName.userName.value}</TextBox>
       </FrontCardContainer>
