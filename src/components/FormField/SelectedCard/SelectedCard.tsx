@@ -10,12 +10,17 @@ interface SelectedCardProps {
 }
 
 const SelectedCard = ({ selectedCardState }: SelectedCardProps) => {
+  const handleOptionChange = (option: string) => {
+    selectedCardState.setValue(option);
+  };
+
   return (
     <FormField title={TITLE.cardSelect} caption={CAPTION.cardSelect}>
       <Dropdown
         optionArray={OPTION.cardSelect}
         selectText={TITLE.cardSelect}
         selectedOptionState={selectedCardState}
+        optionChange={handleOptionChange}
       />
     </FormField>
   );

@@ -10,22 +10,23 @@ interface DropdownType {
   optionArray: string[];
   selectText: string;
   selectedOptionState: SelectedOptionStateType;
+  optionChange: (option: string) => void;
 }
 
-const Dropdown = ({ optionArray, selectText, selectedOptionState }: DropdownType) => {
+const Dropdown = ({ optionArray, selectText, selectedOptionState, optionChange }: DropdownType) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionChange = (option: string) => {
-    selectedOptionState.setValue(option);
+  const handleOptionOnClick = (option: string) => {
+    optionChange(option);
     setIsOpen(false);
   };
 
   const options = optionArray.map((option) => (
-    <Styled.Option onClick={() => handleOptionChange(option)}>{option}</Styled.Option>
+    <Styled.Option onClick={() => handleOptionOnClick(option)}>{option}</Styled.Option>
   ));
 
   return (
