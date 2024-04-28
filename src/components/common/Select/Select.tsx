@@ -16,6 +16,7 @@ interface SelectProps {
   id: string;
   value: string;
   isError: boolean;
+  /** @defaultValue true */
   isRequired?: boolean;
   handleSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
