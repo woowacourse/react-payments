@@ -1,18 +1,9 @@
-import React from "react";
-
-export const sliceOverMaxLength = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  maxLength: number
-) => {
-  if (e.target.value.length > 2)
-    e.target.value = e.target.value.slice(0, maxLength);
+export const sliceOverMaxLength = (value: string, maxLength: number) => {
+  if (value.length > maxLength) return value.slice(0, maxLength);
+  return value;
 };
 
-export const sliceInvalidValueWithRegex = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  regex: RegExp
-) => {
-  if (!regex.test(e.target.value)) {
-    e.target.value = e.target.value.slice(0, -1);
-  }
+export const sliceInvalidValueWithRegex = (value: string, regex: RegExp) => {
+  if (!regex.test(value)) return value.slice(0, -1);
+  return value;
 };

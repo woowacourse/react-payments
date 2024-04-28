@@ -11,6 +11,8 @@ import {
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "./useInput";
 import { CardBrandType } from "@/constants/cardBrandType";
+import { REGEX } from "@/constants/regex";
+import { sliceInvalidValueWithRegex, sliceOverMaxLength } from "@/utils/view";
 
 const useCardRegister = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -25,6 +27,10 @@ const useCardRegister = () => {
         validateIsValidLength(value, VALID_LENGTH.CARD_NUMBERS),
       (value: string) => validateIsNumber(value),
     ],
+    inputChangeCallbacks: [
+      (value: string) => sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
+      (value: string) => sliceOverMaxLength(value, VALID_LENGTH.CARD_NUMBERS),
+    ],
   });
 
   const expirationPeriodState = useInputs<ExpirationPeriodInputType>({
@@ -35,6 +41,10 @@ const useCardRegister = () => {
       (value: string, name: string) =>
         name === "expirationMonth" ? validateMonth(Number(value)) : null,
     ],
+    inputChangeCallbacks: [
+      (value: string) =>
+        sliceOverMaxLength(value, VALID_LENGTH.EXPIRATION_PERIOD),
+    ],
   });
 
   const ownerNameState = useInput({
@@ -42,6 +52,10 @@ const useCardRegister = () => {
     validates: [
       (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
+    ],
+    inputChangeCallbacks: [
+      (value: string) =>
+        sliceInvalidValueWithRegex(value, REGEX.CAPITAL_LETTERS),
     ],
   });
 
@@ -55,6 +69,10 @@ const useCardRegister = () => {
       (value: string) => validateIsValidLength(value, VALID_LENGTH.CVC_NUMBERS),
       (value: string) => validateIsNumber(value),
     ],
+    inputChangeCallbacks: [
+      (value: string) =>
+        sliceInvalidValueWithRegex(value, REGEX.CAPITAL_LETTERS),
+    ],
   });
 
   const passwordState = useInput<string>({
@@ -62,6 +80,10 @@ const useCardRegister = () => {
     validates: [
       (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
       (value: string) => validateIsNumber(value),
+    ],
+    inputChangeCallbacks: [
+      (value: string) => sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
+      (value: string) => sliceOverMaxLength(value, VALID_LENGTH.PASSWORD),
     ],
   });
 

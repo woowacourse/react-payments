@@ -6,7 +6,7 @@ import S from "../../style";
 import useInput from "@/hooks/useInput";
 import { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
-import { sliceOverMaxLength } from "@/utils/view";
+// import { sliceOverMaxLength } from "@/utils/view";
 
 interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
@@ -28,7 +28,7 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
           placeholder={MESSAGE.PLACEHOLDER.CVC}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setIsFront(false);
-            sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
+            // sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
             onChange(e);
           }}
           onBlur={() => {

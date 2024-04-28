@@ -7,8 +7,6 @@ import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { ErrorStatus } from "@/utils/validation";
-import { sliceInvalidValueWithRegex } from "@/utils/view";
-import { REGEX } from "@/constants/regex";
 
 interface Props {
   ownerNameState: ReturnType<typeof useInput<string>>;
@@ -38,7 +36,6 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
             onChange(e);
           }}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>

@@ -34,19 +34,11 @@ const CardPreviewFront = ({
         <S.CardNumbers>
           {Object.values(cardNumbers).map((number: string, index) => {
             const isMasked = index >= 2;
-            return isMasked ? (
+            return (
               <S.Input
                 $isWhite={cardBrandType !== "카카오뱅크"}
                 key={index}
-                type="password"
-                value={number}
-                readOnly
-              />
-            ) : (
-              <S.Input
-                $isWhite={cardBrandType !== "카카오뱅크"}
-                key={index}
-                type="text"
+                type={isMasked ? "password" : "text"}
                 value={number}
                 readOnly
               />

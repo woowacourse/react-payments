@@ -7,16 +7,17 @@ export type ValidateFuncWithPropsType = (
   currentName: string
 ) => { isValid: boolean; type?: ErrorStatus } | null;
 
+export type InputChangeCallbackType = (value: string) => string;
 interface Props<T> {
   initialValue: T;
   validates: ValidateFuncWithPropsType[];
-  onChangeFunc?: (value: string) => string;
+  inputChangeCallbacks?: InputChangeCallbackType[];
 }
 
 const useInputs = <T extends object>({
   initialValue,
   validates,
-  onChangeFunc,
+  inputChangeCallbacks,
 }: Props<T>) => {
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
@@ -26,11 +27,16 @@ const useInputs = <T extends object>({
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    const newValue = value;
+    let newValue = value;
 
-    if (onChangeFunc) {
-      event.target.value = onChangeFunc(newValue);
+    if (inputChangeCallbacks) {
+      inputChangeCallbacks.forEach((inputChangeCallbacks) => {
+        newValue = inputChangeCallbacks(newValue);
+      });
+
+      event.target.value = newValue;
     }
+
     const newErrors = { ...errors };
     let allValid = true;
 

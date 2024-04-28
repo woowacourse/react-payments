@@ -5,9 +5,8 @@ import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
 import { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
-import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
+import { INPUT_COUNTS } from "@/constants/condition";
 import useInputRefs from "@/hooks/useInputRefs";
-import { sliceOverMaxLength } from "@/utils/view";
 
 export type ExpirationPeriodInputType = {
   expirationMonth: string;
@@ -54,7 +53,6 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
               name={EXPIRATION_INPUTS_NAMES[index]}
               placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                sliceOverMaxLength(e, VALID_LENGTH.EXPIRATION_PERIOD);
                 onFocusNextInput(e, index);
               }}
               isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}

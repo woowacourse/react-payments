@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { InputChangeCallbackType } from "./useInputs";
 
 interface Props<T> {
   initialValue: T;
@@ -6,9 +7,14 @@ interface Props<T> {
     isValid: boolean;
     type?: string;
   })[];
+  inputChangeCallbacks?: InputChangeCallbackType[];
 }
 
-const useInput = <T,>({ initialValue, validates }: Props<T>) => {
+const useInput = <T,>({
+  initialValue,
+  validates,
+  inputChangeCallbacks,
+}: Props<T>) => {
   const [value, setValue] = useState<T>(initialValue);
   const [error, setError] = useState<string[]>([]);
   const [isError, setIsError] = useState(true);
@@ -16,7 +22,15 @@ const useInput = <T,>({ initialValue, validates }: Props<T>) => {
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const newValue = event.target.value;
+    let newValue = event.target.value;
+
+    if (inputChangeCallbacks) {
+      inputChangeCallbacks.forEach((inputChangeCallbacks) => {
+        newValue = inputChangeCallbacks(newValue);
+      });
+
+      event.target.value = newValue;
+    }
 
     if (validates) {
       const newErrors = validates
