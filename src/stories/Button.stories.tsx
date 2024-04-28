@@ -19,7 +19,7 @@ export const Default: Story = {
 export const Floating: Story = {
   args: {
     text: '버튼 텍스트',
-    floating: true,
+    $floating: true,
   },
 };
 

@@ -33,7 +33,7 @@ interface PaymentsSelectFieldProps {
 interface ButtonProps {
   text: string;
   onClick?: () => void;
-  floating?: boolean;
+  $floating?: boolean;
   width?: number;
 }
 
