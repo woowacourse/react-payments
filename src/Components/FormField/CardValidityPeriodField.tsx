@@ -31,12 +31,20 @@ const CardValidityPeriodField = () => {
         }
         return prev;
       });
-    }
-    if (!isValid && name) {
       setCardPeriodError((prev) => {
         const temp = { ...prev };
-        temp[name].isError = false;
-        temp[name].errorMessage = errorMessage ?? "";
+        temp.month.isError = false;
+        temp.year.isError = false;
+        temp.month.errorMessage = "";
+        temp.year.errorMessage = "";
+        return temp;
+      });
+    }
+    if (!isValid && name && errorMessage) {
+      setCardPeriodError((prev) => {
+        const temp = { ...prev };
+        temp[name].isError = true;
+        temp[name].errorMessage = errorMessage;
         return temp;
       });
     }
