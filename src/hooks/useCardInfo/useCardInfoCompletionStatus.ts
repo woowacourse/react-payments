@@ -44,23 +44,20 @@ const useCardInfoCompletionStatus = ({
   cvc,
   password,
 }: CardInfoControl): ICardInfoCompletionStatus => {
-  const isCardNumbersCompleted = getObjectValues<string>(cardNumbers.value)
-    .map(number => !validateCardNumber(number).isError)
-    .every(v => v);
-  const isCardTypeCompleted = !validateCardType(cardType.value).isError;
-  const isExpiryDateCompleted =
-    !validateExpiryMonth(expiryMonth.value).isError && !validateExpiryYear(expiryYear.value).isError;
-  const isCardholderNameCompleted = !validateCardholderName(cardholderName.value).isError;
-  const isCvcCompleted = !validateCvc(cvc.value).isError;
-  const isPasswordCompleted = !validatePassword(password.value).isError;
+  const evaluateCompletion = (value: string, validate: (value: string) => { isError: boolean }) =>
+    !validate(value).isError;
 
   return {
-    isCardNumbersCompleted,
-    isCardTypeCompleted,
-    isExpiryDateCompleted,
-    isCardholderNameCompleted,
-    isCvcCompleted,
-    isPasswordCompleted,
+    isCardNumbersCompleted: getObjectValues<string>(cardNumbers.value)
+      .map(val => evaluateCompletion(val, validateCardNumber))
+      .every(v => v),
+    isCardTypeCompleted: evaluateCompletion(cardType.value, validateCardType),
+    isExpiryDateCompleted:
+      evaluateCompletion(expiryMonth.value, validateExpiryMonth) &&
+      evaluateCompletion(expiryYear.value, validateExpiryYear),
+    isCardholderNameCompleted: evaluateCompletion(cardholderName.value, validateCardholderName),
+    isCvcCompleted: evaluateCompletion(cvc.value, validateCvc),
+    isPasswordCompleted: evaluateCompletion(password.value, validatePassword),
   };
 };
 

@@ -23,6 +23,6 @@
 - [x] 컴포넌트 id를 고유하게 만들기(uuid 추가)
 - [x] [CardNumberInputs.tsx] cardNumbers[index] -> cardNumbers[key]
 - [x] [CardInfoForm] type="submit"으로 수정하고, onSubmit을 핸들링하기
-- [ ] [useCardInfoCompletionStatus.ts] 로직 중복 제거
+- [x] [useCardInfoCompletionStatus.ts] 로직 중복 제거
 - [ ] CardPreviewBack, Select 스토리북 추가
 - [ ] onMonth blur 시 자동 formatting 추가
