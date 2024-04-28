@@ -105,7 +105,7 @@ const Payments: React.FC = () => {
 
           {isSuccessEntirely && (
             <>
-              <Spacer space={52} />
+              <Spacer height={52} />
               <SubmitButton
                 label="확인"
                 onClickSubmitButton={(e) => {

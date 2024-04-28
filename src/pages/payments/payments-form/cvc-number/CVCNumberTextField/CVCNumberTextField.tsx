@@ -13,7 +13,7 @@ const CVCNumberTextField: React.FC<OwnerNameTextFieldProps> = ({ cvcNumber, cvcN
   return (
     <section>
       <TextField.Title title="CVC 번호를 입력해 주세요" />
-      <Spacer space={10} />
+      <Spacer height={10} />
       <TextField.Label htmlFor="cvcNumber" labelText="CVC" />
       <TextField.Content>
         <CVCNumberInput

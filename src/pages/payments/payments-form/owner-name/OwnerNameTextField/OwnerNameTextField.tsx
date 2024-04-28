@@ -12,7 +12,7 @@ const OwnerNameTextField: React.FC<OwnerNameTextFieldProps> = ({ ownerName, onAd
   return (
     <section>
       <TextField.Title title="카드 소유자 이름을 입력해 주세요" />
-      <Spacer space={10} />
+      <Spacer height={10} />
       <TextField.Label htmlFor="ownerName" labelText="소유자 이름" />
       <TextField.Content>
         <OwnerNameInput
