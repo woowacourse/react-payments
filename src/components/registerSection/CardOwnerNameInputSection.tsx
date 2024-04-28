@@ -4,11 +4,15 @@ import Label from '../composables/Label';
 import InputSection from './InputSection';
 import { MAX_LENGTH, OWNER_NAME } from '@/constants/cardSection';
 import { RegisterFieldProps } from '@/types';
-import { forwardRef, useCallback } from 'react';
+import { useCallback } from 'react';
 
-const CardOwnerNameInputSection = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
-  const { onChange, value, onKeyDown, isError, onBlur } = props;
-
+const CardOwnerNameInputSection = ({
+  onChange,
+  value,
+  onKeyDown,
+  isError,
+  onBlur,
+}: RegisterFieldProps) => {
   const nameRef = useCallback((node: HTMLInputElement | null) => {
     node?.focus();
   }, []);
@@ -35,6 +39,6 @@ const CardOwnerNameInputSection = forwardRef<HTMLInputElement, RegisterFieldProp
       </S.ErrorContainer>
     </S.Wrapper>
   );
-});
+};
 
 export default CardOwnerNameInputSection;

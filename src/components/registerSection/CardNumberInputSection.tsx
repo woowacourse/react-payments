@@ -1,22 +1,31 @@
 import * as S from '../../app.style';
 import InputSection from './InputSection';
 import { InitialCardNumberState } from '@/types';
-import { Fragment, RefObject } from 'react';
+import { Fragment, RefObject, useRef } from 'react';
 import Label from '../composables/Label';
 import Input from '../composables/Input';
 import { MAX_LENGTH, CARD_NUMBER } from '@/constants/cardSection';
 
 type RegisterCardNumberProps = {
   cardNumbers: InitialCardNumberState[];
-  cardNumbersChangeHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  refs: RefObject<HTMLInputElement>[];
+  cardNumbersChangeHandler: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    ref: RefObject<HTMLInputElement>,
+  ) => void;
 };
 
 const CardNumberInputSection = ({
   cardNumbers,
   cardNumbersChangeHandler,
-  refs,
 }: RegisterCardNumberProps) => {
+  const refs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   return (
     <S.Wrapper>
       <InputSection
@@ -36,7 +45,7 @@ const CardNumberInputSection = ({
                 type="text"
                 maxLength={MAX_LENGTH.INDIVIDUAL_CARD_NUMBER}
                 value={cardNumber.value}
-                onChange={(e) => cardNumbersChangeHandler(e, index)}
+                onChange={(e) => cardNumbersChangeHandler(e, index, refs[index + 1])}
                 isError={cardNumber.isError}
               />
             </Fragment>
