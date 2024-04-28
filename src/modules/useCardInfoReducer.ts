@@ -1,12 +1,14 @@
 import { useReducer } from 'react';
 
-import { CARD_COLOR, CARD_MARK } from '../constants';
+import { CARD_COMPANY, CARD_COMPANY_NAMES, CARD_MARK } from '../constants';
 
 const EDIT_CARD_NUMBERS = 'card/EDIT_CARD_NUMBERS' as const;
 const EDIT_CARD_MARK = 'card/EDIT_CARD_MARK' as const;
 const EDIT_CARD_PERIOD = 'card/EDIT_CARD_PERIOD' as const;
 const EDIT_CARD_USER_NAME = 'card/EDIT_CARD_USER_NAME' as const;
-const EDIT_CARD_COLOR = 'card/EDIT_CARD_COLOR' as const;
+const EDIT_CARD_COMPANY = 'card/EDIT_CARD_COMPANY' as const;
+const EDIT_CARD_CVC = 'card/EDIT_CARD_CVC' as const;
+const EDIT_CARD_PASSWORD = 'card/EDIT_CARD_PASSWORD' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
 export interface CardPeriod {
@@ -15,17 +17,25 @@ export interface CardPeriod {
 }
 
 export type CardMark = keyof typeof CARD_MARK | null;
-export type CardColor = keyof typeof CARD_COLOR;
-export type CardNumbers = (number | undefined)[];
+export type CardNumbers = (string | undefined)[];
+export type CardCompanyName = (typeof CARD_COMPANY_NAMES)[number];
+
+export type CardCompany = {
+  name: CardCompanyName;
+  color: string;
+};
+
 export interface CardInfo {
   numbers: CardNumbers | null;
   mark: CardMark;
-  period: CardPeriod;
+  period: CardPeriod | null;
   userName: string | null;
-  color: CardColor;
+  company: CardCompany | null;
+  cvc: string | null;
+  password: string | null;
 }
 
-const INITIAL_CARD_INFO: CardInfo = {
+export const INITIAL_CARD_INFO: CardInfo = {
   numbers: null,
   mark: null,
   period: {
@@ -33,7 +43,9 @@ const INITIAL_CARD_INFO: CardInfo = {
     year: null,
   },
   userName: null,
-  color: 'default',
+  company: null,
+  cvc: null,
+  password: null,
 };
 
 // action
@@ -52,18 +64,28 @@ const editCardPeriodAction = (period: CardPeriod) => ({
   period,
 });
 
-const editCardUserNameAction = (userName: string) => ({
+const editCardUserNameAction = (userName: string | null) => ({
   type: EDIT_CARD_USER_NAME,
   userName,
 });
 
-const resetCardInfoAction = () => ({
-  type: RESET_CARD_INFO,
+const editCardCompanyAction = (companyName: CardCompanyName | null) => ({
+  type: EDIT_CARD_COMPANY,
+  company: companyName ? CARD_COMPANY.get(companyName) || null : null,
 });
 
-const editCardColorAction = (color: CardColor) => ({
-  type: EDIT_CARD_COLOR,
-  color,
+const editCardCVCAction = (cvc: string | null) => ({
+  type: EDIT_CARD_CVC,
+  cvc,
+});
+
+const editCardPasswordAction = (password: string | null) => ({
+  type: EDIT_CARD_PASSWORD,
+  password,
+});
+
+const resetCardInfoAction = () => ({
+  type: RESET_CARD_INFO,
 });
 
 type CardInfoAction =
@@ -71,7 +93,9 @@ type CardInfoAction =
   | ReturnType<typeof editCardMarkAction>
   | ReturnType<typeof editCardPeriodAction>
   | ReturnType<typeof editCardUserNameAction>
-  | ReturnType<typeof editCardColorAction>
+  | ReturnType<typeof editCardCompanyAction>
+  | ReturnType<typeof editCardCVCAction>
+  | ReturnType<typeof editCardPasswordAction>
   | ReturnType<typeof resetCardInfoAction>;
 
 const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
@@ -88,11 +112,18 @@ const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
     case EDIT_CARD_USER_NAME:
       return { ...state, userName: action.userName };
 
-    case EDIT_CARD_COLOR:
-      return { ...state, color: action.color };
+    case EDIT_CARD_COMPANY:
+      return { ...state, company: action.company };
+
+    case EDIT_CARD_CVC:
+      return { ...state, cvc: action.cvc };
+
+    case EDIT_CARD_PASSWORD:
+      return { ...state, password: action.password };
 
     case RESET_CARD_INFO:
       return INITIAL_CARD_INFO;
+
     default:
       return state;
   }
@@ -113,12 +144,20 @@ export default function useCardInfoReducer() {
     dispatch(editCardPeriodAction(period));
   };
 
-  const editCardUserName = (name: string) => {
+  const editCardUserName = (name: string | null) => {
     dispatch(editCardUserNameAction(name));
   };
 
-  const editCardColor = (color: CardColor) => {
-    dispatch(editCardColorAction(color));
+  const editCardCompany = (companyName: CardCompanyName | null) => {
+    dispatch(editCardCompanyAction(companyName));
+  };
+
+  const editCardCVC = (cvc: string | null) => {
+    dispatch(editCardCVCAction(cvc));
+  };
+
+  const editCardPassword = (password: string | null) => {
+    dispatch(editCardPasswordAction(password));
   };
 
   const resetCardInfo = () => {
@@ -131,7 +170,11 @@ export default function useCardInfoReducer() {
     editCardMark,
     editCardPeriod,
     editCardUserName,
-    editCardColor,
+    editCardCompany,
+    editCardCVC,
+    editCardPassword,
     resetCardInfo,
   };
 }
+
+export type UseCardInfoReducerReturn = ReturnType<typeof useCardInfoReducer>;

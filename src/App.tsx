@@ -1,38 +1,27 @@
+import { Route, Routes } from 'react-router-dom';
+
+import { Layout } from './components';
+import { PATH } from './constants';
 import './styles/App.css';
+import './styles/global.css';
 import './styles/reset.css';
-import {
-  CardExpirationPeriodInput,
-  CardNumbersInput,
-  CardPreview,
-  CardUserNameInput,
-} from './components';
-import useCardInfoReducer from './modules/useCardInfoReducer';
+import { CardEnrollmentConfirmation, CardEnrollmentPage, Home } from './pages';
+import NonePage from './pages/NonePage/index';
 
 function App() {
-  const {
-    cardInfo,
-    editCardMark,
-    editCardNumbers,
-    editCardPeriod,
-    editCardUserName,
-  } = useCardInfoReducer();
-
   return (
     <div id="app">
-      <div className="inner">
-        <CardPreview cardInfo={cardInfo} />
-
-        <form className="form-container">
-          <fieldset>
-            <CardNumbersInput
-              editCardMark={editCardMark}
-              editCardNumbers={editCardNumbers}
-            />
-            <CardExpirationPeriodInput editCardPeriod={editCardPeriod} />
-            <CardUserNameInput editCardUserName={editCardUserName} />
-          </fieldset>
-        </form>
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path={PATH.cardEnrollment} element={<CardEnrollmentPage />} />
+          <Route
+            path={PATH.cardConfirmation}
+            element={<CardEnrollmentConfirmation />}
+          />
+          <Route index element={<Home />} />
+        </Route>
+        <Route path="/*" element={<NonePage />} />
+      </Routes>
     </div>
   );
 }

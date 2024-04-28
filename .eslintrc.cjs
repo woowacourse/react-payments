@@ -15,6 +15,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', '@typescript-eslint'],
   rules: {
+    'import/no-extraneous-dependencies': 'off',
     'react/jsx-no-useless-fragment': 'off',
     'react/jsx-filename-extension': 'off',
     'react/react-in-jsx-scope': 'off',

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CardUserNameInput } from '../components';
 
 const meta = {
-  title: 'Input',
+  title: 'Form',
   component: CardUserNameInput,
 } satisfies Meta<typeof CardUserNameInput>;
 
@@ -13,6 +13,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardUserNameInputDefault: Story = {
   args: {
-    editCardUserName: () => {},
+    goNextFormStep: () => {},
   },
 };

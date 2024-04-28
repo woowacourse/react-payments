@@ -1,3 +1,4 @@
 export * from './card';
 export * from './message';
-export * from './regExp';
+export * from './regexp';
+export * from './system';

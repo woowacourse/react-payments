@@ -1,0 +1,26 @@
+.formContainer {
+  position: relative;
+  box-sizing: border-box;
+  height: calc(100vh - var(--card-preview-height) - var(--layout-padding));
+  min-height: 21.875rem;
+  fieldset {
+    height: calc(100% - var(--submit-btn-height) - 1rem);
+    overflow: auto;
+  }
+}
+.submitBtn {
+  position: absolute;
+  bottom: 0;
+  margin-top: 1rem;
+  background-color: #333333;
+  width: var(--layout-max-width);
+  min-width: 100%;
+  height: var(--submit-btn-height);
+  color: #f3f3f3;
+}
+
+@media screen and (max-width: 480px) {
+  .submitBtn {
+    width: var(--layout-mobile-width);
+  }
+}
