@@ -12,7 +12,7 @@ const meta = {
   },
   decorators: [
     () => {
-      const owner = useInput(validateOwner);
+      const owner = useInput<string>(validateOwner, '');
       return <CardOwnerInput owner={owner} />;
     },
   ],

@@ -12,7 +12,7 @@ const meta = {
   },
   decorators: [
     () => {
-      const company = useInput(validateCompany);
+      const company = useInput<string>(validateCompany, '');
       return <CardCompanyInput company={company} />;
     },
   ],

@@ -12,7 +12,7 @@ const meta = {
   },
   decorators: [
     () => {
-      const cardNumbers = useInputs(validateCardNumber, ['', '', '', '']);
+      const cardNumbers = useInputs<string>(validateCardNumber, ['', '', '', '']);
       return <CardNumbersInput cardNumbers={cardNumbers} />;
     },
   ],

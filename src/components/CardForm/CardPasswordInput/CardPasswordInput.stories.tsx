@@ -12,7 +12,7 @@ const meta = {
   },
   decorators: [
     () => {
-      const password = useInput(validatePassword);
+      const password = useInput<string>(validatePassword, '');
       return <CardPasswordInput password={password} />;
     },
   ],

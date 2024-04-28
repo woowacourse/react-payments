@@ -12,8 +12,8 @@ const meta = {
   },
   decorators: [
     () => {
-      const month = useInput(validateMonth);
-      const year = useInput(validateYear);
+      const month = useInput<string>(validateMonth, '');
+      const year = useInput<string>(validateYear, '');
       return <CardExpirationInput month={month} year={year} />;
     },
   ],
