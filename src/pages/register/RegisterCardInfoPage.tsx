@@ -188,7 +188,6 @@ export default function RegisterCardInfoPage() {
 
             <Register.Step name={REGISTER_STEP.CARD_NUMBER}>
               <CardNumberInputSection
-                // refs={refs}
                 cardNumbers={cardNumbers}
                 cardNumbersChangeHandler={cardNumbersChangeHandler}
               />

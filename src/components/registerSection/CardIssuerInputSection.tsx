@@ -9,7 +9,7 @@ import INITIAL_CARD_ISSUER_INFO from '@/constants/allCardIssuerInfo';
 interface RegisterCardIssuerProps extends SelectHTMLAttributes<HTMLSelectElement> {}
 
 const CardIssuerInputSection = ({ onChange }: RegisterCardIssuerProps) => {
-  const nameRef = useCallback((node: HTMLInputElement | null) => {
+  const cardIssuerRef = useCallback((node: HTMLInputElement | null) => {
     node?.focus();
   }, []);
 
@@ -17,7 +17,10 @@ const CardIssuerInputSection = ({ onChange }: RegisterCardIssuerProps) => {
     <S.Wrapper>
       <InputSection title={CARD_ISSUER.title} inputTitle="" description={CARD_ISSUER.inputTitle}>
         <Label htmlFor={'cardIssuer'} />
-        <Styled.Select ref={nameRef} onChange={onChange} id={'cardIssuer'}>
+        <Styled.Select ref={cardIssuerRef} onChange={onChange} id={'cardIssuer'}>
+          <option value={''} disabled selected>
+            카드사를 선택해주세요
+          </option>
           {INITIAL_CARD_ISSUER_INFO.map((cardIssuer) => {
             return (
               <option key={cardIssuer.id} value={cardIssuer.value}>
@@ -30,4 +33,5 @@ const CardIssuerInputSection = ({ onChange }: RegisterCardIssuerProps) => {
     </S.Wrapper>
   );
 };
+
 export default CardIssuerInputSection;

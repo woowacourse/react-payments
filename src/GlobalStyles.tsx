@@ -4,6 +4,10 @@ import reset from 'styled-reset';
 const GlobalStyles = createGlobalStyle`
   ${reset}
 
+  select option[value=""][disabled] {
+	display: none;
+}
+
   a{
     text-decoration: none;
     color: inherit;
