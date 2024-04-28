@@ -87,7 +87,7 @@ const CardRegistrationPage = () => {
             isCVCInput={isCVCInput}
           />
         </S.CardPreviewBoxWrapper>
-        <S.CardForm>{renderCardForm(moveIndex)}</S.CardForm>
+        {renderCardForm(moveIndex)}
       </S.CardRegistrationContainer>
       {validationList.every(Boolean) && renderSubmitButton()}
     </div>
