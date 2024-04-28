@@ -19,7 +19,7 @@ import {
   useCVCInput,
   usePasswordInput,
   useUserNameInput,
-} from '../../hooks';
+} from '../../hooks/cardForm';
 
 import styles from './style.module.css';
 
