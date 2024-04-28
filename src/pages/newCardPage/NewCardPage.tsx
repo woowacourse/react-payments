@@ -158,6 +158,8 @@ const NewCardPage = () => {
               placeholder={CARD_FORM_INPUTS.CVC.PLACEHOLDER}
               isError={!!errorMessage.cvc[0]}
               onChange={(event) => handleCardCVC(event)}
+              onFocus={() => setPreview('back')}
+              onBlur={() => setPreview('front')}
             ></Input>
           </NewCardInputSection>
         )}
