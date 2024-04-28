@@ -4,7 +4,7 @@ import * as S from "./style";
 
 export type CardCompanyType = {
   value: string;
-  ref: React.Ref;
+  ref: React.RefObject<HTMLSelectElement>;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 

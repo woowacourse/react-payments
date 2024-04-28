@@ -11,7 +11,7 @@ interface UseInputOptions {
 
 export interface UseInputReturn {
   value: string;
-  ref: React.Ref;
+  ref: React.RefObject<HTMLInputElement>;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   validateMessage: string;
