@@ -4,6 +4,7 @@ import { ERRORS } from "@/constants/messages";
 import { isAllDone } from "@/utils/input";
 import useInput from "./useInput";
 import { getInputAttributes } from "@/utils/input";
+import { CARD_NUMBER } from "@/constants/cardInfo";
 
 const useCardNumbers = () => {
   const [first, setFirst] = useInput();
@@ -12,8 +13,7 @@ const useCardNumbers = () => {
   const [fourth, setFourth] = useInput();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [cardNumbersNextInput, setCardNumbersNextInput] =
-    useState<boolean>(false);
+  const [cardNumbersNextInput, setCardNumbersNextInput] = useState<boolean>(false);
   const firstRef = useRef<HTMLInputElement>(null);
   const secondRef = useRef<HTMLInputElement>(null);
   const thirdRef = useRef<HTMLInputElement>(null);
@@ -34,30 +34,30 @@ const useCardNumbers = () => {
         setErrorMessage(ERRORS.isNotInteger);
         return;
       }
-      setFirst({ value, isDone: value.length === 4, isError: false });
+      setFirst({ value, isDone: value.length === CARD_NUMBER, isError: false });
     } else if (name === "second") {
       if (!Number.isInteger(Number(value))) {
         setSecond({ ...second, isError: true });
         setErrorMessage(ERRORS.isNotInteger);
         return;
       }
-      setSecond({ value, isDone: value.length === 4, isError: false });
+      setSecond({ value, isDone: value.length === CARD_NUMBER, isError: false });
     } else if (name === "third") {
       if (!Number.isInteger(Number(value))) {
         setThird({ ...third, isError: true });
         setErrorMessage(ERRORS.isNotInteger);
         return;
       }
-      setThird({ value, isDone: value.length === 4, isError: false });
+      setThird({ value, isDone: value.length === CARD_NUMBER, isError: false });
     } else if (name === "fourth") {
       if (!Number.isInteger(Number(value))) {
         setFourth({ ...fourth, isError: true });
         setErrorMessage(ERRORS.isNotInteger);
         return;
       }
-      setFourth({ value, isDone: value.length === 4, isError: false });
+      setFourth({ value, isDone: value.length === CARD_NUMBER, isError: false });
     }
-
+    setErrorMessage("");
     if (value.length === 4) {
       if (name === "first") secondRef.current?.focus();
       else if (name === "second") thirdRef.current?.focus();

@@ -1,5 +1,6 @@
 import { ERRORS } from "@/constants/messages";
 import { ChangeEvent, useState, KeyboardEvent } from "react";
+import { CVC_MAX_LENGTH } from "@/constants/cardInfo";
 
 const useCVC = () => {
   const [CVC, setCVC] = useState({
@@ -22,7 +23,7 @@ const useCVC = () => {
   const CVCHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      if (CVC.value.length === 3) {
+      if (CVC.value.length === CVC_MAX_LENGTH) {
         setCVCShowNextInput(true);
       } else {
         setCVC({

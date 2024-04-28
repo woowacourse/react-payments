@@ -1,15 +1,6 @@
-import useCardNumbers from "./useCardNumbers";
-import useCardCompany from "./useCardCompany";
-import useCVC from "./useCVC";
-import useExpirationDate from "./useExpirationDate";
-import useOwnerName from "./useOwnerName";
-import usePassword from "./usePassword";
-
-export {
-  useCardNumbers,
-  useCardCompany,
-  useCVC,
-  useExpirationDate,
-  useOwnerName,
-  usePassword,
-};
+export { default as useCardNumbers } from "./useCardNumbers";
+export { default as useCardCompany } from "./useCardCompany";
+export { default as useCVC } from "./useCVC";
+export { default as useExpirationDate } from "./useExpirationDate";
+export { default as useOwnerName } from "./useOwnerName";
+export { default as usePassword } from "./usePassword";
