@@ -3,7 +3,7 @@ import { CVC_NUMBER } from '../../constants/cardSection';
 import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
-import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
@@ -22,7 +22,7 @@ export default function CvcNumberInput({ cvc, setNextContentDisplay, setIsFlip }
   return (
     <S.Wrapper>
       <InputSection title={CVC_NUMBER.title} inputTitle={CVC_NUMBER.inputTitle}>
-        <ScreenReaderOnlyLabel htmlFor={'cvc'} description={'CVC 번호 입력'} />
+        <InputLabel htmlFor={'cvc'} description={'CVC 번호 입력'} />
         <Input
           isAutoFocus={true}
           ref={cvc.ref}

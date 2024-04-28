@@ -2,8 +2,8 @@ import * as S from './common.style';
 import { Fragment } from 'react/jsx-runtime';
 import { CARD_NUMBER } from '../../constants/cardSection';
 import InputSection from '../InputSection';
-import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
 import Input from '../composables/Input';
+import InputLabel from '../composables/InputLabel';
 import { UseInputReturn } from '../../hooks/useInput';
 import { MAX_LENGTH } from '../../constants/rules';
 
@@ -36,7 +36,7 @@ export default function CardNumbersInput({ cardNumbersArray, setNextContentDispl
 
           return (
             <Fragment key={index}>
-              <ScreenReaderOnlyLabel
+              <InputLabel
                 htmlFor={'cardNumbers' + section}
                 description={`카드 번호 ${section}번째 입력 섹션`}
               />

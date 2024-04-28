@@ -3,7 +3,7 @@ import { PASSWORD } from '../../constants/cardSection';
 import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
-import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
@@ -14,7 +14,7 @@ export default function PasswordInput({ password }: Props) {
   return (
     <S.Wrapper>
       <InputSection title={PASSWORD.title} inputTitle={PASSWORD.inputTitle}>
-        <ScreenReaderOnlyLabel htmlFor={'password'} description={'비밀번호 입력'} />
+        <InputLabel htmlFor={'password'} description={'비밀번호 입력'} />
         <Input
           isAutoFocus={true}
           ref={password.ref}

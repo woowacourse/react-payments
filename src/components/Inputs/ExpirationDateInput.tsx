@@ -3,7 +3,7 @@ import { EXPIRATION_PERIOD } from '../../constants/cardSection';
 import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
-import ScreenReaderOnlyLabel from '../composables/ScreenReaderOnlyLabel';
+import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
@@ -32,7 +32,7 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
         description={EXPIRATION_PERIOD.description}
         inputTitle={EXPIRATION_PERIOD.inputTitle}
       >
-        <ScreenReaderOnlyLabel htmlFor={'month'} description={'월 입력'} />
+        <InputLabel htmlFor={'month'} description={'월 입력'} />
         <Input
           isAutoFocus={true}
           ref={month.ref}
@@ -48,7 +48,7 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
           onBlur={month.onBlurHandler}
           isError={month.isError}
         />
-        <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
+        <InputLabel htmlFor={'year'} description={'년도 입력'} />
         <Input
           ref={year.ref}
           id={'year'}
