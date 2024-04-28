@@ -3,18 +3,51 @@ import CardNumbers from "./CardNumbers";
 import CardLogo from "./CardLogo";
 import ExpirationDate from "./ExpirationDate";
 import UserName from "./UserName";
+import { CARD_COMPANY } from "../../constants/card";
+import { useEffect, useState } from "react";
+
+const BaseCard = styled.div`
+  color: white;
+  padding: 10px 12px;
+  width: 202px;
+  height: 117px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 0px #00000040;
+`;
 
 const Styled = {
-  CardFrame: styled.div`
-    background: #333333;
-    color: white;
-    padding: 10px 12px;
-    width: 202px;
-    height: 117px;
+  CardFrontLayout: styled(BaseCard)<{ backgroundColor: string }>`
+    background: ${(props) => props.backgroundColor};
     display: grid;
     gap: 10px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px 0px #00000040;
+  `,
+
+  CardBackLayout: styled(BaseCard)`
+    background: #d5d5d5;
+    position: relative;
+  `,
+
+  CardCVCLine: styled.div`
+    background: #cbba64;
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 90px;
+    left: 0;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    text-align: right;
+  `,
+
+  CVCNumber: styled.div`
+    padding-right: 15px;
   `,
 
   ICChip: styled.div`
@@ -25,28 +58,59 @@ const Styled = {
   `,
 };
 
+interface CardFrontProps {
+  backgroundColor: string;
+  cardNumbers: string[];
+  expirationDate: string[];
+  userName: string[];
+}
+
+interface CardPreviewProps {
+  cardNumbers: string[];
+  expirationDate: string[];
+  userName: string[];
+  cardCompany: string[];
+  cardCVC: string[];
+  cardPassword: string[];
+  focusedField: string;
+}
+
+const CardFront = ({ backgroundColor, cardNumbers, expirationDate, userName }: CardFrontProps) => (
+  <Styled.CardFrontLayout backgroundColor={backgroundColor}>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <Styled.ICChip />
+      <CardLogo cardNumbers={cardNumbers} />
+    </div>
+    <div style={{ display: "grid", gap: "8px", paddingLeft: "5px" }}>
+      <CardNumbers cardNumbers={cardNumbers} />
+      <ExpirationDate expirationDate={expirationDate} />
+      <UserName userName={userName} />
+    </div>
+  </Styled.CardFrontLayout>
+);
+
 const CardPreview = ({
   cardNumbers,
   expirationDate,
   userName,
-}: {
-  cardNumbers: string[];
-  expirationDate: string[];
-  userName: string[];
-}) => {
+  cardCompany,
+
+  focusedField,
+}: CardPreviewProps) => {
+  const [backgroundColor, setBackgroundColor] = useState("#333333");
+
+  useEffect(() => {
+    if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
+  }, [cardCompany, focusedField]);
+
   return (
     <>
-      <Styled.CardFrame>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Styled.ICChip />
-          <CardLogo cardNumbers={cardNumbers} />
-        </div>
-        <div style={{ display: "grid", gap: "8px", paddingLeft: "5px" }}>
-          <CardNumbers cardNumbers={cardNumbers} />
-          <ExpirationDate expirationDate={expirationDate} />
-          <UserName userName={userName} />
-        </div>
-      </Styled.CardFrame>
+      <CardFront
+        backgroundColor={backgroundColor}
+        cardNumbers={cardNumbers}
+        expirationDate={expirationDate}
+        userName={userName}
+      />
     </>
   );
 };
