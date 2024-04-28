@@ -15,18 +15,18 @@ const CardCompanyForm = ({
   setAllFormsValid: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFormFilledOnce: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (isSelected) {
-      setIsGotInputOnce(true);
+      setIsEditedOnce(true);
       setErrorMessage("");
       setAllFormsValid(true);
       setIsFormFilledOnce(true);
     } else {
-      if (isGotInputOnce) {
+      if (isEditedOnce) {
         setErrorMessage(CARD_COMPANY_FORM.errorMessage.notSelected);
       }
 

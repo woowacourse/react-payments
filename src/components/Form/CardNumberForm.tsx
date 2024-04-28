@@ -21,7 +21,7 @@ const CardNumberForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState<InputValidities>(
     Array.from({ length: inputCount }, () => false).reduce<InputValidities>(
@@ -52,7 +52,7 @@ const CardNumberForm = ({
     focusNextInput();
 
     setErrorMessage(
-      isAllValid || !isGotInputOnce
+      isAllValid || !isEditedOnce
         ? ""
         : CARD_NUMBER_FORM.errorMessage.fourDigits
     );
@@ -88,7 +88,7 @@ const CardNumberForm = ({
       errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
       setFocusedInputIndex={setFocusedIndex}
       onFocus={() => {
-        setIsGotInputOnce && setIsGotInputOnce(true);
+        setIsEditedOnce && setIsEditedOnce(true);
       }}
     />
   ));

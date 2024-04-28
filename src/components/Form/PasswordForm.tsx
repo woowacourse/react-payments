@@ -16,7 +16,7 @@ const PasswordForm = ({
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({
     0: false,
@@ -39,7 +39,7 @@ const PasswordForm = ({
     }
 
     setErrorMessage(
-      allValid || !isGotInputOnce ? "" : PASSWORD_FORM.errorMessage.notTwoDigits
+      allValid || !isEditedOnce ? "" : PASSWORD_FORM.errorMessage.notTwoDigits
     );
   }, [inputValidities]);
 
@@ -61,7 +61,7 @@ const PasswordForm = ({
       }
       validationRule={(value) => value.trim() === "" || validatePassword(value)}
       errorMessageText=""
-      onFocus={() => (setIsGotInputOnce ? setIsGotInputOnce(true) : () => {})}
+      onFocus={() => (setIsEditedOnce ? setIsEditedOnce(true) : () => {})}
     />
   ));
 

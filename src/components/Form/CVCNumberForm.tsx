@@ -17,7 +17,7 @@ const CVCNumberForm = ({
   setIsFrontCardPreview,
   setCVCNumber,
 }: ICardFormProps) => {
-  const [isGotInputOnce, setIsGotInputOnce] = useState(false);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({ 0: false });
 
@@ -40,7 +40,7 @@ const CVCNumberForm = ({
     setAllFormsValid(isAllValid);
 
     setErrorMessage(
-      isAllValid || !isGotInputOnce
+      isAllValid || !isEditedOnce
         ? ""
         : CVC_NUMBER_FORM.errorMessage.notThreeDigits
     );
@@ -68,7 +68,7 @@ const CVCNumberForm = ({
       errorMessageText={""}
       onFocus={() => {
         setIsFrontCardPreview ? setIsFrontCardPreview(false) : () => {};
-        setIsGotInputOnce ? setIsGotInputOnce(true) : () => {};
+        isEditedOnce ? setIsEditedOnce(true) : () => {};
       }}
       onBlur={() =>
         setIsFrontCardPreview ? setIsFrontCardPreview(true) : () => {}
