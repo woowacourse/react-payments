@@ -2,7 +2,7 @@ export interface CardInfo {
   cardNumbers: string[];
   expirationDate: string[];
   cardOwnerName: string;
-  cardCompany: string;
+  cardCompany: CardCompany | '';
   cardCVCNumber: string;
   cardPassword: string;
 }

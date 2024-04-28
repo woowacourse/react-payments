@@ -5,7 +5,7 @@ import CardText from './CardText';
 import CardNumberDisplay from './CardNumberDisplay';
 import ExpirationDateDisplay from './ExpirationDateDisplay';
 
-import { CardInfo } from '../../types/card';
+import { CardCompany, CardInfo } from '../../types/card';
 
 import useCardLogo from '../../hooks/useCardType';
 import { CARD_COLOR } from '../../constants/card-app';
@@ -54,7 +54,7 @@ const CardPreview = ({ cardInfo, isCardFront }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardFront = styled.div<{ company: string }>`
+const CardFront = styled.div<{ company: CardCompany | '' }>`
   height: 132px;
   width: 212px;
 

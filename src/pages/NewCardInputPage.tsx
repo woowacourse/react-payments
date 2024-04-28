@@ -22,6 +22,7 @@ import ExpirationDateInput from '../components/ExpirationDateInput';
 import CardOwnerNameInput from '../components/CardOwnerNameInput';
 import CardCVCNumberInput from '../components/CardCVCNumberInput';
 import CardPasswordInput from '../components/CardPasswordInput';
+import { CardCompany } from '../types/card';
 
 const NewCardInputPage = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const NewCardInputPage = () => {
   const { cardNumberState, handleCardNumberChange } = useCardNumberInput();
   const { expirationDateState, handleExpirationDateChange } = useExpirationDateInput();
   const { cardOwnerNameState, handleCardOwnerNameChange, updateValue } = useCardOwnerNameInput();
-  const [cardCompany, setCardCompany] = useState('');
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const { cardCVCNumberState, handleCardCVCNumberChange } = useCardCVCNumberInput();
   const { cardPasswordState, handleCardPasswordChange } = useCardPasswordInput();
 
@@ -123,7 +124,11 @@ const NewCardInputPage = () => {
           <>
             <Title content={CARD_META_INFO.cardCompany.query} />
             <Caption text={CARD_META_INFO.cardCompany.caption} type='input' />
-            <Dropdown value={cardCompany} options={CARD_COMPANY_OPTIONS} onSelect={(e) => setCardCompany(e)} />
+            <Dropdown
+              value={cardCompany}
+              options={CARD_COMPANY_OPTIONS}
+              onSelect={(e) => setCardCompany(e as CardCompany)}
+            />
           </>
         )}
 
