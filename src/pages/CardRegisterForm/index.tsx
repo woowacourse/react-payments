@@ -24,12 +24,10 @@ import {
 import styles from './style.module.css';
 
 function CardRegisterForm() {
-  const { cardNumber, cardExpiration, cardCVC, cardPassword } = INPUT_LENGTH;
-
   const navigate = useNavigate();
 
   const { numbers, numberErrors, isCardNumbersAllFilled, handleNumberChange } =
-    useCardNumbersInput(cardNumber);
+    useCardNumbersInput(INPUT_LENGTH.cardNumber, 4);
 
   const {
     cardCompany,
@@ -39,7 +37,7 @@ function CardRegisterForm() {
   } = useCardCompanyInput();
 
   const { period, periodErrors, isPeriodAllFilled, handlePeriodChange } =
-    useCardExpirationPeriodInput(cardExpiration);
+    useCardExpirationPeriodInput(INPUT_LENGTH.cardExpiration);
 
   const {
     CVCNumber,
@@ -48,7 +46,7 @@ function CardRegisterForm() {
     showCardBack,
     handleCVCNumberChange,
     handleShowCardBack,
-  } = useCVCInput(3);
+  } = useCVCInput(INPUT_LENGTH.cardCVC);
 
   const {
     userName,
@@ -58,7 +56,9 @@ function CardRegisterForm() {
     handleNameInputEnter,
   } = useUserNameInput();
 
-  const { password, passwordError, handlePasswordChange } = usePasswordInput(2);
+  const { password, passwordError, handlePasswordChange } = usePasswordInput(
+    INPUT_LENGTH.cardPassword,
+  );
 
   const errors = [
     ...numberErrors,
@@ -73,7 +73,7 @@ function CardRegisterForm() {
 
   const isError = errors.some((error) => error === true);
   const isBlank = inputs.some((input) => input === '');
-
+  
   const handleConfirmButtonClick = () => {
     navigate('/card-register-success', {
       state: { cardNumber: numbers[0], cardCompany },
@@ -96,7 +96,6 @@ function CardRegisterForm() {
         <fieldset>
           {isCVCNumberFilled && (
             <PasswordInput
-              maxLength={cardPassword}
               password={password}
               passwordError={passwordError}
               onPasswordChange={handlePasswordChange}
@@ -104,7 +103,6 @@ function CardRegisterForm() {
           )}
           {isUserNameFilled && (
             <CVCInput
-              maxLength={cardCVC}
               CVCNumber={CVCNumber}
               CVCNumberError={CVCNumberError}
               onCVCNumberChange={handleCVCNumberChange}
@@ -122,7 +120,6 @@ function CardRegisterForm() {
           )}
           {cardCompany && (
             <CardExpirationPeriodInput
-              maxLength={cardExpiration}
               period={period}
               periodErrors={periodErrors}
               onPeriodChange={handlePeriodChange}
@@ -136,7 +133,6 @@ function CardRegisterForm() {
             />
           )}
           <CardNumbersInput
-            maxLength={cardNumber}
             numbers={numbers}
             numberErrors={numberErrors}
             onNumberChange={handleNumberChange}

@@ -4,23 +4,24 @@ import INPUT_REGEX from '../../constants/regex';
 
 const useCardExpirationPeriodInput = (maxLength: number) => {
   const [period, setPeriod] = useState({ month: '', year: '' });
-  const [periodErrors, setPeriodError] = useState({
+  const [periodErrors, setPeriodErrors] = useState({
     month: false,
     year: false,
     expired: false,
   });
   const [isPeriodAllFilled, setIsPeriodAllFilled] = useState(false);
 
-  const validateMonth = (value: string) => INPUT_REGEX.period.month.test(value);
-
-  const validateYear = (value: string) => INPUT_REGEX.period.year.test(value);
+  const validatePeriod = (value: string, type: string) => {
+    const regex =
+      type === 'month' ? INPUT_REGEX.period.month : INPUT_REGEX.period.year;
+    return regex.test(value);
+  };
 
   const validateExpiration = (month: string, year: string) => {
     const currentYear = new Date().getFullYear() % 100;
     const currentMonth = new Date().getMonth() + 1;
     const inputYear = parseInt(year, 10);
     const inputMonth = parseInt(month, 10);
-
     return !(
       inputYear < currentYear ||
       (inputYear === currentYear && inputMonth < currentMonth)
@@ -30,30 +31,26 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
   const handlePeriodChange = (type: 'month' | 'year', value: string) => {
     const trimmedValue = value.slice(0, maxLength);
 
-    if (type === 'month') {
-      const isValidMonth = validateMonth(trimmedValue);
-      setPeriodError((prev) => ({ ...prev, month: !isValidMonth }));
-    } else if (type === 'year') {
-      const isValidYear = validateYear(trimmedValue);
-      setPeriodError((prev) => ({ ...prev, year: !isValidYear }));
+    const newPeriod = { ...period, [type]: trimmedValue };
+    setPeriod(newPeriod);
+
+    const isValidPeriod = validatePeriod(trimmedValue, type);
+    const isExpired = !validateExpiration(newPeriod.month, newPeriod.year);
+
+    setPeriodErrors((prevErrors) => ({
+      ...prevErrors,
+      [type]: !isValidPeriod,
+    }));
+
+    setPeriodErrors((prevErrors) => ({ ...prevErrors, expired: isExpired }));
+
+    if (
+      !isPeriodAllFilled &&
+      newPeriod.month.length === 2 &&
+      newPeriod.year.length === 2
+    ) {
+      setIsPeriodAllFilled(true);
     }
-
-    setPeriod((prev) => {
-      const newPeriod = { ...prev, [type]: trimmedValue };
-
-      const isExpired = !validateExpiration(newPeriod.month, newPeriod.year);
-      setPeriodError((prevErrors) => ({ ...prevErrors, expired: isExpired }));
-
-      if (!isPeriodAllFilled) {
-        const allFilled =
-          newPeriod.month.length === 2 && newPeriod.year.length === 2;
-
-        if (allFilled) {
-          setIsPeriodAllFilled(true);
-        }
-      }
-      return newPeriod;
-    });
   };
 
   return { period, periodErrors, handlePeriodChange, isPeriodAllFilled };

@@ -10,6 +10,7 @@ function usePasswordInput(maxLength: number) {
     const trimmedValue = value.slice(0, maxLength);
 
     setPassword(trimmedValue);
+
     setPasswordError(!INPUT_REGEX.password.test(trimmedValue));
   };
 

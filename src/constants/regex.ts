@@ -1,4 +1,5 @@
 const INPUT_REGEX = {
+  cardNumber: /^\d{4}$/,
   period: {
     month: /^(0?[1-9]|1[0-2])$/,
     year: /^[0-9]{2}$/,

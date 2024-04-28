@@ -1,6 +1,7 @@
 import {
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
+  INPUT_LENGTH,
 } from '../../../../constants';
 import useAutoFocus from '../../../../hooks/useAutoFocus';
 import Input from '../../../common/Input';
@@ -13,14 +14,12 @@ import styles from './style.module.css';
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
 interface CardNumbersInputProps {
-  maxLength: number;
   numbers: string[];
   numberErrors: boolean[];
   onNumberChange: (value: string, index: number) => void;
 }
 
 function CardNumbersInput({
-  maxLength,
   numbers,
   numberErrors,
   onNumberChange,
@@ -30,7 +29,7 @@ function CardNumbersInput({
 
   const handleInputChange = (value: string, index: number) => {
     onNumberChange(value, index);
-    if (value.length === maxLength) {
+    if (value.length === INPUT_LENGTH.cardNumber) {
       focusElementAtIndex(index + 1);
     }
   };
@@ -53,7 +52,6 @@ function CardNumbersInput({
               type="number"
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               value={number}
-              maxLength={maxLength}
               placeholder={placeholder}
               isError={numberErrors[index]}
               onChange={(event) => handleInputChange(event.target.value, index)}

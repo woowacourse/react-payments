@@ -6,7 +6,6 @@ const meta: Meta<typeof ExpirationPeriodInput> = {
   title: 'CardInput Container',
   component: ExpirationPeriodInput,
   args: {
-    maxLength: 2,
     period: { month: '', year: '' },
     periodErrors: { month: false, year: false, expired: false },
     onPeriodChange: () => {},

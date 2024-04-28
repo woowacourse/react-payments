@@ -1,34 +1,33 @@
 import { useState } from 'react';
 
-const useCardNumbersInput = (maxLength: number) => {
-  const [numbers, setNumbers] = useState(Array(maxLength).fill(''));
+import INPUT_REGEX from '../../constants/regex';
+
+const useCardNumbersInput = (maxLength: number, inputCount = 1) => {
+  const initialNumbersState = Array(inputCount).fill('');
+  const [numbers, setNumbers] = useState(initialNumbersState);
   const [numberErrors, setNumberErrors] = useState(
-    Array(maxLength).fill(false),
+    Array(inputCount).fill(false),
   );
   const [isCardNumbersAllFilled, setIsCardNumbersAllFilled] = useState(false);
 
   const handleNumberChange = (value: string, inputIndex: number) => {
     const trimmedValue = value.slice(0, maxLength);
-    const isValidNumber = trimmedValue.length === maxLength;
 
-    const updatedNumbers = numbers.map((number, index) =>
-      index === inputIndex ? trimmedValue : number,
-    );
+    const updatedNumbers = [...numbers];
+    updatedNumbers[inputIndex] = trimmedValue;
     setNumbers(updatedNumbers);
 
-    const updateNumbersError = numberErrors.map((isError, index) =>
-      index === inputIndex ? !isValidNumber : isError,
-    );
-    setNumberErrors(updateNumbersError);
+    const isValidNumber = INPUT_REGEX.cardNumber.test(trimmedValue);
 
-    if (!isCardNumbersAllFilled) {
-      const allFilled = updatedNumbers.every(
-        (number) => number.length === maxLength,
-      );
+    const updatedNumberErrors = [...numberErrors];
+    updatedNumberErrors[inputIndex] = !isValidNumber;
+    setNumberErrors(updatedNumberErrors);
 
-      if (allFilled) {
-        setIsCardNumbersAllFilled(true);
-      }
+    if (
+      !isCardNumbersAllFilled &&
+      updatedNumbers.every((number) => number.length === maxLength)
+    ) {
+      setIsCardNumbersAllFilled(true);
     }
   };
 

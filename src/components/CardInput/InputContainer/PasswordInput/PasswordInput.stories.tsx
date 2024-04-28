@@ -5,9 +5,7 @@ import PasswordInput from './index';
 const meta: Meta<typeof PasswordInput> = {
   title: 'CardInput Container',
   component: PasswordInput,
-  args: {
-    maxLength: 2,
-  },
+  args: {},
 };
 
 export default meta;

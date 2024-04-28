@@ -12,12 +12,11 @@ function useCVCInput(maxLength: number) {
     const trimmedValue = value.slice(0, maxLength);
 
     setCVCNumber(trimmedValue);
+
     setCVCNumberError(!INPUT_REGEX.CVCNumber.test(trimmedValue));
 
-    if (!isCVCNumberFilled) {
-      if (trimmedValue.length === maxLength) {
-        setIsCVCNumberFilled(true);
-      }
+    if (!isCVCNumberFilled && trimmedValue.length === maxLength) {
+      setIsCVCNumberFilled(true);
     }
   };
 

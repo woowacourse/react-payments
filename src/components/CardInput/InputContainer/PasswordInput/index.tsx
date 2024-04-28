@@ -10,14 +10,12 @@ import InputWrap from '../../InputWrap';
 import styles from './style.module.css';
 
 interface PasswordInputProps {
-  maxLength: number;
   password: string;
   passwordError: boolean;
   onPasswordChange: (value: string) => void;
 }
 
 function PasswordInput({
-  maxLength,
   password,
   passwordError,
   onPasswordChange,
@@ -37,10 +35,9 @@ function PasswordInput({
         <div>
           <div className={styles.inputWrap}>
             <Input
-              type="number"
+              type="password"
               name="password"
               value={password}
-              maxLength={maxLength}
               placeholder={placeholder}
               isError={passwordError}
               onChange={(event) => onPasswordChange(event.target.value)}

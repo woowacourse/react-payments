@@ -7,7 +7,6 @@ import InputWrap from '../../InputWrap';
 import styles from './style.module.css';
 
 interface CVCInputProps {
-  maxLength: number;
   CVCNumber: string;
   CVCNumberError: boolean;
   onCVCNumberChange: (value: string) => void;
@@ -16,7 +15,6 @@ interface CVCInputProps {
 }
 
 function CVCInput({
-  maxLength,
   CVCNumber,
   CVCNumberError,
   onCVCNumberChange,
@@ -41,7 +39,6 @@ function CVCInput({
               type="number"
               name="CVC"
               value={CVCNumber}
-              maxLength={maxLength}
               placeholder={placeholder}
               isError={CVCNumberError}
               onChange={(event) => onCVCNumberChange(event.target.value)}
