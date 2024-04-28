@@ -17,7 +17,7 @@ export default function SucceedSubmit() {
           {cardCompany.name}가 등록되었어요.
         </TextBox>
         <Link to="/">
-          <Button> 확인 </Button>
+          <Button>확인</Button>
         </Link>
       </Container>
     </CenterPage>

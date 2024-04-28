@@ -21,17 +21,12 @@ export const useInputField = ({ inputTypes, handleComplete }: Props) => {
     }
   }, [errorMessages]);
 
-  const isCompleted = () => {
-    if (
-      Object.keys(values).length === inputTypes.inputInfo.length &&
-      Object.values(errorMessages).every((message) => message === '') &&
-      Object.values(values).every((value, index) =>
-        checkLength(value, inputTypes.inputInfo[index].minLength)
-      )
-    )
-      return true;
-    else return false;
-  };
+  const isCompleted = () =>
+    Object.keys(values).length === inputTypes.inputInfo.length &&
+    Object.values(errorMessages).every((message) => message === '') &&
+    Object.values(values).every((value, index) =>
+      checkLength(value, inputTypes.inputInfo[index].minLength)
+    );
 
   const updateInputValue = (property: string, value: string) => {
     setValues((prevValues) => ({
