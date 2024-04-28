@@ -40,20 +40,14 @@ const MainPage = () => {
   } = useExpirationDate();
   const {
     ownerName,
+    errorMessage: ownerNameErrorMessage,
     changeOwnerName,
     ownerNameRef,
     ownerNameNextInput,
     ownerNameHandleKeyDown,
   } = useOwnerName();
-  const {
-    CVC,
-    CVCShowNextInput,
-    CVCHandleKeyDown,
-    changeCVC,
-    isFocus,
-    focusCVC,
-    blurCVC,
-  } = useCVC();
+  const { CVC, CVCShowNextInput, CVCHandleKeyDown, changeCVC, isFocus, focusCVC, blurCVC } =
+    useCVC();
   const { cardCompany, cardCompanyRef, changeCardCompany } = useCardCompany();
   const { password, changePassword } = usePassword();
   const navigate = useNavigate();
@@ -78,9 +72,7 @@ const MainPage = () => {
         ownerName={ownerName.isDone ? ownerName.value : ""}
       />
       <form onSubmit={handleSubmit}>
-        {CVCShowNextInput && (
-          <PasswordInput password={password} onChange={changePassword} />
-        )}
+        {CVCShowNextInput && <PasswordInput password={password} onChange={changePassword} />}
         {ownerNameNextInput && (
           <CVCInput
             CVC={CVC}
@@ -93,6 +85,7 @@ const MainPage = () => {
         {expirationDateNextInput && (
           <OwnerNameInput
             ownerName={ownerName}
+            errorMessage={ownerNameErrorMessage}
             changeOwnerName={changeOwnerName}
             ownerNameRef={ownerNameRef}
             onKeyDown={ownerNameHandleKeyDown}

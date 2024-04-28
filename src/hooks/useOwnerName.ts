@@ -1,25 +1,21 @@
 import { CARD_OWNERNAME_KEY } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
 import { isEnglishCharacter } from "@/utils/validators";
-import {
-  ChangeEvent,
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-  KeyboardEvent,
-} from "react";
+import { ChangeEvent, useState, useCallback, useRef, useEffect, KeyboardEvent } from "react";
+import useInput from "./useInput";
 
 const useOwnerName = () => {
-  const [ownerName, setOwnerName] = useState({
-    value: "",
-    isError: false,
-    isDone: false,
-    errorMessage: "",
-  });
+  // const [ownerName, setOwnerName] = useState({
+  //   value: "",
+  //   isError: false,
+  //   isDone: false,
+  //   errorMessage: "",
+  // });
 
   const [ownerNameNextInput, setOwnerNameNextInput] = useState<boolean>(false);
   const ownerNameRef = useRef<HTMLInputElement>(null);
+  const [ownerName, setOwnerNameValue, setOwnerNameIsError, setOwerNameIsDone] = useInput();
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (ownerName.isDone) {
@@ -29,10 +25,11 @@ const useOwnerName = () => {
 
   const ownerNameHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && ownerName.value !== "") {
-      setOwnerName({
-        ...ownerName,
-        isDone: true,
-      });
+      // setOwnerName({
+      //   ...ownerName,
+      //   isDone: true,
+      // });
+      setOwerNameIsDone(true);
       ownerNameRef.current?.blur();
     }
   };
@@ -46,25 +43,30 @@ const useOwnerName = () => {
       if (!CARD_OWNERNAME_KEY.includes(name)) return;
 
       if (!isEnglishCharacter(value)) {
-        setOwnerName({
-          ...ownerName,
-          isError: true,
-          errorMessage: ERRORS.isNotAlphabet,
-        });
+        // setOwnerName({
+        //   ...ownerName,
+        //   isError: true,
+        //   errorMessage: ERRORS.isNotAlphabet,
+        // });
+        setErrorMessage(ERRORS.isNotAlphabet);
         return;
       }
-      setOwnerName({
-        ...ownerName,
-        value,
-        isError: false,
-        errorMessage: "",
-      });
+      // setOwnerName({
+      //   ...ownerName,
+      //   value,
+      //   isError: false,
+      //   errorMessage: "",
+      // });
+      setOwnerNameValue(value);
+      setOwnerNameIsError(false);
+      setErrorMessage("");
     },
     [ownerName]
   );
 
   return {
     ownerName,
+    errorMessage,
     changeOwnerName,
     ownerNameHandleKeyDown,
     ownerNameNextInput,
