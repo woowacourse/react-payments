@@ -12,7 +12,7 @@ const meta = {
   },
   decorators: [
     () => {
-      const cvc = useInput(validateCVC);
+      const cvc = useInput<string>(validateCVC, '');
       return <CardCVCInput cvc={cvc} handleIsCVCInput={() => {}} />;
     },
   ],

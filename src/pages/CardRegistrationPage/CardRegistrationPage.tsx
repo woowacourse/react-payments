@@ -22,6 +22,7 @@ import {
   validatePassword,
   validateCardNumber,
 } from '../../domain/Card';
+import type { CardCompany } from '../../domain/Card.type';
 import { isAllValid } from '../../utils/validation';
 import { ROUTES } from '../../constants/Routes';
 
@@ -83,7 +84,7 @@ const CardRegistrationPage = () => {
             month={month.value}
             year={year.value}
             owner={owner.value}
-            company={company.value}
+            company={company.value as CardCompany}
             cvc={cvc.value}
             isCVCInput={isCVCInput}
           />
