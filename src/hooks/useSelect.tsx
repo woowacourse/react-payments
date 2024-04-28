@@ -7,15 +7,18 @@ interface Props {
 
 const useSelect = ({ inputLength }: Props) => {
   const initializeInputFieldState = (length: number) => {
-    return Array.from({ length }, (_, index) => ({
-      value: '',
-      hasError: false,
-      hasFocus: index === 0,
-      isFilled: false,
-    })).reduce((acc, curr, index) => {
-      acc[index] = curr;
-      return acc;
-    }, {} as InputStates);
+    const inputStates: InputStates = {};
+
+    Array.from({ length }, (_, index) => {
+      inputStates[index] = {
+        value: '',
+        hasError: false,
+        hasFocus: index === 0,
+        isFilled: false,
+      };
+    });
+
+    return inputStates;
   };
 
   const [errorMessage, setErrorMessage] = useState('');
