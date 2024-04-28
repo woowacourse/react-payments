@@ -1,9 +1,10 @@
 import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import useInputs from "./useInputs";
-import { VALID_LENGTH } from "@/constants/condition";
+import { MIN_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import {
   validateDoubleSpace,
   validateIsCapital,
+  validateIsMinNumber,
   validateIsNumber,
   validateIsValidLength,
   validateMonth,
@@ -52,6 +53,7 @@ const useCardRegister = () => {
     validates: [
       (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
+      (value: string) => validateIsMinNumber(value, MIN_LENGTH.OWNER_NAME),
     ],
     inputChangeCallbacks: [
       (value: string) =>
@@ -78,8 +80,8 @@ const useCardRegister = () => {
   const passwordState = useInput<string>({
     initialValue: "",
     validates: [
-      (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
       (value: string) => validateIsNumber(value),
+      (value: string) => validateIsValidLength(value, VALID_LENGTH.PASSWORD),
     ],
     inputChangeCallbacks: [
       (value: string) => sliceInvalidValueWithRegex(value, REGEX.NUMBERS),

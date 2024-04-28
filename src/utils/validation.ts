@@ -1,4 +1,3 @@
-import { VALID_LENGTH } from "@/constants/condition";
 import { REGEX } from "@/constants/regex";
 
 export enum ErrorStatus {
@@ -23,23 +22,9 @@ export const validateIsValidLength = (
   return { isValid: true };
 };
 
-export const validateExpirationDate = (date: string[]) => {
-  const [expirationMonth, expirationYear] = date;
-
-  const month = Number(expirationMonth);
-  const year = Number(expirationYear);
-
-  if (
-    expirationMonth.length === VALID_LENGTH.EXPIRATION_PERIOD &&
-    expirationYear.length === VALID_LENGTH.EXPIRATION_PERIOD
-  ) {
-    const today = new Date();
-    const currentMonth = today.getMonth() + 1;
-    const currentYear = today.getFullYear() - 2000;
-
-    if (year < currentYear || (year === currentYear && month < currentMonth)) {
-      return { type: ErrorStatus.EXPIRED_CARD_DATE, isValid: false };
-    }
+export const validateIsMinNumber = (newValue: string, minLength: number) => {
+  if (newValue.length < minLength) {
+    return { type: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
   return { isValid: true };
 };

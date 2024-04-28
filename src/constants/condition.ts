@@ -17,6 +17,10 @@ export const MAX_LENGTH = {
   OWNER_NAME: 30,
 };
 
+export const MIN_LENGTH = {
+  OWNER_NAME: 2,
+};
+
 export const VALID_LENGTH = {
   CARD_NUMBERS: 4,
   EXPIRATION_PERIOD: 2,

@@ -24,14 +24,6 @@ const useInput = <T,>({
   ) => {
     let newValue = event.target.value;
 
-    if (inputChangeCallbacks) {
-      inputChangeCallbacks.forEach((inputChangeCallbacks) => {
-        newValue = inputChangeCallbacks(newValue);
-      });
-
-      event.target.value = newValue;
-    }
-
     if (validates) {
       const newErrors = validates
         .map((validate) => validate(newValue))
@@ -39,6 +31,14 @@ const useInput = <T,>({
         .map((result) => result.type);
 
       setError(newErrors as string[]);
+    }
+
+    if (inputChangeCallbacks) {
+      inputChangeCallbacks.forEach((inputChangeCallbacks) => {
+        newValue = inputChangeCallbacks(newValue);
+      });
+
+      event.target.value = newValue;
     }
 
     setValue(newValue as T);

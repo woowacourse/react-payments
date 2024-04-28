@@ -3,7 +3,7 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputRefs from "@/hooks/useInputRefs";
@@ -28,21 +28,23 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
 
 type ExpirationPeriodErrorType =
   | ErrorStatus.IS_NOT_NUMBER
-  | ErrorStatus.INVALID_MONTH;
+  | ErrorStatus.INVALID_MONTH
+  | ErrorStatus.INVALID_LENGTH;
 
 const ExpirationPeriodErrorMessages: Record<ExpirationPeriodErrorType, string> =
   {
     [ErrorStatus.IS_NOT_NUMBER]: "숫자로 입력하세요.",
     [ErrorStatus.INVALID_MONTH]: "달은 2자리의 정수로 입력해 주세요.",
+    [ErrorStatus.INVALID_LENGTH]: "2자리의 정수로 입력해 주세요.",
   };
 
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors } = expirationPeriodState;
-
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
   );
+  const [isErrorShow, setIsErrorShow] = useState(isErrorInInputs(errors));
 
   const currentErrorMessages = (
     Object.values(errors) as ExpirationPeriodErrorType[]
@@ -57,7 +59,7 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
       <InputField
         label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
         errorMessages={currentErrorMessages}
-        isErrorShow={isErrorInInputs(errors)}
+        isErrorShow={isErrorShow}
       >
         {new Array(INPUT_COUNTS.EXPIRATION_PERIOD)
           .fill(0)
@@ -73,6 +75,7 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
                 onFocusNextInput(e, index);
               }}
               isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}
+              onBlur={() => setIsErrorShow(true)}
             />
           ))}
       </InputField>

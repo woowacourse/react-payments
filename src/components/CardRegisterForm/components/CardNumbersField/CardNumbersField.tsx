@@ -6,7 +6,7 @@ import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useInputRefs from "@/hooks/useInputRefs";
 import { isErrorInInputs } from "@/utils/view";
-import React from "react";
+import React, { useState } from "react";
 import InputFieldMemo from "@/components/_common/InputField/InputField";
 
 export type CardNumberInputType = {
@@ -28,6 +28,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
   );
+  const [isErrorShow, setIsErrorShow] = useState(isErrorInInputs(errors));
 
   return (
     <S.InputFieldWithInfo>
@@ -38,7 +39,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
       <InputFieldMemo
         label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
         errorMessages={["카드 번호는 4자리 정수로 입력하셔야 합니다."]}
-        isErrorShow={isErrorInInputs(errors)}
+        isErrorShow={isErrorShow}
       >
         {new Array(INPUT_COUNTS.CARD_NUMBERS)
           .fill(0)
@@ -55,6 +56,7 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
                 onFocusNextInput(e, index);
               }}
               isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
+              onBlur={() => setIsErrorShow(isErrorInInputs(errors))}
             />
           ))}
       </InputFieldMemo>

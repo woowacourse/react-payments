@@ -3,7 +3,7 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { ErrorStatus } from "@/utils/validation";
@@ -13,14 +13,19 @@ interface Props {
   setIsNameEntered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-type OwnerNameErrorType = ErrorStatus.NAME_SHOULD_BE_CAPITAL;
+type OwnerNameErrorType =
+  | ErrorStatus.NAME_SHOULD_BE_CAPITAL
+  | ErrorStatus.INVALID_LENGTH;
 
 const OwnerNameErrorMessage: Record<OwnerNameErrorType, string> = {
   [ErrorStatus.NAME_SHOULD_BE_CAPITAL]: "이름은 영어 대문자로 입력해 주세요.",
+  [ErrorStatus.INVALID_LENGTH]:
+    "이름은 영어 대문자로 2글자 이상 입력해 주세요.",
 };
 
 const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
   const { onChange, error } = ownerNameState;
+  const [isErrorShow, setIsErrorShow] = useState(false);
 
   const currentErrorMessages = (
     Object.values(error) as OwnerNameErrorType[]
@@ -38,6 +43,7 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
         errorMessages={currentErrorMessages}
+        isErrorShow={isErrorShow}
       >
         <Input
           autoFocus={true}
@@ -51,6 +57,8 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
             onEnterCompleted(e)
           }
+          onFocus={() => setIsErrorShow(true)}
+          onBlur={() => setIsErrorShow(true)}
         />
       </InputField>
     </S.InputFieldWithInfo>
