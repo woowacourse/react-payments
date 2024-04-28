@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate } from "react-router-dom";
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { FormRenderOrderContext } from "../../routes/Payments";
 import SubmitButton from "../Button/SubmitButton";
+import { FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
 
 import CardCVCField from "../FormField/CardCVCField";
 import CardIssuerField from "../FormField/CardIssuerField";

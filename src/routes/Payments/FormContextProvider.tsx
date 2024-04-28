@@ -50,6 +50,10 @@ export const CardPasswordErrorContext = createContext<
   [CardPasswordError, Dispatch<SetStateAction<CardPasswordError>>] | null
 >(null);
 
+export const FormRenderOrderContext = createContext<
+  [FormRenderOrder, Dispatch<SetStateAction<FormRenderOrder>>] | null
+>(null);
+
 const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
   const cardNumberErrorState = useState(initCardNumbersError);
   const cardValidityPeriodErrorState = useState(initCardValidityPeriod);
@@ -58,6 +62,11 @@ const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
   const cardCVCErrorContextState = useState(initCardCVCError);
   const cardPasswordErrorState = useState(initCardPasswordError);
 
+  const formRenderOrderState = useState<FormRenderOrder>({
+    index: 0,
+    step: "cardNumbers",
+  });
+
   return (
     <CardNumberErrorContext.Provider value={cardNumberErrorState}>
       <CardValidityPeriodErrorContext.Provider value={cardValidityPeriodErrorState}>
@@ -65,7 +74,9 @@ const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
           <CardIssuerErrorContext.Provider value={cardIssuerErrorContextState}>
             <CardCVCErrorContext.Provider value={cardCVCErrorContextState}>
               <CardPasswordErrorContext.Provider value={cardPasswordErrorState}>
-                {children}
+                <FormRenderOrderContext.Provider value={formRenderOrderState}>
+                  {children}
+                </FormRenderOrderContext.Provider>
               </CardPasswordErrorContext.Provider>
             </CardCVCErrorContext.Provider>
           </CardIssuerErrorContext.Provider>

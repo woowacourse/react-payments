@@ -2,9 +2,8 @@
 
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { FormRenderOrderContext } from "../../routes/Payments";
 import { CardIssuerContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardIssuerErrorContext } from "../../routes/Payments/FormContextProvider";
+import { CardIssuerErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
 
 import CardIssuerInput from "../FormInput/CardIssuerInput";
 import FormFieldComponent from "./FormFieldComponent";
