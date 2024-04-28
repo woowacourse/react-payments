@@ -8,6 +8,7 @@ import CardIssuer from "../components/CardIssuer";
 import CardNumbers from "../components/CardNumbers";
 import CardPassWord from "../components/CardPassword";
 import CardPreview from "../components/CardPreview";
+import ProgressBar from "../components/common/ProgressBar";
 import { matchCardType } from "../domain/matchCardType";
 import useCardCvcNumber from "../hooks/useCardCvcNumber";
 import useCardExpirationPeriod from "../hooks/useCardExpirationPeriod";
@@ -94,6 +95,10 @@ export default function CardRegistrationPage() {
 
   return (
     <div css={styledCardInfoContainer}>
+      <ProgressBar
+        totalProgress={cardFormListJsx.length}
+        curProgress={curProgress}
+      />
       <CardPreview
         isCardFrontView={isCardFrontView}
         setIsCardFrontView={setIsCardFrontView}
