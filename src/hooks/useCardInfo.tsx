@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   CardInfoContext,
   initialCardInfoContext,
@@ -11,9 +11,9 @@ export const CardInfoProvider: React.FC<{ children: React.ReactNode }> = ({
     initialCardInfoContext.cardInfo,
   );
 
-  const changeCardInfo = (newCardInfo: CardInfo) => {
+  const changeCardInfo = useCallback((newCardInfo: CardInfo) => {
     setCardInfo(newCardInfo);
-  };
+  }, []);
 
   const contextValue = useMemo(
     () => ({ cardInfo, changeCardInfo }),
