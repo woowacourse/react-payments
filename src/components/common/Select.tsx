@@ -15,7 +15,7 @@ export default function Select({ placeholder, options, ...rest }: ISelectProps) 
   return (
     <S.Select {...rest}>
       {placeholder && (
-        <option value="" disabled>
+        <option value="" disabled selected>
           {placeholder}
         </option>
       )}
