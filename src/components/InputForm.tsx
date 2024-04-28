@@ -18,7 +18,7 @@ export default function InputForm({
   handleSubmit,
 }: Props) {
   const {
-    handleOneValue,
+    handleInputValue,
     handleExpiryDateInput,
     handleSelectCardCompany,
     handleCardNumberInput,
@@ -33,7 +33,7 @@ export default function InputForm({
         <InputField
           title="비밀번호를 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.PASSWORD}
-          handleInput={handleOneValue}
+          handleInput={handleInputValue}
           handleNext={() => handleNext('')}
           handleComplete={(isComplete: boolean) =>
             handleComplete('password', isComplete)
@@ -44,7 +44,7 @@ export default function InputForm({
         <InputField
           title="CVC 번호를 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.CVC}
-          handleInput={handleOneValue}
+          handleInput={handleInputValue}
           handleNext={() => handleNext('password')}
           handleComplete={(isComplete: boolean) =>
             handleComplete('cvc', isComplete)
@@ -55,7 +55,7 @@ export default function InputForm({
         <InputField
           title="카드 소유자 이름을 입력해 주세요"
           inputTypes={INPUT_TYPE_CATEGORIES.USER_NAME}
-          handleInput={handleOneValue}
+          handleInput={handleInputValue}
           handleNext={() => handleNext('cvc')}
           handleComplete={(isComplete: boolean) =>
             handleComplete('userName', isComplete)

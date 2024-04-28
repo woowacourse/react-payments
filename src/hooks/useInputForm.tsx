@@ -22,7 +22,7 @@ const useInputForm = ({
     } else {
       handleSubmit(false);
     }
-  }, [complete]);
+  }, [complete, handleSubmit]);
 
   const handleComplete = (str: string, isComplete: boolean) => {
     setComplete((prev) => {
@@ -33,7 +33,7 @@ const useInputForm = ({
     });
   };
 
-  const handleOneValue = (value: Record<string, string>) => {
+  const handleInputValue = (value: Record<string, string>) => {
     handleInput({
       ...cardInfo,
       ...value,
@@ -68,7 +68,7 @@ const useInputForm = ({
   };
 
   return {
-    handleOneValue,
+    handleInputValue,
     handleExpiryDateInput,
     handleSelectCardCompany,
     handleCardNumberInput,
