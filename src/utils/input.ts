@@ -1,10 +1,7 @@
 import { ChangeEvent } from "react";
 
 export const isAllDone = (
-  inputData: Record<
-    string,
-    { value: string; isError: boolean; isDone: boolean }
-  >
+  inputData: Record<string, { value: string; isError: boolean; isDone: boolean }>
 ) => Object.values(inputData).every(({ isDone }) => isDone);
 
 export const getInputAttributes = (
@@ -19,4 +16,13 @@ export const getInputAttributes = (
     throw Error("input name이 변경됨");
   }
   return { name, value };
+};
+
+export const isNumberString = (value: string) => {
+  [...value].forEach((element) => {
+    if (!Number.isInteger(Number(element))) {
+      return false;
+    }
+  });
+  return true;
 };

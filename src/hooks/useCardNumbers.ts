@@ -6,6 +6,7 @@ import {
   useEffect,
   Dispatch,
   SetStateAction,
+  RefObject,
 } from "react";
 import { CARD_NUMBER_KEYS } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
@@ -32,16 +33,13 @@ const useCardNumbers = () => {
     if (isAllDone({ first, second, third, fourth })) {
       setCardNumbersNextInput(true);
     }
-
-    if (first.isDone && !first.isError) secondRef.current?.focus();
-    else if (second.isDone && !second.isError) thirdRef.current?.focus();
-    else if (third.isDone && !third.isError) fourthRef.current?.focus();
   }, [first, second, third, fourth]);
 
   const changeCardNumber = (
     value: string,
     cardNumber: Input,
-    setCardNumber: Dispatch<SetStateAction<Input>>
+    setCardNumber: Dispatch<SetStateAction<Input>>,
+    nextRef: RefObject<HTMLInputElement> | null = null
   ) => {
     if (!Number.isInteger(Number(value))) {
       setFirst({ ...cardNumber, isError: true });
@@ -50,14 +48,16 @@ const useCardNumbers = () => {
     }
     setCardNumber({ value, isDone: value.length === CARD_NUMBER, isError: false });
     setErrorMessage("");
+
+    if (value.length === CARD_NUMBER) nextRef?.current?.focus();
   };
 
   const changeCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = getInputAttributes(event, CARD_NUMBER_KEYS);
 
-    if (name === "first") changeCardNumber(value, first, setFirst);
-    else if (name === "second") changeCardNumber(value, second, setSecond);
-    else if (name === "third") changeCardNumber(value, third, setThird);
+    if (name === "first") changeCardNumber(value, first, setFirst, secondRef);
+    else if (name === "second") changeCardNumber(value, second, setSecond, thirdRef);
+    else if (name === "third") changeCardNumber(value, third, setThird, fourthRef);
     else if (name === "fourth") changeCardNumber(value, fourth, setFourth);
   };
 

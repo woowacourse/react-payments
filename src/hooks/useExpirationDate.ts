@@ -4,6 +4,8 @@ import { isValidDate, isValidMonth } from "@/utils/validators";
 import { ChangeEvent, useState, useRef, useEffect } from "react";
 import { getInputAttributes } from "@/utils/input";
 import useInput from "./useInput";
+import { EXPIRATION_DATE_MAX_LENGTH } from "@/constants/cardInfo";
+import { isNumberString } from "@/utils/input";
 
 const useExpirationDate = () => {
   const [nextInput, setShowNextInput] = useState<boolean>(false);
@@ -17,54 +19,45 @@ const useExpirationDate = () => {
   useEffect(() => {
     if (month.isDone && !month.isError) yearRef.current?.focus();
     if (year.isDone && !year.isError) yearRef.current?.blur();
-    if (month.isDone && !month.isError && year.isDone && !year.isError) {
-      setShowNextInput(true);
-    }
+    if (month.isDone && !month.isError && year.isDone && !year.isError) setShowNextInput(true);
   }, [month, year]);
 
-  const changeExpirationDate = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = getInputAttributes(
-      event,
-      CARD_EXPIRATION_DATE_KEYS
-    );
-
-    if (!Number.isInteger(Number(value))) {
-      if (name === "month") {
-        setMonth({ ...month, isError: true });
-      } else if (name === "year") {
-        setYear({ ...year, isError: true });
-      }
+  const changeMonth = (value: string) => {
+    if (!isNumberString(value)) {
+      setMonth({ ...month, isError: true });
       setErrorMessage(ERRORS.isNotInteger);
       return;
+    } else if (value.length === EXPIRATION_DATE_MAX_LENGTH && !isValidMonth(value)) {
+      setMonth({ ...month, isError: true, isDone: false });
+      setErrorMessage(ERRORS.isNotValidMonth);
+      return;
     }
+    setMonth({ value, isError: false, isDone: value.length === EXPIRATION_DATE_MAX_LENGTH });
+    setErrorMessage("");
+  };
 
-    if (name === "month") {
-      if (value.length === 2) {
-        setMonth({
-          value,
-          isError: !isValidMonth(value),
-          isDone: isValidMonth(value),
-        });
-        setErrorMessage(isValidMonth(value) ? "" : ERRORS.isNotValidMonth);
-      } else {
-        setMonth({ value, isError: false, isDone: false });
-      }
-    } else if (name === "year") {
-      if (value.length === 2) {
-        setYear({
-          value,
-          isError: !isValidDate({ year: value, month: month.value }),
-          isDone: isValidDate({ year: value, month: month.value }),
-        });
-        setErrorMessage(
-          isValidDate({ year: value, month: month.value })
-            ? ""
-            : ERRORS.deprecatedCard
-        );
-      } else {
-        setYear({ value, isError: false, isDone: false });
-      }
+  const changeYear = (value: string) => {
+    if (!isNumberString(value)) {
+      setYear({ ...month, isError: true });
+      setErrorMessage(ERRORS.isNotInteger);
+      return;
+    } else if (
+      value.length === EXPIRATION_DATE_MAX_LENGTH &&
+      !isValidDate({ year: value, month: month.value })
+    ) {
+      setYear({ value, isError: true, isDone: false });
+      setErrorMessage(ERRORS.deprecatedCard);
+      return;
     }
+    setYear({ value, isError: false, isDone: value.length === EXPIRATION_DATE_MAX_LENGTH });
+    setErrorMessage("");
+  };
+
+  const changeExpirationDate = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = getInputAttributes(event, CARD_EXPIRATION_DATE_KEYS);
+
+    if (name === "month") changeMonth(value);
+    else if (name === "year") changeYear(value);
   };
 
   return {
