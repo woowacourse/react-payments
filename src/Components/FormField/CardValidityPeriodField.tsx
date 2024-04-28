@@ -22,8 +22,9 @@ const CardValidityPeriodField = () => {
   const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
+  const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
+
   useEffect(() => {
-    const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
     if (isValid) {
       setRenderOrder((prev) => {
         if (prev.index === 2) {
@@ -48,7 +49,7 @@ const CardValidityPeriodField = () => {
         return temp;
       });
     }
-  }, [cardPeriod, setRenderOrder, cardPeriodError, setCardPeriodError]);
+  }, [isValid, cardPeriod]);
 
   useEffect(() => {
     firstInput.current?.focus();
