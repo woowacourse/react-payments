@@ -52,7 +52,7 @@ export default function EnrollCard() {
 const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/CardRegistrationConfirmation", { state: { ...cardNumbers,  ...cardBrand} });
+    navigate("/card-registration-confirmation", { state: { ...cardNumbers,  ...cardBrand} });
   
     
 
