@@ -20,7 +20,7 @@ const LABEL = {
   userName: '소유자 이름',
   cvc: 'CVC',
   password: '비밀번호 앞 2자리',
-  button: '확인',
+  confirmationbutton: '확인',
 } as const;
 
 const ERROR = {

@@ -25,12 +25,6 @@ export const RegistrationContainer = styled.div`
   gap: 2.5rem;
 
   width: 32rem;
-
-  & button {
-    position: static;
-
-    border-radius: 5px;
-  }
 `;
 
 export const Image = styled.img`
