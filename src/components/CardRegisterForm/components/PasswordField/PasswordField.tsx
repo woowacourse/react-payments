@@ -13,7 +13,9 @@ interface Props {
 }
 
 const PasswordField = ({ passwordState }: Props) => {
-  const { onChange, error, isError } = passwordState;
+  const { onChange, error, value } = passwordState;
+
+  const isError = !!error.length && !value.length;
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.PASSWORD} />

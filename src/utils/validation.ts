@@ -15,7 +15,7 @@ export const validateIsValidLength = (
   newValue: string,
   validLength: number
 ) => {
-  if (newValue.length !== validLength && newValue.length) {
+  if (newValue.length !== validLength) {
     return { type: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
   return { isValid: true };

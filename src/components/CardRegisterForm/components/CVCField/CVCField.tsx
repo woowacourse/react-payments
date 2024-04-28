@@ -31,6 +31,9 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
             sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
             onChange(e);
           }}
+          onBlur={() => {
+            setIsFront(true);
+          }}
           isError={isError}
         />
       </InputField>

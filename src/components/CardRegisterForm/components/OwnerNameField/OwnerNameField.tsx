@@ -12,18 +12,16 @@ import { REGEX } from "@/constants/regex";
 
 interface Props {
   ownerNameState: ReturnType<typeof useInput<string>>;
+  setIsNameEntered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const OwnerNameField = ({ ownerNameState }: Props) => {
-  const { onChange, error, setError, isError } = ownerNameState;
+const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
+  const { onChange, error } = ownerNameState;
 
-  const onEnterCompleted = () => {
-    setError((prev) => {
-      if (prev.includes(ErrorStatus.ENTER_REQUIRED)) {
-        return [...prev].filter((e) => e !== ErrorStatus.ENTER_REQUIRED);
-      }
-      return prev;
-    });
+  const onEnterCompleted = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setIsNameEntered(true);
+    }
   };
 
   return (
@@ -40,14 +38,16 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
         <Input
           autoFocus={true}
           placeholder={MESSAGE.PLACEHOLDER.OWNER_NAME}
-          isError={isError}
+          isError={!!error.length}
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             onChange(e);
             sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
           }}
-          onKeyDown={onEnterCompleted}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            onEnterCompleted(e)
+          }
         />
       </InputField>
     </S.InputFieldWithInfo>

@@ -1,11 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import OwnerNameField from "./OwnerNameField";
 import useInput from "@/hooks/useInput";
-import {
-  validateDoubleSpace,
-  validateEnterRequired,
-  validateIsCapital,
-} from "@/utils/validation";
+import { validateDoubleSpace, validateIsCapital } from "@/utils/validation";
+import { useState } from "react";
 
 const meta = {
   title: "CardRegisterForm/OwnerNameField",
@@ -20,11 +17,17 @@ const OwnerNameFieldWithHook = () => {
     validates: [
       (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
-      () => validateEnterRequired(),
     ],
   });
 
-  return <OwnerNameField ownerNameState={ownerNameState} />;
+  const [, setIsNameEntered] = useState<boolean>(false);
+
+  return (
+    <OwnerNameField
+      setIsNameEntered={setIsNameEntered}
+      ownerNameState={ownerNameState}
+    />
+  );
 };
 
 type Story = StoryObj<typeof OwnerNameField>;

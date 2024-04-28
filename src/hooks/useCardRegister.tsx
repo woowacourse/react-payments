@@ -3,7 +3,6 @@ import useInputs from "./useInputs";
 import { VALID_LENGTH } from "@/constants/condition";
 import {
   validateDoubleSpace,
-  validateEnterRequired,
   validateIsCapital,
   validateIsNumber,
   validateIsValidLength,
@@ -43,7 +42,6 @@ const useCardRegister = () => {
     validates: [
       (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
-      () => validateEnterRequired(),
     ],
   });
 

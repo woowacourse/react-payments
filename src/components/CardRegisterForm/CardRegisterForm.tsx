@@ -11,7 +11,6 @@ import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
 import CVCField from "./components/CVCField/CVCField";
 import PasswordField from "./components/PasswordField/PasswordField";
 import CardBrandSelectField from "./components/CardBrandSelectField/CardBrandSelectField";
-import { useEffect } from "react";
 import { REGISTER_STEP } from "@/constants/condition";
 import { CardBrandType } from "@/constants/cardBrandType";
 
@@ -25,9 +24,8 @@ interface Props {
   passwordState: ReturnType<typeof useInput<string>>;
   cardBrandState: ReturnType<typeof useInput<CardBrandType | null>>;
   step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
   setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
-  stepPassedArr: boolean[];
+  setIsNameEntered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardRegisterForm = ({
@@ -37,21 +35,10 @@ const CardRegisterForm = ({
   CVCNumbersState,
   passwordState,
   cardBrandState,
-  stepPassedArr,
   step,
-  setStep,
   setIsFront,
+  setIsNameEntered,
 }: Props) => {
-  useEffect(() => {
-    if (stepPassedArr[step - 1] && step <= stepPassedArr.length) {
-      setStep((prev) => prev + 1);
-    }
-
-    if (step !== REGISTER_STEP.CVC) {
-      setIsFront(true);
-    }
-  }, [step, ...stepPassedArr]);
-
   return (
     <S.CardFormWrapper>
       {step >= REGISTER_STEP.PASSWORD && (
@@ -61,7 +48,10 @@ const CardRegisterForm = ({
         <CVCField CVCNumbersState={CVCNumbersState} setIsFront={setIsFront} />
       )}
       {step >= REGISTER_STEP.OWNER_NAME && (
-        <OwnerNameField ownerNameState={ownerNameState} />
+        <OwnerNameField
+          ownerNameState={ownerNameState}
+          setIsNameEntered={setIsNameEntered}
+        />
       )}
       {step >= REGISTER_STEP.EXPIRATION_PERIOD && (
         <ExpirationPeriodField expirationPeriodState={expirationPeriodState} />

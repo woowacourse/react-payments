@@ -31,4 +31,5 @@ export const REGISTER_STEP = {
   OWNER_NAME: 4,
   CVC: 5,
   PASSWORD: 6,
+  ALL_PASSED: 7,
 };

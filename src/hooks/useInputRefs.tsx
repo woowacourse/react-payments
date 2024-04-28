@@ -13,6 +13,7 @@ const useInputRefs = (
     if (index === 0) {
       inputRefs.current[0]?.focus();
     }
+
     if (e.target.value.length === e.target.maxLength) {
       onChange(e);
       const nextIndex = index + 1;

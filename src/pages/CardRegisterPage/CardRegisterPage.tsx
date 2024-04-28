@@ -1,12 +1,13 @@
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CardPreview from "@/components/CreditCardPreview/CardPreview";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BasicButton from "@/components/_common/BasicButton/BasicButton";
 import { theme } from "@/style/theme";
 import { useNavigate } from "react-router-dom";
 import useCardRegister from "@/hooks/useCardRegister";
 import { ROUTE_URL } from "@/constants/url";
+import { REGISTER_STEP } from "@/constants/condition";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const CardRegisterPage = () => {
 
   const [step, setStep] = useState<number>(1);
   const [isFront, setIsFront] = useState<boolean>(true);
+  const [isNameEntered, setIsNameEntered] = useState<boolean>(false);
 
   const onSubmitCardInfo = () => {
     navigate(ROUTE_URL.REGISTER_CONFIRM, {
@@ -36,12 +38,19 @@ const CardRegisterPage = () => {
     !cardNumbersState.isError,
     !!cardBrandState.value?.length,
     !expirationPeriodState.isError,
-    !ownerNameState.isError,
+    !ownerNameState.isError && isNameEntered,
     !CVCNumbersState.isError,
     !passwordState.isError,
   ];
 
   const allPassed = stepPassedArr.every((isCompleted) => isCompleted === true);
+
+  useEffect(() => {
+    if (stepPassedArr[step - 1] && step < stepPassedArr.length) {
+      setStep((prev) => prev + 1);
+    }
+  }, [step, stepPassedArr]);
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
@@ -57,17 +66,16 @@ const CardRegisterPage = () => {
         <CardRegisterForm
           {...cardRegister}
           step={step}
-          setStep={setStep}
-          stepPassedArr={stepPassedArr}
           setIsFront={setIsFront}
+          setIsNameEntered={setIsNameEntered}
         />
       </S.FlexWrapper>
-      {step === 7 && allPassed && (
+      {step === REGISTER_STEP.ALL_PASSED && allPassed && (
         <BasicButton
           borderType="square"
           position="bottom"
           height={52}
-          disabled={step !== 7}
+          disabled={step !== REGISTER_STEP.ALL_PASSED}
           backgroundColor={theme.COLOR["grey-3"]}
           onClick={onSubmitCardInfo}
         >
