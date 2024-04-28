@@ -59,7 +59,7 @@ const CardCompanyForm = ({
     <FormElement
       labelContent={labelContent}
       inputs={select}
-      errorMessage={isFocused ? "카드사를 선택해 주세요." : ""}
+      errorMessage={isFocused && !cardCompany![0] ? "카드사를 선택해 주세요." : ""}
     />
   );
 };
