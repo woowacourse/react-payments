@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CVC from "./CVC";
 
 const CardBackPreview = ({ CVCNumber }: { CVCNumber: Map<string, string> }) => {
-  const cvcNumber = CVCNumber.get("0") as string;
+  const cvcNumber = CVCNumber.get("0") ?? "";
 
   return (
     <CardBackFrame>
