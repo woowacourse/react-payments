@@ -93,14 +93,9 @@ export default function RegisterCardInfoPage() {
     isActiveCurrentStep: step === REGISTER_STEP.CARD_EXPIRATION_DATE,
   });
 
-  const {
-    backgroundColor,
-    handleCardIssuer,
-    ref: cardIssuerRef,
-    cardIssuer,
-  } = useCardIssuer({
+  const { handleCardIssuer, cardIssuer } = useCardIssuer({
     nextStepHandler,
-    isValidCurrentStep: step === REGISTER_STEP.CARD_ISSUER,
+    isActiveCurrentStep: step === REGISTER_STEP.CARD_ISSUER,
   });
 
   const { cardNumbers, cardNumbersChangeHandler, cardBrand, refs } = useCardNumber({
@@ -109,7 +104,6 @@ export default function RegisterCardInfoPage() {
       () => initialCardNumberState,
     ),
     nextStepHandler,
-    ref: cardIssuerRef,
     isValidCurrentStep: step === REGISTER_STEP.CARD_NUMBER,
   });
 
@@ -134,13 +128,13 @@ export default function RegisterCardInfoPage() {
             year={year}
             name={name}
             cardBrand={cardBrand}
-            backgroundColor={backgroundColor}
+            backgroundColor={cardIssuer.backgroundColor}
           />
         )}
 
         <S.CardInfoContainer>
           {isValidAllFormStates && (
-            <RoutingButton cardNumbers={cardNumbers[0].value} cardIssuer={cardIssuer} />
+            <RoutingButton cardNumbers={cardNumbers[0].value} cardIssuer={cardIssuer.cardIssuer} />
           )}
 
           <Register step={step}>
