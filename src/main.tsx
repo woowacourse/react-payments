@@ -5,21 +5,35 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ConfirmPage from './pages/confirm/ConfirmPage';
 import NotFoundPage from './pages/error/NotFoundPage';
 import ErrorPage from './pages/error/ErrorPage';
+import PAGE_ROUTES from './constants/routes';
+import RegisterCardInfoPage from './pages/register/RegisterCardInfoPage';
 
-const router = createBrowserRouter([
+const routes = [
   {
-    path: '/',
-    element: <App />,
+    path: PAGE_ROUTES.MAIN,
+    element: (
+      <App>
+        <RegisterCardInfoPage />
+      </App>
+    ),
     errorElement: <ErrorPage />,
   },
   {
-    path: '/confirm',
-    element: <ConfirmPage />,
+    path: PAGE_ROUTES.CONFIRM,
+    element: (
+      <App>
+        <ConfirmPage />
+      </App>
+    ),
     errorElement: <ErrorPage />,
   },
 
   { path: '*', element: <NotFoundPage /> },
-]);
+];
+
+const router = createBrowserRouter(routes, {
+  basename: PAGE_ROUTES.MAIN,
+});
 
 createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
