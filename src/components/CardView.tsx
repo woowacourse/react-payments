@@ -18,8 +18,15 @@ export default function CardView({ cardInfo }: Props) {
 
   return (
     <CardsContainer showBack={showBack}>
-      <Front> {!showBack && <CardFrontView cardInfo={cardInfo} />}</Front>
-      <Back> {showBack && <CardBackView cvc={cardInfo.cvc} />}</Back>
+      {showBack ? (
+        <Back>
+          <CardBackView cvc={cardInfo.cvc} />
+        </Back>
+      ) : (
+        <Front>
+          <CardFrontView cardInfo={cardInfo} />
+        </Front>
+      )}
     </CardsContainer>
   );
 }
