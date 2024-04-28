@@ -18,9 +18,10 @@ export const Default: Story = {
     maxLength: 10,
     setErrorMessage: () => {},
     setAllInputValid: () => {},
-    data: [],
-    setData: () => {},
+    state: [],
+    setState: () => {},
     validationRule: (value) => /^[0-9]{4}$/.test(value),
     errorMessageText: "4자리의 숫자를 입력하세요.",
+    onFocus: () => {},
   },
 };

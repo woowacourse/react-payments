@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardNumberForm from "../components/Form/CardNumberForm";
+import CardCVCForm from "../components/Form/CardCVCForm";
 
 const meta = {
-  title: "CardNumberForm",
-  component: CardNumberForm,
-} satisfies Meta<typeof CardNumberForm>;
+  title: "CardCVCForm",
+  component: CardCVCForm,
+} satisfies Meta<typeof CardCVCForm>;
 
 export default meta;
 
@@ -12,10 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    labelContent: "카드 번호",
-    inputCount: 4,
+    labelContent: "CVC",
+    inputCount: 1,
     type: "text",
-    placeholders: ["1234", "1234", "1234", "1234"],
+    placeholders: ["123"],
     onValidation: () => {},
     onFocus: () => {},
     setFocusedField: () => {},

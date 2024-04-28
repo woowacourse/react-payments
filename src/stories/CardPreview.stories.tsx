@@ -15,5 +15,9 @@ export const Default: Story = {
     cardNumbers: ["1234", "5678", "9012", "3456"],
     expirationDate: ["12", "25"],
     userName: ["JOHN DOE"],
+    cardCompany: ["국민카드"],
+    cardCVC: ["123"],
+    cardPassword: ["74"],
+    focusedField: "cardCVC",
   },
 };

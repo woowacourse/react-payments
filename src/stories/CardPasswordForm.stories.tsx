@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import UserNameForm from "../components/Form/UserNameForm";
+import CardPasswordForm from "../components/Form/CardPasswordForm";
 
 const meta = {
-  title: "UserNameForm",
-  component: UserNameForm,
-} satisfies Meta<typeof UserNameForm>;
+  title: "CardPasswordForm",
+  component: CardPasswordForm,
+} satisfies Meta<typeof CardPasswordForm>;
 
 export default meta;
 
@@ -12,10 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    labelContent: "소유자 이름",
+    labelContent: "비밀번호 앞 2자리",
     inputCount: 1,
-    type: "text",
-    placeholders: ["JOHN DOE"],
+    type: "password",
+    placeholders: [""],
     onValidation: () => {},
     onFocus: () => {},
     setFocusedField: () => {},
