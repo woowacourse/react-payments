@@ -1,4 +1,5 @@
 import { isVisaCard, isMasterCard } from '../../../domain/Card';
+import type { CardCompany } from '../../../domain/Card.type';
 
 import { CARD_NUMBER, CARD_COMPANY } from '../../../constants/Condition';
 import { Visa, MasterCard, Dot } from '../../../assets';
@@ -10,7 +11,7 @@ interface CardPreviewProps {
   month: string;
   year: string;
   owner: string;
-  company: string;
+  company: CardCompany;
   cvc: string;
   isCVCInput: boolean;
 }

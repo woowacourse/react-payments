@@ -19,7 +19,7 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
-    isValid: true,
+    isError: false,
     type: 'text',
     placeholder: 'sample',
   },
@@ -27,7 +27,7 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    isValid: false,
+    isError: true,
     type: 'text',
     placeholder: 'sample',
   },
