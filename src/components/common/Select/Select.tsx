@@ -13,7 +13,6 @@ const Select = ({ options, changeCardCompany, selectRef, value = "" }: SelectPro
     <select
       autoFocus
       name="cardCompany"
-      id=""
       onChange={changeCardCompany}
       ref={selectRef}
       value={value}
