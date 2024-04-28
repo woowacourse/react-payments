@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { CARD_COMPANY } from "../../constants/card";
 import FormElement from "../common/FormElement";
 import { FormProps } from "./Form";
-import { useEffect, useState } from "react";
+import useCardCompanyForm from "../../hooks/useCardCompanyForm";
 
 const Styled = {
   CardCompanySelect: styled.select`
@@ -29,20 +29,12 @@ const CardCompanyForm = ({
   onValidation,
   onFocus,
 }: CardCompanyFormProps) => {
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = (type: string) => {
-    onFocus(type);
-    setIsFocused(true);
-  };
-
-  useEffect(() => {
-    if (cardCompany) onValidation(cardCompany[0] !== "");
-  }, [cardCompany, onValidation]);
-
-  const handleCompanyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCardCompany && setCardCompany([e.target.value]);
-  };
+  const { isFocused, handleFocus, handleCompanyChange } = useCardCompanyForm({
+    cardCompany,
+    setCardCompany,
+    onValidation,
+    onFocus,
+  });
 
   const select = (
     <Styled.CardCompanySelect
