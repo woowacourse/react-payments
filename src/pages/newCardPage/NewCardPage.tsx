@@ -4,7 +4,6 @@ import Input from "../../components/default/input/Input";
 import Dropdown from "../../components/default/dropdown/Dropdown";
 import CardPreview from "../../components/newCardPage/cardPreview/CardPreview";
 import NewCardInputSection from "../../components/newCardPage/newCardInputSection/NewCardInputSection";
-import { CardCompany } from "../../types/type";
 import { FORM_FIELDS } from "../../constants/setting";
 import * as Styled from "./NewCardPage.styled";
 import usePasswordInput from "../../hooks/usePasswordInput";
@@ -137,7 +136,8 @@ const NewCardPage = () => {
           >
             <Dropdown
               selectList={FORM_FIELDS.CARD_COMPANY.OPTIONS}
-              onChange={(selectedValue: CardCompany) => handleCardCompanyChange(selectedValue)}
+              placeholder={FORM_FIELDS.CARD_COMPANY.PLACEHOLDER}
+              onChange={(selectedValue: string) => handleCardCompanyChange(selectedValue)}
             />
           </NewCardInputSection>
         )}

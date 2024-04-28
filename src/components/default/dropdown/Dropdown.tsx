@@ -1,4 +1,3 @@
-import { CardCompany } from "../../../types/type";
 import React, { useState } from "react";
 import * as Styled from "./Dropdown.styled";
 import UpArrowIcon from "../../../assets/UpArrowIcon.png";
@@ -6,12 +5,13 @@ import DownArrowIcon from "../../../assets/DownArrowIcon.png";
 
 export interface DropdownProps {
   selectList: string[];
-  onChange: (selectedValue: CardCompany) => void;
+  placeholder?: string;
+  onChange: (selectedValue: string) => void;
 }
 
-const Dropdown = ({ selectList, onChange }: DropdownProps) => {
+const Dropdown = ({ selectList, placeholder = "", onChange }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<string>("카드사를 선택해주세요");
+  const [selectedItem, setSelectedItem] = useState<string>(placeholder);
 
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const Dropdown = ({ selectList, onChange }: DropdownProps) => {
   };
 
   const handleSelect = (item: string) => {
-    onChange(item as CardCompany);
+    onChange(item);
     setSelectedItem(item);
     setIsOpen(false);
   };
@@ -31,7 +31,10 @@ const Dropdown = ({ selectList, onChange }: DropdownProps) => {
     >
       <button onClick={toggleDropdown}>
         <div>{selectedItem}</div>
-        <img src={isOpen ? DownArrowIcon : UpArrowIcon} />
+        <img
+          src={isOpen ? DownArrowIcon : UpArrowIcon}
+          alt="Toggle Dropdown"
+        />
       </button>
       {isOpen && (
         <ul>
