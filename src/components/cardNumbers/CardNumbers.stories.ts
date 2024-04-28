@@ -16,12 +16,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumbers: [1234, 5678, 9012, 3456],
+    cardNumbers: ['1234', '5678', '9012', '3456'],
   },
 };
 
 export const WithZeroes: Story = {
   args: {
-    cardNumbers: [0, 0, 0, 0],
+    cardNumbers: ['0', '0', '0', '0'],
   },
 };
