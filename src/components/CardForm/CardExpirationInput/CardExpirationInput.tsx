@@ -13,7 +13,7 @@ interface CardExpirationInputProps {
   year: InputType;
 }
 
-function CardExpirationInput({ month, year }: CardExpirationInputProps) {
+const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
   const isValid = [month.isValid, year.isValid];
@@ -72,6 +72,6 @@ function CardExpirationInput({ month, year }: CardExpirationInputProps) {
       </InputField>
     </div>
   );
-}
+};
 
 export default CardExpirationInput;

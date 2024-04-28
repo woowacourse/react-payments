@@ -12,7 +12,7 @@ interface CardNumbersInputProps {
   cardNumbers: InputsType;
 }
 
-function CardNumbersInput({ cardNumbers }: CardNumbersInputProps) {
+const CardNumbersInput = ({ cardNumbers }: CardNumbersInputProps) => {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_NUMBER.INPUT_FIELD_COUNT, CARD_NUMBER.MAX_LENGTH);
 
   const handleCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +56,6 @@ function CardNumbersInput({ cardNumbers }: CardNumbersInputProps) {
       </InputField>
     </div>
   );
-}
+};
 
 export default CardNumbersInput;

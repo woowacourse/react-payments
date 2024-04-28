@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-function useAutoFocus(inputCount: number, maxLength: number) {
+const useAutoFocus = (inputCount: number, maxLength: number) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   inputRefs.current = Array(inputCount).fill(null);
@@ -20,6 +20,6 @@ function useAutoFocus(inputCount: number, maxLength: number) {
   };
 
   return { setRef, moveToNextInput };
-}
+};
 
 export default useAutoFocus;

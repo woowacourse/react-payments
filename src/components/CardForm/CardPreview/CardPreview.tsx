@@ -15,7 +15,7 @@ interface CardPreviewProps {
   isCVCInput: boolean;
 }
 
-function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput }: CardPreviewProps) {
+const CardPreview = ({ cardNumber, month, year, owner, company, cvc, isCVCInput }: CardPreviewProps) => {
   const makeCardLogoImage = (cardNumbers: string[]) => {
     if (isVisaCard(cardNumbers)) {
       return <img src={Visa} alt="비자 카드" />;
@@ -67,6 +67,6 @@ function CardPreview({ cardNumber, month, year, owner, company, cvc, isCVCInput 
       </S.CardInner>
     </S.CardContainer>
   );
-}
+};
 
 export default CardPreview;

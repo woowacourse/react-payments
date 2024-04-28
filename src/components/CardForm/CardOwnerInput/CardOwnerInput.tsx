@@ -10,7 +10,7 @@ interface CardOwnerInputProps {
   owner: InputType;
 }
 
-function CardOwnerInput({ owner }: CardOwnerInputProps) {
+const CardOwnerInput = ({ owner }: CardOwnerInputProps) => {
   const handleOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     owner.handleValue(e.target.value.toUpperCase());
   };
@@ -33,6 +33,6 @@ function CardOwnerInput({ owner }: CardOwnerInputProps) {
       </InputField>
     </div>
   );
-}
+};
 
 export default CardOwnerInput;
