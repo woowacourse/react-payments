@@ -15,7 +15,7 @@ import { PasswordStateType } from '../../hooks/usePassword';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 
-const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER, OPTION } = MESSAGE;
+const { TITLE, CAPTION, LABEL, PLACEHOLDER, OPTION } = MESSAGE;
 const { MAX_LENGTH, CARD_INFORMATION_APPEARED } = CONDITION;
 
 interface CardInformationFormProps {
@@ -39,36 +39,10 @@ const CardInformationForm = ({
 
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
+
   const [appearedCondition, setAppearedCondition] = useState<number>(
     CARD_INFORMATION_APPEARED.cardNumber,
   );
-
-  const isCardNumberFilled =
-    firstState.value && secondState.value && thirdState.value && fourthState.value;
-  const isCardSelected = selectedCardState.value;
-  const isExpirationDateFilled = monthState.value && yearState.value;
-  const isUserNameFilled = userNameState.value;
-  const isCVCFilled = cvcState.value;
-  const isPasswordFilled = passwordState.value;
-
-  const isCardNumberError =
-    firstState.error || secondState.error || thirdState.error || fourthState.error;
-  const isExpirationDateError = monthState.error || yearState.error;
-  const isUserNameError = userNameState.error;
-  const isCVCError = cvcState.error;
-  const isPasswordError = passwordState.error;
-
-  const cardNumberErrorMessage = isCardNumberError ? ERROR.cardNumber : '';
-  const expirationErrorMessage = monthState.error ? ERROR.month : yearState.error ? ERROR.year : '';
-  const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
-  const cvcErrorMessage = isCVCError ? ERROR.cvc : '';
-  const passwordErrorMessage = isPasswordError ? ERROR.password : '';
-
-  const isCardNumberValid = isCardNumberFilled && !isCardNumberError;
-  const isExpirationDateValid = isExpirationDateFilled && !isExpirationDateError;
-  const isUserNameValid = isUserNameFilled && !isUserNameError;
-  const isCVCValid = isCVCFilled && !isCVCError;
-  const isPasswordValid = isPasswordFilled && !isPasswordError;
 
   const isCardSelectedAppearedCondition =
     appearedCondition >= CARD_INFORMATION_APPEARED.selectedCard;
@@ -78,22 +52,22 @@ const CardInformationForm = ({
   const isCVCAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.cvc;
   const isPasswordAppearedCondition = appearedCondition >= CARD_INFORMATION_APPEARED.password;
   const isSubmitButtonAppearedCondition =
-    isCardNumberValid &&
-    isCardSelected &&
-    isExpirationDateValid &&
-    isUserNameValid &&
-    isCVCValid &&
-    isPasswordValid;
+    cardNumberState.isValid &&
+    selectedCardState.value &&
+    expirationDateState.isValid &&
+    userNameState.isValid &&
+    cvcState.isValid &&
+    passwordState.isValid;
 
-  if (isCardNumberValid && !isCardSelectedAppearedCondition)
+  if (cardNumberState.isValid && !isCardSelectedAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.selectedCard);
-  if (isCardSelected && !isExpirationDateAppearedCondition)
+  if (selectedCardState.value && !isExpirationDateAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.expirationDate);
-  if (isExpirationDateValid && !isUserNameAppearedCondition)
+  if (expirationDateState.isValid && !isUserNameAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.userName);
-  if (isUserNameValid && !isCVCAppearedCondition)
+  if (userNameState.isValid && !isCVCAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.cvc);
-  if (isCVCValid && !isPasswordAppearedCondition)
+  if (cvcState.isValid && !isPasswordAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.password);
 
   const cardNumberStates = [firstState, secondState, thirdState, fourthState];
@@ -103,7 +77,7 @@ const CardInformationForm = ({
       value={state.value}
       maxLength={MAX_LENGTH.cardNumber}
       onChange={state.setValue}
-      invalid={state.error}
+      invalid={state.isError}
       autoFocus={index === 0 ? true : undefined}
     />
   ));
@@ -125,13 +99,13 @@ const CardInformationForm = ({
       )}
       {isPasswordAppearedCondition && (
         <FormField title={TITLE.password} caption={CAPTION.password}>
-          <InputField label={LABEL.password} error={passwordErrorMessage}>
+          <InputField label={LABEL.password} error={passwordState.errorMessage}>
             <Input
               placeholder={PLACEHOLDER.password}
               value={passwordState.value}
               maxLength={MAX_LENGTH.password}
               onChange={passwordState.setValue}
-              invalid={passwordState.error}
+              invalid={passwordState.isError}
               type="password"
               autoFocus
             />
@@ -140,13 +114,13 @@ const CardInformationForm = ({
       )}
       {isCVCAppearedCondition && (
         <FormField title={TITLE.cvc}>
-          <InputField label={LABEL.cvc} error={cvcErrorMessage}>
+          <InputField label={LABEL.cvc} error={cvcState.errorMessage}>
             <Input
               placeholder={PLACEHOLDER.cvc}
               value={cvcState.value}
               maxLength={MAX_LENGTH.cvc}
               onChange={cvcState.setValue}
-              invalid={cvcState.error}
+              invalid={cvcState.isError}
               onFocus={() => cvcState.setIsFocus(true)}
               onBlur={() => cvcState.setIsFocus(false)}
               autoFocus
@@ -156,13 +130,13 @@ const CardInformationForm = ({
       )}
       {isUserNameAppearedCondition && (
         <FormField title={TITLE.userName}>
-          <InputField label={LABEL.userName} error={userNameErrorMessage}>
+          <InputField label={LABEL.userName} error={userNameState.errorMessage}>
             <Input
               placeholder={PLACEHOLDER.userName}
               value={userNameState.value}
               maxLength={MAX_LENGTH.userName}
               onChange={userNameState.setValue}
-              invalid={userNameState.error}
+              invalid={userNameState.isError}
               autoFocus
             />
           </InputField>
@@ -170,14 +144,14 @@ const CardInformationForm = ({
       )}
       {isExpirationDateAppearedCondition && (
         <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
-          <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
+          <InputField label={LABEL.expirationDate} error={expirationDateState.errorMessage}>
             <>
               <Input
                 placeholder={PLACEHOLDER.month}
                 value={monthState.value}
                 maxLength={MAX_LENGTH.expirationDate}
                 onChange={monthState.setValue}
-                invalid={monthState.error}
+                invalid={monthState.isError}
                 autoFocus
               />
               <Input
@@ -185,7 +159,7 @@ const CardInformationForm = ({
                 value={yearState.value}
                 maxLength={MAX_LENGTH.expirationDate}
                 onChange={yearState.setValue}
-                invalid={yearState.error}
+                invalid={yearState.isError}
               />
             </>
           </InputField>
@@ -201,7 +175,7 @@ const CardInformationForm = ({
         </FormField>
       )}
       <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
-        <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
+        <InputField label={LABEL.cardNumber} error={cardNumberState.errorMessage}>
           <>{cardNumberInputs}</>
         </InputField>
       </FormField>

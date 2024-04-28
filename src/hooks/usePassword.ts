@@ -1,22 +1,30 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
+import MESSAGE from '../constants/Message';
 
 const { REG_EXP } = CONDITION;
-
+const { ERROR } = MESSAGE;
 export interface PasswordStateType {
   value: number | undefined;
   setValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error: boolean;
+  isError: boolean;
+  errorMessage: string;
+  isValid: boolean;
 }
 
 const usePasswordState = (defaultValues: number | undefined) => {
-  const [password, setPassword, passwordError] = useInput(defaultValues, REG_EXP.password);
+  const [password, setPassword, isPasswordError] = useInput(defaultValues, REG_EXP.password);
+
+  const passwordErrorMessage = isPasswordError ? ERROR.password : '';
+  const isPasswordValid = password && !isPasswordError;
 
   return {
     passwordState: {
       value: password,
       setValue: setPassword,
-      error: passwordError,
+      isError: isPasswordError,
+      errorMessage: passwordErrorMessage,
+      isValid: isPasswordValid,
     },
   };
 };
