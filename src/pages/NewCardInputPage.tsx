@@ -10,7 +10,7 @@ import CardPreview from '../components/CardPreview/CardPreview';
 import CardSubmitButton from '../components/CardSubmitButton';
 import CardNumberInput from '../components/CardNumberInput';
 
-import { CARD_COMPANIES, CARD_META_INFO, URL } from '../constants/card-app';
+import { CARD_COMPANY_OPTIONS, CARD_META_INFO, URL } from '../constants/card-app';
 
 import useCardNumberInput from '../hooks/useCardNumberInput';
 import useExpirationDateInput from '../hooks/useExpirationDateInput';
@@ -122,7 +122,7 @@ const NewCardInputPage = () => {
           <>
             <Title content={CARD_META_INFO.cardCompany.query} />
             <Caption text={CARD_META_INFO.cardCompany.caption} type='input' />
-            <Dropdown value={cardCompany} options={CARD_COMPANIES} onSelect={(e) => setCardCompany(e)} />
+            <Dropdown value={cardCompany} options={CARD_COMPANY_OPTIONS} onSelect={(e) => setCardCompany(e)} />
           </>
         )}
 

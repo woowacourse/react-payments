@@ -1,4 +1,4 @@
-import { CardInfo } from '../types/card';
+import { CardCompany, CardInfo } from '../types/card';
 
 interface CardMetaInfo {
   query: string;
@@ -39,7 +39,7 @@ export const CARD_META_INFO: Record<keyof CardInfo, CardMetaInfo> = {
   },
 };
 
-export const CARD_COMPANIES = [
+export const CARD_COMPANY_OPTIONS: CardCompany[] = [
   'BC카드',
   '신한카드',
   '카카오뱅크',
@@ -50,11 +50,22 @@ export const CARD_COMPANIES = [
   '국민카드',
 ];
 
-interface CardColor {
-  [key: string]: string;
-}
+// 질문으로 남긴 부분입니다.
 
-export const CARD_COLOR: CardColor = {
+// export const CARD_COMPANIES = [
+//   'BC카드',
+//   '신한카드',
+//   '카카오뱅크',
+//   '현대카드',
+//   '우리카드',
+//   '롯데카드',
+//   '하나카드',
+//   '국민카드',
+// ] as const;
+
+// export type CardCompany = (typeof CARD_COMPANIES)[number];
+
+export const CARD_COLOR: Record<CardCompany, string> = {
   BC카드: '#f04651',
   신한카드: '#0046FF',
   카카오뱅크: '#FFE600',
