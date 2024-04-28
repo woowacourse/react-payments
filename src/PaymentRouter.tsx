@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PaymentApp from "./components/PaymentApp";
 import RegisteredPage from "./components/RegisteredPage";
 
-const Router = () => {
+const PaymentRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,4 +13,4 @@ const Router = () => {
   );
 };
 
-export default Router;
+export default PaymentRouter;

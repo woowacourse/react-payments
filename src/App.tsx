@@ -1,9 +1,9 @@
 import "./App.css";
-import Router from "./Router";
+import PaymentRouter from "./PaymentRouter";
 function App() {
   return (
     <>
-      <Router />
+      <PaymentRouter />
     </>
   );
 }
