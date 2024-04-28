@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+
+import { ROUTES } from '../../constants/Routes';
+
 import * as S from './ErrorPage.style';
 
 const ErrorPage = () => {
@@ -13,7 +16,7 @@ const ErrorPage = () => {
           주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다.
         </p>
       </S.ErrorTextContainer>
-      <Link to="/">
+      <Link to={ROUTES.HOME}>
         <S.ConfirmButton>메인으로</S.ConfirmButton>
       </Link>
     </S.ErrorLayout>

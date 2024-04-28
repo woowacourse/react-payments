@@ -5,6 +5,8 @@ import CardRegistrationPage from './pages/CardRegistrationPage/CardRegistrationP
 import CardRegistrationCompletePage from './pages/CardRegistrationCompletePage/CardRegistrationCompletePage';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 
+import { ROUTES } from '../src/constants/Routes';
+
 import theme from './styles/theme';
 import GlobalStyles from './styles/Global.style';
 
@@ -12,16 +14,16 @@ function App() {
   const router = createBrowserRouter(
     [
       {
-        path: '/',
+        path: ROUTES.HOME,
         element: <CardRegistrationPage />,
         errorElement: <ErrorPage />,
       },
       {
-        path: '/complete',
+        path: ROUTES.COMPLETE,
         element: <CardRegistrationCompletePage />,
       },
       {
-        path: '/error',
+        path: ROUTES.ERROR,
         element: <ErrorPage />,
       },
     ],

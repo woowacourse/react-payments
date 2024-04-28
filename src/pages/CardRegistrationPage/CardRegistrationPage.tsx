@@ -23,6 +23,7 @@ import {
   validateCardNumber,
 } from '../../domain/Card';
 import { isAllValid } from '../../utils/validation';
+import { ROUTES } from '../../constants/Routes';
 
 import * as S from './CardRegistrationPage.style';
 
@@ -64,7 +65,7 @@ const CardRegistrationPage = () => {
   };
 
   const renderSubmitButton = () => {
-    const submitUrl = `/complete?number=${encodeURIComponent(cardNumbers.values[0])}&company=${encodeURIComponent(company.value)}`;
+    const submitUrl = `${ROUTES.COMPLETE}?number=${encodeURIComponent(cardNumbers.values[0])}&company=${encodeURIComponent(company.value)}`;
 
     return (
       <Link to={submitUrl}>
