@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useCardNumberForm = (onValidation: (isValid: boolean) => void) => {
-  const [allInputValid, setAllInputValid] = useState(false);
+  const [, setAllInputValid] = useState(false);
   const [inputValidities, setInputValidities] = useState({
     0: false,
     1: false,
