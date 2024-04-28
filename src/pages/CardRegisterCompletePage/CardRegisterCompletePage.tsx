@@ -25,7 +25,7 @@ const CardRegisterCompletePage = () => {
         />
         <p className={styles.cardRegisterDescription}>
           {state
-            ? `${state.cardPassword}로 시작하는 <br /> ${state.cardBrand}가 등록되었습니다.`
+            ? `${state.cardPassword}로 시작하는 \n ${state.cardBrand}가 등록되었습니다.`
             : '임의로 접근할 수 없습니다. \n 다시 메인 페이지로 돌아가주세요 :)'}
         </p>
       </>
