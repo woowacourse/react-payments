@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import useToggle from '@hooks/useToggle';
 
 import { isContainsNonNumeric } from '@utils/number/number';
-import { useState } from 'react';
+
+import { isValidCVCNumber } from '@domain/creditCard';
 
 const useChangeCVCNumber = () => {
   const [cvcNumber, setCVCNumber] = useState('');
@@ -17,7 +20,7 @@ const useChangeCVCNumber = () => {
     setCVCError({ isError: false, errorMessage: '' });
     setCVCNumber(cvcNumber);
 
-    if (cvcNumber.length === 3) setIsCVCNumberCompleted(true);
+    if (isValidCVCNumber(cvcNumber)) setIsCVCNumberCompleted(true);
   };
 
   const { isToggle, handleToggle } = useToggle(false);
