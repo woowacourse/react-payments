@@ -26,32 +26,32 @@ const NewCardPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const updateStage = () => {
-      if (
-        cardInfo.cardNumbers.every((element) => element.length === 4) &&
-        errorMessage.cardNumbers.every((element) => element === '') &&
-        creationStage < 2
-      ) {
-        setCreationStage(2);
-      } else if (cardInfo.cardCompany !== '' && creationStage < 3) {
-        setCreationStage(3);
-      } else if (
-        cardInfo.cardExpiration.every((element) => element.length == 2) &&
-        errorMessage.cardExpiration.every((element) => element === '') &&
-        creationStage < 4
-      ) {
-        setCreationStage(4);
-      } else if (cardInfo.userName !== '' && creationStage < 5) {
-        setCreationStage(5);
-      } else if (cardInfo.cvc !== '' && creationStage < 6) {
-        setCreationStage(6);
-      } else if (cardInfo.password !== '' && creationStage < 7) {
-        setCreationStage(7);
-      }
-    };
-
     updateStage();
   }, [cardInfo, errorMessage, creationStage]);
+
+  const updateStage = () => {
+    if (
+      cardInfo.cardNumbers.every((element) => element.length === 4) &&
+      errorMessage.cardNumbers.every((element) => element === '') &&
+      creationStage < 2
+    ) {
+      setCreationStage(2);
+    } else if (cardInfo.cardCompany !== '' && creationStage < 3) {
+      setCreationStage(3);
+    } else if (
+      cardInfo.cardExpiration.every((element) => element.length == 2) &&
+      errorMessage.cardExpiration.every((element) => element === '') &&
+      creationStage < 4
+    ) {
+      setCreationStage(4);
+    } else if (cardInfo.userName !== '' && creationStage < 5) {
+      setCreationStage(5);
+    } else if (cardInfo.cvc !== '' && creationStage < 6) {
+      setCreationStage(6);
+    } else if (cardInfo.password !== '' && creationStage < 7) {
+      setCreationStage(7);
+    }
+  };
 
   const isAllValidInput = () => {
     const isCardInfoValid = Object.values(cardInfo).every(
