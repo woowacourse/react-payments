@@ -68,7 +68,6 @@ export default function RegisterCardInfoPage() {
     onChange: nameChangeHandler,
     isError: nameError,
     onKeyDown: handleEnterName,
-    ref: nameRef,
     onBlur: handleNameBlur,
   } = useInput({
     validators: [{ fn: (value) => validate.isEnglish(value) }],
@@ -98,7 +97,7 @@ export default function RegisterCardInfoPage() {
     isActiveCurrentStep: step === REGISTER_STEP.CARD_ISSUER,
   });
 
-  const { cardNumbers, cardNumbersChangeHandler, cardBrand, refs } = useCardNumber({
+  const { cardNumbers, cardNumbersChangeHandler, cardBrand } = useCardNumber({
     initialCardNumberStates: Array.from(
       { length: CARD_NUMBER_LENGTH },
       () => initialCardNumberState,
@@ -164,7 +163,6 @@ export default function RegisterCardInfoPage() {
                 onChange={nameChangeHandler}
                 isError={nameError}
                 value={name}
-                ref={nameRef}
                 onKeyDown={handleEnterName}
                 onBlur={handleNameBlur}
               />
@@ -190,7 +188,7 @@ export default function RegisterCardInfoPage() {
 
             <Register.Step name={REGISTER_STEP.CARD_NUMBER}>
               <CardNumberInputSection
-                refs={refs}
+                // refs={refs}
                 cardNumbers={cardNumbers}
                 cardNumbersChangeHandler={cardNumbersChangeHandler}
               />
