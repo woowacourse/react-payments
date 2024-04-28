@@ -13,7 +13,7 @@ import {
   UserName,
 } from '../types/card';
 function checkTrimBlank(n: string) {
-  if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
+  if ((n.trim() === '' && n !== '')) {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
 }
@@ -119,7 +119,7 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
 
 export const validateUserName = (userName: UserName) => {
   const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '' && cur.value.length > 3) {
+    if (!cur.isError && cur.value !== '') {
       return pre + 1;
     }
     return pre;
