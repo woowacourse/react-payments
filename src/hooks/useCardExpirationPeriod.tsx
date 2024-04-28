@@ -1,16 +1,23 @@
-import useInput, { UseInputHookValue } from "./useInput";
+import useInput, { PropsWithOnFocus, UseInputHookValue } from "./useInput";
 import {
   validateLength,
   validateMonth,
   validateYear,
 } from "../domain/validateCardInfo";
 
-export default function useCardExpirationPeriod() {
+export default function useCardExpirationPeriod({ onFocus }: PropsWithOnFocus) {
   const monthInputProps = {
     validator: (string: string) => {
       validateMonth(string);
       validateLength(string, 2);
     },
+    checkComplete: (string: string) => {
+      if (string.length === 2) {
+        return true;
+      }
+      return false;
+    },
+    onFocus: onFocus,
   };
 
   const yearInputProps = {
@@ -18,6 +25,13 @@ export default function useCardExpirationPeriod() {
       validateYear(string);
       validateLength(string, 2);
     },
+    checkComplete: (string: string) => {
+      if (string.length === 2) {
+        return true;
+      }
+      return false;
+    },
+    onFocus: onFocus,
   };
 
   const monthInput = useInput(monthInputProps);

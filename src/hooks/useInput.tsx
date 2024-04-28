@@ -1,27 +1,40 @@
+import React, { useState } from "react";
+
 import { NonBlockedInputError } from "../errors/InputError";
-import { useState } from "react";
 
 interface InputProps {
   initValue?: string;
   validator?: (value: string) => void;
+  onFocus?: () => void;
+  checkComplete?: (value: string) => boolean;
   errorHandler?: (error: unknown) => void;
   decorateValue?: (value: string) => string;
+}
+
+export interface PropsWithOnFocus {
+  onFocus: () => void;
 }
 
 export interface UseInputHookValue {
   value: string;
   onChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocusHandler: () => void;
   errorMessage: string;
+  isComplete: boolean;
+  setIsComplete?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function useInput({
   initValue = "",
+  onFocus = () => {},
   validator = () => {},
   errorHandler = () => {},
+  checkComplete = () => true,
   decorateValue = (value: string) => value,
 }: InputProps) {
   const [value, setValue] = useState(initValue);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
 
   const onChangeErrorHandler = (
     error: Error,
@@ -41,6 +54,7 @@ export default function useInput({
       validator(event.target.value);
       setErrorMessage("");
     } catch (error) {
+      setIsComplete(false);
       onChangeErrorHandler(error as Error, event.target);
       return;
     }
@@ -48,7 +62,23 @@ export default function useInput({
     event.target.setCustomValidity("");
 
     setValue(decorateValue(event.target.value));
+
+    if (checkComplete(event.target.value)) {
+      setIsComplete(true);
+      return;
+    }
   };
 
-  return { value, errorMessage, onChangeHandler };
+  const onFocusHandler = () => {
+    onFocus();
+  };
+
+  return {
+    value,
+    errorMessage,
+    isComplete,
+    onChangeHandler,
+    onFocusHandler,
+    setIsComplete,
+  };
 }
