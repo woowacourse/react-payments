@@ -2,20 +2,20 @@ import * as S from '../../app.style';
 import { MAX_LENGTH, EXPIRATION_PERIOD } from '@/constants/cardSection';
 import { Input } from '../composables/input.style';
 import Label from '../composables/Label';
-import InputSection from './InputSection';
-import { forwardRef, RefObject } from 'react';
+import InputSection from '../composables/InputSection';
+import { forwardRef, RefObject, useCallback, useRef } from 'react';
 
 type RegisterExpirationDateProps = {
   month: string;
-  monthChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
+  monthChangeHandler: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    nextRef: RefObject<HTMLInputElement>,
+  ) => void;
   monthError: boolean;
-  monthRef: RefObject<HTMLInputElement>;
-  handleMonthKeyDown: (e: React.KeyboardEvent) => void;
   handleMonthBlur: React.FocusEventHandler<HTMLInputElement>;
   year: string;
   yearChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
   yearError: boolean;
-  yearRef: RefObject<HTMLInputElement>;
   handleYearKeyDown: (e: React.KeyboardEvent) => void;
   handleYearBlur: React.FocusEventHandler<HTMLInputElement>;
 };
@@ -26,16 +26,19 @@ const RegisterExpirationDate = forwardRef<HTMLInputElement, RegisterExpirationDa
       month,
       monthError,
       monthChangeHandler,
-      handleMonthKeyDown,
-      monthRef,
       handleMonthBlur,
       year,
       yearChangeHandler,
       yearError,
-      yearRef,
       handleYearKeyDown,
       handleYearBlur,
     } = props;
+
+    const yearRef = useRef<HTMLInputElement>(null);
+
+    const monthRef = useCallback((node: HTMLInputElement | null) => {
+      node?.focus();
+    }, []);
 
     return (
       <S.Wrapper>
@@ -51,10 +54,9 @@ const RegisterExpirationDate = forwardRef<HTMLInputElement, RegisterExpirationDa
             type="text"
             value={month}
             maxLength={MAX_LENGTH.MONTH}
-            onChange={monthChangeHandler}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => monthChangeHandler(e, yearRef)}
             isError={monthError}
             ref={monthRef}
-            onKeyDown={handleMonthKeyDown}
             onBlur={handleMonthBlur}
           />
           <Label htmlFor={'year'} />
