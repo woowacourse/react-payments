@@ -2,14 +2,12 @@ import { ButtonHTMLAttributes } from 'react';
 import * as B from './confirmButton.style';
 import * as S from '../confirmPage.style';
 
-interface ConfirmButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
-}
+interface ConfirmButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export default function ConfirmButton({ text, ...props }: ConfirmButtonProps) {
+export default function ConfirmButton({ children, ...props }: ConfirmButtonProps) {
   return (
     <S.ButtonContainer>
-      <B.ConfirmButton {...props}>{text}</B.ConfirmButton>
+      <B.ConfirmButton {...props}>{children}</B.ConfirmButton>
     </S.ButtonContainer>
   );
 }

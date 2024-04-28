@@ -29,7 +29,7 @@ export default function ConfirmPage() {
         <S.Container>
           <ConfirmImageIcon />
           <CompleteText cardIssuer={cardIssuer} cardNumbers={cardNumbers} />
-          <ConfirmButton onClick={goToHomePage} text={'확인'} />
+          <ConfirmButton onClick={goToHomePage}>확인</ConfirmButton>
         </S.Container>
       </S.ContentCard>
     </>
