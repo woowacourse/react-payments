@@ -29,7 +29,7 @@ const CardFrontPreview = ({ cardInfo }: CardFrontPreviewProps) => {
   };
 
   return (
-    <Styled.CardPreviewContainer cardBackground={cardInfo.cardCompany}>
+    <Styled.CardPreviewContainer $cardBackground={cardInfo.cardCompany}>
       <Styled.ChipSection>
         <Styled.ICChip></Styled.ICChip>
         <Styled.CardBrand>

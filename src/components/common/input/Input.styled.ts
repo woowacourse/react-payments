@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface InputProps {
-  isError?: boolean;
+  $isError?: boolean;
 }
 
 export const Input = styled.input<InputProps>`
@@ -13,7 +13,7 @@ export const Input = styled.input<InputProps>`
   border: 1px solid #acacac;
 
   ${(props) =>
-    props.isError &&
+    props.$isError &&
     `
     border-color: red;
   `}

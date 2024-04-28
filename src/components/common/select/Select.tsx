@@ -7,17 +7,16 @@ export interface SelectProps extends React.ComponentPropsWithRef<'select'> {
 const Select = ({ options, ...restProps }: SelectProps) => {
   return (
     <Styled.Select {...restProps}>
-      {options.map((option, index) =>
-        index === 0 ? (
-          <option key={option} value='' selected disabled>
-            {option}
-          </option>
-        ) : (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ),
-      )}
+      {options.map((option, index) => (
+        <option
+          key={option}
+          defaultValue='카드사를 선택해 주세요'
+          value={index === 0 ? '' : option}
+          disabled={index === 0}
+        >
+          {option}
+        </option>
+      ))}
     </Styled.Select>
   );
 };

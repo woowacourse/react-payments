@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 interface CardPreviewContainerProps {
-  cardBackground?: string;
+  $cardBackground?: string;
 }
 
 export const CardPreviewContainer = styled.div<CardPreviewContainerProps>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: ${({ cardBackground }) =>
-    cardBackground ? getBackgroundColor(cardBackground) : '#333333'};
+  background: ${({ $cardBackground }) =>
+    $cardBackground ? getBackgroundColor($cardBackground) : '#333333'};
   box-shadow: 3px 3px 5px 0px #00000040;
   margin: auto;
 `;
