@@ -1,4 +1,4 @@
-import { useRef, useState, RefObject, useEffect } from 'react';
+import { useState, RefObject } from 'react';
 import validate from '../utils/validate';
 import { MAX_LENGTH } from '../constants/cardSection';
 import { InitialCardNumberState } from '@/types';
@@ -6,25 +6,18 @@ import { InitialCardNumberState } from '@/types';
 type UseCardNumberHookProps = {
   initialCardNumberStates: InitialCardNumberState[];
   nextStepHandler: () => void;
-  ref: RefObject<HTMLSelectElement>;
+  ref?: RefObject<HTMLSelectElement>;
   isValidCurrentStep: boolean;
 };
 
 const useCardNumber = ({
   initialCardNumberStates,
   nextStepHandler,
-  ref,
   isValidCurrentStep,
 }: UseCardNumberHookProps) => {
   const [cardNumbers, setCardNumbers] = useState<InitialCardNumberState[]>(initialCardNumberStates);
   const [cardBrand, setCardBrand] = useState<'none' | 'Visa' | 'MasterCard'>('none');
   const [isCompleted, setIsCompleted] = useState(false);
-  const refs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
 
   const handleCardBrandImage = (totalCardNumbers: string) => {
     if (validate.isVisa(totalCardNumbers)) {
@@ -38,7 +31,11 @@ const useCardNumber = ({
     setCardBrand('none');
   };
 
-  const cardNumbersChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const cardNumbersChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    ref: RefObject<HTMLInputElement>,
+  ) => {
     const newValue = e.target.value;
 
     const isValid =
@@ -68,7 +65,7 @@ const useCardNumber = ({
     }
 
     if (isValid && newValue.length === MAX_LENGTH.INDIVIDUAL_CARD_NUMBER && index < 3) {
-      refs[index + 1].current?.focus();
+      ref.current?.focus();
     }
 
     if (totalCardNumbers.length === MAX_LENGTH.TOTAL_CARD_NUMBER) {
@@ -79,13 +76,7 @@ const useCardNumber = ({
     }
   };
 
-  useEffect(() => {
-    if (isCompleted && ref.current) {
-      ref.current.focus();
-    }
-  }, [isCompleted]);
-
-  return { cardNumbers, cardNumbersChangeHandler, cardBrand, refs };
+  return { cardNumbers, cardNumbersChangeHandler, cardBrand };
 };
 
 export default useCardNumber;
