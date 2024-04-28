@@ -4,6 +4,7 @@ import useCardNumbers from './useCardNumbers';
 import useCardCompany from './useCardCompany';
 import useCardExpiration from './useCardExpiration';
 import useCardUserName from './useCardUserName';
+import useCardCVC from './useCardCVC';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -56,6 +57,11 @@ const useCardForm = () => {
     setErrorMessage,
   });
 
+  const { handleCardCVC } = useCardCVC({
+    setCardInfo,
+    setErrorMessage,
+  });
+
   return {
     cardInfo,
     errorMessage,
@@ -63,6 +69,7 @@ const useCardForm = () => {
     handleCardCompany,
     handleCardExpiration,
     handleCardUserName,
+    handleCardCVC,
   };
 };
 
