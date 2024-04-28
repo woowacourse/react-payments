@@ -26,6 +26,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     options: CARD_ISSUER,
-    selected: "카드사를 선택해주세요",
+    selected: "",
+    placeholder: "카드사를 선택해주세요",
   },
 };
