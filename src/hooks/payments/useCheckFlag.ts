@@ -7,7 +7,7 @@ const useCheckFlag = (targets: FlagsState) => {
 
   useEffect(() => {
     setFlags((prev) => {
-      return targets.map((target, index) => (prev[index] || target ? true : false));
+      return targets.map((target, index) => prev[index] || target);
     });
   }, [JSON.stringify(targets)]);
 

@@ -25,7 +25,7 @@ const PaymentsPreview: React.FC<PaymentsPreviewProps> = ({
 
   const { month, year } = expirationDate;
   const formattedMonth = month ? month.padStart(2, '0') : '';
-  const isFrontVisible = focusedId !== ID.payments.cvcNumberInput ? true : false;
+  const isFrontVisible = focusedId !== ID.payments.cvcNumberInput;
 
   const renderPasswordDots = (length: number, keyPrefix: string) =>
     Array.from({ length }, (_, i) => (
