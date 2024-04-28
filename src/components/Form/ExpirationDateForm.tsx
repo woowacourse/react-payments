@@ -10,10 +10,22 @@ const ExpirationDateForm = ({
   placeholders,
   expirationDate,
   setExpirationDate,
+  onValidation,
+  onFocus,
 }: CardFormProps) => {
-  const [, setAllInputValid] = useState(true);
+  const [, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  const [inputValidities, setInputValidities] = useState({
+    0: false,
+    1: false,
+  });
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (type: string) => {
+    onFocus(type);
+    setIsFocused(true);
+  };
 
   const validateMonth = (value: string) => {
     const regex = /^(0[1-9]|1[0-2])$/;
@@ -36,9 +48,11 @@ const ExpirationDateForm = ({
 
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
-    setAllInputValid(allValid);
 
+    setAllInputValid(allValid);
     setErrorMessage(allValid ? "" : "만료 기한을 올바르게 입력해주세요.");
+
+    if (onValidation) onValidation(allValid);
   }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -48,15 +62,22 @@ const ExpirationDateForm = ({
       type={type}
       placeholder={placeholders[index]}
       maxLength={2}
-      data={expirationDate || []}
-      setData={setExpirationDate || (() => {})}
+      state={expirationDate || []}
+      setState={setExpirationDate || (() => {})}
       setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
       setAllInputValid={(isValid: boolean) => updateInputValidity(index, isValid)}
       validationRule={(value) => (index === 0 ? validateMonth(value) : validateYear(value))}
+      onFocus={() => handleFocus(type)}
     />
   ));
 
-  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
+  return (
+    <FormElement
+      labelContent={labelContent}
+      inputs={inputs}
+      errorMessage={isFocused ? errorMessage : ""}
+    />
+  );
 };
 
 export default ExpirationDateForm;

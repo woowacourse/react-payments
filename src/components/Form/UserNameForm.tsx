@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-
 import Input from "./Input";
 import FormElement from "../common/FormElement";
-
 import { CardFormProps } from "./CardNumberForm";
 
 const UserNameForm = ({
@@ -12,10 +10,18 @@ const UserNameForm = ({
   placeholders,
   userName,
   setUserName,
+  onValidation,
+  onFocus,
 }: CardFormProps) => {
-  const [, setAllInputValid] = useState(true);
+  const [, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  const [inputValidities, setInputValidities] = useState({ 0: false });
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (type: string) => {
+    onFocus(type);
+    setIsFocused(true);
+  };
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
   const updateInputValidity = (index: number, isValid: boolean) => {
@@ -30,6 +36,9 @@ const UserNameForm = ({
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
     setAllInputValid(allValid);
     setErrorMessage(allValid ? "" : "이름은 30자 이하의 영문 대문자여야 합니다.");
+
+    if (onValidation && allValid) onValidation(true);
+    if (onValidation && !allValid) onValidation(false);
   }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -39,15 +48,22 @@ const UserNameForm = ({
       type={type}
       placeholder={placeholders[index]}
       maxLength={30}
-      data={userName || []}
-      setData={setUserName || (() => {})}
+      state={userName || []}
+      setState={setUserName || (() => {})}
       setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
       setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
       validationRule={(value) => /^[A-Z\s]{1,30}$/.test(value)}
+      onFocus={() => handleFocus(type)}
     />
   ));
 
-  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
+  return (
+    <FormElement
+      labelContent={labelContent}
+      inputs={inputs}
+      errorMessage={isFocused ? errorMessage : ""}
+    />
+  );
 };
 
 export default UserNameForm;
