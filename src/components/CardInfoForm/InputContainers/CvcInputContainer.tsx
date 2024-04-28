@@ -3,6 +3,7 @@ import InputContainer from '../../common/InputContainer';
 import { IInputControl } from '../../../hooks/useInput';
 
 import * as S from '../../../styles/common';
+import makeUniqueString from '../../../utils/getUniqueId';
 
 export interface ICvcInputContainerProps {
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,10 +22,13 @@ const CvcInputContainer = ({
     setIsCardFront(true);
   };
 
+  const inputId = makeUniqueString(`cvc-input`);
+
   return (
     <div>
-      <InputContainer title="CVC 번호를 입력해 주세요" labelFor="CVC" labelText="CVC">
+      <InputContainer title="CVC 번호를 입력해 주세요" labelFor={inputId} labelText="CVC">
         <Input
+          id={inputId}
           isError={errorStatus.isError}
           placeholder="123"
           maxLength={3}

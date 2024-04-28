@@ -1,9 +1,6 @@
 import * as React from 'react';
-
 import Input from '../../../common/Input';
-
 import useRefs from '../../../../hooks/useRefs';
-import getObjectKeys from '../../../../utils/getObjectKeys';
 
 const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
 const INPUT_TYPE = {
@@ -14,6 +11,8 @@ const CARD_NUMBER_LENGTH = 4;
 
 export interface ICardNumberInputsProps {
   cardNumbers: Record<string, string>;
+  cardNumberKeys: string[];
+  inputIds: Record<string, string>;
   isError: Record<string, boolean>;
   validateValue: (key: string, targetValue: string) => void;
   generateOnChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,11 +20,12 @@ export interface ICardNumberInputsProps {
 
 export default function CardNumberInputs({
   cardNumbers,
+  cardNumberKeys,
+  inputIds,
   isError,
   validateValue,
   generateOnChange,
 }: ICardNumberInputsProps) {
-  const cardNumberKeys = getObjectKeys(cardNumbers);
   const { getRefWithIndex, generateRefWithIndex } = useRefs<HTMLInputElement>(cardNumberKeys.length);
 
   return (
@@ -49,9 +49,9 @@ export default function CardNumberInputs({
           <Input
             onChange={onChange}
             key={key}
-            id={`${key}-card-numbers-input`}
+            id={inputIds[key]}
             isError={isError[key]}
-            value={cardNumbers[index]}
+            value={cardNumbers[key]}
             onBlur={e => validateValue(key, e.target.value)}
             placeholder="1234"
             maxLength={4}

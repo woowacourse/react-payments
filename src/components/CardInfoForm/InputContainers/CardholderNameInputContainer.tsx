@@ -3,15 +3,17 @@ import InputContainer from '../../common/InputContainer';
 
 import { IInputControl } from '../../../hooks/useInput';
 import * as S from '../../../styles/common';
+import makeUniqueString from '../../../utils/getUniqueId';
 
 const CardholderNameInputContainer = ({ value, setValue, onBlur, errorStatus }: IInputControl) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
+  const inputId = makeUniqueString(`cardholder-name-input`);
 
   return (
     <div>
-      <InputContainer title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor="cardholder-name-input">
+      <InputContainer title="카드 소유자 이름 입력" labelText="소유자 이름" labelFor={inputId}>
         <Input
-          id="cardholder-name-input"
+          id={inputId}
           isError={errorStatus.isError}
           value={value}
           onChange={onChange}

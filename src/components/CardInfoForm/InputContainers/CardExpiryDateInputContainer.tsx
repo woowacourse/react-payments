@@ -5,6 +5,7 @@ import InputContainer from '../../common/InputContainer';
 
 import { IInputControl } from '../../../hooks/useInput';
 import * as S from '../../../styles/common';
+import makeUniqueString from '../../../utils/getUniqueId';
 
 const MONTH_LENGTH = 2;
 
@@ -27,16 +28,19 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
     }
   };
 
+  const monthInputId = makeUniqueString('card-expiry-month-input');
+  const yearInputId = makeUniqueString('card-expiry-year-input');
+
   return (
     <div>
       <InputContainer
         title="카드 유효기간을 입력해 주세요"
         subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         labelText="유효기간"
-        labelFor="card-expiry-month-input"
+        labelFor={monthInputId}
       >
         <Input
-          id="card-expiry-month-input"
+          id={monthInputId}
           isError={month.errorStatus.isError}
           value={month.value}
           onChange={onMonthChange}
@@ -47,8 +51,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           autoFocus={true}
         />
         <Input
-          ref={yearInputRef}
-          id="card-expiry-year-input"
+          id={yearInputId}
           isError={year.errorStatus.isError}
           value={year.value}
           onChange={year.onChange}
@@ -56,6 +59,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           placeholder="24"
           maxLength={2}
           width="48%"
+          ref={yearInputRef}
         />
       </InputContainer>
       <S.ErrorWrapper>
