@@ -39,7 +39,7 @@ const CardRegistrationPage = () => {
   const cardNumbers = useInputs(validateCardNumber, ['', '', '', '']);
 
   const validationList = [
-    isAllValid(cardNumbers.isValid),
+    isAllValid(cardNumbers.isValidList),
     company.isValid,
     isAllValid([month.isValid, year.isValid]),
     owner.isValid,

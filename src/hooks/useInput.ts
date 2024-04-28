@@ -3,7 +3,7 @@ import { useState } from 'react';
 export interface InputType {
   value: string;
   isValid: boolean;
-  isClicked: boolean;
+  isError: boolean;
   handleValue: (newValue: string) => void;
 }
 
@@ -19,7 +19,7 @@ const useInput = (validateFunction: (value: string) => boolean, defaultValue: st
     setValue(newValue);
   };
 
-  return { value, isValid, isClicked, handleValue };
+  return { value, isValid, isError: isClicked && !isValid, handleValue };
 };
 
 export default useInput;

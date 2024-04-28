@@ -21,14 +21,14 @@ const CardPasswordInput = ({ password }: CardPasswordInputProps) => {
     password.handleValue(e.target.value);
   };
 
-  const errorMessage = password.isClicked && !password.isValid ? ERROR_MESSAGE.INVALID_CARD_PASSWORD : '';
+  const errorMessage = password.isError ? ERROR_MESSAGE.INVALID_CARD_PASSWORD : '';
 
   return (
     <div>
       <TitleContainer title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해 주세요." />
       <InputField label="비밀번호 앞 2자리" inputCount={CARD_PASSWORD.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
-          isValid={password.isClicked ? password.isValid : true}
+          isValid={!password.isError}
           type="password"
           placeholder="비밀번호를 입력하세요"
           value={password.value}

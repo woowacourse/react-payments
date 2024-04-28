@@ -29,12 +29,7 @@ const CardNumbersInput = ({ cardNumbers }: CardNumbersInputProps) => {
     moveToNextInput(e.target.value, inputIndex);
   };
 
-  const errorMessage =
-    cardNumbers.isClicked.some(Boolean) &&
-    !cardNumbers.isValid.every(Boolean) &&
-    JSON.stringify(cardNumbers.isClicked) !== JSON.stringify(cardNumbers.isValid)
-      ? ERROR_MESSAGE.INVALID_CARD_NUMBER
-      : '';
+  const errorMessage = cardNumbers.isErrorList.some(Boolean) ? ERROR_MESSAGE.INVALID_CARD_NUMBER : '';
 
   return (
     <div>
@@ -49,7 +44,7 @@ const CardNumbersInput = ({ cardNumbers }: CardNumbersInputProps) => {
             placeholder="1234"
             value={cardNumbers.values[index]}
             onChange={handleCardNumberChange(index)}
-            isValid={cardNumbers.isClicked[index] ? cardNumbers.isValid[index] : true}
+            isValid={!cardNumbers.isErrorList[index]}
             autoFocus={index === 0}
           />
         ))}

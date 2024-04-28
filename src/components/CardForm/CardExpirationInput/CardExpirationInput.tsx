@@ -16,9 +16,6 @@ interface CardExpirationInputProps {
 const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
   const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
-  const isValid = [month.isValid, year.isValid];
-  const isClicked = [month.isClicked, year.isClicked];
-
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
       e.target.value = '';
@@ -39,35 +36,34 @@ const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
     year.handleValue(e.target.value);
   };
 
-  const errorMessage =
-    isClicked.some(Boolean) && !isValid.every(Boolean) && JSON.stringify(isClicked) !== JSON.stringify(isValid)
-      ? isValid[0]
-        ? ERROR_MESSAGE.INVALID_EXPIRATION_YEAR
-        : ERROR_MESSAGE.INVALID_EXPIRATION_MONTH
-      : '';
+  const errorMessage = () => {
+    if (month.isError || year.isError) {
+      return month.isError ? ERROR_MESSAGE.INVALID_EXPIRATION_MONTH : ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
+    }
+  };
 
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input
+          isValid={!month.isError}
           type="text"
           ref={setRef(0)}
           placeholder="MM"
           value={month.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
-          isValid={isClicked[0] ? isValid[0] : true}
           autoFocus
         />
         <Input
+          isValid={!year.isError}
           type="text"
           ref={setRef(1)}
           placeholder="YY"
           value={year.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
-          isValid={isClicked[1] ? isValid[1] : true}
         />
       </InputField>
     </div>

@@ -22,14 +22,14 @@ const CardCVCInput = ({ cvc, handleIsCVCInput }: CardCVCInputProps) => {
     cvc.handleValue(e.target.value);
   };
 
-  const errorMessage = cvc.isClicked && !cvc.isValid ? ERROR_MESSAGE.INVALID_CARD_CVC : '';
+  const errorMessage = cvc.isError ? ERROR_MESSAGE.INVALID_CARD_CVC : '';
 
   return (
     <div>
       <TitleContainer title="CVC 번호를 입력해 주세요" />
       <InputField label="CVC" inputCount={CARD_CVC.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
-          isValid={cvc.isClicked ? cvc.isValid : true}
+          isValid={!cvc.isError}
           type="text"
           placeholder="123"
           value={cvc.value}
