@@ -1,5 +1,5 @@
-import { CARD, CARD_NUMBER, CARD_EXPIRATION, CARD_OWNER } from '../constants/Condition';
 import { isNotEmpty, isValidForm, isValidLength, isValidRange } from '../utils/validation';
+import { CARD, CARD_NUMBER, CARD_EXPIRATION, CARD_OWNER } from '../constants/Condition';
 
 export const isVisaCard = (cardNumbers: string[]) => {
   return Number(cardNumbers[0].charAt(0)) === CARD.VISA;

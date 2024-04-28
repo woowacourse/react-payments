@@ -1,3 +1,5 @@
+import type { CardCompany } from '../domain/Card.type';
+
 export const CARD_EXPIRATION = {
   INPUT_FIELD_COUNT: 2,
   MAX_LENGTH: 2,
@@ -16,7 +18,7 @@ export const CARD_OWNER = {
   MAX_LENGTH: 30,
 } as const;
 
-export const CARD_COMPANY: Record<string, string> = {
+export const CARD_COMPANY: Record<CardCompany, string> = {
   BC카드: '#F04651',
   신한카드: '#0046FF',
   카카오뱅크: '#FFE600',
