@@ -9,13 +9,25 @@ export const CARD_ISSUER = [
   "국민카드",
 ];
 
-export const cardColorMatcher = {
-  BC카드: "#F04651",
-  신한카드: "#0046FF",
-  카카오뱅크: "#FFE600",
-  현대카드: "#000000",
-  우리카드: "#007BC8",
-  롯데카드: "#ED1C24",
-  하나카드: "#009490",
-  국민카드: "#6A6056",
+export const cardColorMatcher = (issuer: string) => {
+  switch (issuer) {
+    case "BC카드":
+      return "#F04651";
+    case "신한카드":
+      return "#0046FF";
+    case "카카오뱅크":
+      return "#FFE600";
+    case "현대카드":
+      return "#000000";
+    case "우리카드":
+      return "#007BC8";
+    case "롯데카드":
+      return "#ED1C24";
+    case "하나카드":
+      return "#009490";
+    case "국민카드":
+      return "#6A6056";
+    default:
+      return "#333333";
+  }
 };
