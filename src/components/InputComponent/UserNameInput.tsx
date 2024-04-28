@@ -1,12 +1,6 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { UserName } from '../../types/card';
@@ -22,16 +16,11 @@ export default function UserNameInput({
   handleInput,
   handleShowComponent,
 }: Props) {
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
-    {}
-  );
-
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  useEffect(() => {
-    const messages = Object.values(userName).map((value) => value.errorMessage);
-    setErrorMessages(messages);
-  }, [userName]);
+  const errorMessages = Object.values(userName).map(
+    (value) => value.errorMessage
+  );
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -69,7 +58,7 @@ export default function UserNameInput({
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    info: string,
+    info: string
   ) => {
     try {
       Validation[info]?.(e.target.value);
@@ -115,17 +104,17 @@ export default function UserNameInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({length:1}).map((_, index) => (
+        {Array.from({ length: 1 }).map((_, index) => (
           <Input
             key={index}
             type='string'
             maxLength={30}
-            value={userName['userName' as keyof UserName].value }
+            value={userName['userName' as keyof UserName].value}
             placeholder={'JOHN DOE'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'userName')}
             onKeyDown={(e) => handleKeyDown(e)}
-            inputRef={(element : HTMLInputElement) => {
+            inputRef={(element: HTMLInputElement) => {
               inputRefs.current[index] = element;
             }}
           />

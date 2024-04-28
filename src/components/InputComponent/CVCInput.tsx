@@ -1,12 +1,6 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CVC } from '../../types/card';
@@ -22,15 +16,9 @@ export default function CVCInput({
   handleInput,
   handleShowComponent,
 }: Props) {
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
-    {}
-  );
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  useEffect(() => {
-    const messages = Object.values(CVC).map((value) => value.errorMessage);
-    setErrorMessages(messages);
-  }, [CVC]);
+  const errorMessages = Object.values(CVC).map((value) => value.errorMessage);
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -112,7 +100,7 @@ export default function CVCInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({length:1}).map((_, index) => (
+        {Array.from({ length: 1 }).map((_, index) => (
           <Input
             key={index}
             type='string'
@@ -121,7 +109,7 @@ export default function CVCInput({
             placeholder={'123'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'CVC')}
-            inputRef={(element : HTMLInputElement) => {
+            inputRef={(element: HTMLInputElement) => {
               inputRefs.current[index] = element;
             }}
           />

@@ -5,7 +5,6 @@ import React, {
   SetStateAction,
   useEffect,
   useRef,
-  useState,
 } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
@@ -22,15 +21,10 @@ export default function ExpirationDateInput({
   handleInput,
   handleShowComponent,
 }: Props) {
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
-
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-  useEffect(() => {
-    const messages = Object.values(expirationDate).map(
-      (value) => value.errorMessage
-    );
-    setErrorMessages(messages);
-  }, [expirationDate]);
+  const errorMessages = Object.values(expirationDate).map(
+    (value) => value.errorMessage
+  );
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -123,7 +117,7 @@ export default function ExpirationDateInput({
         count={2}
         errorMessages={errorMessages}
       >
-        {Array.from({length:2}).map((_, index) => (
+        {Array.from({ length: 2 }).map((_, index) => (
           <Input
             key={index}
             type='string'
@@ -132,7 +126,7 @@ export default function ExpirationDateInput({
             placeholder={datePlaceHolder[index]}
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, date[index], index)}
-            inputRef={(element : HTMLInputElement) => {
+            inputRef={(element: HTMLInputElement) => {
               inputRefs.current[index] = element;
             }}
           />

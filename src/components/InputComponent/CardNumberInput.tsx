@@ -1,13 +1,7 @@
 // import styled from "styled-components";
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CardNumbers } from '../../types/card';
@@ -23,16 +17,10 @@ export default function CardNumberInput({
   handleInput,
   handleShowComponent,
 }: Props) {
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
-
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-
-  useEffect(() => {
-    const messages = Object.values(cardNumbers).map(
-      (value) => value.errorMessage
-    );
-    setErrorMessages(messages);
-  }, [cardNumbers]);
+  const errorMessages = Object.values(cardNumbers).map(
+    (value) => value.errorMessage
+  );
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -123,7 +111,7 @@ export default function CardNumberInput({
         count={4}
         errorMessages={errorMessages}
       >
-        {Array.from({length:4}).map((_, index) => (
+        {Array.from({ length: 4 }).map((_, index) => (
           <Input
             key={index}
             type='text'
@@ -134,7 +122,7 @@ export default function CardNumberInput({
             placeholder='1234'
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'cardNumber', index)}
-            inputRef={(element : HTMLInputElement) => {
+            inputRef={(element: HTMLInputElement) => {
               inputRefs.current[index] = element;
             }}
           />

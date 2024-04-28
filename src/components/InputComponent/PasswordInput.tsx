@@ -1,12 +1,6 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { Password } from '../../types/card';
@@ -22,16 +16,11 @@ export default function PasswordInput({
   handleInput,
   handleShowComponent,
 }: Props) {
-  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
-    {}
-  );
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-
-  useEffect(() => {
-    const messages = Object.values(password).map((value) => value.errorMessage);
-    setErrorMessages(messages);
-  }, [password]);
+  const errorMessages = Object.values(password).map(
+    (value) => value.errorMessage
+  );
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -87,7 +76,7 @@ export default function PasswordInput({
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    info: string,
+    info: string
   ) => {
     try {
       Validation[info]?.(e.target.value);
@@ -116,16 +105,16 @@ export default function PasswordInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({length:1}).map((_, index) => (
+        {Array.from({ length: 1 }).map((_, index) => (
           <Input
             key={index}
             type='string'
             maxLength={2}
-            value={password['password' as keyof Password].value }
+            value={password['password' as keyof Password].value}
             placeholder={'**'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'password')}
-            inputRef={(element : HTMLInputElement) => {
+            inputRef={(element: HTMLInputElement) => {
               inputRefs.current[index] = element;
             }}
           />
