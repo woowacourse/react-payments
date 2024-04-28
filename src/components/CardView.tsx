@@ -17,7 +17,7 @@ export default function CardView({ cardInfo }: Props) {
   }, [cardInfo.cvc]);
 
   return (
-    <CardsContainer showBack={showBack}>
+    <CardsContainer $showBack={showBack}>
       {showBack ? (
         <Back>
           <CardBackView cvc={cardInfo.cvc} />
@@ -31,15 +31,15 @@ export default function CardView({ cardInfo }: Props) {
   );
 }
 
-const CardsContainer = styled.div<{ showBack: boolean }>`
+const CardsContainer = styled.div<{ $showBack: boolean }>`
   display: inline-grid;
   display: inline-block;
   color: white;
   transition: transform 0.3s;
   transform-style: preserve-3d;
   cursor: pointer;
-  transform: ${(props) =>
-    props.showBack ? 'rotateY(180deg)' : 'rotateY(0deg)'};
+  transform: ${({ $showBack }) =>
+    $showBack ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `;
 
 const Front = styled.div`
