@@ -38,6 +38,7 @@ const CardOwnerNameInput = ({
         isError={cardOwnerNameError}
         onChange={(e) => onCardOwnerNameChange(e.target.value)}
         onKeyDown={(e) => handleEnter(e, e.currentTarget.value)}
+        onBlur={(e) => onPressEnter(e.target.value)}
         autoFocus
       />
       {cardOwnerNameError ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName) : errorCaption('')}

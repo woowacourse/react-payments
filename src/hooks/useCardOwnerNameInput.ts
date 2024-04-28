@@ -9,10 +9,11 @@ const useCardOwnerNameInput = () => {
   const handleCardOwnerNameChange = (value: string) => {
     const isAlphabetInput = REGEX.onlyEnglish.test(value);
     const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
+    const isEmpty = value.length === 0;
 
-    setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName);
+    setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName || isEmpty);
 
-    if (!isAlphabetInput || !isValidOwnerName) return;
+    if (!isAlphabetInput || !isValidOwnerName || isEmpty) return;
 
     setCardOwnerName(value.toUpperCase());
     setIsNextVisible(true);
@@ -21,8 +22,9 @@ const useCardOwnerNameInput = () => {
   const updateValue = (value: string) => {
     const isAlphabetInput = REGEX.onlyEnglish.test(value);
     const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
+    const isEmpty = value.length === 0;
 
-    setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName);
+    setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName || isEmpty);
 
     if (!isAlphabetInput || !isValidOwnerName) return;
 
