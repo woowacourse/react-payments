@@ -8,7 +8,11 @@ interface DropdownContextInterface {
 const DropdownContext = createContext<DropdownContextInterface>({ isOpen: false, onToggleDropdown: () => {} });
 
 export const useDropdownContext = () => {
-  return useContext(DropdownContext);
+  const context = useContext(DropdownContext);
+  if (context === null) {
+    throw new Error('provider 내부에서 사용해야 합니다.');
+  }
+  return context;
 };
 
 export const DropdownProvider: React.FC<React.PropsWithChildren<{ value: DropdownContextInterface }>> = ({
