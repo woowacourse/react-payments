@@ -8,7 +8,7 @@ type ValidateFn = {
 type UseInputProps = {
   validators: ValidateFn[];
   nextRef?: RefObject<HTMLInputElement>;
-  nextStepHandler?: () => void;
+  onComplete?: () => void;
   isActiveCurrentStep: boolean;
   maxLength: number;
 };
@@ -16,7 +16,7 @@ type UseInputProps = {
 const useInput = ({
   validators,
   nextRef,
-  nextStepHandler,
+  onComplete,
   maxLength,
   isActiveCurrentStep,
 }: UseInputProps) => {
@@ -47,8 +47,8 @@ const useInput = ({
 
     if (inputValue.length === maxLength) {
       setIsCompleted(true);
-      if (nextStepHandler && isActiveCurrentStep) {
-        nextStepHandler();
+      if (onComplete && isActiveCurrentStep) {
+        onComplete();
       }
     } else {
       setIsCompleted(false);
@@ -57,13 +57,8 @@ const useInput = ({
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      if (
-        !isCompleted &&
-        nextStepHandler &&
-        !validate.isEmptyValue(inputValue) &&
-        isActiveCurrentStep
-      ) {
-        nextStepHandler();
+      if (!isCompleted && onComplete && !validate.isEmptyValue(inputValue) && isActiveCurrentStep) {
+        onComplete();
       }
       setIsCompleted(true);
     }
@@ -77,20 +72,15 @@ const useInput = ({
       setIsError(true);
       return;
     }
-    if (
-      !isCompleted &&
-      nextStepHandler &&
-      isActiveCurrentStep &&
-      !validate.isEmptyValue(inputValue)
-    ) {
-      nextStepHandler();
+    if (!isCompleted && onComplete && isActiveCurrentStep && !validate.isEmptyValue(inputValue)) {
+      onComplete();
     }
     setIsCompleted(true);
   };
 
   useEffect(() => {
-    if (isCompleted && ref && nextStepHandler && isActiveCurrentStep) {
-      nextStepHandler();
+    if (isCompleted && ref && onComplete && isActiveCurrentStep) {
+      onComplete();
       ref.current?.blur();
     }
     if (isCompleted && nextRef) {

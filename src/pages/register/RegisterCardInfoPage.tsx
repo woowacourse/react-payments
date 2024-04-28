@@ -8,7 +8,6 @@ import useCardIssuer from '@/hooks/useCardIssuer';
 import CvcCard from '@/components/cards/CvcCard';
 import REGISTER_STEP from '@/constants/registerStep';
 import { InitialCardNumberState } from '@/types';
-import useDetectComplete from '@/hooks/useDetectComplete';
 import { MAX_LENGTH } from '@/constants/cardSection';
 import RoutingButton from '@/components/registerSection/RoutingButton';
 import useExpirationDate from '@/hooks/useExpirationDate';
@@ -45,7 +44,7 @@ export default function RegisterCardInfoPage() {
   } = useInput({
     validators: [{ fn: (value) => validate.isValidDigit(value) }],
     maxLength: MAX_LENGTH.PASSWORD,
-    nextStepHandler,
+    onComplete: nextStepHandler,
     isActiveCurrentStep: step === REGISTER_STEP.CARD_PASSWORD,
   });
 
@@ -59,7 +58,7 @@ export default function RegisterCardInfoPage() {
   } = useInput({
     validators: [{ fn: (value) => validate.isValidDigit(value) }],
     maxLength: MAX_LENGTH.CVC,
-    nextStepHandler,
+    onComplete: nextStepHandler,
     nextRef: passwordRef,
     isActiveCurrentStep: step === REGISTER_STEP.CARD_CVC,
   });
@@ -74,7 +73,7 @@ export default function RegisterCardInfoPage() {
   } = useInput({
     validators: [{ fn: (value) => validate.isEnglish(value) }],
     maxLength: MAX_LENGTH.NAME,
-    nextStepHandler,
+    onComplete: nextStepHandler,
     nextRef: cardCvcRef,
     isActiveCurrentStep: step === REGISTER_STEP.CARD_OWNER_NAME,
   });
@@ -101,7 +100,6 @@ export default function RegisterCardInfoPage() {
     cardIssuer,
   } = useCardIssuer({
     nextStepHandler,
-    // nextRef: monthRef,
     isValidCurrentStep: step === REGISTER_STEP.CARD_ISSUER,
   });
 
@@ -115,7 +113,7 @@ export default function RegisterCardInfoPage() {
     isValidCurrentStep: step === REGISTER_STEP.CARD_NUMBER,
   });
 
-  const { isValidAllFormStates } = useDetectComplete({
+  const isValidAllFormStates = validate.isValidAllFormStates({
     cardNumbers,
     month,
     year,
