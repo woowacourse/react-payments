@@ -46,6 +46,7 @@ export type AllCardIssuer =
   | '국민카드';
 
 export type CardIssuerBackgroundColor =
+  | ''
   | 'rgba(240, 70, 81, 1)'
   | 'rgba(0, 70, 255, 1)'
   | 'rgba(255, 230, 0, 1)'
