@@ -9,7 +9,7 @@ export default function CompleteText({ cardNumbers, cardIssuer }: CompleteTextPr
   return (
     <S.TextContainer>
       <S.Text>{cardNumbers}로 시작하는 </S.Text>
-      <S.Text>{cardIssuer}가 등록 되었어요.</S.Text>
+      <S.Text>{cardIssuer}가 등록되었어요.</S.Text>
     </S.TextContainer>
   );
 }

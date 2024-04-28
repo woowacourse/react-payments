@@ -45,3 +45,9 @@ export const IconImageContainer = styled.div`
   background: rgba(51, 51, 51, 1);
   border-radius: 50%;
 `;
+
+export const IconImage = styled.img`
+  border: 7.5px;
+  width: 32px;
+  height: 20px;
+`;
