@@ -29,7 +29,8 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
   const sequence = useSequence(completionFlags);
   const isSubmitable = completionFlags.every((v: boolean) => v);
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (isSubmitable) {
       navigate(ROUTE_PATH.cardRegisterComplete, {
         state: { cardNumberPrefix: cardNumbers.value.first, cardType: cardType.value },
@@ -38,18 +39,14 @@ export default function CardInfoForm({ cardInfoControl, completionStatus, setIsC
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       {sequence >= 5 && <PasswordInputContainer {...password} />}
       {sequence >= 4 && <CvcInputContainer {...cvc} setIsCardFront={setIsCardFront} />}
       {sequence >= 3 && <CardholderNameInputContainer {...cardholderName} />}
       {sequence >= 2 && <CardExpiryDateInputContainer {...expiryDate} />}
       {sequence >= 1 && <CardTypeSelectContainer {...cardType} />}
       <CardNumbersInputContainer {...cardNumbers} />
-      {isSubmitable && (
-        <S.SubmitButton onClick={onSubmit} type="button">
-          확인
-        </S.SubmitButton>
-      )}
+      {isSubmitable && <S.SubmitButton type="submit">확인</S.SubmitButton>}
     </form>
   );
 }
