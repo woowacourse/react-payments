@@ -1,4 +1,4 @@
-import { StyledCardInformationForm } from './style';
+import * as Styled from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -83,7 +83,7 @@ const CardInformationForm = ({
   ));
 
   return (
-    <StyledCardInformationForm>
+    <Styled.CardInformationForm>
       {isSubmitButtonAppearedCondition && (
         <Button
           label={LABEL.button}
@@ -179,7 +179,7 @@ const CardInformationForm = ({
           <>{cardNumberInputs}</>
         </InputField>
       </FormField>
-    </StyledCardInformationForm>
+    </Styled.CardInformationForm>
   );
 };
 

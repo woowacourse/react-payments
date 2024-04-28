@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledPage = styled.div`
+export const Registration = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ export const StyledPage = styled.div`
   background-color: ${(props) => props.theme.color.white};
 `;
 
-export const StyledRegistrationContainer = styled.div`
+export const RegistrationContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -33,12 +33,12 @@ export const StyledRegistrationContainer = styled.div`
   }
 `;
 
-export const StyledImage = styled.img`
+export const Image = styled.img`
   width: 7.6rem;
   height: 7.6rem;
 `;
 
-export const StyledPhrase = styled.p`
+export const Phrase = styled.p`
   text-align: center;
 
   width: 100%;

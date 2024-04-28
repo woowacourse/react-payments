@@ -8,16 +8,7 @@ import { ExpirationDateStateType } from '../../hooks/useExpirationDate';
 import { UserNameStateType } from '../../hooks/useUserName';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import MESSAGE from '../../constants/Message';
-import {
-  StyledCVC,
-  StyledCVCContainer,
-  StyledCardImg,
-  StyledCardInformationPreview,
-  StyledCardNumberContainer,
-  StyledImgContainer,
-  StyledUserInfomation,
-  StyledUserInformationContainer,
-} from './style';
+import * as Styled from './style';
 import { CVCStateType } from '../../hooks/useCVC';
 
 interface CardInformationPreviewProps {
@@ -61,50 +52,50 @@ const CardInformationPreview = ({
   return (
     <>
       {isBackOfCardAppearedCondition && (
-        <StyledCardInformationPreview
+        <Styled.CardInformationPreview
           $isBackOfCard={cvcState.isFocus}
           $selectedCardColor={theme.color.brightGray}
           onClick={() => cvcState.setIsFocus((prev) => !prev)}
         >
-          <StyledCVCContainer>
-            <StyledCVC>{cvcState.value}</StyledCVC>
-          </StyledCVCContainer>
-        </StyledCardInformationPreview>
+          <Styled.CVCContainer>
+            <Styled.CVC>{cvcState.value}</Styled.CVC>
+          </Styled.CVCContainer>
+        </Styled.CardInformationPreview>
       )}
       {!isBackOfCardAppearedCondition && (
-        <StyledCardInformationPreview
+        <Styled.CardInformationPreview
           $isBackOfCard={cvcState.isFocus}
           $selectedCardColor={selectedCardColor(selectedCardState.value)}
           onClick={() => cvcState.setIsFocus((prev) => !prev)}
         >
-          <StyledImgContainer>
-            <StyledCardImg src={magnetic} alt="magnetic" />
-            {isVisa && <StyledCardImg src={visa} alt="visa" />}
-            {isMasterCard && <StyledCardImg src={masterCard} alt="masterCard" />}
-          </StyledImgContainer>
-          <StyledUserInformationContainer>
-            <StyledCardNumberContainer>
-              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+          <Styled.ImgContainer>
+            <Styled.CardImg src={magnetic} alt="magnetic" />
+            {isVisa && <Styled.CardImg src={visa} alt="visa" />}
+            {isMasterCard && <Styled.CardImg src={masterCard} alt="masterCard" />}
+          </Styled.ImgContainer>
+          <Styled.UserInformationContainer>
+            <Styled.CardNumberContainer>
+              <Styled.UserInfomation $typo={theme.typography.cardNumber}>
                 {firstState.value}
-              </StyledUserInfomation>
-              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+              </Styled.UserInfomation>
+              <Styled.UserInfomation $typo={theme.typography.cardNumber}>
                 {secondState.value}
-              </StyledUserInfomation>
-              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+              </Styled.UserInfomation>
+              <Styled.UserInfomation $typo={theme.typography.cardNumber}>
                 {CONDITION.hiddenCardNumber.repeat(String(thirdState.value ?? '').length)}
-              </StyledUserInfomation>
-              <StyledUserInfomation $typo={theme.typography.cardNumber}>
+              </Styled.UserInfomation>
+              <Styled.UserInfomation $typo={theme.typography.cardNumber}>
                 {CONDITION.hiddenCardNumber.repeat(String(fourthState.value ?? '').length)}
-              </StyledUserInfomation>
-            </StyledCardNumberContainer>
-            <StyledUserInfomation $typo={theme.typography.cardExpirationDate}>
+              </Styled.UserInfomation>
+            </Styled.CardNumberContainer>
+            <Styled.UserInfomation $typo={theme.typography.cardExpirationDate}>
               {`${monthState.value ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${yearState.value ?? ''}`}
-            </StyledUserInfomation>
-            <StyledUserInfomation $typo={theme.typography.cardUserName}>
+            </Styled.UserInfomation>
+            <Styled.UserInfomation $typo={theme.typography.cardUserName}>
               {userNameState.value ?? ''}
-            </StyledUserInfomation>
-          </StyledUserInformationContainer>
-        </StyledCardInformationPreview>
+            </Styled.UserInfomation>
+          </Styled.UserInformationContainer>
+        </Styled.CardInformationPreview>
       )}
     </>
   );

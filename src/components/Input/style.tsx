@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledInput = styled.input<{ $invalid?: boolean }>`
+export const Input = styled.input<{ $invalid?: boolean }>`
   width: 100%;
   height: 3.2rem;
   padding: 0.8rem;

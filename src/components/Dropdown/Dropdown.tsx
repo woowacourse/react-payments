@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  StyledDropdown,
-  StyledSelect,
-  StyledSelectText,
-  StyledSelectImage,
-  StyledOptions,
-  StyledOption,
-} from './style';
+import * as Styled from './style';
 
 interface SelectedOptionStateType {
   value: string;
@@ -32,19 +25,19 @@ const Dropdown = ({ optionArray, selectText, selectedOptionState }: DropdownType
   };
 
   const options = optionArray.map((option) => (
-    <StyledOption onClick={() => handleOptionChange(option)}>{option}</StyledOption>
+    <Styled.Option onClick={() => handleOptionChange(option)}>{option}</Styled.Option>
   ));
 
   return (
-    <StyledDropdown>
-      <StyledSelect $isOpen={isOpen} onClick={handleToggleDropdown}>
-        <StyledSelectText $selected={selectedOptionState.value}>
+    <Styled.Dropdown>
+      <Styled.Select $isOpen={isOpen} onClick={handleToggleDropdown}>
+        <Styled.SelectText $selected={selectedOptionState.value}>
           {selectedOptionState.value || selectText}
-        </StyledSelectText>
-        <StyledSelectImage $isOpen={isOpen}>{isOpen ? '⬇️' : '⬆️'}</StyledSelectImage>
-      </StyledSelect>
-      {isOpen && <StyledOptions>{options}</StyledOptions>}
-    </StyledDropdown>
+        </Styled.SelectText>
+        <Styled.SelectImage $isOpen={isOpen}>{isOpen ? '⬇️' : '⬆️'}</Styled.SelectImage>
+      </Styled.Select>
+      {isOpen && <Styled.Options>{options}</Styled.Options>}
+    </Styled.Dropdown>
   );
 };
 

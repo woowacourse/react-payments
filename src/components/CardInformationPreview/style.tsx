@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledCardInformationPreview = styled.section<{
+export const CardInformationPreview = styled.section<{
   $isBackOfCard: boolean;
   $selectedCardColor: string;
 }>`
@@ -22,7 +22,7 @@ export const StyledCardInformationPreview = styled.section<{
   cursor: pointer;
 `;
 
-export const StyledImgContainer = styled.div`
+export const ImgContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,12 +30,12 @@ export const StyledImgContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledCardImg = styled.img`
+export const CardImg = styled.img`
   width: 3.6rem;
   height: 2.2rem;
 `;
 
-export const StyledUserInformationContainer = styled.div`
+export const UserInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -45,7 +45,7 @@ export const StyledUserInformationContainer = styled.div`
   margin: 1.4rem 1.3rem 0.4rem 0.5rem;
 `;
 
-export const StyledCardNumberContainer = styled.div`
+export const CardNumberContainer = styled.div`
   flex: 1;
   display: flex;
   gap: 1rem;
@@ -53,14 +53,14 @@ export const StyledCardNumberContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledUserInfomation = styled.div<{ $typo: string }>`
+export const UserInfomation = styled.div<{ $typo: string }>`
   flex: 1;
 
   ${(props) => props.$typo};
   color: ${(props) => props.theme.color.white};
 `;
 
-export const StyledCVCContainer = styled.div`
+export const CVCContainer = styled.div`
   position: absolute;
   bottom: 2.4rem;
   display: flex;
@@ -73,7 +73,7 @@ export const StyledCVCContainer = styled.div`
   background-color: ${(props) => props.theme.color.ocher};
 `;
 
-export const StyledCVC = styled.p`
+export const CVC = styled.p`
   width: 2rem;
   margin-right: 1.6rem;
 

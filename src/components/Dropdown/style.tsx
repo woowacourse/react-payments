@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledDropdown = styled.div`
+export const Dropdown = styled.div`
   position: relative;
 
   width: 100%;
 `;
 
-export const StyledSelect = styled.div<{ $isOpen: boolean }>`
+export const Select = styled.div<{ $isOpen: boolean }>`
   display: flex;
   justify-content: space-between;
 
@@ -20,15 +20,15 @@ export const StyledSelect = styled.div<{ $isOpen: boolean }>`
   cursor: pointer;
 `;
 
-export const StyledSelectText = styled.div<{ $selected: string }>`
+export const SelectText = styled.div<{ $selected: string }>`
   color: ${(props) => (props.$selected ? props.theme.color.black : props.theme.color.lightGray)};
 `;
 
-export const StyledSelectImage = styled.div<{ $isOpen: boolean }>`
+export const SelectImage = styled.div<{ $isOpen: boolean }>`
   color: ${(props) => (props.$isOpen ? props.theme.color.black : props.theme.color.lightGray)};
 `;
 
-export const StyledOptions = styled.ul`
+export const Options = styled.ul`
   position: absolute;
 
   width: 100%;
@@ -39,7 +39,7 @@ export const StyledOptions = styled.ul`
   background-color: ${(props) => props.theme.color.white};
 `;
 
-export const StyledOption = styled.li`
+export const Option = styled.li`
   height: 3.1rem;
   padding: 0.8rem;
 

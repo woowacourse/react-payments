@@ -1,4 +1,4 @@
-import { StyledCaption, StyledFormField, StyledTitle, StyledTitleContainer } from './style';
+import * as Styled from './style';
 
 interface FormFieldProps {
   title: string;
@@ -8,13 +8,13 @@ interface FormFieldProps {
 
 const FormField = ({ title, caption, children }: FormFieldProps) => {
   return (
-    <StyledFormField>
-      <StyledTitleContainer>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledCaption>{caption}</StyledCaption>
-      </StyledTitleContainer>
+    <Styled.FormField>
+      <Styled.TitleContainer>
+        <Styled.Title>{title}</Styled.Title>
+        <Styled.Caption>{caption}</Styled.Caption>
+      </Styled.TitleContainer>
       {children}
-    </StyledFormField>
+    </Styled.FormField>
   );
 };
 

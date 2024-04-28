@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledInputField = styled.div`
+export const InputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -8,19 +8,19 @@ export const StyledInputField = styled.div`
   width: 100%;
 `;
 
-export const StyledLabel = styled.label`
+export const Label = styled.label`
   ${(props) => props.theme.typography.label};
   color: ${(props) => props.theme.color.black};
 `;
 
-export const StyledInputs = styled.div`
+export const Inputs = styled.div`
   display: flex;
   gap: 1rem;
 
   width: 100%;
 `;
 
-export const StyledError = styled.span`
+export const Error = styled.span`
   ${(props) => props.theme.typography.caption};
   color: ${(props) => props.theme.color.red};
 `;
