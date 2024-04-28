@@ -17,6 +17,11 @@ export const MAX_LENGTH = Object.freeze({
   PASSWORD: 2,
 });
 
+export const MONTH = Object.freeze({
+  MIN: 1,
+  MAX: 12,
+});
+
 export const EXPIRATION_PERIOD = Object.freeze({
   title: '카드 유효기간을 입력해 주세요',
   description: '월/년도(MMYY)를 순서대로 입력해 주세요.',
