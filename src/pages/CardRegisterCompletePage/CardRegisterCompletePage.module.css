@@ -6,8 +6,12 @@
   height: 100vh;
 }
 
-.successCircle {
+.image {
   margin-bottom: 16px;
+}
+
+.fallbackImage {
+  width: 300px;
 }
 
 .cardRegisterDescription {
@@ -17,4 +21,5 @@
   line-height: 36px;
   color: #353c49;
   margin: 24px 0px;
+  white-space: pre-line;
 }
