@@ -9,7 +9,10 @@ import { errorCaption } from '../../utils/errorCaption';
 interface ExpirationDateInputProps {
   expirationDate: string[];
   expirationDateErrors: boolean[];
-  onExpirationDateChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  onExpirationDateChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
 }
 
 const ExpirationDateInput = ({
@@ -17,11 +20,13 @@ const ExpirationDateInput = ({
   expirationDateErrors,
   onExpirationDateChange,
 }: ExpirationDateInputProps) => {
-  const hasErrorInput = () => expirationDateErrors.some((error) => error);
+  const hasErrorInput = () => expirationDateErrors.some(Boolean);
 
   return (
     <InputField>
-      <Label htmlFor='expiration-date'>{CARD_META_INFO.expirationDate.label}</Label>
+      <Label htmlFor='expiration-date'>
+        {CARD_META_INFO.expirationDate.label}
+      </Label>
       <InputContainer>
         {Array.from({ length: expirationDate.length }, (_, index) => (
           <Input
@@ -38,7 +43,9 @@ const ExpirationDateInput = ({
           />
         ))}
       </InputContainer>
-      {hasErrorInput() ? errorCaption(VALIDATION_MESSAGES.invalidDate) : errorCaption('')}
+      {hasErrorInput()
+        ? errorCaption(VALIDATION_MESSAGES.invalidDate)
+        : errorCaption('')}
     </InputField>
   );
 };

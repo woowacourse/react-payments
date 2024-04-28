@@ -2,17 +2,28 @@ import styled from 'styled-components';
 import Label from '../common/Label';
 import Input from '../common/Input';
 
-import { CARD_META_INFO, INPUT_RULES, VALIDATION_MESSAGES } from '../../constants/card-app';
+import {
+  CARD_META_INFO,
+  INPUT_RULES,
+  VALIDATION_MESSAGES,
+} from '../../constants/card-app';
 import { errorCaption } from '../../utils/errorCaption';
 
 interface CardNumberInputProps {
   cardNumbers: string[];
   cardNumberErrors: boolean[];
-  onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  onCardNumberChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
 }
 
-const CardNumberInput = ({ cardNumbers, cardNumberErrors, onCardNumberChange }: CardNumberInputProps) => {
-  const hasError = cardNumberErrors.some((error) => error);
+const CardNumberInput = ({
+  cardNumbers,
+  cardNumberErrors,
+  onCardNumberChange,
+}: CardNumberInputProps) => {
+  const hasError = cardNumberErrors.some(Boolean);
 
   return (
     <InputField>
@@ -33,7 +44,9 @@ const CardNumberInput = ({ cardNumbers, cardNumberErrors, onCardNumberChange }: 
           />
         ))}
       </InputContainer>
-      {hasError ? errorCaption(VALIDATION_MESSAGES.onlyNumbersAllowed) : errorCaption('')}
+      {hasError
+        ? errorCaption(VALIDATION_MESSAGES.onlyNumbersAllowed)
+        : errorCaption('')}
     </InputField>
   );
 };
