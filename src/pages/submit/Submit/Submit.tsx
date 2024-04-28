@@ -2,6 +2,7 @@ import { Complete } from '@assets/images';
 import { ConfirmButton } from '@pages/submit';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Submit.module.css';
+import { CARD } from '@constants/index';
 
 const Submit: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Submit: React.FC = () => {
       <p className={styles.message}>
         <span>{`${firstCardNumber}로 시작하는`}</span>
         <br />
-        {`${cardIssuer}가 등록되었어요.`}
+        {`${CARD.ISSUER_NAME[cardIssuer]}가 등록되었어요.`}
       </p>
       <ConfirmButton
         label="확인"
