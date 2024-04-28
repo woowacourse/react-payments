@@ -124,7 +124,12 @@ const CardInfo = ({ ...props }) => {
 
       {Object.values(isValid).every((state) => state) && (
         <Link to={`/register-confirm`}>
-          <Button text="확인" floating onClick={navigateConfirmPage} />
+          <Button
+            type="button"
+            text="확인"
+            $floating
+            onClick={navigateConfirmPage}
+          />
         </Link>
       )}
     </Container>

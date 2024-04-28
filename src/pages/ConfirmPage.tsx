@@ -29,7 +29,7 @@ const ConfirmPage = () => {
             등록되었어요.
           </CF.Title>
           <Link to={'/'} style={{ width: 'inherit' }}>
-            <Button text="확인" onClick={resetCardInfo} />
+            <Button type="button" text="확인" onClick={resetCardInfo} />
           </Link>
         </CF.Confirm>
       </CF.Container>

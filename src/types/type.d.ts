@@ -30,7 +30,9 @@ interface PaymentsSelectFieldProps {
   onEnter?: (e: React.KeyboardEvent<HTMLSelectElement>) => void;
 }
 
+type ButtonType = 'button' | 'submit';
 interface ButtonProps {
+  type: ButtonType;
   text: string;
   onClick?: () => void;
   $floating?: boolean;
