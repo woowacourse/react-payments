@@ -13,7 +13,7 @@ function App() {
         element: <Payments />,
       },
       {
-        path: "/landing_arrival/:cardNumbers/:cardIssuer",
+        path: "/landing_arrival",
         element: <LandingArrival />,
       },
     ],

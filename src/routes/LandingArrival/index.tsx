@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import checkImage from "../../assets/checkImage.png";
 import {
   arrivalButtonStyle,
@@ -12,10 +12,11 @@ import {
 } from "./style";
 
 const LandingArrival = () => {
-  const { cardNumbers, cardIssuer } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { firstNumbers, issuer } = location.state;
 
-  if (!cardNumbers && !cardIssuer) {
+  if (!firstNumbers && !issuer) {
     //TODO: error page handling
     return <div>something wrong</div>;
   }
@@ -29,8 +30,8 @@ const LandingArrival = () => {
           </div>
         </div>
         <div css={descriptionStyle}>
-          <div>{cardNumbers}로 시작하는</div>
-          <div>{cardIssuer}가 등록되었어요.</div>
+          <div>{firstNumbers}로 시작하는</div>
+          <div>{issuer}가 등록되었어요.</div>
         </div>
         <button onClick={() => navigate("/")} css={arrivalButtonStyle}>
           확인
