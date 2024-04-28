@@ -26,4 +26,4 @@
 - [x] [useCardInfoCompletionStatus.ts] 로직 중복 제거
 - [x] CardPreviewBack, Select 스토리북 추가
 - [x] onMonth blur 시 자동 formatting 추가
-- [ ] cardPreview 전환 애니메이션 추가
+- [x] cardPreview 전환 애니메이션 추가

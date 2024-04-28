@@ -7,7 +7,7 @@ export interface ICardPreviewBackProps {
 
 export default function CardPreviewBack({ cardType, cvc }: ICardPreviewBackProps) {
   return (
-    <S.CardPreviewContainer $cardType={cardType}>
+    <S.CardPreviewContainer className="card-preview-back" $cardType={cardType}>
       <S.CvcLine>
         <S.CvcText>{cvc}</S.CvcText>
       </S.CvcLine>

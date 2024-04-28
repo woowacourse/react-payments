@@ -4,6 +4,23 @@ import { CARD_COLOR, CardType } from '../../constants/cardType';
 
 const DEFAULT_CARD_COLOR = '#333333';
 
+export const CardPreviewAnimationContainer = styled.div<{ $isFront: boolean }>`
+  transition: transform 1.5s;
+  transform: ${({ $isFront }) =>
+    $isFront ? 'perspective(900px) rotateY(0deg)' : 'perspective(900px) rotateY(180deg)'};
+  transform-style: preserve-3d;
+  display: inline-grid;
+
+  & > * {
+    grid-area: 1 / 1 / 1 / 1;
+    backface-visibility: hidden;
+  }
+
+  .card-preview-back {
+    transform: rotateY(180deg);
+  }
+`;
+
 export const CardPreviewContainer = styled.div<{ $cardType?: string }>`
   position: relative;
   display: flex;

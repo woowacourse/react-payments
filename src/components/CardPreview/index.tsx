@@ -1,5 +1,6 @@
 import CardPreviewBack from './CardPreviewBack';
 import CardPreviewFront from './CardPreviewFront';
+import * as S from './cardPreview.styles';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
@@ -20,14 +21,15 @@ export default function CardPreview({
   cardholderName,
   cvc,
 }: ICardPreviewProps) {
-  return isFront ? (
-    <CardPreviewFront
-      cardType={cardType}
-      cardNumbers={cardNumbers}
-      expiryDate={expiryDate}
-      cardholderName={cardholderName}
-    />
-  ) : (
-    <CardPreviewBack cardType={cardType} cvc={cvc} />
+  return (
+    <S.CardPreviewAnimationContainer $isFront={isFront}>
+      <CardPreviewFront
+        cardType={cardType}
+        cardNumbers={cardNumbers}
+        expiryDate={expiryDate}
+        cardholderName={cardholderName}
+      />
+      <CardPreviewBack cardType={cardType} cvc={cvc} />
+    </S.CardPreviewAnimationContainer>
   );
 }
