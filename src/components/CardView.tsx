@@ -37,7 +37,6 @@ const CardsContainer = styled.div<{ $showBack: boolean }>`
   color: white;
   transition: transform 0.3s;
   transform-style: preserve-3d;
-  cursor: pointer;
   transform: ${({ $showBack }) =>
     $showBack ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `;
