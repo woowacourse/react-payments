@@ -1,9 +1,10 @@
+import PAGE_ROUTES from '@/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
 export default function ErrorPage() {
   const navigate = useNavigate();
   const handleClickBackButton = () => {
-    navigate(-1);
+    navigate(PAGE_ROUTES.MAIN, { replace: true });
   };
   return (
     <div>
