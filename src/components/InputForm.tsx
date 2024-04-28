@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Card } from '../types/card';
+import { Card, CardCompany } from '../types/card';
 import InputField from './InputField';
 import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import SelectCardCompanyField from './SelectCardCompanyField';
-import useInputForm from '../hooks/useInputForm';
 import useStep from '../hooks/useStep';
+import useComplete from '../hooks/useComplete';
 
 interface Props {
   cardInfo: Card;
@@ -17,15 +17,42 @@ export default function InputForm({
   handleInput,
   handleSubmit,
 }: Props) {
-  const {
-    handleInputValue,
-    handleExpiryDateInput,
-    handleSelectCardCompany,
-    handleCardNumberInput,
-    handleComplete,
-  } = useInputForm({ cardInfo, handleInput, handleSubmit });
-
   const { step, handleNext } = useStep();
+  const { handleComplete } = useComplete({ handleSubmit });
+
+  const handleInputValue = (value: Record<string, string>) => {
+    handleInput({
+      ...cardInfo,
+      ...value,
+    });
+  };
+
+  const handleExpiryDateInput = (value: Record<string, string>) => {
+    handleInput({
+      ...cardInfo,
+      expiryDate: {
+        ...cardInfo.expiryDate,
+        ...value,
+      },
+    });
+  };
+
+  const handleSelectCardCompany = (value: CardCompany) => {
+    handleInput({
+      ...cardInfo,
+      cardCompany: value,
+    });
+  };
+
+  const handleCardNumberInput = (value: Record<string, string>) => {
+    handleInput({
+      ...cardInfo,
+      cardNumbers: {
+        ...cardInfo.cardNumbers,
+        ...value,
+      },
+    });
+  };
 
   return (
     <FormContainer>
