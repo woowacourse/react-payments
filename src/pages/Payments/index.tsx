@@ -13,6 +13,8 @@ import { useState } from "react";
 import InputCVCNumber from "../../components/input/InputCVCNumber";
 import CreditCardBack from "../../components/creditCard/CreditCardBack";
 import InputCardPassword from "../../components/input/InputCardPassword";
+import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 interface Owner {
   name: string;
@@ -27,6 +29,12 @@ interface Password {
 }
 
 const Payments = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate("/success");
+  };
+
   const [cardNumber, setCardNumber, cardNumberError] = useInput<CardNumberValue>({
     firstValue: SIGN.empty,
     secondValue: SIGN.empty,
@@ -150,6 +158,7 @@ const Payments = () => {
           <InputOwnerName inputValue={owner.name} handleChange={setOwner} inputError={ownerError} />
         </CreditCardForm>
       </InputFormContainer>
+      <Button content="확인" onClick={handleSubmit} />
     </PaymentsContainer>
   );
 };
