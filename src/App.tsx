@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './styles/App.css';
 import './styles/reset.css';
 import CardRegisterForm from './pages/CardRegisterForm';
-import CardRegisterSuccess from './pages/CardRegisterSuccess';
+import CardRegisterSuccess from './pages/CardRegisterSuccess/CardRegisterSuccess';
 
 function App() {
   return (

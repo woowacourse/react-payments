@@ -9,9 +9,9 @@ import {
   CVCInput,
   PasswordInput,
   UserNameInput,
-} from '../components';
-import Button from '../components/common/Button';
-import { INPUT_LENGTH } from '../constants';
+} from '../../components';
+import Button from '../../components/common/Button';
+import { INPUT_LENGTH } from '../../constants';
 import {
   useCardCompanyInput,
   useCardExpirationPeriodInput,
@@ -19,7 +19,9 @@ import {
   useCVCInput,
   usePasswordInput,
   useUserNameInput,
-} from '../hooks';
+} from '../../hooks';
+
+import styles from './style.module.css';
 
 function CardRegisterForm() {
   const { cardNumber, cardExpiration, cardCVC, cardPassword } = INPUT_LENGTH;
@@ -144,7 +146,7 @@ function CardRegisterForm() {
           />
         </fieldset>
         {!isError && !isBlank && (
-          <Button onClick={handleConfirmButtonClick}>확인</Button>
+            <Button onClick={handleConfirmButtonClick}>확인</Button>
         )}
       </form>
     </div>

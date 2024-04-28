@@ -1,0 +1,22 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7%;
+  width: 100%;
+}
+
+.checkImg {
+  width: 4rem;
+  height: 4rem;
+}
+
+.infoContainer {
+  width: 90%;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  text-align: center;
+}
+
