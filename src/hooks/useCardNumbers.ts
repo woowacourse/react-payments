@@ -3,7 +3,6 @@ import { validateCardNumber } from '../validators/newCardInputValidator';
 import { ICardInfo, IErrorMessage } from '../types/type';
 
 interface IUseCardNumbers {
-  index?: number;
   cardNumbers: string[];
   errorMessageCardNumbers: string[];
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
