@@ -4,7 +4,7 @@ import FieldTitle from '../FieldTitle';
 import React, {
   Dispatch,
   SetStateAction,
-  useLayoutEffect,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -27,18 +27,18 @@ export default function CardNumberInput({
 
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const messages = Object.values(cardNumbers).map(
       (value) => value.errorMessage
     );
     setErrorMessages(messages);
   }, [cardNumbers]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
         if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
