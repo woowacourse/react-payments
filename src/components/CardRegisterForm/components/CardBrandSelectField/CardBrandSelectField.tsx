@@ -5,6 +5,7 @@ import InputField from "@/components/_common/InputField/InputField";
 import SelectBox from "@/components/_common/SelectBox/SelectBox";
 import useInput from "@/hooks/useInput";
 import { CardBrandType, CardBrandTypeColor } from "@/constants/cardBrandType";
+import React from "react";
 
 interface Props {
   cardBrandState: ReturnType<typeof useInput<CardBrandType | null>>;
@@ -34,4 +35,12 @@ const CardBrandSelectField = ({ cardBrandState }: Props) => {
   );
 };
 
-export default CardBrandSelectField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return prevProps.cardBrandState.value === nextProps.cardBrandState.value;
+};
+
+const CardBrandSelectFieldMemo = React.memo(
+  CardBrandSelectField,
+  arePropsEqual
+);
+export default CardBrandSelectFieldMemo;

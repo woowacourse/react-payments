@@ -1,18 +1,16 @@
 import S from "./style";
 import useInputs from "@/hooks/useInputs";
-import CardNumbersField, {
-  CardNumberInputType,
-} from "./components/CardNumbersField/CardNumbersField";
-import ExpirationPeriodField, {
-  ExpirationPeriodInputType,
-} from "./components/ExpirationPeriodField/ExpirationPeriodField";
+import { CardNumberInputType } from "./components/CardNumbersField/CardNumbersField";
+import { ExpirationPeriodInputType } from "./components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "@/hooks/useInput";
-import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
-import CVCField from "./components/CVCField/CVCField";
-import PasswordField from "./components/PasswordField/PasswordField";
-import CardBrandSelectField from "./components/CardBrandSelectField/CardBrandSelectField";
 import { REGISTER_STEP } from "@/constants/condition";
 import { CardBrandType } from "@/constants/cardBrandType";
+import ExpirationPeriodFieldMemo from "./components/ExpirationPeriodField/ExpirationPeriodField";
+import CardNumbersFieldMemo from "./components/CardNumbersField/CardNumbersField";
+import OwnerNameFieldMemo from "./components/OwnerNameField/OwnerNameField";
+import CVCFieldMemo from "./components/CVCField/CVCField";
+import PasswordFieldMemo from "./components/PasswordField/PasswordField";
+import CardBrandSelectFieldMemo from "./components/CardBrandSelectField/CardBrandSelectField";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -42,24 +40,29 @@ const CardRegisterForm = ({
   return (
     <S.CardFormWrapper>
       {step >= REGISTER_STEP.PASSWORD && (
-        <PasswordField passwordState={passwordState} />
+        <PasswordFieldMemo passwordState={passwordState} />
       )}
       {step >= REGISTER_STEP.CVC && (
-        <CVCField CVCNumbersState={CVCNumbersState} setIsFront={setIsFront} />
+        <CVCFieldMemo
+          CVCNumbersState={CVCNumbersState}
+          setIsFront={setIsFront}
+        />
       )}
       {step >= REGISTER_STEP.OWNER_NAME && (
-        <OwnerNameField
+        <OwnerNameFieldMemo
           ownerNameState={ownerNameState}
           setIsNameEntered={setIsNameEntered}
         />
       )}
       {step >= REGISTER_STEP.EXPIRATION_PERIOD && (
-        <ExpirationPeriodField expirationPeriodState={expirationPeriodState} />
+        <ExpirationPeriodFieldMemo
+          expirationPeriodState={expirationPeriodState}
+        />
       )}
       {step >= REGISTER_STEP.CARD_BRAND && (
-        <CardBrandSelectField cardBrandState={cardBrandState} />
+        <CardBrandSelectFieldMemo cardBrandState={cardBrandState} />
       )}
-      <CardNumbersField cardNumbersState={cardNumbersState} />
+      <CardNumbersFieldMemo cardNumbersState={cardNumbersState} />
     </S.CardFormWrapper>
   );
 };

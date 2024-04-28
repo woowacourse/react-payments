@@ -11,11 +11,13 @@ export enum ErrorStatus {
   IS_NOT_NUMBER = "is_not_number",
 }
 
+export type ErrorStatusType = typeof ErrorStatus;
+
 export const validateIsValidLength = (
   newValue: string,
   validLength: number
 ) => {
-  if (newValue.length !== validLength) {
+  if (newValue.length !== validLength && newValue.length) {
     return { type: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
   return { isValid: true };

@@ -3,10 +3,12 @@ import S from "../../style";
 import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputRefs from "@/hooks/useInputRefs";
+import { ErrorStatus } from "@/utils/validation";
+import { isErrorInInputs } from "@/utils/view";
 
 export type ExpirationPeriodInputType = {
   expirationMonth: string;
@@ -24,6 +26,16 @@ const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
   "expirationYear",
 ];
 
+type ExpirationPeriodErrorType =
+  | ErrorStatus.IS_NOT_NUMBER
+  | ErrorStatus.INVALID_MONTH;
+
+const ExpirationPeriodErrorMessages: Record<ExpirationPeriodErrorType, string> =
+  {
+    [ErrorStatus.IS_NOT_NUMBER]: "숫자로 입력하세요.",
+    [ErrorStatus.INVALID_MONTH]: "달은 2자리의 정수로 입력해 주세요.",
+  };
+
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors } = expirationPeriodState;
 
@@ -31,6 +43,10 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
   );
+
+  const currentErrorMessages = (
+    Object.values(errors) as ExpirationPeriodErrorType[]
+  ).map((message) => ExpirationPeriodErrorMessages[message]);
 
   return (
     <S.InputFieldWithInfo>
@@ -40,7 +56,8 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
       />
       <InputField
         label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
-        errorMessages={Object.values(errors)}
+        errorMessages={currentErrorMessages}
+        isErrorShow={isErrorInInputs(errors)}
       >
         {new Array(INPUT_COUNTS.EXPIRATION_PERIOD)
           .fill(0)
@@ -63,4 +80,16 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   );
 };
 
-export default ExpirationPeriodField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.expirationPeriodState.errors ===
+    nextProps.expirationPeriodState.errors
+  );
+};
+
+const ExpirationPeriodFieldMemo = React.memo(
+  ExpirationPeriodField,
+  arePropsEqual
+);
+
+export default ExpirationPeriodFieldMemo;

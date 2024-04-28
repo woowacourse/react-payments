@@ -70,8 +70,8 @@ const useCardRegister = () => {
       (value: string) => validateIsNumber(value),
     ],
     inputChangeCallbacks: [
-      (value: string) =>
-        sliceInvalidValueWithRegex(value, REGEX.CAPITAL_LETTERS),
+      (value: string) => sliceInvalidValueWithRegex(value, REGEX.NUMBERS),
+      (value: string) => sliceOverMaxLength(value, VALID_LENGTH.CVC_NUMBERS),
     ],
   });
 

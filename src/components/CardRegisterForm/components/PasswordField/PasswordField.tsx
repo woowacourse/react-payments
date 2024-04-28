@@ -4,7 +4,7 @@ import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
 import useInput from "@/hooks/useInput";
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
 
 interface Props {
@@ -34,4 +34,12 @@ const PasswordField = ({ passwordState }: Props) => {
   );
 };
 
-export default PasswordField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.passwordState.error === nextProps.passwordState.error &&
+    prevProps.passwordState.value === nextProps.passwordState.value
+  );
+};
+
+const PasswordFieldMemo = React.memo(PasswordField, arePropsEqual);
+export default PasswordFieldMemo;

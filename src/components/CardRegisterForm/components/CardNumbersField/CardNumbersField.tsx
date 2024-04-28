@@ -1,13 +1,14 @@
 import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import S from "../../style";
 import { MESSAGE } from "@/constants/message";
-import InputField from "@/components/_common/InputField/InputField";
 import Input from "@/components/_common/Input/Input";
 import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
 import useInputRefs from "@/hooks/useInputRefs";
-// import { sliceInvalidValueWithRegex, sliceOverMaxLength } from "@/utils/view";
-// import { REGEX } from "@/constants/regex";
+import { isErrorInInputs } from "@/utils/view";
+import React from "react";
+import InputFieldMemo from "@/components/_common/InputField/InputField";
+
 export type CardNumberInputType = {
   cardNumbers1: string;
   cardNumbers2: string;
@@ -23,7 +24,6 @@ type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
   const { onChange, errors } = cardNumbersState;
-
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
@@ -35,9 +35,10 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
         title={MESSAGE.INPUT_INFO_TITLE.CARD_NUMBERS}
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_NUMBERS}
       />
-      <InputField
+      <InputFieldMemo
         label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
-        errorMessages={Object.values(errors)}
+        errorMessages={["카드 번호는 4자리 정수로 입력하셔야 합니다."]}
+        isErrorShow={isErrorInInputs(errors)}
       >
         {new Array(INPUT_COUNTS.CARD_NUMBERS)
           .fill(0)
@@ -56,9 +57,17 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
             />
           ))}
-      </InputField>
+      </InputFieldMemo>
     </S.InputFieldWithInfo>
   );
 };
 
-export default CardNumbersField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.cardNumbersState.values === nextProps.cardNumbersState.values &&
+    prevProps.cardNumbersState.errors === nextProps.cardNumbersState.errors
+  );
+};
+
+const CardNumbersFieldMemo = React.memo(CardNumbersField, arePropsEqual);
+export default CardNumbersFieldMemo;

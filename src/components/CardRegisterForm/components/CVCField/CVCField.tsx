@@ -4,9 +4,8 @@ import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHe
 import { MESSAGE } from "@/constants/message";
 import S from "../../style";
 import useInput from "@/hooks/useInput";
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { VALID_LENGTH } from "@/constants/condition";
-// import { sliceOverMaxLength } from "@/utils/view";
 
 interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
-  const { onChange, error, isError } = CVCNumbersState;
+  const { onChange, error } = CVCNumbersState;
 
   return (
     <S.InputFieldWithInfo>
@@ -28,17 +27,21 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
           placeholder={MESSAGE.PLACEHOLDER.CVC}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setIsFront(false);
-            // sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
             onChange(e);
           }}
           onBlur={() => {
             setIsFront(true);
           }}
-          isError={isError}
+          isError={!!error.length}
         />
       </InputField>
     </S.InputFieldWithInfo>
   );
 };
 
-export default CVCField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return prevProps.CVCNumbersState.error === nextProps.CVCNumbersState.error;
+};
+
+const CVCFieldMemo = React.memo(CVCField, arePropsEqual);
+export default CVCFieldMemo;

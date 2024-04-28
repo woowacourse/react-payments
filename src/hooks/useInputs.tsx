@@ -20,7 +20,7 @@ const useInputs = <T extends object>({
   inputChangeCallbacks,
 }: Props<T>) => {
   const [values, setValues] = useState(initialValue);
-  const [errors, setErrors] = useState<{ [K in keyof T]?: string | null }>({});
+  const [errors, setErrors] = useState<{ [K in keyof T]?: string }>({});
   const [isError, setIsError] = useState(true);
 
   const onChange = (
