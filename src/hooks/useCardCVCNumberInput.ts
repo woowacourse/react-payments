@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { INPUT_RULES } from '../constants/card-app';
+import { INPUT_RULES, REGEX } from '../constants/card-app';
 
 const useCardCVCNumberInput = () => {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
@@ -7,7 +7,7 @@ const useCardCVCNumberInput = () => {
   const [isNextVisible, setIsNextVisible] = useState<boolean>(false);
 
   const handleCardCVCNumberChange = (value: string) => {
-    const isNumberInput = /^[0-9]*$/.test(value);
+    const isNumberInput = REGEX.onlyOneDigitNumber.test(value);
     const isValidCVCNumber = value.length <= INPUT_RULES.maxCardCVCNumberLength;
 
     setCardCVCNumberError(!isNumberInput);

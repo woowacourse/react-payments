@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { INPUT_RULES } from '../constants/card-app';
+import { INPUT_RULES, REGEX } from '../constants/card-app';
 
 const useCardOwnerNameInput = () => {
   const [cardOwnerName, setCardOwnerName] = useState<string>('');
@@ -7,7 +7,7 @@ const useCardOwnerNameInput = () => {
   const [isNextVisible, setIsNextVisible] = useState<boolean>(false);
 
   const handleCardOwnerNameChange = (value: string) => {
-    const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
+    const isAlphabetInput = REGEX.onlyEnglish.test(value);
     const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
 
     setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName);
@@ -19,7 +19,7 @@ const useCardOwnerNameInput = () => {
   };
 
   const updateValue = (value: string) => {
-    const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
+    const isAlphabetInput = REGEX.onlyEnglish.test(value);
     const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
 
     setCardOwnerNameError(!isAlphabetInput || !isValidOwnerName);

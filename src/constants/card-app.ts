@@ -104,3 +104,9 @@ export const URL = {
   submitPage: '/submit',
   errorPage: '/error',
 };
+
+export const REGEX = {
+  onlyNumber: /^(\d*)$/,
+  onlyOneDigitNumber: /^[0-9]*$/,
+  onlyEnglish: /^[a-zA-Z ]*$/,
+};

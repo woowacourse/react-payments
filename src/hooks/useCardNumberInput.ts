@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { INPUT_RULES, REGEX } from '../constants/card-app';
 
 const useCardNumberInput = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -9,8 +10,8 @@ const useCardNumberInput = () => {
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-    const isNumericInput = /^(\d*)$/.test(value);
-    const isValidateCardNumber = value.length === 4;
+    const isNumericInput = REGEX.onlyNumber.test(value);
+    const isValidateCardNumber = value.length === INPUT_RULES.maxCardNumberPartLength;
 
     setCardNumberErrors((prevErrors) => {
       const newPrevErrors = [...prevErrors];

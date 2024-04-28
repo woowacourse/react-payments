@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import cardInputValidator from '../validators/cardInputValidator';
-import { INPUT_RULES } from '../constants/card-app';
+import { INPUT_RULES, REGEX } from '../constants/card-app';
 
 const useExpirationDateInput = () => {
   const [expirationDate, setExpirationDate] = useState<string[]>(['', '']);
@@ -11,7 +11,7 @@ const useExpirationDateInput = () => {
 
   const handleExpirationDateChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-    const isNumericInput = /^(\d*)$/.test(value);
+    const isNumericInput = REGEX.onlyNumber.test(value);
     const isValidLength = value.length === INPUT_RULES.maxExpirationDateLength;
     const newExpirationDate = [...expirationDate];
     newExpirationDate[index] = value;

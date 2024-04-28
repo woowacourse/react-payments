@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { INPUT_RULES } from '../constants/card-app';
+import { INPUT_RULES, REGEX } from '../constants/card-app';
 
 const useCardPasswordInput = () => {
   const [cardPassword, setCardPassword] = useState<string>('');
@@ -7,7 +7,7 @@ const useCardPasswordInput = () => {
   const [isNextVisible, setIsNextVisible] = useState<boolean>(false);
 
   const handleCardPasswordChange = (value: string) => {
-    const isNumberInput = /^[0-9]*$/.test(value);
+    const isNumberInput = REGEX.onlyOneDigitNumber.test(value);
     const isValidCardPassword = value.length <= INPUT_RULES.maxCardPasswordLength;
 
     setCardPasswordError(!isNumberInput);
