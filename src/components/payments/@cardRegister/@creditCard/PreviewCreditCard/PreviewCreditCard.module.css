@@ -1,0 +1,135 @@
+.creditCardContainer {
+  position: relative;
+  width: 212px;
+  height: 132px;
+  background-color: var(--grey-500);
+  padding: 8px 12px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bcCard {
+  background-color: #f04651;
+}
+
+.shinhanCard {
+  background-color: #0046ff;
+}
+
+.kakaoBank {
+  background-color: #ffe600;
+}
+
+.hyundaiCard {
+  background-color: var(--grey-500);
+}
+
+.wooriCard {
+  background-color: #007bc8;
+}
+
+.lotteCard {
+  background-color: #ed1c24;
+}
+
+.hanaCard {
+  background-color: #009490;
+}
+
+.kookminCard {
+  background-color: #6a6056;
+}
+
+.cardContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  width: 28px;
+  height: 14px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid rgba(221, 205, 120, 0.1);
+  border-radius: 2px;
+  background-color: var(--grey-100);
+}
+
+.icChip {
+  background-color: #ddcd78;
+}
+
+.creditCard {
+  width: 21px;
+  height: 10px;
+}
+
+.cardDetailContainer {
+  margin: 14px 13px 0 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardNumberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.cardNumber {
+  width: 38px;
+}
+
+.password {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  width: 38px;
+}
+
+.cardDetailText {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-align: left;
+  color: var(--grey-100);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cardNumberText {
+  width: 34px;
+}
+
+.cvcCard {
+  background-color: var(--cvc-card);
+  position: relative;
+  padding: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-align: right;
+  font-weight: 500;
+  color: var(--grey-100);
+}
+
+.cvcNumberContainer {
+  width: calc(100% - 32px);
+  padding: 2px 16px;
+  height: 20px;
+  position: absolute;
+  bottom: 24px;
+  background-color: #cbba64;
+}

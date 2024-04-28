@@ -28,7 +28,10 @@
       "@assets/*": ["assets/*"],
       "@constants/*": ["constants/*"],
       "@types/*": ["types/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@domain/*": ["domain/*"],
+      "@routes/*": ["routes/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": ["src"],

@@ -1,0 +1,25 @@
+.cardRegisterCompletePageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.image {
+  margin-bottom: 16px;
+}
+
+.fallbackImage {
+  width: 300px;
+}
+
+.cardRegisterDescription {
+  text-align: center;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  color: #353c49;
+  margin: 24px 0px;
+  white-space: pre-line;
+}

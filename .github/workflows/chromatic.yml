@@ -2,7 +2,7 @@ name: 'Chromatic'
 
 on:
   push:
-    branches: [jinyoung234]
+    branches: [step2]
 
 jobs:
   chromatic:

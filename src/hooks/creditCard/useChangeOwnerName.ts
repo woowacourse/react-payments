@@ -3,6 +3,7 @@ import { useState } from 'react';
 const useChangeOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
   const [ownerNameError, setOwnerNameError] = useState({ isError: false, errorMessage: '' });
+  const [isOwnerNameCompleted, setIsOwnerNameCompleted] = useState(false);
 
   const handleOwnerNameChange = (value: string) => {
     const isValidName = /^[A-Za-z]*$/.test(value);
@@ -18,7 +19,17 @@ const useChangeOwnerName = () => {
     setOwnerName(value);
   };
 
-  return { ownerName: ownerName.toUpperCase(), ownerNameError, handleOwnerNameChange };
+  const handleEnterOwnerNameInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') setIsOwnerNameCompleted(true);
+  };
+
+  return {
+    isOwnerNameCompleted,
+    ownerName: ownerName.toUpperCase(),
+    ownerNameError,
+    handleOwnerNameChange,
+    handleEnterOwnerNameInput,
+  };
 };
 
 export default useChangeOwnerName;

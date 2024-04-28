@@ -1,9 +1,11 @@
-import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
+import router from '@routes/router';
+
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
     <div className="app">
-      <CreditCardForm />
+      <RouterProvider router={router} />
     </div>
   );
 }

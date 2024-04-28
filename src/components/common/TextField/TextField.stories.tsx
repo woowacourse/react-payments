@@ -1,5 +1,5 @@
 import TextField from '@components/common/TextField/TextField';
-import CardNumberInput from '@components/payments/CardNumberInput/CardNumberInput';
+import CardNumberInput from '@components/payments/@cardRegister/@cardNumber/CardNumberInput/CardNumberInput';
 import type { Meta, StoryObj } from '@storybook/react';
 import { generateArgTypes } from '@utils/generateArgTypes';
 

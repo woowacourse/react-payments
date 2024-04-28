@@ -1,0 +1,48 @@
+.errorPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.fallbackImage {
+  width: 200px;
+}
+
+.fallbackTitle {
+  text-align: center;
+  white-space: pre-line;
+  line-height: 32px;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+
+.errorSubTitle {
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.fallbackContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  font-size: 10px;
+  padding: 16px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  color: var(--grey-100);
+  background-color: var(--grey-500);
+  margin-bottom: 16px;
+}
+
+pre {
+  width: 100%;
+  white-space: pre-wrap;
+}
