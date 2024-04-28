@@ -1,11 +1,17 @@
 import "./App.css";
-import PaymentApp from "./components/PaymentApp";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PaymentApp from "./components/CardRegistrationPage";
+import CardRegistrationCompletePage from "./components/CardRegistrationCompletePage";
 
 function App() {
   return (
     <>
-      <PaymentApp />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/cardRegistrationPage" element={<PaymentApp />} />
+          <Route path="/cardRegistrationCompletePage" element={<CardRegistrationCompletePage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
