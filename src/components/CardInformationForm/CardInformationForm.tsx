@@ -5,18 +5,18 @@ import { UserNameStateType } from '../../hooks/useUserName';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import { CVCStateType } from '../../hooks/useCVC';
 import { PasswordStateType } from '../../hooks/usePassword';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormField from '../FormField/FormField';
-import InputField from '../InputField/InputField';
-import Input from '../Input/Input';
-import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
-import Dropdown from '../Dropdown/Dropdown';
-import Button from '../Button/Button';
+import ConfirmationButton from '../ConfirmationButton/ConfirmationButton';
+import CardNumber from '../FormField/CardNumber/CardNumber';
+import ExpirationDate from '../FormField/ExpirationDate/ExpirationDate';
+import UserName from '../FormField/UserName/UserName';
+import CVC from '../FormField/CVC/CVC';
+import Password from '../FormField/Password/Password';
+import SelectedCard from '../FormField/SelectedCard/SelectedCard';
 
-const { TITLE, CAPTION, LABEL, PLACEHOLDER, OPTION } = MESSAGE;
-const { MAX_LENGTH, CARD_INFORMATION_APPEARED } = CONDITION;
+const { CARD_INFORMATION_APPEARED } = CONDITION;
 
 interface CardInformationFormProps {
   cardNumberState: CardNumberStateType;
@@ -36,9 +36,6 @@ const CardInformationForm = ({
   passwordState,
 }: CardInformationFormProps) => {
   const navigate = useNavigate();
-
-  const { firstState, secondState, thirdState, fourthState } = cardNumberState;
-  const { monthState, yearState } = expirationDateState;
 
   const [appearedCondition, setAppearedCondition] = useState<number>(
     CARD_INFORMATION_APPEARED.cardNumber,
@@ -70,115 +67,28 @@ const CardInformationForm = ({
   if (cvcState.isValid && !isPasswordAppearedCondition)
     setAppearedCondition(CARD_INFORMATION_APPEARED.password);
 
-  const cardNumberStates = [firstState, secondState, thirdState, fourthState];
-  const cardNumberInputs = cardNumberStates.map((state, index) => (
-    <Input
-      placeholder={PLACEHOLDER.cardNumber}
-      value={state.value}
-      maxLength={MAX_LENGTH.cardNumber}
-      onChange={state.setValue}
-      invalid={state.isError}
-      autoFocus={index === 0 ? true : undefined}
-    />
-  ));
+  const handleConfirmationButtonOnClick = () => {
+    navigate('/registration', {
+      state: {
+        firstValue: cardNumberState.firstState.value,
+        selectedCardValue: selectedCardState.value,
+      },
+    });
+  };
 
   return (
     <Styled.CardInformationForm>
       {isSubmitButtonAppearedCondition && (
-        <Button
-          label={LABEL.button}
-          onClick={() => {
-            navigate('/registration', {
-              state: {
-                firstValue: firstState.value,
-                selectedCardValue: selectedCardState.value,
-              },
-            });
-          }}
-        />
+        <ConfirmationButton isSubmit={true} onClick={handleConfirmationButtonOnClick} />
       )}
-      {isPasswordAppearedCondition && (
-        <FormField title={TITLE.password} caption={CAPTION.password}>
-          <InputField label={LABEL.password} error={passwordState.errorMessage}>
-            <Input
-              placeholder={PLACEHOLDER.password}
-              value={passwordState.value}
-              maxLength={MAX_LENGTH.password}
-              onChange={passwordState.setValue}
-              invalid={passwordState.isError}
-              type="password"
-              autoFocus
-            />
-          </InputField>
-        </FormField>
-      )}
-      {isCVCAppearedCondition && (
-        <FormField title={TITLE.cvc}>
-          <InputField label={LABEL.cvc} error={cvcState.errorMessage}>
-            <Input
-              placeholder={PLACEHOLDER.cvc}
-              value={cvcState.value}
-              maxLength={MAX_LENGTH.cvc}
-              onChange={cvcState.setValue}
-              invalid={cvcState.isError}
-              onFocus={() => cvcState.setIsFocus(true)}
-              onBlur={() => cvcState.setIsFocus(false)}
-              autoFocus
-            />
-          </InputField>
-        </FormField>
-      )}
-      {isUserNameAppearedCondition && (
-        <FormField title={TITLE.userName}>
-          <InputField label={LABEL.userName} error={userNameState.errorMessage}>
-            <Input
-              placeholder={PLACEHOLDER.userName}
-              value={userNameState.value}
-              maxLength={MAX_LENGTH.userName}
-              onChange={userNameState.setValue}
-              invalid={userNameState.isError}
-              autoFocus
-            />
-          </InputField>
-        </FormField>
-      )}
+      {isPasswordAppearedCondition && <Password passwordState={passwordState} />}
+      {isCVCAppearedCondition && <CVC cvcState={cvcState} />}
+      {isUserNameAppearedCondition && <UserName userNameState={userNameState} />}
       {isExpirationDateAppearedCondition && (
-        <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
-          <InputField label={LABEL.expirationDate} error={expirationDateState.errorMessage}>
-            <>
-              <Input
-                placeholder={PLACEHOLDER.month}
-                value={monthState.value}
-                maxLength={MAX_LENGTH.expirationDate}
-                onChange={monthState.setValue}
-                invalid={monthState.isError}
-                autoFocus
-              />
-              <Input
-                placeholder={PLACEHOLDER.year}
-                value={yearState.value}
-                maxLength={MAX_LENGTH.expirationDate}
-                onChange={yearState.setValue}
-                invalid={yearState.isError}
-              />
-            </>
-          </InputField>
-        </FormField>
+        <ExpirationDate expirationDateState={expirationDateState} />
       )}
-      {isCardSelectedAppearedCondition && (
-        <FormField title={TITLE.cardSelect} caption={CAPTION.cardSelect}>
-          <Dropdown
-            optionArray={OPTION.cardSelect}
-            selectText={TITLE.cardSelect}
-            selectedOptionState={selectedCardState}
-          />
-        </FormField>
-      )}
-      <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
-        <InputField label={LABEL.cardNumber} error={cardNumberState.errorMessage}>
-          <>{cardNumberInputs}</>
-        </InputField>
-      </FormField>
+      {isCardSelectedAppearedCondition && <SelectedCard selectedCardState={selectedCardState} />}
+      <CardNumber cardNumberState={cardNumberState} />
     </Styled.CardInformationForm>
   );
 };
