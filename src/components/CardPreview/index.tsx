@@ -13,7 +13,7 @@ export interface ICardPreviewProps {
 }
 
 export default function CardPreview({
-  isFront,
+  isFront = true,
   cardType,
   cardNumbers,
   expiryDate,

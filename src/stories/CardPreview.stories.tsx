@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardPreview from '../components/CardPreview/CardPreviewFront';
+import CardPreview from '../components/CardPreview';
+import { CARD_TYPE } from '../constants/cardType';
 
 const meta = {
   title: 'CardPreview',
@@ -45,6 +46,11 @@ const meta = {
           year: '40',
         },
       },
+      control: { type: 'select' },
+    },
+
+    cardType: {
+      options: { ...CARD_TYPE },
       control: { type: 'select' },
     },
   },
