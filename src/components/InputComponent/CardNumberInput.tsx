@@ -24,9 +24,8 @@ export default function CardNumberInput({
   handleShowComponent,
 }: Props) {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const inputRefs = useRef<Array<React.RefObject<HTMLInputElement>>>(
-    Array.from({ length: 4 }, () => React.createRef<HTMLInputElement>())
-  );
+
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
   useLayoutEffect(() => {
     const messages = Object.values(cardNumbers).map(
@@ -36,7 +35,7 @@ export default function CardNumberInput({
   }, [cardNumbers]);
 
   useLayoutEffect(() => {
-    inputRefs.current[0].current?.focus();
+    inputRefs.current[0]?.focus();
   }, []);
 
   useLayoutEffect(() => {
@@ -99,7 +98,7 @@ export default function CardNumberInput({
       handleUpdateInput(index, e.target.value);
       const nextIndex = index + 1;
       if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
-        inputRefs.current[nextIndex].current?.focus();
+        inputRefs.current[nextIndex]?.focus();
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -124,7 +123,7 @@ export default function CardNumberInput({
         count={4}
         errorMessages={errorMessages}
       >
-        {inputRefs.current.map((inputRef, index) => (
+        {Array.from({length:4}).map((_, index) => (
           <Input
             key={index}
             type='text'
@@ -135,7 +134,9 @@ export default function CardNumberInput({
             placeholder='1234'
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'cardNumber', index)}
-            inputRef={inputRef}
+            inputRef={(element : HTMLInputElement) => {
+              inputRefs.current[index] = element;
+            }}
           />
         ))}
       </InputField>

@@ -25,16 +25,16 @@ export default function PasswordInput({
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
-  const inputRefs = useRef<Array<React.RefObject<HTMLInputElement>>>(
-    Array.from({ length: 1 }, () => React.createRef<HTMLInputElement>())
-  );
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
+
+
   useEffect(() => {
     const messages = Object.values(password).map((value) => value.errorMessage);
     setErrorMessages(messages);
   }, [password]);
 
   useEffect(() => {
-    inputRefs.current[0].current?.focus();
+    inputRefs.current[0]?.focus();
   }, []);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function PasswordInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {inputRefs.current.map((inputRef, index) => (
+        {Array.from({length:1}).map((_, index) => (
           <Input
             key={index}
             type='string'
@@ -125,7 +125,9 @@ export default function PasswordInput({
             placeholder={'**'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'password')}
-            inputRef={inputRef}
+            inputRef={(element : HTMLInputElement) => {
+              inputRefs.current[index] = element;
+            }}
           />
         ))}
       </InputField>

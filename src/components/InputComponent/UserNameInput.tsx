@@ -26,9 +26,7 @@ export default function UserNameInput({
     {}
   );
 
-  const inputRefs = useRef<Array<React.RefObject<HTMLInputElement>>>(
-    Array.from({ length: 1 }, () => React.createRef<HTMLInputElement>())
-  );
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
   useEffect(() => {
     const messages = Object.values(userName).map((value) => value.errorMessage);
@@ -36,26 +34,8 @@ export default function UserNameInput({
   }, [userName]);
 
   useEffect(() => {
-    inputRefs.current[0].current?.focus();
+    inputRefs.current[0]?.focus();
   }, []);
-
-  // useEffect(() => {
-  //   const checkCompleteInput = () => {
-  //     const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-  //       if(!cur.isError && cur.value !== '' && cur.value.length === 4){
-  //         return pre + 1;
-  //       }
-  //       return pre;
-  //     }, 0)
-  //     return isNotAllError === 1
-  //   }
-  //   if(checkCompleteInput()) {
-  //     handleShowComponent((prev) => ({
-  //       ...prev,
-  //       CVCInput: true,
-  //     }));
-  //   }
-  // }, [userName, handleShowComponent]);
 
   const handleUpdateInput = (value: string) => {
     const cardKey = 'userName' as keyof UserName;
@@ -135,7 +115,7 @@ export default function UserNameInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {inputRefs.current.map((inputRef, index) => (
+        {Array.from({length:1}).map((_, index) => (
           <Input
             key={index}
             type='string'
@@ -145,7 +125,9 @@ export default function UserNameInput({
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'userName')}
             onKeyDown={(e) => handleKeyDown(e)}
-            inputRef={inputRef}
+            inputRef={(element : HTMLInputElement) => {
+              inputRefs.current[index] = element;
+            }}
           />
         ))}
       </InputField>

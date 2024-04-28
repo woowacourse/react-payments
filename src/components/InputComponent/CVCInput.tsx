@@ -25,16 +25,15 @@ export default function CVCInput({
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
-  const inputRefs = useRef<Array<React.RefObject<HTMLInputElement>>>(
-    Array.from({ length: 1 }, () => React.createRef<HTMLInputElement>())
-  );
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
+
   useEffect(() => {
     const messages = Object.values(CVC).map((value) => value.errorMessage);
     setErrorMessages(messages);
   }, [CVC]);
 
   useEffect(() => {
-    inputRefs.current[0].current?.focus();
+    inputRefs.current[0]?.focus();
   }, []);
 
   useEffect(() => {
@@ -113,7 +112,7 @@ export default function CVCInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {inputRefs.current.map((inputRef, index) => (
+        {Array.from({length:1}).map((_, index) => (
           <Input
             key={index}
             type='string'
@@ -122,7 +121,9 @@ export default function CVCInput({
             placeholder={'123'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'CVC')}
-            inputRef={inputRef}
+            inputRef={(element : HTMLInputElement) => {
+              inputRefs.current[index] = element;
+            }}
           />
         ))}
       </InputField>
