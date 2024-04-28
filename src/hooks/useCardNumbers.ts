@@ -1,10 +1,19 @@
-import { ChangeEvent, useState, FocusEvent, useRef, useEffect } from "react";
+import {
+  ChangeEvent,
+  useState,
+  FocusEvent,
+  useRef,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { CARD_NUMBER_KEYS } from "@/constants/cardInfo";
 import { ERRORS } from "@/constants/messages";
 import { isAllDone } from "@/utils/input";
 import useInput from "./useInput";
 import { getInputAttributes } from "@/utils/input";
 import { CARD_NUMBER } from "@/constants/cardInfo";
+import { Input } from "@/types/card";
 
 const useCardNumbers = () => {
   const [first, setFirst] = useInput();
@@ -23,46 +32,33 @@ const useCardNumbers = () => {
     if (isAllDone({ first, second, third, fourth })) {
       setCardNumbersNextInput(true);
     }
+
+    if (first.isDone && !first.isError) secondRef.current?.focus();
+    else if (second.isDone && !second.isError) thirdRef.current?.focus();
+    else if (third.isDone && !third.isError) fourthRef.current?.focus();
   }, [first, second, third, fourth]);
+
+  const changeCardNumber = (
+    value: string,
+    cardNumber: Input,
+    setCardNumber: Dispatch<SetStateAction<Input>>
+  ) => {
+    if (!Number.isInteger(Number(value))) {
+      setFirst({ ...cardNumber, isError: true });
+      setErrorMessage(ERRORS.isNotInteger);
+      return;
+    }
+    setCardNumber({ value, isDone: value.length === CARD_NUMBER, isError: false });
+    setErrorMessage("");
+  };
 
   const changeCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = getInputAttributes(event, CARD_NUMBER_KEYS);
 
-    if (name === "first") {
-      if (!Number.isInteger(Number(value))) {
-        setFirst({ ...first, isError: true });
-        setErrorMessage(ERRORS.isNotInteger);
-        return;
-      }
-      setFirst({ value, isDone: value.length === CARD_NUMBER, isError: false });
-    } else if (name === "second") {
-      if (!Number.isInteger(Number(value))) {
-        setSecond({ ...second, isError: true });
-        setErrorMessage(ERRORS.isNotInteger);
-        return;
-      }
-      setSecond({ value, isDone: value.length === CARD_NUMBER, isError: false });
-    } else if (name === "third") {
-      if (!Number.isInteger(Number(value))) {
-        setThird({ ...third, isError: true });
-        setErrorMessage(ERRORS.isNotInteger);
-        return;
-      }
-      setThird({ value, isDone: value.length === CARD_NUMBER, isError: false });
-    } else if (name === "fourth") {
-      if (!Number.isInteger(Number(value))) {
-        setFourth({ ...fourth, isError: true });
-        setErrorMessage(ERRORS.isNotInteger);
-        return;
-      }
-      setFourth({ value, isDone: value.length === CARD_NUMBER, isError: false });
-    }
-    setErrorMessage("");
-    if (value.length === 4) {
-      if (name === "first") secondRef.current?.focus();
-      else if (name === "second") thirdRef.current?.focus();
-      else if (name === "third") fourthRef.current?.focus();
-    }
+    if (name === "first") changeCardNumber(value, first, setFirst);
+    else if (name === "second") changeCardNumber(value, second, setSecond);
+    else if (name === "third") changeCardNumber(value, third, setThird);
+    else if (name === "fourth") changeCardNumber(value, fourth, setFourth);
   };
 
   const blurCardNumbers = (event: FocusEvent<HTMLInputElement>) => {

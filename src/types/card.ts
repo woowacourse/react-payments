@@ -15,3 +15,9 @@ export interface OwnerName {
 }
 
 export type Brand = "visa" | "master" | null;
+
+export type Input = {
+  value: string;
+  isError: boolean;
+  isDone: boolean;
+};
