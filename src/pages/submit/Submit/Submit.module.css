@@ -1,6 +1,6 @@
 .submitContainer {
   display: flex;
-  gap: 25px;
+  gap: 39px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -15,7 +15,6 @@
 }
 
 .message {
-  height: 100px;
   font-family: Noto Sans KR;
   font-size: 25px;
   font-weight: 700;

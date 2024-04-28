@@ -15,7 +15,7 @@ const Submit: React.FC = () => {
       <p className={styles.message}>
         <span>{`${firstCardNumber}로 시작하는`}</span>
         <br />
-        {`${CARD.ISSUER_NAME[cardIssuer]}가 등록되었어요.`}
+        <span>{`${CARD.ISSUER_NAME[cardIssuer]}가 등록되었어요.`}</span>
       </p>
       <ConfirmButton
         label="확인"
