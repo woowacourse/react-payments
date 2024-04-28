@@ -11,7 +11,7 @@ const CardRegistrationCompletePage = () => {
   const cardCompany = location.state.cardCompany;
 
   const navigateToNewCardPage = () => {
-    navigate('/new-card');
+    navigate('/');
   };
 
   return (

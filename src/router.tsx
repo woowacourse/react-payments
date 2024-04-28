@@ -12,7 +12,7 @@ const router = createBrowserRouter(
       errorElement: <NotFoundPage />,
       children: [
         {
-          path: 'new-card',
+          index: true,
           element: <NewCardPage />,
         },
         {

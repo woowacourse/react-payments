@@ -7,7 +7,7 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
 
   const navigateToNewCardPage = () => {
-    navigate('/new-card');
+    navigate('/');
   };
   return (
     <Styled.NotFoundContainer>
