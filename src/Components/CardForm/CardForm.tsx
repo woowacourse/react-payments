@@ -12,31 +12,64 @@ import Button from "../common/Button/Button";
 import { useNavigate } from "react-router-dom";
 import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
 import { CardFormWrapper, FormStyle } from "./CardForm.style";
+import useCardNumberInput from "../../hooks/useCardNumberInput";
+import useCardCompanySelect from "../../hooks/useCardCompanySelect";
+import useExpiryInput from "../../hooks/useExpiryInput";
+import useCardOwnerNameInput from "../../hooks/useCardOwnerNameInput";
+import useCardCVCInput from "../../hooks/useCardCVCInput";
+import useCardPasswordInput from "../../hooks/useCardPasswordInput";
 
 const CardForm: React.FC = () => {
-  const [cardNumber, setCardNumber] = useState("");
-  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<CardCompany | "">("");
-  const [isSelectedCardCompleted, setIsSelectedCardCompleted] = useState(false);
-  const [expiryMonth, setExpiryMonth] = useState("");
-  const [isExpiryMonthCompleted, setIsExpiryMonthCompleted] = useState(false);
-  const [expiryYear, setExpiryYear] = useState("");
-  const [isExpiryYearCompleted, setIsExpiryYearCompleted] = useState(false);
-  const [cardholderName, setCardholderName] = useState("");
-  const [isCardholderNameCompleted, setIsCardholderNameCompleted] =
-    useState(false);
-  const [cardCVC, setCardCVC] = useState("");
-  const [cardPassword, setCardPassword] = useState("");
-  const [isCardCVCCompleted, setIsCardCVCCompleted] = useState(false);
+  const {
+    cardNumber,
+    isCardNumberCompleted,
+    handleCardNumberChange,
+    handleCardNumberCompleted,
+  } = useCardNumberInput();
+
+  const {
+    selectedCard,
+    isSelectedCardCompleted,
+    handleSelect,
+    handleSelectedCardCompleted,
+  } = useCardCompanySelect();
+
+  const {
+    expiryMonth,
+    expiryYear,
+    isExpiryMonthCompleted,
+    isExpiryYearCompleted,
+    handleExpiryMonthChange,
+    handleExpiryYearChange,
+    handleExpiryMonthCompleted,
+    handleExpiryYearCompleted,
+  } = useExpiryInput();
+
+  const {
+    cardholderName,
+    isCardholderNameCompleted,
+    handleCardholderNameChange,
+    handleCardholderNameCompleted,
+  } = useCardOwnerNameInput();
+
+  const { cardCVC, isCardCVCCompleted, handleCardCVC, handleCardCVCCompleted } =
+    useCardCVCInput();
+
+  const {
+    cardPassword,
+    isCardPasswordCompleted,
+    handleCardPasswordChange,
+    handleCardPasswordCompleted,
+  } = useCardPasswordInput();
+
+  const navigate = useNavigate();
+
   const [showCardCVCInput, setShowCardCVCInput] = useState(false);
   const [showExpiryInput, setShowExpiryInput] = useState(false);
   const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
   const [showSelectBox, setShowSelectBox] = useState(false);
   const [showCardPasswordInput, setShowCardPasswordInput] = useState(false);
   const [isOnCVCInput, setIsOnCVCInput] = useState(false);
-  const [isCardPasswordCompleted, setIsCardPasswordCompleted] = useState(false);
-
-  const navigate = useNavigate();
 
   const isAllCompleted =
     isCardCVCCompleted &&
@@ -46,12 +79,6 @@ const CardForm: React.FC = () => {
     isCardNumberCompleted &&
     isCardPasswordCompleted;
 
-  const handleCardNumberChange = (value: string) => {
-    const filteredValue = value.replace(/\D/g, "");
-    const formattedValue = filteredValue.replace(/(\d{4})/g, "$1 ").trim();
-    setCardNumber(formattedValue);
-  };
-
   const handleOnClick = () => {
     navigate("/enrollmentCompleted", {
       state: {
@@ -59,63 +86,6 @@ const CardForm: React.FC = () => {
         cardFirstPartNumbers: cardNumber.slice(0, 4),
       },
     });
-  };
-
-  const handleExpiryMonthChange = (value: string) => {
-    const filteredValue = value.replace(/\D/g, "");
-    if (filteredValue === "" || parseInt(filteredValue, 10) <= 12) {
-      setExpiryMonth(filteredValue);
-    }
-  };
-
-  const handleExpiryYearChange = (value: string) => {
-    const filteredValue = value.replace(/\D/g, "").slice(0, 2);
-    setExpiryYear(filteredValue);
-  };
-
-  const handleCardholderNameChange = (value: string) => {
-    setCardholderName(value.toUpperCase());
-  };
-
-  const handleSelect = (value: CardCompany | "") => {
-    setSelectedCard(value);
-  };
-
-  const handleCardCVC = (value: string) => {
-    setCardCVC(value);
-  };
-
-  const handleCardPasswordChange = (value: string) => {
-    setCardPassword(value);
-    console.log("cardPassword", cardPassword);
-  };
-
-  const handleCardNumberCompleted = (isCompleted: boolean) => {
-    setIsCardNumberCompleted(isCompleted);
-  };
-
-  const handleSelectedCardCompleted = (isCompleted: boolean) => {
-    setIsSelectedCardCompleted(isCompleted);
-  };
-
-  const handleExpiryMonthCompleted = (isCompleted: boolean) => {
-    setIsExpiryMonthCompleted(isCompleted);
-  };
-
-  const handleExpiryYearCompleted = (isCompleted: boolean) => {
-    setIsExpiryYearCompleted(isCompleted);
-  };
-
-  const handleCardholderNameCompleted = (isCompleted: boolean) => {
-    setIsCardholderNameCompleted(isCompleted);
-  };
-
-  const handleCardCVCCompleted = (isCompleted: boolean) => {
-    setIsCardCVCCompleted(isCompleted);
-  };
-
-  const handleCardPasswordCompleted = (isCompleted: boolean) => {
-    setIsCardPasswordCompleted(isCompleted);
   };
 
   useEffect(() => {

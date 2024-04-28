@@ -33,7 +33,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const [isValid, setIsValid] = useState(true);
-    const [inputSize, _] = useState(size);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
@@ -53,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <InputWrapper size={inputSize} isValid={isValid}>
+      <InputWrapper size={size} isValid={isValid}>
         <input
           ref={ref}
           value={value}
