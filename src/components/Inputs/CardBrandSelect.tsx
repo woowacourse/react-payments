@@ -20,7 +20,6 @@ export default function CardBrandSelect({ cardCompany, setNextContentDisplay }: 
     <S.Wrapper>
       <InputSection title={CARD_COMPANY.title} description={CARD_COMPANY.description}>
         <Select
-          ref={cardCompany.ref}
           options={[...CARD_COMPANY.options]}
           value={cardCompany.value}
           placeholder={CARD_COMPANY.placeholder}

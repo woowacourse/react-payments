@@ -25,7 +25,6 @@ export default function CvcNumberInput({ cvc, setNextContentDisplay, setIsFlip }
         <InputLabel htmlFor={'cvc'} description={'CVC 번호 입력'} />
         <Input
           isAutoFocus={true}
-          ref={cvc.ref}
           id="cvc"
           maxLength={MAX_LENGTH.cvcNumber}
           onChange={(e) => {

@@ -35,7 +35,6 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
         <InputLabel htmlFor={'month'} description={'월 입력'} />
         <Input
           isAutoFocus={true}
-          ref={month.ref}
           id={'month'}
           placeholder={'MM'}
           type="text"

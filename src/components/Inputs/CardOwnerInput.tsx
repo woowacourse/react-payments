@@ -24,7 +24,6 @@ export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
         <InputLabel htmlFor={'name'} description={'이름 입력'} />
         <Input
           isAutoFocus={true}
-          ref={name.ref}
           id="name"
           maxLength={MAX_LENGTH.ownerName}
           onChange={name.onChangeHandler}

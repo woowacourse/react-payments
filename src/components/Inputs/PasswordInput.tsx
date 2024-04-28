@@ -17,7 +17,6 @@ export default function PasswordInput({ password }: Props) {
         <InputLabel htmlFor={'password'} description={'비밀번호 입력'} />
         <Input
           isAutoFocus={true}
-          ref={password.ref}
           id="password"
           maxLength={MAX_LENGTH.password}
           onChange={password.onChangeHandler}
