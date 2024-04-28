@@ -9,7 +9,7 @@ const FormField = ({
 }: {
   labelContent: string;
   inputs?: JSX.Element[];
-  dropdowns?: JSX.Element;
+  dropdowns?: JSX.Element[];
   errorMessage: string;
 }) => {
   return (

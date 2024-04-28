@@ -38,14 +38,14 @@ const CardCompanyForm = ({
     <>
       <FormField
         labelContent={""}
-        dropdowns={
+        dropdowns={[
           <Dropdown
             values={Object.keys(CARD_COMPANY)}
             contents={Object.keys(CARD_COMPANY)}
             setData={setCardCompany}
             setIsValid={setIsSelected}
-          />
-        }
+          />,
+        ]}
         errorMessage={errorMessage}
       />
     </>
