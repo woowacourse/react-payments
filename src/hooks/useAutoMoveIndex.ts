@@ -4,7 +4,10 @@ const useAutoMoveIndex = (defaultIndex: number, validationList: boolean[]) => {
   const [index, setIndex] = useState(defaultIndex);
 
   useEffect(() => {
-    validationList.some(Boolean) && handleIndex(defaultIndex + validationList.filter(Boolean).length);
+    if (validationList.some(Boolean)) {
+      const nextIndex = defaultIndex + validationList.filter(Boolean).length;
+      handleIndex(nextIndex);
+    }
   }, [validationList]);
 
   const handleIndex = (nextIndex: number) => nextIndex > index && setIndex(nextIndex);
