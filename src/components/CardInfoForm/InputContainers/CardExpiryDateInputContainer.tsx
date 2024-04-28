@@ -9,6 +9,13 @@ import makeUniqueString from '../../../utils/getUniqueId';
 
 const MONTH_LENGTH = 2;
 
+const formatMonth = (month: string) => {
+  if (month.length === 1 && month !== '0') {
+    return `0${month}`;
+  }
+  return month;
+};
+
 interface CardExpiryDateInputContainerProps {
   month: IInputControl;
   year: IInputControl;
@@ -28,6 +35,12 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
     }
   };
 
+  const onMonthBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const formattedMonth = formatMonth(e.target.value);
+    month.setValue(formattedMonth);
+    month.validateValue(formattedMonth);
+  };
+
   const monthInputId = makeUniqueString('card-expiry-month-input');
   const yearInputId = makeUniqueString('card-expiry-year-input');
 
@@ -44,7 +57,7 @@ const CardExpiryDateInputContainer = ({ month, year }: CardExpiryDateInputContai
           isError={month.errorStatus.isError}
           value={month.value}
           onChange={onMonthChange}
-          onBlur={month.onBlur}
+          onBlur={onMonthBlur}
           placeholder="01"
           maxLength={2}
           width="48%"
