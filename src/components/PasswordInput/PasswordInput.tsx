@@ -20,7 +20,7 @@ const PasswordInput = ({ password, onChange }: PasswordInputProps) => {
         value={password.value}
         placeholder="비밀번호"
         maxLength={2}
-        isPassword={true}
+        type="password"
         autoFocus
         onChange={onChange}
       />

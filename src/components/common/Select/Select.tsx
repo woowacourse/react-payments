@@ -2,18 +2,13 @@ import { ChangeEvent, RefObject } from "react";
 import styles from "./Select.module.css";
 
 interface SelectProps {
-  options: string[];
+  options: readonly string[];
   changeCardCompany: (event: ChangeEvent<HTMLSelectElement>) => void;
   selectRef: RefObject<HTMLSelectElement>;
   value?: string;
 }
 
-const Select = ({
-  options,
-  changeCardCompany,
-  selectRef,
-  value = "",
-}: SelectProps) => {
+const Select = ({ options, changeCardCompany, selectRef, value = "" }: SelectProps) => {
   return (
     <select
       autoFocus

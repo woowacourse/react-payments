@@ -8,20 +8,14 @@ interface CardPreviewFrontProps {
   ownerName: string;
 }
 
-const CardPreviewFront = ({
-  cardNumbers,
-  expirationDate,
-  ownerName,
-}: CardPreviewFrontProps) => {
+const CardPreviewFront = ({ cardNumbers, expirationDate, ownerName }: CardPreviewFrontProps) => {
   const brand = getCardbrand(cardNumbers.first);
 
   return (
     <div className={styles.container}>
       <div className={styles.cardHeader}>
         <div className={styles.chip} />
-        {brand && (
-          <img src={CARD_BRAND[brand].logo} className={styles.brandLogo}></img>
-        )}
+        {brand && <img src={CARD_BRAND[brand].logo} className={styles.brandLogo}></img>}
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardNumbers}>
@@ -29,13 +23,8 @@ const CardPreviewFront = ({
             const isMask = index >= MASK_START_INDEX;
 
             return (
-              <span
-                key={name}
-                className={`${styles.cardNumber} ${isMask && styles.mask}`}
-              >
-                {index >= MASK_START_INDEX
-                  ? SYMBOLS.mask.repeat(cardNumber.length)
-                  : cardNumber}
+              <span key={name} className={`${styles.cardNumber} ${isMask && styles.mask}`}>
+                {isMask ? SYMBOLS.mask.repeat(cardNumber.length) : cardNumber}
               </span>
             );
           })}
