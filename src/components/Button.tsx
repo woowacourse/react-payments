@@ -23,7 +23,7 @@ interface Props {
   onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
 }
 
-export default function BottomButton({ value, layoutType, onClick }: Props) {
+export default function Button({ value, layoutType, onClick }: Props) {
   if (layoutType === 'bottom') {
     return <BottomButtonBox onClick={onClick}>{value}</BottomButtonBox>;
   } else {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Check from '../assets/image/check.svg';
-import BottomButton from "../components/Button";
+import Button from "../components/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Page = styled.div`
@@ -48,14 +48,13 @@ export default function CardRegistrationConfirmation() {
     navigate('/');
   }
   return ( 
-  <>
+
     <Page>
       <Container>
         <ConfirmationImage src = {Check}/>
         <ConfirmationMessage>{`${cardNumber1}로 시작하는 ${cardBrand}가 등록되었어요`}</ConfirmationMessage>
-        <BottomButton value="확인" onClick={handleClick}/>
+        <Button value="확인" onClick={handleClick}/>
       </Container>
     </Page>
-  </>
   )
 }

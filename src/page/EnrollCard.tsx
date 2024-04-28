@@ -10,7 +10,7 @@ import {
   validatePassword,
   validateUserName,
 } from '../domain/InputValidation';
-import BottomButton from '../components/Button';
+import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 
 const Page = styled.div`
@@ -103,7 +103,7 @@ const navigate = useNavigate();
             setPassword,
           }}
         />
-        {submitButtonFlag && <BottomButton value={'제출'} layoutType='bottom'></BottomButton>}
+        {submitButtonFlag && <Button value={'제출'} layoutType='bottom'></Button>}
       </Container>
     </Page>
   );
