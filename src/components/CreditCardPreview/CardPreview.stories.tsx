@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardType: "BC카드",
+    cardBrandType: "BC카드",
     cardNumbers: {
       cardNumbers1: "1234",
       cardNumbers2: "1234",
@@ -25,6 +25,7 @@ export const Default: Story = {
     },
     ownerName: "RIAN OH",
     CVCNumbers: "123",
-    isFrontShow: true,
+    isFront: true,
+    setIsFront: () => {},
   },
 };

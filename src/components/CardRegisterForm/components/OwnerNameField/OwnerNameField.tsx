@@ -16,7 +16,7 @@ interface Props {
 }
 
 const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
-  const { onChange, error } = ownerNameState;
+  const { onChange, error, isError } = ownerNameState;
 
   const onEnterCompleted = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -29,11 +29,7 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
       <InputFieldHeader title={MESSAGE.INPUT_INFO_TITLE.OWNER_NAME} />
       <InputField
         label={MESSAGE.INPUT_LABEL.OWNER_NAME}
-        errorMessages={[
-          error.includes(ErrorStatus.NAME_SHOULD_BE_CAPITAL)
-            ? ErrorStatus.NAME_SHOULD_BE_CAPITAL
-            : null,
-        ]}
+        errorMessages={isError ? [ErrorStatus.NAME_SHOULD_BE_CAPITAL] : []}
       >
         <Input
           autoFocus={true}
@@ -42,8 +38,8 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
           type="text"
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            onChange(e);
             sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
+            onChange(e);
           }}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
             onEnterCompleted(e)

@@ -1,11 +1,9 @@
-import S from "./style";
-import MasterLogo from "@/assets/MasterLogo.svg?react";
-import VisaLogo from "@/assets/VisaLogo.svg?react";
+import S from "../style";
 import { theme } from "@/style/theme";
-import { CardNumberInputType } from "../CardRegisterForm/components/CardNumbersField/CardNumbersField";
-import { ExpirationPeriodInputType } from "../CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
-import { checkCardBrand } from "@/utils/validation";
+import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
+import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import { CardBrandType, CardBrandTypeColor } from "@/constants/cardBrandType";
+import CardPreviewLogo from "./CardPreviewLogo";
 
 interface Props {
   cardBrandType: CardBrandType | null;
@@ -20,7 +18,6 @@ const CardPreviewFront = ({
   cardNumbers,
   cardBrandType,
 }: Props) => {
-  const cardTypeLogo = checkCardBrand(cardNumbers.cardNumbers1);
   const cardTypeColor = cardBrandType
     ? CardBrandTypeColor[cardBrandType]
     : null;
@@ -30,15 +27,7 @@ const CardPreviewFront = ({
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR["gold-1"]}></S.LogoBox>
 
-        {cardTypeLogo === "VISA" ? (
-          <S.LogoBox color={theme.COLOR["grey-4"]}>
-            <VisaLogo />
-          </S.LogoBox>
-        ) : cardTypeLogo === "MASTER" ? (
-          <S.LogoBox color={theme.COLOR["grey-4"]}>
-            <MasterLogo />
-          </S.LogoBox>
-        ) : null}
+        <CardPreviewLogo cardNumbers={cardNumbers} />
       </S.FlexBox>
 
       <S.CreditCardInfo>
@@ -60,7 +49,7 @@ const CardPreviewFront = ({
                 type="text"
                 value={number}
                 readOnly
-              ></S.Input>
+              />
             );
           })}
         </S.CardNumbers>
@@ -75,13 +64,13 @@ const CardPreviewFront = ({
             ].join("/")
           }
           readOnly
-        ></S.Input>
+        />
         <S.Input
           $isWhite={cardBrandType !== "카카오뱅크"}
           type="text"
           value={ownerName ? ownerName : ""}
           readOnly
-        ></S.Input>
+        />
       </S.CreditCardInfo>
     </S.CardInner>
   );

@@ -3,6 +3,7 @@ import CVCField from "./CVCField";
 import useInput from "@/hooks/useInput";
 import { validateIsNumber, validateIsValidLength } from "@/utils/validation";
 import { VALID_LENGTH } from "@/constants/condition";
+import { useState } from "react";
 
 const meta = {
   title: "CardRegisterForm/CVCField",
@@ -19,8 +20,9 @@ const CVCFieldWithHook = () => {
       (value: string) => validateIsNumber(value),
     ],
   });
+  const [, setIsFront] = useState<boolean>(true);
 
-  return <CVCField CVCNumbersState={CVCNumbersState} />;
+  return <CVCField CVCNumbersState={CVCNumbersState} setIsFront={setIsFront} />;
 };
 
 type Story = StoryObj<typeof CVCField>;

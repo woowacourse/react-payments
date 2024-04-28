@@ -1,4 +1,4 @@
-import { CARD_BRAND_INFO, VALID_LENGTH } from "@/constants/condition";
+import { VALID_LENGTH } from "@/constants/condition";
 import { REGEX } from "@/constants/regex";
 
 export enum ErrorStatus {
@@ -75,17 +75,4 @@ export const validateIsCapital = (name: string) => {
     return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
   }
   return { isValid: true };
-};
-
-export const checkCardBrand = (cardNumbers: string) => {
-  if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
-    return "VISA";
-  }
-  if (
-    Number(cardNumbers.slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
-    Number(cardNumbers.slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
-  ) {
-    return "MASTER";
-  }
-  return "NONE";
 };

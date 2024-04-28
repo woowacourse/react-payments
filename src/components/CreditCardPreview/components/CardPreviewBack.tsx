@@ -1,5 +1,5 @@
 import { theme } from "@/style/theme";
-import S from "./style";
+import S from "../style";
 
 const CardPreviewBack = ({ CVCNumbers }: { CVCNumbers: string }) => {
   return (

@@ -27,7 +27,7 @@ const SelectBox = <T extends string>({
         onClick={() => setIsOpen((prev) => !prev)}
         selected={!!value}
       >
-        <span>{MESSAGE.INPUT_INFO_TITLE.CARD_TYPE}</span>
+        <span>{value || MESSAGE.INPUT_INFO_TITLE.CARD_TYPE}</span>
         {isOpen ? <DownArrow /> : <UpArrow />}
       </S.SelectedOptionBox>
       {isOpen && (

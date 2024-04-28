@@ -46,7 +46,7 @@ const CardRegisterPage = () => {
   const allPassed = stepPassedArr.every((isCompleted) => isCompleted === true);
 
   useEffect(() => {
-    if (stepPassedArr[step - 1] && step < stepPassedArr.length) {
+    if (stepPassedArr[step - 1] && step <= stepPassedArr.length) {
       setStep((prev) => prev + 1);
     }
   }, [step, stepPassedArr]);

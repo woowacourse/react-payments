@@ -1,7 +1,7 @@
-import CardPreviewFront from "./CardPreviewFront";
-import CardPreviewBack from "./CardPreviewBack";
 import { CardNumberInputType } from "../CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { ExpirationPeriodInputType } from "../CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
+import CardPreviewBack from "./components/CardPreviewBack";
+import CardPreviewFront from "./components/CardPreviewFront";
 import S from "./style";
 import { CardBrandType } from "@/constants/cardBrandType";
 
