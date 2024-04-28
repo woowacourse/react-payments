@@ -106,7 +106,7 @@ const useIsCardInfoValid = () => {
   if (
     isNumberValid(cardNumbers, numbersError) &&
     isIssuerValid(cardIssuer, issuerError) &&
-    isPeriodValid(cardPeriod, periodError) &&
+    isPeriodValid(cardPeriod, periodError).isValid &&
     isOwnerValid(cardOwner, ownerError) &&
     isCVCValid(cardCVC, cvcError) &&
     isPasswordValid(cardPassword, passwordError)
