@@ -1,10 +1,14 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, Navigate, useSearchParams } from 'react-router-dom';
 import { Check } from '../../assets';
 
 import * as S from './CardRegistrationCompletePage.style';
 
 const CardRegistrationCompletePage = () => {
   const [searchParams] = useSearchParams();
+
+  if ([...searchParams.entries()].length === 0) {
+    return <Navigate to="/error" />;
+  }
 
   const cardNumber = searchParams.get('number');
   const cardCompany = searchParams.get('company');
