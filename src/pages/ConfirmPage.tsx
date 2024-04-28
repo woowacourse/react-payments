@@ -13,10 +13,7 @@ const ConfirmPage = () => {
 
   const company = CARD_COMPANY.find((card) => card[1] === cardInfo.cardCompany);
 
-  let card = '';
-  if (company) {
-    card = company[0];
-  }
+  const cardCompanyName = company ? company[0] : '선택한 카드';
 
   const resetCardInfo = () => {
     changeCardInfo(initialCardInfoContext.cardInfo);
@@ -28,7 +25,8 @@ const ConfirmPage = () => {
         <CF.Confirm>
           <CF.Image src={Confirm} alt="카드 생성 완료 아이콘" />
           <CF.Title>
-            {cardInfo.cardNumber[0]}로 시작하는 <br /> {card}가 등록되었어요.
+            {cardInfo.cardNumber[0]}로 시작하는 <br /> {cardCompanyName}가
+            등록되었어요.
           </CF.Title>
           <Link to={'/'} style={{ width: 'inherit' }}>
             <Button text="확인" onClick={resetCardInfo} />
