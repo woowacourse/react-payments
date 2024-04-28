@@ -44,7 +44,7 @@ export default function CardRegistrationConfirmation() {
   const cardBrand = location.state.cardBrand.value;
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleConfirmationButtonClick = () => {
     navigate('/');
   }
   return ( 
@@ -53,7 +53,7 @@ export default function CardRegistrationConfirmation() {
       <Container>
         <ConfirmationImage src = {Check}/>
         <ConfirmationMessage>{`${cardNumber1}로 시작하는 ${cardBrand}가 등록되었어요`}</ConfirmationMessage>
-        <Button value="확인" onClick={handleClick}/>
+        <Button value="확인" onClick={handleConfirmationButtonClick}/>
       </Container>
     </Page>
   )
