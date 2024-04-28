@@ -6,16 +6,19 @@ import Payments from "./routes/Payments";
 import LandingArrival from "./routes/LandingArrival";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Payments />,
-    },
-    {
-      path: "/landing_arrival/:cardNumbers/:cardIssuer",
-      element: <LandingArrival />,
-    },
-  ]);
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <Payments />,
+      },
+      {
+        path: "/landing_arrival/:cardNumbers/:cardIssuer",
+        element: <LandingArrival />,
+      },
+    ],
+    { basename: import.meta.env.BASE_URL }
+  );
   return (
     <React.StrictMode>
       <RouterProvider router={router} />
