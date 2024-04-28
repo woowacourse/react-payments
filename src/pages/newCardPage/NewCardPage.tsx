@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Input from '../../components/common/input/Input';
 import Select from '../../components/common/select/Select';
 import NewCardInputSection from '../../components/newCardInputSection/NewCardInputSection';
@@ -14,6 +14,8 @@ const NewCardPage = () => {
   const {
     cardInfo,
     errorMessage,
+    creationStage,
+    isAllValidInput,
     handleCardNumbers,
     handleCardCompany,
     handleCardExpiration,
@@ -21,47 +23,8 @@ const NewCardPage = () => {
     handleCardCVC,
     handleCardPassword,
   } = useCardForm();
-  const [creationStage, setCreationStage] = useState(1);
   const [preview, setPreview] = useState('front');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    updateStage();
-  }, [cardInfo, errorMessage, creationStage]);
-
-  const updateStage = () => {
-    if (
-      cardInfo.cardNumbers.every((element) => element.length === 4) &&
-      errorMessage.cardNumbers.every((element) => element === '') &&
-      creationStage < 2
-    ) {
-      setCreationStage(2);
-    } else if (cardInfo.cardCompany !== '' && creationStage < 3) {
-      setCreationStage(3);
-    } else if (
-      cardInfo.cardExpiration.every((element) => element.length == 2) &&
-      errorMessage.cardExpiration.every((element) => element === '') &&
-      creationStage < 4
-    ) {
-      setCreationStage(4);
-    } else if (cardInfo.userName !== '' && creationStage < 5) {
-      setCreationStage(5);
-    } else if (cardInfo.cvc !== '' && creationStage < 6) {
-      setCreationStage(6);
-    } else if (cardInfo.password !== '' && creationStage < 7) {
-      setCreationStage(7);
-    }
-  };
-
-  const isAllValidInput = () => {
-    const isCardInfoValid = Object.values(cardInfo).every(
-      (value) => value !== '',
-    );
-    const isErrorMessageValid = Object.values(errorMessage).every((errors) =>
-      errors.every((error: string) => error === ''),
-    );
-    return isCardInfoValid && isErrorMessageValid;
-  };
 
   const navigateToRegistrationCompletePage = () => {
     navigate('/registration-complete', {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ICardInfo, IErrorMessage } from '../types/type';
 import useCardNumbers from './useCardNumbers';
 import useCardCompany from './useCardCompany';
@@ -24,6 +24,45 @@ const useCardForm = () => {
     cvc: [''],
     password: [''],
   });
+  const [creationStage, setCreationStage] = useState(1);
+
+  useEffect(() => {
+    updateStage();
+  }, [cardInfo, errorMessage, creationStage]);
+
+  const isAllValidInput = () => {
+    const isCardInfoValid = Object.values(cardInfo).every(
+      (value) => value !== '',
+    );
+    const isErrorMessageValid = Object.values(errorMessage).every((errors) =>
+      errors.every((error: string) => error === ''),
+    );
+    return isCardInfoValid && isErrorMessageValid;
+  };
+
+  const updateStage = () => {
+    if (
+      cardInfo.cardNumbers.every((element) => element.length === 4) &&
+      errorMessage.cardNumbers.every((element) => element === '') &&
+      creationStage < 2
+    ) {
+      setCreationStage(2);
+    } else if (cardInfo.cardCompany !== '' && creationStage < 3) {
+      setCreationStage(3);
+    } else if (
+      cardInfo.cardExpiration.every((element) => element.length == 2) &&
+      errorMessage.cardExpiration.every((element) => element === '') &&
+      creationStage < 4
+    ) {
+      setCreationStage(4);
+    } else if (cardInfo.userName !== '' && creationStage < 5) {
+      setCreationStage(5);
+    } else if (cardInfo.cvc !== '' && creationStage < 6) {
+      setCreationStage(6);
+    } else if (cardInfo.password !== '' && creationStage < 7) {
+      setCreationStage(7);
+    }
+  };
 
   const focusNextInput = (currentInput: HTMLInputElement) => {
     const nextInput = currentInput.nextSibling as HTMLInputElement | null;
@@ -71,6 +110,8 @@ const useCardForm = () => {
   return {
     cardInfo,
     errorMessage,
+    creationStage,
+    isAllValidInput,
     handleCardNumbers,
     handleCardCompany,
     handleCardExpiration,
