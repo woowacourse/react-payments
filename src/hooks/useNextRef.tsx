@@ -16,11 +16,13 @@ const useNextRef = ({ inputTypes, handleNext }: Props) => {
   }, []);
 
   const handleInputNext = (index: number) => {
-    if (index < inputTypes.inputInfo.length - 1 && inputRefs.current) {
+    const inputLength = inputTypes.inputInfo.length - 1;
+
+    if (index < inputLength && inputRefs.current) {
       inputRefs.current[index + 1].focus();
     }
 
-    if (index === inputTypes.inputInfo.length - 1) {
+    if (index === inputLength) {
       handleNext();
     }
   };
