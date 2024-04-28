@@ -4,6 +4,7 @@ import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
 import { CardNumberInputType } from "@/components/CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { CARD_BRAND_INFO } from "@/constants/condition";
+import React from "react";
 
 const CardPreviewLogo = ({
   cardNumbers,
@@ -40,4 +41,5 @@ const CardPreviewLogo = ({
   );
 };
 
-export default CardPreviewLogo;
+const CardPreviewLogoMemo = React.memo(CardPreviewLogo);
+export default CardPreviewLogoMemo;

@@ -4,6 +4,7 @@ import { CardNumberInputType } from "@/components/CardRegisterForm/components/Ca
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import { CardBrandType, CardBrandTypeColor } from "@/constants/cardBrandType";
 import CardPreviewLogo from "./CardPreviewLogo";
+import CardPreviewNumbersMemo from "./CardPreviewNumbers";
 
 interface Props {
   cardBrandType: CardBrandType | null;
@@ -26,25 +27,14 @@ const CardPreviewFront = ({
     <S.CardInner $cardTypeColor={cardTypeColor} $isFront={true}>
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR["gold-1"]}></S.LogoBox>
-
         <CardPreviewLogo cardNumbers={cardNumbers} />
       </S.FlexBox>
 
       <S.CreditCardInfo>
-        <S.CardNumbers>
-          {Object.values(cardNumbers).map((number: string, index) => {
-            const isMasked = index >= 2;
-            return (
-              <S.Input
-                $isWhite={cardBrandType !== "카카오뱅크"}
-                key={index}
-                type={isMasked ? "password" : "text"}
-                value={number}
-                readOnly
-              />
-            );
-          })}
-        </S.CardNumbers>
+        <CardPreviewNumbersMemo
+          cardBrandType={cardBrandType}
+          cardNumbers={cardNumbers}
+        />
         <S.Input
           $isWhite={cardBrandType !== "카카오뱅크"}
           type="text"
