@@ -41,6 +41,7 @@ export default function CardNumbers({ cardNumberInputs }: CardNumbersProps) {
             onChange={cardNumbersInput.onChangeHandler}
             onFocus={() => {
               setFocusInput(idx);
+              cardNumbersInput.onFocusHandler();
             }}
             value={cardNumbersInput.value}
             autoFocus={idx === 0 ? true : false}

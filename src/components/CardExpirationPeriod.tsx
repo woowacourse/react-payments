@@ -41,8 +41,10 @@ export default function CardExpirationPeriod({
               PAYMENTS_INPUT_MESSAGE.expirationPeriodPlaceHolder[idx]
             }
             onChange={input.onChangeHandler}
+            autoFocus={idx === 0 ? true : false}
             onFocus={() => {
               setFocusInput(idx);
+              input.onFocusHandler();
             }}
             value={input.value}
           />
