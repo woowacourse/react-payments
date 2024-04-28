@@ -5,8 +5,6 @@ import CardPasswordInput from "../FormInput/CardPasswordInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 import { CardPasswordInputContext } from "../Form/FormRefContextProvider";
-import { isPasswordValid } from "../Form/useIsValid";
-import { CardPasswordContext } from "../../routes/Payments/CardInfoContextProvider";
 
 const CardPasswordField = () => {
   const cardPasswordError = useContextWrapper(CardPasswordErrorContext)[0];
@@ -16,11 +14,10 @@ const CardPasswordField = () => {
   });
 
   const firstInput = useContextWrapper(CardPasswordInputContext)[0];
-  const password = useContextWrapper(CardPasswordContext)[0];
 
   useEffect(() => {
-    if (isPasswordValid(password, cardPasswordError)) firstInput.current?.focus();
-  }, [firstInput, password, cardPasswordError]);
+    firstInput.current?.focus();
+  }, [firstInput]);
 
   return (
     <FormFieldComponent
