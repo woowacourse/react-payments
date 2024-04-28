@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterPassword from '../components/registerSection/RegisterPassword';
+import CardOwnerNameInputSection from '@/components/registerSection/CardOwnerNameInputSection';
 import { fn } from '@storybook/test';
 
-const meta: Meta<typeof RegisterPassword> = {
-  title: 'RegisterStep/RegisterPassword',
-  component: RegisterPassword,
+const meta: Meta<typeof CardOwnerNameInputSection> = {
+  title: 'RegisterStep/CardOwnerNameInputSection',
+  component: CardOwnerNameInputSection,
   tags: ['autodocs'],
   argTypes: {
     onChange: {
@@ -15,18 +15,18 @@ const meta: Meta<typeof RegisterPassword> = {
     },
     value: {
       control: 'string',
-      description: '비밀번호 입력값',
+      description: '이름 입력값',
     },
     isError: {
       control: 'boolean',
-      description: '비밀번호 입력에 대한 에러 상태값',
+      description: '에러 상태값',
     },
   },
   args: {
     onChange: fn(),
     onBlur: fn(),
   },
-} satisfies Meta<typeof RegisterPassword>;
+} satisfies Meta<typeof CardOwnerNameInputSection>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

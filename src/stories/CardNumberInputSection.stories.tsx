@@ -1,11 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterCardNumber from '../components/registerSection/RegisterCardNumber';
+import CardNumberInputSection from '@/components/registerSection/CardNumberInputSection';
 import { fn } from '@storybook/test';
-import { useRef } from 'react';
 
-const meta: Meta<typeof RegisterCardNumber> = {
-  title: 'RegisterStep/RegisterCardNumber',
-  component: RegisterCardNumber,
+const meta: Meta<typeof CardNumberInputSection> = {
+  title: 'RegisterStep/CardNumberInputSection',
+  component: CardNumberInputSection,
   tags: ['autodocs'],
   argTypes: {
     cardNumbers: {
@@ -16,7 +15,7 @@ const meta: Meta<typeof RegisterCardNumber> = {
   args: {
     cardNumbersChangeHandler: fn(),
   },
-} satisfies Meta<typeof RegisterCardNumber>;
+} satisfies Meta<typeof CardNumberInputSection>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -29,11 +28,5 @@ export const Default: Story = {
       { value: '0000', isError: false },
       { value: '0000', isError: false },
     ],
-  },
-  render: (args) => {
-    const refs = Array(4)
-      .fill(null)
-      .map(() => useRef<HTMLInputElement>(null));
-    return <RegisterCardNumber {...args} refs={refs} />;
   },
 };

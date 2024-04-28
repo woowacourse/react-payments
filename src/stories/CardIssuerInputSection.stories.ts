@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterCardIssuer from '../components/registerSection/RegisterCardIssuer';
+import CardIssuerInputSection from '@/components/registerSection/CardIssuerInputSection';
 import { fn } from '@storybook/test';
 
-const meta: Meta<typeof RegisterCardIssuer> = {
-  title: 'RegisterStep/RegisterIssuer',
-  component: RegisterCardIssuer,
+const meta: Meta<typeof CardIssuerInputSection> = {
+  title: 'RegisterStep/CardIssuerInputSection',
+  component: CardIssuerInputSection,
   tags: ['autodocs'],
   argTypes: {
     onChange: {
@@ -14,7 +14,7 @@ const meta: Meta<typeof RegisterCardIssuer> = {
   args: {
     onChange: fn(),
   },
-} satisfies Meta<typeof RegisterCardIssuer>;
+} satisfies Meta<typeof CardIssuerInputSection>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

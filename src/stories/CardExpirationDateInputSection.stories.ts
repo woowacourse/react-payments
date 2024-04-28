@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterExpirationDate from '../components/registerSection/RegisterExpirationDate';
+import CardExpirationDateInputSection from '@/components/registerSection/CardExpirationDateInputSection';
 import { fn } from '@storybook/test';
 
-const meta: Meta<typeof RegisterExpirationDate> = {
-  title: 'RegisterStep/RegisterExpirationDate',
-  component: RegisterExpirationDate,
+const meta: Meta<typeof CardExpirationDateInputSection> = {
+  title: 'RegisterStep/CardExpirationDateInputSection',
+  component: CardExpirationDateInputSection,
   tags: ['autodocs'],
   argTypes: {
     month: {
@@ -26,13 +26,12 @@ const meta: Meta<typeof RegisterExpirationDate> = {
   },
   args: {
     monthChangeHandler: fn(),
-    handleMonthKeyDown: fn(),
     handleMonthBlur: fn(),
     yearChangeHandler: fn(),
     handleYearKeyDown: fn(),
     handleYearBlur: fn(),
   },
-} satisfies Meta<typeof RegisterExpirationDate>;
+} satisfies Meta<typeof CardExpirationDateInputSection>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

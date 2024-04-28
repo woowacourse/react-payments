@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterCVC from '../components/registerSection/RegisterCVC';
+import CardCVCInputSection from '@/components/registerSection/CardCVCInputSection';
 import { fn } from '@storybook/test';
 
-const meta: Meta<typeof RegisterCVC> = {
-  title: 'RegisterStep/RegisterCVC',
-  component: RegisterCVC,
+const meta: Meta<typeof CardCVCInputSection> = {
+  title: 'RegisterStep/CardCVCInputSection',
+  component: CardCVCInputSection,
   tags: ['autodocs'],
   argTypes: {
     value: {
@@ -18,10 +18,9 @@ const meta: Meta<typeof RegisterCVC> = {
   },
   args: {
     onChange: fn(),
-    onEnter: fn(),
     onBlur: fn(),
   },
-} satisfies Meta<typeof RegisterCVC>;
+} satisfies Meta<typeof CardCVCInputSection>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
