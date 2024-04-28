@@ -50,7 +50,6 @@ const ListItem = styled.li`
   }
 `;
 interface Props {
-  cardBrand?: CardBrand;
   handleInput: Dispatch<SetStateAction<CardBrand>>;
   handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
 }
