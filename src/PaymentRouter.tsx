@@ -7,7 +7,7 @@ const PaymentRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PaymentApp />} />
-        <Route path="/registered" element={<RegisteredPage />}></Route>
+        <Route path="/registered" element={<RegisteredPage />} />
       </Routes>
     </BrowserRouter>
   );
