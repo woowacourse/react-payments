@@ -146,7 +146,9 @@ function CardRegisterForm() {
           />
         </fieldset>
         {!isError && !isBlank && (
+          <div className={styles.confirmButton}>
             <Button onClick={handleConfirmButtonClick}>확인</Button>
+          </div>
         )}
       </form>
     </div>

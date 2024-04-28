@@ -1,0 +1,9 @@
+.button {
+  cursor: pointer;
+  background-color: black;
+  width: 100%;
+  height: 3rem;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}

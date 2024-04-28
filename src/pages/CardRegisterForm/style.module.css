@@ -1,0 +1,8 @@
+.confirmButton {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  margin: auto;
+  inset: auto 0 0 0;
+  width: 480px;
+}

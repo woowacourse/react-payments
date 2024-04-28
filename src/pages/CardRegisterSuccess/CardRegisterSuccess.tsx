@@ -25,7 +25,9 @@ function CardRegisterSuccess() {
         <div>{cardNumber}로 시작하는</div>
         <div>{cardCompany}가 등록되었어요.</div>
       </p>
+      <div className={styles.confirmButton}>
         <Button onClick={handleConfirmButtonClick}>확인</Button>
+      </div>
     </div>
   );
 }
