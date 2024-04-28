@@ -89,28 +89,44 @@ const CardFront = ({ backgroundColor, cardNumbers, expirationDate, userName }: C
   </Styled.CardFrontLayout>
 );
 
+const CardBack = ({ cardCVC }: { cardCVC: string[] }) => (
+  <Styled.CardBackLayout>
+    <Styled.CardCVCLine>
+      <Styled.CVCNumber>{cardCVC[0]}</Styled.CVCNumber>
+    </Styled.CardCVCLine>
+  </Styled.CardBackLayout>
+);
+
 const CardPreview = ({
   cardNumbers,
   expirationDate,
   userName,
   cardCompany,
-
+  cardCVC,
   focusedField,
 }: CardPreviewProps) => {
   const [backgroundColor, setBackgroundColor] = useState("#333333");
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
+
+    if (focusedField === "cardCVC") setIsFlipped(true);
+    if (focusedField === "cardPassword") setIsFlipped(false);
   }, [cardCompany, focusedField]);
 
   return (
     <>
-      <CardFront
-        backgroundColor={backgroundColor}
-        cardNumbers={cardNumbers}
-        expirationDate={expirationDate}
-        userName={userName}
-      />
+      {isFlipped ? (
+        <CardBack cardCVC={cardCVC} />
+      ) : (
+        <CardFront
+          backgroundColor={backgroundColor}
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
+          userName={userName}
+        />
+      )}
     </>
   );
 };
