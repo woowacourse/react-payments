@@ -1,19 +1,26 @@
 import styled from 'styled-components';
+import BasicButton from '../common/Button';
 
 interface CardSubmitButtonProps {
   isDisplay: boolean;
   onInputFormSubmit: () => void;
 }
 
-const CardSubmitButton = ({ isDisplay, onInputFormSubmit }: CardSubmitButtonProps) => {
+const CardSubmitButton = ({
+  isDisplay,
+  onInputFormSubmit,
+}: CardSubmitButtonProps) => {
   return (
-    <StyledButton type='submit' onClick={onInputFormSubmit} hidden={!isDisplay}>
-      확인
-    </StyledButton>
+    <StyledButton
+      content='확인'
+      onClick={onInputFormSubmit}
+      type='submit'
+      hidden={!isDisplay}
+    />
   );
 };
 
-const StyledButton = styled.button`
+const StyledButton = styled(BasicButton)`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -21,15 +28,7 @@ const StyledButton = styled.button`
   width: 375px;
   height: 52px;
 
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 12px;
-
-  background-color: #333333;
-  color: #f3f3f3;
-
   z-index: 1000;
-  cursor: pointer;
 `;
 
 export default CardSubmitButton;
