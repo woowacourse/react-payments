@@ -60,12 +60,9 @@ function CardRegisterForm() {
 
   const { password, passwordError, handlePasswordChange } = usePasswordInput(2);
 
-  /**
-   * 확인 버튼
-   */
   const errors = [
-    numberErrors,
-    periodErrors,
+    ...numberErrors,
+    ...Object.values(periodErrors),
     nameError,
     cardCompanyError,
     CVCNumberError,
