@@ -3,7 +3,7 @@ import { ICardInfo, IErrorMessage } from '../types/type';
 import useCardNumbers from './useCardNumbers';
 import useCardCompany from './useCardCompany';
 import useCardExpiration from './useCardExpiration';
-import CardExpiration from '../components/cardExpiration/CardExpiration';
+import useCardUserName from './useCardUserName';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -51,12 +51,18 @@ const useCardForm = () => {
     focusNextInput,
   });
 
+  const { handleCardUserName } = useCardUserName({
+    setCardInfo,
+    setErrorMessage,
+  });
+
   return {
     cardInfo,
     errorMessage,
     handleCardNumbers,
     handleCardCompany,
     handleCardExpiration,
+    handleCardUserName,
   };
 };
 
