@@ -30,7 +30,7 @@ const ExpirationDateInput = ({
       <InputContainer>
         {Array.from({ length: expirationDate.length }, (_, index) => (
           <Input
-            key={`input-${index}`}
+            key={index}
             id={`expiration-date-${index}`}
             type='text'
             placeholder={['MM', 'YY'][index]}

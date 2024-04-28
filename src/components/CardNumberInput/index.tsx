@@ -31,7 +31,7 @@ const CardNumberInput = ({
       <InputContainer>
         {Array.from({ length: cardNumbers.length }, (_, index) => (
           <Input
-            key={`input-${index}`}
+            key={index}
             id={`card-number-${index}`}
             type='text'
             placeholder='1234'
