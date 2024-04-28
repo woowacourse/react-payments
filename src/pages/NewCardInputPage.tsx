@@ -35,13 +35,14 @@ const NewCardInputPage = () => {
 
   const [isCardFront, setIsCardFront] = useState<boolean>(true);
 
-  const isFormComplete =
-    cardNumberState.isComplete &&
-    cardCompany !== '' &&
-    expirationDateState.isComplete &&
-    cardOwnerNameState.isComplete &&
-    cardCVCNumberState.isComplete &&
-    cardPasswordState.isComplete;
+  const isFormComplete = ![
+    cardNumberState.isComplete,
+    cardCompany !== '',
+    expirationDateState.isComplete,
+    cardOwnerNameState.isComplete,
+    cardCVCNumberState.isComplete,
+    cardPasswordState.isComplete,
+  ].some((state) => !state);
 
   const handleInputFormSubmit = () => {
     navigate(URL.submitPage, {
