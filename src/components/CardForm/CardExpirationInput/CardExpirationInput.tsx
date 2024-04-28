@@ -47,7 +47,7 @@ const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
       <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input
-          isValid={!month.isError}
+          isError={month.isError}
           type="text"
           ref={setRef(0)}
           placeholder="MM"
@@ -57,7 +57,7 @@ const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
           autoFocus
         />
         <Input
-          isValid={!year.isError}
+          isError={year.isError}
           type="text"
           ref={setRef(1)}
           placeholder="YY"

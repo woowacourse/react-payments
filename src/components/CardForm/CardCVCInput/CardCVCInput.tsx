@@ -29,7 +29,7 @@ const CardCVCInput = ({ cvc, handleIsCVCInput }: CardCVCInputProps) => {
       <TitleContainer title="CVC 번호를 입력해 주세요" />
       <InputField label="CVC" inputCount={CARD_CVC.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
-          isValid={!cvc.isError}
+          isError={cvc.isError}
           type="text"
           placeholder="123"
           value={cvc.value}

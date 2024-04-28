@@ -39,12 +39,12 @@ const CardNumbersInput = ({ cardNumbers }: CardNumbersInputProps) => {
           <Input
             key={index}
             ref={setRef(index)}
+            isError={cardNumbers.isErrorList[index]}
             type="text"
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
             value={cardNumbers.values[index]}
             onChange={handleCardNumberChange(index)}
-            isValid={!cardNumbers.isErrorList[index]}
             autoFocus={index === 0}
           />
         ))}

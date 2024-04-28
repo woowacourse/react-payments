@@ -22,7 +22,7 @@ const CardOwnerInput = ({ owner }: CardOwnerInputProps) => {
       <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
       <InputField label="소유자 이름" inputCount={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
-          isValid={!owner.isError}
+          isError={owner.isError}
           type="text"
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="STEVEN KING"

@@ -28,7 +28,7 @@ const CardPasswordInput = ({ password }: CardPasswordInputProps) => {
       <TitleContainer title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해 주세요." />
       <InputField label="비밀번호 앞 2자리" inputCount={CARD_PASSWORD.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
-          isValid={!password.isError}
+          isError={password.isError}
           type="password"
           placeholder="비밀번호를 입력하세요"
           value={password.value}
