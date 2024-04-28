@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import NewCardPage from './pages/newCardPage/NewCardPage';
-import CardRegistrationCompletePage from './pages/cardRegistrationCompletePage/CardRegistrationCompletePage';
+import NewCardPage from './pages/newCard/NewCardPage';
+import CardRegistrationCompletePage from './pages/cardRegistrationComplete/CardRegistrationCompletePage';
 import App from './App';
 
 const router = createBrowserRouter(
