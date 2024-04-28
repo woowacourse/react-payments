@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ICardInfo, IErrorMessage } from '../types/type';
+import useCardNumbers from './useCardNumbers';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -25,6 +26,16 @@ const useCardForm = () => {
       nextInput.focus();
     }
   };
+
+  const { handleCardNumbers } = useCardNumbers({
+    cardNumbers: cardInfo.cardNumbers,
+    errorMessageCardNumbers: errorMessage.cardNumbers,
+    setCardInfo,
+    setErrorMessage,
+    focusNextInput,
+  });
+
+  return { cardInfo, errorMessage, handleCardNumbers };
 };
 
 export default useCardForm;
