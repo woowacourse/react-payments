@@ -5,6 +5,19 @@ import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
+import styled from 'styled-components';
+
+const CompleteButton = styled.button`
+  padding: 4px 8px;
+  color: #fff;
+  background-color: #333333;
+
+  border-radius: 4px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 
 interface Props {
   name: UseInputReturn<HTMLInputElement>;
@@ -34,6 +47,9 @@ export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
           type="text"
           value={name.value.toUpperCase()}
         />
+        {name.value && (
+          <CompleteButton onClick={() => setNextContentDisplay(true)}>완료</CompleteButton>
+        )}
       </InputSection>
       <S.ErrorWrapper>
         <S.ErrorMessage>{name.isError && name.errorMessage}</S.ErrorMessage>
