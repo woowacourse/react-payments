@@ -9,7 +9,7 @@ import { CARD_NUMBER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardNumbersInputProps {
-  cardNumbers: InputsType;
+  cardNumbers: InputsType<string>;
 }
 
 const CardNumbersInput = ({ cardNumbers }: CardNumbersInputProps) => {

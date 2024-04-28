@@ -8,7 +8,7 @@ import { CARD_PASSWORD } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardPasswordInputProps {
-  password: InputType;
+  password: InputType<string>;
 }
 
 const CardPasswordInput = ({ password }: CardPasswordInputProps) => {

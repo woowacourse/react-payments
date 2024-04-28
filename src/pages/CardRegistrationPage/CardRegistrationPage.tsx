@@ -30,13 +30,13 @@ import * as S from './CardRegistrationPage.style';
 const CardRegistrationPage = () => {
   const [isCVCInput, setIsCVCInput] = useState(false);
 
-  const month = useInput(validateMonth);
-  const year = useInput(validateYear);
-  const owner = useInput(validateOwner);
-  const cvc = useInput(validateCVC);
-  const company = useInput(validateCompany);
-  const password = useInput(validatePassword);
-  const cardNumbers = useInputs(validateCardNumber, ['', '', '', '']);
+  const month = useInput<string>(validateMonth, '');
+  const year = useInput<string>(validateYear, '');
+  const owner = useInput<string>(validateOwner, '');
+  const cvc = useInput<string>(validateCVC, '');
+  const company = useInput<string>(validateCompany, '');
+  const password = useInput<string>(validatePassword, '');
+  const cardNumbers = useInputs<string>(validateCardNumber, ['', '', '', '']);
 
   const validationList = [
     isAllValid(cardNumbers.isValidList),

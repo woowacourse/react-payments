@@ -8,7 +8,7 @@ import { CARD_CVC } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardCVCInputProps {
-  cvc: InputType;
+  cvc: InputType<string>;
   handleIsCVCInput: (isCVCInput: boolean) => void;
 }
 

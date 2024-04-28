@@ -9,8 +9,8 @@ import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardExpirationInputProps {
-  month: InputType;
-  year: InputType;
+  month: InputType<string>;
+  year: InputType<string>;
 }
 
 const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {

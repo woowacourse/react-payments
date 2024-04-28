@@ -1,18 +1,18 @@
 import { useState } from 'react';
 
-export interface InputsType {
-  values: string[];
+export interface InputsType<T> {
+  values: T[];
   isValidList: boolean[];
   isErrorList: boolean[];
-  handleValues: (newValues: string[], index: number) => void;
+  handleValues: (newValues: T[], index: number) => void;
 }
 
-const useInputs = (validateFunction: (value: string) => boolean, defaultValue: string[]) => {
+const useInputs = <T>(validateFunction: (value: T) => boolean, defaultValue: T[]): InputsType<T> => {
   const [values, setValues] = useState(defaultValue);
   const [isValidList, setIsValidList] = useState(defaultValue.map(() => false));
   const [isClickedList, setIsClickedList] = useState(defaultValue.map(() => false));
 
-  const handleValues = (newValues: string[], index: number) => {
+  const handleValues = (newValues: T[], index: number) => {
     if (!isClickedList[index]) {
       const newIsClickedList = [...isClickedList];
       newIsClickedList[index] = true;

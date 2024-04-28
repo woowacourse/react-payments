@@ -7,7 +7,7 @@ import { CARD_OWNER } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardOwnerInputProps {
-  owner: InputType;
+  owner: InputType<string>;
 }
 
 const CardOwnerInput = ({ owner }: CardOwnerInputProps) => {

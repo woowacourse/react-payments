@@ -1,18 +1,18 @@
 import { useState } from 'react';
 
-export interface InputType {
-  value: string;
+export interface InputType<T> {
+  value: T;
   isValid: boolean;
   isError: boolean;
-  handleValue: (newValue: string) => void;
+  handleValue: (newValue: T) => void;
 }
 
-const useInput = (validateFunction: (value: string) => boolean, defaultValue: string = '') => {
-  const [value, setValue] = useState(defaultValue);
+const useInput = <T>(validateFunction: (value: T) => boolean, defaultValue: T): InputType<T> => {
+  const [value, setValue] = useState<T>(defaultValue);
   const [isValid, setIsValid] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleValue = (newValue: string) => {
+  const handleValue = (newValue: T) => {
     if (!isClicked) setIsClicked(true);
 
     setIsValid(validateFunction(newValue));

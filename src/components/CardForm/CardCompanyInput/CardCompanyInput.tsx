@@ -5,7 +5,7 @@ import type { InputType } from '../../../hooks/useInput';
 import { CARD_COMPANY } from '../../../constants/Condition';
 
 interface CardCompanyInputProps {
-  company: InputType;
+  company: InputType<string>;
 }
 
 const CardCompanyInput = ({ company }: CardCompanyInputProps) => {
