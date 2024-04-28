@@ -1,7 +1,7 @@
 import { useRef, useState, RefObject, useEffect } from 'react';
 import validate from '../utils/validate';
 import { MAX_LENGTH } from '../constants/cardSection';
-import { InitialCardNumberState } from 'types';
+import { InitialCardNumberState } from '@/types';
 
 type UseCardNumberHookProps = {
   initialCardNumberStates: InitialCardNumberState[];

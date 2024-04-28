@@ -1,5 +1,5 @@
 import { Children, useState, isValidElement, PropsWithChildren } from 'react';
-import { RegisterComponentProps, RegisterStep } from 'types';
+import { RegisterComponentProps, RegisterStep } from '@/types';
 
 interface StepProps {
   name: string;
