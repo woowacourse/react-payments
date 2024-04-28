@@ -1,4 +1,4 @@
-import InputSection from './InputSection';
+import InputSection from '../composables/InputSection';
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
@@ -6,7 +6,7 @@ import { MAX_LENGTH, CARD_CVC } from '../../constants/cardSection';
 import { RegisterFieldProps } from '@/types';
 import { forwardRef } from 'react';
 
-const RegisterCVC = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
+const CardCVCInputSection = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
   const { value, onChange, isError, onKeyDown, onBlur } = props;
 
   return (
@@ -33,4 +33,4 @@ const RegisterCVC = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref
   );
 });
 
-export default RegisterCVC;
+export default CardCVCInputSection;

@@ -1,13 +1,17 @@
 import * as S from '../../app.style';
 import Input from '../composables/Input';
 import Label from '../composables/Label';
-import InputSection from './InputSection';
+import InputSection from '../composables/InputSection';
 import { MAX_LENGTH, OWNER_NAME } from '@/constants/cardSection';
 import { RegisterFieldProps } from '@/types';
-import { forwardRef } from 'react';
+import { forwardRef, useCallback } from 'react';
 
-const RegisterName = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
+const CardOwnerNameInputSection = forwardRef<HTMLInputElement, RegisterFieldProps>((props, ref) => {
   const { onChange, value, onKeyDown, isError, onBlur } = props;
+
+  const nameRef = useCallback((node: HTMLInputElement | null) => {
+    node?.focus();
+  }, []);
 
   return (
     <S.Wrapper>
@@ -20,7 +24,7 @@ const RegisterName = forwardRef<HTMLInputElement, RegisterFieldProps>((props, re
           isError={isError}
           placeholder="JOHN DOE"
           type="text"
-          ref={ref}
+          ref={nameRef}
           value={value}
           onKeyDown={onKeyDown}
           onBlur={onBlur}
@@ -33,4 +37,4 @@ const RegisterName = forwardRef<HTMLInputElement, RegisterFieldProps>((props, re
   );
 });
 
-export default RegisterName;
+export default CardOwnerNameInputSection;

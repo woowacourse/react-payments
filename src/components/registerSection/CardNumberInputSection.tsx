@@ -1,5 +1,5 @@
 import * as S from '../../app.style';
-import InputSection from './InputSection';
+import InputSection from '../composables/InputSection';
 import { InitialCardNumberState } from '@/types';
 import { Fragment, RefObject } from 'react';
 import Label from '../composables/Label';
@@ -12,7 +12,7 @@ type RegisterCardNumberProps = {
   refs: RefObject<HTMLInputElement>[];
 };
 
-const RegisterCardNumber = ({
+const CardNumberInputSection = ({
   cardNumbers,
   cardNumbersChangeHandler,
   refs,
@@ -52,4 +52,4 @@ const RegisterCardNumber = ({
   );
 };
 
-export default RegisterCardNumber;
+export default CardNumberInputSection;

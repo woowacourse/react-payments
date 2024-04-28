@@ -20,7 +20,7 @@ type RegisterExpirationDateProps = {
   handleYearBlur: React.FocusEventHandler<HTMLInputElement>;
 };
 
-const RegisterExpirationDate = forwardRef<HTMLInputElement, RegisterExpirationDateProps>(
+const CardExpirationDateInputSection = forwardRef<HTMLInputElement, RegisterExpirationDateProps>(
   (props) => {
     const {
       month,
@@ -85,4 +85,4 @@ const RegisterExpirationDate = forwardRef<HTMLInputElement, RegisterExpirationDa
   },
 );
 
-export default RegisterExpirationDate;
+export default CardExpirationDateInputSection;

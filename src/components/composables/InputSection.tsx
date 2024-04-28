@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import * as S from './inputSection.style';
+import * as S from '../registerSection/inputSection.style';
 
 type InfoProps = {
   title: string;
