@@ -1,4 +1,4 @@
 export const REGEX = {
-  CAPITAL_LETTERS: /^[a-zA-Z\s]*$/,
+  CAPITAL_LETTERS: /^[A-Z\s]*$/,
   NUMBERS: /^\d+$/,
 };

@@ -10,9 +10,10 @@ import useInput from "@/hooks/useInput";
 import OwnerNameField from "./components/OwnerNameField/OwnerNameField";
 import CVCField from "./components/CVCField/CVCField";
 import PasswordField from "./components/PasswordField/PasswordField";
-import CardTypeSelectField from "./components/CardTypeSelectField/CardTypeSelectField";
+import CardBrandSelectField from "./components/CardBrandSelectField/CardBrandSelectField";
 import { useEffect } from "react";
-import { CardType } from "@/constants/cardType";
+import { REGISTER_STEP } from "@/constants/condition";
+import { CardBrandType } from "@/constants/cardBrandType";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
@@ -22,9 +23,10 @@ interface Props {
   ownerNameState: ReturnType<typeof useInput<string>>;
   CVCNumbersState: ReturnType<typeof useInput<string>>;
   passwordState: ReturnType<typeof useInput<string>>;
-  cardTypeState: ReturnType<typeof useInput<CardType | null>>;
+  cardBrandState: ReturnType<typeof useInput<CardBrandType | null>>;
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
   stepPassedArr: boolean[];
 }
 
@@ -34,26 +36,39 @@ const CardRegisterForm = ({
   ownerNameState,
   CVCNumbersState,
   passwordState,
-  cardTypeState,
+  cardBrandState,
   stepPassedArr,
   step,
   setStep,
+  setIsFront,
 }: Props) => {
   useEffect(() => {
     if (stepPassedArr[step - 1] && step <= stepPassedArr.length) {
       setStep((prev) => prev + 1);
     }
+
+    if (step !== REGISTER_STEP.CVC) {
+      setIsFront(true);
+    }
   }, [step, ...stepPassedArr]);
 
   return (
     <S.CardFormWrapper>
-      {step >= 6 && <PasswordField passwordState={passwordState} />}
-      {step >= 5 && <CVCField CVCNumbersState={CVCNumbersState} />}
-      {step >= 4 && <OwnerNameField ownerNameState={ownerNameState} />}
-      {step >= 3 && (
+      {step >= REGISTER_STEP.PASSWORD && (
+        <PasswordField passwordState={passwordState} />
+      )}
+      {step >= REGISTER_STEP.CVC && (
+        <CVCField CVCNumbersState={CVCNumbersState} setIsFront={setIsFront} />
+      )}
+      {step >= REGISTER_STEP.OWNER_NAME && (
+        <OwnerNameField ownerNameState={ownerNameState} />
+      )}
+      {step >= REGISTER_STEP.EXPIRATION_PERIOD && (
         <ExpirationPeriodField expirationPeriodState={expirationPeriodState} />
       )}
-      {step >= 2 && <CardTypeSelectField cardTypeState={cardTypeState} />}
+      {step >= REGISTER_STEP.CARD_BRAND && (
+        <CardBrandSelectField cardBrandState={cardBrandState} />
+      )}
       <CardNumbersField cardNumbersState={cardNumbersState} />
     </S.CardFormWrapper>
   );

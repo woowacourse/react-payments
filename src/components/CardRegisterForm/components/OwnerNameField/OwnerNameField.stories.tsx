@@ -4,7 +4,7 @@ import useInput from "@/hooks/useInput";
 import {
   validateDoubleSpace,
   validateEnterRequired,
-  validateIsEnglish,
+  validateIsCapital,
 } from "@/utils/validation";
 
 const meta = {
@@ -18,7 +18,7 @@ const OwnerNameFieldWithHook = () => {
   const ownerNameState = useInput({
     initialValue: "",
     validates: [
-      (value: string) => validateIsEnglish(value),
+      (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],

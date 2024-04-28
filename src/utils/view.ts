@@ -8,12 +8,6 @@ export const sliceOverMaxLength = (
     e.target.value = e.target.value.slice(0, maxLength);
 };
 
-export const changeValueToUpperCase = (
-  e: React.ChangeEvent<HTMLInputElement>
-) => {
-  e.target.value = e.target.value.toUpperCase();
-};
-
 export const sliceInvalidValueWithRegex = (
   e: React.ChangeEvent<HTMLInputElement>,
   regex: RegExp

@@ -5,10 +5,10 @@ import { theme } from "@/style/theme";
 import { CardNumberInputType } from "../CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { ExpirationPeriodInputType } from "../CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import { checkCardBrand } from "@/utils/validation";
-import { CardType, CardTypeColor } from "@/constants/cardType";
+import { CardBrandType, CardBrandTypeColor } from "@/constants/cardBrandType";
 
 interface Props {
-  cardType: CardType | null;
+  cardBrandType: CardBrandType | null;
   cardNumbers: CardNumberInputType;
   expirationDate: ExpirationPeriodInputType;
   ownerName: string | null;
@@ -18,10 +18,12 @@ const CardPreviewFront = ({
   expirationDate,
   ownerName,
   cardNumbers,
-  cardType,
+  cardBrandType,
 }: Props) => {
   const cardTypeLogo = checkCardBrand(cardNumbers.cardNumbers1);
-  const cardTypeColor = cardType ? CardTypeColor[cardType] : null;
+  const cardTypeColor = cardBrandType
+    ? CardBrandTypeColor[cardBrandType]
+    : null;
 
   return (
     <S.CardInner $cardTypeColor={cardTypeColor} $isFront={true}>
@@ -45,7 +47,7 @@ const CardPreviewFront = ({
             const isMasked = index >= 2;
             return isMasked ? (
               <S.Input
-                $isWhite={cardType !== "카카오뱅크"}
+                $isWhite={cardBrandType !== "카카오뱅크"}
                 key={index}
                 type="password"
                 value={number}
@@ -53,7 +55,7 @@ const CardPreviewFront = ({
               />
             ) : (
               <S.Input
-                $isWhite={cardType !== "카카오뱅크"}
+                $isWhite={cardBrandType !== "카카오뱅크"}
                 key={index}
                 type="text"
                 value={number}
@@ -63,7 +65,7 @@ const CardPreviewFront = ({
           })}
         </S.CardNumbers>
         <S.Input
-          $isWhite={cardType !== "카카오뱅크"}
+          $isWhite={cardBrandType !== "카카오뱅크"}
           type="text"
           value={
             expirationDate.expirationMonth &&
@@ -75,7 +77,7 @@ const CardPreviewFront = ({
           readOnly
         ></S.Input>
         <S.Input
-          $isWhite={cardType !== "카카오뱅크"}
+          $isWhite={cardBrandType !== "카카오뱅크"}
           type="text"
           value={ownerName ? ownerName : ""}
           readOnly

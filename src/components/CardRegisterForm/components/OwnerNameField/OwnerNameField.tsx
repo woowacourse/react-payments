@@ -7,10 +7,7 @@ import { ChangeEvent } from "react";
 import { MAX_LENGTH } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { ErrorStatus } from "@/utils/validation";
-import {
-  changeValueToUpperCase,
-  sliceInvalidValueWithRegex,
-} from "@/utils/view";
+import { sliceInvalidValueWithRegex } from "@/utils/view";
 import { REGEX } from "@/constants/regex";
 
 interface Props {
@@ -48,7 +45,6 @@ const OwnerNameField = ({ ownerNameState }: Props) => {
           maxLength={MAX_LENGTH.OWNER_NAME}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             onChange(e);
-            changeValueToUpperCase(e);
             sliceInvalidValueWithRegex(e, REGEX.CAPITAL_LETTERS);
           }}
           onKeyDown={onEnterCompleted}

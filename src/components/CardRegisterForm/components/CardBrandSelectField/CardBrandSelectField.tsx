@@ -4,16 +4,18 @@ import { MESSAGE } from "@/constants/message";
 import InputField from "@/components/_common/InputField/InputField";
 import SelectBox from "@/components/_common/SelectBox/SelectBox";
 import useInput from "@/hooks/useInput";
-import { CardType, CardTypeColor } from "@/constants/cardType";
+import { CardBrandType, CardBrandTypeColor } from "@/constants/cardBrandType";
 
 interface Props {
-  cardTypeState: ReturnType<typeof useInput<CardType | null>>;
+  cardBrandState: ReturnType<typeof useInput<CardBrandType | null>>;
 }
 
-const CardTypeSelectField = ({ cardTypeState }: Props) => {
-  const { value, setValue } = cardTypeState;
+const CardBrandSelectField = ({ cardBrandState }: Props) => {
+  const { value, setValue } = cardBrandState;
 
-  const CardTypeNames = [...(Object.keys(CardTypeColor) as CardType[])];
+  const CardTypeNames = [
+    ...(Object.keys(CardBrandTypeColor) as CardBrandType[]),
+  ];
 
   return (
     <S.InputFieldWithInfo>
@@ -22,7 +24,7 @@ const CardTypeSelectField = ({ cardTypeState }: Props) => {
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_TYPE}
       />
       <InputField errorMessages={[]}>
-        <SelectBox<CardType>
+        <SelectBox<CardBrandType>
           optionArr={CardTypeNames}
           value={value}
           setValue={setValue}
@@ -32,4 +34,4 @@ const CardTypeSelectField = ({ cardTypeState }: Props) => {
   );
 };
 
-export default CardTypeSelectField;
+export default CardBrandSelectField;

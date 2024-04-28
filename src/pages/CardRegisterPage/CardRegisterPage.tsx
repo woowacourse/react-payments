@@ -14,26 +14,27 @@ const CardRegisterPage = () => {
   const {
     cardNumbersState,
     expirationPeriodState,
-    cardTypeState,
+    cardBrandState,
     CVCNumbersState,
     passwordState,
     ownerNameState,
   } = cardRegister;
 
   const [step, setStep] = useState<number>(1);
+  const [isFront, setIsFront] = useState<boolean>(true);
 
   const onSubmitCardInfo = () => {
     navigate(ROUTE_URL.REGISTER_CONFIRM, {
       state: {
         startNumbers: cardNumbersState.values.cardNumbers1,
-        cardType: cardTypeState.value,
+        cardType: cardBrandState.value,
       },
     });
   };
 
   const stepPassedArr = [
     !cardNumbersState.isError,
-    !!cardTypeState.value?.length,
+    !!cardBrandState.value?.length,
     !expirationPeriodState.isError,
     !ownerNameState.isError,
     !CVCNumbersState.isError,
@@ -45,18 +46,20 @@ const CardRegisterPage = () => {
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CardPreview
-          cardType={cardTypeState.value}
+          cardBrandType={cardBrandState.value}
           cardNumbers={cardNumbersState.values}
           expirationDate={expirationPeriodState.values}
           ownerName={ownerNameState.value}
           CVCNumbers={CVCNumbersState.value}
-          isFrontShow={step !== 5}
+          isFront={isFront}
+          setIsFront={setIsFront}
         />
         <CardRegisterForm
           {...cardRegister}
           step={step}
           setStep={setStep}
           stepPassedArr={stepPassedArr}
+          setIsFront={setIsFront}
         />
       </S.FlexWrapper>
       {step === 7 && allPassed && (

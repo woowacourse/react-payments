@@ -10,9 +10,10 @@ import { sliceOverMaxLength } from "@/utils/view";
 
 interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
+  setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CVCField = ({ CVCNumbersState }: Props) => {
+const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
   const { onChange, error, isError } = CVCNumbersState;
 
   return (
@@ -26,6 +27,7 @@ const CVCField = ({ CVCNumbersState }: Props) => {
           name={"cvc"}
           placeholder={MESSAGE.PLACEHOLDER.CVC}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setIsFront(false);
             sliceOverMaxLength(e, VALID_LENGTH.CVC_NUMBERS);
             onChange(e);
           }}

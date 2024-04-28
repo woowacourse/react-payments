@@ -1,4 +1,4 @@
-export const CardTypeColor = {
+export const CardBrandTypeColor = {
   BC카드: "#F04651",
   신한카드: "#0046FF",
   카카오뱅크: "#FFE600",
@@ -9,4 +9,4 @@ export const CardTypeColor = {
   국민카드: "#6A6056",
 } as const;
 
-export type CardType = keyof typeof CardTypeColor;
+export type CardBrandType = keyof typeof CardBrandTypeColor;

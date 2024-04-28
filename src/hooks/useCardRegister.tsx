@@ -4,14 +4,14 @@ import { VALID_LENGTH } from "@/constants/condition";
 import {
   validateDoubleSpace,
   validateEnterRequired,
-  validateIsEnglish,
+  validateIsCapital,
   validateIsNumber,
   validateIsValidLength,
   validateMonth,
 } from "@/utils/validation";
 import { ExpirationPeriodInputType } from "@/components/CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import useInput from "./useInput";
-import { CardType } from "@/constants/cardType";
+import { CardBrandType } from "@/constants/cardBrandType";
 
 const useCardRegister = () => {
   const cardNumbersState = useInputs<CardNumberInputType>({
@@ -41,13 +41,13 @@ const useCardRegister = () => {
   const ownerNameState = useInput({
     initialValue: "",
     validates: [
-      (value: string) => validateIsEnglish(value),
+      (value: string) => validateIsCapital(value),
       (value: string) => validateDoubleSpace(value),
       () => validateEnterRequired(),
     ],
   });
 
-  const cardTypeState = useInput<CardType | null>({
+  const cardBrandState = useInput<CardBrandType | null>({
     initialValue: null,
   });
 
@@ -70,7 +70,7 @@ const useCardRegister = () => {
   return {
     cardNumbersState,
     expirationPeriodState,
-    cardTypeState,
+    cardBrandState,
     CVCNumbersState,
     passwordState,
     ownerNameState,

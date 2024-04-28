@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import CardPreviewFront from "./CardPreviewFront";
 import CardPreviewBack from "./CardPreviewBack";
-import { CardType } from "@/constants/cardType";
 import { CardNumberInputType } from "../CardRegisterForm/components/CardNumbersField/CardNumbersField";
 import { ExpirationPeriodInputType } from "../CardRegisterForm/components/ExpirationPeriodField/ExpirationPeriodField";
 import S from "./style";
+import { CardBrandType } from "@/constants/cardBrandType";
 
 interface FrontProps {
-  cardType: CardType | null;
+  cardBrandType: CardBrandType | null;
   cardNumbers: CardNumberInputType;
   expirationDate: ExpirationPeriodInputType;
   ownerName: string | null;
   CVCNumbers: string;
-  isFrontShow: boolean;
+  isFront: boolean;
+  setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface BackProps {
@@ -23,25 +23,20 @@ const CardPreview = ({
   expirationDate,
   ownerName,
   cardNumbers,
-  cardType,
+  cardBrandType,
   CVCNumbers,
-  isFrontShow,
+  isFront,
+  setIsFront,
 }: FrontProps & BackProps) => {
-  const [isFront, setIsFront] = useState(isFrontShow);
-
   const onFlipCard = () => {
     setIsFront((prev) => !prev);
   };
-
-  useEffect(() => {
-    setIsFront(isFrontShow);
-  }, [isFrontShow]);
 
   return (
     <S.CardWrapper>
       <S.CardOuter $isFront={isFront} onClick={onFlipCard}>
         <CardPreviewFront
-          cardType={cardType}
+          cardBrandType={cardBrandType}
           expirationDate={expirationDate}
           ownerName={ownerName}
           cardNumbers={cardNumbers}

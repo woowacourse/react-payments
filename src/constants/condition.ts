@@ -23,3 +23,12 @@ export const VALID_LENGTH = {
   PASSWORD: 2,
   CVC_NUMBERS: 3,
 };
+
+export const REGISTER_STEP = {
+  CARD_NUMBERS: 1,
+  CARD_BRAND: 2,
+  EXPIRATION_PERIOD: 3,
+  OWNER_NAME: 4,
+  CVC: 5,
+  PASSWORD: 6,
+};

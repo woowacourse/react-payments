@@ -69,7 +69,7 @@ export const validateIsNumber = (value: string) => {
   return { isValid: true };
 };
 
-export const validateIsEnglish = (name: string) => {
+export const validateIsCapital = (name: string) => {
   const alphabetRegex = REGEX.CAPITAL_LETTERS;
   if (!alphabetRegex.test(name)) {
     return { type: ErrorStatus.NAME_SHOULD_BE_CAPITAL, isValid: false };
