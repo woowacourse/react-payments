@@ -52,7 +52,7 @@ export default function CardOwnerInput({ name, setNextContentDisplay }: Props) {
         )}
       </InputSection>
       <S.ErrorWrapper>
-        <S.ErrorMessage>{name.isError && name.errorMessage}</S.ErrorMessage>
+        {name.isError && <S.ErrorMessage>{name.errorMessage}</S.ErrorMessage>}
       </S.ErrorWrapper>
     </S.Wrapper>
   );

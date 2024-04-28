@@ -32,7 +32,7 @@ export default function CardBrandSelect({ cardCompany, setNextContentDisplay }: 
         />
       </InputSection>
       <S.ErrorWrapper>
-        <S.ErrorMessage>{cardCompany.isError && cardCompany.errorMessage}</S.ErrorMessage>
+        {cardCompany.isError && <S.ErrorMessage>{cardCompany.errorMessage}</S.ErrorMessage>}
       </S.ErrorWrapper>
     </S.Wrapper>
   );

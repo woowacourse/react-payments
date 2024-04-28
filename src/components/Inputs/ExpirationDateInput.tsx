@@ -64,11 +64,14 @@ export default function ExpirationDateInput({ month, year, setNextContentDisplay
         />
       </InputSection>
       <S.ErrorWrapper>
-        <S.ErrorMessage>
-          {month.isError && year.isError && month.errorMessage}
-          {!month.isError && year.isError && year.errorMessage}
-          {month.isError && !year.isError && month.errorMessage}
-        </S.ErrorMessage>
+        {month.isError ||
+          (year.isError && (
+            <S.ErrorMessage>
+              {month.isError && year.isError && month.errorMessage}
+              {!month.isError && year.isError && year.errorMessage}
+              {month.isError && !year.isError && month.errorMessage}
+            </S.ErrorMessage>
+          ))}
       </S.ErrorWrapper>
     </S.Wrapper>
   );

@@ -23,6 +23,8 @@ export default function CardNumbersInput({ cardNumbersArray, setNextContentDispl
     }
   };
 
+  const error = cardNumbersArray.find(({ isError }) => isError)?.errorMessage;
+
   return (
     <S.Wrapper>
       <InputSection
@@ -59,11 +61,7 @@ export default function CardNumbersInput({ cardNumbersArray, setNextContentDispl
           );
         })}
       </InputSection>
-      <S.ErrorWrapper>
-        <S.ErrorMessage>
-          {cardNumbersArray.find(({ isError }) => isError)?.errorMessage}
-        </S.ErrorMessage>
-      </S.ErrorWrapper>
+      <S.ErrorWrapper>{error && <S.ErrorMessage>{error}</S.ErrorMessage>}</S.ErrorWrapper>
     </S.Wrapper>
   );
 }

@@ -45,7 +45,7 @@ export default function CvcNumberInput({ cvc, setNextContentDisplay, setIsFlip }
         />
       </InputSection>
       <S.ErrorWrapper>
-        <S.ErrorMessage>{cvc.isError && cvc.errorMessage}</S.ErrorMessage>
+        {cvc.isError && <S.ErrorMessage>{cvc.errorMessage}</S.ErrorMessage>}
       </S.ErrorWrapper>
     </S.Wrapper>
   );

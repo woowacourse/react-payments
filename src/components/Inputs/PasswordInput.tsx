@@ -28,7 +28,7 @@ export default function PasswordInput({ password }: Props) {
         />
       </InputSection>
       <S.ErrorWrapper>
-        <S.ErrorMessage>{password.isError && password.errorMessage}</S.ErrorMessage>
+        {password.isError && <S.ErrorMessage>{password.errorMessage}</S.ErrorMessage>}
       </S.ErrorWrapper>
     </S.Wrapper>
   );
