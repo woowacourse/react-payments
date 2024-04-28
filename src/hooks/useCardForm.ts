@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ICardInfo, IErrorMessage } from '../types/type';
 import useCardNumbers from './useCardNumbers';
 import useCardCompany from './useCardCompany';
+import useCardExpiration from './useCardExpiration';
+import CardExpiration from '../components/cardExpiration/CardExpiration';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -41,7 +43,21 @@ const useCardForm = () => {
     setErrorMessage,
   });
 
-  return { cardInfo, errorMessage, handleCardNumbers, handleCardCompany };
+  const { handleCardExpiration } = useCardExpiration({
+    cardExpiration: cardInfo.cardExpiration,
+    errorMessageCardExpiration: errorMessage.cardExpiration,
+    setCardInfo,
+    setErrorMessage,
+    focusNextInput,
+  });
+
+  return {
+    cardInfo,
+    errorMessage,
+    handleCardNumbers,
+    handleCardCompany,
+    handleCardExpiration,
+  };
 };
 
 export default useCardForm;
