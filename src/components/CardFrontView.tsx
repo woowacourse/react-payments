@@ -7,6 +7,7 @@ import { SECRET_NUMBER, SLASH } from '../constants/system';
 import { isMasterCard, isVisaCard } from '../utils/checkCardType';
 import { CardContainer } from '../style/container.style';
 import { formatDate } from '../utils/formatDate';
+import { useMemo } from 'react';
 
 interface Props {
   cardInfo: Card;
@@ -23,14 +24,17 @@ export default function CardFrontView({ cardInfo }: Props) {
   };
 
   const getCardImage = (cardNumber: string) => {
-    if (cardNumber.length < 2) return;
-
     const cardType = getCardType(cardNumber);
+
     if (cardType === 'visa') return Visa;
     if (cardType === 'master') return Master;
   };
 
-  const cardImgSrc = getCardImage(cardNumbers.cardNumber1);
+  const cardImgSrc = useMemo(() => {
+    if (cardNumbers.cardNumber1.length >= 2) {
+      return getCardImage(cardNumbers.cardNumber1);
+    }
+  }, [cardNumbers.cardNumber1]);
 
   return (
     <CardFrontContainer color={cardCompany.color}>
