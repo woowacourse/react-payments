@@ -3,7 +3,7 @@ import CheckImage from "../assets/Check.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Styled = {
-  CardRegistrationCompletePageWrapper: styled.section`
+  CardRegistrationCompletePageLayout: styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,7 +60,7 @@ const CardRegistrationCompletePage = () => {
   const cardCompany = location.state.cardCompany;
 
   return (
-    <Styled.CardRegistrationCompletePageWrapper>
+    <Styled.CardRegistrationCompletePageLayout>
       <Styled.CardRegistrationCompleteDisplay>
         <Styled.CheckImage />
       </Styled.CardRegistrationCompleteDisplay>
@@ -75,7 +75,7 @@ const CardRegistrationCompletePage = () => {
       >
         확인
       </Styled.RegistrationCompleteButton>
-    </Styled.CardRegistrationCompletePageWrapper>
+    </Styled.CardRegistrationCompletePageLayout>
   );
 };
 

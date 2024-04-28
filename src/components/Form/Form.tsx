@@ -22,7 +22,7 @@ export interface FormProps {
   setCardCompany?: React.Dispatch<React.SetStateAction<string[]>>;
   setCardCVC?: React.Dispatch<React.SetStateAction<string[]>>;
   setCardPassword?: React.Dispatch<React.SetStateAction<string[]>>;
-  setFocusedField: (field: string | null) => void;
+  setFocusedField: (field: string) => void;
 }
 
 const Styled = {
