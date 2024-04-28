@@ -5,6 +5,7 @@ import useCardCompany from './useCardCompany';
 import useCardExpiration from './useCardExpiration';
 import useCardUserName from './useCardUserName';
 import useCardCVC from './useCardCVC';
+import useCardPassword from './useCardPassword';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -62,6 +63,11 @@ const useCardForm = () => {
     setErrorMessage,
   });
 
+  const { handleCardPassword } = useCardPassword({
+    setCardInfo,
+    setErrorMessage,
+  });
+
   return {
     cardInfo,
     errorMessage,
@@ -70,6 +76,7 @@ const useCardForm = () => {
     handleCardExpiration,
     handleCardUserName,
     handleCardCVC,
+    handleCardPassword,
   };
 };
 
