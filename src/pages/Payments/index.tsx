@@ -13,7 +13,7 @@ import { useState } from "react";
 import InputCVCNumber from "../../components/input/InputCVCNumber";
 import CreditCardBack from "../../components/creditCard/CreditCardBack";
 import InputCardPassword from "../../components/input/InputCardPassword";
-import Button from "../../components/Button";
+import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
 
 interface Owner {
