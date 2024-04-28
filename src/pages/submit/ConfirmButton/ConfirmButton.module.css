@@ -9,4 +9,5 @@
   line-height: 21.72px;
   color: var(--submit-confirm-button-text);
   text-align: center;
+  cursor: pointer;
 }
