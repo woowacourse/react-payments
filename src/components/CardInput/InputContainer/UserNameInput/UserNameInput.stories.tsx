@@ -6,9 +6,7 @@ const meta: Meta<typeof UserNameInput> = {
   title: 'CardInput Container',
   component: UserNameInput,
   args: {
-    userName: '',
     nameError: false,
-    onNameChange: () => {},
   },
 };
 
