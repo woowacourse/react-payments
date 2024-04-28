@@ -1,5 +1,5 @@
 import { isValidExpirationDate } from '@domain/creditCard/expiration';
-import { isContainsNonNumeric } from '@utils/number';
+import { isContainsNonNumeric } from '@utils/number/number';
 import { useState } from 'react';
 
 export const initialExpiration = { month: '', year: '' };

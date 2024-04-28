@@ -1,4 +1,4 @@
-import { isContainsNonNumeric } from '@utils/number';
+import { isContainsNonNumeric } from '@utils/number/number';
 import { useState } from 'react';
 
 const useChangeCardPassword = () => {
