@@ -2,6 +2,12 @@ import { BlockedInputError, NonBlockedInputError } from "../errors/InputError";
 
 import { ERROR_MESSAGE } from "../constants/message";
 
+export const validateNotBlank = (string: string) => {
+  if (string.length === 0) {
+    throw new NonBlockedInputError("반드시 입력해주세요");
+  }
+};
+
 export const validateOnlyDigit = (string: string) => {
   if (!/^[0-9]*$/.test(string)) {
     throw new BlockedInputError(ERROR_MESSAGE.notDigit);
