@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const useInput = <T extends object>(initialValue?: T) => {
-  const [inputValue, setInputValue] = useState<T>(initialValue || ({} as T));
+const useInput = <T extends object>(initialValue: T) => {
+  const [inputValue, setInputValue] = useState<T>(initialValue);
 
   const handleChange = (name: string, value: string) => {
     setInputValue((prevState) => ({
