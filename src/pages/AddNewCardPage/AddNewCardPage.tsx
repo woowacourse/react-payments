@@ -20,38 +20,23 @@ import useShowCase from '../../hooks/useShowCase';
 
 const AddNewCardPage = () => {
   const cardNumbers = useCardNumbers();
+  const cardCompany = useDropdown<CardCompany>();
   const expirationDate = useExpirationDate();
   const ownerName = useOwnerName();
-  const {
-    value: CVCNumbers,
-    setValue: setCVCNumbers,
-    errorMessage: CVCNumbersErrorMessage,
-    isValid: isValidCVCNumbers,
-  } = useNumberInput(3);
-  const {
-    value: password,
-    setValue: setPassword,
-    errorMessage: passwordErrorMessage,
-    isValid: isValidPassword,
-  } = useNumberInput(2);
-  const {
-    selected: cardCompany,
-    handleSelect: handleSelectCardCompany,
-    errorMessage: cardCompanyErrorMessage,
-  } = useDropdown<CardCompany>();
+  const CVCNumbers = useNumberInput(3);
+  const password = useNumberInput(2);
 
   const isValidList = {
     cardNumbers: cardNumbers.isValid,
     cardCompany: cardCompany !== null,
     expirationDate: expirationDate.isValid,
     ownerName: ownerName.isValid,
-    CVCNumbers: isValidCVCNumbers,
-    password: isValidPassword,
+    CVCNumbers: CVCNumbers.isValid,
+    password: password.isValid,
   };
-
   const showOrder = ['cardNumbers', 'cardCompany', 'expirationDate', 'ownerName', 'CVCNumbers', 'password'];
-
   const { showCase } = useShowCase(showOrder, isValidList);
+
   const navigate = useNavigate();
   const handleSubmit = () => {
     navigate(`/complete-add-new-card`, {
@@ -68,16 +53,16 @@ const AddNewCardPage = () => {
         cardNumbers={cardNumbers.value}
         expirationDate={expirationDate.value}
         ownerName={ownerName.value}
-        cardCompany={cardCompany}
-        CVCNumbers={CVCNumbers}
+        cardCompany={cardCompany.selected}
+        CVCNumbers={CVCNumbers.value}
       />
       {showCase.password && (
         <ShelfSection>
           <ShelfHeader title='비밀번호를 입력해 주세요' description='앞의 2자리를 입력해주세요' />
           <CardPasswordInputField
-            password={password}
-            handlePassword={setPassword}
-            errorMessage={passwordErrorMessage}
+            password={password.value}
+            handlePassword={password.setValue}
+            errorMessage={password.errorMessage}
           />
         </ShelfSection>
       )}
@@ -85,9 +70,9 @@ const AddNewCardPage = () => {
         <ShelfSection>
           <ShelfHeader title='CVC 번호를 입력해 주세요' />
           <CardCVCNumberInputField
-            CVCNumber={CVCNumbers}
-            handleCVCNumber={setCVCNumbers}
-            errorMessage={CVCNumbersErrorMessage}
+            CVCNumber={CVCNumbers.value}
+            handleCVCNumber={CVCNumbers.setValue}
+            errorMessage={CVCNumbers.errorMessage}
           />
         </ShelfSection>
       )}
@@ -115,9 +100,9 @@ const AddNewCardPage = () => {
         <ShelfSection>
           <ShelfHeader title='카드사를 선택해 주세요' description='현재 국내 카드사만 가능합니다' />
           <CardCompanySelectField
-            cardCompany={cardCompany}
-            handleSelectCardCompany={handleSelectCardCompany}
-            errorMessage={cardCompanyErrorMessage}
+            cardCompany={cardCompany.selected}
+            handleSelectCardCompany={cardCompany.handleSelect}
+            errorMessage={cardCompany.errorMessage}
           />
         </ShelfSection>
       )}
