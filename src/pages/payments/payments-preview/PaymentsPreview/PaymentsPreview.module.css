@@ -1,0 +1,143 @@
+.paymentsPreview {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.frontPreview {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 8px 12px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--preview-default);
+  color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 0.5px solid rgba(221, 205, 120, 0.1);
+  width: 28px;
+  height: 14px;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.icChip {
+  background-color: #ddcd78;
+}
+
+.creditCard {
+  width: 21px;
+  height: 10px;
+}
+
+.cardDetailContainer {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  margin: 14px 13px 0 5px;
+}
+
+.cardNumberContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.cardNumber {
+  width: 38px;
+}
+
+.password {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.cardDetailText {
+  height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  letter-spacing: 0.16em;
+}
+
+.expirationDateTextBox {
+  display: inline-block;
+  min-width: 20px;
+}
+
+.cardNumberTextBox {
+  width: 34px;
+}
+
+.backPreview {
+  width: 100%;
+  height: 100%;
+  background-color: var(--preview-back-floor);
+  color: white;
+  display: flex;
+}
+
+.magneticStripe {
+  margin-top: 84px;
+  width: 100%;
+  height: 24px;
+  background-color: var(--preview-back-stripe);
+}
+
+.cvcNumber {
+  margin-right: 16px;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: right;
+  letter-spacing: 0.08em;
+}
+
+/* 조건부 스타일 */
+.bg-issuer0 {
+  background-color: var(--preview-issuer-bc);
+}
+.bg-issuer1 {
+  background-color: var(--preview-issuer-shinhan);
+}
+.bg-issuer2 {
+  background-color: var(--preview-issuer-kakao);
+  color: black;
+}
+.bg-issuer3 {
+  background-color: var(--preview-issuer-hyundae);
+}
+.bg-issuer4 {
+  background-color: var(--preview-issuer-woori);
+}
+.bg-issuer5 {
+  background-color: var(--preview-issuer-lotte);
+}
+.bg-issuer6 {
+  background-color: var(--preview-issuer-hana);
+}
+.bg-issuer7 {
+  background-color: var(--preview-issuer-kb);
+}

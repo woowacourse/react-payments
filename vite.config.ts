@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/react-payments/dist/',
   plugins: [react()],
   resolve: {
     alias: [
@@ -15,6 +16,7 @@ export default defineConfig({
       { find: '@types', replacement: resolve(__dirname, 'src/types') },
       { find: '@utils', replacement: resolve(__dirname, 'src/utils') },
       { find: '@hooks', replacement: resolve(__dirname, 'src/hooks') },
+      { find: '@pages', replacement: resolve(__dirname, 'src/pages') },
     ],
   },
 });

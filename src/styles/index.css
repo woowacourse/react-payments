@@ -1,10 +1,34 @@
 :root {
+  --primary-color: #333333;
+
   --grey-100: #ffffff;
   --grey-200: #acacac;
   --grey-300: #8b95a1;
   --grey-400: #0a0d13;
   --grey-500: #333333;
   --error: #ff3d3d;
+
+  /* Payments Preview */
+  --preview-default: var(--primary-color);
+  --preview-back-floor: #d5d5d5;
+  --preview-back-stripe: #cbba64;
+  --preview-issuer-bc: #f04651;
+  --preview-issuer-shinhan: #0046ff;
+  --preview-issuer-kakao: #ffe600;
+  --preview-issuer-hyundae: #000000;
+  --preview-issuer-woori: #007bc8;
+  --preview-issuer-lotte: #ed1c24;
+  --preview-issuer-hana: #009490;
+  --preview-issuer-kb: #6a6056;
+
+  /* Payments Form */
+  --payments-submit-button: var(--primary-color);
+  --payments-submit-button-text: white;
+
+  /* Submit Page */
+  --submit-message-text: var(--primary-color);
+  --submit-confirm-button: var(--primary-color);
+  --submit-confirm-button-text: white;
 }
 
 .caption {

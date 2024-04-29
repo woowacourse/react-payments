@@ -1,11 +1,16 @@
-import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
+import { Payments } from '@pages/payments';
 
 import styles from './App.module.css';
+import { Route, Routes } from 'react-router-dom';
+import Submit from './pages/submit/Submit/Submit';
 
 function App() {
   return (
     <div className={styles.app}>
-      <CreditCardForm />
+      <Routes>
+        <Route path="/" element={<Payments />} />
+        <Route path="/submit" element={<Submit />} />
+      </Routes>
     </div>
   );
 }
