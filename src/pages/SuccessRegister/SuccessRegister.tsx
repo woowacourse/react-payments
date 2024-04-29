@@ -21,7 +21,7 @@ const SuccessRegister = () => {
   ${cardInfoState?.cardBrand}가 등록되었어요.`;
 
   const goRegisterPage = () => {
-    navigate('/');
+    navigate(`/${URLS.register}`);
   };
 
   return (
