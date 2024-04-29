@@ -80,8 +80,12 @@ export default function CardNumbersInputField({
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
     setCardNumbers(updatedCardNumbers);
+    console.log(e.target.nextSibling);
 
-    if (e.target.value.length === 4 && e.target.nextSibling) {
+    if (
+      e.target.value.length === 4 &&
+      e.target.nextSibling instanceof HTMLInputElement
+    ) {
       (e.target.nextSibling as HTMLInputElement).focus();
     }
   };
