@@ -1,9 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate } from "react-router-dom";
-import useContextWrapper from "../../hooks/useContextWrapper";
 import SubmitButton from "../Button/SubmitButton";
-import { FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
-
 import CardCVCField from "../FormField/CardCVCField";
 import CardIssuerField from "../FormField/CardIssuerField";
 import CardNumberField from "../FormField/CardNumberField";
@@ -16,6 +13,7 @@ import FormRefContextProvider from "./FormRefContextProvider";
 import { formStyle } from "./style";
 
 import useIsCardInfoValid from "./useIsValid";
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 interface Target extends EventTarget {
   firstNumbers: {
@@ -31,7 +29,7 @@ interface FormEvent extends React.FormEvent<HTMLFormElement> {
 }
 
 const Form = () => {
-  const renderOrder = useContextWrapper(FormRenderOrderContext)[0];
+  const renderOrder = useRenderOrderState()[0];
   const isValid = useIsCardInfoValid();
   const navigate = useNavigate();
 

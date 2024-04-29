@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardOwnerInfoContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardOwnerInfoErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
+import { CardOwnerInfoErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import CardOwnerInput from "../FormInput/CardOwnerInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
 import { isOwnerValid } from "../Form/useIsValid";
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];
@@ -17,27 +18,24 @@ const CardOwnerField = () => {
 
   const cardOwner = useContextWrapper(CardOwnerInfoContext)[0];
   const cardOwnerInput = useContextWrapper(CardOwnerInputContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const [renderOrder, setRenderOrder] = useRenderOrderState();
 
   const firstInput = useContextWrapper(CardOwnerInputContext)[0];
   const nextFieldInput = useContextWrapper(CardCVCInputContext)[0];
 
   const ENTER_KEY_CODE = 13;
   useEffect(() => {
-    if (isOwnerValid(cardOwner, cardOwnerError)) {
-      cardOwnerInput.current?.addEventListener("keydown", (e) => {
-        if (e.keyCode === ENTER_KEY_CODE && cardOwner.name) {
-          setRenderOrder((prev) => {
-            if (prev.index === 3) {
-              return { index: 4, step: "cardCVC" };
-            }
-            return prev;
-          });
-          nextFieldInput.current?.focus();
-        }
-      });
-    }
-  }, [cardOwner, cardOwnerInput, setRenderOrder, nextFieldInput, cardOwnerError]);
+    const keydownEvent = (e: KeyboardEvent) => {
+      if (isOwnerValid(cardOwner, cardOwnerError) && renderOrder.step === "cardOwner" && e.keyCode === ENTER_KEY_CODE) {
+        setRenderOrder.next();
+        nextFieldInput.current?.focus();
+      }
+    };
+    cardOwnerInput.current?.addEventListener("keydown", keydownEvent);
+    return () => {
+      cardOwnerInput.current?.removeEventListener("keydown", keydownEvent);
+    };
+  }, [cardOwner, cardOwnerInput, renderOrder, setRenderOrder, nextFieldInput, cardOwnerError]);
 
   useEffect(() => {
     firstInput.current?.focus();

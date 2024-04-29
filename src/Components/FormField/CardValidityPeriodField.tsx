@@ -3,12 +3,13 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardValidityPeriodContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardValidityPeriodErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
+import { CardValidityPeriodErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import CardPeriodInput from "../FormInput/CardPeriodInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
 import { isPeriodValid } from "../Form/useIsValid";
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 const CardValidityPeriodField = () => {
   const [cardPeriodError, setCardPeriodError] = useContextWrapper(CardValidityPeriodErrorContext);
@@ -18,19 +19,14 @@ const CardValidityPeriodField = () => {
   });
 
   const cardPeriod = useContextWrapper(CardValidityPeriodContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const [renderOrder, setRenderOrder] = useRenderOrderState();
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
 
   useEffect(() => {
-    if (isValid) {
-      setRenderOrder((prev) => {
-        if (prev.index === 2) {
-          return { index: 3, step: "cardOwner" };
-        }
-        return prev;
-      });
+    if (isValid && renderOrder.step === "cardPeriod") {
+      setRenderOrder.next();
       setCardPeriodError((prev) => {
         const temp = { ...prev };
         temp.month.isError = false;

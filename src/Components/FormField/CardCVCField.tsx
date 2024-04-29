@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardCVCContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardCVCErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
+import { CardCVCErrorContext } from "../../routes/Payments/FormContextProvider";
 import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext } from "../Form/FormRefContextProvider";
 import { isCVCValid } from "../Form/useIsValid";
+
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 const CardCVCField = () => {
   const cardCVCError = useContextWrapper(CardCVCErrorContext)[0];
@@ -16,20 +18,15 @@ const CardCVCField = () => {
   });
 
   const cardCVC = useContextWrapper(CardCVCContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const [renderOrder, setRenderOrder] = useRenderOrderState();
 
   const firstInput = useContextWrapper(CardCVCInputContext)[0];
 
   useEffect(() => {
-    if (isCVCValid(cardCVC, cardCVCError)) {
-      setRenderOrder((prev) => {
-        if (prev.index === 4) {
-          return { index: 5, step: "cardPassword" };
-        }
-        return prev;
-      });
+    if (isCVCValid(cardCVC, cardCVCError) && renderOrder.step === "cardCVC") {
+      setRenderOrder.next();
     }
-  }, [cardCVC, setRenderOrder, cardCVCError]);
+  }, [cardCVC, renderOrder, setRenderOrder, cardCVCError]);
 
   useEffect(() => {
     firstInput.current?.focus();

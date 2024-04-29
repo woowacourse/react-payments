@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
-import { CardNumberErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
+import { CardNumberErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import CardNumberInput from "../FormInput/CardNumberInput";
 import FormFieldComponent from "./FormFieldComponent";
@@ -8,6 +8,7 @@ import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvide
 import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 
 import { isNumberValid } from "../Form/useIsValid";
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 const CardNumberField = () => {
   const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
@@ -17,19 +18,14 @@ const CardNumberField = () => {
   });
 
   const cardNumbers = useContextWrapper(CardNumbersContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const [renderOrder, setRenderOrder] = useRenderOrderState();
   const firstInput = useContextWrapper(CardNumberInputsContext)[0];
 
   useEffect(() => {
-    if (isNumberValid(cardNumbers, cardNumberError)) {
-      setRenderOrder((prev) => {
-        if (prev.index < 1) {
-          return { index: 1, step: "cardIssuer" };
-        }
-        return prev;
-      });
+    if (isNumberValid(cardNumbers, cardNumberError) && renderOrder.step === "cardNumbers") {
+      setRenderOrder.next();
     }
-  }, [cardNumbers, setRenderOrder]);
+  }, [cardNumbers, renderOrder, setRenderOrder, cardNumberError]);
 
   useEffect(() => {
     firstInput.current?.focus();

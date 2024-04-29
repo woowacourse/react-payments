@@ -3,27 +3,23 @@
 import { useEffect } from "react";
 import useContextWrapper from "../../hooks/useContextWrapper";
 import { CardIssuerContext } from "../../routes/Payments/CardInfoContextProvider";
-import { CardIssuerErrorContext, FormRenderOrderContext } from "../../routes/Payments/FormContextProvider";
+import { CardIssuerErrorContext } from "../../routes/Payments/FormContextProvider";
 
 import CardIssuerInput from "../FormInput/CardIssuerInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { isIssuerValid } from "../Form/useIsValid";
+import useRenderOrderState from "../../hooks/useRenderOrderState";
 
 const CardIssuerField = () => {
   const cardIssuerError = useContextWrapper(CardIssuerErrorContext)[0];
   const cardIssuer = useContextWrapper(CardIssuerContext)[0];
-  const setRenderOrder = useContextWrapper(FormRenderOrderContext)[1];
+  const [renderOrder, setRenderOrder] = useRenderOrderState();
 
   useEffect(() => {
-    if (isIssuerValid(cardIssuer, cardIssuerError)) {
-      setRenderOrder((prev) => {
-        if (prev.index === 1) {
-          return { index: 2, step: "cardPeriod" };
-        }
-        return prev;
-      });
+    if (isIssuerValid(cardIssuer, cardIssuerError) && renderOrder.step === "cardIssuer") {
+      setRenderOrder.next();
     }
-  }, [cardIssuer, setRenderOrder, cardIssuerError]);
+  }, [cardIssuer, renderOrder, setRenderOrder, cardIssuerError]);
 
   return (
     <FormFieldComponent

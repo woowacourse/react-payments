@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { FormRenderOrderContext } from "../../hooks/useRenderOrderState";
 
 const initError = () => ({
   errorMessage: "",
@@ -48,10 +49,6 @@ export const CardIssuerErrorContext = createContext<
 export const CardCVCErrorContext = createContext<[CardCVCError, Dispatch<SetStateAction<CardCVCError>>] | null>(null);
 export const CardPasswordErrorContext = createContext<
   [CardPasswordError, Dispatch<SetStateAction<CardPasswordError>>] | null
->(null);
-
-export const FormRenderOrderContext = createContext<
-  [FormRenderOrder, Dispatch<SetStateAction<FormRenderOrder>>] | null
 >(null);
 
 const FormContextProvider = ({ children }: { children: React.ReactNode }) => {
