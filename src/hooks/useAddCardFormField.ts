@@ -16,6 +16,7 @@ interface UseAddCardFormFieldProps<T extends InitialValuesType> {
 
 export default function useAddCardFormField<T extends InitialValuesType>({
   initialValues,
+  /** @defaultValue false */
   visibility = false,
 }: UseAddCardFormFieldProps<T>) {
   const [values, setValues] = useState<T>(initialValues);

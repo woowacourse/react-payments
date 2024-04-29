@@ -72,30 +72,28 @@ function OwnerNameInput({
     }
   }, [isFieldComplete]);
 
+  const isVisible = curStep >= findStep('ownerName');
+  if (!isVisible) return null;
   return (
-    curStep >= findStep('ownerName') && (
-      <Field title={title} labelText={labelText} errorMessage={errorMessage}>
-        <Fragment key="ownerName">
-          <Label
-            htmlFor="ownerName"
-            labelText={inputLabelText.ownerName}
-            hideLabel
-          />
-          <Input
-            ref={ref}
-            id="ownerName"
-            name="ownerName"
-            placeholder={placeholder}
-            value={ownerName.ownerName}
-            isError={isError.ownerName}
-            isRequired
-            handleChange={handleOnChange}
-            handleOnBlur={handleOnBlur}
-            maxLength={26}
-          />
-        </Fragment>
-      </Field>
-    )
+    <Field title={title} labelText={labelText} errorMessage={errorMessage}>
+      <Label
+        htmlFor="ownerName"
+        labelText={inputLabelText.ownerName}
+        hideLabel
+      />
+      <Input
+        ref={ref}
+        id="ownerName"
+        name="ownerName"
+        placeholder={placeholder}
+        value={ownerName.ownerName}
+        isError={isError.ownerName}
+        isRequired
+        handleChange={handleOnChange}
+        handleOnBlur={handleOnBlur}
+        maxLength={26}
+      />
+    </Field>
   );
 }
 

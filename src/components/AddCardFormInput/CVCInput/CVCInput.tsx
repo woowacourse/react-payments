@@ -61,25 +61,23 @@ export default function CVCInput({
     }
   }, [isFieldComplete]);
 
+  const isVisible = curStep >= findStep('cvc');
+  if (!isVisible) return null;
   return (
-    curStep >= findStep('cvc') && (
-      <Field title={title} labelText={labelText} errorMessage={errorMessage}>
-        <Fragment key="cvc">
-          <Label htmlFor="cvc" labelText={inputLabelText.cvc} hideLabel />
-          <Input
-            ref={ref}
-            id="cvc"
-            name="cvc"
-            placeholder={placeholder}
-            value={cvc.cvc}
-            isError={isError.cvc}
-            isRequired
-            handleChange={handleOnChange}
-            handleOnBlur={handleOnBlur}
-            maxLength={MAX_LENGTH}
-          />
-        </Fragment>
-      </Field>
-    )
+    <Field title={title} labelText={labelText} errorMessage={errorMessage}>
+      <Label htmlFor="cvc" labelText={inputLabelText.cvc} hideLabel />
+      <Input
+        ref={ref}
+        id="cvc"
+        name="cvc"
+        placeholder={placeholder}
+        value={cvc.cvc}
+        isError={isError.cvc}
+        isRequired
+        handleChange={handleOnChange}
+        handleOnBlur={handleOnBlur}
+        maxLength={MAX_LENGTH}
+      />
+    </Field>
   );
 }

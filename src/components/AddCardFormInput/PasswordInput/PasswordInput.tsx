@@ -75,26 +75,24 @@ export default function PasswordInput({
         labelText={labelText}
         errorMessage={errorMessage}
       >
-        <Fragment key="password">
-          <Label
-            htmlFor="password"
-            labelText={inputLabelText.password}
-            hideLabel
-          />
-          <Input
-            ref={ref}
-            id="password"
-            name="password"
-            type="password"
-            value={password.password}
-            isError={isError.password}
-            placeholder={placeholder}
-            isRequired
-            handleChange={handleOnChange}
-            handleOnBlur={handleOnBlur}
-            maxLength={2}
-          />
-        </Fragment>
+        <Label
+          htmlFor="password"
+          labelText={inputLabelText.password}
+          hideLabel
+        />
+        <Input
+          ref={ref}
+          id="password"
+          name="password"
+          type="password"
+          value={password.password}
+          isError={isError.password}
+          placeholder={placeholder}
+          isRequired
+          handleChange={handleOnChange}
+          handleOnBlur={handleOnBlur}
+          maxLength={2}
+        />
       </Field>
     )
   );

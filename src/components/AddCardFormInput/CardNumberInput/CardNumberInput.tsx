@@ -65,38 +65,34 @@ export default function CardNumberInput({
     }
   }, [isFieldComplete]);
 
+  const isVisible = curStep >= findStep('cardNumbers');
+  if (!isVisible) return null;
   return (
-    curStep >= findStep('cardNumbers') && (
-      <Field
-        title={title}
-        description={description}
-        labelText={labelText}
-        errorMessage={errorMessage}
-      >
-        {Object.keys(cardNumbers).map((n, index) => {
-          const name = n as keyof CardNumbers;
-          return (
-            <Fragment key={name}>
-              <Label
-                htmlFor={name}
-                labelText={inputLabelText[name]}
-                hideLabel
-              />
-              <Input
-                ref={refs[index]}
-                id={name}
-                name={name}
-                placeholder={placeholder}
-                value={cardNumbers[name]}
-                isError={isError[name]}
-                handleChange={handleOnChange}
-                handleOnBlur={handleOnBlur}
-                maxLength={MAX_LENGTH}
-              />
-            </Fragment>
-          );
-        })}
-      </Field>
-    )
+    <Field
+      title={title}
+      description={description}
+      labelText={labelText}
+      errorMessage={errorMessage}
+    >
+      {Object.keys(cardNumbers).map((n, index) => {
+        const name = n as keyof CardNumbers;
+        return (
+          <Fragment key={name}>
+            <Label htmlFor={name} labelText={inputLabelText[name]} hideLabel />
+            <Input
+              ref={refs[index]}
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              value={cardNumbers[name]}
+              isError={isError[name]}
+              handleChange={handleOnChange}
+              handleOnBlur={handleOnBlur}
+              maxLength={MAX_LENGTH}
+            />
+          </Fragment>
+        );
+      })}
+    </Field>
   );
 }

@@ -60,31 +60,27 @@ export default function CardIssuerInput({
     }
   }, [isFieldComplete]);
 
+  const isVisible = curStep >= findStep('cardIssuer');
+  if (!isVisible) return null;
   return (
-    curStep >= findStep('cardIssuer') && (
-      <Field
-        title={title}
-        description={description}
-        errorMessage={errorMessage}
-      >
-        <Label
-          htmlFor="cardIssuer"
-          labelText={inputLabelText.cardIssuer}
-          hideLabel
-        />
-        <Select
-          ref={ref}
-          name="cardIssuer"
-          id="cardIssuer"
-          value={cardIssuer.cardIssuer}
-          defaultText={defaultText}
-          options={options}
-          isError={isError.cardIssuer}
-          isRequired
-          handleSelect={handleOnSelect}
-          handleOnBlur={handleOnBlur}
-        />
-      </Field>
-    )
+    <Field title={title} description={description} errorMessage={errorMessage}>
+      <Label
+        htmlFor="cardIssuer"
+        labelText={inputLabelText.cardIssuer}
+        hideLabel
+      />
+      <Select
+        ref={ref}
+        name="cardIssuer"
+        id="cardIssuer"
+        value={cardIssuer.cardIssuer}
+        defaultText={defaultText}
+        options={options}
+        isError={isError.cardIssuer}
+        isRequired
+        handleSelect={handleOnSelect}
+        handleOnBlur={handleOnBlur}
+      />
+    </Field>
   );
 }
