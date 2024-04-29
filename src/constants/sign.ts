@@ -2,6 +2,7 @@ const SIGN = {
   empty: "",
   slash: "/",
   dotMask: "●",
+  asteriskMask: "*",
   doubleZero: "00",
 };
 
