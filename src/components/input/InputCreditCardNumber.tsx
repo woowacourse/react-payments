@@ -10,6 +10,7 @@ interface InputCreditCardNumberProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
 interface InputboxData {
@@ -22,6 +23,7 @@ const InputCreditCardNumber = ({
   handleChange,
   handleBlur,
   inputError,
+  id,
 }: InputCreditCardNumberProps) => {
   const inputboxData: InputboxData[] = [
     {
@@ -54,7 +56,7 @@ const InputCreditCardNumber = ({
             onBlur={handleBlur}
             size="small"
             placeholder="1234"
-            id={`creditCardNumber${idx + 1}`}
+            id={`${id}${idx + 1}`}
             name={data.name}
             isError={inputError}
             autoFocus={idx === 0}

@@ -9,9 +9,10 @@ interface InputCvcProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
-const InputPassword = ({ inputValue, handleChange, handleBlur, inputError }: InputCvcProps) => {
+const InputPassword = ({ inputValue, handleChange, handleBlur, inputError, id }: InputCvcProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="password">{CARD_FORM_MESSAGE.twoDigitPassword}</InputLabel>
@@ -22,7 +23,7 @@ const InputPassword = ({ inputValue, handleChange, handleBlur, inputError }: Inp
         onBlur={handleBlur}
         size="large"
         placeholder="카드 비밀번호"
-        id="password"
+        id={id}
         name={CARD_INPUTBOX_NAME.authentication.password}
         isError={inputError}
         autoFocus

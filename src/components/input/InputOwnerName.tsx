@@ -9,6 +9,7 @@ interface InputOwnerNameProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
 const InputOwnerName = ({
@@ -16,6 +17,7 @@ const InputOwnerName = ({
   handleChange,
   handleBlur,
   inputError,
+  id,
 }: InputOwnerNameProps) => {
   return (
     <InputContainer>
@@ -26,7 +28,7 @@ const InputOwnerName = ({
         onBlur={handleBlur}
         size="large"
         placeholder="JOHN DOE"
-        id="ownerName"
+        id={id}
         name={CARD_INPUTBOX_NAME.owner.name}
         isError={inputError}
         autoFocus

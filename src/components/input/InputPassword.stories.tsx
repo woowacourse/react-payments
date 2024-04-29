@@ -48,5 +48,6 @@ export const Default: Story = {
     handleChange: () => {},
     handleBlur: () => {},
     inputError: false,
+    id: "password",
   },
 };

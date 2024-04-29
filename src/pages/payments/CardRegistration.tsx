@@ -75,6 +75,7 @@ const CardRegistration = () => {
           handleChange={setCardNumber}
           handleBlur={blurCardNumber}
           inputError={cardNumberError}
+          id="creditCardNumber"
         />
       ),
     },
@@ -103,6 +104,7 @@ const CardRegistration = () => {
           handleChange={setExpirationPeriod}
           handleBlur={blurExpirationPeriod}
           inputError={expirationPeriodError}
+          id="expirationDate"
         />
       ),
     },
@@ -116,6 +118,7 @@ const CardRegistration = () => {
           handleChange={setOwner}
           handleBlur={blurOwner}
           inputError={ownerError}
+          id="ownerName"
         />
       ),
     },
@@ -129,6 +132,7 @@ const CardRegistration = () => {
           handleChange={setInfo}
           handleBlur={blurInfo}
           inputError={infoError}
+          id="cvcNumber"
         />
       ),
     },
@@ -142,6 +146,7 @@ const CardRegistration = () => {
           handleChange={setAuthentication}
           handleBlur={blurAuthentication}
           inputError={authenticationError}
+          id="password"
         />
       ),
     },

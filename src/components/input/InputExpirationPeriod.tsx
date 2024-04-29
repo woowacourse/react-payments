@@ -10,6 +10,7 @@ interface InputExpirationPeriodProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
 interface InputboxData {
@@ -22,6 +23,7 @@ const InputExpirationPeriod = ({
   handleChange,
   handleBlur,
   inputError,
+  id,
 }: InputExpirationPeriodProps) => {
   const inputboxData: InputboxData[] = [
     {
@@ -46,7 +48,7 @@ const InputExpirationPeriod = ({
             onBlur={handleBlur}
             size="medium"
             placeholder="MM"
-            id={`expirationDate${idx + 1}`}
+            id={`${id}${idx + 1}`}
             name={data.name}
             isError={inputError}
             autoFocus={idx === 0}

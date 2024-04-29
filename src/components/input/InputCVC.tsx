@@ -9,9 +9,10 @@ interface InputCvcProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
-const InputCvc = ({ inputValue, handleChange, inputError, handleBlur }: InputCvcProps) => {
+const InputCvc = ({ inputValue, handleChange, inputError, handleBlur, id }: InputCvcProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="cvcNumber">{CARD_FORM_MESSAGE.cvc}</InputLabel>
@@ -20,7 +21,7 @@ const InputCvc = ({ inputValue, handleChange, inputError, handleBlur }: InputCvc
         handleChange={handleChange}
         size="large"
         placeholder="cvc 3자리"
-        id="cvcNumber"
+        id={id}
         name={CARD_INPUTBOX_NAME.info.cvc}
         isError={inputError}
         onBlur={handleBlur}
