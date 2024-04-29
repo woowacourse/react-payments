@@ -39,7 +39,7 @@ const ExpirationPeriodErrorMessages: Record<ExpirationPeriodErrorType, string> =
   };
 
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
-  const { onChange, errors } = expirationPeriodState;
+  const { onChange, errors, values } = expirationPeriodState;
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
@@ -61,23 +61,22 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
         errorMessages={currentErrorMessages}
         isErrorShow={isErrorShow}
       >
-        {new Array(INPUT_COUNTS.EXPIRATION_PERIOD)
-          .fill(0)
-          .map((_: string, index: number) => (
-            <Input
-              autoFocus={index === 0}
-              ref={(el) => (inputRefs.current[index] = el)}
-              type="number"
-              key={index}
-              name={EXPIRATION_INPUTS_NAMES[index]}
-              placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                onFocusNextInput(e, index);
-              }}
-              isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}
-              onBlur={() => setIsErrorShow(true)}
-            />
-          ))}
+        {Object.values(values).map((value: string, index: number) => (
+          <Input
+            autoFocus={index === 0}
+            ref={(el) => (inputRefs.current[index] = el)}
+            type="number"
+            key={index}
+            name={EXPIRATION_INPUTS_NAMES[index]}
+            placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onFocusNextInput(e, index);
+            }}
+            isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}
+            onBlur={() => setIsErrorShow(true)}
+            value={value}
+          />
+        ))}
       </InputField>
     </S.InputFieldWithInfo>
   );
@@ -86,7 +85,9 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
 const arePropsEqual = (prevProps: Props, nextProps: Props) => {
   return (
     prevProps.expirationPeriodState.errors ===
-    nextProps.expirationPeriodState.errors
+      nextProps.expirationPeriodState.errors &&
+    prevProps.expirationPeriodState.values ===
+      nextProps.expirationPeriodState.values
   );
 };
 

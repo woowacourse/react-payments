@@ -31,8 +31,6 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
   const [isErrorShow, setIsErrorShow] = useState(isErrorInInputs(errors));
   const hasCurrentError = !!Object.keys(errors).length;
 
-  console.log("isErrorShow", isErrorShow);
-
   return (
     <S.InputFieldWithInfo>
       <InputFieldHeader
@@ -44,27 +42,25 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
         errorMessages={["카드 번호는 4자리 정수로 입력하셔야 합니다."]}
         isErrorShow={hasCurrentError && isErrorShow}
       >
-        {new Array(INPUT_COUNTS.CARD_NUMBERS)
-          .fill(0)
-          .map((_: string, index: number) => (
-            <Input
-              autoFocus={index === 0}
-              ref={(el) => (inputRefs.current[index] = el)}
-              type="number"
-              key={index}
-              maxLength={VALID_LENGTH.CARD_NUMBERS}
-              name={`cardNumbers${index + 1}`}
-              placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                onFocusNextInput(e, index);
-              }}
-              isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
-              onBlur={() =>
-                setIsErrorShow(isErrorInInputs(errors) && hasCurrentError)
-              }
-              value={values[`cardNumbers${index + 1}` as CardNumberKeys]}
-            />
-          ))}
+        {Object.values(values).map((_: string, index: number) => (
+          <Input
+            autoFocus={index === 0}
+            ref={(el) => (inputRefs.current[index] = el)}
+            type="number"
+            key={index}
+            maxLength={VALID_LENGTH.CARD_NUMBERS}
+            name={`cardNumbers${index + 1}`}
+            placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              onFocusNextInput(e, index);
+            }}
+            isError={!!errors[`cardNumbers${index + 1}` as CardNumberKeys]}
+            onBlur={() =>
+              setIsErrorShow(isErrorInInputs(errors) && hasCurrentError)
+            }
+            value={values[`cardNumbers${index + 1}` as CardNumberKeys]}
+          />
+        ))}
       </InputFieldMemo>
     </S.InputFieldWithInfo>
   );

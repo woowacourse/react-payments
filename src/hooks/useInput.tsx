@@ -37,8 +37,6 @@ const useInput = <T,>({
       inputChangeCallbacks.forEach((inputChangeCallbacks) => {
         newValue = inputChangeCallbacks(newValue);
       });
-
-      event.target.value = newValue;
     }
 
     setValue(newValue as T);

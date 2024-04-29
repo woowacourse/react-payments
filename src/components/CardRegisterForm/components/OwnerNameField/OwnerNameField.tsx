@@ -24,7 +24,7 @@ const OwnerNameErrorMessage: Record<OwnerNameErrorType, string> = {
 };
 
 const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
-  const { onChange, error } = ownerNameState;
+  const { onChange, error, value } = ownerNameState;
   const [isErrorShow, setIsErrorShow] = useState(false);
 
   const currentErrorMessages = (
@@ -62,6 +62,7 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
             setIsErrorShow(true);
             setIsNameEntered(true);
           }}
+          value={value}
         />
       </InputField>
     </S.InputFieldWithInfo>
@@ -69,7 +70,10 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
 };
 
 const arePropsEqual = (prevProps: Props, nextProps: Props) => {
-  return prevProps.ownerNameState.error === nextProps.ownerNameState.error;
+  return (
+    prevProps.ownerNameState.error === nextProps.ownerNameState.error &&
+    prevProps.ownerNameState.value === nextProps.ownerNameState.value
+  );
 };
 
 const OwnerNameFieldMemo = React.memo(OwnerNameField, arePropsEqual);

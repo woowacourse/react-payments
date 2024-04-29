@@ -25,7 +25,7 @@ const CVCNumbersErrorMessage: Record<CVCNumbersErrorType, string> = {
 };
 
 const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
-  const { onChange, error } = CVCNumbersState;
+  const { onChange, error, value } = CVCNumbersState;
   const [isErrorShow, setIsErrorShow] = useState(false);
 
   const currentErrorMessages = (
@@ -55,6 +55,7 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
             setIsFront(true);
           }}
           isError={!!error.length}
+          value={value}
         />
       </InputField>
     </S.InputFieldWithInfo>
