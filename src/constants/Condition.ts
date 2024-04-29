@@ -37,6 +37,7 @@ const CONDITION = {
   MAX_LENGTH,
   REG_EXP,
   hiddenCardNumber: '*',
+  lastNameAndFirstName: (value: string) => value.split(' ').length === 2,
   splitSlash: '/',
   showVisa: (first: string) => first[0] === '4',
   showMasterCard: (first: string) =>

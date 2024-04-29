@@ -10,8 +10,8 @@ const useExpirationDate = (
   showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void,
 ) => {
   const monthCondition = (value: string) =>
-    Number(value) >= 1 && Number(value) <= 12 && value.length >= 2;
-  const yearCondition = (value: string) => value.length === 2;
+    Number(value) >= 1 && Number(value) <= 12 && value.length >= MAX_LENGTH.expirationDate;
+  const yearCondition = (value: string) => value.length === MAX_LENGTH.expirationDate;
 
   const {
     value: month,

@@ -9,7 +9,7 @@ const useCardNumbers = (
   defaultValues: string[],
   showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void,
 ) => {
-  const cardLengthCondition = (value: string) => value.length === 4;
+  const cardLengthCondition = (value: string) => value.length === MAX_LENGTH.cardNumber;
 
   const {
     value: first,

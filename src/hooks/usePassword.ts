@@ -1,10 +1,10 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
 
-const { REG_EXP } = CONDITION;
+const { REG_EXP, MAX_LENGTH } = CONDITION;
 
 const usePassword = (defaultValue: string) => {
-  const passwordCondition = (value: string) => value.length === 2;
+  const passwordCondition = (value: string) => value.length === MAX_LENGTH.password;
 
   const {
     value: passwordState,

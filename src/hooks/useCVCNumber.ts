@@ -9,7 +9,7 @@ const useCVCNumber = (
   defaultValue: string,
   showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void,
 ) => {
-  const cvcNumberCondition = (value: string) => value.length === 3;
+  const cvcNumberCondition = (value: string) => value.length === MAX_LENGTH.cvcNumber;
   const [isFocusCVCPreview, setIsFocusCVCPreview] = useState<boolean>(false);
 
   const {
