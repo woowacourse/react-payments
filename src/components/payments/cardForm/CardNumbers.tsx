@@ -9,7 +9,7 @@ import SectionTitle from '../../SectionTitle';
 import TextInput from '../../TextInput';
 import TextInputContainer from '../../InputContainer';
 import { UseCardNumbers } from '../../../hooks/payments/useCardNumbers';
-import useHTMLRefs from '../../../hooks/useRefs';
+import useHTMLRefs from '../../../hooks/useHTMLRefs';
 import { useState } from 'react';
 
 interface props {

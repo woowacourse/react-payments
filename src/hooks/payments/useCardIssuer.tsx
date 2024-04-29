@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, useRef, useState } from 'react';
 
 import { CardIssuer } from '../../type';
-import useHTMLRefs from '../useRefs';
+import useHTMLRefs from '../useHTMLRefs';
 import useIsFocus from '../useIsFocus';
 import useRadio from '../useRadio';
 
