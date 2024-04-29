@@ -15,10 +15,6 @@ const FocusContext = createContext<FocusContextType>({
 export const useFocusContext = () => {
   const context = useContext(FocusContext);
 
-  if (!context) {
-    throw new Error('컨텍스트없음');
-  }
-
   return context;
 };
 
