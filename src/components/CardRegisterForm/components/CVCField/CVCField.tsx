@@ -63,7 +63,10 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
 };
 
 const arePropsEqual = (prevProps: Props, nextProps: Props) => {
-  return prevProps.CVCNumbersState.error === nextProps.CVCNumbersState.error;
+  return (
+    prevProps.CVCNumbersState.error === nextProps.CVCNumbersState.error &&
+    prevProps.CVCNumbersState.value === nextProps.CVCNumbersState.value
+  );
 };
 
 const CVCFieldMemo = React.memo(CVCField, arePropsEqual);
