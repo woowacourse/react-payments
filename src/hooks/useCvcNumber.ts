@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { MAX_LENGTH } from '../constants/rules';
 import validate from '../utils/validate';
 import useInput from './useInput';
@@ -17,8 +18,15 @@ const validations: ValidationType[] = [
 
 const useCvcNumber = () => {
   const cvc = useInput<HTMLInputElement>(inputLimitValidation, validations);
+  const [isValidCvc, setIsValidCvc] = useState(false);
 
-  return cvc;
+  useEffect(() => {
+    const isValid = cvc.value !== '' && !cvc.isError;
+
+    setIsValidCvc(isValid);
+  }, [cvc.value]);
+
+  return { cvc, isValidCvc };
 };
 
 export default useCvcNumber;

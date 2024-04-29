@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { MAX_LENGTH } from '../constants/rules';
 import validate from '../utils/validate';
 import useInput from './useInput';
@@ -17,8 +18,15 @@ const validations: ValidationType[] = [
 
 const usePassword = () => {
   const password = useInput<HTMLInputElement>(inputLimitValidation, validations);
+  const [isValidPassword, setIsValidPassword] = useState(false);
 
-  return password;
+  useEffect(() => {
+    const isValid = password.value !== '' && !password.isError;
+
+    setIsValidPassword(isValid);
+  }, [password.value]);
+
+  return { password, isValidPassword };
 };
 
 export default usePassword;

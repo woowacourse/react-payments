@@ -2,7 +2,6 @@ import { useState } from 'react';
 import * as S from './CardRegistration.style';
 
 import CardPreview from '../../components/CardPreview/CardPreview';
-import useInput from '../../hooks/useInput';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpirationDate from '../../hooks/useExpirationDate';
 
@@ -16,6 +15,7 @@ import PasswordInput from '../../components/Inputs/PasswordInput';
 import useCvcNumber from '../../hooks/useCvcNumber';
 import usePassword from '../../hooks/usePassword';
 import useName from '../../hooks/useName';
+import useCardCompany from '../../hooks/useCardCompany';
 
 export type CardNumberState = {
   value: string;
@@ -31,12 +31,20 @@ export default function CardRegistration() {
   const [cvcDisplay, setCvcDisplay] = useState(false);
   const [passwordDisplay, setPasswordDisplay] = useState(false);
 
-  const { cardImageSrc, cardNumbersArray } = useCardNumbers<HTMLInputElement>();
-  const cardCompany = useInput<HTMLSelectElement>();
-  const { month, year } = useExpirationDate();
-  const name = useName();
-  const cvc = useCvcNumber();
-  const password = usePassword();
+  const { cardImageSrc, cardNumbersArray, isValidCardNumbers } = useCardNumbers<HTMLInputElement>();
+  const { cardCompany, isValidCardCompany } = useCardCompany();
+  const { month, year, isValidExpirationDate } = useExpirationDate();
+  const { name, isValidName } = useName();
+  const { cvc, isValidCvc } = useCvcNumber();
+  const { password, isValidPassword } = usePassword();
+
+  const isShowConfirmButton =
+    isValidCardNumbers &&
+    isValidExpirationDate &&
+    isValidName &&
+    isValidCvc &&
+    isValidPassword &&
+    isValidCardCompany;
 
   return (
     <>
@@ -88,33 +96,14 @@ export default function CardRegistration() {
           {passwordDisplay && <PasswordInput password={password} />}
         </S.CardInfoContainer>
       </S.SubContainer>
-      {!cardNumbersArray[0].isError &&
-        cardNumbersArray[0].value &&
-        !cardNumbersArray[1].isError &&
-        cardNumbersArray[1].value &&
-        !cardNumbersArray[2].isError &&
-        cardNumbersArray[2].value &&
-        !cardNumbersArray[3].isError &&
-        cardNumbersArray[3].value &&
-        !cardCompany.isError &&
-        cardCompany.value &&
-        !month.isError &&
-        month.value &&
-        !year.isError &&
-        year.value &&
-        !name.isError &&
-        name.value &&
-        !cvc.isError &&
-        cvc.value &&
-        !password.isError &&
-        password.value && (
-          <S.ConfirmLink
-            to="/confirm"
-            state={{ cardNumber: cardNumbersArray[0].value, cardCompany: cardCompany.value }}
-          >
-            확인
-          </S.ConfirmLink>
-        )}
+      {isShowConfirmButton && (
+        <S.ConfirmLink
+          to="/confirm"
+          state={{ cardNumber: cardNumbersArray[0].value, cardCompany: cardCompany.value }}
+        >
+          확인
+        </S.ConfirmLink>
+      )}
     </>
   );
 }

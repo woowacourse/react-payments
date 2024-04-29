@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { EXPIRATION_PERIOD } from '../constants/cardSection';
 import { MAX_LENGTH } from '../constants/rules';
 import validate from '../utils/validate';
@@ -41,8 +42,15 @@ const yearValidations: ValidationType[] = [
 const useExpirationDate = () => {
   const month = useInput<HTMLInputElement>(inputLimitValidation, monthValidations);
   const year = useInput<HTMLInputElement>(inputLimitValidation, yearValidations);
+  const [isValidExpirationDate, setIsValidExpirationDate] = useState(false);
 
-  return { month, year };
+  useEffect(() => {
+    const isValid = month.value !== '' && year.value !== '' && !month.isError && !year.isError;
+
+    setIsValidExpirationDate(isValid);
+  }, [month.value, year.value]);
+
+  return { month, year, isValidExpirationDate };
 };
 
 export default useExpirationDate;

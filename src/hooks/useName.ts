@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { OWNER_NAME } from '../constants/cardSection';
 import validate from '../utils/validate';
 import useInput from './useInput';
@@ -10,8 +11,15 @@ const inputLimitValidation: ValidationType = {
 
 const useName = () => {
   const name = useInput<HTMLInputElement>(inputLimitValidation);
+  const [isValidName, setIsValidName] = useState(false);
 
-  return name;
+  useEffect(() => {
+    const isValid = name.value !== '' && !name.isError;
+
+    setIsValidName(isValid);
+  }, [name]);
+
+  return { name, isValidName };
 };
 
 export default useName;

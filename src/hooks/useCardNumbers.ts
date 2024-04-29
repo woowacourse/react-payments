@@ -29,9 +29,18 @@ const useCardNumbers = <T extends HTMLInputElement>() => {
     useInput<T>(inputLimitValidation, onBlurValidations),
   ];
   const [cardImageSrc, setCardImageSrc] = useState('');
+  const [isValidCardNumbers, setIsValidCardNumbers] = useState(false);
+
+  const isValid = () => {
+    const isError = cardNumbersArray.some(({ value, isError }) => value === '' && isError);
+
+    setIsValidCardNumbers(!isError);
+  };
 
   useEffect(() => {
     const cardNumbersString = cardNumbersArray.map(({ value }) => value).join('');
+
+    isValid();
 
     if (cardImageSrc && VALID_CARD_NUMBERS_LENGTH !== cardNumbersString.length) {
       setCardImageSrc('');
@@ -53,7 +62,7 @@ const useCardNumbers = <T extends HTMLInputElement>() => {
     cardNumbersArray[3].value,
   ]);
 
-  return { cardImageSrc, cardNumbersArray };
+  return { cardImageSrc, cardNumbersArray, isValidCardNumbers };
 };
 
 export default useCardNumbers;
