@@ -2,21 +2,22 @@ import App from "../App";
 import CardRegistrationPage from "../pages/cardRegistrationPage";
 import CompletedPage from "../pages/completedPage";
 import ErrorPage from "../pages/errorPage";
+import ROUTE from "../constants/route";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter(
   [
     {
-      path: "/",
+      path: ROUTE.root,
       element: <App />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "", element: <CardRegistrationPage /> },
-        { path: "completed", element: <CompletedPage /> },
+        { index: true, element: <CardRegistrationPage /> },
+        { path: ROUTE.completed, element: <CompletedPage /> },
       ],
     },
   ],
-  { basename: "/react-payments/" }
+  { basename: ROUTE.baseName }
 );
 
 export default router;
