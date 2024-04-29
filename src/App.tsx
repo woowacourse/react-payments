@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <CardEnrollForm />,
   },
   {
-    path: "card-enroll-complete",
+    path: "/card-enroll-complete",
     element: <CardEnrollComplete />,
   },
 ]);
