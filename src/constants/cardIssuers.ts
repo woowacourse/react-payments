@@ -1,15 +1,15 @@
-export const CARD_ISSUERS = [
-  "bc-card",
-  "shinhan-card",
-  "kakaobank-card",
-  "hyundai-card",
-  "woori-card",
-  "lotte-card",
-  "hana-card",
-  "kb-card",
-] as const;
+export enum CardIssuer {
+  BcCard = "bc-card",
+  ShinhanCard = "shinhan-card",
+  KakaoBankCard = "kakaobank-card",
+  HyundaiCard = "hyundai-card",
+  WooriCard = "woori-card",
+  LotteCard = "lotte-card",
+  HanaCard = "hana-card",
+  KbCard = "kb-card",
+}
 
-export type CardIssuer = (typeof CARD_ISSUERS)[number];
+export const CARD_ISSUERS = Object.values(CardIssuer);
 
 export const isCardIssuer = (value: string): value is CardIssuer => {
   return (CARD_ISSUERS as readonly string[]).includes(value);
