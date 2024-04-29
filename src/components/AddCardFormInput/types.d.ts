@@ -1,4 +1,4 @@
-interface CustomInputHandlerProps<T> {
+interface CustomInputHandlerArgs<T> {
   isValid: boolean;
   errorMessage: string;
   name: keyof T;
@@ -10,6 +10,6 @@ interface InputProps<T> {
   errorMessage: string;
   isError: Record<string, boolean>;
   isFieldComplete: boolean;
-  onChange: (props: CustomInputHandlerProps<T>) => void;
-  onBlur: (props: CustomInputHandlerProps<T>) => void;
+  handleInputChange: (args: CustomInputHandlerArgs<T>) => void;
+  handleInputBlur: (args: CustomInputHandlerArgs<T>) => void;
 }

@@ -10,14 +10,14 @@ import {
   isValidMonth,
 } from '../../../domain/validators';
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
-import { validateInput } from '../../../utils/validateInput';
 import { useEffect } from 'react';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import {
   AddCardFormContextType,
   useAddCardFormContext,
 } from '../../../context/AddCardFormContext';
+import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
+import { validateInput } from '../../../utils/validateInput';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.EXPIRATION_DATE;
@@ -28,8 +28,8 @@ const ExpirationDateInput = ({
   errorMessage,
   isError,
   isFieldComplete,
-  onChange,
-  onBlur,
+  handleInputChange,
+  handleInputBlur,
 }: InputProps<ExpirationDate>) => {
   const { findStep, curStep, setCurStep, setFormValid } =
     useAddCardFormContext() as AddCardFormContextType;
@@ -44,7 +44,7 @@ const ExpirationDateInput = ({
       { test: isInteger, errorMessage: ERRORS.isNotInteger },
     ];
     const result = validateInput(value, validations);
-    onChange({ ...result, name, value });
+    handleInputChange({ ...result, name, value });
 
     if (value.length === MAX_LENGTH)
       moveToNextInput(
@@ -72,7 +72,7 @@ const ExpirationDateInput = ({
       },
     ];
     const result = validateInput(value, validations);
-    onBlur({ ...result, name, value });
+    handleInputBlur({ ...result, name, value });
   };
 
   useEffect(() => {
@@ -106,8 +106,8 @@ const ExpirationDateInput = ({
               }
               value={expirationDate[name]}
               isError={isError[name]}
-              handleChange={handleOnChange}
-              handleOnBlur={handleOnBlur}
+              onChange={handleOnChange}
+              onBlur={handleOnBlur}
               maxLength={MAX_LENGTH}
             />
           </Fragment>

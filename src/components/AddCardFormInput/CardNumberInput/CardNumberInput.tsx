@@ -24,8 +24,8 @@ export default function CardNumberInput({
   errorMessage,
   isError,
   isFieldComplete,
-  onChange,
-  onBlur,
+  handleInputChange,
+  handleInputBlur,
 }: InputProps<CardNumbers>) {
   const { findStep, curStep, setCurStep, setFormValid } =
     useAddCardFormContext() as AddCardFormContextType;
@@ -38,7 +38,7 @@ export default function CardNumberInput({
 
     const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
     const result = validateInput(value, validators);
-    onChange({ ...result, name, value });
+    handleInputChange({ ...result, name, value });
 
     if (value.length === MAX_LENGTH)
       moveToNextInput(
@@ -54,7 +54,7 @@ export default function CardNumberInput({
       { test: hasFourDigit, errorMessage: ERRORS.isNotFourDigit },
     ];
     const result = validateInput(value, validators);
-    onBlur({ ...result, name, value });
+    handleInputBlur({ ...result, name, value });
   };
 
   useEffect(() => {
@@ -86,8 +86,8 @@ export default function CardNumberInput({
               placeholder={placeholder}
               value={cardNumbers[name]}
               isError={isError[name]}
-              handleChange={handleOnChange}
-              handleOnBlur={handleOnBlur}
+              onChange={handleOnChange}
+              onBlur={handleOnBlur}
               maxLength={MAX_LENGTH}
             />
           </Fragment>

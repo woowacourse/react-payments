@@ -22,8 +22,8 @@ export default function CardIssuerInput({
   errorMessage,
   isError,
   isFieldComplete,
-  onChange,
-  onBlur,
+  handleInputChange,
+  handleInputBlur,
 }: InputProps<CardIssuer>) {
   const { findStep, curStep, setCurStep, setFormValid } =
     useAddCardFormContext() as AddCardFormContextType;
@@ -37,7 +37,7 @@ export default function CardIssuerInput({
   const handleOnSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
 
-    onChange({ isValid: true, errorMessage: '', name, value });
+    handleInputChange({ isValid: true, errorMessage: '', name, value });
 
     moveToNextInput();
   };
@@ -49,7 +49,7 @@ export default function CardIssuerInput({
       { test: isNotEmptyString, errorMessage: ERRORS.invalidCardIssuer },
     ];
     const result = validateInput(value, validators);
-    onBlur({ ...result, name, value });
+    handleInputBlur({ ...result, name, value });
   };
 
   useEffect(() => {
@@ -78,8 +78,8 @@ export default function CardIssuerInput({
         options={options}
         isError={isError.cardIssuer}
         isRequired
-        handleSelect={handleOnSelect}
-        handleOnBlur={handleOnBlur}
+        onChange={handleOnSelect}
+        onBlur={handleOnBlur}
       />
     </Field>
   );

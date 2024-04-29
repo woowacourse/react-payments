@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
@@ -10,11 +10,11 @@ import {
 import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 import {
   AddCardFormContextType,
   useAddCardFormContext,
 } from '../../../context/AddCardFormContext';
+import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 
 const { title, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.OWNER_NAME;
@@ -24,8 +24,8 @@ function OwnerNameInput({
   errorMessage,
   isError,
   isFieldComplete,
-  onChange,
-  onBlur,
+  handleInputChange,
+  handleInputBlur,
 }: InputProps<OwnerName>) {
   const { findStep, curStep, setCurStep, setFormValid } =
     useAddCardFormContext() as AddCardFormContextType;
@@ -46,7 +46,7 @@ function OwnerNameInput({
       },
     ];
     const result = validateInput(value, validators);
-    onChange({ ...result, name, value });
+    handleInputChange({ ...result, name, value });
   };
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ function OwnerNameInput({
       },
     ];
     const result = validateInput(value, validators);
-    onBlur({ ...result, name, value });
+    handleInputBlur({ ...result, name, value });
 
     if (result.isValid) moveToNextInput();
   };
@@ -89,8 +89,8 @@ function OwnerNameInput({
         value={ownerName.ownerName}
         isError={isError.ownerName}
         isRequired
-        handleChange={handleOnChange}
-        handleOnBlur={handleOnBlur}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
         maxLength={26}
       />
     </Field>

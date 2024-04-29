@@ -18,8 +18,8 @@ interface SelectProps {
   isError: boolean;
   /** @defaultValue true */
   isRequired?: boolean;
-  handleSelect?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleOnBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
 const Select = forwardRef(function Select(
@@ -28,8 +28,8 @@ const Select = forwardRef(function Select(
     defaultText,
     isError,
     isRequired = true,
-    handleSelect,
-    handleOnBlur,
+    onChange,
+    onBlur,
     ...rest
   }: SelectProps,
   ref: React.ForwardedRef<HTMLSelectElement>
@@ -39,8 +39,8 @@ const Select = forwardRef(function Select(
       ref={ref}
       className={clsx(styles.select, { [styles.error]: isError })}
       required={isRequired}
-      onChange={handleSelect}
-      onBlur={handleOnBlur}
+      onChange={onChange}
+      onBlur={onBlur}
       {...rest}
     >
       {defaultText && (

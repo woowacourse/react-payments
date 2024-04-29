@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Field from '../../common/Field/Field';
 import Input from '../../common/Input/Input';
@@ -8,15 +8,15 @@ import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
 import {
+  AddCardFormContextType,
+  useAddCardFormContext,
+} from '../../../context/AddCardFormContext';
+import {
   hasTwoDigit,
   isInteger,
   isNotEmptyString,
 } from '../../../domain/validators';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
 
 const { title, description, labelText, inputLabelText, placeholder } =
   ADD_CARD_FORM_FIELDS.PASSWORD;
@@ -26,8 +26,8 @@ export default function PasswordInput({
   errorMessage,
   isError,
   isFieldComplete,
-  onChange,
-  onBlur,
+  handleInputChange,
+  handleInputBlur,
 }: InputProps<Password>) {
   const { findStep, curStep, setCurStep, setFormValid } =
     useAddCardFormContext() as AddCardFormContextType;
@@ -43,7 +43,7 @@ export default function PasswordInput({
 
     const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
     const result = validateInput(value, validators);
-    onChange({ ...result, name, value });
+    handleInputChange({ ...result, name, value });
 
     if (value.length === ref.current?.maxLength) moveToNextInput();
   };
@@ -56,7 +56,7 @@ export default function PasswordInput({
       { test: hasTwoDigit, errorMessage: ERRORS.isNotTwoDigit },
     ];
     const result = validateInput(value, validators);
-    onBlur({ ...result, name, value });
+    handleInputBlur({ ...result, name, value });
   };
 
   useEffect(() => {
@@ -86,8 +86,8 @@ export default function PasswordInput({
         isError={isError.password}
         placeholder={placeholder}
         isRequired
-        handleChange={handleOnChange}
-        handleOnBlur={handleOnBlur}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
         maxLength={2}
       />
     </Field>
