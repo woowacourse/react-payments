@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.article`
+export const Fields = styled.article`
   display: flex;
   flex-direction: column-reverse;
   gap: 1.6rem;

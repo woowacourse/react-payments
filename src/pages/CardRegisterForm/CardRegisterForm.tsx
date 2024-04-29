@@ -31,10 +31,10 @@ const CardRegisterForm = () => {
 
   return (
     <>
-      <Styled.Container id="card-register-form" onSubmit={registerAndGoToSuccessPage}>
+      <Styled.Form id="card-register-form" onSubmit={registerAndGoToSuccessPage}>
         <CardInformationPreview {...previewProps} />
         <CardInformationForm {...formProps} />
-      </Styled.Container>
+      </Styled.Form>
       {!isFormError && (
         <Styled.Submit>
           <Button form="card-register-form">확인</Button>

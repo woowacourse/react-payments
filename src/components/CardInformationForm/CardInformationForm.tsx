@@ -1,4 +1,4 @@
-import { Form } from './style';
+import { Fields } from './style';
 import {
   CVCNumberField,
   CardBrandField,
@@ -74,13 +74,13 @@ const CardInformationForm = (props: CardInformationFormProps) => {
   ];
 
   return (
-    <Form>
+    <Fields>
       {fields.map((field, index) => {
         if (isFieldShowCount >= index) {
           return field;
         }
       })}
-    </Form>
+    </Fields>
   );
 };
 
