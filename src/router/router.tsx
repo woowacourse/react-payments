@@ -1,7 +1,7 @@
 import App from "../App";
 import CardRegistrationPage from "../pages/cardRegistrationPage";
 import CompletedPage from "../pages/completedPage";
-import ErrorPage from "../pages/errorPage";
+import NotFoundPage from "../pages/404Page";
 import ROUTE from "../constants/route";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const router = createBrowserRouter(
     {
       path: ROUTE.root,
       element: <App />,
-      errorElement: <ErrorPage />,
+      errorElement: <NotFoundPage />,
       children: [
         { index: true, element: <CardRegistrationPage /> },
         { path: ROUTE.completed, element: <CompletedPage /> },

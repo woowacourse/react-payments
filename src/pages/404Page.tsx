@@ -4,7 +4,7 @@ import Button from "../components/common/Button";
 import WOOWA_LOGO from "../Images/woowa.png";
 import { useNavigate } from "react-router-dom";
 
-export default function ErrorPage() {
+export default function NotFoundPage() {
   const navigate = useNavigate();
 
   const redirectHome = () => {
