@@ -9,8 +9,6 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput: React.FC<CardPasswordInputProps> = ({
-  value,
-  onChange,
   setCompleted,
 }) => {
   const [inputValues, setInputValues] = useState("");

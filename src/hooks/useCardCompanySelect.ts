@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useCardCompanySelect = () => {
   const [selectedCard, setSelectedCard] = useState<CardCompany | "">("");

@@ -13,7 +13,6 @@ interface CardNumberInputProps {
 }
 
 const CardNumberInput: React.FC<CardNumberInputProps> = ({
-  value,
   onChange,
   setCompleted,
 }) => {
@@ -32,7 +31,7 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
     }
   };
 
-  const handleValidate = (index: number, isValid: boolean) => {
+  const handleValidate = (_: number, isValid: boolean) => {
     setIsValid(isValid);
   };
 

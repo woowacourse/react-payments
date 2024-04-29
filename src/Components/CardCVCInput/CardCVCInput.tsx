@@ -11,7 +11,6 @@ interface CardCVCInputProps {
 }
 
 const CardCVCInput: React.FC<CardCVCInputProps> = ({
-  value,
   onChange,
   setCompleted,
   handleOnBlur,

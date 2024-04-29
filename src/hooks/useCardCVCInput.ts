@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useCardCVCInput = () => {
   const [cardCVC, setCardCVC] = useState("");
