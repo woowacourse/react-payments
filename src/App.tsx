@@ -1,16 +1,22 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CardRegisterPage from './pages/CardRegisterPage';
 import CardRegisterComplete from './pages/CardRegisterCompletePage/CardRegisterCompletePage';
 
 import ENDPOINTS from './constants/endpoints';
 
+const router = createBrowserRouter([
+  {
+    path: ENDPOINTS.cardRegister,
+    element: <CardRegisterPage />,
+  },
+  {
+    path: ENDPOINTS.cardRegisterComplete,
+    element: <CardRegisterComplete />,
+  }
+])
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={ENDPOINTS.cardRegister} element={<CardRegisterPage />}></Route>
-        <Route path={ENDPOINTS.cardRegisterComplete} element={<CardRegisterComplete />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   );
 }
