@@ -39,11 +39,14 @@ export default function CardRegistrationPage() {
   } = useCardExpirationPeriod({
     onFocus: showCardFront,
   });
+
   const { holderInput, cardHolderValue, isCardHolerComplete } = useCardHolder({
     onFocus: showCardFront,
   });
+
   const { cvcInput, cardCvcNumberValue, isCardCvcNumberComplete } =
     useCardCvcNumber({ onFocus: showCardBack });
+
   const { passwordInput, isCardPasswordComplete } = useCardPassword({
     onFocus: showCardFront,
   });
@@ -57,9 +60,9 @@ export default function CardRegistrationPage() {
     isCardPasswordComplete,
   ];
 
-  const curProgress = useProgress(isCompleteArray);
+  const isAllComplete = isCompleteArray.every((result) => result === true);
 
-  const allComplete = isCompleteArray.every((result) => result === true);
+  const curProgress = useProgress(isCompleteArray);
 
   const onSubmitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -104,7 +107,7 @@ export default function CardRegistrationPage() {
           return;
         })}
       </form>
-      {allComplete && (
+      {isAllComplete && (
         <div css={styledConfirmButtonBox}>
           <Button buttonType="fullScreen" onClickHandler={onSubmitHandler}>
             확인
