@@ -1,36 +1,20 @@
-import { useState, useEffect } from 'react';
-
 import TitleContainer from '../../common/TitleContainer/TitleContainer';
 import InputField from '../../common/InputField/InputField';
 import Input from '../../common/Input/Input';
 
-import { isNumber, isValidLength, isValidRange } from '../../../utils/validation';
+import useAutoFocus from '../../../hooks/useAutoFocus';
+import { InputType } from '../../../hooks/useInput';
+import { isNumber } from '../../../utils/validation';
 import { CARD_EXPIRATION } from '../../../constants/Condition';
 import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardExpirationInputProps {
-  handleMonth: (month: string) => void;
-  handleYear: (year: string) => void;
+  month: InputType<string>;
+  year: InputType<string>;
 }
 
-function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputProps) {
-  const [isValidMonth, setIsValidMonth] = useState(true);
-  const [isValidYear, setIsValidYear] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    if (!isValidMonth) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_MONTH);
-      return;
-    }
-
-    if (!isValidYear) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_YEAR);
-      return;
-    }
-
-    setErrorMessage('');
-  }, [isValidMonth, isValidYear]);
+const CardExpirationInput = ({ month, year }: CardExpirationInputProps) => {
+  const { setRef, moveToNextInput } = useAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT, CARD_EXPIRATION.MAX_LENGTH);
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(e.target.value)) {
@@ -38,7 +22,9 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
       return;
     }
 
-    handleMonth(e.target.value);
+    month.handleValue(e.target.value);
+
+    moveToNextInput(e.target.value, 0);
   };
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,54 +33,41 @@ function CardExpirationInput({ handleMonth, handleYear }: CardExpirationInputPro
       return;
     }
 
-    handleYear(e.target.value);
+    year.handleValue(e.target.value);
   };
 
-  const handleMonthBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidMonth =
-      isValidRange(Number(e.target.value), CARD_EXPIRATION.MIN_MONTH_RANGE, CARD_EXPIRATION.MAX_MONTH_RANGE) &&
-      isValidLength(e.target.value, 2);
-
-    setIsValidMonth(newIsValidMonth);
-
-    if (!newIsValidMonth) {
-      handleMonth('');
-    }
-  };
-
-  const handleYearBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIsValidYear = isValidLength(e.target.value, 2);
-
-    setIsValidYear(newIsValidYear);
-
-    if (!newIsValidYear) {
-      handleYear('');
+  const errorMessage = () => {
+    if (month.isError || year.isError) {
+      return month.isError ? ERROR_MESSAGE.INVALID_EXPIRATION_MONTH : ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
     }
   };
 
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+      <InputField label="유효기간" inputCount={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input
+          isError={month.isError}
           type="text"
+          ref={setRef(0)}
           placeholder="MM"
+          value={month.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
-          onBlur={handleMonthBlur}
-          isValid={isValidMonth}
+          autoFocus
         />
         <Input
+          isError={year.isError}
           type="text"
+          ref={setRef(1)}
           placeholder="YY"
+          value={year.value}
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
-          onBlur={handleYearBlur}
-          isValid={isValidYear}
         />
       </InputField>
     </div>
   );
-}
+};
 
 export default CardExpirationInput;

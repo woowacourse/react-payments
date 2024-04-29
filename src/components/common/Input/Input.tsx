@@ -1,13 +1,12 @@
-import { InputHTMLAttributes } from 'react';
-
+import { InputHTMLAttributes, forwardRef } from 'react';
 import * as S from './Input.style';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  isValid: boolean;
+  isError: boolean;
 }
 
-function Input({ isValid, ...rest }: InputProps) {
-  return <S.Input $isValid={isValid} {...rest} />;
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, ...rest }, ref) => {
+  return <S.Input $isError={isError} ref={ref} {...rest} />;
+});
 
 export default Input;

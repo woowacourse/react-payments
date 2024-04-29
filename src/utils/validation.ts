@@ -1,3 +1,7 @@
+export const isNotEmpty = (value: string) => {
+  return value !== '';
+};
+
 export const isNumber = (number: string) => {
   return !Number.isNaN(Number(number));
 };
@@ -12,4 +16,8 @@ export const isValidLength = (number: string, validLength: number) => {
 
 export const isValidRange = (number: number, min: number, max: number) => {
   return number >= min && number <= max;
+};
+
+export const isAllValid = (validations: boolean[]) => {
+  return validations.every(Boolean);
 };

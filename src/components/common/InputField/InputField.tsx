@@ -10,7 +10,7 @@ interface InputFieldProps {
   errorMessage?: string;
 }
 
-function InputField({ label, errorMessage, inputCount, children }: StrictPropsWithChildren<InputFieldProps>) {
+const InputField = ({ label, errorMessage, inputCount, children }: StrictPropsWithChildren<InputFieldProps>) => {
   return (
     <S.InputField>
       <S.InputLabel>{label}</S.InputLabel>
@@ -20,6 +20,6 @@ function InputField({ label, errorMessage, inputCount, children }: StrictPropsWi
       </S.InputContainer>
     </S.InputField>
   );
-}
+};
 
 export default InputField;

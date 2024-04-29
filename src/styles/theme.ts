@@ -1,6 +1,9 @@
 const color = {
-  primary: '#ACACAC',
-  dark: '#000000',
+  primary: {
+    light: '#ACACAC',
+    main: '#333333',
+    dark: '#000000',
+  },
   error: '#FF3D3D',
 };
 
@@ -9,6 +12,7 @@ const fontSize = {
   base: '12px',
   md: '14px',
   lg: '18px',
+  xl: '25px',
 };
 
 const theme = {

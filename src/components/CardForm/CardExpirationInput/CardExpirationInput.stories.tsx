@@ -1,10 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import CardExpirationInput from './CardExpirationInput';
+import { validateMonth, validateYear } from '../../../domain/Card';
+import useInput from '../../../hooks/useInput';
 
 const meta = {
-  title: 'CardExpirationInput',
+  title: 'component/CardExpirationInput',
   component: CardExpirationInput,
+  parameters: {
+    controls: { exclude: ['month', 'year'] },
+  },
+  decorators: [
+    () => {
+      const month = useInput<string>(validateMonth, '');
+      const year = useInput<string>(validateYear, '');
+      return <CardExpirationInput month={month} year={year} />;
+    },
+  ],
 } satisfies Meta<typeof CardExpirationInput>;
 
 export default meta;
