@@ -1,24 +1,21 @@
-import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/messages';
 import { CARD_OWNER } from '../constants/conditions';
 import Validation from '../utils/Validation';
 
+import useChangeInput from './useChangeInput';
+
 export default function useChangeOwner() {
-  const [owner, setOwner] = useState('');
-  const [ownerValid, setOwnerValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
+  const {
+    value: owner,
+    validationResult: ownerValid,
+    handleChange: handleChangeOwner,
+    handleSubmit: handleSubmitOwner,
+  } = useChangeInput('', validateOwner, () => onSubmitOwner);
 
-  const handleChangeOwner = (value: string) => {
-    const isValidOwner = validateOwner(value);
-    setOwnerValid(isValidOwner);
-    setOwner(value);
-  };
-
-  const handleSubmitOwner = () => {
+  const onSubmitOwner = () => {
     const isCompleted = Validation.isNotEmpty(owner);
-    setOwnerValid((prevState) => {
-      return { ...prevState, isCompleted }
-    });
-  }
+    return { isValid: ownerValid.isValid, isCompleted, errorMessage: ownerValid.errorMessage };
+  };
 
   return { owner, ownerValid, handleChangeOwner, handleSubmitOwner };
 }

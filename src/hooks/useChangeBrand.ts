@@ -1,23 +1,17 @@
-import { useState } from 'react';
-
 import { CARD_BRANDS } from '../constants/conditions';
 import { ERROR_MESSAGE } from '../constants/messages';
-import { CardBrandsType } from '../types/CardBrandsType';
+import type { CardBrandsType } from '../types/CardBrandsType';
+
+import useChangeInput from './useChangeInput';
 
 export default function useChangeBrand() {
-  const [brand, setBrand] = useState<CardBrandsType>('');
-  const [brandValid, setBrandValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
+  const {
+    value: brand,
+    validationResult: brandValid,
+    handleChange: handleChangeBrand,
+  } = useChangeInput('', validateCardBrand);
 
-  const handleChangeBrand = (value: string) => {
-    const isValidBrand = validateCardBrand(value);
-    setBrandValid(isValidBrand);
-
-    if (!isValidBrand.isValid && value !== '') return;
-
-    setBrand(value as CardBrandsType);
-  };
-
-  return { brand, brandValid, handleChangeBrand };
+  return { brand: brand as CardBrandsType, brandValid, handleChangeBrand };
 }
 
 function validateCardBrand(value: string) {

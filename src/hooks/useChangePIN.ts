@@ -1,17 +1,11 @@
-import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/messages';
 import { CARD_PIN } from '../constants/conditions';
 import Validation from '../utils/Validation';
 
-export default function useChangePIN() {
-  const [PIN, setPIN] = useState('');
-  const [PINValid, setPINValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
+import useChangeInput from './useChangeInput';
 
-  const handleChangePIN = (value: string) => {
-    const isValidPIN = validatePIN(value);
-    setPINValid(isValidPIN);
-    setPIN(value);
-  };
+export default function useChangePIN() {
+  const { value: PIN, validationResult: PINValid, handleChange: handleChangePIN } = useChangeInput('', validatePIN);
 
   return { PIN, PINValid, handleChangePIN };
 }

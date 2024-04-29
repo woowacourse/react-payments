@@ -1,18 +1,11 @@
-import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/messages';
 import { CARD_CVC } from '../constants/conditions';
 import Validation from '../utils/Validation';
 
+import useChangeInput from './useChangeInput';
+
 export default function useChangeCVC() {
-  const [CVC, setCVC] = useState('');
-  const [CVCValid, setCVCValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
-
-  const handleChangeCVC = (value: string) => {
-    const isValidCVC = validateCVC(value);
-    setCVCValid(isValidCVC);
-
-    setCVC(value);
-  };
+  const { value: CVC, validationResult: CVCValid, handleChange: handleChangeCVC } = useChangeInput('', validateCVC);
 
   return { CVC, CVCValid, handleChangeCVC };
 }
