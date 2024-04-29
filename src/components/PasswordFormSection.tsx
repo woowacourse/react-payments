@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import validateAndCheckError from '../domains/validateAndCheckError';
-import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -70,13 +69,6 @@ const PasswordFormSection = ({
   useEffect(() => {
     changePassword(inputState[0].value);
   }, [inputState[0].value]);
-
-  useEffect(() => {
-    changeIsValid({
-      state: 'password',
-      isValid: checkError(inputState),
-    });
-  }, [!inputState[0].hasFocus]);
 
   return (
     <FormSection>

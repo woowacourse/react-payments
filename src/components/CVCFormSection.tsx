@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
-import checkError from '../domains/checkError';
 import validateAndCheckError from '../domains/validateAndCheckError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
@@ -71,13 +70,6 @@ const CVCFormSection = ({
   useEffect(() => {
     changeCVC(inputState[0].value);
   }, [inputState[0].value]);
-
-  useEffect(() => {
-    changeIsValid({
-      state: 'cvc',
-      isValid: checkError(inputState),
-    });
-  }, [!inputState[0].hasFocus]);
 
   return (
     <FormSection>
