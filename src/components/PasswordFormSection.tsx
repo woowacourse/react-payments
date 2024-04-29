@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import validateAndCheckError from '../domains/validateAndCheckError';
+import checkError from '../domains/checkError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
@@ -65,6 +66,13 @@ const PasswordFormSection = ({
         errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
   }, [inputState[0].hasFocus]);
+
+  useEffect(() => {
+    changeIsValid({
+      state: 'password',
+      isValid: checkError(inputState),
+    });
+  }, [!inputState[0].hasFocus]);
 
   useEffect(() => {
     changePassword(inputState[0].value);
