@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from "react";
+import { Dispatch, SetStateAction, createContext, useMemo } from "react";
 import useContextWrapper from "./useContextWrapper";
 
 export const FormRenderOrderContext = createContext<
@@ -18,16 +18,19 @@ const NEXT_STEP: Record<STEP_KEYS, FormRenderOrder["step"]> = {
 const useRenderOrderState = () => {
   const [order, setOrder] = useContextWrapper(FormRenderOrderContext);
 
-  const actions = {
-    next: (currentStep: STEP_KEYS) => {
-      setOrder((prev) => {
-        if (prev.step === currentStep && NEXT_STEP[prev.step]) {
-          return { index: prev.index + 1, step: NEXT_STEP[prev.step] };
-        }
-        return prev;
-      });
-    },
-  };
+  const actions = useMemo(
+    () => ({
+      next: (currentStep: STEP_KEYS) => {
+        setOrder((prev) => {
+          if (prev.step === currentStep && NEXT_STEP[prev.step]) {
+            return { index: prev.index + 1, step: NEXT_STEP[prev.step] };
+          }
+          return prev;
+        });
+      },
+    }),
+    [setOrder]
+  );
 
   return [order, actions] as const;
 };
