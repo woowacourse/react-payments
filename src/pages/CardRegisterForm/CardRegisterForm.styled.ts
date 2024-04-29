@@ -29,10 +29,13 @@ const InputSubTitle = styled.h4`
   color: ${({ theme }) => theme.COLOR["grey-1"]};
 `;
 const Button = styled.button`
-  width: 320px;
-  height: 44px;
-  top: 414px;
-  left: 28px;
+  position: sticky;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-28px);
+
+  width: 375px;
+  height: 52px;
   gap: 0px;
   border-radius: 5px 0px 0px 0px;
   opacity: 0px;
