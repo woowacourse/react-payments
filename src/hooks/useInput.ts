@@ -20,7 +20,6 @@ const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
 
   const onChangeHandler = (e: React.ChangeEvent<T>) => {
     if (inputLimitValidation && !validate(e.target.value, [inputLimitValidation])) {
-      setValue(value);
       return;
     }
 
