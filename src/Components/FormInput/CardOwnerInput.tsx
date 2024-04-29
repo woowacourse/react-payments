@@ -6,7 +6,7 @@ import { CardOwnerInfoErrorContext } from "../../routes/Payments/FormContextProv
 
 import { cardOwnerValidator } from "./validator/changeValidator";
 import FormInputCompound from "./FormInputCompound";
-import { CardOwnerInputContext } from "../Form/FormRefContextProvider";
+import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
 import { cardOwnerBlurValidator } from "./validator/blurValidator";
 
 interface InputInfoList {
@@ -18,6 +18,7 @@ const CardOwnerInput = memo(() => {
   const [cardOwner, setData] = useContextWrapper(CardOwnerInfoContext);
   const [ownerError, setError] = useContextWrapper(CardOwnerInfoErrorContext);
   const ownerInputRef = useContextWrapper(CardOwnerInputContext)[0];
+  const nextRef = useContextWrapper(CardCVCInputContext)[0];
 
   const InputInfoList: InputInfoList[] = [{ name: "name", placeholder: "PARK JEONG-WOO" }];
 
@@ -38,6 +39,7 @@ const CardOwnerInput = memo(() => {
           value={cardOwner[name] ?? ""}
           placeholder={placeholder}
           ref={ownerInputRef}
+          nextRef={nextRef}
         />
       ))}
     </>
