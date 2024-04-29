@@ -16,7 +16,7 @@ export const 기본: Story = {
     userNameState: '',
     setUserNameState: fn(),
     isUserNameError: false,
-    showNextFieldOnLastElementBlur: fn(),
+    showNextFieldOnValid: fn(),
   },
 };
 
@@ -25,7 +25,7 @@ export const 정상입력: Story = {
     userNameState: 'KIM JINHO',
     setUserNameState: fn(),
     isUserNameError: false,
-    showNextFieldOnLastElementBlur: fn(),
+    showNextFieldOnValid: fn(),
   },
 };
 
@@ -34,7 +34,7 @@ export const 유저이름에_한글이_들어간_경우: Story = {
     userNameState: '쿠키',
     setUserNameState: fn(),
     isUserNameError: true,
-    showNextFieldOnLastElementBlur: fn(),
+    showNextFieldOnValid: fn(),
   },
 };
 
@@ -43,6 +43,6 @@ export const 유저이름_입력_사이의_공백이_없을경우: Story = {
     userNameState: 'KIMJINHO',
     setUserNameState: fn(),
     isUserNameError: true,
-    showNextFieldOnLastElementBlur: fn(),
+    showNextFieldOnValid: fn(),
   },
 };

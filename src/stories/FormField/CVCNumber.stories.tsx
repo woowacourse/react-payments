@@ -52,7 +52,6 @@ export const 기본: Story = {
     setCVCNumberState: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: false,
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -78,7 +77,6 @@ export const 정상입력: Story = {
     setCVCNumberState: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: false,
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -104,7 +102,6 @@ export const 잘못된_문자_입력: Story = {
     setCVCNumberState: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: true,
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -130,6 +127,5 @@ export const 세_자리_수가_아닐_때: Story = {
     setCVCNumberState: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: true,
-    showNextFieldOnLastElementBlur: fn(),
   },
 };

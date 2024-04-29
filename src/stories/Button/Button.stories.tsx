@@ -12,13 +12,13 @@ type Story = StoryObj<typeof meta>;
 
 export const 기본: Story = {
   args: {
-    label: '안녕',
+    children: '안녕',
   },
 };
 
 export const 테두리_둥글게: Story = {
   args: {
-    label: '안녕',
+    children: '안녕',
     style: {
       borderRadius: 8,
     },

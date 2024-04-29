@@ -21,7 +21,6 @@ export const 기본: Story = {
       isThirdError: false,
       isFourthError: false,
     },
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -35,7 +34,6 @@ export const 정상입력: Story = {
       isThirdError: false,
       isFourthError: false,
     },
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -49,7 +47,6 @@ export const 숫자형식이_아닌경우: Story = {
       isThirdError: true,
       isFourthError: false,
     },
-    showNextFieldOnLastElementBlur: fn(),
   },
 };
 
@@ -63,6 +60,5 @@ export const 카드번호_자리수가_맞지_않은_경우: Story = {
       isThirdError: false,
       isFourthError: true,
     },
-    showNextFieldOnLastElementBlur: fn(),
   },
 };

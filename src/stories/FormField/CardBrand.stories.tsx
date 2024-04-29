@@ -41,7 +41,6 @@ const meta = {
   ],
   args: {
     setCardBrandState: fn(),
-    showNextFieldOnLastElementBlur: fn(),
   },
 } satisfies Meta<typeof CardBrand>;
 
