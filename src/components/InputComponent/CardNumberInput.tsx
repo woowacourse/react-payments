@@ -1,24 +1,25 @@
 // import styled from "styled-components";
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CardNumbers } from '../../types/card';
-import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
   cardNumbers: CardNumbers;
-  handleInput: Dispatch<SetStateAction<CardNumbers>>;
-  handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
+  handleInput: {
+    updateCardNumberIsNextField : () => void
+  handleUpdateCardNumberInput:  (index: number, value: string) => void
+  handleUpdateCardNumberErrorMessages : (index: number, errorMessage: string, isError: boolean) => void;
+  }
 }
 export default function CardNumberInput({
   cardNumbers,
-  handleInput,
-  handleShowComponent,
+  handleInput: {updateCardNumberIsNextField, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages},
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-  const errorMessages = Object.values(cardNumbers).map(
+  const errorMessages = Object.values(cardNumbers.cardNumberFields).map(
     (value) => value.errorMessage
   );
 
@@ -26,54 +27,62 @@ export default function CardNumberInput({
     inputRefs.current[0]?.focus();
   }, []);
 
-  useEffect(() => {
-    const checkCompleteInput = () => {
-      const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
-          return pre + 1;
-        }
-        return pre;
-      }, 0);
-      return isNotAllError === 4;
-    };
-    if (checkCompleteInput()) {
-      handleShowComponent((prev) => ({
-        ...prev,
-        cardDropDown: true,
-      }));
-    }
-  }, [cardNumbers, handleShowComponent]);
+  // useEffect(() => {
+  //   const checkCompleteInput = () => {
+  //     const isNotAllError = Object.values(cardNumbers.cardNumberFields).reduce((pre, cur) => {
+  //       if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
+  //         return pre + 1;
+  //       }
+  //       return pre;
+  //     }, 0);
+  //     return isNotAllError === 4;
+  //   };
+  //   if (checkCompleteInput()) {
+  //     handleInput((prev) => ({
+  //       ...prev,
+  //       isNextField : true
+  //     }));
+  //   }
+  // }, [cardNumbers.cardNumberFields, handleInput]);
 
-  const handleUpdateInput = (index: number, value: string) => {
-    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
-    handleInput((prevState: CardNumbers) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          value: value,
-        },
-      };
-    });
-  };
+  // const handleUpdateInput = (index: number, value: string) => {
+  //   const cardKey =
+  //     `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
+  //   handleInput((prevState: CardNumbers) => {
+  //     return {
+  //       ...prevState,
+  //       cardNumberFields: {
+  //         ...prevState.cardNumberFields,
+  //         [cardKey]: {
+  //           ...prevState.cardNumberFields[cardKey],
+  //           value: value,
+  //         },
+  //       },
+  //     };
+  //   });
+  // };
 
-  const handleUpdateErrorMessages = (
-    index: number,
-    errorMessage: string,
-    isError: boolean
-  ) => {
-    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
-    handleInput((prevState: CardNumbers) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          errorMessage: errorMessage,
-          isError: isError,
-        },
-      };
-    });
-  };
+  // const handleUpdateErrorMessages = (
+  //   index: number,
+  //   errorMessage: string,
+  //   isError: boolean
+  // ) => {
+  //   const cardKey =
+  //     `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
+  //   handleInput((prevState: CardNumbers) => {
+  //     return {
+  //       ...prevState,
+  //       cardNumberFields: {
+  //         ...prevState.cardNumberFields,
+  //         [cardKey]: {
+  //           ...prevState.cardNumberFields[cardKey],
+  //           errorMessage: errorMessage,
+  //           isError: isError,
+  //         },
+  //       },
+  //     };
+  //   });
+  // };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -82,22 +91,24 @@ export default function CardNumberInput({
   ) => {
     try {
       Validation[info]?.(e.target.value);
-      handleUpdateErrorMessages(index, '', false);
-      handleUpdateInput(index, e.target.value);
+      handleUpdateCardNumberErrorMessages(index, '', false);
+      handleUpdateCardNumberInput(index, e.target.value);
       const nextIndex = index + 1;
       if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
         inputRefs.current[nextIndex]?.focus();
       }
+      updateCardNumberIsNextField()
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(index, error.message, true);
+        handleUpdateCardNumberErrorMessages(index, error.message, true);
       }
     }
   };
 
   const checkInputError = (index: number) => {
-    const cardKey = `cardNumber${index + 1}` as keyof CardNumbers;
-    return cardNumbers[cardKey].isError;
+    const cardKey =
+      `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
+    return cardNumbers.cardNumberFields[cardKey].isError;
   };
 
   return (
@@ -116,7 +127,9 @@ export default function CardNumberInput({
             key={index}
             type='text'
             value={
-              cardNumbers[`cardNumber${index + 1}` as keyof CardNumbers].value
+              cardNumbers.cardNumberFields[
+                `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields
+              ].value
             }
             maxLength={4}
             placeholder='1234'

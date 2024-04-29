@@ -1,4 +1,4 @@
-import { CardInfo } from '../types/card';
+import { CardBrand, CardNumbers, CVC, ExpirationDate, UserName } from '../types/card';
 import styled from 'styled-components';
 import CardChip from '../assets/image/cardclip.svg';
 import Visa from '../assets/image/VISA.svg';
@@ -67,7 +67,7 @@ const TextBox = styled.div`
   height: 30px;
 `;
 
-const CardNumbers = styled(TextBox)`
+const CardNumbersBox = styled(TextBox)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -85,10 +85,23 @@ const SecretNumber = styled.div`
   letter-spacing: 0px;
 `;
 
-export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
-  const cvcValue = cardInfo.CVC.CVC.value;
-  const monthValue = cardInfo.expirationDate.month.value;
-  const yearValue = cardInfo.expirationDate.year.value;
+interface Props{
+  cardNumbers : CardNumbers;
+  expirationDate : ExpirationDate;
+  userName : UserName
+  cardBrand : CardBrand
+  CVC : CVC
+}
+export default function CardView({
+  cardNumbers,
+  expirationDate,
+  userName,
+  cardBrand,
+  CVC,
+}:Props ) {
+  const cvcValue = CVC.CVCField.CVC.value;
+  const monthValue = expirationDate.expirationDateFields.month.value;
+  const yearValue = expirationDate.expirationDateFields.year.value;
 
   const checkCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
@@ -100,7 +113,7 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
       return Master;
   };
 
-  const cardImgSrc = checkCardType(cardInfo.cardNumbers.cardNumber1.value);
+  const cardImgSrc = checkCardType(cardNumbers.cardNumberFields.cardNumber1.value);
 
   if (cvcValue.length > 0 && cvcValue.length < 3) {
     return (
@@ -114,23 +127,23 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
   return (
     <>
       <FrontCardContainer
-        color={CARD_BRAND[cardInfo.cardBrand.cardBrand.value] || '#333333'}
+        color={CARD_BRAND[cardBrand.cardBrandField.cardBrand.value] || '#333333'}
       >
         <ImgBox>
           <CardImg src={CardChip} />
           {cardImgSrc && <CardImg src={cardImgSrc} />}
         </ImgBox>
 
-        <CardNumbers>
-          <CardNumber>{cardInfo.cardNumbers.cardNumber1.value}</CardNumber>
-          <CardNumber>{cardInfo.cardNumbers.cardNumber2.value}</CardNumber>
+        <CardNumbersBox>
+          <CardNumber>{cardNumbers.cardNumberFields.cardNumber1.value}</CardNumber>
+          <CardNumber>{cardNumbers.cardNumberFields.cardNumber2.value}</CardNumber>
           <SecretNumber>
-            {'•'.repeat(cardInfo.cardNumbers.cardNumber3.value.length)}
+            {'•'.repeat(cardNumbers.cardNumberFields.cardNumber3.value.length)}
           </SecretNumber>
           <SecretNumber>
-            {'•'.repeat(cardInfo.cardNumbers.cardNumber4.value.length)}
+            {'•'.repeat(cardNumbers.cardNumberFields.cardNumber4.value.length)}
           </SecretNumber>
-        </CardNumbers>
+        </CardNumbersBox>
         <TextBox>
           {monthValue.length === 1 &&
           monthValue !== '0'
@@ -142,7 +155,7 @@ export default function CardView({ cardInfo }: { cardInfo: CardInfo }) {
             ? `0${yearValue}`
             : yearValue}
         </TextBox>
-        <TextBox>{cardInfo.userName.userName.value}</TextBox>
+        <TextBox>{userName.userNameField.userName.value}</TextBox>
       </FrontCardContainer>
     </>
   );

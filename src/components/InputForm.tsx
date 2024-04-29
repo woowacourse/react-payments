@@ -24,7 +24,9 @@ const FormContainer = styled.div`
 `;
 
 interface HandleInput {
-  setCardNumbers: Dispatch<SetStateAction<CardNumbers>>;
+  updateCardNumberIsNextField : () => void
+  handleUpdateCardNumberInput:  (index: number, value: string) => void
+  handleUpdateCardNumberErrorMessages : (index: number, errorMessage: string, isError: boolean) => void;
   setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
   setUserName: Dispatch<SetStateAction<UserName>>;
   setCardBrand: Dispatch<SetStateAction<CardBrand>>;
@@ -36,7 +38,9 @@ interface HandleInput {
 export default function InputForm({
   cardInfo: { cardNumbers, expirationDate, userName, cardBrand, CVC, password },
   handleInput: {
-    setCardNumbers,
+    updateCardNumberIsNextField,
+    handleUpdateCardNumberInput,
+    handleUpdateCardNumberErrorMessages,
     setExpirationDate,
     setUserName,
     setCardBrand,
@@ -85,20 +89,16 @@ export default function InputForm({
           handleShowComponent={setShowComponent}
         />
       )}
-      {showComponent.cardDropDown && (
+      {cardNumbers.isNextField && (
         <CardDropDown
-          cardBrand={cardBrand}
           handleInput={setCardBrand}
           handleShowComponent={setShowComponent}
         />
       )}
-      {showComponent.cardNumberInput && (
         <CardNumberInput
           cardNumbers={cardNumbers}
-          handleInput={setCardNumbers}
-          handleShowComponent={setShowComponent}
+          handleInput={{updateCardNumberIsNextField, handleUpdateCardNumberInput ,handleUpdateCardNumberErrorMessages}}
         />
-      )}
     </FormContainer>
   );
 }

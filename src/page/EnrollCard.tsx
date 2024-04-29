@@ -37,7 +37,9 @@ const Container = styled.form`
 export default function EnrollCard() {
   const {
     cardNumbers,
-    setCardNumbers,
+    updateCardNumberIsNextField,
+    handleUpdateCardNumberInput,
+    handleUpdateCardNumberErrorMessages,
     expirationDate,
     setExpirationDate,
     userName,
@@ -49,41 +51,37 @@ export default function EnrollCard() {
     password,
     setPassword,
   } = useCardForm({});
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate("/card-registration-confirmation", { state: { ...cardNumbers,  ...cardBrand} });
-  
-    
-
+    navigate('/card-registration-confirmation', {
+      state: { ...cardNumbers, ...cardBrand },
+    });
   };
 
-  const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
-  useEffect(() => {
-    try {
-      validateCarNumbers(cardNumbers);
-      validateExpirationDate(expirationDate);
-      validateUserName(userName);
-      validateCVC(CVC);
-      validatePassword(password);
-      setSubmitButtonFlag(true);
-    } catch (error) {
-      setSubmitButtonFlag(false);
-    }
-  }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password]);
+  // const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
+  // useEffect(() => {
+  //   try {
+  //     validateCarNumbers(cardNumbers);
+  //     validateExpirationDate(expirationDate);
+  //     validateUserName(userName);
+  //     validateCVC(CVC);
+  //     validatePassword(password);
+  //     setSubmitButtonFlag(true);
+  //   } catch (error) {
+  //     setSubmitButtonFlag(false);
+  //   }
+  // }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password]);
 
   return (
     <Page>
       <Container onSubmit={handleSubmit}>
         <CardView
-          cardInfo={{
-            cardNumbers,
-            expirationDate,
-            userName,
-            cardBrand,
-            CVC,
-            password,
-          }}
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
+          userName={userName}
+          cardBrand={cardBrand}
+          CVC={CVC}
         />
         <InputForm
           cardInfo={{
@@ -95,7 +93,9 @@ const navigate = useNavigate();
             password,
           }}
           handleInput={{
-            setCardNumbers,
+            updateCardNumberIsNextField,
+            handleUpdateCardNumberInput,
+            handleUpdateCardNumberErrorMessages,
             setExpirationDate,
             setUserName,
             setCardBrand,
@@ -103,7 +103,12 @@ const navigate = useNavigate();
             setPassword,
           }}
         />
-        {submitButtonFlag && <Button value={'제출'} layoutType='bottom'></Button>}
+        {/* {submitButtonFlag && (
+          <Button
+            value={'제출'}
+            layoutType='bottom'
+          ></Button>
+        )} */}
       </Container>
     </Page>
   );

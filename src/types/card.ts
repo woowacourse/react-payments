@@ -14,29 +14,46 @@ export interface State {
 }
 
 export interface CardNumbers {
-  cardNumber1: State;
-  cardNumber2: State;
-  cardNumber3: State;
-  cardNumber4: State;
+  cardNumberFields: {
+    cardNumber1: State;
+    cardNumber2: State;
+    cardNumber3: State;
+    cardNumber4: State;
+  };
+  isNextField: boolean;
 }
-
 export interface ExpirationDate {
-  month: State;
-  year: State;
+  expirationDateFields : {
+    month: State;
+    year: State;
+  }
+  isNextField : boolean;
 }
 
 export interface UserName {
-  userName: State;
+  userNameField : {
+    userName: State;
+  }
+  isNextField : boolean;
 }
 
 export interface CardBrand {
-  cardBrand: State;
+  cardBrandField : {
+    cardBrand: State;
+  }
+  isNextField : boolean;
 }
 
 export interface CVC {
-  CVC: State;
+  CVCField : {
+    CVC: State;
+  };
+  isNextField : boolean;
 }
 
 export interface Password {
-  password: State;
+  passwordField : {
+    password: State;
+  }
+  isNextField: boolean;
 }
