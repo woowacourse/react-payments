@@ -35,9 +35,9 @@ function OwnerNameInput({
     moveToNextInput,
   } = useFormFieldFocus<HTMLInputElement>();
 
+  const name: OwnerNameKey = 'ownerName';
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as OwnerNameKey;
 
     const validators = [
       {
@@ -51,7 +51,6 @@ function OwnerNameInput({
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as OwnerNameKey;
 
     const validators = [
       {

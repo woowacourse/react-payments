@@ -37,9 +37,9 @@ export default function PasswordInput({
     moveToNextInput,
   } = useFormFieldFocus<HTMLInputElement>();
 
+  const name: PasswordKey = 'password';
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as PasswordKey;
 
     const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
     const result = validateInput(value, validators);
@@ -50,7 +50,6 @@ export default function PasswordInput({
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as PasswordKey;
 
     const validators = [
       { test: isNotEmptyString, errorMessage: ERRORS.invalidPassword },

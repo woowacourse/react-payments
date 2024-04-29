@@ -32,9 +32,9 @@ export default function CVCInput({
     moveToNextInput,
   } = useFormFieldFocus<HTMLInputElement>();
 
+  const name: CVCKey = 'cvc';
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as CVCKey;
 
     const validators = [{ test: isInteger, errorMessage: ERRORS.isNotInteger }];
     const result = validateInput(value, validators);
@@ -45,7 +45,6 @@ export default function CVCInput({
 
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const name = event.target.name as CVCKey;
 
     const validators = [
       { test: isValidCVC, errorMessage: ERRORS.isNotThreeDigit },
