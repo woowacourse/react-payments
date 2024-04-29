@@ -3,6 +3,9 @@ import { getCardType } from '../../utils/getCardType';
 import { Date } from '../../types/date';
 import { useFocusContext } from '../../providers/FocusProvider';
 import { CardCompany } from '../../types/cardCompany';
+import getCardInnerContentColor from '../../utils/getCardInnerContentColor.js';
+import classNames from 'classnames';
+import globalStyles from '../global.module.css';
 
 type CardPreview = {
   cardNumbers: string[];
@@ -15,12 +18,18 @@ type CardPreview = {
 const CardPreview = ({ cardNumbers, expirationDate, ownerName, cardCompany, CVCNumbers }: CardPreview) => {
   const { focusedInputId } = useFocusContext();
 
+  const cardInnerContentColor = getCardInnerContentColor(cardCompany);
+  const cardStyle = classNames(styles.card, {
+    [styles[cardCompany?.toLocaleLowerCase() || '']]: cardCompany !== null,
+    [globalStyles[`${cardInnerContentColor}_inner_content`]]: cardCompany !== null,
+  });
+
   return (
     <>
       {focusedInputId === 'CVCNumberInput' ? (
         <BackOfCardPreview CVCNumbers={CVCNumbers} />
       ) : (
-        <div className={`${styles.card} ${cardCompany !== null ? styles[cardCompany.toLowerCase()] : ''}`}>
+        <div className={cardStyle}>
           <div>{focusedInputId}</div>
           <div className={styles.ic_chip}></div>
           <div className={styles.chip__logo__wrapper}>
@@ -58,7 +67,6 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
 const ExpirationDate = ({ expirationDate }: { expirationDate: Date }) => {
   const dateStringList = Object.values(expirationDate);
 
-  // 모두 빈 칸이라면 /를 띄우지 않도록
   if (dateStringList.every((date) => date === '')) return;
 
   return <span>{dateStringList.join('/')}</span>;
