@@ -37,11 +37,6 @@
 */
 .card.kakao {
   background-color: var(--kakao-color);
-  color: black;
-}
-
-.card.kakao svg {
-  fill: black;
 }
 
 .card.hyundai {
