@@ -1,6 +1,4 @@
 import styles from './CardPreview.module.css';
-import Visa from '../../assets/image/Visa.png';
-import MasterCard from '../../assets/image/Mastercard.png';
 import { getCardType } from '../../utils/getCardType';
 import { Date } from '../../types/date';
 import { useFocusContext } from '../../providers/FocusProvider';
@@ -41,8 +39,6 @@ const CardPreview = ({ cardNumbers, expirationDate, ownerName, cardCompany, CVCN
 };
 
 const BackOfCardPreview = ({ CVCNumbers }: { CVCNumbers: string }) => {
-  console.log(CVCNumbers);
-
   return (
     <div className={`${styles.card} ${styles.back__of__card}`}>
       <div className={styles['cvc-section']}>{CVCNumbers}</div>
@@ -54,13 +50,15 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
   const cardStyle = styles.logo;
   const cardType = getCardType(cardNumbers[0]);
 
-  if (cardType === 'VISA') return <img src={Visa} className={cardStyle} />;
-  if (cardType === 'MASTER') return <img src={MasterCard} className={cardStyle} />;
+  if (cardType === 'Normal') return <></>;
+
+  return <img src={`./images/${cardType}.png`} className={cardStyle} />;
 };
 
 const ExpirationDate = ({ expirationDate }: { expirationDate: Date }) => {
   const dateStringList = Object.values(expirationDate);
 
+  // 모두 빈 칸이라면 /를 띄우지 않도록
   if (dateStringList.every((date) => date === '')) return;
 
   return <span>{dateStringList.join('/')}</span>;
