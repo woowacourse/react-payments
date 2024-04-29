@@ -15,17 +15,6 @@ const REG_EXP = {
   password: /^\d{2}$/,
 } as const;
 
-const CARD = {
-  bc: 0,
-  sinhan: 1,
-  kakaobank: 2,
-  hyndai: 3,
-  woori: 4,
-  lotte: 5,
-  hana: 6,
-  kb: 7,
-};
-
 const CARD_INFORMATION_APPEARED = {
   cardNumber: 1,
   selectedCard: 2,
@@ -43,7 +32,6 @@ const CONDITION = {
   showVisa: (first: number | undefined) => String(first)[0] === '4',
   showMasterCard: (first: number | undefined) =>
     String(first)[0] === '5' && ['1', '2', '3', '4', '5'].includes(String(first)[1]),
-  CARD,
   CARD_INFORMATION_APPEARED,
 } as const;
 
