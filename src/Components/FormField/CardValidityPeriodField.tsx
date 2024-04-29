@@ -25,8 +25,8 @@ const CardValidityPeriodField = () => {
   const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
 
   useEffect(() => {
-    if (isValid && renderOrder.step === "cardPeriod") {
-      setRenderOrder.next();
+    if (isValid) {
+      setRenderOrder.next("cardPeriod");
       setCardPeriodError((prev) => {
         const temp = { ...prev };
         temp.month.isError = false;
@@ -44,7 +44,7 @@ const CardValidityPeriodField = () => {
         return temp;
       });
     }
-  }, [isValid, cardPeriod]);
+  }, [isValid, cardPeriod, errorMessage, name, setCardPeriodError, setRenderOrder]);
 
   useEffect(() => {
     firstInput.current?.focus();

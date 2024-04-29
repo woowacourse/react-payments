@@ -26,8 +26,8 @@ const CardOwnerField = () => {
   const ENTER_KEY_CODE = 13;
   useEffect(() => {
     const keydownEvent = (e: KeyboardEvent) => {
-      if (isOwnerValid(cardOwner, cardOwnerError) && renderOrder.step === "cardOwner" && e.keyCode === ENTER_KEY_CODE) {
-        setRenderOrder.next();
+      if (isOwnerValid(cardOwner, cardOwnerError) && e.keyCode === ENTER_KEY_CODE) {
+        setRenderOrder.next("cardOwner");
         nextFieldInput.current?.focus();
       }
     };
@@ -35,7 +35,7 @@ const CardOwnerField = () => {
     return () => {
       cardOwnerInput.current?.removeEventListener("keydown", keydownEvent);
     };
-  }, [cardOwner, cardOwnerInput, renderOrder, setRenderOrder, nextFieldInput, cardOwnerError]);
+  }, [cardOwner, cardOwnerInput, setRenderOrder, nextFieldInput, cardOwnerError]);
 
   useEffect(() => {
     firstInput.current?.focus();

@@ -22,10 +22,10 @@ const CardNumberField = () => {
   const firstInput = useContextWrapper(CardNumberInputsContext)[0];
 
   useEffect(() => {
-    if (isNumberValid(cardNumbers, cardNumberError) && renderOrder.step === "cardNumbers") {
-      setRenderOrder.next();
+    if (isNumberValid(cardNumbers, cardNumberError)) {
+      setRenderOrder.next("cardNumbers");
     }
-  }, [cardNumbers, renderOrder, setRenderOrder, cardNumberError]);
+  }, [cardNumbers, setRenderOrder, cardNumberError]);
 
   useEffect(() => {
     firstInput.current?.focus();

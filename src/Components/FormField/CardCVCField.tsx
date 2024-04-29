@@ -23,10 +23,10 @@ const CardCVCField = () => {
   const firstInput = useContextWrapper(CardCVCInputContext)[0];
 
   useEffect(() => {
-    if (isCVCValid(cardCVC, cardCVCError) && renderOrder.step === "cardCVC") {
-      setRenderOrder.next();
+    if (isCVCValid(cardCVC, cardCVCError)) {
+      setRenderOrder.next("cardCVC");
     }
-  }, [cardCVC, renderOrder, setRenderOrder, cardCVCError]);
+  }, [cardCVC, setRenderOrder, cardCVCError]);
 
   useEffect(() => {
     firstInput.current?.focus();

@@ -14,12 +14,12 @@ const CardIssuerField = () => {
   const cardIssuerError = useContextWrapper(CardIssuerErrorContext)[0];
   const cardIssuer = useContextWrapper(CardIssuerContext)[0];
   const [renderOrder, setRenderOrder] = useRenderOrderState();
-
   useEffect(() => {
-    if (isIssuerValid(cardIssuer, cardIssuerError) && renderOrder.step === "cardIssuer") {
-      setRenderOrder.next();
+    console.log(isIssuerValid(cardIssuer, cardIssuerError));
+    if (isIssuerValid(cardIssuer, cardIssuerError)) {
+      setRenderOrder.next("cardIssuer");
     }
-  }, [cardIssuer, renderOrder, setRenderOrder, cardIssuerError]);
+  }, [cardIssuer, setRenderOrder, cardIssuerError]);
 
   return (
     <FormFieldComponent
