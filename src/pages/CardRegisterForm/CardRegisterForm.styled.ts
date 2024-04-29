@@ -28,6 +28,23 @@ const InputSubTitle = styled.h4`
   text-align: left;
   color: ${({ theme }) => theme.COLOR["grey-1"]};
 `;
+const Button = styled.button`
+  width: 320px;
+  height: 44px;
+  top: 414px;
+  left: 28px;
+  gap: 0px;
+  border-radius: 5px 0px 0px 0px;
+  opacity: 0px;
+  background: #333333;
+
+  font-family: Noto Sans KR;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.72px;
+  text-align: center;
+  color: #ffffff;
+`;
 
 const S = {
   CardFormWrapper,
@@ -35,6 +52,7 @@ const S = {
   InputSubTitle,
   InputFieldWithInfo,
   TitleWrapper,
+  Button,
 };
 
 export default S;

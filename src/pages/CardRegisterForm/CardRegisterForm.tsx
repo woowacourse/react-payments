@@ -7,6 +7,7 @@ import useInput from "@/hooks/useInput";
 import PasswordInputField from "./PasswordInputField";
 import CVCInputField from "./CVCInputField";
 import CardCompanyInputField from "./CardCompanyInputField";
+import { useNavigate } from "react-router-dom";
 
 type InputState = ReturnType<typeof useInput>;
 interface Props {
@@ -40,6 +41,13 @@ const CardRegisterForm = ({
   const isFilled = (states: InputState[]) => states.every((state) => state.value.length !== 0);
   const isCompleteTo = (index: number) =>
     statesCollection.slice(0, index + 1).every((reduceds) => isValid(reduceds) && isFilled(reduceds));
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/card-register-complete", {
+      state: { cardNumber: cardNumbersStates[0].value, cardCompany: cardCompanyStates[0].value },
+    });
+  };
   return (
     <S.CardFormWrapper>
       {/* 비밀번호 앞 2자리 */}
@@ -103,6 +111,8 @@ const CardRegisterForm = ({
         </S.TitleWrapper>
         <CardNumberInputField inputState={cardNumbersStates} />
       </S.InputFieldWithInfo>
+
+      {isCompleteTo(5) && <S.Button onClick={handleClick}>확인</S.Button>}
     </S.CardFormWrapper>
   );
 };

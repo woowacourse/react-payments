@@ -5,7 +5,6 @@ import { CARD_BRAND_INFO, Company } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
 import { useState } from "react";
 import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
-import { useNavigate } from "react-router-dom";
 
 const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced.value);
 
@@ -33,13 +32,6 @@ const CardRegister = () => {
 
   const cardCompany = cardCompanyStates[0].value;
 
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/card-register-complete", {
-      state: { cardNumber: cardNumbersStates[0].value, cardCompany: cardCompany },
-    });
-  };
-
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
@@ -63,7 +55,6 @@ const CardRegister = () => {
           cardCompanyStates={cardCompanyStates}
           setIsCVCFocused={setIsCVCFocused}
         />
-        <button onClick={handleClick}>확인</button>
       </S.FlexWrapper>
     </S.CardRegisterWrapper>
   );
