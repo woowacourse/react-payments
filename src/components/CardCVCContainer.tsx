@@ -31,7 +31,7 @@ const CardCVCContainer = ({
           placeholder="123"
           width="100%"
           maxLength={4}
-          autoFocus={true}
+          autoFocus
         />
       </InputField>
       <ErrorWrapper>

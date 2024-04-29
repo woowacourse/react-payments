@@ -34,7 +34,7 @@ const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) 
           placeholder="MM"
           maxLength={2}
           width="48%"
-          autoFocus={true}
+          autoFocus
           ref={month.inputRef}
         />
         <Input
