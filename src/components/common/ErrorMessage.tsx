@@ -10,7 +10,6 @@ export default function ErrorMessage({ message }: ErrorMessageProps) {
 
 const SErrorMessage = styled.div`
   height: 14px;
-  font-family: Noto Sans KR;
   font-size: 9.5px;
   font-weight: 400;
   line-height: 13px;

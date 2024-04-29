@@ -72,7 +72,6 @@ const CheckmarkIcon = styled.img`
 
 const SuccessMessage = styled.h1`
   width: 338px;
-  font-family: Noto Sans KR;
   font-size: 25px;
   font-weight: 700;
   line-height: 36.2px;
@@ -87,7 +86,6 @@ const GoBackButton = styled.button`
   border-radius: 5px;
   border: 0;
 
-  font-family: Noto Sans KR;
   font-size: 15px;
   font-weight: 700;
   line-height: 21.72px;
