@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import CreditCardFront from "../../components/creditCard/front";
 import CreditCardForm from "../../components/creditCardForm";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import {
@@ -9,7 +8,6 @@ import {
   InfoValue,
   OwnerValue,
 } from "../../@types/CreditCard";
-import SIGN from "../../constants/sign";
 import InputCreditCardNumber from "../../components/input/InputCreditCardNumber";
 import InputExpirationPeriod from "../../components/input/InputExpirationPeriod";
 import InputOwnerName from "../../components/input/InputOwnerName";
@@ -20,13 +18,14 @@ import InputCVC from "../../components/input/InputCVC";
 import InputPassword from "../../components/input/InputPassword";
 import useCurrentIndex from "../../hooks/useCurrentIndex";
 import { useEffect, useState } from "react";
-import CreditCardBack from "../../components/creditCard/back";
 import CARD_INPUT_LENGTH from "../../constants/cardInputLength";
 import Button from "../../components/button/common";
 import { useNavigate } from "react-router-dom";
 import useFormInputBlur from "../../hooks/useFormInputBlur";
 import isInputComplete from "../../utils/isInputComplete";
 import CARD_EMPTY from "../../constants/cardEmpty";
+import CreditCard from "../../components/creditCard";
+import SIGN from "../../constants/sign";
 
 interface CreditCardForms {
   title: string;
@@ -38,12 +37,9 @@ interface CreditCardForms {
 const CardRegistration = () => {
   const [cardNumber, setCardNumber, blurCardNumber, cardNumberError] =
     useFormInputBlur<CardNumberValue>(CARD_EMPTY.cardNumber);
-
   const { isDropdown, handleDropdown, selected, handleSelected } = useSelect<CardType>();
-
   const [expirationPeriod, setExpirationPeriod, blurExpirationPeriod, expirationPeriodError] =
     useFormInputBlur<ExpirationPeriodValue>(CARD_EMPTY.expiration);
-
   const [owner, setOwner, blurOwner, ownerError] = useFormInputBlur<OwnerValue>(CARD_EMPTY.owner);
   const [info, setInfo, blurInfo, infoError] = useFormInputBlur<InfoValue>(CARD_EMPTY.info);
   const [authentication, setAuthentication, blurAuthentication, authenticationError] =
@@ -59,22 +55,14 @@ const CardRegistration = () => {
     info,
     authentication
   );
-
   const currentIndex = useCurrentIndex(...completeStatus);
-
   const isFormComplete = completeStatus.every(Boolean);
-
   const router = useNavigate();
 
   useEffect(() => {
     if (info.cvc) setShowPreviewCardBack(true);
     if (info.cvc.length === CARD_INPUT_LENGTH.cvc) setShowPreviewCardBack(false);
   }, [info.cvc]);
-
-  const formatExpirationPeriod = () =>
-    expirationPeriod.year.length
-      ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
-      : expirationPeriod.month;
 
   const creditCardForms: CreditCardForms[] = [
     {
@@ -120,7 +108,7 @@ const CardRegistration = () => {
     },
     {
       title: CARD_FORM_MESSAGE.inputCardOwner,
-      description: "",
+      description: SIGN.empty,
       inputError: ownerError,
       childComponent: (
         <InputOwnerName
@@ -133,7 +121,7 @@ const CardRegistration = () => {
     },
     {
       title: CARD_FORM_MESSAGE.inputCvc,
-      description: "",
+      description: SIGN.empty,
       inputError: infoError,
       childComponent: (
         <InputCVC
@@ -161,22 +149,9 @@ const CardRegistration = () => {
 
   return (
     <PaymentsContainer>
-      {!showPreviewCardBack ? (
-        <CreditCardFront
-          creditCardNumber={[
-            cardNumber.firstValue,
-            cardNumber.secondValue,
-            cardNumber.thirdValue,
-            cardNumber.fourthValue,
-          ]}
-          expirationPeriod={formatExpirationPeriod()}
-          ownerName={owner.name}
-          selectedCard={selected}
-        />
-      ) : (
-        <CreditCardBack cvcNumber={info.cvc} />
-      )}
-
+      <CreditCard
+        {...{ showPreviewCardBack, expirationPeriod, cardNumber, owner, selected, info }}
+      />
       <InputFormContainer>
         {creditCardForms.map((formData, idx) => {
           if (idx > currentIndex) return;
