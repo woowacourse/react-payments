@@ -3,6 +3,7 @@ import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
 import FormItem from "./FormItem";
 import SectionTitle from "./SectionTitle";
 import { UseInputHookValue } from "../hooks/useInput";
+import onEnterKeyDown from "../utils/onEnterKeyDown";
 
 export interface CardHolderProps {
   holderInput: UseInputHookValue;
@@ -10,12 +11,9 @@ export interface CardHolderProps {
 
 export default function CardHolder({ holderInput }: CardHolderProps) {
   const onEnterHandler = (e: React.KeyboardEvent) => {
-    if (!holderInput.value) {
-      return;
-    }
-    if (e.key === "Enter" && holderInput.setIsComplete) {
-      holderInput.setIsComplete(true);
-    }
+    onEnterKeyDown(e, () => {
+      if (holderInput.setIsComplete) holderInput.setIsComplete(true);
+    });
   };
 
   return (
