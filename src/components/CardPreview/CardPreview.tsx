@@ -57,7 +57,7 @@ const BackOfCardPreview = ({ CVCNumbers }: { CVCNumbers: string }) => {
 };
 
 const CardLogo = memo(({ firstCardNumberUnit }: { firstCardNumberUnit: string }) => {
-  if (firstCardNumberUnit.length < 2) return;
+  if (firstCardNumberUnit.length > 2) return;
 
   const cardStyle = styles.logo;
   const cardType = getCardType(firstCardNumberUnit);
