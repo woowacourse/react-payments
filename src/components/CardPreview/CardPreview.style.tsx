@@ -1,12 +1,23 @@
 import styled from 'styled-components';
+import { CardBrandsType } from '../../types/CardBrandsType';
+import { CARD_BRANDS } from '../../constants/conditions';
 
-export const Card = styled.div`
+export const CardFrontside = styled.div<{ $brand: CardBrandsType }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background: var(--grey-400);
+  background-color: ${(props) => (props.$brand ? CARD_BRANDS[props.$brand].color : 'var(--grey-600)')};
   box-shadow: 3px 3px 5px 0px var(--card-shadow);
+
+  color: ${(props) => (props.$brand === CARD_BRANDS.카카오뱅크.name ? 'var(--grey-700)' : 'var(--grey-100)')};
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  word-break: break-all;
+
+  transition: 0.3s ease;
 `;
 
 export const CardHeader = styled.header`
@@ -25,6 +36,7 @@ export const ChipBox = styled.div`
 export const LogoBox = styled.div`
   width: 36px;
   height: 22px;
+  text-align: right;
 `;
 
 export const CardBody = styled.div`
@@ -40,12 +52,6 @@ export const InfoBox = styled.p<{ $length?: number }>`
   align-items: center;
   width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
   height: 20px;
-  color: white;
-  font-size: var(--font-size-xl);
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.08em;
-  word-break: break-all;
 
   img {
     width: 4px;
@@ -56,4 +62,32 @@ export const InfoBox = styled.p<{ $length?: number }>`
 export const InfoContainer = styled.div`
   display: flex;
   column-gap: 5px;
+`;
+
+export const CardBackside = styled.div`
+  position: relative;
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  padding: 0;
+  background-color: var(--card-backside-bg);
+  box-shadow: 3px 3px 5px 0px var(--card-shadow);
+  transition: 0.3s ease;
+  vertical-align: bottom;
+`;
+
+export const CVCBox = styled.div`
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  height: 24px;
+  background-color: var(--card-cvc-bg);
+  padding: 2px 16px;
+  text-align: right;
+
+  color: var(--grey-100);
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0.08em;
 `;

@@ -7,16 +7,27 @@ import { CARD_OWNER } from '../../constants/conditions';
 interface CardOwnerInputProps {
   isOwnerValid: { isValid: boolean; errorMessage: string };
   onChangeOwner: (value: string) => void;
+  onSubmitOwner: () => void;
 }
 
-export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwnerInputProps) {
+export default function CardOwnerInput({ isOwnerValid, onChangeOwner, onSubmitOwner }: CardOwnerInputProps) {
   const handleOwnerInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.value = event.target.value.replace(CARD_OWNER.INVALID_CHARS_REGEX, '').toUpperCase();
     onChangeOwner(event.target.value);
   };
 
+  const handleOwnerBlur = () => {
+    onSubmitOwner();
+  };
+
+  const handleOwnerKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSubmitOwner();
+    }
+  };
+
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
       <InputField label="소유자 이름" length={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={isOwnerValid.errorMessage}>
         <Input
@@ -24,7 +35,10 @@ export default function CardOwnerInput({ isOwnerValid, onChangeOwner }: CardOwne
           maxLength={CARD_OWNER.MAX_LENGTH}
           placeholder="SEONGJIN HONG"
           onChange={handleOwnerInput}
+          onBlur={handleOwnerBlur}
+          onKeyDown={handleOwnerKeyDown}
           isValid={isOwnerValid.isValid}
+          autoFocus
         />
       </InputField>
     </div>

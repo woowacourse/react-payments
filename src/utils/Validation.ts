@@ -14,6 +14,10 @@ const Validation = {
   isEnglishWithSpace(value: string) {
     return /^[a-zA-Z][a-zA-Z ]*$/.test(value);
   },
+
+  isNotEmpty(value: string) {
+    return value !== '';
+  },
 };
 
 export default Validation;

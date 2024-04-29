@@ -14,7 +14,7 @@ export const Title = styled.h2`
 `;
 
 export const SubTitle = styled.p`
-  color: var(--grey-300);
+  color: var(--grey-400);
   font-size: var(--font-size-sm);
   font-weight: 400;
   line-height: 13px;

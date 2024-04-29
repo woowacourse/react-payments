@@ -37,9 +37,9 @@ export const CARD_OWNER = {
   MAX_LENGTH: 30,
 } as const;
 
-export const CARD_PREFIX_PATTERNS = {
+export const CARD_GLOBAL_BRAND_PREFIX_PATTERNS = {
   /**
-   * 카드 번호의 패턴에 따른 카드사 식별 규칙을 정합니다.
+   * 카드 번호의 패턴에 따른 글로벌 카드사 식별 규칙을 정합니다.
    *
    * - VISA : 4로 시작하는 카드 번호
    * - Master Card : 51 ~ 55 사이의 숫자로 시작하는 카드 번호
@@ -47,4 +47,63 @@ export const CARD_PREFIX_PATTERNS = {
   VISA_PREFIX: 4,
   MASTER_CARD_PREFIX_MIN: 51,
   MASTER_CARD_PREFIX_MAX: 55,
+} as const;
+
+export const CARD_CVC = {
+  /**
+   * 카드 CVC 번호를 검증하기 위한 규칙을 정합니다.
+   *
+   * - 오직 0 ~ 9 사이의 숫자 입력만 허용합니다.
+   * - 양수/음수 기호(+, -), 소수점 등의 입력을 허용하지 않기 위해 정규식으로 검증합니다.
+   */
+  INPUT_FIELD_COUNT: 1,
+  INVALID_CHARS_REGEX: /[^0-9]/g,
+  MAX_LENGTH: 3,
+} as const;
+
+export const CARD_PIN = {
+  /**
+   * 카드 PIN 번호를 검증하기 위한 규칙을 정합니다.
+   *
+   * - 오직 0 ~ 9 사이의 숫자 입력만 허용합니다.
+   * - 양수/음수 기호(+, -), 소수점 등의 입력을 허용하지 않기 위해 정규식으로 검증합니다.
+   */
+  INPUT_FIELD_COUNT: 1,
+  INVALID_CHARS_REGEX: /[^0-9]/g,
+  MAX_LENGTH: 2,
+} as const;
+
+export const CARD_BRANDS = {
+  BC카드: {
+    name: 'BC카드',
+    color: '#F04651',
+  },
+  신한카드: {
+    name: '신한카드',
+    color: '#0046FF',
+  },
+  카카오뱅크: {
+    name: '카카오뱅크',
+    color: '#FFE600',
+  },
+  현대카드: {
+    name: '현대카드',
+    color: '#000000',
+  },
+  우리카드: {
+    name: '우리카드',
+    color: '#007BC8',
+  },
+  롯데카드: {
+    name: '롯데카드',
+    color: '#ED1C24',
+  },
+  하나카드: {
+    name: '하나카드',
+    color: '#009490',
+  },
+  국민카드: {
+    name: '국민카드',
+    color: '#6A6056',
+  },
 } as const;

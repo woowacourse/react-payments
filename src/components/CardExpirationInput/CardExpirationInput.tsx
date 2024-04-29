@@ -4,6 +4,8 @@ import TitleContainer from '../common/TitleContainer/TitleContainer';
 import InputField from '../common/InputField/InputField';
 import Input from '../common/Input/Input';
 
+import useInputAutoFocus from '../../hooks/useInputAutoFocus';
+
 import { CARD_EXPIRATION } from '../../constants/conditions';
 
 interface CardExpirationInputProps {
@@ -18,6 +20,7 @@ export default function CardExpirationInput({
   onChangeExpireDate,
 }: CardExpirationInputProps) {
   const [expireDate, setExpireDate] = useState({ month: '', year: '' });
+  const { setInputRef, focusNextInput } = useInputAutoFocus(CARD_EXPIRATION.INPUT_FIELD_COUNT);
 
   const errorMessage = () => {
     if (isMonthValid.errorMessage !== '') return isMonthValid.errorMessage;
@@ -31,6 +34,10 @@ export default function CardExpirationInput({
       return { ...prevState, month: event.target.value };
     });
     onChangeExpireDate(event.target.value, expireDate.year);
+
+    if (event.target.value.length === CARD_EXPIRATION.MAX_LENGTH) {
+      focusNextInput();
+    }
   };
 
   const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,18 +49,25 @@ export default function CardExpirationInput({
   };
 
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
       <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input
+          ref={setInputRef(0)}
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="MM"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleMonthChange}
           isValid={isMonthValid.isValid}
+          autoFocus
         />
         <Input
+          ref={setInputRef(1)}
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="YY"
           maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={handleYearChange}
