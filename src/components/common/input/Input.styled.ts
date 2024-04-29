@@ -1,18 +1,10 @@
 import styled from 'styled-components';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  isError?: boolean;
-}
-
-const Input = ({ isError = false, ...rest }: InputProps) => {
-  return <StyledInput $isError={isError} {...rest} />;
-};
-
 interface StyledInputProps {
   $isError: boolean;
 }
 
-const StyledInput = styled.input<StyledInputProps>`
+export const StyledInput = styled.input<StyledInputProps>`
   width: ${props => props.width};
   padding: 10px 7px;
 
@@ -28,5 +20,3 @@ const StyledInput = styled.input<StyledInputProps>`
     outline: none;
   }
 `;
-
-export default Input;

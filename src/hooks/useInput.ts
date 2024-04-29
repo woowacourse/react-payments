@@ -1,31 +1,30 @@
 import { useState } from 'react';
-import { ErrorDetail } from '../components/types/error';
-import { INITIAL_ERROR_VALUE } from '../constants/error';
+import { ErrorDetail } from '../types/error';
+import useError from './useError';
 
-const useInput = (initialValue = '', validate?: (value: string) => ErrorDetail) => {
+interface ValidatorProps {
+  onChange: (value: string) => ErrorDetail;
+  onBlur: (value: string) => ErrorDetail;
+}
+
+const useInput = (initialValue = '', validator: ValidatorProps) => {
   const [value, setValue] = useState(initialValue);
-  const [errorInfo, setErrorInfo] = useState(INITIAL_ERROR_VALUE);
+  const { errorInfo, setErrorInfo, updateErrorMessage } = useError(value, validator);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(() => e.target.value);
-  };
-
-  const updateErrorMessage = () => {
-    if (validate) {
-      const validationResult = validate(value);
-
-      setErrorInfo({
-        ...validationResult,
-      });
-    }
+    const onChangeValidationResult = validator.onChange(e.target.value);
+    setErrorInfo({ ...onChangeValidationResult });
+    if (onChangeValidationResult.isError) return;
+    setValue(e.target.value);
   };
 
   return {
     value,
     setValue,
     handleChange,
-    updateErrorMessage,
     errorInfo,
+    setErrorInfo,
+    updateErrorMessage,
   };
 };
 

@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardPreview from '../components/CardPreview';
+import CardPreview from '../components/cardPreview/CardPreview';
 
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
   argTypes: {
     cardNumbers: {
-      description: '• Visa: 4로 시작하는 16자리 숫자 <br /> • MasterCard: 51~55로 시작하는 16자리 숫자',
+      description:
+        '• Visa: 4로 시작하는 16자리 숫자 <br /> • MasterCard: 51~55로 시작하는 16자리 숫자',
       options: {
         default: {
           first: '1234',
@@ -47,6 +48,21 @@ const meta = {
       },
       control: { type: 'select' },
     },
+
+    cvc: { control: { type: 'text', maxLength: 4 } },
+    cardType: {
+      option: {
+        BC카드: 'BC카드',
+        신한카드: '신한카드',
+        카카오뱅크: '카카오뱅크',
+        현대카드: '현대카드',
+        우리카드: '우리카드',
+        롯데카드: '롯데카드',
+        하나카드: '하나카드',
+        국민카드: '국민카드',
+      },
+      control: { type: 'select' },
+    },
   },
 } satisfies Meta<typeof CardPreview>;
 
@@ -67,5 +83,8 @@ export const Default: Story = {
       year: 'YY',
     },
     cardholderName: 'John Doe',
+    isCardFront: true,
+    cardType: '',
+    cvc: '123',
   },
 };

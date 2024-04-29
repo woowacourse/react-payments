@@ -1,13 +1,14 @@
-import Input from './common/Input';
+import Input from './common/input/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputField from './common/InputField';
-import { ErrorDetail } from './types/error';
+import InputField from './common/inputField/InputField';
+import { ErrorDetail } from '../types/error';
 
 interface ExpiryDateInfo {
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateErrorMessage: () => void;
   errorInfo: ErrorDetail;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 interface CardExpiryDateContainerProps {
@@ -33,6 +34,8 @@ const CardExpiryDateContainer = ({ month, year }: CardExpiryDateContainerProps) 
           placeholder="MM"
           maxLength={2}
           width="48%"
+          autoFocus
+          ref={month.inputRef}
         />
         <Input
           id="card-expiry-year-input"

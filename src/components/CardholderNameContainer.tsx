@@ -1,23 +1,23 @@
-import Input from './common/Input';
+import Input from './common/input/Input';
 import { ErrorWrapper, ErrorText } from '../styles/common';
-import InputField from './common/InputField';
-import { ErrorDetail } from './types/error';
+import InputField from './common/inputField/InputField';
+import { ErrorDetail } from '../types/error';
 
 interface CardholderNameContainerProps {
-  cardholderName: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  updateErrorMessage: () => void;
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleBlur: () => void;
   errorInfo: ErrorDetail;
 }
 
 const CardholderNameContainer = ({
-  cardholderName,
-  setValue,
-  updateErrorMessage,
+  value,
+  handleChange,
+  handleBlur,
+  handleKeyDown,
   errorInfo,
 }: CardholderNameContainerProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value.toUpperCase());
-
   return (
     <div>
       <InputField
@@ -28,12 +28,14 @@ const CardholderNameContainer = ({
         <Input
           id="cardholder-name-input"
           isError={errorInfo.isError}
-          value={cardholderName}
+          value={value}
           onChange={handleChange}
-          onBlur={updateErrorMessage}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
           placeholder="JOHN DOE"
           width="100%"
           maxLength={100}
+          autoFocus
         />
       </InputField>
       <ErrorWrapper>
