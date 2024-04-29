@@ -1,6 +1,7 @@
 import React, { KeyboardEvent, useRef, useState } from 'react';
 
 import { CardIssuer } from '../../type';
+import useHTMLRefs from '../useRefs';
 import useIsFocus from '../useIsFocus';
 import useRadio from '../useRadio';
 
@@ -31,25 +32,7 @@ export default function useCardIssuer() {
   } = useIsFocus();
   const [isTouched, setIsTouched] = useState(false);
 
-  const bcRef = useRef<HTMLDivElement>(null);
-  const hanaRef = useRef<HTMLDivElement>(null);
-  const hyundaiRef = useRef<HTMLDivElement>(null);
-  const kbRef = useRef<HTMLDivElement>(null);
-  const kakaoRef = useRef<HTMLDivElement>(null);
-  const lotteRef = useRef<HTMLDivElement>(null);
-  const shinhanRef = useRef<HTMLDivElement>(null);
-  const wooriRef = useRef<HTMLDivElement>(null);
-
-  const refs = [
-    bcRef,
-    hanaRef,
-    hyundaiRef,
-    kbRef,
-    kakaoRef,
-    lotteRef,
-    shinhanRef,
-    wooriRef,
-  ];
+  const refs = useHTMLRefs<HTMLDivElement>(options.length);
   const nowRefIdx = useRef(0);
 
   const optionOnMouseDowns = radioOnMouseDowns.map((mouseDown, idx) => {

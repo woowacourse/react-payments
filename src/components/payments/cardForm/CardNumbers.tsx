@@ -2,7 +2,6 @@ import {
   PAYMENTS_INPUT_MESSAGE,
   PAYMENTS_MESSAGE,
 } from '../../../constants/message';
-import { useRef, useState } from 'react';
 
 import { BOUND } from '../../../constants/number';
 import FormItem from '../../FormItem';
@@ -10,16 +9,14 @@ import SectionTitle from '../../SectionTitle';
 import TextInput from '../../TextInput';
 import TextInputContainer from '../../InputContainer';
 import { UseCardNumbers } from '../../../hooks/payments/useCardNumbers';
+import useHTMLRefs from '../../../hooks/useRefs';
+import { useState } from 'react';
 
 interface props {
   useCardNumbers: UseCardNumbers;
 }
 export default function CardNumbers({ useCardNumbers }: props) {
-  const firstRef = useRef<HTMLInputElement>(null);
-  const secondRef = useRef<HTMLInputElement>(null);
-  const thirdRef = useRef<HTMLInputElement>(null);
-  const fourthRef = useRef<HTMLInputElement>(null);
-  const refs = [firstRef, secondRef, thirdRef, fourthRef];
+  const refs = useHTMLRefs<HTMLInputElement>(4);
   const [nowFocusIdx, setNowFocusIdx] = useState(0);
 
   const numberElements = useCardNumbers.cardNumberOnChanges.map(
