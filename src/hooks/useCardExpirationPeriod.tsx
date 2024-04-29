@@ -41,5 +41,17 @@ export default function useCardExpirationPeriod({ onFocus }: PropsWithOnFocus) {
     yearInput,
   ];
 
-  return { expirationPeriodInputs };
+  const cardExpirationPeriodValue = expirationPeriodInputs.map(
+    (input) => input.value
+  ) as [string, string];
+
+  const isCardExpirationPeriodComplete = expirationPeriodInputs
+    .map((input) => input.isComplete)
+    .every((result) => result === true);
+
+  return {
+    expirationPeriodInputs,
+    cardExpirationPeriodValue,
+    isCardExpirationPeriodComplete,
+  };
 }

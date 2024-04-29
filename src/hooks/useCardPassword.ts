@@ -18,5 +18,8 @@ export default function useCardPassword({ onFocus }: PropsWithOnFocus) {
 
   const passwordInput = useInput(useInputProps);
 
-  return { passwordInput };
+  return {
+    passwordInput,
+    isCardPasswordComplete: passwordInput.isComplete,
+  };
 }

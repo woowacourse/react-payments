@@ -21,45 +21,39 @@ import { useState } from "react";
 
 export default function CardRegistrationPage() {
   const navigate = useNavigate();
+
   const [isCardFrontView, setIsCardFrontView] = useState(true);
 
-  const { cardNumberInputs } = useCardNumbers({ onFocus: showCardFront });
+  const { cardNumberInputs, cardNumbersValue, isCardNumberComplete } =
+    useCardNumbers({ onFocus: showCardFront });
+
   const [cardIssuer, setCardIssuer] = useState("");
-  const { expirationPeriodInputs } = useCardExpirationPeriod({
+
+  const {
+    expirationPeriodInputs,
+    cardExpirationPeriodValue,
+    isCardExpirationPeriodComplete,
+  } = useCardExpirationPeriod({
     onFocus: showCardFront,
   });
-  const { holderInput } = useCardHolder({ onFocus: showCardFront });
-  const { cvcInput } = useCardCvcNumber({ onFocus: showCardBack });
-  const { passwordInput } = useCardPassword({ onFocus: showCardFront });
-
-  const cardNumbersValue = cardNumberInputs.map((input) => input.value) as [
-    string,
-    string,
-    string,
-    string,
-  ];
-
-  const cardExpirationPeriodValue = expirationPeriodInputs.map(
-    (input) => input.value
-  ) as [string, string];
-
-  const isCardNumberComplete = cardNumberInputs
-    .map((input) => input.isComplete)
-    .every((result) => result === true);
+  const { holderInput, cardHolderValue, isCardHolerComplete } = useCardHolder({
+    onFocus: showCardFront,
+  });
+  const { cvcInput, cardCvcNumberValue, isCardCvcNumberComplete } =
+    useCardCvcNumber({ onFocus: showCardBack });
+  const { passwordInput, isCardPasswordComplete } = useCardPassword({
+    onFocus: showCardFront,
+  });
 
   const isCardIssuerComplete = cardIssuer !== "";
-
-  const isCardExpirationPeriodComplete = expirationPeriodInputs
-    .map((input) => input.isComplete)
-    .every((result) => result === true);
 
   const isCompleteArray = [
     isCardNumberComplete,
     isCardIssuerComplete,
     isCardExpirationPeriodComplete,
-    holderInput.isComplete,
-    cvcInput.isComplete,
-    passwordInput.isComplete,
+    isCardHolerComplete,
+    isCardCvcNumberComplete,
+    isCardPasswordComplete,
   ];
 
   const curProgress = useProgress(isCompleteArray);
@@ -105,9 +99,9 @@ export default function CardRegistrationPage() {
         cardType={matchCardType(cardNumbersValue.join(""))}
         cardNumbers={cardNumbersValue}
         cardExpirationPeriod={cardExpirationPeriodValue}
-        cardHolder={holderInput.value}
+        cardHolder={cardHolderValue}
         cardIssuer={cardIssuer}
-        cardCvcNumber={cvcInput.value}
+        cardCvcNumber={cardCvcNumberValue}
       />
       <form css={styledForm}>
         {cardFormListJsx.map((component: JSX.Element, index: number) => {

@@ -28,5 +28,16 @@ export default function useCardNumbers({ onFocus }: PropsWithOnFocus) {
     UseInputHookValue,
   ] = [firstInput, secondInput, thirdInput, fourthInput];
 
-  return { cardNumberInputs };
+  const cardNumbersValue = cardNumberInputs.map((input) => input.value) as [
+    string,
+    string,
+    string,
+    string,
+  ];
+
+  const isCardNumberComplete = cardNumberInputs
+    .map((input) => input.isComplete)
+    .every((result) => result === true);
+
+  return { cardNumberInputs, cardNumbersValue, isCardNumberComplete };
 }

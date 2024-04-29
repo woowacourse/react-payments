@@ -22,5 +22,9 @@ export default function useCardHolder({ onFocus }: PropsWithOnFocus) {
 
   const holderInput = useInput(useInputProps);
 
-  return { holderInput };
+  return {
+    holderInput,
+    cardHolderValue: holderInput.value,
+    isCardHolerComplete: holderInput.isComplete,
+  };
 }

@@ -18,5 +18,9 @@ export default function useCardCvcNumber({ onFocus }: PropsWithOnFocus) {
 
   const cvcInput = useInput(useInputProps);
 
-  return { cvcInput };
+  return {
+    cvcInput,
+    cardCvcNumberValue: cvcInput.value,
+    isCardCvcNumberComplete: cvcInput.isComplete,
+  };
 }
