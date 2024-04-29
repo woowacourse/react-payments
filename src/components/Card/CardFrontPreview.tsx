@@ -1,7 +1,5 @@
-import MASTERCARD_IMAGE from "../../assets/image/Mastercard.png";
-import VISA_IMAGE from "../../assets/image/Visa.png";
 import CARD_NUMBER_BLIND_IMAGE from "../../assets/image/CardNumberBlind.svg";
-import checkCardType from "../../utils/checkCardType";
+import CardLogo from "./CardLogo";
 import styles from "./CardPreview.module.css";
 
 const CardFrontPreview = ({
@@ -15,13 +13,6 @@ const CardFrontPreview = ({
   date: Record<string, string>;
   ownerName: string;
 }) => {
-  const displayCardLogo = () => {
-    if (checkCardType(cardNumbers[0]) === "Mastercard")
-      return <img src={MASTERCARD_IMAGE} className={styles.logo} />;
-    if (checkCardType(cardNumbers[0]) === "Visa")
-      return <img src={VISA_IMAGE} className={styles.logo} />;
-  };
-
   const getCardCompanyClass = (companyName: string) => {
     switch (companyName) {
       case "BC카드":
@@ -51,7 +42,7 @@ const CardFrontPreview = ({
       <div className={styles.ic_chip}></div>
       <div className={styles.chip__logo__wrapper}>
         <div className={styles.chip}></div>
-        {displayCardLogo()}
+        <CardLogo firstFourCardNumbers={cardNumbers[0]} />
       </div>
       <div className={styles.card__info__container}>
         <div className={styles.card__number__container}>
