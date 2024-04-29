@@ -11,6 +11,7 @@ const CAPTION = {
   cardNumber: '본인 명의의 카드만 결제 가능합니다.',
   cardSelect: '현재 국내 카드사만 가능합니다.',
   expirationDate: '월/년도(MMYY)를 순서대로 입력해주세요.',
+  userName: '입력을 완료한 다음 tap 키를 눌러주세요.',
   password: '앞의 2자리를 입력해주세요',
 } as const;
 

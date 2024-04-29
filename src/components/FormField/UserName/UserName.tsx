@@ -5,7 +5,7 @@ import MESSAGE from '../../../constants/Message';
 import CONDITION from '../../../constants/Condition';
 import { UserNameStateType } from '../../../hooks/useUserName';
 
-const { PLACEHOLDER, TITLE, LABEL } = MESSAGE;
+const { PLACEHOLDER, TITLE, LABEL, CAPTION } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
 
 interface UserNameProps {
@@ -14,7 +14,7 @@ interface UserNameProps {
 
 const UserName = ({ userNameState }: UserNameProps) => {
   return (
-    <FormField title={TITLE.userName}>
+    <FormField title={TITLE.userName} caption={CAPTION.userName}>
       <InputField label={LABEL.userName} error={userNameState.errorMessage}>
         <Input
           placeholder={PLACEHOLDER.userName}
@@ -22,6 +22,8 @@ const UserName = ({ userNameState }: UserNameProps) => {
           maxLength={MAX_LENGTH.userName}
           onChange={userNameState.setValue}
           invalid={userNameState.isError}
+          onFocus={() => userNameState.setIsFocus(true)}
+          onBlur={() => userNameState.setIsFocus(false)}
           autoFocus
         />
       </InputField>
