@@ -1,5 +1,6 @@
 import { forwardRef, useState } from 'react';
 import styles from './Input.module.css';
+import classNames from 'classnames';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
@@ -8,10 +9,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, onFocus, onBlur, onChange, ...rest }, ref) => {
   const [isFocus, setIsFocus] = useState(false);
 
-  // TODO: props 리펙
+  const inputStyle = classNames(styles.customInput, { [styles.isFocus]: isFocus }, { [styles.isError]: isError });
+
   return (
     <input
-      className={`${styles.customInput} ${isFocus ? styles.isFocus : ''} ${isError ? styles.isError : ''}`}
+      className={inputStyle}
       ref={ref}
       {...rest}
       onFocus={(e) => {
