@@ -36,6 +36,11 @@ body {
     sans-serif;
 }
 
+.card-input-container {
+  position: relative;
+  animation: fade-in 1s;
+}
+
 @keyframes fade-in {
   from {
     top: -5px;

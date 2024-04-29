@@ -18,16 +18,16 @@ export default function CardOwnerInput({ isOwnerValid, onChangeOwner, onSubmitOw
 
   const handleOwnerBlur = () => {
     onSubmitOwner();
-  }
+  };
 
   const handleOwnerKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onSubmitOwner();
     }
-  }
+  };
 
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
       <InputField label="소유자 이름" length={CARD_OWNER.INPUT_FIELD_COUNT} errorMessage={isOwnerValid.errorMessage}>
         <Input

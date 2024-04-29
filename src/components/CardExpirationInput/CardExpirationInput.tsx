@@ -49,7 +49,7 @@ export default function CardExpirationInput({
   };
 
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
       <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage()}>
         <Input

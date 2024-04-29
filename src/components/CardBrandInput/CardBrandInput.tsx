@@ -15,7 +15,7 @@ export default function CardBrandInput({ isBrandValid, onChangeBrand }: CardBran
   };
 
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다." />
       <InputField errorMessage={isBrandValid.errorMessage}>
         <SelectBox

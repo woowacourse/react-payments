@@ -26,7 +26,7 @@ export default function CardCVCInput({ isCVCValid, onChangeCVC, onChangeFocusCVC
   };
 
   return (
-    <div>
+    <div className="card-input-container">
       <TitleContainer title="CVC 번호를 입력해 주세요" />
       <InputField label="CVC" errorMessage={isCVCValid.errorMessage}>
         <Input
