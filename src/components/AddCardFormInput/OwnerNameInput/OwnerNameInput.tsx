@@ -86,6 +86,7 @@ function OwnerNameInput({
         value={ownerName.ownerName}
         isError={isError.ownerName}
         isRequired
+        autoFocus
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         maxLength={26}

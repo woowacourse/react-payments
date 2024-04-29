@@ -71,6 +71,7 @@ export default function CVCInput({
         value={cvc.cvc}
         isError={isError.cvc}
         isRequired
+        autoFocus
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         maxLength={MAX_LENGTH}

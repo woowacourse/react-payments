@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function useFormFieldFocus<T extends HTMLElement>(
   length: number = 1
@@ -12,13 +12,6 @@ export default function useFormFieldFocus<T extends HTMLElement>(
 
     if (nextInput) nextInput.current?.focus();
   };
-
-  useEffect(() => {
-    const firstInput = refs[0].current;
-    if (firstInput) {
-      firstInput.focus();
-    }
-  }, []);
 
   return { refs, moveToNextInput };
 }

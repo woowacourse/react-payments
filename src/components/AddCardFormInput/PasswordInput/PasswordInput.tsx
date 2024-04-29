@@ -83,6 +83,7 @@ export default function PasswordInput({
         isError={isError.password}
         placeholder={placeholder}
         isRequired
+        autoFocus
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         maxLength={2}

@@ -12,6 +12,7 @@ interface InputProps {
   isRequired?: boolean;
   maxLength?: number;
   type?: 'text' | 'password';
+  autoFocus?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -26,6 +27,7 @@ const Input = forwardRef(function Input(
     maxLength,
     isError,
     isRequired,
+    autoFocus,
     onChange,
     onBlur,
   }: InputProps,
@@ -43,6 +45,7 @@ const Input = forwardRef(function Input(
       required={isRequired}
       onChange={onChange}
       onBlur={onBlur}
+      autoFocus={autoFocus}
       className={clsx(styles.input, { [styles.error]: isError })}
     />
   );

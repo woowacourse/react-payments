@@ -75,6 +75,7 @@ export default function CardIssuerInput({
         options={options}
         isError={isError.cardIssuer}
         isRequired
+        autoFocus
         onChange={handleOnSelect}
         onBlur={handleOnBlur}
       />

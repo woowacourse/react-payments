@@ -83,6 +83,7 @@ export default function CardNumberInput({
               placeholder={placeholder}
               value={cardNumbers[name]}
               isError={isError[name]}
+              autoFocus={index === 0}
               onChange={handleOnChange}
               onBlur={handleOnBlur}
               maxLength={MAX_LENGTH}

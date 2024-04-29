@@ -18,6 +18,7 @@ interface SelectProps {
   isError: boolean;
   /** @defaultValue true */
   isRequired?: boolean;
+  autoFocus?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
@@ -28,9 +29,9 @@ const Select = forwardRef(function Select(
     defaultText,
     isError,
     isRequired = true,
+    autoFocus,
     onChange,
     onBlur,
-    ...rest
   }: SelectProps,
   ref: React.ForwardedRef<HTMLSelectElement>
 ) {
@@ -41,7 +42,7 @@ const Select = forwardRef(function Select(
       required={isRequired}
       onChange={onChange}
       onBlur={onBlur}
-      {...rest}
+      autoFocus={autoFocus}
     >
       {defaultText && (
         <option value="" hidden selected>
