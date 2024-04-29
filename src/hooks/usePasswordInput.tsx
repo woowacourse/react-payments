@@ -8,7 +8,12 @@ interface PasswordState {
   isValid: boolean;
 }
 
-function usePasswordInput(): { PasswordState: PasswordState; handlePasswordChange: (value: string) => void } {
+interface PasswordInputResult {
+  PasswordState: PasswordState;
+  handlePasswordChange: (value: string) => void;
+}
+
+function usePasswordInput(): PasswordInputResult {
   const [passwordState, setPasswordState] = useState<PasswordState>({
     value: "",
     errorMessage: [""],

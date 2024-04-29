@@ -8,7 +8,12 @@ interface CardCompanyState {
   isValid: boolean;
 }
 
-function useCardCompanyInput(): { CardCompanyState: CardCompanyState; handleCardCompanyChange: (value: string) => void } {
+interface CardCompanyInputResult {
+  CardCompanyState: CardCompanyState;
+  handleCardCompanyChange: (value: string) => void;
+}
+
+function useCardCompanyInput(): CardCompanyInputResult {
   const [cardCompanyState, setCardCompanyState] = useState<CardCompanyState>({
     value: "",
     errorMessage: [""],

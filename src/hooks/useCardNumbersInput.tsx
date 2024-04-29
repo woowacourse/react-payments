@@ -8,7 +8,12 @@ interface CardNumbersState {
   isValid: boolean;
 }
 
-function useCardNumbersInput(): { CardNumbersState: CardNumbersState; handleCardNumbersChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void } {
+interface CardNumbersInputResult {
+  CardNumbersState: CardNumbersState;
+  handleCardNumbersChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+}
+
+function useCardNumbersInput(): CardNumbersInputResult {
   const [cardNumbersState, setCardNumbersState] = useState<CardNumbersState>({
     value: ["", "", "", ""],
     errorMessage: ["", "", "", ""],

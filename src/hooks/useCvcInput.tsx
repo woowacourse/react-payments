@@ -8,7 +8,12 @@ interface CvcState {
   isValid: boolean;
 }
 
-function useCvcInput(): { CvcState: CvcState; handleCvcChange: (value: string) => void } {
+interface CvcInputResult {
+  CvcState: CvcState;
+  handleCvcChange: (value: string) => void;
+}
+
+function useCvcInput(): CvcInputResult {
   const [cvcState, setCvcState] = useState<CvcState>({
     value: "",
     errorMessage: [""],
