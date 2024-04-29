@@ -15,15 +15,6 @@ const REG_EXP = {
   password: /^\d{2}$/,
 } as const;
 
-const CARD_INFORMATION_APPEARED = {
-  cardNumber: 1,
-  selectedCard: 2,
-  expirationDate: 3,
-  userName: 4,
-  cvc: 5,
-  password: 6,
-};
-
 const CONDITION = {
   MAX_LENGTH,
   REG_EXP,
@@ -32,7 +23,6 @@ const CONDITION = {
   showVisa: (first: number | undefined) => String(first)[0] === '4',
   showMasterCard: (first: number | undefined) =>
     String(first)[0] === '5' && ['1', '2', '3', '4', '5'].includes(String(first)[1]),
-  CARD_INFORMATION_APPEARED,
 } as const;
 
 export default CONDITION;
