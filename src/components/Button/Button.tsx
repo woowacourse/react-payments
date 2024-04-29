@@ -1,11 +1,7 @@
 import * as Styled from './style';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
-}
-
-const Button = ({ label, ...props }: ButtonProps) => {
-  return <Styled.Button {...props}>{label}</Styled.Button>;
+const Button = ({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return <Styled.Button {...props}>{children}</Styled.Button>;
 };
 
 export default Button;

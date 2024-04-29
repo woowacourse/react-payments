@@ -37,7 +37,7 @@ const CardRegisterForm = () => {
       </Styled.Container>
       {!isFormError && (
         <Styled.Submit>
-          <Button form="card-register-form" label="확인" />
+          <Button form="card-register-form">확인</Button>
         </Styled.Submit>
       )}
     </>
