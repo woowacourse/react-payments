@@ -17,6 +17,6 @@ const ScreenReaderOnly = styled.label`
   clip: rect(0 0 0 0);
 `;
 
-export default function ScreenReaderOnlyLabel({ htmlFor, description }: LabelProps) {
+export default function InputLabel({ htmlFor, description }: LabelProps) {
   return <ScreenReaderOnly htmlFor={htmlFor}>{description}</ScreenReaderOnly>;
 }

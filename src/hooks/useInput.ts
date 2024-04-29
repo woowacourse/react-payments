@@ -1,49 +1,37 @@
-import { useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
+import useValidations, { ValidationType } from './useValidations';
 
-export type ValidationType = {
-  isError: (state: string) => boolean;
+export interface UseInputReturn<T> {
+  ref: RefObject<T>;
+  value: string;
+  onChangeHandler: (e: React.ChangeEvent<T>) => void;
+  onBlurHandler: (e: React.FocusEvent<T>) => void;
+  isError: boolean;
   errorMessage: string;
-};
+}
 
-const INITIAL_ERROR_STATE = {
-  state: false,
-  message: '',
-};
+const useInput = <T extends HTMLInputElement | HTMLSelectElement>(
+  inputLimitValidation?: ValidationType,
+  validations?: ValidationType[],
+) => {
+  const [value, setValue] = useState('');
+  const { isError, errorMessage, validate } = useValidations();
+  const ref = useRef<T>(null);
 
-const useInput = (onChangeValidations: ValidationType[], onBlurValidations?: ValidationType[]) => {
-  const [inputState, setInputState] = useState('');
-  const [error, setError] = useState(INITIAL_ERROR_STATE);
-
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = onChangeValidations.find(({ isError }) => isError(e.target.value));
-
-    if (validationResult) {
-      setError({
-        state: true,
-        message: validationResult.errorMessage,
-      });
-      setInputState(inputState);
-
+  const onChangeHandler = (e: React.ChangeEvent<T>) => {
+    if (inputLimitValidation && !validate(e.target.value, [inputLimitValidation])) {
       return;
     }
 
-    setError(INITIAL_ERROR_STATE);
-    setInputState(e.target.value);
+    if (validations) validate(e.target.value, validations);
+    setValue(e.target.value);
   };
 
-  const inputFocusOutHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (!onBlurValidations) return;
-    const validationResult = onBlurValidations.find(({ isError }) => isError(e.target.value));
-
-    if (validationResult) {
-      setError({
-        state: true,
-        message: validationResult.errorMessage,
-      });
-    }
+  const onBlurHandler = (e: React.FocusEvent<T>) => {
+    if (validations) validate(e.target.value, validations);
   };
 
-  return { inputState, inputChangeHandler, inputFocusOutHandler, error };
+  return { ref, value, onChangeHandler, onBlurHandler, isError, errorMessage };
 };
 
 export default useInput;

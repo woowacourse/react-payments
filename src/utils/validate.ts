@@ -30,6 +30,12 @@ const validate = {
   isSatisfiedLength: (standardLength: number, compareLength: number) => {
     return standardLength === compareLength;
   },
+
+  isOverYear: (year: number) => {
+    const currentYear = Number(new Date().getFullYear().toString().slice(2));
+
+    return currentYear <= year;
+  },
 };
 
 export default validate;
