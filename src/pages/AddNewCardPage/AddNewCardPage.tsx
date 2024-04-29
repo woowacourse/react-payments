@@ -28,7 +28,7 @@ const AddNewCardPage = () => {
 
   const isValidList = {
     cardNumbers: cardNumbers.isValid,
-    cardCompany: cardCompany !== null,
+    cardCompany: cardCompany.selected !== null,
     expirationDate: expirationDate.isValid,
     ownerName: ownerName.isValid,
     CVCNumbers: CVCNumbers.isValid,
