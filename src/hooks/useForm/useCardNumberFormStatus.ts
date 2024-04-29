@@ -12,6 +12,7 @@ const useCardNumberFormStatus = (cardNumberInfo: UseCardNumberReturnType) => {
   useEffect(() => {
     setCardNumberFormStatus(prev => ({
       ...prev,
+      isValid: isCardNumberValid,
       isOpen: isCardNumberValid || prev.isOpen,
     }));
   }, [isCardNumberValid]);

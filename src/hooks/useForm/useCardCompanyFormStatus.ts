@@ -13,6 +13,7 @@ const useCardCompanyFormStatus = (cardCompanyInfo: UseSelectReturnType<CardType>
   useEffect(() => {
     setCardCompanyFormStatus(prev => ({
       ...prev,
+      isValid: isCardCompanyValid,
       isOpen: isCardCompanyValid || prev.isOpen,
     }));
   }, [isCardCompanyValid]);
