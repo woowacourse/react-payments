@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import CardPreview from "../CardPreview/CardPreview";
 import CardInput from "../CardInput/CardInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
-import ExpiryInput from "../ExpiryInput/ExpiryInput";
+import CardExpiryInput from "../CardExpiryInput/CardExpiryInput";
 import CardOwnerNameInput from "../CardOwnerNameInput/CardOwnerNameInput";
 import SelectBox from "../CardCompanySelector/CardCompanySelector";
 import CardCVCInput from "../CardCVCInput/CardCVCInput";
@@ -181,7 +181,7 @@ const CardForm: React.FC = () => {
             label="유효기간"
             description="월/년도(MMYY)를 순서대로 입력해 주세요"
           >
-            <ExpiryInput
+            <CardExpiryInput
               month={expiryMonth}
               year={expiryYear}
               onMonthChange={handleExpiryMonthChange}
