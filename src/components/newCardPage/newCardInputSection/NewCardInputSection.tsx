@@ -19,7 +19,7 @@ const NewCardInputSection = ({ mainText, subText, label, errorMessage, children 
       <Styled.Form>
         <Styled.Label>{label}</Styled.Label>
         <Styled.InputWrapper>{children}</Styled.InputWrapper>
-        <Styled.ErrorText>{errorMessage && errorMessage.find((item) => item !== "")}</Styled.ErrorText>
+        <Styled.ErrorText>{errorMessage.find((item) => item !== "")}</Styled.ErrorText>
       </Styled.Form>
     </Styled.InputSection>
   );

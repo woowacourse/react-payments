@@ -7,7 +7,6 @@ export const InputSection = styled.fieldset`
 `;
 
 export const MainText = styled.h1`
-  font-family: Noto Sans KR;
   font-size: 18px;
   font-weight: 700;
   line-height: 26.06px;
@@ -16,7 +15,6 @@ export const MainText = styled.h1`
 `;
 
 export const Subtext = styled.p`
-  font-family: Noto Sans KR;
   font-size: 9.5px;
   font-weight: 400;
   line-height: 13.76px;
