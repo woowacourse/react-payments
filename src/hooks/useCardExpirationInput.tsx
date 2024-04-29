@@ -8,7 +8,7 @@ interface CardExpirationState {
   isValid: boolean;
 }
 
-function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<HTMLInputElement>, index: number) => void] {
+function useCardExpirationInput(): { CardExpirationState: CardExpirationState; handleCardExpirationChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void } {
   const [cardExpirationState, setCardExpirationState] = useState<CardExpirationState>({
     value: ["", ""],
     errorMessage: ["", ""],
@@ -34,23 +34,14 @@ function useCardExpirationInput(): [CardExpirationState, (e: React.ChangeEvent<H
 
     setCardExpirationState((prevState) => ({
       ...prevState,
-      errorMessage,
-      isNextVisible,
-      isValid,
-    }));
-
-    if (!cardExpirationValid) return;
-
-    setCardExpirationState((prevState) => ({
-      ...prevState,
-      value: updatedCardExpiration,
+      value: cardExpirationValid ? updatedCardExpiration : prevState.value,
       errorMessage,
       isNextVisible,
       isValid,
     }));
   };
 
-  return [cardExpirationState, handleCardExpirationChange];
+  return { CardExpirationState: cardExpirationState, handleCardExpirationChange };
 }
 
 export default useCardExpirationInput;

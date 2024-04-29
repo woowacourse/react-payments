@@ -17,12 +17,12 @@ export interface CardPreviewProps {
 
 const CardPreview = ({ isCardFlipped, cvc, userName, cardExpiration, cardCompany, cardNumbers }: CardPreviewProps) => {
   const getCardBrandImage = () => {
-    const IIN = Math.floor(Number(cardNumbers[0]) / 100);
+    const cardBrandNumber = Math.floor(Number(cardNumbers[0]) / 100);
     let cardBrandImage = "";
 
-    if (IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER && IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER) {
+    if (cardBrandNumber >= CARD_BRAND.MASTERCARD.MIN_NUMBER && cardBrandNumber <= CARD_BRAND.MASTERCARD.MAX_NUMBER) {
       cardBrandImage = MasterCardImage;
-    } else if (IIN >= CARD_BRAND.VISA.MIN_NUMBER && IIN <= CARD_BRAND.VISA.MAX_NUMBER) {
+    } else if (cardBrandNumber >= CARD_BRAND.VISA.MIN_NUMBER && cardBrandNumber <= CARD_BRAND.VISA.MAX_NUMBER) {
       cardBrandImage = VisaImage;
     }
 

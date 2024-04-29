@@ -8,7 +8,7 @@ interface PasswordState {
   isValid: boolean;
 }
 
-function usePasswordInput(): [PasswordState, (value: string) => void] {
+function usePasswordInput(): { PasswordState: PasswordState; handlePasswordChange: (value: string) => void } {
   const [passwordState, setPasswordState] = useState<PasswordState>({
     value: "",
     errorMessage: [""],
@@ -25,23 +25,14 @@ function usePasswordInput(): [PasswordState, (value: string) => void] {
 
     setPasswordState((prevState) => ({
       ...prevState,
-      errorMessage,
-      isNextVisible,
-      isValid,
-    }));
-
-    if (!isPasswordValid) return;
-
-    setPasswordState((prevState) => ({
-      ...prevState,
-      value: value,
+      value: isPasswordValid ? value : prevState.value,
       errorMessage,
       isNextVisible,
       isValid,
     }));
   };
 
-  return [passwordState, handlePasswordChange];
+  return { PasswordState: passwordState, handlePasswordChange };
 }
 
 export default usePasswordInput;

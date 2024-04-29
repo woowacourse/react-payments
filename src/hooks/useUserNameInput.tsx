@@ -8,7 +8,7 @@ interface UserNameState {
   isValid: boolean;
 }
 
-function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.KeyboardEvent<HTMLInputElement>) => void] {
+function useUserNameInput(): { UserNameState: UserNameState; handleUserNameChange: (value: string) => void; handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void } {
   const [userNameState, setUserNameState] = useState<UserNameState>({
     value: "",
     errorMessage: [""],
@@ -19,18 +19,15 @@ function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.
   const handleUserNameChange = (value: string) => {
     const userNameValid = /^[a-zA-Z\s]*$/.test(value);
     const errorMessage = [validators.userName(value)];
+    const isValid = !!value && !errorMessage[0];
+    const isNextVisible = userNameState.isNextVisible || isValid;
 
     setUserNameState((prevState) => ({
       ...prevState,
+      value: userNameValid ? value.toUpperCase() : prevState.value,
       errorMessage,
-    }));
-
-    if (!userNameValid) return;
-
-    setUserNameState((prevState) => ({
-      ...prevState,
-      value: value.toUpperCase(),
-      errorMessage,
+      isValid,
+      isNextVisible,
     }));
   };
 
@@ -48,7 +45,7 @@ function useUserNameInput(): [UserNameState, (value: string) => void, (e: React.
     }
   };
 
-  return [userNameState, handleUserNameChange, handleKeyDown];
+  return { UserNameState: userNameState, handleUserNameChange, handleKeyDown };
 }
 
 export default useUserNameInput;
