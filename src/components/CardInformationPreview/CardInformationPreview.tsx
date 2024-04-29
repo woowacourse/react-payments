@@ -9,7 +9,6 @@ import { UserNameStateType } from '../../hooks/useUserName';
 import { SelectedCardStateType } from '../../hooks/useSelectedCardState';
 import * as Styled from './style';
 import { CVCStateType } from '../../hooks/useCVC';
-import { useEffect, useState } from 'react';
 
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberStateType;
@@ -30,40 +29,8 @@ const CardInformationPreview = ({
   const { monthState, yearState } = expirationDateState;
   const isMonthYearAllVisible = monthState.value && yearState.value;
   const { isVisa, isMasterCard } = cardNumberState.showImageCondition;
-  const [cardColor, setCardColor] = useState<string>(theme.color.darkGray);
 
   const isBackOfCardAppearedCondition = cvcState.isFocus;
-
-  useEffect(() => {
-    switch (selectedCardState.value) {
-      case 'BC카드':
-        setCardColor(theme.color.magenta);
-        break;
-      case '신한카드':
-        setCardColor(theme.color.blue);
-        break;
-      case '카카오뱅크':
-        setCardColor(theme.color.yellow);
-        break;
-      case '현대카드':
-        setCardColor(theme.color.black);
-        break;
-      case '우리카드':
-        setCardColor(theme.color.brightBlue);
-        break;
-      case '롯데카드':
-        setCardColor(theme.color.orange);
-        break;
-      case '하나카드':
-        setCardColor(theme.color.teal);
-        break;
-      case '국민카드':
-        setCardColor(theme.color.brownishGray);
-        break;
-      default:
-        setCardColor(theme.color.darkGray);
-    }
-  }, [selectedCardState.value]);
 
   return (
     <>
@@ -81,7 +48,7 @@ const CardInformationPreview = ({
       {!isBackOfCardAppearedCondition && (
         <Styled.CardInformationPreview
           $isBackOfCard={cvcState.isFocus}
-          $selectedCardColor={cardColor}
+          $selectedCardColor={selectedCardState.cardColor}
           onClick={() => cvcState.setIsFocus((prev) => !prev)}
         >
           <Styled.ImgContainer>
