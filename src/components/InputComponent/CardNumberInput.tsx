@@ -9,14 +9,13 @@ import { CardNumbers } from '../../types/card';
 interface Props {
   cardNumbers: CardNumbers;
   handleInput: {
-    updateCardNumberIsNextField : () => void
   handleUpdateCardNumberInput:  (index: number, value: string) => void
   handleUpdateCardNumberErrorMessages : (index: number, errorMessage: string, isError: boolean) => void;
   }
 }
 export default function CardNumberInput({
   cardNumbers,
-  handleInput: {updateCardNumberIsNextField, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages},
+  handleInput: {handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages},
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
   const errorMessages = Object.values(cardNumbers.cardNumberFields).map(
@@ -97,7 +96,6 @@ export default function CardNumberInput({
       if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
         inputRefs.current[nextIndex]?.focus();
       }
-      updateCardNumberIsNextField()
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateCardNumberErrorMessages(index, error.message, true);

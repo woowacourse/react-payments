@@ -17,9 +17,6 @@ const useCardNumbers = (
     isNextField: false,
   });
   
-  const updateCardNumberIsNextField = () => {
-    
-  }
   useEffect (() => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(cardNumbers.cardNumberFields).reduce((pre, cur) => {
@@ -76,7 +73,7 @@ const useCardNumbers = (
       };
     });
   };
-  return {cardNumbers ,updateCardNumberIsNextField, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages}
+  return {cardNumbers, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages}
 };
 
 

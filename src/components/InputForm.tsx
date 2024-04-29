@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {
   CardBrand,
   CardInfo,
-  CardNumbers,
   CVC,
   ExpirationDate,
   Password,
@@ -24,26 +23,26 @@ const FormContainer = styled.div`
 `;
 
 interface HandleInput {
-  updateCardNumberIsNextField : () => void
   handleUpdateCardNumberInput:  (index: number, value: string) => void
   handleUpdateCardNumberErrorMessages : (index: number, errorMessage: string, isError: boolean) => void;
   setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
   setUserName: Dispatch<SetStateAction<UserName>>;
-  setCardBrand: Dispatch<SetStateAction<CardBrand>>;
+  handleUpdateCardBrand : (brandName: string) => void;
+  handleUpdateCardBrandIsNextField : () => void;
 
   setCVC: Dispatch<SetStateAction<CVC>>;
   setPassword: Dispatch<SetStateAction<Password>>;
 }
 
 export default function InputForm({
-  cardInfo: { cardNumbers, expirationDate, userName, cardBrand, CVC, password },
+  cardInfo: { cardNumbers, cardBrand, expirationDate, userName, CVC, password },
   handleInput: {
-    updateCardNumberIsNextField,
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
     setExpirationDate,
     setUserName,
-    setCardBrand,
+    handleUpdateCardBrand, 
+    handleUpdateCardBrandIsNextField,
     setCVC,
     setPassword,
   },
@@ -82,7 +81,7 @@ export default function InputForm({
           handleShowComponent={setShowComponent}
         />
       )}
-      {showComponent.expirationDateInput && (
+      {cardBrand.isNextField && (
         <ExpirationDateInput
           expirationDate={expirationDate}
           handleInput={setExpirationDate}
@@ -91,13 +90,12 @@ export default function InputForm({
       )}
       {cardNumbers.isNextField && (
         <CardDropDown
-          handleInput={setCardBrand}
-          handleShowComponent={setShowComponent}
+          handleInput={{handleUpdateCardBrand, handleUpdateCardBrandIsNextField}}
         />
       )}
         <CardNumberInput
           cardNumbers={cardNumbers}
-          handleInput={{updateCardNumberIsNextField, handleUpdateCardNumberInput ,handleUpdateCardNumberErrorMessages}}
+          handleInput={{handleUpdateCardNumberInput ,handleUpdateCardNumberErrorMessages}}
         />
     </FormContainer>
   );

@@ -6,6 +6,7 @@ import {
   UserName,
 } from '../types/card';
 import useCardNumbers from './useCardNumbers';
+import useCardBrand from './useCardBrand';
 
 // 커스텀 훅 정의
 export default function useCardForm({
@@ -19,7 +20,7 @@ export default function useCardForm({
   initCVC = '',
   initPassWord = '',
 }) {
-  const {cardNumbers ,updateCardNumberIsNextField, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages} = useCardNumbers(initCardNumber1, initCardNumber2, initCardNumber3, initCardNumber4)
+  const {cardNumbers, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages} = useCardNumbers(initCardNumber1, initCardNumber2, initCardNumber3, initCardNumber4)
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
     expirationDateFields: {
       month: {
@@ -42,12 +43,8 @@ export default function useCardForm({
     isNextField: false,
   });
 
-  const [cardBrand, setCardBrand] = useState({
-    cardBrandField: {
-      cardBrand: { value: initCardBrand, errorMessage: '', isError: false },
-    },
-    isNextField: false,
-  });
+  const {cardBrand, handleUpdateCardBrand, handleUpdateCardBrandIsNextField} = useCardBrand(initCardBrand);
+
 
   const [CVC, setCVC] = useState<CVC>({
     CVCField: {
@@ -65,15 +62,15 @@ export default function useCardForm({
 
   return {
     cardNumbers,
-    updateCardNumberIsNextField,
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
     expirationDate,
     setExpirationDate,
     userName,
     setUserName,
-    cardBrand,
-    setCardBrand,
+    cardBrand, 
+    handleUpdateCardBrand, 
+    handleUpdateCardBrandIsNextField,
     CVC,
     setCVC,
     password,

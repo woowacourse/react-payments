@@ -37,15 +37,15 @@ const Container = styled.form`
 export default function EnrollCard() {
   const {
     cardNumbers,
-    updateCardNumberIsNextField,
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
     expirationDate,
     setExpirationDate,
     userName,
     setUserName,
-    cardBrand,
-    setCardBrand,
+    cardBrand, 
+    handleUpdateCardBrand, 
+    handleUpdateCardBrandIsNextField,
     CVC,
     setCVC,
     password,
@@ -93,12 +93,12 @@ export default function EnrollCard() {
             password,
           }}
           handleInput={{
-            updateCardNumberIsNextField,
             handleUpdateCardNumberInput,
             handleUpdateCardNumberErrorMessages,
             setExpirationDate,
-            setUserName,
-            setCardBrand,
+            setUserName, 
+            handleUpdateCardBrand, 
+            handleUpdateCardBrandIsNextField,
             setCVC,
             setPassword,
           }}

@@ -50,31 +50,20 @@ const ListItem = styled.li`
   }
 `;
 interface Props {
-  handleInput: Dispatch<SetStateAction<CardBrand>>;
-  handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
+  handleInput: {
+    handleUpdateCardBrand : (brandName: string) => void;
+    handleUpdateCardBrandIsNextField : () => void;
+  };
 }
 export default function CardDropDown({
-  handleInput,
-  handleShowComponent,
+  handleInput : {handleUpdateCardBrand, handleUpdateCardBrandIsNextField},
 }: Props) {
   const [view, setView] = useState<boolean>(false);
   const [selected, setSelected] = useState('카드사를 선택해주세요');
 
   const handleSelectBrand = (brandName: string) => {
-    const cardKey = 'cardBrand' as keyof CardBrand;
-    handleInput((prevState: CardBrand) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          value: brandName,
-        },
-      };
-    });
-    handleShowComponent((prev) => ({
-      ...prev,
-      expirationDateInput: true,
-    }));
+    handleUpdateCardBrand(brandName);
+    handleUpdateCardBrandIsNextField();
     setView(!view);
     setSelected(brandName);
   };
