@@ -11,7 +11,7 @@ interface CardPreviewProps {
   cardIssuer: string;
   cardCvcNumber: string;
   isCardFrontView: boolean;
-  setIsCardFrontView: React.Dispatch<boolean>;
+  flipCard: () => void;
 }
 
 export default function CardPreview({
@@ -22,14 +22,10 @@ export default function CardPreview({
   cardIssuer,
   cardCvcNumber,
   isCardFrontView,
-  setIsCardFrontView,
+  flipCard,
 }: CardPreviewProps) {
   return (
-    <div
-      onClick={() => {
-        setIsCardFrontView(!isCardFrontView);
-      }}
-    >
+    <div onClick={flipCard}>
       {isCardFrontView ? (
         <section css={styledCardPreview(cardColorMatcher(cardIssuer))}>
           <div css={styledCardHeader}>

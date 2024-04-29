@@ -16,14 +16,15 @@ import useCardHolder from "../hooks/useCardHolder";
 import useCardIssuer from "../hooks/useCardIssuer";
 import useCardNumbers from "../hooks/useCardNumbers";
 import useCardPassword from "../hooks/useCardPassword";
+import useCardPreview from "../hooks/useCardPreview";
 import { useNavigate } from "react-router-dom";
 import useProgress from "../hooks/useProgress";
-import { useState } from "react";
 
 export default function CardRegistrationPage() {
   const navigate = useNavigate();
 
-  const [isCardFrontView, setIsCardFrontView] = useState(true);
+  const { isCardFrontView, flipCard, showCardFront, showCardBack } =
+    useCardPreview();
 
   const { cardNumberInputs, cardNumbersValue, isCardNumberComplete } =
     useCardNumbers({ onFocus: showCardFront });
@@ -60,14 +61,6 @@ export default function CardRegistrationPage() {
 
   const allComplete = isCompleteArray.every((result) => result === true);
 
-  function showCardFront() {
-    setIsCardFrontView(true);
-  }
-
-  function showCardBack() {
-    setIsCardFrontView(false);
-  }
-
   const onSubmitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     navigate("/completed", {
@@ -95,7 +88,7 @@ export default function CardRegistrationPage() {
       />
       <CardPreview
         isCardFrontView={isCardFrontView}
-        setIsCardFrontView={setIsCardFrontView}
+        flipCard={flipCard}
         cardType={matchCardType(cardNumbersValue.join(""))}
         cardNumbers={cardNumbersValue}
         cardExpirationPeriod={cardExpirationPeriodValue}
