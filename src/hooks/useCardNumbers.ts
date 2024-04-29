@@ -7,7 +7,6 @@ import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
 import { MAX_LENGTH } from '../constants/rules';
 
-// TODO: 상수화
 const inputLimitValidation: ValidationType = {
   isError: (value: string) => value !== '' && !validate.isValidDigit(value),
   errorMessage: '숫자만 입력할 수 있습니다.',
