@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Input from "../common/Input/Input";
-import { CardNumberInputWrapper, Dd, Tooltip } from "./CardNumberInput.styles";
+import {
+  CardNumberInputWrapper,
+  InputGroup,
+  Tooltip,
+} from "./CardNumberInput.styles";
 
 interface CardNumberInputProps {
   value: string;
@@ -56,7 +60,7 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
 
   return (
     <CardNumberInputWrapper>
-      <Dd>
+      <InputGroup>
         {[0, 1, 2, 3].map((index) => (
           <div key={index}>
             <Input
@@ -70,7 +74,7 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
             />
           </div>
         ))}
-      </Dd>
+      </InputGroup>
 
       <Tooltip>{!isValid ? errorMessage : ""}</Tooltip>
     </CardNumberInputWrapper>

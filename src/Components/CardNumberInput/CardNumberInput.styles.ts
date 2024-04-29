@@ -15,7 +15,7 @@ export const CardNumberInputWrapper = styled.div`
   }
 `;
 
-export const Dd = styled.div`
+export const InputGroup = styled.div`
   display: flex;
   gap: 10px;
 `;
