@@ -18,7 +18,7 @@ const CardOwnerField = () => {
 
   const cardOwner = useContextWrapper(CardOwnerInfoContext)[0];
   const cardOwnerInput = useContextWrapper(CardOwnerInputContext)[0];
-  const [renderOrder, setRenderOrder] = useRenderOrderState();
+  const setRenderOrder = useRenderOrderState()[1];
 
   const firstInput = useContextWrapper(CardOwnerInputContext)[0];
   const nextFieldInput = useContextWrapper(CardCVCInputContext)[0];

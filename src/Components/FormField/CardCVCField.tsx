@@ -18,7 +18,7 @@ const CardCVCField = () => {
   });
 
   const cardCVC = useContextWrapper(CardCVCContext)[0];
-  const [renderOrder, setRenderOrder] = useRenderOrderState();
+  const setRenderOrder = useRenderOrderState()[1];
 
   const firstInput = useContextWrapper(CardCVCInputContext)[0];
 

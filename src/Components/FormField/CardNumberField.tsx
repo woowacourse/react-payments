@@ -18,7 +18,7 @@ const CardNumberField = () => {
   });
 
   const cardNumbers = useContextWrapper(CardNumbersContext)[0];
-  const [renderOrder, setRenderOrder] = useRenderOrderState();
+  const setRenderOrder = useRenderOrderState()[1];
   const firstInput = useContextWrapper(CardNumberInputsContext)[0];
 
   useEffect(() => {

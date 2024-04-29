@@ -13,7 +13,7 @@ import useRenderOrderState from "../../hooks/useRenderOrderState";
 const CardIssuerField = () => {
   const cardIssuerError = useContextWrapper(CardIssuerErrorContext)[0];
   const cardIssuer = useContextWrapper(CardIssuerContext)[0];
-  const [renderOrder, setRenderOrder] = useRenderOrderState();
+  const setRenderOrder = useRenderOrderState()[1];
   useEffect(() => {
     console.log(isIssuerValid(cardIssuer, cardIssuerError));
     if (isIssuerValid(cardIssuer, cardIssuerError)) {

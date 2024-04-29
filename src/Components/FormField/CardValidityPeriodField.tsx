@@ -19,7 +19,7 @@ const CardValidityPeriodField = () => {
   });
 
   const cardPeriod = useContextWrapper(CardValidityPeriodContext)[0];
-  const [renderOrder, setRenderOrder] = useRenderOrderState();
+  const setRenderOrder = useRenderOrderState()[1];
   const firstInput = useContextWrapper(CardPeriodInputsContext)[0];
 
   const { isValid, name, errorMessage } = isPeriodValid(cardPeriod, cardPeriodError);
