@@ -5,30 +5,25 @@ import SuccessRegister from './pages/SuccessRegister/SuccessRegister';
 import URLS from './constants/Urls';
 import Fallback from './pages/fallback/Fallback';
 
-const router = createBrowserRouter(
-  [
-    {
-      path: '/',
-      element: <App />,
-      children: [
-        {
-          path: URLS.register,
-          element: <CardRegisterForm />,
-        },
-        {
-          path: URLS.success,
-          element: <SuccessRegister />,
-        },
-        {
-          path: '*',
-          element: <Fallback />,
-        },
-      ],
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: URLS.base,
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: URLS.register,
+        element: <CardRegisterForm />,
+      },
+      {
+        path: URLS.success,
+        element: <SuccessRegister />,
+      },
+      {
+        path: '*',
+        element: <Fallback />,
+      },
+    ],
   },
-);
+]);
 
 export default router;
