@@ -72,6 +72,7 @@ const CardRegisterForm = ({
           <OwnerNameInputField inputStates={ownerNameStates} />
         </S.InputFieldWithInfo>
       )}
+
       {/* 유효 기간 */}
       {isCompleteTo(1) && (
         <S.InputFieldWithInfo>
@@ -93,6 +94,7 @@ const CardRegisterForm = ({
           <CardCompanyInputField cardCompanyStates={cardCompanyStates} />
         </S.InputFieldWithInfo>
       )}
+
       {/* 카드 번호 */}
       <S.InputFieldWithInfo>
         <S.TitleWrapper>

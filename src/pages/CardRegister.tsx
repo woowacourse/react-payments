@@ -28,7 +28,7 @@ const CardRegister = () => {
   const ownerNameStates = [useInput("")];
   const CVCStates = [useInput("")];
   const passwordStates = [useInput("")];
-  const cardCompanyStates = [useInput("BC카드")];
+  const cardCompanyStates = [useInput("")];
   const [isCVCFocused, setIsCVCFocused] = useState(false);
 
   const cardCompany = cardCompanyStates[0].value;

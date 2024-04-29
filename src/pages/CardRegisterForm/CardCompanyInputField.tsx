@@ -22,13 +22,14 @@ const CardCompanyInputField = ({ cardCompanyStates }: CardCompanyInputFieldProp)
             setCardCompany(value);
           }}
           required
+          defaultValue="카드사를 선택해주세요"
         >
           <>
-            <option value="" selected disabled style={{ display: "none" }}>
+            <option value="" key="선택" disabled style={{ display: "none" }}>
               카드사를 선택해주세요
             </option>
             {companyNames.map((companyName) => (
-              <option>{companyName}</option>
+              <option key={companyName}>{companyName}</option>
             ))}
           </>
         </InputField.Select>
