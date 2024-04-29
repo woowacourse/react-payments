@@ -15,7 +15,6 @@ export default function useChangeExpireDate() {
     if (Validation.isNotEmpty(month)) setExpireMonthValid(isMonthValid);
     if (Validation.isNotEmpty(year)) setExpireYearValid(isYearValid);
 
-    // if (isMonthValid.isValid && isYearValid.isValid && Validation.isNotEmpty(month) && Validation.isNotEmpty(year)) {
     if (
       isMonthValid.isValid &&
       isYearValid.isValid &&
