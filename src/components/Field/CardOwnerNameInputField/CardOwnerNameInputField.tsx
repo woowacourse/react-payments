@@ -5,6 +5,7 @@ import {
   useState,
   FocusEvent,
   useEffect,
+  KeyboardEvent,
 } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
@@ -12,6 +13,7 @@ import normalizeSpaces from "../../../utils/normalizeSpaces";
 import filterEnglish from "../../../utils/filterEnglish";
 
 const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
+
 export default function CardOwnerNameInputField({
   ownerName,
   setOwnerName,
@@ -58,26 +60,23 @@ export default function CardOwnerNameInputField({
 
     setErrorMessage("");
   };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const currentState = ownerName.length !== 0;
+      const updatedIsOpenForm = [...isOpenForm];
+      if (currentState === true) {
+        updatedIsOpenForm[4] = true;
+      }
+      setIsOpenForm(updatedIsOpenForm);
+    }
+  };
+
   useEffect(() => {
     const currentState = ownerName.length !== 0;
     const updatedIsCompletedSections = [...isCompletedSections];
     updatedIsCompletedSections[3] = currentState;
     setIsCompletedSections(updatedIsCompletedSections);
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        const updatedIsOpenForm = [...isOpenForm];
-        if (currentState === true) {
-          updatedIsOpenForm[4] = true;
-        }
-        setIsOpenForm(updatedIsOpenForm);
-      }
-    };
-
-    window.addEventListener("keypress", handleKeyPress);
-
-    return () => {
-      window.removeEventListener("keypress", handleKeyPress);
-    };
   }, [ownerName]);
 
   return (
@@ -92,6 +91,7 @@ export default function CardOwnerNameInputField({
           maxLength={26}
           value={ownerName}
           onBlur={handleBlur}
+          onKeyDown={handleKeyPress}
         />
       </div>
       <div className={styles.error_message}>
