@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import CheckImg from "/public/img/Check.png";
+import THEME from "../../styles/theme";
 
 const CheckBox = () => {
   return (
@@ -14,7 +15,7 @@ export default CheckBox;
 const CheckBoxContainer = styled.div`
   display: flex;
   align-items: center;
-  background: #333333;
+  background: ${THEME.PRIMARY.darkGrey};
   border-radius: 50%;
   text-align: center;
   width: 76px;

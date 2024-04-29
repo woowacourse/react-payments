@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import THEME from "../../../styles/theme";
 
 interface InputBoxProps {
   inputValue: string;
@@ -45,8 +46,7 @@ const InputBox = ({
 export default InputBox;
 
 const Input = styled.input<{ isError: boolean }>`
-  border: 1.01px solid
-    ${(props) => (props.isError ? "rgba(255, 61, 61, 1)" : "rgba(172, 172, 172, 1)")};
+  border: 1.01px solid ${(props) => (props.isError ? THEME.DEFAULT.red : THEME.DEFAULT.grey)};
   height: 32px;
   padding: 8px;
   border-radius: 2px;
@@ -59,6 +59,6 @@ const Input = styled.input<{ isError: boolean }>`
   outline: none;
 
   ::placeholder {
-    color: rgba(172, 172, 172, 1);
+    color: ${THEME.DEFAULT.grey};
   }
 `;

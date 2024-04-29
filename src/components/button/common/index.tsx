@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import THEME from "../../../styles/theme";
 
 interface ButtonProps {
   content: string;
@@ -18,7 +19,7 @@ export default Button;
 
 const ButtonBox = styled.button`
   width: 100%;
-  background: #333333;
+  background: ${THEME.PRIMARY.darkGrey};
   color: #f3f3f3;
   text-align: center;
   padding: 20px;

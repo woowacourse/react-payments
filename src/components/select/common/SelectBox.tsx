@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
+import THEME from "../../../styles/theme";
 
 interface SelectBoxProps {
   isDropdown: boolean;
@@ -53,7 +54,7 @@ const Select = styled.ul`
   border-radius: 3px;
   padding: 8px;
   margin-bottom: 3px;
-  border: 1px solid rgba(172, 172, 172, 1);
+  border: 1px solid ${THEME.DEFAULT.grey};
 `;
 
 const SelectedCardWrapper = styled.div`
@@ -65,16 +66,16 @@ const SelectedCardWrapper = styled.div`
 const SelectedCardText = styled.p<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
-  color: ${(props) => (props.isSelected ? "black" : "#babcbb")};
+  color: ${(props) => (props.isSelected ? THEME.DEFAULT.black : THEME.DEFAULT.grey)};
 `;
 
 const OptionWrapper = styled.div`
   position: absolute;
   left: 0;
   top: 38px;
-  background: white;
+  background: ${THEME.DEFAULT.white};
   width: 100%;
-  border: 1px solid rgba(172, 172, 172, 1);
+  border: 1px solid ${THEME.DEFAULT.grey};
   border-radius: 5px;
   max-height: 20vh;
   overflow: scroll;
@@ -84,7 +85,7 @@ const Option = styled.li`
   padding: 8px;
 
   &:hover {
-    background: #babcbb;
+    background: ${THEME.DEFAULT.grey};
     transition: 0.1s;
   }
 `;
@@ -97,8 +98,8 @@ const Arrow = styled.div<{ isDropdown: boolean }>`
   width: 5px;
   height: 5px;
   box-sizing: border-box;
-  border-top: 2px solid #121212;
-  border-right: 2px solid #121212;
+  border-top: 2px solid ${THEME.DEFAULT.black};
+  border-right: 2px solid ${THEME.DEFAULT.black};
   transform: ${(props) => (props.isDropdown ? "rotate(135deg)" : "rotate(315deg)")};
   transition: 0.3s;
 `;

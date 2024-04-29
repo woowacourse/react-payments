@@ -105,6 +105,7 @@ const resetCss = css`
   }
   body {
     line-height: 1;
+    font-family: Noto Sans KR;
   }
   ol,
   ul {

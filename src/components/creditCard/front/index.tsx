@@ -3,6 +3,7 @@ import CreditCardBrandLogo from "./CreditCardBrandLogo";
 import CreditCardInfo from "./CreditCardInfo";
 import { CreditCardProps } from "../../../@types/CreditCard";
 import CARD_COLOR from "../../../constants/cardColor";
+import THEME from "../../../styles/theme";
 
 const CreditCardFront = ({
   creditCardNumber,
@@ -11,7 +12,7 @@ const CreditCardFront = ({
   selectedCard,
 }: CreditCardProps) => {
   const cardFirstFourNumber = creditCardNumber[0];
-  const cardColor = selectedCard ? CARD_COLOR[selectedCard] : "rgba(51, 51, 51, 1)";
+  const cardColor = selectedCard ? CARD_COLOR[selectedCard] : THEME.PRIMARY.darkGrey;
 
   return (
     <CreditCardContainer cardColor={cardColor}>
@@ -51,7 +52,7 @@ const YellowBox = styled.div`
   width: 36px;
   height: 22px;
   border-radius: 2px;
-  background: rgba(221, 205, 120, 1);
+  background: ${THEME.DEFAULT.mustard};
 `;
 
 const BrandLogoBox = styled.div`

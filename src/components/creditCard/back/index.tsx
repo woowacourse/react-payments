@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import THEME from "../../../styles/theme";
 
 const CreditCardBack = ({ cvcNumber }: { cvcNumber: string }) => {
   return (
@@ -14,7 +15,7 @@ const CreditCardContainer = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: #d5d5d5;
+  background: ${THEME.DEFAULT.grey};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
@@ -28,7 +29,7 @@ const CreditCardCVCWrapper = styled.div`
   display: flex;
   padding: 6px;
   box-sizing: border-box;
-  background: #cbba64;
+  background: ${THEME.DEFAULT.mustard};
   color: white;
   font-size: 14px;
   letter-spacing: 2px;

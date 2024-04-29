@@ -2,6 +2,7 @@ import InputBox from "./common/InputBox";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
+import THEME from "../../styles/theme";
 
 interface InputOwnerNameProps {
   inputValue: string;
@@ -47,6 +48,6 @@ const InputLabel = styled.label`
   font-weight: 500;
   line-height: 15px;
   text-align: left;
-  color: rgba(10, 13, 19, 1);
+  color: ${THEME.DEFAULT.black};
   margin-bottom: 8px;
 `;
