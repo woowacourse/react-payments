@@ -11,7 +11,11 @@ export const Button = styled.button`
 
   cursor: pointer;
 
+  &:hover {
+    background-color: ${(props) => props.theme.color.black};
+  }
+
   &:active {
-    background-color: ${(props) => props.theme.color.lightGray};
+    background-color: ${(props) => props.theme.color.black};
   }
 `;
