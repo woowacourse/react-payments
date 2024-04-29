@@ -30,7 +30,7 @@ const useFormInputBlur = <T extends CreditCardSpecificValue>(initialValue: T) =>
     const validateStatus = Validator.blurCreditCardInfo(newValue, name);
     if (validateStatus === "notValid") return setIsError(true);
 
-    handleFormChange(e);
+    handleInputChange(name, newValue);
   };
 
   return [inputValue, handleFormChange, handleBlur, isError] as const;
