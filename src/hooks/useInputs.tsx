@@ -21,7 +21,7 @@ const useInputs = <T extends object>({
 }: Props<T>) => {
   const [values, setValues] = useState(initialValue);
   const [errors, setErrors] = useState<{ [K in keyof T]?: string }>({});
-  const [isError, setIsError] = useState(true);
+  const [isValidated, setIsValidated] = useState(false);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -60,9 +60,9 @@ const useInputs = <T extends object>({
       !Object.keys(errors).length &&
       Object.values(values).every((value) => value)
     ) {
-      setIsError(false);
+      setIsValidated(true);
     } else {
-      setIsError(true);
+      setIsValidated(false);
     }
   }, [errors, values]);
 
@@ -71,7 +71,7 @@ const useInputs = <T extends object>({
     setValues,
     errors,
     onChange,
-    isError,
+    isValidated,
     setErrors,
   };
 };

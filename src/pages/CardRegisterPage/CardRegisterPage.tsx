@@ -1,17 +1,18 @@
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CardPreview from "@/components/CreditCardPreview/CardPreview";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BasicButton from "@/components/_common/BasicButton/BasicButton";
 import { theme } from "@/style/theme";
 import { useNavigate } from "react-router-dom";
 import useCardRegister from "@/hooks/useCardRegister";
 import { ROUTE_URL } from "@/constants/url";
 import { REGISTER_STEP } from "@/constants/condition";
+import useFormProgress from "@/hooks/useFormProgress";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
-  const cardRegister = useCardRegister();
+  const cardRegisterInfo = useCardRegister();
   const {
     cardNumbersState,
     expirationPeriodState,
@@ -19,11 +20,24 @@ const CardRegisterPage = () => {
     CVCNumbersState,
     passwordState,
     ownerNameState,
-  } = cardRegister;
+  } = cardRegisterInfo;
 
-  const [step, setStep] = useState<number>(1);
   const [isFront, setIsFront] = useState<boolean>(true);
   const [isNameEntered, setIsNameEntered] = useState<boolean>(false);
+
+  const isValidatedArr = [
+    cardNumbersState.isValidated,
+    cardBrandState.isValidated,
+    expirationPeriodState.isValidated,
+    ownerNameState.isValidated && isNameEntered,
+    CVCNumbersState.isValidated,
+    passwordState.isValidated,
+  ];
+
+  const { progressCompleted, formProgress } = useFormProgress({
+    isValidatedArr,
+    isNameEntered,
+  });
 
   const onSubmitCardInfo = () => {
     navigate(ROUTE_URL.REGISTER_CONFIRM, {
@@ -32,24 +46,17 @@ const CardRegisterPage = () => {
         cardType: cardBrandState.value,
       },
     });
+
+    const cardRegisterInfo = {
+      cardNumbers: cardNumbersState.values,
+      expirationNumbers: expirationPeriodState.values,
+      cardBrandState: cardBrandState.value,
+      ownerName: ownerNameState.value,
+      CVCNumbersState: CVCNumbersState.value,
+      passwordState: passwordState.value,
+    };
+    console.log("카드 등록 정보", cardRegisterInfo);
   };
-
-  const stepPassedArr = [
-    !cardNumbersState.isError,
-    !!cardBrandState.value?.length,
-    !expirationPeriodState.isError,
-    !ownerNameState.isError && isNameEntered,
-    !CVCNumbersState.isError,
-    !passwordState.isError,
-  ];
-
-  const allPassed = stepPassedArr.every((isCompleted) => isCompleted === true);
-
-  useEffect(() => {
-    if (stepPassedArr[step - 1] && step <= stepPassedArr.length) {
-      setStep((prev) => prev + 1);
-    }
-  }, [step, stepPassedArr]);
 
   return (
     <S.CardRegisterWrapper>
@@ -64,18 +71,18 @@ const CardRegisterPage = () => {
           setIsFront={setIsFront}
         />
         <CardRegisterForm
-          {...cardRegister}
-          step={step}
+          {...cardRegisterInfo}
+          formProgress={formProgress}
           setIsFront={setIsFront}
           setIsNameEntered={setIsNameEntered}
         />
       </S.FlexWrapper>
-      {step === REGISTER_STEP.ALL_PASSED && allPassed && (
+      {formProgress === REGISTER_STEP.ALL_PASSED && progressCompleted && (
         <BasicButton
           borderType="square"
           position="bottom"
           height={52}
-          disabled={step !== REGISTER_STEP.ALL_PASSED}
+          disabled={formProgress !== REGISTER_STEP.ALL_PASSED}
           backgroundColor={theme.COLOR["grey-3"]}
           onClick={onSubmitCardInfo}
         >

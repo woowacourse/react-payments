@@ -17,7 +17,7 @@ const useInput = <T,>({
 }: Props<T>) => {
   const [value, setValue] = useState<T>(initialValue);
   const [error, setError] = useState<string[]>([]);
-  const [isError, setIsError] = useState(true);
+  const [isValidated, setIsValidated] = useState(true);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -44,13 +44,13 @@ const useInput = <T,>({
 
   useEffect(() => {
     if (!error.length && value !== "" && value) {
-      setIsError(false);
+      setIsValidated(true);
     } else {
-      setIsError(true);
+      setIsValidated(false);
     }
   }, [error, value]);
 
-  return { value, onChange, error, isError, setValue, setError };
+  return { value, onChange, error, isValidated, setValue, setError };
 };
 
 export default useInput;

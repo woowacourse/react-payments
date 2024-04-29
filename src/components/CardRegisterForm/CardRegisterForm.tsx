@@ -21,7 +21,7 @@ interface Props {
   CVCNumbersState: ReturnType<typeof useInput<string>>;
   passwordState: ReturnType<typeof useInput<string>>;
   cardBrandState: ReturnType<typeof useInput<CardBrandType | null>>;
-  step: number;
+  formProgress: number;
   setIsFront: React.Dispatch<React.SetStateAction<boolean>>;
   setIsNameEntered: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -33,33 +33,33 @@ const CardRegisterForm = ({
   CVCNumbersState,
   passwordState,
   cardBrandState,
-  step,
+  formProgress,
   setIsFront,
   setIsNameEntered,
 }: Props) => {
   return (
     <S.CardFormWrapper>
-      {step >= REGISTER_STEP.PASSWORD && (
+      {formProgress >= REGISTER_STEP.PASSWORD && (
         <PasswordFieldMemo passwordState={passwordState} />
       )}
-      {step >= REGISTER_STEP.CVC && (
+      {formProgress >= REGISTER_STEP.CVC && (
         <CVCFieldMemo
           CVCNumbersState={CVCNumbersState}
           setIsFront={setIsFront}
         />
       )}
-      {step >= REGISTER_STEP.OWNER_NAME && (
+      {formProgress >= REGISTER_STEP.OWNER_NAME && (
         <OwnerNameFieldMemo
           ownerNameState={ownerNameState}
           setIsNameEntered={setIsNameEntered}
         />
       )}
-      {step >= REGISTER_STEP.EXPIRATION_PERIOD && (
+      {formProgress >= REGISTER_STEP.EXPIRATION_PERIOD && (
         <ExpirationPeriodFieldMemo
           expirationPeriodState={expirationPeriodState}
         />
       )}
-      {step >= REGISTER_STEP.CARD_BRAND && (
+      {formProgress >= REGISTER_STEP.CARD_BRAND && (
         <CardBrandSelectFieldMemo cardBrandState={cardBrandState} />
       )}
       <CardNumbersFieldMemo cardNumbersState={cardNumbersState} />
