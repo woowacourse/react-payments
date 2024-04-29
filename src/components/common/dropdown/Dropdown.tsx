@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as S from './Dropdown.styled';
 import { CARD_OPTIONS } from '../../../constants/card';
 import ArrowUp from '../../../assets/images/arrow_up.svg?react';
@@ -11,9 +11,19 @@ interface DropdownProps {
 
 const Dropdown = ({ value, handleSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleOutsideClose = (e: MouseEvent) => {
+      if (isOpen && !dropMenuRef.current?.contains(e.target as Node)) setIsOpen(false);
+    };
+    document.addEventListener('click', handleOutsideClose);
+
+    return () => document.removeEventListener('click', handleOutsideClose);
+  }, [isOpen]);
 
   return (
-    <S.SelectBox $isOpen={isOpen} onClick={() => setIsOpen(prev => !prev)}>
+    <S.SelectBox ref={dropMenuRef} $isOpen={isOpen} onClick={() => setIsOpen(prev => !prev)}>
       <S.LabelWrapper>
         <S.SelectedText $value={value}>{value || '선택해주세요'}</S.SelectedText>
         {isOpen ? <ArrowDown /> : <ArrowUp />}
