@@ -11,7 +11,7 @@ const inputWidthSize: InputWidthSize = {
   small: '72px',
   medium: '152px',
   large: '315px',
-} as const;
+};
 
 interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   size: InputSize;
