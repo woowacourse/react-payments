@@ -48,6 +48,8 @@ function CardInputPage() {
 
   const navigate = useNavigate();
 
+  const allSectionsCompleted = isCompletedSections.every((form) => form);
+
   const handleCardAdded = () => {
     navigate("/card-added", {
       state: {
@@ -163,10 +165,9 @@ function CardInputPage() {
             </ShelfSection>
           )}
         </Form>
-        <SubmitButton
-          isCompletedSections={isCompletedSections}
-          onClick={handleCardAdded}
-        ></SubmitButton>
+        {allSectionsCompleted && (
+          <SubmitButton onClick={handleCardAdded}></SubmitButton>
+        )}
       </section>
     </main>
   );
