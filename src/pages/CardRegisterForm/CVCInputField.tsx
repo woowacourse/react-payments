@@ -14,12 +14,12 @@ const individualValidators: Validator[] = [
   },
 ];
 interface CVCInputProps {
-  reduceds: ReturnType<typeof useInput>[];
+  inputStates: ReturnType<typeof useInput>[];
   setIsFocused?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CVCInputField = ({ reduceds, setIsFocused = () => {} }: CVCInputProps) => {
-  const validationStates = [useValidation(reduceds[0], individualValidators)];
+const CVCInputField = ({ inputStates, setIsFocused = () => {} }: CVCInputProps) => {
+  const validationStates = [useValidation(inputStates[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>CVC</InputField.Label>
@@ -27,12 +27,12 @@ const CVCInputField = ({ reduceds, setIsFocused = () => {} }: CVCInputProps) => 
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
             onBlur={() => {
               setIsFocused(false);
             }}
@@ -43,7 +43,7 @@ const CVCInputField = ({ reduceds, setIsFocused = () => {} }: CVCInputProps) => 
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

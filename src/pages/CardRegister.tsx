@@ -6,7 +6,7 @@ import useInput from "@/hooks/useInput";
 import { useState } from "react";
 import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
 
-const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced[0].value);
+const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced.value);
 
 const checkCardBrand = (cardNumbers: string[]): CardBrand => {
   if (Number(cardNumbers[0][0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
@@ -22,11 +22,11 @@ const checkCardBrand = (cardNumbers: string[]): CardBrand => {
 };
 const CardRegister = () => {
   const cardNumbersReduceds = [useInput(""), useInput(""), useInput(""), useInput("")];
-  const expirationDateReduceds = [useInput(""), useInput("")];
+  const expirationDateStates = [useInput(""), useInput("")];
   const ownerNameReduceds = [useInput("")];
-  const CVCReduceds = [useInput("")];
+  const CVCStates = [useInput("")];
   const passwordReduceds = [useInput("")];
-  const [cardCompany, setCardCompany] = useState<Company>("BC카드");
+  const { value: cardCompany, setValue: setCardCompany } = useInput("BC카드");
   const [isCVCFocused, setIsCVCFocused] = useState(false);
   return (
     <S.CardRegisterWrapper>
@@ -35,19 +35,19 @@ const CardRegister = () => {
           <CreditCardPreview
             cardBrand={checkCardBrand(inputsOf(cardNumbersReduceds))}
             cardNumbers={inputsOf(cardNumbersReduceds)}
-            expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
+            expirationDate={expirationDateStates[0].value && inputsOf(expirationDateStates).join("/")}
             ownerName={inputsOf(ownerNameReduceds)[0]}
-            cardCompany={cardCompany}
+            cardCompany={cardCompany as Company}
           />
         )}
-        {isCVCFocused && <CreditCardPreviewRear CVC={CVCReduceds[0][0].value} />}
+        {isCVCFocused && <CreditCardPreviewRear CVC={CVCStates[0].value} />}
 
         <CardRegisterForm
-          cardNumbersReduceds={cardNumbersReduceds}
-          expirationDateReduceds={expirationDateReduceds}
-          ownerNameReduceds={ownerNameReduceds}
-          CVCReduceds={CVCReduceds}
-          passwordReduceds={passwordReduceds}
+          cardNumbersStates={cardNumbersReduceds}
+          expirationDateStates={expirationDateStates}
+          ownerNameStates={ownerNameReduceds}
+          CVCStates={CVCStates}
+          passwordStates={passwordReduceds}
           setIsCVCFocused={setIsCVCFocused}
           setCardCompany={setCardCompany}
         />

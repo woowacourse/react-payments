@@ -1,9 +1,9 @@
 import InputField from "@/components/InputField/InputField";
-import { Company, companyNames } from "@/constants/condition";
+import { companyNames } from "@/constants/condition";
 import React, { FormEvent } from "react";
 
 interface CardCompanyInputFieldProp {
-  setCardCompany?: React.Dispatch<React.SetStateAction<Company>>;
+  setCardCompany?: React.Dispatch<React.SetStateAction<string>>;
 }
 const CardCompanyInputField = ({ setCardCompany }: CardCompanyInputFieldProp) => {
   return (
@@ -13,7 +13,7 @@ const CardCompanyInputField = ({ setCardCompany }: CardCompanyInputFieldProp) =>
           onChange={(e: FormEvent<HTMLSelectElement>) => {
             if (setCardCompany === undefined) return;
             const { value } = e.target as HTMLSelectElement;
-            setCardCompany(value as Company);
+            setCardCompany(value);
           }}
           required
         >

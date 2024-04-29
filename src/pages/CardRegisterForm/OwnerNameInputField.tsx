@@ -18,8 +18,8 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = [useValidation(reduceds[0], individualValidators)];
+const OwnerNameInputField = ({ inputStates }: { inputStates: ReturnType<typeof useInput>[] }) => {
+  const validationStates = [useValidation(inputStates[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>소유자 이름</InputField.Label>
@@ -27,19 +27,19 @@ const OwnerNameInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInpu
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
               event.target.value = event.target.value.toUpperCase();
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
             placeholder="JOHN DOE"
           ></InputField.Input>
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

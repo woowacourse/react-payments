@@ -24,10 +24,10 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+const ExpirationDateInputField = ({ inputStates }: { inputStates: ReturnType<typeof useInput>[] }) => {
   const validationStates = [
-    useValidation(reduceds[0], individualValidators),
-    useValidation(reduceds[1], individualValidators),
+    useValidation(inputStates[0], individualValidators),
+    useValidation(inputStates[1], individualValidators.slice(1)),
   ];
   return (
     <InputField>
@@ -36,18 +36,18 @@ const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof us
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
             placeholder={index === 0 ? "MM" : "YY"}
           ></InputField.Input>
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

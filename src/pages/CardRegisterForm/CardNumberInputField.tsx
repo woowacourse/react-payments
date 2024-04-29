@@ -17,12 +17,12 @@ const individualValidators: Validator[] = [
   },
 ];
 
-const CardNumberInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
+const CardNumberInputField = ({ inputState }: { inputState: ReturnType<typeof useInput>[] }) => {
   const validationStates = [
-    useValidation(reduceds[0], individualValidators),
-    useValidation(reduceds[1], individualValidators),
-    useValidation(reduceds[2], individualValidators),
-    useValidation(reduceds[3], individualValidators),
+    useValidation(inputState[0], individualValidators),
+    useValidation(inputState[1], individualValidators),
+    useValidation(inputState[2], individualValidators),
+    useValidation(inputState[3], individualValidators),
   ];
 
   return (
@@ -32,18 +32,18 @@ const CardNumberInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInp
         {Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map((_, index) => (
           <InputField.Input
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
             placeholder="1234"
           ></InputField.Input>
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );

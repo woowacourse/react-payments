@@ -8,11 +8,16 @@ import { INPUT_COUNTS } from "@/constants/condition";
 const VALID_LENGTH = 2;
 const MAX_LENGTH = VALID_LENGTH;
 const LABEL = "비밀번호 앞 2자리";
-const INPUTS_COUNT = INPUT_COUNTS.OWNER_NAME;
-const individualValidators: Validator[] = [];
+const INPUTS_COUNT = INPUT_COUNTS.PASSWORD;
+const individualValidators: Validator[] = [
+  {
+    validate: (input: string) => input.length == VALID_LENGTH || input.length == 0,
+    errorMessage: `길이는 ${VALID_LENGTH}여야합니다.`,
+  },
+];
 
-const PasswordInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = [useValidation(reduceds[0], individualValidators)];
+const PasswordInputField = ({ inputStates }: { inputStates: ReturnType<typeof useInput>[] }) => {
+  const validationStates = [useValidation(inputStates[0], individualValidators)];
   return (
     <InputField>
       <InputField.Label>{LABEL}</InputField.Label>
@@ -21,15 +26,18 @@ const PasswordInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput
           <InputField.Input
             type="password"
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > MAX_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
           ></InputField.Input>
         ))}
       </InputField.Inputs>
+      <InputField.ErrorMessage>
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
+      </InputField.ErrorMessage>
     </InputField>
   );
 };

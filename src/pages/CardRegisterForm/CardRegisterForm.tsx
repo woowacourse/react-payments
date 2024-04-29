@@ -1,4 +1,4 @@
-import { INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE, Company } from "@/constants/condition";
+import { INPUT_INFO_TITLE, INPUT_INFO_SUBTITLE } from "@/constants/condition";
 import S from "./CardRegisterForm.styled";
 import CardNumberInputField from "@/pages/CardRegisterForm/CardNumberInputField";
 import ExpirationDateInputField from "@/pages/CardRegisterForm/ExpirationDateInputField";
@@ -8,35 +8,35 @@ import PasswordInputField from "./PasswordInputField";
 import CVCInputField from "./CVCInputField";
 import CardCompanyInputField from "./CardCompanyInputField";
 
-type Reduceds = ReturnType<typeof useInput>[];
+type InputState = ReturnType<typeof useInput>;
 interface Props {
-  cardNumbersReduceds: Reduceds;
-  expirationDateReduceds: Reduceds;
-  ownerNameReduceds: Reduceds;
-  CVCReduceds: Reduceds;
-  passwordReduceds: Reduceds;
+  cardNumbersStates: InputState[];
+  expirationDateStates: InputState[];
+  ownerNameStates: InputState[];
+  CVCStates: InputState[];
+  passwordStates: InputState[];
   setIsCVCFocused?: React.Dispatch<React.SetStateAction<boolean>>;
-  setCardCompany?: React.Dispatch<React.SetStateAction<Company>>;
+  setCardCompany?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CardRegisterForm = ({
-  cardNumbersReduceds,
-  expirationDateReduceds,
-  ownerNameReduceds,
-  CVCReduceds,
-  passwordReduceds,
+  cardNumbersStates,
+  expirationDateStates,
+  ownerNameStates,
+  CVCStates,
+  passwordStates,
   setIsCVCFocused,
   setCardCompany,
 }: Props) => {
-  const reducedsCollection: Reduceds[] = [
-    cardNumbersReduceds,
-    expirationDateReduceds,
-    ownerNameReduceds,
-    CVCReduceds,
-    passwordReduceds,
+  const statesCollection: InputState[][] = [
+    cardNumbersStates,
+    expirationDateStates,
+    ownerNameStates,
+    CVCStates,
+    passwordStates,
   ];
-  const isValid = (reduceds: Reduceds) => reduceds.every((reduced) => reduced[0].isValid);
-  const isValidTo = (index: number) => reducedsCollection.slice(0, index + 1).every((reduceds) => isValid(reduceds));
+  const isValid = (states: InputState[]) => states.every((state) => state.isValid);
+  const isValidTo = (index: number) => statesCollection.slice(0, index + 1).every((reduceds) => isValid(reduceds));
   return (
     <S.CardFormWrapper>
       {/* 카드 번호 */}
@@ -46,7 +46,7 @@ const CardRegisterForm = ({
           <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
           <S.InputSubTitle>{INPUT_INFO_SUBTITLE.CARD_NUMBERS}</S.InputSubTitle>
         </S.TitleWrapper>
-        <CardNumberInputField reduceds={cardNumbersReduceds} />
+        <CardNumberInputField inputState={cardNumbersStates} />
       </S.InputFieldWithInfo>
 
       {/* 카드회사명 */}
@@ -65,7 +65,7 @@ const CardRegisterForm = ({
           <S.InputTitle>{INPUT_INFO_TITLE.EXPIRATION_DATE}</S.InputTitle>
           <S.InputSubTitle>{INPUT_INFO_SUBTITLE.EXPIRATION_DATE}</S.InputSubTitle>
         </S.TitleWrapper>
-        <ExpirationDateInputField reduceds={expirationDateReduceds} />
+        <ExpirationDateInputField inputStates={expirationDateStates} />
       </S.InputFieldWithInfo>
 
       {/* 소유자 이름 */}
@@ -73,7 +73,7 @@ const CardRegisterForm = ({
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.OWNER_NAME}</S.InputTitle>
         </S.TitleWrapper>
-        <OwnerNameInputField reduceds={ownerNameReduceds} />
+        <OwnerNameInputField inputStates={ownerNameStates} />
       </S.InputFieldWithInfo>
 
       {/* CVC */}
@@ -81,7 +81,7 @@ const CardRegisterForm = ({
         <S.TitleWrapper>
           <S.InputTitle>{INPUT_INFO_TITLE.CVC}</S.InputTitle>
         </S.TitleWrapper>
-        <CVCInputField reduceds={CVCReduceds} setIsFocused={setIsCVCFocused} />
+        <CVCInputField inputStates={CVCStates} setIsFocused={setIsCVCFocused} />
       </S.InputFieldWithInfo>
 
       {/* 비밀번호 앞 2자리 */}
@@ -90,7 +90,7 @@ const CardRegisterForm = ({
           <S.InputTitle>{INPUT_INFO_TITLE.PASSWORD}</S.InputTitle>
           <S.InputSubTitle>{INPUT_INFO_SUBTITLE.PASSWORD}</S.InputSubTitle>
         </S.TitleWrapper>
-        <PasswordInputField reduceds={passwordReduceds} />
+        <PasswordInputField inputStates={passwordStates} />
       </S.InputFieldWithInfo>
     </S.CardFormWrapper>
   );

@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CVCInputField from "./CVCInputField";
 import useInput from "@/hooks/useInput";
-import { INPUT_COUNTS } from "@/constants/condition";
 
 const meta = {
   title: "CVCInputField",
@@ -13,8 +12,8 @@ export default meta;
 type Story = StoryObj<typeof CVCInputField>;
 
 const CVCInputFieldWithHook = () => {
-  const reduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
-  return <CVCInputField reduceds={reduceds} />;
+  const inputStates = [useInput("")];
+  return <CVCInputField inputStates={inputStates} />;
 };
 
 export const Default: Story = {
