@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import CardNumberInput from '../CardNumberInput/CardNumberInput';
-import CardBrandInput from '../CardBrandInput/CardBrandInput';
-import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
-import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
-import CardCVCInput from '../CardCVCInput/CardCVCInput';
-import CardPINInput from '../CardPINInput/CardPINInput';
-import CardPreviewBox from '../CardPreview/CardPreview';
+import {
+  CardNumberInput,
+  CardBrandInput,
+  CardExpirationInput,
+  CardOwnerInput,
+  CardCVCInput,
+  CardPINInput,
+  CardPreview,
+} from '../';
 
 import {
   useChangeCardNumbers,
@@ -87,7 +89,7 @@ export default function CardRegister() {
   return (
     <S.AppLayout>
       <S.CardPreviewBox>
-        <CardPreviewBox
+        <CardPreview
           cardNumbers={cardNumbers}
           brand={brand}
           month={expireDate.month}
@@ -108,7 +110,11 @@ export default function CardRegister() {
         )}
 
         {currentInputStep >= CARD_INPUT_STEP.Owner && (
-          <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} onSubmitOwner={handleSubmitOwner} />
+          <CardOwnerInput
+            isOwnerValid={ownerValid}
+            onChangeOwner={handleChangeOwner}
+            onSubmitOwner={handleSubmitOwner}
+          />
         )}
 
         {currentInputStep >= CARD_INPUT_STEP.ExpireDate && (
