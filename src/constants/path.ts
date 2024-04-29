@@ -1,9 +1,7 @@
-import { Path } from './../type.d';
-
 const PATH = {
-  payments: '/payments' as Path,
-  wrongAccess: '/wrong-access' as Path,
-  completePaymentsRegister: '/complete-payment-register' as Path,
+  payments: '/payments',
+  wrongAccess: '/wrong-access',
+  completePaymentsRegister: '/complete-payment-register',
 };
 
 export default PATH;

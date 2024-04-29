@@ -18,4 +18,4 @@ export interface CardInfo {
   cardHolder: string;
 }
 
-export type Path = '/payments' | '/wrong-access' | '/complete-payment-register';
+export type Path = keyof PATH;
