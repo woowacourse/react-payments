@@ -16,10 +16,10 @@ export default function CardExpirationDateInputField({
   errorMessages,
 }: CardExpirationDateInputField) {
   // TODO: 단일 ref로 변경
-  const inputRefs = useRef<HTMLInputElement[] | null[]>([]);
+  const yearInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (expirationDate.month.length >= 2) inputRefs.current[1]?.focus();
+    if (expirationDate.month.length >= 2) yearInputRef.current?.focus();
   }, [expirationDate]);
 
   return (
@@ -35,7 +35,7 @@ export default function CardExpirationDateInputField({
           isError={errorMessages[0] !== ''}
         />
         <Input
-          ref={(e) => (inputRefs.current[1] = e)}
+          ref={yearInputRef}
           onChange={handleExpirationDateChange('year')}
           placeholder={DATE_PLACEHOLDER.YEAR}
           maxLength={2}
