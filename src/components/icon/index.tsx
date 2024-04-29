@@ -1,16 +1,22 @@
 import styled from "@emotion/styled";
-import CheckImg from "/public/img/Check.png";
-import THEME from "../../styles/theme";
 
-const CheckBox = () => {
+import THEME from "../../styles/theme";
+import IconKind from "../../@types/IconKind";
+import IconSource from "../../constants/IconSource";
+
+interface IconProps {
+  kind: IconKind;
+}
+
+const Icon = ({ kind }: IconProps) => {
   return (
     <CheckBoxContainer>
-      <Img src={CheckImg} />
+      <Img src={IconSource[kind]} />
     </CheckBoxContainer>
   );
 };
 
-export default CheckBox;
+export default Icon;
 
 const CheckBoxContainer = styled.div`
   display: flex;
