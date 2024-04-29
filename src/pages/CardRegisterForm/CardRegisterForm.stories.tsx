@@ -8,6 +8,7 @@ const CardRegisterFormWithHook = () => {
   const expirationDateStates = [useInput(""), useInput("")];
   const ownerNameStates = [useInput(""), useInput("")];
   const { setValue: setCardCompany } = useInput("BC카드");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setIsCVCFocused] = useState<boolean>(false);
 
   return (

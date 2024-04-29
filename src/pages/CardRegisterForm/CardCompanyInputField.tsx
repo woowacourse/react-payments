@@ -1,11 +1,17 @@
 import InputField from "@/components/InputField/InputField";
 import { companyNames } from "@/constants/condition";
+import useInput from "@/hooks/useInput";
+import useValidation from "@/hooks/useValidation";
 import React, { FormEvent } from "react";
 
 interface CardCompanyInputFieldProp {
-  setCardCompany?: React.Dispatch<React.SetStateAction<string>>;
+  cardCompanyStates: ReturnType<typeof useInput>[];
 }
-const CardCompanyInputField = ({ setCardCompany }: CardCompanyInputFieldProp) => {
+const CardCompanyInputField = ({ cardCompanyStates }: CardCompanyInputFieldProp) => {
+  const validators = [{ validate: (input: string) => companyNames.includes(input), errorMessage: "11" }];
+  const validatedStates = useValidation(cardCompanyStates[0], validators);
+  const { setValue: setCardCompany } = validatedStates;
+
   return (
     <InputField>
       <InputField.Inputs>

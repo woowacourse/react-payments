@@ -21,35 +21,37 @@ const checkCardBrand = (cardNumbers: string[]): CardBrand => {
   return "NONE";
 };
 const CardRegister = () => {
-  const cardNumbersReduceds = [useInput(""), useInput(""), useInput(""), useInput("")];
+  const cardNumbersStates = [useInput(""), useInput(""), useInput(""), useInput("")];
   const expirationDateStates = [useInput(""), useInput("")];
-  const ownerNameReduceds = [useInput("")];
+  const ownerNameStates = [useInput("")];
   const CVCStates = [useInput("")];
-  const passwordReduceds = [useInput("")];
-  const { value: cardCompany, setValue: setCardCompany } = useInput("BC카드");
+  const passwordStates = [useInput("")];
+  const cardCompanyStates = [useInput("BC카드")];
   const [isCVCFocused, setIsCVCFocused] = useState(false);
+
+  const cardCompany = cardCompanyStates[0].value;
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         {!isCVCFocused && (
           <CreditCardPreview
-            cardBrand={checkCardBrand(inputsOf(cardNumbersReduceds))}
-            cardNumbers={inputsOf(cardNumbersReduceds)}
+            cardBrand={checkCardBrand(inputsOf(cardNumbersStates))}
+            cardNumbers={inputsOf(cardNumbersStates)}
             expirationDate={expirationDateStates[0].value && inputsOf(expirationDateStates).join("/")}
-            ownerName={inputsOf(ownerNameReduceds)[0]}
+            ownerName={inputsOf(ownerNameStates)[0]}
             cardCompany={cardCompany as Company}
           />
         )}
         {isCVCFocused && <CreditCardPreviewRear CVC={CVCStates[0].value} />}
 
         <CardRegisterForm
-          cardNumbersStates={cardNumbersReduceds}
+          cardNumbersStates={cardNumbersStates}
           expirationDateStates={expirationDateStates}
-          ownerNameStates={ownerNameReduceds}
+          ownerNameStates={ownerNameStates}
           CVCStates={CVCStates}
-          passwordStates={passwordReduceds}
+          passwordStates={passwordStates}
+          cardCompanyStates={cardCompanyStates}
           setIsCVCFocused={setIsCVCFocused}
-          setCardCompany={setCardCompany}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>

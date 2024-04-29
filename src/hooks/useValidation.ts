@@ -22,6 +22,7 @@ const useValidation = (state: ReturnType<typeof useInput>, validators: Validator
         setError(errorMessage);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, validators]);
 
   return state;
