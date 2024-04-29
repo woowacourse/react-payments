@@ -72,7 +72,7 @@ export default function App() {
     <AppWrapper>
       <HashRouter>
         <Routes>
-          <Route path='/#' element={paymentsElement}></Route>
+          <Route path='/' element={paymentsElement}></Route>
           <Route path={PATH.payments} element={paymentsElement}></Route>
           {lastPath.current === PATH.payments && completePaymentRoute}
           <Route path='*' element={wrongAccessElement}></Route>
