@@ -15,6 +15,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2"
   },
@@ -44,6 +45,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "prettier": "^3.2.5",
     "storybook": "^8.0.8",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }

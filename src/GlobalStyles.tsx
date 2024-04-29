@@ -4,6 +4,10 @@ import reset from 'styled-reset';
 const GlobalStyles = createGlobalStyle`
   ${reset}
 
+  select option[value=""][disabled] {
+	display: none;
+}
+
   a{
     text-decoration: none;
     color: inherit;
@@ -14,10 +18,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     width: 100vw;
     height: auto;
     min-height: 100vh;

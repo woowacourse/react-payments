@@ -1,27 +1,5 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 50px;
-  margin-bottom: 45px;
-
-  width: 100%;
-`;
-
-export const CardContainer = styled.div`
-  background-color: #333333;
-
-  width: 212px;
-  height: 132px;
-
-  padding: 8px 12px;
-
-  border-radius: 4px;
-`;
-
 export const NumbersContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -64,16 +42,13 @@ export const CardHeaderContentWrapper = styled.div`
 export const IcChip = styled.div`
   width: 100%;
   height: 100%;
-
   border-radius: 4px;
-
   background-color: #ddcd78;
 `;
 
 export const CardBrand = styled.img`
   width: 100%;
   height: 100%;
-
   border-radius: 4px;
 `;
 
@@ -81,7 +56,6 @@ export const CardInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
   margin-top: 14px;
   margin-left: 5px;
 `;

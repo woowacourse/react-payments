@@ -1,0 +1,26 @@
+import * as S from '../confirmPage.style';
+import CheckIconImage from './CheckIconImage';
+
+export default function ConfirmImageIcon() {
+  return (
+    <S.IconContainer>
+      <S.IconImageContainer>
+        <svg
+          width="40"
+          height="28"
+          viewBox="0 0 40 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 10.0377L16.0471 24L36 4"
+            stroke="white"
+            stroke-width="7.49999"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </S.IconImageContainer>
+    </S.IconContainer>
+  );
+}
