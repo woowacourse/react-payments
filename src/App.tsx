@@ -4,20 +4,18 @@ import ConfirmCardRegistration from "./pages/confirmCardRegistration/confirmCard
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/react-payments"
-            element={<NewCardPage />}
-          />
-          <Route
-            path="/react-payments/confirmCardRegistration"
-            element={<ConfirmCardRegistration />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/react-payments"
+          element={<NewCardPage />}
+        />
+        <Route
+          path="/react-payments/confirmCardRegistration"
+          element={<ConfirmCardRegistration />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

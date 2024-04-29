@@ -7,13 +7,11 @@ export interface InputProps extends React.ComponentPropsWithRef<"input"> {
 
 const Input = ({ isError, ref, ...restProps }: InputProps) => {
   return (
-    <>
-      <Styled.Input
-        isError={isError}
-        ref={ref}
-        {...restProps}
-      ></Styled.Input>
-    </>
+    <Styled.Input
+      isError={isError}
+      ref={ref}
+      {...restProps}
+    ></Styled.Input>
   );
 };
 

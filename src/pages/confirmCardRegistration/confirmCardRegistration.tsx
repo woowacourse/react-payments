@@ -11,16 +11,14 @@ const ConfirmCardRegistration = () => {
   `;
 
   return (
-    <>
-      <Styled.ConfirmCardRegistrationContainer>
-        <Styled.CheckIcon
-          src={CheckIcon}
-          alt="카드 등록 확인"
-        ></Styled.CheckIcon>
-        <Styled.Text>{text}</Styled.Text>
-        <Styled.Button onClick={() => navigate("/react-payments/")}>확인</Styled.Button>
-      </Styled.ConfirmCardRegistrationContainer>
-    </>
+    <Styled.ConfirmCardRegistrationContainer>
+      <Styled.CheckIcon
+        src={CheckIcon}
+        alt="카드 등록 확인"
+      ></Styled.CheckIcon>
+      <Styled.Text>{text}</Styled.Text>
+      <Styled.Button onClick={() => navigate("/react-payments/")}>확인</Styled.Button>
+    </Styled.ConfirmCardRegistrationContainer>
   );
 };
 
