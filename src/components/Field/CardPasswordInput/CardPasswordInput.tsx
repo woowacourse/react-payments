@@ -8,6 +8,7 @@ import {
 } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
+import formState from "../../../Interfaces/formState";
 
 export default function CardPasswordInput({
   cardPassword,
@@ -17,8 +18,8 @@ export default function CardPasswordInput({
 }: {
   cardPassword: string;
   setCardPassword: Dispatch<SetStateAction<string>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -41,8 +42,8 @@ export default function CardPasswordInput({
   };
 
   useEffect(() => {
-    const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[5] = cardPassword.length == 2;
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
+    updatedIsCompletedSections.cardPasswordInput = cardPassword.length == 2;
     setIsCompletedSections(updatedIsCompletedSections);
     console.log(isCompletedSections);
   }, [cardPassword]);

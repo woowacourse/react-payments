@@ -12,6 +12,7 @@ import {
   CARD_NUMBER_UNIT_PLACEHOLDER,
   CARD_NUMBER_UNIT_LENGTH,
 } from "../../../constants";
+import formState from "../../../Interfaces/formState";
 
 interface CardNumberErrorMessage {
   index: number;
@@ -28,10 +29,10 @@ export default function CardNumbersInputField({
 }: {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
     CardNumberErrorMessage[]
@@ -91,13 +92,13 @@ export default function CardNumbersInputField({
   };
 
   useEffect(() => {
-    const updatedIsCompletedSections = [...isCompletedSections];
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
     const isInputCompleted = cardNumbers.every((num) => num.length === 4);
-    updatedIsCompletedSections[0] = isInputCompleted;
+    updatedIsCompletedSections.cardNumbersInput = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
-    const updatedIsOpenForm = [...isOpenForm];
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
     if (isInputCompleted === true) {
-      updatedIsOpenForm[1] = true;
+      updatedIsOpenForm.cardCompanySelectDropdown = true;
     }
     setIsOpenForm(updatedIsOpenForm);
   }, [cardNumbers]);

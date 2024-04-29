@@ -8,6 +8,7 @@ import {
 } from "react";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
+import formState from "../../../Interfaces/formState";
 
 const CVC_PLACEHOLDER = "123";
 export default function CardCVCInputField({
@@ -21,10 +22,10 @@ export default function CardCVCInputField({
 }: {
   cardCVC: string;
   setCardCVC: Dispatch<SetStateAction<string>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
   setIsCardPreviewFront: Dispatch<SetStateAction<boolean>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -53,13 +54,13 @@ export default function CardCVCInputField({
   };
 
   useEffect(() => {
-    const updatedIsCompletedSections = [...isCompletedSections];
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
     const isInputCompleted = cardCVC.length == 3;
-    updatedIsCompletedSections[4] = isInputCompleted;
+    updatedIsCompletedSections.cardCVCInput = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
-    const updatedIsOpenForm = [...isOpenForm];
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
     if (isInputCompleted === true) {
-      updatedIsOpenForm[5] = true;
+      updatedIsOpenForm.cardPasswordInput = true;
     }
     setIsOpenForm(updatedIsOpenForm);
   }, [cardCVC]);

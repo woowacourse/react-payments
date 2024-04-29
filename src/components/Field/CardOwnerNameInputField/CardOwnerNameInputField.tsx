@@ -11,6 +11,7 @@ import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 import normalizeSpaces from "../../../utils/normalizeSpaces";
 import filterEnglish from "../../../utils/filterEnglish";
+import formState from "../../../Interfaces/formState";
 
 const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
 
@@ -24,10 +25,10 @@ export default function CardOwnerNameInputField({
 }: {
   ownerName: string;
   setOwnerName: Dispatch<SetStateAction<string>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -64,9 +65,9 @@ export default function CardOwnerNameInputField({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const isInputCompleted = ownerName.length !== 0;
-      const updatedIsOpenForm = [...isOpenForm];
+      const updatedIsOpenForm = Object.assign({}, isOpenForm);
       if (isInputCompleted === true) {
-        updatedIsOpenForm[4] = true;
+        updatedIsOpenForm.cardCVCInput = true;
       }
       setIsOpenForm(updatedIsOpenForm);
     }
@@ -74,8 +75,8 @@ export default function CardOwnerNameInputField({
 
   useEffect(() => {
     const isInputCompleted = ownerName.length !== 0;
-    const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[3] = isInputCompleted;
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
+    updatedIsCompletedSections.cardOwnerNameInput = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
   }, [ownerName]);
 

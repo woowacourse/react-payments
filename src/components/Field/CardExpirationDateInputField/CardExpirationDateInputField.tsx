@@ -8,6 +8,7 @@ import {
 import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
 import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
+import formState from "../../../Interfaces/formState";
 
 interface DateError {
   monthError: string | null;
@@ -24,10 +25,10 @@ export default function CardExpirationDateInputField({
 }: {
   date: Record<string, string>;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [errorMessages, setErrorMessages] = useState<DateError>({
     monthError: null,
@@ -78,17 +79,17 @@ export default function CardExpirationDateInputField({
   };
 
   useEffect(() => {
-    const updatedIsCompletedSections = [...isCompletedSections];
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
     const isInputCompleted =
       date.month.length == 2 &&
       date.year.length == 2 &&
       !errorMessages.monthError &&
       !errorMessages.yearError;
-    updatedIsCompletedSections[2] = isInputCompleted;
+    updatedIsCompletedSections.cardExpirationDateInput = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
-    const updatedIsOpenForm = [...isOpenForm];
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
     if (isInputCompleted === true) {
-      updatedIsOpenForm[3] = true;
+      updatedIsOpenForm.cardOwnerNameInput = true;
     }
     setIsOpenForm(updatedIsOpenForm);
   }, [date]);

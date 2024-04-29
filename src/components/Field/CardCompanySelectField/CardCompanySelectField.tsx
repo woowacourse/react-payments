@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useRef } from "react";
 import CardCompanyDropdownList from "../../common/Dropdown/CardCompanyDropdownList";
 import CardDropdownHeadButton from "../../Button/CardDropdownHeadButton";
 import useDetectClose from "../../../hooks/useDetectClose";
+import formState from "../../../Interfaces/formState";
 
 const COMPANY_LIST = [
   "BC카드",
@@ -25,23 +26,23 @@ export default function CardCompanySelectField({
 }: {
   cardCompanyName: string;
   setCardCompanyName: Dispatch<SetStateAction<string>>;
-  isCompletedSections: boolean[];
-  setIsCompletedSections: Dispatch<SetStateAction<boolean[]>>;
-  isOpenForm: boolean[];
-  setIsOpenForm: Dispatch<SetStateAction<boolean[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useDetectClose(ref, false);
   const companyList = COMPANY_LIST;
 
   useEffect(() => {
-    const updatedIsCompletedSections = [...isCompletedSections];
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
     const isInputCompleted = cardCompanyName != "";
-    updatedIsCompletedSections[1] = isInputCompleted;
+    updatedIsCompletedSections.cardCompanySelectDropdown = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
-    const updatedIsOpenForm = [...isOpenForm];
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
     if (isInputCompleted === true) {
-      updatedIsOpenForm[2] = true;
+      updatedIsOpenForm.cardExpirationDateInput = true;
     }
     setIsOpenForm(updatedIsOpenForm);
   }, [cardCompanyName]);
