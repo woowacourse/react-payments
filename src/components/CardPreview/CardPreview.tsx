@@ -6,7 +6,6 @@ import { CardCompany } from '../../types/cardCompany';
 import getCardInnerContentColor from '../../utils/getCardInnerContentColor.js';
 import classNames from 'classnames';
 import globalStyles from '../global.module.css';
-import { memo } from 'react';
 
 type CardPreview = {
   cardNumbers: string[];
@@ -56,16 +55,17 @@ const BackOfCardPreview = ({ CVCNumbers }: { CVCNumbers: string }) => {
   );
 };
 
-const CardLogo = memo(({ firstCardNumberUnit }: { firstCardNumberUnit: string }) => {
+const CardLogo = ({ firstCardNumberUnit }: { firstCardNumberUnit: string }) => {
   if (firstCardNumberUnit.length > 2) return;
 
+  console.log('jj');
   const cardStyle = styles.logo;
   const cardType = getCardType(firstCardNumberUnit);
 
   if (cardType === 'Normal') return <></>;
 
   return <img src={`./images/${cardType}.png`} className={cardStyle} />;
-});
+};
 
 const ExpirationDate = ({ expirationDate }: { expirationDate: Date }) => {
   const dateStringList = Object.values(expirationDate);
