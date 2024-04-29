@@ -127,7 +127,7 @@ export const CardIssuer: Story = {
           options={ADD_CARD_FORM_FIELDS.CARD_ISSUER.options}
           isError={false}
           isRequired
-          handleSelect={() => 1}
+          onChange={() => 1}
           onBlur={() => 1}
         />
       </Fragment>
