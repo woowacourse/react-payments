@@ -5,6 +5,13 @@ import CompleteImg from "../../../static/Complete.png";
 import { cardIssuerMapper } from "../../../constants/cardIssuers";
 import styled from "styled-components";
 
+/**
+ * ##TEMP CODE##
+ * 이 함수는 CardEnrollComplete 페이지를 URL로 접근했을 때 에러가 발생하지 않고,
+ * UI를 볼 수 있게 하기 위한 임시적인 코드이다.
+ * - CardEnrollComplete 페이지는 항상 CardEnrollForm에서 넘어오는 페이지이다.
+ * - CardEnrollForm에서 항상 cardInformation을 넘겨준다.
+ */
 const getDummyData = (): CardInformationValueState => {
   return {
     cardNumbers: ["1234", "0000", "0000", "0000"],
