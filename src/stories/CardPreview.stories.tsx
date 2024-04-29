@@ -60,8 +60,8 @@ const meta = {
         롯데카드: '롯데카드',
         하나카드: '하나카드',
         국민카드: '국민카드',
-        control: { type: 'select' },
       },
+      control: { type: 'select' },
     },
   },
 } satisfies Meta<typeof CardPreview>;
