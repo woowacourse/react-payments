@@ -19,8 +19,7 @@ export default function Button({
   return (
     <button
       className={clsx(styles.button, {
-        [styles.submit]: theme === 'submit',
-        [styles.default]: theme === 'default',
+        [styles[theme]]: theme,
         [styles.active]: isActive,
       })}
       {...props}
