@@ -1,18 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardRegisterForm from "./CardRegisterForm";
-import { INPUT_COUNTS } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
+import { useState } from "react";
 
 const CardRegisterFormWithHook = () => {
-  const cardNumbersReduceds = Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map(() => useInput(""));
-  const expirationDateReduceds = Array.from({ length: INPUT_COUNTS.EXPIRATION_DATE }).map(() => useInput(""));
-  const ownerNameReduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
+  const cardNumbersStates = [useInput(""), useInput(""), useInput(""), useInput("")];
+  const expirationDateStates = [useInput(""), useInput("")];
+  const ownerNameStates = [useInput(""), useInput("")];
+  const cardCompanyStates = [useInput("BC카드")];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setIsCVCFocused] = useState<boolean>(false);
 
   return (
     <CardRegisterForm
-      cardNumbersReduceds={cardNumbersReduceds}
-      expirationDateReduceds={expirationDateReduceds}
-      ownerNameReduceds={ownerNameReduceds}
+      cardNumbersStates={cardNumbersStates}
+      expirationDateStates={expirationDateStates}
+      ownerNameStates={ownerNameStates}
+      CVCStates={[useInput("")]}
+      passwordStates={[useInput("")]}
+      setIsCVCFocused={setIsCVCFocused}
+      cardCompanyStates={cardCompanyStates}
     />
   );
 };

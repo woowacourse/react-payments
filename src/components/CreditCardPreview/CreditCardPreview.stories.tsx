@@ -12,9 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardType: "MASTER",
+    cardBrand: "MASTER",
     cardNumbers: ["1234", "1234", "1234", "1234"],
     expirationDate: "04/18",
     ownerName: "",
+    cardCompany: "BC카드",
   },
 };

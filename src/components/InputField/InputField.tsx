@@ -1,19 +1,22 @@
-import { ReactNode } from "react";
 import S from "./InputField.styled";
 import Input from "../Input/Input";
+import Select from "../Select/Select";
 
-interface Props {
-  errorMessage: string;
-  children: ReactNode;
-  label: string;
+interface InputFieldWrapperProp {
+  children: ReturnType<typeof InputsWrapper | typeof Select | typeof InputsWrapper | typeof S.ErrorMessage>;
+}
+interface InputsProp {
+  children: ReturnType<typeof Input>;
 }
 
-const InputFieldContainer = S.InputFieldWrapper;
-
-const InputField = Object.assign(InputFieldContainer, {
+const InputFieldWrapper = ({ children }: InputFieldWrapperProp) => <S.InputField>{children}</S.InputField>;
+const InputsWrapper = ({ children }: InputsProp) => <S.Inputs>{children}</S.Inputs>;
+const InputField = Object.assign(InputFieldWrapper, {
   Label: S.Label,
-  Inputs: S.InputsWrapper,
-  Input: Input,
-  ErrorMessage: S.ErrorMessageWrapper,
+  Inputs: S.Inputs,
+  Input,
+  Select,
+  ErrorMessage: S.ErrorMessage,
 });
+
 export default InputField;

@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/pages/CardRegisterForm/CardRegisterForm";
-import CreditCardPreview, { CardType } from "@/components/CreditCardPreview/CreditCardPreview";
-import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
+import CreditCardPreview, { CardBrand } from "@/components/CreditCardPreview/CreditCardPreview";
+import { CARD_BRAND_INFO, Company } from "@/constants/condition";
 import useInput from "@/hooks/useInput";
+import { useState } from "react";
+import CreditCardPreviewRear from "@/components/CreditCardPreviewRear/CreditCardPreviewRear";
 
-const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced[0].value);
+const inputsOf = (reduceds: ReturnType<typeof useInput>[]) => reduceds.map((reduced) => reduced.value);
 
-const checkCardBrand = (cardNumbers: string[]): CardType => {
+const checkCardBrand = (cardNumbers: string[]): CardBrand => {
   if (Number(cardNumbers[0][0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
     return "VISA";
   }
@@ -18,24 +20,40 @@ const checkCardBrand = (cardNumbers: string[]): CardType => {
   }
   return "NONE";
 };
+
 const CardRegister = () => {
-  const cardNumbersReduceds = Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }).map(() => useInput(""));
-  const expirationDateReduceds = Array.from({ length: INPUT_COUNTS.EXPIRATION_DATE }).map(() => useInput(""));
-  const ownerNameReduceds = Array.from({ length: INPUT_COUNTS.OWNER_NAME }).map(() => useInput(""));
+  const cardNumbersStates = [useInput(""), useInput(""), useInput(""), useInput("")];
+  const expirationDateStates = [useInput(""), useInput("")];
+  const ownerNameStates = [useInput("")];
+  const CVCStates = [useInput("")];
+  const passwordStates = [useInput("")];
+  const cardCompanyStates = [useInput("")];
+  const [isCVCFocused, setIsCVCFocused] = useState(false);
+
+  const cardCompany = cardCompanyStates[0].value;
 
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
-        <CreditCardPreview
-          cardType={checkCardBrand(inputsOf(cardNumbersReduceds))}
-          cardNumbers={inputsOf(cardNumbersReduceds)}
-          expirationDate={expirationDateReduceds[0][0].value && inputsOf(expirationDateReduceds).join("/")}
-          ownerName={inputsOf(ownerNameReduceds)[0]}
-        />
+        {!isCVCFocused && (
+          <CreditCardPreview
+            cardBrand={checkCardBrand(inputsOf(cardNumbersStates))}
+            cardNumbers={inputsOf(cardNumbersStates)}
+            expirationDate={expirationDateStates[0].value && inputsOf(expirationDateStates).join("/")}
+            ownerName={inputsOf(ownerNameStates)[0]}
+            cardCompany={cardCompany as Company}
+          />
+        )}
+        {isCVCFocused && <CreditCardPreviewRear CVC={CVCStates[0].value} />}
+
         <CardRegisterForm
-          cardNumbersReduceds={cardNumbersReduceds}
-          expirationDateReduceds={expirationDateReduceds}
-          ownerNameReduceds={ownerNameReduceds}
+          cardNumbersStates={cardNumbersStates}
+          expirationDateStates={expirationDateStates}
+          ownerNameStates={ownerNameStates}
+          CVCStates={CVCStates}
+          passwordStates={passwordStates}
+          cardCompanyStates={cardCompanyStates}
+          setIsCVCFocused={setIsCVCFocused}
         />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>

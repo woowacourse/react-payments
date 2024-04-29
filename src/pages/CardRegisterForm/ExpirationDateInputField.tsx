@@ -19,13 +19,16 @@ const individualValidators: Validator[] = [
     index: [0, 1],
   },
   {
-    errorMessage: `입력은 숫자형이어야합니다.`,
+    errorMessage: `숫자만 입력 가능합니다.`,
     validate: (input: string) => input.length === 0 || /^[0-9]*$/.test(input),
   },
 ];
 
-const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof useInput>[] }) => {
-  const validationStates = reduceds.map((reduced) => useValidation(reduced, individualValidators));
+const ExpirationDateInputField = ({ inputStates }: { inputStates: ReturnType<typeof useInput>[] }) => {
+  const validationStates = [
+    useValidation(inputStates[0], individualValidators),
+    useValidation(inputStates[1], individualValidators.slice(1)),
+  ];
   return (
     <InputField>
       <InputField.Label>유효기간</InputField.Label>
@@ -33,18 +36,18 @@ const ExpirationDateInputField = ({ reduceds }: { reduceds: ReturnType<typeof us
         {Array.from({ length: INPUTS_COUNT }).map((_, index) => (
           <InputField.Input
             key={index}
-            isError={!validationStates[index].inputState.isValid}
+            isError={!validationStates[index].isValid}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value.length > VALID_LENGTH) return;
               validationStates[index].setValue(event.target.value);
             }}
-            value={validationStates[index].inputState.value}
+            value={validationStates[index].value}
             placeholder={index === 0 ? "MM" : "YY"}
           ></InputField.Input>
         ))}
       </InputField.Inputs>
       <InputField.ErrorMessage>
-        {validationStates.reduce((prev, cur) => prev || cur.inputState.errorMessage, "")}
+        {validationStates.reduce((prev, cur) => prev || cur.errorMessage, "")}
       </InputField.ErrorMessage>
     </InputField>
   );
