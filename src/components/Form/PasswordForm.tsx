@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 
 import Input from "./Input";
 import FormElement from "../common/FormField";
+import { FORM_REGEXP } from "../../constants/form";
+import { PASSWORD_FORM } from "../../constants/form";
 
 import { ICardFormProps } from "./Form";
-import { USERNAME_FORM, FORM_REGEXP } from "../../constants/form";
 
-const UserNameForm = ({
+const PasswordForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
-  setUserName,
+  setPassword,
   setAllFormsValid,
   setIsFormFilledOnce,
 }: ICardFormProps) => {
@@ -38,13 +39,12 @@ const UserNameForm = ({
     }
 
     setErrorMessage(
-      allValid || !isEditedOnce ? "" : USERNAME_FORM.errorMessage.notAllValid
+      allValid || !isEditedOnce ? "" : PASSWORD_FORM.errorMessage.notTwoDigits
     );
   }, [inputValidities]);
 
-  const validateName = (nameInput: string) => {
-    const regex = FORM_REGEXP.validUserName;
-    return regex.test(nameInput);
+  const validatePassword = (passwordInput: string) => {
+    return FORM_REGEXP.validPassword.test(passwordInput);
   };
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
@@ -53,13 +53,13 @@ const UserNameForm = ({
       index={index.toString()}
       type={type}
       placeholder={placeholders ? placeholders[index] : ""}
-      maxLength={USERNAME_FORM.maxInputLength}
+      maxLength={PASSWORD_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
-      setData={setUserName ? setUserName : () => {}}
+      setData={setPassword ? setPassword : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
-      validationRule={(value) => value.trim() === "" || validateName(value)}
+      validationRule={(value) => value.trim() === "" || validatePassword(value)}
       errorMessageText=""
       onFocus={() => (setIsEditedOnce ? setIsEditedOnce(true) : () => {})}
     />
@@ -74,4 +74,4 @@ const UserNameForm = ({
   );
 };
 
-export default UserNameForm;
+export default PasswordForm;

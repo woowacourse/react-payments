@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Input from "./Input";
 import FormField from "../common/FormField";
+import useInputFocus from "../../hooks/useInputFocus";
 
 import { EXPIRATION_DATE_FORM, FORM_REGEXP } from "../../constants/form";
 
@@ -13,13 +14,20 @@ const ExpirationDateForm = ({
   type,
   placeholders,
   setExpirationDate,
+  setAllFormsValid,
+  setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
+  const { inputRefs, focusNextInput, setFocusedIndex } = useInputFocus(
+    inputCount,
+    EXPIRATION_DATE_FORM.maxInputLength
+  );
+
   const validateMonth = (value: string) => {
-    return FORM_REGEXP.validMonth.test(value);
+    return value !== "" && FORM_REGEXP.validMonth.test(value);
   };
 
   const validateYear = (value: string) => {
@@ -38,21 +46,35 @@ const ExpirationDateForm = ({
     }));
   };
 
+  const setInputRef = (element: HTMLInputElement, index: number) => {
+    inputRefs.current[index] = element;
+  };
+
   useEffect(() => {
     const allValid = Object.values(inputValidities).every((isValid) => isValid);
-    setAllInputValid(allValid);
+    const allFilled = Object.keys(inputValidities).length === inputCount;
+
+    setAllFormsValid(allValid && allFilled);
+    focusNextInput();
 
     setErrorMessage(
-      allValid ? "" : EXPIRATION_DATE_FORM.errorMessage.notAllValid
+      (allValid && allFilled) || !isEditedOnce
+        ? ""
+        : EXPIRATION_DATE_FORM.errorMessage.notAllValid
     );
+
+    if (allValid && allFilled) {
+      setIsFormFilledOnce(true);
+    }
   }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
       index={index.toString()}
+      ref={(element) => setInputRef(element as HTMLInputElement, index)}
       type={type}
-      placeholder={placeholders[index]}
+      placeholder={placeholders ? placeholders[index] : ""}
       maxLength={EXPIRATION_DATE_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setExpirationDate ? setExpirationDate : () => {}}
@@ -67,6 +89,8 @@ const ExpirationDateForm = ({
           ? EXPIRATION_DATE_FORM.errorMessage.invalidMonth
           : EXPIRATION_DATE_FORM.errorMessage.invalidYear
       }
+      setFocusedInputIndex={setFocusedIndex}
+      onFocus={() => (setIsEditedOnce ? setIsEditedOnce(true) : () => {})}
     />
   ));
 

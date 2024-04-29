@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import useInputFocus from "../../hooks/useInputFocus";
 import Input from "./Input";
 import FormField from "../common/FormField";
 
@@ -7,29 +8,60 @@ import { CARD_NUMBER_FORM, FORM_REGEXP } from "../../constants/form";
 
 import { ICardFormProps } from "./Form";
 
+interface InputValidities {
+  [key: string]: boolean;
+}
+
 const CardNumberForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
   setCardNumbers,
+  setAllFormsValid,
+  setIsFormFilledOnce,
 }: ICardFormProps) => {
-  const [isAllInputValid, setAllInputValid] = useState(true);
+  const [isEditedOnce, setIsEditedOnce] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  const [inputValidities, setInputValidities] = useState<InputValidities>(
+    Array.from({ length: inputCount }, () => false).reduce<InputValidities>(
+      (acc, curr, index) => {
+        acc[index.toString()] = curr;
+        return acc;
+      },
+      {} as InputValidities
+    )
+  );
+
+  const { inputRefs, focusNextInput, setFocusedIndex } = useInputFocus(
+    inputCount,
+    CARD_NUMBER_FORM.maxInputLength
+  );
+
+  useEffect(() => {
+    inputRefs.current = inputRefs.current.slice(0, inputCount);
+  }, [inputCount]);
 
   useEffect(() => {
     const isAllValid = Object.values(inputValidities).every(
       (isValid) => isValid
     );
 
-    setAllInputValid(isAllValid);
+    setAllFormsValid(isAllValid);
+
+    focusNextInput();
+
     setErrorMessage(
-      isAllValid ? "" : CARD_NUMBER_FORM.errorMessage.notAllValid
+      isAllValid || !isEditedOnce
+        ? ""
+        : CARD_NUMBER_FORM.errorMessage.fourDigits
     );
+
+    if (isAllValid) {
+      setIsFormFilledOnce(true);
+    }
   }, [inputValidities]);
 
-  // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
   const updateInputValidity = (index: string, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,
@@ -40,17 +72,24 @@ const CardNumberForm = ({
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
       key={index}
+      ref={(element) => (inputRefs.current[index] = element)}
       index={index.toString()}
       type={type}
-      placeholder={placeholders[index]}
+      placeholder={placeholders ? placeholders[index] : ""}
       maxLength={CARD_NUMBER_FORM.maxInputLength}
       setErrorMessage={setErrorMessage}
       setData={setCardNumbers ? setCardNumbers : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }
-      validationRule={(value) => FORM_REGEXP.fourDigitNumber.test(value)}
+      validationRule={(value) =>
+        value === "" || FORM_REGEXP.fourDigitNumber.test(value)
+      }
       errorMessageText={CARD_NUMBER_FORM.errorMessage.fourDigits}
+      setFocusedInputIndex={setFocusedIndex}
+      onFocus={() => {
+        setIsEditedOnce && setIsEditedOnce(true);
+      }}
     />
   ));
 

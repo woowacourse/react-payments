@@ -1,7 +1,9 @@
 export const FORM_REGEXP = {
   fourDigitNumber: /^[0-9]{4}$/,
-  validMonth: /^(0[1-9]|1[0-2]|1[0-9])$/,
+  validMonth: /^(0[1-9]|1[0-2])$/,
   validUserName: /^[A-Z\s]{1,30}$/,
+  validCVCNumber: /[0-9]{3}/,
+  validPassword: /[0-9]{2}/,
 };
 
 export const CARD_NUMBER_FORM = {
@@ -30,5 +32,27 @@ export const USERNAME_FORM = {
 
   errorMessage: {
     notAllValid: "이름은 30자 이하의 영문 대문자여야 합니다.",
+  },
+} as const;
+
+export const CARD_COMPANY_FORM = {
+  errorMessage: {
+    notSelected: "카드사를 선택해 주세요.",
+  },
+} as const;
+
+export const CVC_NUMBER_FORM = {
+  maxInputLength: 3,
+  
+  errorMessage: {
+    notThreeDigits: "CVC 번호는 3자리 숫자입니다.",
+  },
+} as const;
+
+export const PASSWORD_FORM = {
+  maxInputLength: 2,
+
+  errorMessage: {
+    notTwoDigits: "비밀번호는 2자리 숫자입니다.",
   },
 } as const;

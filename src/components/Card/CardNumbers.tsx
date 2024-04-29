@@ -16,9 +16,10 @@ const CardNumbers = ({ cardNumbers }: { cardNumbers: Map<string, string> }) => {
         .map(([index, value]) => {
           if (value) {
             return Number(index) <= 1 ? (
-              <CardNumber cardNumber={value} />
+              <CardNumber key={index} cardNumber={value} />
             ) : (
               <CardNumber
+                key={index}
                 cardNumber={Array.from({ length: value.length }).map((_, i) => (
                   <Dot key={i} />
                 ))}
