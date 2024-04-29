@@ -28,12 +28,12 @@ const meta = {
       },
     },
 
-    handleChange: {
+    onChange: {
       table: {
         disable: true,
       },
     },
-    handleOnBlur: {
+    onBlur: {
       table: {
         disable: true,
       },

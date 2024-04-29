@@ -4,6 +4,7 @@ import Input from '../components/common/Input/Input';
 import Label from '../components/common/Label/Label';
 import { Fragment } from 'react';
 import Select from '../components/common/Select/Select';
+import { ADD_CARD_FORM_FIELDS } from '../constants/messages';
 
 const meta = {
   title: 'Field',
@@ -42,8 +43,8 @@ export const CardNumbers: Story = {
               placeholder="1234"
               value=""
               isError={false}
-              handleChange={() => 1}
-              handleOnBlur={() => 1}
+              onChange={() => 1}
+              onBlur={() => 1}
               maxLength={4}
             />
           </>
@@ -72,8 +73,8 @@ export const ExpirationDate: Story = {
               placeholder={name === 'month' ? 'MM' : 'YY'}
               value=""
               isError={false}
-              handleChange={() => 1}
-              handleOnBlur={() => 1}
+              onChange={() => 1}
+              onBlur={() => 1}
               maxLength={4}
             />
           </>
@@ -97,8 +98,8 @@ export const OwnerName: Story = {
           placeholder="JOHN DOE"
           value=""
           isError={false}
-          handleChange={() => 1}
-          handleOnBlur={() => 1}
+          onChange={() => 1}
+          onBlur={() => 1}
         />
       </Fragment>
     ),
@@ -110,16 +111,6 @@ export const OwnerName: Story = {
   },
 };
 
-const options = [
-  { value: 'BC카드', text: 'BC카드' },
-  { value: '신한카드', text: '신한카드' },
-  { value: '카카오뱅크', text: '카카오뱅크' },
-  { value: '현대카드', text: '현대카드' },
-  { value: '우리카드', text: '우리카드' },
-  { value: '롯데카드', text: '롯데카드' },
-  { value: '하나카드', text: '하나카드' },
-  { value: '국민카드', text: '국민카드' },
-];
 export const CardIssuer: Story = {
   args: {
     title: '카드사를 선택해 주세요',
@@ -133,11 +124,11 @@ export const CardIssuer: Story = {
           id="cardIssuer"
           value=""
           defaultText="카드사를 선택해 주세요"
-          options={options}
+          options={ADD_CARD_FORM_FIELDS.CARD_ISSUER.options}
           isError={false}
           isRequired
           handleSelect={() => 1}
-          handleOnBlur={() => 1}
+          onBlur={() => 1}
         />
       </Fragment>
     ),
@@ -164,8 +155,8 @@ export const CVC: Story = {
           value=""
           isError={false}
           isRequired
-          handleChange={() => 1}
-          handleOnBlur={() => 1}
+          onChange={() => 1}
+          onBlur={() => 1}
           maxLength={3}
         />
       </Fragment>
@@ -199,8 +190,8 @@ export const Password = {
           isError={false}
           placeholder=""
           isRequired
-          handleChange={() => 1}
-          handleOnBlur={() => 1}
+          onChange={() => 1}
+          onBlur={() => 1}
           maxLength={2}
         />
       </Fragment>
