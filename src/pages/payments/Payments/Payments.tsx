@@ -21,6 +21,7 @@ import {
 import styles from './Payments.module.css';
 import { Spacer } from '../../../components/index';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const Payments: React.FC = () => {
   const navigate = useNavigate();
@@ -32,14 +33,24 @@ const Payments: React.FC = () => {
   const { expirationDate, expirationDateState, handleExpirationDateChange } = useChangeExpirationDate();
   const { passwordPrefix, passwordPrefixState, handlePasswordPrefixChange } = useChangePasswordPrefix();
 
-  const successStates = [
-    cvcNumberState.isSuccess,
-    ownerNameState.isSuccess,
-    cardIssuerState.isSuccess,
-    cardNumberState.isSuccess,
-    expirationDateState.isSuccess,
-    passwordPrefixState.isSuccess,
-  ];
+  const successStates = useMemo(
+    () => [
+      cvcNumberState.isSuccess,
+      ownerNameState.isSuccess,
+      cardIssuerState.isSuccess,
+      cardNumberState.isSuccess,
+      expirationDateState.isSuccess,
+      passwordPrefixState.isSuccess,
+    ],
+    [
+      cvcNumberState.isSuccess,
+      ownerNameState.isSuccess,
+      cardIssuerState.isSuccess,
+      cardNumberState.isSuccess,
+      expirationDateState.isSuccess,
+      passwordPrefixState.isSuccess,
+    ],
+  );
 
   const [cvcNumberFlag, ownerNameFlag, cardIssuerFlag, cardNumberFlag, expirationDateFlag] =
     useCheckFlag(successStates);

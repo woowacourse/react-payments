@@ -9,7 +9,7 @@ const useCheckFlag = (targets: FlagsState) => {
     setFlags((prev) => {
       return targets.map((target, index) => prev[index] || target);
     });
-  }, [JSON.stringify(targets)]);
+  }, [targets]);
 
   return flags;
 };
