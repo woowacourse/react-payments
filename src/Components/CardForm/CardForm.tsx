@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CardPreview from "../CardPreview/CardPreview";
 import CardInput from "../CardInput/CardInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
@@ -18,6 +18,7 @@ import useExpiryInput from "../../hooks/useExpiryInput";
 import useCardOwnerNameInput from "../../hooks/useCardOwnerNameInput";
 import useCardCVCInput from "../../hooks/useCardCVCInput";
 import useCardPasswordInput from "../../hooks/useCardPasswordInput";
+import useInputVisibility from "../../hooks/useInputVisibility";
 
 const CardForm: React.FC = () => {
   const {
@@ -62,14 +63,24 @@ const CardForm: React.FC = () => {
     handleCardPasswordCompleted,
   } = useCardPasswordInput();
 
-  const navigate = useNavigate();
+  const {
+    showSelectBox,
+    showExpiryInput,
+    showCardOwnerNameInput,
+    showCardCVCInput,
+    showCardPasswordInput,
+    isOnCVCInput,
+    handleCVCFocus,
+    handleCVCBlur,
+  } = useInputVisibility({
+    isCardNumberCompleted,
+    isSelectedCardCompleted,
+    isExpiryCompleted: isExpiryMonthCompleted && isExpiryYearCompleted,
+    isCardholderNameCompleted,
+    isCardCVCCompleted,
+  });
 
-  const [showCardCVCInput, setShowCardCVCInput] = useState(false);
-  const [showExpiryInput, setShowExpiryInput] = useState(false);
-  const [showCardOwnerNameInput, setShowCardOwnerNameInput] = useState(false);
-  const [showSelectBox, setShowSelectBox] = useState(false);
-  const [showCardPasswordInput, setShowCardPasswordInput] = useState(false);
-  const [isOnCVCInput, setIsOnCVCInput] = useState(false);
+  const navigate = useNavigate();
 
   const isAllCompleted =
     isCardCVCCompleted &&
@@ -87,42 +98,6 @@ const CardForm: React.FC = () => {
       },
     });
   };
-
-  useEffect(() => {
-    if (isCardholderNameCompleted) {
-      setShowCardCVCInput(true);
-    }
-  }, [isCardholderNameCompleted]);
-
-  useEffect(() => {
-    if (isExpiryMonthCompleted && isExpiryYearCompleted) {
-      setShowCardOwnerNameInput(true);
-    }
-  }, [isExpiryMonthCompleted, isExpiryYearCompleted]);
-
-  useEffect(() => {
-    if (isCardCVCCompleted) {
-      setShowCardPasswordInput(true);
-    }
-  }, [isCardCVCCompleted]);
-
-  useEffect(() => {
-    if (isSelectedCardCompleted) {
-      setShowExpiryInput(true);
-    }
-  }, [isSelectedCardCompleted]);
-
-  useEffect(() => {
-    if (isCardNumberCompleted) {
-      setShowSelectBox(true);
-    }
-  }, [isCardNumberCompleted]);
-
-  useEffect(() => {
-    if (isCardCVCCompleted) {
-      setShowCardPasswordInput(true);
-    }
-  }, [isCardCVCCompleted]);
 
   return (
     <CardFormWrapper>
@@ -143,7 +118,7 @@ const CardForm: React.FC = () => {
             description="앞의 2자리를 입력해주세요"
           >
             <CardPasswordInput
-              value={cardNumber}
+              value={cardPassword}
               onChange={handleCardPasswordChange}
               setCompleted={handleCardPasswordCompleted}
             />
@@ -156,8 +131,8 @@ const CardForm: React.FC = () => {
               value={cardCVC}
               onChange={handleCardCVC}
               setCompleted={handleCardCVCCompleted}
-              handleOnBlur={() => setIsOnCVCInput(false)}
-              handleOnFocus={() => setIsOnCVCInput(true)}
+              handleOnBlur={handleCVCBlur}
+              handleOnFocus={handleCVCFocus}
             />
           </CardInput>
         )}
