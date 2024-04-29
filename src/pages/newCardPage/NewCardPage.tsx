@@ -19,7 +19,7 @@ const NewCardPage = () => {
 
   const { PasswordState, handlePasswordChange } = usePasswordInput();
   const { CvcState, handleCvcChange } = useCvcInput();
-  const { UserNameState, handleUserNameChange, handleKeyDown } = useUserNameInput();
+  const { UserNameState, handleUserNameChange, handleKeyDown, handleBlur } = useUserNameInput();
   const { CardExpirationState, handleCardExpirationChange } = useCardExpirationInput();
   const { CardCompanyState, handleCardCompanyChange } = useCardCompanyInput();
   const { CardNumbersState, handleCardNumbersChange } = useCardNumbersInput();
@@ -99,6 +99,7 @@ const NewCardPage = () => {
               isError={!!UserNameState.errorMessage[0]}
               onChange={(e) => handleUserNameChange(e.target.value)}
               onKeyDown={handleKeyDown}
+              onBlur={handleBlur}
               autoFocus
             ></Input>
           </NewCardInputSection>
