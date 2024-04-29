@@ -34,7 +34,7 @@ const CardOwnerInput = memo(() => {
           blurValidator={cardOwnerBlurValidator}
           isError={!!ownerError[name]?.isError}
           sizePreset="large"
-          maxLength={15}
+          maxLength={14}
           name={name}
           value={cardOwner[name] ?? ""}
           placeholder={placeholder}

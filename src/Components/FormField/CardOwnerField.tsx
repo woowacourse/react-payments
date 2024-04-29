@@ -27,7 +27,11 @@ const CardOwnerField = () => {
   const ENTER_KEY_CODE = "Enter";
   useEffect(() => {
     const keydownEvent = (e: KeyboardEvent) => {
-      if (isOwnerValid(cardOwner, cardOwnerError) && e.key === ENTER_KEY_CODE) {
+      const NAME_MAX_LENGTH = 14;
+      if (
+        isOwnerValid(cardOwner, cardOwnerError) &&
+        (e.key === ENTER_KEY_CODE || cardOwner.name?.length === NAME_MAX_LENGTH)
+      ) {
         setRenderOrder.next("cardOwner");
         nextFieldInput.current?.focus();
       }
