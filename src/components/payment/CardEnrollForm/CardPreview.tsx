@@ -4,17 +4,16 @@ import { CardInformationValueState } from "../../../hooks/useCardEnrollForm";
 import { CardNumbers } from "../../../hooks/useCardNumbers";
 import Mastercard from "../../../static/Mastercard.png";
 import Visa from "../../../static/Visa.png";
-import isNumberStartWith from "../../../utils/isNumberStartWith";
 import styled from "styled-components";
 
 const isVisaCard = (cardNumbers: CardNumbers) => {
-  return isNumberStartWith(cardNumbers[0], "4");
+  return cardNumbers[0].startsWith("4");
 };
 
 const isMasterCard = (cardNumbers: CardNumbers) => {
   return (
     ["51", "52", "53", "54", "55"].filter((startingNumber) =>
-      isNumberStartWith(cardNumbers[0], startingNumber)
+      cardNumbers[0].startsWith(startingNumber)
     ).length > 0
   );
 };
