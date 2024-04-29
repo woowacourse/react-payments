@@ -14,3 +14,19 @@
   gap: 10px;
   width: 100%;
 }
+
+.dark_inner_content {
+  color: black;
+
+  svg {
+    fill: black;
+  }
+}
+
+.light_inner_content {
+  color: white;
+
+  svg {
+    fill: white;
+  }
+}
