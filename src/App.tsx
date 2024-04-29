@@ -34,23 +34,23 @@ export default function App() {
     cardPasswordHead.initValue();
   };
 
+  const paymentsElement = (
+    <PayMents
+      useCardNumbers={cardNumbers}
+      useCardExpiredDate={cardExpiredDate}
+      useCardHolder={cardHolder}
+      useCardIssuer={cardIssuer}
+      useCardCVC={cardCVC}
+      useCardPasswordHead={cardPasswordHead}
+      setPath={() => {
+        lastPath.current = PATH.payments;
+      }}
+    />
+  );
+
+  const defaultRoute = <Route path={'/'} element={paymentsElement}></Route>;
   const paymentsRoute = (
-    <Route
-      path='/'
-      element={
-        <PayMents
-          useCardNumbers={cardNumbers}
-          useCardExpiredDate={cardExpiredDate}
-          useCardHolder={cardHolder}
-          useCardIssuer={cardIssuer}
-          useCardCVC={cardCVC}
-          useCardPasswordHead={cardPasswordHead}
-          setPath={() => {
-            lastPath.current = PATH.payments;
-          }}
-        />
-      }
-    ></Route>
+    <Route path={PATH.payments} element={paymentsElement}></Route>
   );
 
   const completePaymentRoute = (
@@ -81,6 +81,7 @@ export default function App() {
     <AppWrapper>
       <HashRouter>
         <Routes>
+          {defaultRoute}
           {paymentsRoute}
           {lastPath.current === PATH.payments && completePaymentRoute}
           {wrongAccessElementRoute}
