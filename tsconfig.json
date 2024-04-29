@@ -18,7 +18,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true
   },
   "include": ["src"],
   "exclude": ["**/*.mdx", "node_modules"],
