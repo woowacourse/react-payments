@@ -26,6 +26,7 @@ import Button from "../../components/button/common";
 import { useNavigate } from "react-router-dom";
 import useFormInputBlur from "../../hooks/useFormInputBlur";
 import isInputComplete from "../../utils/isInputComplete";
+import CARD_EMPTY from "../../constants/cardEmpty";
 
 interface CreditCardForms {
   title: string;
@@ -36,31 +37,17 @@ interface CreditCardForms {
 
 const CardRegistration = () => {
   const [cardNumber, setCardNumber, blurCardNumber, cardNumberError] =
-    useFormInputBlur<CardNumberValue>({
-      firstValue: SIGN.empty,
-      secondValue: SIGN.empty,
-      thirdValue: SIGN.empty,
-      fourthValue: SIGN.empty,
-    });
+    useFormInputBlur<CardNumberValue>(CARD_EMPTY.cardNumber);
 
   const { isDropdown, handleDropdown, selected, handleSelected } = useSelect<CardType>();
 
   const [expirationPeriod, setExpirationPeriod, blurExpirationPeriod, expirationPeriodError] =
-    useFormInputBlur<ExpirationPeriodValue>({
-      month: SIGN.empty,
-      year: SIGN.empty,
-    });
+    useFormInputBlur<ExpirationPeriodValue>(CARD_EMPTY.expiration);
 
-  const [owner, setOwner, blurOwner, ownerError] = useFormInputBlur<OwnerValue>({
-    name: SIGN.empty,
-  });
-  const [info, setInfo, blurInfo, infoError] = useFormInputBlur<InfoValue>({
-    cvc: SIGN.empty,
-  });
+  const [owner, setOwner, blurOwner, ownerError] = useFormInputBlur<OwnerValue>(CARD_EMPTY.owner);
+  const [info, setInfo, blurInfo, infoError] = useFormInputBlur<InfoValue>(CARD_EMPTY.info);
   const [authentication, setAuthentication, blurAuthentication, authenticationError] =
-    useFormInputBlur<AuthenticationValue>({
-      password: SIGN.empty,
-    });
+    useFormInputBlur<AuthenticationValue>(CARD_EMPTY.authentication);
 
   const [showPreviewCardBack, setShowPreviewCardBack] = useState(false);
 
