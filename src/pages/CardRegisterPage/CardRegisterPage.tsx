@@ -9,6 +9,7 @@ import useCardRegister from "@/hooks/useCardRegister";
 import { ROUTE_URL } from "@/constants/url";
 import { REGISTER_STEP } from "@/constants/condition";
 import useFormProgress from "@/hooks/useFormProgress";
+import ProgressBar from "@/components/_common/ProgressBar/ProgressBar";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -60,6 +61,10 @@ const CardRegisterPage = () => {
 
   return (
     <S.CardRegisterWrapper>
+      <ProgressBar
+        currentStep={formProgress}
+        fullStep={REGISTER_STEP.ALL_PASSED}
+      />
       <S.FlexWrapper>
         <CardPreview
           cardBrandType={cardBrandState.value}

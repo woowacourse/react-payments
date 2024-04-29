@@ -51,8 +51,8 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
             onChange(e);
           }}
           onBlur={() => {
-            setIsErrorShow(true);
             setIsFront(true);
+            setIsErrorShow(true);
           }}
           isError={!!error.length}
           value={value}

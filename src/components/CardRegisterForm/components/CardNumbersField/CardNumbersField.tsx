@@ -23,8 +23,11 @@ interface Props {
 type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
-  const { onChange, errors, values } = cardNumbersState;
-  const [isErrorShow, setIsErrorShow] = useState(hasInactiveInputError(errors));
+  const { onChange, errors, values, isValidated } = cardNumbersState;
+  const [isErrorShow, setIsErrorShow] = useState(
+    !isValidated && hasInactiveInputError(errors)
+  );
+
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
@@ -32,11 +35,6 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
 
   const getCardNumbersKey = (index: number): CardNumberKeys => {
     return `cardNumbers${index + 1}` as CardNumberKeys;
-  };
-
-  const hasError = !!Object.keys(errors).length;
-  const onBlurShowError = () => {
-    setIsErrorShow(hasInactiveInputError(errors) && hasError);
   };
 
   return (
@@ -52,9 +50,11 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
       >
         {Object.values(values).map((_: string, index: number) => {
           const currentInputName = getCardNumbersKey(index);
+          const currentInputIsError = !!errors[currentInputName];
 
           return (
             <Input
+              value={values[currentInputName]}
               autoFocus={index === 0}
               ref={(el) => (inputRefs.current[index] = el)}
               type="number"
@@ -62,12 +62,13 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
               maxLength={VALID_LENGTH.CARD_NUMBERS}
               name={currentInputName}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
+              isError={currentInputIsError}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 onFocusNextInput(e, index);
               }}
-              isError={!!errors[currentInputName]}
-              onBlur={onBlurShowError}
-              value={values[currentInputName]}
+              onBlur={() => {
+                setIsErrorShow(!isValidated && hasInactiveInputError(errors));
+              }}
             />
           );
         })}

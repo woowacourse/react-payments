@@ -12,5 +12,6 @@ export const hasInactiveInputError = <T extends object>(errors: T) =>
   !!Object.entries(errors).find(([inputName, error]) => {
     const activeElement = document.activeElement as HTMLInputElement;
     const activeInputName = activeElement.name;
+
     return !activeElement || (inputName !== activeInputName && error);
   });
