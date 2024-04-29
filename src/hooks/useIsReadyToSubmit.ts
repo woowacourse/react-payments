@@ -35,12 +35,12 @@ const isExistError = (cardInformationErrorState: CardInformationErrorState) => {
   });
 };
 
-type dependencies = [CardInformationValueState, CardInformationErrorState];
+type Dependencies = [CardInformationValueState, CardInformationErrorState];
 
 const useIsReadyToSubmit = ([
   cardInformationValueState,
   cardInformationErrorState,
-]: dependencies) => {
+]: Dependencies) => {
   const { flag: isReadyForSubmit, setFlag: setIsReadyForSubmit } = useBoolean();
 
   useEffect(() => {
