@@ -1,4 +1,4 @@
-import { CardType } from "./cardType";
+import { CardBrandType } from "./cardBrandType";
 
 const PLACEHOLDER = {
   CARD_NUMBERS: "1234",
@@ -33,22 +33,16 @@ const INPUT_INFO_SUBTITLE = {
   PASSWORD: "앞의 2자리를 입력해주세요",
 };
 
-const EXPIRATION_DATE_PLACEHOLDER = [
-  PLACEHOLDER.EXPIRATION_MONTH,
-  PLACEHOLDER.EXPIRATION_YEAR,
-];
-
 const REGISTER_CONFIRM_NUMBERS = (startNumbers: number) =>
   `${startNumbers}로 시작하는`;
-const REGISTER_CONFIRM_CARDTYPE = (cardType: CardType) =>
-  `${cardType === "카카오뱅크" ? "카카오뱅크 카드" : cardType}가 등록되었어요.`;
+const REGISTER_CONFIRM_CARDTYPE = (cardBrandType: CardBrandType) =>
+  `${cardBrandType === "카카오뱅크" ? "카카오뱅크 카드" : cardBrandType}가 등록되었어요.`;
 
 export const MESSAGE = {
   PLACEHOLDER,
   INPUT_LABEL,
   INPUT_INFO_TITLE,
   INPUT_INFO_SUBTITLE,
-  EXPIRATION_DATE_PLACEHOLDER,
   REGISTER_CONFIRM_NUMBERS,
   REGISTER_CONFIRM_CARDTYPE,
 };

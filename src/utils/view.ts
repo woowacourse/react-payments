@@ -8,7 +8,7 @@ export const sliceInvalidValueWithRegex = (value: string, regex: RegExp) => {
   return value;
 };
 
-export const isErrorInInputs = <T extends object>(errors: T) =>
+export const hasInactiveInputError = <T extends object>(errors: T) =>
   !!Object.entries(errors).find(([inputName, error]) => {
     const activeElement = document.activeElement as HTMLInputElement;
     const activeInputName = activeElement.name;

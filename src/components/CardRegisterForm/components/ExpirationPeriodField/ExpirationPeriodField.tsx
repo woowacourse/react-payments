@@ -8,7 +8,7 @@ import useInputs from "@/hooks/useInputs";
 import { INPUT_COUNTS } from "@/constants/condition";
 import useInputRefs from "@/hooks/useInputRefs";
 import { ErrorStatus } from "@/utils/validation";
-import { isErrorInInputs } from "@/utils/view";
+import { hasInactiveInputError } from "@/utils/view";
 
 export type ExpirationPeriodInputType = {
   expirationMonth: string;
@@ -20,11 +20,6 @@ interface Props {
     typeof useInputs<ExpirationPeriodInputType>
   >;
 }
-
-const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
-  "expirationMonth",
-  "expirationYear",
-];
 
 type ExpirationPeriodErrorType =
   | ErrorStatus.IS_NOT_NUMBER
@@ -38,13 +33,29 @@ const ExpirationPeriodErrorMessages: Record<ExpirationPeriodErrorType, string> =
     [ErrorStatus.INVALID_LENGTH]: "2자리의 정수로 입력해 주세요.",
   };
 
+type InputConfigType = {
+  name: keyof ExpirationPeriodInputType;
+  placeholder: string;
+};
+
+const expirationInputConfigs: InputConfigType[] = [
+  {
+    name: "expirationMonth",
+    placeholder: MESSAGE.PLACEHOLDER.EXPIRATION_MONTH,
+  },
+  {
+    name: "expirationYear",
+    placeholder: MESSAGE.PLACEHOLDER.EXPIRATION_YEAR,
+  },
+];
+
 const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
   const { onChange, errors, values } = expirationPeriodState;
   const { inputRefs, onFocusNextInput } = useInputRefs(
     INPUT_COUNTS.CARD_NUMBERS,
     onChange
   );
-  const [isErrorShow, setIsErrorShow] = useState(isErrorInInputs(errors));
+  const [isErrorShow, setIsErrorShow] = useState(hasInactiveInputError(errors));
 
   const currentErrorMessages = (
     Object.values(errors) as ExpirationPeriodErrorType[]
@@ -61,22 +72,28 @@ const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
         errorMessages={currentErrorMessages}
         isErrorShow={isErrorShow}
       >
-        {Object.values(values).map((value: string, index: number) => (
-          <Input
-            autoFocus={index === 0}
-            ref={(el) => (inputRefs.current[index] = el)}
-            type="number"
-            key={index}
-            name={EXPIRATION_INPUTS_NAMES[index]}
-            placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              onFocusNextInput(e, index);
-            }}
-            isError={!!errors[EXPIRATION_INPUTS_NAMES[index]]}
-            onBlur={() => setIsErrorShow(true)}
-            value={value}
-          />
-        ))}
+        {expirationInputConfigs.map(
+          (inputConfig: InputConfigType, index: number) => {
+            const { name, placeholder } = inputConfig;
+
+            return (
+              <Input
+                autoFocus={index === 0}
+                ref={(el) => (inputRefs.current[index] = el)}
+                type="number"
+                key={index}
+                name={name}
+                placeholder={placeholder}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  onFocusNextInput(e, index);
+                }}
+                isError={!!errors[name]}
+                onBlur={() => setIsErrorShow(true)}
+                value={values[name]}
+              />
+            );
+          }
+        )}
       </InputField>
     </S.InputFieldWithInfo>
   );
