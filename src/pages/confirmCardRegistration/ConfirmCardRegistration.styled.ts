@@ -19,7 +19,6 @@ export const CheckIcon = styled.img`
 `;
 
 export const Text = styled.h1`
-  font-family: Noto Sans KR;
   font-size: 25px;
   font-weight: 700;
   line-height: 36px;
