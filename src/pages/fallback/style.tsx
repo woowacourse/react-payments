@@ -13,12 +13,12 @@ export const Container = styled.section`
   padding: 0 2rem;
 `;
 
-export const FaliureIcon = styled.img`
+export const FailureIcon = styled.img`
   width: 20rem;
   height: 20rem;
 `;
 
-export const Ment = styled.h1`
+export const ErrorMessage = styled.h1`
   ${(props) => props.theme.typography.heading};
   color: ${(props) => props.theme.color.black};
   white-space: pre-line;
