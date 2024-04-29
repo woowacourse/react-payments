@@ -1,56 +1,47 @@
 import styled from 'styled-components';
 
-export const Select = styled.div<{ $isActive: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
+export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 3.2rem;
-  padding: 0.8rem;
 
   border-radius: 0.3rem;
-  border: 0.1rem solid
-    ${(props) => (props.$isActive ? props.theme.color.black : props.theme.color.lightGray)};
-  color: ${(props) => props.theme.color.black};
-  ${(props) => props.theme.typography.input};
+  border: 0.1rem solid ${(props) => props.theme.color.lightGray};
 
   cursor: pointer;
 `;
 
-export const CurrentSelected = styled.div<{ $unSelected: boolean }>`
-  display: flex;
-  align-items: center;
+export const Select = styled.select<{ $isPlaceholder: boolean }>`
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0 none;
+  padding: 0 1rem;
   position: relative;
-  width: 100%;
-  z-index: 1;
-  color: ${(props) => (props.$unSelected ? props.theme.color.lightGray : props.theme.color.black)};
-`;
+  z-index: 3;
 
-export const Options = styled.ul<{ $isShow: boolean }>`
-  display: ${(props) => (props.$isShow ? 'flex' : 'none')};
-  flex-direction: column;
-  position: absolute;
-  width: 100%;
-  top: 3.5rem;
-  left: 0;
-  z-index: 2;
-
-  border: 0.1rem solid ${(props) => props.theme.color.lightGray};
-  border-radius: 0.3rem;
-  background-color: ${(props) => props.theme.color.white};
-`;
-
-export const Option = styled.li`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 3rem;
-  padding-left: 1rem;
-
-  &:hover {
-    background-color: ${(props) => props.theme.color.lightGray};
+  &::-ms-expand {
+    display: none;
   }
+
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+
+  color: ${(props) =>
+    props.$isPlaceholder ? props.theme.color.lightGray : props.theme.color.black};
+  ${(props) => props.theme.typography.input};
+`;
+
+export const Indicator = styled.div`
+  position: absolute;
+  top: 25%;
+  right: 1rem;
+`;
+
+export const Option = styled.option`
+  color: ${(props) => props.theme.color.black};
+  ${(props) => props.theme.typography.input};
 `;

@@ -29,7 +29,7 @@ const CardBrand = ({ cardBrandState, setCardBrandState }: CardNumbersProps) => {
         <Select
           label="카드브랜드"
           value={cardBrandState}
-          onChange={(event) => setCardBrandState(event.currentTarget.textContent + '')}
+          onChange={(event) => setCardBrandState(event.target.value)}
           placeholder={PLACEHOLDER.cardBrand}
           options={options}
         />

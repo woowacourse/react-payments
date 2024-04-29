@@ -10,7 +10,7 @@ interface Option {
 interface SelectProps {
   label?: string;
   value: string | null;
-  onChange: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
   options: Option[];
 }
@@ -36,24 +36,26 @@ const Select = ({ label, placeholder, options, value, onChange }: SelectProps) =
   }, [selectRef]);
 
   return (
-    <Styled.Select
-      aria-label={label}
-      $isActive={isShowOptions}
-      ref={selectRef}
-      onClick={toggleIsShowOptions}
-    >
-      <Styled.CurrentSelected $unSelected={value === null}>
-        {value ?? placeholder}
-      </Styled.CurrentSelected>
-      <ArrowIcon isActive={isShowOptions} />
-      <Styled.Options $isShow={isShowOptions}>
+    <Styled.Container aria-label={label} ref={selectRef} onClick={toggleIsShowOptions}>
+      <Styled.Select
+        autoFocus
+        defaultValue={value ?? placeholder}
+        $isPlaceholder={value === null}
+        onChange={onChange}
+      >
+        <option value={placeholder} disabled hidden>
+          {placeholder}
+        </option>
         {options.map((option, index) => (
-          <Styled.Option key={index} onClick={(event) => onChange(event)}>
+          <Styled.Option value={option.value} key={index}>
             {option.label}
           </Styled.Option>
         ))}
-      </Styled.Options>
-    </Styled.Select>
+      </Styled.Select>
+      <Styled.Indicator>
+        <ArrowIcon isActive={isShowOptions} />
+      </Styled.Indicator>
+    </Styled.Container>
   );
 };
 
