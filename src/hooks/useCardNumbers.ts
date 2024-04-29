@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
+import { ShowNextFieldConditionParams } from './useCreateNextField';
 
-const { REG_EXP, showVisa, showMasterCard } = CONDITION;
+const { MAX_LENGTH, REG_EXP, showVisa, showMasterCard } = CONDITION;
 
-const useCardNumbers = (defaultValues: string[]) => {
+const useCardNumbers = (
+  defaultValues: string[],
+  showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void,
+) => {
   const cardLengthCondition = (value: string) => value.length === 4;
 
   const {
@@ -32,6 +37,20 @@ const useCardNumbers = (defaultValues: string[]) => {
   } = useInput<string>(defaultValues[3] ?? '', REG_EXP.cardNumber, cardLengthCondition);
 
   const isFieldError = isFirstError || isSecondError || isThirdError || isFourthError;
+
+  const isFill =
+    first.length === MAX_LENGTH.cardNumber &&
+    second.length === MAX_LENGTH.cardNumber &&
+    third.length === MAX_LENGTH.cardNumber &&
+    fourth.length === MAX_LENGTH.cardNumber;
+
+  useEffect(() => {
+    showNextFieldOnValid({
+      isFill,
+      isFieldError,
+      nextIndex: 1,
+    });
+  }, [isFill, isFieldError, showNextFieldOnValid]);
 
   return {
     cardNumberState: {

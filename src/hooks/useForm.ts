@@ -1,6 +1,7 @@
 import useCVCNumber from './useCVCNumber';
 import useCardBrand from './useCardBrand';
 import useCardNumbers from './useCardNumbers';
+import useCreateNextField from './useCreateNextField';
 import useExpirationDate from './useExpirationDate';
 import usePassword from './usePassword';
 import useUserName from './useUserName';
@@ -15,24 +16,26 @@ interface FormState {
 }
 
 const useForm = (defaultValues: FormState) => {
+  const { isFieldShowCount, showNextFieldOnValid } = useCreateNextField();
   const {
     cardNumberState,
     setCardNumberState,
     cardNumberErrorState,
     showImageCondition,
     resetCardNumbers,
-  } = useCardNumbers(defaultValues.cardNumbers);
+  } = useCardNumbers(defaultValues.cardNumbers, showNextFieldOnValid);
+  const { cardBrandState, setCardBrandState, isCardBrandError, resetCardBrand } = useCardBrand(
+    defaultValues.cardBrand,
+    showNextFieldOnValid,
+  );
   const {
     expirationDateState,
     setExpirationDateState,
     expirationDateErrorState,
     resetExpirationDate,
-  } = useExpirationDate(defaultValues.expirationDate);
+  } = useExpirationDate(defaultValues.expirationDate, showNextFieldOnValid);
   const { userNameState, setUserNameState, isUserNameError, resetUserName } = useUserName(
     defaultValues.userName,
-  );
-  const { cardBrandState, setCardBrandState, isCardBrandError, resetCardBrand } = useCardBrand(
-    defaultValues.cardBrand,
   );
   const {
     cvcNumberState,
@@ -41,7 +44,7 @@ const useForm = (defaultValues: FormState) => {
     isFocusCVCPreview,
     setIsFocusCVCPreview,
     resetCVCNumber,
-  } = useCVCNumber(defaultValues.cvcNumber);
+  } = useCVCNumber(defaultValues.cvcNumber, showNextFieldOnValid);
   const { passwordState, setPasswordState, isPasswordError, resetPassword } = usePassword(
     defaultValues.password,
   );
@@ -93,6 +96,7 @@ const useForm = (defaultValues: FormState) => {
       userNameState,
       setUserNameState,
       isUserNameError,
+      showNextFieldOnValid,
     },
     cardBrand: {
       cardBrandState,
@@ -109,6 +113,7 @@ const useForm = (defaultValues: FormState) => {
       setPasswordState,
       isPasswordError,
     },
+    isFieldShowCount,
   };
 
   const formValues = {

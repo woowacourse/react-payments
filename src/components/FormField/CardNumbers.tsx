@@ -5,7 +5,6 @@ import InputField from '../InputField/InputField';
 import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
 import { CardNumberErrorState, CardNumberState, SetCardNumberState } from '../../types/Types';
-import { ShowNextFieldOnLastElementBlurParams } from '../../hooks/useCreateNextField';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
@@ -14,14 +13,12 @@ interface CardNumbersProps {
   cardNumberState: CardNumberState;
   setCardNumberState: SetCardNumberState;
   cardNumberErrorState: CardNumberErrorState;
-  showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
 }
 
 const CardNumbers = ({
   cardNumberState,
   setCardNumberState,
   cardNumberErrorState,
-  showNextFieldOnLastElementBlur,
 }: CardNumbersProps) => {
   const { first, second, third, fourth } = cardNumberState;
   const { setFirst, setSecond, setThird, setFourth } = setCardNumberState;
@@ -29,12 +26,6 @@ const CardNumbers = ({
 
   const cardNumberErrorMessage =
     isFirstError || isSecondError || isThirdError || isFourthError ? ERROR.cardNumber : '';
-
-  const isFill =
-    first.length === MAX_LENGTH.cardNumber &&
-    second.length === MAX_LENGTH.cardNumber &&
-    third.length === MAX_LENGTH.cardNumber &&
-    fourth.length === MAX_LENGTH.cardNumber;
 
   return (
     <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
@@ -71,13 +62,6 @@ const CardNumbers = ({
           maxLength={MAX_LENGTH.cardNumber}
           onChange={setFourth}
           aria-invalid={isFourthError}
-          onBlur={() =>
-            showNextFieldOnLastElementBlur({
-              isFill,
-              isFieldError: cardNumberErrorMessage !== '',
-              nextIndex: 1,
-            })
-          }
         />
       </InputField>
     </FormField>

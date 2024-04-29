@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export interface ShowNextFieldOnLastElementBlurParams {
+export interface ShowNextFieldConditionParams {
   isFill: boolean;
   isFieldError: boolean;
   nextIndex: number;
@@ -9,7 +9,7 @@ export interface ShowNextFieldOnLastElementBlurParams {
 const useCreateNextField = () => {
   const [isFieldShowCount, setIsFieldShowCount] = useState<number>(0);
 
-  const showNextFieldOnLastElementBlur = (params: ShowNextFieldOnLastElementBlurParams) => {
+  const showNextFieldOnValid = (params: ShowNextFieldConditionParams) => {
     const { isFill, isFieldError, nextIndex } = params;
     if (isFill && !isFieldError) {
       setIsFieldShowCount((prev) => Math.max(prev, nextIndex));
@@ -18,7 +18,7 @@ const useCreateNextField = () => {
 
   return {
     isFieldShowCount,
-    showNextFieldOnLastElementBlur,
+    showNextFieldOnValid,
   };
 };
 

@@ -3,7 +3,7 @@ import InputField from '../InputField/InputField';
 import FormField from './FormField';
 import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
-import { ShowNextFieldOnLastElementBlurParams } from '../../hooks/useCreateNextField';
+import { ShowNextFieldConditionParams } from '../../hooks/useCreateNextField';
 
 const { TITLE, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
@@ -12,17 +12,15 @@ interface UserNameProps {
   userNameState: string;
   setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isUserNameError: boolean;
-  showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
+  showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
 }
 const UserName = ({
   userNameState,
   setUserNameState,
   isUserNameError,
-  showNextFieldOnLastElementBlur,
+  showNextFieldOnValid,
 }: UserNameProps) => {
   const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
-
-  const isFill = userNameState !== '';
 
   return (
     <FormField title={TITLE.userName}>
@@ -33,14 +31,14 @@ const UserName = ({
           value={userNameState}
           maxLength={MAX_LENGTH.userName}
           onChange={setUserNameState}
-          aria-invalid={isUserNameError}
-          onBlur={() => {
-            showNextFieldOnLastElementBlur({
-              isFill,
+          onBlur={() =>
+            showNextFieldOnValid({
+              isFill: userNameState !== '',
               isFieldError: userNameErrorMessage !== '',
               nextIndex: 4,
-            });
-          }}
+            })
+          }
+          aria-invalid={isUserNameError}
           autoFocus
         />
       </InputField>

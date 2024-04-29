@@ -16,7 +16,7 @@ import {
   SetCardNumberState,
   SetExpirationDateState,
 } from '../../types/Types';
-import useCreateNextField from '../../hooks/useCreateNextField';
+import { ShowNextFieldConditionParams } from '../../hooks/useCreateNextField';
 
 export interface CardInformationFormProps {
   cardNumbers: {
@@ -33,6 +33,7 @@ export interface CardInformationFormProps {
     userNameState: string;
     setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isUserNameError: boolean;
+    showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
   };
   cardBrand: {
     cardBrandState: string | null;
@@ -49,38 +50,26 @@ export interface CardInformationFormProps {
     setPasswordState: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isPasswordError: boolean;
   };
+  isFieldShowCount: number;
 }
 
 const CardInformationForm = (props: CardInformationFormProps) => {
-  const { isFieldShowCount, showNextFieldOnLastElementBlur } = useCreateNextField();
-  const { cardNumbers, expirationDate, userName, cardBrand, cvcNumber, password } = props;
+  const {
+    cardNumbers,
+    expirationDate,
+    userName,
+    cardBrand,
+    cvcNumber,
+    password,
+    isFieldShowCount,
+  } = props;
 
   const fields: Array<React.ReactNode> = [
-    <CardNumbersField
-      key={0}
-      {...cardNumbers}
-      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
-    />,
-    <CardBrandField
-      key={1}
-      {...cardBrand}
-      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
-    />,
-    <ExpirationDateField
-      key={2}
-      {...expirationDate}
-      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
-    />,
-    <UserNameField
-      key={3}
-      {...userName}
-      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
-    />,
-    <CVCNumberField
-      key={4}
-      {...cvcNumber}
-      showNextFieldOnLastElementBlur={showNextFieldOnLastElementBlur}
-    />,
+    <CardNumbersField key={0} {...cardNumbers} />,
+    <CardBrandField key={1} {...cardBrand} />,
+    <ExpirationDateField key={2} {...expirationDate} />,
+    <UserNameField key={3} {...userName} />,
+    <CVCNumberField key={4} {...cvcNumber} />,
     <PasswordField key={5} {...password} />,
   ];
 

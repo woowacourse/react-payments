@@ -3,7 +3,6 @@ import InputField from '../InputField/InputField';
 import FormField from './FormField';
 import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
-import { ShowNextFieldOnLastElementBlurParams } from '../../hooks/useCreateNextField';
 
 const { TITLE, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
@@ -13,7 +12,6 @@ interface CVCNumberProps {
   setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isCVCNumberError: boolean;
   setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
-  showNextFieldOnLastElementBlur: (params: ShowNextFieldOnLastElementBlurParams) => void;
 }
 
 const CVCNumber = ({
@@ -21,24 +19,12 @@ const CVCNumber = ({
   setCVCNumberState,
   isCVCNumberError,
   setIsFocusCVCPreview,
-  showNextFieldOnLastElementBlur,
 }: CVCNumberProps) => {
-  const isFill = cvcNumberState.length === MAX_LENGTH.cvcNumber;
-
-  const onBlur = () => {
-    setIsFocusCVCPreview(false);
-    showNextFieldOnLastElementBlur({
-      isFill,
-      isFieldError: isCVCNumberError,
-      nextIndex: 5,
-    });
-  };
-
   return (
     <FormField title={TITLE.cvcNumber}>
       <InputField label={LABEL.cvcNumber} error={isCVCNumberError ? ERROR.cvcNumber : ''}>
         <Input
-          onBlur={onBlur}
+          onBlur={() => setIsFocusCVCPreview(false)}
           onFocus={() => setIsFocusCVCPreview(true)}
           aria-label="카드인증값(CVC)"
           placeholder={PLACEHOLDER.cvcNumber}
