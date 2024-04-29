@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 
-export const CardInformationPreview = styled.section<{
-  $isBackOfCard: boolean;
+export const FrontOfTheCard = styled.section<{
   $selectedCardColor: string;
 }>`
-  ${(props) =>
-    props.$isBackOfCard
-      ? `position: relative;`
-      : `display: flex;
-  flex-direction: column;`}
+  display: flex;
+  flex-direction: column;
 
   width: 21.2rem;
   height: 13.2rem;
-  ${(props) => (props.$isBackOfCard ? '' : `padding: 0.8rem 1.2rem;`)}
+  padding: 0.8rem 1.2rem;
 
   background-color: ${(props) => props.$selectedCardColor};
 
@@ -57,26 +53,5 @@ export const UserInfomation = styled.div<{ $typo: string }>`
   flex: 1;
 
   ${(props) => props.$typo};
-  color: ${(props) => props.theme.color.white};
-`;
-
-export const CVCContainer = styled.div`
-  position: absolute;
-  bottom: 2.4rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  width: 100%;
-  height: 2.4rem;
-
-  background-color: ${(props) => props.theme.color.ocher};
-`;
-
-export const CVC = styled.p`
-  width: 2rem;
-  margin-right: 1.6rem;
-
-  ${(props) => props.theme.typography.cardCVC};
   color: ${(props) => props.theme.color.white};
 `;
