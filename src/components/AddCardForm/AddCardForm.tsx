@@ -13,15 +13,11 @@ import CardPreview from '../CardPreview/CardPreview';
 import Button from '../common/Button/Button';
 
 import { useNavigate } from 'react-router-dom';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../context/AddCardFormContext';
 import useAddCardFormField from '../../hooks/useAddCardFormField';
 
 export default function AddCardForm() {
-  const { findStep, curStep, isFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+  const { findStep, curStep, isFormValid } = useAddCardFormContext();
 
   const cardNumbersProps = useAddCardFormField<CardNumbers>({
     initialValues: INITIAL_VALUES.cardNumbers,

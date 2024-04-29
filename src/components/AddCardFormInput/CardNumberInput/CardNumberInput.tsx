@@ -10,10 +10,7 @@ import { validateInput } from '../../../utils/validateInput';
 
 import { useEffect } from 'react';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 
 const { title, description, labelText, placeholder, inputLabelText } =
   ADD_CARD_FORM_FIELDS.CARD_NUMBER;
@@ -28,7 +25,7 @@ export default function CardNumberInput({
   handleInputBlur,
 }: InputProps<CardNumbers>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+    useAddCardFormContext();
 
   const { refs, moveToNextInput } = useFormFieldFocus<HTMLInputElement>(4);
 

@@ -7,10 +7,7 @@ import Label from '../../common/Label/Label';
 import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 import {
   hasTwoDigit,
   isInteger,
@@ -30,7 +27,7 @@ export default function PasswordInput({
   handleInputBlur,
 }: InputProps<Password>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+    useAddCardFormContext();
 
   const {
     refs: [ref],

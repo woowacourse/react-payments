@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-export interface AddCardFormContextType {
+interface AddCardFormContextType {
   findStep: (name: CardInfoKeys) => number;
   curStep: number;
   setCurStep: React.Dispatch<React.SetStateAction<number>>;
@@ -47,5 +47,6 @@ export function AddCardFormProvider({
 
 export function useAddCardFormContext() {
   const context = useContext(AddCardFormContext);
+  if (!context) throw new Error('문제가 발생했어요.');
   return context;
 }

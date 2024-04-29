@@ -10,10 +10,7 @@ import {
 import { validateInput } from '../../../utils/validateInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 
 const { title, labelText, placeholder, inputLabelText } =
@@ -28,7 +25,7 @@ function OwnerNameInput({
   handleInputBlur,
 }: InputProps<OwnerName>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+    useAddCardFormContext();
 
   const {
     refs: [ref],

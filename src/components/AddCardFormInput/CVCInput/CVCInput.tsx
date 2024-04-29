@@ -5,10 +5,7 @@ import Input from '../../common/Input/Input';
 import Label from '../../common/Label/Label';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 import { isInteger, isValidCVC } from '../../../domain/validators';
 import { validateInput } from '../../../utils/validateInput';
 
@@ -25,7 +22,7 @@ export default function CVCInput({
   handleInputBlur,
 }: InputProps<CVC>) {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+    useAddCardFormContext();
 
   const {
     refs: [ref],

@@ -12,10 +12,7 @@ import {
 
 import { useEffect } from 'react';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../../constants/messages';
-import {
-  AddCardFormContextType,
-  useAddCardFormContext,
-} from '../../../context/AddCardFormContext';
+import { useAddCardFormContext } from '../../../context/AddCardFormContext';
 import useFormFieldFocus from '../../../hooks/useFormFieldFocus';
 import { validateInput } from '../../../utils/validateInput';
 
@@ -32,7 +29,7 @@ const ExpirationDateInput = ({
   handleInputBlur,
 }: InputProps<ExpirationDate>) => {
   const { findStep, curStep, setCurStep, setFormValid } =
-    useAddCardFormContext() as AddCardFormContextType;
+    useAddCardFormContext();
 
   const { refs, moveToNextInput } = useFormFieldFocus<HTMLInputElement>(2);
 
