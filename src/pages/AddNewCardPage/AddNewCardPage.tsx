@@ -42,7 +42,7 @@ const AddNewCardPage = () => {
     navigate(`/complete-add-new-card`, {
       state: {
         firstCardNumberUnit: cardNumbers.value[0],
-        cardCompany: cardCompany,
+        cardCompany: cardCompany.selected,
       },
     });
   };
