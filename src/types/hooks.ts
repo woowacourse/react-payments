@@ -33,7 +33,7 @@ export interface UseExpiryDateReturnType {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   errorInfo: ErrorDetail;
   updateErrorMessage: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 export interface UseCardPasswordReturnType {
