@@ -37,9 +37,9 @@ const CardCVCInput: React.FC<CardCVCInputProps> = ({
       return false;
     }
 
-    if (value.length !== 2) {
+    if (value.length !== 3) {
       setIsValid(false);
-      setErrorMessage("CVC 번호는 2자리여야 합니다.");
+      setErrorMessage("CVC 번호는 3자리여야 합니다.");
       return false;
     }
 
@@ -64,7 +64,7 @@ const CardCVCInput: React.FC<CardCVCInputProps> = ({
         onValidate={(isValid) => handleValidate(isValid)}
         placeholder="123"
         size="large"
-        maxLength={2}
+        maxLength={3}
         validator={(value) => validator(value)}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
