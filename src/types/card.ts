@@ -16,7 +16,7 @@ export interface OwnerName {
 
 export type Brand = "visa" | "master" | null;
 
-export type Input = {
+export type InputType = {
   value: string;
   isError: boolean;
   isDone: boolean;

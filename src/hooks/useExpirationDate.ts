@@ -9,8 +9,8 @@ import { isNumberString } from "@/utils/input";
 
 const useExpirationDate = () => {
   const [nextInput, setShowNextInput] = useState<boolean>(false);
-  const [month, setMonth] = useInput();
-  const [year, setYear] = useInput();
+  const [month, setMonthValue, setMonthIsError, setMonthIsDone] = useInput();
+  const [year, setYearValue, setYearIsError, setYearIsDone] = useInput();
   const [errorMessage, setErrorMessage] = useState("");
 
   const monthRef = useRef<HTMLInputElement>(null);
@@ -24,32 +24,38 @@ const useExpirationDate = () => {
 
   const changeMonth = (value: string) => {
     if (!isNumberString(value)) {
-      setMonth({ ...month, isError: true });
+      setMonthIsError(true);
       setErrorMessage(ERRORS.isNotInteger);
       return;
     } else if (value.length === EXPIRATION_DATE_MAX_LENGTH && !isValidMonth(value)) {
-      setMonth({ ...month, isError: true, isDone: false });
+      setMonthIsError(true);
+      setMonthIsDone(false);
       setErrorMessage(ERRORS.isNotValidMonth);
       return;
     }
-    setMonth({ value, isError: false, isDone: value.length === EXPIRATION_DATE_MAX_LENGTH });
+    setMonthValue(value);
+    setMonthIsError(false);
+    setMonthIsDone(value.length === EXPIRATION_DATE_MAX_LENGTH);
     setErrorMessage("");
   };
 
   const changeYear = (value: string) => {
     if (!isNumberString(value)) {
-      setYear({ ...month, isError: true });
+      setYearIsError(false);
       setErrorMessage(ERRORS.isNotInteger);
       return;
     } else if (
       value.length === EXPIRATION_DATE_MAX_LENGTH &&
       !isValidDate({ year: value, month: month.value })
     ) {
-      setYear({ value, isError: true, isDone: false });
+      setYearIsError(true);
+      setYearIsDone(false);
       setErrorMessage(ERRORS.deprecatedCard);
       return;
     }
-    setYear({ value, isError: false, isDone: value.length === EXPIRATION_DATE_MAX_LENGTH });
+    setYearValue(value);
+    setYearIsError(false);
+    setYearIsDone(value.length === EXPIRATION_DATE_MAX_LENGTH);
     setErrorMessage("");
   };
 

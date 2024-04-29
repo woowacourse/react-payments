@@ -3,10 +3,10 @@ import Input from "../common/Input/Input";
 import { ADD_CARD_FORM_FIELDS } from "../../constants/messages";
 import { ChangeEvent, RefObject, memo, KeyboardEvent } from "react";
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
-import { Input } from "@/types/card";
+import { InputType } from "@/types/card";
 
 interface OwnerNameInputProps {
-  ownerName: Record<string, string>;
+  ownerName: InputType;
   errorMessage: string;
   changeOwnerName: (event: ChangeEvent<HTMLInputElement>) => void;
   ownerNameRef: RefObject<HTMLInputElement>;
