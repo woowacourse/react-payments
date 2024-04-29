@@ -7,6 +7,7 @@ import CardForm from './cardForm/CardForm';
 import CardPreview from './CardPreview';
 import ID from '../../constants/id';
 import { Link } from 'react-router-dom';
+import PATH from '../../constants/path';
 import { UseCardCVC } from '../../hooks/payments/useCardCVC';
 import { UseCardExpiredDate } from '../../hooks/payments/useCardExpiredDate';
 import { UseCardHolder } from '../../hooks/payments/useCardHolder';
@@ -74,7 +75,7 @@ function Payments({
         useCardPasswordHead={useCardPasswordHead}
       />
       {isValid && (
-        <Link to='/complete-payment-register'>
+        <Link to={PATH.completePaymentsRegister}>
           <BottomButton tabIndex={11} autoFocus>
             확인
           </BottomButton>
