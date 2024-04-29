@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CardInfoContext } from '../context/CardInfoContext';
 
@@ -10,13 +10,15 @@ import { initialCardInfoContext } from '../context/CardInfoContext';
 
 const ConfirmPage = () => {
   const { cardInfo, changeCardInfo } = useContext(CardInfoContext);
+  const navigate = useNavigate();
 
   const company = CARD_COMPANY.find((card) => card[1] === cardInfo.cardCompany);
 
   const cardCompanyName = company ? company[0] : '선택한 카드';
 
-  const resetCardInfo = () => {
+  const resetCardInfoAndNavigate = () => {
     changeCardInfo(initialCardInfoContext.cardInfo);
+    navigate('/');
   };
 
   return (
@@ -28,9 +30,11 @@ const ConfirmPage = () => {
             {cardInfo.cardNumber[0]}로 시작하는 <br /> {cardCompanyName}가
             등록되었어요.
           </CF.Title>
-          <Link to={'/'} style={{ width: 'inherit' }}>
-            <Button type="button" text="확인" onClick={resetCardInfo} />
-          </Link>
+          <Button
+            type="button"
+            text="확인"
+            onClick={resetCardInfoAndNavigate}
+          />
         </CF.Confirm>
       </CF.Container>
     </>

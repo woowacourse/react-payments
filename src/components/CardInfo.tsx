@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useRender from '../hooks/useRender';
 
 import Container from './style/CardInfo.style';
@@ -38,6 +38,7 @@ const CardInfo = ({ ...props }) => {
     password: false,
   });
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
 
   const changeIsValid = ({ state, isValid }: isValidProps) => {
     setIsValid((prev) => ({ ...prev, [state]: isValid }));
@@ -80,7 +81,7 @@ const CardInfo = ({ ...props }) => {
   };
 
   const navigateConfirmPage = () => {
-    return <Link to={`/register-confirm`}></Link>;
+    navigate('/register-confirm');
   };
 
   return (
@@ -123,14 +124,12 @@ const CardInfo = ({ ...props }) => {
       />
 
       {Object.values(isValid).every((state) => state) && (
-        <Link to={`/register-confirm`}>
-          <Button
-            type="button"
-            text="확인"
-            $floating
-            onClick={navigateConfirmPage}
-          />
-        </Link>
+        <Button
+          type="button"
+          text="확인"
+          $floating
+          onClick={navigateConfirmPage}
+        />
       )}
     </Container>
   );
