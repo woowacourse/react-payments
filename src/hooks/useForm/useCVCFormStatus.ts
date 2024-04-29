@@ -6,14 +6,14 @@ const useCVCFormStatus = (cardCVCInfo: UseCVCReturnType) => {
   const isCardCVCValid = isValidCVCForm(cardCVCInfo);
   const [cardCVCFormStatus, setCardCVCFormFormStatus] = useState({
     isValid: isCardCVCValid,
-    isOpen: false,
+    hasOpened: false,
   });
 
   useEffect(() => {
     setCardCVCFormFormStatus(prev => ({
       ...prev,
       isValid: isCardCVCValid,
-      isOpen: isCardCVCValid || prev.isOpen,
+      hasOpened: isCardCVCValid || prev.hasOpened,
     }));
   }, [isCardCVCValid]);
 

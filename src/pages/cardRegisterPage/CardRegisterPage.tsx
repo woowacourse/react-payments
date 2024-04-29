@@ -34,7 +34,7 @@ const CardRegisterPage = () => {
   } = cardInfo;
 
   const isSectionValid = (section: keyof typeof formStatus) =>
-    formStatus[section].isValid || formStatus[section].isOpen;
+    formStatus[section].isValid || formStatus[section].hasOpened;
 
   const validPasswordSection = isSectionValid('cvc');
   const validCVCSection = isSectionValid('cardholderName');

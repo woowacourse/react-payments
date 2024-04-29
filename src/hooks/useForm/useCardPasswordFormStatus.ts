@@ -6,14 +6,14 @@ const useCardPasswordFormStatus = (cardPasswordInfo: UseCardPasswordReturnType) 
   const isCardPasswordValid = isValidPasswordForm(cardPasswordInfo);
   const [cardPasswordFormStatus, setCardPasswordFormStatus] = useState({
     isValid: isCardPasswordValid,
-    isOpen: false,
+    hasOpened: false,
   });
 
   useEffect(() => {
     setCardPasswordFormStatus(prev => ({
       ...prev,
       isValid: isCardPasswordValid,
-      isOpen: isCardPasswordValid || prev.isOpen,
+      hasOpened: isCardPasswordValid || prev.hasOpened,
     }));
   }, [isCardPasswordValid]);
 
