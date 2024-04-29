@@ -1,14 +1,17 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button";
 import SUCCESS from "/public/img/Success.png";
 
-interface CardProps {
+interface PaymentsSuccessProps {
   cardNumber: string;
   cardName: string;
 }
 
-const PaymentsSuccess = ({ cardNumber, cardName }: CardProps) => {
+const PaymentsSuccess = () => {
+  const location = useLocation();
+  const { cardNumber, cardName } = location.state as PaymentsSuccessProps;
+
   const navigate = useNavigate();
 
   const handleClick = () => {

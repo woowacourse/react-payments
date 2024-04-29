@@ -8,10 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path={routePath.home} element={<Payments />} />
-        <Route
-          path={routePath.success}
-          element={<PaymentsSuccess cardNumber="5511" cardName="BC카드" />}
-        />
+        <Route path={routePath.success} element={<PaymentsSuccess />} />
       </Routes>
     </BrowserRouter>
   );
