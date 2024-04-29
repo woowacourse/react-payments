@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CardNumbersInputProps } from "../components/payment/CardEnrollForm/CardNumbersInput";
 import isNumericString from "../utils/isNumericString";
@@ -44,6 +44,7 @@ export interface CardNumbersErrorState {
 
 interface UseCardNumbersReturnType {
   isDoneThisStep: boolean;
+  isValid: boolean;
   cardNumbersInputProps: CardNumbersInputProps;
 }
 
@@ -63,6 +64,13 @@ const useCardNumbers = (): UseCardNumbersReturnType => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
+  const isValid = useMemo(
+    () =>
+      valueState.every((cardNumber) => cardNumber.length > 0) &&
+      errorState.isError.every((cardNumber) => !cardNumber),
+    [valueState, errorState.isError]
+  );
 
   const updateValueState = (inputValue: string, targetIndex: number) => {
     setValueState((prev) => {
@@ -133,6 +141,7 @@ const useCardNumbers = (): UseCardNumbersReturnType => {
 
   return {
     isDoneThisStep,
+    isValid,
     cardNumbersInputProps: {
       valueState,
       errorState,

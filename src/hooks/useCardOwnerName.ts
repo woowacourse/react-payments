@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { CardOwnerNameInputProps } from "../components/payment/CardEnrollForm/CardOwnerNameInput";
 import isAlphabetOrWhiteSpace from "../utils/isAlphabetOrWhiteSpace";
@@ -23,6 +23,7 @@ export interface CardOwnerNameErrorState {
 
 interface UseCardOwnerNameReturnType {
   isDoneThisStep: boolean;
+  isValid: boolean;
   cardOwnerNameInputProps: CardOwnerNameInputProps;
 }
 
@@ -37,6 +38,11 @@ const useCardOwnerName = (): UseCardOwnerNameReturnType => {
   const { flag: isDoneThisStep, setTrue: updateDone } = useBoolean();
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const isValid = useMemo(
+    () => valueState.length > 0 && !errorState.isError,
+    [valueState, errorState.isError]
+  );
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -65,6 +71,7 @@ const useCardOwnerName = (): UseCardOwnerNameReturnType => {
 
   return {
     isDoneThisStep,
+    isValid,
     cardOwnerNameInputProps: {
       valueState,
       errorState,

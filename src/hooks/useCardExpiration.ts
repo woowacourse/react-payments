@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CardExpirationDateInputProps } from "../components/payment/CardEnrollForm/CardExpirationDateInput";
 import isNumericString from "../utils/isNumericString";
@@ -71,6 +71,7 @@ export interface CardExpirationErrorState {
 
 interface UseCardExpirationReturnType {
   isDoneThisStep: boolean;
+  isValid: boolean;
   cardExpirationDateInputProps: CardExpirationDateInputProps;
 }
 const useCardExpiration = (): UseCardExpirationReturnType => {
@@ -93,6 +94,15 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
+  const isValid = useMemo(
+    () =>
+      valueState.month.length > 0 &&
+      valueState.year.length > 0 &&
+      !errorState.isError.month &&
+      !errorState.isError.year,
+    [valueState, errorState.isError]
+  );
 
   const updateValueState = (
     inputValue: string,
@@ -159,6 +169,7 @@ const useCardExpiration = (): UseCardExpirationReturnType => {
 
   return {
     isDoneThisStep,
+    isValid,
     cardExpirationDateInputProps: {
       valueState,
       errorState,

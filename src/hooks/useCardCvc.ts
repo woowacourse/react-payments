@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { CardCvcInputProps } from "../components/payment/CardEnrollForm/CardCvcInput";
 import isNumericString from "../utils/isNumericString";
@@ -24,6 +24,7 @@ export interface CardCvcErrorState {
 interface UseCardCvcReturnType {
   isFocused: boolean;
   isDoneThisStep: boolean;
+  isValid: boolean;
   cardCvcInputProps: CardCvcInputProps;
 }
 
@@ -44,6 +45,11 @@ const useCardCvc = (): UseCardCvcReturnType => {
     setTrue: updateIsFocused,
     setFalse: updateIsBlurred,
   } = useBoolean(false);
+
+  const isValid = useMemo(
+    () => valueState.length > 0 && !errorState.isError,
+    [valueState, errorState.isError]
+  );
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -78,6 +84,7 @@ const useCardCvc = (): UseCardCvcReturnType => {
   return {
     isFocused,
     isDoneThisStep,
+    isValid,
     cardCvcInputProps: {
       valueState,
       errorState,

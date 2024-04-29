@@ -33,24 +33,43 @@ export interface CardInformationErrorState {
 }
 
 const useCardEnrollForm = () => {
-  const cardPasswordInputProps = useCardPassword();
+  const { isValid: isValidCardPassword, cardPasswordInputProps } =
+    useCardPassword();
   const {
     isFocused: isCardCvcInputFocused,
     isDoneThisStep: isReadyToRenderCardPassword,
+    isValid: isValidCardCvc,
     cardCvcInputProps,
   } = useCardCvc();
-  const { isDoneThisStep: isReadyToRenderCardCvc, cardOwnerNameInputProps } =
-    useCardOwnerName();
+  const {
+    isDoneThisStep: isReadyToRenderCardCvc,
+    isValid: isValidCardOwnerName,
+    cardOwnerNameInputProps,
+  } = useCardOwnerName();
   const {
     isDoneThisStep: isReadyToRenderCardOwnerName,
+    isValid: isValidCardExpiration,
     cardExpirationDateInputProps,
   } = useCardExpiration();
   const {
     isDoneThisStep: isReadyToRenderCardExpiration,
+    isValid: isValidCardIssuer,
     cardIssuerSelectProps,
   } = useCardIssuer();
-  const { isDoneThisStep: isReadyToRenderCardIssuer, cardNumbersInputProps } =
-    useCardNumbers();
+  const {
+    isDoneThisStep: isReadyToRenderCardIssuer,
+    isValid: isValidCardNumbers,
+    cardNumbersInputProps,
+  } = useCardNumbers();
+
+  const isReadyToSubmit = useIsReadyToSubmit([
+    isValidCardPassword,
+    isValidCardCvc,
+    isValidCardOwnerName,
+    isValidCardExpiration,
+    isValidCardIssuer,
+    isValidCardNumbers,
+  ]);
 
   const cardInformationValueState: CardInformationValueState = {
     cardPassword: cardPasswordInputProps.valueState,
@@ -61,25 +80,11 @@ const useCardEnrollForm = () => {
     cardNumbers: cardNumbersInputProps.valueState,
   };
 
-  const cardInformationErrorState: CardInformationErrorState = {
-    cardPassword: cardPasswordInputProps.errorState,
-    cardCvc: cardCvcInputProps.errorState,
-    cardOwnerName: cardOwnerNameInputProps.errorState,
-    cardExpiration: cardExpirationDateInputProps.errorState,
-    cardIssuer: cardIssuerSelectProps.errorState,
-    cardNumbers: cardNumbersInputProps.errorState,
-  };
-
-  const isReadyToSubmit = useIsReadyToSubmit([
-    cardInformationValueState,
-    cardInformationErrorState,
-  ]);
-
   return {
-    cardInformation: cardInformationValueState,
-
-    isCardCvcInputFocused,
     isReadyToSubmit,
+
+    cardInformation: cardInformationValueState,
+    isCardCvcInputFocused,
 
     dynamicInputUiFlag: {
       isReadyToRenderCardIssuer,

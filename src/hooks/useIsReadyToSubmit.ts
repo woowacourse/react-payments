@@ -1,56 +1,12 @@
-import {
-  CardInformationErrorState,
-  CardInformationValueState,
-} from "./useCardEnrollForm";
+import { useMemo } from "react";
 
-import useBoolean from "./common/useBoolean";
-import { useEffect } from "react";
+type IsValidStates = boolean[];
 
-const isAllFilled = (cardInformationValueState: CardInformationValueState) => {
-  return Object.values(cardInformationValueState).every(
-    (cardInformationValue) => {
-      if (typeof cardInformationValue === "string") {
-        return cardInformationValue.length > 0;
-      }
-      if (Array.isArray(cardInformationValue)) {
-        return cardInformationValue.some((el) => el.length > 0);
-      }
-      return (
-        cardInformationValue.month.length > 0 ||
-        cardInformationValue.year.length > 0
-      );
-    }
+const useIsReadyToSubmit = (isValidStates: IsValidStates) => {
+  return useMemo(
+    () => isValidStates.every((isValid) => isValid),
+    [isValidStates]
   );
-};
-
-const isExistError = (cardInformationErrorState: CardInformationErrorState) => {
-  return Object.values(cardInformationErrorState).some(({ isError }) => {
-    if (typeof isError === "boolean") {
-      return isError;
-    }
-    if (Array.isArray(isError)) {
-      return isError.some((el) => el);
-    }
-    return isError.month || isError.year;
-  });
-};
-
-type Dependencies = [CardInformationValueState, CardInformationErrorState];
-
-const useIsReadyToSubmit = ([
-  cardInformationValueState,
-  cardInformationErrorState,
-]: Dependencies) => {
-  const { flag: isReadyForSubmit, setFlag: setIsReadyForSubmit } = useBoolean();
-
-  useEffect(() => {
-    setIsReadyForSubmit(
-      isAllFilled(cardInformationValueState) &&
-        !isExistError(cardInformationErrorState)
-    );
-  }, [cardInformationValueState, cardInformationErrorState]);
-
-  return isReadyForSubmit;
 };
 
 export default useIsReadyToSubmit;

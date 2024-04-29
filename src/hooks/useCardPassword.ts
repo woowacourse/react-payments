@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { CardPasswordInputProps } from "../components/payment/CardEnrollForm/CardPasswordInput";
 import isNumericString from "../utils/isNumericString";
@@ -20,7 +20,12 @@ export interface CardPasswordErrorState {
   errorMessage: string;
 }
 
-const useCardPassword = (): CardPasswordInputProps => {
+interface UseCardPasswordReturnType {
+  isValid: boolean;
+  cardPasswordInputProps: CardPasswordInputProps;
+}
+
+const useCardPassword = (): UseCardPasswordReturnType => {
   const [valueState, setValueState] = useState("");
 
   const [errorState, setErrorState] = useState<CardPasswordErrorState>({
@@ -29,6 +34,11 @@ const useCardPassword = (): CardPasswordInputProps => {
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const isValid = useMemo(
+    () => valueState.length > 0 && !errorState.isError,
+    [valueState, errorState.isError]
+  );
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -62,11 +72,14 @@ const useCardPassword = (): CardPasswordInputProps => {
   };
 
   return {
-    valueState,
-    errorState,
-    inputRef,
-    onChange,
-    onBlur,
+    isValid,
+    cardPasswordInputProps: {
+      valueState,
+      errorState,
+      inputRef,
+      onChange,
+      onBlur,
+    },
   };
 };
 
