@@ -12,7 +12,6 @@ const useShowCase = (showOrder: string[], isValidList: Record<string, boolean>) 
   const [showCase, setShowCase] = useState(initialShowCase);
 
   useEffect(() => {
-    console.log(isValidList);
     Object.values(isValidList).forEach((value, index) => {
       if (value === true && index !== showOrder.length - 1) {
         addItemToShowCase(index + 1);

@@ -58,7 +58,6 @@ const BackOfCardPreview = ({ CVCNumbers }: { CVCNumbers: string }) => {
 const CardLogo = ({ firstCardNumberUnit }: { firstCardNumberUnit: string }) => {
   if (firstCardNumberUnit.length > 2) return;
 
-  console.log('jj');
   const cardStyle = styles.logo;
   const cardType = getCardType(firstCardNumberUnit);
 
