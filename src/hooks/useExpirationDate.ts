@@ -26,17 +26,21 @@ const useExpirationDate = () => {
   };
 
   const handleMonthChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const month = Number(e.target.value);
+    const { value } = e.target;
 
-    if (month <= 1 || e.target.value.length >= 2) setDate({ ...date, month: e.target.value });
-    else if (month >= 2 && month <= 9) setDate({ ...date, month: e.target.value.padStart(2, '0') });
+    const month = Number(value);
+
+    if (month <= 1 || value.length >= 2) setDate({ ...date, month: value });
+    else if (month >= 2 && month <= 9) setDate({ ...date, month: value.padStart(2, '0') });
 
     checkValidDate({ month: e.target.value });
   };
 
   const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!isNaN(Number(e.target.value))) setDate({ ...date, year: e.target.value });
-    checkValidDate({ year: e.target.value });
+    const { value } = e.target;
+
+    if (!isNaN(Number(value))) setDate({ ...date, year: value });
+    checkValidDate({ year: value });
   };
 
   const handleExpirationDateChange = (item: DateItem) => (e: ChangeEvent<HTMLInputElement>) => {
