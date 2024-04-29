@@ -20,7 +20,7 @@ const PasswordError: Record<PasswordErrorType, string> = {
 };
 
 const PasswordField = ({ passwordState }: Props) => {
-  const { onChange, error } = passwordState;
+  const { onChange, error, value } = passwordState;
   const [isErrorShow, setIsErrorShow] = useState(false);
 
   const currentErrorMessage = (Object.values(error) as PasswordErrorType[]).map(
@@ -47,6 +47,7 @@ const PasswordField = ({ passwordState }: Props) => {
           onBlur={() => {
             setIsErrorShow(true);
           }}
+          value={value}
         />
       </InputField>
     </S.InputFieldWithInfo>

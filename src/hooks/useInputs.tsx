@@ -33,15 +33,15 @@ const useInputs = <T extends object>({
       inputChangeCallbacks.forEach((inputChangeCallbacks) => {
         newValue = inputChangeCallbacks(newValue);
       });
-
-      event.target.value = newValue;
     }
 
     const newErrors = { ...errors };
     let allValid = true;
 
+    setValues((values) => ({ ...values, [name]: newValue }));
+
     validates.forEach((validate) => {
-      const errorResult = validate(event.target.value, name);
+      const errorResult = validate(newValue, name);
       if (errorResult && !errorResult.isValid) {
         newErrors[name as keyof T] = errorResult.type;
         allValid = false;
@@ -52,7 +52,6 @@ const useInputs = <T extends object>({
       delete newErrors[name as keyof T];
     }
 
-    setValues((values) => ({ ...values, [name]: newValue }));
     setErrors(newErrors);
   };
 
