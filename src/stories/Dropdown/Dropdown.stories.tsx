@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import MESSAGE from '../../constants/Message';
-import CONDITION from '../../constants/Condition';
 import Dropdown from '../../components/Dropdown/Dropdown';
-import { action } from '@storybook/addon-actions';
 
 const { TITLE, OPTION } = MESSAGE;
 
@@ -20,5 +18,6 @@ export const DropdownDefault: Story = {
     optionArray: OPTION.cardSelect,
     selectText: TITLE.cardSelect,
     selectedOptionState: { value: '', setValue: () => {} },
+    optionChange: () => {},
   },
 };
