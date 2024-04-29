@@ -10,11 +10,10 @@ const useCardholderNameFormStatus = (cardholderNameInfo: UseCardholderNameReturn
   });
 
   useEffect(() => {
-    setCardholderNameFormStatus(prev => ({ ...prev, isValid: isCardholderNameValid }));
-
-    if (isCardholderNameValid) {
-      setCardholderNameFormStatus(prev => ({ ...prev, isOpen: true }));
-    }
+    setCardholderNameFormStatus(prev => ({
+      ...prev,
+      isOpen: isCardholderNameValid || prev.isOpen,
+    }));
   }, [isCardholderNameValid]);
 
   return cardholderNameFormStatus;

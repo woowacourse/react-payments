@@ -4,20 +4,19 @@ import { UseCardPasswordReturnType } from '../../types/hooks';
 
 const useCardPasswordFormStatus = (cardPasswordInfo: UseCardPasswordReturnType) => {
   const isCardPasswordValid = isValidPasswordForm(cardPasswordInfo);
-  const [cardholderNameFormStatus, setCardholderNameFormStatus] = useState({
+  const [cardPasswordFormStatus, setCardPasswordFormStatus] = useState({
     isValid: isCardPasswordValid,
     isOpen: false,
   });
 
   useEffect(() => {
-    setCardholderNameFormStatus(prev => ({ ...prev, isValid: isCardPasswordValid }));
-
-    if (isCardPasswordValid) {
-      setCardholderNameFormStatus(prev => ({ ...prev, isOpen: true }));
-    }
+    setCardPasswordFormStatus(prev => ({
+      ...prev,
+      isOpen: isCardPasswordValid || prev.isOpen,
+    }));
   }, [isCardPasswordValid]);
 
-  return cardholderNameFormStatus;
+  return cardPasswordFormStatus;
 };
 
 export default useCardPasswordFormStatus;

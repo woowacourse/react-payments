@@ -4,20 +4,19 @@ import { UseCVCReturnType } from '../../types/hooks';
 
 const useCVCFormStatus = (cardCVCInfo: UseCVCReturnType) => {
   const isCardCVCValid = isValidCVCForm(cardCVCInfo);
-  const [cardholderNameFormStatus, setCardholderNameFormStatus] = useState({
+  const [cardCVCFormStatus, setCardCVCFormFormStatus] = useState({
     isValid: isCardCVCValid,
     isOpen: false,
   });
 
   useEffect(() => {
-    setCardholderNameFormStatus(prev => ({ ...prev, isValid: isCardCVCValid }));
-
-    if (isCardCVCValid) {
-      setCardholderNameFormStatus(prev => ({ ...prev, isOpen: true }));
-    }
+    setCardCVCFormFormStatus(prev => ({
+      ...prev,
+      isOpen: isCardCVCValid || prev.isOpen,
+    }));
   }, [isCardCVCValid]);
 
-  return cardholderNameFormStatus;
+  return cardCVCFormStatus;
 };
 
 export default useCVCFormStatus;

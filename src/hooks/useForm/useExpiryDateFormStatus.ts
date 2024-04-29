@@ -13,11 +13,10 @@ const useExpiryDateFormStatus = (expiryDateInfo: {
   });
 
   useEffect(() => {
-    setExpiryDateFormStatus(prev => ({ ...prev, isValid: isExpiryDateValid }));
-
-    if (isExpiryDateValid) {
-      setExpiryDateFormStatus(prev => ({ ...prev, isOpen: true }));
-    }
+    setExpiryDateFormStatus(prev => ({
+      ...prev,
+      isOpen: isExpiryDateValid || prev.isOpen,
+    }));
   }, [isExpiryDateValid]);
 
   return expiryDateFormStatus;

@@ -11,11 +11,10 @@ const useCardCompanyFormStatus = (cardCompanyInfo: UseSelectReturnType<CardType>
   });
 
   useEffect(() => {
-    setCardCompanyFormStatus(prev => ({ ...prev, isValid: isCardCompanyValid }));
-
-    if (isCardCompanyValid) {
-      setCardCompanyFormStatus(prev => ({ ...prev, isOpen: true }));
-    }
+    setCardCompanyFormStatus(prev => ({
+      ...prev,
+      isOpen: isCardCompanyValid || prev.isOpen,
+    }));
   }, [isCardCompanyValid]);
 
   return cardCompanyFormStatus;
