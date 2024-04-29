@@ -13,6 +13,7 @@ import { matchCardType } from "../domain/matchCardType";
 import useCardCvcNumber from "../hooks/useCardCvcNumber";
 import useCardExpirationPeriod from "../hooks/useCardExpirationPeriod";
 import useCardHolder from "../hooks/useCardHolder";
+import useCardIssuer from "../hooks/useCardIssuer";
 import useCardNumbers from "../hooks/useCardNumbers";
 import useCardPassword from "../hooks/useCardPassword";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +28,8 @@ export default function CardRegistrationPage() {
   const { cardNumberInputs, cardNumbersValue, isCardNumberComplete } =
     useCardNumbers({ onFocus: showCardFront });
 
-  const [cardIssuer, setCardIssuer] = useState("");
+  const { cardIssuerValue, setCardIssuer, isCardIssuerComplete } =
+    useCardIssuer();
 
   const {
     expirationPeriodInputs,
@@ -44,8 +46,6 @@ export default function CardRegistrationPage() {
   const { passwordInput, isCardPasswordComplete } = useCardPassword({
     onFocus: showCardFront,
   });
-
-  const isCardIssuerComplete = cardIssuer !== "";
 
   const isCompleteArray = [
     isCardNumberComplete,
@@ -73,14 +73,14 @@ export default function CardRegistrationPage() {
     navigate("/completed", {
       state: {
         cardNumber: cardNumbersValue[0],
-        cardIssuer: cardIssuer,
+        cardIssuer: cardIssuerValue,
       },
     });
   };
 
   const cardFormListJsx = [
     <CardNumbers cardNumberInputs={cardNumberInputs} />,
-    <CardIssuer value={cardIssuer} setValue={setCardIssuer} />,
+    <CardIssuer value={cardIssuerValue} setValue={setCardIssuer} />,
     <CardExpirationPeriod expirationPeriodInputs={expirationPeriodInputs} />,
     <CardHolder holderInput={holderInput} />,
     <CardCvcNumber cvcInput={cvcInput} />,
@@ -100,7 +100,7 @@ export default function CardRegistrationPage() {
         cardNumbers={cardNumbersValue}
         cardExpirationPeriod={cardExpirationPeriodValue}
         cardHolder={cardHolderValue}
-        cardIssuer={cardIssuer}
+        cardIssuer={cardIssuerValue}
         cardCvcNumber={cardCvcNumberValue}
       />
       <form css={styledForm}>
