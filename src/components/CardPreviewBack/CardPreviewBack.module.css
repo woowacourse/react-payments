@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-backview-background);
+  border-radius: inherit;
+}
+
+.CVC {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  top: 84px;
+  height: 24px;
+  background-color: var(--color-backview-CVC);
+  font-size: 14px;
+  color: var(--color-grey-100);
+  text-align: right;
+  padding: 0 12px;
+}

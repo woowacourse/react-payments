@@ -1,72 +1,39 @@
 import styles from "./CardPreview.module.css";
-import {
-  CARD_BRAND,
-  MASK_START_INDEX,
-  SYMBOLS,
-} from "../../constants/cardInfo";
-type Brand = "visa" | "master" | null;
 import { memo } from "react";
+import CardPreviewFront from "@/components/CardPreviewFront/CardPreviewFront";
+import CardPreviewBack from "@/components/CardPreviewBack/CardPreviewBack";
 
 interface CardPreviewProps {
-  cardNumbers: { first: string; second: string; third: string; fourth: string };
-  expirationDate: { month: string; year: string };
-  ownerName: { ownerName: string };
+  cardNumbers: Record<string, string>;
+  expirationDate: Record<string, string>;
+  ownerName: string;
+  cardCompany: string;
+  CVC: string;
+  face: "front" | "back";
 }
 
-const getCardbrand = (firstCardNumber: string): Brand => {
-  const { visa, master } = CARD_BRAND;
-
-  if (firstCardNumber.startsWith(visa.startNumber.toString())) return "visa";
-
-  if (
-    Number(firstCardNumber.slice(0, 2)) >= master.startNumber &&
-    Number(firstCardNumber.slice(0, 2)) <= master.endNumber
-  )
-    return "master";
-
-  return null;
-};
-
 const CardPreview = memo(
-  ({ cardNumbers, expirationDate, ownerName }: CardPreviewProps) => {
-    const brand = getCardbrand(cardNumbers.first);
-
+  ({
+    cardNumbers,
+    expirationDate,
+    ownerName,
+    cardCompany,
+    CVC,
+    face,
+  }: CardPreviewProps) => {
     return (
-      <div className={styles.container}>
-        <div className={styles.cardHeader}>
-          <div className={styles.chip} />
-          {brand && (
-            <img
-              src={CARD_BRAND[brand].logo}
-              className={styles.brandLogo}
-            ></img>
-          )}
-        </div>
-
-        <div className={styles.cardBody}>
-          <div className={styles.cardNumbers}>
-            {Object.entries(cardNumbers).map(([name, cardNumber], index) => {
-              const isMask = index >= MASK_START_INDEX;
-
-              return (
-                <span
-                  key={name}
-                  className={`${styles.cardNumber} ${isMask && styles.mask}`}
-                >
-                  {index >= MASK_START_INDEX
-                    ? SYMBOLS.mask.repeat(cardNumber.length)
-                    : cardNumber}
-                </span>
-              );
-            })}
-          </div>
-
-          <div className={styles.expirationDate}>
-            {`${expirationDate.month}${(expirationDate.month || expirationDate.year) && SYMBOLS.slash}${expirationDate.year}`}
-          </div>
-
-          <div className={styles.ownerName}>{ownerName.ownerName}</div>
-        </div>
+      <div
+        className={`${styles.container} ${face === "front" ? styles[cardCompany] : ""}`}
+      >
+        {face === "front" ? (
+          <CardPreviewFront
+            cardNumbers={cardNumbers}
+            expirationDate={expirationDate}
+            ownerName={ownerName}
+          />
+        ) : (
+          <CardPreviewBack CVC={CVC} />
+        )}
       </div>
     );
   },
@@ -78,8 +45,12 @@ const CardPreview = memo(
 
     if (prev.expirationDate.month !== next.expirationDate.month) return false;
     if (prev.expirationDate.year !== next.expirationDate.year) return false;
+    if (prev.ownerName !== next.ownerName) return false;
 
-    if (prev.ownerName.ownerName !== next.ownerName.ownerName) return false;
+    if (prev.CVC !== next.CVC) return false;
+    if (prev.cardCompany !== next.cardCompany) return false;
+
+    if (prev.face !== next.face) return false;
 
     return true;
   }

@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkMark {
+  width: 77px;
+  height: 77px;
+  background-color: #333333;
+  border-radius: 50%;
+  background-image: url("/src/imgs/checkmark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+.checkMarkScreen {
+  width: 77px;
+  height: 77px;
+  border-radius: 50%;
+  background-color: #333333;
+  animation: slideIn 2s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(0, 0); /* 왼쪽으로 이동하여 안 보이게 함 */
+  }
+
+  100% {
+    transform: translate(100%, 0);
+  }
+}
+
+.confirmMessage {
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  font-weight: 700;
+  padding: 15px;
+
+  margin: 25px 0;
+}
+
+.confirmButton {
+  width: 320px;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.confirmButton:focus {
+  text-decoration: underline;
+}

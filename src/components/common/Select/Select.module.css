@@ -1,0 +1,25 @@
+.select {
+  width: 100%;
+  height: 30px;
+  border-radius: 3px;
+  font-size: 11px;
+  appearance: none;
+  padding: 8px;
+  background-image: url("/src/imgs/uparrow.png");
+  background-position: right 5px center;
+  background-repeat: no-repeat;
+}
+
+.select:focus {
+  background-image: url("/src/imgs/downarrow.png");
+  background-position: right 5px center;
+  background-repeat: no-repeat;
+}
+
+.placeholder {
+  color: #acacac;
+}
+
+.inputText {
+  color: #000000;
+}

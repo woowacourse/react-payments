@@ -1,6 +1,7 @@
 .field {
   width: 100%;
   max-width: 315px;
+  border: none;
 }
 
 .title {

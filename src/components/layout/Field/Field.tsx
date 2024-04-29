@@ -4,8 +4,8 @@ import React from "react";
 interface FieldProps {
   title: string;
   description?: string;
-  labelText: string;
-  errorMessage: string;
+  labelText?: string;
+  errorMessage?: string;
   children: React.ReactNode;
 }
 
@@ -17,7 +17,7 @@ export default function Field({
   errorMessage,
 }: FieldProps) {
   return (
-    <div className={styles.field}>
+    <fieldset className={styles.field}>
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
 
@@ -27,6 +27,6 @@ export default function Field({
       </label>
 
       <p className={styles.errorMessage}>{errorMessage}</p>
-    </div>
+    </fieldset>
   );
 }

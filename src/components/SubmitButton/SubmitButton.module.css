@@ -1,0 +1,21 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 16px;
+  background-color: #333333; /* 버튼 배경색을 원하는 색상으로 변경하세요 */
+  color: #f3f3f3; /* 텍스트 색상을 원하는 색상으로 변경하세요 */
+  padding: 15px; /* 버튼 내부 여백을 조절하세요 */
+  border: none;
+  text-align: center;
+}
+
+.container:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.container:focus {
+  text-decoration: underline;
+}
