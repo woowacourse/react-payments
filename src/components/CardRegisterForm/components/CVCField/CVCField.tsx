@@ -25,7 +25,7 @@ const CVCNumbersErrorMessage: Record<CVCNumbersErrorType, string> = {
 };
 
 const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
-  const { onChange, error } = CVCNumbersState;
+  const { onChange, error, value } = CVCNumbersState;
   const [isErrorShow, setIsErrorShow] = useState(false);
 
   const currentErrorMessages = (
@@ -55,6 +55,7 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
             setIsFront(true);
           }}
           isError={!!error.length}
+          value={value}
         />
       </InputField>
     </S.InputFieldWithInfo>
@@ -62,7 +63,10 @@ const CVCField = ({ CVCNumbersState, setIsFront }: Props) => {
 };
 
 const arePropsEqual = (prevProps: Props, nextProps: Props) => {
-  return prevProps.CVCNumbersState.error === nextProps.CVCNumbersState.error;
+  return (
+    prevProps.CVCNumbersState.error === nextProps.CVCNumbersState.error &&
+    prevProps.CVCNumbersState.value === nextProps.CVCNumbersState.value
+  );
 };
 
 const CVCFieldMemo = React.memo(CVCField, arePropsEqual);
