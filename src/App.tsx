@@ -7,7 +7,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/react-payments/" element={<CardRegisterPage />} />
-        <Route path="/react-payments/register" element={<CardRegisterCompletedPage />} />
+        <Route path="/react-payments/complete" element={<CardRegisterCompletedPage />} />
       </Routes>
     </BrowserRouter>
   );

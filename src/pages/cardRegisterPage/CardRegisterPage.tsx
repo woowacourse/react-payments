@@ -15,7 +15,7 @@ const CardRegisterPage = () => {
   const navigate = useNavigate();
 
   const handleClickNextPage = () => {
-    navigate('/react-payments/register', {
+    navigate('/react-payments/complete', {
       state: { cardNumber: cardNumberInfo.value.first, cardCompany: cardCompanyInfo.value },
     });
   };
