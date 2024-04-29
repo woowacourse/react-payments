@@ -35,7 +35,7 @@ const PLACEHOLDER = {
   cardNumber: '1234',
   month: 'MM',
   year: 'YY',
-  userName: 'JOHN DAE',
+  userName: 'JOHN DOE',
   cardBrand: '카드사를 선택해주세요',
   cvcNumber: 'CVC 숫자를 입력해주세요.',
   password: '비밀번호를 입력해주세요.',
