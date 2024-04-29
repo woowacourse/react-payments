@@ -21,7 +21,6 @@ export interface UseCardholderNameReturnType {
 
 export interface UseCardNumberReturnType {
   value: Record<CardNumberKey, string>;
-  setValue: React.Dispatch<React.SetStateAction<Record<CardNumberKey, string>>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void;
   handleBlur: (key: CardNumberKey) => void;
   errorInfo: Record<CardNumberKey, ErrorDetail>;
