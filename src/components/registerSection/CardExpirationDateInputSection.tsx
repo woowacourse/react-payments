@@ -5,7 +5,7 @@ import Label from '../composables/Label';
 import InputSection from './InputSection';
 import { RefObject, useCallback, useRef } from 'react';
 
-type RegisterExpirationDateProps = {
+type Props = {
   month: string;
   monthChangeHandler: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -30,7 +30,7 @@ const CardExpirationDateInputSection = ({
   yearError,
   handleYearKeyDown,
   handleYearBlur,
-}: RegisterExpirationDateProps) => {
+}: Props) => {
   const yearRef = useRef<HTMLInputElement>(null);
 
   const monthRef = useCallback((node: HTMLInputElement | null) => {

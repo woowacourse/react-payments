@@ -6,7 +6,7 @@ import Label from '../composables/Label';
 import Input from '../composables/Input';
 import { MAX_LENGTH, CARD_NUMBER } from '@/constants/cardSection';
 
-type RegisterCardNumberProps = {
+type Props = {
   cardNumbers: InitialCardNumberState[];
   cardNumbersChangeHandler: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -15,10 +15,7 @@ type RegisterCardNumberProps = {
   ) => void;
 };
 
-const CardNumberInputSection = ({
-  cardNumbers,
-  cardNumbersChangeHandler,
-}: RegisterCardNumberProps) => {
+const CardNumberInputSection = ({ cardNumbers, cardNumbersChangeHandler }: Props) => {
   const refs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
