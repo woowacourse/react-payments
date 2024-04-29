@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+import CardInfoContextProvider from "./CardInfoContextProvider";
 import CreditCard from "../../components/CreditCard";
 import Form from "../../components/Form";
-import CardInfoContextProvider from "./CardInfoContextProvider";
+import FormContextProvider from "./FormContextProvider";
 
 const mainStyle = css({
   display: "flex",
@@ -16,12 +17,14 @@ const mainStyle = css({
 
 const Payments = () => {
   return (
-    <CardInfoContextProvider>
-      <div css={mainStyle}>
+    <div css={mainStyle}>
+      <CardInfoContextProvider>
         <CreditCard />
-        <Form />
-      </div>
-    </CardInfoContextProvider>
+        <FormContextProvider>
+          <Form />
+        </FormContextProvider>
+      </CardInfoContextProvider>
+    </div>
   );
 };
 

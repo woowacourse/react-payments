@@ -1,20 +1,42 @@
 import { css } from "@emotion/react";
 
-export const cardPreviewStyle = css({
-  background: "#333",
-  width: "212px",
-  height: "132px",
-  boxShadow: "3px 3px 5px 0px #00000040",
-  borderRadius: "4px",
-  padding: "8px 17px",
-  color: "#fff",
-  fontSize: "20px",
-  fontWeight: "500",
-  display: "flex",
-  flexDirection: "column",
-  gap: "14px",
-  marginBottom: "20px",
-});
+const CardBackgroundColor: Record<CardIssuerCategory, string> = {
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: "#6A6056",
+};
+
+const getBackGroundColor = (colorKey?: CardIssuerCategory | "back") => {
+  const BASE_COLOR = "#333";
+  const BACK_COLOR = "#D5D5D5";
+
+  if (!colorKey) return BASE_COLOR;
+  if (colorKey === "back") return BACK_COLOR;
+  return CardBackgroundColor[colorKey];
+};
+
+export const cardPreviewStyle = (colorKey?: CardIssuerCategory | "back") =>
+  css({
+    background: getBackGroundColor(colorKey),
+    width: "212px",
+    height: "132px",
+    boxShadow: "3px 3px 5px 0px #00000040",
+    borderRadius: "4px",
+    padding: "8px 17px",
+    color: "#fff",
+    fontSize: "20px",
+    fontWeight: "500",
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+    margin: "20px",
+    position: "relative",
+  });
 
 export const logoStyle = css({
   width: "36px",
@@ -49,4 +71,22 @@ export const periodRowStyle = css({
 
 export const periodStyle = css({
   width: "20px",
+});
+
+export const cardBackStyle = css({
+  backgroundColor: "#CBBA64",
+  width: "100%",
+  height: "24px",
+  position: "absolute",
+  top: "90px",
+  left: "0",
+  display: "flex",
+  justifyContent: "end",
+  alignItems: "center",
+});
+
+export const cvcNumberStyle = css({
+  fontSize: "14px",
+  width: "20px",
+  marginRight: "20px",
 });

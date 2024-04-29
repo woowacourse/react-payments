@@ -13,7 +13,7 @@ export const descriptionCss = css({
   lineHeight: "14px",
   textAlign: "left",
   color: "#8B95A1",
-  marginBottom: "30px",
+  marginBottom: "20px",
 });
 
 export const rowStyle = css({

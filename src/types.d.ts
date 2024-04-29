@@ -6,12 +6,38 @@ interface CardNumbers {
 }
 
 interface CardValidityPeriod {
-  month?: number;
-  year?: number;
+  month?: string;
+  year?: string;
 }
 
 interface CardOwnerInfo {
   name?: string;
+}
+
+type CardIssuerCategory =
+  | "BC카드"
+  | "신한카드"
+  | "카카오뱅크"
+  | "현대카드"
+  | "우리카드"
+  | "롯데카드"
+  | "하나카드"
+  | "국민카드";
+
+interface CardIssuer {
+  name?: CardIssuerCategory;
+}
+
+interface CardCVC {
+  value?: string;
+}
+
+interface CardPassword {
+  value?: string;
+}
+
+interface CardUIHeadOrTail {
+  value: "head" | "tail";
 }
 
 type ErrorType = {
@@ -27,41 +53,29 @@ interface CardNumbersError {
 }
 
 interface CardValidityPeriodError {
-  month?: ErrorType;
-  year?: ErrorType;
+  month: ErrorType;
+  year: ErrorType;
 }
 
 interface CardOwnerInfoError {
   name?: ErrorType;
 }
 
-type CardInfoInputKey = keyof CardNumbers | keyof CardValidityPeriod | keyof CardOwnerInfo;
-
-interface CardInfo {
-  cardNumbers: CardNumbers;
-  cardValidityPeriod: CardValidityPeriod;
-  cardOwnerInfo: CardOwnerInfo;
+interface CardIssuerError {
+  name: ErrorType;
 }
 
-type InitCardInfoType = {
-  key: keyof CardInfo;
-  initValue: ValueOf<CardInfo>;
-};
+interface CardCVCError {
+  value: ErrorType;
+}
 
-interface ErrorState {
-  cardNumbers: {
-    firstNumbers: ErrorType;
-    secondNumbers: ErrorType;
-    thirdNumbers: ErrorType;
-    fourthNumbers: ErrorType;
-  };
-  cardValidityPeriod: {
-    month: ErrorType;
-    year: ErrorType;
-  };
-  cardOwnerInfo: {
-    name: ErrorType;
-  };
+interface CardPasswordError {
+  value: ErrorType;
 }
 
 type SizePresetType = "small" | "medium" | "large";
+
+type FormRenderOrder = {
+  index: number;
+  step: "cardNumbers" | "cardIssuer" | "cardPeriod" | "cardOwner" | "cardCVC" | "cardPassword";
+};
