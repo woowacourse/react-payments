@@ -3,13 +3,12 @@ import styles from "./SubmitPage.module.css";
 
 const SubmitPage = () => {
   const location = useLocation();
-  const firstCardNumber =
-    location.state?.firstCardNumber ?? "(첫 번째 카드 번호)";
+  const firstCardNumber = location.state?.firstCardNumber ?? "(첫 번째 카드 번호)";
   const cardCompany = location.state?.cardCompany ?? "(카드 회사명)";
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/react-payments/");
+    navigate("/");
   };
 
   return (

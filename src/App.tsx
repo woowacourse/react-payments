@@ -5,12 +5,12 @@ import MainPage from "@/pages/MainPage/MainPage.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/react-payments/",
+    path: "/",
     element: <MainPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/react-payments/submit",
+    path: "/submit",
     element: <SubmitPage />,
     errorElement: <ErrorPage />,
   },

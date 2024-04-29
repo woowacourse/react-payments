@@ -58,7 +58,7 @@ const MainPage = () => {
       cardCompany,
       firstCardNumber: cardNumbers.first.value,
     };
-    navigate(`/react-payments/submit`, { state: { ...params } });
+    navigate(`/submit`, { state: { ...params } });
   };
 
   return (
