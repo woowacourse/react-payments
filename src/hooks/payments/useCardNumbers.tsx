@@ -34,10 +34,10 @@ export default function useCardNumbers() {
     cardNumberValidateInputProps
   );
 
-  const [isTouchedFirst, setIsTouchedFirst] = useState(false);
-  const [isTouchedSecond, setIsTouchedSecond] = useState(false);
-  const [isTouchedThird, setIsTouchedThird] = useState(false);
-  const [isTouchedFourth, setIsTouchedFourth] = useState(false);
+  const [wasFirstChanged, setWasChangedFirst] = useState(false);
+  const [wasSecondChanged, setWasChangedSecond] = useState(false);
+  const [wasThirdChanged, setWasChangedThird] = useState(false);
+  const [wasFourthChanged, setWasChangedFourth] = useState(false);
 
   const cardNumberInputs = [
     firstCardNumberValidateInput,
@@ -46,18 +46,18 @@ export default function useCardNumbers() {
     fourthCardNumberValidateInput,
   ];
 
-  const isTouchedNumbers = [
-    isTouchedFirst,
-    isTouchedSecond,
-    isTouchedThird,
-    isTouchedFourth,
+  const wasNumbersChanged = [
+    wasFirstChanged,
+    wasSecondChanged,
+    wasThirdChanged,
+    wasFourthChanged,
   ];
 
-  const setIsTouchedNumbers = [
-    setIsTouchedFirst,
-    setIsTouchedSecond,
-    setIsTouchedThird,
-    setIsTouchedFourth,
+  const setWasChangedNumbers = [
+    setWasChangedFirst,
+    setWasChangedSecond,
+    setWasChangedThird,
+    setWasChangedFourth,
   ];
 
   const cardNumbersErrorMessage = useLastValidValue({
@@ -67,34 +67,32 @@ export default function useCardNumbers() {
 
   const cardNumbers = cardNumberInputs.map(input => input.inputValue);
 
-  const isEveryTouched = isTouchedNumbers.every(isTouched => isTouched);
-  const isEveryFullFilled = cardNumbers.every(
-    number => number.length === cardNumberInputs.length
+  const wasEveryChanged = wasNumbersChanged.every(isTouched => isTouched);
+  const isEveryNoError = cardNumberInputs.every(
+    input => input.errorMessage === ''
   );
 
-  const isValid = isEveryTouched && isEveryFullFilled;
-  cardNumbersErrorMessage === undefined;
+  const isValid = wasEveryChanged && isEveryNoError;
 
   const initValue = () => {
     cardNumberInputs.forEach(el => el.initValue());
-    setIsTouchedNumbers.forEach(setIsTouched => setIsTouched(false));
+    setWasChangedNumbers.forEach(setIsTouched => setIsTouched(false));
   };
 
   return {
     cardNumbers,
     cardNumberOnChanges: cardNumberInputs.map((input, idx) => {
       return (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsTouchedNumbers[idx](true);
+        setWasChangedNumbers[idx](true);
         input.onChange(event);
       };
     }),
     errorMessage: cardNumbersErrorMessage ?? '',
     isValidNumberParts: cardNumberInputs.map(
-      (input, idx) => input.errorMessage === '' && isTouchedNumbers[idx]
+      (input, idx) => input.errorMessage === '' && wasNumbersChanged[idx]
     ),
     isValid,
-    isTouched: isTouchedNumbers.some(isTouched => isTouched),
-    isTouchedNumbers,
+    wasNumbersChanged,
     initValue,
   };
 }
@@ -105,7 +103,6 @@ export interface UseCardNumbers {
   errorMessage: string;
   isValidNumberParts: boolean[];
   isValid: boolean;
-  isTouched: boolean;
-  isTouchedNumbers: boolean[];
+  wasNumbersChanged: boolean[];
   initValue: () => void;
 }

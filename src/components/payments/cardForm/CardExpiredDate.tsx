@@ -20,19 +20,22 @@ export default function ExpiredDate({ useCardExpiredDate }: props) {
     isValid: isValidExpiredDate,
     isValidMonth,
     isValidYear,
+    wasChangedMonth,
+    wasChangedYear,
     isFullFilled,
-    isTouchedMonth,
-    isTouchedYear,
   } = useCardExpiredDate;
   const yearRef = useRef<HTMLInputElement>(null);
+
+  const isMonthErrorBorder = !wasChangedMonth || isValidMonth;
+  const isYearErrorBorder = !wasChangedYear || isValidYear;
 
   const monthElement = (
     <TextInput
       placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateMonthPlaceHolder}
       onChange={useCardExpiredDate.monthOnChange}
       maxLength={BOUND.cardExpiredMonthStringUpper}
-      borderColor={!isTouchedMonth || isValidMonth ? undefined : 'error'}
-      aria-invalid={!((!isTouchedMonth || isValidMonth) && isValidExpiredDate)}
+      borderColor={isMonthErrorBorder ? undefined : 'error'}
+      aria-invalid={!(isMonthErrorBorder && isValidExpiredDate)}
       autoFocus
       tabIndex={6}
     />
@@ -43,8 +46,8 @@ export default function ExpiredDate({ useCardExpiredDate }: props) {
       placeholder={PAYMENTS_INPUT_MESSAGE.expiredDateYearPlaceHolder}
       onChange={useCardExpiredDate.yearOnChange}
       maxLength={BOUND.cardExpiredYearStringUpper}
-      borderColor={!isTouchedYear || isValidYear ? undefined : 'error'}
-      aria-invalid={!((!isTouchedYear || isValidYear) && !isValidExpiredDate)}
+      borderColor={isYearErrorBorder ? undefined : 'error'}
+      aria-invalid={!(isYearErrorBorder || isValidExpiredDate)}
       ref={yearRef}
       tabIndex={7}
     />

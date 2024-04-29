@@ -22,23 +22,21 @@ const validateInputProps = {
 export default function useCardPasswordHead() {
   const validateInput = useValidateInput(validateInputProps);
 
-  const [isTouched, setIsTouched] = useState(false);
+  const [wasChanged, setWasChanged] = useState(false);
 
-  const isValid =
-    validateInput.inputValue.length === BOUND.cardPasswordHeadUpper &&
-    validateInput.errorMessage === '';
+  const isValid = wasChanged && validateInput.errorMessage === '';
 
   return {
     cardCVC: validateInput.inputValue,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsTouched(true);
+      setWasChanged(true);
       validateInput.onChange(event);
     },
     errorMessage: validateInput.errorMessage,
     isValid,
-    isTouched,
+    wasChanged,
     initValue: () => {
-      setIsTouched(false);
+      setWasChanged(false);
       validateInput.initValue();
     },
   };
@@ -49,6 +47,6 @@ export interface UseCardPasswordHead {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
   isValid: boolean;
-  isTouched: boolean;
+  wasChanged: boolean;
   initValue: () => void;
 }

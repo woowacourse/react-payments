@@ -21,11 +21,6 @@ export default function CardNumbers({ useCardNumbers }: props) {
   const fourthRef = useRef<HTMLInputElement>(null);
   const refs = [firstRef, secondRef, thirdRef, fourthRef];
   const [nowFocusIdx, setNowFocusIdx] = useState(0);
-  const isErrorBorders = useCardNumbers.isValidNumberParts.map(
-    (isValid, idx) => {
-      return useCardNumbers.isTouchedNumbers[idx] && !isValid;
-    }
-  );
 
   const numberElements = useCardNumbers.cardNumberOnChanges.map(
     (onChange, idx) => (
@@ -37,8 +32,18 @@ export default function CardNumbers({ useCardNumbers }: props) {
           onChange(event);
           setNowFocusIdx(idx);
         }}
-        borderColor={isErrorBorders[idx] ? 'error' : undefined}
-        aria-invalid={isErrorBorders[idx]}
+        borderColor={
+          !useCardNumbers.wasNumbersChanged[idx] ||
+          useCardNumbers.isValidNumberParts[idx]
+            ? undefined
+            : 'error'
+        }
+        aria-invalid={
+          !(
+            !useCardNumbers.wasNumbersChanged[idx] ||
+            useCardNumbers.isValidNumberParts[idx]
+          )
+        }
         maxLength={BOUND.cardNumbersOnePartUpper}
         ref={refs[idx]}
         autoFocus={idx === 0}

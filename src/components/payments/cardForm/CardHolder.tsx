@@ -15,9 +15,8 @@ interface props {
 }
 
 export default function CardHolder({
-  useCardHolder: { errorMessage, onChange },
+  useCardHolder: { errorMessage, onChange, isValid, wasChanged },
 }: props) {
-  const isError = Boolean(errorMessage);
   return (
     <section>
       <SectionTitle title={PAYMENTS_MESSAGE.cardHolderTitle} />
@@ -30,8 +29,8 @@ export default function CardHolder({
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
             onChange={onChange}
             maxLength={BOUND.cardHolderLengthUpper}
-            borderColor={isError ? 'error' : undefined}
-            aria-invalid={!isError}
+            borderColor={!wasChanged || isValid ? undefined : 'error'}
+            aria-invalid={!(!wasChanged || isValid)}
             style={{ textTransform: 'uppercase' }}
             autoFocus
             tabIndex={8}

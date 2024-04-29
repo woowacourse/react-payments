@@ -16,9 +16,8 @@ interface props {
 }
 
 export default function CardCVC({
-  useCardCVC: { errorMessage, onChange },
+  useCardCVC: { errorMessage, onChange, isValid, wasChanged },
 }: props) {
-  const isError = errorMessage !== '';
   return (
     <section>
       <SectionTitle title={PAYMENTS_MESSAGE.cardCVCTitle} />
@@ -31,8 +30,8 @@ export default function CardCVC({
             placeholder={PAYMENTS_INPUT_MESSAGE.cardCVCPlaceholder}
             onChange={onChange}
             maxLength={BOUND.cardCVCUpper}
-            borderColor={isError ? 'error' : undefined}
-            aria-invalid={isError}
+            borderColor={!wasChanged || isValid ? undefined : 'error'}
+            aria-invalid={!(!wasChanged || isValid)}
             tabIndex={9}
             id={ID.cvcInput}
           />

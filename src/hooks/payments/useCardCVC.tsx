@@ -20,23 +20,23 @@ const validateInputProps = {
 };
 
 export default function useCardCVC() {
-  const [isTouched, setIsTouched] = useState(false);
+  const [wasChanged, setWasChanged] = useState(false);
   const validateInput = useValidateInput(validateInputProps);
 
-  const isValid = isTouched && validateInput.errorMessage === '';
+  const isValid = wasChanged && validateInput.errorMessage === '';
 
   return {
     cardCVC: validateInput.inputValue,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsTouched(true);
+      setWasChanged(true);
       validateInput.onChange(event);
     },
     errorMessage: validateInput.errorMessage,
     isValid,
-    isTouched,
+    wasChanged,
     initValue: () => {
       validateInput.initValue();
-      setIsTouched(false);
+      setWasChanged(false);
     },
   };
 }
@@ -46,6 +46,6 @@ export interface UseCardCVC {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   errorMessage: string;
   isValid: boolean;
-  isTouched: boolean;
+  wasChanged: boolean;
   initValue: () => void;
 }

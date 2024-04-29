@@ -15,27 +15,22 @@ const cardHolderValidateInputProps = {
 
 export default function useCardHolder() {
   const validateInput = useValidateInput(cardHolderValidateInputProps);
-  const [isTouched, setIsTouched] = useState(false);
-  const [lastEventTargetValue, setLastEventTargetValue] = useState('');
+  const [wasChanged, setWasChanged] = useState(false);
 
-  const isValid =
-    isTouched &&
-    validateInput.inputValue.length > 0 &&
-    lastEventTargetValue.length > 0;
+  const isValid = wasChanged && validateInput.errorMessage === '';
 
   return {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsTouched(true);
+      setWasChanged(true);
       validateInput.onChange(event);
-      setLastEventTargetValue(event.target.value);
     },
     holder: validateInput.inputValue,
     errorMessage: validateInput.errorMessage,
     isValid,
-    isTouched,
+    wasChanged,
     initValue: () => {
       validateInput.initValue();
-      setIsTouched(false);
+      setWasChanged(false);
     },
   };
 }
@@ -45,6 +40,6 @@ export interface UseCardHolder {
   holder: string;
   errorMessage: string;
   isValid: boolean;
-  isTouched: boolean;
+  wasChanged: boolean;
   initValue: () => void;
 }

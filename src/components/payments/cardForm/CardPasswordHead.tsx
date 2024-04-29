@@ -16,9 +16,8 @@ interface props {
 }
 
 export default function CardPasswordHead({
-  useCardPasswordHead: { errorMessage, onChange },
+  useCardPasswordHead: { errorMessage, onChange, isValid, wasChanged },
 }: props) {
-  const isError = errorMessage !== '';
   return (
     <section>
       <SectionTitle
@@ -35,8 +34,8 @@ export default function CardPasswordHead({
             placeholder={PAYMENTS_INPUT_MESSAGE.cardPasswordHeadPlaceHolder}
             onChange={onChange}
             maxLength={BOUND.cardPasswordHeadUpper}
-            borderColor={isError ? 'error' : undefined}
-            aria-invalid={isError}
+            borderColor={!wasChanged || isValid ? undefined : 'error'}
+            aria-invalid={!wasChanged || isValid}
             autoFocus
             tabIndex={10}
             id={ID.passwordHeadInput}
