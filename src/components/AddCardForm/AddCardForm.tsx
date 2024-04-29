@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './AddCardForm.module.css';
 
-import { INITIAL_VALUES } from '../../constants/form';
-
 import CVCInput from '../AddCardFormInput/CVCInput/CVCInput';
 import CardIssuerInput from '../AddCardFormInput/CardIssuerInput/CardIssuerInput';
 import CardNumberInput from '../AddCardFormInput/CardNumberInput/CardNumberInput';
@@ -20,22 +18,38 @@ export default function AddCardForm() {
   const { findStep, curStep, isFormValid } = useAddCardFormContext();
 
   const cardNumbersProps = useAddCardFormField<CardNumbers>({
-    initialValues: INITIAL_VALUES.cardNumbers,
+    initialValues: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
   });
   const expirationDateProps = useAddCardFormField<ExpirationDate>({
-    initialValues: INITIAL_VALUES.expirationDate,
+    initialValues: {
+      month: '',
+      year: '',
+    },
   });
   const ownerNameProps = useAddCardFormField<OwnerName>({
-    initialValues: INITIAL_VALUES.ownerName,
+    initialValues: {
+      ownerName: '',
+    },
   });
   const cardIssuerProps = useAddCardFormField<CardIssuer>({
-    initialValues: INITIAL_VALUES.cardIssuer,
+    initialValues: {
+      cardIssuer: '',
+    },
   });
   const cvcProps = useAddCardFormField<CVC>({
-    initialValues: INITIAL_VALUES.cvc,
+    initialValues: {
+      cvc: '',
+    },
   });
   const passwordProps = useAddCardFormField<Password>({
-    initialValues: INITIAL_VALUES.password,
+    initialValues: {
+      password: '',
+    },
   });
 
   const navigate = useNavigate();
