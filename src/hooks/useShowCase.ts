@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import { FormItem } from '../constants/addNewCardFormItemNameList';
+import { useEffect, useState } from 'react';
 
-// 쇼케이스에 보여질 것인지 아닌지를 다루는 훅
+const useShowCase = (showOrder: string[], isValidList: Record<string, boolean>) => {
+  // 첫 번째 값만 true
+  const initialShowCase = showOrder.reduce(
+    (acc, item, index) => {
+      acc[item] = index === 0;
+      return acc;
+    },
+    {} as Record<string, boolean>,
+  );
+  const [showCase, setShowCase] = useState(initialShowCase);
 
-// TODO: 지나치게 도메인 의존인 부분 제거해 범용성 확보
-const useShowCase = (initialShowCaseValue: Record<string, boolean>) => {
-  const [showCase, setShowCase] = useState(initialShowCaseValue);
+  useEffect(() => {
+    Object.values(isValidList).forEach((value, index) => {
+      if (value === true && index !== showOrder.length - 1) {
+        addItemToShowCase(index + 1);
+      }
+    });
+  }, [isValidList]);
 
-  const addItemToShowCase = (item: FormItem) => {
-    setShowCase({ ...showCase, [item]: true });
+  const addItemToShowCase = (index: number) => {
+    if (showCase[showOrder[index]]) return;
+
+    setShowCase({ ...showCase, [showOrder[index]]: true });
   };
 
-  const resetShowCase = () => {
-    setShowCase(initialShowCaseValue);
-  };
-
-  return { showCase, addItemToShowCase, resetShowCase };
+  return { showCase };
 };
 
 export default useShowCase;
