@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <AddCardPage />,
       },
       {
-        path: '/confirm/:firstNumber/:cardIssuer',
+        path: '/confirm',
         element: <ConfirmAddCardPage />,
       },
     ],

@@ -47,9 +47,12 @@ export default function AddCardForm() {
     e.preventDefault();
 
     if (isFormValid)
-      navigate(
-        `/confirm/${cardNumbersProps.values.first}/${cardIssuerProps.values.cardIssuer}`
-      );
+      navigate(`/confirm`, {
+        state: {
+          cardIssuer: cardIssuerProps.values.cardIssuer,
+          firstNumbers: cardNumbersProps.values.first,
+        },
+      });
   };
 
   return (
