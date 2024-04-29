@@ -67,33 +67,29 @@ export default function PasswordInput({
     }
   }, [isFieldComplete]);
 
+  const isVisible = curStep >= findStep('password');
+  if (!isVisible) return null;
   return (
-    curStep >= findStep('password') && (
-      <Field
-        title={title}
-        description={description}
-        labelText={labelText}
-        errorMessage={errorMessage}
-      >
-        <Label
-          htmlFor="password"
-          labelText={inputLabelText.password}
-          hideLabel
-        />
-        <Input
-          ref={ref}
-          id="password"
-          name="password"
-          type="password"
-          value={password.password}
-          isError={isError.password}
-          placeholder={placeholder}
-          isRequired
-          handleChange={handleOnChange}
-          handleOnBlur={handleOnBlur}
-          maxLength={2}
-        />
-      </Field>
-    )
+    <Field
+      title={title}
+      description={description}
+      labelText={labelText}
+      errorMessage={errorMessage}
+    >
+      <Label htmlFor="password" labelText={inputLabelText.password} hideLabel />
+      <Input
+        ref={ref}
+        id="password"
+        name="password"
+        type="password"
+        value={password.password}
+        isError={isError.password}
+        placeholder={placeholder}
+        isRequired
+        handleChange={handleOnChange}
+        handleOnBlur={handleOnBlur}
+        maxLength={2}
+      />
+    </Field>
   );
 }
