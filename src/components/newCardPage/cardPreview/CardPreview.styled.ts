@@ -13,7 +13,7 @@ export const TYPE_COMPANY = {
 };
 
 interface CardPreviewContainerProps {
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | "";
 }
 
 export const CardPreviewContainer = styled.div`

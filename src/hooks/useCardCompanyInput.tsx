@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CardCompany } from "../types/type";
 
 interface CardCompanyState {
-  value: CardCompany;
+  value: CardCompany | "";
   errorMessage: string[];
   isNextVisible: boolean;
   isValid: boolean;
@@ -10,7 +10,7 @@ interface CardCompanyState {
 
 function useCardCompanyInput(): [CardCompanyState, (value: string) => void] {
   const [cardCompanyState, setCardCompanyState] = useState<CardCompanyState>({
-    value: "" as CardCompany,
+    value: "",
     errorMessage: [""],
     isNextVisible: false,
     isValid: false,

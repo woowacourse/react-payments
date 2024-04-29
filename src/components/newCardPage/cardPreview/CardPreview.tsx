@@ -11,7 +11,7 @@ export interface CardPreviewProps {
   cvc: string;
   userName: string;
   cardExpiration: string[];
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | "";
   cardNumbers: string[];
 }
 
