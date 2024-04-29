@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import CreditCardFront from "../../components/creditCard/front";
 import CreditCardForm from "../../components/creditCardForm";
-import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import {
   AuthenticationValue,
@@ -25,6 +24,8 @@ import CreditCardBack from "../../components/creditCard/back";
 import CARD_INPUT_LENGTH from "../../constants/cardInputLength";
 import Button from "../../components/button/common";
 import { useNavigate } from "react-router-dom";
+import useFormInputBlur from "../../hooks/useFormInputBlur";
+import isInputComplete from "../../utils/isInputComplete";
 
 interface CreditCardForms {
   title: string;
@@ -34,8 +35,8 @@ interface CreditCardForms {
 }
 
 const CardRegistration = () => {
-  const [cardNumber, setCardNumber, blurCardNumber, cardNumberError, cardNumberIsComplete] =
-    useInput<CardNumberValue>({
+  const [cardNumber, setCardNumber, blurCardNumber, cardNumberError] =
+    useFormInputBlur<CardNumberValue>({
       firstValue: SIGN.empty,
       secondValue: SIGN.empty,
       thirdValue: SIGN.empty,
@@ -44,51 +45,37 @@ const CardRegistration = () => {
 
   const { isDropdown, handleDropdown, selected, handleSelected } = useSelect<CardType>();
 
-  const [
-    expirationPeriod,
-    setExpirationPeriod,
-    blurExpirationPeriod,
-    expirationPeriodError,
-    expirationPeriodIsComplete,
-  ] = useInput<ExpirationPeriodValue>({
-    month: SIGN.empty,
-    year: SIGN.empty,
-  });
+  const [expirationPeriod, setExpirationPeriod, blurExpirationPeriod, expirationPeriodError] =
+    useFormInputBlur<ExpirationPeriodValue>({
+      month: SIGN.empty,
+      year: SIGN.empty,
+    });
 
-  const [owner, setOwner, blurOwner, ownerError] = useInput<OwnerValue>({
+  const [owner, setOwner, blurOwner, ownerError] = useFormInputBlur<OwnerValue>({
     name: SIGN.empty,
   });
-  const [info, setInfo, blurInfo, infoError, infoIsComplete] = useInput<InfoValue>({
+  const [info, setInfo, blurInfo, infoError] = useFormInputBlur<InfoValue>({
     cvc: SIGN.empty,
   });
-  const [
-    authentication,
-    setAuthentication,
-    blurAuthentication,
-    authenticationError,
-    authenticationComplete,
-  ] = useInput<AuthenticationValue>({
-    password: SIGN.empty,
-  });
+  const [authentication, setAuthentication, blurAuthentication, authenticationError] =
+    useFormInputBlur<AuthenticationValue>({
+      password: SIGN.empty,
+    });
 
   const [showBack, setShowBack] = useState(false);
 
-  const currentIndex = useCurrentIndex(
-    cardNumberIsComplete,
+  const completeStatus = isInputComplete(
+    cardNumber,
     !!selected,
-    expirationPeriodIsComplete,
+    expirationPeriod,
     !!owner.name,
-    infoIsComplete,
-    authenticationComplete
+    info,
+    authentication
   );
 
-  const isFormComplete =
-    cardNumberIsComplete &&
-    !!selected &&
-    expirationPeriodIsComplete &&
-    !!owner.name &&
-    infoIsComplete &&
-    authenticationComplete;
+  const currentIndex = useCurrentIndex(...completeStatus);
+
+  const isFormComplete = completeStatus.every(Boolean);
 
   const router = useNavigate();
 
