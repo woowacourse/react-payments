@@ -58,7 +58,10 @@ const OwnerNameField = ({ ownerNameState, setIsNameEntered }: Props) => {
             onEnterCompleted(e)
           }
           onFocus={() => setIsErrorShow(true)}
-          onBlur={() => setIsErrorShow(true)}
+          onBlur={() => {
+            setIsErrorShow(true);
+            setIsNameEntered(true);
+          }}
         />
       </InputField>
     </S.InputFieldWithInfo>
