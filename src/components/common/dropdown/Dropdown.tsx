@@ -13,20 +13,19 @@ const Dropdown = ({ value, handleSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <S.SelectBox $show={isOpen} onClick={() => setIsOpen(prev => !prev)}>
+    <S.SelectBox $isOpen={isOpen} onClick={() => setIsOpen(prev => !prev)}>
       <S.LabelWrapper>
         <S.SelectedText $value={value}>{value || '선택해주세요'}</S.SelectedText>
         {isOpen ? <ArrowDown /> : <ArrowUp />}
       </S.LabelWrapper>
-      {isOpen && (
-        <S.SelectOptions>
-          {CARD_OPTIONS.map(data => (
+      <S.SelectOptions $isOpen={isOpen}>
+        {isOpen &&
+          CARD_OPTIONS.map(data => (
             <S.Option key={data.value} data-value={data.value} onClick={handleSelect}>
               {data.label}
             </S.Option>
           ))}
-        </S.SelectOptions>
-      )}
+      </S.SelectOptions>
     </S.SelectBox>
   );
 };

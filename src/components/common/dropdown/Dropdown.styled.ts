@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface OptionProps {
-  $show: boolean;
+  $isOpen: boolean;
 }
 
 interface SelectedTextProps {
@@ -15,7 +15,7 @@ export const SelectBox = styled.div<OptionProps>`
   border-radius: 8px;
   background-color: #ffffff;
   align-self: center;
-  border: 1px solid ${props => (props.$show ? 'black' : '#acacac')};
+  border: 1px solid ${props => (props.$isOpen ? 'black' : '#acacac')};
   cursor: pointer;
 `;
 
@@ -34,18 +34,21 @@ export const SelectedText = styled.span<SelectedTextProps>`
   color: ${props => (props.$value ? 'black' : '#acacac')};
 `;
 
-export const SelectOptions = styled.ul`
+export const SelectOptions = styled.ul<OptionProps>`
   position: absolute;
   list-style: none;
   top: 45px;
   left: 0;
   width: 100%;
+  height: ${props => (props.$isOpen ? '306px' : '0')};
   overflow: hidden;
 
   border-radius: 8px;
   background-color: white;
   color: black;
-  border: 1px solid #acacac;
+  border: 1px solid ${props => (props.$isOpen ? '#acacac' : 'none')};
+
+  transition: height 0.3s;
 `;
 
 export const Option = styled.li`
