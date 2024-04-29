@@ -8,8 +8,8 @@ import { CardValidityPeriodErrorContext } from "../../routes/Payments/FormContex
 import CardPeriodInput from "../FormInput/CardPeriodInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardPeriodInputsContext } from "../Form/FormRefContextProvider";
-import { isPeriodValid } from "../Form/useIsValid";
 import useRenderOrderState from "../../hooks/useRenderOrderState";
+import { isPeriodValid } from "../../domainUtils";
 
 const CardValidityPeriodField = () => {
   const [cardPeriodError, setCardPeriodError] = useContextWrapper(CardValidityPeriodErrorContext);

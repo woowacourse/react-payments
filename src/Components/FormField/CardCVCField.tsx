@@ -6,9 +6,9 @@ import CardCVCInput from "../FormInput/CardCVCInput";
 
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext } from "../Form/FormRefContextProvider";
-import { isCVCValid } from "../Form/useIsValid";
 
 import useRenderOrderState from "../../hooks/useRenderOrderState";
+import { isCVCValid } from "../../domainUtils";
 
 const CardCVCField = () => {
   const cardCVCError = useContextWrapper(CardCVCErrorContext)[0];

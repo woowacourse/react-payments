@@ -7,15 +7,14 @@ import { CardIssuerErrorContext } from "../../routes/Payments/FormContextProvide
 
 import CardIssuerInput from "../FormInput/CardIssuerInput";
 import FormFieldComponent from "./FormFieldComponent";
-import { isIssuerValid } from "../Form/useIsValid";
 import useRenderOrderState from "../../hooks/useRenderOrderState";
+import { isIssuerValid } from "../../domainUtils";
 
 const CardIssuerField = () => {
   const cardIssuerError = useContextWrapper(CardIssuerErrorContext)[0];
   const cardIssuer = useContextWrapper(CardIssuerContext)[0];
   const setRenderOrder = useRenderOrderState()[1];
   useEffect(() => {
-    console.log(isIssuerValid(cardIssuer, cardIssuerError));
     if (isIssuerValid(cardIssuer, cardIssuerError)) {
       setRenderOrder.next("cardIssuer");
     }

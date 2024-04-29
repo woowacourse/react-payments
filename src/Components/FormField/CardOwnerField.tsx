@@ -6,8 +6,9 @@ import { CardOwnerInfoErrorContext } from "../../routes/Payments/FormContextProv
 import CardOwnerInput from "../FormInput/CardOwnerInput";
 import FormFieldComponent from "./FormFieldComponent";
 import { CardCVCInputContext, CardOwnerInputContext } from "../Form/FormRefContextProvider";
-import { isOwnerValid } from "../Form/useIsValid";
+
 import useRenderOrderState from "../../hooks/useRenderOrderState";
+import { isOwnerValid } from "../../domainUtils";
 
 const CardOwnerField = () => {
   const cardOwnerError = useContextWrapper(CardOwnerInfoErrorContext)[0];

@@ -11,19 +11,7 @@ import {
 } from "../../routes/Payments/CardInfoContextProvider";
 
 import useContextWrapper from "../../hooks/useContextWrapper";
-
-/**
- * @param n 1~2 자리 숫자가 들어온다.
- * @returns 0일경우 빈 문자열, 1자리 숫자가 들어올 경우 앞에 숫자 앞에 "0"을 붙인 문자열을 반환, 2자리 숫자가 들어올 경우 숫자를 문자열로 반환
- * @example formatTwoDigitNumber(0) => ""
- * @example formatTwoDigitNumber(3) => "03"
- * @example formatTwoDigitNumber(12) => "12"
- */
-const formatTwoDigitNumber = (n: string | undefined) => {
-  if (!n) return "";
-  if (n.length > 2) throw new Error("formatTwoDigitNumber에서 잘못된 입력을 받았습니다.");
-  return n.padStart(2, "0");
-};
+import { formatTwoDigitNumber } from "../../domainUtils";
 
 const isVisa = (cardNumber?: string) => {
   const VISA_START_NUMBER = 4;

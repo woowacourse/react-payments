@@ -7,8 +7,8 @@ import FormFieldComponent from "./FormFieldComponent";
 import { CardNumbersContext } from "../../routes/Payments/CardInfoContextProvider";
 import { CardNumberInputsContext } from "../Form/FormRefContextProvider";
 
-import { isNumberValid } from "../Form/useIsValid";
 import useRenderOrderState from "../../hooks/useRenderOrderState";
+import { isNumberValid } from "../../domainUtils";
 
 const CardNumberField = () => {
   const cardNumberError = useContextWrapper(CardNumberErrorContext)[0];
