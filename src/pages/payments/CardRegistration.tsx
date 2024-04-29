@@ -62,7 +62,7 @@ const CardRegistration = () => {
       password: SIGN.empty,
     });
 
-  const [showBack, setShowBack] = useState(false);
+  const [showPreviewCardBack, setShowPreviewCardBack] = useState(false);
 
   const completeStatus = isInputComplete(
     cardNumber,
@@ -80,8 +80,8 @@ const CardRegistration = () => {
   const router = useNavigate();
 
   useEffect(() => {
-    if (info.cvc) setShowBack(true);
-    if (info.cvc.length === CARD_INPUT_LENGTH.cvc) setShowBack(false);
+    if (info.cvc) setShowPreviewCardBack(true);
+    if (info.cvc.length === CARD_INPUT_LENGTH.cvc) setShowPreviewCardBack(false);
   }, [info.cvc]);
 
   const formatExpirationPeriod = () =>
@@ -174,7 +174,7 @@ const CardRegistration = () => {
 
   return (
     <PaymentsContainer>
-      {!showBack ? (
+      {!showPreviewCardBack ? (
         <CreditCardFront
           creditCardNumber={[
             cardNumber.firstValue,
