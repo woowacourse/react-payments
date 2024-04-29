@@ -6,6 +6,7 @@ import { CardCompany } from '../../types/cardCompany';
 import getCardInnerContentColor from '../../utils/getCardInnerContentColor.js';
 import classNames from 'classnames';
 import globalStyles from '../global.module.css';
+import { memo } from 'react';
 
 type CardPreview = {
   cardNumbers: string[];
@@ -34,7 +35,7 @@ const CardPreview = ({ cardNumbers, expirationDate, ownerName, cardCompany, CVCN
           <div className={styles.ic_chip}></div>
           <div className={styles.chip__logo__wrapper}>
             <div className={styles.chip}></div>
-            <CardLogo cardNumbers={cardNumbers} />
+            <CardLogo firstCardNumberUnit={cardNumbers[0]} />
           </div>
           <div className={styles.card__info__container}>
             <CardNumbers cardNumbers={cardNumbers} />
@@ -55,14 +56,16 @@ const BackOfCardPreview = ({ CVCNumbers }: { CVCNumbers: string }) => {
   );
 };
 
-const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
+const CardLogo = memo(({ firstCardNumberUnit }: { firstCardNumberUnit: string }) => {
+  if (firstCardNumberUnit.length < 2) return;
+
   const cardStyle = styles.logo;
-  const cardType = getCardType(cardNumbers[0]);
+  const cardType = getCardType(firstCardNumberUnit);
 
   if (cardType === 'Normal') return <></>;
 
   return <img src={`./images/${cardType}.png`} className={cardStyle} />;
-};
+});
 
 const ExpirationDate = ({ expirationDate }: { expirationDate: Date }) => {
   const dateStringList = Object.values(expirationDate);
