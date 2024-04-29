@@ -10,13 +10,12 @@ type CardNumberInputField = {
   errorMessages: string[];
 };
 
-// TODO: 엔터하면 넘어가는걸로 통일하는게 좋을 것 같음.
 export default function CardNumbersInputField({ cardNumbers, handleCardNumbers, errorMessages }: CardNumberInputField) {
-  const inputRefs = useRef<null[] | HTMLInputElement[]>([]); // ref를 배열로 관리
+  const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
   const handleFocus = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.value.length === CARD_NUMBERS_UNIT_LENGTH && index !== cardNumbers.length - 1) {
-      inputRefs.current[index + 1]?.focus(); // TODO: 제거가 가능한가?
+      inputRefs.current[index + 1]?.focus();
     }
   };
 

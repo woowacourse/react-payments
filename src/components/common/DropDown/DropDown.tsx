@@ -2,7 +2,7 @@ import Input from '../Input/Input';
 import styles from '../../../App.module.css';
 import dropDownStyles from './DropDown.module.css';
 import { useState } from 'react';
-import arrow from '../../../assets/image/arrow.svg';
+import arrow from '/images/arrow.svg';
 
 type DropDown<T extends string | number | symbol> = {
   itemList: Record<T, string>;
@@ -12,7 +12,6 @@ type DropDown<T extends string | number | symbol> = {
   isError: boolean;
 };
 
-// TODO: 타입 제거
 const DropDown = <T extends string | number | symbol>({
   itemList,
   placeholder,
@@ -26,7 +25,6 @@ const DropDown = <T extends string | number | symbol>({
     setIsOpen((prev) => !prev);
   };
 
-  // TODO: 리펙터링
   return (
     <div className={styles.wrapper}>
       <div
@@ -34,7 +32,6 @@ const DropDown = <T extends string | number | symbol>({
         onClick={() => {
           handleIsOpen();
 
-          // 열려있는 상태에서 아무것도 선택하지 않고 닫을 때
           if (isOpen) handleSelectItem(null);
         }}>
         <Input

@@ -7,7 +7,6 @@ interface BottomButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: ButtonType;
 }
 
-// TODO: 컬러는 css로 분리
 const BottomButton = (props: BottomButton) => {
   const { name, buttonType = 'confirm', ...rest } = props;
 

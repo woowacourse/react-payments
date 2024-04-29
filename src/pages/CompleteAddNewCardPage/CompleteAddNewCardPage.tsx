@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import checkCircle from '../../assets/image/checkCircle.svg';
+import checkCircle from '../../../public/images/checkCircle.svg';
 import Button from '../../components/common/Button/Button';
 import { COMPANY_LIST, CardCompany } from '../../types/cardCompany';
 import styles from './CompleteAddNewCardPage.module.css';

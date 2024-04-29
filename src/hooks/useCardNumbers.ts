@@ -8,8 +8,6 @@ const useCardNumbers = () => {
   const { errorMessages, setErrorMessages } = useErrorMessages<string>(cardNumbers.length, '');
   const [isValid, setIsValid] = useState(false);
 
-  // 값과, 에러가 났는지, 업데이트, (유효성 검사)
-
   const updateCardNumbers = (index: number, cardNumber: string) => {
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = cardNumber;
@@ -73,9 +71,3 @@ const useCardNumbers = () => {
 };
 
 export default useCardNumbers;
-
-/**
- * isValid: errorMessage만으로 처리하기엔 입력 안된 값들과 혼동될 여지 존재
- * value
- * errorMessage
- */

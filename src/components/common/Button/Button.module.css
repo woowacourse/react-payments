@@ -13,7 +13,6 @@
   max-width: 500px;
 }
 
-/* TODO: bottomButton과 겹치는 스타일링. 글로벌로 빼기엔 너무 광범위? */
 .button.confirm {
   background-color: black;
   color: white;

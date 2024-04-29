@@ -32,9 +32,6 @@
   background-color: var(--shinhan-color);
 }
 
-/* TODO: 카카오 말고도 밝은 색상의 카드 회사가 많아지만 리펙토링 필요
-지나치게 도메인 의존적인 클래스 네이밍
-*/
 .card.kakao {
   background-color: var(--kakao-color);
 }

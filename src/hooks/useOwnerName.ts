@@ -22,7 +22,6 @@ const useOwnerName = () => {
     return '';
   };
 
-  // TODO: 하나의 함수에서 키 입력까지 다루는게 맞는가? 지금 설계가 함수를 추가하기가 form훅때문에 어려움. 수정요망
   const handleOwnerNameChange = (e: ChangeEvent<HTMLInputElement>, isKeyEnter?: boolean) => {
     const upperCaseName = e.target.value.toUpperCase();
     const engName = filterEnglish(upperCaseName);
