@@ -15,7 +15,6 @@ export default function CardExpirationDateInputField({
   handleExpirationDateChange,
   errorMessages,
 }: CardExpirationDateInputField) {
-  // TODO: 단일 ref로 변경
   const yearInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
