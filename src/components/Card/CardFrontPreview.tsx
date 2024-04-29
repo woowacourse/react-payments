@@ -61,13 +61,13 @@ const CardFrontPreview = ({
         </div>
         <div>
           {Object.values(date).map((date, i) => (
-            <span style={{ color: "white" }}>
+            <span>
               {date}
               {i < Object.values(date).length - 1 && "/"}
             </span>
           ))}
         </div>
-        <span style={{ color: "white" }}>{ownerName}</span>
+        <span>{ownerName}</span>
       </div>
     </div>
   );
