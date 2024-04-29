@@ -34,7 +34,7 @@ export const SelectedText = styled.span<SelectedTextProps>`
   color: ${props => (props.$value ? 'black' : '#acacac')};
 `;
 
-export const SelectOptions = styled.ul<OptionProps>`
+export const SelectOptions = styled.ul`
   position: absolute;
   list-style: none;
   top: 45px;

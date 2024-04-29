@@ -19,7 +19,7 @@ const Dropdown = ({ value, handleChange }: DropdownProps) => {
         {isOpen ? <ArrowDown /> : <ArrowUp />}
       </S.LabelWrapper>
       {isOpen && (
-        <S.SelectOptions $show={isOpen}>
+        <S.SelectOptions>
           {CARD_OPTIONS.map(data => (
             <S.Option key={data.value} data-value={data.value} onClick={handleChange}>
               {data.label}
