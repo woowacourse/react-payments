@@ -1,8 +1,8 @@
+import { CardIssuer, cardIssuerMapper } from "../../../constants/cardIssuers";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { CardInformationValueState } from "../../../hooks/useCardEnrollForm";
 import CompleteImg from "../../../static/Complete.png";
-import { cardIssuerMapper } from "../../../constants/cardIssuers";
 import styled from "styled-components";
 
 /**
@@ -15,7 +15,7 @@ import styled from "styled-components";
 const getDummyData = (): CardInformationValueState => {
   return {
     cardNumbers: ["1234", "0000", "0000", "0000"],
-    cardIssuer: "kb-card",
+    cardIssuer: CardIssuer.KbCard,
     cardExpiration: { month: "00", year: "00" },
     cardOwnerName: "",
     cardCvc: "",

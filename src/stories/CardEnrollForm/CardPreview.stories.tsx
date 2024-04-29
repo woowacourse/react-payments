@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
+import { CardIssuer } from "../../constants/cardIssuers";
 import CardPreview from "../../components/payment/CardEnrollForm/CardPreview";
 
 const meta: Meta<typeof CardPreview> = {
@@ -13,7 +14,7 @@ export const Default: Story = {
   args: {
     cardInformation: {
       cardNumbers: ["5434", "5678", "9012", "3456"],
-      cardIssuer: "hyundai-card",
+      cardIssuer: CardIssuer.HyundaiCard,
       cardExpiration: {
         month: "12",
         year: "34",

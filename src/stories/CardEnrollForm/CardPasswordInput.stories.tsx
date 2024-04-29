@@ -12,7 +12,7 @@ type Story = StoryObj<typeof CardPasswordInput>;
 
 export const Default: Story = {
   render: () => {
-    const cardPasswordInputProps = useCardPassword();
+    const { cardPasswordInputProps } = useCardPassword();
 
     return <CardPasswordInput {...cardPasswordInputProps} />;
   },
