@@ -16,6 +16,6 @@ export const 카드사_선택_레이아웃: Story = {
   args: {
     title: '카드사를 선택해 주세요',
     subtitle: '현재 국내 카드사만 가능합니다.',
-    children: <Dropdown value="" handleChange={() => ''} />,
+    children: <Dropdown value="" handleSelect={() => ''} />,
   },
 };

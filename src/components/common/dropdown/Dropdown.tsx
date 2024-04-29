@@ -6,10 +6,10 @@ import ArrowDown from '../../../assets/images/arrow_down.svg?react';
 
 interface DropdownProps {
   value: string;
-  handleChange: (e: React.MouseEvent<HTMLLIElement>) => void;
+  handleSelect: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
 
-const Dropdown = ({ value, handleChange }: DropdownProps) => {
+const Dropdown = ({ value, handleSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ const Dropdown = ({ value, handleChange }: DropdownProps) => {
       {isOpen && (
         <S.SelectOptions>
           {CARD_OPTIONS.map(data => (
-            <S.Option key={data.value} data-value={data.value} onClick={handleChange}>
+            <S.Option key={data.value} data-value={data.value} onClick={handleSelect}>
               {data.label}
             </S.Option>
           ))}

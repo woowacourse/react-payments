@@ -46,5 +46,5 @@ export interface UseCardPasswordReturnType {
 
 export interface UseSelectReturnType<T> {
   value: T;
-  handleChange: (e: React.MouseEvent<HTMLLIElement>) => void;
+  handleSelect: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
