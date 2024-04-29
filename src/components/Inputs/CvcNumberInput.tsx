@@ -1,13 +1,13 @@
 import * as S from './common.style';
 import { CVC_NUMBER } from '../../constants/cardSection';
-import { UseInputReturn } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
-  cvc: UseInputReturn<HTMLInputElement>;
+  cvc: ReturnType<typeof useInput<HTMLInputElement>>;
   setNextContentDisplay: React.Dispatch<React.SetStateAction<boolean>>;
   setIsFlip: React.Dispatch<React.SetStateAction<boolean>>;
 }

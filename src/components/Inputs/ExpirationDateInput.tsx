@@ -1,14 +1,14 @@
 import * as S from './common.style';
 import { EXPIRATION_PERIOD } from '../../constants/cardSection';
-import { UseInputReturn } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
-  month: UseInputReturn<HTMLInputElement>;
-  year: UseInputReturn<HTMLInputElement>;
+  month: ReturnType<typeof useInput<HTMLInputElement>>;
+  year: ReturnType<typeof useInput<HTMLInputElement>>;
   setNextContentDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

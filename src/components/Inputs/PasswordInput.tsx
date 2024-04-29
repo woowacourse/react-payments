@@ -1,13 +1,13 @@
 import * as S from './common.style';
 import { PASSWORD } from '../../constants/cardSection';
-import { UseInputReturn } from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import InputLabel from '../composables/InputLabel';
 import { MAX_LENGTH } from '../../constants/rules';
+import useInput from '../../hooks/useInput';
 
 interface Props {
-  password: UseInputReturn<HTMLInputElement>;
+  password: ReturnType<typeof useInput<HTMLInputElement>>;
 }
 
 export default function PasswordInput({ password }: Props) {

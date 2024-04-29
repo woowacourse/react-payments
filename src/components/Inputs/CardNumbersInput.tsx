@@ -4,11 +4,11 @@ import { CARD_NUMBER } from '../../constants/cardSection';
 import InputSection from '../InputSection';
 import Input from '../composables/Input';
 import InputLabel from '../composables/InputLabel';
-import { UseInputReturn } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput';
 import { MAX_LENGTH } from '../../constants/rules';
 
 interface Props {
-  cardNumbersArray: UseInputReturn<HTMLInputElement>[];
+  cardNumbersArray: ReturnType<typeof useInput<HTMLInputElement>>[];
   setNextContentDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

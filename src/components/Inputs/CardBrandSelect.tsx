@@ -1,11 +1,11 @@
 import * as S from './common.style';
 import { CARD_COMPANY } from '../../constants/cardSection';
-import { UseInputReturn } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput';
 import InputSection from '../InputSection';
 import Select from '../composables/Select';
 
 interface Props {
-  cardCompany: UseInputReturn<HTMLSelectElement>;
+  cardCompany: ReturnType<typeof useInput<HTMLSelectElement>>;
   setNextContentDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
