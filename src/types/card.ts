@@ -10,4 +10,4 @@ export interface ExpiryDate {
   year: YY;
 }
 
-export type CARD_TYPE = keyof typeof CARD_COLOR;
+export type CardType = keyof typeof CARD_COLOR;

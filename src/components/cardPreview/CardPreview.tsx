@@ -1,5 +1,5 @@
 import CONDITION from '../../constants/condition';
-import { CARD_TYPE, CardNumberKey, ExpiryDate } from '../../types/card';
+import { CardType, CardNumberKey, ExpiryDate } from '../../types/card';
 import BackCardPreview from './BackCardPreview';
 import FrontCardPreview from './FrontCardPreview';
 import { CardPreviewLayout } from './CardPreview.styled';
@@ -8,7 +8,7 @@ interface CardPreviewProps {
   cardNumbers: Record<CardNumberKey, string>;
   expiryDate: ExpiryDate;
   cardholderName: string;
-  cardType: CARD_TYPE;
+  cardType: CardType;
   cvc: string;
   isCardFront: boolean;
   setIsCardFront: React.Dispatch<React.SetStateAction<boolean>>;

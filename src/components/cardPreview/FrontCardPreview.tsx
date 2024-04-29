@@ -1,13 +1,13 @@
 import MasterCard from '../../../src/assets/images/mastercard.png';
 import VisaCard from '../../../src/assets/images/visa.png';
-import { CARD_TYPE, CardNumberKey, ExpiryDate } from '../../types/card';
+import { CardType, CardNumberKey, ExpiryDate } from '../../types/card';
 import * as S from './CardPreview.styled';
 
 interface FrontCardPreviewProps {
   cardNumbers: Record<CardNumberKey, string>;
   expiryDate: ExpiryDate;
   cardholderName: string;
-  cardType: CARD_TYPE;
+  cardType: CardType;
   isVisa: boolean;
   isMaster: boolean;
 }

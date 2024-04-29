@@ -1,5 +1,5 @@
 import CONDITION from '../constants/condition';
-import { CARD_TYPE } from '../types/card';
+import { CardType } from '../types/card';
 import {
   UseCVCReturnType,
   UseCardNumberReturnType,
@@ -23,7 +23,7 @@ const isValidCardNumberForm = (cardNumberInfo: UseCardNumberReturnType) => {
   return isValidLength && isFirst && isSecond && isThird && isFourth;
 };
 
-const isValidCardCompanyForm = (cardCompanyInfo: UseSelectReturnType<CARD_TYPE>) => {
+const isValidCardCompanyForm = (cardCompanyInfo: UseSelectReturnType<CardType>) => {
   return cardCompanyInfo.value.length > CONDITION.TEXT_LENGTH_MIN;
 };
 

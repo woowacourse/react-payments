@@ -6,7 +6,7 @@ import {
   UseExpiryDateReturnType,
   UseSelectReturnType,
 } from '../../types/hooks';
-import { CARD_TYPE } from '../../types/card';
+import { CardType } from '../../types/card';
 
 import useCardNumberFormStatus from './useCardNumberFormStatus';
 import useCardCompanyFormStatus from './useCardCompanyFormStatus';
@@ -17,7 +17,7 @@ import useCardPasswordFormStatus from './useCardPasswordFormStatus';
 
 interface UseFormValidationProps {
   cardNumberInfo: UseCardNumberReturnType;
-  cardCompanyInfo: UseSelectReturnType<CARD_TYPE>;
+  cardCompanyInfo: UseSelectReturnType<CardType>;
   expiryDateInfo: { month: UseExpiryDateReturnType; year: UseExpiryDateReturnType };
   cardholderNameInfo: UseCardholderNameReturnType;
   cardCVCInfo: UseCVCReturnType;

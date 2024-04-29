@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { isValidCardCompanyForm } from '../../validator/validateForm';
 import { UseSelectReturnType } from '../../types/hooks';
-import { CARD_TYPE } from '../../types/card';
+import { CardType } from '../../types/card';
 
-const useCardCompanyFormStatus = (cardCompanyInfo: UseSelectReturnType<CARD_TYPE>) => {
+const useCardCompanyFormStatus = (cardCompanyInfo: UseSelectReturnType<CardType>) => {
   const isCardCompanyValid = isValidCardCompanyForm(cardCompanyInfo);
   const [cardCompanyFormStatus, setCardCompanyFormStatus] = useState({
     isValid: isCardCompanyValid,

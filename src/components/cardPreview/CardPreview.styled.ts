@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { CARD_COLOR } from '../../constants/card';
-import { CARD_TYPE } from '../../types/card';
+import { CardType } from '../../types/card';
 
 interface FrontCardPreviewLayoutProps {
-  $cardType: CARD_TYPE;
+  $cardType: CardType;
 }
 
 interface CardPreviewLayoutProps {
