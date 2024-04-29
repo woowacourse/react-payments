@@ -14,7 +14,10 @@ const validateCardholderName = (cardholderName: string): ErrorDetail => {
   const containSideBlankOrMultipleBlanks = !/^(?!\s)(?!.*\s\s)(?!.*\s$)/.test(cardholderName);
 
   if (containSideBlankOrMultipleBlanks) {
-    return { isError: true, errorMessage: '양 끝에 공백이 포함되면 안 되며, 사이 공백의 길이는 최대 1입니다.' };
+    return {
+      isError: true,
+      errorMessage: '양 끝에 공백이 포함되면 안 되며, 사이 공백의 길이는 최대 1입니다.',
+    };
   }
 
   return { isError: false, errorMessage: '' };

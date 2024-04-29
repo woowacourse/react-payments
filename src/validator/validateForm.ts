@@ -11,14 +11,20 @@ import {
 
 const isValidCardNumberForm = (cardNumberInfo: UseCardNumberReturnType) => {
   const { first, second, third, fourth } = cardNumberInfo.errorInfo;
-  const { first: firstValue, second: secondValue, third: thirdValue, fourth: fourthValue } = cardNumberInfo.value;
+  const {
+    first: firstValue,
+    second: secondValue,
+    third: thirdValue,
+    fourth: fourthValue,
+  } = cardNumberInfo.value;
 
   const isFirst = Boolean(firstValue) && !first.isError;
   const isSecond = Boolean(secondValue) && !second.isError;
   const isThird = Boolean(thirdValue) && !third.isError;
   const isFourth = Boolean(fourthValue) && !fourth.isError;
 
-  const totalLength = firstValue.length + secondValue.length + thirdValue.length + fourthValue.length;
+  const totalLength =
+    firstValue.length + secondValue.length + thirdValue.length + fourthValue.length;
   const isValidLength = totalLength === CONDITION.TOTAL_CARD_NUMBER_LENGTH;
   return isValidLength && isFirst && isSecond && isThird && isFourth;
 };
@@ -27,7 +33,10 @@ const isValidCardCompanyForm = (cardCompanyInfo: UseSelectReturnType<CardType>) 
   return cardCompanyInfo.value.length > CONDITION.TEXT_LENGTH_MIN;
 };
 
-const isValidExpiryDateForm = (expiryDateInfo: { month: UseExpiryDateReturnType; year: UseExpiryDateReturnType }) => {
+const isValidExpiryDateForm = (expiryDateInfo: {
+  month: UseExpiryDateReturnType;
+  year: UseExpiryDateReturnType;
+}) => {
   const { month, year } = expiryDateInfo;
   const isValidMonth = Boolean(month.value) && !month.errorInfo.isError;
   const isValidYear = Boolean(year.value) && !year.errorInfo.isError;
