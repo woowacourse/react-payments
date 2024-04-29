@@ -8,16 +8,19 @@ import ConfirmPage from './pages/ConfirmPage.tsx';
 
 import GlobalStyle from './Global.style.ts';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    Component: MainPage,
-  },
-  {
-    path: '/register-confirm',
-    Component: ConfirmPage,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: MainPage,
+    },
+    {
+      path: '/register-confirm',
+      Component: ConfirmPage,
+    },
+  ],
+  { basename: import.meta.env.BASE_URL },
+);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
