@@ -1,4 +1,4 @@
-import Dropdown from "./common/Dropdown";
+import Dropdown from "../common/Dropdown";
 
 interface InputCreditCardCompanyProps {
   selectedCompany: string;

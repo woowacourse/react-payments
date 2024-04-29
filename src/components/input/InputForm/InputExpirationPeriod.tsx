@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { ExpirationPeriodValue } from "../../@types/CreditCard";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
-import InputBox from "./common/InputBox";
+import { ExpirationPeriodValue } from "../../../@types/CreditCard";
+import CARD_FORM_MESSAGE from "../../../constants/cardFormMessage";
+import CARD_INPUTBOX_NAME from "../../../constants/cardInputBoxName";
+import InputBox from "../common/InputBox";
 
 interface InputExpirationPeriodProps {
   inputValue: ExpirationPeriodValue;

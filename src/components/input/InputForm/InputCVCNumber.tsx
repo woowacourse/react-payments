@@ -1,32 +1,33 @@
 import styled from "@emotion/styled";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
-import InputBox from "./common/InputBox";
+import CARD_FORM_MESSAGE from "../../../constants/cardFormMessage";
+import CARD_INPUTBOX_NAME from "../../../constants/cardInputBoxName";
+import InputBox from "../common/InputBox";
 
-interface InputCardPasswordProps {
+interface InputCVCNumberProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputError: boolean;
+  onClick: () => void;
 }
 
-const InputCardPassword = ({ inputValue, handleChange, inputError }: InputCardPasswordProps) => {
+const InputCVCNumber = ({ inputValue, handleChange, inputError, onClick }: InputCVCNumberProps) => {
   return (
-    <InputContainer>
-      <InputLabel htmlFor="password">{CARD_FORM_MESSAGE.cardPassword}</InputLabel>
+    <InputContainer onClick={onClick}>
+      <InputLabel htmlFor="cvcNumber">{CARD_FORM_MESSAGE.inputCardCVC}</InputLabel>
       <InputBox
         inputValue={inputValue}
         handleChange={handleChange}
         size="large"
-        placeholder="**"
-        id="password"
-        name={CARD_INPUTBOX_NAME.password.number}
+        placeholder="123"
+        id="cvcNumber"
+        name={CARD_INPUTBOX_NAME.cvc.number}
         isError={inputError}
       />
     </InputContainer>
   );
 };
 
-export default InputCardPassword;
+export default InputCVCNumber;
 
 const InputContainer = styled.div`
   display: flex;

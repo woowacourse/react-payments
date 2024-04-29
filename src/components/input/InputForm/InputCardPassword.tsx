@@ -1,32 +1,32 @@
 import styled from "@emotion/styled";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
-import InputBox from "./common/InputBox";
+import CARD_FORM_MESSAGE from "../../../constants/cardFormMessage";
+import CARD_INPUTBOX_NAME from "../../../constants/cardInputBoxName";
+import InputBox from "../common/InputBox";
 
-interface InputOwnerNameProps {
+interface InputCardPasswordProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputError: boolean;
 }
 
-const InputOwnerName = ({ inputValue, handleChange, inputError }: InputOwnerNameProps) => {
+const InputCardPassword = ({ inputValue, handleChange, inputError }: InputCardPasswordProps) => {
   return (
     <InputContainer>
-      <InputLabel htmlFor="ownerName">{CARD_FORM_MESSAGE.cardOwner}</InputLabel>
+      <InputLabel htmlFor="password">{CARD_FORM_MESSAGE.cardPassword}</InputLabel>
       <InputBox
         inputValue={inputValue}
         handleChange={handleChange}
         size="large"
-        placeholder="JOHN DOE"
-        id="ownerName"
-        name={CARD_INPUTBOX_NAME.owner.name}
+        placeholder="**"
+        id="password"
+        name={CARD_INPUTBOX_NAME.password.number}
         isError={inputError}
       />
     </InputContainer>
   );
 };
 
-export default InputOwnerName;
+export default InputCardPassword;
 
 const InputContainer = styled.div`
   display: flex;
