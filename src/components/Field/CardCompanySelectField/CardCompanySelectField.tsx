@@ -36,11 +36,11 @@ export default function CardCompanySelectField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    const currentState = cardCompanyName != "";
-    updatedIsCompletedSections[1] = currentState;
+    const isInputCompleted = cardCompanyName != "";
+    updatedIsCompletedSections[1] = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
     const updatedIsOpenForm = [...isOpenForm];
-    if (currentState === true) {
+    if (isInputCompleted === true) {
       updatedIsOpenForm[2] = true;
     }
     setIsOpenForm(updatedIsOpenForm);

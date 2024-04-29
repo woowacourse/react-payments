@@ -92,11 +92,11 @@ export default function CardNumbersInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    const currentState = cardNumbers.every((num) => num.length === 4);
-    updatedIsCompletedSections[0] = currentState;
+    const isInputCompleted = cardNumbers.every((num) => num.length === 4);
+    updatedIsCompletedSections[0] = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
     const updatedIsOpenForm = [...isOpenForm];
-    if (currentState === true) {
+    if (isInputCompleted === true) {
       updatedIsOpenForm[1] = true;
     }
     setIsOpenForm(updatedIsOpenForm);

@@ -54,11 +54,11 @@ export default function CardCVCInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    const currentState = cardCVC.length == 3;
-    updatedIsCompletedSections[4] = currentState;
+    const isInputCompleted = cardCVC.length == 3;
+    updatedIsCompletedSections[4] = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
     const updatedIsOpenForm = [...isOpenForm];
-    if (currentState === true) {
+    if (isInputCompleted === true) {
       updatedIsOpenForm[5] = true;
     }
     setIsOpenForm(updatedIsOpenForm);

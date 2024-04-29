@@ -63,9 +63,9 @@ export default function CardOwnerNameInputField({
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const currentState = ownerName.length !== 0;
+      const isInputCompleted = ownerName.length !== 0;
       const updatedIsOpenForm = [...isOpenForm];
-      if (currentState === true) {
+      if (isInputCompleted === true) {
         updatedIsOpenForm[4] = true;
       }
       setIsOpenForm(updatedIsOpenForm);
@@ -73,9 +73,9 @@ export default function CardOwnerNameInputField({
   };
 
   useEffect(() => {
-    const currentState = ownerName.length !== 0;
+    const isInputCompleted = ownerName.length !== 0;
     const updatedIsCompletedSections = [...isCompletedSections];
-    updatedIsCompletedSections[3] = currentState;
+    updatedIsCompletedSections[3] = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
   }, [ownerName]);
 

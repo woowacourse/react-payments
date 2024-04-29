@@ -79,15 +79,15 @@ export default function CardExpirationDateInputField({
 
   useEffect(() => {
     const updatedIsCompletedSections = [...isCompletedSections];
-    const currentState =
+    const isInputCompleted =
       date.month.length == 2 &&
       date.year.length == 2 &&
       !errorMessages.monthError &&
       !errorMessages.yearError;
-    updatedIsCompletedSections[2] = currentState;
+    updatedIsCompletedSections[2] = isInputCompleted;
     setIsCompletedSections(updatedIsCompletedSections);
     const updatedIsOpenForm = [...isOpenForm];
-    if (currentState === true) {
+    if (isInputCompleted === true) {
       updatedIsOpenForm[3] = true;
     }
     setIsOpenForm(updatedIsOpenForm);
