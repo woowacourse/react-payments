@@ -24,10 +24,10 @@ const CardOwnerField = () => {
   const firstInput = useContextWrapper(CardOwnerInputContext)[0];
   const nextFieldInput = useContextWrapper(CardCVCInputContext)[0];
 
-  const ENTER_KEY_CODE = 13;
+  const ENTER_KEY_CODE = "Enter";
   useEffect(() => {
     const keydownEvent = (e: KeyboardEvent) => {
-      if (isOwnerValid(cardOwner, cardOwnerError) && e.keyCode === ENTER_KEY_CODE) {
+      if (isOwnerValid(cardOwner, cardOwnerError) && e.key === ENTER_KEY_CODE) {
         setRenderOrder.next("cardOwner");
         nextFieldInput.current?.focus();
       }

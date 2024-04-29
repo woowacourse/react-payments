@@ -16,8 +16,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   maxLength: number;
 }
 
-const ENTER_KEY_CODE = 13;
-const TAB_KEY_CODE = 9;
+const ENTER_KEY_CODE = "Enter";
+const TAB_KEY_CODE = "Tab";
 
 const FormInputCompound = forwardRef(function FormInputCompound(
   {
@@ -36,7 +36,7 @@ const FormInputCompound = forwardRef(function FormInputCompound(
 ) {
   useEffect(() => {
     const event = (e: KeyboardEvent) => {
-      if (e.keyCode === ENTER_KEY_CODE || e.keyCode === TAB_KEY_CODE) {
+      if (e.key === ENTER_KEY_CODE || e.key === TAB_KEY_CODE) {
         e.preventDefault();
         nextRef?.current?.focus();
       }
