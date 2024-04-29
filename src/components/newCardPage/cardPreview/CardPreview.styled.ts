@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CardCompany } from "../../../types/type";
 
-export const TYPE_COMPANY = {
+export const CARD_COMPANY_COLOR: Record<CardCompany, string> = {
   BC카드: "#f04651",
   신한카드: "#0046FF",
   카카오뱅크: "#FFE600",
@@ -30,7 +30,7 @@ export const FrontCard = styled.div<CardPreviewContainerProps>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: ${(props) => (props.cardCompany ? TYPE_COMPANY[props.cardCompany] : "#333333")};
+  background: ${(props) => (props.cardCompany ? CARD_COMPANY_COLOR[props.cardCompany] : "#333333")};
   box-shadow: 3px 3px 5px 0px #00000040;
   margin: auto;
   margin-top: 77px;
