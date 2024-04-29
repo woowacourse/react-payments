@@ -8,13 +8,6 @@ export default function CardRegisterCompletePage() {
   const navigate = useNavigate();
 
   const { firstFourCardNumberDigits, brand } = location.state;
-  const successMessage = (
-    <p>
-      {firstFourCardNumberDigits}로 시작하는
-      <br />
-      {brand}가 등록되었어요.
-    </p>
-  );
 
   const handleClickCompleteButton = () => {
     navigate(ENDPOINTS.cardRegister);
@@ -23,7 +16,7 @@ export default function CardRegisterCompletePage() {
   return (
     <S.Container>
       <S.SuccessIcon />
-      <S.SuccessDescription>{successMessage}</S.SuccessDescription>
+      <S.SuccessDescription>{firstFourCardNumberDigits}로 시작하는<br />{brand}가 등록되었어요.</S.SuccessDescription>
       <S.CompleteButton onClick={handleClickCompleteButton}>확인</S.CompleteButton>
     </S.Container>
   );
