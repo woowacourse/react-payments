@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { cardBrandsType } from '../../types/cardBrands';
+import { CardBrandsType } from '../../types/CardBrandsType';
 import { CARD_BRANDS } from '../../constants/conditions';
 
-export const CardFrontside = styled.div<{ $brand: cardBrandsType }>`
+export const CardFrontside = styled.div<{ $brand: CardBrandsType }>`
   width: 212px;
   height: 132px;
   border-radius: 4px;
   padding: 8px 12px;
-  background-color: ${(props) => props.$brand ? CARD_BRANDS[props.$brand].color : 'var(--grey-600)'};
+  background-color: ${(props) => (props.$brand ? CARD_BRANDS[props.$brand].color : 'var(--grey-600)')};
   box-shadow: 3px 3px 5px 0px var(--card-shadow);
 
-  color: ${(props) => props.$brand === CARD_BRANDS.카카오뱅크.name ? 'var(--grey-700)' : 'var(--grey-100)'};
+  color: ${(props) => (props.$brand === CARD_BRANDS.카카오뱅크.name ? 'var(--grey-700)' : 'var(--grey-100)')};
   font-size: var(--font-size-xl);
   font-weight: 500;
   line-height: 20px;

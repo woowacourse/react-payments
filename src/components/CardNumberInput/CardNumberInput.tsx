@@ -5,10 +5,10 @@ import Input from '../common/Input/Input';
 import useInputAutoFocus from '../../hooks/useInputAutoFocus';
 
 import { CARD_NUMBER } from '../../constants/conditions';
-import { cardNumbersValidStatesType } from '../../types/cardNumbers';
+import { CardNumbersValidStatesType } from '../../types/CardNumbersTypes';
 
 interface CardNumberInputProps {
-  isCardNumbersValid: { validStates: cardNumbersValidStatesType; errorMessage: string };
+  isCardNumbersValid: { validStates: CardNumbersValidStatesType; errorMessage: string };
   onChangeCardNumbers: (inputIndex: number, value: string) => void;
 }
 

@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { CARD_BRANDS } from '../constants/conditions';
 import { ERROR_MESSAGE } from '../constants/messages';
-import { cardBrandsType } from '../types/cardBrands';
+import { CardBrandsType } from '../types/CardBrandsType';
 
 export default function useChangeBrand() {
-  const [brand, setBrand] = useState<cardBrandsType>('');
+  const [brand, setBrand] = useState<CardBrandsType>('');
   const [brandValid, setBrandValid] = useState({ isValid: true, isCompleted: false, errorMessage: '' });
 
   const handleChangeBrand = (value: string) => {
@@ -14,7 +14,7 @@ export default function useChangeBrand() {
 
     if (!isValidBrand.isValid && value !== '') return;
 
-    setBrand(value as cardBrandsType);
+    setBrand(value as CardBrandsType);
   };
 
   return { brand, brandValid, handleChangeBrand };

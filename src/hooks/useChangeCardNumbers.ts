@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/messages';
 import Validation from '../utils/Validation';
 import { CARD_NUMBER } from '../constants/conditions';
-import { cardNumbersType, cardNumbersValidType, cardNumbersValidStatesType } from '../types/cardNumbers';
+import { CardNumbersType, CardNumbersValidType, CardNumbersValidStatesType } from '../types/CardNumbersTypes';
 
 export default function useChangeCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<cardNumbersType>(['', '', '', '']);
-  const [cardNumbersValid, setCardNumbersValid] = useState<cardNumbersValidType>({
+  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
+  const [cardNumbersValid, setCardNumbersValid] = useState<CardNumbersValidType>({
     validStates: [true, true, true, true],
     isCompleted: false,
     errorMessage: '',
@@ -17,7 +17,7 @@ export default function useChangeCardNumbers() {
 
     const newCardNumbersValidStates = cardNumbersValid.validStates.map((prevState, index) =>
       index === inputIndex ? cardNumberValidationResult : prevState,
-    ) as cardNumbersValidStatesType;
+    ) as CardNumbersValidStatesType;
 
     const isAllInputsValid = newCardNumbersValidStates.every((isValid) => isValid === true);
     const newErrorMessage = isAllInputsValid ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
@@ -33,7 +33,7 @@ export default function useChangeCardNumbers() {
     setCardNumbers((prev) => {
       const newCardNumbers = [...prev];
       newCardNumbers[inputIndex] = value;
-      return newCardNumbers as cardNumbersType;
+      return newCardNumbers as CardNumbersType;
     });
   };
 

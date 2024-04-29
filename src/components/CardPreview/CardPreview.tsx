@@ -4,13 +4,13 @@ import { Visa, MasterCard, Dot, DotBlack } from '../../assets';
 import * as S from './CardPreview.style';
 
 import { CARD_BRANDS, CARD_NUMBER } from '../../constants/conditions';
-import { cardNumbersType } from '../../types/cardNumbers';
-import { cardBrandsType } from '../../types/cardBrands';
+import { CardNumbersType } from '../../types/CardNumbersTypes';
+import { CardBrandsType } from '../../types/CardBrandsType';
 import checkCardGlobalBrand from '../../utils/checkCardGlobalBrand';
 
 interface CardPreviewProps {
-  cardNumbers: cardNumbersType;
-  brand: cardBrandsType;
+  cardNumbers: CardNumbersType;
+  brand: CardBrandsType;
   month: string;
   year: string;
   owner: string;
@@ -37,7 +37,7 @@ export default function CardPreview({
     }
   }, [logoImage, cardNumbers]);
 
-  const handleLogoImage = (cardNumbers: cardNumbersType) => {
+  const handleLogoImage = (cardNumbers: CardNumbersType) => {
     if (checkCardGlobalBrand(cardNumbers[0]) === 'Visa') {
       return <img src={Visa} alt="비자 카드" />;
     }
@@ -51,7 +51,7 @@ export default function CardPreview({
     if (index <= 1) return `${number} `;
     return Array.from({ length: number.length }).map((_, idx) => {
       const img = brand && brand === CARD_BRANDS.카카오뱅크.name ? DotBlack : Dot;
-      return <img src={img} key={idx} alt="dot" />
+      return <img src={img} key={idx} alt="dot" />;
     });
   };
 
