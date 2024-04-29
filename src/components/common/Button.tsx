@@ -9,9 +9,9 @@ interface ButtonProps {
   bottom?: string;
 }
 
-const Button = ({ content, onClick, width, disabled }: ButtonProps) => {
+const Button = ({ content, onClick, width, position, bottom }: ButtonProps) => {
   return (
-    <ButtonContainer onClick={onClick} width={width} disabled={disabled}>
+    <ButtonContainer onClick={onClick} width={width} position={position} bottom={bottom}>
       {content}
     </ButtonContainer>
   );
