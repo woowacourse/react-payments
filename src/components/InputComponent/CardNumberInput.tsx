@@ -47,6 +47,9 @@ export default function CardNumberInput({
       if (e.target.value.length === CARD_NUMBER.FIELD_LENGTH && nextIndex < inputRefs.current.length) {
         inputRefs.current[nextIndex]?.focus();
       }
+      if(cardNumbers.isNextField && e.target.value.length !== CARD_NUMBER.FIELD_LENGTH){
+        throw new Error('4자리의 숫자를 입력해주세요');
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateCardNumberErrorMessages(index, error.message, true);

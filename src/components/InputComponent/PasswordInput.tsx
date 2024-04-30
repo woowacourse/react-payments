@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { Password } from '../../types/card';
+import { PASSWORD } from '../../constants/system';
 
 interface Props {
   password: Password;
@@ -37,6 +38,9 @@ export default function PasswordInput({
       Validation[info]?.(e.target.value);
       handleUpdatePasswordErrorMessages('', false);
       handleUpdatePasswordInput(e.target.value);
+      if(password.isNextField && e.target.value.length !== PASSWORD.FIELD_LENGTH){
+        throw new Error('2자리의 숫자를 입력해주세요');
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdatePasswordErrorMessages(error.message, true);

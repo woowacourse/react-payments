@@ -43,6 +43,9 @@ export default function UserNameInput({
       Validation[info]?.(e.target.value);
       handleUpdateUserNameErrorMessages('', false);
       handleUpdateUserNameInput(e.target.value);
+      if(userName.isNextField && e.target.value.length === 0){
+        throw new Error('이름을 입력해주세요.');
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateUserNameErrorMessages(error.message, true);

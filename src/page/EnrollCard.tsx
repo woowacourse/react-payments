@@ -65,8 +65,7 @@ export default function EnrollCard() {
     CVC,
     password,
   });
-  console.log(password);
-
+  
   return (
     <Page>
       <Container onSubmit={handleSubmit}>

@@ -38,6 +38,9 @@ export default function CVCInput({
       Validation[info]?.(e.target.value);
       handleUpdateCVCErrorMessages('', false);
       handleUpdateCVCInput(e.target.value);
+      if(CVC.isNextField && e.target.value.length !== CVC_LIMIT.FIELD_LENGTH){
+        throw new Error('3자리의 숫자를 입력해주세요');
+      }
     } catch (error) {
       if (error instanceof Error) {
         handleUpdateCVCErrorMessages(error.message, true);
