@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CreditCard from ".";
+import CreditCardFront from ".";
 
 const meta = {
-  title: "CreditCard",
-  component: CreditCard,
+  title: "Payment/CreditCardFront",
+  component: CreditCardFront,
   parameters: {
     layout: "centered",
     docs: {
@@ -23,7 +23,7 @@ const meta = {
       description: "카드 소유자 이름",
     },
   },
-} satisfies Meta<typeof CreditCard>;
+} satisfies Meta<typeof CreditCardFront>;
 
 export default meta;
 

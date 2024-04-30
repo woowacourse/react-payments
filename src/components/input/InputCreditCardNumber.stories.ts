@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputCreditCardNumber from "./InputCreditCardNumber";
 
-const meta: Meta = {
-  title: "InputCreditCardNumber",
+const meta = {
+  title: "Payment/InputCreditCardNumber",
   component: InputCreditCardNumber,
   parameters: {
     layout: "centered",
@@ -19,11 +19,14 @@ const meta: Meta = {
     handleChange: {
       description: "카드 번호 핸들러",
     },
+    handleBlur: {
+      description: "카드 번호 블러 핸들러",
+    },
     inputError: {
       description: "에러 발생 여부",
     },
   },
-};
+} satisfies Meta<typeof InputCreditCardNumber>;
 
 export default meta;
 
@@ -46,6 +49,8 @@ export const Default: Story = {
       fourthValue: "",
     },
     handleChange: () => {},
+    handleBlur: () => {},
     inputError: false,
+    id: "creditCardNumber",
   },
 };

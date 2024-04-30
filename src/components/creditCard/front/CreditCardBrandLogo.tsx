@@ -1,5 +1,5 @@
-import { CardNumber } from "../../@types/CreditCard";
-import CARD_THRESHOLD from "../../constants/cardThreshold";
+import { CardNumber } from "../../../@types/CreditCard";
+import CARD_THRESHOLD from "../../../constants/cardThreshold";
 import styled from "@emotion/styled";
 import VisaCard from "/public/img/Visa.png";
 import MasterCard from "/public/img/Mastercard.png";

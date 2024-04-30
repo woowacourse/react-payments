@@ -3,11 +3,14 @@ import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { CardNumberValue } from "../../@types/CreditCard";
 import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
+import THEME from "../../styles/theme";
 
 interface InputCreditCardNumberProps {
   inputValue: CardNumberValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   inputError: boolean;
+  id: string;
 }
 
 interface InputboxData {
@@ -18,7 +21,9 @@ interface InputboxData {
 const InputCreditCardNumber = ({
   inputValue,
   handleChange,
+  handleBlur,
   inputError,
+  id,
 }: InputCreditCardNumberProps) => {
   const inputboxData: InputboxData[] = [
     {
@@ -45,13 +50,16 @@ const InputCreditCardNumber = ({
       <InputWrapper>
         {inputboxData.map((data, idx) => (
           <InputBox
+            key={`creditCardNumber${idx + 1}`}
             inputValue={data.inputValue}
             handleChange={handleChange}
+            onBlur={handleBlur}
             size="small"
             placeholder="1234"
-            id={`creditCardNumber${idx + 1}`}
+            id={`${id}${idx + 1}`}
             name={data.name}
             isError={inputError}
+            autoFocus={idx === 0}
           />
         ))}
       </InputWrapper>
@@ -72,7 +80,7 @@ const InputLabel = styled.label`
   font-weight: 500;
   line-height: 15px;
   text-align: left;
-  color: rgba(10, 13, 19, 1);
+  color: ${THEME.DEFAULT.black};
   margin-bottom: 8px;
 `;
 

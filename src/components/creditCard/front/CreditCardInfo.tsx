@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import { CreditCardProps, CreditCardNumber } from "../../@types/CreditCard";
-import replaceToMaskingNumber from "../../utils/replaceToMaskingNumber";
+import { CreditCardProps, CreditCardNumber } from "../../../@types/CreditCard";
+import replaceToMaskingNumber from "../../../utils/replaceToMaskingNumber";
 import { useMemo } from "react";
+import THEME from "../../../styles/theme";
 
 const maskLastEightDigits = (creditCardNumber: CreditCardNumber) => {
   const digitKeys = ["firstNumber", "secondNumber", "thirdNumber", "fourthNumber"];
@@ -28,7 +29,7 @@ const CreditCardInfo = ({ creditCardNumber, expirationPeriod, ownerName }: Credi
     <CreditCardInfoContainer>
       <CreditCardInfoWrapper>{maskedCreditCardNumber}</CreditCardInfoWrapper>
       <CreditCardExpirationPeriod>{expirationPeriod}</CreditCardExpirationPeriod>
-      <CreditCardOwnerInfo>{ownerName}</CreditCardOwnerInfo>
+      <CreditCardOwnerInfo>{ownerName.toUpperCase()}</CreditCardOwnerInfo>
     </CreditCardInfoContainer>
   );
 };
@@ -42,7 +43,7 @@ const CreditCardInfoContainer = styled.div`
   line-height: 20px;
   letter-spacing: 0.16em;
   text-align: left;
-  color: rgba(255, 255, 255, 1);
+  color: ${THEME.DEFAULT.white};
   display: flex;
   flex-direction: column;
   gap: 6px;

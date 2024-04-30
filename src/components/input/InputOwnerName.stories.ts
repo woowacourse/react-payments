@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import InputOwnerName from "./InputOwnerName";
 
 const meta = {
-  title: "InputOwnerName",
+  title: "Payment/InputOwnerName",
   component: InputOwnerName,
   parameters: {
     layout: "centered",
@@ -18,6 +18,9 @@ const meta = {
     },
     handleChange: {
       description: "카드 소유자 이름 핸들러",
+    },
+    handleBlur: {
+      description: "카드 소유자 이름 블러 핸들러",
     },
     inputError: {
       description: "에러 발생 여부",
@@ -41,6 +44,8 @@ export const Default: Story = {
   args: {
     inputValue: "",
     handleChange: () => {},
+    handleBlur: () => {},
     inputError: false,
+    id: "ownerName",
   },
 };
