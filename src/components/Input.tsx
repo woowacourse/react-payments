@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { InputInfo } from '../types/input';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import { useInput } from '../hooks/useInput';
 import { InputValidation, validateLength } from '../domain/InputValidation';
 
@@ -13,18 +13,12 @@ interface Props {
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { info, isError, onNext } = props;
-  const { value, handleChange, handleBlur, handleKeyDown } = useInput({
+  const { info, isError } = props;
+  const { handleChange, handleBlur, handleKeyDown } = useInput({
     ...props,
     validate: InputValidation[info.validateType],
     validateLength: (value) => validateLength(value, info.minLength),
   });
-
-  useEffect(() => {
-    if (value.length === info.maxLength) {
-      onNext();
-    }
-  }, [value]);
 
   return (
     <StyledInput
@@ -33,7 +27,7 @@ export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
       type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
-      onChange={handleChange}
+      onChange={(e) => handleChange(e, info.maxLength)}
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
     />

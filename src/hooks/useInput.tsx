@@ -18,13 +18,20 @@ export const useInput = ({
 }: Props) => {
   const [value, setValue] = useState<string>('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    maxLength: number
+  ) => {
     const inputValue = e.target.value;
     handleTryCatch(() => {
       validate(inputValue);
       setValue(inputValue);
       handleInput(inputValue);
       handleErrorMessage('');
+
+      if (inputValue.length === maxLength) {
+        onNext();
+      }
     });
   };
 
@@ -56,7 +63,6 @@ export const useInput = ({
   };
 
   return {
-    value,
     handleChange,
     handleBlur,
     handleKeyDown,
