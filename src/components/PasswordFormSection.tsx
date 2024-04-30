@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 import validateAndCheckError from '../domains/validateAndCheckError';
 import checkError from '../domains/checkError';
@@ -19,15 +18,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
-  text-transform: uppercase;
-`;
-
-const NameFormSection = ({
-  changeName,
+const PasswordFormSection = ({
+  changePassword,
   changeIsValid,
 }: {
-  changeName: (name: string) => void;
+  changePassword: (password: string) => void;
   changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
@@ -40,11 +35,10 @@ const NameFormSection = ({
     setBlur,
     resetErrors,
   } = useInput({
-    inputLength: OPTION.nameInputCount,
-    maxLength: OPTION.nameMaxLength,
-    regex: REGEX.name,
-    errorText: ERROR_MESSAGE.onlyEnglish,
-    betweenMaxLength: true,
+    inputLength: OPTION.passwordInputCount,
+    maxLength: OPTION.passwordMaxLength,
+    regex: REGEX.numbers,
+    errorText: ERROR_MESSAGE.onlyNumber,
   });
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -54,8 +48,8 @@ const NameFormSection = ({
         setInputState,
         setErrorMessage,
         changeIsValid,
-        stateText: 'name',
-        errorText: ERROR_MESSAGE.nameOutOfRange,
+        stateText: 'password',
+        errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
     }
   };
@@ -68,38 +62,42 @@ const NameFormSection = ({
         setInputState,
         setErrorMessage,
         changeIsValid,
-        stateText: 'name',
-        errorText: ERROR_MESSAGE.nameOutOfRange,
+        stateText: 'password',
+        errorText: ERROR_MESSAGE.passwordOutOfRange,
       });
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {
-    changeName(inputState[0].value);
-  }, [inputState[0].value]);
-
-  useEffect(() => {
     changeIsValid({
-      state: 'name',
+      state: 'password',
       isValid: checkError(inputState),
     });
   }, [!inputState[0].hasFocus]);
 
+  useEffect(() => {
+    changePassword(inputState[0].value);
+  }, [inputState[0].value]);
+
   return (
     <FormSection>
-      <PaymentsFormTitle title="카드 소유자 이름을 입력해 주세요" />
+      <PaymentsFormTitle
+        title="비밀번호를 입력해 주세요"
+        subTitle="앞의 2자리를 입력해주세요"
+      />
       <InputForm>
-        <Label>소유자 이름</Label>
+        <Label>비밀번호 앞 2자리</Label>
         <InputFieldContainer className="input-field-container">
-          <PaymentsInputFieldUppercase
-            className="name-form-section"
-            placeholder="FAMILY / GIVEN"
-            maxLength={OPTION.nameMaxLength}
+          <PaymentsInputField
+            className="password-form-section"
+            placeholder="••"
+            maxLength={OPTION.passwordMaxLength}
             value={inputState[0].value}
             hasError={inputState[0].hasError}
             handleValueChange={(e) => handleValueChange(e, 0)}
             handleOnFocus={() => setFocus(0)}
             handleOnBlur={() => setBlur(0)}
             onEnter={(e) => handleKeyPress(e)}
+            type="password"
           />
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
@@ -108,4 +106,4 @@ const NameFormSection = ({
   );
 };
 
-export default NameFormSection;
+export default PasswordFormSection;

@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import validateAndCheckError from '../domains/validateAndCheckError';
+import { validateExpired, formatMonth } from '../utils/validateExpirationDate';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
 
 import ERROR_MESSAGE from '../constants/errorMessage';
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 
 import {
@@ -19,10 +20,11 @@ import {
 
 const ExpirationDateFormSection = ({
   changeExpiration,
+  changeIsValid,
 }: {
   changeExpiration: ({ month, year }: ChangeExpirationProps) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
-  const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
   const {
     inputState,
     errorMessage,
@@ -39,55 +41,42 @@ const ExpirationDateFormSection = ({
     errorText: ERROR_MESSAGE.onlyNumber,
   });
 
-  const formatMonth = () => {
-    if (REGEX.oneToNine.test(inputState[0].value)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: '0' + prevState[0].value,
-          isFilled: true,
-        },
-      }));
-    } else if (REGEX.zero.test(inputState[0].value)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: OPTION.minMonth,
-        },
-      }));
-    } else if (
-      !REGEX.month.test(inputState[0].value) &&
-      inputState[0].value.length
-    ) {
-      setInputState((prevState) => ({
-        ...prevState,
-        0: {
-          ...prevState[0],
-          value: OPTION.maxMonth,
-        },
-      }));
+  const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const handleInputChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (e.target.value.length === OPTION.expirationDateMaxLength) {
+      if (inputRefs[index].current) {
+        inputRefs[index + 1].current?.focus();
+      }
     }
   };
 
-  const validateExpired = () => {
-    const inputExpirationDate = new Date(
-      `20${inputState[1].value}-${inputState[0].value}-01`,
-    );
-    const currentDate = new Date();
-
-    if (inputExpirationDate < currentDate) {
-      inputState[0].hasError = true;
-      inputState[1].hasError = true;
-      setErrorMessage(ERROR_MESSAGE.expiredCard);
-    } else {
-      setErrorMessage('');
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'expirationDate',
+        errorText: ERROR_MESSAGE.expiryFormat,
+        elseValidator: () => validateExpired({ inputState, setErrorMessage }),
+      });
     }
   };
 
   useEffect(() => {
-    formatMonth();
+    formatMonth({
+      inputState,
+      setInputState,
+    });
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {
@@ -100,12 +89,14 @@ const ExpirationDateFormSection = ({
   useEffect(() => {
     resetErrors();
     if (hasNoAllFocus) {
-      validateInputAndSetErrorMessage({
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'expirationDate',
         errorText: ERROR_MESSAGE.expiryFormat,
-        elseValidator: validateExpired,
+        elseValidator: () => validateExpired({ inputState, setErrorMessage }),
       });
     }
   }, [hasNoAllFocus]);
@@ -119,24 +110,22 @@ const ExpirationDateFormSection = ({
       <InputForm>
         <Label>유효기간</Label>
         <InputFieldContainer className="input-field-container">
-          <PaymentsInputField
-            placeholder="MM"
-            maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[0].value}
-            hasError={inputState[0].hasError}
-            handleValueChange={(e) => handleValueChange(e, 0)}
-            handleOnFocus={() => setFocus(0)}
-            handleOnBlur={() => setBlur(0)}
-          />
-          <PaymentsInputField
-            placeholder="YY"
-            maxLength={OPTION.expirationDateMaxLength}
-            value={inputState[1].value}
-            hasError={inputState[1].hasError}
-            handleValueChange={(e) => handleValueChange(e, 1)}
-            handleOnFocus={() => setFocus(1)}
-            handleOnBlur={() => setBlur(1)}
-          />
+          {['MM', 'YY'].map((placeholderText, index) => (
+            <PaymentsInputField
+              key={index}
+              placeholder={placeholderText}
+              maxLength={OPTION.cardNumberMaxLength}
+              value={inputState[index].value}
+              hasError={inputState[index].hasError}
+              handleValueChange={(e) => {
+                handleValueChange(e, index), handleInputChange(index, e);
+              }}
+              handleOnFocus={() => setFocus(index)}
+              handleOnBlur={() => setBlur(index)}
+              onEnter={(e) => handleKeyPress(e)}
+              ref={inputRefs[index]}
+            />
+          ))}
         </InputFieldContainer>
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </InputForm>

@@ -16,6 +16,9 @@ export const Default: Story = {
     expirationMonth: '04',
     expirationYear: '24',
     name: 'HONG GILDONG',
+    cvc: '123',
+    cardCompany: null,
+    password: '123',
   },
 };
 
@@ -25,6 +28,9 @@ export const Visa: Story = {
     expirationMonth: '04',
     expirationYear: '24',
     name: 'HONG GILDONG',
+    cvc: '123',
+    cardCompany: null,
+    password: '123',
   },
 };
 
@@ -34,6 +40,9 @@ export const Mastercard: Story = {
     expirationMonth: '04',
     expirationYear: '24',
     name: 'HONG GILDONG',
+    cvc: '123',
+    cardCompany: null,
+    password: '123',
   },
 };
 
@@ -43,5 +52,20 @@ export const LongName: Story = {
     expirationMonth: '04',
     expirationYear: '24',
     name: 'KIM AREUMDAUNIDDANGEGUMSUGANGSANE',
+    cvc: '123',
+    cardCompany: null,
+    password: '123',
+  },
+};
+
+export const CardCompany: Story = {
+  args: {
+    cardNumber: ['1234', '5678', '9012', '3456'],
+    expirationMonth: '04',
+    expirationYear: '24',
+    name: 'KIM AREUMDAUNIDDANGEGUMSUGANGSANE',
+    cvc: '123',
+    cardCompany: 'shinhan',
+    password: '123',
   },
 };

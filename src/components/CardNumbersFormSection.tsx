@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import useInput from '../hooks/useInput';
-import validateInputAndSetErrorMessage from '../domains/validateInputAndSetErrorMessage';
+import validateAndCheckError from '../domains/validateAndCheckError';
 
 import PaymentsFormTitle from './common/PaymentsFormTitle';
 import PaymentsInputField from './common/PaymentsInputField';
 import ERROR_MESSAGE from '../constants/errorMessage';
 
-import OPTION from '../constants/option';
+import { OPTION } from '../constants/option';
 import REGEX from '../constants/regex';
 
 import {
@@ -19,8 +19,10 @@ import {
 
 const CardNumbersFormSection = ({
   changeCardNumber,
+  changeIsValid,
 }: {
   changeCardNumber: (cardNumber: string[]) => void;
+  changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
     inputState,
@@ -37,7 +39,38 @@ const CardNumbersFormSection = ({
     regex: REGEX.numbers,
     errorText: ERROR_MESSAGE.onlyNumber,
   });
+
   const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const handleInputChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (e.target.value.length === OPTION.cardNumberMaxLength) {
+      if (inputRefs[index].current) {
+        inputRefs[index + 1].current?.focus();
+      }
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      validateAndCheckError({
+        inputState,
+        setInputState,
+        setErrorMessage,
+        changeIsValid,
+        stateText: 'cardNumber',
+        errorText: ERROR_MESSAGE.cardNumberOutOfRange,
+      });
+    }
+  };
 
   useEffect(() => {
     changeCardNumber([
@@ -54,10 +87,12 @@ const CardNumbersFormSection = ({
   useEffect(() => {
     resetErrors();
     if (hasNoAllFocus) {
-      validateInputAndSetErrorMessage({
+      validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
+        changeIsValid,
+        stateText: 'cardNumber',
         errorText: ERROR_MESSAGE.cardNumberOutOfRange,
       });
     }
@@ -80,9 +115,13 @@ const CardNumbersFormSection = ({
                 maxLength={OPTION.cardNumberMaxLength}
                 value={inputState[index].value}
                 hasError={inputState[index].hasError}
-                handleValueChange={(e) => handleValueChange(e, index)}
+                handleValueChange={(e) => {
+                  handleValueChange(e, index), handleInputChange(index, e);
+                }}
                 handleOnFocus={() => setFocus(index)}
                 handleOnBlur={() => setBlur(index)}
+                onEnter={(e) => handleKeyPress(e)}
+                ref={inputRefs[index]}
               />
             ),
           )}

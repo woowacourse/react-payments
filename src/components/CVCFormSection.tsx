@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 import validateAndCheckError from '../domains/validateAndCheckError';
 import checkError from '../domains/checkError';
@@ -19,15 +18,11 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
-  text-transform: uppercase;
-`;
-
-const NameFormSection = ({
-  changeName,
+const CVCFormSection = ({
+  changeCVC,
   changeIsValid,
 }: {
-  changeName: (name: string) => void;
+  changeCVC: (cvc: string) => void;
   changeIsValid: ({ state, isValid }: isValidProps) => void;
 }) => {
   const {
@@ -40,11 +35,10 @@ const NameFormSection = ({
     setBlur,
     resetErrors,
   } = useInput({
-    inputLength: OPTION.nameInputCount,
-    maxLength: OPTION.nameMaxLength,
-    regex: REGEX.name,
-    errorText: ERROR_MESSAGE.onlyEnglish,
-    betweenMaxLength: true,
+    inputLength: OPTION.cvcInputCount,
+    maxLength: OPTION.cvcMaxLength,
+    regex: REGEX.numbers,
+    errorText: ERROR_MESSAGE.onlyNumber,
   });
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -54,46 +48,47 @@ const NameFormSection = ({
         setInputState,
         setErrorMessage,
         changeIsValid,
-        stateText: 'name',
-        errorText: ERROR_MESSAGE.nameOutOfRange,
+        stateText: 'cvc',
+        errorText: ERROR_MESSAGE.cvcOutOfRange,
       });
     }
   };
 
   useEffect(() => {
     resetErrors();
-    if (!inputState[0].hasFocus)
+    if (!inputState[0].hasFocus) {
       validateAndCheckError({
         inputState,
         setInputState,
         setErrorMessage,
         changeIsValid,
-        stateText: 'name',
-        errorText: ERROR_MESSAGE.nameOutOfRange,
+        stateText: 'cvc',
+        errorText: ERROR_MESSAGE.cvcOutOfRange,
       });
+    }
   }, [inputState[0].hasFocus]);
 
   useEffect(() => {
-    changeName(inputState[0].value);
+    changeCVC(inputState[0].value);
   }, [inputState[0].value]);
 
   useEffect(() => {
     changeIsValid({
-      state: 'name',
+      state: 'cvc',
       isValid: checkError(inputState),
     });
   }, [!inputState[0].hasFocus]);
 
   return (
     <FormSection>
-      <PaymentsFormTitle title="카드 소유자 이름을 입력해 주세요" />
+      <PaymentsFormTitle title="CVC 번호를 입력해 주세요" />
       <InputForm>
-        <Label>소유자 이름</Label>
+        <Label>CVC</Label>
         <InputFieldContainer className="input-field-container">
-          <PaymentsInputFieldUppercase
-            className="name-form-section"
-            placeholder="FAMILY / GIVEN"
-            maxLength={OPTION.nameMaxLength}
+          <PaymentsInputField
+            className="cvc-form-section"
+            placeholder="123"
+            maxLength={OPTION.cvcMaxLength}
             value={inputState[0].value}
             hasError={inputState[0].hasError}
             handleValueChange={(e) => handleValueChange(e, 0)}
@@ -107,5 +102,4 @@ const NameFormSection = ({
     </FormSection>
   );
 };
-
-export default NameFormSection;
+export default CVCFormSection;

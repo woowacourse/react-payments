@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import STYLE from '../../constants/style';
 
-export const Card = styled.div`
+export const Card = styled.div<{ cardCompany: CardCompany }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -10,7 +10,8 @@ export const Card = styled.div`
   height: 154px;
   padding: 16px;
   border-radius: 8px;
-  background-color: ${STYLE.COLOR.black50};
+  background-color: ${(props) =>
+    props.cardCompany ? STYLE.COLOR[props.cardCompany] : STYLE.COLOR.black50};
   box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
 `;
 
@@ -96,4 +97,24 @@ export const Expiration = styled.p`
 export const Image = styled.img`
   width: 36px;
   height: 28px;
+`;
+
+export const CVC = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: ${STYLE.COLOR.yellow203};
+  background: linear-gradient(
+    to right,
+    ${STYLE.COLOR.yellow203},
+    ${STYLE.COLOR.yellow240},
+    ${STYLE.COLOR.yellow245}
+  );
+  color: ${STYLE.COLOR.yellow203};
+  font-weight: ${STYLE.BOLD.label};
+  height: 25%;
+  width: 246px;
+  margin: 76px 0 16px -16px;
+  box-sizing: border-box;
+  padding-right: 16px;
 `;
