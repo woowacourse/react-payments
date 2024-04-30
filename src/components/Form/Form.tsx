@@ -4,11 +4,11 @@ import ExpirationDateForm from "./ExpirationDateForm";
 import UserNameForm from "./UserNameForm";
 import CardNumberForm from "./CardNumberForm";
 import CardCompanyForm from "./CardCompanyForm";
-import { useEffect, useState } from "react";
 import CardCVCForm from "./CardCVCForm";
 import CardPasswordForm from "./CardPasswordForm";
 import { useNavigate } from "react-router-dom";
 import { CARD_PATH } from "../../constants/card";
+import useForm from "../../hooks/useForm";
 
 export interface FormProps {
   cardNumbers?: string[];
@@ -64,56 +64,20 @@ const Form = ({
   setCardPassword,
   setFocusedField,
 }: FormProps) => {
-  const [isCardNumberValid, setIsCardNumberValid] = useState(false);
-  const [isExpirationDateValid, setIsExpirationDateValid] = useState(false);
-  const [isUserNameValid, setIsUserNameValid] = useState(false);
-  const [isCardCompanyValid, setIsCardCompanyValid] = useState(false);
-  const [isCardCVCValid, setIsCardCVCValid] = useState(false);
-  const [isCardPasswordValid, setIsCardPasswordValid] = useState(false);
-
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-
-  const handleCardNumberValidation = (isValid: boolean) => {
-    setIsCardNumberValid(isValid);
-  };
-
-  const handleExpirationDateValidation = (isValid: boolean) => {
-    setIsExpirationDateValid(isValid);
-  };
-
-  const handleUserNameValidation = (isValid: boolean) => {
-    setIsUserNameValid(isValid);
-  };
-
-  const handleCardCompanyValidation = (isValid: boolean) => {
-    setIsCardCompanyValid(isValid);
-  };
-
-  const handleCardCVCValidation = (isValid: boolean) => {
-    setIsCardCVCValid(isValid);
-  };
-
-  const handleCardPasswordValidation = (isValid: boolean) => {
-    setIsCardPasswordValid(isValid);
-  };
-
-  useEffect(() => {
-    setIsSubmitEnabled(
-      isCardNumberValid &&
-        isExpirationDateValid &&
-        isUserNameValid &&
-        isCardCompanyValid &&
-        isCardCVCValid &&
-        isCardPasswordValid
-    );
-  }, [
+  const {
     isCardNumberValid,
     isExpirationDateValid,
     isUserNameValid,
     isCardCompanyValid,
     isCardCVCValid,
-    isCardPasswordValid,
-  ]);
+    isSubmitEnabled,
+    handleCardNumberValidation,
+    handleExpirationDateValidation,
+    handleUserNameValidation,
+    handleCardCompanyValidation,
+    handleCardCVCValidation,
+    handleCardPasswordValidation,
+  } = useForm();
 
   const navigate = useNavigate();
 
