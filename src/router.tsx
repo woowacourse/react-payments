@@ -9,7 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CardAddFormProvider />, // Provider를 여기에 배치
+    element: <CardAddFormProvider />,
     children: [
       { path: "/", element: <CardFormPage /> },
       { path: "complete", element: <CardFormSuccessPage /> },
