@@ -1,14 +1,8 @@
 import styled from "styled-components";
 import { StaticPropsWithChildren } from "../../types/components";
 
-import CardPageLayout from "./CardPageLayout";
-
 const FormResultPageLayout = ({ children }: StaticPropsWithChildren) => {
-  return (
-    <CardPageLayout>
-      <PageLayout>{children}</PageLayout>
-    </CardPageLayout>
-  );
+  return <PageLayout>{children}</PageLayout>;
 };
 
 export default FormResultPageLayout;
