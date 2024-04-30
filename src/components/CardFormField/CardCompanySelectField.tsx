@@ -12,7 +12,7 @@ import {
   VALIDATION_MESSAGES,
 } from "../../constants/card-app";
 
-import { isArrayElement } from "../../types/type-guard";
+import { isArrayElement } from "../../utils/type-guard";
 
 const CardCompanySelectField = () => {
   const { isValidFormField, handleFormFieldFocus, dispatch } =
