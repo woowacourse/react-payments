@@ -3,43 +3,43 @@ import useFormSection from "./useFormSection";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 import OPTION from "../constants/option";
-import { useState } from "react";
 
 interface UsePasswordFormSectionProps {
   cardInfo: CardInfo
-  dispatchCardInfo: React.Dispatch<CardInfoAction>
+  updateCardInfo: (value: string) => void;
+  onComplete: () => void;
   ref: React.MutableRefObject<HTMLInputElement>
 }
 
 const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo, ref } = props
+  const { cardInfo, updateCardInfo, onComplete, ref } = props
 
-  const { handleChange, error, setError } = useFormSection({
-    value: cardInfo.password.value,
-    ref: ref,
-    regex: REGEX.numbers,
-    errorMessage: ERROR_MESSAGE.onlyNumber,
-    maxLength: OPTION.passwordMaxLength,
-    dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_PASSWORD_VALUE', value }),
-  });
+  const validateWhenChange = (value: string) => {
+    if (!REGEX.numbers.test(value) && value.length !== 0) {
+      return { errorMessage: ERROR_MESSAGE.onlyNumber, newValue: value.split('').filter(char => REGEX.numbers.test(char)).join('') }
+    };
+    return { errorMessage: '', newValue: value }
+  }
 
-  const validatePassword = (value: string) => {
+  const validateWhenBlur = (value: string) => {
     if (value.length === OPTION.passwordMaxLength) {
-      dispatchCardInfo({ type: 'SET_CARD_PASSWORD_COMPLETED', value: true })
+      return { errorMessage: '', complete: true }
     } else {
-      setError(ERROR_MESSAGE.passwordFormat);
+      return { errorMessage: ERROR_MESSAGE.passwordFormat, complete: false };
     }
   }
 
-  if (ref.current) {
-    ref.current.onfocus = () => {
-      setError('');
-    };
-    ref.current.onblur = () => {
-      setError('');
-      validatePassword(cardInfo.password.value);
-    };
-  }
+  const blurCondition = (value: string) => value.length === OPTION.passwordMaxLength
+
+  const { handleChange, error } = useFormSection({
+    ref: ref,
+    value: cardInfo.password.value,
+    validateWhenChange,
+    validateWhenBlur,
+    blurCondition,
+    updateCardInfo,
+    onComplete,
+  });
 
   return { error, handleChange };
 };

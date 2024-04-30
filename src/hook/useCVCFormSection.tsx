@@ -3,49 +3,60 @@ import useFormSection from "./useFormSection";
 import REGEX from "../constants/regex";
 import ERROR_MESSAGE from "../constants/errorMessage"
 import OPTION from "../constants/option";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface UseCVCFormSectionProps {
   cardInfo: CardInfo;
-  dispatchCardInfo: React.Dispatch<CardInfoAction>;
+  updateCardInfo: (value: string) => void;
+  onComplete: () => void;
   handleCardState: (cardState: CardState) => void;
   ref: React.MutableRefObject<HTMLInputElement>
 }
 
 const useCVCFormSection = (props: UseCVCFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo, handleCardState, ref } = props
+  const { cardInfo, updateCardInfo, onComplete, handleCardState, ref } = props
 
-  const { handleChange, error, setError } = useFormSection({
-    value: cardInfo.cvc.value,
-    ref: ref,
-    regex: REGEX.numbers,
-    errorMessage: ERROR_MESSAGE.onlyNumber,
-    maxLength: OPTION.cvcMaxLength,
-    dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value }),
-  });
+  const validateWhenChange = (value: string) => {
+    if (!REGEX.numbers.test(value) && value.length !== 0) {
+      return { errorMessage: ERROR_MESSAGE.onlyNumber, newValue: value.split('').filter(char => REGEX.numbers.test(char)).join('') }
+    };
+    return { errorMessage: '', newValue: value }
+  }
 
-  const validateCVC = (value: string) => {
+  const validateWhenBlur = (value: string) => {
     if (value.length === OPTION.cvcMaxLength) {
-      dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
+      return { errorMessage: '', complete: true }
     } else {
-      setError(ERROR_MESSAGE.cvcFormat);
+      return { errorMessage: ERROR_MESSAGE.cvcFormat, complete: false };
     }
   }
 
-  if (ref.current) {
-    ref.current.onfocus = () => {
-      handleCardState('back')
-      setError('');
-    };
-    ref.current.onblur = () => {
-      handleCardState('front')
-      setError('');
-      validateCVC(cardInfo.cvc.value);
-    };
-  }
+  const blurCondition = (value: string) => value.length === OPTION.cvcMaxLength
+
+  const { handleChange, error } = useFormSection({
+    ref: ref,
+    value: cardInfo.cvc.value,
+    validateWhenChange,
+    validateWhenBlur,
+    blurCondition,
+    updateCardInfo,
+    onComplete,
+  });
 
   useEffect(() => {
     handleCardState('back')
+
+    if (ref.current) {
+      ref.current.addEventListener('focus', () => handleCardState('back'))
+      ref.current.addEventListener('blur', () => handleCardState('front'))
+    }
+
+    return () => {
+      if (ref.current) {
+        ref.current.removeEventListener('focus', () => handleCardState('back'))
+        ref.current.removeEventListener('blur', () => handleCardState('front'))
+      }
+    }
   }, [])
 
 

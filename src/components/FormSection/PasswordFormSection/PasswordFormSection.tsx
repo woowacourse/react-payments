@@ -15,7 +15,16 @@ interface PasswordFormSectionProps {
 const PasswordFormSection = (props: PasswordFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { error, handleChange } = usePasswordFormSection({ cardInfo, dispatchCardInfo, ref })
+
+  const updateCardInfo = (password: string) => {
+    dispatchCardInfo({ type: 'SET_CARD_PASSWORD_VALUE', value: password })
+  }
+
+  const onComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_PASSWORD_COMPLETED', value: true })
+  }
+
+  const { error, handleChange } = usePasswordFormSection({ cardInfo, updateCardInfo, onComplete, ref })
 
   const PasswordForm = (
     <PaymentsInputField

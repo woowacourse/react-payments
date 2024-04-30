@@ -16,7 +16,16 @@ interface CVCFormSectionProps {
 const CVCFormSection = (props: CVCFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, handleCardState } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { error, handleChange } = useCVCFormSection({ cardInfo, dispatchCardInfo, handleCardState, ref })
+
+  const updateCardInfo = (cvc: string) => {
+    dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value: cvc })
+  }
+
+  const onComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
+  }
+
+  const { error, handleChange } = useCVCFormSection({ cardInfo, updateCardInfo, onComplete, handleCardState, ref })
 
   const CVCForm = (
     <PaymentsInputField

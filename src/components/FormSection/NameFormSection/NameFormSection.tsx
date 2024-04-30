@@ -19,7 +19,16 @@ text-transform: uppercase`
 const NameFormSection = (props: NameFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
-  const { error, handleChange } = useNameFormSection({ cardInfo, dispatchCardInfo, ref })
+
+  const updateCardInfo = (name: string) => {
+    dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value: name })
+  }
+
+  const onComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_NAME_COMPLETED', value: true })
+  }
+
+  const { error, handleChange } = useNameFormSection({ cardInfo, updateCardInfo, onComplete, ref })
 
   const NameForm = (
     <PaymentsInputFieldUppercase

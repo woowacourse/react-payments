@@ -1,39 +1,60 @@
 import { useEffect, useState } from 'react';
 
 interface UseFormSectionProps {
-  value: string;
   ref: React.MutableRefObject<HTMLInputElement>;
-  regex: RegExp;
-  errorMessage: string;
-  maxLength?: number;
-  dispatchCardInfo: (value: string) => void
-
+  value: string;
+  validateWhenChange: (value: string) => { errorMessage: string, newValue: string }
+  validateWhenBlur: (value: string) => { errorMessage: string, complete: boolean }
+  blurCondition: (value: string) => boolean;
+  updateCardInfo: (value: string) => void;
+  onComplete: () => void
 }
 
 const useFormSection = (props: UseFormSectionProps) => {
-  const { value, ref, regex, errorMessage, maxLength, dispatchCardInfo } = props
+  const { ref, value, validateWhenChange, validateWhenBlur, blurCondition, updateCardInfo, onComplete } = props
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.addEventListener('focus', () => setError(''))
+      ref.current.addEventListener('blur', (e: FocusEvent) => {
+        onBlur((e.target as HTMLInputElement).value);
+      })
+    }
+
+    return () => {
+      if (ref.current) {
+        ref.current.removeEventListener('focus', () => setError(''))
+        ref.current.removeEventListener('blur', (e: FocusEvent) => {
+          onBlur((e.target as HTMLInputElement).value);
+        })
+      }
+    }
+  }, [])
+
+  const onBlur = (value: string) => {
+    const { errorMessage, complete } = validateWhenBlur(value);
+    setError(errorMessage);
+    if (complete) {
+      onComplete();
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!regex.test(value) && value.length !== 0) {
-      setError(errorMessage);
-      e.target.value = (value.split('').filter(char => regex.test(char)).join(''));
-    } else {
-      setError('');
-      dispatchCardInfo(value);
-    }
-
+    const { errorMessage, newValue } = validateWhenChange(value)
+    setError(errorMessage);
+    updateCardInfo(newValue);
   };
 
   useEffect(() => {
-    if (value.length === maxLength) {
-      setError('');
+    if (blurCondition(value)) {
       ref.current.blur();
     }
   }, [value]);
 
-  return { handleChange, error, setError };
+  return { handleChange, error };
 };
+
 
 export default useFormSection;
