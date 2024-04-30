@@ -5,14 +5,7 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from '../constants/system';
-import {
-  CardInfo,
-  CardNumbers,
-  CVC,
-  ExpirationDate,
-  Password,
-  UserName,
-} from '../types/card';
+import { CardInfo } from '../types/card';
 function checkTrimBlank(n: string) {
   if (n.trim() === '' && n !== '') {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
@@ -93,66 +86,6 @@ const Validation: ValidationMap = {
     validateNumber(n);
   },
 };
-
-export const validateCarNumbers = (cardNumbers: CardNumbers) => {
-  const isNotAllError = Object.values(cardNumbers).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
-      return pre + 1;
-    }
-    return pre;
-  }, 0);
-  if (isNotAllError !== 4) {
-    throw new Error('');
-  }
-};
-
-export const validateExpirationDate = (expirationDate: ExpirationDate) => {
-  const isNotAllError = Object.values(expirationDate).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
-      return pre + 1;
-    }
-    return pre;
-  }, 0);
-  if (isNotAllError !== 2) {
-    throw new Error('');
-  }
-};
-
-export const validateUserName = (userName: UserName) => {
-  const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '') {
-      return pre + 1;
-    }
-    return pre;
-  }, 0);
-  if (isNotAllError !== 1) {
-    throw new Error('');
-  }
-};
-export const validateCVC = (CVC: CVC) => {
-  const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '' && cur.value.length === 3) {
-      return pre + 1;
-    }
-    return pre;
-  }, 0);
-  if (isNotAllError !== 1) {
-    throw new Error('');
-  }
-};
-
-export const validatePassword = (password: Password) => {
-  const isNotAllError = Object.values(password).reduce((pre, cur) => {
-    if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
-      return pre + 1;
-    }
-    return pre;
-  }, 0);
-  if (isNotAllError !== 1) {
-    throw new Error('');
-  }
-};
-
 export const validateButton = ({
   cardNumbers,
   expirationDate,
