@@ -22,9 +22,10 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
     const currentMonth = new Date().getMonth() + 1;
     const inputYear = parseInt(year, 10);
     const inputMonth = parseInt(month, 10);
-    return !(
-      inputYear < currentYear ||
-      (inputYear === currentYear && inputMonth < currentMonth)
+
+    return (
+      inputYear > currentYear ||
+      (inputYear === currentYear && inputMonth >= currentMonth)
     );
   };
 
@@ -35,6 +36,7 @@ const useCardExpirationPeriodInput = (maxLength: number) => {
     setPeriod(newPeriod);
 
     const isValidPeriod = validatePeriod(trimmedValue, type);
+
     const isExpired = !validateExpiration(newPeriod.month, newPeriod.year);
 
     setPeriodErrors((prevErrors) => ({
