@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useCardAddForm from "../hooks/useCardAddForm";
 
-import CardPageLayout from "../components/layout/CardPageLayout";
-
 import CardPreview from "../components/CardPreview/CardPreview";
 
 import CardPasswordInputField from "../components/CardFormField/CardPasswordInputField";
@@ -28,7 +26,7 @@ const CardFormPage = () => {
   } = useCardAddForm();
 
   return (
-    <CardPageLayout>
+    <>
       <CardPreview />
 
       {formState.cardPassword.displayed && <CardPasswordInputField />}
@@ -54,12 +52,11 @@ const CardFormPage = () => {
           확인
         </StyledButton>
       )}
-    </CardPageLayout>
+    </>
   );
 };
 
 export default CardFormPage;
-
 const StyledButton = styled.button`
   height: 52px;
   width: 376px;
