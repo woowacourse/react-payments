@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-const useSelect = (defaultValue: string | null) => {
-  const [value, setValue] = useState<string | null>(defaultValue);
+const useSelect = (defaultValue: string) => {
+  const [value, setValue] = useState<string>(defaultValue);
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(event.target.value);
   };
 
   const clear = () => {
-    setValue(null);
+    setValue('');
   };
 
   return {

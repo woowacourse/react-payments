@@ -9,7 +9,7 @@ interface Option {
 
 interface SelectProps {
   label?: string;
-  value: string | null;
+  value: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
   options: Option[];
@@ -39,8 +39,8 @@ const Select = ({ label, placeholder, options, value, onChange }: SelectProps) =
     <Styled.Container aria-label={label} ref={selectRef} onClick={toggleIsShowOptions}>
       <Styled.Select
         autoFocus
-        defaultValue={value ?? placeholder}
-        $isPlaceholder={value === null}
+        defaultValue={value === '' ? placeholder : value}
+        $isPlaceholder={value === ''}
         onChange={onChange}
       >
         <option value={placeholder} disabled hidden>

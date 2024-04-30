@@ -10,7 +10,7 @@ interface FormState {
   cardNumbers: string[];
   expirationDate: string[];
   userName: string;
-  cardBrand: null;
+  cardBrand: string;
   cvcNumber: string;
   password: string;
 }

@@ -7,7 +7,7 @@ import Select from '../Select/Select';
 const { TITLE, CAPTION, PLACEHOLDER } = MESSAGE;
 
 interface CardNumbersProps {
-  cardBrandState: string | null;
+  cardBrandState: string;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 

@@ -11,7 +11,7 @@ interface CardInformationPreviewProps {
   expirationDateState: ExpirationDateState;
   userNameState: string;
   showImageCondition: ShowImageCondition;
-  cardBrandState: string | null;
+  cardBrandState: string;
   cvcNumberState: string;
   isFocusCVCPreview: boolean;
   setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +52,11 @@ const CardInformationPreview = ({
     <Preview.Container>
       <Preview.Inner onClick={toggleIsFocusCVCPreview} $isFocusCVCPreview={isFocusCVCPreview}>
         <Preview.CardFront
-          $brandColor={CARD_BRAND_BACKGROUND[cardBrandState ?? 'default']}
+          $brandColor={
+            cardBrandState !== ''
+              ? CARD_BRAND_BACKGROUND[cardBrandState]
+              : CARD_BRAND_BACKGROUND.default
+          }
           $isFocusCVCPreview={isFocusCVCPreview}
         >
           <Preview.ImgContainer>

@@ -12,7 +12,7 @@ const CardRegisterForm = () => {
     cardNumbers: [],
     expirationDate: [],
     userName: '',
-    cardBrand: null,
+    cardBrand: '',
     cvcNumber: '',
     password: '',
   });

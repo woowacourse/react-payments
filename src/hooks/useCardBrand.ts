@@ -3,12 +3,12 @@ import useSelect from './useSelect';
 import { ShowNextFieldConditionParams } from './useCreateNextField';
 
 const useCardBrand = (
-  defaultValue: string | null,
+  defaultValue: string,
   showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void,
 ) => {
   const { value, onChange, clear } = useSelect(defaultValue);
-  const isCardBrandError = value === null;
-  const isFill = value !== null;
+  const isCardBrandError = value === '';
+  const isFill = value !== '';
 
   useEffect(() => {
     showNextFieldOnValid({

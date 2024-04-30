@@ -36,7 +36,7 @@ export interface CardInformationFormProps {
     showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
   };
   cardBrand: {
-    cardBrandState: string | null;
+    cardBrandState: string;
     onChangeCardBrand: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   };
   cvcNumber: {
