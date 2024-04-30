@@ -1,24 +1,27 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { Password } from '../../types/card';
-import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
   password: Password;
-  handleInput: Dispatch<SetStateAction<Password>>;
-  handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
+  handleInput: {
+    handleUpdatePasswordInput: (value: string) => void;
+    handleUpdatePasswordErrorMessages: (
+      errorMessage: string,
+      isError: boolean
+    ) => void;
+  };
 }
 export default function PasswordInput({
   password,
-  handleInput,
-  handleShowComponent,
+  handleInput: { handleUpdatePasswordInput, handleUpdatePasswordErrorMessages },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  const errorMessages = Object.values(password).map(
+  const errorMessages = Object.values(password.passwordField).map(
     (value) => value.errorMessage
   );
 
@@ -26,72 +29,24 @@ export default function PasswordInput({
     inputRefs.current[0]?.focus();
   }, []);
 
-  useEffect(() => {
-    const checkCompleteInput = () => {
-      const isNotAllError = Object.values(password).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
-          return pre + 1;
-        }
-        return pre;
-      }, 0);
-      return isNotAllError === 1;
-    };
-    if (checkCompleteInput()) {
-      handleShowComponent((prev) => ({
-        ...prev,
-        passWordInput: true,
-      }));
-    }
-  }, [password, handleShowComponent]);
-
-  const handleUpdateInput = (value: string) => {
-    const cardKey = 'password' as keyof Password;
-    handleInput((prevState: Password) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          value: value,
-        },
-      };
-    });
-  };
-
-  const handleUpdateErrorMessages = (
-    errorMessage: string,
-    isError: boolean
-  ) => {
-    const cardKey = 'password' as keyof Password;
-    handleInput((prevState: Password) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          errorMessage: errorMessage,
-          isError: isError,
-        },
-      };
-    });
-  };
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string
   ) => {
     try {
       Validation[info]?.(e.target.value);
-      handleUpdateErrorMessages('', false);
-      handleUpdateInput(e.target.value);
+      handleUpdatePasswordErrorMessages('', false);
+      handleUpdatePasswordInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(error.message, true);
+        handleUpdatePasswordErrorMessages(error.message, true);
       }
     }
   };
 
   const checkInputError = () => {
-    const cardKey = 'password' as keyof Password;
-    return password[cardKey].isError;
+    const cardKey = 'password' as keyof typeof password.passwordField;
+    return password.passwordField[cardKey].isError;
   };
 
   return (
@@ -110,7 +65,11 @@ export default function PasswordInput({
             key={index}
             type='string'
             maxLength={2}
-            value={password['password' as keyof Password].value}
+            value={
+              password.passwordField[
+                'password' as keyof typeof password.passwordField
+              ].value
+            }
             placeholder={'**'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'password')}

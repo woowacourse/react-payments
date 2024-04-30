@@ -1,17 +1,8 @@
 import styled from 'styled-components';
-import {
-  CardBrand,
-  CardInfo,
-  CVC,
-  ExpirationDate,
-  Password,
-  UserName,
-} from '../types/card';
+import { CardInfo } from '../types/card';
 import CardNumberInput from './InputComponent/CardNumberInput';
 import ExpirationDateInput from './InputComponent/ExpirationDateInput';
 import UserNameInput from './InputComponent/UserNameInput';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { ShowComponents } from '../types/showComponents';
 import CardDropDown from './CardDropDown';
 import CVCInput from './InputComponent/CVCInput';
 import PasswordInput from './InputComponent/PasswordInput';
@@ -23,15 +14,37 @@ const FormContainer = styled.div`
 `;
 
 interface HandleInput {
-  handleUpdateCardNumberInput:  (index: number, value: string) => void
-  handleUpdateCardNumberErrorMessages : (index: number, errorMessage: string, isError: boolean) => void;
-  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
-  setUserName: Dispatch<SetStateAction<UserName>>;
-  handleUpdateCardBrand : (brandName: string) => void;
-  handleUpdateCardBrandIsNextField : () => void;
+  handleUpdateCardNumberInput: (index: number, value: string) => void;
+  handleUpdateCardNumberErrorMessages: (
+    index: number,
+    errorMessage: string,
+    isError: boolean
+  ) => void;
+  handleUpdateExpirationDateInput: (index: number, value: string) => void;
+  handleUpdateExpirationDateErrorMessages: (
+    index: number,
+    errorMessage: string,
+    isError: boolean
+  ) => void;
+  handleUpdateUserNameIsNextPage: () => void;
+  handleUpdateUserNameInput: (value: string) => void;
+  handleUpdateUserNameErrorMessages: (
+    errorMessage: string,
+    isError: boolean
+  ) => void;
+  handleUpdateCardBrand: (brandName: string) => void;
+  handleUpdateCardBrandIsNextField: () => void;
 
-  setCVC: Dispatch<SetStateAction<CVC>>;
-  setPassword: Dispatch<SetStateAction<Password>>;
+  handleUpdateCVCInput: (value: string) => void;
+  handleUpdateCVCErrorMessages: (
+    errorMessage: string,
+    isError: boolean
+  ) => void;
+  handleUpdatePasswordInput: (value: string) => void;
+  handleUpdatePasswordErrorMessages: (
+    errorMessage: string,
+    isError: boolean
+  ) => void;
 }
 
 export default function InputForm({
@@ -39,64 +52,73 @@ export default function InputForm({
   handleInput: {
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
-    setExpirationDate,
-    setUserName,
-    handleUpdateCardBrand, 
+    handleUpdateExpirationDateInput,
+    handleUpdateExpirationDateErrorMessages,
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+    handleUpdateCardBrand,
     handleUpdateCardBrandIsNextField,
-    setCVC,
-    setPassword,
+    handleUpdateCVCInput,
+    handleUpdateCVCErrorMessages,
+    handleUpdatePasswordInput,
+    handleUpdatePasswordErrorMessages,
   },
 }: {
   cardInfo: CardInfo;
   handleInput: HandleInput;
 }) {
-  const [showComponent, setShowComponent] = useState<ShowComponents>({
-    cardNumberInput: true,
-    cardDropDown: false,
-    expirationDateInput: false,
-    userNameInput: false,
-    CVCInput: false,
-    passwordInput: false,
-  });
   return (
     <FormContainer>
-      {showComponent.passwordInput && (
+      {CVC.isNextField && (
         <PasswordInput
           password={password}
-          handleInput={setPassword}
-          handleShowComponent={setShowComponent}
+          handleInput={{
+            handleUpdatePasswordInput,
+            handleUpdatePasswordErrorMessages,
+          }}
         />
       )}
-      {showComponent.CVCInput && (
+      {userName.isNextField && (
         <CVCInput
           CVC={CVC}
-          handleInput={setCVC}
-          handleShowComponent={setShowComponent}
+          handleInput={{ handleUpdateCVCInput, handleUpdateCVCErrorMessages }}
         />
       )}
-      {showComponent.userNameInput && (
+      {expirationDate.isNextField && (
         <UserNameInput
           userName={userName}
-          handleInput={setUserName}
-          handleShowComponent={setShowComponent}
+          handleInput={{
+            handleUpdateUserNameIsNextPage,
+            handleUpdateUserNameInput,
+            handleUpdateUserNameErrorMessages,
+          }}
         />
       )}
       {cardBrand.isNextField && (
         <ExpirationDateInput
           expirationDate={expirationDate}
-          handleInput={setExpirationDate}
-          handleShowComponent={setShowComponent}
+          handleInput={{
+            handleUpdateExpirationDateInput,
+            handleUpdateExpirationDateErrorMessages,
+          }}
         />
       )}
       {cardNumbers.isNextField && (
         <CardDropDown
-          handleInput={{handleUpdateCardBrand, handleUpdateCardBrandIsNextField}}
+          handleInput={{
+            handleUpdateCardBrand,
+            handleUpdateCardBrandIsNextField,
+          }}
         />
       )}
-        <CardNumberInput
-          cardNumbers={cardNumbers}
-          handleInput={{handleUpdateCardNumberInput ,handleUpdateCardNumberErrorMessages}}
-        />
+      <CardNumberInput
+        cardNumbers={cardNumbers}
+        handleInput={{
+          handleUpdateCardNumberInput,
+          handleUpdateCardNumberErrorMessages,
+        }}
+      />
     </FormContainer>
   );
 }

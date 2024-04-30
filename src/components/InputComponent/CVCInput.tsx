@@ -1,76 +1,33 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CVC } from '../../types/card';
-import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
   CVC: CVC;
-  handleInput: Dispatch<SetStateAction<CVC>>;
-  handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
+  handleInput: {
+    handleUpdateCVCInput: (value: string) => void;
+    handleUpdateCVCErrorMessages: (
+      errorMessage: string,
+      isError: boolean
+    ) => void;
+  };
 }
 export default function CVCInput({
   CVC,
-  handleInput,
-  handleShowComponent,
+  handleInput: { handleUpdateCVCInput, handleUpdateCVCErrorMessages },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  const errorMessages = Object.values(CVC).map((value) => value.errorMessage);
+  const errorMessages = Object.values(CVC.CVCField).map(
+    (value) => value.errorMessage
+  );
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
-
-  useEffect(() => {
-    const checkCompleteInput = () => {
-      const isNotAllError = Object.values(CVC).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 3) {
-          return pre + 1;
-        }
-        return pre;
-      }, 0);
-      return isNotAllError === 1;
-    };
-    if (checkCompleteInput()) {
-      handleShowComponent((prev) => ({
-        ...prev,
-        passwordInput: true,
-      }));
-    }
-  }, [CVC, handleShowComponent]);
-
-  const handleUpdateInput = (value: string) => {
-    const cardKey = 'CVC' as keyof CVC;
-    handleInput((prevState: CVC) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          value: value,
-        },
-      };
-    });
-  };
-
-  const handleUpdateErrorMessages = (
-    errorMessage: string,
-    isError: boolean
-  ) => {
-    const cardKey = 'CVC' as keyof CVC;
-    handleInput((prevState: CVC) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          errorMessage: errorMessage,
-          isError: isError,
-        },
-      };
-    });
-  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -78,18 +35,18 @@ export default function CVCInput({
   ) => {
     try {
       Validation[info]?.(e.target.value);
-      handleUpdateErrorMessages('', false);
-      handleUpdateInput(e.target.value);
+      handleUpdateCVCErrorMessages('', false);
+      handleUpdateCVCInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(error.message, true);
+        handleUpdateCVCErrorMessages(error.message, true);
       }
     }
   };
 
   const checkInputError = () => {
-    const cardKey = 'CVC' as keyof CVC;
-    return CVC[cardKey].isError;
+    const cardKey = 'CVC' as keyof typeof CVC.CVCField;
+    return CVC.CVCField[cardKey].isError;
   };
 
   return (
@@ -105,7 +62,7 @@ export default function CVCInput({
             key={index}
             type='string'
             maxLength={3}
-            value={CVC[`CVC` as keyof CVC].value}
+            value={CVC.CVCField['CVC' as keyof typeof CVC.CVCField].value}
             placeholder={'123'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'CVC')}

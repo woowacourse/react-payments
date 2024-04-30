@@ -1,4 +1,10 @@
-import { CardBrand, CardNumbers, CVC, ExpirationDate, UserName } from '../types/card';
+import {
+  CardBrand,
+  CardNumbers,
+  CVC,
+  ExpirationDate,
+  UserName,
+} from '../types/card';
 import styled from 'styled-components';
 import CardChip from '../assets/image/cardclip.svg';
 import Visa from '../assets/image/VISA.svg';
@@ -85,12 +91,12 @@ const SecretNumber = styled.div`
   letter-spacing: 0px;
 `;
 
-interface Props{
-  cardNumbers : CardNumbers;
-  expirationDate : ExpirationDate;
-  userName : UserName
-  cardBrand : CardBrand
-  CVC : CVC
+interface Props {
+  cardNumbers: CardNumbers;
+  expirationDate: ExpirationDate;
+  userName: UserName;
+  cardBrand: CardBrand;
+  CVC: CVC;
 }
 export default function CardView({
   cardNumbers,
@@ -98,7 +104,7 @@ export default function CardView({
   userName,
   cardBrand,
   CVC,
-}:Props ) {
+}: Props) {
   const cvcValue = CVC.CVCField.CVC.value;
   const monthValue = expirationDate.expirationDateFields.month.value;
   const yearValue = expirationDate.expirationDateFields.year.value;
@@ -113,7 +119,9 @@ export default function CardView({
       return Master;
   };
 
-  const cardImgSrc = checkCardType(cardNumbers.cardNumberFields.cardNumber1.value);
+  const cardImgSrc = checkCardType(
+    cardNumbers.cardNumberFields.cardNumber1.value
+  );
 
   if (cvcValue.length > 0 && cvcValue.length < 3) {
     return (
@@ -127,7 +135,9 @@ export default function CardView({
   return (
     <>
       <FrontCardContainer
-        color={CARD_BRAND[cardBrand.cardBrandField.cardBrand.value] || '#333333'}
+        color={
+          CARD_BRAND[cardBrand.cardBrandField.cardBrand.value] || '#333333'
+        }
       >
         <ImgBox>
           <CardImg src={CardChip} />
@@ -135,8 +145,12 @@ export default function CardView({
         </ImgBox>
 
         <CardNumbersBox>
-          <CardNumber>{cardNumbers.cardNumberFields.cardNumber1.value}</CardNumber>
-          <CardNumber>{cardNumbers.cardNumberFields.cardNumber2.value}</CardNumber>
+          <CardNumber>
+            {cardNumbers.cardNumberFields.cardNumber1.value}
+          </CardNumber>
+          <CardNumber>
+            {cardNumbers.cardNumberFields.cardNumber2.value}
+          </CardNumber>
           <SecretNumber>
             {'•'.repeat(cardNumbers.cardNumberFields.cardNumber3.value.length)}
           </SecretNumber>
@@ -145,13 +159,11 @@ export default function CardView({
           </SecretNumber>
         </CardNumbersBox>
         <TextBox>
-          {monthValue.length === 1 &&
-          monthValue !== '0'
+          {monthValue.length === 1 && monthValue !== '0'
             ? `0${monthValue}`
             : monthValue}
           {yearValue.length > 0 ? ' / ' : ''}
-          {yearValue.length === 1 &&
-          yearValue !== '0'
+          {yearValue.length === 1 && yearValue !== '0'
             ? `0${yearValue}`
             : yearValue}
         </TextBox>

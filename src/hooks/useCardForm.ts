@@ -1,12 +1,9 @@
-import { useState } from 'react';
-import {
-  CVC,
-  ExpirationDate,
-  Password,
-  UserName,
-} from '../types/card';
 import useCardNumbers from './useCardNumbers';
 import useCardBrand from './useCardBrand';
+import useExpireDate from './useExpireDate';
+import useUserName from './useUserName';
+import useCVC from './useCVC';
+import usePassword from './usePassword';
 
 // 커스텀 훅 정의
 export default function useCardForm({
@@ -18,62 +15,60 @@ export default function useCardForm({
   initUserName = '',
   initCardBrand = '',
   initCVC = '',
-  initPassWord = '',
+  initPassword = '',
 }) {
-  const {cardNumbers, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages} = useCardNumbers(initCardNumber1, initCardNumber2, initCardNumber3, initCardNumber4)
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    expirationDateFields: {
-      month: {
-        value: initExpirationDate.month,
-        errorMessage: '',
-        isError: false,
-      },
-      year: {
-        value: initExpirationDate.year,
-        errorMessage: '',
-        isError: false,
-      },
-    },
-    isNextField: false,
-  });
-  const [userName, setUserName] = useState<UserName>({
-    userNameField: {
-      userName: { value: initUserName, errorMessage: '', isError: false },
-    },
-    isNextField: false,
-  });
+  const {
+    cardNumbers,
+    handleUpdateCardNumberInput,
+    handleUpdateCardNumberErrorMessages,
+  } = useCardNumbers(
+    initCardNumber1,
+    initCardNumber2,
+    initCardNumber3,
+    initCardNumber4
+  );
+  const {
+    expirationDate,
+    handleUpdateExpirationDateInput,
+    handleUpdateExpirationDateErrorMessages,
+  } = useExpireDate(initExpirationDate);
+  const {
+    userName,
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+  } = useUserName(initUserName);
+  const { cardBrand, handleUpdateCardBrand, handleUpdateCardBrandIsNextField } =
+    useCardBrand(initCardBrand);
 
-  const {cardBrand, handleUpdateCardBrand, handleUpdateCardBrandIsNextField} = useCardBrand(initCardBrand);
+  const { CVC, handleUpdateCVCInput, handleUpdateCVCErrorMessages } =
+    useCVC(initCVC);
 
-
-  const [CVC, setCVC] = useState<CVC>({
-    CVCField: {
-      CVC: { value: initCVC, errorMessage: '', isError: false },
-    },
-    isNextField: false,
-  });
-
-  const [password, setPassword] = useState<Password>({
-    passwordField: {
-      password: { value: initPassWord, errorMessage: '', isError: false },
-    },
-    isNextField: false,
-  });
+  const {
+    password,
+    handleUpdatePasswordInput,
+    handleUpdatePasswordErrorMessages,
+  } = usePassword(initPassword);
 
   return {
     cardNumbers,
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
     expirationDate,
-    setExpirationDate,
+    handleUpdateExpirationDateInput,
+    handleUpdateExpirationDateErrorMessages,
     userName,
-    setUserName,
-    cardBrand, 
-    handleUpdateCardBrand, 
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+    cardBrand,
+    handleUpdateCardBrand,
     handleUpdateCardBrandIsNextField,
     CVC,
-    setCVC,
+    handleUpdateCVCInput,
+    handleUpdateCVCErrorMessages,
     password,
-    setPassword,
+    handleUpdatePasswordInput,
+    handleUpdatePasswordErrorMessages,
   };
 }

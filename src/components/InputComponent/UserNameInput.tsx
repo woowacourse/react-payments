@@ -1,24 +1,32 @@
 import Input from './Input';
 import FieldTitle from '../FieldTitle';
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { UserName } from '../../types/card';
-import { ShowComponents } from '../../types/showComponents';
 
 interface Props {
   userName: UserName;
-  handleInput: Dispatch<SetStateAction<UserName>>;
-  handleShowComponent: Dispatch<SetStateAction<ShowComponents>>;
+  handleInput: {
+    handleUpdateUserNameIsNextPage: () => void;
+    handleUpdateUserNameInput: (value: string) => void;
+    handleUpdateUserNameErrorMessages: (
+      errorMessage: string,
+      isError: boolean
+    ) => void;
+  };
 }
 export default function UserNameInput({
   userName,
-  handleInput,
-  handleShowComponent,
+  handleInput: {
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+  },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
 
-  const errorMessages = Object.values(userName).map(
+  const errorMessages = Object.values(userName.userNameField).map(
     (value) => value.errorMessage
   );
 
@@ -26,74 +34,44 @@ export default function UserNameInput({
     inputRefs.current[0]?.focus();
   }, []);
 
-  const handleUpdateInput = (value: string) => {
-    const cardKey = 'userName' as keyof UserName;
-    handleInput((prevState: UserName) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          value: value,
-        },
-      };
-    });
-  };
-
-  const handleUpdateErrorMessages = (
-    errorMessage: string,
-    isError: boolean
-  ) => {
-    const cardKey = 'userName' as keyof UserName;
-    handleInput((prevState: UserName) => {
-      return {
-        ...prevState,
-        [cardKey]: {
-          ...prevState[cardKey],
-          errorMessage: errorMessage,
-          isError: isError,
-        },
-      };
-    });
-  };
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     info: string
   ) => {
     try {
       Validation[info]?.(e.target.value);
-      handleUpdateErrorMessages('', false);
-      handleUpdateInput(e.target.value);
+      handleUpdateUserNameErrorMessages('', false);
+      handleUpdateUserNameInput(e.target.value);
     } catch (error) {
       if (error instanceof Error) {
-        handleUpdateErrorMessages(error.message, true);
+        handleUpdateUserNameErrorMessages(error.message, true);
       }
     }
   };
 
   const checkCompleteInput = () => {
-    const isNotAllError = Object.values(userName).reduce((pre, cur) => {
-      if (!cur.isError && cur.value !== '') {
-        return pre + 1;
-      }
-      return pre;
-    }, 0);
+    const isNotAllError = Object.values(userName.userNameField).reduce(
+      (pre, cur) => {
+        if (!cur.isError && cur.value !== '') {
+          return pre + 1;
+        }
+        return pre;
+      },
+      0
+    );
     return isNotAllError === 1;
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (checkCompleteInput()) {
-        handleShowComponent((prev) => ({
-          ...prev,
-          CVCInput: true,
-        }));
+        handleUpdateUserNameIsNextPage();
       }
     }
   };
 
   const checkInputError = () => {
-    const cardKey = 'userName' as keyof UserName;
-    return userName[cardKey].isError;
+    const cardKey = 'userName' as keyof typeof userName.userNameField;
+    return userName.userNameField[cardKey].isError;
   };
 
   return (
@@ -109,7 +87,11 @@ export default function UserNameInput({
             key={index}
             type='string'
             maxLength={30}
-            value={userName['userName' as keyof UserName].value}
+            value={
+              userName.userNameField[
+                'userName' as keyof typeof userName.userNameField
+              ].value
+            }
             placeholder={'JOHN DOE'}
             isError={checkInputError()}
             onChange={(e) => handleInputChange(e, 'userName')}

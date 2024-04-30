@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import Check from '../assets/image/check.svg';
-import Button from "../components/Button";
-import { useLocation, useNavigate } from "react-router-dom";
+import Button from '../components/Button';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Page = styled.div`
   width: 100vw;
@@ -28,15 +28,14 @@ const Container = styled.div`
 const ConfirmationMessage = styled.p`
   font-size: 25px;
   font-weight: 700;
-  text-align:center;
+  text-align: center;
   padding: 25px;
-`
+`;
 
 const ConfirmationImage = styled.img`
   width: 80px;
   height: 80px;
-
-`
+`;
 
 export default function CardRegistrationConfirmation() {
   const location = useLocation();
@@ -46,15 +45,17 @@ export default function CardRegistrationConfirmation() {
 
   const handleConfirmationButtonClick = () => {
     navigate('/');
-  }
-  return ( 
-
+  };
+  return (
     <Page>
       <Container>
-        <ConfirmationImage src = {Check}/>
+        <ConfirmationImage src={Check} />
         <ConfirmationMessage>{`${cardNumber1}로 시작하는 ${cardBrand}가 등록되었어요`}</ConfirmationMessage>
-        <Button value="확인" onClick={handleConfirmationButtonClick}/>
+        <Button
+          value='확인'
+          onClick={handleConfirmationButtonClick}
+        />
       </Container>
     </Page>
-  )
+  );
 }

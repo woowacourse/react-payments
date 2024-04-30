@@ -15,7 +15,7 @@ interface Props {
   isError?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  inputRef?: (element : HTMLInputElement) => void;
+  inputRef?: (element: HTMLInputElement) => void;
 }
 export default function Input({
   type = 'string',

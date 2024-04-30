@@ -2,14 +2,7 @@ import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import useCardForm from '../hooks/useCardForm';
-import { useEffect, useState } from 'react';
-import {
-  validateCarNumbers,
-  validateCVC,
-  validateExpirationDate,
-  validatePassword,
-  validateUserName,
-} from '../domain/InputValidation';
+import { validateButton } from '../domain/InputValidation';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,38 +33,39 @@ export default function EnrollCard() {
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
     expirationDate,
-    setExpirationDate,
+    handleUpdateExpirationDateInput,
+    handleUpdateExpirationDateErrorMessages,
     userName,
-    setUserName,
-    cardBrand, 
-    handleUpdateCardBrand, 
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+    cardBrand,
+    handleUpdateCardBrand,
     handleUpdateCardBrandIsNextField,
     CVC,
-    setCVC,
+    handleUpdateCVCInput,
+    handleUpdateCVCErrorMessages,
     password,
-    setPassword,
+    handleUpdatePasswordInput,
+    handleUpdatePasswordErrorMessages,
   } = useCardForm({});
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     navigate('/card-registration-confirmation', {
-      state: { ...cardNumbers, ...cardBrand },
+      state: { ...cardNumbers.cardNumberFields, ...cardBrand.cardBrandField },
     });
   };
 
-  // const [submitButtonFlag, setSubmitButtonFlag] = useState(false);
-  // useEffect(() => {
-  //   try {
-  //     validateCarNumbers(cardNumbers);
-  //     validateExpirationDate(expirationDate);
-  //     validateUserName(userName);
-  //     validateCVC(CVC);
-  //     validatePassword(password);
-  //     setSubmitButtonFlag(true);
-  //   } catch (error) {
-  //     setSubmitButtonFlag(false);
-  //   }
-  // }, [cardNumbers, expirationDate, userName, cardBrand, CVC, password]);
+  const buttonFlag = validateButton({
+    cardNumbers,
+    expirationDate,
+    userName,
+    cardBrand,
+    CVC,
+    password,
+  });
+  console.log(password);
 
   return (
     <Page>
@@ -95,20 +89,25 @@ export default function EnrollCard() {
           handleInput={{
             handleUpdateCardNumberInput,
             handleUpdateCardNumberErrorMessages,
-            setExpirationDate,
-            setUserName, 
-            handleUpdateCardBrand, 
+            handleUpdateExpirationDateInput,
+            handleUpdateExpirationDateErrorMessages,
+            handleUpdateUserNameIsNextPage,
+            handleUpdateUserNameInput,
+            handleUpdateUserNameErrorMessages,
+            handleUpdateCardBrand,
             handleUpdateCardBrandIsNextField,
-            setCVC,
-            setPassword,
+            handleUpdateCVCInput,
+            handleUpdateCVCErrorMessages,
+            handleUpdatePasswordInput,
+            handleUpdatePasswordErrorMessages,
           }}
         />
-        {/* {submitButtonFlag && (
+        {buttonFlag && (
           <Button
             value={'제출'}
             layoutType='bottom'
           ></Button>
-        )} */}
+        )}
       </Container>
     </Page>
   );

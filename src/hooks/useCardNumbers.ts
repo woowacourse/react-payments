@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { CardNumbers } from "../types/card";
+import { useEffect, useState } from 'react';
+import { CardNumbers } from '../types/card';
 
 const useCardNumbers = (
   initCardNumber1: string,
@@ -16,29 +16,32 @@ const useCardNumbers = (
     },
     isNextField: false,
   });
-  
-  useEffect (() => {
+
+  useEffect(() => {
     const checkCompleteInput = () => {
-      const isNotAllError = Object.values(cardNumbers.cardNumberFields).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
-          return pre + 1;
-        }
-        return pre;
-      }, 0);
+      const isNotAllError = Object.values(cardNumbers.cardNumberFields).reduce(
+        (pre, cur) => {
+          if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
+            return pre + 1;
+          }
+          return pre;
+        },
+        0
+      );
       return isNotAllError === 4;
     };
     if (checkCompleteInput()) {
-      setCardNumbers((prev : CardNumbers) => ({
+      setCardNumbers((prev: CardNumbers) => ({
         ...prev,
-        isNextField : true
+        isNextField: true,
       }));
     }
-  }, [cardNumbers.cardNumberFields])
+  }, [cardNumbers.cardNumberFields]);
 
   const handleUpdateCardNumberInput = (index: number, value: string) => {
     const cardKey =
       `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
-      setCardNumbers((prevState: CardNumbers) => {
+    setCardNumbers((prevState: CardNumbers) => {
       return {
         ...prevState,
         cardNumberFields: {
@@ -59,7 +62,7 @@ const useCardNumbers = (
   ) => {
     const cardKey =
       `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
-      setCardNumbers((prevState: CardNumbers) => {
+    setCardNumbers((prevState: CardNumbers) => {
       return {
         ...prevState,
         cardNumberFields: {
@@ -73,9 +76,11 @@ const useCardNumbers = (
       };
     });
   };
-  return {cardNumbers, handleUpdateCardNumberInput, handleUpdateCardNumberErrorMessages}
+  return {
+    cardNumbers,
+    handleUpdateCardNumberInput,
+    handleUpdateCardNumberErrorMessages,
+  };
 };
-
-
 
 export default useCardNumbers;

@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { CARD_BRAND } from '../constants/cardBrand';
-import { CardBrand } from '../types/card';
-import { ShowComponents } from '../types/showComponents';
 import FieldTitle from './FieldTitle';
 import InputField from './InputComponent/InputField';
 import styled from 'styled-components';
@@ -51,12 +49,12 @@ const ListItem = styled.li`
 `;
 interface Props {
   handleInput: {
-    handleUpdateCardBrand : (brandName: string) => void;
-    handleUpdateCardBrandIsNextField : () => void;
+    handleUpdateCardBrand: (brandName: string) => void;
+    handleUpdateCardBrandIsNextField: () => void;
   };
 }
 export default function CardDropDown({
-  handleInput : {handleUpdateCardBrand, handleUpdateCardBrandIsNextField},
+  handleInput: { handleUpdateCardBrand, handleUpdateCardBrandIsNextField },
 }: Props) {
   const [view, setView] = useState<boolean>(false);
   const [selected, setSelected] = useState('카드사를 선택해주세요');

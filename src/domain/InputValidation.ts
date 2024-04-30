@@ -6,6 +6,7 @@ import {
   YEAR_RANGE,
 } from '../constants/system';
 import {
+  CardInfo,
   CardNumbers,
   CVC,
   ExpirationDate,
@@ -13,7 +14,7 @@ import {
   UserName,
 } from '../types/card';
 function checkTrimBlank(n: string) {
-  if ((n.trim() === '' && n !== '')) {
+  if (n.trim() === '' && n !== '') {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
 }
@@ -152,4 +153,31 @@ export const validatePassword = (password: Password) => {
   }
 };
 
+export const validateButton = ({
+  cardNumbers,
+  expirationDate,
+  userName,
+  cardBrand,
+  CVC,
+  password,
+}: CardInfo) => {
+  return (
+    Object.values(cardNumbers.cardNumberFields).every(
+      (value) => !value.isError
+    ) &&
+    Object.values(expirationDate.expirationDateFields).every(
+      (value) => !value.isError
+    ) &&
+    Object.values(userName.userNameField).every((value) => !value.isError) &&
+    Object.values(cardBrand.cardBrandField).every((value) => !value.isError) &&
+    Object.values(CVC.CVCField).every((value) => !value.isError) &&
+    Object.values(password.passwordField).every((value) => !value.isError) &&
+    cardNumbers.isNextField &&
+    expirationDate.isNextField &&
+    userName.isNextField &&
+    cardBrand.isNextField &&
+    CVC.isNextField &&
+    password.isNextField
+  );
+};
 export default Validation;
