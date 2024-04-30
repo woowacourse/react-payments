@@ -19,7 +19,7 @@ const TextInput = styled.input((props: TextInputProps) => ({
   outline: 'none',
   borderColor: props.borderColor
     ? borderColors[props.borderColor] + ' !important'
-    : undefined,
+    : COLOR.gray1,
 
   '&::placeholder': {
     color: COLOR.gray1,
