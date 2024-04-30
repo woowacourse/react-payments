@@ -23,7 +23,7 @@ function CVCInput({
 }: CVCInputProps) {
   const { title, subTitle, label, placeholder } = CARD_CVC_FORM_MESSAGE;
 
-  const errorMessage = CVCNumber ? ERROR_MESSAGE.CVCNumber : undefined;
+  const errorMessage = CVCNumberError ? ERROR_MESSAGE.CVCNumber : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>

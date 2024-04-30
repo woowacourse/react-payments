@@ -22,7 +22,7 @@ function PasswordInput({
 }: PasswordInputProps) {
   const { title, subTitle, label, placeholder } = CARD_PASSWORD_FORM_MESSAGE;
 
-  const errorMessage = password ? ERROR_MESSAGE.password : undefined;
+  const errorMessage = passwordError ? ERROR_MESSAGE.password : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
