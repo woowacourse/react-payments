@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import { DEFAULT_CARD_BOOLEAN } from '../constants/card';
 
 interface Props {
-  handleSubmit: (value: boolean) => void;
+  defaultValue: Record<string, boolean>;
+  setCanSubmit: (value: boolean) => void;
 }
 
-const useComplete = ({ handleSubmit }: Props) => {
+const useComplete = ({ defaultValue, setCanSubmit }: Props) => {
   const [complete, setComplete] =
-    useState<Record<string, boolean>>(DEFAULT_CARD_BOOLEAN);
+    useState<Record<string, boolean>>(defaultValue);
 
   useEffect(() => {
     if (Object.values(complete).every((value) => value === true)) {
-      handleSubmit(true);
+      setCanSubmit(true);
     } else {
-      handleSubmit(false);
+      setCanSubmit(false);
     }
-  }, [complete, handleSubmit]);
+  }, [complete, setCanSubmit]);
 
   const handleComplete = (str: string, isComplete: boolean) => {
     setComplete((prev) => {

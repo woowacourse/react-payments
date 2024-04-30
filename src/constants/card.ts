@@ -20,7 +20,7 @@ export const DEFAULT_CARD: Card = {
   password: '',
 };
 
-export const DEFAULT_CARD_BOOLEAN = {
+export const DEFAULT_CARD_BOOLEAN: Record<string, boolean> = {
   cardNumbers: false,
   cardCompany: false,
   expiryDate: false,
