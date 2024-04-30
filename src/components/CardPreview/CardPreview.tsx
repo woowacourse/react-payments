@@ -9,13 +9,13 @@ const CardPreview = () => {
   const { formState } = useCardAddForm();
   const { isFocused: isCvcFieldFocused } = useFocusField("cvc-number");
 
-  const cardColor = CARD_COMPANY_COLOR[formState.cardCompany.value.cardCompany];
+  const cardColor = CARD_COMPANY_COLOR[formState.cardCompany.value];
 
   return (
     <>
       {isCvcFieldFocused ? (
         <Card cardColor="#D5D5D5">
-          <Card.CVCLine value={formState.cvcNumber.value} />
+          <Card.CVCLine cvcNumber={formState.cvcNumber.value} />
         </Card>
       ) : (
         <Card cardColor={cardColor}>

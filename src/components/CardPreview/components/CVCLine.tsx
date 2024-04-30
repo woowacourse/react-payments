@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import { CVCNumberKeys } from "../../../types/card";
 
 interface CVCLineProps {
-  value: Record<CVCNumberKeys, string>;
+  cvcNumber: string;
 }
 
-const CVCLine = ({ value }: CVCLineProps) => {
-  const { cvcNumber } = value;
-
+const CVCLine = ({ cvcNumber }: CVCLineProps) => {
   return (
     <StyledCVCLine>
       <CVCText>{cvcNumber}</CVCText>
