@@ -1,5 +1,6 @@
 import IMAGES from '../../../assets/images';
 import { CARD_COLOR, CARD_MARK } from '../../../constants';
+import { CARD_MARK_REGEX } from '../../../constants/regex';
 
 import styles from './style.module.css';
 
@@ -33,15 +34,12 @@ function CardFront({
     const firstGroup = cardNumbers[0];
     if (!firstGroup) return 'etc';
 
-    const visaRegex = /^4[0-9]{15}$/;
-    const masterCardRegex = /^(5[1-5][0-9]{14})$/;
-
     const cardNumber = cardNumbers.join('');
 
-    if (visaRegex.test(cardNumber)) {
+    if (CARD_MARK_REGEX.visa.test(cardNumber)) {
       return 'visa';
     }
-    if (masterCardRegex.test(cardNumber)) {
+    if (CARD_MARK_REGEX.master.test(cardNumber)) {
       return 'master';
     }
     return 'etc';

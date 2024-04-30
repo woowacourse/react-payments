@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import INPUT_REGEX from '../../constants/regex';
+import { INPUT_REGEX } from '../../constants/regex';
 
 const useCardExpirationPeriodInput = (maxLength: number) => {
   const [period, setPeriod] = useState({ month: '', year: '' });

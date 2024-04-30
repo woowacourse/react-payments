@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import INPUT_REGEX from '../../constants/regex';
+import { INPUT_REGEX } from '../../constants/regex';
 
 function usePasswordInput(maxLength: number) {
   const [password, setPassword] = useState('');

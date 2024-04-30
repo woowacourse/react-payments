@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import INPUT_REGEX from '../../constants/regex';
+import { INPUT_REGEX } from '../../constants/regex';
 
 const useCardNumbersInput = (maxLength: number, inputCount = 1) => {
   const initialNumbersState = Array(inputCount).fill('');
