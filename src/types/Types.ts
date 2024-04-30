@@ -6,10 +6,10 @@ export interface CardNumberState {
 }
 
 export interface SetCardNumberState {
-  onChangeFirst: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  onChangeSecond: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  onChangeThird: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  onChangeFourth: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  onChangeFirst: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSecond: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeThird: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFourth: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface CardNumberErrorState {
