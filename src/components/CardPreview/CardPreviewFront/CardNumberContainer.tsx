@@ -29,14 +29,16 @@ const getDisplayingCardNumber = (cardNumber: string, type: TCardNumberType) => {
 const CardNumber = ({ data = '', type = TYPE.normal }: ICardNumberContainerProps) => {
   const displayingCardNumber = getDisplayingCardNumber(data, type);
 
-  return <CardNumberContainer>{displayingCardNumber}</CardNumberContainer>;
+  return <S.CardNumberContainer>{displayingCardNumber}</S.CardNumberContainer>;
 };
 
-const CardNumberContainer = styled.p`
-  display: flex;
-  flex-basis: 25%;
-  height: 20px;
-  font-size: 20px;
-`;
+const S = {
+  CardNumberContainer: styled.p`
+    display: flex;
+    flex-basis: 25%;
+    height: 20px;
+    font-size: 20px;
+  `,
+};
 
 export default CardNumber;

@@ -1,36 +1,17 @@
-import styled from 'styled-components';
-
-import CardholderNameInputContainer from './components/CardholderNameInputContainer';
-import CardExpiryDateInputContainer from './components/CardExpiryDateInputContainer';
-import CardNumbersInputContainer from './components/CardNumbersInputContainer';
-import CardPreview from './components/CardPreview';
-
-import useCardInfo from './hooks/useCardInfo';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CardRegisterPage from './pages/CardRegisterPage';
+import CardRegisterCompletePage from './pages/CardRegisterCompletePage';
+import ROUTE_PATH from './pages/constants/routePath';
 
 const App = () => {
-  const { cardNumbers, expiryDate, cardholderName } = useCardInfo();
-
   return (
-    <AppLayout>
-      <CardPreview cardNumbers={cardNumbers.data} expiryDate={expiryDate.data} cardholderName={cardholderName.data} />
-      <CardInfoInputWrapper>
-        <CardNumbersInputContainer {...cardNumbers} />
-        <CardExpiryDateInputContainer {...expiryDate} />
-        <CardholderNameInputContainer {...cardholderName} />
-      </CardInfoInputWrapper>
-    </AppLayout>
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTE_PATH.cardRegister} element={<CardRegisterPage />} />
+        <Route path={ROUTE_PATH.cardRegisterComplete} element={<CardRegisterCompletePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
-
-const AppLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
-`;
-
-const CardInfoInputWrapper = styled.section`
-  margin-top: 50px;
-`;
 
 export default App;
