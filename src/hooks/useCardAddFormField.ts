@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import FormContext from "../context/card-add-form";
 
-import { CardAddFormState, CardFormField, FormAction } from "../types/card";
+import { FormAction } from "../components/providers/CardAddFormProvider/cardAddFormReducer";
+
+import { CardAddFormState, CardFormField } from "../types/card";
 
 const useCardAddFormField = <T extends CardFormField>(
   field: T
