@@ -8,6 +8,7 @@ import { CARD_FORM_ATTRIBUTES, INPUT_RULES } from "../../constants/card-app";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
 import { validateCardOwnerInputCompleted } from "../../validators/cardAddFormValidator";
+import cardInputValidator from "../../validators/cardInputValidator";
 
 const CardOwnerInputField = () => {
   const { formFieldState, isValidFormField, handleFormFieldFocus, dispatch } =
@@ -16,17 +17,21 @@ const CardOwnerInputField = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
-    const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
+    const isAlphabetInput = cardInputValidator.validateAlphabetInput(value);
+    const isValidOwnerName = cardInputValidator.validateNumberInRange(
+      value.length,
+      INPUT_RULES.minCardOwnerNameLength,
+      INPUT_RULES.maxCardOwnerNameLength
+    );
 
     dispatch({
-      type: "SET_ERROR",
+      type: "SET_ERROR_WITH_SUBFIELD",
       field: "ownerName",
       subField: name,
       isValid: !isAlphabetInput || !isValidOwnerName,
     });
 
-    if (!isAlphabetInput || !isValidOwnerName) return;
+    if (!isAlphabetInput) return;
 
     dispatch({
       type: "SET_OWNER_NAME",

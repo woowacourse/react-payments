@@ -1,14 +1,15 @@
 import { useRef } from "react";
 
+import useFocusChain from "../../hooks/useFocusChain";
+import useCardAddFormField from "../../hooks/useCardAddFormField";
+
 import Input from "../common/Input";
 import FormField from "../FormField";
 
-import { CARD_FORM_ATTRIBUTES } from "../../constants/card-app";
-import { VALIDATION_MESSAGES } from "../../constants/card-app";
-
 import cardInputValidator from "../../validators/cardInputValidator";
-import useCardAddFormField from "../../hooks/useCardAddFormField";
-import useFocusChain from "../../hooks/useFocusChain";
+
+import { CARD_FORM_ATTRIBUTES, INPUT_RULES } from "../../constants/card-app";
+import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
 const ExpirationDateInputField = () => {
   const monthRef = useRef<HTMLInputElement>(null);
@@ -18,6 +19,7 @@ const ExpirationDateInputField = () => {
 
   const { formFieldState, isValidFormField, handleFormFieldFocus, dispatch } =
     useCardAddFormField("expirationDate");
+
   const { setFocusNext } = useFocusChain(expirationDateRefs);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +27,7 @@ const ExpirationDateInputField = () => {
 
     const { name, value } = event.target;
 
-    const isNumericInput = /^(\d*)$/.test(value);
+    const isNumericInput = cardInputValidator.validateNumericInput(value);
     const isValidDate = cardInputValidator.validateExpiration({
       mm: monthRef.current.value,
       yy: yearRef.current.value,
@@ -33,7 +35,7 @@ const ExpirationDateInputField = () => {
     });
 
     dispatch({
-      type: "SET_ERROR",
+      type: "SET_ERROR_WITH_SUBFIELD",
       field: "expirationDate",
       subField: name,
       isValid: !isNumericInput || !isValidDate,
@@ -47,7 +49,7 @@ const ExpirationDateInputField = () => {
       value: value,
     });
 
-    if (value.length === 2) {
+    if (value.length === INPUT_RULES.validExpirationLength) {
       setFocusNext();
     }
   };

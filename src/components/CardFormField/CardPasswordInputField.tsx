@@ -9,20 +9,19 @@ import {
   CARD_FORM_ATTRIBUTES,
   VALIDATION_MESSAGES,
 } from "../../constants/card-app";
+import cardInputValidator from "../../validators/cardInputValidator";
 
 const CardPasswordInputField = () => {
-  const { formFieldState, isValidFormField, dispatch } =
-    useCardAddFormField("cardPassword");
+  const { formFieldState, dispatch } = useCardAddFormField("cardPassword");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
 
-    const isNumericInput = /^(\d*)$/.test(value);
+    const isNumericInput = cardInputValidator.validateNumericInput(value);
 
     dispatch({
-      type: "SET_ERROR",
+      type: "SET_ERROR_WITHOUT_SUBFIELD",
       field: "cardPassword",
-      subField: name,
       isValid: !isNumericInput,
     });
 
@@ -47,17 +46,21 @@ const CardPasswordInputField = () => {
           type="password"
           placeholder="**"
           name="cardPassword"
-          value={formFieldState.value.cardPassword}
+          value={formFieldState.value}
           maxLength={2}
           autoFocus
           inputSize="large"
-          isError={formFieldState.errorState.cardPassword}
+          isError={formFieldState.errorState}
           onChange={(event) => handleInputChange(event)}
         />
       </FormField.InputContent>
       <FormField.InfoText
         textType="error"
-        text={isValidFormField ? "" : VALIDATION_MESSAGES.invalidCardPassword}
+        text={
+          formFieldState.errorState
+            ? VALIDATION_MESSAGES.invalidCardPassword
+            : ""
+        }
       />
     </FormField>
   );

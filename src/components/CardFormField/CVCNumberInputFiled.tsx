@@ -11,20 +11,19 @@ import {
 } from "../../constants/card-app";
 
 import { validateCVCNumberInputCompleted } from "../../validators/cardAddFormValidator";
+import cardInputValidator from "../../validators/cardInputValidator";
 
 const CVCNumberInputField = () => {
-  const { formFieldState, isValidFormField, dispatch } =
-    useCardAddFormField("cvcNumber");
+  const { formFieldState, dispatch } = useCardAddFormField("cvcNumber");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
 
-    const isNumericInput = /^(\d*)$/.test(value);
+    const isNumericInput = cardInputValidator.validateNumericInput(value);
 
     dispatch({
-      type: "SET_ERROR",
+      type: "SET_ERROR_WITHOUT_SUBFIELD",
       field: "cvcNumber",
-      subField: name,
       isValid: !isNumericInput,
     });
 
@@ -62,24 +61,24 @@ const CVCNumberInputField = () => {
           type="text"
           placeholder="123"
           name="cvcNumber"
-          value={formFieldState.value.cvcNumber}
+          value={formFieldState.value}
           maxLength={3}
           autoFocus
           onKeyDown={handleKeyDown}
           inputSize="large"
-          isError={formFieldState.errorState.cvcNumber}
+          isError={formFieldState.errorState}
           onChange={(event) => handleInputChange(event)}
         />
       </FormField.InputContent>
-      {isValidFormField ? (
+      {formFieldState.errorState ? (
         <FormField.InfoText
-          textType="caption"
-          text="CVC 입력이 완료되면 엔터를 눌러주세요"
+          textType="error"
+          text={VALIDATION_MESSAGES.invalidCVCNumber}
         />
       ) : (
         <FormField.InfoText
-          textType="error"
-          text={isValidFormField ? "" : VALIDATION_MESSAGES.invalidCVCNumber}
+          textType="caption"
+          text="CVC 입력이 완료되면 엔터를 눌러주세요"
         />
       )}
     </FormField>

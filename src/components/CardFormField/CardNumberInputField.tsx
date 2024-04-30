@@ -9,6 +9,8 @@ import FormField from "../FormField";
 import { CARD_FORM_ATTRIBUTES, INPUT_RULES } from "../../constants/card-app";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
+import cardInputValidator from "../../validators/cardInputValidator";
+
 import { CardNumberKeys } from "../../types/card";
 
 const CardNumberInputField = () => {
@@ -31,11 +33,12 @@ const CardNumberInputField = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    const isNumericInput = /^(\d*)$/.test(value);
-    const isValidCardNumberLength = value.length === 4;
+    const isNumericInput = cardInputValidator.validateNumericInput(value);
+    const isValidCardNumberLength =
+      cardInputValidator.validateCardNumberLength(value);
 
     dispatch({
-      type: "SET_ERROR",
+      type: "SET_ERROR_WITH_SUBFIELD",
       field: "cardNumbers",
       subField: name,
       isValid: !isNumericInput || !isValidCardNumberLength,
