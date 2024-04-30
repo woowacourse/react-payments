@@ -1,5 +1,5 @@
 import IMAGES from '../../../assets/images';
-import { CARD_COLOR, CARD_MARK } from '../../../constants';
+import { CARD_COLOR, CARD_MARK, INPUT_LENGTH } from '../../../constants';
 import { CARD_MARK_REGEX } from '../../../constants/regex';
 
 import styles from './style.module.css';
@@ -31,11 +31,11 @@ function CardFront({
       .join(' ');
 
   function getCardCompanyMark(): 'visa' | 'master' | 'etc' {
-    const firstGroup = cardNumbers[0];
-    if (!firstGroup) return 'etc';
-
     const cardNumber = cardNumbers.join('');
 
+    if (cardNumber.length < 16) {
+      return 'etc';
+    }
     if (CARD_MARK_REGEX.visa.test(cardNumber)) {
       return 'visa';
     }
