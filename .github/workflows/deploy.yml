@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # 기본 브랜치에 대한 푸시 이벤트 발생 시 실행
   push:
-    branches: ['github-pages']
+    branches: ['yoonkyoungme-step2']
 
   # Actions 탭에서 수동으로 워크플로우를 실행할 수 있도록 구성
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # dist 디렉터리 업로드
           path: './dist'

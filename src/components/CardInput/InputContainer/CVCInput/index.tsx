@@ -23,12 +23,7 @@ function CVCInput({
 }: CVCInputProps) {
   const { title, subTitle, label, placeholder } = CARD_CVC_FORM_MESSAGE;
 
-  const getErrorMessage = () => {
-    if (!CVCNumberError) {
-      return;
-    }
-    return ERROR_MESSAGE.CVCNumber;
-  };
+  const errorMessage = CVCNumber ? ERROR_MESSAGE.CVCNumber : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -47,7 +42,7 @@ function CVCInput({
               autoFocus
             />
           </div>
-          <InputErrorMessage errorMessage={getErrorMessage()} />
+          <InputErrorMessage errorMessage={errorMessage} />
         </div>
       </InputField>
     </InputWrap>

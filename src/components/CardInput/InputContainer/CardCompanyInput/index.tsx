@@ -23,12 +23,7 @@ function CardCompanyInput({
   const { title, subTitle, label, placeholder, options } =
     CARD_COMPANY_FORM_MESSAGE;
 
-  const getErrorMessage = () => {
-    if (!cardCompanyError) {
-      return;
-    }
-    return ERROR_MESSAGE.cardCompany;
-  };
+  const errorMessage = cardCompanyError ? ERROR_MESSAGE.cardCompany : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -44,7 +39,7 @@ function CardCompanyInput({
           />
         </div>
       </InputField>
-      <InputErrorMessage errorMessage={getErrorMessage()} />
+      <InputErrorMessage errorMessage={errorMessage} />
     </InputWrap>
   );
 }

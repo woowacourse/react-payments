@@ -22,12 +22,7 @@ function PasswordInput({
 }: PasswordInputProps) {
   const { title, subTitle, label, placeholder } = CARD_PASSWORD_FORM_MESSAGE;
 
-  const getErrorMessage = () => {
-    if (!passwordError) {
-      return;
-    }
-    return ERROR_MESSAGE.password;
-  };
+  const errorMessage = password ? ERROR_MESSAGE.password : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -44,7 +39,7 @@ function PasswordInput({
               autoFocus
             />
           </div>
-          <InputErrorMessage errorMessage={getErrorMessage()} />
+          <InputErrorMessage errorMessage={errorMessage} />
         </div>
       </InputField>
     </InputWrap>

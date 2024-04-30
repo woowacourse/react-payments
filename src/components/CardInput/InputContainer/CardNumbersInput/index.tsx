@@ -34,12 +34,9 @@ function CardNumbersInput({
     }
   };
 
-  const getErrorMessage = () => {
-    if (numberErrors.every((isError) => !isError)) {
-      return;
-    }
-    return ERROR_MESSAGE.cardNumber;
-  };
+  const errorMessage = numberErrors.some((isError) => isError)
+    ? ERROR_MESSAGE.cardNumber
+    : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -59,7 +56,7 @@ function CardNumbersInput({
           ))}
         </div>
       </InputField>
-      <InputErrorMessage errorMessage={getErrorMessage()} />
+      <InputErrorMessage errorMessage={errorMessage} />
     </InputWrap>
   );
 }

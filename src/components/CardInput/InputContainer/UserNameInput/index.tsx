@@ -21,12 +21,7 @@ function UserNameInput({
 }: CardUserNameInputProps) {
   const { title, subTitle, label, placeholder } = CARD_USER_FORM_MESSAGE;
 
-  const getErrorMessage = () => {
-    if (!nameError) {
-      return;
-    }
-    return ERROR_MESSAGE.userName;
-  };
+  const errorMessage = nameError ? ERROR_MESSAGE.userName : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -44,7 +39,7 @@ function UserNameInput({
               autoFocus
             />
           </div>
-          <InputErrorMessage errorMessage={getErrorMessage()} />
+          <InputErrorMessage errorMessage={errorMessage} />
         </div>
       </InputField>
     </InputWrap>
