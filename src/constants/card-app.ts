@@ -21,7 +21,11 @@ export const INPUT_RULES = {
   maxMonth: 12,
   maxCardNumberPartLength: 4,
   maxExpirationDateLength: 2,
+  minCardOwnerNameLength: 1,
   maxCardOwnerNameLength: 15,
+  validExpirationLength: 2,
+  validCVCNumberLength: 3,
+  validCardPasswordNumberLength: 2,
 };
 
 interface FormDescription {
