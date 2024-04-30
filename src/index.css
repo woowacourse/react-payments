@@ -133,3 +133,10 @@ input {
   width: 0;
   height: 0;
 }
+
+body,
+button,
+input,
+textarea {
+  font-family: "Noto Sans KR", sans-serif;
+}
