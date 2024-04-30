@@ -22,14 +22,22 @@ const INITIAL_CARD_INFO_STATE: CardInfo = {
   password: { value: '', isComplete: false },
 }
 
+const date = new Date();
+const year = date.getFullYear().toString().slice(2, 4);
+const month = (date.getMonth() + 1).toString().padStart(2, '0');
+const now = year + month;
+
+
 const COMPLETE_CONDITION = {
-  cardNumbers: (values: string[]) => values.every(value => value.length === OPTION.cardNumberMaxLength),
-  cardBrand: true,
-  cardCompany: (value: CardCompany) => (value as string).length !== 0,
-  expiration: (values: string[]) => values.every(value => value.length === OPTION.expirationDateMaxLength),
-  name: (value: string) => value.length !== 0,
-  cvc: (value: string) => value.length === OPTION.cvcMaxLength,
-  password: (value: string) => value.length === OPTION.passwordMaxLength,
+  cardNumbers: (cardInfo: CardInfo) => cardInfo.cardNumbers.value.every(value => value.length === OPTION.cardNumberMaxLength),
+  cardCompany: (cardInfo: CardInfo) => (cardInfo.cardCompany.value as string).length !== 0,
+  expiration: (cardInfo: CardInfo) => {
+    return cardInfo.expiration.value.every(value => value.length === OPTION.expirationDateMaxLength)
+      && +(cardInfo.expiration.value[1] + cardInfo.expiration.value[0]) - (+ now) >= 0
+  },
+  name: (cardInfo: CardInfo) => cardInfo.name.value.length !== 0,
+  cvc: (cardInfo: CardInfo) => cardInfo.cvc.value.length === OPTION.cvcMaxLength,
+  password: (cardInfo: CardInfo) => cardInfo.password.value.length === OPTION.passwordMaxLength,
 }
 
 const RegisterCardInfo = () => {
@@ -40,17 +48,7 @@ const RegisterCardInfo = () => {
     setCardState(cardState)
   }
 
-  const showSubmitButton = (cardInfo: CardInfo): boolean => {
-    return (
-      COMPLETE_CONDITION.cardNumbers(cardInfo.cardNumbers.value) &&
-      COMPLETE_CONDITION.cardBrand &&
-      COMPLETE_CONDITION.cardCompany(cardInfo.cardCompany.value) &&
-      COMPLETE_CONDITION.expiration(cardInfo.expiration.value) &&
-      COMPLETE_CONDITION.name(cardInfo.name.value) &&
-      COMPLETE_CONDITION.cvc(cardInfo.cvc.value) &&
-      COMPLETE_CONDITION.password(cardInfo.password.value)
-    );
-  }
+  const showSubmitButton = (cardInfo: CardInfo): boolean => Object.values(COMPLETE_CONDITION).every((condition) => condition(cardInfo))
 
   const navigate = useNavigate();
 
