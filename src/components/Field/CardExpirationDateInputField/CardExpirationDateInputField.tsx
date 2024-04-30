@@ -1,7 +1,14 @@
-import { Dispatch, SetStateAction, useState, ChangeEvent } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  ChangeEvent,
+  useEffect,
+} from "react";
 import { DATE_PLACEHOLDER } from "../../../constants";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
+import formState from "../../../Interfaces/formState";
 
 interface DateError {
   monthError: string | null;
@@ -11,9 +18,17 @@ interface DateError {
 export default function CardExpirationDateInputField({
   date,
   setDate,
+  isCompletedSections,
+  setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   date: Record<string, string>;
   setDate: Dispatch<SetStateAction<Record<string, string>>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [errorMessages, setErrorMessages] = useState<DateError>({
     monthError: null,
@@ -63,6 +78,22 @@ export default function CardExpirationDateInputField({
     });
   };
 
+  useEffect(() => {
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
+    const isInputCompleted =
+      date.month.length == 2 &&
+      date.year.length == 2 &&
+      !errorMessages.monthError &&
+      !errorMessages.yearError;
+    updatedIsCompletedSections.cardExpirationDateInput = isInputCompleted;
+    setIsCompletedSections(updatedIsCompletedSections);
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
+    if (isInputCompleted === true) {
+      updatedIsOpenForm.cardOwnerNameInput = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [date]);
+
   const checkExpired = (month: string, year: string) => {
     if (year.length < 2 || month.length < 2) return false;
     const today = new Date();
@@ -89,6 +120,13 @@ export default function CardExpirationDateInputField({
       setDate({ ...date, month: e.target.value.padStart(2, "0") });
 
     checkValidDate({ month: e.target.value });
+
+    if (
+      (e.target.value.length === 2 && e.target.nextSibling) ||
+      Number(e.target.value) > 2
+    ) {
+      (e.target.nextSibling as HTMLInputElement).focus();
+    }
   };
 
   const handleYear = (e: ChangeEvent<HTMLInputElement>) => {
@@ -105,6 +143,7 @@ export default function CardExpirationDateInputField({
           placeholder={DATE_PLACEHOLDER.MONTH}
           maxLength={2}
           value={date.month}
+          autoFocus
           isError={errorMessages?.monthError !== null}
         />
         <Input
@@ -115,15 +154,16 @@ export default function CardExpirationDateInputField({
           isError={errorMessages?.yearError !== null}
         />
       </div>
-      {errorMessages !== null && (
+      {
         <div className={styles.error_message}>
-          {(errorMessages?.monthError || errorMessages?.yearError) && (
-            <div className={styles.error_message}>
-              {errorMessages?.monthError || errorMessages?.yearError}
-            </div>
-          )}
+          {errorMessages !== null &&
+            (errorMessages?.monthError || errorMessages?.yearError) && (
+              <div className={styles.error_message}>
+                {errorMessages?.monthError || errorMessages?.yearError}
+              </div>
+            )}
         </div>
-      )}
+      }
     </>
   );
 }

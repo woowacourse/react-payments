@@ -1,0 +1,147 @@
+.card_front {
+  display: flex;
+  flex-direction: column;
+  background-color: #333333;
+  border-radius: calc(min(30%, 212px) * 0.11) / calc(min(30%, 212px) * 0.17);
+  width: 212px;
+  aspect-ratio: calc(18 / 11);
+  box-shadow: 3px 3px 5px 0px #00000040;
+  position: relative;
+  align-items: center;
+  margin: 30px;
+
+  font-family: Inter;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-align: left;
+  color: white;
+}
+
+.card_back {
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  border-radius: calc(min(30%, 212px) * 0.11) / calc(min(30%, 212px) * 0.17);
+  width: 212px;
+  aspect-ratio: calc(18 / 11);
+  box-shadow: 3px 3px 5px 0px #00000040;
+  position: relative;
+  margin: 30px;
+
+  font-family: Inter;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-align: left;
+  color: white;
+}
+
+.cvc_line {
+  background-color: rgba(203, 186, 100, 1);
+  width: 100%;
+  height: 24px;
+  margin-top: 80px;
+}
+
+.cvc_number {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  height: 100%;
+  width: 95%;
+
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.08em;
+  text-align: right;
+}
+
+.chip__logo__wrapper {
+  width: 90%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 4%;
+}
+
+.chip {
+  width: 17%;
+  min-width: 36px;
+  aspect-ratio: calc(83 / 56.91);
+  background-color: #ddcd78;
+  border-radius: calc(min(30%, 212px) * 0.22) / calc(min(30%, 212px) * 0.34);
+}
+
+.logo {
+  width: 17%;
+  min-width: 36px;
+  aspect-ratio: calc(83 / 56.91);
+  border-radius: calc(min(30%, 212px) * 0.22) / calc(min(30%, 212px) * 0.34);
+}
+
+.card__info__container {
+  width: 100%;
+  padding: 7%;
+  box-sizing: border-box;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+
+.card__number__container {
+  width: 100%;
+  display: flex;
+  gap: 5%;
+  height: 20px;
+}
+
+.card__number__container img {
+  width: 6px;
+}
+
+.number {
+  min-width: 37px;
+  display: flex;
+  gap: 10%;
+  align-items: center;
+  justify-content: start;
+}
+.BC {
+  background-color: rgba(240, 70, 81, 1);
+}
+
+.shinhan {
+  background-color: rgba(0, 70, 255, 1);
+}
+
+.kakao {
+  background-color: rgba(255, 230, 0, 1);
+}
+
+.hyundai {
+  background-color: #000000;
+}
+
+.woori {
+  background-color: #007bc8;
+}
+
+.lotte {
+  background-color: #ed1c24;
+}
+
+.hana {
+  background-color: #009490;
+}
+
+.kookmin {
+  background-color: #6a6056;
+}

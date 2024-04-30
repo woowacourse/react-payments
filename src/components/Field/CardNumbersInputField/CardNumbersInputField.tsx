@@ -1,13 +1,20 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 
 import {
   CARD_NUMBER_UNIT_PLACEHOLDER,
   CARD_NUMBER_UNIT_LENGTH,
 } from "../../../constants";
+import formState from "../../../Interfaces/formState";
 
-interface cardNumberErrorMessage {
+interface CardNumberErrorMessage {
   index: number;
   message: string;
 }
@@ -15,15 +22,23 @@ interface cardNumberErrorMessage {
 export default function CardNumbersInputField({
   cardNumbers,
   setCardNumbers,
+  isCompletedSections,
+  setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [numberLengthErrorMessages, setNumberLengthErrorMessages] = useState<
-    cardNumberErrorMessage[]
+    CardNumberErrorMessage[]
   >([]);
   const [nanErrorMessage, setNanErrorMessage] =
-    useState<cardNumberErrorMessage | null>(null);
+    useState<CardNumberErrorMessage | null>(null);
 
   const updateErrorMessage = (index: number, message: string) => {
     const errorMessageIndex = numberLengthErrorMessages.findIndex(
@@ -57,6 +72,8 @@ export default function CardNumbersInputField({
 
     if (e.target.value.length < 4) {
       updateErrorMessage(index, "4개의 숫자를 입력해주세요.");
+    } else {
+      removeErrorMessage(index);
     }
 
     setNanErrorMessage(null);
@@ -64,9 +81,27 @@ export default function CardNumbersInputField({
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
     setCardNumbers(updatedCardNumbers);
+    console.log(e.target.nextSibling);
 
-    if (e.target.value.length === 4) removeErrorMessage(index);
+    if (
+      e.target.value.length === 4 &&
+      e.target.nextSibling instanceof HTMLInputElement
+    ) {
+      (e.target.nextSibling as HTMLInputElement).focus();
+    }
   };
+
+  useEffect(() => {
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
+    const isInputCompleted = cardNumbers.every((num) => num.length === 4);
+    updatedIsCompletedSections.cardNumbersInput = isInputCompleted;
+    setIsCompletedSections(updatedIsCompletedSections);
+    const updatedIsOpenForm = Object.assign({}, isOpenForm);
+    if (isInputCompleted === true) {
+      updatedIsOpenForm.cardCompanySelectDropdown = true;
+    }
+    setIsOpenForm(updatedIsOpenForm);
+  }, [cardNumbers]);
 
   const checkError = (index: number): boolean => {
     const numberLengthError = numberLengthErrorMessages.some(
@@ -82,23 +117,31 @@ export default function CardNumbersInputField({
       <div className={styles.horizon__gap__container}>
         {cardNumbers.map((cardNumber, i) => (
           <Input
+            key={i}
             onChange={(e) => handleChange(e, i)}
             placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
             maxLength={CARD_NUMBER_UNIT_LENGTH}
             value={cardNumber}
+            autoFocus={i == 0}
             type={i >= cardNumbers.length / 2 ? "password" : "type"}
             isError={checkError(i)}
           />
         ))}
       </div>
-      {(nanErrorMessage !== null || numberLengthErrorMessages.length !== 0) && (
+      {
         <div className={styles.error_message}>
-          {nanErrorMessage !== null
-            ? nanErrorMessage.message
-            : numberLengthErrorMessages[numberLengthErrorMessages.length - 1]
-                .message}
+          {(nanErrorMessage !== null ||
+            numberLengthErrorMessages.length !== 0) && (
+            <>
+              {nanErrorMessage !== null
+                ? nanErrorMessage.message
+                : numberLengthErrorMessages[
+                    numberLengthErrorMessages.length - 1
+                  ].message}
+            </>
+          )}
         </div>
-      )}
+      }
     </>
   );
 }

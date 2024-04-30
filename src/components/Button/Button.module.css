@@ -1,0 +1,40 @@
+.primary {
+  background-color: rgba(51, 51, 51, 1);
+  color: white;
+  border: none;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.submit {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 52px;
+}
+
+.go_main {
+  width: 320px;
+  height: 44px;
+  gap: 0px;
+  border-radius: 5px;
+}
+
+.dropdown_head {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 37.5px;
+  background-color: white;
+  padding: none;
+  border: 1px solid #acacac;
+  border-radius: 4px;
+  text-align: left;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdown_head:focus {
+  border: 1px solid black;
+}

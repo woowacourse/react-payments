@@ -4,19 +4,31 @@ import {
   SetStateAction,
   useState,
   FocusEvent,
+  useEffect,
+  KeyboardEvent,
 } from "react";
 import Input from "../../common/Input/Input";
-import styles from "../../../App.module.css";
+import styles from "../../../pages/CardInputPage/CardInputPage.module.css";
 import normalizeSpaces from "../../../utils/normalizeSpaces";
 import filterEnglish from "../../../utils/filterEnglish";
+import formState from "../../../Interfaces/formState";
 
 const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
+
 export default function CardOwnerNameInputField({
   ownerName,
   setOwnerName,
+  isCompletedSections,
+  setIsCompletedSections,
+  isOpenForm,
+  setIsOpenForm,
 }: {
   ownerName: string;
   setOwnerName: Dispatch<SetStateAction<string>>;
+  isCompletedSections: formState;
+  setIsCompletedSections: Dispatch<SetStateAction<formState>>;
+  isOpenForm: formState;
+  setIsOpenForm: Dispatch<SetStateAction<formState>>;
 }) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -50,6 +62,24 @@ export default function CardOwnerNameInputField({
     setErrorMessage("");
   };
 
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const isInputCompleted = ownerName.length !== 0;
+      const updatedIsOpenForm = Object.assign({}, isOpenForm);
+      if (isInputCompleted === true) {
+        updatedIsOpenForm.cardCVCInput = true;
+      }
+      setIsOpenForm(updatedIsOpenForm);
+    }
+  };
+
+  useEffect(() => {
+    const isInputCompleted = ownerName.length !== 0;
+    const updatedIsCompletedSections = Object.assign({}, isCompletedSections);
+    updatedIsCompletedSections.cardOwnerNameInput = isInputCompleted;
+    setIsCompletedSections(updatedIsCompletedSections);
+  }, [ownerName]);
+
   return (
     <>
       <div className={styles.label}>소유자 이름</div>
@@ -58,14 +88,16 @@ export default function CardOwnerNameInputField({
           onChange={handleChange}
           isError={errorMessage.length !== 0}
           placeholder={OWNER_NAME_PLACEHOLDER}
-          maxLength={26} // 비자 21자, 마스터카드 26자!
+          autoFocus
+          maxLength={26}
           value={ownerName}
           onBlur={handleBlur}
+          onKeyDown={handleKeyPress}
         />
       </div>
-      {errorMessage !== "" && (
-        <div className={styles.error_message}>{errorMessage}</div>
-      )}
+      <div className={styles.error_message}>
+        {errorMessage !== "" && errorMessage}
+      </div>
     </>
   );
 }

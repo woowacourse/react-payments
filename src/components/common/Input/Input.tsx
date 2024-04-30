@@ -7,12 +7,13 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function Input(props: InputProps) {
-  const { onChange, ...rest } = props;
+  const { onChange, autoFocus, ...rest } = props;
 
   return (
     <input
       className={`${styles.customInput} ${props.isError ? styles.isError : ""} `}
       {...rest}
+      autoFocus={autoFocus}
       onBlur={(e) => {
         if (props.onBlur) {
           props.onBlur(e);
