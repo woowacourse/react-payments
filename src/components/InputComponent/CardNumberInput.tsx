@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CardNumbers } from '../../types/card';
+import { CARD_NUMBER } from '../../constants/system';
 
 interface Props {
   cardNumbers: CardNumbers;
@@ -43,7 +44,7 @@ export default function CardNumberInput({
       handleUpdateCardNumberErrorMessages(index, '', false);
       handleUpdateCardNumberInput(index, e.target.value);
       const nextIndex = index + 1;
-      if (e.target.value.length === 4 && nextIndex < inputRefs.current.length) {
+      if (e.target.value.length === CARD_NUMBER.FIELD_LENGTH && nextIndex < inputRefs.current.length) {
         inputRefs.current[nextIndex]?.focus();
       }
     } catch (error) {
@@ -70,7 +71,7 @@ export default function CardNumberInput({
         count={4}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: CARD_NUMBER.TOTAL_FIELDS }).map((_, index) => (
           <Input
             key={index}
             type='text'
@@ -79,7 +80,7 @@ export default function CardNumberInput({
                 `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields
               ].value
             }
-            maxLength={4}
+            maxLength={CARD_NUMBER.FIELD_LENGTH}
             placeholder='1234'
             isError={checkInputError(index)}
             onChange={(e) => handleInputChange(e, 'cardNumber', index)}
