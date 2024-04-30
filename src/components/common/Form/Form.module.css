@@ -1,5 +1,8 @@
 .card__info__form {
   display: flex;
-  gap: 10px;
+  gap: 40px;
   flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
 }

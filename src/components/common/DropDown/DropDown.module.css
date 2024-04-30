@@ -1,0 +1,51 @@
+.wrapper {
+  width: 100%;
+}
+
+.dropdown {
+  position: relative;
+  z-index: 10;
+  margin-top: 10px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+
+  list-style-type: none;
+  border-radius: 5px;
+  border: 1px solid #acacac;
+
+  height: 300px;
+  overflow-y: scroll;
+  font-size: 14px;
+}
+
+.dropdown li {
+  color: #4f4f4f;
+}
+
+.dropdown button {
+  background: inherit;
+  padding: 12px 10px;
+  text-align: left;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  transition: transform 0.3s ease-in-out;
+  right: 6px;
+
+  /* 중앙 정렬 */
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}

@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import styles from './Input.module.css';
+import classNames from 'classnames';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError?: boolean;
 }
 
-export default function Input(props: InputProps) {
-  const { onChange, ...rest } = props;
+const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, onFocus, onBlur, onChange, ...rest }, ref) => {
   const [isFocus, setIsFocus] = useState(false);
+
+  const inputStyle = classNames(styles.customInput, { [styles.isFocus]: isFocus }, { [styles.isError]: isError });
 
   return (
     <input
-      className={`${styles.customInput} ${isFocus ? styles.isFocus : ''} ${props.isError ? styles.isError : ''} `}
+      className={inputStyle}
+      ref={ref}
       {...rest}
-      onFocus={() => setIsFocus(true)}
+      onFocus={(e) => {
+        if (onFocus) onFocus(e);
+        setIsFocus(true);
+      }}
       onBlur={(e) => {
         setIsFocus(false);
-        if (props.onBlur) {
-          props.onBlur(e);
-        }
+        if (onBlur) onBlur(e);
       }}
       onChange={onChange}
     />
   );
-}
+});
+
+export default Input;

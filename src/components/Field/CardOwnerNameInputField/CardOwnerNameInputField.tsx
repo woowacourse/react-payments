@@ -1,51 +1,27 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import Input from '../../common/Input/Input';
 import styles from '../../../App.module.css';
-import normalizeSpaces from '../../../utils/normalizeSpaces';
-import filterEnglish from '../../../utils/filterEnglish';
-import { ERROR_MESSAGES } from '../../../constants/errorMessages';
-import { MAX_NAME_LENGTH, OWNER_NAME_PLACEHOLDER } from '../../../constants/input';
+import { MAX_NAME_LENGTH, MIN_NAME_LENGTH, OWNER_NAME_PLACEHOLDER } from '../../../constants/input';
 
 type CardOwnerNameInputField = {
   ownerName: string;
-  setOwnerName: Dispatch<SetStateAction<string>>;
+  handleOwnerName: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string;
 };
 
-export default function CardOwnerNameInputField({ ownerName, setOwnerName }: CardOwnerNameInputField) {
-  const [errorMessage, setErrorMessage] = useState<string>('');
+export default function CardOwnerNameInputField({ ownerName, handleOwnerName, errorMessage }: CardOwnerNameInputField) {
+  const [isFocus, setIsFocus] = useState(false);
 
-  const getErrorMessage = (name: string, engName: string, normalizedOwnerName: string) => {
-    const isExcessiveWhiteSpace = engName.length > normalizedOwnerName.length;
-
-    if (isExcessiveWhiteSpace && normalizedOwnerName.length !== 0) {
-      return ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
-    }
-
-    if (engName.length < name.length) {
-      return ERROR_MESSAGES.NOT_ENG;
-    }
-
-    return '';
+  const handleEnterKey = (handleOwnerName: (e: ChangeEvent<HTMLInputElement>, isKeyEnter: boolean) => void) => {
+    return (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        handleOwnerName(event as unknown as ChangeEvent<HTMLInputElement>, true);
+      }
+    };
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const upperCaseName = e.target.value.toUpperCase();
-    const engName = filterEnglish(upperCaseName);
-    const normalizedOwnerName = normalizeSpaces(engName);
-
-    const errorMessage = getErrorMessage(upperCaseName, engName, normalizedOwnerName);
-
-    setErrorMessage(errorMessage);
-    setOwnerName(normalizedOwnerName);
-  };
-
-  const handleMissingName = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length === 0) {
-      setErrorMessage(ERROR_MESSAGES.MISSING_NAME);
-      return;
-    }
-
-    setErrorMessage('');
+  const isInfoMessageVisible = () => {
+    return ownerName.length >= MIN_NAME_LENGTH && errorMessage === '' && isFocus;
   };
 
   return (
@@ -53,15 +29,22 @@ export default function CardOwnerNameInputField({ ownerName, setOwnerName }: Car
       <div className={styles.label}>소유자 이름</div>
       <div className={styles.horizon__gap__container}>
         <Input
-          onChange={handleChange}
+          onFocus={() => setIsFocus(true)}
+          autoFocus
+          onChange={handleOwnerName}
           isError={errorMessage.length !== 0}
           placeholder={OWNER_NAME_PLACEHOLDER}
-          maxLength={MAX_NAME_LENGTH} // 비자 21자, 마스터카드 26자!
+          maxLength={MAX_NAME_LENGTH}
           value={ownerName}
-          onBlur={handleMissingName}
+          onBlur={(e) => {
+            handleOwnerName(e);
+            setIsFocus(false);
+          }}
+          onKeyDown={handleEnterKey(handleOwnerName)}
         />
       </div>
       {errorMessage !== '' && <div className={styles.error_message}>{errorMessage}</div>}
+      {isInfoMessageVisible() && <div className={styles.info_message}>입력 완료시 enter를 눌러주세요</div>}
     </>
   );
 }

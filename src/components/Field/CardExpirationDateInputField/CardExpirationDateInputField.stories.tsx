@@ -14,7 +14,12 @@ type InputProps = {
 };
 
 export const Default: StoryObj<InputProps> = (args: any) => (
-  <CardExpirationDateInputField {...args} date={{ month: 12, year: 24 }} />
+  <CardExpirationDateInputField
+    {...args}
+    expirationDate={{ month: 12, year: 24 }}
+    handleExpirationDateChange={() => {}}
+    errorMessages={['', '']}
+  />
 );
 
 Default.args = {};

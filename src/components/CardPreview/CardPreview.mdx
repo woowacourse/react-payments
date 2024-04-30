@@ -1,11 +1,11 @@
 import { Canvas, Meta } from '@storybook/blocks';
 
-import * as CardStories from './Card.stories';
+import * as CardPreviewStories from './CardPreview.stories';
 import { Component } from 'react';
 
-<Meta of={CardStories} />
+<Meta of={CardPreviewStories} />
 
-# Card
+# CardPreview
 
 카드 컴포넌트는 **카드 번호, 유효 기간, 이름**을 받아 카드 모양으로 미리보기를 띄워줍니다.
 
@@ -19,7 +19,13 @@ import { Component } from 'react';
 ## Using the Component
 
 ```js
-<Card cardNumbers={cardNumbers} date={date} ownerName={ownerName} />
+<CardPreview
+  cardNumbers={cardNumbers}
+  date={date}
+  ownerName={ownerName}
+  cardCompany={cardCompany}
+  CVCNumbers={CVCNumbers}
+/>
 ```
 
 <br />
@@ -28,11 +34,15 @@ import { Component } from 'react';
 
 ### default
 
-<Canvas of={CardStories.DefaultCard} />
+<Canvas of={CardPreviewStories.DefaultCard} />
 
 ### visa
 
-<Canvas of={CardStories.VisaCard} />
+<Canvas of={CardPreviewStories.VisaCard} />
 ### master
 
-<Canvas of={CardStories.MasterCard} />
+<Canvas of={CardPreviewStories.MasterCard} />
+
+### defaultCardWithCardCompany
+
+<Canvas of={CardPreviewStories.DefaultCardWithCardCompany} />

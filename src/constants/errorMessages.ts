@@ -10,4 +10,11 @@ export const ERROR_MESSAGES = {
 
   INVALID_DATE: '유효하지 않은 날짜입니다.',
   EXPIRED_DATE: '이미 만료된 카드입니다.',
+
+  EMPTY: '입력해주세요.',
+  NO_SELECT: '선택해주세요.',
+
+  MAX_LENGTH: (length: number) => `${length}개의 숫자를 입력해주세요.`,
+
+  INVALID_ACCESS: '올바른 접근이 아닙니다.',
 };
