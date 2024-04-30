@@ -1,10 +1,10 @@
-import EnrollCard from './page/EnrollCard';
 import './reset.css';
+import Router from './Router';
 
 function App() {
   return (
     <>
-      <EnrollCard />
+      <Router />
     </>
   );
 }

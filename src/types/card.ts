@@ -10,8 +10,16 @@ export interface ExpiryDate {
   year: string;
 }
 
+export interface CardCompany {
+  name: string;
+  color: string;
+}
+
 export interface Card {
   cardNumbers: CardNumbers;
   expiryDate: ExpiryDate;
   userName: string;
+  cardCompany: CardCompany;
+  cvc: string;
+  password: string;
 }

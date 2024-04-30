@@ -1,48 +1,43 @@
 import styled from 'styled-components';
 import { InputInfo } from '../types/input';
-import Validation from '../domain/InputValidation';
+import { forwardRef } from 'react';
+import { useInput } from '../hooks/useInput';
+import { InputValidation, validateLength } from '../domain/InputValidation';
 
 interface Props {
   info: InputInfo;
   handleInput: (value: string) => void;
   isError: boolean;
   handleErrorMessage: (errorMessage: string) => void;
+  onNext: () => void;
 }
 
-export default function Input({
-  info,
-  handleInput,
-  isError,
-  handleErrorMessage,
-}: Props) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    try {
-      Validation[info.validateType]?.(inputValue);
-      handleErrorMessage('');
-      handleInput(inputValue);
-    } catch (error) {
-      if (error instanceof Error) {
-        handleErrorMessage(error.message);
-      }
-    }
-  };
+export const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
+  const { info, isError } = props;
+  const { handleChange, handleBlur, handleKeyDown } = useInput({
+    ...props,
+    validate: InputValidation[info.validateType],
+    validateLength: (value) => validateLength(value, info.minLength),
+  });
 
   return (
     <StyledInput
-      color={isError ? 'red' : 'grey'}
-      type="text"
+      ref={ref}
+      $error={isError}
+      type={info.type || 'text'}
       maxLength={info.maxLength}
       placeholder={info.placeHolder}
-      onChange={handleChange}
+      onChange={(e) => handleChange(e, info.maxLength)}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
     />
   );
-}
+});
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ $error: boolean }>`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${({ color }) => color};
-  outline-color: ${({ color }) => color};
+  border: 1px solid ${({ $error }) => ($error ? 'red' : 'grey')};
+  outline-color: ${({ $error }) => ($error ? 'red' : 'grey')};
   border-radius: 3px;
 `;

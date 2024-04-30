@@ -12,4 +12,19 @@ export const DEFAULT_CARD: Card = {
     year: '',
   },
   userName: '',
+  cardCompany: {
+    name: '',
+    color: '',
+  },
+  cvc: '',
+  password: '',
+};
+
+export const DEFAULT_CARD_BOOLEAN: Record<string, boolean> = {
+  cardNumbers: false,
+  cardCompany: false,
+  expiryDate: false,
+  userName: false,
+  cvc: false,
+  password: false,
 };

@@ -4,29 +4,32 @@ import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_CARD } from '../constants/card';
+import SubmitCardBox from '../components/SubmitCardBox';
+import { Link } from 'react-router-dom';
+import { Page } from '../style/page.style';
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>(DEFAULT_CARD);
+  const [canSubmit, setCanSubmit] = useState<boolean>(false);
   return (
     <Page>
       <Container>
         <CardView cardInfo={cardInfo} />
-        <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
+        <InputForm
+          cardInfo={cardInfo}
+          handleInput={setCardInfo}
+          setCanSubmit={setCanSubmit}
+        />
       </Container>
+      <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
+        {canSubmit && <SubmitCardBox />}
+      </Link>
     </Page>
   );
 }
 
-const Page = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Container = styled.div`
+  margin: 50px 0px 80px;
   max-width: 400px;
   display: flex;
   flex-direction: column;

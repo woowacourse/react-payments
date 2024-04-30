@@ -1,10 +1,6 @@
 import ERROR_MESSAGES from '../constants/error';
-import {
-  DOUBLE_BLANK,
-  MONTH_RANGE,
-  UPPERCASE_AND_SPACE_ONLY,
-  YEAR_RANGE,
-} from '../constants/system';
+import { DOUBLE_BLANK, UPPERCASE_AND_SPACE_ONLY } from '../constants/system';
+import { isValidMonth, isValidYear } from '../utils/checkDateRange';
 
 function checkTrimBlank(n: string) {
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
@@ -30,10 +26,16 @@ function checkEmpty(n: string) {
   }
 }
 
+function empty(n: string) {
+  if (n.length === 0) {
+    throw new Error('빈칸');
+  }
+}
+
 function validateMonth(n: string) {
   if (checkEmpty(n)) return;
   const month = Number(n);
-  if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
+  if (!isValidMonth(month)) {
     throw new Error(ERROR_MESSAGES.INVALID_MONTH);
   }
 }
@@ -41,7 +43,7 @@ function validateMonth(n: string) {
 function validateYear(n: string) {
   if (checkEmpty(n)) return;
   const year = Number(n);
-  if (!(YEAR_RANGE.MIN <= year && year <= YEAR_RANGE.MAX)) {
+  if (!isValidYear(year)) {
     throw new Error(ERROR_MESSAGES.INVALID_YEAR);
   }
 }
@@ -52,12 +54,26 @@ function validateUpperCase(str: string) {
   }
 }
 
-type ValidationMap = Record<string, (n: string) => void>;
+export function checkLength(n: string, length: number) {
+  if (n.length < length) {
+    return false;
+  }
+  return true;
+}
 
-const Validation: ValidationMap = {
+export function validateLength(n: string, length: number) {
+  if (!checkLength(n, length)) {
+    throw new Error(ERROR_MESSAGES.INVALID_LENGTH);
+  }
+}
+
+type InputValidationMap = Record<string, (n: string) => void>;
+
+export const InputValidation: InputValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
     validateNumber(n);
+    empty(n);
   },
   month: (n: string) => {
     checkTrimBlank(n);
@@ -70,10 +86,15 @@ const Validation: ValidationMap = {
     validateYear(n);
   },
   userName: (n: string) => {
-    checkTrimBlank(n);
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
+  cvc: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
+  password: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
 };
-
-export default Validation;
