@@ -9,6 +9,16 @@ const CARD_FORM_MESSAGE = {
 
   inputCardOwner: "카드 소유자 이름을 입력해 주세요",
   cardOwner: "소유자 이름",
+
+  inputCardCompany: "카드사를 선택해주세요.",
+  cardCompanyDescription: "현재 국내 카드사만 가능합니다.",
+
+  inputCardCVC: "CVC 번호를 입력해 주세요.",
+  cardCVC: "CVC",
+
+  inputCardPassword: "비밀번호를 입력해 주세요.",
+  cardPasswordDescription: "앞의 2자리를 입력해 주세요.",
+  cardPassword: "비밀번호 앞 2자리",
 };
 
 export default CARD_FORM_MESSAGE;
