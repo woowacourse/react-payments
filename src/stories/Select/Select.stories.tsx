@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const 기본: Story = {
   args: {
-    value: null,
+    value: '',
     placeholder: '반가운 육칠이들',
     options: SIX_SEVEN.options,
   },

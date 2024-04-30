@@ -15,7 +15,7 @@ const previewProps = {
     month: '',
     year: '',
   },
-  cardBrandState: null,
+  cardBrandState: '',
   userNameState: '',
   showImageCondition: {
     visaShowCondition: false,

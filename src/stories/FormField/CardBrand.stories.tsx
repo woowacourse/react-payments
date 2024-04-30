@@ -30,7 +30,7 @@ const meta = {
   component: CardBrand,
   decorators: [
     (Story, context) => {
-      const [brand, setBrand] = useState<string | null>(null);
+      const [brand, setBrand] = useState<string>('');
       const handleBrand = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setBrand(event.target.value);
       };
@@ -53,6 +53,6 @@ type Story = StoryObj<typeof meta>;
 
 export const 카드브랜드와_셀렉트: Story = {
   args: {
-    cardBrandState: null,
+    cardBrandState: '',
   },
 };
