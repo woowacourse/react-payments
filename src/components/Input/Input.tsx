@@ -1,12 +1,12 @@
 import { InputHTMLAttributes } from 'react';
-import { StyledInput } from './style';
+import * as Styled from './style';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   invalid?: boolean;
 }
 
 const Input = ({ invalid, ...props }: InputProps) => {
-  return <StyledInput {...props} $invalid={invalid} />;
+  return <Styled.Input {...props} $invalid={invalid} />;
 };
 
 export default Input;

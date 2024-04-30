@@ -2,6 +2,8 @@ const MAX_LENGTH = {
   cardNumber: 4,
   expirationDate: 2,
   userName: 20,
+  cvc: 3,
+  password: 2,
 } as const;
 
 const REG_EXP = {
@@ -9,12 +11,14 @@ const REG_EXP = {
   month: /^(0[1-9]|1[0-2])$/,
   year: /^\d{2}$/,
   userName: /^[A-Z]+\s[A-Z]+$/,
+  cvc: /^\d{3}$/,
+  password: /^\d{2}$/,
 } as const;
 
 const CONDITION = {
   MAX_LENGTH,
   REG_EXP,
-  hiddenCardNumber: '*',
+  hiddenCardNumber: '•',
   splitSlash: '/',
   showVisa: (first: number | undefined) => String(first)[0] === '4',
   showMasterCard: (first: number | undefined) =>

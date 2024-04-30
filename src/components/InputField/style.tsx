@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const InputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
   width: 100%;
 `;
 
@@ -15,6 +16,7 @@ export const Label = styled.label`
 export const Inputs = styled.div`
   display: flex;
   gap: 1rem;
+
   width: 100%;
 `;
 

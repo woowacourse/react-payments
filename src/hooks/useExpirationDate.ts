@@ -1,30 +1,45 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
-import { MonthState, YearState } from '../types/Types';
+import MESSAGE from '../constants/Message';
 
 const { REG_EXP } = CONDITION;
+const { ERROR } = MESSAGE;
 
-export interface ExpirationDateState {
-  monthState: MonthState;
-  yearState: YearState;
+interface DetailExpirationDateStateType {
+  value: number | undefined;
+  setValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isError: boolean;
+}
+export interface ExpirationDateStateType {
+  monthState: DetailExpirationDateStateType;
+  yearState: DetailExpirationDateStateType;
+  errorMessage: string;
+  isValid: boolean;
 }
 
 const useExpirationDate = (defaultValues: Array<number | undefined>) => {
-  const [month, setMonth, monthError] = useInput(defaultValues[0], REG_EXP.month);
-  const [year, setYear, yearError] = useInput(defaultValues[1], REG_EXP.year);
+  const [month, setMonth, isMonthError] = useInput(defaultValues[0], REG_EXP.month);
+  const [year, setYear, isYearError] = useInput(defaultValues[1], REG_EXP.year);
+
+  const isExpirationDateFilled = month && year;
+  const isExpirationDateError = isMonthError || isYearError;
+  const expirationErrorMessage = isMonthError ? ERROR.month : isYearError ? ERROR.year : '';
+  const isExpirationDateValid = isExpirationDateFilled !== undefined && !isExpirationDateError;
 
   return {
     expirationDateState: {
       monthState: {
-        month,
-        setMonth,
-        monthError,
+        value: month,
+        setValue: setMonth,
+        isError: isMonthError,
       },
       yearState: {
-        year,
-        setYear,
-        yearError,
+        value: year,
+        setValue: setYear,
+        isError: isYearError,
       },
+      errorMessage: expirationErrorMessage,
+      isValid: isExpirationDateValid,
     },
   };
 };
