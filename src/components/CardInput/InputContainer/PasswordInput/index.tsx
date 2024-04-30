@@ -27,20 +27,18 @@ function PasswordInput({
   return (
     <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
-        <div>
-          <div className={styles.inputWrap}>
-            <Input
-              type="password"
-              name="password"
-              value={password}
-              placeholder={placeholder}
-              isError={passwordError}
-              onChange={(event) => onPasswordChange(event.target.value)}
-              autoFocus
-            />
-          </div>
-          <InputErrorMessage errorMessage={errorMessage} />
+        <div className={styles.inputWrap}>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            placeholder={placeholder}
+            isError={passwordError}
+            onChange={(event) => onPasswordChange(event.target.value)}
+            autoFocus
+          />
         </div>
+        <InputErrorMessage errorMessage={errorMessage} />
       </InputField>
     </InputWrap>
   );
