@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { ExpirationDate } from '../../types/card';
+import { EXPIRATION_DATE } from '../../constants/system';
 
 interface Props {
   expirationDate: ExpirationDate;
@@ -42,6 +43,13 @@ export default function ExpirationDateInput({
   ) => {
     try {
       Validation[info]?.(e.target.value);
+      const nextIndex = index + 1;
+      if (
+        e.target.value.length === EXPIRATION_DATE.FIELD_LENGTH &&
+        nextIndex < inputRefs.current.length
+      ) {
+        inputRefs.current[nextIndex]?.focus();
+      }
       handleUpdateExpirationDateErrorMessages(index, '', false);
       handleUpdateExpirationDateInput(index, e.target.value);
     } catch (error) {
@@ -49,14 +57,10 @@ export default function ExpirationDateInput({
         handleUpdateExpirationDateErrorMessages(index, error.message, true);
       }
     }
-    const nextIndex = index + 1;
-    if (e.target.value.length === 2 && nextIndex < inputRefs.current.length) {
-      inputRefs.current[nextIndex]?.focus();
-    }
   };
 
   const checkInputError = (index: number) => {
-    const cardKey = date[
+    const cardKey = Object.keys(expirationDate.expirationDateFields)[
       index
     ] as keyof typeof expirationDate.expirationDateFields;
     return expirationDate.expirationDateFields[cardKey].isError;
