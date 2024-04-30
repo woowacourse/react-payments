@@ -20,7 +20,7 @@ export default function CardHolder({ holderInput }: CardHolderProps) {
     <section>
       <SectionTitle
         title={PAYMENTS_MESSAGE.cardHolderTitle}
-        description={"영문 이름을 입력한 뒤 Enter를 눌러주세요"}
+        description={PAYMENTS_MESSAGE.cardHolderDescription}
       />
       <FormItem
         labelText={PAYMENTS_INPUT_MESSAGE.cardHolderLabel}
@@ -30,7 +30,7 @@ export default function CardHolder({ holderInput }: CardHolderProps) {
           <input
             type="text"
             placeholder={PAYMENTS_INPUT_MESSAGE.cardHolderPlaceHolder}
-            maxLength={30}
+            maxLength={PAYMENTS_INPUT_MESSAGE.cardHolderMaxLength}
             onChange={holderInput.onChangeHandler}
             onFocus={holderInput.onFocusHandler}
             onKeyDown={onEnterHandler}

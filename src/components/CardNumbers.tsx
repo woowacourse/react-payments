@@ -37,7 +37,7 @@ export default function CardNumbers({ cardNumberInputs }: CardNumbersProps) {
             key={idx}
             type="text"
             placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
-            maxLength={4}
+            maxLength={PAYMENTS_INPUT_MESSAGE.cardNumberMaxLength}
             onChange={cardNumbersInput.onChangeHandler}
             onFocus={() => {
               setFocusInput(idx);

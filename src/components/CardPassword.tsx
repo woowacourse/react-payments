@@ -1,3 +1,5 @@
+import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
+
 import FormItem from "./FormItem";
 import SectionTitle from "./SectionTitle";
 import { UseInputHookValue } from "../hooks/useInput";
@@ -10,17 +12,17 @@ export default function CardPassWord({ passwordInput }: CardPassWordProps) {
   return (
     <section>
       <SectionTitle
-        title={"비밀번호를 입력해 주세요"}
-        description={"앞의 2자리를 입력해 주세요"}
+        title={PAYMENTS_MESSAGE.cardPasswordTitle}
+        description={PAYMENTS_MESSAGE.cardPasswordDescription}
       />
       <FormItem
-        labelText={"비밀번호 앞 2자리"}
+        labelText={PAYMENTS_INPUT_MESSAGE.cardPasswordLabel}
         errorMessage={passwordInput.errorMessage}
       >
         <input
           type="password"
-          placeholder={"00"}
-          maxLength={2}
+          placeholder={PAYMENTS_INPUT_MESSAGE.cardPasswordPlaceHolder}
+          maxLength={PAYMENTS_INPUT_MESSAGE.cardPasswordMaxLength}
           onChange={passwordInput.onChangeHandler}
           onFocus={passwordInput.onFocusHandler}
           value={passwordInput.value}

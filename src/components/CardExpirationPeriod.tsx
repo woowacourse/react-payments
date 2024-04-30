@@ -36,7 +36,7 @@ export default function CardExpirationPeriod({
           <input
             key={idx}
             type="text"
-            maxLength={2}
+            maxLength={PAYMENTS_INPUT_MESSAGE.expirationPeriodMaxLength}
             placeholder={
               PAYMENTS_INPUT_MESSAGE.expirationPeriodPlaceHolder[idx]
             }

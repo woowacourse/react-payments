@@ -1,3 +1,5 @@
+import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
+
 import { CARD_ISSUER } from "../constants/cardIssuer";
 import FormItem from "./FormItem";
 import SectionTitle from "./SectionTitle";
@@ -12,13 +14,13 @@ export default function CardIssuer({ value, setValue }: CardIssuerProps) {
   return (
     <section>
       <SectionTitle
-        title={"카드사를 선택해 주세요"}
-        description={"현재 국내 카드사만 가능합니다."}
+        title={PAYMENTS_MESSAGE.cardIssuerTitle}
+        description={PAYMENTS_MESSAGE.cardIssuerDescription}
       />
       <FormItem>
         <SelectBox
           options={CARD_ISSUER}
-          placeholder={"카드사를 선택해 주세요"}
+          placeholder={PAYMENTS_INPUT_MESSAGE.cardIssuerPlaceHolder}
           selected={value}
           setSelected={setValue}
         />
