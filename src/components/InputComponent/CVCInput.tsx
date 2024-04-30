@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { CVC } from '../../types/card';
+import { CVC_LIMIT } from '../../constants/system';
 
 interface Props {
   CVC: CVC;
@@ -57,7 +58,7 @@ export default function CVCInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: 1 }).map((_, index) => (
+        {Array.from({ length: CVC_LIMIT.TOTAL_FIELDS }).map((_, index) => (
           <Input
             key={index}
             type='string'

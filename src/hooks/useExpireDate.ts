@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ExpirationDate } from '../types/card';
+import { EXPIRATION_DATE } from '../constants/system';
 
 const useExpireDate = (initExpirationDate = { month: '', year: '' }) => {
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
@@ -23,13 +24,13 @@ const useExpireDate = (initExpirationDate = { month: '', year: '' }) => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(
         expirationDate.expirationDateFields
-      ).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
-          return pre + 1;
+      ).reduce((count, field) => {
+        if (!field.isError && field.value !== '' && field.value.length === EXPIRATION_DATE.FIELD_LENGTH) {
+          return count + 1;
         }
-        return pre;
+        return count;
       }, 0);
-      return isNotAllError === 2;
+      return isNotAllError === EXPIRATION_DATE.TOTAL_FIELDS;
     };
     if (checkCompleteInput()) {
       setExpirationDate((prev: ExpirationDate) => ({

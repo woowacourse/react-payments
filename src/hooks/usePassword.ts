@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Password } from '../types/card';
+import { PASSWORD } from '../constants/system';
 
 const usePassword = (initPassword = '') => {
   const [password, setPassword] = useState<Password>({
@@ -13,14 +14,14 @@ const usePassword = (initPassword = '') => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(password.passwordField).reduce(
         (pre, cur) => {
-          if (!cur.isError && cur.value !== '' && cur.value.length === 2) {
+          if (!cur.isError && cur.value !== '' && cur.value.length === PASSWORD.FIELD_LENGTH) {
             return pre + 1;
           }
           return pre;
         },
         0
       );
-      return isNotAllError === 1;
+      return isNotAllError === PASSWORD.TOTAL_FIELDS;
     };
     if (checkCompleteInput()) {
       setPassword((prev: Password) => ({

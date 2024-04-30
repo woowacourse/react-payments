@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CVC } from '../types/card';
+import { CVC_LIMIT } from '../constants/system';
 
 const useCVC = (initCVC = '') => {
   const [CVC, setCVC] = useState<CVC>({
@@ -12,12 +13,12 @@ const useCVC = (initCVC = '') => {
   useEffect(() => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(CVC.CVCField).reduce((pre, cur) => {
-        if (!cur.isError && cur.value !== '' && cur.value.length === 3) {
+        if (!cur.isError && cur.value !== '' && cur.value.length === CVC_LIMIT.FIELD_LENGTH) {
           return pre + 1;
         }
         return pre;
       }, 0);
-      return isNotAllError === 1;
+      return isNotAllError === CVC_LIMIT.TOTAL_FIELDS;
     };
     if (checkCompleteInput()) {
       setCVC((prev: CVC) => ({

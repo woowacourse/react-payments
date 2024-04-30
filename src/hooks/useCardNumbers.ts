@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CardNumbers } from '../types/card';
+import { CARD_NUMBER } from '../constants/system';
 
 const useCardNumbers = (
   initCardNumber1: string,
@@ -20,15 +21,15 @@ const useCardNumbers = (
   useEffect(() => {
     const checkCompleteInput = () => {
       const isNotAllError = Object.values(cardNumbers.cardNumberFields).reduce(
-        (pre, cur) => {
-          if (!cur.isError && cur.value !== '' && cur.value.length === 4) {
-            return pre + 1;
+        (count, field) => {
+          if (!field.isError && field.value !== '' && field.value.length === CARD_NUMBER.FIELD_LENGTH) {
+            return count + 1;
           }
-          return pre;
+          return count;
         },
         0
       );
-      return isNotAllError === 4;
+      return isNotAllError === CARD_NUMBER.TOTAL_FIELDS;
     };
     if (checkCompleteInput()) {
       setCardNumbers((prev: CardNumbers) => ({

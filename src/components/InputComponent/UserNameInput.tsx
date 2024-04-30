@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Validation from '../../domain/InputValidation';
 import InputField from './InputField';
 import { UserName } from '../../types/card';
+import { USER_NAME } from '../../constants/system';
 
 interface Props {
   userName: UserName;
@@ -59,7 +60,7 @@ export default function UserNameInput({
       },
       0
     );
-    return isNotAllError === 1;
+    return isNotAllError === USER_NAME.TOTAL_FIELDS;
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -82,7 +83,7 @@ export default function UserNameInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: 1 }).map((_, index) => (
+        {Array.from({ length: USER_NAME.TOTAL_FIELDS }).map((_, index) => (
           <Input
             key={index}
             type='string'
