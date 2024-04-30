@@ -20,6 +20,7 @@ import {
   usePasswordInput,
   useUserNameInput,
 } from '../../hooks/cardForm';
+import useCardDirection from '../../hooks/useCardDirection';
 
 import styles from './style.module.css';
 
@@ -43,10 +44,10 @@ function CardRegisterForm() {
     CVCNumber,
     CVCNumberError,
     isCVCNumberFilled,
-    showCardBack,
     handleCVCNumberChange,
-    handleShowCardBack,
   } = useCVCInput(INPUT_LENGTH.cardCVC);
+
+  const { isFront, changeCardDirection } = useCardDirection();
 
   const {
     userName,
@@ -73,7 +74,7 @@ function CardRegisterForm() {
 
   const isError = errors.some((error) => error === true);
   const isBlank = inputs.some((input) => input === '');
-  
+
   const handleConfirmButtonClick = () => {
     navigate('/card-register-success', {
       state: { cardNumber: numbers[0], cardCompany },
@@ -82,15 +83,15 @@ function CardRegisterForm() {
 
   return (
     <div className="inner">
-      {showCardBack ? (
-        <CardBack CVCNumber={CVCNumber} />
-      ) : (
+      {isFront ? (
         <CardFront
           cardNumbers={numbers}
           period={period}
           userName={userName}
           cardCompany={cardCompany}
         />
+      ) : (
+        <CardBack CVCNumber={CVCNumber} />
       )}
       <form className="form-container">
         <fieldset>
@@ -106,8 +107,8 @@ function CardRegisterForm() {
               CVCNumber={CVCNumber}
               CVCNumberError={CVCNumberError}
               onCVCNumberChange={handleCVCNumberChange}
-              onFocus={handleShowCardBack}
-              onBlur={handleShowCardBack}
+              onFocus={changeCardDirection}
+              onBlur={changeCardDirection}
             />
           )}
           {isPeriodAllFilled && (

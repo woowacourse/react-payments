@@ -6,7 +6,6 @@ function useCVCInput(maxLength: number) {
   const [CVCNumber, setCVCNumber] = useState('');
   const [CVCNumberError, setCVCNumberError] = useState(false);
   const [isCVCNumberFilled, setIsCVCNumberFilled] = useState(false);
-  const [showCardBack, setShowCardBack] = useState(false);
 
   const handleCVCNumberChange = (value: string) => {
     const trimmedValue = value.slice(0, maxLength);
@@ -20,17 +19,11 @@ function useCVCInput(maxLength: number) {
     }
   };
 
-  const handleShowCardBack = () => {
-    setShowCardBack((prev) => !prev);
-  };
-
   return {
     CVCNumber,
     CVCNumberError,
     isCVCNumberFilled,
-    showCardBack,
     handleCVCNumberChange,
-    handleShowCardBack,
   };
 }
 

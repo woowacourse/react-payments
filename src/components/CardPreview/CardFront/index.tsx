@@ -33,7 +33,7 @@ function CardFront({
   function getCardCompanyMark(): 'visa' | 'master' | 'etc' {
     const cardNumber = cardNumbers.join('');
 
-    if (cardNumber.length < 16) {
+    if (cardNumber.length < INPUT_LENGTH.cardNumber * 4) {
       return 'etc';
     }
     if (CARD_MARK_REGEX.visa.test(cardNumber)) {
