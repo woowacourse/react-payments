@@ -5,20 +5,24 @@ import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import SelectCardCompanyField from './SelectCardCompanyField';
 import useStep from '../hooks/useStep';
 import useComplete from '../hooks/useComplete';
+import { DEFAULT_CARD_BOOLEAN } from '../constants/card';
 
 interface Props {
   cardInfo: Card;
   handleInput: (value: Card) => void;
-  handleSubmit: (value: boolean) => void;
+  setCanSubmit: (value: boolean) => void;
 }
 
 export default function InputForm({
   cardInfo,
   handleInput,
-  handleSubmit,
+  setCanSubmit,
 }: Props) {
   const { step, handleNext } = useStep();
-  const { handleComplete } = useComplete({ handleSubmit });
+  const { handleComplete } = useComplete({
+    defaultValue: DEFAULT_CARD_BOOLEAN,
+    setCanSubmit,
+  });
 
   const handleInputValue = (value: Record<string, string>) => {
     handleInput({

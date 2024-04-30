@@ -18,7 +18,7 @@ export default function EnrollCard() {
         <InputForm
           cardInfo={cardInfo}
           handleInput={setCardInfo}
-          handleSubmit={setCanSubmit}
+          setCanSubmit={setCanSubmit}
         />
       </Container>
       <Link to="/addSucceed" state={{ cardInfo: cardInfo }}>
