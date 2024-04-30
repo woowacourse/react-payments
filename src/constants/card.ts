@@ -13,3 +13,8 @@ export const CARD_COMPANY: { [key: string]: string } = {
   하나카드: "#009490",
   국민카드: "#6A6056",
 };
+
+export const CARD_PATH = {
+  REGISTRATION_PAGE: "/cardRegistrationPage",
+  CARD_REGISTRATION_COMPLETE_PAGE: "/cardRegistrationCompletePage",
+};

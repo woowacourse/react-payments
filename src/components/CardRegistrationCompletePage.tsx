@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CheckImage from "../assets/Check.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { CARD_PATH } from "../constants/card";
 
 const Styled = {
   CardRegistrationCompletePageLayout: styled.section`
@@ -70,7 +71,7 @@ const CardRegistrationCompletePage = () => {
       </Styled.CardRegistrationMessage>
       <Styled.RegistrationCompleteButton
         onClick={() => {
-          navigate("/cardRegistrationPage");
+          navigate(`${CARD_PATH.REGISTRATION_PAGE}`);
         }}
       >
         확인

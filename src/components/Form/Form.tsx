@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import CardCVCForm from "./CardCVCForm";
 import CardPasswordForm from "./CardPasswordForm";
 import { useNavigate } from "react-router-dom";
+import { CARD_PATH } from "../../constants/card";
 
 export interface FormProps {
   cardNumbers?: string[];
@@ -231,7 +232,7 @@ const Form = ({
       {isSubmitEnabled && (
         <Styled.SubmitButton
           onClick={() => {
-            navigate("/cardRegistrationCompletePage", {
+            navigate(`${CARD_PATH.CARD_REGISTRATION_COMPLETE_PAGE}`, {
               state: { cardNumbers, cardCompany },
             });
           }}
