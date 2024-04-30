@@ -12,8 +12,10 @@ export default {
 
 const Template: StoryObj<typeof CardDropDown> = {
   args: {
-    handleInput: action('Card Brand Selected'),
-    handleShowComponent: action('Next Component Show Triggered'),
+    handleInput : {
+      handleUpdateCardBrand: action(' '),
+      handleUpdateCardBrandIsNextField: action(' '),
+    }
   },
 };
 
