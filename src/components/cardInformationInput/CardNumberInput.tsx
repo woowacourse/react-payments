@@ -1,16 +1,16 @@
 import { CARD_NUMBER } from '../../constants/inputInformation';
-import { CardNumberErrorType, CardNumberKeys } from '../../types/cardType';
+import { VALIDATION } from '../../constants/validation';
+import { CardNumberErrorType, CardNumberKeys, OnChange, Validation } from '../../types/cardType';
 import { cardNumberValidated } from '../../validations/validateInput';
 import Input from '../common/Input';
 import InputGroup from '../common/InputGroup';
 
 interface CardNumberInputPropType {
-  setValue: (name: string, value: string) => void;
   error: CardNumberErrorType;
-  handleError: (name: string, errorMessage: string) => void;
+  handleOnChange: (validation: Validation) => OnChange;
 }
 
-const CardNumberInput = ({ setValue, error, handleError }: CardNumberInputPropType) => {
+const CardNumberInput = ({ error, handleOnChange }: CardNumberInputPropType) => {
   const { names, title, subtitle, label, maxLength, placeholders } = CARD_NUMBER;
 
   return (
@@ -19,15 +19,14 @@ const CardNumberInput = ({ setValue, error, handleError }: CardNumberInputPropTy
         const isPassword = name === 'number_3' || name === 'number_4';
         return (
           <Input
+            autoFocus={index === 0}
             key={index}
             type={isPassword ? 'password' : 'input'}
             name={name}
-            setValue={setValue}
+            handleOnChange={handleOnChange(cardNumberValidated(VALIDATION.cardNumberCount))}
             placeholder={placeholders[index]}
             maxLength={maxLength}
-            validation={cardNumberValidated}
             error={error[name]}
-            handleError={handleError}
           />
         );
       })}

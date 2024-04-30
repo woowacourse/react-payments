@@ -1,5 +1,7 @@
 export const VALIDATION = {
   cardNumberCount: 4,
+  cardCVCCount: 3,
+  cardPasswordCount: 2,
   cardMonthRange: {
     min: 1,
     max: 12,

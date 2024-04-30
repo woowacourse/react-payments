@@ -1,14 +1,17 @@
 import { css } from '@emotion/react';
 import { MASTERCARD, VISA } from '../../assets';
 import { CARD_INFORMATION } from '../../constants/cardInformation';
-import { cardBrand, CardBrandType, CardNumberType, OwnerType, PeriodType } from '../../types/cardType';
+import { cardBrand, CardBrandType, CardNumberType, IssuerType, OwnerType, PeriodType } from '../../types/cardType';
 import { isValueInRange } from '../../util/isValueInRange';
 import { monthFormat, yearFormat } from '../../util/periodFormat';
+import ISSUER_COLOR from '../../constants/issuerColor';
+import styled from '@emotion/styled';
 
 interface CardImageType {
   cardNumber: CardNumberType;
   cardPeriod: PeriodType;
   cardOwner: OwnerType;
+  issuer: string;
 }
 
 interface CardImageTableType {
@@ -17,7 +20,7 @@ interface CardImageTableType {
   noneImage: string;
 }
 
-function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
+function CardFrontImage({ cardNumber, issuer, cardPeriod, cardOwner }: CardImageType) {
   const cardBrandType = (): CardBrandType => {
     const startNumber = Number(cardNumber.number_1.substring(0, 2));
     if (cardNumber.number_1[0] === CARD_INFORMATION.visa) {
@@ -51,7 +54,7 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
 
   return (
     <>
-      <div css={cardContainerStyle}>
+      <CardContainerStyle color={ISSUER_COLOR[issuer as IssuerType]} className="card-image">
         <div css={cardHeaderStyle}>
           <div css={cardIcStyle}></div>
           {imageUrl && <img src={imageUrl} css={cardLogoStyle} />}
@@ -69,13 +72,13 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
           </p>
           <p css={cardDetailStyle}>{cardOwner.owner}</p>
         </div>
-      </div>
+      </CardContainerStyle>
     </>
   );
 }
 
-const cardContainerStyle = css`
-  background-color: #333333;
+export const CardContainerStyle = styled.div`
+  background-color: ${(props) => (props.color ? props.color : '#333333')};
   width: 212px;
   height: 132px;
   border-radius: 4px;
@@ -86,6 +89,13 @@ const cardContainerStyle = css`
   flex-direction: column;
   gap: 14px;
   margin: 0 auto;
+  /* 
+  transition: transform 0.5s ease; 
+  transform-origin: center;
+
+  .rotate-animation {
+    transform: rotateY(60deg);
+  } */
 `;
 
 const cardHeaderStyle = css`
@@ -135,4 +145,4 @@ const cardNumberGridStyle = css`
   justify-content: center;
 `;
 
-export default CardImage;
+export default CardFrontImage;

@@ -1,16 +1,17 @@
+import { Dispatch, SetStateAction } from 'react';
 import { CARD_OWNER } from '../../constants/inputInformation';
-import { OwnerErrorType, OwnerKeys } from '../../types/cardType';
+import { OnChange, OwnerErrorType, OwnerKeys, Validation } from '../../types/cardType';
 import { cardOwnerValidated } from '../../validations/validateInput';
 import Input from '../common/Input';
 import InputGroup from '../common/InputGroup';
 
 interface CardOwnerInputPropType {
-  setValue: (name: string, value: string) => void;
   error: OwnerErrorType;
-  handleError: (name: string, errorMessage: string) => void;
+  handleOnChange: (validation: Validation) => OnChange;
+  setBlur?: Dispatch<SetStateAction<boolean>>;
 }
 
-const CardOwnerInput = ({ setValue, error, handleError }: CardOwnerInputPropType) => {
+const CardOwnerInput = ({ error, handleOnChange, setBlur }: CardOwnerInputPropType) => {
   const { names, title, subtitle, label, maxLength, placeholders } = CARD_OWNER;
 
   return (
@@ -18,14 +19,15 @@ const CardOwnerInput = ({ setValue, error, handleError }: CardOwnerInputPropType
       {names.map((name: OwnerKeys, index: number) => {
         return (
           <Input
+            autoFocus={index === 0}
             key={index}
             name={name}
-            setValue={setValue}
             placeholder={placeholders[index]}
             maxLength={maxLength}
-            validation={cardOwnerValidated}
+            handleOnChange={handleOnChange(cardOwnerValidated)}
             error={error[name]}
-            handleError={handleError}
+            setBlur={() => setBlur && setBlur(true)}
+            setFocus={() => setBlur && setBlur(false)}
           />
         );
       })}
