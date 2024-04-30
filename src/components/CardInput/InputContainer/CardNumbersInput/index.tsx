@@ -51,6 +51,7 @@ function CardNumbersInput({
               value={number}
               placeholder={placeholder}
               isError={numberErrors[index]}
+              autoFocus={index === 0}
               onChange={(event) => handleInputChange(event.target.value, index)}
             />
           ))}

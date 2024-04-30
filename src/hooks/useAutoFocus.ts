@@ -1,15 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const useAutoFocus = (inputCounts: number) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>(
     Array.from({ length: inputCounts }, () => null),
   );
-
-  useEffect(() => {
-    if (inputRefs.current[0]) {
-      inputRefs.current[0].focus();
-    }
-  }, []);
 
   const setElementRef = (element: HTMLInputElement | null, index: number) => {
     inputRefs.current[index] = element;

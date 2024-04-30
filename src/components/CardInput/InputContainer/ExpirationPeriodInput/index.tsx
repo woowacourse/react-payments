@@ -39,12 +39,6 @@ function CardExpirationPeriodInput({
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
   const { setElementRef, focusElementAtIndex } = useAutoFocus(2);
 
-  useEffect(() => {
-    if (period.month.length === INPUT_LENGTH.cardExpiration) {
-      focusElementAtIndex(1);
-    }
-  }, [period.month]);
-
   const getErrorMessage = () => {
     if (periodErrors.month) {
       return ERROR_MESSAGE.cardExpirationPeriod.month;
@@ -56,6 +50,14 @@ function CardExpirationPeriodInput({
 
     if (periodErrors.expired) {
       return ERROR_MESSAGE.cardExpirationPeriod.expired;
+    }
+  };
+
+  const handleMonthChange = (value: string) => {
+    onPeriodChange('month', value);
+
+    if (value.length === INPUT_LENGTH.cardExpiration) {
+      focusElementAtIndex(1);
     }
   };
 
@@ -71,7 +73,8 @@ function CardExpirationPeriodInput({
               value={period.month}
               placeholder={monthPlaceholder}
               isError={periodErrors.month || periodErrors.expired}
-              onChange={(event) => onPeriodChange('month', event.target.value)}
+              autoFocus
+              onChange={(event) => handleMonthChange(event.target.value)}
             />
             <Input
               ref={(element) => setElementRef(element, 1)}
