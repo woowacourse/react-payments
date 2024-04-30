@@ -18,12 +18,10 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
   const validateCardNumbers = (values: string[]) => {
     if (values.every(value => value.length === 0)) return
     const newHasErrors = [...hasErrors];
-    let anyError = false;
 
     values.forEach((value, index) => {
       if (value.length !== OPTION.cardNumberMaxLength) {
         newHasErrors[index] = true;
-        anyError = true;
       } else {
         newHasErrors[index] = false;
       }
@@ -31,7 +29,7 @@ const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
 
     setHasErrors(newHasErrors);
 
-    if (anyError) {
+    if (newHasErrors.some(value => value === true)) {
       setError(ERROR_MESSAGE.cardNumberOutOfRange);
     } else {
       setError('');
