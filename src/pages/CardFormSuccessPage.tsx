@@ -15,7 +15,7 @@ const CardFormSuccessPage = () => {
   const { formState, dispatch, isFormInputCompleted } = useCardAddForm();
 
   const { first } = formState.cardNumbers.value;
-  const { cardCompany } = formState.cardCompany.value;
+  const cardCompany = formState.cardCompany.value;
 
   const onClick = () => {
     dispatch({ type: "RESET" });
