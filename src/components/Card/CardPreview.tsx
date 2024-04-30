@@ -110,10 +110,12 @@ const CardPreview = ({
 
   useEffect(() => {
     if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
+  }, [cardCompany]);
 
+  useEffect(() => {
     if (focusedField === "cardCVC") setIsFlipped(true);
     if (focusedField === "cardPassword") setIsFlipped(false);
-  }, [cardCompany, focusedField]);
+  }, [focusedField]);
 
   return (
     <>
