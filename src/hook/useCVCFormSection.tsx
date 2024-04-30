@@ -14,16 +14,14 @@ interface UseCVCFormSectionProps {
 
 const useCVCFormSection = (props: UseCVCFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, handleCardState, ref } = props
-  const [error, setError] = useState('')
 
-  const { handleChange } = useFormSection({
+  const { handleChange, error, setError } = useFormSection({
     value: cardInfo.cvc.value,
     ref: ref,
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.cvcMaxLength,
     dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value }),
-    setError: setError,
   });
 
   const validateCVC = (value: string) => {

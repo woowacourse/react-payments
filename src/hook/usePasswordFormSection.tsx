@@ -13,16 +13,14 @@ interface UsePasswordFormSectionProps {
 
 const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, ref } = props
-  const [error, setError] = useState('')
 
-  const { handleChange } = useFormSection({
+  const { handleChange, error, setError } = useFormSection({
     value: cardInfo.password.value,
     ref: ref,
     regex: REGEX.numbers,
     errorMessage: ERROR_MESSAGE.onlyNumber,
     maxLength: OPTION.passwordMaxLength,
     dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_PASSWORD_VALUE', value }),
-    setError: setError
   });
 
   const validatePassword = (value: string) => {

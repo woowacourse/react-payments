@@ -11,15 +11,13 @@ interface UseNameFormSectionProps {
 
 const useNameFormSection = (props: UseNameFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, ref } = props
-  const [error, setError] = useState('')
 
-  const { handleChange } = useFormSection({
+  const { handleChange, error, setError } = useFormSection({
     value: cardInfo.name.value,
     ref: ref,
     regex: REGEX.name,
     errorMessage: ERROR_MESSAGE.onlyEnglish,
     dispatchCardInfo: (value: string) => dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value }),
-    setError: setError,
   });
 
   const validateName = (value: string) => {

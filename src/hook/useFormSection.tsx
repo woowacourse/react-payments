@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface UseFormSectionProps {
   value: string;
@@ -7,11 +7,12 @@ interface UseFormSectionProps {
   errorMessage: string;
   maxLength?: number;
   dispatchCardInfo: (value: string) => void
-  setError: (error: string) => void
+
 }
 
 const useFormSection = (props: UseFormSectionProps) => {
-  const { value, ref, regex, errorMessage, maxLength, dispatchCardInfo, setError } = props
+  const { value, ref, regex, errorMessage, maxLength, dispatchCardInfo } = props
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -32,7 +33,7 @@ const useFormSection = (props: UseFormSectionProps) => {
     }
   }, [value]);
 
-  return { value, handleChange };
+  return { handleChange, error, setError };
 };
 
 export default useFormSection;
