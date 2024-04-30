@@ -15,13 +15,13 @@ const useExpirationDate = (
 
   const {
     value: month,
-    onChange: setMonth,
+    onChange: onChangeMonth,
     isError: isMonthError,
     clear: monthClear,
   } = useInput<string>(defaultValues[0] ?? '', REG_EXP.month, monthCondition);
   const {
     value: year,
-    onChange: setYear,
+    onChange: onChangeYear,
     isError: isYearError,
     clear: yearClear,
   } = useInput<string>(defaultValues[1] ?? '', REG_EXP.year, yearCondition);
@@ -44,8 +44,8 @@ const useExpirationDate = (
       year,
     },
     setExpirationDateState: {
-      setMonth,
-      setYear,
+      onChangeMonth,
+      onChangeYear,
     },
     expirationDateErrorState: {
       isMonthError,

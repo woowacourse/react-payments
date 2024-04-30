@@ -24,7 +24,7 @@ const useForm = (defaultValues: FormState) => {
     showImageCondition,
     resetCardNumbers,
   } = useCardNumbers(defaultValues.cardNumbers, showNextFieldOnValid);
-  const { cardBrandState, setCardBrandState, isCardBrandError, resetCardBrand } = useCardBrand(
+  const { cardBrandState, onChangeCardBrand, isCardBrandError, resetCardBrand } = useCardBrand(
     defaultValues.cardBrand,
     showNextFieldOnValid,
   );
@@ -34,18 +34,18 @@ const useForm = (defaultValues: FormState) => {
     expirationDateErrorState,
     resetExpirationDate,
   } = useExpirationDate(defaultValues.expirationDate, showNextFieldOnValid);
-  const { userNameState, setUserNameState, isUserNameError, resetUserName } = useUserName(
+  const { userNameState, onChangeUserName, isUserNameError, resetUserName } = useUserName(
     defaultValues.userName,
   );
   const {
     cvcNumberState,
-    setCVCNumberState,
+    onChangeCVC,
     isCVCNumberError,
     isFocusCVCPreview,
     setIsFocusCVCPreview,
     resetCVCNumber,
   } = useCVCNumber(defaultValues.cvcNumber, showNextFieldOnValid);
-  const { passwordState, setPasswordState, isPasswordError, resetPassword } = usePassword(
+  const { passwordState, onChangePassword, isPasswordError, resetPassword } = usePassword(
     defaultValues.password,
   );
 
@@ -94,23 +94,23 @@ const useForm = (defaultValues: FormState) => {
     },
     userName: {
       userNameState,
-      setUserNameState,
+      onChangeUserName,
       isUserNameError,
       showNextFieldOnValid,
     },
     cardBrand: {
       cardBrandState,
-      setCardBrandState,
+      onChangeCardBrand,
     },
     cvcNumber: {
       cvcNumberState,
-      setCVCNumberState,
+      onChangeCVC,
       isCVCNumberError,
       setIsFocusCVCPreview,
     },
     password: {
       passwordState,
-      setPasswordState,
+      onChangePassword,
       isPasswordError,
     },
     isFieldShowCount,

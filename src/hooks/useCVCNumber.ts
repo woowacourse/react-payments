@@ -14,7 +14,7 @@ const useCVCNumber = (
 
   const {
     value: cvcNumberState,
-    onChange: setCVCNumberState,
+    onChange,
     isError: isCVCNumberError,
     clear: resetCVCNumber,
   } = useInput<string>(defaultValue, REG_EXP.cvcNumber, cvcNumberCondition);
@@ -31,7 +31,7 @@ const useCVCNumber = (
 
   return {
     cvcNumberState,
-    setCVCNumberState,
+    onChangeCVC: onChange,
     isCVCNumberError,
     isFocusCVCPreview,
     setIsFocusCVCPreview,

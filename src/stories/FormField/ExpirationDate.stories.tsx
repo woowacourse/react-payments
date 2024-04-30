@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const 기본: Story = {
   args: {
     expirationDateState: { month: '', year: '' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: false, isYearError: false },
   },
 };
@@ -22,7 +22,7 @@ export const 기본: Story = {
 export const 정상입력: Story = {
   args: {
     expirationDateState: { month: '12', year: '24' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: false, isYearError: false },
   },
 };
@@ -30,7 +30,7 @@ export const 정상입력: Story = {
 export const 월_입력의_형식이_아닌_경우: Story = {
   args: {
     expirationDateState: { month: '쿠', year: '24' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: true, isYearError: false },
   },
 };
@@ -38,7 +38,7 @@ export const 월_입력의_형식이_아닌_경우: Story = {
 export const 월_입력_길이가_맞지_않은_경우: Story = {
   args: {
     expirationDateState: { month: '3', year: '24' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: true, isYearError: false },
   },
 };
@@ -46,7 +46,7 @@ export const 월_입력_길이가_맞지_않은_경우: Story = {
 export const 년_입력의_형식이_아닌_경우: Story = {
   args: {
     expirationDateState: { month: '12', year: '쿠' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: false, isYearError: true },
   },
 };
@@ -54,7 +54,7 @@ export const 년_입력의_형식이_아닌_경우: Story = {
 export const 년_입력의_길이가_맞지_않은_경우: Story = {
   args: {
     expirationDateState: { month: '12', year: '234' },
-    setExpirationDateState: { setMonth: fn(), setYear: fn() },
+    setExpirationDateState: { onChangeMonth: fn(), onChangeYear: fn() },
     expirationDateErrorState: { isMonthError: false, isYearError: true },
   },
 };

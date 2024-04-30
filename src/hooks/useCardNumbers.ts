@@ -13,25 +13,25 @@ const useCardNumbers = (
 
   const {
     value: first,
-    onChange: setFirst,
+    onChange: onChangeFirst,
     isError: isFirstError,
     clear: firstClear,
   } = useInput<string>(defaultValues[0] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: second,
-    onChange: setSecond,
+    onChange: onChangeSecond,
     isError: isSecondError,
     clear: secondClear,
   } = useInput<string>(defaultValues[1] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: third,
-    onChange: setThird,
+    onChange: onChangeThird,
     isError: isThirdError,
     clear: thirdClear,
   } = useInput<string>(defaultValues[2] ?? '', REG_EXP.cardNumber, cardLengthCondition);
   const {
     value: fourth,
-    onChange: setFourth,
+    onChange: onChangeFourth,
     isError: isFourthError,
     clear: fourthClear,
   } = useInput<string>(defaultValues[3] ?? '', REG_EXP.cardNumber, cardLengthCondition);
@@ -60,10 +60,10 @@ const useCardNumbers = (
       fourth,
     },
     setCardNumberState: {
-      setFirst,
-      setSecond,
-      setThird,
-      setFourth,
+      onChangeFirst,
+      onChangeSecond,
+      onChangeThird,
+      onChangeFourth,
     },
     cardNumberErrorState: {
       isFirstError,

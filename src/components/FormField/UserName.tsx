@@ -10,13 +10,13 @@ const { MAX_LENGTH } = CONDITION;
 
 interface UserNameProps {
   userNameState: string;
-  setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isUserNameError: boolean;
   showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
 }
 const UserName = ({
   userNameState,
-  setUserNameState,
+  onChange,
   isUserNameError,
   showNextFieldOnValid,
 }: UserNameProps) => {
@@ -30,7 +30,7 @@ const UserName = ({
           placeholder={PLACEHOLDER.userName}
           value={userNameState}
           maxLength={MAX_LENGTH.userName}
-          onChange={setUserNameState}
+          onChange={onChange}
           onBlur={() =>
             showNextFieldOnValid({
               isFill: userNameState !== '',

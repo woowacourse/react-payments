@@ -9,14 +9,14 @@ const { MAX_LENGTH } = CONDITION;
 
 interface CVCNumberProps {
   cvcNumberState: string;
-  setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isCVCNumberError: boolean;
   setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CVCNumber = ({
   cvcNumberState,
-  setCVCNumberState,
+  onChange,
   isCVCNumberError,
   setIsFocusCVCPreview,
 }: CVCNumberProps) => {
@@ -30,7 +30,7 @@ const CVCNumber = ({
           placeholder={PLACEHOLDER.cvcNumber}
           value={cvcNumberState}
           maxLength={MAX_LENGTH.cvcNumber}
-          onChange={setCVCNumberState}
+          onChange={onChange}
           aria-invalid={isCVCNumberError}
           autoFocus
         />

@@ -8,14 +8,14 @@ const useUserName = (defaultValue: string) => {
 
   const {
     value: userName,
-    onChange: setUserName,
+    onChange: onChangeUserName,
     isError: isUserNameError,
     clear: resetUserName,
   } = useInput<string>(defaultValue, REG_EXP.userName, lastNameAndFirstName, changeUpperCase);
 
   return {
     userNameState: userName,
-    setUserNameState: setUserName,
+    onChangeUserName,
     isUserNameError,
     resetUserName,
   };

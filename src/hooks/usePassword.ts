@@ -8,7 +8,7 @@ const usePassword = (defaultValue: string) => {
 
   const {
     value: passwordState,
-    onChange: setPasswordState,
+    onChange: onChangePassword,
     isError: isPasswordError,
     clear: resetPassword,
   } = useInput<string>(defaultValue, REG_EXP.password, passwordCondition);
@@ -17,7 +17,7 @@ const usePassword = (defaultValue: string) => {
 
   return {
     passwordState,
-    setPasswordState,
+    onChangePassword,
     isPasswordError,
     isFieldError,
     resetPassword,

@@ -9,11 +9,11 @@ const { MAX_LENGTH } = CONDITION;
 
 interface PasswordProps {
   passwordState: string;
-  setPasswordState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isPasswordError: boolean;
 }
 
-const Password = ({ passwordState, setPasswordState, isPasswordError }: PasswordProps) => {
+const Password = ({ passwordState, onChange, isPasswordError }: PasswordProps) => {
   return (
     <FormField title={TITLE.password} caption={CAPTION.password}>
       <InputField label={LABEL.password} error={isPasswordError ? ERROR.password : ''}>
@@ -23,7 +23,7 @@ const Password = ({ passwordState, setPasswordState, isPasswordError }: Password
           placeholder={PLACEHOLDER.password}
           value={passwordState}
           maxLength={MAX_LENGTH.password}
-          onChange={setPasswordState}
+          onChange={onChange}
           aria-invalid={isPasswordError}
           autoFocus
         />

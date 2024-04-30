@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardBrand from '../../components/FormField/CardBrand';
 import { fn } from '@storybook/test';
 import CardInformationPreview from '../../components/CardInformationPreview/CardInformationPreview';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const previewProps = {
   cardNumberState: {
@@ -31,16 +31,19 @@ const meta = {
   decorators: [
     (Story, context) => {
       const [brand, setBrand] = useState<string | null>(null);
+      const handleBrand = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setBrand(event.target.value);
+      };
       return (
         <div>
           <CardInformationPreview {...previewProps} cardBrandState={brand} />
-          <Story args={{ ...context.args, cardBrandState: brand, setCardBrandState: setBrand }} />
+          <Story args={{ ...context.args, cardBrandState: brand, onChange: handleBrand }} />
         </div>
       );
     },
   ],
   args: {
-    setCardBrandState: fn(),
+    onChange: fn(),
   },
 } satisfies Meta<typeof CardBrand>;
 

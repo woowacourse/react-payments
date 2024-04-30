@@ -23,7 +23,7 @@ const ExpirationDate = ({
   expirationDateErrorState,
 }: ExpirationDateProps) => {
   const { month, year } = expirationDateState;
-  const { setMonth, setYear } = setExpirationDateState;
+  const { onChangeMonth, onChangeYear } = setExpirationDateState;
   const { isMonthError, isYearError } = expirationDateErrorState;
 
   const expirationErrorMessage = isMonthError ? ERROR.month : isYearError ? ERROR.year : '';
@@ -36,7 +36,7 @@ const ExpirationDate = ({
           placeholder={PLACEHOLDER.month}
           value={month}
           maxLength={MAX_LENGTH.expirationDate}
-          onChange={setMonth}
+          onChange={onChangeMonth}
           aria-invalid={isMonthError}
           autoFocus
         />
@@ -45,7 +45,7 @@ const ExpirationDate = ({
           placeholder={PLACEHOLDER.year}
           value={year}
           maxLength={MAX_LENGTH.expirationDate}
-          onChange={setYear}
+          onChange={onChangeYear}
           aria-invalid={isYearError}
         />
       </InputField>

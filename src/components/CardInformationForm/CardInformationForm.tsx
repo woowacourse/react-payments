@@ -31,23 +31,23 @@ export interface CardInformationFormProps {
   };
   userName: {
     userNameState: string;
-    setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isUserNameError: boolean;
     showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
   };
   cardBrand: {
     cardBrandState: string | null;
-    setCardBrandState: React.Dispatch<React.SetStateAction<string | null>>;
+    onChangeCardBrand: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   };
   cvcNumber: {
     cvcNumberState: string;
-    setCVCNumberState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeCVC: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isCVCNumberError: boolean;
     setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
   };
   password: {
     passwordState: string;
-    setPasswordState: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isPasswordError: boolean;
   };
   isFieldShowCount: number;
@@ -66,11 +66,11 @@ const CardInformationForm = (props: CardInformationFormProps) => {
 
   const fields: Array<React.ReactNode> = [
     <CardNumbersField key={0} {...cardNumbers} />,
-    <CardBrandField key={1} {...cardBrand} />,
+    <CardBrandField key={1} {...cardBrand} onChange={cardBrand.onChangeCardBrand} />,
     <ExpirationDateField key={2} {...expirationDate} />,
-    <UserNameField key={3} {...userName} />,
-    <CVCNumberField key={4} {...cvcNumber} />,
-    <PasswordField key={5} {...password} />,
+    <UserNameField key={3} {...userName} onChange={userName.onChangeUserName} />,
+    <CVCNumberField key={4} {...cvcNumber} onChange={cvcNumber.onChangeCVC} />,
+    <PasswordField key={5} {...password} onChange={password.onChangePassword} />,
   ];
 
   return (

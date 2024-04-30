@@ -20,7 +20,7 @@ const useCardBrand = (
 
   return {
     cardBrandState: value,
-    setCardBrandState: onChange,
+    onChangeCardBrand: onChange,
     isCardBrandError,
     resetCardBrand: clear,
   };

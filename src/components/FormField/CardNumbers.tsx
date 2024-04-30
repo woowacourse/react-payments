@@ -21,7 +21,7 @@ const CardNumbers = ({
   cardNumberErrorState,
 }: CardNumbersProps) => {
   const { first, second, third, fourth } = cardNumberState;
-  const { setFirst, setSecond, setThird, setFourth } = setCardNumberState;
+  const { onChangeFirst, onChangeSecond, onChangeThird, onChangeFourth } = setCardNumberState;
   const { isFirstError, isSecondError, isThirdError, isFourthError } = cardNumberErrorState;
 
   const cardNumberErrorMessage =
@@ -35,7 +35,7 @@ const CardNumbers = ({
           placeholder={PLACEHOLDER.cardNumber}
           value={first}
           maxLength={MAX_LENGTH.cardNumber}
-          onChange={setFirst}
+          onChange={onChangeFirst}
           aria-invalid={isFirstError}
           autoFocus
         />
@@ -44,7 +44,7 @@ const CardNumbers = ({
           placeholder={PLACEHOLDER.cardNumber}
           value={second}
           maxLength={MAX_LENGTH.cardNumber}
-          onChange={setSecond}
+          onChange={onChangeSecond}
           aria-invalid={isSecondError}
         />
         <Input
@@ -52,7 +52,7 @@ const CardNumbers = ({
           placeholder={PLACEHOLDER.cardNumber}
           value={third}
           maxLength={MAX_LENGTH.cardNumber}
-          onChange={setThird}
+          onChange={onChangeThird}
           aria-invalid={isThirdError}
         />
         <Input
@@ -60,7 +60,7 @@ const CardNumbers = ({
           placeholder={PLACEHOLDER.cardNumber}
           value={fourth}
           maxLength={MAX_LENGTH.cardNumber}
-          onChange={setFourth}
+          onChange={onChangeFourth}
           aria-invalid={isFourthError}
         />
       </InputField>

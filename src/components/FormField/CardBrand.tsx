@@ -8,7 +8,7 @@ const { TITLE, CAPTION, PLACEHOLDER } = MESSAGE;
 
 interface CardNumbersProps {
   cardBrandState: string | null;
-  setCardBrandState: React.Dispatch<React.SetStateAction<string | null>>;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const options = [
@@ -22,14 +22,14 @@ const options = [
   { label: '국민카드', value: '국민카드' },
 ];
 
-const CardBrand = ({ cardBrandState, setCardBrandState }: CardNumbersProps) => {
+const CardBrand = ({ cardBrandState, onChange }: CardNumbersProps) => {
   return (
     <FormField title={TITLE.cardBrand} caption={CAPTION.cardBrand}>
       <InputField>
         <Select
           label="카드브랜드"
           value={cardBrandState}
-          onChange={(event) => setCardBrandState(event.target.value)}
+          onChange={onChange}
           placeholder={PLACEHOLDER.cardBrand}
           options={options}
         />

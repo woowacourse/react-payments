@@ -49,7 +49,7 @@ export const 기본: Story = {
   ],
   args: {
     cvcNumberState: '',
-    setCVCNumberState: fn(),
+    onChange: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: false,
   },
@@ -74,7 +74,7 @@ export const 정상입력: Story = {
   ],
   args: {
     cvcNumberState: '123',
-    setCVCNumberState: fn(),
+    onChange: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: false,
   },
@@ -99,7 +99,7 @@ export const 잘못된_문자_입력: Story = {
   ],
   args: {
     cvcNumberState: '쿠키',
-    setCVCNumberState: fn(),
+    onChange: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: true,
   },
@@ -124,7 +124,7 @@ export const 세_자리_수가_아닐_때: Story = {
   ],
   args: {
     cvcNumberState: '12',
-    setCVCNumberState: fn(),
+    onChange: fn(),
     setIsFocusCVCPreview: fn(),
     isCVCNumberError: true,
   },
