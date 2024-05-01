@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
-import useCardForm from '../hooks/useCardForm';
 import { validateButton } from '../domain/InputValidation';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';

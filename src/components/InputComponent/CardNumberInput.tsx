@@ -50,6 +50,7 @@ export default function CardNumberInput({
       ) {
         inputRefs.current[nextIndex]?.focus();
       }
+            
       if (e.target.value.length !== CARD_NUMBER.FIELD_LENGTH) {
         throw new Error('4자리의 숫자를 입력해주세요');
       }
@@ -96,7 +97,7 @@ export default function CardNumberInput({
             <Input
               key={index}
               type='text'
-              value={cardNumbers.cardNumberFields[getCardKey(index)].value}
+              value={cardNumbers.cardNumberFields[getCardKey(index+1)].value}
               maxLength={CARD_NUMBER.FIELD_LENGTH}
               placeholder='1234'
               isError={checkInputError(index)}
