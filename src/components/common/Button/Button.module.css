@@ -1,0 +1,35 @@
+.button {
+  width: 100%;
+
+  background-color: var(--color-grey-200);
+
+  color: var(--color-grey-100);
+  padding: 20px 0;
+}
+.button:hover {
+  cursor: default;
+}
+
+.submit {
+  position: sticky;
+  bottom: 0;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 12px;
+
+  width: calc(100% + 40px);
+  margin-left: -20px;
+}
+
+.default {
+  width: 320px;
+  border-radius: 5px;
+}
+
+.active {
+  background-color: var(--color-primitive);
+}
+.active:hover {
+  cursor: pointer;
+}

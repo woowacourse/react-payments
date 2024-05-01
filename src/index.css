@@ -6,10 +6,23 @@
   --color-grey-500: #000000;
 
   --color-red: #ff3d3d;
+  --color-primitive: #333;
 
   /* CardPreview */
-  --color-card-bg: #333;
+  --color-card-bg: var(--color-primitive);
+  --color-card-bg-back: #d5d5d5;
   --color-card-chip: #ddcd78;
+  --color-card-bg-cvc: #cbba64;
+
+  /* Card Issuer Brand Colors */
+  --color-bc: #f04651;
+  --color-shinhan: #0046ff;
+  --color-kakao: #ffe600;
+  --color-hyundai: #000000;
+  --color-woori: #007bc8;
+  --color-lotte: #ed1c24;
+  --color-hana: #009490;
+  --color-kookmin: #6a6056;
 }
 
 * {
@@ -50,11 +63,25 @@ fieldset {
   min-width: 0;
 }
 
-#root {
-  height: 100%;
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
 
+#root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
 }

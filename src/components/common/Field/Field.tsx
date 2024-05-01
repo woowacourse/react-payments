@@ -5,8 +5,8 @@ import styles from './Field.module.css';
 interface FieldProps {
   title: string;
   description?: string;
-  labelText: string;
-  errMsg: string;
+  labelText?: string;
+  errorMessage: string;
   children: React.ReactNode;
 }
 
@@ -15,7 +15,7 @@ export default function Field({
   description,
   labelText,
   children,
-  errMsg,
+  errorMessage,
 }: FieldProps) {
   return (
     <div className={styles.field}>
@@ -23,11 +23,11 @@ export default function Field({
       {description && <p className={styles.description}>{description}</p>}
 
       <fieldset className={styles.fieldset}>
-        <legend className={styles.legend}>{labelText}</legend>
+        {labelText && <legend className={styles.legend}>{labelText}</legend>}
         {children}
       </fieldset>
 
-      <p className={styles.errMsg}>{errMsg}</p>
+      <p className={styles.errorMsg}>{errorMessage}</p>
     </div>
   );
 }
