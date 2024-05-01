@@ -1,23 +1,23 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
 
-const { REG_EXP } = CONDITION;
+const { REG_EXP, lastNameAndFirstName } = CONDITION;
 
 const useUserName = (defaultValue: string) => {
-  const userNameCondition = (value: string) => value.split(' ').length === 2;
-
   const changeUpperCase = (value: string) => value.toUpperCase();
 
   const {
     value: userName,
-    onChange: setUserName,
+    onChange: onChangeUserName,
     isError: isUserNameError,
-  } = useInput<string>(defaultValue, REG_EXP.userName, userNameCondition, changeUpperCase);
+    clear: resetUserName,
+  } = useInput<string>(defaultValue, REG_EXP.userName, lastNameAndFirstName, changeUpperCase);
 
   return {
     userNameState: userName,
-    setUserNameState: setUserName,
+    onChangeUserName,
     isUserNameError,
+    resetUserName,
   };
 };
 

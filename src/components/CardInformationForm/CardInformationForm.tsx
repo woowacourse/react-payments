@@ -1,12 +1,12 @@
-import { Form } from './style';
-import FormField from '../FormField/FormField';
-import InputField from '../InputField/InputField';
-import Input from '../Input/Input';
-import MESSAGE from '../../constants/Message';
-import CONDITION from '../../constants/Condition';
-
-const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
-const { MAX_LENGTH } = CONDITION;
+import { Fields } from './style';
+import {
+  CVCNumberField,
+  CardBrandField,
+  CardNumbersField,
+  ExpirationDateField,
+  PasswordField,
+  UserNameField,
+} from '../FormField';
 
 import {
   CardNumberErrorState,
@@ -16,117 +16,71 @@ import {
   SetCardNumberState,
   SetExpirationDateState,
 } from '../../types/Types';
+import { ShowNextFieldConditionParams } from '../../hooks/useCreateNextField';
 
-interface CardInformationFormProps {
-  cardNumberState: CardNumberState;
-  setCardNumberState: SetCardNumberState;
-  cardNumberErrorState: CardNumberErrorState;
-  expirationDateState: ExpirationDateState;
-  setExpirationDateState: SetExpirationDateState;
-  expirationDateErrorState: ExpirationDateErrorState;
-  userNameState: string;
-  setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isUserNameError: boolean;
+export interface CardInformationFormProps {
+  cardNumbers: {
+    cardNumberState: CardNumberState;
+    setCardNumberState: SetCardNumberState;
+    cardNumberErrorState: CardNumberErrorState;
+  };
+  expirationDate: {
+    expirationDateState: ExpirationDateState;
+    setExpirationDateState: SetExpirationDateState;
+    expirationDateErrorState: ExpirationDateErrorState;
+  };
+  userName: {
+    userNameState: string;
+    onChangeUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isUserNameError: boolean;
+    showNextFieldOnValid: (params: ShowNextFieldConditionParams) => void;
+  };
+  cardBrand: {
+    cardBrandState: string;
+    onChangeCardBrand: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  };
+  cvcNumber: {
+    cvcNumberState: string;
+    onChangeCVC: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isCVCNumberError: boolean;
+    setIsFocusCVCPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  password: {
+    passwordState: string;
+    onChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isPasswordError: boolean;
+  };
+  isFieldShowCount: number;
 }
 
-const CardInformationForm = ({
-  cardNumberState,
-  setCardNumberState,
-  cardNumberErrorState,
-  expirationDateState,
-  setExpirationDateState,
-  expirationDateErrorState,
-  userNameState,
-  setUserNameState,
-  isUserNameError,
-}: CardInformationFormProps) => {
-  const { first, second, third, fourth } = cardNumberState;
-  const { setFirst, setSecond, setThird, setFourth } = setCardNumberState;
-  const { isFirstError, isSecondError, isThirdError, isFourthError } = cardNumberErrorState;
-  const { month, year } = expirationDateState;
-  const { setMonth, setYear } = setExpirationDateState;
-  const { isMonthError, isYearError } = expirationDateErrorState;
+const CardInformationForm = (props: CardInformationFormProps) => {
+  const {
+    cardNumbers,
+    expirationDate,
+    userName,
+    cardBrand,
+    cvcNumber,
+    password,
+    isFieldShowCount,
+  } = props;
 
-  const cardNumberErrorMessage =
-    isFirstError || isSecondError || isThirdError || isFourthError ? ERROR.cardNumber : '';
-  const expirationErrorMessage = isMonthError ? ERROR.month : isYearError ? ERROR.year : '';
-  const userNameErrorMessage = isUserNameError ? ERROR.userName : '';
+  const fields: Array<React.ReactNode> = [
+    <CardNumbersField key={0} {...cardNumbers} />,
+    <CardBrandField key={1} {...cardBrand} onChange={cardBrand.onChangeCardBrand} />,
+    <ExpirationDateField key={2} {...expirationDate} />,
+    <UserNameField key={3} {...userName} onChange={userName.onChangeUserName} />,
+    <CVCNumberField key={4} {...cvcNumber} onChange={cvcNumber.onChangeCVC} />,
+    <PasswordField key={5} {...password} onChange={password.onChangePassword} />,
+  ];
 
   return (
-    <Form>
-      <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
-        <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
-          <>
-            <Input
-              aria-label="first-card-numbers"
-              placeholder={PLACEHOLDER.cardNumber}
-              value={first}
-              maxLength={MAX_LENGTH.cardNumber}
-              onChange={setFirst}
-              aria-invalid={isFirstError}
-            />
-            <Input
-              aria-label="second-card-numbers"
-              placeholder={PLACEHOLDER.cardNumber}
-              value={second}
-              maxLength={MAX_LENGTH.cardNumber}
-              onChange={setSecond}
-              aria-invalid={isSecondError}
-            />
-            <Input
-              aria-label="third-card-numbers"
-              placeholder={PLACEHOLDER.cardNumber}
-              value={third}
-              maxLength={MAX_LENGTH.cardNumber}
-              onChange={setThird}
-              aria-invalid={isThirdError}
-            />
-            <Input
-              aria-label="fourth-card-numbers"
-              placeholder={PLACEHOLDER.cardNumber}
-              value={fourth}
-              maxLength={MAX_LENGTH.cardNumber}
-              onChange={setFourth}
-              aria-invalid={isFourthError}
-            />
-          </>
-        </InputField>
-      </FormField>
-      <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
-        <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
-          <>
-            <Input
-              aria-label="month-expiration"
-              placeholder={PLACEHOLDER.month}
-              value={month}
-              maxLength={MAX_LENGTH.expirationDate}
-              onChange={setMonth}
-              aria-invalid={isMonthError}
-            />
-            <Input
-              aria-label="year-expiration"
-              placeholder={PLACEHOLDER.year}
-              value={year}
-              maxLength={MAX_LENGTH.expirationDate}
-              onChange={setYear}
-              aria-invalid={isYearError}
-            />
-          </>
-        </InputField>
-      </FormField>
-      <FormField title={TITLE.userName}>
-        <InputField label={LABEL.userName} error={userNameErrorMessage}>
-          <Input
-            aria-label="userName"
-            placeholder={PLACEHOLDER.userName}
-            value={userNameState}
-            maxLength={MAX_LENGTH.userName}
-            onChange={setUserNameState}
-            aria-invalid={isUserNameError}
-          />
-        </InputField>
-      </FormField>
-    </Form>
+    <Fields>
+      {fields.map((field, index) => {
+        if (isFieldShowCount >= index) {
+          return field;
+        }
+      })}
+    </Fields>
   );
 };
 

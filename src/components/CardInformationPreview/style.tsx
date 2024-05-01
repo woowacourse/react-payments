@@ -1,18 +1,74 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
+  position: relative;
   width: 21.2rem;
   height: 13.2rem;
+  perspective: 100rem;
+`;
+
+export const Inner = styled.div<{ $isFocusCVCPreview: boolean }>`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.999s;
+
+  transform: ${(props) => (props.$isFocusCVCPreview ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+`;
+
+export const CardFront = styled.div<{ $isFocusCVCPreview: boolean; $brandColor: string }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   padding: 0.8rem 1.2rem;
-  background-color: ${(props) => props.theme.color.darkGray};
   box-shadow: 0.3rem 0.3rem 0.5rem 0rem ${(props) => props.theme.color.dropShadow};
   border-radius: 0.4rem;
+
+  /* z-index: ${(props) => (props.$isFocusCVCPreview ? -1 : 2)}; */
+  background-color: ${(props) => props.$brandColor};
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+`;
+
+export const CardBack = styled.div<{ $isFocusCVCPreview: boolean }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 0.3rem 0.3rem 0.5rem 0rem ${(props) => props.theme.color.dropShadow};
+  border-radius: 0.4rem;
+
+  /* z-index: ${(props) => (props.$isFocusCVCPreview ? 2 : -1)}; */
+  background-color: ${(props) => props.theme.color.lightGray};
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+`;
+
+export const CVCNumber = styled.p<{ $brandColor: string }>`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 2.4rem;
+  padding-right: 1.6rem;
+
+  top: 8.4rem;
+  left: 0;
+  background-color: ${(props) => props.$brandColor};
+  ${(props) => props.theme.typography.paragraph2};
+  color: ${(props) => props.theme.color.white};
 `;
 
 export const ImgContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   width: 100%;
 `;
 

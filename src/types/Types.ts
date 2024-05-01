@@ -6,10 +6,10 @@ export interface CardNumberState {
 }
 
 export interface SetCardNumberState {
-  setFirst: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setSecond: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setThird: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setFourth: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  onChangeFirst: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSecond: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeThird: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeFourth: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface CardNumberErrorState {
@@ -24,8 +24,8 @@ export interface ExpirationDateState {
   year: string;
 }
 export interface SetExpirationDateState {
-  setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export interface ExpirationDateErrorState {
   isMonthError: boolean;
@@ -35,4 +35,9 @@ export interface ExpirationDateErrorState {
 export interface ShowImageCondition {
   visaShowCondition: boolean;
   masterCardShowCondition: boolean;
+}
+
+export interface SuccessCardInfoState {
+  firstCardNumbers: string;
+  cardBrand: string;
 }

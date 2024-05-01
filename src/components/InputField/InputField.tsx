@@ -1,12 +1,11 @@
 import * as Field from './style';
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
   error?: string;
-  children: JSX.Element;
 }
 
-const InputField = ({ label, error, children }: InputFieldProps) => {
+const InputField = ({ label, error, children }: React.PropsWithChildren<InputFieldProps>) => {
   return (
     <>
       <Field.Fieldset>

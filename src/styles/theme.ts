@@ -2,6 +2,12 @@ import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   typography: {
+    heading: `
+      font-family: Noto Sans KR;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 3.62rem;    
+    `,
     title: `
       font-family: Noto Sans KR;
       font-weight: 700;
@@ -25,6 +31,12 @@ const theme: DefaultTheme = {
       font-size: 1.1rem;
       font-weight: 400;
       line-height: 1.488rem;
+    `,
+    button: `
+      font-family: Noto Sans KR;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 2.172rem;
     `,
     paragraph1: `
       font-family: Inter;
@@ -50,6 +62,16 @@ const theme: DefaultTheme = {
     darkGray: '#333333',
     magnetic: '#DDCD78',
     dropShadow: '#00000040',
+    brand: {
+      bc: '#F04651',
+      shinhan: '#0046FF',
+      kakao: '#FFE600',
+      hyundai: '#000000',
+      woori: '#007BC8',
+      lotte: '#ED1C24',
+      hana: '#009490',
+      kookmin: '#6A6056',
+    },
   },
 };
 
