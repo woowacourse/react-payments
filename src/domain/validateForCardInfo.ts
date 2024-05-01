@@ -1,39 +1,41 @@
-import { BlockedInputError, NonBlockedInputError } from "../errors/InputError";
-
 import { ERROR_MESSAGE } from "../constants/message";
 
-export const validateNotBlank = (string: string) => {
-  if (string.length === 0) {
-    throw new NonBlockedInputError("반드시 입력해주세요");
-  }
-};
+const validResult = { isError: false, message: "" } as const;
 
 export const validateOnlyDigit = (string: string) => {
   if (!/^[0-9]*$/.test(string)) {
-    throw new BlockedInputError(ERROR_MESSAGE.notDigit);
+    return { isError: true, message: ERROR_MESSAGE.notDigit };
   }
+  return validResult;
 };
 
 export const validateOnlyEnglishWithSpace = (string: string) => {
   if (!/^([a-zA-Z]+\s*)*$/.test(string)) {
-    throw new BlockedInputError(ERROR_MESSAGE.notEnglish);
+    return { isError: true, message: ERROR_MESSAGE.notEnglish };
   }
+  return validResult;
 };
 
 export const validateLength = (string: string, length: number) => {
   if (string.length < length) {
-    throw new NonBlockedInputError(`${length}${ERROR_MESSAGE.underLengthTail}`);
+    return {
+      isError: true,
+      message: `${length}${ERROR_MESSAGE.underLengthTail}`,
+    };
   }
+  return validResult;
 };
 
 export const validateMonth = (string: string) => {
   if (!/^$|^(0[1-9]|1[0-2]|0|1)$/.test(string)) {
-    throw new BlockedInputError(ERROR_MESSAGE.wrongMonth);
+    return { isError: true, message: ERROR_MESSAGE.wrongMonth };
   }
+  return validResult;
 };
 
 export const validateYear = (string: string) => {
   if (!/^$|^(0?[0-9]|[1-9][0-9])$/.test(string)) {
-    throw new BlockedInputError(ERROR_MESSAGE.wrongYear);
+    return { isError: true, message: ERROR_MESSAGE.wrongYear };
   }
+  return validResult;
 };

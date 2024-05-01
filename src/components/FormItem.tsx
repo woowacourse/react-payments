@@ -49,12 +49,12 @@ const styledInputContainer = css`
 `;
 
 interface FormItemProps {
-  labelText: string;
+  labelText?: string;
   errorMessage?: string;
 }
 
 export default function FormItem({
-  labelText,
+  labelText = "",
   errorMessage = "",
   children,
 }: React.PropsWithChildren<FormItemProps>) {
