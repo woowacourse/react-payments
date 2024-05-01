@@ -11,7 +11,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
 export default AppLayout;
 
-const Layout = styled.div`
+const Layout = styled.main`
   height: 100vh;
 
   display: flex;
@@ -19,5 +19,4 @@ const Layout = styled.div`
   align-items: center;
 
   background-color: #f5f5f5;
-  overflow-y: scroll;
 `;

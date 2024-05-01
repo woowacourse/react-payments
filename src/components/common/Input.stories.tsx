@@ -11,19 +11,9 @@ const meta = {
     layout: "centered",
   },
 
-  decorators: [
-    (Story, context) => {
-      const [value, setValue] = useState(context.args.value);
-      const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setValue(e.target.value);
-      return <Story args={{ ...context.args, value, onChange }} />;
-    },
-  ],
-
-  tags: ["autodocs"],
-
   argTypes: {
-    size: {
+    inputSize: {
+      type: "string",
       control: "radio",
       options: ["small", "medium", "large"],
     },
@@ -32,6 +22,18 @@ const meta = {
   args: {
     onChange: fn(),
   },
+
+  decorators: [
+    (Story, context) => {
+      const [value, setValue] = useState(context.args.value);
+      const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+        setValue(e.target.value);
+
+      return <Story args={{ ...context.args, value, onChange }} />;
+    },
+  ],
+
+  tags: ["autodocs"],
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -45,7 +47,7 @@ export const Default: Story = {
     placeholder: "test",
     value: "",
     maxLength: 10,
-    size: "medium",
+    inputSize: "medium",
     isError: false,
   },
 };

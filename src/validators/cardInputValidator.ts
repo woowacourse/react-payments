@@ -1,50 +1,62 @@
+import { INPUT_RULES } from "../constants/card-app";
+
 const cardInputValidator = {
+  validateNumericInput(value: string) {
+    return /^(\d*)$/.test(value);
+  },
+
+  validateAlphabetInput(value: string) {
+    return /^[a-zA-Z ]*$/.test(value);
+  },
+
+  validateNumberInRange(number: number, min: number, max: number) {
+    return number >= min && number <= max;
+  },
+
+  validateCardNumberLength(value: string) {
+    return value.length === INPUT_RULES.maxCardNumberPartLength;
+  },
+
+  validatePastYear(year: string) {
+    const currentYear = new Date().getFullYear() & 100;
+
+    return parseInt(year, 10) <= currentYear;
+  },
+
   validateMonth(month: string) {
-    if (month.length === 0) return true;
+    if (month.length !== INPUT_RULES.validExpirationLength) return false;
 
-    if (month.length !== 2) return false;
-
-    if (month[0] !== "0" && month[0] !== "1") return false;
-
-    if (parseInt(month, 10) < 1 || parseInt(month, 10) > 12) return false;
-
-    return true;
+    return this.validateNumberInRange(parseInt(month, 10), 1, 12);
   },
 
   validateYear(year: string) {
-    if (year.length === 0) return true;
+    if (year.length !== INPUT_RULES.validExpirationLength) return false;
 
-    if (year.length !== 2) return false;
-
-    const date = new Date();
-
-    const currentYear = date.getFullYear() % 100;
-
-    return parseInt(year, 10) >= currentYear;
+    return this.validatePastYear(year);
   },
 
   validateFutureDate(month: number, year: number) {
-    if (new Date().getTime() > new Date(2000 + year, month, 0).getTime()) {
-      return false;
-    }
+    const currentTime = new Date().getTime();
 
-    return true;
+    const enteredDate = new Date(2000 + year, month, 0).getTime();
+
+    return enteredDate > currentTime;
   },
 
-  validateExpiration(expiration: string[]) {
-    const [month, year] = expiration;
+  validateExpiration(expiration: { mm: string; yy: string; name: string }) {
+    const { mm, yy, name } = expiration;
 
-    if (!this.validateMonth(month)) return false;
+    if (name === "mm" && !this.validateMonth(mm)) return false;
 
-    if (!this.validateYear(year)) return false;
+    if (name === "yy" && !this.validateYear(yy)) return false;
 
-    const [numericMonth, numericYear] = expiration.map((str) =>
-      parseInt(str, 10)
-    );
+    if (
+      mm.length !== INPUT_RULES.validExpirationLength ||
+      yy.length !== INPUT_RULES.validExpirationLength
+    )
+      return true;
 
-    if (!this.validateFutureDate(numericMonth, numericYear)) return false;
-
-    return true;
+    return this.validateFutureDate(parseInt(mm), parseInt(yy)) ? true : false;
   },
 };
 

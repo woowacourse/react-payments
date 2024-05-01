@@ -1,27 +1,31 @@
 import styled from "styled-components";
+
 import CardText from "./CardText";
 
-interface CardNumberDisplayProps {
-  cardNumbers: string[];
+import { CardNumberKeys } from "../../../types/card";
+
+interface CardNumberProps {
+  value: Record<CardNumberKeys, string>;
 }
 
-const CardNumberDisplay = ({ cardNumbers }: CardNumberDisplayProps) => {
-  const [first, second, third, fourth] = cardNumbers;
+const CardNumber = ({ value }: CardNumberProps) => {
+  const { first, second, third, fourth } = value;
 
   return (
-    <CardTextContainer>
+    <Container>
       <CardText text={first} type="text" />
       <CardText text={second} type="text" />
       <CardText text={third} type="password" />
       <CardText text={fourth} type="password" />
-    </CardTextContainer>
+    </Container>
   );
 };
 
-export default CardNumberDisplay;
+export default CardNumber;
 
-const CardTextContainer = styled.div`
+const Container = styled.div`
   width: 170px;
+
   display: flex;
   justify-content: space-between;
 `;
