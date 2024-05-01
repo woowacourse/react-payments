@@ -1,67 +1,68 @@
-import React, { useState } from "react"
-import useMultiFormSection from "./useMultiFormSection"
-import OPTION from "../constants/option";
-import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage"
+import React from "react";
+import useMultiFormSection from "./useMultiFormSection";
 
-interface UseCardNumbersFormSectionProps {
-  cardInfo: CardInfo,
-  dispatchCardInfo: React.Dispatch<CardInfoAction>
+interface UseCardNumbersFormSection {
   refs: React.MutableRefObject<HTMLInputElement[]>
+  values: string[];
+  updateValues: (values: string[]) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
 
-const useCardNumbersFormSection = (props: UseCardNumbersFormSectionProps) => {
-  const { cardInfo, dispatchCardInfo, refs } = props;
-  const [hasErrors, setHasErrors] = useState(new Array(refs.current.length).fill(false))
-  const [error, setError] = useState('');
-
-  const validateCardNumbers = (values: string[]) => {
-    if (values.every(value => value.length === 0)) return
-    const newHasErrors = [...hasErrors];
-
-    values.forEach((value, index) => {
-      if (value.length !== OPTION.cardNumberMaxLength) {
-        newHasErrors[index] = true;
-      } else {
-        newHasErrors[index] = false;
-      }
-    });
-
-    setHasErrors(newHasErrors);
-
-    if (newHasErrors.some(value => value === true)) {
-      setError(ERROR_MESSAGE.cardNumberOutOfRange);
-    } else {
-      setError('');
-      dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
+const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete, maxLength = 4 }: UseCardNumbersFormSection) => {
+  const validateOnChange = (index: number, newValue: string) => {
+    if (!/^\d*$/.test(newValue)) {
+      return {
+        isValid: false,
+        errorMessage: '카드번호는 숫자만 입력이 가능해요.',
+      };
     }
+    return { isValid: true, errorMessage: '' };
   };
 
-  const dispatchCardNumbersAndBrand = (values: string[]) => {
-    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values })
-    if (REGEX.masterCard.test(values[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'MasterCard' })
-    } else if (REGEX.visaCard.test(values[0])) {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'Visa' })
-    } else {
-      dispatchCardInfo({ type: 'SET_CARD_BRAND_VALUE', value: 'none' })
+  const validateOnBlur = (index: number) => {
+    return { isValid: true, errorMessage: '' };
+  };
+
+  const validateOnBlurAll = () => {
+    const result: number[] = []
+    values.forEach((value, index) => {
+      if (value.length !== maxLength) {
+        result.push(index)
+      }
+    })
+    if (result.length !== 0) {
+      return {
+        indexList: result,
+        isValid: false,
+        errorMessage: `카드번호는 ${maxLength * values.length}글자로 입력해 주세요.`,
+      };
     }
+    updateComplete();
+    return { indexList: result, isValid: true, errorMessage: '' };
   }
 
-  const { handleChange } = useMultiFormSection({
-    values: cardInfo.cardNumbers.value,
-    refs: refs,
-    regex: REGEX.numbers,
-    errorMessage: ERROR_MESSAGE.onlyNumber,
-    maxLength: OPTION.cardNumberMaxLength,
-    dispatchCardInfo: dispatchCardNumbersAndBrand,
-    setError: setError,
-    hasErrors: hasErrors,
-    setHasErrors: setHasErrors,
-    validate: validateCardNumbers,
+  const {
+    hasErrors,
+    errorMessage,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useMultiFormSection({
+    refs,
+    values,
+    updateValues,
+    validateOnChange,
+    validateOnBlur,
+    validateOnBlurAll,
   });
 
-  return { error, hasErrors, handleChange } as const
-}
-
+  return {
+    hasErrors,
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
+};
 export default useCardNumbersFormSection;

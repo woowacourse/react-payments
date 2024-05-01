@@ -15,7 +15,14 @@ interface CardNumbersFormSectionProps {
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.cardNumberInputCount).fill(null));
-  const { error, hasErrors, handleChange } = useCardNumbersFormSection({ cardInfo, dispatchCardInfo, refs })
+  const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useCardNumbersFormSection(
+    {
+      refs,
+      values: cardInfo.cardNumbers.value,
+      updateValues: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values }),
+      updateComplete: () => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
+    }
+  )
 
   const CardNumbersForm = (
     <>
@@ -27,7 +34,9 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
           maxLength={OPTION.cardNumberMaxLength}
           value={cardInfo.cardNumbers.value[index]}
           hasError={hasErrors[index]}
-          handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, index)}
+          handleValueChange={(e) => onChangeHandler(e, index)}
+          handleOnBlur={() => onBlurHandler(index)}
+          handleOnFocus={() => onFocusHandler(index)}
           autoFocus={index === 0}
         />
       ))}
@@ -36,7 +45,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
 
   return (
     <FormSection title="결제할 카드 번호를 입력해 주세요"
-      subTitle="본인 명의의 카드만 결제 가능합니다." label="카드번호" errorMessage={error} Children={CardNumbersForm} />
+      subTitle="본인 명의의 카드만 결제 가능합니다." label="카드번호" errorMessage={errorMessage} Children={CardNumbersForm} />
   );
 };
 

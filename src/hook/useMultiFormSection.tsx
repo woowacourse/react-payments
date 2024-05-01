@@ -1,93 +1,96 @@
-import { useEffect } from 'react';
-import useFocusNext from './useFocusNext';
+import { useEffect, useState } from 'react';
 
 interface UseMultiFormSectionProps {
+  refs: React.MutableRefObject<HTMLInputElement[]>
   values: string[];
-  refs: React.MutableRefObject<HTMLInputElement[]>;
-  regex: RegExp;
-  errorMessage: string;
-  maxLength?: number;
-  dispatchCardInfo: (value: string[]) => void;
-  setError: (error: string) => void;
-  hasErrors: boolean[]
-  setHasErrors: (hasErrors: boolean[]) => void;
-  validate: (values: string[]) => void;
+  updateValues: (values: string[]) => void;
+  validateOnChange: (index: number, value: string) => ValidateResult;
+  validateOnBlur: (index: number) => ValidateResult;
+  validateOnBlurAll: () => ValidateAllResult;
 }
 
-const useMultiFormSection = (props: UseMultiFormSectionProps) => {
-  const { values, refs, regex, errorMessage, maxLength, dispatchCardInfo, setError, hasErrors, setHasErrors, validate } = props
+interface ValidateResult {
+  isValid: boolean;
+  errorMessage: string;
+}
 
-  const { focusNext } = useFocusNext(refs);
+interface ValidateAllResult {
+  indexList: number[];
+  isValid: boolean;
+  errorMessage: string;
+}
 
-  useEffect(() => {
-    refs.current.forEach((element, index) => {
-      if (element) {
-        element.onfocus = () => { resetIndexError(index) };
-        element.onblur = () => {
-          resetIndexError(index)
-        };
-      }
-    })
+const useMultiFormSection = ({
+  refs,
+  values,
+  updateValues,
+  validateOnChange,
+  validateOnBlur,
+  validateOnBlurAll,
+}: UseMultiFormSectionProps) => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [hasErrors, setHasErrors] = useState(Array.from<boolean>({ length: values.length }).fill(false))
 
-    return () => {
-      refs.current.forEach((element) => {
-        if (element) {
-          element.onfocus = null;
-          element.onblur = null;
-        }
-      });
-    };
-  }, [])
+  const hasAnyFocus = refs.current.some((element) => element === document.activeElement);
 
-  const isAnyFocused = refs.current.some(element => element === document.activeElement);
+  const onChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const targetValue = e.target.value;
 
-  useEffect(() => {
-    if (!isAnyFocused) {
-      validate(values);
-    }
-  }, [isAnyFocused])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newValues = [...values]
-
-    const { value } = e.target;
-
-    if (!regex.test(value)) {
-      setError(errorMessage);
-      newValues[index] = value.split('').filter(char => regex.test(char)).join('')
-      setIndexError(index);
+    const { isValid, errorMessage } = validateOnChange(index, targetValue);
+    if (!isValid) {
+      setNewHasErrors(index, true)
+      setErrorMessage(errorMessage);
     } else {
-      setError('');
-      newValues[index] = value
-      resetIndexError(index);
-    }
-
-    dispatchCardInfo(newValues);
-
-    if (newValues[index].length === maxLength) {
-      focusNext();
-    }
-    if (newValues.every(newValue => newValue.length === maxLength)) {
-      const focusedRef = refs.current.find(element => document.activeElement === element)
-      focusedRef?.blur();
+      setNewHasErrors(index, false)
+      setErrorMessage('');
+      const newValue = [...values];
+      newValue[index] = targetValue;
+      updateValues(newValue);
     }
   };
 
-  const setIndexError = (index: number) => {
+  const onFocusHandler = (index: number) => {
+    setNewHasErrors(index, false)
+    setErrorMessage('');
+  };
+
+  const onBlurHandler = (index: number) => {
+    const { isValid, errorMessage } = validateOnBlur(index);
+    if (!isValid) {
+      setNewHasErrors(index, true)
+      setErrorMessage(errorMessage);
+    } else {
+      setNewHasErrors(index, false)
+    }
+  };
+
+  useEffect(() => {
+    if (values.join("").length === 0) return
+    if (!hasAnyFocus) {
+      const { indexList, isValid, errorMessage } = validateOnBlurAll();
+      indexList.forEach((index) => setNewHasErrors(index, true))
+      if (!isValid) {
+        setErrorMessage(errorMessage);
+      }
+    }
+  }, [hasAnyFocus]);
+
+  const setNewHasErrors = (index: number, value: boolean) => {
     const newHasErrors = [...hasErrors]
-    setError(errorMessage);
-    newHasErrors[index] = true;
-    setHasErrors(newHasErrors);
+    newHasErrors[index] = value;
+    setHasErrors(newHasErrors)
   }
 
-  const resetIndexError = (index: number) => {
-    const newHasErrors = [...hasErrors]
-    setError('');
-    newHasErrors[index] = false;
-    setHasErrors(newHasErrors);
-  }
-
-  return { values, handleChange };
+  return {
+    hasErrors,
+    setHasErrors,
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
 };
-
 export default useMultiFormSection;
