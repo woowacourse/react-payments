@@ -65,11 +65,11 @@ export default function CardNumberInput({
 
   const getCardKey = (index: number): CardKeys => {
     switch (index) {
-      case 1:
+      case 0:
         return 'cardNumber1';
-      case 2:
+      case 1:
         return 'cardNumber2';
-      case 3:
+      case 2:
         return 'cardNumber3';
       default:
         return 'cardNumber4';
@@ -97,7 +97,7 @@ export default function CardNumberInput({
             <Input
               key={index}
               type='text'
-              value={cardNumbers.cardNumberFields[getCardKey(index+1)].value}
+              value={cardNumbers.cardNumberFields[getCardKey(index)].value}
               maxLength={CARD_NUMBER.FIELD_LENGTH}
               placeholder='1234'
               isError={checkInputError(index)}
