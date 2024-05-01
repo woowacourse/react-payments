@@ -33,16 +33,15 @@ export default function ExpirationDateInput({
     inputRefs.current[0]?.focus();
   }, []);
 
-  const date = ['month', 'year'];
   const datePlaceHolder = ['MM', 'YY'];
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    info: string,
+    matchingKey: string,
     index: number
   ) => {
     try {
-      Validation[info]?.(e.target.value);
+      Validation[matchingKey]?.(e.target.value);
       const nextIndex = index + 1;
       if (
         e.target.value.length === EXPIRATION_DATE.FIELD_LENGTH &&
@@ -52,7 +51,10 @@ export default function ExpirationDateInput({
       }
       handleUpdateExpirationDateErrorMessages(index, '', false);
       handleUpdateExpirationDateInput(index, e.target.value);
-      if(e.target.value.length !== EXPIRATION_DATE.FIELD_LENGTH){
+      if (
+        expirationDate.isNextField &&
+        e.target.value.length !== EXPIRATION_DATE.FIELD_LENGTH
+      ) {
         throw new Error('2자리의 숫자를 입력해주세요');
       }
     } catch (error) {
@@ -62,12 +64,10 @@ export default function ExpirationDateInput({
     }
   };
 
-  const checkInputError = (index: number) => {
-    const cardKey = Object.keys(expirationDate.expirationDateFields)[
-      index
-    ] as keyof typeof expirationDate.expirationDateFields;
-    return expirationDate.expirationDateFields[cardKey].isError;
-  };
+  const checkInputError = (
+    matchingKey: keyof ExpirationDate['expirationDateFields']
+  ) => expirationDate.expirationDateFields[matchingKey].isError;
+
   return (
     <>
       <FieldTitle
@@ -79,24 +79,25 @@ export default function ExpirationDateInput({
         count={2}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: 2 }).map((_, index) => (
-          <Input
-            key={index}
-            type='string'
-            maxLength={2}
-            value={
-              expirationDate.expirationDateFields[
-                date[index] as keyof typeof expirationDate.expirationDateFields
-              ].value
-            }
-            placeholder={datePlaceHolder[index]}
-            isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, date[index], index)}
-            inputRef={(element: HTMLInputElement) => {
-              inputRefs.current[index] = element;
-            }}
-          />
-        ))}
+        {Array.from({ length: 2 }).map((_, index) => {
+          const matchingKey: keyof ExpirationDate['expirationDateFields'] =
+            index === 0 ? 'month' : 'year';
+
+          return (
+            <Input
+              key={index}
+              type='string'
+              maxLength={2}
+              value={expirationDate.expirationDateFields[matchingKey].value}
+              placeholder={datePlaceHolder[index]}
+              isError={checkInputError(matchingKey)}
+              onChange={(e) => handleInputChange(e, matchingKey, index)}
+              inputRef={(element: HTMLInputElement) => {
+                inputRefs.current[index] = element;
+              }}
+            />
+          );
+        })}
       </InputField>
     </>
   );

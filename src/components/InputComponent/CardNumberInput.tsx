@@ -44,10 +44,13 @@ export default function CardNumberInput({
       handleUpdateCardNumberErrorMessages(index, '', false);
       handleUpdateCardNumberInput(index, e.target.value);
       const nextIndex = index + 1;
-      if (e.target.value.length === CARD_NUMBER.FIELD_LENGTH && nextIndex < inputRefs.current.length) {
+      if (
+        e.target.value.length === CARD_NUMBER.FIELD_LENGTH &&
+        nextIndex < inputRefs.current.length
+      ) {
         inputRefs.current[nextIndex]?.focus();
       }
-      if(e.target.value.length !== CARD_NUMBER.FIELD_LENGTH){
+      if (e.target.value.length !== CARD_NUMBER.FIELD_LENGTH) {
         throw new Error('4자리의 숫자를 입력해주세요');
       }
     } catch (error) {
@@ -57,9 +60,23 @@ export default function CardNumberInput({
     }
   };
 
+  type CardKeys = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4';
+
+  const getCardKey = (index: number): CardKeys => {
+    switch (index) {
+      case 1:
+        return 'cardNumber1';
+      case 2:
+        return 'cardNumber2';
+      case 3:
+        return 'cardNumber3';
+      default:
+        return 'cardNumber4';
+    }
+  };
+
   const checkInputError = (index: number) => {
-    const cardKey =
-      `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields;
+    const cardKey = getCardKey(index);
     return cardNumbers.cardNumberFields[cardKey].isError;
   };
 
@@ -74,24 +91,22 @@ export default function CardNumberInput({
         count={4}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: CARD_NUMBER.TOTAL_FIELDS }).map((_, index) => (
-          <Input
-            key={index}
-            type='text'
-            value={
-              cardNumbers.cardNumberFields[
-                `cardNumber${index + 1}` as keyof typeof cardNumbers.cardNumberFields
-              ].value
-            }
-            maxLength={CARD_NUMBER.FIELD_LENGTH}
-            placeholder='1234'
-            isError={checkInputError(index)}
-            onChange={(e) => handleInputChange(e, 'cardNumber', index)}
-            inputRef={(element: HTMLInputElement) => {
-              inputRefs.current[index] = element;
-            }}
-          />
-        ))}
+        {Array.from({ length: CARD_NUMBER.TOTAL_FIELDS }).map((_, index) => {
+          return (
+            <Input
+              key={index}
+              type='text'
+              value={cardNumbers.cardNumberFields[getCardKey(index)].value}
+              maxLength={CARD_NUMBER.FIELD_LENGTH}
+              placeholder='1234'
+              isError={checkInputError(index)}
+              onChange={(e) => handleInputChange(e, 'cardNumber', index)}
+              inputRef={(element: HTMLInputElement) => {
+                inputRefs.current[index] = element;
+              }}
+            />
+          );
+        })}
       </InputField>
     </>
   );

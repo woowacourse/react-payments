@@ -26,7 +26,7 @@ export default function UserNameInput({
   },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-
+  const cardKey: keyof UserName['userNameField'] = 'userName';
   const errorMessages = Object.values(userName.userNameField).map(
     (value) => value.errorMessage
   );
@@ -40,11 +40,11 @@ export default function UserNameInput({
     info: string
   ) => {
     try {
-      const str = e.target.value.toUpperCase()
+      const str = e.target.value.toUpperCase();
       Validation[info]?.(str);
       handleUpdateUserNameErrorMessages('', false);
       handleUpdateUserNameInput(str);
-      if(str.length === 0){
+      if (str.length === 0) {
         throw new Error('이름을 입력해주세요.');
       }
     } catch (error) {
@@ -75,7 +75,6 @@ export default function UserNameInput({
   };
 
   const checkInputError = () => {
-    const cardKey = 'userName' as keyof typeof userName.userNameField;
     return userName.userNameField[cardKey].isError;
   };
 
@@ -87,25 +86,19 @@ export default function UserNameInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: USER_NAME.TOTAL_FIELDS }).map((_, index) => (
-          <Input
-            key={index}
-            type='string'
-            maxLength={30}
-            value={
-              userName.userNameField[
-                'userName' as keyof typeof userName.userNameField
-              ].value
-            }
-            placeholder={'JOHN DOE'}
-            isError={checkInputError()}
-            onChange={(e) => handleInputChange(e, 'userName')}
-            onKeyDown={(e) => handleKeyDown(e)}
-            inputRef={(element: HTMLInputElement) => {
-              inputRefs.current[index] = element;
-            }}
-          />
-        ))}
+        <Input
+          key={0}
+          type='string'
+          maxLength={30}
+          value={userName.userNameField[cardKey].value}
+          placeholder={'JOHN DOE'}
+          isError={checkInputError()}
+          onChange={(e) => handleInputChange(e, 'userName')}
+          onKeyDown={(e) => handleKeyDown(e)}
+          inputRef={(element: HTMLInputElement) => {
+            inputRefs.current[0] = element;
+          }}
+        />
       </InputField>
     </>
   );

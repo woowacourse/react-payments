@@ -21,7 +21,7 @@ export default function CVCInput({
   handleInput: { handleUpdateCVCInput, handleUpdateCVCErrorMessages },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-
+  const cardKey: keyof CVC['CVCField'] = 'CVC';
   const errorMessages = Object.values(CVC.CVCField).map(
     (value) => value.errorMessage
   );
@@ -38,7 +38,7 @@ export default function CVCInput({
       Validation[info]?.(e.target.value);
       handleUpdateCVCErrorMessages('', false);
       handleUpdateCVCInput(e.target.value);
-      if(e.target.value.length !== CVC_LIMIT.FIELD_LENGTH){
+      if (e.target.value.length !== CVC_LIMIT.FIELD_LENGTH) {
         throw new Error('3자리의 숫자를 입력해주세요');
       }
     } catch (error) {
@@ -49,7 +49,6 @@ export default function CVCInput({
   };
 
   const checkInputError = () => {
-    const cardKey = 'CVC' as keyof typeof CVC.CVCField;
     return CVC.CVCField[cardKey].isError;
   };
 
@@ -61,20 +60,18 @@ export default function CVCInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: CVC_LIMIT.TOTAL_FIELDS }).map((_, index) => (
-          <Input
-            key={index}
-            type='string'
-            maxLength={3}
-            value={CVC.CVCField['CVC' as keyof typeof CVC.CVCField].value}
-            placeholder={'123'}
-            isError={checkInputError()}
-            onChange={(e) => handleInputChange(e, 'CVC')}
-            inputRef={(element: HTMLInputElement) => {
-              inputRefs.current[index] = element;
-            }}
-          />
-        ))}
+        <Input
+          key={0}
+          type='string'
+          maxLength={3}
+          value={CVC.CVCField[cardKey].value}
+          placeholder={'123'}
+          isError={checkInputError()}
+          onChange={(e) => handleInputChange(e, 'CVC')}
+          inputRef={(element: HTMLInputElement) => {
+            inputRefs.current[0] = element;
+          }}
+        />
       </InputField>
     </>
   );

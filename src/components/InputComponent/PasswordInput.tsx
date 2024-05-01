@@ -21,7 +21,7 @@ export default function PasswordInput({
   handleInput: { handleUpdatePasswordInput, handleUpdatePasswordErrorMessages },
 }: Props) {
   const inputRefs = useRef<null[] | HTMLInputElement[]>([]);
-
+  const cardKey: keyof Password['passwordField'] = 'password';
   const errorMessages = Object.values(password.passwordField).map(
     (value) => value.errorMessage
   );
@@ -38,7 +38,7 @@ export default function PasswordInput({
       Validation[info]?.(e.target.value);
       handleUpdatePasswordErrorMessages('', false);
       handleUpdatePasswordInput(e.target.value);
-      if(e.target.value.length !== PASSWORD.FIELD_LENGTH){
+      if (e.target.value.length !== PASSWORD.FIELD_LENGTH) {
         throw new Error('2자리의 숫자를 입력해주세요');
       }
     } catch (error) {
@@ -49,7 +49,6 @@ export default function PasswordInput({
   };
 
   const checkInputError = () => {
-    const cardKey = 'password' as keyof typeof password.passwordField;
     return password.passwordField[cardKey].isError;
   };
 
@@ -64,24 +63,18 @@ export default function PasswordInput({
         count={1}
         errorMessages={errorMessages}
       >
-        {Array.from({ length: 1 }).map((_, index) => (
-          <Input
-            key={index}
-            type='string'
-            maxLength={2}
-            value={
-              password.passwordField[
-                'password' as keyof typeof password.passwordField
-              ].value
-            }
-            placeholder={'**'}
-            isError={checkInputError()}
-            onChange={(e) => handleInputChange(e, 'password')}
-            inputRef={(element: HTMLInputElement) => {
-              inputRefs.current[index] = element;
-            }}
-          />
-        ))}
+        <Input
+          key={0}
+          type='string'
+          maxLength={2}
+          value={password.passwordField[cardKey].value}
+          placeholder={'**'}
+          isError={checkInputError()}
+          onChange={(e) => handleInputChange(e, 'password')}
+          inputRef={(element: HTMLInputElement) => {
+            inputRefs.current[0] = element;
+          }}
+        />
       </InputField>
     </>
   );
