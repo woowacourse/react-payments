@@ -7,4 +7,6 @@ export const ERROR_MESSAGE = {
   inputCount: (count: number) => {
     return `${count}글자를 입력해주세요.`;
   },
+  invalidProvider: '카드사를 선택해주세요.',
+  invalidCvc: '올바른 CVC 번호를 입력해 주세요.',
 };

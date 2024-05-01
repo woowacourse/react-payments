@@ -2,9 +2,19 @@ import { css } from '@emotion/react';
 import InputTitle from './InputTitle';
 import Input from './Input';
 import ErrorMessage from './ErrorMessage';
-import { InformationDetailType, informationSectionType, period } from '../types/card';
-import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
+import { InputChangePropsType, informationSectionType } from '../types/card';
+import {
+  CARD_CVC,
+  CARD_NUMBER,
+  CARD_OWNER,
+  CARD_PASSWORD,
+  CARD_PERIOD,
+  CARD_PROVIDER,
+  PERIOD,
+} from '../constants/inputInformation';
 import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
+import Selector from './Selector';
+import { useRef, useState } from 'react';
 
 const inputGroupStyle = css({
   display: 'flex',
@@ -54,27 +64,47 @@ const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusCol
   });
 
 interface InputGroupType {
-  onInputChange: (value: string, index: number, inputSection?: InformationDetailType) => void;
+  onInputChange: ({ value, index, inputSection }: InputChangePropsType) => void;
   informationSection: informationSectionType;
   isError: boolean[];
   errorMessage: string;
+  onBlur?: () => void;
+  onFocus?: () => void;
 }
 
-function InputGroup({ onInputChange, informationSection, isError, errorMessage }: InputGroupType) {
+function InputGroup({ onInputChange, informationSection, isError, errorMessage, onBlur, onFocus }: InputGroupType) {
   const getTypeTable = {
     number: CARD_NUMBER,
     period: CARD_PERIOD,
     owner: CARD_OWNER,
+    provider: CARD_PROVIDER,
+    cvc: CARD_CVC,
+    password: CARD_PASSWORD,
   };
 
   const { title, subtitle, label, placeholders, maxLength } = getTypeTable[informationSection];
 
   const getInputType = (type: informationSectionType, index: number) => {
-    if (type === 'number' && (index === CARD_DISPLAY_INDEX.third || index === CARD_DISPLAY_INDEX.fourth))
+    if (
+      type === 'password' ||
+      (type === 'number' && [CARD_DISPLAY_INDEX.third, CARD_DISPLAY_INDEX.fourth].includes(index))
+    )
       return 'password';
     if (type === 'number' || type === 'period') return 'number';
     return 'input';
   };
+
+  const [isClicked, setIsClicked] = useState(new Array(placeholders.length).fill(false));
+
+  const handleClicked = (index: number) => {
+    if (isClicked[index]) return;
+    setIsClicked((prevState) => {
+      const updatedState = [...prevState];
+      updatedState[index] = true;
+      return updatedState;
+    });
+  };
+  const inputRefs = useRef(Array(placeholders.length).fill(null));
 
   return (
     <div css={inputGroupStyle}>
@@ -88,7 +118,18 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
         </label>
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
-            const inputSection = informationSection === 'period' ? period[index] : informationSection;
+            const inputSection = informationSection === 'period' ? PERIOD[index] : informationSection;
+
+            if (informationSection === 'provider') {
+              return (
+                <Selector
+                  key={index}
+                  onInputChange={(provider: string) => onInputChange({ value: provider, index: 0 })}
+                  isError={isError}
+                  errorMessage={errorMessage}
+                />
+              );
+            }
 
             return (
               <Input
@@ -96,16 +137,23 @@ function InputGroup({ onInputChange, informationSection, isError, errorMessage }
                 maxLength={maxLength}
                 type={getInputType(informationSection, index)}
                 placeholder={placeholder}
-                onStateChange={(value) => onInputChange(value, index, inputSection)}
+                onStateChange={(value) => onInputChange({ value, index, inputSection })}
                 inputCss={inputStyle({
-                  borderColor: isError[index] ? '#FF3D3D' : '#acacac',
-                  focusColor: isError[index] ? '#FF3D3D' : '#000',
+                  borderColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#acacac',
+                  focusColor: isError[index] && isClicked[index] ? '#FF3D3D' : '#000',
                 })}
+                onHandleClicked={() => handleClicked(index)}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                autoFocus={index === 0}
+                ref={(ref) => {
+                  inputRefs.current[index] = ref;
+                }}
               />
             );
           })}
         </div>
-        <ErrorMessage value={errorMessage}></ErrorMessage>
+        {isError && <ErrorMessage value={errorMessage} />}
       </div>
     </div>
   );
