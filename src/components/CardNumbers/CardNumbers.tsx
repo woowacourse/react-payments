@@ -1,49 +1,22 @@
-import { useState } from "react";
+import { CARD_INFO } from "../../constants/cardInformation";
+import { CardNumbersType } from "../../hooks/useCardForm";
+import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
-import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {
-  executeValidators,
-  isInvalidCardNumberLength,
-  isInvalidNumber,
-} from "../../utils/validators";
 import * as S from "./style";
 
 interface Props {
-  cardNumbers: CardInfoValue[];
-  onChangeCardInfo: (inputValue: CardInfoValue[], inputId: string) => void;
+  cardNumbers: CardNumbersType;
 }
 
-export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onChangeInput = (cardNumberIdx: number, value: string) => {
-    const newCardNumbers = [...cardNumbers];
-    const validateResult = isInvalidNumber(value);
-
-    newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardNumbers, "cardNumbers");
-  };
-
-  const onBlurInput = (cardNumberIdx: number, value: string) => {
-    const newCardNumbers = [...cardNumbers];
-    const validateResult = executeValidators(
-      [isInvalidNumber, isInvalidCardNumberLength],
-      value
-    );
-
-    newCardNumbers[cardNumberIdx].value = value;
-    newCardNumbers[cardNumberIdx].isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardNumbers, "cardNumbers");
-  };
+export default function CardNumbers({ cardNumbers }: Props) {
+  const errorMessage = getFirstValidateMessage(cardNumbers);
 
   return (
     <S.CardNumbersContainer>
       <div>
-        <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
+        <SubTitleText>결제할 카드 번호를 입력해 주세요</SubTitleText>
         <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
       </div>
       <S.CardNumberBox>
@@ -52,19 +25,21 @@ export default function CardNumbers({ cardNumbers, onChangeCardInfo }: Props) {
           {cardNumbers.map((cardNumber, idx) => {
             return (
               <Input
+                ref={cardNumbers[idx].ref}
                 id={`cardNumber${idx + 1}`}
+                key={`cardNumber${idx + 1}`}
                 ariaLabel={`카드번호${idx + 1}`}
-                maxLength={4}
+                maxLength={CARD_INFO.NUMBER_LENGTH}
                 placeholder="1234"
                 value={cardNumber.value}
-                isError={cardNumber.isError}
-                onChangeInput={(value) => onChangeInput(idx, value)}
-                onBlurInput={(value) => onBlurInput(idx, value)}
+                isError={cardNumber.validateMessage !== ""}
+                onChange={cardNumber.onChange}
+                onBlur={cardNumber.onBlur}
               />
             );
           })}
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={errorMessage || ""} />
       </S.CardNumberBox>
     </S.CardNumbersContainer>
   );

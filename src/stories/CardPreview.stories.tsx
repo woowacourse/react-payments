@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardPreview from "../components/CardPreview/CardPreview";
+import CardPreview from "../components/CardPreview";
 
 const meta: Meta<typeof CardPreview> = {
   component: CardPreview,
@@ -8,20 +8,30 @@ const meta: Meta<typeof CardPreview> = {
 export default meta;
 type Story = StoryObj<typeof CardPreview>;
 
-export const Default: Story = {
+export const PreviewFront: Story = {
   args: {
-    cardInformation: {
-      cardNumbers: [
-        { value: "", isError: false },
-        { value: "", isError: false },
-        { value: "", isError: false },
-        { value: "", isError: false },
-        { value: "", isError: false },
-      ],
-      cardExpirationMonth: { value: "", isError: false },
-      cardExpirationYear: { value: "", isError: false },
-      cardOwnerName: { value: "", isError: false },
-    },
+    cardNumbers: ["1234", "1234", "1234", "1234"],
+    cardCompany: "현대카드",
+    cardExpirationMonth: "12",
+    cardExpirationYear: "25",
+    cardOwnerName: "JAY MYONG",
+    cardCVC: "123",
+    previewStatus: "front",
+  },
+  render: ({ ...args }) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const PreviewBack: Story = {
+  args: {
+    cardNumbers: ["5123", "1234", "1234", "1234"],
+    cardCompany: "현대카드",
+    cardExpirationMonth: "12",
+    cardExpirationYear: "25",
+    cardOwnerName: "JAY MYONG",
+    cardCVC: "123",
+    previewStatus: "back",
   },
   render: ({ ...args }) => {
     return <CardPreview {...args} />;
@@ -30,18 +40,13 @@ export const Default: Story = {
 
 export const Visa: Story = {
   args: {
-    cardInformation: {
-      cardNumbers: [
-        { value: "4312", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-      ],
-      cardExpirationMonth: { value: "12", isError: false },
-      cardExpirationYear: { value: "25", isError: false },
-      cardOwnerName: { value: "JAEWI MYONG", isError: false },
-    },
+    cardNumbers: ["4312", "1234", "1234", "1234"],
+    cardCompany: "현대카드",
+    cardExpirationMonth: "12",
+    cardExpirationYear: "25",
+    cardOwnerName: "JAY MYONG",
+    cardCVC: "123",
+    previewStatus: "front",
   },
   render: ({ ...args }) => {
     return <CardPreview {...args} />;
@@ -50,18 +55,13 @@ export const Visa: Story = {
 
 export const Master: Story = {
   args: {
-    cardInformation: {
-      cardNumbers: [
-        { value: "5112", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-        { value: "1234", isError: false },
-      ],
-      cardExpirationMonth: { value: "12", isError: false },
-      cardExpirationYear: { value: "25", isError: false },
-      cardOwnerName: { value: "JAEWI MYONG", isError: false },
-    },
+    cardNumbers: ["5123", "1234", "1234", "1234"],
+    cardCompany: "현대카드",
+    cardExpirationMonth: "12",
+    cardExpirationYear: "25",
+    cardOwnerName: "JAY MYONG",
+    cardCVC: "123",
+    previewStatus: "front",
   },
   render: ({ ...args }) => {
     return <CardPreview {...args} />;

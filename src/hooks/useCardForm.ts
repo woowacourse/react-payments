@@ -1,0 +1,211 @@
+import { FormEvent, useEffect, useState } from "react";
+import {
+  isCardCVCLength,
+  isCardDateLength,
+  isCardMonth,
+  isCardNumber,
+  isCardNumberLength,
+  isCardYear,
+  isOwnerNameLength,
+  isPasswordLength,
+  isUpperCase,
+} from "../utils/validators";
+import useInput, { UseInputReturn } from "./useInput";
+import useSelect from "./useSelect";
+import useFocus from "./useFocus";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../constants/path";
+import { CARD_INFO } from "../constants/cardInformation";
+import { CardCompanyType } from "../components/CardCompanySelect/CardCompanySelect";
+
+export type CardNumbersType = UseInputReturn[];
+
+export interface CardInformation {
+  cardNumbers: CardNumbersType;
+  cardExpirationMonth: UseInputReturn;
+  cardExpirationYear: UseInputReturn;
+  cardOwnerName: UseInputReturn;
+  cardCompany: CardCompanyType;
+  cardCVC: UseInputReturn;
+  cardPassword: UseInputReturn;
+}
+
+const useCardForm = () => {
+  const [step, setStep] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const navigate = useNavigate();
+
+  const cardNumber1 = useInput("", {
+    validateOnChange: [isCardNumber, isCardNumberLength],
+    validateOnBlur: [isCardNumber, isCardNumberLength],
+  });
+
+  const cardNumber2 = useInput("", {
+    validateOnChange: [isCardNumber, isCardNumberLength],
+    validateOnBlur: [isCardNumber, isCardNumberLength],
+  });
+
+  const cardNumber3 = useInput("", {
+    validateOnChange: [isCardNumber, isCardNumberLength],
+    validateOnBlur: [isCardNumber, isCardNumberLength],
+  });
+
+  const cardNumber4 = useInput("", {
+    validateOnChange: [isCardNumber, isCardNumberLength],
+    validateOnBlur: [isCardNumber, isCardNumberLength],
+  });
+
+  const cardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
+
+  const cardCompany = useSelect();
+
+  const cardExpirationMonth = useInput("", {
+    validateOnChange: [isCardNumber, isCardMonth, isCardDateLength],
+    validateOnBlur: [isCardNumber, isCardMonth, isCardDateLength],
+  });
+
+  const cardExpirationYear = useInput("", {
+    validateOnChange: [isCardNumber, isCardYear, isCardDateLength],
+    validateOnBlur: [isCardNumber, isCardYear, isCardDateLength],
+  });
+
+  const cardOwnerName = useInput("", {
+    validateOnChange: [isUpperCase, isOwnerNameLength],
+    validateOnBlur: [isUpperCase, isOwnerNameLength],
+  });
+
+  const cardCVC = useInput("", {
+    validateOnChange: [isCardNumber, isCardCVCLength],
+    validateOnBlur: [isCardNumber, isCardCVCLength],
+  });
+
+  const cardPassword = useInput("", {
+    validateOnChange: [isCardNumber, isPasswordLength],
+    validateOnBlur: [isCardNumber, isPasswordLength],
+  });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate(PATH.CONFIRM, {
+      state: {
+        cardCompany: cardCompany.value,
+        firstCardNumber: cardNumbers[0].value,
+      },
+    });
+  };
+
+  const changeNextStep = (index: number) => {
+    const newStep = [...step];
+
+    newStep[index] = true;
+    setStep(newStep);
+  };
+
+  useEffect(() => {
+    const cardNumbersCompleted = cardNumbers.every(
+      (cn) =>
+        cn.value.length === CARD_INFO.NUMBER_LENGTH && cn.validateMessage === ""
+    );
+    const cardCompanyCompleted = cardCompany.value !== "";
+    const cardExpirationDateCompleted = [
+      cardExpirationMonth,
+      cardExpirationYear,
+    ].every(
+      (date) =>
+        date.value.length === CARD_INFO.DATE_LENGTH &&
+        date.validateMessage === ""
+    );
+    const cardOwnerNameCompleted =
+      cardOwnerName.value !== "" && cardOwnerName.validateMessage === "";
+    const cardCVCCompleted =
+      cardCVC.value !== "" && cardCVC.validateMessage === "";
+    const cardPasswordCompleted =
+      cardPassword.value !== "" && cardPassword.validateMessage === "";
+
+    if (!step[1] && cardNumbersCompleted) {
+      changeNextStep(1);
+    }
+    if (!step[2] && cardCompanyCompleted) {
+      changeNextStep(2);
+    }
+    if (!step[3] && cardExpirationDateCompleted) {
+      changeNextStep(3);
+    }
+    if (!step[4] && cardOwnerNameCompleted) {
+      changeNextStep(4);
+    }
+    if (!step[5] && cardCVCCompleted) {
+      changeNextStep(5);
+    }
+    if (!step[6] && cardPasswordCompleted) {
+      changeNextStep(6);
+    }
+
+    if (
+      step[6] &&
+      cardNumbersCompleted &&
+      cardCompanyCompleted &&
+      cardExpirationDateCompleted &&
+      cardOwnerNameCompleted &&
+      cardCVCCompleted &&
+      cardPasswordCompleted
+    ) {
+      setIsCompleted(true);
+    }
+    if (
+      step[6] &&
+      !(
+        cardNumbersCompleted &&
+        cardCompanyCompleted &&
+        cardExpirationDateCompleted &&
+        cardOwnerNameCompleted &&
+        cardCVCCompleted &&
+        cardPasswordCompleted
+      )
+    ) {
+      setIsCompleted(false);
+    }
+  }, [
+    step,
+    cardNumbers,
+    cardCompany,
+    cardExpirationMonth,
+    cardExpirationYear,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+  ]);
+
+  useFocus(step, {
+    cardNumbers,
+    cardCompany,
+    cardExpirationMonth,
+    cardExpirationYear,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+  });
+
+  return {
+    step,
+    cardNumbers,
+    cardCompany,
+    cardExpirationMonth,
+    cardExpirationYear,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+    isCompleted,
+    handleSubmit,
+  };
+};
+
+export default useCardForm;

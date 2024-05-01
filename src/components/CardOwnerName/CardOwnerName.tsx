@@ -1,67 +1,33 @@
-import { useState } from "react";
+import { CARD_INFO } from "../../constants/cardInformation";
+import { UseInputReturn } from '../../hooks/useInput';
 import Input from "../atoms/Input/Input";
-import { TitleText, LabelText } from "../atoms/text";
+import { SubTitleText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {
-  executeValidators,
-  isInvalidNameLength,
-  isInvalidOwnerName,
-} from "../../utils/validators";
 import * as S from "./style";
 
 interface Props {
-  cardOwnerName: CardInfoValue;
-  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
+  cardOwnerName: UseInputReturn;
 }
 
-export default function CardOwnerName({
-  cardOwnerName,
-  onChangeCardInfo,
-}: Props) {
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onChangeNameInput = (value: string) => {
-    const newCardOwnerName = cardOwnerName;
-    const upperName = value.toUpperCase();
-    const validateResult = isInvalidOwnerName(upperName);
-
-    newCardOwnerName.value = upperName;
-    newCardOwnerName.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardOwnerName, "cardOwnerName");
-  };
-
-  const onBlurNameInput = (value: string) => {
-    const newCardOwnerName = cardOwnerName;
-    const upperName = value.toUpperCase();
-    const validateResult = executeValidators(
-      [isInvalidOwnerName, isInvalidNameLength],
-      value
-    );
-
-    newCardOwnerName.value = upperName;
-    newCardOwnerName.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardOwnerName, "cardOwnerName");
-  };
-
+export default function CardOwnerName({ cardOwnerName }: Props) {
   return (
     <S.CardOwnerNameContainer>
-      <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
+      <SubTitleText>카드 소유자 이름을 입력해 주세요</SubTitleText>
       <S.CardOwnerNameBox>
         <LabelText htmlFor="cardOwnerName">소유자 이름</LabelText>
         <S.InputContainer>
           <Input
             id="cardOwnerName"
-            maxLength={15}
+            ref={cardOwnerName.ref}
+            maxLength={CARD_INFO.NAME_LENGTH}
             placeholder="JOHN DOE"
             value={cardOwnerName.value}
-            isError={cardOwnerName.isError}
-            onChangeInput={(value) => onChangeNameInput(value)}
-            onBlurInput={(value) => onBlurNameInput(value)}
+            isError={cardOwnerName.validateMessage !== ""}
+            onChange={cardOwnerName.onChange}
+            onBlur={cardOwnerName.onBlur}
           />
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={cardOwnerName.validateMessage || ""} />
       </S.CardOwnerNameBox>
     </S.CardOwnerNameContainer>
   );

@@ -9,7 +9,7 @@ export const Input = styled.input<{ isError: boolean }>`
     ${(props) =>
       props.isError ? props.theme.colors.inputError : props.theme.colors.input};
 
-  border-radius: 2px;
+  border-radius: 2.6px;
   font-family: Inter;
   font-size: 11px;
   font-weight: 400;

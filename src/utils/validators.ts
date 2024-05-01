@@ -22,57 +22,71 @@ export const executeValidators = (
   return result;
 };
 
-export const isInvalidNumber = (value: string) => {
+export const isCardNumber = (value: string) => {
   if (value.length !== 0 && !Number.isInteger(Number(value))) {
-    return { isError: true, message: ERROR.NOT_NUMBER };
+    return ERROR.NOT_NUMBER;
   }
 
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidCardNumberLength = (value: string) => {
+export const isCardNumberLength = (value: string) => {
   if (value.length !== CARD_INFO.NUMBER_LENGTH) {
-    return { isError: true, message: ERROR.CARD_NUMBER_LENGTH };
+    return ERROR.CARD_NUMBER_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidDateLength = (value: string) => {
+export const isCardDateLength = (value: string) => {
   if (value.length !== CARD_INFO.DATE_LENGTH) {
-    return { isError: true, message: ERROR.CARD_DATE_LENGTH };
+    return ERROR.CARD_DATE_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidMonth = (value: string) => {
+export const isCardMonth = (value: string) => {
   if (
     Number(value) < CARD_INFO.MONTH_START ||
     Number(value) > CARD_INFO.MONTH_END
   ) {
-    return { isError: true, message: ERROR.NOT_MONTH };
+    return ERROR.NOT_MONTH;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidYear = (value: string) => {
+export const isCardYear = (value: string) => {
   if (Number(value) < CARD_INFO.VALID_YEAR) {
-    return { isError: true, message: ERROR.NOT_YEAR };
+    return ERROR.NOT_YEAR;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidOwnerName = (upperName: string) => {
+export const isUpperCase = (name: string) => {
   const pattern: RegExp = OWNER_NAME_REG;
 
-  if (upperName.length !== 0 && !pattern.test(upperName)) {
-    return { isError: true, message: ERROR.NOT_ALPHABET };
+  if (name.length !== 0 && !pattern.test(name)) {
+    return ERROR.NOT_ALPHABET;
   }
-  return { isError: false, message: "" };
+  return "";
 };
 
-export const isInvalidNameLength = (value: string) => {
-  if (value.length < 1 && value.length > CARD_INFO.NAME_LENGTH) {
-    return { isError: true, message: ERROR.CARD_NAME_LENGTH };
+export const isOwnerNameLength = (name: string) => {
+  if (name.length < 1 && name.length > CARD_INFO.NAME_LENGTH) {
+    return ERROR.CARD_NAME_LENGTH;
   }
-  return { isError: false, message: "" };
+  return "";
+};
+
+export const isCardCVCLength = (value: string) => {
+  if (value.length !== CARD_INFO.CVC_LENGTH) {
+    return ERROR.CARD_CVC_LENGTH;
+  }
+  return "";
+};
+
+export const isPasswordLength = (value: string) => {
+  if (value.length !== CARD_INFO.PASSWORD_LENGTH) {
+    return ERROR.CARD_PASSWORD_LENGTH;
+  }
+  return "";
 };

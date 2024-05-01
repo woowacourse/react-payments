@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
-export const CardEnrollFormContainer = styled.div`
+export const CardEnrollContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 77px;
 `;
 
-export const CardInformation = styled.div`
+export const CardForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ cardCompanyColor: string }>`
   width: 212px;
   height: 132px;
-  background: ${({ theme }) => theme.colors.cardPreviewBackground};
+  background: ${(props) => props.cardCompanyColor};
   border-radius: 4px;
   color: ${({ theme }) => theme.colors.cardPreviewText};
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export const CardHeader = styled.div`

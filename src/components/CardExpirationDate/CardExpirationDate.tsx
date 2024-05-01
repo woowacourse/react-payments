@@ -1,79 +1,29 @@
-import { useState } from "react";
+import { CARD_INFO } from "../../constants/cardInformation";
+import { UseInputReturn } from '../../hooks/useInput';
+import { getFirstValidateMessage } from "../../utils/getFirstValidateMessage";
 import Input from "../atoms/Input/Input";
-import { TitleText, CaptionText, LabelText } from "../atoms/text";
+import { SubTitleText, CaptionText, LabelText } from "../atoms/text";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {
-  executeValidators,
-  isInvalidDateLength,
-  isInvalidMonth,
-  isInvalidNumber,
-  isInvalidYear,
-} from "../../utils/validators";
 import * as S from "./style";
 
 interface Props {
-  cardExpirationMonth: CardInfoValue;
-  cardExpirationYear: CardInfoValue;
-  onChangeCardInfo: (inputValue: CardInfoValue, inputId: string) => void;
+  cardExpirationMonth: UseInputReturn;
+  cardExpirationYear: UseInputReturn;
 }
 
 export default function CardExpirationDate({
   cardExpirationMonth,
   cardExpirationYear,
-  onChangeCardInfo,
 }: Props) {
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onChangeMonthInput = (value: string) => {
-    const newCardExpirationMonth = cardExpirationMonth;
-    const validateResult = isInvalidNumber(value);
-
-    newCardExpirationMonth.value = value;
-    newCardExpirationMonth.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
-  };
-
-  const onBlurMonthInput = (value: string) => {
-    const newCardExpirationMonth = cardExpirationMonth;
-    const validateResult = executeValidators(
-      [isInvalidNumber, isInvalidDateLength, isInvalidMonth],
-      value
-    );
-
-    newCardExpirationMonth.value = value;
-    newCardExpirationMonth.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardExpirationMonth, "cardExpirationMonth");
-  };
-
-  const onChangeYearInput = (value: string) => {
-    const newCardExpirationYear = cardExpirationYear;
-    const validateResult = isInvalidNumber(value);
-
-    newCardExpirationYear.value = value;
-    newCardExpirationYear.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
-  };
-
-  const onBlurYearInput = (value: string) => {
-    const newCardExpirationYear = cardExpirationYear;
-    const validateResult = executeValidators(
-      [isInvalidNumber, isInvalidDateLength, isInvalidYear],
-      value
-    );
-
-    newCardExpirationYear.value = value;
-    newCardExpirationYear.isError = validateResult.isError;
-    setErrorMessage(validateResult.message);
-    onChangeCardInfo(newCardExpirationYear, "cardExpirationYear");
-  };
+  const errorMessage = getFirstValidateMessage([
+    cardExpirationMonth,
+    cardExpirationYear,
+  ]);
 
   return (
     <S.CardDateContainer>
       <div>
-        <TitleText>카드 유효기간을 입력해 주세요</TitleText>
+        <SubTitleText>카드 유효기간을 입력해 주세요</SubTitleText>
         <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
       </div>
       <S.CardDateBox>
@@ -81,26 +31,28 @@ export default function CardExpirationDate({
         <S.InputContainer>
           <Input
             id="cardExpirationMonth"
+            ref={cardExpirationMonth.ref}
             ariaLabel="유효기간 월"
-            maxLength={2}
+            maxLength={CARD_INFO.DATE_LENGTH}
             placeholder="MM"
             value={cardExpirationMonth.value}
-            isError={cardExpirationMonth.isError}
-            onChangeInput={(value) => onChangeMonthInput(value)}
-            onBlurInput={(value) => onBlurMonthInput(value)}
+            isError={cardExpirationMonth.validateMessage !== ""}
+            onChange={cardExpirationMonth.onChange}
+            onBlur={cardExpirationMonth.onBlur}
           />
           <Input
             id="cardExpirationYear"
+            ref={cardExpirationYear.ref}
             ariaLabel="유효기간 연도"
-            maxLength={2}
+            maxLength={CARD_INFO.DATE_LENGTH}
             placeholder="YY"
             value={cardExpirationYear.value}
-            isError={cardExpirationYear.isError}
-            onChangeInput={(value) => onChangeYearInput(value)}
-            onBlurInput={(value) => onBlurYearInput(value)}
+            isError={cardExpirationYear.validateMessage !== ""}
+            onChange={cardExpirationYear.onChange}
+            onBlur={cardExpirationYear.onBlur}
           />
         </S.InputContainer>
-        <ErrorMessage message={errorMessage}></ErrorMessage>
+        <ErrorMessage message={errorMessage || ""} />
       </S.CardDateBox>
     </S.CardDateContainer>
   );
