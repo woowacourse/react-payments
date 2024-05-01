@@ -3,10 +3,10 @@ import { CardNumbers } from '../types/card';
 import { CARD_NUMBER } from '../constants/system';
 
 const useCardNumbers = (
-  initCardNumber1: string,
-  initCardNumber2: string,
-  initCardNumber3: string,
-  initCardNumber4: string
+  initCardNumber1: string = '',
+  initCardNumber2: string = '',
+  initCardNumber3: string = '',
+  initCardNumber4: string = ''
 ) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     cardNumberFields: {

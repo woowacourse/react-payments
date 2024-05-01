@@ -5,6 +5,12 @@ import useCardForm from '../hooks/useCardForm';
 import { validateButton } from '../domain/InputValidation';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import useCardNumbers from '../hooks/useCardNumbers';
+import useExpireDate from '../hooks/useExpireDate';
+import useUserName from '../hooks/useUserName';
+import useCardBrand from '../hooks/useCardBrand';
+import usePassword from '../hooks/usePassword';
+import useCVC from '../hooks/useCVC';
 
 const Page = styled.div`
   width: 100vw;
@@ -32,23 +38,28 @@ export default function EnrollCard() {
     cardNumbers,
     handleUpdateCardNumberInput,
     handleUpdateCardNumberErrorMessages,
+  } = useCardNumbers();
+  const {
     expirationDate,
     handleUpdateExpirationDateInput,
     handleUpdateExpirationDateErrorMessages,
+  } = useExpireDate();
+  const {
     userName,
     handleUpdateUserNameIsNextPage,
     handleUpdateUserNameInput,
     handleUpdateUserNameErrorMessages,
-    cardBrand,
-    handleUpdateCardBrand,
-    handleUpdateCardBrandIsNextField,
-    CVC,
-    handleUpdateCVCInput,
-    handleUpdateCVCErrorMessages,
+  } = useUserName();
+  const { cardBrand, handleUpdateCardBrand, handleUpdateCardBrandIsNextField } =
+    useCardBrand();
+
+  const { CVC, handleUpdateCVCInput, handleUpdateCVCErrorMessages } = useCVC();
+
+  const {
     password,
     handleUpdatePasswordInput,
     handleUpdatePasswordErrorMessages,
-  } = useCardForm({});
+  } = usePassword();
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,7 +76,7 @@ export default function EnrollCard() {
     CVC,
     password,
   });
-  
+
   return (
     <Page>
       <Container onSubmit={handleSubmit}>

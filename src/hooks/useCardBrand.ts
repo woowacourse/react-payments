@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CardBrand } from '../types/card';
 
-const useCardBrand = (initCardBrand: string) => {
+const useCardBrand = (initCardBrand: string = '') => {
   const [cardBrand, setCardBrand] = useState({
     cardBrandField: {
       cardBrand: { value: initCardBrand, errorMessage: '', isError: false },
