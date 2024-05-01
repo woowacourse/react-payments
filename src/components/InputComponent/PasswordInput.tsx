@@ -38,7 +38,7 @@ export default function PasswordInput({
       Validation[info]?.(e.target.value);
       handleUpdatePasswordErrorMessages('', false);
       handleUpdatePasswordInput(e.target.value);
-      if(password.isNextField && e.target.value.length !== PASSWORD.FIELD_LENGTH){
+      if(e.target.value.length !== PASSWORD.FIELD_LENGTH){
         throw new Error('2자리의 숫자를 입력해주세요');
       }
     } catch (error) {

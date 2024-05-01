@@ -40,10 +40,11 @@ export default function UserNameInput({
     info: string
   ) => {
     try {
-      Validation[info]?.(e.target.value);
+      const str = e.target.value.toUpperCase()
+      Validation[info]?.(str);
       handleUpdateUserNameErrorMessages('', false);
-      handleUpdateUserNameInput(e.target.value);
-      if(userName.isNextField && e.target.value.length === 0){
+      handleUpdateUserNameInput(str);
+      if(str.length === 0){
         throw new Error('이름을 입력해주세요.');
       }
     } catch (error) {

@@ -52,7 +52,7 @@ export default function ExpirationDateInput({
       }
       handleUpdateExpirationDateErrorMessages(index, '', false);
       handleUpdateExpirationDateInput(index, e.target.value);
-      if(expirationDate.isNextField && e.target.value.length !== EXPIRATION_DATE.FIELD_LENGTH){
+      if(e.target.value.length !== EXPIRATION_DATE.FIELD_LENGTH){
         throw new Error('2자리의 숫자를 입력해주세요');
       }
     } catch (error) {
