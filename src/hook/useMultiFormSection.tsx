@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import useFocusNext from './useFocusNext'
 
 interface UseMultiFormSectionProps {
   refs: React.MutableRefObject<HTMLInputElement[]>

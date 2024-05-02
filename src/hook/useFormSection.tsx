@@ -1,60 +1,61 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-interface UseFormSectionProps {
-  ref: React.MutableRefObject<HTMLInputElement>;
-  value: string;
-  validateWhenChange: (value: string) => { errorMessage: string, newValue: string }
-  validateWhenBlur: (value: string) => { errorMessage: string, complete: boolean }
-  blurCondition: (value: string) => boolean;
-  updateCardInfo: (value: string) => void;
-  onComplete: () => void
+export interface UseFormSectionProps {
+  initValue: string;
+  validateOnChange: (value: string) => ValidateResult;
+  validateOnBlur: () => ValidateResult;
 }
 
-const useFormSection = (props: UseFormSectionProps) => {
-  const { ref, value, validateWhenChange, validateWhenBlur, blurCondition, updateCardInfo, onComplete } = props
-  const [error, setError] = useState('')
+export interface ValidateResult {
+  isValid: boolean;
+  errorMessage: string;
+}
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.addEventListener('focus', () => setError(''))
-      ref.current.addEventListener('blur', (e: FocusEvent) => {
-        onBlur((e.target as HTMLInputElement).value);
-      })
+const useFormSection = ({
+  initValue,
+  validateOnChange,
+  validateOnBlur,
+}: UseFormSectionProps) => {
+  const [value, setValue] = useState(initValue);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    const { isValid, errorMessage } = validateOnChange(newValue);
+
+    setIsCompleted(false);
+
+    if (!isValid) {
+      setErrorMessage(errorMessage);
+
+      return;
     }
-
-    return () => {
-      if (ref.current) {
-        ref.current.removeEventListener('focus', () => setError(''))
-        ref.current.removeEventListener('blur', (e: FocusEvent) => {
-          onBlur((e.target as HTMLInputElement).value);
-        })
-      }
-    }
-  }, [])
-
-  const onBlur = (value: string) => {
-    const { errorMessage, complete } = validateWhenBlur(value);
-    setError(errorMessage);
-    if (complete) {
-      onComplete();
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const { errorMessage, newValue } = validateWhenChange(value)
-    setError(errorMessage);
-    updateCardInfo(newValue);
+    setErrorMessage('');
+    setValue(newValue);
   };
 
-  useEffect(() => {
-    if (blurCondition(value)) {
-      ref.current.blur();
+  const onFocusHandler = () => {
+    setErrorMessage('');
+  };
+
+  const onBlurHandler = () => {
+    const { isValid, errorMessage } = validateOnBlur();
+
+    setIsCompleted(isValid);
+
+    if (!isValid) {
+      setErrorMessage(errorMessage);
     }
-  }, [value]);
+  };
 
-  return { handleChange, error };
+  return {
+    value,
+    isCompleted,
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
 };
-
-
 export default useFormSection;
