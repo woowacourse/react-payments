@@ -40,7 +40,7 @@ const CardCVCForm = ({
       onValidation(false);
       setErrorMessage("3자리 수를 입력하세요.");
     }
-  }, [cardCVC, onValidation, inputValidities]);
+  }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input

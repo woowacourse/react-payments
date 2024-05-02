@@ -46,7 +46,7 @@ const CardPasswordForm = ({
       onValidation(false);
       setErrorMessage("2자리 수를 입력하세요.");
     }
-  }, [cardPassword, onValidation, inputValidities]);
+  }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
