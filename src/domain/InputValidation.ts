@@ -5,9 +5,9 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from '../constants/system';
-
+import { CardInfo } from '../types/card';
 function checkTrimBlank(n: string) {
-  if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
+  if (n.trim() === '' && n !== '') {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
 }
@@ -31,7 +31,7 @@ function checkEmpty(n: string) {
 }
 
 function validateMonth(n: string) {
-  if (checkEmpty(n)) return;
+  if (checkEmpty(n) || n === '0') return;
   const month = Number(n);
   if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
     throw new Error(ERROR_MESSAGES.INVALID_MONTH);
@@ -76,6 +76,41 @@ const Validation: ValidationMap = {
     checkDoubleBlank(n);
     validateUpperCase(n);
   },
-};
+  CVC: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
 
+  password: (n: string) => {
+    checkTrimBlank(n);
+    validateNumber(n);
+  },
+};
+export const validateButton = ({
+  cardNumbers,
+  expirationDate,
+  userName,
+  cardBrand,
+  CVC,
+  password,
+}: CardInfo) => {
+  return (
+    Object.values(cardNumbers.cardNumberFields).every(
+      (value) => !value.isError
+    ) &&
+    Object.values(expirationDate.expirationDateFields).every(
+      (value) => !value.isError
+    ) &&
+    Object.values(userName.userNameField).every((value) => !value.isError) &&
+    Object.values(cardBrand.cardBrandField).every((value) => !value.isError) &&
+    Object.values(CVC.CVCField).every((value) => !value.isError) &&
+    Object.values(password.passwordField).every((value) => !value.isError) &&
+    cardNumbers.isNextField &&
+    expirationDate.isNextField &&
+    userName.isNextField &&
+    cardBrand.isNextField &&
+    CVC.isNextField &&
+    password.isNextField
+  );
+};
 export default Validation;

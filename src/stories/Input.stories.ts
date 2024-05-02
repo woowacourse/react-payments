@@ -1,30 +1,59 @@
-// Input.stories.js
-
-import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../components/Input';
-import InputType from '../constants/inputType';
-import { action } from '@storybook/addon-actions';
-
-const meta = {
-  title: 'Input',
+import { Meta, StoryObj } from '@storybook/react';
+import Input from '../components/InputComponent/Input';
+export default {
+  title: 'Components/Input',
   component: Input,
-} satisfies Meta<typeof Input>;
+  tags: ['autodocs'],
+  argTypes: {
+    type: {
+      control: 'text',
+      defaultValue: 'text',
+    },
+    maxLength: {
+      control: 'number',
+      defaultValue: 20,
+    },
+    value: {
+      control: 'text',
+      defaultValue: '',
+    },
+    placeholder: {
+      control: 'text',
+      defaultValue: 'Empty',
+    },
+    isError: {
+      control: 'boolean',
+      defaultValue: false,
+    },
+  },
+} as Meta<typeof Input>;
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-const mockIndex = 0;
-const mockInfo = InputType.CARD_NUMBER;
-const mockHandleInput = action('handleInput');
-const mockSetErrorMessages = action('handleErrorMessage');
-
-export const Default: Story = {
+const Template: StoryObj<typeof Input> = {
   args: {
-    info: mockInfo.inputInfo[mockIndex],
-    index: mockIndex,
-    handleInput: mockHandleInput,
+    maxLength: 20,
+    value: '',
+    placeholder: '비었어',
     isError: false,
-    handleErrorMessage: mockSetErrorMessages,
+    onChange: () => {},
+    onKeyDown: () => {},
+  },
+};
+
+export const Default = Template;
+
+export const WithError = {
+  ...Template,
+  args: {
+    ...Template.args,
+    isError: true,
+    value: '틀렸어',
+  },
+};
+
+export const Filled = {
+  ...Template,
+  args: {
+    ...Template.args,
+    value: '하하하하하!',
   },
 };

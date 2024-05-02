@@ -1,20 +1,26 @@
-// import { useState } from 'react';
 import styled from 'styled-components';
 import CardView from '../components/CardView';
 import InputForm from '../components/InputForm';
-// import { Card } from '../types/card';
-import useCardForm from '../hooks/useCardForm';
+import { validateButton } from '../domain/InputValidation';
+import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
+import useCardNumbers from '../hooks/useCardNumbers';
+import useExpireDate from '../hooks/useExpireDate';
+import useUserName from '../hooks/useUserName';
+import useCardBrand from '../hooks/useCardBrand';
+import usePassword from '../hooks/usePassword';
+import useCVC from '../hooks/useCVC';
 
 const Page = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
+  margin: 50px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -29,18 +35,88 @@ const Container = styled.div`
 export default function EnrollCard() {
   const {
     cardNumbers,
-    setCardNumbers,
+    handleUpdateCardNumberInput,
+    handleUpdateCardNumberErrorMessages,
+  } = useCardNumbers();
+  const {
     expirationDate,
-    setExpirationDate,
+    handleUpdateExpirationDateInput,
+    handleUpdateExpirationDateErrorMessages,
+  } = useExpireDate();
+  const {
     userName,
-    setUserName,
-  } = useCardForm({});
-  console.log({cardNumbers, expirationDate, userName})
+    handleUpdateUserNameIsNextPage,
+    handleUpdateUserNameInput,
+    handleUpdateUserNameErrorMessages,
+  } = useUserName();
+  const { cardBrand, handleUpdateCardBrand, handleUpdateCardBrandIsNextField } =
+    useCardBrand();
+
+  const { CVC, handleUpdateCVCInput, handleUpdateCVCErrorMessages } = useCVC();
+
+  const {
+    password,
+    handleUpdatePasswordInput,
+    handleUpdatePasswordErrorMessages,
+  } = usePassword();
+  const navigate = useNavigate();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate('/card-registration-confirmation', {
+      state: { ...cardNumbers.cardNumberFields, ...cardBrand.cardBrandField },
+    });
+  };
+
+  const buttonFlag = validateButton({
+    cardNumbers,
+    expirationDate,
+    userName,
+    cardBrand,
+    CVC,
+    password,
+  });
+
   return (
     <Page>
-      <Container>
-        <CardView cardInfo={{cardNumbers, expirationDate, userName}} />
-        <InputForm cardInfo={{cardNumbers, expirationDate, userName}} handleInput={{setCardNumbers, setExpirationDate, setUserName}} />
+      <Container onSubmit={handleSubmit}>
+        <CardView
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
+          userName={userName}
+          cardBrand={cardBrand}
+          CVC={CVC}
+        />
+        <InputForm
+          cardInfo={{
+            cardNumbers,
+            expirationDate,
+            userName,
+            cardBrand,
+            CVC,
+            password,
+          }}
+          handleInput={{
+            handleUpdateCardNumberInput,
+            handleUpdateCardNumberErrorMessages,
+            handleUpdateExpirationDateInput,
+            handleUpdateExpirationDateErrorMessages,
+            handleUpdateUserNameIsNextPage,
+            handleUpdateUserNameInput,
+            handleUpdateUserNameErrorMessages,
+            handleUpdateCardBrand,
+            handleUpdateCardBrandIsNextField,
+            handleUpdateCVCInput,
+            handleUpdateCVCErrorMessages,
+            handleUpdatePasswordInput,
+            handleUpdatePasswordErrorMessages,
+          }}
+        />
+        {buttonFlag && (
+          <Button
+            value={'제출'}
+            layoutType='bottom'
+          ></Button>
+        )}
       </Container>
     </Page>
   );
