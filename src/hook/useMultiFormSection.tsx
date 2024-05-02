@@ -4,6 +4,7 @@ interface UseMultiFormSectionProps {
   refs: React.MutableRefObject<HTMLInputElement[]>
   values: string[];
   updateValues: (values: string[]) => void;
+  updateComplete: () => void;
   validateOnChange: (index: number, value: string) => ValidateResult;
   validateOnBlur: (index: number) => ValidateResult;
   validateOnBlurAll: () => ValidateAllResult;
@@ -24,6 +25,7 @@ const useMultiFormSection = ({
   refs,
   values,
   updateValues,
+  updateComplete,
   validateOnChange,
   validateOnBlur,
   validateOnBlurAll,
@@ -75,7 +77,10 @@ const useMultiFormSection = ({
       setHasErrors(hasErrors.map((_, index) => indexList.includes(index)))
       if (!isValid) {
         setErrorMessage(errorMessage);
+        return
       }
+      setErrorMessage('');
+      updateComplete();
     }
   }, [hasAnyFocus]);
 
