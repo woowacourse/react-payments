@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
 import { validateCVC } from '../validators/newCardInputValidator';
 import { ICardInfo, IErrorMessage } from '../types/type';
+import useInput from './useInput';
 
 interface IUseCardCVC {
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
@@ -8,25 +8,13 @@ interface IUseCardCVC {
 }
 
 const useCardCVC = ({ setCardInfo, setErrorMessage }: IUseCardCVC) => {
-  const handleCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const errorMessageCopy = validateCVC(value);
-    setErrorMessage((prev) => {
-      return {
-        ...prev,
-        cvc: [errorMessageCopy],
-      };
-    });
+  const { handleInputChange: handleCardCVC } = useInput({
+    setCardInfo,
+    setErrorMessage,
+    validateInput: validateCVC,
+    key: 'cvc',
+  });
 
-    if (errorMessageCopy === '') {
-      setCardInfo((prev) => {
-        return {
-          ...prev,
-          cvc: value,
-        };
-      });
-    }
-  };
   return {
     handleCardCVC,
   };

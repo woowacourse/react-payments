@@ -1,6 +1,6 @@
-import { ChangeEvent } from 'react';
 import { validateCardCompany } from '../validators/newCardInputValidator';
 import { ICardInfo, IErrorMessage } from '../types/type';
+import useInput from './useInput';
 
 interface IUseCardCompany {
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
@@ -8,27 +8,14 @@ interface IUseCardCompany {
 }
 
 const useCardCompany = ({ setCardInfo, setErrorMessage }: IUseCardCompany) => {
-  const handleCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
-    const errorMessageCopy = validateCardCompany(value);
+  const { handleInputChange } = useInput({
+    setCardInfo,
+    setErrorMessage,
+    validateInput: validateCardCompany,
+    key: 'cardCompany',
+  });
 
-    setErrorMessage((prev) => {
-      return {
-        ...prev,
-        cardCompany: [errorMessageCopy],
-      };
-    });
-
-    setCardInfo((prev) => {
-      return {
-        ...prev,
-        cardCompany: value,
-      };
-    });
-  };
-  return {
-    handleCardCompany,
-  };
+  return { handleCardCompany: handleInputChange };
 };
 
 export default useCardCompany;

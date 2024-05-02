@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import { validateUserName } from '../validators/newCardInputValidator';
 import { ICardInfo, IErrorMessage } from '../types/type';
+import useInput from './useInput';
 
 interface IUseCardUserName {
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
@@ -11,26 +12,24 @@ const useCardUserName = ({
   setCardInfo,
   setErrorMessage,
 }: IUseCardUserName) => {
+  const { handleInputChange } = useInput({
+    setCardInfo,
+    setErrorMessage,
+    validateInput: validateUserName,
+    key: 'userName',
+  });
+
   const handleCardUserName = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(event);
     const { value } = event.target;
-    const errorMessageCopy = validateUserName(value);
-
-    setErrorMessage((prev) => {
-      return {
+    if (validateUserName(value) === '') {
+      setCardInfo((prev) => ({
         ...prev,
-        userName: [errorMessageCopy],
-      };
-    });
-
-    if (errorMessageCopy === '') {
-      setCardInfo((prev) => {
-        return {
-          ...prev,
-          userName: value.toUpperCase(),
-        };
-      });
+        userName: value.toUpperCase(),
+      }));
     }
   };
+
   return {
     handleCardUserName,
   };

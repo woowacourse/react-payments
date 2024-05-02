@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react';
 import { validatePassword } from '../validators/newCardInputValidator';
 import { ICardInfo, IErrorMessage } from '../types/type';
+import useInput from './useInput';
 
-interface IUseCardPassWord {
+interface IUseCardPasswordProps {
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
   setErrorMessage: React.Dispatch<React.SetStateAction<IErrorMessage>>;
 }
@@ -10,29 +10,15 @@ interface IUseCardPassWord {
 const useCardPassword = ({
   setCardInfo,
   setErrorMessage,
-}: IUseCardPassWord) => {
-  const handleCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const errorMessageCopy = validatePassword(value);
-    setErrorMessage((prev) => {
-      return {
-        ...prev,
-        password: [errorMessageCopy],
-      };
-    });
+}: IUseCardPasswordProps) => {
+  const { handleInputChange } = useInput({
+    setCardInfo,
+    setErrorMessage,
+    validateInput: validatePassword,
+    key: 'password',
+  });
 
-    if (errorMessageCopy === '') {
-      setCardInfo((prev) => {
-        return {
-          ...prev,
-          password: value,
-        };
-      });
-    }
-  };
-  return {
-    handleCardPassword,
-  };
+  return { handleCardPassword: handleInputChange };
 };
 
 export default useCardPassword;
