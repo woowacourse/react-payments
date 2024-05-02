@@ -17,15 +17,33 @@ const BaseCard = styled.div`
 `;
 
 const Styled = {
-  CardFrontLayout: styled(BaseCard)<{ backgroundColor: string }>`
-    background: ${(props) => props.backgroundColor};
-    display: grid;
-    gap: 10px;
+  CardContainer: styled.div`
+    position: relative;
+    width: 202px;
+    height: 117px;
   `,
 
-  CardBackLayout: styled(BaseCard)`
+  CardFrontLayout: styled(BaseCard)<{ backgroundColor: string; isFlipped: boolean }>`
+    background: ${(props) => props.backgroundColor};
+    display: grid;
+    gap: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    transform: ${(props) => (props.isFlipped ? "rotateY(180deg)" : "rotateY(0deg)")};
+  `,
+
+  CardBackLayout: styled(BaseCard)<{ isFlipped: boolean }>`
     background: #d5d5d5;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    transform: ${(props) => (props.isFlipped ? "rotateY(0deg)" : "rotateY(180deg)")};
+    backface-visibility: hidden;
   `,
 
   CardCVCLine: styled.div`
@@ -64,6 +82,7 @@ interface CardFrontProps {
   cardNumbers: string[];
   expirationDate: string[];
   cardOwner: string[];
+  isFlipped: boolean;
 }
 
 interface CardPreviewProps {
@@ -76,8 +95,14 @@ interface CardPreviewProps {
   focusedField: string;
 }
 
-const CardFront = ({ backgroundColor, cardNumbers, expirationDate, cardOwner }: CardFrontProps) => (
-  <Styled.CardFrontLayout backgroundColor={backgroundColor}>
+const CardFront = ({
+  backgroundColor,
+  cardNumbers,
+  expirationDate,
+  cardOwner,
+  isFlipped,
+}: CardFrontProps) => (
+  <Styled.CardFrontLayout backgroundColor={backgroundColor} isFlipped={isFlipped}>
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Styled.ICChip />
       <CardLogo cardNumbers={cardNumbers} />
@@ -90,8 +115,8 @@ const CardFront = ({ backgroundColor, cardNumbers, expirationDate, cardOwner }: 
   </Styled.CardFrontLayout>
 );
 
-const CardBack = ({ cardCVC }: { cardCVC: string[] }) => (
-  <Styled.CardBackLayout>
+const CardBack = ({ cardCVC, isFlipped }: { cardCVC: string[]; isFlipped: boolean }) => (
+  <Styled.CardBackLayout isFlipped={isFlipped}>
     <Styled.CardCVCLine>
       <Styled.CVCNumber>{cardCVC[0]}</Styled.CVCNumber>
     </Styled.CardCVCLine>
@@ -120,16 +145,17 @@ const CardPreview = ({
 
   return (
     <>
-      {isFlipped ? (
-        <CardBack cardCVC={cardCVC} />
-      ) : (
+      <Styled.CardContainer>
         <CardFront
-          backgroundColor={backgroundColor}
           cardNumbers={cardNumbers}
           expirationDate={expirationDate}
           cardOwner={cardOwner}
+          isFlipped={isFlipped}
+          backgroundColor={backgroundColor}
         />
-      )}
+
+        <CardBack cardCVC={cardCVC} isFlipped={isFlipped} />
+      </Styled.CardContainer>
     </>
   );
 };

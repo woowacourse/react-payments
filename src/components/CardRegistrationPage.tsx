@@ -6,12 +6,12 @@ import { CardCompany } from "../types/card";
 
 const Styled = {
   CardRegistrationPageLayout: styled.section`
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    height: 100vh;
+    gap: 50px;
   `,
 };
 
