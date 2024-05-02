@@ -20,7 +20,7 @@ const ExpirationDateForm = ({
 }: ExpirationDateFormProps) => {
   const [, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({
+  const [inputValidity, setInputValidity] = useState({
     0: false,
     1: false,
   });
@@ -45,20 +45,20 @@ const ExpirationDateForm = ({
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
   const updateInputValidity = (index: number, isValid: boolean) => {
-    setInputValidities((prevValidities) => ({
+    setInputValidity((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
     }));
   };
 
   useEffect(() => {
-    const allValid = Object.values(inputValidities).every((isValid) => isValid);
+    const allValid = Object.values(inputValidity).every((isValid) => isValid);
 
     setAllInputValid(allValid);
     setErrorMessage(allValid ? "" : "만료 기한을 올바르게 입력해주세요.");
 
     if (onValidation) onValidation(allValid);
-  }, [inputValidities]);
+  }, [inputValidity]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input

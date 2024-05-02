@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const useCardNumberForm = (onValidation: (isValid: boolean) => void) => {
   const [, setAllInputValid] = useState(false);
-  const [inputValidities, setInputValidities] = useState({
+  const [inputValidity, setInputValidity] = useState({
     0: false,
     1: false,
     2: false,
@@ -14,19 +14,19 @@ const useCardNumberForm = (onValidation: (isValid: boolean) => void) => {
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
   const updateInputValidity = (index: number, isValid: boolean) => {
-    setInputValidities((prevValidities) => ({
+    setInputValidity((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
     }));
   };
 
   useEffect(() => {
-    const allValid = Object.values(inputValidities).every((isValid) => isValid);
+    const allValid = Object.values(inputValidity).every((isValid) => isValid);
     setAllInputValid(allValid);
     setErrorMessage(allValid ? "" : "4자리의 숫자를 입력해주세요.");
 
     if (onValidation) onValidation(allValid);
-  }, [inputValidities]);
+  }, [inputValidity]);
 
   return {
     updateInputValidity,

@@ -19,7 +19,7 @@ const CardPasswordForm = ({
   onFocus,
 }: CardPasswordFormProps) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({
+  const [inputValidity, setInputValidity] = useState({
     0: false,
   });
   const [isFocused, setIsFocused] = useState(false);
@@ -31,22 +31,22 @@ const CardPasswordForm = ({
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
   const updateInputValidity = (index: number, isValid: boolean) => {
-    setInputValidities((prevValidities) => ({
+    setInputValidity((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
     }));
   };
 
   useEffect(() => {
-    if (onValidation && inputValidities[0]) {
+    if (onValidation && inputValidity[0]) {
       onValidation(true);
       setErrorMessage("");
     }
-    if (onValidation && !inputValidities[0]) {
+    if (onValidation && !inputValidity[0]) {
       onValidation(false);
       setErrorMessage("2자리 수를 입력하세요.");
     }
-  }, [inputValidities]);
+  }, [inputValidity]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
