@@ -32,42 +32,37 @@ const useExpirationDateFormSection = ({ refs, values, updateValues, updateComple
   };
 
   const validateOnBlur = (index: number) => {
+    return { isValid: true, errorMessage: '' }
+  };
+
+  const validateOnBlurAll = () => {
     const nowDate = new Date();
     const year = nowDate.getFullYear().toString().slice(2, 4);
     const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
     const now = Number(year + month);
     const expireDate = Number(values[1] + values[0]);
 
-    if (values.join('').length !== values.length * maxLength) {
-      return {
-        isValid: false,
-        errorMessage: `유효기간은 MM / YY 형식의 4자리로 입력해 주세요.`,
-      };
-    }
-    if (now - expireDate > 0) {
-      return {
-        isValid: false,
-        errorMessage: `만료된 카드입니다.`,
-      };
-    }
-    return { isValid: true, errorMessage: '' };
-  };
-
-  const validateOnBlurAll = () => {
     const result: number[] = []
     values.forEach((value, index) => {
       if (value.length !== maxLength) {
         result.push(index)
       }
     })
-    if (result.length !== 0) {
+    if (values.join('').length !== values.length * maxLength) {
       return {
         indexList: result,
         isValid: false,
-        errorMessage: `카드번호는 ${maxLength * values.length}글자로 입력해 주세요.`,
+        errorMessage: `유효기간은 MM / YY 형식의 4자리로 입력해 주세요.`,
       };
     }
-    updateComplete();
+
+    if (now - expireDate > 0) {
+      return {
+        indexList: [0, 1],
+        isValid: false,
+        errorMessage: `만료된 카드입니다.`,
+      };
+    }
     return { indexList: result, isValid: true, errorMessage: '' };
   }
 
@@ -81,6 +76,7 @@ const useExpirationDateFormSection = ({ refs, values, updateValues, updateComple
     refs,
     values,
     updateValues,
+    updateComplete,
     validateOnChange,
     validateOnBlur,
     validateOnBlurAll,
