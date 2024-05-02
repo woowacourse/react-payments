@@ -1,14 +1,16 @@
+import { useEffect } from "react";
 import OPTION from "../constants/option";
 import useFormSection from "./useFormSection";
 
 interface UseCVCFormSectionProps {
+  ref: React.MutableRefObject<HTMLInputElement>
   value: string;
   updateValue: (value: string) => void;
   updateComplete: () => void;
   maxLength?: number
 }
 
-const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UseCVCFormSectionProps) => {
+const useCVCFormSection = ({ ref, value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UseCVCFormSectionProps) => {
   const validateOnChange = (newValue: string) => {
     if (newValue.length > maxLength) {
       return {
@@ -22,6 +24,9 @@ const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPT
         errorMessage: 'CVC 번호는 숫자만 입력이 가능해요.',
       };
     }
+    if (newValue.length === maxLength) {
+      ref.current.blur();
+    }
     return { isValid: true, errorMessage: '' };
   };
 
@@ -32,7 +37,6 @@ const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPT
         errorMessage: `CVC 번호는 ${maxLength}글자로 입력해 주세요.`,
       };
     }
-    updateComplete();
     return { isValid: true, errorMessage: '' };
   };
 
@@ -43,6 +47,7 @@ const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPT
     onBlurHandler,
   } = useFormSection({
     updateValue,
+    updateComplete,
     validateOnChange,
     validateOnBlur,
   });
