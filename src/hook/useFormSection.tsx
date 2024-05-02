@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export interface UseFormSectionProps {
   updateValue: (value: string) => void;
+  updateComplete: () => void;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
 }
@@ -13,6 +14,7 @@ export interface ValidateResult {
 
 const useFormSection = ({
   updateValue,
+  updateComplete,
   validateOnChange,
   validateOnBlur,
 }: UseFormSectionProps) => {
@@ -40,7 +42,10 @@ const useFormSection = ({
 
     if (!isValid) {
       setErrorMessage(errorMessage);
+      return
     }
+    setErrorMessage('');
+    updateComplete();
   };
 
   return {
