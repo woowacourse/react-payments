@@ -1,5 +1,7 @@
 import React from "react";
 import useMultiFormSection from "./useMultiFormSection";
+import useFocusNext from "./useFocusNext";
+import OPTION from "../constants/option";
 
 interface UseCardNumbersFormSection {
   refs: React.MutableRefObject<HTMLInputElement[]>
@@ -9,7 +11,9 @@ interface UseCardNumbersFormSection {
   maxLength?: number
 }
 
-const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete, maxLength = 4 }: UseCardNumbersFormSection) => {
+const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete, maxLength = OPTION.cardNumberMaxLength }: UseCardNumbersFormSection) => {
+  const { focusNext } = useFocusNext(refs);
+
   const validateOnChange = (index: number, newValue: string) => {
     if (!/^\d*$/.test(newValue)) {
       return {
@@ -17,6 +21,7 @@ const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete,
         errorMessage: '카드번호는 숫자만 입력이 가능해요.',
       };
     }
+    if (newValue.length === maxLength) focusNext();
     return { isValid: true, errorMessage: '' };
   };
 
