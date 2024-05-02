@@ -34,10 +34,10 @@ const useCardForm = () => {
     const isCardInfoValid = Object.values(cardInfo).every(
       (value) => value !== '',
     );
-    const isErrorMessageValid = Object.values(errorMessage).every((errors) =>
+    const hasErrorMessage = Object.values(errorMessage).every((errors) =>
       errors.every((error: string) => error === ''),
     );
-    return isCardInfoValid && isErrorMessageValid;
+    return isCardInfoValid && hasErrorMessage;
   };
 
   const updateStage = () => {
