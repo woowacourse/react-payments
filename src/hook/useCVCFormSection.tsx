@@ -1,14 +1,14 @@
 import OPTION from "../constants/option";
 import useFormSection from "./useFormSection";
 
-interface UseCVCFormSection {
+interface UseCVCFormSectionProps {
   value: string;
   updateValue: (value: string) => void;
   updateComplete: () => void;
   maxLength?: number
 }
 
-const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UseCVCFormSection) => {
+const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UseCVCFormSectionProps) => {
   const validateOnChange = (newValue: string) => {
     if (newValue.length > maxLength) {
       return {
