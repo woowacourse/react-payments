@@ -30,6 +30,7 @@ const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete,
   };
 
   const validateOnBlurAll = () => {
+    if (values.join('').length === 0) return { indexList: [], isValid: false, errorMessage: '' }
     const result: number[] = []
     values.forEach((value, index) => {
       if (value.length !== maxLength) {
@@ -43,7 +44,6 @@ const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete,
         errorMessage: `카드번호는 ${maxLength * values.length}글자로 입력해 주세요.`,
       };
     }
-    updateComplete();
     return { indexList: result, isValid: true, errorMessage: '' };
   }
 
@@ -57,6 +57,7 @@ const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete,
     refs,
     values,
     updateValues,
+    updateComplete,
     validateOnChange,
     validateOnBlur,
     validateOnBlurAll,
