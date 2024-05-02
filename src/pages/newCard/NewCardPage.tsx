@@ -66,6 +66,7 @@ const NewCardPage = () => {
               options={CARD_FORM_INPUTS.CARD_COMPANY.OPTIONS}
               onChange={(event) => handleCardCompany(event)}
               value={cardInfo.cardCompany}
+              defaultValue={CARD_FORM_INPUTS.CARD_COMPANY.OPTIONS[0]}
             ></Select>
           </NewCardInputSection>
         )}

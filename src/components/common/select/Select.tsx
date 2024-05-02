@@ -4,13 +4,13 @@ export interface SelectProps extends React.ComponentPropsWithRef<'select'> {
   options: string[];
 }
 
-const Select = ({ options, ...restProps }: SelectProps) => {
+const Select = ({ options, defaultValue, ...restProps }: SelectProps) => {
   return (
     <Styled.Select {...restProps}>
       {options.map((option, index) => (
         <option
           key={option}
-          defaultValue='카드사를 선택해 주세요'
+          defaultValue={defaultValue}
           value={index === 0 ? '' : option}
           disabled={index === 0}
         >
