@@ -15,7 +15,15 @@ interface ExpirationDateFormSectionProps {
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
-  const { error, hasErrors, handleChange } = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
+  const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useExpirationDateFormSection(
+    {
+      refs,
+      values: cardInfo.expiration.value,
+      updateValues: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: values }),
+      updateComplete: () => dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
+    }
+  )
+  // const { error, hasErrors, handleChange } = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
 
   const ExpirationDateForm = (
     <>
@@ -25,7 +33,9 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         maxLength={OPTION.expirationDateMaxLength}
         value={cardInfo.expiration.value[0]}
         hasError={hasErrors[0]}
-        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 0)}
+        handleValueChange={(e) => onChangeHandler(e, 0)}
+        handleOnBlur={() => onBlurHandler(0)}
+        handleOnFocus={() => onFocusHandler(0)}
         autoFocus={true}
       />
       <PaymentsInputField
@@ -34,7 +44,9 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         maxLength={OPTION.expirationDateMaxLength}
         value={cardInfo.expiration.value[1]}
         hasError={hasErrors[1]}
-        handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, 1)}
+        handleValueChange={(e) => onChangeHandler(e, 1)}
+        handleOnBlur={() => onBlurHandler(1)}
+        handleOnFocus={() => onFocusHandler(1)}
       />
     </>)
 
@@ -42,7 +54,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
     <FormSection title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요."
       label="유효기간"
-      errorMessage={error}
+      errorMessage={errorMessage}
       Children={ExpirationDateForm} />
   );
 };
