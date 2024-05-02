@@ -15,15 +15,23 @@ interface ExpirationDateFormSectionProps {
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
+
+  const updateValues = (expiration: string[]) => {
+    dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: expiration })
+  }
+
+  const updateComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
+  }
+
   const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useExpirationDateFormSection(
     {
       refs,
       values: cardInfo.expiration.value,
-      updateValues: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_VALUE', value: values }),
-      updateComplete: () => dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
+      updateValues,
+      updateComplete,
     }
   )
-  // const { error, hasErrors, handleChange } = useExpirationDateFormSection({ cardInfo, dispatchCardInfo, refs })
 
   const ExpirationDateForm = (
     <>

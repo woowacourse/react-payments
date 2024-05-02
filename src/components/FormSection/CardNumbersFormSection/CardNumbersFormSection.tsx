@@ -15,12 +15,22 @@ interface CardNumbersFormSectionProps {
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.cardNumberInputCount).fill(null));
+
+
+  const updateValues = (cardNumbers: string[]) => {
+    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: cardNumbers })
+  }
+
+  const updateComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
+  }
+
   const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useCardNumbersFormSection(
     {
       refs,
       values: cardInfo.cardNumbers.value,
-      updateValues: (values: string[]) => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_VALUE', value: values }),
-      updateComplete: () => dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
+      updateValues,
+      updateComplete,
     }
   )
 
