@@ -1,45 +1,55 @@
-import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage"
 import useFormSection from "./useFormSection";
 import OPTION from "../constants/option";
 
 interface UseNameFormSectionProps {
-  cardInfo: CardInfo
-  updateCardInfo: (value: string) => void;
-  onComplete: () => void;
-  ref: React.MutableRefObject<HTMLInputElement>
+  ref: React.MutableRefObject<HTMLInputElement>,
+  value: string;
+  updateValue: (value: string) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
-
-const useNameFormSection = (props: UseNameFormSectionProps) => {
-  const { cardInfo, updateCardInfo, onComplete, ref } = props
-
-  const validateWhenChange = (value: string) => {
-    if (!REGEX.name.test(value) && value.length !== 0) {
-      return { errorMessage: ERROR_MESSAGE.onlyEnglish, newValue: value.split('').filter(char => REGEX.name.test(char)).join('') }
-    };
-    return { errorMessage: '', newValue: value }
-  }
-
-  const validateWhenBlur = (value: string) => {
-    if (value.length !== 0) {
-      return { errorMessage: '', complete: true }
+const useNameFormSection = ({ ref, value, updateValue, updateComplete, maxLength = OPTION.nameMaxLength }: UseNameFormSectionProps) => {
+  const validateOnChange = (newValue: string) => {
+    if (newValue.length > maxLength) {
+      return {
+        isValid: false,
+        errorMessage: `이름은 ${maxLength}글자 까지만 입력이 가능해요.`,
+      };
     }
-    return { errorMessage: '', complete: false }
-  }
+    if (!/^([a-zA-Z]+ ?)*[a-zA-Z]*$/.test(newValue)) {
+      return {
+        isValid: false,
+        errorMessage: '이름은 사이에 공백이 들어간 영문자만 입력이 가능해요.',
+      };
+    }
 
-  const blurCondition = (value: string) => value.length === OPTION.nameMaxLength
+    return { isValid: true, errorMessage: '' };
+  };
 
-  const { handleChange, error } = useFormSection({
-    ref: ref,
-    value: cardInfo.name.value,
-    validateWhenChange,
-    validateWhenBlur,
-    blurCondition,
-    updateCardInfo,
-    onComplete,
+  const validateOnBlur = () => {
+    if (value.length !== 0) {
+      return { isValid: true, errorMessage: '' };
+    }
+    return { isValid: false, errorMessage: '' };
+  };
+
+  const {
+    errorMessage,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useFormSection({
+    updateValue,
+    updateComplete,
+    validateOnChange,
+    validateOnBlur,
   });
 
-  return { error, handleChange };
-}
-
+  return {
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
+};
 export default useNameFormSection;

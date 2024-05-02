@@ -1,47 +1,62 @@
+import OPTION from "../constants/option";
 import useFormSection from "./useFormSection";
 
-import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage"
-import OPTION from "../constants/option";
-
-interface UsePasswordFormSectionProps {
-  cardInfo: CardInfo
-  updateCardInfo: (value: string) => void;
-  onComplete: () => void;
-  ref: React.MutableRefObject<HTMLInputElement>
+interface UsePasswordFormSection {
+  ref: React.MutableRefObject<HTMLInputElement>;
+  value: string;
+  updateValue: (value: string) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
 
-const usePasswordFormSection = (props: UsePasswordFormSectionProps) => {
-  const { cardInfo, updateCardInfo, onComplete, ref } = props
-
-  const validateWhenChange = (value: string) => {
-    if (!REGEX.numbers.test(value) && value.length !== 0) {
-      return { errorMessage: ERROR_MESSAGE.onlyNumber, newValue: value.split('').filter(char => REGEX.numbers.test(char)).join('') }
-    };
-    return { errorMessage: '', newValue: value }
-  }
-
-  const validateWhenBlur = (value: string) => {
-    if (value.length === OPTION.passwordMaxLength) {
-      return { errorMessage: '', complete: true }
-    } else {
-      return { errorMessage: ERROR_MESSAGE.passwordFormat, complete: false };
+const usePasswordFormSection = ({ ref, value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UsePasswordFormSection) => {
+  const validateOnChange = (newValue: string) => {
+    if (newValue.length > maxLength) {
+      return {
+        isValid: false,
+        errorMessage: `비밀번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
+      };
     }
-  }
+    if (!/^\d*$/.test(newValue)) {
+      return {
+        isValid: false,
+        errorMessage: '비밀번호는 숫자만 입력이 가능해요.',
+      };
+    }
+    if (newValue.length === maxLength) {
+      ref.current.blur();
+    }
 
-  const blurCondition = (value: string) => value.length === OPTION.passwordMaxLength
+    return { isValid: true, errorMessage: '' };
+  };
 
-  const { handleChange, error } = useFormSection({
-    ref: ref,
-    value: cardInfo.password.value,
-    validateWhenChange,
-    validateWhenBlur,
-    blurCondition,
-    updateCardInfo,
-    onComplete,
+  const validateOnBlur = () => {
+    if (value.length !== maxLength) {
+      return {
+        isValid: false,
+        errorMessage: `비밀번호는 ${maxLength}글자로 입력해 주세요.`,
+      };
+    }
+    return { isValid: true, errorMessage: '' };
+  };
+
+  const {
+    errorMessage,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useFormSection({
+    updateValue,
+    updateComplete,
+    validateOnChange,
+    validateOnBlur,
   });
 
-  return { error, handleChange };
+  return {
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
 };
-
 export default usePasswordFormSection;
