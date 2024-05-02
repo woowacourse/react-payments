@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import InputDescription from "./InputDescription";
 import ExpirationDateForm from "./ExpirationDateForm";
-import UserNameForm from "./UserNameForm";
+import CardOwnerForm from "./CardOwnerForm";
 import CardNumberForm from "./CardNumberForm";
 import CardCompanyForm from "./CardCompanyForm";
 import CardCVCForm from "./CardCVCForm";
@@ -68,13 +68,13 @@ const Form = ({
   const {
     isCardNumberValid,
     isExpirationDateValid,
-    isUserNameValid,
+    isCardOwnerValid,
     isCardCompanyValid,
     isCardCVCValid,
     isSubmitEnabled,
     handleCardNumberValidation,
     handleExpirationDateValidation,
-    handleUserNameValidation,
+    handleCardOwnerValidation,
     handleCardCompanyValidation,
     handleCardCVCValidation,
     handleCardPasswordValidation,
@@ -103,7 +103,7 @@ const Form = ({
         </div>
       )}
 
-      {isUserNameValid && (
+      {isCardOwnerValid && (
         <div style={{ height: "137px" }}>
           <InputDescription title="CVC 번호를 입력해 주세요" />
           <CardCVCForm
@@ -122,14 +122,14 @@ const Form = ({
       {isExpirationDateValid && (
         <div style={{ height: "137px" }}>
           <InputDescription title="카드 소유자 이름을 입력해 주세요" />
-          <UserNameForm
+          <CardOwnerForm
             labelContent="소유자 이름"
             inputCount={1}
             type="text"
             placeholders={["JOHN DOE"]}
             userName={userName}
             setUserName={setUserName}
-            onValidation={handleUserNameValidation}
+            onValidation={handleCardOwnerValidation}
             onFocus={() => setFocusedField("cardUserName")}
           />
         </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useForm = () => {
   const [isCardNumberValid, setIsCardNumberValid] = useState(false);
   const [isExpirationDateValid, setIsExpirationDateValid] = useState(false);
-  const [isUserNameValid, setIsUserNameValid] = useState(false);
+  const [isCardOwnerValid, setIsCardOwnerValid] = useState(false);
   const [isCardCompanyValid, setIsCardCompanyValid] = useState(false);
   const [isCardCVCValid, setIsCardCVCValid] = useState(false);
   const [isCardPasswordValid, setIsCardPasswordValid] = useState(false);
@@ -18,8 +18,8 @@ const useForm = () => {
     setIsExpirationDateValid(isValid);
   };
 
-  const handleUserNameValidation = (isValid: boolean) => {
-    setIsUserNameValid(isValid);
+  const handleCardOwnerValidation = (isValid: boolean) => {
+    setIsCardOwnerValid(isValid);
   };
 
   const handleCardCompanyValidation = (isValid: boolean) => {
@@ -38,7 +38,7 @@ const useForm = () => {
     setIsSubmitEnabled(
       isCardNumberValid &&
         isExpirationDateValid &&
-        isUserNameValid &&
+        isCardOwnerValid &&
         isCardCompanyValid &&
         isCardCVCValid &&
         isCardPasswordValid
@@ -46,7 +46,7 @@ const useForm = () => {
   }, [
     isCardNumberValid,
     isExpirationDateValid,
-    isUserNameValid,
+    isCardOwnerValid,
     isCardCompanyValid,
     isCardCVCValid,
     isCardPasswordValid,
@@ -55,13 +55,13 @@ const useForm = () => {
   return {
     isCardNumberValid,
     isExpirationDateValid,
-    isUserNameValid,
+    isCardOwnerValid,
     isCardCompanyValid,
     isCardCVCValid,
     isSubmitEnabled,
     handleCardNumberValidation,
     handleExpirationDateValidation,
-    handleUserNameValidation,
+    handleCardOwnerValidation,
     handleCardCompanyValidation,
     handleCardCVCValidation,
     handleCardPasswordValidation,
