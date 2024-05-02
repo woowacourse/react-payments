@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export interface UseFormSectionProps {
-  initValue: string;
+  updateValue: (value: string) => void;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
 }
@@ -12,19 +12,15 @@ export interface ValidateResult {
 }
 
 const useFormSection = ({
-  initValue,
+  updateValue,
   validateOnChange,
   validateOnBlur,
 }: UseFormSectionProps) => {
-  const [value, setValue] = useState(initValue);
-  const [isCompleted, setIsCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const { isValid, errorMessage } = validateOnChange(newValue);
-
-    setIsCompleted(false);
 
     if (!isValid) {
       setErrorMessage(errorMessage);
@@ -32,7 +28,7 @@ const useFormSection = ({
       return;
     }
     setErrorMessage('');
-    setValue(newValue);
+    updateValue(newValue);
   };
 
   const onFocusHandler = () => {
@@ -42,20 +38,16 @@ const useFormSection = ({
   const onBlurHandler = () => {
     const { isValid, errorMessage } = validateOnBlur();
 
-    setIsCompleted(isValid);
-
     if (!isValid) {
       setErrorMessage(errorMessage);
     }
   };
 
   return {
-    value,
-    isCompleted,
     errorMessage,
     onChangeHandler,
-    onBlurHandler,
     onFocusHandler,
+    onBlurHandler,
   };
 };
 export default useFormSection;
