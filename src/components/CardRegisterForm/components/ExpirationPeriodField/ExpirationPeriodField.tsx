@@ -1,82 +1,65 @@
-import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
+import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import S from "../../style";
 import { MESSAGE } from "@/constants/message";
-import InputField from "@/components/InputField/InputField";
-import Input from "@/components/Input/Input";
-import { ChangeEvent, useState } from "react";
+import InputField from "@/components/_common/InputField/InputField";
+import Input from "@/components/_common/Input/Input";
+import React, { ChangeEvent, useState } from "react";
 import useInputs from "@/hooks/useInputs";
-import {
-  makeNewErrorMessages,
-  validateExpirationDate,
-  validateIsValidLength,
-  validateMonth,
-} from "@/utils/validation";
-import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
-import { limitNumberLength } from "@/utils/numberHelper";
-import { ExpirationPeriodInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
+import { INPUT_COUNTS } from "@/constants/condition";
+import useInputRefs from "@/hooks/useInputRefs";
+import { ErrorStatus } from "@/utils/validation";
+import { hasInactiveInputError } from "@/utils/view";
+
+export type ExpirationPeriodInputType = {
+  expirationMonth: string;
+  expirationYear: string;
+};
 
 interface Props {
-  expiredPeriodState: ReturnType<typeof useInputs<ExpirationPeriodInputType>>;
+  expirationPeriodState: ReturnType<
+    typeof useInputs<ExpirationPeriodInputType>
+  >;
 }
 
-const EXPIRATION_INPUTS_NAMES: (keyof ExpirationPeriodInputType)[] = [
-  "expirationMonth",
-  "expirationYear",
+type ExpirationPeriodErrorType =
+  | ErrorStatus.IS_NOT_NUMBER
+  | ErrorStatus.INVALID_MONTH
+  | ErrorStatus.INVALID_LENGTH;
+
+const ExpirationPeriodErrorMessages: Record<ExpirationPeriodErrorType, string> =
+  {
+    [ErrorStatus.IS_NOT_NUMBER]: "숫자로 입력하세요.",
+    [ErrorStatus.INVALID_MONTH]: "달은 2자리의 정수로 입력해 주세요.",
+    [ErrorStatus.INVALID_LENGTH]: "2자리의 정수로 입력해 주세요.",
+  };
+
+type InputConfigType = {
+  name: keyof ExpirationPeriodInputType;
+  placeholder: string;
+};
+
+const expirationInputConfigs: InputConfigType[] = [
+  {
+    name: "expirationMonth",
+    placeholder: MESSAGE.PLACEHOLDER.EXPIRATION_MONTH,
+  },
+  {
+    name: "expirationYear",
+    placeholder: MESSAGE.PLACEHOLDER.EXPIRATION_YEAR,
+  },
 ];
 
-const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
-  const { values: expirationPeriod, onChange: onChangeExpirationPeriod } =
-    expiredPeriodState;
-
-  const [expirationErrors, setExpirationErrors] = useState(
-    new Array(INPUT_COUNTS.EXPIRATION_PERIOD).fill(null)
+const ExpirationPeriodField = ({ expirationPeriodState }: Props) => {
+  const { onChange, errors, values } = expirationPeriodState;
+  const { inputRefs, onFocusNextInput } = useInputRefs(
+    INPUT_COUNTS.CARD_NUMBERS,
+    onChange
   );
+  const [isErrorShow, setIsErrorShow] = useState(hasInactiveInputError(errors));
 
-  const onValidateExpirationPeriod = (index: number) => {
-    getExpirationError();
-    getLengthError(index);
-    index === 0 && getMonthError();
-    resetVacantInputError(index);
-  };
-
-  const getMonthError = () => {
-    const monthError = validateMonth(Number(expirationPeriod.expirationMonth));
-
-    if (monthError) {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, monthError, 0));
-    }
-  };
-
-  const getLengthError = (index: number) => {
-    const lengthError = validateIsValidLength(
-      expirationPeriod[EXPIRATION_INPUTS_NAMES[index]],
-      VALID_LENGTH.EXPIRATION_PERIOD
-    );
-
-    if (lengthError) {
-      setExpirationErrors((prev) =>
-        makeNewErrorMessages(prev, lengthError, index)
-      );
-    } else {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
-    }
-  };
-
-  const getExpirationError = () => {
-    const expiredError = validateExpirationDate(expirationPeriod);
-
-    if (expiredError) {
-      setExpirationErrors([expiredError, expiredError]);
-    } else {
-      setExpirationErrors([null, null]);
-    }
-  };
-
-  const resetVacantInputError = (index: number) => {
-    if (!expirationPeriod[EXPIRATION_INPUTS_NAMES[index]].length) {
-      setExpirationErrors((prev) => makeNewErrorMessages(prev, null, index));
-    }
-  };
+  const currentErrorMessages = (
+    Object.values(errors) as ExpirationPeriodErrorType[]
+  ).map((message) => ExpirationPeriodErrorMessages[message]);
 
   return (
     <S.InputFieldWithInfo>
@@ -86,37 +69,48 @@ const ExpirationPeriodField = ({ expiredPeriodState }: Props) => {
       />
       <InputField
         label={MESSAGE.INPUT_LABEL.EXPIRATION_DATE}
-        errorMessages={expirationErrors}
+        errorMessages={currentErrorMessages}
+        isErrorShow={isErrorShow}
       >
-        {new Array(INPUT_COUNTS.EXPIRATION_PERIOD)
-          .fill(0)
-          .map((_: string, index: number) => (
-            <Input
-              type="number"
-              key={index}
-              name={EXPIRATION_INPUTS_NAMES[index]}
-              placeholder={MESSAGE.EXPIRATION_DATE_PLACEHOLDER[index]}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                e.target.value = limitNumberLength({
-                  value: e.target.value,
-                  maxLength: MAX_LENGTH.EXPIRATION_PERIOD,
-                });
-                onChangeExpirationPeriod(e);
-              }}
-              onBlur={() => {
-                onValidateExpirationPeriod(index);
-              }}
-              isError={
-                !!(
-                  expirationPeriod[EXPIRATION_INPUTS_NAMES[index]] &&
-                  expirationErrors[index]
-                )
-              }
-            />
-          ))}
+        {expirationInputConfigs.map(
+          (inputConfig: InputConfigType, index: number) => {
+            const { name, placeholder } = inputConfig;
+
+            return (
+              <Input
+                autoFocus={index === 0}
+                ref={(el) => (inputRefs.current[index] = el)}
+                type="number"
+                key={index}
+                name={name}
+                placeholder={placeholder}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  onFocusNextInput(e, index);
+                }}
+                isError={!!errors[name]}
+                onBlur={() => setIsErrorShow(true)}
+                value={values[name]}
+              />
+            );
+          }
+        )}
       </InputField>
     </S.InputFieldWithInfo>
   );
 };
 
-export default ExpirationPeriodField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.expirationPeriodState.errors ===
+      nextProps.expirationPeriodState.errors &&
+    prevProps.expirationPeriodState.values ===
+      nextProps.expirationPeriodState.values
+  );
+};
+
+const ExpirationPeriodFieldMemo = React.memo(
+  ExpirationPeriodField,
+  arePropsEqual
+);
+
+export default ExpirationPeriodFieldMemo;

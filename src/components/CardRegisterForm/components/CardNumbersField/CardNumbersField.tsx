@@ -1,50 +1,40 @@
-import InputFieldHeader from "@/components/InputFieldHeader/InputFieldHeader";
+import InputFieldHeader from "@/components/_common/InputFieldHeader/InputFieldHeader";
 import S from "../../style";
 import { MESSAGE } from "@/constants/message";
-import InputField from "@/components/InputField/InputField";
-import Input from "@/components/Input/Input";
-import {
-  makeNewErrorMessages,
-  validateIsValidLength,
-} from "@/utils/validation";
-import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
+import Input from "@/components/_common/Input/Input";
+import { INPUT_COUNTS, VALID_LENGTH } from "@/constants/condition";
 import useInputs from "@/hooks/useInputs";
-import { useState } from "react";
-import { limitNumberLength } from "@/utils/numberHelper";
-import { CardNumberInputType } from "@/pages/CardRegisterPage/CardRegisterPage";
+import useInputRefs from "@/hooks/useInputRefs";
+import { hasInactiveInputError } from "@/utils/view";
+import React, { useState } from "react";
+import InputFieldMemo from "@/components/_common/InputField/InputField";
+
+export type CardNumberInputType = {
+  cardNumbers1: string;
+  cardNumbers2: string;
+  cardNumbers3: string;
+  cardNumbers4: string;
+};
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInputs<CardNumberInputType>>;
 }
 
-const CARD_NUMBERS_KEYS: (keyof CardNumberInputType)[] = [
-  "cardNumbers1",
-  "cardNumbers2",
-  "cardNumbers3",
-  "cardNumbers4",
-];
+type CardNumberKeys = keyof CardNumberInputType;
 
 const CardNumbersField = ({ cardNumbersState }: Props) => {
-  const { values: cardNumbers, onChange: onChangeCardNumbers } =
-    cardNumbersState;
-
-  const [cardNumbersErrors, setCardNumbersErrors] = useState(
-    new Array(INPUT_COUNTS.CARD_NUMBERS).fill(null)
+  const { onChange, errors, values, isValidated } = cardNumbersState;
+  const [isErrorShow, setIsErrorShow] = useState(
+    !isValidated && hasInactiveInputError(errors)
   );
 
-  const onValidateCardNumbers = (index: number) => {
-    const errorMessage = getCardNumbersError(
-      cardNumbers[CARD_NUMBERS_KEYS[index]]
-    );
-    setCardNumbersErrors((prev) =>
-      makeNewErrorMessages(prev, errorMessage, index)
-    );
-  };
+  const { inputRefs, onFocusNextInput } = useInputRefs(
+    INPUT_COUNTS.CARD_NUMBERS,
+    onChange
+  );
 
-  const getCardNumbersError = (cardNumber: string) => {
-    return cardNumber.length
-      ? validateIsValidLength(cardNumber, VALID_LENGTH.CARD_NUMBERS)
-      : null;
+  const getCardNumbersKey = (index: number): CardNumberKeys => {
+    return `cardNumbers${index + 1}` as CardNumberKeys;
   };
 
   return (
@@ -53,37 +43,46 @@ const CardNumbersField = ({ cardNumbersState }: Props) => {
         title={MESSAGE.INPUT_INFO_TITLE.CARD_NUMBERS}
         subTitle={MESSAGE.INPUT_INFO_SUBTITLE.CARD_NUMBERS}
       />
-      <InputField
+      <InputFieldMemo
         label={MESSAGE.INPUT_LABEL.CARD_NUMBERS}
-        errorMessages={cardNumbersErrors}
+        errorMessages={["카드 번호는 4자리 정수로 입력하셔야 합니다."]}
+        isErrorShow={isErrorShow}
       >
-        {new Array(INPUT_COUNTS.CARD_NUMBERS)
-          .fill(0)
-          .map((_: string, index: number) => (
+        {Object.values(values).map((_: string, index: number) => {
+          const currentInputName = getCardNumbersKey(index);
+          const currentInputIsError = !!errors[currentInputName];
+
+          return (
             <Input
+              value={values[currentInputName]}
+              autoFocus={index === 0}
+              ref={(el) => (inputRefs.current[index] = el)}
               type="number"
               key={index}
-              name={`cardNumbers${index + 1}`}
+              maxLength={VALID_LENGTH.CARD_NUMBERS}
+              name={currentInputName}
               placeholder={MESSAGE.PLACEHOLDER.CARD_NUMBERS}
-              onChange={(e) => {
-                e.target.value = limitNumberLength({
-                  value: e.target.value,
-                  maxLength: MAX_LENGTH.CARD_NUMBERS,
-                });
-                onChangeCardNumbers(e);
+              isError={currentInputIsError}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                onFocusNextInput(e, index);
               }}
-              onBlur={() => onValidateCardNumbers(index)}
-              isError={
-                !!(
-                  cardNumbers[CARD_NUMBERS_KEYS[index]] &&
-                  cardNumbersErrors[index]
-                )
-              }
+              onBlur={() => {
+                setIsErrorShow(!isValidated && hasInactiveInputError(errors));
+              }}
             />
-          ))}
-      </InputField>
+          );
+        })}
+      </InputFieldMemo>
     </S.InputFieldWithInfo>
   );
 };
 
-export default CardNumbersField;
+const arePropsEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.cardNumbersState.values === nextProps.cardNumbersState.values &&
+    prevProps.cardNumbersState.errors === nextProps.cardNumbersState.errors
+  );
+};
+
+const CardNumbersFieldMemo = React.memo(CardNumbersField, arePropsEqual);
+export default CardNumbersFieldMemo;

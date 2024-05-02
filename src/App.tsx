@@ -2,16 +2,15 @@ import { ThemeProvider } from "styled-components";
 import "./App.css";
 import { theme } from "@/style/theme";
 import GlobalStyles from "@/style/global";
-import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
+import { RouterProvider } from "react-router-dom";
+import router from "./router/router";
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <CardRegisterPage />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

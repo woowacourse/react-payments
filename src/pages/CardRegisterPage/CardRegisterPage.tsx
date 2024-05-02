@@ -1,65 +1,99 @@
 import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
-import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
-import { CARD_BRAND_INFO } from "@/constants/condition";
-import useInput from "@/hooks/useInput";
-import useInputs from "@/hooks/useInputs";
-
-export type CardNumberInputType = {
-  cardNumbers1: string;
-  cardNumbers2: string;
-  cardNumbers3: string;
-  cardNumbers4: string;
-};
-
-export type ExpirationPeriodInputType = {
-  expirationMonth: string;
-  expirationYear: string;
-};
+import CardPreview from "@/components/CreditCardPreview/CardPreview";
+import { useState } from "react";
+import BasicButton from "@/components/_common/BasicButton/BasicButton";
+import { theme } from "@/style/theme";
+import { useNavigate } from "react-router-dom";
+import useCardRegister from "@/hooks/useCardRegister";
+import { ROUTE_URL } from "@/constants/url";
+import { REGISTER_STEP } from "@/constants/condition";
+import useFormProgress from "@/hooks/useFormProgress";
+import ProgressBar from "@/components/_common/ProgressBar/ProgressBar";
 
 const CardRegisterPage = () => {
-  const cardNumbersState = useInputs<CardNumberInputType>({
-    cardNumbers1: "",
-    cardNumbers2: "",
-    cardNumbers3: "",
-    cardNumbers4: "",
+  const navigate = useNavigate();
+  const cardRegisterInfo = useCardRegister();
+  const {
+    cardNumbersState,
+    expirationPeriodState,
+    cardBrandState,
+    CVCNumbersState,
+    passwordState,
+    ownerNameState,
+  } = cardRegisterInfo;
+
+  const [isFront, setIsFront] = useState<boolean>(true);
+  const [isNameEntered, setIsNameEntered] = useState<boolean>(false);
+
+  const isValidatedArr = [
+    cardNumbersState.isValidated,
+    cardBrandState.isValidated,
+    expirationPeriodState.isValidated,
+    ownerNameState.isValidated && isNameEntered,
+    CVCNumbersState.isValidated,
+    passwordState.isValidated,
+  ];
+
+  const { progressCompleted, formProgress } = useFormProgress({
+    isValidatedArr,
+    isNameEntered,
   });
 
-  const expiredDateState = useInputs<ExpirationPeriodInputType>({
-    expirationMonth: "",
-    expirationYear: "",
-  });
+  const onSubmitCardInfo = () => {
+    navigate(ROUTE_URL.REGISTER_CONFIRM, {
+      state: {
+        startNumbers: cardNumbersState.values.cardNumbers1,
+        cardType: cardBrandState.value,
+      },
+    });
 
-  const ownerNameState = useInput("");
-
-  const checkCardBrand = (cardNumbers: string) => {
-    if (Number(cardNumbers[0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
-      return "VISA";
-    }
-    if (
-      Number(cardNumbers.slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
-      Number(cardNumbers.slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
-    ) {
-      return "MASTER";
-    }
-    return "NONE";
+    const cardRegisterInfo = {
+      cardNumbers: cardNumbersState.values,
+      expirationNumbers: expirationPeriodState.values,
+      cardBrandState: cardBrandState.value,
+      ownerName: ownerNameState.value,
+      CVCNumbersState: CVCNumbersState.value,
+      passwordState: passwordState.value,
+    };
+    console.log("카드 등록 정보", cardRegisterInfo);
   };
 
   return (
     <S.CardRegisterWrapper>
+      <ProgressBar
+        currentStep={formProgress}
+        fullStep={REGISTER_STEP.ALL_PASSED}
+      />
       <S.FlexWrapper>
-        <CreditCardPreview
-          cardType={checkCardBrand(cardNumbersState.values.cardNumbers1)}
+        <CardPreview
+          cardBrandType={cardBrandState.value}
           cardNumbers={cardNumbersState.values}
-          expirationDate={expiredDateState.values}
+          expirationDate={expirationPeriodState.values}
           ownerName={ownerNameState.value}
+          CVCNumbers={CVCNumbersState.value}
+          isFront={isFront}
+          setIsFront={setIsFront}
         />
         <CardRegisterForm
-          cardNumbersState={cardNumbersState}
-          expiredPeriodState={expiredDateState}
-          ownerNameState={ownerNameState}
+          {...cardRegisterInfo}
+          formProgress={formProgress}
+          setIsFront={setIsFront}
+          setIsNameEntered={setIsNameEntered}
         />
       </S.FlexWrapper>
+      {formProgress === REGISTER_STEP.ALL_PASSED && progressCompleted && (
+        <BasicButton
+          borderType="square"
+          position="bottom"
+          height={52}
+          disabled={formProgress !== REGISTER_STEP.ALL_PASSED}
+          backgroundColor={theme.COLOR["grey-3"]}
+          onClick={onSubmitCardInfo}
+        >
+          확인
+        </BasicButton>
+      )}
     </S.CardRegisterWrapper>
   );
 };

@@ -6,11 +6,23 @@ const resetStyle = css`
     padding: 0;
   }
 
+  div {
+    white-space: "pre-wrap";
+  }
+
   input[type="password"] {
     letter-spacing: 4px;
   }
 
   body::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    -ms-overflow-style: none;
+  }
+
+  ::-webkit-scrollbar {
     display: none;
   }
 
