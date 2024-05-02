@@ -1,66 +1,57 @@
+import OPTION from "../constants/option";
 import useFormSection from "./useFormSection";
 
-import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage"
-import OPTION from "../constants/option";
-import { useEffect } from "react";
-
-interface UseCVCFormSectionProps {
-  cardInfo: CardInfo;
-  updateCardInfo: (value: string) => void;
-  onComplete: () => void;
-  handleCardState: (cardState: CardState) => void;
-  ref: React.MutableRefObject<HTMLInputElement>
+interface UseCVCFormSection {
+  value: string;
+  updateValue: (value: string) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
 
-const useCVCFormSection = (props: UseCVCFormSectionProps) => {
-  const { cardInfo, updateCardInfo, onComplete, handleCardState, ref } = props
-
-  const validateWhenChange = (value: string) => {
-    if (!REGEX.numbers.test(value) && value.length !== 0) {
-      return { errorMessage: ERROR_MESSAGE.onlyNumber, newValue: value.split('').filter(char => REGEX.numbers.test(char)).join('') }
-    };
-    return { errorMessage: '', newValue: value }
-  }
-
-  const validateWhenBlur = (value: string) => {
-    if (value.length === OPTION.cvcMaxLength) {
-      return { errorMessage: '', complete: true }
-    } else {
-      return { errorMessage: ERROR_MESSAGE.cvcFormat, complete: false };
+const useCVCFormSection = ({ value, updateValue, updateComplete, maxLength = OPTION.cvcMaxLength }: UseCVCFormSection) => {
+  const validateOnChange = (newValue: string) => {
+    if (newValue.length > maxLength) {
+      return {
+        isValid: false,
+        errorMessage: `CVC 번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
+      };
     }
-  }
+    if (!/^\d*$/.test(newValue)) {
+      return {
+        isValid: false,
+        errorMessage: 'CVC 번호는 숫자만 입력이 가능해요.',
+      };
+    }
+    return { isValid: true, errorMessage: '' };
+  };
 
-  const blurCondition = (value: string) => value.length === OPTION.cvcMaxLength
+  const validateOnBlur = () => {
+    if (value.length !== maxLength) {
+      return {
+        isValid: false,
+        errorMessage: `CVC 번호는 ${maxLength}글자로 입력해 주세요.`,
+      };
+    }
+    updateComplete();
+    return { isValid: true, errorMessage: '' };
+  };
 
-  const { handleChange, error } = useFormSection({
-    ref: ref,
-    value: cardInfo.cvc.value,
-    validateWhenChange,
-    validateWhenBlur,
-    blurCondition,
-    updateCardInfo,
-    onComplete,
+  const {
+    errorMessage,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useFormSection({
+    updateValue,
+    validateOnChange,
+    validateOnBlur,
   });
 
-  useEffect(() => {
-    handleCardState('back')
-
-    if (ref.current) {
-      ref.current.addEventListener('focus', () => handleCardState('back'))
-      ref.current.addEventListener('blur', () => handleCardState('front'))
-    }
-
-    return () => {
-      if (ref.current) {
-        ref.current.removeEventListener('focus', () => handleCardState('back'))
-        ref.current.removeEventListener('blur', () => handleCardState('front'))
-      }
-    }
-  }, [])
-
-
-  return { error, handleChange };
+  return {
+    errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  };
 };
-
 export default useCVCFormSection;

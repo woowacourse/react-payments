@@ -17,15 +17,22 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
   const { cardInfo, dispatchCardInfo, handleCardState } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
 
-  const updateCardInfo = (cvc: string) => {
+  const updateValue = (cvc: string) => {
     dispatchCardInfo({ type: 'SET_CARD_CVC_VALUE', value: cvc })
   }
 
-  const onComplete = () => {
+  const updateComplete = () => {
     dispatchCardInfo({ type: 'SET_CARD_CVC_COMPLETED', value: true })
   }
 
-  const { error, handleChange } = useCVCFormSection({ cardInfo, updateCardInfo, onComplete, handleCardState, ref })
+  const { errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler, } = useCVCFormSection({
+      value: cardInfo.cvc.value,
+      updateValue,
+      updateComplete,
+    })
 
   const CVCForm = (
     <PaymentsInputField
@@ -34,14 +41,22 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
       placeholder="123"
       maxLength={OPTION.cvcMaxLength}
       value={cardInfo.cvc.value}
-      hasError={error.length !== 0}
-      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+      hasError={errorMessage.length !== 0}
+      handleValueChange={(e) => onChangeHandler(e)}
+      handleOnBlur={() => {
+        onBlurHandler()
+        handleCardState('front')
+      }}
+      handleOnFocus={() => {
+        onFocusHandler()
+        handleCardState('back')
+      }}
       autoFocus={true}
     />
   )
 
   return (
-    <FormSection title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={error} Children={CVCForm} />
+    <FormSection title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage} Children={CVCForm} />
   );
 };
 
