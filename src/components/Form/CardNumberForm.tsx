@@ -8,7 +8,7 @@ export interface CardFormProps {
   inputCount: number;
   type: string;
   placeholders: string[];
-  onValidation?: (isValid: boolean) => void;
+  onValidation: (isValid: boolean) => void;
   onFocus: (field: string | null) => void;
 }
 

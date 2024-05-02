@@ -1,7 +1,7 @@
 import FormElement from "../common/FormElement";
-import { useEffect, useState } from "react";
 import Input from "./Input";
 import { CardFormProps } from "./CardNumberForm";
+import useCardCVCForm from "../../hooks/useCardCVCForm";
 
 interface CardCVCFormProps extends CardFormProps {
   cardCVC: string[];
@@ -18,29 +18,7 @@ const CardCVCForm = ({
   onValidation,
   onFocus,
 }: CardCVCFormProps) => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidity, setInputValidity] = useState({
-    0: false,
-  });
-
-  // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
-  const updateInputValidity = (index: number, isValid: boolean) => {
-    setInputValidity((prevValidities) => ({
-      ...prevValidities,
-      [index]: isValid,
-    }));
-  };
-
-  useEffect(() => {
-    if (onValidation && inputValidity[0]) {
-      onValidation(true);
-      setErrorMessage("");
-    }
-    if (onValidation && !inputValidity[0]) {
-      onValidation(false);
-      setErrorMessage("3자리 수를 입력하세요.");
-    }
-  }, [inputValidity]);
+  const { errorMessage, setErrorMessage, updateInputValidity } = useCardCVCForm(onValidation);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
