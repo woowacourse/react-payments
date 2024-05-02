@@ -14,6 +14,8 @@ export const Default: Story = {
   args: {
     labelContent: "",
     placeholders: ["카드사를 선택해주세요."],
+    cardCompany: null,
+    setCardCompany: () => {},
     onValidation: () => {},
     onFocus: () => {},
   },
