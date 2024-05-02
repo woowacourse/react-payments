@@ -4,9 +4,9 @@ import FormElement from "../common/FormElement";
 import { CardFormProps } from "./CardNumberForm";
 import useCardOwnerForm from "../../hooks/useCardOwnerForm";
 
-interface UserNameFormProps extends CardFormProps {
-  userName: string[];
-  setUserName: React.Dispatch<React.SetStateAction<string[]>>;
+interface CardOwnerFormProps extends CardFormProps {
+  cardOwner: string[];
+  setCardOwner: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CardOwnerForm = ({
@@ -14,11 +14,11 @@ const CardOwnerForm = ({
   inputCount,
   type,
   placeholders,
-  userName,
-  setUserName,
+  cardOwner,
+  setCardOwner,
   onValidation,
   onFocus,
-}: UserNameFormProps) => {
+}: CardOwnerFormProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const { errorMessage, setErrorMessage, updateInputValidity } = useCardOwnerForm(onValidation);
 
@@ -34,8 +34,8 @@ const CardOwnerForm = ({
       type={type}
       placeholder={placeholders[index]}
       maxLength={30}
-      state={userName || []}
-      setState={setUserName || (() => {})}
+      state={cardOwner || []}
+      setState={setCardOwner || (() => {})}
       setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
       setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
       validationRule={(value) => /^[A-Z\s]{1,30}$/.test(value)}

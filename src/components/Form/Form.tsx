@@ -14,13 +14,13 @@ import { CardCompany } from "../../types/card";
 export interface FormProps {
   cardNumbers: string[];
   expirationDate: string[];
-  userName: string[];
+  cardOwner: string[];
   cardCompany: CardCompany | null;
   cardCVC: string[];
   cardPassword: string[];
   setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
-  setUserName: React.Dispatch<React.SetStateAction<string[]>>;
+  setCardOwner: React.Dispatch<React.SetStateAction<string[]>>;
   setCardCompany: React.Dispatch<React.SetStateAction<CardCompany | null>>;
   setCardCVC: React.Dispatch<React.SetStateAction<string[]>>;
   setCardPassword: React.Dispatch<React.SetStateAction<string[]>>;
@@ -53,13 +53,13 @@ const Styled = {
 const Form = ({
   cardNumbers,
   expirationDate,
-  userName,
+  cardOwner,
   cardCompany,
   cardCVC,
   cardPassword,
   setCardNumbers,
   setExpirationDate,
-  setUserName,
+  setCardOwner,
   setCardCompany,
   setCardCVC,
   setCardPassword,
@@ -99,6 +99,7 @@ const Form = ({
             setCardPassword={setCardPassword}
             onValidation={handleCardPasswordValidation}
             onFocus={() => setFocusedField("cardPassword")}
+            // setFocusedField={setFocusedField}
           />
         </div>
       )}
@@ -115,6 +116,7 @@ const Form = ({
             setCardCVC={setCardCVC}
             onValidation={handleCardCVCValidation}
             onFocus={() => setFocusedField("cardCVC")}
+            // setFocusedField={setFocusedField}
           />
         </div>
       )}
@@ -127,10 +129,11 @@ const Form = ({
             inputCount={1}
             type="text"
             placeholders={["JOHN DOE"]}
-            userName={userName}
-            setUserName={setUserName}
+            cardOwner={cardOwner}
+            setCardOwner={setCardOwner}
             onValidation={handleCardOwnerValidation}
             onFocus={() => setFocusedField("cardUserName")}
+            // setFocusedField={setFocusedField}
           />
         </div>
       )}
@@ -150,6 +153,7 @@ const Form = ({
             setExpirationDate={setExpirationDate}
             onValidation={handleExpirationDateValidation}
             onFocus={() => setFocusedField("cardExpirationDate")}
+            // setFocusedField={setFocusedField}
           />
         </div>
       )}
@@ -185,6 +189,7 @@ const Form = ({
           setCardNumbers={setCardNumbers}
           onValidation={handleCardNumberValidation}
           onFocus={() => setFocusedField("cardNumber")}
+          // setFocusedField={setFocusedField}
         />
       </div>
 

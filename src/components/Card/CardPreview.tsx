@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CardNumbers from "./CardNumbers";
 import CardLogo from "./CardLogo";
 import ExpirationDate from "./ExpirationDate";
-import UserName from "./UserName";
+import CardOwner from "./CardOwner";
 import { CARD_COMPANY } from "../../constants/card";
 import { useEffect, useState } from "react";
 import { CardCompany } from "../../types/card";
@@ -63,20 +63,20 @@ interface CardFrontProps {
   backgroundColor: string;
   cardNumbers: string[];
   expirationDate: string[];
-  userName: string[];
+  cardOwner: string[];
 }
 
 interface CardPreviewProps {
   cardNumbers: string[];
   expirationDate: string[];
-  userName: string[];
+  cardOwner: string[];
   cardCompany: CardCompany | null;
   cardCVC: string[];
   cardPassword: string[];
   focusedField: string;
 }
 
-const CardFront = ({ backgroundColor, cardNumbers, expirationDate, userName }: CardFrontProps) => (
+const CardFront = ({ backgroundColor, cardNumbers, expirationDate, cardOwner }: CardFrontProps) => (
   <Styled.CardFrontLayout backgroundColor={backgroundColor}>
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Styled.ICChip />
@@ -85,7 +85,7 @@ const CardFront = ({ backgroundColor, cardNumbers, expirationDate, userName }: C
     <div style={{ display: "grid", gap: "8px", paddingLeft: "5px" }}>
       <CardNumbers cardNumbers={cardNumbers} />
       <ExpirationDate expirationDate={expirationDate} />
-      <UserName userName={userName} />
+      <CardOwner cardOwner={cardOwner} />
     </div>
   </Styled.CardFrontLayout>
 );
@@ -101,7 +101,7 @@ const CardBack = ({ cardCVC }: { cardCVC: string[] }) => (
 const CardPreview = ({
   cardNumbers,
   expirationDate,
-  userName,
+  cardOwner,
   cardCompany,
   cardCVC,
   focusedField,
@@ -110,7 +110,6 @@ const CardPreview = ({
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    // if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
     if (cardCompany) setBackgroundColor(CARD_COMPANY[cardCompany]);
   }, [cardCompany]);
 
@@ -128,7 +127,7 @@ const CardPreview = ({
           backgroundColor={backgroundColor}
           cardNumbers={cardNumbers}
           expirationDate={expirationDate}
-          userName={userName}
+          cardOwner={cardOwner}
         />
       )}
     </>

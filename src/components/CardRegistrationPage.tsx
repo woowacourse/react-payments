@@ -18,7 +18,7 @@ const Styled = {
 const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(["", "", "", ""]);
   const [expirationDate, setExpirationDate] = useState<string[]>(["", ""]);
-  const [userName, setUserName] = useState<string[]>([""]);
+  const [cardOwner, setCardOwner] = useState<string[]>([""]);
   const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [cardCVC, setCardCVC] = useState<string[]>([""]);
   const [cardPassword, setCardPassword] = useState<string[]>([""]);
@@ -30,7 +30,7 @@ const CardRegistrationPage = () => {
       <CardPreview
         cardNumbers={cardNumbers}
         expirationDate={expirationDate}
-        userName={userName}
+        cardOwner={cardOwner}
         cardCompany={cardCompany}
         cardCVC={cardCVC}
         cardPassword={cardPassword}
@@ -39,13 +39,13 @@ const CardRegistrationPage = () => {
       <Form
         cardNumbers={cardNumbers}
         expirationDate={expirationDate}
-        userName={userName}
+        cardOwner={cardOwner}
         cardCompany={cardCompany}
         cardCVC={cardCVC}
         cardPassword={cardPassword}
         setCardNumbers={setCardNumbers}
         setExpirationDate={setExpirationDate}
-        setUserName={setUserName}
+        setCardOwner={setCardOwner}
         setCardCompany={setCardCompany}
         setCardCVC={setCardCVC}
         setCardPassword={setCardPassword}
