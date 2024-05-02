@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Form from "./Form/Form";
 import CardPreview from "./Card/CardPreview";
+import { CardCompany } from "../types/card";
 
 const Styled = {
   CardRegistrationPageLayout: styled.section`
@@ -18,7 +19,7 @@ const CardRegistrationPage = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(["", "", "", ""]);
   const [expirationDate, setExpirationDate] = useState<string[]>(["", ""]);
   const [userName, setUserName] = useState<string[]>([""]);
-  const [cardCompany, setCardCompany] = useState<string[]>([""]);
+  const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [cardCVC, setCardCVC] = useState<string[]>([""]);
   const [cardPassword, setCardPassword] = useState<string[]>([""]);
 

@@ -1,20 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
-interface InputProps {
-  index: number;
-  type: string;
-  placeholder?: string;
-  maxLength: number;
-  state: string[];
-  setState: React.Dispatch<React.SetStateAction<string[]>>;
-  setErrorMessage: (errorMessage: string) => void;
-  setAllInputValid: (isValidInput: boolean) => void;
-  validationRule: (value: string) => boolean;
-  errorMessageText?: string;
-  onFocus: (field: string | null) => void;
-}
-
 const Styled = {
   InputWrapper: styled.input<{ isValidInput: boolean }>`
     width: 100%;
@@ -31,6 +17,20 @@ const Styled = {
     }
   `,
 };
+
+interface InputProps {
+  index: number;
+  type: string;
+  placeholder?: string;
+  maxLength: number;
+  state: string[];
+  setState: React.Dispatch<React.SetStateAction<string[]>>;
+  setErrorMessage: (errorMessage: string) => void;
+  setAllInputValid: (isValidInput: boolean) => void;
+  validationRule: (value: string) => boolean;
+  errorMessageText?: string;
+  onFocus: (field: string | null) => void;
+}
 
 const Input = ({
   index,

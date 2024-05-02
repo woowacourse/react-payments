@@ -3,6 +3,11 @@ import Input from "./Input";
 import FormElement from "../common/FormElement";
 import { CardFormProps } from "./CardNumberForm";
 
+interface UserNameFormProps extends CardFormProps {
+  userName: string[];
+  setUserName: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 const UserNameForm = ({
   labelContent,
   inputCount,
@@ -12,7 +17,7 @@ const UserNameForm = ({
   setUserName,
   onValidation,
   onFocus,
-}: CardFormProps) => {
+}: UserNameFormProps) => {
   const [, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({ 0: false });

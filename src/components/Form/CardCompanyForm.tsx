@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { CARD_COMPANY } from "../../constants/card";
 import FormElement from "../common/FormElement";
-import { FormProps } from "./Form";
 import useCardCompanyForm from "../../hooks/useCardCompanyForm";
+import { CardCompany } from "../../types/card";
 
 const Styled = {
   CardCompanySelect: styled.select`
@@ -14,11 +14,13 @@ const Styled = {
   `,
 };
 
-export interface CardCompanyFormProps extends FormProps {
+export interface CardCompanyFormProps {
   labelContent: string;
   placeholders: string[];
+  cardCompany: CardCompany | null;
+  setCardCompany: React.Dispatch<React.SetStateAction<CardCompany | null>>;
   onValidation: (isValid: boolean) => void;
-  onFocus: (field: string | null) => void;
+  onFocus: (field: string) => void;
 }
 
 const CardCompanyForm = ({
@@ -38,7 +40,7 @@ const CardCompanyForm = ({
 
   const select = (
     <Styled.CardCompanySelect
-      value={cardCompany && cardCompany.length > 0 ? cardCompany[0] : ""}
+      value={cardCompany ? cardCompany : ""}
       onChange={handleCompanyChange}
       onFocus={() => handleFocus("cardCompany")}
     >
@@ -59,7 +61,7 @@ const CardCompanyForm = ({
     <FormElement
       labelContent={labelContent}
       inputs={select}
-      errorMessage={isFocused && !cardCompany![0] ? "카드사를 선택해 주세요." : ""}
+      errorMessage={isFocused && !cardCompany ? "카드사를 선택해 주세요." : ""}
     />
   );
 };

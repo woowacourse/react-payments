@@ -1,16 +1,20 @@
 import Input from "./Input";
 import FormElement from "../common/FormElement";
-import { FormProps } from "./Form";
 import useCardNumberForm from "../../hooks/useCardNumberForm";
 import { useState } from "react";
 
-export interface CardFormProps extends FormProps {
+export interface CardFormProps {
   labelContent: string;
   inputCount: number;
   type: string;
   placeholders: string[];
   onValidation?: (isValid: boolean) => void;
   onFocus: (field: string | null) => void;
+}
+
+interface CardNumberFormProps extends CardFormProps {
+  cardNumbers: string[];
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CardNumberForm = ({
@@ -22,7 +26,7 @@ const CardNumberForm = ({
   setCardNumbers,
   onValidation,
   onFocus,
-}: CardFormProps) => {
+}: CardNumberFormProps) => {
   const { updateInputValidity, isValidCarNumber, setErrorMessage, errorMessage } =
     useCardNumberForm(onValidation!);
 

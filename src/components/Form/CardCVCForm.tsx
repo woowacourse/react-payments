@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import Input from "./Input";
 import { CardFormProps } from "./CardNumberForm";
 
+interface CardCVCFormProps extends CardFormProps {
+  cardCVC: string[];
+  setCardCVC: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 const CardCVCForm = ({
   labelContent,
   inputCount,
@@ -12,7 +17,7 @@ const CardCVCForm = ({
   setCardCVC,
   onValidation,
   onFocus,
-}: CardFormProps) => {
+}: CardCVCFormProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({
     0: false,

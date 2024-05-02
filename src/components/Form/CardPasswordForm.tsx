@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import Input from "./Input";
 import { CardFormProps } from "./CardNumberForm";
 
+interface CardPasswordFormProps extends CardFormProps {
+  cardPassword: string[];
+  setCardPassword: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 const CardPasswordForm = ({
   labelContent,
   inputCount,
@@ -12,7 +17,7 @@ const CardPasswordForm = ({
   setCardPassword,
   onValidation,
   onFocus,
-}: CardFormProps) => {
+}: CardPasswordFormProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({
     0: false,

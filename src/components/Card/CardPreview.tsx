@@ -5,6 +5,7 @@ import ExpirationDate from "./ExpirationDate";
 import UserName from "./UserName";
 import { CARD_COMPANY } from "../../constants/card";
 import { useEffect, useState } from "react";
+import { CardCompany } from "../../types/card";
 
 const BaseCard = styled.div`
   color: white;
@@ -69,7 +70,7 @@ interface CardPreviewProps {
   cardNumbers: string[];
   expirationDate: string[];
   userName: string[];
-  cardCompany: string[];
+  cardCompany: CardCompany | null;
   cardCVC: string[];
   cardPassword: string[];
   focusedField: string;
@@ -109,7 +110,8 @@ const CardPreview = ({
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
+    // if (cardCompany[0]) setBackgroundColor(CARD_COMPANY[cardCompany[0]]);
+    if (cardCompany) setBackgroundColor(CARD_COMPANY[cardCompany]);
   }, [cardCompany]);
 
   useEffect(() => {

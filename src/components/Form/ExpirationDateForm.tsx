@@ -3,6 +3,11 @@ import Input from "./Input";
 import FormElement from "../common/FormElement";
 import { CardFormProps } from "./CardNumberForm";
 
+interface ExpirationDateFormProps extends CardFormProps {
+  expirationDate: string[];
+  setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
 const ExpirationDateForm = ({
   labelContent,
   inputCount,
@@ -12,7 +17,7 @@ const ExpirationDateForm = ({
   setExpirationDate,
   onValidation,
   onFocus,
-}: CardFormProps) => {
+}: ExpirationDateFormProps) => {
   const [, setAllInputValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({

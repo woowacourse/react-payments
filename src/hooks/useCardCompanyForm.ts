@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { CardCompany } from "../types/card";
 
 interface UseCardCompanyFormProps {
-  cardCompany: string[] | undefined;
-  setCardCompany: React.Dispatch<React.SetStateAction<string[]>> | undefined;
+  cardCompany: CardCompany | null;
+  setCardCompany: React.Dispatch<React.SetStateAction<CardCompany | null>>;
   onValidation: (isValid: boolean) => void;
-  onFocus: (field: string | null) => void;
+  onFocus: (field: string) => void;
 }
 
 const useCardCompanyForm = ({
@@ -21,11 +22,13 @@ const useCardCompanyForm = ({
   };
 
   useEffect(() => {
-    if (cardCompany) onValidation(cardCompany[0] !== "");
+    if (cardCompany) onValidation(true);
   }, [cardCompany, onValidation]);
 
   const handleCompanyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCardCompany && setCardCompany([e.target.value]);
+    const currentValue = e.target.value as CardCompany;
+
+    setCardCompany(currentValue);
   };
 
   return { isFocused, handleFocus, handleCompanyChange };
