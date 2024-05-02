@@ -69,3 +69,12 @@ export const CARD_BRAND = {
     MAX_NUMBER: 49,
   },
 };
+
+export const CREATION_STAGE = {
+  CARD_NUMBERS: 2,
+  CARD_COMPANY: 3,
+  CARD_EXPIRATION: 4,
+  CARD_USERNAME: 5,
+  CARD_CVC: 6,
+  CARD_PASSWORD: 7,
+};

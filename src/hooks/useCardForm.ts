@@ -6,6 +6,7 @@ import useCardExpiration from './useCardExpiration';
 import useCardUserName from './useCardUserName';
 import useCardCVC from './useCardCVC';
 import useCardPassword from './useCardPassword';
+import { CREATION_STAGE } from '../constants/setting';
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
@@ -41,26 +42,48 @@ const useCardForm = () => {
   };
 
   const updateStage = () => {
+    const isValidCardNumbers = cardInfo.cardNumbers.every(
+      (element) => element.length === 4,
+    );
+    const isErroMessageEmpty = errorMessage.cardNumbers.every(
+      (element) => element === '',
+    );
+    const isValidExpiration = cardInfo.cardExpiration.every(
+      (element) => element.length == 2,
+    );
+    const isVarExpirationErrorMessagesEmpty = errorMessage.cardExpiration.every(
+      (element) => element === '',
+    );
+
     if (
-      cardInfo.cardNumbers.every((element) => element.length === 4) &&
-      errorMessage.cardNumbers.every((element) => element === '') &&
-      creationStage < 2
+      isValidCardNumbers &&
+      isErroMessageEmpty &&
+      creationStage < CREATION_STAGE.CARD_NUMBERS
     ) {
-      setCreationStage(2);
-    } else if (cardInfo.cardCompany !== '' && creationStage < 3) {
-      setCreationStage(3);
+      setCreationStage(CREATION_STAGE.CARD_NUMBERS);
     } else if (
-      cardInfo.cardExpiration.every((element) => element.length == 2) &&
-      errorMessage.cardExpiration.every((element) => element === '') &&
-      creationStage < 4
+      cardInfo.cardCompany !== '' &&
+      creationStage < CREATION_STAGE.CARD_COMPANY
     ) {
-      setCreationStage(4);
-    } else if (cardInfo.userName !== '' && creationStage < 5) {
-      setCreationStage(5);
-    } else if (cardInfo.cvc !== '' && creationStage < 6) {
-      setCreationStage(6);
-    } else if (cardInfo.password !== '' && creationStage < 7) {
-      setCreationStage(7);
+      setCreationStage(CREATION_STAGE.CARD_COMPANY);
+    } else if (
+      isValidExpiration &&
+      isVarExpirationErrorMessagesEmpty &&
+      creationStage < CREATION_STAGE.CARD_EXPIRATION
+    ) {
+      setCreationStage(CREATION_STAGE.CARD_EXPIRATION);
+    } else if (
+      cardInfo.userName !== '' &&
+      creationStage < CREATION_STAGE.CARD_USERNAME
+    ) {
+      setCreationStage(CREATION_STAGE.CARD_USERNAME);
+    } else if (cardInfo.cvc !== '' && creationStage < CREATION_STAGE.CARD_CVC) {
+      setCreationStage(CREATION_STAGE.CARD_CVC);
+    } else if (
+      cardInfo.password !== '' &&
+      creationStage < CREATION_STAGE.CARD_PASSWORD
+    ) {
+      setCreationStage(CREATION_STAGE.CARD_PASSWORD);
     }
   };
 
