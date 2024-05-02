@@ -18,6 +18,5 @@ export const Default: Story = {
     placeholders: ["1234", "1234", "1234", "1234"],
     onValidation: () => {},
     onFocus: () => {},
-    setFocusedField: () => {},
   },
 };

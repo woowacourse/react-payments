@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import UserName from "../components/Card/UserName";
+import CardOwner from "../components/Card/CardOwner";
 
 const meta = {
-  title: "UserName",
-  component: UserName,
-} satisfies Meta<typeof UserName>;
+  title: "CardOwner",
+  component: CardOwner,
+} satisfies Meta<typeof CardOwner>;
 
 export default meta;
 
@@ -12,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    userName: ["JOHN DOE"],
+    cardOwner: ["HYUN SOOYEON"],
   },
 };

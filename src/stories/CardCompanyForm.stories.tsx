@@ -16,6 +16,5 @@ export const Default: Story = {
     placeholders: ["카드사를 선택해주세요."],
     onValidation: () => {},
     onFocus: () => {},
-    setFocusedField: () => {},
   },
 };

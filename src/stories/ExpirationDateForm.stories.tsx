@@ -18,6 +18,5 @@ export const Default: Story = {
     placeholders: ["MM", "YY"],
     onValidation: () => {},
     onFocus: () => {},
-    setFocusedField: () => {},
   },
 };

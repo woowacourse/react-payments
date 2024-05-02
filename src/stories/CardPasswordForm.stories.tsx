@@ -18,6 +18,5 @@ export const Default: Story = {
     placeholders: [""],
     onValidation: () => {},
     onFocus: () => {},
-    setFocusedField: () => {},
   },
 };
