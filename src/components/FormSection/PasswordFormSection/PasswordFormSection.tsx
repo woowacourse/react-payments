@@ -16,15 +16,23 @@ const PasswordFormSection = (props: PasswordFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
 
-  const updateCardInfo = (password: string) => {
+  const updateValue = (password: string) => {
     dispatchCardInfo({ type: 'SET_CARD_PASSWORD_VALUE', value: password })
   }
 
-  const onComplete = () => {
+  const updateComplete = () => {
     dispatchCardInfo({ type: 'SET_CARD_PASSWORD_COMPLETED', value: true })
   }
 
-  const { error, handleChange } = usePasswordFormSection({ cardInfo, updateCardInfo, onComplete, ref })
+  const { errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler, } = usePasswordFormSection({
+      ref,
+      value: cardInfo.cvc.value,
+      updateValue,
+      updateComplete,
+    })
 
   const PasswordForm = (
     <PaymentsInputField
@@ -33,15 +41,17 @@ const PasswordFormSection = (props: PasswordFormSectionProps) => {
       placeholder="12"
       maxLength={OPTION.passwordMaxLength}
       value={cardInfo.password.value}
-      hasError={error.length !== 0}
-      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+      hasError={errorMessage.length !== 0}
+      handleValueChange={onChangeHandler}
+      handleOnBlur={onBlurHandler}
+      handleOnFocus={onFocusHandler}
       autoFocus={true}
       type='password'
     />
   )
 
   return (
-    <FormSection title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" label="비밀번호 앞 2자리" errorMessage={error} Children={PasswordForm} />
+    <FormSection title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" label="비밀번호 앞 2자리" errorMessage={errorMessage} Children={PasswordForm} />
   );
 };
 

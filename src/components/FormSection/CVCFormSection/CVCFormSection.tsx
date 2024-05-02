@@ -29,6 +29,7 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
     onChangeHandler,
     onBlurHandler,
     onFocusHandler, } = useCVCFormSection({
+      ref,
       value: cardInfo.cvc.value,
       updateValue,
       updateComplete,
@@ -42,7 +43,7 @@ const CVCFormSection = (props: CVCFormSectionProps) => {
       maxLength={OPTION.cvcMaxLength}
       value={cardInfo.cvc.value}
       hasError={errorMessage.length !== 0}
-      handleValueChange={(e) => onChangeHandler(e)}
+      handleValueChange={onChangeHandler}
       handleOnBlur={() => {
         onBlurHandler()
         handleCardState('front')

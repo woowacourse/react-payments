@@ -20,15 +20,23 @@ const NameFormSection = (props: NameFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
 
-  const updateCardInfo = (name: string) => {
+  const updateValue = (name: string) => {
     dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value: name })
   }
 
-  const onComplete = () => {
+  const updateComplete = () => {
     dispatchCardInfo({ type: 'SET_CARD_NAME_COMPLETED', value: true })
   }
 
-  const { error, handleChange } = useNameFormSection({ cardInfo, updateCardInfo, onComplete, ref })
+  const { errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler, } = useNameFormSection({
+      ref,
+      value: cardInfo.name.value,
+      updateValue,
+      updateComplete,
+    })
 
   const NameForm = (
     <PaymentsInputFieldUppercase
@@ -37,13 +45,15 @@ const NameFormSection = (props: NameFormSectionProps) => {
       placeholder="FAMILY / GIVEN"
       maxLength={OPTION.nameMaxLength}
       value={cardInfo.name.value}
-      hasError={error.length !== 0}
-      handleValueChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+      hasError={errorMessage.length !== 0}
+      handleValueChange={onChangeHandler}
+      handleOnBlur={onBlurHandler}
+      handleOnFocus={onFocusHandler}
       autoFocus={true}
     />)
 
   return (
-    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={error} Children={NameForm} />
+    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={errorMessage} Children={NameForm} />
   );
 };
 
