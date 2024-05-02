@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useFocusNext from './useFocusNext'
 
 interface UseMultiFormSectionProps {
   refs: React.MutableRefObject<HTMLInputElement[]>
@@ -68,10 +69,11 @@ const useMultiFormSection = ({
   };
 
   useEffect(() => {
+    setHasErrors([false, false, false, false])
     if (values.join("").length === 0) return
     if (!hasAnyFocus) {
       const { indexList, isValid, errorMessage } = validateOnBlurAll();
-      indexList.forEach((index) => setNewHasErrors(index, true))
+      setHasErrors(hasErrors.map((_, index) => indexList.includes(index)))
       if (!isValid) {
         setErrorMessage(errorMessage);
       }
