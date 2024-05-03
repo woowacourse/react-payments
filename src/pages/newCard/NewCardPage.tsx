@@ -18,6 +18,7 @@ const NewCardPage = () => {
     cardInfo,
     errorMessage,
     creationStage,
+    inputRefs,
     isAllValidInput,
     handleCardNumbers,
     handleCardCompany,
@@ -48,6 +49,7 @@ const NewCardPage = () => {
             cardInfo={cardInfo}
             errorMessage={errorMessage}
             handleCardNumbers={handleCardNumbers}
+            inputRefs={inputRefs}
           />
         )}
         {creationStage >= CREATION_STAGE.CARD_COMPANY && (
@@ -61,6 +63,7 @@ const NewCardPage = () => {
             cardInfo={cardInfo}
             errorMessage={errorMessage}
             handleCardExpiration={handleCardExpiration}
+            inputRef={inputRefs}
           />
         )}
         {creationStage >= CREATION_STAGE.CARD_USERNAME && (

@@ -7,7 +7,7 @@ interface IUseCardNumbers {
   errorMessageCardNumbers: string[];
   setCardInfo: React.Dispatch<React.SetStateAction<ICardInfo>>;
   setErrorMessage: React.Dispatch<React.SetStateAction<IErrorMessage>>;
-  focusNextInput: (currentInput: HTMLInputElement) => void;
+  focusNextInput: (currentIndex: number) => void;
 }
 
 const useCardNumbers = ({
@@ -53,7 +53,7 @@ const useCardNumbers = ({
       });
 
       if (value.length === 4) {
-        focusNextInput(event.target);
+        focusNextInput(index);
       }
     }
   };

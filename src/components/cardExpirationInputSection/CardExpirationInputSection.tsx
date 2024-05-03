@@ -9,12 +9,14 @@ interface CardExpirationInputSectionProps {
     event: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => void;
+  inputRef: React.MutableRefObject<(HTMLInputElement | null)[]>;
 }
 
 const CardExpirationInputSection: React.FC<CardExpirationInputSectionProps> = ({
   cardInfo,
   errorMessage,
   handleCardExpiration,
+  inputRef,
 }) => {
   return (
     <NewCardInputSection
@@ -35,6 +37,7 @@ const CardExpirationInputSection: React.FC<CardExpirationInputSectionProps> = ({
           }
           $isError={!!errorMessage.cardExpiration[index]}
           onChange={(event) => handleCardExpiration(event, index)}
+          ref={(el) => (inputRef.current[index] = el)}
         ></Input>
       ))}
     </NewCardInputSection>

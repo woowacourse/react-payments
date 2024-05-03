@@ -9,12 +9,14 @@ interface CardNumberInputSectionProps {
     event: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => void;
+  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
 }
 
 const CardNumberInputSection: React.FC<CardNumberInputSectionProps> = ({
   cardInfo,
   errorMessage,
   handleCardNumbers,
+  inputRefs,
 }) => {
   return (
     <NewCardInputSection
@@ -30,6 +32,7 @@ const CardNumberInputSection: React.FC<CardNumberInputSectionProps> = ({
           placeholder={CARD_FORM_INPUTS.CARD_NUMBERS.PLACEHOLDER}
           $isError={!!errorMessage.cardNumbers[index]}
           onChange={(event) => handleCardNumbers(event, index)}
+          ref={(el) => (inputRefs.current[index] = el)}
         />
       ))}
     </NewCardInputSection>

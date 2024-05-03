@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ICardInfo, IErrorMessage } from '../types/type';
 import useCardNumbers from './useCardNumbers';
 import useCardCompany from './useCardCompany';
@@ -26,6 +26,7 @@ const useCardForm = () => {
     password: [''],
   });
   const [creationStage, setCreationStage] = useState(1);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     updateStage();
@@ -85,9 +86,9 @@ const useCardForm = () => {
     }
   };
 
-  const focusNextInput = (currentInput: HTMLInputElement) => {
-    const nextInput = currentInput.nextSibling as HTMLInputElement | null;
-    if (nextInput && nextInput instanceof HTMLInputElement) {
+  const focusNextInput = (currentIndex: number) => {
+    const nextInput = inputRefs.current[currentIndex + 1];
+    if (nextInput) {
       nextInput.focus();
     }
   };
@@ -97,7 +98,7 @@ const useCardForm = () => {
     errorMessageCardNumbers: errorMessage.cardNumbers,
     setCardInfo,
     setErrorMessage,
-    focusNextInput,
+    focusNextInput: () => focusNextInput(0),
   });
 
   const { handleCardCompany } = useCardCompany({
@@ -110,7 +111,7 @@ const useCardForm = () => {
     errorMessageCardExpiration: errorMessage.cardExpiration,
     setCardInfo,
     setErrorMessage,
-    focusNextInput,
+    focusNextInput: () => focusNextInput(0),
   });
 
   const { handleCardUserName } = useCardUserName({
@@ -132,6 +133,7 @@ const useCardForm = () => {
     cardInfo,
     errorMessage,
     creationStage,
+    inputRefs,
     isAllValidInput,
     handleCardNumbers,
     handleCardCompany,
