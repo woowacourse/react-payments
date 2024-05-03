@@ -1,21 +1,24 @@
+import React from 'react';
+
 import styles from './style.module.css';
 
-type InputType = 'text' | 'number';
+type InputType = 'text' | 'number' | 'password';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: InputType;
   name?: string;
   value: string;
-  maxLength?: number;
   placeholder: string;
   isError?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function Input({ isError = false, ...rest }: InputProps) {
-  const className = `${styles.input} ${isError ? styles.error : ''}`;
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ isError = false, ...rest }, ref) => {
+    const className = `${styles.input} ${isError ? styles.error : ''}`;
 
-  return <input className={className} {...rest} />;
-}
+    return <input ref={ref} className={className} {...rest} />;
+  },
+);
 
 export default Input;

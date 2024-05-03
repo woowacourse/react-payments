@@ -1,0 +1,43 @@
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(15.875rem - 1.1875rem * 2);
+  font-family: 'Inter', sans-serif;
+}
+
+.cardBox {
+  position: relative;
+  -webkit-box-shadow: 0px 0px 1.25rem 0.1875rem rgba(70, 70, 70, 0.43);
+  box-shadow: 0px 0px 1rem 0.1875rem rgba(70, 70, 70, 0.43);
+  border-radius: 0.3125rem;
+  background-color: #d5d5d5;
+  width: 13.25rem;
+  height: 8.25rem;
+}
+
+.cardInfo {
+  width: 100%;
+  height: 100%;
+  color: #ffff;
+  font-size: 0.875rem;
+}
+
+.cvcNumber {
+  display: flex;
+  position: absolute;
+  bottom: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #cbba64;
+  width: 100%;
+  height: 1.5rem;
+}
+
+.cvcNumber > div {
+  width: calc(100% - 2rem);
+  height: calc(100% - 0.4rem);
+  letter-spacing: 0.07rem;
+  text-align: end;
+}

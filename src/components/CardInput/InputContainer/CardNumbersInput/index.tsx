@@ -1,7 +1,9 @@
 import {
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
+  INPUT_LENGTH,
 } from '../../../../constants';
+import useAutoFocus from '../../../../hooks/useAutoFocus';
 import Input from '../../../common/Input';
 import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
@@ -12,26 +14,29 @@ import styles from './style.module.css';
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
 interface CardNumbersInputProps {
-  maxLength: number;
   numbers: string[];
   numberErrors: boolean[];
   onNumberChange: (value: string, index: number) => void;
 }
 
 function CardNumbersInput({
-  maxLength,
   numbers,
   numberErrors,
   onNumberChange,
 }: CardNumbersInputProps) {
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
+  const { setElementRef, focusElementAtIndex } = useAutoFocus(numbers.length);
 
-  const getErrorMessage = () => {
-    if (numberErrors.every((isError) => !isError)) {
-      return;
+  const handleInputChange = (value: string, index: number) => {
+    onNumberChange(value, index);
+    if (value.length === INPUT_LENGTH.cardNumber) {
+      focusElementAtIndex(index + 1);
     }
-    return ERROR_MESSAGE.cardNumber;
   };
+
+  const errorMessage = numberErrors.some((isError) => isError)
+    ? ERROR_MESSAGE.cardNumber
+    : undefined;
 
   return (
     <InputWrap title={title} subTitle={subTitle}>
@@ -40,18 +45,19 @@ function CardNumbersInput({
           {numbers.map((number, index) => (
             <Input
               key={`${NUMBERS_NAME_PREFIX}${index}`}
+              ref={(element) => setElementRef(element, index)}
               type="number"
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               value={number}
-              maxLength={maxLength}
               placeholder={placeholder}
               isError={numberErrors[index]}
-              onChange={(event) => onNumberChange(event.target.value, index)}
+              autoFocus={index === 0}
+              onChange={(event) => handleInputChange(event.target.value, index)}
             />
           ))}
         </div>
       </InputField>
-      <InputErrorMessage errorMessage={getErrorMessage()} />
+      <InputErrorMessage errorMessage={errorMessage} />
     </InputWrap>
   );
 }

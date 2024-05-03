@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
+
 import {
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
+  INPUT_LENGTH,
 } from '../../../../constants';
+import useAutoFocus from '../../../../hooks/useAutoFocus';
 import Input from '../../../common/Input';
 import InputErrorMessage from '../../InputErrorMessage';
 import InputField from '../../InputField';
@@ -21,20 +25,19 @@ type PeriodErrorsState = {
 };
 
 type CardExpirationPeriodInputProps = {
-  maxLength: number;
   period: PeriodState;
   periodErrors: PeriodErrorsState;
   onPeriodChange: (type: 'month' | 'year', value: string) => void;
 };
 
 function CardExpirationPeriodInput({
-  maxLength,
   period,
   periodErrors,
   onPeriodChange,
 }: CardExpirationPeriodInputProps) {
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
     CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
+  const { setElementRef, focusElementAtIndex } = useAutoFocus(2);
 
   const getErrorMessage = () => {
     if (periodErrors.month) {
@@ -50,25 +53,34 @@ function CardExpirationPeriodInput({
     }
   };
 
+  const handleMonthChange = (value: string) => {
+    onPeriodChange('month', value);
+
+    if (value.length === INPUT_LENGTH.cardExpiration) {
+      focusElementAtIndex(1);
+    }
+  };
+
   return (
     <InputWrap title={title} subTitle={subTitle}>
       <InputField label={label}>
         <div>
           <div className={styles.inputWrap}>
             <Input
+              ref={(element) => setElementRef(element, 0)}
               type="number"
               name="month"
               value={period.month}
-              maxLength={maxLength}
               placeholder={monthPlaceholder}
               isError={periodErrors.month || periodErrors.expired}
-              onChange={(event) => onPeriodChange('month', event.target.value)}
+              autoFocus
+              onChange={(event) => handleMonthChange(event.target.value)}
             />
             <Input
+              ref={(element) => setElementRef(element, 1)}
               type="number"
               name="year"
               value={period.year}
-              maxLength={maxLength}
               placeholder={yearPlaceholder}
               isError={periodErrors.year || periodErrors.expired}
               onChange={(event) => onPeriodChange('year', event.target.value)}

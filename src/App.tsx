@@ -1,58 +1,20 @@
+import { Route, Routes } from 'react-router-dom';
+
 import './styles/App.css';
 import './styles/reset.css';
-import {
-  CardExpirationPeriodInput,
-  CardNumbersInput,
-  CardPreview,
-  UserNameInput,
-} from './components';
-import { INPUT_LENGTH } from './constants';
-import useCardExpirationPeriodInput from './hooks/useCardExpirationPeriodInput';
-import useCardNumbersInput from './hooks/useCardNumbersInput';
-import useUserNameInput from './hooks/useUserNameInput';
+import CardRegisterForm from './pages/CardRegisterForm';
+import CardRegisterSuccess from './pages/CardRegisterSuccess/CardRegisterSuccess';
 
 function App() {
-  const { CARD_NUMBERS, CARD_EXPIRATION, CARD_USER } = INPUT_LENGTH;
-
-  const { numbers, numberErrors, handleNumberChange } =
-    useCardNumbersInput(CARD_NUMBERS);
-
-  const { period, periodErrors, handlePeriodChange } =
-    useCardExpirationPeriodInput(CARD_EXPIRATION);
-
-  const { userName, nameError, handleNameChange } = useUserNameInput();
-
   return (
     <div id="app">
-      <div className="inner">
-        <CardPreview
-          cardNumbers={numbers}
-          period={period}
-          userName={userName}
+      <Routes>
+        <Route path="/" element={<CardRegisterForm />} />
+        <Route
+          path="/card-register-success"
+          element={<CardRegisterSuccess />}
         />
-        <form className="form-container">
-          <fieldset>
-            <CardNumbersInput
-              maxLength={CARD_NUMBERS}
-              numbers={numbers}
-              numberErrors={numberErrors}
-              onNumberChange={handleNumberChange}
-            />
-            <CardExpirationPeriodInput
-              maxLength={CARD_EXPIRATION}
-              period={period}
-              periodErrors={periodErrors}
-              onPeriodChange={handlePeriodChange}
-            />
-            <UserNameInput
-              maxLength={CARD_USER}
-              userName={userName}
-              nameError={nameError}
-              onNameChange={handleNameChange}
-            />
-          </fieldset>
-        </form>
-      </div>
+      </Routes>
     </div>
   );
 }

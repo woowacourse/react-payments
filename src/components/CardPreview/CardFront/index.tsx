@@ -1,18 +1,25 @@
-import IMAGES from '../../assets/images';
-import { CARD_COLOR, CARD_MARK } from '../../constants';
+import IMAGES from '../../../assets/images';
+import { CARD_COLOR, CARD_MARK, INPUT_LENGTH } from '../../../constants';
+import { CARD_MARK_REGEX } from '../../../constants/regex';
 
 import styles from './style.module.css';
 
-interface CardPreviewProps {
+interface CardFrontProps {
   cardNumbers: string[];
   period: {
     month: string;
     year: string;
   };
   userName: string;
+  cardCompany: string;
 }
 
-function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
+function CardFront({
+  cardNumbers,
+  period,
+  userName,
+  cardCompany,
+}: CardFrontProps) {
   const maskCardNumbers = () =>
     cardNumbers
       .map((number, index) => {
@@ -24,30 +31,31 @@ function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
       .join(' ');
 
   function getCardCompanyMark(): 'visa' | 'master' | 'etc' {
-    const firstGroup = cardNumbers[0];
-    if (!firstGroup) return 'etc';
-
-    const visaRegex = /^4[0-9]{15}$/;
-    const masterCardRegex = /^(5[1-5][0-9]{14})$/;
-
     const cardNumber = cardNumbers.join('');
 
-    if (visaRegex.test(cardNumber)) {
+    if (cardNumber.length < INPUT_LENGTH.cardNumber * 4) {
+      return 'etc';
+    }
+    if (CARD_MARK_REGEX.visa.test(cardNumber)) {
       return 'visa';
     }
-    if (masterCardRegex.test(cardNumber)) {
+    if (CARD_MARK_REGEX.master.test(cardNumber)) {
       return 'master';
     }
     return 'etc';
   }
 
   return (
-    <div className={styles.cardPreview}>
+    <div className={styles.cardContainer}>
       <div
-        className={styles.cardImg}
-        style={{ backgroundColor: CARD_COLOR.default }}
+        className={styles.cardBox}
+        style={{
+          backgroundColor: cardCompany
+            ? CARD_COLOR[cardCompany]
+            : CARD_COLOR['기본'],
+        }}
       >
-        <div className={styles.cardImgInner}>
+        <div className={styles.cardWrap}>
           <section className={styles.top}>
             <img src={IMAGES.cardChip} alt="card chip" />
             <img
@@ -55,12 +63,12 @@ function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
               alt={CARD_MARK[getCardCompanyMark()].alt}
             />
           </section>
-          <section className={styles.info}>
+          <section className={styles.cardInfo}>
             <div className="card-number">{maskCardNumbers()}</div>
             <div className="period">
               {period.month && period.month.padStart(2, '0')}
-              {period.month && period.year ? '/' : ''}
-              {period.year}
+              {period.month ? '/' : ''}
+              {period.year && period.year.padStart(2, '0')}
             </div>
             <div className={styles.user}>{userName}</div>
           </section>
@@ -70,4 +78,4 @@ function CardPreview({ cardNumbers, period, userName }: CardPreviewProps) {
   );
 }
 
-export default CardPreview;
+export default CardFront;

@@ -6,8 +6,7 @@ interface InputErrorMessageProps {
 
 function InputErrorMessage(props: InputErrorMessageProps) {
   const { errorMessage } = props;
-
-  return <div className={styles.message}>{errorMessage}</div>;
+  return errorMessage && <div className={styles.message}>{errorMessage}</div>;
 }
 
 export default InputErrorMessage;
