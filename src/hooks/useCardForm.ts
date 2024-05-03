@@ -98,7 +98,7 @@ const useCardForm = () => {
     errorMessageCardNumbers: errorMessage.cardNumbers,
     setCardInfo,
     setErrorMessage,
-    focusNextInput: () => focusNextInput(0),
+    focusNextInput,
   });
 
   const { handleCardCompany } = useCardCompany({
