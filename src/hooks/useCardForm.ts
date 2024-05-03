@@ -58,30 +58,28 @@ const useCardForm = () => {
     if (
       isValidCardNumbers &&
       isErroMessageEmpty &&
-      creationStage < CREATION_STAGE.CARD_NUMBERS
-    ) {
-      setCreationStage(CREATION_STAGE.CARD_NUMBERS);
-    } else if (
-      cardInfo.cardCompany !== '' &&
-      creationStage < CREATION_STAGE.CARD_COMPANY
+      creationStage <= CREATION_STAGE.CARD_NUMBERS
     ) {
       setCreationStage(CREATION_STAGE.CARD_COMPANY);
     } else if (
-      isValidExpiration &&
-      isVarExpirationErrorMessagesEmpty &&
-      creationStage < CREATION_STAGE.CARD_EXPIRATION
+      cardInfo.cardCompany !== '' &&
+      creationStage <= CREATION_STAGE.CARD_COMPANY
     ) {
       setCreationStage(CREATION_STAGE.CARD_EXPIRATION);
     } else if (
-      cardInfo.userName !== '' &&
-      creationStage < CREATION_STAGE.CARD_USERNAME
+      isValidExpiration &&
+      isVarExpirationErrorMessagesEmpty &&
+      creationStage <= CREATION_STAGE.CARD_EXPIRATION
     ) {
       setCreationStage(CREATION_STAGE.CARD_USERNAME);
-    } else if (cardInfo.cvc !== '' && creationStage < CREATION_STAGE.CARD_CVC) {
+    } else if (
+      cardInfo.userName !== '' &&
+      creationStage <= CREATION_STAGE.CARD_USERNAME
+    ) {
       setCreationStage(CREATION_STAGE.CARD_CVC);
     } else if (
-      cardInfo.password !== '' &&
-      creationStage < CREATION_STAGE.CARD_PASSWORD
+      cardInfo.cvc !== '' &&
+      creationStage <= CREATION_STAGE.CARD_CVC
     ) {
       setCreationStage(CREATION_STAGE.CARD_PASSWORD);
     }
