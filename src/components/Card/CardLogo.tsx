@@ -4,7 +4,7 @@ import MasterCard from "../../assets/Mastercard.png";
 import { CARD_TYPES } from "../../constants/card";
 
 const Styled = {
-  CardLogoWrapper: styled.img`
+  CardLogoLayout: styled.img`
     width: 36px;
     height: 22px;
     gap: 0px;
@@ -30,8 +30,7 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: string[] }) => {
     }
   }
 
-  if (cardType === Visa || cardType === MasterCard)
-    return <Styled.CardLogoWrapper src={cardType} />;
+  if (cardType === Visa || cardType === MasterCard) return <Styled.CardLogoLayout src={cardType} />;
 };
 
 export default CardLogo;

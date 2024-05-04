@@ -20,7 +20,7 @@ const FormElement = ({
   errorMessage,
 }: {
   labelContent: string;
-  inputs: JSX.Element[];
+  inputs: JSX.Element[] | JSX.Element;
   errorMessage: string;
 }) => {
   return (

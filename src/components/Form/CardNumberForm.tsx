@@ -1,13 +1,20 @@
-import { useState, useEffect } from "react";
 import Input from "./Input";
 import FormElement from "../common/FormElement";
-import { FormProps } from "./Form";
+import useCardNumberForm from "../../hooks/useCardNumberForm";
+import { useState } from "react";
 
-export interface CardFormProps extends FormProps {
+export interface CardFormProps {
   labelContent: string;
   inputCount: number;
   type: string;
   placeholders: string[];
+  onValidation: (isValid: boolean) => void;
+  onFocus: (field: string | null) => void;
+}
+
+interface CardNumberFormProps extends CardFormProps {
+  cardNumbers: string[];
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CardNumberForm = ({
@@ -17,25 +24,18 @@ const CardNumberForm = ({
   placeholders,
   cardNumbers,
   setCardNumbers,
-}: CardFormProps) => {
-  const [, setAllInputValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [inputValidities, setInputValidities] = useState({});
+  onValidation,
+  onFocus,
+}: CardNumberFormProps) => {
+  const { updateInputValidity, isValidCarNumber, setErrorMessage, errorMessage } =
+    useCardNumberForm(onValidation!);
 
-  // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
-  const updateInputValidity = (index: number, isValid: boolean) => {
-    setInputValidities((prevValidities) => ({
-      ...prevValidities,
-      [index]: isValid,
-    }));
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (type: string) => {
+    onFocus(type);
+    setIsFocused(true);
   };
-
-  // NOTE: 모든 입력 필드가 유효한지 검사하는 로직
-  useEffect(() => {
-    const allValid = Object.values(inputValidities).every((isValid) => isValid);
-    setAllInputValid(allValid);
-    setErrorMessage(allValid ? "" : "4자리의 숫자를 입력해주세요.");
-  }, [inputValidities]);
 
   const inputs = Array.from({ length: inputCount }, (_, index) => (
     <Input
@@ -44,15 +44,22 @@ const CardNumberForm = ({
       type={type}
       placeholder={placeholders[index]}
       maxLength={4}
-      data={cardNumbers || []}
-      setData={setCardNumbers || (() => [])}
+      state={cardNumbers || []}
+      setState={setCardNumbers || (() => [])}
       setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
       setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
-      validationRule={(value) => /^[0-9]{4}$/.test(value)}
+      validationRule={(value) => isValidCarNumber(value)}
+      onFocus={() => handleFocus(type)}
     />
   ));
 
-  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
+  return (
+    <FormElement
+      labelContent={labelContent}
+      inputs={inputs}
+      errorMessage={isFocused ? errorMessage : ""}
+    />
+  );
 };
 
 export default CardNumberForm;

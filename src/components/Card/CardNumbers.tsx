@@ -2,7 +2,7 @@ import styled from "styled-components";
 import CardNumber from "./CardNumber";
 
 const Styled = {
-  CardNumbersWrapper: styled.div`
+  CardNumbersLayout: styled.div`
     display: flex;
     justifycontent: flex-start;
     gap: 15px;
@@ -21,12 +21,12 @@ const Styled = {
 
 const CardNumbers = ({ cardNumbers }: { cardNumbers: string[] }) => {
   return (
-    <Styled.CardNumbersWrapper>
+    <Styled.CardNumbersLayout>
       <CardNumber number={cardNumbers[0]} />
       <CardNumber number={cardNumbers[1]} />
       <CardNumber number={Array(cardNumbers[2].length).fill(<Styled.Dot />)} />
       <CardNumber number={Array(cardNumbers[3].length).fill(<Styled.Dot />)} />
-    </Styled.CardNumbersWrapper>
+    </Styled.CardNumbersLayout>
   );
 };
 

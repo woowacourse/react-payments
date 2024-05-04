@@ -1,18 +1,5 @@
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useState } from "react";
-
-interface InputProps {
-  index: number;
-  type: string;
-  placeholder?: string;
-  maxLength: number;
-  data: string[];
-  setData: React.Dispatch<React.SetStateAction<string[]>>;
-  setErrorMessage: (errorMessage: string) => void;
-  setAllInputValid: (isValidInput: boolean) => void;
-  validationRule: (value: string) => boolean;
-  errorMessageText?: string;
-}
 
 const Styled = {
   InputWrapper: styled.input<{ isValidInput: boolean }>`
@@ -31,24 +18,40 @@ const Styled = {
   `,
 };
 
+interface InputProps {
+  index: number;
+  type: string;
+  placeholder?: string;
+  maxLength: number;
+  state: string[];
+  setState: React.Dispatch<React.SetStateAction<string[]>>;
+  setErrorMessage: (errorMessage: string) => void;
+  setAllInputValid: (isValidInput: boolean) => void;
+  validationRule: (value: string) => boolean;
+  errorMessageText?: string;
+  onFocus: (field: string | null) => void;
+}
+
 const Input = ({
   index,
   type,
   placeholder,
   maxLength,
-  data,
-  setData,
+  state,
+  setState,
   setErrorMessage,
   setAllInputValid,
   validationRule,
   errorMessageText,
+  onFocus,
 }: InputProps) => {
   const [isValidInput, setIsValidInput] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.target.value;
 
-    setData((prevData) => {
+    setState((prevData) => {
       const newData = [...prevData];
       newData[index] = currentValue;
       return newData;
@@ -64,6 +67,10 @@ const Input = ({
       setErrorMessage("");
       setIsValidInput(true);
       setAllInputValid(true);
+
+      if (index < state.length - 1 && inputRef.current?.nextSibling instanceof HTMLInputElement) {
+        (inputRef.current.nextSibling as HTMLInputElement).focus();
+      }
     }
   };
 
@@ -75,8 +82,10 @@ const Input = ({
       type={type}
       placeholder={placeholder}
       key={index}
-      value={data[index]}
-    ></Styled.InputWrapper>
+      value={state[index]}
+      ref={inputRef}
+      onFocus={() => onFocus?.(type)}
+    />
   );
 };
 

@@ -14,6 +14,11 @@ export const Default: Story = {
   args: {
     cardNumbers: ["1234", "5678", "9012", "3456"],
     expirationDate: ["12", "25"],
-    userName: ["JOHN DOE"],
+    cardOwner: ["JOHN DOE"],
+    cardCompany:
+      "BC카드 | 신한카드 | 카카오뱅크 | 현대카드 | 우리카드 | 롯데카드 | 하나카드 | 국민카드",
+    cardCVC: ["123"],
+    cardPassword: ["74"],
+    focusedField: "cardCVC",
   },
 };

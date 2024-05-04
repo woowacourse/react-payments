@@ -2,26 +2,25 @@ import { useState } from "react";
 import Input from "./Input";
 import FormElement from "../common/FormElement";
 import { CardFormProps } from "./CardNumberForm";
-import useExpirationDateForm from "../../hooks/useExpirationDateForm";
+import useCardOwnerForm from "../../hooks/useCardOwnerForm";
 
-interface ExpirationDateFormProps extends CardFormProps {
-  expirationDate: string[];
-  setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
+interface CardOwnerFormProps extends CardFormProps {
+  cardOwner: string[];
+  setCardOwner: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const ExpirationDateForm = ({
+const CardOwnerForm = ({
   labelContent,
   inputCount,
   type,
   placeholders,
-  expirationDate,
-  setExpirationDate,
+  cardOwner,
+  setCardOwner,
   onValidation,
   onFocus,
-}: ExpirationDateFormProps) => {
+}: CardOwnerFormProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const { errorMessage, setErrorMessage, validateMonth, validateYear, updateInputValidity } =
-    useExpirationDateForm(onValidation);
+  const { errorMessage, setErrorMessage, updateInputValidity } = useCardOwnerForm(onValidation);
 
   const handleFocus = (type: string) => {
     onFocus(type);
@@ -34,12 +33,12 @@ const ExpirationDateForm = ({
       index={index}
       type={type}
       placeholder={placeholders[index]}
-      maxLength={2}
-      state={expirationDate || []}
-      setState={setExpirationDate || (() => {})}
+      maxLength={30}
+      state={cardOwner || []}
+      setState={setCardOwner || (() => {})}
       setErrorMessage={(errorMessage) => setErrorMessage(errorMessage)}
-      setAllInputValid={(isValid: boolean) => updateInputValidity(index, isValid)}
-      validationRule={(value) => (index === 0 ? validateMonth(value) : validateYear(value))}
+      setAllInputValid={(isValid) => updateInputValidity(index, isValid)}
+      validationRule={(value) => /^[A-Z\s]{1,30}$/.test(value)}
       onFocus={() => handleFocus(type)}
     />
   ));
@@ -53,4 +52,4 @@ const ExpirationDateForm = ({
   );
 };
 
-export default ExpirationDateForm;
+export default CardOwnerForm;

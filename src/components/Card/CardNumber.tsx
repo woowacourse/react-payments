@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Styled = {
-  CardNumberWrapper: styled.span`
+  CardNumberLayout: styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +13,7 @@ const Styled = {
 };
 
 const CardNumber = ({ number }: { number: string | string[] }) => {
-  return <Styled.CardNumberWrapper>{number}</Styled.CardNumberWrapper>;
+  return <Styled.CardNumberLayout>{number}</Styled.CardNumberLayout>;
 };
 
 export default CardNumber;
