@@ -2,7 +2,9 @@ import React from "react";
 import useMultiFormSection from "./useMultiFormSection";
 import useFocusNext from "./useFocusNext";
 import OPTION from "../constants/option";
+import REGEX from "../constants/regex";
 
+// TODO: maxlength props
 interface UseCardNumbersFormSection {
   refs: React.MutableRefObject<HTMLInputElement[]>
   values: string[];
@@ -14,42 +16,32 @@ interface UseCardNumbersFormSection {
 const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete, maxLength = OPTION.cardNumberMaxLength }: UseCardNumbersFormSection) => {
   const { focusNext } = useFocusNext(refs);
 
-  const validateOnChange = (index: number, newValue: string) => {
-    if (!/^\d*$/.test(newValue)) {
-      return {
-        isValid: false,
-        errorMessage: '카드번호는 숫자만 입력이 가능해요.',
-      };
+  const validateOnChange = (newValue: string) => {
+    if (!REGEX.numbers.test(newValue)) {
+      return 'invalidInputType'
     }
     if (newValue.length === maxLength) focusNext();
-    return { isValid: true, errorMessage: '' };
+    return '';
   };
 
-  const validateOnBlur = (index: number) => {
-    return { isValid: true, errorMessage: '' };
+  const validateOnBlur = () => {
+    return '';
   };
 
   const validateOnBlurAll = () => {
-    if (values.join('').length === 0) return { indexList: [], isValid: false, errorMessage: '' }
-    const result: number[] = []
-    values.forEach((value, index) => {
+    if (values.join('').length === 0) return Array.from({ length: values.length }).fill('') as string[]
+    return values.map((value) => {
       if (value.length !== maxLength) {
-        result.push(index)
+
+        return 'notEnoughLength'
       }
-    })
-    if (result.length !== 0) {
-      return {
-        indexList: result,
-        isValid: false,
-        errorMessage: `카드번호는 ${maxLength * values.length}글자로 입력해 주세요.`,
-      };
-    }
-    return { indexList: result, isValid: true, errorMessage: '' };
+
+      return ''
+    });
   }
 
   const {
-    hasErrors,
-    errorMessage,
+    errors,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -64,8 +56,7 @@ const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete,
   });
 
   return {
-    hasErrors,
-    errorMessage,
+    errors,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,

@@ -12,6 +12,13 @@ interface ExpirationDateFormSectionProps {
   dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
+enum CardInputErrorType {
+  NotEnoughLength = 'notEnoughLength',
+  InvalidInputType = 'invalidInputType',
+  InvalidMonth = 'invalidMonth',
+  Expired = 'expired'
+}
+
 const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
   const { cardInfo, dispatchCardInfo } = props
   const refs = useRef(new Array(OPTION.expirationDateInputCount).fill(null));
@@ -24,7 +31,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
     dispatchCardInfo({ type: 'SET_CARD_EXPIRATION_COMPLETED', value: true })
   }
 
-  const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useExpirationDateFormSection(
+  const { errors, onChangeHandler, onBlurHandler, onFocusHandler } = useExpirationDateFormSection(
     {
       refs,
       values: cardInfo.expiration.value,
@@ -33,6 +40,14 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
     }
   )
 
+  const getErrorMessage = (errors: string[]) => {
+    if (errors.some(error => error === CardInputErrorType.InvalidMonth)) return '유효기간 월은 01~12 사이만 입력이 가능해요.'
+    if (errors.some(error => error === CardInputErrorType.NotEnoughLength)) return '유효기간은 MM / YY 형식의 4자리로 입력해 주세요.'
+    if (errors.some(error => error === CardInputErrorType.Expired)) return '만료된 카드입니다.'
+    if (errors.some(error => error === CardInputErrorType.InvalidInputType)) return '유효기간은 숫자만 입력 가능해요.'
+    return ''
+  }
+
   const ExpirationDateForm = (
     <>
       <PaymentsInputField
@@ -40,10 +55,10 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         placeholder="MM"
         maxLength={OPTION.expirationDateMaxLength}
         value={cardInfo.expiration.value[0]}
-        hasError={hasErrors[0]}
+        hasError={errors[0].length !== 0}
         handleValueChange={(e) => onChangeHandler(e, 0)}
         handleOnBlur={() => onBlurHandler(0)}
-        handleOnFocus={() => onFocusHandler(0)}
+        handleOnFocus={() => onFocusHandler()}
         autoFocus={true}
       />
       <PaymentsInputField
@@ -51,10 +66,10 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
         placeholder="YY"
         maxLength={OPTION.expirationDateMaxLength}
         value={cardInfo.expiration.value[1]}
-        hasError={hasErrors[1]}
+        hasError={errors[1].length !== 0}
         handleValueChange={(e) => onChangeHandler(e, 1)}
         handleOnBlur={() => onBlurHandler(1)}
-        handleOnFocus={() => onFocusHandler(1)}
+        handleOnFocus={() => onFocusHandler()}
       />
     </>)
 
@@ -62,7 +77,7 @@ const ExpirationDateFormSection = (props: ExpirationDateFormSectionProps) => {
     <FormSection title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요."
       label="유효기간"
-      errorMessage={errorMessage}
+      errorMessage={getErrorMessage(errors)}
       Children={ExpirationDateForm} />
   );
 };

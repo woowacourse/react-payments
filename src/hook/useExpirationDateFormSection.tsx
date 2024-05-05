@@ -15,60 +15,47 @@ interface UseExpirationDateFormSection {
 const useExpirationDateFormSection = ({ refs, values, updateValues, updateComplete, maxLength = OPTION.expirationDateMaxLength }: UseExpirationDateFormSection) => {
   const { focusNext } = useFocusNext(refs);
 
-  const validateOnChange = (index: number, newValue: string) => {
-    if (!/^\d*$/.test(newValue)) {
-      return {
-        isValid: false,
-        errorMessage: '유효기간은 숫자만 입력이 가능해요.',
-      };
+  const validateOnChange = (newValue: string, index?: number) => {
+    if (!REGEX.numbers.test(newValue)) {
+      return 'invalidInputType';
     }
-    if (index === 0 && !/^$|^(0[1-9]|1[0-2]|0|1)$/.test(newValue))
-      return {
-        isValid: false,
-        errorMessage: '유효기간 월은 01~12 사이만 입력이 가능해요.',
-      };
+    if (index === 0 && !/^$|^(0[1-9]|1[0-2]|0|1)$/.test(newValue)) return 'invalidMonth'
     if (newValue.length === maxLength) focusNext();
-    return { isValid: true, errorMessage: '' };
+    return '';
   };
 
-  const validateOnBlur = (index: number) => {
-    return { isValid: true, errorMessage: '' }
+  const validateOnBlur = () => {
+    return '';
   };
 
-  const validateOnBlurAll = () => {
+  const getIsExpired = () => {
     const nowDate = new Date();
     const year = nowDate.getFullYear().toString().slice(2, 4);
     const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
     const now = Number(year + month);
     const expireDate = Number(values[1] + values[0]);
 
-    const result: number[] = []
-    values.forEach((value, index) => {
-      if (value.length !== maxLength) {
-        result.push(index)
-      }
-    })
-    if (values.join('').length !== values.length * maxLength) {
-      return {
-        indexList: result,
-        isValid: false,
-        errorMessage: `유효기간은 MM / YY 형식의 4자리로 입력해 주세요.`,
-      };
-    }
+    return now - expireDate > 0
+  }
 
-    if (now - expireDate > 0) {
-      return {
-        indexList: [0, 1],
-        isValid: false,
-        errorMessage: `만료된 카드입니다.`,
+  const validateOnBlurAll = () => {
+    if (values.join('').length === 0) return Array.from({ length: values.length }).fill('') as string[]
+    return values.map((value) => {
+      if (value.length !== maxLength) {
+
+        return 'notEnoughLength';
+      }
+      if (getIsExpired()) {
+
+        return 'expired';
       };
-    }
-    return { indexList: result, isValid: true, errorMessage: '' };
+
+      return '';
+    })
   }
 
   const {
-    hasErrors,
-    errorMessage,
+    errors,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -83,8 +70,7 @@ const useExpirationDateFormSection = ({ refs, values, updateValues, updateComple
   });
 
   return {
-    hasErrors,
-    errorMessage,
+    errors,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,

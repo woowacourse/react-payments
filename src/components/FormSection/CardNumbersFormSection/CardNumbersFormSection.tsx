@@ -7,9 +7,15 @@ import useCardNumbersFormSection from '../../../hook/useCardNumbersFormSection';
 import OPTION from '../../../constants/option';
 import FormSection from '../FormSection';
 
+
 interface CardNumbersFormSectionProps {
   cardInfo: CardInfo,
   dispatchCardInfo: React.Dispatch<CardInfoAction>
+}
+
+enum CardInputErrorType {
+  NotEnoughLength = 'notEnoughLength',
+  InvalidInputType = 'invalidInputType'
 }
 
 const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
@@ -25,7 +31,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
     dispatchCardInfo({ type: 'SET_CARD_NUMBERS_COMPLETED', value: true })
   }
 
-  const { hasErrors, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useCardNumbersFormSection(
+  const { errors, onChangeHandler, onBlurHandler, onFocusHandler } = useCardNumbersFormSection(
     {
       refs,
       values: cardInfo.cardNumbers.value,
@@ -33,6 +39,12 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
       updateComplete,
     }
   )
+
+  const getErrorMessage = (errors: string[]) => {
+    if (errors.some(error => error === CardInputErrorType.NotEnoughLength)) return '카드번호는 16글자로 입력해 주세요.'
+    if (errors.some(error => error === CardInputErrorType.InvalidInputType)) return '카드번호는 숫자만 입력 가능해요.'
+    return ''
+  }
 
   const CardNumbersForm = (
     <>
@@ -43,10 +55,10 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
           placeholder="1234"
           maxLength={OPTION.cardNumberMaxLength}
           value={cardInfo.cardNumbers.value[index]}
-          hasError={hasErrors[index]}
+          hasError={errors[index].length !== 0}
           handleValueChange={(e) => onChangeHandler(e, index)}
-          handleOnBlur={() => onBlurHandler(index)}
-          handleOnFocus={() => onFocusHandler(index)}
+          handleOnBlur={() => onBlurHandler()}
+          handleOnFocus={() => onFocusHandler()}
           autoFocus={index === 0}
         />
       ))}
@@ -55,7 +67,7 @@ const CardNumbersFormSection = (props: CardNumbersFormSectionProps) => {
 
   return (
     <FormSection title="결제할 카드 번호를 입력해 주세요"
-      subTitle="본인 명의의 카드만 결제 가능합니다." label="카드번호" errorMessage={errorMessage} Children={CardNumbersForm} />
+      subTitle="본인 명의의 카드만 결제 가능합니다." label="카드번호" errorMessage={getErrorMessage(errors)} Children={CardNumbersForm} />
   );
 };
 
