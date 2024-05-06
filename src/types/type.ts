@@ -1,11 +1,17 @@
 export interface ICardInfo {
-  cardNumbers: [number, number, number, number];
-  cardExpiration: [number, number];
+  cardNumbers: [string, string, string, string];
+  cardCompany: string;
+  cardExpiration: [string, string];
   userName: string;
+  cvc: string;
+  password: string;
 }
 
 export interface IErrorMessage {
   cardNumbers: [string, string, string, string];
+  cardCompany: [string];
   cardExpiration: [string, string];
   userName: [string];
+  cvc: [string];
+  password: [string];
 }

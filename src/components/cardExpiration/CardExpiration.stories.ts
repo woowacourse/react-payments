@@ -16,14 +16,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    month: 0,
-    year: 0,
+    month: '0',
+    year: '0',
   },
 };
 
 export const WithExpirationDate: Story = {
   args: {
-    month: 12,
-    year: 24,
+    month: '12',
+    year: '24',
   },
 };

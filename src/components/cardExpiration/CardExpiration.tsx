@@ -1,13 +1,13 @@
 export interface CardExpirationProps {
-  month: number;
-  year: number;
+  month: string;
+  year: string;
 }
 
 const CardExpiration = ({ month, year }: CardExpirationProps) => {
   return (
     <div>
-      {month !== 0 && <span>{month}/</span>}
-      {year !== 0 && <span>{year}</span>}
+      {month !== '' && <span>{month}/</span>}
+      {year !== '' && <span>{year}</span>}
     </div>
   );
 };

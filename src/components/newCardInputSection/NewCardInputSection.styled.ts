@@ -4,6 +4,8 @@ export const InputSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-left: 31px;
+  margin-right: 31px;
 `;
 
 export const MainText = styled.h1`

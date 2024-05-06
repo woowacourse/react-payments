@@ -1,4 +1,4 @@
-import Input from '../input/Input';
+import Input from '../common/input/Input';
 import { Meta, StoryObj } from '@storybook/react';
 import NewCardInputSection, {
   NewCardInputSectionProps,
