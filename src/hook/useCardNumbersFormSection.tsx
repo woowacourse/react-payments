@@ -1,116 +1,65 @@
-import { useState } from "react"
+import React from "react";
+import useMultiFormSection from "./useMultiFormSection";
+import useFocusNext from "./useFocusNext";
 import OPTION from "../constants/option";
 import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage";
 
-interface UseCardNumbersFormSectionProps {
-  changeCardNumbers: (newNumber: string, index: number) => void
-  value: string[]
+// TODO: maxlength props
+interface UseCardNumbersFormSection {
+  refs: React.MutableRefObject<HTMLInputElement[]>
+  values: string[];
+  updateValues: (values: string[]) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
 
-const initializeInputFieldState = (length: number) => {
-  const obj: InputStates = [];
-  for (let i = 0; i < length; i++) {
-    obj[i] = {
-      hasError: false,
-      hasFocus: i === 0,
-    };
-  }
-  return obj;
-};
+const useCardNumbersFormSection = ({ refs, values, updateValues, updateComplete, maxLength = OPTION.cardNumberMaxLength }: UseCardNumbersFormSection) => {
+  const { focusNext } = useFocusNext(refs);
 
-const useCardNumbersFormSection = ({ changeCardNumbers, value }: UseCardNumbersFormSectionProps) => {
-  const [inputState, setInputState] = useState(initializeInputFieldState(OPTION.cardNumberInputCount));
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = event.target.value;
-
-    if (!REGEX.numbers.test(inputValue)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          hasError: true,
-        }
-      }))
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
-      changeCardNumbers(inputValue.slice(0, - 1), index)
-    } else {
-      resetErrors();
-      changeCardNumbers(inputValue, index)
+  const validateOnChange = (newValue: string) => {
+    if (!REGEX.numbers.test(newValue)) {
+      return 'invalidInputType'
     }
-  }
-
-  const handleOnFocus = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-
-    resetErrors();
+    if (newValue.length === maxLength) focusNext();
+    return '';
   };
 
-  const handleOnBlur = (index: number) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
-
-    if (checkHasNoFocus()) {
-      resetErrors();
-      handleValidate();
-    }
+  const validateOnBlur = () => {
+    return '';
   };
 
-  const checkHasNoFocus = () => {
-    return Object.values(inputState).every((field) => !field.hasFocus);
-  }
+  const validateOnBlurAll = () => {
+    if (values.join('').length === 0) return Array.from({ length: values.length }).fill('') as string[]
+    return values.map((value) => {
+      if (value.length !== maxLength) {
 
-  const handleValidate = () => {
-    if (value.reduce((prev, current) => prev + current, '') === '') return
-
-    let hasAnyError = false;
-
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = value[Number(key)];
-      if (field.length !== OPTION.cardNumberMaxLength) {
-        acc[Number(key)] = { ...acc[Number(key)], hasError: true };
-        hasAnyError = true;
-      } else {
-        acc[Number(key)] = { ...acc[Number(key)], hasError: false };
+        return 'notEnoughLength'
       }
-      return acc;
-    }, []);
 
-    setInputState(newState);
+      return ''
+    });
+  }
 
-    if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.cardNumberOutOfRange);
-    } else {
-      setErrorMessage('');
-    }
+  const {
+    errors,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useMultiFormSection({
+    refs,
+    values,
+    updateValues,
+    updateComplete,
+    validateOnChange,
+    validateOnBlur,
+    validateOnBlurAll,
+  });
+
+  return {
+    errors,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
   };
-
-  const resetErrors = () => {
-    const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
-      const field = inputState[Number(key)];
-      acc[Number(key)] = { ...field, hasError: false };
-      return acc;
-    }, []);
-
-    setInputState(newState);
-
-    setErrorMessage('');
-  };
-
-  return [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] as const
-}
-
+};
 export default useCardNumbersFormSection;

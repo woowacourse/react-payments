@@ -7,6 +7,7 @@ export const MainContainer = styled.div`
   justify-content: center;
   padding: 0 32px;
   gap: 48px;
+
   width: 100%;
   max-width: 375px;
   height: fit-content;

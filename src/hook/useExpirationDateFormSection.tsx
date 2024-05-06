@@ -1,135 +1,79 @@
-import { useState } from "react";
-import OPTION from "../constants/option";
+import React from "react";
+import useMultiFormSection from "./useMultiFormSection";
+import useFocusNext from "./useFocusNext";
 import REGEX from "../constants/regex";
-import ERROR_MESSAGE from "../constants/errorMessage";
+import OPTION from "../constants/option";
 
-interface UseExpirationFormSectionProps {
-  changeExpiration: (expiration: Expiration) => void;
-  expiration: Expiration;
+interface UseExpirationDateFormSection {
+  refs: React.MutableRefObject<HTMLInputElement[]>
+  values: string[];
+  updateValues: (values: string[]) => void;
+  updateComplete: () => void;
+  maxLength?: number
 }
 
-interface ExpirationInputState {
-  [key: string]: InputState;
-  month: InputState;
-  year: InputState;
-}
+const useExpirationDateFormSection = ({ refs, values, updateValues, updateComplete, maxLength = OPTION.expirationDateMaxLength }: UseExpirationDateFormSection) => {
+  const { focusNext } = useFocusNext(refs);
 
-type ExpirationInputType = 'month' | 'year'
-
-const nowDate = new Date();
-const year = nowDate.getFullYear().toString().slice(2, 4);
-const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
-const now = year + month;
-
-const useExpirationDateFormSection = ({ changeExpiration, expiration }: UseExpirationFormSectionProps) => {
-  const [inputState, setInputState] = useState<ExpirationInputState>({ month: { hasError: false, hasFocus: false }, year: { hasError: false, hasFocus: false } });
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>, index: ExpirationInputType) => {
-    const inputValue = event.target.value;
-
-    if (!REGEX.numbers.test(inputValue)) {
-      setInputState((prevState) => ({
-        ...prevState,
-        [index]: {
-          ...prevState[index],
-          hasError: true,
-        }
-      }))
-      setErrorMessage(ERROR_MESSAGE.onlyNumber);
-      changeExpiration({ ...expiration, [index]: inputValue.slice(0, -1) })
-    } else {
-      changeExpiration({ ...expiration, [index]: inputValue })
+  const validateOnChange = (newValue: string, index?: number) => {
+    if (!REGEX.numbers.test(newValue)) {
+      return 'invalidInputType';
     }
+    if (index === 0 && !/^$|^(0[1-9]|1[0-2]|0|1)$/.test(newValue)) return 'invalidMonth'
+    if (newValue.length === maxLength) focusNext();
+    return '';
+  };
+
+  const validateOnBlur = () => {
+    return '';
+  };
+
+  const getIsExpired = () => {
+    const nowDate = new Date();
+    const year = nowDate.getFullYear().toString().slice(2, 4);
+    const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
+    const now = Number(year + month);
+    const expireDate = Number(values[1] + values[0]);
+
+    return now - expireDate > 0
   }
 
+  const validateOnBlurAll = () => {
+    if (values.join('').length === 0) return Array.from({ length: values.length }).fill('') as string[]
+    return values.map((value) => {
+      if (value.length !== maxLength) {
 
-  const handleOnFocus = (index: ExpirationInputType) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: true,
-      },
-    }));
-    resetErrors();
-  };
+        return 'notEnoughLength';
+      }
+      if (getIsExpired()) {
 
-  const handleOnBlur = (index: ExpirationInputType) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [index]: {
-        ...prevState[index],
-        hasFocus: false,
-      },
-    }));
+        return 'expired';
+      };
 
-    if (index === 'month') {
-      formatMonth();
-    }
-
-    if (checkHasNoFocus()) {
-      resetErrors();
-      handleValidate();
-    }
-  };
-
-  const formatMonth = () => {
-    if (expiration.month.length === 0) return
-    if (REGEX.oneToNine.test(expiration.month)) {
-      changeExpiration({ month: '0' + expiration.month, year: expiration.year })
-    } else if (REGEX.zero.test(expiration.month)) {
-      changeExpiration({ month: OPTION.minMonth, year: expiration.year })
-    } else if (
-      !REGEX.month.test(expiration.month)
-    ) {
-      changeExpiration({ month: OPTION.maxMonth, year: expiration.year })
-    };
-  };
-
-  const checkHasNoFocus = () => {
-    return Object.values(inputState).every((field) => !field.hasFocus);
+      return '';
+    })
   }
 
-  const validateExpired = () => {
-    const expireDate = +(expiration.year + expiration.month);
-    const nowDate = +now;
+  const {
+    errors,
+    onChangeHandler,
+    onFocusHandler,
+    onBlurHandler,
+  } = useMultiFormSection({
+    refs,
+    values,
+    updateValues,
+    updateComplete,
+    validateOnChange,
+    validateOnBlur,
+    validateOnBlurAll,
+  });
 
-    if (nowDate - expireDate > 0) {
-      setInputState({ month: { ...inputState.month, hasError: true }, year: { ...inputState.month, hasError: true } });
-      setErrorMessage(ERROR_MESSAGE.expiredCard);
-    } else {
-      setErrorMessage('');
-    }
+  return {
+    errors,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
   };
-
-  const handleValidate = () => {
-    if (expiration.month.length + expiration.year.length === 0) return
-    let hasAnyError = false;
-
-    if (expiration.month.length !== OPTION.expirationDateMaxLength) {
-      setInputState({ ...inputState, month: { ...inputState[month], hasError: true } });
-      hasAnyError = true;
-    }
-    if (expiration.year.length !== OPTION.expirationDateMaxLength) {
-      setInputState({ ...inputState, year: { ...inputState[year], hasError: true } });
-      hasAnyError = true;
-    }
-
-    if (hasAnyError) {
-      setErrorMessage(ERROR_MESSAGE.expiryFormat);
-    } else {
-      validateExpired();
-    }
-  };
-
-  const resetErrors = () => {
-    setInputState({ month: { ...inputState.month, hasError: false }, year: { ...inputState.month, hasError: false } });
-    setErrorMessage('');
-  };
-
-
-  return [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] as const;
 };
-
 export default useExpirationDateFormSection;

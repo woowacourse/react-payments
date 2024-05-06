@@ -1,46 +1,59 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 
-import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
+import FormSection from '../FormSection';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
+
+import useNameFormSection from '../../../hook/useNameFormSection';
 
 import OPTION from '../../../constants/option';
 
-import * as Styled from '../FormSection.styled';
-import useNameFormSection from '../../../hook/useNameFormSection';
-
-const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
-    text-transform: uppercase;
-  `;
-
 interface NameFormSectionProps {
-  changeName: (name: string) => void;
-  name: string;
+  cardInfo: CardInfo
+  dispatchCardInfo: React.Dispatch<CardInfoAction>
 }
 
-const NameFormSection = ({ changeName, name }: NameFormSectionProps) => {
+const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
+text-transform: uppercase`
 
-  const [inputState, onChange, errorMessage, handleOnFocus, handleOnBlur] = useNameFormSection({ changeName })
+const NameFormSection = (props: NameFormSectionProps) => {
+  const { cardInfo, dispatchCardInfo } = props
+  const ref = useRef<HTMLInputElement>(null) as React.MutableRefObject<HTMLInputElement>
+
+  const updateValue = (name: string) => {
+    dispatchCardInfo({ type: 'SET_CARD_NAME_VALUE', value: name })
+  }
+
+  const updateComplete = () => {
+    dispatchCardInfo({ type: 'SET_CARD_NAME_COMPLETED', value: true })
+  }
+
+  const { errorMessage,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler, } = useNameFormSection({
+      ref,
+      value: cardInfo.name.value,
+      updateValue,
+      updateComplete,
+    })
+
+  const NameForm = (
+    <PaymentsInputFieldUppercase
+      ref={ref}
+      className="name-form-section"
+      placeholder="FAMILY / GIVEN"
+      maxLength={OPTION.nameMaxLength}
+      value={cardInfo.name.value}
+      hasError={errorMessage.length !== 0}
+      handleValueChange={onChangeHandler}
+      handleOnBlur={onBlurHandler}
+      handleOnFocus={onFocusHandler}
+      autoFocus={true}
+    />)
 
   return (
-    <Styled.FormSection>
-      <PaymentsFormTitle title="카드 소유자 이름을 입력해 주세요" />
-      <Styled.InputForm>
-        <Styled.Label>소유자 이름</Styled.Label>
-        <Styled.InputFieldContainer className="input-field-container">
-          <PaymentsInputFieldUppercase
-            className="name-form-section"
-            placeholder="FAMILY / GIVEN"
-            maxLength={OPTION.nameMaxLength}
-            value={name}
-            hasError={inputState.errorMessage.length !== 0}
-            handleValueChange={(e) => onChange(e)}
-            handleOnFocus={handleOnFocus}
-            handleOnBlur={handleOnBlur}
-          />
-        </Styled.InputFieldContainer>
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
-      </Styled.InputForm>
-    </Styled.FormSection>
+    <FormSection title="카드 소유자 이름을 입력해 주세요" label="소유자 이름" errorMessage={errorMessage} Children={NameForm} />
   );
 };
 

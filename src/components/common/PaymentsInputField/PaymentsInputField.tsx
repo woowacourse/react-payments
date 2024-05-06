@@ -1,6 +1,21 @@
+import { forwardRef } from "react";
 import { Input } from "./PaymentsInputField.styled";
 
-const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
+interface PaymentsInputFieldProps {
+  className?: string;
+  placeholder?: string;
+  maxLength?: number;
+  hasError?: boolean;
+  value?: string;
+  handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: number;
+  autoFocus?: boolean;
+  type?: string
+}
+
+const PaymentsInputField = forwardRef<HTMLInputElement, PaymentsInputFieldProps>((props, ref) => {
   const {
     placeholder,
     maxLength,
@@ -11,10 +26,19 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
     handleOnFocus,
     className,
     width,
+    autoFocus,
+    type,
   } = props;
+
+  const handleKeyDownEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur()
+    }
+  }
 
   return (
     <Input
+      ref={ref}
       className={className}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
@@ -24,8 +48,11 @@ const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
       value={value}
       onChange={handleValueChange}
       width={width}
+      autoFocus={autoFocus}
+      onKeyDown={(e) => handleKeyDownEnter(e)}
+      type={type}
     />
   );
-};
+});
 
 export default PaymentsInputField;

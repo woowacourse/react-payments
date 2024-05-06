@@ -1,4 +1,8 @@
+import { startsWithNumberRegex } from '../util/startsWithNumberRegex';
+
 const REGEX = {
+  masterCard: startsWithNumberRegex(51, 55),
+  visaCard: startsWithNumberRegex(4),
   numbers: /^\d*$/,
   allNumbers: /\d/gi,
   oneToNine: /^[1-9]$/,
