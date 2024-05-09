@@ -3,13 +3,15 @@ import { InputType } from '../types/input';
 const INPUT_TYPE_CATEGORIES: Record<string, InputType> = {
   CARD_NUMBER: {
     inputLabel: '카드번호',
-    inputInfo: Array.from({ length: 4 }, (_, index) => ({
-      property: `cardNumber${index + 1}`,
-      validateType: 'cardNumber',
-      maxLength: 4,
-      minLength: 4,
-      placeHolder: '1234',
-    })),
+    inputInfo: [
+      {
+        property: `cardNumbers`,
+        validateType: 'cardNumbers',
+        maxLength: 16,
+        minLength: 14,
+        placeHolder: '1234',
+      },
+    ],
   },
   EXPIRY_DATE: {
     inputLabel: '유효기간',

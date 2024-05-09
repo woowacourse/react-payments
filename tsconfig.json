@@ -18,8 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "esModuleInterop": true
   },
-  "include": ["src/*"],
+  "include": ["src/**/*", "src/types/svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

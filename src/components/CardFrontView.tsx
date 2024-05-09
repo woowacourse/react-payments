@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
-import { SECRET_NUMBER, SLASH } from '../constants/system';
-import { isMasterCard, isVisaCard } from '../utils/checkCardType';
+import AMEX from '../assets/image/amex.png';
+import DINERS from '../assets/image/diners.png';
+import UNIONPAY from '../assets/image/unionpay.png';
+import { SLASH } from '../constants/system';
 import { CardContainer } from '../style/container.style';
 import { formatDate } from '../utils/formatDate';
 import { useMemo } from 'react';
@@ -14,45 +16,31 @@ interface Props {
 }
 
 export default function CardFrontView({ cardInfo }: Props) {
-  const { cardNumbers, expiryDate, userName, cardCompany } = cardInfo;
+  const { cardBrand, cardNumbers, expiryDate, userName } = cardInfo;
 
-  const getCardType = (cardNumber: string) => {
-    const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
-
-    if (isVisaCard(cardBrandNumber)) return 'visa';
-    if (isMasterCard(cardBrandNumber)) return 'master';
-  };
-
-  const getCardImage = (cardNumber: string) => {
-    const cardType = getCardType(cardNumber);
-
-    if (cardType === 'visa') return Visa;
-    if (cardType === 'master') return Master;
+  const getCardImage = (cardBrand: string) => {
+    if (cardBrand === 'VISA') return Visa;
+    if (cardBrand === 'MASTER') return Master;
+    if (cardBrand === 'AMEX') return AMEX;
+    if (cardBrand === 'DINERS') return DINERS;
+    if (cardBrand === 'UNIONPAY') return UNIONPAY;
+    else return '';
   };
 
   const cardImgSrc = useMemo(() => {
-    if (cardNumbers.cardNumber1.length >= 2) {
-      return getCardImage(cardNumbers.cardNumber1);
+    if (cardBrand) {
+      return getCardImage(cardBrand);
     }
-  }, [cardNumbers.cardNumber1]);
+  }, [cardBrand]);
 
   return (
-    <CardFrontContainer color={cardCompany.color}>
+    <CardFrontContainer>
       <ImgBox>
         <CardImg src={CardChip} />
         {cardImgSrc && <CardImg src={cardImgSrc} />}
       </ImgBox>
 
-      <CardNumbers>
-        <CardNumber>{cardNumbers.cardNumber1}</CardNumber>
-        <CardNumber>{cardNumbers.cardNumber2}</CardNumber>
-        <SecretCardNumber>
-          {SECRET_NUMBER.repeat(cardNumbers.cardNumber3.length)}
-        </SecretCardNumber>
-        <SecretCardNumber>
-          {SECRET_NUMBER.repeat(cardNumbers.cardNumber4.length)}
-        </SecretCardNumber>
-      </CardNumbers>
+      <CardNumbers>{cardNumbers}</CardNumbers>
       <TextBox>
         {formatDate(expiryDate.month)}
         {expiryDate.year.length > 0 ? SLASH : ''}
@@ -91,15 +79,5 @@ const CardNumbers = styled(TextBox)`
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
-`;
-
-const CardNumber = styled.div`
-  width: 100px;
   letter-spacing: 3px;
-`;
-
-const SecretCardNumber = styled.div`
-  width: 100px;
-  font-size: 11px;
-  letter-spacing: 0px;
 `;
