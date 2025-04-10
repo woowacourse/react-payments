@@ -1,10 +1,16 @@
 import "./App.css";
+import CardFormPage from "./common/CardFormPage";
+import styled from "styled-components";
+
+const BodyDiv = styled.div`
+  padding: 200px;
+`;
 
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <BodyDiv>
+      <CardFormPage />
+    </BodyDiv>
   );
 }
 
