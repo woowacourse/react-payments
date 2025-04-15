@@ -20,10 +20,6 @@ const InitialCardNumber: CardNumbers = {
   fourthNumber: '',
 };
 
-const isValidCardNumbers = (input: string) => {
-  return !isNaN(Number(input));
-};
-
 const isError = {
   firstNumber: false,
   secondNumber: false,
@@ -37,6 +33,7 @@ type UseCardNumbersOptions = {
     target: CardNumbersKeys
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError: typeof isError;
+  errorMessage: string;
 };
 
 const useCardNumbers = (): UseCardNumbersOptions => {
@@ -47,6 +44,16 @@ const useCardNumbers = (): UseCardNumbersOptions => {
     thirdNumber: false,
     fourthNumber: false,
   });
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const isValidCardNumbers = (input: string) => {
+    if (isNaN(Number(input))) {
+      setErrorMessage('숫자만 입력 가능합니다');
+      return false;
+    }
+
+    return true;
+  };
 
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
@@ -54,14 +61,18 @@ const useCardNumbers = (): UseCardNumbersOptions => {
       const isValid = isValidCardNumbers(event.target.value);
       if (isValid) {
         setIsError({ ...isError, [target]: false });
+        setErrorMessage('');
         setCardNumbers({ ...cardNumbers, [target]: event.target.value });
       } else {
         setIsError({ ...isError, [target]: true });
       }
-
-      console.log(cardNumbers);
     };
 
-  return { cardNumbers, setCardNumbers: handleCardNumbersChange, isError };
+  return {
+    cardNumbers,
+    setCardNumbers: handleCardNumbersChange,
+    isError,
+    errorMessage,
+  };
 };
 export default useCardNumbers;
