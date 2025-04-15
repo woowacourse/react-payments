@@ -1,15 +1,26 @@
 import styled from 'styled-components';
-import './App.css';
 
-const Test = styled.div`
-  background-color: #000000;
+const PaymentsLayout = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PaymentsContainer = styled.div`
+  width: 376px;
+  height: 100%;
+  background-color: white;
+  border: 1px solid lightgray;
 `;
 
 function App() {
   return (
-    <Test>
-      <h1>React Payments</h1>
-    </Test>
+    <PaymentsLayout>
+      <PaymentsContainer>
+        <h1>React Payments</h1>
+      </PaymentsContainer>
+    </PaymentsLayout>
   );
 }
 
