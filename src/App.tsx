@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CardPreviw from './CardPreviw';
+import CardPreview from './CardPreview';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
@@ -24,7 +24,7 @@ function App() {
   return (
     <PaymentsLayout>
       <PaymentsContainer>
-        <CardPreviw />
+        <CardPreview />
       </PaymentsContainer>
     </PaymentsLayout>
   );
