@@ -1,10 +1,12 @@
+import InputContainer from "../InputContainer/InputContainer";
+
 const CVCInput = () => {
     return (
-        <div>
+        <InputContainer title="CVC 번호를 입력해 주세요">
             <label>CVC</label>
             <input name="cvc" placeholder="123"/>
             <p>helper text</p>
-        </div>
+        </InputContainer>
     );
 }
 
