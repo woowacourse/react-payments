@@ -22,6 +22,6 @@
 ### 컴포넌트
 - [ ] CardPreview
 - [x] InputContainer
-- [ ] CardNumbersInput
+- [x] CardNumbersInput
 - [ ] CardExpiryInput
 - [ ] CVCInput

@@ -1,15 +1,16 @@
 import "./App.css";
 import InputContainer from "./components/InputContainer/InputContainer";
+import CardNumbersInput from "./components/CardNumbersInput/CardNumbersInput";
 
 function App() {
+
   return (
     <>
-      <h1>React Payments</h1>
-      <section>
-      <InputContainer title="임시 타이틀" subTitle="임시 서브 타이틀">
-        children 
+      <form>
+      <InputContainer title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
+        <CardNumbersInput /> 
       </InputContainer>
-      </section>
+      </form>
     </>
   );
 }
