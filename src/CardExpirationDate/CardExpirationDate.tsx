@@ -22,10 +22,12 @@ export default function CardExpirationDate({
         <InputNumber
           onChange={(value) => handleChange(value, 0)}
           placeholder="MM"
+          maxLength={2}
         />
         <InputNumber
           onChange={(value) => handleChange(value, 1)}
           placeholder="YY"
+          maxLength={2}
         />
       </div>
     </section>

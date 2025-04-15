@@ -1,11 +1,11 @@
-import "./InputDescription.css";
+import styles from "./InputDescription.module.css";
 interface Props {
   inputValue: string;
 }
 
 export default function InputDescription({ inputValue }: Props) {
   return (
-    <div className="input-description">
+    <div className={styles["input-description"]}>
       <p>{inputValue}</p>
     </div>
   );

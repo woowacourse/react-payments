@@ -1,17 +1,19 @@
-import "./InputNumber.css";
+import styles from "./InputNumber.module.css";
 
 type InputNumberProps = {
   onChange: (value: string) => void;
   placeholder?: string;
+  maxLength?: number;
 };
 
 export default function InputNumber({
   onChange,
   placeholder = "1234",
+  maxLength = 4,
 }: InputNumberProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value.length <= 4) {
+    if (value.length <= maxLength) {
       onChange(value);
     }
   };
@@ -20,9 +22,9 @@ export default function InputNumber({
 
   return (
     <input
-      className="input-number"
+      className={styles["input-number"]}
       placeholder={placeholder}
-      maxLength={4}
+      maxLength={maxLength}
       onChange={handleInputChange}
     />
   );
