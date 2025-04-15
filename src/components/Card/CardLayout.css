@@ -1,0 +1,17 @@
+.card-layout {
+  width: 212px;
+  height: 132px;
+  background-color: var(--card-background);
+  border-radius: 4px;
+  position: relative;
+}
+
+.card-chip {
+  width: 36px;
+  height: 22px;
+  background-color: var(--card-chip);
+  border-radius: 4px;
+  position: absolute;
+  top: 8px;
+  left: 12px;
+}
