@@ -1,10 +1,19 @@
 import styled from '@emotion/styled';
 
-const Preview: React.FC = () => {
+interface PreviewProps {
+  cardNumbers: string[];
+}
+
+const Preview: React.FC<PreviewProps> = ({ cardNumbers }) => {
   return (
     <PreviewContainer>
       <CardFrame>
         <ICChip></ICChip>
+        <CardNumberArea>
+          {cardNumbers.map((number, index) => (
+            <CardNumber key={index}>{number}</CardNumber>
+          ))}
+        </CardNumberArea>
       </CardFrame>
     </PreviewContainer>
   );
@@ -42,4 +51,26 @@ const ICChip = styled.div`
   position: absolute;
   top: 8px;
   left: 12px;
+`;
+
+const CardNumberArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  position: absolute;
+  top: 44px;
+`;
+
+const CardNumber = styled.span`
+  width: 36px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 16%;
+  vertical-align: middle;
+  color: #ffffff;
 `;

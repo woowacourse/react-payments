@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import CardNumbers from './components/CardNumbers';
 import ExpirationPeriod from './components/ExpirationPeriod';
@@ -7,10 +7,12 @@ import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
 
 const App: React.FC = () => {
+  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+
   return (
     <Main>
-      <Preview />
-      <CardNumbers />
+      <Preview cardNumbers={cardNumbers} />
+      <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       <ExpirationPeriod />
       <CVCNumbers />
     </Main>
