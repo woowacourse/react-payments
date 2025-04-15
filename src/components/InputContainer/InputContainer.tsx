@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './InputContainer.module.css'
 
 type propsType = {
     children: React.ReactNode;
@@ -8,9 +9,9 @@ type propsType = {
 
 const InputContainer = ({children, title, subTitle}:propsType) => {
   return (
-    <div>
-      <h2>{title}</h2>
-      <h4>{subTitle}</h4>
+    <div className={styles.inputContainer}>
+      <h2 className={styles.inputTitle}>{title}</h2>
+      <p className={styles.inputSubTitle}>{subTitle}</p>
       {children}
     </div>
   );
