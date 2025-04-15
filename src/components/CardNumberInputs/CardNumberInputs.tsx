@@ -19,7 +19,7 @@ function CardNumberInputs({
     third.isError,
     fourth.isError
   );
-  console.log(first, second, third, fourth);
+
   return (
     <div className={styles.container}>
       <Label htmlFor="card-number-input">카드 번호</Label>

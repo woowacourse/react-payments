@@ -17,7 +17,8 @@ const useControlledCardNumber = () => {
         return;
       }
 
-      const isValid = isNaN(Number(value)) || value.length !== 4;
+      const isValidLength = value.length === 0 || value.length === 4;
+      const isValid = isNaN(Number(value)) || !isValidLength;
       setCardNumberState((prevState) => ({
         ...prevState,
         [key]: {
