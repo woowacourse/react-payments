@@ -6,7 +6,7 @@ export type Props = {
   color: string;
 } & PropsWithChildren;
 
-export const Text = ({ children, variant, color }: Props) => {
+export const Text = ({ variant, color, children }: Props) => {
   return (
     <StyledTextContainer variant={variant} color={color}>
       {children}

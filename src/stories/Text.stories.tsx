@@ -18,7 +18,7 @@ export const Default: Story = {
   },
   argTypes: {
     variant: {
-      control: { type: 'radio' },
+      control: { type: 'select' },
       options: ['Title', 'Body', 'Caption'],
     },
     color: {
