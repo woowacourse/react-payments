@@ -1,9 +1,14 @@
-import "./App.css";
+import styled from "styled-components";
+import "./style.css";
+
+const H1 = styled.h1`
+  color: var(--color-yellow);
+`;
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <H1>안녕하세요</H1>
     </>
   );
 }
