@@ -1,11 +1,11 @@
 import { DescriptionCSS } from "./Description.styled";
 
 export interface DescriptionProps {
-  description: string;
+  description: string | null;
 }
 
 function Description({ description }: DescriptionProps) {
-  return <DescriptionCSS>{description}</DescriptionCSS>;
+  return description !== null && <DescriptionCSS>{description}</DescriptionCSS>;
 }
 
 export default Description;
