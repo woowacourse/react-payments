@@ -12,10 +12,10 @@
 
 **컴포넌트**
 
-- [ ] input
-- [ ] text
-- [ ] image
-- [ ] layout
-    - [ ] app layout
-    - [ ] input layout
-- [ ] flex
+- [x] Input
+- [x] Text
+- [x] Card
+- [x] Layout
+    - [x] AppLayout
+    - [x] InputLayout
+- [ ] Flex
