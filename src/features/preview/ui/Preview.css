@@ -1,0 +1,21 @@
+.card-background {
+  background-color: #333333;
+  width: 212px;
+  height: 132px;
+  padding: 8px 12px;
+  color: #333333;
+  border-radius: 4px;
+}
+.payment-card-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.payment-card {
+  width: 36px;
+  height: 22px;
+}
+.payment-sim {
+  background-color: #ddcd78;
+  border-radius: 4px;
+}
