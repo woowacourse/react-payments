@@ -8,7 +8,7 @@ export default function CardCvcNumber() {
     <section className={styles["card-cvc"]}>
       <InputTitle inputValue={"CVC 번호를"} />
       <InputSubtitle inputValue={"CVC"} />
-      <InputNumber />
+      <InputNumber onChange={() => {}} placeholder="123" />
     </section>
   );
 }

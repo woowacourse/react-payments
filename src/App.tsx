@@ -7,6 +7,8 @@ import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+  const [cardExpirationDate, setCardExpirationDate] = useState(["", ""]);
+  const [cardCvcNumber, setCardCvcNumber] = useState([""]);
 
   const handleCardNumber = (value: string, index: number) => {
     const newCardNumbers = [...cardNumbers];
@@ -15,12 +17,24 @@ function App() {
     console.log(newCardNumbers.join(" - "));
   };
 
-  return (
+  const handleCardExpirationDate = (value: string, index: number) => {
+    const newCardExpirationDate = [...cardExpirationDate];
+    newCardExpirationDate[index] = value;
+    setCardExpirationDate(newCardExpirationDate);
+    console.log(newCardExpirationDate);
+  };
+
+const handleCardCvcNumber = 
+
+return (
     <div className="App">
-      <PreviewCardLayout cardNumbers={cardNumbers} />
+      <PreviewCardLayout
+        cardNumbers={cardNumbers}
+        cardExpirationDate={cardExpirationDate}
+      />
       <div className="card-input">
         <CardNumber handleChange={handleCardNumber} />
-        <CardExpirationDate />
+        <CardExpirationDate handleChange={handleCardExpirationDate} />
         <CardCvcNumber />
       </div>
     </div>

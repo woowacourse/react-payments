@@ -4,7 +4,13 @@ import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
 import InputTitle from "../components/InputTitle/InputTitle";
 import styles from "./CardExpirationDate.module.css";
 
-export default function CardExpirationDate() {
+interface CardExpirationDateProps {
+  handleChange: (value: string, index: number) => void;
+}
+
+export default function CardExpirationDate({
+  handleChange,
+}: CardExpirationDateProps) {
   return (
     <section className="card-expiration-date">
       <InputTitle inputValue={"유효 기간을"} />
@@ -13,8 +19,14 @@ export default function CardExpirationDate() {
       />
       <InputSubtitle inputValue={"유효기간"} />
       <div className={styles["card-number__input"]}>
-        <InputNumber />
-        <InputNumber />
+        <InputNumber
+          onChange={(value) => handleChange(value, 0)}
+          placeholder="MM"
+        />
+        <InputNumber
+          onChange={(value) => handleChange(value, 1)}
+          placeholder="YY"
+        />
       </div>
     </section>
   );

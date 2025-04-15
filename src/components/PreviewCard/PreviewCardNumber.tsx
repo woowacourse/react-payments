@@ -2,14 +2,15 @@ import styles from "./PreviewCardNumber.module.css";
 
 interface PreviewCardNumberProps {
   cardNumbers: string[];
+  cardExpirationDate: string[];
 }
 
 export default function PreviewCardNumber({
   cardNumbers,
+  cardExpirationDate,
 }: PreviewCardNumberProps) {
-  // TODO : props로 변경
-  const year = "23";
-  const month = "12";
+  const expiration = `${cardExpirationDate[1]}/${cardExpirationDate[0]}`;
+
   return (
     <div className={styles["card-layout-number-container"]}>
       <div className={styles["card-layout-number-wrapper"]}>
@@ -23,7 +24,7 @@ export default function PreviewCardNumber({
         </div>
       </div>
       <div className={styles["card-layout-expiration-number"]}>
-        {year}/{month}
+        {expiration}
       </div>
     </div>
   );
