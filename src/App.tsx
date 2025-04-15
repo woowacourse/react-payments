@@ -2,11 +2,13 @@ import './App.css';
 import React from 'react';
 import styled from '@emotion/styled';
 import CardNumbers from './components/CardNumbers';
+import ExpirationPeriod from './components/ExpirationPeriod';
 
 const App: React.FC = () => {
   return (
     <Main>
       <CardNumbers />
+      <ExpirationPeriod />
     </Main>
   );
 };
@@ -22,4 +24,5 @@ const Main = styled.div`
   width: 376px;
   height: 100dvh;
   background-color: #f9f9f9;
+  gap: 24px;
 `;

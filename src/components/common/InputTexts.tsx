@@ -7,7 +7,7 @@ interface InputTextsProps {
 
 const InputTexts: React.FC<InputTextsProps> = ({ label, placeholder }) => {
   return (
-    <div>
+    <Width100>
       <Label>{label}</Label>
       <Row>
         {placeholder.map((text, index) => (
@@ -19,11 +19,15 @@ const InputTexts: React.FC<InputTextsProps> = ({ label, placeholder }) => {
           />
         ))}
       </Row>
-    </div>
+    </Width100>
   );
 };
 
 export default InputTexts;
+
+const Width100 = styled.div`
+  width: 100%;
+`;
 
 const Label = styled.div`
   font-weight: 500;
@@ -37,10 +41,9 @@ const Label = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   margin-bottom: 8px;
-  width: 100%;
+  min-width: 100%;
   gap: 10px;
 `;
 
