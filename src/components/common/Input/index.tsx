@@ -6,7 +6,7 @@ export type Props = {
   /**
    * 입력 상태 타입을 나타냅니다.
    */
-  value: string | null;
+  value?: number;
   /**
    * 입력 전 보여줄 임시 문구입니다.
    */
@@ -18,11 +18,11 @@ export type Props = {
 } & ComponentProps<'input'>;
 
 export const Input = ({
-  value,
+  value = 0,
   type = 'text',
   onChange,
-  disabled = true,
-  minLength = 0,
+  disabled = false,
+  minLength = 1,
   maxLength = 4,
   placeholder,
   isValid = false,

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: '',
+    value: 0,
     disabled: true,
     minLength: 0,
     maxLength: 10,
@@ -27,11 +27,11 @@ export const Default: Story = {
   },
   render: (args) => {
     // TODO : useInput 커스텀 훅
-    const [value, setValue] = useState<string>(args.value);
+    const [value, setValue] = useState<number>(args.value ?? 0);
     return (
       <Input
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValue(Number(e.target.value))}
         disabled={args.disabled}
         minLength={args.minLength}
         maxLength={args.maxLength}
