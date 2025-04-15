@@ -1,4 +1,4 @@
-import style from '../css/Input.module.css';
+import style from '../css/input.module.css';
 
 type InputProps = {
   value: number | '';

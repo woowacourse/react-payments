@@ -1,4 +1,5 @@
 import useCardNumbers from '../hooks/useCardNumbers';
+import ErrorMessage from './ErrorMessage';
 import Input from './Input';
 
 const CardNumbersInput = () => {
@@ -30,7 +31,7 @@ const CardNumbersInput = () => {
         onChange={setCardNumbers('fourthNumber')}
         isError={isError.fourthNumber}
       ></Input>
-      <p>{errorMessage}</p>
+      <ErrorMessage message={errorMessage} />
     </>
   );
 };
