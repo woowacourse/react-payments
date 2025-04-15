@@ -6,15 +6,24 @@ export interface InputProps {
   name: string;
   id?: string;
   placeholder?: string;
+  maxLength?: number;
 }
 
-function Input({ type, onChange, name, id, placeholder }: InputProps) {
+function Input({
+  type,
+  onChange,
+  name,
+  id,
+  placeholder,
+  maxLength,
+}: InputProps) {
   return (
     <input
       type={type}
       name={name}
       id={id}
       placeholder={placeholder}
+      maxLength={maxLength}
       onChange={onChange}
       className={`${styles.input} tx-md`}
     />
