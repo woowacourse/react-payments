@@ -53,11 +53,6 @@ export const cardContent = css`
 `;
 
 export const cardContentText = css`
-  color: #fff;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: 2.24px;
+  color: ${theme.color.white};
+  ${theme.font.card.number}
 `;

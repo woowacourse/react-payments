@@ -6,6 +6,18 @@ const theme = {
     cardBlack: '#333333',
     gold: '#DDCD78',
   },
+  font: {
+    card: {
+      number: {
+        fontFamily: 'Inter',
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        lineHeight: '20px',
+        letterSpacing: '2.24px',
+      },
+    },
+  },
 };
 
 export type ColorType = typeof theme.color;
