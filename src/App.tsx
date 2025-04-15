@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
-import InputSection from './InputSection';
-import { useState } from 'react';
 import InputField from './InputField';
+import InputSection from './InputSection';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
