@@ -3,12 +3,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import CardNumbers from './components/CardNumbers';
 import ExpirationPeriod from './components/ExpirationPeriod';
+import CVCNumbers from './components/CVCNumbers';
 
 const App: React.FC = () => {
   return (
     <Main>
       <CardNumbers />
       <ExpirationPeriod />
+      <CVCNumbers />
     </Main>
   );
 };
