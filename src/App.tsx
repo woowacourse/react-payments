@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import "./style.css";
+import "./reset.css";
 
 const H1 = styled.h1`
   color: var(--color-yellow);
