@@ -7,22 +7,14 @@ interface InputLabelsProps {
 
 const InputLabels: React.FC<InputLabelsProps> = ({ title, caption }) => {
   return (
-    <CardNumbersContainer>
+    <div>
       <Title>{title}</Title>
       <Caption>{caption || ''}</Caption>
-    </CardNumbersContainer>
+    </div>
   );
 };
 
 export default InputLabels;
-
-const CardNumbersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-`;
 
 const Title = styled.h2`
   font-size: 18px;
