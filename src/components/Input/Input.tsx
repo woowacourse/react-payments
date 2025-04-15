@@ -8,9 +8,8 @@ interface InputProps extends ComponentProps<"input"> {
 function Input({ isError, ...props }: InputProps) {
   return (
     <input
-      type="text"
       {...props}
-      className={`${styles.input} ${isError && styles.error}`}
+      className={`${styles.input} ${isError ? styles.error : ""}`}
     />
   );
 }
