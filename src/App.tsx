@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import "./App.css";
+import './App.css';
 
 const Test = styled.div`
-  background-color: #000000
+  background-color: #000000;
 `;
 
 function App() {
