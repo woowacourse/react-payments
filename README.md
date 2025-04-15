@@ -12,7 +12,7 @@
 
 
 ### 공통 컴포넌트 구현
-- [ ] Input 
+- [x] Input 
 - [ ] InputField(Label, Input, ErrorMessage)
 - [x] Title
 - [x] Description
