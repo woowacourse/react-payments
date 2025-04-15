@@ -1,11 +1,12 @@
 import './App.css';
+import React from 'react';
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <h1>React Payments</h1>
     </>
   );
-}
+};
 
 export default App;
