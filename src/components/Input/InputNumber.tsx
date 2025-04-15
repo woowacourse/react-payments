@@ -1,7 +1,4 @@
+import "./InputNumber.css";
 export default function InputNumber() {
-  return (
-    <div className="input-number">
-      <input></input>
-    </div>
-  );
+  return <input className="input-number" />;
 }

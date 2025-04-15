@@ -1,0 +1,9 @@
+.card-number {
+  width: 100%;
+}
+
+.card-number__input {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

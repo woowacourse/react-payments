@@ -1,3 +1,4 @@
+import "./InputSubtitle.css";
 interface Props {
   inputValue: string;
 }

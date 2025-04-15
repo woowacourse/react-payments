@@ -1,3 +1,4 @@
+import "./InputTitle.css";
 interface Props {
   inputValue: string;
 }

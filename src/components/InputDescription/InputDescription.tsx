@@ -1,3 +1,4 @@
+import "./InputDescription.css";
 interface Props {
   inputValue: string;
 }
