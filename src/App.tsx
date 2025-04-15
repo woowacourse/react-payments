@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
+import InputSection from './InputSection';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
@@ -25,6 +26,9 @@ function App() {
     <PaymentsLayout>
       <PaymentsContainer>
         <CardPreview />
+        <InputSection title="결제할 카드 번호를 입력해 주세요" caption="sdfs">
+          <div></div>
+        </InputSection>
       </PaymentsContainer>
     </PaymentsLayout>
   );
