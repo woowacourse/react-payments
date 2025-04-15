@@ -4,7 +4,7 @@
   background-color: var(--card-background);
   border-radius: 4px;
   position: relative;
-  margin: 77px 82px;
+  margin: 77px 82px 0;
 }
 
 .card-chip {
