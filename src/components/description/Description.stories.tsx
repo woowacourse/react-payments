@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof Description>;
 
 export const Default: Story = {
-  args: {
+	args: {
 		text: "본인 명의의 카드만 결제 가능합니다.",
 	},
 };
@@ -22,4 +22,3 @@ export const Error: Story = {
 		text: "본인 명의의 카드만 결제 가능합니다.",
 	},
 };
-

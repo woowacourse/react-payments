@@ -1,14 +1,14 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
 
 type Props = {
 	placeholder?: string;
-	isError?:boolean;
-}
+	isError?: boolean;
+};
 
-const Input = ({placeholder, isError=false}:Props)=>{
-  return <TextInput isError={isError} placeholder={placeholder} />;
-}
+const Input = ({ placeholder, isError = false }: Props) => {
+	return <TextInput isError={isError} placeholder={placeholder} />;
+};
 
 const TextInput = styled.input<{ isError: boolean }>(
 	(props) => `
@@ -22,6 +22,5 @@ const TextInput = styled.input<{ isError: boolean }>(
 	}
 `
 );
-
 
 export default Input;

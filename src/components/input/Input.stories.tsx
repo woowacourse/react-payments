@@ -11,8 +11,8 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  args: {
-    placeholder: "1234",
+	args: {
+		placeholder: "1234",
 	},
 };
 
@@ -21,4 +21,3 @@ export const Error: Story = {
 		isError: true,
 	},
 };
-

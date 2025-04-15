@@ -14,24 +14,16 @@ export default meta;
 type Story = StoryObj<typeof InputField>;
 
 export const Default: Story = {
-  args: {
-    label:"유효기간",
-    inputs:[
-      <Input placeholder="MM"/>,
-      <Input placeholder="YY"/>,
-    ],
+	args: {
+		label: "유효기간",
+		inputs: [<Input placeholder="MM" />, <Input placeholder="YY" />],
 	},
 };
 
 export const Error: Story = {
-  args: {
-    label:"유효기간",
-    inputs:[
-      <Input placeholder="MM"/>,
-      <Input placeholder="YY"/>,
-    ],
-    errorMessage:<Description text="숫자만 입력 가능합니다." color={COLORS.ERROR}/>
+	args: {
+		label: "유효기간",
+		inputs: [<Input placeholder="MM" />, <Input placeholder="YY" />],
+		errorMessage: <Description text="숫자만 입력 가능합니다." color={COLORS.ERROR} />,
 	},
 };
-
-
