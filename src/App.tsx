@@ -1,10 +1,11 @@
 import './App.css';
-import CardNumbersInput from './components/CardNumbersInput';
+import CardNumbersInputSection from './components/CardNumbersInputSection';
+
 function App() {
   return (
     <>
       <h1>React Payments</h1>
-      <CardNumbersInput />
+      <CardNumbersInputSection />
     </>
   );
 }

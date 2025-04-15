@@ -1,12 +1,12 @@
 import style from '../css/input.module.css';
 
-type InputProps = {
+type InputFieldProps = {
   value: number | '';
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError?: boolean;
 };
 
-const Input = ({ value, onChange, isError = false }: InputProps) => {
+const InputField = ({ value, onChange, isError = false }: InputFieldProps) => {
   console.log(isError, 'hello');
   return (
     <input
@@ -17,4 +17,4 @@ const Input = ({ value, onChange, isError = false }: InputProps) => {
   );
 };
 
-export default Input;
+export default InputField;
