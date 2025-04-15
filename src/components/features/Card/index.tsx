@@ -4,7 +4,7 @@ import { StyledCardContainer, StyledCardTypeIcon, StyledICCheapContainer } from 
 
 type Props = {
   type: 'VISA' | 'MASTER';
-  cardNumbers: string[];
+  cardNumbers: number[];
   expireDate: string;
 };
 
@@ -38,12 +38,12 @@ export const Card = ({ type, cardNumbers, expireDate }: Props) => {
           `}
         >
           {cardNumbers.map((number, index) => (
-            <Text variant="Title" color="white" key={`${number}-${index}`}>
+            <Text variant="Title" fontWeight="regular" color="white" key={`${number}-${index}`}>
               {number}
             </Text>
           ))}
         </div>
-        <Text variant="Title" color="white">
+        <Text variant="Title" fontWeight="regular" color="white">
           {expireDate}
         </Text>
       </div>

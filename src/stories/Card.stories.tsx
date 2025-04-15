@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     type: 'VISA',
-    cardNumbers: ['1234', '5678', '9012', '3456'],
+    cardNumbers: [1234, 5678, 9012, 3456],
     expireDate: '01/25',
   },
   argTypes: {
