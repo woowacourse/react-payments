@@ -1,0 +1,18 @@
+/* .input {
+  border: none;
+} */
+.basic {
+  border: 1px solid blue;
+  &:focus {
+    outline: none;
+    border: 2px solid blue;
+  }
+}
+
+.error {
+  border: 1px solid red;
+  &:focus {
+    outline: none;
+    border: 2px solid red;
+  }
+}

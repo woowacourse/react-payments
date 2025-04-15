@@ -19,30 +19,49 @@ const InitialCardNumber: CardNumbers = {
   thirdNumber: '',
   fourthNumber: '',
 };
-const validateCardNumbers = (input: string) => {
-  if (isNaN(Number(input))) {
-    throw new Error('Invalid input type. Expected a number.');
-  }
+
+const isValidCardNumbers = (input: string) => {
+  return !isNaN(Number(input));
 };
 
-const useCardNumbers = (): [
-  CardNumbers,
-  (
+const isError = {
+  firstNumber: false,
+  secondNumber: false,
+  thirdNumber: false,
+  fourthNumber: false,
+};
+
+type UseCardNumbersOptions = {
+  cardNumbers: CardNumbers;
+  setCardNumbers: (
     target: CardNumbersKeys
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void
-] => {
+  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isError: typeof isError;
+};
+
+const useCardNumbers = (): UseCardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(InitialCardNumber);
+  const [isError, setIsError] = useState({
+    firstNumber: false,
+    secondNumber: false,
+    thirdNumber: false,
+    fourthNumber: false,
+  });
 
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      validateCardNumbers(event.target.value);
+      const isValid = isValidCardNumbers(event.target.value);
+      if (isValid) {
+        setIsError({ ...isError, [target]: false });
+        setCardNumbers({ ...cardNumbers, [target]: event.target.value });
+      } else {
+        setIsError({ ...isError, [target]: true });
+      }
 
-      setCardNumbers({ ...cardNumbers, [target]: event.target.value });
       console.log(cardNumbers);
     };
 
-  return [cardNumbers, handleCardNumbersChange];
+  return { cardNumbers, setCardNumbers: handleCardNumbersChange, isError };
 };
-
 export default useCardNumbers;
