@@ -1,17 +1,36 @@
 import './CardInfoSection.css';
+import CustomInput from '../../../shared/ui/CustomInput';
+import { CustomInputProps } from '../../../shared/type/types';
 
-export default function CardInfoSection() {
+interface CardInfoSectionProps {
+  title: string;
+  description: string;
+  subTitle: string;
+  inputArr: CustomInputProps[];
+  errorMessage?: string;
+}
+
+export default function CardInfoSection({
+  title,
+  description,
+  subTitle,
+  inputArr,
+  errorMessage = '',
+}: CardInfoSectionProps) {
   return (
     <section className='card-info-section'>
       <div>
-        <h1 className='card-info-title'>결제할 카드 번호를 입력해 주세요</h1>
-        <span className='card-info-description'>본인 명의의 카드만 결제 가능합니다.</span>
+        <h1 className='card-info-title'>{title}</h1>
+        <span className='card-info-description'>{description}</span>
       </div>
-
       <div className='card-info-sub-section'>
-        <span className='card-info-subtitle'>카드 번호</span>
-        <input type='text' placeholder='카드 번호를 입력해 주세요' name='cardNumber' />
-        <div className='card-info-error'>에러 메세지</div>
+        <span className='card-info-subtitle'>{subTitle}</span>
+        <div className='card-info-input-container'>
+          {inputArr.map((input, index) => (
+            <CustomInput key={index} {...input} />
+          ))}
+        </div>
+        <span className='error-message'>{errorMessage}</span>
       </div>
     </section>
   );
