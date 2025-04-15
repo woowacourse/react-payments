@@ -1,9 +1,10 @@
 import "./App.css";
+import NumberInput from "./components/NumberInput/NumberInput";
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <NumberInput maxLength={2} placeholder="1234"></NumberInput>
     </>
   );
 }
