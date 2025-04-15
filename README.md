@@ -15,8 +15,7 @@
 - [ ] Input 
 - [ ] InputField(Label, Input, ErrorMessage)
 - [x] Title
-- [ ] Description
-- [ ] ErrorMessage
+- [x] Description
 
 ### 개별 컴포넌트 구현
 - Card
