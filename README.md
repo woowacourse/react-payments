@@ -12,11 +12,11 @@
 
 
 ### 공통 컴포넌트 구현
-- Input 
-- InputField(Label, Input, ErrorMessage)
-- Title
-- Description
-- ErrorMessage
+- [ ] Input 
+- [ ] InputField(Label, Input, ErrorMessage)
+- [x] Title
+- [ ] Description
+- [ ] ErrorMessage
 
 ### 개별 컴포넌트 구현
 - Card
