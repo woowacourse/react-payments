@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import { isAnyTrue } from "../../utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../constants/card";
 
-interface CardNumberInputsProps {
+export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
   onCardNumberChange: (key: CardNumberInputKey, value: string) => void;
 }
