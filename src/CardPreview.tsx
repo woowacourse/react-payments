@@ -19,11 +19,11 @@ const CardChip = styled.div`
   background: #ddcd78;
 `;
 
-function CardPreviw() {
+function CardPreview() {
   return (
     <Card>
       <CardChip />
     </Card>
   );
 }
-export default CardPreviw;
+export default CardPreview;
