@@ -13,6 +13,13 @@ interface CardProps {
 function Card({ cardNumber, expiration }: CardProps) {
   const cardType = getCardType(String(cardNumber[0]));
 
+  function maskCardNumber(cardNumber: number[]) {
+    return [
+      ...cardNumber.slice(0, 2),
+      ...cardNumber.slice(2).map((number) => "·".repeat(String(number).length)),
+    ];
+  }
+
   return (
     <CardContainer>
       <CardHeader>
@@ -21,7 +28,7 @@ function Card({ cardNumber, expiration }: CardProps) {
       </CardHeader>
 
       <CardInfo>
-        <p>{cardNumber.join(" ")}</p>
+        <p>{maskCardNumber(cardNumber).join(" ")}</p>
         <p>{expiration.join("/")}</p>
       </CardInfo>
     </CardContainer>
@@ -75,4 +82,5 @@ const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  letter-spacing: 1.5px;
 `;
