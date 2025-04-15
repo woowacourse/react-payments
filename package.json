@@ -12,12 +12,13 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/css": "^11.13.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.24.0",
     "@chromatic-com/storybook": "^3.2.6",
+    "@eslint/js": "^9.24.0",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
