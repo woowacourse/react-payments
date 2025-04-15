@@ -1,4 +1,9 @@
-import { CardNumbersGroupCSS, CardTypeCSS, PreviewCSS } from "./Preview.styled";
+import {
+  CardNumbersGroupCSS,
+  CardTypeCSS,
+  PreviewContainerCSS,
+  PreviewCSS,
+} from "./Preview.styled";
 
 export interface PreviewProps {
   cardNumbers: string[];
@@ -7,17 +12,19 @@ export interface PreviewProps {
 
 function Preview({ cardNumbers, expirationPeriod }: PreviewProps) {
   return (
-    <PreviewCSS>
-      <CardTypeCSS></CardTypeCSS>
-      <CardNumbersGroupCSS>
-        {cardNumbers.map((cardNumber) => (
-          <span>{cardNumber}</span>
-        ))}
-      </CardNumbersGroupCSS>
-      <div>
-        <span>{expirationPeriod.join("/")}</span>
-      </div>
-    </PreviewCSS>
+    <PreviewContainerCSS>
+      <PreviewCSS>
+        <CardTypeCSS></CardTypeCSS>
+        <CardNumbersGroupCSS>
+          {cardNumbers.map((cardNumber) => (
+            <span>{cardNumber}</span>
+          ))}
+        </CardNumbersGroupCSS>
+        <div>
+          <span>{expirationPeriod.join("/")}</span>
+        </div>
+      </PreviewCSS>
+    </PreviewContainerCSS>
   );
 }
 export default Preview;

@@ -2,6 +2,14 @@ import LogoImg from "/visa.jpg";
 import PreviewImg from "/card-preview.jpg";
 import styled from "styled-components";
 
+export const PreviewContainerCSS = styled.div`
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+`;
+
 export const PreviewCSS = styled.div`
   background: no-repeat center url(${PreviewImg});
   background-size: cover;
