@@ -1,9 +1,10 @@
 import './App.css';
-import CardNumbersInputSection from './components/CardNumbersInputSection';
+import CardNumbersInputSection from './components/InputSection/CardNumbersInputSection';
 import ErrorMessage from './components/ErrorMessage';
 import InputField from './components/InputField';
-import InputSection from './components/InputSection';
+import InputSection from './components/InputSection/InputSection';
 import useCardExpirationDate from './hooks/useCardExpirationDate';
+import CardCVCNumberInputSection from './components/InputSection/CardCVCNumberInputSection';
 
 const CardExpirationDateInputSection = () => {
   const { cardExpirationDate, setCardExpirationDate, isError, errorMessage } =
@@ -36,6 +37,7 @@ function App() {
       <h1>React Payments</h1>
       <CardNumbersInputSection />
       <CardExpirationDateInputSection />
+      <CardCVCNumberInputSection />
     </>
   );
 }

@@ -7,7 +7,7 @@ type CardExpirationDate = {
   year: '' | number;
 };
 
-const InitialCardExpirationDate: CardExpirationDate = {
+const initialCardExpirationDate: CardExpirationDate = {
   month: '',
   year: '',
 };
@@ -28,7 +28,7 @@ type useCardExpirationDateOptions = {
 
 const useCardExpirationDate = (): useCardExpirationDateOptions => {
   const [cardExpirationDate, setCardExpirationDate] = useState(
-    InitialCardExpirationDate
+    initialCardExpirationDate
   );
   const [isError, setIsError] = useState({
     month: false,
@@ -78,11 +78,11 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
         setErrorMessage('');
         setCardExpirationDate({
           ...cardExpirationDate,
-          [target]: event.target.value,
+          [target]: Number(event.target.value),
         });
-      } else {
-        setIsError({ ...isError, [target]: true });
+        return;
       }
+      setIsError({ ...isError, [target]: true });
     };
 
   return {

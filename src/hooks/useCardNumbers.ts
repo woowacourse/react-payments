@@ -62,7 +62,10 @@ const useCardNumbers = (): UseCardNumbersOptions => {
       if (isValid) {
         setIsError({ ...isError, [target]: false });
         setErrorMessage('');
-        setCardNumbers({ ...cardNumbers, [target]: event.target.value });
+        setCardNumbers({
+          ...cardNumbers,
+          [target]: Number(event.target.value),
+        });
       } else {
         setIsError({ ...isError, [target]: true });
       }
