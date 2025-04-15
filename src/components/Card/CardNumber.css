@@ -1,0 +1,13 @@
+.card-layout-number-container {
+  font-size: 14px;
+  color: var(--color-white);
+  position: absolute;
+  top: 44px;
+  left: 17px;
+}
+
+.card-layout-number-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
