@@ -24,4 +24,4 @@
 - [x] InputContainer
 - [x] CardNumbersInput
 - [x] CardExpiryInput
-- [ ] CVCInput
+- [x] CVCInput

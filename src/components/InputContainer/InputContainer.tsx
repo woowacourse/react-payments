@@ -3,7 +3,7 @@ import React from 'react';
 type propsType = {
     children: React.ReactNode;
     title: string;
-    subTitle: string;
+    subTitle?: string;
 }
 
 const InputContainer = ({children, title, subTitle}:propsType) => {
