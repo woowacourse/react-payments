@@ -1,0 +1,14 @@
+.card-logo {
+  width: 36px;
+  height: 22px;
+  background-color: var(--card-logo-background);
+  border-radius: 4px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  justify-content: center;
+}
+
+.card-logo-image {
+  width: 21.75px;
+}
