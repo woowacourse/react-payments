@@ -2,7 +2,15 @@ import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 import styled from '@emotion/styled';
 
-const CardNumbers = () => {
+interface CardNumbersProps {
+  cardNumbers: string[];
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const CardNumbers: React.FC<CardNumbersProps> = ({
+  cardNumbers,
+  setCardNumbers,
+}) => {
   return (
     <CardNumbersContainer>
       <InputLabels
@@ -12,6 +20,8 @@ const CardNumbers = () => {
       <InputTexts
         label="카드 번호"
         placeholder={['1234', '1234', '1234', '1234']}
+        setCardNumbers={setCardNumbers}
+        cardNumbers={cardNumbers}
       />
     </CardNumbersContainer>
   );

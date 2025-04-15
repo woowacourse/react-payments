@@ -3,9 +3,16 @@ import styled from '@emotion/styled';
 interface InputTextsProps {
   label: string;
   placeholder: string[];
+  setCardNumbers?: React.Dispatch<React.SetStateAction<string[]>>;
+  cardNumbers?: string[];
 }
 
-const InputTexts: React.FC<InputTextsProps> = ({ label, placeholder }) => {
+const InputTexts: React.FC<InputTextsProps> = ({
+  label,
+  placeholder,
+  setCardNumbers,
+  cardNumbers,
+}) => {
   return (
     <Width100>
       <Label>{label}</Label>
@@ -16,6 +23,14 @@ const InputTexts: React.FC<InputTextsProps> = ({ label, placeholder }) => {
             type="text"
             placeholder={text}
             maxLength={text.length}
+            value={cardNumbers ? cardNumbers[index] : ''}
+            onChange={(e) => {
+              setCardNumbers!((prev) => {
+                const newCardNumbers = [...prev];
+                newCardNumbers[index] = e.target.value;
+                return newCardNumbers;
+              });
+            }}
           />
         ))}
       </Row>
