@@ -9,5 +9,8 @@
 .card-layout-number-wrapper {
   display: flex;
   justify-content: center;
-  gap: 10px;
+}
+
+.card-layout-number {
+  width: 40px;
 }

@@ -9,7 +9,10 @@ export default function PreviewCardNumber({
   cardNumbers,
   cardExpirationDate,
 }: PreviewCardNumberProps) {
-  const expiration = `${cardExpirationDate[1]}/${cardExpirationDate[0]}`;
+  const expiration =
+    cardExpirationDate[0] === ""
+      ? `${cardExpirationDate[1]}`
+      : `${cardExpirationDate[1]}/${cardExpirationDate[0]}`;
 
   return (
     <div className={styles["card-layout-number-container"]}>

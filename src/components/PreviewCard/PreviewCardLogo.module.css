@@ -6,9 +6,11 @@
   position: absolute;
   top: 8px;
   right: 12px;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .card-logo-image {
-  width: 21.75px;
+  width: 33px;
 }
