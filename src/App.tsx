@@ -1,9 +1,14 @@
-import "./App.css";
+import { Global, ThemeProvider } from '@emotion/react';
+import './App.css';
+import GlobalStyle from './styles/globalStyle';
+import theme from './styles/theme';
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <ThemeProvider theme={theme}>
+        <Global styles={GlobalStyle} />
+      </ThemeProvider>
     </>
   );
 }
