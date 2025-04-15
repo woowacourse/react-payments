@@ -1,7 +1,15 @@
+import CardNumberInputs from "./components/CardNumberInputs/CardNumberInputs";
+import useControlledCardNumber from "./hooks/useControlledCardNumber";
+
 function App() {
+  const { cardNumberState, handleCardNumberChange } = useControlledCardNumber();
+
   return (
     <>
-      <h1>React Payments</h1>
+      <CardNumberInputs
+        cardNumberState={cardNumberState}
+        onCardNumberChange={handleCardNumberChange}
+      />
     </>
   );
 }
