@@ -1,0 +1,6 @@
+.input {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 2px;
+  color: var(--grey);
+}
