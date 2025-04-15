@@ -1,0 +1,42 @@
+.card {
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  background: #333;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.chipWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+
+.cardLogo {
+  width: 36px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.chip {
+  width: 36px;
+  height: 22px;
+  border-radius: 4px;
+  background-color: #ddcd78;
+}
+
+.cardNumberWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cardNumber {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 2.24px;
+}

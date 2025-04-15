@@ -1,27 +1,21 @@
-import { useState } from 'react';
-import { ChangeEvent } from 'react';
 import styles from './Input.module.css';
+import { ChangeEvent } from 'react';
 
-export default function Input({ placeholder }: { placeholder: string }) {
-  const [value, setValue] = useState<string>('');
-  const [isValid, setIsValid] = useState<boolean>(true);
+type Props = {
+  value: string;
+  placeholder: string;
+  isValid: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    if (Number.isNaN(+inputValue)) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
-    }
-    setValue(inputValue);
-  };
-
+export default function Input({ value, placeholder, isValid, onChange }: Props) {
   return (
     <input
-      onChange={handleInputChange}
       value={value}
-      className={`${styles.input} ${isValid ? styles.valid : styles.inValid}`}
+      onChange={onChange}
       placeholder={placeholder}
+      className={`${styles.input} ${isValid ? styles.valid : styles.inValid}`}
+      maxLength={4}
     />
   );
 }

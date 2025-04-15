@@ -11,6 +11,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { placeholder: '1234' },
+  args: {
+    value: '',
+    placeholder: '1234',
+    isValid: true,
+    onChange: (e) => console.log('입력값:', e.target.value)
+  },
   render: (args) => <Input {...args} />
 };
