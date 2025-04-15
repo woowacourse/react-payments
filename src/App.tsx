@@ -1,15 +1,25 @@
 import "./App.css";
-import CardNumber from "./CardNumber/CardNumber";
+import CardNumber from "./CardNumber/CarNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
-import CardLayout from "./components/Card/CardLayout";
+import { useState } from "react";
+import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
 
 function App() {
+  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+
+  const handleCardNumber = (value: string, index: number) => {
+    const newCardNumbers = [...cardNumbers];
+    newCardNumbers[index] = value;
+    setCardNumbers(newCardNumbers);
+    console.log(newCardNumbers.join(" - "));
+  };
+
   return (
     <div className="App">
-      <CardLayout />
+      <PreviewCardLayout cardNumbers={cardNumbers} />
       <div className="card-input">
-        <CardNumber />
+        <CardNumber handleChange={handleCardNumber} />
         <CardExpirationDate />
         <CardCvcNumber />
       </div>

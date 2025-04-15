@@ -1,7 +1,7 @@
-import InputNumber from "../components/Input/InputNumber";
 import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
 import InputTitle from "../components/InputTitle/InputTitle";
 import styles from "./CardCvcNumber.module.css";
+import InputNumber from "../components/Input/InputNumber";
 
 export default function CardCvcNumber() {
   return (

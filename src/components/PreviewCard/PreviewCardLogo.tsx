@@ -1,6 +1,6 @@
-import styles from "./CardLogo.module.css";
+import styles from "./PreviewCardLogo.module.css";
 
-export default function CardLogo() {
+export default function PreviewCardLogo() {
   return (
     <div className={styles["card-logo"]}>
       {/* TODO : 이미지 경로 props로 수정 */}
