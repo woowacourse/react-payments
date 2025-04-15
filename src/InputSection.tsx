@@ -14,13 +14,11 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.p`
-  font-family: NotoSansKR;
   font-weight: 700;
   font-size: 18px;
 `;
 
 const Caption = styled.p`
-  font-family: NotoSansKR;
   font-weight: 400;
   font-size: 9.5px;
   color: #8b95a1;
