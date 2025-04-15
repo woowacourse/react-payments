@@ -1,4 +1,9 @@
 import styled from "@emotion/styled";
+import {
+  CARD_TYPE_PATH,
+  VISA_CARD_PREFIXES,
+  MASTER_CARD_PREFIXES,
+} from "../constants";
 
 interface CardProps {
   cardNumber: number[];
@@ -6,11 +11,13 @@ interface CardProps {
 }
 
 function Card({ cardNumber, expiration }: CardProps) {
+  const cardType = getCardType(String(cardNumber[0]));
+
   return (
     <CardContainer>
       <CardHeader>
         <CardIC />
-        <CardType src="/assets/Mastercard.png" alt="Mastercard" />
+        {cardType !== "None" && <CardType src={CARD_TYPE_PATH[cardType]} />}
       </CardHeader>
 
       <CardInfo>
@@ -22,6 +29,17 @@ function Card({ cardNumber, expiration }: CardProps) {
 }
 
 export default Card;
+
+function getCardType(cardFirstNumber: string) {
+  for (const prefix of VISA_CARD_PREFIXES) {
+    if (cardFirstNumber.startsWith(prefix)) return "VISA";
+  }
+  for (const prefix of MASTER_CARD_PREFIXES) {
+    if (cardFirstNumber.startsWith(prefix)) return "MasterCard";
+  }
+
+  return "None";
+}
 
 const CardContainer = styled.div`
   width: 212px;
