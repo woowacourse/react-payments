@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: 'Title',
+    fontWeight: 'regular',
     color: 'black',
     children: '텍스트',
   },
@@ -20,6 +21,10 @@ export const Default: Story = {
     variant: {
       control: { type: 'select' },
       options: ['Title', 'Body', 'Caption'],
+    },
+    fontWeight: {
+      control: { type: 'select' },
+      options: ['regular', 'medium', 'semibold', 'bold'],
     },
     color: {
       control: { type: 'color' },

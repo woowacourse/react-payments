@@ -3,12 +3,13 @@ import { StyledTextContainer } from './Text.styled';
 
 export type Props = {
   variant: 'Title' | 'Body' | 'Caption';
-  color: string;
+  fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold';
+  color?: string;
 } & PropsWithChildren;
 
-export const Text = ({ variant, color, children }: Props) => {
+export const Text = ({ variant, fontWeight = 'medium', color = 'black', children }: Props) => {
   return (
-    <StyledTextContainer variant={variant} color={color}>
+    <StyledTextContainer variant={variant} fontWeight={fontWeight} color={color}>
       {children}
     </StyledTextContainer>
   );
