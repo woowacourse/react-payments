@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Preview from "../components/Preview/Preview";
+import Preview from "./Preview";
 
 const meta = {
   title: "Preview",
