@@ -39,13 +39,18 @@ export const validateCardNumbers = (
     throw new Error("유효하지 않은 카드번호입니다.");
 };
 
-export const validateExpiry = (month: string, year: string, length: number) => {
-  if (!isNumber(month) || !isNumber(year))
-    throw new Error("숫자를 입력해주세요.");
-  if (!numberLength(month, length) || !numberLength(year, length))
+export const validateMonth = (month: string, length: number) => {
+  if (!isNumber(month)) throw new Error("숫자를 입력해주세요.");
+  if (!numberLength(month, length))
     throw new Error(`${length}자리로 입력해주세요.`);
   if (!invalidMonth(month)) throw new Error("유효하지 않은 월입니다.");
-  if (!invalidYear(month)) throw new Error("유효하지 않은 연도입니다.");
+};
+
+export const validateYear = (year: string, length: number) => {
+  if (!isNumber(year)) throw new Error("숫자를 입력해주세요.");
+  if (!numberLength(year, length))
+    throw new Error(`${length}자리로 입력해주세요.`);
+  if (!invalidYear(year)) throw new Error("유효하지 않은 연도입니다.");
 };
 
 export const validateCVC = (number: string, length: number) => {
