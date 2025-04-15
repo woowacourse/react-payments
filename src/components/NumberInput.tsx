@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-interface NumberInput {
+interface NumberInputProps {
   maxLength: number;
   placeholder: string;
 }
 
-function NumberInput({ maxLength, placeholder }: NumberInput) {
+function NumberInput({ maxLength, placeholder }: NumberInputProps) {
   const [isError, setIsError] = useState(false);
   return (
     <Input maxLength={maxLength} placeholder={placeholder} isError={isError} />
