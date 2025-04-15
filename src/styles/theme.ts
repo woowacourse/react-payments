@@ -3,6 +3,8 @@ const theme = {
     black: '#000000',
     white: '#FFFFFF',
     gray: '#8B95A1',
+    cardBlack: '#333333',
+    gold: '#DDCD78',
   },
 };
 
