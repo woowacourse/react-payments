@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { ExpirationPeriodProps } from "../../\btypes/index.types"
 
 const StyledContainer = styled.div`
 display: flex;
@@ -66,9 +67,13 @@ type CardPreviewProps = {
         third: string,
         forth : string,
     }
+    expirationPeriod: {
+        month: string,
+        year : string
+    }
 }
 
-function CardPreview({cardNumber} : CardPreviewProps) {
+function CardPreview({cardNumber, expirationPeriod} : CardPreviewProps) {
     return (
         <StyledContainer>
             <StyledIconWrap>
@@ -85,7 +90,7 @@ function CardPreview({cardNumber} : CardPreviewProps) {
                 <StyledCardNumber>{cardNumber['forth']}</StyledCardNumber>
             </StyledCardNumberWrap>
             <StyledExpirationPeriod>
-                04/21
+                {expirationPeriod['month']}/{expirationPeriod['year']}
             </StyledExpirationPeriod>
         </StyledContainer>
     )

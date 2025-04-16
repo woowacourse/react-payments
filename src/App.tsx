@@ -62,7 +62,7 @@ function App() {
 
   return (
     <StyleFrame>
-      <CardPreview cardNumber={cardNumber} />
+      <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod}  />
       <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
       <CardExpirationPeriodSection expirationPeriod={expirationPeriod} changeExpirationPeriod={changeExpirationPeriod}/>
       <CardCVCNumberSection />
