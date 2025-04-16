@@ -21,13 +21,13 @@ const meta = {
 export default meta;
 
 export const CardNumberFormStory = () => {
-  const { value: cardNumbers, handleChange, handleBlur } = useCardInput(4, 4);
+  const { value: cardNumbers, handleChange, handleBlur } = useCardInput('cardNumber', 4, 4);
 
   return <CardNumberForm cardNumbers={cardNumbers} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export const ExpireDateFormStory = () => {
-  const { value: expireNumber, handleChange, handleBlur } = useCardInput(2, 2);
+  const { value: expireNumber, handleChange, handleBlur } = useCardInput('expireDate', 2, 2);
 
   return <ExpireDateForm expireDate={expireNumber} onChange={handleChange} onBlur={handleBlur} />;
 };
