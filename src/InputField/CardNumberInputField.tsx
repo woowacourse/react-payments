@@ -12,7 +12,7 @@ function CardNumberInputField() {
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    setInputValue({ ...inputValue, [name]: value });
+    if (value.length <= 4) setInputValue({ ...inputValue, [name]: value });
   };
 
   return (

@@ -10,7 +10,10 @@ function ExpirationDateInputField() {
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    setInputValue({ ...inputValue, [name]: value });
+    if (value.length <= 2) {
+      if (name === 'ExpirationDatePart1' && Number(value) > 12) return;
+      setInputValue({ ...inputValue, [name]: value });
+    }
   };
 
   return (
