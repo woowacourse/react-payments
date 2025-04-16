@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumber from './CardNumber';
+import CardInputSection from './CardInputSection';
 import CardNumberField from '../CardNumberField/CardNumberField';
 import React, { useState } from 'react';
 
 const meta = {
-  title: 'CardNumber',
-  component: CardNumber,
-} satisfies Meta<typeof CardNumber>;
+  title: 'CardInputSection',
+  component: CardInputSection,
+} satisfies Meta<typeof CardInputSection>;
 
 export default meta;
 
@@ -38,13 +38,13 @@ export const Default: Story = {
     };
 
     return (
-      <CardNumber {...args}>
+      <CardInputSection {...args}>
         <CardNumberField
           cardNumber={cardNumber}
           isError={isError}
           onChange={onChange}
         />
-      </CardNumber>
+      </CardInputSection>
     );
   },
 };
@@ -74,13 +74,13 @@ export const Error: Story = {
     };
 
     return (
-      <CardNumber {...args}>
+      <CardInputSection {...args}>
         <CardNumberField
           cardNumber={cardNumber}
           isError={isError}
           onChange={onChange}
         />
-      </CardNumber>
+      </CardInputSection>
     );
   },
 };

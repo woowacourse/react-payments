@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 
-interface CardNumberProps {
+interface CardInputSectionProps {
   title: string;
   description?: string;
   errorMessage: string;
   children: React.ReactElement;
 }
 
-function CardNumber({
+function CardInputSection({
   title,
   description,
   errorMessage,
   children,
-}: CardNumberProps) {
+}: CardInputSectionProps) {
   return (
     <Wrapper>
       <Title>{title}</Title>
@@ -23,9 +23,9 @@ function CardNumber({
   );
 }
 
-export default CardNumber;
+export default CardInputSection;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.section``;
 
 const Title = styled.p`
   font-weight: bold;
