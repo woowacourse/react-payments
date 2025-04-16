@@ -10,14 +10,12 @@ const CardCVCNumberInputSection = () => {
 
   return (
     <InputSection title="CVC 번호를 입력해주세요" description="" subtitle="CVC">
-      <div className={styles.inputContainer}>
-        <InputField
-          value={cardCVCNumber}
-          onChange={setCardCVCNumber}
-          isError={isError}
-          placeholder="123"
-        ></InputField>
-      </div>
+      <InputField
+        value={cardCVCNumber}
+        onChange={setCardCVCNumber}
+        isError={isError}
+        placeholder="123"
+      ></InputField>
 
       <ErrorMessage message={errorMessage} />
     </InputSection>

@@ -1,6 +1,6 @@
 import useCardNumbers from '../../hooks/useCardNumbers';
 import ErrorMessage from '../ErrorMessage';
-import CardNumbersInputs from './CardNumbersInputs';
+import InputField from '../InputField';
 
 import InputSection from './InputSection';
 
@@ -14,11 +14,30 @@ const CardNumbersInputSection = () => {
       description="본인 명의의 카드만 결제 가능합니다"
       subtitle="카드번호"
     >
-      <CardNumbersInputs
-        cardNumbers={cardNumbers}
-        setCardNumbers={setCardNumbers}
-        isError={isError}
-      ></CardNumbersInputs>
+      <InputField
+        value={cardNumbers.firstNumber}
+        onChange={setCardNumbers('firstNumber')}
+        isError={isError.firstNumber}
+        placeholder="1234"
+      ></InputField>
+      <InputField
+        value={cardNumbers.secondNumber}
+        onChange={setCardNumbers('secondNumber')}
+        isError={isError.secondNumber}
+        placeholder="1234"
+      ></InputField>
+      <InputField
+        value={cardNumbers.thirdNumber}
+        onChange={setCardNumbers('thirdNumber')}
+        isError={isError.thirdNumber}
+        placeholder="1234"
+      ></InputField>
+      <InputField
+        value={cardNumbers.fourthNumber}
+        onChange={setCardNumbers('fourthNumber')}
+        isError={isError.fourthNumber}
+        placeholder="1234"
+      ></InputField>
       <ErrorMessage message={errorMessage} />
     </InputSection>
   );

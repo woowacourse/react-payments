@@ -14,20 +14,19 @@ const CardExpirationDateInputSection = () => {
       description="월/년도(MM/YY) 순서대로 입력해 주세요"
       subtitle="유효기간"
     >
-      <div className={styles.inputContainer}>
-        <InputField
-          value={cardExpirationDate.month}
-          onChange={setCardExpirationDate('month')}
-          isError={isError.month}
-          placeholder="MM"
-        ></InputField>
-        <InputField
-          value={cardExpirationDate.year}
-          onChange={setCardExpirationDate('year')}
-          isError={isError.year}
-          placeholder="YY"
-        ></InputField>
-      </div>
+      <InputField
+        value={cardExpirationDate.month}
+        onChange={setCardExpirationDate('month')}
+        isError={isError.month}
+        placeholder="MM"
+      ></InputField>
+      <InputField
+        value={cardExpirationDate.year}
+        onChange={setCardExpirationDate('year')}
+        isError={isError.year}
+        placeholder="YY"
+      ></InputField>
+
       <ErrorMessage message={errorMessage} />
     </InputSection>
   );

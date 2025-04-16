@@ -1,5 +1,4 @@
 import styles from './inputSection.module.css';
-
 type InputSectionProps = {
   title: string;
   description: string;
@@ -18,7 +17,7 @@ const InputSection = ({
       <h2 className={styles.title}>{title} </h2>
       <p className={styles.description}>{description}</p>
       <p className={styles.subtitle}>{subtitle}</p>
-      {children}
+      <div className={styles.inputContainer}> {children}</div>
     </div>
   );
 };
