@@ -1,11 +1,8 @@
-import "./App.css";
+import './App.css';
+import CardPage from './components/CardPage/CardPage';
 
 function App() {
-  return (
-    <>
-      <h1>React Payments</h1>
-    </>
-  );
+  return <CardPage />;
 }
 
 export default App;
