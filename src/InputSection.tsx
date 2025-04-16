@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
 `;
 
@@ -30,7 +31,7 @@ function InputSection({
   children,
 }: {
   title: string;
-  caption: string;
+  caption?: string;
   children: ReactNode;
 }) {
   return (
