@@ -2,8 +2,13 @@ import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import { validateCVC } from "../../domain/validate";
 
-const CVCInput = () => {
-  const [CVC, setCVC] = useState("");
+type CVCInputProps = {
+  CVC: string;
+  setCVC: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const CVCInput = ({CVC, setCVC}: CVCInputProps) => {
+  // const [CVC, setCVC] = useState("");
   const [helperText, setHelperText] = useState("");
   const inputRef = useRef<(HTMLElement | null)>(null);
 

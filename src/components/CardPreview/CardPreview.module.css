@@ -10,6 +10,7 @@
 .magnetic {
   position: absolute;
   width: 50px;
+  height: 33px;
   top: 15px;
   left: 20px;
 }
@@ -17,6 +18,11 @@
 .visa {
   position: absolute;
   width: 50px;
+  height: 33px;
   top: 15px;
   left: 205px;
+}
+
+.preview p {
+  color: white
 }

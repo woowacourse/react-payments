@@ -3,9 +3,16 @@ import InputContainer from "../InputContainer/InputContainer";
 import { validateMonth } from "../../domain/validate";
 import { validateYear } from "../../domain/validate";
 
-const CardExpiryInput = () => {
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+type CardExpiryInputProps = {
+  month: string;
+  setMonth: React.Dispatch<React.SetStateAction<string>>;
+  year: string;
+  setYear: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps) => {
+  // const [month, setMonth] = useState("");
+  // const [year, setYear] = useState("");
   const [helperText, setHelperText] = useState("");
 
   const [errorIndex, setErrorIndex] = useState<number | null>(null);

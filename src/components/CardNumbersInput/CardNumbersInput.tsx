@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer"; 
 import { validateCardNumbers } from "../../domain/validate"; 
 
-const TOTAL_INPUTS = 4;
+type CardNumbersInputProps = {
+  cardNumbers: string[];
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
-const CardNumbersInput = () => { 
-  const [cardNumbers, setCardNumbers] = useState<string[]>( 
-    Array(TOTAL_INPUTS).fill("")
-  );
+const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) => { 
   const [helperText, setHelperText] = useState<string>('');
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLElement | null)[]>([]);

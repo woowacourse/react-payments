@@ -3,17 +3,25 @@ import CardExpiryInput from "./components/CardExpiryInput/CardExpiryInput";
 import CVCInput from "./components/CVCInput/CVCInput";
 import CardPreview from "./components/CardPreview/CardPreview";
 import './App.css'
-// import styles from './App.module.css'
+import { useState } from "react";
+
+const TOTAL_INPUTS = 4;
 
 function App() {
+  const [cardNumbers, setCardNumbers] = useState<string[]>( 
+      Array(TOTAL_INPUTS).fill("")
+    );
+    const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
+    const [CVC, setCVC] = useState("");
 
   return (
     <div className='app'>
-      <CardPreview />
+      <CardPreview cardNumbers={cardNumbers} month={month} year={year}/>
       <form>
-        <CardNumbersInput /> 
-        <CardExpiryInput/>
-        <CVCInput/>
+        <CardNumbersInput cardNumbers={cardNumbers} setCardNumbers={setCardNumbers}/> 
+        <CardExpiryInput month={month} setMonth={setMonth} year={year} setYear={setYear}/>
+        <CVCInput CVC={CVC} setCVC={setCVC}/>
       </form>
     </div>
   );
