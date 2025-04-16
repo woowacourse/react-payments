@@ -15,6 +15,12 @@ const StyledInput = styled.input<{ $isError: boolean }>`
     outline: none;
     border-color: ${(props) => (props.$isError ? 'red' : 'black')};
   }
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 11px;
+    color: #acacac;
+  }
 `;
 
 function Input({
