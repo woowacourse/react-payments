@@ -4,6 +4,7 @@ import Subtitle from "./Subtitle";
 const meta = {
   title: "Subtitle",
   component: Subtitle,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Subtitle>;
 
 export default meta;

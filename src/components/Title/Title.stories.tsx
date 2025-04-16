@@ -4,6 +4,7 @@ import Title from "./Title";
 const meta = {
   title: "Title",
   component: Title,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Title>;
 
 export default meta;

@@ -5,6 +5,7 @@ import { INPUT_TYPE } from "../../constants/constants";
 const meta = {
   title: "InputGroup",
   component: InputGroup,
+  tags: ["autodocs"],
 } satisfies Meta<typeof InputGroup>;
 
 export default meta;

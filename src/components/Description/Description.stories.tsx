@@ -4,6 +4,7 @@ import Description from "./Description";
 const meta = {
   title: "Description",
   component: Description,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Description>;
 
 export default meta;

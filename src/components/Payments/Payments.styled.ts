@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AppCSS = styled.div`
+export const PaymentsCSS = styled.div`
   margin: 0 auto;
   height: 100vh;
   width: 30%;

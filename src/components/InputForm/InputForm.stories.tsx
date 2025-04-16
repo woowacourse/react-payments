@@ -5,6 +5,7 @@ import InputForm from "./InputForm";
 const meta = {
   title: "InputForm",
   component: InputForm,
+  tags: ["autodocs"],
 } satisfies Meta<typeof InputForm>;
 
 export default meta;

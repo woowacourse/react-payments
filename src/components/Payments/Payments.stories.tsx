@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import App from "./App";
+import Payments from "./Payments";
 
 const meta = {
-  title: "App",
-  component: App,
-} satisfies Meta<typeof App>;
+  title: "Payments",
+  component: Payments,
+  tags: ["autodocs"],
+} satisfies Meta<typeof Payments>;
 
 export default meta;
 

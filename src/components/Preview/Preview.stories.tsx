@@ -4,6 +4,7 @@ import Preview from "./Preview";
 const meta = {
   title: "Preview",
   component: Preview,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Preview>;
 
 export default meta;
