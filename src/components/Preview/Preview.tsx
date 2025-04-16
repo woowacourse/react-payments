@@ -55,8 +55,12 @@ function Preview() {
         <CardNumbersGroupCSS>
           <span>{cardNumbers.first}</span>
           <span>{cardNumbers.second}</span>
-          <span>{cardNumbers.third}</span>
-          <span>{cardNumbers.fourth}</span>
+          <span>
+            {cardNumbers.third && "*".repeat(cardNumbers.third.length)}
+          </span>
+          <span>
+            {cardNumbers.fourth && "*".repeat(cardNumbers.fourth.length)}
+          </span>
         </CardNumbersGroupCSS>
         <span>
           {expirationPeriod.month}/{expirationPeriod.year}
