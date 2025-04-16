@@ -4,7 +4,7 @@ import parser from "@typescript-eslint/parser";
 
 export default [
   {
-    files: ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       ecmaVersion: "latest",
       parser,
@@ -12,12 +12,12 @@ export default [
     plugins: {
       prettier: eslintPluginPrettier,
     },
-    // parser: "babel-parser",
     rules: {
       "max-depth": ["error", 2],
       "max-params": ["error", 3],
       ...eslintConfigPrettier.rules,
       "prettier/prettier": "error",
+      quotes: ["error", "double"],
     },
   },
 ];
