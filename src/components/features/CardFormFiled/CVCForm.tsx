@@ -7,9 +7,9 @@ import { Text } from '@/components/common/Text';
 import { useCardInput } from '@/hooks/useCardInput';
 
 export const CVCForm = () => {
-  const { value: cvcNumber, errorMessage, handleChange, handleBlur } = useCardInput(1, 3);
+  const { value: cvcNumber, errorMessage, handleChange, handleBlur } = useCardInput('CVC', 1, 3);
 
-  const isValidate = cvcNumber.some((cvcNumber) => cvcNumber.isValid);
+  const isInvalidCVC = cvcNumber.some((cvcNumber) => !cvcNumber.isValid);
 
   return (
     <CardInputLayout headerText="CVC 번호를 입력해 주세요." label="CVC">
@@ -34,7 +34,7 @@ export const CVCForm = () => {
             height: 10px;
           `}
         >
-          {!isValidate ? errorMessage : ''}
+          {isInvalidCVC ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>

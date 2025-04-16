@@ -13,7 +13,8 @@ type Props = {
 } & CardFormFiledProps;
 
 export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: Props) => {
-  const isValidate = cardNumbers.some((cardNumber) => cardNumber.isValid);
+  const isInvalidCardNumber = cardNumbers.some((cardNumber) => !cardNumber.isValid);
+
   return (
     <CardInputLayout
       headerText="결제할 카드 번호를 입력해 주세요."
@@ -40,7 +41,7 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
             height: 10px;
           `}
         >
-          {!isValidate ? errorMessage : ''}
+          {isInvalidCardNumber ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>

@@ -13,13 +13,14 @@ function App() {
     errorMessage: cardErrorMessage,
     handleChange,
     handleBlur,
-  } = useCardInput(4, 4);
+  } = useCardInput('cardNumber', 4, 4);
+
   const {
     value: expireDate,
     errorMessage: expireDateErrorMessage,
     handleChange: handleExpireDateChange,
     handleBlur: handleExpireDateBlur,
-  } = useCardInput(2, 2);
+  } = useCardInput('expireDate', 2, 2);
 
   return (
     <AppLayout>

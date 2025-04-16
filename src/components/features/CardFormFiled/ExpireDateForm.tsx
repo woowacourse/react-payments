@@ -12,9 +12,10 @@ type Props = {
   expireDate: CardInputType[];
 } & CardFormFiledProps;
 
+const ExpireDatePlaceholder = ['MM', 'YY'];
+
 export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: Props) => {
-  const ExpireDatePlaceholder = ['MM', 'YY'];
-  const isValidate = expireDate.some((expireDate) => expireDate.isValid);
+  const isInvalidDate = expireDate.some((expireDate) => !expireDate.isValid);
 
   return (
     <CardInputLayout
@@ -43,7 +44,7 @@ export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: P
             height: 10px;
           `}
         >
-          {!isValidate ? errorMessage : ''}
+          {isInvalidDate ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>
