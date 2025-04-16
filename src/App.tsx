@@ -1,5 +1,6 @@
 import "./style.css";
 import "./reset.css";
+import LabeledInput from "./component/LabeledInput";
 
 function App() {
   const cardNumber = {
@@ -12,7 +13,11 @@ function App() {
     CVC: 123,
   };
 
-  return <></>;
+  return (
+    <>
+      <LabeledInput label="레이블" errorMessage="에러입니다" type="periodMM" />
+    </>
+  );
 }
 
 export default App;

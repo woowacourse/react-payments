@@ -1,17 +1,13 @@
 import styled from "styled-components";
 import Input from "./Input";
+import inputContainerType from "../constants/inputContainerType";
 
-interface InputContainerTypeProps {
-  maxLength: number;
-  placeholder: string;
-  isError: boolean;
-}
+type InputContainerTypeProps = "cardNumber" | "periodMM" | "periodYY" | "cvc";
 
 interface LabeledInputProps {
   label: string;
-  inputCount: number;
   errorMessage: string;
-  inputContainerType: InputContainerTypeProps;
+  type: InputContainerTypeProps;
 }
 
 const Container = styled.div`
@@ -34,22 +30,23 @@ const InputContainer = styled.div`
 // TODO : 에러메세지 컴포넌트 제작 및 삽입
 const LabeledInput = ({
   label,
-  inputCount,
   errorMessage,
-  inputContainerType,
+  type = "cardNumber",
 }: LabeledInputProps) => {
   return (
     <Container>
       <Label>{label}</Label>
       <InputContainer>
-        {Array.from({ length: inputCount }).map((_, index) => (
-          <Input
-            key={index}
-            maxLength={4}
-            placeholder="placeholder"
-            isError={inputContainerType.isError}
-          />
-        ))}
+        {Array.from({ length: inputContainerType[type].inputCount }).map(
+          (_, index) => (
+            <Input
+              key={index}
+              maxLength={inputContainerType[type].maxLength}
+              placeholder={inputContainerType[type].placeholder}
+              // isError={inputContainerType[]}
+            />
+          )
+        )}
       </InputContainer>
     </Container>
   );
