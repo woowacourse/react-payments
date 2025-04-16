@@ -1,19 +1,42 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import isExactLength from "../utils/isExactLength";
 
 interface NumberInputProps {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   maxLength: number;
   placeholder: string;
 }
 
-function NumberInput({ maxLength, placeholder }: NumberInputProps) {
+function NumberInput({
+  value,
+  setValue,
+  maxLength,
+  placeholder,
+}: NumberInputProps) {
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (isExactLength(value, 0) || isExactLength(value, maxLength))
+      setIsError(false);
+    else setIsError(true);
+  }, [value]);
+
+  function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
+    if (Number.isNaN(Number(e.target.value))) {
+      e.target.value = value;
+      return;
+    }
+    setValue(e.target.value);
+  }
+
   return (
     <Input
-      type="number"
       maxLength={maxLength}
       placeholder={placeholder}
       isError={isError}
+      onChange={handleValue}
     />
   );
 }
@@ -28,7 +51,7 @@ const Input = styled.input<{ isError: boolean }>`
   padding: 8px;
 
   &:focus {
-    border: 1.5px solid #000;
+    border: 1.5px solid ${({ isError }) => (isError ? "#FF3D3D" : "#000")};
     outline: none;
   }
 `;
