@@ -30,7 +30,11 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
+  gap: 10px;
+`;
+
+const StyledHelperTextWrapper = styled.div`
+  height: 30px;
 `;
 
 const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => {
@@ -97,7 +101,9 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
           />
         ))}
       </StyledInputWrapper>
-      {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      <StyledHelperTextWrapper>
+        {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      </StyledHelperTextWrapper>
     </StyledExpirationDateInput>
   );
 };

@@ -25,7 +25,11 @@ const StyledInputWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  gap: 10px;
+`;
+
+const StyledHelperTextWrapper = styled.div`
+  height: 30px;
 `;
 
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
@@ -72,7 +76,9 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
           />
         ))}
       </StyledInputWrapper>
-      {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      <StyledHelperTextWrapper>
+        {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      </StyledHelperTextWrapper>
     </StyledCardNumberInput>
   );
 };

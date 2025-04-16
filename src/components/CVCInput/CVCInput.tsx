@@ -27,6 +27,10 @@ const StyledInputWrapper = styled.div`
   gap: 5px;
 `;
 
+const StyledHelperTextWrapper = styled.div`
+  height: 30px;
+`;
+
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
   const [isError, setIsError] = useState([false]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -70,7 +74,9 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
           />
         ))}
       </StyledInputWrapper>
-      {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      <StyledHelperTextWrapper>
+        {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      </StyledHelperTextWrapper>
     </StyledCVCInput>
   );
 };
