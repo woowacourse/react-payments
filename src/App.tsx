@@ -6,6 +6,7 @@ import InputSection from './InputSection';
 import ExpirationDateInputField from './InputField/ExpirationDateInputField';
 import CVCInputField from './InputField/CVCInputField';
 import { useState } from 'react';
+import { CardType } from './types/cardType';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
@@ -44,12 +45,15 @@ function App() {
     CVCPart1: '',
   });
 
+  const [cardType, setCardType] = useState<CardType>(null);
+
   return (
     <PaymentsLayout>
       <PaymentsContainer>
         <CardPreview
           cardNumberInputValue={cardNumberInputValue}
           expirationDateInputValue={expirationDateInputValue}
+          cardType={cardType}
         />
         <InputSection
           title="결제할 카드 번호를 입력해 주세요"
@@ -58,6 +62,8 @@ function App() {
           <CardNumberInputField
             inputValue={cardNumberInputValue}
             setInputValue={setCardNumberInputValue}
+            cardType={cardType}
+            setCardType={setCardType}
           />
         </InputSection>
         <InputSection

@@ -3,6 +3,7 @@ import {
   CardNumberInputValueType,
   ExpirationDateInputValueType,
 } from './types/inputFieldType';
+import { CardType } from './types/cardType';
 
 const Card = styled.div`
   position: relative;
@@ -22,9 +23,19 @@ const CardChip = styled.div`
   position: absolute;
   width: 36px;
   height: 22px;
-  inset: 8px 0 0 12px;
+  top: 8px;
+  left: 12px;
   border-radius: 4px;
   background: #ddcd78;
+`;
+
+const CardTypeBadge = styled.img<{ $cardType: CardType }>`
+  visibility: ${(props) => (props.$cardType === null ? 'hidden' : 'visible')};
+  position: absolute;
+  width: 36px;
+  height: 22px;
+  top: 8px;
+  right: 12px;
 `;
 
 const CardInfoBox = styled.div`
@@ -67,13 +78,16 @@ const CardNumberMask = styled.div`
 function CardPreview({
   cardNumberInputValue,
   expirationDateInputValue,
+  cardType,
 }: {
   cardNumberInputValue: Record<CardNumberInputValueType, string>;
   expirationDateInputValue: Record<ExpirationDateInputValueType, string>;
+  cardType: CardType;
 }) {
   return (
     <Card>
       <CardChip />
+      <CardTypeBadge src={`img/${cardType}.png`} $cardType={cardType} />
       <CardInfoBox>
         <CardNumberRow>
           <CardNumberWrapper>
