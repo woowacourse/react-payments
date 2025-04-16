@@ -27,7 +27,7 @@ export const checkValidYear = (value: string) => {
   }
 };
 
-export const checkValidExpirationDate = (month: string, year: string) => {
+export const checkTotalExpirationDate = (month: string, year: string) => {
   const currentYear = getCurrentYear().toString().slice(2);
   const currentMonth = getCurrentMonth() + 1;
 
