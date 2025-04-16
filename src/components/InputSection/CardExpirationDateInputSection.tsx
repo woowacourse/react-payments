@@ -17,7 +17,11 @@ const CardExpirationDateInputSection = ({
       subtitle="유효기간"
     >
       <InputField
-        value={cardExpirationDate.month}
+        value={
+          cardExpirationDate.month !== '' && cardExpirationDate.month < 10
+            ? `0${cardExpirationDate.month}`
+            : cardExpirationDate.month
+        }
         onChange={setCardExpirationDate('month')}
         isError={isError.month}
         placeholder="MM"

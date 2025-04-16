@@ -9,7 +9,6 @@ const CardNumbersInputSection = ({
   isError,
   errorMessage,
 }: UseCardNumbersOptions) => {
-  console.log(cardNumbers, 'cardNumbers');
   return (
     <InputSection
       title="결제할 카드번호를 입력해 주세요"

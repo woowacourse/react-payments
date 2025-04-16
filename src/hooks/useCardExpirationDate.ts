@@ -40,6 +40,8 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
     target: CardExpirationDateKeys,
     input: string
   ) => {
+    // if (input === '') return true;
+
     if (isNaN(Number(input))) {
       setErrorMessage('숫자만 입력 가능합니다');
       return false;
@@ -61,11 +63,39 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
         setErrorMessage('01 ~ 12 사이의 숫자만 입력 가능합니다');
         return false;
       }
+
+      if (
+        cardExpirationDate.year !== '' &&
+        cardExpirationDate.year === new Date().getFullYear() % 100
+      ) {
+        if (Number(input) < Math.floor(new Date().getMonth() + 1)) {
+          setErrorMessage('유효기간이 지났습니다');
+          return false;
+        }
+      }
     }
+
     if (target === 'year') {
+      if (input.length < 2) return true;
+
       if (Number(input) < 0 || Number(input) > 99) {
         setErrorMessage('00 ~ 99 사이의 숫자만 입력 가능합니다');
         return false;
+      }
+
+      if (Number(input) < Math.floor(new Date().getFullYear() % 100)) {
+        setErrorMessage('유효기간이 지났습니다');
+        return false;
+      }
+
+      if (Number(input) === Math.floor(new Date().getFullYear() % 100)) {
+        if (
+          cardExpirationDate.month !== '' &&
+          cardExpirationDate.month < new Date().getMonth() + 1
+        ) {
+          setErrorMessage('유효기간이 지났습니다');
+          return false;
+        }
       }
     }
 
