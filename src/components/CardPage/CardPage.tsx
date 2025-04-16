@@ -13,6 +13,7 @@ export type HandleInputParams = {
 
 const StyledCardPage = styled.div`
   width: 40%;
+  min-width: 400px;
   height: 100vh;
   margin: 0 auto;
   display: flex;
