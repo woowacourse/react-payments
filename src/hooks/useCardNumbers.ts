@@ -14,7 +14,7 @@ export type CardNumbers = {
 };
 
 const InitialCardNumber: CardNumbers = {
-  firstNumber: 1234,
+  firstNumber: '',
   secondNumber: '',
   thirdNumber: '',
   fourthNumber: '',
