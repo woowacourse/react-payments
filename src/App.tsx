@@ -1,6 +1,7 @@
 import CardNumbersInput from "./components/CardNumbersInput/CardNumbersInput";
 import CardExpiryInput from "./components/CardExpiryInput/CardExpiryInput";
 import CVCInput from "./components/CVCInput/CVCInput";
+import CardPreview from "./components/CardPreview/CardPreview";
 import './App.css'
 // import styles from './App.module.css'
 
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <div className='app'>
-      <div>Preview</div>
+      <CardPreview />
       <form>
         <CardNumbersInput /> 
         <CardExpiryInput/>

@@ -1,0 +1,22 @@
+.preview {
+  position: relative;
+  width: 300px;
+  height: 180px;
+  background-image: url('./preview.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.magnetic {
+  position: absolute;
+  width: 50px;
+  top: 15px;
+  left: 20px;
+}
+
+.visa {
+  position: absolute;
+  width: 50px;
+  top: 15px;
+  left: 205px;
+}
