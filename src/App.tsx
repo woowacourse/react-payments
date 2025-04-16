@@ -50,7 +50,6 @@ function App() {
         <CardPreview
           cardNumberInputValue={cardNumberInputValue}
           expirationDateInputValue={expirationDateInputValue}
-          CVCInputValue={CVCInputValue}
         />
         <InputSection
           title="결제할 카드 번호를 입력해 주세요"
