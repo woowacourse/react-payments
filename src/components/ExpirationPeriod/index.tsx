@@ -1,136 +1,106 @@
-import { useEffect, useRef, useState } from 'react';
-import InputLabels from '../common/InputLabels';
-import InputTexts from '../common/InputTexts';
-import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
+import ExpirationPeriodView from './ExpirationPeriodView';
 
-interface PeriodProps {
+export interface ExpirationPeriodProps {
   period: string[];
   setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
   separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const ExpirationPeriod: React.FC<PeriodProps> = ({
+const ExpirationPeriod: React.FC<ExpirationPeriodProps> = ({
   period,
   setPeriod,
   separatorRef,
 }) => {
-  const errorMessageRef = useRef<HTMLDivElement>(null);
-  const [isError, setIsError] = useState<boolean[]>([false, false]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errors, setErrors] = useState<boolean[]>([false, false]);
 
   useEffect(() => {
-    if (errorMessageRef?.current && isError.every((error) => error === false)) {
-      errorMessageRef.current.innerText = '';
+    if (errors.every((error) => error === false)) {
+      setErrorMessage('');
     }
-  }, [isError]);
-
-  const enterCorrectPeriod = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-    newState: string[]
-  ) => {
-    newState[index] = e.target.value;
-    setIsError(isError.map((error, i) => (i === index ? false : error)));
-    e.target.style.borderColor = '#ccc';
-  };
-
-  const enterWrongPeriod = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-    message: string
-  ) => {
-    e.target.style.borderColor = 'red';
-    setIsError(isError.map((error, i) => (i === index ? true : error)));
-    if (errorMessageRef?.current) {
-      errorMessageRef.current.innerText = message;
-    }
-  };
+  }, [errors]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
+    const value = e.target.value;
     setPeriod((prev) => {
       const newState = [...prev];
 
-      if (/^[0-9]*$/.test(e.target.value)) {
-        enterCorrectPeriod(e, index, newState);
-      } else {
-        enterWrongPeriod(e, index, '숫자만 입력 가능합니다.');
-        return prev;
+      let valid = true;
+      let message = '';
+
+      if (!/^[0-9]*$/.test(value)) {
+        valid = false;
+        message = '숫자만 입력 가능합니다.';
+      } else if (value.length <= 2) {
+        newState[index] = value;
+        if (index === 0) {
+          const month = Number(value);
+          if (month > 12 || month < 1) {
+            valid = false;
+            message = '올바른 유효기간을 입력하세요.';
+          } else if (month < 10 && !value.startsWith('0')) {
+            valid = false;
+            message = '올바른 유효기간을 입력하세요.';
+          }
+        } else {
+          const year = Number(value);
+          if (year < 0 || year > 99) {
+            valid = false;
+            message = '올바른 유효기간을 입력하세요.';
+          } else if (
+            (year < 10 && !value.startsWith('0')) ||
+            value.length === 1
+          ) {
+            valid = false;
+            message = '올바른 유효기간을 입력하세요.';
+          }
+        }
       }
 
-      if (index === 0) {
-        if (
-          e.target.value.length === 2 &&
-          Number(e.target.value) <= 12 &&
-          Number(e.target.value) > 0
-        ) {
-          enterCorrectPeriod(e, index, newState);
-        } else {
-          enterWrongPeriod(
-            e,
-            index,
-            '올바른 유효기간을 입력하세요. (MM: 01~12)'
-          );
-        }
+      if (!valid) {
+        setErrorMessage(message);
+        setErrors((prevErr) => {
+          const newErrors = [...prevErr];
+          newErrors[index] = true;
+          return newErrors;
+        });
       } else {
-        if (e.target.value.length === 2) {
-          enterCorrectPeriod(e, index, newState);
-        } else {
-          enterWrongPeriod(
-            e,
-            index,
-            '올바른 유효기간을 입력하세요. (YY: 00~99)'
-          );
-        }
+        setErrors((prevErr) => {
+          const newErrors = [...prevErr];
+          newErrors[index] = false;
+          return newErrors;
+        });
       }
-
       return newState;
     });
   };
 
+  const handleFocus = () => {
+    if (separatorRef?.current) {
+      separatorRef.current.textContent = '/';
+    }
+  };
+
+  const handleBlur = () => {
+    if (separatorRef?.current && period[0] === '' && period[1] === '') {
+      separatorRef.current.textContent = '';
+    }
+  };
+
   return (
-    <ExpirationPeriodContainer data-testid="expiration-component">
-      <InputLabels
-        title="카드 유효기간을 입력해 주세요"
-        caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-      />
-      <InputTexts
-        label="유효기간"
-        placeholder={['MM', 'YY']}
-        state={period}
-        eventHandler={handleInputChange}
-        onFocus={() => {
-          if (separatorRef?.current) {
-            separatorRef.current.textContent = '/';
-          }
-        }}
-        onBlur={() => {
-          if (separatorRef?.current && period[0] === '' && period[1] === '') {
-            separatorRef.current.textContent = '';
-          }
-        }}
-      />
-      <ErrorMessage ref={errorMessageRef}></ErrorMessage>
-    </ExpirationPeriodContainer>
+    <ExpirationPeriodView
+      period={period}
+      errorMessage={errorMessage}
+      errors={errors}
+      handleInputChange={handleInputChange}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+    />
   );
 };
+
 export default ExpirationPeriod;
-
-const ExpirationPeriodContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-`;
-
-const ErrorMessage = styled.div`
-  font-weight: 400;
-  font-size: 9.5px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  vertical-align: middle;
-  color: red;
-  height: 9.5px;
-`;
