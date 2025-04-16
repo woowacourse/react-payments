@@ -9,7 +9,7 @@ function CVCInputField() {
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    setInputValue({ ...inputValue, [name]: value });
+    if (value.length <= 3) setInputValue({ ...inputValue, [name]: value });
   };
 
   return (

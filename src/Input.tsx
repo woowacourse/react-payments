@@ -40,6 +40,7 @@ function Input({
   name,
   type,
   onChange,
+  onBlur,
 }: {
   placeholder: string;
   isError?: boolean;
@@ -47,6 +48,7 @@ function Input({
   name: string;
   type: 'text' | 'number';
   onChange: (e: ChangeEvent) => void;
+  onBlur?: (e: ChangeEvent) => void;
 }) {
   return (
     <StyledInput
@@ -56,6 +58,7 @@ function Input({
       onChange={onChange}
       name={name}
       type={type}
+      onBlur={onBlur}
     ></StyledInput>
   );
 }
