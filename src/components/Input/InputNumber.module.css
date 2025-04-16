@@ -9,3 +9,11 @@
 .input-number::placeholder {
   color: var(--color-input);
 }
+
+.input-number:focus {
+  outline-color: var(--color-black) 1px solid;
+}
+
+.input-number.error {
+  outline: 1px solid var(--color-error);
+}
