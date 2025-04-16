@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { isNaN } from "../../../utils/isNaN";
+import { isNaN } from "../../../../../utils/isNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
 import { INITIAL_CARD_NUMBER_STATE } from "../constants";
 

@@ -1,15 +1,22 @@
 import styles from "./CardExpireDateInputs.module.css";
-import Input from "../../../../components/Input/Input";
-import Label from "../../../../components/Label/Label";
-import useControlledExpireDate from "../../hooks/useControlledExpireDate";
+import Input from "../../../../../../components/Input/Input";
+import Label from "../../../../../../components/Label/Label";
 
-function CardExpireDateInputs() {
-  const {
-    expireDate,
-    handleExpireMonthChange,
-    handleExpireYearChange,
-    handleExpireMonthBlur,
-  } = useControlledExpireDate();
+import { ExpireDateState } from "../../types";
+
+export interface CardExpireDateInputsProps {
+  expireDate: ExpireDateState;
+  handleExpireMonthChange: (value: string) => void;
+  handleExpireYearChange: (value: string) => void;
+  handleExpireMonthBlur: (value: string) => void;
+}
+
+function CardExpireDateInputs({
+  expireDate,
+  handleExpireMonthChange,
+  handleExpireYearChange,
+  handleExpireMonthBlur,
+}: CardExpireDateInputsProps) {
   const { MM, YY } = expireDate;
 
   return (

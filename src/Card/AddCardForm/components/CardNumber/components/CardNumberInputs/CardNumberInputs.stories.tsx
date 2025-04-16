@@ -9,7 +9,7 @@ const meta = {
   component: CardNumberInputs,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
-    onCardNumberChange: () => {},
+    handleCardNumberChange: () => {},
   },
 } satisfies Meta<typeof CardNumberInputs>;
 
@@ -36,7 +36,7 @@ export const WithValidationTest: Story = {
     return (
       <CardNumberInputs
         cardNumberState={cardNumberState}
-        onCardNumberChange={handleCardNumberChange}
+        handleCardNumberChange={handleCardNumberChange}
       />
     );
   },

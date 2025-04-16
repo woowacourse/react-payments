@@ -1,8 +1,11 @@
 import styles from "./CardNumberInputs.module.css";
-import Label from "../../../../components/Label/Label";
-import Input from "../../../../components/Input/Input";
-import { isAnyTrue } from "../../../../utils/isAnyTrue";
-import type { CardNumberInputKey, CardNumberState } from "../../types";
+import Label from "../Label/Label";
+import Input from "../Input/Input";
+import { isAnyTrue } from "../../utils/isAnyTrue";
+import type {
+  CardNumberInputKey,
+  CardNumberState,
+} from "../../Card/AddCardForm/components/CardNumber/constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
