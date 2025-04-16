@@ -35,7 +35,7 @@ function CardExpireDateInputs({
             onBlur={(e) => handleExpireMonthBlur(e.target.value)}
           />
           {MM.errorMessage && (
-            <span id="error-message" className={styles.errorMessage}>
+            <span id="month-error-message" className={styles.errorMessage}>
               {MM.errorMessage}
             </span>
           )}
@@ -51,7 +51,7 @@ function CardExpireDateInputs({
             onChange={(e) => handleExpireYearChange(e.target.value)}
           />
           {YY.errorMessage && (
-            <span id="error-message" className={styles.errorMessage}>
+            <span id="year-error-message" className={styles.errorMessage}>
               {YY.errorMessage}
             </span>
           )}
