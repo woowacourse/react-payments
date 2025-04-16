@@ -5,7 +5,6 @@ import { useState } from "react";
 function App() {
   const cardInstance = new Card();
   const [cardState, setCardState] = useState(cardInstance.information);
-  console.log(cardState);
   return <div></div>;
 }
 
