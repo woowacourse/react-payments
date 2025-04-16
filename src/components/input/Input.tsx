@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 const InputStyled = styled.input`
+    width: ${(props) => props.width ? props.width : "100%"};
     border-radius: 2px;
     border: 1.015px solid #ACACAC;
     &::-webkit-outer-spin-button {
@@ -23,12 +24,13 @@ type InputProps = {
     type: "text" | "number"
     maxLength: number;
     placeholder: string;
+    width?: string;
 }
 
-function Input({type, maxLength, placeholder}: InputProps) {
+function Input({width ,type, maxLength, placeholder}: InputProps) {
     return (
         <>
-            <InputStyled type={type} placeholder={placeholder} maxLength={maxLength}></InputStyled>
+            <InputStyled width={width} type={type} placeholder={placeholder} maxLength={maxLength}></InputStyled>
         </>
     )
 }

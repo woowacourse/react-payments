@@ -21,10 +21,10 @@ function CardNumberInputs() {
         <Container>
             <label htmlFor="">카드 번호</label>
            <InputWrap>
-                <Input maxLength={4} placeholder="1234" type="number"></Input>
-                <Input maxLength={4} placeholder="1234" type="number"></Input>
-                <Input maxLength={4} placeholder="1234" type="number"></Input>
-                <Input maxLength={4} placeholder="1234" type="number"></Input>
+                <Input width='25%' maxLength={4} placeholder="1234" type="number"></Input>
+                <Input width='25%' maxLength={4} placeholder="1234" type="number"></Input>
+                <Input width='25%' maxLength={4} placeholder="1234" type="number"></Input>
+                <Input width='25%' maxLength={4} placeholder="1234" type="number"></Input>
             </InputWrap>
         </Container>
     )
