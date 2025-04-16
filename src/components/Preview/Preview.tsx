@@ -1,3 +1,4 @@
+import { useCard } from "../../hooks/useCard";
 import {
   CardNumbersGroupCSS,
   CardTypeCSS,
@@ -5,24 +6,21 @@ import {
   PreviewCSS,
 } from "./Preview.styled";
 
-export interface PreviewProps {
-  cardNumbers: string[];
-  expirationPeriod: string[];
-}
-
-function Preview({ cardNumbers, expirationPeriod }: PreviewProps) {
+function Preview() {
+  const { cardNumbers, expirationPeriod } = useCard();
   return (
     <PreviewContainerCSS>
       <PreviewCSS>
         <CardTypeCSS />
         <CardNumbersGroupCSS>
-          {cardNumbers.map((cardNumber) => (
-            <span>{cardNumber}</span>
-          ))}
+          <span>{cardNumbers.first}</span>
+          <span>{cardNumbers.second}</span>
+          <span>{cardNumbers.third}</span>
+          <span>{cardNumbers.fourth}</span>
         </CardNumbersGroupCSS>
-        <div>
-          <span>{expirationPeriod.join("/")}</span>
-        </div>
+        <span>
+          {expirationPeriod.month}/{expirationPeriod.year}
+        </span>
       </PreviewCSS>
     </PreviewContainerCSS>
   );

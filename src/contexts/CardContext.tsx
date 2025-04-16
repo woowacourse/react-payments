@@ -1,4 +1,10 @@
 import { createContext, ReactNode, useState } from "react";
+import {
+  CARD_POSITION,
+  CardPositionType,
+  PERIOD_POSITION,
+  PeriodPositionType,
+} from "../constants/constants";
 
 interface CardNumbers {
   first: string;
@@ -15,24 +21,17 @@ interface ExpirationPeriod {
 type CvcNumber = string;
 
 export interface CardContextType {
-  getFirstCardNumber: () => CardNumbers["first"];
-  getSecondCardNumber: () => CardNumbers["second"];
-  getThirdCardNumber: () => CardNumbers["third"];
-  getFourthCardNumber: () => CardNumbers["first"];
+  cardNumbers: CardNumbers;
+  updateCardNumber: (number: string, position: CardPositionType) => void;
 
-  getMonth: () => ExpirationPeriod["month"];
-  getYear: () => ExpirationPeriod["year"];
-
-  updateFirstCardNumber: (first: string) => void;
-  updateSecondCardNumber: (second: string) => void;
-  updateThirdCardNumber: (third: string) => void;
-  updateFourthCardNumber: (fourth: string) => void;
-
-  updateMonth: (month: string) => void;
-  updateYear: (year: string) => void;
+  expirationPeriod: ExpirationPeriod;
+  updateExpirationPeriod: (
+    period: string,
+    position: PeriodPositionType
+  ) => void;
 
   cvcNumber: CvcNumber;
-  setCvcNumber: React.Dispatch<React.SetStateAction<string>>;
+  setCvcNumber: React.Dispatch<React.SetStateAction<CvcNumber>>;
 }
 
 interface CardProviderProps {
@@ -51,7 +50,7 @@ const defaultExpirationPeriod = {
   year: "",
 };
 
-const defaultCvcNumber = "0";
+const defaultCvcNumber = "";
 
 export const CardContext = createContext<CardContextType | null>(null);
 
@@ -63,87 +62,32 @@ export function CardProvider({ children }: CardProviderProps) {
   );
   const [cvcNumber, setCvcNumber] = useState<CvcNumber>(defaultCvcNumber);
 
-  const getFirstCardNumber = () => {
-    return cardNumbers.first;
-  };
-
-  const getSecondCardNumber = () => {
-    return cardNumbers.second;
-  };
-
-  const getThirdCardNumber = () => {
-    return cardNumbers.third;
-  };
-
-  const getFourthCardNumber = () => {
-    return cardNumbers.fourth;
-  };
-
-  const getMonth = () => {
-    return expirationPeriod.month;
-  };
-
-  const getYear = () => {
-    return expirationPeriod.year;
-  };
-
-  const updateFirstCardNumber = (first: string) => {
-    setCardNumbers((prevCardNumbers) => ({
-      ...prevCardNumbers,
-      first: first,
+  const updateCardNumber = (number: string, position: CardPositionType) => {
+    setCardNumbers((prevNumbers) => ({
+      ...prevNumbers,
+      [CARD_POSITION[position]]: number,
     }));
   };
 
-  const updateSecondCardNumber = (second: string) => {
-    setCardNumbers((prevCardNumbers) => ({
-      ...prevCardNumbers,
-      second: second,
-    }));
-  };
-
-  const updateThirdCardNumber = (third: string) => {
-    setCardNumbers((prevCardNumbers) => ({
-      ...prevCardNumbers,
-      third: third,
-    }));
-  };
-
-  const updateFourthCardNumber = (fourth: string) => {
-    setCardNumbers((prevCardNumbers) => ({
-      ...prevCardNumbers,
-      fourth: fourth,
-    }));
-  };
-
-  const updateMonth = (month: string) => {
+  const updateExpirationPeriod = (
+    period: string,
+    position: PeriodPositionType
+  ) => {
     setExpirationPeriod((prevExpirationPeriod) => ({
       ...prevExpirationPeriod,
-      month: month,
-    }));
-  };
-
-  const updateYear = (year: string) => {
-    setExpirationPeriod((prevExpirationPeriod) => ({
-      ...prevExpirationPeriod,
-      year: year,
+      [PERIOD_POSITION[position]]: period,
     }));
   };
 
   return (
     <CardContext.Provider
       value={{
-        getFirstCardNumber,
-        getSecondCardNumber,
-        getThirdCardNumber,
-        getFourthCardNumber,
-        getMonth,
-        getYear,
-        updateFirstCardNumber,
-        updateSecondCardNumber,
-        updateThirdCardNumber,
-        updateFourthCardNumber,
-        updateMonth,
-        updateYear,
+        cardNumbers,
+        updateCardNumber,
+
+        expirationPeriod,
+        updateExpirationPeriod,
+
         cvcNumber,
         setCvcNumber,
       }}
