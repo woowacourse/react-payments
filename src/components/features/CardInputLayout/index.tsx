@@ -1,7 +1,10 @@
 import { PropsWithChildren } from 'react';
-import { Text } from '../../common/Text';
+
+import { css } from '@emotion/react';
+
 import { StyledCardInputLayoutContainer } from './CardInputLayout.styled';
-import { css } from '@emotion/css';
+
+import { Text } from '@/components/common/Text';
 
 export type Props = {
   headerText: string;
@@ -23,7 +26,7 @@ export const CardInputLayout = ({ headerText, description, label, children }: Pr
         {label}
       </Text>
       <div
-        className={css`
+        css={css`
           display: flex;
           flex-direction: row;
           gap: 8px;

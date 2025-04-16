@@ -8,5 +8,4 @@ export const StyledCardInputLayoutContainer = styled.div`
   gap: 4px;
   width: 100%;
   max-width: 500px;
-  height: 100%;
 `;
