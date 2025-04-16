@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { CardInputProps } from "../types/CardInputTypes";
+import { useState } from "react";
 
 type InputKeyType =
   | "first"
@@ -14,32 +15,48 @@ type InputKeyType =
 interface InputProps {
   maxLength: number;
   placeholder: string;
-  isError: boolean;
   inputKey: InputKeyType;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
+  validate: (value: string) => string;
+  setErrorMessage: Dispatch<SetStateAction<string>>;
 }
 
-const InputField = styled.input`
+const InputField = styled.input<{ $isError: boolean }>`
   width: 100%;
   padding: 8px;
   background-color: var(--color-white);
   border: 1px solid var(--color-gray);
+  border-color: ${({ $isError }) =>
+    $isError ? "var(--color-red)" : "var(--color-gray)"};
   border-radius: 4px;
   &:focus {
     outline: none;
-    border-color: var(--color-black);
+    border-color: ${({ $isError }) =>
+      $isError ? "var(--color-red)" : "var(--color-black)"};
   }
 `;
 
 const Input = ({
   maxLength,
   placeholder,
-  isError = false,
   inputKey,
   setCardInput,
+  validate,
+  setErrorMessage,
 }: InputProps) => {
+  const [isError, setIsError] = useState(false);
+
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    const errorMessage = validate(value);
+    if (errorMessage.length > 0) {
+      setErrorMessage(errorMessage);
+      setIsError(true);
+      return;
+    }
+
+    setErrorMessage("");
+    setIsError(false);
 
     setCardInput((prev: CardInputProps) => ({
       ...prev,
@@ -54,6 +71,7 @@ const Input = ({
       onChange={handleCardNumber}
       inputMode="numeric"
       pattern="[0-9]*"
+      $isError={isError}
     />
   );
 };
