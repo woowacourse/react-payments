@@ -1,4 +1,4 @@
-import { css } from '@emotion/css';
+import { css } from '@emotion/react';
 
 import { StyledCardContainer, StyledCardTypeIcon, StyledICCheapContainer } from './Card.styled';
 
@@ -7,13 +7,23 @@ import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
 
 type Props = {
-  type: 'VISA' | 'MASTER';
   cardNumbers: CardInputType[];
-  expireDate: string;
+  expireDate: CardInputType[];
 };
 
-export const Card = ({ type, cardNumbers, expireDate }: Props) => {
-  const cardTypeSrc = type === 'VISA' ? '/images/Visa.png' : '/images/Master.png';
+export const Card = ({ cardNumbers, expireDate }: Props) => {
+  const cardTypeCheck = () => {
+    if (cardNumbers[0].value.startsWith('4')) {
+      return '/images/Visa.png';
+    }
+
+    if (
+      Number(cardNumbers[0].value.slice(0, 2)) >= 51 &&
+      Number(cardNumbers[0].value.slice(0, 2)) <= 55
+    ) {
+      return '/images/Master.png';
+    }
+  };
 
   const getDisplayCardNumber = (number: number, index: number): string => {
     if (!number) {
@@ -30,15 +40,16 @@ export const Card = ({ type, cardNumbers, expireDate }: Props) => {
   return (
     <StyledCardContainer>
       <StyledICCheapContainer />
-      <StyledCardTypeIcon src={cardTypeSrc} alt="cardType" />
+      {cardTypeCheck() && <StyledCardTypeIcon src={cardTypeCheck()} alt="cardType" />}
 
-      <Flex direction="column" alignItems="flex-start" width="300px" height="100%" margin="0 auto">
+      <Flex direction="column" alignItems="flex-start" width="300px" height="200px" margin="0 auto">
         <Flex gap="20px" height="36px" margin="10px 0 0 0">
           {cardNumbers.map((str, index) => (
             <div
               key={`card-number-${index}`}
-              className={css`
+              css={css`
                 width: 60px;
+                height: 36px;
                 text-align: left;
               `}
             >
@@ -48,9 +59,20 @@ export const Card = ({ type, cardNumbers, expireDate }: Props) => {
             </div>
           ))}
         </Flex>
-        <Text variant="Title" fontWeight="regular" color="white">
-          {expireDate}
-        </Text>
+        {expireDate[0].value && (
+          <Text
+            variant="Title"
+            fontWeight="regular"
+            color="white"
+            css={css`
+              width: 60px;
+              height: 36px;
+              text-align: left;
+            `}
+          >
+            {expireDate.map((date) => date.value).join(' / ')}
+          </Text>
+        )}
       </Flex>
     </StyledCardContainer>
   );
