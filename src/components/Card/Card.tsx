@@ -9,7 +9,6 @@ export default function Card({
   cardLogo: 'visa' | 'master' | '';
   expiration: string[];
 }) {
-  console.log(expiration);
   return (
     <div className={styles.card}>
       <div className={styles.chipWrapper}>
@@ -19,21 +18,29 @@ export default function Card({
           <img className={styles.cardLogo} src={cardLogo === 'visa' ? 'images/visa.jpg' : 'images/mastercard.jpg'} />
         )}
       </div>
-      <div className={styles.cardNumberWrapper}>
-        {numbers.slice(0, 2).map((number) => (
-          <p className={styles.cardNumber}> {number}</p>
-        ))}
-        {numbers.slice(2).map((number, i) => (
-          <p key={i} className={styles.cardNumber}>
-            {'・'.repeat(number.length)}
-          </p>
-        ))}
-      </div>
-      <div className={styles.cardNumber}>
-        {expiration[0]}
-        {expiration[0] && '/'}
-        {expiration[1]}
+      <div className={styles.numberWrapper}>
+        <div className={styles.cardNumberWrapper}>
+          {numbers.slice(0, 2).map((number) => (
+            <p className={styles.cardNumber}> {number}</p>
+          ))}
+          {numbers.slice(2).map((number, i) => (
+            <div key={i} className={styles.dotWrapper}>
+              {Array.from({ length: number.length }).map((_, j) => (
+                <Dot key={j} />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className={styles.cardNumber}>
+          {expiration[0]}
+          {expiration[0] && '/'}
+          {expiration[1]}
+        </div>
       </div>
     </div>
   );
+}
+
+function Dot() {
+  return <div className={styles.dot}></div>;
 }

@@ -6,8 +6,13 @@
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+
+  gap: 14px;
 }
 
+.numberWrapper {
+  padding: 0 25px 12px 17px;
+}
 .chipWrapper {
   display: flex;
   justify-content: space-between;
@@ -30,7 +35,7 @@
 .cardNumberWrapper {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  align-items: center;
 }
 
 .cardNumber {
@@ -39,4 +44,16 @@
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 2.24px;
+}
+
+.dotWrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background-color: white;
 }
