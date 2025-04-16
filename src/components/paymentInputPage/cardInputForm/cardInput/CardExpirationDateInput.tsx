@@ -1,7 +1,12 @@
+import { Dispatch, SetStateAction } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 
-function CardExpirationDateInput() {
+function CardExpirationDateInput({
+  setExpirationDate,
+}: {
+  setExpirationDate: Dispatch<SetStateAction<string[]>>;
+}) {
   function onChangeHandler(
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
