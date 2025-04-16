@@ -24,6 +24,13 @@ function App() {
   })
   const cardType = getCardType(cardNumber.first)
 
+  const [cardExpirationDate, setCardExpirationDate] = useState<Record<string, string>>({
+    month: '',
+    year: '',
+  })
+
+  const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
+
   return (
     <div
       css={css`
@@ -46,8 +53,8 @@ function App() {
 
       <form style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
         <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
-        <CardExpirationDate />
-        <CardCVCNumber />
+        <CardExpirationDate cardExpirationDate={cardExpirationDate} setCardExpirationDate={setCardExpirationDate} />
+        <CardCVCNumber cardCVCNumber={cardCVCNumber} setCardCVCNumber={setCardCVCNumber} />
       </form>
     </div>
   )
