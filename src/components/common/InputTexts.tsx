@@ -38,7 +38,6 @@ const InputTexts: React.FC<InputTextsProps> = ({
             onFocus={onFocus}
             onBlur={onBlur}
             error={errors ? errors[index] : false}
-            data-testid={`card-number-input-${index}`}
           />
         ))}
       </Row>

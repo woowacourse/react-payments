@@ -24,9 +24,7 @@ export const ValidInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cardnumbers-component');
-    const inputs = container.querySelectorAll(
-      '[data-testid^="card-number-input-"]'
-    );
+    const inputs = container.querySelectorAll('input');
     for (let i = 0; i < inputs.length; i++) {
       await userEvent.clear(inputs[i]);
       await userEvent.type(inputs[i], '1234');
@@ -43,7 +41,7 @@ export const InvalidInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cardnumbers-component');
-    const firstInput = await canvas.findByTestId('card-number-input-0');
+    const firstInput = container.querySelectorAll('input')[0];
     await userEvent.clear(firstInput);
     await userEvent.type(firstInput, 'abcd');
     await waitFor(() =>
@@ -59,9 +57,7 @@ export const MixedInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cardnumbers-component');
-    const inputs = container.querySelectorAll(
-      '[data-testid^="card-number-input-"]'
-    );
+    const inputs = container.querySelectorAll('input');
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], '1234');
     await userEvent.clear(inputs[1]);

@@ -21,6 +21,8 @@ const PreviewView: React.FC<PreviewViewProps> = ({
         <CardMethod
           src={cardMethodSrc}
           style={{ display: cardMethodSrc ? 'block' : 'none' }}
+          data-testid="card-method"
+          alt="Card Method"
         />
         <CardNumberArea>
           {cardNumbers.map((number, index) => (

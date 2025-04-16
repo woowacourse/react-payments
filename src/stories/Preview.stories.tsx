@@ -39,7 +39,7 @@ export const Visa: Story = {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
     await waitFor(() => expect(container).toBeDefined());
-    const cardMethodImg = container.querySelector('img');
+    const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
       expect(cardMethodImg?.getAttribute('src')).toBe('/images/visa.svg')
@@ -58,7 +58,7 @@ export const Mastercard: Story = {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
     await waitFor(() => expect(container).toBeDefined());
-    const cardMethodImg = container.querySelector('img');
+    const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
       expect(cardMethodImg?.getAttribute('src')).toBe('/images/Mastercard.svg')
@@ -77,7 +77,7 @@ export const NoLogo: Story = {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
     await waitFor(() => expect(container).toBeDefined());
-    const cardMethodImg = container.querySelector('img');
+    const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() => expect(cardMethodImg?.getAttribute('src')).toBe(null));
   },
