@@ -42,4 +42,8 @@ function App() {
 
 export default App;
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+	width: 376px;
+	padding: 77px 30px 20px;
+	margin: auto;
+`;

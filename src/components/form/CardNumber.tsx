@@ -56,4 +56,6 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 
 export default CardNumber;
 
-const CardNumberWrap = styled.div``;
+const CardNumberWrap = styled.div`
+	height: 130px;
+`;

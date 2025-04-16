@@ -20,6 +20,7 @@ const InputField = ({ label, inputs, errorMessage }: Props) => {
 };
 
 const Container = styled.div`
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -28,6 +29,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+	width: 100%;
 	display: flex;
 	gap: 8px;
 `;

@@ -25,6 +25,7 @@ const Input = ({ placeholder, isError = false, value, maxLength, inputHandler }:
 
 const TextInput = styled.input<{ isError: boolean }>(
 	(props) => `
+	width:100%;
 	padding: 8px;
 	border-radius: 2px;
   border:none;

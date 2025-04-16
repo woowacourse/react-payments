@@ -77,6 +77,7 @@ export default Card;
 const Container = styled.div`
 	width: 212px;
 	height: 132px;
+	margin: 0 auto 45px;
 	padding: 8px 12px;
 	border-radius: 4px;
 	background: #333;
