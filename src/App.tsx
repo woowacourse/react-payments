@@ -4,48 +4,60 @@ import { useState } from 'react';
 import Card from './components/Card/Card';
 import { InputSection } from './components/InputSection/InputSection';
 
+function useInputGroup(length: number, validateFn: (value: string, index: number) => boolean) {
+  const [values, setValues] = useState<string[]>(Array(length).fill(''));
+  const [validity, setValidity] = useState<boolean[]>(Array(length).fill(true));
+
+  const handleChange = (index: number, value: string) => {
+    const isValid = validateFn(value, index);
+
+    const updatedValues = [...values];
+    updatedValues[index] = value;
+    setValues(updatedValues);
+
+    const updatedValidity = [...validity];
+    updatedValidity[index] = isValid;
+    setValidity(updatedValidity);
+  };
+
+  const isError = () => {
+    return validity.includes(false);
+  };
+
+  return {
+    values,
+    validity,
+    handleChange,
+    isError
+  };
+}
+
 export default function App() {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [cardValid, setCardValid] = useState([true, true, true, true]);
+  const cardNumberGroup = useInputGroup(4, (v) => /^[0-9]*$/.test(v));
 
-  const [expirationPeriod, setExpirationPeriod] = useState(['', '']);
-  const [expirationPeriodValid, setExpirationPeriodValid] = useState([true]);
-
-  const handleNumberChange = (index: number, value: string) => {
-    const isValid = /^[0-9]*$/.test(value);
-
-    const updatedCardNumbers = [...cardNumbers];
-    updatedCardNumbers[index] = value;
-    setCardNumbers(updatedCardNumbers);
-
-    const updatedValid = [...cardValid];
-    updatedValid[index] = isValid;
-    setCardValid(updatedValid);
-  };
-
-  const handleExpirationPeriodChange = (index: number, value: string) => {
-    const isValid = /^[0-9]*$/.test(value);
-
-    const updatedCardNumbers = [...expirationPeriod];
-    updatedCardNumbers[index] = value;
-    setExpirationPeriod(updatedCardNumbers);
-
-    const updatedValid = [...expirationPeriodValid];
-    updatedValid[index] = isValid;
-    setExpirationPeriodValid(updatedValid);
-  };
+  const expirationGroup = useInputGroup(2, (v, i) => {
+    if (!/^[0-9]*$/.test(v)) return false;
+    const num = +v;
+    return i === 0 ? num >= 1 && num <= 12 : v.length === 2;
+  });
 
   return (
     <div>
-      <Card numbers={cardNumbers} />
+      <Card numbers={cardNumberGroup.values} />
+
       <InputSection.TitleWrapper>
         <InputSection.Title title="결제할 카드 번호를 입력해주세요" />
         <InputSection.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
       </InputSection.TitleWrapper>
       <InputSection.Label text="카드번호" />
-
-      <InputSection.InputWrapper numbers={cardNumbers} onChange={handleNumberChange} valid={cardValid} />
-      {cardValid.includes(false) && <InputSection.Error message={'숫자만 입력 가능합니다.'} />}
+      <InputSection.InputWrapper
+        numbers={cardNumberGroup.values}
+        onChange={cardNumberGroup.handleChange}
+        valid={cardNumberGroup.validity}
+        placeholders={['1234', '1234', '1234', '1234']}
+        maxLength={4}
+      />
+      {cardNumberGroup.isError() && <InputSection.Error message={'숫자만 입력 가능합니다.'} />}
 
       <InputSection.TitleWrapper>
         <InputSection.Title title="카드 유효기간을 입력해 주세요" />
@@ -53,11 +65,13 @@ export default function App() {
       </InputSection.TitleWrapper>
       <InputSection.Label text="유효기간" />
       <InputSection.InputWrapper
-        numbers={expirationPeriod}
-        onChange={handleExpirationPeriodChange}
-        valid={expirationPeriodValid}
+        numbers={expirationGroup.values}
+        onChange={expirationGroup.handleChange}
+        valid={expirationGroup.validity}
+        placeholders={['MM', 'YY']}
+        maxLength={2}
       />
-      {cardValid.includes(false) && <InputSection.Error message={'숫자만 입력 가능합니다.'} />}
+      {expirationGroup.isError() && <InputSection.Error message={'숫자만 입력 가능합니다.'} />}
     </div>
   );
 }

@@ -22,15 +22,15 @@ function Error({ message }: { message: string }) {
   return <p className={styles.errorMessage}>{message}</p>;
 }
 
-function InputWrapper({
-  numbers,
-  onChange,
-  valid
-}: {
+type InputWrapperProps = {
   numbers: string[];
   onChange: (index: number, value: string) => void;
   valid: boolean[];
-}) {
+  placeholders?: string[];
+  maxLength: number;
+};
+
+export function InputWrapper({ numbers, onChange, valid, placeholders = [], maxLength }: InputWrapperProps) {
   return (
     <div className={styles.inputWrapper}>
       {numbers.map((value, index) => (
@@ -38,8 +38,9 @@ function InputWrapper({
           key={index}
           value={value}
           isValid={valid[index]}
-          placeholder="1234"
+          placeholder={placeholders[index]}
           onChange={(e) => onChange(index, e.target.value)}
+          maxLength={maxLength}
         />
       ))}
     </div>
