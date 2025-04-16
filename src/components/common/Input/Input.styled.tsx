@@ -21,5 +21,7 @@ export const StyledInputContainer = styled.input<Pick<Props, 'isValid'>>`
 
   &:disabled {
     cursor: not-allowed;
+    color: #bcbcbc;
+    background-color: rgba(172, 172, 172, 0.2);
   }
 `;
