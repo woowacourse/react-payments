@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 interface CardNumberProps {
   title: string;
-  description: string;
+  description?: string;
   errorMessage: string;
   children: React.ReactElement;
 }
@@ -16,7 +16,7 @@ function CardNumber({
   return (
     <Wrapper>
       <Title>{title}</Title>
-      <Description>{description}</Description>
+      {description && <Description>{description}</Description>}
       {children}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Wrapper>
