@@ -11,7 +11,7 @@ type IsErrorType = {
   year: boolean;
 };
 
-interface CardValidityPeriodProps {
+interface CardValidityPeriodFieldProps {
   cardValidityPeriod: CardValidityPeriodType;
   isError: IsErrorType;
   onChange: (
@@ -20,11 +20,11 @@ interface CardValidityPeriodProps {
   ) => void;
 }
 
-function CardValidityPeriod({
+function CardValidityPeriodField({
   cardValidityPeriod,
   isError,
   onChange,
-}: CardValidityPeriodProps) {
+}: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
   const { month: isErrorMonth, year: isErrorYear } = isError;
 
@@ -57,7 +57,7 @@ function CardValidityPeriod({
   );
 }
 
-export default CardValidityPeriod;
+export default CardValidityPeriodField;
 
 const InputWrapper = styled.div`
   display: flex;
