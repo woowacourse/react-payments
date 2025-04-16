@@ -2,44 +2,55 @@ import "./App.css";
 import CardNumber from "./CardNumber/CarNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
-import { useState } from "react";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
+import useCardNumbers from "./hooks/useCardNumbers";
+import useExpirationDate from "./hooks/useExpirationDate";
+import useCvcNumber from "./hooks/useCvcNumber";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const [cardExpirationDate, setCardExpirationDate] = useState(["", ""]);
-  const [cardCvcNumber, setCardCvcNumber] = useState("");
+  const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
+    useCardNumbers();
+  const { cardExpirationDate, cardExpirationDateError, dateValidate } =
+    useExpirationDate();
+  const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
 
   const handleCardNumber = (value: string, index: number) => {
-    const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value;
-    setCardNumbers(newCardNumbers);
-    console.log(newCardNumbers.join(" - "));
+    cardNumbersValidate(value, index);
+    console.log(cardNumbers.join(" - "));
   };
 
   const handleCardExpirationDate = (value: string, index: number) => {
-    const newCardExpirationDate = [...cardExpirationDate];
-    newCardExpirationDate[index] = value;
-    setCardExpirationDate(newCardExpirationDate);
-    console.log(newCardExpirationDate);
+    dateValidate(value, index);
   };
 
   const handleCardCvcNumber = (value: string) => {
-    const newCardCvcNumber = value;
-    setCardCvcNumber(newCardCvcNumber);
-    console.log(cardCvcNumber);
+    cvcNumbersValidate(value);
+    console.log(cvcNumbers);
   };
 
   return (
     <div className="App">
       <PreviewCardLayout
         cardNumbers={cardNumbers}
+        cardType={cardType}
         cardExpirationDate={cardExpirationDate}
       />
       <div className="card-input">
-        <CardNumber handleChange={handleCardNumber} />
-        <CardExpirationDate handleChange={handleCardExpirationDate} />
-        <CardCvcNumber handleChange={handleCardCvcNumber} />
+        <CardNumber
+          handleChange={handleCardNumber}
+          cardNumbers={cardNumbers}
+          errorMessage={cardNumbersError}
+        />
+        <CardExpirationDate
+          handleChange={handleCardExpirationDate}
+          cardExpirationDate={cardExpirationDate}
+          errorMessage={cardExpirationDateError}
+        />
+        <CardCvcNumber
+          handleChange={handleCardCvcNumber}
+          cvcNumbers={cvcNumbers}
+          errorMessage={cvcNumbersError}
+        />
       </div>
     </div>
   );

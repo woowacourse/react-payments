@@ -5,6 +5,8 @@
   --color-white: #ffffff;
   --color-description: #8b95a1;
   --color-input: #acacac;
+  --color-error: #ff3d3d;
+  --color-black: #000000;
 }
 
 .App {

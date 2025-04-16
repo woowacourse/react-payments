@@ -1,3 +1,4 @@
+import InputErrorMessage from "../components/Input/InputErrorMessage";
 import InputNumber from "../components/Input/InputNumber";
 import InputDescription from "../components/InputDescription/InputDescription";
 import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
@@ -6,10 +7,14 @@ import styles from "./CardExpirationDate.module.css";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
+  cardExpirationDate: string[];
+  errorMessage: string[];
 }
 
 export default function CardExpirationDate({
   handleChange,
+  cardExpirationDate,
+  errorMessage,
 }: CardExpirationDateProps) {
   return (
     <section className="card-expiration-date">
@@ -22,14 +27,19 @@ export default function CardExpirationDate({
         <InputNumber
           onChange={(value) => handleChange(value, 0)}
           placeholder="MM"
-          maxLength={2}
+          value={cardExpirationDate[0]}
+          errorMessage={errorMessage[0]}
         />
         <InputNumber
           onChange={(value) => handleChange(value, 1)}
           placeholder="YY"
-          maxLength={2}
+          value={cardExpirationDate[1]}
+          errorMessage={errorMessage[1]}
         />
       </div>
+      <InputErrorMessage
+        message={errorMessage.find((msg) => msg !== "") ?? ""}
+      />
     </section>
   );
 }
