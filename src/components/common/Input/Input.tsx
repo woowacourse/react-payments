@@ -19,6 +19,7 @@ export default Input;
 
 // isError를 통해 border 색상 붉은색과 회색
 const InputWrapper = styled.input<InputProps>`
+  width: 100%;
   border: 1px solid ${(props) => (props.isError ? 'red' : 'gray')};
   border-radius: 2px;
   padding: 8px;
