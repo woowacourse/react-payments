@@ -49,7 +49,7 @@
 ## 기능 명세서
 
 - [x] 프로젝트 초기 세팅(emotion 설치, npm install, storybook 세팅)
-- [ ] cardInformation domain 생성
+- [x] cardInformation domain 생성
 - [ ] component 생성
   - [ ] Input 컴포넌트 구현
   - [ ] Input 컴포넌트 스토리북 생성
