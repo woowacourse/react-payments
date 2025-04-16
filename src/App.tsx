@@ -1,15 +1,7 @@
-import useAddCard from "./hooks/useAddCard";
-import AddCardForm from "./Card/AddCardForm/components/AddCardForm";
+import AddCard from "./AddCard/components/AddCard";
 
 function App() {
-  const { addCardState, previewState } = useAddCard();
-
-  return (
-    <>
-      <div>Preview</div>
-      <AddCardForm addCardState={addCardState} />
-    </>
-  );
+  return <AddCard />;
 }
 
 export default App;

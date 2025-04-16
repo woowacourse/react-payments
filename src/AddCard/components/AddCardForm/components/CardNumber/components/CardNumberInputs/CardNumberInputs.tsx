@@ -1,20 +1,17 @@
 import styles from "./CardNumberInputs.module.css";
-import Label from "../Label/Label";
-import Input from "../Input/Input";
-import { isAnyTrue } from "../../utils/isAnyTrue";
-import type {
-  CardNumberInputKey,
-  CardNumberState,
-} from "../../Card/AddCardForm/components/CardNumber/constants";
+import Label from "../../../../../../../components/Label/Label";
+import Input from "../../../../../../../components/Input/Input";
+import { isAnyTrue } from "../../../../../../../utils/isAnyTrue";
+import type { CardNumberInputKey, CardNumberState } from "../../types";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
-  onCardNumberChange: (key: CardNumberInputKey, value: string) => void;
+  handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
 }
 
 function CardNumberInputs({
   cardNumberState: { first, second, third, fourth },
-  onCardNumberChange,
+  handleCardNumberChange,
 }: CardNumberInputsProps) {
   const isCardNumberValid = isAnyTrue(
     first.isError,
@@ -34,7 +31,7 @@ function CardNumberInputs({
           placeholder="1234"
           isError={first.isError}
           value={first.value}
-          onChange={(e) => onCardNumberChange("first", e.target.value)}
+          onChange={(e) => handleCardNumberChange("first", e.target.value)}
         />
         <Input
           id="card-number-input"
@@ -43,7 +40,7 @@ function CardNumberInputs({
           placeholder="1234"
           isError={second.isError}
           value={second.value}
-          onChange={(e) => onCardNumberChange("second", e.target.value)}
+          onChange={(e) => handleCardNumberChange("second", e.target.value)}
         />
 
         <Input
@@ -53,7 +50,7 @@ function CardNumberInputs({
           placeholder="1234"
           isError={third.isError}
           value={third.value}
-          onChange={(e) => onCardNumberChange("third", e.target.value)}
+          onChange={(e) => handleCardNumberChange("third", e.target.value)}
         />
         <Input
           id="card-number-input"
@@ -62,7 +59,7 @@ function CardNumberInputs({
           placeholder="1234"
           isError={fourth.isError}
           value={fourth.value}
-          onChange={(e) => onCardNumberChange("fourth", e.target.value)}
+          onChange={(e) => handleCardNumberChange("fourth", e.target.value)}
         />
       </p>
       {isCardNumberValid && (
