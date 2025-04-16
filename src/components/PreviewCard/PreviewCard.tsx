@@ -49,6 +49,16 @@ const StyledCardNumberWrapper = styled.div`
 const StyledCardNumber = styled.div`
   color: white;
   font-size: 14px;
+  font-family: 'Inter';
+  letter-spacing: 2.5px;
+`;
+
+const StyledExpirationDate = styled.div`
+  color: white;
+  font-size: 14px;
+  margin: 10px 2px;
+  font-family: 'Inter';
+  letter-spacing: 2.5px;
 `;
 
 const checkCardType = (firstCardInput: string) => {
@@ -61,12 +71,6 @@ const checkCardType = (firstCardInput: string) => {
   return null;
 };
 
-const StyledExpirationDate = styled.div`
-  color: white;
-  font-size: 14px;
-  margin: 10px;
-`;
-
 const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
   const cardType = checkCardType(cardNumber[0]);
 
@@ -78,7 +82,7 @@ const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
       </StyledCardHeader>
       <StyledCardNumberWrapper>
         {cardNumber.map((number, idx) => (
-          <StyledCardNumber>{idx >= 2 ? '• '.repeat(number.length) : number}</StyledCardNumber>
+          <StyledCardNumber>{idx >= 2 ? '•'.repeat(number.length) : number}</StyledCardNumber>
         ))}
       </StyledCardNumberWrapper>
 
