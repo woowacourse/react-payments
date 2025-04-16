@@ -8,17 +8,21 @@ import {
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
 import { CardNumberInputValueType } from '../types/inputFieldType';
+import { CardType } from '../types/cardType';
 
 function CardNumberInputField({
   inputValue,
   setInputValue,
+  cardType,
+  setCardType,
 }: {
   inputValue: Record<CardNumberInputValueType, string>;
   setInputValue: Dispatch<
     SetStateAction<Record<CardNumberInputValueType, string>>
   >;
+  cardType: CardType;
+  setCardType: Dispatch<SetStateAction<CardType>>;
 }) {
-  const [cardType, setCardType] = useState<'visa' | 'master' | null>(null);
   type ErrorType = 'noneCardType' | null;
 
   const [cardNumberErrors, setCardNumberErrors] = useState<
