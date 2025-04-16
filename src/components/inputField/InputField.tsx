@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
+import Description from "../description/Description";
 import styled from "styled-components";
+import { COLORS } from "../../styles/colors";
 
 type Props = {
 	label: string;
@@ -12,7 +14,7 @@ const InputField = ({ label, inputs, errorMessage }: Props) => {
 		<Container>
 			<Label>{label}</Label>
 			<Wrapper>{...inputs}</Wrapper>
-			{errorMessage && errorMessage}
+			<Description color={COLORS.ERROR}>{errorMessage && errorMessage}</Description>
 		</Container>
 	);
 };

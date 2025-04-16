@@ -5,12 +5,14 @@ type Props = {
 	placeholder?: string;
 	isError?: boolean;
 	value: string;
+	maxLength?: number;
 	inputHandler: (value: string) => void;
 };
 
-const Input = ({ placeholder, isError = false, value, inputHandler }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, inputHandler }: Props) => {
 	return (
 		<TextInput
+			maxLength={maxLength && maxLength}
 			value={value}
 			isError={isError}
 			placeholder={placeholder}

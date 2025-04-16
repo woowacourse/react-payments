@@ -5,6 +5,7 @@ import Description from "./components/description/Description";
 import InputField from "./components/inputField/InputField";
 import Input from "./components/input/Input";
 import { useState } from "react";
+import CardNumber from "./components/card/CardNumber";
 
 export type cardNumber = {
 	first: string;
@@ -31,20 +32,9 @@ function App() {
 	});
 	const [cvcNumber, setcvcNumber] = useState<string>("");
 
-	const handleCardNumber = (order: keyof cardNumber, numbers: string) => {
-		setCardNumber({ ...cardNumber, [order]: numbers });
-	};
-
 	const handleDate = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 	};
-
-	const cardNumberInputs = [
-		<Input placeholder="1234" value={cardNumber?.first} inputHandler={(numbers) => handleCardNumber("first", numbers)} />,
-		<Input placeholder="1234" value={cardNumber?.second} inputHandler={(numbers) => handleCardNumber("second", numbers)} />,
-		<Input placeholder="1234" value={cardNumber?.third} inputHandler={(numbers) => handleCardNumber("third", numbers)} />,
-		<Input placeholder="1234" value={cardNumber?.fourth} inputHandler={(numbers) => handleCardNumber("fourth", numbers)} />,
-	];
 
 	const expirationInput = [
 		<Input placeholder="MM" value={expirationDate.month} inputHandler={(value) => handleDate("month", value)} />,
@@ -56,11 +46,7 @@ function App() {
 	return (
 		<MainContainer>
 			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
-			<CardNumberWrap>
-				<Title>결제할 카드 번호를 입력해 주세요</Title>
-				<Description>본인 명의의 카드만 결제 가능합니다.</Description>
-				<InputField label="카드 번호" inputs={cardNumberInputs} />
-			</CardNumberWrap>
+			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
 
 			<CardNumberWrap>
 				<Title>카드 유효기간을 입력해 주세요</Title>
