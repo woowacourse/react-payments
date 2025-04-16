@@ -6,7 +6,7 @@ interface InputProps {
   placeholder: string
   maxLength: number
   value?: string
-  onChange: ChangeEventHandler<HTMLInputElement>
+  onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
 export default function Input({ placeholder, maxLength, value, onChange }: InputProps) {

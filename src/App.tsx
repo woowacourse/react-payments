@@ -8,6 +8,7 @@ import CardPreview from './components/CardPreview'
 import Spacing from './components/common/Spacing'
 import { useState } from 'react'
 import { SequenceType } from './components/CardNumber'
+import { dateType } from './components/CardExpirationDate'
 
 const getCardType = (cardNumberFirst: string) => {
   if (['4'].some((value) => cardNumberFirst.startsWith(value))) return 'visa'
@@ -24,7 +25,7 @@ function App() {
   })
   const cardType = getCardType(cardNumber.first)
 
-  const [cardExpirationDate, setCardExpirationDate] = useState<Record<string, string>>({
+  const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
     month: '',
     year: '',
   })
@@ -39,6 +40,7 @@ function App() {
         margin: 0 auto;
         border: 1px solid #000;
         padding: 71px 31px;
+        overflow-y: scroll;
       `}
     >
       <div
