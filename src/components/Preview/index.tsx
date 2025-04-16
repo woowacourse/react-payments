@@ -11,7 +11,9 @@ const Preview: React.FC<PreviewProps> = ({ cardNumbers }) => {
         <ICChip></ICChip>
         <CardNumberArea>
           {cardNumbers.map((number, index) => (
-            <CardNumber key={index}>{number}</CardNumber>
+            <CardNumber key={index}>
+              {index < 2 ? number : '∙'.repeat(number.length)}
+            </CardNumber>
           ))}
         </CardNumberArea>
       </CardFrame>
@@ -65,12 +67,12 @@ const CardNumberArea = styled.div`
 `;
 
 const CardNumber = styled.span`
-  width: 36px;
+  width: 38px;
   font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 16%;
+  letter-spacing: 2px;
   vertical-align: middle;
   color: #ffffff;
 `;
