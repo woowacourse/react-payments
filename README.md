@@ -42,3 +42,62 @@
 
 - Visa: 4로 시작하는 16자리 숫자
 - MasterCard: 51~55로 시작하는 16자리 숫자
+
+### 컴포넌트 구조 및 상태
+
+- 공통 컴포넌트
+  - Input(common)
+- 전체 레이아웃 컨테이너
+  - 카드 UI
+    - form 컴포넌트의 카드 번호와 같은 상태이므로 props로 받아서 보여준다.
+    - 로고 이미지
+    - 카드 번호
+    - 카드 유효기간
+  - form 컴포넌트
+    - 카드 번호
+      - title
+      - description
+      - label
+      - Input(common)
+      - error message
+    - 카드 유효기간
+      - title
+      - description
+      - label
+      - Input(common)
+      - error message
+    - cvc 번호
+      - title
+      - label
+      - Input(common)
+      - error message
+
+### 전체 레이아웃 컨테이너 컴포넌트에 필요한 상태
+
+- 카드 번호 16자리
+  - label
+  - Input(common) 4개
+- 카드 유효기간
+  - 월 2자리
+    - label
+    - Input(common)
+  - 년도 2자리
+    - label
+    - Input(common)
+
+### CVC 번호 컴포넌트에 필요한 상태 (자체적으로 상태 가짐)
+
+- cvc번호
+  - 자체적으로 상태를 갖는 이유
+    - form 컴포넌트에서 formData로 가져올 수 있기 때문이다.
+    - 카드 프리뷰 에도 필요하지 않기 때문이다.
+
+### 카드 UI 만들 때 필요한 상태 (상위에서 전달 받음)
+
+- 카드 번호 16자리
+- 카드 유효기간
+
+## 폴더 구조
+
+- 컴포넌트
+- UI빼고 전부다 도메인?
