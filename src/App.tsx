@@ -1,8 +1,9 @@
 import './App.css';
 import './index.css';
-import Card from './stories/Card';
-import Input from './stories/Input';
+
 import { useState } from 'react';
+import Input from './components/Input/Input';
+import Card from './components/Card/Card';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);

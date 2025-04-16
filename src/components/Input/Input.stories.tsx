@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Input from './Input';
+import { action } from '@storybook/addon-actions';
 
 const meta = {
   title: 'Input',
@@ -15,7 +16,22 @@ export const Default: Story = {
     value: '',
     placeholder: '1234',
     isValid: true,
-    onChange: (e) => console.log('입력값:', e.target.value)
-  },
-  render: (args) => <Input {...args} />
+    onChange: action('onChange')
+  }
+};
+
+export const Valid: Story = {
+  args: {
+    ...Default.args,
+    value: '2354',
+    isValid: true
+  }
+};
+
+export const Invalid: Story = {
+  args: {
+    ...Default.args,
+    value: 'gdas',
+    isValid: false
+  }
 };
