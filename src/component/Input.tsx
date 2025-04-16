@@ -1,9 +1,22 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { CardInputProps } from "../types/CardInputTypes";
+
+type InputKeyType =
+  | "first"
+  | "second"
+  | "third"
+  | "fourth"
+  | "MM"
+  | "YY"
+  | "CVC";
 
 interface InputProps {
   maxLength: number;
   placeholder: string;
   isError: boolean;
+  inputKey: InputKeyType;
+  setCardInput: Dispatch<SetStateAction<CardInputProps>>;
 }
 
 const InputField = styled.input`
@@ -18,8 +31,29 @@ const InputField = styled.input`
   }
 `;
 
-const Input = ({ maxLength, placeholder, isError = false }: InputProps) => {
-  return <InputField placeholder={placeholder} maxLength={maxLength} />;
+const Input = ({
+  maxLength,
+  placeholder,
+  isError = false,
+  inputKey,
+  setCardInput,
+}: InputProps) => {
+  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCardInput((prev: CardInputProps) => ({
+      ...prev,
+      [inputKey]: value,
+    }));
+  };
+
+  return (
+    <InputField
+      placeholder={placeholder}
+      maxLength={maxLength}
+      onChange={handleCardNumber}
+      type="number"
+    />
+  );
 };
 
 export default Input;

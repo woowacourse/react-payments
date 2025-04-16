@@ -1,9 +1,10 @@
 import Card from "../component/Card";
 import Description from "../component/Description";
-import InputGroup from "../component/InputGroup";
 import styled from "styled-components";
 import Input from "../component/Input";
-import { InputContainer } from "../component/InputGroup";
+import { useState } from "react";
+import { InputContainer } from "../style/InputContainerStyle";
+import { CardInputProps } from "../types/CardInputTypes";
 
 const Label = styled.span`
   color: var(--color-black);
@@ -38,21 +39,21 @@ const Container = styled.div`
 `;
 
 const AddCard = () => {
-  const cardNumber = {
-    first: 1111,
-    second: 1111,
-    third: 1111,
-    fourth: 1111,
-    MM: 12,
-    YY: 25,
-    CVC: 123,
-  };
-
   //TODO: refactor : MM YY 그룹에서 관리하도록
+  const [cardInput, setCardInput] = useState<CardInputProps>({
+    first: null,
+    second: null,
+    third: null,
+    fourth: null,
+    MM: null,
+    YY: null,
+    CVC: null,
+  });
+  console.log(cardInput);
 
   return (
     <Wrap>
-      <Card cardNumber={cardNumber} cardType="visa" />
+      <Card cardNumber={cardInput} cardType="visa" />
       <Form>
         <Description
           headText="결제할 카드 번호를 입력해 주세요."
@@ -60,7 +61,36 @@ const AddCard = () => {
         />
         <Container>
           <Label>카드 번호</Label>
-          <InputGroup maxLength={4} placeholder="1111" inputCount={4} />
+          <InputContainer>
+            <Input
+              maxLength={4}
+              placeholder="1234"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="first"
+            />
+            <Input
+              maxLength={4}
+              placeholder="1234"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="second"
+            />
+            <Input
+              maxLength={4}
+              placeholder="1234"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="third"
+            />
+            <Input
+              maxLength={4}
+              placeholder="1234"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="fourth"
+            />
+          </InputContainer>
         </Container>
         <Description
           headText="카드 유효기간을 입력해 주세요"
@@ -69,14 +99,32 @@ const AddCard = () => {
         <Container>
           <Label>유효기간</Label>
           <InputContainer>
-            <Input maxLength={2} placeholder="MM" isError={false} />
-            <Input maxLength={2} placeholder="YY" isError={false} />
+            <Input
+              maxLength={2}
+              placeholder="MM"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="MM"
+            />
+            <Input
+              maxLength={2}
+              placeholder="YY"
+              isError={false}
+              setCardInput={setCardInput}
+              inputKey="YY"
+            />
           </InputContainer>
         </Container>
         <Description headText="CVC 번호를 입력해 주세요" />
         <Container>
           <Label>CVC</Label>
-          <InputGroup maxLength={3} placeholder="123" inputCount={1} />
+          <Input
+            maxLength={3}
+            placeholder="123"
+            isError={false}
+            setCardInput={setCardInput}
+            inputKey="CVC"
+          />
         </Container>
       </Form>
     </Wrap>

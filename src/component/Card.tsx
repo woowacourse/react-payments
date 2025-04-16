@@ -1,18 +1,9 @@
 import styled from "styled-components";
 import cardBrandLogo from "../constants/cardBrandLogo";
-
-interface CardNumber {
-  first: number;
-  second: number;
-  third: number;
-  fourth: number;
-  MM: number;
-  YY: number;
-  CVC: number;
-}
+import { CardInputProps } from "../types/CardInputTypes";
 
 interface CardProps {
-  cardNumber: CardNumber;
+  cardNumber: CardInputProps | null;
   cardType: "visa" | "mastercard";
 }
 
@@ -67,13 +58,30 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
         <CardGoldChip />
         <CardBrandLogo src={cardBrandLogo[cardType]} />
       </ChipContainer>
-      <CardNumberContainer>
-        <CardInformation>{cardNumber.first}</CardInformation>
-        <CardInformation>{cardNumber.second}</CardInformation>
-        <CardInformation>{cardNumber.third}</CardInformation>
-        <CardInformation>{cardNumber.fourth}</CardInformation>
-      </CardNumberContainer>
-      <CardInformation>{`${cardNumber.MM}/${cardNumber.YY}`}</CardInformation>
+      {cardNumber && (
+        <>
+          <CardNumberContainer>
+            {cardNumber.first && (
+              <CardInformation>{cardNumber.first}</CardInformation>
+            )}
+            {cardNumber.second && (
+              <CardInformation>{cardNumber.second}</CardInformation>
+            )}
+            {cardNumber.third && (
+              <CardInformation>{cardNumber.third}</CardInformation>
+            )}
+            {cardNumber.fourth && (
+              <CardInformation>{cardNumber.fourth}</CardInformation>
+            )}
+          </CardNumberContainer>
+
+          {cardNumber.MM && cardNumber.YY && (
+            <CardInformation>
+              {cardNumber.MM}/{cardNumber.YY}
+            </CardInformation>
+          )}
+        </>
+      )}
     </CardContainer>
   );
 };
