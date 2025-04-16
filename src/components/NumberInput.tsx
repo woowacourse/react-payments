@@ -9,7 +9,12 @@ interface NumberInputProps {
 function NumberInput({ maxLength, placeholder }: NumberInputProps) {
   const [isError, setIsError] = useState(false);
   return (
-    <Input maxLength={maxLength} placeholder={placeholder} isError={isError} />
+    <Input
+      type="number"
+      maxLength={maxLength}
+      placeholder={placeholder}
+      isError={isError}
+    />
   );
 }
 
@@ -21,4 +26,9 @@ const Input = styled.input<{ isError: boolean }>`
   border-radius: 2px;
   height: 32px;
   padding: 8px;
+
+  &:focus {
+    border: 1.5px solid #000;
+    outline: none;
+  }
 `;
