@@ -7,7 +7,7 @@ const meta: Meta<typeof CardNumberInput> = {
   tags: ['autodocs'],
   argTypes: {
     values: {
-      control: 'text',
+      control: 'object',
       description: '값',
     },
   },
