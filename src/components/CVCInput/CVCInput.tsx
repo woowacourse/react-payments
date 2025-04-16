@@ -1,9 +1,13 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
+import { HandleInputParams } from '../CardPage/CardPage';
+import { useState } from 'react';
+import { checkNumber, checkValidLength } from '../../validators/inputValidator';
+import HelperText from '../HelperText/HelperText';
 
 type CVCInputProps = {
   values: string[];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, idx: number) => void;
+  onChange: ({ e, idx }: HandleInputParams) => void;
 };
 
 const StyledCVCInput = styled.div`
@@ -24,6 +28,33 @@ const StyledInputWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
+  const [isError, setIsError] = useState([false]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const checkValidCVC = ({ e, idx }: HandleInputParams) => {
+    const CVCNumber = e.target.value;
+    try {
+      checkNumber(CVCNumber);
+      checkValidLength(CVCNumber, 3);
+      setIsError((prev) => {
+        const updated = [...prev];
+        updated[idx] = false;
+        if (updated.every((errorState) => errorState === false)) {
+          setErrorMessage('');
+        }
+        return updated;
+      });
+    } catch (error) {
+      setIsError((prev) => {
+        const updated = [...prev];
+        updated[idx] = true;
+        return updated;
+      });
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
   return (
     <StyledCVCInput>
       <StyledLabel>CVC</StyledLabel>
@@ -31,13 +62,15 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
         {values.map((value: string, idx: number) => (
           <Input
             value={value}
-            onChange={(e) => onChange(e, idx)}
+            onChange={(e) => onChange({ e, idx })}
+            onBlur={(e) => checkValidCVC({ e, idx })}
             maxLength={3}
             placeHolder={'123'}
-            isError={false}
+            isError={isError[idx]}
           />
         ))}
       </StyledInputWrapper>
+      {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
     </StyledCVCInput>
   );
 };
