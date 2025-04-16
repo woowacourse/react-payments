@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   checkNumber,
   checkTotalExpirationDate,
