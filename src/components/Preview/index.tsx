@@ -32,7 +32,7 @@ const Preview: React.FC<PreviewProps> = ({
   }, [cardNumbers]);
 
   return (
-    <PreviewContainer>
+    <PreviewContainer data-testid="preview-component">
       <CardFrame>
         <ICChip></ICChip>
         <CardMethod src={cardMethodSrc} ref={cardMethodRef} />

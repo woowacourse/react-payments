@@ -90,7 +90,7 @@ const ExpirationPeriod: React.FC<PeriodProps> = ({
   };
 
   return (
-    <ExpirationPeriodContainer>
+    <ExpirationPeriodContainer data-testid="expiration-component">
       <InputLabels
         title="카드 유효기간을 입력해 주세요"
         caption="월/년도(MMYY)를 순서대로 입력해 주세요."

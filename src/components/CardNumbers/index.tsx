@@ -13,7 +13,12 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
   setCardNumbers,
 }) => {
   const errorMessageRef = useRef<HTMLDivElement>(null);
-  const [isError, setIsError] = useState<boolean[]>([false, false, false, false]);
+  const [isError, setIsError] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   useEffect(() => {
     if (errorMessageRef?.current && isError.every((error) => error === false)) {
@@ -52,18 +57,14 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
       if (/^[0-9]*$/.test(e.target.value) && e.target.value.length <= 4) {
         enterCorrectCardNumbers(e, index, newState);
       } else {
-        enterWrongCardNumbers(
-          e,
-          index,
-          '숫자만 가능합니다.'
-        );
+        enterWrongCardNumbers(e, index, '숫자만 가능합니다.');
       }
       return newState;
     });
   };
 
   return (
-    <CardNumbersContainer>
+    <CardNumbersContainer data-testid="cardnumbers-component">
       <InputLabels
         title="결제할 카드 번호를 입력해 주세요"
         caption="본인 명의의 카드만 결제 가능합니다."

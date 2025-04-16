@@ -54,7 +54,8 @@ const CVCNumbers: React.FC<CVCNumbersProps> = ({
   };
 
   return (
-    <CVCNumbersContainer>
+    <CVCNumbersContainer
+    data-testid="cvcnumbers-component">
       <InputLabels title="CVC 번호를 입력해 주세요" />
       <InputTexts
         label="CVC"
