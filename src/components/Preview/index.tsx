@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useEffect, useRef, useState } from 'react';
 
 interface PreviewProps {
   cardNumbers: string[];
@@ -11,10 +12,30 @@ const Preview: React.FC<PreviewProps> = ({
   period,
   separatorRef,
 }) => {
+  const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
+  const cardMethodRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (cardNumbers[0].startsWith('4')) {
+      setCardMethodSrc('/images/visa.svg');
+      cardMethodRef.current!.style.display = 'block';
+    } else if (
+      Number(cardNumbers[0].slice(0, 2)) >= 51 &&
+      Number(cardNumbers[0].slice(0, 2)) <= 55
+    ) {
+      setCardMethodSrc('/images/Mastercard.svg');
+      cardMethodRef.current!.style.display = 'block';
+    } else {
+      setCardMethodSrc('');
+      cardMethodRef.current!.style.display = 'none';
+    }
+  }, [cardNumbers]);
+
   return (
     <PreviewContainer>
       <CardFrame>
         <ICChip></ICChip>
+        <CardMethod src={cardMethodSrc} ref={cardMethodRef} />
         <CardNumberArea>
           {cardNumbers.map((number, index) => (
             <CardNumber key={index}>
@@ -118,4 +139,13 @@ const Separator = styled.span`
   letter-spacing: 2px;
   vertical-align: middle;
   color: #ffffff;
+`;
+
+const CardMethod = styled.img`
+  display: none;
+  width: 36px;
+  height: 22px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
 `;
