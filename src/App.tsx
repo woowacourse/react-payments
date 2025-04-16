@@ -4,7 +4,7 @@ import styles from './App.module.css';
 import CardNumberSection from './components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import Card from './components/Card/Card';
-
+import CvcSection from './components/CvcSection/CvcSection';
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [cardValidity, setCardValidity] = useState<boolean[]>([true, true, true, true]);
@@ -51,6 +51,20 @@ export default function App() {
     setExpirationError(updatedError);
   };
 
+  const [cvc, setCvc] = useState<string>('');
+  const [cvcError, setCvcError] = useState<string>('');
+
+  const handleCvcChange = (value: string) => {
+    let errorMsg = '';
+    if (!/^[0-9]*$/.test(value)) {
+      errorMsg = '숫자만 입력 가능합니다.';
+    } else if (value !== '' && value.length !== 3) {
+      errorMsg = 'CVC는 3자리여야 합니다.';
+    }
+    setCvc(value);
+    setCvcError(errorMsg);
+  };
+
   return (
     <div className={styles.appContainer}>
       <Card numbers={cardNumbers} />
@@ -60,6 +74,7 @@ export default function App() {
         expirationError={expirationError}
         onChange={handleExpirationChange}
       />
+      <CvcSection cvc={cvc} cvcError={cvcError} onChange={handleCvcChange} />
     </div>
   );
 }
