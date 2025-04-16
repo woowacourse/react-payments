@@ -1,15 +1,33 @@
 import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import isExactLength from "../utils/isExactLength";
 
-interface CardNumberFormProps {}
+interface CardNumberFormProps {
+  maxLength: number;
+}
 
-function CardNumberForm({}: CardNumberFormProps) {
+function CardNumberForm({ maxLength }: CardNumberFormProps) {
   const [firstNumber, setFirstNumber] = useState("");
   const [secondNumber, setSecondNumber] = useState("");
   const [thirdNumber, setThirdNumber] = useState("");
   const [fourthNumber, setFourthNumber] = useState("");
   const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    const condition = [
+      firstNumber,
+      secondNumber,
+      thirdNumber,
+      fourthNumber,
+    ].some((number) => {
+      if (isExactLength(number, 0) || isExactLength(number, maxLength))
+        return false;
+      return true;
+    });
+    if (condition) setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
+    else setErrorText("");
+  }, [firstNumber, secondNumber, thirdNumber, fourthNumber]);
 
   return (
     <>
@@ -18,25 +36,25 @@ function CardNumberForm({}: CardNumberFormProps) {
         <NumberInput
           value={firstNumber}
           setValue={setFirstNumber}
-          maxLength={4}
+          maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
           value={secondNumber}
           setValue={setSecondNumber}
-          maxLength={4}
+          maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
           value={thirdNumber}
           setValue={setThirdNumber}
-          maxLength={4}
+          maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
           value={fourthNumber}
           setValue={setFourthNumber}
-          maxLength={4}
+          maxLength={maxLength}
           placeholder="1234"
         />
       </NumberInputContainer>
