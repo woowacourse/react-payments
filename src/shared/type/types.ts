@@ -12,3 +12,7 @@ export interface CardInfoProps {
   cardExpirationDate: { month: string; year: string };
   cardCVC: string;
 }
+
+export interface ErrorProps {
+  [key: string]: [number, string];
+}

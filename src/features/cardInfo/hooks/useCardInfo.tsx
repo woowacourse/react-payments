@@ -4,6 +4,7 @@ import {
   cardExpirationDateValidator,
   cardCVCValidator,
 } from '../validation/cardInfoValidator';
+import { ErrorProps } from '../../../shared/type/types';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState({
@@ -11,10 +12,10 @@ export default function useCardInfo() {
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
   });
-  const [error, setError] = useState<any>({
-    cardNumberError: [],
-    cardExpirationDateError: [],
-    cardCVCError: [],
+  const [error, setError] = useState<ErrorProps>({
+    cardNumberError: [-1, ''],
+    cardExpirationDateError: [-1, ''],
+    cardCVCError: [-1, ''],
   });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,10 +28,13 @@ export default function useCardInfo() {
         const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
 
         const [errorIndex, errorMessage] = cardNumberValidator(updatedNumbers);
-        setError((prevError: any) => ({
-          ...prevError,
-          cardNumberError: errorIndex !== -1 ? [errorIndex, errorMessage] : [],
-        }));
+        setError(
+          (prevError): ErrorProps => ({
+            ...prevError,
+            cardNumberError:
+              errorIndex !== -1 ? ([errorIndex, errorMessage] as [number, string]) : [-1, ''],
+          }),
+        );
 
         return {
           ...prev,
@@ -46,10 +50,13 @@ export default function useCardInfo() {
         const updateDate = { ...prev.cardExpirationDate, [key]: value };
         const [errorIndex, errorMessage] = cardExpirationDateValidator(updateDate);
 
-        setError((prevError: any) => ({
-          ...prevError,
-          cardExpirationDateError: errorIndex !== -1 ? [errorIndex, errorMessage] : [],
-        }));
+        setError(
+          (prevError): ErrorProps => ({
+            ...prevError,
+            cardExpirationDateError:
+              errorIndex !== -1 ? ([errorIndex, errorMessage] as [number, string]) : [-1, ''],
+          }),
+        );
 
         return {
           ...prev,
@@ -64,10 +71,13 @@ export default function useCardInfo() {
         const updateCVC = value;
         const [errorIndex, errorMessage] = cardCVCValidator(updateCVC);
 
-        setError((prevError: any) => ({
-          ...prevError,
-          cardCVCError: errorIndex !== -1 ? [errorIndex, errorMessage] : [],
-        }));
+        setError(
+          (prevError): ErrorProps => ({
+            ...prevError,
+            cardCVCError:
+              errorIndex !== -1 ? ([errorIndex, errorMessage] as [number, string]) : [-1, ''],
+          }),
+        );
 
         return {
           ...prev,

@@ -12,7 +12,7 @@ export const cardNumberValidator = (inputs: string[]) => {
     }
   }
 
-  return [-1];
+  return [-1, ''];
 };
 
 const isNumber = (input: string) => {
@@ -43,7 +43,7 @@ export const cardExpirationDateValidator = (date: { month: string; year: string 
   if (!isNumber(date.year)) {
     return [1, '유효 연도는 숫자만 입력 가능합니다.'];
   }
-  return [-1];
+  return [-1, ''];
 };
 
 const isValidExpirationMonth = (month: string) => {
@@ -55,5 +55,5 @@ export const cardCVCValidator = (input: string) => {
   if (!isNumber(input)) {
     return [0, 'CVC는 숫자만 입력 가능합니다.'];
   }
-  return [-1];
+  return [-1, ''];
 };

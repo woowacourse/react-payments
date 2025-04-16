@@ -1,13 +1,14 @@
 import './cardInfoContainer.css';
 import CardInfoSection from './CardInfoSection';
 import { cardInfoSectionData } from '../data/cardInfoSectionData';
+import { ErrorProps } from '../../../shared/type/types';
 
 export default function CardInfoContainer({
   onChange,
   error,
 }: {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error: any;
+  error?: ErrorProps;
 }) {
   return (
     <div className="card-info-container">
