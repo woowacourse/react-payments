@@ -42,6 +42,7 @@ function CardValidityPeriodField({
           value={month}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'month')}
+          placeholder="MM"
         />
         <Input
           isError={isErrorYear}
@@ -51,6 +52,7 @@ function CardValidityPeriodField({
           value={year}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'year')}
+          placeholder="YY"
         />
       </InputWrapper>
     </div>

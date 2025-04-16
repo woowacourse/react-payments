@@ -28,6 +28,7 @@ function CardNumberField({
             key={index}
             aria-labelledby="cardNumber"
             onChange={(e) => onChange(e, index)}
+            placeholder="1234"
           />
         ))}
       </InputWrapper>

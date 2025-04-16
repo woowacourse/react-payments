@@ -27,6 +27,7 @@ function CardCVCField() {
           value={cardCVC}
           aria-labelledby="CardCVC"
           onChange={onChange}
+          placeholder="123"
         />
       </InputWrapper>
     </div>
