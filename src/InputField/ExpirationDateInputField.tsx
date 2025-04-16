@@ -4,8 +4,8 @@ import Input from '../Input';
 
 function ExpirationDateInputField() {
   const [inputValue, setInputValue] = useState({
-    ExpirationDatePart1: '',
-    ExpirationDatePart2: '',
+    expirationDatePart1: '',
+    expirationDatePart2: '',
   });
 
   const onChange = (e: ChangeEvent) => {
@@ -13,7 +13,7 @@ function ExpirationDateInputField() {
     const numericValue = value.replace(/[^0-9]/g, '');
 
     if (numericValue.length <= 2) {
-      if (name === 'ExpirationDatePart1' && Number(numericValue) > 12) return;
+      if (name === 'expirationDatePart1' && Number(numericValue) > 12) return;
       setInputValue({ ...inputValue, [name]: numericValue });
     }
   };
@@ -29,17 +29,17 @@ function ExpirationDateInputField() {
       <Input
         inputMode="numeric"
         placeholder="MM"
-        value={inputValue.ExpirationDatePart1}
+        value={inputValue.expirationDatePart1}
         onChange={onChange}
-        name="ExpirationDatePart1"
+        name="expirationDatePart1"
         onBlur={onBlur}
       />
       <Input
         inputMode="numeric"
         placeholder="YY"
-        value={inputValue.ExpirationDatePart2}
+        value={inputValue.expirationDatePart2}
         onChange={onChange}
-        name="ExpirationDatePart2"
+        name="expirationDatePart2"
         onBlur={onBlur}
       />
     </BaseInputField>
