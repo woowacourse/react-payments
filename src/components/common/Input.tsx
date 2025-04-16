@@ -14,6 +14,7 @@ export default function Input({ placeholder }: InputProps) {
         border: 1px solid #acacac;
         border-radius: 4px;
         padding: 8px;
+        width: 100%;
         &::placeholder {
           color: #acacac;
         }
