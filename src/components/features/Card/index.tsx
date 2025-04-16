@@ -1,52 +1,57 @@
 import { css } from '@emotion/css';
-import { Text } from '../../common/Text';
+
 import { StyledCardContainer, StyledCardTypeIcon, StyledICCheapContainer } from './Card.styled';
+
+import { Flex } from '@/components/common/Flex';
+import { Text } from '@/components/common/Text';
+import { CardInputType } from '@/hooks/useCardInput';
 
 type Props = {
   type: 'VISA' | 'MASTER';
-  cardNumbers: number[];
+  cardNumbers: CardInputType[];
   expireDate: string;
 };
 
 export const Card = ({ type, cardNumbers, expireDate }: Props) => {
   const cardTypeSrc = type === 'VISA' ? '/images/Visa.png' : '/images/Master.png';
+
+  const getDisplayCardNumber = (number: number, index: number): string => {
+    if (!number) {
+      return '';
+    }
+
+    if (index < 2) {
+      return number.toString();
+    }
+
+    return '****';
+  };
+
   return (
     <StyledCardContainer>
       <StyledICCheapContainer />
-      {/* <StyledCardBackground src="./images/CardPreview.png" alt="cardBackground" /> */}
       <StyledCardTypeIcon src={cardTypeSrc} alt="cardType" />
-      {/* TODO: flex components */}
-      <div
-        className={css`
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: center;
-          width: 300px;
-          height: 100%;
-          margin: 0 auto;
-        `}
-      >
-        <div
-          className={css`
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 10px;
-          `}
-        >
-          {cardNumbers.map((number, index) => (
-            <Text variant="Title" fontWeight="regular" color="white" key={`${number}-${index}`}>
-              {number}
-            </Text>
+
+      <Flex direction="column" alignItems="flex-start" width="300px" height="100%" margin="0 auto">
+        <Flex gap="20px" height="36px" margin="10px 0 0 0">
+          {cardNumbers.map((str, index) => (
+            <div
+              key={`card-number-${index}`}
+              className={css`
+                width: 60px;
+                text-align: left;
+              `}
+            >
+              <Text variant="Title" fontWeight="regular" color="white" key={`${str}-${index}`}>
+                {getDisplayCardNumber(Number(str.value), index)}
+              </Text>
+            </div>
           ))}
-        </div>
+        </Flex>
         <Text variant="Title" fontWeight="regular" color="white">
           {expireDate}
         </Text>
-      </div>
+      </Flex>
     </StyledCardContainer>
   );
 };
