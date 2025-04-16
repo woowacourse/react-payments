@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 import Input from "../Input/Input";
+import { useState } from "react";
 
 type InputFieldProps = {
   label: string;
@@ -27,6 +28,8 @@ const InputField = ({
   setCardInformation,
   informationType,
 }: InputFieldProps) => {
+  const [error, isError] = useState<boolean>(false);
+
   const handleChange = (index: number, text: string) => {
     const updatedArray = cardInformation[informationType];
     updatedArray[index] = text;
@@ -48,10 +51,11 @@ const InputField = ({
             setValue={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
+            isError={isError}
           />
         ))}
       </div>
-      <span css={errorStyle}>에러 메시지</span>
+      <span css={errorStyle(error)}>{error && "숫자만 입력 가능합니다."}</span>
     </div>
   );
 };
@@ -79,10 +83,11 @@ const labelStyle = css`
   line-height: 15px;
 `;
 
-const errorStyle = css`
+const errorStyle = (error: boolean) => css`
   color: #ff3d3d;
   font-size: 9.5px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  opacity: ${error ? "1" : "0"};
 `;

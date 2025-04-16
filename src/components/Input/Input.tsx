@@ -25,11 +25,21 @@ type InputProps = {
   maxLength: number;
   value: string;
   setValue: (value: string) => void;
+  isError: (error: boolean) => void;
 };
 
-const Input = ({ placeholder, maxLength, value, setValue }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, setValue, isError }: InputProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    const input = e.target.value;
+
+    const isOnlyNumber = /^[0-9]*$/.test(input);
+
+    if (isOnlyNumber) {
+      isError(false);
+      setValue(input);
+    } else {
+      isError(true);
+    }
   };
   return <input css={inputStyle} onChange={onChange} value={value} placeholder={placeholder} maxLength={maxLength} />;
 };

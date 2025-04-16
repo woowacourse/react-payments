@@ -21,6 +21,14 @@ export const Primary: Story = {
   render: (args: any) => {
     const [value, setValue] = useState(args.value);
 
-    return <Input placeholder={args.placeholder} maxLength={args.maxLength} value={value} setValue={setValue} />;
+    return (
+      <Input
+        placeholder={args.placeholder}
+        maxLength={args.maxLength}
+        value={value}
+        setValue={setValue}
+        isError={() => {}}
+      />
+    );
   },
 };
