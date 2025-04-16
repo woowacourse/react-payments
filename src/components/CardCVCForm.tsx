@@ -4,11 +4,12 @@ import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
 
 interface CardCVCFormProps {
+  cvc: string;
+  setCvc: React.Dispatch<React.SetStateAction<string>>;
   maxLength: number;
 }
 
-function CardCVCForm({ maxLength }: CardCVCFormProps) {
-  const [cvc, setCvc] = useState("");
+function CardCVCForm({ cvc, setCvc, maxLength }: CardCVCFormProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {

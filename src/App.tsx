@@ -4,23 +4,51 @@ import Card from "./components/Card";
 import CardNumberForm from "./components/CardNumberForm";
 import CardExpirationForm from "./components/CardExpirationForm";
 import CardCVCForm from "./components/CardCVCForm";
+import { useState } from "react";
 
 function App() {
+  const [firstNumber, setFirstNumber] = useState("");
+  const [secondNumber, setSecondNumber] = useState("");
+  const [thirdNumber, setThirdNumber] = useState("");
+  const [fourthNumber, setFourthNumber] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [cvc, setCvc] = useState("");
+
   return (
     <>
-      <Card cardNumber={[1234, 1234, 1234, 1234]} expiration={[12, 12]}></Card>
+      <Card
+        cardNumber={[firstNumber, secondNumber, thirdNumber, fourthNumber]}
+        expiration={[month, year]}
+      ></Card>
       <Announcement
         main="결제할 카드 번호를 입력해 주세요"
         caption="본인 명의의 카드만 결제 가능합니다."
       ></Announcement>
-      <CardNumberForm maxLength={4} />
+      <CardNumberForm
+        firstNumber={firstNumber}
+        setFirstNumber={setFirstNumber}
+        secondNumber={secondNumber}
+        setSecondNumber={setSecondNumber}
+        thirdNumber={thirdNumber}
+        setThirdNumber={setThirdNumber}
+        fourthNumber={fourthNumber}
+        setFourthNumber={setFourthNumber}
+        maxLength={4}
+      />
       <Announcement
         main="카드 유효기간을 입력해 주세요"
         caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       ></Announcement>
-      <CardExpirationForm maxLength={2} />
+      <CardExpirationForm
+        month={month}
+        setMonth={setMonth}
+        year={year}
+        setYear={setYear}
+        maxLength={2}
+      />
       <Announcement main="CVC 번호를 입력해 주세요"></Announcement>
-      <CardCVCForm maxLength={3} />
+      <CardCVCForm cvc={cvc} setCvc={setCvc} maxLength={3} />
     </>
   );
 }

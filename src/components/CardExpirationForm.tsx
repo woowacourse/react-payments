@@ -4,13 +4,20 @@ import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
 
 interface CardExpirationFormProps {
+  month: string;
+  year: string;
+  setMonth: React.Dispatch<React.SetStateAction<string>>;
+  setYear: React.Dispatch<React.SetStateAction<string>>;
   maxLength: number;
 }
 
-function CardExpirationForm({ maxLength }: CardExpirationFormProps) {
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-
+function CardExpirationForm({
+  month,
+  year,
+  setMonth,
+  setYear,
+  maxLength,
+}: CardExpirationFormProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {

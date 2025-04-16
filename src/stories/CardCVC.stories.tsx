@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import CardCVCForm from "../components/CardCVCForm";
+import { useState } from "react";
 
 const meta = {
   title: "CardCVCForm",
@@ -8,10 +9,8 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Default = () => {
+  const [cvc, setCvc] = useState("");
 
-export const Default: Story = {
-  args: {
-    maxLength: 3,
-  },
+  return <CardCVCForm cvc={cvc} setCvc={setCvc} maxLength={3} />;
 };

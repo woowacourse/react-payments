@@ -4,14 +4,28 @@ import { useState, useEffect } from "react";
 import isExactLength from "../utils/isExactLength";
 
 interface CardNumberFormProps {
+  firstNumber: string;
+  secondNumber: string;
+  thirdNumber: string;
+  fourthNumber: string;
+  setFirstNumber: React.Dispatch<React.SetStateAction<string>>;
+  setSecondNumber: React.Dispatch<React.SetStateAction<string>>;
+  setThirdNumber: React.Dispatch<React.SetStateAction<string>>;
+  setFourthNumber: React.Dispatch<React.SetStateAction<string>>;
   maxLength: number;
 }
 
-function CardNumberForm({ maxLength }: CardNumberFormProps) {
-  const [firstNumber, setFirstNumber] = useState("");
-  const [secondNumber, setSecondNumber] = useState("");
-  const [thirdNumber, setThirdNumber] = useState("");
-  const [fourthNumber, setFourthNumber] = useState("");
+function CardNumberForm({
+  firstNumber,
+  setFirstNumber,
+  secondNumber,
+  setSecondNumber,
+  thirdNumber,
+  setThirdNumber,
+  fourthNumber,
+  setFourthNumber,
+  maxLength,
+}: CardNumberFormProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {

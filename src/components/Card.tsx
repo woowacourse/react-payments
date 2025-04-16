@@ -6,17 +6,17 @@ import {
 } from "../constants";
 
 interface CardProps {
-  cardNumber: number[];
-  expiration: number[];
+  cardNumber: string[];
+  expiration: string[];
 }
 
 function Card({ cardNumber, expiration }: CardProps) {
-  const cardType = getCardType(String(cardNumber[0]));
+  const cardType = getCardType(cardNumber[0]);
 
-  function maskCardNumber(cardNumber: number[]) {
+  function maskCardNumber(cardNumber: string[]) {
     return [
       ...cardNumber.slice(0, 2),
-      ...cardNumber.slice(2).map((number) => "·".repeat(String(number).length)),
+      ...cardNumber.slice(2).map((letter) => "·".repeat(letter.length)),
     ];
   }
 
