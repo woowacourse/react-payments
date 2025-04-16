@@ -29,6 +29,7 @@ function App() {
 		month: "",
 		year: "",
 	});
+	const [cvcNumber, setcvcNumber] = useState<string>("");
 
 	const handleCardNumber = (order: keyof cardNumber, numbers: string) => {
 		setCardNumber({ ...cardNumber, [order]: numbers });
@@ -50,6 +51,8 @@ function App() {
 		<Input placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
 	];
 
+	const cvcInput = [<Input placeholder="123" value={cvcNumber} inputHandler={(value) => setcvcNumber(value)} />];
+
 	return (
 		<MainContainer>
 			<Card />
@@ -63,6 +66,11 @@ function App() {
 				<Title>카드 유효기간을 입력해 주세요</Title>
 				<Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
 				<InputField label="유효기간" inputs={expirationInput} />
+			</CardNumberWrap>
+
+			<CardNumberWrap>
+				<Title>CVC 번호를 입력해 주세요</Title>
+				<InputField label="CVC" inputs={cvcInput} />
 			</CardNumberWrap>
 		</MainContainer>
 	);
