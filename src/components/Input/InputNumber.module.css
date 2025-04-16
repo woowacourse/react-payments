@@ -5,3 +5,7 @@
   height: 32px;
   box-sizing: border-box;
 }
+
+.input-number::placeholder {
+  color: var(--color-input);
+}
