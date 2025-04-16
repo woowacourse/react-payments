@@ -1,6 +1,15 @@
 import styles from './Card.module.css';
 
-export default function Card({ numbers, cardLogo }: { numbers: string[]; cardLogo: 'visa' | 'master' | '' }) {
+export default function Card({
+  numbers,
+  cardLogo,
+  expiration
+}: {
+  numbers: string[];
+  cardLogo: 'visa' | 'master' | '';
+  expiration: string[];
+}) {
+  console.log(expiration);
   return (
     <div className={styles.card}>
       <div className={styles.chipWrapper}>
@@ -19,6 +28,11 @@ export default function Card({ numbers, cardLogo }: { numbers: string[]; cardLog
             {'・'.repeat(number.length)}
           </p>
         ))}
+      </div>
+      <div className={styles.cardNumber}>
+        {expiration[0]}
+        {expiration[0] && '/'}
+        {expiration[1]}
       </div>
     </div>
   );
