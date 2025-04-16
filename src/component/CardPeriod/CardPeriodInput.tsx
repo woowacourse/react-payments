@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import {
   sectionTitle,
   sectionTitleSubText,
@@ -10,7 +11,18 @@ import {
 } from '../CardNumberInput/CardNumberInput.style';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
 
-function CardPeriodInput() {
+type CardPeriodInputProps = {
+  cardExpirationDate: {
+    month: string;
+    year: string;
+  };
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+function CardPeriodInput({
+  cardExpirationDate,
+  onChange,
+}: CardPeriodInputProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <div css={sectionTitle}>
@@ -22,8 +34,20 @@ function CardPeriodInput() {
       <div css={cardNumberInputContainer}>
         <Input.Label>유효기간</Input.Label>
         <article css={cardNumberInputInputContainer}>
-          <Input />
-          <Input />
+          <Input
+            type="text"
+            name="month"
+            maxLength={2}
+            value={cardExpirationDate.month}
+            onChange={onChange}
+          />
+          <Input
+            type="text"
+            name="year"
+            maxLength={2}
+            value={cardExpirationDate.year}
+            onChange={onChange}
+          />
         </article>
       </div>
     </div>

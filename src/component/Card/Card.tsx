@@ -16,9 +16,13 @@ type CardProps = {
     third: string;
     forth: string;
   };
+  cardExpirationDate: {
+    month: string;
+    year: string;
+  };
 };
 
-function Card({ cardNumber }: CardProps) {
+function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const { first, second, third, forth } = cardNumber;
 
   const masterCardType =
@@ -38,6 +42,9 @@ function Card({ cardNumber }: CardProps) {
     }
   };
 
+  const isCardExpirationDate =
+    cardExpirationDate.month || cardExpirationDate.year;
+
   return (
     <section css={cardLayout}>
       <div css={cardContainer}>
@@ -56,7 +63,11 @@ function Card({ cardNumber }: CardProps) {
           <span css={cardContentText}>{forth}</span>
         </div>
         <div css={cardContent}>
-          <span css={cardContentText}>04/21</span>
+          {isCardExpirationDate && (
+            <span css={cardContentText}>
+              {cardExpirationDate.month}/{cardExpirationDate.year}
+            </span>
+          )}
         </div>
       </div>
     </section>

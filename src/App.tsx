@@ -16,6 +16,11 @@ function App() {
     forth: '',
   });
 
+  const [cardExpirationDate, setCardExpirationDate] = useState({
+    month: '',
+    year: '',
+  });
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setCardNumber({
@@ -25,18 +30,33 @@ function App() {
     console.log('cardNumber', cardNumber);
   };
 
+  const handleExpirationDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setCardExpirationDate({
+      ...cardExpirationDate,
+      [e.target.name]: value,
+    });
+    console.log('cardExpirationDate', cardExpirationDate);
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <Global styles={GlobalStyle} />
         <div css={appLayout}>
-          <Card cardNumber={cardNumber} />
+          <Card
+            cardNumber={cardNumber}
+            cardExpirationDate={cardExpirationDate}
+          />
           <main css={mainLayout}>
             <CardNumberInput
               cardNumber={cardNumber}
               onChange={handleInputChange}
             />
-            <CardPeriodInput />
+            <CardPeriodInput
+              cardExpirationDate={cardExpirationDate}
+              onChange={handleExpirationDateChange}
+            />
             <CvcInput />
           </main>
         </div>
