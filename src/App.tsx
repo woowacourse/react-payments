@@ -1,15 +1,11 @@
-import styled from "styled-components";
 import "./style.css";
 import "./reset.css";
-
-const H1 = styled.h1`
-  color: var(--color-yellow);
-`;
+import Description from "./component/Description";
 
 function App() {
   return (
     <>
-      <H1>안녕하세요</H1>
+      <Description headText="안녕하세요" detailText="디테일" />
     </>
   );
 }
