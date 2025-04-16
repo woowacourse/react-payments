@@ -14,20 +14,6 @@ function App() {
     useExpirationDate();
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
 
-  const handleCardNumber = (value: string, index: number) => {
-    cardNumbersValidate(value, index);
-    console.log(cardNumbers.join(" - "));
-  };
-
-  const handleCardExpirationDate = (value: string, index: number) => {
-    dateValidate(value, index);
-  };
-
-  const handleCardCvcNumber = (value: string) => {
-    cvcNumbersValidate(value);
-    console.log(cvcNumbers);
-  };
-
   return (
     <div className="App">
       <PreviewCardLayout
@@ -37,17 +23,17 @@ function App() {
       />
       <div className="card-input">
         <CardNumber
-          handleChange={handleCardNumber}
+          handleChange={cardNumbersValidate}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
         />
         <CardExpirationDate
-          handleChange={handleCardExpirationDate}
+          handleChange={dateValidate}
           cardExpirationDate={cardExpirationDate}
           errorMessage={cardExpirationDateError}
         />
         <CardCvcNumber
-          handleChange={handleCardCvcNumber}
+          handleChange={cvcNumbersValidate}
           cvcNumbers={cvcNumbers}
           errorMessage={cvcNumbersError}
         />
