@@ -61,6 +61,5 @@ const AppContainer = styled.div`
   width: 376px;
   display: flex;
   flex-direction: column;
-
   align-items: center;
 `;

@@ -21,7 +21,7 @@ function CardCVCForm({ cvc, setCvc, maxLength }: CardCVCFormProps) {
   }, [cvc]);
 
   return (
-    <>
+    <NumberInputForm>
       <Label>CVC</Label>
       <NumberInputContainer>
         <NumberInput
@@ -32,7 +32,7 @@ function CardCVCForm({ cvc, setCvc, maxLength }: CardCVCFormProps) {
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
-    </>
+    </NumberInputForm>
   );
 }
 
@@ -53,4 +53,8 @@ const NumberInputContainer = styled.div`
 const ErrorText = styled.p`
   color: #ff3d3d;
   font-size: 9.5px;
+`;
+
+const NumberInputForm = styled.div`
+  height: 70px;
 `;
