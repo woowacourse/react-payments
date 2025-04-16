@@ -20,6 +20,7 @@ const InputWrapper = styled.div`
 `;
 
 const ErrorMessage = styled.p`
+  min-height: 14px;
   font-weight: 400;
   font-size: 9.5px;
   color: #ff3d3d;
@@ -28,15 +29,17 @@ const ErrorMessage = styled.p`
 function BaseInputField({
   label,
   children,
+  errorMessage,
 }: {
   label: string;
   children: ReactNode;
+  errorMessage?: string;
 }) {
   return (
     <InputFieldContainer>
       <Label>{label}</Label>
       <InputWrapper>{children}</InputWrapper>
-      <ErrorMessage>sdf</ErrorMessage>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputFieldContainer>
   );
 }

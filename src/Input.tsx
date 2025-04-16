@@ -60,7 +60,7 @@ function Input({
       name={name}
       type="text"
       onBlur={onBlur}
-    ></StyledInput>
+    />
   );
 }
 
