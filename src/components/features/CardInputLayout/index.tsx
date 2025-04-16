@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react';
 
-import { css } from '@emotion/react';
-
 import { StyledCardInputLayoutContainer } from './CardInputLayout.styled';
 
 import { Flex } from '@/components/common/Flex';
@@ -26,7 +24,9 @@ export const CardInputLayout = ({ headerText, description, label, children }: Pr
       <Text variant="Body" fontWeight="regular">
         {label}
       </Text>
-      <Flex gap="8px">{children}</Flex>
+      <Flex gap="8px" width="100%">
+        {children}
+      </Flex>
     </StyledCardInputLayoutContainer>
   );
 };
