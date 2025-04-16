@@ -2,6 +2,7 @@ import Title from './common/Title'
 import Label from './common/Label'
 import Input from './common/Input'
 import Spacing from './common/Spacing'
+import ErrorMessage from './common/ErrorMessage'
 
 export default function CardNumber() {
   return (
@@ -22,7 +23,7 @@ export default function CardNumber() {
         <Input placeholder="1234" />
       </div>
       <Spacing size={8} />
-      {/* 에러 메시지 */}
+      <ErrorMessage>4자리만 가능</ErrorMessage>
     </div>
   )
 }
