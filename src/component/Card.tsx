@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import cardBrandLogo from "../constants/cardBrandLogo";
 import { CardInputProps } from "../types/CardInputTypes";
+import { maskingNumber } from "../util/maskingNumber";
 
 interface CardProps {
   cardNumber: CardInputProps | null;
@@ -44,6 +45,10 @@ const CardInformation = styled.div`
   min-width: 40px;
 `;
 
+const CardMaskingInformation = styled(CardInformation)`
+  letter-spacing: -2px;
+`;
+
 const CardNumberContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -65,8 +70,14 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
           <CardNumberContainer>
             <CardInformation>{cardNumber.first}</CardInformation>
             <CardInformation>{cardNumber.second}</CardInformation>
-            <CardInformation>{cardNumber.third}</CardInformation>
-            <CardInformation>{cardNumber.fourth}</CardInformation>
+            <CardMaskingInformation>
+              {cardNumber.third &&
+                maskingNumber(String(cardNumber.third).length)}
+            </CardMaskingInformation>
+            <CardMaskingInformation>
+              {cardNumber.fourth &&
+                maskingNumber(String(cardNumber.fourth).length)}
+            </CardMaskingInformation>
           </CardNumberContainer>
 
           {cardNumber.MM && cardNumber.YY && (
