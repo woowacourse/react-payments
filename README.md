@@ -58,7 +58,8 @@
     - [x] error 메시지 상태관리
   - [x] FormSection 컴포넌트 구현(title, description, wrapper)
   - [x] FormSection 컴포넌트 스토리북 생성
-  - [ ] FormContainer 컴포넌트 구현
+  - [x] FormContainer 컴포넌트 구현
+  - [x] FormContainer 컴포넌트 스토리북 생성
   - [ ] PreviewContainer 컴포넌트 구현
   - [x] text 컴포넌트 구현
 - [ ] domain 상태 관리 (preview, form 상태 동기화)
