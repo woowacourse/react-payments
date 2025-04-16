@@ -10,7 +10,8 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
   return (
     <div className={styles.preview}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
-      <img src="./Visa.png" alt="visa" className={styles.visa} />
+       {Number(cardNumbers[0][0]) === 4 && <img src="./Visa.png" alt="visa" className={styles.visa} />} 
+       {(Number(cardNumbers[0].slice(0,2)) >= 51 && Number(cardNumbers[0].slice(0,2)) <= 55 ) && <img src="./Mastercard.png" alt="visa" className={styles.visa} />} 
       <div className={styles.cardInfo}>
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
