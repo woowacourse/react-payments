@@ -1,2 +1,11 @@
 .custom-input {
+  border-radius: 2px;
+  border: 1.015px solid, #acacac;
+  padding: 8px;
+}
+.custom-input::placeholder {
+  color: #acacac;
+}
+.custom-input:focus {
+  border: 1.015px solid, black;
 }

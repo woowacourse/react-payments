@@ -130,3 +130,12 @@ button {
   background-color: transparent;
   padding: 0;
 }
+
+input {
+  border: none;
+  outline: none;
+}
+input:focus {
+  border: none;
+  outline: none;
+}
