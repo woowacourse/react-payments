@@ -11,10 +11,6 @@ import {
   cardNumberInputLayout,
 } from './CardNumberInput.style';
 
-//51~55로 시작하면 마스터카드
-//4로 시작하면 비자카드
-//그 외로 시작하면 alert띄우고 값 리셋
-
 type CardNumberInputProps = {
   cardNumber: {
     first: string;
