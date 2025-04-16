@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   checkNumber,
   checkTotalExpirationDate,
@@ -46,6 +46,21 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
     const expirationDate = e.target.value;
 
     try {
+      checkTotalExpirationDate(values[0], values[1]);
+    } catch (error) {
+      setIsError((prev) => {
+        const updated = [...prev];
+        updated[0] = true;
+        return updated;
+      });
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+      return;
+    }
+
+    try {
       checkNumber(expirationDate);
       checkValidLength(expirationDate, 2);
 
@@ -74,16 +89,6 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
         setErrorMessage(error.message);
       }
     }
-
-    // try {
-    //   checkTotalExpirationDate(values[0], values[1]);
-    // } catch (error) {
-    //   setIsError((prev) => prev.map((flag) => true));
-
-    //   if (error instanceof Error) {
-    //     setErrorMessage(error.message);
-    //   }
-    // }
   };
 
   return (
