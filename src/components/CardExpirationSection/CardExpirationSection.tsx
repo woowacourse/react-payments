@@ -1,13 +1,44 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 type Props = {
   expiration: string[];
-  expirationError: string[];
-  onChange: (index: number, value: string) => void;
+  setExpiration: Dispatch<SetStateAction<string[]>>;
 };
 
-export default function CardExpirationSection({ expiration, expirationError, onChange }: Props) {
+export default function CardExpirationSection({ expiration }: Props) {
+  const [expirationError, setExpirationError] = useState<string[]>(['', '']);
+
+  const handleExpirationChange = (index: number, value: string) => {
+    let errorMsg = '';
+    if (!/^[0-9]*$/.test(value)) {
+      errorMsg = '숫자만 입력 가능합니다.';
+      return;
+    }
+
+    if (index === 0) {
+      if (value !== '') {
+        const month = Number(value);
+        if (month < 1 || month > 12) {
+          errorMsg = '1부터 12 사이의 숫자를 입력해주세요.';
+        }
+      }
+    }
+    if (index === 1) {
+      if (value !== '' && value.length !== 2) {
+        errorMsg = '2자리 숫자를 입력해주세요.';
+      }
+    }
+
+    const updatedExpiration = [...expiration];
+    updatedExpiration[index] = value;
+    setExpirationError(updatedExpiration);
+
+    const updatedError = [...expirationError];
+    updatedError[index] = errorMsg;
+    setExpirationError(updatedError);
+  };
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
@@ -17,7 +48,7 @@ export default function CardExpirationSection({ expiration, expirationError, onC
       <InputSection.Label text="유효기간" />
       <InputSection.InputWrapper
         numbers={expiration}
-        onChange={onChange}
+        onChange={handleExpirationChange}
         valid={expirationError.map((msg) => msg === '')}
         placeholders={['MM', 'YY']}
         maxLength={2}
