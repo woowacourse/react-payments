@@ -27,14 +27,17 @@ const isError = {
   fourthNumber: false,
 };
 
-type UseCardNumbersOptions = {
+export type CardNumbersOptions = {
   cardNumbers: CardNumbers;
   setCardNumbers: (
     target: CardNumbersKeys
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError: typeof isError;
-  errorMessage: string;
 };
+
+type UseCardNumbersOptions = {
+  errorMessage: string;
+} & CardNumbersOptions;
 
 const useCardNumbers = (): UseCardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(InitialCardNumber);
@@ -51,7 +54,7 @@ const useCardNumbers = (): UseCardNumbersOptions => {
       setErrorMessage('숫자만 입력 가능합니다');
       return false;
     }
-//TODO: focus out 시 카드번호 검증 로직 추가
+    //TODO: focus out 시 카드번호 검증 로직 추가
     if (input.length > 4) {
       setErrorMessage('4자리 숫자만 입력 가능합니다');
       return false;
