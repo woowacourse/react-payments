@@ -23,6 +23,7 @@ const AnnouncementContainer = styled.div`
 `;
 
 const MainTitle = styled.p`
+  margin-top: 16px;
   font-size: 18px;
   font-weight: 700;
 `;
@@ -30,4 +31,5 @@ const MainTitle = styled.p`
 const Caption = styled.p`
   color: #8b95a1;
   font-size: 9.5px;
+  margin-bottom: 16px;
 `;

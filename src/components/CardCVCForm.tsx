@@ -22,7 +22,7 @@ function CardCVCForm({ cvc, setCvc, maxLength }: CardCVCFormProps) {
 
   return (
     <>
-      <Label>CVC 번호</Label>
+      <Label>CVC</Label>
       <NumberInputContainer>
         <NumberInput
           value={cvc}

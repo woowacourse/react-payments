@@ -55,6 +55,7 @@ const CardContainer = styled.div`
   border-radius: 4px;
   background: #333;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 30px;
 `;
 
 const CardHeader = styled.div`
