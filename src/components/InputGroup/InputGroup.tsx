@@ -11,10 +11,10 @@ const typeVariants = {
     const placeholder = "1234";
     return (
       <>
-        <Input placeholder={placeholder}></Input>
-        <Input placeholder={placeholder}></Input>
-        <Input placeholder={placeholder}></Input>
-        <Input placeholder={placeholder}></Input>
+        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} />
+        <Input placeholder={placeholder} />
       </>
     );
   },
@@ -23,14 +23,14 @@ const typeVariants = {
     const yearPlaceholder = "YY";
     return (
       <>
-        <Input placeholder={monthPlaceholder}></Input>
-        <Input placeholder={yearPlaceholder}></Input>
+        <Input placeholder={monthPlaceholder} />
+        <Input placeholder={yearPlaceholder} />
       </>
     );
   },
   [INPUT_TYPE.cvcNumber]: () => {
     const placeholder = "123";
-    return <Input placeholder={placeholder}></Input>;
+    return <Input placeholder={placeholder} />;
   },
 };
 

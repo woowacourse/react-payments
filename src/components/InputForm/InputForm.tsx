@@ -29,10 +29,10 @@ const subTitleVariants = {
 function InputForm({ type }: InputFormProps) {
   return (
     <>
-      <Title title={titleVariants[type]}></Title>
-      <Description description={descriptionVariants[type]}></Description>
-      <Subtitle subtitle={subTitleVariants[type]}></Subtitle>
-      <InputGroup type={type}></InputGroup>
+      <Title title={titleVariants[type]} />
+      <Description description={descriptionVariants[type]} />
+      <Subtitle subtitle={subTitleVariants[type]} />
+      <InputGroup type={type} />
     </>
   );
 }

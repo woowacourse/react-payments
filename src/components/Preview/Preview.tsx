@@ -14,7 +14,7 @@ function Preview({ cardNumbers, expirationPeriod }: PreviewProps) {
   return (
     <PreviewContainerCSS>
       <PreviewCSS>
-        <CardTypeCSS></CardTypeCSS>
+        <CardTypeCSS />
         <CardNumbersGroupCSS>
           {cardNumbers.map((cardNumber) => (
             <span>{cardNumber}</span>
