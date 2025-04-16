@@ -18,6 +18,10 @@ export const Default: Story = {
 			third: "",
 			fourth: "",
 		},
+		expirationDate: {
+			month: "",
+			year: "",
+		},
 	},
 };
 export const VisaCard: Story = {
@@ -28,10 +32,18 @@ export const VisaCard: Story = {
 			third: "5678",
 			fourth: "9123",
 		},
+		expirationDate: {
+			month: "02",
+			year: "19",
+		},
 	},
 };
 export const MasterCard: Story = {
 	args: {
 		cardNumbers: { first: "5512", second: "1234", third: "5678", fourth: "9123" },
+		expirationDate: {
+			month: "05",
+			year: "24",
+		},
 	},
 };
