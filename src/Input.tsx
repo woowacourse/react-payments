@@ -21,19 +21,22 @@ function Input({
   placeholder,
   isError,
   value,
+  name,
   onChange,
 }: {
   placeholder: string;
-  isError: boolean;
+  isError?: boolean;
   value: string;
+  name: string;
   onChange: (e: ChangeEvent) => void;
 }) {
   return (
     <StyledInput
       placeholder={placeholder}
       value={value}
-      $isError={isError}
+      $isError={isError ?? false}
       onChange={onChange}
+      name={name}
     ></StyledInput>
   );
 }
