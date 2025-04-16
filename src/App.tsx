@@ -5,6 +5,7 @@ import CardNumberInputField from './InputField/CardNumberInputField';
 import InputSection from './InputSection';
 import ExpirationDateInputField from './InputField/ExpirationDateInputField';
 import CVCInputField from './InputField/CVCInputField';
+import { useState } from 'react';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
@@ -27,24 +28,53 @@ const PaymentsContainer = styled.div`
 `;
 
 function App() {
+  const [cardNumberInputValue, setCardNumberInputValue] = useState({
+    cardNumberPart1: '',
+    cardNumberPart2: '',
+    cardNumberPart3: '',
+    cardNumberPart4: '',
+  });
+
+  const [expirationDateInputValue, setExpirationDateInputValue] = useState({
+    expirationDatePart1: '',
+    expirationDatePart2: '',
+  });
+
+  const [CVCInputValue, setCVCInputValue] = useState({
+    CVCPart1: '',
+  });
+
   return (
     <PaymentsLayout>
       <PaymentsContainer>
-        <CardPreview />
+        <CardPreview
+          cardNumberInputValue={cardNumberInputValue}
+          expirationDateInputValue={expirationDateInputValue}
+          CVCInputValue={CVCInputValue}
+        />
         <InputSection
           title="결제할 카드 번호를 입력해 주세요"
           caption="본인 명의의 카드만 결제 가능합니다."
         >
-          <CardNumberInputField />
+          <CardNumberInputField
+            inputValue={cardNumberInputValue}
+            setInputValue={setCardNumberInputValue}
+          />
         </InputSection>
         <InputSection
           title="카드 유효기간을 입력해 주세요"
           caption="월/년도(MMYY)를 순서대로 입력해 주세요."
         >
-          <ExpirationDateInputField />
+          <ExpirationDateInputField
+            inputValue={expirationDateInputValue}
+            setInputValue={setExpirationDateInputValue}
+          />
         </InputSection>
         <InputSection title="CVC 번호를 입력해 주세요">
-          <CVCInputField />
+          <CVCInputField
+            inputValue={CVCInputValue}
+            setInputValue={setCVCInputValue}
+          />
         </InputSection>
       </PaymentsContainer>
     </PaymentsLayout>
