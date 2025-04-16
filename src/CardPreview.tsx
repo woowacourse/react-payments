@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {
   CardNumberInputValueType,
-  CVCInputValueType,
   ExpirationDateInputValueType,
 } from './types/inputFieldType';
 
@@ -34,9 +33,19 @@ const CardInfoBox = styled.div`
   gap: 8px;
 `;
 
-const CardNumberWrapper = styled.div`
+const CardNumberRow = styled.div`
   display: flex;
   gap: 10px;
+`;
+
+const CardNumberWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 34px;
+  min-height: 20px;
+  border-bottom: 1px solid white;
 `;
 
 const CardInfoText = styled.p`
@@ -44,10 +53,15 @@ const CardInfoText = styled.p`
   font-weight: 300;
   font-size: 14px;
   text-align: center;
+  vertical-align: center;
   color: white;
-  width: 34px;
-  min-height: 20px;
-  border-bottom: 1px solid white;
+`;
+
+const CardNumberMask = styled.div`
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
 `;
 
 function CardPreview({
@@ -61,16 +75,36 @@ function CardPreview({
     <Card>
       <CardChip />
       <CardInfoBox>
+        <CardNumberRow>
+          <CardNumberWrapper>
+            <CardInfoText>{cardNumberInputValue.cardNumberPart1}</CardInfoText>
+          </CardNumberWrapper>
+          <CardNumberWrapper>
+            <CardInfoText>{cardNumberInputValue.cardNumberPart2}</CardInfoText>
+          </CardNumberWrapper>
+          <CardNumberWrapper>
+            {Array.from(
+              { length: cardNumberInputValue.cardNumberPart3.length },
+              () => (
+                <CardNumberMask />
+              )
+            )}
+          </CardNumberWrapper>
+          <CardNumberWrapper>
+            {Array.from(
+              { length: cardNumberInputValue.cardNumberPart4.length },
+              () => (
+                <CardNumberMask />
+              )
+            )}
+          </CardNumberWrapper>
+        </CardNumberRow>
         <CardNumberWrapper>
-          <CardInfoText>{cardNumberInputValue.cardNumberPart1}</CardInfoText>
-          <CardInfoText>{cardNumberInputValue.cardNumberPart2}</CardInfoText>
-          <CardInfoText>{cardNumberInputValue.cardNumberPart3}</CardInfoText>
-          <CardInfoText>{cardNumberInputValue.cardNumberPart4}</CardInfoText>
+          <CardInfoText>
+            {expirationDateInputValue.expirationDatePart1}/
+            {expirationDateInputValue.expirationDatePart2}
+          </CardInfoText>
         </CardNumberWrapper>
-        <CardInfoText>
-          {expirationDateInputValue.expirationDatePart1}/
-          {expirationDateInputValue.expirationDatePart2}
-        </CardInfoText>
       </CardInfoBox>
     </Card>
   );
