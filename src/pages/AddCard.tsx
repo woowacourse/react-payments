@@ -12,6 +12,12 @@ import {
   validateCardCVC,
 } from "../validation/validation";
 
+type ErrorMessagesType = {
+  cardNumber: string;
+  expirationDate: string;
+  cvc: string;
+};
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,14 +50,16 @@ const AddCard = () => {
   });
 
   // 오류 메시지를 객체로 관리
-  const [errorMessages, setErrorMessages] = useState({
+  const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
     cardNumber: "",
     expirationDate: "",
     cvc: "",
   });
 
-  // 오류 메시지 설정 함수
-  const setErrorMessage = (key, message) => {
+  const handleErrorMessages = (
+    key: keyof ErrorMessagesType,
+    message: string
+  ) => {
     setErrorMessages((prev) => ({
       ...prev,
       [key]: message,
@@ -77,8 +85,8 @@ const AddCard = () => {
             setCardInput={setCardInput}
             validate={validateCardNumber}
             inputKey="first"
-            setErrorMessage={(message) =>
-              setErrorMessage("cardNumber", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("cardNumber", message)
             }
           />
           <Input
@@ -87,8 +95,8 @@ const AddCard = () => {
             validate={validateCardNumber}
             setCardInput={setCardInput}
             inputKey="second"
-            setErrorMessage={(message) =>
-              setErrorMessage("cardNumber", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("cardNumber", message)
             }
           />
           <Input
@@ -97,8 +105,8 @@ const AddCard = () => {
             setCardInput={setCardInput}
             validate={validateCardNumber}
             inputKey="third"
-            setErrorMessage={(message) =>
-              setErrorMessage("cardNumber", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("cardNumber", message)
             }
           />
           <Input
@@ -107,8 +115,8 @@ const AddCard = () => {
             setCardInput={setCardInput}
             validate={validateCardNumber}
             inputKey="fourth"
-            setErrorMessage={(message) =>
-              setErrorMessage("cardNumber", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("cardNumber", message)
             }
           />
         </InputGroup>
@@ -128,8 +136,8 @@ const AddCard = () => {
             validate={validateCardExpirationDateMM}
             setCardInput={setCardInput}
             inputKey="MM"
-            setErrorMessage={(message) =>
-              setErrorMessage("expirationDate", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("expirationDate", message)
             }
           />
           <Input
@@ -138,8 +146,8 @@ const AddCard = () => {
             validate={validateCardExpirationDateYY}
             setCardInput={setCardInput}
             inputKey="YY"
-            setErrorMessage={(message) =>
-              setErrorMessage("expirationDate", message)
+            handleErrorMessage={(message) =>
+              handleErrorMessages("expirationDate", message)
             }
           />
         </InputGroup>
@@ -152,7 +160,9 @@ const AddCard = () => {
             validate={validateCardCVC}
             setCardInput={setCardInput}
             inputKey="CVC"
-            setErrorMessage={(message) => setErrorMessage("cvc", message)}
+            handleErrorMessage={(message) =>
+              handleErrorMessages("cvc", message)
+            }
           />
         </InputGroup>
       </Form>

@@ -17,8 +17,8 @@ interface InputProps {
   placeholder: string;
   inputKey: InputKeyType;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
-  validate: (value: string) => string;
-  setErrorMessage: Dispatch<SetStateAction<string>>;
+  validate: (value: string) => string | undefined;
+  handleErrorMessage: (input: string) => void;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -42,20 +42,20 @@ const Input = ({
   inputKey,
   setCardInput,
   validate,
-  setErrorMessage,
+  handleErrorMessage,
 }: InputProps) => {
   const [isError, setIsError] = useState(false);
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const errorMessage = validate(value);
-    if (errorMessage.length > 0) {
-      setErrorMessage(errorMessage);
+    if (errorMessage && errorMessage.length > 0) {
+      handleErrorMessage(errorMessage);
       setIsError(true);
       return;
     }
 
-    setErrorMessage("");
+    handleErrorMessage("");
     setIsError(false);
 
     setCardInput((prev: CardInputProps) => ({
