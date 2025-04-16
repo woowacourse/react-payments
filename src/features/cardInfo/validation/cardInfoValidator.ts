@@ -2,7 +2,6 @@ export const cardNumberValidator = (inputs: string[]) => {
   for (let index = 0; index < inputs.length; index++) {
     const input = inputs[index];
     if (!isNumber(input)) {
-      console.log('!!!!!!!');
       return [index, '카드 번호는 숫자만 입력 가능합니다.'];
     }
     if (!isFourDigit(Number(input))) {

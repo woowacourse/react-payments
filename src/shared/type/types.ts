@@ -4,6 +4,7 @@ export interface CustomInputProps {
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
+  error?: boolean;
 }
 
 export interface CardInfoProps {

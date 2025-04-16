@@ -38,6 +38,7 @@ export default function CardInfoSection({
               {...input}
               onChange={onChange}
               maxLength={maxLength}
+              error={error[`${id}Error`]?.[0] === index}
             />
           ))}
         </div>

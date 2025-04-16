@@ -7,10 +7,12 @@ export default function CustomInput({
   name,
   onChange,
   maxLength,
+  error,
 }: CustomInputProps) {
+  console.log('asdf', error);
   return (
     <input
-      className="custom-input"
+      className={`custom-input ${error && 'custom-input-error'}`}
       onChange={onChange}
       type={type}
       placeholder={placeholder}

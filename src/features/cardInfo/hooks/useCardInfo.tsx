@@ -28,7 +28,6 @@ export default function useCardInfo() {
             ...prev,
             cardNumberError: [errorIndex, errorMessage],
           }));
-          console.log(error.cardNumberError);
         } else {
           setError((prev: any) => ({
             ...prev,
