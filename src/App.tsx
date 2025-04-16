@@ -45,6 +45,7 @@ function App() {
     year: "",
   });
 
+  const [CVCNumber, setCVCNumber] = useState("");
 
   function changeCardNumber(position: Position, cardNumber: string) {
     setCardNumber((prev) => {
@@ -60,12 +61,17 @@ function App() {
     })
   }
 
+   function changeCVCNumber(CVCNumber : string ) {
+    setCVCNumber(CVCNumber);
+  }
+
+
   return (
     <StyleFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod}  />
       <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
       <CardExpirationPeriodSection expirationPeriod={expirationPeriod} changeExpirationPeriod={changeExpirationPeriod}/>
-      <CardCVCNumberSection />
+      <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} />
     </StyleFrame>
   );
 }

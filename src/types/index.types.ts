@@ -16,4 +16,10 @@ export type ExpirationPeriodProps = {
         month: string,
         year: string,
     },
-    changeExpirationPeriod : (expirationPeriod : ExpirationPeriod , date : string) => void}
+    changeExpirationPeriod: (expirationPeriod: ExpirationPeriod, date: string) => void
+}
+    
+export type CardCVCNumberSectionProps = {
+    CVCNumber: string,
+    changeCVCNumber : (CVCNumber : string) => void
+}

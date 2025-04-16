@@ -1,6 +1,7 @@
 import SectionTitle from "../sectionTitle/SectionTitle"
 import CardCVCNumberInputs from "../cardCVCNumberInputs/cardCVCNumberInputs"
 import styled from "styled-components"
+import { CardCVCNumberSectionProps } from "../../\btypes/index.types"
 
 const StyledContainer = styled.div`
     display: flex;
@@ -11,11 +12,11 @@ const StyledContainer = styled.div`
     width: 100%;
 `
 
-function CardCVCNumberSection() {
+function CardCVCNumberSection({ CVCNumber, changeCVCNumber } : CardCVCNumberSectionProps) {
     return (
         <StyledContainer>
             <SectionTitle title="CVC 번호를 입력해 주세요"/>
-            <CardCVCNumberInputs/>
+            <CardCVCNumberInputs CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber}/>
         </StyledContainer>
     )
 }
