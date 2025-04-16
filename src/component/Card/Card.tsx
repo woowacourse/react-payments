@@ -11,10 +11,10 @@ import {
 
 type CardProps = {
   cardNumber: {
-    first: string;
-    second: string;
-    third: string;
-    forth: string;
+    first: number | null;
+    second: number | null;
+    third: number | null;
+    forth: number | null;
   };
   cardExpirationDate: {
     month: string;
@@ -26,13 +26,13 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const { first, second, third, forth } = cardNumber;
 
   const masterCardType =
-    first.startsWith('51') ||
-    first.startsWith('52') ||
-    first.startsWith('53') ||
-    first.startsWith('54') ||
-    first.startsWith('55');
+    first?.toString().startsWith('51') ||
+    first?.toString().startsWith('52') ||
+    first?.toString().startsWith('53') ||
+    first?.toString().startsWith('54') ||
+    first?.toString().startsWith('55');
 
-  const visaCardType = first.startsWith('4');
+  const visaCardType = first?.toString().startsWith('4');
 
   const checkCardType = () => {
     if (masterCardType) {

@@ -1,5 +1,7 @@
 import { ChangeEvent } from 'react';
 import {
+  errorInputStyle,
+  errorMessageStyle,
   sectionTitle,
   sectionTitleSubText,
   sectionTitleText,
@@ -13,15 +15,25 @@ import {
 
 type CardNumberInputProps = {
   cardNumber: {
-    first: string;
-    second: string;
-    third: string;
-    forth: string;
+    first: number | null;
+    second: number | null;
+    third: number | null;
+    forth: number | null;
   };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorState: {
+    first: boolean;
+    second: boolean;
+    third: boolean;
+    forth: boolean;
+  };
 };
 
-function CardNumberInput({ cardNumber, onChange }: CardNumberInputProps) {
+function CardNumberInput({
+  cardNumber,
+  onChange,
+  errorState,
+}: CardNumberInputProps) {
   return (
     <div css={cardNumberInputLayout}>
       <div css={sectionTitle}>
@@ -37,31 +49,41 @@ function CardNumberInput({ cardNumber, onChange }: CardNumberInputProps) {
             type="text"
             name="first"
             maxLength={4}
-            value={cardNumber.first}
+            value={cardNumber.first?.toString()}
             onChange={onChange}
+            css={errorState.first ? errorInputStyle : undefined}
           />
           <Input
             type="text"
             name="second"
             maxLength={4}
-            value={cardNumber.second}
+            value={cardNumber.second?.toString()}
             onChange={onChange}
+            css={errorState.second ? errorInputStyle : undefined}
           />
           <Input
             type="text"
             name="third"
             maxLength={4}
-            value={cardNumber.third}
+            value={cardNumber.third?.toString()}
             onChange={onChange}
+            css={errorState.third ? errorInputStyle : undefined}
           />
           <Input
             type="text"
             name="forth"
             maxLength={4}
-            value={cardNumber.forth}
+            value={cardNumber.forth?.toString()}
             onChange={onChange}
+            css={errorState.forth ? errorInputStyle : undefined}
           />
         </article>
+        {(errorState.first ||
+          errorState.second ||
+          errorState.third ||
+          errorState.forth) && (
+          <div css={errorMessageStyle}>숫자만 입력 가능합니다.</div>
+        )}
       </div>
     </div>
   );
