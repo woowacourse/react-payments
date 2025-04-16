@@ -1,14 +1,19 @@
-import { useState } from 'react';
-
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { CardInputLayout } from '@/components/common/CardInputLayout';
 import { Input } from '@/components/common/Input';
-import { CardInputLayout } from '@/components/features/CardInputLayout';
 
 const meta = {
   title: 'common/CardInputLayout',
   component: CardInputLayout,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '카드 등록을 위한 레이아웃 컴포넌트입니다.',
+      },
+    },
+  },
 } satisfies Meta<typeof CardInputLayout>;
 
 export default meta;
@@ -17,21 +22,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    headerText: '결제할 카드 번호를 입력해 주세요.',
-    description: '본인 명의의 카드만 결제 가능합니다.',
-    label: '카드 번호',
+    headerText: '헤더 텍스트입니다.',
+    description: '설명을 담은 description입니다.',
+    label: '라벨 값 입니다.',
   },
   render: (args) => {
-    const [value, _] = useState<string[]>(['', '', '', '']);
     return (
       <CardInputLayout {...args}>
-        {Array.from({ length: 4 }, (_, i) => (
+        {Array.from({ length: 1 }, (_, i) => (
           <Input
             key={i}
-            value={value[i]}
+            disabled={true}
             minLength={1}
             maxLength={4}
-            placeholder="0000"
+            placeholder="값을 입력해주세요."
             isValid={true}
           />
         ))}

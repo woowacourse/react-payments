@@ -5,7 +5,7 @@ export const StyledCardInputLayoutContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 4px;
+  gap: 8px;
   width: 100%;
   max-width: 500px;
 `;
