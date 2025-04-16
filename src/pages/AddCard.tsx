@@ -11,6 +11,7 @@ import {
   validateCardExpirationDateYY,
   validateCardCVC,
 } from "../validation/validation";
+import { justifyBrandLogo } from "./util/justifyBrandLogo";
 
 type ErrorMessagesType = {
   cardNumber: string;
@@ -49,26 +50,11 @@ const AddCard = () => {
     CVC: null,
   });
 
-  // 오류 메시지를 객체로 관리
   const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
     cardNumber: "",
     expirationDate: "",
     cvc: "",
   });
-
-  const justifyBrandLogo = (cardNumber: number) => {
-    if (cardNumber.toString().startsWith("0")) return "default";
-    if (cardNumber.toString().startsWith("4")) return "visa";
-
-    if (
-      cardNumber.toString().startsWith("51") ||
-      cardNumber.toString().startsWith("52")
-    )
-      return "mastercard";
-    if (cardNumber >= 2221 && cardNumber <= 2720) return "mastercard";
-
-    return "default";
-  };
 
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
