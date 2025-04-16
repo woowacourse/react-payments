@@ -8,6 +8,8 @@ export interface PreviewViewProps {
   cardMethodSrc: string;
 }
 
+const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
+
 const PreviewView: React.FC<PreviewViewProps> = ({
   cardNumbers,
   period,
@@ -27,7 +29,9 @@ const PreviewView: React.FC<PreviewViewProps> = ({
         <CardNumberArea>
           {cardNumbers.map((number, index) => (
             <CardNumber key={index}>
-              {index < 2 ? number : '∙'.repeat(number.length)}
+              {index < CARD_NUMBER_VISIBLE_THRESHOLD
+                ? number
+                : '∙'.repeat(number.length)}
             </CardNumber>
           ))}
         </CardNumberArea>

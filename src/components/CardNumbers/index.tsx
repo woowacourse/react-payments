@@ -6,6 +6,9 @@ export interface CardNumbersProps {
   setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const CARD_NUMBERS_LENGTH = 4;
+const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
+
 const CardNumbers: React.FC<CardNumbersProps> = ({
   cardNumbers,
   setCardNumbers,
@@ -26,7 +29,7 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
     const value = e.target.value;
     setCardNumbers((prev) => {
       const newState = [...prev];
-      if (/^[0-9]*$/.test(value) && value.length <= 4) {
+      if (/^[0-9]*$/.test(value) && value.length <= CARD_NUMBERS_LENGTH) {
         newState[index] = value;
         setErrors((prevErrors) => {
           const newErrors = [...prevErrors];
@@ -34,7 +37,7 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
           return newErrors;
         });
       } else {
-        setErrorMessage('숫자만 가능합니다.');
+        setErrorMessage(ERROR_MESSAGE);
         setErrors((prevErrors) => {
           const newErrors = [...prevErrors];
           newErrors[index] = true;

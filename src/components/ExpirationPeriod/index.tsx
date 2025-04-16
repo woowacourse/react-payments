@@ -7,6 +7,21 @@ export interface ExpirationPeriodProps {
   separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 
+const EXPIRATION_PERIOD_LENGTH = 2;
+const SEPARATOR = '/';
+const MONTH = {
+  MIN: 1,
+  MAX: 12,
+} as const;
+const YEAR = {
+  MIN: 0,
+  MAX: 99,
+} as const;
+const ERROR_MESSAGE = {
+  INVALID: '올바른 유효기간을 입력하세요.',
+  INVALID_CHARACTER: '숫자만 입력 가능합니다.',
+} as const;
+
 const ExpirationPeriod: React.FC<ExpirationPeriodProps> = ({
   period,
   setPeriod,
@@ -34,29 +49,29 @@ const ExpirationPeriod: React.FC<ExpirationPeriodProps> = ({
 
       if (!/^[0-9]*$/.test(value)) {
         valid = false;
-        message = '숫자만 입력 가능합니다.';
-      } else if (value.length <= 2) {
+        message = ERROR_MESSAGE.INVALID_CHARACTER;
+      } else if (value.length <= EXPIRATION_PERIOD_LENGTH) {
         newState[index] = value;
         if (index === 0) {
           const month = Number(value);
-          if (month > 12 || month < 1) {
+          if (month > MONTH.MAX || month < MONTH.MIN) {
             valid = false;
-            message = '올바른 유효기간을 입력하세요.';
+            message = ERROR_MESSAGE.INVALID;
           } else if (month < 10 && !value.startsWith('0')) {
             valid = false;
-            message = '올바른 유효기간을 입력하세요.';
+            message = ERROR_MESSAGE.INVALID;
           }
         } else {
           const year = Number(value);
-          if (year < 0 || year > 99) {
+          if (year < YEAR.MIN || year > YEAR.MAX) {
             valid = false;
-            message = '올바른 유효기간을 입력하세요.';
+            message = ERROR_MESSAGE.INVALID;
           } else if (
             (year < 10 && !value.startsWith('0')) ||
             value.length === 1
           ) {
             valid = false;
-            message = '올바른 유효기간을 입력하세요.';
+            message = ERROR_MESSAGE.INVALID;
           }
         }
       }
@@ -81,7 +96,7 @@ const ExpirationPeriod: React.FC<ExpirationPeriodProps> = ({
 
   const handleFocus = () => {
     if (separatorRef?.current) {
-      separatorRef.current.textContent = '/';
+      separatorRef.current.textContent = SEPARATOR;
     }
   };
 

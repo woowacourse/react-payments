@@ -6,6 +6,9 @@ export interface CVCNumbersProps {
   setCvcNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const CVC_NUMBERS_LENGTH = 3;
+const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
+
 const CVCNumbers: React.FC<CVCNumbersProps> = ({
   cvcNumbers,
   setCvcNumbers,
@@ -17,12 +20,12 @@ const CVCNumbers: React.FC<CVCNumbersProps> = ({
     setCvcNumbers((prev) => {
       const newState = [...prev];
       const value = e.target.value;
-      if (/^[0-9]*$/.test(value) && value.length <= 3) {
+      if (/^[0-9]*$/.test(value) && value.length <= CVC_NUMBERS_LENGTH) {
         newState[0] = value;
         setErrorMessage('');
         setError(false);
       } else {
-        setErrorMessage('숫자만 입력 가능합니다.');
+        setErrorMessage(ERROR_MESSAGE);
         setError(true);
       }
       return newState;
