@@ -19,7 +19,7 @@ const StyledText = styled.div<TextProps>`
       case 'title':
         return '18px';
       case 'subTitle':
-        return '14px';
+        return '12px';
     }
   }};
   color: ${(props) => {
