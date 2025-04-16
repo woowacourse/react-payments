@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import {
+  CardNumberInputValueType,
+  CVCInputValueType,
+  ExpirationDateInputValueType,
+} from './types/inputFieldType';
 
 const Card = styled.div`
   position: relative;
@@ -19,7 +24,15 @@ const CardChip = styled.div`
   background: #ddcd78;
 `;
 
-function CardPreview() {
+function CardPreview({
+  cardNumberInputValue,
+  expirationDateInputValue,
+  CVCInputValue,
+}: {
+  cardNumberInputValue: Record<CardNumberInputValueType, string>;
+  expirationDateInputValue: Record<ExpirationDateInputValueType, string>;
+  CVCInputValue: Record<CVCInputValueType, string>;
+}) {
   return (
     <Card>
       <CardChip />

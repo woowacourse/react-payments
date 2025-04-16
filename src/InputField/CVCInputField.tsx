@@ -1,12 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
+import { CVCInputValueType } from '../types/inputFieldType';
 
-function CVCInputField() {
-  const [inputValue, setInputValue] = useState({
-    CVCPart1: '',
-  });
-
+function CVCInputField({
+  inputValue,
+  setInputValue,
+}: {
+  inputValue: Record<CVCInputValueType, string>;
+  setInputValue: Dispatch<SetStateAction<Record<CVCInputValueType, string>>>;
+}) {
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     const numericValue = value.replace(/[^0-9]/g, '');

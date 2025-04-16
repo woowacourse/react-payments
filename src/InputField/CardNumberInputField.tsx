@@ -1,15 +1,23 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
+import { CardNumberInputValueType } from '../types/inputFieldType';
 
-function CardNumberInputField() {
-  const [inputValue, setInputValue] = useState({
-    cardNumberPart1: '',
-    cardNumberPart2: '',
-    cardNumberPart3: '',
-    cardNumberPart4: '',
-  });
-
+function CardNumberInputField({
+  inputValue,
+  setInputValue,
+}: {
+  inputValue: Record<CardNumberInputValueType, string>;
+  setInputValue: Dispatch<
+    SetStateAction<Record<CardNumberInputValueType, string>>
+  >;
+}) {
   const [cardType, setCardType] = useState<'visa' | 'master' | null>(null);
   type ErrorType = 'noneCardType' | null;
 

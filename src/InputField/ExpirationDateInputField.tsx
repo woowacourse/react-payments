@@ -1,13 +1,17 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
+import { ExpirationDateInputValueType } from '../types/inputFieldType';
 
-function ExpirationDateInputField() {
-  const [inputValue, setInputValue] = useState({
-    expirationDatePart1: '',
-    expirationDatePart2: '',
-  });
-
+function ExpirationDateInputField({
+  inputValue,
+  setInputValue,
+}: {
+  inputValue: Record<ExpirationDateInputValueType, string>;
+  setInputValue: Dispatch<
+    SetStateAction<Record<ExpirationDateInputValueType, string>>
+  >;
+}) {
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     const numericValue = value.replace(/[^0-9]/g, '');
