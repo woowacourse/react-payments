@@ -15,6 +15,7 @@ const CardCVCNumberInputSection = () => {
           value={cardCVCNumber}
           onChange={setCardCVCNumber}
           isError={isError}
+          placeholder="123"
         ></InputField>
       </div>
 

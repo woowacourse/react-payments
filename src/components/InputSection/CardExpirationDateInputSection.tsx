@@ -19,11 +19,13 @@ const CardExpirationDateInputSection = () => {
           value={cardExpirationDate.month}
           onChange={setCardExpirationDate('month')}
           isError={isError.month}
+          placeholder="MM"
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
           onChange={setCardExpirationDate('year')}
           isError={isError.year}
+          placeholder="YY"
         ></InputField>
       </div>
       <ErrorMessage message={errorMessage} />
