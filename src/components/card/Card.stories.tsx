@@ -10,14 +10,28 @@ export default meta;
 
 type Story = StoryObj<typeof Card>;
 
-export const Default: Story = {};
+export const Default: Story = {
+	args: {
+		cardNumbers: {
+			first: "",
+			second: "",
+			third: "",
+			fourth: "",
+		},
+	},
+};
 export const VisaCard: Story = {
 	args: {
-		cardNumbers: ["4123", "1234", "5678", "9123"],
+		cardNumbers: {
+			first: "4123",
+			second: "1234",
+			third: "5678",
+			fourth: "9123",
+		},
 	},
 };
 export const MasterCard: Story = {
 	args: {
-		cardNumbers: ["5512", "1234", "5678", "9123"],
+		cardNumbers: { first: "5512", second: "1234", third: "5678", fourth: "9123" },
 	},
 };

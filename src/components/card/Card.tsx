@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { cardNumber } from "../../App";
 
-const Card = ({ cardNumbers }: { cardNumbers?: string[] }) => {
+const Card = ({ cardNumbers }: { cardNumbers: cardNumber }) => {
 	// none:0, mastercard: 1, visa: 2
 	const [badgeBrand, setBadgeBrand] = useState(0);
 
@@ -13,19 +14,27 @@ const Card = ({ cardNumbers }: { cardNumbers?: string[] }) => {
 	};
 
 	const settingBadgeBrand = () => {
-		if (!cardNumbers) return;
+		const firstSection = cardNumbers.first;
 
-		const firstSection = cardNumbers[0];
-		const visaIdentity = Number(firstSection[0]);
-		const masterCardIdentity = Number(firstSection[0] + firstSection[1]);
-
-		if (masterCardIdentity >= 51 && masterCardIdentity <= 55) {
-			setBadgeBrand(1);
+		if (firstSection === "") {
+			setBadgeBrand(0);
 			return;
 		}
 
-		if (visaIdentity === 4) {
-			setBadgeBrand(2);
+		const firstSectionStr = String(firstSection);
+
+		if (firstSectionStr.length >= 2) {
+			const firstTwoDigits = firstSectionStr.substring(0, 2);
+			const numValue = parseInt(firstTwoDigits);
+
+			if (numValue >= 51 && numValue <= 55) {
+				setBadgeBrand(1); // Mastercard
+				return;
+			}
+		}
+
+		if (firstSectionStr.startsWith("4")) {
+			setBadgeBrand(2); // Visa
 			return;
 		}
 	};
@@ -41,11 +50,11 @@ const Card = ({ cardNumbers }: { cardNumbers?: string[] }) => {
 				<BrandBadge image={matchBadgeBrand()} />
 			</Wrap>
 			<CardNumbers>
-				{cardNumbers?.map((cardNumber, index) => {
-					if (index >= 2) {
-						return <CardNumberblind>{"•".repeat(cardNumber.length)}</CardNumberblind>;
+				{Object.entries(cardNumbers).map(([key, value]) => {
+					if (key === "third" || key === "fourth") {
+						return <CardNumberblind>{"•".repeat(value?.length)}</CardNumberblind>;
 					}
-					return <CardNumber>{cardNumber}</CardNumber>;
+					return <CardNumber>{value}</CardNumber>;
 				})}
 			</CardNumbers>
 		</Container>
