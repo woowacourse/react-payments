@@ -47,6 +47,7 @@ function App() {
 
   const [CVCNumber, setCVCNumber] = useState("");
 
+
   function changeCardNumber(position: Position, cardNumber: string) {
     setCardNumber((prev) => {
       prev[position] = cardNumber;

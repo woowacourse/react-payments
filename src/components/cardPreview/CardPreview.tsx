@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { ExpirationPeriodProps } from "../../\btypes/index.types"
+import { useState } from "react"
+import { useEffect } from "react"
 
 const StyledContainer = styled.div`
 display: flex;
@@ -73,21 +75,37 @@ type CardPreviewProps = {
     }
 }
 
-function CardPreview({cardNumber, expirationPeriod} : CardPreviewProps) {
+function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
+    const [logoSrc, setLogoSrc] = useState("");
+
+    
+    
+    useEffect(() => {
+        function identifyLogo() {
+            const id = cardNumber['first'].slice(0, 2);
+            if (id[0] === "4") setLogoSrc('/images/Visa.svg')
+            else if (Number(id) >= 51 && Number(id) <= 55) setLogoSrc('/images/Mastercard.svg')
+            else { setLogoSrc("") }
+        }
+         identifyLogo();
+    },[cardNumber])
+
     return (
         <StyledContainer>
             <StyledIconWrap>
                 <StyledMagnetic>
                 </StyledMagnetic>
-                <StyledLogoWrap>
-                    <img src="/images/Mastercard.svg" alt="logo" style={{width: "100%", height: "100%"}}/>
-                </StyledLogoWrap>
+                {logoSrc !== "" ?
+                    <StyledLogoWrap>
+                        <img src={logoSrc} alt="logo" style={{width: "100%", height: "100%"}}/>
+                    </StyledLogoWrap>
+                    : null}
             </StyledIconWrap>
             <StyledCardNumberWrap>
                 <StyledCardNumber>{cardNumber['first']}</StyledCardNumber>
                 <StyledCardNumber>{cardNumber['second']}</StyledCardNumber>
-                <StyledCardNumber>{cardNumber['third']}</StyledCardNumber>
-                <StyledCardNumber>{cardNumber['forth']}</StyledCardNumber>
+                <StyledCardNumber>{"*".repeat(cardNumber['third'].length)}</StyledCardNumber>
+                <StyledCardNumber>{"*".repeat(cardNumber['forth'].length)}</StyledCardNumber>
             </StyledCardNumberWrap>
             <StyledExpirationPeriod>
                 {expirationPeriod['month']}/{expirationPeriod['year']}
