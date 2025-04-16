@@ -21,8 +21,9 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 
 	const handleCardNumber = (order: keyof cardNumber, value: string) => {
 		setCardNumber({ ...cardNumber, [order]: value });
+		const regex = /^(?:\d{1,4})?$/;
 
-		if (isNaN(Number(value))) {
+		if (!regex.test(value)) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
 			return;
 		}

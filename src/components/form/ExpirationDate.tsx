@@ -24,7 +24,9 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	const handleDate = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
-		if (isNaN(Number(value))) {
+		const regex = /^(?:\d{1,2})?$/;
+
+		if (!regex.test(value)) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
 			return;
 		}
@@ -67,4 +69,6 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 export default ExpirationDate;
 
-const CardNumberWrap = styled.div``;
+const CardNumberWrap = styled.div`
+	height: 130px;
+`;

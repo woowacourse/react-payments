@@ -10,12 +10,13 @@ type Props = {
 };
 const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	const [error, setError] = useState("");
-	const cvcInput = [<Input isError={error.length > 0 && true} placeholder="123" value={cvcNumber} inputHandler={(value) => handleCardCvc(value)} />];
+	const cvcInput = [<Input maxLength={3} isError={error.length > 0 && true} placeholder="123" value={cvcNumber} inputHandler={(value) => handleCardCvc(value)} />];
 
 	const handleCardCvc = (value: string) => {
 		setcvcNumber(value);
+		const regex = /^(?:\d{1,3})?$/;
 
-		if (isNaN(Number(value))) {
+		if (!regex.test(value)) {
 			setError("숫자만 입력 가능합니다.");
 			return;
 		}
@@ -33,4 +34,6 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 
 export default CardCvc;
 
-const CardNumberWrap = styled.div``;
+const CardNumberWrap = styled.div`
+	height: 130px;
+`;
