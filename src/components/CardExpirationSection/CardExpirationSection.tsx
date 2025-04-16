@@ -7,7 +7,7 @@ type Props = {
   setExpiration: Dispatch<SetStateAction<string[]>>;
 };
 
-export default function CardExpirationSection({ expiration }: Props) {
+export default function CardExpirationSection({ expiration, setExpiration }: Props) {
   const [expirationError, setExpirationError] = useState<string[]>(['', '']);
 
   const handleExpirationChange = (index: number, value: string) => {
@@ -33,12 +33,13 @@ export default function CardExpirationSection({ expiration }: Props) {
 
     const updatedExpiration = [...expiration];
     updatedExpiration[index] = value;
-    setExpirationError(updatedExpiration);
+    setExpiration(updatedExpiration);
 
     const updatedError = [...expirationError];
     updatedError[index] = errorMsg;
     setExpirationError(updatedError);
   };
+
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

@@ -20,8 +20,10 @@ export default function Card({
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>
-          {numbers.slice(0, 2).map((number) => (
-            <p className={styles.cardNumber}> {number}</p>
+          {numbers.slice(0, 2).map((number, index) => (
+            <p className={styles.cardNumber} key={index}>
+              {number}
+            </p>
           ))}
           {numbers.slice(2).map((number, i) => (
             <div key={i} className={styles.dotWrapper}>
