@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import cardBrandLogo from "../constants/cardBrandLogo";
 
 interface CardNumber {
   first: number;
@@ -12,7 +13,7 @@ interface CardNumber {
 
 interface CardProps {
   cardNumber: CardNumber;
-  cardType: "visa" | "master";
+  cardType: "visa" | "mastercard";
 }
 
 const CardContainer = styled.div`
@@ -66,7 +67,7 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
     <CardContainer>
       <ChipContainer>
         <CardGoldChip />
-        <CardBrandLogo src={`./${cardType}.png`} />
+        <CardBrandLogo src={cardBrandLogo[cardType]} />
       </ChipContainer>
       <CardNumberContainer>
         <CardInformation>{cardNumber.first}</CardInformation>

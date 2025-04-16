@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <Card cardNumber={cardNumber} cardType="visa" />
+      <Card cardNumber={cardNumber} cardType="mastercard" />
     </>
   );
 }
