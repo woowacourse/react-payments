@@ -12,7 +12,7 @@ function CVCInputField() {
     const numericValue = value.replace(/[^0-9]/g, '');
 
     if (numericValue.length <= 3)
-      setInputValue({ ...inputValue, [name]: numericValue });
+      setInputValue((prevValue) => ({ ...prevValue, [name]: numericValue }));
   };
 
   return (

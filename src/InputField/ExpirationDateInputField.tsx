@@ -14,7 +14,7 @@ function ExpirationDateInputField() {
 
     if (numericValue.length <= 2) {
       if (name === 'expirationDatePart1' && Number(numericValue) > 12) return;
-      setInputValue({ ...inputValue, [name]: numericValue });
+      setInputValue((prevValue) => ({ ...prevValue, [name]: numericValue }));
     }
   };
 
