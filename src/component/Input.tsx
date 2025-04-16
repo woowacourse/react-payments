@@ -40,6 +40,7 @@ const Input = ({
 }: InputProps) => {
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     setCardInput((prev: CardInputProps) => ({
       ...prev,
       [inputKey]: value,
@@ -51,7 +52,8 @@ const Input = ({
       placeholder={placeholder}
       maxLength={maxLength}
       onChange={handleCardNumber}
-      type="number"
+      inputMode="numeric"
+      pattern="[0-9]*"
     />
   );
 };
