@@ -17,10 +17,10 @@ type CardNetworkProps = {
 const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
   const getCardNetworkState = (number: string) => {
     if (number === '4') {
-      return 'master';
+      return 'visa';
     }
     if (number === '5') {
-      return 'visa';
+      return 'master';
     }
   };
   const cardNetworkState = getCardNetworkState(
