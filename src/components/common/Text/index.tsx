@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 
 import { StyledTextContainer } from './Text.styled';
 
@@ -6,7 +6,8 @@ export type Props = {
   variant: 'Title' | 'Body' | 'Caption';
   fontWeight?: 'regular' | 'medium' | 'semibold' | 'bold';
   color?: string;
-} & PropsWithChildren;
+  children: ReactNode;
+} & ComponentProps<'p'>;
 
 export const Text = ({
   variant,
