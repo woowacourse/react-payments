@@ -1,9 +1,8 @@
 import "./App.css";
 import styled from "styled-components";
-import CardNumberInputs from "./components/cardNumberInputs/CardNumberInputs";
-import CardExpirationPeriodInputs from "./components/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
-import CardCVCNumberInputs from "./components/cardCVCNumberInputs/cardCVCNumberInputs";
-import SectionTitle from "./components/sectionTitle/SectionTitle";
+import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
+import CardExpirationPeriodSection from "./components/cardExpirationPeriodSection/CardExpirationPeriodSection";
+import CardCVCNumberSection from "./components/cardCVCNumberSection/CardCVCNumberSection";
 
 
 const StyleFrame = styled.div`
@@ -12,7 +11,7 @@ padding: 77px 30px 19px 31px;
 flex-direction: column;
 justify-content: flex-end;
 gap: 45px;
-background-color: red;
+background-color: white;
 width: 100%;
 max-width: 600px;
 box-sizing: border-box;
@@ -22,10 +21,9 @@ box-sizing: border-box;
 function App() {
   return (
     <StyleFrame>
-      <SectionTitle title={"타이틀"} subTitle={"서브 타이틀"}></SectionTitle>
-      <CardNumberInputs></CardNumberInputs>
-      <CardExpirationPeriodInputs></CardExpirationPeriodInputs>
-      <CardCVCNumberInputs></CardCVCNumberInputs>
+      <CardNumberSection/>
+      <CardExpirationPeriodSection/>
+      <CardCVCNumberSection/>
     </StyleFrame>
   );
 }
