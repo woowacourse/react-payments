@@ -1,4 +1,4 @@
-import style from '../css/input.module.css';
+import styles from '../css/input.module.css';
 
 type InputFieldProps = {
   value: number | '';
@@ -12,7 +12,8 @@ const InputField = ({ value, onChange, isError = false }: InputFieldProps) => {
     <input
       value={value}
       onChange={onChange}
-      className={isError ? style.error : style.basic}
+      className={`${styles.input} ${isError ? styles.error : styles.basic}`}
+      placeholder="숫자"
     />
   );
 };

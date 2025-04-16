@@ -5,6 +5,7 @@ import InputField from './components/InputField';
 import InputSection from './components/InputSection/InputSection';
 import useCardExpirationDate from './hooks/useCardExpirationDate';
 import CardCVCNumberInputSection from './components/InputSection/CardCVCNumberInputSection';
+import styles from './css/cardForm.module.css';
 
 const CardExpirationDateInputSection = () => {
   const { cardExpirationDate, setCardExpirationDate, isError, errorMessage } =
@@ -35,9 +36,11 @@ function App() {
   return (
     <>
       <h1>React Payments</h1>
-      <CardNumbersInputSection />
-      <CardExpirationDateInputSection />
-      <CardCVCNumberInputSection />
+      <div className={styles.cardForm}>
+        <CardNumbersInputSection />
+        <CardExpirationDateInputSection />
+        <CardCVCNumberInputSection />
+      </div>
     </>
   );
 }

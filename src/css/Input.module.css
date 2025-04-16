@@ -1,8 +1,8 @@
 .basic {
-  border: 1px solid blue;
+  border: 1px solid #acacac;
   &:focus {
     outline: none;
-    border: 2px solid blue;
+    border: 2px solid black;
   }
 }
 
@@ -13,3 +13,16 @@
     border: 2px solid red;
   }
 }
+
+.input {
+  height: 32px;
+  color: black;
+  font-size: 16px;
+
+  &::placeholder {
+    color: #acacac;
+  }
+}
+
+/* 가운데 정렬  */
+/* input box 사이즈, gap */
