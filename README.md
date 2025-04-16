@@ -62,3 +62,5 @@
   - [ ] PreviewContainer 컴포넌트 구현
   - [x] text 컴포넌트 구현
 - [ ] domain 상태 관리 (preview, form 상태 동기화)
+
+-[x] text 컴포넌트 스토리북 생성
