@@ -8,12 +8,13 @@ import Preview from './components/Preview';
 
 const App: React.FC = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const [period, setPeriod] = useState<string[]>(['', '']);
 
   return (
     <Main>
       <Preview cardNumbers={cardNumbers} />
       <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      <ExpirationPeriod />
+      <ExpirationPeriod period={period} setPeriod={setPeriod} />
       <CVCNumbers />
     </Main>
   );
