@@ -12,7 +12,6 @@ const meta = {
   
   export const Default: Story = {
     args: {
-        type: "number",
         maxLength: 10,
         placeholder: "Enter text here",
     }
@@ -20,7 +19,6 @@ const meta = {
 
   export const CardNumber: Story = {
     args: {
-        type: "number",
         maxLength: 4,
         placeholder: "1234",
     }
@@ -28,7 +26,6 @@ const meta = {
 
   export const ExpirationPeriodMonth: Story = {
     args: {
-        type: "number",
         maxLength: 2,
         placeholder: "MM",
     }
@@ -36,7 +33,6 @@ const meta = {
 
   export const ExpirationPeriodYear: Story = {
     args: {
-        type: "number",
         maxLength: 2,
         placeholder: "YY",
     }
@@ -44,7 +40,6 @@ const meta = {
 
   export const CVC: Story = {
     args: {
-        type: "number",
         maxLength: 3,
         placeholder: "123",
     }

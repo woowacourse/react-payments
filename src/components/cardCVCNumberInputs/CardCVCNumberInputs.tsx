@@ -22,7 +22,7 @@ function CardCVCNumberInputs() {
         <Container>
             <label htmlFor="">CVC</label>
            <InputWrap>
-                <Input width='100%' maxLength={3} placeholder="123" type="number"></Input>
+                <Input width='100%' maxLength={3} placeholder="123" ></Input>
             </InputWrap>
         </Container>
     )

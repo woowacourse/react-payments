@@ -22,8 +22,8 @@ function CardExpirationPeriodInputs() {
         <Container>
             <label htmlFor="">유효 기간</label>
            <InputWrap>
-                <Input width='50%' maxLength={2} placeholder="MM" type="number"></Input>
-                <Input width='50%' maxLength={2} placeholder="YY" type="number"></Input>
+                <Input width='50%' maxLength={2} placeholder="MM" ></Input>
+                <Input width='50%' maxLength={2} placeholder="YY" ></Input>
             </InputWrap>
         </Container>
     )
