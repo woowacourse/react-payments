@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 type InputProps = {
   value: string;
-  onChange: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
   placeHolder: string;
   isError: boolean;
