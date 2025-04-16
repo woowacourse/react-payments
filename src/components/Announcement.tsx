@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 
 interface AnnouncementProps {
   main: string;
-  caption: string;
+  caption?: string;
 }
 
 function Announcement({ main, caption }: AnnouncementProps) {
   return (
     <AnnouncementContainer>
       <MainTitle>{main}</MainTitle>
-      <Caption>{caption}</Caption>
+      <Caption>{caption ?? ""}</Caption>
     </AnnouncementContainer>
   );
 }

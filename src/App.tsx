@@ -3,6 +3,7 @@ import Announcement from "./components/Announcement";
 import Card from "./components/Card";
 import CardNumberForm from "./components/CardNumberForm";
 import CardExpirationForm from "./components/CardExpirationForm";
+import CardCVCForm from "./components/CardCVCForm";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       ></Announcement>
       <CardExpirationForm maxLength={2} />
+      <Announcement main="CVC 번호를 입력해 주세요"></Announcement>
+      <CardCVCForm maxLength={3} />
     </>
   );
 }
