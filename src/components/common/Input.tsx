@@ -18,6 +18,7 @@ export default function Input({ placeholder }: InputProps) {
         &::placeholder {
           color: #acacac;
         }
+        appearance: none;
       `}
     />
   )

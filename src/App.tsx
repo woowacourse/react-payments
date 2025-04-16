@@ -4,6 +4,8 @@ import './App.css'
 import CardNumber from './components/CardNumber'
 import CardExpirationDate from './components/CardExpirationDate'
 import CardCVCNumber from './components/CardCVCNumber'
+import CardPreview from './components/CardPreview'
+import Spacing from './components/common/Spacing'
 
 function App() {
   return (
@@ -16,9 +18,21 @@ function App() {
         padding: 71px 31px;
       `}
     >
-      <CardNumber />
-      <CardExpirationDate />
-      <CardCVCNumber />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <CardPreview />
+      </div>
+      <Spacing size={60} />
+
+      <form style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
+        <CardNumber />
+        <CardExpirationDate />
+        <CardCVCNumber />
+      </form>
     </div>
   )
 }
