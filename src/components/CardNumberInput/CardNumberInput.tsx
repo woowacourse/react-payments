@@ -30,7 +30,7 @@ const StyledInputWrapper = styled.div`
 
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   const [isError, setIsError] = useState([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const checkValidCardNumber = ({ e, idx }: HandleInputParams) => {
     const cardNumber = e.target.value;
     try {
@@ -40,7 +40,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
         const updated = [...prev];
         updated[idx] = false;
         if (updated.every((errorState) => errorState === false)) {
-          setErrorMessage(null);
+          setErrorMessage('');
         }
         return updated;
       });
@@ -50,7 +50,10 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
         updated[idx] = true;
         return updated;
       });
-      setErrorMessage(error.message);
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
     }
   };
 
@@ -69,7 +72,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
           />
         ))}
       </StyledInputWrapper>
-      {errorMessage && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+      {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
     </StyledCardNumberInput>
   );
 };
