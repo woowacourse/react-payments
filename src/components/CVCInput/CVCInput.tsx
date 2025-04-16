@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import { validateCVC } from "../../domain/validate";
+import { CVCTitle } from "../../constants/title";
+import { CardValidationInfo } from "../../constants/CardValidationInfo";
 
 type CVCInputProps = {
   CVC: string;
@@ -24,10 +26,10 @@ const CVCInput = ({CVC, setCVC}: CVCInputProps) => {
     }
   };
   return (
-    <InputContainer title="CVC 번호를 입력해 주세요">
+    <InputContainer title={CVCTitle.TITLE}>
       <label className='label'>CVC</label>
       <div className="inputContainer">
-      <input name="cvc" placeholder="123" value={CVC} onChange={handleCVC} ref={(element) => {inputRef.current = element}} className={`input ${helperText !== "" && 'errorInput'}`} maxLength={3}/>
+      <input name="cvc" placeholder="123" value={CVC} onChange={handleCVC} ref={(element) => {inputRef.current = element}} className={`input ${helperText !== "" && 'errorInput'}`} maxLength={CardValidationInfo.CVC_MAX_LENGTH}/>
       </div>
       <p className="helperText">{helperText}</p>
     </InputContainer>

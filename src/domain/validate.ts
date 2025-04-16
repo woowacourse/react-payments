@@ -1,4 +1,6 @@
+import ERROR from "../constants/errorMessage";
 import CustomCardNumbersError from "../error/CustomCardNumbersError";
+import { CardValidationInfo } from "../constants/CardValidationInfo";
 
 const isNumber = (number: string) => {
   if (isNaN(Number(number))) return false;
@@ -12,32 +14,38 @@ const numberLength = (number: string, length: number) => {
 
 const invalidNumber = (number: string) => {
   if (
-    Number(number[0]) !== 4 &&
-    (Number(number.slice(0, 2)) < 51 || Number(number.slice(0, 2)) > 55)
+    Number(number[0]) !== CardValidationInfo.VISA_CARD_START_NUMBER &&
+    (Number(number.slice(0, 2)) <
+      CardValidationInfo.MASTER_CARD_MIN_START_NUMBER ||
+      Number(number.slice(0, 2)) >
+        CardValidationInfo.MASTER_CARD_MAX_START_NUMBER)
   )
     return false;
   return true;
 };
 
 const invalidMonth = (month: string) => {
-  if (Number(month) < 1 || Number(month) > 12) return false;
+  if (
+    Number(month) < CardValidationInfo.MIN_VALID_MONTH ||
+    Number(month) > CardValidationInfo.MAX_VALID_MONTH
+  )
+    return false;
   return true;
 };
 
 const invalidYear = (year: string) => {
-  if (Number(year) < 25) return false;
+  if (Number(year) < CardValidationInfo.MIN_VALID_YEAR) return false;
   return true;
 };
 
 export const validateCardNumbers = (number: string[], length: number) => {
   number.map((num, index) => {
-    console.log(num, index);
     if (num.length > 0) {
       if (!isNumber(num))
-        throw new CustomCardNumbersError("숫자로 입력해주세요.", index);
+        throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
       if (!numberLength(num, length))
         throw new CustomCardNumbersError(
-          `${length}자리로 입력해주세요.`,
+          `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
           index
         );
     }
@@ -46,25 +54,25 @@ export const validateCardNumbers = (number: string[], length: number) => {
 
 export const validateFirstCardNumbers = (number: string) => {
   if (!invalidNumber(number))
-    throw new CustomCardNumbersError("유효하지 않은 카드번호입니다.", 0);
+    throw new CustomCardNumbersError(ERROR.CARD_NUMBER.INVALID, 0);
 };
 
 export const validateMonth = (month: string, length: number) => {
-  if (!isNumber(month)) throw new Error("숫자를 입력해주세요.");
+  if (!isNumber(month)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!numberLength(month, length))
-    throw new Error(`${length}자리로 입력해주세요.`);
-  if (!invalidMonth(month)) throw new Error("유효하지 않은 월입니다.");
+    throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
+  if (!invalidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
 };
 
 export const validateYear = (year: string, length: number) => {
-  if (!isNumber(year)) throw new Error("숫자를 입력해주세요.");
+  if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!numberLength(year, length))
-    throw new Error(`${length}자리로 입력해주세요.`);
-  if (!invalidYear(year)) throw new Error("유효하지 않은 연도입니다.");
+    throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
+  if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
 };
 
 export const validateCVC = (number: string, length: number) => {
-  if (!isNumber(number)) throw new Error("숫자를 입력해주세요.");
+  if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!numberLength(number, length))
-    throw new Error(`${length}자리로 입력해주세요.`);
+    throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
 };

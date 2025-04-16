@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import { validateMonth } from "../../domain/validate";
 import { validateYear } from "../../domain/validate";
+import { expireTitle } from "../../constants/title";
+import ERROR from "../../constants/errorMessage";
+import { CardValidationInfo } from "../../constants/CardValidationInfo";
 
 type CardExpiryInputProps = {
   month: string;
@@ -19,12 +22,11 @@ const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps)
   const handleMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setMonth(e.target.value);
-      validateMonth(e.target.value, 2);
-      validateYear(year, 2);
+      validateMonth(e.target.value, CardValidationInfo.EXPIRE_DATE_MAX_LENGTH);
+      validateYear(year, CardValidationInfo.EXPIRE_DATE_MAX_LENGTH);
       setHelperText("");
       setErrorIndex(null);
     } catch (error: unknown) {
-      console.log('에러')
       catchError(error);
     }
   };
@@ -32,31 +34,22 @@ const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps)
   const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setYear(e.target.value);
-      validateMonth(month, 2);
-      validateYear(e.target.value, 2);
+      validateMonth(month, CardValidationInfo.EXPIRE_DATE_MAX_LENGTH);
+      validateYear(e.target.value, CardValidationInfo.EXPIRE_DATE_MAX_LENGTH);
       setHelperText("");
       setErrorIndex(null);
     } catch (error: unknown) {
-      // if (error instanceof Error) {
-      //   setHelperText(error.message);
-      //   setErrorIndex(1);
-      //   inputRefs.current[1]?.focus();
-      // }
-
-      console.log('에러')
       catchError(error);
     }
   };
 
   const catchError = (error: unknown) => {
-    console.log(inputRefs)
     if (error instanceof Error) {
-      console.log('error message :', error.message);
-      if(error.message === '유효하지 않은 월입니다.') {
+      if(error.message === ERROR.EXPIRY.INVALID_MONTH) {
         inputRefs.current[0]?.focus();
         setErrorIndex(0);
       }   
-      else if(error.message === '유효하지 않은 연도입니다.') {
+      else if(error.message === ERROR.EXPIRY.INVALID_YEAR) {
         inputRefs.current[1]?.focus();
         setErrorIndex(1);
       }
@@ -66,8 +59,8 @@ const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps)
 
   return (
     <InputContainer
-      title="카드 유효기간을 입력해 주세요"
-      subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
+      title={expireTitle.TITLE}
+      subTitle={expireTitle.SUBTITLE}
     >
       <label htmlFor="" className="label">
         유효기간
@@ -79,10 +72,9 @@ const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps)
           placeholder="MM"
           value={month}
           onChange={handleMonth}
-          // ref={[...inputRefs, input]}
           ref={(element) => {inputRefs.current.push(element)}}
           className={`input ${errorIndex === 0 && 'errorInput'}`}
-          maxLength={2}
+          maxLength={CardValidationInfo.EXPIRE_DATE_MAX_LENGTH}
         />
         <input
           type="text"
@@ -92,7 +84,7 @@ const CardExpiryInput = ({month, setMonth, year, setYear}: CardExpiryInputProps)
           onChange={handleYear}
           ref = {(element) => {inputRefs.current.push(element)}}
           className={`input ${errorIndex === 1 && 'errorInput'}`}
-          maxLength={2}
+          maxLength={CardValidationInfo.EXPIRE_DATE_MAX_LENGTH}
         />
       </div>
       <p className="helperText">{helperText}</p>

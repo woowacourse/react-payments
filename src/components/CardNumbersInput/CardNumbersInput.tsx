@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer"; 
 import { validateCardNumbers, validateFirstCardNumbers } from "../../domain/validate"; 
 import CustomCardNumbersError from "../../error/CustomCardNumbersError";
+import { cardNumbersTitle } from "../../constants/title";
+import ERROR from "../../constants/errorMessage";
+import { CardValidationInfo } from "../../constants/CardValidationInfo";
 
 type CardNumbersInputProps = {
   cardNumbers: string[];
@@ -21,7 +24,7 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
             setCardNumbers(newCardNumbers); 
             
             validateFirstCardNumbers(newCardNumbers[0])
-            validateCardNumbers(newCardNumbers, 4); 
+            validateCardNumbers(newCardNumbers, CardValidationInfo.CARD_MAX_LENGTH); 
             if (helperText !== '') {
               inputRefs.current[index]?.focus();
             }
@@ -29,7 +32,7 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
             setErrorIndex(null);
         } catch (error: unknown) { 
             if(error instanceof CustomCardNumbersError) {
-              if(error.message === '유효하지 않은 카드번호입니다.') {
+              if(error.message === ERROR.CARD_NUMBER.INVALID) {
                 inputRefs.current[0]?.focus();
                 setErrorIndex(0);
               }
@@ -44,8 +47,8 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
 
   return (
     <InputContainer
-      title="결제할 카드 번호를 입력해 주세요"
-      subTitle="본인 명의의 카드만 결제 가능합니다."
+      title={cardNumbersTitle.TITLE}
+      subTitle={cardNumbersTitle.SUBTITLE}
     >
       <label className='label'>카드 번호</label>
       <div className="inputContainer">
@@ -58,7 +61,7 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
             onChange={handleChange(index)}
             ref={(element) => {inputRefs.current.push(element)}}
             className={`input ${index===errorIndex && 'errorInput'}`}
-            maxLength={4}
+            maxLength={CardValidationInfo.CARD_MAX_LENGTH}
           />
         ))}
       </div>
