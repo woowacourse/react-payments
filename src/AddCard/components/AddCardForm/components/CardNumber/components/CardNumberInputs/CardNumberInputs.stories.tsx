@@ -11,6 +11,7 @@ const meta = {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
     handleCardNumberChange: () => {},
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardNumberInputs>;
 
 export default meta;
