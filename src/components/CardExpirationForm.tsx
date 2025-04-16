@@ -20,15 +20,15 @@ function CardExpirationForm({
 }: CardExpirationFormProps) {
   const [errorText, setErrorText] = useState("");
 
+  const isValidMonth = Number(month) >= 1 && Number(month) <= 12;
+  const isValidYear = Number(year) >= 25 && Number(year) <= 99;
+
   useEffect(() => {
     const isExactDigits = [month, year].some((number) => {
       if (isExactLength(number, 0) || isExactLength(number, maxLength))
         return false;
       return true;
     });
-
-    const isValidMonth = Number(month) >= 1 && Number(month) <= 12;
-    const isValidYear = Number(year) >= 25 && Number(year) <= 99;
 
     if (isExactDigits) {
       setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
@@ -42,7 +42,6 @@ function CardExpirationForm({
       setErrorText("만료된 연도입니다. 25년 이후의 년도를 입력해주세요.");
       return;
     }
-
     setErrorText("");
   }, [month, year]);
 
@@ -55,12 +54,14 @@ function CardExpirationForm({
           setValue={setMonth}
           maxLength={maxLength}
           placeholder="MM"
+          extraErrorCondition={month !== "" && !isValidMonth}
         />
         <NumberInput
           value={year}
           setValue={setYear}
           maxLength={maxLength}
           placeholder="YY"
+          extraErrorCondition={year !== "" && !isValidYear}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>

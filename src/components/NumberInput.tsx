@@ -7,6 +7,7 @@ interface NumberInputProps {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   maxLength: number;
   placeholder: string;
+  extraErrorCondition?: boolean;
 }
 
 function NumberInput({
@@ -14,13 +15,21 @@ function NumberInput({
   setValue,
   maxLength,
   placeholder,
+  extraErrorCondition,
 }: NumberInputProps) {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (isExactLength(value, 0) || isExactLength(value, maxLength))
-      setIsError(false);
-    else setIsError(true);
+    if (!isExactLength(value, 0) && !isExactLength(value, maxLength)) {
+      setIsError(true);
+      return;
+    }
+    if (extraErrorCondition) {
+      setIsError(true);
+      return;
+    }
+
+    setIsError(false);
   }, [value]);
 
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
