@@ -1,4 +1,4 @@
-import styles from '../../css/inputSection.module.css';
+import styles from './inputSection.module.css';
 
 type InputSectionProps = {
   title: string;

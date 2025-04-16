@@ -10,3 +10,8 @@
 .subtitle {
   font-size: 1rem;
 }
+
+.inputContainer {
+  display: flex;
+  gap: 0.5rem;
+}

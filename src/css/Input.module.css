@@ -18,6 +18,9 @@
   height: 32px;
   color: black;
   font-size: 16px;
+  min-width: 0;
+  border-radius: 5px;
+  flex-grow: 1;
 
   &::placeholder {
     color: #acacac;

@@ -2,6 +2,7 @@ import useCardNumbers from '../../hooks/useCardNumbers';
 import ErrorMessage from '../ErrorMessage';
 import InputField from '../InputField';
 import InputSection from './InputSection';
+import styles from './inputSection.module.css';
 
 const CardNumbersInputSection = () => {
   const { cardNumbers, setCardNumbers, isError, errorMessage } =
@@ -13,26 +14,28 @@ const CardNumbersInputSection = () => {
       description="본인 명의의 카드만 결제 가능합니다"
       subtitle="카드번호"
     >
-      <InputField
-        value={cardNumbers.firstNumber}
-        onChange={setCardNumbers('firstNumber')}
-        isError={isError.firstNumber}
-      ></InputField>
-      <InputField
-        value={cardNumbers.secondNumber}
-        onChange={setCardNumbers('secondNumber')}
-        isError={isError.secondNumber}
-      ></InputField>
-      <InputField
-        value={cardNumbers.thirdNumber}
-        onChange={setCardNumbers('thirdNumber')}
-        isError={isError.thirdNumber}
-      ></InputField>
-      <InputField
-        value={cardNumbers.fourthNumber}
-        onChange={setCardNumbers('fourthNumber')}
-        isError={isError.fourthNumber}
-      ></InputField>
+      <div className={styles.inputContainer}>
+        <InputField
+          value={cardNumbers.firstNumber}
+          onChange={setCardNumbers('firstNumber')}
+          isError={isError.firstNumber}
+        ></InputField>
+        <InputField
+          value={cardNumbers.secondNumber}
+          onChange={setCardNumbers('secondNumber')}
+          isError={isError.secondNumber}
+        ></InputField>
+        <InputField
+          value={cardNumbers.thirdNumber}
+          onChange={setCardNumbers('thirdNumber')}
+          isError={isError.thirdNumber}
+        ></InputField>
+        <InputField
+          value={cardNumbers.fourthNumber}
+          onChange={setCardNumbers('fourthNumber')}
+          isError={isError.fourthNumber}
+        ></InputField>
+      </div>
       <ErrorMessage message={errorMessage} />
     </InputSection>
   );
