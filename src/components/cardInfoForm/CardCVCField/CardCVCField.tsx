@@ -9,8 +9,10 @@ function CardCVCField() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    const isValid = value.length < 3 || value.length > 3;
-    setIsError(isValid);
+    const isNotValid =
+      value.length < 3 || value.length > 3 || Number(value) < 0;
+
+    setIsError(isNotValid);
     setCardCVC(value);
   };
 
@@ -28,6 +30,8 @@ function CardCVCField() {
           aria-labelledby="CardCVC"
           onChange={onChange}
           placeholder="123"
+          min={0}
+          max={999}
         />
       </InputWrapper>
     </div>
