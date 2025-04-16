@@ -31,7 +31,7 @@ export const ValidInput: Story = {
       expect((inputs[i] as HTMLInputElement).value).toBe('1234');
     }
     await waitFor(() =>
-      expect(container.textContent).not.toContain('숫자만 가능합니다.')
+      expect(container.textContent).not.toContain('숫자만 입력 가능합니다.')
     );
   },
 };
@@ -45,7 +45,7 @@ export const InvalidInput: Story = {
     await userEvent.clear(firstInput);
     await userEvent.type(firstInput, 'abcd');
     await waitFor(() =>
-      expect(container.textContent).toContain('숫자만 가능합니다.')
+      expect(container.textContent).toContain('숫자만 입력 가능합니다.')
     );
     const style = getComputedStyle(firstInput);
     expect(style.borderColor).toBe('rgb(255, 0, 0)');
@@ -63,7 +63,7 @@ export const MixedInput: Story = {
     await userEvent.clear(inputs[1]);
     await userEvent.type(inputs[1], '12ab');
     await waitFor(() =>
-      expect(container.textContent).toContain('숫자만 가능합니다.')
+      expect(container.textContent).toContain('숫자만 입력 가능합니다.')
     );
     const style1 = getComputedStyle(inputs[0]);
     const style2 = getComputedStyle(inputs[1]);
