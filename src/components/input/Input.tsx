@@ -11,6 +11,12 @@ const InputStyled = styled.input`
             -webkit-appearance: none;
             margin: 0;
     }
+    display: flex;
+    height: 32px;
+    padding: 8px;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;    
 `
 
 type InputProps = {
