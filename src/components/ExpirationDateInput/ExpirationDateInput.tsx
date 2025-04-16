@@ -62,7 +62,11 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
 
     try {
       checkNumber(expirationDate);
-      checkValidLength(expirationDate, 2);
+      if (idx === 0 && values[0].length === 1) {
+        values[0] = values[0].padStart(2, '0');
+      } else {
+        checkValidLength(expirationDate, 2);
+      }
 
       if (idx === 0) {
         checkValidMonth(expirationDate);
