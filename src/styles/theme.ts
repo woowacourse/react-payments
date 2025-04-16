@@ -6,6 +6,7 @@ const theme = {
     cardBlack: '#333333',
     gold: '#DDCD78',
     text: '#0A0D13',
+    red: '#FF3D3D',
   },
   font: {
     card: {
