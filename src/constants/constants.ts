@@ -1,5 +1,5 @@
 export const INPUT_TYPE = {
-  cardNumber: "cardNumber",
+  cardNumbers: "cardNumbers",
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
 } as const;

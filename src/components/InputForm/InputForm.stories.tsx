@@ -12,9 +12,9 @@ export default meta;
 
 type Story = StoryObj<typeof InputForm>;
 
-export const CardNumber: Story = {
+export const CardNumbers: Story = {
   args: {
-    type: INPUT_TYPE.cardNumber,
+    type: INPUT_TYPE.cardNumbers,
   },
 };
 
@@ -23,7 +23,7 @@ export const ExpirationPeriod: Story = {
     type: INPUT_TYPE.expirationPeriod,
   },
 };
-export const CVCNumber: Story = {
+export const cvcNumber: Story = {
   args: {
     type: INPUT_TYPE.cvcNumber,
   },

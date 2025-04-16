@@ -10,7 +10,7 @@ function Payments() {
   return (
     <PaymentsCSS>
       <Preview cardNumbers={cardNumbers} expirationPeriod={expirationPeriod} />
-      <InputForm type={INPUT_TYPE.cardNumber} />
+      <InputForm type={INPUT_TYPE.cardNumbers} />
       <InputForm type={INPUT_TYPE.expirationPeriod} />
       <InputForm type={INPUT_TYPE.cvcNumber} />
     </PaymentsCSS>

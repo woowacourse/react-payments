@@ -11,7 +11,7 @@ export interface InputGroupProps {
 function InputGroup({ type, error, setError }: InputGroupProps) {
   const renderInputByType = () => {
     switch (type) {
-      case INPUT_TYPE.cardNumber:
+      case INPUT_TYPE.cardNumbers:
         const carNumberPlaceholder = "1234";
         return (
           <>

@@ -29,7 +29,7 @@ export const ExpirationPeriodMonth: Story = {
   },
 };
 
-export const CVCNumber: Story = {
+export const cvcNumber: Story = {
   args: {
     placeholder: "123",
   },
