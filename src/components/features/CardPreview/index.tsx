@@ -1,17 +1,27 @@
 import { css } from '@emotion/react';
 
-import { StyledCardContainer, StyledCardTypeIcon, StyledICCheapContainer } from './Card.styled';
+import {
+  StyledCardContainer,
+  StyledCardTypeIcon,
+  StyledICCheapContainer,
+} from './CardPreview.styled';
 
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
 
 type Props = {
+  /**
+   * 카드 번호를 입력받는 배열입니다.
+   */
   cardNumbers: CardInputType[];
+  /**
+   * 카드 유효기간을 입력받는 배열입니다.
+   */
   expireDate: CardInputType[];
 };
 
-export const Card = ({ cardNumbers, expireDate }: Props) => {
+export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   const cardTypeCheck = () => {
     if (cardNumbers[0].value.startsWith('4')) {
       return '/images/Visa.png';
@@ -41,9 +51,16 @@ export const Card = ({ cardNumbers, expireDate }: Props) => {
     <StyledCardContainer>
       <StyledICCheapContainer />
       {cardTypeCheck() && <StyledCardTypeIcon src={cardTypeCheck()} alt="cardType" />}
-
-      <Flex direction="column" alignItems="flex-start" width="300px" height="200px" margin="0 auto">
-        <Flex gap="20px" height="36px" margin="10px 0 0 0">
+      <Flex
+        direction="column"
+        alignItems="flex-start"
+        width="300px"
+        height="200px"
+        margin="0 auto"
+        padding="20px 0 0 0"
+        gap="10px"
+      >
+        <Flex gap="20px" height="36px">
           {cardNumbers.map((str, index) => (
             <div
               key={`card-number-${index}`}
@@ -59,20 +76,20 @@ export const Card = ({ cardNumbers, expireDate }: Props) => {
             </div>
           ))}
         </Flex>
-        {expireDate[0].value && (
+        <Flex gap="20px" height="36px">
           <Text
             variant="Title"
             fontWeight="regular"
             color="white"
             css={css`
-              width: 60px;
+              width: 100px;
               height: 36px;
               text-align: left;
             `}
           >
-            {expireDate.map((date) => date.value).join(' / ')}
+            {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
           </Text>
-        )}
+        </Flex>
       </Flex>
     </StyledCardContainer>
   );
