@@ -63,7 +63,9 @@ function CardNumberInputs({
         />
       </p>
       {isCardNumberValid && (
-        <p className={styles.errorMessage}>4자리의 숫자만 입력 가능합니다.</p>
+        <p id="error-message" className={styles.errorMessage}>
+          4자리의 숫자만 입력 가능합니다.
+        </p>
       )}
     </div>
   );
