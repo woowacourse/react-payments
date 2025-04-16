@@ -18,10 +18,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Emotion */
-    "types": ["@emotion/react/types/css-prop"]
+    "noUncheckedSideEffectImports": true
   },
   "include": ["vite.config.ts"]
 }
