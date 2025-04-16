@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "./components/cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "./components/cardCVCNumberSection/CardCVCNumberSection";
+import CardPreview from "./components/cardPreview/CardPreview";
 
 
 const StyleFrame = styled.div`
@@ -21,6 +22,7 @@ box-sizing: border-box;
 function App() {
   return (
     <StyleFrame>
+      <CardPreview/>
       <CardNumberSection/>
       <CardExpirationPeriodSection/>
       <CardCVCNumberSection/>
