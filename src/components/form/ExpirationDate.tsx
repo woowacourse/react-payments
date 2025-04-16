@@ -16,6 +16,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		month: "",
 		year: "",
 	});
+
 	const expirationInput = [
 		<Input isError={error.month.length > 0 && true} maxLength={2} placeholder="MM" value={expirationDate.month} inputHandler={(value) => handleDate("month", value)} />,
 		<Input isError={error.year.length > 0 && true} maxLength={2} placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
@@ -32,6 +33,14 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 			const month = Number(value);
 			if (month < 0 || month > 12) {
 				setError({ ...error, month: "1~12까지의 숫자만 입력 가능합니다." });
+				return;
+			}
+		}
+
+		if (order === "year") {
+			const year = Number(value);
+			if (year < 25 && year > 0) {
+				setError({ ...error, year: "25년 이상만 입력 가능합니다." });
 				return;
 			}
 		}
