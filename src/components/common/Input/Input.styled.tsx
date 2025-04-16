@@ -20,6 +20,6 @@ export const StyledInputContainer = styled.input<Pick<Props, 'isValid'>>`
   }
 
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
   }
 `;

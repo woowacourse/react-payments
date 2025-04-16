@@ -8,6 +8,13 @@ const meta = {
   title: 'common/Input',
   component: Input,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '입력 필드 컴포넌트입니다.',
+      },
+    },
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -16,20 +23,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: '',
-    disabled: true,
+    disabled: false,
     minLength: 0,
     maxLength: 10,
     placeholder: '값을 입력해주세요.',
     isValid: true,
   },
   argTypes: {
+    value: {
+      control: false,
+    },
     placeholder: {
       control: { type: 'text' },
     },
   },
   render: (args) => {
-    // TODO : useInput 커스텀 훅
     const [value, setValue] = useState<string>(args.value ?? '');
     return (
       <Input
