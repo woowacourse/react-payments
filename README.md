@@ -56,8 +56,8 @@
   - [x] InputField 컴포넌트 구현(label, input, error label)
   - [x] InputField 컴포넌트 스토리북 생성
     - [x] error 메시지 상태관리
-  - [ ] FormSection 컴포넌트 구현(title, description, wrapper)
-  - [ ] FormSection 컴포넌트 스토리북 생성
+  - [x] FormSection 컴포넌트 구현(title, description, wrapper)
+  - [x] FormSection 컴포넌트 스토리북 생성
   - [ ] FormContainer 컴포넌트 구현
   - [ ] PreviewContainer 컴포넌트 구현
   - [x] text 컴포넌트 구현
