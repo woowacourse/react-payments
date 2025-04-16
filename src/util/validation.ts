@@ -11,4 +11,16 @@ const isValidNumber = (number: string) => {
     } return false;
 }
 
-export { isValidLength, isValidNumber}
+const isValidMonthRange = (number: string) => {
+    if (Number(number)<=12 && Number(number)>=1) {
+        return true;
+    } return false;
+}
+
+const isValidYearRange = (number: string) => {
+    if (Number(number)<=99 && Number(number)>=25) {
+        return true;
+    } return false;
+}
+
+export { isValidLength, isValidNumber, isValidMonthRange, isValidYearRange}
