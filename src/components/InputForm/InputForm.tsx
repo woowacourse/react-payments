@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { INPUT_TYPE } from "../../constants/constants";
+import { INPUT_TYPE, InputType } from "../../constants/constants";
 import Description from "../Description/Description";
 import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
@@ -7,7 +7,7 @@ import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
 
 export interface InputFormProps {
-  type: keyof typeof INPUT_TYPE;
+  type: InputType;
 }
 
 const titleVariants = {

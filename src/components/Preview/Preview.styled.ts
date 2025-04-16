@@ -1,6 +1,6 @@
-import LogoImg from "/visa.jpg";
 import PreviewImg from "/card-preview.jpg";
 import styled from "styled-components";
+import { CARD_IMAGE, CardImageType } from "../../constants/constants";
 
 export const PreviewContainerCSS = styled.div`
   width: 100%;
@@ -33,8 +33,8 @@ export const CardNumbersGroupCSS = styled.div`
   gap: 7px;
 `;
 
-export const CardTypeCSS = styled.div`
-  background: no-repeat url(${LogoImg});
+export const CardTypeCSS = styled.div<{ $cardType: CardImageType }>`
+  background: no-repeat url(${(props) => CARD_IMAGE[props.$cardType]});
   background-size: cover;
   width: 44px;
   height: 30px;

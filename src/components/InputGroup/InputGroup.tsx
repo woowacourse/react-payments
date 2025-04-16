@@ -3,6 +3,7 @@ import {
   CARD_POSITION,
   CardPositionType,
   INPUT_TYPE,
+  InputType,
   PERIOD_POSITION,
   PeriodPositionType,
 } from "../../constants/constants";
@@ -11,7 +12,7 @@ import Input from "../Input/Input";
 import { InputGroupCSS } from "./InputGroup.styled";
 
 export interface InputGroupProps {
-  type: keyof typeof INPUT_TYPE;
+  type: InputType;
   error: boolean;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 }
