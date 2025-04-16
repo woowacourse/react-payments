@@ -9,7 +9,6 @@ export default function CustomInput({
   maxLength,
   error,
 }: CustomInputProps) {
-  console.log('asdf', error);
   return (
     <input
       className={`custom-input ${error && 'custom-input-error'}`}
