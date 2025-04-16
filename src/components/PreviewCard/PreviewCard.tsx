@@ -81,7 +81,10 @@ const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
           <StyledCardNumber>{number}</StyledCardNumber>
         ))}
       </StyledCardNumberWrapper>
-      <StyledExpirationDate>{expirationDate && expirationDate.join('/')}</StyledExpirationDate>
+
+      <StyledExpirationDate>
+        {expirationDate.join('/').length > 1 && expirationDate.join('/')}
+      </StyledExpirationDate>
     </StyledPreviewCard>
   );
 };
