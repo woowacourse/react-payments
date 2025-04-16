@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { cardNumber } from "../../App";
+import { cardNumber, date } from "../../App";
 
-const Card = ({ cardNumbers }: { cardNumbers: cardNumber }) => {
+type Props = {
+	cardNumbers: cardNumber;
+	expirationDate: date;
+};
+const Card = ({ cardNumbers, expirationDate }: Props) => {
 	// none:0, mastercard: 1, visa: 2
 	const [badgeBrand, setBadgeBrand] = useState(0);
 
@@ -14,17 +18,10 @@ const Card = ({ cardNumbers }: { cardNumbers: cardNumber }) => {
 	};
 
 	const settingBadgeBrand = () => {
-		const firstSection = cardNumbers.first;
+		const firstSection = String(cardNumbers.first);
 
-		if (firstSection === "") {
-			setBadgeBrand(0);
-			return;
-		}
-
-		const firstSectionStr = String(firstSection);
-
-		if (firstSectionStr.length >= 2) {
-			const firstTwoDigits = firstSectionStr.substring(0, 2);
+		if (firstSection.length >= 2) {
+			const firstTwoDigits = firstSection.substring(0, 2);
 			const numValue = parseInt(firstTwoDigits);
 
 			if (numValue >= 51 && numValue <= 55) {
@@ -33,10 +30,21 @@ const Card = ({ cardNumbers }: { cardNumbers: cardNumber }) => {
 			}
 		}
 
-		if (firstSectionStr.startsWith("4")) {
+		if (firstSection.startsWith("4")) {
 			setBadgeBrand(2); // Visa
 			return;
 		}
+
+		setBadgeBrand(0);
+	};
+
+	const formatDate = () => {
+		const month = expirationDate.month;
+		const year = expirationDate.year;
+
+		if (month === "" && year === "") return;
+		if (year === "") return month;
+		return `${month} / ${year}`;
 	};
 
 	useEffect(() => {
@@ -49,14 +57,17 @@ const Card = ({ cardNumbers }: { cardNumbers: cardNumber }) => {
 				<Chip />
 				<BrandBadge image={matchBadgeBrand()} />
 			</Wrap>
-			<CardNumbers>
+
+			<CardInfoWrap>
 				{Object.entries(cardNumbers).map(([key, value]) => {
 					if (key === "third" || key === "fourth") {
 						return <CardNumberblind>{"•".repeat(value?.length)}</CardNumberblind>;
 					}
 					return <CardNumber>{value}</CardNumber>;
 				})}
-			</CardNumbers>
+			</CardInfoWrap>
+
+			<CardInfoWrap>{formatDate()}</CardInfoWrap>
 		</Container>
 	);
 };
@@ -92,7 +103,7 @@ const Wrap = styled.div`
 	justify-content: space-between;
 `;
 
-const CardNumbers = styled.div`
+const CardInfoWrap = styled.div`
 	display: flex;
 	gap: 10px;
 	font-size: 14px;

@@ -55,7 +55,7 @@ function App() {
 
 	return (
 		<MainContainer>
-			<Card cardNumbers={cardNumber} />
+			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
 			<CardNumberWrap>
 				<Title>결제할 카드 번호를 입력해 주세요</Title>
 				<Description>본인 명의의 카드만 결제 가능합니다.</Description>
