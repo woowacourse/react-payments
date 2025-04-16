@@ -1,5 +1,4 @@
-import './App.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import CardNumbers from './components/CardNumbers';
 import ExpirationPeriod from './components/ExpirationPeriod';
@@ -9,12 +8,21 @@ import Preview from './components/Preview';
 const App: React.FC = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
+  const separatorRef = useRef<HTMLDivElement>(null);
 
   return (
     <Main>
-      <Preview cardNumbers={cardNumbers} />
+      <Preview
+        cardNumbers={cardNumbers}
+        period={period}
+        separatorRef={separatorRef}
+      />
       <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      <ExpirationPeriod period={period} setPeriod={setPeriod} />
+      <ExpirationPeriod
+        period={period}
+        setPeriod={setPeriod}
+        separatorRef={separatorRef}
+      />
       <CVCNumbers />
     </Main>
   );

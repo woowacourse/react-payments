@@ -2,9 +2,15 @@ import styled from '@emotion/styled';
 
 interface PreviewProps {
   cardNumbers: string[];
+  period: string[];
+  separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const Preview: React.FC<PreviewProps> = ({ cardNumbers }) => {
+const Preview: React.FC<PreviewProps> = ({
+  cardNumbers,
+  period,
+  separatorRef,
+}) => {
   return (
     <PreviewContainer>
       <CardFrame>
@@ -16,6 +22,11 @@ const Preview: React.FC<PreviewProps> = ({ cardNumbers }) => {
             </CardNumber>
           ))}
         </CardNumberArea>
+        <CardPeriodArea>
+          <CardPeriod>{period[0]}</CardPeriod>
+          <Separator ref={separatorRef}></Separator>
+          <CardPeriod>{period[1]}</CardPeriod>
+        </CardPeriodArea>
       </CardFrame>
     </PreviewContainer>
   );
@@ -68,6 +79,38 @@ const CardNumberArea = styled.div`
 
 const CardNumber = styled.span`
   width: 38px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  color: #ffffff;
+`;
+
+const CardPeriodArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 72px;
+  left: 15px;
+`;
+
+const CardPeriod = styled.span`
+  width: 16px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+  color: #ffffff;
+`;
+
+const Separator = styled.span`
   font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;

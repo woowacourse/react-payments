@@ -8,6 +8,8 @@ interface InputTextsProps {
     index: number
   ) => void;
   state?: string[];
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const InputTexts: React.FC<InputTextsProps> = ({
@@ -15,6 +17,8 @@ const InputTexts: React.FC<InputTextsProps> = ({
   placeholder,
   state,
   eventHandler,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <InputTextsContainer>
@@ -28,6 +32,8 @@ const InputTexts: React.FC<InputTextsProps> = ({
             maxLength={text.length}
             value={state ? state[index] : ''}
             onChange={(e) => eventHandler!(e, index)}
+            onFocus={onFocus}
+            onBlur={onBlur}
           />
         ))}
       </Row>

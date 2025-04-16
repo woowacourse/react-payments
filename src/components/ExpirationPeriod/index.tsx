@@ -6,9 +6,14 @@ import styled from '@emotion/styled';
 interface PeriodProps {
   period: string[];
   setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
+  separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-const ExpirationPeriod: React.FC<PeriodProps> = ({ period, setPeriod }) => {
+const ExpirationPeriod: React.FC<PeriodProps> = ({
+  period,
+  setPeriod,
+  separatorRef,
+}) => {
   const errorMessageRef = useRef<HTMLDivElement>(null);
   const [isError, setIsError] = useState<boolean[]>([false, false]);
 
@@ -95,6 +100,16 @@ const ExpirationPeriod: React.FC<PeriodProps> = ({ period, setPeriod }) => {
         placeholder={['MM', 'YY']}
         state={period}
         eventHandler={handleInputChange}
+        onFocus={() => {
+          if (separatorRef?.current) {
+            separatorRef.current.textContent = '/';
+          }
+        }}
+        onBlur={() => {
+          if (separatorRef?.current && period[0] === '' && period[1] === '') {
+            separatorRef.current.textContent = '';
+          }
+        }}
       />
       <ErrorMessage ref={errorMessageRef}></ErrorMessage>
     </ExpirationPeriodContainer>
