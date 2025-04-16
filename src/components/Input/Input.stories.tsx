@@ -27,7 +27,8 @@ export const Primary: Story = {
         maxLength={args.maxLength}
         value={value}
         setValue={setValue}
-        isError={() => {}}
+        handleChangeError={() => {}}
+        error={false}
       />
     );
   },

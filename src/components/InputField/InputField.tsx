@@ -29,7 +29,11 @@ const InputField = ({
   setCardInformation,
   informationType,
 }: InputFieldProps) => {
-  const [error, isError] = useState<boolean>(false);
+  const [isErrors, setIsErrors] = useState({
+    uniqueNumber: [false, false, false, false],
+    expirationDate: [false, false],
+    cvcNumber: [false],
+  });
 
   const handleChange = (index: number, text: string) => {
     const updatedArray = cardInformation[informationType];
@@ -37,6 +41,16 @@ const InputField = ({
 
     setCardInformation({
       ...cardInformation,
+      [informationType]: updatedArray,
+    });
+  };
+
+  const handleChangeError = (index: number, error: boolean) => {
+    const updatedArray = isErrors[informationType];
+    updatedArray[index] = error;
+
+    setIsErrors({
+      ...isErrors,
       [informationType]: updatedArray,
     });
   };
@@ -52,11 +66,12 @@ const InputField = ({
             setValue={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
-            isError={isError}
+            handleChangeError={(error) => handleChangeError(index, error)}
+            error={isErrors[informationType][index]}
           />
         ))}
       </div>
-      <div css={errorTextWrapperStyle(error)}>
+      <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
         <Text type="error" text={"숫자만 입력 가능합니다."} />
       </div>
     </div>
@@ -76,14 +91,6 @@ const inputFieldStyle = css`
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
-
-const labelStyle = css`
-  font-size: 12px;
-  color: #0a0d13;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 15px;
 `;
 
 const errorTextWrapperStyle = (error: boolean) => css`

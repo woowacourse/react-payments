@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-const inputStyle = css`
+const inputStyle = (error: boolean) => css`
   width: 100%;
   height: 32px;
-  border: solid 1.01px #acacac;
+  border: solid 1.01px ${error ? "#FF3D3D" : "#acacac"};
   border-radius: 2px;
   padding: 8px;
   box-sizing: border-box;
@@ -18,30 +18,37 @@ const inputStyle = css`
     vertical-align: middle;
     color: #acacac;
   }
+
+  &:focus {
+    outline-color: ${error ? "#FF3D3D" : "#000000"};
+  }
 `;
 
 type InputProps = {
   placeholder: string;
   maxLength: number;
   value: string;
+  error: boolean;
   setValue: (value: string) => void;
-  isError: (error: boolean) => void;
+  handleChangeError: (error: boolean) => void;
 };
 
-const Input = ({ placeholder, maxLength, value, setValue, isError }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, error, setValue, handleChangeError }: InputProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
 
     const isOnlyNumber = /^[0-9]*$/.test(input);
 
     if (isOnlyNumber) {
-      isError(false);
-      setValue(input);
+      handleChangeError(false);
     } else {
-      isError(true);
+      handleChangeError(true);
     }
+    setValue(input);
   };
-  return <input css={inputStyle} onChange={onChange} value={value} placeholder={placeholder} maxLength={maxLength} />;
+  return (
+    <input css={inputStyle(error)} onChange={onChange} value={value} placeholder={placeholder} maxLength={maxLength} />
+  );
 };
 
 export default Input;
