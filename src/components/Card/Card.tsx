@@ -11,8 +11,13 @@ export default function Card({ numbers, cardLogo }: { numbers: string[]; cardLog
         )}
       </div>
       <div className={styles.cardNumberWrapper}>
-        {numbers.map((number) => (
+        {numbers.slice(0, 2).map((number) => (
           <p className={styles.cardNumber}> {number}</p>
+        ))}
+        {numbers.slice(2).map((number, i) => (
+          <p key={i} className={styles.cardNumber}>
+            {'・'.repeat(number.length)}
+          </p>
         ))}
       </div>
     </div>
