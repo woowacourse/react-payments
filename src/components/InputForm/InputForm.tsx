@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { INPUT_TYPE } from "../../constants/constants";
 import Description from "../Description/Description";
+import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
 import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
@@ -27,12 +29,15 @@ const subTitleVariants = {
 };
 
 function InputForm({ type }: InputFormProps) {
+  const [error, setError] = useState(false);
+
   return (
     <>
       <Title title={titleVariants[type]} />
       <Description description={descriptionVariants[type]} />
       <Subtitle subtitle={subTitleVariants[type]} />
-      <InputGroup type={type} />
+      <InputGroup type={type} setError={setError} />
+      <Error errorMessage="숫자만 입력 가능합니다." isVisible={error} />
     </>
   );
 }
