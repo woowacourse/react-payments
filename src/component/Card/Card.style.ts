@@ -4,8 +4,10 @@ import theme from '../../styles/theme';
 export const cardLayout = css`
   display: flex;
   flex-direction: column;
+
   width: 21.2rem;
   height: 13.2rem;
+  margin-top: 7.7rem;
 
   border-radius: 5px;
   background-color: ${theme.color.cardBlack};

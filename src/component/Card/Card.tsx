@@ -9,7 +9,7 @@ import {
   cardType,
 } from './Card.style';
 
-const Card = () => {
+function Card() {
   return (
     <section css={cardLayout}>
       <div css={cardContainer}>
@@ -29,6 +29,6 @@ const Card = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Card;
