@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"; 
 import InputContainer from "../InputContainer/InputContainer"; 
 import { validateCardNumbers, validateFirstCardNumbers } from "../../domain/validate"; 
+import CustomCardNumbersError from "../../error/CustomCardNumbersError";
 
 type CardNumbersInputProps = {
   cardNumbers: string[];
@@ -15,25 +16,26 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
   const handleChange = (index: number) => 
     (e: React.ChangeEvent<HTMLInputElement>) => { 
         try { 
-            const { value, name } = e.target; 
-            
             const newCardNumbers = [...cardNumbers]; 
             newCardNumbers[index] = e.target.value; 
             setCardNumbers(newCardNumbers); 
             
             validateFirstCardNumbers(newCardNumbers[0])
-            validateCardNumbers(value, 4, name); 
+            validateCardNumbers(newCardNumbers, 4); 
+            if (helperText !== '') {
+              inputRefs.current[index]?.focus();
+            }
             setHelperText('');
             setErrorIndex(null);
         } catch (error: unknown) { 
-            if(error instanceof Error) {
+            if(error instanceof CustomCardNumbersError) {
               if(error.message === '유효하지 않은 카드번호입니다.') {
                 inputRefs.current[0]?.focus();
                 setErrorIndex(0);
               }
               else {
-                inputRefs.current[index]?.focus();
-                setErrorIndex(index);
+                inputRefs.current[error.index]?.focus();
+                setErrorIndex(error.index);
               }
                 setHelperText(error.message);
             }

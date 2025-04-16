@@ -1,3 +1,5 @@
+import CustomCardNumbersError from "../error/CustomCardNumbersError";
+
 const isNumber = (number: string) => {
   if (isNaN(Number(number))) return false;
   return true;
@@ -27,18 +29,24 @@ const invalidYear = (year: string) => {
   return true;
 };
 
-export const validateCardNumbers = (
-  number: string,
-  length: number,
-  name: string
-) => {
-  if (!isNumber(number)) throw new Error("숫자로 입력해주세요.");
-  if (!numberLength(number, length))
-    throw new Error(`${length}자리로 입력해주세요.`);
+export const validateCardNumbers = (number: string[], length: number) => {
+  number.map((num, index) => {
+    console.log(num, index);
+    if (num.length > 0) {
+      if (!isNumber(num))
+        throw new CustomCardNumbersError("숫자로 입력해주세요.", index);
+      if (!numberLength(num, length))
+        throw new CustomCardNumbersError(
+          `${length}자리로 입력해주세요.`,
+          index
+        );
+    }
+  });
 };
 
 export const validateFirstCardNumbers = (number: string) => {
-  if (!invalidNumber(number)) throw new Error("유효하지 않은 카드번호입니다.");
+  if (!invalidNumber(number))
+    throw new CustomCardNumbersError("유효하지 않은 카드번호입니다.", 0);
 };
 
 export const validateMonth = (month: string, length: number) => {
