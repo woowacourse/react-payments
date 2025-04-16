@@ -11,12 +11,12 @@ function InputForm(props: InputFormProps) {
   const { title, label, description } = props;
 
   return (
-    <div className=''>
-      <div className=''>
+    <div className={styles.container}>
+      <div className={styles.titleBox}>
         <h3 className='tx-xl'>{title}</h3>
-        {description && <p>{description}</p>}
+        {description && <p className='tx-md'>{description}</p>}
       </div>
-      <div className=''>
+      <div className={styles.inputBox}>
         <label className='tx-lg'>{label}</label>
         <div className={styles.inputContainer}>{props.children}</div>
       </div>

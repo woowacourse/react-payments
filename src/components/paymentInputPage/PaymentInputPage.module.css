@@ -5,7 +5,12 @@
 }
 .container {
   width: 390px;
-  height: 700px;
+  height: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid var(--grey);
   border-radius: 4px;
+  padding: 28px;
+  gap: 40px;
 }

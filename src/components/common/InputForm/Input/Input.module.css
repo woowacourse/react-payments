@@ -1,7 +1,14 @@
 .input {
   width: 100%;
-  height: 40px;
   border: 1px solid var(--grey);
   border-radius: 4px;
-  color: var(--grey);
+  color: var(--black);
+  padding: 12px 8px;
+  &::placeholder {
+    color: var(--grey);
+  }
+
+  &:focus {
+    border: 1px solid var(--black);
+  }
 }

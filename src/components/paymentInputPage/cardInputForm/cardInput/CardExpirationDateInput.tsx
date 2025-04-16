@@ -21,7 +21,7 @@ function CardExpirationDateInput() {
         name='cardExpirationDate'
         placeholder={index === 0 ? 'MM' : 'YY'}
         onChange={(e) => onChangeHandler(e, index)}
-        maxLength={4}
+        maxLength={2}
       />
     );
   });

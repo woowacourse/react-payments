@@ -146,3 +146,10 @@ button {
   overflow: visible;
   cursor: pointer;
 }
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline-style: none;
+}
