@@ -4,8 +4,8 @@ import { COLORS } from "../../styles/colors";
 type Props = {
 	placeholder?: string;
 	isError?: boolean;
-	value: number | undefined;
-	inputHandler: (value: number) => void;
+	value: string;
+	inputHandler: (value: string) => void;
 };
 
 const Input = ({ placeholder, isError = false, value, inputHandler }: Props) => {
@@ -15,7 +15,7 @@ const Input = ({ placeholder, isError = false, value, inputHandler }: Props) => 
 			isError={isError}
 			placeholder={placeholder}
 			onChange={(e) => {
-				inputHandler(Number(e.target.value));
+				inputHandler(e.target.value);
 			}}
 		/>
 	);

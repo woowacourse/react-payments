@@ -7,29 +7,47 @@ import Input from "./components/input/Input";
 import { useState } from "react";
 
 export type cardNumber = {
-	first: number | undefined;
-	second: number | undefined;
-	third: number | undefined;
-	fourth: number | undefined;
+	first: string;
+	second: string;
+	third: string;
+	fourth: string;
+};
+
+export type date = {
+	month: string;
+	year: string;
 };
 
 function App() {
 	const [cardNumber, setCardNumber] = useState<cardNumber>({
-		first: undefined,
-		second: undefined,
-		third: undefined,
-		fourth: undefined,
+		first: "",
+		second: "",
+		third: "",
+		fourth: "",
+	});
+	const [expirationDate, setExpirationDate] = useState<date>({
+		month: "",
+		year: "",
 	});
 
-	const handleCardNumber = (order: keyof cardNumber, numbers: number) => {
+	const handleCardNumber = (order: keyof cardNumber, numbers: string) => {
 		setCardNumber({ ...cardNumber, [order]: numbers });
 	};
 
+	const handleDate = (order: keyof date, value: string) => {
+		setExpirationDate({ ...expirationDate, [order]: value });
+	};
+
 	const cardNumberInputs = [
-		<Input value={cardNumber?.first} inputHandler={(numbers) => handleCardNumber("first", numbers)} />,
-		<Input value={cardNumber?.second} inputHandler={(numbers) => handleCardNumber("second", numbers)} />,
-		<Input value={cardNumber?.third} inputHandler={(numbers) => handleCardNumber("third", numbers)} />,
-		<Input value={cardNumber?.fourth} inputHandler={(numbers) => handleCardNumber("fourth", numbers)} />,
+		<Input placeholder="1234" value={cardNumber?.first} inputHandler={(numbers) => handleCardNumber("first", numbers)} />,
+		<Input placeholder="1234" value={cardNumber?.second} inputHandler={(numbers) => handleCardNumber("second", numbers)} />,
+		<Input placeholder="1234" value={cardNumber?.third} inputHandler={(numbers) => handleCardNumber("third", numbers)} />,
+		<Input placeholder="1234" value={cardNumber?.fourth} inputHandler={(numbers) => handleCardNumber("fourth", numbers)} />,
+	];
+
+	const expirationInput = [
+		<Input placeholder="MM" value={expirationDate.month} inputHandler={(value) => handleDate("month", value)} />,
+		<Input placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
 	];
 
 	return (
@@ -39,6 +57,12 @@ function App() {
 				<Title>결제할 카드 번호를 입력해 주세요</Title>
 				<Description>본인 명의의 카드만 결제 가능합니다.</Description>
 				<InputField label="카드 번호" inputs={cardNumberInputs} />
+			</CardNumberWrap>
+
+			<CardNumberWrap>
+				<Title>카드 유효기간을 입력해 주세요</Title>
+				<Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
+				<InputField label="유효기간" inputs={expirationInput} />
 			</CardNumberWrap>
 		</MainContainer>
 	);
