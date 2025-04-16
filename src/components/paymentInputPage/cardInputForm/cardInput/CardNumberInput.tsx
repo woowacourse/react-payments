@@ -1,22 +1,14 @@
+import { Dispatch, SetStateAction } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
 
-function CardNumberInput() {
-  function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber[0] === '4') {
-      // cardPreview의 replaceLogo('visa')
-      return 'visa;';
-    }
+const numbersArray = Array.from({ length: 4 }).fill('') as string[];
 
-    if (
-      inputCardNumber[0] === '5' &&
-      inputCardNumber[1] >= '1' &&
-      inputCardNumber[1] <= '5'
-    ) {
-      return 'mastercard;';
-    }
-  }
-
+function CardNumberInput({
+  setCardNumbers,
+}: {
+  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+}) {
   function validateCardNumber() {
     console.log('validate!');
   }
@@ -26,8 +18,8 @@ function CardNumberInput() {
     index: number
   ) {
     const inputCardNumber = e.target.value;
-    if (index === 0) checkBrand(inputCardNumber);
-    validateCardNumber(inputCardNumber);
+    numbersArray[index] = inputCardNumber;
+    setCardNumbers([...numbersArray]);
   }
 
   const inputs = Array.from({ length: 4 }).map((_, index) => {
