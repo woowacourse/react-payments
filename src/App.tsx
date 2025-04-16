@@ -4,20 +4,30 @@ import { Flex } from './components/common/Flex';
 import { Card } from './components/features/Card';
 import { CardNumberForm } from './components/features/CardFormFiled/CardNumberForm';
 import { CVCForm } from './components/features/CardFormFiled/CVCForm';
+import { ExpireDateForm } from './components/features/CardFormFiled/ExpireDateForm';
 import { useCardInput } from './hooks/useCardInput';
 
 function App() {
-  const { value: cardNumber, handleChange, handleBlur } = useCardInput(4);
+  const { value: cardNumbers, handleChange, handleBlur } = useCardInput(4);
+  const {
+    value: expireDate,
+    handleChange: handleExpireDateChange,
+    handleBlur: handleExpireDateBlur,
+  } = useCardInput(2);
 
   return (
     <AppLayout>
       <Flex padding="80px 0 0 0 ">
-        <Card type={'VISA'} cardNumbers={cardNumber} expireDate={'04/12'} />
+        <Card cardNumbers={cardNumbers} expireDate={expireDate} />
       </Flex>
-      <Flex direction="column" gap="20px" padding="60px 0 0 0">
-        <CardNumberForm cardNumber={cardNumber} onChange={handleChange} onBlur={handleBlur} />
-        {/* <ExpireDateForm expireNumber={expireNumber} />
-        <CVCForm cvcNumber={cvcNumber} /> */}
+      <Flex direction="column" gap="40px" padding="60px 0 0 0">
+        <CardNumberForm cardNumbers={cardNumbers} onChange={handleChange} onBlur={handleBlur} />
+        <ExpireDateForm
+          expireDate={expireDate}
+          onChange={handleExpireDateChange}
+          onBlur={handleExpireDateBlur}
+        />
+        <CVCForm />
       </Flex>
     </AppLayout>
   );
