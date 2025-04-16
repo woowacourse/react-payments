@@ -51,6 +51,11 @@ const useCardNumbers = (): UseCardNumbersOptions => {
       setErrorMessage('숫자만 입력 가능합니다');
       return false;
     }
+//TODO: focus out 시 카드번호 검증 로직 추가
+    if (input.length > 4) {
+      setErrorMessage('4자리 숫자만 입력 가능합니다');
+      return false;
+    }
 
     return true;
   };

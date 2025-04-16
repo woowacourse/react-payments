@@ -44,6 +44,12 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
       setErrorMessage('숫자만 입력 가능합니다');
       return false;
     }
+
+    if (input.length > 2) {
+      setErrorMessage('2자리 숫자만 입력 가능합니다');
+      return false;
+    }
+
     //TODO: 카드 유효기간 검증 로직
     // 년도가 올해 이후인 경우 -> 합격
     // 년도가 올해인 경우, 월은 아직 지나지 않음 -> 합격
