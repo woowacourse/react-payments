@@ -1,0 +1,51 @@
+.container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.brand {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+.cardNumber {
+  position: absolute;
+  top: 40%;
+  left: 7%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.cardNumber > span {
+  letter-spacing: 5px;
+  width: 70px;
+}
+
+.dots {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.expire {
+  position: absolute;
+  top: 60%;
+  left: 7%;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.expire > span {
+  display: inline-block;
+  width: 30px;
+}
+
+.expire > span:nth-child(2) {
+  width: auto;
+}
