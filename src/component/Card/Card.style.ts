@@ -33,9 +33,6 @@ export const cardFrame = css`
 export const cardType = css`
   width: 5rem;
   height: 3rem;
-
-  border-radius: 5px;
-  background-color: ${theme.color.gold};
 `;
 
 export const cardContentContainer = css`
