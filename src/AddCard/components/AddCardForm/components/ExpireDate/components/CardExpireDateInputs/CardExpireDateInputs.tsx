@@ -26,7 +26,7 @@ function CardExpireDateInputs({
         <p className={styles.expireDateInputBox}>
           <Input
             id="expire-date-input"
-            type="number"
+            type="text"
             maxLength={2}
             placeholder="MM"
             isError={Boolean(MM.errorMessage)}
@@ -43,7 +43,7 @@ function CardExpireDateInputs({
         <p className={styles.expireDateInputBox}>
           <Input
             id="expire-date-input"
-            type="number"
+            type="text"
             maxLength={2}
             placeholder="YY"
             isError={Boolean(YY.errorMessage)}

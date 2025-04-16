@@ -26,7 +26,7 @@ function CardNumberInputs({
       <p className={styles.cardInputs}>
         <Input
           id="card-number-input"
-          type="number"
+          type="text"
           maxLength={4}
           placeholder="1234"
           isError={first.isError}
@@ -35,7 +35,7 @@ function CardNumberInputs({
         />
         <Input
           id="card-number-input"
-          type="number"
+          type="text"
           maxLength={4}
           placeholder="1234"
           isError={second.isError}
@@ -45,7 +45,7 @@ function CardNumberInputs({
 
         <Input
           id="card-number-input"
-          type="number"
+          type="text"
           maxLength={4}
           placeholder="1234"
           isError={third.isError}
@@ -54,7 +54,7 @@ function CardNumberInputs({
         />
         <Input
           id="card-number-input"
-          type="number"
+          type="text"
           maxLength={4}
           placeholder="1234"
           isError={fourth.isError}
