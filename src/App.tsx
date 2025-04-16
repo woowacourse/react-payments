@@ -8,6 +8,7 @@ import CvcSection from './components/CvcSection/CvcSection';
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [cardValidity, setCardValidity] = useState<boolean[]>([true, true, true, true]);
+  const [cardLogo, setCardLogo] = useState<'visa' | 'master' | ''>('');
 
   const handleCardNumberChange = (index: number, value: string) => {
     const isValid = /^[0-9]*$/.test(value);
@@ -18,6 +19,14 @@ export default function App() {
     const updatedValidity = [...cardValidity];
     updatedValidity[index] = isValid;
     setCardValidity(updatedValidity);
+
+    if (updatedNumbers[0].startsWith('4')) {
+      setCardLogo('visa');
+    } else if (51 <= Number(updatedNumbers[0].slice(0, 2)) && Number(updatedNumbers[0].slice(0, 2)) <= 55) {
+      setCardLogo('master');
+    } else {
+      setCardLogo('');
+    }
   };
 
   const [expiration, setExpiration] = useState<string[]>(['', '']);
@@ -67,7 +76,7 @@ export default function App() {
 
   return (
     <div className={styles.appContainer}>
-      <Card numbers={cardNumbers} />
+      <Card numbers={cardNumbers} cardLogo={cardLogo} />
       <CardNumberSection cardNumbers={cardNumbers} cardValidity={cardValidity} onChange={handleCardNumberChange} />
       <CardExpirationSection
         expiration={expiration}
