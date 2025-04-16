@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import { StyledTextContainer } from './Text.styled';
 
 export type Props = {
@@ -7,9 +8,15 @@ export type Props = {
   color?: string;
 } & PropsWithChildren;
 
-export const Text = ({ variant, fontWeight = 'medium', color = 'black', children }: Props) => {
+export const Text = ({
+  variant,
+  fontWeight = 'medium',
+  color = 'black',
+  children,
+  ...props
+}: Props) => {
   return (
-    <StyledTextContainer variant={variant} fontWeight={fontWeight} color={color}>
+    <StyledTextContainer variant={variant} fontWeight={fontWeight} color={color} {...props}>
       {children}
     </StyledTextContainer>
   );
