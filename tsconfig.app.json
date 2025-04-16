@@ -22,5 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "paths": {
+    "@/*": ["src/*"],
+    "@assets/*": ["src/assets/*"]
+  }
 }
