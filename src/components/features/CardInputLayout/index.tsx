@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 
 import { StyledCardInputLayoutContainer } from './CardInputLayout.styled';
 
+import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
 
 export type Props = {
@@ -25,16 +26,7 @@ export const CardInputLayout = ({ headerText, description, label, children }: Pr
       <Text variant="Body" fontWeight="regular">
         {label}
       </Text>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: row;
-          gap: 8px;
-          width: 100%;
-        `}
-      >
-        {children}
-      </div>
+      <Flex gap="8px">{children}</Flex>
     </StyledCardInputLayoutContainer>
   );
 };
