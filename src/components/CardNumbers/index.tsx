@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 import styled from '@emotion/styled';
@@ -13,6 +13,35 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
   setCardNumbers,
 }) => {
   const errorMessageRef = useRef<HTMLDivElement>(null);
+  const [isError, setIsError] = useState<boolean[]>([false, false, false, false]);
+
+  useEffect(() => {
+    if (errorMessageRef?.current && isError.every((error) => error === false)) {
+      errorMessageRef.current.innerText = '';
+    }
+  }, [isError]);
+
+  const enterCorrectCardNumbers = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    newState: string[]
+  ) => {
+    newState[index] = e.target.value;
+    setIsError(isError.map((error, i) => (i === index ? false : error)));
+    e.target.style.borderColor = '#ccc';
+  };
+
+  const enterWrongCardNumbers = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    message: string
+  ) => {
+    e.target.style.borderColor = 'red';
+    setIsError(isError.map((error, i) => (i === index ? true : error)));
+    if (errorMessageRef?.current) {
+      errorMessageRef.current.innerText = message;
+    }
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -21,16 +50,13 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
     setCardNumbers((prev) => {
       const newState = [...prev];
       if (/^[0-9]*$/.test(e.target.value) && e.target.value.length <= 4) {
-        newState[index] = e.target.value;
-        e.target.style.borderColor = '#ccc';
-        if (errorMessageRef?.current) {
-          errorMessageRef.current.innerText = '';
-        }
+        enterCorrectCardNumbers(e, index, newState);
       } else {
-        e.target.style.borderColor = 'red';
-        if (errorMessageRef?.current) {
-          errorMessageRef.current.innerText = '숫자만 입력 가능합니다.';
-        }
+        enterWrongCardNumbers(
+          e,
+          index,
+          '숫자만 가능합니다.'
+        );
       }
       return newState;
     });
