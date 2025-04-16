@@ -3,22 +3,24 @@ import CustomInput from '../../../shared/ui/CustomInput';
 import { CustomInputProps } from '../../../shared/type/types';
 
 interface CardInfoSectionProps {
+  id: string;
   title: string;
   description: string;
   subTitle: string;
   inputArr: CustomInputProps[];
   maxLength: number;
-  errorMessage?: string;
+  error?: any;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CardInfoSection({
+  id,
   title,
   description,
   subTitle,
   inputArr,
   maxLength,
-  errorMessage = '',
+  error = '',
   onChange,
 }: CardInfoSectionProps) {
   return (
@@ -31,10 +33,15 @@ export default function CardInfoSection({
         <span className="card-info-subtitle">{subTitle}</span>
         <div className="card-info-input-container">
           {inputArr.map((input, index) => (
-            <CustomInput key={index} {...input} onChange={onChange} maxLength={maxLength} />
+            <CustomInput
+              key={`custom-input-${index}`}
+              {...input}
+              onChange={onChange}
+              maxLength={maxLength}
+            />
           ))}
         </div>
-        <span className="error-message">{errorMessage}</span>
+        <span className="card-info-error">{error[`${id}Error`]?.[1] || ''}</span>
       </div>
     </section>
   );

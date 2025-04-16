@@ -7,10 +7,10 @@ export default function useCardInfo() {
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
   });
-  const [error, setError] = useState<Object>({
-    cardNumberError: '',
-    cardExpirationDateError: '',
-    cardCVCError: '',
+  const [error, setError] = useState<any>({
+    cardNumberError: [],
+    cardExpirationDateError: [],
+    cardCVCError: [],
   });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +24,16 @@ export default function useCardInfo() {
 
         const [errorIndex, errorMessage] = cardNumberValidator(updatedNumbers);
         if (errorIndex !== -1) {
-          setError(errorMessage);
+          setError((prev: any) => ({
+            ...prev,
+            cardNumberError: [errorIndex, errorMessage],
+          }));
+          console.log(error.cardNumberError);
         } else {
-          setError({ cardNumberError: '', cardExpirationDateError: '', cardCVCError: '' });
+          setError((prev: any) => ({
+            ...prev,
+            cardNumberError: [],
+          }));
         }
 
         return {

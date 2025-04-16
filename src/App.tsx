@@ -4,13 +4,13 @@ import CardInfoContainer from './features/cardInfo/ui/CardInfoContainer';
 import useCardInfo from './features/cardInfo/hooks/useCardInfo';
 
 function App() {
-  const { cardInfo, handleCardInfoChange } = useCardInfo();
+  const { cardInfo, handleCardInfoChange, error } = useCardInfo();
 
   return (
     <div className="app-container">
       <main className="card-container">
         <Preview cardInfo={cardInfo} />
-        <CardInfoContainer onChange={handleCardInfoChange} />
+        <CardInfoContainer onChange={handleCardInfoChange} error={error} />
       </main>
     </div>
   );
