@@ -59,8 +59,16 @@ font-weight: 500;
 letter-spacing: 16%;
 color: #FFFFFF;`
 
+type CardPreviewProps = {
+    cardNumber: {
+        first: string,
+        second: string,
+        third: string,
+        forth : string,
+    }
+}
 
-function CardPreview() {
+function CardPreview({cardNumber} : CardPreviewProps) {
     return (
         <StyledContainer>
             <StyledIconWrap>
@@ -71,10 +79,10 @@ function CardPreview() {
                 </StyledLogoWrap>
             </StyledIconWrap>
             <StyledCardNumberWrap>
-                <StyledCardNumber>1111</StyledCardNumber>
-                <StyledCardNumber>1234</StyledCardNumber>
-                <StyledCardNumber>1231</StyledCardNumber>
-                <StyledCardNumber>1233</StyledCardNumber>
+                <StyledCardNumber>{cardNumber['first']}</StyledCardNumber>
+                <StyledCardNumber>{cardNumber['second']}</StyledCardNumber>
+                <StyledCardNumber>{cardNumber['third']}</StyledCardNumber>
+                <StyledCardNumber>{cardNumber['forth']}</StyledCardNumber>
             </StyledCardNumberWrap>
             <StyledExpirationPeriod>
                 04/21

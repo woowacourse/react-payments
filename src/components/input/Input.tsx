@@ -4,6 +4,8 @@ type InputProps = {
   maxLength: number;
   placeholder: string;
   width?: string;
+  onChange: (e : React.ChangeEvent<HTMLInputElement>) => void
+  value : string 
 };
 
 const InputStyled = styled.input<{ width?: string }>`
@@ -28,12 +30,14 @@ const InputStyled = styled.input<{ width?: string }>`
   }
 `;
 
-function Input({ width, maxLength, placeholder }: InputProps) {
+function Input({ width, maxLength, placeholder, onChange, value }: InputProps) {
   return (
       <InputStyled
         width={width}
         placeholder={placeholder}
         maxLength={maxLength}
+        value={value}
+        onChange={onChange}
     />
   );
 }
