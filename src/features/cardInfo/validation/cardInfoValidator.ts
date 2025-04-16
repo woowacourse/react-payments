@@ -1,39 +1,34 @@
-export const cardInfoValidator = (input: []) => {
-  const cardNumbers = input.map(Number);
-
-  cardNumbers.map((cardNumber) => {
-    if (!isNumber(cardNumber)) {
-      throw new Error('카드 번호는 숫자만 입력 가능합니다.');
+export const cardNumberValidator = (inputs: string[]) => {
+  for (let index = 0; index < inputs.length; index++) {
+    const input = inputs[index];
+    if (!isNumber(input)) {
+      console.log('!!!!!!!');
+      return [index, '카드 번호는 숫자만 입력 가능합니다.'];
     }
-    if (!isFourDigit(cardNumber)) {
-      throw new Error('카드 번호는 4자리어야 합니다.');
+    if (!isFourDigit(Number(input))) {
+      return [index, '카드 번호는 4자리어야 합니다.'];
     }
-  });
-
-  if (!isValidCardNumber(String(cardNumbers[0]))) {
-    throw new Error('카드 번호는 4 또는 51~55로 시작해야 합니다.');
+    if (index === 0 && !isValidCardNumber(input)) {
+      return [0, '카드 번호는 4 또는 51~55로 시작해야 합니다.'];
+    }
   }
+
+  return [-1];
 };
 
-const isNumber = (input: number | string) => {
-  if (!Number.isInteger(input)) {
-    return false;
-  }
+const isNumber = (input: string) => {
+  return Number.isInteger(Number(input));
 };
 
 const isFourDigit = (cardNumber: number) => {
-  if (String(cardNumber).length !== 4) {
-    return false;
-  }
+  return String(cardNumber).length === 4;
 };
 
-const isValidCardNumber = (input: string) => {
-  if (input[0] === '4') {
-    return true;
-  } else if (input[0] === '5') {
-    if (1 <= Number(input[1]) && Number(input[1]) <= 5) {
-      return true;
-    }
+const isValidCardNumber = (input: string): boolean => {
+  if (input[0] === '4') return true;
+  if (input[0] === '5') {
+    const secondDigit = Number(input[1]);
+    return secondDigit >= 1 && secondDigit <= 5;
   }
   return false;
 };

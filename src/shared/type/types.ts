@@ -3,6 +3,7 @@ export interface CustomInputProps {
   placeholder: string;
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
 
 export interface CardInfoProps {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { cardNumberValidator } from '../validation/cardInfoValidator';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState({
@@ -6,16 +7,34 @@ export default function useCardInfo() {
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
   });
+  const [error, setError] = useState<Object>({
+    cardNumberError: '',
+    cardExpirationDateError: '',
+    cardCVCError: '',
+  });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith('cardNumber')) {
       const index = Number(name[name.length - 1]);
-      setCardInfo((prev) => ({
-        ...prev,
-        cardNumber: prev.cardNumber.map((num, i) => (i === index ? value : num)),
-      }));
+
+      setCardInfo((prev) => {
+        const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
+
+        const [errorIndex, errorMessage] = cardNumberValidator(updatedNumbers);
+        if (errorIndex !== -1) {
+          setError(errorMessage);
+        } else {
+          setError({ cardNumberError: '', cardExpirationDateError: '', cardCVCError: '' });
+        }
+
+        return {
+          ...prev,
+          cardNumber: updatedNumbers,
+        };
+      });
+
       return;
     }
 
@@ -37,5 +56,5 @@ export default function useCardInfo() {
     }));
   };
 
-  return { cardInfo, setCardInfo, handleCardInfoChange };
+  return { cardInfo, setCardInfo, handleCardInfoChange, error };
 }
