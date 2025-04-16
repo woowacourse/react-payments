@@ -19,10 +19,10 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		fourth: "",
 	});
 
-	const handleCardNumber = (order: keyof cardNumber, numbers: string) => {
-		setCardNumber({ ...cardNumber, [order]: numbers });
+	const handleCardNumber = (order: keyof cardNumber, value: string) => {
+		setCardNumber({ ...cardNumber, [order]: value });
 
-		if (isNaN(Number(numbers))) {
+		if (isNaN(Number(value))) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
 			return;
 		}
