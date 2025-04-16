@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { ChangeEvent } from 'react';
 
 type InputProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
   placeHolder: string;
   isError: boolean;
@@ -25,11 +25,12 @@ const StyledInput = styled.input<InputProps>`
   }};
 `;
 
-const Input = ({ value, onChange, maxLength, placeHolder, isError }: InputProps) => {
+const Input = ({ value, onChange, onBlur, maxLength, placeHolder, isError }: InputProps) => {
   return (
     <StyledInput
       value={value}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e)}
+      onChange={onChange}
+      onBlur={onBlur}
       maxLength={maxLength}
       placeHolder={placeHolder}
       isError={isError}
