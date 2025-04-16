@@ -18,6 +18,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInputWrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;

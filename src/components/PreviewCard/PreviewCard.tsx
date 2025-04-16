@@ -14,6 +14,7 @@ const StyledPreviewCard = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.8rem;
+  margin: 30px auto;
 `;
 
 const StyledCardHeader = styled.div`
