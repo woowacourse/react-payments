@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import Text from "../Text/Text";
 
 import Input from "../Input/Input";
 import { useState } from "react";
@@ -42,7 +43,7 @@ const InputField = ({
 
   return (
     <div css={inputFieldStyle}>
-      <label css={labelStyle}>{label}</label>
+      <Text type="label" text={label} />
       <div css={inputWrapperStyle}>
         {Array.from({ length: inputNumber }).map((_, index) => (
           <Input
@@ -55,7 +56,9 @@ const InputField = ({
           />
         ))}
       </div>
-      <span css={errorStyle(error)}>{error && "숫자만 입력 가능합니다."}</span>
+      <div css={errorTextWrapperStyle(error)}>
+        <Text type="error" text={"숫자만 입력 가능합니다."} />
+      </div>
     </div>
   );
 };
@@ -83,11 +86,6 @@ const labelStyle = css`
   line-height: 15px;
 `;
 
-const errorStyle = (error: boolean) => css`
-  color: #ff3d3d;
-  font-size: 9.5px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+const errorTextWrapperStyle = (error: boolean) => css`
   opacity: ${error ? "1" : "0"};
 `;
