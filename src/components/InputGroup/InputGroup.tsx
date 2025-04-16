@@ -4,20 +4,37 @@ import { InputGroupCSS } from "./InputGroup.styled";
 
 export interface InputGroupProps {
   type: keyof typeof INPUT_TYPE;
+  error: boolean;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function InputGroup({ type, setError }: InputGroupProps) {
+function InputGroup({ type, error, setError }: InputGroupProps) {
   const renderInputByType = () => {
     switch (type) {
       case INPUT_TYPE.cardNumber:
         const carNumberPlaceholder = "1234";
         return (
           <>
-            <Input placeholder={carNumberPlaceholder} maxLength={4} />
-            <Input placeholder={carNumberPlaceholder} maxLength={4} />
-            <Input placeholder={carNumberPlaceholder} maxLength={4} />
-            <Input placeholder={carNumberPlaceholder} maxLength={4} />
+            <Input
+              placeholder={carNumberPlaceholder}
+              maxLength={4}
+              isError={error}
+            />
+            <Input
+              placeholder={carNumberPlaceholder}
+              maxLength={4}
+              isError={error}
+            />
+            <Input
+              placeholder={carNumberPlaceholder}
+              maxLength={4}
+              isError={error}
+            />
+            <Input
+              placeholder={carNumberPlaceholder}
+              maxLength={4}
+              isError={error}
+            />
           </>
         );
 
@@ -26,14 +43,24 @@ function InputGroup({ type, setError }: InputGroupProps) {
         const yearPlaceholder = "YY";
         return (
           <>
-            <Input placeholder={monthPlaceholder} maxLength={2} />
-            <Input placeholder={yearPlaceholder} maxLength={2} />
+            <Input
+              placeholder={monthPlaceholder}
+              maxLength={2}
+              isError={error}
+            />
+            <Input
+              placeholder={yearPlaceholder}
+              maxLength={2}
+              isError={error}
+            />
           </>
         );
 
       case INPUT_TYPE.cvcNumber:
         const cvcPlaceholder = "123";
-        return <Input placeholder={cvcPlaceholder} maxLength={3} />;
+        return (
+          <Input placeholder={cvcPlaceholder} maxLength={3} isError={error} />
+        );
 
       default:
         null;

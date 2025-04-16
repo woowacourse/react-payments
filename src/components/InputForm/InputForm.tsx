@@ -36,7 +36,7 @@ function InputForm({ type }: InputFormProps) {
       <Title title={titleVariants[type]} />
       <Description description={descriptionVariants[type]} />
       <Subtitle subtitle={subTitleVariants[type]} />
-      <InputGroup type={type} setError={setError} />
+      <InputGroup type={type} error={error} setError={setError} />
       <Error errorMessage="숫자만 입력 가능합니다." isVisible={error} />
     </>
   );
