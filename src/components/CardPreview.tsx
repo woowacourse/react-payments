@@ -1,7 +1,12 @@
 import MasterCard from './logo/MasterCard'
 import VisaCard from './logo/VisaCard'
 
-export default function CardPreview() {
+interface CardPreviewProps {
+  cardType: 'visa' | 'master' | ''
+  cardNumber: Record<string, string>
+}
+
+export default function CardPreview({ cardType, cardNumber }: CardPreviewProps) {
   return (
     <div
       style={{
@@ -32,22 +37,30 @@ export default function CardPreview() {
             borderRadius: '2.5px',
           }}
         ></div>
-        <VisaCard width={36} />
+        {cardType === 'visa' && <VisaCard width={36} />}
+        {cardType === 'master' && <MasterCard width={36} />}
       </div>
       <div
         style={{
           display: 'flex',
-          gap: '10px',
-          justifyContent: 'space-between',
+          gap: '16px',
           alignItems: 'center',
           textAlign: 'center',
           verticalAlign: 'middle',
         }}
       >
-        <span>1111</span>
-        <span>2222</span>
-        <span>****</span>
-        <span>****</span>
+        <span>{cardNumber.first}</span>
+        <span>{cardNumber.second}</span>
+        <span>
+          {Array.from({ length: cardNumber.third.length }, () => {
+            return '·'
+          })}
+        </span>
+        <span>
+          {Array.from({ length: cardNumber.fourth.length }, () => {
+            return '·'
+          })}
+        </span>
       </div>
       <div>
         <span>04/21</span>

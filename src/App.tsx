@@ -6,8 +6,24 @@ import CardExpirationDate from './components/CardExpirationDate'
 import CardCVCNumber from './components/CardCVCNumber'
 import CardPreview from './components/CardPreview'
 import Spacing from './components/common/Spacing'
+import { useState } from 'react'
+import { SequenceType } from './components/CardNumber'
+
+const getCardType = (cardNumberFirst: string) => {
+  if (['4'].some((value) => cardNumberFirst.startsWith(value))) return 'visa'
+  if (['51', '52', '53', '54', '55'].some((value) => cardNumberFirst.startsWith(value))) return 'master'
+  return ''
+}
 
 function App() {
+  const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  })
+  const cardType = getCardType(cardNumber.first)
+
   return (
     <div
       css={css`
@@ -24,12 +40,12 @@ function App() {
           justifyContent: 'center',
         }}
       >
-        <CardPreview />
+        <CardPreview cardType={cardType} cardNumber={cardNumber} />
       </div>
       <Spacing size={60} />
 
       <form style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
-        <CardNumber />
+        <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
         <CardExpirationDate />
         <CardCVCNumber />
       </form>
