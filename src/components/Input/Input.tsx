@@ -2,10 +2,12 @@
 import { css } from "@emotion/react";
 
 const inputStyle = css`
-  width: 315px;
+  width: 100%;
   height: 32px;
   border: solid 1.01px #acacac;
   border-radius: 2px;
+  padding: 8px;
+  box-sizing: border-box;
 
   &::placeholder {
     font-family: Inter;
@@ -21,17 +23,15 @@ const inputStyle = css`
 type InputProps = {
   placeholder: string;
   maxLength: number;
-  cardNumber: string;
-  setCardNumber: (cardNumber: string) => void;
+  value: string;
+  setValue: (value: string) => void;
 };
 
-const Input = ({ placeholder, maxLength, cardNumber, setCardNumber }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, setValue }: InputProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber(e.target.value);
+    setValue(e.target.value);
   };
-  return (
-    <input css={inputStyle} onChange={onChange} value={cardNumber} placeholder={placeholder} maxLength={maxLength} />
-  );
+  return <input css={inputStyle} onChange={onChange} value={value} placeholder={placeholder} maxLength={maxLength} />;
 };
 
 export default Input;

@@ -53,8 +53,8 @@
 - [ ] component 생성
   - [x] Input 컴포넌트 구현
   - [x] Input 컴포넌트 스토리북 생성
-  - [ ] InputField 컴포넌트 구현(label, input, error label)
-  - [ ] InputField 컴포넌트 스토리북 생성
+  - [x] InputField 컴포넌트 구현(label, input, error label)
+  - [x] InputField 컴포넌트 스토리북 생성
   - [ ] FormSection 컴포넌트 구현(title, description, wrapper)
   - [ ] FormSection 컴포넌트 스토리북 생성
   - [ ] FormContainer 컴포넌트 구현

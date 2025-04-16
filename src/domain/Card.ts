@@ -1,8 +1,8 @@
 class Card {
   information = {
-    uniqueNumber: { first: "", second: "", third: "", fourth: "" },
-    expirationDate: { MM: "", YY: "" },
-    cvcNumber: "",
+    uniqueNumber: ["", "", "", ""],
+    expirationDate: ["", ""],
+    cvcNumber: [""],
   };
   constructor() {}
 }

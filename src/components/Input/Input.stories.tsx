@@ -5,7 +5,7 @@ import { useState } from "react";
 const meta = {
   title: "MyComponent/MyInput",
   component: Input,
-  tags: ["autodocs"], // ✅ 자동 문서화 활성화!
+  tags: ["autodocs"],
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -16,18 +16,11 @@ export const Primary: Story = {
   args: {
     placeholder: "1234",
     maxLength: 4,
-    cardNumber: "",
+    value: "",
   },
   render: (args: any) => {
-    const [cardNumber, setCardNumber] = useState(args.cardNumber);
+    const [value, setValue] = useState(args.value);
 
-    return (
-      <Input
-        placeholder={args.placeholder}
-        maxLength={args.maxLength}
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-      />
-    );
+    return <Input placeholder={args.placeholder} maxLength={args.maxLength} value={value} setValue={setValue} />;
   },
 };
