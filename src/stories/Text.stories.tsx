@@ -6,6 +6,13 @@ const meta = {
   title: 'common/Text',
   component: Text,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '텍스트 컴포넌트입니다.',
+      },
+    },
+  },
 } satisfies Meta<typeof Text>;
 
 export default meta;
