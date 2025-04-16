@@ -5,7 +5,7 @@ export default function useCvcNumber() {
   const [cvcNumbersError, setError] = useState("");
 
   const cvcNumbersValidate = (value: string) => {
-    setCardCvcNumbers(value.slice(0, 3));
+    setCardCvcNumbers(value.slice(0, 4));
     const isValidLength = value.length <= 3;
     const isNumber = /^[0-9]*$/.test(value);
     if (!isValidLength) {

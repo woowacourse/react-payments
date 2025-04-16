@@ -6,7 +6,7 @@ export default function useExpirationDate() {
 
   const dateValidate = (value: string, index: number) => {
     const newDate = [...cardExpirationDate];
-    newDate[index] = value.slice(0, 2);
+    newDate[index] = value.slice(0, 3);
     setcardExpirationDate(newDate);
 
     const isNumber = /^[0-9]*$/.test(value);

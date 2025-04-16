@@ -7,7 +7,7 @@ export default function useCardNumbers() {
 
   const cardNumbersValidate = (value: string, index: number) => {
     const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value.slice(0, 4);
+    newCardNumbers[index] = value.slice(0, 5);
     setCardNumbers(newCardNumbers);
 
     const firstTwoDigits = Number(cardNumbers[0].slice(0, 2));
