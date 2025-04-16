@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { INPUT_TYPE, InputType } from "../../constants/constants";
 import Description from "../Description/Description";
 import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
 import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
+import { useInputError } from "../../hooks/useInputError";
 
 export interface InputFormProps {
   type: InputType;
@@ -29,15 +29,33 @@ const subTitleVariants = {
 };
 
 function InputForm({ type }: InputFormProps) {
-  const [error, setError] = useState(false);
+  const {
+    error,
+    setCardNumberError,
+    setExpirationPeriodError,
+    setCvcNumberError,
+  } = useInputError();
 
   return (
     <>
       <Title title={titleVariants[type]} />
       <Description description={descriptionVariants[type]} />
       <Subtitle subtitle={subTitleVariants[type]} />
-      <InputGroup type={type} error={error} setError={setError} />
-      <Error errorMessage="숫자만 입력 가능합니다." isVisible={error} />
+      <InputGroup
+        type={type}
+        error={error}
+        setCardNumberError={setCardNumberError}
+        setExpirationPeriodError={setExpirationPeriodError}
+        setCvcNumberError={setCvcNumberError}
+      />
+      <Error
+        errorMessage="숫자만 입력 가능합니다."
+        isVisible={
+          type === INPUT_TYPE.cvcNumber
+            ? error[type]
+            : Object.values(error[type] ?? {}).some((value: boolean) => value)
+        }
+      />
     </>
   );
 }

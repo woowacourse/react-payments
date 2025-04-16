@@ -1,10 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import {
-  CARD_POSITION,
-  CardPositionType,
-  PERIOD_POSITION,
-  PeriodPositionType,
-} from "../constants/constants";
+import { CardPositionType, PeriodPositionType } from "../constants/constants";
 
 interface CardNumbers {
   first: string;
@@ -31,7 +26,7 @@ export interface CardContextType {
   ) => void;
 
   cvcNumber: CvcNumber;
-  setCvcNumber: React.Dispatch<React.SetStateAction<CvcNumber>>;
+  updateCvcNumber: React.Dispatch<React.SetStateAction<CvcNumber>>;
 }
 
 interface CardProviderProps {
@@ -62,20 +57,20 @@ export function CardProvider({ children }: CardProviderProps) {
   );
   const [cvcNumber, setCvcNumber] = useState<CvcNumber>(defaultCvcNumber);
 
-  const updateCardNumber = (number: string, position: CardPositionType) => {
+  const updateCardNumber = (value: string, position: CardPositionType) => {
     setCardNumbers((prevNumbers) => ({
       ...prevNumbers,
-      [CARD_POSITION[position]]: number,
+      [position]: value,
     }));
   };
 
   const updateExpirationPeriod = (
-    period: string,
+    value: string,
     position: PeriodPositionType
   ) => {
     setExpirationPeriod((prevExpirationPeriod) => ({
       ...prevExpirationPeriod,
-      [PERIOD_POSITION[position]]: period,
+      [position]: value,
     }));
   };
 
@@ -89,7 +84,7 @@ export function CardProvider({ children }: CardProviderProps) {
         updateExpirationPeriod,
 
         cvcNumber,
-        setCvcNumber,
+        updateCvcNumber: setCvcNumber,
       }}
     >
       {children}

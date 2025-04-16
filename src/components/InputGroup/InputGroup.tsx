@@ -10,28 +10,40 @@ import {
 import { useCard } from "../../hooks/useCard";
 import Input from "../Input/Input";
 import { InputGroupCSS } from "./InputGroup.styled";
+import { InputErrorType } from "../../hooks/useInputError";
 
 export interface InputGroupProps {
   type: InputType;
-  error: boolean;
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  error: InputErrorType;
+  setCardNumberError: (value: string, position: CardPositionType) => void;
+  setExpirationPeriodError: (
+    value: string,
+    position: PeriodPositionType
+  ) => void;
+  setCvcNumberError: (value: string) => void;
 }
 
-function InputGroup({ type, error, setError }: InputGroupProps) {
+function InputGroup({
+  type,
+  error,
+  setCardNumberError,
+  setExpirationPeriodError,
+  setCvcNumberError,
+}: InputGroupProps) {
   const {
     cardNumbers,
     updateCardNumber,
     expirationPeriod,
     updateExpirationPeriod,
     cvcNumber,
-    setCvcNumber,
+    updateCvcNumber,
   } = useCard();
 
   const handleCardNumberChange = (
     value: string,
     position: CardPositionType
   ) => {
-    // 유효성 검증
+    setCardNumberError(value, position);
     updateCardNumber(value, position);
   };
 
@@ -39,13 +51,13 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
     value: string,
     position: PeriodPositionType
   ) => {
-    // 유효성 검증
+    setExpirationPeriodError(value, position);
     updateExpirationPeriod(value, position);
   };
 
   const handleCvcNumberChange = (value: string) => {
-    // 유효성 검증
-    setCvcNumber(value);
+    setCvcNumberError(value);
+    updateCvcNumber(value);
   };
 
   const renderInputByType = () => {
@@ -57,7 +69,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={carNumberPlaceholder}
               maxLength={4}
-              isError={error}
+              isError={error.cardNumbers.first}
               value={cardNumbers.first}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleCardNumberChange(e.target.value, CARD_POSITION.first)
@@ -66,7 +78,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={carNumberPlaceholder}
               maxLength={4}
-              isError={error}
+              isError={error.cardNumbers.second}
               value={cardNumbers.second}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleCardNumberChange(e.target.value, CARD_POSITION.second)
@@ -75,7 +87,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={carNumberPlaceholder}
               maxLength={4}
-              isError={error}
+              isError={error.cardNumbers.third}
               value={cardNumbers.third}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleCardNumberChange(e.target.value, CARD_POSITION.third)
@@ -84,7 +96,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={carNumberPlaceholder}
               maxLength={4}
-              isError={error}
+              isError={error.cardNumbers.fourth}
               value={cardNumbers.fourth}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleCardNumberChange(e.target.value, CARD_POSITION.fourth)
@@ -101,7 +113,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={monthPlaceholder}
               maxLength={2}
-              isError={error}
+              isError={error.expirationPeriod.month}
               value={expirationPeriod.month}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleExpirationPeriodChange(
@@ -113,7 +125,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
             <Input
               placeholder={yearPlaceholder}
               maxLength={2}
-              isError={error}
+              isError={error.expirationPeriod.year}
               value={expirationPeriod.year}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleExpirationPeriodChange(
@@ -131,7 +143,7 @@ function InputGroup({ type, error, setError }: InputGroupProps) {
           <Input
             placeholder={cvcPlaceholder}
             maxLength={3}
-            isError={error}
+            isError={error.cvcNumber}
             value={cvcNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCvcNumberChange(e.target.value)
