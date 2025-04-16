@@ -11,18 +11,29 @@ function CardNumberInputField() {
   });
 
   const [cardType, setCardType] = useState<'visa' | 'master' | null>(null);
+  const [isError, setIsError] = useState({
+    cardNumberPart1: false,
+    cardNumberPart2: false,
+    cardNumberPart3: false,
+    cardNumberPart4: false,
+  });
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     const numericValue = value.replace(/[^0-9]/g, '');
 
     if (numericValue.length <= 4) {
-      if (name === 'cardNumberPart1' && value.length <= 2) {
-        if (value[0] === '4') setCardType('visa');
-        else if (value >= '51' && value <= '55') setCardType('master');
-        else setCardType(null);
+      if (name === 'cardNumberPart1') {
+        setIsError((prevValue) => ({ ...prevValue, [name]: false }));
+        if (value.length <= 2) {
+          if (value[0] === '4') setCardType('visa');
+          else if (value >= '51' && value <= '55') setCardType('master');
+          else setCardType(null);
+        } else if (cardType === null) {
+          setIsError((prevValue) => ({ ...prevValue, [name]: true }));
+        }
       }
-      setInputValue({ ...inputValue, [name]: numericValue });
+      setInputValue((prevValue) => ({ ...prevValue, [name]: numericValue }));
     }
   };
 
@@ -34,6 +45,7 @@ function CardNumberInputField() {
         value={inputValue.cardNumberPart1}
         onChange={onChange}
         name="cardNumberPart1"
+        isError={isError.cardNumberPart1}
       />
       <Input
         inputMode="numeric"
@@ -41,6 +53,7 @@ function CardNumberInputField() {
         value={inputValue.cardNumberPart2}
         onChange={onChange}
         name="cardNumberPart2"
+        isError={isError.cardNumberPart2}
       />
       <Input
         inputMode="numeric"
@@ -48,6 +61,7 @@ function CardNumberInputField() {
         value={inputValue.cardNumberPart3}
         onChange={onChange}
         name="cardNumberPart3"
+        isError={isError.cardNumberPart3}
       />
       <Input
         inputMode="numeric"
@@ -55,6 +69,7 @@ function CardNumberInputField() {
         value={inputValue.cardNumberPart4}
         onChange={onChange}
         name="cardNumberPart4"
+        isError={isError.cardNumberPart4}
       />
     </BaseInputField>
   );
