@@ -9,13 +9,24 @@
   --color-black: #000000;
 }
 
+html body {
+  min-width: 300px;
+}
+
+body {
+  padding: 20px;
+}
+
 .App {
-  width: 376px;
+  max-width: 300px;
+  width: 100%;
   justify-self: center;
   display: flex;
   flex-direction: column;
+  padding: 50px 0;
 }
 
 .card-input {
+  width: 100%;
   justify-self: center;
 }
