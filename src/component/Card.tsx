@@ -41,6 +41,7 @@ const CardInformation = styled.div`
   font-size: var(--font-size-subheader);
   font-weight: var(--font-weight-caption);
   letter-spacing: 2.56px;
+  min-width: 40px;
 `;
 
 const CardNumberContainer = styled.div`
@@ -61,18 +62,10 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
       {cardNumber && (
         <>
           <CardNumberContainer>
-            {cardNumber.first && (
-              <CardInformation>{cardNumber.first}</CardInformation>
-            )}
-            {cardNumber.second && (
-              <CardInformation>{cardNumber.second}</CardInformation>
-            )}
-            {cardNumber.third && (
-              <CardInformation>{cardNumber.third}</CardInformation>
-            )}
-            {cardNumber.fourth && (
-              <CardInformation>{cardNumber.fourth}</CardInformation>
-            )}
+            <CardInformation>{cardNumber.first}</CardInformation>
+            <CardInformation>{cardNumber.second}</CardInformation>
+            <CardInformation>{cardNumber.third}</CardInformation>
+            <CardInformation>{cardNumber.fourth}</CardInformation>
           </CardNumberContainer>
 
           {cardNumber.MM && cardNumber.YY && (
