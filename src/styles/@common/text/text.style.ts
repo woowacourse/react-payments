@@ -17,3 +17,12 @@ export const sectionTitleSubText = css`
   color: ${theme.color.gray};
   ${theme.font.cardNumberInput.caption}
 `;
+
+export const errorMessageStyle = css`
+  color: ${theme.color.red};
+  ${theme.font.cardNumberInput.caption};
+`;
+
+export const errorInputStyle = css`
+  border: 1px solid ${theme.color.red};
+`;
