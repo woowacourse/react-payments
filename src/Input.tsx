@@ -38,7 +38,7 @@ function Input({
   isError,
   value,
   name,
-  type,
+  inputMode,
   onChange,
   onBlur,
 }: {
@@ -46,7 +46,7 @@ function Input({
   isError?: boolean;
   value: string;
   name: string;
-  type: 'text' | 'number';
+  inputMode: 'text' | 'numeric';
   onChange: (e: ChangeEvent) => void;
   onBlur?: (e: ChangeEvent) => void;
 }) {
@@ -54,10 +54,11 @@ function Input({
     <StyledInput
       placeholder={placeholder}
       value={value}
+      inputMode={inputMode}
       $isError={isError ?? false}
       onChange={onChange}
       name={name}
-      type={type}
+      type="text"
       onBlur={onBlur}
     ></StyledInput>
   );

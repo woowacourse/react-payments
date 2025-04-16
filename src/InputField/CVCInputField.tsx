@@ -9,13 +9,16 @@ function CVCInputField() {
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    if (value.length <= 3) setInputValue({ ...inputValue, [name]: value });
+    const numericValue = value.replace(/[^0-9]/g, '');
+
+    if (numericValue.length <= 3)
+      setInputValue({ ...inputValue, [name]: numericValue });
   };
 
   return (
     <BaseInputField label="CVC">
       <Input
-        type="number"
+        inputMode="numeric"
         placeholder="123"
         value={inputValue.CVCPart1}
         onChange={onChange}

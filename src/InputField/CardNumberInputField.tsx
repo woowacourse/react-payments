@@ -12,34 +12,38 @@ function CardNumberInputField() {
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    if (value.length <= 4) setInputValue({ ...inputValue, [name]: value });
+    const numericValue = value.replace(/[^0-9]/g, '');
+    console.log(value, numericValue);
+
+    if (numericValue.length <= 4)
+      setInputValue({ ...inputValue, [name]: numericValue });
   };
 
   return (
     <BaseInputField label="카드 번호">
       <Input
-        type="number"
+        inputMode="numeric"
         placeholder="1234"
         value={inputValue.CardNumberPart1}
         onChange={onChange}
         name="CardNumberPart1"
       />
       <Input
-        type="number"
+        inputMode="numeric"
         placeholder="1234"
         value={inputValue.CardNumberPart2}
         onChange={onChange}
         name="CardNumberPart2"
       />
       <Input
-        type="number"
+        inputMode="numeric"
         placeholder="1234"
         value={inputValue.CardNumberPart3}
         onChange={onChange}
         name="CardNumberPart3"
       />
       <Input
-        type="number"
+        inputMode="numeric"
         placeholder="1234"
         value={inputValue.CardNumberPart4}
         onChange={onChange}
