@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"; 
 import InputContainer from "../InputContainer/InputContainer"; 
-import { validateCardNumbers } from "../../domain/validate"; 
+import { validateCardNumbers, validateFirstCardNumbers } from "../../domain/validate"; 
 
 type CardNumbersInputProps = {
   cardNumbers: string[];
@@ -20,15 +20,22 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
             const newCardNumbers = [...cardNumbers]; 
             newCardNumbers[index] = e.target.value; 
             setCardNumbers(newCardNumbers); 
-      
+            
+            validateFirstCardNumbers(newCardNumbers[0])
             validateCardNumbers(value, 4, name); 
             setHelperText('');
             setErrorIndex(null);
         } catch (error: unknown) { 
             if(error instanceof Error) {
-                setHelperText(error.message);
-                setErrorIndex(index);
+              if(error.message === '유효하지 않은 카드번호입니다.') {
+                inputRefs.current[0]?.focus();
+                setErrorIndex(0);
+              }
+              else {
                 inputRefs.current[index]?.focus();
+                setErrorIndex(index);
+              }
+                setHelperText(error.message);
             }
         }
     };
@@ -47,7 +54,9 @@ const CardNumbersInput = ({cardNumbers, setCardNumbers}:CardNumbersInputProps) =
             name={`card${index + 1}`}
             value={value}
             onChange={handleChange(index)}
+            ref={(element) => {inputRefs.current.push(element)}}
             className={`input ${index===errorIndex && 'errorInput'}`}
+            maxLength={4}
           />
         ))}
       </div>

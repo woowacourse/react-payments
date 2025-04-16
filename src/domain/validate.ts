@@ -35,8 +35,10 @@ export const validateCardNumbers = (
   if (!isNumber(number)) throw new Error("숫자로 입력해주세요.");
   if (!numberLength(number, length))
     throw new Error(`${length}자리로 입력해주세요.`);
-  if (name === "card1" && !invalidNumber(number))
-    throw new Error("유효하지 않은 카드번호입니다.");
+};
+
+export const validateFirstCardNumbers = (number: string) => {
+  if (!invalidNumber(number)) throw new Error("유효하지 않은 카드번호입니다.");
 };
 
 export const validateMonth = (month: string, length: number) => {
