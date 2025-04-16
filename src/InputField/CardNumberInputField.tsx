@@ -4,19 +4,26 @@ import Input from '../Input';
 
 function CardNumberInputField() {
   const [inputValue, setInputValue] = useState({
-    CardNumberPart1: '',
-    CardNumberPart2: '',
-    CardNumberPart3: '',
-    CardNumberPart4: '',
+    cardNumberPart1: '',
+    cardNumberPart2: '',
+    cardNumberPart3: '',
+    cardNumberPart4: '',
   });
+
+  const [cardType, setCardType] = useState<'visa' | 'master' | null>(null);
 
   const onChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     const numericValue = value.replace(/[^0-9]/g, '');
-    console.log(value, numericValue);
 
-    if (numericValue.length <= 4)
+    if (numericValue.length <= 4) {
+      if (name === 'cardNumberPart1' && value.length <= 2) {
+        if (value[0] === '4') setCardType('visa');
+        else if (value >= '51' && value <= '55') setCardType('master');
+        else setCardType(null);
+      }
       setInputValue({ ...inputValue, [name]: numericValue });
+    }
   };
 
   return (
@@ -24,30 +31,30 @@ function CardNumberInputField() {
       <Input
         inputMode="numeric"
         placeholder="1234"
-        value={inputValue.CardNumberPart1}
+        value={inputValue.cardNumberPart1}
         onChange={onChange}
-        name="CardNumberPart1"
+        name="cardNumberPart1"
       />
       <Input
         inputMode="numeric"
         placeholder="1234"
-        value={inputValue.CardNumberPart2}
+        value={inputValue.cardNumberPart2}
         onChange={onChange}
-        name="CardNumberPart2"
+        name="cardNumberPart2"
       />
       <Input
         inputMode="numeric"
         placeholder="1234"
-        value={inputValue.CardNumberPart3}
+        value={inputValue.cardNumberPart3}
         onChange={onChange}
-        name="CardNumberPart3"
+        name="cardNumberPart3"
       />
       <Input
         inputMode="numeric"
         placeholder="1234"
-        value={inputValue.CardNumberPart4}
+        value={inputValue.cardNumberPart4}
         onChange={onChange}
-        name="CardNumberPart4"
+        name="cardNumberPart4"
       />
     </BaseInputField>
   );
