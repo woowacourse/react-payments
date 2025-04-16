@@ -43,7 +43,6 @@ const CardGoldChip = styled.div`
 const CardBrandLogo = styled.img`
   width: 36px;
   height: 22px;
-  //임시
 `;
 
 const CardInformation = styled.div`
@@ -61,7 +60,6 @@ const CardNumberContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-// TODO: visa, master 카드 이미지 추가
 const Card = ({ cardNumber, cardType }: CardProps) => {
   return (
     <CardContainer>

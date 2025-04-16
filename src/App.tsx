@@ -1,6 +1,5 @@
 import "./style.css";
 import "./reset.css";
-import Card from "./component/Card";
 
 function App() {
   const cardNumber = {
@@ -13,11 +12,7 @@ function App() {
     CVC: 123,
   };
 
-  return (
-    <>
-      <Card cardNumber={cardNumber} cardType="mastercard" />
-    </>
-  );
+  return <></>;
 }
 
 export default App;
