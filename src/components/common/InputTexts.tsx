@@ -3,17 +3,18 @@ import styled from '@emotion/styled';
 interface InputTextsProps {
   label: string;
   placeholder: string[];
-  setCardNumbers?: React.Dispatch<React.SetStateAction<string[]>>;
-  cardNumbers?: string[];
-  errorMessageRef?: React.RefObject<HTMLDivElement | null>;
+  eventHandler?: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
+  state?: string[];
 }
 
 const InputTexts: React.FC<InputTextsProps> = ({
   label,
   placeholder,
-  setCardNumbers,
-  cardNumbers,
-  errorMessageRef,
+  state,
+  eventHandler,
 }) => {
   return (
     <InputTextsContainer>
@@ -25,29 +26,8 @@ const InputTexts: React.FC<InputTextsProps> = ({
             type="text"
             placeholder={text}
             maxLength={text.length}
-            value={cardNumbers ? cardNumbers[index] : ''}
-            onChange={(e) => {
-              setCardNumbers!((prev) => {
-                const newCardNumbers = [...prev];
-                if (
-                  /^[0-9]*$/.test(e.target.value) &&
-                  e.target.value.length <= text.length
-                ) {
-                  newCardNumbers[index] = e.target.value;
-                  e.target.style.borderColor = '#ccc';
-                  if (errorMessageRef?.current) {
-                    errorMessageRef.current.innerText = ' ';
-                  }
-                } else {
-                  e.target.style.borderColor = 'red';
-                  if (errorMessageRef?.current) {
-                    errorMessageRef.current.innerText =
-                      '숫자만 입력 가능합니다.';
-                  }
-                }
-                return newCardNumbers;
-              });
-            }}
+            value={state ? state[index] : ''}
+            onChange={(e) => eventHandler!(e, index)}
           />
         ))}
       </Row>

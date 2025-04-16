@@ -14,6 +14,28 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
 }) => {
   const errorMessageRef = useRef<HTMLDivElement>(null);
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setCardNumbers((prev) => {
+      const newState = [...prev];
+      if (/^[0-9]*$/.test(e.target.value) && e.target.value.length <= 4) {
+        newState[index] = e.target.value;
+        e.target.style.borderColor = '#ccc';
+        if (errorMessageRef?.current) {
+          errorMessageRef.current.innerText = '';
+        }
+      } else {
+        e.target.style.borderColor = 'red';
+        if (errorMessageRef?.current) {
+          errorMessageRef.current.innerText = '숫자만 입력 가능합니다.';
+        }
+      }
+      return newState;
+    });
+  };
+
   return (
     <CardNumbersContainer>
       <InputLabels
@@ -23,11 +45,10 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
       <InputTexts
         label="카드 번호"
         placeholder={['1234', '1234', '1234', '1234']}
-        setCardNumbers={setCardNumbers}
-        cardNumbers={cardNumbers}
-        errorMessageRef={errorMessageRef}
+        eventHandler={handleInputChange}
+        state={cardNumbers}
       />
-      <ErrorMessage ref={errorMessageRef}> </ErrorMessage>
+      <ErrorMessage ref={errorMessageRef}></ErrorMessage>
     </CardNumbersContainer>
   );
 };
