@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import React from 'react';
 
 interface InputTextsProps {
   label: string;
@@ -8,6 +9,7 @@ interface InputTextsProps {
     index: number
   ) => void;
   state?: string[];
+  errors?: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -17,6 +19,7 @@ const InputTexts: React.FC<InputTextsProps> = ({
   placeholder,
   state,
   eventHandler,
+  errors,
   onFocus,
   onBlur,
 }) => {
@@ -34,6 +37,8 @@ const InputTexts: React.FC<InputTextsProps> = ({
             onChange={(e) => eventHandler!(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
+            error={errors ? errors[index] : false}
+            data-testid={`card-number-input-${index}`}
           />
         ))}
       </Row>
@@ -51,8 +56,6 @@ const Label = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: 0%;
-  vertical-align: middle;
   margin-bottom: 8px;
 `;
 
@@ -65,10 +68,14 @@ const Row = styled.div`
   gap: 10px;
 `;
 
-const Input = styled.input`
+interface InputProps {
+  error?: boolean;
+}
+
+const Input = styled.input<InputProps>`
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid ${(props) => (props.error ? 'red' : '#ccc')};
   border-radius: 2px;
   font-size: 11px;
   outline: none;
