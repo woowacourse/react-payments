@@ -1,4 +1,4 @@
-import { MasterCard } from '../../asset/image';
+import { MasterCard, Visa } from '../../asset/image';
 import {
   cardContainer,
   cardContent,
@@ -9,19 +9,51 @@ import {
   cardType,
 } from './Card.style';
 
-function Card() {
+type CardProps = {
+  cardNumber: {
+    first: string;
+    second: string;
+    third: string;
+    forth: string;
+  };
+};
+
+function Card({ cardNumber }: CardProps) {
+  const { first, second, third, forth } = cardNumber;
+
+  const masterCardType =
+    first.startsWith('51') ||
+    first.startsWith('52') ||
+    first.startsWith('53') ||
+    first.startsWith('54') ||
+    first.startsWith('55');
+
+  const visaCardType = first.startsWith('4');
+
+  const checkCardType = () => {
+    if (masterCardType) {
+      return MasterCard;
+    } else if (visaCardType) {
+      return Visa;
+    }
+  };
+
   return (
     <section css={cardLayout}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
-        <img css={cardType} src={MasterCard} />
+        {checkCardType() && (
+          <div>
+            <img css={cardType} src={checkCardType() ?? ''} alt="카드 타입" />
+          </div>
+        )}
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          <span css={cardContentText}>1231</span>
-          <span css={cardContentText}>1231</span>
-          <span css={cardContentText}>1231</span>
-          <span css={cardContentText}>1231</span>
+          <span css={cardContentText}>{first}</span>
+          <span css={cardContentText}>{second}</span>
+          <span css={cardContentText}>{third}</span>
+          <span css={cardContentText}>{forth}</span>
         </div>
         <div css={cardContent}>
           <span css={cardContentText}>04/21</span>

@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import {
   sectionTitle,
   sectionTitleSubText,
@@ -10,7 +11,21 @@ import {
   cardNumberInputLayout,
 } from './CardNumberInput.style';
 
-function CardNumberInput() {
+//51~55로 시작하면 마스터카드
+//4로 시작하면 비자카드
+//그 외로 시작하면 alert띄우고 값 리셋
+
+type CardNumberInputProps = {
+  cardNumber: {
+    first: string;
+    second: string;
+    third: string;
+    forth: string;
+  };
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+function CardNumberInput({ cardNumber, onChange }: CardNumberInputProps) {
   return (
     <div css={cardNumberInputLayout}>
       <div css={sectionTitle}>
@@ -22,10 +37,34 @@ function CardNumberInput() {
       <div css={cardNumberInputContainer}>
         <Input.Label>카드 번호</Input.Label>
         <article css={cardNumberInputInputContainer}>
-          <Input />
-          <Input />
-          <Input />
-          <Input />
+          <Input
+            type="text"
+            name="first"
+            maxLength={4}
+            value={cardNumber.first}
+            onChange={onChange}
+          />
+          <Input
+            type="text"
+            name="second"
+            maxLength={4}
+            value={cardNumber.second}
+            onChange={onChange}
+          />
+          <Input
+            type="text"
+            name="third"
+            maxLength={4}
+            value={cardNumber.third}
+            onChange={onChange}
+          />
+          <Input
+            type="text"
+            name="forth"
+            maxLength={4}
+            value={cardNumber.forth}
+            onChange={onChange}
+          />
         </article>
       </div>
     </div>
