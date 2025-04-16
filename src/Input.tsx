@@ -21,6 +21,16 @@ const StyledInput = styled.input<{ $isError: boolean }>`
     font-size: 11px;
     color: #acacac;
   }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
 `;
 
 function Input({
@@ -28,12 +38,14 @@ function Input({
   isError,
   value,
   name,
+  type,
   onChange,
 }: {
   placeholder: string;
   isError?: boolean;
   value: string;
   name: string;
+  type: 'text' | 'number';
   onChange: (e: ChangeEvent) => void;
 }) {
   return (
@@ -43,6 +55,7 @@ function Input({
       $isError={isError ?? false}
       onChange={onChange}
       name={name}
+      type={type}
     ></StyledInput>
   );
 }

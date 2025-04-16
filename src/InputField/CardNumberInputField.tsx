@@ -18,24 +18,28 @@ function CardNumberInputField() {
   return (
     <BaseInputField label="카드 번호">
       <Input
+        type="number"
         placeholder="1234"
         value={inputValue.CardNumberPart1}
         onChange={onChange}
         name="CardNumberPart1"
       />
       <Input
+        type="number"
         placeholder="1234"
         value={inputValue.CardNumberPart2}
         onChange={onChange}
         name="CardNumberPart2"
       />
       <Input
+        type="number"
         placeholder="1234"
         value={inputValue.CardNumberPart3}
         onChange={onChange}
         name="CardNumberPart3"
       />
       <Input
+        type="number"
         placeholder="1234"
         value={inputValue.CardNumberPart4}
         onChange={onChange}
