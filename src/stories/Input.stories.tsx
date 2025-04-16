@@ -1,10 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '../components/common/Input';
 import { useState } from 'react';
+
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Input } from '@/components/common/Input';
 
 const meta = {
   title: 'common/Input',
   component: Input,
+  tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -13,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 0,
+    value: '',
     disabled: true,
     minLength: 0,
     maxLength: 10,
@@ -27,11 +30,11 @@ export const Default: Story = {
   },
   render: (args) => {
     // TODO : useInput 커스텀 훅
-    const [value, setValue] = useState<number>(args.value ?? 0);
+    const [value, setValue] = useState<string>(args.value ?? '');
     return (
       <Input
         value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={(e) => setValue(e.target.value)}
         disabled={args.disabled}
         minLength={args.minLength}
         maxLength={args.maxLength}

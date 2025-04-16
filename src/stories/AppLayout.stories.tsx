@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AppLayout } from '../components/common/AppLayout';
-import { Text } from '../components/common/Text';
+
+import { AppLayout } from '@/components/common/AppLayout';
+import { Text } from '@/components/common/Text';
 
 const meta = {
   title: 'common/AppLayout',
   component: AppLayout,
+  tags: ['autodocs'],
 } satisfies Meta<typeof AppLayout>;
 
 export default meta;

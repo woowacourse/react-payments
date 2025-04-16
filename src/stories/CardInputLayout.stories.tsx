@@ -1,11 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { CardInputLayout } from '../components/features/CardInputLayout';
-import { Input } from '../components/common/Input';
 import { useState } from 'react';
+
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Input } from '@/components/common/Input';
+import { CardInputLayout } from '@/components/features/CardInputLayout';
 
 const meta = {
   title: 'common/CardInputLayout',
   component: CardInputLayout,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardInputLayout>;
 
 export default meta;
@@ -19,13 +22,13 @@ export const Default: Story = {
     label: '카드 번호',
   },
   render: (args) => {
-    const [value, _] = useState<number[]>([0, 0, 0, 0]);
+    const [value, _] = useState<string[]>(['', '', '', '']);
     return (
       <CardInputLayout {...args}>
         {Array.from({ length: 4 }, (_, i) => (
           <Input
             key={i}
-            value={value[i - 1]}
+            value={value[i]}
             minLength={1}
             maxLength={4}
             placeholder="0000"

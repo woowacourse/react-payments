@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Text } from '../components/common/Text';
+
+import { Text } from '@/components/common/Text';
 
 const meta = {
   title: 'common/Text',
   component: Text,
+  tags: ['autodocs'],
 } satisfies Meta<typeof Text>;
 
 export default meta;
