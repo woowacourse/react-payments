@@ -56,6 +56,20 @@ const AddCard = () => {
     cvc: "",
   });
 
+  const justifyBrandLogo = (cardNumber: number) => {
+    if (cardNumber.toString().startsWith("0")) return "default";
+    if (cardNumber.toString().startsWith("4")) return "visa";
+
+    if (
+      cardNumber.toString().startsWith("51") ||
+      cardNumber.toString().startsWith("52")
+    )
+      return "mastercard";
+    if (cardNumber >= 2221 && cardNumber <= 2720) return "mastercard";
+
+    return "default";
+  };
+
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
     message: string
@@ -68,7 +82,12 @@ const AddCard = () => {
 
   return (
     <Wrap>
-      <Card cardNumber={cardInput} cardType="visa" />
+      <Card
+        cardNumber={cardInput}
+        cardType={
+          cardInput.first ? justifyBrandLogo(cardInput.first) : "default"
+        }
+      />
       <Form>
         <Description
           headText="결제할 카드 번호를 입력해 주세요."

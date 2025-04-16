@@ -5,7 +5,7 @@ import { maskingNumber } from "../util/maskingNumber";
 
 interface CardProps {
   cardNumber: CardInputProps | null;
-  cardType: "visa" | "mastercard";
+  cardType: "visa" | "mastercard" | "default";
 }
 
 const CardContainer = styled.div`
