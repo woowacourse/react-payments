@@ -1,25 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Text from "../Text/Text";
-
+import { InputFieldProps } from "../../types/inputFieldDataType";
 import Input from "../Input/Input";
 import { useState } from "react";
-
-type InputFieldProps = {
-  label: string;
-  inputNumber: number;
-  inputProps: {
-    placeholder: string[];
-    maxLength: number;
-  };
-  cardInformation: {
-    uniqueNumber: string[];
-    expirationDate: string[];
-    cvcNumber: string[];
-  };
-  setCardInformation: (newValue: InputFieldProps["cardInformation"]) => void;
-  informationType: "uniqueNumber" | "expirationDate" | "cvcNumber";
-};
 
 const InputField = ({
   label,
