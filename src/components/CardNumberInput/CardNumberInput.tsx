@@ -32,7 +32,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
           <Input
             value={value}
             onChange={(e) => onChange(e, idx)}
-            maxLength={0}
+            maxLength={4}
             placeHolder={'1234'}
             isError={false}
           />
