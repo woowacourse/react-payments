@@ -3,4 +3,5 @@
   border: var(--color-input) 1px solid;
   border-radius: 4px;
   height: 32px;
+  box-sizing: border-box;
 }
