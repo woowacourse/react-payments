@@ -1,4 +1,4 @@
-import './CardInfoSection.css';
+import './cardInfoSection.css';
 import CustomInput from '../../../shared/ui/CustomInput';
 import { CustomInputProps } from '../../../shared/type/types';
 

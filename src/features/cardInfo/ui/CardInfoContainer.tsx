@@ -1,4 +1,4 @@
-import './CardInfoContainer.css';
+import './cardInfoContainer.css';
 import CardInfoSection from './CardInfoSection';
 import { cardInfoSectionData } from '../data/cardInfoSectionData';
 
