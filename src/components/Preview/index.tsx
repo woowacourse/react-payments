@@ -22,12 +22,12 @@ const Preview: React.FC<PreviewProps> = ({
 
   useEffect(() => {
     if (cardNumbers[0].startsWith(VISA_CARD_PREFIXES)) {
-      setCardMethodSrc('/images/visa.svg');
+      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/visa.svg`);
     } else if (
       Number(cardNumbers[0].slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
       Number(cardNumbers[0].slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
     ) {
-      setCardMethodSrc('/images/Mastercard.svg');
+      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/Mastercard.svg`);
     } else {
       setCardMethodSrc('');
     }
