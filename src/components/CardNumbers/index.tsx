@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardNumbersView from './CardNumbersView';
 
 export interface CardNumbersProps {
@@ -13,6 +13,12 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
 
+  useEffect(() => {
+    if (errors.every((error) => error === false)) {
+      setErrorMessage('');
+    }
+  }, [errors]);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -22,9 +28,6 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
       const newState = [...prev];
       if (/^[0-9]*$/.test(value) && value.length <= 4) {
         newState[index] = value;
-        if (errors.every((error) => error === false)) {
-          setErrorMessage('');
-        }
         setErrors((prevErrors) => {
           const newErrors = [...prevErrors];
           newErrors[index] = false;
