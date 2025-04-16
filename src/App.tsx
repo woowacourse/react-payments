@@ -1,9 +1,8 @@
 import styles from './App.module.css';
 import './index.css';
-
 import { useState } from 'react';
-import Input from './components/Input/Input';
 import Card from './components/Card/Card';
+import { InputSection } from './components/InputSection/InputSection';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -24,23 +23,13 @@ export default function App() {
   return (
     <div>
       <Card numbers={cardNumbers} />
-      <div className={styles.titleWrapper}>
-        <h1>결제할 카드 번호를 입력해주세요</h1>
-        <p>본인 명의의 카드만 입력 가능합니다.</p>
-      </div>
-      <p className={styles.inputTitle}>카드 번호</p>
-      <div className={styles.inputWrapper}>
-        {cardNumbers.map((value, index) => (
-          <Input
-            key={index}
-            value={value}
-            isValid={cardValid[index]}
-            placeholder="1234"
-            onChange={(e) => handleChange(index, e.target.value)}
-          />
-        ))}
-      </div>
-      {cardValid.includes(false) && <p className={styles.errorMessage}>숫자만 입력 가능합니다.</p>}
+      <InputSection.TitleWrapper>
+        <InputSection.Title title="결제할 카드 번호를 입력해주세요" />
+        <InputSection.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
+      </InputSection.TitleWrapper>
+      <InputSection.Label text="카드번호" />
+      <InputSection.InputWrapper cardNumbers={cardNumbers} onChange={handleChange} cardValid={cardValid} />
+      {cardValid.includes(false) && <InputSection.Error message={'숫자만 입력 가능합니다.'} />}
     </div>
   );
 }
