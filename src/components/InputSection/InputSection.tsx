@@ -23,21 +23,21 @@ function Error({ message }: { message: string }) {
 }
 
 function InputWrapper({
-  cardNumbers,
+  numbers,
   onChange,
-  cardValid
+  valid
 }: {
-  cardNumbers: string[];
+  numbers: string[];
   onChange: (index: number, value: string) => void;
-  cardValid: boolean[];
+  valid: boolean[];
 }) {
   return (
     <div className={styles.inputWrapper}>
-      {cardNumbers.map((value, index) => (
+      {numbers.map((value, index) => (
         <Input
           key={index}
           value={value}
-          isValid={cardValid[index]}
+          isValid={valid[index]}
           placeholder="1234"
           onChange={(e) => onChange(index, e.target.value)}
         />
