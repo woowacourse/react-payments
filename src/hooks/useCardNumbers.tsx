@@ -6,7 +6,7 @@ export default function useCardNumbers() {
 
   const cardNumbersValidate = (value: string, index: number) => {
     const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value;
+    newCardNumbers[index] = value.slice(0, 4);
     setCardNumbers(newCardNumbers);
 
     const isValidLength = value.length <= 4;

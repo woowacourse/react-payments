@@ -22,7 +22,6 @@ export default function CardCvcNumber({
       <InputNumber
         onChange={handleChange}
         placeholder="123"
-        maxLength={3}
         value={cvcNumbers}
         errorMessage={errorMessage}
       />
