@@ -4,10 +4,21 @@ import { COLORS } from "../../styles/colors";
 type Props = {
 	placeholder?: string;
 	isError?: boolean;
+	value: number | undefined;
+	inputHandler: (value: number) => void;
 };
 
-const Input = ({ placeholder, isError = false }: Props) => {
-	return <TextInput isError={isError} placeholder={placeholder} />;
+const Input = ({ placeholder, isError = false, value, inputHandler }: Props) => {
+	return (
+		<TextInput
+			value={value}
+			isError={isError}
+			placeholder={placeholder}
+			onChange={(e) => {
+				inputHandler(Number(e.target.value));
+			}}
+		/>
+	);
 };
 
 const TextInput = styled.input<{ isError: boolean }>(

@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { ReactNode } from "react";
 
 type Props = {
-	text: string;
+	children: ReactNode;
 	color?: string;
 };
-const Description = ({ text, color = "#8B95A1" }: Props) => {
-	return <DescriptionText color={color}>{text}</DescriptionText>;
+const Description = ({ children, color = "#8B95A1" }: Props) => {
+	return <DescriptionText color={color}>{children}</DescriptionText>;
 };
 
 const DescriptionText = styled.div`

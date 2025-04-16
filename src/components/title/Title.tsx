@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { ReactNode } from "react";
 
-const Title = ({ text }: { text: string }) => {
-	return <TitleText>{text}</TitleText>;
+const Title = ({ children }: { children: ReactNode }) => {
+	return <TitleText>{children}</TitleText>;
 };
 
 export default Title;

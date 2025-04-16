@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Card = ({ cardNumbers }: { cardNumbers: string[] }) => {
+const Card = ({ cardNumbers }: { cardNumbers?: string[] }) => {
 	// none:0, mastercard: 1, visa: 2
 	const [badgeBrand, setBadgeBrand] = useState(0);
 
