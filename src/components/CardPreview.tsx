@@ -4,9 +4,10 @@ import VisaCard from './logo/VisaCard'
 interface CardPreviewProps {
   cardType: 'visa' | 'master' | ''
   cardNumber: Record<string, string>
+  cardExpirationDate: Record<string, string>
 }
 
-export default function CardPreview({ cardType, cardNumber }: CardPreviewProps) {
+export default function CardPreview({ cardType, cardNumber, cardExpirationDate }: CardPreviewProps) {
   return (
     <div
       style={{
@@ -63,7 +64,7 @@ export default function CardPreview({ cardType, cardNumber }: CardPreviewProps) 
         </span>
       </div>
       <div>
-        <span>04/21</span>
+        <span>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</span>
       </div>
     </div>
   )

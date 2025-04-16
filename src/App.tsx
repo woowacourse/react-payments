@@ -47,7 +47,7 @@ function App() {
           justifyContent: 'center',
         }}
       >
-        <CardPreview cardType={cardType} cardNumber={cardNumber} />
+        <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
       </div>
       <Spacing size={60} />
 
