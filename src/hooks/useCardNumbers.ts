@@ -6,7 +6,7 @@ type CardNumbersKeys =
   | 'thirdNumber'
   | 'fourthNumber';
 
-type CardNumbers = {
+export type CardNumbers = {
   firstNumber: '' | number;
   secondNumber: '' | number;
   thirdNumber: '' | number;
@@ -35,7 +35,7 @@ export type CardNumbersOptions = {
   isError: typeof isError;
 };
 
-type UseCardNumbersOptions = {
+export type UseCardNumbersOptions = {
   errorMessage: string;
 } & CardNumbersOptions;
 

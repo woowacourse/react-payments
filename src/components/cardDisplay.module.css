@@ -1,9 +1,21 @@
-.basic {
+.card {
   width: 212px;
   height: 132px;
-  background-color: black;
   padding: 10px;
   border-radius: 5px;
+  color: white;
+}
+
+.basic {
+  background-color: black;
+}
+.cardData {
+  margin: 4px;
+}
+.cardNumber {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 8px;
 }
 
 .chip {

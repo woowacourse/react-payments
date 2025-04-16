@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type CardExpirationDateKeys = 'month' | 'year';
 
-type CardExpirationDate = {
+export type CardExpirationDate = {
   month: '' | number;
   year: '' | number;
 };
@@ -17,7 +17,7 @@ const isError = {
   year: false,
 };
 
-type useCardExpirationDateOptions = {
+export type useCardExpirationDateOptions = {
   cardExpirationDate: CardExpirationDate;
   setCardExpirationDate: (
     target: CardExpirationDateKeys

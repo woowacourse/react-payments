@@ -1,12 +1,14 @@
-import useCardNumbers from '../../hooks/useCardNumbers';
+import { UseCardNumbersOptions } from '../../hooks/useCardNumbers';
 import ErrorMessage from '../ErrorMessage';
 import InputField from '../InputField';
-
 import InputSection from './InputSection';
 
-const CardNumbersInputSection = () => {
-  const { cardNumbers, setCardNumbers, isError, errorMessage } =
-    useCardNumbers();
+const CardNumbersInputSection = ({
+  cardNumbers,
+  setCardNumbers,
+  isError,
+  errorMessage,
+}: UseCardNumbersOptions) => {
   console.log(cardNumbers, 'cardNumbers');
   return (
     <InputSection
