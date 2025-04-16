@@ -1,5 +1,5 @@
 export const checkNumber = (value: string) => {
-  if (Number.isInteger(Number(value))) throw new Error(`숫자만 입력 가능합니다.`);
+  if (!Number.isInteger(Number(value))) throw new Error(`숫자만 입력 가능합니다.`);
 };
 
 export const checkValidLength = (value: string, validLength: number) => {
