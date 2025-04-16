@@ -57,7 +57,6 @@ const CardNumberContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-//TODO: 유효기간 입력 로직 수정(한개만 입력해도 적용되도록)
 const Card = ({ cardNumber, cardType }: CardProps) => {
   return (
     <CardContainer>
