@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 import styled from '@emotion/styled';
@@ -11,6 +12,8 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
   cardNumbers,
   setCardNumbers,
 }) => {
+  const errorMessageRef = useRef<HTMLDivElement>(null);
+
   return (
     <CardNumbersContainer>
       <InputLabels
@@ -22,7 +25,9 @@ const CardNumbers: React.FC<CardNumbersProps> = ({
         placeholder={['1234', '1234', '1234', '1234']}
         setCardNumbers={setCardNumbers}
         cardNumbers={cardNumbers}
+        errorMessageRef={errorMessageRef}
       />
+      <ErrorMessage ref={errorMessageRef}> </ErrorMessage>
     </CardNumbersContainer>
   );
 };
@@ -34,5 +39,14 @@ const CardNumbersContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  gap: 16px;
+`;
+
+const ErrorMessage = styled.div`
+  font-weight: 400;
+  font-size: 9.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: red;
+  height: 9.5px;
 `;

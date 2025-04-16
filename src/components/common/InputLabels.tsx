@@ -7,17 +7,18 @@ interface InputLabelsProps {
 
 const InputLabels: React.FC<InputLabelsProps> = ({ title, caption }) => {
   return (
-    <Width100>
+    <InputLabelsContainer>
       <Title>{title}</Title>
       <Caption>{caption || ''}</Caption>
-    </Width100>
+    </InputLabelsContainer>
   );
 };
 
 export default InputLabels;
 
-const Width100 = styled.div`
+const InputLabelsContainer = styled.div`
   width: 100%;
+  margin-bottom: 16px;
 `;
 
 const Title = styled.h2`

@@ -5,6 +5,7 @@ interface InputTextsProps {
   placeholder: string[];
   setCardNumbers?: React.Dispatch<React.SetStateAction<string[]>>;
   cardNumbers?: string[];
+  errorMessageRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 const InputTexts: React.FC<InputTextsProps> = ({
@@ -12,9 +13,10 @@ const InputTexts: React.FC<InputTextsProps> = ({
   placeholder,
   setCardNumbers,
   cardNumbers,
+  errorMessageRef,
 }) => {
   return (
-    <Width100>
+    <InputTextsContainer>
       <Label>{label}</Label>
       <Row>
         {placeholder.map((text, index) => (
@@ -27,20 +29,35 @@ const InputTexts: React.FC<InputTextsProps> = ({
             onChange={(e) => {
               setCardNumbers!((prev) => {
                 const newCardNumbers = [...prev];
-                newCardNumbers[index] = e.target.value;
+                if (
+                  /^[0-9]*$/.test(e.target.value) &&
+                  e.target.value.length <= text.length
+                ) {
+                  newCardNumbers[index] = e.target.value;
+                  e.target.style.borderColor = '#ccc';
+                  if (errorMessageRef?.current) {
+                    errorMessageRef.current.innerText = ' ';
+                  }
+                } else {
+                  e.target.style.borderColor = 'red';
+                  if (errorMessageRef?.current) {
+                    errorMessageRef.current.innerText =
+                      '숫자만 입력 가능합니다.';
+                  }
+                }
                 return newCardNumbers;
               });
             }}
           />
         ))}
       </Row>
-    </Width100>
+    </InputTextsContainer>
   );
 };
 
 export default InputTexts;
 
-const Width100 = styled.div`
+const InputTextsContainer = styled.div`
   width: 100%;
 `;
 

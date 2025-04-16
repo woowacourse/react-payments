@@ -9,10 +9,7 @@ const ExpirationPeriod = () => {
         title="카드 유효기간을 입력해 주세요"
         caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       />
-      <InputTexts
-        label="유효기간"
-        placeholder={['MM', 'YY']}
-      />
+      <InputTexts label="유효기간" placeholder={['MM', 'YY']} />
     </ExpirationPeriodContainer>
   );
 };
@@ -24,5 +21,4 @@ const ExpirationPeriodContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  gap: 16px;
 `;

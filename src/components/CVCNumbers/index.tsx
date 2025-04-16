@@ -18,5 +18,4 @@ const CVCNumbersContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  gap: 16px;
 `;
