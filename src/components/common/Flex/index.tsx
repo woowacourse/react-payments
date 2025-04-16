@@ -4,44 +4,65 @@ import { StyledFlexBox } from './Flex.styled';
 
 export type Props = {
   /**
-   * Flex 방향을 설정합니다.
+   * Controls flex direction (row or column)
+   * @default row
    */
   direction?: 'row' | 'column';
   /**
-   * Flex 정렬을 설정합니다.
+   * Controls horizontal alignment of items
+   * @default center
    */
-  justifyContent?: 'flex-start' | 'center' | 'flex-end';
+  justifyContent?:
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+    | 'initial'
+    | 'inherit';
   /**
-   * Flex 정렬을 설정합니다.
+   * Controls vertical alignment of items
+   * @default center
    */
-  alignItems?: 'flex-start' | 'center' | 'flex-end';
+  alignItems?:
+    | 'normal'
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'baseline'
+    | 'stretch'
+    | 'initial'
+    | 'inherit';
   /**
-   * Flex gap을 설정합니다.
+   * Specifies spacing between flex items
    * @default 0
    */
   gap?: string;
   /**
-   * Flex margin을 설정합니다.
+   * Sets outer spacing around the container
    * @default 0
    */
   margin?: string;
   /**
-   * Flex padding을 설정합니다.
+   * Sets inner spacing within the container
    * @default 0
    */
   padding?: string;
   /**
-   * Flex width를 설정합니다.
+   * Sets container width
    * @default auto
    */
   width?: string;
   /**
-   * Flex height를 설정합니다.
+   * Sets container height
    * @default auto
    */
   height?: string;
   /**
-   * Flex children을 설정합니다.
+   * Required prop for content inside the container
    */
   children: ReactNode;
 } & ComponentProps<'div'>;

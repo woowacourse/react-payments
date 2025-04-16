@@ -7,6 +7,14 @@ const meta = {
   title: 'common/Flex',
   component: Flex,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Flex 컴포넌트는 Flexbox 레이아웃을 구현하기 위한 컴포넌트입니다. 다양한 방향과 정렬 옵션을 지원합니다.',
+      },
+    },
+  },
 } satisfies Meta<typeof Flex>;
 
 export default meta;
