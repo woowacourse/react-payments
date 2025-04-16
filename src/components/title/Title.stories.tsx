@@ -12,6 +12,6 @@ type Story = StoryObj<typeof Title>;
 
 export const Default: Story = {
 	args: {
-		text: "결제할 카드 번호를 입력해 주세요",
+		children: "결제할 카드 번호를 입력해 주세요",
 	},
 };
