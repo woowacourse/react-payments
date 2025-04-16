@@ -1,4 +1,4 @@
-import { ChangeEvent, Children, ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 type inputType = '카드 번호' | '유효기간' | 'CVC';

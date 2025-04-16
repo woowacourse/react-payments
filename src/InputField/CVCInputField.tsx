@@ -15,6 +15,7 @@ function CVCInputField() {
   return (
     <BaseInputField label="CVC">
       <Input
+        type="number"
         placeholder="123"
         value={inputValue.CVCPart1}
         onChange={onChange}

@@ -16,12 +16,14 @@ function ExpirationDateInputField() {
   return (
     <BaseInputField label="유효기간">
       <Input
+        type="number"
         placeholder="MM"
         value={inputValue.ExpirationDatePart1}
         onChange={onChange}
         name="ExpirationDatePart1"
       />
       <Input
+        type="number"
         placeholder="YY"
         value={inputValue.ExpirationDatePart2}
         onChange={onChange}
