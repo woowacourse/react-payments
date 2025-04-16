@@ -16,14 +16,14 @@ type Story = StoryObj<typeof InputField>;
 export const Default: Story = {
 	args: {
 		label: "유효기간",
-		inputs: [<Input placeholder="MM" />, <Input placeholder="YY" />],
+		inputs: [<Input placeholder="MM" value="" inputHandler={() => {}} />, <Input placeholder="YY" value="" inputHandler={() => {}} />],
 	},
 };
 
 export const Error: Story = {
 	args: {
 		label: "유효기간",
-		inputs: [<Input placeholder="MM" />, <Input placeholder="YY" />],
-		errorMessage: <Description text="숫자만 입력 가능합니다." color={COLORS.ERROR} />,
+		inputs: [<Input placeholder="MM" value="" inputHandler={() => {}} isError={true} />, <Input placeholder="YY" value="" inputHandler={() => {}} />],
+		errorMessage: <Description color={COLORS.ERROR}>숫자만 입력 가능합니다.</Description>,
 	},
 };
