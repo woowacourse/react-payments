@@ -50,7 +50,7 @@
 
 - [x] 프로젝트 초기 세팅(emotion 설치, npm install, storybook 세팅)
 - [x] cardInformation domain 생성
-- [ ] component 생성
+- [x] component 생성
   - [x] Input 컴포넌트 구현
   - [x] Input 컴포넌트 스토리북 생성
   - [x] InputField 컴포넌트 구현(label, input, error label)
@@ -61,6 +61,7 @@
   - [x] FormContainer 컴포넌트 구현
   - [x] FormContainer 컴포넌트 스토리북 생성
   - [ ] PreviewContainer 컴포넌트 구현
+  - [x] PreviewComponent 컴포넌트 퍼블리싱
   - [x] text 컴포넌트 구현
 - [ ] domain 상태 관리 (preview, form 상태 동기화)
 
