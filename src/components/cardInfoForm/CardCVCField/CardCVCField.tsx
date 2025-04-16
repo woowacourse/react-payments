@@ -3,7 +3,7 @@ import Input from '../../common/Input/Input';
 import { useState } from 'react';
 
 function CardCVCField() {
-  const [cardCVC, setCardCVC] = useState(0);
+  const [cardCVC, setCardCVC] = useState('0');
   const [isError, setIsError] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ function CardCVCField() {
 
     const isValid = value.length < 3;
     setIsError(isValid);
-    setCardCVC(Number.parseInt(value, 10));
+    setCardCVC(value);
   };
 
   return (

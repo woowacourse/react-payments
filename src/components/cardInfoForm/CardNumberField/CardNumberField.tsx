@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 
 interface CardNumberFieldProps {
-  cardNumber: number[];
+  cardNumber: string[];
   isError: boolean[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 }

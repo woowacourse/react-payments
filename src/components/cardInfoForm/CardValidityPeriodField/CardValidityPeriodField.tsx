@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 
 type CardValidityPeriodType = {
-  month: number;
-  year: number;
+  month: string;
+  year: string;
 };
 
 type IsErrorType = {
