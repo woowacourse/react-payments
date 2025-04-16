@@ -8,6 +8,7 @@ interface CardInfoSectionProps {
   subTitle: string;
   inputArr: CustomInputProps[];
   errorMessage?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CardInfoSection({
@@ -16,6 +17,7 @@ export default function CardInfoSection({
   subTitle,
   inputArr,
   errorMessage = '',
+  onChange,
 }: CardInfoSectionProps) {
   return (
     <section className='card-info-section'>
@@ -27,7 +29,7 @@ export default function CardInfoSection({
         <span className='card-info-subtitle'>{subTitle}</span>
         <div className='card-info-input-container'>
           {inputArr.map((input, index) => (
-            <CustomInput key={index} {...input} />
+            <CustomInput key={index} {...input} onChange={onChange} />
           ))}
         </div>
         <span className='error-message'>{errorMessage}</span>
