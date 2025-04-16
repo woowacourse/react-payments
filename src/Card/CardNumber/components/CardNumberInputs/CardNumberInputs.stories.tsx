@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardNumberInputs from "./CardNumberInputs";
-import { INITIAL_CARD_NUMBER_STATE } from "../../constants/card";
+import { INITIAL_CARD_NUMBER_STATE } from "../../constants";
 import useControlledCardNumber from "../../hooks/useControlledCardNumber";
 import { userEvent, expect } from "@storybook/test";
 

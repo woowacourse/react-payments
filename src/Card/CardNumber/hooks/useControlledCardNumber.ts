@@ -1,10 +1,7 @@
 import { useCallback, useState } from "react";
-import { isNaN } from "../utils/isNaN";
-import {
-  type CardNumberInputKey,
-  type CardNumberState,
-  INITIAL_CARD_NUMBER_STATE,
-} from "../constants/card";
+import { isNaN } from "../../../utils/isNaN";
+import type { CardNumberInputKey, CardNumberState } from "../types";
+import { INITIAL_CARD_NUMBER_STATE } from "../constants";
 
 const useControlledCardNumber = () => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
