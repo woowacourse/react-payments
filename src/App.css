@@ -35,6 +35,6 @@
   font-size: 15px;
 }
 
-.errorInput {
+.errorInput:focus {
   outline: 1px solid red;
 }

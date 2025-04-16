@@ -1,7 +1,6 @@
-import { useState } from "react"; 
+import { useRef, useState } from "react"; 
 import InputContainer from "../InputContainer/InputContainer"; 
 import { validateCardNumbers } from "../../domain/validate"; 
-import styles from './CardNumbersInput.module.css'
 
 const TOTAL_INPUTS = 4;
 
@@ -10,6 +9,8 @@ const CardNumbersInput = () => {
     Array(TOTAL_INPUTS).fill("")
   );
   const [helperText, setHelperText] = useState<string>('');
+  const [errorIndex, setErrorIndex] = useState<number | null>(null);
+  const inputRefs = useRef<(HTMLElement | null)[]>([]);
 
   const handleChange = (index: number) => 
     (e: React.ChangeEvent<HTMLInputElement>) => { 
@@ -22,8 +23,13 @@ const CardNumbersInput = () => {
       
             validateCardNumbers(value, 4, name); 
             setHelperText('');
+            setErrorIndex(null);
         } catch (error: unknown) { 
-            if(error instanceof Error) setHelperText(error.message);
+            if(error instanceof Error) {
+                setHelperText(error.message);
+                setErrorIndex(index);
+                inputRefs.current[index]?.focus();
+            }
         }
     };
 
@@ -41,7 +47,7 @@ const CardNumbersInput = () => {
             name={`card${index + 1}`}
             value={value}
             onChange={handleChange(index)}
-            className={`input ${helperText !== '' && 'errorInput'}`}
+            className={`input ${index===errorIndex && 'errorInput'}`}
           />
         ))}
       </div>

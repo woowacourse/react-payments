@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import { validateCVC } from "../../domain/validate";
-import styles from './CVCInput.module.css'
 
 const CVCInput = () => {
   const [CVC, setCVC] = useState("");
   const [helperText, setHelperText] = useState("");
+  const inputRef = useRef<(HTMLElement | null)>(null);
 
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -13,14 +13,17 @@ const CVCInput = () => {
       validateCVC(e.target.value, 3);
       setHelperText("");
     } catch (error: unknown) {
-      if (error instanceof Error) setHelperText(error.message);
+      if (error instanceof Error) {
+        setHelperText(error.message);
+        inputRef.current?.focus();
+      }
     }
   };
   return (
     <InputContainer title="CVC 번호를 입력해 주세요">
       <label className='label'>CVC</label>
       <div className="inputContainer">
-      <input name="cvc" placeholder="123" value={CVC} onChange={handleCVC} className={`input`}/>
+      <input name="cvc" placeholder="123" value={CVC} onChange={handleCVC} className={`input ${helperText !== "" && 'errorInput'}`}/>
       </div>
       <p className="helperText">{helperText}</p>
     </InputContainer>
