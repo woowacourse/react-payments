@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardNumber from './CardNumber';
-import Input from '../../common/Input/Input';
+import CardNumberField from '../CardNumberField/CardNumberField';
 import React, { useState } from 'react';
 
 const meta = {
@@ -20,20 +20,28 @@ export const Default: Story = {
     children: <></>,
   },
   render: (args) => {
-    const [value, setValue] = useState(0);
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [cardNumber, setCardNumber] = useState([1234, 5678, 9012, 3456]);
+    const [isError, setIsError] = useState([false, false, false, false]);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
       const { value } = e.target;
-      setValue(Number.parseInt(value, 10));
+
+      // 유효성 검사 setIsError
+      const isValid = value.length < 4;
+      const copyError = [...isError];
+      copyError[n] = isValid;
+      setIsError(copyError);
+
+      const copy = [...cardNumber];
+      copy[n] = Number.parseInt(value, 10);
+      setCardNumber(copy);
     };
 
     return (
       <CardNumber {...args}>
-        <Input
-          isError={false}
-          type="number"
-          value={value}
-          name="input"
-          placeholder="카드번호를 입력하세요"
+        <CardNumberField
+          cardNumber={cardNumber}
+          isError={isError}
           onChange={onChange}
         />
       </CardNumber>
@@ -48,20 +56,28 @@ export const Error: Story = {
     children: <></>,
   },
   render: (args) => {
-    const [value, setValue] = useState(0);
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [cardNumber, setCardNumber] = useState([123, 567, 901, 3456]);
+    const [isError, setIsError] = useState([true, true, true, false]);
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
       const { value } = e.target;
-      setValue(Number.parseInt(value, 10));
+
+      // 유효성 검사 setIsError
+      const isValid = value.length < 4;
+      const copyError = [...isError];
+      copyError[n] = isValid;
+      setIsError(copyError);
+
+      const copy = [...cardNumber];
+      copy[n] = Number.parseInt(value, 10);
+      setCardNumber(copy);
     };
 
     return (
       <CardNumber {...args}>
-        <Input
-          isError={true}
-          type="number"
-          value={value}
-          name="input"
-          placeholder="카드번호를 입력하세요"
+        <CardNumberField
+          cardNumber={cardNumber}
+          isError={isError}
           onChange={onChange}
         />
       </CardNumber>
