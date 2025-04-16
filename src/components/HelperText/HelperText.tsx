@@ -6,6 +6,8 @@ type HelperTextProps = {
 };
 
 const StyledHelperText = styled.div<HelperTextProps>`
+  font-size: 10px;
+  margin-top: 10px;
   color: ${(props) => {
     switch (props.type) {
       case 'isError':
