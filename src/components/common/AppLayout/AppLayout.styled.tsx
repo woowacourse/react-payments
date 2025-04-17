@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 
 export const StyledAppLayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
   max-width: 600px;
   height: 100dvh;

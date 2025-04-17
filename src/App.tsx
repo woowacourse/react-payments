@@ -1,4 +1,3 @@
-import './App.css';
 import { AppLayout } from './components/common/AppLayout';
 import { Flex } from './components/common/Flex';
 import { CardNumberForm } from './components/features/CardFormFiled/CardNumberForm';
@@ -24,10 +23,10 @@ function App() {
 
   return (
     <AppLayout>
-      <Flex padding="60px 0 0 0 ">
+      <Flex padding="20px 0">
         <CardPreview cardNumbers={cardNumbers} expireDate={expireDate} />
       </Flex>
-      <Flex direction="column" gap="20px" padding="60px 0 0 0">
+      <Flex direction="column" gap="10px" margin="30px 0">
         <CardNumberForm
           cardNumbers={cardNumbers}
           errorMessage={cardErrorMessage}
