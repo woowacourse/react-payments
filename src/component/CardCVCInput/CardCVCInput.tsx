@@ -39,20 +39,22 @@ function CardCVCInput({
       <div css={sectionTitle}>
         <span css={sectionTitleText}>CVC 번호를 입력해 주세요</span>
       </div>
-      <div css={inputContainer}>
-        <Input.Label>CVC</Input.Label>
-        <article css={inputSection}>
-          <Input
-            type="text"
-            name="cvc"
-            maxLength={CARD_CVC.maxLength}
-            value={cardCVC?.toString()}
-            onChange={onChange}
-            css={hasError ? errorInputStyle : undefined}
-          />
-        </article>
-        {hasError && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
-      </div>
+      <Input.Group id="card-cvc">
+        <div css={inputContainer}>
+          <Input.Label>CVC</Input.Label>
+          <article css={inputSection}>
+            <Input
+              type="text"
+              name="cvc"
+              maxLength={CARD_CVC.maxLength}
+              value={cardCVC?.toString()}
+              onChange={onChange}
+              css={hasError ? errorInputStyle : undefined}
+            />
+          </article>
+          {hasError && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
+        </div>
+      </Input.Group>
     </div>
   );
 }
