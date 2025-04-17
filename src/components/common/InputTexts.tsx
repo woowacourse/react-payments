@@ -4,12 +4,9 @@ import React from 'react';
 interface InputTextsProps {
   label: string;
   placeholder: string[];
-  eventHandler?: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  state?: string[];
-  errors?: boolean[];
+  eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  state: string[];
+  errors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
