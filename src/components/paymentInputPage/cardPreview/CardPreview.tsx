@@ -42,7 +42,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
         {isBrand && (
-          <img src={`/${brandName}.png`} className={styles.logoBrand} />
+          <img src={`./${brandName}.png`} className={styles.logoBrand} />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
