@@ -16,7 +16,8 @@ export const Default: Story = {
     value: '',
     placeholder: '1234',
     isValid: true,
-    onChange: action('onChange')
+    onChange: action('onChange'),
+    maxLength: 4
   }
 };
 
