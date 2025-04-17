@@ -6,6 +6,8 @@ import Title from "../title/Title";
 import styled from "styled-components";
 import Input from "../input/Input";
 
+const INPUT_MAX_LENGTH = 2;
+
 type Props = {
 	expirationDate: date;
 	setExpirationDate: Dispatch<SetStateAction<date>>;
@@ -20,7 +22,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	const handleDate = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
-		const regex = /^(?:\d{1,2})?$/;
+		const regex = new RegExp(`^(?:\\d{1,${INPUT_MAX_LENGTH}})?$`);
 
 		if (!regex.test(value)) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
@@ -37,7 +39,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 		if (order === "year") {
 			const year = Number(value);
-			if (year < 25 && year > 0) {
+			if (year < 25 && year >= 0) {
 				setError({ ...error, year: "25년 이상만 입력 가능합니다." });
 				return;
 			}
@@ -47,7 +49,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	};
 
 	const handleFocusout = (order: keyof date, value: string) => {
-		if (value.length < 2) setError({ ...error, [order]: "MM형태로 입력해주세요." });
+		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: "MM형태로 입력해주세요." });
 	};
 
 	const findError = () => {
@@ -58,17 +60,20 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		return "";
 	};
 
-	const expirationInput = [
-		<Input
-			isError={error.month.length > 0 && true}
-			maxLength={2}
-			placeholder="MM"
-			value={expirationDate.month}
-			inputHandler={(value) => handleDate("month", value)}
-			handleFocusout={(numbers) => handleFocusout("month", numbers)}
-		/>,
-		<Input isError={error.year.length > 0 && true} maxLength={2} placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
-	];
+	const expirationInput = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
+		const orderLabels = ["month", "year"] as const;
+
+		return (
+			<Input
+				isError={error[orderLabels[index]].length > 0}
+				placeholder="MM"
+				value={expirationDate[orderLabels[index]]}
+				maxLength={INPUT_MAX_LENGTH}
+				inputHandler={(numbers) => handleDate(orderLabels[index], numbers)}
+				handleFocusout={(numbers) => handleFocusout(orderLabels[index], numbers)}
+			/>
+		);
+	});
 
 	return (
 		<CardNumberWrap>
