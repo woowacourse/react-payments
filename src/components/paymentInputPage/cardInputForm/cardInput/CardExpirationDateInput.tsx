@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
 
 const numbersArray = Array.from({ length: 2 }).fill('') as string[];
-function CardExpirationDateInput({ setExpirationDate }) {
+function CardExpirationDateInput({
+  setExpirationDate,
+}: {
+  setExpirationDate: Dispatch<SetStateAction<string[]>>;
+}) {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
   function onChangeHandler(
