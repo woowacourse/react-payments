@@ -9,28 +9,20 @@ import { useState } from 'react'
 import { SequenceType } from './components/CardNumber'
 import { dateType } from './components/CardExpirationDate'
 
-const getCardType = (cardNumberFirst: string) => {
+export const getCardType = (cardNumberFirst: string) => {
   if (['4'].some((value) => cardNumberFirst.startsWith(value))) return 'visa'
   if (['51', '52', '53', '54', '55'].some((value) => cardNumberFirst.startsWith(value))) return 'master'
   return ''
 }
 
 function App() {
+  // 카드 번호
   const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
     first: '',
     second: '',
     third: '',
     fourth: '',
   })
-  const cardType = getCardType(cardNumber.first)
-
-  const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
-    month: '',
-    year: '',
-  })
-
-  const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
-
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
     first: '',
     second: '',
@@ -38,12 +30,21 @@ function App() {
     fourth: '',
   })
 
+  // 카드 유효기간
+  const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
+    month: '',
+    year: '',
+  })
   const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<dateType, string>>({
     month: '',
     year: '',
   })
 
+  // 카드 CVC 번호
+  const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('')
+
+  const cardType = getCardType(cardNumber.first)
   return (
     <S.Wrapper>
       <S.CardPreviewWrapper>
