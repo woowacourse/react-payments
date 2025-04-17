@@ -80,7 +80,10 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
       }
 
       if (Number(input) === Math.floor(new Date().getFullYear() % 100)) {
-        if (Number(cardExpirationDate.month) < new Date().getMonth() + 1) {
+        if (
+          cardExpirationDate.month !== '' &&
+          Number(cardExpirationDate.month) < new Date().getMonth() + 1
+        ) {
           return { isError: true, errorMessage: '유효기간이 지났습니다' };
         }
       }
