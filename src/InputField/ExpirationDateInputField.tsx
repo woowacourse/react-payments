@@ -6,15 +6,17 @@ import {
   ExpirationDateInputType,
 } from '../config/inputField';
 
-function ExpirationDateInputField({
-  inputValue,
-  setInputValue,
-}: {
+interface ExpirationDateInputFieldProps {
   inputValue: Record<ExpirationDateInputType, string>;
   setInputValue: Dispatch<
     SetStateAction<Record<ExpirationDateInputType, string>>
   >;
-}) {
+}
+
+function ExpirationDateInputField({
+  inputValue,
+  setInputValue,
+}: ExpirationDateInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= 2) {
       if (name === 'expirationDatePart1' && Number(value) > 12) return;
