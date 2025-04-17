@@ -10,17 +10,17 @@ export interface CVCNumbersViewProps {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CVCNumbersView: React.FC<CVCNumbersViewProps> = ({
+const CVCNumbersView = ({
   cvcNumbers,
   errorMessage,
   error,
   handleInputChange,
-}) => {
+}: CVCNumbersViewProps) => {
   return (
-    <Container data-testid="cvcnumbers-component">
-      <InputLabels title="CVC 번호를 입력해 주세요" />
+    <Container data-testid='cvcnumbers-component'>
+      <InputLabels title='CVC 번호를 입력해 주세요' />
       <InputTexts
-        label="CVC"
+        label='CVC'
         placeholder={['123']}
         state={cvcNumbers}
         eventHandler={handleInputChange}

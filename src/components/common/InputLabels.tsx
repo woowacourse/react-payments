@@ -5,7 +5,7 @@ interface InputLabelsProps {
   caption?: string;
 }
 
-const InputLabels: React.FC<InputLabelsProps> = ({ title, caption }) => {
+const InputLabels = ({ title, caption }: InputLabelsProps) => {
   return (
     <InputLabelsContainer>
       <Title>{title}</Title>

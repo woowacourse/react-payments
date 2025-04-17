@@ -15,22 +15,22 @@ export interface ExpirationPeriodViewProps {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const ExpirationPeriodView: React.FC<ExpirationPeriodViewProps> = ({
+const ExpirationPeriodView = ({
   period,
   errorMessage,
   errors,
   handleInputChange,
   onFocus,
   onBlur,
-}) => {
+}: ExpirationPeriodViewProps) => {
   return (
-    <Container data-testid="expiration-component">
+    <Container data-testid='expiration-component'>
       <InputLabels
-        title="카드 유효기간을 입력해 주세요"
-        caption="월/년도(MMYY)를 순서대로 입력해 주세요."
+        title='카드 유효기간을 입력해 주세요'
+        caption='월/년도(MMYY)를 순서대로 입력해 주세요.'
       />
       <InputTexts
-        label="유효기간"
+        label='유효기간'
         placeholder={['MM', 'YY']}
         state={period}
         eventHandler={handleInputChange}

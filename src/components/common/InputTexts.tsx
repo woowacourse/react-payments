@@ -14,7 +14,7 @@ interface InputTextsProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const InputTexts: React.FC<InputTextsProps> = ({
+const InputTexts = ({
   label,
   placeholder,
   state,
@@ -22,7 +22,7 @@ const InputTexts: React.FC<InputTextsProps> = ({
   errors,
   onFocus,
   onBlur,
-}) => {
+}: InputTextsProps) => {
   return (
     <InputTextsContainer>
       <Label>{label}</Label>
@@ -30,7 +30,7 @@ const InputTexts: React.FC<InputTextsProps> = ({
         {placeholder.map((text, index) => (
           <Input
             key={index}
-            type="text"
+            type='text'
             placeholder={text}
             maxLength={text.length}
             value={state ? state[index] : ''}

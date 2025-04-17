@@ -13,11 +13,7 @@ const MASTERCARD_CARD_PREFIXES = {
   MAX: 55,
 } as const;
 
-const Preview: React.FC<PreviewProps> = ({
-  cardNumbers,
-  period,
-  separatorRef,
-}) => {
+const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
   const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
 
   useEffect(() => {
