@@ -7,8 +7,13 @@ import CardCVCNumberSection from "./components/cardCVCNumberSection/CardCVCNumbe
 import { useState } from "react";
 import { ExpirationPeriod, Position } from "./\btypes/index.types";
 
+const StyledApp = styled.div`
+display: flex;
+justify-content : center;
+`
 
-const StyleFrame = styled.div`
+
+const StyledFrame = styled.div`
 display: inline-flex;
 padding: 77px 30px 19px 31px;
 flex-direction: column;
@@ -68,12 +73,14 @@ function App() {
 
 
   return (
-    <StyleFrame>
+    <StyledApp>
+    <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod}  />
       <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
       <CardExpirationPeriodSection expirationPeriod={expirationPeriod} changeExpirationPeriod={changeExpirationPeriod}/>
       <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} />
-    </StyleFrame>
+    </StyledFrame>
+    </StyledApp>
   );
 }
 
