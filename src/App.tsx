@@ -87,7 +87,6 @@ function App() {
     if (isNumber) {
       if (name === 'month' && value.length > 0) {
         const monthValue = Number(value);
-        console.log('monthValue', monthValue);
         if (monthValue < 1 || monthValue > 12) {
           setCardExpirationDateError({
             ...cardExpirationDateError,
@@ -101,7 +100,6 @@ function App() {
         }
       } else if (name === 'year' && value.length > 0) {
         const yearValue = Number(value);
-        console.log('yearValue', yearValue);
         if (yearValue < 25) {
           setCardExpirationDateError({
             ...cardExpirationDateError,
