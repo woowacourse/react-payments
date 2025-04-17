@@ -1,3 +1,4 @@
+import Input from '../@common/Input/Input';
 import { ChangeEvent } from 'react';
 import {
   errorInputStyle,
@@ -6,57 +7,67 @@ import {
   sectionTitleSubText,
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
-import Input from '../@common/Input/Input';
 import {
   cardNumberInputContainer,
   cardNumberInputInputContainer,
 } from '../CardNumberInput/CardNumberInput.style';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
+import { CardExpirationDate, CardExpirationDateError } from '../../hooks';
+import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
 
 type CardPeriodInputProps = {
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardExpirationDate: CardExpirationDate;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorState: {
-    month: boolean;
-    year: boolean;
-  };
+  errorState: CardExpirationDateError;
+  getMonthErrorMessage?: () => string | null | undefined;
+  getYearErrorMessage?: () => string | null | undefined;
 };
 
 function CardPeriodInput({
   cardExpirationDate,
   onChange,
   errorState,
+  getMonthErrorMessage,
+  getYearErrorMessage,
 }: CardPeriodInputProps) {
-  const getMonthErrorMessage = () => {
-    if (!errorState.month) return null;
+  const getMonthError =
+    getMonthErrorMessage ||
+    (() => {
+      if (!errorState.month) return null;
 
-    const monthValue = Number(cardExpirationDate.month);
+      const monthValue = Number(cardExpirationDate.month);
 
-    if (!cardExpirationDate.month || isNaN(monthValue)) {
-      return '숫자만 입력 가능합니다.';
-    }
+      if (!cardExpirationDate.month || isNaN(monthValue)) {
+        return CARD_EXPIRATION_ERROR.onlyNumbers;
+      }
 
-    if (monthValue < 1 || monthValue > 12) {
-      return '1~12 사이의 값을 입력해 주세요.';
-    }
-  };
+      if (
+        monthValue < CARD_EXPIRATION.minMonth ||
+        monthValue > CARD_EXPIRATION.maxMonth
+      ) {
+        return CARD_EXPIRATION_ERROR.invalidMonth;
+      }
 
-  const getYearErrorMessage = () => {
-    if (!errorState.year) return null;
+      return null;
+    });
 
-    const yearValue = Number(cardExpirationDate.year);
+  const getYearError =
+    getYearErrorMessage ||
+    (() => {
+      if (!errorState.year) return null;
 
-    if (!cardExpirationDate.year || isNaN(yearValue)) {
-      return '숫자만 입력 가능합니다.';
-    }
+      const yearValue = Number(cardExpirationDate.year);
 
-    if (yearValue < 25) {
-      return '25년 이상의 값을 입력해 주세요.';
-    }
-  };
+      if (!cardExpirationDate.year || isNaN(yearValue)) {
+        return CARD_EXPIRATION_ERROR.onlyNumbers;
+      }
+
+      if (yearValue < CARD_EXPIRATION.minYear) {
+        return CARD_EXPIRATION_ERROR.invalidYear;
+      }
+
+      return null;
+    });
 
   return (
     <div css={cardPeriodInputLayout}>
@@ -72,7 +83,7 @@ function CardPeriodInput({
           <Input
             type="text"
             name="month"
-            maxLength={2}
+            maxLength={CARD_EXPIRATION.monthLength}
             value={cardExpirationDate.month}
             onChange={onChange}
             css={errorState.month ? errorInputStyle : undefined}
@@ -80,17 +91,17 @@ function CardPeriodInput({
           <Input
             type="text"
             name="year"
-            maxLength={2}
+            maxLength={CARD_EXPIRATION.yearLength}
             value={cardExpirationDate.year}
             onChange={onChange}
             css={errorState.year ? errorInputStyle : undefined}
           />
         </article>
         {errorState.month && (
-          <div css={errorMessageStyle}>{getMonthErrorMessage()}</div>
+          <div css={errorMessageStyle}>{getMonthError()}</div>
         )}
         {errorState.year && !errorState.month && (
-          <div css={errorMessageStyle}>{getYearErrorMessage()}</div>
+          <div css={errorMessageStyle}>{getYearError()}</div>
         )}
       </div>
     </div>
