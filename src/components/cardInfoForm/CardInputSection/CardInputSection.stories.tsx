@@ -20,20 +20,24 @@ export const Default: Story = {
     children: <></>,
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState([1234, 5678, 9012, 3456]);
+    const [cardNumber, setCardNumber] = useState([
+      '1234',
+      '5678',
+      '9012',
+      '3456',
+    ]);
     const [isError, setIsError] = useState([false, false, false, false]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
       const { value } = e.target;
 
-      // 유효성 검사 setIsError
       const isValid = value.length < 4;
       const copyError = [...isError];
       copyError[n] = isValid;
       setIsError(copyError);
 
       const copy = [...cardNumber];
-      copy[n] = Number.parseInt(value, 10);
+      copy[n] = value.slice(0, 4);
       setCardNumber(copy);
     };
 
@@ -48,6 +52,7 @@ export const Default: Story = {
     );
   },
 };
+
 export const Error: Story = {
   args: {
     title: '결제할 카드 번호 입력',
@@ -56,20 +61,19 @@ export const Error: Story = {
     children: <></>,
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState([123, 567, 901, 3456]);
+    const [cardNumber, setCardNumber] = useState(['123', '567', '901', '3456']);
     const [isError, setIsError] = useState([true, true, true, false]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
       const { value } = e.target;
 
-      // 유효성 검사 setIsError
       const isValid = value.length < 4;
       const copyError = [...isError];
       copyError[n] = isValid;
       setIsError(copyError);
 
       const copy = [...cardNumber];
-      copy[n] = Number.parseInt(value, 10);
+      copy[n] = value.slice(0, 4);
       setCardNumber(copy);
     };
 
