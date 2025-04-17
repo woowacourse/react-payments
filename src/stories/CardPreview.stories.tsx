@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../Input';
 import CardPreview from '../CardPreview';
 
 const meta: Meta<typeof CardPreview> = {
