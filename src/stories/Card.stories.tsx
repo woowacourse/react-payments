@@ -13,17 +13,16 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-const cardNumber = {
-  first: null,
-  second: null,
-  third: null,
-  fourth: null,
-  MM: null,
-  YY: null,
-  CVC: null,
-};
-
 const renderBrandCard = (cardType: "default" | "visa" | "mastercard") => {
+  const cardNumber = {
+    first: null,
+    second: null,
+    third: null,
+    fourth: null,
+    MM: null,
+    YY: null,
+    CVC: null,
+  };
   return <Card cardNumber={cardNumber} cardType={cardType} />;
 };
 
@@ -39,13 +38,47 @@ export const Mastercard: Story = {
   render: () => renderBrandCard("mastercard"),
 };
 
-/*
-1. default일때
-2. visa일때
-3. mastercard일때
+export const InputTwoCardNumber: Story = {
+  args: {
+    cardNumber: {
+      first: 1111,
+      second: 2222,
+      third: null,
+      fourth: null,
+      MM: null,
+      YY: null,
+      CVC: null,
+    },
+  },
+  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
+};
 
-1. 카드번호 렌더링 잘 되는지 
-- 2개 입력했을때
-- 4개 입력했을때
-2. 유효기간 렌더링 잘 되는지
-*/
+export const InputFourCardNumber: Story = {
+  args: {
+    cardNumber: {
+      first: 1111,
+      second: 2222,
+      third: 3333,
+      fourth: 4444,
+      MM: null,
+      YY: null,
+      CVC: null,
+    },
+  },
+  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
+};
+
+export const InputExpiration: Story = {
+  args: {
+    cardNumber: {
+      first: 1111,
+      second: 2222,
+      third: 3333,
+      fourth: 4444,
+      MM: 12,
+      YY: 25,
+      CVC: null,
+    },
+  },
+  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
+};
