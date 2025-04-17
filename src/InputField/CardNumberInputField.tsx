@@ -23,9 +23,18 @@ function CardNumberInputField({
   cardType: CardType;
   setCardType: Dispatch<SetStateAction<CardType>>;
 }) {
+  const INPUT_FIELD_TYPE = [
+    'cardNumberPart1',
+    'cardNumberPart2',
+    'cardNumberPart3',
+    'cardNumberPart4',
+  ] as const;
+  type InputFieldType = (typeof INPUT_FIELD_TYPE)[number];
   type ErrorType = 'noneCardType' | 'shortCardSegment';
 
-  const [errorTypes, setErrorTypes] = useState<Record<string, ErrorType[]>>({
+  const [errorTypes, setErrorTypes] = useState<
+    Record<InputFieldType, ErrorType[]>
+  >({
     cardNumberPart1: [],
     cardNumberPart2: [],
     cardNumberPart3: [],
@@ -35,7 +44,7 @@ function CardNumberInputField({
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateCardError = (
-    inputName: string,
+    inputName: InputFieldType,
     errorStatus: { errorType: ErrorType; isError: boolean }
   ) => {
     const currentErrorType = errorTypes[inputName];
@@ -84,7 +93,8 @@ function CardNumberInputField({
 
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    updateCardError(name, {
+
+    updateCardError(name as InputFieldType, {
       errorType: 'shortCardSegment',
       isError: value.length > 0 && value.length < 4,
     });
@@ -97,8 +107,9 @@ function CardNumberInputField({
 
   useEffect(() => {
     const errorStatus = Object.values(errorTypes).find(
-      (errorType) => errorType
+      (errorType) => errorType.length
     );
+
     if (errorStatus && errorStatus?.length !== 0)
       setErrorMessage(ERROR_TYPE_TO_MESSAGE[errorStatus[0]]);
     else setErrorMessage('');
@@ -106,42 +117,17 @@ function CardNumberInputField({
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      <Input
-        type="number"
-        placeholder="1234"
-        value={inputValue.cardNumberPart1}
-        onChange={onChange}
-        onBlur={onBlur}
-        name="cardNumberPart1"
-        isError={Boolean(errorTypes.cardNumberPart1.length)}
-      />
-      <Input
-        type="number"
-        placeholder="1234"
-        value={inputValue.cardNumberPart2}
-        onChange={onChange}
-        onBlur={onBlur}
-        name="cardNumberPart2"
-        isError={Boolean(errorTypes.cardNumberPart2.length)}
-      />
-      <Input
-        type="number"
-        placeholder="1234"
-        value={inputValue.cardNumberPart3}
-        onChange={onChange}
-        onBlur={onBlur}
-        name="cardNumberPart3"
-        isError={Boolean(errorTypes.cardNumberPart3.length)}
-      />
-      <Input
-        type="number"
-        placeholder="1234"
-        value={inputValue.cardNumberPart4}
-        onChange={onChange}
-        onBlur={onBlur}
-        name="cardNumberPart4"
-        isError={Boolean(errorTypes.cardNumberPart4.length)}
-      />
+      {INPUT_FIELD_TYPE.map((inputFieldType) => (
+        <Input
+          type="number"
+          placeholder="1234"
+          value={inputValue[inputFieldType]}
+          onChange={onChange}
+          onBlur={onBlur}
+          name={inputFieldType}
+          isError={Boolean(errorTypes[inputFieldType].length)}
+        />
+      ))}
     </BaseInputField>
   );
 }

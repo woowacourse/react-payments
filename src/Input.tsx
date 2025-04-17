@@ -42,7 +42,6 @@ function Input({
 }) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    console.log(value, name, type);
 
     if (type === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
