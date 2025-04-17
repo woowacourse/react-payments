@@ -24,11 +24,15 @@ export const Default: Story = {
     const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
+      if (value.length > 3) {
+        return;
+      }
+
       const isNotValid =
         value.length < 3 || value.length > 3 || Number(value) < 0;
 
       setIsCardCVCError(isNotValid);
-      setCardCVC(value.slice(0, 3));
+      setCardCVC(value);
     };
     return (
       <CardCVCField
@@ -54,11 +58,15 @@ export const Error: Story = {
     const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
+      if (value.length > 3) {
+        return;
+      }
+
       const isNotValid =
         value.length < 3 || value.length > 3 || Number(value) < 0;
 
       setIsCardCVCError(isNotValid);
-      setCardCVC(value.slice(0, 3));
+      setCardCVC(value);
     };
 
     return (
