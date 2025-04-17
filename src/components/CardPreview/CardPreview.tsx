@@ -74,6 +74,7 @@ const Card = styled.div`
   background: #333333;
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
+  align-self: center;
 `;
 
 const IcChip = styled.div`
