@@ -1,6 +1,8 @@
 import styled from "styled-components"
+import { CardNumber, ExpirationPeriod } from "../../\btypes/index.types"
 import { useState } from "react"
 import { useEffect } from "react"
+
 
 const StyledContainer = styled.div`
 display: flex;
@@ -62,16 +64,8 @@ letter-spacing: 16%;
 color: #FFFFFF;`
 
 type CardPreviewProps = {
-    cardNumber: {
-        first: string,
-        second: string,
-        third: string,
-        fourth : string,
-    }
-    expirationPeriod: {
-        month: string,
-        year : string
-    }
+    cardNumber: CardNumber
+    expirationPeriod: ExpirationPeriod
 }
 
 function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {

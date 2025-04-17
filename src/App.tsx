@@ -32,7 +32,7 @@ type CardNumberState = {
 };
 
 type ExpirationPeriodState = {
-  [key in ExpirationPeriod]: string;
+  [key in keyof ExpirationPeriod]: string;
 }
 
 
@@ -60,7 +60,7 @@ function App() {
     })
   }
 
-  function changeExpirationPeriod(expirationPeriod: ExpirationPeriod, date: string) {
+  function changeExpirationPeriod(expirationPeriod: keyof ExpirationPeriod, date: string) {
     setExpirationPeriod((prev) => {
       prev[expirationPeriod] = date;
       return {...prev}

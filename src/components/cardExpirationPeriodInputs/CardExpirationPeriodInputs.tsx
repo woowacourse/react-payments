@@ -41,7 +41,7 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
         year: "",
     });
 
-    function checkCommonValidation(expirationPeriod: ExpirationPeriod, length: number, number: string) {
+    function checkCommonValidation(expirationPeriod: keyof ExpirationPeriod, length: number, number: string) {
        
 
         if (!isValidLength(number, length)) {
