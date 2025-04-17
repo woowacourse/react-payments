@@ -9,8 +9,13 @@ import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
 
 function App() {
-  const { cardNumber, onChange, checkCardNumberError, isError } =
-    useCardNumber();
+  const {
+    cardNumber,
+    onChange,
+    checkCardNumberError,
+    isError,
+    errorMessage: cardNumberErrorMessage,
+  } = useCardNumber();
 
   const {
     cardValidityPeriod,
@@ -22,19 +27,27 @@ function App() {
   const { cardCVC, isCardCVCError, onChangeCVC, checkCardCVCError } =
     useCardCVC();
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    const DISABLED_KEY = '-+.eE';
+    const { key } = e;
+
+    if (DISABLED_KEY.includes(key)) {
+      e.preventDefault();
+      return;
+    }
+  };
+
   return (
     <AppLayout>
       <CardPreview
         cardNumber={cardNumber}
         cardValidityPeriod={cardValidityPeriod}
       />
-      <CardForm>
+      <CardForm onKeyDown={onKeyDown}>
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
-          errorMessage={
-            checkCardNumberError() ? '카드 번호는 16자리입니다.' : ''
-          }
+          errorMessage={checkCardNumberError() ? cardNumberErrorMessage : ''}
         >
           <CardNumberField
             cardNumber={cardNumber}
