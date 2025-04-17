@@ -62,9 +62,11 @@ function Preview() {
             {cardNumbers.fourth && "*".repeat(cardNumbers.fourth.length)}
           </span>
         </CardNumbersGroupCSS>
-        <span>
-          {expirationPeriod.month}/{expirationPeriod.year}
-        </span>
+        {(expirationPeriod.month || expirationPeriod.year) && (
+          <span>
+            {expirationPeriod.month}/{expirationPeriod.year}
+          </span>
+        )}
       </PreviewCSS>
     </PreviewContainerCSS>
   );
