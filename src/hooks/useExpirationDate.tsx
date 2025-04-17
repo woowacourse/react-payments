@@ -1,4 +1,13 @@
 import { useState } from "react";
+import { isNumber, isValidLength, isValidMonth } from "../validation/validate";
+import { setErrorMessage } from "../utils/setErrorMessage";
+
+const CONSTANT_USE_EXPIRATION_DATE = {
+  IS_VALID_LENGTH_ERROR: "2자리까지 입력 가능합니다.",
+  IS_NUMBER_ERROR: "숫자만 입력 가능합니다.",
+  MONTH_RANGE_ERROR: "1부터 12 사이의 숫자를 입력하세요.",
+  MAX_LENGTH: 2,
+} as const;
 
 export default function useExpirationDate() {
   const [cardExpirationDate, setcardExpirationDate] = useState(["", ""]);
@@ -9,34 +18,40 @@ export default function useExpirationDate() {
     newDate[index] = value.slice(0, 3);
     setcardExpirationDate(newDate);
 
-    const isNumber = /^[0-9]*$/.test(value);
-    const isValidLength = value.length <= 2;
-
-    const newError = [...cardExpirationDateError];
-
-    if (!isValidLength) {
-      newError[index] = "2자리까지 입력 가능합니다.";
-      setError(newError);
+    if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
+      setErrorMessage(
+        cardExpirationDateError,
+        CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
+        index,
+        setError
+      );
       return;
     }
 
-    if (!isNumber) {
-      newError[index] = "숫자만 입력 가능합니다.";
-      setError(newError);
+    if (!isNumber(value)) {
+      setErrorMessage(
+        cardExpirationDateError,
+        CONSTANT_USE_EXPIRATION_DATE.IS_NUMBER_ERROR,
+        index,
+        setError
+      );
       return;
     }
 
-    if (index === 0 && value.length === 2) {
-      const month = Number(value);
-      if (month < 1 || month > 12) {
-        newError[index] = "1부터 12 사이의 숫자를 입력하세요.";
-        setError(newError);
-        return;
-      }
+    if (
+      index === 0 &&
+      value.length === CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH &&
+      !isValidMonth(Number(value))
+    ) {
+      setErrorMessage(
+        cardExpirationDateError,
+        CONSTANT_USE_EXPIRATION_DATE.MONTH_RANGE_ERROR,
+        index,
+        setError
+      );
     }
 
-    newError[index] = "";
-    setError(newError);
+    setErrorMessage(cardExpirationDateError, "", index, setError);
   };
 
   return {

@@ -3,9 +3,9 @@ import CardNumber from "./CardNumber/CarNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import useCardNumbers from "./hooks/useCardNumbers";
 import useExpirationDate from "./hooks/useExpirationDate";
 import useCvcNumber from "./hooks/useCvcNumber";
+import useCardNumbers from "./hooks/useCardNumbers";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
