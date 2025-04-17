@@ -32,6 +32,19 @@ function App() {
 
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
 
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  })
+
+  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<dateType, string>>({
+    month: '',
+    year: '',
+  })
+
+  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('')
   return (
     <div
       css={css`
@@ -54,9 +67,24 @@ function App() {
       <Spacing size={60} />
 
       <form style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
-        <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
-        <CardExpirationDate cardExpirationDate={cardExpirationDate} setCardExpirationDate={setCardExpirationDate} />
-        <CardCVCNumber cardCVCNumber={cardCVCNumber} setCardCVCNumber={setCardCVCNumber} />
+        <CardNumber
+          cardNumber={cardNumber}
+          setCardNumber={setCardNumber}
+          cardNumberErrorMessage={cardNumberErrorMessage}
+          setCardNumberErrorMessage={setCardNumberErrorMessage}
+        />
+        <CardExpirationDate
+          cardExpirationDate={cardExpirationDate}
+          setCardExpirationDate={setCardExpirationDate}
+          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
+          setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
+        />
+        <CardCVCNumber
+          cardCVCNumber={cardCVCNumber}
+          setCardCVCNumber={setCardCVCNumber}
+          cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
+          setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
+        />
       </form>
     </div>
   )

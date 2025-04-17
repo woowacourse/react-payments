@@ -3,11 +3,13 @@ import Label from './common/Label'
 import Input from './common/Input'
 import Spacing from './common/Spacing'
 import ErrorMessage from './common/ErrorMessage'
-import { Dispatch, useState, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>
   setCardNumber: Dispatch<SetStateAction<Record<SequenceType, string>>>
+  cardNumberErrorMessage: Record<SequenceType, string>
+  setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>
 }
 
 export type SequenceType = 'first' | 'second' | 'third' | 'fourth'
@@ -17,16 +19,21 @@ interface HandleInputChangeProps {
   value: string
 }
 
-export default function CardNumber({ cardNumber, setCardNumber }: CardNumberProps) {
-  const [errorMassage, setErrorMassage] = useState('')
+export default function CardNumber({
+  cardNumber,
+  setCardNumber,
+  cardNumberErrorMessage,
+  setCardNumberErrorMessage,
+}: CardNumberProps) {
   const handleInputChange = ({ value, sequence }: HandleInputChangeProps) => {
+    setCardNumber({ ...cardNumber, [sequence]: value })
+
     if (/^[0-9]*$/.test(value)) {
-      setCardNumber({ ...cardNumber, [sequence]: value })
-      setErrorMassage('')
+      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' })
       return
     }
 
-    setErrorMassage('숫자만 입력 가능합니다.')
+    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '숫자만 입력 가능합니다.' })
   }
 
   return (
@@ -51,6 +58,7 @@ export default function CardNumber({ cardNumber, setCardNumber }: CardNumberProp
               sequence: 'first',
             })
           }
+          isError={cardNumberErrorMessage.first !== ''}
         />
         <Input
           placeholder="1234"
@@ -62,6 +70,7 @@ export default function CardNumber({ cardNumber, setCardNumber }: CardNumberProp
               sequence: 'second',
             })
           }
+          isError={cardNumberErrorMessage.second !== ''}
         />
         <Input
           placeholder="1234"
@@ -73,6 +82,7 @@ export default function CardNumber({ cardNumber, setCardNumber }: CardNumberProp
               sequence: 'third',
             })
           }
+          isError={cardNumberErrorMessage.third !== ''}
         />
         <Input
           placeholder="1234"
@@ -84,10 +94,17 @@ export default function CardNumber({ cardNumber, setCardNumber }: CardNumberProp
               sequence: 'fourth',
             })
           }
+          isError={cardNumberErrorMessage.fourth !== ''}
         />
       </div>
       <Spacing size={8} />
-      {errorMassage && <ErrorMessage>{errorMassage}</ErrorMessage>}
+      <ErrorMessage>
+        {
+          Object.entries(cardNumberErrorMessage)
+            .filter(([_, errorMassage]) => errorMassage !== '')
+            .at(0)?.[1]
+        }
+      </ErrorMessage>
     </div>
   )
 }

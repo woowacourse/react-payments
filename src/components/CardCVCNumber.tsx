@@ -4,23 +4,30 @@ import Input from './common/Input'
 import Spacing from './common/Spacing'
 
 import ErrorMessage from './common/ErrorMessage'
-import { Dispatch, useState, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 interface CardCVCNumberProps {
   cardCVCNumber: string
   setCardCVCNumber: Dispatch<SetStateAction<string>>
+  cardCVCNumberErrorMessage: string
+  setCardCVCNumberErrorMessage: Dispatch<SetStateAction<string>>
 }
 
-export default function CardCVCNumber({ cardCVCNumber, setCardCVCNumber }: CardCVCNumberProps) {
-  const [errorMassage, setErrorMassage] = useState('')
+export default function CardCVCNumber({
+  cardCVCNumber,
+  setCardCVCNumber,
+  cardCVCNumberErrorMessage,
+  setCardCVCNumberErrorMessage,
+}: CardCVCNumberProps) {
   const handleInputChange = (value: string) => {
+    setCardCVCNumber(value)
+
     if (/^[0-9]*$/.test(value)) {
-      setCardCVCNumber(value)
-      setErrorMassage('')
+      setCardCVCNumberErrorMessage('')
       return
     }
 
-    setErrorMassage('숫자만 입력 가능합니다.')
+    setCardCVCNumberErrorMessage('숫자만 입력 가능합니다.')
   }
 
   return (
@@ -40,10 +47,11 @@ export default function CardCVCNumber({ cardCVCNumber, setCardCVCNumber }: CardC
           maxLength={3}
           value={cardCVCNumber}
           onChange={(event) => handleInputChange(event.target.value)}
+          isError={cardCVCNumberErrorMessage !== ''}
         />
       </div>
       <Spacing size={8} />
-      {errorMassage && <ErrorMessage>{errorMassage}</ErrorMessage>}
+      <ErrorMessage>{cardCVCNumberErrorMessage}</ErrorMessage>
     </div>
   )
 }

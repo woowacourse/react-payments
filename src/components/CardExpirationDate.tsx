@@ -2,12 +2,14 @@ import Title from './common/Title'
 import Label from './common/Label'
 import Input from './common/Input'
 import Spacing from './common/Spacing'
-import { Dispatch, useState, SetStateAction } from 'react'
 import ErrorMessage from './common/ErrorMessage'
+import { Dispatch, SetStateAction } from 'react'
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<string, string>
   setCardExpirationDate: Dispatch<SetStateAction<Record<string, string>>>
+  cardExpirationDateErrorMessage: Record<string, string>
+  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<string, string>>>
 }
 
 export type dateType = 'month' | 'year'
@@ -17,34 +19,40 @@ interface HandleInputChangeProps {
   value: string
 }
 
-export default function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }: CardExpirationDateProps) {
-  const [errorMassage, setErrorMassage] = useState('')
+export default function CardExpirationDate({
+  cardExpirationDate,
+  setCardExpirationDate,
+  cardExpirationDateErrorMessage,
+  setCardExpirationDateErrorMessage,
+}: CardExpirationDateProps) {
   const handleInputChange = ({ value, dateType }: HandleInputChangeProps) => {
+    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value })
+    setCardExpirationDateErrorMessage({
+      ...cardExpirationDateErrorMessage,
+      [dateType]: '',
+    })
+
     if (!/^[0-9]*$/.test(value)) {
-      setErrorMassage('숫자만 입력 가능합니다.')
+      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: '숫자만 입력 가능합니다.' })
       return
     }
-
-    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value })
 
     const valueAsNumber = parseInt(value, 10)
 
     if (dateType === 'month') {
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
-        setErrorMassage('유효하지 않은 월입니다.')
-        return
+        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: '유효하지 않은 월입니다.' })
       }
-      return
     }
 
     if (dateType === 'year') {
       if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
-        setErrorMassage('유효 기간이 지난 연도입니다.')
-        return
+        setCardExpirationDateErrorMessage({
+          ...cardExpirationDateErrorMessage,
+          [dateType]: '유효 기간이 지난 연도입니다.',
+        })
       }
     }
-
-    setErrorMassage('')
   }
 
   return (
@@ -69,6 +77,7 @@ export default function CardExpirationDate({ cardExpirationDate, setCardExpirati
               dateType: 'month',
             })
           }
+          isError={cardExpirationDateErrorMessage.month !== ''}
         />
         <Input
           placeholder="YY"
@@ -80,10 +89,17 @@ export default function CardExpirationDate({ cardExpirationDate, setCardExpirati
               dateType: 'year',
             })
           }
+          isError={cardExpirationDateErrorMessage.year !== ''}
         />
       </div>
       <Spacing size={8} />
-      {errorMassage && <ErrorMessage>{errorMassage}</ErrorMessage>}
+      <ErrorMessage>
+        {
+          Object.entries(cardExpirationDateErrorMessage)
+            .filter(([_, errorMassage]) => errorMassage !== '')
+            .at(0)?.[1]
+        }
+      </ErrorMessage>
     </div>
   )
 }
