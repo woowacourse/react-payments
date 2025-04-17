@@ -7,7 +7,7 @@ import CardPreview from './components/CardPreview'
 import Spacing from './components/common/Spacing'
 import { useState } from 'react'
 import { SequenceType } from './components/CardNumber'
-import { dateType } from './components/CardExpirationDate'
+import { DateType } from './components/CardExpirationDate'
 import { VISA_CARD_CONDITIONS, MASTER_CARD_CONDITIONS } from './constants'
 
 export const getCardType = (cardNumberFirst: string) => {
@@ -24,7 +24,7 @@ function App() {
     third: '',
     fourth: '',
   })
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<Record<SequenceType, string>>({
     first: '',
     second: '',
     third: '',
@@ -32,11 +32,11 @@ function App() {
   })
 
   // 카드 유효기간
-  const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
+  const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
     month: '',
     year: '',
   })
-  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<dateType, string>>({
+  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
     month: '',
     year: '',
   })

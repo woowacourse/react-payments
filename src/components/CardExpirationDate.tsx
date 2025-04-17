@@ -8,13 +8,13 @@ import { Dispatch, SetStateAction } from 'react'
 import { ERROR_MESSAGE } from '../constants'
 
 interface CardExpirationDateProps {
-  cardExpirationDate: Record<string, string>
-  setCardExpirationDate: Dispatch<SetStateAction<Record<string, string>>>
-  cardExpirationDateErrorMessage: Record<string, string>
-  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<string, string>>>
+  cardExpirationDate: Record<DateType, string>
+  setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>
+  cardExpirationDateErrorMessage: Record<DateType, string>
+  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>
 }
 
-export type dateType = 'month' | 'year'
+export type DateType = 'month' | 'year'
 
 interface HandleInputChangeProps {
   dateType: string
