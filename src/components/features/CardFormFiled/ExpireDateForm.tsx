@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { CardFormFiledProps } from './CardFormFiled.types';
 
-import { CardInputLayout } from '../../common/CardInputLayout';
+import { CardInputLayout } from '@/components/common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
