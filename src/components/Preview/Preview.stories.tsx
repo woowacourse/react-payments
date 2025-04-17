@@ -1,5 +1,45 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Preview from "./Preview";
+import { ReactNode } from "react";
+import { CardContext, CardContextType } from "../../contexts/CardContext";
+
+interface CardProviderProps {
+  children: ReactNode;
+  value: Partial<CardContextType>;
+}
+
+const CustomCardProvider = ({ children, value }: CardProviderProps) => {
+  const defaultValue: CardContextType = {
+    cardNumbers: {
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
+    },
+    updateCardNumber: () => {},
+    expirationPeriod: {
+      month: "",
+      year: "",
+    },
+    updateExpirationPeriod: () => {},
+    cvcNumber: "",
+    updateCvcNumber: () => {},
+  };
+
+  const contextValue = { ...defaultValue, ...value };
+
+  return (
+    <CardContext.Provider value={contextValue}>{children}</CardContext.Provider>
+  );
+};
+
+const withCustomCardProvider = (value: Partial<CardContextType>) => {
+  return (Story: () => ReactNode) => (
+    <CustomCardProvider value={value}>
+      <Story />
+    </CustomCardProvider>
+  );
+};
 
 const meta = {
   title: "Preview",
@@ -11,9 +51,57 @@ export default meta;
 
 type Story = StoryObj<typeof Preview>;
 
-export const Default: Story = {
-  args: {
-    cardNumbers: ["1234", "1233", "1232", "1211"],
-    expirationPeriod: ["02", "13"],
-  },
+export const Empty: Story = {
+  decorators: [withCustomCardProvider({})],
+};
+
+export const VisaCard: Story = {
+  decorators: [
+    withCustomCardProvider({
+      cardNumbers: {
+        first: "4111",
+        second: "1111",
+        third: "1111",
+        fourth: "1111",
+      },
+      expirationPeriod: {
+        month: "02",
+        year: "25",
+      },
+    }),
+  ],
+};
+
+export const MasterCard: Story = {
+  decorators: [
+    withCustomCardProvider({
+      cardNumbers: {
+        first: "5111",
+        second: "2222",
+        third: "3333",
+        fourth: "4444",
+      },
+      expirationPeriod: {
+        month: "11",
+        year: "28",
+      },
+    }),
+  ],
+};
+
+export const PartiallyMaskedCard: Story = {
+  decorators: [
+    withCustomCardProvider({
+      cardNumbers: {
+        first: "1234",
+        second: "5678",
+        third: "91",
+        fourth: "345",
+      },
+      expirationPeriod: {
+        month: "05",
+        year: "27",
+      },
+    }),
+  ],
 };
