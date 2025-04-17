@@ -12,7 +12,7 @@ const CardCVCNumberInputSection = () => {
       <InputField
         value={cardCVCNumber}
         onChange={setCardCVCNumber}
-        isError={isError}
+        isError={isError.cvcNumber}
         placeholder="123"
       ></InputField>
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useError from './useError';
 
 type CardNumbersKeys =
   | 'firstNumber'
@@ -48,44 +49,43 @@ export type UseCardNumbersOptions = {
 
 const useCardNumbers = (): UseCardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
-  const [isError, setIsError] = useState(INITIAL_IS_ERROR);
-  const [errorMessage, setErrorMessage] = useState('');
+  const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const isValidCardNumbers = (input: string) => {
     if (isNaN(Number(input))) {
-      setErrorMessage('숫자만 입력 가능합니다');
-      return false;
+      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
     //TODO: focus out 시 카드번호 검증 로직 추가
     if (input.length > 4) {
-      setErrorMessage('4자리 숫자만 입력 가능합니다');
-      return false;
+      return { isError: true, errorMessage: '4자리 숫자만 입력 가능합니다' };
     }
 
-    return true;
+    return { isError: false, errorMessage: '' };
   };
 
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const isValid = isValidCardNumbers(event.target.value.trim());
-      if (isValid) {
-        setIsError({ ...isError, [target]: false });
-        setErrorMessage('');
-        setCardNumbers({
-          ...cardNumbers,
-          [target]: event.target.value.trim(),
-        });
-      } else {
-        setIsError({ ...isError, [target]: true });
+      const { isError, errorMessage } = isValidCardNumbers(
+        event.target.value.trim()
+      );
+      if (isError) {
+        setErrorField(target, errorMessage);
+        return;
       }
+      
+      clearError(target);
+      setCardNumbers({
+        ...cardNumbers,
+        [target]: event.target.value.trim(),
+      });
     };
 
   return {
     cardNumbers,
     setCardNumbers: handleCardNumbersChange,
-    isError,
-    errorMessage,
+    isError: error.isError,
+    errorMessage: error.errorMessage,
   };
 };
 export default useCardNumbers;

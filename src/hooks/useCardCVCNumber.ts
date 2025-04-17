@@ -1,49 +1,56 @@
 import { useState } from 'react';
+import useError from './useError';
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isError: boolean;
+  isError: IsError;
   errorMessage: string;
+};
+
+type IsError = {
+  cvcNumber: boolean;
+};
+
+const INITIAL_IS_ERROR: IsError = {
+  cvcNumber: false,
 };
 
 const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const isValidCardCVCNumberChange = (input: string) => {
     if (isNaN(Number(input))) {
-      setErrorMessage('숫자만 입력 가능합니다');
-      return false;
+      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
     if (input.length > 3) {
-      setErrorMessage('3자리를 입려해야 합니다');
-      return false;
+      return { isError: true, errorMessage: '3자리를 입려해야 합니다' };
     }
 
-    return true;
+    return { isError: false, errorMessage: '' };
   };
 
   const handleCardCVCNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const isValid = isValidCardCVCNumberChange(event.target.value.trim());
-    if (isValid) {
-      setIsError(false);
-      setErrorMessage('');
-      setCardCVCNumber(event.target.value.trim());
+    const { isError, errorMessage } = isValidCardCVCNumberChange(
+      event.target.value.trim()
+    );
+    if (isError) {
+      setErrorField('cvcNumber', errorMessage);
       return;
     }
-
-    setIsError(true);
+    clearError('cvcNumber');
+    setCardCVCNumber(event.target.value.trim());
   };
 
+  console.log('error!', error);
   return {
     cardCVCNumber: cardCVCNumber,
     setCardCVCNumber: handleCardCVCNumberChange,
-    isError: isError,
-    errorMessage: errorMessage,
+    isError: error.isError,
+    errorMessage: error.errorMessage,
   };
 };
 
