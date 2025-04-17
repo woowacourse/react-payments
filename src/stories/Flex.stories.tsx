@@ -44,11 +44,25 @@ export const Default: Story = {
         'space-between',
         'space-around',
         'space-evenly',
+        'center',
+        'initial',
+        'inherit',
       ],
     },
     alignItems: {
       control: { type: 'select' },
-      options: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      options: [
+        'normal',
+        'flex-start',
+        'flex-end',
+        'start',
+        'center',
+        'end',
+        'baseline',
+        'stretch',
+        'initial',
+        'inherit',
+      ],
     },
     margin: {
       control: false,
@@ -63,7 +77,7 @@ export const Default: Story = {
       control: false,
     },
     gap: {
-      control: { type: 'text' },
+      control: false,
     },
     children: {
       control: false,

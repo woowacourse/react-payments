@@ -42,6 +42,11 @@ export type Props = {
    */
   gap?: string;
   /**
+   * Sets flex grow/shrink ratio
+   * @default 1
+   */
+  flex?: number;
+  /**
    * Sets outer spacing around the container
    * @default 0
    */
@@ -71,6 +76,7 @@ export const Flex = ({
   justifyContent = 'center',
   alignItems = 'center',
   gap = '0',
+  flex = 1,
   margin,
   padding,
   width,
@@ -84,6 +90,7 @@ export const Flex = ({
       justifyContent={justifyContent}
       alignItems={alignItems}
       gap={gap}
+      flex={flex}
       margin={margin}
       padding={padding}
       width={width}
