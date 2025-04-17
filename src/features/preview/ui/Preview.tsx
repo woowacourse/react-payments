@@ -1,14 +1,24 @@
 import { CardInfoProps } from '../../../shared/type/types';
 import './preview.css';
 
+const getCardImageSrc = (cardNumber = '') => {
+  const first = cardNumber[0];
+  const second = Number(cardNumber[1]);
+
+  if (first === '4') return './Visa.svg';
+  if (first === '5' && second >= 1 && second <= 5) return './Mastercard.svg';
+  return '';
+};
+
 export default function Preview({ cardInfo }: { cardInfo: CardInfoProps }) {
+  const imgSrc = getCardImageSrc(cardInfo.cardNumber[0]);
+
   return (
     <div className='card-background'>
       <div className='card-preview-container'>
         <div className='card-preview payment-sim'></div>
         <div className='card-preview payment-method'>
-          <img src='./Mastercard.svg' alt='Mastercard' className='card-preview' />
-          {/* <img src='./Visa.svg' alt='Visa' className='payment-logo' /> */}
+          {imgSrc !== '' && <img src={imgSrc} alt='cardType' className='card-preview' />}
         </div>
       </div>
       <div className='card-preview-info-container'>
