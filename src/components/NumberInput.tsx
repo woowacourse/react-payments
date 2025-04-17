@@ -33,7 +33,9 @@ function NumberInput({
   }, [value]);
 
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
-    if (Number.isNaN(Number(e.target.value))) {
+    const numericRegex = /^[0-9]*$/;
+
+    if (!numericRegex.test(e.target.value)) {
       e.target.value = value;
       return;
     }
