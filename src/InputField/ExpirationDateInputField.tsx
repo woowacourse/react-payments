@@ -2,6 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
 import {
+  EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
 } from '../config/inputField';
@@ -36,7 +37,7 @@ function ExpirationDateInputField({
         <Input
           key={inputType}
           type="number"
-          placeholder={expirationDateInputPlaceholder[inputType]}
+          placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
           value={inputValue[inputType]}
           onChange={onChange}
           name={inputType}
