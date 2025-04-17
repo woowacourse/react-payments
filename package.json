@@ -10,10 +10,9 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
-    "chromatic": "npx chromatic --project-token=chpt_539ed4212963e3b"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
-  "homepage": "https://keemsebin.github.io/react-payments",
+  "homepage": "https://ohgus.github.io/react-payments",
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
