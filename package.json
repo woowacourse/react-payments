@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -17,6 +18,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
+  "homepage": "https://kimyou1102.github.io/react-payments",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/compat": "^1.2.8",
