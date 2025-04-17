@@ -13,14 +13,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardValidityPeriod: { month: 0, year: 0 },
+    cardValidityPeriod: { month: '0', year: '0' },
     isError: { month: false, year: false },
     onChange: () => {},
   },
   render: (args) => {
     const [cardValidityPeriod, setCardValidityPeriod] = useState({
-      month: 1,
-      year: 25,
+      month: '1',
+      year: '25',
     });
     const [isErrorCardValidityPeriod, setIsErrorCardValidityPeriod] = useState({
       month: false,
@@ -63,7 +63,7 @@ export const Default: Story = {
 
       setCardValidityPeriod((prev) => ({
         ...prev,
-        [type]: Number.parseInt(value, 10),
+        [type]: value.slice(0, 2),
       }));
     };
 
@@ -80,14 +80,14 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    cardValidityPeriod: { month: 13, year: 26 },
+    cardValidityPeriod: { month: '13', year: '26' },
     isError: { month: false, year: false },
     onChange: () => {},
   },
   render: (args) => {
     const [cardValidityPeriod, setCardValidityPeriod] = useState({
-      month: 13,
-      year: 26,
+      month: '13',
+      year: '26',
     });
     const [isErrorCardValidityPeriod, setIsErrorCardValidityPeriod] = useState({
       month: true,
@@ -130,7 +130,7 @@ export const Error: Story = {
 
       setCardValidityPeriod((prev) => ({
         ...prev,
-        [type]: Number.parseInt(value, 10),
+        [type]: value.slice(0, 2),
       }));
     };
 
