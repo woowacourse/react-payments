@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { StyledCardInputLayoutContainer } from './CardInputLayout.styled';
+import { css } from '@emotion/react';
 
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
@@ -22,21 +22,35 @@ export type Props = {
 
 export const CardInputLayout = ({ headerText, description, label, children }: Props) => {
   return (
-    <StyledCardInputLayoutContainer>
+    <Flex
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="flex-start"
+      width="100%"
+      css={css`
+        max-width: 500px;
+      `}
+    >
       <Text variant="Title" fontWeight="bold">
         {headerText}
       </Text>
       {description && (
-        <Text variant="Caption" color="gray" fontWeight="regular">
+        <Text variant="Caption" fontWeight="regular" color="GY1">
           {description}
         </Text>
       )}
-      <Text variant="Body" fontWeight="regular">
+      <Text
+        variant="Body"
+        fontWeight="regular"
+        css={css`
+          margin: 6px 0px;
+        `}
+      >
         {label}
       </Text>
       <Flex gap="8px" width="100%">
         {children}
       </Flex>
-    </StyledCardInputLayoutContainer>
+    </Flex>
   );
 };
