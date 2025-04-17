@@ -11,6 +11,35 @@ export default meta;
 
 type Story = StoryObj<typeof PreviewCard>;
 
-export const Primary: Story = {
-  render: () => <PreviewCard />,
+export const NoneCard: Story = {
+  args: {
+    cardInformationState: {
+      uniqueNumber: ["1234", "1234", "1234", "1234"],
+      expirationDate: ["12", "25"],
+      cvcNumber: ["123"],
+    },
+    cardType: "none",
+  },
+};
+
+export const VisaCard: Story = {
+  args: {
+    cardInformationState: {
+      uniqueNumber: ["4234", "1234", "1234", "1234"],
+      expirationDate: ["12", "25"],
+      cvcNumber: ["123"],
+    },
+    cardType: "visa",
+  },
+};
+
+export const MasterCard: Story = {
+  args: {
+    cardInformationState: {
+      uniqueNumber: ["5134", "1234", "1234", "1234"],
+      expirationDate: ["12", "25"],
+      cvcNumber: ["123"],
+    },
+    cardType: "master",
+  },
 };
