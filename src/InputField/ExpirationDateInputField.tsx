@@ -6,20 +6,18 @@ import {
   ExpirationDateInputType,
 } from '../config/inputField';
 
-interface ExpirationDateInputFieldProps {
+function ExpirationDateInputField({
+  inputValue,
+  setInputValue,
+}: {
   inputValue: Record<ExpirationDateInputType, string>;
   setInputValue: Dispatch<
     SetStateAction<Record<ExpirationDateInputType, string>>
   >;
-}
-
-function ExpirationDateInputField({
-  inputValue,
-  setInputValue,
-}: ExpirationDateInputFieldProps) {
+}) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= 2) {
-      if (name === EXPIRATION_DATE_INPUT_TYPE[0] && Number(value) > 12) return;
+      if (name === 'expirationDatePart1' && Number(value) > 12) return;
       setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
     }
   };
@@ -34,6 +32,7 @@ function ExpirationDateInputField({
     <BaseInputField label="유효기간">
       {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
         <Input
+          key={inputType}
           type="number"
           placeholder="MM"
           value={inputValue[inputType]}
