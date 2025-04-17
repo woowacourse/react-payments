@@ -15,23 +15,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const TemplateVisa = () => {
-  const [cardNumbers] = useState<string[]>(['4234', '5678', '3333', '4444']);
-  const [month] = useState('12');
-  const [year] = useState('30');
+  const [cardNumbers] = useState<string[]>(["4234", "5678", "3333", "4444"]);
+  const [month] = useState("12");
+  const [year] = useState("30");
 
-  return (
-    <CardPreview cardNumbers={cardNumbers} month={month} year={year} />
-  );
+  return <CardPreview cardNumbers={cardNumbers} month={month} year={year} />;
 };
 
 const TemplateMaster = () => {
-  const [cardNumbers] = useState<string[]>(['5134', '5678', '3333', '4444']);
-  const [month] = useState('12');
-  const [year] = useState('30');
+  const [cardNumbers] = useState<string[]>(["5134", "5678", "3333", "4444"]);
+  const [month] = useState("12");
+  const [year] = useState("30");
 
-  return (
-    <CardPreview cardNumbers={cardNumbers} month={month} year={year} />
-  );
+  return <CardPreview cardNumbers={cardNumbers} month={month} year={year} />;
 };
 
 export const PreviewUpdatesOnInputVisa: Story = {
@@ -65,7 +61,3 @@ export const PreviewUpdatesOnInputMaster: Story = {
     expect(canvas.getByText("12/30")).toBeInTheDocument();
   },
 };
-  
-
-
-

@@ -1,4 +1,4 @@
-export const CardValidationInfo = {
+export const CARD_VALIDATION_INFO = {
   TOTAL_CARD_INPUTS: 4,
   VISA_CARD_START_NUMBER: 4,
   MASTER_CARD_MIN_START_NUMBER: 51,

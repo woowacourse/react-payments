@@ -4,7 +4,7 @@ import { useState } from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
-import { CardValidationInfo } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
 
 const meta: Meta<typeof CardNumbersInput> = {
   title: "Components/CardNumbersInput",
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof CardNumbersInput>;
 
 const Template = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(
-    Array(CardValidationInfo.TOTAL_CARD_INPUTS).fill("")
+    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""),
   );
   return (
     <CardNumbersInput
@@ -37,7 +37,7 @@ export const InvalidCardPrefix: Story = {
     await userEvent.type(inputs[0], "60");
 
     await expect(
-      canvas.findByText(ERROR.CARD_NUMBER.INVALID)
+      canvas.findByText(ERROR.CARD_NUMBER.INVALID),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -52,7 +52,7 @@ export const InvalidCard_NonNumeric: Story = {
     await userEvent.type(inputs[0], "dkdk");
 
     await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
+      canvas.findByText(ERROR.REQUIRE.NUMBER),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -68,8 +68,8 @@ export const InvalidCard_TooShort_FirstBlock: Story = {
 
     await expect(
       canvas.findByText(
-        `${CardValidationInfo.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
+        `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
+      ),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -92,8 +92,8 @@ export const InvalidCard_TooShort_ThirdBlock: Story = {
 
     await expect(
       canvas.findByText(
-        `${CardValidationInfo.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
+        `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
+      ),
     ).resolves.toBeInTheDocument();
   },
 };

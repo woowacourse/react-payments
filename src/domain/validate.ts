@@ -1,6 +1,6 @@
 import ERROR from "../constants/errorMessage";
 import CustomCardNumbersError from "../error/CustomCardNumbersError";
-import { CardValidationInfo } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
 
 const isNumber = (number: string) => {
   if (isNaN(Number(number))) return false;
@@ -14,11 +14,11 @@ const numberLength = (number: string, length: number) => {
 
 const invalidNumber = (number: string) => {
   if (
-    Number(number[0]) !== CardValidationInfo.VISA_CARD_START_NUMBER &&
+    Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
     (Number(number.slice(0, 2)) <
-      CardValidationInfo.MASTER_CARD_MIN_START_NUMBER ||
+      CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER ||
       Number(number.slice(0, 2)) >
-        CardValidationInfo.MASTER_CARD_MAX_START_NUMBER)
+        CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER)
   )
     return false;
   return true;
@@ -26,15 +26,15 @@ const invalidNumber = (number: string) => {
 
 const invalidMonth = (month: string) => {
   if (
-    Number(month) < CardValidationInfo.MIN_VALID_MONTH ||
-    Number(month) > CardValidationInfo.MAX_VALID_MONTH
+    Number(month) < CARD_VALIDATION_INFO.MIN_VALID_MONTH ||
+    Number(month) > CARD_VALIDATION_INFO.MAX_VALID_MONTH
   )
     return false;
   return true;
 };
 
 const invalidYear = (year: string) => {
-  if (Number(year) < CardValidationInfo.MIN_VALID_YEAR) return false;
+  if (Number(year) < CARD_VALIDATION_INFO.MIN_VALID_YEAR) return false;
   return true;
 };
 
@@ -46,7 +46,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
       if (!numberLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index
+          index,
         );
     }
   });

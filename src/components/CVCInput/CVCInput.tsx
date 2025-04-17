@@ -1,17 +1,17 @@
 import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import { validateCVC } from "../../domain/validate";
-import { CVCTitle } from "../../constants/title";
-import { CardValidationInfo } from "../../constants/CardValidationInfo";
+import { INPUT_CONTAINER } from "../../constants/title";
+import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 
 type CVCInputProps = {
   CVC: string;
   setCVC: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const CVCInput = ({CVC, setCVC}: CVCInputProps) => {
+const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
   const [helperText, setHelperText] = useState("");
-  const inputRef = useRef<(HTMLElement | null)>(null);
+  const inputRef = useRef<HTMLElement | null>(null);
 
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -25,11 +25,22 @@ const CVCInput = ({CVC, setCVC}: CVCInputProps) => {
       }
     }
   };
+
   return (
-    <InputContainer title={CVCTitle.TITLE}>
-      <label className='label'>CVC</label>
+    <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
+      <label className="label">CVC</label>
       <div className="inputContainer">
-      <input name="cvc" placeholder="123" value={CVC} onChange={handleCVC} ref={(element) => {inputRef.current = element}} className={`input ${helperText !== "" && 'errorInput'}`} maxLength={CardValidationInfo.CVC_MAX_LENGTH}/>
+        <input
+          name="cvc"
+          placeholder="123"
+          value={CVC}
+          onChange={handleCVC}
+          ref={(element) => {
+            inputRef.current = element;
+          }}
+          className={`input ${helperText !== "" && "errorInput"}`}
+          maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
+        />
       </div>
       <p className="helperText">{helperText}</p>
     </InputContainer>
