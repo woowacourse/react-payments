@@ -24,8 +24,13 @@ function App() {
     checkCardValidityPeriodError,
   } = useCardValidityPeriod();
 
-  const { cardCVC, isCardCVCError, onChangeCVC, checkCardCVCError } =
-    useCardCVC();
+  const {
+    cardCVC,
+    isCardCVCError,
+    onChangeCVC,
+    checkCardCVCError,
+    errorMessage: cardCVCErrorMessage,
+  } = useCardCVC();
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
     const DISABLED_KEY = '-+.eE';
@@ -70,7 +75,7 @@ function App() {
         </CardInputSection>
         <CardInputSection
           title="CVC 번호를 입력해 주세요"
-          errorMessage={checkCardCVCError() ? 'CVC는 3자리입니다.' : ''}
+          errorMessage={checkCardCVCError() ? cardCVCErrorMessage : ''}
         >
           <CardCVCField
             cardCVC={cardCVC}
