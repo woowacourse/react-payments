@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
-import { useState } from 'react';
-import { checkNumber, checkValidLength } from '../../validators/inputValidator';
+import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
+import useInputValidation from '../../hooks/useInputValidation';
 
 type CVCInputProps = {
   values: string[];
@@ -33,33 +33,10 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const [isError, setIsError] = useState([false]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const checkValidCVC = ({ e, idx }: HandleInputParams) => {
-    const CVCNumber = e.target.value;
-    try {
-      checkNumber(CVCNumber);
-      checkValidLength(CVCNumber, 3);
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = false;
-        if (updated.every((errorState) => errorState === false)) {
-          setErrorMessage('');
-        }
-        return updated;
-      });
-    } catch (error) {
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = true;
-        return updated;
-      });
+  const { isError, errorMessage, validate } = useInputValidation([false], (e) =>
+    inputValidation(e, 3)
+  );
 
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
-    }
-  };
   return (
     <StyledCVCInput>
       <StyledLabel>CVC</StyledLabel>
@@ -68,7 +45,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
           <Input
             value={value}
             onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => checkValidCVC({ e, idx })}
+            onBlur={(e) => validate({ e, idx })}
             maxLength={3}
             placeHolder={'123'}
             isError={isError[idx]}

@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
-import { checkNumber, checkValidLength } from '../../validators/inputValidator';
-import { useState } from 'react';
+import { inputValidation } from '../../validators/inputValidator';
+import useInputValidation from '../../hooks/useInputValidation';
 
 type CardNumberInputProps = {
   values: string[];
@@ -34,33 +34,10 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
-  const [isError, setIsError] = useState([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const checkValidCardNumber = ({ e, idx }: HandleInputParams) => {
-    const cardNumber = e.target.value;
-    try {
-      checkNumber(cardNumber);
-      checkValidLength(cardNumber, 4);
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = false;
-        if (updated.every((errorState) => errorState === false)) {
-          setErrorMessage('');
-        }
-        return updated;
-      });
-    } catch (error) {
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = true;
-        return updated;
-      });
-
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
-    }
-  };
+  const { isError, errorMessage, validate } = useInputValidation(
+    Array.from({ length: 4 }, () => false),
+    (e) => inputValidation(e, 4)
+  );
 
   return (
     <StyledCardNumberInput>
@@ -70,7 +47,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
           <Input
             value={value}
             onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => checkValidCardNumber({ e, idx })}
+            onBlur={(e) => validate({ e, idx })}
             maxLength={4}
             placeHolder={'1234'}
             isError={isError[idx]}
