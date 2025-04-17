@@ -5,6 +5,7 @@ import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import PreviewCard from '../PreviewCard/PreviewCard';
 import Text from '../Text/Text';
 import { useState } from 'react';
+import { CARD_PAGE_TEXT } from '../../constants/cardPageText';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -53,17 +54,17 @@ const CardPage = () => {
   return (
     <StyledCardPage>
       <PreviewCard cardNumber={cardNumber} expirationDate={expirationDate} />
-      <Text type="title" text="결제할 카드 번호를 입력해 주세요" />
-      <Text type="subTitle" text="본인 명의의 카드만 결제 가능합니다." />
+      <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
+      <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
 
       <CardNumberInput values={cardNumber} onChange={handleCardNumberInput} />
 
-      <Text type="title" text="카드 유효기간을 입력해 주세요" />
-      <Text type="subTitle" text="월/년도(MMYY)를 순서대로 입력해 주세요." />
+      <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
+      <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
 
       <ExpirationDateInput values={expirationDate} onChange={handleExpirationDateInput} />
 
-      <Text type="title" text="CVC 번호를 입력해 주세요" />
+      <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
 
       <CVCInput values={cvc} onChange={handleCVCInput} />
     </StyledCardPage>
