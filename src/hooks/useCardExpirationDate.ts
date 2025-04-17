@@ -1,24 +1,18 @@
 import { useState } from 'react';
 import useError from './useError';
 import isValidStringLength from './validate/isValidStringLength';
-import isNumber from './validate/IsNumber';
+import isNumber from './validate/isNumber';
 import isValidNumberRange from './validate/isValidNumberRange';
-
-type CardExpirationDateKeys = 'month' | 'year';
-
-export type CardExpirationDate = {
-  month: string;
-  year: string;
-};
+import CardExpirationDate from '../types/CardExpirationDate';
+import {
+  CardExpirationDateKeys,
+  CardExpirationDateOptions,
+  IsError,
+} from '../types/CardExpirationDateOptions';
 
 const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
   month: '',
   year: '',
-};
-
-type IsError = {
-  month: boolean;
-  year: boolean;
 };
 
 const INITIAL_IS_ERROR: IsError = {
@@ -26,16 +20,7 @@ const INITIAL_IS_ERROR: IsError = {
   year: false,
 };
 
-export type useCardExpirationDateOptions = {
-  cardExpirationDate: CardExpirationDate;
-  setCardExpirationDate: (
-    target: CardExpirationDateKeys
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isError: IsError;
-  errorMessage: string;
-};
-
-const useCardExpirationDate = (): useCardExpirationDateOptions => {
+const useCardExpirationDate = (): CardExpirationDateOptions => {
   const [cardExpirationDate, setCardExpirationDate] = useState(
     INITIAL_CARD_EXPIRATION_DATE
   );

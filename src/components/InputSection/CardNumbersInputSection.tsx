@@ -1,4 +1,4 @@
-import { UseCardNumbersOptions } from '../../hooks/useCardNumbers';
+import { CardNumbersOptions } from '../../types/CardNumbers';
 import ErrorMessage from '../ErrorMessage';
 import InputField from '../InputField';
 import InputSection from './InputSection';
@@ -8,7 +8,7 @@ const CardNumbersInputSection = ({
   setCardNumbers,
   isError,
   errorMessage,
-}: UseCardNumbersOptions) => {
+}: CardNumbersOptions) => {
   return (
     <InputSection
       title="결제할 카드번호를 입력해 주세요"

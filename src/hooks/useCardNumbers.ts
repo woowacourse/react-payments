@@ -1,33 +1,19 @@
 import { useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/IsNumber';
+import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
-
-type CardNumbersKeys =
-  | 'firstNumber'
-  | 'secondNumber'
-  | 'thirdNumber'
-  | 'fourthNumber';
-
-export type CardNumbers = {
-  firstNumber: string;
-  secondNumber: string;
-  thirdNumber: string;
-  fourthNumber: string;
-};
+import {
+  CardNumbers,
+  CardNumbersKeys,
+  CardNumbersOptions,
+  IsError,
+} from '../types/CardNumbers';
 
 const INITIAL_CARD_NUMBER: CardNumbers = {
   firstNumber: '',
   secondNumber: '',
   thirdNumber: '',
   fourthNumber: '',
-};
-
-type IsError = {
-  firstNumber: boolean;
-  secondNumber: boolean;
-  thirdNumber: boolean;
-  fourthNumber: boolean;
 };
 
 const INITIAL_IS_ERROR: IsError = {
@@ -37,19 +23,9 @@ const INITIAL_IS_ERROR: IsError = {
   fourthNumber: false,
 };
 
-export type CardNumbersOptions = {
-  cardNumbers: CardNumbers;
-  setCardNumbers: (
-    target: CardNumbersKeys
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isError: IsError;
-};
 
-export type UseCardNumbersOptions = {
-  errorMessage: string;
-} & CardNumbersOptions;
 
-const useCardNumbers = (): UseCardNumbersOptions => {
+const useCardNumbers = (): CardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 

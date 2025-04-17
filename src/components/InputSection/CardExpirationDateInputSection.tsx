@@ -1,14 +1,14 @@
 import ErrorMessage from '../ErrorMessage';
 import InputField from '../InputField';
 import InputSection from './InputSection';
-import { useCardExpirationDateOptions } from '../../hooks/useCardExpirationDate';
+import { CardExpirationDateOptions } from '../../types/CardExpirationDateOptions';
 
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
   setCardExpirationDate,
   isError,
   errorMessage,
-}: useCardExpirationDateOptions) => {
+}: CardExpirationDateOptions) => {
   return (
     <InputSection
       title="카드 유효기간을 입력해 주세요"

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/IsNumber';
+import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
 
 type useCardCVCNumberOptions = {
