@@ -1,3 +1,4 @@
+import * as S from './CardNumber.styles'
 import Title from './common/Title'
 import Label from './common/Label'
 import Input from './common/Input'
@@ -42,12 +43,7 @@ export default function CardNumber({
       <Spacing size={24} />
       <Label id="card-number">카드 번호</Label>
       <Spacing size={8} />
-      <div
-        style={{
-          display: 'flex',
-          gap: '10px',
-        }}
-      >
+      <S.InputWrapper>
         <Input
           placeholder="1234"
           maxLength={4}
@@ -96,7 +92,7 @@ export default function CardNumber({
           }
           isError={cardNumberErrorMessage.fourth !== ''}
         />
-      </div>
+      </S.InputWrapper>
       <Spacing size={8} />
       <ErrorMessage>
         {

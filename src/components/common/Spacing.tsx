@@ -1,13 +1,9 @@
+import * as S from './Spacing.styles'
+
 interface SpacingProps {
   size: number
 }
 
 export default function Spacing({ size }: SpacingProps) {
-  return (
-    <div
-      style={{
-        height: `${size}px`,
-      }}
-    />
-  )
+  return <S.Spacing size={size} />
 }

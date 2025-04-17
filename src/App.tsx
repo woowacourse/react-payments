@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import './App.css'
+import * as S from './App.styles'
 import CardNumber from './components/CardNumber'
 import CardExpirationDate from './components/CardExpirationDate'
 import CardCVCNumber from './components/CardCVCNumber'
@@ -46,27 +45,12 @@ function App() {
 
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('')
   return (
-    <div
-      css={css`
-        width: 480px;
-        height: 100vh;
-        margin: 0 auto;
-        border: 1px solid #000;
-        padding: 71px 31px;
-        overflow-y: scroll;
-      `}
-    >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
+    <S.Wrapper>
+      <S.CardPreviewWrapper>
         <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
-      </div>
+      </S.CardPreviewWrapper>
       <Spacing size={60} />
-
-      <form style={{ display: 'flex', gap: '32px', flexDirection: 'column' }}>
+      <S.CardInfoForm>
         <CardNumber
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
@@ -85,8 +69,8 @@ function App() {
           cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
           setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
         />
-      </form>
-    </div>
+      </S.CardInfoForm>
+    </S.Wrapper>
   )
 }
 

@@ -1,3 +1,4 @@
+import * as S from './CardExpirationDate.styles'
 import Title from './common/Title'
 import Label from './common/Label'
 import Input from './common/Input'
@@ -61,12 +62,7 @@ export default function CardExpirationDate({
       <Spacing size={24} />
       <Label id="card-expiration-date">유효기간</Label>
       <Spacing size={8} />
-      <div
-        style={{
-          display: 'flex',
-          gap: '10px',
-        }}
-      >
+      <S.InputWrapper>
         <Input
           placeholder="MM"
           maxLength={2}
@@ -91,7 +87,7 @@ export default function CardExpirationDate({
           }
           isError={cardExpirationDateErrorMessage.year !== ''}
         />
-      </div>
+      </S.InputWrapper>
       <Spacing size={8} />
       <ErrorMessage>
         {

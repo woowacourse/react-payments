@@ -36,12 +36,7 @@ export default function CardCVCNumber({
       <Spacing size={24} />
       <Label id="card-cvc-number">CVC</Label>
       <Spacing size={8} />
-      <div
-        style={{
-          display: 'flex',
-          gap: '10px',
-        }}
-      >
+      <div>
         <Input
           placeholder="123"
           maxLength={3}
