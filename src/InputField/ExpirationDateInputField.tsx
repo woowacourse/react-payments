@@ -12,13 +12,10 @@ function ExpirationDateInputField({
     SetStateAction<Record<ExpirationDateInputValueType, string>>
   >;
 }) {
-  const onChange = (e: ChangeEvent) => {
-    const { value, name } = e.target as HTMLInputElement;
-    const numericValue = value.replace(/[^0-9]/g, '');
-
-    if (numericValue.length <= 2) {
-      if (name === 'expirationDatePart1' && Number(numericValue) > 12) return;
-      setInputValue((prevValue) => ({ ...prevValue, [name]: numericValue }));
+  const onChange = ({ name, value }: { name: string; value: string }) => {
+    if (value.length <= 2) {
+      if (name === 'expirationDatePart1' && Number(value) > 12) return;
+      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
     }
   };
 
@@ -31,7 +28,7 @@ function ExpirationDateInputField({
   return (
     <BaseInputField label="유효기간">
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="MM"
         value={inputValue.expirationDatePart1}
         onChange={onChange}
@@ -39,7 +36,7 @@ function ExpirationDateInputField({
         onBlur={onBlur}
       />
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="YY"
         value={inputValue.expirationDatePart2}
         onChange={onChange}

@@ -69,11 +69,8 @@ function CardNumberInputField({
     return false;
   };
 
-  const onChange = (e: ChangeEvent) => {
-    const { value, name } = e.target as HTMLInputElement;
-    const numericValue = value.replace(/[^0-9]/g, '');
-
-    if (numericValue.length <= 4) {
+  const onChange = ({ name, value }: { name: string; value: string }) => {
+    if (value.length <= 4) {
       if (name === 'cardNumberPart1') {
         const isError = checkCardTypeFromPrefix(value);
         updateCardError('cardNumberPart1', {
@@ -81,7 +78,7 @@ function CardNumberInputField({
           isError,
         });
       }
-      setInputValue((prevValue) => ({ ...prevValue, [name]: numericValue }));
+      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
     }
   };
 
@@ -110,7 +107,7 @@ function CardNumberInputField({
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="1234"
         value={inputValue.cardNumberPart1}
         onChange={onChange}
@@ -119,7 +116,7 @@ function CardNumberInputField({
         isError={Boolean(errorTypes.cardNumberPart1.length)}
       />
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="1234"
         value={inputValue.cardNumberPart2}
         onChange={onChange}
@@ -128,7 +125,7 @@ function CardNumberInputField({
         isError={Boolean(errorTypes.cardNumberPart2.length)}
       />
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="1234"
         value={inputValue.cardNumberPart3}
         onChange={onChange}
@@ -137,7 +134,7 @@ function CardNumberInputField({
         isError={Boolean(errorTypes.cardNumberPart3.length)}
       />
       <Input
-        inputMode="numeric"
+        type="number"
         placeholder="1234"
         value={inputValue.cardNumberPart4}
         onChange={onChange}
