@@ -21,16 +21,6 @@ const StyledInput = styled.input<{ $isError: boolean }>`
     font-size: 11px;
     color: #acacac;
   }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  &[type='number'] {
-    -moz-appearance: textfield;
-  }
 `;
 
 function Input({
@@ -38,7 +28,7 @@ function Input({
   isError,
   value,
   name,
-  inputMode,
+  type,
   onChange,
   onBlur,
 }: {
@@ -46,17 +36,29 @@ function Input({
   isError?: boolean;
   value: string;
   name: string;
-  inputMode: 'text' | 'numeric';
-  onChange: (e: ChangeEvent) => void;
+  type: 'text' | 'number';
+  onChange: ({ name, value }: { name: string; value: string }) => void;
   onBlur?: (e: ChangeEvent) => void;
 }) {
+  const handleTypeChange = (e: ChangeEvent) => {
+    const { value, name } = e.target as HTMLInputElement;
+    console.log(value, name, type);
+
+    if (type === 'number') {
+      const numericValue = value.replace(/[^0-9]/g, '');
+
+      return onChange({ value: numericValue, name });
+    }
+
+    return onChange({ value, name });
+  };
   return (
     <StyledInput
       placeholder={placeholder}
       value={value}
-      inputMode={inputMode}
+      inputMode={type === 'number' ? 'numeric' : 'text'}
       $isError={isError ?? false}
-      onChange={onChange}
+      onChange={handleTypeChange}
       name={name}
       type="text"
       onBlur={onBlur}
