@@ -29,7 +29,11 @@ function Card({ cardNumber, expiration }: CardProps) {
 
       <CardInfo>
         <p>{maskCardNumber(cardNumber).join(" ")}</p>
-        <p>{expiration.join("/")}</p>
+        <p>
+          {expiration[0] === "" && expiration[1] === ""
+            ? ""
+            : expiration.join("/")}
+        </p>
       </CardInfo>
     </CardContainer>
   );
