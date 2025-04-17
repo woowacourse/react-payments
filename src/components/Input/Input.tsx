@@ -30,24 +30,17 @@ type InputProps = {
   value: string;
   error: boolean;
   setValue: (value: string) => void;
-  handleChangeError: (error: boolean) => void;
+  // handleChangeError: (error: boolean) => void;
 };
-
-const Input = ({ placeholder, maxLength, value, error, setValue, handleChangeError }: InputProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-
-    const isOnlyNumber = /^[0-9]*$/.test(input);
-
-    if (isOnlyNumber) {
-      handleChangeError(false);
-    } else {
-      handleChangeError(true);
-    }
-    setValue(input);
-  };
+const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) => {
   return (
-    <input css={inputStyle(error)} onChange={onChange} value={value} placeholder={placeholder} maxLength={maxLength} />
+    <input
+      css={inputStyle(error)}
+      onChange={(e) => setValue(e.target.value)}
+      value={value}
+      placeholder={placeholder}
+      maxLength={maxLength}
+    />
   );
 };
 

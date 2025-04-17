@@ -19,24 +19,30 @@ const InputField = ({
     cvcNumber: [false],
   });
 
-  const handleChange = (index: number, text: string) => {
-    const updatedArray = cardInformation[informationType];
-    updatedArray[index] = text;
+  const handleChange = (index: number, value: string) => {
+    const isNumberOnly = /^[0-9]*$/.test(value);
 
+    let error = !isNumberOnly;
+
+    if (isNumberOnly && informationType === "expirationDate") {
+      const num = parseInt(value);
+      if (index === 0) error = num < 1 || num > 12;
+      if (index === 1) {
+        const year = 25;
+        error = num < year;
+      }
+    }
+
+    const updatedValues = [...cardInformation[informationType]];
+    updatedValues[index] = value;
     setCardInformation({
       ...cardInformation,
-      [informationType]: updatedArray,
+      [informationType]: updatedValues,
     });
-  };
 
-  const handleChangeError = (index: number, error: boolean) => {
-    const updatedArray = isErrors[informationType];
-    updatedArray[index] = error;
-
-    setIsErrors({
-      ...isErrors,
-      [informationType]: updatedArray,
-    });
+    const updatedErrors = [...isErrors[informationType]];
+    updatedErrors[index] = error;
+    setIsErrors({ ...isErrors, [informationType]: updatedErrors });
   };
 
   return (
@@ -50,13 +56,12 @@ const InputField = ({
             setValue={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
-            handleChangeError={(error) => handleChangeError(index, error)}
             error={isErrors[informationType][index]}
           />
         ))}
       </div>
       <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-        <Text type="error" text={"숫자만 입력 가능합니다."} />
+        <Text type="error" text={"유효하지 않은 값입니다.!"} />
       </div>
     </div>
   );

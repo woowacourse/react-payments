@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import FormSection from "../FormSection/FormSection";
-import { css } from "@emotion/css";
+import { css } from "@emotion/react";
 import { CardInformationType } from "../../types/CardInformationType";
 
 type FormContainerProps = {

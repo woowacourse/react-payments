@@ -10,8 +10,10 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_79c8505c4ac2bf6"
+    "chromatic": "npx chromatic --project-token=chpt_79c8505c4ac2bf6",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
+  "homepage": "https://shuyeon.github.io/react-payments",
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
