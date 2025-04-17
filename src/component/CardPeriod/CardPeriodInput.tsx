@@ -7,13 +7,14 @@ import {
   sectionTitleSubText,
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
-import {
-  cardNumberInputContainer,
-  cardNumberInputInputContainer,
-} from '../CardNumberInput/CardNumberInput.style';
+
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
 import { CardExpirationDate, CardExpirationDateError } from '../../hooks';
 import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
+import {
+  inputContainer,
+  inputSection,
+} from '../../styles/@common/inputContainer.style';
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;
@@ -77,9 +78,9 @@ function CardPeriodInput({
           월/년도(MMYY)를 순서대로 입력해 주세요.
         </span>
       </div>
-      <div css={cardNumberInputContainer}>
+      <div css={inputContainer}>
         <Input.Label>유효기간</Input.Label>
-        <article css={cardNumberInputInputContainer}>
+        <article css={inputSection}>
           <Input
             type="text"
             name="month"

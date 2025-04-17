@@ -7,13 +7,13 @@ import {
   sectionTitleSubText,
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
-import {
-  cardNumberInputContainer,
-  cardNumberInputInputContainer,
-  cardNumberInputLayout,
-} from './CardNumberInput.style';
+import { cardNumberInputLayout } from './CardNumberInput.style';
 import { CardNumber, CardNumberError } from '../../hooks';
 import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
+import {
+  inputContainer,
+  inputSection,
+} from '../../styles/@common/inputContainer.style';
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
@@ -43,9 +43,9 @@ function CardNumberInput({
           본인 명의의 카드만 결제 가능합니다.
         </span>
       </div>
-      <div css={cardNumberInputContainer}>
+      <div css={inputContainer}>
         <Input.Label>카드 번호</Input.Label>
-        <article css={cardNumberInputInputContainer}>
+        <article css={inputSection}>
           <Input
             type="text"
             name="first"

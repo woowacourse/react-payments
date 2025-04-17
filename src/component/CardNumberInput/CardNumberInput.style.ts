@@ -11,17 +11,3 @@ export const cardNumberInputLayout = css`
   margin-top: 4.5rem;
   gap: 1.6rem;
 `;
-
-export const cardNumberInputContainer = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.8rem;
-`;
-
-export const cardNumberInputInputContainer = css`
-  display: flex;
-  flex-direction: row;
-  gap: 0.8rem;
-`;

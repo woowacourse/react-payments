@@ -6,13 +6,13 @@ import {
   sectionTitle,
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
-import {
-  cardNumberInputContainer,
-  cardNumberInputInputContainer,
-} from '../CardNumberInput/CardNumberInput.style';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
 import { CardCVC } from '../../hooks';
 import { CARD_CVC_ERROR, CARD_CVC } from '../../constants';
+import {
+  inputContainer,
+  inputSection,
+} from '../../styles/@common/inputContainer.style';
 
 type CardCVCInputProps = {
   cardCVC: CardCVC;
@@ -39,9 +39,9 @@ function CardCVCInput({
       <div css={sectionTitle}>
         <span css={sectionTitleText}>CVC 번호를 입력해 주세요</span>
       </div>
-      <div css={cardNumberInputContainer}>
+      <div css={inputContainer}>
         <Input.Label>CVC</Input.Label>
-        <article css={cardNumberInputInputContainer}>
+        <article css={inputSection}>
           <Input
             type="text"
             name="cvc"
