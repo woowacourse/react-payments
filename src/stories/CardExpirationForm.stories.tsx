@@ -5,6 +5,7 @@ import useCardInfo from "../hooks/useCardInfo";
 const meta = {
   title: "CardExpirationForm",
   component: CardExpirationForm,
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardExpirationForm>;
 
 export default meta;

@@ -5,6 +5,7 @@ import { useState } from "react";
 const meta = {
   title: "NumberInput",
   component: NumberInput,
+  tags: ["autodocs"],
 } satisfies Meta<typeof NumberInput>;
 
 export default meta;

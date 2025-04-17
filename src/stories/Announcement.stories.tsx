@@ -4,6 +4,7 @@ import Announcement from "../components/Announcement";
 const meta = {
   title: "Announcement",
   component: Announcement,
+  tags: ["autodocs"],
 } satisfies Meta<typeof Announcement>;
 
 export default meta;

@@ -5,6 +5,7 @@ import useCardInfo from "../hooks/useCardInfo";
 const meta = {
   title: "CardCVCForm",
   component: CardCVCForm,
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardCVCForm>;
 
 export default meta;
