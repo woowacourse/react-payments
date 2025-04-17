@@ -14,25 +14,25 @@ const Input = ({ placeholder, isError = false, value, maxLength, inputHandler }:
 		<TextInput
 			maxLength={maxLength && maxLength}
 			value={value}
-			isError={isError}
 			placeholder={placeholder}
 			onChange={(e) => {
 				inputHandler(e.target.value);
 			}}
+			$isError={isError}
 		/>
 	);
 };
 
-const TextInput = styled.input<{ isError: boolean }>(
+const TextInput = styled.input<{ $isError: boolean }>(
 	(props) => `
 	width:100%;
 	padding: 8px;
 	border-radius: 2px;
   border:none;
-	outline: 1px solid ${props.isError ? COLORS.ERROR : COLORS.LIGHT_GRAY};
+	outline: 1px solid ${props.$isError ? COLORS.ERROR : COLORS.LIGHT_GRAY};
   
 	&:focus {
-		outline: 1px solid ${props.isError ? COLORS.ERROR : "#000"};
+		outline: 1px solid ${props.$isError ? COLORS.ERROR : "#000"};
 	}
 `
 );
