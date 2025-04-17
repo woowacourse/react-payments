@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CustomInput from './CustomInput';
 import {
   cardNumberValidator,
   cardExpirationDateValidator,
   cardCVCValidator,
 } from '../../features/cardInfo/validation/cardInfoValidator';
 import { useState } from 'react';
-import '../../features/cardInfo/ui/CardInfoSection.css';
+import * as S from '../../features/cardInfo/ui/CardInfoSection.styles';
+import CustomInput from './CustomInput';
 
 const meta: Meta<typeof CustomInput> = {
   title: 'Shared/CustomInput',
@@ -41,8 +41,8 @@ export const Default: Story = {
     };
 
     return (
-      <div className='card-info-sub-section' style={{ width: '300px' }}>
-        <div className='card-info-input-container'>
+      <S.CardInfoSubSection style={{ width: '300px' }}>
+        <S.CardInfoInputContainer>
           {Array.from({ length: 4 }, (_, index) => (
             <CustomInput
               key={`cardNumber-${index}`}
@@ -54,9 +54,9 @@ export const Default: Story = {
               error={error[0] === index}
             />
           ))}
-        </div>
-        {error && <span className='card-info-error'>{error[1]}</span>}
-      </div>
+        </S.CardInfoInputContainer>
+        {error && <S.CardInfoError>{error[1]}</S.CardInfoError>}
+      </S.CardInfoSubSection>
     );
   },
 };
@@ -78,8 +78,8 @@ export const ExpirationDateInput: Story = {
     };
 
     return (
-      <div className='card-info-sub-section' style={{ width: '200px' }}>
-        <div className='card-info-input-container'>
+      <S.CardInfoSubSection style={{ width: '200px' }}>
+        <S.CardInfoInputContainer>
           <CustomInput
             type='text'
             placeholder='MM'
@@ -96,9 +96,9 @@ export const ExpirationDateInput: Story = {
             onChange={handleChange}
             error={error[0] === 1}
           />
-        </div>
-        {error && <span className='card-info-error'>{error[1]}</span>}
-      </div>
+        </S.CardInfoInputContainer>
+        {error && <S.CardInfoError>{error[1]}</S.CardInfoError>}
+      </S.CardInfoSubSection>
     );
   },
 };
@@ -122,7 +122,7 @@ export const CVCInput: Story = {
     };
 
     return (
-      <div className='card-info-sub-section' style={{ width: '200px' }}>
+      <S.CardInfoSubSection style={{ width: '200px' }}>
         <CustomInput
           type='text'
           placeholder='CVC 입력'
@@ -131,8 +131,8 @@ export const CVCInput: Story = {
           onChange={handleChange}
           error={isError}
         />
-        {isError && <span className='card-info-error'>{message}</span>}
-      </div>
+        {isError && <S.CardInfoError>{message}</S.CardInfoError>}
+      </S.CardInfoSubSection>
     );
   },
 };
