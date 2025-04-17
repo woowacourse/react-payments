@@ -18,7 +18,7 @@ export const Default: Story = {
       year: '25',
     },
     cardNumber: {
-      first: '1234',
+      first: '5134',
       second: '2312',
       third: '1232',
       fourth: '2353',
