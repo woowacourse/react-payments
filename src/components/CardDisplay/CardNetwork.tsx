@@ -1,8 +1,8 @@
 import styles from './cardDisplay.module.css';
 
-import masterCard from '../public/mastercard.png';
-import visa from '../public/visa.png';
-import { CardNumbers } from '../types/CardNumbers';
+import { CardNumbers } from '../../types/CardNumbers';
+import Visa from '../../public/visa.png';
+import MasterCard from '../../public/mastercard.png';
 
 type CardNetworkProps = {
   cardNumbers: CardNumbers;
@@ -12,12 +12,12 @@ const CARD_NETWORKS = [
   {
     prefixes: ['40', '41', '42', '43', '44', '45', '46', '47', '48', '49'],
     name: 'visa',
-    image: visa,
+    image: Visa,
   },
   {
     prefixes: ['51', '52', '53', '54', '55'],
     name: 'master',
-    image: masterCard,
+    image: MasterCard,
   },
 ];
 

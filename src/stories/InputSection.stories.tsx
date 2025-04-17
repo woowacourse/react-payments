@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import InputSection from '../components/InputSection/InputSection';
-import InputField from '../components/InputField';
+import InputSection from '../components/common/InputSection/InputSection';
+import InputField from '../components/common/InputField/InputField';
 
 const meta = {
   title: 'InputSection',

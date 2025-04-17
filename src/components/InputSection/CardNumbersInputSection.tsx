@@ -1,7 +1,7 @@
 import { CardNumbersOptions } from '../../types/CardNumbers';
-import ErrorMessage from '../ErrorMessage';
-import InputField from '../InputField';
-import InputSection from './InputSection';
+import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
+import InputField from '../common/InputField/InputField';
+import InputSection from '../common/InputSection/InputSection';
 
 const CardNumbersInputSection = ({
   cardNumbers,

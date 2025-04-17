@@ -2,9 +2,9 @@ import CardNumbersInputSection from './components/InputSection/CardNumbersInputS
 import CardExpirationDateInputSection from './components/InputSection/CardExpirationDateInputSection';
 import CardCVCNumberInputSection from './components/InputSection/CardCVCNumberInputSection';
 import styles from './css/cardForm.module.css';
-import CardDisplay from './components/CardDisplay';
 import useCardNumbers from './hooks/useCardNumbers';
 import useCardExpirationDate from './hooks/useCardExpirationDate';
+import CardDisplay from './components/CardDisplay/CardDisplay';
 
 function App() {
   const {

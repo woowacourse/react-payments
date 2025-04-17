@@ -1,7 +1,7 @@
-import styles from '../css/input.module.css';
+import styles from './inputField.module.css';
 
 type InputFieldProps = {
-  value: number | string;
+  value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError?: boolean;
   placeholder: string;
