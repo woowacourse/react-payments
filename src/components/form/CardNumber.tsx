@@ -6,6 +6,7 @@ import Title from "../title/Title";
 import { cardNumber } from "../../App";
 import { Dispatch, SetStateAction, useState } from "react";
 import findErrorOrder from "../../utils/findErrorOrder";
+import isNumberWithinRange from "../../utils/isNumberWithinRange";
 
 const INPUT_MAX_LENGTH = 4;
 
@@ -24,9 +25,8 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 
 	const handleCardNumber = (order: keyof cardNumber, value: string) => {
 		setCardNumber({ ...cardNumber, [order]: value });
-		const regex = new RegExp(`^(?:\\d{1,${INPUT_MAX_LENGTH}})?$`);
 
-		if (!regex.test(value)) {
+		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
 			return;
 		}

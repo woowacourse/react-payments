@@ -6,6 +6,7 @@ import Title from "../title/Title";
 import styled from "styled-components";
 import Input from "../input/Input";
 import findErrorOrder from "../../utils/findErrorOrder";
+import isNumberWithinRange from "../../utils/isNumberWithinRange";
 
 const INPUT_MAX_LENGTH = 2;
 
@@ -23,9 +24,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	const handleDate = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
-		const regex = new RegExp(`^(?:\\d{1,${INPUT_MAX_LENGTH}})?$`);
-
-		if (!regex.test(value)) {
+		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
 			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
 			return;
 		}

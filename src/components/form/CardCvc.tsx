@@ -3,6 +3,7 @@ import Title from "../title/Title";
 import InputField from "../inputField/InputField";
 import Input from "../input/Input";
 import { Dispatch, SetStateAction, useState } from "react";
+import isNumberWithinRange from "../../utils/isNumberWithinRange";
 
 const INPUT_MAX_LENGTH = 3;
 
@@ -15,9 +16,8 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 
 	const handleCardCvc = (value: string) => {
 		setcvcNumber(value);
-		const regex = new RegExp(`^(?:\\d{1,${INPUT_MAX_LENGTH}})?$`);
 
-		if (!regex.test(value)) {
+		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
 			setError("숫자만 입력 가능합니다.");
 			return;
 		}
