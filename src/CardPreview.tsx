@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { CardType } from './config/card';
 import {
-  CardNumberInputValueType,
-  ExpirationDateInputValueType,
-} from './types/inputFieldType';
-import { CardType } from './types/cardType';
+  CardNumberInputType,
+  ExpirationDateInputType,
+} from './config/inputField';
 
 const Card = styled.div`
   position: relative;
@@ -80,8 +80,8 @@ function CardPreview({
   expirationDateInputValue,
   cardType,
 }: {
-  cardNumberInputValue: Record<CardNumberInputValueType, string>;
-  expirationDateInputValue: Record<ExpirationDateInputValueType, string>;
+  cardNumberInputValue: Record<CardNumberInputType, string>;
+  expirationDateInputValue: Record<ExpirationDateInputType, string>;
   cardType: CardType;
 }) {
   return (
