@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardDisplay from '../components/CardDisplay';
+import CardDisplay from '../components/CardDisplay/CardDisplay';
 
 const meta = {
   title: 'CardDisplay',
@@ -13,14 +13,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardNumbers: {
-      firstNumber: 1234,
-      secondNumber: 1234,
-      thirdNumber: 1234,
-      fourthNumber: 1234,
+      firstNumber: '1234',
+      secondNumber: '1234',
+      thirdNumber: '1234',
+      fourthNumber: '1234',
     },
     cardExpirationDate: {
-      month: 12,
-      year: 25,
+      month: '12',
+      year: '25',
     },
   },
 };
@@ -28,14 +28,14 @@ export const Default: Story = {
 export const Visa: Story = {
   args: {
     cardNumbers: {
-      firstNumber: 4444,
-      secondNumber: 1234,
-      thirdNumber: 1234,
-      fourthNumber: 1234,
+      firstNumber: '4444',
+      secondNumber: '1234',
+      thirdNumber: '1234',
+      fourthNumber: '1234',
     },
     cardExpirationDate: {
-      month: 12,
-      year: 25,
+      month: '12',
+      year: '25',
     },
   },
 };
@@ -43,14 +43,14 @@ export const Visa: Story = {
 export const Master: Story = {
   args: {
     cardNumbers: {
-      firstNumber: 5555,
-      secondNumber: 1234,
-      thirdNumber: 1234,
-      fourthNumber: 1234,
+      firstNumber: '5555',
+      secondNumber: '1234',
+      thirdNumber: '1234',
+      fourthNumber: '1234',
     },
     cardExpirationDate: {
-      month: 12,
-      year: 25,
+      month: '12',
+      year: '25',
     },
   },
 };

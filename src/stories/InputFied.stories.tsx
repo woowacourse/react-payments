@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 1234,
+    value: '1234',
     onChange: fn(),
     isError: false,
     placeholder: '1234',
@@ -22,7 +22,7 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    value: 1234,
+    value: '1234',
     onChange: fn(),
     isError: true,
     placeholder: '1234',

@@ -19,10 +19,10 @@ export const Default: Story = {
     subtitle: 'Input Section Subtitle',
     children: (
       <>
-        <InputField value={1234} onChange={fn()} placeholder="0000" />
-        <InputField value={1234} onChange={fn()} placeholder="0000" />
-        <InputField value={1234} onChange={fn()} placeholder="0000" />
-        <InputField value={1234} onChange={fn()} placeholder="0000" />
+        <InputField value={'1234'} onChange={fn()} placeholder="0000" />
+        <InputField value={'1234'} onChange={fn()} placeholder="0000" />
+        <InputField value={'1234'} onChange={fn()} placeholder="0000" />
+        <InputField value={'1234'} onChange={fn()} placeholder="0000" />
       </>
     ),
   },
