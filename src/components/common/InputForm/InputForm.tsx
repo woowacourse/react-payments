@@ -4,11 +4,12 @@ export interface InputFormProps {
   title: string;
   label: string;
   description?: string;
+  feedbackMessage?: string;
   children: React.ReactNode;
 }
 
 function InputForm(props: InputFormProps) {
-  const { title, label, description } = props;
+  const { title, label, description, feedbackMessage } = props;
 
   return (
     <div className={styles.container}>
@@ -19,6 +20,16 @@ function InputForm(props: InputFormProps) {
       <div className={styles.inputBox}>
         <label className='tx-lg'>{label}</label>
         <div className={styles.inputContainer}>{props.children}</div>
+        <p
+          style={
+            feedbackMessage
+              ? { visibility: 'visible' }
+              : { visibility: 'hidden' }
+          }
+          className={`${styles.feedbackMessage}`}
+        >
+          {feedbackMessage}
+        </p>
       </div>
     </div>
   );

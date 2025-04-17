@@ -5,7 +5,7 @@
 }
 .container {
   width: 390px;
-  height: 640px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;

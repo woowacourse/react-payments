@@ -11,4 +11,7 @@
   &:focus {
     border: 1px solid var(--black);
   }
+  &.isNotValid {
+    border: 1px solid var(--red);
+  }
 }

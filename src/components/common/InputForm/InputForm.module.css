@@ -36,3 +36,8 @@ label {
     color: var(--grey);
   }
 }
+
+.feedbackMessage {
+  color: var(--red);
+  height: 18px;
+}
