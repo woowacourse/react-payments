@@ -49,7 +49,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
             onChange={(e) => onChange({ e, idx })}
             onBlur={(e) => validate({ e, idx })}
             maxLength={4}
-            placeHolder={'1234'}
+            placeholder={'1234'}
             isError={isError[idx]}
           />
         ))}

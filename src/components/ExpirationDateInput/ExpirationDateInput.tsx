@@ -106,7 +106,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
             onChange={(e) => onChange({ e, idx })}
             onBlur={(e) => checkValidExpirationDate({ e, idx })}
             maxLength={2}
-            placeHolder={placeHolders[idx]}
+            placeholder={placeHolders[idx]}
             isError={isError[idx]}
           />
         ))}

@@ -47,7 +47,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
             onChange={(e) => onChange({ e, idx })}
             onBlur={(e) => validate({ e, idx })}
             maxLength={3}
-            placeHolder={'123'}
+            placeholder={'123'}
             isError={isError[idx]}
           />
         ))}
