@@ -1,8 +1,8 @@
 import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
-
-import { ExpireDateState } from "../../types";
+import { EXPIRE_DATE_KEYS } from "../../constants";
+import type { ExpireDateState } from "../../types";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
@@ -17,46 +17,42 @@ function CardExpireDateInputs({
   handleExpireYearChange,
   handleExpireMonthBlur,
 }: CardExpireDateInputsProps) {
-  const { MM, YY } = expireDate;
+  const changeEvent = {
+    MM: handleExpireMonthChange,
+    YY: handleExpireYearChange,
+  };
 
   return (
     <div className={styles.container}>
-      <Label htmlFor="expire-date-input">유효 기간</Label>
-      <p className={styles.expireDateInputContainer}>
-        <p className={styles.expireDateInputBox}>
-          <Input
-            id="expire-month-input"
-            type="text"
-            maxLength={2}
-            placeholder="MM"
-            isError={Boolean(MM.errorMessage)}
-            value={MM.value}
-            onChange={(e) => handleExpireMonthChange(e.target.value)}
-            onBlur={(e) => handleExpireMonthBlur(e.target.value)}
-          />
-          {MM.errorMessage && (
-            <span id="month-error-message" className={styles.errorMessage}>
-              {MM.errorMessage}
+      <div className={styles.expireDateInputContainer}>
+        {EXPIRE_DATE_KEYS.map((expireKey, idx) => (
+          <p className={styles.expireDateInputBox} key={expireKey}>
+            <Label htmlFor={`expire-${expireKey}-input`} isHidden={idx !== 0}>
+              유효 기간
+            </Label>
+            <Input
+              id={`expire-${expireKey}-input`}
+              type="text"
+              maxLength={2}
+              placeholder={expireKey}
+              isError={Boolean(expireDate[expireKey].errorMessage)}
+              value={expireDate[expireKey].value}
+              onChange={(e) => changeEvent[expireKey](e.target.value)}
+              onBlur={
+                expireKey === "MM"
+                  ? (e) => handleExpireMonthBlur(e.target.value)
+                  : undefined
+              }
+            />
+            <span
+              id={`${expireKey}-error-message`}
+              className={styles.errorMessage}
+            >
+              {expireDate[expireKey].errorMessage}
             </span>
-          )}
-        </p>
-        <p className={styles.expireDateInputBox}>
-          <Input
-            id="expire-year-input"
-            type="text"
-            maxLength={2}
-            placeholder="YY"
-            isError={Boolean(YY.errorMessage)}
-            value={YY.value}
-            onChange={(e) => handleExpireYearChange(e.target.value)}
-          />
-          {YY.errorMessage && (
-            <span id="year-error-message" className={styles.errorMessage}>
-              {YY.errorMessage}
-            </span>
-          )}
-        </p>
-      </p>
+          </p>
+        ))}
+      </div>
     </div>
   );
 }

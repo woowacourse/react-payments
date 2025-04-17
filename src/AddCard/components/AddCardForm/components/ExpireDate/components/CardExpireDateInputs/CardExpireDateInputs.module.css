@@ -16,10 +16,13 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  justify-content: flex-end;
+  height: 90px;
 }
 
 .errorMessage {
   color: #ff3d3d;
   font-family: "Noto Sans KR";
   font-size: 0.75rem;
+  height: 15px;
 }
