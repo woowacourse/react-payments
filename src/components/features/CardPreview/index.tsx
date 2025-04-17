@@ -35,16 +35,10 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
     }
   };
 
-  const getDisplayCardNumber = (number: number, index: number): string => {
-    if (!number) {
-      return '';
-    }
+  const getDisplayCardNumber = (cardNumber: number, index: number): string => {
+    if (!cardNumber) return '';
 
-    if (index < 2) {
-      return number.toString();
-    }
-
-    return '****';
+    return index < 2 ? cardNumber.toString() : '****';
   };
 
   return (
