@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import useError from './useError';
+import isValidStringLength from './validate/isValidStringLength';
+import isNumber from './validate/IsNumber';
+import isValidNumberRange from './validate/isValidNumberRange';
 
 type CardExpirationDateKeys = 'month' | 'year';
 
@@ -44,16 +47,16 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
   ) => {
     if (input.length < 2) return { isError: false, errorMessage: '' };
 
-    if (isNaN(Number(input))) {
+    if (!isNumber(input)) {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
 
-    if (input.length > 2) {
+    if (!isValidStringLength({ value: input, maxLength: 2 })) {
       return { isError: true, errorMessage: '2자리 숫자만 입력 가능합니다' };
     }
 
     if (target === 'month') {
-      if (Number(input) < 1 || Number(input) > 12) {
+      if (!isValidNumberRange({ value: Number(input), min: 1, max: 12 })) {
         return {
           isError: true,
           errorMessage: '01 ~ 12 사이의 숫자만 입력 가능합니다',
@@ -68,7 +71,7 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
     }
 
     if (target === 'year') {
-      if (Number(input) < 0 || Number(input) > 99) {
+      if (!isValidNumberRange({ value: Number(input), min: 0, max: 99 })) {
         return {
           isError: true,
           errorMessage: '00 ~ 99 사이의 숫자만 입력 가능합니다',

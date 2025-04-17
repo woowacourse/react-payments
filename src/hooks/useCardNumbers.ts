@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import useError from './useError';
+import isNumber from './validate/IsNumber';
+import isValidStringLength from './validate/isValidStringLength';
 
 type CardNumbersKeys =
   | 'firstNumber'
@@ -52,11 +54,11 @@ const useCardNumbers = (): UseCardNumbersOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {
-    if (isNaN(Number(input))) {
+    if (!isNumber(input)) {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
     //TODO: focus out 시 카드번호 검증 로직 추가
-    if (input.length > 4) {
+    if (!isValidStringLength({ value: input, maxLength: 4 })) {
       return { isError: true, errorMessage: '4자리 숫자만 입력 가능합니다' };
     }
 

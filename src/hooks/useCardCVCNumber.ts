@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import useError from './useError';
+import isNumber from './validate/IsNumber';
+import isValidStringLength from './validate/isValidStringLength';
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
@@ -21,10 +23,10 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardCVCNumberChangeValidationResult = (input: string) => {
-    if (isNaN(Number(input))) {
+    if (!isNumber(input)) {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
-    if (input.length > 3) {
+    if (isValidStringLength({ value: input, maxLength: 3 })) {
       return { isError: true, errorMessage: '3자리를 입려해야 합니다' };
     }
 
@@ -45,7 +47,6 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     setCardCVCNumber(event.target.value.trim());
   };
 
-  console.log('error!', error);
   return {
     cardCVCNumber: cardCVCNumber,
     setCardCVCNumber: handleCardCVCNumberChange,
