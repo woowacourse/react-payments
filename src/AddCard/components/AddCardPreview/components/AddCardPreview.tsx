@@ -4,23 +4,12 @@ import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/ty
 import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "../../../../components/Dot/Dot";
+import { getCardBrand } from "../utils";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,
   MASTERCARD: MasterCardImage,
   DEFAULT: "",
-};
-
-const getCardBrand = (cardNumber: number) => {
-  if (cardNumber.toString().startsWith("4")) {
-    return "VISA";
-  }
-
-  if (cardNumber >= 51 && cardNumber <= 55) {
-    return "MASTERCARD";
-  }
-
-  return "DEFAULT";
 };
 
 interface AddCardPreviewProps {
