@@ -1,21 +1,13 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
-import { useState } from 'react';
 
-function CardCVCField() {
-  const [cardCVC, setCardCVC] = useState('');
-  const [isError, setIsError] = useState(false);
+interface CardCVCFieldProps {
+  cardCVC: string;
+  isError: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const isNotValid =
-      value.length < 3 || value.length > 3 || Number(value) < 0;
-
-    setIsError(isNotValid);
-    setCardCVC(value.slice(0, 3));
-  };
-
+function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
   return (
     <div>
       <Label htmlFor="CardCVC-0" id="CardCVC">
