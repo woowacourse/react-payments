@@ -1,3 +1,5 @@
+import { ERROR_MESSAGES } from '../constants/errorMessages';
+
 export const inputValidation = (e: React.ChangeEvent<HTMLInputElement>, validLength: number) => {
   const inputValue = e.target.value;
   checkNumber(inputValue);
@@ -5,10 +7,10 @@ export const inputValidation = (e: React.ChangeEvent<HTMLInputElement>, validLen
 };
 
 export const checkNumber = (value: string) => {
-  if (!Number.isInteger(Number(value))) throw new Error(`숫자만 입력 가능합니다.`);
+  if (!Number.isInteger(Number(value))) throw new Error(`${ERROR_MESSAGES.IS_NOT_NUM}`);
 };
 
 export const checkValidLength = (value: string, validLength: number) => {
   if (value.length !== validLength)
-    throw new Error(`반드시 ${validLength}자리의 숫자를 입력해야 합니다.`);
+    throw new Error(`${ERROR_MESSAGES.INVALID_LENGTH(validLength)}`);
 };
