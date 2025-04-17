@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardInputSection from './CardInputSection';
 import CardNumberField from '../CardNumberField/CardNumberField';
 import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
+import CardCVCField from '../CardCVCField/CardCVCField';
 import React, { useState } from 'react';
 
 const meta = {
@@ -163,6 +164,49 @@ export const CardValidityPeriod: Story = {
           cardValidityPeriod={cardValidityPeriod}
           isError={isErrorCardValidityPeriod}
           onChange={onChangeCardValidityPeriod}
+        />
+      </CardInputSection>
+    );
+  },
+};
+
+export const CardCVC: Story = {
+  args: {
+    title: 'CVC 번호를 입력해 주세요',
+    errorMessage: '',
+    children: <></>,
+  },
+  render: (args) => {
+    const [cardCVC, setCardCVC] = useState('');
+    const [isCardCVCError, setIsCardCVCError] = useState(false);
+
+    const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+
+      if (value.length > 3) {
+        return;
+      }
+
+      const isNotValid =
+        value.length < 3 || value.length > 3 || Number(value) < 0;
+
+      setIsCardCVCError(isNotValid);
+      setCardCVC(value);
+    };
+
+    const checkCardCVCError = () => {
+      return isCardCVCError;
+    };
+
+    return (
+      <CardInputSection
+        {...args}
+        errorMessage={checkCardCVCError() ? 'CVC는 3자리입니다.' : ''}
+      >
+        <CardCVCField
+          cardCVC={cardCVC}
+          isError={isCardCVCError}
+          onChange={onChangeCVC}
         />
       </CardInputSection>
     );
