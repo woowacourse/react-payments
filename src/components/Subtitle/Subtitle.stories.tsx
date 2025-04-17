@@ -11,20 +11,8 @@ export default meta;
 
 type Story = StoryObj<typeof Subtitle>;
 
-export const CardSubTitle: Story = {
+export const Default: Story = {
   args: {
     subtitle: "카드 번호",
-  },
-};
-
-export const ExpirationPeriodSubTitle: Story = {
-  args: {
-    subtitle: "유효기간",
-  },
-};
-
-export const CVCSubTitle: Story = {
-  args: {
-    subtitle: "CVC",
   },
 };
