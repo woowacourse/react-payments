@@ -5,6 +5,7 @@ import InputField from "../inputField/InputField";
 import Title from "../title/Title";
 import { cardNumber } from "../../App";
 import { Dispatch, SetStateAction, useState } from "react";
+import findErrorOrder from "../../utils/findErrorOrder";
 
 const INPUT_MAX_LENGTH = 4;
 
@@ -37,14 +38,6 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: `${INPUT_MAX_LENGTH}자리를 입력해주세요.` });
 	};
 
-	const findError = () => {
-		for (const key in error) {
-			if (error[key as keyof cardNumber].length > 0) return error[key as keyof cardNumber];
-		}
-
-		return "";
-	};
-
 	const cardNumberInputs = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
 		const orderLabels = ["first", "second", "third", "fourth"] as const;
 
@@ -64,7 +57,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		<CardNumberWrap>
 			<Title>결제할 카드 번호를 입력해 주세요</Title>
 			<Description>본인 명의의 카드만 결제 가능합니다.</Description>
-			<InputField label="카드 번호" inputs={cardNumberInputs} errorMessage={findError()} />
+			<InputField label="카드 번호" inputs={cardNumberInputs} errorMessage={findErrorOrder(error)} />
 		</CardNumberWrap>
 	);
 };

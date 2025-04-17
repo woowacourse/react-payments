@@ -5,6 +5,7 @@ import InputField from "../inputField/InputField";
 import Title from "../title/Title";
 import styled from "styled-components";
 import Input from "../input/Input";
+import findErrorOrder from "../../utils/findErrorOrder";
 
 const INPUT_MAX_LENGTH = 2;
 
@@ -52,14 +53,6 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: "MM형태로 입력해주세요." });
 	};
 
-	const findError = () => {
-		for (const key in error) {
-			if (error[key as keyof date].length > 0) return error[key as keyof date];
-		}
-
-		return "";
-	};
-
 	const expirationInput = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
 		const orderLabels = ["month", "year"] as const;
 
@@ -79,7 +72,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		<CardNumberWrap>
 			<Title>카드 유효기간을 입력해 주세요</Title>
 			<Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-			<InputField label="유효기간" inputs={expirationInput} errorMessage={findError()} />
+			<InputField label="유효기간" inputs={expirationInput} errorMessage={findErrorOrder(error)} />
 		</CardNumberWrap>
 	);
 };
