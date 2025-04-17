@@ -49,26 +49,31 @@ export default function useCardNumbers() {
         CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
       )
     ) {
-      replaceAt(
-        cardNumbersError,
-        CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
-        index,
-        setError
-      );
+      replaceAt({
+        array: cardNumbersError,
+        newValue: CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
+        index: index,
+        setState: setError,
+      });
       return;
     }
 
     if (!isNumber(value)) {
-      replaceAt(
-        cardNumbersError,
-        CONSTANT_USE_CARD_NUMBER.IS_NUMBER_ERROR,
-        index,
-        setError
-      );
+      replaceAt({
+        array: cardNumbersError,
+        newValue: CONSTANT_USE_CARD_NUMBER.IS_NUMBER_ERROR,
+        index: index,
+        setState: setError,
+      });
       return;
     }
 
-    replaceAt(cardNumbersError, "", index, setError);
+    replaceAt({
+      array: cardNumbersError,
+      newValue: "",
+      index: index,
+      setState: setError,
+    });
   };
 
   return { cardNumbers, cardType, cardNumbersError, cardNumbersValidate };

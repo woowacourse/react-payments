@@ -16,25 +16,31 @@ export default function useCvcNumber() {
     setCardCvcNumbers(value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH));
 
     if (!isValidLength(value.length, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH)) {
-      replaceAt(
-        cvcNumbersError,
-        CONSTANT_USE_CVC_NUMBER.IS_VALID_LENGTH_ERROR,
-        0,
-        setError
-      );
+      replaceAt({
+        array: cvcNumbersError,
+        newValue: CONSTANT_USE_CVC_NUMBER.IS_VALID_LENGTH_ERROR,
+        index: 0,
+        setState: setError,
+      });
+
       return;
     }
 
     if (!isNumber(value)) {
-      replaceAt(
-        cvcNumbersError,
-        CONSTANT_USE_CVC_NUMBER.IS_NUMBER_ERROR,
-        0,
-        setError
-      );
+      replaceAt({
+        array: cvcNumbersError,
+        newValue: CONSTANT_USE_CVC_NUMBER.IS_NUMBER_ERROR,
+        index: 0,
+        setState: setError,
+      });
       return;
     }
-    replaceAt(cvcNumbersError, "", 0, setError);
+    replaceAt({
+      array: cvcNumbersError,
+      newValue: "",
+      index: 0,
+      setState: setError,
+    });
   };
 
   return {

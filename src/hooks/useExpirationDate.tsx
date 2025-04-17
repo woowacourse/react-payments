@@ -19,22 +19,22 @@ export default function useExpirationDate() {
     setcardExpirationDate(newDate);
 
     if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
-      replaceAt(
-        cardExpirationDateError,
-        CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
-        index,
-        setError
-      );
+      replaceAt({
+        array: cardExpirationDateError,
+        newValue: CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
+        index: index,
+        setState: setError,
+      });
       return;
     }
 
     if (!isNumber(value)) {
-      replaceAt(
-        cardExpirationDateError,
-        CONSTANT_USE_EXPIRATION_DATE.IS_NUMBER_ERROR,
-        index,
-        setError
-      );
+      replaceAt({
+        array: cardExpirationDateError,
+        newValue: CONSTANT_USE_EXPIRATION_DATE.IS_NUMBER_ERROR,
+        index: index,
+        setState: setError,
+      });
       return;
     }
 
@@ -43,15 +43,20 @@ export default function useExpirationDate() {
       value.length === CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH &&
       !isValidMonth(Number(value))
     ) {
-      replaceAt(
-        cardExpirationDateError,
-        CONSTANT_USE_EXPIRATION_DATE.MONTH_RANGE_ERROR,
-        index,
-        setError
-      );
+      replaceAt({
+        array: cardExpirationDateError,
+        newValue: CONSTANT_USE_EXPIRATION_DATE.MONTH_RANGE_ERROR,
+        index: index,
+        setState: setError,
+      });
       return;
     }
-    replaceAt(cardExpirationDateError, "", index, setError);
+    replaceAt({
+      array: cardExpirationDateError,
+      newValue: "",
+      index: index,
+      setState: setError,
+    });
   };
 
   return {
