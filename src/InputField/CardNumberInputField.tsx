@@ -107,15 +107,16 @@ function CardNumberInputField({
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      {CARD_NUMBER_INPUT_TYPE.map((inputFieldType) => (
+      {CARD_NUMBER_INPUT_TYPE.map((inputType) => (
         <Input
+          key={inputType}
           type="number"
           placeholder="1234"
-          value={inputValue[inputFieldType]}
+          value={inputValue[inputType]}
           onChange={onChange}
           onBlur={onBlur}
-          name={inputFieldType}
-          isError={Boolean(errorTypes[inputFieldType].length)}
+          name={inputType}
+          isError={Boolean(errorTypes[inputType].length)}
         />
       ))}
     </BaseInputField>
