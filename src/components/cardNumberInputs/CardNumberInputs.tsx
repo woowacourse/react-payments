@@ -73,8 +73,7 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     width='25%'
                     maxLength={CARD_NUMBER_LENGTH}
                     placeholder="1234" 
-                    isError={error['first'] !== NO_ERROR} >
-                    </Input>
+                    isError={error['first'] !== NO_ERROR} />
                 <Input 
                     value={cardNumber['second']} 
                     onChange={(e) =>
@@ -84,8 +83,8 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     }} 
                     width='25%' 
                     maxLength={CARD_NUMBER_LENGTH} 
-                    placeholder="1234" 
-                    isError={error['second'] !== NO_ERROR}></Input>
+                    placeholder='1234' 
+                    isError={error['second'] !== NO_ERROR} />
                 <Input 
                     value={cardNumber['third']} 
                     onChange={(e) =>
@@ -95,8 +94,8 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     }} 
                     width='25%' 
                     maxLength={CARD_NUMBER_LENGTH} 
-                    placeholder="1234" 
-                    isError={error['third'] !== NO_ERROR}></Input>
+                    placeholder='1234' 
+                    isError={error['third'] !== NO_ERROR} />
                 <Input 
                     value={cardNumber['fourth']} 
                     onChange={(e) =>
@@ -106,8 +105,8 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     }} 
                     width='25%' 
                     maxLength={CARD_NUMBER_LENGTH} 
-                    placeholder="1234" 
-                    isError={error['fourth'] !== NO_ERROR}></Input>
+                    placeholder='1234' 
+                    isError={error['fourth'] !== NO_ERROR} />
             </StyledInputWrap>
            {getErrorMessage() ? <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage> : null}  
         </StyledContainer>

@@ -97,7 +97,7 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
                 </StyledMagnetic>
                 {logoSrc !== INITIALIZE_VALUE ?
                     <StyledLogoWrap>
-                        <img src={logoSrc} alt="logo" style={{width: "100%", height: "100%"}}/>
+                        <img src={logoSrc} alt='logo' style={{width: '100%', height: '100%'}}/>
                     </StyledLogoWrap>
                     : null}
             </StyledIconWrap>

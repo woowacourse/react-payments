@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import CardExpirationPeriodSection from "./CardExpirationPeriodSection";
 
 const meta = {
-    title: "CardExpirationPeriodSection",
+    title: 'CardExpirationPeriodSection',
     component: CardExpirationPeriodSection,
   } satisfies Meta<typeof CardExpirationPeriodSection>;
   
@@ -12,8 +12,8 @@ const meta = {
   
   export const Default: Story = {
     args: {
-      expirationPeriod: {month: "12",
-      year : "23" },
+      expirationPeriod: {month: '12',
+      year : '23' },
       changeExpirationPeriod: () => alert('변경'),
       }
   };

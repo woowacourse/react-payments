@@ -7,7 +7,6 @@ import { StyledContainer, StyledInputWrap, StyledErrorMessage } from "../../styl
 
 const CVC_NUMBER_LENGTH = 3;
 
-
 const errorMessage = {
     length: '3자리만 입력 가능합니다.',
     number : '숫자만 입력 가능합니다.'
@@ -49,7 +48,7 @@ function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectio
                     isError={error !== NO_ERROR}
                     width='100%'
                     maxLength={CVC_NUMBER_LENGTH}
-                    placeholder="123" ></Input>
+                    placeholder='123' />
             </StyledInputWrap>
             {error !== NO_ERROR ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
         </StyledContainer>

@@ -1,5 +1,5 @@
-export type Position = "first" | "second" | "third" | "fourth"
-// export type ExpirationPeriod = "month" | "year"
+export type Position = 'first' | 'second' | 'third' | 'fourth'
+
 
 export type CardNumber = {
     first: string ,

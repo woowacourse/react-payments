@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import CardCVCNumberSection from "./CardCVCNumberSection";
 
 const meta = {
-    title: "CardCVCNumberSection",
+    title: 'CardCVCNumberSection',
     component: CardCVCNumberSection,
   } satisfies Meta<typeof CardCVCNumberSection>;
   
@@ -12,7 +12,7 @@ const meta = {
   
   export const Default: Story = {
     args: {
-      CVCNumber: "123",
+      CVCNumber: '123',
       changeCVCNumber : () => alert('변경')
       }
   };

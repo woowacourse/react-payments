@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 function CardCVCNumberSection({ CVCNumber, changeCVCNumber } : CardCVCNumberSectionProps) {
     return (
         <StyledContainer>
-            <SectionTitle title="CVC 번호를 입력해 주세요"/>
+            <SectionTitle title='CVC 번호를 입력해 주세요'/>
             <CardCVCNumberInputs CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber}/>
         </StyledContainer>
     )

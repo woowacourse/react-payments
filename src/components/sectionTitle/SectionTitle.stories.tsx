@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import SectionTitle from "./SectionTitle";
 
 const meta = {
-    title: "SectionTitle",
+    title: 'SectionTitle',
     component: SectionTitle,
   } satisfies Meta<typeof SectionTitle>;
   

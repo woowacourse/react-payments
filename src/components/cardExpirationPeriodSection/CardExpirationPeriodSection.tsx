@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 function CardExpirationPeriodSection({expirationPeriod ,changeExpirationPeriod}: ExpirationPeriodProps) {
     return (
         <StyledContainer>
-            <SectionTitle title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."/>
+            <SectionTitle title='카드 유효기간을 입력해 주세요' subTitle='월/년도(MMYY)를 순서대로 입력해 주세요.'/>
             <CardExpirationPeriodInputs expirationPeriod={expirationPeriod} changeExpirationPeriod={changeExpirationPeriod}/>
         </StyledContainer>
     )

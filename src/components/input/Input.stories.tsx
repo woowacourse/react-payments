@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Input from "./Input";
 
 const meta = {
-    title: "Input",
+    title: 'Input',
     component: Input,
   } satisfies Meta<typeof Input>;
   
@@ -13,7 +13,7 @@ const meta = {
   export const Default: Story = {
     args: {
         maxLength: 10,
-        placeholder: "Enter text here",
+        placeholder: 'Enter text here',
         width: '100%',
         onChange: () => alert('Input changed'),
         value : 'string',
@@ -24,7 +24,7 @@ const meta = {
   export const CardNumber: Story = {
     args: {
         maxLength: 4,
-        placeholder: "1234",
+        placeholder: '1234',
         width: '100%',
         onChange: () => alert('Input changed'),
         value : 'string',
@@ -35,7 +35,7 @@ const meta = {
   export const ExpirationPeriodMonth: Story = {
     args: {
         maxLength: 2,
-        placeholder: "MM",
+        placeholder: 'MM',
         width: '100%',
         onChange: () => alert('Input changed'),
         value : 'string',
@@ -46,7 +46,7 @@ const meta = {
   export const ExpirationPeriodYear: Story = {
     args: {
         maxLength: 2,
-        placeholder: "YY",
+        placeholder: 'YY',
         width: '100%',
         onChange: () => alert('Input changed'),
         value : 'string',
@@ -57,7 +57,7 @@ const meta = {
   export const CVC: Story = {
     args: {
         maxLength: 3,
-        placeholder: "123",
+        placeholder: '123',
         width: '100%',
         onChange: () => alert('Input changed'),
         value : 'string',

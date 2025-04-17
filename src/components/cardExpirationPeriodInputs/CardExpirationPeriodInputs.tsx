@@ -2,7 +2,7 @@ import { useState } from "react"
 import Input from "../input/Input"
 import { ExpirationPeriod, ExpirationPeriodProps } from "../../\btypes/index.types"
 import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from "../../util/validation"
-import { NO_ERROR } from "../../constants/constant"
+import { NO_ERROR, EXPIRATION_PERIOD } from "../../constants/constant"
 import { StyledContainer, StyledInputWrap, StyledErrorMessage } from "../../styled-component/inputs"
 
 
@@ -49,37 +49,37 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
     function checkMonthValidation(length: number, number: string) {
   if (number === NO_ERROR) {
             setError((prev) => {
-                prev["month"] = NO_ERROR
+                prev[EXPIRATION_PERIOD.MONTH] = NO_ERROR
                 return {...prev}
             })
             return;
         }
         if (!isValidMonthRange(number)) {
             setError((prev) => {
-                prev["month"] = errorMessage.monthRange
+                prev[EXPIRATION_PERIOD.MONTH] = errorMessage.monthRange
                 return {...prev}
             })
               return;
         } 
-        checkCommonValidation("month", length, number);
+        checkCommonValidation(EXPIRATION_PERIOD.MONTH, length, number);
 
     }
     function checkYearValidation(length: number, number: string) {
          if (number === NO_ERROR) {
             setError((prev) => {
-                prev["year"] = NO_ERROR
+                prev[EXPIRATION_PERIOD.YEAR] = NO_ERROR
                 return {...prev}
             })
             return;
         }
         if (!isValidYearRange(number)) {
             setError((prev) => {
-                prev["year"] = errorMessage.yearRange
+                prev[EXPIRATION_PERIOD.YEAR] = errorMessage.yearRange
                 return {...prev}
             })
               return;
         } 
-        checkCommonValidation("year", length, number);
+        checkCommonValidation(EXPIRATION_PERIOD.YEAR, length, number);
     }
 
     function getErrorMessage() {
@@ -99,7 +99,7 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
                 value={expirationPeriod['month']} 
                 onChange={(e) => {
                     checkMonthValidation(EXPIRATION_PERIOD_LENGTH, e.target.value)
-                    changeExpirationPeriod("month", e.target.value)
+                    changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value)
                     }}
                 width='50%' 
                 maxLength={EXPIRATION_PERIOD_LENGTH} 
@@ -109,12 +109,12 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
                 value={expirationPeriod['year']} 
                 onChange={(e) => {
                     checkYearValidation(EXPIRATION_PERIOD_LENGTH, e.target.value)
-                    changeExpirationPeriod("year", e.target.value)
+                    changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value)
                     }}
                 width='50%' 
                 maxLength={EXPIRATION_PERIOD_LENGTH} 
                 placeholder="YY" 
-                isError={error['year'] !== NO_ERROR}></Input>
+                isError={error['year'] !== NO_ERROR} />
             </StyledInputWrap>
             {getErrorMessage() ? <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage> : null}
         </StyledContainer>
