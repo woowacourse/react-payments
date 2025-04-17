@@ -1,6 +1,7 @@
 import * as S from './CardPreview.styles'
 import MasterCard from './logo/MasterCard'
 import VisaCard from './logo/VisaCard'
+import { MASKING } from '../constants'
 
 interface CardPreviewProps {
   cardType: 'visa' | 'master' | ''
@@ -21,12 +22,12 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
         <span>{cardNumber.second}</span>
         <span>
           {Array.from({ length: cardNumber.third.length }, () => {
-            return '·'
+            return MASKING
           })}
         </span>
         <span>
           {Array.from({ length: cardNumber.fourth.length }, () => {
-            return '·'
+            return MASKING
           })}
         </span>
       </S.CardPreviewMiddle>

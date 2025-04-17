@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import CardCVCNumber from '../../components/CardCVCNumber'
 import { useState } from '@storybook/preview-api'
+import { ERROR_MESSAGE } from '../../constants'
 
 const meta = {
   title: 'CardCVCNumber',
@@ -45,7 +46,7 @@ export const Valid: Story = {
 export const Error: Story = {
   args: {
     cardCVCNumber: '우테코',
-    cardCVCNumberErrorMessage: '숫자만 입력 가능합니다.',
+    cardCVCNumberErrorMessage: ERROR_MESSAGE.onlyNumber,
     setCardCVCNumber: () => {},
     setCardCVCNumberErrorMessage: () => {},
   },

@@ -5,6 +5,7 @@ import Input from './common/Input'
 import Spacing from './common/Spacing'
 import ErrorMessage from './common/ErrorMessage'
 import { Dispatch, SetStateAction } from 'react'
+import { ERROR_MESSAGE } from '../constants'
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<string, string>
@@ -34,7 +35,7 @@ export default function CardExpirationDate({
     })
 
     if (!/^[0-9]*$/.test(value)) {
-      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: '숫자만 입력 가능합니다.' })
+      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber })
       return
     }
 
@@ -42,7 +43,7 @@ export default function CardExpirationDate({
 
     if (dateType === 'month') {
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: '유효하지 않은 월입니다.' })
+        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth })
       }
     }
 
@@ -50,7 +51,7 @@ export default function CardExpirationDate({
       if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
         setCardExpirationDateErrorMessage({
           ...cardExpirationDateErrorMessage,
-          [dateType]: '유효 기간이 지난 연도입니다.',
+          [dateType]: ERROR_MESSAGE.pastYear,
         })
       }
     }

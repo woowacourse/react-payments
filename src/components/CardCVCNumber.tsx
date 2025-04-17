@@ -5,6 +5,7 @@ import Spacing from './common/Spacing'
 
 import ErrorMessage from './common/ErrorMessage'
 import { Dispatch, SetStateAction } from 'react'
+import { ERROR_MESSAGE } from '../constants'
 
 interface CardCVCNumberProps {
   cardCVCNumber: string
@@ -27,7 +28,7 @@ export default function CardCVCNumber({
       return
     }
 
-    setCardCVCNumberErrorMessage('숫자만 입력 가능합니다.')
+    setCardCVCNumberErrorMessage(ERROR_MESSAGE.onlyNumber)
   }
 
   return (

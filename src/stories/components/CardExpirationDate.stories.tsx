@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import CardExpirationDate, { dateType } from '../../components/CardExpirationDate'
 import { useState } from 'storybook/internal/preview-api'
+import { ERROR_MESSAGE } from '../../constants'
 
 const meta = {
   title: 'CardExpirationDate',
@@ -68,8 +69,8 @@ export const Error: Story = {
     },
     setCardExpirationDate: () => {},
     cardExpirationDateErrorMessage: {
-      month: '유효하지 않은 월입니다.',
-      year: '유효 기간이 지난 연도입니다.',
+      month: ERROR_MESSAGE.validMonth,
+      year: ERROR_MESSAGE.pastYear,
     },
     setCardExpirationDateErrorMessage: () => {},
   },

@@ -5,6 +5,7 @@ import Input from './common/Input'
 import Spacing from './common/Spacing'
 import ErrorMessage from './common/ErrorMessage'
 import { Dispatch, SetStateAction } from 'react'
+import { ERROR_MESSAGE } from '../constants'
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>
@@ -34,7 +35,7 @@ export default function CardNumber({
       return
     }
 
-    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '숫자만 입력 가능합니다.' })
+    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.onlyNumber })
   }
 
   return (
