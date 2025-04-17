@@ -16,7 +16,7 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
       <div className={styles.cardInfo}>
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
-            <span key={index}>
+            <span key={index} data-testid={`card-number-${index}`}>
               {index === 2 || index === 3
                 ? number
                   ? "•".repeat(number.length).padEnd(CardValidationInfo.CARD_MAX_LENGTH, " ")

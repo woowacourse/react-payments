@@ -68,7 +68,7 @@ export const validateYear = (year: string, length: number) => {
   if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!numberLength(year, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
-  if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
+  if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
 };
 
 export const validateCVC = (number: string, length: number) => {
