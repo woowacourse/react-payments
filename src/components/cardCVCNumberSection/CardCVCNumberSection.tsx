@@ -1,5 +1,5 @@
 import SectionTitle from "../sectionTitle/SectionTitle"
-import CardCVCNumberInputs from "../cardCVCNumberInputs/cardCVCNumberInputs"
+import CardCVCNumberInputs from "../cardCVCNumberInputs/CardCVCNumberInputs"
 import styled from "styled-components"
 import { CardCVCNumberSectionProps } from "../../\btypes/index.types"
 
