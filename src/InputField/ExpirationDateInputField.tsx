@@ -1,7 +1,10 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
-import { ExpirationDateInputType } from '../config/inputField';
+import {
+  EXPIRATION_DATE_INPUT_TYPE,
+  ExpirationDateInputType,
+} from '../config/inputField';
 
 function ExpirationDateInputField({
   inputValue,
@@ -27,22 +30,16 @@ function ExpirationDateInputField({
 
   return (
     <BaseInputField label="유효기간">
-      <Input
-        type="number"
-        placeholder="MM"
-        value={inputValue.expirationDatePart1}
-        onChange={onChange}
-        name="expirationDatePart1"
-        onBlur={onBlur}
-      />
-      <Input
-        type="number"
-        placeholder="YY"
-        value={inputValue.expirationDatePart2}
-        onChange={onChange}
-        name="expirationDatePart2"
-        onBlur={onBlur}
-      />
+      {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
+        <Input
+          type="number"
+          placeholder="MM"
+          value={inputValue[inputType]}
+          onChange={onChange}
+          name={inputType}
+          onBlur={onBlur}
+        />
+      ))}
     </BaseInputField>
   );
 }

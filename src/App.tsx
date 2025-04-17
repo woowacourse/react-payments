@@ -7,6 +7,11 @@ import ExpirationDateInputField from './InputField/ExpirationDateInputField';
 import CVCInputField from './InputField/CVCInputField';
 import { useState } from 'react';
 import { CardType } from './config/card';
+import {
+  CardNumberInputType,
+  CVCInputValueType,
+  ExpirationDateInputType,
+} from './config/inputField';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
@@ -29,19 +34,25 @@ const PaymentsContainer = styled.div`
 `;
 
 function App() {
-  const [cardNumberInputValue, setCardNumberInputValue] = useState({
+  const [cardNumberInputValue, setCardNumberInputValue] = useState<
+    Record<CardNumberInputType, string>
+  >({
     cardNumberPart1: '',
     cardNumberPart2: '',
     cardNumberPart3: '',
     cardNumberPart4: '',
   });
 
-  const [expirationDateInputValue, setExpirationDateInputValue] = useState({
+  const [expirationDateInputValue, setExpirationDateInputValue] = useState<
+    Record<ExpirationDateInputType, string>
+  >({
     expirationDatePart1: '',
     expirationDatePart2: '',
   });
 
-  const [CVCInputValue, setCVCInputValue] = useState({
+  const [CVCInputValue, setCVCInputValue] = useState<
+    Record<CVCInputValueType, string>
+  >({
     CVCPart1: '',
   });
 
