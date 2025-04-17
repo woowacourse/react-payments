@@ -6,7 +6,7 @@ import {
   cardCVCValidator,
 } from '../../features/cardInfo/validation/cardInfoValidator';
 import { useState } from 'react';
-import '../../features/cardInfo/ui/cardInfoSection.css';
+import '../../features/cardInfo/ui/CardInfoSection.css';
 
 const meta: Meta<typeof CustomInput> = {
   title: 'Shared/CustomInput',
