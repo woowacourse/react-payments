@@ -4,8 +4,10 @@ interface PreviewCardLogoProps {
   cardType?: string;
 }
 
+const DEFAULT_CARD_TYPE = "default" as const;
+
 export default function PreviewCardLogo({
-  cardType = "default",
+  cardType = DEFAULT_CARD_TYPE,
 }: PreviewCardLogoProps) {
   return (
     <img className={styles["card-logo"]} src={cardLogoImagePath(cardType)} />

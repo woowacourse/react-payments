@@ -3,10 +3,15 @@ interface Props {
   inputValue: string;
 }
 
+const CONSTANT_INPUT_TITLE = " 입력해 주세요." as const;
+
 export default function InputTitle({ inputValue }: Props) {
   return (
     <div className="input-title">
-      <h2>{inputValue} 입력해 주세요.</h2>
+      <h2>
+        {inputValue}
+        {CONSTANT_INPUT_TITLE}
+      </h2>
     </div>
   );
 }

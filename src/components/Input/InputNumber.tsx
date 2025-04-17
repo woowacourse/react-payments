@@ -7,11 +7,14 @@ type InputNumberProps = {
   errorMessage?: string;
 };
 
+const DEFAULT_PLACEHOLDER = "1234" as const;
+const DEFAULT_ERROR_MESSAGE = "" as const;
+
 export default function InputNumber({
   value,
   onChange,
-  placeholder = "1234",
-  errorMessage,
+  placeholder = DEFAULT_PLACEHOLDER,
+  errorMessage = DEFAULT_ERROR_MESSAGE,
 }: InputNumberProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -20,7 +23,7 @@ export default function InputNumber({
   return (
     <input
       className={`${styles["input-number"]} ${
-        errorMessage ? styles["error"] : ""
+        errorMessage ? styles["error"] : DEFAULT_ERROR_MESSAGE
       }`}
       placeholder={placeholder}
       value={value}
