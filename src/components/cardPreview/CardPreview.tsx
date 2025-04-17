@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { CardNumber, ExpirationPeriod } from "../../\btypes/index.types"
 import { useState } from "react"
 import { useEffect } from "react"
+import { INITIALIZE_VALUE } from "../../constants/constant"
 
 
 const StyledContainer = styled.div`
@@ -68,15 +69,23 @@ type CardPreviewProps = {
     expirationPeriod: ExpirationPeriod
 }
 
+const CARD_IDENTIFYING_NUMBER = {
+    VISA: 4,
+    MASTERCARD: {
+        MIN: 51,
+        MAX: 55
+    }
+}
+
 function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
-    const [logoSrc, setLogoSrc] = useState("");
+    const [logoSrc, setLogoSrc] = useState(INITIALIZE_VALUE);
 
     useEffect(() => {
         function identifyLogo() {
             const id = cardNumber['first'].slice(0, 2);
-            if (id[0] === "4") setLogoSrc('/images/Visa.svg')
-            else if (Number(id) >= 51 && Number(id) <= 55) setLogoSrc('/images/Mastercard.svg')
-            else { setLogoSrc("") }
+            if (Number(id[0]) === CARD_IDENTIFYING_NUMBER.VISA) setLogoSrc('/images/Visa.svg')
+            else if (Number(id) >= CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN && Number(id) <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX) setLogoSrc('/images/Mastercard.svg')
+            else { setLogoSrc(INITIALIZE_VALUE) }
         }
          identifyLogo();
     },[cardNumber])
@@ -86,7 +95,7 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
             <StyledIconWrap>
                 <StyledMagnetic>
                 </StyledMagnetic>
-                {logoSrc !== "" ?
+                {logoSrc !== INITIALIZE_VALUE ?
                     <StyledLogoWrap>
                         <img src={logoSrc} alt="logo" style={{width: "100%", height: "100%"}}/>
                     </StyledLogoWrap>

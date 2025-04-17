@@ -6,6 +6,7 @@ import CardExpirationPeriodSection from "./components/cardExpirationPeriodSectio
 import CardCVCNumberSection from "./components/cardCVCNumberSection/CardCVCNumberSection";
 import { useState } from "react";
 import { ExpirationPeriod, Position } from "./\btypes/index.types";
+import { INITIALIZE_VALUE } from "./constants/constant";
 
 const StyledApp = styled.div`
 display: flex;
@@ -37,20 +38,19 @@ type ExpirationPeriodState = {
 
 
 function App() {
-
   const [cardNumber, setCardNumber] = useState<CardNumberState>({
-    first: "",
-    second: "",
-    third: "",
-    fourth : "",
+    first: INITIALIZE_VALUE,
+    second: INITIALIZE_VALUE,
+    third: INITIALIZE_VALUE,
+    fourth : INITIALIZE_VALUE,
   });
 
   const [expirationPeriod, setExpirationPeriod] = useState<ExpirationPeriodState >({
-    month: "",
-    year: "",
+    month: INITIALIZE_VALUE,
+    year: INITIALIZE_VALUE,
   });
 
-  const [CVCNumber, setCVCNumber] = useState("");
+  const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
 
 
   function changeCardNumber(position: Position, cardNumber: string) {

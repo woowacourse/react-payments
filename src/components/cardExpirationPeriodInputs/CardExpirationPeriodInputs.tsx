@@ -3,6 +3,10 @@ import Input from "../input/Input"
 import styled from "styled-components"
 import { ExpirationPeriod, ExpirationPeriodProps } from "../../\btypes/index.types"
 import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from "../../util/validation"
+import { NO_ERROR } from "../../constants/constant"
+
+
+const EXPIRATION_PERIOD_LENGTH = 3;
 
 const StyledContainer = styled.div`
     display: flex;
@@ -37,8 +41,8 @@ const errorMessage = {
 
 function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: ExpirationPeriodProps) {
     const [error, setError] = useState({
-        month: "",
-        year: "",
+        month: NO_ERROR,
+        year: NO_ERROR,
     });
 
     function checkCommonValidation(expirationPeriod: keyof ExpirationPeriod, length: number, number: string) {
@@ -59,14 +63,14 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
             return;
         }
         setError((prev) => {
-            prev[expirationPeriod] = ""
+            prev[expirationPeriod] = NO_ERROR
             return {...prev}
         })
     }
     function checkMonthValidation(length: number, number: string) {
-  if (number === "") {
+  if (number === NO_ERROR) {
             setError((prev) => {
-                prev["month"] = ""
+                prev["month"] = NO_ERROR
                 return {...prev}
             })
             return;
@@ -82,9 +86,9 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
 
     }
     function checkYearValidation(length: number, number: string) {
-         if (number === "") {
+         if (number === NO_ERROR) {
             setError((prev) => {
-                prev["year"] = ""
+                prev["year"] = NO_ERROR
                 return {...prev}
             })
             return;
@@ -102,7 +106,7 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
     function printError() {
         for (const key in error) {
             const typedKey = key as keyof typeof error;
-            if (error[typedKey] !== "") {
+            if (error[typedKey] !== NO_ERROR) {
                 return error[typedKey]
             }
         }
@@ -115,23 +119,23 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
                 <Input 
                 value={expirationPeriod['month']} 
                 onChange={(e) => {
-                    checkMonthValidation(2, e.target.value)
+                    checkMonthValidation(EXPIRATION_PERIOD_LENGTH, e.target.value)
                     changeExpirationPeriod("month", e.target.value)
                     }}
                 width='50%' 
-                maxLength={2} 
+                maxLength={EXPIRATION_PERIOD_LENGTH} 
                 placeholder="MM" 
-                isError={error['month'] !== ""}></Input>
+                isError={error['month'] !== NO_ERROR}></Input>
                 <Input 
                 value={expirationPeriod['year']} 
                 onChange={(e) => {
-                    checkYearValidation(2, e.target.value)
+                    checkYearValidation(EXPIRATION_PERIOD_LENGTH, e.target.value)
                     changeExpirationPeriod("year", e.target.value)
                     }}
                 width='50%' 
-                maxLength={2} 
+                maxLength={EXPIRATION_PERIOD_LENGTH} 
                 placeholder="YY" 
-                isError={error['year'] !== ""}></Input>
+                isError={error['year'] !== NO_ERROR}></Input>
             </StyledInputWrap>
             {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}
         </StyledContainer>

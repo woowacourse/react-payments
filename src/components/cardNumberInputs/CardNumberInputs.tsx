@@ -3,7 +3,10 @@ import styled from "styled-components"
 import { CardNumberProps, Position } from "../../\btypes/index.types"
 import { useState } from "react"
 import { isValidLength, isValidNumber } from "../../util/validation"
+import { NO_ERROR, POSITION } from "../../constants/constant"
 
+
+const CARD_NUMBER_LENGTH = 4;
 
 const StyledContainer = styled.div`
     display: flex;
@@ -33,16 +36,16 @@ const errorMessage = {
 
 function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
     const [error, setError] = useState({
-        first: "",
-        second: "",
-        third: "",
-        fourth : "",
+        [POSITION.FIRST]: NO_ERROR,
+        [POSITION.SECOND]: NO_ERROR,
+        [POSITION.THIRD]: NO_ERROR,
+        [POSITION.FOURTH]: NO_ERROR,
     });
 
     function checkValidation(position: Position, length: number, number: string) {
-        if (number === "") {
+        if (number === NO_ERROR) {
             setError((prev) => {
-                prev[position] = ""
+                prev[position] = NO_ERROR
                 return {...prev}
             })
             return;
@@ -63,7 +66,7 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
         }
 
         setError((prev) => {
-                prev[position] = ""
+                prev[position] = NO_ERROR
                 return {...prev}
             })
     }
@@ -71,12 +74,11 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
     function printError() {
         for (const key in error) {
             const typedKey = key as keyof typeof error;
-            if (error[typedKey] !== "") {
+            if (error[typedKey] !== NO_ERROR) {
                 return error[typedKey]
             }
         }
     }
-   
 
     return (
         <StyledContainer>
@@ -86,47 +88,47 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     value={cardNumber['first']}
                     onChange={(e) =>
                     {
-                        checkValidation('first', 4, e.target.value);
+                        checkValidation('first', CARD_NUMBER_LENGTH, e.target.value);
                         changeCardNumber('first', e.target?.value)
                     }}
                     width='25%'
-                    maxLength={4}
+                    maxLength={CARD_NUMBER_LENGTH}
                     placeholder="1234" 
-                    isError={error['first'] !== ""} >
+                    isError={error['first'] !== NO_ERROR} >
                     </Input>
                 <Input 
                     value={cardNumber['second']} 
                     onChange={(e) =>
                     {
-                        checkValidation('second', 4, e.target.value);
+                        checkValidation('second', CARD_NUMBER_LENGTH, e.target.value);
                         changeCardNumber('second', e.target?.value)
                     }} 
                     width='25%' 
-                    maxLength={4} 
+                    maxLength={CARD_NUMBER_LENGTH} 
                     placeholder="1234" 
-                    isError={error['second'] !== ""}></Input>
+                    isError={error['second'] !== NO_ERROR}></Input>
                 <Input 
                     value={cardNumber['third']} 
                     onChange={(e) =>
                     {
-                        checkValidation('third', 4, e.target.value);
+                        checkValidation('third', CARD_NUMBER_LENGTH, e.target.value);
                         changeCardNumber('third', e.target?.value)
                     }} 
                     width='25%' 
-                    maxLength={4} 
+                    maxLength={CARD_NUMBER_LENGTH} 
                     placeholder="1234" 
-                    isError={error['third'] !== ""}></Input>
+                    isError={error['third'] !== NO_ERROR}></Input>
                 <Input 
                     value={cardNumber['fourth']} 
                     onChange={(e) =>
                     {
-                        checkValidation('fourth', 4, e.target.value);
+                        checkValidation('fourth', CARD_NUMBER_LENGTH, e.target.value);
                         changeCardNumber('fourth', e.target?.value)
                     }} 
                     width='25%' 
-                    maxLength={4} 
+                    maxLength={CARD_NUMBER_LENGTH} 
                     placeholder="1234" 
-                    isError={error['fourth'] !== ""}></Input>
+                    isError={error['fourth'] !== NO_ERROR}></Input>
             </StyledInputWrap>
            {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}  
         </StyledContainer>
