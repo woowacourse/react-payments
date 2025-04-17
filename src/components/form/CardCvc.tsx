@@ -10,7 +10,6 @@ type Props = {
 };
 const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	const [error, setError] = useState("");
-	const cvcInput = [<Input maxLength={3} isError={error.length > 0 && true} placeholder="123" value={cvcNumber} inputHandler={(value) => handleCardCvc(value)} />];
 
 	const handleCardCvc = (value: string) => {
 		setcvcNumber(value);
@@ -23,6 +22,14 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 
 		setError("");
 	};
+
+	const handleFocusout = (value: string) => {
+		if (value.length < 3) setError("3자리를 입력해주세요.");
+	};
+
+	const cvcInput = [
+		<Input maxLength={3} isError={error.length > 0 && true} placeholder="123" value={cvcNumber} inputHandler={(value) => handleCardCvc(value)} handleFocusout={(value) => handleFocusout(value)} />,
+	];
 
 	return (
 		<CardNumberWrap>

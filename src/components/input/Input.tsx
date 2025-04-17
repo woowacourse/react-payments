@@ -7,17 +7,17 @@ type Props = {
 	value: string;
 	maxLength?: number;
 	inputHandler: (value: string) => void;
+	handleFocusout?: (value: string) => void;
 };
 
-const Input = ({ placeholder, isError = false, value, maxLength, inputHandler }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, inputHandler, handleFocusout }: Props) => {
 	return (
 		<TextInput
 			maxLength={maxLength && maxLength}
 			value={value}
 			placeholder={placeholder}
-			onChange={(e) => {
-				inputHandler(e.target.value);
-			}}
+			onChange={(e) => inputHandler(e.target.value)}
+			onBlur={handleFocusout && ((e) => handleFocusout(e.target.value))}
 			$isError={isError}
 		/>
 	);

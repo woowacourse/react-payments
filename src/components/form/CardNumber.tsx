@@ -31,12 +31,9 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		setError({ ...error, [order]: "" });
 	};
 
-	const cardNumberInputs = [
-		<Input isError={error.first.length > 0 && true} placeholder="1234" value={cardNumber?.first} maxLength={4} inputHandler={(numbers) => handleCardNumber("first", numbers)} />,
-		<Input isError={error.second.length > 0 && true} placeholder="1234" value={cardNumber?.second} maxLength={4} inputHandler={(numbers) => handleCardNumber("second", numbers)} />,
-		<Input isError={error.third.length > 0 && true} placeholder="1234" value={cardNumber?.third} maxLength={4} inputHandler={(numbers) => handleCardNumber("third", numbers)} />,
-		<Input isError={error.fourth.length > 0 && true} placeholder="1234" value={cardNumber?.fourth} maxLength={4} inputHandler={(numbers) => handleCardNumber("fourth", numbers)} />,
-	];
+	const handleFocusout = (order: keyof cardNumber, value: string) => {
+		if (value.length < 4) setError({ ...error, [order]: "4자리를 입력해주세요." });
+	};
 
 	const findError = () => {
 		for (const key in error) {
@@ -45,6 +42,41 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 
 		return "";
 	};
+
+	const cardNumberInputs = [
+		<Input
+			isError={error.first.length > 0 && true}
+			placeholder="1234"
+			value={cardNumber?.first}
+			maxLength={4}
+			inputHandler={(numbers) => handleCardNumber("first", numbers)}
+			handleFocusout={(numbers) => handleFocusout("first", numbers)}
+		/>,
+		<Input
+			isError={error.second.length > 0 && true}
+			placeholder="1234"
+			value={cardNumber?.second}
+			maxLength={4}
+			inputHandler={(numbers) => handleCardNumber("second", numbers)}
+			handleFocusout={(numbers) => handleFocusout("second", numbers)}
+		/>,
+		<Input
+			isError={error.third.length > 0 && true}
+			placeholder="1234"
+			value={cardNumber?.third}
+			maxLength={4}
+			inputHandler={(numbers) => handleCardNumber("third", numbers)}
+			handleFocusout={(numbers) => handleFocusout("third", numbers)}
+		/>,
+		<Input
+			isError={error.fourth.length > 0 && true}
+			placeholder="1234"
+			value={cardNumber?.fourth}
+			maxLength={4}
+			inputHandler={(numbers) => handleCardNumber("fourth", numbers)}
+			handleFocusout={(numbers) => handleFocusout("fourth", numbers)}
+		/>,
+	];
 
 	return (
 		<CardNumberWrap>

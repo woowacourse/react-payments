@@ -17,10 +17,6 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		year: "",
 	});
 
-	const expirationInput = [
-		<Input isError={error.month.length > 0 && true} maxLength={2} placeholder="MM" value={expirationDate.month} inputHandler={(value) => handleDate("month", value)} />,
-		<Input isError={error.year.length > 0 && true} maxLength={2} placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
-	];
 	const handleDate = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
@@ -50,6 +46,10 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		setError({ ...error, [order]: "" });
 	};
 
+	const handleFocusout = (order: keyof date, value: string) => {
+		if (value.length < 2) setError({ ...error, [order]: "MM형태로 입력해주세요." });
+	};
+
 	const findError = () => {
 		for (const key in error) {
 			if (error[key as keyof date].length > 0) return error[key as keyof date];
@@ -57,6 +57,18 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 		return "";
 	};
+
+	const expirationInput = [
+		<Input
+			isError={error.month.length > 0 && true}
+			maxLength={2}
+			placeholder="MM"
+			value={expirationDate.month}
+			inputHandler={(value) => handleDate("month", value)}
+			handleFocusout={(numbers) => handleFocusout("month", numbers)}
+		/>,
+		<Input isError={error.year.length > 0 && true} maxLength={2} placeholder="YY" value={expirationDate.year} inputHandler={(value) => handleDate("year", value)} />,
+	];
 
 	return (
 		<CardNumberWrap>
