@@ -1,16 +1,16 @@
 import "./App.css";
-import Card from "./domain/Card.ts";
-import { useState } from "react";
+import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
+import CardInformation from "./domain/CardInformation.tsx";
 
 function App() {
-  const cardInstance = new Card();
-  const [cardInformationState, setCardInformationState] = useState(cardInstance.information);
+  const { cardType, cardInformationState, setCardInformationState } = CardInformation();
+
   return (
-    <>
-      {/* PreviewCard */}
+    <div>
+      <PreviewCard cardInformationState={cardInformationState} cardType={cardType} />
       <FormContainer cardInformationState={cardInformationState} setCardInformationState={setCardInformationState} />
-    </>
+    </div>
   );
 }
 
