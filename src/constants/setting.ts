@@ -7,3 +7,9 @@ export const CARD_TYPE_PATH = {
   MasterCard: "/assets/Mastercard.png",
   None: "",
 };
+
+export const CARD_INFO_LENGTH = {
+  NUMBER: 4,
+  EXPIRATION: 2,
+  CVC: 3,
+};

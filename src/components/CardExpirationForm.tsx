@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import isExactLength from "../utils/isExactLength";
 import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
+import { ERROR_MESSAGE } from "../constants/guide";
 
 interface CardExpirationFormProps {
   cardInfo: {
@@ -35,15 +36,15 @@ function CardExpirationForm({
     });
 
     if (isExactDigits) {
-      setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
+      setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
       return;
     }
     if (cardInfo.month !== "" && !isValidMonth) {
-      setErrorText("01에서 12사이의 숫자를 입력해주세요.");
+      setErrorText(ERROR_MESSAGE.INVALID_MONTH);
       return;
     }
     if (cardInfo.year !== "" && !isValidYear) {
-      setErrorText("만료된 연도입니다. 25년 이후의 년도를 입력해주세요.");
+      setErrorText(ERROR_MESSAGE.INVALID_YEAR);
       return;
     }
     setErrorText("");

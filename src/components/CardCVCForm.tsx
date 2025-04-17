@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import isExactLength from "../utils/isExactLength";
 import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
+import { ERROR_MESSAGE } from "../constants/guide";
 
 interface CardCVCFormProps {
   cardInfo: {
@@ -28,7 +29,7 @@ function CardCVCForm({
     ) {
       setErrorText("");
     } else {
-      setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
+      setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
     }
   }, [cardInfo.cvc]);
 

@@ -3,7 +3,7 @@ import {
   CARD_TYPE_PATH,
   VISA_CARD_PREFIXES,
   MASTER_CARD_PREFIXES,
-} from "../constants";
+} from "../constants/setting";
 
 interface CardProps {
   cardNumber: string[];

@@ -5,6 +5,12 @@ import CardExpirationForm from "./components/CardExpirationForm";
 import CardCVCForm from "./components/CardCVCForm";
 import styled from "@emotion/styled";
 import useCardInfo from "./hooks/useCardInfo";
+import {
+  CARD_NUMBER_MESSAGE,
+  CVC_MESSAGE,
+  EXPIRATION_MESSAGE,
+} from "./constants/guide";
+import { CARD_INFO_LENGTH } from "./constants/setting";
 
 function App() {
   const { cardInfo, handleCardInfo } = useCardInfo();
@@ -22,28 +28,28 @@ function App() {
       ></Card>
       <div>
         <Announcement
-          main="결제할 카드 번호를 입력해 주세요"
-          caption="본인 명의의 카드만 결제 가능합니다."
-        ></Announcement>
+          main={CARD_NUMBER_MESSAGE.main}
+          caption={CARD_NUMBER_MESSAGE.caption}
+        />
         <CardNumberForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
-          maxLength={4}
+          maxLength={CARD_INFO_LENGTH.NUMBER}
         />
         <Announcement
-          main="카드 유효기간을 입력해 주세요"
-          caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-        ></Announcement>
+          main={EXPIRATION_MESSAGE.main}
+          caption={EXPIRATION_MESSAGE.caption}
+        />
         <CardExpirationForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
-          maxLength={2}
+          maxLength={CARD_INFO_LENGTH.EXPIRATION}
         />
-        <Announcement main="CVC 번호를 입력해 주세요"></Announcement>
+        <Announcement main={CVC_MESSAGE.main} />
         <CardCVCForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
-          maxLength={3}
+          maxLength={CARD_INFO_LENGTH.CVC}
         />
       </div>
     </AppContainer>

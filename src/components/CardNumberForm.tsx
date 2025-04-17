@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
 import { useState, useEffect } from "react";
 import isExactLength from "../utils/isExactLength";
+import { ERROR_MESSAGE } from "../constants/guide";
 
 interface CardNumberFormProps {
   cardInfo: {
@@ -35,7 +36,7 @@ function CardNumberForm({
         return false;
       return true;
     });
-    if (condition) setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
+    if (condition) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
     else setErrorText("");
   }, [
     cardInfo.firstNumber,
