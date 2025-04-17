@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Text } from '@/components/common/Text';
+import { colorNames } from '@/styles/global';
 
 const meta = {
   title: 'common/Text',
@@ -36,10 +37,11 @@ export const Default: Story = {
       options: ['regular', 'medium', 'semibold', 'bold'],
     },
     color: {
-      control: { type: 'color' },
+      control: { type: 'select' },
+      options: colorNames,
     },
   },
   render: (args) => {
-    return <Text {...args} />;
+    return <Text {...args}>{args.children}</Text>;
   },
 };
