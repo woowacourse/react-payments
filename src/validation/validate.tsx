@@ -7,5 +7,5 @@ export function isNumber(value: string) {
 }
 
 export function isValidMonth(month: number) {
-  return month >= 1 && month <= 12;
+  return 1 <= month && month <= 12;
 }

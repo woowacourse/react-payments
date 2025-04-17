@@ -34,7 +34,7 @@ export default function CardExpirationDate({
       <div className={styles["card-number__input"]}>
         <InputNumber
           onChange={(value) => handleChange(value, 0)}
-          placeholder={CONSTANT_EXPIRATION_DATE.PLACE_HOLDER_MOMTH}
+          placeholder={CONSTANT_EXPIRATION_DATE.PLACE_HOLDER_MONTH}
           value={cardExpirationDate[0]}
           errorMessage={errorMessage[0]}
         />
