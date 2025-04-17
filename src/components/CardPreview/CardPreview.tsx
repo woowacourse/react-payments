@@ -28,8 +28,8 @@ const getCardType = (cardNumber: string): CardType => {
 };
 
 const CARD_TYPE_IMAGES_PATH = {
-  visa: '/Visa.png',
-  masterCard: '/Mastercard.png',
+  visa: './Visa.png',
+  masterCard: './Mastercard.png',
   default: '',
 };
 
