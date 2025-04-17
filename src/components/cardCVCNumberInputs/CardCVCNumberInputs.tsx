@@ -1,40 +1,17 @@
 import Input from "../input/Input"
-import styled from "styled-components"
 import { CardCVCNumberSectionProps } from "../../\btypes/index.types"
 import { useState } from "react"
 import { isValidLength, isValidNumber } from "../../util/validation"
 import { NO_ERROR } from "../../constants/constant"
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from "../../styled-component/inputs"
 
 const CVC_NUMBER_LENGTH = 3;
 
-const StyledContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-    width: 100%;
-`
-
-const StyledInputWrap = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-`
-
-const StyledErrorMessage = styled.p`
-    color: red;
-    font-size: 12px;
-    margin: 0;
-    `
 
 const errorMessage = {
     length: '3자리만 입력 가능합니다.',
     number : '숫자만 입력 가능합니다.'
 }
-
-
 
 function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectionProps) {
 

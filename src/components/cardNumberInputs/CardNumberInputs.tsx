@@ -1,33 +1,12 @@
 import Input from "../input/Input"
-import styled from "styled-components"
 import { CardNumberProps, Position } from "../../\btypes/index.types"
 import { useState } from "react"
 import { isValidLength, isValidNumber } from "../../util/validation"
 import { NO_ERROR, POSITION } from "../../constants/constant"
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from "../../styled-component/inputs"
 
 
 const CARD_NUMBER_LENGTH = 4;
-
-const StyledContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-`
-
-const StyledInputWrap = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-`
-
-const StyledErrorMessage = styled.p`
-    color: red;
-    font-size: 12px;
-    margin: 0;
-    `
 
 const errorMessage = {
     length: '4자리만 입력 가능합니다.',
@@ -71,7 +50,7 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
             })
     }
 
-    function printError() {
+    function getErrorMessage() {
         for (const key in error) {
             const typedKey = key as keyof typeof error;
             if (error[typedKey] !== NO_ERROR) {
@@ -130,7 +109,7 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     placeholder="1234" 
                     isError={error['fourth'] !== NO_ERROR}></Input>
             </StyledInputWrap>
-           {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}  
+           {getErrorMessage() ? <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage> : null}  
         </StyledContainer>
     )
 }

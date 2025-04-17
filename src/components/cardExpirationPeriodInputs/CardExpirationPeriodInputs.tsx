@@ -1,34 +1,13 @@
 import { useState } from "react"
 import Input from "../input/Input"
-import styled from "styled-components"
 import { ExpirationPeriod, ExpirationPeriodProps } from "../../\btypes/index.types"
 import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from "../../util/validation"
 import { NO_ERROR } from "../../constants/constant"
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from "../../styled-component/inputs"
 
 
 const EXPIRATION_PERIOD_LENGTH = 3;
 
-const StyledContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-    width: 100%;
-`
-
-const StyledInputWrap = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-`
-
-const StyledErrorMessage = styled.p`
-    color: red;
-    font-size: 12px;
-    margin: 0;
-    `
 
 const errorMessage = {
     length: '2자리만 입력 가능합니다.',
@@ -103,7 +82,7 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
         checkCommonValidation("year", length, number);
     }
 
-    function printError() {
+    function getErrorMessage() {
         for (const key in error) {
             const typedKey = key as keyof typeof error;
             if (error[typedKey] !== NO_ERROR) {
@@ -137,7 +116,7 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
                 placeholder="YY" 
                 isError={error['year'] !== NO_ERROR}></Input>
             </StyledInputWrap>
-            {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}
+            {getErrorMessage() ? <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage> : null}
         </StyledContainer>
     )
 }
