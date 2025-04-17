@@ -7,12 +7,12 @@ import {
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
-import { CardCVC } from '../../hooks';
 import { CARD_CVC_ERROR, CARD_CVC } from '../../constants';
 import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
+import { CardCVC } from '../../../types/types';
 
 type CardCVCInputProps = {
   cardCVC: CardCVC;
