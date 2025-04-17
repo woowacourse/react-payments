@@ -4,8 +4,8 @@ import { css } from "@emotion/react";
 import { CardInformationType, CardType } from "../../types/CardInformationType";
 
 const seperateCard = {
-  visa: "/Visa.png",
-  master: "/Mastercard.png",
+  visa: "Visa.png",
+  master: "Mastercard.png",
 };
 
 const PreviewCard = ({

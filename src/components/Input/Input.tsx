@@ -1,36 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-const inputStyle = (error: boolean) => css`
-  width: 100%;
-  height: 32px;
-  border: solid 1.01px ${error ? "#FF3D3D" : "#acacac"};
-  border-radius: 2px;
-  padding: 8px;
-  box-sizing: border-box;
-
-  &::placeholder {
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 14.88px;
-    letter-spacing: 0%;
-    vertical-align: middle;
-    color: #acacac;
-  }
-
-  &:focus {
-    outline-color: ${error ? "#FF3D3D" : "#000000"};
-  }
-`;
-
 type InputProps = {
   placeholder: string;
   maxLength: number;
   value: string;
   error: boolean;
   setValue: (value: string) => void;
-  // handleChangeError: (error: boolean) => void;
 };
 const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) => {
   return (
@@ -43,5 +19,27 @@ const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) =
     />
   );
 };
+
+const inputStyle = (error: boolean) => css`
+  width: 100%;
+  height: 32px;
+  border: solid 1.01px ${error ? "#FF3D3D" : "#acacac"};
+  border-radius: 2px;
+  padding: 8px;
+  box-sizing: border-box;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 14.88px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #acacac;
+  }
+
+  &:focus {
+    outline-color: ${error ? "#FF3D3D" : "#000000"};
+  }
+`;
 
 export default Input;
