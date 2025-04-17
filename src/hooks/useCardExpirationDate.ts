@@ -30,6 +30,9 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     target: CardExpirationDateKeys,
     input: string
   ) => {
+    if (input.length === 1 && !isNumber(input))
+      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+
     if (input.length < 2) return { isError: false, errorMessage: '' };
 
     if (!isNumber(input)) {
