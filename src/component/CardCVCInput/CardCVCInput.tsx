@@ -12,7 +12,7 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import {CardCVC} from "../../types";
+import { CardCVC } from "../../types";
 
 type CardCVCInputProps = {
   cardCVC: CardCVC;

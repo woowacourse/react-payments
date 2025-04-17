@@ -13,7 +13,7 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import {CardNumber, CardNumberError} from "../../types";
+import { CardNumber, CardNumberError } from "../../types";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;

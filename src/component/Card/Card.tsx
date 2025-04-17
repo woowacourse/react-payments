@@ -9,7 +9,7 @@ import {
   cardType,
 } from './Card.style';
 import { CARD_TYPE } from '../../constants';
-import {CardExpirationDate, CardNumber} from "../../types";
+import { CardExpirationDate, CardNumber } from "../../types";
 
 type CardProps = {
   cardNumber: CardNumber;

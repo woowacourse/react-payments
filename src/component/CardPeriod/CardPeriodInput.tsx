@@ -1,5 +1,5 @@
 import Input from '../@common/Input/Input';
-import {ChangeEvent} from 'react';
+import { ChangeEvent } from 'react';
 import {
   errorInputStyle,
   errorMessageStyle,
@@ -13,7 +13,7 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import {CardExpirationDate, CardExpirationDateError} from "../../types";
+import { CardExpirationDate, CardExpirationDateError } from "../../types";
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;
