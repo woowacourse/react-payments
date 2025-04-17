@@ -18,7 +18,7 @@ const CardInformation = () => {
     if (first.startsWith("4")) {
       setCardType("visa");
     } else if (/^5[1-5]/.test(bin)) {
-      setCardType("mastercard");
+      setCardType("master");
     } else {
       setCardType("none");
     }

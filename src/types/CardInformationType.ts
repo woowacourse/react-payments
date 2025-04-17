@@ -4,4 +4,4 @@ export type CardInformationType = {
   cvcNumber: string[];
 };
 
-export type CardType = "visa" | "mastercard" | "none";
+export type CardType = "visa" | "master" | "none";

@@ -5,7 +5,7 @@ import Visa from "../../../public/Visa.png";
 import MasterCard from "../../../public/MasterCard.png";
 import { CardInformationType, CardType } from "../../types/CardInformationType";
 
-const seperateCard = { visa: Visa, mastercard: MasterCard };
+const seperateCard = { visa: Visa, master: MasterCard };
 
 const PreviewCard = ({
   cardInformationState,
