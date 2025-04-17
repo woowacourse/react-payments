@@ -1,0 +1,32 @@
+@import "./reset.css";
+:root {
+  --card-background: #333333;
+  --card-chip: #ddcd78;
+  --color-white: #ffffff;
+  --color-description: #8b95a1;
+  --color-input: #acacac;
+  --color-error: #ff3d3d;
+  --color-black: #000000;
+}
+
+html body {
+  min-width: 300px;
+}
+
+body {
+  padding: 20px;
+}
+
+.App {
+  max-width: 300px;
+  width: 100%;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+}
+
+.card-input {
+  width: 100%;
+  justify-self: center;
+}
