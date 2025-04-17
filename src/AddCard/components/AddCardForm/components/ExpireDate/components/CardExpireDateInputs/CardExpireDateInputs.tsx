@@ -25,7 +25,7 @@ function CardExpireDateInputs({
       <p className={styles.expireDateInputContainer}>
         <p className={styles.expireDateInputBox}>
           <Input
-            id="expire-date-input"
+            id="expire-month-input"
             type="text"
             maxLength={2}
             placeholder="MM"
@@ -42,7 +42,7 @@ function CardExpireDateInputs({
         </p>
         <p className={styles.expireDateInputBox}>
           <Input
-            id="expire-date-input"
+            id="expire-year-input"
             type="text"
             maxLength={2}
             placeholder="YY"
