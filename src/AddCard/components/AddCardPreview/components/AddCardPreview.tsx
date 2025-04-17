@@ -33,14 +33,16 @@ function AddCardPreview({ cardNumberState, expireDate }: AddCardPreviewProps) {
   const cardBrand = getCardBrand(Number(cardNumberState.first.value));
 
   return (
-    <div className={styles.container}>
-      <img src={PreviewCardImage} alt="카드 프리뷰" />
-      {cardBrand !== "DEFAULT" && (
-        <p className={styles.brand}>
-          <img src={CARD_BRAND_IMAGES[cardBrand]} alt="카드 브랜드" />
-        </p>
-      )}
-      <p className={styles.cardNumber}>
+    <div className={styles.previewCard}>
+      <div className={styles.previewHeader}>
+        <p className={styles.chip} />
+        {cardBrand !== "DEFAULT" && (
+          <p>
+            <img src={CARD_BRAND_IMAGES[cardBrand]} alt="카드 브랜드" />
+          </p>
+        )}
+      </div>
+      <div className={styles.cardNumber}>
         <span>{cardNumberState.first.value}</span>
         <span>{cardNumberState.second.value}</span>
         <span className={styles.dots}>
@@ -57,12 +59,12 @@ function AddCardPreview({ cardNumberState, expireDate }: AddCardPreviewProps) {
             )
           )}
         </span>
-      </p>
-      <p className={styles.expire}>
+      </div>
+      <div className={styles.expire}>
         <span>{expireDate.MM.value}</span>
         {(expireDate.MM.value || expireDate.YY.value) && <span>/</span>}
         <span>{expireDate.YY.value}</span>
-      </p>
+      </div>
     </div>
   );
 }

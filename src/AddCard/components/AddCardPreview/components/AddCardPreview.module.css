@@ -1,24 +1,37 @@
-.container {
+.previewCard {
   margin: 0 auto;
-  position: relative;
+  width: 26.5625rem;
+  height: 16.5625rem;
+  background-color: #333333;
+  padding: 1.25rem 1.5rem;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.brand {
-  position: absolute;
-  top: 5%;
-  right: 5%;
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chip {
+  width: 3.75rem;
+  height: 2.8125rem;
+  background-color: #ddcd78;
+  border-radius: 4px;
 }
 
 .cardNumber {
-  position: absolute;
-  top: 40%;
-  left: 7%;
   color: #fff;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 0 0.25rem;
   font-size: 25px;
   font-weight: 500;
+  height: 25px;
 }
 
 .cardNumber > span {
@@ -32,13 +45,12 @@
 }
 
 .expire {
-  position: absolute;
-  top: 60%;
-  left: 7%;
   color: #fff;
   font-size: 25px;
   font-weight: 500;
   letter-spacing: 3px;
+  height: 25px;
+  padding: 0 0.25rem;
 }
 
 .expire > span {
