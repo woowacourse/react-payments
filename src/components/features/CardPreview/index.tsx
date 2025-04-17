@@ -45,16 +45,8 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
     <StyledCardContainer>
       <StyledICCheapContainer />
       {cardTypeCheck() && <StyledCardTypeIcon src={cardTypeCheck()} alt="cardType" />}
-      <Flex
-        direction="column"
-        alignItems="flex-start"
-        width="300px"
-        height="200px"
-        margin="0 auto"
-        padding="20px 0 0 0"
-        gap="10px"
-      >
-        <Flex gap="20px" height="36px">
+      <Flex direction="column" alignItems="flex-start" padding="70px 25px 0px 25px" gap="10px">
+        <Flex gap="20px">
           {cardNumbers.map((str, index) => (
             <div
               key={`card-number-${index}`}
@@ -70,20 +62,18 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
             </div>
           ))}
         </Flex>
-        <Flex gap="20px" height="36px">
-          <Text
-            variant="Title"
-            fontWeight="regular"
-            color="white"
-            css={css`
-              width: 100px;
-              height: 36px;
-              text-align: left;
-            `}
-          >
-            {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
-          </Text>
-        </Flex>
+        <Text
+          variant="Title"
+          fontWeight="regular"
+          color="white"
+          css={css`
+            width: 100px;
+            height: 36px;
+            text-align: left;
+          `}
+        >
+          {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
+        </Text>
       </Flex>
     </StyledCardContainer>
   );
