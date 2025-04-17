@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
   width: 480px;
@@ -9,14 +9,14 @@ export const Wrapper = styled.div`
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   padding: 72px 32px;
   overflow-y: scroll;
-`
+`;
 
 export const CardPreviewWrapper = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 export const CardInfoForm = styled.form`
   display: flex;
   gap: 32px;
   flex-direction: column;
-`
+`;

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import CardNumber, { SequenceType } from '../../components/CardNumber'
-import { useState } from 'storybook/internal/preview-api'
+import type { Meta, StoryObj } from '@storybook/react';
+import CardNumber, { SequenceType } from '../../components/CardNumber';
+import { useState } from 'storybook/internal/preview-api';
 
 const meta = {
   title: 'CardNumber',
   component: CardNumber,
   tags: ['autodocs'],
-} satisfies Meta<typeof CardNumber>
+} satisfies Meta<typeof CardNumber>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -35,13 +35,13 @@ export const Default: Story = {
       second: '',
       third: '',
       fourth: '',
-    })
+    });
     const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
       first: '',
       second: '',
       third: '',
       fourth: '',
-    })
+    });
     return (
       <CardNumber
         cardNumber={cardNumber}
@@ -49,9 +49,9 @@ export const Default: Story = {
         cardNumberErrorMessage={cardNumberErrorMessage}
         setCardNumberErrorMessage={setCardNumberErrorMessage}
       ></CardNumber>
-    )
+    );
   },
-}
+};
 
 export const Valid: Story = {
   args: {
@@ -70,7 +70,7 @@ export const Valid: Story = {
     },
     setCardNumberErrorMessage: () => {},
   },
-}
+};
 
 export const Error: Story = {
   args: {
@@ -94,4 +94,4 @@ export const Error: Story = {
       expanded: true,
     },
   },
-}
+};

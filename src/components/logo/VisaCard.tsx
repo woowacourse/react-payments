@@ -1,5 +1,5 @@
 interface VisaCardProps {
-  width: number
+  width: number;
 }
 
 export default function VisaCard({ width }: VisaCardProps) {
@@ -22,5 +22,5 @@ export default function VisaCard({ width }: VisaCardProps) {
         fill="#172B85"
       />
     </svg>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import * as S from './Title.styles'
-import { PropsWithChildren } from 'react'
+import * as S from './Title.styles';
+import { PropsWithChildren } from 'react';
 
 interface TitleProps {
-  description?: string
+  description?: string;
 }
 
 export default function Title({ children, description }: PropsWithChildren<TitleProps>) {
@@ -11,5 +11,5 @@ export default function Title({ children, description }: PropsWithChildren<Title
       <S.Title>{children}</S.Title>
       {description && <S.Description>{description}</S.Description>}
     </S.TitleBox>
-  )
+  );
 }

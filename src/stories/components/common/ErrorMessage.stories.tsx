@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import ErrorMessage from '../../../components/common/ErrorMessage'
+import type { Meta, StoryObj } from '@storybook/react';
+import ErrorMessage from '../../../components/common/ErrorMessage';
 
 const meta = {
   title: 'ErrorMessage',
   component: ErrorMessage,
   tags: ['autodocs'],
-} satisfies Meta<typeof ErrorMessage>
+} satisfies Meta<typeof ErrorMessage>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -20,4 +20,4 @@ export const Default: Story = {
       expanded: true,
     },
   },
-}
+};

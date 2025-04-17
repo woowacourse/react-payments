@@ -1,9 +1,9 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react';
 
 interface LabelProps {
-  id: string
+  id: string;
 }
 
 export default function Label({ id, children }: PropsWithChildren<LabelProps>) {
-  return <label htmlFor={id}>{children}</label>
+  return <label htmlFor={id}>{children}</label>;
 }

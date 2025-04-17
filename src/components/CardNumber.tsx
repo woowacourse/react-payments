@@ -1,24 +1,24 @@
-import * as S from './CardNumber.styles'
-import Title from './common/Title'
-import Label from './common/Label'
-import Input from './common/Input'
-import Spacing from './common/Spacing'
-import ErrorMessage from './common/ErrorMessage'
-import { Dispatch, SetStateAction } from 'react'
-import { ERROR_MESSAGE } from '../constants'
+import * as S from './CardNumber.styles';
+import Title from './common/Title';
+import Label from './common/Label';
+import Input from './common/Input';
+import Spacing from './common/Spacing';
+import ErrorMessage from './common/ErrorMessage';
+import { Dispatch, SetStateAction } from 'react';
+import { ERROR_MESSAGE } from '../constants';
 
 interface CardNumberProps {
-  cardNumber: Record<SequenceType, string>
-  setCardNumber: Dispatch<SetStateAction<Record<SequenceType, string>>>
-  cardNumberErrorMessage: Record<SequenceType, string>
-  setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>
+  cardNumber: Record<SequenceType, string>;
+  setCardNumber: Dispatch<SetStateAction<Record<SequenceType, string>>>;
+  cardNumberErrorMessage: Record<SequenceType, string>;
+  setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>;
 }
 
-export type SequenceType = 'first' | 'second' | 'third' | 'fourth'
+export type SequenceType = 'first' | 'second' | 'third' | 'fourth';
 
 interface HandleInputChangeProps {
-  sequence: string
-  value: string
+  sequence: string;
+  value: string;
 }
 
 export default function CardNumber({
@@ -28,15 +28,15 @@ export default function CardNumber({
   setCardNumberErrorMessage,
 }: CardNumberProps) {
   const handleInputChange = ({ value, sequence }: HandleInputChangeProps) => {
-    setCardNumber({ ...cardNumber, [sequence]: value })
+    setCardNumber({ ...cardNumber, [sequence]: value });
 
     if (/^[0-9]*$/.test(value)) {
-      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' })
-      return
+      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
+      return;
     }
 
-    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.onlyNumber })
-  }
+    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.onlyNumber });
+  };
 
   return (
     <div>
@@ -103,5 +103,5 @@ export default function CardNumber({
         }
       </ErrorMessage>
     </div>
-  )
+  );
 }

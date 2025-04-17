@@ -1,5 +1,5 @@
 interface MasterCardProps {
-  width: number
+  width: number;
 }
 
 export default function MasterCard({ width }: MasterCardProps) {
@@ -34,5 +34,5 @@ export default function MasterCard({ width }: MasterCardProps) {
         fill="#FF5E00"
       />
     </svg>
-  )
+  );
 }

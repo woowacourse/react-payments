@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Input from '../../../components/common/Input'
+import type { Meta, StoryObj } from '@storybook/react';
+import Input from '../../../components/common/Input';
 
 const meta = {
   title: 'Input',
   component: Input,
   tags: ['autodocs'],
-} satisfies Meta<typeof Input>
+} satisfies Meta<typeof Input>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -22,7 +22,7 @@ export const Default: Story = {
       expanded: true,
     },
   },
-}
+};
 
 export const Valid: Story = {
   args: {
@@ -31,7 +31,7 @@ export const Valid: Story = {
     maxLength: 2,
     isError: false,
   },
-}
+};
 
 export const Error: Story = {
   args: {
@@ -40,4 +40,4 @@ export const Error: Story = {
     maxLength: 2,
     isError: true,
   },
-}
+};

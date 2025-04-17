@@ -1,20 +1,20 @@
-import './App.css'
-import * as S from './App.styles'
-import CardNumber from './components/CardNumber'
-import CardExpirationDate from './components/CardExpirationDate'
-import CardCVCNumber from './components/CardCVCNumber'
-import CardPreview from './components/CardPreview'
-import Spacing from './components/common/Spacing'
-import { useState } from 'react'
-import { SequenceType } from './components/CardNumber'
-import { DateType } from './components/CardExpirationDate'
-import { VISA_CARD_CONDITIONS, MASTER_CARD_CONDITIONS } from './constants'
+import './App.css';
+import * as S from './App.styles';
+import CardNumber from './components/CardNumber';
+import CardExpirationDate from './components/CardExpirationDate';
+import CardCVCNumber from './components/CardCVCNumber';
+import CardPreview from './components/CardPreview';
+import Spacing from './components/common/Spacing';
+import { useState } from 'react';
+import { SequenceType } from './components/CardNumber';
+import { DateType } from './components/CardExpirationDate';
+import { VISA_CARD_CONDITIONS, MASTER_CARD_CONDITIONS } from './constants';
 
 export const getCardType = (cardNumberFirst: string) => {
-  if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa'
-  if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master'
-  return ''
-}
+  if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
+  if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master';
+  return '';
+};
 
 function App() {
   // 카드 번호
@@ -23,29 +23,29 @@ function App() {
     second: '',
     third: '',
     fourth: '',
-  })
+  });
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<Record<SequenceType, string>>({
     first: '',
     second: '',
     third: '',
     fourth: '',
-  })
+  });
 
   // 카드 유효기간
   const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
     month: '',
     year: '',
-  })
+  });
   const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
     month: '',
     year: '',
-  })
+  });
 
   // 카드 CVC 번호
-  const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
-  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('')
+  const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
+  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
 
-  const cardType = getCardType(cardNumber.first)
+  const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
       <S.CardPreviewWrapper>
@@ -73,7 +73,7 @@ function App() {
         />
       </S.CardInfoForm>
     </S.Wrapper>
-  )
+  );
 }
 
-export default App
+export default App;

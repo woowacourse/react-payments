@@ -1,9 +1,9 @@
-import * as S from './Spacing.styles'
+import * as S from './Spacing.styles';
 
 interface SpacingProps {
-  size: number
+  size: number;
 }
 
 export default function Spacing({ size }: SpacingProps) {
-  return <S.Spacing size={size} />
+  return <S.Spacing size={size} />;
 }

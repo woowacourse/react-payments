@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import CardCVCNumber from '../../components/CardCVCNumber'
-import { useState } from '@storybook/preview-api'
-import { ERROR_MESSAGE } from '../../constants'
+import type { Meta, StoryObj } from '@storybook/react';
+import CardCVCNumber from '../../components/CardCVCNumber';
+import { useState } from '@storybook/preview-api';
+import { ERROR_MESSAGE } from '../../constants';
 
 const meta = {
   title: 'CardCVCNumber',
   component: CardCVCNumber,
   tags: ['autodocs'],
-} satisfies Meta<typeof CardCVCNumber>
+} satisfies Meta<typeof CardCVCNumber>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -21,8 +21,8 @@ export const Default: Story = {
     setCardCVCNumberErrorMessage: () => {},
   },
   render: function Render(args) {
-    const [cardCVCNumber, setCardCVCNumber] = useState<string>('')
-    const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('')
+    const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
+    const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
     return (
       <CardCVCNumber
         cardCVCNumber={cardCVCNumber}
@@ -30,9 +30,9 @@ export const Default: Story = {
         cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
         setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
       ></CardCVCNumber>
-    )
+    );
   },
-}
+};
 
 export const Valid: Story = {
   args: {
@@ -41,7 +41,7 @@ export const Valid: Story = {
     setCardCVCNumber: () => {},
     setCardCVCNumberErrorMessage: () => {},
   },
-}
+};
 
 export const Error: Story = {
   args: {
@@ -55,4 +55,4 @@ export const Error: Story = {
       expanded: true,
     },
   },
-}
+};

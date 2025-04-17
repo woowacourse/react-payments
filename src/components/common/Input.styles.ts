@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 export const Input = styled.input<{ isError: boolean }>`
   border: 1px solid ${(props) => (props.isError ? '#f00' : '#acacac')};
@@ -9,4 +9,4 @@ export const Input = styled.input<{ isError: boolean }>`
     color: #acacac;
   }
   ${(props) => props.isError && `outline: #f00`};
-`
+`;

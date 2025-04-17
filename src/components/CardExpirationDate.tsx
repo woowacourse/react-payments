@@ -1,24 +1,24 @@
-import * as S from './CardExpirationDate.styles'
-import Title from './common/Title'
-import Label from './common/Label'
-import Input from './common/Input'
-import Spacing from './common/Spacing'
-import ErrorMessage from './common/ErrorMessage'
-import { Dispatch, SetStateAction } from 'react'
-import { ERROR_MESSAGE } from '../constants'
+import * as S from './CardExpirationDate.styles';
+import Title from './common/Title';
+import Label from './common/Label';
+import Input from './common/Input';
+import Spacing from './common/Spacing';
+import ErrorMessage from './common/ErrorMessage';
+import { Dispatch, SetStateAction } from 'react';
+import { ERROR_MESSAGE } from '../constants';
 
 interface CardExpirationDateProps {
-  cardExpirationDate: Record<DateType, string>
-  setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>
-  cardExpirationDateErrorMessage: Record<DateType, string>
-  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>
+  cardExpirationDate: Record<DateType, string>;
+  setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>;
+  cardExpirationDateErrorMessage: Record<DateType, string>;
+  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>;
 }
 
-export type DateType = 'month' | 'year'
+export type DateType = 'month' | 'year';
 
 interface HandleInputChangeProps {
-  dateType: string
-  value: string
+  dateType: string;
+  value: string;
 }
 
 export default function CardExpirationDate({
@@ -28,22 +28,22 @@ export default function CardExpirationDate({
   setCardExpirationDateErrorMessage,
 }: CardExpirationDateProps) {
   const handleInputChange = ({ value, dateType }: HandleInputChangeProps) => {
-    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value })
+    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
     setCardExpirationDateErrorMessage({
       ...cardExpirationDateErrorMessage,
       [dateType]: '',
-    })
+    });
 
     if (!/^[0-9]*$/.test(value)) {
-      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber })
-      return
+      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber });
+      return;
     }
 
-    const valueAsNumber = parseInt(value, 10)
+    const valueAsNumber = parseInt(value, 10);
 
     if (dateType === 'month') {
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth })
+        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
       }
     }
 
@@ -52,10 +52,10 @@ export default function CardExpirationDate({
         setCardExpirationDateErrorMessage({
           ...cardExpirationDateErrorMessage,
           [dateType]: ERROR_MESSAGE.pastYear,
-        })
+        });
       }
     }
-  }
+  };
 
   return (
     <div>
@@ -98,5 +98,5 @@ export default function CardExpirationDate({
         }
       </ErrorMessage>
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import * as S from './Input.styles'
-import { ChangeEventHandler } from 'react'
+import * as S from './Input.styles';
+import { ChangeEventHandler } from 'react';
 
 export interface InputProps {
-  placeholder: string
-  maxLength: number
-  value?: string
-  onChange?: ChangeEventHandler<HTMLInputElement>
-  isError: boolean
+  placeholder: string;
+  maxLength: number;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  isError: boolean;
 }
 
 export default function Input({ placeholder, maxLength, value, onChange, isError }: InputProps) {
@@ -19,5 +19,5 @@ export default function Input({ placeholder, maxLength, value, onChange, isError
       onChange={onChange}
       isError={isError}
     />
-  )
+  );
 }

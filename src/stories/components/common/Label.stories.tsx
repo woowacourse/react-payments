@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Label from '../../../components/common/Label'
+import type { Meta, StoryObj } from '@storybook/react';
+import Label from '../../../components/common/Label';
 
 const meta = {
   title: 'Label',
   component: Label,
   tags: ['autodocs'],
-} satisfies Meta<typeof Label>
+} satisfies Meta<typeof Label>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -21,4 +21,4 @@ export const Default: Story = {
       expanded: true,
     },
   },
-}
+};

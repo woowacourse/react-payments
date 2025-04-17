@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import CardExpirationDate, { dateType } from '../../components/CardExpirationDate'
-import { useState } from 'storybook/internal/preview-api'
-import { ERROR_MESSAGE } from '../../constants'
+import type { Meta, StoryObj } from '@storybook/react';
+import CardExpirationDate, { dateType } from '../../components/CardExpirationDate';
+import { useState } from 'storybook/internal/preview-api';
+import { ERROR_MESSAGE } from '../../constants';
 
 const meta = {
   title: 'CardExpirationDate',
   component: CardExpirationDate,
   tags: ['autodocs'],
-} satisfies Meta<typeof CardExpirationDate>
+} satisfies Meta<typeof CardExpirationDate>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -30,11 +30,11 @@ export const Default: Story = {
     const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
       month: '',
       year: '',
-    })
+    });
     const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<dateType, string>>({
       month: '',
       year: '',
-    })
+    });
     return (
       <CardExpirationDate
         cardExpirationDate={cardExpirationDate}
@@ -42,9 +42,9 @@ export const Default: Story = {
         cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
         setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
       ></CardExpirationDate>
-    )
+    );
   },
-}
+};
 
 export const Valid: Story = {
   args: {
@@ -59,7 +59,7 @@ export const Valid: Story = {
     },
     setCardExpirationDateErrorMessage: () => {},
   },
-}
+};
 
 export const Error: Story = {
   args: {
@@ -79,4 +79,4 @@ export const Error: Story = {
       expanded: true,
     },
   },
-}
+};

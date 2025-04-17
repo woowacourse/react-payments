@@ -1,12 +1,12 @@
-import * as S from './CardPreview.styles'
-import MasterCard from './logo/MasterCard'
-import VisaCard from './logo/VisaCard'
-import { MASKING } from '../constants'
+import * as S from './CardPreview.styles';
+import MasterCard from './logo/MasterCard';
+import VisaCard from './logo/VisaCard';
+import { MASKING } from '../constants';
 
 interface CardPreviewProps {
-  cardType: 'visa' | 'master' | ''
-  cardNumber: Record<string, string>
-  cardExpirationDate: Record<string, string>
+  cardType: 'visa' | 'master' | '';
+  cardNumber: Record<string, string>;
+  cardExpirationDate: Record<string, string>;
 }
 
 export default function CardPreview({ cardType, cardNumber, cardExpirationDate }: CardPreviewProps) {
@@ -22,12 +22,12 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
         <span>{cardNumber.second}</span>
         <span>
           {Array.from({ length: cardNumber.third.length }, () => {
-            return MASKING
+            return MASKING;
           })}
         </span>
         <span>
           {Array.from({ length: cardNumber.fourth.length }, () => {
-            return MASKING
+            return MASKING;
           })}
         </span>
       </S.CardPreviewMiddle>
@@ -35,5 +35,5 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
         <span>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</span>
       </div>
     </S.CardPreviewWrapper>
-  )
+  );
 }

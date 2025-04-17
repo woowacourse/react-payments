@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import CardPreview from '../../components/CardPreview'
+import type { Meta, StoryObj } from '@storybook/react';
+import CardPreview from '../../components/CardPreview';
 
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
   tags: ['autodocs'],
-} satisfies Meta<typeof CardPreview>
+} satisfies Meta<typeof CardPreview>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -25,4 +25,4 @@ export const Default: Story = {
     },
     cardType: 'master',
   },
-}
+};
