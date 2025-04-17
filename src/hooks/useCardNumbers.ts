@@ -51,7 +51,7 @@ const useCardNumbers = (): UseCardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
-  const isValidCardNumbers = (input: string) => {
+  const getCardNumbersValidationResult = (input: string) => {
     if (isNaN(Number(input))) {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
@@ -66,14 +66,14 @@ const useCardNumbers = (): UseCardNumbersOptions => {
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { isError, errorMessage } = isValidCardNumbers(
+      const { isError, errorMessage } = getCardNumbersValidationResult(
         event.target.value.trim()
       );
       if (isError) {
         setErrorField(target, errorMessage);
         return;
       }
-      
+
       clearError(target);
       setCardNumbers({
         ...cardNumbers,

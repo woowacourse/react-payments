@@ -38,7 +38,7 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
   );
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
-  const isValidCardExpirationDateChange = (
+  const getCardExpirationDateValidationResult = (
     target: CardExpirationDateKeys,
     input: string
   ) => {
@@ -95,7 +95,7 @@ const useCardExpirationDate = (): useCardExpirationDateOptions => {
   const handleCardExpirationDateChange =
     (target: CardExpirationDateKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { isError, errorMessage } = isValidCardExpirationDateChange(
+      const { isError, errorMessage } = getCardExpirationDateValidationResult(
         target,
         event.target.value.trim()
       );

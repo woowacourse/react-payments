@@ -20,7 +20,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
-  const isValidCardCVCNumberChange = (input: string) => {
+  const getCardCVCNumberChangeValidationResult = (input: string) => {
     if (isNaN(Number(input))) {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
@@ -34,7 +34,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const handleCardCVCNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const { isError, errorMessage } = isValidCardCVCNumberChange(
+    const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
       event.target.value.trim()
     );
     if (isError) {
