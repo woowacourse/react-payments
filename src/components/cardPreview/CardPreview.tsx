@@ -83,8 +83,8 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
     useEffect(() => {
         function identifyLogo() {
             const id = cardNumber['first'].slice(0, 2);
-            if (Number(id[0]) === CARD_IDENTIFYING_NUMBER.VISA) setLogoSrc('/images/Visa.svg')
-            else if (Number(id) >= CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN && Number(id) <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX) setLogoSrc('/images/Mastercard.svg')
+            if (Number(id[0]) === CARD_IDENTIFYING_NUMBER.VISA) setLogoSrc('./images/Visa.svg')
+            else if (Number(id) >= CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN && Number(id) <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX) setLogoSrc('./images/Mastercard.svg')
             else { setLogoSrc(INITIALIZE_VALUE) }
         }
          identifyLogo();

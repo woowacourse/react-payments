@@ -9,13 +9,15 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "styled-components": "^6.1.17"
   },
+  "homepage": "https://ha-kuku.github.io/react-payments",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/js": "^9.24.0",
