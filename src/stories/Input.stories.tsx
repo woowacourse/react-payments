@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Input } from '@/components/common/Input';
@@ -48,6 +49,33 @@ export const Default: Story = {
         maxLength={args.maxLength}
         placeholder={args.placeholder}
         isValid={args.isValid}
+      />
+    );
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    isValid: true,
+  },
+  render: (args) => {
+    return <Input {...args} />;
+  },
+};
+
+export const isInValid: Story = {
+  args: {
+    disabled: false,
+    isValid: false,
+  },
+  render: (args) => {
+    return (
+      <Input
+        {...args}
+        css={css`
+          cursor: not-allowed;
+        `}
       />
     );
   },
