@@ -11,6 +11,13 @@
   gap: 0.62rem;
 }
 
+.cardInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
 .errorMessage {
   color: #ff3d3d;
   font-family: "Noto Sans KR";

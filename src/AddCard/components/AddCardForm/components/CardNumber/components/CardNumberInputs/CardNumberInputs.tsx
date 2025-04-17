@@ -4,6 +4,7 @@ import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
 import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
+import { Fragment } from "react/jsx-runtime";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
@@ -24,19 +25,25 @@ function CardNumberInputs({
 
   return (
     <div className={styles.container}>
-      <Label htmlFor="card-number-input">카드 번호</Label>
       <p className={styles.cardInputs}>
-        {CARD_NUMBER_INPUT_KEYS.map((inputKey) => (
-          <Input
-            key={inputKey}
-            id={`card-number-${inputKey}-input`}
-            type="text"
-            maxLength={4}
-            placeholder="1234"
-            isError={cardNumberState[inputKey].isError}
-            value={cardNumberState[inputKey].value}
-            onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
-          />
+        {CARD_NUMBER_INPUT_KEYS.map((inputKey, idx) => (
+          <div key={inputKey} className={styles.cardInputBox}>
+            <Label
+              htmlFor={`card-number-${inputKey}-input`}
+              isHidden={idx !== 0}
+            >
+              카드 번호
+            </Label>
+            <Input
+              id={`card-number-${inputKey}-input`}
+              type="text"
+              maxLength={4}
+              placeholder="1234"
+              isError={cardNumberState[inputKey].isError}
+              value={cardNumberState[inputKey].value}
+              onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+            />
+          </div>
         ))}
       </p>
       {isCardNumberValid && (
