@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 
+import { colors } from '@/styles/global';
+
 export const StyledCardContainer = styled.div`
   position: relative;
-  background-color: #333;
+  background-color: ${colors.GY3};
   border-radius: 12px;
   width: 350px;
   height: 200px;
+  box-shadow: 3px 3px 10px ${colors.GY2};
 `;
 
 export const StyledICCheapContainer = styled.div`
@@ -14,7 +17,7 @@ export const StyledICCheapContainer = styled.div`
   left: 12px;
   width: 60px;
   height: 40px;
-  background-color: #ddcd78;
+  background-color: ${colors.gold};
   border-radius: 6px;
 `;
 

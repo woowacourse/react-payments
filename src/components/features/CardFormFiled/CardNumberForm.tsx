@@ -38,7 +38,7 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
           variant="Caption"
           color="red"
           css={css`
-            height: 10px;
+            height: 20px;
           `}
         >
           {isInvalidCardNumber ? errorMessage : ''}

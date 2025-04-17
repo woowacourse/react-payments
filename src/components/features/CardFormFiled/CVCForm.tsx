@@ -14,24 +14,22 @@ export const CVCForm = () => {
   return (
     <CardInputLayout headerText="CVC 번호를 입력해 주세요." label="CVC">
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
-        <Flex width="100%">
-          {cvcNumber.map((cvc, index) => (
-            <Input
-              key={`cvc-${index}`}
-              value={cvc.value}
-              maxLength={3}
-              placeholder="CVC 번호"
-              isValid={cvc.isValid}
-              onChange={(e) => handleChange(index, e)}
-              onBlur={(e) => handleBlur(index, e)}
-            />
-          ))}
-        </Flex>
+        {cvcNumber.map((cvc, index) => (
+          <Input
+            key={`cvc-${index}`}
+            value={cvc.value}
+            maxLength={3}
+            placeholder="CVC 번호(카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리)"
+            isValid={cvc.isValid}
+            onChange={(e) => handleChange(index, e)}
+            onBlur={(e) => handleBlur(index, e)}
+          />
+        ))}
         <Text
           variant="Caption"
           color="red"
           css={css`
-            height: 10px;
+            height: 20px;
           `}
         >
           {isInvalidCVC ? errorMessage : ''}

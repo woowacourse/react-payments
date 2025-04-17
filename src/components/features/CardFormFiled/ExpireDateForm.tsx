@@ -41,7 +41,7 @@ export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: P
           variant="Caption"
           color="red"
           css={css`
-            height: 10px;
+            height: 20px;
           `}
         >
           {isInvalidDate ? errorMessage : ''}
