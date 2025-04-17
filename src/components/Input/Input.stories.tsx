@@ -11,26 +11,23 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const CardNumber: Story = {
+const defaultArgs = {
+  placeholder: "1234",
+  maxLength: 4,
+  value: "1234",
+  onChange: () => {},
+};
+
+export const Default: Story = {
   args: {
-    placeholder: "1234",
+    ...defaultArgs,
+    isError: false,
   },
 };
 
-export const ExpirationPeriodYear: Story = {
+export const WithError: Story = {
   args: {
-    placeholder: "YY",
-  },
-};
-
-export const ExpirationPeriodMonth: Story = {
-  args: {
-    placeholder: "MM",
-  },
-};
-
-export const cvcNumber: Story = {
-  args: {
-    placeholder: "123",
+    ...defaultArgs,
+    isError: true,
   },
 };
