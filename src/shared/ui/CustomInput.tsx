@@ -1,22 +1,15 @@
 import { CustomInputProps } from '../type/types';
-import './customInput.css';
+import * as S from './customInput.styles';
 
-export default function CustomInput({
-  type,
-  placeholder,
-  name,
-  onChange,
-  maxLength,
-  error,
-}: CustomInputProps) {
+export default function CustomInput({ type, placeholder, name, onChange, maxLength, error }: CustomInputProps) {
   return (
-    <input
-      className={`custom-input ${error && 'custom-input-error'}`}
-      onChange={onChange}
+    <S.CustomInput
       type={type}
       placeholder={placeholder}
       name={name}
+      onChange={onChange}
       maxLength={maxLength}
+      error={error}
     />
   );
 }
