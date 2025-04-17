@@ -40,3 +40,34 @@ export const Default: Story = {
     );
   },
 };
+
+export const Error: Story = {
+  args: {
+    label: 'BaseInputField',
+    errorMessage: 'errorMessage',
+  },
+  render: function Render(args) {
+    const [isError, setIsError] = useState(false);
+
+    useEffect(() => {
+      if (args.errorMessage !== undefined)
+        setIsError(args.errorMessage.length ? true : false);
+    }, [args.errorMessage]);
+
+    return (
+      <BaseInputField
+        {...args}
+        children={
+          <Input
+            placeholder="1234"
+            isError={isError}
+            value=""
+            name="inputName"
+            type="text"
+            onChange={() => {}}
+          />
+        }
+      />
+    );
+  },
+};

@@ -11,8 +11,29 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
-    placeholder: '1234',
+    placeholder: 'defaultStatus',
     isError: false,
+    name: 'inputName',
+    type: 'text',
+    value: 'inputValue',
+  },
+  render: function Render(args) {
+    const [selected, setSelected] = useState('');
+
+    return (
+      <Input
+        {...args}
+        value={selected}
+        onChange={({ value }) => setSelected(value)}
+      />
+    );
+  },
+};
+
+export const Error: Story = {
+  args: {
+    placeholder: 'errorStatus',
+    isError: true,
     name: 'inputName',
     type: 'text',
     value: 'inputValue',

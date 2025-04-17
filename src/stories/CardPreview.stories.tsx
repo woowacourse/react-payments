@@ -26,3 +26,41 @@ export const Default: Story = {
     return <CardPreview {...args} />;
   },
 };
+
+export const Visa: Story = {
+  args: {
+    cardNumberInputValue: {
+      cardNumberPart1: '4567',
+      cardNumberPart2: '4567',
+      cardNumberPart3: '4567',
+      cardNumberPart4: '4567',
+    },
+    expirationDateInputValue: {
+      expirationDatePart1: '02',
+      expirationDatePart2: '25',
+    },
+    cardType: 'visa',
+  },
+  render: function Render(args) {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const Master: Story = {
+  args: {
+    cardNumberInputValue: {
+      cardNumberPart1: '5123',
+      cardNumberPart2: '5123',
+      cardNumberPart3: '5123',
+      cardNumberPart4: '5123',
+    },
+    expirationDateInputValue: {
+      expirationDatePart1: '02',
+      expirationDatePart2: '25',
+    },
+    cardType: 'master',
+  },
+  render: function Render(args) {
+    return <CardPreview {...args} />;
+  },
+};
