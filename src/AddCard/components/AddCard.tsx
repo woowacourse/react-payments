@@ -1,3 +1,4 @@
+import styles from "./AddCard.module.css";
 import AddCardForm from "./AddCardForm/components/AddCardForm";
 import useAddCard from "../hooks/useAddCard";
 import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
@@ -7,15 +8,7 @@ function AddCard() {
   const { cardNumberState, expireDate } = previewState;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "3rem",
-        width: "650px",
-        margin: "3rem auto 0",
-      }}
-    >
+    <div className={styles.container}>
       <AddCardPreview
         cardNumberState={cardNumberState}
         expireDate={expireDate}
