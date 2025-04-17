@@ -28,7 +28,7 @@ export const Error: Story = {
   args: {
     expireDate: {
       ...INITIAL_EXPIRE_DATE_STATE,
-      MM: { value: "13", errorMessage: "1 ~ 12월까지만 입력 가능합니다.`" },
+      MM: { value: "13", errorMessage: "1 ~ 12월까지만 입력 가능합니다." },
     },
   },
 };
@@ -59,7 +59,7 @@ export const WithValidationTest: Story = {
     await userEvent.type(yearInput, "2");
 
     const errorMessageEl = canvasElement.querySelector(
-      "#year-error-message"
+      "#YY-error-message"
     ) as HTMLSpanElement;
 
     expect(errorMessageEl.textContent).toBe("년도는 2자리만 입력 가능합니다.");

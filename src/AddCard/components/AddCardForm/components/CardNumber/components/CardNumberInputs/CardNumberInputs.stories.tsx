@@ -43,7 +43,7 @@ export const WithValidationTest: Story = {
   },
   play: async ({ canvasElement }) => {
     const inputElement = canvasElement.querySelector(
-      "#card-number-input"
+      "#card-number-first-input"
     ) as HTMLInputElement;
     await userEvent.type(inputElement, "321");
     expect(inputElement.value).toBe("321");
