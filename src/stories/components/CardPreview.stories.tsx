@@ -4,6 +4,7 @@ import CardPreview from '../../components/CardPreview'
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardPreview>
 
 export default meta
