@@ -24,14 +24,14 @@ type Props = {
 export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   const cardTypeCheck = () => {
     if (cardNumbers[0].value.startsWith('4')) {
-      return '/images/Visa.png';
+      return './images/Visa.png';
     }
 
     if (
       Number(cardNumbers[0].value.slice(0, 2)) >= 51 &&
       Number(cardNumbers[0].value.slice(0, 2)) <= 55
     ) {
-      return '/images/Master.png';
+      return './images/Master.png';
     }
   };
 
