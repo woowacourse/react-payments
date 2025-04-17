@@ -73,9 +73,9 @@ function CardNumberInputField({
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= 4) {
-      if (name === 'cardNumberPart1') {
+      if (name === CARD_NUMBER_INPUT_TYPE[0]) {
         const isError = checkCardTypeFromPrefix(value);
-        updateCardError('cardNumberPart1', {
+        updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
           errorType: 'noneCardType',
           isError,
         });
