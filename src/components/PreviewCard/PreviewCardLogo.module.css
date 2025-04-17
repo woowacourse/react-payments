@@ -1,8 +1,6 @@
 .card-logo {
   width: 36px;
-  height: 22px;
-  background-color: var(--color-white);
-  border-radius: 4px;
+  border: 0px;
   position: absolute;
   top: 8px;
   right: 12px;

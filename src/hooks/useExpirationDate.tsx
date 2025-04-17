@@ -15,7 +15,7 @@ export default function useExpirationDate() {
 
   const dateValidate = (value: string, index: number) => {
     const newDate = [...cardExpirationDate];
-    newDate[index] = value.slice(0, 3);
+    newDate[index] = value.slice(0, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH);
     setcardExpirationDate(newDate);
 
     if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
@@ -49,6 +49,7 @@ export default function useExpirationDate() {
         index,
         setError
       );
+      return;
     }
 
     setErrorMessage(cardExpirationDateError, "", index, setError);

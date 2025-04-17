@@ -15,5 +15,6 @@ export default function PreviewCardLogo({
 }
 
 function cardLogoImagePath(cardType: string) {
+  if (cardType === "default") return;
   return `./${cardType}-logo.png`;
 }
