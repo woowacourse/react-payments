@@ -91,7 +91,7 @@ export const CardNumberInputGroup: Story = {
     return (
       <div style={{ width: "300px" }}>
         <InputGroup
-          label="Card Number"
+          label="카드번호"
           errorKey="cardNumber"
           errorMessages={errorMessages}
         >
@@ -127,7 +127,7 @@ export const ExpiryDateInputGroup: Story = {
     return (
       <div style={{ width: "300px" }}>
         <InputGroup
-          label="Expiry Date"
+          label="유효기간"
           errorKey="expiryDate"
           errorMessages={errorMessages}
         >
@@ -173,13 +173,13 @@ export const CVCInputGroup: Story = {
 export const InputGroupWithError: Story = {
   render: () => {
     const [errorMessages, setErrorMessages] = useState<Record<string, string>>({
-      cardNumber: "Invalid card number",
+      cardNumber: "숫자만 입력 가능합니다.",
     });
 
     return (
       <div style={{ width: "300px" }}>
         <InputGroup
-          label="Card Number"
+          label="카드번호"
           errorKey="cardNumber"
           errorMessages={errorMessages}
         >
@@ -190,7 +190,7 @@ export const InputGroupWithError: Story = {
               borderRadius: "4px",
             }}
           >
-            Input with error
+            abcd
           </div>
         </InputGroup>
       </div>
@@ -244,7 +244,7 @@ export const PaymentFormExample: Story = {
         }}
       >
         <InputGroup
-          label="Card Number"
+          label="카드번호"
           errorKey="cardNumber"
           errorMessages={errorMessages}
         >
@@ -286,7 +286,7 @@ export const PaymentFormExample: Story = {
 
         <div style={{ display: "flex", gap: "12px" }}>
           <InputGroup
-            label="Expiry Date"
+            label="유효기간"
             errorKey="expiryDate"
             errorMessages={errorMessages}
           >
