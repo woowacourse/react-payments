@@ -5,7 +5,7 @@ type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength: number;
-  placeHolder: string;
+  placeholder: string;
   isError: boolean;
 };
 
@@ -23,16 +23,25 @@ const StyledInput = styled.input<InputProps>`
         return '1px solid #ACACAC;';
     }
   }};
+
+  ::placeholder {
+    color: #acacac;
+  }
+
+  :focus {
+    outline: none;
+    border: 1.5px solid #000000;
+  }
 `;
 
-const Input = ({ value, onChange, onBlur, maxLength, placeHolder, isError }: InputProps) => {
+const Input = ({ value, onChange, onBlur, maxLength, placeholder, isError }: InputProps) => {
   return (
     <StyledInput
       value={value}
       onChange={onChange}
       onBlur={onBlur}
       maxLength={maxLength}
-      placeHolder={placeHolder}
+      placeholder={placeholder}
       isError={isError}
     />
   );
