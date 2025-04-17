@@ -10,12 +10,14 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "dev": "vite dev --host 0.0.0.0",
-    "chromatic": "npx chromatic --project-token=chpt_eda0b95802f9a8f"
+    "chromatic": "npx chromatic --project-token=chpt_eda0b95802f9a8f",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
+  "homepage": "https://Daeun-100.github.io/react-payments",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/js": "^9.24.0",
@@ -35,6 +37,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-storybook": "^0.12.0",
+    "gh-pages": "^6.3.0",
     "storybook": "^8.6.12",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.29.1",

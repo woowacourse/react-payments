@@ -8,29 +8,39 @@ type CardNetworkProps = {
   cardNumbers: CardNumbers;
 };
 
+const CARD_NETWORKS = [
+  {
+    prefixes: ['40', '41', '42', '43', '44', '45', '46', '47', '48', '49'],
+    name: 'visa',
+    image: visa,
+  },
+  {
+    prefixes: ['51', '52', '53', '54', '55'],
+    name: 'master',
+    image: masterCard,
+  },
+];
+
 const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
-  const getCardNetworkState = (number: string) => {
-    if (number === '4') {
-      return 'visa';
-    }
-    if (number === '5') {
-      return 'master';
-    }
+  const getCardNetwork = (number: string) => {
+    return CARD_NETWORKS.find((network) => network.prefixes.includes(number));
   };
 
-  const cardNetworkState = getCardNetworkState(
-    String(cardNumbers.firstNumber)[0]
+  const cardNetwork = getCardNetwork(
+    String(cardNumbers.firstNumber).slice(0, 2)
   );
 
-  if (cardNetworkState === 'master') {
-    return (
-      <img src={masterCard} alt="mastercard" className={styles.cardNetwork} />
-    );
+  if (!cardNetwork) {
+    return null;
   }
 
-  if (cardNetworkState === 'visa') {
-    return <img src={visa} alt="visa" className={styles.cardNetwork} />;
-  }
+  return (
+    <img
+      src={cardNetwork.image}
+      alt="mastercard"
+      className={styles.cardNetwork}
+    />
+  );
 };
 
 export default CardNetwork;
