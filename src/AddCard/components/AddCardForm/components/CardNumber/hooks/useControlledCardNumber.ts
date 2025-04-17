@@ -5,7 +5,7 @@ import { INITIAL_CARD_NUMBER_STATE } from "../constants";
 
 const useControlledCardNumber = () => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
-    () => INITIAL_CARD_NUMBER_STATE
+    INITIAL_CARD_NUMBER_STATE
   );
 
   const handleCardNumberChange = useCallback(

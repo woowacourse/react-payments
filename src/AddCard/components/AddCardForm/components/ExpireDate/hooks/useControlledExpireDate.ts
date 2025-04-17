@@ -44,7 +44,7 @@ const validateYear = (year: string) => {
 
 const useControlledExpireDate = () => {
   const [expireDate, setExpireDate] = useState<ExpireDateState>(
-    () => INITIAL_EXPIRE_DATE_STATE
+    INITIAL_EXPIRE_DATE_STATE
   );
 
   const handleExpireMonthChange = useCallback((value: string) => {
