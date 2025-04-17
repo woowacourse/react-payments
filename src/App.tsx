@@ -5,32 +5,11 @@ import CardValidityPeriodField from './components/cardInfoForm/CardValidityPerio
 import CardCVCField from './components/cardInfoForm/CardCVCField/CardCVCField';
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import useCardNumber from './hooks/useCardNumber';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [isError, setIsError] = useState([false, false, false, false]);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-    const { value } = e.target;
-
-    if (value.length > 4) {
-      return;
-    }
-
-    const isNotValid =
-      value.length < 4 || value.length > 4 || Number(value) < 0;
-    const copyError = [...isError];
-    copyError[n] = isNotValid;
-    setIsError(copyError);
-
-    const copy = [...cardNumber];
-    copy[n] = value;
-    setCardNumber(copy);
-  };
-
-  const checkCardNumberError = () => {
-    return isError.some((v) => v === true);
-  };
+  const { cardNumber, onChange, checkCardNumberError, isError } =
+    useCardNumber();
 
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
