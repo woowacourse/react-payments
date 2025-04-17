@@ -1,16 +1,11 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
 import styles from './Input.module.css';
 
-export interface InputProps {
-  type: string;
+export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   onChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     setState: Dispatch<SetStateAction<boolean>>
   ) => void;
-  name: string;
-  id?: string;
-  placeholder?: string;
-  maxLength?: number;
 }
 
 function Input({
