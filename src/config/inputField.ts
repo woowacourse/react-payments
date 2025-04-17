@@ -6,6 +6,13 @@ export const CARD_NUMBER_INPUT_TYPE = [
 ] as const;
 export type CardNumberInputType = (typeof CARD_NUMBER_INPUT_TYPE)[number];
 
+export const EXPIRATION_DATE_INPUT_PLACEHOLDER: Record<
+  ExpirationDateInputType,
+  string
+> = {
+  expirationDatePart1: 'MM',
+  expirationDatePart2: 'YY',
+};
 export const EXPIRATION_DATE_INPUT_TYPE = [
   'expirationDatePart1',
   'expirationDatePart2',

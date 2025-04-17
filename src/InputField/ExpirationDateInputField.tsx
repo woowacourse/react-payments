@@ -36,7 +36,7 @@ function ExpirationDateInputField({
         <Input
           key={inputType}
           type="number"
-          placeholder="MM"
+          placeholder={expirationDateInputPlaceholder[inputType]}
           value={inputValue[inputType]}
           onChange={onChange}
           name={inputType}
