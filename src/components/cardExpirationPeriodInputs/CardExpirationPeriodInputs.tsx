@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { ExpirationPeriod, ExpirationPeriodProps } from "../../\btypes/index.types"
 import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from "../../util/validation"
 
-const Container = styled.div`
+const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,12 +13,18 @@ const Container = styled.div`
     width: 100%;
 `
 
-const InputWrap = styled.div`
+const StyledInputWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
     align-self: stretch;
 `
+
+const StyledErrorMessage = styled.p`
+    color: red;
+    font-size: 12px;
+    margin: 0;
+    `
 
 const errorMessage = {
     length: '2자리만 입력 가능합니다.',
@@ -27,11 +33,7 @@ const errorMessage = {
     yearRange: '유효기간은 25~99년 사이여야 합니다.'
 }
 
-const StyledErrorMessage = styled.p`
-    color: red;
-    font-size: 12px;
-    margin: 0;
-    `
+
 
 function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: ExpirationPeriodProps) {
     const [error, setError] = useState({
@@ -107,9 +109,9 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
     }
 
     return (
-        <Container>
+        <StyledContainer>
             <label htmlFor="">유효 기간</label>
-           <InputWrap>
+           <StyledInputWrap>
                 <Input 
                 value={expirationPeriod['month']} 
                 onChange={(e) => {
@@ -130,9 +132,9 @@ function CardExpirationPeriodInputs({expirationPeriod ,changeExpirationPeriod}: 
                 maxLength={2} 
                 placeholder="YY" 
                 isError={error['year'] !== ""}></Input>
-            </InputWrap>
+            </StyledInputWrap>
             {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}
-        </Container>
+        </StyledContainer>
     )
 }
 

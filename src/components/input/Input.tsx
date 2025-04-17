@@ -9,7 +9,7 @@ type InputProps = {
   isError: boolean;
 };
 
-const InputStyled = styled.input<{ width?: string, isError:boolean }>`
+const StyledInput = styled.input<{ width?: string, isError:boolean }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
   border: 1.015px solid ${(props)=>props.isError ? "red" : "#acacac"};
@@ -37,7 +37,7 @@ const InputStyled = styled.input<{ width?: string, isError:boolean }>`
 
 function Input({ width, maxLength, placeholder, onChange, value, isError }: InputProps) {
   return (
-      <InputStyled
+      <StyledInput
         width={width}
         placeholder={placeholder}
         maxLength={maxLength}

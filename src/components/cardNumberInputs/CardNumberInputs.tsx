@@ -5,7 +5,7 @@ import { useState } from "react"
 import { isValidLength, isValidNumber } from "../../util/validation"
 
 
-const Container = styled.div`
+const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@ const Container = styled.div`
     gap: 8px;
 `
 
-const InputWrap = styled.div`
+const StyledInputWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
@@ -79,9 +79,9 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
    
 
     return (
-        <Container>
+        <StyledContainer>
             <label htmlFor="">카드 번호</label>
-           <InputWrap>
+           <StyledInputWrap>
                 <Input
                     value={cardNumber['first']}
                     onChange={(e) =>
@@ -127,9 +127,9 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     maxLength={4} 
                     placeholder="1234" 
                     isError={error['fourth'] !== ""}></Input>
-            </InputWrap>
+            </StyledInputWrap>
            {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}  
-        </Container>
+        </StyledContainer>
     )
 }
 

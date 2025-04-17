@@ -4,7 +4,7 @@ import { CardCVCNumberSectionProps } from "../../\btypes/index.types"
 import { useState } from "react"
 import { isValidLength, isValidNumber } from "../../util/validation"
 
-const Container = styled.div`
+const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@ const Container = styled.div`
     width: 100%;
 `
 
-const InputWrap = styled.div`
+const StyledInputWrap = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
@@ -57,9 +57,9 @@ function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectio
 
 
     return (
-        <Container>
+        <StyledContainer>
             <label htmlFor="">CVC</label>
-           <InputWrap>
+           <StyledInputWrap>
                 <Input
                     value={CVCNumber}
                     onChange={(e) => {
@@ -70,9 +70,9 @@ function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectio
                     width='100%'
                     maxLength={3}
                     placeholder="123" ></Input>
-            </InputWrap>
+            </StyledInputWrap>
             {error !== "" ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
-        </Container>
+        </StyledContainer>
     )
 }
 
