@@ -45,10 +45,30 @@ export default function CardExpirationDate({
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
         setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
       }
+
+      if (
+        Number(cardExpirationDate.year) === Number(String(new Date().getFullYear()).slice(2)) &&
+        valueAsNumber < new Date().getMonth() + 1
+      ) {
+        setCardExpirationDateErrorMessage({
+          ...cardExpirationDateErrorMessage,
+          [dateType]: ERROR_MESSAGE.pastYear,
+        });
+      }
     }
 
     if (dateType === 'year') {
       if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
+        setCardExpirationDateErrorMessage({
+          ...cardExpirationDateErrorMessage,
+          [dateType]: ERROR_MESSAGE.pastYear,
+        });
+      }
+
+      if (
+        valueAsNumber === Number(String(new Date().getFullYear()).slice(2)) &&
+        Number(cardExpirationDate.month) < new Date().getMonth() + 1
+      ) {
         setCardExpirationDateErrorMessage({
           ...cardExpirationDateErrorMessage,
           [dateType]: ERROR_MESSAGE.pastYear,
