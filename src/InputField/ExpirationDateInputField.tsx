@@ -2,19 +2,22 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
 import {
+  EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
 } from '../config/inputField';
 
-function ExpirationDateInputField({
-  inputValue,
-  setInputValue,
-}: {
+interface ExpirationDateInputFieldProps {
   inputValue: Record<ExpirationDateInputType, string>;
   setInputValue: Dispatch<
     SetStateAction<Record<ExpirationDateInputType, string>>
   >;
-}) {
+}
+
+function ExpirationDateInputField({
+  inputValue,
+  setInputValue,
+}: ExpirationDateInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= 2) {
       if (name === 'expirationDatePart1' && Number(value) > 12) return;
@@ -34,7 +37,7 @@ function ExpirationDateInputField({
         <Input
           key={inputType}
           type="number"
-          placeholder="MM"
+          placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
           value={inputValue[inputType]}
           onChange={onChange}
           name={inputType}

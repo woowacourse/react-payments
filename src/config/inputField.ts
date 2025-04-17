@@ -13,4 +13,12 @@ export const EXPIRATION_DATE_INPUT_TYPE = [
 export type ExpirationDateInputType =
   (typeof EXPIRATION_DATE_INPUT_TYPE)[number];
 
+export const EXPIRATION_DATE_INPUT_PLACEHOLDER: Record<
+  ExpirationDateInputType,
+  string
+> = {
+  expirationDatePart1: 'MM',
+  expirationDatePart2: 'YY',
+};
+
 export type CVCInputValueType = 'CVCPart1';
