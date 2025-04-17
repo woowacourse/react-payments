@@ -1,7 +1,25 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-type inputType = '카드 번호' | '유효기간' | 'CVC';
+interface BaseInputFieldProps {
+  label: string;
+  children: ReactNode;
+  errorMessage?: string;
+}
+
+function BaseInputField({
+  label,
+  children,
+  errorMessage,
+}: BaseInputFieldProps) {
+  return (
+    <InputFieldContainer>
+      <Label>{label}</Label>
+      <InputWrapper>{children}</InputWrapper>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
+    </InputFieldContainer>
+  );
+}
 
 const InputFieldContainer = styled.div`
   display: flex;
@@ -25,23 +43,4 @@ const ErrorMessage = styled.p`
   font-size: 9.5px;
   color: #ff3d3d;
 `;
-
-function BaseInputField({
-  label,
-  children,
-  errorMessage,
-}: {
-  label: string;
-  children: ReactNode;
-  errorMessage?: string;
-}) {
-  return (
-    <InputFieldContainer>
-      <Label>{label}</Label>
-      <InputWrapper>{children}</InputWrapper>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
-    </InputFieldContainer>
-  );
-}
-
 export default BaseInputField;

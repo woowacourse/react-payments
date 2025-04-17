@@ -14,17 +14,19 @@ import {
   CardNumberInputType,
 } from '../config/inputField';
 
+interface CardNumberInputFieldProps {
+  inputValue: Record<CardNumberInputType, string>;
+  setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
+  cardType: CardType;
+  setCardType: Dispatch<SetStateAction<CardType>>;
+}
+
 function CardNumberInputField({
   inputValue,
   setInputValue,
   cardType,
   setCardType,
-}: {
-  inputValue: Record<CardNumberInputType, string>;
-  setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
-  cardType: CardType;
-  setCardType: Dispatch<SetStateAction<CardType>>;
-}) {
+}: CardNumberInputFieldProps) {
   const [errorTypes, setErrorTypes] = useState<
     Record<CardNumberInputType, ErrorType[]>
   >({

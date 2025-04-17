@@ -1,6 +1,24 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+interface InputSectionProps {
+  title: string;
+  caption?: string;
+  children: ReactNode;
+}
+
+function InputSection({ title, caption, children }: InputSectionProps) {
+  return (
+    <Section>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        <Caption>{caption}</Caption>
+      </TitleWrapper>
+      {children}
+    </Section>
+  );
+}
+
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -24,25 +42,5 @@ const Caption = styled.p`
   font-size: 9.5px;
   color: #8b95a1;
 `;
-
-function InputSection({
-  title,
-  caption,
-  children,
-}: {
-  title: string;
-  caption?: string;
-  children: ReactNode;
-}) {
-  return (
-    <Section>
-      <TitleWrapper>
-        <Title>{title}</Title>
-        <Caption>{caption}</Caption>
-      </TitleWrapper>
-      {children}
-    </Section>
-  );
-}
 
 export default InputSection;
