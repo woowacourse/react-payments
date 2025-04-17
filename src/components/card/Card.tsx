@@ -61,9 +61,9 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 			<CardInfoWrap>
 				{Object.entries(cardNumbers).map(([key, value]) => {
 					if (key === "third" || key === "fourth") {
-						return <CardNumberblind>{"•".repeat(value?.length)}</CardNumberblind>;
+						return <CardNumberblind key={key}>{"•".repeat(value?.length)}</CardNumberblind>;
 					}
-					return <CardNumber>{value}</CardNumber>;
+					return <CardNumber key={key}>{value}</CardNumber>;
 				})}
 			</CardInfoWrap>
 
