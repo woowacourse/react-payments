@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@storybook/addon-themes": "^8.6.12",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "styled-components": "^6.1.17"
