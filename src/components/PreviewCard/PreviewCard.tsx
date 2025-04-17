@@ -5,7 +5,7 @@ import { CardInformationType, CardType } from "../../types/CardInformationType";
 
 const seperateCard = {
   visa: "/Visa.png",
-  master: "/MasterCard.png",
+  master: "/Mastercard.png",
 };
 
 const PreviewCard = ({
