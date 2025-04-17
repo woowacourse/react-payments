@@ -2,7 +2,6 @@ import ErrorMessage from '../ErrorMessage';
 import InputField from '../InputField';
 import InputSection from './InputSection';
 import { useCardExpirationDateOptions } from '../../hooks/useCardExpirationDate';
-import styles from './inputSection.module.css';
 
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
@@ -17,11 +16,7 @@ const CardExpirationDateInputSection = ({
       subtitle="유효기간"
     >
       <InputField
-        value={
-          cardExpirationDate.month !== '' && cardExpirationDate.month < 10
-            ? `0${cardExpirationDate.month}`
-            : cardExpirationDate.month
-        }
+        value={cardExpirationDate.month}
         onChange={setCardExpirationDate('month')}
         isError={isError.month}
         placeholder="MM"

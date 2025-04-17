@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 type useCardCVCNumberOptions = {
-  cardCVCNumber: number | '';
+  cardCVCNumber: string;
   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError: boolean;
   errorMessage: string;
 };
 
 const useCardCVCNumber = (): useCardCVCNumberOptions => {
-  const [cardCVCNumber, setCardCVCNumber] = useState<number | ''>('');
+  const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -28,11 +28,11 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const handleCardCVCNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const isValid = isValidCardCVCNumberChange(event.target.value);
+    const isValid = isValidCardCVCNumberChange(event.target.value.trim());
     if (isValid) {
       setIsError(false);
       setErrorMessage('');
-      setCardCVCNumber(Number(event.target.value));
+      setCardCVCNumber(event.target.value.trim());
       return;
     }
 

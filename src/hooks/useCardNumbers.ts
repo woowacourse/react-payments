@@ -13,7 +13,7 @@ export type CardNumbers = {
   fourthNumber: string;
 };
 
-const InitialCardNumber: CardNumbers = {
+const INITIAL_CARD_NUMBER: CardNumbers = {
   firstNumber: '',
   secondNumber: '',
   thirdNumber: '',
@@ -27,7 +27,7 @@ type IsError = {
   fourthNumber: boolean;
 };
 
-const InitialIsError: IsError = {
+const INITIAL_IS_ERROR: IsError = {
   firstNumber: false,
   secondNumber: false,
   thirdNumber: false,
@@ -47,8 +47,8 @@ export type UseCardNumbersOptions = {
 } & CardNumbersOptions;
 
 const useCardNumbers = (): UseCardNumbersOptions => {
-  const [cardNumbers, setCardNumbers] = useState(InitialCardNumber);
-  const [isError, setIsError] = useState(InitialIsError);
+  const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
+  const [isError, setIsError] = useState(INITIAL_IS_ERROR);
   const [errorMessage, setErrorMessage] = useState('');
 
   const isValidCardNumbers = (input: string) => {
@@ -68,13 +68,13 @@ const useCardNumbers = (): UseCardNumbersOptions => {
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const isValid = isValidCardNumbers(event.target.value);
+      const isValid = isValidCardNumbers(event.target.value.trim());
       if (isValid) {
         setIsError({ ...isError, [target]: false });
         setErrorMessage('');
         setCardNumbers({
           ...cardNumbers,
-          [target]: event.target.value,
+          [target]: event.target.value.trim(),
         });
       } else {
         setIsError({ ...isError, [target]: true });
