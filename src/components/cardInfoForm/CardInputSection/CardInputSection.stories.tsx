@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardInputSection from './CardInputSection';
 import CardNumberField from '../CardNumberField/CardNumberField';
+import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
 import React, { useState } from 'react';
 
 const meta = {
@@ -64,14 +65,104 @@ export const CardNumber: Story = {
     return (
       <CardInputSection
         {...args}
-        title="결제할 카드 번호 입력"
-        description="본인 명의의 카드만 결제 가능합니다."
         errorMessage={checkCardNumberError() ? '카드 번호는 16자리입니다.' : ''}
       >
         <CardNumberField
           cardNumber={cardNumber}
           isError={isError}
           onChange={onChange}
+        />
+      </CardInputSection>
+    );
+  },
+};
+
+export const CardValidityPeriod: Story = {
+  args: {
+    title: '카드 유효기간을 입력해 주세요',
+    description: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    errorMessage: '',
+    children: <></>,
+  },
+  render: (args) => {
+    const [cardValidityPeriod, setCardValidityPeriod] = useState({
+      month: '',
+      year: '',
+    });
+    const [isErrorCardValidityPeriod, setIsErrorCardValidityPeriod] = useState({
+      month: false,
+      year: false,
+    });
+
+    const onChangeCardValidityPeriod = (
+      e: React.ChangeEvent<HTMLInputElement>,
+      type: 'month' | 'year',
+    ) => {
+      const { value } = e.target;
+
+      if (type === 'month') {
+        if (Number.parseInt(value, 10) > 12 || Number.parseInt(value, 10) < 1) {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            month: true,
+          }));
+        } else {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            month: false,
+          }));
+        }
+
+        if (value.length < 2) {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            month: true,
+          }));
+        }
+      } else if (type === 'year') {
+        if (
+          Number.parseInt(value, 10) <
+          Number.parseInt(new Date().getFullYear().toString().slice(2), 10)
+        ) {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            year: true,
+          }));
+        } else {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            year: false,
+          }));
+        }
+        if (value.length < 2) {
+          setIsErrorCardValidityPeriod((prev) => ({
+            ...prev,
+            year: true,
+          }));
+        }
+      }
+
+      setCardValidityPeriod((prev) => ({
+        ...prev,
+        [type]: value.slice(0, 2),
+      }));
+    };
+
+    const checkCardValidityPeriodError = () => {
+      return Object.values(isErrorCardValidityPeriod).some((v) => v === true);
+    };
+
+    return (
+      <CardInputSection
+        {...args}
+        errorMessage={
+          checkCardValidityPeriodError() ? 'MM/YY는 4자리입니다.' : ''
+        }
+      >
+        <CardValidityPeriodField
+          cardValidityPeriod={cardValidityPeriod}
+          isError={isErrorCardValidityPeriod}
+          onChange={onChangeCardValidityPeriod}
         />
       </CardInputSection>
     );
