@@ -4,8 +4,7 @@ import styled from "styled-components";
 interface InputGroupProps {
   label: string;
   children: React.ReactNode;
-  errorKey: string;
-  errorMessages: Record<string, string>;
+  errorMessages: () => string;
 }
 
 export const InputContainer = styled.div`
@@ -37,18 +36,13 @@ const ErrorMessageContainer = styled.div`
   gap: 4px;
 `;
 
-const InputGroup = ({
-  label,
-  children,
-  errorKey,
-  errorMessages,
-}: InputGroupProps) => {
+const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
   return (
     <Container>
       <Label>{label}</Label>
       <InputContainer>{children}</InputContainer>
       <ErrorMessageContainer>
-        <ErrorMessage>{errorMessages[errorKey]}</ErrorMessage>
+        <ErrorMessage>{errorMessages()}</ErrorMessage>
       </ErrorMessageContainer>
     </Container>
   );
