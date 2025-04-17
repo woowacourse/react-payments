@@ -106,7 +106,7 @@ const AddCard = () => {
         />
         <InputGroup
           label="카드 번호"
-          errorMessages={() => handleCardNumberErrorMessages()}
+          errorMessages={handleCardNumberErrorMessages()}
         >
           <Input
             maxLength={4}
@@ -156,7 +156,7 @@ const AddCard = () => {
         />
         <InputGroup
           label="유효기간"
-          errorMessages={() => handlePeriodErrorMessages()}
+          errorMessages={handlePeriodErrorMessages()}
         >
           <Input
             maxLength={2}
@@ -177,7 +177,7 @@ const AddCard = () => {
         </InputGroup>
 
         <Description headText="CVC 번호를 입력해 주세요" />
-        <InputGroup label="CVC" errorMessages={() => errorMessages.CVC}>
+        <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
           <Input
             maxLength={3}
             placeholder="123"

@@ -1,6 +1,5 @@
 import ERROR_MESSAGE from "../constants/errorMessage";
 
-//TODO: 포커스 이동됐을때 숫자수가 더 작을때의 예외처리
 export const validateCardNumber = (cardNumber: string) => {
   if (cardNumber.length === 0) return;
 
