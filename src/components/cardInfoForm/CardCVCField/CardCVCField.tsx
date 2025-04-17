@@ -13,7 +13,7 @@ function CardCVCField() {
       value.length < 3 || value.length > 3 || Number(value) < 0;
 
     setIsError(isNotValid);
-    setCardCVC(value);
+    setCardCVC(value.slice(0, 3));
   };
 
   return (
