@@ -1,15 +1,15 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
-import { ExpirationDateInputValueType } from '../types/inputFieldType';
+import { ExpirationDateInputType } from '../config/inputField';
 
 function ExpirationDateInputField({
   inputValue,
   setInputValue,
 }: {
-  inputValue: Record<ExpirationDateInputValueType, string>;
+  inputValue: Record<ExpirationDateInputType, string>;
   setInputValue: Dispatch<
-    SetStateAction<Record<ExpirationDateInputValueType, string>>
+    SetStateAction<Record<ExpirationDateInputType, string>>
   >;
 }) {
   const onChange = ({ name, value }: { name: string; value: string }) => {

@@ -7,8 +7,12 @@ import {
 } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
-import { CardNumberInputValueType } from '../types/inputFieldType';
-import { CardType } from '../types/cardType';
+import { CardType } from '../config/card';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+import {
+  CARD_NUMBER_INPUT_TYPE,
+  CardNumberInputType,
+} from '../config/inputField';
 
 function CardNumberInputField({
   inputValue,
@@ -16,24 +20,13 @@ function CardNumberInputField({
   cardType,
   setCardType,
 }: {
-  inputValue: Record<CardNumberInputValueType, string>;
-  setInputValue: Dispatch<
-    SetStateAction<Record<CardNumberInputValueType, string>>
-  >;
+  inputValue: Record<CardNumberInputType, string>;
+  setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
   cardType: CardType;
   setCardType: Dispatch<SetStateAction<CardType>>;
 }) {
-  const INPUT_FIELD_TYPE = [
-    'cardNumberPart1',
-    'cardNumberPart2',
-    'cardNumberPart3',
-    'cardNumberPart4',
-  ] as const;
-  type InputFieldType = (typeof INPUT_FIELD_TYPE)[number];
-  type ErrorType = 'noneCardType' | 'shortCardSegment';
-
   const [errorTypes, setErrorTypes] = useState<
-    Record<InputFieldType, ErrorType[]>
+    Record<CardNumberInputType, ErrorType[]>
   >({
     cardNumberPart1: [],
     cardNumberPart2: [],
@@ -44,7 +37,7 @@ function CardNumberInputField({
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateCardError = (
-    inputName: InputFieldType,
+    inputName: CardNumberInputType,
     errorStatus: { errorType: ErrorType; isError: boolean }
   ) => {
     const currentErrorType = errorTypes[inputName];
@@ -94,15 +87,10 @@ function CardNumberInputField({
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
-    updateCardError(name as InputFieldType, {
+    updateCardError(name as CardNumberInputType, {
       errorType: 'shortCardSegment',
       isError: value.length > 0 && value.length < 4,
     });
-  };
-
-  const ERROR_TYPE_TO_MESSAGE = {
-    noneCardType: '유효하지 않은 카드 번호입니다. 카드 번호를 확인해주세요',
-    shortCardSegment: '카드 번호는 4자리씩 입력해주세요.',
   };
 
   useEffect(() => {
@@ -117,7 +105,7 @@ function CardNumberInputField({
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      {INPUT_FIELD_TYPE.map((inputFieldType) => (
+      {CARD_NUMBER_INPUT_TYPE.map((inputFieldType) => (
         <Input
           type="number"
           placeholder="1234"

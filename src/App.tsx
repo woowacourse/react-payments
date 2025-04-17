@@ -6,7 +6,7 @@ import InputSection from './InputSection';
 import ExpirationDateInputField from './InputField/ExpirationDateInputField';
 import CVCInputField from './InputField/CVCInputField';
 import { useState } from 'react';
-import { CardType } from './types/cardType';
+import { CardType } from './config/card';
 
 const PaymentsLayout = styled.div`
   height: 100vh;
