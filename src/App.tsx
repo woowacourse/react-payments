@@ -4,6 +4,7 @@ import CardNumberField from './components/cardInfoForm/CardNumberField/CardNumbe
 import CardValidityPeriodField from './components/cardInfoForm/CardValidityPeriodField/CardValidityPeriodField';
 import CardCVCField from './components/cardInfoForm/CardCVCField/CardCVCField';
 import { useState } from 'react';
+import styled from '@emotion/styled';
 
 function App() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -121,12 +122,12 @@ function App() {
   };
 
   return (
-    <main>
+    <AppLayout>
       <CardPreview
         cardNumber={cardNumber}
         cardValidityPeriod={cardValidityPeriod}
       />
-      <form>
+      <CardForm>
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
@@ -163,9 +164,26 @@ function App() {
             onChange={onChangeCVC}
           />
         </CardInputSection>
-      </form>
-    </main>
+      </CardForm>
+    </AppLayout>
   );
 }
 
 export default App;
+
+const AppLayout = styled.main`
+  width: 376px;
+
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 70px 30px;
+`;
+
+const CardForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  margin-top: 45px;
+`;
