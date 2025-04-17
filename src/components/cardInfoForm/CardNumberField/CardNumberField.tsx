@@ -29,6 +29,8 @@ function CardNumberField({
             aria-labelledby="cardNumber"
             onChange={(e) => onChange(e, index)}
             placeholder="1234"
+            min={0}
+            max={9999}
           />
         ))}
       </InputWrapper>
