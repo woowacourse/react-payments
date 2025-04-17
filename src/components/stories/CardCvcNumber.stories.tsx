@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardCvcNumber from "../CardCvcNumber/CardCvcNumber";
+import CardCvcNumber from "../../CardCvcNumber/CardCvcNumber";
 
 const meta: Meta<typeof CardCvcNumber> = {
   title: "Example/CardCvcNumber",

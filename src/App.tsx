@@ -1,5 +1,5 @@
 import "./App.css";
-import CardNumber from "./CardNumber/CarNumber";
+import CardNumber from "./CardNumber/CardNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";

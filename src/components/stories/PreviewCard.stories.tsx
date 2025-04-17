@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PreviewCardLayout from "../components/PreviewCard/PreviewCardLayout";
+import PreviewCardLayout from "../PreviewCard/PreviewCardLayout";
 
 const meta: Meta<typeof PreviewCardLayout> = {
   title: "Example/PreviewCardLayout",
