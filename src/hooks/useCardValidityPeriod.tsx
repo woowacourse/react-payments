@@ -9,6 +9,7 @@ function useCardValidityPeriod() {
     month: false,
     year: false,
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onChangeCardValidityPeriod = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -41,6 +42,8 @@ function useCardValidityPeriod() {
       },
     };
 
+    setErrorMessage(validatePeriod[type](value) ? `MM/YY는 4자리입니다.` : '');
+
     setIsErrorCardValidityPeriod((prev) => ({
       ...prev,
       [type]: validatePeriod[type](value),
@@ -61,6 +64,7 @@ function useCardValidityPeriod() {
     isErrorCardValidityPeriod,
     onChangeCardValidityPeriod,
     checkCardValidityPeriodError,
+    errorMessage,
   };
 }
 
