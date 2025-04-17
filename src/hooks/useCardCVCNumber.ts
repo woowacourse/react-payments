@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import useError from './useError';
-import isNumber from './validate/isNumber';
-import isValidStringLength from './validate/isValidStringLength';
+import { useState } from "react";
+import useError from "./useError";
+import isNumber from "./validate/isNumber";
+import isValidStringLength from "./validate/isValidStringLength";
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
@@ -19,18 +19,18 @@ const INITIAL_IS_ERROR: IsError = {
 };
 
 const useCardCVCNumber = (): useCardCVCNumberOptions => {
-  const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
+  const [cardCVCNumber, setCardCVCNumber] = useState<string>("");
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardCVCNumberChangeValidationResult = (input: string) => {
     if (!isNumber(input)) {
-      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+      return { isError: true, errorMessage: "숫자만 입력 가능합니다" };
     }
-    if (isValidStringLength({ value: input, maxLength: 3 })) {
-      return { isError: true, errorMessage: '3자리를 입려해야 합니다' };
+    if (!isValidStringLength({ value: input, maxLength: 3 })) {
+      return { isError: true, errorMessage: "3자리를 입려해야 합니다" };
     }
 
-    return { isError: false, errorMessage: '' };
+    return { isError: false, errorMessage: "" };
   };
 
   const handleCardCVCNumberChange = (
@@ -40,10 +40,10 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
       event.target.value.trim()
     );
     if (isError) {
-      setErrorField('cvcNumber', errorMessage);
+      setErrorField("cvcNumber", errorMessage);
       return;
     }
-    clearError('cvcNumber');
+    clearError("cvcNumber");
     setCardCVCNumber(event.target.value.trim());
   };
 
