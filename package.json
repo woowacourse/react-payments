@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_51547092641dadc"
+    "chromatic": "npx chromatic --project-token=chpt_51547092641dadc",
+    "deploy": "vite build && npx gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.1.0",
