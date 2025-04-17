@@ -1,4 +1,4 @@
-import styles from './CardPreview.module.css';
+import styles from "./CardPreview.module.css";
 
 export type CardInformationType = {
   cardNumbers: string[];
@@ -7,30 +7,30 @@ export type CardInformationType = {
 
 function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
   let isBrand = false;
-  let brandName = 'Mastercard';
+  let brandName = "Mastercard";
   const displayCardNumbers = cardNumbers.map((number, index) => {
     if (index === 0) checkBrand(number);
     if (index <= 1) {
       return number;
     }
 
-    return '•'.repeat(number.length);
+    return "•".repeat(number.length);
   });
 
   function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber[0] === '4') {
+    if (inputCardNumber[0] === "4") {
       isBrand = true;
-      brandName = 'Visa';
+      brandName = "Visa";
       return;
     }
 
     if (
-      inputCardNumber[0] === '5' &&
+      inputCardNumber[0] === "5" &&
       Number(inputCardNumber[1]) >= 1 &&
       Number(inputCardNumber[1]) <= 5
     ) {
       isBrand = true;
-      brandName = 'Mastercard';
+      brandName = "Mastercard";
       return;
     }
 
@@ -42,7 +42,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
         {isBrand && (
-          <img src={`/${brandName}.png`} className={styles.logoBrand} />
+          <img src={`./${brandName}.png`} className={styles.logoBrand} />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
@@ -51,7 +51,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         })}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
-        {expirationDate.join('/')}
+        {expirationDate.join("/")}
       </p>
     </div>
   );
