@@ -4,6 +4,7 @@ import InputField from "../inputField/InputField";
 import Input from "../input/Input";
 import { Dispatch, SetStateAction, useState } from "react";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
+import { MESSAGE } from "./constants/error";
 
 const INPUT_MAX_LENGTH = 3;
 
@@ -11,14 +12,15 @@ type Props = {
 	cvcNumber: string;
 	setcvcNumber: Dispatch<SetStateAction<string>>;
 };
+
 const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	const [error, setError] = useState("");
 
-	const handleCardCvc = (value: string) => {
+	const handleInput = (value: string) => {
 		setcvcNumber(value);
 
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-			setError("숫자만 입력 가능합니다.");
+			setError(MESSAGE.INVALID_NUMBER);
 			return;
 		}
 
@@ -26,24 +28,17 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	};
 
 	const handleFocusout = (value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError(`${INPUT_MAX_LENGTH}자리를 입력해주세요.`);
+		if (value.length < INPUT_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
 	};
 
-	const cvcInput = [
-		<Input
-			maxLength={INPUT_MAX_LENGTH}
-			isError={error.length > 0}
-			placeholder="123"
-			value={cvcNumber}
-			inputHandler={(value) => handleCardCvc(value)}
-			handleFocusout={(value) => handleFocusout(value)}
-		/>,
+	const inputs = [
+		<Input maxLength={INPUT_MAX_LENGTH} isError={error.length > 0} placeholder="123" value={cvcNumber} handleInput={(value) => handleInput(value)} handleFocusout={(value) => handleFocusout(value)} />,
 	];
 
 	return (
 		<CardNumberWrap>
 			<Title>CVC 번호를 입력해 주세요</Title>
-			<InputField label="CVC" inputs={cvcInput} errorMessage={error} />
+			<InputField label="CVC" inputs={inputs} errorMessage={error} />
 		</CardNumberWrap>
 	);
 };

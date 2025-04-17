@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Description from "../description/Description";
-import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
+import styled from "styled-components";
 
 type Props = {
 	label: string;
@@ -13,7 +13,7 @@ const InputField = ({ label, inputs, errorMessage }: Props) => {
 	return (
 		<Container>
 			<Label>{label}</Label>
-			<Wrapper>{...inputs}</Wrapper>
+			<InputWrapper>{...inputs}</InputWrapper>
 			<Description color={COLORS.ERROR}>{errorMessage && errorMessage}</Description>
 		</Container>
 	);
@@ -28,7 +28,7 @@ const Container = styled.div`
 	gap: 8px;
 `;
 
-const Wrapper = styled.div`
+const InputWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	gap: 8px;

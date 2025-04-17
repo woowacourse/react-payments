@@ -1,22 +1,22 @@
-import styled from "styled-components";
 import { COLORS } from "../../styles/colors";
+import styled from "styled-components";
 
 type Props = {
 	placeholder?: string;
 	isError?: boolean;
 	value: string;
 	maxLength?: number;
-	inputHandler: (value: string) => void;
+	handleInput: (value: string) => void;
 	handleFocusout?: (value: string) => void;
 };
 
-const Input = ({ placeholder, isError = false, value, maxLength, inputHandler, handleFocusout }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, handleInput, handleFocusout }: Props) => {
 	return (
 		<TextInput
 			maxLength={maxLength && maxLength}
 			value={value}
 			placeholder={placeholder}
-			onChange={(e) => inputHandler(e.target.value)}
+			onChange={(e) => handleInput(e.target.value)}
 			onBlur={handleFocusout && ((e) => handleFocusout(e.target.value))}
 			$isError={isError}
 		/>

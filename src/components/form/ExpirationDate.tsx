@@ -3,10 +3,11 @@ import { date } from "../../App";
 import Description from "../description/Description";
 import InputField from "../inputField/InputField";
 import Title from "../title/Title";
-import styled from "styled-components";
 import Input from "../input/Input";
 import findErrorOrder from "../../utils/findErrorOrder";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
+import { MESSAGE } from "./constants/error";
+import styled from "styled-components";
 
 const INPUT_MAX_LENGTH = 2;
 
@@ -21,26 +22,28 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		year: "",
 	});
 
-	const handleDate = (order: keyof date, value: string) => {
+	const nowYear = new Date().getFullYear() % 100;
+
+	const handleInput = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-			setError({ ...error, [order]: "숫자만 입력 가능합니다." });
+			setError({ ...error, [order]: MESSAGE.INVALID_NUMBER });
 			return;
 		}
 
 		if (order === "month") {
 			const month = Number(value);
 			if (month < 0 || month > 12) {
-				setError({ ...error, month: "1~12까지의 숫자만 입력 가능합니다." });
+				setError({ ...error, month: MESSAGE.MONTH_RANGE });
 				return;
 			}
 		}
 
 		if (order === "year") {
 			const year = Number(value);
-			if (year < 25 && year >= 0) {
-				setError({ ...error, year: "25년 이상만 입력 가능합니다." });
+			if (year < nowYear && year >= 0) {
+				setError({ ...error, year: MESSAGE.YEAR_RANGE(nowYear) });
 				return;
 			}
 		}
@@ -49,10 +52,10 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	};
 
 	const handleFocusout = (order: keyof date, value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: "MM형태로 입력해주세요." });
+		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
-	const expirationInput = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
+	const inputs = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
 		const orderLabels = ["month", "year"] as const;
 
 		return (
@@ -61,7 +64,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 				placeholder="MM"
 				value={expirationDate[orderLabels[index]]}
 				maxLength={INPUT_MAX_LENGTH}
-				inputHandler={(numbers) => handleDate(orderLabels[index], numbers)}
+				handleInput={(numbers) => handleInput(orderLabels[index], numbers)}
 				handleFocusout={(numbers) => handleFocusout(orderLabels[index], numbers)}
 			/>
 		);
@@ -71,7 +74,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		<CardNumberWrap>
 			<Title>카드 유효기간을 입력해 주세요</Title>
 			<Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-			<InputField label="유효기간" inputs={expirationInput} errorMessage={findErrorOrder(error)} />
+			<InputField label="유효기간" inputs={inputs} errorMessage={findErrorOrder(error)} />
 		</CardNumberWrap>
 	);
 };

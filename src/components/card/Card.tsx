@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { cardNumber, date } from "../../App";
+import styled from "styled-components";
 
 type Props = {
 	cardNumbers: cardNumber;
@@ -10,7 +10,7 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 	// none:0, mastercard: 1, visa: 2
 	const [badgeBrand, setBadgeBrand] = useState(0);
 
-	const matchBadgeBrand = () => {
+	const badgeImagePath = () => {
 		if (badgeBrand === 1) return "./images/Mastercard.png";
 		if (badgeBrand === 2) return "./images/Visa.png";
 
@@ -55,7 +55,7 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 		<Container>
 			<Wrap>
 				<Chip />
-				<BrandBadge image={matchBadgeBrand()} />
+				<BrandBadge image={badgeImagePath()} />
 			</Wrap>
 
 			<CardInfoWrap>
