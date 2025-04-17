@@ -79,11 +79,10 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
             </CardMaskingInformation>
           </CardNumberContainer>
 
-          {cardNumber.MM && cardNumber.YY && (
-            <CardInformation>
-              {cardNumber.MM}/{cardNumber.YY}
-            </CardInformation>
-          )}
+          <CardInformation>
+            {cardNumber.MM && `${cardNumber.MM}`}
+            {cardNumber.YY && `/${cardNumber.YY}`}
+          </CardInformation>
         </>
       )}
     </CardContainer>
