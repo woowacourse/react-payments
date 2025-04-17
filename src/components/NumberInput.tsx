@@ -4,7 +4,7 @@ import isExactLength from "../utils/isExactLength";
 
 interface NumberInputProps {
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (value: string) => void;
   maxLength: number;
   placeholder: string;
   extraErrorCondition?: boolean;

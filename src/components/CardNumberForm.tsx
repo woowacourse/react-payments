@@ -4,36 +4,32 @@ import { useState, useEffect } from "react";
 import isExactLength from "../utils/isExactLength";
 
 interface CardNumberFormProps {
-  firstNumber: string;
-  secondNumber: string;
-  thirdNumber: string;
-  fourthNumber: string;
-  setFirstNumber: React.Dispatch<React.SetStateAction<string>>;
-  setSecondNumber: React.Dispatch<React.SetStateAction<string>>;
-  setThirdNumber: React.Dispatch<React.SetStateAction<string>>;
-  setFourthNumber: React.Dispatch<React.SetStateAction<string>>;
+  cardInfo: {
+    firstNumber: string;
+    secondNumber: string;
+    thirdNumber: string;
+    fourthNumber: string;
+  };
+  handleCardInfo: (
+    key: keyof CardNumberFormProps["cardInfo"],
+    value: string
+  ) => void;
   maxLength: number;
 }
 
 function CardNumberForm({
-  firstNumber,
-  setFirstNumber,
-  secondNumber,
-  setSecondNumber,
-  thirdNumber,
-  setThirdNumber,
-  fourthNumber,
-  setFourthNumber,
+  cardInfo,
+  handleCardInfo,
   maxLength,
 }: CardNumberFormProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     const condition = [
-      firstNumber,
-      secondNumber,
-      thirdNumber,
-      fourthNumber,
+      cardInfo.firstNumber,
+      cardInfo.secondNumber,
+      cardInfo.thirdNumber,
+      cardInfo.fourthNumber,
     ].some((number) => {
       if (isExactLength(number, 0) || isExactLength(number, maxLength))
         return false;
@@ -41,33 +37,46 @@ function CardNumberForm({
     });
     if (condition) setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
     else setErrorText("");
-  }, [firstNumber, secondNumber, thirdNumber, fourthNumber]);
+  }, [
+    cardInfo.firstNumber,
+    cardInfo.secondNumber,
+    cardInfo.thirdNumber,
+    cardInfo.fourthNumber,
+  ]);
 
   return (
     <NumberInputForm>
       <Label>카드 번호</Label>
       <NumberInputContainer>
         <NumberInput
-          value={firstNumber}
-          setValue={setFirstNumber}
+          value={cardInfo.firstNumber}
+          setValue={(value) => {
+            handleCardInfo("firstNumber", value);
+          }}
           maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
-          value={secondNumber}
-          setValue={setSecondNumber}
+          value={cardInfo.secondNumber}
+          setValue={(value) => {
+            handleCardInfo("secondNumber", value);
+          }}
           maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
-          value={thirdNumber}
-          setValue={setThirdNumber}
+          value={cardInfo.thirdNumber}
+          setValue={(value) => {
+            handleCardInfo("thirdNumber", value);
+          }}
           maxLength={maxLength}
           placeholder="1234"
         />
         <NumberInput
-          value={fourthNumber}
-          setValue={setFourthNumber}
+          value={cardInfo.fourthNumber}
+          setValue={(value) => {
+            handleCardInfo("fourthNumber", value);
+          }}
           maxLength={maxLength}
           placeholder="1234"
         />

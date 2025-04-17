@@ -4,29 +4,43 @@ import styled from "@emotion/styled";
 import NumberInput from "./NumberInput";
 
 interface CardCVCFormProps {
-  cvc: string;
-  setCvc: React.Dispatch<React.SetStateAction<string>>;
+  cardInfo: {
+    cvc: string;
+  };
+  handleCardInfo: (
+    key: keyof CardCVCFormProps["cardInfo"],
+    value: string
+  ) => void;
   maxLength: number;
 }
 
-function CardCVCForm({ cvc, setCvc, maxLength }: CardCVCFormProps) {
+function CardCVCForm({
+  cardInfo,
+  handleCardInfo,
+  maxLength,
+}: CardCVCFormProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
-    if (isExactLength(cvc, 0) || isExactLength(cvc, maxLength)) {
+    if (
+      isExactLength(cardInfo.cvc, 0) ||
+      isExactLength(cardInfo.cvc, maxLength)
+    ) {
       setErrorText("");
     } else {
       setErrorText(maxLength + "자의 숫자만 입력 가능합니다.");
     }
-  }, [cvc]);
+  }, [cardInfo.cvc]);
 
   return (
     <NumberInputForm>
       <Label>CVC</Label>
       <NumberInputContainer>
         <NumberInput
-          value={cvc}
-          setValue={setCvc}
+          value={cardInfo.cvc}
+          setValue={(value) => {
+            handleCardInfo("cvc", value);
+          }}
           maxLength={maxLength}
           placeholder="123"
         />
