@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import Visa from "../../../public/Visa.png";
-import MasterCard from "../../../public/MasterCard.png";
+import Visa from "../../assets/Visa.png";
+import MasterCard from "../../assets/MasterCard.png";
 import { CardInformationType, CardType } from "../../types/CardInformationType";
 
 const seperateCard = { visa: Visa, master: MasterCard };
