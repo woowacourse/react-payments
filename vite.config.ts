@@ -1,7 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [
+    react({
+      // @ts-expect-error
+      emotion: {
+        sourceMap: true,
+        autoLabel: 'dev-only',
+        labelFormat: '[local]',
+        cssPropOptimization: true,
+      },
+    }),
+  ],
+});
