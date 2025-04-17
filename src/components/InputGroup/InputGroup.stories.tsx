@@ -24,7 +24,7 @@ export const ExpirationPeriod: Story = {
   },
 };
 
-export const cvcNumber: Story = {
+export const CvcNumber: Story = {
   args: {
     type: INPUT_TYPE.cvcNumber,
   },
