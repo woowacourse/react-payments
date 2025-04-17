@@ -40,3 +40,34 @@ export const Default: Story = {
     );
   },
 };
+
+export const Error: Story = {
+  args: {
+    cardCVC: '',
+    isError: true,
+    onChange: () => {},
+  },
+  render: (args) => {
+    const [cardCVC, setCardCVC] = useState('12');
+    const [isCardCVCError, setIsCardCVCError] = useState(true);
+
+    const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+
+      const isNotValid =
+        value.length < 3 || value.length > 3 || Number(value) < 0;
+
+      setIsCardCVCError(isNotValid);
+      setCardCVC(value.slice(0, 3));
+    };
+
+    return (
+      <CardCVCField
+        {...args}
+        cardCVC={cardCVC}
+        isError={isCardCVCError}
+        onChange={onChangeCVC}
+      />
+    );
+  },
+};
