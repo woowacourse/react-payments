@@ -1,9 +1,8 @@
-import { CardNumbers } from '../hooks/useCardNumbers';
-
 import styles from './cardDisplay.module.css';
 
 import masterCard from '../public/mastercard.png';
 import visa from '../public/visa.png';
+import { CardNumbers } from '../types/CardNumbers';
 
 type CardNetworkProps = {
   cardNumbers: CardNumbers;

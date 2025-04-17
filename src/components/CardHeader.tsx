@@ -1,4 +1,4 @@
-import { CardNumbers } from '../hooks/useCardNumbers';
+import { CardNumbers } from '../types/CardNumbers';
 import styles from './cardDisplay.module.css';
 import CardNetwork from './CardNetwork';
 
