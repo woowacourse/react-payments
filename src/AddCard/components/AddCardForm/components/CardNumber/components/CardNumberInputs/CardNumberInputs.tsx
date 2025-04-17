@@ -3,6 +3,7 @@ import Label from "../../../../../../../components/Label/Label";
 import Input from "../../../../../../../components/Input/Input";
 import { isAnyTrue } from "../../../../../../../utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
+import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
@@ -10,9 +11,10 @@ export interface CardNumberInputsProps {
 }
 
 function CardNumberInputs({
-  cardNumberState: { first, second, third, fourth },
+  cardNumberState,
   handleCardNumberChange,
 }: CardNumberInputsProps) {
+  const { first, second, third, fourth } = cardNumberState;
   const isCardNumberValid = isAnyTrue(
     first.isError,
     second.isError,
@@ -24,43 +26,18 @@ function CardNumberInputs({
     <div className={styles.container}>
       <Label htmlFor="card-number-input">카드 번호</Label>
       <p className={styles.cardInputs}>
-        <Input
-          id="card-number-input"
-          type="text"
-          maxLength={4}
-          placeholder="1234"
-          isError={first.isError}
-          value={first.value}
-          onChange={(e) => handleCardNumberChange("first", e.target.value)}
-        />
-        <Input
-          id="card-number-input"
-          type="text"
-          maxLength={4}
-          placeholder="1234"
-          isError={second.isError}
-          value={second.value}
-          onChange={(e) => handleCardNumberChange("second", e.target.value)}
-        />
-
-        <Input
-          id="card-number-input"
-          type="text"
-          maxLength={4}
-          placeholder="1234"
-          isError={third.isError}
-          value={third.value}
-          onChange={(e) => handleCardNumberChange("third", e.target.value)}
-        />
-        <Input
-          id="card-number-input"
-          type="text"
-          maxLength={4}
-          placeholder="1234"
-          isError={fourth.isError}
-          value={fourth.value}
-          onChange={(e) => handleCardNumberChange("fourth", e.target.value)}
-        />
+        {CARD_NUMBER_INPUT_KEYS.map((inputKey) => (
+          <Input
+            key={inputKey}
+            id={`card-number-${inputKey}-input`}
+            type="text"
+            maxLength={4}
+            placeholder="1234"
+            isError={cardNumberState[inputKey].isError}
+            value={cardNumberState[inputKey].value}
+            onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+          />
+        ))}
       </p>
       {isCardNumberValid && (
         <p id="error-message" className={styles.errorMessage}>
