@@ -4,8 +4,10 @@ import useAddCard from "../hooks/useAddCard";
 import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
 
 function AddCard() {
-  const { addCardState, previewState } = useAddCard();
-  const { cardNumberState, expireDate } = previewState;
+  const {
+    addCardState,
+    previewState: { cardNumberState, expireDate },
+  } = useAddCard();
 
   return (
     <div className={styles.container}>
