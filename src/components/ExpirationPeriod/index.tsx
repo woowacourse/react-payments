@@ -22,11 +22,11 @@ const ERROR_MESSAGE = {
   INVALID_CHARACTER: '숫자만 입력 가능합니다.',
 } as const;
 
-const ExpirationPeriod: React.FC<ExpirationPeriodProps> = ({
+const ExpirationPeriod = ({
   period,
   setPeriod,
   separatorRef,
-}) => {
+}: ExpirationPeriodProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false]);
 

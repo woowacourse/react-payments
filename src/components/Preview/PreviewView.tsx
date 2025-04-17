@@ -10,12 +10,12 @@ export interface PreviewViewProps {
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
 
-const PreviewView: React.FC<PreviewViewProps> = ({
+const PreviewView = ({
   cardNumbers,
   period,
   separatorRef,
   cardMethodSrc,
-}) => {
+}: PreviewViewProps) => {
   return (
     <PreviewContainer data-testid="preview-component">
       <CardFrame>

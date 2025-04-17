@@ -15,14 +15,14 @@ export interface ExpirationPeriodViewProps {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const ExpirationPeriodView: React.FC<ExpirationPeriodViewProps> = ({
+const ExpirationPeriodView = ({
   period,
   errorMessage,
   errors,
   handleInputChange,
   onFocus,
   onBlur,
-}) => {
+}: ExpirationPeriodViewProps) => {
   return (
     <Container data-testid="expiration-component">
       <InputLabels

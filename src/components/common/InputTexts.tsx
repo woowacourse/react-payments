@@ -4,17 +4,14 @@ import React from 'react';
 interface InputTextsProps {
   label: string;
   placeholder: string[];
-  eventHandler?: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  state?: string[];
-  errors?: boolean[];
+  eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  state: string[];
+  errors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const InputTexts: React.FC<InputTextsProps> = ({
+const InputTexts = ({
   label,
   placeholder,
   state,
@@ -22,7 +19,7 @@ const InputTexts: React.FC<InputTextsProps> = ({
   errors,
   onFocus,
   onBlur,
-}) => {
+}: InputTextsProps) => {
   return (
     <InputTextsContainer>
       <Label>{label}</Label>
@@ -34,7 +31,7 @@ const InputTexts: React.FC<InputTextsProps> = ({
             placeholder={text}
             maxLength={text.length}
             value={state ? state[index] : ''}
-            onChange={(e) => eventHandler!(e, index)}
+            onChange={(e) => eventHandler(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
             error={errors ? errors[index] : false}

@@ -9,10 +9,7 @@ export interface CVCNumbersProps {
 const CVC_NUMBERS_LENGTH = 3;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
-const CVCNumbers: React.FC<CVCNumbersProps> = ({
-  cvcNumbers,
-  setCvcNumbers,
-}) => {
+const CVCNumbers = ({ cvcNumbers, setCvcNumbers }: CVCNumbersProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [error, setError] = useState(false);
 

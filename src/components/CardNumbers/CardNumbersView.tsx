@@ -13,12 +13,12 @@ export interface CardNumbersViewProps {
   ) => void;
 }
 
-const CardNumbersView: React.FC<CardNumbersViewProps> = ({
+const CardNumbersView = ({
   cardNumbers,
   errorMessage,
   errors,
   handleInputChange,
-}) => {
+}: CardNumbersViewProps) => {
   return (
     <Container data-testid="cardnumbers-component">
       <InputLabels

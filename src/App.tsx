@@ -5,7 +5,7 @@ import ExpirationPeriod from './components/ExpirationPeriod';
 import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
 
-const App: React.FC = () => {
+const App = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
