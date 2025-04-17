@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { INPUT_TYPE } from "../../constants/constants";
 import InputForm from "./InputForm";
+import { withCustomCardProvider } from "../../utils/storybook/CardProviderDecorator";
 
 const meta = {
   title: "InputForm",
@@ -13,17 +14,21 @@ export default meta;
 type Story = StoryObj<typeof InputForm>;
 
 export const CardNumbers: Story = {
+  decorators: [withCustomCardProvider({})],
   args: {
     type: INPUT_TYPE.cardNumbers,
   },
 };
 
 export const ExpirationPeriod: Story = {
+  decorators: [withCustomCardProvider({})],
   args: {
     type: INPUT_TYPE.expirationPeriod,
   },
 };
+
 export const cvcNumber: Story = {
+  decorators: [withCustomCardProvider({})],
   args: {
     type: INPUT_TYPE.cvcNumber,
   },
