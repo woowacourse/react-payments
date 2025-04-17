@@ -63,7 +63,7 @@
   - [ ] PreviewContainer 컴포넌트 구현
   - [x] PreviewComponent 컴포넌트 퍼블리싱
   - [ ] PreviewCard 컴포넌트 스토리북 생성 -> 버전 (비자, 마스터카드)
-  - [ ] PreviewCard APP 컴포넌트 합성 -> 상태 공유
+  - [x] PreviewCard APP 컴포넌트 합성 -> 상태 공유
   - [ ] App 컴포넌트 퍼블리싱
   - [ ] 카드 타입 판별 기능 구현
   - [x] text 컴포넌트 구현

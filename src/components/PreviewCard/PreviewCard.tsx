@@ -3,29 +3,37 @@
 import { css } from "@emotion/react";
 import Visa from "../../../public/Visa.png";
 import MasterCard from "../../../public/MasterCard.png";
+import { CardInformationType, CardType } from "../../types/CardInformationType";
 
-const seperateCard = { visa: Visa, masterCard: MasterCard };
+const seperateCard = { visa: Visa, mastercard: MasterCard };
 
-// information = {
-//   uniqueNumber: ["", "", "", ""],
-//   expirationDate: ["", ""],
-//   cvcNumber: [""],
-// };
-const PreviewCard = () => {
+const PreviewCard = ({
+  cardInformationState,
+  cardType,
+}: {
+  cardInformationState: CardInformationType;
+  cardType: CardType;
+}) => {
+  const { uniqueNumber, expirationDate } = cardInformationState;
+  const [MM, YY] = expirationDate;
+
   return (
     <div css={previewCardStyle}>
       <div css={TopStyle}>
         <div css={magneticStyle}></div>
-        <img css={cardImageStyle} src={seperateCard["visa"]} alt="visa" />
+        {cardType !== "none" && <img css={cardImageStyle} src={seperateCard[cardType]} alt={cardType} />}
       </div>
       <div css={cardInformationStyle}>
         <div css={uniqueNumberStyle}>
-          <span>1234</span>
-          <span>1234</span>
-          <span>1234</span>
-          <span>1234</span>
+          {uniqueNumber.map((number: string) => {
+            return <span css={numberStyle}>{number}</span>;
+          })}
         </div>
-        <span css={expirationDateStyle}>09 / 25</span>
+        <span css={expirationDateStyle}>
+          <span css={dateStyle}>{MM}</span>
+          {MM.length === 2 ? " / " : ""}
+          <span css={dateStyle}>{YY}</span>
+        </span>
       </div>
     </div>
   );
@@ -80,6 +88,16 @@ const cardInformationStyle = css`
 const uniqueNumberStyle = css`
   display: flex;
   gap: 10px;
+  height: 20px;
+`;
+
+const numberStyle = css`
+  width: 35px;
+`;
+
+const dateStyle = css`
+  display: inline-block;
+  width: 22px;
 `;
 
 const expirationDateStyle = css``;
