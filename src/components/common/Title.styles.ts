@@ -13,7 +13,7 @@ export const Title = styled.h1`
   line-height: 1.5rem;
 `;
 
-export const Description = styled.caption`
+export const Description = styled.p`
   color: #8b95a1;
   font-size: 0.8rem;
 `;
