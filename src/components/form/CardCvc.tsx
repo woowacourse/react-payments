@@ -4,6 +4,8 @@ import InputField from "../inputField/InputField";
 import Input from "../input/Input";
 import { Dispatch, SetStateAction, useState } from "react";
 
+const INPUT_MAX_LENGTH = 3;
+
 type Props = {
 	cvcNumber: string;
 	setcvcNumber: Dispatch<SetStateAction<string>>;
@@ -13,7 +15,7 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 
 	const handleCardCvc = (value: string) => {
 		setcvcNumber(value);
-		const regex = /^(?:\d{1,3})?$/;
+		const regex = new RegExp(`^(?:\\d{1,${INPUT_MAX_LENGTH}})?$`);
 
 		if (!regex.test(value)) {
 			setError("숫자만 입력 가능합니다.");
@@ -24,11 +26,18 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	};
 
 	const handleFocusout = (value: string) => {
-		if (value.length < 3) setError("3자리를 입력해주세요.");
+		if (value.length < INPUT_MAX_LENGTH) setError(`${INPUT_MAX_LENGTH}자리를 입력해주세요.`);
 	};
 
 	const cvcInput = [
-		<Input maxLength={3} isError={error.length > 0 && true} placeholder="123" value={cvcNumber} inputHandler={(value) => handleCardCvc(value)} handleFocusout={(value) => handleFocusout(value)} />,
+		<Input
+			maxLength={INPUT_MAX_LENGTH}
+			isError={error.length > 0}
+			placeholder="123"
+			value={cvcNumber}
+			inputHandler={(value) => handleCardCvc(value)}
+			handleFocusout={(value) => handleFocusout(value)}
+		/>,
 	];
 
 	return (
