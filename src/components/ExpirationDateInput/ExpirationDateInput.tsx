@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
 import { useState } from 'react';
+
+import HelperText from '../HelperText/HelperText';
 import {
-  checkNumber,
   checkTotalExpirationDate,
-  checkValidLength,
   checkValidMonth,
   checkValidYear,
-} from '../../validators/inputValidator';
-import HelperText from '../HelperText/HelperText';
+} from '../../validators/expirationDateValidator';
+import { checkNumber, checkValidLength } from '../../validators/inputValidator';
 
 type ExpirationDateInputProps = {
   values: string[];
