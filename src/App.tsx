@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CardPreview from './CardPreview';
+import CardPreview from './CardPreviw/CardPreview';
 
 import CardNumberInputField from './InputField/CardNumberInputField';
 import InputSection from './InputSection';
@@ -12,26 +12,6 @@ import {
   CVCInputValueType,
   ExpirationDateInputType,
 } from './config/inputField';
-
-const PaymentsLayout = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PaymentsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-sizing: border-box;
-  padding: 44px 28px;
-  align-items: center;
-  width: 376px;
-  min-height: 100%;
-  background-color: white;
-  border: 1px solid lightgray;
-`;
 
 function App() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
@@ -96,5 +76,25 @@ function App() {
     </PaymentsLayout>
   );
 }
+
+const PaymentsLayout = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PaymentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+  padding: 44px 28px;
+  align-items: center;
+  width: 376px;
+  min-height: 100%;
+  background-color: white;
+  border: 1px solid lightgray;
+`;
 
 export default App;
