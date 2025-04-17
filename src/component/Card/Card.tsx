@@ -1,4 +1,5 @@
 import { MasterCard, Visa } from '../../asset/image';
+import { CardExpirationDate, CardNumber } from '../../hooks';
 import {
   cardContainer,
   cardContent,
@@ -8,31 +9,24 @@ import {
   cardLayout,
   cardType,
 } from './Card.style';
+import { CARD_TYPE } from '../../constants';
 
 type CardProps = {
-  cardNumber: {
-    first: number | null;
-    second: number | null;
-    third: number | null;
-    forth: number | null;
-  };
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardNumber: CardNumber;
+  cardExpirationDate: CardExpirationDate;
 };
 
 function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const { first, second, third, forth } = cardNumber;
 
   const masterCardType =
-    first?.toString().startsWith('51') ||
-    first?.toString().startsWith('52') ||
-    first?.toString().startsWith('53') ||
-    first?.toString().startsWith('54') ||
-    first?.toString().startsWith('55');
+    first?.toString() &&
+    CARD_TYPE.masterCard.startsWith.some((prefix) =>
+      first.toString().startsWith(prefix)
+    );
 
-  const visaCardType = first?.toString().startsWith('4');
+  const visaCardType =
+    first?.toString() && first.toString().startsWith(CARD_TYPE.visa.startsWith);
 
   const checkCardType = () => {
     if (masterCardType) {
