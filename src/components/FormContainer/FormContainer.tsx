@@ -1,15 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import FormSection from "../FormSection/FormSection";
 import { css } from "@emotion/css";
-
-type cardInformationType = {
-  uniqueNumber: string[];
-  expirationDate: string[];
-  cvcNumber: string[];
-};
+import { CardInformationType } from "../../types/CardInformationType";
 
 type FormContainerProps = {
-  cardInformationState: cardInformationType;
+  cardInformationState: CardInformationType;
   setCardInformationState: (newValue: FormContainerProps["cardInformationState"]) => void;
 };
 
