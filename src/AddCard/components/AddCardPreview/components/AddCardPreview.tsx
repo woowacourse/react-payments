@@ -3,7 +3,7 @@ import type { CardNumberState } from "../../AddCardForm/components/CardNumber/ty
 import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
 import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
-import Dot from "../../../../components/Dot/Dot";
+import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
 
 const CARD_BRAND_IMAGES = {

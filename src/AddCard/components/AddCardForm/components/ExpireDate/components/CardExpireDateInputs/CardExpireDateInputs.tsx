@@ -1,6 +1,6 @@
 import styles from "./CardExpireDateInputs.module.css";
-import Input from "../../../../../../../components/Input/Input";
-import Label from "../../../../../../../components/Label/Label";
+import Input from "@components/Input/Input";
+import Label from "@components/Label/Label";
 
 import { ExpireDateState } from "../../types";
 

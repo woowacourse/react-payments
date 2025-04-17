@@ -1,7 +1,7 @@
 import styles from "./CardNumberInputs.module.css";
-import Label from "../../../../../../../components/Label/Label";
-import Input from "../../../../../../../components/Input/Input";
-import { isAnyTrue } from "../../../../../../../utils/isAnyTrue";
+import Label from "@components/Label/Label";
+import Input from "@components/Input/Input";
+import { isAnyTrue } from "@utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
 import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
 

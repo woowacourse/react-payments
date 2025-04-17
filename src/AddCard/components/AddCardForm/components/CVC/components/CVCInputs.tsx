@@ -1,6 +1,6 @@
 import styles from "./CVCInputs.module.css";
-import Input from "../../../../../../components/Input/Input";
-import Label from "../../../../../../components/Label/Label";
+import Input from "@components/Input/Input";
+import Label from "@components/Label/Label";
 
 export interface CVCInputsProps {
   CVCState: { value: string; isError: boolean };

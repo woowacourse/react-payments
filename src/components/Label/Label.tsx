@@ -1,4 +1,4 @@
-import { ComponentProps, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Label.module.css";
 
 interface LabelProps extends PropsWithChildren, ComponentProps<"label"> {
