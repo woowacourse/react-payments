@@ -4,7 +4,6 @@ import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
 import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
-import { Fragment } from "react/jsx-runtime";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
@@ -25,9 +24,9 @@ function CardNumberInputs({
 
   return (
     <div className={styles.container}>
-      <p className={styles.cardInputs}>
+      <div className={styles.cardInputs}>
         {CARD_NUMBER_INPUT_KEYS.map((inputKey, idx) => (
-          <div key={inputKey} className={styles.cardInputBox}>
+          <p key={inputKey} className={styles.cardInputBox}>
             <Label
               htmlFor={`card-number-${inputKey}-input`}
               isHidden={idx !== 0}
@@ -43,9 +42,9 @@ function CardNumberInputs({
               value={cardNumberState[inputKey].value}
               onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
             />
-          </div>
+          </p>
         ))}
-      </p>
+      </div>
       {isCardNumberValid && (
         <p id="error-message" className={styles.errorMessage}>
           4자리의 숫자만 입력 가능합니다.
