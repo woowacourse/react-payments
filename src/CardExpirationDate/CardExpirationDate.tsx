@@ -16,7 +16,7 @@ const CONSTANT_EXPIRATION_DATE = {
   INPUT_DESCRIPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
   INPUT_SUBTITLE: "유효기간",
   PLACE_HOLDER_YEAR: "YY",
-  PLACE_HOLDER_MOMTH: "MM",
+  PLACE_HOLDER_MONTH: "MM",
 } as const;
 
 export default function CardExpirationDate({
