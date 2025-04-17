@@ -43,9 +43,10 @@
 
 .expire > span {
   display: inline-block;
-  width: 30px;
+  width: 35px;
 }
 
 .expire > span:nth-child(2) {
   width: auto;
+  padding-right: 0.25rem;
 }
