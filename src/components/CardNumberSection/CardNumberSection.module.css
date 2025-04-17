@@ -1,0 +1,8 @@
+.inputWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.inputSection {
+  height: 77px;
+}
