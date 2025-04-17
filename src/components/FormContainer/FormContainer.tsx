@@ -41,7 +41,7 @@ const UIControllerData = {
 const FormContainer = ({ cardInformationState, setCardInformationState }: FormContainerProps) => {
   return (
     <div css={FormContainerStyle}>
-      {Object.keys(cardInformationState).map((key) => {
+      {(Object.keys(cardInformationState) as (keyof typeof cardInformationState)[]).map((key) => {
         const formSectionData = UIControllerData[key];
         return (
           <FormSection
