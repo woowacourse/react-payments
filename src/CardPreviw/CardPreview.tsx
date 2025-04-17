@@ -20,7 +20,7 @@ function CardPreview({
   return (
     <Card>
       <CardChip />
-      <CardTypeBadge src={`img/${cardType}.png`} $cardType={cardType} />
+      <CardTypeBadge src={`./img/${cardType}.png`} $cardType={cardType} />
       <CardInfoBox
         cardNumber={cardNumberInputValue}
         expirationDate={expirationDateInputValue}
