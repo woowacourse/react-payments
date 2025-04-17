@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isNumber, isValidLength, isValidMonth } from "../validation/validate";
-import { setErrorMessage } from "../utils/setErrorMessage";
+import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_EXPIRATION_DATE = {
   IS_VALID_LENGTH_ERROR: "2자리까지 입력 가능합니다.",
@@ -19,7 +19,7 @@ export default function useExpirationDate() {
     setcardExpirationDate(newDate);
 
     if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
-      setErrorMessage(
+      replaceAt(
         cardExpirationDateError,
         CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
         index,
@@ -29,7 +29,7 @@ export default function useExpirationDate() {
     }
 
     if (!isNumber(value)) {
-      setErrorMessage(
+      replaceAt(
         cardExpirationDateError,
         CONSTANT_USE_EXPIRATION_DATE.IS_NUMBER_ERROR,
         index,
@@ -43,7 +43,7 @@ export default function useExpirationDate() {
       value.length === CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH &&
       !isValidMonth(Number(value))
     ) {
-      setErrorMessage(
+      replaceAt(
         cardExpirationDateError,
         CONSTANT_USE_EXPIRATION_DATE.MONTH_RANGE_ERROR,
         index,
@@ -51,8 +51,7 @@ export default function useExpirationDate() {
       );
       return;
     }
-
-    setErrorMessage(cardExpirationDateError, "", index, setError);
+    replaceAt(cardExpirationDateError, "", index, setError);
   };
 
   return {

@@ -1,10 +1,10 @@
-export function setErrorMessage(
-  cardNumbersError: string[],
-  errorMessage: string,
+export function replaceAt<T>(
+  array: T[],
+  newValue: T,
   index: number,
-  setError: Function
+  setState: (newArray: T[]) => void
 ) {
-  const newError = [...cardNumbersError];
-  newError[index] = errorMessage;
-  setError(newError);
+  const newArray = [...array];
+  newArray[index] = newValue;
+  setState(newArray);
 }

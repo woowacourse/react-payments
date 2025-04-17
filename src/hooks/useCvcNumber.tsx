@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isNumber, isValidLength } from "../validation/validate";
-import { setErrorMessage } from "../utils/setErrorMessage";
+import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_CVC_NUMBER = {
   IS_VALID_LENGTH_ERROR: "CVC 번호는 3자리 숫자여야 합니다.",
@@ -16,7 +16,7 @@ export default function useCvcNumber() {
     setCardCvcNumbers(value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH));
 
     if (!isValidLength(value.length, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH)) {
-      setErrorMessage(
+      replaceAt(
         cvcNumbersError,
         CONSTANT_USE_CVC_NUMBER.IS_VALID_LENGTH_ERROR,
         0,
@@ -26,7 +26,7 @@ export default function useCvcNumber() {
     }
 
     if (!isNumber(value)) {
-      setErrorMessage(
+      replaceAt(
         cvcNumbersError,
         CONSTANT_USE_CVC_NUMBER.IS_NUMBER_ERROR,
         0,
@@ -34,8 +34,7 @@ export default function useCvcNumber() {
       );
       return;
     }
-
-    setErrorMessage(cvcNumbersError, "", 0, setError);
+    replaceAt(cvcNumbersError, "", 0, setError);
   };
 
   return {

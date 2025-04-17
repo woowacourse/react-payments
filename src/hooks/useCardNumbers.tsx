@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isNumber, isValidLength } from "../validation/validate";
-import { setErrorMessage } from "../utils/setErrorMessage";
+import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_CARD_NUMBER = {
   IS_VALID_LENGTH_ERROR: "카드 번호는 4자리 숫자여야 합니다.",
@@ -49,7 +49,7 @@ export default function useCardNumbers() {
         CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
       )
     ) {
-      setErrorMessage(
+      replaceAt(
         cardNumbersError,
         CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
         index,
@@ -59,7 +59,7 @@ export default function useCardNumbers() {
     }
 
     if (!isNumber(value)) {
-      setErrorMessage(
+      replaceAt(
         cardNumbersError,
         CONSTANT_USE_CARD_NUMBER.IS_NUMBER_ERROR,
         index,
@@ -68,7 +68,7 @@ export default function useCardNumbers() {
       return;
     }
 
-    setErrorMessage(cardNumbersError, "", index, setError);
+    replaceAt(cardNumbersError, "", index, setError);
   };
 
   return { cardNumbers, cardType, cardNumbersError, cardNumbersValidate };
