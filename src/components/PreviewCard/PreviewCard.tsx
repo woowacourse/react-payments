@@ -92,7 +92,7 @@ const uniqueNumberStyle = css`
 `;
 
 const numberStyle = css`
-  width: 35px;
+  width: 38px;
 `;
 
 const dateStyle = css`
