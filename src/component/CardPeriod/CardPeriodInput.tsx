@@ -7,14 +7,13 @@ import {
   sectionTitleSubText,
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
-
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
-import { CardExpirationDate, CardExpirationDateError } from '../../hooks';
 import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
 import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
+import {CardExpirationDate, CardExpirationDateError} from "../../types";
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;

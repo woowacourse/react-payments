@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { CardNumber, CardNumberError } from './types';
+import { CardNumber, CardNumberError } from '../types/types.ts';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_NUMBER_ERROR } from '../constants';
 

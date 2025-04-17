@@ -1,5 +1,4 @@
 import { MasterCard, Visa } from '../../asset/image';
-import { CardExpirationDate, CardNumber } from '../../hooks';
 import {
   cardContainer,
   cardContent,
@@ -10,6 +9,7 @@ import {
   cardType,
 } from './Card.style';
 import { CARD_TYPE } from '../../constants';
+import {CardExpirationDate, CardNumber} from "../../types";
 
 type CardProps = {
   cardNumber: CardNumber;

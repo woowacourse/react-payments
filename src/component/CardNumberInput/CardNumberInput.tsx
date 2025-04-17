@@ -8,12 +8,12 @@ import {
   sectionTitleText,
 } from '../../styles/@common/text/text.style';
 import { cardNumberInputLayout } from './CardNumberInput.style';
-import { CardNumber, CardNumberError } from '../../hooks';
 import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
 import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
+import {CardNumber, CardNumberError} from "../../types";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
