@@ -23,7 +23,6 @@ function App() {
 
   return (
     <>
-      <h1>React Payments</h1>
       <div className={styles.main}>
         <CardDisplay
           cardNumbers={cardNumbers}
