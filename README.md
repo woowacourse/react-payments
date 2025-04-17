@@ -3,7 +3,8 @@
 > react-payments  
 > FE 레벨2 페이먼츠 미션
 
-[🔗 배포 주소]()
+[🔗 웹페이지 배포 주소](https://shinjungoh.github.io/react-payments/)  
+[🎨 스토리북 배포 주소](https://68009db56ddb7f7e2eb2c11e-uugkxvlfan.chromatic.com/?path=/story/app-app--default)
 
 <br>
 
