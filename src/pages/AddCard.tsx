@@ -1,4 +1,4 @@
-import Card from "../component/Card";
+import Card from "../component/card/Card";
 import Description from "../component/Description";
 import styled from "styled-components";
 import Input from "../component/Input";

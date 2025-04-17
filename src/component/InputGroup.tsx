@@ -1,4 +1,3 @@
-import { InputContainer } from "../style/InputContainerStyle";
 import styled from "styled-components";
 
 //FIX: 첫번째에서 오류 메세지 덮어씌워지는 현상고치기
@@ -8,6 +7,11 @@ interface InputGroupProps {
   errorKey: string;
   errorMessages: Record<string, string>;
 }
+
+export const InputContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 
 const Label = styled.span`
   color: var(--color-black);
