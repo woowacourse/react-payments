@@ -37,7 +37,7 @@ function App() {
     first: "",
     second: "",
     third: "",
-    forth : "",
+    fourth : "",
   });
 
   const [expirationPeriod, setExpirationPeriod] = useState<ExpirationPeriodState >({

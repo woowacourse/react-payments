@@ -10,4 +10,9 @@ const meta = {
   
   type Story = StoryObj<typeof meta>;
   
-  export const Default: Story = {};
+  export const Default: Story = {
+    args: {
+      CVCNumber: "123",
+      changeCVCNumber : () => alert('변경')
+      }
+  };

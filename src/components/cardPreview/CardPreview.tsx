@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { ExpirationPeriodProps } from "../../\btypes/index.types"
 import { useState } from "react"
 import { useEffect } from "react"
 
@@ -67,7 +66,7 @@ type CardPreviewProps = {
         first: string,
         second: string,
         third: string,
-        forth : string,
+        fourth : string,
     }
     expirationPeriod: {
         month: string,
@@ -78,8 +77,6 @@ type CardPreviewProps = {
 function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
     const [logoSrc, setLogoSrc] = useState("");
 
-    
-    
     useEffect(() => {
         function identifyLogo() {
             const id = cardNumber['first'].slice(0, 2);
@@ -105,7 +102,7 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
                 <StyledCardNumber>{cardNumber['first']}</StyledCardNumber>
                 <StyledCardNumber>{cardNumber['second']}</StyledCardNumber>
                 <StyledCardNumber>{"*".repeat(cardNumber['third'].length)}</StyledCardNumber>
-                <StyledCardNumber>{"*".repeat(cardNumber['forth'].length)}</StyledCardNumber>
+                <StyledCardNumber>{"*".repeat(cardNumber['fourth'].length)}</StyledCardNumber>
             </StyledCardNumberWrap>
             <StyledExpirationPeriod>
                 {expirationPeriod['month']}/{expirationPeriod['year']}

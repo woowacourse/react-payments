@@ -1,4 +1,4 @@
-export type Position = "first" | "second" | "third" | "forth"
+export type Position = "first" | "second" | "third" | "fourth"
 export type ExpirationPeriod = "month" | "year"
 
 export type CardNumberProps = {
@@ -6,7 +6,7 @@ export type CardNumberProps = {
         first: string ,
         second: string,
         third: string,
-        forth : string,
+        fourth : string,
     },
     changeCardNumber : (position : Position , cardNumber : string) => void
 }

@@ -14,6 +14,10 @@ const meta = {
     args: {
         maxLength: 10,
         placeholder: "Enter text here",
+        width: '100%',
+        onChange: () => alert('Input changed'),
+        value : 'string',
+        isError: true,
     }
   };
 
@@ -21,6 +25,10 @@ const meta = {
     args: {
         maxLength: 4,
         placeholder: "1234",
+        width: '100%',
+        onChange: () => alert('Input changed'),
+        value : 'string',
+        isError: true,
     }
   };
 
@@ -28,6 +36,10 @@ const meta = {
     args: {
         maxLength: 2,
         placeholder: "MM",
+        width: '100%',
+        onChange: () => alert('Input changed'),
+        value : 'string',
+        isError: true,
     }
   };
 
@@ -35,6 +47,10 @@ const meta = {
     args: {
         maxLength: 2,
         placeholder: "YY",
+        width: '100%',
+        onChange: () => alert('Input changed'),
+        value : 'string',
+        isError: true,
     }
   };
 
@@ -42,5 +58,9 @@ const meta = {
     args: {
         maxLength: 3,
         placeholder: "123",
+        width: '100%',
+        onChange: () => alert('Input changed'),
+        value : 'string',
+        isError: true,
     }
   };

@@ -36,7 +36,7 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
         first: "",
         second: "",
         third: "",
-        forth : "",
+        fourth : "",
     });
 
     function checkValidation(position: Position, length: number, number: string) {
@@ -117,16 +117,16 @@ function CardNumberInputs({cardNumber, changeCardNumber} : CardNumberProps) {
                     placeholder="1234" 
                     isError={error['third'] !== ""}></Input>
                 <Input 
-                    value={cardNumber['forth']} 
+                    value={cardNumber['fourth']} 
                     onChange={(e) =>
                     {
-                        checkValidation('forth', 4, e.target.value);
-                        changeCardNumber('forth', e.target?.value)
+                        checkValidation('fourth', 4, e.target.value);
+                        changeCardNumber('fourth', e.target?.value)
                     }} 
                     width='25%' 
                     maxLength={4} 
                     placeholder="1234" 
-                    isError={error['forth'] !== ""}></Input>
+                    isError={error['fourth'] !== ""}></Input>
             </InputWrap>
            {printError() ? <StyledErrorMessage>{printError()}</StyledErrorMessage> : null}  
         </Container>
