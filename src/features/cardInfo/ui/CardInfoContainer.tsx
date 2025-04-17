@@ -1,7 +1,15 @@
-import './cardInfoContainer.css';
 import CardInfoSection from './CardInfoSection';
 import { cardInfoSectionData } from '../data/cardInfoSectionData';
 import { ErrorProps } from '../../../shared/type/types';
+import styled from '@emotion/styled';
+
+const CardInfoWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 45px 0 0;
+`;
 
 export default function CardInfoContainer({
   onChange,
@@ -11,10 +19,10 @@ export default function CardInfoContainer({
   error?: ErrorProps;
 }) {
   return (
-    <div className="card-info-container">
+    <CardInfoWrapper>
       {cardInfoSectionData.map((data, index) => (
         <CardInfoSection key={`data.title-${index}`} {...data} onChange={onChange} error={error} />
       ))}
-    </div>
+    </CardInfoWrapper>
   );
 }

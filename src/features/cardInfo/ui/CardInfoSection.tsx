@@ -1,6 +1,6 @@
-import './cardInfoSection.css';
 import CustomInput from '../../../shared/ui/CustomInput';
 import { CustomInputProps, ErrorProps } from '../../../shared/type/types';
+import * as S from './CardInfoSection.styles';
 
 interface CardInfoSectionProps {
   id: string;
@@ -26,14 +26,14 @@ export default function CardInfoSection({
   const errorKey = `${id}Error`;
 
   return (
-    <section className="card-info-section">
+    <S.CardInfoMainSection>
       <div>
-        <h1 className="card-info-title">{title}</h1>
-        <span className="card-info-description">{description}</span>
+        <S.CardInfoTitle>{title}</S.CardInfoTitle>
+        <S.CardInfoDescription>{description}</S.CardInfoDescription>
       </div>
-      <div className="card-info-sub-section">
-        <span className="card-info-subtitle">{subTitle}</span>
-        <div className="card-info-input-container">
+      <S.CardInfoSubSection>
+        <S.CardInfoSubTitle>{subTitle}</S.CardInfoSubTitle>
+        <S.CardInfoInputContainer>
           {inputArr.map((input, index) => (
             <CustomInput
               key={`custom-input-${index}`}
@@ -43,11 +43,9 @@ export default function CardInfoSection({
               error={error && errorKey in error && error[errorKey][0] === index}
             />
           ))}
-        </div>
-        <span className="card-info-error">
-          {error && errorKey in error ? error[errorKey][1] : ''}
-        </span>
-      </div>
-    </section>
+        </S.CardInfoInputContainer>
+        <S.CardInfoError>{error && errorKey in error ? error[errorKey][1] : ''}</S.CardInfoError>
+      </S.CardInfoSubSection>
+    </S.CardInfoMainSection>
   );
 }
