@@ -14,6 +14,7 @@
 .previewHeader {
   display: flex;
   justify-content: space-between;
+  height: 67.5px;
 }
 
 .chip {
