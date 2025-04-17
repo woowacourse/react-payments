@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { CardExpirationDate, CardExpirationDateError } from './types';
+import { CardExpirationDate, CardExpirationDateError } from '../../types/types';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../constants';
 
