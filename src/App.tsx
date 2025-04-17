@@ -1,9 +1,9 @@
-import "./App.css";
-
+import './App.css';
+import PaymentInputPage from './components/paymentInputPage/PaymentInputPage';
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <PaymentInputPage />
     </>
   );
 }
