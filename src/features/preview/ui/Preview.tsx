@@ -1,5 +1,5 @@
 import { CardInfoProps } from '../../../shared/type/types';
-import './preview.css';
+import * as S from './Preview.styles';
 
 const getCardImageSrc = (cardNumber = '') => {
   const first = cardNumber[0];
@@ -14,26 +14,24 @@ export default function Preview({ cardInfo }: { cardInfo: CardInfoProps }) {
   const imgSrc = getCardImageSrc(cardInfo.cardNumber[0]);
 
   return (
-    <div className='card-background'>
-      <div className='card-preview-container'>
-        <div className='card-preview payment-sim'></div>
-        <div className='card-preview payment-method'>
-          {imgSrc !== '' && <img src={imgSrc} alt='cardType' className='card-preview' />}
-        </div>
-      </div>
-      <div className='card-preview-info-container'>
-        <div className='card-preview-info-card-number-container'>
-          <div className='card-preview-info-text'>{cardInfo?.cardNumber[0]}</div>
-          <div className='card-preview-info-text'>{cardInfo?.cardNumber[1]}</div>
-          <div className='card-preview-info-text secret'>{'•'.repeat(cardInfo.cardNumber[2]?.length)}</div>
-          <div className='card-preview-info-text secret'>{'•'.repeat(cardInfo.cardNumber[3]?.length)}</div>
-        </div>
-        <div className='card-preview-info-text'>
+    <S.CardBackground>
+      <S.PreviewContainer>
+        <S.PaymentSim />
+        <S.CardPreview>{imgSrc !== '' && <S.CardImage src={imgSrc} alt='cardType' />}</S.CardPreview>
+      </S.PreviewContainer>
+      <S.CardInfoContainer>
+        <S.CardNumberContainer>
+          <S.InfoText>{cardInfo?.cardNumber[0]}</S.InfoText>
+          <S.InfoText>{cardInfo?.cardNumber[1]}</S.InfoText>
+          <S.Secret>{'•'.repeat(cardInfo.cardNumber[2]?.length)}</S.Secret>
+          <S.Secret>{'•'.repeat(cardInfo.cardNumber[3]?.length)}</S.Secret>
+        </S.CardNumberContainer>
+        <S.InfoText>
           {cardInfo.cardExpirationDate.month}
           {cardInfo.cardExpirationDate.year && '/'}
           {cardInfo.cardExpirationDate.year}
-        </div>
-      </div>
-    </div>
+        </S.InfoText>
+      </S.CardInfoContainer>
+    </S.CardBackground>
   );
 }

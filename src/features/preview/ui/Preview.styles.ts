@@ -1,49 +1,63 @@
-.card-background {
+import styled from '@emotion/styled';
+
+export const CardBackground = styled.div`
   background-color: #333333;
   width: 212px;
   height: 132px;
   padding: 8px 12px;
   color: #333333;
   border-radius: 4px;
-}
-.card-preview-container {
+`;
+
+export const PreviewContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
-.card-preview {
+`;
+
+export const CardPreview = styled.div`
   width: 36px;
   height: 22px;
-}
-.payment-sim {
+`;
+
+export const PaymentSim = styled(CardPreview)`
   background-color: #ddcd78;
   border-radius: 4px;
-}
-.card-preview-info-container {
+`;
+
+export const CardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 14px 13px 0 5px;
   gap: 8px;
-}
-.card-preview-info-card-number-container {
+`;
+
+export const CardNumberContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: left;
   min-height: 20px;
   gap: 8px;
-}
-.card-preview-info-card-number-container div {
-  min-width: 41px;
-}
 
-.card-preview-info-text {
+  & > div {
+    min-width: 41px;
+  }
+`;
+
+export const InfoText = styled.div`
   color: white;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 2.24px;
-}
-.secret {
+`;
+
+export const Secret = styled(InfoText)`
   letter-spacing: 2px;
-}
+`;
+
+export const CardImage = styled.img`
+  width: 36px;
+  height: 22px;
+`;
