@@ -1,3 +1,13 @@
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  width: 315px;
+  margin: auto;
+  gap: 45px;
+  height: 100vh;
+  justify-content: center;
+}
+
 .inputWrapper {
   display: flex;
   gap: 10px;

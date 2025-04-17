@@ -25,15 +25,17 @@ export default function CvcSection({ cvc, setCvc }: Props) {
       <InputSection.TitleWrapper>
         <InputSection.Title title="CVC 번호를 입력해 주세요" />
       </InputSection.TitleWrapper>
-      <InputSection.Label text="CVC" />
-      <InputSection.InputWrapper
-        numbers={[cvc]}
-        onChange={(_index, value) => handleCvcChange(value)}
-        valid={[cvcError === '']}
-        placeholders={['123']}
-        maxLength={3}
-      />
-      {cvcError && <InputSection.Error message={cvcError} />}
+      <div className={styles.inputSection}>
+        <InputSection.Label text="CVC" />
+        <InputSection.InputWrapper
+          numbers={[cvc]}
+          onChange={(_index, value) => handleCvcChange(value)}
+          valid={[cvcError === '']}
+          placeholders={['123']}
+          maxLength={3}
+        />
+        {cvcError && <InputSection.Error message={cvcError} />}
+      </div>
     </div>
   );
 }
