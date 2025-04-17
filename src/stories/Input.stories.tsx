@@ -10,10 +10,16 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    placeholder: '1234',
+    isError: false,
+    name: 'inputName',
+    type: 'text',
+    value: 'inputValue',
+  },
   render: function Render(args) {
     const [selected, setSelected] = useState('');
-    console.log(args);
+
     return (
       <Input
         {...args}
