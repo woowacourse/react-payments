@@ -1,2 +1,2 @@
 export * from './errorMessages';
-export * from './cardFlag';
+export * from './cardConfig';
