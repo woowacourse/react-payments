@@ -1,7 +1,6 @@
 import styles from "./AddCardPreview.module.css";
 import type { CardNumberState } from "../../AddCardForm/components/CardNumber/types";
 import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
-import PreviewCardImage from "@assets/images/preview-card.png";
 import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "../../../../components/Dot/Dot";
