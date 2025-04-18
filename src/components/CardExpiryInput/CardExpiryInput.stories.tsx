@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpiryInput from '../components/CardExpiryInput/CardExpiryInput';
+import CardExpiryInput from './CardExpiryInput';
 import { useState } from 'react';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import ERROR from '../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../constants/CardValidationInfo';
+import ERROR from '../../constants/errorMessage';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 
 const meta: Meta<typeof CardExpiryInput> = {
   title: 'Components/CardExpiryInput',

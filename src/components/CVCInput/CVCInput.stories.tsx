@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CVCInput from '../components/CVCInput/CVCInput';
+import CVCInput from './CVCInput';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { useState } from 'react';
-import ERROR from '../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../constants/CardValidationInfo';
+import ERROR from '../../constants/errorMessage';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 
 const meta: Meta<typeof CVCInput> = {
   title: 'Components/CVCInput',

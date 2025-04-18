@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardPreview from '../components/CardPreview/CardPreview';
+import CardPreview from './CardPreview';
 import { useState } from 'react';
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
