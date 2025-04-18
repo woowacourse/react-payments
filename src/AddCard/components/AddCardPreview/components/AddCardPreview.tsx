@@ -1,16 +1,9 @@
 import styles from "./AddCardPreview.module.css";
 import type { CardNumberState } from "../../AddCardForm/components/CardNumber/types";
 import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
-import VisaCardImage from "@assets/icons/visa-card.svg";
-import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
-
-const CARD_BRAND_IMAGES = {
-  VISA: VisaCardImage,
-  MASTERCARD: MasterCardImage,
-  DEFAULT: "",
-};
+import { CARD_BRAND_IMAGES } from "../constants";
 
 interface AddCardPreviewProps {
   cardNumberState: CardNumberState;
