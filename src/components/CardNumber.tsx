@@ -7,6 +7,7 @@ import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
 import { SequenceType } from '../types';
+import { checkAllNumber } from '../utils';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
@@ -29,7 +30,7 @@ export default function CardNumber({
   const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
     setCardNumber({ ...cardNumber, [sequence]: value });
 
-    if (/^[0-9]*$/.test(value)) {
+    if (checkAllNumber(value)) {
       setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
       return;
     }
