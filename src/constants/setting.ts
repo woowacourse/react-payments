@@ -4,8 +4,8 @@ export const VISA_CARD_PREFIXES = ["4"];
 
 export const CARD_TYPE_PATH = {
   VISA: "./assets/Visa.png",
-  MasterCard: "./assets/Mastercard.png",
-  None: "",
+  MASTERCARD: "./assets/Mastercard.png",
+  NONE: "",
 };
 
 export const CARD_INFO_LENGTH = {

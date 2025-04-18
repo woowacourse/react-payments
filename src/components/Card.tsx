@@ -46,7 +46,7 @@ function getCardType(cardFirstNumber: string) {
     if (cardFirstNumber.startsWith(prefix)) return "VISA";
   }
   for (const prefix of MASTER_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return "MasterCard";
+    if (cardFirstNumber.startsWith(prefix)) return "MASTERCARD";
   }
 
   return "None";
