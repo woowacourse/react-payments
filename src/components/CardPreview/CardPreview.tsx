@@ -7,33 +7,36 @@ type CardPreviewProps = {
   year: string;
 };
 
+const VISA_CARD_CONDITION = 4;
+const MASTER_CARD_CONDITIONS = ['51', '52', '53', '54', '55'];
+const UNVISIBLE_CARD_NUMBER_CONDITIONS = [2, 3];
+
 const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
+  const isVisaCard = VISA_CARD_CONDITION === Number(cardNumbers[0][0]);
+  const isMasterCard = MASTER_CARD_CONDITIONS.some((condition) =>
+    cardNumbers[0].startsWith(condition)
+  );
+  const isUnVisibleCardNumber = (index: number) =>
+    UNVISIBLE_CARD_NUMBER_CONDITIONS.includes(index);
+
   return (
     <div className={styles.preview}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
-      {Number(cardNumbers[0][0]) ===
-        CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER && (
+      {isVisaCard && (
         <img src="./Visa.png" alt="visa" className={styles.visa} />
       )}
-      {Number(cardNumbers[0].slice(0, 2)) >=
-        CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER &&
-        Number(cardNumbers[0].slice(0, 2)) <=
-          CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER && (
-          <img src="./Mastercard.png" alt="visa" className={styles.visa} />
-        )}
+      {isMasterCard && (
+        <img src="./Mastercard.png" alt="visa" className={styles.visa} />
+      )}
       <div className={styles.cardInfo}>
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
             <span key={index} data-testid={`card-number-${index}`}>
-              {index === 2 || index === 3
-                ? number
-                  ? '•'
-                      .repeat(number.length)
-                      .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
-                  : '    '
-                : number
-                ? number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
-                : '    '}
+              {isUnVisibleCardNumber(index)
+                ? '•'
+                    .repeat(number.length)
+                    .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
+                : number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')}
             </span>
           ))}
         </div>
