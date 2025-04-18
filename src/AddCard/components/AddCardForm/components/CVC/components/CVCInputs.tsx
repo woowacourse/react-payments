@@ -15,6 +15,7 @@ function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
         <Input
           id="cvc-input"
           type="text"
+          inputMode="numeric"
           maxLength={3}
           placeholder="123"
           isError={CVCState.isError}

@@ -33,6 +33,7 @@ function CardExpireDateInputs({
             <Input
               id={`expire-${expireKey}-input`}
               type="text"
+              inputMode="numeric"
               maxLength={2}
               placeholder={expireKey}
               isError={Boolean(expireDate[expireKey].errorMessage)}

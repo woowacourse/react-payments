@@ -36,6 +36,7 @@ function CardNumberInputs({
             <Input
               id={`card-number-${inputKey}-input`}
               type="text"
+              inputMode="numeric"
               maxLength={4}
               placeholder="1234"
               isError={cardNumberState[inputKey].isError}
