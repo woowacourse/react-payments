@@ -11,13 +11,17 @@
   gap: 0.62rem;
 }
 
-.expireDateInputBox {
+.expireDateBox {
   width: 50%;
+}
+
+.expireDateInputBox {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   justify-content: flex-end;
-  height: 90px;
+  gap: 0.5rem;
+  height: 80px;
+  padding-bottom: 0.5rem;
 }
 
 .errorMessage {
