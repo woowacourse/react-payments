@@ -22,7 +22,7 @@ const CardNumbersInput = ({
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
 
-  const handleChange = (
+  const handleCardNumberInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
@@ -65,7 +65,7 @@ const CardNumbersInput = ({
             placeholder="1234"
             name={`card${index + 1}`}
             value={value}
-            onChange={(e) => handleChange(e, index)}
+            onChange={(e) => handleCardNumberInput(e, index)}
             ref={(element) => {
               inputRefs.current.push(element);
             }}
