@@ -15,7 +15,7 @@ interface CardNumberProps {
   setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>;
 }
 
-interface HandleInputChangeProps {
+interface HandleInputChangeParams {
   sequence: SequenceType;
   value: string;
 }
@@ -26,7 +26,7 @@ export default function CardNumber({
   cardNumberErrorMessage,
   setCardNumberErrorMessage,
 }: CardNumberProps) {
-  const handleInputChange = ({ value, sequence }: HandleInputChangeProps) => {
+  const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
     setCardNumber({ ...cardNumber, [sequence]: value });
 
     if (/^[0-9]*$/.test(value)) {
