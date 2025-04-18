@@ -129,12 +129,6 @@ const global = css`
       border-spacing: 0;
     }
   }
-
-  /** Reset */
-  /* Firefox  */
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
 `;
 
 export default global;
