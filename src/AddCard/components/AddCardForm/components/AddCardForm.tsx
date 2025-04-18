@@ -14,8 +14,8 @@ interface AddCardFormProps {
     CVCInputsProps;
 }
 
-function AddCardForm({
-  addCardState: {
+function AddCardForm({ addCardState }: AddCardFormProps) {
+  const {
     cardNumberState,
     handleCardNumberChange,
     expireDate,
@@ -24,8 +24,8 @@ function AddCardForm({
     handleExpireMonthBlur,
     CVCState,
     handleCVCChange,
-  },
-}: AddCardFormProps) {
+  } = addCardState;
+
   return (
     <form className={styles.form}>
       <CardInputBox
