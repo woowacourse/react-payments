@@ -28,7 +28,7 @@ export const WithValidationTest: Story = {
   },
   play: async ({ canvasElement }) => {
     const inputElement = canvasElement.querySelector(
-      "#cvc-input"
+      'input[role="cvc-input"]'
     ) as HTMLInputElement;
 
     await userEvent.type(inputElement, "12");

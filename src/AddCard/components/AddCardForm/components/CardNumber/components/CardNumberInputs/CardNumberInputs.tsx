@@ -35,6 +35,7 @@ function CardNumberInputs({
             </Label>
             <Input
               id={`card-number-${inputKey}-input`}
+              role={`card-number-${inputKey}-input`}
               type="text"
               inputMode="numeric"
               maxLength={4}
