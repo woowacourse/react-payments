@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import ExpirationPeriod from '../components/ExpirationPeriod';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -12,7 +12,7 @@ const meta: Meta<typeof ExpirationPeriod> = {
 export default meta;
 type Story = StoryObj<typeof ExpirationPeriod>;
 
-const Wrapper: React.FC = () => {
+const Wrapper = () => {
   const [period, setPeriod] = useState<string[]>(['', '']);
   const separatorRef = useRef<HTMLDivElement>(null);
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Preview from '../components/Preview';
 import { within, waitFor, expect } from '@storybook/test';
@@ -12,10 +12,12 @@ const meta: Meta<typeof Preview> = {
 export default meta;
 type Story = StoryObj<typeof Preview>;
 
-const Wrapper: React.FC<{
+interface PreviewProps {
   initialCardNumbers: string[];
   initialPeriod: string[];
-}> = ({ initialCardNumbers, initialPeriod }) => {
+}
+
+const Wrapper = ({ initialCardNumbers, initialPeriod }: PreviewProps) => {
   const [cardNumbers] = useState<string[]>(initialCardNumbers);
   const [period] = useState<string[]>(initialPeriod);
   const separatorRef = useRef<HTMLDivElement>(null);

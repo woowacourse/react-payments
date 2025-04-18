@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import CVCNumbers from '../components/CVCNumbers';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -12,7 +12,7 @@ const meta: Meta<typeof CVCNumbers> = {
 export default meta;
 type Story = StoryObj<typeof CVCNumbers>;
 
-const Wrapper: React.FC = () => {
+const Wrapper = () => {
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
   return <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />;
 };

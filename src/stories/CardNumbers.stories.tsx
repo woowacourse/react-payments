@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import CardNumbers from '../components/CardNumbers';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -12,7 +12,7 @@ const meta: Meta<typeof CardNumbers> = {
 export default meta;
 type Story = StoryObj<typeof CardNumbers>;
 
-const Wrapper: React.FC = () => {
+const Wrapper = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   return (
     <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
