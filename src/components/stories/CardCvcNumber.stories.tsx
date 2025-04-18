@@ -16,10 +16,3 @@ export const Primary: Story = {
     errorMessage: "",
   },
 };
-export const Error: Story = {
-  args: {
-    handleChange: () => {},
-    cvcNumbers: "abc",
-    errorMessage: "숫자만 입력 가능합니다.",
-  },
-};

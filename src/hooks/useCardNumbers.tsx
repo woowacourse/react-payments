@@ -4,7 +4,6 @@ import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_CARD_NUMBER = {
   IS_VALID_LENGTH_ERROR: "카드 번호는 4자리 숫자여야 합니다.",
-  IS_NUMBER_ERROR: "숫자만 입력 가능합니다.",
   CARD_NUMBER_MAX_LENGTH: 4,
   CARD_TYPE_MAX_LENGTH: 2,
 } as const;
@@ -52,16 +51,6 @@ export default function useCardNumbers() {
       replaceAt({
         array: cardNumbersError,
         newValue: CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
-        index: index,
-        setState: setError,
-      });
-      return;
-    }
-
-    if (!isNumber(value)) {
-      replaceAt({
-        array: cardNumbersError,
-        newValue: CONSTANT_USE_CARD_NUMBER.IS_NUMBER_ERROR,
         index: index,
         setState: setError,
       });

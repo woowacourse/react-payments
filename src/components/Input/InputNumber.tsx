@@ -17,7 +17,10 @@ export default function InputNumber({
   errorMessage = DEFAULT_ERROR_MESSAGE,
 }: InputNumberProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    const newValue = e.target.value;
+    if (/^\d*$/.test(newValue)) {
+      onChange(newValue);
+    }
   };
 
   return (

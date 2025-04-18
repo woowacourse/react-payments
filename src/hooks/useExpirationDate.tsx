@@ -4,7 +4,6 @@ import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_EXPIRATION_DATE = {
   IS_VALID_LENGTH_ERROR: "2자리까지 입력 가능합니다.",
-  IS_NUMBER_ERROR: "숫자만 입력 가능합니다.",
   MONTH_RANGE_ERROR: "1부터 12 사이의 숫자를 입력하세요.",
   MAX_LENGTH: 2,
 } as const;
@@ -22,16 +21,6 @@ export default function useExpirationDate() {
       replaceAt({
         array: cardExpirationDateError,
         newValue: CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
-        index: index,
-        setState: setError,
-      });
-      return;
-    }
-
-    if (!isNumber(value)) {
-      replaceAt({
-        array: cardExpirationDateError,
-        newValue: CONSTANT_USE_EXPIRATION_DATE.IS_NUMBER_ERROR,
         index: index,
         setState: setError,
       });
