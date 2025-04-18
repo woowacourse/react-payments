@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { CVC_INPUT_LENGTH } from "../constants";
 
 const useControlledCVC = () => {
   const [CVCState, setCVCState] = useState({
@@ -7,7 +8,7 @@ const useControlledCVC = () => {
   });
 
   const handleCVCChange = useCallback((value: string) => {
-    if (value.length > 3) {
+    if (value.length > CVC_INPUT_LENGTH) {
       return;
     }
     if (isNaN(Number(value))) {

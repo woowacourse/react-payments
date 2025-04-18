@@ -1,6 +1,7 @@
 import styles from "./CVCInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
+import { CVC_INPUT_LENGTH } from "../constants";
 
 export interface CVCInputsProps {
   CVCState: { value: string; isError: boolean };
@@ -15,7 +16,7 @@ function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
         <Input
           id="cvc-input"
           type="text"
-          maxLength={3}
+          maxLength={CVC_INPUT_LENGTH}
           placeholder="123"
           isError={CVCState.isError}
           value={CVCState.value}

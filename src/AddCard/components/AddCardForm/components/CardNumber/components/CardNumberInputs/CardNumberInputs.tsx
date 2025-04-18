@@ -3,7 +3,7 @@ import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
-import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
+import { CARD_NUMBER_INPUT_KEYS, CARD_NUMBER_LENGTH } from "../../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
@@ -36,7 +36,7 @@ function CardNumberInputs({
             <Input
               id={`card-number-${inputKey}-input`}
               type="text"
-              maxLength={4}
+              maxLength={CARD_NUMBER_LENGTH}
               placeholder="1234"
               isError={cardNumberState[inputKey].isError}
               value={cardNumberState[inputKey].value}

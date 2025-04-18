@@ -1,7 +1,7 @@
 import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
-import { EXPIRE_DATE_KEYS } from "../../constants";
+import { EXPIRE_DATE_KEYS, EXPIRE_DATE_LENGTH } from "../../constants";
 import type { ExpireDateState } from "../../types";
 
 export interface CardExpireDateInputsProps {
@@ -33,7 +33,7 @@ function CardExpireDateInputs({
             <Input
               id={`expire-${expireKey}-input`}
               type="text"
-              maxLength={2}
+              maxLength={EXPIRE_DATE_LENGTH}
               placeholder={expireKey}
               isError={Boolean(expireDate[expireKey].errorMessage)}
               value={expireDate[expireKey].value}

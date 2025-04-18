@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { isNaN } from "../../../../../../utils/isNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
-import { INITIAL_CARD_NUMBER_STATE } from "../constants";
+import { CARD_NUMBER_LENGTH, INITIAL_CARD_NUMBER_STATE } from "../constants";
 
 const useControlledCardNumber = () => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
@@ -10,7 +10,7 @@ const useControlledCardNumber = () => {
 
   const handleCardNumberChange = useCallback(
     (key: CardNumberInputKey, value: string) => {
-      if (value.length > 4) {
+      if (value.length > CARD_NUMBER_LENGTH) {
         return;
       }
       if (isNaN(Number(value))) {

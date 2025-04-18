@@ -13,3 +13,5 @@ function isExpireKey(k: string): k is CardNumberInputKey {
 export const CARD_NUMBER_INPUT_KEYS = Object.keys(
   INITIAL_CARD_NUMBER_STATE
 ).filter(isExpireKey);
+
+export const CARD_NUMBER_LENGTH = 4;

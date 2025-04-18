@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { INITIAL_EXPIRE_DATE_STATE } from "../constants";
+import { EXPIRE_DATE_LENGTH, INITIAL_EXPIRE_DATE_STATE } from "../constants";
 import { ExpireDateState } from "../types";
 import { validateMonth, validateYear } from "../validation";
 
@@ -9,7 +9,7 @@ const useControlledExpireDate = () => {
   );
 
   const handleExpireMonthChange = useCallback((value: string) => {
-    if (value.length > 2) {
+    if (value.length > EXPIRE_DATE_LENGTH) {
       return;
     }
     if (isNaN(Number(value))) {

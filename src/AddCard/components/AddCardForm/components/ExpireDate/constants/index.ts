@@ -19,3 +19,5 @@ function isExpireKey(k: string): k is ExpireDateInputKey {
 export const EXPIRE_DATE_KEYS = Object.keys(INITIAL_EXPIRE_DATE_STATE).filter(
   isExpireKey
 );
+
+export const EXPIRE_DATE_LENGTH = 2;
