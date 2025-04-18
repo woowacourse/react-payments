@@ -13,22 +13,29 @@ const useControlledCardNumber = () => {
       if (value.length > CARD_NUMBER_LENGTH) {
         return;
       }
-      if (isNaN(Number(value))) {
+
+      const numeric = Number(value);
+
+      if (isNaN(numeric)) {
+        setCardNumberState((prev) => ({
+          ...prev,
+          [key]: {
+            ...prev[key],
+            isError: true,
+          },
+        }));
         return;
       }
 
+      // 숫자일 때: 정상 길이인지 검사
       const isValidLength = value.length === 0 || value.length === 4;
-      const isValid = isNaN(Number(value)) || !isValidLength;
-
-      setCardNumberState((prevState) => {
-        return {
-          ...prevState,
-          [key]: {
-            value,
-            isError: isValid,
-          },
-        };
-      });
+      setCardNumberState((prev) => ({
+        ...prev,
+        [key]: {
+          value, // 새로운 숫자값
+          isError: !isValidLength,
+        },
+      }));
     },
     []
   );

@@ -11,7 +11,12 @@ const useControlledCVC = () => {
     if (value.length > CVC_INPUT_LENGTH) {
       return;
     }
-    if (isNaN(Number(value))) {
+    const numeric = Number(value);
+    if (isNaN(numeric)) {
+      setCVCState((prevState) => ({
+        ...prevState,
+        isError: true,
+      }));
       return;
     }
 
