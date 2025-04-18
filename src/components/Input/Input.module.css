@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  border-radius: 2px;
+  padding: 8px;
+  border: 1px solid var(--color-gray-10);
+}
+
+.valid {
+  border: 1px solid var(--color-gray-10);
+}
+
+.inValid {
+  border: 1px solid var(--color-red);
+}
+
+.input:focus {
+  border: 1px solid var(--color-black);
+}
+
+.input:focus.inValid {
+  border: 1px solid var(--color-red);
+}
