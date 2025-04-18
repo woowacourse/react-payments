@@ -1,6 +1,4 @@
-import { INITIAL_CARD_NUMBER_STATE } from "../constants";
-
-export type CardNumberInputKey = keyof typeof INITIAL_CARD_NUMBER_STATE;
+export type CardNumberInputKey = "first" | "second" | "third" | "fourth";
 export type CardNumberState = Record<
   CardNumberInputKey,
   { value: string; isError: boolean }

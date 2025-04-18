@@ -1,4 +1,4 @@
-import { ExpireDateInputKey } from "../types";
+import { ExpireDateInputKey, ExpireDateState } from "../types";
 
 export const EXPIRE_DATE_ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
@@ -7,17 +7,11 @@ export const EXPIRE_DATE_ERROR_MESSAGE = {
   INVALID_MONTH_RANGE: "월은 1 ~ 12까지만 입력 가능합니다.",
 } as const;
 
-export const INITIAL_EXPIRE_DATE_STATE = {
+export const INITIAL_EXPIRE_DATE_STATE: ExpireDateState = {
   MM: { value: "", errorMessage: "" },
   YY: { value: "", errorMessage: "" },
 } as const;
 
-function isExpireKey(k: string): k is ExpireDateInputKey {
-  return k in INITIAL_EXPIRE_DATE_STATE;
-}
-
-export const EXPIRE_DATE_KEYS = Object.keys(INITIAL_EXPIRE_DATE_STATE).filter(
-  isExpireKey
-);
+export const EXPIRE_DATE_KEYS: ExpireDateInputKey[] = ["MM", "YY"];
 
 export const EXPIRE_DATE_LENGTH = 2 as const;
