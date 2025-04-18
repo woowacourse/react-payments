@@ -34,7 +34,7 @@ const useControlledExpireDate = () => {
     }));
   }, []);
 
-  const handleExpireMonthBlur = useCallback((value: string) => {
+  const handleExpireMonthBlur = (value: string) => {
     if (value.length !== 1) {
       return;
     }
@@ -48,7 +48,7 @@ const useControlledExpireDate = () => {
         },
       }));
     }
-  }, []);
+  };
 
   const handleExpireYearChange = useCallback((value: string) => {
     if (value.length > 2) {
