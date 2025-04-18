@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import InputContainer from '../InputContainer/InputContainer';
 import { validateCVC } from '../../domain/validate';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 
 type CVCInputProps = {
   CVC: string;

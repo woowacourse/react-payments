@@ -4,7 +4,7 @@ import { validateMonth } from '../../domain/validate';
 import { validateYear } from '../../domain/validate';
 import { INPUT_CONTAINER } from '../../constants/title';
 import ERROR from '../../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 
 type CardExpiryInputProps = {
   month: string;

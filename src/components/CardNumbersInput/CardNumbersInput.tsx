@@ -7,7 +7,7 @@ import {
 import CustomCardNumbersError from '../../error/CustomCardNumbersError';
 import { INPUT_CONTAINER } from '../../constants/title';
 import ERROR from '../../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 
 type CardNumbersInputProps = {
   cardNumbers: string[];

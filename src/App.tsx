@@ -3,7 +3,7 @@ import CardNumbersInput from './components/CardNumbersInput/CardNumbersInput';
 import CardExpiryInput from './components/CardExpiryInput/CardExpiryInput';
 import CVCInput from './components/CVCInput/CVCInput';
 import CardPreview from './components/CardPreview/CardPreview';
-import { CARD_VALIDATION_INFO } from './constants/CardValidationInfo';
+import { CARD_VALIDATION_INFO } from './constants/cardValidationInfo';
 import './App.css';
 
 function App() {
