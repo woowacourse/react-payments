@@ -1,0 +1,19 @@
+.input-number {
+  width: 100%;
+  border: var(--color-input) 1px solid;
+  border-radius: 4px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.input-number::placeholder {
+  color: var(--color-input);
+}
+
+.input-number:focus {
+  outline-color: var(--color-black) 1px solid;
+}
+
+.input-number.error {
+  outline: 1px solid var(--color-error);
+}
