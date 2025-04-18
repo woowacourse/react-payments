@@ -23,7 +23,7 @@ const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
       Number(cardNumbers[0].slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
       Number(cardNumbers[0].slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
     ) {
-      setCardMethodSrc('./images/Mastercard.svg');
+      setCardMethodSrc('./images/master.svg');
     } else {
       setCardMethodSrc('');
     }

@@ -31,7 +31,7 @@ const PreviewView = ({
             <CardNumber key={index}>
               {index < CARD_NUMBER_VISIBLE_THRESHOLD
                 ? number
-                : '∙'.repeat(number.length)}
+                : '•'.repeat(number.length)}
             </CardNumber>
           ))}
         </CardNumberArea>
