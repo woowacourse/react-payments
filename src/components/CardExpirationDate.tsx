@@ -15,7 +15,7 @@ interface CardExpirationDateProps {
   setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>;
 }
 
-interface HandleInputChangeProps {
+interface HandleInputChangeParams {
   dateType: string;
   value: string;
 }
@@ -26,7 +26,7 @@ export default function CardExpirationDate({
   cardExpirationDateErrorMessage,
   setCardExpirationDateErrorMessage,
 }: CardExpirationDateProps) {
-  const handleInputChange = ({ value, dateType }: HandleInputChangeProps) => {
+  const handleInputChange = ({ value, dateType }: HandleInputChangeParams) => {
     setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
     setCardExpirationDateErrorMessage({
       ...cardExpirationDateErrorMessage,
