@@ -6,7 +6,10 @@ import CVCInputs from "./CVCInputs";
 const meta = {
   title: "Component/CVCInput",
   component: CVCInputs,
-  args: { CVCState: { isError: false, value: "" }, handleCVCChange: () => {} },
+  args: {
+    CVCState: { errorMessage: "", value: "" },
+    handleCVCChange: () => {},
+  },
 } satisfies Meta<typeof CVCInputs>;
 
 export default meta;
@@ -16,7 +19,10 @@ export const Default: Story = {};
 
 export const Error: Story = {
   args: {
-    CVCState: { isError: true, value: "0" },
+    CVCState: {
+      value: "0",
+      errorMessage: "CVC는 3자리의 숫자만 입력 가능합니다.",
+    },
   },
 };
 
