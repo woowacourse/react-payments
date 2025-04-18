@@ -4,19 +4,15 @@ import { ReactNode } from "react";
 interface CardInputBoxProps {
   title: string;
   guideText?: string;
-  InputComponents: ReactNode;
+  InputComponent: ReactNode;
 }
 
-function CardInputBox({
-  title,
-  guideText,
-  InputComponents,
-}: CardInputBoxProps) {
+function CardInputBox({ title, guideText, InputComponent }: CardInputBoxProps) {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
       {guideText && <p className={styles.guideText}>{guideText}</p>}
-      {InputComponents}
+      {InputComponent}
     </div>
   );
 }
