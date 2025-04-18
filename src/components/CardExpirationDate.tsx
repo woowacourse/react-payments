@@ -7,7 +7,7 @@ import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
 import { DateType } from '../types';
-
+import { checkAllNumber } from '../utils';
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
   setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>;
@@ -16,7 +16,7 @@ interface CardExpirationDateProps {
 }
 
 interface HandleInputChangeParams {
-  dateType: string;
+  dateType: DateType;
   value: string;
 }
 
@@ -33,7 +33,7 @@ export default function CardExpirationDate({
       [dateType]: '',
     });
 
-    if (!/^[0-9]*$/.test(value)) {
+    if (!checkAllNumber(value)) {
       setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber });
       return;
     }
