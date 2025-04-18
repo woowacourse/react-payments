@@ -27,7 +27,7 @@ export const ExpirationPeriod: Story = {
   },
 };
 
-export const cvcNumber: Story = {
+export const CvcNumber: Story = {
   decorators: [withCustomCardProvider({})],
   args: {
     type: INPUT_TYPE.cvcNumber,
