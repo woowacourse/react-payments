@@ -1,13 +1,14 @@
-import * as S from './CardExpirationDate.styles';
-import Title from './common/Title';
-import Label from './common/Label';
-import Input from './common/Input';
-import Spacing from './common/Spacing';
-import ErrorMessage from './common/ErrorMessage';
+import Title from '../common/Title/Title';
+import Label from '../common/Label/Label';
+import Input from '../common/Input/Input';
+import Spacing from '../common/Spacing/Spacing';
+import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE } from '../constants';
-import { DateType } from '../types';
-import { checkAllNumber } from '../utils';
+import { ERROR_MESSAGE } from '../../constants';
+import { DateType } from '../../types';
+import { checkAllNumber } from '../../utils';
+import * as S from './CardExpirationDate.styles';
+
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
   setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>;
