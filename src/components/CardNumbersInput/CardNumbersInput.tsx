@@ -1,13 +1,13 @@
-import { useRef, useState } from "react";
-import InputContainer from "../InputContainer/InputContainer";
+import { useRef, useState } from 'react';
+import InputContainer from '../InputContainer/InputContainer';
 import {
   validateCardNumbers,
   validateFirstCardNumbers,
-} from "../../domain/validate";
-import CustomCardNumbersError from "../../error/CustomCardNumbersError";
-import { INPUT_CONTAINER } from "../../constants/title";
-import ERROR from "../../constants/errorMessage";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+} from '../../domain/validate';
+import CustomCardNumbersError from '../../error/CustomCardNumbersError';
+import { INPUT_CONTAINER } from '../../constants/title';
+import ERROR from '../../constants/errorMessage';
+import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
 
 type CardNumbersInputProps = {
   cardNumbers: string[];
@@ -18,7 +18,7 @@ const CardNumbersInput = ({
   cardNumbers,
   setCardNumbers,
 }: CardNumbersInputProps) => {
-  const [helperText, setHelperText] = useState<string>("");
+  const [helperText, setHelperText] = useState('');
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -32,12 +32,12 @@ const CardNumbersInput = ({
         validateFirstCardNumbers(newCardNumbers[0]);
         validateCardNumbers(
           newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
+          CARD_VALIDATION_INFO.CARD_MAX_LENGTH
         );
-        if (helperText !== "") {
+        if (helperText !== '') {
           inputRefs.current[index]?.focus();
         }
-        setHelperText("");
+        setHelperText('');
         setErrorIndex(null);
       } catch (error: unknown) {
         if (error instanceof CustomCardNumbersError) {
@@ -70,7 +70,7 @@ const CardNumbersInput = ({
             ref={(element) => {
               inputRefs.current.push(element);
             }}
-            className={`input ${index === errorIndex && "errorInput"}`}
+            className={`input ${index === errorIndex && 'errorInput'}`}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
           />
         ))}

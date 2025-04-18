@@ -1,6 +1,6 @@
-import ERROR from "../constants/errorMessage";
-import CustomCardNumbersError from "../error/CustomCardNumbersError";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import ERROR from '../constants/errorMessage';
+import CustomCardNumbersError from '../error/CustomCardNumbersError';
+import { CARD_VALIDATION_INFO } from '../constants/CardValidationInfo.ts';
 
 const isNumber = (number: string) => {
   if (isNaN(Number(number))) return false;
@@ -46,7 +46,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
       if (!numberLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index,
+          index
         );
     }
   });

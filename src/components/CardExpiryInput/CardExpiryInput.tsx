@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
-import InputContainer from "../InputContainer/InputContainer";
-import { validateMonth } from "../../domain/validate";
-import { validateYear } from "../../domain/validate";
-import { INPUT_CONTAINER } from "../../constants/title";
-import ERROR from "../../constants/errorMessage";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { useRef, useState } from 'react';
+import InputContainer from '../InputContainer/InputContainer';
+import { validateMonth } from '../../domain/validate';
+import { validateYear } from '../../domain/validate';
+import { INPUT_CONTAINER } from '../../constants/title';
+import ERROR from '../../constants/errorMessage';
+import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
 
 type CardExpiryInputProps = {
   month: string;
@@ -19,7 +19,7 @@ const CardExpiryInput = ({
   year,
   setYear,
 }: CardExpiryInputProps) => {
-  const [helperText, setHelperText] = useState("");
+  const [helperText, setHelperText] = useState('');
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -27,16 +27,16 @@ const CardExpiryInput = ({
     const { name, value } = e.target;
 
     try {
-      if (name === "month") {
+      if (name === 'month') {
         setMonth(value);
         validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         validateYear(year, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
-      } else if (name === "year") {
+      } else if (name === 'year') {
         setYear(value);
         validateMonth(month, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         validateYear(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
       }
-      setHelperText("");
+      setHelperText('');
       setErrorIndex(null);
     } catch (error: unknown) {
       catchError(error);
@@ -74,7 +74,7 @@ const CardExpiryInput = ({
           ref={(element) => {
             inputRefs.current.push(element);
           }}
-          className={`input ${errorIndex === 0 && "errorInput"}`}
+          className={`input ${errorIndex === 0 && 'errorInput'}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
         <input
@@ -86,7 +86,7 @@ const CardExpiryInput = ({
           ref={(element) => {
             inputRefs.current.push(element);
           }}
-          className={`input ${errorIndex === 1 && "errorInput"}`}
+          className={`input ${errorIndex === 1 && 'errorInput'}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
       </div>

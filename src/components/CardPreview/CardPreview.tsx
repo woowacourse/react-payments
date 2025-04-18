@@ -1,5 +1,5 @@
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
-import styles from "./CardPreview.module.css";
+import { CARD_VALIDATION_INFO } from '../../constants/CardValidationInfo';
+import styles from './CardPreview.module.css';
 
 type CardPreviewProps = {
   cardNumbers: string[];
@@ -27,13 +27,13 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
             <span key={index} data-testid={`card-number-${index}`}>
               {index === 2 || index === 3
                 ? number
-                  ? "•"
+                  ? '•'
                       .repeat(number.length)
-                      .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, " ")
-                  : "    "
+                      .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
+                  : '    '
                 : number
-                  ? number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, " ")
-                  : "    "}
+                ? number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
+                : '    '}
             </span>
           ))}
         </div>
@@ -41,7 +41,7 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
           <p>
             {month}
             {month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH &&
-              "/"}
+              '/'}
             {year}
           </p>
         </div>
