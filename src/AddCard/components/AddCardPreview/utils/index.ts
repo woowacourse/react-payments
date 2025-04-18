@@ -1,9 +1,13 @@
-export const getCardBrand = (cardNumber: number) => {
-  if (cardNumber.toString().startsWith("4")) {
+import { CardBrand } from "../types";
+
+export const getCardBrand = (cardNumber: string): CardBrand => {
+  if (cardNumber[0] === "4") {
     return "VISA";
   }
 
-  if (cardNumber >= 51 && cardNumber <= 55) {
+  // MASTERCARD : 앞두자리 51~55
+  const prefix = parseInt(cardNumber.slice(0, 2), 10);
+  if (prefix >= 51 && prefix <= 55) {
     return "MASTERCARD";
   }
 

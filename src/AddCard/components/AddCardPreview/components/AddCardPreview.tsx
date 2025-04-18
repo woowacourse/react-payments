@@ -11,7 +11,7 @@ interface AddCardPreviewProps {
 }
 
 function AddCardPreview({ cardNumberState, expireDate }: AddCardPreviewProps) {
-  const cardBrand = getCardBrand(Number(cardNumberState.first.value));
+  const cardBrand = getCardBrand(cardNumberState.first.value);
 
   return (
     <div className={styles.previewCard}>

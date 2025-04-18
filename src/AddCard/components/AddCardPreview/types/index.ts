@@ -1,4 +1,4 @@
-type CardBrand = "VISA" | "MASTERCARD" | "DEFAULT";
+export type CardBrand = "VISA" | "MASTERCARD" | "DEFAULT";
 
 type CardBrandImageSrc = string;
 
