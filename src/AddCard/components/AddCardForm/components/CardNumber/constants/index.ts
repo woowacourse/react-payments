@@ -1,5 +1,3 @@
-import { CardNumberInputKey } from "../types";
-
 export const INITIAL_CARD_NUMBER_STATE = {
   first: { value: "", isError: false },
   second: { value: "", isError: false },
@@ -9,4 +7,4 @@ export const INITIAL_CARD_NUMBER_STATE = {
 
 export const CARD_NUMBER_INPUT_KEYS = Object.keys(
   INITIAL_CARD_NUMBER_STATE
-) as CardNumberInputKey[];
+) as (keyof typeof INITIAL_CARD_NUMBER_STATE)[];
