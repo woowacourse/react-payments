@@ -37,12 +37,16 @@ export const WithValidationTest: Story = {
       "#cvc-input"
     ) as HTMLInputElement;
 
-    await userEvent.type(inputElement, "12");
-    expect(inputElement.value).toBe("12");
+    await userEvent.type(inputElement, "aaa");
+    expect(inputElement.value).toBe("");
 
     const errorMessageEl = canvasElement.querySelector(
       "#error-message"
     ) as HTMLParagraphElement;
+
+    expect(errorMessageEl.textContent).toBe("숫자만 입력 가능합니다.");
+    await userEvent.type(inputElement, "12");
+    expect(inputElement.value).toBe("12");
     expect(errorMessageEl.textContent).toBe(
       "CVC는 3자리의 숫자만 입력 가능합니다."
     );
