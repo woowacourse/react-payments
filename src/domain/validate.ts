@@ -3,10 +3,10 @@ import CustomCardNumbersError from '../error/CustomCardNumbersError';
 import { CARD_VALIDATION_INFO } from '../constants/CardValidationInfo.ts';
 
 const isNumber = (number: string) => {
-  return isNaN(Number(number));
+  return !isNaN(Number(number));
 };
 
-const numberLength = (number: string, length: number) => {
+const invaludNumberLength = (number: string, length: number) => {
   return number.length !== length;
 };
 
@@ -36,7 +36,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
     if (num.length > 0) {
       if (!isNumber(num))
         throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
-      if (!numberLength(num, length))
+      if (invaludNumberLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
           index
@@ -46,26 +46,26 @@ export const validateCardNumbers = (number: string[], length: number) => {
 };
 
 export const validateFirstCardNumbers = (number: string) => {
-  if (!invalidCardNumber(number))
+  if (invalidCardNumber(number))
     throw new CustomCardNumbersError(ERROR.CARD_NUMBER.INVALID, 0);
 };
 
 export const validateMonth = (month: string, length: number) => {
   if (!isNumber(month)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(month, length))
+  if (invaludNumberLength(month, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
-  if (!invalidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
+  if (invalidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
 };
 
 export const validateYear = (year: string, length: number) => {
   if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(year, length))
+  if (invaludNumberLength(year, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
-  if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
+  if (invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
 };
 
 export const validateCVC = (number: string, length: number) => {
   if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(number, length))
+  if (invaludNumberLength(number, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
 };
