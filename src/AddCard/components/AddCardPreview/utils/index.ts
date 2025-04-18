@@ -5,7 +5,6 @@ export const getCardBrand = (cardNumber: string): CardBrand => {
     return "VISA";
   }
 
-  // MASTERCARD : 앞두자리 51~55
   const prefix = parseInt(cardNumber.slice(0, 2), 10);
   if (prefix >= 51 && prefix <= 55) {
     return "MASTERCARD";
