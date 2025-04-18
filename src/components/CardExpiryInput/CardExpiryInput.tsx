@@ -44,16 +44,15 @@ const CardExpiryInput = ({
   };
 
   const catchError = (error: unknown) => {
-    if (error instanceof Error) {
-      if (error.message === ERROR.EXPIRY.INVALID_MONTH) {
-        inputRefs.current[0]?.focus();
-        setErrorIndex(0);
-      } else if (error.message === ERROR.EXPIRY.INVALID_YEAR) {
-        inputRefs.current[1]?.focus();
-        setErrorIndex(1);
-      }
-      setHelperText(error.message);
+    if (!(error instanceof Error)) return;
+    if (error.message === ERROR.EXPIRY.INVALID_MONTH) {
+      inputRefs.current[0]?.focus();
+      setErrorIndex(0);
+    } else if (error.message === ERROR.EXPIRY.INVALID_YEAR) {
+      inputRefs.current[1]?.focus();
+      setErrorIndex(1);
     }
+    setHelperText(error.message);
   };
 
   return (
