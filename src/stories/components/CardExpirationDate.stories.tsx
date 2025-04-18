@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpirationDate, { dateType } from '../../components/CardExpirationDate';
 import { useState } from 'storybook/internal/preview-api';
 import { ERROR_MESSAGE } from '../../constants';
+import { DateType } from '../../types';
+import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
 
 const meta = {
   title: 'CardExpirationDate',
@@ -27,11 +28,11 @@ export const Default: Story = {
     setCardExpirationDateErrorMessage: () => {},
   },
   render: function Render(args) {
-    const [cardExpirationDate, setCardExpirationDate] = useState<Record<dateType, string>>({
+    const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
       month: '',
       year: '',
     });
-    const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<dateType, string>>({
+    const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
       month: '',
       year: '',
     });

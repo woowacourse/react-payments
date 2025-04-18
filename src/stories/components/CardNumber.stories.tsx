@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumber, { SequenceType } from '../../components/CardNumber';
+import CardNumber from '../../components/CardNumber/CardNumber';
 import { useState } from 'storybook/internal/preview-api';
+import { SequenceType } from '../../types';
 
 const meta = {
   title: 'CardNumber',

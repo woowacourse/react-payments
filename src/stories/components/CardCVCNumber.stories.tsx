@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardCVCNumber from '../../components/CardCVCNumber';
+import CardCVCNumber from '../../components/CardCVCNumber/CardCVCNumber';
 import { useState } from '@storybook/preview-api';
 import { ERROR_MESSAGE } from '../../constants';
 

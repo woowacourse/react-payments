@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import * as S from './App.styles';
-import CardCVCNumber from './components/CardCVCNumber';
-import CardExpirationDate from './components/CardExpirationDate';
-import CardNumber from './components/CardNumber';
-import CardPreview from './components/CardPreview';
-import Spacing from './components/common/Spacing';
+import CardCVCNumber from './components/CardCVCNumber/CardCVCNumber';
+import CardExpirationDate from './components/CardExpirationDate/CardExpirationDate';
+import CardNumber from './components/CardNumber/CardNumber';
+import CardPreview from './components/CardPreview/CardPreview';
+import Spacing from './components/common/Spacing/Spacing';
 import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from './constants';
 import { CardType, SequenceType, DateType } from './types';
 import { Global } from '@emotion/react';
