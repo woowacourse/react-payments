@@ -1,0 +1,17 @@
+.input-title {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 38px 0 5px 0;
+}
+
+.input-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 18px 0 8px 0;
+}
+
+.input-description {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--color-description);
+}

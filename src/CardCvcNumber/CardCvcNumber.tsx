@@ -1,5 +1,4 @@
-import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
-import InputTitle from "../components/InputTitle/InputTitle";
+import InputText from "../components/InputText/InputText";
 import styles from "./CardCvcNumber.module.css";
 import InputNumber from "../components/Input/InputNumber";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
@@ -23,8 +22,14 @@ export default function CardCvcNumber({
 }: CardCvcNumberProps) {
   return (
     <section className={styles["card-cvc"]}>
-      <InputTitle inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_TITLE} />
-      <InputSubtitle inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_SUBTITLE} />
+      <InputText
+        inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_TITLE}
+        variant="title"
+      />
+      <InputText
+        inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_SUBTITLE}
+        variant="subtitle"
+      />
       <InputNumber
         onChange={handleChange}
         placeholder={CONSTANT_CARD_CVC_NUMBER.PLACE_HOLDER}

@@ -1,8 +1,6 @@
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 import InputNumber from "../components/Input/InputNumber";
-import InputDescription from "../components/InputDescription/InputDescription";
-import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
-import InputTitle from "../components/InputTitle/InputTitle";
+import InputText from "../components/InputText/InputText";
 import styles from "./CardExpirationDate.module.css";
 
 interface CardExpirationDateProps {
@@ -26,11 +24,18 @@ export default function CardExpirationDate({
 }: CardExpirationDateProps) {
   return (
     <section className="card-expiration-date">
-      <InputTitle inputValue={CONSTANT_EXPIRATION_DATE.INPUT_TITLE} />
-      <InputDescription
-        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_DESCRIPTION}
+      <InputText
+        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_TITLE}
+        variant="title"
       />
-      <InputSubtitle inputValue={CONSTANT_EXPIRATION_DATE.INPUT_SUBTITLE} />
+      <InputText
+        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_DESCRIPTION}
+        variant="description"
+      />
+      <InputText
+        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_SUBTITLE}
+        variant="subtitle"
+      />
       <div className={styles["card-number__input"]}>
         <InputNumber
           onChange={(value) => handleChange(value, 0)}

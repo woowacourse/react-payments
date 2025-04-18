@@ -1,7 +1,5 @@
 import InputNumber from "../components/Input/InputNumber";
-import InputDescription from "../components/InputDescription/InputDescription";
-import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
-import InputTitle from "../components/InputTitle/InputTitle";
+import InputText from "../components/InputText/InputText";
 import styles from "./CardNumber.module.css";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 
@@ -24,9 +22,18 @@ export default function CardNumber({
 }: CardNumberProps) {
   return (
     <section className={styles["card-number"]}>
-      <InputTitle inputValue={CONSTANT_CARD_NUMBER.INPUT_TITLE} />
-      <InputDescription inputValue={CONSTANT_CARD_NUMBER.INPUT_DESCRIPTION} />
-      <InputSubtitle inputValue={CONSTANT_CARD_NUMBER.INPUT_SUBTITLE} />
+      <InputText
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_TITLE}
+        variant="title"
+      />
+      <InputText
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_DESCRIPTION}
+        variant="description"
+      />
+      <InputText
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_SUBTITLE}
+        variant="subtitle"
+      />
       <div className={styles["card-number__input"]}>
         {[0, 1, 2, 3].map((index) => (
           <InputNumber
