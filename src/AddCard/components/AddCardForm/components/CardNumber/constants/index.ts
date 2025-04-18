@@ -14,4 +14,4 @@ export const CARD_NUMBER_INPUT_KEYS = Object.keys(
   INITIAL_CARD_NUMBER_STATE
 ).filter(isExpireKey);
 
-export const CARD_NUMBER_LENGTH = 4;
+export const CARD_NUMBER_LENGTH = 4 as const;
