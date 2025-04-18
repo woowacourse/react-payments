@@ -42,15 +42,22 @@ export const WithValidationTest: Story = {
     );
   },
   play: async ({ canvasElement }) => {
-    const inputElement = canvasElement.querySelector(
+    const firstInputElement = canvasElement.querySelector(
       "#card-number-first-input"
     ) as HTMLInputElement;
-    await userEvent.type(inputElement, "321");
-    expect(inputElement.value).toBe("321");
+    await userEvent.type(firstInputElement, "321");
+    expect(firstInputElement.value).toBe("321");
 
     const errorMessageEl = canvasElement.querySelector(
       "#card-number-error-message"
     ) as HTMLParagraphElement;
     expect(errorMessageEl.textContent).toBe("4자리의 숫자만 입력 가능합니다.");
+    const secondInputElement = canvasElement.querySelector(
+      "#card-number-second-input"
+    ) as HTMLInputElement;
+    await userEvent.type(secondInputElement, "aaaa");
+    expect(secondInputElement.value).toBe("");
+
+    expect(errorMessageEl.textContent).toBe("숫자만 입력 가능합니다.");
   },
 };
