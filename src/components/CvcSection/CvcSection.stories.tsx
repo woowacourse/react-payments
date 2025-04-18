@@ -19,7 +19,7 @@ export const Default: Story = {
   }
 };
 
-export const Vaild: Story = {
+export const Valid: Story = {
   args: {
     cardNumbers: '314'
   },
@@ -30,7 +30,7 @@ export const Vaild: Story = {
   }
 };
 
-export const InVaild: Story = {
+export const InValid: Story = {
   args: {
     cardNumbers: 'a2'
   },
