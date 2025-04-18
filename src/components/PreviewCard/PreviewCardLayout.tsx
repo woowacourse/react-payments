@@ -5,7 +5,8 @@ import PreviewCardNumber from "./PreviewCardNumber";
 interface PreviewCardLayoutProps {
   cardNumbers: string[];
   cardExpirationDate: string[];
-  cardType: string;
+  // cardType: string;
+  cardType: "visa" | "master";
 }
 
 export default function PreviewCardLayout({

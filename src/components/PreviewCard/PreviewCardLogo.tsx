@@ -10,11 +10,7 @@ export default function PreviewCardLogo({
   cardType = DEFAULT_CARD_TYPE,
 }: PreviewCardLogoProps) {
   return (
-    <img
-      className={styles["card-logo"]}
-      src={cardLogoImagePath(cardType)}
-      alt="card-logo"
-    />
+    <img className={styles["card-logo"]} src={cardLogoImagePath(cardType)} />
   );
 }
 
