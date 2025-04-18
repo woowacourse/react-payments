@@ -12,7 +12,9 @@ const useControlledExpireDate = () => {
     if (value.length > 2) {
       return;
     }
-
+    if (isNaN(Number(value))) {
+      return;
+    }
     setExpireDate((prevState) => ({
       ...prevState,
       MM: {

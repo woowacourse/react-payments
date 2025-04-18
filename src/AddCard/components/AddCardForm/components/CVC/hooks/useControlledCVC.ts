@@ -10,6 +10,9 @@ const useControlledCVC = () => {
     if (value.length > 3) {
       return;
     }
+    if (isNaN(Number(value))) {
+      return;
+    }
 
     const isValidLength = value.length === 0 || value.length === 3;
     const isValid = isNaN(Number(value)) || !isValidLength;
