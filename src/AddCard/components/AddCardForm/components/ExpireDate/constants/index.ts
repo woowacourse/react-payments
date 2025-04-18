@@ -12,6 +12,10 @@ export const INITIAL_EXPIRE_DATE_STATE = {
   YY: { value: "", errorMessage: "" },
 } as const;
 
-export const EXPIRE_DATE_KEYS = Object.keys(
-  INITIAL_EXPIRE_DATE_STATE
-) as ExpireDateInputKey[];
+function isExpireKey(k: string): k is ExpireDateInputKey {
+  return k in INITIAL_EXPIRE_DATE_STATE;
+}
+
+export const EXPIRE_DATE_KEYS = Object.keys(INITIAL_EXPIRE_DATE_STATE).filter(
+  isExpireKey
+);
