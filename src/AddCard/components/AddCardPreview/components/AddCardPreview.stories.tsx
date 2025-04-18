@@ -33,3 +33,31 @@ export const FilledCard: Story = {
     },
   },
 };
+export const VisaCard: Story = {
+  args: {
+    cardNumberState: {
+      first: { value: "4234", errorMessage: "" },
+      second: { value: "1234", errorMessage: "" },
+      third: { value: "1234", errorMessage: "" },
+      fourth: { value: "1234", errorMessage: "" },
+    },
+    expireDate: {
+      MM: { value: "12", errorMessage: "" },
+      YY: { value: "25", errorMessage: "" },
+    },
+  },
+};
+export const MasterCard: Story = {
+  args: {
+    cardNumberState: {
+      first: { value: "5134", errorMessage: "" },
+      second: { value: "1234", errorMessage: "" },
+      third: { value: "1234", errorMessage: "" },
+      fourth: { value: "1234", errorMessage: "" },
+    },
+    expireDate: {
+      MM: { value: "12", errorMessage: "" },
+      YY: { value: "25", errorMessage: "" },
+    },
+  },
+};
