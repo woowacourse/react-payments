@@ -15,7 +15,11 @@ export default function Card({
         <div className={styles.chip} />
 
         {cardLogo === '' ? null : (
-          <img className={styles.cardLogo} src={cardLogo === 'visa' ? 'images/visa.jpg' : 'images/mastercard.jpg'} />
+          <img
+            className={styles.cardLogo}
+            src={cardLogo === 'visa' ? 'images/visa.jpg' : 'images/mastercard.jpg'}
+            alt={cardLogo === 'visa' ? 'visa logo' : 'mastercard logo'}
+          />
         )}
       </div>
       <div className={styles.numberWrapper}>
