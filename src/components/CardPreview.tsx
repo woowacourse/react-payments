@@ -4,7 +4,7 @@ import VisaCard from './logo/VisaCard';
 import { MASKING } from '../constants';
 
 interface CardPreviewProps {
-  cardType: 'visa' | 'master' | '';
+  cardType: 'visa' | 'master' | 'etc' | '';
   cardNumber: Record<string, string>;
   cardExpirationDate: Record<string, string>;
 }
@@ -16,6 +16,7 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
         <S.ICChip />
         {cardType === 'visa' && <VisaCard width={36} />}
         {cardType === 'master' && <MasterCard width={36} />}
+        {cardType === 'etc' && <span>Other Card</span>}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
         <span>{cardNumber.first}</span>

@@ -1,19 +1,18 @@
+import { useState } from 'react';
 import './App.css';
 import * as S from './App.styles';
-import CardNumber from './components/CardNumber';
-import CardExpirationDate from './components/CardExpirationDate';
 import CardCVCNumber from './components/CardCVCNumber';
+import CardExpirationDate, { DateType } from './components/CardExpirationDate';
+import CardNumber, { SequenceType } from './components/CardNumber';
 import CardPreview from './components/CardPreview';
 import Spacing from './components/common/Spacing';
-import { useState } from 'react';
-import { SequenceType } from './components/CardNumber';
-import { DateType } from './components/CardExpirationDate';
-import { VISA_CARD_CONDITIONS, MASTER_CARD_CONDITIONS } from './constants';
+import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from './constants';
+import { CardType } from './types';
 
-export const getCardType = (cardNumberFirst: string) => {
+export const getCardType = (cardNumberFirst: string): CardType => {
   if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
   if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master';
-  return '';
+  return 'etc';
 };
 
 function App() {
