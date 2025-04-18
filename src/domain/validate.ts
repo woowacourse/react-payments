@@ -3,39 +3,32 @@ import CustomCardNumbersError from '../error/CustomCardNumbersError';
 import { CARD_VALIDATION_INFO } from '../constants/CardValidationInfo.ts';
 
 const isNumber = (number: string) => {
-  if (isNaN(Number(number))) return false;
-  return true;
+  return isNaN(Number(number));
 };
 
 const numberLength = (number: string, length: number) => {
-  if (number.length !== length) return false;
-  return true;
+  return number.length !== length;
 };
 
 const invalidCardNumber = (number: string) => {
-  if (
+  return (
     Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
     (Number(number.slice(0, 2)) <
       CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER ||
       Number(number.slice(0, 2)) >
         CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER)
-  )
-    return false;
-  return true;
+  );
 };
 
 const invalidMonth = (month: string) => {
-  if (
+  return (
     Number(month) < CARD_VALIDATION_INFO.MIN_VALID_MONTH ||
     Number(month) > CARD_VALIDATION_INFO.MAX_VALID_MONTH
-  )
-    return false;
-  return true;
+  );
 };
 
 const invalidYear = (year: string) => {
-  if (Number(year) < CARD_VALIDATION_INFO.MIN_VALID_YEAR) return false;
-  return true;
+  return Number(year) < CARD_VALIDATION_INFO.MIN_VALID_YEAR;
 };
 
 export const validateCardNumbers = (number: string[], length: number) => {
