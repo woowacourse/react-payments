@@ -33,6 +33,7 @@
 .helperText {
   color: red;
   font-size: 15px;
+  min-height: 20px;
 }
 
 .errorInput:focus {
