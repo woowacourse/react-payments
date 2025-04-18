@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import * as S from './App.styles';
 import CardCVCNumber from './components/CardCVCNumber';
 import CardExpirationDate, { DateType } from './components/CardExpirationDate';
@@ -8,6 +7,8 @@ import CardPreview from './components/CardPreview';
 import Spacing from './components/common/Spacing';
 import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from './constants';
 import { CardType } from './types';
+import { Global } from '@emotion/react';
+import reset from './styles/reset';
 
 export const getCardType = (cardNumberFirst: string): CardType => {
   if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
@@ -47,6 +48,7 @@ function App() {
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
+      <Global styles={reset} />
       <S.CardPreviewWrapper>
         <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
       </S.CardPreviewWrapper>
