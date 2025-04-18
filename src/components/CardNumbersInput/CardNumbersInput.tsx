@@ -22,36 +22,35 @@ const CardNumbersInput = ({
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
 
-  const handleChange =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      try {
-        const newCardNumbers = [...cardNumbers];
-        newCardNumbers[index] = e.target.value;
-        setCardNumbers(newCardNumbers);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    try {
+      const newCardNumbers = [...cardNumbers];
+      newCardNumbers[index] = e.target.value;
+      setCardNumbers(newCardNumbers);
 
-        validateFirstCardNumbers(newCardNumbers[0]);
-        validateCardNumbers(
-          newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH
-        );
-        if (helperText !== '') {
-          inputRefs.current[index]?.focus();
-        }
-        setHelperText('');
-        setErrorIndex(null);
-      } catch (error: unknown) {
-        if (error instanceof CustomCardNumbersError) {
-          if (error.message === ERROR.CARD_NUMBER.INVALID) {
-            inputRefs.current[0]?.focus();
-            setErrorIndex(0);
-          } else {
-            inputRefs.current[error.index]?.focus();
-            setErrorIndex(error.index);
-          }
-          setHelperText(error.message);
-        }
+      validateFirstCardNumbers(newCardNumbers[0]);
+      validateCardNumbers(newCardNumbers, CARD_VALIDATION_INFO.CARD_MAX_LENGTH);
+      if (helperText !== '') {
+        inputRefs.current[index]?.focus();
       }
-    };
+      setHelperText('');
+      setErrorIndex(null);
+    } catch (error: unknown) {
+      if (error instanceof CustomCardNumbersError) {
+        if (error.message === ERROR.CARD_NUMBER.INVALID) {
+          inputRefs.current[0]?.focus();
+          setErrorIndex(0);
+        } else {
+          inputRefs.current[error.index]?.focus();
+          setErrorIndex(error.index);
+        }
+        setHelperText(error.message);
+      }
+    }
+  };
 
   return (
     <InputContainer
@@ -66,7 +65,7 @@ const CardNumbersInput = ({
             placeholder="1234"
             name={`card${index + 1}`}
             value={value}
-            onChange={handleChange(index)}
+            onChange={(e) => handleChange(e, index)}
             ref={(element) => {
               inputRefs.current.push(element);
             }}
