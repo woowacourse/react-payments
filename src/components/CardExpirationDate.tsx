@@ -6,6 +6,7 @@ import Spacing from './common/Spacing';
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
+import { DateType } from '../types';
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
@@ -13,8 +14,6 @@ interface CardExpirationDateProps {
   cardExpirationDateErrorMessage: Record<DateType, string>;
   setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>;
 }
-
-export type DateType = 'month' | 'year';
 
 interface HandleInputChangeProps {
   dateType: string;

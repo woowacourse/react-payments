@@ -2,11 +2,12 @@ import * as S from './CardPreview.styles';
 import MasterCard from './logo/MasterCard';
 import VisaCard from './logo/VisaCard';
 import { MASKING } from '../constants';
+import { CardType, SequenceType, DateType } from '../types';
 
 interface CardPreviewProps {
-  cardType: 'visa' | 'master' | 'etc' | '';
-  cardNumber: Record<string, string>;
-  cardExpirationDate: Record<string, string>;
+  cardType: CardType;
+  cardNumber: Record<SequenceType, string>;
+  cardExpirationDate: Record<DateType, string>;
 }
 
 export default function CardPreview({ cardType, cardNumber, cardExpirationDate }: CardPreviewProps) {

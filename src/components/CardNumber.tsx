@@ -6,6 +6,7 @@ import Spacing from './common/Spacing';
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
+import { SequenceType } from '../types';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
@@ -13,8 +14,6 @@ interface CardNumberProps {
   cardNumberErrorMessage: Record<SequenceType, string>;
   setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>;
 }
-
-export type SequenceType = 'first' | 'second' | 'third' | 'fourth';
 
 interface HandleInputChangeProps {
   sequence: SequenceType;
