@@ -1,3 +1,5 @@
+import React from "react";
+
 export function replaceAt<T>({
   array,
   newValue,
@@ -7,7 +9,7 @@ export function replaceAt<T>({
   array: T[];
   newValue: T;
   index: number;
-  setState: (newArray: T[]) => void;
+  setState: React.Dispatch<React.SetStateAction<T[]>>;
 }) {
   const newArray = [...array];
   newArray[index] = newValue;
