@@ -17,7 +17,7 @@ interface CardNumberProps {
 export type SequenceType = 'first' | 'second' | 'third' | 'fourth';
 
 interface HandleInputChangeProps {
-  sequence: string;
+  sequence: SequenceType;
   value: string;
 }
 
