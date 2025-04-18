@@ -24,7 +24,7 @@ export const Error: Story = {
   args: {
     cardNumberState: {
       ...INITIAL_CARD_NUMBER_STATE,
-      first: { value: "123", isError: true },
+      first: { value: "123", errorMessage: "4자리의 숫자만 입력 가능합니다." },
     },
   },
 };
@@ -49,7 +49,7 @@ export const WithValidationTest: Story = {
     expect(inputElement.value).toBe("321");
 
     const errorMessageEl = canvasElement.querySelector(
-      "#error-message"
+      "#card-number-error-message"
     ) as HTMLParagraphElement;
     expect(errorMessageEl.textContent).toBe("4자리의 숫자만 입력 가능합니다.");
   },

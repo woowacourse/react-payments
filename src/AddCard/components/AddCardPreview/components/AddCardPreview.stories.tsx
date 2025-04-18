@@ -22,10 +22,10 @@ export const Default: Story = {};
 export const FilledCard: Story = {
   args: {
     cardNumberState: {
-      first: { value: "1234", isError: false },
-      second: { value: "1234", isError: false },
-      third: { value: "1234", isError: false },
-      fourth: { value: "1234", isError: false },
+      first: { value: "1234", errorMessage: "" },
+      second: { value: "1234", errorMessage: "" },
+      third: { value: "1234", errorMessage: "" },
+      fourth: { value: "1234", errorMessage: "" },
     },
     expireDate: {
       MM: { value: "12", errorMessage: "" },

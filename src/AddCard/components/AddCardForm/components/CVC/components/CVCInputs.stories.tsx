@@ -37,6 +37,8 @@ export const WithValidationTest: Story = {
     const errorMessageEl = canvasElement.querySelector(
       "#error-message"
     ) as HTMLParagraphElement;
-    expect(errorMessageEl.textContent).toBe("3자리의 숫자만 입력 가능합니다.");
+    expect(errorMessageEl.textContent).toBe(
+      "CVC는 3자리의 숫자만 입력 가능합니다."
+    );
   },
 };
