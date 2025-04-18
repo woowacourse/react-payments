@@ -12,7 +12,7 @@ const numberLength = (number: string, length: number) => {
   return true;
 };
 
-const invalidNumber = (number: string) => {
+const invalidCardNumber = (number: string) => {
   if (
     Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
     (Number(number.slice(0, 2)) <
@@ -53,7 +53,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
 };
 
 export const validateFirstCardNumbers = (number: string) => {
-  if (!invalidNumber(number))
+  if (!invalidCardNumber(number))
     throw new CustomCardNumbersError(ERROR.CARD_NUMBER.INVALID, 0);
 };
 
