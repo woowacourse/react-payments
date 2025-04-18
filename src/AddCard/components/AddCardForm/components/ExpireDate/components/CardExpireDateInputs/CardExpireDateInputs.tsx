@@ -26,7 +26,7 @@ function CardExpireDateInputs({
     <div className={styles.container}>
       <div className={styles.expireDateInputContainer}>
         {EXPIRE_DATE_KEYS.map((expireKey, idx) => (
-          <div className={styles.expireDateBox}>
+          <div className={styles.expireDateBox} key={expireKey}>
             <p className={styles.expireDateInputBox}>
               <Label htmlFor={`expire-${expireKey}-input`} isHidden={idx !== 0}>
                 유효 기간
