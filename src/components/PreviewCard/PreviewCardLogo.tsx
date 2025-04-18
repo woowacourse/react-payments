@@ -4,7 +4,7 @@ interface PreviewCardLogoProps {
   cardType?: string;
 }
 
-const DEFAULT_CARD_TYPE = "default" as const;
+const DEFAULT_CARD_TYPE = "default";
 
 export default function PreviewCardLogo({
   cardType = DEFAULT_CARD_TYPE,

@@ -7,8 +7,8 @@ type InputNumberProps = {
   errorMessage?: string;
 };
 
-const DEFAULT_PLACEHOLDER = "1234" as const;
-const DEFAULT_ERROR_MESSAGE = "" as const;
+const DEFAULT_PLACEHOLDER = "1234";
+const DEFAULT_ERROR_MESSAGE = "";
 
 export default function InputNumber({
   value,
