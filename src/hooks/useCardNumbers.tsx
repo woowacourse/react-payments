@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber, isValidLength } from "../validation/validate";
+import { isValidLength } from "../validation/validate";
 import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_CARD_NUMBER = {

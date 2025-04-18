@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber, isValidLength, isValidMonth } from "../validation/validate";
+import { isValidLength, isValidMonth } from "../validation/validate";
 import { replaceAt } from "../utils/setErrorMessage";
 
 const CONSTANT_USE_EXPIRATION_DATE = {
