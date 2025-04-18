@@ -3,7 +3,7 @@ import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
 import type { CardNumberInputKey, CardNumberState } from "../../types";
-import { CARD_NUMBER_INPUT_KEYS, CARD_NUMBER_LENGTH } from "../../constants";
+import { CARD_NUMBER_LENGTH, CARD_NUMBER_INPUT_KEYS } from "../../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
