@@ -22,11 +22,7 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
       <S.CardPreviewMiddle>
         <span>{cardNumber.first}</span>
         <span>{cardNumber.second}</span>
-        <span>
-          {Array.from({ length: cardNumber.third.length }, () => {
-            return MASKING;
-          })}
-        </span>
+        <span>{Array.from({ length: cardNumber.third.length }, () => MASKING)}</span>
         <span>
           {Array.from({ length: cardNumber.fourth.length }, () => {
             return MASKING;
