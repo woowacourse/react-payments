@@ -1,7 +1,12 @@
 import { useCallback, useState } from "react";
 
+interface CVCState {
+  value: string;
+  isError: boolean;
+}
+
 const useControlledCVC = () => {
-  const [CVCState, setCVCState] = useState({
+  const [CVCState, setCVCState] = useState<CVCState>({
     value: "",
     isError: false,
   });
