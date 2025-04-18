@@ -3,7 +3,6 @@ import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 import { EXPIRE_DATE_KEYS } from "../../constants";
 import type { ExpireDateState } from "../../types";
-import { Fragment } from "react/jsx-runtime";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
