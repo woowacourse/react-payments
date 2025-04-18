@@ -4,7 +4,7 @@ import Label from "@components/Label/Label";
 import { CVC_INPUT_LENGTH } from "../constants";
 
 export interface CVCInputsProps {
-  CVCState: { value: string; isError: boolean };
+  CVCState: { value: string; errorMessage: string };
   handleCVCChange: (value: string) => void;
 }
 
@@ -18,14 +18,14 @@ function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
           type="text"
           maxLength={CVC_INPUT_LENGTH}
           placeholder="123"
-          isError={CVCState.isError}
+          isError={Boolean(CVCState.errorMessage)}
           value={CVCState.value}
           onChange={(e) => handleCVCChange(e.target.value)}
         />
       </p>
-      {CVCState.isError && (
+      {CVCState.errorMessage && (
         <p id="error-message" className={styles.errorMessage}>
-          3자리의 숫자만 입력 가능합니다.
+          {CVCState.errorMessage}
         </p>
       )}
     </div>

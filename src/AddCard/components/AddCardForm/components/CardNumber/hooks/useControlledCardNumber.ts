@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { isNaN } from "../../../../../../utils/isNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
 import { CARD_NUMBER_LENGTH, INITIAL_CARD_NUMBER_STATE } from "../constants";
+import { validateCardNumber } from "../validation";
 
 const useControlledCardNumber = () => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
@@ -21,19 +22,17 @@ const useControlledCardNumber = () => {
           ...prev,
           [key]: {
             ...prev[key],
-            isError: true,
+            errorMessage: validateCardNumber(value),
           },
         }));
         return;
       }
 
-      // 숫자일 때: 정상 길이인지 검사
-      const isValidLength = value.length === 0 || value.length === 4;
       setCardNumberState((prev) => ({
         ...prev,
         [key]: {
-          value, // 새로운 숫자값
-          isError: !isValidLength,
+          value,
+          errorMessage: validateCardNumber(value),
         },
       }));
     },

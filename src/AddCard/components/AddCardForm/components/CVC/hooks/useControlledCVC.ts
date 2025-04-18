@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react";
 import { CVC_INPUT_LENGTH } from "../constants";
+import { validateCVCNumber } from "../validation";
 
 const useControlledCVC = () => {
   const [CVCState, setCVCState] = useState({
     value: "",
-    isError: false,
+    errorMessage: "",
   });
 
   const handleCVCChange = useCallback((value: string) => {
@@ -12,20 +13,18 @@ const useControlledCVC = () => {
       return;
     }
     const numeric = Number(value);
+
     if (isNaN(numeric)) {
       setCVCState((prevState) => ({
         ...prevState,
-        isError: true,
+        errorMessage: validateCVCNumber(value),
       }));
       return;
     }
 
-    const isValidLength = value.length === 0 || value.length === 3;
-    const isValid = isNaN(Number(value)) || !isValidLength;
-    setCVCState((prevState) => ({
-      ...prevState,
+    setCVCState(() => ({
       value,
-      isError: isValid,
+      errorMessage: validateCVCNumber(value),
     }));
   }, []);
 
