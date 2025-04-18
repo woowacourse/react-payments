@@ -8,7 +8,7 @@ import Spacing from './components/common/Spacing';
 import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from './constants';
 import { CardType } from './types';
 import { Global } from '@emotion/react';
-import reset from './styles/reset';
+import global from './styles/global';
 
 export const getCardType = (cardNumberFirst: string): CardType => {
   if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
@@ -48,7 +48,7 @@ function App() {
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
-      <Global styles={reset} />
+      <Global styles={global} />
       <S.CardPreviewWrapper>
         <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
       </S.CardPreviewWrapper>

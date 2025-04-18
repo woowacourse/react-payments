@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
-const reset = css`
+const global = css`
+  /** Reset */
   * {
     html,
     body,
@@ -127,18 +128,13 @@ const reset = css`
       border-collapse: collapse;
       border-spacing: 0;
     }
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+  }
 
-    /* Firefox  */
-    input[type='number'] {
-      -moz-appearance: textfield;
-    }
+  /** Reset */
+  /* Firefox  */
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 `;
 
-export default reset;
+export default global;
