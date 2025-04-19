@@ -17,6 +17,7 @@ const InputField = ({
     <input
       value={value}
       onChange={(event) => onChange(event.target.value)}
+      onBlur={(event) => onChange(event.target.value)}
       className={`${styles.input} ${isError ? styles.error : styles.basic}`}
       placeholder={placeholder}
     />
