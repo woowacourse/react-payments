@@ -1,4 +1,3 @@
-import './App.css';
 import PaymentInputPage from './components/paymentInputPage/PaymentInputPage';
 function App() {
   return (
