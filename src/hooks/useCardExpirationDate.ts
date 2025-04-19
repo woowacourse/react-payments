@@ -1,8 +1,11 @@
 import { useState } from "react";
+
 import useError from "./useError";
-import isValidStringLength from "./validate/isValidStringLength";
+
 import isNumber from "./validate/isNumber";
-import isValidNumberRange from "./validate/isValidNumberRange";
+import isValidStringLength from "./validate/isValidStringLength";
+import { validateMonth, validateYear } from "./validate/validateDate";
+
 import CardExpirationDate from "../types/CardExpirationDate";
 import {
   CardExpirationDateKeys,
@@ -22,13 +25,13 @@ const INITIAL_IS_ERROR: IsError = {
 
 const useCardExpirationDate = (): CardExpirationDateOptions => {
   const [cardExpirationDate, setCardExpirationDate] = useState(
-    INITIAL_CARD_EXPIRATION_DATE,
+    INITIAL_CARD_EXPIRATION_DATE
   );
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardExpirationDateValidationResult = (
     target: CardExpirationDateKeys,
-    input: string,
+    input: string
   ) => {
     if (input.length === 1 && !isNumber(input))
       return { isError: true, errorMessage: "숫자만 입력 가능합니다" };
@@ -44,40 +47,17 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     }
 
     if (target === "month") {
-      if (!isValidNumberRange({ value: Number(input), min: 1, max: 12 })) {
-        return {
-          isError: true,
-          errorMessage: "01 ~ 12 사이의 숫자만 입력 가능합니다",
-        };
-      }
-
-      if (Number(cardExpirationDate.year) === new Date().getFullYear() % 100) {
-        if (Number(input) < Math.floor(new Date().getMonth() + 1)) {
-          return { isError: true, errorMessage: "유효기간이 지났습니다" };
-        }
-      }
+      return validateMonth({
+        month: Number(input),
+        year: Number(cardExpirationDate.year),
+      });
     }
 
     if (target === "year") {
-      if (!isValidNumberRange({ value: Number(input), min: 0, max: 99 })) {
-        return {
-          isError: true,
-          errorMessage: "00 ~ 99 사이의 숫자만 입력 가능합니다",
-        };
-      }
-
-      if (Number(input) < Math.floor(new Date().getFullYear() % 100)) {
-        return { isError: true, errorMessage: "유효기간이 지났습니다" };
-      }
-
-      if (Number(input) === Math.floor(new Date().getFullYear() % 100)) {
-        if (
-          cardExpirationDate.month !== "" &&
-          Number(cardExpirationDate.month) < new Date().getMonth() + 1
-        ) {
-          return { isError: true, errorMessage: "유효기간이 지났습니다" };
-        }
-      }
+      return validateYear({
+        month: Number(cardExpirationDate.month),
+        year: Number(input),
+      });
     }
 
     return { isError: false, errorMessage: "" };
@@ -87,7 +67,7 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     (target: CardExpirationDateKeys) => (value: string) => {
       const { isError, errorMessage } = getCardExpirationDateValidationResult(
         target,
-        value.trim(),
+        value.trim()
       );
       if (isError) {
         setErrorField(target, errorMessage);
