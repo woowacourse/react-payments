@@ -18,7 +18,7 @@ interface CardExpirationDateProps {
 export type DateType = 'month' | 'year';
 
 interface HandleInputChangeProps {
-  dateType: string;
+  dateType: DateType;
   value: string;
 }
 
