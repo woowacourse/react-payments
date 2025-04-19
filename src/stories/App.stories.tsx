@@ -5,6 +5,11 @@ const meta = {
   title: 'App',
   component: App,
   tags: ['autodocs'],
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile2',
+    },
+  },
 } satisfies Meta<typeof App>;
 
 export default meta;

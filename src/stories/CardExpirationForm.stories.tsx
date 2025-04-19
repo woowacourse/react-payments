@@ -6,6 +6,11 @@ const meta = {
   title: 'CardExpirationForm',
   component: CardExpirationForm,
   tags: ['autodocs'],
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile2',
+    },
+  },
 } satisfies Meta<typeof CardExpirationForm>;
 
 export default meta;

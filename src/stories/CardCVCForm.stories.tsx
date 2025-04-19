@@ -6,6 +6,11 @@ const meta = {
   title: 'CardCVCForm',
   component: CardCVCForm,
   tags: ['autodocs'],
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile2',
+    },
+  },
 } satisfies Meta<typeof CardCVCForm>;
 
 export default meta;
