@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import CardCVCForm from '../components/CardCVCForm';
+import CardCVCForm from '../components/domain/CardCVCForm';
 import useCardInfo from '../hooks/useCardInfo';
 
 const meta = {

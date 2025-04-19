@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import isZeroOrExactLength from '../utils/isExactLength';
+import isZeroOrExactLength from '../../utils/isExactLength';
 
 interface NumberInputProps {
   value: string;

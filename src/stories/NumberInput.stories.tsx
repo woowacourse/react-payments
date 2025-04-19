@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import NumberInput from '../components/NumberInput';
+import NumberInput from '../components/common/NumberInput';
 import { useState } from 'react';
 
 const meta = {

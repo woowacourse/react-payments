@@ -1,8 +1,8 @@
-import Announcement from './components/Announcement';
-import Card from './components/Card';
-import CardNumberForm from './components/CardNumberForm';
-import CardExpirationForm from './components/CardExpirationForm';
-import CardCVCForm from './components/CardCVCForm';
+import Announcement from './components/common/Announcement';
+import Card from './components/domain/Card';
+import CardNumberForm from './components/domain/CardNumberForm';
+import CardExpirationForm from './components/domain/CardExpirationForm';
+import CardCVCForm from './components/domain/CardCVCForm';
 import styled from '@emotion/styled';
 import useCardInfo from './hooks/useCardInfo';
 import { CARD_NUMBER_MESSAGE, CVC_MESSAGE, EXPIRATION_MESSAGE } from './constants/guide';

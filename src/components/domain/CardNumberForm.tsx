@@ -1,8 +1,13 @@
-import NumberInput from './NumberInput';
+import NumberInput from '../common/NumberInput';
 import { useState, useEffect } from 'react';
-import isZeroOrExactLength from '../utils/isExactLength';
-import { ERROR_MESSAGE } from '../constants/guide';
-import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
+import isZeroOrExactLength from '../../utils/isExactLength';
+import { ERROR_MESSAGE } from '../../constants/guide';
+import {
+  NumberInputForm,
+  Label,
+  NumberInputContainer,
+  ErrorText,
+} from '../../styles/CardForm.styles';
 
 interface CardNumberFormProps {
   cardInfo: CardInfo;

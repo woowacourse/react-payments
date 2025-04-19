@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CARD_TYPE_PATH, VISA_CARD_PREFIXES, MASTER_CARD_PREFIXES } from '../constants/setting';
+import { CARD_TYPE_PATH, VISA_CARD_PREFIXES, MASTER_CARD_PREFIXES } from '../../constants/setting';
 
 interface CardProps {
   cardNumber: string[];

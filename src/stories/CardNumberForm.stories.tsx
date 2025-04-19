@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import CardNumberForm from '../components/CardNumberForm';
+import CardNumberForm from '../components/domain/CardNumberForm';
 import useCardInfo from '../hooks/useCardInfo';
 
 const meta = {
