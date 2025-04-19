@@ -14,3 +14,14 @@ export const CARD_INFO_LENGTH = {
   EXPIRATION: 2,
   CVC: 3,
 };
+
+export const EXPIRATION_DATE = {
+  MONTH: {
+    MIN: 1,
+    MAX: 12,
+  },
+  YEAR: {
+    MIN: 25,
+    MAX: 99,
+  },
+};

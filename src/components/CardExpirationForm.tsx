@@ -8,6 +8,7 @@ import {
   NumberInputContainer,
   ErrorText,
 } from "../styles/CardForm.styles";
+import { EXPIRATION_DATE } from "../constants/setting";
 
 interface CardExpirationFormProps {
   cardInfo: {
@@ -29,9 +30,11 @@ function CardExpirationForm({
   const [errorText, setErrorText] = useState("");
 
   const isValidMonth =
-    Number(cardInfo.month) >= 1 && Number(cardInfo.month) <= 12;
+    Number(cardInfo.month) >= EXPIRATION_DATE.MONTH.MIN &&
+    Number(cardInfo.month) <= EXPIRATION_DATE.MONTH.MAX;
   const isValidYear =
-    Number(cardInfo.year) >= 25 && Number(cardInfo.year) <= 99;
+    Number(cardInfo.year) >= EXPIRATION_DATE.YEAR.MIN &&
+    Number(cardInfo.year) <= EXPIRATION_DATE.YEAR.MAX;
 
   useEffect(() => {
     const isExactDigits = [cardInfo.month, cardInfo.year].some((number) => {
