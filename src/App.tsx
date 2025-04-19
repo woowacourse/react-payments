@@ -20,7 +20,8 @@ function App() {
           cardInfo.thirdNumber,
           cardInfo.fourthNumber,
         ]}
-        expiration={[cardInfo.month, cardInfo.year]}></Card>
+        expiration={[cardInfo.month, cardInfo.year]}
+      />
       <div>
         <Announcement main={CARD_NUMBER_MESSAGE.main} caption={CARD_NUMBER_MESSAGE.caption} />
         <CardNumberForm
