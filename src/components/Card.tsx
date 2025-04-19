@@ -20,7 +20,7 @@ const Card = ({ cardNumber, expiration }: CardProps) => {
     <CardContainer>
       <CardHeader>
         <CardIC />
-        {cardType !== 'None' && <CardType src={CARD_TYPE_PATH[cardType]} />}
+        {cardType !== 'None' && <CardType src={CARD_TYPE_PATH[cardType]} alt={cardType} />}
       </CardHeader>
 
       <CardInfo>
