@@ -3,17 +3,29 @@ import { useState } from "react";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import ArrowIcon from "../ArrowIcon/ArrowIcon";
 
-interface DropdownProps {
-  dropdownList: string[];
-  buttonText: string;
+interface DropdownProps<T> {
+  selectedValue: T | null;
+  defaultValue: string;
+  dropdownList: T[] | readonly T[];
+  onChange: (value: T) => void;
 }
 
-function Dropdown({ dropdownList, buttonText }: DropdownProps) {
+function Dropdown<T extends string>({
+  selectedValue,
+  defaultValue,
+  dropdownList,
+  onChange,
+}: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
 
   const handleDropdownToggle = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleDropdownItemClick = (item: T) => {
+    onChange(item);
+    setIsOpen(false);
   };
 
   return (
@@ -22,9 +34,10 @@ function Dropdown({ dropdownList, buttonText }: DropdownProps) {
       <button
         type="button"
         onClick={handleDropdownToggle}
-        className={`${styles.button} ${isOpen ? styles.activeButton : ""}`}
+        className={`${styles.button} ${isOpen ? styles.activeButton : ""} 
+        ${selectedValue ? styles.textBlack : ""}`}
       >
-        {buttonText}
+        {selectedValue ?? defaultValue}
         {isOpen ? (
           <ArrowIcon direction="up" color="#000" />
         ) : (
@@ -33,9 +46,13 @@ function Dropdown({ dropdownList, buttonText }: DropdownProps) {
       </button>
       {isOpen && (
         <ul className={styles.dropdownList}>
-          {dropdownList.map((text) => (
-            <li key={text} className={styles.dropdownListItem}>
-              {text}
+          {dropdownList.map((item) => (
+            <li
+              key={item}
+              className={styles.dropdownListItem}
+              onClick={() => handleDropdownItemClick(item)}
+            >
+              {item}
             </li>
           ))}
         </ul>

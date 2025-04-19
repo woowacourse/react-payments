@@ -26,6 +26,10 @@
   padding: 0.5rem;
 }
 
+.textBlack {
+  color: #000;
+}
+
 .activeButton {
   border: 1px solid #000;
 }

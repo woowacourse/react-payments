@@ -7,9 +7,13 @@ import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
 } from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
 import CVCInputs, { type CVCInputsProps } from "./CVC/components/CVCInputs";
+import CardTypeDropdown, {
+  CardTypeDropdownProps,
+} from "./CardType/components/CardTypeDropdown";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
+    CardTypeDropdownProps &
     CardExpireDateInputsProps &
     CVCInputsProps;
 }
@@ -18,6 +22,8 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
   const {
     cardNumberState,
     handleCardNumberChange,
+    cardType,
+    handleCardTypeChange,
     expireDate,
     handleExpireMonthChange,
     handleExpireYearChange,
@@ -35,6 +41,16 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
           <CardNumberInputs
             cardNumberState={cardNumberState}
             handleCardNumberChange={handleCardNumberChange}
+          />
+        }
+      />
+      <CardInputBox
+        title="카드사를 선택해 주세요"
+        guideText="현재 국내 카드사만 가능합니다."
+        InputComponent={
+          <CardTypeDropdown
+            cardType={cardType}
+            handleCardTypeChange={handleCardTypeChange}
           />
         }
       />
