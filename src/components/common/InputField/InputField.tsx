@@ -1,8 +1,8 @@
-import styles from './inputField.module.css';
+import styles from "./inputField.module.css";
 
 type InputFieldProps = {
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   isError?: boolean;
   placeholder: string;
 };
@@ -16,7 +16,7 @@ const InputField = ({
   return (
     <input
       value={value}
-      onChange={onChange}
+      onChange={(event) => onChange(event.target.value)}
       className={`${styles.input} ${isError ? styles.error : styles.basic}`}
       placeholder={placeholder}
     />

@@ -5,7 +5,7 @@ import isValidStringLength from "./validate/isValidStringLength";
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
-  setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardCVCNumberChange: (value: string) => void;
   isError: IsError;
   errorMessage: string;
 };
@@ -33,23 +33,21 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     return { isError: false, errorMessage: "" };
   };
 
-  const handleCardCVCNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleCardCVCNumberChange = (value: string) => {
     const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
-      event.target.value.trim()
+      value.trim()
     );
     if (isError) {
       setErrorField("cvcNumber", errorMessage);
       return;
     }
     clearError("cvcNumber");
-    setCardCVCNumber(event.target.value.trim());
+    setCardCVCNumber(value.trim());
   };
 
   return {
     cardCVCNumber: cardCVCNumber,
-    setCardCVCNumber: handleCardCVCNumberChange,
+    handleCardCVCNumberChange,
     isError: error.isError,
     errorMessage: error.errorMessage,
   };
