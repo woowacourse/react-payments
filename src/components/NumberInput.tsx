@@ -33,17 +33,16 @@ function NumberInput({
   }, [value]);
 
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
-    const numericRegex = /^[0-9]*$/;
+    const isNumeric = /^[0-9]*$/.test(e.target.value);
 
-    if (!numericRegex.test(e.target.value)) {
-      e.target.value = value;
-      return;
+    if (isNumeric) {
+      setValue(e.target.value);
     }
-    setValue(e.target.value);
   }
 
   return (
     <Input
+      value={value}
       maxLength={maxLength}
       placeholder={placeholder}
       isError={isError}
