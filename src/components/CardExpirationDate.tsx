@@ -5,7 +5,7 @@ import Input from './common/Input';
 import Spacing from './common/Spacing';
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE } from '../constants';
+import { ERROR_MESSAGE, MAX_VALID_MONTH, MIN_VALID_MONTH, ONLY_NUMBER_PATTERN } from '../constants';
 import { getFirstErrorMessage } from '../utils';
 
 interface CardExpirationDateProps {
@@ -37,7 +37,7 @@ export default function CardExpirationDate({
       [dateType]: '',
     });
 
-    if (!/^[0-9]*$/.test(value)) {
+    if (!ONLY_NUMBER_PATTERN.test(value)) {
       setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber });
       return;
     }
@@ -45,7 +45,7 @@ export default function CardExpirationDate({
     const valueAsNumber = parseInt(value, 10);
 
     if (dateType === 'month') {
-      if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
+      if (valueAsNumber < MIN_VALID_MONTH || valueAsNumber > MAX_VALID_MONTH) {
         setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
       }
 

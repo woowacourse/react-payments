@@ -2,10 +2,9 @@ import Title from './common/Title';
 import Label from './common/Label';
 import Input from './common/Input';
 import Spacing from './common/Spacing';
-
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE } from '../constants';
+import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../constants';
 
 interface CardCVCNumberProps {
   cardCVCNumber: string;
@@ -23,7 +22,7 @@ export default function CardCVCNumber({
   const handleInputChange = (value: string) => {
     setCardCVCNumber(value);
 
-    if (/^[0-9]*$/.test(value)) {
+    if (ONLY_NUMBER_PATTERN.test(value)) {
       setCardCVCNumberErrorMessage('');
       return;
     }
