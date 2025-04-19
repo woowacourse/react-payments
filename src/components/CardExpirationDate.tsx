@@ -27,6 +27,8 @@ export default function CardExpirationDate({
   cardExpirationDateErrorMessage,
   setCardExpirationDateErrorMessage,
 }: CardExpirationDateProps) {
+  const CardExpirationDateInputTypes: DateType[] = ['month', 'year'];
+
   const handleInputChange = ({ value, dateType }: HandleInputChangeProps) => {
     setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
     setCardExpirationDateErrorMessage({
@@ -84,33 +86,23 @@ export default function CardExpirationDate({
       <Label id="card-expiration-date">유효기간</Label>
       <Spacing size={8} />
       <S.InputWrapper>
-        <Input
-          type="text"
-          placeholder="MM"
-          maxLength={2}
-          id="card-expiration-date"
-          value={cardExpirationDate.month}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              dateType: 'month',
-            })
-          }
-          isError={cardExpirationDateErrorMessage.month !== ''}
-        />
-        <Input
-          type="text"
-          placeholder="YY"
-          maxLength={2}
-          value={cardExpirationDate.year}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              dateType: 'year',
-            })
-          }
-          isError={cardExpirationDateErrorMessage.year !== ''}
-        />
+        {CardExpirationDateInputTypes.map((dateType, index) => (
+          <Input
+            key={index}
+            type="text"
+            placeholder={dateType === 'month' ? 'MM' : 'YY'}
+            maxLength={2}
+            id={index === 0 ? 'card-expiration-date' : undefined}
+            value={cardExpirationDate[dateType]}
+            onChange={(event) =>
+              handleInputChange({
+                value: event.target.value,
+                dateType,
+              })
+            }
+            isError={cardExpirationDateErrorMessage[dateType] !== ''}
+          />
+        ))}
       </S.InputWrapper>
       <Spacing size={8} />
       <ErrorMessage>

@@ -27,6 +27,8 @@ export default function CardNumber({
   cardNumberErrorMessage,
   setCardNumberErrorMessage,
 }: CardNumberProps) {
+  const cardNumberInputSequences: SequenceType[] = ['first', 'second', 'third', 'fourth'];
+
   const handleInputChange = ({ value, sequence }: HandleInputChangeProps) => {
     setCardNumber({ ...cardNumber, [sequence]: value });
 
@@ -45,59 +47,23 @@ export default function CardNumber({
       <Label id="card-number">카드 번호</Label>
       <Spacing size={8} />
       <S.InputWrapper>
-        <Input
-          type="text"
-          placeholder="1234"
-          maxLength={4}
-          id="card-number"
-          value={cardNumber.first}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'first',
-            })
-          }
-          isError={cardNumberErrorMessage.first !== ''}
-        />
-        <Input
-          type="text"
-          placeholder="1234"
-          maxLength={4}
-          value={cardNumber.second}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'second',
-            })
-          }
-          isError={cardNumberErrorMessage.second !== ''}
-        />
-        <Input
-          type="text"
-          placeholder="1234"
-          maxLength={4}
-          value={cardNumber.third}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'third',
-            })
-          }
-          isError={cardNumberErrorMessage.third !== ''}
-        />
-        <Input
-          type="text"
-          placeholder="1234"
-          maxLength={4}
-          value={cardNumber.fourth}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'fourth',
-            })
-          }
-          isError={cardNumberErrorMessage.fourth !== ''}
-        />
+        {cardNumberInputSequences.map((sequence, index) => (
+          <Input
+            key={index}
+            type="text"
+            placeholder="1234"
+            maxLength={4}
+            id={index === 0 ? 'card-number' : undefined}
+            value={cardNumber[sequence]}
+            onChange={(event) =>
+              handleInputChange({
+                value: event.target.value,
+                sequence,
+              })
+            }
+            isError={cardNumberErrorMessage[sequence] !== ''}
+          />
+        ))}
       </S.InputWrapper>
       <Spacing size={8} />
       <ErrorMessage>
