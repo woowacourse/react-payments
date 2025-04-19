@@ -15,7 +15,7 @@ const useControlledExpireDate = () => {
 
     const numeric = Number(value);
 
-    if (isNaN(numeric)) {
+    if (Number.isNaN(numeric)) {
       setExpireDate((prevState) => ({
         ...prevState,
         MM: {
@@ -55,6 +55,18 @@ const useControlledExpireDate = () => {
       return;
     }
 
+    const numeric = Number(value);
+
+    if (Number.isNaN(numeric)) {
+      setExpireDate((prevState) => ({
+        ...prevState,
+        YY: {
+          ...prevState["YY"],
+          errorMessage: validateYear(value),
+        },
+      }));
+      return;
+    }
     setExpireDate((prevState) => ({
       ...prevState,
       YY: {
