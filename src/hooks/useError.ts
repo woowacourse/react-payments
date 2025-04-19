@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const useError = <T>(initiallError: T) => {
-  const [isError, setIsError] = useState<T>(initiallError);
+const useError = <T>(initialError: T) => {
+  const [isError, setIsError] = useState<T>(initialError);
   const [errorMessage, setErrorMessage] = useState("");
 
   const clearError = (target: string) => {
