@@ -11,7 +11,7 @@ import {
   validateCardExpirationDateYY,
   validateCardCVC,
 } from "../validation/validation";
-import { justifyBrandLogo } from "./util/justifyBrandLogo";
+import { justifyBrandLogo } from "../util/justifyBrandLogo";
 
 type ErrorMessagesType = {
   first: string;
