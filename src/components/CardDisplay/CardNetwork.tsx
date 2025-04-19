@@ -22,12 +22,9 @@ const CARD_NETWORKS = [
 ];
 
 const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
-  const getCardNetwork = (number: string) => {
-    return CARD_NETWORKS.find((network) => network.prefixes.includes(number));
-  };
-
-  const cardNetwork = getCardNetwork(
-    String(cardNumbers.firstNumber).slice(0, 2)
+  const cardNumberPrefix = String(cardNumbers.firstNumber).slice(0, 2);
+  const cardNetwork = CARD_NETWORKS.find((network) =>
+    network.prefixes.includes(cardNumberPrefix)
   );
 
   if (!cardNetwork) {
