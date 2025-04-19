@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  height: 80px;
+}
+
+.cardInputs {
+  display: flex;
+  gap: 0.62rem;
+}
+
+.cardInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.errorMessage {
+  color: #ff3d3d;
+  font-family: "Noto Sans KR";
+  font-size: 0.75rem;
+}

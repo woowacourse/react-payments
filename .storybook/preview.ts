@@ -1,3 +1,4 @@
+import "../src/styles/reset.css";
 import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
