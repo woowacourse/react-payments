@@ -4,9 +4,9 @@ export const INPUT_TYPE = {
   cvcNumber: "cvcNumber",
 } as const;
 
-export const CARD_IMAGE = {
-  visa: "./visa.jpg",
-  mastercard: "./mastercard.jpg",
+export const CARD_TYPE = {
+  visa: "visa",
+  master: "master",
 } as const;
 
 export const CARD_POSITION = {
@@ -22,6 +22,6 @@ export const PERIOD_POSITION = {
 } as const;
 
 export type InputType = keyof typeof INPUT_TYPE;
-export type CardImageType = keyof typeof CARD_IMAGE;
+export type CardType = keyof typeof CARD_TYPE;
 export type CardPositionType = keyof typeof CARD_POSITION;
 export type PeriodPositionType = keyof typeof PERIOD_POSITION;

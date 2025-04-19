@@ -6,12 +6,22 @@ import {
   PreviewContainerCSS,
   PreviewCSS,
 } from "./Preview.styled";
-import { CardImageType } from "../../constants/constants";
+import { CARD_TYPE, CardType } from "../../constants/constants";
+
+const CARD_CONSTANTS = {
+  COMPLETE_CARD_NUMBER_LENGTH: 16,
+  VISA: {
+    FIRST_DIGIT: "4",
+  },
+  MASTER: {
+    FIRST_DIGIT: "5",
+    SECOND_DIGIT_MIN: "1",
+    SECOND_DIGIT_MAX: "5",
+  },
+};
 
 function Preview() {
-  const [cardImageType, setCardImageType] = useState<CardImageType | null>(
-    null
-  );
+  const [cardType, setCardType] = useState<CardType | null>(null);
   const { cardNumbers, expirationPeriod } = useCard();
 
   useEffect(() => {
@@ -27,31 +37,38 @@ function Preview() {
   };
 
   const checkCardType = (parsedCardNumbers: string) => {
-    if (parsedCardNumbers.length !== 16) {
-      setCardImageType(null);
+    const isIncompleteCardNumber =
+      parsedCardNumbers.length !== CARD_CONSTANTS.COMPLETE_CARD_NUMBER_LENGTH;
+
+    if (isIncompleteCardNumber) {
+      setCardType(null);
       return;
     }
 
     const firstNumber = parsedCardNumbers[0];
     const secondNumber = parsedCardNumbers[1];
 
-    if (firstNumber === "4") {
-      setCardImageType("visa");
-    } else if (
-      firstNumber === "5" &&
-      secondNumber >= "1" &&
-      secondNumber <= "5"
-    ) {
-      setCardImageType("mastercard");
-    } else {
-      setCardImageType(null);
-    }
+    const isVisaCard = firstNumber === CARD_CONSTANTS.VISA.FIRST_DIGIT;
+
+    const isMasterCardFirstDigitMatch =
+      firstNumber === CARD_CONSTANTS.MASTER.FIRST_DIGIT;
+
+    const isSecondDigitInMasterCardRange =
+      secondNumber >= CARD_CONSTANTS.MASTER.SECOND_DIGIT_MIN &&
+      secondNumber <= CARD_CONSTANTS.MASTER.SECOND_DIGIT_MAX;
+
+    const isMasterCard =
+      isMasterCardFirstDigitMatch && isSecondDigitInMasterCardRange;
+
+    if (isVisaCard) setCardType(CARD_TYPE.visa);
+    else if (isMasterCard) setCardType(CARD_TYPE.master);
+    else setCardType(null);
   };
 
   return (
     <PreviewContainerCSS>
       <PreviewCSS>
-        {cardImageType !== null && <CardTypeCSS $cardType={cardImageType} />}
+        {cardType !== null && <CardTypeCSS $cardType={cardType} />}
         <CardNumbersGroupCSS>
           <span>{cardNumbers.first}</span>
           <span>{cardNumbers.second}</span>

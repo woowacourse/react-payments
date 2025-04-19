@@ -1,6 +1,11 @@
 import PreviewImg from "/card-preview.jpg";
 import styled from "styled-components";
-import { CARD_IMAGE, CardImageType } from "../../constants/constants";
+import { CARD_TYPE, CardType } from "../../constants/constants";
+
+const CARD_IMAGE = {
+  [CARD_TYPE.visa]: "./visa.jpg",
+  [CARD_TYPE.master]: "./master.jpg",
+};
 
 export const PreviewContainerCSS = styled.div`
   width: 100%;
@@ -33,7 +38,7 @@ export const CardNumbersGroupCSS = styled.div`
   gap: 7px;
 `;
 
-export const CardTypeCSS = styled.div<{ $cardType: CardImageType }>`
+export const CardTypeCSS = styled.div<{ $cardType: CardType }>`
   background: no-repeat url(${(props) => CARD_IMAGE[props.$cardType]});
   background-size: cover;
   width: 44px;
