@@ -1,10 +1,10 @@
-import CardNumbersInputSection from './components/InputSection/CardNumbersInputSection';
-import CardExpirationDateInputSection from './components/InputSection/CardExpirationDateInputSection';
-import CardCVCNumberInputSection from './components/InputSection/CardCVCNumberInputSection';
+import CardCVCNumberInputSection from '@InputSectionComponents/CardCVCNumberInputSection';
+import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSection';
+import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
+import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './css/cardForm.module.css';
-import useCardNumbers from './hooks/useCardNumbers';
-import useCardExpirationDate from './hooks/useCardExpirationDate';
-import CardDisplay from './components/CardDisplay/CardDisplay';
+import useCardNumbers from '@hooks/useCardNumbers';
+import useCardExpirationDate from '@hooks/useCardExpirationDate';
 
 function App() {
   const {

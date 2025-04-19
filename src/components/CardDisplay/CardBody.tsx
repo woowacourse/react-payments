@@ -1,5 +1,5 @@
-import CardExpirationDate from '../../types/CardExpirationDate';
-import { CardNumbers } from '../../types/CardNumbers';
+import type CardExpirationDate from '@/types/CardExpirationDate';
+import { CardNumbers } from '@/types/CardNumbers';
 import CardNumberDisplay from './CardNumberDisplay';
 import styles from './cardDisplay.module.css';
 

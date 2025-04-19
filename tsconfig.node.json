@@ -18,7 +18,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@commonComponents/*": ["src/components/common/*"],
+      "@InputSectionComponents/*": ["src/components/InputSection/*"],
+      "@CardDisplayComponents/*": ["src/components/CardDisplay/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@assets/*": ["assets/*"]
+    }
   },
+
   "include": ["vite.config.ts"]
 }

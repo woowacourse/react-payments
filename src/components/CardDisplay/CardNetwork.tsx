@@ -1,8 +1,8 @@
 import styles from './cardDisplay.module.css';
 
-import { CardNumbers } from '../../types/CardNumbers';
-import Visa from '../../public/visa.png';
-import MasterCard from '../../public/mastercard.png';
+import { CardNumbers } from '@/types/CardNumbers';
+import Visa from '@assets/visa.png';
+import MasterCard from '@assets/mastercard.png';
 
 type CardNetworkProps = {
   cardNumbers: CardNumbers;
