@@ -1,0 +1,31 @@
+.basic {
+  border: 1px solid #acacac;
+  &:focus {
+    outline: none;
+    border: 2px solid black;
+  }
+}
+
+.error {
+  border: 1px solid red;
+  &:focus {
+    outline: none;
+    border: 2px solid red;
+  }
+}
+
+.input {
+  height: 32px;
+  color: black;
+  font-size: 16px;
+  min-width: 0;
+  border-radius: 5px;
+  flex-grow: 1;
+
+  &::placeholder {
+    color: #acacac;
+  }
+}
+
+/* 가운데 정렬  */
+/* input box 사이즈, gap */
