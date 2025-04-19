@@ -59,13 +59,17 @@ export default NumberInput;
 
 const Input = styled.input<{ isError: boolean }>`
   width: 100%;
-  border: 1px solid ${({ isError }) => (isError ? "#FF3D3D" : "#ACACAC")};
+  border: 1px solid
+    ${({ isError, theme }) =>
+      isError ? theme.colors.error : theme.colors.gray};
   border-radius: 2px;
   height: 32px;
   padding: 8px;
 
   &:focus {
-    border: 1.5px solid ${({ isError }) => (isError ? "#FF3D3D" : "#000")};
+    border: 1.5px solid
+      ${({ isError, theme }) =>
+        isError ? theme.colors.error : theme.colors.black};
     outline: none;
   }
 `;

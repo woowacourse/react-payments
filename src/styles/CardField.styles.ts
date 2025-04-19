@@ -13,7 +13,7 @@ export const NumberInputContainer = styled.div`
 `;
 
 export const ErrorText = styled.p`
-  color: #ff3d3d;
+  color: ${({ theme }) => theme.colors.error};
   font-size: 9.5px;
 `;
 
