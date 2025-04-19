@@ -32,3 +32,17 @@
 - [x] 컴포넌트 설계
 - [x] UI 구현
 - [x] 유효성 검증
+
+## 컴포넌트 관계도
+
+```
+CardPaymentsPage
+├── CardPreview
+└── CardInputSection (총 3개의 섹션)
+    ├── Title (제목)
+    ├── Description (설명)
+    ├── Subtitle (부제목)
+    ├── CardInputGroup
+    │   └── Input (각 섹션에 맞게 조합)
+    └── Error (오류 시 메시지)
+```

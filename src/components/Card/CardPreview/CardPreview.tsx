@@ -1,19 +1,19 @@
-import { useCard } from "../../hooks/useCard";
-import { useCardType } from "../../hooks/useCardType";
+import { useCard } from "../../../hooks/useCard";
+import { useCardType } from "../../../hooks/useCardType";
 import {
   CardNumbersGroupCSS,
   CardTypeCSS,
-  PreviewContainerCSS,
-  PreviewCSS,
-} from "./Preview.styled";
+  CardPreviewContainerCSS,
+  CardPreviewCSS,
+} from "./CardPreview.styled";
 
-function Preview() {
+function CardPreview() {
   const { cardNumbers, expirationPeriod } = useCard();
   const cardType = useCardType(cardNumbers);
 
   return (
-    <PreviewContainerCSS>
-      <PreviewCSS>
+    <CardPreviewContainerCSS>
+      <CardPreviewCSS>
         {cardType !== null && <CardTypeCSS $cardType={cardType} />}
         <CardNumbersGroupCSS>
           <span>{cardNumbers.first}</span>
@@ -30,8 +30,8 @@ function Preview() {
             {expirationPeriod.month}/{expirationPeriod.year}
           </span>
         )}
-      </PreviewCSS>
-    </PreviewContainerCSS>
+      </CardPreviewCSS>
+    </CardPreviewContainerCSS>
   );
 }
-export default Preview;
+export default CardPreview;

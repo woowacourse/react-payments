@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import InputGroup from "./InputGroup";
-import { INPUT_TYPE } from "../../constants/constants";
-import { withCustomCardProvider } from "../../../.storybook/utils/withCustomCardProvider";
+import CardInputGroup from "./CardInputGroup";
+import { CARD_INPUT_TYPE } from "../../../constants/constants";
+import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
 
 const defaultError = {
   cardNumbers: {
@@ -18,15 +18,15 @@ const defaultError = {
 };
 
 const meta = {
-  title: "InputGroup",
-  component: InputGroup,
+  title: "CardInputGroup",
+  component: CardInputGroup,
   tags: ["autodocs"],
   decorators: [withCustomCardProvider({})],
-} satisfies Meta<typeof InputGroup>;
+} satisfies Meta<typeof CardInputGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof InputGroup>;
+type Story = StoryObj<typeof CardInputGroup>;
 
 export const CardNumber: Story = {
   decorators: [
@@ -40,7 +40,7 @@ export const CardNumber: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.cardNumbers,
+    type: CARD_INPUT_TYPE.cardNumbers,
     error: defaultError,
   },
 };
@@ -55,7 +55,7 @@ export const ExpirationPeriod: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.expirationPeriod,
+    type: CARD_INPUT_TYPE.expirationPeriod,
     error: defaultError,
   },
 };
@@ -67,7 +67,7 @@ export const CvcNumber: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.cvcNumber,
+    type: CARD_INPUT_TYPE.cvcNumber,
     error: defaultError,
   },
 };
@@ -84,7 +84,7 @@ export const WithCardNumberError: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.cardNumbers,
+    type: CARD_INPUT_TYPE.cardNumbers,
     error: {
       ...defaultError,
       cardNumbers: {
@@ -105,7 +105,7 @@ export const WithExpirationPeriodError: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.expirationPeriod,
+    type: CARD_INPUT_TYPE.expirationPeriod,
     error: {
       ...defaultError,
       expirationPeriod: {
@@ -123,7 +123,7 @@ export const WithCvcNumberError: Story = {
     }),
   ],
   args: {
-    type: INPUT_TYPE.cvcNumber,
+    type: CARD_INPUT_TYPE.cvcNumber,
     error: {
       ...defaultError,
       cvcNumber: true,

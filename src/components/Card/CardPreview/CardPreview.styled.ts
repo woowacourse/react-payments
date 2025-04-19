@@ -1,13 +1,13 @@
-import PreviewImg from "/card-preview.jpg";
+import CardPreviewImg from "/card-preview.jpg";
 import styled from "styled-components";
-import { CARD_TYPE, CardType } from "../../constants/constants";
+import { CARD_TYPE, CardType } from "../../../constants/constants";
 
 const CARD_IMAGE = {
   [CARD_TYPE.visa]: "./visa.jpg",
   [CARD_TYPE.master]: "./master.jpg",
 };
 
-export const PreviewContainerCSS = styled.div`
+export const CardPreviewContainerCSS = styled.div`
   width: 100%;
   height: 180px;
   display: flex;
@@ -15,8 +15,8 @@ export const PreviewContainerCSS = styled.div`
   padding-bottom: 30px;
 `;
 
-export const PreviewCSS = styled.div`
-  background: no-repeat center url(${PreviewImg});
+export const CardPreviewCSS = styled.div`
+  background: no-repeat center url(${CardPreviewImg});
   background-size: cover;
   width: 230px;
   height: 180px;

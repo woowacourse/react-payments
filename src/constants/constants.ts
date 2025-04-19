@@ -1,4 +1,4 @@
-export const INPUT_TYPE = {
+export const CARD_INPUT_TYPE = {
   cardNumbers: "cardNumbers",
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
@@ -21,7 +21,7 @@ export const PERIOD_POSITION = {
   year: "year",
 } as const;
 
-export type InputType = keyof typeof INPUT_TYPE;
+export type CardInputType = keyof typeof CARD_INPUT_TYPE;
 export type CardType = keyof typeof CARD_TYPE;
 export type CardPositionType = keyof typeof CARD_POSITION;
 export type PeriodPositionType = keyof typeof PERIOD_POSITION;

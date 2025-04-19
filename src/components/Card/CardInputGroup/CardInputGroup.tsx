@@ -1,16 +1,16 @@
 import { ChangeEvent } from "react";
 import {
+  CARD_INPUT_TYPE,
   CARD_POSITION,
   CardPositionType,
-  INPUT_TYPE,
-  InputType,
+  CardInputType,
   PERIOD_POSITION,
   PeriodPositionType,
-} from "../../constants/constants";
-import { useCard } from "../../hooks/useCard";
-import Input from "../Input/Input";
-import { InputGroupCSS } from "./InputGroup.styled";
-import { InputErrorType } from "../../hooks/useInputError";
+} from "../../../constants/constants";
+import { useCard } from "../../../hooks/useCard";
+import Input from "../../Common/Input/Input";
+import { CardInputGroupCSS } from "./CardInputGroup.styled";
+import { CardInputErrorType } from "../../../hooks/useCardInputError";
 
 const PLACEHOLDERS = {
   cardNumber: "1234",
@@ -25,9 +25,9 @@ const MAX_LENGTHS = {
   cvcNumber: 3,
 };
 
-export interface InputGroupProps {
-  type: InputType;
-  error: InputErrorType;
+export interface CardInputGroupProps {
+  type: CardInputType;
+  error: CardInputErrorType;
   setCardNumberError: (value: string, position: CardPositionType) => void;
   setExpirationPeriodError: (
     value: string,
@@ -36,13 +36,13 @@ export interface InputGroupProps {
   setCvcNumberError: (value: string) => void;
 }
 
-function InputGroup({
+function CardInputGroup({
   type,
   error,
   setCardNumberError,
   setExpirationPeriodError,
   setCvcNumberError,
-}: InputGroupProps) {
+}: CardInputGroupProps) {
   const {
     cardNumbers,
     updateCardNumber,
@@ -75,7 +75,7 @@ function InputGroup({
 
   const renderInputByType = () => {
     switch (type) {
-      case INPUT_TYPE.cardNumbers:
+      case CARD_INPUT_TYPE.cardNumbers:
         const cardPositions: CardPositionType[] = [
           CARD_POSITION.first,
           CARD_POSITION.second,
@@ -101,7 +101,7 @@ function InputGroup({
           </>
         );
 
-      case INPUT_TYPE.expirationPeriod:
+      case CARD_INPUT_TYPE.expirationPeriod:
         const periodPositions: PeriodPositionType[] = [
           PERIOD_POSITION.month,
           PERIOD_POSITION.year,
@@ -125,7 +125,7 @@ function InputGroup({
           </>
         );
 
-      case INPUT_TYPE.cvcNumber:
+      case CARD_INPUT_TYPE.cvcNumber:
         return (
           <Input
             placeholder={PLACEHOLDERS.cvcNumber}
@@ -143,7 +143,7 @@ function InputGroup({
     }
   };
 
-  return <InputGroupCSS>{renderInputByType()}</InputGroupCSS>;
+  return <CardInputGroupCSS>{renderInputByType()}</CardInputGroupCSS>;
 }
 
-export default InputGroup;
+export default CardInputGroup;

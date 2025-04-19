@@ -13,6 +13,6 @@ type Story = StoryObj<typeof Subtitle>;
 
 export const Default: Story = {
   args: {
-    subtitle: "카드 번호",
+    subtitle: "부제목 텍스트",
   },
 };

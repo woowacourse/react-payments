@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Preview from "./Preview";
-import { withCustomCardProvider } from "../../../.storybook/utils/withCustomCardProvider";
+import CardPreview from "./CardPreview";
+import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
 
 const meta = {
-  title: "Preview",
-  component: Preview,
+  title: "CardPreview",
+  component: CardPreview,
   tags: ["autodocs"],
-} satisfies Meta<typeof Preview>;
+} satisfies Meta<typeof CardPreview>;
 
 export default meta;
 
-type Story = StoryObj<typeof Preview>;
+type Story = StoryObj<typeof CardPreview>;
 
 export const Empty: Story = {
   decorators: [withCustomCardProvider({})],

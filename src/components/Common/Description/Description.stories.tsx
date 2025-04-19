@@ -13,6 +13,6 @@ type Story = StoryObj<typeof Description>;
 
 export const Default: Story = {
   args: {
-    description: "본인 명의의 카드만 결제 가능합니다.",
+    description: "설명 텍스트입니다.",
   },
 };
