@@ -8,13 +8,7 @@ import Spacing from './components/common/Spacing';
 import { useState } from 'react';
 import { SequenceType } from './components/CardNumber';
 import { DateType } from './components/CardExpirationDate';
-import { VISA_CARD_CONDITIONS, MASTER_CARD_CONDITIONS } from './constants';
-
-export const getCardType = (cardNumberFirst: string) => {
-  if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
-  if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master';
-  return '';
-};
+import { getCardType } from './utils';
 
 function App() {
   // 카드 번호
