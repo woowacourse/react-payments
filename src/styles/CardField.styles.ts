@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Label = styled.p`
+export const Label = styled.label`
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 8px;
@@ -17,6 +17,6 @@ export const ErrorText = styled.p`
   font-size: 9.5px;
 `;
 
-export const NumberInputForm = styled.div`
+export const NumberInputField = styled.div`
   height: 70px;
 `;

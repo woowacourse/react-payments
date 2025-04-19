@@ -1,12 +1,12 @@
 import type { Meta } from "@storybook/react";
-import CardExpirationForm from "../components/CardExpirationForm";
+import CardNumberField from "../components/CardNumberField";
 import useCardInfo from "../hooks/useCardInfo";
 
 const meta = {
-  title: "CardExpirationForm",
-  component: CardExpirationForm,
+  title: "CardNumberField",
+  component: CardNumberField,
   tags: ["autodocs"],
-} satisfies Meta<typeof CardExpirationForm>;
+} satisfies Meta<typeof CardNumberField>;
 
 export default meta;
 
@@ -14,10 +14,10 @@ export const Default = () => {
   const { cardInfo, handleCardInfo } = useCardInfo();
 
   return (
-    <CardExpirationForm
+    <CardNumberField
       cardInfo={cardInfo}
       handleCardInfo={handleCardInfo}
-      maxLength={2}
+      maxLength={4}
     />
   );
 };

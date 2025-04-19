@@ -3,28 +3,28 @@ import isExactLength from "../utils/isExactLength";
 import NumberInput from "./NumberInput";
 import { ERROR_MESSAGE } from "../constants/guide";
 import {
-  NumberInputForm,
+  NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardForm.styles";
+} from "../styles/CardField.styles";
 
-interface CardCVCFormProps {
+interface CardCVCFieldProps {
   cardInfo: {
     cvc: string;
   };
   handleCardInfo: (
-    key: keyof CardCVCFormProps["cardInfo"],
+    key: keyof CardCVCFieldProps["cardInfo"],
     value: string
   ) => void;
   maxLength: number;
 }
 
-function CardCVCForm({
+function CardCVCField({
   cardInfo,
   handleCardInfo,
   maxLength,
-}: CardCVCFormProps) {
+}: CardCVCFieldProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
@@ -39,10 +39,11 @@ function CardCVCForm({
   }, [cardInfo.cvc]);
 
   return (
-    <NumberInputForm>
-      <Label>CVC</Label>
+    <NumberInputField>
+      <Label htmlFor="cvc">CVC</Label>
       <NumberInputContainer>
         <NumberInput
+          id="cvc"
           value={cardInfo.cvc}
           setValue={(value) => {
             handleCardInfo("cvc", value);
@@ -52,8 +53,8 @@ function CardCVCForm({
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
-    </NumberInputForm>
+    </NumberInputField>
   );
 }
 
-export default CardCVCForm;
+export default CardCVCField;

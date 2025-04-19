@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import isExactLength from "../utils/isExactLength";
 
 interface NumberInputProps {
+  id?: string;
   value: string;
   setValue: (value: string) => void;
   maxLength: number;
@@ -11,6 +12,7 @@ interface NumberInputProps {
 }
 
 function NumberInput({
+  id,
   value,
   setValue,
   maxLength,
@@ -44,6 +46,7 @@ function NumberInput({
 
   return (
     <Input
+      id={id}
       maxLength={maxLength}
       placeholder={placeholder}
       isError={isError}

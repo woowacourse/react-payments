@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import isExactLength from "../utils/isExactLength";
 import { ERROR_MESSAGE } from "../constants/guide";
 import {
-  NumberInputForm,
+  NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardForm.styles";
+} from "../styles/CardField.styles";
 
-interface CardNumberFormProps {
+interface CardNumberFieldProps {
   cardInfo: {
     firstNumber: string;
     secondNumber: string;
@@ -17,17 +17,17 @@ interface CardNumberFormProps {
     fourthNumber: string;
   };
   handleCardInfo: (
-    key: keyof CardNumberFormProps["cardInfo"],
+    key: keyof CardNumberFieldProps["cardInfo"],
     value: string
   ) => void;
   maxLength: number;
 }
 
-function CardNumberForm({
+function CardNumberField({
   cardInfo,
   handleCardInfo,
   maxLength,
-}: CardNumberFormProps) {
+}: CardNumberFieldProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
@@ -51,10 +51,11 @@ function CardNumberForm({
   ]);
 
   return (
-    <NumberInputForm>
-      <Label>카드 번호</Label>
+    <NumberInputField>
+      <Label htmlFor="first-number">카드 번호</Label>
       <NumberInputContainer>
         <NumberInput
+          id="first-number"
           value={cardInfo.firstNumber}
           setValue={(value) => {
             handleCardInfo("firstNumber", value);
@@ -88,8 +89,8 @@ function CardNumberForm({
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
-    </NumberInputForm>
+    </NumberInputField>
   );
 }
 
-export default CardNumberForm;
+export default CardNumberField;

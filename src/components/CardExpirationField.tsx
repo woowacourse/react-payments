@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import NumberInput from "./NumberInput";
 import {
-  NumberInputForm,
+  NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardForm.styles";
+} from "../styles/CardField.styles";
 import {
   isNotExpired,
   isValidMonth,
@@ -13,23 +13,23 @@ import {
   validateExpiration,
 } from "../domains/expiration/dateUtils";
 
-interface CardExpirationFormProps {
+interface CardExpirationFieldProps {
   cardInfo: {
     month: string;
     year: string;
   };
   handleCardInfo: (
-    key: keyof CardExpirationFormProps["cardInfo"],
+    key: keyof CardExpirationFieldProps["cardInfo"],
     value: string
   ) => void;
   maxLength: number;
 }
 
-function CardExpirationForm({
+function CardExpirationField({
   cardInfo,
   handleCardInfo,
   maxLength,
-}: CardExpirationFormProps) {
+}: CardExpirationFieldProps) {
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
@@ -37,10 +37,11 @@ function CardExpirationForm({
   }, [cardInfo.month, cardInfo.year, maxLength]);
 
   return (
-    <NumberInputForm>
-      <Label>유효기간</Label>
+    <NumberInputField>
+      <Label htmlFor="expiration-month">유효기간</Label>
       <NumberInputContainer>
         <NumberInput
+          id="expiration-month"
           value={cardInfo.month}
           setValue={(value) => {
             handleCardInfo("month", value);
@@ -70,8 +71,8 @@ function CardExpirationForm({
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
-    </NumberInputForm>
+    </NumberInputField>
   );
 }
 
-export default CardExpirationForm;
+export default CardExpirationField;
