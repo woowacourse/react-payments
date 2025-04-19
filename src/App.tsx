@@ -1,4 +1,3 @@
-import './App.css';
 import * as S from './App.styles';
 import CardNumber from './components/CardNumber/CardNumber';
 import CardExpirationDate, { DateType } from './components/CardExpirationDate/CardExpirationDate';
