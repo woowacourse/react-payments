@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  color: var(--black);
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & p {
+    color: var(--grey);
+  }
+}
+
+.feedbackMessage {
+  color: var(--red);
+  height: 18px;
+}

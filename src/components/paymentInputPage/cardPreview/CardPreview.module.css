@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 212px;
+  height: 120px;
+  background-color: #000000c4;
+  border-radius: 4px;
+  gap: 16px;
+  color: var(--white);
+  padding: 14px;
+  box-shadow: 1px 0px 5px #444;
+}
+
+.cardNumberBox {
+  display: flex;
+  gap: 8px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goldBox {
+  width: 36px;
+  height: 22px;
+  border-radius: 4px;
+  background-color: var(--gold);
+}
+
+.logoBrand {
+  width: 36px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.pCardNumber {
+  width: 40px;
+  letter-spacing: 2px;
+}
+
+.cardNumberBox > .pCardNumber:nth-child(n + 3) {
+  font-size: 21px;
+  letter-spacing: -8px;
+  line-height: 0.7;
+}
