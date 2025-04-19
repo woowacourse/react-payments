@@ -1,4 +1,4 @@
-import styles from './cardDisplay.module.css';
+import styles from "./cardDisplay.module.css";
 type CardNumberDisplayProps = {
   cardNumber: string;
   isMasked: boolean;
@@ -11,7 +11,7 @@ const CardNumberDisplay = ({
   return (
     <p className={styles.cardNumberDisplay}>
       {isMasked
-        ? (cardNumber = '*'.repeat(String(cardNumber).length))
+        ? (cardNumber = "*".repeat(String(cardNumber).length))
         : cardNumber}
     </p>
   );

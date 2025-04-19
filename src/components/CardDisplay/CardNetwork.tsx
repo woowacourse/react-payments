@@ -1,8 +1,8 @@
-import styles from './cardDisplay.module.css';
+import styles from "./cardDisplay.module.css";
 
-import { CardNumbers } from '../../types/CardNumbers';
-import Visa from '../../public/visa.png';
-import MasterCard from '../../public/mastercard.png';
+import { CardNumbers } from "../../types/CardNumbers";
+import Visa from "../../public/visa.png";
+import MasterCard from "../../public/mastercard.png";
 
 type CardNetworkProps = {
   cardNumbers: CardNumbers;
@@ -10,13 +10,13 @@ type CardNetworkProps = {
 
 const CARD_NETWORKS = [
   {
-    prefixes: ['40', '41', '42', '43', '44', '45', '46', '47', '48', '49'],
-    name: 'visa',
+    prefixes: ["40", "41", "42", "43", "44", "45", "46", "47", "48", "49"],
+    name: "visa",
     image: Visa,
   },
   {
-    prefixes: ['51', '52', '53', '54', '55'],
-    name: 'master',
+    prefixes: ["51", "52", "53", "54", "55"],
+    name: "master",
     image: MasterCard,
   },
 ];
@@ -27,7 +27,7 @@ const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
   };
 
   const cardNetwork = getCardNetwork(
-    String(cardNumbers.firstNumber).slice(0, 2)
+    String(cardNumbers.firstNumber).slice(0, 2),
   );
 
   if (!cardNetwork) {

@@ -42,7 +42,7 @@ const useCardNumbers = (): CardNumbersOptions => {
   const handleCardNumbersChange =
     (target: CardNumbersKeys) => (value: string) => {
       const { isError, errorMessage } = getCardNumbersValidationResult(
-        value.trim()
+        value.trim(),
       );
       if (isError) {
         setErrorField(target, errorMessage);

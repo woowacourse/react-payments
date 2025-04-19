@@ -1,7 +1,7 @@
-import CardExpirationDate from '../../types/CardExpirationDate';
-import { CardNumbers } from '../../types/CardNumbers';
-import CardNumberDisplay from './CardNumberDisplay';
-import styles from './cardDisplay.module.css';
+import CardExpirationDate from "../../types/CardExpirationDate";
+import { CardNumbers } from "../../types/CardNumbers";
+import CardNumberDisplay from "./CardNumberDisplay";
+import styles from "./cardDisplay.module.css";
 
 type CardBodyProps = {
   cardNumbers: CardNumbers;

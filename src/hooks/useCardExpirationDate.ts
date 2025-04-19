@@ -22,13 +22,13 @@ const INITIAL_IS_ERROR: IsError = {
 
 const useCardExpirationDate = (): CardExpirationDateOptions => {
   const [cardExpirationDate, setCardExpirationDate] = useState(
-    INITIAL_CARD_EXPIRATION_DATE
+    INITIAL_CARD_EXPIRATION_DATE,
   );
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardExpirationDateValidationResult = (
     target: CardExpirationDateKeys,
-    input: string
+    input: string,
   ) => {
     if (input.length === 1 && !isNumber(input))
       return { isError: true, errorMessage: "숫자만 입력 가능합니다" };
@@ -87,7 +87,7 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     (target: CardExpirationDateKeys) => (value: string) => {
       const { isError, errorMessage } = getCardExpirationDateValidationResult(
         target,
-        value.trim()
+        value.trim(),
       );
       if (isError) {
         setErrorField(target, errorMessage);

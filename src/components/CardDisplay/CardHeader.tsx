@@ -1,6 +1,6 @@
-import { CardNumbers } from '../../types/CardNumbers';
-import styles from './cardDisplay.module.css';
-import CardNetwork from './CardNetwork';
+import { CardNumbers } from "../../types/CardNumbers";
+import styles from "./cardDisplay.module.css";
+import CardNetwork from "./CardNetwork";
 
 type CardHearProps = {
   cardNumbers: CardNumbers;

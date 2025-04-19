@@ -10,7 +10,7 @@ export type IsError = {
 export type CardExpirationDateOptions = {
   cardExpirationDate: CardExpirationDate;
   handleCardExpirationDateChange: (
-    target: CardExpirationDateKeys
+    target: CardExpirationDateKeys,
   ) => (value: string) => void;
   isError: IsError;
   errorMessage: string;
