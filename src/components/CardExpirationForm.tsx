@@ -40,28 +40,35 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
     setErrorText('');
   }, [cardInfo.month, cardInfo.year]);
 
+  const InputInfo = [
+    {
+      value: cardInfo.month,
+      setValue: (value: string) => handleCardInfo('month', value),
+      placeholder: 'MM',
+      extraErrorCondition: cardInfo.month !== '' && !isValidMonth,
+    },
+    {
+      value: cardInfo.year,
+      setValue: (value: string) => handleCardInfo('year', value),
+      placeholder: 'YY',
+      extraErrorCondition: cardInfo.year !== '' && !isValidYear,
+    },
+  ];
+
   return (
     <NumberInputForm>
       <Label>유효기간</Label>
       <NumberInputContainer>
-        <NumberInput
-          value={cardInfo.month}
-          setValue={(value) => {
-            handleCardInfo('month', value);
-          }}
-          maxLength={maxLength}
-          placeholder="MM"
-          extraErrorCondition={cardInfo.month !== '' && !isValidMonth}
-        />
-        <NumberInput
-          value={cardInfo.year}
-          setValue={(value) => {
-            handleCardInfo('year', value);
-          }}
-          maxLength={maxLength}
-          placeholder="YY"
-          extraErrorCondition={cardInfo.year !== '' && !isValidYear}
-        />
+        {InputInfo.map((inputInfo, index) => (
+          <NumberInput
+            key={index}
+            value={inputInfo.value}
+            setValue={inputInfo.setValue}
+            maxLength={maxLength}
+            placeholder={inputInfo.placeholder}
+            extraErrorCondition={inputInfo.extraErrorCondition}
+          />
+        ))}
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
     </NumberInputForm>

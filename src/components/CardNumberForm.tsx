@@ -32,42 +32,38 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
     else setErrorText('');
   }, [cardInfo.firstNumber, cardInfo.secondNumber, cardInfo.thirdNumber, cardInfo.fourthNumber]);
 
+  const NumberInputInfo = [
+    {
+      value: cardInfo.firstNumber,
+      setValue: (value: string) => handleCardInfo('firstNumber', value),
+    },
+    {
+      value: cardInfo.secondNumber,
+      setValue: (value: string) => handleCardInfo('secondNumber', value),
+    },
+    {
+      value: cardInfo.thirdNumber,
+      setValue: (value: string) => handleCardInfo('thirdNumber', value),
+    },
+    {
+      value: cardInfo.fourthNumber,
+      setValue: (value: string) => handleCardInfo('fourthNumber', value),
+    },
+  ];
+
   return (
     <NumberInputForm>
       <Label>카드 번호</Label>
       <NumberInputContainer>
-        <NumberInput
-          value={cardInfo.firstNumber}
-          setValue={(value) => {
-            handleCardInfo('firstNumber', value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.secondNumber}
-          setValue={(value) => {
-            handleCardInfo('secondNumber', value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.thirdNumber}
-          setValue={(value) => {
-            handleCardInfo('thirdNumber', value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.fourthNumber}
-          setValue={(value) => {
-            handleCardInfo('fourthNumber', value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
+        {NumberInputInfo.map((inputInfo, index) => (
+          <NumberInput
+            key={index}
+            value={inputInfo.value}
+            setValue={inputInfo.setValue}
+            maxLength={maxLength}
+            placeholder="1234"
+          />
+        ))}
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
     </NumberInputForm>
