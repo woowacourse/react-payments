@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import useCardInfo from './hooks/useCardInfo';
 import { CARD_NUMBER_MESSAGE, CVC_MESSAGE, EXPIRATION_MESSAGE } from './constants/guide';
 import { CARD_INFO_LENGTH } from './constants/setting';
+import { VIEWPORT } from './constants/viewport';
 
 function App() {
   const { cardInfo, handleCardInfo } = useCardInfo();
@@ -49,7 +50,7 @@ function App() {
 export default App;
 
 const AppContainer = styled.div`
-  width: 376px;
+  width: ${VIEWPORT.MOBILE}px;
   display: flex;
   flex-direction: column;
   align-items: center;
