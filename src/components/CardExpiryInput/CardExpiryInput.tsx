@@ -88,7 +88,9 @@ const CardExpiryInput = ({
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
       </div>
-      <p className="helperText">{helperText}</p>
+      <p className="helperText" data-testid="helper-text">
+        {helperText}
+      </p>
     </InputContainer>
   );
 };

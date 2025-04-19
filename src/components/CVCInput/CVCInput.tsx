@@ -42,7 +42,9 @@ const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
           maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
         />
       </div>
-      <p className="helperText">{helperText}</p>
+      <p className="helperText" data-testid="helper-text">
+        {helperText}
+      </p>
     </InputContainer>
   );
 };

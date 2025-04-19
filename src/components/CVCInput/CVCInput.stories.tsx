@@ -22,6 +22,33 @@ const Template = () => {
   return <CVCInput CVC={CVC} setCVC={setCVC} />;
 };
 
+export const emptyInput: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const CVCInput = canvas.getByPlaceholderText('123');
+
+    await userEvent.clear(CVCInput);
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
+export const validInput: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const CVCInput = canvas.getByPlaceholderText('123');
+
+    await userEvent.clear(CVCInput);
+    await userEvent.type(CVCInput, '567');
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
 export const Invalid_NonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
@@ -31,9 +58,8 @@ export const Invalid_NonNumeric: Story = {
     await userEvent.clear(CVCInput);
     await userEvent.type(CVCInput, 'ab');
 
-    await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
   },
 };
 
@@ -46,10 +72,9 @@ export const Invalid_NumberLength: Story = {
     await userEvent.clear(CVCInput);
     await userEvent.type(CVCInput, '12');
 
-    await expect(
-      canvas.findByText(
-        `${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(
+      `${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+    );
   },
 };

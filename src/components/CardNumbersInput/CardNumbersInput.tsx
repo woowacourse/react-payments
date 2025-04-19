@@ -74,7 +74,9 @@ const CardNumbersInput = ({
           />
         ))}
       </div>
-      <p className={`helperText`}>{helperText}</p>
+      <p className={`helperText`} data-testid="helper-text">
+        {helperText}
+      </p>
     </InputContainer>
   );
 };

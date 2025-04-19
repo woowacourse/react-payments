@@ -29,6 +29,38 @@ const Template = () => {
   );
 };
 
+export const emptyInput: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const monthInput = canvas.getByPlaceholderText('MM');
+    const yearInput = canvas.getByPlaceholderText('YY');
+
+    await userEvent.clear(monthInput);
+    await userEvent.clear(yearInput);
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
+export const validInput: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const monthInput = canvas.getByPlaceholderText('MM');
+    const yearInput = canvas.getByPlaceholderText('YY');
+
+    await userEvent.clear(monthInput);
+    await userEvent.type(monthInput, '12');
+    await userEvent.clear(yearInput);
+    await userEvent.type(yearInput, '25');
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
 export const InvalidMonth_NonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
@@ -38,9 +70,8 @@ export const InvalidMonth_NonNumeric: Story = {
     await userEvent.clear(monthInput);
     await userEvent.type(monthInput, 'ab');
 
-    await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
   },
 };
 
@@ -53,11 +84,10 @@ export const InvalidMonth_TooShort: Story = {
     await userEvent.clear(monthInput);
     await userEvent.type(monthInput, '1');
 
-    await expect(
-      canvas.findByText(
-        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(
+      `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+    );
   },
 };
 
@@ -74,9 +104,8 @@ export const InvalidYear_NonNumeric: Story = {
     await userEvent.clear(yearInput);
     await userEvent.type(yearInput, 'ㅁㅁ');
 
-    await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
   },
 };
 
@@ -93,10 +122,9 @@ export const InvalidYear_TooShort: Story = {
     await userEvent.clear(yearInput);
     await userEvent.type(yearInput, '2');
 
-    await expect(
-      canvas.findByText(
-        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(
+      `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+    );
   },
 };

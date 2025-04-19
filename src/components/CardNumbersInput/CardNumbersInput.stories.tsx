@@ -27,6 +27,46 @@ const Template = () => {
   );
 };
 
+export const emptyInput: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputs = canvas.getAllByPlaceholderText('1234');
+
+    await userEvent.clear(inputs[0]);
+    await userEvent.clear(inputs[1]);
+    await userEvent.clear(inputs[2]);
+    await userEvent.clear(inputs[3]);
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
+export const invalidCardNumbers: Story = {
+  render: Template,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const inputs = canvas.getAllByPlaceholderText('1234');
+
+    await userEvent.clear(inputs[0]);
+    await userEvent.type(inputs[0], '4123');
+
+    await userEvent.clear(inputs[1]);
+    await userEvent.type(inputs[1], '5678');
+
+    await userEvent.clear(inputs[2]);
+    await userEvent.type(inputs[2], '1234');
+
+    await userEvent.clear(inputs[3]);
+    await userEvent.type(inputs[3], '7895');
+
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe('');
+  },
+};
+
 export const InvalidCardPrefix: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
@@ -36,9 +76,8 @@ export const InvalidCardPrefix: Story = {
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], '60');
 
-    await expect(
-      canvas.findByText(ERROR.CARD_NUMBER.INVALID)
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(ERROR.CARD_NUMBER.INVALID);
   },
 };
 
@@ -51,9 +90,8 @@ export const InvalidCard_NonNumeric: Story = {
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], 'dkdk');
 
-    await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
   },
 };
 
@@ -66,11 +104,10 @@ export const InvalidCard_TooShort_FirstBlock: Story = {
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], '412');
 
-    await expect(
-      canvas.findByText(
-        `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(
+      `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+    );
   },
 };
 
@@ -90,10 +127,9 @@ export const InvalidCard_TooShort_ThirdBlock: Story = {
     await userEvent.clear(inputs[2]);
     await userEvent.type(inputs[2], '333');
 
-    await expect(
-      canvas.findByText(
-        `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
-    ).resolves.toBeInTheDocument();
+    const helperText = canvas.getByTestId('helper-text');
+    expect(helperText.textContent).toBe(
+      `${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+    );
   },
 };
