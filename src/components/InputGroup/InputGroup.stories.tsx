@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputGroup from "./InputGroup";
 import { INPUT_TYPE } from "../../constants/constants";
-import { withCustomCardProvider } from "../../utils/storybook/CardProviderDecorator";
+import { withCustomCardProvider } from "../../../.storybook/utils/withCustomCardProvider";
 
 const defaultError = {
   cardNumbers: {

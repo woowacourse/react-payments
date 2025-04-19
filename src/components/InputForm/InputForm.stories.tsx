@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { INPUT_TYPE } from "../../constants/constants";
 import InputForm from "./InputForm";
-import { withCustomCardProvider } from "../../utils/storybook/CardProviderDecorator";
+import { withCustomCardProvider } from "../../../.storybook/utils/withCustomCardProvider";
 
 const meta = {
   title: "InputForm",

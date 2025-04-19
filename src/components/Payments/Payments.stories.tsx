@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Payments from "./Payments";
-import { withCustomCardProvider } from "../../utils/storybook/CardProviderDecorator";
+import { withCustomCardProvider } from "../../../.storybook/utils/withCustomCardProvider";
 
 const meta = {
   title: "Payments",
