@@ -10,50 +10,20 @@ const meta = {
 
 export default meta;
 
-export const CardNumber = () => {
-  const [value, setValue] = useState("");
-  return (
-    <NumberInput
-      value={value}
-      setValue={setValue}
-      maxLength={4}
-      placeholder="1234"
-    />
-  );
-};
+const createNumberInputStory =
+  (maxLength: number, placeholder: string) => () => {
+    const [value, setValue] = useState("");
+    return (
+      <NumberInput
+        value={value}
+        setValue={setValue}
+        maxLength={maxLength}
+        placeholder={placeholder}
+      />
+    );
+  };
 
-export const CVCNumber = () => {
-  const [value, setValue] = useState("");
-  return (
-    <NumberInput
-      value={value}
-      setValue={setValue}
-      maxLength={3}
-      placeholder="123"
-    />
-  );
-};
-
-export const ExpirationMonth = () => {
-  const [value, setValue] = useState("");
-  return (
-    <NumberInput
-      value={value}
-      setValue={setValue}
-      maxLength={2}
-      placeholder="MM"
-    />
-  );
-};
-
-export const ExpirationYear = () => {
-  const [value, setValue] = useState("");
-  return (
-    <NumberInput
-      value={value}
-      setValue={setValue}
-      maxLength={2}
-      placeholder="YY"
-    />
-  );
-};
+export const CardNumber = createNumberInputStory(4, "1234");
+export const CVCNumber = createNumberInputStory(3, "123");
+export const ExpirationMonth = createNumberInputStory(2, "MM");
+export const ExpirationYear = createNumberInputStory(2, "YY");
