@@ -6,6 +6,7 @@ import Spacing from './common/Spacing';
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
+import { getFirstErrorMessage } from '../utils';
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
@@ -105,13 +106,7 @@ export default function CardExpirationDate({
         ))}
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>
-        {
-          Object.entries(cardExpirationDateErrorMessage)
-            .filter(([_, errorMassage]) => errorMassage !== '')
-            .at(0)?.[1]
-        }
-      </ErrorMessage>
+      <ErrorMessage>{getFirstErrorMessage(cardExpirationDateErrorMessage)}</ErrorMessage>
     </div>
   );
 }

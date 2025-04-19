@@ -5,3 +5,12 @@ export const getCardType = (cardNumberFirst: string) => {
   if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master';
   return '';
 };
+
+export const getFirstErrorMessage = <T extends string>(cardNumberErrorMessage: Record<T, string>) => {
+  const visibleErrors = Object.values(cardNumberErrorMessage).filter(
+    (errorMassage): errorMassage is string => errorMassage !== '',
+  );
+  if (visibleErrors.length === 0) return '';
+
+  return visibleErrors[0];
+};

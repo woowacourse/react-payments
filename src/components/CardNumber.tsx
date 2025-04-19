@@ -6,6 +6,7 @@ import Spacing from './common/Spacing';
 import ErrorMessage from './common/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../constants';
+import { getFirstErrorMessage } from '../utils';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
@@ -66,13 +67,7 @@ export default function CardNumber({
         ))}
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>
-        {
-          Object.entries(cardNumberErrorMessage)
-            .filter(([_, errorMassage]) => errorMassage !== '')
-            .at(0)?.[1]
-        }
-      </ErrorMessage>
+      <ErrorMessage>{getFirstErrorMessage(cardNumberErrorMessage)}</ErrorMessage>
     </div>
   );
 }
