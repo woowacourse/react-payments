@@ -1,12 +1,11 @@
 import Card from '../component/card/Card';
-import Description from '../component/Description';
+
 import styled from 'styled-components';
-import Input from '../component/Input';
+
 import { useState } from 'react';
-import InputGroup from '../component/InputGroup';
+
 import { CardInputProps } from '../types/CardInputTypes';
 import {
-  validateCardNumber,
   validateCardExpirationDateMM,
   validateCardExpirationDateYY,
   validateCardCVC,
@@ -14,16 +13,8 @@ import {
 import { justifyBrandLogo } from './util/justifyBrandLogo';
 import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
 import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
-
-type ErrorMessagesType = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-  MM: string;
-  YY: string;
-  CVC: string;
-};
+import { CVCInput } from '../component/cardDetails/CVCInput';
+import { ErrorMessagesType } from '../types/ErrorMessagesType';
 
 const Wrap = styled.div`
   display: flex;
@@ -117,17 +108,12 @@ const AddCard = () => {
           setCardInput={setCardInput}
           handleErrorMessages={handleErrorMessages}
         />
-        <Description headText="CVC 번호를 입력해 주세요" />
-        <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
-          <Input
-            maxLength={3}
-            placeholder="123"
-            validate={validateCardCVC}
-            setCardInput={setCardInput}
-            inputKey="CVC"
-            handleErrorMessage={message => handleErrorMessages('CVC', message)}
-          />
-        </InputGroup>
+        <CVCInput
+          validateCardCVC={validateCardCVC}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
+          errorMessages={errorMessages}
+        />
       </Form>
     </Wrap>
   );
