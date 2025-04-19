@@ -5,7 +5,7 @@ import {
   errorMessageStyle,
 } from '../../styles/@common/text/text.style';
 import { cardNumberInputLayout } from './CardNumberInput.style';
-import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
+import { CARD_NUMBER } from '../../constants';
 import {
   inputContainer,
   inputSection,
@@ -26,12 +26,11 @@ function CardNumberInput({
   errorState,
   getCardNumberErrorMessage,
 }: CardNumberInputProps) {
-  const getErrorMessage = (): string => {
-    if (getCardNumberErrorMessage) {
-      return getCardNumberErrorMessage() || CARD_NUMBER_ERROR.onlyNumbers;
-    }
-    return CARD_NUMBER_ERROR.onlyNumbers;
-  };
+  const hasError =
+    errorState.first ||
+    errorState.second ||
+    errorState.third ||
+    errorState.forth;
 
   return (
     <div css={cardNumberInputLayout}>
@@ -84,11 +83,8 @@ function CardNumberInput({
               />
             </Input.Group>
           </article>
-          {(errorState.first ||
-            errorState.second ||
-            errorState.third ||
-            errorState.forth) && (
-            <div css={errorMessageStyle}>{getErrorMessage()}</div>
+          {hasError && (
+            <div css={errorMessageStyle}>{getCardNumberErrorMessage?.()}</div>
           )}
         </div>
       </Input.Group>
