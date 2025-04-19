@@ -1,9 +1,3 @@
-export type ErrorMessagesType = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-  MM: string;
-  YY: string;
-  CVC: string;
-};
+import { CardInputProps } from './CardInputTypes';
+
+export type ErrorMessagesType = Record<keyof CardInputProps, string>;
