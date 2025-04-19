@@ -9,7 +9,7 @@ import {
   CardExpirationDateOptions,
   IsError,
 } from '../types/CardExpirationDateOptions';
-import { COMMON_ERROR_MESSAGE } from './commonErrorMessage';
+import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 
 const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
   month: '',

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useError from './useError';
 import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
-import { COMMON_ERROR_MESSAGE } from './commonErrorMessage';
+import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
