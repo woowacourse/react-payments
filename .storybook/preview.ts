@@ -40,7 +40,7 @@ const preview: Preview = {
           },
         },
       },
-      defaultViewport: "tablet",
+      defaultViewport: "mobile",
     },
   },
 };
