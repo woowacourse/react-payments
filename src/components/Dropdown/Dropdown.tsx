@@ -18,6 +18,7 @@ function Dropdown({ dropdownList, buttonText }: DropdownProps) {
 
   return (
     <div ref={dropdownRef} className={styles.container}>
+      <input type="hidden" />
       <button
         type="button"
         onClick={handleDropdownToggle}
