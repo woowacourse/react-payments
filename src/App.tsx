@@ -21,7 +21,7 @@ function App() {
           cardInfo.thirdNumber,
           cardInfo.fourthNumber,
         ]}
-        expiration={[cardInfo.month, cardInfo.year]}
+        expiration={{ month: cardInfo.month, year: cardInfo.year }}
       />
       <div>
         <Announcement main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />

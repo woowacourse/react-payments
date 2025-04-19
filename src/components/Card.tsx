@@ -3,7 +3,7 @@ import { CARD_TYPE_PATH, VISA_CARD_PREFIXES, MASTER_CARD_PREFIXES } from '../con
 
 interface CardProps {
   cardNumber: string[];
-  expiration: string[];
+  expiration: { month: string; year: string };
 }
 
 const Card = ({ cardNumber, expiration }: CardProps) => {
@@ -25,7 +25,9 @@ const Card = ({ cardNumber, expiration }: CardProps) => {
 
       <CardInfo>
         <p>{maskCardNumber(cardNumber).join(' ')}</p>
-        <p>{expiration[0] === '' && expiration[1] === '' ? '' : expiration.join('/')}</p>
+        <p>
+          {expiration.year === '' ? expiration.month : `${expiration.month} / ${expiration.year}`}
+        </p>
       </CardInfo>
     </CardContainer>
   );
