@@ -21,7 +21,6 @@ export const EXPIRATION_DATE = {
     MAX: 12,
   },
   YEAR: {
-    MIN: 25,
-    MAX: 99,
+    MAX_OFFSET: 10,
   },
 };

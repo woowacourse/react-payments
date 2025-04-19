@@ -13,7 +13,8 @@ export const CVC_MESSAGE = {
 };
 
 export const ERROR_MESSAGE = {
-  LENGTH: (length: number) => `${length}자의 숫자만 입력 가능합니다.`,
-  INVALID_MONTH: "01에서 12사이의 숫자를 입력해주세요.",
-  INVALID_YEAR: "만료된 연도입니다. 25년 이후의 년도를 입력해주세요.",
+  LENGTH: (length: number) => `입력값은 ${length}자리여야 합니다.`,
+  INVALID_MONTH: "유효하지 않은 월입니다. 01-12 사이의 값을 입력하세요",
+  INVALID_YEAR: "유효하지 않은 연도입니다",
+  EXPIRED: "만료된 카드입니다.",
 };

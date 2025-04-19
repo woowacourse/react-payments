@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import isExactLength from "../utils/isExactLength";
 import NumberInput from "./NumberInput";
-import { ERROR_MESSAGE } from "../constants/guide";
 import {
   NumberInputForm,
   Label,
   NumberInputContainer,
   ErrorText,
 } from "../styles/CardForm.styles";
-import { EXPIRATION_DATE } from "../constants/setting";
+import {
+  isNotExpired,
+  isValidMonth,
+  isValidYear,
+  validateExpiration,
+} from "../domains/expiration/dateUtils";
 
 interface CardExpirationFormProps {
   cardInfo: {
@@ -29,34 +32,9 @@ function CardExpirationForm({
 }: CardExpirationFormProps) {
   const [errorText, setErrorText] = useState("");
 
-  const isValidMonth =
-    Number(cardInfo.month) >= EXPIRATION_DATE.MONTH.MIN &&
-    Number(cardInfo.month) <= EXPIRATION_DATE.MONTH.MAX;
-  const isValidYear =
-    Number(cardInfo.year) >= EXPIRATION_DATE.YEAR.MIN &&
-    Number(cardInfo.year) <= EXPIRATION_DATE.YEAR.MAX;
-
   useEffect(() => {
-    const isExactDigits = [cardInfo.month, cardInfo.year].some((number) => {
-      if (isExactLength(number, 0) || isExactLength(number, maxLength))
-        return false;
-      return true;
-    });
-
-    if (isExactDigits) {
-      setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
-      return;
-    }
-    if (cardInfo.month !== "" && !isValidMonth) {
-      setErrorText(ERROR_MESSAGE.INVALID_MONTH);
-      return;
-    }
-    if (cardInfo.year !== "" && !isValidYear) {
-      setErrorText(ERROR_MESSAGE.INVALID_YEAR);
-      return;
-    }
-    setErrorText("");
-  }, [cardInfo.month, cardInfo.year]);
+    setErrorText(validateExpiration(cardInfo, maxLength));
+  }, [cardInfo.month, cardInfo.year, maxLength]);
 
   return (
     <NumberInputForm>
@@ -69,7 +47,12 @@ function CardExpirationForm({
           }}
           maxLength={maxLength}
           placeholder="MM"
-          extraErrorCondition={cardInfo.month !== "" && !isValidMonth}
+          extraErrorCondition={
+            (cardInfo.month !== "" && !isValidMonth(cardInfo.month)) ||
+            (!isNotExpired(cardInfo.month, cardInfo.year) &&
+              cardInfo.month !== "" &&
+              cardInfo.year !== "")
+          }
         />
         <NumberInput
           value={cardInfo.year}
@@ -78,7 +61,12 @@ function CardExpirationForm({
           }}
           maxLength={maxLength}
           placeholder="YY"
-          extraErrorCondition={cardInfo.year !== "" && !isValidYear}
+          extraErrorCondition={
+            (cardInfo.year !== "" && !isValidYear(cardInfo.year)) ||
+            (!isNotExpired(cardInfo.month, cardInfo.year) &&
+              cardInfo.month !== "" &&
+              cardInfo.year !== "")
+          }
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
