@@ -87,6 +87,7 @@ export default function CardExpirationDate({
         <Input
           placeholder="MM"
           maxLength={2}
+          id="card-expiration-date"
           value={cardExpirationDate.month}
           onChange={(event) =>
             handleInputChange({

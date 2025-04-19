@@ -41,6 +41,7 @@ export default function CardCVCNumber({
         <Input
           placeholder="123"
           maxLength={3}
+          id="card-cvc-number"
           value={cardCVCNumber}
           onChange={(event) => handleInputChange(event.target.value)}
           isError={cardCVCNumberErrorMessage !== ''}

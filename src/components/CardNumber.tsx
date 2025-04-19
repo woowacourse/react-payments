@@ -48,6 +48,7 @@ export default function CardNumber({
         <Input
           placeholder="1234"
           maxLength={4}
+          id="card-number"
           value={cardNumber.first}
           onChange={(event) =>
             handleInputChange({
