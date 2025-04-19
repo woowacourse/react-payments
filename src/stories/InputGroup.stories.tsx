@@ -1,40 +1,28 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { CardInputProps } from "../types/CardInputTypes";
-import InputGroup from "../component/InputGroup";
-import Input from "../component/Input";
-import {
-  validateCardCVC,
-  validateCardExpirationDateMM,
-  validateCardExpirationDateYY,
-  validateCardNumber,
-} from "../validation/validation";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { CardInputProps } from '../types/CardInputTypes';
+import InputGroup from '../component/InputGroup';
+import Input from '../component/Input';
+import { validateCardCVC, validateCardExpirationDateMM, validateCardExpirationDateYY, validateCardNumber } from '../validation/validation';
 
 const meta: Meta<typeof InputGroup> = {
-  title: "Components/InputGroup",
+  title: 'Components/InputGroup',
   component: InputGroup,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
 type Story = StoryObj<typeof InputGroup>;
 
 const renderCardNumberInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input
-    maxLength={4}
-    placeholder="0000"
-    inputKey="first"
-    setCardInput={setCardInput}
-    validate={validateCardNumber}
-    handleErrorMessage={handleErrorMessage}
-  />
+  <Input maxLength={4} placeholder="0000" inputKey="first" setCardInput={setCardInput} validate={validateCardNumber} handleErrorMessage={handleErrorMessage} />
 );
 
 const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
-  <div style={{ display: "flex", gap: "8px" }}>
+  <div style={{ display: 'flex', gap: '8px' }}>
     <Input
       maxLength={2}
       placeholder="MM"
@@ -43,7 +31,7 @@ const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
       validate={validateCardExpirationDateMM}
       handleErrorMessage={handleErrorMessage}
     />
-    <span style={{ alignSelf: "center" }}>/</span>
+    <span style={{ alignSelf: 'center' }}>/</span>
     <Input
       maxLength={2}
       placeholder="YY"
@@ -56,55 +44,38 @@ const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
 );
 
 const renderCVCInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input
-    maxLength={3}
-    placeholder="CVC"
-    inputKey="CVC"
-    setCardInput={setCardInput}
-    validate={validateCardCVC}
-    handleErrorMessage={handleErrorMessage}
-  />
+  <Input maxLength={3} placeholder="CVC" inputKey="CVC" setCardInput={setCardInput} validate={validateCardCVC} handleErrorMessage={handleErrorMessage} />
 );
 
 export const CardNumberInputGroup: Story = {
   render: () => {
     const Component = () => {
       const [cardInput, setCardInput] = useState<CardInputProps>({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        MM: "",
-        YY: "",
-        CVC: "",
+        first: 0,
+        second: 0,
+        third: 0,
+        fourth: 0,
+        MM: 0,
+        YY: 0,
+        CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<
-        Record<string, string>
-      >({});
+      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
       const handleErrorMessage = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           cardNumber: message,
         }));
       };
 
       const handleCardNumberErrorMessages = () => {
-        const filterErrorMessage = [
-          errorMessages.first,
-          errorMessages.second,
-          errorMessages.third,
-          errorMessages.fourth,
-        ].filter((message) => message?.length);
+        const filterErrorMessage = [errorMessages.first, errorMessages.second, errorMessages.third, errorMessages.fourth].filter(message => message?.length);
         return filterErrorMessage[0];
       };
 
       return (
-        <div style={{ width: "300px" }}>
-          <InputGroup
-            label="카드번호"
-            errorMessages={handleCardNumberErrorMessages()}
-          >
+        <div style={{ width: '300px' }}>
+          <InputGroup label="카드번호" errorMessages={handleCardNumberErrorMessages()}>
             {renderCardNumberInput(setCardInput, handleErrorMessage)}
           </InputGroup>
         </div>
@@ -119,38 +90,31 @@ export const ExpiryDateInputGroup: Story = {
   render: () => {
     const Component = () => {
       const [cardInput, setCardInput] = useState<CardInputProps>({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        MM: "",
-        YY: "",
-        CVC: "",
+        first: 0,
+        second: 0,
+        third: 0,
+        fourth: 0,
+        MM: 0,
+        YY: 0,
+        CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<
-        Record<string, string>
-      >({});
+      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
       const handleErrorMessage = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           expiryDate: message,
         }));
       };
 
       const handlePeriodErrorMessages = () => {
-        const filterErrorMessage = [errorMessages.MM, errorMessages.YY].filter(
-          (msg) => msg?.length
-        );
+        const filterErrorMessage = [errorMessages.MM, errorMessages.YY].filter(msg => msg?.length);
         return filterErrorMessage[0];
       };
 
       return (
-        <div style={{ width: "300px" }}>
-          <InputGroup
-            label="유효기간"
-            errorMessages={handlePeriodErrorMessages()}
-          >
+        <div style={{ width: '300px' }}>
+          <InputGroup label="유효기간" errorMessages={handlePeriodErrorMessages()}>
             {renderExpiryDateInputs(setCardInput, handleErrorMessage)}
           </InputGroup>
         </div>
@@ -165,27 +129,25 @@ export const CVCInputGroup: Story = {
   render: () => {
     const Component = () => {
       const [cardInput, setCardInput] = useState<CardInputProps>({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        MM: "",
-        YY: "",
-        CVC: "",
+        first: 0,
+        second: 0,
+        third: 0,
+        fourth: 0,
+        MM: 0,
+        YY: 0,
+        CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<
-        Record<string, string>
-      >({});
+      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
       const handleErrorMessage = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           cvc: message,
         }));
       };
 
       return (
-        <div style={{ width: "300px" }}>
+        <div style={{ width: '300px' }}>
           <InputGroup label="CVC" errorMessages={errorMessages.cvc}>
             {renderCVCInput(setCardInput, handleErrorMessage)}
           </InputGroup>
@@ -201,17 +163,17 @@ export const InputGroupWithError: Story = {
   render: () => {
     const Component = () => {
       const [errorMessages] = useState<Record<string, string>>({
-        cardNumber: "숫자만 입력 가능합니다.",
+        cardNumber: '숫자만 입력 가능합니다.',
       });
 
       return (
-        <div style={{ width: "300px" }}>
+        <div style={{ width: '300px' }}>
           <InputGroup label="카드번호" errorMessages={errorMessages.cardNumber}>
             <div
               style={{
-                padding: "8px",
-                border: "1px solid var(--color-red)",
-                borderRadius: "4px",
+                padding: '8px',
+                border: '1px solid var(--color-red)',
+                borderRadius: '4px',
               }}
             >
               abcd
@@ -229,34 +191,32 @@ export const PaymentFormExample: Story = {
   render: () => {
     const Component = () => {
       const [cardInput, setCardInput] = useState<CardInputProps>({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-        MM: "",
-        YY: "",
-        CVC: "",
+        first: 0,
+        second: 0,
+        third: 0,
+        fourth: 0,
+        MM: 0,
+        YY: 0,
+        CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<
-        Record<string, string>
-      >({});
+      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
 
       const handleCardNumberError = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           second: message,
         }));
       };
 
       const handleExpiryDateError = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           third: message,
         }));
       };
 
       const handleCVCError = (message: string) => {
-        setErrorMessages((prev) => ({
+        setErrorMessages(prev => ({
           ...prev,
           cvc: message,
         }));
@@ -265,14 +225,14 @@ export const PaymentFormExample: Story = {
       return (
         <div
           style={{
-            width: "400px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
+            width: '400px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
           }}
         >
           <InputGroup label="카드번호" errorMessages={errorMessages.second}>
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
               <Input
                 maxLength={4}
                 placeholder="0000"
@@ -308,9 +268,9 @@ export const PaymentFormExample: Story = {
             </div>
           </InputGroup>
 
-          <div style={{ display: "flex", gap: "12px" }}>
+          <div style={{ display: 'flex', gap: '12px' }}>
             <InputGroup label="유효기간" errorMessages={errorMessages.third}>
-              <div style={{ display: "flex", gap: "8px" }}>
+              <div style={{ display: 'flex', gap: '8px' }}>
                 <Input
                   maxLength={2}
                   placeholder="MM"
@@ -319,7 +279,7 @@ export const PaymentFormExample: Story = {
                   validate={validateCardExpirationDateMM}
                   handleErrorMessage={handleExpiryDateError}
                 />
-                <span style={{ alignSelf: "center" }}>/</span>
+                <span style={{ alignSelf: 'center' }}>/</span>
                 <Input
                   maxLength={2}
                   placeholder="YY"
