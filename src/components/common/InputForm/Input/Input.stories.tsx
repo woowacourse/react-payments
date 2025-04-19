@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../components/common/inputForm/input/Input';
-import { validatorUtils } from '../utils/validationUtils';
+import Input from '../../../common/inputForm/input/Input';
+import { validatorUtils } from '../../../../utils/validationUtils';
 import { userEvent, within, expect, waitFor } from '@storybook/test';
-import styles from '../components/common/inputForm/input/Input.module.css';
+import styles from '../../../common/inputForm/input/Input.module.css';
 
 function onChangeHandler(
   e: React.ChangeEvent<HTMLInputElement>,

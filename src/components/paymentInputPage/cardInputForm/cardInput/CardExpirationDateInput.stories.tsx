@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpirationDateInput from '../components/paymentInputPage/cardInputForm/cardInput/CardExpirationDateInput';
+import CardExpirationDateInput from './CardExpirationDateInput';
 import { expect, userEvent, within } from '@storybook/test';
-import styles from '../components/common/inputForm/input/Input.module.css';
+import styles from '../../../common/inputForm/input/Input.module.css';
 
 const meta = {
   title: 'CardExpirationDateInput',

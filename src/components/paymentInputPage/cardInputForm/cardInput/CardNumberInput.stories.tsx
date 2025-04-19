@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import CardNumberInput from '../components/paymentInputPage/cardInputForm/cardInput/CardNumberInput';
+import CardNumberInput from './CardNumberInput';
 import { userEvent, expect, within } from '@storybook/test';
-import styles from '../components/common/inputForm/input/Input.module.css';
+import styles from '../../../common/inputForm/input/Input.module.css';
 
 const meta = {
   title: 'CardNumberInput',

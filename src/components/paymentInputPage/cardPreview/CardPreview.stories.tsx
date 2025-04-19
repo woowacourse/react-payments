@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardPreview from '../components/paymentInputPage/cardPreview/CardPreview';
+import CardPreview from './CardPreview';
 
 const meta = {
   title: 'CardPreview',
