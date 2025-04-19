@@ -1,19 +1,11 @@
 import { createContext, ReactNode, useState } from "react";
-import { CardPositionType, PeriodPositionType } from "../constants/constants";
-
-interface CardNumbers {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
-
-interface ExpirationPeriod {
-  month: string;
-  year: string;
-}
-
-type CvcNumber = string;
+import {
+  CardNumbers,
+  CardPositionType,
+  CvcNumber,
+  ExpirationPeriod,
+  PeriodPositionType,
+} from "../constants/constants";
 
 export interface CardContextType {
   cardNumbers: CardNumbers;
