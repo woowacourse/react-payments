@@ -16,7 +16,13 @@ const PLACEHOLDERS = {
   cardNumber: "1234",
   month: "MM",
   year: "YY",
-  cvc: "123",
+  cvcNumber: "123",
+};
+
+const MAX_LENGTHS = {
+  cardNumber: 4,
+  expirationPeriod: 2,
+  cvcNumber: 3,
 };
 
 export interface InputGroupProps {
@@ -70,82 +76,60 @@ function InputGroup({
   const renderInputByType = () => {
     switch (type) {
       case INPUT_TYPE.cardNumbers:
+        const cardPositions: CardPositionType[] = [
+          CARD_POSITION.first,
+          CARD_POSITION.second,
+          CARD_POSITION.third,
+          CARD_POSITION.fourth,
+        ];
+
         return (
           <>
-            <Input
-              placeholder={PLACEHOLDERS.cardNumber}
-              maxLength={4}
-              isError={error.cardNumbers.first}
-              value={cardNumbers.first}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.first)
-              }
-            />
-            <Input
-              placeholder={PLACEHOLDERS.cardNumber}
-              maxLength={4}
-              isError={error.cardNumbers.second}
-              value={cardNumbers.second}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.second)
-              }
-            />
-            <Input
-              placeholder={PLACEHOLDERS.cardNumber}
-              maxLength={4}
-              isError={error.cardNumbers.third}
-              value={cardNumbers.third}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.third)
-              }
-            />
-            <Input
-              placeholder={PLACEHOLDERS.cardNumber}
-              maxLength={4}
-              isError={error.cardNumbers.fourth}
-              value={cardNumbers.fourth}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.fourth)
-              }
-            />
+            {cardPositions.map((position) => {
+              return (
+                <Input
+                  placeholder={PLACEHOLDERS.cardNumber}
+                  maxLength={MAX_LENGTHS.cardNumber}
+                  isError={error.cardNumbers[position]}
+                  value={cardNumbers[position]}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleCardNumberChange(e.target.value, position)
+                  }
+                />
+              );
+            })}
           </>
         );
 
       case INPUT_TYPE.expirationPeriod:
+        const periodPositions: PeriodPositionType[] = [
+          PERIOD_POSITION.month,
+          PERIOD_POSITION.year,
+        ];
+
         return (
           <>
-            <Input
-              placeholder={PLACEHOLDERS.month}
-              maxLength={2}
-              isError={error.expirationPeriod.month}
-              value={expirationPeriod.month}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleExpirationPeriodChange(
-                  e.target.value,
-                  PERIOD_POSITION.month
-                )
-              }
-            />
-            <Input
-              placeholder={PLACEHOLDERS.year}
-              maxLength={2}
-              isError={error.expirationPeriod.year}
-              value={expirationPeriod.year}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleExpirationPeriodChange(
-                  e.target.value,
-                  PERIOD_POSITION.year
-                )
-              }
-            />
+            {periodPositions.map((position) => {
+              return (
+                <Input
+                  placeholder={PLACEHOLDERS.month}
+                  maxLength={MAX_LENGTHS.expirationPeriod}
+                  isError={error.expirationPeriod[position]}
+                  value={expirationPeriod[position]}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleExpirationPeriodChange(e.target.value, position)
+                  }
+                />
+              );
+            })}
           </>
         );
 
       case INPUT_TYPE.cvcNumber:
         return (
           <Input
-            placeholder={PLACEHOLDERS.cvc}
-            maxLength={3}
+            placeholder={PLACEHOLDERS.cvcNumber}
+            maxLength={MAX_LENGTHS.cvcNumber}
             isError={error.cvcNumber}
             value={cvcNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
