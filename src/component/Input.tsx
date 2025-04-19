@@ -1,16 +1,16 @@
-import { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
-import { CardInputProps } from "../types/CardInputTypes";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
+import { CardInputProps } from '../types/CardInputTypes';
+import { useState } from 'react';
 
 type InputKeyType =
-  | "first"
-  | "second"
-  | "third"
-  | "fourth"
-  | "MM"
-  | "YY"
-  | "CVC";
+  | 'first'
+  | 'second'
+  | 'third'
+  | 'fourth'
+  | 'MM'
+  | 'YY'
+  | 'CVC';
 
 interface InputProps {
   maxLength: number;
@@ -27,12 +27,12 @@ const InputField = styled.input<{ $isError: boolean }>`
   background-color: var(--color-white);
   border: 1px solid var(--color-gray);
   border-color: ${({ $isError }) =>
-    $isError ? "var(--color-red)" : "var(--color-gray)"};
+    $isError ? 'var(--color-red)' : 'var(--color-gray)'};
   border-radius: 4px;
   &:focus {
     outline: none;
     border-color: ${({ $isError }) =>
-      $isError ? "var(--color-red)" : "var(--color-black)"};
+      $isError ? 'var(--color-red)' : 'var(--color-black)'};
   }
 `;
 
@@ -55,12 +55,12 @@ const Input = ({
       return;
     }
 
-    handleErrorMessage("");
+    handleErrorMessage('');
     setIsError(false);
 
     setCardInput((prev: CardInputProps) => ({
       ...prev,
-      [inputKey]: value,
+      [inputKey]: value === '' ? null : Number(value),
     }));
   };
 
