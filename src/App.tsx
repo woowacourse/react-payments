@@ -16,12 +16,12 @@ function App() {
     <AppContainer>
       <Card
         cardNumber={[
-          cardInfo.firstNumber,
-          cardInfo.secondNumber,
-          cardInfo.thirdNumber,
-          cardInfo.fourthNumber,
+          cardInfo.number.first,
+          cardInfo.number.second,
+          cardInfo.number.third,
+          cardInfo.number.fourth,
         ]}
-        expiration={{ month: cardInfo.month, year: cardInfo.year }}
+        expiration={{ month: cardInfo.expiration.month, year: cardInfo.expiration.year }}
       />
       <div>
         <Announcement main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />

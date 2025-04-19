@@ -5,13 +5,12 @@ import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
 
 interface CardNumberFormProps {
-  cardInfo: {
-    firstNumber: string;
-    secondNumber: string;
-    thirdNumber: string;
-    fourthNumber: string;
-  };
-  handleCardInfo: (key: keyof CardNumberFormProps['cardInfo'], value: string) => void;
+  cardInfo: CardInfo;
+  handleCardInfo: (
+    field: keyof CardInfo,
+    value: string,
+    subfield?: keyof CardNumber | keyof Expiration
+  ) => void;
   maxLength: number;
 }
 
@@ -20,34 +19,39 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
 
   useEffect(() => {
     const condition = [
-      cardInfo.firstNumber,
-      cardInfo.secondNumber,
-      cardInfo.thirdNumber,
-      cardInfo.fourthNumber,
+      cardInfo.number.first,
+      cardInfo.number.second,
+      cardInfo.number.third,
+      cardInfo.number.fourth,
     ].some((number) => {
       if (isZeroOrExactLength(number, maxLength)) return false;
       return true;
     });
     if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
-  }, [cardInfo.firstNumber, cardInfo.secondNumber, cardInfo.thirdNumber, cardInfo.fourthNumber]);
+  }, [
+    cardInfo.number.first,
+    cardInfo.number.second,
+    cardInfo.number.third,
+    cardInfo.number.fourth,
+  ]);
 
   const NumberInputInfo = [
     {
-      value: cardInfo.firstNumber,
-      setValue: (value: string) => handleCardInfo('firstNumber', value),
+      value: cardInfo.number.first,
+      setValue: (value: string) => handleCardInfo('number', value, 'first'),
     },
     {
-      value: cardInfo.secondNumber,
-      setValue: (value: string) => handleCardInfo('secondNumber', value),
+      value: cardInfo.number.second,
+      setValue: (value: string) => handleCardInfo('number', value, 'second'),
     },
     {
-      value: cardInfo.thirdNumber,
-      setValue: (value: string) => handleCardInfo('thirdNumber', value),
+      value: cardInfo.number.third,
+      setValue: (value: string) => handleCardInfo('number', value, 'third'),
     },
     {
-      value: cardInfo.fourthNumber,
-      setValue: (value: string) => handleCardInfo('fourthNumber', value),
+      value: cardInfo.number.fourth,
+      setValue: (value: string) => handleCardInfo('number', value, 'fourth'),
     },
   ];
 

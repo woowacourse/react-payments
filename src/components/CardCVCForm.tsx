@@ -5,10 +5,12 @@ import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
 
 interface CardCVCFormProps {
-  cardInfo: {
-    cvc: string;
-  };
-  handleCardInfo: (key: keyof CardCVCFormProps['cardInfo'], value: string) => void;
+  cardInfo: CardInfo;
+  handleCardInfo: (
+    field: keyof CardInfo,
+    value: string,
+    subfield?: keyof CardNumber | keyof Expiration
+  ) => void;
   maxLength: number;
 }
 

@@ -5,22 +5,25 @@ import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
 
 interface CardExpirationFormProps {
-  cardInfo: {
-    month: string;
-    year: string;
-  };
-  handleCardInfo: (key: keyof CardExpirationFormProps['cardInfo'], value: string) => void;
+  cardInfo: CardInfo;
+  handleCardInfo: (
+    field: keyof CardInfo,
+    value: string,
+    subfield?: keyof CardNumber | keyof Expiration
+  ) => void;
   maxLength: number;
 }
 
 function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirationFormProps) {
   const [errorText, setErrorText] = useState('');
 
-  const isValidMonth = Number(cardInfo.month) >= 1 && Number(cardInfo.month) <= 12;
-  const isValidYear = Number(cardInfo.year) >= 25 && Number(cardInfo.year) <= 99;
+  const isValidMonth =
+    Number(cardInfo.expiration.month) >= 1 && Number(cardInfo.expiration.month) <= 12;
+  const isValidYear =
+    Number(cardInfo.expiration.year) >= 25 && Number(cardInfo.expiration.year) <= 99;
 
   useEffect(() => {
-    const isExactDigits = [cardInfo.month, cardInfo.year].some((number) => {
+    const isExactDigits = [cardInfo.expiration.month, cardInfo.expiration.year].some((number) => {
       if (isZeroOrExactLength(number, maxLength)) return false;
       return true;
     });
@@ -29,29 +32,29 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
       setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
       return;
     }
-    if (cardInfo.month !== '' && !isValidMonth) {
+    if (cardInfo.expiration.month !== '' && !isValidMonth) {
       setErrorText(ERROR_MESSAGE.INVALID_MONTH);
       return;
     }
-    if (cardInfo.year !== '' && !isValidYear) {
+    if (cardInfo.expiration.year !== '' && !isValidYear) {
       setErrorText(ERROR_MESSAGE.INVALID_YEAR);
       return;
     }
     setErrorText('');
-  }, [cardInfo.month, cardInfo.year]);
+  }, [cardInfo.expiration.month, cardInfo.expiration.year]);
 
   const InputInfo = [
     {
-      value: cardInfo.month,
-      setValue: (value: string) => handleCardInfo('month', value),
+      value: cardInfo.expiration.month,
+      setValue: (value: string) => handleCardInfo('expiration', value, 'month'),
       placeholder: 'MM',
-      extraErrorCondition: cardInfo.month !== '' && !isValidMonth,
+      extraErrorCondition: cardInfo.expiration.month !== '' && !isValidMonth,
     },
     {
-      value: cardInfo.year,
-      setValue: (value: string) => handleCardInfo('year', value),
+      value: cardInfo.expiration.year,
+      setValue: (value: string) => handleCardInfo('expiration', value, 'year'),
       placeholder: 'YY',
-      extraErrorCondition: cardInfo.year !== '' && !isValidYear,
+      extraErrorCondition: cardInfo.expiration.year !== '' && !isValidYear,
     },
   ];
 

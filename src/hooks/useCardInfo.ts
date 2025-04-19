@@ -1,18 +1,41 @@
 import { useState } from 'react';
 
 function useCardInfo() {
-  const [cardInfo, setCardInfo] = useState({
-    firstNumber: '',
-    secondNumber: '',
-    thirdNumber: '',
-    fourthNumber: '',
-    month: '',
-    year: '',
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    number: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
+    expiration: {
+      month: '',
+      year: '',
+    },
     cvc: '',
   });
 
-  function handleCardInfo(key: keyof typeof cardInfo, value: string) {
-    setCardInfo((prev) => ({ ...prev, [key]: value }));
+  function handleCardInfo(
+    field: keyof CardInfo,
+    value: string,
+    subfield?: keyof CardNumber | keyof Expiration
+  ) {
+    if ((field === 'number' || field === 'expiration') && subfield) {
+      setCardInfo({
+        ...cardInfo,
+        [field]: {
+          ...cardInfo[field],
+          [subfield]: value,
+        },
+      });
+    }
+
+    if (field === 'cvc') {
+      setCardInfo({
+        ...cardInfo,
+        [field]: value,
+      });
+    }
   }
 
   return { cardInfo, handleCardInfo };
