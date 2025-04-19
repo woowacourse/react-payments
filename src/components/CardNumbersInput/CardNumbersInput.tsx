@@ -57,7 +57,7 @@ const CardNumbersInput = ({
       title={INPUT_CONTAINER.CARD_NUMBERS.TITLE}
       subTitle={INPUT_CONTAINER.CARD_NUMBERS.SUBTITLE}
     >
-      <label className="label">카드 번호</label>
+      <h4 className="label">카드 번호</h4>
       <div className="inputContainer">
         {cardNumbers.map((value, index) => (
           <input

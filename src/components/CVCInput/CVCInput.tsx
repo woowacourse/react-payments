@@ -28,7 +28,7 @@ const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
-      <label className="label">CVC</label>
+      <h4 className="label">CVC</h4>
       <div className="inputContainer">
         <input
           name="cvc"

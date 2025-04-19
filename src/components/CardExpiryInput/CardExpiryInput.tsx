@@ -59,9 +59,7 @@ const CardExpiryInput = ({
       title={INPUT_CONTAINER.EXPIRE.TITLE}
       subTitle={INPUT_CONTAINER.EXPIRE.SUBTITLE}
     >
-      <label htmlFor="" className="label">
-        유효기간
-      </label>
+      <h4 className="label">유효기간</h4>
       <div className={`inputContainer`}>
         <input
           type="text"
