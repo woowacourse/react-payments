@@ -59,9 +59,12 @@ const CardExpiryInput = ({
       title={INPUT_CONTAINER.EXPIRE.TITLE}
       subTitle={INPUT_CONTAINER.EXPIRE.SUBTITLE}
     >
-      <h4 className="label">유효기간</h4>
+      <label htmlFor="expiry" className="label">
+        유효기간
+      </label>
       <div className={`inputContainer`}>
         <input
+          id="expiry"
           type="text"
           name="month"
           placeholder="MM"
@@ -74,6 +77,7 @@ const CardExpiryInput = ({
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
         <input
+          id="expiry"
           type="text"
           name="year"
           placeholder="YY"

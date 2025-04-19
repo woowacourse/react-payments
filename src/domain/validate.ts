@@ -6,7 +6,7 @@ const isNumber = (number: string) => {
   return !isNaN(Number(number));
 };
 
-const invaludNumberLength = (number: string, length: number) => {
+const invalidNumberLength = (number: string, length: number) => {
   return number.length !== length;
 };
 
@@ -36,7 +36,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
     if (num.length > 0) {
       if (!isNumber(num))
         throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
-      if (invaludNumberLength(num, length))
+      if (invalidNumberLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
           index
@@ -52,20 +52,20 @@ export const validateFirstCardNumbers = (number: string) => {
 
 export const validateMonth = (month: string, length: number) => {
   if (!isNumber(month)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (invaludNumberLength(month, length))
+  if (invalidNumberLength(month, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
   if (invalidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
 };
 
 export const validateYear = (year: string, length: number) => {
   if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (invaludNumberLength(year, length))
+  if (invalidNumberLength(year, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
   if (invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
 };
 
 export const validateCVC = (number: string, length: number) => {
   if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (invaludNumberLength(number, length))
+  if (invalidNumberLength(number, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
 };
