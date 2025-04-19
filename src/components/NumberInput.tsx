@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import isExactLength from "../utils/isExactLength";
+import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import isExactLength from '../utils/isExactLength';
 
 interface NumberInputProps {
   value: string;
@@ -56,13 +56,13 @@ export default NumberInput;
 
 const Input = styled.input<{ isError: boolean }>`
   width: 100%;
-  border: 1px solid ${({ isError }) => (isError ? "#FF3D3D" : "#ACACAC")};
+  border: 1px solid ${({ isError }) => (isError ? '#FF3D3D' : '#ACACAC')};
   border-radius: 2px;
   height: 32px;
   padding: 8px;
 
   &:focus {
-    border: 1.5px solid ${({ isError }) => (isError ? "#FF3D3D" : "#000")};
+    border: 1.5px solid ${({ isError }) => (isError ? '#FF3D3D' : '#000')};
     outline: none;
   }
 `;

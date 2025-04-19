@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function useCardInfo() {
   const [cardInfo, setCardInfo] = useState({
-    firstNumber: "",
-    secondNumber: "",
-    thirdNumber: "",
-    fourthNumber: "",
-    month: "",
-    year: "",
-    cvc: "",
+    firstNumber: '',
+    secondNumber: '',
+    thirdNumber: '',
+    fourthNumber: '',
+    month: '',
+    year: '',
+    cvc: '',
   });
 
   function handleCardInfo(key: keyof typeof cardInfo, value: string) {

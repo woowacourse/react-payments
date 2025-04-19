@@ -1,16 +1,12 @@
-import Announcement from "./components/Announcement";
-import Card from "./components/Card";
-import CardNumberForm from "./components/CardNumberForm";
-import CardExpirationForm from "./components/CardExpirationForm";
-import CardCVCForm from "./components/CardCVCForm";
-import styled from "@emotion/styled";
-import useCardInfo from "./hooks/useCardInfo";
-import {
-  CARD_NUMBER_MESSAGE,
-  CVC_MESSAGE,
-  EXPIRATION_MESSAGE,
-} from "./constants/guide";
-import { CARD_INFO_LENGTH } from "./constants/setting";
+import Announcement from './components/Announcement';
+import Card from './components/Card';
+import CardNumberForm from './components/CardNumberForm';
+import CardExpirationForm from './components/CardExpirationForm';
+import CardCVCForm from './components/CardCVCForm';
+import styled from '@emotion/styled';
+import useCardInfo from './hooks/useCardInfo';
+import { CARD_NUMBER_MESSAGE, CVC_MESSAGE, EXPIRATION_MESSAGE } from './constants/guide';
+import { CARD_INFO_LENGTH } from './constants/setting';
 
 function App() {
   const { cardInfo, handleCardInfo } = useCardInfo();
@@ -24,22 +20,15 @@ function App() {
           cardInfo.thirdNumber,
           cardInfo.fourthNumber,
         ]}
-        expiration={[cardInfo.month, cardInfo.year]}
-      ></Card>
+        expiration={[cardInfo.month, cardInfo.year]}></Card>
       <div>
-        <Announcement
-          main={CARD_NUMBER_MESSAGE.main}
-          caption={CARD_NUMBER_MESSAGE.caption}
-        />
+        <Announcement main={CARD_NUMBER_MESSAGE.main} caption={CARD_NUMBER_MESSAGE.caption} />
         <CardNumberForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
-        <Announcement
-          main={EXPIRATION_MESSAGE.main}
-          caption={EXPIRATION_MESSAGE.caption}
-        />
+        <Announcement main={EXPIRATION_MESSAGE.main} caption={EXPIRATION_MESSAGE.caption} />
         <CardExpirationForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}

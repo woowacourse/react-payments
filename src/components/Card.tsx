@@ -1,22 +1,18 @@
-import styled from "@emotion/styled";
-import {
-  CARD_TYPE_PATH,
-  VISA_CARD_PREFIXES,
-  MASTER_CARD_PREFIXES,
-} from "../constants/setting";
+import styled from '@emotion/styled';
+import { CARD_TYPE_PATH, VISA_CARD_PREFIXES, MASTER_CARD_PREFIXES } from '../constants/setting';
 
 interface CardProps {
   cardNumber: string[];
   expiration: string[];
 }
 
-function Card({ cardNumber, expiration }: CardProps) {
+const Card = ({ cardNumber, expiration }: CardProps) => {
   const cardType = getCardType(cardNumber[0]);
 
   function maskCardNumber(cardNumber: string[]) {
     return [
       ...cardNumber.slice(0, 2),
-      ...cardNumber.slice(2).map((letter) => "·".repeat(letter.length)),
+      ...cardNumber.slice(2).map((letter) => '·'.repeat(letter.length)),
     ];
   }
 
@@ -24,33 +20,29 @@ function Card({ cardNumber, expiration }: CardProps) {
     <CardContainer>
       <CardHeader>
         <CardIC />
-        {cardType !== "None" && <CardType src={CARD_TYPE_PATH[cardType]} />}
+        {cardType !== 'None' && <CardType src={CARD_TYPE_PATH[cardType]} />}
       </CardHeader>
 
       <CardInfo>
-        <p>{maskCardNumber(cardNumber).join(" ")}</p>
-        <p>
-          {expiration[0] === "" && expiration[1] === ""
-            ? ""
-            : expiration.join("/")}
-        </p>
+        <p>{maskCardNumber(cardNumber).join(' ')}</p>
+        <p>{expiration[0] === '' && expiration[1] === '' ? '' : expiration.join('/')}</p>
       </CardInfo>
     </CardContainer>
   );
-}
+};
 
 export default Card;
 
-function getCardType(cardFirstNumber: string) {
+const getCardType = (cardFirstNumber: string) => {
   for (const prefix of VISA_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return "VISA";
+    if (cardFirstNumber.startsWith(prefix)) return 'VISA';
   }
   for (const prefix of MASTER_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return "MasterCard";
+    if (cardFirstNumber.startsWith(prefix)) return 'MasterCard';
   }
 
-  return "None";
-}
+  return 'None';
+};
 
 const CardContainer = styled.div`
   width: 212px;
