@@ -24,9 +24,9 @@ function ArrowIcon({ direction, color = "#acacac" }: ArrowIconProps) {
       <path
         d="M12.1801 9.54985L8.36014 5.72992L4.54021 9.54985"
         stroke={color}
-        stroke-width="1.32867"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.32867"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
