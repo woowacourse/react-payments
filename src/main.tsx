@@ -1,10 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import CardPaymentsPage from "./components/Card/CardPaymentsPage/CardPaymentsPage";
+import { CardProvider } from "./contexts/CardContext";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <CardProvider>
+      <CardPaymentsPage />
+    </CardProvider>
+  </React.StrictMode>
+);
