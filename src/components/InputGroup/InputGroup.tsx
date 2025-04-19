@@ -12,6 +12,13 @@ import Input from "../Input/Input";
 import { InputGroupCSS } from "./InputGroup.styled";
 import { InputErrorType } from "../../hooks/useInputError";
 
+const PLACEHOLDERS = {
+  cardNumber: "1234",
+  month: "MM",
+  year: "YY",
+  cvc: "123",
+};
+
 export interface InputGroupProps {
   type: InputType;
   error: InputErrorType;
@@ -63,11 +70,10 @@ function InputGroup({
   const renderInputByType = () => {
     switch (type) {
       case INPUT_TYPE.cardNumbers:
-        const carNumberPlaceholder = "1234";
         return (
           <>
             <Input
-              placeholder={carNumberPlaceholder}
+              placeholder={PLACEHOLDERS.cardNumber}
               maxLength={4}
               isError={error.cardNumbers.first}
               value={cardNumbers.first}
@@ -76,7 +82,7 @@ function InputGroup({
               }
             />
             <Input
-              placeholder={carNumberPlaceholder}
+              placeholder={PLACEHOLDERS.cardNumber}
               maxLength={4}
               isError={error.cardNumbers.second}
               value={cardNumbers.second}
@@ -85,7 +91,7 @@ function InputGroup({
               }
             />
             <Input
-              placeholder={carNumberPlaceholder}
+              placeholder={PLACEHOLDERS.cardNumber}
               maxLength={4}
               isError={error.cardNumbers.third}
               value={cardNumbers.third}
@@ -94,7 +100,7 @@ function InputGroup({
               }
             />
             <Input
-              placeholder={carNumberPlaceholder}
+              placeholder={PLACEHOLDERS.cardNumber}
               maxLength={4}
               isError={error.cardNumbers.fourth}
               value={cardNumbers.fourth}
@@ -106,12 +112,10 @@ function InputGroup({
         );
 
       case INPUT_TYPE.expirationPeriod:
-        const monthPlaceholder = "MM";
-        const yearPlaceholder = "YY";
         return (
           <>
             <Input
-              placeholder={monthPlaceholder}
+              placeholder={PLACEHOLDERS.month}
               maxLength={2}
               isError={error.expirationPeriod.month}
               value={expirationPeriod.month}
@@ -123,7 +127,7 @@ function InputGroup({
               }
             />
             <Input
-              placeholder={yearPlaceholder}
+              placeholder={PLACEHOLDERS.year}
               maxLength={2}
               isError={error.expirationPeriod.year}
               value={expirationPeriod.year}
@@ -138,10 +142,9 @@ function InputGroup({
         );
 
       case INPUT_TYPE.cvcNumber:
-        const cvcPlaceholder = "123";
         return (
           <Input
-            placeholder={cvcPlaceholder}
+            placeholder={PLACEHOLDERS.cvc}
             maxLength={3}
             isError={error.cvcNumber}
             value={cvcNumber}
