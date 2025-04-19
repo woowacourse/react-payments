@@ -1,9 +1,9 @@
-import styles from "./AddCard.module.css";
-import AddCardForm from "./AddCardForm/components/AddCardForm";
-import useAddCard from "../hooks/useAddCard";
-import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
+import styles from "./AddCardPage.module.css";
+import AddCardForm from "@/AddCard/AddCardForm/components/AddCardForm";
+import AddCardPreview from "@/AddCard/AddCardPreview/components/AddCardPreview";
+import useAddCard from "@/AddCard/hooks/useAddCard";
 
-function AddCard() {
+function AddCardPage() {
   const {
     addCardState,
     previewState: { cardNumberState, expireDate },
@@ -20,4 +20,4 @@ function AddCard() {
   );
 }
 
-export default AddCard;
+export default AddCardPage;

@@ -1,6 +1,6 @@
-import useControlledCardNumber from "../components/AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
-import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
-import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
+import useControlledCardNumber from "../AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
+import useControlledCVC from "../AddCardForm/components/CVC/hooks/useControlledCVC";
+import useControlledExpireDate from "../AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
 
 const useAddCard = () => {
   const { cardNumberState, handleCardNumberChange } = useControlledCardNumber();
