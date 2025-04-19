@@ -23,19 +23,19 @@ function App() {
         expiration={[cardInfo.month, cardInfo.year]}
       />
       <div>
-        <Announcement main={CARD_NUMBER_MESSAGE.main} caption={CARD_NUMBER_MESSAGE.caption} />
+        <Announcement main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
         <CardNumberForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
-        <Announcement main={EXPIRATION_MESSAGE.main} caption={EXPIRATION_MESSAGE.caption} />
+        <Announcement main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
         <CardExpirationForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.EXPIRATION}
         />
-        <Announcement main={CVC_MESSAGE.main} />
+        <Announcement main={CVC_MESSAGE.MAIN} />
         <CardCVCForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}

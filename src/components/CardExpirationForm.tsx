@@ -26,7 +26,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
     });
 
     if (isExactDigits) {
-      setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
+      setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
       return;
     }
     if (cardInfo.month !== '' && !isValidMonth) {

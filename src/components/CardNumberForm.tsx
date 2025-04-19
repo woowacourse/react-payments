@@ -28,7 +28,7 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
       if (isExactLength(number, 0) || isExactLength(number, maxLength)) return false;
       return true;
     });
-    if (condition) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
+    if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
   }, [cardInfo.firstNumber, cardInfo.secondNumber, cardInfo.thirdNumber, cardInfo.fourthNumber]);
 
