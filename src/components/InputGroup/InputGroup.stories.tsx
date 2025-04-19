@@ -86,17 +86,11 @@ export const WithCardNumberError: Story = {
   args: {
     type: INPUT_TYPE.cardNumbers,
     error: {
+      ...defaultError,
       cardNumbers: {
+        ...defaultError.cardNumbers,
         first: true,
-        second: false,
-        third: false,
-        fourth: false,
       },
-      expirationPeriod: {
-        month: false,
-        year: false,
-      },
-      cvcNumber: false,
     },
   },
 };
@@ -113,17 +107,11 @@ export const WithExpirationPeriodError: Story = {
   args: {
     type: INPUT_TYPE.expirationPeriod,
     error: {
-      cardNumbers: {
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
-      },
+      ...defaultError,
       expirationPeriod: {
-        month: true, // 월 입력에 에러 표시
-        year: false,
+        ...defaultError.expirationPeriod,
+        month: true,
       },
-      cvcNumber: false,
     },
   },
 };
@@ -131,23 +119,14 @@ export const WithExpirationPeriodError: Story = {
 export const WithCvcNumberError: Story = {
   decorators: [
     withCustomCardProvider({
-      cvcNumber: "12a", // 숫자가 아닌 값 포함
+      cvcNumber: "12a",
     }),
   ],
   args: {
     type: INPUT_TYPE.cvcNumber,
     error: {
-      cardNumbers: {
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
-      },
-      expirationPeriod: {
-        month: false,
-        year: false,
-      },
-      cvcNumber: true, // CVC 입력에 에러 표시
+      ...defaultError,
+      cvcNumber: true,
     },
   },
 };
