@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { CardInputProps } from "../types/CardInputTypes";
-import InputGroup from "../component/InputGroup";
-import Input from "../component/Input";
+import { CardInputProps } from "../../types/CardInputTypes";
+import InputGroup from "./InputGroup";
+import Input from "../Input";
 import {
   validateCardCVC,
   validateCardExpirationDateMM,
   validateCardExpirationDateYY,
   validateCardNumber,
-} from "../validation/validation";
+} from "../../validation/validation";
 
 const meta: Meta<typeof InputGroup> = {
   title: "Components/InputGroup",

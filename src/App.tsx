@@ -1,10 +1,10 @@
 import AddCard from "./pages/AddCard";
-import GlobalStyle from "./GlobalStyle";
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyles />
       <AddCard />
     </>
   );

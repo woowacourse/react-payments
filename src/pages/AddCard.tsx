@@ -3,7 +3,7 @@ import Description from "../component/Description";
 import styled from "styled-components";
 import Input from "../component/Input";
 import { useState } from "react";
-import InputGroup from "../component/InputGroup";
+import InputGroup from "../component/inputGroup/InputGroup";
 import { CardInputProps } from "../types/CardInputTypes";
 import {
   validateCardNumber,
