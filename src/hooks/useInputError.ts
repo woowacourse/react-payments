@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CardPositionType, PeriodPositionType } from "../constants/constants";
+import { isNotNumber } from "../utils/validation";
 
 export interface InputErrorType {
   cardNumbers: Record<CardPositionType, boolean>;
@@ -29,7 +30,7 @@ export function useInputError() {
       ...prev,
       cardNumbers: {
         ...prev.cardNumbers,
-        [position]: Number.isNaN(Number(value)),
+        [position]: isNotNumber(value),
       },
     }));
   };
@@ -42,7 +43,7 @@ export function useInputError() {
       ...prev,
       expirationPeriod: {
         ...prev.expirationPeriod,
-        [position]: Number.isNaN(Number(value)),
+        [position]: isNotNumber(value),
       },
     }));
   };
@@ -50,7 +51,7 @@ export function useInputError() {
   const setCvcNumberError = (value: string) => {
     setError((prev) => ({
       ...prev,
-      cvcNumber: Number.isNaN(Number(value)),
+      cvcNumber: isNotNumber(value),
     }));
   };
 
