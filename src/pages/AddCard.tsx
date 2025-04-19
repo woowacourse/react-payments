@@ -1,17 +1,18 @@
-import Card from "../component/card/Card";
-import Description from "../component/Description";
-import styled from "styled-components";
-import Input from "../component/Input";
-import { useState } from "react";
-import InputGroup from "../component/InputGroup";
-import { CardInputProps } from "../types/CardInputTypes";
+import Card from '../component/card/Card';
+import Description from '../component/Description';
+import styled from 'styled-components';
+import Input from '../component/Input';
+import { useState } from 'react';
+import InputGroup from '../component/InputGroup';
+import { CardInputProps } from '../types/CardInputTypes';
 import {
   validateCardNumber,
   validateCardExpirationDateMM,
   validateCardExpirationDateYY,
   validateCardCVC,
-} from "../validation/validation";
-import { justifyBrandLogo } from "./util/justifyBrandLogo";
+} from '../validation/validation';
+import { justifyBrandLogo } from './util/justifyBrandLogo';
+import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
 
 type ErrorMessagesType = {
   first: string;
@@ -55,20 +56,20 @@ const AddCard = () => {
   });
 
   const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-    MM: "",
-    YY: "",
-    CVC: "",
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+    MM: '',
+    YY: '',
+    CVC: '',
   });
 
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
-    message: string
+    message: string,
   ) => {
-    setErrorMessages((prev) => ({
+    setErrorMessages(prev => ({
       ...prev,
       [key]: message,
     }));
@@ -80,13 +81,13 @@ const AddCard = () => {
       errorMessages.second,
       errorMessages.third,
       errorMessages.fourth,
-    ].filter((message) => message.length !== 0);
+    ].filter(message => message.length !== 0);
     return filterErrorMessage[0];
   };
 
   const handlePeriodErrorMessages = () => {
     const filterErrorMessage = [errorMessages.YY, errorMessages.MM].filter(
-      (message) => message.length !== 0
+      message => message.length !== 0,
     );
     return filterErrorMessage[0];
   };
@@ -96,59 +97,17 @@ const AddCard = () => {
       <Card
         cardNumber={cardInput}
         cardType={
-          cardInput.first ? justifyBrandLogo(cardInput.first) : "default"
+          cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'
         }
       />
       <Form>
-        <Description
-          headText="결제할 카드 번호를 입력해 주세요."
-          detailText="본인 명의의 카드만 결제 가능합니다."
+        <CardNumberInput
+          cardInput={cardInput}
+          setCardInput={setCardInput}
+          errorMessages={errorMessages}
+          handleErrorMessages={handleErrorMessages}
+          handleCardNumberErrorMessages={handleCardNumberErrorMessages}
         />
-        <InputGroup
-          label="카드 번호"
-          errorMessages={handleCardNumberErrorMessages()}
-        >
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="first"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("first", message)
-            }
-          />
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            validate={validateCardNumber}
-            setCardInput={setCardInput}
-            inputKey="second"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("second", message)
-            }
-          />
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="third"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("third", message)
-            }
-          />
-          <Input
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="fourth"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("fourth", message)
-            }
-          />
-        </InputGroup>
 
         <Description
           headText="카드 유효기간을 입력해 주세요"
@@ -164,7 +123,7 @@ const AddCard = () => {
             validate={validateCardExpirationDateMM}
             setCardInput={setCardInput}
             inputKey="MM"
-            handleErrorMessage={(message) => handleErrorMessages("MM", message)}
+            handleErrorMessage={message => handleErrorMessages('MM', message)}
           />
           <Input
             maxLength={2}
@@ -172,7 +131,7 @@ const AddCard = () => {
             validate={validateCardExpirationDateYY}
             setCardInput={setCardInput}
             inputKey="YY"
-            handleErrorMessage={(message) => handleErrorMessages("YY", message)}
+            handleErrorMessage={message => handleErrorMessages('YY', message)}
           />
         </InputGroup>
 
@@ -184,9 +143,7 @@ const AddCard = () => {
             validate={validateCardCVC}
             setCardInput={setCardInput}
             inputKey="CVC"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("CVC", message)
-            }
+            handleErrorMessage={message => handleErrorMessages('CVC', message)}
           />
         </InputGroup>
       </Form>
