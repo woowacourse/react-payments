@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { InputCSS } from "./Input.styled";
 
 export interface InputProps {
-  placeholder: string;
+  placeholder?: string;
   maxLength: number;
   isError: boolean;
   value: string;
