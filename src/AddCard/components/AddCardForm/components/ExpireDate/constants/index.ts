@@ -14,4 +14,4 @@ export const INITIAL_EXPIRE_DATE_STATE: ExpireDateState = {
 
 export const EXPIRE_DATE_KEYS: ExpireDateInputKey[] = ["MM", "YY"];
 
-export const EXPIRE_DATE_LENGTH = 2 as const;
+export const EXPIRE_DATE_LENGTH = 2;

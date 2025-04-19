@@ -19,4 +19,4 @@ export const EXPIRE_DATE_ERROR_MESSAGE = {
   INVALID_CARD_LENGTH: "4자리의 숫자만 입력 가능합니다.",
 } as const;
 
-export const CARD_NUMBER_LENGTH = 4 as const;
+export const CARD_NUMBER_LENGTH = 4;
