@@ -17,7 +17,7 @@ type CardProps = {
 };
 
 function Card({ cardNumber, cardExpirationDate }: CardProps) {
-  const { first, second, third, forth } = cardNumber;
+  const { first } = cardNumber;
 
   const masterCardType =
     first?.toString() &&
@@ -51,10 +51,9 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          <span css={cardContentText}>{first}</span>
-          <span css={cardContentText}>{second}</span>
-          <span css={cardContentText}>{third}</span>
-          <span css={cardContentText}>{forth}</span>
+          {Object.values(cardNumber).map((value) => {
+            return <span css={cardContentText}>{value}</span>;
+          })}
         </div>
         <div css={cardContent}>
           {isCardExpirationDate && (
