@@ -6,7 +6,7 @@ export interface ErrorProps {
 }
 
 function Error({ errorMessage, isVisible }: ErrorProps) {
-  return isVisible ? <ErrorCSS>{errorMessage}</ErrorCSS> : null;
+  return isVisible && <ErrorCSS>{errorMessage}</ErrorCSS>;
 }
 
 export default Error;
