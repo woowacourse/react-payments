@@ -1,74 +1,69 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Card from "../component/card/Card";
+import { Meta, StoryObj } from '@storybook/react';
+import Card from '../component/card/Card';
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: 'Components/Card',
   component: Card,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
-};
-
-export default meta;
-type Story = StoryObj<typeof Card>;
-
-const renderBrandCard = (cardType: "default" | "visa" | "mastercard") => {
-  const cardNumber = {
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-    MM: null,
-    YY: null,
-    CVC: null,
-  };
-  return <Card cardNumber={cardNumber} cardType={cardType} />;
-};
-
-export const Default: Story = {
-  render: () => renderBrandCard("default"),
-};
-
-export const Visa: Story = {
-  render: () => renderBrandCard("visa"),
-};
-
-export const Mastercard: Story = {
-  render: () => renderBrandCard("mastercard"),
-};
-
-export const InputTwoCardNumber: Story = {
+  tags: ['autodocs'],
   args: {
     cardNumber: {
-      first: 1111,
-      second: 2222,
+      first: null,
+      second: null,
       third: null,
       fourth: null,
       MM: null,
       YY: null,
       CVC: null,
     },
+    cardType: 'default',
   },
-  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
+  argTypes: {
+    cardType: {
+      control: 'select',
+      options: ['default', 'visa', 'mastercard'],
+      description: '카드 브랜드 유형',
+    },
+    cardNumber: {
+      control: 'object',
+      description: '카드 정보 객체',
+    },
+  },
 };
 
-export const InputFourCardNumber: Story = {
+export default meta;
+type Story = StoryObj<typeof Card>;
+
+export const EmptyCard: Story = {
   args: {
     cardNumber: {
-      first: 1111,
-      second: 2222,
-      third: 3333,
-      fourth: 4444,
+      first: null,
+      second: null,
+      third: null,
+      fourth: null,
       MM: null,
       YY: null,
       CVC: null,
     },
+    cardType: 'default',
   },
-  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
 };
 
-export const InputExpiration: Story = {
+export const VisaCard: Story = {
+  args: {
+    cardType: 'visa',
+  },
+};
+
+export const MastercardCard: Story = {
+  args: {
+    cardType: 'mastercard',
+  },
+};
+
+export const FilledCardInfo: Story = {
   args: {
     cardNumber: {
       first: 1111,
@@ -77,8 +72,8 @@ export const InputExpiration: Story = {
       fourth: 4444,
       MM: 12,
       YY: 25,
-      CVC: null,
+      CVC: 123,
     },
+    cardType: 'visa',
   },
-  render: (args) => <Card cardNumber={args.cardNumber} cardType="default" />,
 };
