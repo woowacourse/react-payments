@@ -1,40 +1,26 @@
-import { useState } from 'react';
+import { CARD_CVC, CARD_CVC_ERROR } from '../constants';
+import { useCardField } from './useCardField';
 import { CardCVC } from '../../types/types';
-import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_CVC_ERROR, CARD_CVC } from '../constants';
 
 export const useCardCVC = () => {
-  const [cardCVC, setCardCVC] = useState<CardCVC>(null);
-  const [cardCVCError, setCardCVCError] = useState(false);
+  const {
+    value: cvcValue,
+    error: cardCVCError,
+    handleChange,
+    reset: resetCardCVC,
+    isValid: isCardCVCValid,
+    getErrorMessage: getCardCVCErrorMessage,
+  } = useCardField({
+    requiredLength: CARD_CVC.maxLength,
+    errorMessages: {
+      onlyNumbers: CARD_CVC_ERROR.onlyNumbers,
+    },
+  });
+
+  const cardCVC: CardCVC = cvcValue ? Number(cvcValue) : null;
 
   const handleCardCVCChange = (value: string) => {
-    const isNumber = isOnlyDigits(value);
-
-    if (isNumber) {
-      setCardCVC(value === '' ? null : Number(value));
-      setCardCVCError(false);
-    } else {
-      setCardCVCError(true);
-    }
-  };
-
-  const resetCardCVC = () => {
-    setCardCVC(null);
-    setCardCVCError(false);
-  };
-
-  const isCardCVCValid = () => {
-    return (
-      cardCVC !== null &&
-      cardCVC.toString().length === CARD_CVC.maxLength &&
-      !cardCVCError
-    );
-  };
-
-  const getCardCVCErrorMessage = (): string | null => {
-    if (!cardCVCError) return null;
-
-    return CARD_CVC_ERROR.onlyNumbers;
+    handleChange(value);
   };
 
   return {

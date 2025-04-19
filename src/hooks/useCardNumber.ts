@@ -1,85 +1,53 @@
-import { useState, ChangeEvent } from 'react';
-import { CardNumber, CardNumberError } from '../../types/types';
-import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_NUMBER_ERROR } from '../constants';
+import { ChangeEvent } from 'react';
+import {
+  CARD_NUMBER_ERROR,
+  CARD_NUMBER,
+  CARD_NUMBER_FIELD_NAMES,
+} from '../constants';
+import {
+  createCardFields,
+  createCardNumber,
+  createCardNumberError,
+} from '../utils/cardFieldFactory';
+
+type FieldName = (typeof CARD_NUMBER_FIELD_NAMES)[number];
 
 export const useCardNumber = () => {
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    first: null,
-    second: null,
-    third: null,
-    forth: null,
+  const fields = createCardFields({
+    requiredLength: CARD_NUMBER.maxLength,
+    errorMessages: { onlyNumbers: CARD_NUMBER_ERROR.onlyNumbers },
   });
 
-  const [cardNumberError, setCardNumberError] = useState<CardNumberError>({
-    first: false,
-    second: false,
-    third: false,
-    forth: false,
-  });
+  const cardNumber = createCardNumber(fields);
+  const cardNumberError = createCardNumberError(fields);
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    const isNumber = isOnlyDigits(value);
-
-    if (isNumber) {
-      setCardNumber({
-        ...cardNumber,
-        [name]: value === '' ? null : Number(value),
-      });
-      setCardNumberError({
-        ...cardNumberError,
-        [name]: false,
-      });
-    } else {
-      setCardNumberError({
-        ...cardNumberError,
-        [name]: true,
-      });
+    if (name in fields) {
+      fields[name as FieldName].handleChange(value);
     }
   };
 
   const resetCardNumber = () => {
-    setCardNumber({
-      first: null,
-      second: null,
-      third: null,
-      forth: null,
-    });
-    setCardNumberError({
-      first: false,
-      second: false,
-      third: false,
-      forth: false,
+    CARD_NUMBER_FIELD_NAMES.forEach((name) => {
+      fields[name].reset();
     });
   };
 
   const isCardNumberValid = () => {
-    const { first, second, third, forth } = cardNumber;
-    return (
-      first !== null &&
-      second !== null &&
-      third !== null &&
-      forth !== null &&
-      !cardNumberError.first &&
-      !cardNumberError.second &&
-      !cardNumberError.third &&
-      !cardNumberError.forth
-    );
+    return CARD_NUMBER_FIELD_NAMES.every((name) => {
+      return (
+        fields[name].isValid() &&
+        fields[name].value.length === CARD_NUMBER.maxLength
+      );
+    });
   };
 
   const getCardNumberErrorMessage = (): string | null => {
-    if (
-      !cardNumberError.first &&
-      !cardNumberError.second &&
-      !cardNumberError.third &&
-      !cardNumberError.forth
-    ) {
-      return null;
+    if (CARD_NUMBER_FIELD_NAMES.some((name) => fields[name].error)) {
+      return CARD_NUMBER_ERROR.onlyNumbers;
     }
-
-    return CARD_NUMBER_ERROR.onlyNumbers;
+    return null;
   };
 
   return {
