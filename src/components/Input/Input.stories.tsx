@@ -7,6 +7,11 @@ const meta = {
   args: {
     type: "text",
     placeholder: "카드 번호를 입력하세요",
+    disabled: false,
+    readOnly: false,
+    minLength: 0,
+    maxLength: 30,
+    isError: false,
   },
 } satisfies Meta<typeof Input>;
 
