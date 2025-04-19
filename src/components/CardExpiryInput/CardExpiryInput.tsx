@@ -30,6 +30,7 @@ const CardExpiryInput = ({
       if (name === 'month') {
         setMonth(value);
         validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
+        validateYear(year, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
       } else if (name === 'year') {
         setYear(value);
         validateMonth(month, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
@@ -59,12 +60,9 @@ const CardExpiryInput = ({
       title={INPUT_CONTAINER.EXPIRE.TITLE}
       subTitle={INPUT_CONTAINER.EXPIRE.SUBTITLE}
     >
-      <label htmlFor="expiry" className="label">
-        유효기간
-      </label>
+      <h4 className="label">유효기간</h4>
       <div className={`inputContainer`}>
         <input
-          id="expiry"
           type="text"
           name="month"
           placeholder="MM"
@@ -77,7 +75,6 @@ const CardExpiryInput = ({
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
         <input
-          id="expiry"
           type="text"
           name="year"
           placeholder="YY"
