@@ -34,7 +34,7 @@ const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
   return (
     <img
       src={cardNetwork.image}
-      alt="mastercard"
+      alt={cardNetwork.name}
       className={styles.cardNetwork}
     />
   );
