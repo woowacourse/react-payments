@@ -13,6 +13,7 @@ import {
 } from '../validation/validation';
 import { justifyBrandLogo } from './util/justifyBrandLogo';
 import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
+import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
 
 type ErrorMessagesType = {
   first: string;
@@ -109,32 +110,13 @@ const AddCard = () => {
           handleCardNumberErrorMessages={handleCardNumberErrorMessages}
         />
 
-        <Description
-          headText="카드 유효기간을 입력해 주세요"
-          detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
+        <ExpiryDateInput
+          handlePeriodErrorMessages={handlePeriodErrorMessages}
+          validateCardExpirationDateMM={validateCardExpirationDateMM}
+          validateCardExpirationDateYY={validateCardExpirationDateYY}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
         />
-        <InputGroup
-          label="유효기간"
-          errorMessages={handlePeriodErrorMessages()}
-        >
-          <Input
-            maxLength={2}
-            placeholder="MM"
-            validate={validateCardExpirationDateMM}
-            setCardInput={setCardInput}
-            inputKey="MM"
-            handleErrorMessage={message => handleErrorMessages('MM', message)}
-          />
-          <Input
-            maxLength={2}
-            placeholder="YY"
-            validate={validateCardExpirationDateYY}
-            setCardInput={setCardInput}
-            inputKey="YY"
-            handleErrorMessage={message => handleErrorMessages('YY', message)}
-          />
-        </InputGroup>
-
         <Description headText="CVC 번호를 입력해 주세요" />
         <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
           <Input
