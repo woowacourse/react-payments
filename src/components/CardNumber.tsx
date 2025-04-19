@@ -46,6 +46,7 @@ export default function CardNumber({
       <Spacing size={8} />
       <S.InputWrapper>
         <Input
+          type="text"
           placeholder="1234"
           maxLength={4}
           id="card-number"
@@ -59,6 +60,7 @@ export default function CardNumber({
           isError={cardNumberErrorMessage.first !== ''}
         />
         <Input
+          type="text"
           placeholder="1234"
           maxLength={4}
           value={cardNumber.second}
@@ -71,6 +73,7 @@ export default function CardNumber({
           isError={cardNumberErrorMessage.second !== ''}
         />
         <Input
+          type="text"
           placeholder="1234"
           maxLength={4}
           value={cardNumber.third}
@@ -83,6 +86,7 @@ export default function CardNumber({
           isError={cardNumberErrorMessage.third !== ''}
         />
         <Input
+          type="text"
           placeholder="1234"
           maxLength={4}
           value={cardNumber.fourth}

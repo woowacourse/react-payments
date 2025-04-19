@@ -39,6 +39,7 @@ export default function CardCVCNumber({
       <Spacing size={8} />
       <div>
         <Input
+          type="text"
           placeholder="123"
           maxLength={3}
           id="card-cvc-number"

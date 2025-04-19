@@ -85,6 +85,7 @@ export default function CardExpirationDate({
       <Spacing size={8} />
       <S.InputWrapper>
         <Input
+          type="text"
           placeholder="MM"
           maxLength={2}
           id="card-expiration-date"
@@ -98,6 +99,7 @@ export default function CardExpirationDate({
           isError={cardExpirationDateErrorMessage.month !== ''}
         />
         <Input
+          type="text"
           placeholder="YY"
           maxLength={2}
           value={cardExpirationDate.year}
