@@ -36,6 +36,8 @@ function CardExpireDateInputs({
                 type="text"
                 inputMode="numeric"
                 maxLength={2}
+                pattern="[0-9]*"
+                required
                 placeholder={expireKey}
                 isError={Boolean(expireDate[expireKey].errorMessage)}
                 value={expireDate[expireKey].value}

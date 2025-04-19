@@ -18,6 +18,8 @@ function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
           type="text"
           inputMode="numeric"
           maxLength={3}
+          pattern="[0-9]*"
+          required
           placeholder="123"
           isError={CVCState.isError}
           value={CVCState.value}

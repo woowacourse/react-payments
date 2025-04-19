@@ -39,6 +39,8 @@ function CardNumberInputs({
               type="text"
               inputMode="numeric"
               maxLength={4}
+              pattern="[0-9]*"
+              required
               placeholder="1234"
               isError={cardNumberState[inputKey].isError}
               value={cardNumberState[inputKey].value}
