@@ -12,7 +12,7 @@ function CardNumberInput({
 }) {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-  function onChangeHandler(
+  function checkIsValidCardNumber(
     e: React.ChangeEvent<HTMLInputElement>,
     setIsValid: (state: boolean) => void,
     index: number
@@ -35,7 +35,9 @@ function CardNumberInput({
         name='cardNumber'
         placeholder='1234'
         maxLength={4}
-        onChange={(e, setIsValid) => onChangeHandler(e, setIsValid, index)}
+        onChange={(e, setIsValid) =>
+          checkIsValidCardNumber(e, setIsValid, index)
+        }
       />
     );
   });

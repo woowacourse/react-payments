@@ -11,7 +11,7 @@ function CardExpirationDateInput({
 }) {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-  function onChangeHandler(
+  function checkIsValidExpirationDate(
     e: React.ChangeEvent<HTMLInputElement>,
     setIsValid: (state: boolean) => void,
     index: number
@@ -52,7 +52,9 @@ function CardExpirationDateInput({
         type='tel'
         name='cardExpirationDate'
         placeholder={index === 0 ? 'MM' : 'YY'}
-        onChange={(e, setIsValid) => onChangeHandler(e, setIsValid, index)}
+        onChange={(e, setIsValid) =>
+          checkIsValidExpirationDate(e, setIsValid, index)
+        }
         maxLength={2}
       />
     );

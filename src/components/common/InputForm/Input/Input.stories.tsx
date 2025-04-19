@@ -4,7 +4,7 @@ import { validatorUtils } from '../../../../utils/validationUtils';
 import { userEvent, within, expect, waitFor } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 
-function onChangeHandler(
+function checkIsNumber(
   e: React.ChangeEvent<HTMLInputElement>,
   setIsValid: (state: boolean) => void
 ) {
@@ -35,7 +35,7 @@ export const Default: Story = {
         type='test'
         placeholder='숫자를 입력하세요'
         maxLength={3}
-        onChange={onChangeHandler}
+        onChange={checkIsNumber}
       />
     );
   },
@@ -48,7 +48,7 @@ export const ErrorInput: Story = {
         type='text'
         placeholder='숫자를 입력하세요'
         maxLength={3}
-        onChange={onChangeHandler}
+        onChange={checkIsNumber}
       />
     );
   },

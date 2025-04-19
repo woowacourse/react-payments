@@ -6,7 +6,7 @@ import { validatorUtils } from '../../../../utils/validationUtils';
 function CardCVCInput() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-  function onChangeHandler(
+  function checkIsValidCVC(
     e: React.ChangeEvent<HTMLInputElement>,
     setIsValid: (state: boolean) => void
   ) {
@@ -30,7 +30,7 @@ function CardCVCInput() {
           name='cardCVC'
           placeholder='123'
           maxLength={3}
-          onChange={onChangeHandler}
+          onChange={checkIsValidCVC}
         />
       </InputForm>
     </>
