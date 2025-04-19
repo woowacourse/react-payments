@@ -1,6 +1,7 @@
 .previewCard {
   margin: 0 auto;
-  width: 26.5625rem;
+  width: 100%;
+  max-width: 26.5625rem;
   height: 16.5625rem;
   background-color: #333333;
   padding: 1.25rem 1.5rem;
@@ -9,6 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  box-sizing: border-box;
 }
 
 .previewHeader {
@@ -29,25 +31,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.25rem;
-  font-size: 25px;
+
+  font-size: clamp(18px, 5vw, 25px);
   font-weight: 500;
   height: 25px;
 }
 
 .cardNumber > span {
-  letter-spacing: 5px;
-  width: 70px;
+  letter-spacing: 4px;
+  width: 65px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dots {
   display: flex;
   gap: 0.65rem;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
 }
 
 .expire {
   color: #fff;
-  font-size: 25px;
+  font-size: clamp(18px, 5vw, 25px);
   font-weight: 500;
   letter-spacing: 3px;
   height: 25px;
@@ -56,7 +65,7 @@
 
 .expire > span {
   display: inline-block;
-  width: 35px;
+  width: 30px;
 }
 
 .expire > span:nth-child(2) {
