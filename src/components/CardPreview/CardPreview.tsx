@@ -1,7 +1,7 @@
 import * as S from './CardPreview.styles';
-import MasterCard from './logo/MasterCard';
-import VisaCard from './logo/VisaCard';
-import { MASKING } from '../constants';
+import MasterCard from '../logo/MasterCard';
+import VisaCard from '../logo/VisaCard';
+import { MASKING } from '../../constants';
 
 interface CardPreviewProps {
   cardType: 'visa' | 'master' | '';

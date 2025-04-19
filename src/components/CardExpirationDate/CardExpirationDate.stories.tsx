@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpirationDate, { dateType } from '../../components/CardExpirationDate';
+import CardExpirationDate, { dateType } from '../../components/CardExpirationDate/CardExpirationDate';
 import { useState } from 'storybook/internal/preview-api';
 import { ERROR_MESSAGE } from '../../constants';
 

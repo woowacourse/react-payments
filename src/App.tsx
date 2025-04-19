@@ -1,13 +1,12 @@
 import './App.css';
 import * as S from './App.styles';
-import CardNumber from './components/CardNumber';
-import CardExpirationDate from './components/CardExpirationDate';
-import CardCVCNumber from './components/CardCVCNumber';
-import CardPreview from './components/CardPreview';
-import Spacing from './components/common/Spacing';
+import CardNumber from './components/CardNumber/CardNumber';
+import CardExpirationDate, { DateType } from './components/CardExpirationDate/CardExpirationDate';
+import CardCVCNumber from './components/CardCVCNumber/CardCVCNumber';
+import CardPreview from './components/CardPreview/CardPreview';
+import Spacing from './components/common/Spacing/Spacing';
 import { useState } from 'react';
-import { SequenceType } from './components/CardNumber';
-import { DateType } from './components/CardExpirationDate';
+import { SequenceType } from './components/CardNumber/CardNumber';
 import { getCardType } from './utils';
 
 function App() {

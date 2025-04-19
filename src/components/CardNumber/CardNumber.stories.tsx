@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumber, { SequenceType } from '../../components/CardNumber';
+import CardNumber, { SequenceType } from '../../components/CardNumber/CardNumber';
 import { useState } from 'storybook/internal/preview-api';
 
 const meta = {

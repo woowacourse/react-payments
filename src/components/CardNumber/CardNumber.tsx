@@ -1,12 +1,12 @@
 import * as S from './CardNumber.styles';
-import Title from './common/Title';
-import Label from './common/Label';
-import Input from './common/Input';
-import Spacing from './common/Spacing';
-import ErrorMessage from './common/ErrorMessage';
+import Title from '../common/Title/Title';
+import Label from '../common/Label/Label';
+import Input from '../common/Input/Input';
+import Spacing from '../common/Spacing/Spacing';
+import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../constants';
-import { getFirstErrorMessage } from '../utils';
+import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../constants';
+import { getFirstErrorMessage } from '../../utils';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
