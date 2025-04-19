@@ -3,6 +3,12 @@ import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
 import { CardExpirationDateOptions } from '../../types/CardExpirationDateOptions';
 
+export const CARD_EXPIRATION_DATE_TEXT = {
+  title: '카드 유효기간을 입력해 주세요',
+  description: '월/년도(MM/YY) 순서대로 입력해 주세요',
+  subtitle: '유효기간',
+};
+
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
   setCardExpirationDate,
@@ -12,9 +18,9 @@ const CardExpirationDateInputSection = ({
   return (
     <>
       <InputSection
-        title="카드 유효기간을 입력해 주세요"
-        description="월/년도(MM/YY) 순서대로 입력해 주세요"
-        subtitle="유효기간"
+        title={CARD_EXPIRATION_DATE_TEXT.title}
+        description={CARD_EXPIRATION_DATE_TEXT.description}
+        subtitle={CARD_EXPIRATION_DATE_TEXT.subtitle}
       >
         <InputField
           value={cardExpirationDate.month}

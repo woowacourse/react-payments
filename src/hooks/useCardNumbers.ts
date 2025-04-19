@@ -8,6 +8,7 @@ import {
   CardNumbersOptions,
   IsError,
 } from '../types/CardNumbers';
+import { COMMON_ERROR_MESSAGE } from './commonErrorMessage';
 
 const INITIAL_CARD_NUMBER: CardNumbers = {
   firstNumber: '',
@@ -23,7 +24,7 @@ const INITIAL_IS_ERROR: IsError = {
   fourthNumber: false,
 };
 
-
+const MAX_INPUT_LENGTH = 4;
 
 const useCardNumbers = (): CardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
@@ -31,11 +32,15 @@ const useCardNumbers = (): CardNumbersOptions => {
 
   const getCardNumbersValidationResult = (input: string) => {
     if (!isNumber(input)) {
-      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+      return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
     //TODO: focus out 시 카드번호 검증 로직 추가
-    if (!isValidStringLength({ value: input, maxLength: 4 })) {
-      return { isError: true, errorMessage: '4자리 숫자만 입력 가능합니다' };
+    if (!isValidStringLength({ value: input, maxLength: MAX_INPUT_LENGTH })) {
+      return {
+        isError: true,
+        errorMessage:
+          COMMON_ERROR_MESSAGE.ONLY_NUMBER_WITH_LENGTH(MAX_INPUT_LENGTH),
+      };
     }
 
     return { isError: false, errorMessage: '' };

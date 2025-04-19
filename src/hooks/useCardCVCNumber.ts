@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useError from './useError';
 import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
+import { COMMON_ERROR_MESSAGE } from './commonErrorMessage';
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
@@ -18,16 +19,22 @@ const INITIAL_IS_ERROR: IsError = {
   cvcNumber: false,
 };
 
+const MAX_CVC_LENGTH = 3;
+
 const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardCVCNumberChangeValidationResult = (input: string) => {
     if (!isNumber(input)) {
-      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+      return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
-    if (!isValidStringLength({ value: input, maxLength: 3 })) {
-      return { isError: true, errorMessage: '3자리를 입력력해야 합니다' };
+    if (!isValidStringLength({ value: input, maxLength: MAX_CVC_LENGTH })) {
+      return {
+        isError: true,
+        errorMessage:
+          COMMON_ERROR_MESSAGE.ONLY_NUMBER_WITH_LENGTH(MAX_CVC_LENGTH),
+      };
     }
 
     return { isError: false, errorMessage: '' };

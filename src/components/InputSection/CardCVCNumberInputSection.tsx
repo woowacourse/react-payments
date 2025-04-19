@@ -3,6 +3,12 @@ import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
 
+const CARD_CVC_NUMBER_TEXT = {
+  title: '카드 CVC 번호를 입력해 주세요',
+  description: '카드 뒷면에 있는 3자리 숫자입니다',
+  subtitle: 'CVC',
+};
+
 const CardCVCNumberInputSection = () => {
   const { cardCVCNumber, setCardCVCNumber, isError, errorMessage } =
     useCardCVCNumber();
@@ -10,9 +16,9 @@ const CardCVCNumberInputSection = () => {
   return (
     <>
       <InputSection
-        title="CVC 번호를 입력해주세요"
-        description=""
-        subtitle="CVC"
+        title={CARD_CVC_NUMBER_TEXT.title}
+        description={CARD_CVC_NUMBER_TEXT.description}
+        subtitle={CARD_CVC_NUMBER_TEXT.subtitle}
       >
         <InputField
           value={cardCVCNumber}

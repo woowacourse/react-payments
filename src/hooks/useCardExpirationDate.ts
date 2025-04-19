@@ -9,6 +9,7 @@ import {
   CardExpirationDateOptions,
   IsError,
 } from '../types/CardExpirationDateOptions';
+import { COMMON_ERROR_MESSAGE } from './commonErrorMessage';
 
 const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
   month: '',
@@ -18,6 +19,16 @@ const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
 const INITIAL_IS_ERROR: IsError = {
   month: false,
   year: false,
+};
+
+const MAX_INPUT_LENGTH = 2;
+const MIN_YEAR = 0;
+const MAX_YEAR = 99;
+const MIN_MONTH = 1;
+const MAX_MONTH = 12;
+const ERROR_MESSAGE = {
+  //유효기간이 지났습니다
+  EXPIRED: '유효기간이 지났습니다',
 };
 
 const useCardExpirationDate = (): CardExpirationDateOptions => {
@@ -31,43 +42,66 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     input: string
   ) => {
     if (input.length === 1 && !isNumber(input))
-      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+      return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
 
-    if (input.length < 2) return { isError: false, errorMessage: '' };
+    if (input.length < MAX_INPUT_LENGTH)
+      return { isError: false, errorMessage: '' };
 
     if (!isNumber(input)) {
-      return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
+      return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 
-    if (!isValidStringLength({ value: input, maxLength: 2 })) {
-      return { isError: true, errorMessage: '2자리 숫자만 입력 가능합니다' };
+    if (!isValidStringLength({ value: input, maxLength: MAX_INPUT_LENGTH })) {
+      return {
+        isError: true,
+        errorMessage:
+          COMMON_ERROR_MESSAGE.ONLY_NUMBER_WITH_LENGTH(MAX_INPUT_LENGTH),
+      };
     }
 
     if (target === 'month') {
-      if (!isValidNumberRange({ value: Number(input), min: 1, max: 12 })) {
+      if (
+        !isValidNumberRange({
+          value: Number(input),
+          min: MIN_MONTH,
+          max: MAX_MONTH,
+        })
+      ) {
         return {
           isError: true,
-          errorMessage: '01 ~ 12 사이의 숫자만 입력 가능합니다',
+          errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER_WITH_LENGTH_MIN_MAX(
+            MIN_MONTH,
+            MAX_MONTH
+          ),
         };
       }
 
       if (Number(cardExpirationDate.year) === new Date().getFullYear() % 100) {
         if (Number(input) < Math.floor(new Date().getMonth() + 1)) {
-          return { isError: true, errorMessage: '유효기간이 지났습니다' };
+          return { isError: true, errorMessage: ERROR_MESSAGE.EXPIRED };
         }
       }
     }
 
     if (target === 'year') {
-      if (!isValidNumberRange({ value: Number(input), min: 0, max: 99 })) {
+      if (
+        !isValidNumberRange({
+          value: Number(input),
+          min: MIN_YEAR,
+          max: MAX_YEAR,
+        })
+      ) {
         return {
           isError: true,
-          errorMessage: '00 ~ 99 사이의 숫자만 입력 가능합니다',
+          errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER_WITH_RANGE(
+            MIN_YEAR,
+            MAX_YEAR
+          ),
         };
       }
 
       if (Number(input) < Math.floor(new Date().getFullYear() % 100)) {
-        return { isError: true, errorMessage: '유효기간이 지났습니다' };
+        return { isError: true, errorMessage: ERROR_MESSAGE.EXPIRED };
       }
 
       if (Number(input) === Math.floor(new Date().getFullYear() % 100)) {
@@ -75,7 +109,7 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
           cardExpirationDate.month !== '' &&
           Number(cardExpirationDate.month) < new Date().getMonth() + 1
         ) {
-          return { isError: true, errorMessage: '유효기간이 지났습니다' };
+          return { isError: true, errorMessage: ERROR_MESSAGE.EXPIRED };
         }
       }
     }
