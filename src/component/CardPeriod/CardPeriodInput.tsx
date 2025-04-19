@@ -19,7 +19,10 @@ import Title from '../@common/Title/Title';
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: {
+    month: (value: string) => void;
+    year: (value: string) => void;
+  };
   errorState: CardExpirationDateError;
   getMonthErrorMessage?: () => string | null | undefined;
   getYearErrorMessage?: () => string | null | undefined;
@@ -88,7 +91,7 @@ function CardPeriodInput({
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
                 value={cardExpirationDate.month}
-                onChange={onChange}
+                onChange={(e) => onChange.month(e.target.value)}
                 css={errorState.month ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -98,7 +101,7 @@ function CardPeriodInput({
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
                 value={cardExpirationDate.year}
-                onChange={onChange}
+                onChange={(e) => onChange.year(e.target.value)}
                 css={errorState.year ? errorInputStyle : undefined}
               />
             </Input.Group>
