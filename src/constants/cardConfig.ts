@@ -23,3 +23,10 @@ export const CARD_TYPE = {
     startsWith: ['51', '52', '53', '54', '55'],
   },
 };
+
+export const CARD_NUMBER_FIELD_NAMES = [
+  'first',
+  'second',
+  'third',
+  'forth',
+] as const;
