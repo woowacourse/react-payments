@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { CardCVC } from '../../types/types';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_CVC_ERROR, CARD_CVC } from '../constants';
@@ -7,8 +7,7 @@ export const useCardCVC = () => {
   const [cardCVC, setCardCVC] = useState<CardCVC>(null);
   const [cardCVCError, setCardCVCError] = useState(false);
 
-  const handleCardCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleCardCVCChange = (value: string) => {
     const isNumber = isOnlyDigits(value);
 
     if (isNumber) {

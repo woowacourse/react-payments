@@ -1,5 +1,4 @@
 import Input from '../@common/Input/Input';
-import { ChangeEvent } from 'react';
 import {
   errorInputStyle,
   errorMessageStyle,
@@ -15,7 +14,7 @@ import Title from '../@common/Title/Title';
 
 type CardCVCInputProps = {
   cardCVC: CardCVC;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   hasError: boolean;
   getCardCVCErrorMessage?: () => string | null;
 };
@@ -47,7 +46,7 @@ function CardCVCInput({
               name="cvc"
               maxLength={CARD_CVC.maxLength}
               value={cardCVC?.toString()}
-              onChange={onChange}
+              onChange={(e) => onChange(e.target.value)}
               css={hasError ? errorInputStyle : undefined}
             />
           </article>
