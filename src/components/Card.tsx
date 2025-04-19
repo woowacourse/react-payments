@@ -35,7 +35,7 @@ const Card = ({ cardNumber, expiration }: CardProps) => {
 
 export default Card;
 
-const getCardType = (cardFirstNumber: string) => {
+const getCardType = (cardFirstNumber: string): CardType => {
   for (const prefix of VISA_CARD_PREFIXES) {
     if (cardFirstNumber.startsWith(prefix)) return 'VISA';
   }
