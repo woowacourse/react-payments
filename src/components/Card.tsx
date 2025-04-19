@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import {
-  CARD_TYPE_PATH,
-  VISA_CARD_PREFIXES,
-  MASTER_CARD_PREFIXES,
-} from "../constants/setting";
+import { getCardType, maskCardNumber } from "../domains/card/cardUtils";
+import { CARD_TYPE_PATH } from "../constants/setting";
+
+export type CardBrand = keyof typeof CARD_TYPE_PATH;
 
 interface CardProps {
   cardNumber: string[];
@@ -11,28 +10,20 @@ interface CardProps {
 }
 
 function Card({ cardNumber, expiration }: CardProps) {
-  const cardType = getCardType(cardNumber[0]);
-
-  function maskCardNumber(cardNumber: string[]) {
-    return [
-      ...cardNumber.slice(0, 2),
-      ...cardNumber.slice(2).map((letter) => "·".repeat(letter.length)),
-    ];
-  }
+  const cardType = getCardType(cardNumber[0]) as CardBrand;
 
   return (
     <CardContainer>
       <CardHeader>
         <CardIC />
-        {cardType !== "None" && <CardType src={CARD_TYPE_PATH[cardType]} />}
+        {cardType !== "NONE" && <CardType src={CARD_TYPE_PATH[cardType]} />}
       </CardHeader>
 
       <CardInfo>
         <p>{maskCardNumber(cardNumber).join(" ")}</p>
         <p>
-          {expiration[0] === "" && expiration[1] === ""
-            ? ""
-            : expiration.join("/")}
+          {(expiration[0] !== "" || expiration[1] !== "") &&
+            expiration.join("/")}
         </p>
       </CardInfo>
     </CardContainer>
@@ -40,17 +31,6 @@ function Card({ cardNumber, expiration }: CardProps) {
 }
 
 export default Card;
-
-function getCardType(cardFirstNumber: string) {
-  for (const prefix of VISA_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return "VISA";
-  }
-  for (const prefix of MASTER_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return "MASTERCARD";
-  }
-
-  return "None";
-}
 
 const CardContainer = styled.div`
   width: 212px;
