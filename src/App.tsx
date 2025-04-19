@@ -1,11 +1,8 @@
-import "./App.css";
-
+import './style.css';
+import './reset.css';
+import AddCard from './pages/AddCard';
 function App() {
-  return (
-    <>
-      <h1>React Payments</h1>
-    </>
-  );
+  return <AddCard />;
 }
 
 export default App;
