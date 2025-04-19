@@ -1,11 +1,11 @@
-import { CardNumbersOptions } from '../../types/CardNumbers';
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
-import InputField from '../common/InputField/InputField';
-import InputSection from '../common/InputSection/InputSection';
+import { CardNumbersOptions } from "../../types/CardNumbers";
+import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
+import InputField from "../common/InputField/InputField";
+import InputSection from "../common/InputSection/InputSection";
 
 const CardNumbersInputSection = ({
   cardNumbers,
-  setCardNumbers,
+  handleCardNumbersChange,
   isError,
   errorMessage,
 }: CardNumbersOptions) => {
@@ -18,25 +18,25 @@ const CardNumbersInputSection = ({
       >
         <InputField
           value={cardNumbers.firstNumber}
-          onChange={setCardNumbers('firstNumber')}
+          onChange={handleCardNumbersChange("firstNumber")}
           isError={isError.firstNumber}
           placeholder="1234"
         ></InputField>
         <InputField
           value={cardNumbers.secondNumber}
-          onChange={setCardNumbers('secondNumber')}
+          onChange={handleCardNumbersChange("secondNumber")}
           isError={isError.secondNumber}
           placeholder="1234"
         ></InputField>
         <InputField
           value={cardNumbers.thirdNumber}
-          onChange={setCardNumbers('thirdNumber')}
+          onChange={handleCardNumbersChange("thirdNumber")}
           isError={isError.thirdNumber}
           placeholder="1234"
         ></InputField>
         <InputField
           value={cardNumbers.fourthNumber}
-          onChange={setCardNumbers('fourthNumber')}
+          onChange={handleCardNumbersChange("fourthNumber")}
           isError={isError.fourthNumber}
           placeholder="1234"
         ></InputField>

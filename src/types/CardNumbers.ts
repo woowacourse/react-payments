@@ -4,9 +4,7 @@ export type CardNumbersOptions = {
 
 export type CardNumbersOptionsWithoutErrormessage = {
   cardNumbers: CardNumbers;
-  setCardNumbers: (
-    target: CardNumbersKeys
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardNumbersChange: (target: CardNumbersKeys) => (value: string) => void;
   isError: IsError;
 };
 
@@ -18,10 +16,10 @@ export type CardNumbers = {
 };
 
 export type CardNumbersKeys =
-  | 'firstNumber'
-  | 'secondNumber'
-  | 'thirdNumber'
-  | 'fourthNumber';
+  | "firstNumber"
+  | "secondNumber"
+  | "thirdNumber"
+  | "fourthNumber";
 
 export type IsError = {
   firstNumber: boolean;

@@ -1,11 +1,11 @@
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
-import InputField from '../common/InputField/InputField';
-import InputSection from '../common/InputSection/InputSection';
-import { CardExpirationDateOptions } from '../../types/CardExpirationDateOptions';
+import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
+import InputField from "../common/InputField/InputField";
+import InputSection from "../common/InputSection/InputSection";
+import { CardExpirationDateOptions } from "../../types/CardExpirationDateOptions";
 
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
-  setCardExpirationDate,
+  handleCardExpirationDateChange,
   isError,
   errorMessage,
 }: CardExpirationDateOptions) => {
@@ -18,13 +18,13 @@ const CardExpirationDateInputSection = ({
       >
         <InputField
           value={cardExpirationDate.month}
-          onChange={setCardExpirationDate('month')}
+          onChange={handleCardExpirationDateChange("month")}
           isError={isError.month}
           placeholder="MM"
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
-          onChange={setCardExpirationDate('year')}
+          onChange={handleCardExpirationDateChange("year")}
           isError={isError.year}
           placeholder="YY"
         ></InputField>

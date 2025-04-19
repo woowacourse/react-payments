@@ -1,6 +1,6 @@
-import CardExpirationDate from './CardExpirationDate';
+import CardExpirationDate from "./CardExpirationDate";
 
-export type CardExpirationDateKeys = 'month' | 'year';
+export type CardExpirationDateKeys = "month" | "year";
 
 export type IsError = {
   month: boolean;
@@ -9,9 +9,9 @@ export type IsError = {
 
 export type CardExpirationDateOptions = {
   cardExpirationDate: CardExpirationDate;
-  setCardExpirationDate: (
+  handleCardExpirationDateChange: (
     target: CardExpirationDateKeys
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  ) => (value: string) => void;
   isError: IsError;
   errorMessage: string;
 };
