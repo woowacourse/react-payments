@@ -27,7 +27,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
       return { isError: true, errorMessage: '숫자만 입력 가능합니다' };
     }
     if (!isValidStringLength({ value: input, maxLength: 3 })) {
-      return { isError: true, errorMessage: '3자리를 입려해야 합니다' };
+      return { isError: true, errorMessage: '3자리를 입력력해야 합니다' };
     }
 
     return { isError: false, errorMessage: '' };
