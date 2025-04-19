@@ -1,9 +1,12 @@
 export const getCardBrand = (cardNumber: number) => {
-  if (cardNumber.toString().startsWith("4")) {
+  const cardNumberString = String(cardNumber);
+
+  if (cardNumberString.startsWith("4")) {
     return "VISA";
   }
 
-  if (cardNumber >= 51 && cardNumber <= 55) {
+  const firstTwoDigits = Number(cardNumberString.slice(0, 2));
+  if (firstTwoDigits >= 51 && firstTwoDigits <= 55) {
     return "MASTERCARD";
   }
 
