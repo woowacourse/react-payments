@@ -5,5 +5,5 @@ export interface InputProps extends React.ComponentProps<'input'> {
 }
 
 export default function Input({ isError, ...inputAttributesProps }: InputProps) {
-  return <S.Input {...inputAttributesProps} isError={isError} />;
+  return <S.StyledInput {...inputAttributesProps} isError={isError} />;
 }
