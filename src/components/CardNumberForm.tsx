@@ -1,6 +1,6 @@
 import NumberInput from './NumberInput';
 import { useState, useEffect } from 'react';
-import isExactLength from '../utils/isExactLength';
+import isZeroOrExactLength from '../utils/isExactLength';
 import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
 
@@ -25,7 +25,7 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
       cardInfo.thirdNumber,
       cardInfo.fourthNumber,
     ].some((number) => {
-      if (isExactLength(number, 0) || isExactLength(number, maxLength)) return false;
+      if (isZeroOrExactLength(number, maxLength)) return false;
       return true;
     });
     if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));

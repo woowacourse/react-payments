@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import isExactLength from '../utils/isExactLength';
+import isZeroOrExactLength from '../utils/isExactLength';
 
 interface NumberInputProps {
   value: string;
@@ -20,7 +20,7 @@ function NumberInput({
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (!isExactLength(value, 0) && !isExactLength(value, maxLength)) {
+    if (!isZeroOrExactLength(value, maxLength)) {
       setIsError(true);
       return;
     }

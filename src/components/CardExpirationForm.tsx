@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import isExactLength from '../utils/isExactLength';
+import isZeroOrExactLength from '../utils/isExactLength';
 import NumberInput from './NumberInput';
 import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
@@ -21,7 +21,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
 
   useEffect(() => {
     const isExactDigits = [cardInfo.month, cardInfo.year].some((number) => {
-      if (isExactLength(number, 0) || isExactLength(number, maxLength)) return false;
+      if (isZeroOrExactLength(number, maxLength)) return false;
       return true;
     });
 

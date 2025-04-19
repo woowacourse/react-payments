@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import isExactLength from '../utils/isExactLength';
+import isZeroOrExactLength from '../utils/isExactLength';
 import NumberInput from './NumberInput';
 import { ERROR_MESSAGE } from '../constants/guide';
 import { NumberInputForm, Label, NumberInputContainer, ErrorText } from '../styles/CardForm.styles';
@@ -16,7 +16,7 @@ function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) 
   const [errorText, setErrorText] = useState('');
 
   useEffect(() => {
-    if (isExactLength(cardInfo.cvc, 0) || isExactLength(cardInfo.cvc, maxLength)) {
+    if (isZeroOrExactLength(cardInfo.cvc, maxLength)) {
       setErrorText('');
     } else {
       setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));

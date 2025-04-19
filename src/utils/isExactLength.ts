@@ -1,5 +1,5 @@
-function isExactLength(target: string, length: number) {
-  return target.length == length;
+function isZeroOrExactLength(target: string, length: number) {
+  return target.length === 0 || target.length === length;
 }
 
-export default isExactLength;
+export default isZeroOrExactLength;
