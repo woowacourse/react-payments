@@ -6,7 +6,7 @@ const isValidMonth = (month: number) => {
 };
 
 export const validateMonth = (month: string) => {
-  if (isNaN(Number(month))) {
+  if (Number.isNaN(Number(month))) {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_NUMBER;
   }
 
@@ -28,7 +28,7 @@ const isValidYear = (year: string) => {
 };
 
 export const validateYear = (year: string) => {
-  if (isNaN(Number(year))) {
+  if (Number.isNaN(Number(year))) {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_NUMBER;
   }
 

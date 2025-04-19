@@ -2,7 +2,7 @@ import { EXPIRE_DATE_ERROR_MESSAGE } from "../constants";
 import { CARD_NUMBER_LENGTH } from "../constants";
 
 export const validateCardNumber = (cardNumber: string) => {
-  if (isNaN(Number(cardNumber))) {
+  if (Number.isNaN(Number(cardNumber))) {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_NUMBER;
   }
 

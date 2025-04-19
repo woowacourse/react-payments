@@ -14,7 +14,7 @@ const useControlledCVC = () => {
     }
     const numeric = Number(value);
 
-    if (isNaN(numeric)) {
+    if (Number.isNaN(numeric)) {
       setCVCState((prevState) => ({
         ...prevState,
         errorMessage: validateCVCNumber(value),

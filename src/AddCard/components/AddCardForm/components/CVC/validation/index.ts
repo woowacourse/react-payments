@@ -1,7 +1,7 @@
 import { EXPIRE_DATE_ERROR_MESSAGE } from "../constants";
 
 export const validateCVCNumber = (CVCNumber: string) => {
-  if (isNaN(Number(CVCNumber))) {
+  if (Number.isNaN(Number(CVCNumber))) {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_NUMBER;
   }
 
