@@ -15,15 +15,6 @@ type Props = {
 export default function CardExpirationSection({ expiration, setExpiration }: Props) {
   const [expirationError, setExpirationError] = useState<string[]>(['', '']);
 
-  function getExpirationError(index: number, value: string): string {
-    return (
-      validateNumberError(value) ||
-      (index === 0 && validateMonthRangeError(value)) ||
-      (index === 1 && validateYearLengthError(value)) ||
-      ''
-    );
-  }
-
   const handleExpirationChange = (index: number, value: string) => {
     const updatedExpiration = [...expiration];
     updatedExpiration[index] = value;
@@ -34,6 +25,15 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
     updatedError[index] = errorMsg;
     setExpirationError(updatedError);
   };
+
+  function getExpirationError(index: number, value: string): string {
+    return (
+      validateNumberError(value) ||
+      (index === 0 && validateMonthRangeError(value)) ||
+      (index === 1 && validateYearLengthError(value)) ||
+      ''
+    );
+  }
 
   return (
     <div className={styles.sectionContainer}>

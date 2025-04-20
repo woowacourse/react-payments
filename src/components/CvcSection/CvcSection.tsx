@@ -11,16 +11,16 @@ type Props = {
 export default function CvcSection({ cvc, setCvc }: Props) {
   const [cvcError, setCvcError] = useState<string>('');
 
-  function getCvcError(value: string): string {
-    return validateNumberError(value) || validateCvcLengthError(value) || '';
-  }
-
   const handleCvcChange = (value: string) => {
     setCvc(value);
 
     const errorMsg = getCvcError(value);
     setCvcError(errorMsg);
   };
+
+  function getCvcError(value: string): string {
+    return validateNumberError(value) || validateCvcLengthError(value) || '';
+  }
 
   return (
     <div className={styles.sectionContainer}>
