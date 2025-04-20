@@ -6,8 +6,9 @@ import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../../constants';
 import { SequenceType } from '../../types';
-import { checkAllNumber } from '../../utils';
 import * as S from './CardNumber.styles';
+import { getErrorMessageFromObject } from '../../utils/message';
+import { checkAllNumber } from '../../utils/validation';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
@@ -94,13 +95,7 @@ export default function CardNumber({
         />
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>
-        {
-          Object.entries(cardNumberErrorMessage)
-            .filter(([_, errorMassage]) => errorMassage !== '')
-            .at(0)?.[1]
-        }
-      </ErrorMessage>
+      <ErrorMessage>{getErrorMessageFromObject(cardNumberErrorMessage)}</ErrorMessage>
     </div>
   );
 }

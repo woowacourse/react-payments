@@ -6,9 +6,10 @@ import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../../constants';
 import { DateType } from '../../types';
-import { checkAllNumber } from '../../utils';
 import * as S from './CardExpirationDate.styles';
 import { checkValidMonth, checkValidYear } from './utils';
+import { getErrorMessageFromObject } from '../../utils/message';
+import { checkAllNumber } from '../../utils/validation';
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
@@ -89,13 +90,7 @@ export default function CardExpirationDate({
         />
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>
-        {
-          Object.entries(cardExpirationDateErrorMessage)
-            .filter(([_, errorMassage]) => errorMassage !== '')
-            .at(0)?.[1]
-        }
-      </ErrorMessage>
+      <ErrorMessage>{getErrorMessageFromObject(cardExpirationDateErrorMessage)}</ErrorMessage>
     </div>
   );
 }
