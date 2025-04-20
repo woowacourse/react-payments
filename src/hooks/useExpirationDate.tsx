@@ -21,11 +21,7 @@ export default function useExpirationDate() {
   const [cardExpirationDate, setcardExpirationDate] = useState(["", ""]);
   const [cardExpirationDateError, setError] = useState(["", ""]);
 
-  const dateValidate = (value: string, index: number) => {
-    const newDate = [...cardExpirationDate];
-    newDate[index] = value.slice(0, EXPIRATION_DATE.MAX_LENGTH);
-    setcardExpirationDate(newDate);
-
+  const validateExpirationDate = (value: string, index: number) => {
     if (!isUnderMaxLength(value.length, EXPIRATION_DATE.MAX_LENGTH)) {
       setErrorMessage(
         cardExpirationDateError,
@@ -33,7 +29,7 @@ export default function useExpirationDate() {
         index,
         setError
       );
-      return;
+      return false;
     }
 
     if (!isNumber(value)) {
@@ -43,7 +39,7 @@ export default function useExpirationDate() {
         index,
         setError
       );
-      return;
+      return false;
     }
 
     if (
@@ -57,15 +53,23 @@ export default function useExpirationDate() {
         index,
         setError
       );
-      return;
+      return false;
     }
 
     setErrorMessage(cardExpirationDateError, "", index, setError);
+    return true;
+  };
+
+  const onExpirationDateChange = (value: string, index: number) => {
+    if (!validateExpirationDate(value, index)) return;
+    const newDate = [...cardExpirationDate];
+    newDate[index] = value.slice(0, EXPIRATION_DATE.MAX_LENGTH);
+    setcardExpirationDate(newDate);
   };
 
   return {
     cardExpirationDate,
     cardExpirationDateError,
-    dateValidate,
+    onExpirationDateChange,
   };
 }

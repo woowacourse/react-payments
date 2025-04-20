@@ -8,11 +8,14 @@ import useCvcNumber from "./hooks/useCvcNumber";
 import useCardNumbers from "./hooks/useCardNumbers";
 
 function App() {
-  const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
+  const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
     useCardNumbers();
-  const { cardExpirationDate, cardExpirationDateError, dateValidate } =
-    useExpirationDate();
-  const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
+  const {
+    cardExpirationDate,
+    cardExpirationDateError,
+    onExpirationDateChange,
+  } = useExpirationDate();
+  const { cvcNumbers, cvcNumbersError, onCvcNumberChange } = useCvcNumber();
 
   return (
     <div className="App">
@@ -23,17 +26,17 @@ function App() {
       />
       <div className="card-input">
         <CardNumber
-          handleChange={cardNumbersValidate}
+          handleChange={onCardNumberChange}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
         />
         <CardExpirationDate
-          handleChange={dateValidate}
+          handleChange={onExpirationDateChange}
           cardExpirationDate={cardExpirationDate}
           errorMessage={cardExpirationDateError}
         />
         <CardCvcNumber
-          handleChange={cvcNumbersValidate}
+          handleChange={onCvcNumberChange}
           cvcNumbers={cvcNumbers}
           errorMessage={cvcNumbersError}
         />

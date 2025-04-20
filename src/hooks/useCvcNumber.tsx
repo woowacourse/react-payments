@@ -15,9 +15,7 @@ export default function useCvcNumber() {
   const [cvcNumbers, setCardCvcNumbers] = useState("");
   const [cvcNumbersError, setError] = useState([""]);
 
-  const cvcNumbersValidate = (value: string) => {
-    setCardCvcNumbers(value.slice(0, CVC_NUMBER.MAX_CVC_LENGTH));
-
+  const validateCvcNumbers = (value: string) => {
     if (!isUnderMaxLength(value.length, CVC_NUMBER.MAX_CVC_LENGTH)) {
       setErrorMessage(
         cvcNumbersError,
@@ -25,7 +23,7 @@ export default function useCvcNumber() {
         0,
         setError
       );
-      return;
+      return false;
     }
 
     if (!isNumber(value)) {
@@ -35,15 +33,21 @@ export default function useCvcNumber() {
         0,
         setError
       );
-      return;
+      return false;
     }
 
     setErrorMessage(cvcNumbersError, "", 0, setError);
+    return true;
+  };
+
+  const onCvcNumberChange = (value: string) => {
+    if (!validateCvcNumbers(value)) return;
+    setCardCvcNumbers(value.slice(0, CVC_NUMBER.MAX_CVC_LENGTH));
   };
 
   return {
     cvcNumbers,
     cvcNumbersError: cvcNumbersError[0],
-    cvcNumbersValidate,
+    onCvcNumberChange,
   };
 }

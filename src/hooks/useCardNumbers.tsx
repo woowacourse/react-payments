@@ -33,22 +33,16 @@ export default function useCardNumbers() {
   const [cardNumbersError, setError] = useState(["", "", "", ""]);
   const [cardType, setCardType] = useState("default");
 
-  const cardNumbersValidate = (value: string, index: number) => {
-    const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value.slice(0, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH);
-    setCardNumbers(newCardNumbers);
-    setCardType(
-      getCardType(Number(value.slice(0, CARD_NUMBER.CARD_TYPE_MAX_LENGTH)))
-    );
-
+  const validateCardNumbers = (value: string, index: number) => {
     if (!isUnderMaxLength(value.length, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH)) {
+      console.log("dfsdfsfkdjfldfjs");
       setErrorMessage(
         cardNumbersError,
         CARD_NUMBER_ERROR.INVALID_LENGTH_ERROR,
         index,
         setError
       );
-      return;
+      return false;
     }
 
     if (!isNumber(value)) {
@@ -58,13 +52,27 @@ export default function useCardNumbers() {
         index,
         setError
       );
-      return;
+      return false;
     }
 
     setErrorMessage(cardNumbersError, "", index, setError);
+    return true;
   };
 
-  return { cardNumbers, cardType, cardNumbersError, cardNumbersValidate };
+  const onCardNumberChange = (value: string, index: number) => {
+    if (!validateCardNumbers(value, index)) return;
+    const trimmedValue = value.slice(0, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH);
+
+    const newCardNumbers = [...cardNumbers];
+    newCardNumbers[index] = trimmedValue;
+    setCardNumbers(newCardNumbers);
+
+    setCardType(
+      getCardType(Number(value.slice(0, CARD_NUMBER.CARD_TYPE_MAX_LENGTH)))
+    );
+  };
+
+  return { cardNumbers, cardType, cardNumbersError, onCardNumberChange };
 }
 
 function getCardType(firstTwoDigits: number) {
