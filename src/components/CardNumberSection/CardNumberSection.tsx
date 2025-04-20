@@ -15,6 +15,19 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
     return /^[0-9]*$/.test(value);
   }
 
+  function updateCardLogoFromNumbers(numbers: string) {
+    if (numbers.startsWith('4')) {
+      setCardLogo('visa');
+      return;
+    }
+    if (51 <= Number(numbers.slice(0, 2)) && Number(numbers.slice(0, 2)) <= 55) {
+      setCardLogo('master');
+      return;
+    }
+
+    return setCardLogo('');
+  }
+
   const handleCardNumberChange = (index: number, value: string) => {
     const isValid = validateNumberValidity(value);
 
@@ -26,13 +39,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
     updatedValidity[index] = isValid;
     setCardValidity(updatedValidity);
 
-    if (updatedNumbers[0].startsWith('4')) {
-      setCardLogo('visa');
-    } else if (51 <= Number(updatedNumbers[0].slice(0, 2)) && Number(updatedNumbers[0].slice(0, 2)) <= 55) {
-      setCardLogo('master');
-    } else {
-      setCardLogo('');
-    }
+    updateCardLogoFromNumbers(updatedNumbers[0]);
   };
 
   return (
