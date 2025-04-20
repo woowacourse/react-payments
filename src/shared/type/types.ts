@@ -1,9 +1,4 @@
-export interface CustomInputProps {
-  type: string;
-  placeholder: string;
-  name: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxLength?: number;
+export interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
 }
 
