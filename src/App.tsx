@@ -1,8 +1,13 @@
-import './App.css';
 import CardPage from './pages/CardPage/CardPage';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
-  return <CardPage />;
+  return (
+    <>
+      <GlobalStyles />
+      <CardPage />
+    </>
+  );
 }
 
 export default App;
