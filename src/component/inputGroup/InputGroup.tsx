@@ -6,6 +6,18 @@ interface InputGroupProps {
   errorMessages: string;
 }
 
+const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
+  return (
+    <Container>
+      <Label>{label}</Label>
+      <InputContainer>{children}</InputContainer>
+      <ErrorMessageContainer>
+        <ErrorMessage>{errorMessages}</ErrorMessage>
+      </ErrorMessageContainer>
+    </Container>
+  );
+};
+
 export const InputContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -34,17 +46,5 @@ const ErrorMessageContainer = styled.div`
   flex-direction: column;
   gap: 4px;
 `;
-
-const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
-  return (
-    <Container>
-      <Label>{label}</Label>
-      <InputContainer>{children}</InputContainer>
-      <ErrorMessageContainer>
-        <ErrorMessage>{errorMessages}</ErrorMessage>
-      </ErrorMessageContainer>
-    </Container>
-  );
-};
 
 export default InputGroup;

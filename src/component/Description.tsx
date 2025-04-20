@@ -5,6 +5,15 @@ interface DescriptionProps {
   detailText?: string;
 }
 
+const Description = ({ headText, detailText }: DescriptionProps) => {
+  return (
+    <Container>
+      <HeaderText>{headText}</HeaderText>
+      <DetailText>{detailText}</DetailText>
+    </Container>
+  );
+};
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,14 +31,5 @@ const DetailText = styled.span`
   font-weight: var(--font-weight-caption);
   color: var(--color-gray);
 `;
-
-const Description = ({ headText, detailText }: DescriptionProps) => {
-  return (
-    <Container>
-      <HeaderText>{headText}</HeaderText>
-      <DetailText>{detailText}</DetailText>
-    </Container>
-  );
-};
 
 export default Description;

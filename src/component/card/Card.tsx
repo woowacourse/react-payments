@@ -1,12 +1,44 @@
 import styled from "styled-components";
 import cardBrandLogo from "../../constants/cardBrandLogo";
-import { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../../types/CardInputTypes";
 import { maskingNumber } from "../../util/maskingNumber";
 
 interface CardProps {
   cardNumber: CardInputProps | null;
   cardType: "visa" | "mastercard" | "default";
 }
+
+const Card = ({ cardNumber, cardType }: CardProps) => {
+  return (
+    <CardContainer>
+      <ChipContainer>
+        <CardGoldChip />
+        <CardBrandLogo src={cardBrandLogo[cardType]} />
+      </ChipContainer>
+      {cardNumber && (
+        <>
+          <CardNumberContainer>
+            <CardInformation>{cardNumber.first}</CardInformation>
+            <CardInformation>{cardNumber.second}</CardInformation>
+            <CardMaskingInformation>
+              {cardNumber.third &&
+                maskingNumber(String(cardNumber.third).length)}
+            </CardMaskingInformation>
+            <CardMaskingInformation>
+              {cardNumber.fourth &&
+                maskingNumber(String(cardNumber.fourth).length)}
+            </CardMaskingInformation>
+          </CardNumberContainer>
+
+          <CardInformation>
+            {cardNumber.MM && `${cardNumber.MM}`}
+            {cardNumber.YY && `/${cardNumber.YY}`}
+          </CardInformation>
+        </>
+      )}
+    </CardContainer>
+  );
+};
 
 const CardContainer = styled.div`
   box-sizing: border-box;
@@ -56,37 +88,5 @@ const CardNumberContainer = styled.div`
   margin-top: 16px;
   margin-bottom: 8px;
 `;
-
-const Card = ({ cardNumber, cardType }: CardProps) => {
-  return (
-    <CardContainer>
-      <ChipContainer>
-        <CardGoldChip />
-        <CardBrandLogo src={cardBrandLogo[cardType]} />
-      </ChipContainer>
-      {cardNumber && (
-        <>
-          <CardNumberContainer>
-            <CardInformation>{cardNumber.first}</CardInformation>
-            <CardInformation>{cardNumber.second}</CardInformation>
-            <CardMaskingInformation>
-              {cardNumber.third &&
-                maskingNumber(String(cardNumber.third).length)}
-            </CardMaskingInformation>
-            <CardMaskingInformation>
-              {cardNumber.fourth &&
-                maskingNumber(String(cardNumber.fourth).length)}
-            </CardMaskingInformation>
-          </CardNumberContainer>
-
-          <CardInformation>
-            {cardNumber.MM && `${cardNumber.MM}`}
-            {cardNumber.YY && `/${cardNumber.YY}`}
-          </CardInformation>
-        </>
-      )}
-    </CardContainer>
-  );
-};
 
 export default Card;

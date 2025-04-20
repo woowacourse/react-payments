@@ -10,26 +10,6 @@ import ExpirationDateInputs from "../component/inputSections/ExpirationDateInput
 import CVCInputs from "../component/inputSections/CVCInputs";
 import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
 
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 376px;
-  padding: 30px;
-  background-color: var(--color-white);
-  padding-top: 77px;
-  height: 700px;
-  gap: 45px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  gap: 16px;
-`;
-
 const AddCard = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
     first: null,
@@ -115,5 +95,25 @@ const AddCard = () => {
     </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 376px;
+  padding: 30px;
+  background-color: var(--color-white);
+  padding-top: 77px;
+  height: 700px;
+  gap: 45px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 16px;
+`;
 
 export default AddCard;
