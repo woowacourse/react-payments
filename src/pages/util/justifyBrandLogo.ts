@@ -1,11 +1,28 @@
-export const justifyBrandLogo = (cardNumber: number) => {
+const BRAND_MAP = {
+  '0': 'default',
+  '4': 'visa',
+  '51': 'mastercard',
+  '52': 'mastercard',
+} as const;
+
+const MASTERCARD_RANGE = { start: 2221, end: 2720 };
+
+export const justifyBrandLogo = (
+  cardNumber: number,
+): 'visa' | 'mastercard' | 'default' => {
   const cardNumberStr = cardNumber.toString();
-  if (cardNumberStr.startsWith('0')) return 'default';
-  if (cardNumberStr.startsWith('4')) return 'visa';
 
-  if (cardNumberStr.startsWith('51') || cardNumberStr.startsWith('52'))
+  const prefixMatch = Object.keys(BRAND_MAP).find(prefix =>
+    cardNumberStr.startsWith(prefix),
+  );
+
+  if (prefixMatch) return BRAND_MAP[prefixMatch as keyof typeof BRAND_MAP];
+
+  if (
+    cardNumber >= MASTERCARD_RANGE.start &&
+    cardNumber <= MASTERCARD_RANGE.end
+  ) {
     return 'mastercard';
-  if (cardNumber >= 2221 && cardNumber <= 2720) return 'mastercard';
-
+  }
   return 'default';
 };
