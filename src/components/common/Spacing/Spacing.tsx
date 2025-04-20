@@ -1,9 +1,9 @@
 import * as S from './Spacing.styles';
-
-interface SpacingProps {
+import { forwardRef } from 'react';
+interface SpacingProps extends React.HTMLAttributes<HTMLDivElement> {
   size: number;
 }
 
-export default function Spacing({ size }: SpacingProps) {
-  return <S.Spacing size={size} />;
-}
+export default forwardRef<HTMLDivElement, SpacingProps>(function Spacing({ size, ...props }, ref) {
+  return <S.Spacing size={size} ref={ref} {...props} />;
+});

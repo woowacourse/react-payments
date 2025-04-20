@@ -1,9 +1,13 @@
-import { PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 interface LabelProps {
   id: string;
 }
 
-export default function Label({ id, children }: PropsWithChildren<LabelProps>) {
-  return <label htmlFor={id}>{children}</label>;
-}
+export default forwardRef<HTMLLabelElement, PropsWithChildren<LabelProps>>(({ id, children, ...props }, ref) => {
+  return (
+    <label htmlFor={id} ref={ref} {...props}>
+      {children}
+    </label>
+  );
+});
