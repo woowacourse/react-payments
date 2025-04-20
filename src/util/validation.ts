@@ -6,7 +6,8 @@ const isValidLength = (number: string, maxLength: number) => {
 };
 
 const isValidNumber = (number: string) => {
-  if (Number.isInteger(number)) {
+  const regex = /^[0-9]*$/;
+  if (regex.test(number)) {
     return true;
   }
   return false;
