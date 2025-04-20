@@ -1,10 +1,11 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { CardLogo } from '../../types/card';
 
 type Props = {
   cardNumbers: string[];
-  setCardLogo: Dispatch<SetStateAction<'visa' | 'master' | ''>>;
+  setCardLogo: Dispatch<SetStateAction<CardLogo>>;
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
 };
 

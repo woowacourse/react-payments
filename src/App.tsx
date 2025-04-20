@@ -5,10 +5,11 @@ import CardNumberSection from './components/CardNumberSection/CardNumberSection'
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import Card from './components/Card/Card';
 import CvcSection from './components/CvcSection/CvcSection';
+import { CardLogo } from './types/card';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [cardLogo, setCardLogo] = useState<'visa' | 'master' | ''>('');
+  const [cardLogo, setCardLogo] = useState<CardLogo>('');
   const [expiration, setExpiration] = useState<string[]>(['', '']);
   const [cvc, setCvc] = useState<string>('');
 

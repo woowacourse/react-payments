@@ -1,3 +1,4 @@
+import { CardLogo } from '../../types/card';
 import styles from './Card.module.css';
 
 export default function Card({
@@ -6,7 +7,7 @@ export default function Card({
   expiration
 }: {
   numbers: string[];
-  cardLogo: 'visa' | 'master' | '';
+  cardLogo: CardLogo;
   expiration: string[];
 }) {
   return (
