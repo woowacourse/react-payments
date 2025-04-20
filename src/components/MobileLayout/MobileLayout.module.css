@@ -10,8 +10,13 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.75rem;
   background-color: #e8eeff;
+}
+
+.sidePanel > span {
+  @media screen and (max-width: 1024px) {
+  }
 }
 
 .main {

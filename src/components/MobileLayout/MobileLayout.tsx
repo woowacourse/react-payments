@@ -8,9 +8,13 @@ interface MobileLayoutProps {
 function MobileLayout({ children }: MobileLayoutProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.sidePanel}>페이먼츠 미션 2단계</div>
+      <div className={styles.sidePanel}>
+        <span>페이먼츠 미션 2단계</span>
+      </div>
       <div className={styles.main}>{children}</div>
-      <div className={styles.sidePanel}>ㅇ_ㅇ</div>
+      <div className={styles.sidePanel}>
+        <span>ㅇ_ㅇ</span>
+      </div>
     </div>
   );
 }
