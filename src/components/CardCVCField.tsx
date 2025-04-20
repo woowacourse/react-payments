@@ -8,11 +8,11 @@ import {
   NumberInputContainer,
   ErrorText,
 } from "../styles/CardField.styles";
+import { CardInfo } from "../hooks/useCardInfo";
 
 interface CardCVCFieldProps {
-  cardInfo: {
-    cvc: string;
-  };
+  cardInfo: CardInfo;
+
   handleCardInfo: (
     key: keyof CardCVCFieldProps["cardInfo"],
     value: string

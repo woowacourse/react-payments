@@ -1,7 +1,17 @@
 import { useState } from "react";
 
+export type CardInfo = {
+  firstNumber: string;
+  secondNumber: string;
+  thirdNumber: string;
+  fourthNumber: string;
+  month: string;
+  year: string;
+  cvc: string;
+};
+
 function useCardInfo() {
-  const [cardInfo, setCardInfo] = useState({
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
     firstNumber: "",
     secondNumber: "",
     thirdNumber: "",

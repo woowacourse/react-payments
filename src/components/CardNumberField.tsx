@@ -8,14 +8,11 @@ import {
   ErrorText,
 } from "../styles/CardField.styles";
 import { hasInvalidCardNumberSegment } from "../utils/validation";
+import { CardInfo } from "../hooks/useCardInfo";
 
 interface CardNumberFieldProps {
-  cardInfo: {
-    firstNumber: string;
-    secondNumber: string;
-    thirdNumber: string;
-    fourthNumber: string;
-  };
+  cardInfo: CardInfo;
+
   handleCardInfo: (
     key: keyof CardNumberFieldProps["cardInfo"],
     value: string

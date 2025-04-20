@@ -12,12 +12,11 @@ import {
   isValidYear,
   validateExpiration,
 } from "../domains/expiration/dateUtils";
+import { CardInfo } from "../hooks/useCardInfo";
 
 interface CardExpirationFieldProps {
-  cardInfo: {
-    month: string;
-    year: string;
-  };
+  cardInfo: CardInfo;
+
   handleCardInfo: (
     key: keyof CardExpirationFieldProps["cardInfo"],
     value: string
