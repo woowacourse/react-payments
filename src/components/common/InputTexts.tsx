@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import SingleInput from './SingleInput';
 
 type CardNumber = {
   first: string;
@@ -53,16 +54,14 @@ const InputTexts = ({
       <Label>{label}</Label>
       <Row>
         {placeholder.map((text, index) => (
-          <Input
-            key={index}
-            type='text'
+          <SingleInput
+            value={getValue(state, index)}
             placeholder={text}
             maxLength={text.length}
-            value={getValue(state, index)}
+            error={errors ? errors[index] : false}
             onChange={(e) => eventHandler!(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
-            error={errors ? errors[index] : false}
           />
         ))}
       </Row>
