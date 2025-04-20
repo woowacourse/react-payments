@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cardNumberValidator, cardExpirationDateValidator, cardCVCValidator } from '../validation/cardInfoValidator';
-import { CardInfoProps, ErrorProps } from '../../../shared/type/types';
+import { ErrorProps } from '../../../shared/type/types';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,
@@ -15,11 +15,12 @@ const ERROR_KEYS = {
 };
 
 export default function useCardInfo() {
-  const [cardInfo, setCardInfo] = useState<CardInfoProps>({
-    cardNumber: ['', '', '', ''],
-    cardExpirationDate: { month: '', year: '' },
-    cardCVC: '',
+  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
+  const [cardExpirationDate, setCardExpirationDate] = useState<{ month: string; year: string }>({
+    month: '',
+    year: '',
   });
+  const [cardCVC, setCardCVC] = useState<string>('');
   const [error, setError] = useState<ErrorProps>({
     cardNumberError: { errorIndex: -1, errorMessage: '' },
     cardExpirationDateError: { errorIndex: -1, errorMessage: '' },
@@ -31,39 +32,33 @@ export default function useCardInfo() {
 
     if (name.startsWith('cardNumber')) {
       const index = Number(name[name.length - 1]);
-      setCardInfo((prev) => {
-        const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
+      setCardNumber((prev) => {
+        const updatedNumbers = prev.map((num, i) => (i === index ? value : num));
         validateAndSetError('cardNumber', updatedNumbers, setError);
-        return { ...prev, cardNumber: updatedNumbers };
+        return updatedNumbers;
       });
       return;
     }
 
     if (name.startsWith('cardExpirationDate')) {
       const key = name.split('-')[1] as 'month' | 'year';
-      setCardInfo((prev) => {
-        const updateDate = { ...prev.cardExpirationDate, [key]: value };
+      setCardExpirationDate((prev) => {
+        const updateDate = { ...prev, [key]: value };
         validateAndSetError('cardExpirationDate', updateDate, setError);
-        return { ...prev, cardExpirationDate: updateDate };
+        return updateDate;
       });
       return;
     }
 
     if (name.startsWith('cardCVC')) {
-      setCardInfo((prev) => {
+      setCardCVC(() => {
         validateAndSetError('cardCVC', value, setError);
-        return { ...prev, cardCVC: value };
+        return value;
       });
-      return;
     }
-
-    setCardInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
-  return { cardInfo, setCardInfo, handleCardInfoChange, error };
+  return { cardNumber, cardExpirationDate, cardCVC, handleCardInfoChange, error };
 }
 
 const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {

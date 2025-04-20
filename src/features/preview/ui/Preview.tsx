@@ -10,8 +10,14 @@ const getCardImageSrc = (cardNumber = '') => {
   return '';
 };
 
-export default function Preview({ cardInfo }: { cardInfo: CardInfoProps }) {
-  const imgSrc = getCardImageSrc(cardInfo.cardNumber[0]);
+export default function Preview({
+  cardNumber,
+  cardExpirationDate,
+}: {
+  cardNumber: string[];
+  cardExpirationDate: { month: string; year: string };
+}) {
+  const imgSrc = getCardImageSrc(cardNumber[0]);
 
   return (
     <S.CardBackground>
@@ -21,15 +27,15 @@ export default function Preview({ cardInfo }: { cardInfo: CardInfoProps }) {
       </S.PreviewContainer>
       <S.CardInfoContainer>
         <S.CardNumberContainer>
-          <S.InfoText>{cardInfo?.cardNumber[0]}</S.InfoText>
-          <S.InfoText>{cardInfo?.cardNumber[1]}</S.InfoText>
-          <S.Secret>{'•'.repeat(cardInfo.cardNumber[2]?.length)}</S.Secret>
-          <S.Secret>{'•'.repeat(cardInfo.cardNumber[3]?.length)}</S.Secret>
+          <S.InfoText>{cardNumber[0]}</S.InfoText>
+          <S.InfoText>{cardNumber[1]}</S.InfoText>
+          <S.Secret>{'•'.repeat(cardNumber[2]?.length)}</S.Secret>
+          <S.Secret>{'•'.repeat(cardNumber[3]?.length)}</S.Secret>
         </S.CardNumberContainer>
         <S.InfoText>
-          {cardInfo.cardExpirationDate.month}
-          {cardInfo.cardExpirationDate.year && '/'}
-          {cardInfo.cardExpirationDate.year}
+          {cardExpirationDate.month}
+          {cardExpirationDate.year && '/'}
+          {cardExpirationDate.year}
         </S.InfoText>
       </S.CardInfoContainer>
     </S.CardBackground>
