@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { INPUT_TYPE } from "../../constants/constants";
-import InputForm from "./InputForm";
+import InputSection from "./InputSection";
 import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
 
 const meta = {
-  title: "InputForm",
-  component: InputForm,
+  title: "InputSection",
+  component: InputSection,
   tags: ["autodocs"],
-} satisfies Meta<typeof InputForm>;
+} satisfies Meta<typeof InputSection>;
 
 export default meta;
 
-type Story = StoryObj<typeof InputForm>;
+type Story = StoryObj<typeof InputSection>;
 
 export const CardNumbers: Story = {
   decorators: [withCustomCardProvider({})],
