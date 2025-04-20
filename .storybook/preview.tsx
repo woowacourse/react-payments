@@ -11,14 +11,13 @@ const preview = {
     },
   },
   decorators: [
-    (Story) => {
-      return (
-        <CardProvider>
-          {Story()}
-        </CardProvider>
-      );
-    },
+    (Story) => (
+      <CardProvider>
+        <Story />
+      </CardProvider>
+    ),
   ],
+  
 };
 
 export default preview;

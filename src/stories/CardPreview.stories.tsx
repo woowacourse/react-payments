@@ -1,8 +1,9 @@
+import { useCardContext } from "../contexts/CardContext";
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPreview from "../components/CardPreview/CardPreview";
-import { useState } from "react";
+import { useEffect } from "react";
 import { within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import CardPreview from "../components/CardPreview/CardPreview";
 
 const meta: Meta<typeof CardPreview> = {
   title: "Components/CardPreview",
@@ -42,19 +43,28 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const TemplateVisa = () => {
-  const [cardNumbers] = useState<string[]>(["4234", "5678", "3333", "4444"]);
-  const [month] = useState("12");
-  const [year] = useState("30");
+  const { setCardNumbers, setMonth, setYear } = useCardContext();
 
-  return <CardPreview cardNumbers={cardNumbers} month={month} year={year} />;
+  useEffect(() => {
+    setCardNumbers(["4234", "5678", "3333", "4444"]);
+    setMonth("12");
+    setYear("30");
+  }, []);
+
+  return <CardPreview />;
 };
 
-const TemplateMaster = () => {
-  const [cardNumbers] = useState<string[]>(["5134", "5678", "3333", "4444"]);
-  const [month] = useState("12");
-  const [year] = useState("30");
 
-  return <CardPreview cardNumbers={cardNumbers} month={month} year={year} />;
+const TemplateMaster = () => {
+  const { setCardNumbers, setMonth, setYear } = useCardContext();
+
+  useEffect(() => {
+    setCardNumbers(["5134", "5678", "3333", "4444"]);
+    setMonth("12");
+    setYear("30");
+  }, []);
+
+  return <CardPreview />;
 };
 
 export const PreviewUpdatesOnInputVisa: Story = {
