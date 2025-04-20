@@ -23,13 +23,23 @@ const MASTERCARD_CARD_PREFIXES = {
 const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
   const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
 
+  const isVisa = (firstInput: string) => {
+    return firstInput.startsWith(VISA_CARD_PREFIXES);
+  };
+
+  const isMastercard = (firstInput: string) => {
+    const prefix = Number(firstInput.slice(0, 2));
+    return (
+      prefix >= MASTERCARD_CARD_PREFIXES.MIN &&
+      prefix <= MASTERCARD_CARD_PREFIXES.MAX
+    );
+  };
+
   useEffect(() => {
-    if (cardNumbers.first.startsWith(VISA_CARD_PREFIXES)) {
+    const firstInputValue = cardNumbers.first;
+    if (isVisa(firstInputValue)) {
       setCardMethodSrc(`${import.meta.env.BASE_URL}/images/visa.svg`);
-    } else if (
-      Number(cardNumbers.first.slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
-      Number(cardNumbers.first.slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
-    ) {
+    } else if (isMastercard(firstInputValue)) {
       setCardMethodSrc(`${import.meta.env.BASE_URL}/images/Mastercard.svg`);
     } else {
       setCardMethodSrc('');
