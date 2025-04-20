@@ -19,25 +19,19 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 		return "";
 	};
 
+	const findCardBrand = (firstInputElementValues: string): CardBrand => {
+		if (firstInputElementValues.startsWith("4")) return "visa";
+
+		const firstTwoDigits = parseInt(firstInputElementValues.slice(0, 2));
+		if (firstTwoDigits >= 51 && firstTwoDigits <= 55) return "mastercard";
+
+		return "none";
+	};
+
 	const settingBadgeBrand = () => {
-		const firstSection = String(cardNumbers.first);
-
-		if (firstSection.length >= 2) {
-			const firstTwoDigits = firstSection.substring(0, 2);
-			const numValue = parseInt(firstTwoDigits);
-
-			if (numValue >= 51 && numValue <= 55) {
-				setBadgeBrand("mastercard");
-				return;
-			}
-		}
-
-		if (firstSection.startsWith("4")) {
-			setBadgeBrand("visa");
-			return;
-		}
-
-		setBadgeBrand("none");
+		const firstInputElementValues = String(cardNumbers.first);
+		const brandName = findCardBrand(firstInputElementValues);
+		setBadgeBrand(brandName);
 	};
 
 	const formatDate = () => {
