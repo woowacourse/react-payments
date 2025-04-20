@@ -1,4 +1,3 @@
-import { CardInfoProps } from '../../../shared/type/types';
 import * as S from './Preview.styles';
 
 const getCardImageSrc = (cardNumber = '') => {
