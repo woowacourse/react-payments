@@ -7,12 +7,12 @@ const isNumber = (number: string) => {
   return true;
 };
 
-const numberLength = (number: string, length: number) => {
+const isCorrectLength = (number: string, length: number) => {
   if (number.length !== length) return false;
   return true;
 };
 
-const invalidNumber = (number: string) => {
+const isValidCardStartNumber = (number: string) => {
   if (number.length > 0) {
     if (
       Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
@@ -26,7 +26,7 @@ const invalidNumber = (number: string) => {
   return true;
 };
 
-const invalidMonth = (month: string) => {
+const isValidMonth = (month: string) => {
   if (
     Number(month) < CARD_VALIDATION_INFO.MIN_VALID_MONTH ||
     Number(month) > CARD_VALIDATION_INFO.MAX_VALID_MONTH
@@ -35,7 +35,7 @@ const invalidMonth = (month: string) => {
   return true;
 };
 
-const invalidYear = (year: string) => {
+const isValidYear = (year: string) => {
   if (Number(year) < CARD_VALIDATION_INFO.MIN_VALID_YEAR) return false;
   return true;
 };
@@ -45,7 +45,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
     if (num.length > 0) {
       if (!isNumber(num))
         throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
-      if (!numberLength(num, length))
+      if (!isCorrectLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
           index
@@ -55,28 +55,28 @@ export const validateCardNumbers = (number: string[], length: number) => {
 };
 
 export const validateFirstCardNumbers = (number: string) => {
-  if (!invalidNumber(number))
+  if (!isValidCardStartNumber(number))
     throw new CustomCardNumbersError(ERROR.CARD_NUMBER.INVALID, 0);
 };
 
 export const validateMonth = (month: string, length: number) => {
   if (!isNumber(month)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(month, length))
+  if (!isCorrectLength(month, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
-  if (!invalidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
+  if (!isValidMonth(month)) throw new Error(ERROR.EXPIRY.INVALID_MONTH);
 };
 
 export const validateYear = (year: string, length: number) => {
   if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(year, length))
+  if (!isCorrectLength(year, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
   if (Number(year) < CARD_VALIDATION_INFO.CURRENT_YEAR)
     throw new Error(ERROR.EXPIRY.BELOW_CURRENT_YEAR);
-  if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
+  if (!isValidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
 };
 
 export const validateCVC = (number: string, length: number) => {
   if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
-  if (!numberLength(number, length))
+  if (!isCorrectLength(number, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
 };
