@@ -13,7 +13,7 @@ export default meta;
 type Story = StoryObj<typeof CVCNumbers>;
 
 const Wrapper: React.FC = () => {
-  const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
+  const [cvcNumbers, setCvcNumbers] = useState<string>('');
   return <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />;
 };
 

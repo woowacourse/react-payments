@@ -11,13 +11,24 @@ const meta: Meta<typeof Preview> = {
 
 export default meta;
 type Story = StoryObj<typeof Preview>;
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+
+type Period = {
+  month: string;
+  year: string;
+};
 
 const Wrapper: React.FC<{
-  initialCardNumbers: string[];
-  initialPeriod: string[];
+  initialCardNumbers: CardNumber;
+  initialPeriod: Period;
 }> = ({ initialCardNumbers, initialPeriod }) => {
-  const [cardNumbers] = useState<string[]>(initialCardNumbers);
-  const [period] = useState<string[]>(initialPeriod);
+  const [cardNumbers] = useState<CardNumber>(initialCardNumbers);
+  const [period] = useState<Period>(initialPeriod);
   const separatorRef = useRef<HTMLDivElement>(null);
   return (
     <Preview
@@ -31,8 +42,16 @@ const Wrapper: React.FC<{
 export const Visa: Story = {
   render: () => (
     <Wrapper
-      initialCardNumbers={['4123', '1234', '1234', '1234']}
-      initialPeriod={['05', '23']}
+      initialCardNumbers={{
+        first: '4123',
+        second: '1234',
+        third: '1234',
+        fourth: '1234',
+      }}
+      initialPeriod={{
+        month: '05',
+        year: '23',
+      }}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -52,8 +71,16 @@ export const Visa: Story = {
 export const Mastercard: Story = {
   render: () => (
     <Wrapper
-      initialCardNumbers={['5310', '1234', '1234', '1234']}
-      initialPeriod={['06', '24']}
+      initialCardNumbers={{
+        first: '5310',
+        second: '1234',
+        third: '1234',
+        fourth: '1234',
+      }}
+      initialPeriod={{
+        month: '06',
+        year: '24',
+      }}
     />
   ),
   play: async ({ canvasElement }) => {
@@ -73,8 +100,16 @@ export const Mastercard: Story = {
 export const NoLogo: Story = {
   render: () => (
     <Wrapper
-      initialCardNumbers={['1234', '1234', '1234', '1234']}
-      initialPeriod={['07', '25']}
+      initialCardNumbers={{
+        first: '1234',
+        second: '1234',
+        third: '1234',
+        fourth: '1234',
+      }}
+      initialPeriod={{
+        month: '07',
+        year: '25',
+      }}
     />
   ),
   play: async ({ canvasElement }) => {

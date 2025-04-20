@@ -11,9 +11,20 @@ const meta: Meta<typeof CardNumbers> = {
 
 export default meta;
 type Story = StoryObj<typeof CardNumbers>;
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
 
 const Wrapper: React.FC = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<CardNumber>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
   return (
     <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
   );

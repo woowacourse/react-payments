@@ -11,9 +11,16 @@ const meta: Meta<typeof ExpirationPeriod> = {
 
 export default meta;
 type Story = StoryObj<typeof ExpirationPeriod>;
+type Period = {
+  month: string;
+  year: string;
+};
 
 const Wrapper: React.FC = () => {
-  const [period, setPeriod] = useState<string[]>(['', '']);
+  const [period, setPeriod] = useState<Period>({
+    month: '',
+    year: '',
+  });
   const separatorRef = useRef<HTMLDivElement>(null);
   return (
     <>
@@ -22,7 +29,7 @@ const Wrapper: React.FC = () => {
         setPeriod={setPeriod}
         separatorRef={separatorRef}
       />
-      <div data-testid="separator" ref={separatorRef}></div>
+      <div data-testid='separator' ref={separatorRef}></div>
     </>
   );
 };
