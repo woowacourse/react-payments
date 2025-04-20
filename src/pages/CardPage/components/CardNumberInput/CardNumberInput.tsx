@@ -7,7 +7,7 @@ import { checkInputValidation } from '../../../../validators/checkInputValidator
 
 type CardNumberInputProps = {
   values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
+  onChange: ({ value, idx }: HandleInputParams) => void;
 };
 
 const StyledCardNumberInput = styled.div`
@@ -36,7 +36,7 @@ const StyledHelperTextWrapper = styled.div`
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   const { isError, errorMessage, validate } = useInputValidation(
     Array.from({ length: 4 }, () => false),
-    (e) => checkInputValidation(e, 4)
+    (value) => checkInputValidation(value, 4)
   );
 
   return (
@@ -46,8 +46,8 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
         {values.map((value: string, idx: number) => (
           <Input
             value={value}
-            onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => validate({ e, idx })}
+            onChange={(e) => onChange({ value: e.target.value, idx })}
+            onBlur={(e) => validate({ value: e.target.value, idx })}
             maxLength={4}
             placeholder={'1234'}
             isError={isError[idx]}

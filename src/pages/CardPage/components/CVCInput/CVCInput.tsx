@@ -7,7 +7,7 @@ import { HandleInputParams } from '../../CardPage';
 
 type CVCInputProps = {
   values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
+  onChange: ({ value, idx }: HandleInputParams) => void;
 };
 
 const StyledCVCInput = styled.div`
@@ -33,8 +33,8 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const { isError, errorMessage, validate } = useInputValidation([false], (e) =>
-    checkInputValidation(e, 3)
+  const { isError, errorMessage, validate } = useInputValidation([false], (value) =>
+    checkInputValidation(value, 3)
   );
 
   return (
@@ -44,8 +44,8 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
         {values.map((value: string, idx: number) => (
           <Input
             value={value}
-            onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => validate({ e, idx })}
+            onChange={(e) => onChange({ value: e.target.value, idx })}
+            onBlur={(e) => validate({ value: e.target.value, idx })}
             maxLength={3}
             placeholder={'123'}
             isError={isError[idx]}

@@ -8,7 +8,7 @@ import ExpirationDateInput from './components/ExpirationDateInput/ExpirationDate
 import CVCInput from './components/CVCInput/CVCInput';
 
 export type HandleInputParams = {
-  e: React.ChangeEvent<HTMLInputElement>;
+  value: string;
   idx: number;
 };
 
@@ -28,25 +28,25 @@ const CardPage = () => {
   const [expirationDate, setExpirationDate] = useState(['', '']);
   const [cvc, setCvc] = useState(['']);
 
-  const handleCardNumberInput = ({ e, idx }: HandleInputParams) => {
+  const handleCardNumberInput = ({ value, idx }: HandleInputParams) => {
     setCardNumber((prev) => {
       const updated = [...prev];
-      updated[idx] = e.target.value;
+      updated[idx] = value;
       return updated;
     });
   };
-  const handleExpirationDateInput = ({ e, idx }: HandleInputParams) => {
+  const handleExpirationDateInput = ({ value, idx }: HandleInputParams) => {
     setExpirationDate((prev) => {
       const updated = [...prev];
-      updated[idx] = e.target.value;
+      updated[idx] = value;
       return updated;
     });
   };
 
-  const handleCVCInput = ({ e, idx }: HandleInputParams) => {
+  const handleCVCInput = ({ value, idx }: HandleInputParams) => {
     setCvc((prev) => {
       const updated = [...prev];
-      updated[idx] = e.target.value;
+      updated[idx] = value;
       return updated;
     });
   };

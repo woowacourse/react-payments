@@ -13,7 +13,7 @@ import { HandleInputParams } from '../../CardPage';
 
 type ExpirationDateInputProps = {
   values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
+  onChange: ({ value, idx }: HandleInputParams) => void;
 };
 
 const StyledExpirationDateInput = styled.div`
@@ -43,9 +43,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
 
   const [isError, setIsError] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
-  const checkValidExpirationDate = ({ e, idx }: HandleInputParams) => {
-    const expirationDate = e.target.value;
-
+  const checkValidExpirationDate = ({ value, idx }: HandleInputParams) => {
     try {
       checkTotalExpirationDate(values[0], values[1]);
     } catch (error) {
@@ -62,17 +60,17 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
     }
 
     try {
-      checkNumber(expirationDate);
+      checkNumber(value);
       if (idx === 0 && values[0].length === 1) {
         values[0] = values[0].padStart(2, '0');
       } else {
-        checkValidLength(expirationDate, 2);
+        checkValidLength(value, 2);
       }
 
       if (idx === 0) {
-        checkValidMonth(expirationDate);
+        checkValidMonth(value);
       } else if (idx === 1) {
-        checkValidYear(expirationDate);
+        checkValidYear(value);
       }
 
       setIsError((prev) => {
@@ -103,8 +101,8 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
         {values.map((value: string, idx: number) => (
           <Input
             value={value}
-            onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => checkValidExpirationDate({ e, idx })}
+            onChange={(e) => onChange({ value: e.target.value, idx })}
+            onBlur={(e) => checkValidExpirationDate({ value: e.target.value, idx })}
             maxLength={2}
             placeholder={placeHolders[idx]}
             isError={isError[idx]}

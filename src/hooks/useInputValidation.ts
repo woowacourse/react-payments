@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { HandleInputParams } from '../pages/CardPage/CardPage';
-function useInputValidation(
-  initialErrorState: boolean[],
-  validationFn: (e: React.ChangeEvent<HTMLInputElement>) => void
-) {
+function useInputValidation(initialErrorState: boolean[], validationFn: (value: string) => void) {
   const [isError, setIsError] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const validate = ({ e, idx }: HandleInputParams) => {
+  const validate = ({ value, idx }: HandleInputParams) => {
     try {
-      validationFn(e);
+      validationFn(value);
 
       setIsError((prev) => {
         const updated = [...prev];
