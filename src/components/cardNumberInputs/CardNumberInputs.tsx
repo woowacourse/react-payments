@@ -34,51 +34,25 @@ const getErrorMessage = (cardNumbers: CardNumber) => {
 
 function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber }: CardNumberProps) {
   const errorMessage = getErrorMessage(cardNumbers);
+  const inputKeys: (keyof typeof cardNumbers)[] = ['first', 'second', 'third', 'fourth'];
 
   return (
     <StyledContainer>
       <label htmlFor="">카드 번호</label>
       <StyledInputWrap>
-        <Input
-          value={cardNumbers['first']}
-          onChange={(e) => {
-            changeCardNumber('first', e.target?.value);
-          }}
-          width="25%"
-          maxLength={CARD_NUMBER_LENGTH}
-          placeholder="1234"
-          isError={isCardNumberInvalid(cardNumbers['first'])}
-        />
-        <Input
-          value={cardNumbers['second']}
-          onChange={(e) => {
-            changeCardNumber('second', e.target?.value);
-          }}
-          width="25%"
-          maxLength={CARD_NUMBER_LENGTH}
-          placeholder="1234"
-          isError={isCardNumberInvalid(cardNumbers['second'])}
-        />
-        <Input
-          value={cardNumbers['third']}
-          onChange={(e) => {
-            changeCardNumber('third', e.target?.value);
-          }}
-          width="25%"
-          maxLength={CARD_NUMBER_LENGTH}
-          placeholder="1234"
-          isError={isCardNumberInvalid(cardNumbers['third'])}
-        />
-        <Input
-          value={cardNumbers['fourth']}
-          onChange={(e) => {
-            changeCardNumber('fourth', e.target?.value);
-          }}
-          width="25%"
-          maxLength={CARD_NUMBER_LENGTH}
-          placeholder="1234"
-          isError={isCardNumberInvalid(cardNumbers['fourth'])}
-        />
+        {inputKeys.map((key) => (
+          <Input
+            key={key}
+            value={cardNumbers[key]}
+            onChange={(e) => {
+              changeCardNumber(key, e.target?.value);
+            }}
+            width="25%"
+            maxLength={CARD_NUMBER_LENGTH}
+            placeholder="1234"
+            isError={isCardNumberInvalid(cardNumbers[key])}
+          />
+        ))}
       </StyledInputWrap>
       <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>
     </StyledContainer>
