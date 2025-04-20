@@ -1,6 +1,6 @@
-import styles from "./InputNumber.module.css";
+import styles from "./Input.module.css";
 
-type InputNumberProps = {
+type InputProps = {
   onChange: (value: string) => void;
   value: string;
   placeholder?: string;
@@ -10,12 +10,12 @@ type InputNumberProps = {
 const DEFAULT_PLACEHOLDER = "1234" as const;
 const DEFAULT_ERROR_MESSAGE = "" as const;
 
-export default function InputNumber({
+export default function Input({
   value,
   onChange,
   placeholder = DEFAULT_PLACEHOLDER,
   errorMessage = DEFAULT_ERROR_MESSAGE,
-}: InputNumberProps) {
+}: InputProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };

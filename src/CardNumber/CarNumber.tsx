@@ -1,7 +1,7 @@
-import InputNumber from "../components/Input/InputNumber";
-import InputDescription from "../components/InputDescription/InputDescription";
-import InputSubtitle from "../components/InputSubtitle/InputSubtitle";
-import InputTitle from "../components/InputTitle/InputTitle";
+import Input from "../components/Input/Input";
+import InputDescription from "../components/Description/InputDescription";
+import InputSubtitle from "../components/Subtitle/InputSubtitle";
+import InputTitle from "../components/Title/InputTitle";
 import styles from "./CardNumber.module.css";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 
@@ -29,7 +29,7 @@ export default function CardNumber({
       <InputSubtitle inputValue={CONSTANT_CARD_NUMBER.INPUT_SUBTITLE} />
       <div className={styles["card-number__input"]}>
         {[0, 1, 2, 3].map((index) => (
-          <InputNumber
+          <Input
             key={index}
             value={cardNumbers[index]}
             errorMessage={errorMessage[index]}
