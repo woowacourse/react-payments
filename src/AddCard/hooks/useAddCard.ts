@@ -1,55 +1,36 @@
 import useControlledCardNumber from "../components/AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
 import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
-import type {
-  CardNumberState,
-  CardNumberInputKey,
-} from "../components/AddCardForm/components/CardNumber/types";
-import type { ExpireDateState } from "../components/AddCardForm/components/ExpireDate/types";
 
-interface AddCardState {
-  cardNumberState: CardNumberState;
-  handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
-  expireDate: ExpireDateState;
-  handleExpireMonthChange: (value: string) => void;
-  handleExpireYearChange: (value: string) => void;
-  handleExpireMonthBlur: (value: string) => void;
-  CVCState: { value: string; errorMessage: string };
-  handleCVCChange: (value: string) => void;
+type CardNumberSlice = ReturnType<typeof useControlledCardNumber>;
+type ExpireDateSlice = ReturnType<typeof useControlledExpireDate>;
+type CVCSlice = ReturnType<typeof useControlledCVC>;
+
+export interface AddCardState
+  extends CardNumberSlice,
+    ExpireDateSlice,
+    CVCSlice {}
+
+export interface PreviewState {
+  cardNumberState: CardNumberSlice["cardNumberState"];
+  expireDate: ExpireDateSlice["expireDate"];
 }
 
-interface PreviewState {
-  cardNumberState: CardNumberState;
-  expireDate: ExpireDateState;
-}
-
-interface UseAddCardReturn {
+export interface UseAddCardReturn {
   addCardState: AddCardState;
   previewState: PreviewState;
 }
 
-const useAddCard = (): UseAddCardReturn => {
-  const { cardNumberState, handleCardNumberChange } = useControlledCardNumber();
-  const {
-    expireDate,
-    handleExpireMonthChange,
-    handleExpireYearChange,
-    handleExpireMonthBlur,
-  } = useControlledExpireDate();
-  const { CVCState, handleCVCChange } = useControlledCVC();
+export const useAddCard = (): UseAddCardReturn => {
+  const card = useControlledCardNumber();
+  const expire = useControlledExpireDate();
+  const cvc = useControlledCVC();
 
-  const addCardState = {
-    cardNumberState,
-    handleCardNumberChange,
-    expireDate,
-    handleExpireMonthChange,
-    handleExpireYearChange,
-    handleExpireMonthBlur,
-    CVCState,
-    handleCVCChange,
+  const addCardState: AddCardState = { ...card, ...expire, ...cvc };
+  const previewState: PreviewState = {
+    cardNumberState: card.cardNumberState,
+    expireDate: expire.expireDate,
   };
-
-  const previewState = { cardNumberState, expireDate };
 
   return { addCardState, previewState };
 };
