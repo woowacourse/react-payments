@@ -4,15 +4,15 @@ type InputProps = {
   maxLength: number;
   placeholder: string;
   width?: string;
-  onChange: (e : React.ChangeEvent<HTMLInputElement>) => void
-  value : string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   isError: boolean;
 };
 
-const StyledInput = styled.input<{ width?: string, isError:boolean }>`
+const StyledInput = styled.input<{ width?: string; isError: boolean }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
-  border: 1.015px solid ${(props)=>props.isError ? "red" : "#acacac"};
+  border: 1.015px solid ${(props) => (props.isError ? "red" : "#acacac")};
   display: flex;
   height: 32px;
   padding: 8px;
@@ -35,15 +35,22 @@ const StyledInput = styled.input<{ width?: string, isError:boolean }>`
   }
 `;
 
-function Input({ width, maxLength, placeholder, onChange, value, isError }: InputProps) {
+function Input({
+  width,
+  maxLength,
+  placeholder,
+  onChange,
+  value,
+  isError,
+}: InputProps) {
   return (
-      <StyledInput
-        width={width}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        value={value}
-        onChange={onChange}
-        isError={isError}
+    <StyledInput
+      width={width}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      value={value}
+      onChange={onChange}
+      isError={isError}
     />
   );
 }
