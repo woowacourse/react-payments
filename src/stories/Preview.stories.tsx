@@ -116,8 +116,9 @@ export const NoLogo: Story = {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
     await waitFor(() => expect(container).toBeDefined());
-    const cardMethodImg = await canvas.findByTestId('card-method');
-    expect(cardMethodImg).toBeDefined();
-    await waitFor(() => expect(cardMethodImg?.getAttribute('src')).toBe(null));
+    await waitFor(() => {
+      const cardMethodImg = canvas.queryByTestId('card-method');
+      expect(cardMethodImg).not.toBeInTheDocument();
+    });
   },
 };
