@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardNumberField from './CardNumberField';
-import React, { useState } from 'react';
+import useCardNumber from '../../../hooks/useCardNumber';
 
 const meta = {
   title: 'CardNumberField',
@@ -13,36 +13,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumber: ['0', '0', '0', '0'],
+    cardNumber: ['1234', '5678', '9012', '3456'],
     isError: [false, false, false, false],
     onChange: () => {},
   },
-  render: (args) => {
-    const [cardNumber, setCardNumber] = useState([
-      '1234',
-      '5678',
-      '9012',
-      '3456',
-    ]);
-    const [isError, setIsError] = useState([false, false, false, false]);
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-      const { value } = e.target;
-
-      // 유효성 검사 setIsError
-      const isValid = value.length < 4;
-      const copyError = [...isError];
-      copyError[n] = isValid;
-      setIsError(copyError);
-
-      const copy = [...cardNumber];
-      copy[n] = value;
-      setCardNumber(copy);
-    };
-
+  render: () => {
+    const { cardNumber, isError, onChange } = useCardNumber();
     return (
       <CardNumberField
-        {...args}
         cardNumber={cardNumber}
         isError={isError}
         onChange={onChange}
@@ -50,37 +28,25 @@ export const Default: Story = {
     );
   },
 };
-export const Error: Story = {
+
+export const Pass: Story = {
   args: {
-    cardNumber: ['0', '0', '0', '0'],
+    cardNumber: ['1234', '5678', '9012', '3456'],
     isError: [false, false, false, false],
     onChange: () => {},
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState(['123', '567', '901', '3456']);
-    const [isError, setIsError] = useState([true, true, true, false]);
+    return <CardNumberField {...args} />;
+  },
+};
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-      const { value } = e.target;
-
-      // 유효성 검사 setIsError
-      const isValid = value.length < 4;
-      const copyError = [...isError];
-      copyError[n] = isValid;
-      setIsError(copyError);
-
-      const copy = [...cardNumber];
-      copy[n] = value;
-      setCardNumber(copy);
-    };
-
-    return (
-      <CardNumberField
-        {...args}
-        cardNumber={cardNumber}
-        isError={isError}
-        onChange={onChange}
-      />
-    );
+export const Error: Story = {
+  args: {
+    cardNumber: ['123', '45', '1234', '1'],
+    isError: [true, true, false, true],
+    onChange: () => {},
+  },
+  render: (args) => {
+    return <CardNumberField {...args} />;
   },
 };
