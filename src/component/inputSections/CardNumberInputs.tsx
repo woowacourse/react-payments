@@ -2,7 +2,7 @@ import { validateCardNumber } from "../../validation/validation";
 import InputGroup from "../inputGroup/InputGroup";
 import CardInput from "../CardInput";
 import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
-import type { CardInputProps, InputKeyType } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../../types/CardInputTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 interface CardNumberInputProps {
@@ -16,7 +16,10 @@ const CardNumberInputs = ({
   setCardInput,
   handleErrorMessages,
 }: CardNumberInputProps) => {
-  const cardNumberKeys: InputKeyType[] = ["first", "second", "third", "fourth"];
+  const cardNumberKeys: (keyof Pick<
+    CardInputProps,
+    "first" | "second" | "third" | "fourth"
+  >)[] = ["first", "second", "third", "fourth"];
 
   return (
     <InputGroup label="카드 번호" errorMessages={errorMessages}>

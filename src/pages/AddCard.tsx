@@ -41,13 +41,6 @@ const AddCard = () => {
     }));
   };
 
-  const getFirstPeriodError = () => {
-    const filterErrorMessage = [errorMessages.YY, errorMessages.MM].filter(
-      (message) => message.length !== 0
-    );
-    return filterErrorMessage[0];
-  };
-
   return (
     <Wrap>
       <Card

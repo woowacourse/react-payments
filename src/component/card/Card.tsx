@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cardBrandLogo from "../../constants/cardBrandLogo";
 import type { CardInputProps } from "../../types/CardInputTypes";
-import CardNumber from "./CardNumber";
+import CardNumber from "../CardNumber";
 
 interface CardProps {
   cardNumber: CardInputProps | null;

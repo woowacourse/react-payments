@@ -1,6 +1,6 @@
-import { maskingNumber } from "../../util/maskingNumber";
+import { maskingNumber } from "../util/maskingNumber";
 import styled from "styled-components";
-import type { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../types/CardInputTypes";
 
 interface CardNumberProps {
   cardNumber: CardInputProps;

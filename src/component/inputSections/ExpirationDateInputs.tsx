@@ -1,6 +1,6 @@
 import InputGroup from "../inputGroup/InputGroup";
 import CardInput from "../CardInput";
-import type { CardInputProps, InputKeyType } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../../types/CardInputTypes";
 import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
 import type { Dispatch, SetStateAction } from "react";
 import {
@@ -19,7 +19,10 @@ const ExpirationDateInputs = ({
   setCardInput,
   handleErrorMessages,
 }: ExpirationDateInputsProps) => {
-  const expirationDateKeys: InputKeyType[] = ["MM", "YY"];
+  const expirationDateKeys: (keyof Pick<CardInputProps, "MM" | "YY">)[] = [
+    "MM",
+    "YY",
+  ];
   return (
     <InputGroup label="유효기간" errorMessages={errorMessages}>
       {expirationDateKeys.map((key) => (

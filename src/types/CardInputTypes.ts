@@ -7,12 +7,3 @@ export interface CardInputProps {
   YY: number | null;
   CVC: number | null;
 }
-
-export type InputKeyType =
-  | "first"
-  | "second"
-  | "third"
-  | "fourth"
-  | "MM"
-  | "YY"
-  | "CVC";

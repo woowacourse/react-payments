@@ -1,12 +1,12 @@
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import type { CardInputProps, InputKeyType } from "../types/CardInputTypes";
+import type { CardInputProps } from "../types/CardInputTypes";
 import { useState } from "react";
 
 interface InputProps {
   maxLength: number;
   placeholder: string;
-  inputKey: InputKeyType;
+  inputKey: keyof CardInputProps;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
