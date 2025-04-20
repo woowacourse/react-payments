@@ -1,4 +1,4 @@
-import PreviewImg from "/card-preview.jpg";
+import PreviewImg from "/card-preview.svg";
 import styled from "styled-components";
 import { CARD_IMAGE, CardImageType } from "../../constants/constants";
 
@@ -11,7 +11,7 @@ export const PreviewContainerCSS = styled.div`
 `;
 
 export const PreviewCSS = styled.div`
-  background: no-repeat center url(${PreviewImg});
+  background: no-repeat center url("${PreviewImg}");
   background-size: cover;
   width: 230px;
   height: 180px;

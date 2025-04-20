@@ -5,8 +5,8 @@ export const INPUT_TYPE = {
 } as const;
 
 export const CARD_IMAGE = {
-  visa: "./visa.jpg",
-  mastercard: "./mastercard.jpg",
+  visa: "./visa.svg",
+  mastercard: "./mastercard.svg",
 } as const;
 
 export const CARD_POSITION = {
