@@ -4,7 +4,7 @@ import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
 export interface CVCNumbersViewProps {
-  cvcNumbers: string[];
+  cvcNumbers: string;
   errorMessage: string;
   error: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

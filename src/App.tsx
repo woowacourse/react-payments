@@ -28,7 +28,7 @@ const App: React.FC = () => {
     month: '',
     year: '',
   });
-  const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
+  const [cvcNumbers, setCvcNumbers] = useState<string>('');
   const separatorRef = useRef<HTMLDivElement>(null);
 
   return (
