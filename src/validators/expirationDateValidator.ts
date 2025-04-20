@@ -1,15 +1,9 @@
 import { ERROR_MESSAGES } from '../constants/errorMessages';
+import { getCurrentMonth } from '../utils/getCurrentMonth';
+import { getCurrentYear } from '../utils/getCurrentYear';
 
 export const checkValidMonth = (value: string) => {
   if (Number(value) < 1 || Number(value) > 12) throw new Error(ERROR_MESSAGES.INVALID_MONTH_RANGE);
-};
-
-export const getCurrentYear = () => {
-  return new Date().getFullYear();
-};
-
-export const getCurrentMonth = () => {
-  return new Date().getMonth();
 };
 
 export const checkValidYear = (value: string) => {
