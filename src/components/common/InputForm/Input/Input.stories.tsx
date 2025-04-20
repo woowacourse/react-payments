@@ -4,23 +4,11 @@ import { validatorUtils } from '../../../../utils/validationUtils';
 import { userEvent, within, expect, waitFor } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 
-function checkIsNumber(
-  e: React.ChangeEvent<HTMLInputElement>,
-  setIsValid: (state: boolean) => void
-) {
-  const numberString = e.target.value;
-  if (!validatorUtils.isNumber(numberString)) {
-    setIsValid(false);
-    return;
-  }
-  setIsValid(true);
-}
-
 const meta = {
   title: 'Input',
   component: Input,
   args: {
-    onChange: () => {},
+    handleInputChange: () => {},
   },
 } satisfies Meta<typeof Input>;
 
@@ -29,29 +17,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => {
-    return (
-      <Input
-        type='test'
-        placeholder='숫자를 입력하세요'
-        maxLength={3}
-        onChange={checkIsNumber}
-      />
-    );
+  args: {
+    type: 'text',
+    name: 'test',
+    placeholder: '숫자를 입력하세요',
+    maxLength: 3,
+    isValidInput: true,
   },
 };
 
 export const ErrorInput: Story = {
-  render: () => {
-    return (
-      <Input
-        type='text'
-        placeholder='숫자를 입력하세요'
-        maxLength={3}
-        onChange={checkIsNumber}
-      />
-    );
+  args: {
+    type: 'text',
+    name: 'test',
+    placeholder: '숫자를 입력하세요',
+    maxLength: 3,
+    isValidInput: false,
   },
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByPlaceholderText('숫자를 입력하세요');

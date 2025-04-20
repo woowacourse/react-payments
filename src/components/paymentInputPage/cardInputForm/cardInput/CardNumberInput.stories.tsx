@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 import CardNumberInput from './CardNumberInput';
 import { userEvent, expect, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
@@ -8,6 +7,7 @@ const meta = {
   title: 'CardNumberInput',
   component: CardNumberInput,
   args: {
+    cardNumbers: [],
     setCardNumbers: () => {},
   },
 } satisfies Meta<typeof CardNumberInput>;
@@ -16,24 +16,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => {
-    const [cardNumbers, setCardNumbers] = useState<string[]>([
-      '1234',
-      '1234',
-      '1234',
-      '1234',
-    ]);
-    return <CardNumberInput setCardNumbers={setCardNumbers} />;
-  },
-};
+export const Default: Story = {};
 
 export const Error: Story = {
-  render: () => {
-    const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-    return <CardNumberInput setCardNumbers={setCardNumbers} />;
-  },
-
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstInput = canvas.getAllByPlaceholderText('1234')[0];
