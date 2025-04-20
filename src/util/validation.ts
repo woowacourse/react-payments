@@ -1,30 +1,18 @@
 const isValidLength = (number: string, maxLength: number) => {
-  if (number.length < maxLength) {
-    return false;
-  }
-  return true;
+  return number.length >= maxLength;
 };
 
 const isValidNumber = (number: string) => {
   const regex = /^[0-9]*$/;
-  if (regex.test(number)) {
-    return true;
-  }
-  return false;
+  return regex.test(number);
 };
 
 const isValidMonthRange = (number: string) => {
-  if (Number(number) <= 12 && Number(number) >= 1) {
-    return true;
-  }
-  return false;
+  return Number(number) >= 1 && Number(number) <= 12;
 };
 
 const isValidYearRange = (number: string) => {
-  if (Number(number) <= 99 && Number(number) >= 25) {
-    return true;
-  }
-  return false;
+  return Number(number) >= 25 && Number(number) <= 99;
 };
 
 export { isValidLength, isValidNumber, isValidMonthRange, isValidYearRange };
