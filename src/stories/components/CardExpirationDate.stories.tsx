@@ -1,33 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'storybook/internal/preview-api';
+import { useState } from 'react';
+import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
 import { ERROR_MESSAGE } from '../../constants';
 import { DateType } from '../../types';
-import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
 
 const meta = {
   title: 'CardExpirationDate',
   component: CardExpirationDate,
-  tags: ['autodocs'],
+  argTypes: {
+    cardExpirationDate: { control: false },
+    cardExpirationDateErrorMessage: { control: false },
+    setCardExpirationDate: { control: false },
+    setCardExpirationDateErrorMessage: { control: false },
+  },
 } satisfies Meta<typeof CardExpirationDate>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof CardExpirationDate>;
 
 export const Default: Story = {
-  args: {
-    cardExpirationDate: {
-      month: '',
-      year: '',
-    },
-    setCardExpirationDate: () => {},
-    cardExpirationDateErrorMessage: {
-      month: '',
-      year: '',
-    },
-    setCardExpirationDateErrorMessage: () => {},
-  },
-  render: function Render(args) {
+  render: function Render() {
     const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
       month: '',
       year: '',
@@ -36,48 +29,42 @@ export const Default: Story = {
       month: '',
       year: '',
     });
+
     return (
       <CardExpirationDate
         cardExpirationDate={cardExpirationDate}
         setCardExpirationDate={setCardExpirationDate}
         cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
         setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
-      ></CardExpirationDate>
+      />
     );
   },
 };
 
 export const Valid: Story = {
+  name: '유효한 카드 유효기간 입력',
   args: {
     cardExpirationDate: {
       month: '12',
       year: '25',
     },
-    setCardExpirationDate: () => {},
     cardExpirationDateErrorMessage: {
       month: '',
       year: '',
     },
-    setCardExpirationDateErrorMessage: () => {},
   },
 };
 
 export const Error: Story = {
+  name: '유효하지 않은 카드 유효기간 입력',
   args: {
     cardExpirationDate: {
-      month: '32',
-      year: '21',
+      month: '13',
+      year: '25',
     },
-    setCardExpirationDate: () => {},
     cardExpirationDateErrorMessage: {
       month: ERROR_MESSAGE.validMonth,
       year: ERROR_MESSAGE.pastYear,
-    },
-    setCardExpirationDateErrorMessage: () => {},
-  },
-  parameters: {
-    controls: {
-      expanded: true,
     },
   },
 };

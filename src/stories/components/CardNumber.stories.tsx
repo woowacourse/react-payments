@@ -1,12 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumber from '../../components/CardNumber/CardNumber';
+import { fn } from '@storybook/test';
 import { useState } from 'storybook/internal/preview-api';
-import { SequenceType } from '../../types';
+import CardNumber from '../../components/CardNumber/CardNumber';
+
+export const ActionsData = {
+  setCardNumber: fn(),
+  setCardNumberErrorMessage: fn(),
+};
 
 const meta = {
   title: 'CardNumber',
   component: CardNumber,
-  tags: ['autodocs'],
+  excludeStories: /.*Data$/,
+  args: {
+    ...ActionsData,
+  },
+  argTypes: {
+    cardNumber: { control: false },
+    cardNumberErrorMessage: { control: false },
+    setCardNumber: { control: false },
+    setCardNumberErrorMessage: { control: false },
+  },
 } satisfies Meta<typeof CardNumber>;
 
 export default meta;
@@ -14,6 +28,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  name: '기본 상태',
   args: {
     cardNumber: {
       first: '',
@@ -21,40 +36,29 @@ export const Default: Story = {
       third: '',
       fourth: '',
     },
-    setCardNumber: () => {},
     cardNumberErrorMessage: {
       first: '',
       second: '',
       third: '',
       fourth: '',
     },
-    setCardNumberErrorMessage: () => {},
   },
   render: function Render(args) {
-    const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
-    const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
+    const [cardNumber, setCardNumber] = useState(args.cardNumber);
+    const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState(args.cardNumberErrorMessage);
     return (
       <CardNumber
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
         cardNumberErrorMessage={cardNumberErrorMessage}
         setCardNumberErrorMessage={setCardNumberErrorMessage}
-      ></CardNumber>
+      />
     );
   },
 };
 
 export const Valid: Story = {
+  name: '유효한 카드 번호 입력',
   args: {
     cardNumber: {
       first: '1234',
@@ -62,33 +66,30 @@ export const Valid: Story = {
       third: '8910',
       fourth: '1112',
     },
-    setCardNumber: () => {},
     cardNumberErrorMessage: {
       first: '',
       second: '',
       third: '',
       fourth: '',
     },
-    setCardNumberErrorMessage: () => {},
   },
 };
 
 export const Error: Story = {
+  name: '유효하지 않은 카드 번호 입력',
   args: {
     cardNumber: {
       first: 'd455',
-      second: 's4565',
+      second: '4565',
       third: '1234',
       fourth: '5678',
     },
-    setCardNumber: () => {},
     cardNumberErrorMessage: {
       first: '숫자만 입력 가능합니다.',
-      second: '숫자만 입력 가능합니다.',
+      second: '',
       third: '',
       fourth: '',
     },
-    setCardNumberErrorMessage: () => {},
   },
   parameters: {
     controls: {
