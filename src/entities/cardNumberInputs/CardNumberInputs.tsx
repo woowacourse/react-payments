@@ -1,5 +1,5 @@
 import Input from "../../shared/input/Input";
-import { CardNumberProps, Position } from "../../\btypes/index.types";
+import { CardNumberProps, CardNumberPosition } from "../../\btypes/index.types";
 import { useState } from "react";
 import { isValidLength, isValidNumber } from "../../util/validation";
 import { NO_ERROR, POSITION } from "../../shared/constants/constant";
@@ -24,7 +24,11 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
     [POSITION.FOURTH]: NO_ERROR,
   });
 
-  function checkValidation(position: Position, length: number, number: string) {
+  function checkValidation(
+    position: CardNumberPosition,
+    length: number,
+    number: string
+  ) {
     if (number === NO_ERROR) {
       setError((prev) => {
         prev[position] = NO_ERROR;

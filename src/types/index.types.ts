@@ -1,4 +1,4 @@
-export type Position = "first" | "second" | "third" | "fourth";
+export type CardNumberPosition = "first" | "second" | "third" | "fourth";
 
 export type CardNumber = {
   first: string;
@@ -14,7 +14,7 @@ export type ExpirationPeriod = {
 
 export type CardNumberProps = {
   cardNumber: CardNumber;
-  changeCardNumber: (position: Position, cardNumber: string) => void;
+  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
 };
 
 export type ExpirationPeriodProps = {
