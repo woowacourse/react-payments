@@ -7,7 +7,13 @@ const CONSTANT_USE_CVC_NUMBER = {
   MAX_CVC_LENGTH: 3,
 } as const;
 
-export default function useCvcNumber() {
+interface UseCvcNumberReturn {
+  cvcNumbers: string;
+  cvcNumbersError: string;
+  cvcNumbersValidate: (value: string) => void;
+}
+
+export default function useCvcNumber(): UseCvcNumberReturn {
   const [cvcNumbers, setCardCvcNumbers] = useState("");
   const [cvcNumbersError, setError] = useState([""]);
 

@@ -8,7 +8,16 @@ const CONSTANT_USE_EXPIRATION_DATE = {
   MAX_LENGTH: 2,
 } as const;
 
-export default function useExpirationDate() {
+interface UseExpirationDateReturn {
+  cardExpirationDate: {
+    month: string;
+    year: string;
+  };
+  cardExpirationDateError: string[];
+  dateValidate: (value: string, index: number) => void;
+}
+
+export default function useExpirationDate(): UseExpirationDateReturn {
   const [cardExpirationDate, setCardExpirationDate] = useState({
     month: "",
     year: "",

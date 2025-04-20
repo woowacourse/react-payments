@@ -26,7 +26,14 @@ export type CardData = {
   [K in CardType]: (typeof CARD_TYPE)[K];
 };
 
-export default function useCardNumbers() {
+interface UseCardNumbersReturn {
+  cardNumbers: string[];
+  cardNumbersError: string[];
+  cardType: CardType;
+  cardNumbersValidate: (value: string, index: number) => void;
+}
+
+export default function useCardNumbers(): UseCardNumbersReturn {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
   const [cardNumbersError, setError] = useState(["", "", "", ""]);
   const [cardType, setCardType] = useState<CardType>("default");
