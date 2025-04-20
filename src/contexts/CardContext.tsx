@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { CardPositionType, PeriodPositionType } from "../constants/constants";
 
-interface CardNumbers {
+export interface CardNumbers {
   first: string;
   second: string;
   third: string;

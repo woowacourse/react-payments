@@ -7,6 +7,7 @@ import {
   PreviewCSS,
 } from "./Preview.styled";
 import { CardImageType } from "../../constants/constants";
+import { checkCardType, parsingCardNumbers } from "../../utils/cardUtils";
 
 function Preview() {
   const [cardImageType, setCardImageType] = useState<CardImageType | null>(
@@ -15,38 +16,10 @@ function Preview() {
   const { cardNumbers, expirationPeriod } = useCard();
 
   useEffect(() => {
-    const parsedCardNumbers = parsingCardNumbers();
-    checkCardType(parsedCardNumbers);
+    const parsedCardNumbers = parsingCardNumbers(cardNumbers);
+    const type = checkCardType(parsedCardNumbers);
+    setCardImageType(type);
   }, [cardNumbers]);
-
-  const parsingCardNumbers = () => {
-    return Object.values(cardNumbers).reduce(
-      (acc: string, cardNumber: string) => acc + cardNumber,
-      ""
-    );
-  };
-
-  const checkCardType = (parsedCardNumbers: string) => {
-    if (parsedCardNumbers.length !== 16) {
-      setCardImageType(null);
-      return;
-    }
-
-    const firstNumber = parsedCardNumbers[0];
-    const secondNumber = parsedCardNumbers[1];
-
-    if (firstNumber === "4") {
-      setCardImageType("visa");
-    } else if (
-      firstNumber === "5" &&
-      secondNumber >= "1" &&
-      secondNumber <= "5"
-    ) {
-      setCardImageType("mastercard");
-    } else {
-      setCardImageType(null);
-    }
-  };
 
   return (
     <PreviewContainerCSS>
