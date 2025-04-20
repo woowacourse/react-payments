@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { isNumber, isUnderMaxLength } from "../validation/validate";
-import { setErrorMessage } from "../utils/setErrorMessage";
 import { getCardType } from "../utils/getCardType";
 import { indexToCardNumberKey } from "../utils/indexToCardNumberKey";
 import type { CardKey } from "../types/cardKeyTypes";
+import { useError } from "./useError";
 
 const CARD_NUMBER_LIMIT = {
   CARD_NUMBER_MAX_LENGTH: 4,
@@ -31,33 +31,24 @@ const CARD_NUMBERS_ERROR: Record<CardKey, string> = {
 
 export default function useCardNumbersInput() {
   const [cardNumbers, setCardNumbers] = useState(CARD_NUMBERS);
-  const [cardNumbersError, setError] = useState(CARD_NUMBERS_ERROR);
+  const { error: cardNumbersError, setErrorMessage } =
+    useError<CardKey>(CARD_NUMBERS_ERROR);
   const [cardType, setCardType] = useState("default");
 
   const validateCardNumbers = (value: string, key: CardKey) => {
     if (
       !isUnderMaxLength(value.length, CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH)
     ) {
-      setErrorMessage(
-        cardNumbersError,
-        CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
-        key,
-        setError
-      );
+      setErrorMessage(CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR, key);
       return false;
     }
 
     if (!isNumber(value)) {
-      setErrorMessage(
-        cardNumbersError,
-        CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR,
-        key,
-        setError
-      );
+      setErrorMessage(CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR, key);
       return false;
     }
 
-    setErrorMessage(cardNumbersError, "", key, setError);
+    setErrorMessage("", key);
     return true;
   };
 

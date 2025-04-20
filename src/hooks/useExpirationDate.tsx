@@ -4,9 +4,9 @@ import {
   isUnderMaxLength,
   isValidMonth,
 } from "../validation/validate";
-import { setErrorMessage } from "../utils/setErrorMessage";
 import type { ExpirationKey } from "../types/cardKeyTypes";
 import { indexToExpirationKey } from "../utils/indexToExpirationKey";
+import { useError } from "./useError";
 
 const EXPIRATION_DATE_LIMIT = {
   MAX_LENGTH: 2,
@@ -31,26 +31,17 @@ const EXPIRATION_DATE_ERROR: Record<ExpirationKey, string> = {
 
 export default function useExpirationDateInput() {
   const [cardExpirationDate, setcardExpirationDate] = useState(EXPIRATION_DATE);
-  const [cardExpirationDateError, setError] = useState(EXPIRATION_DATE_ERROR);
+  const { error: cardExpirationDateError, setErrorMessage } =
+    useError<ExpirationKey>(EXPIRATION_DATE_ERROR);
 
   const validateExpirationDate = (value: string, key: ExpirationKey) => {
     if (!isUnderMaxLength(value.length, EXPIRATION_DATE_LIMIT.MAX_LENGTH)) {
-      setErrorMessage(
-        cardExpirationDateError,
-        EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
-        key,
-        setError
-      );
+      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR, key);
       return false;
     }
 
     if (!isNumber(value)) {
-      setErrorMessage(
-        cardExpirationDateError,
-        EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC_ERROR,
-        key,
-        setError
-      );
+      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC_ERROR, key);
       return false;
     }
 
@@ -59,16 +50,11 @@ export default function useExpirationDateInput() {
       value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH &&
       !isValidMonth(Number(value))
     ) {
-      setErrorMessage(
-        cardExpirationDateError,
-        EXPIRATION_DATE_ERROR_MESSAGE.MONTH_RANGE_ERROR,
-        key,
-        setError
-      );
+      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.MONTH_RANGE_ERROR, key);
       return false;
     }
 
-    setErrorMessage(cardExpirationDateError, "", key, setError);
+    setErrorMessage("", key);
     return true;
   };
 

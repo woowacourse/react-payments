@@ -3,19 +3,20 @@ import CardNumber from "./CardNumber/CarNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import useExpirationDate from "./hooks/useExpirationDate";
-import useCvcNumber from "./hooks/useCvcNumber";
-import useCardNumbers from "./hooks/useCardNumbers";
+import useExpirationDateInput from "./hooks/useExpirationDate";
+import useCvcNumberInput from "./hooks/useCvcNumber";
+import useCardNumbersInput from "./hooks/useCardNumbers";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
-    useCardNumbers();
+    useCardNumbersInput();
   const {
     cardExpirationDate,
     cardExpirationDateError,
     onExpirationDateChange,
-  } = useExpirationDate();
-  const { cvcNumbers, cvcNumbersError, onCvcNumberChange } = useCvcNumber();
+  } = useExpirationDateInput();
+  const { cvcNumbers, cvcNumbersError, onCvcNumberChange } =
+    useCvcNumberInput();
 
   return (
     <div className="App">
