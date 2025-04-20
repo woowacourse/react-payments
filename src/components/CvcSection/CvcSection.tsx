@@ -1,5 +1,5 @@
 import { validateCvcLengthError, validateNumberError } from '../../utils/CardInputValidations';
-import { InputSection } from '../InputSection/InputSection';
+import { InputSection } from '../common/InputSection/InputSection';
 import styles from './CvcSection.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
 

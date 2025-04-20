@@ -1,5 +1,5 @@
 import styles from './CardNumberSection.module.css';
-import { InputSection } from '../InputSection/InputSection';
+import { InputSection } from '../common/InputSection/InputSection';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CardLogo } from '../../types/card';
 

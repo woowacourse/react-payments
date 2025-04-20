@@ -3,7 +3,7 @@ import './styles/index.css';
 import styles from './App.module.css';
 import CardNumberSection from './components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
-import Card from './components/Card/Card';
+import Card from './components/CardPreview/CardPreview';
 import CvcSection from './components/CvcSection/CvcSection';
 import { CardLogo } from './types/card';
 

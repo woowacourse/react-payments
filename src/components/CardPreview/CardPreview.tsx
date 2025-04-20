@@ -1,5 +1,5 @@
 import { CardLogo } from '../../types/card';
-import styles from './Card.module.css';
+import styles from './CardPreview.module.css';
 
 export default function Card({
   numbers,
