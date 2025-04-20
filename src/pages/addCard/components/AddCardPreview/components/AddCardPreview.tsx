@@ -1,13 +1,13 @@
 import styles from "./AddCardPreview.module.css";
-import type { CardNumberState } from "../../AddCardForm/components/CardNumber/types";
-import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
+import type { CardNumberState } from "@card/CardNumber/types";
+import type { ExpireDateState } from "@card/ExpireDate/types";
 import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
 import { CardType } from "@/pages/addCard/types";
-import { CVCState } from "../../AddCardForm/components/CVC/hooks/useControlledCVC";
-import { CARD_TYPE_COLOR } from "@/pages/addCard/constants";
+import { CVCState } from "@card/CVC/hooks/useControlledCVC";
+import { CARD_TYPE_COLOR } from "@/card/CardType/constants";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,

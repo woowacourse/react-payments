@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AddCardPreview from "./AddCardPreview";
-import { INITIAL_EXPIRE_DATE_STATE } from "../../AddCardForm/components/ExpireDate/constants";
-import { INITIAL_CARD_NUMBER_STATE } from "../../AddCardForm/components/CardNumber/constants";
+import { INITIAL_EXPIRE_DATE_STATE } from "@card/ExpireDate/constants";
+import { INITIAL_CARD_NUMBER_STATE } from "@card/CardNumber/constants";
 
 const meta = {
   title: "Component/AddCardPreview",

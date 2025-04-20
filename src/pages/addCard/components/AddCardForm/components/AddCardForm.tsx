@@ -1,18 +1,18 @@
 import styles from "./AddCardForm.module.css";
-import CardInputBox from "./CardInputBox/CardInputBox";
+import CardInputBox from "@card/CardInputBox/CardInputBox";
 import CardNumberInputs, {
   type CardNumberInputsProps,
-} from "./CardNumber/components/CardNumberInputs/CardNumberInputs";
+} from "@card/CardNumber/components/CardNumberInputs/CardNumberInputs";
 import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
-} from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
-import CVCInputs, { type CVCInputsProps } from "./CVC/components/CVCInputs";
+} from "@card/ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
+import CVCInputs, { type CVCInputsProps } from "@card/CVC/components/CVCInputs";
 import CardTypeDropdown, {
   CardTypeDropdownProps,
-} from "./CardType/components/CardTypeDropdown";
+} from "@card/CardType/components/CardTypeDropdown";
 import CardOwnerInput, {
   type CardOwnerInputProps,
-} from "./CardOwner/components/CardOwner";
+} from "@card/CardOwner/components/CardOwner";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
