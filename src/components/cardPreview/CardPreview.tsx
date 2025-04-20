@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardNumber, ExpirationPeriod } from '../../\btypes/index.types';
+import { CardNumber, ExpirationPeriod } from '../../types/index.types';
 import { INITIALIZE_VALUE } from '../../constants/constant';
 
 const StyledContainer = styled.div`
