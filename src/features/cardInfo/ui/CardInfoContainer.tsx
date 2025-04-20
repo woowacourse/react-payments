@@ -21,7 +21,7 @@ export default function CardInfoContainer({
   return (
     <CardInfoWrapper>
       {cardInfoSectionData.map((data, index) => (
-        <CardInfoSection key={`data.title-${index}`} {...data} onChange={onChange} error={error} />
+        <CardInfoSection key={`${data.id}-${index}`} {...data} onChange={onChange} error={error} />
       ))}
     </CardInfoWrapper>
   );

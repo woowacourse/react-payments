@@ -36,7 +36,7 @@ export default function CardInfoSection({
         <S.CardInfoInputContainer>
           {inputArr.map((input, index: number) => (
             <CustomInput
-              key={`custom-input-${index}`}
+              key={`${id}-custom-input-${index}`}
               {...input}
               onChange={onChange}
               maxLength={maxLength}
