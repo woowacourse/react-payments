@@ -24,8 +24,9 @@
 
 ### 리팩터링 사항
 
-- [ ] 카드 로고 동적 UI 구현 방법 바꾸기
-- [ ] 코드 포맷터 적용
-- [ ] isValidNumber 수정
-- [ ] util 함수 분리
-- [ ] CardCVCNumberSection 경로문제 수정
+- [x] 카드 로고 동적 UI 구현 방법 바꾸기
+- [x] 코드 포맷터 적용
+- [x] isValidNumber 수정
+- [x] 중복 코드 줄이기
+- [x] types 폴더명 앞 공백 수정
+- [x] 에러 처리 로직 수정
