@@ -24,6 +24,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
               maxLength={4}
               setValue={(v) => dispatch({ type: "SET_UNIQUE_NUMBER", index, value: v })}
               error={false}
+              allowOnly="number"
             />
           ))}
         </div>

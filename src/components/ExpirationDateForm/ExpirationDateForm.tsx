@@ -22,6 +22,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
             setValue={(v) => dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v })}
             maxLength={2}
             error={false}
+            allowOnly="number"
           ></Input>
           <Input
             placeholder="YY"
@@ -29,6 +30,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
             setValue={(v) => dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v })}
             maxLength={2}
             error={false}
+            allowOnly="number"
           ></Input>
         </div>
         {/* <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>

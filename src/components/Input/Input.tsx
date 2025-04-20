@@ -7,12 +7,27 @@ type InputProps = {
   value: string;
   error: boolean;
   setValue: (value: string) => void;
+  allowOnly?: string;
 };
-const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, error, setValue, allowOnly }: InputProps) => {
+  const handleChange = (inputValue: string) => {
+    switch (allowOnly) {
+      case "number":
+        if (/^[0-9]*$/.test(inputValue)) {
+          setValue(inputValue);
+        }
+        break;
+
+      default:
+        setValue(inputValue);
+        break;
+    }
+  };
+
   return (
     <input
       css={inputStyle(error)}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => handleChange(e.target.value)}
       value={value}
       placeholder={placeholder}
       maxLength={maxLength}
