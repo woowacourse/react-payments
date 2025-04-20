@@ -15,10 +15,9 @@ type InputKeyType =
 interface InputProps {
   maxLength: number;
   placeholder: string;
-  inputKey: InputKeyType;
-  setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
+  onChange: (value: string) => void;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -39,10 +38,9 @@ const InputField = styled.input<{ $isError: boolean }>`
 const Input = ({
   maxLength,
   placeholder,
-  inputKey,
-  setCardInput,
   validate,
   handleErrorMessage,
+  onChange,
 }: InputProps) => {
   const [isError, setIsError] = useState(false);
 
@@ -57,11 +55,7 @@ const Input = ({
 
     handleErrorMessage('');
     setIsError(false);
-
-    setCardInput((prev: CardInputProps) => ({
-      ...prev,
-      [inputKey]: value === '' ? null : Number(value),
-    }));
+    onChange(value);
   };
 
   return (

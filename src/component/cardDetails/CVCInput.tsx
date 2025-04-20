@@ -7,16 +7,17 @@ import { CardInputProps } from '../../types/CardInputTypes';
 
 interface CVCInputProps {
   validateCardCVC: (value: string) => string | undefined;
-  setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
+  setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   errorMessages: ErrorMessagesType;
+  onChange: (value: string) => void;
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({
   validateCardCVC,
-  setCardInput,
   handleErrorMessages,
   errorMessages,
+  setCardInput,
 }) => {
   return (
     <>
@@ -26,8 +27,12 @@ export const CVCInput: React.FC<CVCInputProps> = ({
           maxLength={3}
           placeholder="123"
           validate={validateCardCVC}
-          setCardInput={setCardInput}
-          inputKey="CVC"
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              CVC: value === '' ? null : Number(value),
+            }));
+          }}
           handleErrorMessage={message => handleErrorMessages('CVC', message)}
         />
       </InputGroup>

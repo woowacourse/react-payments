@@ -14,42 +14,68 @@ interface CardNumberInputProps {
   handleCardNumberErrorMessages: () => string;
 }
 
-export const CardNumberInput: React.FC<CardNumberInputProps> = ({ handleCardNumberErrorMessages, setCardInput, handleErrorMessages }) => {
+export const CardNumberInput: React.FC<CardNumberInputProps> = ({
+  handleCardNumberErrorMessages,
+  setCardInput,
+  handleErrorMessages,
+}) => {
   return (
     <>
-      <Description headText="결제할 카드 번호를 입력해 주세요." detailText="본인 명의의 카드만 결제 가능합니다." />
-      <InputGroup label="카드 번호" errorMessages={handleCardNumberErrorMessages()}>
+      <Description
+        headText="결제할 카드 번호를 입력해 주세요."
+        detailText="본인 명의의 카드만 결제 가능합니다."
+      />
+      <InputGroup
+        label="카드 번호"
+        errorMessages={handleCardNumberErrorMessages()}
+      >
         <Input
           maxLength={4}
           placeholder="1234"
-          setCardInput={setCardInput}
           validate={validateCardNumber}
-          inputKey="first"
           handleErrorMessage={message => handleErrorMessages('first', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              first: value === '' ? null : Number(value),
+            }));
+          }}
         />
         <Input
           maxLength={4}
           placeholder="1234"
           validate={validateCardNumber}
-          setCardInput={setCardInput}
-          inputKey="second"
           handleErrorMessage={message => handleErrorMessages('second', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              second: value === '' ? null : Number(value),
+            }));
+          }}
         />
         <Input
           maxLength={4}
           placeholder="1234"
-          setCardInput={setCardInput}
           validate={validateCardNumber}
-          inputKey="third"
           handleErrorMessage={message => handleErrorMessages('third', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              third: value === '' ? null : Number(value),
+            }));
+          }}
         />
         <Input
           maxLength={4}
           placeholder="1234"
-          setCardInput={setCardInput}
           validate={validateCardNumber}
-          inputKey="fourth"
           handleErrorMessage={message => handleErrorMessages('fourth', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              fourth: value === '' ? null : Number(value),
+            }));
+          }}
         />
       </InputGroup>
     </>

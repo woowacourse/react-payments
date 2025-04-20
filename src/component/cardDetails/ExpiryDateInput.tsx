@@ -31,17 +31,25 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
           maxLength={2}
           placeholder="MM"
           validate={validateCardExpirationDateMM}
-          setCardInput={setCardInput}
-          inputKey="MM"
           handleErrorMessage={message => handleErrorMessages('MM', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              MM: value === '' ? null : Number(value),
+            }));
+          }}
         />
         <Input
           maxLength={2}
           placeholder="YY"
           validate={validateCardExpirationDateYY}
-          setCardInput={setCardInput}
-          inputKey="YY"
           handleErrorMessage={message => handleErrorMessages('YY', message)}
+          onChange={value => {
+            setCardInput((prev: CardInputProps) => ({
+              ...prev,
+              YY: value === '' ? null : Number(value),
+            }));
+          }}
         />
       </InputGroup>
     </>
