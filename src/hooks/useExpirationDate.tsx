@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { isNumber, isValidLength, isValidMonth } from "../validation/validate";
+import {
+  isNumber,
+  isUnderMaxLength,
+  isValidMonth,
+} from "../validation/validate";
 import { setErrorMessage } from "../utils/setErrorMessage";
 
 const EXPIRATION_DATE = {
@@ -22,7 +26,7 @@ export default function useExpirationDate() {
     newDate[index] = value.slice(0, EXPIRATION_DATE.MAX_LENGTH);
     setcardExpirationDate(newDate);
 
-    if (!isValidLength(value.length, EXPIRATION_DATE.MAX_LENGTH)) {
+    if (!isUnderMaxLength(value.length, EXPIRATION_DATE.MAX_LENGTH)) {
       setErrorMessage(
         cardExpirationDateError,
         EXPIRATION_DATE_ERROR.INVALID_LENGTH_ERROR,

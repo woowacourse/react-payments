@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber, isValidLength } from "../validation/validate";
+import { isNumber, isUnderMaxLength } from "../validation/validate";
 import { setErrorMessage } from "../utils/setErrorMessage";
 
 const CVC_NUMBER = {
@@ -18,7 +18,7 @@ export default function useCvcNumber() {
   const cvcNumbersValidate = (value: string) => {
     setCardCvcNumbers(value.slice(0, CVC_NUMBER.MAX_CVC_LENGTH));
 
-    if (!isValidLength(value.length, CVC_NUMBER.MAX_CVC_LENGTH)) {
+    if (!isUnderMaxLength(value.length, CVC_NUMBER.MAX_CVC_LENGTH)) {
       setErrorMessage(
         cvcNumbersError,
         CVC_NUMBER_ERROR.INVALID_LENGTH_ERROR,

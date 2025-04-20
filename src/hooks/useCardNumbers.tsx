@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber, isValidLength } from "../validation/validate";
+import { isNumber, isUnderMaxLength } from "../validation/validate";
 import { setErrorMessage } from "../utils/setErrorMessage";
 
 const CARD_NUMBER = {
@@ -41,7 +41,7 @@ export default function useCardNumbers() {
       getCardType(Number(value.slice(0, CARD_NUMBER.CARD_TYPE_MAX_LENGTH)))
     );
 
-    if (!isValidLength(value.length, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH)) {
+    if (!isUnderMaxLength(value.length, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH)) {
       setErrorMessage(
         cardNumbersError,
         CARD_NUMBER_ERROR.INVALID_LENGTH_ERROR,

@@ -1,4 +1,4 @@
-export function isValidLength(length: number, maxLength: number) {
+export function isUnderMaxLength(length: number, maxLength: number) {
   return length <= maxLength;
 }
 
