@@ -12,7 +12,7 @@ import CardTypeDropdown, {
 } from "@card/CardType/components/CardTypeDropdown";
 import CardOwnerInput, {
   type CardOwnerInputProps,
-} from "@card/CardOwner/components/CardOwner";
+} from "@/card/CardOwner/components/CardOwnerInput";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &

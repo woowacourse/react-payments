@@ -1,4 +1,4 @@
-import styles from "./CardOwner.module.css";
+import styles from "./CardOwnerInput.module.css";
 import Input from "@/components/Input/Input";
 import Label from "@/components/Label/Label";
 import type { CardOwnerState } from "../types";
