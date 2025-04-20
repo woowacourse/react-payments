@@ -14,7 +14,7 @@ const meta: Meta<typeof Input> = {
       control: 'text',
       description: '최대 길이',
     },
-    placeHolder: {
+    placeholder: {
       control: 'text',
       description: '입력 힌트',
     },
@@ -32,7 +32,7 @@ export const CardNumberInput: Story = {
   args: {
     value: '5511',
     maxLength: 4,
-    placeHolder: '1234',
+    placeholder: '1234',
     isError: false,
   },
 };
@@ -40,7 +40,7 @@ export const ExpirationDateInput: Story = {
   args: {
     value: '12',
     maxLength: 2,
-    placeHolder: 'MM',
+    placeholder: 'MM',
     isError: false,
   },
 };
@@ -48,7 +48,7 @@ export const CVCInput: Story = {
   args: {
     value: '333',
     maxLength: 3,
-    placeHolder: '123',
+    placeholder: '123',
     isError: false,
   },
 };
@@ -57,7 +57,7 @@ export const InvalidCardNumberInput: Story = {
   args: {
     value: 'aaaa',
     maxLength: 4,
-    placeHolder: '1234',
+    placeholder: '1234',
     isError: true,
   },
 };
