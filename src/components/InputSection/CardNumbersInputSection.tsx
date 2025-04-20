@@ -22,30 +22,22 @@ const CardNumbersInputSection = ({
         description={CARD_NUMBERS_TEXT.description}
         subtitle={CARD_NUMBERS_TEXT.subtitle}
       >
-        <InputField
-          value={cardNumbers.firstNumber}
-          onChange={setCardNumbers('firstNumber')}
-          isError={isError.firstNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.secondNumber}
-          onChange={setCardNumbers('secondNumber')}
-          isError={isError.secondNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.thirdNumber}
-          onChange={setCardNumbers('thirdNumber')}
-          isError={isError.thirdNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.fourthNumber}
-          onChange={setCardNumbers('fourthNumber')}
-          isError={isError.fourthNumber}
-          placeholder="1234"
-        ></InputField>
+        {(
+          [
+            'firstNumber',
+            'secondNumber',
+            'thirdNumber',
+            'fourthNumber',
+          ] as const
+        ).map((key) => (
+          <InputField
+            key={key}
+            value={cardNumbers[key]}
+            onChange={setCardNumbers(key)}
+            isError={isError[key]}
+            placeholder="1234"
+          />
+        ))}
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>
