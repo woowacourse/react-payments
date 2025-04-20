@@ -21,9 +21,9 @@ export default function useCardInfo() {
     cardCVC: '',
   });
   const [error, setError] = useState<ErrorProps>({
-    cardNumberError: [-1, ''],
-    cardExpirationDateError: [-1, ''],
-    cardCVCError: [-1, ''],
+    cardNumberError: { errorIndex: -1, errorMessage: '' },
+    cardExpirationDateError: { errorIndex: -1, errorMessage: '' },
+    cardCVCError: { errorIndex: -1, errorMessage: '' },
   });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError:
     (prevError: any) =>
       ({
         ...prevError,
-        [errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
+        [errorKey]: errorIndex !== -1 ? { errorIndex, errorMessage } : { errorIndex: -1, errorMessage: '' },
       } as ErrorProps)
   );
 };

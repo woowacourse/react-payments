@@ -14,5 +14,7 @@ export interface CardInfoProps {
 }
 
 export interface ErrorProps {
-  [key: string]: [number, string];
+  cardNumberError: { errorIndex: number; errorMessage: string };
+  cardExpirationDateError: { errorIndex: number; errorMessage: string };
+  cardCVCError: { errorIndex: number; errorMessage: string };
 }

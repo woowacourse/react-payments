@@ -23,7 +23,7 @@ export default function CardInfoSection({
   error = {} as ErrorProps,
   onChange,
 }: CardInfoSectionProps) {
-  const errorKey = `${id}Error`;
+  const errorKey = `${id}Error` as keyof ErrorProps;
 
   return (
     <S.CardInfoMainSection>
@@ -34,17 +34,17 @@ export default function CardInfoSection({
       <S.CardInfoSubSection>
         <S.CardInfoSubTitle>{subTitle}</S.CardInfoSubTitle>
         <S.CardInfoInputContainer>
-          {inputArr.map((input, index) => (
+          {inputArr.map((input, index: number) => (
             <CustomInput
               key={`custom-input-${index}`}
               {...input}
               onChange={onChange}
               maxLength={maxLength}
-              error={error && errorKey in error && error[errorKey][0] === index}
+              error={error && error[errorKey].errorIndex === index}
             />
           ))}
         </S.CardInfoInputContainer>
-        <S.CardInfoError>{error && errorKey in error ? error[errorKey][1] : ''}</S.CardInfoError>
+        <S.CardInfoError>{error && error[errorKey].errorMessage}</S.CardInfoError>
       </S.CardInfoSubSection>
     </S.CardInfoMainSection>
   );
