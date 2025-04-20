@@ -21,6 +21,7 @@ interface AddCardFormProps {
 function AddCardForm({ addCardState }: AddCardFormProps) {
   const {
     cardNumberState,
+    inputRefs,
     handleCardNumberChange,
     cardType,
     handleCardTypeChange,
@@ -39,6 +40,7 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
         guideText="본인 명의의 카드만 결제 가능합니다."
         InputComponent={
           <CardNumberInputs
+            inputRefs={inputRefs}
             cardNumberState={cardNumberState}
             handleCardNumberChange={handleCardNumberChange}
           />

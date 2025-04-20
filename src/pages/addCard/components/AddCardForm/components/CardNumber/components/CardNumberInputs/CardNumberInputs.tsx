@@ -2,16 +2,22 @@ import styles from "./CardNumberInputs.module.css";
 import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
-import type { CardNumberInputKey, CardNumberState } from "../../types";
+import type {
+  CardNumberInputKey,
+  CardNumberInputRefs,
+  CardNumberState,
+} from "../../types";
 import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
+  inputRefs: CardNumberInputRefs;
   handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
 }
 
 function CardNumberInputs({
   cardNumberState,
+  inputRefs,
   handleCardNumberChange,
 }: CardNumberInputsProps) {
   const { first, second, third, fourth } = cardNumberState;
@@ -34,6 +40,7 @@ function CardNumberInputs({
               카드 번호
             </Label>
             <Input
+              ref={inputRefs[inputKey]}
               id={`card-number-${inputKey}-input`}
               role={`card-number-${inputKey}-input`}
               type="text"
