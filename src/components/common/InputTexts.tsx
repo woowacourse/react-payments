@@ -1,11 +1,23 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+
+type Period = {
+  month: string;
+  year: string;
+};
+
 interface InputTextsProps {
   label: string;
   placeholder: string[];
   eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  state: string[] | { month: string; year: string };
+  state: string | Period | CardNumber;
   errors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;

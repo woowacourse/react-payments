@@ -3,7 +3,7 @@ import CVCNumbersView from './CVCNumbersView';
 
 export interface CVCNumbersProps {
   cvcNumbers: string[];
-  setCvcNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+  setCvcNumbers: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CVC_NUMBERS_LENGTH = 3;

@@ -5,9 +5,26 @@ import ExpirationPeriod from './components/ExpirationPeriod';
 import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+
+type Period = {
+  month: string;
+  year: string;
+};
+
 const App: React.FC = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [period, setPeriod] = useState<{ month: string; year: string }>({
+  const [cardNumbers, setCardNumbers] = useState<CardNumber>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
+  const [period, setPeriod] = useState<Period>({
     month: '',
     year: '',
   });

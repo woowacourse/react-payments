@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+
 export interface PreviewViewProps {
-  cardNumbers: string[];
+  cardNumbers: CardNumber;
   period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
   cardMethodSrc: string;
@@ -27,7 +34,7 @@ const PreviewView: React.FC<PreviewViewProps> = ({
           alt='Card Method'
         />
         <CardNumberArea>
-          {cardNumbers.map((number, index) => (
+          {Object.values(cardNumbers).map((number, index) => (
             <CardNumber key={index}>
               {index < CARD_NUMBER_VISIBLE_THRESHOLD
                 ? number

@@ -3,8 +3,15 @@ import styled from '@emotion/styled';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+
 export interface CardNumbersViewProps {
-  cardNumbers: string[];
+  cardNumbers: CardNumber;
   errorMessage: string;
   errors: boolean[];
   handleInputChange: (

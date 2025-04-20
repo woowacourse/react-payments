@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import CardNumbersView from './CardNumbersView';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
+type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
+
 export interface CardNumbersProps {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+  cardNumbers: CardNumber;
+  setCardNumbers: React.Dispatch<React.SetStateAction<CardNumber>>;
 }
 
 const CARD_NUMBERS_LENGTH = 4;
@@ -12,6 +20,7 @@ const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
+  const keyMap: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
 
   useEffect(() => {
     if (errors.every((error) => error === false)) {
@@ -25,9 +34,10 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
   ) => {
     const value = e.target.value;
     setCardNumbers((prev) => {
-      const newState = [...prev];
+      const newState = { ...prev };
       if (/^[0-9]*$/.test(value) && value.length <= CARD_NUMBERS_LENGTH) {
-        newState[index] = value;
+        const key: CardNumberKey = keyMap[index];
+        newState[key] = value;
         setErrors((prevErrors) => {
           const newErrors = [...prevErrors];
           newErrors[index] = false;
