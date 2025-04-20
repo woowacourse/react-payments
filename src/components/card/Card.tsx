@@ -6,13 +6,15 @@ type Props = {
 	cardNumbers: cardNumber;
 	expirationDate: date;
 };
+
+type CardBrand = "none" | "mastercard" | "visa";
+
 const Card = ({ cardNumbers, expirationDate }: Props) => {
-	// none:0, mastercard: 1, visa: 2
-	const [badgeBrand, setBadgeBrand] = useState(0);
+	const [badgeBrand, setBadgeBrand] = useState<CardBrand>("none");
 
 	const badgeImagePath = () => {
-		if (badgeBrand === 1) return "./images/Mastercard.png";
-		if (badgeBrand === 2) return "./images/Visa.png";
+		if (badgeBrand === "mastercard") return "./images/Mastercard.png";
+		if (badgeBrand === "visa") return "./images/Visa.png";
 
 		return "";
 	};
@@ -25,17 +27,17 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 			const numValue = parseInt(firstTwoDigits);
 
 			if (numValue >= 51 && numValue <= 55) {
-				setBadgeBrand(1); // Mastercard
+				setBadgeBrand("mastercard");
 				return;
 			}
 		}
 
 		if (firstSection.startsWith("4")) {
-			setBadgeBrand(2); // Visa
+			setBadgeBrand("visa");
 			return;
 		}
 
-		setBadgeBrand(0);
+		setBadgeBrand("none");
 	};
 
 	const formatDate = () => {
