@@ -1,16 +1,15 @@
-import { ChangeEvent } from "react";
 import {
-  CARD_POSITION,
   CardPositionType,
   INPUT_TYPE,
   InputType,
-  PERIOD_POSITION,
   PeriodPositionType,
 } from "../../constants/constants";
 import { useCard } from "../../hooks/useCard";
-import Input from "../Input/Input";
 import { InputGroupCSS } from "./InputGroup.styled";
 import { InputErrorType } from "../../hooks/useInputError";
+import ExpirationPeriodInputs from "../ExpirationPeriodInputs/ExpirationPeriodInputs";
+import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
+import CvcInput from "../CvcInput/CvcInput";
 
 export interface InputGroupProps {
   type: InputType;
@@ -63,103 +62,30 @@ function InputGroup({
     updateCvcNumber(value);
   };
 
-  const renderInputByType = () => {
-    switch (type) {
-      case INPUT_TYPE.cardNumbers:
-        const carNumberPlaceholder = "1234";
-        return (
-          <>
-            <Input
-              placeholder={carNumberPlaceholder}
-              maxLength={4}
-              isError={error.cardNumbers.first}
-              value={cardNumbers.first}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.first)
-              }
-            />
-            <Input
-              placeholder={carNumberPlaceholder}
-              maxLength={4}
-              isError={error.cardNumbers.second}
-              value={cardNumbers.second}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.second)
-              }
-            />
-            <Input
-              placeholder={carNumberPlaceholder}
-              maxLength={4}
-              isError={error.cardNumbers.third}
-              value={cardNumbers.third}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.third)
-              }
-            />
-            <Input
-              placeholder={carNumberPlaceholder}
-              maxLength={4}
-              isError={error.cardNumbers.fourth}
-              value={cardNumbers.fourth}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleCardNumberChange(e.target.value, CARD_POSITION.fourth)
-              }
-            />
-          </>
-        );
-
-      case INPUT_TYPE.expirationPeriod:
-        const monthPlaceholder = "MM";
-        const yearPlaceholder = "YY";
-        return (
-          <>
-            <Input
-              placeholder={monthPlaceholder}
-              maxLength={2}
-              isError={error.expirationPeriod.month}
-              value={expirationPeriod.month}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleExpirationPeriodChange(
-                  e.target.value,
-                  PERIOD_POSITION.month
-                )
-              }
-            />
-            <Input
-              placeholder={yearPlaceholder}
-              maxLength={2}
-              isError={error.expirationPeriod.year}
-              value={expirationPeriod.year}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleExpirationPeriodChange(
-                  e.target.value,
-                  PERIOD_POSITION.year
-                )
-              }
-            />
-          </>
-        );
-
-      case INPUT_TYPE.cvcNumber:
-        const cvcPlaceholder = "123";
-        return (
-          <Input
-            placeholder={cvcPlaceholder}
-            maxLength={3}
-            isError={error.cvcNumber}
-            value={cvcNumber}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleCvcNumberChange(e.target.value)
-            }
-          />
-        );
-
-      default:
-        null;
-    }
-  };
-
-  return <InputGroupCSS>{renderInputByType()}</InputGroupCSS>;
+  return (
+    <InputGroupCSS>
+      {type === INPUT_TYPE.cardNumbers && (
+        <CardNumberInputs
+          cardNumbers={cardNumbers}
+          error={error}
+          handleCardNumberChange={handleCardNumberChange}
+        />
+      )}
+      {type === INPUT_TYPE.expirationPeriod && (
+        <ExpirationPeriodInputs
+          expirationPeriod={expirationPeriod}
+          error={error.expirationPeriod}
+          handleExpirationPeriodChange={handleExpirationPeriodChange}
+        />
+      )}
+      {type === INPUT_TYPE.cvcNumber && (
+        <CvcInput
+          value={cvcNumber}
+          error={error.cvcNumber}
+          handleCvcNumberChange={handleCvcNumberChange}
+        />
+      )}
+    </InputGroupCSS>
+  );
 }
-
 export default InputGroup;
