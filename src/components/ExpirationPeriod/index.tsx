@@ -38,64 +38,60 @@ const ExpirationPeriod = ({
     }
   }, [errors]);
 
+  const isNumeric = (value: string) => /^[0-9]*$/.test(value);
+
+  const isValidMonth = (value: string) => {
+    const month = Number(value);
+    return value.length === 2 && month >= MONTH.MIN && month <= MONTH.MAX;
+  };
+
+  const isValidYear = (value: string) => {
+    const year = Number(value);
+    return value.length === 2 && year >= YEAR.MIN && year <= YEAR.MAX;
+  };
+
+  const updateErrors = (
+    prev: boolean[],
+    index: number,
+    isError: boolean
+  ): boolean[] => {
+    const newErrors = [...prev];
+    newErrors[index] = isError;
+    return newErrors;
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const value = e.target.value;
-    setPeriod((prev) => {
-      const newState = { ...prev };
+    // console.log(value);
 
-      let valid = true;
-      let message = '';
+    if (!isNumeric(value)) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_CHARACTER);
+      setErrors((prev) => updateErrors(prev, index, true));
+      // console.log(`1 ${value}`);
+      return;
+    }
 
-      if (!/^[0-9]*$/.test(value)) {
-        valid = false;
-        message = ERROR_MESSAGE.INVALID_CHARACTER;
-      } else if (value.length <= EXPIRATION_PERIOD_LENGTH) {
-        if (index === 0) {
-          newState.month = value;
-          const month = Number(value);
-          if (month > MONTH.MAX || month < MONTH.MIN) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          } else if (month < 10 && !value.startsWith('0')) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          }
-        } else {
-          newState.year = value;
-          const year = Number(value);
-          if (year < YEAR.MIN || year > YEAR.MAX) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          } else if (
-            (year < 10 && !value.startsWith('0')) ||
-            value.length === 1
-          ) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          }
-        }
-      }
+    const isMonthField = index === 0;
+    const isValid = isMonthField ? isValidMonth(value) : isValidYear(value);
 
-      if (!valid) {
-        console.log(newState);
-        setErrorMessage(message);
-        setErrors((prevErr) => {
-          const newErrors = [...prevErr];
-          newErrors[index] = true;
-          return newErrors;
-        });
-      } else {
-        setErrors((prevErr) => {
-          const newErrors = [...prevErr];
-          newErrors[index] = false;
-          return newErrors;
-        });
-      }
-      return newState;
-    });
+    if (!isValid) {
+      setErrorMessage(ERROR_MESSAGE.INVALID);
+      setErrors((prev) => updateErrors(prev, index, true));
+      setPeriod((prev) => ({
+        ...prev,
+        [isMonthField ? 'month' : 'year']: value,
+      }));
+      return;
+    }
+
+    setErrors((prev) => updateErrors(prev, index, false));
+    setPeriod((prev) => ({
+      ...prev,
+      [isMonthField ? 'month' : 'year']: value,
+    }));
   };
 
   const handleFocus = () => {
