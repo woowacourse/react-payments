@@ -1,13 +1,9 @@
-import Title from '@/components/common/Title/Title';
-import Label from '@/components/common/Label/Label';
-import Input from '@/components/common/Input/Input';
-
-import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
+import { Title, Label, Input, Spacing, ErrorMessage } from '@/components/common';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
 import { checkValidCVCNumber } from './utils';
 import { checkAllNumber } from '@/utils';
-import Spacing from '@/components/common/Spacing/Spacing';
+
 interface CardCVCNumberProps {
   cardCVCNumber: string;
   setCardCVCNumber: Dispatch<SetStateAction<string>>;

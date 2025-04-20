@@ -1,14 +1,10 @@
-import Title from '../common/Title/Title';
-import Label from '../common/Label/Label';
-import Input from '../common/Input/Input';
-import Spacing from '../common/Spacing/Spacing';
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
+import { Title, Label, Input, Spacing, ErrorMessage } from '@/components/common';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE } from '../../constants';
-import { SequenceType } from '../../types';
+import { ERROR_MESSAGE } from '@/constants';
+import { SequenceType } from '@/types';
 import * as S from './CardNumber.styles';
-import { getErrorMessageFromObject } from '../../utils/message';
-import { checkAllNumber } from '../../utils/validation';
+import { getErrorMessageFromObject } from '@/utils/message';
+import { checkAllNumber } from '@/utils/validation';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
