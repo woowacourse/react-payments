@@ -92,6 +92,7 @@ export const Default: Story = {
         `}
       >
         <Flex
+          flex={0.1}
           css={css`
             background-color: red;
             width: 32px;
@@ -101,6 +102,7 @@ export const Default: Story = {
           1
         </Flex>
         <Flex
+          flex={0.1}
           css={css`
             background-color: green;
             width: 32px;
@@ -110,6 +112,7 @@ export const Default: Story = {
           2
         </Flex>
         <Flex
+          flex={0.1}
           css={css`
             background-color: blue;
             width: 32px;
