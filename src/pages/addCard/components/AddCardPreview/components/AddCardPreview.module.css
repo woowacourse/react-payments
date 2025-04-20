@@ -24,7 +24,7 @@
   border-radius: 4px;
 }
 
-.cardNumber {
+.cardNumbers {
   color: #fff;
   display: flex;
   align-items: center;
@@ -34,14 +34,16 @@
   height: 20px;
 }
 
-.cardNumber > span {
+.cardNumber {
+  width: 55px;
   letter-spacing: 5px;
 }
 
-.dots {
+.dot {
   display: flex;
   gap: 0.65rem;
-  width: 70px;
+  width: 65px;
+  padding-bottom: 0.25rem;
 }
 
 .expire {
@@ -68,4 +70,36 @@
   font-weight: 500;
   letter-spacing: 3px;
   height: 20px;
+}
+
+.BC카드 {
+  background-color: #f04651;
+}
+
+.신한카드 {
+  background-color: #0046ff;
+}
+
+.카카오뱅크 {
+  background-color: #ffe600;
+}
+
+.현대카드 {
+  background-color: #000;
+}
+
+.우리카드 {
+  background-color: #007bc8;
+}
+
+.롯데카드 {
+  background-color: #ed1c24;
+}
+
+.하나카드 {
+  background-color: #009490;
+}
+
+.국민카드 {
+  background-color: #6a6056;
 }

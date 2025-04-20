@@ -7,7 +7,6 @@ import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
 import { CardType } from "@/pages/addCard/types";
 import { CVCState } from "@card/CVC/hooks/useControlledCVC";
-import { CARD_TYPE_COLOR } from "@/card/CardType/constants";
 import { CardOwnerState } from "@/card/CardOwner/types";
 
 const CARD_BRAND_IMAGES = {
@@ -32,12 +31,10 @@ function AddCardPreview({
   CVCState,
 }: AddCardPreviewProps) {
   const cardBrand = getCardBrand(Number(cardNumberState.first.value));
-  const cardTypeColor = cardType ? CARD_TYPE_COLOR[cardType] : "#333";
 
   return (
     <div
-      className={styles.previewCard}
-      style={{ backgroundColor: cardTypeColor }}
+      className={`${styles.previewCard} ${cardType ? styles[cardType] : ""}`}
     >
       <div className={styles.previewHeader}>
         <p className={styles.chip} />
@@ -47,17 +44,19 @@ function AddCardPreview({
           </p>
         )}
       </div>
-      <div className={styles.cardNumber}>
-        <span>{cardNumberState.first.value}</span>
-        <span>{cardNumberState.second.value}</span>
-        <span className={styles.dots}>
+      <div className={styles.cardNumbers}>
+        <span className={styles.cardNumber}>{cardNumberState.first.value}</span>
+        <span className={styles.cardNumber}>
+          {cardNumberState.second.value}
+        </span>
+        <span className={styles.dot}>
           {Array.from({ length: cardNumberState.third.value.length }).map(
             (_, index) => (
               <Dot key={index} />
             )
           )}
         </span>
-        <span className={styles.dots}>
+        <span className={styles.dot}>
           {Array.from({ length: cardNumberState.fourth.value.length }).map(
             (_, index) => (
               <Dot key={index} />
