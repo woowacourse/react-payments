@@ -1,18 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import PreviewCard from "../PreviewCard/PreviewCard";
-import { CardType, CardInformationType } from "../../types/CardInformationType";
+import { CardType } from "../../types/CardInformationType";
+import { CardInformationType } from "../../types/CardInformationType";
 
-const PreviewContainer = ({
-  cardInformationState,
-  cardType,
-}: {
-  cardInformationState: CardInformationType;
-  cardType: CardType;
-}) => {
+const PreviewContainer = ({ cardType, cardState }: { cardState: CardInformationType; cardType: CardType }) => {
   return (
     <div css={PreviewCardContainerStyle}>
-      <PreviewCard cardInformationState={cardInformationState} cardType={cardType} />
+      <PreviewCard
+        cardType={cardType}
+        uniqueNumber={cardState.uniqueNumber}
+        expirationDate={cardState.expirationDate}
+      />
     </div>
   );
 };

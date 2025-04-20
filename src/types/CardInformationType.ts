@@ -1,3 +1,30 @@
+import { Dispatch } from "react";
+
+export type CardStateType = {
+  cardState: CardInformationType;
+  dispatch: Dispatch<Action>;
+};
+
+export type CvcNumberStateType = {
+  cvcNumberState: string[];
+  dispatch: Dispatch<Action>;
+};
+
+export type ExpirationDateStateType = {
+  expirationDateState: string[];
+  dispatch: Dispatch<Action>;
+};
+
+export type UniqueNumberStateType = {
+  uniqueNumberState: string[];
+  dispatch: Dispatch<Action>;
+};
+
+type Action =
+  | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
+  | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
+  | { type: "SET_CVC"; value: string };
+
 export type CardInformationType = {
   uniqueNumber: string[];
   expirationDate: string[];
