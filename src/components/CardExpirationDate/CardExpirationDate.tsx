@@ -89,7 +89,7 @@ export default function CardExpirationDate({
       <S.InputWrapper>
         {CardExpirationDateInputTypes.map((dateType, index) => (
           <Input
-            key={index}
+            key={dateType}
             type="text"
             placeholder={dateType === 'month' ? 'MM' : 'YY'}
             maxLength={2}

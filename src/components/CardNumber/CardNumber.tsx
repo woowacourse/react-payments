@@ -50,7 +50,7 @@ export default function CardNumber({
       <S.InputWrapper>
         {cardNumberInputSequences.map((sequence, index) => (
           <Input
-            key={index}
+            key={sequence}
             type="text"
             placeholder="1234"
             maxLength={4}
