@@ -17,7 +17,12 @@ function App() {
   return (
     <div className="App">
       <PreviewCardLayout
-        cardNumbers={cardNumbers}
+        cardNumbers={{
+          first: cardNumbers[0],
+          second: cardNumbers[1],
+          third: cardNumbers[2],
+          fourth: cardNumbers[3],
+        }}
         cardType={cardType}
         cardExpirationDate={cardExpirationDate}
       />

@@ -4,7 +4,12 @@ import PreviewCardLogo from "./PreviewCardLogo";
 import PreviewCardNumber from "./PreviewCardNumber";
 
 interface PreviewCardLayoutProps {
-  cardNumbers: string[];
+  cardNumbers: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  };
   cardExpirationDate: {
     month: string;
     year: string;
