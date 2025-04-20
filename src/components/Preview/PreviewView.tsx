@@ -27,12 +27,14 @@ const PreviewView: React.FC<PreviewViewProps> = ({
     <PreviewContainer data-testid='preview-component'>
       <CardFrame>
         <ICChip />
-        <CardMethod
-          src={cardMethodSrc}
-          style={{ display: cardMethodSrc ? 'block' : 'none' }}
-          data-testid='card-method'
-          alt='Card Method'
-        />
+        {cardMethodSrc && (
+          <CardMethod
+            src={cardMethodSrc}
+            style={{ display: cardMethodSrc ? 'block' : 'none' }}
+            data-testid='card-method'
+            alt='Card Method'
+          />
+        )}
         <CardNumberArea>
           {Object.values(cardNumbers).map((number, index) => (
             <CardNumber key={index}>
