@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cardBrandLogo from "../../constants/cardBrandLogo";
 import type { CardInputProps } from "../../types/CardInputTypes";
-import { maskingNumber } from "../../util/maskingNumber";
+import CardNumber from "./CardNumber";
 
 interface CardProps {
   cardNumber: CardInputProps | null;
@@ -15,27 +15,7 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
         <CardGoldChip />
         <CardBrandLogo src={cardBrandLogo[cardType]} />
       </ChipContainer>
-      {cardNumber && (
-        <>
-          <CardNumberContainer>
-            <CardInformation>{cardNumber.first}</CardInformation>
-            <CardInformation>{cardNumber.second}</CardInformation>
-            <CardMaskingInformation>
-              {cardNumber.third &&
-                maskingNumber(String(cardNumber.third).length)}
-            </CardMaskingInformation>
-            <CardMaskingInformation>
-              {cardNumber.fourth &&
-                maskingNumber(String(cardNumber.fourth).length)}
-            </CardMaskingInformation>
-          </CardNumberContainer>
-
-          <CardInformation>
-            {cardNumber.MM && `${cardNumber.MM}`}
-            {cardNumber.YY && `/${cardNumber.YY}`}
-          </CardInformation>
-        </>
-      )}
+      {cardNumber && <CardNumber cardNumber={cardNumber} />}
     </CardContainer>
   );
 };
@@ -67,26 +47,6 @@ const CardGoldChip = styled.div`
 const CardBrandLogo = styled.img`
   width: 36px;
   height: 22px;
-`;
-
-const CardInformation = styled.div`
-  color: var(--color-white);
-  font-size: var(--font-size-subheader);
-  font-weight: var(--font-weight-caption);
-  letter-spacing: 2.56px;
-  min-width: 40px;
-`;
-
-const CardMaskingInformation = styled(CardInformation)`
-  letter-spacing: -2px;
-`;
-
-const CardNumberContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 16px;
-  margin-bottom: 8px;
 `;
 
 export default Card;
