@@ -35,8 +35,7 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 	};
 
 	const formatDate = () => {
-		const month = expirationDate.month;
-		const year = expirationDate.year;
+		const { month, year } = expirationDate;
 
 		if (month === "" && year === "") return;
 		if (year === "") return month;
