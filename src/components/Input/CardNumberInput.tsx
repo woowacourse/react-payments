@@ -1,6 +1,6 @@
-import styles from "./InputNumber.module.css";
+import styles from "./CardNumberInput.module.css";
 
-type InputNumberProps = {
+type CardNumberInputProps = {
   onChange: (value: string) => void;
   value: string;
   placeholder?: string;
@@ -10,12 +10,12 @@ type InputNumberProps = {
 const DEFAULT_PLACEHOLDER = "1234";
 const DEFAULT_ERROR_MESSAGE = "";
 
-export default function InputNumber({
+export default function CardNumberInput({
   value,
   onChange,
   placeholder = DEFAULT_PLACEHOLDER,
   errorMessage = DEFAULT_ERROR_MESSAGE,
-}: InputNumberProps) {
+}: CardNumberInputProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     if (/^\d*$/.test(newValue)) {

@@ -1,4 +1,4 @@
-import InputNumber from "../components/Input/InputNumber";
+import CardNumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import styles from "./CardNumber.module.css";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
@@ -36,7 +36,7 @@ export default function CardNumber({
       />
       <div className={styles["card-number__input"]}>
         {[0, 1, 2, 3].map((index) => (
-          <InputNumber
+          <CardNumberInput
             key={index}
             value={cardNumbers[index]}
             errorMessage={errorMessage[index]}
