@@ -1,15 +1,15 @@
-import Title from '../common/Title/Title';
-import Label from '../common/Label/Label';
-import Input from '../common/Input/Input';
-import Spacing from '../common/Spacing/Spacing';
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
+import Title from '@/components/common/Title/Title';
+import Label from '@/components/common/Label/Label';
+import Input from '@/components/common/Input/Input';
+import Spacing from '@/components/common/Spacing/Spacing';
+import ErrorMessage from '@/components/common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE } from '../../constants';
-import { DateType } from '../../types';
+import { ERROR_MESSAGE } from '@/constants';
+import { DateType } from '@/types';
 import * as S from './CardExpirationDate.styles';
 import { checkValidMonth, checkValidYear } from './utils';
-import { getErrorMessageFromObject } from '../../utils/message';
-import { checkAllNumber } from '../../utils/validation';
+import { getErrorMessageFromObject } from '@/utils/message';
+import { checkAllNumber } from '@/utils/validation';
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;

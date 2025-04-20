@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import * as S from './App.styles';
-import CardCVCNumber from './components/CardCVCNumber/CardCVCNumber';
-import CardExpirationDate from './components/CardExpirationDate/CardExpirationDate';
-import CardNumber from './components/CardNumber/CardNumber';
-import CardPreview from './components/CardPreview/CardPreview';
-import Spacing from './components/common/Spacing/Spacing';
-import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from './constants';
-import { CardType, SequenceType, DateType } from './types';
+import CardCVCNumber from '@/components/CardCVCNumber/CardCVCNumber';
+import CardExpirationDate from '@/components/CardExpirationDate/CardExpirationDate';
+import CardNumber from '@/components/CardNumber/CardNumber';
+import CardPreview from '@/components/CardPreview/CardPreview';
+import Spacing from '@/components/common/Spacing/Spacing';
+import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from '@/constants';
+import { CardType, SequenceType, DateType } from '@/types';
 import { Global } from '@emotion/react';
-import global from './styles/global';
+import global from '@/styles/global';
 
 export const getCardType = (cardNumberFirst: string): CardType => {
   if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
