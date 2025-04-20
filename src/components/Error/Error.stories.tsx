@@ -11,13 +11,6 @@ export default meta;
 
 type Story = StoryObj<typeof Error>;
 
-export const Default: Story = {
-  args: {
-    errorMessage: "",
-    isVisible: false,
-  },
-};
-
 export const WithError: Story = {
   args: {
     errorMessage: "숫자만 입력 가능합니다.",
