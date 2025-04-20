@@ -49,7 +49,7 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
   const [logoSrc, setLogoSrc] = useState(INITIALIZE_VALUE);
 
   useEffect(() => {
-    const id = cardNumber["first"].slice(0, 2);
+    const id = cardNumber.first.slice(0, 2);
 
     const identifyFns = getIdentifyFns(id);
     const identifiedLogoSrc = identifyFns.find((fn) => fn.identify());
@@ -71,17 +71,17 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
         ) : null}
       </StyledIconWrap>
       <StyledCardNumberWrap>
-        <StyledCardNumber>{cardNumber["first"]}</StyledCardNumber>
-        <StyledCardNumber>{cardNumber["second"]}</StyledCardNumber>
+        <StyledCardNumber>{cardNumber.first}</StyledCardNumber>
+        <StyledCardNumber>{cardNumber.second}</StyledCardNumber>
         <StyledCardNumber>
-          {"*".repeat(cardNumber["third"].length)}
+          {"*".repeat(cardNumber.third.length)}
         </StyledCardNumber>
         <StyledCardNumber>
-          {"*".repeat(cardNumber["fourth"].length)}
+          {"*".repeat(cardNumber.fourth.length)}
         </StyledCardNumber>
       </StyledCardNumberWrap>
       <StyledExpirationPeriod>
-        {expirationPeriod["month"]}/{expirationPeriod["year"]}
+        {expirationPeriod.month}/{expirationPeriod.year}
       </StyledExpirationPeriod>
     </StyledContainer>
   );

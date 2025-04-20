@@ -109,7 +109,7 @@ function CardExpirationPeriodInputs({
       <label htmlFor="">유효 기간</label>
       <StyledInputWrap>
         <Input
-          value={expirationPeriod["month"]}
+          value={expirationPeriod.month}
           onChange={(e) => {
             checkValidation(EXPIRATION_PERIOD_LENGTH, e.target.value, "month");
             changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
@@ -117,10 +117,10 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={error["month"] !== NO_ERROR}
+          isError={error.month !== NO_ERROR}
         ></Input>
         <Input
-          value={expirationPeriod["year"]}
+          value={expirationPeriod.year}
           onChange={(e) => {
             checkValidation(EXPIRATION_PERIOD_LENGTH, e.target.value, "year");
             changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
@@ -128,7 +128,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={error["year"] !== NO_ERROR}
+          isError={error.year !== NO_ERROR}
         />
       </StyledInputWrap>
       {errorMessage ? (
