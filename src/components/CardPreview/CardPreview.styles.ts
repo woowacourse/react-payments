@@ -31,3 +31,7 @@ export const CardPreviewMiddle = styled.div`
   text-align: center;
   vertical-align: middle;
 `;
+
+export const CardPreviewNumber = styled.span`
+  flex: 1;
+`;

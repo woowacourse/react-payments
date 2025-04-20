@@ -17,17 +17,16 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate }
         <S.ICChip />
         {cardType === 'visa' && <VisaCard width={36} />}
         {cardType === 'master' && <MasterCard width={36} />}
-        {cardType === 'etc' && <span>Other Card</span>}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
-        <span>{cardNumber.first}</span>
-        <span>{cardNumber.second}</span>
-        <span>{Array.from({ length: cardNumber.third.length }, () => MASKING)}</span>
-        <span>
+        <S.CardPreviewNumber>{cardNumber.first}</S.CardPreviewNumber>
+        <S.CardPreviewNumber>{cardNumber.second}</S.CardPreviewNumber>
+        <S.CardPreviewNumber>{Array.from({ length: cardNumber.third.length }, () => MASKING)}</S.CardPreviewNumber>
+        <S.CardPreviewNumber>
           {Array.from({ length: cardNumber.fourth.length }, () => {
             return MASKING;
           })}
-        </span>
+        </S.CardPreviewNumber>
       </S.CardPreviewMiddle>
       <div>
         <span>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</span>
