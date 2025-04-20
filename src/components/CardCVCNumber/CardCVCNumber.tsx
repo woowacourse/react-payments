@@ -7,6 +7,7 @@ import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '../../constants';
 import { checkAllNumber } from '../../utils';
+import { checkValidCVCNumber } from './utils';
 
 interface CardCVCNumberProps {
   cardCVCNumber: string;
@@ -14,11 +15,6 @@ interface CardCVCNumberProps {
   cardCVCNumberErrorMessage: string;
   setCardCVCNumberErrorMessage: Dispatch<SetStateAction<string>>;
 }
-
-const checkValidCVCNumber = (value: string) => {
-  if (value.length === 3) return true;
-  return false;
-};
 
 export default function CardCVCNumber({
   cardCVCNumber,
@@ -31,11 +27,8 @@ export default function CardCVCNumber({
 
     setCardCVCNumber(value);
 
-    if (checkValidCVCNumber(value)) {
-      setCardCVCNumberErrorMessage('');
-    } else {
-      setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardCVCNumber.length);
-    }
+    if (checkValidCVCNumber(value)) setCardCVCNumberErrorMessage('');
+    else setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardCVCNumber.length);
   };
 
   return (

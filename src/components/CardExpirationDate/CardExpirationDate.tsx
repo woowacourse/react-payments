@@ -8,6 +8,7 @@ import { ERROR_MESSAGE } from '../../constants';
 import { DateType } from '../../types';
 import { checkAllNumber } from '../../utils';
 import * as S from './CardExpirationDate.styles';
+import { checkValidMonth, checkValidYear } from './utils';
 
 interface CardExpirationDateProps {
   cardExpirationDate: Record<DateType, string>;
@@ -20,16 +21,6 @@ interface HandleInputChangeParams {
   dateType: DateType;
   value: string;
 }
-
-const checkValidMonth = (value: string) => {
-  if (Number(value) >= 1 && Number(value) <= 12 && value.length === 2) return true;
-  return false;
-};
-
-const checkValidYear = (value: string) => {
-  if (value.length === 2) return true;
-  return false;
-};
 
 export default function CardExpirationDate({
   cardExpirationDate,
