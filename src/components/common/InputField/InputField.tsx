@@ -2,6 +2,7 @@ import styles from './inputField.module.css';
 
 type InputFieldProps = {
   value: string;
+  name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError?: boolean;
   placeholder: string;
@@ -10,6 +11,7 @@ type InputFieldProps = {
 
 const InputField = ({
   value,
+  name,
   onChange,
   isError = false,
   placeholder,
@@ -18,6 +20,7 @@ const InputField = ({
   return (
     <input
       value={value}
+      name={name}
       onChange={onChange}
       onBlur={onBlur}
       className={`${styles.input} ${isError ? styles.error : styles.basic}`}

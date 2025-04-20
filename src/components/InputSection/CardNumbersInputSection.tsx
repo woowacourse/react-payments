@@ -34,6 +34,7 @@ const CardNumbersInputSection = ({
           <InputField
             key={key}
             value={cardNumbers[key]}
+            name={`card${key}`}
             onChange={setCardNumbers(key)}
             onBlur={() => handleCardNumbersBlur(key)}
             isError={isError[key]}

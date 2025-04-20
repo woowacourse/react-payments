@@ -3,7 +3,6 @@ import styles from '../cardDisplay.module.css';
 type CardNetworkProps = {
   cardNetwork:
     | {
-        prefixes: string[];
         name: string;
         image: string;
       }

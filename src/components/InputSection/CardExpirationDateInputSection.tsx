@@ -25,6 +25,7 @@ const CardExpirationDateInputSection = ({
       >
         <InputField
           value={cardExpirationDate.month}
+          name="expirationDateMonth"
           onChange={setCardExpirationDate('month')}
           isError={isError.month}
           placeholder="MM"
@@ -32,6 +33,7 @@ const CardExpirationDateInputSection = ({
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
+          name="expirationDateYear"
           onChange={setCardExpirationDate('year')}
           isError={isError.year}
           placeholder="YY"
