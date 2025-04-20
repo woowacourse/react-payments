@@ -1,22 +1,12 @@
 import styles from './Input.module.css';
-import { ChangeEvent } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 type Props = {
-  value: string;
-  placeholder: string;
   isValid: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  maxLength: number;
-};
+} & InputHTMLAttributes<HTMLInputElement>;
 
-export default function Input({ value, placeholder, isValid, onChange, maxLength }: Props) {
+export default function Input({ isValid, className, ...rest }: Props) {
   return (
-    <input
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      className={`${styles.input} ${isValid ? styles.valid : styles.inValid}`}
-      maxLength={maxLength}
-    />
+    <input className={`${styles.input} ${isValid ? styles.valid : styles.inValid} ${className ?? ''}`} {...rest} />
   );
 }
