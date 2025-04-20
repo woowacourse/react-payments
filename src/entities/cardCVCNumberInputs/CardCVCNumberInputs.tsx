@@ -27,21 +27,21 @@ function CardCVCNumberInputs({
   const [error, setError] = useState(NO_ERROR);
 
   function checkValidation(length: number, CVCNumber: string) {
-    if (CVCNumber === NO_ERROR) {
-      setError(NO_ERROR);
-      return;
-    }
+    const validations = [
+      { condition: () => CVCNumber === NO_ERROR, errorMsg: NO_ERROR },
+      {
+        condition: () => !isValidLength(CVCNumber, length),
+        errorMsg: errorMessage.length,
+      },
+      {
+        condition: () => !isValidNumber(CVCNumber),
+        errorMsg: errorMessage.number,
+      },
+      { condition: () => true, errorMsg: NO_ERROR },
+    ];
 
-    if (!isValidLength(CVCNumber, length)) {
-      setError(errorMessage.length);
-      return;
-    }
-    if (!isValidNumber(CVCNumber)) {
-      setError(errorMessage.number);
-      return;
-    }
-
-    setError(NO_ERROR);
+    const validation = validations.find((v) => v.condition());
+    setError(validation?.errorMsg || NO_ERROR);
   }
 
   return (
