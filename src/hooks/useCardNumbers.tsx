@@ -8,7 +8,6 @@ const CONSTANT_USE_CARD_NUMBER = {
   CARD_TYPE_MAX_LENGTH: 2,
 } as const;
 
-// CardType은 객체 키에서 자동 추출되도록
 export const CARD_TYPE = {
   visa: {
     START_NUMBER: 40,
@@ -21,7 +20,7 @@ export const CARD_TYPE = {
   default: {},
 } as const;
 
-export type CardType = keyof typeof CARD_TYPE; // "visa" | "master" | "default"
+export type CardType = keyof typeof CARD_TYPE;
 
 export type CardData = {
   [K in CardType]: (typeof CARD_TYPE)[K];
