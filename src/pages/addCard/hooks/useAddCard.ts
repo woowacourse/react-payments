@@ -1,4 +1,5 @@
 import useControlledCardNumber from "../components/AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
+import useControlledCardOwner from "../components/AddCardForm/components/CardOwner/hooks/useControlledCardOwner";
 import useControlledCardType from "../components/AddCardForm/components/CardType/hooks/useControlledCardType";
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
 import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
@@ -13,6 +14,7 @@ const useAddCard = () => {
     handleExpireYearChange,
     handleExpireMonthBlur,
   } = useControlledExpireDate();
+  const { cardOwner, handleCardOwnerChange } = useControlledCardOwner();
   const { CVCState, handleCVCChange } = useControlledCVC();
 
   const addCardState = {
@@ -25,6 +27,8 @@ const useAddCard = () => {
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
+    cardOwner,
+    handleCardOwnerChange,
     CVCState,
     handleCVCChange,
   };
