@@ -21,7 +21,7 @@ const Wrap = styled.div`
   gap: 45px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
