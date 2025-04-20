@@ -11,8 +11,13 @@ type Props = {
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
   const [cardValidity, setCardValidity] = useState<boolean[]>([true, true, true, true]);
 
+  function validateNumberValidity(value: string): boolean {
+    return /^[0-9]*$/.test(value);
+  }
+
   const handleCardNumberChange = (index: number, value: string) => {
-    const isValid = /^[0-9]*$/.test(value);
+    const isValid = validateNumberValidity(value);
+
     const updatedNumbers = [...cardNumbers];
     updatedNumbers[index] = value;
     setCardNumbers(updatedNumbers);

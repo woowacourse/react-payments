@@ -10,16 +10,29 @@ type Props = {
 export default function CvcSection({ cvc, setCvc }: Props) {
   const [cvcError, setCvcError] = useState<string>('');
 
-  const handleCvcChange = (value: string) => {
-    let errorMsg = '';
+  function validateNumberError(value: string) {
     if (!/^[0-9]*$/.test(value)) {
-      errorMsg = '숫자만 입력 가능합니다.';
-    } else if (value !== '' && value.length !== 3) {
-      errorMsg = 'CVC는 3자리여야 합니다.';
+      return '숫자만 입력 가능합니다.';
     }
+  }
+
+  function validateCvcLengthError(value: string) {
+    if (value !== '' && value.length !== 3) {
+      return 'CVC는 3자리여야 합니다.';
+    }
+  }
+
+  function getCvcError(value: string): string {
+    return validateNumberError(value) || validateCvcLengthError(value) || '';
+  }
+
+  const handleCvcChange = (value: string) => {
     setCvc(value);
+
+    const errorMsg = getCvcError(value);
     setCvcError(errorMsg);
   };
+
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

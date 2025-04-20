@@ -10,31 +10,40 @@ type Props = {
 export default function CardExpirationSection({ expiration, setExpiration }: Props) {
   const [expirationError, setExpirationError] = useState<string[]>(['', '']);
 
-  const handleExpirationChange = (index: number, value: string) => {
-    let errorMsg = '';
+  function validateNumberError(value: string) {
     if (!/^[0-9]*$/.test(value)) {
-      errorMsg = '숫자만 입력 가능합니다.';
-      return;
+      return '숫자만 입력 가능합니다.';
     }
+  }
 
-    if (index === 0) {
-      if (value !== '') {
-        const month = Number(value);
-        if (month < 1 || month > 12) {
-          errorMsg = '1부터 12 사이의 숫자를 입력해주세요.';
-        }
-      }
+  function validateMonthRangeError(value: string) {
+    const month = Number(value);
+    if (value !== '' && (month < 1 || month > 12)) {
+      return '1부터 12 사이의 숫자를 입력해주세요.';
     }
-    if (index === 1) {
-      if (value !== '' && value.length !== 2) {
-        errorMsg = '2자리 숫자를 입력해주세요.';
-      }
-    }
+  }
 
+  function validateYearLengthError(value: string) {
+    if (value !== '' && value.length !== 2) {
+      return '2자리 숫자를 입력해주세요.';
+    }
+  }
+
+  function getExpirationError(index: number, value: string): string {
+    return (
+      validateNumberError(value) ||
+      (index === 0 && validateMonthRangeError(value)) ||
+      (index === 1 && validateYearLengthError(value)) ||
+      ''
+    );
+  }
+
+  const handleExpirationChange = (index: number, value: string) => {
     const updatedExpiration = [...expiration];
     updatedExpiration[index] = value;
     setExpiration(updatedExpiration);
 
+    const errorMsg = getExpirationError(index, value);
     const updatedError = [...expirationError];
     updatedError[index] = errorMsg;
     setExpirationError(updatedError);
