@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import useCardTypeImage from '../../hooks/useCardTypeImage';
 
 type PreviewCardProps = {
   cardNumber: string[];
@@ -61,18 +62,8 @@ const StyledExpirationDate = styled.div`
   letter-spacing: 2.5px;
 `;
 
-const checkCardType = (firstCardInput: string) => {
-  if (firstCardInput[0] === '4') return './Visa.png';
-
-  const cardTypePrefix = Number(firstCardInput.slice(0, 2));
-  if (cardTypePrefix >= 51 && cardTypePrefix <= 55) {
-    return './Mastercard.png';
-  }
-  return null;
-};
-
 const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
-  const cardType = checkCardType(cardNumber[0]);
+  const cardType = useCardTypeImage(cardNumber[0]);
 
   return (
     <StyledPreviewCard>
