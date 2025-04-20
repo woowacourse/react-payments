@@ -69,6 +69,15 @@ function getValidationFns(length: number, date: string) {
   };
 }
 
+function getErrorMessage(error: Record<keyof ExpirationPeriod, string>) {
+  for (const key in error) {
+    const typedKey = key as keyof typeof error;
+    if (error[typedKey] !== NO_ERROR) {
+      return error[typedKey];
+    }
+  }
+}
+
 function CardExpirationPeriodInputs({
   expirationPeriod,
   changeExpirationPeriod,
@@ -91,14 +100,9 @@ function CardExpirationPeriodInputs({
     });
   }
 
-  function getErrorMessage() {
-    for (const key in error) {
-      const typedKey = key as keyof typeof error;
-      if (error[typedKey] !== NO_ERROR) {
-        return error[typedKey];
-      }
-    }
-  }
+  const errorMessage = getErrorMessage(
+    error as Record<keyof ExpirationPeriod, string>
+  );
 
   return (
     <StyledContainer>
@@ -127,8 +131,8 @@ function CardExpirationPeriodInputs({
           isError={error["year"] !== NO_ERROR}
         />
       </StyledInputWrap>
-      {getErrorMessage() ? (
-        <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage>
+      {errorMessage ? (
+        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
       ) : null}
     </StyledContainer>
   );

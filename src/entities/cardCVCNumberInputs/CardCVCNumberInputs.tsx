@@ -35,11 +35,17 @@ function getValidationFns(length: number, CVCNumber: string) {
   ];
 }
 
+function getErrorMessage(error: string) {
+  return error;
+}
+
 function CardCVCNumberInputs({
   CVCNumber,
   changeCVCNumber,
 }: CardCVCNumberSectionProps) {
   const [error, setError] = useState(NO_ERROR);
+
+  const errorMessage = getErrorMessage(error);
 
   function checkValidation(length: number, CVCNumber: string) {
     const validationFns = getValidationFns(length, CVCNumber);
@@ -64,8 +70,8 @@ function CardCVCNumberInputs({
           placeholder="123"
         />
       </StyledInputWrap>
-      {error !== NO_ERROR ? (
-        <StyledErrorMessage>{error}</StyledErrorMessage>
+      {errorMessage ? (
+        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
       ) : null}
     </StyledContainer>
   );

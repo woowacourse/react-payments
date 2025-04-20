@@ -46,6 +46,15 @@ function getValidationFns(length: number, cardNumber: string) {
   ];
 }
 
+function getErrorMessage(error: Record<CardNumberPosition, string>) {
+  for (const key in error) {
+    const typedKey = key as keyof typeof error;
+    if (error[typedKey] !== NO_ERROR) {
+      return error[typedKey];
+    }
+  }
+}
+
 function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
   const [error, setError] = useState({
     [CARD_NUMBER_POSITION.FIRST]: NO_ERROR,
@@ -53,6 +62,10 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
     [CARD_NUMBER_POSITION.THIRD]: NO_ERROR,
     [CARD_NUMBER_POSITION.FOURTH]: NO_ERROR,
   });
+
+  const errorMessage = getErrorMessage(
+    error as Record<CardNumberPosition, string>
+  );
 
   function checkValidation(
     length: number,
@@ -70,82 +83,73 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
     });
   }
 
-  function getErrorMessage() {
-    for (const key in error) {
-      const typedKey = key as keyof typeof error;
-      if (error[typedKey] !== NO_ERROR) {
-        return error[typedKey];
-      }
-    }
-  }
-
   return (
     <StyledContainer>
       <label htmlFor="">카드 번호</label>
       <StyledInputWrap>
         <Input
-          value={cardNumber["first"]}
+          value={cardNumber[CARD_NUMBER_POSITION.FIRST]}
           onChange={(e) => {
             checkValidation(
               CARD_NUMBER_LENGTH,
               e.target.value,
               CARD_NUMBER_POSITION.FIRST
             );
-            changeCardNumber("first", e.target?.value);
+            changeCardNumber(CARD_NUMBER_POSITION.FIRST, e.target?.value);
           }}
           width="25%"
           maxLength={CARD_NUMBER_LENGTH}
           placeholder="1234"
-          isError={error["first"] !== NO_ERROR}
+          isError={error[CARD_NUMBER_POSITION.FIRST] !== NO_ERROR}
         />
         <Input
-          value={cardNumber["second"]}
+          value={cardNumber[CARD_NUMBER_POSITION.SECOND]}
           onChange={(e) => {
             checkValidation(
               CARD_NUMBER_LENGTH,
               e.target.value,
               CARD_NUMBER_POSITION.SECOND
             );
-            changeCardNumber("second", e.target?.value);
+            changeCardNumber(CARD_NUMBER_POSITION.SECOND, e.target?.value);
           }}
           width="25%"
           maxLength={CARD_NUMBER_LENGTH}
           placeholder="1234"
-          isError={error["second"] !== NO_ERROR}
+          isError={error[CARD_NUMBER_POSITION.SECOND] !== NO_ERROR}
         />
         <Input
-          value={cardNumber["third"]}
+          value={cardNumber[CARD_NUMBER_POSITION.THIRD]}
           onChange={(e) => {
             checkValidation(
               CARD_NUMBER_LENGTH,
               e.target.value,
               CARD_NUMBER_POSITION.THIRD
             );
-            changeCardNumber("third", e.target?.value);
+            changeCardNumber(CARD_NUMBER_POSITION.THIRD, e.target?.value);
           }}
           width="25%"
           maxLength={CARD_NUMBER_LENGTH}
           placeholder="1234"
-          isError={error["third"] !== NO_ERROR}
+          isError={error[CARD_NUMBER_POSITION.THIRD] !== NO_ERROR}
         />
         <Input
-          value={cardNumber["fourth"]}
+          value={cardNumber[CARD_NUMBER_POSITION.FOURTH]}
           onChange={(e) => {
             checkValidation(
               CARD_NUMBER_LENGTH,
               e.target.value,
               CARD_NUMBER_POSITION.FOURTH
             );
-            changeCardNumber("fourth", e.target?.value);
+            changeCardNumber(CARD_NUMBER_POSITION.FOURTH, e.target?.value);
           }}
           width="25%"
           maxLength={CARD_NUMBER_LENGTH}
           placeholder="1234"
-          isError={error["fourth"] !== NO_ERROR}
+          isError={error[CARD_NUMBER_POSITION.FOURTH] !== NO_ERROR}
         />
       </StyledInputWrap>
-      {getErrorMessage() ? (
-        <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage>
+      {errorMessage ? (
+        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
       ) : null}
     </StyledContainer>
   );
