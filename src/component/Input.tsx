@@ -12,15 +12,15 @@ interface InputProps {
 const InputField = styled.input<{ $isError: boolean }>`
   width: 100%;
   padding: 8px;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-gray);
-  border-color: ${({ $isError }) =>
-    $isError ? 'var(--color-red)' : 'var(--color-gray)'};
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border-color: ${({ $isError, theme }) =>
+    $isError ? theme.colors.red : theme.colors.gray};
   border-radius: 4px;
   &:focus {
     outline: none;
-    border-color: ${({ $isError }) =>
-      $isError ? 'var(--color-red)' : 'var(--color-black)'};
+    border-color: ${({ $isError, theme }) =>
+      $isError ? theme.colors.red : theme.colors.black};
   }
 `;
 

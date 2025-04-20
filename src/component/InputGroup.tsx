@@ -12,9 +12,9 @@ export const InputContainer = styled.div`
 `;
 
 const Label = styled.span`
-  color: var(--color-black);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-body);
+  color: ${({ theme }) => theme.colors.black};
+  font-size: ${({ theme }) => theme.fontSizes.body};
+  font-weight: ${({ theme }) => theme.fontWeights.body};
 `;
 
 const Container = styled.div`
@@ -24,9 +24,9 @@ const Container = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  color: var(--color-red);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-caption);
+  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
+  font-weight: ${({ theme }) => theme.fontWeights.caption};
 `;
 
 const ErrorMessageContainer = styled.div`

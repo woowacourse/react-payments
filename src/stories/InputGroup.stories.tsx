@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { CardInputProps } from '../types/CardInputTypes';
 import InputGroup from '../component/InputGroup';
 import Input from '../component/Input';
-import { validateCardCVC, validateCardExpirationDateMM, validateCardExpirationDateYY, validateCardNumber } from '../validation/validation';
+import {
+  validateCardCVC,
+  validateCardExpirationDateMM,
+  validateCardExpirationDateYY,
+  validateCardNumber,
+} from '../validation/validation';
 
 const meta: Meta<typeof InputGroup> = {
   title: 'Components/InputGroup',
@@ -18,7 +23,18 @@ export default meta;
 type Story = StoryObj<typeof InputGroup>;
 
 const renderCardNumberInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input maxLength={4} placeholder="0000" inputKey="first" setCardInput={setCardInput} validate={validateCardNumber} handleErrorMessage={handleErrorMessage} />
+  <Input
+    maxLength={4}
+    placeholder="0000"
+    validate={validateCardNumber}
+    handleErrorMessage={handleErrorMessage}
+    onChange={value => {
+      setCardInput((prev: CardInputProps) => ({
+        ...prev,
+        first: value === '' ? null : Number(value),
+      }));
+    }}
+  />
 );
 
 const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
@@ -26,25 +42,44 @@ const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
     <Input
       maxLength={2}
       placeholder="MM"
-      inputKey="MM"
-      setCardInput={setCardInput}
       validate={validateCardExpirationDateMM}
       handleErrorMessage={handleErrorMessage}
+      onChange={value => {
+        setCardInput((prev: CardInputProps) => ({
+          ...prev,
+          MM: value === '' ? null : Number(value),
+        }));
+      }}
     />
     <span style={{ alignSelf: 'center' }}>/</span>
     <Input
       maxLength={2}
       placeholder="YY"
-      inputKey="YY"
-      setCardInput={setCardInput}
       validate={validateCardExpirationDateYY}
       handleErrorMessage={handleErrorMessage}
+      onChange={value => {
+        setCardInput((prev: CardInputProps) => ({
+          ...prev,
+          YY: value === '' ? null : Number(value),
+        }));
+      }}
     />
   </div>
 );
 
 const renderCVCInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input maxLength={3} placeholder="CVC" inputKey="CVC" setCardInput={setCardInput} validate={validateCardCVC} handleErrorMessage={handleErrorMessage} />
+  <Input
+    maxLength={3}
+    placeholder="CVC"
+    validate={validateCardCVC}
+    handleErrorMessage={handleErrorMessage}
+    onChange={value => {
+      setCardInput((prev: CardInputProps) => ({
+        ...prev,
+        CVC: value === '' ? null : Number(value),
+      }));
+    }}
+  />
 );
 
 export const CardNumberInputGroup: Story = {
@@ -59,7 +94,9 @@ export const CardNumberInputGroup: Story = {
         YY: 0,
         CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
+      const [errorMessages, setErrorMessages] = useState<
+        Record<string, string>
+      >({});
 
       const handleErrorMessage = (message: string) => {
         setErrorMessages(prev => ({
@@ -69,13 +106,21 @@ export const CardNumberInputGroup: Story = {
       };
 
       const handleCardNumberErrorMessages = () => {
-        const filterErrorMessage = [errorMessages.first, errorMessages.second, errorMessages.third, errorMessages.fourth].filter(message => message?.length);
+        const filterErrorMessage = [
+          errorMessages.first,
+          errorMessages.second,
+          errorMessages.third,
+          errorMessages.fourth,
+        ].filter(message => message?.length);
         return filterErrorMessage[0];
       };
 
       return (
         <div style={{ width: '300px' }}>
-          <InputGroup label="카드번호" errorMessages={handleCardNumberErrorMessages()}>
+          <InputGroup
+            label="카드번호"
+            errorMessages={handleCardNumberErrorMessages()}
+          >
             {renderCardNumberInput(setCardInput, handleErrorMessage)}
           </InputGroup>
         </div>
@@ -98,7 +143,9 @@ export const ExpiryDateInputGroup: Story = {
         YY: 0,
         CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
+      const [errorMessages, setErrorMessages] = useState<
+        Record<string, string>
+      >({});
 
       const handleErrorMessage = (message: string) => {
         setErrorMessages(prev => ({
@@ -108,13 +155,18 @@ export const ExpiryDateInputGroup: Story = {
       };
 
       const handlePeriodErrorMessages = () => {
-        const filterErrorMessage = [errorMessages.MM, errorMessages.YY].filter(msg => msg?.length);
+        const filterErrorMessage = [errorMessages.MM, errorMessages.YY].filter(
+          msg => msg?.length,
+        );
         return filterErrorMessage[0];
       };
 
       return (
         <div style={{ width: '300px' }}>
-          <InputGroup label="유효기간" errorMessages={handlePeriodErrorMessages()}>
+          <InputGroup
+            label="유효기간"
+            errorMessages={handlePeriodErrorMessages()}
+          >
             {renderExpiryDateInputs(setCardInput, handleErrorMessage)}
           </InputGroup>
         </div>
@@ -137,7 +189,9 @@ export const CVCInputGroup: Story = {
         YY: 0,
         CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
+      const [errorMessages, setErrorMessages] = useState<
+        Record<string, string>
+      >({});
 
       const handleErrorMessage = (message: string) => {
         setErrorMessages(prev => ({
@@ -172,7 +226,7 @@ export const InputGroupWithError: Story = {
             <div
               style={{
                 padding: '8px',
-                border: '1px solid var(--color-red)',
+                border: '1px solid red',
                 borderRadius: '4px',
               }}
             >
@@ -199,7 +253,9 @@ export const PaymentFormExample: Story = {
         YY: 0,
         CVC: 0,
       });
-      const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
+      const [errorMessages, setErrorMessages] = useState<
+        Record<string, string>
+      >({});
 
       const handleCardNumberError = (message: string) => {
         setErrorMessages(prev => ({
@@ -236,34 +292,50 @@ export const PaymentFormExample: Story = {
               <Input
                 maxLength={4}
                 placeholder="0000"
-                inputKey="first"
-                setCardInput={setCardInput}
                 validate={validateCardNumber}
                 handleErrorMessage={handleCardNumberError}
+                onChange={value => {
+                  setCardInput((prev: CardInputProps) => ({
+                    ...prev,
+                    first: value === '' ? null : Number(value),
+                  }));
+                }}
               />
               <Input
                 maxLength={4}
                 placeholder="0000"
-                inputKey="second"
-                setCardInput={setCardInput}
                 validate={validateCardNumber}
                 handleErrorMessage={handleCardNumberError}
+                onChange={value => {
+                  setCardInput((prev: CardInputProps) => ({
+                    ...prev,
+                    second: value === '' ? null : Number(value),
+                  }));
+                }}
               />
               <Input
                 maxLength={4}
                 placeholder="0000"
-                inputKey="third"
-                setCardInput={setCardInput}
                 validate={validateCardNumber}
                 handleErrorMessage={handleCardNumberError}
+                onChange={value => {
+                  setCardInput((prev: CardInputProps) => ({
+                    ...prev,
+                    third: value === '' ? null : Number(value),
+                  }));
+                }}
               />
               <Input
                 maxLength={4}
                 placeholder="0000"
-                inputKey="fourth"
-                setCardInput={setCardInput}
                 validate={validateCardNumber}
                 handleErrorMessage={handleCardNumberError}
+                onChange={value => {
+                  setCardInput((prev: CardInputProps) => ({
+                    ...prev,
+                    fourth: value === '' ? null : Number(value),
+                  }));
+                }}
               />
             </div>
           </InputGroup>
@@ -274,19 +346,27 @@ export const PaymentFormExample: Story = {
                 <Input
                   maxLength={2}
                   placeholder="MM"
-                  inputKey="MM"
-                  setCardInput={setCardInput}
                   validate={validateCardExpirationDateMM}
                   handleErrorMessage={handleExpiryDateError}
+                  onChange={value => {
+                    setCardInput((prev: CardInputProps) => ({
+                      ...prev,
+                      MM: value === '' ? null : Number(value),
+                    }));
+                  }}
                 />
                 <span style={{ alignSelf: 'center' }}>/</span>
                 <Input
                   maxLength={2}
                   placeholder="YY"
-                  inputKey="YY"
-                  setCardInput={setCardInput}
                   validate={validateCardExpirationDateYY}
                   handleErrorMessage={handleExpiryDateError}
+                  onChange={value => {
+                    setCardInput((prev: CardInputProps) => ({
+                      ...prev,
+                      YY: value === '' ? null : Number(value),
+                    }));
+                  }}
                 />
               </div>
             </InputGroup>
@@ -295,10 +375,14 @@ export const PaymentFormExample: Story = {
               <Input
                 maxLength={3}
                 placeholder="CVC"
-                inputKey="CVC"
-                setCardInput={setCardInput}
                 validate={validateCardCVC}
                 handleErrorMessage={handleCVCError}
+                onChange={value => {
+                  setCardInput((prev: CardInputProps) => ({
+                    ...prev,
+                    CVC: value === '' ? null : Number(value),
+                  }));
+                }}
               />
             </InputGroup>
           </div>

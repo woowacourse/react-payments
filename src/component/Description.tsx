@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface DescriptionProps {
   headText: string;
@@ -12,15 +12,15 @@ const Container = styled.div`
 `;
 
 const HeaderText = styled.span`
-  font-size: var(--font-size-header);
-  font-weight: var(--font-weight-header);
-  color: var(--color-black);
+  font-size: ${({ theme }) => theme.fontSizes.header};
+  font-weight: ${({ theme }) => theme.fontWeights.header};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 const DetailText = styled.span`
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-caption);
-  color: var(--color-gray);
+  font-size: ${({ theme }) => theme.fontSizes.caption};
+  font-weight: ${({ theme }) => theme.fontWeights.caption};
+  color: ${({ theme }) => theme.colors.gray};
 `;
 
 const Description = ({ headText, detailText }: DescriptionProps) => {

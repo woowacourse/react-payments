@@ -22,7 +22,7 @@ const Wrap = styled.div`
   align-items: center;
   width: 376px;
   padding: 30px;
-  background-color: var(--color-white);
+  background-color: ${({ theme }) => theme.colors.white};
   padding-top: 77px;
   height: 700px;
   gap: 45px;
