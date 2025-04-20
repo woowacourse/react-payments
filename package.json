@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
+    "chromatic": "npx chromatic --project-token=chpt_c1df702992678e8"
   },
   "homepage": "https://mun-kyeong.github.io/react-payments",
   "dependencies": {
@@ -21,11 +22,11 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/js": "^9.24.0",
-    "@storybook/addon-themes": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/addon-themes": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
@@ -33,6 +34,7 @@
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
