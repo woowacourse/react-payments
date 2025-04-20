@@ -36,6 +36,12 @@ function InputSection({ type }: InputSectionProps) {
     setCvcNumberError,
   } = useInputError();
 
+  const getErrorVisible = (type: InputType) => {
+    return type === INPUT_TYPE.cvcNumber
+      ? error[type]
+      : Object.values(error[type] ?? {}).some((value: boolean) => value);
+  };
+
   return (
     <>
       <Title title={titleVariants[type]} />
@@ -50,11 +56,7 @@ function InputSection({ type }: InputSectionProps) {
       />
       <Error
         errorMessage="숫자만 입력 가능합니다."
-        isVisible={
-          type === INPUT_TYPE.cvcNumber
-            ? error[type]
-            : Object.values(error[type] ?? {}).some((value: boolean) => value)
-        }
+        isVisible={getErrorVisible(type)}
       />
     </>
   );
