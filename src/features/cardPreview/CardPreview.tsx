@@ -30,24 +30,30 @@ const CARD_IDENTIFYING_NUMBER = {
   },
 };
 
+function getIdentifyFns(id: string) {
+  return [
+    {
+      identify: () => Number(id[0]) === CARD_IDENTIFYING_NUMBER.VISA,
+      logoSrc: "./images/Visa.svg",
+    },
+    {
+      identify: () =>
+        Number(id) >= CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN &&
+        Number(id) <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX,
+      logoSrc: "./images/Mastercard.svg",
+    },
+  ];
+}
+
 function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
   const [logoSrc, setLogoSrc] = useState(INITIALIZE_VALUE);
 
   useEffect(() => {
-    function identifyLogo() {
-      const id = cardNumber["first"].slice(0, 2);
-      if (Number(id[0]) === CARD_IDENTIFYING_NUMBER.VISA)
-        setLogoSrc("./images/Visa.svg");
-      else if (
-        Number(id) >= CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN &&
-        Number(id) <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX
-      )
-        setLogoSrc("./images/Mastercard.svg");
-      else {
-        setLogoSrc(INITIALIZE_VALUE);
-      }
-    }
-    identifyLogo();
+    const id = cardNumber["first"].slice(0, 2);
+
+    const identifyFns = getIdentifyFns(id);
+    const identifiedLogoSrc = identifyFns.find((fn) => fn.identify());
+    setLogoSrc(identifiedLogoSrc?.logoSrc || "");
   }, [cardNumber]);
 
   return (
