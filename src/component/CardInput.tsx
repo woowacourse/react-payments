@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { CardInputProps } from "../types/CardInputTypes";
+import type { CardInputProps } from "../types/CardInputTypes";
 import { useState } from "react";
 
 type InputKeyType =
@@ -36,7 +36,7 @@ const InputField = styled.input<{ $isError: boolean }>`
   }
 `;
 
-const Input = ({
+const CardInput = ({
   maxLength,
   placeholder,
   inputKey,
@@ -76,4 +76,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default CardInput;

@@ -1,10 +1,10 @@
 import Card from "../component/card/Card";
 import Description from "../component/Description";
 import styled from "styled-components";
-import Input from "../component/Input";
+import CardInput from "../component/CardInput";
 import { useState } from "react";
 import InputGroup from "../component/inputGroup/InputGroup";
-import { CardInputProps } from "../types/CardInputTypes";
+import type { CardInputProps } from "../types/CardInputTypes";
 import {
   validateCardNumber,
   validateCardExpirationDateMM,
@@ -108,7 +108,7 @@ const AddCard = () => {
           label="카드 번호"
           errorMessages={handleCardNumberErrorMessages()}
         >
-          <Input
+          <CardInput
             maxLength={4}
             placeholder="1234"
             setCardInput={setCardInput}
@@ -118,7 +118,7 @@ const AddCard = () => {
               handleErrorMessages("first", message)
             }
           />
-          <Input
+          <CardInput
             maxLength={4}
             placeholder="1234"
             validate={validateCardNumber}
@@ -128,7 +128,7 @@ const AddCard = () => {
               handleErrorMessages("second", message)
             }
           />
-          <Input
+          <CardInput
             maxLength={4}
             placeholder="1234"
             setCardInput={setCardInput}
@@ -138,7 +138,7 @@ const AddCard = () => {
               handleErrorMessages("third", message)
             }
           />
-          <Input
+          <CardInput
             maxLength={4}
             placeholder="1234"
             setCardInput={setCardInput}
@@ -158,7 +158,7 @@ const AddCard = () => {
           label="유효기간"
           errorMessages={handlePeriodErrorMessages()}
         >
-          <Input
+          <CardInput
             maxLength={2}
             placeholder="MM"
             validate={validateCardExpirationDateMM}
@@ -166,7 +166,7 @@ const AddCard = () => {
             inputKey="MM"
             handleErrorMessage={(message) => handleErrorMessages("MM", message)}
           />
-          <Input
+          <CardInput
             maxLength={2}
             placeholder="YY"
             validate={validateCardExpirationDateYY}
@@ -178,7 +178,7 @@ const AddCard = () => {
 
         <Description headText="CVC 번호를 입력해 주세요" />
         <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
-          <Input
+          <CardInput
             maxLength={3}
             placeholder="123"
             validate={validateCardCVC}

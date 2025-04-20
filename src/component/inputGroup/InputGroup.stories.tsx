@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../../types/CardInputTypes";
 import InputGroup from "./InputGroup";
-import Input from "../Input";
+import CardInput from "../CardInput";
 import {
   validateCardCVC,
   validateCardExpirationDateMM,
@@ -23,7 +23,7 @@ export default meta;
 type Story = StoryObj<typeof InputGroup>;
 
 const renderCardNumberInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input
+  <CardInput
     maxLength={4}
     placeholder="0000"
     inputKey="first"
@@ -35,7 +35,7 @@ const renderCardNumberInput = (setCardInput: any, handleErrorMessage: any) => (
 
 const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <Input
+    <CardInput
       maxLength={2}
       placeholder="MM"
       inputKey="MM"
@@ -44,7 +44,7 @@ const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
       handleErrorMessage={handleErrorMessage}
     />
     <span style={{ alignSelf: "center" }}>/</span>
-    <Input
+    <CardInput
       maxLength={2}
       placeholder="YY"
       inputKey="YY"
@@ -56,7 +56,7 @@ const renderExpiryDateInputs = (setCardInput: any, handleErrorMessage: any) => (
 );
 
 const renderCVCInput = (setCardInput: any, handleErrorMessage: any) => (
-  <Input
+  <CardInput
     maxLength={3}
     placeholder="CVC"
     inputKey="CVC"
