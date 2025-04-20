@@ -1,5 +1,5 @@
-import SectionTitle from "../sectionTitle/SectionTitle";
-import CardNumberInputs from "../cardNumberInputs/CardNumberInputs";
+import SectionTitle from "../../entities/sectionTitle/SectionTitle";
+import CardNumberInputs from "../../entities/cardNumberInputs/CardNumberInputs";
 import styled from "styled-components";
 import { CardNumberProps } from "../../\btypes/index.types";
 

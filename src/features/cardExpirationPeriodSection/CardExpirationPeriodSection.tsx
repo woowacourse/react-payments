@@ -1,5 +1,5 @@
-import SectionTitle from "../sectionTitle/SectionTitle";
-import CardExpirationPeriodInputs from "../cardExpirationPeriodInputs/CardExpirationPeriodInputs";
+import SectionTitle from "../../entities/sectionTitle/SectionTitle";
+import CardExpirationPeriodInputs from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
 import styled from "styled-components";
 import { ExpirationPeriodProps } from "../../\btypes/index.types";
 

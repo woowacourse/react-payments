@@ -1,8 +1,8 @@
-import Input from "../input/Input";
+import Input from "../../shared/input/Input";
 import { CardNumberProps, Position } from "../../\btypes/index.types";
 import { useState } from "react";
 import { isValidLength, isValidNumber } from "../../util/validation";
-import { NO_ERROR, POSITION } from "../../constants/constant";
+import { NO_ERROR, POSITION } from "../../shared/constants/constant";
 import {
   StyledContainer,
   StyledInputWrap,

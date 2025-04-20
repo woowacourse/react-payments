@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../input/Input";
+import Input from "../../shared/input/Input";
 import {
   ExpirationPeriod,
   ExpirationPeriodProps,
@@ -10,7 +10,7 @@ import {
   isValidNumber,
   isValidYearRange,
 } from "../../util/validation";
-import { NO_ERROR, EXPIRATION_PERIOD } from "../../constants/constant";
+import { NO_ERROR, EXPIRATION_PERIOD } from "../../shared/constants/constant";
 import {
   StyledContainer,
   StyledInputWrap,

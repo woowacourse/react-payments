@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { CardNumber, ExpirationPeriod } from "../../\btypes/index.types";
 import { useState } from "react";
 import { useEffect } from "react";
-import { INITIALIZE_VALUE } from "../../constants/constant";
+import { INITIALIZE_VALUE } from "../../shared/constants/constant";
 
 const StyledContainer = styled.div`
   display: flex;

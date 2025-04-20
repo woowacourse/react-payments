@@ -1,12 +1,12 @@
 import "./App.css";
 import styled from "styled-components";
-import CardPreview from "./components/cardPreview/CardPreview";
-import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
-import CardExpirationPeriodSection from "./components/cardExpirationPeriodSection/CardExpirationPeriodSection";
-import CardCVCNumberSection from "./components/cardCVCNumberSection/CardCVCNumberSection";
+import CardPreview from "../features/cardPreview/CardPreview";
+import CardNumberSection from "../features/cardNumberSection/CardNumberSection";
+import CardExpirationPeriodSection from "../features/cardExpirationPeriodSection/CardExpirationPeriodSection";
+import CardCVCNumberSection from "../features/cardCVCNumberSection/CardCVCNumberSection";
 import { useState } from "react";
-import { ExpirationPeriod, Position } from "./\btypes/index.types";
-import { INITIALIZE_VALUE } from "./constants/constant";
+import { ExpirationPeriod, Position } from "../types/index.types";
+import { INITIALIZE_VALUE } from "../shared/constants/constant";
 
 const StyledApp = styled.div`
   display: flex;
