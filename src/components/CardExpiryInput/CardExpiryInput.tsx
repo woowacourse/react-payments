@@ -1,24 +1,14 @@
+import { useCardContext } from "../../contexts/CardContext";
 import { useRef, useState } from "react";
-import InputContainer from "../InputContainer/InputContainer";
 import { validateMonth } from "../../domain/validate";
 import { validateYear } from "../../domain/validate";
 import { INPUT_CONTAINER } from "../../constants/title";
-import ERROR from "../../constants/errorMessage";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import InputContainer from "../InputContainer/InputContainer";
+import ERROR from "../../constants/errorMessage";
 
-type CardExpiryInputProps = {
-  month: string;
-  setMonth: React.Dispatch<React.SetStateAction<string>>;
-  year: string;
-  setYear: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CardExpiryInput = ({
-  month,
-  setMonth,
-  year,
-  setYear,
-}: CardExpiryInputProps) => {
+const CardExpiryInput = () => {
+  const { month, setMonth, year, setYear } = useCardContext();
   const [helperText, setHelperText] = useState("");
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);

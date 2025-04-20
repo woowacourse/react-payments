@@ -1,15 +1,12 @@
+import { useCardContext } from "../../contexts/CardContext";
 import { useRef, useState } from "react";
-import InputContainer from "../InputContainer/InputContainer";
 import { validateCVC } from "../../domain/validate";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import InputContainer from "../InputContainer/InputContainer";
 
-type CVCInputProps = {
-  CVC: string;
-  setCVC: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
+const CVCInput = () => {
+  const {CVC, setCVC} = useCardContext();
   const [helperText, setHelperText] = useState("");
   const inputRef = useRef<HTMLElement | null>(null);
 

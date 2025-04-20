@@ -1,23 +1,17 @@
+import { useCardContext } from "../../contexts/CardContext";
 import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
 import {
   validateCardNumbers,
   validateFirstCardNumbers,
 } from "../../domain/validate";
-import CustomCardNumbersError from "../../error/CustomCardNumbersError";
 import { INPUT_CONTAINER } from "../../constants/title";
-import ERROR from "../../constants/errorMessage";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import ERROR from "../../constants/errorMessage";
+import CustomCardNumbersError from "../../error/CustomCardNumbersError";
 
-type CardNumbersInputProps = {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-const CardNumbersInput = ({
-  cardNumbers,
-  setCardNumbers,
-}: CardNumbersInputProps) => {
+const CardNumbersInput = () => {
+  const { cardNumbers, setCardNumbers } = useCardContext();
   const [helperText, setHelperText] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
