@@ -4,30 +4,28 @@ function useInputValidation(initialErrorState: boolean[], validationFn: (value: 
   const [isError, setIsError] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const updateError = (idx: number, hasError: boolean, message?: string) => {
+    setIsError((prev) => {
+      const updated = [...prev];
+      updated[idx] = hasError;
+
+      if (!hasError && updated.every((error) => error === false)) {
+        setErrorMessage('');
+      } else if (hasError && message) {
+        setErrorMessage(message);
+      }
+
+      return updated;
+    });
+  };
+
   const validate = ({ value, idx }: HandleInputParams) => {
     try {
       validationFn(value);
-
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = false;
-
-        if (updated.every((error) => error === false)) {
-          setErrorMessage('');
-        }
-
-        return updated;
-      });
+      updateError(idx, false);
     } catch (error) {
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = true;
-        return updated;
-      });
-
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
+      const errorMessage = error instanceof Error ? error.message : 'Invalid input';
+      updateError(idx, true, errorMessage);
     }
   };
 
