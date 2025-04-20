@@ -36,7 +36,7 @@ const renderCardNumberInputs = (
 export const Default: Story = {
   render: () => {
     const Component = () => {
-      const [cardInput, setCardInput] = useState<CardInputProps>({
+      const [, setCardInput] = useState<CardInputProps>({
         first: null,
         second: null,
         third: null,
