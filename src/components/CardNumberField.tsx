@@ -1,6 +1,5 @@
 import NumberInput from "./NumberInput";
 import { useState, useEffect } from "react";
-import isExactLength from "../utils/isExactLength";
 import { ERROR_MESSAGE } from "../constants/guide";
 import {
   NumberInputField,
@@ -8,6 +7,7 @@ import {
   NumberInputContainer,
   ErrorText,
 } from "../styles/CardField.styles";
+import { hasInvalidCardNumberSegment } from "../utils/validation";
 
 interface CardNumberFieldProps {
   cardInfo: {
@@ -31,23 +31,22 @@ function CardNumberField({
   const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
-    const condition = [
+    const numbers = [
       cardInfo.firstNumber,
       cardInfo.secondNumber,
       cardInfo.thirdNumber,
       cardInfo.fourthNumber,
-    ].some((number) => {
-      if (isExactLength(number, 0) || isExactLength(number, maxLength))
-        return false;
-      return true;
-    });
-    if (condition) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
+    ];
+
+    const isInvalid = hasInvalidCardNumberSegment(numbers, maxLength);
+    if (isInvalid) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
     else setErrorText("");
   }, [
     cardInfo.firstNumber,
     cardInfo.secondNumber,
     cardInfo.thirdNumber,
     cardInfo.fourthNumber,
+    maxLength,
   ]);
 
   return (
