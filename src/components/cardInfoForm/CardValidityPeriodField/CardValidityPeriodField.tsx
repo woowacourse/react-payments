@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
+import { useId } from 'react';
 
 type CardValidityPeriodType = {
   month: string;
@@ -28,6 +29,7 @@ function CardValidityPeriodField({
   const { month, year } = cardValidityPeriod;
   const { month: isErrorMonth, year: isErrorYear } = isError;
 
+  const id = useId();
   return (
     <div>
       <Label htmlFor="cardValidityPeriod-0" id="cardValidityPeriod">
@@ -38,7 +40,7 @@ function CardValidityPeriodField({
           isError={isErrorMonth}
           type="number"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${month}`}
+          id={`cardValidityPeriod-${id}-${month}`}
           value={month}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'month')}
@@ -50,7 +52,7 @@ function CardValidityPeriodField({
           isError={isErrorYear}
           type="number"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${year}`}
+          id={`cardValidityPeriod-${id}-${year}`}
           value={year}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'year')}
