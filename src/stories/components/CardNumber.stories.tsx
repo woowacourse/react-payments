@@ -17,7 +17,7 @@ const meta = {
   },
   argTypes: {
     cardNumber: { control: false },
-    cardNumberErrorMessage: { control: false },
+    cardNumberErrorMessage: { control: 'object' },
     setCardNumber: { control: false },
     setCardNumberErrorMessage: { control: false },
   },
@@ -45,15 +45,7 @@ export const Default: Story = {
   },
   render: function Render(args) {
     const [cardNumber, setCardNumber] = useState(args.cardNumber);
-    const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState(args.cardNumberErrorMessage);
-    return (
-      <CardNumber
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        cardNumberErrorMessage={cardNumberErrorMessage}
-        setCardNumberErrorMessage={setCardNumberErrorMessage}
-      />
-    );
+    return <CardNumber {...args} cardNumber={cardNumber} setCardNumber={setCardNumber} />;
   },
 };
 

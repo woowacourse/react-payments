@@ -14,7 +14,7 @@ const meta = {
   component: CardCVCNumber,
   argTypes: {
     cardCVCNumber: { control: false },
-    cardCVCNumberErrorMessage: { control: false },
+    cardCVCNumberErrorMessage: { control: 'object' },
     setCardCVCNumber: { control: false },
     setCardCVCNumberErrorMessage: { control: false },
   },
@@ -36,15 +36,7 @@ export const Default: Story = {
   },
   render: function Render(args) {
     const [cardCVCNumber, setCardCVCNumber] = useState<string>(args.cardCVCNumber);
-    const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>(args.cardCVCNumberErrorMessage);
-    return (
-      <CardCVCNumber
-        cardCVCNumber={cardCVCNumber}
-        setCardCVCNumber={setCardCVCNumber}
-        cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-        setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
-      />
-    );
+    return <CardCVCNumber {...args} cardCVCNumber={cardCVCNumber} setCardCVCNumber={setCardCVCNumber} />;
   },
 };
 

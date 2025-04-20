@@ -3,15 +3,25 @@ import { useState } from 'react';
 import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
 import { ERROR_MESSAGE } from '../../constants';
 import { DateType } from '../../types';
+import { fn } from '@storybook/test';
+
+export const ActionsData = {
+  setCardExpirationDate: fn(),
+  setCardExpirationDateErrorMessage: fn(),
+};
 
 const meta = {
   title: 'CardExpirationDate',
   component: CardExpirationDate,
   argTypes: {
     cardExpirationDate: { control: false },
-    cardExpirationDateErrorMessage: { control: false },
+    cardExpirationDateErrorMessage: { control: 'object' },
     setCardExpirationDate: { control: false },
     setCardExpirationDateErrorMessage: { control: false },
+  },
+  excludeStories: /.*Data$/,
+  args: {
+    ...ActionsData,
   },
 } satisfies Meta<typeof CardExpirationDate>;
 
@@ -20,22 +30,28 @@ export default meta;
 type Story = StoryObj<typeof CardExpirationDate>;
 
 export const Default: Story = {
-  render: function Render() {
-    const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
+  name: '기본 상태',
+  args: {
+    cardExpirationDate: {
       month: '',
       year: '',
-    });
-    const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
+    },
+    cardExpirationDateErrorMessage: {
+      month: '',
+      year: '',
+    },
+  },
+  render: function Render(args) {
+    const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
       month: '',
       year: '',
     });
 
     return (
       <CardExpirationDate
+        {...args}
         cardExpirationDate={cardExpirationDate}
         setCardExpirationDate={setCardExpirationDate}
-        cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-        setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
       />
     );
   },
