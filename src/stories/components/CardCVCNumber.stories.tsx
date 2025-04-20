@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardCVCNumber from '../../components/CardCVCNumber/CardCVCNumber';
+import { CardCVCNumber } from '@/components';
 import { useState } from '@storybook/preview-api';
-import { ERROR_MESSAGE } from '../../constants';
+import { ERROR_MESSAGE } from '@/constants';
 import { fn } from '@storybook/test';
 
 export const ActionsData = {

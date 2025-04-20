@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ErrorMessage from '../../../components/common/ErrorMessage/ErrorMessage';
+import { ErrorMessage } from '@/components';
 
 const meta = {
   title: 'ErrorMessage',

@@ -1,8 +1,8 @@
 import * as S from './CardPreview.styles';
-import MasterCard from '../logo/MasterCard';
-import VisaCard from '../logo/VisaCard';
-import { MASKING } from '../../constants';
-import { CardType, SequenceType, DateType } from '../../types';
+import MasterCard from '../icons/MasterCard';
+import VisaCard from '../icons/VisaCard';
+import { CardType, DateType, SequenceType } from '@/types';
+import { MASKING } from '@/constants';
 
 interface CardPreviewProps {
   cardType: CardType;

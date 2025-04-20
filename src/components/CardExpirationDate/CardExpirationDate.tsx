@@ -1,4 +1,4 @@
-import { Title, Label, Input, Spacing, ErrorMessage } from '@/components/common';
+import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
 import { DateType } from '@/types';

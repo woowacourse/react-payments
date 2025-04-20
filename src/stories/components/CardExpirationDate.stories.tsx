@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
-import { ERROR_MESSAGE } from '../../constants';
-import { DateType } from '../../types';
+import { CardExpirationDate } from '@/components';
+import { ERROR_MESSAGE } from '@/constants';
+import { DateType } from '@/types';
 import { fn } from '@storybook/test';
 
 export const ActionsData = {

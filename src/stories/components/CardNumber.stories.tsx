@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { useState } from 'storybook/internal/preview-api';
-import CardNumber from '../../components/CardNumber/CardNumber';
+import { CardNumber } from '@/components';
 
 export const ActionsData = {
   setCardNumber: fn(),
