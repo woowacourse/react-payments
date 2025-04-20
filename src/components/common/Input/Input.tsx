@@ -2,13 +2,9 @@ import styled from '@emotion/styled';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
-  type?: string;
-  placeholder?: string;
   value: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 function Input(props: InputProps) {
