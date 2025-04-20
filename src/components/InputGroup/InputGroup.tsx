@@ -15,20 +15,23 @@ import { InputErrorType } from "../../hooks/useInputError";
 export interface InputGroupProps {
   type: InputType;
   error: InputErrorType;
-  setCardNumberError: (value: string, position: CardPositionType) => void;
-  setExpirationPeriodError: (
+  handleCardNumberValidation: (
+    value: string,
+    position: CardPositionType
+  ) => void;
+  handleExpirationPeriodValidation: (
     value: string,
     position: PeriodPositionType
   ) => void;
-  setCvcNumberError: (value: string) => void;
+  handleCvcNumberValidation: (value: string) => void;
 }
 
 function InputGroup({
   type,
   error,
-  setCardNumberError,
-  setExpirationPeriodError,
-  setCvcNumberError,
+  handleCardNumberValidation,
+  handleExpirationPeriodValidation,
+  handleCvcNumberValidation,
 }: InputGroupProps) {
   const {
     cardNumbers,
@@ -43,7 +46,7 @@ function InputGroup({
     value: string,
     position: CardPositionType
   ) => {
-    setCardNumberError(value, position);
+    handleCardNumberValidation(value, position);
     updateCardNumber(value, position);
   };
 
@@ -51,12 +54,12 @@ function InputGroup({
     value: string,
     position: PeriodPositionType
   ) => {
-    setExpirationPeriodError(value, position);
+    handleExpirationPeriodValidation(value, position);
     updateExpirationPeriod(value, position);
   };
 
   const handleCvcNumberChange = (value: string) => {
-    setCvcNumberError(value);
+    handleCvcNumberValidation(value);
     updateCvcNumber(value);
   };
 

@@ -24,7 +24,10 @@ const defaultError = {
 export function useInputError() {
   const [error, setError] = useState<InputErrorType>(defaultError);
 
-  const setCardNumberError = (value: string, position: CardPositionType) => {
+  const handleCardNumberValidation = (
+    value: string,
+    position: CardPositionType
+  ) => {
     setError((prev) => ({
       ...prev,
       cardNumbers: {
@@ -34,7 +37,7 @@ export function useInputError() {
     }));
   };
 
-  const setExpirationPeriodError = (
+  const handleExpirationPeriodValidation = (
     value: string,
     position: PeriodPositionType
   ) => {
@@ -47,7 +50,7 @@ export function useInputError() {
     }));
   };
 
-  const setCvcNumberError = (value: string) => {
+  const handleCvcNumberValidation = (value: string) => {
     setError((prev) => ({
       ...prev,
       cvcNumber: Number.isNaN(Number(value)),
@@ -56,8 +59,8 @@ export function useInputError() {
 
   return {
     error,
-    setCardNumberError,
-    setExpirationPeriodError,
-    setCvcNumberError,
+    handleCardNumberValidation,
+    handleExpirationPeriodValidation,
+    handleCvcNumberValidation,
   };
 }
