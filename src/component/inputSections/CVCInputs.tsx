@@ -17,8 +17,9 @@ const CVCInputs = ({
   handleErrorMessages,
 }: CVCInputsProps) => {
   return (
-    <InputGroup label="CVC" errorMessages={errorMessages}>
+    <InputGroup label="CVC" errorMessages={errorMessages} id="cvc">
       <CardInput
+        id="cvc"
         maxLength={3}
         placeholder="123"
         validate={validateCardCVC}

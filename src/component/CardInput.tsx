@@ -10,6 +10,7 @@ interface InputProps {
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
+  id: string;
 }
 
 const CardInput = ({
@@ -19,6 +20,7 @@ const CardInput = ({
   setCardInput,
   validate,
   handleErrorMessage,
+  id,
 }: InputProps) => {
   const [isError, setIsError] = useState(false);
 
@@ -42,6 +44,7 @@ const CardInput = ({
 
   return (
     <InputField
+      id={id}
       placeholder={placeholder}
       maxLength={maxLength}
       onChange={handleCardNumber}

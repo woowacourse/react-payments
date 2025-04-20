@@ -22,9 +22,14 @@ const CardNumberInputs = ({
   >)[] = ["first", "second", "third", "fourth"];
 
   return (
-    <InputGroup label="카드 번호" errorMessages={errorMessages}>
+    <InputGroup
+      label="카드 번호"
+      errorMessages={errorMessages}
+      id="card-number"
+    >
       {cardNumberKeys.map((key) => (
         <CardInput
+          id="card-number"
           key={key}
           maxLength={4}
           placeholder="1234"

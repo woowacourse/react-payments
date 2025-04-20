@@ -4,12 +4,18 @@ interface InputGroupProps {
   label: string;
   children: React.ReactNode;
   errorMessages: string;
+  id: string;
 }
 
-const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
+const InputGroup = ({
+  label,
+  children,
+  errorMessages,
+  id,
+}: InputGroupProps) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label htmlFor={id}>{label}</Label>
       <InputContainer>{children}</InputContainer>
       <ErrorMessageContainer>
         <ErrorMessage>{errorMessages}</ErrorMessage>
@@ -23,7 +29,7 @@ export const InputContainer = styled.div`
   gap: 10px;
 `;
 
-const Label = styled.span`
+const Label = styled.label`
   color: var(--color-black);
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-body);

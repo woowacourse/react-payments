@@ -24,9 +24,14 @@ const ExpirationDateInputs = ({
     "YY",
   ];
   return (
-    <InputGroup label="유효기간" errorMessages={errorMessages}>
+    <InputGroup
+      label="유효기간"
+      errorMessages={errorMessages}
+      id="expiration-date"
+    >
       {expirationDateKeys.map((key) => (
         <CardInput
+          id="expiration-date"
           key={key}
           maxLength={2}
           placeholder={key}
