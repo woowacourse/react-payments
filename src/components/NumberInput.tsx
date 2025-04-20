@@ -2,22 +2,19 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import isExactLength from "../utils/isExactLength";
 
-interface NumberInputProps {
-  id?: string;
+interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   setValue: (value: string) => void;
   maxLength: number;
-  placeholder: string;
   extraErrorCondition?: boolean;
 }
 
 function NumberInput({
-  id,
   value,
   setValue,
   maxLength,
-  placeholder,
   extraErrorCondition,
+  ...rest
 }: NumberInputProps) {
   const [isError, setIsError] = useState(false);
 
@@ -45,12 +42,11 @@ function NumberInput({
 
   return (
     <Input
-      id={id}
       value={value}
       maxLength={maxLength}
-      placeholder={placeholder}
       isError={isError}
       onChange={handleValue}
+      {...rest}
     />
   );
 }
