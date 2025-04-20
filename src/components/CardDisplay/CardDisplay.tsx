@@ -1,8 +1,8 @@
 import CardExpirationDate from '@/types/CardExpirationDate';
 import { CardNumbers } from '@/types/CardNumbers';
-import CardBody from './CardBody';
+import CardBody from './CardBody/CardBody';
 import styles from './cardDisplay.module.css';
-import CardHeader from './CardHeader';
+import CardHeader from './CardHeader/CardHeader';
 
 type CardDisplayProps = {
   cardNumbers: CardNumbers;

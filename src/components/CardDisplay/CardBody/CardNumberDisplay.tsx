@@ -1,4 +1,4 @@
-import styles from './cardDisplay.module.css';
+import styles from '../cardDisplay.module.css';
 type CardNumberDisplayProps = {
   cardNumber: string;
   isMasked: boolean;

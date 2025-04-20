@@ -1,12 +1,6 @@
-import styles from './cardDisplay.module.css';
-
-import { CardNumbers } from '@/types/CardNumbers';
 import Visa from '@assets/visa.png';
 import MasterCard from '@assets/mastercard.png';
-
-type CardNetworkProps = {
-  cardNumbers: CardNumbers;
-};
+import { CardNumbers } from '@/types/CardNumbers';
 
 const CARD_NETWORKS = [
   {
@@ -21,23 +15,13 @@ const CARD_NETWORKS = [
   },
 ];
 
-const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
+const getCardNetwork = (cardNumbers: CardNumbers) => {
   const cardNumberPrefix = String(cardNumbers.firstNumber).slice(0, 2);
   const cardNetwork = CARD_NETWORKS.find((network) =>
     network.prefixes.includes(cardNumberPrefix)
   );
 
-  if (!cardNetwork) {
-    return null;
-  }
-
-  return (
-    <img
-      src={cardNetwork.image}
-      alt={cardNetwork.name}
-      className={styles.cardNetwork}
-    />
-  );
+  return cardNetwork;
 };
 
-export default CardNetwork;
+export default getCardNetwork;
