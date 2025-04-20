@@ -1,6 +1,11 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  validateMonthRangeError,
+  validateNumberError,
+  validateYearLengthError
+} from '../../utils/CardInputValidations';
 
 type Props = {
   expiration: string[];
@@ -9,25 +14,6 @@ type Props = {
 
 export default function CardExpirationSection({ expiration, setExpiration }: Props) {
   const [expirationError, setExpirationError] = useState<string[]>(['', '']);
-
-  function validateNumberError(value: string) {
-    if (!/^[0-9]*$/.test(value)) {
-      return '숫자만 입력 가능합니다.';
-    }
-  }
-
-  function validateMonthRangeError(value: string) {
-    const month = Number(value);
-    if (value !== '' && (month < 1 || month > 12)) {
-      return '1부터 12 사이의 숫자를 입력해주세요.';
-    }
-  }
-
-  function validateYearLengthError(value: string) {
-    if (value !== '' && value.length !== 2) {
-      return '2자리 숫자를 입력해주세요.';
-    }
-  }
 
   function getExpirationError(index: number, value: string): string {
     return (

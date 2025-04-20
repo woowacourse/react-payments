@@ -1,3 +1,4 @@
+import { validateCvcLengthError, validateNumberError } from '../../utils/CardInputValidations';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -9,18 +10,6 @@ type Props = {
 
 export default function CvcSection({ cvc, setCvc }: Props) {
   const [cvcError, setCvcError] = useState<string>('');
-
-  function validateNumberError(value: string) {
-    if (!/^[0-9]*$/.test(value)) {
-      return '숫자만 입력 가능합니다.';
-    }
-  }
-
-  function validateCvcLengthError(value: string) {
-    if (value !== '' && value.length !== 3) {
-      return 'CVC는 3자리여야 합니다.';
-    }
-  }
 
   function getCvcError(value: string): string {
     return validateNumberError(value) || validateCvcLengthError(value) || '';
