@@ -1,5 +1,4 @@
 import Input from "../../shared/input/Input";
-import { CardCVCNumberSectionProps } from "../../\btypes/index.types";
 import { useState } from "react";
 import { isValidLength, isValidNumber } from "../../util/validation";
 import { NO_ERROR } from "../../shared/constants/constant";
@@ -8,6 +7,11 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+
+export type CardCVCNumberSectionProps = {
+  CVCNumber: string;
+  changeCVCNumber: (CVCNumber: string) => void;
+};
 
 const CVC_NUMBER_LENGTH = 3;
 

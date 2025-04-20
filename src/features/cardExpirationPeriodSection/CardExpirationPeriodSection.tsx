@@ -1,7 +1,15 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardExpirationPeriodInputs from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
 import { StyledContainer } from "./CardExpirationPeriodSection.css";
-import { ExpirationPeriodProps } from "../../\btypes/index.types";
+import { ExpirationPeriod } from "../../\btypes/index.types";
+
+export type ExpirationPeriodProps = {
+  expirationPeriod: ExpirationPeriod;
+  changeExpirationPeriod: (
+    expirationPeriod: keyof ExpirationPeriod,
+    date: string
+  ) => void;
+};
 
 function CardExpirationPeriodSection({
   expirationPeriod,

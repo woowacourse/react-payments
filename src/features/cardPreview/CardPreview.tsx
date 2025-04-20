@@ -7,10 +7,15 @@ import {
   StyledCardNumber,
   StyledExpirationPeriod,
 } from "./CardPreview.css";
-import { CardNumber, ExpirationPeriod } from "../../\btypes/index.types";
+import {
+  CardNumberPosition,
+  ExpirationPeriod,
+} from "../../\btypes/index.types";
 import { useState } from "react";
 import { useEffect } from "react";
 import { INITIALIZE_VALUE } from "../../shared/constants/constant";
+
+type CardNumber = Record<CardNumberPosition, string>;
 
 type CardPreviewProps = {
   cardNumber: CardNumber;

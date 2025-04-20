@@ -1,7 +1,12 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardNumberInputs from "../../entities/cardNumberInputs/CardNumberInputs";
 import { StyledContainer } from "./cardNumberSection.css";
-import { CardNumberProps } from "../../\btypes/index.types";
+import { CardNumberPosition } from "../../\btypes/index.types";
+
+type CardNumberProps = {
+  cardNumber: Record<CardNumberPosition, string>;
+  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+};
 
 function CardNumberSection({ cardNumber, changeCardNumber }: CardNumberProps) {
   return (

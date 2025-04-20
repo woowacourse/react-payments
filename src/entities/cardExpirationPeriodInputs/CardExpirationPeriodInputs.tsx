@@ -1,9 +1,6 @@
 import { useState } from "react";
 import Input from "../../shared/input/Input";
-import {
-  ExpirationPeriod,
-  ExpirationPeriodProps,
-} from "../../\btypes/index.types";
+import { ExpirationPeriod } from "../../\btypes/index.types";
 import {
   isValidLength,
   isValidMonthRange,
@@ -16,6 +13,14 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+
+export type ExpirationPeriodProps = {
+  expirationPeriod: ExpirationPeriod;
+  changeExpirationPeriod: (
+    expirationPeriod: keyof ExpirationPeriod,
+    date: string
+  ) => void;
+};
 
 const EXPIRATION_PERIOD_LENGTH = 2;
 

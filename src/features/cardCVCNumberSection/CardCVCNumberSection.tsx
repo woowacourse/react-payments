@@ -1,7 +1,11 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardCVCNumberInputs from "../../entities/cardCVCNumberInputs/CardCVCNumberInputs";
 import { StyledContainer } from "./CardCVCNumberSection.css";
-import { CardCVCNumberSectionProps } from "../../\btypes/index.types";
+
+export type CardCVCNumberSectionProps = {
+  CVCNumber: string;
+  changeCVCNumber: (CVCNumber: string) => void;
+};
 
 function CardCVCNumberSection({
   CVCNumber,

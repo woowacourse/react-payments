@@ -1,5 +1,5 @@
 import Input from "../../shared/input/Input";
-import { CardNumberProps, CardNumberPosition } from "../../\btypes/index.types";
+import { CardNumberPosition } from "../../\btypes/index.types";
 import { useState } from "react";
 import { isValidLength, isValidNumber } from "../../util/validation";
 import { NO_ERROR, POSITION } from "../../shared/constants/constant";
@@ -8,6 +8,11 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+
+type CardNumberProps = {
+  cardNumber: Record<CardNumberPosition, string>;
+  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+};
 
 const CARD_NUMBER_LENGTH = 4;
 
