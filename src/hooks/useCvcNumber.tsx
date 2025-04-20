@@ -14,11 +14,13 @@ interface UseCvcNumberReturn {
 }
 
 export default function useCvcNumber(): UseCvcNumberReturn {
-  const [cvcNumbers, setCardCvcNumbers] = useState("");
+  const [cvcNumbers, setCardCvcNumbers] = useState([""]);
   const [cvcNumbersError, setError] = useState([""]);
 
   const cvcNumbersValidate = (value: string) => {
-    setCardCvcNumbers(value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH));
+    const newCvcNumbers = [...cvcNumbers];
+    newCvcNumbers[0] = value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH);
+    setCardCvcNumbers(newCvcNumbers);
 
     if (!isValidLength(value.length, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH)) {
       replaceAt({
@@ -40,7 +42,7 @@ export default function useCvcNumber(): UseCvcNumberReturn {
   };
 
   return {
-    cvcNumbers,
+    cvcNumbers: cvcNumbers[0],
     cvcNumbersError: cvcNumbersError[0],
     cvcNumbersValidate,
   };
