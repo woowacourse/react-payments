@@ -1,6 +1,6 @@
 import InputGroup from "../inputGroup/InputGroup";
 import CardInput from "../CardInput";
-import type { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps, InputKeyType } from "../../types/CardInputTypes";
 import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
 import type { Dispatch, SetStateAction } from "react";
 import {
@@ -19,24 +19,24 @@ const ExpirationDateInputs = ({
   setCardInput,
   handleErrorMessages,
 }: ExpirationDateInputsProps) => {
+  const expirationDateKeys: InputKeyType[] = ["MM", "YY"];
   return (
     <InputGroup label="유효기간" errorMessages={getFirstPeriodError()}>
-      <CardInput
-        maxLength={2}
-        placeholder="MM"
-        validate={validateCardExpirationDateMM}
-        setCardInput={setCardInput}
-        inputKey="MM"
-        handleErrorMessage={(message) => handleErrorMessages("MM", message)}
-      />
-      <CardInput
-        maxLength={2}
-        placeholder="YY"
-        validate={validateCardExpirationDateYY}
-        setCardInput={setCardInput}
-        inputKey="YY"
-        handleErrorMessage={(message) => handleErrorMessages("YY", message)}
-      />
+      {expirationDateKeys.map((key) => (
+        <CardInput
+          key={key}
+          maxLength={2}
+          placeholder={key}
+          validate={
+            key === "MM"
+              ? validateCardExpirationDateMM
+              : validateCardExpirationDateYY
+          }
+          setCardInput={setCardInput}
+          inputKey={key}
+          handleErrorMessage={(message) => handleErrorMessages(key, message)}
+        />
+      ))}
     </InputGroup>
   );
 };
