@@ -23,10 +23,13 @@ type Period = {
   year: string;
 };
 
-const Wrapper: React.FC<{
+const Wrapper = ({
+  initialCardNumbers,
+  initialPeriod,
+}: {
   initialCardNumbers: CardNumber;
   initialPeriod: Period;
-}> = ({ initialCardNumbers, initialPeriod }) => {
+}) => {
   const [cardNumbers] = useState<CardNumber>(initialCardNumbers);
   const [period] = useState<Period>(initialPeriod);
   const separatorRef = useRef<HTMLDivElement>(null);

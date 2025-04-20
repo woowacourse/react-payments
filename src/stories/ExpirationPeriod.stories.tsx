@@ -16,7 +16,7 @@ type Period = {
   year: string;
 };
 
-const Wrapper: React.FC = () => {
+const Wrapper = () => {
   const [period, setPeriod] = useState<Period>({
     month: '',
     year: '',

@@ -18,7 +18,7 @@ type CardNumber = {
   fourth: string;
 };
 
-const Wrapper: React.FC = () => {
+const Wrapper = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({
     first: '',
     second: '',
