@@ -5,6 +5,11 @@ export const MAGIC_NUMBER = {
     year: "YY",
     cvcNumber: "123",
   },
+  maxLength: {
+    cardNumber: 4,
+    expirationPeriod: 2,
+    cvcNumber: 3,
+  },
 };
 
 export const INPUT_TYPE = {
