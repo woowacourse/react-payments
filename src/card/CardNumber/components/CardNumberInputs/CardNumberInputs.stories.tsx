@@ -9,6 +9,12 @@ const meta = {
   component: CardNumberInputs,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
+    inputRefs: {
+      first: { current: null },
+      second: { current: null },
+      third: { current: null },
+      fourth: { current: null },
+    },
     handleCardNumberChange: () => {},
   },
   tags: ["autodocs"],
@@ -31,12 +37,13 @@ export const Error: Story = {
 
 export const WithValidationTest: Story = {
   render: () => {
-    const { cardNumberState, handleCardNumberChange } =
+    const { cardNumberState, inputRefs, handleCardNumberChange } =
       useControlledCardNumber();
 
     return (
       <CardNumberInputs
         cardNumberState={cardNumberState}
+        inputRefs={inputRefs}
         handleCardNumberChange={handleCardNumberChange}
       />
     );
