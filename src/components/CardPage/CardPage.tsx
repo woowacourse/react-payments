@@ -4,8 +4,8 @@ import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import PreviewCard from '../PreviewCard/PreviewCard';
 import Text from '../Text/Text';
-import { useState } from 'react';
 import { CARD_PAGE_TEXT } from '../../constants/cardPageText';
+import useInputArrayState from '../../hooks/useInputArrayState';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -24,32 +24,9 @@ const StyledCardPage = styled.div`
 `;
 
 const CardPage = () => {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState(['', '']);
-  const [cvc, setCvc] = useState(['']);
-
-  const handleCardNumberInput = ({ e, idx }: HandleInputParams) => {
-    setCardNumber((prev) => {
-      const updated = [...prev];
-      updated[idx] = e.target.value;
-      return updated;
-    });
-  };
-  const handleExpirationDateInput = ({ e, idx }: HandleInputParams) => {
-    setExpirationDate((prev) => {
-      const updated = [...prev];
-      updated[idx] = e.target.value;
-      return updated;
-    });
-  };
-
-  const handleCVCInput = ({ e, idx }: HandleInputParams) => {
-    setCvc((prev) => {
-      const updated = [...prev];
-      updated[idx] = e.target.value;
-      return updated;
-    });
-  };
+  const [cardNumber, handleCardNumberInput] = useInputArrayState(4);
+  const [expirationDate, handleExpirationDateInput] = useInputArrayState(2);
+  const [cvc, handleCVCInput] = useInputArrayState(1);
 
   return (
     <StyledCardPage>
