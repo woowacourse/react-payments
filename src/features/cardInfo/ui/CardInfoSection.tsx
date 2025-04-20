@@ -20,10 +20,12 @@ export default function CardInfoSection({
   subTitle,
   inputArr,
   maxLength,
-  error = {} as ErrorProps,
+  error,
   onChange,
 }: CardInfoSectionProps) {
   const errorKey = `${id}Error` as keyof ErrorProps;
+
+  const isError = error && error[errorKey].errorIndex !== -1 && error[errorKey].errorMessage !== '';
 
   return (
     <S.CardInfoMainSection>
@@ -40,7 +42,7 @@ export default function CardInfoSection({
               {...input}
               onChange={onChange}
               maxLength={maxLength}
-              error={error && error[errorKey].errorIndex === index}
+              error={isError && error[errorKey].errorIndex === index}
             />
           ))}
         </S.CardInfoInputContainer>
