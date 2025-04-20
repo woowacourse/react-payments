@@ -3,7 +3,7 @@ interface Props {
   inputValue: string;
 }
 
-const CONSTANT_INPUT_TITLE = " 입력해 주세요." as const;
+const CONSTANT_INPUT_TITLE = " 입력해 주세요.";
 
 export default function InputTitle({ inputValue }: Props) {
   return (
