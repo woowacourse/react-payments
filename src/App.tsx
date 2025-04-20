@@ -2,15 +2,19 @@
 import "./App.css";
 import { css } from "@emotion/react";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
-import PreviewContainer from "./components/PreviewContainer/PreviewContainer.tsx";
 import useCardInformation from "./hooks/useCardInformation.tsx";
+import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
   return (
     <div css={AppStyle}>
       <div css={PreviewCardContainerStyle}>
-        <PreviewContainer cardType={"visa"} cardState={cardState} />
+        <PreviewCard
+          cardType={"visa"}
+          uniqueNumber={cardState.uniqueNumber}
+          expirationDate={cardState.expirationDate}
+        />
       </div>
       <FormContainer cardState={cardState} dispatch={dispatch} />
     </div>
