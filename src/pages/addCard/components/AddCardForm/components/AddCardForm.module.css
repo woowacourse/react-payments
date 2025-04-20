@@ -1,11 +1,12 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  overflow-y: auto;
-  height: calc(100vh - 210px - 3rem);
+  gap: 1.25rem;
+  height: calc(100vh - 210px - 3rem - 1px);
   padding: 1.5rem 0;
   border-top: 1px solid #d4d4d4;
+  overflow-y: auto;
+  position: relative;
 }
 
 .form::-webkit-scrollbar {

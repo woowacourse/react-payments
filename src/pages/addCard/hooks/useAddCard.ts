@@ -1,3 +1,4 @@
+import useControlledCardPassword from "@/card/CardPassword/hooks/useControlledCardPassword";
 import useControlledCardNumber from "@card/CardNumber/hooks/useControlledCardNumber";
 import useControlledCardOwner from "@card/CardOwner/hooks/useControlledCardOwner";
 import useControlledCardType from "@card/CardType/hooks/useControlledCardType";
@@ -16,6 +17,8 @@ const useAddCard = () => {
   } = useControlledExpireDate();
   const { cardOwner, handleCardOwnerChange } = useControlledCardOwner();
   const { CVCState, handleCVCChange } = useControlledCVC();
+  const { cardPasswordState, handleCardPasswordChange } =
+    useControlledCardPassword();
 
   const addCardState = {
     cardNumberState,
@@ -31,6 +34,8 @@ const useAddCard = () => {
     handleCardOwnerChange,
     CVCState,
     handleCVCChange,
+    cardPasswordState,
+    handleCardPasswordChange,
   };
 
   const previewState = {

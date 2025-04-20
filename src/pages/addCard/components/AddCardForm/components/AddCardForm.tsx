@@ -13,13 +13,17 @@ import CardTypeDropdown, {
 import CardOwnerInput, {
   type CardOwnerInputProps,
 } from "@/card/CardOwner/components/CardOwnerInput";
+import CardPasswordInput, {
+  CardPasswordInputProps,
+} from "@/card/CardPassword/components/CardPasswordInput";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
     CardTypeDropdownProps &
     CardExpireDateInputsProps &
     CardOwnerInputProps &
-    CVCInputsProps;
+    CVCInputsProps &
+    CardPasswordInputProps;
 }
 
 function AddCardForm({ addCardState }: AddCardFormProps) {
@@ -37,10 +41,22 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
     handleCardOwnerChange,
     CVCState,
     handleCVCChange,
+    cardPasswordState,
+    handleCardPasswordChange,
   } = addCardState;
 
   return (
     <form className={styles.form}>
+      <CardInputBox
+        title="비밀번호를 입력해 주세요"
+        guideText="앞의 2자리를 입력해 주세요"
+        InputComponent={
+          <CardPasswordInput
+            cardPasswordState={cardPasswordState}
+            handleCardPasswordChange={handleCardPasswordChange}
+          />
+        }
+      />
       <CardInputBox
         title="결제할 카드 번호를 입력해 주세요"
         guideText="본인 명의의 카드만 결제 가능합니다."

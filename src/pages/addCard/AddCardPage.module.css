@@ -3,4 +3,5 @@
   flex-direction: column;
   gap: 1.5rem;
   margin: 1.5rem auto 0;
+  overflow: hidden;
 }
