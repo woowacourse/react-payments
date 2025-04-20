@@ -82,7 +82,9 @@ const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
       </StyledCardHeader>
       <StyledCardNumberWrapper>
         {cardNumber.map((number, idx) => (
-          <StyledCardNumber>{idx >= 2 ? '•'.repeat(number.length) : number}</StyledCardNumber>
+          <StyledCardNumber key={idx}>
+            {idx >= 2 ? '•'.repeat(number.length) : number}
+          </StyledCardNumber>
         ))}
       </StyledCardNumberWrapper>
 

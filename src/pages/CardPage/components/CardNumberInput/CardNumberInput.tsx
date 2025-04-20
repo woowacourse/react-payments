@@ -45,6 +45,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
+            key={idx}
             value={value}
             onChange={(e) => onChange({ value: e.target.value, idx })}
             onBlur={(e) => validate({ value: e.target.value, idx })}
