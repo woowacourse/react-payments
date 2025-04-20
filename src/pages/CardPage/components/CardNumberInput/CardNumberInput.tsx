@@ -4,6 +4,7 @@ import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
 import { checkInputValidation } from '../../../../validators/checkInputValidator';
+import { CARD_NUMBER } from '../../../../constants/settings';
 
 type CardNumberInputProps = {
   values: string[];
@@ -35,8 +36,8 @@ const StyledHelperTextWrapper = styled.div`
 
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   const { isErrorStates, errorMessage, validate } = useInputValidation(
-    Array.from({ length: 4 }, () => false),
-    (value) => checkInputValidation(value, 4)
+    Array.from({ length: CARD_NUMBER.FIELDS_COUNT }, () => false),
+    (value) => checkInputValidation(value, CARD_NUMBER.MAX_LENGTH)
   );
 
   return (
@@ -49,8 +50,8 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
             value={value}
             onChange={(e) => onChange({ value: e.target.value, idx })}
             onBlur={(e) => validate({ value: e.target.value, idx })}
-            maxLength={4}
-            placeholder={'1234'}
+            maxLength={CARD_NUMBER.MAX_LENGTH}
+            placeholder={CARD_NUMBER.PLACEHOLDER}
             isError={isErrorStates[idx]}
           />
         ))}

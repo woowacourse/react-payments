@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { CARD_PREFIX } from '../../../../constants/settings';
 
 type PreviewCardProps = {
   cardNumber: string[];
@@ -62,10 +63,13 @@ const StyledExpirationDate = styled.div`
 `;
 
 const checkCardType = (firstCardInput: string) => {
-  if (firstCardInput[0] === '4') return './Visa.png';
+  if (Number(firstCardInput[0]) === CARD_PREFIX.VISA) return './Visa.png';
 
   const cardTypePrefix = Number(firstCardInput.slice(0, 2));
-  if (cardTypePrefix >= 51 && cardTypePrefix <= 55) {
+  if (
+    cardTypePrefix >= CARD_PREFIX.MASTERCARD_MIN &&
+    cardTypePrefix <= CARD_PREFIX.MASTERCARD_MAX
+  ) {
     return './Mastercard.png';
   }
   return null;

@@ -4,6 +4,7 @@ import { checkInputValidation } from '../../../../validators/checkInputValidator
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
+import { CVC } from '../../../../constants/settings';
 
 type CVCInputProps = {
   values: string[];
@@ -33,8 +34,9 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const { isErrorStates, errorMessage, validate } = useInputValidation([false], (value) =>
-    checkInputValidation(value, 3)
+  const { isErrorStates, errorMessage, validate } = useInputValidation(
+    Array.from({ length: CVC.FIELDS_COUNT }, () => false),
+    (value) => checkInputValidation(value, CVC.MAX_LENGTH)
   );
 
   return (
@@ -47,8 +49,8 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
             value={value}
             onChange={(e) => onChange({ value: e.target.value, idx })}
             onBlur={(e) => validate({ value: e.target.value, idx })}
-            maxLength={3}
-            placeholder={'123'}
+            maxLength={CVC.MAX_LENGTH}
+            placeholder={CVC.PLACEHOLDER}
             isError={isErrorStates[idx]}
           />
         ))}

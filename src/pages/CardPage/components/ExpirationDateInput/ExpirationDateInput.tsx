@@ -10,6 +10,7 @@ import {
 } from '../../../../validators/expirationDateValidator';
 import { checkNumber, checkValidLength } from '../../../../validators/checkInputValidator';
 import { HandleInputParams } from '../../CardPage';
+import { EXPIRATION_DATE } from '../../../../constants/settings';
 
 type ExpirationDateInputProps = {
   values: string[];
@@ -39,8 +40,6 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => {
-  const placeHolders = ['MM', 'YY'];
-
   const [isError, setIsError] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
   const checkValidExpirationDate = ({ value, idx }: HandleInputParams) => {
@@ -104,8 +103,8 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
             value={value}
             onChange={(e) => onChange({ value: e.target.value, idx })}
             onBlur={(e) => checkValidExpirationDate({ value: e.target.value, idx })}
-            maxLength={2}
-            placeholder={placeHolders[idx]}
+            maxLength={EXPIRATION_DATE.MAX_LENGTH}
+            placeholder={EXPIRATION_DATE.PLACEHOLDER[idx]}
             isError={isError[idx]}
           />
         ))}
