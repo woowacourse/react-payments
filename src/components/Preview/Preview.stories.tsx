@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Preview from "./Preview";
-import { withCustomCardProvider } from "../../utils/storybook/CardProviderDecorator";
+import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
 
 const meta = {
   title: "Preview",

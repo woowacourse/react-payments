@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { CardContext, CardContextType } from "../../contexts/CardContext";
+import { CardContext, CardContextType } from "../src/contexts/CardContext";
 
 interface CardProviderProps {
   children: ReactNode;
