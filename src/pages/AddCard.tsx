@@ -4,15 +4,12 @@ import styled from "styled-components";
 import CardInput from "../component/CardInput";
 import { useState } from "react";
 import InputGroup from "../component/inputGroup/InputGroup";
-import {
-  validateCardExpirationDateMM,
-  validateCardExpirationDateYY,
-  validateCardCVC,
-} from "../validation/validation";
+import { validateCardCVC } from "../validation/validation";
 import { justifyBrandLogo } from "../util/justifyBrandLogo";
-import CardNumberInput from "../component/inputSections/CardNumberInput";
+import CardNumberInputs from "../component/inputSections/CardNumberInputs";
 import type { CardInputProps } from "../types/CardInputTypes";
 import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
+import ExpirationDateInputs from "../component/inputSections/ExpirationDateInputs";
 
 const Wrap = styled.div`
   display: flex;
@@ -95,7 +92,7 @@ const AddCard = () => {
           headText="결제할 카드 번호를 입력해 주세요."
           detailText="본인 명의의 카드만 결제 가능합니다."
         />
-        <CardNumberInput
+        <CardNumberInputs
           getFirstCardNumberError={getFirstCardNumberError}
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
@@ -105,24 +102,11 @@ const AddCard = () => {
           headText="카드 유효기간을 입력해 주세요"
           detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
         />
-        <InputGroup label="유효기간" errorMessages={getFirstPeriodError()}>
-          <CardInput
-            maxLength={2}
-            placeholder="MM"
-            validate={validateCardExpirationDateMM}
-            setCardInput={setCardInput}
-            inputKey="MM"
-            handleErrorMessage={(message) => handleErrorMessages("MM", message)}
-          />
-          <CardInput
-            maxLength={2}
-            placeholder="YY"
-            validate={validateCardExpirationDateYY}
-            setCardInput={setCardInput}
-            inputKey="YY"
-            handleErrorMessage={(message) => handleErrorMessages("YY", message)}
-          />
-        </InputGroup>
+        <ExpirationDateInputs
+          getFirstPeriodError={getFirstPeriodError}
+          handleErrorMessages={handleErrorMessages}
+          setCardInput={setCardInput}
+        />
 
         <Description headText="CVC 번호를 입력해 주세요" />
         <InputGroup label="CVC" errorMessages={errorMessages.CVC}>

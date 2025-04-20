@@ -11,7 +11,7 @@ interface CardNumberInputProps {
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
 }
 
-const CardNumberInput = ({
+const CardNumberInputs = ({
   getFirstCardNumberError,
   setCardInput,
   handleErrorMessages,
@@ -54,4 +54,4 @@ const CardNumberInput = ({
   );
 };
 
-export default CardNumberInput;
+export default CardNumberInputs;
