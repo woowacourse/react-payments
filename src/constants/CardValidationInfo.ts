@@ -9,4 +9,5 @@ export const CARD_VALIDATION_INFO = {
   MIN_VALID_MONTH: 1,
   MAX_VALID_MONTH: 12,
   MIN_VALID_YEAR: 25,
+  CURRENT_YEAR: Number(new Date().getFullYear().toString().slice(-2)),
 };

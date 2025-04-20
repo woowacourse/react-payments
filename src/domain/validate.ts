@@ -13,14 +13,16 @@ const numberLength = (number: string, length: number) => {
 };
 
 const invalidNumber = (number: string) => {
-  if (
-    Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
-    (Number(number.slice(0, 2)) <
-      CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER ||
-      Number(number.slice(0, 2)) >
-        CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER)
-  )
-    return false;
+  if (number.length > 0) {
+    if (
+      Number(number[0]) !== CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER &&
+      (Number(number.slice(0, 2)) <
+        CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER ||
+        Number(number.slice(0, 2)) >
+          CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER)
+    )
+      return false;
+  }
   return true;
 };
 
@@ -46,7 +48,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
       if (!numberLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index,
+          index
         );
     }
   });
