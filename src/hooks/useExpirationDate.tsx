@@ -28,11 +28,6 @@ export default function useExpirationDate(): UseExpirationDateReturn {
     const newValue = value.slice(0, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH);
     const key = index === 0 ? "month" : "year";
 
-    setCardExpirationDate((prev) => ({
-      ...prev,
-      [key]: newValue,
-    }));
-
     if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
       replaceAt({
         array: cardExpirationDateError,
@@ -56,6 +51,12 @@ export default function useExpirationDate(): UseExpirationDateReturn {
       });
       return;
     }
+
+    setCardExpirationDate((prev) => ({
+      ...prev,
+      [key]: newValue,
+    }));
+
     replaceAt({
       array: cardExpirationDateError,
       newValue: "",

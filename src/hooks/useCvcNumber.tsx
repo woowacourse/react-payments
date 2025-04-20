@@ -18,10 +18,6 @@ export default function useCvcNumber(): UseCvcNumberReturn {
   const [cvcNumbersError, setError] = useState([""]);
 
   const cvcNumbersValidate = (value: string) => {
-    const newCvcNumbers = [...cvcNumbers];
-    newCvcNumbers[0] = value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH);
-    setCardCvcNumbers(newCvcNumbers);
-
     if (!isValidLength(value.length, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH)) {
       replaceAt({
         array: cvcNumbersError,
@@ -32,6 +28,9 @@ export default function useCvcNumber(): UseCvcNumberReturn {
 
       return;
     }
+    const newCvcNumbers = [...cvcNumbers];
+    newCvcNumbers[0] = value.slice(0, CONSTANT_USE_CVC_NUMBER.MAX_CVC_LENGTH);
+    setCardCvcNumbers(newCvcNumbers);
 
     replaceAt({
       array: cvcNumbersError,

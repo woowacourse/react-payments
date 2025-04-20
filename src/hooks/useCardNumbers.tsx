@@ -44,12 +44,6 @@ export default function useCardNumbers(): UseCardNumbersReturn {
       0,
       CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
     );
-    setCardNumbers(newCardNumbers);
-    setCardType(
-      getCardType(
-        Number(value.slice(0, CONSTANT_USE_CARD_NUMBER.CARD_TYPE_MAX_LENGTH))
-      )
-    );
 
     if (
       !isValidLength(
@@ -65,6 +59,13 @@ export default function useCardNumbers(): UseCardNumbersReturn {
       });
       return;
     }
+
+    setCardNumbers(newCardNumbers);
+    setCardType(
+      getCardType(
+        Number(value.slice(0, CONSTANT_USE_CARD_NUMBER.CARD_TYPE_MAX_LENGTH))
+      )
+    );
 
     replaceAt({
       array: cardNumbersError,
