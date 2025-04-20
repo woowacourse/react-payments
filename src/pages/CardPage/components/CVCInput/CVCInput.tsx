@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import Input from '../Input/Input';
-import { HandleInputParams } from '../CardPage/CardPage';
-import { inputValidation } from '../../validators/inputValidator';
-import HelperText from '../HelperText/HelperText';
-import useInputValidation from '../../hooks/useInputValidation';
+import Input from '../../../../components/Input/Input';
+import { inputValidation } from '../../../../validators/inputValidator';
+import HelperText from '../../../../components/HelperText/HelperText';
+import useInputValidation from '../../../../hooks/useInputValidation';
+import { HandleInputParams } from '../../CardPage';
 
 type CVCInputProps = {
   values: string[];

@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import CVCInput from '../CVCInput/CVCInput';
-import CardNumberInput from '../CardNumberInput/CardNumberInput';
-import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
-import PreviewCard from '../PreviewCard/PreviewCard';
-import Text from '../Text/Text';
 import { useState } from 'react';
 import { CARD_PAGE_TEXT } from '../../constants/cardPageText';
+import PreviewCard from './components/PreviewCard/PreviewCard';
+import Text from '../../components/Text/Text';
+import CardNumberInput from './components/CardNumberInput/CardNumberInput';
+import ExpirationDateInput from './components/ExpirationDateInput/ExpirationDateInput';
+import CVCInput from './components/CVCInput/CVCInput';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
