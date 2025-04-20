@@ -17,7 +17,6 @@ const preview = {
       </CardProvider>
     ),
   ],
-  
 };
 
 export default preview;

@@ -6,7 +6,7 @@ import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 
 const CVCInput = () => {
-  const {CVC, setCVC} = useCardContext();
+  const { CVC, setCVC } = useCardContext();
   const [helperText, setHelperText] = useState("");
   const inputRef = useRef<HTMLElement | null>(null);
 

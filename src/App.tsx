@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       <CardPreview />
       <form>
-        <CardNumbersInput/>
+        <CardNumbersInput />
         <CardExpiryInput />
         <CVCInput />
       </form>

@@ -8,18 +8,17 @@ const CardPreview = () => {
   const displayCardNumber = (number: string, index: number) => {
     const isMasked = index === 2 || index === 3;
     const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
-  
+
     if (!number) {
       return "    ";
     }
-  
+
     if (isMasked) {
       return "•".repeat(number.length).padEnd(maxLength, " ");
     }
-  
+
     return number.padEnd(maxLength, " ");
   };
-  
 
   return (
     <div className={styles.preview}>
@@ -45,15 +44,6 @@ const CardPreview = () => {
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
             <span key={index} data-testid={`card-number-${index}`}>
-              {/* {index === 2 || index === 3
-                ? number
-                  ? "•"
-                      .repeat(number.length)
-                      .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, " ")
-                  : "    "
-                : number
-                  ? number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, " ")
-                  : "    "} */}
               {displayCardNumber(number, index)}
             </span>
           ))}

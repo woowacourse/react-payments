@@ -13,7 +13,8 @@ const meta: Meta<typeof CVCInput> = {
   parameters: {
     docs: {
       description: {
-        component: "💳 CVCInput은 3자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.",
+        component:
+          "💳 CVCInput은 3자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.",
       },
     },
   },

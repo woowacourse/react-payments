@@ -72,10 +72,10 @@ export const Valid_CardExpiryInput: Story = {
     await userEvent.type(yearInput, "25");
 
     await expect(
-      canvas.queryByText(ERROR.EXPIRY.INVALID_MONTH)
+      canvas.queryByText(ERROR.EXPIRY.INVALID_MONTH),
     ).not.toBeInTheDocument();
     await expect(
-      canvas.queryByText(ERROR.EXPIRY.INVALID_YEAR)
+      canvas.queryByText(ERROR.EXPIRY.INVALID_YEAR),
     ).not.toBeInTheDocument();
   },
 };
@@ -90,7 +90,7 @@ export const InvalidMonth_NonNumeric: Story = {
     await userEvent.type(monthInput, "ab");
 
     await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
+      canvas.findByText(ERROR.REQUIRE.NUMBER),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -106,8 +106,8 @@ export const InvalidMonth_TooShort: Story = {
 
     await expect(
       canvas.findByText(
-        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
+        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
+      ),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -126,7 +126,7 @@ export const InvalidYear_NonNumeric: Story = {
     await userEvent.type(yearInput, "ㅁㅁ");
 
     await expect(
-      canvas.findByText(ERROR.REQUIRE.NUMBER)
+      canvas.findByText(ERROR.REQUIRE.NUMBER),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -146,8 +146,8 @@ export const InvalidYear_TooShort: Story = {
 
     await expect(
       canvas.findByText(
-        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-      )
+        `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
+      ),
     ).resolves.toBeInTheDocument();
   },
 };
@@ -166,7 +166,7 @@ export const InvalidYear_BelowCurrentYear: Story = {
     await userEvent.type(yearInput, "24");
 
     await expect(
-      canvas.findByText(ERROR.EXPIRY.BELOW_CURRENT_YEAR)
+      canvas.findByText(ERROR.EXPIRY.BELOW_CURRENT_YEAR),
     ).resolves.toBeInTheDocument();
   },
 };

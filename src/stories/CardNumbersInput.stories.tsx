@@ -69,7 +69,7 @@ export const Valid_CardNumbersInput: Story = {
     await userEvent.type(inputs[3], "8765");
 
     await expect(
-      canvas.queryByText(ERROR.CARD_NUMBER.INVALID)
+      canvas.queryByText(ERROR.CARD_NUMBER.INVALID),
     ).not.toBeInTheDocument();
   },
 };

@@ -54,7 +54,6 @@ const TemplateVisa = () => {
   return <CardPreview />;
 };
 
-
 const TemplateMaster = () => {
   const { setCardNumbers, setMonth, setYear } = useCardContext();
 
