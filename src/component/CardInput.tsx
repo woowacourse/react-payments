@@ -1,16 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import type { CardInputProps } from "../types/CardInputTypes";
+import type { CardInputProps, InputKeyType } from "../types/CardInputTypes";
 import { useState } from "react";
-
-type InputKeyType =
-  | "first"
-  | "second"
-  | "third"
-  | "fourth"
-  | "MM"
-  | "YY"
-  | "CVC";
 
 interface InputProps {
   maxLength: number;

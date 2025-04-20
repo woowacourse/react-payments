@@ -2,7 +2,7 @@ import { validateCardNumber } from "../../validation/validation";
 import InputGroup from "../inputGroup/InputGroup";
 import CardInput from "../CardInput";
 import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
-import type { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps, InputKeyType } from "../../types/CardInputTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 interface CardNumberInputProps {
@@ -16,40 +16,21 @@ const CardNumberInputs = ({
   setCardInput,
   handleErrorMessages,
 }: CardNumberInputProps) => {
+  const cardNumberKeys: InputKeyType[] = ["first", "second", "third", "fourth"];
+
   return (
     <InputGroup label="카드 번호" errorMessages={getFirstCardNumberError()}>
-      <CardInput
-        maxLength={4}
-        placeholder="1234"
-        setCardInput={setCardInput}
-        validate={validateCardNumber}
-        inputKey="first"
-        handleErrorMessage={(message) => handleErrorMessages("first", message)}
-      />
-      <CardInput
-        maxLength={4}
-        placeholder="1234"
-        validate={validateCardNumber}
-        setCardInput={setCardInput}
-        inputKey="second"
-        handleErrorMessage={(message) => handleErrorMessages("second", message)}
-      />
-      <CardInput
-        maxLength={4}
-        placeholder="1234"
-        setCardInput={setCardInput}
-        validate={validateCardNumber}
-        inputKey="third"
-        handleErrorMessage={(message) => handleErrorMessages("third", message)}
-      />
-      <CardInput
-        maxLength={4}
-        placeholder="1234"
-        setCardInput={setCardInput}
-        validate={validateCardNumber}
-        inputKey="fourth"
-        handleErrorMessage={(message) => handleErrorMessages("fourth", message)}
-      />
+      {cardNumberKeys.map((key) => (
+        <CardInput
+          key={key}
+          maxLength={4}
+          placeholder="1234"
+          setCardInput={setCardInput}
+          validate={validateCardNumber}
+          inputKey={key}
+          handleErrorMessage={(message) => handleErrorMessages(key, message)}
+        />
+      ))}
     </InputGroup>
   );
 };
