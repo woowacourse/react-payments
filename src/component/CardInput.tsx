@@ -1,26 +1,22 @@
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import type { ComponentProps } from "react";
 import type { CardInputProps } from "../types/CardInputTypes";
 import { useState } from "react";
 
-interface InputProps {
-  maxLength: number;
-  placeholder: string;
+interface InputProps extends ComponentProps<"input"> {
   inputKey: keyof CardInputProps;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
-  id: string;
 }
 
 const CardInput = ({
-  maxLength,
-  placeholder,
   inputKey,
   setCardInput,
   validate,
   handleErrorMessage,
-  id,
+  ...restProps
 }: InputProps) => {
   const [isError, setIsError] = useState(false);
 
@@ -44,9 +40,7 @@ const CardInput = ({
 
   return (
     <InputField
-      id={id}
-      placeholder={placeholder}
-      maxLength={maxLength}
+      {...restProps}
       onChange={handleCardNumber}
       inputMode="numeric"
       pattern="[0-9]*"
