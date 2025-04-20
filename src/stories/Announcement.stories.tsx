@@ -5,11 +5,6 @@ const meta = {
   title: 'Announcement',
   component: Announcement,
   tags: ['autodocs'],
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile2',
-    },
-  },
 } satisfies Meta<typeof Announcement>;
 
 export default meta;

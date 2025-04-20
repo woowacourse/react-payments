@@ -5,11 +5,6 @@ const meta = {
   title: 'Card',
   component: Card,
   tags: ['autodocs'],
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile2',
-    },
-  },
 } satisfies Meta<typeof Card>;
 
 export default meta;

@@ -6,11 +6,6 @@ const meta = {
   title: 'NumberInput',
   component: NumberInput,
   tags: ['autodocs'],
-  parameters: {
-    viewport: {
-      defaultViewport: 'mobile2',
-    },
-  },
 } satisfies Meta<typeof NumberInput>;
 
 export default meta;
