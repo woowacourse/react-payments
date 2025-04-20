@@ -51,8 +51,8 @@ export const Valid: Story = {
 export const Error: Story = {
   name: '유효하지 않은 카드 CVC 번호 입력',
   args: {
-    cardCVCNumber: '우테코',
-    cardCVCNumberErrorMessage: ERROR_MESSAGE.onlyNumber,
+    cardCVCNumber: '12',
+    cardCVCNumberErrorMessage: ERROR_MESSAGE.cardCVCNumber.length,
   },
   parameters: {
     controls: {

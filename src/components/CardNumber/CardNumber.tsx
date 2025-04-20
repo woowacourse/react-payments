@@ -28,14 +28,13 @@ export default function CardNumber({
   setCardNumberErrorMessage,
 }: CardNumberProps) {
   const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
+    if (!checkAllNumber(value)) return;
+
     setCardNumber({ ...cardNumber, [sequence]: value });
 
-    if (checkAllNumber(value)) {
-      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
-      return;
-    }
-
-    setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.onlyNumber });
+    if (value.length < 4)
+      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.cardNumber.length });
+    else setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
   };
 
   return (

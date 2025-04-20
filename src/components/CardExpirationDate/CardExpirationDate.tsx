@@ -21,6 +21,16 @@ interface HandleInputChangeParams {
   value: string;
 }
 
+const checkValidMonth = (value: string) => {
+  if (Number(value) >= 1 && Number(value) <= 12 && value.length === 2) return true;
+  return false;
+};
+
+const checkValidYear = (value: string) => {
+  if (value.length === 2) return true;
+  return false;
+};
+
 export default function CardExpirationDate({
   cardExpirationDate,
   setCardExpirationDate,
@@ -28,24 +38,29 @@ export default function CardExpirationDate({
   setCardExpirationDateErrorMessage,
 }: CardExpirationDateProps) {
   const handleInputChange = ({ value, dateType }: HandleInputChangeParams) => {
-    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
-    setCardExpirationDateErrorMessage({
-      ...cardExpirationDateErrorMessage,
-      [dateType]: '',
-    });
+    if (!checkAllNumber(value)) return;
 
-    if (!checkAllNumber(value)) {
-      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber });
-      return;
+    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
+
+    if (dateType === 'month') {
+      if (checkValidMonth(value)) {
+        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, month: '' });
+      } else {
+        setCardExpirationDateErrorMessage({
+          ...cardExpirationDateErrorMessage,
+          month: ERROR_MESSAGE.cardExpirationDate.month,
+        });
+      }
     }
 
-    const valueAsNumber = parseInt(value, 10);
-
-    if (dateType === 'month') validateMonth();
-
-    function validateMonth() {
-      if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
+    if (dateType === 'year') {
+      if (checkValidYear(value)) {
+        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, year: '' });
+      } else {
+        setCardExpirationDateErrorMessage({
+          ...cardExpirationDateErrorMessage,
+          year: ERROR_MESSAGE.cardExpirationDate.year,
+        });
       }
     }
   };

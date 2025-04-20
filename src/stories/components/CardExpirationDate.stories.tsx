@@ -79,8 +79,8 @@ export const Error: Story = {
       year: '25',
     },
     cardExpirationDateErrorMessage: {
-      month: ERROR_MESSAGE.validMonth,
-      year: ERROR_MESSAGE.onlyNumber,
+      month: ERROR_MESSAGE.cardExpirationDate.month,
+      year: ERROR_MESSAGE.cardExpirationDate.year,
     },
   },
 };
