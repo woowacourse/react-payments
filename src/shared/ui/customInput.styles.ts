@@ -5,7 +5,7 @@ export const CustomInput = styled.input<{ error?: boolean }>`
   min-width: 0;
   box-sizing: border-box;
   border-radius: 2px;
-  border: 1.015px solid #acacac;
+  border: 1px solid #acacac;
   padding: 8px;
 
   ::placeholder {
@@ -13,8 +13,8 @@ export const CustomInput = styled.input<{ error?: boolean }>`
   }
 
   :focus {
-    border: 1.015px solid black;
+    border: 1px solid black;
   }
 
-  ${({ error }) => error && `border: 1.015px solid #ff3d3d`}
+  ${({ error }) => error && `border: 1px solid #ff3d3d`}
 `;
