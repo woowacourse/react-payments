@@ -11,29 +11,6 @@ type CardNumberInputProps = {
   onChange: ({ value, idx }: HandleInputParams) => void;
 };
 
-const StyledCardNumberInput = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 12px;
-  margin-bottom: 5px;
-`;
-
-const StyledInputWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
-`;
-
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   const { isErrorStates, errorMessage, validate } = useInputValidation(
     Array.from({ length: CARD_NUMBER.FIELDS_COUNT }, () => false),
@@ -64,3 +41,26 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
 };
 
 export default CardNumberInput;
+
+const StyledCardNumberInput = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 12px;
+  margin-bottom: 5px;
+`;
+
+const StyledInputWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+`;
+
+const StyledHelperTextWrapper = styled.div`
+  height: 30px;
+`;

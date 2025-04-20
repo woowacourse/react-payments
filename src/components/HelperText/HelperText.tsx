@@ -5,6 +5,12 @@ type HelperTextProps = {
   type: 'isError' | 'isValid';
 };
 
+const HelperText = ({ text, type }: HelperTextProps) => {
+  return <StyledHelperText type={type}>{text}</StyledHelperText>;
+};
+
+export default HelperText;
+
 const StyledHelperText = styled.div<HelperTextProps>`
   font-size: 10px;
   margin-top: 10px;
@@ -17,9 +23,3 @@ const StyledHelperText = styled.div<HelperTextProps>`
     }
   }};
 `;
-
-const HelperText = ({ text, type }: HelperTextProps) => {
-  return <StyledHelperText type={type}>{text}</StyledHelperText>;
-};
-
-export default HelperText;

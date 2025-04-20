@@ -9,6 +9,21 @@ type InputProps = {
   isError: boolean;
 };
 
+const Input = ({ value, onChange, onBlur, maxLength, placeholder, isError }: InputProps) => {
+  return (
+    <StyledInput
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      maxLength={maxLength}
+      placeholder={placeholder}
+      isError={isError}
+    />
+  );
+};
+
+export default Input;
+
 const StyledInput = styled.input<InputProps>`
   width: 100%;
   height: 32px;
@@ -33,18 +48,3 @@ const StyledInput = styled.input<InputProps>`
     border: 1.5px solid #000000;
   }
 `;
-
-const Input = ({ value, onChange, onBlur, maxLength, placeholder, isError }: InputProps) => {
-  return (
-    <StyledInput
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      isError={isError}
-    />
-  );
-};
-
-export default Input;

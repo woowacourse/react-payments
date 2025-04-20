@@ -12,17 +12,6 @@ export type HandleInputParams = {
   idx: number;
 };
 
-const StyledCardPage = styled.div`
-  width: 40%;
-  min-width: 400px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 30px;
-`;
-
 const CardPage = () => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState(['', '']);
@@ -72,3 +61,14 @@ const CardPage = () => {
 };
 
 export default CardPage;
+
+const StyledCardPage = styled.div`
+  width: 40%;
+  min-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+`;

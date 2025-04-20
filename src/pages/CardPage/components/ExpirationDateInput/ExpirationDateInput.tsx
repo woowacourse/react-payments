@@ -17,28 +17,6 @@ type ExpirationDateInputProps = {
   onChange: ({ value, idx }: HandleInputParams) => void;
 };
 
-const StyledExpirationDateInput = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 12px;
-  margin-bottom: 5px;
-`;
-
-const StyledInputWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
-`;
-
 const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => {
   const [isError, setIsError] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -117,3 +95,25 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
 };
 
 export default ExpirationDateInput;
+
+const StyledExpirationDateInput = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 12px;
+  margin-bottom: 5px;
+`;
+
+const StyledInputWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+`;
+
+const StyledHelperTextWrapper = styled.div`
+  height: 30px;
+`;

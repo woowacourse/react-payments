@@ -6,6 +6,45 @@ type PreviewCardProps = {
   expirationDate: string[];
 };
 
+const checkCardType = (firstCardInput: string) => {
+  if (Number(firstCardInput[0]) === CARD_PREFIX.VISA) return './Visa.png';
+
+  const cardTypePrefix = Number(firstCardInput.slice(0, 2));
+  if (
+    cardTypePrefix >= CARD_PREFIX.MASTERCARD_MIN &&
+    cardTypePrefix <= CARD_PREFIX.MASTERCARD_MAX
+  ) {
+    return './Mastercard.png';
+  }
+  return null;
+};
+
+const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
+  const cardType = checkCardType(cardNumber[0]);
+
+  return (
+    <StyledPreviewCard>
+      <StyledCardHeader>
+        <StyledICChip />
+        {cardType && <StyledCardType src={cardType} />}
+      </StyledCardHeader>
+      <StyledCardNumberWrapper>
+        {cardNumber.map((number, idx) => (
+          <StyledCardNumber key={idx}>
+            {idx >= 2 ? '•'.repeat(number.length) : number}
+          </StyledCardNumber>
+        ))}
+      </StyledCardNumberWrapper>
+
+      <StyledExpirationDate>
+        {expirationDate.join('/').length > 1 && expirationDate.join('/')}
+      </StyledExpirationDate>
+    </StyledPreviewCard>
+  );
+};
+
+export default PreviewCard;
+
 const StyledPreviewCard = styled.div`
   width: 212px;
   height: 120px;
@@ -61,42 +100,3 @@ const StyledExpirationDate = styled.div`
   font-family: 'Inter';
   letter-spacing: 2.5px;
 `;
-
-const checkCardType = (firstCardInput: string) => {
-  if (Number(firstCardInput[0]) === CARD_PREFIX.VISA) return './Visa.png';
-
-  const cardTypePrefix = Number(firstCardInput.slice(0, 2));
-  if (
-    cardTypePrefix >= CARD_PREFIX.MASTERCARD_MIN &&
-    cardTypePrefix <= CARD_PREFIX.MASTERCARD_MAX
-  ) {
-    return './Mastercard.png';
-  }
-  return null;
-};
-
-const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
-  const cardType = checkCardType(cardNumber[0]);
-
-  return (
-    <StyledPreviewCard>
-      <StyledCardHeader>
-        <StyledICChip />
-        {cardType && <StyledCardType src={cardType} />}
-      </StyledCardHeader>
-      <StyledCardNumberWrapper>
-        {cardNumber.map((number, idx) => (
-          <StyledCardNumber key={idx}>
-            {idx >= 2 ? '•'.repeat(number.length) : number}
-          </StyledCardNumber>
-        ))}
-      </StyledCardNumberWrapper>
-
-      <StyledExpirationDate>
-        {expirationDate.join('/').length > 1 && expirationDate.join('/')}
-      </StyledExpirationDate>
-    </StyledPreviewCard>
-  );
-};
-
-export default PreviewCard;

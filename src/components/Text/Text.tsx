@@ -5,6 +5,12 @@ type TextProps = {
   type: 'title' | 'subTitle';
 };
 
+const Text = ({ text, type }: TextProps) => {
+  return <StyledText type={type}>{text}</StyledText>;
+};
+
+export default Text;
+
 const StyledText = styled.div<TextProps>`
   font-weight: ${(props) => {
     switch (props.type) {
@@ -31,9 +37,3 @@ const StyledText = styled.div<TextProps>`
     }
   }};
 `;
-
-const Text = ({ text, type }: TextProps) => {
-  return <StyledText type={type}>{text}</StyledText>;
-};
-
-export default Text;
