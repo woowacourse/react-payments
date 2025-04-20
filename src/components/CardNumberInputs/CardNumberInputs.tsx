@@ -1,5 +1,9 @@
 import { ChangeEvent } from "react";
-import { CARD_POSITION, CardPositionType } from "../../constants/constants";
+import {
+  CARD_POSITION,
+  CardPositionType,
+  MAGIC_NUMBER,
+} from "../../constants/constants";
 import { InputErrorType } from "../../hooks/useInputError";
 import Input from "../Input/Input";
 
@@ -14,12 +18,13 @@ function CardNumberInputs({
   error,
   handleCardNumberChange,
 }: CardNumberInputsProps) {
-  const cardNumberPlaceholder = "1234";
+  const cardNumberPlaceholder = MAGIC_NUMBER.placeholders.cardNumber;
+  const maxLength = MAGIC_NUMBER.maxLength.cardNumber;
   return (
     <>
       <Input
         placeholder={cardNumberPlaceholder}
-        maxLength={4}
+        maxLength={maxLength}
         isError={error.cardNumbers.first}
         value={cardNumbers.first}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -28,7 +33,7 @@ function CardNumberInputs({
       />
       <Input
         placeholder={cardNumberPlaceholder}
-        maxLength={4}
+        maxLength={maxLength}
         isError={error.cardNumbers.second}
         value={cardNumbers.second}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -37,7 +42,7 @@ function CardNumberInputs({
       />
       <Input
         placeholder={cardNumberPlaceholder}
-        maxLength={4}
+        maxLength={maxLength}
         isError={error.cardNumbers.third}
         value={cardNumbers.third}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -46,7 +51,7 @@ function CardNumberInputs({
       />
       <Input
         placeholder={cardNumberPlaceholder}
-        maxLength={4}
+        maxLength={maxLength}
         isError={error.cardNumbers.fourth}
         value={cardNumbers.fourth}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>

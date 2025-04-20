@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import Input from "../Input/Input";
+import { MAGIC_NUMBER } from "../../constants/constants";
 
 interface CvcInputProps {
   value: string;
@@ -8,10 +9,12 @@ interface CvcInputProps {
 }
 
 function CvcInput({ value, error, handleCvcNumberChange }: CvcInputProps) {
+  const placeholder = MAGIC_NUMBER.placeholders.cvcNumber;
+  const maxLength = MAGIC_NUMBER.maxLength.cvcNumber;
   return (
     <Input
-      placeholder="123"
-      maxLength={3}
+      placeholder={placeholder}
+      maxLength={maxLength}
       isError={error}
       value={value}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>

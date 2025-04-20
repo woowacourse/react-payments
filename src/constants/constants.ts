@@ -1,3 +1,12 @@
+export const MAGIC_NUMBER = {
+  placeholders: {
+    cardNumber: "1234",
+    month: "MM",
+    year: "YY",
+    cvcNumber: "123",
+  },
+};
+
 export const INPUT_TYPE = {
   cardNumbers: "cardNumbers",
   expirationPeriod: "expirationPeriod",

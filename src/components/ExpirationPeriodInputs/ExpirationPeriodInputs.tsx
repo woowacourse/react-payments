@@ -1,6 +1,10 @@
 import { ChangeEvent } from "react";
 import Input from "../Input/Input";
-import { PeriodPositionType, PERIOD_POSITION } from "../../constants/constants";
+import {
+  PeriodPositionType,
+  PERIOD_POSITION,
+  MAGIC_NUMBER,
+} from "../../constants/constants";
 import { InputErrorType } from "../../hooks/useInputError";
 
 interface ExpirationPeriodInputsProps {
@@ -17,11 +21,14 @@ function ExpirationPeriodInputs({
   error,
   handleExpirationPeriodChange,
 }: ExpirationPeriodInputsProps) {
+  const month = MAGIC_NUMBER.placeholders.month;
+  const year = MAGIC_NUMBER.placeholders.year;
+  const maxLength = MAGIC_NUMBER.maxLength.expirationPeriod;
   return (
     <>
       <Input
-        placeholder="MM"
-        maxLength={2}
+        placeholder={month}
+        maxLength={maxLength}
         isError={error.month}
         value={expirationPeriod.month}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -29,8 +36,8 @@ function ExpirationPeriodInputs({
         }
       />
       <Input
-        placeholder="YY"
-        maxLength={2}
+        placeholder={year}
+        maxLength={maxLength}
         isError={error.year}
         value={expirationPeriod.year}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
