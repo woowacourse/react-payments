@@ -2,15 +2,15 @@ import { useState } from 'react';
 
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
 
-const ExpireDateIndex = {
-  MONTH: 0,
-  YEAR: 1,
-};
-
 export type CardInputType = {
   value: string;
   isValid: boolean;
 };
+
+const ExpireDateIndex = {
+  MONTH: 0,
+  YEAR: 1,
+} as const;
 
 const currentYear = new Date().getFullYear().toString().slice(-2);
 
