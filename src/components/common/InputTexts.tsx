@@ -23,6 +23,22 @@ interface InputTextsProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+const getValue = (
+  state: string | Period | CardNumber,
+  index: number
+): string => {
+  if (typeof state === 'string') {
+    return index === 0 ? state : ''; // 문자열 하나면 index 0에만 표시
+  }
+
+  if ('month' in state)
+    return index === 0 ? state.month ?? '' : state.year ?? '';
+
+  const keys = ['first', 'second', 'third', 'fourth'] as const;
+  const key = keys[index];
+  return state[key] ?? '';
+};
+
 const InputTexts = ({
   label,
   placeholder,
@@ -42,13 +58,7 @@ const InputTexts = ({
             type='text'
             placeholder={text}
             maxLength={text.length}
-            value={
-              Array.isArray(state)
-                ? state[index]
-                : index === 0
-                ? state.month
-                : state.year
-            }
+            value={getValue(state, index)}
             onChange={(e) => eventHandler!(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
