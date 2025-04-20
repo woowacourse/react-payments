@@ -16,15 +16,15 @@ export const Default: Story = {
     isError: false,
     type: 'number',
     placeholder: '카드번호를 입력하세요',
-    value: 0,
+    value: '0',
     name: 'input',
     onChange: () => {},
   },
   render: (args) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState('0');
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      setValue(Number.parseInt(value, 10));
+      setValue(value);
     };
 
     return <Input {...args} onChange={onChange} value={value} />;
@@ -36,15 +36,15 @@ export const Error: Story = {
     isError: true,
     type: 'number',
     placeholder: '카드번호를 입력하세요',
-    value: 0,
+    value: '0',
     name: 'input',
     onChange: () => {},
   },
   render: (args) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState('0');
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      setValue(Number.parseInt(value, 10));
+      setValue(value);
     };
 
     return <Input {...args} onChange={onChange} value={value} />;

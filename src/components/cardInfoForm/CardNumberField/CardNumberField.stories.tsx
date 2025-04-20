@@ -13,12 +13,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumber: [0, 0, 0, 0],
+    cardNumber: ['0', '0', '0', '0'],
     isError: [false, false, false, false],
     onChange: () => {},
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState([1234, 5678, 9012, 3456]);
+    const [cardNumber, setCardNumber] = useState([
+      '1234',
+      '5678',
+      '9012',
+      '3456',
+    ]);
     const [isError, setIsError] = useState([false, false, false, false]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
@@ -31,7 +36,7 @@ export const Default: Story = {
       setIsError(copyError);
 
       const copy = [...cardNumber];
-      copy[n] = Number.parseInt(value, 10);
+      copy[n] = value;
       setCardNumber(copy);
     };
 
@@ -47,12 +52,12 @@ export const Default: Story = {
 };
 export const Error: Story = {
   args: {
-    cardNumber: [0, 0, 0, 0],
+    cardNumber: ['0', '0', '0', '0'],
     isError: [false, false, false, false],
     onChange: () => {},
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState([123, 567, 901, 3456]);
+    const [cardNumber, setCardNumber] = useState(['123', '567', '901', '3456']);
     const [isError, setIsError] = useState([true, true, true, false]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
@@ -65,7 +70,7 @@ export const Error: Story = {
       setIsError(copyError);
 
       const copy = [...cardNumber];
-      copy[n] = Number.parseInt(value, 10);
+      copy[n] = value;
       setCardNumber(copy);
     };
 
