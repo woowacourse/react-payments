@@ -1,11 +1,10 @@
-import React from "react";
+import { PropsWithChildren } from "react";
 import styles from "./InputContainer.module.css";
 
-type InputContainerProps = {
-  children: React.ReactNode;
+type InputContainerProps = PropsWithChildren<{
   title: string;
   subTitle?: string;
-};
+}>;
 
 const InputContainer = ({ children, title, subTitle }: InputContainerProps) => {
   return (
