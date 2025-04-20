@@ -70,6 +70,8 @@ export const validateYear = (year: string, length: number) => {
   if (!isNumber(year)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!numberLength(year, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
+  if (Number(year) < CARD_VALIDATION_INFO.CURRENT_YEAR)
+    throw new Error(ERROR.EXPIRY.BELOW_CURRENT_YEAR);
   if (!invalidYear(year)) throw new Error(ERROR.EXPIRY.INVALID_YEAR);
 };
 
