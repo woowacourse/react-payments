@@ -5,6 +5,11 @@ const meta = {
   title: 'CardPreview',
   component: CardPreview,
   tags: ['autodocs'],
+  argTypes: {
+    cardExpirationDate: {
+      control: 'object',
+    },
+  },
 } satisfies Meta<typeof CardPreview>;
 
 export default meta;
