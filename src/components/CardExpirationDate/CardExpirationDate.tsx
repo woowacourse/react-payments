@@ -41,38 +41,12 @@ export default function CardExpirationDate({
 
     const valueAsNumber = parseInt(value, 10);
 
+    if (dateType === 'month') validateMonth();
+
     function validateMonth() {
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
         setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
       }
-    }
-
-    function validateYear() {
-      if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
-      }
-    }
-
-    function validatePastYear(month: number, year: number) {
-      if (year === Number(String(new Date().getFullYear()).slice(2)) && month < new Date().getMonth() + 1) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
-      }
-    }
-
-    if (dateType === 'month') {
-      validateMonth();
-      validatePastYear(valueAsNumber, Number(String(new Date().getFullYear()).slice(2)));
-    }
-
-    if (dateType === 'year') {
-      validateYear();
-      validatePastYear(Number(cardExpirationDate.month), valueAsNumber);
     }
   };
 

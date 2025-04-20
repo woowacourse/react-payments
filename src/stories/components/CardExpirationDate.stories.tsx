@@ -75,12 +75,12 @@ export const Error: Story = {
   name: '유효하지 않은 카드 유효기간 입력',
   args: {
     cardExpirationDate: {
-      month: '13',
+      month: '1a',
       year: '25',
     },
     cardExpirationDateErrorMessage: {
       month: ERROR_MESSAGE.validMonth,
-      year: ERROR_MESSAGE.pastYear,
+      year: ERROR_MESSAGE.onlyNumber,
     },
   },
 };
