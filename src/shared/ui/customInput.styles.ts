@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const CustomInput = styled.input<{ error?: boolean }>`
@@ -16,5 +17,9 @@ export const CustomInput = styled.input<{ error?: boolean }>`
     border: 1px solid black;
   }
 
-  ${({ error }) => error && `border: 1px solid #ff3d3d`}
+  ${({ error }) =>
+    error &&
+    css`
+      border: 1px solid #ff3d3d;
+    `}
 `;
