@@ -2,11 +2,14 @@ import { useState } from "react";
 import { isNumber, isValidLength } from "../validation/validate";
 import { setErrorMessage } from "../utils/setErrorMessage";
 
-const CONSTANT_USE_CARD_NUMBER = {
-  IS_VALID_LENGTH_ERROR: "카드 번호는 4자리 숫자여야 합니다.",
-  IS_NUMBER_ERROR: "숫자만 입력 가능합니다.",
+const CARD_NUMBER = {
   CARD_NUMBER_MAX_LENGTH: 4,
   CARD_TYPE_MAX_LENGTH: 2,
+} as const;
+
+const CARD_NUMBER_ERROR = {
+  INVALID_LENGTH_ERROR: `카드 번호는 자리 ${CARD_NUMBER.CARD_NUMBER_MAX_LENGTH}숫자여야 합니다.`,
+  NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
 } as const;
 
 const CARD_TYPE = {
@@ -23,7 +26,7 @@ const CARD_TYPE = {
   DEFAULT: {
     NAME: "default",
   },
-};
+} as const;
 
 export default function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -32,26 +35,16 @@ export default function useCardNumbers() {
 
   const cardNumbersValidate = (value: string, index: number) => {
     const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value.slice(
-      0,
-      CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
-    );
+    newCardNumbers[index] = value.slice(0, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH);
     setCardNumbers(newCardNumbers);
     setCardType(
-      getCardType(
-        Number(value.slice(0, CONSTANT_USE_CARD_NUMBER.CARD_TYPE_MAX_LENGTH))
-      )
+      getCardType(Number(value.slice(0, CARD_NUMBER.CARD_TYPE_MAX_LENGTH)))
     );
 
-    if (
-      !isValidLength(
-        value.length,
-        CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
-      )
-    ) {
+    if (!isValidLength(value.length, CARD_NUMBER.CARD_NUMBER_MAX_LENGTH)) {
       setErrorMessage(
         cardNumbersError,
-        CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
+        CARD_NUMBER_ERROR.INVALID_LENGTH_ERROR,
         index,
         setError
       );
@@ -61,7 +54,7 @@ export default function useCardNumbers() {
     if (!isNumber(value)) {
       setErrorMessage(
         cardNumbersError,
-        CONSTANT_USE_CARD_NUMBER.IS_NUMBER_ERROR,
+        CARD_NUMBER_ERROR.NOT_NUMBERIC_ERROR,
         index,
         setError
       );
