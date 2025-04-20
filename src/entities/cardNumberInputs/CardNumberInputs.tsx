@@ -2,12 +2,22 @@ import Input from "../../shared/input/Input";
 import { CardNumberPosition } from "../../\btypes/index.types";
 import { useState } from "react";
 import { isValidLength, isValidNumber } from "../../util/validation";
-import { NO_ERROR, POSITION } from "../../shared/constants/constant";
+import { NO_ERROR } from "../../shared/constants/constant";
 import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+
+const CARD_NUMBER_POSITION: Record<
+  "FIRST" | "SECOND" | "THIRD" | "FOURTH",
+  CardNumberPosition
+> = {
+  FIRST: "first",
+  SECOND: "second",
+  THIRD: "third",
+  FOURTH: "fourth",
+};
 
 type CardNumberProps = {
   cardNumber: Record<CardNumberPosition, string>;
@@ -23,10 +33,10 @@ const errorMessage = {
 
 function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
   const [error, setError] = useState({
-    [POSITION.FIRST]: NO_ERROR,
-    [POSITION.SECOND]: NO_ERROR,
-    [POSITION.THIRD]: NO_ERROR,
-    [POSITION.FOURTH]: NO_ERROR,
+    [CARD_NUMBER_POSITION.FIRST]: NO_ERROR,
+    [CARD_NUMBER_POSITION.SECOND]: NO_ERROR,
+    [CARD_NUMBER_POSITION.THIRD]: NO_ERROR,
+    [CARD_NUMBER_POSITION.FOURTH]: NO_ERROR,
   });
 
   function checkValidation(

@@ -7,12 +7,20 @@ import {
   isValidNumber,
   isValidYearRange,
 } from "../../util/validation";
-import { NO_ERROR, EXPIRATION_PERIOD } from "../../shared/constants/constant";
+import { NO_ERROR } from "../../shared/constants/constant";
 import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+
+export const EXPIRATION_PERIOD: Record<
+  "MONTH" | "YEAR",
+  keyof ExpirationPeriod
+> = {
+  MONTH: "month",
+  YEAR: "year",
+};
 
 export type ExpirationPeriodProps = {
   expirationPeriod: ExpirationPeriod;
