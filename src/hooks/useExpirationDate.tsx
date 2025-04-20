@@ -9,13 +9,20 @@ const CONSTANT_USE_EXPIRATION_DATE = {
 } as const;
 
 export default function useExpirationDate() {
-  const [cardExpirationDate, setcardExpirationDate] = useState(["", ""]);
+  const [cardExpirationDate, setCardExpirationDate] = useState({
+    month: "",
+    year: "",
+  });
   const [cardExpirationDateError, setError] = useState(["", ""]);
 
   const dateValidate = (value: string, index: number) => {
-    const newDate = [...cardExpirationDate];
-    newDate[index] = value.slice(0, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH);
-    setcardExpirationDate(newDate);
+    const newValue = value.slice(0, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH);
+    const key = index === 0 ? "month" : "year";
+
+    setCardExpirationDate((prev) => ({
+      ...prev,
+      [key]: newValue,
+    }));
 
     if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
       replaceAt({

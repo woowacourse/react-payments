@@ -1,12 +1,15 @@
+import type { CardType } from "../../hooks/useCardNumbers";
 import styles from "./PreviewCardLayout.module.css";
 import PreviewCardLogo from "./PreviewCardLogo";
 import PreviewCardNumber from "./PreviewCardNumber";
 
 interface PreviewCardLayoutProps {
   cardNumbers: string[];
-  cardExpirationDate: string[];
-  // cardType: string;
-  cardType: "visa" | "master";
+  cardExpirationDate: {
+    month: string;
+    year: string;
+  };
+  cardType: CardType;
 }
 
 export default function PreviewCardLayout({
