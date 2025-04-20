@@ -57,11 +57,15 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 	const inputs = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
 		const orderLabels = ["month", "year"] as const;
+		const placeholderMap = {
+			month: "MM",
+			year: "YY",
+		};
 
 		return (
 			<Input
 				isError={error[orderLabels[index]].length > 0}
-				placeholder="MM"
+				placeholder={placeholderMap[orderLabels[index]]}
 				value={expirationDate[orderLabels[index]]}
 				maxLength={INPUT_MAX_LENGTH}
 				handleInput={(numbers) => handleInput(orderLabels[index], numbers)}
