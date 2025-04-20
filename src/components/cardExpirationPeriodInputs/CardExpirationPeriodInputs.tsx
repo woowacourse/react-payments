@@ -17,7 +17,7 @@ import {
   StyledErrorMessage,
 } from "../../styled-component/inputs";
 
-const EXPIRATION_PERIOD_LENGTH = 3;
+const EXPIRATION_PERIOD_LENGTH = 2;
 
 const errorMessage = {
   length: "2자리만 입력 가능합니다.",
@@ -59,6 +59,7 @@ function CardExpirationPeriodInputs({
       return { ...prev };
     });
   }
+
   function checkMonthValidation(length: number, number: string) {
     if (number === NO_ERROR) {
       setError((prev) => {
@@ -76,6 +77,7 @@ function CardExpirationPeriodInputs({
     }
     checkCommonValidation(EXPIRATION_PERIOD.MONTH, length, number);
   }
+
   function checkYearValidation(length: number, number: string) {
     if (number === NO_ERROR) {
       setError((prev) => {
