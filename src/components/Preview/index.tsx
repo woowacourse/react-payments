@@ -3,7 +3,7 @@ import PreviewView from './PreviewView';
 
 interface PreviewProps {
   cardNumbers: string[];
-  period: string[];
+  period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 

@@ -4,7 +4,7 @@ import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
 export interface ExpirationPeriodViewProps {
-  period: string[];
+  period: { month: string; year: string };
   errorMessage: string;
   errors: boolean[];
   handleInputChange: (

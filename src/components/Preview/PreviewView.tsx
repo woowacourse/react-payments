@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 export interface PreviewViewProps {
   cardNumbers: string[];
-  period: string[];
+  period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
   cardMethodSrc: string;
 }
@@ -17,14 +17,14 @@ const PreviewView: React.FC<PreviewViewProps> = ({
   cardMethodSrc,
 }) => {
   return (
-    <PreviewContainer data-testid="preview-component">
+    <PreviewContainer data-testid='preview-component'>
       <CardFrame>
         <ICChip />
         <CardMethod
           src={cardMethodSrc}
           style={{ display: cardMethodSrc ? 'block' : 'none' }}
-          data-testid="card-method"
-          alt="Card Method"
+          data-testid='card-method'
+          alt='Card Method'
         />
         <CardNumberArea>
           {cardNumbers.map((number, index) => (
@@ -36,9 +36,9 @@ const PreviewView: React.FC<PreviewViewProps> = ({
           ))}
         </CardNumberArea>
         <CardPeriodArea>
-          <CardPeriod>{period[0]}</CardPeriod>
+          <CardPeriod>{period.month}</CardPeriod>
           <Separator ref={separatorRef} />
-          <CardPeriod>{period[1]}</CardPeriod>
+          <CardPeriod>{period.year}</CardPeriod>
         </CardPeriodArea>
       </CardFrame>
     </PreviewContainer>

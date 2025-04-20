@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ExpirationPeriodView from './ExpirationPeriodView';
 
 export interface ExpirationPeriodProps {
-  period: string[];
-  setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
+  period: { month: string; year: string };
+  setPeriod: React.Dispatch<
+    React.SetStateAction<{ month: string; year: string }>
+  >;
   separatorRef?: React.RefObject<HTMLDivElement | null>;
 }
 
@@ -42,7 +44,7 @@ const ExpirationPeriod = ({
   ) => {
     const value = e.target.value;
     setPeriod((prev) => {
-      const newState = [...prev];
+      const newState = { ...prev };
 
       let valid = true;
       let message = '';
@@ -51,8 +53,8 @@ const ExpirationPeriod = ({
         valid = false;
         message = ERROR_MESSAGE.INVALID_CHARACTER;
       } else if (value.length <= EXPIRATION_PERIOD_LENGTH) {
-        newState[index] = value;
         if (index === 0) {
+          newState.month = value;
           const month = Number(value);
           if (month > MONTH.MAX || month < MONTH.MIN) {
             valid = false;
@@ -62,6 +64,7 @@ const ExpirationPeriod = ({
             message = ERROR_MESSAGE.INVALID;
           }
         } else {
+          newState.year = value;
           const year = Number(value);
           if (year < YEAR.MIN || year > YEAR.MAX) {
             valid = false;
@@ -77,6 +80,7 @@ const ExpirationPeriod = ({
       }
 
       if (!valid) {
+        console.log(newState);
         setErrorMessage(message);
         setErrors((prevErr) => {
           const newErrors = [...prevErr];
@@ -101,7 +105,7 @@ const ExpirationPeriod = ({
   };
 
   const handleBlur = () => {
-    if (separatorRef?.current && period[0] === '' && period[1] === '') {
+    if (separatorRef?.current && period.month === '' && period.year === '') {
       separatorRef.current.textContent = '';
     }
   };

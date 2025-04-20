@@ -5,7 +5,7 @@ interface InputTextsProps {
   label: string;
   placeholder: string[];
   eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  state: string[];
+  state: string[] | { month: string; year: string };
   errors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -30,7 +30,13 @@ const InputTexts = ({
             type='text'
             placeholder={text}
             maxLength={text.length}
-            value={state ? state[index] : ''}
+            value={
+              Array.isArray(state)
+                ? state[index]
+                : index === 0
+                ? state.month
+                : state.year
+            }
             onChange={(e) => eventHandler!(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}

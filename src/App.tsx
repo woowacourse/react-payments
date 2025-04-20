@@ -7,7 +7,10 @@ import Preview from './components/Preview';
 
 const App: React.FC = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [period, setPeriod] = useState<string[]>(['', '']);
+  const [period, setPeriod] = useState<{ month: string; year: string }>({
+    month: '',
+    year: '',
+  });
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
   const separatorRef = useRef<HTMLDivElement>(null);
 
