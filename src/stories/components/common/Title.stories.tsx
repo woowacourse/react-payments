@@ -23,7 +23,7 @@ export const Default: Story = {
   },
 };
 
-export const onlyTitle: Story = {
+export const OnlyTitle: Story = {
   args: {
     children: '제목만 있습니다.',
   },

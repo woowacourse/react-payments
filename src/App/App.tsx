@@ -1,16 +1,10 @@
+import { CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
+import global from '@/styles/global';
+import { DateType, SequenceType } from '@/types';
+import { Global } from '@emotion/react';
 import { useState } from 'react';
 import * as S from './App.styles';
-import { CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
-import { MASTER_CARD_CONDITIONS, VISA_CARD_CONDITIONS } from '@/constants';
-import { CardType, SequenceType, DateType } from '@/types';
-import { Global } from '@emotion/react';
-import global from '@/styles/global';
-
-export const getCardType = (cardNumberFirst: string): CardType => {
-  if (VISA_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'visa';
-  if (MASTER_CARD_CONDITIONS.some((value) => cardNumberFirst.startsWith(value))) return 'master';
-  return 'etc';
-};
+import { getCardType } from './utils';
 
 function App() {
   // 카드 번호
