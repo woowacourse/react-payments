@@ -1,7 +1,7 @@
 export interface CustomInputProps {
   type: string;
   placeholder: string;
-  name?: string;
+  name: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxLength?: number;
   error?: boolean;
