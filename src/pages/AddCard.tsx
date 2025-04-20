@@ -4,24 +4,15 @@ import styled from "styled-components";
 import CardInput from "../component/CardInput";
 import { useState } from "react";
 import InputGroup from "../component/inputGroup/InputGroup";
-import type { CardInputProps } from "../types/CardInputTypes";
 import {
-  validateCardNumber,
   validateCardExpirationDateMM,
   validateCardExpirationDateYY,
   validateCardCVC,
 } from "../validation/validation";
 import { justifyBrandLogo } from "../util/justifyBrandLogo";
-
-type ErrorMessagesType = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-  MM: string;
-  YY: string;
-  CVC: string;
-};
+import CardNumberInput from "../component/inputSections/CardNumberInput";
+import type { CardInputProps } from "../types/CardInputTypes";
+import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
 
 const Wrap = styled.div`
   display: flex;
@@ -54,7 +45,7 @@ const AddCard = () => {
     CVC: null,
   });
 
-  const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
+  const [errorMessages, setErrorMessages] = useState<ErrorMessagesProps>({
     first: "",
     second: "",
     third: "",
@@ -65,16 +56,16 @@ const AddCard = () => {
   });
 
   const handleErrorMessages = (
-    key: keyof ErrorMessagesType,
+    key: keyof ErrorMessagesProps,
     message: string
   ) => {
-    setErrorMessages((prev) => ({
+    setErrorMessages((prev: ErrorMessagesProps) => ({
       ...prev,
       [key]: message,
     }));
   };
 
-  const handleCardNumberErrorMessages = () => {
+  const getFirstCardNumberError = () => {
     const filterErrorMessage = [
       errorMessages.first,
       errorMessages.second,
@@ -84,7 +75,7 @@ const AddCard = () => {
     return filterErrorMessage[0];
   };
 
-  const handlePeriodErrorMessages = () => {
+  const getFirstPeriodError = () => {
     const filterErrorMessage = [errorMessages.YY, errorMessages.MM].filter(
       (message) => message.length !== 0
     );
@@ -104,60 +95,17 @@ const AddCard = () => {
           headText="결제할 카드 번호를 입력해 주세요."
           detailText="본인 명의의 카드만 결제 가능합니다."
         />
-        <InputGroup
-          label="카드 번호"
-          errorMessages={handleCardNumberErrorMessages()}
-        >
-          <CardInput
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="first"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("first", message)
-            }
-          />
-          <CardInput
-            maxLength={4}
-            placeholder="1234"
-            validate={validateCardNumber}
-            setCardInput={setCardInput}
-            inputKey="second"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("second", message)
-            }
-          />
-          <CardInput
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="third"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("third", message)
-            }
-          />
-          <CardInput
-            maxLength={4}
-            placeholder="1234"
-            setCardInput={setCardInput}
-            validate={validateCardNumber}
-            inputKey="fourth"
-            handleErrorMessage={(message) =>
-              handleErrorMessages("fourth", message)
-            }
-          />
-        </InputGroup>
+        <CardNumberInput
+          getFirstCardNumberError={getFirstCardNumberError}
+          handleErrorMessages={handleErrorMessages}
+          setCardInput={setCardInput}
+        />
 
         <Description
           headText="카드 유효기간을 입력해 주세요"
           detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
         />
-        <InputGroup
-          label="유효기간"
-          errorMessages={handlePeriodErrorMessages()}
-        >
+        <InputGroup label="유효기간" errorMessages={getFirstPeriodError()}>
           <CardInput
             maxLength={2}
             placeholder="MM"
