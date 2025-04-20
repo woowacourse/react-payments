@@ -17,7 +17,7 @@ type Period = {
   year: string;
 };
 
-const App: React.FC = () => {
+const App = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({
     first: '',
     second: '',
