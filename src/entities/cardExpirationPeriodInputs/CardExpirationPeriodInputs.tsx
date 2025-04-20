@@ -90,10 +90,11 @@ function CardExpirationPeriodInputs({
   function checkValidation(
     length: number,
     date: string,
-    type: "year" | "month"
+    type: keyof ExpirationPeriod
   ) {
-    const validations = getValidationFns(length, date);
-    const validation = validations[type].find((v) => v.condition());
+    const validationFns = getValidationFns(length, date);
+
+    const validation = validationFns[type].find((v) => v.condition());
 
     setError((prev) => {
       return { ...prev, [type]: validation?.errorMsg || NO_ERROR };
