@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
 import HelperText from '../../../../components/HelperText/HelperText';
-import { inputValidation } from '../../../../validators/inputValidator';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
+import { checkInputValidation } from '../../../../validators/checkInputValidator';
 
 type CardNumberInputProps = {
   values: string[];
@@ -36,7 +36,7 @@ const StyledHelperTextWrapper = styled.div`
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   const { isError, errorMessage, validate } = useInputValidation(
     Array.from({ length: 4 }, () => false),
-    (e) => inputValidation(e, 4)
+    (e) => checkInputValidation(e, 4)
   );
 
   return (

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
-import { inputValidation } from '../../../../validators/inputValidator';
+import { checkInputValidation } from '../../../../validators/checkInputValidator';
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
@@ -34,7 +34,7 @@ const StyledHelperTextWrapper = styled.div`
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
   const { isError, errorMessage, validate } = useInputValidation([false], (e) =>
-    inputValidation(e, 3)
+    checkInputValidation(e, 3)
   );
 
   return (

@@ -1,6 +1,9 @@
 import { ERROR_MESSAGES } from '../constants/errorMessages';
 
-export const inputValidation = (e: React.ChangeEvent<HTMLInputElement>, validLength: number) => {
+export const checkInputValidation = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  validLength: number
+) => {
   const inputValue = e.target.value;
   checkNumber(inputValue);
   checkValidLength(inputValue, validLength);

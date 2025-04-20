@@ -8,7 +8,7 @@ import {
   checkValidMonth,
   checkValidYear,
 } from '../../../../validators/expirationDateValidator';
-import { checkNumber, checkValidLength } from '../../../../validators/inputValidator';
+import { checkNumber, checkValidLength } from '../../../../validators/checkInputValidator';
 import { HandleInputParams } from '../../CardPage';
 
 type ExpirationDateInputProps = {
