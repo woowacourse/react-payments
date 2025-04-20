@@ -28,6 +28,16 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
     }
   }, [errors]);
 
+  const updateErrors = (
+    prev: boolean[],
+    index: number,
+    isError: boolean
+  ): boolean[] => {
+    const newErrors = [...prev];
+    newErrors[index] = isError;
+    return newErrors;
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -38,18 +48,10 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
       if (/^[0-9]*$/.test(value) && value.length <= CARD_NUMBERS_LENGTH) {
         const key: CardNumberKey = keyMap[index];
         newState[key] = value;
-        setErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[index] = false;
-          return newErrors;
-        });
+        setErrors((prevErrors) => updateErrors(prevErrors, index, false));
       } else {
         setErrorMessage(ERROR_MESSAGE);
-        setErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[index] = true;
-          return newErrors;
-        });
+        setErrors((prevErrors) => updateErrors(prevErrors, index, true));
       }
       return newState;
     });
