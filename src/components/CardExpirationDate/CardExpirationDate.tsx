@@ -41,15 +41,14 @@ export default function CardExpirationDate({
 
     const valueAsNumber = parseInt(value, 10);
 
-    if (dateType === 'month') {
+    function validateMonth() {
       if (valueAsNumber < 0 || valueAsNumber > 12 || value === '00') {
         setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
       }
+    }
 
-      if (
-        Number(cardExpirationDate.year) === Number(String(new Date().getFullYear()).slice(2)) &&
-        valueAsNumber < new Date().getMonth() + 1
-      ) {
+    function validateYear() {
+      if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
         setCardExpirationDateErrorMessage({
           ...cardExpirationDateErrorMessage,
           [dateType]: ERROR_MESSAGE.pastYear,
@@ -57,23 +56,23 @@ export default function CardExpirationDate({
       }
     }
 
-    if (dateType === 'year') {
-      if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
+    function validatePastYear(month: number, year: number) {
+      if (year === Number(String(new Date().getFullYear()).slice(2)) && month < new Date().getMonth() + 1) {
         setCardExpirationDateErrorMessage({
           ...cardExpirationDateErrorMessage,
           [dateType]: ERROR_MESSAGE.pastYear,
         });
       }
+    }
 
-      if (
-        valueAsNumber === Number(String(new Date().getFullYear()).slice(2)) &&
-        Number(cardExpirationDate.month) < new Date().getMonth() + 1
-      ) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
-      }
+    if (dateType === 'month') {
+      validateMonth();
+      validatePastYear(valueAsNumber, Number(String(new Date().getFullYear()).slice(2)));
+    }
+
+    if (dateType === 'year') {
+      validateYear();
+      validatePastYear(Number(cardExpirationDate.month), valueAsNumber);
     }
   };
 
