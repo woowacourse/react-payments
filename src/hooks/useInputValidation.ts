@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { HandleInputParams } from '../pages/CardPage/CardPage';
 function useInputValidation(initialErrorState: boolean[], validationFn: (value: string) => void) {
-  const [isError, setIsError] = useState(initialErrorState);
+  const [isErrorStates, setIsErrorStates] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateError = (idx: number, hasError: boolean, message?: string) => {
-    setIsError((prev) => {
+    setIsErrorStates((prev) => {
       const updated = [...prev];
       updated[idx] = hasError;
 
@@ -30,7 +30,7 @@ function useInputValidation(initialErrorState: boolean[], validationFn: (value: 
   };
 
   return {
-    isError,
+    isErrorStates,
     errorMessage,
     validate,
   };

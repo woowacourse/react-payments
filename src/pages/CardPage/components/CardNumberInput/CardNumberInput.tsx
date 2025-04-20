@@ -34,7 +34,7 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
-  const { isError, errorMessage, validate } = useInputValidation(
+  const { isErrorStates, errorMessage, validate } = useInputValidation(
     Array.from({ length: 4 }, () => false),
     (value) => checkInputValidation(value, 4)
   );
@@ -50,7 +50,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
             onBlur={(e) => validate({ value: e.target.value, idx })}
             maxLength={4}
             placeholder={'1234'}
-            isError={isError[idx]}
+            isError={isErrorStates[idx]}
           />
         ))}
       </StyledInputWrapper>

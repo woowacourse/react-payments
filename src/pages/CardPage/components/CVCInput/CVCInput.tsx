@@ -33,7 +33,7 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const { isError, errorMessage, validate } = useInputValidation([false], (value) =>
+  const { isErrorStates, errorMessage, validate } = useInputValidation([false], (value) =>
     checkInputValidation(value, 3)
   );
 
@@ -48,7 +48,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
             onBlur={(e) => validate({ value: e.target.value, idx })}
             maxLength={3}
             placeholder={'123'}
-            isError={isError[idx]}
+            isError={isErrorStates[idx]}
           />
         ))}
       </StyledInputWrapper>
