@@ -1,23 +1,23 @@
-import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
+import { ComponentProps } from 'react';
 import styles from './Input.module.css';
 
-export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setState: Dispatch<SetStateAction<boolean>>
-  ) => void;
+export interface InputProps extends ComponentProps<'input'> {
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isValidInput: boolean;
+  dataInputId?: number;
 }
 
 function Input({
   type,
-  onChange,
   name,
   id,
   placeholder,
   maxLength,
+  value,
+  handleInputChange,
+  isValidInput,
+  dataInputId,
 }: InputProps) {
-  const [isValid, setIsValid] = useState<boolean>(true);
-
   return (
     <input
       type={type}
@@ -25,8 +25,10 @@ function Input({
       id={id}
       placeholder={placeholder}
       maxLength={maxLength}
-      onChange={(e) => onChange(e, setIsValid)}
-      className={`${styles.input} ${!isValid && styles.isNotValid} tx-md`}
+      value={value}
+      onChange={handleInputChange}
+      className={`${styles.input} ${!isValidInput && styles.isNotValid} tx-md`}
+      data-input-id={dataInputId}
     />
   );
 }

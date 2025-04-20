@@ -4,18 +4,27 @@ import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
 
 function CardCVCInput() {
-  const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const [cardCVC, setCardCVC] = useState('');
+  const [isValid, setIsValid] = useState(true);
 
-  function checkIsValidCVC(
-    e: React.ChangeEvent<HTMLInputElement>,
-    setIsValid: (state: boolean) => void
-  ) {
-    const cvc = e.target.value;
-    if (!validatorUtils.isNumber(cvc)) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
+  function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target;
+    const value = target.value;
+
+    setCardCVC(value);
+    validateCVCnumber(value);
+  }
+
+  function validateCVCnumber(cvcNumber: string) {
+    if (!checkIsValidCVC(cvcNumber)) {
       setIsValid(false);
-      return;
+    } else {
+      setIsValid(true);
     }
+  }
+
+  function checkIsValidCVC(cvcNumber: string) {
+    return validatorUtils.isNumber(cvcNumber);
   }
 
   return (
@@ -23,14 +32,16 @@ function CardCVCInput() {
       <InputForm
         title='CVC 번호를 입력해 주세요.'
         label='CVC'
-        feedbackMessage={feedbackMessage}
+        feedbackMessage={isValid ? '' : '숫자만 입력 가능합니다.'}
       >
         <Input
           type='tel'
           name='cardCVC'
           placeholder='123'
           maxLength={3}
-          onChange={checkIsValidCVC}
+          value={cardCVC}
+          handleInputChange={handleCVCNumberChange}
+          isValidInput={isValid}
         />
       </InputForm>
     </>

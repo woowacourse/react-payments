@@ -6,26 +6,49 @@ import { validatorUtils } from '../../../../utils/validationUtils';
 const numbersArray = Array.from({ length: 4 }).fill('') as string[];
 
 function CardNumberInput({
+  cardNumbers,
   setCardNumbers,
 }: {
+  cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
 }) {
-  const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const initialValidInputs = Array.from({ length: 4 }, () => true);
+  const [isValidInputs, setIsValidInputs] =
+    useState<boolean[]>(initialValidInputs);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  function checkIsValidCardNumber(
-    e: React.ChangeEvent<HTMLInputElement>,
-    setIsValid: (state: boolean) => void,
-    index: number
-  ) {
-    const inputCardNumber = e.target.value;
-    if (!validatorUtils.isNumber(inputCardNumber)) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
-      setIsValid(false);
-      return;
-    }
+  function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target;
+    const value = target.value;
+    const dataInputId = Number(target.dataset.inputId);
 
-    numbersArray[index] = inputCardNumber;
+    updateCarNumber(value, dataInputId);
+    validateCardNumber(value, dataInputId);
+    decideShowFeedback();
+  }
+
+  function updateCarNumber(inputCardNumber: string, dataInputId: number) {
+    numbersArray[dataInputId] = inputCardNumber;
     setCardNumbers([...numbersArray]);
+  }
+
+  function validateCardNumber(inputCardNumber: string, dataInputId: number) {
+    if (!validatorUtils.isNumber(inputCardNumber)) {
+      isValidInputs[dataInputId] = false;
+      setIsValidInputs([...isValidInputs]);
+    } else {
+      isValidInputs[dataInputId] = true;
+      setIsValidInputs([...isValidInputs]);
+    }
+  }
+
+  function decideShowFeedback() {
+    const hasInvalidInput = isValidInputs.some((isValid) => !isValid);
+    if (hasInvalidInput) {
+      setFeedbackMessage('숫자만 입력 가능합니다.');
+    } else {
+      setFeedbackMessage('');
+    }
   }
 
   const inputs = Array.from({ length: 4 }).map((_, index) => {
@@ -35,9 +58,10 @@ function CardNumberInput({
         name='cardNumber'
         placeholder='1234'
         maxLength={4}
-        onChange={(e, setIsValid) =>
-          checkIsValidCardNumber(e, setIsValid, index)
-        }
+        value={cardNumbers[index]}
+        handleInputChange={handleCardNumberChange}
+        isValidInput={isValidInputs[index]}
+        dataInputId={index}
       />
     );
   });

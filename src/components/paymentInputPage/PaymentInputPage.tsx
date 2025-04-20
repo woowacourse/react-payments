@@ -15,6 +15,8 @@ function PaymentInputPage() {
           expirationDate={expirationDate}
         />
         <CardInputForm
+          cardNumbers={cardNumbers}
+          expirationDate={expirationDate}
           setCardNumbers={setCardNumbers}
           setExpirationDate={setExpirationDate}
         />
