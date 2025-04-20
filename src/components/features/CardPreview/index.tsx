@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
-  const cardTypeCheck = () => {
+  const cardTypeCheck = (() => {
     if (cardNumbers[0].value.startsWith('4')) {
       return './images/Visa.png';
     }
@@ -33,7 +33,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
     ) {
       return './images/Master.png';
     }
-  };
+  })();
 
   const getDisplayCardNumber = (cardNumber: number, index: number): string => {
     if (!cardNumber) return '';
@@ -44,7 +44,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   return (
     <StyledCardContainer>
       <StyledICCheapContainer />
-      {cardTypeCheck() && <StyledCardTypeIcon src={cardTypeCheck()} alt="cardType" />}
+      {cardTypeCheck && <StyledCardTypeIcon src={cardTypeCheck} alt="cardType" />}
       <Flex direction="column" alignItems="flex-start" padding="70px 25px 0px 25px" gap="10px">
         <Flex gap="20px">
           {cardNumbers.map((str, index) => (
