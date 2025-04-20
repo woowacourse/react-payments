@@ -5,28 +5,40 @@ import {
   isValidMonth,
 } from "../validation/validate";
 import { setErrorMessage } from "../utils/setErrorMessage";
+import type { ExpirationKey } from "../types/cardKeyTypes";
+import { indexToExpirationKey } from "../utils/indexToExpirationKey";
 
-const EXPIRATION_DATE = {
+const EXPIRATION_DATE_LIMIT = {
   MAX_LENGTH: 2,
   MIN_MONTH: 1,
   MAX_MONTH: 12,
 };
-const EXPIRATION_DATE_ERROR = {
-  INVALID_LENGTH_ERROR: `${EXPIRATION_DATE.MAX_LENGTH}자리까지 입력 가능합니다.`,
+const EXPIRATION_DATE_ERROR_MESSAGE = {
+  INVALID_LENGTH_ERROR: `${EXPIRATION_DATE_LIMIT.MAX_LENGTH}자리까지 입력 가능합니다.`,
   NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
-  MONTH_RANGE_ERROR: `${EXPIRATION_DATE.MIN_MONTH}부터 ${EXPIRATION_DATE.MAX_MONTH} 사이의 숫자를 입력하세요.`,
+  MONTH_RANGE_ERROR: `${EXPIRATION_DATE_LIMIT.MIN_MONTH}부터 ${EXPIRATION_DATE_LIMIT.MAX_MONTH} 사이의 숫자를 입력하세요.`,
 } as const;
 
-export default function useExpirationDate() {
-  const [cardExpirationDate, setcardExpirationDate] = useState(["", ""]);
-  const [cardExpirationDateError, setError] = useState(["", ""]);
+export const EXPIRATION_DATE: Record<ExpirationKey, string> = {
+  YEAR: "",
+  MONTH: "",
+};
 
-  const validateExpirationDate = (value: string, index: number) => {
-    if (!isUnderMaxLength(value.length, EXPIRATION_DATE.MAX_LENGTH)) {
+const EXPIRATION_DATE_ERROR: Record<ExpirationKey, string> = {
+  YEAR: "",
+  MONTH: "",
+};
+
+export default function useExpirationDateInput() {
+  const [cardExpirationDate, setcardExpirationDate] = useState(EXPIRATION_DATE);
+  const [cardExpirationDateError, setError] = useState(EXPIRATION_DATE_ERROR);
+
+  const validateExpirationDate = (value: string, key: ExpirationKey) => {
+    if (!isUnderMaxLength(value.length, EXPIRATION_DATE_LIMIT.MAX_LENGTH)) {
       setErrorMessage(
         cardExpirationDateError,
-        EXPIRATION_DATE_ERROR.INVALID_LENGTH_ERROR,
-        index,
+        EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
+        key,
         setError
       );
       return false;
@@ -35,35 +47,35 @@ export default function useExpirationDate() {
     if (!isNumber(value)) {
       setErrorMessage(
         cardExpirationDateError,
-        EXPIRATION_DATE_ERROR.NOT_NUMBERIC_ERROR,
-        index,
+        EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC_ERROR,
+        key,
         setError
       );
       return false;
     }
 
     if (
-      index === 0 &&
-      value.length === EXPIRATION_DATE.MAX_LENGTH &&
+      key === "MONTH" &&
+      value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH &&
       !isValidMonth(Number(value))
     ) {
       setErrorMessage(
         cardExpirationDateError,
-        EXPIRATION_DATE_ERROR.MONTH_RANGE_ERROR,
-        index,
+        EXPIRATION_DATE_ERROR_MESSAGE.MONTH_RANGE_ERROR,
+        key,
         setError
       );
       return false;
     }
 
-    setErrorMessage(cardExpirationDateError, "", index, setError);
+    setErrorMessage(cardExpirationDateError, "", key, setError);
     return true;
   };
 
   const onExpirationDateChange = (value: string, index: number) => {
-    if (!validateExpirationDate(value, index)) return;
-    const newDate = [...cardExpirationDate];
-    newDate[index] = value.slice(0, EXPIRATION_DATE.MAX_LENGTH);
+    const key = indexToExpirationKey(index);
+    if (!validateExpirationDate(value, key)) return;
+    const newDate = { ...cardExpirationDate, [key]: value };
     setcardExpirationDate(newDate);
   };
 

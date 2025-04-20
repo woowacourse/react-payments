@@ -1,10 +1,11 @@
 import styles from "./PreviewCardLayout.module.css";
 import PreviewCardLogo from "./PreviewCardLogo";
 import PreviewCardNumber from "./PreviewCardNumber";
+import type { CardKey, ExpirationKey } from "../../types/cardKeyTypes";
 
 interface PreviewCardLayoutProps {
-  cardNumbers: string[];
-  cardExpirationDate: string[];
+  cardNumbers: Record<CardKey, string>;
+  cardExpirationDate: Record<ExpirationKey, string>;
   cardType: string;
 }
 
