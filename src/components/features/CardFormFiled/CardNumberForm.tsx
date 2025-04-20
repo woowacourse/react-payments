@@ -26,6 +26,7 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
           {cardNumbers.map((cardNumber, index) => (
             <Input
               key={`card-${index}`}
+              type={index >= 2 ? 'password' : 'tel'}
               value={cardNumber.value}
               onChange={(e) => onChange(index, e)}
               onBlur={(e) => onBlur(index, e)}

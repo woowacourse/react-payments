@@ -16,6 +16,7 @@ export type Props = {
 
 export const Input = ({
   value = '',
+  type = 'tel',
   minLength = 1,
   maxLength = 4,
   isValid = false,
@@ -24,6 +25,7 @@ export const Input = ({
   return (
     <StyledInputContainer
       value={value}
+      type={type}
       minLength={minLength}
       maxLength={maxLength}
       isValid={isValid}
