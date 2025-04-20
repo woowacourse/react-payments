@@ -102,6 +102,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
+            key={idx}
             value={value}
             onChange={(e) => onChange({ e, idx })}
             onBlur={(e) => checkValidExpirationDate({ e, idx })}

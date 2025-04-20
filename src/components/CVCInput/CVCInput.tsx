@@ -43,6 +43,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
+            key={idx}
             value={value}
             onChange={(e) => onChange({ e, idx })}
             onBlur={(e) => validate({ e, idx })}
