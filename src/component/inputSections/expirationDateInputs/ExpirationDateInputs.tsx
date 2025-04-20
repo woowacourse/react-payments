@@ -1,12 +1,12 @@
-import InputGroup from "../inputGroup/InputGroup";
-import CardInput from "../CardInput";
-import type { CardInputProps } from "../../types/CardInputTypes";
-import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
+import InputGroup from "../../InputGroup";
+import CardInput from "../../CardInput";
+import type { CardInputProps } from "../../../types/CardInputTypes";
+import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
 import type { Dispatch, SetStateAction } from "react";
 import {
   validateCardExpirationDateMM,
   validateCardExpirationDateYY,
-} from "../../validation/validation";
+} from "../../../validation/validation";
 
 interface ExpirationDateInputsProps {
   errorMessages: string;

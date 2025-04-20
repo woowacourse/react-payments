@@ -3,11 +3,11 @@ import Description from "../component/Description";
 import styled from "styled-components";
 import { useState } from "react";
 import { justifyBrandLogo } from "../util/justifyBrandLogo";
-import CardNumberInputs from "../component/inputSections/CardNumberInputs";
+import CardNumberInputs from "../component/inputSections/cardNumberInputs/CardNumberInputs";
 import type { CardInputProps } from "../types/CardInputTypes";
-import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
-import ExpirationDateInputs from "../component/inputSections/ExpirationDateInputs";
-import CVCInputs from "../component/inputSections/CVCInputs";
+import { useErrorMessages } from "../hook/useErrorMessages";
+import ExpirationDateInputs from "../component/inputSections/expirationDateInputs/ExpirationDateInputs";
+import CVCInputs from "../component/inputSections/cvcInputs/CVCInputs";
 import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
 
 const AddCard = () => {
@@ -21,25 +21,7 @@ const AddCard = () => {
     CVC: null,
   });
 
-  const [errorMessages, setErrorMessages] = useState<ErrorMessagesProps>({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-    MM: "",
-    YY: "",
-    CVC: "",
-  });
-
-  const handleErrorMessages = (
-    key: keyof ErrorMessagesProps,
-    message: string
-  ) => {
-    setErrorMessages((prev: ErrorMessagesProps) => ({
-      ...prev,
-      [key]: message,
-    }));
-  };
+  const { errorMessages, handleErrorMessages } = useErrorMessages();
 
   return (
     <Wrap>

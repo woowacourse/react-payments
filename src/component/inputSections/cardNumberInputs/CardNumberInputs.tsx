@@ -1,8 +1,8 @@
-import { validateCardNumber } from "../../validation/validation";
-import InputGroup from "../inputGroup/InputGroup";
-import CardInput from "../CardInput";
-import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
-import type { CardInputProps } from "../../types/CardInputTypes";
+import { validateCardNumber } from "../../../validation/validation";
+import InputGroup from "../../InputGroup";
+import CardInput from "../../CardInput";
+import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
+import type { CardInputProps } from "../../../types/CardInputTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 interface CardNumberInputProps {
@@ -29,14 +29,16 @@ const CardNumberInputs = ({
     >
       {cardNumberKeys.map((key) => (
         <CardInput
-          id="card-number"
           key={key}
+          id="card-number"
           maxLength={4}
           placeholder="1234"
           setCardInput={setCardInput}
           validate={validateCardNumber}
           inputKey={key}
-          handleErrorMessage={(message) => handleErrorMessages(key, message)}
+          handleErrorMessage={(message: string) =>
+            handleErrorMessages(key, message)
+          }
         />
       ))}
     </InputGroup>

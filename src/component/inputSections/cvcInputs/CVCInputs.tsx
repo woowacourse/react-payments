@@ -1,9 +1,9 @@
-import { validateCardCVC } from "../../validation/validation";
-import CardInput from "../CardInput";
-import InputGroup from "../inputGroup/InputGroup";
-import type { ErrorMessagesProps } from "../../types/ErrorMessagesType";
+import { validateCardCVC } from "../../../validation/validation";
+import CardInput from "../../CardInput";
+import InputGroup from "../../InputGroup";
+import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
 import type { Dispatch, SetStateAction } from "react";
-import type { CardInputProps } from "../../types/CardInputTypes";
+import type { CardInputProps } from "../../../types/CardInputTypes";
 
 interface CVCInputsProps {
   errorMessages: string;

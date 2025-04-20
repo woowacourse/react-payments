@@ -15,7 +15,7 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
         <CardGoldChip />
         <CardBrandLogo src={cardBrandLogo[cardType]} />
       </ChipContainer>
-      {cardNumber && <CardNumber cardNumber={cardNumber} />}
+      {cardNumber ? <CardNumber cardNumber={cardNumber} /> : null}
     </CardContainer>
   );
 };
