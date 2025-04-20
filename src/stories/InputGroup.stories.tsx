@@ -9,6 +9,8 @@ import {
   validateCardExpirationDateYY,
   validateCardNumber,
 } from '../validation/validation';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/theme';
 
 const meta: Meta<typeof InputGroup> = {
   title: 'Components/InputGroup',
@@ -17,6 +19,13 @@ const meta: Meta<typeof InputGroup> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  decorators: [
+    Story => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default meta;

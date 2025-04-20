@@ -10,7 +10,6 @@ interface CVCInputProps {
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   errorMessages: ErrorMessagesType;
-  onChange: (value: string) => void;
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({

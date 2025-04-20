@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Card from '../component/card/Card';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/theme';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -31,6 +33,13 @@ const meta: Meta<typeof Card> = {
       description: '카드 정보 객체',
     },
   },
+  decorators: [
+    Story => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default meta;

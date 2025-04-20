@@ -26,6 +26,7 @@ export const validateCardExpirationDateMM = (
 
 export const validateCardExpirationDateYY = (
   expirationDate: string,
+  month?: string,
 ): string | undefined => {
   if (expirationDate.length === 0) return;
 
@@ -35,6 +36,20 @@ export const validateCardExpirationDateYY = (
   if (Number(expirationDate) < 25 || Number(expirationDate) > 99) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
   }
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear() % 100;
+  const currentMonth = currentDate.getMonth() + 1;
+
+  if (
+    Number(expirationDate) < currentYear ||
+    (Number(expirationDate) === currentYear &&
+      month &&
+      Number(month) < currentMonth)
+  ) {
+    return ERROR_MESSAGE.INVALID_EXPIRED_CARD;
+  }
+
   return undefined;
 };
 

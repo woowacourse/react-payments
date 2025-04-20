@@ -4,11 +4,15 @@ import InputGroup from '../InputGroup';
 import Input from '../Input';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { CardInputProps } from '../../types/CardInputTypes';
+import { useState } from 'react';
 
 interface ExpiryDateInputProps {
   handlePeriodErrorMessages: () => string;
   validateCardExpirationDateMM: (value: string) => string | undefined;
-  validateCardExpirationDateYY: (value: string) => string | undefined;
+  validateCardExpirationDateYY: (
+    value: string,
+    month?: string,
+  ) => string | undefined;
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
 }
@@ -20,6 +24,7 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
   setCardInput,
   handleErrorMessages,
 }) => {
+  const [mmValue, setMmValue] = useState<string>('');
   return (
     <>
       <Description
@@ -33,6 +38,7 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
           validate={validateCardExpirationDateMM}
           handleErrorMessage={message => handleErrorMessages('MM', message)}
           onChange={value => {
+            setMmValue(value);
             setCardInput((prev: CardInputProps) => ({
               ...prev,
               MM: value === '' ? null : Number(value),
@@ -42,7 +48,7 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
         <Input
           maxLength={2}
           placeholder="YY"
-          validate={validateCardExpirationDateYY}
+          validate={value => validateCardExpirationDateYY(value, mmValue)}
           handleErrorMessage={message => handleErrorMessages('YY', message)}
           onChange={value => {
             setCardInput((prev: CardInputProps) => ({
