@@ -7,7 +7,7 @@ export const inputValidation = (e: React.ChangeEvent<HTMLInputElement>, validLen
 };
 
 export const checkNumber = (value: string) => {
-  if (!Number.isInteger(Number(value))) throw new Error(`${ERROR_MESSAGES.IS_NOT_NUM}`);
+  if (!/^\d+$/.test(value)) throw new Error(`${ERROR_MESSAGES.IS_NOT_NUM}`);
 };
 
 export const checkValidLength = (value: string, validLength: number) => {
