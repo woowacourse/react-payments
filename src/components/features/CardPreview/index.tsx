@@ -38,7 +38,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   const getDisplayCardNumber = (cardNumber: number, index: number): string => {
     if (!cardNumber) return '';
 
-    return index < 2 ? cardNumber.toString() : '****';
+    return index < 2 ? cardNumber.toString() : '*'.repeat(cardNumber.toString().length);
   };
 
   return (
