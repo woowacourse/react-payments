@@ -10,13 +10,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# storybook
+storybook-static
+
+
 node_modules
 dist
 dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
