@@ -1,6 +1,7 @@
+import { ComponentProps } from "react";
 import { StyledInput } from "./Input.css";
 
-type InputProps = {
+type InputProps = ComponentProps<"input"> & {
   maxLength: number;
   placeholder: string;
   width?: string;
@@ -9,24 +10,8 @@ type InputProps = {
   isError: boolean;
 };
 
-function Input({
-  width,
-  maxLength,
-  placeholder,
-  onChange,
-  value,
-  isError,
-}: InputProps) {
-  return (
-    <StyledInput
-      width={width}
-      placeholder={placeholder}
-      maxLength={maxLength}
-      value={value}
-      onChange={onChange}
-      isError={isError}
-    />
-  );
+function Input(props: InputProps) {
+  return <StyledInput {...props} />;
 }
 
 export default Input;
