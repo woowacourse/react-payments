@@ -1,8 +1,9 @@
 import styles from "./PreviewCardNumber.module.css";
+import type { CardKey, ExpirationKey } from "../../types/cardKeyTypes";
 
 interface PreviewCardNumberProps {
-  cardNumbers: string[];
-  cardExpirationDate: string[];
+  cardNumbers: Record<CardKey, string>;
+  cardExpirationDate: Record<ExpirationKey, string>;
 }
 
 export default function PreviewCardNumber({
@@ -10,20 +11,20 @@ export default function PreviewCardNumber({
   cardExpirationDate,
 }: PreviewCardNumberProps) {
   const expiration =
-    cardExpirationDate[0] === ""
-      ? `${cardExpirationDate[1]}`
-      : `${cardExpirationDate[1]}/${cardExpirationDate[0]}`;
+    cardExpirationDate.MONTH === ""
+      ? `${cardExpirationDate.YEAR}`
+      : `${cardExpirationDate.YEAR}/${cardExpirationDate.MONTH}`;
 
   return (
     <div className={styles["card-layout-number-container"]}>
       <div className={styles["card-layout-number-wrapper"]}>
-        <div className={styles["card-layout-number"]}>{cardNumbers[0]}</div>
-        <div className={styles["card-layout-number"]}>{cardNumbers[1]}</div>
+        <div className={styles["card-layout-number"]}>{cardNumbers.FIRST}</div>
+        <div className={styles["card-layout-number"]}>{cardNumbers.SECOND}</div>
         <div className={styles["card-layout-number"]}>
-          {"·".repeat(cardNumbers[2].length)}
+          {"·".repeat(cardNumbers.THIRD.length)}
         </div>
         <div className={styles["card-layout-number"]}>
-          {"·".repeat(cardNumbers[3].length)}
+          {"·".repeat(cardNumbers.FOURTH.length)}
         </div>
       </div>
       <div className={styles["card-layout-expiration-number"]}>

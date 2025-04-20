@@ -10,7 +10,7 @@ interface CardCvcNumberProps {
   errorMessage: string;
 }
 
-const CONSTANT_CARD_CVC_NUMBER = {
+const CARD_CVC_NUMBER_LABEL = {
   INPUT_TITLE: "CVC 번호를",
   INPUT_SUBTITLE: "CVC",
   PLACE_HOLDER: "123",
@@ -23,11 +23,11 @@ export default function CardCvcNumber({
 }: CardCvcNumberProps) {
   return (
     <section className={styles["card-cvc"]}>
-      <InputTitle inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_TITLE} />
-      <InputSubtitle inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_SUBTITLE} />
+      <InputTitle inputValue={CARD_CVC_NUMBER_LABEL.INPUT_TITLE} />
+      <InputSubtitle inputValue={CARD_CVC_NUMBER_LABEL.INPUT_SUBTITLE} />
       <Input
         onChange={handleChange}
-        placeholder={CONSTANT_CARD_CVC_NUMBER.PLACE_HOLDER}
+        placeholder={CARD_CVC_NUMBER_LABEL.PLACE_HOLDER}
         value={cvcNumbers}
         errorMessage={errorMessage}
       />
