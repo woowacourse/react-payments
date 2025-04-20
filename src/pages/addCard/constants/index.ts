@@ -9,7 +9,7 @@ export const CARD_TYPE_LIST = [
   "국민카드",
 ] as const;
 
-export const CARD_COLOR = {
+export const CARD_TYPE_COLOR = {
   BC카드: "#F04651",
   신한카드: "#0046FF",
   카카오뱅크: "#FFE600",

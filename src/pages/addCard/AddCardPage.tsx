@@ -6,14 +6,16 @@ import useAddCard from "@/pages/addCard/hooks/useAddCard";
 function AddCardPage() {
   const {
     addCardState,
-    previewState: { cardNumberState, expireDate },
+    previewState: { cardType, cardNumberState, expireDate, CVCState },
   } = useAddCard();
 
   return (
     <div className={styles.container}>
       <AddCardPreview
+        cardType={cardType}
         cardNumberState={cardNumberState}
         expireDate={expireDate}
+        CVCState={CVCState}
       />
       <AddCardForm addCardState={addCardState} />
     </div>

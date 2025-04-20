@@ -5,6 +5,9 @@ import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
+import { CardType } from "@/pages/addCard/types";
+import { CVCState } from "../../AddCardForm/components/CVC/hooks/useControlledCVC";
+import { CARD_TYPE_COLOR } from "@/pages/addCard/constants";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,
@@ -13,15 +16,26 @@ const CARD_BRAND_IMAGES = {
 };
 
 interface AddCardPreviewProps {
+  cardType: CardType | null;
   cardNumberState: CardNumberState;
   expireDate: ExpireDateState;
+  CVCState: CVCState;
 }
 
-function AddCardPreview({ cardNumberState, expireDate }: AddCardPreviewProps) {
+function AddCardPreview({
+  cardNumberState,
+  cardType,
+  expireDate,
+  CVCState,
+}: AddCardPreviewProps) {
   const cardBrand = getCardBrand(Number(cardNumberState.first.value));
+  const cardTypeColor = cardType ? CARD_TYPE_COLOR[cardType] : "#333";
 
   return (
-    <div className={styles.previewCard}>
+    <div
+      className={styles.previewCard}
+      style={{ backgroundColor: cardTypeColor }}
+    >
       <div className={styles.previewHeader}>
         <p className={styles.chip} />
         {cardBrand !== "DEFAULT" && (

@@ -4,7 +4,7 @@ import Dropdown from "@/components/Dropdown/Dropdown";
 import { CardType } from "@/pages/addCard/types";
 
 export interface CardTypeDropdownProps {
-  cardType: CardType;
+  cardType: CardType | null;
   handleCardTypeChange: (value: CardType) => void;
 }
 

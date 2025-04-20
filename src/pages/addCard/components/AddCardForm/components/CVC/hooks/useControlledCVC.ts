@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-interface CVCState {
+export interface CVCState {
   value: string;
   isError: boolean;
 }
