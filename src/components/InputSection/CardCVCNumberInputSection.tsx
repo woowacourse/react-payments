@@ -10,8 +10,13 @@ const CARD_CVC_NUMBER_TEXT = {
 };
 
 const CardCVCNumberInputSection = () => {
-  const { cardCVCNumber, setCardCVCNumber, isError, errorMessage } =
-    useCardCVCNumber();
+  const {
+    cardCVCNumber,
+    setCardCVCNumber,
+    handleCardCVCBlur,
+    isError,
+    errorMessage,
+  } = useCardCVCNumber();
 
   return (
     <>
@@ -25,6 +30,7 @@ const CardCVCNumberInputSection = () => {
           onChange={setCardCVCNumber}
           isError={isError.cvcNumber}
           placeholder="123"
+          onBlur={handleCardCVCBlur}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

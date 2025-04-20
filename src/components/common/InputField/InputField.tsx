@@ -5,6 +5,7 @@ type InputFieldProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isError?: boolean;
   placeholder: string;
+  onBlur: () => void;
 };
 
 const InputField = ({
@@ -12,11 +13,13 @@ const InputField = ({
   onChange,
   isError = false,
   placeholder,
+  onBlur,
 }: InputFieldProps) => {
   return (
     <input
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
       className={`${styles.input} ${isError ? styles.error : styles.basic}`}
       placeholder={placeholder}
     />

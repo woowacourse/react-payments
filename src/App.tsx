@@ -12,6 +12,7 @@ function App() {
     setCardNumbers,
     isError: isCardNumbersError,
     errorMessage: cardNumbersErrorMessage,
+    handleCardNumbersBlur,
   } = useCardNumbers();
 
   const {
@@ -19,6 +20,7 @@ function App() {
     setCardExpirationDate,
     isError: isCardExpirationDateError,
     errorMessage: cardExpirationDateErrorMessage,
+    handleCardExpirationDateBlur,
   } = useCardExpirationDate();
 
   return (
@@ -32,12 +34,14 @@ function App() {
           <CardNumbersInputSection
             cardNumbers={cardNumbers}
             setCardNumbers={setCardNumbers}
+            handleCardNumbersBlur={handleCardNumbersBlur}
             isError={isCardNumbersError}
             errorMessage={cardNumbersErrorMessage}
           />
           <CardExpirationDateInputSection
             cardExpirationDate={cardExpirationDate}
             setCardExpirationDate={setCardExpirationDate}
+            handleCardExpirationDateBlur={handleCardExpirationDateBlur}
             isError={isCardExpirationDateError}
             errorMessage={cardExpirationDateErrorMessage}
           />

@@ -12,6 +12,7 @@ export type CardExpirationDateOptions = {
   setCardExpirationDate: (
     target: CardExpirationDateKeys
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardExpirationDateBlur: (target: CardExpirationDateKeys) => void;
   isError: IsError;
   errorMessage: string;
 };

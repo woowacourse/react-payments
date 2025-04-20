@@ -7,6 +7,7 @@ export type CardNumbersOptionsWithoutErrormessage = {
   setCardNumbers: (
     target: CardNumbersKeys
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardNumbersBlur: (target: CardNumbersKeys) => void;
   isError: IsError;
 };
 

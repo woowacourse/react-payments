@@ -7,6 +7,7 @@ import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardCVCBlur: () => void;
   isError: IsError;
   errorMessage: string;
 };
@@ -54,9 +55,14 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     setCardCVCNumber(event.target.value.trim());
   };
 
+  const handleCardCVCBlur = () => {
+    clearError('cvcNumber');
+  };
+
   return {
     cardCVCNumber: cardCVCNumber,
     setCardCVCNumber: handleCardCVCNumberChange,
+    handleCardCVCBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
   };

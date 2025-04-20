@@ -34,7 +34,7 @@ const useCardNumbers = (): CardNumbersOptions => {
     if (!isNumber(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
-    //TODO: focus out 시 카드번호 검증 로직 추가
+
     if (!isValidStringLength({ value: input, maxLength: MAX_INPUT_LENGTH })) {
       return {
         isError: true,
@@ -49,9 +49,12 @@ const useCardNumbers = (): CardNumbersOptions => {
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('target', target);
+      console.log('event', event.target.value.trim());
       const { isError, errorMessage } = getCardNumbersValidationResult(
         event.target.value.trim()
       );
+
       if (isError) {
         setErrorField(target, errorMessage);
         return;
@@ -64,9 +67,14 @@ const useCardNumbers = (): CardNumbersOptions => {
       });
     };
 
+  const handleCardNumbersBlur = (target: CardNumbersKeys) => {
+    clearError(target);
+  };
+
   return {
     cardNumbers,
     setCardNumbers: handleCardNumbersChange,
+    handleCardNumbersBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
   };

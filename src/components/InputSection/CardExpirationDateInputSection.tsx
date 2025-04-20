@@ -12,6 +12,7 @@ export const CARD_EXPIRATION_DATE_TEXT = {
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
   setCardExpirationDate,
+  handleCardExpirationDateBlur,
   isError,
   errorMessage,
 }: CardExpirationDateOptions) => {
@@ -27,12 +28,14 @@ const CardExpirationDateInputSection = ({
           onChange={setCardExpirationDate('month')}
           isError={isError.month}
           placeholder="MM"
+          onBlur={() => handleCardExpirationDateBlur('month')}
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
           onChange={setCardExpirationDate('year')}
           isError={isError.year}
           placeholder="YY"
+          onBlur={() => handleCardExpirationDateBlur('year')}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

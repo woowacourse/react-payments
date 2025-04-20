@@ -136,9 +136,14 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
       });
     };
 
+  const handleCardExpirationDateBlur = (target: CardExpirationDateKeys) => {
+    clearError(target);
+  };
+
   return {
     cardExpirationDate,
     setCardExpirationDate: handleCardExpirationDateChange,
+    handleCardExpirationDateBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
   };

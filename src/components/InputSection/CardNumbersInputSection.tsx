@@ -12,6 +12,7 @@ const CARD_NUMBERS_TEXT = {
 const CardNumbersInputSection = ({
   cardNumbers,
   setCardNumbers,
+  handleCardNumbersBlur,
   isError,
   errorMessage,
 }: CardNumbersOptions) => {
@@ -34,6 +35,7 @@ const CardNumbersInputSection = ({
             key={key}
             value={cardNumbers[key]}
             onChange={setCardNumbers(key)}
+            onBlur={() => handleCardNumbersBlur(key)}
             isError={isError[key]}
             placeholder="1234"
           />
