@@ -5,6 +5,22 @@ import styles from "./CardPreview.module.css";
 const CardPreview = () => {
   const { cardNumbers, month, year } = useCardContext();
 
+  const displayCardNumber = (number: string, index: number) => {
+    const isMasked = index === 2 || index === 3;
+    const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
+  
+    if (!number) {
+      return "    ";
+    }
+  
+    if (isMasked) {
+      return "•".repeat(number.length).padEnd(maxLength, " ");
+    }
+  
+    return number.padEnd(maxLength, " ");
+  };
+  
+
   return (
     <div className={styles.preview}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
@@ -18,14 +34,18 @@ const CardPreview = () => {
         CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER &&
         Number(cardNumbers[0].slice(0, 2)) <=
           CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER && (
-          <img src="./Mastercard.png" alt="mastercard" className={styles.visa} />
+          <img
+            src="./Mastercard.png"
+            alt="mastercard"
+            className={styles.visa}
+          />
         )}
 
       <div className={styles.cardInfo}>
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
             <span key={index} data-testid={`card-number-${index}`}>
-              {index === 2 || index === 3
+              {/* {index === 2 || index === 3
                 ? number
                   ? "•"
                       .repeat(number.length)
@@ -33,14 +53,16 @@ const CardPreview = () => {
                   : "    "
                 : number
                   ? number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, " ")
-                  : "    "}
+                  : "    "} */}
+              {displayCardNumber(number, index)}
             </span>
           ))}
         </div>
         <div className={styles.date}>
           <p>
             {month}
-            {month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH && "/"}
+            {month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH &&
+              "/"}
             {year}
           </p>
         </div>
