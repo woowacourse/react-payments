@@ -28,6 +28,7 @@ const MAX_INPUT_LENGTH = 4;
 
 const useCardNumbers = (): CardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
+
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {
@@ -49,8 +50,6 @@ const useCardNumbers = (): CardNumbersOptions => {
   const handleCardNumbersChange =
     (target: CardNumbersKeys) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log('target', target);
-      console.log('event', event.target.value.trim());
       const { isError, errorMessage } = getCardNumbersValidationResult(
         event.target.value.trim()
       );
@@ -61,10 +60,10 @@ const useCardNumbers = (): CardNumbersOptions => {
       }
 
       clearError(target);
-      setCardNumbers({
-        ...cardNumbers,
+      setCardNumbers((prev) => ({
+        ...prev,
         [target]: event.target.value.trim(),
-      });
+      }));
     };
 
   const handleCardNumbersBlur = (target: CardNumbersKeys) => {
@@ -72,7 +71,7 @@ const useCardNumbers = (): CardNumbersOptions => {
   };
 
   return {
-    cardNumbers,
+    cardNumbers: cardNumbers,
     setCardNumbers: handleCardNumbersChange,
     handleCardNumbersBlur,
     isError: error.isError,
