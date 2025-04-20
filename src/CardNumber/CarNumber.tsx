@@ -1,11 +1,8 @@
 import Input from "../components/Input/Input";
-import InputDescription from "../components/Description/InputDescription";
-import InputSubtitle from "../components/Subtitle/InputSubtitle";
-import InputTitle from "../components/Title/InputTitle";
 import styles from "./CardNumber.module.css";
-import InputErrorMessage from "../components/Input/InputErrorMessage";
 import { indexToCardNumberKey } from "../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../types/cardKeyTypes";
+import Text from "../components/Text/Text";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;
@@ -14,7 +11,7 @@ interface CardNumberProps {
 }
 
 const CARD_NUMBER_LABEL = {
-  INPUT_TITLE: "결제할 카드 번호를",
+  INPUT_TITLE: "결제할 카드 번호를 입력해주세요.",
   INPUT_DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
   INPUT_SUBTITLE: "카드 번호",
 } as const;
@@ -31,9 +28,9 @@ export default function CardNumber({
 
   return (
     <section className={styles["card-number"]}>
-      <InputTitle inputValue={CARD_NUMBER_LABEL.INPUT_TITLE} />
-      <InputDescription inputValue={CARD_NUMBER_LABEL.INPUT_DESCRIPTION} />
-      <InputSubtitle inputValue={CARD_NUMBER_LABEL.INPUT_SUBTITLE} />
+      <Text textType="title">{CARD_NUMBER_LABEL.INPUT_TITLE}</Text>
+      <Text textType="description">{CARD_NUMBER_LABEL.INPUT_DESCRIPTION}</Text>
+      <Text textType="subtitle">{CARD_NUMBER_LABEL.INPUT_SUBTITLE}</Text>
       <div className={styles["card-number__input"]}>
         {CARD_NUMBER_FIELDS.map((key, idx) => (
           <Input
@@ -44,7 +41,7 @@ export default function CardNumber({
           />
         ))}
       </div>
-      <InputErrorMessage message={firstError} />
+      <Text textType="error">{firstError}</Text>
     </section>
   );
 }

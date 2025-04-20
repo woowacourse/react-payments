@@ -1,8 +1,6 @@
-import InputSubtitle from "../components/Subtitle/InputSubtitle";
-import InputTitle from "../components/Title/InputTitle";
 import styles from "./CardCvcNumber.module.css";
 import Input from "../components/Input/Input";
-import InputErrorMessage from "../components/Input/InputErrorMessage";
+import Text from "../components/Text/Text";
 
 interface CardCvcNumberProps {
   handleChange: (value: string) => void;
@@ -11,7 +9,7 @@ interface CardCvcNumberProps {
 }
 
 const CARD_CVC_NUMBER_LABEL = {
-  INPUT_TITLE: "CVC 번호를",
+  INPUT_TITLE: "CVC 번호를 입력해주세요.",
   INPUT_SUBTITLE: "CVC",
   PLACE_HOLDER: "123",
 } as const;
@@ -23,15 +21,15 @@ export default function CardCvcNumber({
 }: CardCvcNumberProps) {
   return (
     <section className={styles["card-cvc"]}>
-      <InputTitle inputValue={CARD_CVC_NUMBER_LABEL.INPUT_TITLE} />
-      <InputSubtitle inputValue={CARD_CVC_NUMBER_LABEL.INPUT_SUBTITLE} />
+      <Text textType="title">{CARD_CVC_NUMBER_LABEL.INPUT_TITLE}</Text>
+      <Text textType="subtitle">{CARD_CVC_NUMBER_LABEL.INPUT_SUBTITLE}</Text>
       <Input
         onChange={handleChange}
         placeholder={CARD_CVC_NUMBER_LABEL.PLACE_HOLDER}
         value={cvcNumbers}
         errorMessage={errorMessage}
       />
-      <InputErrorMessage message={errorMessage} />
+      <Text textType="error">{errorMessage}</Text>
     </section>
   );
 }

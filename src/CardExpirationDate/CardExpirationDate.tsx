@@ -1,11 +1,8 @@
-import InputErrorMessage from "../components/Input/InputErrorMessage";
 import Input from "../components/Input/Input";
-import InputDescription from "../components/Description/InputDescription";
-import InputSubtitle from "../components/Subtitle/InputSubtitle";
-import InputTitle from "../components/Title/InputTitle";
 import styles from "./CardExpirationDate.module.css";
 import { EXPIRATION_FIELDS, type ExpirationKey } from "../types/cardKeyTypes";
 import { indexToExpirationKey } from "../utils/indexToExpirationKey";
+import Text from "../components/Text/Text";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
@@ -14,7 +11,7 @@ interface CardExpirationDateProps {
 }
 
 const EXPIRATION_DATE_LABEL = {
-  INPUT_TITLE: "유효 기간을",
+  INPUT_TITLE: "유효 기간을 입력해주세요.",
   INPUT_DESCRIPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
   INPUT_SUBTITLE: "유효기간",
   PLACE_HOLDER_YEAR: "YY",
@@ -33,9 +30,11 @@ export default function CardExpirationDate({
 
   return (
     <section className="card-expiration-date">
-      <InputTitle inputValue={EXPIRATION_DATE_LABEL.INPUT_TITLE} />
-      <InputDescription inputValue={EXPIRATION_DATE_LABEL.INPUT_DESCRIPTION} />
-      <InputSubtitle inputValue={EXPIRATION_DATE_LABEL.INPUT_SUBTITLE} />
+      <Text textType="title">{EXPIRATION_DATE_LABEL.INPUT_TITLE}</Text>
+      <Text textType="description">
+        {EXPIRATION_DATE_LABEL.INPUT_DESCRIPTION}
+      </Text>
+      <Text textType="subtitle">{EXPIRATION_DATE_LABEL.INPUT_SUBTITLE}</Text>
       <div className={styles["card-number__input"]}>
         <Input
           onChange={(value) => handleChange(value, 0)}
@@ -50,7 +49,7 @@ export default function CardExpirationDate({
           errorMessage={errorMessage.YEAR}
         />
       </div>
-      <InputErrorMessage message={firstError} />
+      <Text textType="error">{firstError}</Text>
     </section>
   );
 }
