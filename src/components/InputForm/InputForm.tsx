@@ -6,7 +6,7 @@ import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
 import { useInputError } from "../../hooks/useInputError";
 
-export interface InputFormProps {
+export interface InputSectionProps {
   type: InputType;
 }
 
@@ -28,7 +28,7 @@ const subTitleVariants = {
   [INPUT_TYPE.cvcNumber]: "CVC",
 };
 
-function InputForm({ type }: InputFormProps) {
+function InputSection({ type }: InputSectionProps) {
   const {
     error,
     setCardNumberError,
@@ -60,4 +60,4 @@ function InputForm({ type }: InputFormProps) {
   );
 }
 
-export default InputForm;
+export default InputSection;
