@@ -44,7 +44,7 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 
 	useEffect(() => {
 		settingBadgeBrand();
-	}, [cardNumbers]);
+	}, [cardNumbers.first]);
 
 	return (
 		<Container>
