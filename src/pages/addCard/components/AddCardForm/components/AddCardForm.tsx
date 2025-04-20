@@ -6,7 +6,7 @@ import CardNumberInputs, {
 import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
 } from "@card/ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
-import CVCInputs, { type CVCInputsProps } from "@card/CVC/components/CVCInputs";
+import CVCInput, { type CVCInputsProps } from "@/card/CVC/components/CVCInput";
 import CardTypeDropdown, {
   CardTypeDropdownProps,
 } from "@card/CardType/components/CardTypeDropdown";
@@ -102,7 +102,7 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
       <CardInputBox
         title="CVC 번호를 입력해 주세요"
         InputComponent={
-          <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />
+          <CVCInput CVCState={CVCState} handleCVCChange={handleCVCChange} />
         }
       />
     </form>

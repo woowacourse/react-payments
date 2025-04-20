@@ -1,4 +1,4 @@
-import styles from "./CVCInputs.module.css";
+import styles from "./CVCInput.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 
@@ -7,7 +7,7 @@ export interface CVCInputsProps {
   handleCVCChange: (value: string) => void;
 }
 
-function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
+function CVCInput({ CVCState, handleCVCChange }: CVCInputsProps) {
   return (
     <div className={styles.container}>
       <Label htmlFor="cvc-input">CVC</Label>
@@ -35,4 +35,4 @@ function CVCInputs({ CVCState, handleCVCChange }: CVCInputsProps) {
   );
 }
 
-export default CVCInputs;
+export default CVCInput;

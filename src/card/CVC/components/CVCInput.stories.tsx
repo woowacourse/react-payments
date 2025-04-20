@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import useControlledCVC from "../hooks/useControlledCVC";
 import { expect, userEvent } from "@storybook/test";
-import CVCInputs from "./CVCInputs";
+import CVCInput from "./CVCInput";
 
 const meta = {
   title: "Component/CVCInput",
-  component: CVCInputs,
+  component: CVCInput,
   args: { CVCState: { isError: false, value: "" }, handleCVCChange: () => {} },
-} satisfies Meta<typeof CVCInputs>;
+} satisfies Meta<typeof CVCInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -24,7 +24,7 @@ export const WithValidationTest: Story = {
   render: () => {
     const { CVCState, handleCVCChange } = useControlledCVC();
 
-    return <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />;
+    return <CVCInput CVCState={CVCState} handleCVCChange={handleCVCChange} />;
   },
   play: async ({ canvasElement }) => {
     const inputElement = canvasElement.querySelector(
