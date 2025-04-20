@@ -33,7 +33,13 @@ const useAddCard = () => {
     handleCVCChange,
   };
 
-  const previewState = { cardNumberState, cardType, expireDate, CVCState };
+  const previewState = {
+    cardNumberState,
+    cardType,
+    expireDate,
+    cardOwner,
+    CVCState,
+  };
 
   return { addCardState, previewState };
 };

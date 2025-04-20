@@ -9,7 +9,7 @@ const useControlledCardOwner = () => {
   );
 
   const handleCardOwnerChange = useCallback((value: string) => {
-    if (value.length > 20) {
+    if (value.length > 15) {
       return;
     }
 

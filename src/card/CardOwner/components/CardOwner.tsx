@@ -19,7 +19,7 @@ function CardOwnerInput({
         id="card-owner-input"
         type="text"
         inputMode="text"
-        maxLength={20}
+        maxLength={15}
         required
         pattern="[가-힣a-zA-Z]*"
         isError={Boolean(cardOwner.errorMessage)}

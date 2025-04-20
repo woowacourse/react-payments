@@ -8,6 +8,7 @@ import { getCardBrand } from "../utils";
 import { CardType } from "@/pages/addCard/types";
 import { CVCState } from "@card/CVC/hooks/useControlledCVC";
 import { CARD_TYPE_COLOR } from "@/card/CardType/constants";
+import { CardOwnerState } from "@/card/CardOwner/types";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,
@@ -19,6 +20,7 @@ interface AddCardPreviewProps {
   cardType: CardType | null;
   cardNumberState: CardNumberState;
   expireDate: ExpireDateState;
+  cardOwner: CardOwnerState;
   CVCState: CVCState;
 }
 
@@ -26,6 +28,7 @@ function AddCardPreview({
   cardNumberState,
   cardType,
   expireDate,
+  cardOwner,
   CVCState,
 }: AddCardPreviewProps) {
   const cardBrand = getCardBrand(Number(cardNumberState.first.value));
@@ -66,6 +69,9 @@ function AddCardPreview({
         <span>{expireDate.MM.value}</span>
         {(expireDate.MM.value || expireDate.YY.value) && <span>/</span>}
         <span>{expireDate.YY.value}</span>
+      </div>
+      <div className={styles.cardOwner}>
+        <span>{cardOwner.value}</span>
       </div>
     </div>
   );
