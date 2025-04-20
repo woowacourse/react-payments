@@ -15,7 +15,7 @@ import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
-} from "../../styled-component/inputs";
+} from "../inputs.css";
 
 const EXPIRATION_PERIOD_LENGTH = 2;
 

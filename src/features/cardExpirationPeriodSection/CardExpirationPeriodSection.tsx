@@ -1,16 +1,7 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardExpirationPeriodInputs from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
-import styled from "styled-components";
+import { StyledContainer } from "./CardExpirationPeriodSection.css";
 import { ExpirationPeriodProps } from "../../\btypes/index.types";
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
-  width: 100%;
-`;
 
 function CardExpirationPeriodSection({
   expirationPeriod,

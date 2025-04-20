@@ -1,15 +1,7 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardNumberInputs from "../../entities/cardNumberInputs/CardNumberInputs";
-import styled from "styled-components";
+import { StyledContainer } from "./cardNumberSection.css";
 import { CardNumberProps } from "../../\btypes/index.types";
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
-`;
 
 function CardNumberSection({ cardNumber, changeCardNumber }: CardNumberProps) {
   return (

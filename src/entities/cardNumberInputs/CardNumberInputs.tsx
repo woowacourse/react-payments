@@ -7,7 +7,7 @@ import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
-} from "../../styled-component/inputs";
+} from "../inputs.css";
 
 const CARD_NUMBER_LENGTH = 4;
 
