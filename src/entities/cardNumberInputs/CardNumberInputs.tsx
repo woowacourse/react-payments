@@ -31,6 +31,21 @@ const errorMessage = {
   number: "숫자만 입력 가능합니다.",
 };
 
+function getValidationFns(length: number, cardNumber: string) {
+  return [
+    { condition: () => cardNumber === NO_ERROR, errorMsg: NO_ERROR },
+    {
+      condition: () => !isValidLength(cardNumber, length),
+      errorMsg: errorMessage.length,
+    },
+    {
+      condition: () => !isValidNumber(cardNumber),
+      errorMsg: errorMessage.number,
+    },
+    { condition: () => true, errorMsg: NO_ERROR },
+  ];
+}
+
 function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
   const [error, setError] = useState({
     [CARD_NUMBER_POSITION.FIRST]: NO_ERROR,
@@ -40,35 +55,18 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
   });
 
   function checkValidation(
-    position: CardNumberPosition,
     length: number,
-    number: string
+    cardNumber: string,
+    cardNumberPosition: CardNumberPosition
   ) {
-    if (number === NO_ERROR) {
-      setError((prev) => {
-        prev[position] = NO_ERROR;
-        return { ...prev };
-      });
-      return;
-    }
+    const validationFns = getValidationFns(length, cardNumber);
 
-    if (!isValidLength(number, length)) {
-      setError((prev) => {
-        prev[position] = errorMessage.length;
-        return { ...prev };
-      });
-      return;
-    } else if (!isValidNumber(number)) {
-      setError((prev) => {
-        prev[position] = errorMessage.number;
-        return { ...prev };
-      });
-      return;
-    }
-
+    const validation = validationFns.find((v) => v.condition());
     setError((prev) => {
-      prev[position] = NO_ERROR;
-      return { ...prev };
+      return {
+        ...prev,
+        [cardNumberPosition]: validation?.errorMsg || NO_ERROR,
+      };
     });
   }
 
@@ -88,7 +86,11 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
         <Input
           value={cardNumber["first"]}
           onChange={(e) => {
-            checkValidation("first", CARD_NUMBER_LENGTH, e.target.value);
+            checkValidation(
+              CARD_NUMBER_LENGTH,
+              e.target.value,
+              CARD_NUMBER_POSITION.FIRST
+            );
             changeCardNumber("first", e.target?.value);
           }}
           width="25%"
@@ -99,7 +101,11 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
         <Input
           value={cardNumber["second"]}
           onChange={(e) => {
-            checkValidation("second", CARD_NUMBER_LENGTH, e.target.value);
+            checkValidation(
+              CARD_NUMBER_LENGTH,
+              e.target.value,
+              CARD_NUMBER_POSITION.SECOND
+            );
             changeCardNumber("second", e.target?.value);
           }}
           width="25%"
@@ -110,7 +116,11 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
         <Input
           value={cardNumber["third"]}
           onChange={(e) => {
-            checkValidation("third", CARD_NUMBER_LENGTH, e.target.value);
+            checkValidation(
+              CARD_NUMBER_LENGTH,
+              e.target.value,
+              CARD_NUMBER_POSITION.THIRD
+            );
             changeCardNumber("third", e.target?.value);
           }}
           width="25%"
@@ -121,7 +131,11 @@ function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
         <Input
           value={cardNumber["fourth"]}
           onChange={(e) => {
-            checkValidation("fourth", CARD_NUMBER_LENGTH, e.target.value);
+            checkValidation(
+              CARD_NUMBER_LENGTH,
+              e.target.value,
+              CARD_NUMBER_POSITION.FOURTH
+            );
             changeCardNumber("fourth", e.target?.value);
           }}
           width="25%"

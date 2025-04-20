@@ -14,20 +14,9 @@ import {
   StyledErrorMessage,
 } from "../inputs.css";
 
-export const EXPIRATION_PERIOD: Record<
-  "MONTH" | "YEAR",
-  keyof ExpirationPeriod
-> = {
+const EXPIRATION_PERIOD: Record<"MONTH" | "YEAR", keyof ExpirationPeriod> = {
   MONTH: "month",
   YEAR: "year",
-};
-
-export type ExpirationPeriodProps = {
-  expirationPeriod: ExpirationPeriod;
-  changeExpirationPeriod: (
-    expirationPeriod: keyof ExpirationPeriod,
-    date: string
-  ) => void;
 };
 
 const EXPIRATION_PERIOD_LENGTH = 2;
@@ -39,6 +28,47 @@ const errorMessage = {
   yearRange: "유효기간은 25~99년 사이여야 합니다.",
 };
 
+type ExpirationPeriodProps = {
+  expirationPeriod: ExpirationPeriod;
+  changeExpirationPeriod: (
+    expirationPeriod: keyof ExpirationPeriod,
+    date: string
+  ) => void;
+};
+
+function getValidationFns(length: number, date: string) {
+  const common = [
+    { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+    {
+      condition: () => !isValidLength(date, length),
+      errorMsg: errorMessage.length,
+    },
+    {
+      condition: () => !isValidNumber(date),
+      errorMsg: errorMessage.number,
+    },
+  ];
+
+  return {
+    month: [
+      { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+      {
+        condition: () => !isValidMonthRange(date),
+        errorMsg: errorMessage.monthRange,
+      },
+      ...common,
+    ],
+    year: [
+      { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+      {
+        condition: () => !isValidYearRange(date),
+        errorMsg: errorMessage.yearRange,
+      },
+      ...common,
+    ],
+  };
+}
+
 function CardExpirationPeriodInputs({
   expirationPeriod,
   changeExpirationPeriod,
@@ -48,65 +78,17 @@ function CardExpirationPeriodInputs({
     year: NO_ERROR,
   });
 
-  function checkCommonValidation(
-    expirationPeriod: keyof ExpirationPeriod,
+  function checkValidation(
     length: number,
-    number: string
+    date: string,
+    type: "year" | "month"
   ) {
-    if (!isValidLength(number, length)) {
-      setError((prev) => {
-        prev[expirationPeriod] = errorMessage.length;
-        return { ...prev };
-      });
-      return;
-    }
-    if (!isValidNumber(number)) {
-      setError((prev) => {
-        prev[expirationPeriod] = errorMessage.number;
-        return { ...prev };
-      });
-      return;
-    }
+    const validations = getValidationFns(length, date);
+    const validation = validations[type].find((v) => v.condition());
+
     setError((prev) => {
-      prev[expirationPeriod] = NO_ERROR;
-      return { ...prev };
+      return { ...prev, [type]: validation?.errorMsg || NO_ERROR };
     });
-  }
-
-  function checkMonthValidation(length: number, number: string) {
-    if (number === NO_ERROR) {
-      setError((prev) => {
-        prev[EXPIRATION_PERIOD.MONTH] = NO_ERROR;
-        return { ...prev };
-      });
-      return;
-    }
-    if (!isValidMonthRange(number)) {
-      setError((prev) => {
-        prev[EXPIRATION_PERIOD.MONTH] = errorMessage.monthRange;
-        return { ...prev };
-      });
-      return;
-    }
-    checkCommonValidation(EXPIRATION_PERIOD.MONTH, length, number);
-  }
-
-  function checkYearValidation(length: number, number: string) {
-    if (number === NO_ERROR) {
-      setError((prev) => {
-        prev[EXPIRATION_PERIOD.YEAR] = NO_ERROR;
-        return { ...prev };
-      });
-      return;
-    }
-    if (!isValidYearRange(number)) {
-      setError((prev) => {
-        prev[EXPIRATION_PERIOD.YEAR] = errorMessage.yearRange;
-        return { ...prev };
-      });
-      return;
-    }
-    checkCommonValidation(EXPIRATION_PERIOD.YEAR, length, number);
   }
 
   function getErrorMessage() {
@@ -125,7 +107,7 @@ function CardExpirationPeriodInputs({
         <Input
           value={expirationPeriod["month"]}
           onChange={(e) => {
-            checkMonthValidation(EXPIRATION_PERIOD_LENGTH, e.target.value);
+            checkValidation(EXPIRATION_PERIOD_LENGTH, e.target.value, "month");
             changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
           }}
           width="50%"
@@ -136,7 +118,7 @@ function CardExpirationPeriodInputs({
         <Input
           value={expirationPeriod["year"]}
           onChange={(e) => {
-            checkYearValidation(EXPIRATION_PERIOD_LENGTH, e.target.value);
+            checkValidation(EXPIRATION_PERIOD_LENGTH, e.target.value, "year");
             changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
           }}
           width="50%"

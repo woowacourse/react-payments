@@ -20,6 +20,21 @@ const errorMessage = {
   number: "숫자만 입력 가능합니다.",
 };
 
+function getValidationFns(length: number, CVCNumber: string) {
+  return [
+    { condition: () => CVCNumber === NO_ERROR, errorMsg: NO_ERROR },
+    {
+      condition: () => !isValidLength(CVCNumber, length),
+      errorMsg: errorMessage.length,
+    },
+    {
+      condition: () => !isValidNumber(CVCNumber),
+      errorMsg: errorMessage.number,
+    },
+    { condition: () => true, errorMsg: NO_ERROR },
+  ];
+}
+
 function CardCVCNumberInputs({
   CVCNumber,
   changeCVCNumber,
@@ -27,20 +42,9 @@ function CardCVCNumberInputs({
   const [error, setError] = useState(NO_ERROR);
 
   function checkValidation(length: number, CVCNumber: string) {
-    const validations = [
-      { condition: () => CVCNumber === NO_ERROR, errorMsg: NO_ERROR },
-      {
-        condition: () => !isValidLength(CVCNumber, length),
-        errorMsg: errorMessage.length,
-      },
-      {
-        condition: () => !isValidNumber(CVCNumber),
-        errorMsg: errorMessage.number,
-      },
-      { condition: () => true, errorMsg: NO_ERROR },
-    ];
+    const validationFns = getValidationFns(length, CVCNumber);
 
-    const validation = validations.find((v) => v.condition());
+    const validation = validationFns.find((v) => v.condition());
     setError(validation?.errorMsg || NO_ERROR);
   }
 
