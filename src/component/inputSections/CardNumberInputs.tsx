@@ -6,20 +6,20 @@ import type { CardInputProps, InputKeyType } from "../../types/CardInputTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 interface CardNumberInputProps {
-  getFirstCardNumberError: () => string;
+  errorMessages: string;
   handleErrorMessages: (key: keyof ErrorMessagesProps, message: string) => void;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
 }
 
 const CardNumberInputs = ({
-  getFirstCardNumberError,
+  errorMessages,
   setCardInput,
   handleErrorMessages,
 }: CardNumberInputProps) => {
   const cardNumberKeys: InputKeyType[] = ["first", "second", "third", "fourth"];
 
   return (
-    <InputGroup label="카드 번호" errorMessages={getFirstCardNumberError()}>
+    <InputGroup label="카드 번호" errorMessages={errorMessages}>
       {cardNumberKeys.map((key) => (
         <CardInput
           key={key}

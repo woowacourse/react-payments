@@ -9,19 +9,19 @@ import {
 } from "../../validation/validation";
 
 interface ExpirationDateInputsProps {
-  getFirstPeriodError: () => string;
+  errorMessages: string;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesProps, message: string) => void;
 }
 
 const ExpirationDateInputs = ({
-  getFirstPeriodError,
+  errorMessages,
   setCardInput,
   handleErrorMessages,
 }: ExpirationDateInputsProps) => {
   const expirationDateKeys: InputKeyType[] = ["MM", "YY"];
   return (
-    <InputGroup label="유효기간" errorMessages={getFirstPeriodError()}>
+    <InputGroup label="유효기간" errorMessages={errorMessages}>
       {expirationDateKeys.map((key) => (
         <CardInput
           key={key}

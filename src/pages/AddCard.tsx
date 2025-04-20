@@ -8,6 +8,7 @@ import type { CardInputProps } from "../types/CardInputTypes";
 import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
 import ExpirationDateInputs from "../component/inputSections/ExpirationDateInputs";
 import CVCInputs from "../component/inputSections/CVCInputs";
+import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
 
 const Wrap = styled.div`
   display: flex;
@@ -60,16 +61,6 @@ const AddCard = () => {
     }));
   };
 
-  const getFirstCardNumberError = () => {
-    const filterErrorMessage = [
-      errorMessages.first,
-      errorMessages.second,
-      errorMessages.third,
-      errorMessages.fourth,
-    ].filter((message) => message.length !== 0);
-    return filterErrorMessage[0];
-  };
-
   const getFirstPeriodError = () => {
     const filterErrorMessage = [errorMessages.YY, errorMessages.MM].filter(
       (message) => message.length !== 0
@@ -91,7 +82,12 @@ const AddCard = () => {
           detailText="본인 명의의 카드만 결제 가능합니다."
         />
         <CardNumberInputs
-          getFirstCardNumberError={getFirstCardNumberError}
+          errorMessages={getFirstErrorMessage([
+            errorMessages.first,
+            errorMessages.second,
+            errorMessages.third,
+            errorMessages.fourth,
+          ])}
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
         />
@@ -101,7 +97,10 @@ const AddCard = () => {
           detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
         />
         <ExpirationDateInputs
-          getFirstPeriodError={getFirstPeriodError}
+          errorMessages={getFirstErrorMessage([
+            errorMessages.YY,
+            errorMessages.MM,
+          ])}
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
         />
