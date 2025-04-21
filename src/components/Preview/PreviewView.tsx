@@ -23,7 +23,6 @@ const PreviewView = ({
         {cardMethodSrc && (
           <CardMethod
             src={cardMethodSrc}
-            style={{ display: cardMethodSrc ? 'block' : 'none' }}
             data-testid="card-method"
             alt="Card Method"
           />
