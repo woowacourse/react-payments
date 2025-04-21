@@ -22,7 +22,9 @@ const Wrapper = () => {
         period={period}
         setPeriod={setPeriod}
         showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}
-        hidePeriodSeparator={() => setIsPeriodSeparatorShowing(false)}
+        hidePeriodSeparator={() =>
+          setIsPeriodSeparatorShowing(period.some((p) => p !== ''))
+        }
       />
       {isPeriodSeparatorShowing && <div data-testid="separator">/</div>}
     </>
@@ -35,7 +37,6 @@ export const ValidInput: Story = {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('expiration-component');
     const inputs = container.querySelectorAll('input');
-    const separator = await canvas.findByTestId('separator');
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], '05');
     await waitFor(() =>
@@ -46,6 +47,7 @@ export const ValidInput: Story = {
     await waitFor(() =>
       expect((inputs[1] as HTMLInputElement).value).toBe('23')
     );
+    const separator = await canvas.findByTestId('separator');
     expect(separator.textContent).toBe('/');
     expect(container.textContent).not.toContain('올바른 유효기간을 입력하세요');
   },
