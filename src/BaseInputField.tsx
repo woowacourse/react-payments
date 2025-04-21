@@ -1,9 +1,8 @@
-import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { StrictPropsWithChildren } from './types/props';
 
 interface BaseInputFieldProps {
   label: string;
-  children: ReactNode;
   errorMessage?: string;
 }
 
@@ -11,7 +10,7 @@ function BaseInputField({
   label,
   children,
   errorMessage,
-}: BaseInputFieldProps) {
+}: StrictPropsWithChildren<BaseInputFieldProps>) {
   return (
     <InputFieldContainer>
       <Label>{label}</Label>

@@ -1,13 +1,16 @@
-import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { StrictPropsWithChildren } from './types/props';
 
 interface InputSectionProps {
   title: string;
   caption?: string;
-  children: ReactNode;
 }
 
-function InputSection({ title, caption, children }: InputSectionProps) {
+function InputSection({
+  title,
+  caption,
+  children,
+}: StrictPropsWithChildren<InputSectionProps>) {
   return (
     <Section>
       <TitleWrapper>
