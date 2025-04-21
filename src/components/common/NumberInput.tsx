@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import isZeroOrExactLength from '../../utils/isExactLength';
+import useNumberInputError from '../../hooks/useNumberInputError';
 
 interface NumberInputProps {
   value: string;
@@ -19,20 +18,7 @@ function NumberInput({
   extraErrorCondition,
   isHidden = false,
 }: NumberInputProps) {
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    if (!isZeroOrExactLength(value, maxLength)) {
-      setIsError(true);
-      return;
-    }
-    if (extraErrorCondition) {
-      setIsError(true);
-      return;
-    }
-
-    setIsError(false);
-  }, [value]);
+  const { isError } = useNumberInputError(value, maxLength, extraErrorCondition);
 
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
     const isNumeric = /^[0-9]*$/.test(e.target.value);
