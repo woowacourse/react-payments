@@ -6,7 +6,7 @@ function App() {
 	return (
 		<BrowserRouter basename="/react-payments/">
 			<Routes>
-				<Route path="/" element={<CardInfo />} />
+				<Route path="/1" element={<CardInfo />} />
 				<Route path="/addSuccess" element={<CardCompletePage />} />
 			</Routes>
 		</BrowserRouter>
