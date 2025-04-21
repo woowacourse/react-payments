@@ -2,19 +2,19 @@ import { useCardContext } from "../../contexts/CardContext";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import styles from "./CardPreview.module.css";
 
-const displayCardNumber = (number: string, index: number) => {
+const displayCardNumber = (blockValue: string, index: number) => {
   const isMasked = index === 2 || index === 3;
   const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
 
-  if (!number) {
+  if (blockValue === '') {
     return "    ";
   }
 
   if (isMasked) {
-    return "•".repeat(number.length).padEnd(maxLength, " ");
+    return "•".repeat(blockValue.length).padEnd(maxLength, " ");
   }
 
-  return number.padEnd(maxLength, " ");
+  return blockValue.padEnd(maxLength, " ");
 };
 
 const CardPreview = () => {
