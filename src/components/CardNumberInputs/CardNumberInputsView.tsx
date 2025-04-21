@@ -27,7 +27,7 @@ const CardNumberInputsView = ({
       <InputTexts
         label="카드 번호"
         placeholder={['1234', '1234', '1234', '1234']}
-        eventHandler={handleInputChange}
+        onChange={handleInputChange}
         state={cardNumbers}
         isErrors={isErrors}
       />

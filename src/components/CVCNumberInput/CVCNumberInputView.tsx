@@ -22,7 +22,7 @@ const CVCNumberInputView = ({
         label="CVC"
         placeholder={['123']}
         state={cvcNumbers}
-        eventHandler={handleInputChange}
+        onChange={handleInputChange}
         isErrors={[isError]}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>

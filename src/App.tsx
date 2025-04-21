@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import CardNumberInputs from './components/CardNumberInputs';
 import ExpirationPeriodInputs from './components/ExpirationPeriodInputs';
@@ -13,6 +13,14 @@ const App = () => {
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
+
+  const showPeriodSeparator = useCallback(() => {
+    setIsPeriodSeparatorShowing(true);
+  }, []);
+
+  const hidePeriodSeparator = useCallback(() => {
+    setIsPeriodSeparatorShowing(period.some((p) => p !== ''));
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -30,10 +38,8 @@ const App = () => {
         <ExpirationPeriodInputs
           period={period}
           setPeriod={setPeriod}
-          showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}
-          hidePeriodSeparator={() =>
-            setIsPeriodSeparatorShowing(period.some((p) => p !== ''))
-          }
+          showPeriodSeparator={showPeriodSeparator}
+          hidePeriodSeparator={hidePeriodSeparator}
         />
         <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
       </Main>

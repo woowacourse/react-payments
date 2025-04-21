@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
+import { useCallback } from 'react';
 
 interface InputTextsProps {
   label: string;
   placeholder: string[];
-  eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   state: string[];
   isErrors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -14,11 +15,18 @@ const InputTexts = ({
   label,
   placeholder,
   state,
-  eventHandler,
+  onChange,
   isErrors,
   onFocus,
   onBlur,
 }: InputTextsProps) => {
+  const onChangeAt = useCallback(
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e, index);
+    },
+    []
+  );
+
   return (
     <InputTextsContainer>
       <Label>{label}</Label>
@@ -30,10 +38,10 @@ const InputTexts = ({
             placeholder={text}
             maxLength={text.length}
             value={state[index]}
-            onChange={(e) => eventHandler(e, index)}
+            onChange={onChangeAt(index)}
             onFocus={onFocus}
             onBlur={onBlur}
-            isError={isErrors ? isErrors[index] : false}
+            isError={isErrors[index]}
           />
         ))}
       </Row>
