@@ -17,18 +17,26 @@ function useCardNumber() {
     }
 
     const checkValidCardNumber = (value: string) => {
+      if (value === '') return false;
       return value.length < 4 || Number(value) < 0;
     };
 
-    const isNotValid = checkValidCardNumber(value);
+    const copy = [...isError];
 
-    setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '');
+    for (let i = 0; i < cardNumber.length; i++) {
+      if (i === n) {
+        const isNotValid = checkValidCardNumber(value);
+        copy[i] = isNotValid ? true : false;
+      } else {
+        const isNotValid = checkValidCardNumber(cardNumber[i]);
+        copy[i] = isNotValid ? true : false;
+      }
+    }
+    setIsError(copy);
 
-    setIsError((prev) => {
-      const newError = [...prev];
-      newError[n] = isNotValid;
-      return newError;
-    });
+    setErrorMessage(
+      copy.some((v) => v === true) ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '',
+    );
 
     setCardNumber((prev) => {
       const newCardNumber = [...prev];
@@ -37,14 +45,9 @@ function useCardNumber() {
     });
   };
 
-  const checkCardNumberError = () => {
-    return isError.some((v) => v === true);
-  };
-
   return {
     cardNumber,
     onChange,
-    checkCardNumberError,
     isError,
     errorMessage,
   };

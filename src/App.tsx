@@ -9,13 +9,7 @@ import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
 
 function App() {
-  const {
-    cardNumber,
-    onChange,
-    checkCardNumberError,
-    isError,
-    errorMessage: cardNumberErrorMessage,
-  } = useCardNumber();
+  const { cardNumber, onChange, isError, errorMessage } = useCardNumber();
 
   const {
     cardValidityPeriod,
@@ -52,7 +46,7 @@ function App() {
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
-          errorMessage={checkCardNumberError() ? cardNumberErrorMessage : ''}
+          errorMessage={errorMessage ? errorMessage : ''}
         >
           <CardNumberField
             cardNumber={cardNumber}
