@@ -48,8 +48,10 @@ function CardNumberField({
 
   return (
     <NumberInputField>
-      <Label htmlFor="first-number">카드 번호</Label>
-      <NumberInputContainer>
+      <Label id="number-label" htmlFor="first-number">
+        카드 번호
+      </Label>
+      <NumberInputContainer role="group" aria-labelledby="number-label">
         <NumberInput
           id="first-number"
           value={cardInfo.firstNumber}

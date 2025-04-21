@@ -37,8 +37,10 @@ function CardExpirationField({
 
   return (
     <NumberInputField>
-      <Label htmlFor="expiration-month">유효기간</Label>
-      <NumberInputContainer>
+      <Label id="expiration-label" htmlFor="expiration-month">
+        유효기간
+      </Label>
+      <NumberInputContainer role="group" aria-labelledby="expiration-label">
         <NumberInput
           id="expiration-month"
           value={cardInfo.month}
