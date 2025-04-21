@@ -1,32 +1,39 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import { Dispatch, SetStateAction } from 'react';
-import { CardNumberType } from '../../App';
+import { CardLogoKey, CardNumberKey, CardNumberType } from '../../App';
 import Input from '../Input/Input';
 
 type Props = {
   cardNumbers: CardNumberType;
-  setCardLogo: Dispatch<SetStateAction<'visa' | 'master' | ''>>;
+  setCardLogo: Dispatch<SetStateAction<CardLogoKey | null>>;
   setCardNumbers: Dispatch<SetStateAction<CardNumberType>>;
 };
 
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  type CardNumberKey = keyof CardNumberType;
-
   const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
-    const isValid = /^[0-9]*$/.test(value);
+    const isValid = Number.isInteger(value);
     setCardNumbers((prev) => ({
       ...prev,
       [field]: { value, isError: isValid }
     }));
 
-    if (cardNumbers.first.value.startsWith('4')) {
-      setCardLogo('visa');
-    } else if (51 <= Number(cardNumbers.first.value.slice(0, 2)) && Number(cardNumbers.first.value.slice(0, 2)) <= 55) {
-      setCardLogo('master');
-    } else {
-      setCardLogo('');
+    if (field !== 'first') {
+      return;
     }
+    setCardLogo(getCardBrand(value));
+  };
+
+  const getCardBrand = (value: string) => {
+    if (value.startsWith('4')) {
+      return 'visa';
+    }
+
+    const firstCardNumber = Number(value.slice(0, 2));
+    if (51 <= firstCardNumber && firstCardNumber <= 55) {
+      return 'master';
+    }
+    return null;
   };
 
   return (

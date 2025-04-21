@@ -1,4 +1,4 @@
-import { CardNumberType, Expiration } from '../../App';
+import { CARD_LOGO, CardLogoType, CardNumberType, Expiration } from '../../App';
 import styles from './Card.module.css';
 
 export default function Card({
@@ -7,7 +7,7 @@ export default function Card({
   expiration
 }: {
   numbers: CardNumberType;
-  cardLogo: 'visa' | 'master' | '';
+  cardLogo: keyof CardLogoType | null;
   expiration: Expiration;
 }) {
   return (
@@ -15,9 +15,7 @@ export default function Card({
       <div className={styles.chipWrapper}>
         <div className={styles.chip} />
 
-        {cardLogo === '' ? null : (
-          <img className={styles.cardLogo} src={cardLogo === 'visa' ? 'images/visa.jpg' : 'images/mastercard.jpg'} />
-        )}
+        {cardLogo && <img className={styles.cardLogo} src={cardLogo === 'visa' ? CARD_LOGO.visa : CARD_LOGO.master} />}
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>
