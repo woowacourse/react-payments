@@ -51,5 +51,5 @@ export default function CardPreview({
 }
 
 function Dot() {
-  return <div className={styles.dot}></div>;
+  return <div className={styles.dot} />;
 }
