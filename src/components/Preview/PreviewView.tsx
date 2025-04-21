@@ -64,7 +64,7 @@ const CardFrame = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ theme }) => theme.colors.cardBackground};
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
 `;
@@ -72,7 +72,7 @@ const CardFrame = styled.div`
 const ICChip = styled.div`
   width: 36px;
   height: 22px;
-  background-color: #ddcd78;
+  background-color: ${({ theme }) => theme.colors.ICChip};
   border-radius: 3px;
   position: absolute;
   top: 8px;
@@ -92,13 +92,13 @@ const CardNumberArea = styled.div`
 
 const CardNumber = styled.span`
   width: 38px;
-  font-family: 'Inter';
-  font-weight: 500;
-  font-size: 14px;
+  font-family: ${({ theme }) => theme.fonts.inter};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.cardInfo};
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.cardText};
 `;
 
 const CardPeriodArea = styled.div`
@@ -114,23 +114,23 @@ const CardPeriodArea = styled.div`
 
 const CardPeriod = styled.span`
   width: 16px;
-  font-family: 'Inter';
-  font-weight: 500;
-  font-size: 14px;
+  font-family: ${({ theme }) => theme.fonts.inter};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.cardInfo};
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.cardText};
 `;
 
 const Separator = styled.span`
-  font-family: 'Inter';
-  font-weight: 500;
-  font-size: 14px;
+  font-family: ${({ theme }) => theme.fonts.inter};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.cardInfo};
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.cardText};
 `;
 
 const CardMethod = styled.img`

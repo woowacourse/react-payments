@@ -39,6 +39,6 @@ const Main = styled.main`
   margin: 0 auto;
   width: 376px;
   height: 100dvh;
-  background-color: #f9f9f9;
+  background-color: ${({ theme }) => theme.colors.background};
   gap: 24px;
 `;

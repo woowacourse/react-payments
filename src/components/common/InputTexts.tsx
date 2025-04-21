@@ -49,8 +49,8 @@ const InputTextsContainer = styled.div`
 `;
 
 const Label = styled.div`
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.label};
   line-height: 15px;
   margin-bottom: 8px;
 `;
@@ -64,15 +64,12 @@ const Row = styled.div`
   gap: 10px;
 `;
 
-interface InputProps {
-  error?: boolean;
-}
-
-const Input = styled.input<InputProps>`
+const Input = styled.input<{ error?: boolean }>`
   width: 100%;
   padding: 8px;
-  border: 1px solid ${(props) => (props.error ? 'red' : '#ccc')};
+  border: 1px solid
+    ${({ theme, error }) => (error ? theme.colors.error : theme.colors.border)};
   border-radius: 2px;
-  font-size: 11px;
+  font-size: ${({ theme }) => theme.fontSizes.label};
   outline: none;
 `;

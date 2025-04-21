@@ -22,16 +22,16 @@ const InputLabelsContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 18px;
-  font-weight: 800;
+  font-size: ${({ theme }) => theme.fontSizes.title};
+  font-weight: ${({ theme }) => theme.fontWeights.extraBold};
   line-height: 100%;
   margin-bottom: 4px;
 `;
 
 const Caption = styled.p`
-  font-weight: 400;
-  font-size: 9.5px;
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
   line-height: 100%;
   vertical-align: middle;
-  color: #8b95a1;
+  color: ${({ theme }) => theme.colors.caption};
 `;

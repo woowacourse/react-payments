@@ -54,11 +54,11 @@ const Container = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  font-weight: 400;
-  font-size: 9.5px;
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
+  font-size: ${({ theme }) => theme.fontSizes.caption};
   line-height: 100%;
   letter-spacing: 0%;
   vertical-align: middle;
-  color: red;
-  height: 9.5px;
+  color: ${({ theme }) => theme.colors.error};
+  height: ${({ theme }) => theme.fontSizes.caption};
 `;
