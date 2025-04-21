@@ -1,4 +1,4 @@
-import { CardInfo } from '../../../shared/type/types';
+import CardInfo from '../../../features/cardInfo/model/CardInfo';
 import './preview.css';
 
 const getCardImageSrc = (cardNumber = '') => {
