@@ -1,34 +1,11 @@
 import styled from '@emotion/styled';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxLength: number;
-  placeholder: string;
-  isError: boolean;
+  isError?: boolean;
 };
 
-const Input = ({
-  value,
-  onChange,
-  onBlur,
-  maxLength,
-  placeholder,
-  isError,
-  ...props
-}: InputProps) => {
-  return (
-    <StyledInput
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      isError={isError}
-      {...props}
-    />
-  );
+const Input = ({ isError, ...props }: InputProps) => {
+  return <StyledInput isError={isError} {...props} />;
 };
 
 export default Input;
