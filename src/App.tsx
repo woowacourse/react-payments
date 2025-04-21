@@ -12,8 +12,6 @@ function App() {
   const {
     cardNumber,
     onChange,
-    checkCardNumberError,
-    isError,
     errorMessage: cardNumberErrorMessage,
   } = useCardNumber();
 
@@ -41,6 +39,17 @@ function App() {
     }
   };
 
+  const getErrorMessageFromList = (errorMessageList: string[]) => {
+    const filteredErrorMessageList = errorMessageList.filter(
+      (errorMessage) => errorMessage !== '',
+    );
+
+    if (filteredErrorMessageList.length === 0) {
+      return '';
+    }
+    return filteredErrorMessageList[0];
+  };
+
   return (
     <AppLayout>
       <CardPreview
@@ -51,11 +60,13 @@ function App() {
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
-          errorMessage={checkCardNumberError() ? cardNumberErrorMessage : ''}
+          errorMessage={getErrorMessageFromList(cardNumberErrorMessage)}
         >
           <CardNumberField
             cardNumber={cardNumber}
-            isError={isError}
+            isError={cardNumberErrorMessage.map((errorMessage) =>
+              Boolean(errorMessage),
+            )}
             onChange={onChange}
           />
         </CardInputSection>
