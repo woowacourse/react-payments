@@ -19,7 +19,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
 
   return (
     <StyledCardNumberInput>
-      <StyledLabel>카드 번호</StyledLabel>
+      <StyledLabel htmlFor="card-number">카드 번호</StyledLabel>
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
@@ -30,6 +30,7 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder={CARD_NUMBER.PLACEHOLDER}
             isError={isErrorStates[idx]}
+            id="card-number"
           />
         ))}
       </StyledInputWrapper>

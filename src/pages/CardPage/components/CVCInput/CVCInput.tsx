@@ -19,7 +19,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
 
   return (
     <StyledCVCInput>
-      <StyledLabel>CVC</StyledLabel>
+      <StyledLabel htmlFor="cvc">CVC</StyledLabel>
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
@@ -30,6 +30,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
             maxLength={CVC.MAX_LENGTH}
             placeholder={CVC.PLACEHOLDER}
             isError={isErrorStates[idx]}
+            id="cvc"
           />
         ))}
       </StyledInputWrapper>

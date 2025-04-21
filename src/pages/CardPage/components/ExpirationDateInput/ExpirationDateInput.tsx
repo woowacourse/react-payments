@@ -16,7 +16,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
 
   return (
     <StyledExpirationDateInput>
-      <StyledLabel>유효기간</StyledLabel>
+      <StyledLabel htmlFor="expiration-date">유효기간</StyledLabel>
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
@@ -27,11 +27,14 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
             maxLength={EXPIRATION_DATE.MAX_LENGTH}
             placeholder={EXPIRATION_DATE.PLACEHOLDER[idx]}
             isError={isErrorStates[idx]}
+            id="expiration-date"
           />
         ))}
       </StyledInputWrapper>
       <StyledHelperTextWrapper>
-        {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>}
+        {errorMessage.length > 0 && (
+          <HelperText text={errorMessage} type={'isError'} aria-live="polite" />
+        )}
       </StyledHelperTextWrapper>
     </StyledExpirationDateInput>
   );
