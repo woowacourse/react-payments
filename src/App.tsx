@@ -1,9 +1,11 @@
-import "./App.css";
+import CardPage from './pages/CardPage/CardPage';
+import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <GlobalStyles />
+      <CardPage />
     </>
   );
 }

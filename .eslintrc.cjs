@@ -11,9 +11,32 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
+    "max-params": ["error", 2],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { exceptAfterSingleLine: true },
     ],
+    "max-depth": ["error", 1],
+    "no-console": "off",
+    "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
+    "import/extensions": "off",
+    "class-methods-use-this": "off",
+    "no-await-in-loop": "off",
+    "arrow-body-style": "off",
+    "no-return-await": "off",
+    "no-constant-condition": "off",
+    "prettier/prettier": "off",
+    "no-param-reassign": "off",
   },
+  env: {
+    es6: true,
+    node: true,
+    browser: true,
+  },
+  parserOptions: {
+    ecmaVersion: "latest",
+  },
+  extends: ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
+  ignorePatterns: ["cypress/**"],
 };
