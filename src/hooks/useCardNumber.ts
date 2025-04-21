@@ -1,7 +1,8 @@
 import { useState, ChangeEvent } from 'react';
-import { CardNumber, CardNumberError } from '../types/types.ts';
+import { CardNumber, CardNumberError } from '../types';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_NUMBER_ERROR } from '../constants';
+import { areAllValuesFalse, areAllValuesNotNull } from "../utils/objectUtils";
 
 export const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -56,30 +57,11 @@ export const useCardNumber = () => {
   };
 
   const isCardNumberValid = () => {
-    const { first, second, third, forth } = cardNumber;
-    return (
-      first !== null &&
-      second !== null &&
-      third !== null &&
-      forth !== null &&
-      !cardNumberError.first &&
-      !cardNumberError.second &&
-      !cardNumberError.third &&
-      !cardNumberError.forth
-    );
+    return areAllValuesNotNull(cardNumber) && areAllValuesFalse(cardNumberError);
   };
 
   const getCardNumberErrorMessage = (): string | null => {
-    if (
-      !cardNumberError.first &&
-      !cardNumberError.second &&
-      !cardNumberError.third &&
-      !cardNumberError.forth
-    ) {
-      return null;
-    }
-
-    return CARD_NUMBER_ERROR.onlyNumbers;
+    return areAllValuesFalse(cardNumberError) ? null : CARD_NUMBER_ERROR.onlyNumbers;
   };
 
   return {
