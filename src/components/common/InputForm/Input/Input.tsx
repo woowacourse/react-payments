@@ -1,25 +1,29 @@
-import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
-import styles from './Input.module.css';
+import {
+  ComponentProps,
+  Dispatch,
+  forwardRef,
+  SetStateAction,
+  useState,
+  Ref,
+} from "react";
+import styles from "./Input.module.css";
 
-export interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
+export interface InputProps extends Omit<ComponentProps<"input">, "onChange"> {
   onChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     setState: Dispatch<SetStateAction<boolean>>
   ) => void;
 }
 
-function Input({
-  type,
-  onChange,
-  name,
-  id,
-  placeholder,
-  maxLength,
-}: InputProps) {
+function Input(
+  { type, onChange, name, id, placeholder, maxLength }: InputProps,
+  ref: Ref<HTMLInputElement>
+) {
   const [isValid, setIsValid] = useState<boolean>(true);
 
   return (
     <input
+      ref={ref}
       type={type}
       name={name}
       id={id}
@@ -31,4 +35,4 @@ function Input({
   );
 }
 
-export default Input;
+export default forwardRef<HTMLInputElement, InputProps>(Input);
