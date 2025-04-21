@@ -4,7 +4,7 @@ import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import PreviewCard from '../PreviewCard/PreviewCard';
 import Text from '../Text/Text';
-import { CARD_PAGE_TEXT } from '../../constants/cardPageText';
+import { CARD_PAGE_TEXT } from './cardPageText';
 import useInputArrayState from '../../hooks/useInputArrayState';
 
 export type HandleInputParams = {
