@@ -1,7 +1,8 @@
 import { useCardContext } from "../../contexts/CardContext";
-import InputContainer from "../InputContainer/InputContainer";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import Input from "../Input/Input";
+import InputContainer from "../InputContainer/InputContainer";
 
 const CardNumbersInput = () => {
   const { cardNumbers, cardNumbersHelperText, cardNumbersErrorIndex, cardNumbersInputRefs, handleCardNumbers } = useCardContext();
@@ -14,7 +15,7 @@ const CardNumbersInput = () => {
       <label className="label">카드 번호</label>
       <div className="inputContainer">
         {cardNumbers.map((value, index) => (
-          <input
+          <Input
             key={index}
             placeholder="1234"
             name={`card${index + 1}`}
@@ -23,7 +24,7 @@ const CardNumbersInput = () => {
             ref={(element) => {
               cardNumbersInputRefs.current.push(element);
             }}
-            className={`input ${index === cardNumbersErrorIndex && "errorInput"}`}
+            error={index === cardNumbersErrorIndex}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
           />
         ))}

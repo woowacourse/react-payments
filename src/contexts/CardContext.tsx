@@ -47,7 +47,9 @@ interface CardContextType {
 const CardContext = createContext<CardContextType | null>(null);
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(["", "", "", ""]);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(
+    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""),
+  );
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [CVC, setCVC] = useState("");

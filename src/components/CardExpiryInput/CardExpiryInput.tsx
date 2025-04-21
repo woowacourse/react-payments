@@ -2,6 +2,7 @@ import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
+import Input from "../Input/Input";
 
 const CardExpiryInput = () => {
   const {
@@ -22,7 +23,7 @@ const CardExpiryInput = () => {
         유효기간
       </label>
       <div className={`inputContainer`}>
-        <input
+        <Input
           type="text"
           name="month"
           placeholder="MM"
@@ -31,10 +32,10 @@ const CardExpiryInput = () => {
           ref={(element) => {
             expiryInputRefs.current[0] = element;
           }}
-          className={`input ${expiryErrorIndex === 0 && "errorInput"}`}
+          error={expiryErrorIndex === 0}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
-        <input
+        <Input
           type="text"
           name="year"
           placeholder="YY"
@@ -43,7 +44,7 @@ const CardExpiryInput = () => {
           ref={(element) => {
             expiryInputRefs.current[1] = element;
           }}
-          className={`input ${expiryErrorIndex === 1 && "errorInput"}`}
+          error={expiryErrorIndex === 0}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
       </div>
