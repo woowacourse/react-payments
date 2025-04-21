@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Input from "./Input";
 import { useState } from "react";
+import { InputProps } from "../../types/componentPropsType";
 
 const meta = {
   title: "MyComponent/MyInput",
   component: Input,
   tags: ["autodocs"],
-} satisfies Meta<typeof Input>;
+} satisfies Meta<InputProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<InputProps>;
 
 export const Primary: Story = {
   args: {
@@ -18,7 +19,7 @@ export const Primary: Story = {
     maxLength: 4,
     value: "",
   },
-  render: (args: any) => {
+  render: (args) => {
     const [value, setValue] = useState(args.value);
 
     return (

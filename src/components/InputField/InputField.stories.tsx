@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputField from "./InputField";
 import { useState } from "react";
+import { InputFieldProps } from "../../types/componentPropsType";
 
 const meta = {
   title: "MyComponent/MyInputField",
   component: InputField,
   tags: ["autodocs"],
-} satisfies Meta<typeof InputField>;
+} satisfies Meta<InputFieldProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof InputField>;
+type Story = StoryObj<InputFieldProps>;
 
 export const UniqueNumberInputField: Story = {
   args: {
@@ -20,7 +21,7 @@ export const UniqueNumberInputField: Story = {
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "uniqueNumber",
   },
-  render: (args: any) => {
+  render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
     return (
       <InputField
@@ -43,7 +44,7 @@ export const ExpirationDateInputField: Story = {
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "expirationDate",
   },
-  render: (args: any) => {
+  render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
     return (
       <InputField
@@ -66,7 +67,7 @@ export const CvcNumberInputField: Story = {
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "cvcNumber",
   },
-  render: (args: any) => {
+  render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
     return (
       <InputField

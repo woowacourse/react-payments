@@ -85,7 +85,7 @@
 - [x] CardInformation 도메인 -> use- 붙이기 (훅사용)
 - [x] keyof CardInformationType 수정 (formContainer 파일)
 - [ ] storybook autodocs 주석처리
-- [ ] storybook 타입 에러 (args:any)
+- [x] storybook 타입 에러 (args:any)
 - [x] previewCard uniqueNumber 뒷 8자리 마스킹 처리
 - [x] setState((prev) => {...})로 변경
 - [x] errorMessage 컴포넌트 분리

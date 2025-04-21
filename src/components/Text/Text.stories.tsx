@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "./Text";
+import { TextProps } from "../../types/componentPropsType";
 
 const meta = {
   title: "MyComponent/MyText",
   component: Text,
   tags: ["autodocs"],
-} satisfies Meta<typeof Text>;
+} satisfies Meta<TextProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<TextProps>;
 
 export const TitleText: Story = {
   args: {

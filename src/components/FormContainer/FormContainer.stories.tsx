@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import FormContainer from "./FormContainer";
 import { useState } from "react";
+import { FormContainerProps } from "../../types/componentPropsType";
 
 const meta = {
   title: "MyComponent/MyFormContainer",
   component: FormContainer,
   tags: ["autodocs"],
-} satisfies Meta<typeof FormContainer>;
+} satisfies Meta<FormContainerProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof FormContainer>;
+type Story = StoryObj<FormContainerProps>;
 
 export const Primary: Story = {
   args: {
     cardInformationState: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
-    setCardInformationState: () => {},
   },
-  render: (args: any) => {
+  render: (args) => {
     const [cardInformation, setCardInformation] = useState(args.cardInformationState);
     return <FormContainer cardInformationState={cardInformation} setCardInformationState={setCardInformation} />;
   },

@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import FormSection from "./FormSection";
 import { useState } from "react";
+import { FormSectionProps } from "../../types/componentPropsType";
 
 const meta = {
   title: "MyComponent/MyFormSection",
   component: FormSection,
   tags: ["autodocs"],
-} satisfies Meta<typeof FormSection>;
+} satisfies Meta<FormSectionProps>;
 
 export default meta;
 
-type Story = StoryObj<typeof FormSection>;
+type Story = StoryObj<FormSectionProps>;
 
 export const Primary: Story = {
   args: {
@@ -25,8 +26,8 @@ export const Primary: Story = {
       setCardInformation: () => {},
     },
   },
-  render: (args: any) => {
-    const [cardInformation, setCardInformation] = useState(args.cardInformation);
+  render: (args) => {
+    const [cardInformation, setCardInformation] = useState(args.inputFieldData.cardInformation);
     return (
       <FormSection
         title={args.title}
