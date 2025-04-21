@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { CardType } from '../config/card';
+import { CardType } from '../../config/card';
 import {
   CardNumberInputType,
   ExpirationDateInputType,
-} from '../config/inputField';
-import CardInfoBox from './CardInfoBox';
+} from '../../config/inputField';
+import CardInfoBox from './CardInfoBox/CardInfoBox';
 
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;

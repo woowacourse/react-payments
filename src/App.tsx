@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import CardPreview from './CardPreviw/CardPreview';
-
-import CardNumberInputField from './InputField/CardNumberInputField';
-import InputSection from './InputSection';
-import ExpirationDateInputField from './InputField/ExpirationDateInputField';
-import CVCInputField from './InputField/CVCInputField';
+import CardPreview from './components/CardPreviw/CardPreview';
 import { useState } from 'react';
 import { CardType } from './config/card';
 import {
@@ -12,6 +7,10 @@ import {
   CVCInputValueType,
   ExpirationDateInputType,
 } from './config/inputField';
+import InputSection from './components/InputSection/InputSection';
+import CardNumberInputField from './components/InputField/CardNumberInputField/CardNumberInputField';
+import ExpirationDateInputField from './components/InputField/ExpirationDateInputField/ExpirationDateInputField';
+import CVCInputField from './components/InputField/CVCInputField/CVCInputField';
 
 function App() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
