@@ -44,9 +44,7 @@ export default meta;
 type Story = StoryObj<typeof CardExpiryInput>;
 
 const Template = () => {
-  return (
-    <CardExpiryInput />
-  );
+  return <CardExpiryInput />;
 };
 
 export const Valid_CardExpiryInput: Story = {

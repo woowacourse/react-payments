@@ -35,7 +35,7 @@ interface CardContextType {
   cardNumbersErrorIndex: number | null;
   cardNumbersInputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
   handleCardNumbers: (
-    index: number
+    index: number,
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   CVCHelperText: string;
@@ -66,7 +66,6 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const [CVCHelperText, setCVCHelperText] = useState("");
   const CVCInputRef = useRef<HTMLInputElement | null>(null);
-
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -108,7 +107,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         validateFirstCardNumbers(newCardNumbers[0]);
         validateCardNumbers(
           newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+          CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
         );
         if (cardNumbersHelperText !== "") {
           cardNumbersInputRefs.current[index]?.focus();

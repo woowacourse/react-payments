@@ -6,7 +6,7 @@ const displayCardNumber = (blockValue: string, index: number) => {
   const isMasked = index === 2 || index === 3;
   const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
 
-  if (blockValue === '') {
+  if (blockValue === "") {
     return "    ";
   }
 

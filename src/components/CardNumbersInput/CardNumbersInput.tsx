@@ -5,7 +5,13 @@ import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
 
 const CardNumbersInput = () => {
-  const { cardNumbers, cardNumbersHelperText, cardNumbersErrorIndex, cardNumbersInputRefs, handleCardNumbers } = useCardContext();
+  const {
+    cardNumbers,
+    cardNumbersHelperText,
+    cardNumbersErrorIndex,
+    cardNumbersInputRefs,
+    handleCardNumbers,
+  } = useCardContext();
 
   return (
     <InputContainer
