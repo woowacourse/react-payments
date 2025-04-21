@@ -29,13 +29,13 @@ const ExpirationPeriodInputs = ({
   hidePeriodSeparator,
 }: ExpirationPeriodInputsProps) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<boolean[]>([false, false]);
+  const [isErrors, setIsErrors] = useState<boolean[]>([false, false]);
 
   useEffect(() => {
-    if (errors.every((error) => error === false)) {
+    if (isErrors.every((error) => error === false)) {
       setErrorMessage('');
     }
-  }, [errors]);
+  }, [isErrors]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -79,13 +79,13 @@ const ExpirationPeriodInputs = ({
 
       if (!valid) {
         setErrorMessage(message);
-        setErrors((prevErr) => {
+        setIsErrors((prevErr) => {
           const newErrors = [...prevErr];
           newErrors[index] = true;
           return newErrors;
         });
       } else {
-        setErrors((prevErr) => {
+        setIsErrors((prevErr) => {
           const newErrors = [...prevErr];
           newErrors[index] = false;
           return newErrors;
@@ -99,7 +99,7 @@ const ExpirationPeriodInputs = ({
     <ExpirationPeriodInputsView
       period={period}
       errorMessage={errorMessage}
-      errors={errors}
+      isErrors={isErrors}
       handleInputChange={handleInputChange}
       onFocus={showPeriodSeparator}
       onBlur={hidePeriodSeparator}

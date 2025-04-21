@@ -14,13 +14,18 @@ const CardNumberInputs = ({
   setCardNumbers,
 }: CardNumberInputsProps) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
+  const [isErrors, setIsErrors] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   useEffect(() => {
-    if (errors.every((error) => error === false)) {
+    if (isErrors.every((error) => error === false)) {
       setErrorMessage('');
     }
-  }, [errors]);
+  }, [isErrors]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -31,14 +36,14 @@ const CardNumberInputs = ({
       const newState = [...prev];
       if (/^[0-9]*$/.test(value) && value.length <= CARD_NUMBERS_LENGTH) {
         newState[index] = value;
-        setErrors((prevErrors) => {
+        setIsErrors((prevErrors) => {
           const newErrors = [...prevErrors];
           newErrors[index] = false;
           return newErrors;
         });
       } else {
         setErrorMessage(ERROR_MESSAGE);
-        setErrors((prevErrors) => {
+        setIsErrors((prevErrors) => {
           const newErrors = [...prevErrors];
           newErrors[index] = true;
           return newErrors;
@@ -52,7 +57,7 @@ const CardNumberInputs = ({
     <CardNumberInputsView
       cardNumbers={cardNumbers}
       errorMessage={errorMessage}
-      errors={errors}
+      isErrors={isErrors}
       handleInputChange={handleInputChange}
     />
   );

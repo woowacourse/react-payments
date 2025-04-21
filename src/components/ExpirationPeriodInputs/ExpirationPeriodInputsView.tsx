@@ -6,7 +6,7 @@ import InputTexts from '../common/InputTexts';
 export interface ExpirationPeriodInputsViewProps {
   period: string[];
   errorMessage: string;
-  errors: boolean[];
+  isErrors: boolean[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -18,7 +18,7 @@ export interface ExpirationPeriodInputsViewProps {
 const ExpirationPeriodInputsView = ({
   period,
   errorMessage,
-  errors,
+  isErrors,
   handleInputChange,
   onFocus,
   onBlur,
@@ -34,7 +34,7 @@ const ExpirationPeriodInputsView = ({
         placeholder={['MM', 'YY']}
         state={period}
         eventHandler={handleInputChange}
-        errors={errors}
+        isErrors={isErrors}
         onFocus={onFocus}
         onBlur={onBlur}
       />

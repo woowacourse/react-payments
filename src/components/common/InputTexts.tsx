@@ -6,7 +6,7 @@ interface InputTextsProps {
   placeholder: string[];
   eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   state: string[];
-  errors: boolean[];
+  isErrors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -16,7 +16,7 @@ const InputTexts = ({
   placeholder,
   state,
   eventHandler,
-  errors,
+  isErrors,
   onFocus,
   onBlur,
 }: InputTextsProps) => {
@@ -34,7 +34,7 @@ const InputTexts = ({
             onChange={(e) => eventHandler(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
-            error={errors ? errors[index] : false}
+            isError={isErrors ? isErrors[index] : false}
           />
         ))}
       </Row>
@@ -64,11 +64,11 @@ const Row = styled.div`
   gap: 10px;
 `;
 
-const Input = styled.input<{ error?: boolean }>`
+const Input = styled.input<{ isError: boolean }>`
   width: 100%;
   padding: 8px;
   border: 1px solid
-    ${({ theme, error }) => (error ? theme.colors.error : theme.colors.border)};
+    ${({ theme, isError }) => (isError ? theme.colors.error : theme.colors.border)};
   border-radius: 2px;
   font-size: ${({ theme }) => theme.fontSizes.label};
   outline: none;

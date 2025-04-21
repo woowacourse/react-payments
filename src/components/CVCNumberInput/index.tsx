@@ -11,7 +11,7 @@ const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const CVCNumberInput = ({ cvcNumbers, setCvcNumbers }: CVCNumberInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCvcNumbers((prev) => {
@@ -20,10 +20,10 @@ const CVCNumberInput = ({ cvcNumbers, setCvcNumbers }: CVCNumberInputProps) => {
       if (/^[0-9]*$/.test(value) && value.length <= CVC_NUMBERS_LENGTH) {
         newState[0] = value;
         setErrorMessage('');
-        setError(false);
+        setIsError(false);
       } else {
         setErrorMessage(ERROR_MESSAGE);
-        setError(true);
+        setIsError(true);
       }
       return newState;
     });
@@ -33,7 +33,7 @@ const CVCNumberInput = ({ cvcNumbers, setCvcNumbers }: CVCNumberInputProps) => {
     <CVCNumberInputView
       cvcNumbers={cvcNumbers}
       errorMessage={errorMessage}
-      error={error}
+      isError={isError}
       handleInputChange={handleInputChange}
     />
   );

@@ -6,14 +6,14 @@ import InputTexts from '../common/InputTexts';
 export interface CVCNumberInputViewProps {
   cvcNumbers: string[];
   errorMessage: string;
-  error: boolean;
+  isError: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CVCNumberInputView = ({
   cvcNumbers,
   errorMessage,
-  error,
+  isError,
   handleInputChange,
 }: CVCNumberInputViewProps) => {
   return (
@@ -24,7 +24,7 @@ const CVCNumberInputView = ({
         placeholder={['123']}
         state={cvcNumbers}
         eventHandler={handleInputChange}
-        errors={[error]}
+        isErrors={[isError]}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>

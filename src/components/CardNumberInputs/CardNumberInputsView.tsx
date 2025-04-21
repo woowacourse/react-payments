@@ -6,7 +6,7 @@ import InputTexts from '../common/InputTexts';
 export interface CardNumberInputsViewProps {
   cardNumbers: string[];
   errorMessage: string;
-  errors: boolean[];
+  isErrors: boolean[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -16,7 +16,7 @@ export interface CardNumberInputsViewProps {
 const CardNumberInputsView = ({
   cardNumbers,
   errorMessage,
-  errors,
+  isErrors,
   handleInputChange,
 }: CardNumberInputsViewProps) => {
   return (
@@ -30,7 +30,7 @@ const CardNumberInputsView = ({
         placeholder={['1234', '1234', '1234', '1234']}
         eventHandler={handleInputChange}
         state={cardNumbers}
-        errors={errors}
+        isErrors={isErrors}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
