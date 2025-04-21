@@ -31,7 +31,7 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
 	};
 
-	const inputs = [<Input maxLength={INPUT_MAX_LENGTH} isError={error.length > 0} placeholder="123" value={cvcNumber} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />];
+	const inputs = [<Input maxLength={INPUT_MAX_LENGTH} isError={!!error} placeholder="123" value={cvcNumber} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />];
 
 	return (
 		<CardNumberWrap>

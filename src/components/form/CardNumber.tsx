@@ -43,7 +43,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 	const inputs = orderLabels.map((label: keyof cardNumber) => (
 		<Input
 			key={label}
-			isError={error[label].length > 0}
+			isError={!!error[label]}
 			placeholder="1234"
 			value={cardNumber[label]}
 			maxLength={INPUT_MAX_LENGTH}

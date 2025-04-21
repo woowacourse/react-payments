@@ -64,7 +64,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 		return (
 			<Input
-				isError={error[orderLabels[index]].length > 0}
+				isError={!!error[orderLabels[index]]}
 				placeholder={placeholderMap[orderLabels[index]]}
 				value={expirationDate[orderLabels[index]]}
 				maxLength={INPUT_MAX_LENGTH}
