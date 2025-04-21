@@ -20,7 +20,7 @@ export const CardPreviewWrapper = styled.div<{ CardBrandType: CardBrandType | nu
   display: flex;
   flex-direction: column;
   padding: 8px 12px;
-  gap: 14px;
+  gap: 28px;
   color: #fff;
   font-size: 18px;
 `;
@@ -29,8 +29,8 @@ export const CardPreviewTop = styled.div`
   justify-content: space-between;
 `;
 export const ICChip = styled.div`
-  width: 36px;
-  height: 22px;
+  width: 46px;
+  height: 32px;
   background-color: #ddcd78;
   border: 0.5px solid #ddcd78;
   border-radius: 2.5px;
@@ -38,8 +38,26 @@ export const ICChip = styled.div`
 
 export const CardPreviewMiddle = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 38px;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+  padding-left: 10px;
+`;
+
+export const CardPreviewMiddleText = styled.span`
+  font-size: 22px;
+`;
+
+export const CardPreviewDateBox = styled.div`
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  padding-left: 10px;
+`;
+
+export const CardPreviewDateBoxText = styled.span`
+  font-size: 22px;
 `;

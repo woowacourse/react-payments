@@ -20,22 +20,22 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate, 
         {cardType === 'master' && <MasterCard width={36} />}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
-        <span>{cardNumber.first}</span>
-        <span>{cardNumber.second}</span>
-        <span>
+        <S.CardPreviewMiddleText>{cardNumber.first}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText>{cardNumber.second}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText>
           {Array.from({ length: cardNumber.third.length }, () => {
             return MASKING;
           })}
-        </span>
-        <span>
+        </S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText>
           {Array.from({ length: cardNumber.fourth.length }, () => {
             return MASKING;
           })}
-        </span>
+        </S.CardPreviewMiddleText>
       </S.CardPreviewMiddle>
-      <div>
-        <span>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</span>
-      </div>
+      <S.CardPreviewDateBox>
+        <S.CardPreviewDateBoxText>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
+      </S.CardPreviewDateBox>
     </S.CardPreviewWrapper>
   );
 }
