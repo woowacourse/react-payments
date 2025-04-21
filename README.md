@@ -87,3 +87,4 @@
 - [ ] storybook 타입 에러 (args:any)
 - [x] previewCard uniqueNumber 뒷 8자리 마스킹 처리
 - [x] setState((prev) => {...})로 변경
+- [x] errorMessage 컴포넌트 분리

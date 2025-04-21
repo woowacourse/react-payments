@@ -4,6 +4,7 @@ import Text from "../Text/Text";
 import { InputFieldProps } from "../../types/inputFieldDataType";
 import Input from "../Input/Input";
 import useCardInformationErrors from "../../hooks/useCardInformationErrors";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const InputField = ({
   label,
@@ -39,9 +40,10 @@ const InputField = ({
           />
         ))}
       </div>
-      <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-        <Text type="error" text={errorMessage[informationType] || "유효하지 않은 값입니다."} />
-      </div>
+      <ErrorMessage
+        error={isErrors[informationType].some((bool) => bool === true)}
+        message={errorMessage[informationType]}
+      />
     </div>
   );
 };
@@ -59,8 +61,4 @@ const inputFieldStyle = css`
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
-
-const errorTextWrapperStyle = (error: boolean) => css`
-  opacity: ${error ? "1" : "0"};
 `;
