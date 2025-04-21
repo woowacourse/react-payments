@@ -29,7 +29,7 @@ const InputTexts = ({
             type="text"
             placeholder={text}
             maxLength={text.length}
-            value={state ? state[index] : ''}
+            value={state[index]}
             onChange={(e) => eventHandler(e, index)}
             onFocus={onFocus}
             onBlur={onBlur}
@@ -47,7 +47,7 @@ const InputTextsContainer = styled.div`
   width: 100%;
 `;
 
-const Label = styled.div`
+const Label = styled.label`
   font-weight: ${({ theme }) => theme.fontWeights.normal};
   font-size: ${({ theme }) => theme.fontSizes.label};
   line-height: 15px;
@@ -67,7 +67,8 @@ const Input = styled.input<{ isError: boolean }>`
   width: 100%;
   padding: 8px;
   border: 1px solid
-    ${({ theme, isError }) => (isError ? theme.colors.error : theme.colors.border)};
+    ${({ theme, isError }) =>
+      isError ? theme.colors.error : theme.colors.border};
   border-radius: 2px;
   font-size: ${({ theme }) => theme.fontSizes.label};
   outline: none;
