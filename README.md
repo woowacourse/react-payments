@@ -74,7 +74,8 @@
 ## 피드백 바탕 리팩토링 사항
 
 - [ ] 설계 구조 변경
-  - [ ] 에러 처리 로직
+  - [x] 에러 처리 로직
+    - [x] 에러 관련 처리 훅으로 분리
 - [x] previewContainer 제거
 - [x] previewCard 내부 로직 수정 (cardType 내부에서 관리)
 - [x] cspell 익스텐션 이용 알파벳 수정
@@ -85,3 +86,4 @@
 - [ ] storybook autodocs 주석처리
 - [ ] storybook 타입 에러 (args:any)
 - [x] previewCard uniqueNumber 뒷 8자리 마스킹 처리
+- [ ] setState((prev) => {...})로 변경

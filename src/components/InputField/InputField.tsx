@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import Text from "../Text/Text";
 import { InputFieldProps } from "../../types/inputFieldDataType";
 import Input from "../Input/Input";
-import { useState } from "react";
+import useCardInformationErrors from "../../hooks/useCardInformationErrors";
 
 const InputField = ({
   label,
@@ -13,36 +13,16 @@ const InputField = ({
   setCardInformation,
   informationType,
 }: InputFieldProps) => {
-  const [isErrors, setIsErrors] = useState({
-    uniqueNumber: [false, false, false, false],
-    expirationDate: [false, false],
-    cvcNumber: [false],
-  });
+  const { isErrors, errorMessage, validateInput } = useCardInformationErrors();
 
   const handleChange = (index: number, value: string) => {
-    const isNumberOnly = /^[0-9]*$/.test(value);
-
-    let error = !isNumberOnly;
-
-    if (isNumberOnly && informationType === "expirationDate") {
-      const num = parseInt(value);
-      if (index === 0) error = num < 1 || num > 12;
-      if (index === 1) {
-        const year = 25;
-        error = num < year;
-      }
-    }
-
+    validateInput(informationType, index, value);
     const updatedValues = [...cardInformation[informationType]];
     updatedValues[index] = value;
     setCardInformation({
       ...cardInformation,
       [informationType]: updatedValues,
     });
-
-    const updatedErrors = [...isErrors[informationType]];
-    updatedErrors[index] = error;
-    setIsErrors({ ...isErrors, [informationType]: updatedErrors });
   };
 
   return (
@@ -61,7 +41,7 @@ const InputField = ({
         ))}
       </div>
       <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-        <Text type="error" text={"유효하지 않은 값입니다.!"} />
+        <Text type="error" text={errorMessage[informationType] || "유효하지 않은 값입니다."} />
       </div>
     </div>
   );
