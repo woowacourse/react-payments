@@ -1,12 +1,8 @@
 import styled from '@emotion/styled';
+import { ComponentProps } from 'react';
 
-type InputProps = {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxLength: number;
-  placeholder: string;
-  isError: boolean;
+type InputProps = ComponentProps<'input'> & {
+  isError?: boolean;
 };
 
 const StyledInput = styled.input<InputProps>`
