@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
+import { CardNumberInfo } from '../../types/models';
 
-export interface CardNumberInputsViewProps {
-  cardNumbers: string[];
-  isErrors: boolean[];
+interface CardNumberInputsViewProps {
+  cardNumbersInfo: CardNumberInfo[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -14,8 +14,7 @@ export interface CardNumberInputsViewProps {
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const CardNumberInputsView = ({
-  cardNumbers,
-  isErrors,
+  cardNumbersInfo,
   handleInputChange,
 }: CardNumberInputsViewProps) => {
   return (
@@ -26,13 +25,11 @@ const CardNumberInputsView = ({
       />
       <InputTexts
         label="카드 번호"
-        placeholder={['1234', '1234', '1234', '1234']}
+        dataModels={cardNumbersInfo}
         onChange={handleInputChange}
-        state={cardNumbers}
-        isErrors={isErrors}
       />
       <ErrorMessage>
-        {isErrors.some((isError) => isError) ? ERROR_MESSAGE : ''}
+        {cardNumbersInfo.some((data) => data.isError) ? ERROR_MESSAGE : ''}
       </ErrorMessage>
     </Container>
   );

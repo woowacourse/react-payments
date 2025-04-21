@@ -1,53 +1,56 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardNumberInputsView from './CardNumberInputsView';
+import { CardNumberInfo } from '../../types/models';
+import { isNumeric, isValidSegment } from '../../utils/cardValidation';
 
-export interface CardNumberInputsProps {
+interface CardNumberInputsProps {
   cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+  handleCardNumbersChange: (newCardNumbers: string[]) => void;
 }
 
 const CARD_NUMBERS_LENGTH = 4;
 
 const CardNumberInputs = ({
   cardNumbers,
-  setCardNumbers,
+  handleCardNumbersChange,
 }: CardNumberInputsProps) => {
-  const [isErrors, setIsErrors] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [cardNumbersInfo, setCardNumbersInfo] = useState<CardNumberInfo[]>(() =>
+    cardNumbers.map((number) => ({
+      number,
+      isError: false,
+      placeholder: '1234',
+      numberSegmentLength: CARD_NUMBERS_LENGTH,
+    }))
+  );
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const value = e.target.value;
-    setCardNumbers((prev) => {
-      const newState = [...prev];
-      if (/^[0-9]*$/.test(value) && value.length <= CARD_NUMBERS_LENGTH) {
-        newState[index] = value;
-        setIsErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[index] = false;
-          return newErrors;
-        });
-      } else {
-        setIsErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[index] = true;
-          return newErrors;
-        });
-      }
-      return newState;
-    });
+    const { value } = e.target;
+    const valid =
+      isNumeric(value) && isValidSegment(value, CARD_NUMBERS_LENGTH);
+
+    setCardNumbersInfo((prev) =>
+      prev.map((info, i) =>
+        i === index
+          ? {
+              ...info,
+              number: valid ? value : info.number,
+              isError: !valid,
+            }
+          : info
+      )
+    );
   };
+
+  useEffect(() => {
+    handleCardNumbersChange(cardNumbersInfo.map((info) => info.number));
+  }, [cardNumbersInfo]);
 
   return (
     <CardNumberInputsView
-      cardNumbers={cardNumbers}
-      isErrors={isErrors}
+      cardNumbersInfo={cardNumbersInfo}
       handleInputChange={handleInputChange}
     />
   );
