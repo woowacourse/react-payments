@@ -6,7 +6,7 @@ import {
   sectionTitle,
   sectionTitleSubText,
   sectionTitleText,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style.ts';
 import { cardNumberInputLayout } from './CardNumberInput.style';
 import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
 import {

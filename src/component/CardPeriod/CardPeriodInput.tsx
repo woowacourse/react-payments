@@ -6,7 +6,7 @@ import {
   sectionTitle,
   sectionTitleSubText,
   sectionTitleText,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style.ts';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
 import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
 import {

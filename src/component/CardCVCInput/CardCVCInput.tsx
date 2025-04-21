@@ -5,7 +5,7 @@ import {
   errorMessageStyle,
   sectionTitle,
   sectionTitleText,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style.ts';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
 import { CARD_CVC_ERROR, CARD_CVC } from '../../constants';
 import {

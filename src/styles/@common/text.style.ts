@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import theme from '../../theme';
+import theme from '../theme.ts';
 
 export const sectionTitle = css`
   display: flex;
