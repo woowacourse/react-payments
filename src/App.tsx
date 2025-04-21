@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import Card from './components/card/Card';
 import {useState} from 'react';
 import CardNumberSection from './components/form/CardNumberSection';
-import ExpirationDate from './components/form/ExpirationDateSection';
+import ExpirationDateSection from './components/form/ExpirationDateSection';
 import CardCvc from './components/form/CardCvcSection';
-import {CardNumber, Date} from './type/Card';
+import {CardNumber, ExpirationDate} from './type/Card';
 
 function App() {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -13,7 +13,7 @@ function App() {
     third: '',
     fourth: '',
   });
-  const [expirationDate, setExpirationDate] = useState<Date>({
+  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
     month: '',
     year: '',
   });
@@ -26,7 +26,7 @@ function App() {
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
       />
-      <ExpirationDate
+      <ExpirationDateSection
         expirationDate={expirationDate}
         setExpirationDate={setExpirationDate}
       />

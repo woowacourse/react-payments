@@ -4,10 +4,10 @@ import Input from '../input/Input';
 import InputField from '../inputField/InputField';
 import Title from '../title/Title';
 import findErrorOrder from '../../utils/findErrorOrder';
-import {CardNumber} from '../../App';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from './constants/error';
 import styled from 'styled-components';
+import {CardNumber} from '../../type/Card';
 
 const INPUT_MAX_LENGTH = 4;
 
@@ -16,7 +16,7 @@ type Props = {
   setCardNumber: Dispatch<SetStateAction<CardNumber>>;
 };
 
-const CardNumber = ({cardNumber, setCardNumber}: Props) => {
+const CardNumberSection = ({cardNumber, setCardNumber}: Props) => {
   const [error, setError] = useState({
     first: '',
     second: '',
@@ -73,7 +73,7 @@ const CardNumber = ({cardNumber, setCardNumber}: Props) => {
   );
 };
 
-export default CardNumber;
+export default CardNumberSection;
 
 const CardNumberWrap = styled.div`
   height: 130px;

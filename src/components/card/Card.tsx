@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import {CardNumber, Date} from '../../type/Card';
+import {CardNumber, ExpirationDate} from '../../type/Card';
 
 type Props = {
   cardNumbers: CardNumber;
-  expirationDate: Date;
+  expirationDate: ExpirationDate;
 };
 
 const BADGE_BRAND = {
@@ -37,7 +37,7 @@ const badgeImagePath = (badgeBrand: number) => {
   return '';
 };
 
-const formatDate = (expirationDate: Date) => {
+const formatDate = (expirationDate: ExpirationDate) => {
   const month = expirationDate.month;
   const year = expirationDate.year;
 

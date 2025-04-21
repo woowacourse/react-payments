@@ -1,5 +1,4 @@
 import {Dispatch, SetStateAction, useState} from 'react';
-import {Date} from '../../App';
 import Description from '../description/Description';
 import InputField from '../inputField/InputField';
 import Title from '../title/Title';
@@ -8,15 +7,16 @@ import findErrorOrder from '../../utils/findErrorOrder';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from './constants/error';
 import styled from 'styled-components';
+import {ExpirationDate} from '../../type/Card';
 
 const INPUT_MAX_LENGTH = 2;
 
 type Props = {
-  expirationDate: Date;
-  setExpirationDate: Dispatch<SetStateAction<Date>>;
+  expirationDate: ExpirationDate;
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
 };
 
-const ExpirationDate = ({expirationDate, setExpirationDate}: Props) => {
+const ExpirationDateSection = ({expirationDate, setExpirationDate}: Props) => {
   const [error, setError] = useState({
     month: '',
     year: '',
@@ -24,7 +24,7 @@ const ExpirationDate = ({expirationDate, setExpirationDate}: Props) => {
 
   const nowYear = new Date().getFullYear() % 100;
 
-  const handleInput = (order: keyof Date, value: string) => {
+  const handleInput = (order: keyof ExpirationDate, value: string) => {
     setExpirationDate({...expirationDate, [order]: value});
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
@@ -51,7 +51,7 @@ const ExpirationDate = ({expirationDate, setExpirationDate}: Props) => {
     setError({...error, [order]: ''});
   };
 
-  const handleFocusout = (order: keyof Date, value: string) => {
+  const handleFocusout = (order: keyof ExpirationDate, value: string) => {
     if (value.length < INPUT_MAX_LENGTH)
       setError({...error, [order]: MESSAGE.MONTH_FORMAT});
   };
@@ -86,7 +86,7 @@ const ExpirationDate = ({expirationDate, setExpirationDate}: Props) => {
   );
 };
 
-export default ExpirationDate;
+export default ExpirationDateSection;
 
 const CardNumberWrap = styled.div`
   height: 130px;

@@ -5,7 +5,7 @@ export type CardNumber = {
   fourth: string;
 };
 
-export type Date = {
+export type ExpirationDate = {
   month: string;
   year: string;
 };
