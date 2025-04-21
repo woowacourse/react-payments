@@ -1,7 +1,7 @@
 import { CardLogo } from '../../types/card';
 import styles from './CardPreview.module.css';
 
-export default function Card({
+export default function CardPreview({
   numbers,
   cardLogo,
   expiration
