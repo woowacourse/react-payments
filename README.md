@@ -89,3 +89,5 @@
 - [x] previewCard uniqueNumber 뒷 8자리 마스킹 처리
 - [x] setState((prev) => {...})로 변경
 - [x] errorMessage 컴포넌트 분리
+- [x] errorMessage, errorState 타입 추가
+- [x] constant (MIN_MONTH, MAX_MONTH, MIN_YEAR,NUMBER_ONLY_REGEX)추가
