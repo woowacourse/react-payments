@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isValidLength } from "../validation/validate";
-import { replaceAt } from "../utils/setErrorMessage";
+import { replaceAt } from "./setErrorMessage";
 
 const CONSTANT_USE_CARD_NUMBER = {
   IS_VALID_LENGTH_ERROR: "카드 번호는 4자리 숫자여야 합니다.",
