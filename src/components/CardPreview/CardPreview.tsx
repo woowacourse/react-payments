@@ -2,23 +2,23 @@ import { useCardContext } from "../../contexts/CardContext";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import styles from "./CardPreview.module.css";
 
+const displayCardNumber = (number: string, index: number) => {
+  const isMasked = index === 2 || index === 3;
+  const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
+
+  if (!number) {
+    return "    ";
+  }
+
+  if (isMasked) {
+    return "•".repeat(number.length).padEnd(maxLength, " ");
+  }
+
+  return number.padEnd(maxLength, " ");
+};
+
 const CardPreview = () => {
   const { cardNumbers, month, year } = useCardContext();
-
-  const displayCardNumber = (number: string, index: number) => {
-    const isMasked = index === 2 || index === 3;
-    const maxLength = CARD_VALIDATION_INFO.CARD_MAX_LENGTH;
-
-    if (!number) {
-      return "    ";
-    }
-
-    if (isMasked) {
-      return "•".repeat(number.length).padEnd(maxLength, " ");
-    }
-
-    return number.padEnd(maxLength, " ");
-  };
 
   return (
     <div className={styles.preview}>
