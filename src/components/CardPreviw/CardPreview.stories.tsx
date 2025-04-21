@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from './CardPreview';
 
 const meta: Meta<typeof CardPreview> = {
+  title: 'components/CardPreview',
   component: CardPreview,
   tags: ['autodocs'],
 };
