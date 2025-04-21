@@ -1,49 +1,44 @@
-import styled from "styled-components";
-import Card from "./components/card/Card";
-import { useState } from "react";
-import CardNumber from "./components/form/CardNumber";
-import ExpirationDate from "./components/form/ExpirationDate";
-import CardCvc from "./components/form/CardCvc";
-
-export type cardNumber = {
-	first: string;
-	second: string;
-	third: string;
-	fourth: string;
-};
-
-export type date = {
-	month: string;
-	year: string;
-};
+import styled from 'styled-components';
+import Card from './components/card/Card';
+import {useState} from 'react';
+import CardNumberSection from './components/form/CardNumberSection';
+import ExpirationDate from './components/form/ExpirationDateSection';
+import CardCvc from './components/form/CardCvcSection';
+import {CardNumber, Date} from './type/Card';
 
 function App() {
-	const [cardNumber, setCardNumber] = useState<cardNumber>({
-		first: "",
-		second: "",
-		third: "",
-		fourth: "",
-	});
-	const [expirationDate, setExpirationDate] = useState<date>({
-		month: "",
-		year: "",
-	});
-	const [cvcNumber, setcvcNumber] = useState<string>("");
+  const [cardNumber, setCardNumber] = useState<CardNumber>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
+  const [expirationDate, setExpirationDate] = useState<Date>({
+    month: '',
+    year: '',
+  });
+  const [cvcNumber, setcvcNumber] = useState<string>('');
 
-	return (
-		<MainContainer>
-			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
-			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
-			<ExpirationDate expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
-			<CardCvc cvcNumber={cvcNumber} setcvcNumber={setcvcNumber} />
-		</MainContainer>
-	);
+  return (
+    <MainContainer>
+      <Card cardNumbers={cardNumber} expirationDate={expirationDate} />
+      <CardNumberSection
+        cardNumber={cardNumber}
+        setCardNumber={setCardNumber}
+      />
+      <ExpirationDate
+        expirationDate={expirationDate}
+        setExpirationDate={setExpirationDate}
+      />
+      <CardCvc cvcNumber={cvcNumber} setcvcNumber={setcvcNumber} />
+    </MainContainer>
+  );
 }
 
 export default App;
 
 const MainContainer = styled.div`
-	width: 376px;
-	padding: 77px 30px 20px;
-	margin: auto;
+  width: 376px;
+  padding: 77px 30px 20px;
+  margin: auto;
 `;

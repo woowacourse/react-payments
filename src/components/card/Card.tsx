@@ -1,9 +1,9 @@
-import {cardNumber, date} from '../../App';
 import styled from 'styled-components';
+import {CardNumber, Date} from '../../type/Card';
 
 type Props = {
-  cardNumbers: cardNumber;
-  expirationDate: date;
+  cardNumbers: CardNumber;
+  expirationDate: Date;
 };
 
 const BADGE_BRAND = {
@@ -37,7 +37,7 @@ const badgeImagePath = (badgeBrand: number) => {
   return '';
 };
 
-const formatDate = (expirationDate: date) => {
+const formatDate = (expirationDate: Date) => {
   const month = expirationDate.month;
   const year = expirationDate.year;
 
@@ -64,12 +64,12 @@ const Card = ({cardNumbers, expirationDate}: Props) => {
         {Object.entries(cardNumbers).map(([key, value]) => {
           if (key === 'third' || key === 'fourth') {
             return (
-              <CardNumberblind key={key}>
+              <CardNumbersBlind key={key}>
                 {'•'.repeat(value?.length)}
-              </CardNumberblind>
+              </CardNumbersBlind>
             );
           }
-          return <CardNumber key={key}>{value}</CardNumber>;
+          return <CardNumbers key={key}>{value}</CardNumbers>;
         })}
       </CardInfoWrap>
 
@@ -118,8 +118,8 @@ const CardInfoWrap = styled.div`
   color: #fff;
 `;
 
-const CardNumber = styled.p`
+const CardNumbers = styled.p`
   letter-spacing: 2.24px;
 `;
 
-const CardNumberblind = styled.p``;
+const CardNumbersBlind = styled.p``;
