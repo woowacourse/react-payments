@@ -1,1 +1,1 @@
-export type CardType = 'visa' | 'master' | null;
+export type CardType = 'visa' | 'master' | 'none';

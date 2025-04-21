@@ -66,8 +66,8 @@ function CardNumberInputField({
     if (value.length <= 2) {
       if (value[0] === '4') setCardType('visa');
       else if (value >= '51' && value <= '55') setCardType('master');
-      else setCardType(null);
-    } else if (cardType === null) {
+      else setCardType('none');
+    } else if (cardType === 'none') {
       return true;
     }
     return false;

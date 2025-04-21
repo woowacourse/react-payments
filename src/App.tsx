@@ -36,7 +36,7 @@ function App() {
     CVCPart1: '',
   });
 
-  const [cardType, setCardType] = useState<CardType>(null);
+  const [cardType, setCardType] = useState<CardType>('none');
 
   return (
     <PaymentsLayout>

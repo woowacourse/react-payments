@@ -54,7 +54,7 @@ const CardChip = styled.div`
 `;
 
 const CardTypeBadge = styled.img<{ $cardType: CardType }>`
-  visibility: ${(props) => (props.$cardType === null ? 'hidden' : 'visible')};
+  visibility: ${(props) => (props.$cardType === 'none' ? 'hidden' : 'visible')};
   position: absolute;
   width: 36px;
   height: 22px;
