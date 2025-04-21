@@ -22,7 +22,12 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		year: "",
 	});
 
-	const nowYear = new Date().getFullYear() % 100;
+	const CURRENT_YEAR = new Date().getFullYear() % 100;
+	const orderLabels = ["month", "year"] as const;
+	const placeholderMap = {
+		month: "MM",
+		year: "YY",
+	};
 
 	const onChange = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
@@ -42,8 +47,8 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 		if (order === "year") {
 			const year = Number(value);
-			if (year < nowYear && year >= 0) {
-				setError({ ...error, year: MESSAGE.YEAR_RANGE(nowYear) });
+			if (year < CURRENT_YEAR && year >= 0) {
+				setError({ ...error, year: MESSAGE.YEAR_RANGE(CURRENT_YEAR) });
 				return;
 			}
 		}
@@ -55,21 +60,16 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
-	const inputs = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
-		const orderLabels = ["month", "year"] as const;
-		const placeholderMap = {
-			month: "MM",
-			year: "YY",
-		};
-
+	const inputs = orderLabels.map((label: keyof date) => {
 		return (
 			<Input
-				isError={!!error[orderLabels[index]]}
-				placeholder={placeholderMap[orderLabels[index]]}
-				value={expirationDate[orderLabels[index]]}
+				key={label}
+				isError={!!error[label]}
+				placeholder={placeholderMap[label]}
+				value={expirationDate[label]}
 				maxLength={INPUT_MAX_LENGTH}
-				onChange={(numbers) => onChange(orderLabels[index], numbers)}
-				onBlur={(numbers) => onBlur(orderLabels[index], numbers)}
+				onChange={(numbers) => onChange(label, numbers)}
+				onBlur={(numbers) => onBlur(label, numbers)}
 			/>
 		);
 	});
