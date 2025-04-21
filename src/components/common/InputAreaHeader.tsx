@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-interface InputLabelsProps {
+interface InputAreaHeaderProps {
   title: string;
   caption?: string;
 }
 
-const InputLabels = ({ title, caption }: InputLabelsProps) => {
+const InputAreaHeader = ({ title, caption }: InputAreaHeaderProps) => {
   return (
     <InputLabelsContainer>
       <Title>{title}</Title>
@@ -14,7 +14,7 @@ const InputLabels = ({ title, caption }: InputLabelsProps) => {
   );
 };
 
-export default InputLabels;
+export default InputAreaHeader;
 
 const InputLabelsContainer = styled.div`
   width: 100%;

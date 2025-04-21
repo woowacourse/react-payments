@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputLabels from '../common/InputLabels';
+import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 
 export interface CardNumberInputsViewProps {
@@ -21,7 +21,7 @@ const CardNumberInputsView = ({
 }: CardNumberInputsViewProps) => {
   return (
     <Container data-testid="cardnumbers-component">
-      <InputLabels
+      <InputAreaHeader
         title="결제할 카드 번호를 입력해 주세요"
         caption="본인 명의의 카드만 결제 가능합니다."
       />

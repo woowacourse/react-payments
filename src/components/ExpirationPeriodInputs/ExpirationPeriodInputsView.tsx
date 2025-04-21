@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputLabels from '../common/InputLabels';
+import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 
 export interface ExpirationPeriodInputsViewProps {
@@ -25,7 +25,7 @@ const ExpirationPeriodInputsView = ({
 }: ExpirationPeriodInputsViewProps) => {
   return (
     <Container data-testid="expiration-component">
-      <InputLabels
+      <InputAreaHeader
         title="카드 유효기간을 입력해 주세요"
         caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       />

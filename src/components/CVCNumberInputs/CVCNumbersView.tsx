@@ -1,37 +1,37 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputAreaHeader from '../common/InputAreaHeader';
+import InputLabels from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 
-export interface CVCNumberInputViewProps {
+export interface CVCNumbersViewProps {
   cvcNumbers: string[];
   errorMessage: string;
-  isError: boolean;
+  error: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CVCNumberInputView = ({
+const CVCNumbersView = ({
   cvcNumbers,
   errorMessage,
-  isError,
+  error,
   handleInputChange,
-}: CVCNumberInputViewProps) => {
+}: CVCNumbersViewProps) => {
   return (
     <Container data-testid="cvcnumbers-component">
-      <InputAreaHeader title="CVC 번호를 입력해 주세요" />
+      <InputLabels title="CVC 번호를 입력해 주세요" />
       <InputTexts
         label="CVC"
         placeholder={['123']}
         state={cvcNumbers}
         eventHandler={handleInputChange}
-        isErrors={[isError]}
+        errors={[error]}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 };
 
-export default CVCNumberInputView;
+export default CVCNumbersView;
 
 const Container = styled.div`
   display: flex;
