@@ -1,13 +1,14 @@
 import CustomInput from '../../../shared/ui/CustomInput';
-import { CustomInputProps, ErrorProps } from '../../../shared/type/types';
+import { ErrorProps } from '../../../shared/type/types';
 import * as S from './CardInfoSection.styles';
+import { ComponentProps } from 'react';
 
 interface CardInfoSectionProps {
   id: string;
   title: string;
   description: string;
   subTitle: string;
-  inputArr: CustomInputProps[];
+  inputArr: ComponentProps<typeof CustomInput>[];
   maxLength: number;
   error?: ErrorProps;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
