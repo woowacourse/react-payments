@@ -28,13 +28,12 @@ function useCardValidityPeriod() {
         cardValidityPeriod.year,
       );
       setErrorMessage(message);
-      console.log(message, dateType);
 
       if (message !== '') {
         setIsErrorCardValidityPeriod({
           month: false,
           year: false,
-          [dateType === null ? type : dateType]: true,
+          [dateType!]: true,
         });
       } else {
         setIsErrorCardValidityPeriod({
@@ -54,7 +53,7 @@ function useCardValidityPeriod() {
         setIsErrorCardValidityPeriod({
           month: false,
           year: false,
-          [dateType === null ? type : dateType]: true,
+          [dateType!]: true,
         });
       } else {
         setIsErrorCardValidityPeriod({
@@ -71,10 +70,11 @@ function useCardValidityPeriod() {
   };
 
   const validateYearErrorMessage = (month: string, year: string) => {
-    if (!checkValideDate(month, year)) {
+    const invalidInput = checkValideDate(month, year);
+    if (invalidInput !== null) {
       return {
         message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-        type: null,
+        type: invalidInput,
       };
     }
 
@@ -120,10 +120,11 @@ function useCardValidityPeriod() {
     if (month.length < 2)
       return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
 
-    if (!checkValideDate(month, year)) {
+    const invalidInput = checkValideDate(month, year);
+    if (invalidInput !== null) {
       return {
         message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-        type: null,
+        type: invalidInput,
       };
     }
 

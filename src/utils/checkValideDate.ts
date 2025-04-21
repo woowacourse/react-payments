@@ -9,9 +9,9 @@ export const checkValideDate = (monthString: string, yearString: string) => {
   const year = Number(yearString);
   const month = Number(monthString);
 
-  if (currentYear < year) return true;
+  if (currentYear > year) return 'year';
 
-  if (currentYear === year && month >= currentMonth) return true;
+  if (currentYear === year && month < currentMonth) return 'month';
 
-  return false;
+  return null;
 };
