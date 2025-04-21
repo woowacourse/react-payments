@@ -6,7 +6,7 @@ import InputSection from './InputSection';
 import ExpirationDateInputField from './InputField/ExpirationDateInputField';
 import CVCInputField from './InputField/CVCInputField';
 import { useState } from 'react';
-import { CardType } from './config/card';
+import { CARD_TYPE, CardType } from './config/card';
 import {
   CardNumberInputType,
   CVCInputValueType,
@@ -36,7 +36,7 @@ function App() {
     CVCPart1: '',
   });
 
-  const [cardType, setCardType] = useState<CardType>('none');
+  const [cardType, setCardType] = useState<CardType>(CARD_TYPE.none);
 
   return (
     <PaymentsLayout>

@@ -7,8 +7,8 @@ import {
 } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
-import { CardType } from '../config/card';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+import { CARD_NUMBER, CARD_TYPE, CardType } from '../config/card';
+import { ERROR_TYPE, ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
@@ -63,22 +63,22 @@ function CardNumberInputField({
   };
 
   const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length <= 2) {
-      if (value[0] === '4') setCardType('visa');
-      else if (value >= '51' && value <= '55') setCardType('master');
-      else setCardType('none');
-    } else if (cardType === 'none') {
+    if (value.length <= CARD_NUMBER.length.prefix) {
+      if (value[0] === '4') setCardType(CARD_TYPE.visa);
+      else if (value >= '51' && value <= '55') setCardType(CARD_TYPE.master);
+      else setCardType(CARD_TYPE.none);
+    } else if (cardType === CARD_TYPE.none) {
       return true;
     }
     return false;
   };
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 4) {
-      if (name === CARD_NUMBER_INPUT_TYPE[0]) {
+    if (value.length <= CARD_NUMBER.length.max) {
+      if (name === CARD_NUMBER_INPUT_TYPE.cardNumberPart1) {
         const isError = checkCardTypeFromPrefix(value);
-        updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
-          errorType: 'noneCardType',
+        updateCardError(CARD_NUMBER_INPUT_TYPE.cardNumberPart1, {
+          errorType: ERROR_TYPE.noneCardType,
           isError,
         });
       }
@@ -90,8 +90,10 @@ function CardNumberInputField({
     const { value, name } = e.target as HTMLInputElement;
 
     updateCardError(name as CardNumberInputType, {
-      errorType: 'shortCardSegment',
-      isError: value.length > 0 && value.length < 4,
+      errorType: ERROR_TYPE.shortCardSegment,
+      isError:
+        value.length > CARD_NUMBER.length.min &&
+        value.length < CARD_NUMBER.length.max,
     });
   };
 
@@ -107,7 +109,7 @@ function CardNumberInputField({
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      {CARD_NUMBER_INPUT_TYPE.map((inputType) => (
+      {Object.values(CARD_NUMBER_INPUT_TYPE).map((inputType) => (
         <Input
           key={inputType}
           type="number"

@@ -6,6 +6,7 @@ import {
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
 } from '../config/inputField';
+import { EXPIRATION_DATE } from '../config/card';
 
 interface ExpirationDateInputFieldProps {
   inputValue: Record<ExpirationDateInputType, string>;
@@ -19,21 +20,25 @@ function ExpirationDateInputField({
   setInputValue,
 }: ExpirationDateInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 2) {
-      if (name === 'expirationDatePart1' && Number(value) > 12) return;
+    if (value.length <= EXPIRATION_DATE.length) {
+      if (
+        name === EXPIRATION_DATE_INPUT_TYPE.expirationDatePart1 &&
+        Number(value) > EXPIRATION_DATE.month.max
+      )
+        return;
       setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
     }
   };
 
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
-    if (value.length === 1)
+    if (value.length === EXPIRATION_DATE.padLeftThreshold)
       setInputValue({ ...inputValue, [name]: `0${value}` });
   };
 
   return (
     <BaseInputField label="유효기간">
-      {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
+      {Object.values(EXPIRATION_DATE_INPUT_TYPE).map((inputType) => (
         <Input
           key={inputType}
           type="number"

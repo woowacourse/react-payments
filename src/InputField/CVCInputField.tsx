@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import BaseInputField from '../BaseInputField';
 import Input from '../Input';
 import { CVCInputValueType } from '../config/inputField';
+import { CVC } from '../config/card';
 
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;
@@ -10,7 +11,7 @@ interface CVCInputFieldProps {
 
 function CVCInputField({ inputValue, setInputValue }: CVCInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 3)
+    if (value.length <= CVC.length)
       setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
