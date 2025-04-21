@@ -5,6 +5,7 @@ import styles from "./css/cardForm.module.css";
 import useCardNumbers from "./hooks/useCardNumbers";
 import useCardExpirationDate from "./hooks/useCardExpirationDate";
 import CardDisplay from "./components/CardDisplay/CardDisplay";
+import CardCompanyInputSection from "./components/InputSection/CardCompanyInputSection";
 
 function App() {
   const {
@@ -29,6 +30,21 @@ function App() {
           cardExpirationDate={cardExpirationDate}
         />
         <div className={styles.cardForm}>
+          <CardCompanyInputSection
+            companies={[
+              { value: "BC", label: "BC" },
+              { value: "신한", label: "신한" },
+              { value: "카카오", label: "카카오" },
+              { value: "현대", label: "현대" },
+              { value: "우리", label: "우리" },
+              { value: "롯데", label: "롯데" },
+              { value: "하나", label: "하나" },
+              { value: "국민", label: "국민" },
+            ]}
+            handleCardNumbersChange={() => {}}
+            isError={{ cardCompany: false }}
+            errorMessage=""
+          />
           <CardNumbersInputSection
             cardNumbers={cardNumbers}
             handleCardNumbersChange={handleCardNumbersChange}
