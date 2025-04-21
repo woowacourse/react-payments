@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MAX_MONTH, MIN_MONTH, MIN_YEAR, NUMBER_ONLY_REGEX } from "../constants/constant";
+import { CardInformationErrorType, ErrorMessageType } from "../types/CardInformationErrorType";
 
 const ERROR_MESSAGE = {
   IS_NOT_NUMBER: "숫자값만 입력해주세요.",
@@ -7,20 +9,20 @@ const ERROR_MESSAGE = {
 };
 
 const useCardInformationErrors = () => {
-  const [isErrors, setIsErrors] = useState({
+  const [isErrors, setIsErrors] = useState<CardInformationErrorType>({
     uniqueNumber: [false, false, false, false],
     expirationDate: [false, false],
     cvcNumber: [false],
   });
 
-  const [errorMessage, setErrorMessage] = useState({
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>({
     uniqueNumber: "",
     expirationDate: "",
     cvcNumber: "",
   });
 
   const validateInput = (type: "uniqueNumber" | "expirationDate" | "cvcNumber", index: number, value: string) => {
-    const isNumberOnly = /^[0-9]*$/.test(value);
+    const isNumberOnly = NUMBER_ONLY_REGEX.test(value);
 
     const getValidationResult = (): { error: boolean; message: string } => {
       if (!isNumberOnly) {
@@ -29,10 +31,10 @@ const useCardInformationErrors = () => {
 
       if (type === "expirationDate") {
         const num = parseInt(value);
-        if (index === 0 && (num < 1 || num > 12)) {
+        if (index === 0 && (num < MIN_MONTH || num > MAX_MONTH)) {
           return { error: true, message: ERROR_MESSAGE.MM_VALID };
         }
-        if (index === 1 && num < 25) {
+        if (index === 1 && num < MIN_YEAR) {
           return { error: true, message: ERROR_MESSAGE.YY_VALID };
         }
       }
