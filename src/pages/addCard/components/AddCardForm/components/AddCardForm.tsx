@@ -10,9 +10,6 @@ import CVCInput, { type CVCInputsProps } from "@/card/CVC/components/CVCInput";
 import CardTypeDropdown, {
   CardTypeDropdownProps,
 } from "@card/CardType/components/CardTypeDropdown";
-import CardOwnerInput, {
-  type CardOwnerInputProps,
-} from "@/card/CardOwner/components/CardOwnerInput";
 import CardPasswordInput, {
   CardPasswordInputProps,
 } from "@/card/CardPassword/components/CardPasswordInput";
@@ -21,7 +18,6 @@ interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
     CardTypeDropdownProps &
     CardExpireDateInputsProps &
-    CardOwnerInputProps &
     CVCInputsProps &
     CardPasswordInputProps;
 }
@@ -37,8 +33,6 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
-    cardOwner,
-    handleCardOwnerChange,
     CVCState,
     handleCVCChange,
     cardPasswordState,
@@ -65,15 +59,6 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
             inputRefs={inputRefs}
             cardNumberState={cardNumberState}
             handleCardNumberChange={handleCardNumberChange}
-          />
-        }
-      />
-      <CardInputBox
-        title="카드 소유자 이름을 입력해 주세요"
-        InputComponent={
-          <CardOwnerInput
-            cardOwner={cardOwner}
-            handleCardOwnerChange={handleCardOwnerChange}
           />
         }
       />

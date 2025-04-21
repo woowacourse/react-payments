@@ -27,8 +27,6 @@ function AddCardPreview({
   cardNumberState,
   cardType,
   expireDate,
-  cardOwner,
-  CVCState,
 }: AddCardPreviewProps) {
   const cardBrand = getCardBrand(Number(cardNumberState.first.value));
 
@@ -68,9 +66,6 @@ function AddCardPreview({
         <span>{expireDate.MM.value}</span>
         {(expireDate.MM.value || expireDate.YY.value) && <span>/</span>}
         <span>{expireDate.YY.value}</span>
-      </div>
-      <div className={styles.cardOwner}>
-        <span>{cardOwner.value}</span>
       </div>
     </div>
   );
