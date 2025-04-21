@@ -3,12 +3,13 @@ import CardCVCInput from './cardInput/CardCVCInput';
 import CardExpirationDateInput from './cardInput/CardExpirationDateInput';
 import CardNumberInput from './cardInput/CardNumberInput';
 import styles from './cardInputForm.module.css';
+import { ExpirationDateType } from '../PaymentInputPage';
 
 interface CardInputFormProps {
   cardNumbers: string[];
-  expirationDate: string[];
+  expirationDate: ExpirationDateType;
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
-  setExpirationDate: Dispatch<SetStateAction<string[]>>;
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDateType>>;
 }
 
 function CardInputForm({

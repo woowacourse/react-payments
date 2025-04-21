@@ -3,9 +3,17 @@ import CardInputForm from './cardInputForm/CardInputForm';
 import styles from './PaymentInputPage.module.css';
 import { useState } from 'react';
 
+export interface ExpirationDateType {
+  month: string;
+  year: string;
+}
+
 function PaymentInputPage() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-  const [expirationDate, setExpirationDate] = useState<string[]>([]);
+  const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
+    month: '',
+    year: '',
+  });
 
   return (
     <section className={styles.section}>

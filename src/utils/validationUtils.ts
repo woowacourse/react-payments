@@ -4,7 +4,7 @@ export const validatorUtils = {
   isValidLength: (value: string, length: number) => value.length === length,
   isValidNumberRange: (value: number, min: number, max: number) =>
     value >= min && value <= max,
-  isValidExpirationDate: (month: string, year: string) => {
+  isValidExpirationDate: ({ month, year }: { month: string; year: string }) => {
     const numberMonth = Number(month);
     const numberYear = Number(year);
     const today = new Date();

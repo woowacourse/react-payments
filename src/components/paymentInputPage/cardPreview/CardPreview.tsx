@@ -1,8 +1,9 @@
+import { ExpirationDateType } from '../PaymentInputPage';
 import styles from './CardPreview.module.css';
 
 export type CardInformationType = {
   cardNumbers: string[];
-  expirationDate: string[];
+  expirationDate: ExpirationDateType;
 };
 
 function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
@@ -51,7 +52,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         })}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
-        {expirationDate.join('/')}
+        {`${expirationDate.month}/${expirationDate.year}`}
       </p>
     </div>
   );
