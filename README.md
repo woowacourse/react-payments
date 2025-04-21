@@ -70,3 +70,15 @@
 - [x] domain 상태 관리 (preview, form 상태 동기화)
 
 - [x] text 컴포넌트 스토리북 생성
+
+## 피드백 바탕 리팩토링 사항
+
+- [ ] 설계 구조 변경
+  - [ ] 에러 처리 로직
+- [ ] cspell 익스텐션 이용 알파벳 수정
+- [ ] string 배열 타입 -> 튜플 타입 변경
+- [ ] input props 네이밍 표준 인터페이스 명으로 변경
+- [ ] CardInformation 도메인 -> use- 붙이기 (훅사용)
+- [ ] keyof CardInformationType 수정 (formContainer 파일)
+- [ ] storybook autodocs 주석처리
+- [ ] storybook 타입 에러 (args:any)
