@@ -31,9 +31,9 @@ const subTitleVariants = {
 function InputSection({ type }: InputSectionProps) {
   const {
     error,
-    handleCardNumberValidation,
-    handleExpirationPeriodValidation,
-    handleCvcNumberValidation,
+    validateCardNumber,
+    validateExpirationPeriod,
+    validateCvcNumber,
   } = useInputError();
 
   const getErrorVisible = (type: InputType) => {
@@ -50,9 +50,9 @@ function InputSection({ type }: InputSectionProps) {
       <InputGroup
         type={type}
         error={error}
-        handleCardNumberValidation={handleCardNumberValidation}
-        handleExpirationPeriodValidation={handleExpirationPeriodValidation}
-        handleCvcNumberValidation={handleCvcNumberValidation}
+        validateCardNumber={validateCardNumber}
+        validateExpirationPeriod={validateExpirationPeriod}
+        validateCvcNumber={validateCvcNumber}
       />
       <Error
         errorMessage="숫자만 입력 가능합니다."

@@ -14,23 +14,20 @@ import CvcInput from "../CvcInput/CvcInput";
 export interface InputGroupProps {
   type: InputType;
   error: InputErrorType;
-  handleCardNumberValidation: (
-    value: string,
-    position: CardPositionType
-  ) => void;
-  handleExpirationPeriodValidation: (
+  validateCardNumber: (value: string, position: CardPositionType) => void;
+  validateExpirationPeriod: (
     value: string,
     position: PeriodPositionType
   ) => void;
-  handleCvcNumberValidation: (value: string) => void;
+  validateCvcNumber: (value: string) => void;
 }
 
 function InputGroup({
   type,
   error,
-  handleCardNumberValidation,
-  handleExpirationPeriodValidation,
-  handleCvcNumberValidation,
+  validateCardNumber,
+  validateExpirationPeriod,
+  validateCvcNumber,
 }: InputGroupProps) {
   const {
     cardNumbers,
@@ -45,7 +42,7 @@ function InputGroup({
     value: string,
     position: CardPositionType
   ) => {
-    handleCardNumberValidation(value, position);
+    validateCardNumber(value, position);
     updateCardNumber(value, position);
   };
 
@@ -53,12 +50,12 @@ function InputGroup({
     value: string,
     position: PeriodPositionType
   ) => {
-    handleExpirationPeriodValidation(value, position);
+    validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);
   };
 
   const handleCvcNumberChange = (value: string) => {
-    handleCvcNumberValidation(value);
+    validateCvcNumber(value);
     updateCvcNumber(value);
   };
 
