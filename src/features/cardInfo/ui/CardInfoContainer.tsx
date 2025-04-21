@@ -1,7 +1,8 @@
-import CardInfoSection from './CardInfoSection';
-import { cardInfoSectionSpec } from '../model/cardInfoSectionSpec';
 import { ErrorProps } from '../../../shared/model/types';
 import styled from '@emotion/styled';
+import CardNumberSection from './CardNumberSection';
+import CardExpirationDateSection from './CardExpirationDateSection';
+import CardCVCSection from './CardCVCSection';
 
 const CardInfoWrapper = styled.div`
   width: 100%;
@@ -16,13 +17,13 @@ export default function CardInfoContainer({
   error,
 }: {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: ErrorProps;
+  error: ErrorProps;
 }) {
   return (
     <CardInfoWrapper>
-      {cardInfoSectionSpec.map((data, index) => (
-        <CardInfoSection key={`${data.id}-${index}`} {...data} onChange={onChange} error={error} />
-      ))}
+      <CardNumberSection error={error} onChange={onChange} />
+      <CardExpirationDateSection error={error} onChange={onChange} />
+      <CardCVCSection error={error} onChange={onChange} />
     </CardInfoWrapper>
   );
 }

@@ -2,12 +2,6 @@ export interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputEle
   error?: boolean;
 }
 
-export interface CardInfo {
-  cardNumber: string[];
-  cardExpirationDate: { month: string; year: string };
-  cardCVC: string;
-}
-
 export interface ErrorProps {
   cardNumberError: { errorIndex: number; errorMessage: string };
   cardExpirationDateError: { errorIndex: number; errorMessage: string };
