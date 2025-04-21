@@ -10,6 +10,13 @@ interface Props {
   errorMessage: string[];
 }
 
+const CONSTANT_CARD_NUMBER = {
+  INPUT_TITLE: "결제할 카드 번호를",
+  INPUT_DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
+  INPUT_SUBTITLE: "카드 번호",
+  MAX_LENGTH: 4,
+} as const;
+
 export default function CardNumber({
   handleChange,
   cardNumbers,
@@ -19,12 +26,18 @@ export default function CardNumber({
 
   return (
     <section className={styles["card-number"]}>
-      <InputText inputValue="결제할 카드 번호를" variant="title" />
       <InputText
-        inputValue="본인 명의의 카드만 결제 가능합니다."
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_TITLE}
+        variant="title"
+      />
+      <InputText
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_DESCRIPTION}
         variant="description"
       />
-      <InputText inputValue="카드 번호" variant="subtitle" />
+      <InputText
+        inputValue={CONSTANT_CARD_NUMBER.INPUT_SUBTITLE}
+        variant="subtitle"
+      />
       <div className={styles["card-number__input"]}>
         {[0, 1, 2, 3].map((index) => (
           <CardNumberInput
@@ -36,7 +49,10 @@ export default function CardNumber({
             errorMessage={errorMessage[index]}
             onChange={(value) => {
               handleChange(value, index);
-              if (value.length === 4 && index < 3) {
+              if (
+                value.length === CONSTANT_CARD_NUMBER.MAX_LENGTH &&
+                index < 3
+              ) {
                 inputRefs.current[index + 1]?.focus();
               }
             }}
