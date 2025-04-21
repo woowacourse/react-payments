@@ -68,10 +68,8 @@ const ExpirationDateSection = ({
         placeholder="MM"
         value={expirationDate[orderLabels[index]]}
         maxLength={INPUT_MAX_LENGTH}
-        handleInput={(numbers) => handleInput(orderLabels[index], numbers)}
-        handleFocusout={(numbers) =>
-          handleFocusout(orderLabels[index], numbers)
-        }
+        onChange={(e) => handleInput(orderLabels[index], e.target.value)}
+        onBlur={(e) => handleFocusout(orderLabels[index], e.target.value)}
       />
     );
   });

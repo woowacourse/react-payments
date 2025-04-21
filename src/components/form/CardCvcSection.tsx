@@ -38,8 +38,8 @@ const CardCvcSection = ({cvcNumber, onCvcNumberChange}: Props) => {
       isError={error.length > 0}
       placeholder="123"
       value={cvcNumber}
-      handleInput={(value) => handleInput(value)}
-      handleFocusout={(value) => handleFocusout(value)}
+      onChange={(e) => handleInput(e.target.value)}
+      onBlur={(e) => handleFocusout(e.target.value)}
     />,
   ];
 

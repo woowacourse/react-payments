@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 type Props = {
   isError?: boolean;
-  handleInput: (value: string) => void;
-  handleFocusout?: (value: string) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
@@ -13,16 +11,16 @@ const Input = ({
   isError = false,
   value,
   maxLength,
-  handleInput,
-  handleFocusout,
+  onChange,
+  onBlur,
 }: Props) => {
   return (
     <TextInput
       maxLength={maxLength && maxLength}
       value={value}
       placeholder={placeholder}
-      onChange={(e) => handleInput(e.target.value)}
-      onBlur={handleFocusout && ((e) => handleFocusout(e.target.value))}
+      onChange={onChange}
+      onBlur={onBlur}
       $isError={isError}
     />
   );
