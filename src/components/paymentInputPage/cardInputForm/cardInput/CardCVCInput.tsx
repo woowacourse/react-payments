@@ -15,6 +15,9 @@ function CardCVCInput() {
     if (!validatorUtils.isNumber(cvc)) {
       setFeedbackMessage("숫자만 입력 가능합니다.");
       setIsValid(false);
+    } else {
+      setFeedbackMessage("");
+      setIsValid(true);
     }
   }
 

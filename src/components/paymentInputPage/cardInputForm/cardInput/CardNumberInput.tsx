@@ -23,6 +23,9 @@ function CardNumberInput({
       setFeedbackMessage("숫자만 입력 가능합니다.");
       setIsValid(false);
       return;
+    } else {
+      setFeedbackMessage("");
+      setIsValid(true);
     }
 
     numbersArray[index] = inputCardNumber;
