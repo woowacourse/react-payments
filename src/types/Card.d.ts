@@ -16,6 +16,7 @@ type CardInfo = {
   number: CardNumber;
   expiration: Expiration;
   cvc: string;
+  passwordFront: string;
 };
 
 interface CardInfo {

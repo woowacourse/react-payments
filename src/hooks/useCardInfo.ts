@@ -13,6 +13,7 @@ function useCardInfo() {
       year: '',
     },
     cvc: '',
+    passwordFront: '',
   });
 
   function handleCardInfo(
@@ -30,7 +31,7 @@ function useCardInfo() {
       });
     }
 
-    if (field === 'cvc') {
+    if (field === 'cvc' || field === 'passwordFront') {
       setCardInfo({
         ...cardInfo,
         [field]: value,

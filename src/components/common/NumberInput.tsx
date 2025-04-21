@@ -8,6 +8,7 @@ interface NumberInputProps {
   maxLength: number;
   placeholder: string;
   extraErrorCondition?: boolean;
+  isHidden?: boolean;
 }
 
 function NumberInput({
@@ -16,6 +17,7 @@ function NumberInput({
   maxLength,
   placeholder,
   extraErrorCondition,
+  isHidden = false,
 }: NumberInputProps) {
   const [isError, setIsError] = useState(false);
 
@@ -47,6 +49,7 @@ function NumberInput({
       placeholder={placeholder}
       isError={isError}
       onChange={handleValue}
+      type={isHidden ? 'password' : 'text'}
     />
   );
 }
