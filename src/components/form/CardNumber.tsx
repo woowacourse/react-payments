@@ -25,7 +25,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 	});
 	const orderLabels = ["first", "second", "third", "fourth"] as const;
 
-	const handleInput = (order: keyof cardNumber, value: string) => {
+	const onChange = (order: keyof cardNumber, value: string) => {
 		setCardNumber({ ...cardNumber, [order]: value });
 
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
@@ -36,7 +36,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		setError({ ...error, [order]: "" });
 	};
 
-	const handleFocusout = (order: keyof cardNumber, value: string) => {
+	const onBlur = (order: keyof cardNumber, value: string) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH) });
 	};
 
@@ -47,8 +47,8 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 			placeholder="1234"
 			value={cardNumber[label]}
 			maxLength={INPUT_MAX_LENGTH}
-			handleInput={(numbers) => handleInput(label, numbers)}
-			handleFocusout={(numbers) => handleFocusout(label, numbers)}
+			onChange={(numbers) => onChange(label, numbers)}
+			onBlur={(numbers) => onBlur(label, numbers)}
 		/>
 	));
 

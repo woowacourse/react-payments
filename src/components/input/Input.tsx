@@ -6,18 +6,18 @@ type Props = {
 	isError?: boolean;
 	value: string;
 	maxLength?: number;
-	handleInput: (value: string) => void;
-	handleFocusout?: (value: string) => void;
+	onChange: (value: string) => void;
+	onBlur?: (value: string) => void;
 };
 
-const Input = ({ placeholder, isError = false, value, maxLength, handleInput, handleFocusout }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur }: Props) => {
 	return (
 		<TextInput
 			maxLength={maxLength && maxLength}
 			value={value}
 			placeholder={placeholder}
-			onChange={(e) => handleInput(e.target.value)}
-			onBlur={handleFocusout && ((e) => handleFocusout(e.target.value))}
+			onChange={(e) => onChange(e.target.value)}
+			onBlur={onBlur && ((e) => onBlur(e.target.value))}
 			$isError={isError}
 		/>
 	);
