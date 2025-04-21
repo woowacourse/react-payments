@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import CVCNumberInput from '../components/CVCNumberInput';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -12,15 +11,8 @@ const meta: Meta<typeof CVCNumberInput> = {
 export default meta;
 type Story = StoryObj<typeof CVCNumberInput>;
 
-const Wrapper = () => {
-  const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
-  return (
-    <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
-  );
-};
-
 export const ValidInput: Story = {
-  render: () => <Wrapper />,
+  render: () => <CVCNumberInput />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cvcnumbers-component');
@@ -34,7 +26,7 @@ export const ValidInput: Story = {
 };
 
 export const InvalidInput: Story = {
-  render: () => <Wrapper />,
+  render: () => <CVCNumberInput />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cvcnumbers-component');
@@ -51,7 +43,7 @@ export const InvalidInput: Story = {
 };
 
 export const MixedInput: Story = {
-  render: () => <Wrapper />,
+  render: () => <CVCNumberInput />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('cvcnumbers-component');

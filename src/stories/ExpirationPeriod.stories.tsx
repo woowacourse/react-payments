@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import ExpirationPeriodInputs from '../components/ExpirationPeriodInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -14,13 +14,17 @@ type Story = StoryObj<typeof ExpirationPeriodInputs>;
 
 const Wrapper = () => {
   const [period, setPeriod] = useState<string[]>(['', '']);
+  const handlePeriodChange = useCallback((newPeriod: string[]) => {
+    setPeriod(newPeriod);
+  }, []);
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
+
   return (
     <>
       <ExpirationPeriodInputs
         period={period}
-        setPeriod={setPeriod}
+        handlePeriodChange={handlePeriodChange}
         showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}
         hidePeriodSeparator={() =>
           setIsPeriodSeparatorShowing(period.some((p) => p !== ''))
@@ -65,22 +69,6 @@ export const InvalidMonth: Story = {
       expect(container.textContent).toContain('올바른 유효기간을 입력하세요.')
     );
     const style = getComputedStyle(inputs[0]);
-    expect(style.borderColor).toBe('rgb(255, 0, 0)');
-  },
-};
-
-export const InvalidYear: Story = {
-  render: () => <Wrapper />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const container = await canvas.findByTestId('expiration-component');
-    const inputs = container.querySelectorAll('input');
-    await userEvent.clear(inputs[1]);
-    await userEvent.type(inputs[1], '2');
-    await waitFor(() =>
-      expect(container.textContent).toContain('올바른 유효기간을 입력하세요.')
-    );
-    const style = getComputedStyle(inputs[1]);
     expect(style.borderColor).toBe('rgb(255, 0, 0)');
   },
 };

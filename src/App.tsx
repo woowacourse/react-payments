@@ -10,7 +10,6 @@ import { theme } from './styles/theme';
 const App = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
-  const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
 
@@ -20,6 +19,14 @@ const App = () => {
 
   const hidePeriodSeparator = useCallback(() => {
     setIsPeriodSeparatorShowing(period.some((p) => p !== ''));
+  }, []);
+
+  const handleCardNumbersChange = useCallback((newCardNumbers: string[]) => {
+    setCardNumbers(newCardNumbers);
+  }, []);
+
+  const handlePeriodChange = useCallback((newPeriod: string[]) => {
+    setPeriod(newPeriod);
   }, []);
 
   return (
@@ -33,15 +40,15 @@ const App = () => {
 
         <CardNumberInputs
           cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
+          handleCardNumbersChange={handleCardNumbersChange}
         />
         <ExpirationPeriodInputs
           period={period}
-          setPeriod={setPeriod}
+          handlePeriodChange={handlePeriodChange}
           showPeriodSeparator={showPeriodSeparator}
           hidePeriodSeparator={hidePeriodSeparator}
         />
-        <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+        <CVCNumberInput />
       </Main>
     </ThemeProvider>
   );

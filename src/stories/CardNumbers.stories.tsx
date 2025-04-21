@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import CardNumberInputs from '../components/CardNumberInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -14,8 +14,14 @@ type Story = StoryObj<typeof CardNumberInputs>;
 
 const Wrapper = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const handleCardNumbersChange = useCallback((newCardNumbers: string[]) => {
+    setCardNumbers(newCardNumbers);
+  }, []);
   return (
-    <CardNumberInputs cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+    <CardNumberInputs
+      cardNumbers={cardNumbers}
+      handleCardNumbersChange={handleCardNumbersChange}
+    />
   );
 };
 
