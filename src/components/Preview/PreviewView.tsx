@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 export interface PreviewViewProps {
   cardNumbers: string[];
   period: string[];
-  separatorRef?: React.RefObject<HTMLDivElement | null>;
-  cardMethodSrc: string;
+  separatorRef: React.RefObject<HTMLDivElement | null>;
+  cardMethodSrc: string | null;
 }
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
@@ -20,12 +20,14 @@ const PreviewView = ({
     <PreviewContainer data-testid="preview-component">
       <CardFrame>
         <ICChip />
-        <CardMethod
-          src={cardMethodSrc}
-          style={{ display: cardMethodSrc ? 'block' : 'none' }}
-          data-testid="card-method"
-          alt="Card Method"
-        />
+        {cardMethodSrc && (
+          <CardMethod
+            src={cardMethodSrc}
+            style={{ display: cardMethodSrc ? 'block' : 'none' }}
+            data-testid="card-method"
+            alt="Card Method"
+          />
+        )}
         <CardNumberArea>
           {cardNumbers.map((number, index) => (
             <CardNumber key={index}>

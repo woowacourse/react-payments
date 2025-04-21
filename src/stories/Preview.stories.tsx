@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Preview from '../components/Preview';
-import { within, waitFor, expect } from '@storybook/test';
+import { within, expect } from '@storybook/test';
 
 const meta: Meta<typeof Preview> = {
   title: 'Components/Preview Container',
@@ -40,12 +40,10 @@ export const Visa: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
-    await waitFor(() => expect(container).toBeDefined());
+    expect(container).toBeDefined();
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
-    await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe('./images/visa.svg')
-    );
+    expect(cardMethodImg.getAttribute('src')).toBe('./images/visa.svg');
   },
 };
 
@@ -59,12 +57,10 @@ export const Mastercard: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
-    await waitFor(() => expect(container).toBeDefined());
+    expect(container).toBeDefined();
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
-    await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe('./images/master.svg')
-    );
+    expect(cardMethodImg.getAttribute('src')).toBe('./images/master.svg');
   },
 };
 
@@ -78,9 +74,8 @@ export const NoLogo: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const container = await canvas.findByTestId('preview-component');
-    await waitFor(() => expect(container).toBeDefined());
-    const cardMethodImg = await canvas.findByTestId('card-method');
-    expect(cardMethodImg).toBeDefined();
-    await waitFor(() => expect(cardMethodImg?.getAttribute('src')).toBe(null));
+    expect(container).toBeDefined();
+    const cardMethodImg = canvas.queryByTestId('card-method');
+    expect(cardMethodImg).toBeNull();
   },
 };

@@ -4,6 +4,8 @@ import CardNumbers from './components/CardNumbers';
 import ExpirationPeriod from './components/ExpirationPeriod';
 import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './styles/theme';
 
 const App = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -12,20 +14,25 @@ const App = () => {
   const separatorRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Main>
-      <Preview
-        cardNumbers={cardNumbers}
-        period={period}
-        separatorRef={separatorRef}
-      />
-      <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      <ExpirationPeriod
-        period={period}
-        setPeriod={setPeriod}
-        separatorRef={separatorRef}
-      />
-      <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
-    </Main>
+    <ThemeProvider theme={theme}>
+      <Main>
+        <Preview
+          cardNumbers={cardNumbers}
+          period={period}
+          separatorRef={separatorRef}
+        />
+        <CardNumbers
+          cardNumbers={cardNumbers}
+          setCardNumbers={setCardNumbers}
+        />
+        <ExpirationPeriod
+          period={period}
+          setPeriod={setPeriod}
+          separatorRef={separatorRef}
+        />
+        <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+      </Main>
+    </ThemeProvider>
   );
 };
 

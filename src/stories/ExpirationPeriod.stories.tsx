@@ -61,7 +61,7 @@ export const InvalidMonth: Story = {
       expect(container.textContent).toContain('올바른 유효기간을 입력하세요.')
     );
     const style = getComputedStyle(inputs[0]);
-    expect(style.borderColor).toBe('#ff0000');
+    expect(style.borderColor).toBe('rgb(255, 0, 0)');
   },
 };
 
@@ -77,7 +77,7 @@ export const InvalidYear: Story = {
       expect(container.textContent).toContain('올바른 유효기간을 입력하세요.')
     );
     const style = getComputedStyle(inputs[1]);
-    expect(style.borderColor).toBe('#ff0000');
+    expect(style.borderColor).toBe('rgb(255, 0, 0)');
   },
 };
 
@@ -99,7 +99,7 @@ export const MixedInput: Story = {
     );
     const style0 = getComputedStyle(inputs[0]);
     const style1 = getComputedStyle(inputs[1]);
-    expect(style0.borderColor).not.toBe('#ff0000');
-    expect(style1.borderColor).toBe('#ff0000');
+    expect(style0.borderColor).not.toBe('rgb(255, 0, 0)');
+    expect(style1.borderColor).toBe('rgb(255, 0, 0)');
   },
 };

@@ -4,7 +4,7 @@ import PreviewView from './PreviewView';
 interface PreviewProps {
   cardNumbers: string[];
   period: string[];
-  separatorRef?: React.RefObject<HTMLDivElement | null>;
+  separatorRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const VISA_CARD_PREFIXES = '4';
@@ -14,7 +14,7 @@ const MASTERCARD_CARD_PREFIXES = {
 } as const;
 
 const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
-  const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
+  const [cardMethodSrc, setCardMethodSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (cardNumbers[0].startsWith(VISA_CARD_PREFIXES)) {
