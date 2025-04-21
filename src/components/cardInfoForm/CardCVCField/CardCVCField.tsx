@@ -10,16 +10,14 @@ interface CardCVCFieldProps {
 function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
   return (
     <div>
-      <Label htmlFor="CardCVC-0" id="CardCVC">
-        CVC
-      </Label>
+      <Label htmlFor="CardCVC">CVC</Label>
       <InputWrapper>
         <Input
           isError={isError}
           type="number"
           name="CardCVC"
+          id="CardCVC"
           value={cardCVC}
-          aria-labelledby="CardCVC"
           onChange={onChange}
           placeholder="123"
           min={0}

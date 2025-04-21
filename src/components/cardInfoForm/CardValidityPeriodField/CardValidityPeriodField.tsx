@@ -30,7 +30,7 @@ function CardValidityPeriodField({
 
   return (
     <div>
-      <Label htmlFor="cardValidityPeriod-0" id="cardValidityPeriod">
+      <Label htmlFor={`cardValidityPeriod-${month}`} id="cardValidityPeriod">
         유효기간
       </Label>
       <InputWrapper>
