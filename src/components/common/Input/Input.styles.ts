@@ -8,5 +8,9 @@ export const StyledInput = styled.input<{ isError: boolean }>`
   &::placeholder {
     color: #acacac;
   }
+  &:focus-visible {
+    outline: none;
+    border-color: #000;
+  }
   ${(props) => props.isError && `outline: #f00`};
 `;
