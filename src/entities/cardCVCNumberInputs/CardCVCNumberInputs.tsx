@@ -21,15 +21,24 @@ function CardCVCNumberInputs({
   CVCNumber,
   changeCVCNumber,
 }: CardCVCNumberSectionProps) {
-  const [error, setError] = useState(NO_ERROR);
+  const [error, setError] = useState({ CVCNumber: NO_ERROR });
 
   const errorMessage = getErrorMessage(error);
 
-  function checkValidation(length: number, CVCNumber: string) {
+  function checkValidation(
+    length: number,
+    CVCNumber: string,
+    type: "CVCNumber"
+  ) {
     const validationFns = getValidationFns(length, CVCNumber);
 
     const validation = validationFns.find((v) => v.condition());
-    setError(validation?.errorMsg || NO_ERROR);
+    setError((prev) => {
+      return {
+        ...prev,
+        [type]: validation?.errorMsg || NO_ERROR,
+      };
+    });
   }
 
   return (
@@ -40,9 +49,9 @@ function CardCVCNumberInputs({
           value={CVCNumber}
           onChange={(e) => {
             changeCVCNumber("CVCNumber", e.target.value);
-            checkValidation(CVC_NUMBER_LENGTH, e.target.value);
+            checkValidation(CVC_NUMBER_LENGTH, e.target.value, "CVCNumber");
           }}
-          isError={error !== NO_ERROR}
+          isError={error.CVCNumber !== NO_ERROR}
           width="100%"
           maxLength={CVC_NUMBER_LENGTH}
           placeholder="123"
