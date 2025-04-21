@@ -7,7 +7,7 @@ const meta = {
   title: 'CardExpirationDateInput',
   component: CardExpirationDateInput,
   args: {
-    expirationDate: [],
+    expirationDate: { month: '', year: '' },
     setExpirationDate: () => {},
   },
 } satisfies Meta<typeof CardExpirationDateInput>;
