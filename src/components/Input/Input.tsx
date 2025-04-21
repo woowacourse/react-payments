@@ -15,14 +15,7 @@ const StyledInput = styled.input<InputProps>`
   border-radius: 2px;
   padding-left: 10px;
   box-sizing: border-box;
-  border: ${({ isError }) => {
-    switch (isError) {
-      case true:
-        return '1px solid #FF3D3D;';
-      case false:
-        return '1px solid #ACACAC;';
-    }
-  }};
+  border: ${({ isError }) => `1px solid ${isError ? '#FF3D3D' : '#ACACAC'}`};
 
   ::placeholder {
     color: #acacac;
@@ -34,17 +27,8 @@ const StyledInput = styled.input<InputProps>`
   }
 `;
 
-const Input = ({ value, onChange, onBlur, maxLength, placeholder, isError }: InputProps) => {
-  return (
-    <StyledInput
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      isError={isError}
-    />
-  );
+const Input = (props: InputProps) => {
+  return <StyledInput {...props} />;
 };
 
 export default Input;
