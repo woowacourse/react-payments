@@ -19,6 +19,6 @@ export const CardInfoForm = styled.form`
   display: flex;
   gap: 32px;
   flex-direction: column;
-  height: calc(100% - 260px);
+  height: calc(100% - 265px);
   overflow-y: scroll;
 `;

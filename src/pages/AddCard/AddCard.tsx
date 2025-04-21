@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { SequenceType } from '../../components/CardNumber/CardNumber';
 import { getCardType } from '../../utils';
 import CardBrand, { CardBrandType } from '../../components/CardBrand/CardBrand';
+import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
 
 export default function AddCard() {
   // 카드 번호
@@ -40,6 +41,11 @@ export default function AddCard() {
 
   // 카드 브랜드
   const [CardBrandType, setCardBrandType] = useState<CardBrandType | null>(null);
+
+  // 카드 비밀번호
+  const [CardPassword, setCardPassword] = useState<string>('');
+  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
+
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
@@ -71,6 +77,12 @@ export default function AddCard() {
           setCardCVCNumber={setCardCVCNumber}
           cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
           setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
+        />
+        <CardPasswordNumber
+          CardPassword={CardPassword}
+          setCardPassword={setCardPassword}
+          cardPasswordErrorMessage={cardPasswordErrorMessage}
+          setCardPasswordErrorMessage={setCardPasswordErrorMessage}
         />
       </S.CardInfoForm>
     </S.Wrapper>
