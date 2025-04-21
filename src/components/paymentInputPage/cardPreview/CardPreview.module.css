@@ -40,7 +40,7 @@
   letter-spacing: 2px;
 }
 
-.cardNumberBox > .pCardNumber:nth-child(n + 3) {
+.pMaskingCardNumber {
   font-size: 21px;
   letter-spacing: -8px;
   line-height: 0.7;

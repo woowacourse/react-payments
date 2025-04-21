@@ -46,8 +46,16 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
-        {displayCardNumbers.map((number) => {
-          return <p className={styles.pCardNumber}>{number}</p>;
+        {displayCardNumbers.map((number, index) => {
+          return (
+            <p
+              className={`${styles.pCardNumber} ${
+                index >= 2 ? styles.pMaskingCardNumber : ''
+              }`}
+            >
+              {number}
+            </p>
+          );
         })}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
