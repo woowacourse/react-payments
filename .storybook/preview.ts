@@ -1,5 +1,4 @@
 import type { Preview } from '@storybook/react';
-import '../reset.css';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import GlobalStyles from '../styles/global.ts';
 
