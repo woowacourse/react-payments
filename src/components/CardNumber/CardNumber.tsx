@@ -1,5 +1,5 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useRef, KeyboardEvent } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
 import { SequenceType } from '@/types';
 import * as S from './CardNumber.styles';
@@ -24,14 +24,51 @@ export default function CardNumber({
   cardNumberErrorMessage,
   setCardNumberErrorMessage,
 }: CardNumberProps) {
+  const inputRefs = {
+    first: useRef<HTMLInputElement>(null),
+    second: useRef<HTMLInputElement>(null),
+    third: useRef<HTMLInputElement>(null),
+    fourth: useRef<HTMLInputElement>(null),
+  };
+
+  const nextSequence: Record<SequenceType, SequenceType | null> = {
+    first: 'second',
+    second: 'third',
+    third: 'fourth',
+    fourth: null,
+  };
+
+  const prevSequence: Record<SequenceType, SequenceType | null> = {
+    first: null,
+    second: 'first',
+    third: 'second',
+    fourth: 'third',
+  };
+
   const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
     if (!checkAllNumber(value)) return;
 
     setCardNumber({ ...cardNumber, [sequence]: value });
 
-    if (value.length < 4)
+    if (value.length < 4) {
       setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.cardNumber.length });
-    else setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
+    } else {
+      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
+
+      const next = nextSequence[sequence];
+      if (next && inputRefs[next]?.current) {
+        inputRefs[next].current?.focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, sequence: SequenceType) => {
+    if (event.key === 'Backspace' && cardNumber[sequence] === '') {
+      const prev = prevSequence[sequence];
+      if (prev && inputRefs[prev]?.current) {
+        inputRefs[prev].current?.focus();
+      }
+    }
   };
 
   return (
@@ -51,7 +88,9 @@ export default function CardNumber({
               sequence: 'first',
             })
           }
+          onKeyDown={(event) => handleKeyDown(event, 'first')}
           isError={cardNumberErrorMessage.first !== ''}
+          ref={inputRefs.first}
         />
         <Input
           placeholder="1234"
@@ -63,7 +102,9 @@ export default function CardNumber({
               sequence: 'second',
             })
           }
+          onKeyDown={(event) => handleKeyDown(event, 'second')}
           isError={cardNumberErrorMessage.second !== ''}
+          ref={inputRefs.second}
         />
         <Input
           placeholder="1234"
@@ -75,7 +116,9 @@ export default function CardNumber({
               sequence: 'third',
             })
           }
+          onKeyDown={(event) => handleKeyDown(event, 'third')}
           isError={cardNumberErrorMessage.third !== ''}
+          ref={inputRefs.third}
         />
         <Input
           placeholder="1234"
@@ -87,7 +130,9 @@ export default function CardNumber({
               sequence: 'fourth',
             })
           }
+          onKeyDown={(event) => handleKeyDown(event, 'fourth')}
           isError={cardNumberErrorMessage.fourth !== ''}
+          ref={inputRefs.fourth}
         />
       </S.InputWrapper>
       <Spacing size={8} />
