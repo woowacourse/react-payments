@@ -6,7 +6,7 @@ import styles from "./CardCompany.module.css";
 import ChevronUp from "/chevron-up.svg";
 
 interface Props {
-  selectedCompany: CardCompanyType;
+  selectedCompany: CardCompanyType | null;
   selectCompany: (company: CardCompanyType) => void;
 }
 

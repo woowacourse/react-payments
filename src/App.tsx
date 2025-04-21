@@ -20,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <PreviewCardLayout
+        selectedCompany={selectedCompany?.value ?? ""}
         cardNumbers={{
           first: cardNumbers[0],
           second: cardNumbers[1],
