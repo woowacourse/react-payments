@@ -5,8 +5,8 @@ import { CARD_INFO } from "../../constants/CardInfo";
 import {
   validateExpirationDateMonth,
   validateExpirationDateYear,
-  validateisNumberString,
 } from "./validator/validateCardInput";
+import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 function CardExpirationDateInput({
   setExpirationDate,
@@ -25,30 +25,21 @@ function CardExpirationDateInput({
     const month = monthRef.current.value;
     const year = yearRef.current.value;
 
-    function errorFeedback(message: string) {
-      setFeedbackMessage(message);
-      setIsValid(false);
-    }
+    const field = e.target.name === "month" ? "MONTH" : "YEAR";
+    const validator =
+      field === "MONTH"
+        ? validateExpirationDateMonth(month, year)
+        : validateExpirationDateYear(month, year);
 
-    if (!validateisNumberString(e.target.value)) {
-      errorFeedback("숫자만 입력 가능합니다.");
+    const errorMessage = getFirstErrorMessage(validator, field);
+
+    if (errorMessage) {
+      setFeedbackMessage(errorMessage);
+      setIsValid(false);
       return;
     }
 
     setExpirationDate([month, year]);
-
-    if (
-      e.target.name === "month" &&
-      !validateExpirationDateMonth(month, year)
-    ) {
-      errorFeedback("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
-      return;
-    }
-    if (e.target.name === "year" && !validateExpirationDateYear(month, year)) {
-      errorFeedback("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
-      return;
-    }
-
     setFeedbackMessage("");
     setIsValid(true);
   }
@@ -75,4 +66,5 @@ function CardExpirationDateInput({
     </InputForm>
   );
 }
+
 export default CardExpirationDateInput;
