@@ -19,15 +19,15 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
   });
 
   function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber[0] === CARD_INFO.VISA_START_NUMBER.toString()) {
+    if (inputCardNumber.startsWith(CARD_INFO.VISA_START_NUMBER.toString())) {
       isBrand = true;
       brandName = "Visa";
       return;
     }
 
     if (
-      CARD_INFO.MASTER_START_NUMBERS.includes(
-        Number(inputCardNumber[0] + inputCardNumber[1])
+      CARD_INFO.MASTER_START_NUMBERS.some((startNumber) =>
+        inputCardNumber.startsWith(startNumber.toString())
       )
     ) {
       isBrand = true;
