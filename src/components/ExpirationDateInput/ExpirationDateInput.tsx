@@ -3,7 +3,7 @@ import Input from '../Input/Input';
 import { HandleInputParams } from '../CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import useExpDateValidation from '../../hooks/useExpDateValidation';
-import { expDateValidation } from '../../validators/expirationDateValidator';
+import { expirationDateValidation } from '../../validators/expirationDateValidator';
 import { useCallback } from 'react';
 
 type ExpirationDateInputProps = {
@@ -37,7 +37,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
   const placeHolders = ['MM', 'YY'];
   const validationCallback = useCallback(
     (values: string[], params: HandleInputParams, validLength: number) =>
-      expDateValidation(values, params, validLength),
+      expirationDateValidation(values, params, validLength),
     []
   );
   const { isError, errorMessage, validateExpirationDate } = useExpDateValidation(

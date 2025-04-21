@@ -30,27 +30,20 @@ export const checkTotalExpirationDate = (month: string, year: string) => {
   }
 };
 
-export const expDateValidation = (
+export const expirationDateValidation = (
   values: string[],
   { e, idx }: HandleInputParams,
   validLength: number
 ) => {
   const expDateValue = e.target.value;
-
   checkNumber(expDateValue);
-
-  if (idx === 0 && expDateValue.length === 1) {
-    checkValidLength(expDateValue.padStart(2, '0'), validLength);
-  } else {
-    checkValidLength(expDateValue, validLength);
-  }
+  checkValidLength(expDateValue, validLength);
 
   if (idx === 0) {
     checkValidMonth(expDateValue);
   } else if (idx === 1) {
     checkValidYear(expDateValue);
   }
-
   const updatedValues = [...values];
   updatedValues[idx] = expDateValue;
 
