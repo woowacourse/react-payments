@@ -53,19 +53,6 @@ function CardExpirationDateInput({
     setIsValid(true);
   }
 
-  const inputs = Array.from({ length: 2 }).map((_, index) => {
-    return (
-      <Input
-        ref={index === 0 ? monthRef : yearRef}
-        type="tel"
-        name={index === 0 ? "month" : "year"}
-        placeholder={index === 0 ? "MM" : "YY"}
-        onChange={(e, setIsValid) => onChangeHandler(e, setIsValid)}
-        maxLength={CARD_INFO.EXPIRATION_DATE_LENGTH_PART}
-      />
-    );
-  });
-
   return (
     <InputForm
       feedbackMessage={feedbackMessage}
@@ -73,7 +60,18 @@ function CardExpirationDateInput({
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
     >
-      {inputs}
+      {["month", "year"].map((name) => {
+        return (
+          <Input
+            ref={name === "month" ? monthRef : yearRef}
+            type="tel"
+            name={name}
+            placeholder={name === "month" ? "MM" : "YY"}
+            onChange={(e, setIsValid) => onChangeHandler(e, setIsValid)}
+            maxLength={CARD_INFO.EXPIRATION_DATE_LENGTH_PART}
+          />
+        );
+      })}
     </InputForm>
   );
 }
