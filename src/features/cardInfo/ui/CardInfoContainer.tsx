@@ -1,5 +1,5 @@
 import CardInfoSection from './CardInfoSection';
-import { cardInfoSectionData } from '../data/cardInfoSectionData';
+import { cardInfoSectionSpec } from '../data/cardInfoSectionSpec';
 import { ErrorProps } from '../../../shared/type/types';
 import styled from '@emotion/styled';
 
@@ -20,7 +20,7 @@ export default function CardInfoContainer({
 }) {
   return (
     <CardInfoWrapper>
-      {cardInfoSectionData.map((data, index) => (
+      {cardInfoSectionSpec.map((data, index) => (
         <CardInfoSection key={`${data.id}-${index}`} {...data} onChange={onChange} error={error} />
       ))}
     </CardInfoWrapper>

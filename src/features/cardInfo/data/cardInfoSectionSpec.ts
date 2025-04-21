@@ -1,4 +1,4 @@
-export const cardInfoSectionData = [
+export const cardInfoSectionSpec = [
   {
     id: 'cardNumber',
     title: '결제할 카드 번호를 입력해 주세요',
