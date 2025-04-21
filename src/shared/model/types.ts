@@ -2,7 +2,7 @@ export interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputEle
   error?: boolean;
 }
 
-export interface CardInfoProps {
+export interface CardInfo {
   cardNumber: string[];
   cardExpirationDate: { month: string; year: string };
   cardCVC: string;
