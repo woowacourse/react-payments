@@ -48,31 +48,50 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		year: "YY",
 	};
 
-	const onChange = (order: keyof date, value: string) => {
-		setExpirationDate({ ...expirationDate, [order]: value });
+	const updateExpirationDate = (order: keyof date, value: string) => {
+		setExpirationDate((prev) => ({ ...prev, [order]: value }));
+	};
 
+	const validateInputFormat = (order: keyof date, value: string): boolean => {
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-			setError({ ...error, [order]: MESSAGE.INVALID_NUMBER });
-			return;
+			setError((prev) => ({ ...prev, [order]: MESSAGE.INVALID_NUMBER }));
+			return false;
 		}
+		return true;
+	};
 
-		if (order === "month") {
-			const month = Number(value);
-			if (month < 0 || month > 12) {
-				setError({ ...error, month: MESSAGE.MONTH_RANGE });
-				return;
-			}
+	const validateMonthRange = (value: string): boolean => {
+		const month = Number(value);
+		if (month < 1 || month > 12) {
+			setError((prev) => ({ ...prev, month: MESSAGE.MONTH_RANGE }));
+			return false;
 		}
+		return true;
+	};
 
-		if (order === "year") {
-			const year = Number(value);
-			if (year < CURRENT_YEAR && year >= 0) {
-				setError({ ...error, year: MESSAGE.YEAR_RANGE(CURRENT_YEAR) });
-				return;
-			}
+	const validateYearRange = (value: string): boolean => {
+		const year = Number(value);
+		if (year < CURRENT_YEAR && year >= 0) {
+			setError((prev) => ({ ...prev, year: MESSAGE.YEAR_RANGE(CURRENT_YEAR) }));
+			return false;
 		}
+		return true;
+	};
 
-		setError({ ...error, [order]: "" });
+	const clearError = (order: keyof date) => {
+		setError((prev) => ({ ...prev, [order]: "" }));
+	};
+
+	const onChange = (order: keyof date, value: string) => {
+		updateExpirationDate(order, value);
+
+		if (!validateInputFormat(order, value)) return;
+
+		if (order === "month" && !validateMonthRange(value)) return;
+
+		if (order === "year" && !validateYearRange(value)) return;
+
+		clearError(order);
 	};
 
 	const onBlur = (order: keyof date, value: string) => {
