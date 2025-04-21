@@ -44,7 +44,7 @@ export const InvalidInput: Story = {
       expect(container.textContent).toContain('숫자만 입력 가능합니다.')
     );
     const style = getComputedStyle(input!);
-    expect(style.borderColor).toBe('rgb(255, 0, 0)');
+    expect(style.borderColor).toBe('#ff0000');
   },
 };
 
@@ -61,6 +61,6 @@ export const MixedInput: Story = {
       expect(container.textContent).toContain('숫자만 입력 가능합니다.')
     );
     const style = getComputedStyle(input);
-    expect(style.borderColor).toBe('rgb(255, 0, 0)');
+    expect(style.borderColor).toBe('#ff0000');
   },
 };
