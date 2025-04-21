@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cardNumberValidator, cardExpirationDateValidator, cardCVCValidator } from '../validation/cardInfoValidator';
-import { ErrorProps } from '../../../shared/type/types';
+import { ErrorProps } from '../../../shared/model/types';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,

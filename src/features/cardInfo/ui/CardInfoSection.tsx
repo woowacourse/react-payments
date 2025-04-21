@@ -1,5 +1,5 @@
 import CustomInput from '../../../shared/ui/CustomInput';
-import { ErrorProps } from '../../../shared/type/types';
+import { ErrorProps } from '../../../shared/model/types';
 import * as S from './CardInfoSection.styles';
 import { ComponentProps } from 'react';
 

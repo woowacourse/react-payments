@@ -1,6 +1,6 @@
 import CardInfoSection from './CardInfoSection';
-import { cardInfoSectionSpec } from '../data/cardInfoSectionSpec';
-import { ErrorProps } from '../../../shared/type/types';
+import { cardInfoSectionSpec } from '../model/cardInfoSectionSpec';
+import { ErrorProps } from '../../../shared/model/types';
 import styled from '@emotion/styled';
 
 const CardInfoWrapper = styled.div`

@@ -1,4 +1,4 @@
-import { CustomInputProps } from '../type/types';
+import { CustomInputProps } from '../model/types';
 import * as S from './customInput.styles';
 
 export default function CustomInput({ type, placeholder, name, onChange, maxLength, error }: CustomInputProps) {
