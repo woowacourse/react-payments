@@ -22,8 +22,8 @@ function CardExpirationDateInput({
     const { name, value } = target;
 
     setExpirationDate({ ...expirationDate, [name]: value });
-    checkIsValidType(name, value);
     checkIsValidExpiration(name, value);
+    checkIsValidType(name, value);
   }
 
   function checkIsValidType(name: string, expiryValue: string) {
