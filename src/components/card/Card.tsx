@@ -6,22 +6,29 @@ type Props = {
   expirationDate: date;
 };
 
-const settingBadgeBrand = (firstSection: string) => {
-  if (firstSection.length >= 2) {
-    const firstTwoDigits = firstSection.substring(0, 2);
-    const numValue = parseInt(firstTwoDigits);
-
-    if (numValue >= 51 && numValue <= 55) {
-      return 1;
-    }
-  }
-
-  if (firstSection.startsWith('4')) {
-    return 2;
-  }
-
-  return 0;
+const BADGE_BRAND = {
+  NONE: 0,
+  MASTER_CARD: 1,
+  VISA: 2,
 };
+
+const cardBrandRules = [
+  {
+    brand: BADGE_BRAND.MASTER_CARD,
+    validate: (cardFirstSection: string) => {
+      if (cardFirstSection.length >= 2) {
+        const firstTwoDigits = parseInt(cardFirstSection.substring(0, 2));
+        return firstTwoDigits >= 51 && firstTwoDigits <= 55;
+      }
+
+      return false;
+    },
+  },
+  {
+    brand: BADGE_BRAND.VISA,
+    validate: (cardFirstSection: string) => cardFirstSection.startsWith('4'),
+  },
+];
 
 const badgeImagePath = (badgeBrand: number) => {
   if (badgeBrand === 1) return './images/Mastercard.png';
@@ -40,12 +47,16 @@ const formatDate = (expirationDate: date) => {
 };
 
 const Card = ({cardNumbers, expirationDate}: Props) => {
+  const matchedCard = cardBrandRules.find((rule) =>
+    rule.validate(cardNumbers.first)
+  );
+
   return (
     <Container>
       <Wrap>
         <Chip />
         <BrandBadge
-          image={badgeImagePath(settingBadgeBrand(cardNumbers.first))}
+          image={badgeImagePath(matchedCard ? matchedCard.brand : 0)}
         />
       </Wrap>
 
