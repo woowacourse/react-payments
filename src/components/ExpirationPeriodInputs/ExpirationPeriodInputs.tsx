@@ -16,14 +16,15 @@ interface ExpirationPeriodInputsProps {
   ) => void;
 }
 
+const month = MAGIC_NUMBER.placeholders.month;
+const year = MAGIC_NUMBER.placeholders.year;
+const maxLength = MAGIC_NUMBER.maxLength.expirationPeriod;
+
 function ExpirationPeriodInputs({
   expirationPeriod,
   error,
   handleExpirationPeriodChange,
 }: ExpirationPeriodInputsProps) {
-  const month = MAGIC_NUMBER.placeholders.month;
-  const year = MAGIC_NUMBER.placeholders.year;
-  const maxLength = MAGIC_NUMBER.maxLength.expirationPeriod;
   return (
     <>
       <Input

@@ -13,13 +13,14 @@ interface CardNumberInputsProps {
   handleCardNumberChange: (value: string, position: CardPositionType) => void;
 }
 
+const cardNumberPlaceholder = MAGIC_NUMBER.placeholders.cardNumber;
+const maxLength = MAGIC_NUMBER.maxLength.cardNumber;
+
 function CardNumberInputs({
   cardNumbers,
   error,
   handleCardNumberChange,
 }: CardNumberInputsProps) {
-  const cardNumberPlaceholder = MAGIC_NUMBER.placeholders.cardNumber;
-  const maxLength = MAGIC_NUMBER.maxLength.cardNumber;
   return (
     <>
       <Input

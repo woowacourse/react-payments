@@ -8,9 +8,10 @@ interface CvcInputProps {
   handleCvcNumberChange: (value: string) => void;
 }
 
+const placeholder = MAGIC_NUMBER.placeholders.cvcNumber;
+const maxLength = MAGIC_NUMBER.maxLength.cvcNumber;
+
 function CvcInput({ value, error, handleCvcNumberChange }: CvcInputProps) {
-  const placeholder = MAGIC_NUMBER.placeholders.cvcNumber;
-  const maxLength = MAGIC_NUMBER.maxLength.cvcNumber;
   return (
     <Input
       placeholder={placeholder}
