@@ -2,7 +2,7 @@ export const MASTER_CARD_PREFIXES = ['51', '52', '53', '54', '55'];
 
 export const VISA_CARD_PREFIXES = ['4'];
 
-export const CARD_COMPANY_NAMES = [
+export const CARD_COMPANY_NAMES: CompanyType[] = [
   'BC카드',
   '신한카드',
   '카카오뱅크',
@@ -13,7 +13,8 @@ export const CARD_COMPANY_NAMES = [
   '국민카드',
 ];
 
-export const CARD_COMPANY_COLORS = {
+export const CARD_COMPANY_COLORS: Record<CompanyType, string> = {
+  '': '#333',
   BC카드: '#F04651',
   신한카드: '#0046FF',
   카카오뱅크: '#FFE600',

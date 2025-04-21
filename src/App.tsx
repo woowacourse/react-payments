@@ -29,6 +29,7 @@ function App() {
           cardInfo.number.third,
           cardInfo.number.fourth,
         ]}
+        company={cardInfo.company}
         expiration={{ month: cardInfo.expiration.month, year: cardInfo.expiration.year }}
       />
       <div>

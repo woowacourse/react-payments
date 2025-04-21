@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
-import { CARD_TYPE_PATH, VISA_CARD_PREFIXES, MASTER_CARD_PREFIXES } from '../../constants/setting';
+import { CARD_COMPANY_COLORS, CARD_TYPE_PATH } from '../../constants/setting';
+import getCardType from '../../utils/getCardType';
 
 interface CardProps {
   cardNumber: string[];
+  company: keyof typeof CARD_COMPANY_COLORS;
   expiration: { month: string; year: string };
 }
 
-const Card = ({ cardNumber, expiration }: CardProps) => {
+const Card = ({ cardNumber, company, expiration }: CardProps) => {
   const cardType = getCardType(cardNumber[0]);
 
   function maskCardNumber(cardNumber: string[]) {
@@ -17,7 +19,7 @@ const Card = ({ cardNumber, expiration }: CardProps) => {
   }
 
   return (
-    <CardContainer>
+    <CardContainer company={company}>
       <CardHeader>
         <CardIC />
         {cardType !== 'None' && <CardType src={CARD_TYPE_PATH[cardType]} alt={cardType} />}
@@ -35,23 +37,13 @@ const Card = ({ cardNumber, expiration }: CardProps) => {
 
 export default Card;
 
-const getCardType = (cardFirstNumber: string): CardType => {
-  for (const prefix of VISA_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return 'VISA';
-  }
-  for (const prefix of MASTER_CARD_PREFIXES) {
-    if (cardFirstNumber.startsWith(prefix)) return 'MasterCard';
-  }
-
-  return 'None';
-};
-
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ company: keyof typeof CARD_COMPANY_COLORS }>`
   width: 212px;
   height: 132px;
+  color: ${({ company }) => (company === '카카오뱅크' ? '#333' : 'white')};
   padding: 8px 12px;
   border-radius: 4px;
-  background: #333;
+  background: ${({ company }) => CARD_COMPANY_COLORS[company]};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 30px;
 `;
@@ -77,7 +69,6 @@ const CardType = styled.img`
 `;
 
 const CardInfo = styled.div`
-  color: white;
   display: flex;
   flex-direction: column;
   gap: 8px;
