@@ -27,9 +27,7 @@ function App() {
 
   const {
     cardCVC,
-    isCardCVCError,
     onChangeCVC,
-    checkCardCVCError,
     errorMessage: cardCVCErrorMessage,
   } = useCardCVC();
 
@@ -76,11 +74,11 @@ function App() {
         </CardInputSection>
         <CardInputSection
           title="CVC 번호를 입력해 주세요"
-          errorMessage={checkCardCVCError() ? cardCVCErrorMessage : ''}
+          errorMessage={cardCVCErrorMessage}
         >
           <CardCVCField
             cardCVC={cardCVC}
-            isError={isCardCVCError}
+            isError={Boolean(cardCVCErrorMessage)}
             onChange={onChangeCVC}
           />
         </CardInputSection>
