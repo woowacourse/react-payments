@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardNumbersInput from "../components/CardNumbersInput/CardNumbersInput";
-import { useState } from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
@@ -38,14 +37,8 @@ export default meta;
 type Story = StoryObj<typeof CardNumbersInput>;
 
 const Template = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(
-    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""),
-  );
   return (
-    <CardNumbersInput
-      cardNumbers={cardNumbers}
-      setCardNumbers={setCardNumbers}
-    />
+    <CardNumbersInput />
   );
 };
 

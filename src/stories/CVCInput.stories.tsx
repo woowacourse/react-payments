@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CVCInput from "../components/CVCInput/CVCInput";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
-import { useState } from "react";
 import ERROR from "../constants/errorMessage";
 import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
 
@@ -35,9 +34,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const Template = () => {
-  const [CVC, setCVC] = useState("");
-
-  return <CVCInput CVC={CVC} setCVC={setCVC} />;
+  return <CVCInput />;
 };
 
 export const Valid_CVCInput: Story = {
@@ -87,7 +84,7 @@ export const Invalid_NumberLength: Story = {
 
     await expect(
       canvas.findByText(
-        `${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}${ERROR.REQUIRE}`,
+        `${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
       ),
     ).resolves.toBeInTheDocument();
   },

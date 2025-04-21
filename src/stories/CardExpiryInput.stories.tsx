@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardExpiryInput from "../components/CardExpiryInput/CardExpiryInput";
-import { useState } from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
@@ -45,16 +44,8 @@ export default meta;
 type Story = StoryObj<typeof CardExpiryInput>;
 
 const Template = () => {
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-
   return (
-    <CardExpiryInput
-      month={month}
-      setMonth={setMonth}
-      year={year}
-      setYear={setYear}
-    />
+    <CardExpiryInput />
   );
 };
 

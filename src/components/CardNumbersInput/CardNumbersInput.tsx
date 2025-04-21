@@ -1,51 +1,10 @@
 import { useCardContext } from "../../contexts/CardContext";
-import { useRef, useState } from "react";
 import InputContainer from "../InputContainer/InputContainer";
-import {
-  validateCardNumbers,
-  validateFirstCardNumbers,
-} from "../../domain/validate";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
-import ERROR from "../../constants/errorMessage";
-import CustomCardNumbersError from "../../error/CustomCardNumbersError";
 
 const CardNumbersInput = () => {
-  const { cardNumbers, setCardNumbers } = useCardContext();
-  const [helperText, setHelperText] = useState<string>("");
-  const [errorIndex, setErrorIndex] = useState<number | null>(null);
-  const inputRefs = useRef<(HTMLElement | null)[]>([]);
-
-  const handleChange =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      try {
-        const newCardNumbers = [...cardNumbers];
-        newCardNumbers[index] = e.target.value;
-        setCardNumbers(newCardNumbers);
-
-        validateFirstCardNumbers(newCardNumbers[0]);
-        validateCardNumbers(
-          newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
-        );
-        if (helperText !== "") {
-          inputRefs.current[index]?.focus();
-        }
-        setHelperText("");
-        setErrorIndex(null);
-      } catch (error: unknown) {
-        if (error instanceof CustomCardNumbersError) {
-          if (error.message === ERROR.CARD_NUMBER.INVALID) {
-            inputRefs.current[0]?.focus();
-            setErrorIndex(0);
-          } else {
-            inputRefs.current[error.index]?.focus();
-            setErrorIndex(error.index);
-          }
-          setHelperText(error.message);
-        }
-      }
-    };
+  const { cardNumbers, cardNumbersHelperText, cardNumbersErrorIndex, cardNumbersInputRefs, handleCardNumbers } = useCardContext();
 
   return (
     <InputContainer
@@ -60,16 +19,16 @@ const CardNumbersInput = () => {
             placeholder="1234"
             name={`card${index + 1}`}
             value={value}
-            onChange={handleChange(index)}
+            onChange={handleCardNumbers(index)}
             ref={(element) => {
-              inputRefs.current.push(element);
+              cardNumbersInputRefs.current.push(element);
             }}
-            className={`input ${index === errorIndex && "errorInput"}`}
+            className={`input ${index === cardNumbersErrorIndex && "errorInput"}`}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
           />
         ))}
       </div>
-      <p className={`helperText`}>{helperText}</p>
+      <p className={`helperText`}>{cardNumbersHelperText}</p>
     </InputContainer>
   );
 };
