@@ -6,11 +6,16 @@ export type CardInformationType = {
   expirationDate: ExpirationDateType;
 };
 
+const BRAND_IMAGE = {
+  visa: './Visa.png',
+  master: './Mastercard.png',
+};
+
 function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
-  let isBrand = false;
-  let brandName = 'Mastercard';
+  const inputCardNumber = cardNumbers.join('');
+  const brand = determineBrand(inputCardNumber);
+
   const displayCardNumbers = cardNumbers.map((number, index) => {
-    if (index === 0) checkBrand(number);
     if (index <= 1) {
       return number;
     }
@@ -18,32 +23,26 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
     return '•'.repeat(number.length);
   });
 
-  function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber[0] === '4') {
-      isBrand = true;
-      brandName = 'Visa';
-      return;
-    }
+  function determineBrand(inputCardNumber: string) {
+    const visa = ['4'];
+    const master = ['51', '52', '53', '54', '55'];
 
-    if (
-      inputCardNumber[0] === '5' &&
-      Number(inputCardNumber[1]) >= 1 &&
-      Number(inputCardNumber[1]) <= 5
-    ) {
-      isBrand = true;
-      brandName = 'Mastercard';
-      return;
-    }
+    if (checkBrandCard(inputCardNumber, visa)) return 'visa';
+    if (checkBrandCard(inputCardNumber, master)) return 'master';
+    return '';
+  }
 
-    isBrand = false;
+  function checkBrandCard(cardNumber: string, brandNumbers: string[]) {
+    return brandNumbers.some((code) => cardNumber.startsWith(code));
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
-        {isBrand && (
-          <img src={`./${brandName}.png`} className={styles.logoBrand} />
+
+        {brand === '' ? null : (
+          <img src={BRAND_IMAGE[brand]} className={styles.logoBrand} />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
