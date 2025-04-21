@@ -33,15 +33,14 @@ const invalidYear = (year: string) => {
 
 export const validateCardNumbers = (number: string[], length: number) => {
   number.map((num, index) => {
-    if (num.length > 0) {
-      if (!isNumber(num))
-        throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
-      if (invalidNumberLength(num, length))
-        throw new CustomCardNumbersError(
-          `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index
-        );
-    }
+    if (num.length <= 0) return;
+    if (!isNumber(num))
+      throw new CustomCardNumbersError(ERROR.REQUIRE.NUMBER, index);
+    if (invalidNumberLength(num, length))
+      throw new CustomCardNumbersError(
+        `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
+        index
+      );
   });
 };
 
