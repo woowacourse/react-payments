@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from '../constants/errorMessages';
+import { ERROR_MESSAGES } from './errorMessages';
 
 export const inputValidation = (e: React.ChangeEvent<HTMLInputElement>, validLength: number) => {
   const inputValue = e.target.value;

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from '../constants/errorMessages';
+import { ERROR_MESSAGES } from './errorMessages';
 
 export const checkValidMonth = (value: string) => {
   if (Number(value) < 1 || Number(value) > 12) throw new Error(ERROR_MESSAGES.INVALID_MONTH_RANGE);
