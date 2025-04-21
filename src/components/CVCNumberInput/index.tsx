@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CVCNumberInputView from './CVCNumberInputView';
 
 export interface CVCNumberInputProps {
