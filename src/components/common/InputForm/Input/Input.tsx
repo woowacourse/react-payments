@@ -1,11 +1,4 @@
-import {
-  ComponentProps,
-  Dispatch,
-  forwardRef,
-  SetStateAction,
-  useState,
-  Ref,
-} from "react";
+import { ComponentProps, Dispatch, SetStateAction, useState } from "react";
 import styles from "./Input.module.css";
 
 export interface InputProps extends Omit<ComponentProps<"input">, "onChange"> {
@@ -15,24 +8,16 @@ export interface InputProps extends Omit<ComponentProps<"input">, "onChange"> {
   ) => void;
 }
 
-function Input(
-  { type, onChange, name, id, placeholder, maxLength }: InputProps,
-  ref: Ref<HTMLInputElement>
-) {
+function Input({ onChange, ...props }: InputProps) {
   const [isValid, setIsValid] = useState<boolean>(true);
 
   return (
     <input
-      ref={ref}
-      type={type}
-      name={name}
-      id={id}
-      placeholder={placeholder}
-      maxLength={maxLength}
+      {...props}
       onChange={(e) => onChange(e, setIsValid)}
       className={`${styles.input} ${!isValid && styles.isNotValid} tx-md`}
     />
   );
 }
 
-export default forwardRef<HTMLInputElement, InputProps>(Input);
+export default Input;
