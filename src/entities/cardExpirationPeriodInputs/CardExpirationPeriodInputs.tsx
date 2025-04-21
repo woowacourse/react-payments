@@ -18,9 +18,9 @@ import {
 } from "../inputs.css";
 
 type ExpirationPeriodProps = {
-  expirationPeriod: ExpirationPeriod;
+  expirationPeriod: Record<ExpirationPeriod, string>;
   changeExpirationPeriod: (
-    expirationPeriod: keyof ExpirationPeriod,
+    expirationPeriod: ExpirationPeriod,
     date: string
   ) => void;
 };
@@ -37,7 +37,7 @@ function CardExpirationPeriodInputs({
   function checkMonthValidation(
     length: number,
     date: string,
-    type: keyof ExpirationPeriod
+    type: ExpirationPeriod
   ) {
     const validationFns = getMonthValidationFns(length, date);
     const validation = validationFns?.find((v) => v?.condition());
@@ -52,7 +52,7 @@ function CardExpirationPeriodInputs({
   function checkYearValidation(
     length: number,
     date: string,
-    type: keyof ExpirationPeriod
+    type: ExpirationPeriod
   ) {
     const validationFns = getYearValidationFns(length, date);
     const validation = validationFns?.find((v) => v?.condition());
@@ -65,7 +65,7 @@ function CardExpirationPeriodInputs({
   }
 
   const errorMessage = getErrorMessage(
-    error as Record<keyof ExpirationPeriod, string>
+    error as Record<ExpirationPeriod, string>
   );
 
   return (

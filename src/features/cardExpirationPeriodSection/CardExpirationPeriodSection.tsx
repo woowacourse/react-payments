@@ -4,9 +4,9 @@ import { StyledContainer } from "./CardExpirationPeriodSection.css";
 import { ExpirationPeriod } from "../../\btypes/index.types";
 
 export type ExpirationPeriodProps = {
-  expirationPeriod: ExpirationPeriod;
+  expirationPeriod: Record<ExpirationPeriod, string>;
   changeExpirationPeriod: (
-    expirationPeriod: keyof ExpirationPeriod,
+    expirationPeriod: ExpirationPeriod,
     date: string
   ) => void;
 };

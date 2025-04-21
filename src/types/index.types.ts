@@ -1,9 +1,6 @@
 export type CardNumberPosition = "first" | "second" | "third" | "fourth";
 
-export type ExpirationPeriod = {
-  month: string;
-  year: string;
-};
+export type ExpirationPeriod = "month" | "year";
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: string;

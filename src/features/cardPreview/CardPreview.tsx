@@ -19,7 +19,7 @@ type CardNumber = Record<CardNumberPosition, string>;
 
 type CardPreviewProps = {
   cardNumber: CardNumber;
-  expirationPeriod: ExpirationPeriod;
+  expirationPeriod: Record<ExpirationPeriod, string>;
 };
 
 const CARD_IDENTIFYING_NUMBER = {

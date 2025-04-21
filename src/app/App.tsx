@@ -1,21 +1,17 @@
 import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
-import CardNumberSection from "../features/cardNumberSection/CardNumberSection";
-import CardExpirationPeriodSection from "../features/cardExpirationPeriodSection/CardExpirationPeriodSection";
-import CardCVCNumberSection from "../features/cardCVCNumberSection/CardCVCNumberSection";
+import CardInfoForm from "../features/cardInfoForm/cardInfoForm.tsx";
 import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
-import { INITIALIZE_VALUE, NO_ERROR } from "../shared/constants/constant";
+import { INITIALIZE_VALUE } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
-import useError from "../shared/hook/useError.ts";
-import { getCardNumberValidationFns } from "../entities/cardNumberInputs/CardNumberInputs.domain.ts";
 
 type CardNumberState = {
   [key in CardNumberPosition]: string;
 };
 
 type ExpirationPeriodState = {
-  [key in keyof ExpirationPeriod]: string;
+  [key in ExpirationPeriod]: string;
 };
 
 function App() {
@@ -26,18 +22,6 @@ function App() {
       third: INITIALIZE_VALUE,
       fourth: INITIALIZE_VALUE,
     });
-
-  const { error, checkValidation, getErrorMessage } = useError<
-    Record<CardNumberPosition, string>
-  >(
-    {
-      first: NO_ERROR,
-      second: NO_ERROR,
-      third: NO_ERROR,
-      fourth: NO_ERROR,
-    },
-    getCardNumberValidationFns
-  );
 
   const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
     useCardInfo<ExpirationPeriodState>({
@@ -59,18 +43,11 @@ function App() {
           cardNumber={cardNumber}
           expirationPeriod={expirationPeriod}
         />
-        <CardNumberSection
+        <CardInfoForm
           cardNumber={cardNumber}
           changeCardNumber={changeCardNumber}
-          error={error}
-          checkValidation={checkValidation}
-          getErrorMessage={getErrorMessage}
-        />
-        <CardExpirationPeriodSection
           expirationPeriod={expirationPeriod}
           changeExpirationPeriod={changeExpirationPeriod}
-        />
-        <CardCVCNumberSection
           CVCNumber={CVCNumber}
           changeCVCNumber={changeCVCNumber}
         />
