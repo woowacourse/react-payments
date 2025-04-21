@@ -1,31 +1,28 @@
 import styled from '@emotion/styled';
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
+import { CVCNumberInfo } from '../../types/models';
 
 export interface CVCNumberInputViewProps {
-  cvcNumbers: string[];
-  isError: boolean;
+  cvcNumberInfo: CVCNumberInfo;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const CVCNumberInputView = ({
-  cvcNumbers,
-  isError,
+  cvcNumberInfo,
   handleInputChange,
 }: CVCNumberInputViewProps) => {
   return (
     <Container data-testid="cvcnumbers-component">
       <InputAreaHeader title="CVC 번호를 입력해 주세요" />
       <InputTexts
+        dataModels={cvcNumberInfo}
         label="CVC"
-        placeholder={['123']}
-        state={cvcNumbers}
         onChange={handleInputChange}
-        isErrors={[isError]}
       />
-      <ErrorMessage>{isError ? ERROR_MESSAGE : ''}</ErrorMessage>
+      <ErrorMessage>{cvcNumberInfo.isError ? ERROR_MESSAGE : ''}</ErrorMessage>
     </Container>
   );
 };

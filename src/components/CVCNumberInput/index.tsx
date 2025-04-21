@@ -1,34 +1,32 @@
 import { useState } from 'react';
 import CVCNumberInputView from './CVCNumberInputView';
-
-export interface CVCNumberInputProps {
-  cvcNumbers: string[];
-  setCvcNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-}
+import { isNumeric, isValidSegment } from '../../utils/cardValidation';
+import { CVCNumberInfo } from '../../types/models';
 
 const CVC_NUMBERS_LENGTH = 3;
 
-const CVCNumberInput = ({ cvcNumbers, setCvcNumbers }: CVCNumberInputProps) => {
-  const [isError, setIsError] = useState(false);
+const CVCNumberInput = () => {
+  const [cvcNumberInfo, setCvcNumberInfo] = useState<CVCNumberInfo>(() => ({
+    number: '',
+    isError: false,
+    placeholder: '123',
+    numberSegmentLength: CVC_NUMBERS_LENGTH,
+  }));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCvcNumbers((prev) => {
-      const newState = [...prev];
-      const value = e.target.value;
-      if (/^[0-9]*$/.test(value) && value.length <= CVC_NUMBERS_LENGTH) {
-        newState[0] = value;
-        setIsError(false);
-      } else {
-        setIsError(true);
-      }
-      return newState;
-    });
+    const { value } = e.target;
+    const valid = isNumeric(value) && isValidSegment(value, CVC_NUMBERS_LENGTH);
+
+    setCvcNumberInfo((prev) => ({
+      ...prev,
+      number: valid ? value : prev.number,
+      isError: !valid,
+    }));
   };
 
   return (
     <CVCNumberInputView
-      cvcNumbers={cvcNumbers}
-      isError={isError}
+      cvcNumberInfo={cvcNumberInfo}
       handleInputChange={handleInputChange}
     />
   );
