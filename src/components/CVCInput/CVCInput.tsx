@@ -4,6 +4,7 @@ import { HandleInputParams } from '../CardPage/CardPage';
 import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
+import { useCallback } from 'react';
 
 type CVCInputProps = {
   values: string[];
@@ -33,9 +34,11 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const { isError, errorMessage, validate } = useInputValidation([false], (e) =>
-    inputValidation(e, 3)
+  const validationCallback = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 3),
+    []
   );
+  const { isError, errorMessage, validate } = useInputValidation([false], validationCallback);
 
   return (
     <StyledCVCInput>
