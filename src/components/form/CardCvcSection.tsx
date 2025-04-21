@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Title from '../title/Title';
 import InputField from '../inputField/InputField';
 import Input from '../input/Input';
-import {Dispatch, SetStateAction, useState} from 'react';
+import {useState} from 'react';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from './constants/error';
 
