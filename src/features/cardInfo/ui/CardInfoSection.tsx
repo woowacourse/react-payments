@@ -1,6 +1,6 @@
 import './cardInfoSection.css';
-import CustomInput from '../../../shared/ui/CustomInput';
-import { CustomInputProps, ErrorProps } from '../../../shared/type/types';
+import CustomInput, { CustomInputProps } from '../../../shared/ui/CustomInput';
+import { ErrorProps } from '../../../shared/type/types';
 
 interface CardInfoSectionProps {
   id: string;

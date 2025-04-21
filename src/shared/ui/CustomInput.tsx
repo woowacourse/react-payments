@@ -1,5 +1,13 @@
-import { CustomInputProps } from '../type/types';
 import './customInput.css';
+
+export interface CustomInputProps {
+  type: string;
+  placeholder: string;
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
+  error?: boolean;
+}
 
 export default function CustomInput({
   type,
