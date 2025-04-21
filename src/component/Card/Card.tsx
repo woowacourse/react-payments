@@ -19,14 +19,16 @@ type CardProps = {
 function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const { first, second, third, forth } = cardNumber;
 
+  const firstString = first?.toString();
+
   const masterCardType =
-    first?.toString() &&
+    firstString &&
     CARD_TYPE.masterCard.startsWith.some((prefix) =>
-      first.toString().startsWith(prefix)
+      firstString.startsWith(prefix)
     );
 
   const visaCardType =
-    first?.toString() && first.toString().startsWith(CARD_TYPE.visa.startsWith);
+    firstString && firstString.startsWith(CARD_TYPE.visa.startsWith);
 
   const checkCardType = () => {
     if (masterCardType) {
