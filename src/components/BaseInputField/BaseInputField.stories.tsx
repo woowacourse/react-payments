@@ -5,6 +5,7 @@ import BaseInputField from './BaseInputField';
 import Input from '../Input/Input';
 
 const meta: Meta<typeof BaseInputField> = {
+  title: 'components/BaseInputField',
   component: BaseInputField,
   tags: ['autodocs'],
 };
