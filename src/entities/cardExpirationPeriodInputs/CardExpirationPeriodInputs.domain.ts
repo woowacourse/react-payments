@@ -30,7 +30,6 @@ export function getMonthValidationFns(length: number, date: string) {
       errorMsg: ERROR_MESSAGE.MONTH_RANGE,
     },
     ...getCommonValidationFns(length, date),
-    ,
   ];
 }
 

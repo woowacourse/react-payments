@@ -1,11 +1,5 @@
-import { useState } from "react";
 import Input from "../../shared/input/Input";
 import { ExpirationPeriod } from "../../\btypes/index.types";
-import {
-  getErrorMessage,
-  getMonthValidationFns,
-  getYearValidationFns,
-} from "./CardExpirationPeriodInputs.domain.ts";
 import { NO_ERROR } from "../../shared/constants/constant";
 import {
   EXPIRATION_PERIOD,
@@ -23,50 +17,41 @@ type ExpirationPeriodProps = {
     expirationPeriod: ExpirationPeriod,
     date: string
   ) => void;
+  monthError: Record<"month", string>;
+  checkMonthValidation: ({
+    length,
+    value,
+    type,
+  }: {
+    length: number;
+    value: string;
+    type: "month";
+  }) => void;
+  getMonthErrorMessage: () => string | undefined;
+  yearError: Record<"year", string>;
+  checkYearValidation: ({
+    length,
+    value,
+    type,
+  }: {
+    length: number;
+    value: string;
+    type: "year";
+  }) => void;
+  getYearErrorMessage: () => string | undefined;
 };
 
 function CardExpirationPeriodInputs({
   expirationPeriod,
   changeExpirationPeriod,
+  monthError,
+  checkMonthValidation,
+  getMonthErrorMessage,
+  yearError,
+  checkYearValidation,
+  getYearErrorMessage,
 }: ExpirationPeriodProps) {
-  const [error, setError] = useState({
-    month: NO_ERROR,
-    year: NO_ERROR,
-  });
-
-  function checkMonthValidation(
-    length: number,
-    date: string,
-    type: ExpirationPeriod
-  ) {
-    const validationFns = getMonthValidationFns(length, date);
-    const validation = validationFns?.find((v) => v?.condition());
-    setError((prev) => {
-      return {
-        ...prev,
-        [type]: validation?.errorMsg || NO_ERROR,
-      };
-    });
-  }
-
-  function checkYearValidation(
-    length: number,
-    date: string,
-    type: ExpirationPeriod
-  ) {
-    const validationFns = getYearValidationFns(length, date);
-    const validation = validationFns?.find((v) => v?.condition());
-    setError((prev) => {
-      return {
-        ...prev,
-        [type]: validation?.errorMsg || NO_ERROR,
-      };
-    });
-  }
-
-  const errorMessage = getErrorMessage(
-    error as Record<ExpirationPeriod, string>
-  );
+  const errorMessage = getMonthErrorMessage() || getYearErrorMessage();
 
   return (
     <StyledContainer>
@@ -75,32 +60,32 @@ function CardExpirationPeriodInputs({
         <Input
           value={expirationPeriod.month}
           onChange={(e) => {
-            checkMonthValidation(
-              EXPIRATION_PERIOD_LENGTH,
-              e.target.value,
-              "month"
-            );
+            checkMonthValidation({
+              length: EXPIRATION_PERIOD_LENGTH,
+              value: e.target.value,
+              type: "month",
+            });
             changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={error.month !== NO_ERROR}
+          isError={monthError.month !== NO_ERROR}
         ></Input>
         <Input
           value={expirationPeriod.year}
           onChange={(e) => {
-            checkYearValidation(
-              EXPIRATION_PERIOD_LENGTH,
-              e.target.value,
-              "year"
-            );
+            checkYearValidation({
+              length: EXPIRATION_PERIOD_LENGTH,
+              value: e.target.value,
+              type: "year",
+            });
             changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={error.year !== NO_ERROR}
+          isError={yearError.year !== NO_ERROR}
         />
       </StyledInputWrap>
       {errorMessage ? (

@@ -9,11 +9,39 @@ export type ExpirationPeriodProps = {
     expirationPeriod: ExpirationPeriod,
     date: string
   ) => void;
+  monthError: Record<"month", string>;
+  checkMonthValidation: ({
+    length,
+    value,
+    type,
+  }: {
+    length: number;
+    value: string;
+    type: "month";
+  }) => void;
+  getMonthErrorMessage: () => string | undefined;
+  yearError: Record<"year", string>;
+  checkYearValidation: ({
+    length,
+    value,
+    type,
+  }: {
+    length: number;
+    value: string;
+    type: "year";
+  }) => void;
+  getYearErrorMessage: () => string | undefined;
 };
 
 function CardExpirationPeriodSection({
   expirationPeriod,
   changeExpirationPeriod,
+  monthError,
+  checkMonthValidation,
+  getMonthErrorMessage,
+  yearError,
+  checkYearValidation,
+  getYearErrorMessage,
 }: ExpirationPeriodProps) {
   return (
     <StyledContainer>
@@ -24,6 +52,12 @@ function CardExpirationPeriodSection({
       <CardExpirationPeriodInputs
         expirationPeriod={expirationPeriod}
         changeExpirationPeriod={changeExpirationPeriod}
+        monthError={monthError}
+        checkMonthValidation={checkMonthValidation}
+        getMonthErrorMessage={getMonthErrorMessage}
+        yearError={yearError}
+        checkYearValidation={checkYearValidation}
+        getYearErrorMessage={getYearErrorMessage}
       />
     </StyledContainer>
   );
