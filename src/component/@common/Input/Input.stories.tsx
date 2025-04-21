@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useArgs } from '@storybook/preview-api';
 import Input from './Input';
 import { useState } from 'react';
+import { DIGITS_ONLY_REGEX } from '../../../constants';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
@@ -36,7 +37,7 @@ export const NumberInput: Story = {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
 
-      if (newValue === '' || /^[0-9]+$/.test(newValue)) {
+      if (newValue === '' || DIGITS_ONLY_REGEX.test(newValue)) {
         updateArgs({ value: newValue });
       }
       args.onChange?.(e);
@@ -45,7 +46,7 @@ export const NumberInput: Story = {
     return (
       <div>
         <Input {...args} value={value || ''} onChange={handleChange} />
-        {value && !/^[0-9]+$/.test(value) && (
+        {value && !DIGITS_ONLY_REGEX.test(value) && (
           <div style={{ color: 'red', marginTop: '5px' }}>
             숫자만 입력 가능합니다
           </div>
@@ -67,7 +68,7 @@ export const CVCInput: Story = {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
 
-      if (newValue === '' || /^[0-9]+$/.test(newValue)) {
+      if (newValue === '' || DIGITS_ONLY_REGEX.test(newValue)) {
         updateArgs({ value: newValue });
 
         if (newValue.length > 0 && newValue.length < 3) {

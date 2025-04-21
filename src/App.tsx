@@ -41,7 +41,10 @@ function App() {
           />
           <CardPeriodInput
             cardExpirationDate={cardExpirationDate}
-            onChange={handleCardExpirationChange}
+            onChange={{
+              month: handleCardExpirationChange.month,
+              year: handleCardExpirationChange.year,
+            }}
             errorState={cardExpirationDateError}
             getMonthErrorMessage={getMonthErrorMessage}
             getYearErrorMessage={getYearErrorMessage}

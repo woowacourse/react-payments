@@ -5,21 +5,14 @@ export type CardNumber = {
   forth: number | null;
 };
 
-export type CardNumberError = {
-  first: boolean;
-  second: boolean;
-  third: boolean;
-  forth: boolean;
-};
+export interface CardNumberError extends Record<keyof CardNumber, boolean> {}
 
 export type CardExpirationDate = {
   month: string;
   year: string;
 };
 
-export type CardExpirationDateError = {
-  month: boolean;
-  year: boolean;
-};
+export interface CardExpirationDateError
+  extends Record<keyof CardExpirationDate, boolean> {}
 
 export type CardCVC = number | null;

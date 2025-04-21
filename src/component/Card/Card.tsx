@@ -8,8 +8,8 @@ import {
   cardLayout,
   cardType,
 } from './Card.style';
-import { CARD_TYPE } from '../../constants';
 import { CardExpirationDate, CardNumber } from '../../../types/types';
+import { identifyCardType } from '../../utils/cardTypeUtils';
 
 type CardProps = {
   cardNumber: CardNumber;
@@ -17,47 +17,39 @@ type CardProps = {
 };
 
 function Card({ cardNumber, cardExpirationDate }: CardProps) {
-  const { first, second, third, forth } = cardNumber;
+  const cardTypeId = identifyCardType(cardNumber);
 
-  const masterCardType =
-    first?.toString() &&
-    CARD_TYPE.masterCard.startsWith.some((prefix) =>
-      first.toString().startsWith(prefix)
-    );
-
-  const visaCardType =
-    first?.toString() && first.toString().startsWith(CARD_TYPE.visa.startsWith);
-
-  const checkCardType = () => {
-    if (masterCardType) {
-      return MasterCard;
-    } else if (visaCardType) {
-      return Visa;
-    }
+  const getCardTypeImage = () => {
+    if (cardTypeId === 'mastercard') return MasterCard;
+    if (cardTypeId === 'visa') return Visa;
+    return null;
   };
 
-  const isCardExpirationDate =
+  const cardTypeImage = getCardTypeImage();
+
+  const hasCardExpirationDate =
     cardExpirationDate.month || cardExpirationDate.year;
 
   return (
     <section css={cardLayout}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
-        {checkCardType() && (
+        {cardTypeImage && (
           <div>
-            <img css={cardType} src={checkCardType() ?? ''} alt="카드 타입" />
+            <img css={cardType} src={cardTypeImage} alt="카드 타입" />
           </div>
         )}
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          <span css={cardContentText}>{first}</span>
-          <span css={cardContentText}>{second}</span>
-          <span css={cardContentText}>{third}</span>
-          <span css={cardContentText}>{forth}</span>
+          {Object.values(cardNumber).map((value, index) => (
+            <span key={index} css={cardContentText}>
+              {value}
+            </span>
+          ))}
         </div>
         <div css={cardContent}>
-          {isCardExpirationDate && (
+          {hasCardExpirationDate && (
             <span css={cardContentText}>
               {cardExpirationDate.month}/{cardExpirationDate.year}
             </span>
