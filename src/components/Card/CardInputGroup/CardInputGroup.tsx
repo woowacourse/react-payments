@@ -88,6 +88,7 @@ function CardInputGroup({
             {cardPositions.map((position) => {
               return (
                 <Input
+                  key={position}
                   placeholder={PLACEHOLDERS.cardNumber}
                   maxLength={MAX_LENGTHS.cardNumber}
                   isError={error.cardNumbers[position]}
@@ -112,6 +113,7 @@ function CardInputGroup({
             {periodPositions.map((position) => {
               return (
                 <Input
+                  key={position}
                   placeholder={PLACEHOLDERS.month}
                   maxLength={MAX_LENGTHS.expirationPeriod}
                   isError={error.expirationPeriod[position]}
@@ -128,6 +130,7 @@ function CardInputGroup({
       case CARD_INPUT_TYPE.cvcNumber:
         return (
           <Input
+            key={CARD_INPUT_TYPE.cvcNumber}
             placeholder={PLACEHOLDERS.cvcNumber}
             maxLength={MAX_LENGTHS.cvcNumber}
             isError={error.cvcNumber}
