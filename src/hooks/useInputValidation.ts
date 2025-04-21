@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { HandleInputParams } from '../pages/CardPage/CardPage';
+
 function useInputValidation(initialErrorState: boolean[], validationFn: (value: string) => void) {
   const [isErrorStates, setIsErrorStates] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState('');

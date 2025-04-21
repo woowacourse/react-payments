@@ -1,16 +1,9 @@
 import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
-import { useState } from 'react';
-
 import HelperText from '../../../../components/HelperText/HelperText';
-import {
-  checkTotalExpirationDate,
-  checkValidMonth,
-  checkValidYear,
-} from '../../../../validators/expirationDateValidator';
-import { checkNumber, checkValidLength } from '../../../../validators/checkInputValidator';
 import { HandleInputParams } from '../../CardPage';
 import { EXPIRATION_DATE } from '../../../../constants/settings';
+import useExpirationDateValidation from '../../../../hooks/useExpirationDateValidation';
 
 type ExpirationDateInputProps = {
   values: string[];
@@ -18,58 +11,8 @@ type ExpirationDateInputProps = {
 };
 
 const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => {
-  const [isError, setIsError] = useState([false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const checkValidExpirationDate = ({ value, idx }: HandleInputParams) => {
-    try {
-      checkTotalExpirationDate(values[0], values[1]);
-    } catch (error) {
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[0] = true;
-        return updated;
-      });
-
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
-      return;
-    }
-
-    try {
-      checkNumber(value);
-      if (idx === 0 && values[0].length === 1) {
-        values[0] = values[0].padStart(2, '0');
-      } else {
-        checkValidLength(value, 2);
-      }
-
-      if (idx === 0) {
-        checkValidMonth(value);
-      } else if (idx === 1) {
-        checkValidYear(value);
-      }
-
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = false;
-        if (updated.every((errorState) => errorState === false)) {
-          setErrorMessage('');
-        }
-        return updated;
-      });
-    } catch (error) {
-      setIsError((prev) => {
-        const updated = [...prev];
-        updated[idx] = true;
-        return updated;
-      });
-
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
-    }
-  };
+  const { isErrorStates, errorMessage, checkValidExpirationDate } =
+    useExpirationDateValidation(values);
 
   return (
     <StyledExpirationDateInput>
@@ -83,7 +26,7 @@ const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => 
             onBlur={(e) => checkValidExpirationDate({ value: e.target.value, idx })}
             maxLength={EXPIRATION_DATE.MAX_LENGTH}
             placeholder={EXPIRATION_DATE.PLACEHOLDER[idx]}
-            isError={isError[idx]}
+            isError={isErrorStates[idx]}
           />
         ))}
       </StyledInputWrapper>
