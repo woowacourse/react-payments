@@ -1,0 +1,17 @@
+.input {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--black);
+  padding: 12px 8px;
+  &::placeholder {
+    color: var(--grey);
+  }
+
+  &:focus {
+    border: 1px solid var(--black);
+  }
+  &.isNotValid {
+    border: 1px solid var(--red);
+  }
+}
