@@ -1,0 +1,28 @@
+import styled from '@emotion/styled';
+
+import { Props } from '.';
+import { colors } from '@/styles/global';
+
+export const StyledInputContainer = styled.input<Pick<Props, 'isValid'>>`
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  height: 40px;
+  color: black;
+  background-color: white;
+  font-size: 14px;
+  border: solid 1px;
+  border-radius: 4px;
+  outline: none;
+  ${({ isValid }) => 'border-color : ' + (isValid ? `${colors.GY1}` : `${colors.red}`)};
+
+  &:focus {
+    border-color: black;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: ${colors.GY2};
+    background-color: rgba(172, 172, 172, 0.2);
+  }
+`;
