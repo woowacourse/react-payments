@@ -16,7 +16,7 @@ type Props = {
 const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 	const [error, setError] = useState("");
 
-	const handleInput = (value: string) => {
+	const onChange = (value: string) => {
 		setcvcNumber(value);
 
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
@@ -27,13 +27,11 @@ const CardCvc = ({ cvcNumber, setcvcNumber }: Props) => {
 		setError("");
 	};
 
-	const handleFocusout = (value: string) => {
+	const onBlur = (value: string) => {
 		if (value.length < INPUT_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
 	};
 
-	const inputs = [
-		<Input maxLength={INPUT_MAX_LENGTH} isError={error.length > 0} placeholder="123" value={cvcNumber} handleInput={(value) => handleInput(value)} handleFocusout={(value) => handleFocusout(value)} />,
-	];
+	const inputs = [<Input maxLength={INPUT_MAX_LENGTH} isError={error.length > 0} placeholder="123" value={cvcNumber} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />];
 
 	return (
 		<CardNumberWrap>

@@ -24,7 +24,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 
 	const nowYear = new Date().getFullYear() % 100;
 
-	const handleInput = (order: keyof date, value: string) => {
+	const onChange = (order: keyof date, value: string) => {
 		setExpirationDate({ ...expirationDate, [order]: value });
 
 		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
@@ -51,7 +51,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		setError({ ...error, [order]: "" });
 	};
 
-	const handleFocusout = (order: keyof date, value: string) => {
+	const onBlur = (order: keyof date, value: string) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
@@ -68,8 +68,8 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 				placeholder={placeholderMap[orderLabels[index]]}
 				value={expirationDate[orderLabels[index]]}
 				maxLength={INPUT_MAX_LENGTH}
-				handleInput={(numbers) => handleInput(orderLabels[index], numbers)}
-				handleFocusout={(numbers) => handleFocusout(orderLabels[index], numbers)}
+				onChange={(numbers) => onChange(orderLabels[index], numbers)}
+				onBlur={(numbers) => onBlur(orderLabels[index], numbers)}
 			/>
 		);
 	});
