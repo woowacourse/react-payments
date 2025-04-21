@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import InputForm from "../../../common/inputForm/InputForm";
 import Input from "../../../common/inputForm/input/Input";
-import { validatorUtils } from "../../../../utils/validationUtils";
 import { CARD_INFO } from "../../constants/CardInfo";
+import { validateisNumberString } from "./validator/validateCardInput";
 
 const numbersArray = Array.from({ length: 4 }).fill("") as string[];
 
@@ -19,7 +19,7 @@ function CardNumberInput({
     index: number
   ) {
     const inputCardNumber = e.target.value;
-    if (!validatorUtils.isNumber(inputCardNumber)) {
+    if (!validateisNumberString(inputCardNumber)) {
       setFeedbackMessage("숫자만 입력 가능합니다.");
       setIsValid(false);
       return;

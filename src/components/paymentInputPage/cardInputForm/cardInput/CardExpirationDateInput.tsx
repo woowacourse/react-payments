@@ -3,8 +3,14 @@ import Input from "../../../common/inputForm/input/Input";
 import InputForm from "../../../common/inputForm/InputForm";
 import { validatorUtils } from "../../../../utils/validationUtils";
 import { CARD_INFO } from "../../constants/CardInfo";
+import {
+  validateExpirationDateMonth,
+  validateExpirationDateYear,
+  validateisNumberString,
+} from "./validator/validateCardInput";
 
-const numbersArray = Array.from({ length: 2 }).fill("") as string[];
+let [month, year] = Array.from({ length: 2 }).fill("") as string[];
+
 function CardExpirationDateInput({
   setExpirationDate,
 }: {
@@ -17,29 +23,26 @@ function CardExpirationDateInput({
     setIsValid: (state: boolean) => void,
     index: number
   ) {
+    function errorFeedback(message: string) {
+      setFeedbackMessage(message);
+      setIsValid(false);
+    }
     const expirationDate = e.target.value;
-    if (!validatorUtils.isNumber(expirationDate)) {
-      setFeedbackMessage("숫자만 입력 가능합니다.");
-      setIsValid(false);
+    if (!validateisNumberString(expirationDate)) {
+      errorFeedback("숫자만 입력 가능합니다.");
       return;
     }
-    numbersArray[index] = expirationDate;
-    setExpirationDate([...numbersArray]);
-    if (
-      (index === 0 &&
-        !validatorUtils.isValidNumberRange(Number(expirationDate), 1, 12)) ||
-      !validatorUtils.isValidExpirationDate(numbersArray[0], numbersArray[1])
-    ) {
-      setFeedbackMessage("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
-      setIsValid(false);
+
+    if (index === 0) month = expirationDate;
+    if (index === 1) year = expirationDate;
+    setExpirationDate([month, year]);
+
+    if (index === 0 && !validateExpirationDateMonth(month, year)) {
+      errorFeedback("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
       return;
     }
-    if (
-      index === 1 &&
-      !validatorUtils.isValidExpirationDate(numbersArray[0], numbersArray[1])
-    ) {
-      setFeedbackMessage("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
-      setIsValid(false);
+    if (index === 1 && !validateExpirationDateYear(month, year)) {
+      errorFeedback("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.");
       return;
     }
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Input from "../../../common/inputForm/input/Input";
 import InputForm from "../../../common/inputForm/InputForm";
-import { validatorUtils } from "../../../../utils/validationUtils";
 import { CARD_INFO } from "../../constants/CardInfo";
+import { validateCVC } from "./validator/validateCardInput";
 
 function CardCVCInput() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
@@ -12,7 +12,7 @@ function CardCVCInput() {
     setIsValid: (state: boolean) => void
   ) {
     const cvc = e.target.value;
-    if (!validatorUtils.isNumber(cvc)) {
+    if (!validateCVC(cvc)) {
       setFeedbackMessage("숫자만 입력 가능합니다.");
       setIsValid(false);
     } else {
