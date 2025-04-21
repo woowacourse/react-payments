@@ -1,0 +1,14 @@
+.input {
+  width: 100%;
+  padding: 10px 10px;
+  border: 1px solid #acacac;
+  border-radius: 5px;
+}
+
+.input:focus {
+  outline: 1px solid black;
+}
+
+.errorInput:focus {
+  outline: 1px solid red;
+}

@@ -1,0 +1,25 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin: auto;
+  max-width: 400px;
+}
+
+.label {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.inputContainer {
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.helperText {
+  color: red;
+  font-size: 15px;
+}
