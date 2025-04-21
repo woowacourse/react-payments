@@ -32,9 +32,7 @@ function CardValidityPeriodField({
   const id = useId();
   return (
     <div>
-      <Label htmlFor="cardValidityPeriod-0" id="cardValidityPeriod">
-        유효기간
-      </Label>
+      <Label htmlFor={`cardValidityPeriod-${id}-${month}`}>유효기간</Label>
       <InputWrapper>
         <Input
           isError={isErrorMonth}
