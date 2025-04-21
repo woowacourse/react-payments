@@ -1,13 +1,19 @@
 import CardInfo from '../../../features/cardInfo/model/CardInfo';
+import { CARD_TYPE, CARD_IMAGE_PATH } from '../../../shared/constants/cardTypeConstants';
 import './preview.css';
 
 const getCardImageSrc = (cardNumber = '') => {
   const first = cardNumber[0];
   const second = Number(cardNumber[1]);
 
-  if (first === '4') return './Visa.svg';
-  if (first === '5' && second >= 1 && second <= 5) return './Mastercard.svg';
-  return '';
+  if (first === CARD_TYPE.VISA.FIRST_DIGIT) return CARD_IMAGE_PATH.VISA;
+  if (
+    first === CARD_TYPE.MASTERCARD.FIRST_DIGIT &&
+    second >= CARD_TYPE.MASTERCARD.SECOND_DIGIT_MIN &&
+    second <= CARD_TYPE.MASTERCARD.SECOND_DIGIT_MAX
+  )
+    return CARD_IMAGE_PATH.MASTERCARD;
+  return CARD_IMAGE_PATH.DEFAULT;
 };
 
 export default function Preview({ cardInfo }: { cardInfo: CardInfo }) {
