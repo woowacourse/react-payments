@@ -9,6 +9,7 @@ export type InputFieldProps = {
     uniqueNumber: string[];
     expirationDate: string[];
     cvcNumber: string[];
+    type?: string;
   };
   setCardInformation: (newValue: InputFieldProps["cardInformation"]) => void;
   informationType: "uniqueNumber" | "expirationDate" | "cvcNumber";

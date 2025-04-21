@@ -7,9 +7,9 @@ type InputProps = {
   value: string;
   error: boolean;
   setValue: (value: string) => void;
-  allowOnly?: string;
+  type?: string;
 };
-const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, error, setValue, type }: InputProps) => {
   return (
     <input
       css={inputStyle(error)}
@@ -17,6 +17,7 @@ const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) =
       value={value}
       placeholder={placeholder}
       maxLength={maxLength}
+      type={type}
     />
   );
 };

@@ -22,12 +22,12 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
           {uniqueNumberState.map((value: string, index: number) => (
             <Input
               key={index}
-              placeholder="1234"
+              placeholder={index === 2 || index === 3 ? "●●●●" : "1234"}
               value={value}
               maxLength={4}
               setValue={(v) => handleChange(v, index)}
               error={error[index]}
-              allowOnly="number"
+              type={index === 2 || index === 3 ? "password" : "text"}
             />
           ))}
         </div>

@@ -27,7 +27,11 @@ const PreviewCard = ({ uniqueNumber, expirationDate }: { uniqueNumber: string[];
           {uniqueNumber.map((number: string, index) => {
             return (
               <span key={index} css={numberStyle}>
-                {number}
+                {index === 2 || index === 3
+                  ? Array(number.length)
+                      .fill("*")
+                      .map((dot, idx) => <span key={idx}>{dot}</span>)
+                  : number}
               </span>
             );
           })}

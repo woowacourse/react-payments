@@ -26,7 +26,6 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
             setValue={(v) => handleChangeMonth(v)}
             maxLength={2}
             error={monthError}
-            allowOnly="number"
           ></Input>
           <Input
             placeholder="YY"
@@ -34,7 +33,6 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
             setValue={(v) => handleChangeYear(v)}
             maxLength={2}
             error={yearError}
-            allowOnly="number"
           ></Input>
         </div>
         <div css={errorTextWrapperStyle(monthError || yearError)}>

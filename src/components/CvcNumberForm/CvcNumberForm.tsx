@@ -24,7 +24,6 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
             value={cvcNumberState[0]}
             setValue={(v) => handleChange(v)}
             error={error}
-            allowOnly="number"
           />
         </div>
         <div css={errorTextWrapperStyle(error)}>
