@@ -1,5 +1,5 @@
+import InputSection from "../\bInputSection/InputSection";
 import { INPUT_TYPE } from "../../constants/constants";
-import InputSection from "../InputForm/InputSection";
 import Preview from "../Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
 

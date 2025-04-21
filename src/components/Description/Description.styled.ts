@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { COLORS, FONT_SIZE } from "../../styles/tokens";
 
 export const DescriptionCSS = styled.p`
-  font-size: ${FONT_SIZE.small};
-  color: ${COLORS.gray};
+  font-size: ${({ theme }) => theme.fontSize.small};
+  color: ${({ theme }) => theme.colors.gray};
   margin: 0;
   padding: 10px 0;
 `;

@@ -1,7 +1,6 @@
 import PreviewImg from "/card-preview.svg";
 import styled from "styled-components";
 import { CARD_IMAGE, CardImageType } from "../../constants/constants";
-import { COLORS, FONT_SIZE } from "../../styles/tokens";
 
 export const PreviewContainerCSS = styled.div`
   width: 100%;
@@ -17,8 +16,8 @@ export const PreviewCSS = styled.div`
   width: 230px;
   height: 180px;
 
-  color: ${COLORS.white};
-  font-size: ${FONT_SIZE.large};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSize.large};
   letter-spacing: 2px;
 
   display: flex;
