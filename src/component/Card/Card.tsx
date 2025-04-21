@@ -36,7 +36,7 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
     }
   };
 
-  const isCardExpirationDate =
+  const filledExpirationField =
     cardExpirationDate.month || cardExpirationDate.year;
 
   return (
@@ -57,7 +57,7 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
           <span css={cardContentText}>{forth}</span>
         </div>
         <div css={cardContent}>
-          {isCardExpirationDate && (
+          {filledExpirationField && (
             <span css={cardContentText}>
               {cardExpirationDate.month}/{cardExpirationDate.year}
             </span>
