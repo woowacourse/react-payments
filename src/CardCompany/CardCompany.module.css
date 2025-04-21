@@ -1,0 +1,51 @@
+.card-number__input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-number {
+  display: grid;
+  width: 100%;
+  border: var(--color-input) 1px solid;
+  border-radius: 4px;
+  /* height: 32px; */
+  box-sizing: border-box;
+}
+
+.button {
+  background-color: var(--color-white);
+  width: 100%;
+}
+
+.card-company {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dropdown-icon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.dropdown-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.placeholder-label {
+  color: var(--color-input);
+  width: 100%;
+  text-align: left;
+}
+
+li {
+  color: var(--color-gray2);
+  width: 316px;
+  height: 31px;
+  padding: 7px 73px 7px 10px;
+}

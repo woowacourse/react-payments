@@ -25,7 +25,7 @@ export default function CardNumber({
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   return (
-    <section className={styles["card-number"]}>
+    <section className="card-company">
       <InputText
         inputValue={CONSTANT_CARD_NUMBER.INPUT_TITLE}
         variant="title"
