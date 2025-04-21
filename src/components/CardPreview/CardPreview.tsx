@@ -32,11 +32,7 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
             <span key={index} data-testid={`card-number-${index}`}>
-              {isHiddenCardIndex(index)
-                ? '•'
-                    .repeat(number.length)
-                    .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
-                : number.padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')}
+              {isHiddenCardIndex(index) ? '•'.repeat(number.length) : number}
             </span>
           ))}
         </div>

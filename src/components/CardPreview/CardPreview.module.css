@@ -46,6 +46,7 @@
 .cardNumberContainer > span {
   text-align: center;
   white-space: pre;
+  flex: 1;
 }
 
 .date {
