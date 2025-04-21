@@ -23,7 +23,7 @@ const CardExpiryInput = ({
   const [errorIndex, setErrorIndex] = useState<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     try {
@@ -67,7 +67,7 @@ const CardExpiryInput = ({
           name="month"
           placeholder="MM"
           value={month}
-          onChange={handleDate}
+          onChange={updateDate}
           ref={(element) => {
             inputRefs.current.push(element);
           }}
@@ -79,7 +79,7 @@ const CardExpiryInput = ({
           name="year"
           placeholder="YY"
           value={year}
-          onChange={handleDate}
+          onChange={updateDate}
           ref={(element) => {
             inputRefs.current.push(element);
           }}

@@ -9,15 +9,15 @@ type CardPreviewProps = {
 
 const VISA_CARD_CONDITION = 4;
 const MASTER_CARD_CONDITIONS = ['51', '52', '53', '54', '55'];
-const UNVISIBLE_CARD_NUMBER_CONDITIONS = [2, 3];
+const HIDDEN_CARD_NUMBER_CONDITIONS = [2, 3];
 
 const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
   const isVisaCard = VISA_CARD_CONDITION === Number(cardNumbers[0][0]);
   const isMasterCard = MASTER_CARD_CONDITIONS.some((condition) =>
     cardNumbers[0].startsWith(condition)
   );
-  const isUnVisibleCardNumber = (index: number) =>
-    UNVISIBLE_CARD_NUMBER_CONDITIONS.includes(index);
+  const isHiddenCardIndex = (index: number) =>
+    HIDDEN_CARD_NUMBER_CONDITIONS.includes(index);
 
   return (
     <div className={styles.preview}>
@@ -32,7 +32,7 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
         <div className={styles.cardNumberContainer}>
           {cardNumbers.map((number, index) => (
             <span key={index} data-testid={`card-number-${index}`}>
-              {isUnVisibleCardNumber(index)
+              {isHiddenCardIndex(index)
                 ? '•'
                     .repeat(number.length)
                     .padEnd(CARD_VALIDATION_INFO.CARD_MAX_LENGTH, ' ')
