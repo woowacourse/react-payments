@@ -49,8 +49,8 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         {displayCardNumbers.map((number, index) => {
           return (
             <p
-              className={`${styles.pCardNumber} ${
-                index >= 2 ? styles.pMaskingCardNumber : ''
+              className={`${styles.cardNumber} ${
+                index >= 2 ? styles.maskingCardNumber : ''
               }`}
             >
               {number}
@@ -58,7 +58,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
           );
         })}
       </div>
-      <p className={`${styles.pCardNumber} tx-md`}>
+      <p className={`${styles.cardNumber} tx-md`}>
         {expirationDate.month !== '' || expirationDate.year !== ''
           ? `${expirationDate.month}/${expirationDate.year}`
           : ''}

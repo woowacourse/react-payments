@@ -35,12 +35,12 @@
   border-radius: 4px;
 }
 
-.pCardNumber {
+.cardNumber {
   width: 40px;
   letter-spacing: 2px;
 }
 
-.pMaskingCardNumber {
+.maskingCardNumber {
   font-size: 21px;
   letter-spacing: -8px;
   line-height: 0.7;
