@@ -71,7 +71,7 @@ const useCardNumbers = (): CardNumbersOptions => {
   };
 
   return {
-    cardNumbers: cardNumbers,
+    cardNumbers,
     setCardNumbers: handleCardNumbersChange,
     handleCardNumbersBlur,
     isError: error.isError,

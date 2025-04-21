@@ -12,6 +12,7 @@ const InputField = ({
   isError = false,
   placeholder,
   onBlur,
+  ...rest
 }: InputFieldProps) => {
   return (
     <input
@@ -21,6 +22,7 @@ const InputField = ({
       onBlur={onBlur}
       className={`${styles.input} ${isError ? styles.error : styles.basic}`}
       placeholder={placeholder}
+      {...rest}
     />
   );
 };
