@@ -1,12 +1,8 @@
+import { InputHTMLAttributes } from 'react';
 import styles from './inputField.module.css';
 
-type InputFieldProps = {
-  value: string;
-  name: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   isError?: boolean;
-  placeholder: string;
-  onBlur: () => void;
 };
 
 const InputField = ({
