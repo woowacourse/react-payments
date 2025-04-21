@@ -1,33 +1,32 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from "@emotion/react";
-import { CardInformationType, CardType } from "../../types/CardInformationType";
+import { CardInformationType } from "../../types/CardInformationType";
+import useCardType from "../../hooks/useCardType";
 
-const seperateCard = {
+const separateCard = {
   visa: "Visa.png",
   master: "Mastercard.png",
 };
 
-const PreviewCard = ({
-  cardInformationState,
-  cardType,
-}: {
-  cardInformationState: CardInformationType;
-  cardType: CardType;
-}) => {
+const PreviewCard = ({ cardInformationState }: { cardInformationState: CardInformationType }) => {
   const { uniqueNumber, expirationDate } = cardInformationState;
   const [MM, YY] = expirationDate;
+  const cardType = useCardType(cardInformationState.uniqueNumber[0]);
 
   return (
     <div css={previewCardStyle}>
       <div css={TopStyle}>
         <div css={magneticStyle}></div>
-        {cardType !== "none" && <img css={cardImageStyle} src={seperateCard[cardType]} alt={cardType} />}
+        {cardType !== "none" && <img css={cardImageStyle} src={separateCard[cardType]} alt={cardType} />}
       </div>
       <div css={cardInformationStyle}>
         <div css={uniqueNumberStyle}>
-          {uniqueNumber.map((number: string) => {
-            return <span css={numberStyle}>{number}</span>;
+          {uniqueNumber.map((number: string, index: number) => {
+            return (
+              <span key={index} css={numberStyle}>
+                {number}
+              </span>
+            );
           })}
         </div>
         <span css={expirationDateStyle}>

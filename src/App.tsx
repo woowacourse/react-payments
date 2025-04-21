@@ -2,15 +2,15 @@
 import "./App.css";
 import { css } from "@emotion/react";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
-import CardInformation from "./domain/CardInformation.tsx";
+import useCardInformation from "./hooks/useCardInformation.tsx";
 import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
 
 function App() {
-  const { cardType, cardInformationState, setCardInformationState } = CardInformation();
+  const { cardInformationState, setCardInformationState } = useCardInformation();
 
   return (
     <div css={AppStyle}>
-      <PreviewCard cardInformationState={cardInformationState} cardType={cardType} />
+      <PreviewCard cardInformationState={cardInformationState} />
       <FormContainer cardInformationState={cardInformationState} setCardInformationState={setCardInformationState} />
     </div>
   );

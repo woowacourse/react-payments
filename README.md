@@ -76,8 +76,8 @@
 - [ ] 설계 구조 변경
   - [ ] 에러 처리 로직
 - [x] previewContainer 제거
-- [ ] previewCard 내부 로직 수정 (cardType 내부에서 관리)
-- [ ] cspell 익스텐션 이용 알파벳 수정
+- [x] previewCard 내부 로직 수정 (cardType 내부에서 관리)
+- [x] cspell 익스텐션 이용 알파벳 수정
 - [ ] string 배열 타입 -> 튜플 타입 변경
 - [ ] input props 네이밍 표준 인터페이스 명으로 변경
 - [ ] CardInformation 도메인 -> use- 붙이기 (훅사용)
