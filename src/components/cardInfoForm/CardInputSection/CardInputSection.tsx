@@ -14,18 +14,16 @@ function CardInputSection({
   children,
 }: CardInputSectionProps) {
   return (
-    <Wrapper>
+    <section>
       <Title>{title}</Title>
       {description && <Description>{description}</Description>}
       {children}
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </Wrapper>
+    </section>
   );
 }
 
 export default CardInputSection;
-
-const Wrapper = styled.section``;
 
 const Title = styled.p`
   font-weight: bold;
