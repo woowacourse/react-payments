@@ -13,15 +13,14 @@ export default meta;
 
 type Story = StoryObj<typeof CvcNumberForm>;
 
-export const Primary: Story = {
+export const Cvc: Story = {
   args: {
-    // placeholder: "1234",
-    // maxLength: 4,
-    // value: "",
+    cvcNumberState: ["123"],
+    dispatch: () => {},
   },
   render: (args: any) => {
-    // const [value, setValue] = useState(args.value);
+    const [value, setValue] = useState(args.cvcNumberState);
 
-    return <CvcNumberForm />;
+    return <CvcNumberForm cvcNumberState={value} dispatch={setValue} />;
   },
 };

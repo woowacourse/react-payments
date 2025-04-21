@@ -13,33 +13,21 @@ type Story = StoryObj<typeof PreviewCard>;
 
 export const NoneCard: Story = {
   args: {
-    cardInformationState: {
-      uniqueNumber: ["1234", "1234", "1234", "1234"],
-      expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
-    },
-    cardType: "none",
+    uniqueNumber: ["1234", "1234", "1234", "1234"],
+    expirationDate: ["12", "25"],
   },
 };
 
 export const VisaCard: Story = {
   args: {
-    cardInformationState: {
-      uniqueNumber: ["4234", "1234", "1234", "1234"],
-      expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
-    },
-    cardType: "visa",
+    uniqueNumber: ["4234", "1234", "1234", "1234"],
+    expirationDate: ["12", "25"],
   },
 };
 
 export const MasterCard: Story = {
   args: {
-    cardInformationState: {
-      uniqueNumber: ["5134", "1234", "1234", "1234"],
-      expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
-    },
-    cardType: "master",
+    uniqueNumber: ["5234", "1234", "1234", "1234"],
+    expirationDate: ["12", "25"],
   },
 };

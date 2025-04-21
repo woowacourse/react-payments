@@ -14,11 +14,10 @@ type Story = StoryObj<typeof FormContainer>;
 
 export const Primary: Story = {
   args: {
-    cardInformationState: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
-    setCardInformationState: () => {},
+    cardState: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
+    dispatch: () => {},
   },
   render: (args: any) => {
-    const [cardInformation, setCardInformation] = useState(args.cardInformationState);
-    return <FormContainer cardInformationState={cardInformation} setCardInformationState={setCardInformation} />;
+    return <FormContainer cardState={args.cardState} dispatch={args.dispatch} />;
   },
 };

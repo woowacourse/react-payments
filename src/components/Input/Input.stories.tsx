@@ -12,9 +12,9 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const Primary: Story = {
+export const Basic: Story = {
   args: {
-    placeholder: "1234",
+    placeholder: "Basic",
     maxLength: 4,
     value: "",
   },
@@ -29,6 +29,21 @@ export const Primary: Story = {
         setValue={setValue}
         error={false}
       />
+    );
+  },
+};
+
+export const Error: Story = {
+  args: {
+    placeholder: "Error",
+    maxLength: 4,
+    value: "",
+  },
+  render: (args: any) => {
+    const [value, setValue] = useState(args.value);
+
+    return (
+      <Input placeholder={args.placeholder} maxLength={args.maxLength} value={value} setValue={setValue} error={true} />
     );
   },
 };

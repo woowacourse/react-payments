@@ -57,11 +57,11 @@
   - [x] InputField 컴포넌트 스토리북 생성
     - [x] error 메시지 상태관리
   - [x] UniqueNumberForm 컴포넌트 구현
-  - [ ] UniqueNumberForm 스토리북 생성
+  - [x] UniqueNumberForm 스토리북 생성
   - [x] ExpirationDateForm 컴포넌트 구현
-  - [ ] ExpirationDateForm 스토리북 생성
+  - [x] ExpirationDateForm 스토리북 생성
   - [x] CvcNumberForm 컴포넌트 구현
-  - [ ] CvcNumberForm 스토리북 생성
+  - [x] CvcNumberForm 스토리북 생성
   - [x] FormContainer 컴포넌트 구현
   - [x] FormContainer 컴포넌트 스토리북 생성
   - [x] PreviewContainer 컴포넌트 구현
