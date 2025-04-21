@@ -22,11 +22,19 @@ const PreviewCard = ({ cardInformationState }: { cardInformationState: CardInfor
       <div css={cardInformationStyle}>
         <div css={uniqueNumberStyle}>
           {uniqueNumber.map((number: string, index: number) => {
-            return (
-              <span key={index} css={numberStyle}>
-                {number}
-              </span>
-            );
+            if (index < 2) {
+              return (
+                <span key={index} css={numberStyle}>
+                  {number}
+                </span>
+              );
+            } else {
+              return (
+                <span key={index} css={dotStyle}>
+                  {number && "·".repeat(number.length)}
+                </span>
+              );
+            }
           })}
         </div>
         <span css={expirationDateStyle}>
@@ -93,6 +101,10 @@ const uniqueNumberStyle = css`
 
 const numberStyle = css`
   width: 38px;
+`;
+
+const dotStyle = css`
+  font-size: 24px;
 `;
 
 const dateStyle = css`
