@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import CardNumbersView from './CardNumbersView';
+import CardNumberInputsView from './CardNumberInputsView';
 
-export interface CardNumbersProps {
+export interface CardNumberInputsProps {
   cardNumbers: string[];
   setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -9,7 +9,10 @@ export interface CardNumbersProps {
 const CARD_NUMBERS_LENGTH = 4;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
-const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
+const CardNumberInputs = ({
+  cardNumbers,
+  setCardNumbers,
+}: CardNumberInputsProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
 
@@ -46,7 +49,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
   };
 
   return (
-    <CardNumbersView
+    <CardNumberInputsView
       cardNumbers={cardNumbers}
       errorMessage={errorMessage}
       errors={errors}
@@ -55,4 +58,4 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
   );
 };
 
-export default CardNumbers;
+export default CardNumberInputs;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ExpirationPeriodView from './ExpirationPeriodView';
+import ExpirationPeriodInputsView from './ExpirationPeriodInputsView';
 
-export interface ExpirationPeriodProps {
+export interface ExpirationPeriodInputsProps {
   period: string[];
   setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
   separatorRef?: React.RefObject<HTMLDivElement | null>;
@@ -22,11 +22,11 @@ const ERROR_MESSAGE = {
   INVALID_CHARACTER: '숫자만 입력 가능합니다.',
 } as const;
 
-const ExpirationPeriod = ({
+const ExpirationPeriodInputs = ({
   period,
   setPeriod,
   separatorRef,
-}: ExpirationPeriodProps) => {
+}: ExpirationPeriodInputsProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false]);
 
@@ -107,7 +107,7 @@ const ExpirationPeriod = ({
   };
 
   return (
-    <ExpirationPeriodView
+    <ExpirationPeriodInputsView
       period={period}
       errorMessage={errorMessage}
       errors={errors}
@@ -118,4 +118,4 @@ const ExpirationPeriod = ({
   );
 };
 
-export default ExpirationPeriod;
+export default ExpirationPeriodInputs;

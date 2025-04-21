@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import CardNumbers from './components/CardNumbers';
-import ExpirationPeriod from './components/ExpirationPeriod';
-import CVCNumbers from './components/CVCNumbers';
+import CardNumberInputs from './components/CardNumberInputs';
+import ExpirationPeriodInputs from './components/ExpirationPeriodInputs';
+import CVCNumberInput from './components/CVCNumberInput';
 import Preview from './components/Preview';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
@@ -21,16 +21,17 @@ const App = () => {
           period={period}
           separatorRef={separatorRef}
         />
-        <CardNumbers
+
+        <CardNumberInputs
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
         />
-        <ExpirationPeriod
+        <ExpirationPeriodInputs
           period={period}
           setPeriod={setPeriod}
           separatorRef={separatorRef}
         />
-        <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+        <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
       </Main>
     </ThemeProvider>
   );

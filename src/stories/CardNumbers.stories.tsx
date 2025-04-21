@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import CardNumbers from '../components/CardNumbers';
+import CardNumberInputs from '../components/CardNumberInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
 
-const meta: Meta<typeof CardNumbers> = {
-  title: 'Components/CardNumbers Container',
-  component: CardNumbers,
+const meta: Meta<typeof CardNumberInputs> = {
+  title: 'Components/CardNumberInputs Container',
+  component: CardNumberInputs,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof CardNumbers>;
+type Story = StoryObj<typeof CardNumberInputs>;
 
 const Wrapper = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   return (
-    <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+    <CardNumberInputs cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
   );
 };
 

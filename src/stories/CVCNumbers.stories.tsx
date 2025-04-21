@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import CVCNumbers from '../components/CVCNumbers';
+import CVCNumberInput from '../components/CVCNumberInput';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
 
-const meta: Meta<typeof CVCNumbers> = {
+const meta: Meta<typeof CVCNumberInput> = {
   title: 'Components/CVCNumbers Container',
-  component: CVCNumbers,
+  component: CVCNumberInput,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof CVCNumbers>;
+type Story = StoryObj<typeof CVCNumberInput>;
 
 const Wrapper = () => {
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
-  return <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />;
+  return (
+    <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+  );
 };
 
 export const ValidInput: Story = {

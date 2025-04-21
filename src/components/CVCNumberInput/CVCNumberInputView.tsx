@@ -3,47 +3,35 @@ import styled from '@emotion/styled';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
-export interface ExpirationPeriodViewProps {
-  period: string[];
+export interface CVCNumberInputViewProps {
+  cvcNumbers: string[];
   errorMessage: string;
-  errors: boolean[];
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  error: boolean;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ExpirationPeriodView = ({
-  period,
+const CVCNumberInputView = ({
+  cvcNumbers,
   errorMessage,
-  errors,
+  error,
   handleInputChange,
-  onFocus,
-  onBlur,
-}: ExpirationPeriodViewProps) => {
+}: CVCNumberInputViewProps) => {
   return (
-    <Container data-testid="expiration-component">
-      <InputLabels
-        title="카드 유효기간을 입력해 주세요"
-        caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-      />
+    <Container data-testid="cvcnumbers-component">
+      <InputLabels title="CVC 번호를 입력해 주세요" />
       <InputTexts
-        label="유효기간"
-        placeholder={['MM', 'YY']}
-        state={period}
+        label="CVC"
+        placeholder={['123']}
+        state={cvcNumbers}
         eventHandler={handleInputChange}
-        errors={errors}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        errors={[error]}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 };
 
-export default ExpirationPeriodView;
+export default CVCNumberInputView;
 
 const Container = styled.div`
   display: flex;

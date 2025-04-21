@@ -3,35 +3,41 @@ import styled from '@emotion/styled';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
-export interface CVCNumbersViewProps {
-  cvcNumbers: string[];
+export interface CardNumberInputsViewProps {
+  cardNumbers: string[];
   errorMessage: string;
-  error: boolean;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  errors: boolean[];
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
 }
 
-const CVCNumbersView = ({
-  cvcNumbers,
+const CardNumberInputsView = ({
+  cardNumbers,
   errorMessage,
-  error,
+  errors,
   handleInputChange,
-}: CVCNumbersViewProps) => {
+}: CardNumberInputsViewProps) => {
   return (
-    <Container data-testid="cvcnumbers-component">
-      <InputLabels title="CVC 번호를 입력해 주세요" />
+    <Container data-testid="cardnumbers-component">
+      <InputLabels
+        title="결제할 카드 번호를 입력해 주세요"
+        caption="본인 명의의 카드만 결제 가능합니다."
+      />
       <InputTexts
-        label="CVC"
-        placeholder={['123']}
-        state={cvcNumbers}
+        label="카드 번호"
+        placeholder={['1234', '1234', '1234', '1234']}
         eventHandler={handleInputChange}
-        errors={[error]}
+        state={cardNumbers}
+        errors={errors}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 };
 
-export default CVCNumbersView;
+export default CardNumberInputsView;
 
 const Container = styled.div`
   display: flex;

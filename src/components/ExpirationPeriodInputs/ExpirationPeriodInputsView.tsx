@@ -3,41 +3,47 @@ import styled from '@emotion/styled';
 import InputLabels from '../common/InputLabels';
 import InputTexts from '../common/InputTexts';
 
-export interface CardNumbersViewProps {
-  cardNumbers: string[];
+export interface ExpirationPeriodInputsViewProps {
+  period: string[];
   errorMessage: string;
   errors: boolean[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const CardNumbersView = ({
-  cardNumbers,
+const ExpirationPeriodInputsView = ({
+  period,
   errorMessage,
   errors,
   handleInputChange,
-}: CardNumbersViewProps) => {
+  onFocus,
+  onBlur,
+}: ExpirationPeriodInputsViewProps) => {
   return (
-    <Container data-testid="cardnumbers-component">
+    <Container data-testid="expiration-component">
       <InputLabels
-        title="결제할 카드 번호를 입력해 주세요"
-        caption="본인 명의의 카드만 결제 가능합니다."
+        title="카드 유효기간을 입력해 주세요"
+        caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       />
       <InputTexts
-        label="카드 번호"
-        placeholder={['1234', '1234', '1234', '1234']}
+        label="유효기간"
+        placeholder={['MM', 'YY']}
+        state={period}
         eventHandler={handleInputChange}
-        state={cardNumbers}
         errors={errors}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 };
 
-export default CardNumbersView;
+export default ExpirationPeriodInputsView;
 
 const Container = styled.div`
   display: flex;
