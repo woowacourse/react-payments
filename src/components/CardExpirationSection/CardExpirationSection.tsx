@@ -6,34 +6,29 @@ import {
   validateNumberError,
   validateYearLengthError
 } from '../../utils/CardInputValidations';
+import { Expiration } from '../../types/card';
 
 type Props = {
-  expiration: string[];
-  setExpiration: Dispatch<SetStateAction<string[]>>;
+  expiration: Expiration;
+  setExpiration: Dispatch<SetStateAction<Expiration>>;
 };
 
 export default function CardExpirationSection({ expiration, setExpiration }: Props) {
-  const [expirationError, setExpirationError] = useState<string[]>(['', '']);
+  const [expirationError, setExpirationError] = useState<Record<keyof Expiration, string>>({
+    month: '',
+    year: ''
+  });
 
-  const handleExpirationChange = (index: number, value: string) => {
-    const updatedExpiration = [...expiration];
-    updatedExpiration[index] = value;
-    setExpiration(updatedExpiration);
+  const handleExpirationChange = (key: keyof Expiration, value: string) => {
+    setExpiration({ ...expiration, [key]: value });
 
-    const errorMsg = getExpirationError(index, value);
-    const updatedError = [...expirationError];
-    updatedError[index] = errorMsg;
-    setExpirationError(updatedError);
-  };
-
-  function getExpirationError(index: number, value: string): string {
-    return (
+    const errorMsg =
+      (key === 'month' && validateMonthRangeError(value)) ||
+      (key === 'year' && validateYearLengthError(value)) ||
       validateNumberError(value) ||
-      (index === 0 && validateMonthRangeError(value)) ||
-      (index === 1 && validateYearLengthError(value)) ||
-      ''
-    );
-  }
+      '';
+    setExpirationError((prev) => ({ ...prev, [key]: errorMsg }));
+  };
 
   return (
     <div className={styles.sectionContainer}>
@@ -43,14 +38,20 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
       </InputSection.TitleWrapper>
       <div className={styles.inputSection}>
         <InputSection.Label text="유효기간" />
-        <InputSection.InputWrapper
-          numbers={expiration}
+        <InputSection.InputWrapper<'month' | 'year'>
+          fields={[
+            { key: 'month', value: expiration.month },
+            { key: 'year', value: expiration.year }
+          ]}
           onChange={handleExpirationChange}
-          valid={expirationError.map((msg) => msg === '')}
-          placeholders={['MM', 'YY']}
+          valid={{ month: expirationError.month === '', year: expirationError.year === '' }}
+          placeholders={{ month: 'MM', year: 'YY' }}
           maxLength={2}
         />
-        <div>{expirationError.map((msg, index) => msg && <InputSection.Error key={index} message={msg} />)}</div>
+        <div>
+          {expirationError.month && <InputSection.Error message={expirationError.month} />}
+          {expirationError.year && <InputSection.Error message={expirationError.year} />}
+        </div>
       </div>
     </div>
   );

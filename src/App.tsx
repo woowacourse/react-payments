@@ -5,12 +5,12 @@ import CardNumberSection from './components/CardNumberSection/CardNumberSection'
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import CardPreview from './components/CardPreview/CardPreview';
 import CvcSection from './components/CvcSection/CvcSection';
-import { CardLogo } from './types/card';
+import { CardLogo, CardNumber, Expiration } from './types/card';
 
 export default function App() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
   const [cardLogo, setCardLogo] = useState<CardLogo>('');
-  const [expiration, setExpiration] = useState<string[]>(['', '']);
+  const [expiration, setExpiration] = useState<Expiration>({ month: '', year: '' });
   const [cvc, setCvc] = useState<string>('');
 
   return (

@@ -22,24 +22,35 @@ function Error({ message }: { message: string }) {
   return <p className={styles.errorMessage}>{message}</p>;
 }
 
-type InputWrapperProps = {
-  numbers: string[];
-  onChange: (index: number, value: string) => void;
-  valid: boolean[];
-  placeholders?: string[];
+type InputField<T extends string = string> = {
+  key: T;
+  value: string;
+};
+
+type InputWrapperProps<T extends string = string> = {
+  fields: InputField<T>[];
+  onChange: (key: T, value: string) => void;
+  valid: Record<T, boolean>;
+  placeholders?: Record<T, string>;
   maxLength: number;
 };
 
-export function InputWrapper({ numbers, onChange, valid, placeholders = [], maxLength }: InputWrapperProps) {
+export function InputWrapper<T extends string = string>({
+  fields,
+  onChange,
+  valid,
+  placeholders = {} as Record<T, string>,
+  maxLength
+}: InputWrapperProps<T>) {
   return (
     <div className={styles.inputWrapper}>
-      {numbers.map((value, index) => (
+      {fields.map((field) => (
         <Input
-          key={index}
-          value={value}
-          isValid={valid[index]}
-          placeholder={placeholders[index]}
-          onChange={(e) => onChange(index, e.target.value)}
+          key={field.key}
+          value={field.value}
+          isValid={valid[field.key]}
+          placeholder={placeholders[field.key]}
+          onChange={(e) => onChange(field.key, e.target.value)}
           maxLength={maxLength}
         />
       ))}

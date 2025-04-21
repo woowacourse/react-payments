@@ -1,29 +1,30 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../common/InputSection/InputSection';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { CardLogo } from '../../types/card';
+import { CardLogo, CardNumber } from '../../types/card';
 
 type Props = {
-  cardNumbers: string[];
+  cardNumbers: CardNumber;
   setCardLogo: Dispatch<SetStateAction<CardLogo>>;
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  setCardNumbers: Dispatch<SetStateAction<CardNumber>>;
 };
 
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  const [cardValidity, setCardValidity] = useState<boolean[]>([true, true, true, true]);
+  const [cardValidity, setCardValidity] = useState<Record<keyof CardNumber, boolean>>({
+    first: true,
+    second: true,
+    third: true,
+    fourth: true
+  });
 
-  const handleCardNumberChange = (index: number, value: string) => {
-    const isValid = validateNumberValidity(value);
+  const handleCardNumberChange = (key: keyof CardNumber, value: string) => {
+    setCardNumbers((prev) => ({ ...prev, [key]: value }));
 
-    const updatedNumbers = [...cardNumbers];
-    updatedNumbers[index] = value;
-    setCardNumbers(updatedNumbers);
+    const isValidNumber = validateNumberValidity(value);
+    setCardValidity((prev) => ({ ...prev, [key]: isValidNumber }));
 
-    const updatedValidity = [...cardValidity];
-    updatedValidity[index] = isValid;
-    setCardValidity(updatedValidity);
-
-    updateCardLogoFromNumbers(updatedNumbers[0]);
+    const first = key === 'first' ? value : cardNumbers.first;
+    updateCardLogoFromNumbers(first);
   };
 
   function validateNumberValidity(value: string): boolean {
@@ -51,14 +52,29 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
       </InputSection.TitleWrapper>
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
-        <InputSection.InputWrapper
-          numbers={cardNumbers}
+        <InputSection.InputWrapper<keyof CardNumber>
+          fields={[
+            { key: 'first', value: cardNumbers.first },
+            { key: 'second', value: cardNumbers.second },
+            { key: 'third', value: cardNumbers.third },
+            { key: 'fourth', value: cardNumbers.fourth }
+          ]}
           onChange={handleCardNumberChange}
-          valid={cardValidity}
-          placeholders={['1234', '1234', '1234', '1234']}
+          valid={{
+            first: cardValidity.first,
+            second: cardValidity.second,
+            third: cardValidity.third,
+            fourth: cardValidity.fourth
+          }}
+          placeholders={{
+            first: '1234',
+            second: '1234',
+            third: '1234',
+            fourth: '1234'
+          }}
           maxLength={4}
         />
-        <InputSection.Error message={!cardValidity.every((v) => v) ? '숫자만 입력 가능합니다.' : ''} />
+        <InputSection.Error message={Object.values(cardValidity).every((v) => v) ? '' : '숫자만 입력 가능합니다.'} />
       </div>
     </div>
   );

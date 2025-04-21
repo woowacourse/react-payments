@@ -1,4 +1,4 @@
-import { CardLogo } from '../../types/card';
+import { CardLogo, Expiration, CardNumber } from '../../types/card';
 import styles from './CardPreview.module.css';
 
 export default function CardPreview({
@@ -6,16 +6,18 @@ export default function CardPreview({
   cardLogo,
   expiration
 }: {
-  numbers: string[];
+  numbers: CardNumber;
   cardLogo: CardLogo;
-  expiration: string[];
+  expiration: Expiration;
 }) {
+  const numberKeys: (keyof CardNumber)[] = ['first', 'second', 'third', 'fourth'];
+
   return (
     <div className={styles.card}>
       <div className={styles.chipWrapper}>
         <div className={styles.chip} />
 
-        {cardLogo === '' ? null : (
+        {cardLogo && (
           <img
             className={styles.cardLogo}
             src={cardLogo === 'visa' ? 'images/visa.jpg' : 'images/mastercard.jpg'}
@@ -25,23 +27,23 @@ export default function CardPreview({
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>
-          {numbers.slice(0, 2).map((number, index) => (
-            <p className={styles.cardNumber} key={index}>
-              {number}
+          {numberKeys.slice(0, 2).map((key) => (
+            <p className={styles.cardNumber} key={key}>
+              {numbers[key]}
             </p>
           ))}
-          {numbers.slice(2).map((number, i) => (
-            <div key={i} className={styles.dotWrapper}>
-              {Array.from({ length: number.length }).map((_, j) => (
-                <Dot key={j} />
+          {numberKeys.slice(2).map((key) => (
+            <div key={key} className={styles.dotWrapper}>
+              {Array.from({ length: numbers[key].length }).map((_, i) => (
+                <Dot key={i} />
               ))}
             </div>
           ))}
         </div>
         <div className={styles.cardNumber}>
-          {expiration[0]}
-          {expiration[0] && '/'}
-          {expiration[1]}
+          {expiration.month}
+          {expiration.month && '/'}
+          {expiration.year}
         </div>
       </div>
     </div>
