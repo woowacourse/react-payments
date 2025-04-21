@@ -12,15 +12,10 @@ type Expiration = {
   year: string;
 };
 
-type CardInfo = {
-  number: CardNumber;
-  expiration: Expiration;
-  cvc: string;
-  passwordFront: string;
-};
-
 interface CardInfo {
   number: CardNumber;
   expiration: Expiration;
+  company: string;
   cvc: string;
+  passwordFront: string;
 }

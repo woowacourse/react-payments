@@ -11,9 +11,9 @@ export const CARD_COMPANY_NAMES = [
   '롯데카드',
   '하나카드',
   '국민카드',
-] as const;
+];
 
-export const CARD_COMPANY_COLORS: Record<(typeof CARD_COMPANY_NAMES)[number], string> = {
+export const CARD_COMPANY_COLORS = {
   BC카드: '#F04651',
   신한카드: '#0046FF',
   카카오뱅크: '#FFE600',

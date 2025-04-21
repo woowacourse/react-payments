@@ -3,6 +3,11 @@ export const CARD_NUMBER_MESSAGE = {
   CAPTION: '본인 명의의 카드만 결제 가능합니다.',
 };
 
+export const CARD_COMPANY_MESSAGE = {
+  MAIN: '카드사 선택를 선택해 주세요',
+  CAPTION: '현재 국내 카드사만 가능합니다',
+};
+
 export const EXPIRATION_MESSAGE = {
   MAIN: '카드 유효기간을 입력해 주세요',
   CAPTION: '월/년도(MMYY)를 순서대로 입력해 주세요.',
