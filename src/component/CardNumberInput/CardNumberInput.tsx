@@ -88,10 +88,8 @@ function CardNumberInput({
               />
             </Input.Group>
           </article>
-          {(errorState.first ||
-            errorState.second ||
-            errorState.third ||
-            errorState.forth) && (
+          {
+            Object.values(errorState).some(Boolean) && (
             <div css={errorMessageStyle}>{getErrorMessage()}</div>
           )}
         </div>
