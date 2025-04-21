@@ -4,6 +4,11 @@ import Card from "./Card";
 const meta = {
 	title: "components/card",
 	component: Card,
+	argTypes: {
+		expirationDate: {
+			control: { type: "object" },
+		},
+	},
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -24,6 +29,7 @@ export const Default: Story = {
 		},
 	},
 };
+
 export const VisaCard: Story = {
 	args: {
 		cardNumbers: {
@@ -38,6 +44,7 @@ export const VisaCard: Story = {
 		},
 	},
 };
+
 export const MasterCard: Story = {
 	args: {
 		cardNumbers: { first: "5512", second: "1234", third: "5678", fourth: "9123" },
