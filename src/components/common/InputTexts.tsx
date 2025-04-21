@@ -1,22 +1,23 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
+import {
+  CardNumberInfo,
+  CVCNumberInfo,
+  ExpirationPeriodInfo,
+} from '../../types/models';
 
 interface InputTextsProps {
   label: string;
-  placeholder: string[];
+  dataModels: CardNumberInfo[] | ExpirationPeriodInfo[] | CVCNumberInfo;
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  state: string[];
-  isErrors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const InputTexts = ({
   label,
-  placeholder,
-  state,
+  dataModels,
   onChange,
-  isErrors,
   onFocus,
   onBlur,
 }: InputTextsProps) => {
@@ -31,19 +32,32 @@ const InputTexts = ({
     <InputTextsContainer>
       <Label>{label}</Label>
       <Row>
-        {placeholder.map((text, index) => (
+        {Array.isArray(dataModels) ? (
+          dataModels.map((data, index) => (
+            <Input
+              key={index}
+              type="text"
+              placeholder={data.placeholder}
+              maxLength={data.numberSegmentLength}
+              value={data.number}
+              onChange={onChangeAt(index)}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              isError={data.isError}
+            />
+          ))
+        ) : (
           <Input
-            key={index}
             type="text"
-            placeholder={text}
-            maxLength={text.length}
-            value={state[index]}
-            onChange={onChangeAt(index)}
+            placeholder={dataModels.placeholder}
+            maxLength={dataModels.numberSegmentLength}
+            value={dataModels.number}
+            onChange={onChangeAt(0)}
             onFocus={onFocus}
             onBlur={onBlur}
-            isError={isErrors[index]}
+            isError={dataModels.isError}
           />
-        ))}
+        )}
       </Row>
     </InputTextsContainer>
   );
