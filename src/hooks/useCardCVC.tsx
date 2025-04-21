@@ -6,7 +6,6 @@ const ERROR_MESSAGE = {
 
 function useCardCVC() {
   const [cardCVC, setCardCVC] = useState('');
-  const [isCardCVCError, setIsCardCVCError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,20 +20,12 @@ function useCardCVC() {
 
     setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_CVC_LENGTH : '');
 
-    setIsCardCVCError(isNotValid);
-
     setCardCVC(value);
-  };
-
-  const checkCardCVCError = () => {
-    return isCardCVCError;
   };
 
   return {
     cardCVC,
-    isCardCVCError,
     onChangeCVC,
-    checkCardCVCError,
     errorMessage,
   };
 }
