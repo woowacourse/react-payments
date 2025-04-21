@@ -20,6 +20,11 @@ const defaultError = {
   },
   cvcNumber: false,
 };
+const isValidNumber = (value: string) => {
+  if (value === "") return true;
+  const number = Number(value);
+  return !isNaN(number) && Number.isInteger(number) && number >= 0;
+};
 
 export function useInputError() {
   const [error, setError] = useState<InputErrorType>(defaultError);
@@ -29,7 +34,7 @@ export function useInputError() {
       ...prev,
       cardNumbers: {
         ...prev.cardNumbers,
-        [position]: Number.isNaN(Number(value)),
+        [position]: !isValidNumber(value),
       },
     }));
   };
@@ -42,7 +47,7 @@ export function useInputError() {
       ...prev,
       expirationPeriod: {
         ...prev.expirationPeriod,
-        [position]: Number.isNaN(Number(value)),
+        [position]: !isValidNumber(value),
       },
     }));
   };
@@ -50,7 +55,7 @@ export function useInputError() {
   const validateCvcNumber = (value: string) => {
     setError((prev) => ({
       ...prev,
-      cvcNumber: Number.isNaN(Number(value)),
+      cvcNumber: !isValidNumber(value),
     }));
   };
 
