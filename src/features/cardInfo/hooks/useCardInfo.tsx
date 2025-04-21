@@ -1,6 +1,11 @@
 import { useState } from 'react';
-import { cardNumberValidator, cardExpirationDateValidator, cardCVCValidator } from '../validation/cardInfoValidator';
-import { CardInfoProps, ErrorProps } from '../../../shared/type/types';
+import {
+  cardNumberValidator,
+  cardExpirationDateValidator,
+  cardCVCValidator,
+} from '../validation/cardInfoValidator';
+import { ErrorProps } from '../../../shared/type/types';
+import CardInfo from '../model/CardInfo';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,
@@ -15,7 +20,7 @@ const ERROR_KEYS = {
 };
 
 export default function useCardInfo() {
-  const [cardInfo, setCardInfo] = useState<CardInfoProps>({
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumber: ['', '', '', ''],
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
@@ -75,6 +80,6 @@ const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError:
       ({
         ...prevError,
         [errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
-      } as ErrorProps)
+      }) as ErrorProps,
   );
 };
