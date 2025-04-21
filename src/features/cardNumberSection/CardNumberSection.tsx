@@ -6,9 +6,26 @@ import { CardNumberPosition } from "../../\btypes/index.types";
 type CardNumberProps = {
   cardNumber: Record<CardNumberPosition, string>;
   changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+  error: Record<CardNumberPosition, string>;
+  checkValidation: ({
+    length,
+    value,
+    type,
+  }: {
+    length: number;
+    value: string;
+    type: CardNumberPosition;
+  }) => void;
+  getErrorMessage: () => string | undefined;
 };
 
-function CardNumberSection({ cardNumber, changeCardNumber }: CardNumberProps) {
+function CardNumberSection({
+  cardNumber,
+  changeCardNumber,
+  error,
+  checkValidation,
+  getErrorMessage,
+}: CardNumberProps) {
   return (
     <StyledContainer>
       <SectionTitle
@@ -18,6 +35,9 @@ function CardNumberSection({ cardNumber, changeCardNumber }: CardNumberProps) {
       <CardNumberInputs
         cardNumber={cardNumber}
         changeCardNumber={changeCardNumber}
+        error={error}
+        checkValidation={checkValidation}
+        getErrorMessage={getErrorMessage}
       />
     </StyledContainer>
   );

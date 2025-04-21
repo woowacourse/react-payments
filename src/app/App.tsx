@@ -5,8 +5,10 @@ import CardNumberSection from "../features/cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../features/cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../features/cardCVCNumberSection/CardCVCNumberSection";
 import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
-import { INITIALIZE_VALUE } from "../shared/constants/constant";
+import { INITIALIZE_VALUE, NO_ERROR } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
+import useError from "../shared/hook/useError.ts";
+import { getValidationFns } from "../entities/cardNumberInputs/CardNumberInputs.domain.ts";
 
 type CardNumberState = {
   [key in CardNumberPosition]: string;
@@ -24,6 +26,18 @@ function App() {
       third: INITIALIZE_VALUE,
       fourth: INITIALIZE_VALUE,
     });
+
+  const { error, checkValidation, getErrorMessage } = useError<
+    Record<CardNumberPosition, string>
+  >(
+    {
+      first: NO_ERROR,
+      second: NO_ERROR,
+      third: NO_ERROR,
+      fourth: NO_ERROR,
+    },
+    getValidationFns
+  );
 
   const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
     useCardInfo<ExpirationPeriodState>({
@@ -48,6 +62,9 @@ function App() {
         <CardNumberSection
           cardNumber={cardNumber}
           changeCardNumber={changeCardNumber}
+          error={error}
+          checkValidation={checkValidation}
+          getErrorMessage={getErrorMessage}
         />
         <CardExpirationPeriodSection
           expirationPeriod={expirationPeriod}
