@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import ExpirationPeriodInputs from '../components/ExpirationPeriodInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
@@ -14,15 +14,17 @@ type Story = StoryObj<typeof ExpirationPeriodInputs>;
 
 const Wrapper = () => {
   const [period, setPeriod] = useState<string[]>(['', '']);
-  const separatorRef = useRef<HTMLDivElement>(null);
+  const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
+    useState<boolean>(false);
   return (
     <>
       <ExpirationPeriodInputs
         period={period}
         setPeriod={setPeriod}
-        separatorRef={separatorRef}
+        showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}
+        hidePeriodSeparator={() => setIsPeriodSeparatorShowing(false)}
       />
-      <div data-testid="separator" ref={separatorRef}></div>
+      {isPeriodSeparatorShowing && <div data-testid="separator">/</div>}
     </>
   );
 };

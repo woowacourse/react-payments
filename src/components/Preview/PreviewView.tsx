@@ -1,19 +1,19 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
 export interface PreviewViewProps {
   cardNumbers: string[];
   period: string[];
-  separatorRef: React.RefObject<HTMLDivElement | null>;
+  isPeriodSeparatorShowing: boolean;
   cardMethodSrc: string | null;
 }
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
+const SEPARATOR = '/';
 
 const PreviewView = ({
   cardNumbers,
   period,
-  separatorRef,
+  isPeriodSeparatorShowing,
   cardMethodSrc,
 }: PreviewViewProps) => {
   return (
@@ -39,7 +39,7 @@ const PreviewView = ({
         </CardNumberArea>
         <CardPeriodArea>
           <CardPeriod>{period[0]}</CardPeriod>
-          <Separator ref={separatorRef} />
+          {isPeriodSeparatorShowing && <Separator>{SEPARATOR}</Separator>}
           <CardPeriod>{period[1]}</CardPeriod>
         </CardPeriodArea>
       </CardFrame>
@@ -126,12 +126,13 @@ const CardPeriod = styled.span`
 `;
 
 const Separator = styled.span`
+  width: 10px;
   font-family: ${({ theme }) => theme.fonts.inter};
   font-weight: ${({ theme }) => theme.fontWeights.normal};
   font-size: ${({ theme }) => theme.fontSizes.cardInfo};
   line-height: 20px;
-  letter-spacing: 2px;
   vertical-align: middle;
+  text-align: center;
   color: ${({ theme }) => theme.colors.cardText};
 `;
 

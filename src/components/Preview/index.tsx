@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PreviewView from './PreviewView';
 
 interface PreviewProps {
   cardNumbers: string[];
   period: string[];
-  separatorRef: React.RefObject<HTMLDivElement | null>;
+  isPeriodSeparatorShowing: boolean;
 }
 
 const VISA_CARD_PREFIXES = '4';
@@ -13,7 +13,11 @@ const MASTERCARD_CARD_PREFIXES = {
   MAX: 55,
 } as const;
 
-const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
+const Preview = ({
+  cardNumbers,
+  period,
+  isPeriodSeparatorShowing,
+}: PreviewProps) => {
   const [cardMethodSrc, setCardMethodSrc] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +37,7 @@ const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
     <PreviewView
       cardNumbers={cardNumbers}
       period={period}
-      separatorRef={separatorRef}
+      isPeriodSeparatorShowing={isPeriodSeparatorShowing}
       cardMethodSrc={cardMethodSrc}
     />
   );

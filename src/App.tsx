@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import CardNumberInputs from './components/CardNumberInputs';
 import ExpirationPeriodInputs from './components/ExpirationPeriodInputs';
@@ -11,7 +11,8 @@ const App = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
   const [cvcNumbers, setCvcNumbers] = useState<string[]>(['']);
-  const separatorRef = useRef<HTMLDivElement>(null);
+  const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
+    useState<boolean>(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -19,7 +20,7 @@ const App = () => {
         <Preview
           cardNumbers={cardNumbers}
           period={period}
-          separatorRef={separatorRef}
+          isPeriodSeparatorShowing={isPeriodSeparatorShowing}
         />
 
         <CardNumberInputs
@@ -29,7 +30,10 @@ const App = () => {
         <ExpirationPeriodInputs
           period={period}
           setPeriod={setPeriod}
-          separatorRef={separatorRef}
+          showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}
+          hidePeriodSeparator={() =>
+            setIsPeriodSeparatorShowing(period.some((p) => p !== ''))
+          }
         />
         <CVCNumberInput cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
       </Main>

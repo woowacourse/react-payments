@@ -4,11 +4,11 @@ import ExpirationPeriodInputsView from './ExpirationPeriodInputsView';
 export interface ExpirationPeriodInputsProps {
   period: string[];
   setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
-  separatorRef?: React.RefObject<HTMLDivElement | null>;
+  showPeriodSeparator: () => void;
+  hidePeriodSeparator: () => void;
 }
 
 const EXPIRATION_PERIOD_LENGTH = 2;
-const SEPARATOR = '/';
 const MONTH = {
   MIN: 1,
   MAX: 12,
@@ -25,7 +25,8 @@ const ERROR_MESSAGE = {
 const ExpirationPeriodInputs = ({
   period,
   setPeriod,
-  separatorRef,
+  showPeriodSeparator,
+  hidePeriodSeparator,
 }: ExpirationPeriodInputsProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<boolean[]>([false, false]);
@@ -94,26 +95,14 @@ const ExpirationPeriodInputs = ({
     });
   };
 
-  const handleFocus = () => {
-    if (separatorRef?.current) {
-      separatorRef.current.textContent = SEPARATOR;
-    }
-  };
-
-  const handleBlur = () => {
-    if (separatorRef?.current && period[0] === '' && period[1] === '') {
-      separatorRef.current.textContent = '';
-    }
-  };
-
   return (
     <ExpirationPeriodInputsView
       period={period}
       errorMessage={errorMessage}
       errors={errors}
       handleInputChange={handleInputChange}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onFocus={showPeriodSeparator}
+      onBlur={hidePeriodSeparator}
     />
   );
 };

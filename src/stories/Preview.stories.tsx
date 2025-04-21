@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Preview from '../components/Preview';
 import { within, expect } from '@storybook/test';
@@ -20,12 +20,13 @@ interface PreviewProps {
 const Wrapper = ({ initialCardNumbers, initialPeriod }: PreviewProps) => {
   const [cardNumbers] = useState<string[]>(initialCardNumbers);
   const [period] = useState<string[]>(initialPeriod);
-  const separatorRef = useRef<HTMLDivElement>(null);
+  const isPeriodSeparatorShowing = period.some((p) => p !== '');
+
   return (
     <Preview
       cardNumbers={cardNumbers}
       period={period}
-      separatorRef={separatorRef}
+      isPeriodSeparatorShowing={isPeriodSeparatorShowing}
     />
   );
 };
