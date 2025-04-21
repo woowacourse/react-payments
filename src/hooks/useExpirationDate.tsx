@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isValidLength, isValidMonth } from "../validation/validate";
-import { replaceAt } from "./setErrorMessage";
+import { replaceAt } from "./replaceAt";
 
 const CONSTANT_USE_EXPIRATION_DATE = {
   IS_VALID_LENGTH_ERROR: "2자리까지 입력 가능합니다.",
