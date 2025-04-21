@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { getCardType, maskCardNumber } from "../domains/card/cardUtils";
+import { getCardType, maskCardNumber } from "../utils/card/cardUtils";
 import { CARD_TYPE_PATH } from "../constants/setting";
 
 export type CardBrand = keyof typeof CARD_TYPE_PATH;

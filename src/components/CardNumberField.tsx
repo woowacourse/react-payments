@@ -7,7 +7,7 @@ import {
   NumberInputContainer,
   ErrorText,
 } from "../styles/CardField.styles";
-import { hasInvalidCardNumberSegment } from "../utils/validation";
+import { hasInvalidSegment } from "../utils/@common/hasInvalidSegment";
 import { CardInfo } from "../hooks/useCardInfo";
 
 interface CardNumberFieldProps {
@@ -35,7 +35,7 @@ function CardNumberField({
       cardInfo.fourthNumber,
     ];
 
-    const isInvalid = hasInvalidCardNumberSegment(numbers, maxLength);
+    const isInvalid = hasInvalidSegment(numbers, maxLength);
     if (isInvalid) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
     else setErrorText("");
   }, [

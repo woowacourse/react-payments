@@ -11,7 +11,7 @@ import {
   isValidMonth,
   isValidYear,
   validateExpiration,
-} from "../domains/expiration/dateUtils";
+} from "../utils/expiration/dateUtils";
 import { CardInfo } from "../hooks/useCardInfo";
 
 interface CardExpirationFieldProps {

@@ -1,5 +1,4 @@
 import { ERROR_MESSAGE } from "../../constants/guide";
-import isExactLength from "../../utils/isExactLength";
 import { EXPIRATION_DATE } from "../../constants/setting";
 
 export function isValidMonth(month: string) {
@@ -53,8 +52,8 @@ export function validateExpiration(
 ) {
   const { month, year } = cardInfo;
 
-  const isExactDigitsMonth = month !== "" && !isExactLength(month, maxLength);
-  const isExactDigitsYear = year !== "" && !isExactLength(year, maxLength);
+  const isExactDigitsMonth = month !== "" && month.length !== maxLength;
+  const isExactDigitsYear = year !== "" && year.length !== maxLength;
 
   if (isExactDigitsMonth || isExactDigitsYear) {
     return ERROR_MESSAGE.LENGTH(maxLength);
