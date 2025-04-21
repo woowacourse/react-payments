@@ -59,7 +59,9 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         })}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
-        {`${expirationDate.month}/${expirationDate.year}`}
+        {expirationDate.month !== '' || expirationDate.year !== ''
+          ? `${expirationDate.month}/${expirationDate.year}`
+          : ''}
       </p>
     </div>
   );
