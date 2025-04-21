@@ -6,6 +6,7 @@ import useCardNumbers from "./hooks/useCardNumbers";
 import useCardExpirationDate from "./hooks/useCardExpirationDate";
 import CardDisplay from "./components/CardDisplay/CardDisplay";
 import CardCompanyInputSection from "./components/InputSection/CardCompanyInputSection";
+import { useState } from "react";
 
 function App() {
   const {
@@ -41,6 +42,7 @@ function App() {
               { value: "하나", label: "하나" },
               { value: "국민", label: "국민" },
             ]}
+            selectedOption="BC"
             handleCardNumbersChange={() => {}}
             isError={{ cardCompany: false }}
             errorMessage=""

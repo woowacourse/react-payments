@@ -1,7 +1,6 @@
-import { useState } from "react";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputSection from "../common/InputSection/InputSection";
-import Select from "../common/InputSection/Select";
+import SelectField from "../common/SelectField/SelectField";
 
 type Option = {
   label: string;
@@ -13,6 +12,7 @@ type IsError = {
 
 type CardCompanyOptions = {
   companies: Option[];
+  selectedOption: string;
   handleCardNumbersChange: (selected: string) => void;
   isError: IsError;
   errorMessage: string;
@@ -20,34 +20,24 @@ type CardCompanyOptions = {
 
 const CardCompanyInputSection = ({
   companies,
+  selectedOption,
   handleCardNumbersChange,
   isError,
   errorMessage,
 }: CardCompanyOptions) => {
-  const [selected, setSelected] = useState<string | undefined>(undefined);
-
-  const handleSelectChange = (value: string) => {
-    setSelected(value);
-    handleCardNumbersChange(value);
-  };
-
   return (
     <>
       <InputSection
         title="카드사를 선택해 주세요"
         description="현재 국내 카드사만 가능합니다"
       >
-        <Select
-          value={selected}
-          onChange={handleSelectChange}
+        <SelectField
+          value={selectedOption}
+          onChange={handleCardNumbersChange}
           options={companies}
-          valueAs={(value) =>
-            companies.find((company) => company.id === Number(value))?.name ??
-            "선택하기"
-          }
           isError={isError.cardCompany}
         />
-        {isError.cardCompany && <ErrorMessage message={errorMessage} />}
+        {<ErrorMessage message={errorMessage} />}
       </InputSection>
     </>
   );
