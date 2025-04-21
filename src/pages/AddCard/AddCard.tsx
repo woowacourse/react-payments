@@ -7,6 +7,7 @@ import Spacing from '../../components/common/Spacing/Spacing';
 import { useState } from 'react';
 import { SequenceType } from '../../components/CardNumber/CardNumber';
 import { getCardType } from '../../utils';
+import CardBrand, { CardBrandType } from '../../components/CardBrand/CardBrand';
 
 export default function AddCard() {
   // 카드 번호
@@ -37,11 +38,18 @@ export default function AddCard() {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
 
+  // 카드 브랜드
+  const [CardBrandType, setCardBrandType] = useState<CardBrandType | null>(null);
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
       <S.CardPreviewWrapper>
-        <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
+        <CardPreview
+          cardType={cardType}
+          cardNumber={cardNumber}
+          cardExpirationDate={cardExpirationDate}
+          CardBrandType={CardBrandType}
+        />
       </S.CardPreviewWrapper>
       <Spacing size={60} />
       <S.CardInfoForm>
@@ -51,6 +59,7 @@ export default function AddCard() {
           cardNumberErrorMessage={cardNumberErrorMessage}
           setCardNumberErrorMessage={setCardNumberErrorMessage}
         />
+        <CardBrand CardBrandType={CardBrandType} setCardBrandType={setCardBrandType} />
         <CardExpirationDate
           cardExpirationDate={cardExpirationDate}
           setCardExpirationDate={setCardExpirationDate}
