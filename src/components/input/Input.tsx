@@ -11,16 +11,7 @@ type Props = {
 };
 
 const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur }: Props) => {
-	return (
-		<TextInput
-			maxLength={maxLength && maxLength}
-			value={value}
-			placeholder={placeholder}
-			onChange={(e) => onChange(e.target.value)}
-			onBlur={onBlur && ((e) => onBlur(e.target.value))}
-			$isError={isError}
-		/>
-	);
+	return <TextInput maxLength={maxLength} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} onBlur={onBlur && ((e) => onBlur(e.target.value))} $isError={isError} />;
 };
 
 const TextInput = styled.input<{ $isError: boolean }>(
