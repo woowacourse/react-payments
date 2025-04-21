@@ -1,14 +1,10 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-interface InputProps {
-  placeholder: string;
+interface InputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isError?: boolean;
-  value: string;
-  name: string;
-  type: 'text' | 'number';
   onChange: ({ name, value }: { name: string; value: string }) => void;
-  onBlur?: (e: ChangeEvent) => void;
 }
 
 function Input({
