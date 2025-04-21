@@ -5,14 +5,14 @@ import {
   useEffect,
   useState,
 } from 'react';
-import BaseInputField from '../BaseInputField';
-import Input from '../Input';
-import { CardType } from '../config/card';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
-} from '../config/inputField';
+} from '../../../config/inputField';
+import { CardType } from '../../../config/card';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../config/error';
+import BaseInputField from '../../BaseInputField/BaseInputField';
+import Input from '../../Input/Input';
 
 interface CardNumberInputFieldProps {
   inputValue: Record<CardNumberInputType, string>;

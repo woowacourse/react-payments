@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
-import BaseInputField from '../BaseInputField';
-import Input from '../Input';
-import { CVCInputValueType } from '../config/inputField';
+import { CVCInputValueType } from '../../../config/inputField';
+import BaseInputField from '../../BaseInputField/BaseInputField';
+import Input from '../../Input/Input';
 
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;

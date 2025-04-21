@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BaseInputField from '../BaseInputField';
-import Input from '../Input';
+
 import { useEffect, useState } from 'react';
+import BaseInputField from './BaseInputField';
+import Input from '../Input/Input';
 
 const meta: Meta<typeof BaseInputField> = {
   component: BaseInputField,

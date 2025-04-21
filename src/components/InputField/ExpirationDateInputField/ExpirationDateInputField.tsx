@@ -1,11 +1,11 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import BaseInputField from '../BaseInputField';
-import Input from '../Input';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
-} from '../config/inputField';
+} from '../../../config/inputField';
+import BaseInputField from '../../BaseInputField/BaseInputField';
+import Input from '../../Input/Input';
 
 interface ExpirationDateInputFieldProps {
   inputValue: Record<ExpirationDateInputType, string>;
