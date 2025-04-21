@@ -23,6 +23,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		third: "",
 		fourth: "",
 	});
+	const orderLabels = ["first", "second", "third", "fourth"] as const;
 
 	const handleInput = (order: keyof cardNumber, value: string) => {
 		setCardNumber({ ...cardNumber, [order]: value });
@@ -39,20 +40,17 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH) });
 	};
 
-	const inputs = Array.from({ length: INPUT_MAX_LENGTH }, (_, index: number) => {
-		const orderLabels = ["first", "second", "third", "fourth"] as const;
-
-		return (
-			<Input
-				isError={error[orderLabels[index]].length > 0}
-				placeholder="1234"
-				value={cardNumber[orderLabels[index]]}
-				maxLength={INPUT_MAX_LENGTH}
-				handleInput={(numbers) => handleInput(orderLabels[index], numbers)}
-				handleFocusout={(numbers) => handleFocusout(orderLabels[index], numbers)}
-			/>
-		);
-	});
+	const inputs = orderLabels.map((label: keyof cardNumber) => (
+		<Input
+			key={label}
+			isError={error[label].length > 0}
+			placeholder="1234"
+			value={cardNumber[label]}
+			maxLength={INPUT_MAX_LENGTH}
+			handleInput={(numbers) => handleInput(label, numbers)}
+			handleFocusout={(numbers) => handleFocusout(label, numbers)}
+		/>
+	));
 
 	return (
 		<CardNumberWrap>
