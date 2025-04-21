@@ -28,14 +28,14 @@ function App() {
 		month: "",
 		year: "",
 	});
-	const [cvcNumber, setcvcNumber] = useState<string>("");
+	const [cvcNumber, setCvcNumber] = useState<string>("");
 
 	return (
 		<MainContainer>
 			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
 			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
 			<ExpirationDate expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
-			<CardCvc cvcNumber={cvcNumber} setcvcNumber={setcvcNumber} />
+			<CardCvc cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
 		</MainContainer>
 	);
 }
