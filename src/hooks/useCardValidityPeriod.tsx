@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { checkValideDate } from '../utils/checkValideDate';
 
+const VALIDITY_PERIOD = {
+  MAX_LENGTH: 2,
+};
+
 function useCardValidityPeriod() {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
@@ -18,7 +22,7 @@ function useCardValidityPeriod() {
   ) => {
     const { value } = e.target;
 
-    if (value.length > 2) {
+    if (value.length > VALIDITY_PERIOD.MAX_LENGTH) {
       return;
     }
 
@@ -91,7 +95,7 @@ function useCardValidityPeriod() {
       };
     }
 
-    if (year.length < 2)
+    if (year.length < VALIDITY_PERIOD.MAX_LENGTH)
       return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'year' };
 
     const monthNumber = Number(month);
@@ -102,7 +106,7 @@ function useCardValidityPeriod() {
       };
     }
 
-    if (month.length < 2)
+    if (month.length < VALIDITY_PERIOD.MAX_LENGTH)
       return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
 
     return { message: '', type: null };
@@ -141,7 +145,7 @@ function useCardValidityPeriod() {
       };
     }
 
-    if (year.length < 2)
+    if (year.length < VALIDITY_PERIOD.MAX_LENGTH)
       return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
 
     return { message: '', type: null };

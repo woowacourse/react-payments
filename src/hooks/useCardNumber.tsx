@@ -4,6 +4,11 @@ const ERROR_MESSAGE = {
   CARD_NUMBER_LENGTH: '카드 번호는 16자리입니다.',
 };
 
+const CARD_NUMBER = {
+  MAX_LENGTH: 4,
+  MIN_LENGTH: 0,
+};
+
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [isError, setIsError] = useState([false, false, false, false]);
@@ -12,13 +17,16 @@ function useCardNumber() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const { value } = e.target;
 
-    if (value.length > 4) {
+    if (value.length > CARD_NUMBER.MAX_LENGTH) {
       return;
     }
 
     const checkValidCardNumber = (value: string) => {
       if (value === '') return false;
-      return value.length < 4 || Number(value) < 0;
+      return (
+        value.length < CARD_NUMBER.MAX_LENGTH ||
+        Number(value) < CARD_NUMBER.MIN_LENGTH
+      );
     };
 
     const copy = [...isError];
