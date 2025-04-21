@@ -18,7 +18,6 @@ export const NoneCard: Story = {
       expirationDate: ["12", "25"],
       cvcNumber: ["123"],
     },
-    cardType: "none",
   },
 };
 
@@ -29,7 +28,6 @@ export const VisaCard: Story = {
       expirationDate: ["12", "25"],
       cvcNumber: ["123"],
     },
-    cardType: "visa",
   },
 };
 
@@ -40,6 +38,5 @@ export const MasterCard: Story = {
       expirationDate: ["12", "25"],
       cvcNumber: ["123"],
     },
-    cardType: "master",
   },
 };
