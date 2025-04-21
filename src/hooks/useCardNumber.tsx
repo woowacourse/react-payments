@@ -6,8 +6,7 @@ const ERROR_MESSAGE = {
 
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [isError, setIsError] = useState([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const { value } = e.target;
@@ -20,13 +19,10 @@ function useCardNumber() {
       return value.length < 4 || Number(value) < 0;
     };
 
-    const isNotValid = checkValidCardNumber(value);
-
-    setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '');
-
-    setIsError((prev) => {
+    setErrorMessage((prev) => {
       const newError = [...prev];
-      newError[n] = isNotValid;
+      const isNotValid = checkValidCardNumber(value);
+      newError[n] = isNotValid ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '';
       return newError;
     });
 
@@ -37,15 +33,9 @@ function useCardNumber() {
     });
   };
 
-  const checkCardNumberError = () => {
-    return isError.some((v) => v === true);
-  };
-
   return {
     cardNumber,
     onChange,
-    checkCardNumberError,
-    isError,
     errorMessage,
   };
 }
