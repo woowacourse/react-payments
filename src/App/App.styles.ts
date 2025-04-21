@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 40px 16px;
+`;
+
 export const Wrapper = styled.div`
   width: 480px;
   height: 100vh;

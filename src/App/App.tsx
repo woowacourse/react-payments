@@ -1,6 +1,6 @@
-import { CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
+import { CardCompany, CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
 import global from '@/styles/global';
-import { DateType, SequenceType } from '@/types';
+import { CardCompanyType, DateType, SequenceType } from '@/types';
 import { Global } from '@emotion/react';
 import { useState } from 'react';
 import * as S from './App.styles';
@@ -35,6 +35,9 @@ function App() {
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
 
+  // 카드사
+  const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | ''>('');
+
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
@@ -44,6 +47,7 @@ function App() {
       </S.CardPreviewWrapper>
       <Spacing size={60} />
       <S.CardInfoForm>
+        <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
         <CardNumber
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}

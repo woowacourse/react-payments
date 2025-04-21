@@ -15,3 +15,14 @@ export const ERROR_MESSAGE = {
     length: 'CVC 번호는 3자리만 입력해주세요.',
   },
 } as const;
+
+export const CARD_COMPANIES = [
+  { id: 'shinhan', name: '신한카드' },
+  { id: 'samsung', name: '삼성카드' },
+  { id: 'hyundai', name: '현대카드' },
+  { id: 'bc', name: 'BC카드' },
+  { id: 'lotte', name: '롯데카드' },
+  { id: 'kb', name: 'KB국민카드' },
+  { id: 'nh', name: 'NH농협카드' },
+  { id: 'hana', name: '하나카드' },
+] as const;
