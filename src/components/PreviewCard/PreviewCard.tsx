@@ -1,22 +1,21 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from "@emotion/react";
-import { CardType } from "../../types/CardInformationType";
 
 const seperateCard = {
   visa: "Visa.png",
   master: "Mastercard.png",
 };
 
-const PreviewCard = ({
-  cardType,
-  uniqueNumber,
-  expirationDate,
-}: {
-  cardType: CardType;
-  uniqueNumber: string[];
-  expirationDate: string[];
-}) => {
+const PreviewCard = ({ uniqueNumber, expirationDate }: { uniqueNumber: string[]; expirationDate: string[] }) => {
+  function getCardType(cardNumber: string) {
+    const bin = cardNumber.slice(0, 2);
+    if (cardNumber.startsWith("4")) return "visa";
+    if (/^5[1-5]/.test(bin)) return "master";
+    return "none";
+  }
+
+  const cardType = getCardType(uniqueNumber[0]);
+
   return (
     <div css={previewCardStyle}>
       <div css={TopStyle}>

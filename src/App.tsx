@@ -10,11 +10,7 @@ function App() {
   return (
     <div css={AppStyle}>
       <div css={PreviewCardContainerStyle}>
-        <PreviewCard
-          cardType={"visa"}
-          uniqueNumber={cardState.uniqueNumber}
-          expirationDate={cardState.expirationDate}
-        />
+        <PreviewCard uniqueNumber={cardState.uniqueNumber} expirationDate={cardState.expirationDate} />
       </div>
       <FormContainer cardState={cardState} dispatch={dispatch} />
     </div>

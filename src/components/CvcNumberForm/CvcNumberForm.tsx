@@ -23,7 +23,7 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
             setValue={(v) => dispatch({ type: "SET_CVC", value: v })}
             error={false}
             allowOnly="number"
-          ></Input>
+          />
         </div>
         {/* <div css={inputWrapperStyle}>
         {Array.from({ length: inputNumber }).map((_, index) => (
