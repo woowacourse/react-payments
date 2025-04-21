@@ -1,0 +1,10 @@
+.card-logo {
+  width: 36px;
+  border: 0px;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
