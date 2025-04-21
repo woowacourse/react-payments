@@ -6,13 +6,13 @@ type InputProps = {
   maxLength: number;
   value: string;
   error: boolean;
-  setValue: (value: string) => void;
+  onChange: (value: string) => void;
 };
-const Input = ({ placeholder, maxLength, value, error, setValue }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, error, onChange }: InputProps) => {
   return (
     <input
       css={inputStyle(error)}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       value={value}
       placeholder={placeholder}
       maxLength={maxLength}

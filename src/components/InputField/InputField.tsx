@@ -53,7 +53,7 @@ const InputField = ({
           <Input
             key={index}
             value={cardInformation[informationType][index] ?? ""}
-            setValue={(v) => handleChange(index, v)}
+            onChange={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
             error={isErrors[informationType][index]}
