@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { cardNumberValidator, cardExpirationDateValidator, cardCVCValidator } from '../validation/cardInfoValidator';
 import { ErrorProps } from '../../../shared/model/types';
+import { NO_ERROR } from '../../../shared/constants/errorConstants';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,
@@ -22,9 +23,9 @@ export default function useCardInfo() {
   });
   const [cardCVC, setCardCVC] = useState<string>('');
   const [error, setError] = useState<ErrorProps>({
-    cardNumberError: { errorIndex: -1, errorMessage: '' },
-    cardExpirationDateError: { errorIndex: -1, errorMessage: '' },
-    cardCVCError: { errorIndex: -1, errorMessage: '' },
+    cardNumberError: { errorIndex: NO_ERROR, errorMessage: '' },
+    cardExpirationDateError: { errorIndex: NO_ERROR, errorMessage: '' },
+    cardCVCError: { errorIndex: NO_ERROR, errorMessage: '' },
   });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +38,6 @@ export default function useCardInfo() {
         validateAndSetError('cardNumber', updatedNumbers, setError);
         return updatedNumbers;
       });
-      return;
     }
 
     if (name.startsWith('cardExpirationDate')) {
@@ -47,7 +47,6 @@ export default function useCardInfo() {
         validateAndSetError('cardExpirationDate', updateDate, setError);
         return updateDate;
       });
-      return;
     }
 
     if (name.startsWith('cardCVC')) {
@@ -69,7 +68,7 @@ const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError:
     (prevError: any) =>
       ({
         ...prevError,
-        [errorKey]: errorIndex !== -1 ? { errorIndex, errorMessage } : { errorIndex: -1, errorMessage: '' },
+        [errorKey]: errorIndex !== NO_ERROR ? { errorIndex, errorMessage } : { errorIndex: NO_ERROR, errorMessage: '' },
       } as ErrorProps)
   );
 };

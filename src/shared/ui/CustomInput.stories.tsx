@@ -7,6 +7,7 @@ import {
 import { useState } from 'react';
 import * as S from '../../features/cardInfo/ui/CardInfoSection.styles';
 import CustomInput from './CustomInput';
+import { MONTH_ERROR, NO_ERROR, YEAR_ERROR } from '../constants/errorConstants';
 
 const meta: Meta<typeof CustomInput> = {
   title: 'Shared/CustomInput',
@@ -28,7 +29,7 @@ type Story = StoryObj<typeof CustomInput>;
 export const Default: Story = {
   render: () => {
     const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-    const [error, setError] = useState([-1, '']);
+    const [error, setError] = useState([NO_ERROR, '']);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -37,7 +38,7 @@ export const Default: Story = {
       setCardNumbers(updatedNumbers);
 
       const [errorIndex, errorMessage] = cardNumberValidator(updatedNumbers);
-      setError(errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, '']);
+      setError(errorIndex !== NO_ERROR ? [errorIndex, errorMessage] : [NO_ERROR, '']);
     };
 
     return (
@@ -64,7 +65,7 @@ export const Default: Story = {
 export const ExpirationDateInput: Story = {
   render: () => {
     const [date, setDate] = useState({ month: '', year: '' });
-    const [error, setError] = useState([-1, '']);
+    const [error, setError] = useState([NO_ERROR, '']);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
@@ -74,7 +75,7 @@ export const ExpirationDateInput: Story = {
       setDate(updatedDate);
 
       const [errorIndex, errorMessage] = cardExpirationDateValidator(updatedDate);
-      setError(errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, '']);
+      setError(errorIndex !== NO_ERROR ? [errorIndex, errorMessage] : [NO_ERROR, '']);
     };
 
     return (
@@ -86,7 +87,7 @@ export const ExpirationDateInput: Story = {
             name='cardExpirationDate-month'
             maxLength={2}
             onChange={handleChange}
-            error={error[0] === 0}
+            error={error[0] === MONTH_ERROR}
           />
           <CustomInput
             type='text'
@@ -94,7 +95,7 @@ export const ExpirationDateInput: Story = {
             name='cardExpirationDate-year'
             maxLength={2}
             onChange={handleChange}
-            error={error[0] === 1}
+            error={error[0] === YEAR_ERROR}
           />
         </S.CardInfoInputContainer>
         {error && <S.CardInfoError>{error[1]}</S.CardInfoError>}
@@ -112,7 +113,7 @@ export const CVCInput: Story = {
       const newValue = e.target.value;
 
       const [errorIndex, errorMsg] = cardCVCValidator(newValue);
-      if (errorIndex !== -1) {
+      if (errorIndex !== NO_ERROR) {
         setIsError(true);
         setMessage(errorMsg as string);
       } else {

@@ -1,3 +1,12 @@
+import {
+  MASTERCARD_FIRST_DIGIT,
+  MASTERCARD_MAX_SECOND_DIGIT,
+  MASTERCARD_MIN_SECOND_DIGIT,
+  VISA_CARD_FIRST_DIGIT,
+} from '../../../shared/constants/cardInfoConstants';
+import { MONTH_ERROR, NO_ERROR, YEAR_ERROR } from '../../../shared/constants/errorConstants';
+import { CARD_NUMBER_MAX_LENGTH } from '../../../shared/constants/validationConstants';
+
 export const cardNumberValidator = (inputs: string[]) => {
   for (let index = 0; index < inputs.length; index++) {
     const input = inputs[index];
@@ -12,7 +21,7 @@ export const cardNumberValidator = (inputs: string[]) => {
     }
   }
 
-  return [-1, ''];
+  return [NO_ERROR, ''];
 };
 
 const isNumber = (input: string) => {
@@ -20,39 +29,39 @@ const isNumber = (input: string) => {
 };
 
 const isFourDigit = (cardNumber: number) => {
-  return String(cardNumber).length === 4;
+  return String(cardNumber).length === CARD_NUMBER_MAX_LENGTH;
 };
 
 export const isValidCardNumber = (input: string): boolean => {
-  if (input[0] === '4') return true;
-  if (input[0] === '5') {
+  if (input[0] === VISA_CARD_FIRST_DIGIT) return true;
+  if (input[0] === MASTERCARD_FIRST_DIGIT) {
     const secondDigit = Number(input[1]);
-    return secondDigit >= 1 && secondDigit <= 5;
+    return secondDigit >= MASTERCARD_MIN_SECOND_DIGIT && secondDigit <= MASTERCARD_MAX_SECOND_DIGIT;
   }
   return false;
 };
 
 export const cardExpirationDateValidator = (date: { month: string; year: string }) => {
   if (!isNumber(date.month)) {
-    return [0, '유효 월은 숫자만 입력 가능합니다.'];
+    return [MONTH_ERROR, '유효 월은 숫자만 입력 가능합니다.'];
   }
 
   if (!isValidExpirationMonth(date.month)) {
-    return [0, '유효 월은 1월과 12월 사이만 입력 가능합니다.'];
+    return [MONTH_ERROR, '유효 월은 1월과 12월 사이만 입력 가능합니다.'];
   }
 
   if (!isTwoDigit(date.month)) {
-    return [0, '유효 월은 2자리 숫자여야 합니다.'];
+    return [MONTH_ERROR, '유효 월은 2자리 숫자여야 합니다.'];
   }
 
   if (!isNumber(date.year)) {
-    return [1, '유효 연도는 숫자만 입력 가능합니다.'];
+    return [YEAR_ERROR, '유효 연도는 숫자만 입력 가능합니다.'];
   }
 
   if (!isTwoDigit(date.year)) {
-    return [1, '유효 연도는 2자리 숫자여야 합니다.'];
+    return [YEAR_ERROR, '유효 연도는 2자리 숫자여야 합니다.'];
   }
-  return [-1, ''];
+  return [NO_ERROR, ''];
 };
 
 const isValidExpirationMonth = (month: string) => {
@@ -68,5 +77,5 @@ export const cardCVCValidator = (input: string) => {
   if (!isNumber(input)) {
     return [0, 'CVC는 숫자만 입력 가능합니다.'];
   }
-  return [-1, ''];
+  return [NO_ERROR, ''];
 };
