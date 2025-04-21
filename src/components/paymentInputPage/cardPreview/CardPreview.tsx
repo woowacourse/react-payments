@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { CARD_INFO } from "../constants/CardInfo";
 import styles from "./CardPreview.module.css";
 
@@ -7,49 +8,47 @@ export type CardInformationType = {
 };
 
 function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
-  let isBrand = false;
-  let brandName = "Mastercard";
-  const displayCardNumbers = cardNumbers.map((number, index) => {
-    if (index === 0) checkBrand(number);
-    if (index <= 1) {
-      return number;
+  const { brandName } = useMemo(() => {
+    const firstNumber = cardNumbers[0] ?? "";
+
+    if (firstNumber.startsWith(CARD_INFO.VISA_START_NUMBER.toString())) {
+      return { brandName: "Visa" };
     }
 
-    return CARD_INFO.MASKING_STRING.repeat(number.length);
-  });
+    const isMaster = CARD_INFO.MASTER_START_NUMBERS.some((startNumber) =>
+      firstNumber.startsWith(startNumber.toString())
+    );
 
-  function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber.startsWith(CARD_INFO.VISA_START_NUMBER.toString())) {
-      isBrand = true;
-      brandName = "Visa";
-      return;
-    }
+    return {
+      brandName: isMaster ? "Mastercard" : "",
+    };
+  }, [cardNumbers]);
 
-    if (
-      CARD_INFO.MASTER_START_NUMBERS.some((startNumber) =>
-        inputCardNumber.startsWith(startNumber.toString())
-      )
-    ) {
-      isBrand = true;
-      brandName = "Mastercard";
-      return;
-    }
-
-    isBrand = false;
-  }
+  const displayCardNumbers = useMemo(() => {
+    return cardNumbers.map((number, index) => {
+      if (index <= 1) return number;
+      return CARD_INFO.MASKING_STRING.repeat(number.length);
+    });
+  }, [cardNumbers]);
 
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
-        {isBrand && (
-          <img src={`./${brandName}.png`} className={styles.logoBrand} />
+        {brandName !== "" && (
+          <img
+            src={`./${brandName}.png`}
+            alt={`${brandName} logo`}
+            className={styles.logoBrand}
+          />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
-        {displayCardNumbers.map((number) => {
-          return <p className={styles.pCardNumber}>{number}</p>;
-        })}
+        {displayCardNumbers.map((number, i) => (
+          <p key={i} className={styles.pCardNumber}>
+            {number}
+          </p>
+        ))}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
         {expirationDate.join(CARD_INFO.EXPIRATION_SPLIT)}
