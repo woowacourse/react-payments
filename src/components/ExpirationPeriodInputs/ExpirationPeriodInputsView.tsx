@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
+import { ExpirationPeriodInfo } from '../../types/models';
 
 export interface ExpirationPeriodInputsViewProps {
-  period: string[];
-  errorMessage: string;
-  isErrors: boolean[];
+  expiryDateInfo: ExpirationPeriodInfo[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -15,13 +14,14 @@ export interface ExpirationPeriodInputsViewProps {
 }
 
 const ExpirationPeriodInputsView = ({
-  period,
-  errorMessage,
-  isErrors,
+  expiryDateInfo,
   handleInputChange,
   onFocus,
   onBlur,
 }: ExpirationPeriodInputsViewProps) => {
+  const errorMessage =
+    expiryDateInfo.find((info) => info.isError)?.errorMessage ?? '';
+
   return (
     <Container data-testid="expiration-component">
       <InputAreaHeader
@@ -30,10 +30,8 @@ const ExpirationPeriodInputsView = ({
       />
       <InputTexts
         label="유효기간"
-        placeholder={['MM', 'YY']}
-        state={period}
+        dataModels={expiryDateInfo}
         onChange={handleInputChange}
-        isErrors={isErrors}
         onFocus={onFocus}
         onBlur={onBlur}
       />

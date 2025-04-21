@@ -1,105 +1,65 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { isValidExpirationSegment } from '../../utils/cardValidation';
 import ExpirationPeriodInputsView from './ExpirationPeriodInputsView';
+import { ExpirationPeriodInfo } from '../../types/models';
 
-export interface ExpirationPeriodInputsProps {
+interface ExpirationPeriodInputsProps {
   period: string[];
-  setPeriod: React.Dispatch<React.SetStateAction<string[]>>;
-  showPeriodSeparator: () => void;
-  hidePeriodSeparator: () => void;
+  handlePeriodChange: (newPeriod: string[]) => void;
+  showPeriodSeparator: (e: React.FocusEvent<HTMLInputElement>) => void;
+  hidePeriodSeparator: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const EXPIRATION_PERIOD_LENGTH = 2;
-const MONTH = {
-  MIN: 1,
-  MAX: 12,
-} as const;
-const YEAR = {
-  MIN: 0,
-  MAX: 99,
-} as const;
-const ERROR_MESSAGE = {
-  INVALID: '올바른 유효기간을 입력하세요.',
-  INVALID_CHARACTER: '숫자만 입력 가능합니다.',
-} as const;
 
 const ExpirationPeriodInputs = ({
   period,
-  setPeriod,
+  handlePeriodChange,
   showPeriodSeparator,
   hidePeriodSeparator,
 }: ExpirationPeriodInputsProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isErrors, setIsErrors] = useState<boolean[]>([false, false]);
-
-  useEffect(() => {
-    if (isErrors.every((error) => error === false)) {
-      setErrorMessage('');
-    }
-  }, [isErrors]);
+  const [expiryDateInfo, setExpiryDateInfo] = useState<ExpirationPeriodInfo[]>(
+    period.map((num, idx) => ({
+      number: num,
+      isError: false,
+      placeholder: idx === 0 ? 'MM' : 'YY',
+      numberSegmentLength: EXPIRATION_PERIOD_LENGTH,
+      errorMessage: '',
+    }))
+  );
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const value = e.target.value;
-    setPeriod((prev) => {
-      const newState = [...prev];
+    const { valid, errorMessage } = isValidExpirationSegment(
+      value,
+      index,
+      EXPIRATION_PERIOD_LENGTH
+    );
 
-      let valid = true;
-      let message = '';
-
-      if (!/^[0-9]*$/.test(value)) {
-        valid = false;
-        message = ERROR_MESSAGE.INVALID_CHARACTER;
-      } else if (value.length <= EXPIRATION_PERIOD_LENGTH) {
-        newState[index] = value;
-        if (index === 0) {
-          const month = Number(value);
-          if (month > MONTH.MAX || month < MONTH.MIN) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          } else if (month < 10 && !value.startsWith('0')) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          }
-        } else {
-          const year = Number(value);
-          if (year < YEAR.MIN || year > YEAR.MAX) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          } else if (
-            (year < 10 && !value.startsWith('0')) ||
-            value.length === 1
-          ) {
-            valid = false;
-            message = ERROR_MESSAGE.INVALID;
-          }
-        }
-      }
-
-      if (!valid) {
-        setErrorMessage(message);
-        setIsErrors((prevErr) => {
-          const newErrors = [...prevErr];
-          newErrors[index] = true;
-          return newErrors;
-        });
-      } else {
-        setIsErrors((prevErr) => {
-          const newErrors = [...prevErr];
-          newErrors[index] = false;
-          return newErrors;
-        });
-      }
-      return newState;
-    });
+    setExpiryDateInfo((prev) =>
+      prev.map((info, i) =>
+        i === index
+          ? {
+              ...info,
+              number: valid ? value : info.number,
+              isError: !valid,
+              errorMessage: errorMessage,
+            }
+          : info
+      )
+    );
   };
+
+  useEffect(() => {
+    handlePeriodChange(expiryDateInfo.map((info) => info.number));
+  }, [expiryDateInfo]);
 
   return (
     <ExpirationPeriodInputsView
-      period={period}
-      errorMessage={errorMessage}
-      isErrors={isErrors}
+      expiryDateInfo={expiryDateInfo}
       handleInputChange={handleInputChange}
       onFocus={showPeriodSeparator}
       onBlur={hidePeriodSeparator}
