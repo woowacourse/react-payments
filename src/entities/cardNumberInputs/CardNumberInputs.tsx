@@ -1,8 +1,9 @@
 import Input from "../../shared/input/Input";
 import { CardNumberPosition } from "../../\btypes/index.types";
 import { useState } from "react";
-import { isValidLength, isValidNumber } from "../../util/validation";
 import { NO_ERROR } from "../../shared/constants/constant";
+import { CARD_NUMBER_LENGTH } from "./CardNumberInputs.constant";
+import { getValidationFns, getErrorMessage } from "./CardNumberInputs.domain";
 import {
   StyledContainer,
   StyledInputWrap,
@@ -23,37 +24,6 @@ type CardNumberProps = {
   cardNumber: Record<CardNumberPosition, string>;
   changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
 };
-
-const CARD_NUMBER_LENGTH = 4;
-
-const errorMessage = {
-  length: "4자리만 입력 가능합니다.",
-  number: "숫자만 입력 가능합니다.",
-};
-
-function getValidationFns(length: number, cardNumber: string) {
-  return [
-    { condition: () => cardNumber === NO_ERROR, errorMsg: NO_ERROR },
-    {
-      condition: () => !isValidLength(cardNumber, length),
-      errorMsg: errorMessage.length,
-    },
-    {
-      condition: () => !isValidNumber(cardNumber),
-      errorMsg: errorMessage.number,
-    },
-    { condition: () => true, errorMsg: NO_ERROR },
-  ];
-}
-
-function getErrorMessage(error: Record<CardNumberPosition, string>) {
-  for (const key in error) {
-    const typedKey = key as keyof typeof error;
-    if (error[typedKey] !== NO_ERROR) {
-      return error[typedKey];
-    }
-  }
-}
 
 function CardNumberInputs({ cardNumber, changeCardNumber }: CardNumberProps) {
   const [error, setError] = useState({

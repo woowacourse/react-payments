@@ -1,30 +1,12 @@
 import "./App.css";
-import styled from "styled-components";
+import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
 import CardNumberSection from "../features/cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../features/cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../features/cardCVCNumberSection/CardCVCNumberSection";
-import { useState } from "react";
 import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
-
-const StyledApp = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledFrame = styled.div`
-  display: inline-flex;
-  padding: 77px 30px 19px 31px;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 45px;
-  background-color: white;
-  width: 100%;
-  max-width: 600px;
-  box-sizing: border-box;
-`;
+import useCardInfo from "./useCardInfo.ts";
 
 type CardNumberState = {
   [key in CardNumberPosition]: string;
@@ -35,41 +17,26 @@ type ExpirationPeriodState = {
 };
 
 function App() {
-  const [cardNumber, setCardNumber] = useState<CardNumberState>({
-    first: INITIALIZE_VALUE,
-    second: INITIALIZE_VALUE,
-    third: INITIALIZE_VALUE,
-    fourth: INITIALIZE_VALUE,
-  });
+  const { values: cardNumber, changeValues: changeCardNumber } =
+    useCardInfo<CardNumberState>({
+      first: INITIALIZE_VALUE,
+      second: INITIALIZE_VALUE,
+      third: INITIALIZE_VALUE,
+      fourth: INITIALIZE_VALUE,
+    });
 
-  const [expirationPeriod, setExpirationPeriod] =
-    useState<ExpirationPeriodState>({
+  const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
+    useCardInfo<ExpirationPeriodState>({
       month: INITIALIZE_VALUE,
       year: INITIALIZE_VALUE,
     });
 
-  const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
-
-  function changeCardNumber(position: CardNumberPosition, cardNumber: string) {
-    setCardNumber((prev) => {
-      prev[position] = cardNumber;
-      return { ...prev };
-    });
-  }
-
-  function changeExpirationPeriod(
-    expirationPeriod: keyof ExpirationPeriod,
-    date: string
-  ) {
-    setExpirationPeriod((prev) => {
-      prev[expirationPeriod] = date;
-      return { ...prev };
-    });
-  }
-
-  function changeCVCNumber(CVCNumber: string) {
-    setCVCNumber(CVCNumber);
-  }
+  const {
+    values: { CVCNumber },
+    changeValues: changeCVCNumber,
+  } = useCardInfo({
+    CVCNumber: INITIALIZE_VALUE,
+  });
 
   return (
     <StyledApp>

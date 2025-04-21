@@ -1,7 +1,11 @@
 import Input from "../../shared/input/Input";
 import { useState } from "react";
-import { isValidLength, isValidNumber } from "../../util/validation";
 import { NO_ERROR } from "../../shared/constants/constant";
+import { CVC_NUMBER_LENGTH } from "./CardCVCNumberInputs.constant";
+import {
+  getValidationFns,
+  getErrorMessage,
+} from "./CardCVCNumberInputs.domain";
 import {
   StyledContainer,
   StyledInputWrap,
@@ -10,34 +14,8 @@ import {
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: string;
-  changeCVCNumber: (CVCNumber: string) => void;
+  changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
 };
-
-const CVC_NUMBER_LENGTH = 3;
-
-const errorMessage = {
-  length: "3자리만 입력 가능합니다.",
-  number: "숫자만 입력 가능합니다.",
-};
-
-function getValidationFns(length: number, CVCNumber: string) {
-  return [
-    { condition: () => CVCNumber === NO_ERROR, errorMsg: NO_ERROR },
-    {
-      condition: () => !isValidLength(CVCNumber, length),
-      errorMsg: errorMessage.length,
-    },
-    {
-      condition: () => !isValidNumber(CVCNumber),
-      errorMsg: errorMessage.number,
-    },
-    { condition: () => true, errorMsg: NO_ERROR },
-  ];
-}
-
-function getErrorMessage(error: string) {
-  return error;
-}
 
 function CardCVCNumberInputs({
   CVCNumber,
@@ -61,7 +39,7 @@ function CardCVCNumberInputs({
         <Input
           value={CVCNumber}
           onChange={(e) => {
-            changeCVCNumber(e.target.value);
+            changeCVCNumber("CVCNumber", e.target.value);
             checkValidation(CVC_NUMBER_LENGTH, e.target.value);
           }}
           isError={error !== NO_ERROR}

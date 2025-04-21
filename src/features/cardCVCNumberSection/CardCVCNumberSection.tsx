@@ -4,7 +4,7 @@ import { StyledContainer } from "./CardCVCNumberSection.css";
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: string;
-  changeCVCNumber: (CVCNumber: string) => void;
+  changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
 };
 
 function CardCVCNumberSection({
