@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../../../common/inputForm/input/Input';
+import Input from './Input';
 import { userEvent, within, expect, waitFor } from '@storybook/test';
-import styles from '../../../common/inputForm/input/Input.module.css';
+import styles from './Input.module.css';
 
 const meta = {
   title: 'Input',
