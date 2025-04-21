@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import InputForm from "../../../common/inputForm/InputForm";
 import Input from "../../../common/inputForm/input/Input";
 import { validatorUtils } from "../../../../utils/validationUtils";
+import { CARD_INFO } from "../../constants/CardInfo";
 
 const numbersArray = Array.from({ length: 4 }).fill("") as string[];
 
@@ -34,7 +35,7 @@ function CardNumberInput({
         type="tel"
         name="cardNumber"
         placeholder="1234"
-        maxLength={4}
+        maxLength={CARD_INFO.NUMBER_LENGTH_PART}
         onChange={(e, setIsValid) => onChangeHandler(e, setIsValid, index)}
       />
     );

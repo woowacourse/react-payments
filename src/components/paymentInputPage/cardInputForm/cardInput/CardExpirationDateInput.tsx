@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Input from "../../../common/inputForm/input/Input";
 import InputForm from "../../../common/inputForm/InputForm";
 import { validatorUtils } from "../../../../utils/validationUtils";
+import { CARD_INFO } from "../../constants/CardInfo";
 
 const numbersArray = Array.from({ length: 2 }).fill("") as string[];
 function CardExpirationDateInput({
@@ -53,7 +54,7 @@ function CardExpirationDateInput({
         name="cardExpirationDate"
         placeholder={index === 0 ? "MM" : "YY"}
         onChange={(e, setIsValid) => onChangeHandler(e, setIsValid, index)}
-        maxLength={2}
+        maxLength={CARD_INFO.EXPIRATION_DATE_LENGTH_PART}
       />
     );
   });

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Input from "../../../common/inputForm/input/Input";
 import InputForm from "../../../common/inputForm/InputForm";
 import { validatorUtils } from "../../../../utils/validationUtils";
+import { CARD_INFO } from "../../constants/CardInfo";
 
 function CardCVCInput() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
@@ -14,7 +15,6 @@ function CardCVCInput() {
     if (!validatorUtils.isNumber(cvc)) {
       setFeedbackMessage("숫자만 입력 가능합니다.");
       setIsValid(false);
-      return;
     }
   }
 
@@ -28,7 +28,7 @@ function CardCVCInput() {
         type="tel"
         name="cardCVC"
         placeholder="123"
-        maxLength={3}
+        maxLength={CARD_INFO.CVC_LENGTH}
         onChange={onChangeHandler}
       />
     </InputForm>

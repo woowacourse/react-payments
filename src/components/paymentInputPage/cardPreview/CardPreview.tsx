@@ -1,3 +1,4 @@
+import { CARD_INFO } from "../constants/CardInfo";
 import styles from "./CardPreview.module.css";
 
 export type CardInformationType = {
@@ -14,20 +15,20 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
       return number;
     }
 
-    return "•".repeat(number.length);
+    return CARD_INFO.MASKING_STRING.repeat(number.length);
   });
 
   function checkBrand(inputCardNumber: string) {
-    if (inputCardNumber[0] === "4") {
+    if (inputCardNumber[0] === CARD_INFO.VISA_START_NUMBER.toString()) {
       isBrand = true;
       brandName = "Visa";
       return;
     }
 
     if (
-      inputCardNumber[0] === "5" &&
-      Number(inputCardNumber[1]) >= 1 &&
-      Number(inputCardNumber[1]) <= 5
+      CARD_INFO.MASTER_START_NUMBERS.includes(
+        Number(inputCardNumber[0] + inputCardNumber[1])
+      )
     ) {
       isBrand = true;
       brandName = "Mastercard";
@@ -51,7 +52,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         })}
       </div>
       <p className={`${styles.pCardNumber} tx-md`}>
-        {expirationDate.join("/")}
+        {expirationDate.join(CARD_INFO.EXPIRATION_SPLIT)}
       </p>
     </div>
   );

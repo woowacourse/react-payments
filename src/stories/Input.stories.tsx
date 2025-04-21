@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../components/common/inputForm/input/Input';
-import { validatorUtils } from '../utils/validationUtils';
-import { userEvent, within, expect, waitFor } from '@storybook/test';
-import styles from '../components/common/inputForm/input/Input.module.css';
+import type { Meta, StoryObj } from "@storybook/react";
+import Input from "../components/common/inputForm/input/Input";
+import { validatorUtils } from "../utils/validationUtils";
+import { userEvent, within, expect, waitFor } from "@storybook/test";
+import styles from "../components/common/inputForm/input/Input.module.css";
 
 function onChangeHandler(
   e: React.ChangeEvent<HTMLInputElement>,
@@ -17,7 +17,7 @@ function onChangeHandler(
 }
 
 const meta = {
-  title: 'Input',
+  title: "Input",
   component: Input,
   args: {
     onChange: () => {},
@@ -32,8 +32,8 @@ export const Default: Story = {
   render: () => {
     return (
       <Input
-        type='test'
-        placeholder='숫자를 입력하세요'
+        type="test"
+        placeholder="숫자를 입력하세요"
         maxLength={3}
         onChange={onChangeHandler}
       />
@@ -45,8 +45,8 @@ export const ErrorInput: Story = {
   render: () => {
     return (
       <Input
-        type='text'
-        placeholder='숫자를 입력하세요'
+        type="text"
+        placeholder="숫자를 입력하세요"
         maxLength={3}
         onChange={onChangeHandler}
       />
@@ -54,13 +54,13 @@ export const ErrorInput: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText('숫자를 입력하세요');
+    const input = canvas.getByPlaceholderText("숫자를 입력하세요");
 
-    await userEvent.type(input, 'abc');
+    await userEvent.type(input, "abc");
     expect(input.className).toContain(styles.isNotValid);
 
     await userEvent.clear(input);
-    await userEvent.type(input, '123');
+    await userEvent.type(input, "123");
     await waitFor(() =>
       expect(input.className).not.toContain(styles.isNotValid)
     );
