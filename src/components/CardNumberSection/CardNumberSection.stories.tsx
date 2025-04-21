@@ -7,7 +7,7 @@ const meta: Meta<typeof CardNumberSection> = {
   title: 'CardNumberSection',
   component: CardNumberSection,
   args: {
-    cardNumbers: ['', '', '', '']
+    cardNumbers: { first: '', second: '', third: '', fourth: '' }
   }
 };
 export default meta;
@@ -24,7 +24,7 @@ export const Default: Story = {
 
 export const Valid: Story = {
   args: {
-    cardNumbers: ['1412', '4123', '3223', '1233']
+    cardNumbers: { first: '1334', second: '2123', third: '4123', fourth: '2111' }
   },
   render: ({ cardNumbers: initialNumbers }) => {
     const [cardNumbers, setCardNumbers] = useState(initialNumbers);
@@ -35,7 +35,7 @@ export const Valid: Story = {
 
 export const InValid: Story = {
   args: {
-    cardNumbers: ['aasd', '4123', '3223', '1233']
+    cardNumbers: { first: 'aasd', second: '2123', third: '4123', fourth: '2111' }
   },
   render: ({ cardNumbers: initialNumbers }) => {
     const [cardNumbers, setCardNumbers] = useState(initialNumbers);

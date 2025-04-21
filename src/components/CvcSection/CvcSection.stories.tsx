@@ -12,7 +12,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: ({ cardNumbers: initialNumbers }) => {
+  args: {
+    cvc: ''
+  },
+  render: ({ cvc: initialNumbers }) => {
     const [cvc, setCvc] = useState(initialNumbers);
 
     return <CvcSection cvc={cvc} setCvc={setCvc} />;
@@ -21,9 +24,9 @@ export const Default: Story = {
 
 export const Valid: Story = {
   args: {
-    cardNumbers: '314'
+    cvc: '314'
   },
-  render: ({ cardNumbers: initialNumbers }) => {
+  render: ({ cvc: initialNumbers }) => {
     const [cvc, setCvc] = useState(initialNumbers);
 
     return <CvcSection cvc={cvc} setCvc={setCvc} />;
@@ -32,9 +35,9 @@ export const Valid: Story = {
 
 export const InValid: Story = {
   args: {
-    cardNumbers: 'a2'
+    cvc: 'a2'
   },
-  render: ({ cardNumbers: initialNumbers }) => {
+  render: ({ cvc: initialNumbers }) => {
     const [cvc, setCvc] = useState(initialNumbers);
 
     return <CvcSection cvc={cvc} setCvc={setCvc} />;

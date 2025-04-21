@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    expiration: ['', '']
+    expiration: { month: '', year: '' }
   },
   render: ({ expiration }) => {
     const [exp, setExp] = useState(expiration);
@@ -22,7 +22,7 @@ export const Default: Story = {
 
 export const Valid: Story = {
   args: {
-    expiration: ['31', '12']
+    expiration: { month: '12', year: '28' }
   },
   render: ({ expiration }) => {
     const [exp, setExp] = useState(expiration);
@@ -32,7 +32,7 @@ export const Valid: Story = {
 
 export const InValid: Story = {
   args: {
-    expiration: ['as', '12']
+    expiration: { month: 'aq', year: '12' }
   },
   render: ({ expiration }) => {
     const [exp, setExp] = useState(expiration);
