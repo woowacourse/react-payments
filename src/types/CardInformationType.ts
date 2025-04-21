@@ -23,7 +23,7 @@ export type UniqueNumberStateType = {
 type Action =
   | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
   | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
-  | { type: "SET_CVC"; value: string };
+  | { type: "SET_CVC_NUMBER"; value: string };
 
 export type CardInformationType = {
   uniqueNumber: string[];

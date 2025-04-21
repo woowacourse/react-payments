@@ -4,8 +4,12 @@ import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { ExpirationDateStateType } from "../../types/CardInformationType";
+import useExpirationDateValidation from "../../hooks/useExpirationDateValidation";
 
 const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
+  const { monthError, yearError, errorMessage, handleChangeMonth, handleChangeYear } =
+    useExpirationDateValidation(dispatch);
+
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
@@ -19,23 +23,23 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
           <Input
             placeholder="MM"
             value={expirationDateState[0]}
-            setValue={(v) => dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v })}
+            setValue={(v) => handleChangeMonth(v)}
             maxLength={2}
-            error={false}
+            error={monthError}
             allowOnly="number"
           ></Input>
           <Input
             placeholder="YY"
             value={expirationDateState[1]}
-            setValue={(v) => dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v })}
+            setValue={(v) => handleChangeYear(v)}
             maxLength={2}
-            error={false}
+            error={yearError}
             allowOnly="number"
           ></Input>
         </div>
-        {/* <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-        <Text type="error" text={"유효하지 않은 값입니다.!"} />
-      </div> */}
+        <div css={errorTextWrapperStyle(monthError || yearError)}>
+          <Text type="error" text={errorMessage} />
+        </div>
       </div>
     </div>
   );
@@ -56,6 +60,7 @@ const inputFieldStyle = css`
 
 const errorTextWrapperStyle = (error: boolean) => css`
   opacity: ${error ? "1" : "0"};
+  height: 5px;
 `;
 
 const TextWrapperStyle = css`

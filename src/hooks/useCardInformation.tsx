@@ -10,7 +10,7 @@ const initialCardInfo: CardInformationType = {
 type Action =
   | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
   | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
-  | { type: "SET_CVC"; value: string };
+  | { type: "SET_CVC_NUMBER"; value: string };
 
 function reducer(state: CardInformationType, action: Action): CardInformationType {
   switch (action.type) {
@@ -26,7 +26,7 @@ function reducer(state: CardInformationType, action: Action): CardInformationTyp
       return { ...state, expirationDate: updated };
     }
 
-    case "SET_CVC":
+    case "SET_CVC_NUMBER":
       return { ...state, cvcNumber: [action.value] };
 
     default:

@@ -4,8 +4,11 @@ import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { UniqueNumberStateType } from "../../types/CardInformationType";
+import useUniqueNumberValidation from "../../hooks/useUniqueNumberValidation";
 
 const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
+  const { error, errorMessage, handleChange } = useUniqueNumberValidation(dispatch);
+
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
@@ -22,15 +25,15 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
               placeholder="1234"
               value={value}
               maxLength={4}
-              setValue={(v) => dispatch({ type: "SET_UNIQUE_NUMBER", index, value: v })}
-              error={false}
+              setValue={(v) => handleChange(v, index)}
+              error={error[index]}
               allowOnly="number"
             />
           ))}
         </div>
-        {/* <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-        <Text type="error" text={"유효하지 않은 값입니다.!"} />
-      </div> */}
+        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
+          <Text type="error" text={errorMessage} />
+        </div>
       </div>
     </div>
   );
@@ -51,6 +54,7 @@ const inputFieldStyle = css`
 
 const errorTextWrapperStyle = (error: boolean) => css`
   opacity: ${error ? "1" : "0"};
+  height: 5px;
 `;
 
 const TextWrapperStyle = css`

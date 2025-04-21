@@ -4,8 +4,10 @@ import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { CvcNumberStateType } from "../../types/CardInformationType";
+import useCvcNumberValidation from "../../hooks/useCvcNumberValidation";
 
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
+  const { error, errorMessage, handleChange } = useCvcNumberValidation(dispatch);
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
@@ -20,27 +22,13 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
             placeholder="123"
             maxLength={3}
             value={cvcNumberState[0]}
-            setValue={(v) => dispatch({ type: "SET_CVC", value: v })}
-            error={false}
+            setValue={(v) => handleChange(v)}
+            error={error}
             allowOnly="number"
           />
         </div>
-        {/* <div css={inputWrapperStyle}>
-        {Array.from({ length: inputNumber }).map((_, index) => (
-          <Input
-            // key={index}
-            // value={cardInformation[informationType][index] ?? ""}
-            // setValue={(v) => handleChange(index, v)}
-            // placeholder={inputProps.placeholder[index]}
-            // maxLength={inputProps.maxLength}
-            // error={isErrors[informationType][index]}
-          />
-        ))}
-      </div> */}
-        {/* <div css={errorTextWrapperStyle(isErrors[informationType].some((bool) => bool === true))}>
-         */}
-        <div>
-          <Text type="error" text={"유효하지 않은 값입니다.!"} />
+        <div css={errorTextWrapperStyle(error)}>
+          <Text type="error" text={errorMessage} />
         </div>
       </div>
     </div>
@@ -62,6 +50,7 @@ const inputFieldStyle = css`
 
 const errorTextWrapperStyle = (error: boolean) => css`
   opacity: ${error ? "1" : "0"};
+  height: 5px;
 `;
 
 const TextWrapperStyle = css`
