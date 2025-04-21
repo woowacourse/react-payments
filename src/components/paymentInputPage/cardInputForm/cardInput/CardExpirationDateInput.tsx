@@ -21,34 +21,66 @@ function CardExpirationDateInput({
     const target = e.target;
     const { name, value } = target;
 
-    if (!validatorUtils.isNumber(value)) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
-      setIsValidInputs({ ...isValidInputs, [name]: false });
-      setExpirationDate({ ...expirationDate, [name]: value });
+    setExpirationDate({ ...expirationDate, [name]: value });
+    checkIsValidType(name, value);
+    checkIsValidExpiration(name, value);
+  }
 
+  function checkIsValidType(name: string, expiryValue: string) {
+    if (!validatorUtils.isNumber(expiryValue)) {
+      setFeedbackMessage('숫자만 입력 가능합니다.');
+      setIsValidInputs((prev) => {
+        return { ...prev, [name]: false };
+      });
+    }
+  }
+
+  function checkIsValidExpiration(name: string, value: string) {
+    const { month, year } = expirationDate;
+    if (
+      month !== '' &&
+      year !== '' &&
+      !validatorUtils.isValidExpirationDate(expirationDate)
+    ) {
+      setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
+      setIsValidInputs((prev) => {
+        return { ...prev, [name]: false };
+      });
       return;
     }
 
     if (
-      (name === 'month' &&
-        !validatorUtils.isValidNumberRange(Number(expirationDate), 1, 12)) ||
-      !validatorUtils.isValidExpirationDate(expirationDate)
+      name === 'month' &&
+      value !== '' &&
+      !validatorUtils.isValidNumberRange({
+        value: Number(value),
+        min: 1,
+        max: 12,
+      })
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValidInputs({ ...isValidInputs, [name]: false });
+      setIsValidInputs((prev) => {
+        return { ...prev, [name]: false };
+      });
       return;
     }
+
     if (
       name === 'year' &&
-      !validatorUtils.isValidExpirationDate(expirationDate)
+      value !== '' &&
+      !validatorUtils.isValidNumberRange({ value: Number(value), min: 25 })
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValidInputs({ ...isValidInputs, [name]: false });
+      setIsValidInputs((prev) => {
+        return { ...prev, [name]: false };
+      });
       return;
     }
 
     setFeedbackMessage('');
-    setIsValidInputs({ ...isValidInputs, [name]: true });
+    setIsValidInputs((prev) => {
+      return { ...prev, [name]: true };
+    });
   }
 
   return (
