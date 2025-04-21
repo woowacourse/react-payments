@@ -2,7 +2,7 @@ import { NO_ERROR } from "../../shared/constants/constant";
 import { ERROR_MESSAGE } from "./CardCVCNumberInputs.constant";
 import { isValidLength, isValidNumber } from "../../util/validation";
 
-export function getValidationFns(length: number, CVCNumber: string) {
+export function getCVCValidationFns(length: number, CVCNumber: string) {
   return [
     { condition: () => CVCNumber === NO_ERROR, errorMsg: NO_ERROR },
     {

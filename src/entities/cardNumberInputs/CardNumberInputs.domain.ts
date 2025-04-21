@@ -3,7 +3,7 @@ import { NO_ERROR } from "../../shared/constants/constant";
 import { ERROR_MESSAGE } from "./CardNumberInputs.constant";
 import { isValidLength, isValidNumber } from "../../util/validation";
 
-export function getValidationFns(length: number, cardNumber: string) {
+export function getCardNumberValidationFns(length: number, cardNumber: string) {
   return [
     { condition: () => cardNumber === NO_ERROR, errorMsg: NO_ERROR },
     {

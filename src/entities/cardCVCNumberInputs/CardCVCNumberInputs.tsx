@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NO_ERROR } from "../../shared/constants/constant";
 import { CVC_NUMBER_LENGTH } from "./CardCVCNumberInputs.constant";
 import {
-  getValidationFns,
+  getCVCValidationFns,
   getErrorMessage,
 } from "./CardCVCNumberInputs.domain";
 import {
@@ -30,7 +30,7 @@ function CardCVCNumberInputs({
     CVCNumber: string,
     type: "CVCNumber"
   ) {
-    const validationFns = getValidationFns(length, CVCNumber);
+    const validationFns = getCVCValidationFns(length, CVCNumber);
 
     const validation = validationFns.find((v) => v.condition());
     setError((prev) => {

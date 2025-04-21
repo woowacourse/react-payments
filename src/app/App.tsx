@@ -8,7 +8,7 @@ import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
 import { INITIALIZE_VALUE, NO_ERROR } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
 import useError from "../shared/hook/useError.ts";
-import { getValidationFns } from "../entities/cardNumberInputs/CardNumberInputs.domain.ts";
+import { getCardNumberValidationFns } from "../entities/cardNumberInputs/CardNumberInputs.domain.ts";
 
 type CardNumberState = {
   [key in CardNumberPosition]: string;
@@ -36,7 +36,7 @@ function App() {
       third: NO_ERROR,
       fourth: NO_ERROR,
     },
-    getValidationFns
+    getCardNumberValidationFns
   );
 
   const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
