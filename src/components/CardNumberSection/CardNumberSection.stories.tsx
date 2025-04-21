@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-
 import CardNumberSection from './CardNumberSection';
 
 const meta: Meta<typeof CardNumberSection> = {
   title: 'CardNumberSection',
-  component: CardNumberSection,
-  args: {
-    cardNumbers: { first: '', second: '', third: '', fourth: '' }
-  }
+  component: CardNumberSection
 };
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    cardNumbers: { first: '', second: '', third: '', fourth: '' }
+  },
   render: ({ cardNumbers: initialNumbers }) => {
     const [cardNumbers, setCardNumbers] = useState(initialNumbers);
     const [, setCardLogo] = useState<'visa' | 'master' | ''>('');

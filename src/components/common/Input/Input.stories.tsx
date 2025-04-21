@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Input from './Input';
-import { action } from '@storybook/addon-actions';
 
 const meta = {
   title: 'Input',
-  component: Input
+  component: Input,
+  args: {
+    placeholder: '1234',
+    maxLength: 4
+  }
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -14,16 +17,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     value: '',
-    placeholder: '1234',
-    isValid: true,
-    onChange: action('onChange'),
-    maxLength: 4
+    isValid: true
   }
 };
 
 export const Valid: Story = {
   args: {
-    ...Default.args,
     value: '2354',
     isValid: true
   }
@@ -31,7 +30,6 @@ export const Valid: Story = {
 
 export const Invalid: Story = {
   args: {
-    ...Default.args,
     value: 'gdas',
     isValid: false
   }
