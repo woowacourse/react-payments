@@ -34,7 +34,7 @@ export const ErrorInput: Story = {
     isValidInput: false,
   },
 
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, updateArgs }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByPlaceholderText('숫자를 입력하세요');
 
@@ -43,6 +43,8 @@ export const ErrorInput: Story = {
 
     await userEvent.clear(input);
     await userEvent.type(input, '123');
+    updateArgs({ isValidInput: true });
+
     await waitFor(() =>
       expect(input.className).not.toContain(styles.isNotValid)
     );
