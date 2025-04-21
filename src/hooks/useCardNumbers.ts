@@ -9,6 +9,7 @@ import {
   IsError,
 } from '../types/CardNumbers';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
+import isInteger from './validate/isInteger';
 
 const INITIAL_CARD_NUMBER: CardNumbers = {
   firstNumber: '',
@@ -32,7 +33,7 @@ const useCardNumbers = (): CardNumbersOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {
-    if (!isNumber(input)) {
+    if (!isNumber(input) || !isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 

@@ -3,6 +3,7 @@ import useError from './useError';
 import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
+import isInteger from './validate/isInteger';
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
@@ -27,7 +28,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardCVCNumberChangeValidationResult = (input: string) => {
-    if (!isNumber(input)) {
+    if (!isNumber(input) || !isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
     if (!isValidStringLength({ value: input, maxLength: MAX_CVC_LENGTH })) {

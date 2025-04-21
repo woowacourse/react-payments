@@ -10,6 +10,7 @@ import {
   IsError,
 } from '../types/CardExpirationDateOptions';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
+import isInteger from './validate/isInteger';
 
 const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
   month: '',
@@ -47,7 +48,7 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     if (input.length < MAX_INPUT_LENGTH)
       return { isError: false, errorMessage: '' };
 
-    if (!isNumber(input)) {
+    if (!isNumber(input) || !isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 
