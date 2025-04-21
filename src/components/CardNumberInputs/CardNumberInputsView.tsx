@@ -4,7 +4,6 @@ import InputTexts from '../common/InputTexts';
 
 export interface CardNumberInputsViewProps {
   cardNumbers: string[];
-  errorMessage: string;
   isErrors: boolean[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -12,9 +11,10 @@ export interface CardNumberInputsViewProps {
   ) => void;
 }
 
+const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
+
 const CardNumberInputsView = ({
   cardNumbers,
-  errorMessage,
   isErrors,
   handleInputChange,
 }: CardNumberInputsViewProps) => {
@@ -31,7 +31,9 @@ const CardNumberInputsView = ({
         state={cardNumbers}
         isErrors={isErrors}
       />
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>
+        {isErrors.some((isError) => isError) ? ERROR_MESSAGE : ''}
+      </ErrorMessage>
     </Container>
   );
 };

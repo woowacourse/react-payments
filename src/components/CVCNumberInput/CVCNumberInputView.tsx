@@ -4,14 +4,14 @@ import InputTexts from '../common/InputTexts';
 
 export interface CVCNumberInputViewProps {
   cvcNumbers: string[];
-  errorMessage: string;
   isError: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
+
 const CVCNumberInputView = ({
   cvcNumbers,
-  errorMessage,
   isError,
   handleInputChange,
 }: CVCNumberInputViewProps) => {
@@ -25,7 +25,7 @@ const CVCNumberInputView = ({
         onChange={handleInputChange}
         isErrors={[isError]}
       />
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>{isError ? ERROR_MESSAGE : ''}</ErrorMessage>
     </Container>
   );
 };

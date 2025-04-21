@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import PreviewView from './PreviewView';
 
 interface PreviewProps {
@@ -18,27 +17,27 @@ const Preview = ({
   period,
   isPeriodSeparatorShowing,
 }: PreviewProps) => {
-  const [cardMethodSrc, setCardMethodSrc] = useState<string | null>(null);
-
-  useEffect(() => {
+  const getCardMethodSrc = () => {
     if (cardNumbers[0].startsWith(VISA_CARD_PREFIXES)) {
-      setCardMethodSrc('./images/visa.svg');
-    } else if (
+      return './images/visa.svg';
+    }
+
+    if (
       Number(cardNumbers[0].slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
       Number(cardNumbers[0].slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
     ) {
-      setCardMethodSrc('./images/master.svg');
-    } else {
-      setCardMethodSrc('');
+      return './images/master.svg';
     }
-  }, [cardNumbers]);
+
+    return null;
+  };
 
   return (
     <PreviewView
       cardNumbers={cardNumbers}
       period={period}
       isPeriodSeparatorShowing={isPeriodSeparatorShowing}
-      cardMethodSrc={cardMethodSrc}
+      cardMethodSrc={getCardMethodSrc()}
     />
   );
 };
