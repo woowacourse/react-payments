@@ -45,6 +45,5 @@
   letter-spacing: 2.24px;
 }
 .secret {
-  letter-spacing: 2px;
-  /* TODO : claire -1px로 변경 */
+  letter-spacing: -1px;
 }
