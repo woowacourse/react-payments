@@ -13,10 +13,10 @@ const INPUT_MAX_LENGTH = 4;
 
 type Props = {
   cardNumber: CardNumber;
-  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
+  onCardNumberChange: (order: keyof CardNumber, value: string) => void;
 };
 
-const CardNumberSection = ({cardNumber, setCardNumber}: Props) => {
+const CardNumberSection = ({cardNumber, onCardNumberChange}: Props) => {
   const [error, setError] = useState({
     first: '',
     second: '',
@@ -25,7 +25,7 @@ const CardNumberSection = ({cardNumber, setCardNumber}: Props) => {
   });
 
   const handleInput = (order: keyof CardNumber, value: string) => {
-    setCardNumber({...cardNumber, [order]: value});
+    onCardNumberChange(order, value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError({...error, [order]: MESSAGE.INVALID_NUMBER});

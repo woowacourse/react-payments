@@ -10,14 +10,14 @@ const INPUT_MAX_LENGTH = 3;
 
 type Props = {
   cvcNumber: string;
-  setcvcNumber: Dispatch<SetStateAction<string>>;
+  onCvcNumberChange: (value: string) => void;
 };
 
-const CardCvcSection = ({cvcNumber, setcvcNumber}: Props) => {
+const CardCvcSection = ({cvcNumber, onCvcNumberChange}: Props) => {
   const [error, setError] = useState('');
 
   const handleInput = (value: string) => {
-    setcvcNumber(value);
+    onCvcNumberChange(value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);

@@ -13,10 +13,13 @@ const INPUT_MAX_LENGTH = 2;
 
 type Props = {
   expirationDate: ExpirationDate;
-  setExpirationDate: Dispatch<SetStateAction<ExpirationDate>>;
+  onExpirationDateChange: (order: keyof ExpirationDate, value: string) => void;
 };
 
-const ExpirationDateSection = ({expirationDate, setExpirationDate}: Props) => {
+const ExpirationDateSection = ({
+  expirationDate,
+  onExpirationDateChange,
+}: Props) => {
   const [error, setError] = useState({
     month: '',
     year: '',
@@ -25,7 +28,7 @@ const ExpirationDateSection = ({expirationDate, setExpirationDate}: Props) => {
   const nowYear = new Date().getFullYear() % 100;
 
   const handleInput = (order: keyof ExpirationDate, value: string) => {
-    setExpirationDate({...expirationDate, [order]: value});
+    onExpirationDateChange(order, value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError({...error, [order]: MESSAGE.INVALID_NUMBER});

@@ -3,7 +3,7 @@ import Card from './components/card/Card';
 import {useState} from 'react';
 import CardNumberSection from './components/form/CardNumberSection';
 import ExpirationDateSection from './components/form/ExpirationDateSection';
-import CardCvc from './components/form/CardCvcSection';
+import CardCvcSection from './components/form/CardCvcSection';
 import {CardNumber, ExpirationDate} from './type/Card';
 
 function App() {
@@ -17,20 +17,33 @@ function App() {
     month: '',
     year: '',
   });
-  const [cvcNumber, setcvcNumber] = useState<string>('');
+  const [cvcNumber, setcvcNumber] = useState('');
 
   return (
     <MainContainer>
       <Card cardNumbers={cardNumber} expirationDate={expirationDate} />
       <CardNumberSection
         cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
+        onCardNumberChange={(order, value) =>
+          setCardNumber((prev) => ({
+            ...prev,
+            [order]: value,
+          }))
+        }
       />
       <ExpirationDateSection
         expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
+        onExpirationDateChange={(order, value) =>
+          setExpirationDate((prev) => ({
+            ...prev,
+            [order]: value,
+          }))
+        }
       />
-      <CardCvc cvcNumber={cvcNumber} setcvcNumber={setcvcNumber} />
+      <CardCvcSection
+        cvcNumber={cvcNumber}
+        onCvcNumberChange={(value) => setcvcNumber(value)}
+      />
     </MainContainer>
   );
 }
