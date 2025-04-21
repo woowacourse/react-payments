@@ -17,11 +17,10 @@ const InputField = ({
 
   const handleChange = (index: number, value: string) => {
     validateInput(informationType, index, value);
-    const updatedValues = [...cardInformation[informationType]];
-    updatedValues[index] = value;
-    setCardInformation({
-      ...cardInformation,
-      [informationType]: updatedValues,
+    setCardInformation((prev) => {
+      const updated = prev[informationType];
+      updated[index] = value;
+      return { ...prev, [informationType]: updated };
     });
   };
 

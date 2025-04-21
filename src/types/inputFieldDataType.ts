@@ -1,3 +1,5 @@
+import { setCardInformationType } from "./CardInformationType";
+
 export type InputFieldProps = {
   label: string;
   inputNumber: number;
@@ -10,6 +12,6 @@ export type InputFieldProps = {
     expirationDate: string[];
     cvcNumber: string[];
   };
-  setCardInformation: (newValue: InputFieldProps["cardInformation"]) => void;
+  setCardInformation: setCardInformationType;
   informationType: "uniqueNumber" | "expirationDate" | "cvcNumber";
 };

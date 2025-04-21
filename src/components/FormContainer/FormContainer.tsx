@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import FormSection from "../FormSection/FormSection";
 import { css } from "@emotion/react";
-import { CardInformationType } from "../../types/CardInformationType";
+import { CardInformationType, setCardInformationType } from "../../types/CardInformationType";
 
 type FormContainerProps = {
   cardInformationState: CardInformationType;
-  setCardInformationState: (newValue: FormContainerProps["cardInformationState"]) => void;
+  setCardInformationState: setCardInformationType;
 };
 
 const UIControllerData = {

@@ -8,7 +8,7 @@ const initialCardInformation: CardInformationType = {
 };
 
 const useCardInformation = () => {
-  const [cardInformationState, setCardInformationState] = useState(initialCardInformation);
+  const [cardInformationState, setCardInformationState] = useState<CardInformationType>(initialCardInformation);
   return { cardInformationState, setCardInformationState };
 };
 
