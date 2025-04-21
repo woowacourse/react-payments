@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { getCardImageSrc } from '../utils/getCardImageSrc';
 import * as S from './Preview.styles';
 
@@ -8,7 +9,11 @@ export default function Preview({
   cardNumber: string[];
   cardExpirationDate: { month: string; year: string };
 }) {
-  const imgSrc = getCardImageSrc(cardNumber[0]);
+  let imgSrc = '';
+
+  useEffect(() => {
+    imgSrc = getCardImageSrc(cardNumber[0]);
+  }, [cardNumber[0]]);
 
   return (
     <S.CardBackground>
