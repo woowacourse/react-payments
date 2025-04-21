@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { TextProps } from "../../types/componentPropsType";
 
-type TextType = "title" | "description" | "label" | "error";
-type textProps = { type: TextType; text: string };
-
-const Text = ({ type, text }: textProps) => {
+const Text = ({ type, text }: TextProps) => {
   const matchType = {
     title: titleStyle,
     description: descriptionStyle,

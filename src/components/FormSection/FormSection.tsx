@@ -1,14 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import Text from "../Text/Text";
 import InputField from "../InputField/InputField";
-import { InputFieldProps } from "../../types/inputFieldDataType";
 import { css } from "@emotion/react";
-
-type FormSectionProps = {
-  title: string;
-  description: string;
-  inputFieldData: InputFieldProps;
-};
+import { FormSectionProps } from "../../types/componentPropsType";
 
 const FormSection = ({ title, description, inputFieldData }: FormSectionProps) => {
   return (

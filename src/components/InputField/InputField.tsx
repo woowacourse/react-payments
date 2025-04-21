@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Text from "../Text/Text";
-import { InputFieldProps } from "../../types/inputFieldDataType";
 import Input from "../Input/Input";
 import useCardInformationErrors from "../../hooks/useCardInformationErrors";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { InputFieldProps } from "../../types/componentPropsType";
 
 const InputField = ({
   label,
@@ -18,6 +18,7 @@ const InputField = ({
 
   const handleChange = (index: number, value: string) => {
     validateInput(informationType, index, value);
+
     setCardInformation((prev) => {
       const updated = prev[informationType];
       updated[index] = value;

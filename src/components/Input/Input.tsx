@@ -1,13 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { InputProps } from "../../types/componentPropsType";
 
-type InputProps = {
-  placeholder: string;
-  maxLength: number;
-  value: string;
-  error: boolean;
-  onChange: (value: string) => void;
-};
 const Input = ({ placeholder, maxLength, value, error, onChange }: InputProps) => {
   return (
     <input
