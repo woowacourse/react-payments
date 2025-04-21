@@ -1,3 +1,4 @@
+import { CardNumberType, Expiration } from '../../App';
 import styles from './Card.module.css';
 
 export default function Card({
@@ -5,9 +6,9 @@ export default function Card({
   cardLogo,
   expiration
 }: {
-  numbers: string[];
+  numbers: CardNumberType;
   cardLogo: 'visa' | 'master' | '';
-  expiration: string[];
+  expiration: Expiration;
 }) {
   return (
     <div className={styles.card}>
@@ -20,23 +21,24 @@ export default function Card({
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>
-          {numbers.slice(0, 2).map((number, index) => (
+          {[numbers.first, numbers.second].map(({ value }, index) => (
             <p className={styles.cardNumber} key={index}>
-              {number}
+              {value}
             </p>
           ))}
-          {numbers.slice(2).map((number, i) => (
+
+          {[numbers.third, numbers.fourth].map(({ value }, i) => (
             <div key={i} className={styles.dotWrapper}>
-              {Array.from({ length: number.length }).map((_, j) => (
+              {Array.from({ length: value.length }).map((_, j) => (
                 <Dot key={j} />
               ))}
             </div>
           ))}
         </div>
         <div className={styles.cardNumber}>
-          {expiration[0]}
-          {expiration[0] && '/'}
-          {expiration[1]}
+          {expiration.year}
+          {expiration.year && '/'}
+          {expiration.month}
         </div>
       </div>
     </div>

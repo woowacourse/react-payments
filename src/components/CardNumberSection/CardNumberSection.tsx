@@ -1,29 +1,28 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { CardNumberType } from '../../App';
+import Input from '../Input/Input';
 
 type Props = {
-  cardNumbers: string[];
+  cardNumbers: CardNumberType;
   setCardLogo: Dispatch<SetStateAction<'visa' | 'master' | ''>>;
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  setCardNumbers: Dispatch<SetStateAction<CardNumberType>>;
 };
 
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  const [cardValidity, setCardValidity] = useState<boolean[]>([true, true, true, true]);
+  type CardNumberKey = keyof CardNumberType;
 
-  const handleCardNumberChange = (index: number, value: string) => {
+  const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
     const isValid = /^[0-9]*$/.test(value);
-    const updatedNumbers = [...cardNumbers];
-    updatedNumbers[index] = value;
-    setCardNumbers(updatedNumbers);
+    setCardNumbers((prev) => ({
+      ...prev,
+      [field]: { value, isError: isValid }
+    }));
 
-    const updatedValidity = [...cardValidity];
-    updatedValidity[index] = isValid;
-    setCardValidity(updatedValidity);
-
-    if (updatedNumbers[0].startsWith('4')) {
+    if (cardNumbers.first.value.startsWith('4')) {
       setCardLogo('visa');
-    } else if (51 <= Number(updatedNumbers[0].slice(0, 2)) && Number(updatedNumbers[0].slice(0, 2)) <= 55) {
+    } else if (51 <= Number(cardNumbers.first.value.slice(0, 2)) && Number(cardNumbers.first.value.slice(0, 2)) <= 55) {
       setCardLogo('master');
     } else {
       setCardLogo('');
@@ -38,14 +37,22 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
       </InputSection.TitleWrapper>
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
-        <InputSection.InputWrapper
-          numbers={cardNumbers}
-          onChange={handleCardNumberChange}
-          valid={cardValidity}
-          placeholders={['1234', '1234', '1234', '1234']}
-          maxLength={4}
+        <div className={styles.inputWrapper}>
+          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
+            <Input
+              key={index}
+              value={cardNumbers[inputKey].value}
+              isValid={!cardNumbers[inputKey].isError}
+              placeholder={'1234'}
+              onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+              maxLength={4}
+            />
+          ))}
+        </div>
+
+        <InputSection.Error
+          message={Object.values(cardNumbers).some(({ isError }) => isError) ? '숫자만 입력 가능합니다.' : ''}
         />
-        <InputSection.Error message={!cardValidity.every((v) => v) ? '숫자만 입력 가능합니다.' : ''} />
       </div>
     </div>
   );

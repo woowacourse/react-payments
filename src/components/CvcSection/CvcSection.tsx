@@ -1,3 +1,4 @@
+import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -27,13 +28,15 @@ export default function CvcSection({ cvc, setCvc }: Props) {
       </InputSection.TitleWrapper>
       <div className={styles.inputSection}>
         <InputSection.Label text="CVC" />
-        <InputSection.InputWrapper
-          numbers={[cvc]}
-          onChange={(_index, value) => handleCvcChange(value)}
-          valid={[cvcError === '']}
-          placeholders={['123']}
+
+        <Input
+          onChange={(e) => handleCvcChange(e.target.value)}
+          value={cvc}
+          placeholder="123"
+          isValid={cvcError == ''}
           maxLength={3}
         />
+
         {cvcError && <InputSection.Error message={cvcError} />}
       </div>
     </div>
