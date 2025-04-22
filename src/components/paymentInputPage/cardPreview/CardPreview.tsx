@@ -12,7 +12,7 @@ const BRAND_IMAGE = {
 };
 
 function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
-  const inputCardNumber = cardNumbers.join('');
+  const inputCardNumber = cardNumbers[0];
   const brand = determineBrand(inputCardNumber);
 
   const displayCardNumbers = cardNumbers.map((number, index) => {

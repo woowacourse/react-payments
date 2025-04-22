@@ -9,7 +9,7 @@ export interface ExpirationDateType {
 }
 
 function PaymentInputPage() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>([]);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
     month: '',
     year: '',
