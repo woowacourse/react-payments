@@ -33,7 +33,7 @@ function ExpirationDateInputField({
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     if (value.length === EXPIRATION_DATE.padLeftThreshold)
-      setInputValue({ ...inputValue, [name]: `0${value}` });
+      setInputValue((prevValue) => ({ ...prevValue, [name]: `0${value}` }));
   };
 
   return (

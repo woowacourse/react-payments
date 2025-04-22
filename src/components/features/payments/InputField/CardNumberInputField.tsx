@@ -63,13 +63,13 @@ function CardNumberInputField({
   };
 
   const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length <= CARD_NUMBER.length.prefix) {
-      if (value[0] === '4') setCardType(CARD_TYPE.visa);
-      else if (value >= '51' && value <= '55') setCardType(CARD_TYPE.master);
-      else setCardType(CARD_TYPE.none);
-    } else if (cardType === CARD_TYPE.none) {
-      return true;
+    if (value.length > CARD_NUMBER.length.prefix) {
+      return cardType === CARD_TYPE.none;
     }
+
+    if (value[0] === '4') setCardType(CARD_TYPE.visa);
+    else if (value >= '51' && value <= '55') setCardType(CARD_TYPE.master);
+    else setCardType(CARD_TYPE.none);
     return false;
   };
 
