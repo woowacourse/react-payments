@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import FormSection from "../FormSection/FormSection";
 import { css } from "@emotion/react";
 import { FormContainerProps } from "../../types/componentPropsType";

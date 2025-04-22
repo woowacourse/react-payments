@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import Text from "../Text/Text";
 import InputField from "../InputField/InputField";
 import { css } from "@emotion/react";

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { CardInformationType } from "../../types/CardInformationType";
 import useCardType from "../../hooks/useCardType";

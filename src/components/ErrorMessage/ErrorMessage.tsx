@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Text from "../Text/Text";
 import { errorMessageProps } from "../../types/componentPropsType";
