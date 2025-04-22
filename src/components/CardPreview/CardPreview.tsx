@@ -18,10 +18,10 @@ const displayCardNumber = (blockValue: string, index: number) => {
 };
 
 const CardPreview = () => {
-  const { cardNumbers, month, year } = useCardContext();
+  const { cardNumbers, month, year, cardColor } = useCardContext();
 
   return (
-    <div className={styles.preview}>
+    <div className={styles.preview} style={{ backgroundColor: cardColor }}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
 
       {Number(cardNumbers[0][0]) ===

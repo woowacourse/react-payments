@@ -40,8 +40,10 @@ interface CardContextType {
 
   CVCHelperText: string;
   CVCInputRef: React.MutableRefObject<HTMLInputElement | null>;
-
   handleCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  cardColor: string;
+  setCardColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -66,6 +68,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const [CVCHelperText, setCVCHelperText] = useState("");
   const CVCInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [cardColor, setCardColor] = useState<string>("#333333");
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -169,6 +173,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         CVCHelperText,
         CVCInputRef,
         handleCVC,
+        cardColor,
+        setCardColor
       }}
     >
       {children}
