@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import {CardNumber} from '../../type/Card';
 
 const INPUT_MAX_LENGTH = 4;
+const ORDER_LABEL = ['first', 'second', 'third', 'fourth'] as const;
 
 type Props = {
   cardNumber: CardNumber;
@@ -43,30 +44,22 @@ const CardNumberSection = ({cardNumber, onCardNumberChange}: Props) => {
       });
   };
 
-  const inputs = Array.from({length: INPUT_MAX_LENGTH}, (_, index: number) => {
-    const orderLabels = ['first', 'second', 'third', 'fourth'] as const;
-
-    return (
-      <Input
-        isError={error[orderLabels[index]].length > 0}
-        placeholder="1234"
-        value={cardNumber[orderLabels[index]]}
-        maxLength={INPUT_MAX_LENGTH}
-        onChange={(e) => handleInput(orderLabels[index], e.target.value)}
-        onBlur={(e) => handleFocusout(orderLabels[index], e.target.value)}
-      />
-    );
-  });
-
   return (
     <CardNumberWrap>
       <Title>결제할 카드 번호를 입력해 주세요</Title>
       <Description>본인 명의의 카드만 결제 가능합니다.</Description>
-      <InputField
-        label="카드 번호"
-        inputs={inputs}
-        errorMessage={findErrorOrder(error)}
-      />
+      <InputField label="카드 번호" errorMessage={findErrorOrder(error)}>
+        {ORDER_LABEL.map((label) => (
+          <Input
+            isError={error[label].length > 0}
+            placeholder="1234"
+            value={cardNumber[label]}
+            maxLength={INPUT_MAX_LENGTH}
+            onChange={(e) => handleInput(label, e.target.value)}
+            onBlur={(e) => handleFocusout(label, e.target.value)}
+          />
+        ))}
+      </InputField>
     </CardNumberWrap>
   );
 };

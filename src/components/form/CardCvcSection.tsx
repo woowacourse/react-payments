@@ -32,21 +32,19 @@ const CardCvcSection = ({cvcNumber, onCvcNumberChange}: Props) => {
       setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
   };
 
-  const inputs = [
-    <Input
-      maxLength={INPUT_MAX_LENGTH}
-      isError={error.length > 0}
-      placeholder="123"
-      value={cvcNumber}
-      onChange={(e) => handleInput(e.target.value)}
-      onBlur={(e) => handleFocusout(e.target.value)}
-    />,
-  ];
-
   return (
     <CardNumberWrap>
       <Title>CVC 번호를 입력해 주세요</Title>
-      <InputField label="CVC" inputs={inputs} errorMessage={error} />
+      <InputField label="CVC" errorMessage={error}>
+        <Input
+          maxLength={INPUT_MAX_LENGTH}
+          isError={error.length > 0}
+          placeholder="123"
+          value={cvcNumber}
+          onChange={(e) => handleInput(e.target.value)}
+          onBlur={(e) => handleFocusout(e.target.value)}
+        />
+      </InputField>
     </CardNumberWrap>
   );
 };

@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import {ExpirationDate} from '../../type/Card';
 
 const INPUT_MAX_LENGTH = 2;
+const ORDER_LABEL = ['month', 'year'] as const;
 
 type Props = {
   expirationDate: ExpirationDate;
@@ -76,30 +77,22 @@ const ExpirationDateSection = ({
       setError({...error, [order]: MESSAGE.MONTH_FORMAT});
   };
 
-  const inputs = Array.from({length: INPUT_MAX_LENGTH}, (_, index: number) => {
-    const orderLabels = ['month', 'year'] as const;
-
-    return (
-      <Input
-        isError={error[orderLabels[index]].length > 0}
-        placeholder="MM"
-        value={expirationDate[orderLabels[index]]}
-        maxLength={INPUT_MAX_LENGTH}
-        onChange={(e) => handleInput(orderLabels[index], e.target.value)}
-        onBlur={(e) => handleFocusout(orderLabels[index], e.target.value)}
-      />
-    );
-  });
-
   return (
     <CardNumberWrap>
       <Title>카드 유효기간을 입력해 주세요</Title>
       <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-      <InputField
-        label="유효기간"
-        inputs={inputs}
-        errorMessage={findErrorOrder(error)}
-      />
+      <InputField label="유효기간" errorMessage={findErrorOrder(error)}>
+        {ORDER_LABEL.map((label) => (
+          <Input
+            isError={error[label].length > 0}
+            placeholder={label === 'month' ? 'MM' : 'YY'}
+            value={expirationDate[label]}
+            maxLength={INPUT_MAX_LENGTH}
+            onChange={(e) => handleInput(label, e.target.value)}
+            onBlur={(e) => handleFocusout(label, e.target.value)}
+          />
+        ))}
+      </InputField>
     </CardNumberWrap>
   );
 };
