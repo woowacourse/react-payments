@@ -1,20 +1,20 @@
 import type { Meta } from '@storybook/react';
-import { useState } from 'react';
-import DropdownInput from '../components/common/DropdownInput';
+import DropdownSelect from '../components/legacy/DropdownSelect';
 import { CARD_COMPANY_NAMES } from '../constants/setting';
+import { useState } from 'react';
 
 const meta = {
-  title: 'DropdownInput',
-  component: DropdownInput,
+  title: 'DropdownSelect',
+  component: DropdownSelect,
   tags: ['autodocs'],
-} satisfies Meta<typeof DropdownInput>;
+} satisfies Meta<typeof DropdownSelect>;
 
 export default meta;
 
 export const Default = () => {
   const [value, setValue] = useState('');
   return (
-    <DropdownInput
+    <DropdownSelect
       value={value}
       setValue={setValue}
       options={CARD_COMPANY_NAMES}

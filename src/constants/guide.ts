@@ -6,6 +6,7 @@ export const CARD_NUMBER_MESSAGE = {
 export const CARD_COMPANY_MESSAGE = {
   MAIN: '카드사 선택를 선택해 주세요',
   CAPTION: '현재 국내 카드사만 가능합니다',
+  PLACEHOLDER: '카드사를 선택해주세요',
 };
 
 export const EXPIRATION_MESSAGE = {

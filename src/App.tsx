@@ -44,6 +44,7 @@ function App() {
           value={cardInfo.company}
           setValue={(value) => handleCardInfo('company', value)}
           options={CARD_COMPANY_NAMES}
+          placeholder={CARD_COMPANY_MESSAGE.PLACEHOLDER}
         />
         <Announcement main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
         <CardExpirationForm
