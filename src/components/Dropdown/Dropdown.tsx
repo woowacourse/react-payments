@@ -3,13 +3,19 @@ import styles from "./Dropdown.module.css";
 
 interface InputProps extends ComponentProps<"select"> {
   itemList: string[];
+  placeholder: string;
 }
 
-function Dropdown({ itemList, ...props }: InputProps) {
+function Dropdown({ itemList, placeholder, ...props }: InputProps) {
   return (
     <select {...props} className={styles.dropdown}>
+      <option value="" disabled>
+        {placeholder}
+      </option>
       {itemList.map((item) => (
-        <option value={item}>{item}</option>
+        <option key={item} value={item}>
+          {item}
+        </option>
       ))}
     </select>
   );
