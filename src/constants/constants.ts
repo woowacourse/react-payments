@@ -23,6 +23,18 @@ export const EXPIRATION_PERIOD_SEGMENT = {
   year: "year",
 } as const;
 
+export const CARD_COMPANY = {
+  none: "",
+  bc: "bc",
+  shinhan: "shinhan",
+  kakaobank: "kakaobank",
+  hyundai: "hyundai",
+  woori: "woori",
+  lotte: "lotte",
+  hana: "hana",
+  kb: "kb",
+} as const;
+
 export type CardFormType = keyof typeof CARD_FORM_TYPE;
 export type CardType = keyof typeof CARD_TYPE;
 export type CardNumbersSegmentType = keyof typeof CARD_NUMBERS_SEGMENT;
@@ -32,5 +44,5 @@ export type ExpirationPeriodSegmentType =
 export type CardNumbersState = Record<CardNumbersSegmentType, string>;
 export type ExpirationPeriodState = Record<ExpirationPeriodSegmentType, string>;
 export type CvcNumberState = string;
-export type CardCompanyState = string;
+export type CardCompanyState = (typeof CARD_COMPANY)[keyof typeof CARD_COMPANY];
 export type PasswordState = string;

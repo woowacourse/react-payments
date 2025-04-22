@@ -1,10 +1,13 @@
 import { createContext, ReactNode, useState } from "react";
 import {
+  CARD_COMPANY,
+  CardCompanyState,
   CardNumbersSegmentType,
   CardNumbersState,
   CvcNumberState,
   ExpirationPeriodSegmentType,
   ExpirationPeriodState,
+  PasswordState,
 } from "../constants/constants";
 
 export interface CardContextType {
@@ -19,6 +22,12 @@ export interface CardContextType {
 
   cvcNumber: CvcNumberState;
   updateCvcNumber: React.Dispatch<React.SetStateAction<CvcNumberState>>;
+
+  cardCompany: CardCompanyState;
+  updateCardCompany: React.Dispatch<React.SetStateAction<CardCompanyState>>;
+
+  password: PasswordState;
+  updatePassword: React.Dispatch<React.SetStateAction<PasswordState>>;
 }
 
 const initialState = {
@@ -33,6 +42,8 @@ const initialState = {
     year: "",
   },
   cvcNumber: "",
+  cardCompany: CARD_COMPANY.none,
+  password: "",
 };
 
 export const CardContext = createContext<CardContextType | null>(null);
@@ -45,6 +56,12 @@ export function CardProvider({ children }: { children: ReactNode }) {
     useState<ExpirationPeriodState>(initialState.expirationPeriod);
   const [cvcNumber, setCvcNumber] = useState<CvcNumberState>(
     initialState.cvcNumber
+  );
+  const [cardCompany, setCardCompany] = useState<CardCompanyState>(
+    initialState.cardCompany
+  );
+  const [password, setPassword] = useState<PasswordState>(
+    initialState.password
   );
 
   const updateCardNumber = (
@@ -78,6 +95,12 @@ export function CardProvider({ children }: { children: ReactNode }) {
 
         cvcNumber,
         updateCvcNumber: setCvcNumber,
+
+        cardCompany,
+        updateCardCompany: setCardCompany,
+
+        password,
+        updatePassword: setPassword,
       }}
     >
       {children}
