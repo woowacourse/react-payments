@@ -11,9 +11,9 @@ interface CardNumberProps {
 }
 
 const CARD_NUMBER_LABEL = {
-  INPUT_TITLE: "결제할 카드 번호를 입력해주세요.",
-  INPUT_DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
-  INPUT_SUBTITLE: "카드 번호",
+  TITLE: "결제할 카드 번호를 입력해주세요.",
+  DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
+  SUBTITLE: "카드 번호",
 } as const;
 
 export default function CardNumber({
@@ -28,9 +28,9 @@ export default function CardNumber({
 
   return (
     <section className={styles["card-number"]}>
-      <Text textType="title">{CARD_NUMBER_LABEL.INPUT_TITLE}</Text>
-      <Text textType="description">{CARD_NUMBER_LABEL.INPUT_DESCRIPTION}</Text>
-      <Text textType="subtitle">{CARD_NUMBER_LABEL.INPUT_SUBTITLE}</Text>
+      <Text textType="title">{CARD_NUMBER_LABEL.TITLE}</Text>
+      <Text textType="description">{CARD_NUMBER_LABEL.DESCRIPTION}</Text>
+      <Text textType="subtitle">{CARD_NUMBER_LABEL.SUBTITLE}</Text>
       <div className={styles["card-number__input"]}>
         {CARD_NUMBER_FIELDS.map((key, idx) => (
           <Input
