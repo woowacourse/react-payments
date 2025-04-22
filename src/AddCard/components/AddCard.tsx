@@ -6,9 +6,9 @@ import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
 function AddCard() {
   const {
     state,
-    previewState: { cardNumberState, expireDate },
+    previewState: { cardNumberState, expireDate, selectedBrand },
     currentStep,
-    isStepValid,
+    allValid,
   } = useCardRegistrationFlow();
 
   return (
@@ -16,13 +16,10 @@ function AddCard() {
       <AddCardPreview
         cardNumberState={cardNumberState}
         expireDate={expireDate}
+        selectedBrand={selectedBrand}
       />
-      <AddCardForm
-        addCardState={state}
-        currentStep={currentStep}
-        isStepValid={isStepValid}
-      />
-      {currentStep === "COMPLETE" && <p>카드 하나 만드시죠!</p>}
+      <AddCardForm addCardState={state} currentStep={currentStep} />
+      {allValid && <p>카드 하나 만드시죠!</p>}
     </div>
   );
 }
