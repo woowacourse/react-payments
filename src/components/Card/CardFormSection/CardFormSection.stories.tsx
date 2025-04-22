@@ -1,42 +1,42 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CARD_INPUT_TYPE } from "../../../constants/constants";
-import CardInputSection from "./CardInputSection";
+import { CARD_FORM_TYPE } from "../../../constants/constants";
+import CardFormSection from "./CardFormSection";
 import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
 
 const meta = {
-  title: "CardInputSection",
-  component: CardInputSection,
+  title: "CardFormSection",
+  component: CardFormSection,
   tags: ["autodocs"],
-} satisfies Meta<typeof CardInputSection>;
+} satisfies Meta<typeof CardFormSection>;
 
 export default meta;
 
-type Story = StoryObj<typeof CardInputSection>;
+type Story = StoryObj<typeof CardFormSection>;
 
 export const CardNumbers: Story = {
   decorators: [withCustomCardProvider({})],
   args: {
-    type: CARD_INPUT_TYPE.cardNumbers,
+    type: CARD_FORM_TYPE.cardNumbers,
   },
 };
 
 export const ExpirationPeriod: Story = {
   decorators: [withCustomCardProvider({})],
   args: {
-    type: CARD_INPUT_TYPE.expirationPeriod,
+    type: CARD_FORM_TYPE.expirationPeriod,
   },
 };
 
 export const CvcNumber: Story = {
   decorators: [withCustomCardProvider({})],
   args: {
-    type: CARD_INPUT_TYPE.cvcNumber,
+    type: CARD_FORM_TYPE.cvcNumber,
   },
 };
 
 export const CardCompany: Story = {
   decorators: [withCustomCardProvider({})],
   args: {
-    type: CARD_INPUT_TYPE.cardCompany,
+    type: CARD_FORM_TYPE.cardCompany,
   },
 };

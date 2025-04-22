@@ -1,5 +1,5 @@
-import { CARD_INPUT_TYPE } from "../../../constants/constants";
-import CardInputSection from "../CardInputSection/CardInputSection";
+import { CARD_FORM_TYPE } from "../../../constants/constants";
+import CardFormSections from "../CardFormSection/CardFormSection";
 import CardPreview from "../CardPreview/CardPreview";
 import { CardPaymentsPageCSS } from "./CardPaymentsPage.styled";
 
@@ -7,10 +7,10 @@ function CardPaymentsPage() {
   return (
     <CardPaymentsPageCSS>
       <CardPreview />
-      <CardInputSection type={CARD_INPUT_TYPE.cvcNumber} />
-      <CardInputSection type={CARD_INPUT_TYPE.expirationPeriod} />
-      <CardInputSection type={CARD_INPUT_TYPE.cardCompany} />
-      <CardInputSection type={CARD_INPUT_TYPE.cardNumbers} />
+      <CardFormSections type={CARD_FORM_TYPE.cvcNumber} />
+      <CardFormSections type={CARD_FORM_TYPE.expirationPeriod} />
+      <CardFormSections type={CARD_FORM_TYPE.cardCompany} />
+      <CardFormSections type={CARD_FORM_TYPE.cardNumbers} />
     </CardPaymentsPageCSS>
   );
 }

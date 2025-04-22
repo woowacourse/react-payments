@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardInputGroupCSS = styled.div`
+export const CardFormFieldCSS = styled.div`
   display: flex;
   gap: 8px;
 `;
