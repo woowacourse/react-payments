@@ -7,6 +7,7 @@ function Payments() {
   return (
     <PaymentsCSS>
       <Preview />
+      <InputSection type={INPUT_TYPE.cardBrand} />
       <InputSection type={INPUT_TYPE.cardNumbers} />
       <InputSection type={INPUT_TYPE.expirationPeriod} />
       <InputSection type={INPUT_TYPE.cvcNumber} />

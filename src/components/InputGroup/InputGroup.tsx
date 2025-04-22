@@ -10,6 +10,7 @@ import { InputErrorType } from "../../hooks/useInputError";
 import ExpirationPeriodInputs from "../ExpirationPeriodInputs/ExpirationPeriodInputs";
 import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
 import CvcInput from "../CvcInput/CvcInput";
+import CardBrandInput from "../CardBrandInput/CardBrandInput";
 
 export interface InputGroupProps {
   type: InputType;
@@ -36,6 +37,8 @@ function InputGroup({
     updateExpirationPeriod,
     cvcNumber,
     updateCvcNumber,
+    cardBrand,
+    updateCardBrand,
   } = useCard();
 
   const handleCardNumberChange = (
@@ -59,6 +62,10 @@ function InputGroup({
     updateCvcNumber(value);
   };
 
+  const handleCardBrandChange = (value: string) => {
+    updateCardBrand(value);
+  };
+
   return (
     <InputGroupCSS>
       {type === INPUT_TYPE.cardNumbers && (
@@ -80,6 +87,12 @@ function InputGroup({
           value={cvcNumber}
           error={error.cvcNumber}
           handleCvcNumberChange={handleCvcNumberChange}
+        />
+      )}
+      {type === INPUT_TYPE.cardBrand && (
+        <CardBrandInput
+          value={cardBrand}
+          handleCardBrandChange={handleCardBrandChange}
         />
       )}
     </InputGroupCSS>

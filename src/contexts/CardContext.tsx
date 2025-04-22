@@ -14,6 +14,7 @@ interface ExpirationPeriod {
 }
 
 type CvcNumber = string;
+type CardBrand = string;
 
 export interface CardContextType {
   cardNumbers: CardNumbers;
@@ -27,6 +28,9 @@ export interface CardContextType {
 
   cvcNumber: CvcNumber;
   updateCvcNumber: React.Dispatch<React.SetStateAction<CvcNumber>>;
+
+  cardBrand: CardBrand;
+  updateCardBrand: (value: string) => void;
 }
 
 interface CardProviderProps {
@@ -46,6 +50,7 @@ const defaultExpirationPeriod = {
 };
 
 const defaultCvcNumber = "";
+const defaultCardBrand = "";
 
 export const CardContext = createContext<CardContextType | null>(null);
 
@@ -56,6 +61,7 @@ export function CardProvider({ children }: CardProviderProps) {
     defaultExpirationPeriod
   );
   const [cvcNumber, setCvcNumber] = useState<CvcNumber>(defaultCvcNumber);
+  const [cardBrand, setCardBrand] = useState<CardBrand>(defaultCardBrand);
 
   const updateCardNumber = (value: string, position: CardPositionType) => {
     setCardNumbers((prevNumbers) => ({
@@ -74,6 +80,10 @@ export function CardProvider({ children }: CardProviderProps) {
     }));
   };
 
+  const updateCardBrand = (value: string) => {
+    setCardBrand(value);
+  };
+
   return (
     <CardContext.Provider
       value={{
@@ -85,6 +95,9 @@ export function CardProvider({ children }: CardProviderProps) {
 
         cvcNumber,
         updateCvcNumber: setCvcNumber,
+
+        cardBrand,
+        updateCardBrand,
       }}
     >
       {children}

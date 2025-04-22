@@ -4,6 +4,7 @@ export const MAGIC_NUMBER = {
     month: "MM",
     year: "YY",
     cvcNumber: "123",
+    cardBrand: "카드사를 선택해주세요",
   },
   maxLength: {
     cardNumber: 4,
@@ -16,6 +17,7 @@ export const INPUT_TYPE = {
   cardNumbers: "cardNumbers",
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
+  cardBrand: "cardBrand",
 } as const;
 
 export const CARD_IMAGE = {

@@ -5,6 +5,7 @@ export interface InputErrorType {
   cardNumbers: Record<CardPositionType, boolean>;
   expirationPeriod: Record<PeriodPositionType, boolean>;
   cvcNumber: boolean;
+  cardBrand: boolean;
 }
 
 const defaultError = {
@@ -19,6 +20,7 @@ const defaultError = {
     year: false,
   },
   cvcNumber: false,
+  cardBrand: false,
 };
 const isValidNumber = (value: string) => {
   if (value === "") return true;
