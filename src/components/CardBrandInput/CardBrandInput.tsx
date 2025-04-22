@@ -1,4 +1,3 @@
-import { MAGIC_NUMBER } from "../../constants/constants";
 import { SelectCSS } from "./CardBrandInput.styled";
 
 interface CardBrandInputProps {
@@ -13,7 +12,9 @@ function CardBrandInput({ value, handleCardBrandChange }: CardBrandInputProps) {
       onChange={(e) => handleCardBrandChange(e.target.value)}
       required
     >
-      <option value="">카드사를 선택하세요</option>
+      <option value="" hidden>
+        카드사를 선택하세요
+      </option>
       <option value="BC카드">BC카드</option>
       <option value="신한카드">신한카드</option>
       <option value="카카오뱅크">카카오뱅크</option>
