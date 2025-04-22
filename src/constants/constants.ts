@@ -28,6 +28,8 @@ export type CardType = keyof typeof CARD_TYPE;
 export type CardPositionType = keyof typeof CARD_POSITION;
 export type PeriodPositionType = keyof typeof PERIOD_POSITION;
 
-export type CardNumbers = Record<CardPositionType, string>;
-export type ExpirationPeriod = Record<PeriodPositionType, string>;
-export type CvcNumber = string;
+export type CardNumbersState = Record<CardPositionType, string>;
+export type ExpirationPeriodState = Record<PeriodPositionType, string>;
+export type CvcNumberState = string;
+export type CardCompanyState = string;
+export type PasswordState = string;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CARD_TYPE, CardNumbers, CardType } from "../constants/constants";
+import { CARD_TYPE, CardNumbersState, CardType } from "../constants/constants";
 
 const CARD_CONSTANTS = {
   COMPLETE_CARD_NUMBER_LENGTH: 16,
@@ -13,7 +13,7 @@ const CARD_CONSTANTS = {
   },
 };
 
-function parseCardNumbers(cardNumbers: CardNumbers): string {
+function parseCardNumbers(cardNumbers: CardNumbersState): string {
   return Object.values(cardNumbers).reduce(
     (acc: string, cardNumber: string) => acc + cardNumber,
     ""
@@ -45,7 +45,7 @@ function identifyCardType(parsedCardNumbers: string): CardType | null {
   return null;
 }
 
-export function useCardType(cardNumbers: CardNumbers) {
+export function useCardType(cardNumbers: CardNumbersState) {
   const [cardType, setCardType] = useState<CardType | null>(null);
 
   useEffect(() => {
