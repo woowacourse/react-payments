@@ -6,15 +6,11 @@ type Option = {
   label: string;
   value: string;
 };
-type IsError = {
-  cardCompany: boolean;
-};
 
 type CardCompanyOptions = {
   companies: Option[];
   selectedOption: string;
   handleCardNumbersChange: (selected: string) => void;
-  isError: IsError;
   errorMessage: string;
 };
 
@@ -22,7 +18,6 @@ const CardCompanyInputSection = ({
   companies,
   selectedOption,
   handleCardNumbersChange,
-  isError,
   errorMessage,
 }: CardCompanyOptions) => {
   return (
@@ -35,7 +30,6 @@ const CardCompanyInputSection = ({
           value={selectedOption}
           onChange={handleCardNumbersChange}
           options={companies}
-          isError={isError.cardCompany}
         />
         {<ErrorMessage message={errorMessage} />}
       </InputSection>

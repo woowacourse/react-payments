@@ -35,7 +35,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
 
   const handleCardCVCNumberChange = (value: string) => {
     const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
-      value.trim(),
+      value.trim()
     );
     if (isError) {
       setErrorField("cvcNumber", errorMessage);
@@ -46,7 +46,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   };
 
   return {
-    cardCVCNumber: cardCVCNumber,
+    cardCVCNumber,
     handleCardCVCNumberChange,
     isError: error.isError,
     errorMessage: error.errorMessage,
