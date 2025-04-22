@@ -1,4 +1,4 @@
-import { CARD_TYPE_PREFIXES } from "../../constants/setting";
+import { CARD_TYPE_PREFIXES } from "../constants";
 
 export function getCardType(cardNumber: string) {
   return (

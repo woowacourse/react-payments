@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import NumberInput from "./NumberInput";
-import { ERROR_MESSAGE } from "../constants/guide";
+import NumberInput from "../../@common/NumberInput/NumberInput";
+import { ERROR_MESSAGE } from "../../../constants/guide";
 import {
   NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardField.styles";
-import { CardInfo } from "../hooks/useCardInfo";
+} from "../CardField.styles";
+import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface CardCVCFieldProps {
   cardInfo: CardInfo;

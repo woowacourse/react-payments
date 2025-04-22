@@ -1,12 +1,12 @@
 import type { Meta } from "@storybook/react";
-import CardNumberField from "../components/CardNumberField";
-import useCardInfo from "../hooks/useCardInfo";
+import CardCVCField from "./CardCVCField";
+import useCardInfo from "../../../hooks/useCardInfo";
 
 const meta = {
-  title: "CardNumberField",
-  component: CardNumberField,
+  title: "CardCVCField",
+  component: CardCVCField,
   tags: ["autodocs"],
-} satisfies Meta<typeof CardNumberField>;
+} satisfies Meta<typeof CardCVCField>;
 
 export default meta;
 
@@ -14,10 +14,10 @@ export const Default = () => {
   const { cardInfo, handleCardInfo } = useCardInfo();
 
   return (
-    <CardNumberField
+    <CardCVCField
       cardInfo={cardInfo}
       handleCardInfo={handleCardInfo}
-      maxLength={4}
+      maxLength={3}
     />
   );
 };

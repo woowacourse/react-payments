@@ -1,14 +1,14 @@
-import NumberInput from "./NumberInput";
+import NumberInput from "../../@common/NumberInput/NumberInput";
 import { useState, useEffect } from "react";
-import { ERROR_MESSAGE } from "../constants/guide";
+import { ERROR_MESSAGE } from "../../../constants/guide";
 import {
   NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardField.styles";
-import { hasInvalidSegment } from "../utils/@common/hasInvalidSegment";
-import { CardInfo } from "../hooks/useCardInfo";
+} from "../CardField.styles";
+import { hasInvalidSegment } from "../../../utils/hasInvalidSegment";
+import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface CardNumberFieldProps {
   cardInfo: CardInfo;

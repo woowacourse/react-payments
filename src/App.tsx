@@ -1,8 +1,8 @@
-import Announcement from "./components/Announcement";
-import Card from "./components/Card";
-import CardNumberField from "./components/CardNumberField";
-import CardExpirationField from "./components/CardExpirationField";
-import CardCVCField from "./components/CardCVCField";
+import Announcement from "./components/@common/Announcement/Announcement";
+import Card from "./components/CardPreview/Card";
+import CardNumberField from "./components/InputField/CardNumber/CardNumberField";
+import CardExpirationField from "./components/InputField/Expiration/CardExpirationField";
+import CardCVCField from "./components/InputField/CVC/CardCVCField";
 import styled from "@emotion/styled";
 import useCardInfo from "./hooks/useCardInfo";
 import {
@@ -28,8 +28,8 @@ function App() {
       ></Card>
       <div>
         <Announcement
-          main={CARD_NUMBER_MESSAGE.main}
-          caption={CARD_NUMBER_MESSAGE.caption}
+          main={CARD_NUMBER_MESSAGE.MAIN}
+          caption={CARD_NUMBER_MESSAGE.CAPTION}
         />
         <CardNumberField
           cardInfo={cardInfo}
@@ -37,15 +37,15 @@ function App() {
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
         <Announcement
-          main={EXPIRATION_MESSAGE.main}
-          caption={EXPIRATION_MESSAGE.caption}
+          main={EXPIRATION_MESSAGE.MAIN}
+          caption={EXPIRATION_MESSAGE.CAPTION}
         />
         <CardExpirationField
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.EXPIRATION}
         />
-        <Announcement main={CVC_MESSAGE.main} />
+        <Announcement main={CVC_MESSAGE.MAIN} />
         <CardCVCField
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}

@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import NumberInput from "./NumberInput";
+import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../styles/CardField.styles";
+} from "../CardField.styles";
 import {
-  isNotExpired,
-  isValidMonth,
-  isValidYear,
+  isExpired,
+  isInvalidMonth,
+  isInvalidYear,
   validateExpiration,
-} from "../utils/expiration/dateUtils";
-import { CardInfo } from "../hooks/useCardInfo";
+} from "./utils/dateUtils";
+import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface CardExpirationFieldProps {
   cardInfo: CardInfo;
@@ -50,10 +50,8 @@ function CardExpirationField({
           maxLength={maxLength}
           placeholder="MM"
           extraErrorCondition={
-            (cardInfo.month !== "" && !isValidMonth(cardInfo.month)) ||
-            (!isNotExpired(cardInfo.month, cardInfo.year) &&
-              cardInfo.month !== "" &&
-              cardInfo.year !== "")
+            isInvalidMonth(cardInfo.month) ||
+            isExpired(cardInfo.month, cardInfo.year)
           }
         />
         <NumberInput
@@ -64,10 +62,8 @@ function CardExpirationField({
           maxLength={maxLength}
           placeholder="YY"
           extraErrorCondition={
-            (cardInfo.year !== "" && !isValidYear(cardInfo.year)) ||
-            (!isNotExpired(cardInfo.month, cardInfo.year) &&
-              cardInfo.month !== "" &&
-              cardInfo.year !== "")
+            isInvalidYear(cardInfo.year) ||
+            isExpired(cardInfo.month, cardInfo.year)
           }
         />
       </NumberInputContainer>

@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
-import CardExpirationField from "../components/CardExpirationField";
-import useCardInfo from "../hooks/useCardInfo";
+import CardExpirationField from "./CardExpirationField";
+import useCardInfo from "../../../hooks/useCardInfo";
 
 const meta = {
   title: "CardExpirationField",
