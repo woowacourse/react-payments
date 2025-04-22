@@ -27,10 +27,10 @@ const createCardNumbers = (count: number, value: string): CardInputType[] => {
 export const Default: Story = {
   args: {
     cardNumbers: createCardNumbers(4, '1234'),
-    expireDate: [
-      { value: '12', isValid: true },
-      { value: '34', isValid: true },
-    ],
+    expireDate: {
+      month: { value: '12', isValid: true },
+      year: { value: '34', isValid: true },
+    },
   },
   argTypes: {
     cardNumbers: {
@@ -45,10 +45,10 @@ export const Default: Story = {
 export const VisaCard: Story = {
   args: {
     cardNumbers: [{ value: '4123', isValid: true }, ...createCardNumbers(3, '5678')],
-    expireDate: [
-      { value: '12', isValid: true },
-      { value: '25', isValid: true },
-    ],
+    expireDate: {
+      month: { value: '12', isValid: true },
+      year: { value: '34', isValid: true },
+    },
   },
   argTypes: {
     cardNumbers: {
@@ -63,10 +63,10 @@ export const VisaCard: Story = {
 export const MasterCard: Story = {
   args: {
     cardNumbers: [{ value: '5412', isValid: true }, ...createCardNumbers(3, '3456')],
-    expireDate: [
-      { value: '06', isValid: true },
-      { value: '26', isValid: true },
-    ],
+    expireDate: {
+      month: { value: '12', isValid: true },
+      year: { value: '34', isValid: true },
+    },
   },
   argTypes: {
     cardNumbers: {

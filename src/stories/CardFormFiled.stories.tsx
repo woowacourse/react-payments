@@ -4,6 +4,7 @@ import { CardNumberForm } from '@/components/features/CardFormFiled/CardNumberFo
 import { CVCForm } from '@/components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from '@/components/features/CardFormFiled/ExpireDateForm';
 import { useCardInput } from '@/hooks/useCardInput';
+import { useExpireDateInput } from '@/hooks/useExpireDateInput';
 
 const meta = {
   title: 'features/CardFormFiled',
@@ -21,17 +22,19 @@ const meta = {
 export default meta;
 
 export const CardNumberFormStory = () => {
-  const { value: cardNumbers, handleChange, handleBlur } = useCardInput('cardNumber', 4, 4);
+  const { value: cardNumbers, handleChange, handleBlur } = useCardInput('cardNumber');
 
   return <CardNumberForm cardNumbers={cardNumbers} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export const ExpireDateFormStory = () => {
-  const { value: expireNumber, handleChange, handleBlur } = useCardInput('expireDate', 2, 2);
+  const { value: expireNumber, handleChange, handleBlur } = useExpireDateInput();
 
   return <ExpireDateForm expireDate={expireNumber} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export const CVCFormStory = () => {
-  return <CVCForm />;
+  const { value: cvcNumber, handleChange, handleBlur } = useCardInput('CVC');
+
+  return <CVCForm cvcNumber={cvcNumber} onChange={handleChange} onBlur={handleBlur} />;
 };
