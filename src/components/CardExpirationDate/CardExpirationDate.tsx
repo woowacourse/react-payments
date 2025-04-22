@@ -28,27 +28,33 @@ export default function CardExpirationDate({
   const handleInputChange = ({ value, dateType }: HandleInputChangeParams) => {
     if (!checkAllNumber(value)) return;
 
-    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
+    setCardExpirationDate((prev) => ({ ...prev, [dateType]: value }));
 
     if (dateType === 'month') {
       if (checkValidMonth(value)) {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, month: '' });
+        setCardExpirationDateErrorMessage((prev) => ({ ...prev, month: '' }));
+        if (value.length === 2) {
+          const nextInput = document.querySelector(`input[data-expiry="year"]`) as HTMLInputElement;
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
       } else {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
+        setCardExpirationDateErrorMessage((prev) => ({
+          ...prev,
           month: ERROR_MESSAGE.cardExpirationDate.month,
-        });
+        }));
       }
     }
 
     if (dateType === 'year') {
       if (checkValidYear(value)) {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, year: '' });
+        setCardExpirationDateErrorMessage((prev) => ({ ...prev, year: '' }));
       } else {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
+        setCardExpirationDateErrorMessage((prev) => ({
+          ...prev,
           year: ERROR_MESSAGE.cardExpirationDate.year,
-        });
+        }));
       }
     }
   };
@@ -71,6 +77,8 @@ export default function CardExpirationDate({
             })
           }
           isError={cardExpirationDateErrorMessage.month !== ''}
+          data-expiry="month"
+          inputMode="numeric"
         />
         <Input
           placeholder="YY"
@@ -83,6 +91,8 @@ export default function CardExpirationDate({
             })
           }
           isError={cardExpirationDateErrorMessage.year !== ''}
+          data-expiry="year"
+          inputMode="numeric"
         />
       </S.InputWrapper>
       <Spacing size={8} />
