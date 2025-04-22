@@ -1,5 +1,4 @@
 import InputText from "../components/InputText/InputText";
-import styles from "./CardCvcNumber.module.css";
 import CardNumberInput from "../components/Input/CardNumberInput";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 
