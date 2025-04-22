@@ -51,6 +51,7 @@ function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber }: CardNum
             maxLength={CARD_NUMBER_LENGTH}
             placeholder="1234"
             isError={isCardNumberInvalid(cardNumbers[key])}
+            isPassword={false}
           />
         ))}
       </StyledInputWrap>

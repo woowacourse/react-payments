@@ -26,3 +26,8 @@ export type CardCVCNumberSectionProps = {
   CVCNumber: string;
   changeCVCNumber: (CVCNumber: string) => void;
 };
+
+export type CardPasswordSectionProps = {
+  password: string;
+  changePassword: (CVCNumber: string) => void;
+};

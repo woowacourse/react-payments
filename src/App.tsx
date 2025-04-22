@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { ExpirationPeriod, Position } from './types/index.types';
 import { INITIALIZE_VALUE } from './constants/constant';
 import CardSelectSection from './components/cardSelectSection/CardSelectSection';
+import CardPasswordSection from './components/cardPasswordSection/CardPasswordSection';
 
 const StyledApp = styled.div`
   display: flex;
@@ -50,6 +51,8 @@ function App() {
 
   const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
 
+  const [password, setPassword] = useState(INITIALIZE_VALUE);
+
   function changeCardNumber(position: Position, cardNumber: string) {
     setCardNumber((prev) => {
       prev[position] = cardNumber;
@@ -68,6 +71,10 @@ function App() {
     setCVCNumber(CVCNumber);
   }
 
+  function changePassword(password: string) {
+    setPassword(password);
+  }
+
   return (
     <StyledApp>
       <StyledFrame>
@@ -79,6 +86,7 @@ function App() {
           changeExpirationPeriod={changeExpirationPeriod}
         />
         <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} />
+        <CardPasswordSection password={password} changePassword={changePassword}></CardPasswordSection>
       </StyledFrame>
     </StyledApp>
   );

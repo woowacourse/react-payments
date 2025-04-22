@@ -57,6 +57,7 @@ function CardExpirationPeriodInputs({ expirationPeriod, changeExpirationPeriod }
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
           isError={isCardExpirationPeriodMonthInvalid(expirationPeriod['month'])}
+          isPassword={false}
         ></Input>
         <Input
           value={expirationPeriod['year']}
@@ -67,6 +68,7 @@ function CardExpirationPeriodInputs({ expirationPeriod, changeExpirationPeriod }
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
           isError={isCardExpirationPeriodYearInvalid(expirationPeriod['year'])}
+          isPassword={false}
         />
       </StyledInputWrap>
       <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>

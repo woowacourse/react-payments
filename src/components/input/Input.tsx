@@ -7,6 +7,7 @@ type InputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   isError: boolean;
+  isPassword: boolean;
 };
 
 const StyledInput = styled.input<{ width?: string; isError: boolean }>`
@@ -35,7 +36,7 @@ const StyledInput = styled.input<{ width?: string; isError: boolean }>`
   }
 `;
 
-function Input({ width, maxLength, placeholder, onChange, value, isError }: InputProps) {
+function Input({ width, maxLength, placeholder, onChange, value, isError, isPassword }: InputProps) {
   return (
     <StyledInput
       width={width}
@@ -44,6 +45,7 @@ function Input({ width, maxLength, placeholder, onChange, value, isError }: Inpu
       value={value}
       onChange={onChange}
       isError={isError}
+      type={isPassword ? 'password' : 'text'}
     />
   );
 }

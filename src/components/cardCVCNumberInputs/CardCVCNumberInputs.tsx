@@ -42,6 +42,7 @@ function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectio
             changeCVCNumber(e.target.value);
           }}
           isError={isCardCVCNumberInvalid(CVCNumber)}
+          isPassword={false}
           width="100%"
           maxLength={CVC_NUMBER_LENGTH}
           placeholder="123"
