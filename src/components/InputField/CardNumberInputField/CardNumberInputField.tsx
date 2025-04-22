@@ -67,27 +67,28 @@ function CardNumberInputField({
   };
 
   const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length <= CARD_TYPE_ID_LENGTH) {
-      if (value[0] === '4') setCardType('visa');
-      else if (value >= '51' && value <= '55') setCardType('master');
-      else setCardType(null);
-    } else if (cardType === null) {
-      return true;
+    if (value.length > CARD_TYPE_ID_LENGTH) {
+      if (cardType === null) return true;
+      return false;
     }
+
+    if (value[0] === '4') setCardType('visa');
+    else if (Number(value) >= 51 && Number(value) <= 55) setCardType('master');
+    else setCardType(null);
+
     return false;
   };
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= MAX_CARD_LENGTH) {
-      if (name === CARD_NUMBER_INPUT_TYPE[0]) {
-        const isError = checkCardTypeFromPrefix(value);
-        updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
-          errorType: 'noneCardType',
-          isError,
-        });
-      }
-      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
+    if (value.length > MAX_CARD_LENGTH) return;
+    if (name === CARD_NUMBER_INPUT_TYPE[0]) {
+      const isError = checkCardTypeFromPrefix(value);
+      updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
+        errorType: 'noneCardType',
+        isError,
+      });
     }
+    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   const onBlur = (e: ChangeEvent) => {
