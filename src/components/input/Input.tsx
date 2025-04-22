@@ -16,7 +16,7 @@ const Input = ({
 }: Props) => {
   return (
     <TextInput
-      maxLength={maxLength && maxLength}
+      maxLength={maxLength}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
