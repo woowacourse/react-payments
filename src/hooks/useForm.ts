@@ -1,31 +1,40 @@
 import { useState } from 'react';
 
 type ValidationType = { required: boolean; length?: number; errorMessage: string };
-export type RegisterType<T> = ReturnType<typeof useForm<T>>['register'];
+export type RegisterType<T extends Record<string, string>> = ReturnType<typeof useForm<T>>['register'];
 
-export default function useForm<T>({
-  defaultValues,
-  validation,
-}: {
-  defaultValues: T;
-  validation: Record<keyof T, ValidationType>;
-}) {
+export default function useForm<T extends Record<string, string>>({ defaultValues }: { defaultValues: T }) {
   const [value, setValue] = useState<T>(defaultValues);
   const [errors, setErrors] = useState<T>(defaultValues);
+  const [isValid, setIsValid] = useState(false);
 
-  const register = (key: keyof T, options?: { onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void }) => {
+  const register = (
+    currentKey: keyof T,
+    options?: {
+      onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+      validation: ValidationType;
+    },
+  ) => {
     return {
-      value: value[key],
+      value: value[currentKey],
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue((prev) => ({ ...prev, [key]: e.target.value }));
-        setErrors((prev) => ({ ...prev, [key]: validate(validation[key], e.target.value) }));
+        setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
+        if (options?.validation) {
+          setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
+
+          setIsValid(
+            Object.entries(value).every(
+              ([key]) => validate(options.validation, currentKey === key ? e.target.value : value[key]) === '',
+            ),
+          );
+        }
 
         options?.onChange?.(e);
       },
     };
   };
 
-  return { value, errors, register };
+  return { value, errors, register, isValid };
 }
 
 function validate(validation: ValidationType, value: string) {

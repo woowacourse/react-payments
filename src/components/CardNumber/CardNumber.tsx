@@ -43,6 +43,11 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
           data-sequence="1"
           {...register('first', {
             onChange: handleInputChange,
+            validation: {
+              required: true,
+              length: 4,
+              errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+            },
           })}
         />
         <Input
@@ -54,6 +59,11 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
           data-sequence="2"
           {...register('second', {
             onChange: handleInputChange,
+            validation: {
+              required: true,
+              length: 4,
+              errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+            },
           })}
         />
         <Input
@@ -65,6 +75,11 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
           data-sequence="3"
           {...register('third', {
             onChange: handleInputChange,
+            validation: {
+              required: true,
+              length: 4,
+              errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+            },
           })}
         />
         <Input
@@ -76,6 +91,11 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
           data-sequence="4"
           {...register('fourth', {
             onChange: handleInputChange,
+            validation: {
+              required: true,
+              length: 4,
+              errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+            },
           })}
         />
       </S.InputWrapper>

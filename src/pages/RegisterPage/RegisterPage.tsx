@@ -33,35 +33,14 @@ export default function RegisterPage() {
   const {
     value: cardNumber,
     errors: cardNumberErrors,
-    register,
+    register: cardNumberRegister,
+    isValid: isCardNumberIsValid,
   } = useForm<CardNumberInputType>({
     defaultValues: {
       first: '',
       second: '',
       third: '',
       fourth: '',
-    },
-    validation: {
-      first: {
-        required: true,
-        length: 4,
-        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
-      },
-      second: {
-        required: true,
-        length: 4,
-        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
-      },
-      third: {
-        required: true,
-        length: 4,
-        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
-      },
-      fourth: {
-        required: true,
-        length: 4,
-        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
-      },
     },
   });
 
@@ -106,17 +85,16 @@ export default function RegisterPage() {
     });
   };
 
-  const isCardNumberValid = Object.values(cardNumber).every((value) => value.length === 4);
   const isCardCompanyValid = Boolean(selectedCompany);
   const isExpirationDateValid = cardExpirationDate.month && cardExpirationDate.year;
   const isCVCNumberValid = cardCVCNumber.length === 3;
   const isPasswordValid = cardPassword.length === 2;
 
   useEffect(() => {
-    if (currentStep === 1 && isCardNumberValid) {
+    if (currentStep === 1 && isCardNumberIsValid) {
       setCurrentStep(2);
     }
-  }, [currentStep, isCardNumberValid]);
+  }, [currentStep, isCardNumberIsValid]);
 
   useEffect(() => {
     if (currentStep === 2 && isCardCompanyValid) {
@@ -185,9 +163,11 @@ export default function RegisterPage() {
           />
         )}
 
-        {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
+        {isCardNumberIsValid && (
+          <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
+        )}
 
-        {currentStep >= 1 && <CardNumber register={register} cardNumberErrorMessage={cardNumberErrors} />}
+        {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrorMessage={cardNumberErrors} />}
 
         {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
