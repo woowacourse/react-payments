@@ -4,8 +4,8 @@ import {
   CardPositionType,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
 
 const cardPositions = Object.values(CARD_POSITION);
 
@@ -13,13 +13,13 @@ const PLACEHOLDERS = "1234";
 const MAX_LENGTHS = 4;
 
 export interface CardNumberInputProps {
-  error: CardValidationType; // TODO: 관련된 에러 상태만 넘겨주기
-  setError: (value: string, position: CardPositionType) => void;
+  cardNumberErrors: CardValidationType["cardNumbers"];
+  validateCardNumber: (value: string, position: CardPositionType) => void;
 }
 
 export default function CardNumberInput({
-  error,
-  setError,
+  cardNumberErrors,
+  validateCardNumber,
 }: CardNumberInputProps) {
   const { cardNumbers, updateCardNumber } = useCard();
 
@@ -27,7 +27,7 @@ export default function CardNumberInput({
     value: string,
     position: CardPositionType
   ) => {
-    setError(value, position);
+    validateCardNumber(value, position);
     updateCardNumber(value, position);
   };
 
@@ -39,7 +39,7 @@ export default function CardNumberInput({
             key={position}
             placeholder={PLACEHOLDERS}
             maxLength={MAX_LENGTHS}
-            isError={error.cardNumbers[position]}
+            isError={cardNumberErrors[position]}
             value={cardNumbers[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCardNumberChange(e.target.value, position)

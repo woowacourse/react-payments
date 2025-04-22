@@ -8,15 +8,18 @@ const PLACEHOLDERS = "123";
 const MAX_LENGTHS = 3;
 
 export interface CardCvcInputProps {
-  error: CardValidationType; // TODO: 관련된 에러 상태만 넘겨주기
-  setError: (value: string) => void;
+  cvcNumberError: CardValidationType["cvcNumber"];
+  validateCvcNumber: (value: string) => void;
 }
 
-export default function CardCvcInput({ error, setError }: CardCvcInputProps) {
+export default function CardCvcInput({
+  cvcNumberError,
+  validateCvcNumber,
+}: CardCvcInputProps) {
   const { cvcNumber, updateCvcNumber } = useCard();
 
   const handleCvcNumberChange = (value: string) => {
-    setError(value);
+    validateCvcNumber(value);
     updateCvcNumber(value);
   };
 
@@ -25,7 +28,7 @@ export default function CardCvcInput({ error, setError }: CardCvcInputProps) {
       key={CARD_FORM_TYPE.cvcNumber}
       placeholder={PLACEHOLDERS}
       maxLength={MAX_LENGTHS}
-      isError={error.cvcNumber}
+      isError={cvcNumberError}
       value={cvcNumber}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         handleCvcNumberChange(e.target.value)

@@ -24,6 +24,8 @@ const initialState = {
   cardCompany: false,
 };
 
+// TODO: 상태별로 훅을 모두 분리하는게 맞을까?
+// TODO: cardCompany와 비밀번호 input 상태에 대한 get, set 정의
 export function useCardValidation() {
   const [validationErrors, setValidationErrors] =
     useState<CardValidationType>(initialState);
@@ -58,8 +60,15 @@ export function useCardValidation() {
     }));
   };
 
+  const getCardNumberErrors = () => validationErrors.cardNumbers;
+  const getExpirationPeriodErrors = () => validationErrors.expirationPeriod;
+  const getCvcNumberError = () => validationErrors.cvcNumber;
+
   return {
     validationErrors,
+    getCardNumberErrors,
+    getExpirationPeriodErrors,
+    getCvcNumberError,
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,

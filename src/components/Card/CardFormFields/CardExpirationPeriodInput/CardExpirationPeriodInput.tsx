@@ -16,13 +16,16 @@ const PLACEHOLDERS = {
 const MAX_LENGTHS = 2;
 
 export interface CardExpirationPeriodInputProps {
-  error: CardValidationType;
-  setError: (value: string, position: PeriodPositionType) => void;
+  expirationPeriodErrors: CardValidationType["expirationPeriod"];
+  validateExpirationPeriod: (
+    value: string,
+    position: PeriodPositionType
+  ) => void;
 }
 
 export default function CardExpirationPeriodInput({
-  error, // TODO: 관련된 에러 상태만 넘겨주기
-  setError,
+  expirationPeriodErrors,
+  validateExpirationPeriod,
 }: CardExpirationPeriodInputProps) {
   const { expirationPeriod, updateExpirationPeriod } = useCard();
 
@@ -30,7 +33,7 @@ export default function CardExpirationPeriodInput({
     value: string,
     position: PeriodPositionType
   ) => {
-    setError(value, position);
+    validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);
   };
 
@@ -42,7 +45,7 @@ export default function CardExpirationPeriodInput({
             key={position}
             placeholder={PLACEHOLDERS[position]}
             maxLength={MAX_LENGTHS}
-            isError={error.expirationPeriod[position]}
+            isError={expirationPeriodErrors[position]}
             value={expirationPeriod[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleExpirationPeriodChange(e.target.value, position)

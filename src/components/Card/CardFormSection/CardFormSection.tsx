@@ -38,11 +38,15 @@ const subtitleVariants: Record<CardFormType, string | null> = {
 function CardFormSection({ type }: CardFormSectionProps) {
   const {
     validationErrors,
+    getCardNumberErrors,
+    getExpirationPeriodErrors,
+    getCvcNumberError,
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,
   } = useCardValidation();
 
+  // TODO: useCardValidation 내부로 분리 : hasError
   const isErrorVisible =
     type === CARD_FORM_TYPE.cvcNumber
       ? validationErrors[type]
@@ -53,8 +57,8 @@ function CardFormSection({ type }: CardFormSectionProps) {
       case CARD_FORM_TYPE.cardNumbers:
         return (
           <CardNumberInput
-            error={validationErrors}
-            setError={validateCardNumber}
+            cardNumberErrors={getCardNumberErrors()}
+            validateCardNumber={validateCardNumber}
           />
         );
       case CARD_FORM_TYPE.cardCompany:
@@ -62,13 +66,16 @@ function CardFormSection({ type }: CardFormSectionProps) {
       case CARD_FORM_TYPE.expirationPeriod:
         return (
           <CardExpirationPeriodInput
-            error={validationErrors}
-            setError={validateExpirationPeriod}
+            expirationPeriodErrors={getExpirationPeriodErrors()}
+            validateExpirationPeriod={validateExpirationPeriod}
           />
         );
       case CARD_FORM_TYPE.cvcNumber:
         return (
-          <CardCvcInput error={validationErrors} setError={validateCvcNumber} />
+          <CardCvcInput
+            cvcNumberError={getCvcNumberError()}
+            validateCvcNumber={validateCvcNumber}
+          />
         );
       // TODO: 비밀번호 Input 추가
       default:
