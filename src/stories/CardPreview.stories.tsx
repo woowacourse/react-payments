@@ -20,7 +20,7 @@ export const Default: Story = {
       expirationDatePart1: '',
       expirationDatePart2: '',
     },
-    cardType: null,
+    cardType: 'none',
   },
   render: function Render(args) {
     return <CardPreview {...args} />;
