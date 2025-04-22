@@ -11,13 +11,13 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
   const register = (
     currentKey: keyof T,
     options?: {
-      onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+      onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
       validation: ValidationType;
     },
   ) => {
     return {
       value: value[currentKey],
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
         if (options?.validation) {
           setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));

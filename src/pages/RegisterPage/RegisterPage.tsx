@@ -66,12 +66,22 @@ export default function RegisterPage() {
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<CardCVCNumberInputType>('');
 
   // 카드사
-  const [selectedCompany, setSelectedCompany] = useState<CardCompanyInputType>('');
+  const {
+    value: { company: selectedCompany },
+    register: cardCompanyRegister,
+    isValid: isCardCompanyValid,
+  } = useForm<{ company: CardCompanyInputType }>({
+    defaultValues: {
+      company: '',
+    },
+  });
 
   // 카드 뒤집기 상태
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
   const cardType = getCardType(cardNumber.first);
+  const isCVCNumberValid = cardCVCNumber.length === 3;
+  const isPasswordValid = cardPassword.length === 2;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,10 +97,6 @@ export default function RegisterPage() {
       },
     });
   };
-
-  const isCardCompanyValid = Boolean(selectedCompany);
-  const isCVCNumberValid = cardCVCNumber.length === 3;
-  const isPasswordValid = cardPassword.length === 2;
 
   useEffect(() => {
     if (currentStep === 1 && isCardNumberIsValid) {
@@ -163,9 +169,7 @@ export default function RegisterPage() {
           />
         )}
 
-        {isCardNumberIsValid && (
-          <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
-        )}
+        {isCardNumberIsValid && <CardCompany register={cardCompanyRegister} />}
 
         {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrorMessage={cardNumberErrors} />}
 
