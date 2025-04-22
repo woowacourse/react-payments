@@ -23,4 +23,9 @@ const InputWrapper = styled.input<InputProps>`
   border-radius: 2px;
   padding: 8px;
   font-size: 11px;
+  outline: none;
+
+  &:focus {
+    border-color: ${(props) => !props.isError && 'black'};
+  }
 `;
