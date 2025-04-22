@@ -45,8 +45,9 @@ export const CardPreviewMiddle = styled.div`
   padding-left: 10px;
 `;
 
-export const CardPreviewMiddleText = styled.span`
+export const CardPreviewMiddleText = styled.span<{ CardBrandType: CardBrandType | null }>`
   font-size: 22px;
+  ${(props) => `color:${props.CardBrandType === '카카오뱅크' ? '#000;' : '#fff;'}`}
 `;
 
 export const CardPreviewDateBox = styled.div`

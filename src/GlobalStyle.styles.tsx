@@ -143,6 +143,9 @@ const globalStyles = css`
   input[type='number'] {
     -moz-appearance: textfield;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const GlobalStyle = () => {
