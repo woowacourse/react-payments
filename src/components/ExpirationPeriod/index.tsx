@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import ExpirationPeriodView from './ExpirationPeriodView';
+import { useErrorMessage } from '../../hooks/useErrorMessage';
 
 export interface ExpirationPeriodProps {
   period: { month: string; year: string };
@@ -29,14 +29,10 @@ const ExpirationPeriod = ({
   setPeriod,
   separatorRef,
 }: ExpirationPeriodProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<boolean[]>([false, false]);
-
-  useEffect(() => {
-    if (errors.every((error) => error === false)) {
-      setErrorMessage('');
-    }
-  }, [errors]);
+  const { errors, setErrors, errorMessage, setErrorMessage } = useErrorMessage([
+    false,
+    false,
+  ]);
 
   const isNumeric = (value: string) => /^[0-9]*$/.test(value);
 

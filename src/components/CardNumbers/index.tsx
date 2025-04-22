@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import CardNumbersView from './CardNumbersView';
+import { useErrorMessage } from '../../hooks/useErrorMessage';
 
 type CardNumber = {
   first: string;
@@ -18,15 +18,13 @@ const CARD_NUMBERS_LENGTH = 4;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
+  const {
+      errors,
+      setErrors,
+      errorMessage,
+      setErrorMessage,
+    } = useErrorMessage([false, false]);
   const keyMap: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
-
-  useEffect(() => {
-    if (errors.every((error) => error === false)) {
-      setErrorMessage('');
-    }
-  }, [errors]);
 
   const updateErrors = (
     prev: boolean[],
