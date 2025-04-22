@@ -1,5 +1,10 @@
+import { CARD_FORM_TYPE } from "./../constants/constants";
 import { useState } from "react";
-import { CardPositionType, PeriodPositionType } from "../constants/constants";
+import {
+  CardFormType,
+  CardPositionType,
+  PeriodPositionType,
+} from "../constants/constants";
 import { isNotNumber } from "../utils/validation";
 
 export interface CardValidationType {
@@ -24,7 +29,6 @@ const initialState = {
   cardCompany: false,
 };
 
-// TODO: 상태별로 훅을 모두 분리하는게 맞을까?
 // TODO: cardCompany와 비밀번호 input 상태에 대한 get, set 정의
 export function useCardValidation() {
   const [validationErrors, setValidationErrors] =
@@ -60,12 +64,23 @@ export function useCardValidation() {
     }));
   };
 
+  const hasError = (type: CardFormType): boolean => {
+    if (
+      type === CARD_FORM_TYPE.cvcNumber ||
+      type === CARD_FORM_TYPE.cardCompany
+    ) {
+      return !!validationErrors[type];
+    }
+
+    return Object.values(validationErrors[type] ?? {}).some((v) => v);
+  };
+
   const getCardNumberErrors = () => validationErrors.cardNumbers;
   const getExpirationPeriodErrors = () => validationErrors.expirationPeriod;
   const getCvcNumberError = () => validationErrors.cvcNumber;
 
   return {
-    validationErrors,
+    hasError,
     getCardNumberErrors,
     getExpirationPeriodErrors,
     getCvcNumberError,

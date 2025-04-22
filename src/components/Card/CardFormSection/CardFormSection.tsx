@@ -37,7 +37,7 @@ const subtitleVariants: Record<CardFormType, string | null> = {
 
 function CardFormSection({ type }: CardFormSectionProps) {
   const {
-    validationErrors,
+    hasError,
     getCardNumberErrors,
     getExpirationPeriodErrors,
     getCvcNumberError,
@@ -45,12 +45,6 @@ function CardFormSection({ type }: CardFormSectionProps) {
     validateExpirationPeriod,
     validateCvcNumber,
   } = useCardValidation();
-
-  // TODO: useCardValidation 내부로 분리 : hasError
-  const isErrorVisible =
-    type === CARD_FORM_TYPE.cvcNumber
-      ? validationErrors[type]
-      : Object.values(validationErrors[type] ?? {}).some((v) => v);
 
   const renderCardFormFieldByType = () => {
     switch (type) {
@@ -90,8 +84,8 @@ function CardFormSection({ type }: CardFormSectionProps) {
       <Subtitle subtitle={subtitleVariants[type]} />
       <CardFormFieldCSS>{renderCardFormFieldByType()}</CardFormFieldCSS>
       <Error
-        errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 useCardInputError에서 관리
-        isVisible={isErrorVisible}
+        errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리?
+        isVisible={hasError(type)}
       />
     </>
   );
