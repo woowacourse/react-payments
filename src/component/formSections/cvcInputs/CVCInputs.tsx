@@ -1,6 +1,6 @@
 import { validateCardCVC } from "../../../validation/validation";
 import CardInput from "../../CardInput";
-import InputGroup from "../../InputGroup";
+import FormField from "../../FormField";
 import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
 import type { Dispatch, SetStateAction } from "react";
 import type { CardInputProps } from "../../../types/CardInputTypes";
@@ -17,7 +17,7 @@ const CVCInputs = ({
   handleErrorMessages,
 }: CVCInputsProps) => {
   return (
-    <InputGroup label="CVC" errorMessages={errorMessages} id="cvc">
+    <FormField label="CVC" errorMessages={errorMessages} id="cvc">
       <CardInput
         id="cvc"
         maxLength={3}
@@ -27,7 +27,7 @@ const CVCInputs = ({
         inputKey="CVC"
         handleErrorMessage={(message) => handleErrorMessages("CVC", message)}
       />
-    </InputGroup>
+    </FormField>
   );
 };
 

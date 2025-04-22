@@ -3,12 +3,13 @@ import Description from "../component/Description";
 import styled from "styled-components";
 import { useState } from "react";
 import { justifyBrandLogo } from "../util/justifyBrandLogo";
-import CardNumberInputs from "../component/inputSections/cardNumberInputs/CardNumberInputs";
+import CardNumberInputs from "../component/formSections/cardNumberInputs/CardNumberInputs";
 import type { CardInputProps } from "../types/CardInputTypes";
 import { useErrorMessages } from "../hook/useErrorMessages";
-import ExpirationDateInputs from "../component/inputSections/expirationDateInputs/ExpirationDateInputs";
-import CVCInputs from "../component/inputSections/cvcInputs/CVCInputs";
+import ExpirationDateInputs from "../component/formSections/expirationDateInputs/ExpirationDateInputs";
+import CVCInputs from "../component/formSections/cvcInputs/CVCInputs";
 import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
+import CardBrandSelects from "../component/formSections/cardBrandSelects";
 
 const AddCard = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
@@ -32,6 +33,11 @@ const AddCard = () => {
         }
       />
       <Form>
+        <Description
+          headText="카드사를 선택해 주세요"
+          detailText="현재 국내 카드사만 가능합니다."
+        />
+        <CardBrandSelects />
         <Description
           headText="결제할 카드 번호를 입력해 주세요."
           detailText="본인 명의의 카드만 결제 가능합니다."
@@ -79,7 +85,6 @@ const Wrap = styled.div`
   padding: 30px;
   background-color: var(--color-white);
   padding-top: 77px;
-  height: 700px;
   gap: 45px;
 `;
 

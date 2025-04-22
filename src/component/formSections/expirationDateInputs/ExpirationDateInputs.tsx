@@ -1,4 +1,4 @@
-import InputGroup from "../../InputGroup";
+import FormField from "../../FormField";
 import CardInput from "../../CardInput";
 import type { CardInputProps } from "../../../types/CardInputTypes";
 import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
@@ -24,7 +24,7 @@ const ExpirationDateInputs = ({
     "YY",
   ];
   return (
-    <InputGroup
+    <FormField
       label="유효기간"
       errorMessages={errorMessages}
       id="expiration-date"
@@ -45,7 +45,7 @@ const ExpirationDateInputs = ({
           handleErrorMessage={(message) => handleErrorMessages(key, message)}
         />
       ))}
-    </InputGroup>
+    </FormField>
   );
 };
 

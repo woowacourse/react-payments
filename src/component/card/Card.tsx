@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import cardBrandLogo from "../../constants/cardBrandLogo";
 import type { CardInputProps } from "../../types/CardInputTypes";
-import CardNumber from "../CardNumber";
+import CardNumber from "./CardNumber";
+import cardNetworkLogos from "../../constants/cardNetworkLogos";
 
 interface CardProps {
   cardNumber: CardInputProps | null;
@@ -13,7 +13,7 @@ const Card = ({ cardNumber, cardType }: CardProps) => {
     <CardContainer>
       <ChipContainer>
         <CardGoldChip />
-        <CardBrandLogo src={cardBrandLogo[cardType]} />
+        <CardNetworkLogo src={cardNetworkLogos[cardType]} />
       </ChipContainer>
       {cardNumber ? <CardNumber cardNumber={cardNumber} /> : null}
     </CardContainer>
@@ -44,7 +44,7 @@ const CardGoldChip = styled.div`
   box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.1);
 `;
 
-const CardBrandLogo = styled.img`
+const CardNetworkLogo = styled.img`
   width: 36px;
   height: 22px;
 `;

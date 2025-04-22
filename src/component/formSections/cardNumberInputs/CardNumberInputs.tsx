@@ -1,9 +1,9 @@
 import { validateCardNumber } from "../../../validation/validation";
-import InputGroup from "../../InputGroup";
 import CardInput from "../../CardInput";
 import type { ErrorMessagesProps } from "../../../types/ErrorMessagesType";
 import type { CardInputProps } from "../../../types/CardInputTypes";
 import type { Dispatch, SetStateAction } from "react";
+import FormField from "../../FormField";
 
 interface CardNumberInputProps {
   errorMessages: string;
@@ -22,11 +22,7 @@ const CardNumberInputs = ({
   >)[] = ["first", "second", "third", "fourth"];
 
   return (
-    <InputGroup
-      label="카드 번호"
-      errorMessages={errorMessages}
-      id="card-number"
-    >
+    <FormField label="카드 번호" errorMessages={errorMessages} id="card-number">
       {cardNumberKeys.map((key) => (
         <CardInput
           key={key}
@@ -41,7 +37,7 @@ const CardNumberInputs = ({
           }
         />
       ))}
-    </InputGroup>
+    </FormField>
   );
 };
 

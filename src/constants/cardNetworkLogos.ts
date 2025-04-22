@@ -1,7 +1,7 @@
-const cardBrandLogo = {
+const cardNetworkLogos = {
   visa: "./visa.png",
   mastercard: "./mastercard.png",
   default: "./default.png",
 };
 
-export default cardBrandLogo;
+export default cardNetworkLogos;
