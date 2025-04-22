@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Input from "../components/common/inputForm/input/Input";
+import Input from "../components/common/inputFormTest/inputTest/Input";
 import { validatorUtils } from "../utils/validationUtils";
 import { userEvent, within, expect, waitFor } from "@storybook/test";
 import styles from "../components/common/inputForm/input/Input.module.css";
