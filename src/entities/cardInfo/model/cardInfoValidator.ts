@@ -1,3 +1,9 @@
+import { isValidCardType } from './cardType';
+
+export interface InputValidationResultProps {
+  [key: string]: [number, string];
+}
+
 export const cardNumberValidator = (inputs: string[]) => {
   for (let index = 0; index < inputs.length; index++) {
     const input = inputs[index];
@@ -7,30 +13,12 @@ export const cardNumberValidator = (inputs: string[]) => {
     if (!isFourDigit(Number(input))) {
       return [index, '카드 번호는 4자리어야 합니다.'];
     }
-    if (index === 0 && !isValidCardNumber(input)) {
+    if (index === 0 && !isValidCardType(input)) {
       return [0, '카드 번호는 4 또는 51~55로 시작해야 합니다.'];
     }
   }
 
   return [-1, ''];
-};
-
-const isNumeric = (input: string) => {
-  const numericRegex = /^\d+$/;
-  return numericRegex.test(input);
-};
-
-const isFourDigit = (cardNumber: number) => {
-  return String(cardNumber).length === 4;
-};
-
-export const isValidCardNumber = (input: string): boolean => {
-  if (input[0] === '4') return true;
-  if (input[0] === '5') {
-    const secondDigit = Number(input[1]);
-    return secondDigit >= 1 && secondDigit <= 5;
-  }
-  return false;
 };
 
 export const cardExpirationDateValidator = (date: { month: string; year: string }) => {
@@ -56,6 +44,22 @@ export const cardExpirationDateValidator = (date: { month: string; year: string 
   return [-1, ''];
 };
 
+export const cardCVCValidator = (input: string) => {
+  if (!isNumeric(input)) {
+    return [0, 'CVC는 숫자만 입력 가능합니다.'];
+  }
+  return [-1, ''];
+};
+
+const isNumeric = (input: string) => {
+  const numericRegex = /^\d+$/;
+  return numericRegex.test(input);
+};
+
+const isFourDigit = (cardNumber: number) => {
+  return String(cardNumber).length === 4;
+};
+
 const isValidExpirationMonth = (month: string) => {
   const num = Number(month);
   return num >= 1 && num <= 12;
@@ -63,11 +67,4 @@ const isValidExpirationMonth = (month: string) => {
 
 const isTwoDigit = (input: string) => {
   return input.length === 2;
-};
-
-export const cardCVCValidator = (input: string) => {
-  if (!isNumeric(input)) {
-    return [0, 'CVC는 숫자만 입력 가능합니다.'];
-  }
-  return [-1, ''];
 };

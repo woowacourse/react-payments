@@ -3,9 +3,9 @@ import {
   cardNumberValidator,
   cardExpirationDateValidator,
   cardCVCValidator,
-} from '../validation/cardInfoValidator';
-import { ErrorProps } from '../../../shared/type/types';
-import CardInfo from '../model/CardInfo';
+} from '../../../entities/cardInfo/model/cardInfoValidator';
+import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
+import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,
@@ -25,7 +25,7 @@ export default function useCardInfo() {
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
   });
-  const [error, setError] = useState<ErrorProps>({
+  const [error, setError] = useState<InputValidationResultProps>({
     cardNumberError: [-1, ''],
     cardExpirationDateError: [-1, ''],
     cardCVCError: [-1, ''],
@@ -73,13 +73,13 @@ export default function useCardInfo() {
 
 const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {
   const validator = VALIDATORS[key];
-  const errorKey = ERROR_KEYS[key] as keyof ErrorProps;
+  const errorKey = ERROR_KEYS[key] as keyof InputValidationResultProps;
   const [errorIndex, errorMessage] = validator(value);
   setError(
     (prevError: any) =>
       ({
         ...prevError,
         [errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
-      }) as ErrorProps,
+      }) as InputValidationResultProps,
   );
 };

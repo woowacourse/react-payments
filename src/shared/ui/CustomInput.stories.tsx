@@ -4,7 +4,7 @@ import {
   cardNumberValidator,
   cardExpirationDateValidator,
   cardCVCValidator,
-} from '../../features/cardInfo/validation/cardInfoValidator';
+} from '../../entities/cardInfo/model/cardInfoValidator';
 import { useState } from 'react';
 import '../../features/cardInfo/ui/cardInfoSection.css';
 

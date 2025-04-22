@@ -1,18 +1,18 @@
 import './cardInfoContainer.css';
 import CardInfoSection from './CardInfoSection';
-import { cardInfoSectionSpec } from '../data/cardInfoSectionSpec';
-import { ErrorProps } from '../../../shared/type/types';
+import { cardInfoSectionConfig } from '../config/cardInfoSectionConfig';
+import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 
 export default function CardInfoContainer({
   onChange,
   error,
 }: {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: ErrorProps;
+  error?: InputValidationResultProps;
 }) {
   return (
     <div className="card-info-container">
-      {cardInfoSectionSpec.map((data, index) => (
+      {cardInfoSectionConfig.map((data, index) => (
         <CardInfoSection key={`data.title-${index}`} {...data} onChange={onChange} error={error} />
       ))}
     </div>

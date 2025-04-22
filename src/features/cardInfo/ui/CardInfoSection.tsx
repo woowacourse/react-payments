@@ -1,30 +1,34 @@
 import './cardInfoSection.css';
 import CustomInput from '../../../shared/ui/CustomInput';
 import { ComponentProps } from 'react';
-import { ErrorProps } from '../../../shared/type/types';
+import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 
 interface CardInfoSectionProps {
+  key: string;
   id: string;
   title: string;
   description: string;
   subTitle: string;
   inputArr: ComponentProps<typeof CustomInput>[];
   maxLength: number;
-  error?: ErrorProps;
+  error?: InputValidationResultProps;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CardInfoSection({
+  key,
   id,
   title,
   description,
   subTitle,
   inputArr,
   maxLength,
-  error = {} as ErrorProps,
+  error = {} as InputValidationResultProps,
   onChange,
 }: CardInfoSectionProps) {
   const errorKey = `${id}Error`;
+  console.log('o-o key', key);
+  console.log('o-o idid', id);
 
   return (
     <section className="card-info-section">
