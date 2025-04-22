@@ -45,9 +45,13 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
     getCardNumberErrors,
     getExpirationPeriodErrors,
     getCvcNumberError,
+    getCardCompanyError,
+    getPasswordError,
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,
+    validateCardCompany,
+    validatePassword,
   } = useCardValidation();
 
   const renderCardFormFieldByType = () => {
@@ -60,7 +64,12 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
           />
         );
       case CARD_FORM_TYPE.cardCompany:
-        return <CardCompanySelect />;
+        return (
+          <CardCompanySelect
+            cardCompanyError={getCardCompanyError()}
+            validateCardCompany={validateCardCompany}
+          />
+        );
       case CARD_FORM_TYPE.expirationPeriod:
         return (
           <CardExpirationPeriodInput
@@ -76,7 +85,12 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
           />
         );
       case CARD_FORM_TYPE.password:
-        return <CardPasswordInput />;
+        return (
+          <CardPasswordInput
+            passwordError={getPasswordError()}
+            validatePassword={validatePassword}
+          />
+        );
       default:
         null;
     }

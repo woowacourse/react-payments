@@ -1,4 +1,6 @@
+import { ChangeEvent } from "react";
 import { CARD_FORM_TYPE } from "../../../../constants/constants";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Select from "../../../Common/Select/Select";
 
 const cardCompanyOptions = [
@@ -14,13 +16,30 @@ const cardCompanyOptions = [
 
 const PLACEHOLDER = "카드사를 선택해 주세요";
 
-export default function CardCompanySelect() {
+export interface CardCompanySelectProps {
+  cardCompanyError: CardValidationType["cardCompany"];
+  validateCardCompany: (value: string) => void;
+}
+
+export default function CardCompanySelect({
+  cardCompanyError,
+  validateCardCompany,
+}: CardCompanySelectProps) {
+  const handleCardCompanyChange = (value: string) => {
+    validateCardCompany(value);
+    // TODO: value update하는 로직 추가
+  };
+
   return (
     <Select
       key={CARD_FORM_TYPE.cardCompany}
-      isError={false}
+      isError={cardCompanyError}
       placeholder={PLACEHOLDER}
       options={cardCompanyOptions}
+      // TODO: value 값 설정
+      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+        handleCardCompanyChange(e.target.value)
+      }
     />
   );
 }
