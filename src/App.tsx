@@ -7,6 +7,7 @@ import CardCVCNumberSection from './components/cardCVCNumberSection/CardCVCNumbe
 import { useState } from 'react';
 import { ExpirationPeriod, Position } from './types/index.types';
 import { INITIALIZE_VALUE } from './constants/constant';
+import CardSelectSection from './components/cardSelectSection/CardSelectSection';
 
 const StyledApp = styled.div`
   display: flex;
@@ -71,6 +72,7 @@ function App() {
     <StyledApp>
       <StyledFrame>
         <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} />
+        <CardSelectSection></CardSelectSection>
         <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
         <CardExpirationPeriodSection
           expirationPeriod={expirationPeriod}
