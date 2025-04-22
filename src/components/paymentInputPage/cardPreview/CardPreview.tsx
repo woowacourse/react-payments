@@ -42,7 +42,11 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
         <div className={styles.goldBox}></div>
 
         {brand === '' ? null : (
-          <img src={BRAND_IMAGE[brand]} className={styles.logoBrand} />
+          <img
+            src={BRAND_IMAGE[brand]}
+            alt={`${brand} 로고 이미지`}
+            className={styles.logoBrand}
+          />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
