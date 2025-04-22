@@ -19,39 +19,6 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
     }));
   };
 
-  const getErrorMessage = (field: 'month' | 'year', value: string) => {
-    if (!Number.isInteger(value)) {
-      return '숫자만 입력 가능합니다.';
-    }
-
-    if (field === 'month') {
-      return getMonthErrorMessage(value);
-    }
-
-    if (field === 'year') {
-      return getYearErrorMessage(value);
-    }
-  };
-
-  const getMonthErrorMessage = (value: string) => {
-    if (value == '') {
-      return '';
-    }
-
-    const month = Number(value);
-    if (month < 1 || month > 12) {
-      return '1부터 12 사이의 숫자를 입력해주세요.';
-    }
-
-    return '';
-  };
-
-  const getYearErrorMessage = (value: string) => {
-    if (value !== '' && value.length !== 2) {
-      return '2자리 숫자를 입력해주세요.';
-    }
-  };
-
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
   return (
@@ -86,3 +53,36 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
     </div>
   );
 }
+
+const getErrorMessage = (field: 'month' | 'year', value: string) => {
+  if (!Number.isInteger(+value)) {
+    return '숫자만 입력 가능합니다.';
+  }
+
+  if (field === 'month') {
+    return getMonthErrorMessage(value);
+  }
+
+  if (field === 'year') {
+    return getYearErrorMessage(value);
+  }
+};
+
+const getMonthErrorMessage = (value: string) => {
+  if (value == '') {
+    return '';
+  }
+
+  const month = Number(value);
+  if (month < 1 || month > 12) {
+    return '1부터 12 사이의 숫자를 입력해주세요.';
+  }
+
+  return '';
+};
+
+const getYearErrorMessage = (value: string) => {
+  if (value !== '' && value.length !== 2) {
+    return '2자리 숫자를 입력해주세요.';
+  }
+};

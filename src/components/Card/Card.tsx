@@ -1,13 +1,13 @@
-import { CARD_LOGO, CardLogoType, CardNumberType, ExpirationType } from '../../App';
+import { CARD_BRANDS, CardBrandType, CardNumberType, ExpirationType } from '../../App';
 import styles from './Card.module.css';
 
-export default function Card({ numbers, cardLogo, expiration }: { numbers: CardNumberType; cardLogo: keyof CardLogoType | null; expiration: ExpirationType }) {
+export default function Card({ numbers, cardLogo, expiration }: { numbers: CardNumberType; cardLogo: keyof CardBrandType | null; expiration: ExpirationType }) {
   return (
     <div className={styles.card}>
       <div className={styles.chipWrapper}>
         <div className={styles.chip} />
 
-        {cardLogo && <img className={styles.cardLogo} src={cardLogo === 'visa' ? CARD_LOGO.visa : CARD_LOGO.master} />}
+        {cardLogo && <img className={styles.cardLogo} src={CARD_BRANDS[cardLogo].logo} />}
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>

@@ -16,13 +16,25 @@ export const INITIAL_CARD_NUMBER = {
 export type CardNumberType = typeof INITIAL_CARD_NUMBER;
 export type CardNumberKey = keyof CardNumberType;
 
-export const CARD_LOGO = {
-  visa: 'images/visa.jpg',
-  master: 'images/mastercard.jpg'
-};
-export type CardLogoType = typeof CARD_LOGO;
+export const CARD_BRANDS = {
+  VISA: {
+    name: 'VISA',
+    logo: '/images/visa.jpg',
+    match: (value: string) => value.startsWith('4')
+  },
+  MASTERCARD: {
+    name: 'MASTERCARD',
+    logo: '/images/mastercard.jpg',
+    match: (value: string) => {
+      const prefix = Number(value.slice(0, 2));
+      return prefix >= 51 && prefix <= 55;
+    }
+  }
+} as const;
 
-export type CardLogoKey = keyof CardLogoType;
+export type CardBrandType = typeof CARD_BRANDS;
+
+export type CardLogoKey = keyof CardBrandType;
 
 const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
 
@@ -35,7 +47,7 @@ export type CvcType = typeof INITIAL_CVC;
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
-  const [cardLogo, setCardLogo] = useState<keyof CardLogoType | null>(null);
+  const [cardLogo, setCardLogo] = useState<keyof CardBrandType | null>(null);
   const [expiration, setExpiration] = useState<ExpirationType>(INITIAL_EXPIRATION);
   const [cvc, setCvc] = useState<CvcType>(INITIAL_CVC);
 
