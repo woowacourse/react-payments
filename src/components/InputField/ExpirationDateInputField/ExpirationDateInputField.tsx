@@ -15,13 +15,17 @@ interface ExpirationDateInputFieldProps {
   >;
 }
 
+const MAX_MONTH_LENGTH = 2;
+const MAX_MONTH_VALUE = 12;
+
 function ExpirationDateInputField({
   inputValue,
   setInputValue,
 }: ExpirationDateInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 2) {
-      if (name === 'expirationDatePart1' && Number(value) > 12) return;
+    if (value.length <= MAX_MONTH_LENGTH) {
+      if (name === 'expirationDatePart1' && Number(value) > MAX_MONTH_VALUE)
+        return;
       setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
     }
   };

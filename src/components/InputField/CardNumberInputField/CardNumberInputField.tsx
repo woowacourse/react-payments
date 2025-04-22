@@ -22,6 +22,9 @@ interface CardNumberInputFieldProps {
   setCardType: Dispatch<SetStateAction<CardType>>;
 }
 
+const MAX_CARD_LENGTH = 4;
+const CARD_TYPE_ID_LENGTH = 2;
+
 function CardNumberInputField({
   inputValue,
   setInputValue,
@@ -64,7 +67,7 @@ function CardNumberInputField({
   };
 
   const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length <= 2) {
+    if (value.length <= CARD_TYPE_ID_LENGTH) {
       if (value[0] === '4') setCardType('visa');
       else if (value >= '51' && value <= '55') setCardType('master');
       else setCardType(null);
@@ -75,7 +78,7 @@ function CardNumberInputField({
   };
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 4) {
+    if (value.length <= MAX_CARD_LENGTH) {
       if (name === CARD_NUMBER_INPUT_TYPE[0]) {
         const isError = checkCardTypeFromPrefix(value);
         updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
@@ -92,7 +95,7 @@ function CardNumberInputField({
 
     updateCardError(name as CardNumberInputType, {
       errorType: 'shortCardSegment',
-      isError: value.length > 0 && value.length < 4,
+      isError: value.length > 0 && value.length < MAX_CARD_LENGTH,
     });
   };
 
