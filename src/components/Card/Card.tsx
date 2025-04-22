@@ -1,15 +1,7 @@
-import { CARD_LOGO, CardLogoType, CardNumberType, Expiration } from '../../App';
+import { CARD_LOGO, CardLogoType, CardNumberType, ExpirationType } from '../../App';
 import styles from './Card.module.css';
 
-export default function Card({
-  numbers,
-  cardLogo,
-  expiration
-}: {
-  numbers: CardNumberType;
-  cardLogo: keyof CardLogoType | null;
-  expiration: Expiration;
-}) {
+export default function Card({ numbers, cardLogo, expiration }: { numbers: CardNumberType; cardLogo: keyof CardLogoType | null; expiration: ExpirationType }) {
   return (
     <div className={styles.card}>
       <div className={styles.chipWrapper}>
@@ -34,9 +26,9 @@ export default function Card({
           ))}
         </div>
         <div className={styles.cardNumber}>
-          {expiration.year}
-          {expiration.year && '/'}
-          {expiration.month}
+          {expiration.year.value}
+          {expiration.year.value && '/'}
+          {expiration.month.value}
         </div>
       </div>
     </div>

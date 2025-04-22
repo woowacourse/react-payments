@@ -1,28 +1,21 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Expiration, ExpirationKey } from '../../App';
+import { Dispatch, SetStateAction } from 'react';
+import { ExpirationType, ExpirationKey } from '../../App';
 import Input from '../Input/Input';
 
 type Props = {
-  expiration: Expiration;
-  setExpiration: Dispatch<SetStateAction<Expiration>>;
+  expiration: ExpirationType;
+  setExpiration: Dispatch<SetStateAction<ExpirationType>>;
 };
 
 export default function CardExpirationSection({ expiration, setExpiration }: Props) {
-  const [expirationError, setExpirationError] = useState<Expiration>({ month: '', year: '' });
-
   const handleExpirationChange = (field: ExpirationKey, value: string) => {
-    setExpiration((prev) => ({
-      ...prev,
-      [field]: value
-    }));
-
     const errorMessage = getErrorMessage(field, value);
 
-    setExpirationError((prev) => ({
+    setExpiration((prev) => ({
       ...prev,
-      [field]: errorMessage
+      [field]: { value, errorMessage }
     }));
   };
 
@@ -59,6 +52,8 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
     }
   };
 
+  const isError = expiration.month.errorMessage || expiration.year.errorMessage;
+
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
@@ -71,24 +66,22 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
 
         <div className={styles.inputWrapper}>
           <Input
-            value={expiration.month}
+            value={expiration.month.value}
             placeholder="MM"
-            isValid={expirationError.month === ''}
+            isError={Boolean(expiration.month.errorMessage)}
             onChange={(e) => handleExpirationChange('month', e.target.value)}
             maxLength={2}
           />
           <Input
-            value={expiration.year}
+            value={expiration.year.value}
             placeholder="YY"
-            isValid={expirationError.year === ''}
+            isError={Boolean(expiration.month.errorMessage)}
             onChange={(e) => handleExpirationChange('year', e.target.value)}
             maxLength={2}
           />
         </div>
 
-        {(expirationError.month || expirationError.year) && (
-          <InputSection.Error message={expirationError.month || expirationError.year} />
-        )}
+        {isError && <InputSection.Error message={expiration.month.errorMessage || expiration.year.errorMessage} />}
       </div>
     </div>
   );

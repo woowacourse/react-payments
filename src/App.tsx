@@ -6,11 +6,6 @@ import CardExpirationSection from './components/CardExpirationSection/CardExpira
 import Card from './components/Card/Card';
 import CvcSection from './components/CvcSection/CvcSection';
 
-export type Expiration = {
-  year: string;
-  month: string;
-};
-
 export const INITIAL_CARD_NUMBER = {
   first: { value: '', isError: false },
   second: { value: '', isError: false },
@@ -29,15 +24,20 @@ export type CardLogoType = typeof CARD_LOGO;
 
 export type CardLogoKey = keyof CardLogoType;
 
-const INITIAL_EXPIRATION = { year: '', month: '' } as const;
+const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
 
+export type ExpirationType = typeof INITIAL_EXPIRATION;
 export type ExpirationKey = keyof typeof INITIAL_EXPIRATION;
+
+const INITIAL_CVC = { value: '', errorMessage: '' };
+
+export type CvcType = typeof INITIAL_CVC;
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
   const [cardLogo, setCardLogo] = useState<keyof CardLogoType | null>(null);
-  const [expiration, setExpiration] = useState<Expiration>(INITIAL_EXPIRATION);
-  const [cvc, setCvc] = useState('');
+  const [expiration, setExpiration] = useState<ExpirationType>(INITIAL_EXPIRATION);
+  const [cvc, setCvc] = useState<CvcType>(INITIAL_CVC);
 
   return (
     <div className={styles.appContainer}>

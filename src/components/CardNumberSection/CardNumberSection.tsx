@@ -12,10 +12,11 @@ type Props = {
 
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
   const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
-    const isValid = Number.isInteger(value);
+    const isError = !Number.isInteger(+value);
+
     setCardNumbers((prev) => ({
       ...prev,
-      [field]: { value, isError: isValid }
+      [field]: { value, isError }
     }));
 
     if (field !== 'first') {
@@ -49,7 +50,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
             <Input
               key={index}
               value={cardNumbers[inputKey].value}
-              isValid={!cardNumbers[inputKey].isError}
+              isError={cardNumbers[inputKey].isError}
               placeholder={'1234'}
               onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
               maxLength={4}
@@ -57,9 +58,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
           ))}
         </div>
 
-        <InputSection.Error
-          message={Object.values(cardNumbers).some(({ isError }) => isError) ? '숫자만 입력 가능합니다.' : ''}
-        />
+        <InputSection.Error message={Object.values(cardNumbers).some(({ isError }) => isError) ? '숫자만 입력 가능합니다.' : ''} />
       </div>
     </div>
   );

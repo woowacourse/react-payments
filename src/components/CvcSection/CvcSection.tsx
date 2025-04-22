@@ -1,20 +1,18 @@
+import { CvcType } from '../../App';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
-  cvc: string;
-  setCvc: Dispatch<SetStateAction<string>>;
+  cvc: CvcType;
+  setCvc: Dispatch<SetStateAction<CvcType>>;
 };
 
 export default function CvcSection({ cvc, setCvc }: Props) {
-  const [cvcError, setCvcError] = useState<string>('');
-
   const handleCvcChange = (value: string) => {
-    setCvc(value);
     const errorMessage = getCvcErrorMessage(value);
-    setCvcError(errorMessage);
+    setCvc((prev) => ({ errorMessage, value }));
   };
 
   const getCvcErrorMessage = (value: string) => {
@@ -34,15 +32,9 @@ export default function CvcSection({ cvc, setCvc }: Props) {
       <div className={styles.inputSection}>
         <InputSection.Label text="CVC" />
 
-        <Input
-          onChange={(e) => handleCvcChange(e.target.value)}
-          value={cvc}
-          placeholder="123"
-          isValid={cvcError == ''}
-          maxLength={3}
-        />
+        <Input onChange={(e) => handleCvcChange(e.target.value)} value={cvc.value} placeholder="123" isError={cvc.errorMessage == ''} maxLength={3} />
 
-        {cvcError && <InputSection.Error message={cvcError} />}
+        {cvc.errorMessage && <InputSection.Error message={cvc.errorMessage} />}
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ export const Default: Story = {
   args: {
     value: '',
     placeholder: '1234',
-    isValid: true,
+    isError: true,
     onChange: action('onChange'),
     maxLength: 4
   }
@@ -25,7 +25,7 @@ export const Valid: Story = {
   args: {
     ...Default.args,
     value: '2354',
-    isValid: true
+    isError: true
   }
 };
 
@@ -33,6 +33,6 @@ export const Invalid: Story = {
   args: {
     ...Default.args,
     value: 'gdas',
-    isValid: false
+    isError: false
   }
 };
