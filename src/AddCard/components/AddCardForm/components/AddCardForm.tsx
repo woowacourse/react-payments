@@ -7,11 +7,14 @@ import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
 } from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
 import CVCInputs, { type CVCInputsProps } from "./CVC/components/CVCInputs";
+import { FlowStep } from "../../../hooks/useCardRegistrationFlow";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
     CardExpireDateInputsProps &
     CVCInputsProps;
+  currentStep: FlowStep;
+  isStepValid: (step: FlowStep) => boolean;
 }
 
 function AddCardForm({
@@ -25,6 +28,7 @@ function AddCardForm({
     CVCState,
     handleCVCChange,
   },
+  currentStep,
 }: AddCardFormProps) {
   return (
     <form className={styles.form}>
@@ -38,24 +42,28 @@ function AddCardForm({
           />
         }
       />
-      <CardInputBox
-        title="카드 유효기간을 입력해 주세요"
-        guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
-        InputComponents={
-          <CardExpireDateInputs
-            expireDate={expireDate}
-            handleExpireMonthChange={handleExpireMonthChange}
-            handleExpireYearChange={handleExpireYearChange}
-            handleExpireMonthBlur={handleExpireMonthBlur}
-          />
-        }
-      />
-      <CardInputBox
-        title="CVC 번호를 입력해 주세요"
-        InputComponents={
-          <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />
-        }
-      />
+      {currentStep !== "CARD_NUMBER" && (
+        <CardInputBox
+          title="카드 유효기간을 입력해 주세요"
+          guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
+          InputComponents={
+            <CardExpireDateInputs
+              expireDate={expireDate}
+              handleExpireMonthChange={handleExpireMonthChange}
+              handleExpireYearChange={handleExpireYearChange}
+              handleExpireMonthBlur={handleExpireMonthBlur}
+            />
+          }
+        />
+      )}
+      {(currentStep === "CVC" || currentStep === "COMPLETE") && (
+        <CardInputBox
+          title="CVC 번호를 입력해 주세요"
+          InputComponents={
+            <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />
+          }
+        />
+      )}
     </form>
   );
 }

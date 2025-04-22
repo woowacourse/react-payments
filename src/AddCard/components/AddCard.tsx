@@ -1,13 +1,15 @@
 import styles from "./AddCard.module.css";
 import AddCardForm from "./AddCardForm/components/AddCardForm";
-import useAddCard from "../hooks/useAddCard";
+import useCardRegistrationFlow from "../hooks/useCardRegistrationFlow";
 import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
 
 function AddCard() {
   const {
-    addCardState,
+    state,
     previewState: { cardNumberState, expireDate },
-  } = useAddCard();
+    currentStep,
+    isStepValid,
+  } = useCardRegistrationFlow();
 
   return (
     <div className={styles.container}>
@@ -15,7 +17,12 @@ function AddCard() {
         cardNumberState={cardNumberState}
         expireDate={expireDate}
       />
-      <AddCardForm addCardState={addCardState} />
+      <AddCardForm
+        addCardState={state}
+        currentStep={currentStep}
+        isStepValid={isStepValid}
+      />
+      {currentStep === "COMPLETE" && <p>카드 하나 만드시죠!</p>}
     </div>
   );
 }
