@@ -8,8 +8,25 @@ export const PreviewContainerCSS = styled.div`
   justify-content: center;
 `;
 
-export const PreviewCSS = styled.div`
-  background-color: black;
+export const PreviewCSS = styled.div<{ $brand: string }>`
+  background-color: ${({ $brand }) =>
+    $brand === "BC카드"
+      ? "#F04651"
+      : $brand === "신한카드"
+      ? "#0046FF"
+      : $brand === "카카오뱅크"
+      ? "#FFE600"
+      : $brand === "현대카드"
+      ? "#000000"
+      : $brand === "우리카드"
+      ? "#007BC8"
+      : $brand === "롯데카드"
+      ? "#ED1C24"
+      : $brand === "하나카드"
+      ? "#009490"
+      : $brand === "국민카드"
+      ? "#6A6056"
+      : "black"};
   width: 230px;
   height: 180px;
 

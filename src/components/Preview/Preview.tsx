@@ -15,7 +15,7 @@ function Preview() {
   const [cardImageType, setCardImageType] = useState<CardImageType | null>(
     null
   );
-  const { cardNumbers, expirationPeriod } = useCard();
+  const { cardNumbers, expirationPeriod, cardBrand } = useCard();
 
   useEffect(() => {
     const parsedCardNumbers = parsingCardNumbers(cardNumbers);
@@ -25,7 +25,7 @@ function Preview() {
 
   return (
     <PreviewContainerCSS>
-      <PreviewCSS>
+      <PreviewCSS $brand={cardBrand}>
         <LogoCSS>
           <ICChipCSS />
           {cardImageType !== null && <CardTypeCSS $cardType={cardImageType} />}
