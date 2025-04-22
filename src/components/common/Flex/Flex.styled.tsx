@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import { Props } from '.';
+import { FlexProps } from './Flex.types';
 
-export const StyledFlexBox = styled.div<Props>`
+export const StyledFlexBox = styled.div<FlexProps>`
   display: flex;
   flex-direction: ${({ direction = 'column' }) => direction};
   justify-content: ${({ justifyContent = 'center' }) => justifyContent};

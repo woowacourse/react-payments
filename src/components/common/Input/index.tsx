@@ -1,18 +1,5 @@
-import { ComponentProps } from 'react';
-
 import { StyledInputContainer } from './Input.styled';
-
-// TODO : onChange 타입 정의
-export type Props = {
-  /**
-   * Represents the input state type.
-   */
-  value?: string;
-  /**
-   * Indicates whether the input is valid.
-   */
-  isValid: boolean;
-} & Omit<ComponentProps<'input'>, 'value'>;
+import { InputProps } from './Input.types';
 
 export const Input = ({
   value = '',
@@ -20,7 +7,7 @@ export const Input = ({
   maxLength = 4,
   isValid = false,
   ...props
-}: Props) => {
+}: InputProps) => {
   return (
     <StyledInputContainer
       value={value}

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { Props } from '.';
+import { TextProps } from './Text.types';
 
 const variants = {
   Title: css`
@@ -35,7 +35,7 @@ const fontWeights = {
   `,
 };
 
-export const StyledTextContainer = styled.p<Props>`
+export const StyledTextContainer = styled.p<TextProps>`
   margin: 0;
   color: ${({ color }) => color};
   ${({ fontWeight }) => fontWeights[fontWeight ?? 'regular']};

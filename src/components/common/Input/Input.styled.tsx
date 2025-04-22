@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
-import { Props } from '.';
+import { InputProps } from './Input.types';
+
 import { colors } from '@/styles/global';
 
-export const StyledInputContainer = styled.input<Pick<Props, 'isValid'>>`
+export const StyledInputContainer = styled.input<Pick<InputProps, 'isValid'>>`
   box-sizing: border-box;
   width: 100%;
   padding: 8px;
