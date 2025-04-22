@@ -14,7 +14,12 @@ type Props = {
 
 const ExpireDatePlaceholder = ['MM', 'YY'];
 
-export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: Props) => {
+export const ExpireDateForm = ({
+  expireDate,
+  errorMessage,
+  onCardExpireDateInputChange,
+  onCardExpireDateInputBlur,
+}: Props) => {
   const isValidDate = expireDate.month.isValid && expireDate.year.isValid;
   const expireDateKeys = Object.keys(expireDate) as ExpireDateInputKey[];
 
@@ -31,8 +36,8 @@ export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: P
               key={`expire-${key}`}
               value={expireDate[key].value}
               maxLength={2}
-              onChange={(e) => onChange(e, key)}
-              onBlur={(e) => onBlur(e, key)}
+              onChange={(e) => onCardExpireDateInputChange(e, key)}
+              onBlur={(e) => onCardExpireDateInputBlur(e, key)}
               isValid={expireDate[key].isValid}
               placeholder={ExpireDatePlaceholder[index]}
             />

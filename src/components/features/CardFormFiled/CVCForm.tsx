@@ -12,7 +12,7 @@ type Props = {
   cvcNumber: CardInputType[];
 } & CardFormFiledProps;
 
-export const CVCForm = ({ cvcNumber, errorMessage, onChange, onBlur }: Props) => {
+export const CVCForm = ({ cvcNumber, errorMessage, onCardInputChange, onCardInputBlur }: Props) => {
   const isValidCVC = cvcNumber.every((cvcNumber) => cvcNumber.isValid);
 
   return (
@@ -25,8 +25,8 @@ export const CVCForm = ({ cvcNumber, errorMessage, onChange, onBlur }: Props) =>
             maxLength={3}
             placeholder="CVC 번호(카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리)"
             isValid={cvc.isValid}
-            onChange={(e) => onChange(e, index)}
-            onBlur={(e) => onBlur(e, index)}
+            onChange={(e) => onCardInputChange(e, index)}
+            onBlur={(e) => onCardInputBlur(e, index)}
           />
         ))}
         <Text

@@ -38,20 +38,20 @@ function App() {
         <CardNumberForm
           cardNumbers={cardNumbers}
           errorMessage={cardErrorMessage}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          onCardInputChange={handleChange}
+          onCardInputBlur={handleBlur}
         />
         <ExpireDateForm
           expireDate={expireDate}
           errorMessage={expireDateErrorMessage}
-          onChange={handleExpireDateChange}
-          onBlur={handleExpireDateBlur}
+          onCardExpireDateInputChange={handleExpireDateChange}
+          onCardExpireDateInputBlur={handleExpireDateBlur}
         />
         <CVCForm
           cvcNumber={cvcNumber}
           errorMessage={cvcErrorMessage}
-          onChange={handleCVCChange}
-          onBlur={handleCVCBlur}
+          onCardInputChange={handleCVCChange}
+          onCardInputBlur={handleCVCBlur}
         />
       </Flex>
     </AppLayout>

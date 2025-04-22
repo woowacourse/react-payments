@@ -12,7 +12,12 @@ type Props = {
   cardNumbers: CardInputType[];
 } & CardFormFiledProps;
 
-export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: Props) => {
+export const CardNumberForm = ({
+  cardNumbers,
+  errorMessage,
+  onCardInputChange,
+  onCardInputBlur,
+}: Props) => {
   const isValidCardNumber = cardNumbers.every((cardNumber) => cardNumber.isValid);
 
   return (
@@ -27,8 +32,8 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
             <Input
               key={`card-${index}`}
               value={cardNumber.value}
-              onChange={(e) => onChange(e, index)}
-              onBlur={(e) => onBlur(e, index)}
+              onChange={(e) => onCardInputChange(e, index)}
+              onBlur={(e) => onCardInputBlur(e, index)}
               isValid={cardNumber.isValid}
               placeholder="1234"
             />
