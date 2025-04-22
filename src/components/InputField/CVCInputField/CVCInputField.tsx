@@ -20,7 +20,7 @@ function CVCInputField({ inputValue, setInputValue }: CVCInputFieldProps) {
       <Label htmlFor="CVC-input" />
       <Input
         id="CVC-input"
-        type="number"
+        inputType="number"
         placeholder="123"
         value={inputValue.CVCPart1}
         onChange={onChange}

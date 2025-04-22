@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isError?: boolean;
+  inputType: 'number' | 'text';
   onChange: ({ name, value }: { name: string; value: string }) => void;
 }
 
@@ -13,14 +14,14 @@ function Input({
   isError,
   value,
   name,
-  type,
+  inputType,
   onChange,
   onBlur,
 }: InputProps) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
-    if (type === 'number') {
+    if (inputType === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
       return onChange({ value: numericValue, name });
     }
@@ -33,7 +34,7 @@ function Input({
       id={id}
       placeholder={placeholder}
       value={value}
-      inputMode={type === 'number' ? 'numeric' : 'text'}
+      inputMode={inputType === 'number' ? 'numeric' : 'text'}
       $isError={isError ?? false}
       onChange={handleTypeChange}
       name={name}

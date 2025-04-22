@@ -114,7 +114,7 @@ function CardNumberInputField({
           <Input
             id={`card-number-input-${inputType}`}
             key={inputType}
-            type="number"
+            inputType="number"
             placeholder="1234"
             value={inputValue[inputType]}
             onChange={onChange}

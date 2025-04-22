@@ -34,7 +34,7 @@ export const Default: Story = {
             isError={isError}
             value=""
             name="inputName"
-            type="text"
+            inputType="text"
             onChange={() => {}}
           />
         }
@@ -65,7 +65,7 @@ export const Error: Story = {
             isError={isError}
             value=""
             name="inputName"
-            type="text"
+            inputType="text"
             onChange={() => {}}
           />
         }
