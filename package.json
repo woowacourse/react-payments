@@ -16,7 +16,8 @@
     "@emotion/react": "^11.14.0",
     "gh-pages": "^6.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^7.5.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
