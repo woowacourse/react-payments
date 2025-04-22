@@ -38,6 +38,9 @@ function App() {
   // 카드사
   const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | ''>('');
 
+  // 카드 뒤집기 상태
+  const [isCardFlipped, setIsCardFlipped] = useState(false);
+
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
@@ -48,6 +51,8 @@ function App() {
           cardNumber={cardNumber}
           cardExpirationDate={cardExpirationDate}
           selectedCompany={selectedCompany}
+          cardCVCNumber={cardCVCNumber}
+          isFlipped={isCardFlipped}
         />
       </S.CardPreviewWrapper>
       <Spacing size={60} />
@@ -70,6 +75,8 @@ function App() {
           setCardCVCNumber={setCardCVCNumber}
           cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
           setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
+          onFocus={() => setIsCardFlipped(true)}
+          onBlur={() => setIsCardFlipped(false)}
         />
       </S.CardInfoForm>
     </S.Wrapper>

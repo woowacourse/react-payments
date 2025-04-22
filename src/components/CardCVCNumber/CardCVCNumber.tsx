@@ -1,14 +1,15 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
-import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
-import { checkValidCVCNumber } from './utils';
-import { checkAllNumber } from '@/utils';
+import { checkAllNumber } from '@/utils/validation';
+import { Dispatch, SetStateAction } from 'react';
 
 interface CardCVCNumberProps {
   cardCVCNumber: string;
   setCardCVCNumber: Dispatch<SetStateAction<string>>;
   cardCVCNumberErrorMessage: string;
   setCardCVCNumberErrorMessage: Dispatch<SetStateAction<string>>;
+  onFocus: () => void;
+  onBlur: () => void;
 }
 
 export default function CardCVCNumber({
@@ -16,14 +17,22 @@ export default function CardCVCNumber({
   setCardCVCNumber,
   cardCVCNumberErrorMessage,
   setCardCVCNumberErrorMessage,
+  onFocus,
+  onBlur,
 }: CardCVCNumberProps) {
   const handleInputChange = (value: string) => {
-    if (!checkAllNumber(value)) return;
+    if (!checkAllNumber(value)) {
+      setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardNumber.number);
+      return;
+    }
 
     setCardCVCNumber(value);
 
-    if (checkValidCVCNumber(value)) setCardCVCNumberErrorMessage('');
-    else setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardCVCNumber.length);
+    if (value.length !== 3) {
+      setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardCVCNumber.length);
+    } else {
+      setCardCVCNumberErrorMessage('');
+    }
   };
 
   return (
@@ -38,6 +47,8 @@ export default function CardCVCNumber({
           maxLength={3}
           value={cardCVCNumber}
           onChange={(event) => handleInputChange(event.target.value)}
+          onFocus={onFocus}
+          onBlur={onBlur}
           isError={cardCVCNumberErrorMessage !== ''}
         />
       </div>
