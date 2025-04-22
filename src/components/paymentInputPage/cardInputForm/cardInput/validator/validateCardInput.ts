@@ -21,6 +21,6 @@ export function validateCVC(cvc: string) {
   return validatorUtils.isNumber(cvc);
 }
 
-export function validateisNumberString(cardNumber: string) {
+export function validateNumberString(cardNumber: string) {
   return validatorUtils.isNumber(cardNumber);
 }
