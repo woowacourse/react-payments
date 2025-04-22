@@ -31,7 +31,7 @@ const CARD_TYPE_IMAGES_PATH = {
   visa: './Visa.png',
   masterCard: './Mastercard.png',
   default: '',
-};
+} as const;
 
 type CardType = keyof typeof CARD_TYPE_IMAGES_PATH;
 

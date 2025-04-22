@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const ERROR_MESSAGE = {
   CARD_CVC_LENGTH: 'CVC는 3자리입니다.',
-};
+} as const;
 
 function useCardCVC() {
   const [cardCVC, setCardCVC] = useState('');

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const ERROR_MESSAGE = {
   CARD_NUMBER_LENGTH: '카드 번호는 16자리입니다.',
-};
+} as const;
 
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
