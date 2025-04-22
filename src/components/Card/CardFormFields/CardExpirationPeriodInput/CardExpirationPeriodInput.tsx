@@ -4,7 +4,7 @@ import {
   PeriodPositionType,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
-import { CardInputErrorType } from "../../../../hooks/useCardInputError";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
 
 const periodPositions = Object.values(PERIOD_POSITION);
@@ -16,7 +16,7 @@ const PLACEHOLDERS = {
 const MAX_LENGTHS = 2;
 
 export interface CardExpirationPeriodInputProps {
-  error: CardInputErrorType;
+  error: CardValidationType;
   setError: (value: string, position: PeriodPositionType) => void;
 }
 

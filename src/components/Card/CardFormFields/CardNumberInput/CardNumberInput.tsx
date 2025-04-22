@@ -4,7 +4,7 @@ import {
   CardPositionType,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
-import { CardInputErrorType } from "../../../../hooks/useCardInputError";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
 
 const cardPositions = Object.values(CARD_POSITION);
@@ -13,7 +13,7 @@ const PLACEHOLDERS = "1234";
 const MAX_LENGTHS = 4;
 
 export interface CardNumberInputProps {
-  error: CardInputErrorType; // TODO: 관련된 에러 상태만 넘겨주기
+  error: CardValidationType; // TODO: 관련된 에러 상태만 넘겨주기
   setError: (value: string, position: CardPositionType) => void;
 }
 

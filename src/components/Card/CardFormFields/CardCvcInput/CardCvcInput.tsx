@@ -2,13 +2,13 @@ import { ChangeEvent } from "react";
 import { CARD_FORM_TYPE } from "../../../../constants/constants";
 import Input from "../../../Common/Input/Input";
 import { useCard } from "../../../../hooks/useCard";
-import { CardInputErrorType } from "../../../../hooks/useCardInputError";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
 
 const PLACEHOLDERS = "123";
 const MAX_LENGTHS = 3;
 
 export interface CardCvcInputProps {
-  error: CardInputErrorType; // TODO: 관련된 에러 상태만 넘겨주기
+  error: CardValidationType; // TODO: 관련된 에러 상태만 넘겨주기
   setError: (value: string) => void;
 }
 

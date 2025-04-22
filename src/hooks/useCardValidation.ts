@@ -2,14 +2,14 @@ import { useState } from "react";
 import { CardPositionType, PeriodPositionType } from "../constants/constants";
 import { isNotNumber } from "../utils/validation";
 
-export interface CardInputErrorType {
+export interface CardValidationType {
   cardNumbers: Record<CardPositionType, boolean>;
   expirationPeriod: Record<PeriodPositionType, boolean>;
   cvcNumber: boolean;
   cardCompany: boolean;
 }
 
-const defaultError = {
+const initialState = {
   cardNumbers: {
     first: false,
     second: false,
@@ -24,11 +24,12 @@ const defaultError = {
   cardCompany: false,
 };
 
-export function useCardInputError() {
-  const [error, setError] = useState<CardInputErrorType>(defaultError);
+export function useCardValidation() {
+  const [validationErrors, setValidationErrors] =
+    useState<CardValidationType>(initialState);
 
-  const setCardNumberError = (value: string, position: CardPositionType) => {
-    setError((prev) => ({
+  const validateCardNumber = (value: string, position: CardPositionType) => {
+    setValidationErrors((prev) => ({
       ...prev,
       cardNumbers: {
         ...prev.cardNumbers,
@@ -37,11 +38,11 @@ export function useCardInputError() {
     }));
   };
 
-  const setExpirationPeriodError = (
+  const validateExpirationPeriod = (
     value: string,
     position: PeriodPositionType
   ) => {
-    setError((prev) => ({
+    setValidationErrors((prev) => ({
       ...prev,
       expirationPeriod: {
         ...prev.expirationPeriod,
@@ -50,17 +51,17 @@ export function useCardInputError() {
     }));
   };
 
-  const setCvcNumberError = (value: string) => {
-    setError((prev) => ({
+  const validateCvcNumber = (value: string) => {
+    setValidationErrors((prev) => ({
       ...prev,
       cvcNumber: isNotNumber(value),
     }));
   };
 
   return {
-    error,
-    setCardNumberError,
-    setExpirationPeriodError,
-    setCvcNumberError,
+    validationErrors,
+    validateCardNumber,
+    validateExpirationPeriod,
+    validateCvcNumber,
   };
 }

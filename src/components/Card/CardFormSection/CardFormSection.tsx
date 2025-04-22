@@ -1,5 +1,5 @@
 import { CARD_FORM_TYPE, CardFormType } from "../../../constants/constants";
-import { useCardInputError } from "../../../hooks/useCardInputError";
+import { useCardValidation } from "../../../hooks/useCardValidation";
 import Description from "../../Common/Description/Description";
 import Error from "../../Common/Error/Error";
 import Subtitle from "../../Common/Subtitle/Subtitle";
@@ -37,32 +37,39 @@ const subtitleVariants: Record<CardFormType, string | null> = {
 
 function CardFormSection({ type }: CardFormSectionProps) {
   const {
-    error,
-    setCardNumberError,
-    setExpirationPeriodError,
-    setCvcNumberError,
-  } = useCardInputError();
+    validationErrors,
+    validateCardNumber,
+    validateExpirationPeriod,
+    validateCvcNumber,
+  } = useCardValidation();
 
   const isErrorVisible =
     type === CARD_FORM_TYPE.cvcNumber
-      ? error[type]
-      : Object.values(error[type] ?? {}).some((v) => v);
+      ? validationErrors[type]
+      : Object.values(validationErrors[type] ?? {}).some((v) => v);
 
   const renderCardFormFieldByType = () => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return <CardNumberInput error={error} setError={setCardNumberError} />;
+        return (
+          <CardNumberInput
+            error={validationErrors}
+            setError={validateCardNumber}
+          />
+        );
       case CARD_FORM_TYPE.cardCompany:
         return <CardCompanySelect />;
       case CARD_FORM_TYPE.expirationPeriod:
         return (
           <CardExpirationPeriodInput
-            error={error}
-            setError={setExpirationPeriodError}
+            error={validationErrors}
+            setError={validateExpirationPeriod}
           />
         );
       case CARD_FORM_TYPE.cvcNumber:
-        return <CardCvcInput error={error} setError={setCvcNumberError} />;
+        return (
+          <CardCvcInput error={validationErrors} setError={validateCvcNumber} />
+        );
       // TODO: 비밀번호 Input 추가
       default:
         null;
