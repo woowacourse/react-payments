@@ -8,6 +8,7 @@ import CardCompanySelect from "../CardFormFields/CardCompanySelect/CardCompanySe
 import CardCvcInput from "../CardFormFields/CardCvcInput/CardCvcInput";
 import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput/CardExpirationPeriodInput";
 import CardNumberInput from "../CardFormFields/CardNumberInput/CardNumberInput";
+import CardPasswordInput from "../CardFormFields/CardPasswordInput/CardPasswordInput";
 import { CardFormFieldCSS } from "./CardFormSection.styled";
 
 export interface CardFormSectionProps {
@@ -19,6 +20,7 @@ const titleVariants: Record<CardFormType, string> = {
   [CARD_FORM_TYPE.expirationPeriod]: "카드 유효기간을 입력해 주세요",
   [CARD_FORM_TYPE.cvcNumber]: "CVC 번호를 입력해 주세요",
   [CARD_FORM_TYPE.cardCompany]: "카드사를 선택해 주세요",
+  [CARD_FORM_TYPE.password]: "비밀번호를 입력해 주세요",
 };
 
 const descriptionVariants: Record<CardFormType, string | null> = {
@@ -26,6 +28,7 @@ const descriptionVariants: Record<CardFormType, string | null> = {
   [CARD_FORM_TYPE.expirationPeriod]: "월/년도(MMYY)를 순서대로 입력해 주세요.",
   [CARD_FORM_TYPE.cvcNumber]: null,
   [CARD_FORM_TYPE.cardCompany]: "현재 국내 카드사만 가능합니다.",
+  [CARD_FORM_TYPE.password]: "앞의 2자리를 입력해주세요",
 };
 
 const subtitleVariants: Record<CardFormType, string | null> = {
@@ -33,6 +36,7 @@ const subtitleVariants: Record<CardFormType, string | null> = {
   [CARD_FORM_TYPE.expirationPeriod]: "유효기간",
   [CARD_FORM_TYPE.cvcNumber]: "CVC",
   [CARD_FORM_TYPE.cardCompany]: null,
+  [CARD_FORM_TYPE.password]: "비밀번호 앞 2자리",
 };
 
 function CardFormSection({ type }: CardFormSectionProps) {
@@ -71,7 +75,8 @@ function CardFormSection({ type }: CardFormSectionProps) {
             validateCvcNumber={validateCvcNumber}
           />
         );
-      // TODO: 비밀번호 Input 추가
+      case CARD_FORM_TYPE.password:
+        return <CardPasswordInput />;
       default:
         null;
     }

@@ -1,3 +1,4 @@
+import { CARD_FORM_TYPE } from "../../../../constants/constants";
 import Select from "../../../Common/Select/Select";
 
 const cardCompanyOptions = [
@@ -11,11 +12,12 @@ const cardCompanyOptions = [
   { value: "kb", text: "국민카드" },
 ];
 
-const PLACEHOLDER = "카드사를 선택해주세요";
+const PLACEHOLDER = "카드사를 선택해 주세요";
 
 export default function CardCompanySelect() {
   return (
     <Select
+      key={CARD_FORM_TYPE.cardCompany}
       isError={false}
       placeholder={PLACEHOLDER}
       options={cardCompanyOptions}

@@ -3,6 +3,7 @@ export const CARD_FORM_TYPE = {
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
   cardCompany: "cardCompany",
+  password: "password",
 } as const;
 
 export const CARD_TYPE = {

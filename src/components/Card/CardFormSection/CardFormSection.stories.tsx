@@ -40,3 +40,10 @@ export const CardCompany: Story = {
     type: CARD_FORM_TYPE.cardCompany,
   },
 };
+
+export const Password: Story = {
+  decorators: [withCustomCardProvider({})],
+  args: {
+    type: CARD_FORM_TYPE.password,
+  },
+};
