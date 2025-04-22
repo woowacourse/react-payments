@@ -1,0 +1,40 @@
+.selectBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selectedInput {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--black);
+  padding: 12px 8px;
+  &::placeholder {
+    color: var(--grey);
+  }
+
+  &:focus {
+    border: 1px solid var(--black);
+  }
+}
+
+.optionBox {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--grey-2);
+  &::placeholder {
+    color: var(--grey);
+  }
+}
+
+.optionList {
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.hidden {
+  visibility: hidden;
+}
