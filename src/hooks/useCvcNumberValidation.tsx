@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 
-const useCvcNumberValidation = (dispatch: (action: { type: "SET_CVC_NUMBER"; value: string }) => void) => {
+const useCvcNumberValidation = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleChange = (v: string) => {
+  const validateInputType = (v: string) => {
     if (/^[0-9]*$/.test(v)) {
-      dispatch({ type: "SET_CVC_NUMBER", value: v });
-
       setError(false);
-      return;
+      return true;
     }
 
     setError(true);
     setErrorMessage("숫자만 입력해 주세요.");
+    return false;
   };
 
-  return { error, errorMessage, handleChange };
+  return { error, errorMessage, validateInputType };
 };
 
 export default useCvcNumberValidation;

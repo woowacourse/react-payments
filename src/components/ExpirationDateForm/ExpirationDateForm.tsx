@@ -6,8 +6,21 @@ import { ExpirationDateStateType } from "../../types/CardInformationType";
 import useExpirationDateValidation from "../../hooks/useExpirationDateValidation";
 
 const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
-  const { monthError, yearError, errorMessage, handleChangeMonth, handleChangeYear } =
-    useExpirationDateValidation(dispatch);
+  const { error, errorMessage, validateInputType, validateMonth } = useExpirationDateValidation();
+
+  const handleChangeMonth = (v: string) => {
+    if (validateInputType(v, 0)) {
+      validateMonth(v);
+      dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v });
+      return;
+    }
+  };
+
+  const handleChangeYear = (v: string) => {
+    if (validateInputType(v, 1)) {
+      dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v });
+    }
+  };
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -24,17 +37,17 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
             value={expirationDateState[0]}
             setValue={(v) => handleChangeMonth(v)}
             maxLength={2}
-            error={monthError}
+            error={error[0]}
           ></Input>
           <Input
             placeholder="YY"
             value={expirationDateState[1]}
             setValue={(v) => handleChangeYear(v)}
             maxLength={2}
-            error={yearError}
+            error={error[1]}
           ></Input>
         </div>
-        <div css={errorTextWrapperStyle(monthError || yearError)}>
+        <div css={errorTextWrapperStyle(error[0] || error[1])}>
           <Text type="error" text={errorMessage} />
         </div>
       </div>

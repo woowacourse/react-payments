@@ -5,12 +5,21 @@ import Text from "../Text/Text";
 import { CvcNumberStateType } from "../../types/CardInformationType";
 import useCvcNumberValidation from "../../hooks/useCvcNumberValidation";
 
+// import cvcNumber from "./CvcNumberData";
+
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
-  const { error, errorMessage, handleChange } = useCvcNumberValidation(dispatch);
+  const { error, errorMessage, validateInputType } = useCvcNumberValidation();
+
+  const handleChange = (value: string) => {
+    if (validateInputType(value)) {
+      dispatch({ type: "SET_CVC_NUMBER", value: value });
+    }
+  };
+
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
-        <Text type="title" text={"CVC 번호를 입력해 주세요"} />
+        <Text type="title" text={"CVC"} />
         <Text type="description" text={""} />
       </div>
 

@@ -6,7 +6,13 @@ import { UniqueNumberStateType } from "../../types/CardInformationType";
 import useUniqueNumberValidation from "../../hooks/useUniqueNumberValidation";
 
 const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
-  const { error, errorMessage, handleChange } = useUniqueNumberValidation(dispatch);
+  const { error, errorMessage, validateInputType } = useUniqueNumberValidation(dispatch);
+
+  const handleChange = (v: string, index: number) => {
+    if (validateInputType(v, index)) {
+      dispatch({ type: "SET_UNIQUE_NUMBER", index, value: v });
+    }
+  };
 
   return (
     <div css={FormSectionWrapperStyle}>
