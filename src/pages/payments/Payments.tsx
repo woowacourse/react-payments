@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
+import {
+  CARD_TYPE,
+  CardType,
+} from '../../components/features/payments/config/card';
 import {
   CardNumberInputType,
   CVCInputValueType,
   ExpirationDateInputType,
-} from '../../config/inputField';
-import { useState } from 'react';
-import { CARD_TYPE, CardType } from '../../config/card';
-import CardPreview from '../../CardPreviw/CardPreview';
-import InputSection from '../../InputSection';
-import CardNumberInputField from '../../InputField/CardNumberInputField';
-import ExpirationDateInputField from '../../InputField/ExpirationDateInputField';
-import CVCInputField from '../../InputField/CVCInputField';
+} from '../../components/features/payments/config/inputField';
+import CardNumberInputField from '../../components/features/payments/InputField/CardNumberInputField';
+import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
+import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
+import InputSection from '../../components/features/payments/InputSection/InputSection';
 
 function Payments() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<

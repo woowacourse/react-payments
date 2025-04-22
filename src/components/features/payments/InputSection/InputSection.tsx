@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StrictPropsWithChildren } from './types/props';
+import { StrictPropsWithChildren } from '../../../../types/props';
 
 interface InputSectionProps {
   title: string;

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import NotoSansKR from '../fonts/NotoSansKR-VariableFont_wght.ttf';
-import Inter from '../fonts/Inter-VariableFont_opsz,wght.ttf';
+import Inter from '/fonts/Inter-VariableFont_opsz,wght.ttf';
+import NotoSansKR from '/fonts/NotoSansKR-VariableFont_wght.ttf';
 
 const GlobalStyle = createGlobalStyle`
   body {

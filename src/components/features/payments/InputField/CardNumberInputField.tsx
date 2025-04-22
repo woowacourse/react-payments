@@ -5,8 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import BaseInputField from '../BaseInputField';
-import Input from '../Input';
+import BaseInputField from '../../../common/BaseInputField/BaseInputField';
+import Input from '../../../common/Input/Input';
 import { CARD_NUMBER, CARD_TYPE, CardType } from '../config/card';
 import { ERROR_TYPE, ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import {
