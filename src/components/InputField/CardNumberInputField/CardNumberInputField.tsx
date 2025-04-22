@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
