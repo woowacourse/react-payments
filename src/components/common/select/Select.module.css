@@ -18,6 +18,10 @@
   &:focus {
     border: 1px solid var(--black);
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .optionBox {
@@ -33,6 +37,10 @@
 .optionList {
   width: 100%;
   padding: 8px 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .hidden {
