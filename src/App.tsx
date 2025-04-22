@@ -8,6 +8,8 @@ import useCardExpirationDate from '@hooks/useCardExpirationDate';
 import CardCompanySelectSection from './components/SelectSection/CardCompanySelectSection';
 import { useState } from 'react';
 import useError from './hooks/useError';
+import ConfirmButton from './components/common/ComfirmButton/ConfirmButton';
+import buttonStyle from './css/button.module.css';
 
 function App() {
   const {
@@ -40,6 +42,7 @@ function App() {
           cardExpirationDate={cardExpirationDate}
           cardCompany={cardCompany}
         />
+
         <div className={styles.cardForm}>
           <CardCompanySelectSection
             cardCompany={cardCompany}
@@ -64,6 +67,12 @@ function App() {
           />
           <CardCVCNumberInputSection />
         </div>
+        <ConfirmButton
+          type="submit"
+          text="확인"
+          onClick={() => {}}
+          className={buttonStyle.cardConfirm}
+        />
       </div>
     </>
   );
