@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputLabels from '../common/InputLabels';
+import FormLabel from '../common/FormLabel';
 import InputTexts from '../common/InputTexts';
 
 export interface CVCNumbersViewProps {
@@ -18,7 +18,7 @@ const CVCNumbersView = ({
 }: CVCNumbersViewProps) => {
   return (
     <Container data-testid='cvcnumbers-component'>
-      <InputLabels title='CVC 번호를 입력해 주세요' />
+      <FormLabel title='CVC 번호를 입력해 주세요' />
       <InputTexts
         label='CVC'
         placeholder={['123']}
