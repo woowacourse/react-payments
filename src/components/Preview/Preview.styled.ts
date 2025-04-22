@@ -1,4 +1,3 @@
-import PreviewImg from "/card-preview.svg";
 import styled from "styled-components";
 import { CARD_IMAGE, CardImageType } from "../../constants/constants";
 
@@ -7,29 +6,25 @@ export const PreviewContainerCSS = styled.div`
   height: 180px;
   display: flex;
   justify-content: center;
-  padding-bottom: 30px;
 `;
 
 export const PreviewCSS = styled.div`
-  background: no-repeat center url("${PreviewImg}");
-  background-size: cover;
+  background-color: black;
   width: 230px;
   height: 180px;
 
   color: ${({ theme }) => theme.colors.white};
   font-size: ${({ theme }) => theme.fontSize.large};
   letter-spacing: 2px;
+  border-radius: 8px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 0 25px;
   gap: 10px;
-  position: relative;
 `;
 
 export const CardNumbersGroupCSS = styled.div`
   display: flex;
+  margin-top: 20px;
   gap: 7px;
 `;
 
@@ -39,7 +34,18 @@ export const CardTypeCSS = styled.div<{ $cardType: CardImageType }>`
   width: 44px;
   height: 30px;
   border-radius: 4px;
-  position: absolute;
-  right: 25px;
-  top: 10px;
+`;
+
+export const LogoCSS = styled.div`
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const ICChipCSS = styled.div`
+  background-color: #ddcd78;
+  border-radius: 4px;
+  width: 44px;
+  height: 25px;
 `;

@@ -3,6 +3,8 @@ import { useCard } from "../../hooks/useCard";
 import {
   CardNumbersGroupCSS,
   CardTypeCSS,
+  ICChipCSS,
+  LogoCSS,
   PreviewContainerCSS,
   PreviewCSS,
 } from "./Preview.styled";
@@ -24,7 +26,10 @@ function Preview() {
   return (
     <PreviewContainerCSS>
       <PreviewCSS>
-        {cardImageType !== null && <CardTypeCSS $cardType={cardImageType} />}
+        <LogoCSS>
+          <ICChipCSS />
+          {cardImageType !== null && <CardTypeCSS $cardType={cardImageType} />}
+        </LogoCSS>
         <CardNumbersGroupCSS>
           <span>{cardNumbers.first}</span>
           <span>{cardNumbers.second}</span>
