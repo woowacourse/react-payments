@@ -5,6 +5,7 @@ const meta = {
   title: "Component/Dropdown",
   component: Dropdown,
   args: {
+    placeholder: "개노잼 노라라",
     itemList: ["도도", "동아리", "잼잼", "개노잼"],
   },
 } satisfies Meta<typeof Dropdown>;
