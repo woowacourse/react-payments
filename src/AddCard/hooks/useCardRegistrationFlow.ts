@@ -1,91 +1,98 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import useControlledCardNumber from "../components/AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
 import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
+import useControlledSelectedCardBrand from "../components/AddCardForm/components/CardBrand/hooks/useControlledSelectCardBrand";
 
-export type FlowStep = "CARD_NUMBER" | "EXPIRE_DATE" | "CVC" | "COMPLETE";
+export type FlowStep =
+  | "CARD_NUMBER"
+  | "CARD_BRAND"
+  | "EXPIRE_DATE"
+  | "CVC"
+  | "COMPLETE";
 
-const STEP_ORDER: FlowStep[] = [
+export const STEP_ORDER: FlowStep[] = [
   "CARD_NUMBER",
+  "CARD_BRAND",
   "EXPIRE_DATE",
   "CVC",
   "COMPLETE",
 ];
 
-const validators: Record<
-  Exclude<FlowStep, "COMPLETE">,
-  (s: Slices) => boolean
-> = {
-  CARD_NUMBER: ({ card }) =>
+type Slices = {
+  card: ReturnType<typeof useControlledCardNumber>;
+  brand: ReturnType<typeof useControlledSelectedCardBrand>;
+  expire: ReturnType<typeof useControlledExpireDate>;
+  cvc: ReturnType<typeof useControlledCVC>;
+};
+
+export const validators = [
+  ({ card }: Slices) =>
     Object.values(card.cardNumberState).every(
       ({ value, errorMessage }) => !errorMessage && value.length === 4
     ),
-  EXPIRE_DATE: ({ expire }) =>
+
+  ({ brand }: Slices) => {
+    return brand.selectedBrand != null;
+  },
+
+  ({ expire }: Slices) =>
     Object.values(expire.expireDate).every(
       ({ value, errorMessage }) => !errorMessage && value.length === 2
     ),
-  CVC: ({ cvc }) =>
+  // CVC
+  ({ cvc }: Slices) =>
     !cvc.CVCState.errorMessage && cvc.CVCState.value.length === 3,
-};
-
-const isComplete = (s: Slices) =>
-  ["CARD_NUMBER", "EXPIRE_DATE", "CVC"].every((k) =>
-    validators[k as keyof typeof validators](s)
-  );
-
-const firstInvalidStep = (s: Slices): FlowStep =>
-  (STEP_ORDER.find(
-    (k) => k !== "COMPLETE" && !validators[k as keyof typeof validators](s)
-  ) ?? "CARD_NUMBER") as FlowStep;
-
-const nextStep = (step: FlowStep): FlowStep =>
-  STEP_ORDER[Math.min(STEP_ORDER.indexOf(step) + 1, STEP_ORDER.length - 1)];
-
-type CardSlice = ReturnType<typeof useControlledCardNumber>;
-type ExpireSlice = ReturnType<typeof useControlledExpireDate>;
-type CVCSlice = ReturnType<typeof useControlledCVC>;
-type Slices = { card: CardSlice; expire: ExpireSlice; cvc: CVCSlice };
+];
 
 const useCardRegistrationFlow = () => {
   const card = useControlledCardNumber();
+  const brand = useControlledSelectedCardBrand();
   const expire = useControlledExpireDate();
   const cvc = useControlledCVC();
 
-  const slices: Slices = { card, expire, cvc };
+  const slices = { card, brand, expire, cvc };
 
-  const [currentStep, setStep] = useState<FlowStep>("CARD_NUMBER");
+  const { stepIndex, allValid } = useMemo(() => {
+    let firstFail = validators.length;
+    let validAll = true;
 
-  useEffect(() => {
-    const validNow =
-      currentStep === "COMPLETE"
-        ? isComplete(slices)
-        : validators[currentStep as keyof typeof validators](slices);
+    validators.forEach((fn, i) => {
+      const result = fn(slices);
+      if (result === false) {
+        validAll = false;
+        if (firstFail === validators.length) {
+          firstFail = i;
+        }
+      }
+    });
 
-    if (validNow) {
-      if (currentStep !== "COMPLETE") setStep(nextStep(currentStep));
-    } else if (currentStep === "COMPLETE") {
-      setStep(firstInvalidStep(slices));
-    }
-  }, [currentStep, card.cardNumberState, expire.expireDate, cvc.CVCState]);
+    return { stepIndex: firstFail, allValid: validAll };
+  }, [
+    card.cardNumberState,
+    brand.selectedBrand,
+    expire.expireDate,
+    cvc.CVCState,
+  ]);
 
-  const previewState = useMemo(
-    () => ({
-      cardNumberState: card.cardNumberState,
-      expireDate: expire.expireDate,
-    }),
-    [card.cardNumberState, expire.expireDate]
-  );
-
-  const isStepValid = (step: FlowStep) =>
-    step === "COMPLETE"
-      ? isComplete(slices)
-      : validators[step as keyof typeof validators](slices);
+  // currentStep 결정
+  let currentStep: FlowStep;
+  if (stepIndex < STEP_ORDER.length) {
+    currentStep = STEP_ORDER[stepIndex];
+  } else {
+    currentStep = STEP_ORDER[STEP_ORDER.length - 1];
+  }
 
   return {
-    state: { ...card, ...expire, ...cvc },
-    previewState,
+    state: { ...card, ...brand, ...expire, ...cvc },
+    previewState: {
+      cardNumberState: card.cardNumberState,
+      selectedBrand: brand.selectedBrand,
+      expireDate: expire.expireDate,
+    },
     currentStep,
-    isStepValid,
+    allValid,
   };
 };
+
 export default useCardRegistrationFlow;

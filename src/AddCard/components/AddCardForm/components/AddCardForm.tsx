@@ -7,14 +7,18 @@ import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
 } from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
 import CVCInputs, { type CVCInputsProps } from "./CVC/components/CVCInputs";
-import { FlowStep } from "../../../hooks/useCardRegistrationFlow";
+import CardBrandDropdown, {
+  type BrandDropdownProps,
+} from "./CardBrand/components/CardBrandDropdown";
+import { FlowStep, STEP_ORDER } from "../../../hooks/useCardRegistrationFlow";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
     CardExpireDateInputsProps &
-    CVCInputsProps;
+    CVCInputsProps &
+    BrandDropdownProps;
+
   currentStep: FlowStep;
-  isStepValid: (step: FlowStep) => boolean;
 }
 
 function AddCardForm({
@@ -27,9 +31,13 @@ function AddCardForm({
     handleExpireMonthBlur,
     CVCState,
     handleCVCChange,
+    selectedBrand,
+    setSelectedBrand,
   },
   currentStep,
 }: AddCardFormProps) {
+  const currentIndex = STEP_ORDER.indexOf(currentStep);
+
   return (
     <form className={styles.form}>
       <CardInputBox
@@ -42,7 +50,21 @@ function AddCardForm({
           />
         }
       />
-      {currentStep !== "CARD_NUMBER" && (
+
+      {currentIndex >= 1 && (
+        <CardInputBox
+          title="카드사를 선택해 주세요"
+          guideText="현재 국내 카드사만 지원합니다."
+          InputComponents={
+            <CardBrandDropdown
+              selectedBrand={selectedBrand}
+              setSelectedBrand={setSelectedBrand}
+            />
+          }
+        />
+      )}
+
+      {currentIndex >= 2 && (
         <CardInputBox
           title="카드 유효기간을 입력해 주세요"
           guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -56,7 +78,8 @@ function AddCardForm({
           }
         />
       )}
-      {(currentStep === "CVC" || currentStep === "COMPLETE") && (
+
+      {currentIndex >= 3 && (
         <CardInputBox
           title="CVC 번호를 입력해 주세요"
           InputComponents={
