@@ -11,6 +11,7 @@ import CVCInputs from "../component/formSections/cvcInputs/CVCInputs";
 import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
 import CardBrandSelects from "../component/formSections/cardBrandSelects";
 import CardPasswordInputs from "../component/formSections/cardPasswordInputs";
+import DESCRIPTION_TEXT from "../constants/descriptionText";
 
 const AddCard = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
@@ -36,23 +37,28 @@ const AddCard = () => {
       />
       <Form>
         <Description
-          headText="비밀번호를 입력해 주세요"
-          detailText="앞의 2자리를 입력해주세요"
+          headText={DESCRIPTION_TEXT.password.headText}
+          detailText={DESCRIPTION_TEXT.password.detailText}
         />
         <CardPasswordInputs
           errorMessage={errorMessages.password}
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
         />
-        <Description headText="CVC 번호를 입력해 주세요" />
+
+        <Description
+          headText={DESCRIPTION_TEXT.CVC.headText}
+          detailText={DESCRIPTION_TEXT.CVC.detailText}
+        />
         <CVCInputs
           errorMessage={errorMessages.CVC}
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
         />
+
         <Description
-          headText="카드 유효기간을 입력해 주세요"
-          detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
+          headText={DESCRIPTION_TEXT.expirationDate.headText}
+          detailText={DESCRIPTION_TEXT.expirationDate.detailText}
         />
         <ExpirationDateInputs
           errorMessage={getFirstErrorMessage([
@@ -62,14 +68,16 @@ const AddCard = () => {
           handleErrorMessages={handleErrorMessages}
           setCardInput={setCardInput}
         />
+
         <Description
-          headText="카드사를 선택해 주세요"
-          detailText="현재 국내 카드사만 가능합니다."
+          headText={DESCRIPTION_TEXT.cardBrand.headText}
+          detailText={DESCRIPTION_TEXT.cardBrand.detailText}
         />
         <CardBrandSelects />
+
         <Description
-          headText="결제할 카드 번호를 입력해 주세요."
-          detailText="본인 명의의 카드만 결제 가능합니다."
+          headText={DESCRIPTION_TEXT.cardNumber.headText}
+          detailText={DESCRIPTION_TEXT.cardNumber.detailText}
         />
         <CardNumberInputs
           errorMessage={getFirstErrorMessage([

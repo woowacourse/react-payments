@@ -37,7 +37,7 @@ export const validateCardExpirationDateYY = (expirationDate: string) => {
 export const validateCardCVC = (cvc: string) => {
   if (cvc.length === 0) return;
 
-  if (Number.isNaN(cvc)) {
+  if (Number.isNaN(Number(cvc))) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   return "";

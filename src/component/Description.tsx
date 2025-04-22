@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 interface DescriptionProps {
   headText: string;
-  detailText?: string;
+  detailText: string;
 }
 
 const Description = ({ headText, detailText }: DescriptionProps) => {
   return (
     <Container>
       <HeaderText>{headText}</HeaderText>
-      <DetailText>{detailText}</DetailText>
+      {detailText.length !== 0 && <DetailText>{detailText}</DetailText>}
     </Container>
   );
 };
