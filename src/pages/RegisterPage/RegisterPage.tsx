@@ -1,4 +1,12 @@
-import { CardCompany, CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
+import {
+  CardCompany,
+  CardCVCNumber,
+  CardExpirationDate,
+  CardNumber,
+  CardPassword,
+  CardPreview,
+  Spacing,
+} from '@/components';
 import { CardCompanyType, DateType, SequenceType } from '@/types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +18,10 @@ import { CARD_COMPANIES } from '@/constants';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+
+  // 비밀번호
+  const [cardPassword, setCardPassword] = useState<string>('');
+  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
 
   // 카드 번호
   const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
@@ -77,8 +89,14 @@ export default function RegisterPage() {
           isFlipped={isCardFlipped}
         />
       </S.CardPreviewWrapper>
-      <Spacing size={60} />
+      <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
+        <CardPassword
+          cardPassword={cardPassword}
+          setCardPassword={setCardPassword}
+          cardPasswordErrorMessage={cardPasswordErrorMessage}
+          setCardPasswordErrorMessage={setCardPasswordErrorMessage}
+        />
         <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
         <CardNumber
           cardNumber={cardNumber}

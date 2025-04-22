@@ -3,6 +3,9 @@ export const MASTER_CARD_CONDITIONS = ['51', '52', '53', '54', '55'];
 export const MASKING = '·';
 
 export const ERROR_MESSAGE = {
+  cardPassword: {
+    length: '비밀번호는 2자리 이상이어야 합니다.',
+  },
   cardNumber: {
     number: '카드 번호는 오로지 숫자만 입력 가능합니다.',
     length: '카드 번호는 4자리씩 입력해주세요.',

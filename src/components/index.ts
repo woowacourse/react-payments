@@ -8,3 +8,4 @@ export { default as CardExpirationDate } from './CardExpirationDate/CardExpirati
 export { default as CardCVCNumber } from './CardCVCNumber/CardCVCNumber';
 export { default as CardPreview } from './CardPreview/CardPreview';
 export { default as CardCompany } from './CardCompany/CardCompany';
+export { default as CardPassword } from './CardPassword/CardPassword';

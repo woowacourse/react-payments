@@ -1,5 +1,5 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
-import { Dispatch, SetStateAction, useRef, KeyboardEvent } from 'react';
+import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
 import { SequenceType } from '@/types';
 import * as S from './CardNumber.styles';
@@ -24,51 +24,29 @@ export default function CardNumber({
   cardNumberErrorMessage,
   setCardNumberErrorMessage,
 }: CardNumberProps) {
-  const inputRefs = {
-    first: useRef<HTMLInputElement>(null),
-    second: useRef<HTMLInputElement>(null),
-    third: useRef<HTMLInputElement>(null),
-    fourth: useRef<HTMLInputElement>(null),
-  };
-
-  const nextSequence: Record<SequenceType, SequenceType | null> = {
-    first: 'second',
-    second: 'third',
-    third: 'fourth',
-    fourth: null,
-  };
-
-  const prevSequence: Record<SequenceType, SequenceType | null> = {
-    first: null,
-    second: 'first',
-    third: 'second',
-    fourth: 'third',
-  };
-
   const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
     if (!checkAllNumber(value)) return;
 
-    setCardNumber({ ...cardNumber, [sequence]: value });
+    setCardNumber((prev) => ({ ...prev, [sequence]: value }));
 
     if (value.length < 4) {
-      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: ERROR_MESSAGE.cardNumber.length });
+      setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: ERROR_MESSAGE.cardNumber.length }));
     } else {
-      setCardNumberErrorMessage({ ...cardNumberErrorMessage, [sequence]: '' });
+      setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: '' }));
 
-      const next = nextSequence[sequence];
-      if (next && inputRefs[next]?.current) {
-        inputRefs[next].current?.focus();
+      const currentSequenceNumber = Number(document.activeElement?.getAttribute('data-sequence'));
+      const nextInput = document.querySelector(
+        `input[data-sequence="${currentSequenceNumber + 1}"]`,
+      ) as HTMLInputElement;
+      if (nextInput) {
+        nextInput.focus();
       }
     }
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, sequence: SequenceType) => {
-    if (event.key === 'Backspace' && cardNumber[sequence] === '') {
-      const prev = prevSequence[sequence];
-      if (prev && inputRefs[prev]?.current) {
-        inputRefs[prev].current?.focus();
-      }
-    }
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, sequence: SequenceType) => {
+    const { value } = event.target;
+    handleInputChange({ value, sequence });
   };
 
   return (
@@ -82,57 +60,41 @@ export default function CardNumber({
           placeholder="1234"
           maxLength={4}
           value={cardNumber.first}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'first',
-            })
-          }
-          onKeyDown={(event) => handleKeyDown(event, 'first')}
+          onChange={(event) => handleChange(event, 'first')}
           isError={cardNumberErrorMessage.first !== ''}
-          ref={inputRefs.first}
+          aria-label="카드 번호 첫 번째 4자리"
+          inputMode="numeric"
+          data-sequence="1"
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.second}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'second',
-            })
-          }
-          onKeyDown={(event) => handleKeyDown(event, 'second')}
+          onChange={(event) => handleChange(event, 'second')}
           isError={cardNumberErrorMessage.second !== ''}
-          ref={inputRefs.second}
+          aria-label="카드 번호 두 번째 4자리"
+          inputMode="numeric"
+          data-sequence="2"
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.third}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'third',
-            })
-          }
-          onKeyDown={(event) => handleKeyDown(event, 'third')}
+          onChange={(event) => handleChange(event, 'third')}
           isError={cardNumberErrorMessage.third !== ''}
-          ref={inputRefs.third}
+          aria-label="카드 번호 세 번째 4자리"
+          inputMode="numeric"
+          data-sequence="3"
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.fourth}
-          onChange={(event) =>
-            handleInputChange({
-              value: event.target.value,
-              sequence: 'fourth',
-            })
-          }
-          onKeyDown={(event) => handleKeyDown(event, 'fourth')}
+          onChange={(event) => handleChange(event, 'fourth')}
           isError={cardNumberErrorMessage.fourth !== ''}
-          ref={inputRefs.fourth}
+          aria-label="카드 번호 마지막 4자리"
+          inputMode="numeric"
+          data-sequence="4"
         />
       </S.InputWrapper>
       <Spacing size={8} />
