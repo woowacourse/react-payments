@@ -16,3 +16,5 @@ export interface CardExpirationDateError
   extends Record<keyof CardExpirationDate, boolean> {}
 
 export type CardCVC = number | null;
+
+export type NonEmptyArray<T> = readonly [T, ...T[]];
