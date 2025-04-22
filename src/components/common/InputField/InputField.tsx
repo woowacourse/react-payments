@@ -20,7 +20,7 @@ const InputField = ({
       name={name}
       onChange={onChange}
       onBlur={onBlur}
-      className={`${styles.field} ${isError ? styles.error : styles.basic}`}
+      className={`${styles.input} ${isError ? styles.error : styles.basic}`}
       placeholder={placeholder}
       {...rest}
     />

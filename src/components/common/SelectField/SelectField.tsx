@@ -3,6 +3,7 @@ import styles from '../InputField/InputField.module.css';
 
 type SelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
   isError?: boolean;
+  placeholder?: string;
   options: { label: string; value: string }[];
 };
 
@@ -10,20 +11,24 @@ const SelectField = ({
   name,
   onChange,
   onBlur,
-  value,
   isError = false,
+  placeholder,
   options,
   ...rest
 }: SelectFieldProps) => {
   return (
     <select
       name={name}
-      value={value}
       onChange={onChange}
       onBlur={onBlur}
-      className={`${styles.field} ${isError ? styles.error : styles.basic}`}
+      className={`${styles.select} ${isError ? styles.error : styles.basic}`}
       {...rest}
     >
+      {
+        <option value="" disabled selected hidden>
+          {placeholder}
+        </option>
+      }
       {options.map(({ label, value }) => (
         <option key={value} value={value}>
           {label}

@@ -14,7 +14,7 @@
   }
 }
 
-.field {
+.input {
   height: 32px;
   color: black;
   font-size: 16px;
@@ -25,6 +25,16 @@
   &::placeholder {
     color: #acacac;
   }
+}
+
+.select {
+  /* ///.input 포함 */
+  height: 38px;
+  color: black;
+  font-size: 16px;
+  min-width: 0;
+  border-radius: 5px;
+  flex-grow: 1;
 }
 
 /* 가운데 정렬  */
