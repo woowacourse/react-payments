@@ -71,42 +71,29 @@
 
 ## 디렉터리 구조
 
-src/utils
-src/constants
-src/styles
-src/components
-
-src/components/abc/constants
-src/components/abc/styles
-
-Dom 트리구조와 비슷한 디렉터리 설계
-src/components/paymentsLayout/paymentInput/
-src/components/common
-
-## 컴포넌트 분리
-
 ```js
+
+
 src/
 ├── components/
-│   ├── common/
-│   │   ├── input.ts               # validator 콜백을 받아서 input 하나를 검증
-│   │   └── inputForm.ts          # input 개수만큼 input 생성 + validator 전달
-│   │
-│   ├── paymentsInputPage/
-│   │   ├── paymentsInputPage.ts  # 카드 정보 입력 페이지의 메인 컴포넌트
-│   │   │
-│   │   ├── cardInputForm/        # 카드 입력 폼 영역
-│   │   │   ├── cardInputForm.ts          # 카드 번호, 유효기간, CVC를 포함하는 폼 컴포넌트
-│   │   │   ├── cardNumberInput/
-│   │   │   │   └── cardNumberInput.ts    # 카드 번호 입력 필드
-│   │   │   ├── cardExpirationDateInput/
-│   │   │   │   └── cardExpirationDateInput.ts  # 유효기간 입력 필드
-│   │   │   └── cardCVCInput/
-│   │   │       └── cardCVCInput.ts       # CVC 입력 필드
-│   │   │
-│   │   └── cardPreview/          # 카드 미리보기 영역
-│   │       └── cardPreview.ts    # 카드 정보 시각화 (title, description, label, inputs)
+│ ├── common/
+│ │ └── inputForm/
+│ │ ├── InputForm.tsx
+│ │ └── input/
+│ │ └── Input.tsx
+│
+│ ├── paymentInputPage/
+│ │ ├── cardInputForm/
+│ │ │ └── cardInput/
+│ │ │ ├── CardCVCInput.tsx
+│ │ │ ├── CardExperienceInput.tsx
+│ │ │ └── CardNumberInput.tsx
+│ │ └── cardPreview/
+│ │ └── CardPreview.tsx
+
 ```
+
+## 컴포넌트 분리
 
 ## 상태 관리
 

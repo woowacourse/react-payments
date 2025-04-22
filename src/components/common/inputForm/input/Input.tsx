@@ -1,21 +1,15 @@
-import { ComponentProps, Dispatch, SetStateAction, useState } from "react";
+import { ComponentProps } from "react";
 import styles from "./Input.module.css";
 
-export interface InputProps extends Omit<ComponentProps<"input">, "onChange"> {
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    setState: Dispatch<SetStateAction<boolean>>
-  ) => void;
+export interface InputProps extends ComponentProps<"input"> {
+  isValid?: boolean;
 }
 
-function Input({ onChange, ...props }: InputProps) {
-  const [isValid, setIsValid] = useState<boolean>(true);
-
+function Input({ isValid, ...props }: InputProps) {
   return (
     <input
       {...props}
-      onChange={(e) => onChange(e, setIsValid)}
-      className={`${styles.input} ${!isValid && styles.isNotValid} tx-md`}
+      className={`${styles.input} ${isValid ? "" : styles.isNotValid} tx-md`}
     />
   );
 }

@@ -6,59 +6,72 @@ import {
   validateExpirationDateMonth,
   validateExpirationDateYear,
 } from "./validator/validateCardInput";
-import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 function CardExpirationDateInput({
   setExpirationDate,
 }: {
   setExpirationDate: Dispatch<SetStateAction<string[]>>;
 }) {
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
-  const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+  const [expiration, setExpiration] = useState({
+    month: "",
+    year: "",
+    feedbackMessage: {
+      month: "",
+      year: "",
+    },
+  });
 
-  function onChangeHandler(
-    e: React.ChangeEvent<HTMLInputElement>,
-    setIsValid: (state: boolean) => void
-  ) {
-    if (!monthRef.current || !yearRef.current) return;
-    const month = monthRef.current.value;
-    const year = yearRef.current.value;
+  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
 
-    const field = e.target.name === "month" ? "MONTH" : "YEAR";
-    const validator =
-      field === "MONTH"
-        ? validateExpirationDateMonth(month, year)
-        : validateExpirationDateYear(month, year);
+    const next = {
+      ...expiration,
+      [name]: value,
+    };
+    const nextMonth = next.month;
+    const nextYear = next.year;
 
-    const errorMessage = getFirstErrorMessage(validator, field);
+    const monthValidator = validateExpirationDateMonth(nextMonth, nextYear);
+    const yearValidator = validateExpirationDateYear(nextMonth, nextYear);
 
-    if (errorMessage) {
-      setFeedbackMessage(errorMessage);
-      setIsValid(false);
-      return;
-    }
+    const monthError = getExpirationFirstErrorMessage(monthValidator, "MONTH");
+    const yearError = getExpirationFirstErrorMessage(yearValidator, "YEAR");
 
-    setExpirationDate([month, year]);
-    setFeedbackMessage("");
-    setIsValid(true);
+    setExpiration({
+      month: nextMonth,
+      year: nextYear,
+      feedbackMessage: {
+        month: monthError,
+        year: yearError,
+      },
+    });
+
+    setExpirationDate([nextMonth, nextYear]);
   }
 
   return (
     <InputForm
-      feedbackMessage={feedbackMessage}
+      feedbackMessage={
+        expiration.feedbackMessage.month || expiration.feedbackMessage.year
+      }
       title="카드 유효기간을 입력해 주세요."
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
     >
-      {["month", "year"].map((name) => {
+      {["MONTH", "YEAR"].map((field) => {
+        const name = field.toLowerCase() as "month" | "year";
+        const isValid = expiration.feedbackMessage[name] === "";
+
         return (
           <Input
-            ref={name === "month" ? monthRef : yearRef}
+            key={name}
             type="tel"
             name={name}
-            placeholder={name === "month" ? "MM" : "YY"}
-            onChange={(e, setIsValid) => onChangeHandler(e, setIsValid)}
+            value={expiration[name]}
+            isValid={isValid}
+            placeholder={field === "MONTH" ? "MM" : "YY"}
+            onChange={onChangeHandler}
             maxLength={CARD_INFO.EXPIRATION_DATE_LENGTH_PART}
           />
         );
