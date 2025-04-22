@@ -11,5 +11,8 @@ export const InputCSS = styled.input<{ $isError?: boolean }>`
     props.$isError &&
     css`
       border-color: #ff3d3d;
+      &:focus {
+        outline: none;
+      }
     `}
 `;
