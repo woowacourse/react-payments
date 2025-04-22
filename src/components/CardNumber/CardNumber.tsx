@@ -1,39 +1,22 @@
-import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
-import { Dispatch, SetStateAction, ChangeEvent } from 'react';
-import { ERROR_MESSAGE } from '@/constants';
+import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { SequenceType } from '@/types';
-import * as S from './CardNumber.styles';
 import { getErrorMessageFromObject } from '@/utils/message';
 import { checkAllNumber } from '@/utils/validation';
+import { ChangeEvent } from 'react';
+import * as S from './CardNumber.styles';
 
 interface CardNumberProps {
   cardNumber: Record<SequenceType, string>;
-  setCardNumber: Dispatch<SetStateAction<Record<SequenceType, string>>>;
   cardNumberErrorMessage: Record<SequenceType, string>;
-  setCardNumberErrorMessage: Dispatch<SetStateAction<Record<SequenceType, string>>>;
+  register: any;
 }
 
-interface HandleInputChangeParams {
-  sequence: SequenceType;
-  value: string;
-}
-
-export default function CardNumber({
-  cardNumber,
-  setCardNumber,
-  cardNumberErrorMessage,
-  setCardNumberErrorMessage,
-}: CardNumberProps) {
-  const handleInputChange = ({ value, sequence }: HandleInputChangeParams) => {
+export default function CardNumber({ register, cardNumber, cardNumberErrorMessage }: CardNumberProps) {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
     if (!checkAllNumber(value)) return;
 
-    setCardNumber((prev) => ({ ...prev, [sequence]: value }));
-
-    if (value.length < 4) {
-      setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: ERROR_MESSAGE.cardNumber.length }));
-    } else {
-      setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: '' }));
-
+    if (value.length === 4) {
       const currentSequenceNumber = Number(document.activeElement?.getAttribute('data-sequence'));
       const nextInput = document.querySelector(
         `input[data-sequence="${currentSequenceNumber + 1}"]`,
@@ -42,11 +25,6 @@ export default function CardNumber({
         nextInput.focus();
       }
     }
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>, sequence: SequenceType) => {
-    const { value } = event.target;
-    handleInputChange({ value, sequence });
   };
 
   return (
@@ -60,41 +38,49 @@ export default function CardNumber({
           placeholder="1234"
           maxLength={4}
           value={cardNumber.first}
-          onChange={(event) => handleChange(event, 'first')}
           isError={cardNumberErrorMessage.first !== ''}
           aria-label="카드 번호 첫 번째 4자리"
           inputMode="numeric"
           data-sequence="1"
+          {...register('first', {
+            onChange: handleInputChange,
+          })}
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.second}
-          onChange={(event) => handleChange(event, 'second')}
           isError={cardNumberErrorMessage.second !== ''}
           aria-label="카드 번호 두 번째 4자리"
           inputMode="numeric"
           data-sequence="2"
+          {...register('second', {
+            onChange: handleInputChange,
+          })}
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.third}
-          onChange={(event) => handleChange(event, 'third')}
           isError={cardNumberErrorMessage.third !== ''}
           aria-label="카드 번호 세 번째 4자리"
           inputMode="numeric"
           data-sequence="3"
+          {...register('third', {
+            onChange: handleInputChange,
+          })}
         />
         <Input
           placeholder="1234"
           maxLength={4}
           value={cardNumber.fourth}
-          onChange={(event) => handleChange(event, 'fourth')}
           isError={cardNumberErrorMessage.fourth !== ''}
           aria-label="카드 번호 마지막 4자리"
           inputMode="numeric"
           data-sequence="4"
+          {...register('fourth', {
+            onChange: handleInputChange,
+          })}
         />
       </S.InputWrapper>
       <Spacing size={8} />

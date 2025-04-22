@@ -14,6 +14,7 @@ import Button from '@/components/Button/Button';
 import { getCardType } from '@/App/utils';
 import * as S from './RegisterPage.styles';
 import { CARD_COMPANIES } from '@/constants';
+import useForm from '@/hooks/useForm';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -23,23 +24,44 @@ export default function RegisterPage() {
   // 현재 스텝
   const [currentStep, setCurrentStep] = useState<Step>(1);
 
+  const {
+    value: cardNumber,
+    errors: cardNumberErrors,
+    register,
+  } = useForm<Record<SequenceType, string>>({
+    defaultValues: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
+    validation: {
+      first: {
+        required: true,
+        length: 4,
+        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+      },
+      second: {
+        required: true,
+        length: 4,
+        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+      },
+      third: {
+        required: true,
+        length: 4,
+        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+      },
+      fourth: {
+        required: true,
+        length: 4,
+        errorMessage: '카드 번호는 4자리의 숫자로 입력해주세요.',
+      },
+    },
+  });
+
   // 비밀번호
   const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
-
-  // 카드 번호
-  const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<Record<SequenceType, string>>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
 
   // 카드 유효기간
   const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
@@ -156,12 +178,7 @@ export default function RegisterPage() {
         {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
 
         {currentStep >= 1 && (
-          <CardNumber
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
-            cardNumberErrorMessage={cardNumberErrorMessage}
-            setCardNumberErrorMessage={setCardNumberErrorMessage}
-          />
+          <CardNumber register={register} cardNumber={cardNumber} cardNumberErrorMessage={cardNumberErrors} />
         )}
 
         {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
