@@ -36,7 +36,7 @@ function CardValidityPeriodField({
       <InputWrapper>
         <Input
           isError={isErrorMonth}
-          type="number"
+          type="tel"
           name="cardValidityPeriod"
           id={`cardValidityPeriod-${month}`}
           value={month}
@@ -48,7 +48,7 @@ function CardValidityPeriodField({
         />
         <Input
           isError={isErrorYear}
-          type="number"
+          type="tel"
           name="cardValidityPeriod"
           id={`cardValidityPeriod-${year}`}
           value={year}

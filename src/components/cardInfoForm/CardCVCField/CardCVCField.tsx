@@ -14,7 +14,7 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
       <InputWrapper>
         <Input
           isError={isError}
-          type="number"
+          type="tel"
           name="CardCVC"
           id="CardCVC"
           value={cardCVC}
