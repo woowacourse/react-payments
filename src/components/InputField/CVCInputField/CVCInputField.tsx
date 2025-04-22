@@ -9,9 +9,11 @@ interface CVCInputFieldProps {
   setInputValue: Dispatch<SetStateAction<Record<CVCInputValueType, string>>>;
 }
 
+const MAX_CVC_LENGTH = 3;
+
 function CVCInputField({ inputValue, setInputValue }: CVCInputFieldProps) {
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= 3)
+    if (value.length <= MAX_CVC_LENGTH)
       setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
