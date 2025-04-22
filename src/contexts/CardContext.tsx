@@ -1,20 +1,20 @@
 import { createContext, ReactNode, useState } from "react";
 import {
+  CardNumbersSegmentType,
   CardNumbersState,
-  CardPositionType,
   CvcNumberState,
+  ExpirationPeriodSegmentType,
   ExpirationPeriodState,
-  PeriodPositionType,
 } from "../constants/constants";
 
 export interface CardContextType {
   cardNumbers: CardNumbersState;
-  updateCardNumber: (number: string, position: CardPositionType) => void;
+  updateCardNumber: (number: string, position: CardNumbersSegmentType) => void;
 
   expirationPeriod: ExpirationPeriodState;
   updateExpirationPeriod: (
     period: string,
-    position: PeriodPositionType
+    position: ExpirationPeriodSegmentType
   ) => void;
 
   cvcNumber: CvcNumberState;
@@ -47,7 +47,10 @@ export function CardProvider({ children }: { children: ReactNode }) {
     initialState.cvcNumber
   );
 
-  const updateCardNumber = (value: string, position: CardPositionType) => {
+  const updateCardNumber = (
+    value: string,
+    position: CardNumbersSegmentType
+  ) => {
     setCardNumbers((prevNumbers) => ({
       ...prevNumbers,
       [position]: value,
@@ -56,7 +59,7 @@ export function CardProvider({ children }: { children: ReactNode }) {
 
   const updateExpirationPeriod = (
     value: string,
-    position: PeriodPositionType
+    position: ExpirationPeriodSegmentType
   ) => {
     setExpirationPeriod((prevExpirationPeriod) => ({
       ...prevExpirationPeriod,

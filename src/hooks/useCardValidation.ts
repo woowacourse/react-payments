@@ -1,15 +1,15 @@
-import { CARD_FORM_TYPE } from "./../constants/constants";
-import { useState } from "react";
 import {
-  CardFormType,
-  CardPositionType,
-  PeriodPositionType,
-} from "../constants/constants";
+  CARD_FORM_TYPE,
+  CardNumbersSegmentType,
+  ExpirationPeriodSegmentType,
+} from "./../constants/constants";
+import { useState } from "react";
+import { CardFormType } from "../constants/constants";
 import { isNotNumber } from "../utils/validation";
 
 export interface CardValidationType {
-  cardNumbers: Record<CardPositionType, boolean>;
-  expirationPeriod: Record<PeriodPositionType, boolean>;
+  cardNumbers: Record<CardNumbersSegmentType, boolean>;
+  expirationPeriod: Record<ExpirationPeriodSegmentType, boolean>;
   cvcNumber: boolean;
   cardCompany: boolean;
 }
@@ -34,7 +34,10 @@ export function useCardValidation() {
   const [validationErrors, setValidationErrors] =
     useState<CardValidationType>(initialState);
 
-  const validateCardNumber = (value: string, position: CardPositionType) => {
+  const validateCardNumber = (
+    value: string,
+    position: CardNumbersSegmentType
+  ) => {
     setValidationErrors((prev) => ({
       ...prev,
       cardNumbers: {
@@ -46,7 +49,7 @@ export function useCardValidation() {
 
   const validateExpirationPeriod = (
     value: string,
-    position: PeriodPositionType
+    position: ExpirationPeriodSegmentType
   ) => {
     setValidationErrors((prev) => ({
       ...prev,

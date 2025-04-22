@@ -1,13 +1,13 @@
 import { ChangeEvent } from "react";
 import {
-  PERIOD_POSITION,
-  PeriodPositionType,
+  EXPIRATION_PERIOD_SEGMENT,
+  ExpirationPeriodSegmentType,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
 
-const periodPositions = Object.values(PERIOD_POSITION);
+const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
 
 const PLACEHOLDERS = {
   month: "MM",
@@ -19,7 +19,7 @@ export interface CardExpirationPeriodInputProps {
   expirationPeriodErrors: CardValidationType["expirationPeriod"];
   validateExpirationPeriod: (
     value: string,
-    position: PeriodPositionType
+    position: ExpirationPeriodSegmentType
   ) => void;
 }
 
@@ -31,7 +31,7 @@ export default function CardExpirationPeriodInput({
 
   const handleExpirationPeriodChange = (
     value: string,
-    position: PeriodPositionType
+    position: ExpirationPeriodSegmentType
   ) => {
     validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);

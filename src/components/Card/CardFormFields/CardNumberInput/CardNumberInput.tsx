@@ -1,20 +1,20 @@
 import { ChangeEvent } from "react";
 import {
-  CARD_POSITION,
-  CardPositionType,
+  CARD_NUMBERS_SEGMENT,
+  CardNumbersSegmentType,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
 import { CardValidationType } from "../../../../hooks/useCardValidation";
 
-const cardPositions = Object.values(CARD_POSITION);
+const cardPositions = Object.values(CARD_NUMBERS_SEGMENT);
 
 const PLACEHOLDERS = "1234";
 const MAX_LENGTHS = 4;
 
 export interface CardNumberInputProps {
   cardNumberErrors: CardValidationType["cardNumbers"];
-  validateCardNumber: (value: string, position: CardPositionType) => void;
+  validateCardNumber: (value: string, position: CardNumbersSegmentType) => void;
 }
 
 export default function CardNumberInput({
@@ -25,7 +25,7 @@ export default function CardNumberInput({
 
   const handleCardNumberChange = (
     value: string,
-    position: CardPositionType
+    position: CardNumbersSegmentType
   ) => {
     validateCardNumber(value, position);
     updateCardNumber(value, position);
