@@ -13,7 +13,7 @@ type Props = {
 } & CardFormFiledProps;
 
 export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: Props) => {
-  const isInvalidCardNumber = cardNumbers.some((cardNumber) => !cardNumber.isValid);
+  const isValidCardNumber = cardNumbers.every((cardNumber) => cardNumber.isValid);
 
   return (
     <CardInputLayout
@@ -41,7 +41,7 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
             height: 20px;
           `}
         >
-          {isInvalidCardNumber ? errorMessage : ''}
+          {isValidCardNumber ? '' : errorMessage}
         </Text>
       </Flex>
     </CardInputLayout>
