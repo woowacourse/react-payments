@@ -1,30 +1,12 @@
-import { ChangeEvent } from "react";
+import { InputHTMLAttributes } from "react";
 import { InputCSS } from "./Input.styled";
 
-export interface InputProps {
-  placeholder?: string;
-  maxLength: number;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input({
-  placeholder,
-  maxLength,
-  isError,
-  value,
-  onChange,
-}: InputProps) {
-  return (
-    <InputCSS
-      placeholder={placeholder}
-      maxLength={maxLength}
-      $isError={isError}
-      value={value}
-      onChange={onChange}
-    />
-  );
+function Input({ isError, ...props }: InputProps) {
+  return <InputCSS $isError={isError} {...props} />;
 }
 
 export default Input;
