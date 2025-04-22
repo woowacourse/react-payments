@@ -21,7 +21,7 @@ export default function CardCvcNumber({
   errorMessage,
 }: CardCvcNumberProps) {
   return (
-    <section className={styles["card-cvc"]}>
+    <section>
       <InputText
         inputValue={CONSTANT_CARD_CVC_NUMBER.INPUT_TITLE}
         variant="title"
