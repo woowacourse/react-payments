@@ -4,7 +4,6 @@ import PreviewCard from "./PreviewCard";
 const meta = {
   title: "MyComponent/MyPreviewCard",
   component: PreviewCard,
-  tags: ["autodocs"],
 } satisfies Meta<typeof PreviewCard>;
 
 export default meta;

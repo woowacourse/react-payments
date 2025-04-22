@@ -6,7 +6,6 @@ import { InputFieldProps } from "../../types/componentPropsType";
 const meta = {
   title: "MyComponent/MyInputField",
   component: InputField,
-  tags: ["autodocs"],
 } satisfies Meta<InputFieldProps>;
 
 export default meta;

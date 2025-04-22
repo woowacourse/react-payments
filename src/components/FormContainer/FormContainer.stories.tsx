@@ -6,7 +6,6 @@ import { FormContainerProps } from "../../types/componentPropsType";
 const meta = {
   title: "MyComponent/MyFormContainer",
   component: FormContainer,
-  tags: ["autodocs"],
 } satisfies Meta<FormContainerProps>;
 
 export default meta;

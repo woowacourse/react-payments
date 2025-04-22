@@ -6,7 +6,6 @@ import { FormSectionProps } from "../../types/componentPropsType";
 const meta = {
   title: "MyComponent/MyFormSection",
   component: FormSection,
-  tags: ["autodocs"],
 } satisfies Meta<FormSectionProps>;
 
 export default meta;

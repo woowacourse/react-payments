@@ -5,7 +5,6 @@ import { TextProps } from "../../types/componentPropsType";
 const meta = {
   title: "MyComponent/MyText",
   component: Text,
-  tags: ["autodocs"],
 } satisfies Meta<TextProps>;
 
 export default meta;
