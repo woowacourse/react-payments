@@ -6,7 +6,7 @@ import { checkAllNumber } from '@/utils/validation';
 
 interface CardPasswordProps {
   cardPassword: string;
-  setCardPassword: Dispatch<SetStateAction<string>>;
+  setCardPassword: (value: string) => void;
   cardPasswordErrorMessage: string;
   setCardPasswordErrorMessage: Dispatch<SetStateAction<string>>;
 }
