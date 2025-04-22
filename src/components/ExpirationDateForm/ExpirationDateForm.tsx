@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
 import Input from "../Input/Input";

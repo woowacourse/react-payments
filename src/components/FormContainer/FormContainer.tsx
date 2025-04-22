@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import UniqueNumberForm from "../UniqueNumberForm/UniqueNumberForm";
 import ExpirationDateForm from "../ExpirationDateForm/ExpirationDateForm";

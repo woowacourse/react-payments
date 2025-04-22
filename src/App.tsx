@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import "./App.css";
 import { css } from "@emotion/react";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
