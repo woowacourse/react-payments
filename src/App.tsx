@@ -22,6 +22,13 @@ function App() {
     handleBlur: handleExpireDateBlur,
   } = useExpireDateInput();
 
+  const {
+    value: cvcNumber,
+    errorMessage: cvcErrorMessage,
+    handleChange: handleCVCChange,
+    handleBlur: handleCVCBlur,
+  } = useCardInput('CVC');
+
   return (
     <AppLayout>
       <Flex padding="20px 0">
@@ -40,7 +47,12 @@ function App() {
           onChange={handleExpireDateChange}
           onBlur={handleExpireDateBlur}
         />
-        <CVCForm />
+        <CVCForm
+          cvcNumber={cvcNumber}
+          errorMessage={cvcErrorMessage}
+          onChange={handleCVCChange}
+          onBlur={handleCVCBlur}
+        />
       </Flex>
     </AppLayout>
   );

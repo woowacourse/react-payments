@@ -1,14 +1,18 @@
 import { css } from '@emotion/react';
 
+import { CardFormFiledProps } from './CardFormFiled.types';
+
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { useCardInput } from '@/hooks/useCardInput';
+import { CardInputType } from '@/hooks/useCardInput';
 
-export const CVCForm = () => {
-  const { value: cvcNumber, errorMessage, handleChange, handleBlur } = useCardInput('CVC', 1, 3);
+type Props = {
+  cvcNumber: CardInputType[];
+} & CardFormFiledProps;
 
+export const CVCForm = ({ cvcNumber, errorMessage, onChange, onBlur }: Props) => {
   const isValidCVC = cvcNumber.every((cvcNumber) => cvcNumber.isValid);
 
   return (
@@ -21,8 +25,8 @@ export const CVCForm = () => {
             maxLength={3}
             placeholder="CVC 번호(카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리)"
             isValid={cvc.isValid}
-            onChange={(e) => handleChange(index, e)}
-            onBlur={(e) => handleBlur(index, e)}
+            onChange={(e) => onChange(index, e)}
+            onBlur={(e) => onBlur(index, e)}
           />
         ))}
         <Text
