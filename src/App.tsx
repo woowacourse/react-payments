@@ -17,9 +17,7 @@ function App() {
 
   const {
     cardValidityPeriod,
-    isErrorCardValidityPeriod,
     onChangeCardValidityPeriod,
-    checkCardValidityPeriodError,
     errorMessage: cardValidityPeriodErrorMessage,
   } = useCardValidityPeriod();
 
@@ -73,13 +71,16 @@ function App() {
         <CardInputSection
           title="카드 유효기간을 입력해 주세요"
           description="월/년도(MMYY)를 순서대로 입력해 주세요."
-          errorMessage={
-            checkCardValidityPeriodError() ? cardValidityPeriodErrorMessage : ''
-          }
+          errorMessage={getErrorMessageFromList(
+            Object.values(cardValidityPeriodErrorMessage),
+          )}
         >
           <CardValidityPeriodField
             cardValidityPeriod={cardValidityPeriod}
-            isError={isErrorCardValidityPeriod}
+            isError={{
+              month: Boolean(cardValidityPeriodErrorMessage.month),
+              year: Boolean(cardValidityPeriodErrorMessage.year),
+            }}
             onChange={onChangeCardValidityPeriod}
           />
         </CardInputSection>
