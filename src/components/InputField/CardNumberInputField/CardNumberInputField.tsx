@@ -13,6 +13,7 @@ import { CardType } from '../../../config/card';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../config/error';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 import Input from '../../Input/Input';
+import styled from 'styled-components';
 
 interface CardNumberInputFieldProps {
   inputValue: Record<CardNumberInputType, string>;
@@ -108,19 +109,35 @@ function CardNumberInputField({
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
       {CARD_NUMBER_INPUT_TYPE.map((inputType) => (
-        <Input
-          key={inputType}
-          type="number"
-          placeholder="1234"
-          value={inputValue[inputType]}
-          onChange={onChange}
-          onBlur={onBlur}
-          name={inputType}
-          isError={Boolean(errorTypes[inputType].length)}
-        />
+        <>
+          <Label htmlFor={`card-number-input-${inputType}`} />
+          <Input
+            id={`card-number-input-${inputType}`}
+            key={inputType}
+            type="number"
+            placeholder="1234"
+            value={inputValue[inputType]}
+            onChange={onChange}
+            onBlur={onBlur}
+            name={inputType}
+            isError={Boolean(errorTypes[inputType].length)}
+          />
+        </>
       ))}
     </BaseInputField>
   );
 }
+
+const Label = styled.label`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
 
 export default CardNumberInputField;

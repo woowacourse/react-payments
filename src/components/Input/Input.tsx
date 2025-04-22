@@ -8,6 +8,7 @@ interface InputProps
 }
 
 function Input({
+  id,
   placeholder,
   isError,
   value,
@@ -29,6 +30,7 @@ function Input({
 
   return (
     <StyledInput
+      id={id}
       placeholder={placeholder}
       value={value}
       inputMode={type === 'number' ? 'numeric' : 'text'}
