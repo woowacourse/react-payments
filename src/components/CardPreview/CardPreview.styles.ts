@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-export const CardPreviewWrapper = styled.div`
+export const CardPreviewWrapper = styled.div<{ backgroundColor?: string }>`
   width: 212px;
   height: 132px;
-  background-color: #333;
+  background-color: ${({ backgroundColor }) => backgroundColor || '#333'};
   border-radius: 4px;
   display: flex;
   flex-direction: column;

@@ -17,12 +17,12 @@ export const ERROR_MESSAGE = {
 } as const;
 
 export const CARD_COMPANIES = [
-  { id: 'shinhan', name: '신한카드' },
-  { id: 'samsung', name: '삼성카드' },
-  { id: 'hyundai', name: '현대카드' },
-  { id: 'bc', name: 'BC카드' },
-  { id: 'lotte', name: '롯데카드' },
-  { id: 'kb', name: 'KB국민카드' },
-  { id: 'nh', name: 'NH농협카드' },
-  { id: 'hana', name: '하나카드' },
+  { id: 'shinhan', name: '신한카드', color: '#0046FF' },
+  { id: 'samsung', name: '삼성카드', color: '#034EA2' },
+  { id: 'hyundai', name: '현대카드', color: '#002C5F' },
+  { id: 'bc', name: 'BC카드', color: '#0050FF' },
+  { id: 'lotte', name: '롯데카드', color: '#DA291C' },
+  { id: 'kb', name: 'KB국민카드', color: '#FFD700' },
+  { id: 'nh', name: 'NH농협카드', color: '#0C9748' },
+  { id: 'hana', name: '하나카드', color: '#00857E' },
 ] as const;

@@ -43,7 +43,12 @@ function App() {
     <S.Wrapper>
       <Global styles={global} />
       <S.CardPreviewWrapper>
-        <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
+        <CardPreview
+          cardType={cardType}
+          cardNumber={cardNumber}
+          cardExpirationDate={cardExpirationDate}
+          selectedCompany={selectedCompany}
+        />
       </S.CardPreviewWrapper>
       <Spacing size={60} />
       <S.CardInfoForm>
