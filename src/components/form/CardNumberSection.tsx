@@ -29,19 +29,19 @@ const CardNumberSection = ({cardNumber, onCardNumberChange}: Props) => {
     onCardNumberChange(order, value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-      setError({...error, [order]: MESSAGE.INVALID_NUMBER});
+      setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
       return;
     }
 
-    setError({...error, [order]: ''});
+    setError((prev) => ({...prev, [order]: ''}));
   };
 
   const handleFocusout = (order: keyof CardNumber, value: string) => {
     if (value.length < INPUT_MAX_LENGTH)
-      setError({
-        ...error,
+      setError((prev) => ({
+        ...prev,
         [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH),
-      });
+      }));
   };
 
   return (

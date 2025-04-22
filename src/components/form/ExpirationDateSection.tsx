@@ -20,13 +20,11 @@ type Props = {
 const expirationErrorRule = [
   {
     error: MESSAGE.INVALID_NUMBER,
-    validate: (date: string) => {
-      return !isNumberWithinRange(date, INPUT_MAX_LENGTH);
-    },
+    validate: (date: string) => !isNumberWithinRange(date, INPUT_MAX_LENGTH),
   },
   {
     error: MESSAGE.MONTH_RANGE,
-    validate: (order: keyof ExpirationDate, date: string) => {
+    validate: (date: string, order: keyof ExpirationDate) => {
       if (order === 'month') {
         const month = Number(date);
         return month < 0 || month > 12;
@@ -35,7 +33,7 @@ const expirationErrorRule = [
   },
   {
     error: (nowYear: number) => MESSAGE.YEAR_RANGE(nowYear),
-    validate: (order: keyof ExpirationDate, date: string, nowYear: number) => {
+    validate: (date: string, order: keyof ExpirationDate, nowYear: number) => {
       if (order === 'year') {
         const year = Number(date);
         return year < nowYear && year >= 0;
@@ -59,22 +57,22 @@ const ExpirationDateSection = ({
     onExpirationDateChange(order, value);
 
     const matchedError = expirationErrorRule.find((rule) =>
-      rule.validate(order, value, nowYear)
+      rule.validate(value, order, nowYear)
     );
 
-    setError({
-      ...error,
+    setError((prev) => ({
+      ...prev,
       [order]: matchedError
         ? typeof matchedError.error === 'function'
           ? matchedError.error(nowYear)
           : matchedError.error
         : '',
-    });
+    }));
   };
 
   const handleFocusout = (order: keyof ExpirationDate, value: string) => {
     if (value.length < INPUT_MAX_LENGTH)
-      setError({...error, [order]: MESSAGE.MONTH_FORMAT});
+      setError((prev) => ({...prev, [order]: MESSAGE.MONTH_FORMAT}));
   };
 
   return (
