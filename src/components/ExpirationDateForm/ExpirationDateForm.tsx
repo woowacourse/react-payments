@@ -1,51 +1,46 @@
-import React from "react";
 import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { ExpirationDateStateType } from "../../types/CardInformationType";
-import useExpirationDateValidation from "../../hooks/useExpirationDateValidation";
+import useError from "../../hooks/useError";
+import expirationDateSpec from "./ExpirationDateSpec";
+
+const { title, description, inputFieldData } = expirationDateSpec;
 
 const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
-  const { error, errorMessage, validateInputType, validateMonth } = useExpirationDateValidation();
+  const { error, errorMessage, validateInputType, validateMonth } = useError([false, false]);
 
-  const handleChangeMonth = (v: string) => {
-    if (validateInputType(v, 0)) {
-      validateMonth(v);
-      dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v });
+  const handleChange = (v: string, index: number) => {
+    if (validateInputType(v, index)) {
+      if (index === 0) validateMonth(v);
+      dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
       return;
-    }
-  };
-
-  const handleChangeYear = (v: string) => {
-    if (validateInputType(v, 1)) {
-      dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v });
     }
   };
 
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
-        <Text type="title" text={"카드 유효기간을 입력해 주세요"} />
-        <Text type="description" text={"월/년도(MMYY)를 순서대로 입력해 주세요."} />
+        <Text type="title" text={title} />
+        <Text type="description" text={description} />
       </div>
 
       <div css={inputFieldStyle}>
-        <Text type="label" text={"유효기간"} />
+        <Text type="label" text={inputFieldData.label} />
         <div css={inputWrapperStyle}>
-          <Input
-            placeholder="MM"
-            value={expirationDateState[0]}
-            setValue={(v) => handleChangeMonth(v)}
-            maxLength={2}
-            error={error[0]}
-          ></Input>
-          <Input
-            placeholder="YY"
-            value={expirationDateState[1]}
-            setValue={(v) => handleChangeYear(v)}
-            maxLength={2}
-            error={error[1]}
-          ></Input>
+          {Array.from({ length: inputFieldData.inputNumber }).map((_, index: number) => {
+            const { placeholder, maxLength } = inputFieldData.inputProps;
+
+            return (
+              <Input
+                placeholder={placeholder[index]}
+                value={expirationDateState[index]}
+                onChange={(v) => handleChange(v, index)}
+                maxLength={maxLength}
+                error={error[index]}
+              />
+            );
+          })}
         </div>
         <div css={errorTextWrapperStyle(error[0] || error[1])}>
           <Text type="error" text={errorMessage} />

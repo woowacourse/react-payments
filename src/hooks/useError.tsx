@@ -1,9 +1,8 @@
-import React from "react";
 import { useState } from "react";
 
-const useExpirationDateValidation = () => {
+const useError = (initialErrorState: boolean[]) => {
+  const [error, setError] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState("");
-  const [error, setError] = useState([false, false]);
 
   const validateInputType = (v: string, index: number) => {
     if (/^[0-9]*$/.test(v)) {
@@ -11,23 +10,23 @@ const useExpirationDateValidation = () => {
       return true;
     }
 
-    setError([true, error[1]]);
+    setError((prev) => prev.map((item, i) => (i === index ? true : item)));
     setErrorMessage("숫자만 입력해 주세요.");
     return false;
   };
 
   const validateMonth = (v: string) => {
     const month = parseInt(v);
-    if (month < 1 || month > 12) {
-      setError([true, error[1]]);
-
-      setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
+    if (month >= 1 && month <= 12) {
+      setError([false, error[1]]);
       return;
     }
-    setError([false, error[1]]);
+
+    setError([true, error[1]]);
+    setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
   };
 
-  return { error, errorMessage, validateInputType, validateMonth };
+  return { error, errorMessage, validateMonth, validateInputType };
 };
 
-export default useExpirationDateValidation;
+export default useError;

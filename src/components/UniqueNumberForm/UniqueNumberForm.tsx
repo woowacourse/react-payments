@@ -3,10 +3,10 @@ import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { UniqueNumberStateType } from "../../types/CardInformationType";
-import useUniqueNumberValidation from "../../hooks/useUniqueNumberValidation";
+import useError from "../../hooks/useError";
 
 const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useUniqueNumberValidation(dispatch);
+  const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
 
   const handleChange = (v: string, index: number) => {
     if (validateInputType(v, index)) {
@@ -27,12 +27,12 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
           {uniqueNumberState.map((value: string, index: number) => (
             <Input
               key={index}
-              placeholder={index === 2 || index === 3 ? "●●●●" : "1234"}
+              placeholder={index > 1 ? "●●●●" : "1234"}
               value={value}
               maxLength={4}
-              setValue={(v) => handleChange(v, index)}
+              onChange={(v) => handleChange(v, index)}
               error={error[index]}
-              type={index === 2 || index === 3 ? "password" : "text"}
+              type={index > 1 ? "password" : "text"}
             />
           ))}
         </div>

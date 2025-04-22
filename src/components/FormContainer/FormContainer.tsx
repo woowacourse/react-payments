@@ -35,11 +35,12 @@ import { CardStateType } from "../../types/CardInformationType";
 // };
 
 const FormContainer = ({ cardState, dispatch }: CardStateType) => {
+  const { uniqueNumber, expirationDate, cvcNumber } = cardState;
   return (
     <div css={FormContainerStyle}>
-      <UniqueNumberForm uniqueNumberState={cardState.uniqueNumber} dispatch={dispatch} />
-      <ExpirationDateForm expirationDateState={cardState.expirationDate} dispatch={dispatch} />
-      <CvcNumberForm cvcNumberState={cardState.cvcNumber} dispatch={dispatch} />
+      <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+      <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
+      <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
     </div>
   );
 };

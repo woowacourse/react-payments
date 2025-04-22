@@ -12,6 +12,7 @@ const PreviewCard = ({ uniqueNumber, expirationDate }: { uniqueNumber: string[];
     if (/^5[1-5]/.test(bin)) return "master";
     return "none";
   }
+  //utils로 분리
 
   const cardType = getCardType(uniqueNumber[0]);
 

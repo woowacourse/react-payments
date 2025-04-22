@@ -1,17 +1,14 @@
-import React from "react";
 import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { CvcNumberStateType } from "../../types/CardInformationType";
-import useCvcNumberValidation from "../../hooks/useCvcNumberValidation";
-
-// import cvcNumber from "./CvcNumberData";
+import useError from "../../hooks/useError";
 
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useCvcNumberValidation();
+  const { error, errorMessage, validateInputType } = useError([false]);
 
   const handleChange = (value: string) => {
-    if (validateInputType(value)) {
+    if (validateInputType(value, 0)) {
       dispatch({ type: "SET_CVC_NUMBER", value: value });
     }
   };
@@ -30,11 +27,11 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
             placeholder="123"
             maxLength={3}
             value={cvcNumberState[0]}
-            setValue={(v) => handleChange(v)}
-            error={error}
+            onChange={(v) => handleChange(v)}
+            error={error[0]}
           />
         </div>
-        <div css={errorTextWrapperStyle(error)}>
+        <div css={errorTextWrapperStyle(error[0])}>
           <Text type="error" text={errorMessage} />
         </div>
       </div>
