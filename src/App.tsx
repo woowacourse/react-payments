@@ -1,10 +1,13 @@
-import "./App.css";
+import './reset.css';
+import AddCard from './pages/AddCard';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
 
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <ThemeProvider theme={theme}>
+      <AddCard />
+    </ThemeProvider>
   );
 }
 
