@@ -5,6 +5,7 @@ import { CVCForm } from './components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from './components/features/CardFormFiled/ExpireDateForm';
 import { CardPreview } from './components/features/CardPreview';
 import { useCardInput } from './hooks/useCardInput';
+import { useExpireDateInput } from './hooks/useExpireDateInput';
 
 function App() {
   const {
@@ -19,7 +20,7 @@ function App() {
     errorMessage: expireDateErrorMessage,
     handleChange: handleExpireDateChange,
     handleBlur: handleExpireDateBlur,
-  } = useCardInput('expireDate', 2, 2);
+  } = useExpireDateInput();
 
   return (
     <AppLayout>

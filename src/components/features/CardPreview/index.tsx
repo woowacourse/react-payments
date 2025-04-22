@@ -9,7 +9,7 @@ import {
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
-
+import { ExpireDateInputType } from '@/hooks/useExpireDateInput';
 type Props = {
   /**
    * 카드 번호를 입력받는 배열입니다.
@@ -18,7 +18,7 @@ type Props = {
   /**
    * 카드 유효기간을 입력받는 배열입니다.
    */
-  expireDate: CardInputType[];
+  expireDate: ExpireDateInputType;
 };
 
 export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
@@ -72,7 +72,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
             text-align: left;
           `}
         >
-          {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
+          {expireDate.month.value ? `${expireDate.month.value} / ${expireDate.year.value}` : ''}
         </Text>
       </Flex>
     </StyledCardContainer>

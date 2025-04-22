@@ -1,21 +1,22 @@
 import { css } from '@emotion/react';
 
-import { CardFormFiledProps } from './CardFormFiled.types';
+import { CardExpireDateFiledType } from './CardFormFiled.types';
 
 import { CardInputLayout } from '@/components/common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardInputType } from '@/hooks/useCardInput';
+import { ExpireDateInputType, ExpireDateInputKey } from '@/hooks/useExpireDateInput';
 
 type Props = {
-  expireDate: CardInputType[];
-} & CardFormFiledProps;
+  expireDate: ExpireDateInputType;
+} & CardExpireDateFiledType;
 
 const ExpireDatePlaceholder = ['MM', 'YY'];
 
 export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: Props) => {
-  const isValidDate = expireDate.every((expireDate) => expireDate.isValid);
+  const isValidDate = expireDate.month.isValid && expireDate.year.isValid;
+  const expireDateKeys = Object.keys(expireDate) as ExpireDateInputKey[];
 
   return (
     <CardInputLayout
@@ -25,14 +26,14 @@ export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: P
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
         <Flex gap="8px" width="100%">
-          {expireDate.map((date, index) => (
+          {expireDateKeys.map((key, index) => (
             <Input
-              key={`expire-${index}`}
-              value={date.value}
+              key={`expire-${key}`}
+              value={expireDate[key].value}
               maxLength={2}
-              onChange={(e) => onChange(index, e)}
-              onBlur={(e) => onBlur(index, e)}
-              isValid={date.isValid}
+              onChange={(e) => onChange(e, key)}
+              onBlur={(e) => onBlur(e, key)}
+              isValid={expireDate[key].isValid}
               placeholder={ExpireDatePlaceholder[index]}
             />
           ))}
