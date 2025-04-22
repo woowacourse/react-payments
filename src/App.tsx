@@ -7,6 +7,8 @@ import useCardExpirationDate from "./hooks/useCardExpirationDate";
 import useCardCompany from "./hooks/useCardCompany";
 import CardDisplay from "./components/CardDisplay/CardDisplay";
 import CardCompanyInputSection from "./components/InputSection/CardCompanyInputSection";
+import CardPasswordInputSection from "./components/InputSection/CardPasswordInputSection";
+import useCardPassword from "./hooks/useCardPassword";
 
 const COMPANIES = [
   { value: "BC", label: "BC" },
@@ -41,6 +43,13 @@ function App() {
     errorMessage: cardCompanyErrorMessage,
   } = useCardCompany();
 
+  const {
+    cardPassword,
+    handleCardPasswordChange,
+    isError: isCardPasswordError,
+    errorMessage: cardPasswordErrorMessage,
+  } = useCardPassword();
+
   return (
     <>
       <div className={styles.main}>
@@ -49,6 +58,12 @@ function App() {
           cardExpirationDate={cardExpirationDate}
         />
         <div className={styles.cardForm}>
+          <CardPasswordInputSection
+            cardPassword={cardPassword}
+            handleCardPasswordChange={handleCardPasswordChange}
+            isError={isCardPasswordError}
+            errorMessage={cardPasswordErrorMessage}
+          />
           <CardCVCNumberInputSection />
           <CardExpirationDateInputSection
             cardExpirationDate={cardExpirationDate}
