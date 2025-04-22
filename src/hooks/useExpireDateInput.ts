@@ -14,10 +14,6 @@ export type ExpireDateInputType = {
 
 export type ExpireDateInputKey = keyof ExpireDateInputType;
 
-function deepCopyObject<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
-}
-
 export const useExpireDateInput = () => {
   const [value, setValue] = useState<ExpireDateInputType>({
     month: { value: '', isValid: true },
@@ -27,7 +23,7 @@ export const useExpireDateInput = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     setValue((prev) => {
-      const newDateObj = deepCopyObject(prev);
+      const newDateObj = { ...prev };
       newDateObj[key].value = e.target.value;
       return newDateObj;
     });
@@ -38,7 +34,7 @@ export const useExpireDateInput = () => {
     const isValidate = validateInput(inputValue, key);
 
     setValue((prev) => {
-      const newDateObj = deepCopyObject(prev);
+      const newDateObj = { ...prev };
       newDateObj[key].isValid = isValidate;
       return newDateObj;
     });
