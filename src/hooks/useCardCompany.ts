@@ -36,6 +36,7 @@ const useCardCompany = (): useCardCompanyOptions => {
       setErrorField("cardCompany", errorMessage);
       return;
     }
+
     clearError("cardCompany");
     setCardCompany(value.trim());
   };

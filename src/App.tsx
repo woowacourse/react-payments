@@ -49,6 +49,13 @@ function App() {
           cardExpirationDate={cardExpirationDate}
         />
         <div className={styles.cardForm}>
+          <CardCVCNumberInputSection />
+          <CardExpirationDateInputSection
+            cardExpirationDate={cardExpirationDate}
+            handleCardExpirationDateChange={handleCardExpirationDateChange}
+            isError={isCardExpirationDateError}
+            errorMessage={cardExpirationDateErrorMessage}
+          />
           <CardCompanyInputSection
             companies={COMPANIES}
             selectedOption={cardCompany}
@@ -61,13 +68,6 @@ function App() {
             isError={isCardNumbersError}
             errorMessage={cardNumbersErrorMessage}
           />
-          <CardExpirationDateInputSection
-            cardExpirationDate={cardExpirationDate}
-            handleCardExpirationDateChange={handleCardExpirationDateChange}
-            isError={isCardExpirationDateError}
-            errorMessage={cardExpirationDateErrorMessage}
-          />
-          <CardCVCNumberInputSection />
         </div>
       </div>
     </>
