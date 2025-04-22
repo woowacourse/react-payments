@@ -9,6 +9,7 @@ const meta = {
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
     expireDate: INITIAL_EXPIRE_DATE_STATE,
+    selectedBrand: null,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof AddCardPreview>;
