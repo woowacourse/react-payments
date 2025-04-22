@@ -21,12 +21,12 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
-        <Text type="title" text={title} />
-        <Text type="description" text={description} />
+        <Text text={title} size="18px" color="#000" weight={700} lineHeight="normal" />
+        <Text text={description} size="9.5px" color="#8b95a1" weight={400} lineHeight="normal" />
       </div>
 
       <div css={inputFieldStyle}>
-        <Text type="label" text={inputFieldData.label} />
+        <Text text={inputFieldData.label} size="12px" color="#0a0d13" weight={500} lineHeight="15px" />
         <div css={inputWrapperStyle}>
           {Array.from({ length: inputFieldData.inputNumber }).map((_, index: number) => {
             const { placeholder, maxLength } = inputFieldData.inputProps;
@@ -43,7 +43,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
           })}
         </div>
         <div css={errorTextWrapperStyle(error[0] || error[1])}>
-          <Text type="error" text={errorMessage} />
+          <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>
     </div>
