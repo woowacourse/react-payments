@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import InputForm from "../components/common/inputFormTest/InputForm";
+import InputForm from "../components/common/inputForm/InputForm";
 import { expect, within } from "@storybook/test";
 
 export default {

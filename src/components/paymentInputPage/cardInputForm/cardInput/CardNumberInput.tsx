@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import InputForm from "../../../common/inputFormTest/InputForm";
-import Input from "../../../common/inputFormTest/inputTest/Input";
+import InputForm from "../../../common/inputForm/InputForm";
+import Input from "../../../common/inputForm/input/Input";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validateisNumberString } from "./validator/validateCardInput";
 
