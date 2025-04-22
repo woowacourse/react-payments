@@ -1,29 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 import {
-  CARD_TYPE,
-  CardType,
-} from '../../components/features/payments/config/card';
-import {
-  CardNumberInputType,
   CVCInputValueType,
   ExpirationDateInputType,
 } from '../../components/features/payments/config/inputField';
+import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
 import CardNumberInputField from '../../components/features/payments/InputField/CardNumberInputField';
 import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
+import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 
 function Payments() {
-  const [cardNumberInputValue, setCardNumberInputValue] = useState<
-    Record<CardNumberInputType, string>
-  >({
-    cardNumberPart1: '',
-    cardNumberPart2: '',
-    cardNumberPart3: '',
-    cardNumberPart4: '',
-  });
+  const { inputValues, errorTypes, handleValue, onBlur, cardType } =
+    useCardNumberValidation();
 
   const [expirationDateInputValue, setExpirationDateInputValue] = useState<
     Record<ExpirationDateInputType, string>
@@ -38,13 +28,11 @@ function Payments() {
     CVCPart1: '',
   });
 
-  const [cardType, setCardType] = useState<CardType>(CARD_TYPE.none);
-
   return (
     <PaymentsLayout>
       <PaymentsContainer>
         <CardPreview
-          cardNumberInputValue={cardNumberInputValue}
+          cardNumberInputValue={inputValues}
           expirationDateInputValue={expirationDateInputValue}
           cardType={cardType}
         />
@@ -53,10 +41,10 @@ function Payments() {
           caption="본인 명의의 카드만 결제 가능합니다."
         >
           <CardNumberInputField
-            inputValue={cardNumberInputValue}
-            setInputValue={setCardNumberInputValue}
-            cardType={cardType}
-            setCardType={setCardType}
+            inputValues={inputValues}
+            errorTypes={errorTypes}
+            handleValue={handleValue}
+            onBlur={onBlur}
           />
         </InputSection>
         <InputSection

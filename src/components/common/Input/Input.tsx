@@ -1,27 +1,28 @@
 import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
 
-interface InputProps {
+interface InputProps<T> {
   isError?: boolean;
   inputType: 'text' | 'number';
-  onChange: ({ name, value }: { name: string; value: string }) => void;
+  name: T;
+  onChange: ({ name, value }: { name: T; value: string }) => void;
 }
 
-function Input({
+function Input<T>({
   isError,
   inputType,
   onChange,
   ...props
-}: InputProps & Omit<ComponentProps<'input'>, 'onChange'>) {
+}: InputProps<T> & Omit<ComponentProps<'input'>, 'onChange'>) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
     if (inputType === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
-      return onChange({ value: numericValue, name });
+      return onChange({ name: name as T, value: numericValue });
     }
 
-    return onChange({ value, name });
+    return onChange({ name: name as T, value });
   };
 
   return (
