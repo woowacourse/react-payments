@@ -2,23 +2,32 @@ import { useState } from 'react';
 
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
 import { validateCardNumbers } from '@/validations/validateCardNumbers';
-const ExpireDateIndex = {
-  MONTH: 0,
-  YEAR: 1,
-};
 
 export type CardInputType = {
   value: string;
   isValid: boolean;
 };
 
-const currentYear = new Date().getFullYear().toString().slice(-2);
+export const CardInputTypeOptions = {
+  cardNumber: {
+    valueLength: 4,
+    arrLength: 4,
+  },
 
-export const useCardInput = (type: CardFormFiledType, arrLength: number, valueLength: number) => {
+  CVC: {
+    valueLength: 3,
+    arrLength: 1,
+  },
+};
+
+export const useCardInput = (type: CardFormFiledType) => {
   const [value, setValue] = useState<CardInputType[]>(
-    Array.from({ length: arrLength }, () => ({ value: '', isValid: true }))
+    Array.from({ length: CardInputTypeOptions[type].arrLength }, () => ({
+      value: '',
+      isValid: true,
+    }))
   );
-  const [errorMessage, setErrorMessage] = useState<string>('숫자를 입력하세요.');
+  const [errorMessage, setErrorMessage] = useState<string>('형식에 맞는 값을 입력해주세요.');
 
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     setValue((prev) => {
@@ -40,7 +49,7 @@ export const useCardInput = (type: CardFormFiledType, arrLength: number, valueLe
 
   const handleBlur = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const isValidate = validateInput(inputValue, index);
+    const isValidate = validateInput(inputValue);
 
     setValue((prev) => {
       const newArr = [...prev];
