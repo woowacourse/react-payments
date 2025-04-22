@@ -27,8 +27,8 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
             <Input
               key={`card-${index}`}
               value={cardNumber.value}
-              onChange={(e) => onChange(index, e)}
-              onBlur={(e) => onBlur(index, e)}
+              onChange={(e) => onChange(e, index)}
+              onBlur={(e) => onBlur(e, index)}
               isValid={cardNumber.isValid}
               placeholder="1234"
             />
