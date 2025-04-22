@@ -99,6 +99,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const handleCardNumbers =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+
       try {
         const newCardNumbers = [...cardNumbers];
         newCardNumbers[index] = e.target.value;
@@ -114,6 +116,10 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         }
         setCardNumbersHelperText("");
         setCardNumbersErrorIndex(null);
+
+        if (value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH && index < CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS - 1) {
+          cardNumbersInputRefs.current[index + 1]?.focus();
+        }
       } catch (error: unknown) {
         if (error instanceof CustomCardNumbersError) {
           if (error.message === ERROR.CARD_NUMBER.INVALID) {
