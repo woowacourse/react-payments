@@ -17,7 +17,6 @@ const YEAR_RULE = {
 } as const;
 
 const ERROR_MESSAGE = {
-  TOTAL_LENGTH: 'MM/YY는 4자리입니다.',
   MONTH_LENGTH: 'MM은 2자리여야 합니다.',
   YEAR_LENGTH: 'YY는 2자리여야 합니다.',
   MONTH_RANGE: 'MM은 1~12 사이의 숫자여야 합니다.',
