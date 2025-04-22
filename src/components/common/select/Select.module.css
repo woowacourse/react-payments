@@ -12,10 +12,6 @@
 .selectedInput {
   width: 100%;
   padding: 12px 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   border: 1px solid var(--grey);
   border-radius: 4px;
   color: var(--black);
@@ -58,5 +54,5 @@
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
