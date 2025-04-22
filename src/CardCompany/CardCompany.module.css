@@ -44,6 +44,8 @@
 }
 
 li {
+  display: flex;
+  align-items: center;
   color: var(--color-gray2);
   width: 316px;
   height: 31px;
