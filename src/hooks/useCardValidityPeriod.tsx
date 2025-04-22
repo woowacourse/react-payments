@@ -17,9 +17,9 @@ const YEAR_RULE = {
 } as const;
 
 const ERROR_MESSAGE = {
-  MONTH_LENGTH: 'MM은 2자리여야 합니다.',
-  YEAR_LENGTH: 'YY는 2자리여야 합니다.',
-  MONTH_RANGE: 'MM은 1~12 사이의 숫자여야 합니다.',
+  MONTH_LENGTH: `MM은 ${MONTH_RULE.length}자리여야 합니다.`,
+  YEAR_LENGTH: `YY는 ${YEAR_RULE.length}자리여야 합니다.`,
+  MONTH_RANGE: `MM은 ${MONTH_RULE.min}~${MONTH_RULE.max} 사이의 숫자여야 합니다.`,
   YEAR_RANGE: `YY는 현재 연도(${Number(
     YEAR_RULE.currentYear.toString().slice(YEAR_RULE.length),
   )})보다 크거나 같아야 합니다.`,
