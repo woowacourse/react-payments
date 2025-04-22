@@ -1,12 +1,14 @@
-import React from "react";
 import { css } from "@emotion/react";
 import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { UniqueNumberStateType } from "../../types/CardInformationType";
 import useError from "../../hooks/useError";
+import uniqueNumberSpec from "./UniqueNumberSpec";
 
 const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
   const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
+  const { title, description, inputFieldData } = uniqueNumberSpec;
+  const { label, inputNumber, inputProps } = inputFieldData;
 
   const handleChange = (v: string, index: number) => {
     if (validateInputType(v, index)) {
@@ -17,25 +19,29 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
-        <Text type="title" text={"결제할 카드 번호를 입력해 주세요"} />
-        <Text type="description" text={"본인 명의의 카드만 결제 가능합니다."} />
+        <Text type="title" text={title} />
+        <Text type="description" text={description} />
       </div>
 
       <div css={inputFieldStyle}>
-        <Text type="label" text={"카드번호"} />
+        <Text type="label" text={label} />
         <div css={inputWrapperStyle}>
-          {uniqueNumberState.map((value: string, index: number) => (
-            <Input
-              key={index}
-              placeholder={index > 1 ? "●●●●" : "1234"}
-              value={value}
-              maxLength={4}
-              onChange={(v) => handleChange(v, index)}
-              error={error[index]}
-              type={index > 1 ? "password" : "text"}
-            />
-          ))}
+          {Array.from({ length: inputNumber }).map((_, index: number) => {
+            const { placeholder, maxLength } = inputProps;
+            return (
+              <Input
+                key={index}
+                placeholder={placeholder[index]}
+                value={uniqueNumberState[index]}
+                maxLength={maxLength}
+                onChange={(v) => handleChange(v, index)}
+                error={error[index]}
+                type={index > 1 ? "password" : "text"}
+              />
+            );
+          })}
         </div>
+
         <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
           <Text type="error" text={errorMessage} />
         </div>

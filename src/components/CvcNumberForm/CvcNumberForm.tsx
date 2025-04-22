@@ -3,9 +3,13 @@ import Input from "../Input/Input";
 import Text from "../Text/Text";
 import { CvcNumberStateType } from "../../types/CardInformationType";
 import useError from "../../hooks/useError";
+import cvcNumberSpec from "./CvcNumberSpec";
 
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
   const { error, errorMessage, validateInputType } = useError([false]);
+  const { title, description, inputFieldData } = cvcNumberSpec;
+  const { label, inputProps } = inputFieldData;
+  const { placeholder, maxLength } = inputProps;
 
   const handleChange = (value: string) => {
     if (validateInputType(value, 0)) {
@@ -16,16 +20,16 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
-        <Text type="title" text={"CVC"} />
-        <Text type="description" text={""} />
+        <Text type="title" text={title} />
+        <Text type="description" text={description} />
       </div>
 
       <div css={inputFieldStyle}>
-        <Text type="label" text={"cvc"} />
+        <Text type="label" text={label} />
         <div css={inputWrapperStyle}>
           <Input
-            placeholder="123"
-            maxLength={3}
+            placeholder={placeholder[0]}
+            maxLength={maxLength}
             value={cvcNumberState[0]}
             onChange={(v) => handleChange(v)}
             error={error[0]}
