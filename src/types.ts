@@ -1,0 +1,13 @@
+import { CARD_BRANDS, INITIAL_CARD_NUMBER, INITIAL_CVC, INITIAL_EXPIRATION } from './constants';
+
+export type CardNumberType = typeof INITIAL_CARD_NUMBER;
+export type CardNumberKey = keyof CardNumberType;
+
+export type CardBrandType = typeof CARD_BRANDS;
+
+export type CardLogoKey = keyof CardBrandType;
+
+export type ExpirationType = typeof INITIAL_EXPIRATION;
+export type ExpirationKey = keyof typeof INITIAL_EXPIRATION;
+
+export type CvcType = typeof INITIAL_CVC;

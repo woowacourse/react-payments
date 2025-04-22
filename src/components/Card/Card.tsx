@@ -1,4 +1,5 @@
-import { CARD_BRANDS, CardBrandType, CardNumberType, ExpirationType } from '../../App';
+import { CARD_BRANDS } from '../../constants';
+import { CardBrandType, CardNumberType, ExpirationType } from '../../types';
 import styles from './Card.module.css';
 
 export default function Card({ numbers, cardLogo, expiration }: { numbers: CardNumberType; cardLogo: keyof CardBrandType | null; expiration: ExpirationType }) {
@@ -36,5 +37,5 @@ export default function Card({ numbers, cardLogo, expiration }: { numbers: CardN
 }
 
 function Dot() {
-  return <div className={styles.dot}></div>;
+  return <div className={styles.dot} />;
 }

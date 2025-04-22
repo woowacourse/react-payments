@@ -5,45 +5,8 @@ import CardNumberSection from './components/CardNumberSection/CardNumberSection'
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import Card from './components/Card/Card';
 import CvcSection from './components/CvcSection/CvcSection';
-
-export const INITIAL_CARD_NUMBER = {
-  first: { value: '', isError: false },
-  second: { value: '', isError: false },
-  third: { value: '', isError: false },
-  fourth: { value: '', isError: false }
-} as const;
-
-export type CardNumberType = typeof INITIAL_CARD_NUMBER;
-export type CardNumberKey = keyof CardNumberType;
-
-export const CARD_BRANDS = {
-  VISA: {
-    name: 'VISA',
-    logo: '/images/visa.jpg',
-    match: (value: string) => value.startsWith('4')
-  },
-  MASTERCARD: {
-    name: 'MASTERCARD',
-    logo: '/images/mastercard.jpg',
-    match: (value: string) => {
-      const prefix = Number(value.slice(0, 2));
-      return prefix >= 51 && prefix <= 55;
-    }
-  }
-} as const;
-
-export type CardBrandType = typeof CARD_BRANDS;
-
-export type CardLogoKey = keyof CardBrandType;
-
-const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
-
-export type ExpirationType = typeof INITIAL_EXPIRATION;
-export type ExpirationKey = keyof typeof INITIAL_EXPIRATION;
-
-const INITIAL_CVC = { value: '', errorMessage: '' };
-
-export type CvcType = typeof INITIAL_CVC;
+import { CardBrandType, CardNumberType, CvcType, ExpirationType } from './types';
+import { INITIAL_CARD_NUMBER, INITIAL_CVC, INITIAL_EXPIRATION } from './constants';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);

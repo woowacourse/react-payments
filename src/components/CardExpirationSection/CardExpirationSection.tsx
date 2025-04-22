@@ -1,8 +1,9 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import { Dispatch, SetStateAction } from 'react';
-import { ExpirationType, ExpirationKey } from '../../App';
+
 import Input from '../Input/Input';
+import { ExpirationKey, ExpirationType } from '../../types';
 
 type Props = {
   expiration: ExpirationType;

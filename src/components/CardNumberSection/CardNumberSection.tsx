@@ -1,8 +1,9 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import { Dispatch, SetStateAction } from 'react';
-import { CARD_BRANDS, CardLogoKey, CardNumberKey, CardNumberType } from '../../App';
 import Input from '../Input/Input';
+import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
+import { CARD_BRANDS } from '../../constants';
 
 type Props = {
   cardNumbers: CardNumberType;
@@ -54,7 +55,6 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
 
 const getCardBrand = (value: string) => {
   const brand = Object.values(CARD_BRANDS).find(({ match }) => match(value));
-  console.log(brand);
   return brand?.name ?? null;
 };
 

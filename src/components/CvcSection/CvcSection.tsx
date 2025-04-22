@@ -1,4 +1,4 @@
-import { CvcType } from '../../App';
+import { CvcType } from '../../types';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
