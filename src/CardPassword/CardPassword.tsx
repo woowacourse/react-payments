@@ -10,6 +10,7 @@ interface CardPasswordProps {
 
 const CONSTANT_CARD_PASSWORD = {
   INPUT_TITLE: "비밀번호를",
+  INPUT_DESCRIPTION: "앞의 2자리를 입력해주세요",
   INPUT_SUBTITLE: "비밀번호 앞 2자리",
   PLACE_HOLDER: "",
 } as const;
@@ -24,6 +25,10 @@ export default function CardPassword({
       <InputText
         inputValue={CONSTANT_CARD_PASSWORD.INPUT_TITLE}
         variant="title"
+      />
+      <InputText
+        inputValue={CONSTANT_CARD_PASSWORD.INPUT_DESCRIPTION}
+        variant="description"
       />
       <InputText
         inputValue={CONSTANT_CARD_PASSWORD.INPUT_SUBTITLE}
