@@ -38,8 +38,7 @@ const badgeImagePath = (badgeBrand: number) => {
 };
 
 const formatDate = (expirationDate: ExpirationDate) => {
-  const month = expirationDate.month;
-  const year = expirationDate.year;
+  const {month, year} = expirationDate;
 
   if (month === '' && year === '') return;
   if (year === '') return month;
@@ -61,16 +60,13 @@ const Card = ({cardNumbers, expirationDate}: Props) => {
       </Wrap>
 
       <CardInfoWrap>
-        {Object.entries(cardNumbers).map(([key, value]) => {
-          if (key === 'third' || key === 'fourth') {
-            return (
-              <CardNumbersBlind key={key}>
-                {'•'.repeat(value?.length)}
-              </CardNumbersBlind>
-            );
-          }
-          return <CardNumbers key={key}>{value}</CardNumbers>;
-        })}
+        {Object.entries(cardNumbers).map(([key, value]) => (
+          <CardNumbers key={key} blind={key === 'third' || key === 'fourth'}>
+            {key === 'third' || key === 'fourth'
+              ? '•'.repeat(value?.length)
+              : value}
+          </CardNumbers>
+        ))}
       </CardInfoWrap>
 
       <CardInfoWrap>{formatDate(expirationDate)}</CardInfoWrap>
@@ -118,8 +114,6 @@ const CardInfoWrap = styled.div`
   color: #fff;
 `;
 
-const CardNumbers = styled.p`
-  letter-spacing: 2.24px;
+const CardNumbers = styled.p<{blind: boolean}>`
+  letter-spacing: ${(props) => (props.blind ? '' : '2.24px')};
 `;
-
-const CardNumbersBlind = styled.p``;
