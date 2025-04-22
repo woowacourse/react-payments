@@ -73,10 +73,10 @@ export type Props = {
 } & ComponentProps<'div'>;
 export const Flex = ({
   direction = 'row',
-  justifyContent = 'center',
-  alignItems = 'center',
-  gap = '0',
-  flex = 1,
+  justifyContent,
+  alignItems,
+  gap,
+  flex,
   margin,
   padding,
   width,
