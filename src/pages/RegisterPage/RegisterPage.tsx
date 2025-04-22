@@ -49,13 +49,16 @@ export default function RegisterPage() {
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<CardPasswordInputType>('');
 
   // 카드 유효기간
-  const [cardExpirationDate, setCardExpirationDate] = useState<CardExpirationDateInputType>({
-    month: '',
-    year: '',
-  });
-  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<CardExpirationDateInputType>({
-    month: '',
-    year: '',
+  const {
+    value: cardExpirationDate,
+    errors: cardExpirationDateErrors,
+    register: cardExpirationDateRegister,
+    isValid: isExpirationDateValid,
+  } = useForm<CardExpirationDateInputType>({
+    defaultValues: {
+      month: '',
+      year: '',
+    },
   });
 
   // 카드 CVC 번호
@@ -86,7 +89,6 @@ export default function RegisterPage() {
   };
 
   const isCardCompanyValid = Boolean(selectedCompany);
-  const isExpirationDateValid = cardExpirationDate.month && cardExpirationDate.year;
   const isCVCNumberValid = cardCVCNumber.length === 3;
   const isPasswordValid = cardPassword.length === 2;
 
@@ -156,10 +158,8 @@ export default function RegisterPage() {
 
         {currentStep >= 3 && isCardCompanyValid && (
           <CardExpirationDate
-            cardExpirationDate={cardExpirationDate}
-            setCardExpirationDate={setCardExpirationDate}
-            cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-            setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
+            register={cardExpirationDateRegister}
+            cardExpirationDateErrorMessage={cardExpirationDateErrors}
           />
         )}
 
