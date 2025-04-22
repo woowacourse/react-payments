@@ -24,17 +24,31 @@ export default meta;
 export const CardNumberFormStory = () => {
   const { value: cardNumbers, handleChange, handleBlur } = useCardInput('cardNumber');
 
-  return <CardNumberForm cardNumbers={cardNumbers} onChange={handleChange} onBlur={handleBlur} />;
+  return (
+    <CardNumberForm
+      cardNumbers={cardNumbers}
+      onCardInputChange={handleChange}
+      onCardInputBlur={handleBlur}
+    />
+  );
 };
 
 export const ExpireDateFormStory = () => {
   const { value: expireNumber, handleChange, handleBlur } = useExpireDateInput();
 
-  return <ExpireDateForm expireDate={expireNumber} onChange={handleChange} onBlur={handleBlur} />;
+  return (
+    <ExpireDateForm
+      expireDate={expireNumber}
+      onCardExpireDateInputChange={handleChange}
+      onCardExpireDateInputBlur={handleBlur}
+    />
+  );
 };
 
 export const CVCFormStory = () => {
   const { value: cvcNumber, handleChange, handleBlur } = useCardInput('CVC');
 
-  return <CVCForm cvcNumber={cvcNumber} onChange={handleChange} onBlur={handleBlur} />;
+  return (
+    <CVCForm cvcNumber={cvcNumber} onCardInputChange={handleChange} onCardInputBlur={handleBlur} />
+  );
 };
