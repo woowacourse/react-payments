@@ -127,6 +127,11 @@ function useCardValidityPeriod() {
   ) => {
     const { value } = e.target;
 
+    const isNumeric = value === '' || /^[0-9]+$/.test(value);
+    if (!isNumeric) {
+      return;
+    }
+
     if (value.length > PARSE_RULE.length) {
       return;
     }

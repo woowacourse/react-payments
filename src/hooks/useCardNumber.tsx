@@ -19,6 +19,11 @@ function useCardNumber() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const { value } = e.target;
 
+    const isNumeric = value === '' || /^[0-9]+$/.test(value);
+    if (!isNumeric) {
+      return;
+    }
+
     if (value.length > PARSE_RULE.length) {
       return;
     }
