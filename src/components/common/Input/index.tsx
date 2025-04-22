@@ -12,7 +12,7 @@ export type Props = {
    * Indicates whether the input is valid.
    */
   isValid: boolean;
-} & ComponentProps<'input'>;
+} & Omit<ComponentProps<'input'>, 'value'>;
 
 export const Input = ({
   value = '',
