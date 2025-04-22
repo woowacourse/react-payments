@@ -13,6 +13,7 @@ export interface PreviewViewProps {
   period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
   cardMethodSrc: string;
+  cardFrameColor: string;
 }
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
@@ -22,10 +23,11 @@ const PreviewView = ({
   period,
   separatorRef,
   cardMethodSrc,
+  cardFrameColor,
 }: PreviewViewProps) => {
   return (
     <PreviewContainer data-testid='preview-component'>
-      <CardFrame>
+      <CardFrame cardFrameColor={cardFrameColor}>
         <ICChip />
         {cardMethodSrc && (
           <CardMethod
@@ -65,7 +67,7 @@ const PreviewContainer = styled.div`
   padding: 34px 0 45px;
 `;
 
-const CardFrame = styled.div`
+const CardFrame = styled.div<{ cardFrameColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,7 +75,7 @@ const CardFrame = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ cardFrameColor }) => cardFrameColor};
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
 `;

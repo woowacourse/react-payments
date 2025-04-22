@@ -4,6 +4,7 @@ import CardNumbers from './components/CardNumbers';
 import ExpirationPeriod from './components/ExpirationPeriod';
 import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
+import CardBrandSelector from './components/CardBrand/CardBrandSelector';
 
 type CardNumber = {
   first: string;
@@ -30,6 +31,7 @@ const App = () => {
   });
   const [cvcNumbers, setCvcNumbers] = useState<string>('');
   const separatorRef = useRef<HTMLDivElement>(null);
+  const [cardFrameColor, setCardFrameColor] = useState('#333333');
 
   return (
     <Main>
@@ -37,7 +39,9 @@ const App = () => {
         cardNumbers={cardNumbers}
         period={period}
         separatorRef={separatorRef}
+        cardFrameColor={cardFrameColor}
       />
+      <CardBrandSelector setCardFrameColor={setCardFrameColor} />
       <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       <ExpirationPeriod
         period={period}

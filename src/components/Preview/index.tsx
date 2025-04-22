@@ -12,6 +12,7 @@ interface PreviewProps {
   cardNumbers: CardNumber;
   period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
+  cardFrameColor: string;
 }
 
 const VISA_CARD_PREFIXES = '4';
@@ -20,7 +21,12 @@ const MASTERCARD_CARD_PREFIXES = {
   MAX: 55,
 } as const;
 
-const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
+const Preview = ({
+  cardNumbers,
+  period,
+  separatorRef,
+  cardFrameColor,
+}: PreviewProps) => {
   const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
 
   const isVisa = (firstInput: string) => {
@@ -52,6 +58,7 @@ const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
       period={period}
       separatorRef={separatorRef}
       cardMethodSrc={cardMethodSrc}
+      cardFrameColor={cardFrameColor}
     />
   );
 };
