@@ -8,9 +8,7 @@ function App() {
   const { cardState, dispatch } = useCardInformation();
   return (
     <div css={AppStyle}>
-      <div css={PreviewCardContainerStyle}>
-        <PreviewCard uniqueNumber={cardState.uniqueNumber} expirationDate={cardState.expirationDate} />
-      </div>
+      <PreviewCard uniqueNumber={cardState.uniqueNumber} expirationDate={cardState.expirationDate} />
       <FormContainer cardState={cardState} dispatch={dispatch} />
     </div>
   );
@@ -22,13 +20,9 @@ const AppStyle = css`
   padding: 77px 30px 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 45px;
   border-radius: 20px;
-`;
-
-const PreviewCardContainerStyle = css`
-  display: flex;
-  justify-content: center;
 `;
 
 export default App;
