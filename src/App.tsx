@@ -5,6 +5,7 @@ import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './css/cardForm.module.css';
 import useCardNumbers from '@hooks/useCardNumbers';
 import useCardExpirationDate from '@hooks/useCardExpirationDate';
+import CardCompanySelectSection from './components/SelectSection/CardCompanySelectSection';
 
 function App() {
   const {
@@ -31,6 +32,7 @@ function App() {
           cardExpirationDate={cardExpirationDate}
         />
         <div className={styles.cardForm}>
+          <CardCompanySelectSection />
           <CardNumbersInputSection
             cardNumbers={cardNumbers}
             setCardNumbers={setCardNumbers}

@@ -23,11 +23,12 @@ export const Default: Story = {
           name=""
           onChange={fn()}
           onBlur={fn()}
-          value="선택해주세요"
           isError={false}
+          placeholder={'카드사를 선택해주세요'}
           options={[
-            { label: '옵션1', value: '옵션1' },
-            { label: '옵션2', value: '옵션2' },
+            { label: '카드사1', value: '카드사1' },
+            { label: '카드사2', value: '카드사2' },
+            { label: '카드사3', value: '카드사3' },
           ]}
         />
       </>

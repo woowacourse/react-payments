@@ -9,6 +9,7 @@ type SelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
 
 const SelectField = ({
   name,
+  value = '',
   onChange,
   onBlur,
   isError = false,
@@ -19,13 +20,14 @@ const SelectField = ({
   return (
     <select
       name={name}
+      value={value}
       onChange={onChange}
       onBlur={onBlur}
       className={`${styles.select} ${isError ? styles.error : styles.basic}`}
       {...rest}
     >
       {
-        <option value="" disabled selected hidden>
+        <option value="" disabled hidden>
           {placeholder}
         </option>
       }
