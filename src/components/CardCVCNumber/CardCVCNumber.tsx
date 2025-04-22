@@ -1,39 +1,19 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { CardCVCNumberInputType } from '@/types';
+import { RegisterType } from '@/hooks/useForm';
+import { CardCVCNumberInputType } from '@/types/input';
 import { checkAllNumber } from '@/utils/validation';
-import { Dispatch, SetStateAction } from 'react';
 
 interface CardCVCNumberProps {
-  cardCVCNumber: CardCVCNumberInputType;
-  setCardCVCNumber: Dispatch<SetStateAction<CardCVCNumberInputType>>;
-  cardCVCNumberErrorMessage: CardCVCNumberInputType;
-  setCardCVCNumberErrorMessage: Dispatch<SetStateAction<CardCVCNumberInputType>>;
+  register: RegisterType<{ cvc: CardCVCNumberInputType }>;
+  cardCVCNumberErrorMessage: { cvc: CardCVCNumberInputType };
   onFocus: () => void;
   onBlur: () => void;
 }
 
-export default function CardCVCNumber({
-  cardCVCNumber,
-  setCardCVCNumber,
-  cardCVCNumberErrorMessage,
-  setCardCVCNumberErrorMessage,
-  onFocus,
-  onBlur,
-}: CardCVCNumberProps) {
-  const handleInputChange = (value: string) => {
-    if (!checkAllNumber(value)) {
-      setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardNumber.number);
-      return;
-    }
-
-    setCardCVCNumber(value);
-
-    if (value.length !== 3) {
-      setCardCVCNumberErrorMessage(ERROR_MESSAGE.cardCVCNumber.length);
-    } else {
-      setCardCVCNumberErrorMessage('');
-    }
+export default function CardCVCNumber({ register, cardCVCNumberErrorMessage, onFocus, onBlur }: CardCVCNumberProps) {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!checkAllNumber(event.target.value)) return;
   };
 
   return (
@@ -46,15 +26,22 @@ export default function CardCVCNumber({
         <Input
           placeholder="123"
           maxLength={3}
-          value={cardCVCNumber}
-          onChange={(event) => handleInputChange(event.target.value)}
+          isError={cardCVCNumberErrorMessage.cvc !== ''}
           onFocus={onFocus}
           onBlur={onBlur}
-          isError={cardCVCNumberErrorMessage !== ''}
+          inputMode="numeric"
+          {...register('cvc', {
+            onChange: handleInputChange,
+            validation: {
+              required: true,
+              length: 3,
+              errorMessage: ERROR_MESSAGE.cardCVCNumber.length,
+            },
+          })}
         />
       </div>
       <Spacing size={8} />
-      <ErrorMessage>{cardCVCNumberErrorMessage}</ErrorMessage>
+      <ErrorMessage>{cardCVCNumberErrorMessage.cvc}</ErrorMessage>
     </div>
   );
 }

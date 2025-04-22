@@ -30,6 +30,7 @@ export default function RegisterPage() {
   // 현재 스텝
   const [currentStep, setCurrentStep] = useState<Step>(1);
 
+  // 1. 카드 번호
   const {
     value: cardNumber,
     errors: cardNumberErrors,
@@ -44,11 +45,18 @@ export default function RegisterPage() {
     },
   });
 
-  // 비밀번호
-  const [cardPassword, setCardPassword] = useState<CardPasswordInputType>('');
-  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<CardPasswordInputType>('');
+  // 2. 카드사
+  const {
+    value: { company: selectedCompany },
+    register: cardCompanyRegister,
+    isValid: isCardCompanyValid,
+  } = useForm<{ company: CardCompanyInputType }>({
+    defaultValues: {
+      company: '',
+    },
+  });
 
-  // 카드 유효기간
+  // 3. 카드 유효기간
   const {
     value: cardExpirationDate,
     errors: cardExpirationDateErrors,
@@ -61,18 +69,27 @@ export default function RegisterPage() {
     },
   });
 
-  // 카드 CVC 번호
-  const [cardCVCNumber, setCardCVCNumber] = useState<CardCVCNumberInputType>('');
-  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<CardCVCNumberInputType>('');
-
-  // 카드사
+  // 4. 카드 CVC 번호
   const {
-    value: { company: selectedCompany },
-    register: cardCompanyRegister,
-    isValid: isCardCompanyValid,
-  } = useForm<{ company: CardCompanyInputType }>({
+    value: { cvc: cardCVCNumber },
+    errors: cardCVCNumberErrors,
+    register: cardCVCNumberRegister,
+    isValid: isCVCNumberValid,
+  } = useForm<{ cvc: CardCVCNumberInputType }>({
     defaultValues: {
-      company: '',
+      cvc: '',
+    },
+  });
+
+  // 5. 비밀번호
+  const {
+    value: { password: cardPassword },
+    errors: cardPasswordErrors,
+    register: cardPasswordRegister,
+    isValid: isPasswordValid,
+  } = useForm<CardPasswordInputType>({
+    defaultValues: {
+      password: '',
     },
   });
 
@@ -80,8 +97,6 @@ export default function RegisterPage() {
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
   const cardType = getCardType(cardNumber.first);
-  const isCVCNumberValid = cardCVCNumber.length === 3;
-  const isPasswordValid = cardPassword.length === 2;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,8 +107,8 @@ export default function RegisterPage() {
         cardCompany: selectedCardCompany?.name || '',
         cardExpirationDateMonth: cardExpirationDate.month,
         cardExpirationDateYear: cardExpirationDate.year,
-        cardCVCNumber: cardCVCNumber,
-        cardPassword: cardPassword,
+        cardCVCNumber,
+        cardPassword,
       },
     });
   };
@@ -143,20 +158,13 @@ export default function RegisterPage() {
       <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
         {currentStep >= 5 && isCVCNumberValid && (
-          <CardPassword
-            cardPassword={cardPassword}
-            setCardPassword={setCardPassword}
-            cardPasswordErrorMessage={cardPasswordErrorMessage}
-            setCardPasswordErrorMessage={setCardPasswordErrorMessage}
-          />
+          <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
         )}
 
         {currentStep >= 4 && isExpirationDateValid && (
           <CardCVCNumber
-            cardCVCNumber={cardCVCNumber}
-            setCardCVCNumber={setCardCVCNumber}
-            cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-            setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
+            register={cardCVCNumberRegister}
+            cardCVCNumberErrorMessage={cardCVCNumberErrors}
             onFocus={() => setIsCardFlipped(true)}
             onBlur={() => setIsCardFlipped(false)}
           />

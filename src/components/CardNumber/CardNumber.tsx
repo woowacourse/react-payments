@@ -37,7 +37,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={cardNumberErrorMessage.first !== ''}
+          isError={!!cardNumberErrorMessage.first}
           aria-label="카드 번호 첫 번째 4자리"
           inputMode="numeric"
           data-sequence="1"
@@ -53,7 +53,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={cardNumberErrorMessage.second !== ''}
+          isError={!!cardNumberErrorMessage.second}
           aria-label="카드 번호 두 번째 4자리"
           inputMode="numeric"
           data-sequence="2"
@@ -69,7 +69,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={cardNumberErrorMessage.third !== ''}
+          isError={!!cardNumberErrorMessage.third}
           aria-label="카드 번호 세 번째 4자리"
           inputMode="numeric"
           data-sequence="3"
@@ -85,7 +85,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={cardNumberErrorMessage.fourth !== ''}
+          isError={!!cardNumberErrorMessage.fourth}
           aria-label="카드 번호 마지막 4자리"
           inputMode="numeric"
           data-sequence="4"
