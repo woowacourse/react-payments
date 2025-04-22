@@ -42,3 +42,30 @@
   height: 18px;
   margin: 8px 0 8px 0;
 }
+
+.BC카드 {
+  background-color: #f04651;
+}
+
+.신한카드 {
+  background-color: #0033a0;
+}
+
+.카카오뱅크 {
+  background-color: #ffe600;
+}
+.현대카드 {
+  background-color: #000000;
+}
+.우리카드 {
+  background-color: #007bc8;
+}
+.롯데카드 {
+  background-color: #ed1c24;
+}
+.하나카드 {
+  background-color: #009490;
+}
+.국민카드 {
+  background-color: #6a6056;
+}

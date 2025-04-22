@@ -38,6 +38,7 @@ function App() {
         <CardDisplay
           cardNumbers={cardNumbers}
           cardExpirationDate={cardExpirationDate}
+          cardCompany={cardCompany}
         />
         <div className={styles.cardForm}>
           <CardCompanySelectSection

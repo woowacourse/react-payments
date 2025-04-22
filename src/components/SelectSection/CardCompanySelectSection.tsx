@@ -20,6 +20,7 @@ const CARD_COMPANY = [
   { label: '하나카드', value: '하나카드' },
   { label: '국민카드', value: '국민카드' },
 ];
+
 type CardCompanySelectSectionProps = {
   cardCompany: string;
   setCardCompany: (value: string) => void;
