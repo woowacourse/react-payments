@@ -24,10 +24,15 @@ export type InputFieldProps = {
 };
 
 export type InputProps = {
+  /** 입력창에 표시할 힌트 텍스트 */
   placeholder: string;
+  /** 입력 가능한 최대 숫자 길이 */
   maxLength: number;
+  /** 현재 입력값 */
   value: string;
+  /** 에러 상태 여부 (true일 경우 스타일 변경) */
   error: boolean;
+  /** 입력값이 변경될 때 호출되는 콜백 함수 */
   onChange: (value: string) => void;
 };
 

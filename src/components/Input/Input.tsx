@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { InputProps } from "../../types/componentPropsType";
 
+/** input 컴포넌트 */
 const Input = ({ placeholder, maxLength, value, error, onChange }: InputProps) => {
   return (
     <input
