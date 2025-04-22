@@ -39,20 +39,26 @@ const checkYearLength = (year: string) => {
   return year.length === YEAR_RULE.length;
 };
 
+const YEAR_RANGE_TYPE_RULE = {
+  same: 'same',
+  less: 'less',
+  greater: 'greater',
+} as const;
+
 const getYearRangeType = (year: number) => {
   const currentYear = Number(
     YEAR_RULE.currentYear.toString().slice(YEAR_RULE.length),
   );
 
   if (year === currentYear) {
-    return 'same';
+    return YEAR_RANGE_TYPE_RULE.same;
   }
 
   if (year < currentYear) {
-    return 'less';
+    return YEAR_RANGE_TYPE_RULE.less;
   }
 
-  return 'greater';
+  return YEAR_RANGE_TYPE_RULE.greater;
 };
 
 const checkMonthRangeInSameYear = (month: number) => {
@@ -89,12 +95,12 @@ const validateCardValidityPeriod = ({
     newErrorMessage.year = ERROR_MESSAGE.YEAR_LENGTH;
   } else {
     const yearRangeType = getYearRangeType(yearNumber);
-    if (yearRangeType === 'greater') {
+    if (yearRangeType === YEAR_RANGE_TYPE_RULE.greater) {
       newErrorMessage.year = '';
-    } else if (yearRangeType === 'less') {
+    } else if (yearRangeType === YEAR_RANGE_TYPE_RULE.less) {
       newErrorMessage.year = ERROR_MESSAGE.YEAR_RANGE;
     } else if (
-      yearRangeType === 'same' &&
+      yearRangeType === YEAR_RANGE_TYPE_RULE.same &&
       !checkMonthRangeInSameYear(monthNumber)
     ) {
       newErrorMessage.month = ERROR_MESSAGE.SAME_YEAR_MONTH_RANGE;

@@ -1,5 +1,13 @@
 import { useState } from 'react';
 
+const PARSE_RULE = {
+  length: 4,
+} as const;
+
+const CARD_NUMBER_RULE = {
+  min: 0,
+} as const;
+
 const ERROR_MESSAGE = {
   CARD_NUMBER_LENGTH: '카드 번호는 16자리입니다.',
 } as const;
@@ -11,12 +19,14 @@ function useCardNumber() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const { value } = e.target;
 
-    if (value.length > 4) {
+    if (value.length > PARSE_RULE.length) {
       return;
     }
 
     const checkValidCardNumber = (value: string) => {
-      return value.length < 4 || Number(value) < 0;
+      return (
+        value.length < PARSE_RULE.length || Number(value) < CARD_NUMBER_RULE.min
+      );
     };
 
     setErrorMessage((prev) => {

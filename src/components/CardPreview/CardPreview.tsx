@@ -35,6 +35,10 @@ const CARD_TYPE_IMAGES_PATH = {
 
 type CardType = keyof typeof CARD_TYPE_IMAGES_PATH;
 
+const CARD_PREVIEW_RULE = {
+  SENSITIVE_INFO: 2,
+} as const;
+
 function CardPreview({ cardNumber, cardValidityPeriod }: CardPreviewProps) {
   const { month, year } = cardValidityPeriod;
 
@@ -47,7 +51,7 @@ function CardPreview({ cardNumber, cardValidityPeriod }: CardPreviewProps) {
       <CardInfoWrapper>
         <CardNumberWrapper>
           {cardNumber.map((number, index) => {
-            if (index < 2) {
+            if (index < CARD_PREVIEW_RULE.SENSITIVE_INFO) {
               return <CardNumber key={index}>{number}</CardNumber>;
             }
             return (

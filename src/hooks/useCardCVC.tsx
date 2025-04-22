@@ -1,5 +1,13 @@
 import { useState } from 'react';
 
+const PARSE_RULE = {
+  length: 3,
+} as const;
+
+const CVC_RULE = {
+  min: 0,
+} as const;
+
 const ERROR_MESSAGE = {
   CARD_CVC_LENGTH: 'CVC는 3자리입니다.',
 } as const;
@@ -11,12 +19,14 @@ function useCardCVC() {
   const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (value.length > 3) {
+    if (value.length > PARSE_RULE.length) {
       return;
     }
 
     const isNotValid =
-      value.length < 3 || value.length > 3 || Number(value) < 0;
+      value.length < PARSE_RULE.length ||
+      value.length > PARSE_RULE.length ||
+      Number(value) < CVC_RULE.min;
 
     setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_CVC_LENGTH : '');
 
