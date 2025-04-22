@@ -21,8 +21,6 @@ export default function useCardCompany() {
     setSelectedCompany(company);
   };
 
-  console.log(selectedCompany, selectCompany);
-
   return {
     selectedCompany,
     selectCompany,
