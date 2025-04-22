@@ -3,7 +3,7 @@ import {
   sectionTitle,
   sectionTitleSubText,
   sectionTitleText,
-} from '../../../styles/@common/text/text.style';
+} from '../../../styles/@common/text.style';
 
 function Title({ children }: PropsWithChildren) {
   return <div css={sectionTitle}>{children}</div>;

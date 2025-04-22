@@ -2,7 +2,7 @@ import Input from '../@common/Input/Input';
 import {
   errorInputStyle,
   errorMessageStyle,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
 import { CARD_CVC } from '../../constants';
 import {

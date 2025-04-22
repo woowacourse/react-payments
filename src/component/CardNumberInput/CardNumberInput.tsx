@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react';
 import {
   errorInputStyle,
   errorMessageStyle,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style';
 import { cardNumberInputLayout } from './CardNumberInput.style';
 import { CARD_NUMBER } from '../../constants';
 import {
