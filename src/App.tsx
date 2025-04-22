@@ -8,6 +8,8 @@ import useCvcNumber from "./hooks/useCvcNumber";
 import useCardNumbers from "./hooks/useCardNumbers";
 import CardCompanyPicker from "./CardCompany/CardCompany";
 import useCardCompany from "./hooks/useCardCompany";
+import useCardPassword from "./hooks/useCardPassword";
+import CardPassword from "./CardPassword/CardPassword";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
@@ -16,6 +18,7 @@ function App() {
     useExpirationDate();
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
   const { selectedCompany, selectCompany } = useCardCompany();
+  const { password, passwordError, passwordValidate } = useCardPassword();
 
   return (
     <div className="App">
@@ -49,6 +52,11 @@ function App() {
         <CardCompanyPicker
           selectedCompany={selectedCompany}
           selectCompany={selectCompany}
+        />
+        <CardPassword
+          handleChange={passwordValidate}
+          password={password}
+          errorMessage={passwordError}
         />
       </div>
     </div>

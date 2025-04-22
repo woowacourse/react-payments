@@ -6,10 +6,14 @@ type Props = {
   onChange: (value: string) => void;
   placeholder?: string;
   errorMessage?: string;
+  type?: "text" | "password";
 };
 
 const CardNumberInput = forwardRef<HTMLInputElement, Props>(
-  ({ value, onChange, placeholder = "1234", errorMessage = "" }, ref) => {
+  (
+    { value, onChange, placeholder = "1234", errorMessage = "", type = "text" },
+    ref
+  ) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       if (/^\d*$/.test(newValue)) {
@@ -26,6 +30,7 @@ const CardNumberInput = forwardRef<HTMLInputElement, Props>(
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        type={type ?? "text"}
       />
     );
   }
