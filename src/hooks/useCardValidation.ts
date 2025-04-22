@@ -5,13 +5,14 @@ import {
 } from "./../constants/constants";
 import { useState } from "react";
 import { CardFormType } from "../constants/constants";
-import { isNotNumber } from "../utils/validation";
+import { isEmpty, isNotNumber } from "../utils/validation";
 
 export interface CardValidationType {
   cardNumbers: Record<CardNumbersSegmentType, boolean>;
   expirationPeriod: Record<ExpirationPeriodSegmentType, boolean>;
   cvcNumber: boolean;
   cardCompany: boolean;
+  password: boolean;
 }
 
 const initialState = {
@@ -27,9 +28,9 @@ const initialState = {
   },
   cvcNumber: false,
   cardCompany: false,
+  password: false,
 };
 
-// TODO: cardCompany와 비밀번호 input 상태에 대한 get, set 정의
 export function useCardValidation() {
   const [validationErrors, setValidationErrors] =
     useState<CardValidationType>(initialState);
@@ -67,6 +68,20 @@ export function useCardValidation() {
     }));
   };
 
+  const validateCardCompany = (value: string) => {
+    setValidationErrors((prev) => ({
+      ...prev,
+      cardCompany: isEmpty(value),
+    }));
+  };
+
+  const validatePassword = (value: string) => {
+    setValidationErrors((prev) => ({
+      ...prev,
+      password: isNotNumber(value),
+    }));
+  };
+
   const hasError = (type: CardFormType): boolean => {
     if (
       type === CARD_FORM_TYPE.cvcNumber ||
@@ -81,14 +96,20 @@ export function useCardValidation() {
   const getCardNumberErrors = () => validationErrors.cardNumbers;
   const getExpirationPeriodErrors = () => validationErrors.expirationPeriod;
   const getCvcNumberError = () => validationErrors.cvcNumber;
+  const getCardCompanyError = () => validationErrors.cardCompany;
+  const getPasswordError = () => validationErrors.password;
 
   return {
     hasError,
     getCardNumberErrors,
     getExpirationPeriodErrors,
     getCvcNumberError,
+    getCardCompanyError,
+    getPasswordError,
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,
+    validateCardCompany,
+    validatePassword,
   };
 }
