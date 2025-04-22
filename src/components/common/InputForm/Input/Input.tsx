@@ -1,7 +1,12 @@
 import { ComponentProps } from 'react';
 import styles from './Input.module.css';
 
-export interface InputProps extends ComponentProps<'input'> {
+type InputAttribute = Pick<
+  ComponentProps<'input'>,
+  'type' | 'name' | 'id' | 'placeholder' | 'maxLength' | 'value'
+>;
+
+export interface InputProps extends InputAttribute {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isValidInput: boolean;
   dataInputId?: number;
