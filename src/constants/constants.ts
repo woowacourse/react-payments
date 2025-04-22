@@ -26,16 +26,7 @@ export type CardType = keyof typeof CARD_TYPE;
 export type CardPositionType = keyof typeof CARD_POSITION;
 export type PeriodPositionType = keyof typeof PERIOD_POSITION;
 
-export interface CardNumbers {
-  [CARD_POSITION.first]: string;
-  [CARD_POSITION.second]: string;
-  [CARD_POSITION.third]: string;
-  [CARD_POSITION.fourth]: string;
-}
-
-export interface ExpirationPeriod {
-  [PERIOD_POSITION.month]: string;
-  [PERIOD_POSITION.year]: string;
-}
+export type CardNumbers = Record<CardPositionType, string>;
+export type ExpirationPeriod = Record<PeriodPositionType, string>;
 
 export type CvcNumber = string;
