@@ -8,16 +8,22 @@ import {
   Spacing,
 } from '@/components';
 import { CardCompanyType, DateType, SequenceType } from '@/types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
-import { isValidCardInfo } from '@/utils/validation';
 import { getCardType } from '@/App/utils';
 import * as S from './RegisterPage.styles';
 import { CARD_COMPANIES } from '@/constants';
 
+type Step = 1 | 2 | 3 | 4 | 5;
+
 export default function RegisterPage() {
   const navigate = useNavigate();
+
+  // 현재 스텝
+  const [currentStep, setCurrentStep] = useState<Step>(1);
+
+  console.log(currentStep);
 
   // 비밀번호
   const [cardPassword, setCardPassword] = useState<string>('');
@@ -70,12 +76,35 @@ export default function RegisterPage() {
     });
   };
 
-  const isValid = isValidCardInfo({
-    cardNumber,
-    cardExpirationDate,
-    cardCVCNumber,
-    selectedCompany,
-  });
+  const isCardNumberValid = Object.values(cardNumber).every((value) => value.length === 4);
+  const isCardCompanyValid = Boolean(selectedCompany);
+  const isExpirationDateValid = cardExpirationDate.month && cardExpirationDate.year;
+  const isCVCNumberValid = cardCVCNumber.length === 3;
+  const isPasswordValid = cardPassword.length === 2;
+
+  useEffect(() => {
+    if (currentStep === 1 && isCardNumberValid) {
+      setCurrentStep(2);
+    }
+  }, [currentStep, isCardNumberValid]);
+
+  useEffect(() => {
+    if (currentStep === 2 && isCardCompanyValid) {
+      setCurrentStep(3);
+    }
+  }, [currentStep, isCardCompanyValid]);
+
+  useEffect(() => {
+    if (currentStep === 3 && isExpirationDateValid) {
+      setCurrentStep(4);
+    }
+  }, [currentStep, isExpirationDateValid]);
+
+  useEffect(() => {
+    if (currentStep === 4 && isCVCNumberValid) {
+      setCurrentStep(5);
+    }
+  }, [currentStep, isCVCNumberValid]);
 
   return (
     <S.Wrapper>
@@ -91,35 +120,44 @@ export default function RegisterPage() {
       </S.CardPreviewWrapper>
       <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
-        <CardPassword
-          cardPassword={cardPassword}
-          setCardPassword={setCardPassword}
-          cardPasswordErrorMessage={cardPasswordErrorMessage}
-          setCardPasswordErrorMessage={setCardPasswordErrorMessage}
-        />
-        <CardCVCNumber
-          cardCVCNumber={cardCVCNumber}
-          setCardCVCNumber={setCardCVCNumber}
-          cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-          setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
-          onFocus={() => setIsCardFlipped(true)}
-          onBlur={() => setIsCardFlipped(false)}
-        />
-        <CardExpirationDate
-          cardExpirationDate={cardExpirationDate}
-          setCardExpirationDate={setCardExpirationDate}
-          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-          setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
-        />
-        <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
         <CardNumber
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
           cardNumberErrorMessage={cardNumberErrorMessage}
           setCardNumberErrorMessage={setCardNumberErrorMessage}
         />
+        {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
 
-        {isValid && <Button type="submit">확인</Button>}
+        {currentStep >= 2 && isCardCompanyValid && (
+          <CardExpirationDate
+            cardExpirationDate={cardExpirationDate}
+            setCardExpirationDate={setCardExpirationDate}
+            cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
+            setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
+          />
+        )}
+
+        {currentStep >= 3 && isExpirationDateValid && (
+          <CardCVCNumber
+            cardCVCNumber={cardCVCNumber}
+            setCardCVCNumber={setCardCVCNumber}
+            cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
+            setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
+            onFocus={() => setIsCardFlipped(true)}
+            onBlur={() => setIsCardFlipped(false)}
+          />
+        )}
+
+        {currentStep >= 4 && isCVCNumberValid && (
+          <CardPassword
+            cardPassword={cardPassword}
+            setCardPassword={setCardPassword}
+            cardPasswordErrorMessage={cardPasswordErrorMessage}
+            setCardPasswordErrorMessage={setCardPasswordErrorMessage}
+          />
+        )}
+
+        {currentStep === 5 && isPasswordValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
     </S.Wrapper>
   );
