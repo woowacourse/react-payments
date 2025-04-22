@@ -1,22 +1,33 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
+import CheckIcon from '@/components/icons/CheckIcon';
 import * as S from './CompletePage.styles';
+
+interface LocationState {
+  cardNumber: string;
+  cardCompany: string;
+}
 
 export default function CompletePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as LocationState;
 
   const handleClick = () => {
-    navigate('/');
+    navigate('/', { replace: true });
   };
+
+  if (!state?.cardNumber || !state?.cardCompany) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <S.Wrapper>
-      <S.Title>카드 등록이 완료되었습니다</S.Title>
-      <S.Description>
-        등록하신 카드로 결제하실 수 있습니다.
-        <br />
-        추가로 카드를 등록하시려면 아래 버튼을 눌러주세요.
-      </S.Description>
+      <S.IconWrapper>
+        <CheckIcon />
+      </S.IconWrapper>
+      <S.Title>{state.cardNumber}로 시작하는</S.Title>
+      <S.Description>{state.cardCompany}가 등록되었어요.</S.Description>
       <S.ButtonWrapper>
         <Button type="button" onClick={handleClick}>
           확인

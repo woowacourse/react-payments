@@ -6,6 +6,7 @@ import Button from '@/components/Button/Button';
 import { isValidCardInfo } from '@/utils/validation';
 import { getCardType } from '@/App/utils';
 import * as S from './RegisterPage.styles';
+import { CARD_COMPANIES } from '@/constants';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -48,7 +49,13 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/complete');
+    const selectedCardCompany = CARD_COMPANIES.find((company) => company.id === selectedCompany);
+    navigate('/complete', {
+      state: {
+        cardNumber: cardNumber.first,
+        cardCompany: selectedCardCompany?.name || '',
+      },
+    });
   };
 
   const isValid = isValidCardInfo({
