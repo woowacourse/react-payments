@@ -5,12 +5,20 @@
   gap: 5px;
 }
 
+.selectedInputContainer {
+  position: relative;
+}
+
 .selectedInput {
   width: 100%;
+  padding: 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   border: 1px solid var(--grey);
   border-radius: 4px;
   color: var(--black);
-  padding: 12px 8px;
   &::placeholder {
     color: var(--grey);
   }
@@ -22,6 +30,12 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.selectedIcon {
+  position: absolute;
+  top: 18px;
+  right: 0px;
 }
 
 .optionBox {

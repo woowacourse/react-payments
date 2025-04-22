@@ -23,16 +23,25 @@ function Select({ name, placeholder, optionList }: SelectProps) {
 
   return (
     <div className={styles.selectBox}>
-      <input
-        type='text'
-        name={name}
-        className={styles.selectedInput}
-        id='selectInput'
-        placeholder={placeholder}
-        value={selectedValue}
-        onClick={handleSelectClick}
-        readOnly
-      />
+      <div className={styles.selectedInputContainer}>
+        <input
+          type='text'
+          name={name}
+          className={styles.selectedInput}
+          id='selectInput'
+          placeholder={placeholder}
+          value={selectedValue}
+          onClick={handleSelectClick}
+          readOnly
+        />
+        <img
+          src={
+            isOpenOptions ? './SelectBox-visible.png' : './SelectBox-hidden.png'
+          }
+          alt='Selected 드롭다운 아이콘'
+          className={styles.selectedIcon}
+        />
+      </div>
       <ul
         className={`${styles.optionBox} ${isOpenOptions ? '' : styles.hidden}`}
       >
