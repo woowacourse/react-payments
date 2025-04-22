@@ -1,17 +1,17 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
-import { SequenceType } from '@/types';
+import { RegisterType } from '@/hooks/useForm';
+import { CardNumberInputType } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
 import { checkAllNumber } from '@/utils/validation';
 import { ChangeEvent } from 'react';
 import * as S from './CardNumber.styles';
 
 interface CardNumberProps {
-  cardNumber: Record<SequenceType, string>;
-  cardNumberErrorMessage: Record<SequenceType, string>;
-  register: any;
+  cardNumberErrorMessage: CardNumberInputType;
+  register: RegisterType<CardNumberInputType>;
 }
 
-export default function CardNumber({ register, cardNumber, cardNumberErrorMessage }: CardNumberProps) {
+export default function CardNumber({ register, cardNumberErrorMessage }: CardNumberProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     if (!checkAllNumber(value)) return;
@@ -37,7 +37,6 @@ export default function CardNumber({ register, cardNumber, cardNumberErrorMessag
         <Input
           placeholder="1234"
           maxLength={4}
-          value={cardNumber.first}
           isError={cardNumberErrorMessage.first !== ''}
           aria-label="카드 번호 첫 번째 4자리"
           inputMode="numeric"
@@ -49,7 +48,6 @@ export default function CardNumber({ register, cardNumber, cardNumberErrorMessag
         <Input
           placeholder="1234"
           maxLength={4}
-          value={cardNumber.second}
           isError={cardNumberErrorMessage.second !== ''}
           aria-label="카드 번호 두 번째 4자리"
           inputMode="numeric"
@@ -61,7 +59,6 @@ export default function CardNumber({ register, cardNumber, cardNumberErrorMessag
         <Input
           placeholder="1234"
           maxLength={4}
-          value={cardNumber.third}
           isError={cardNumberErrorMessage.third !== ''}
           aria-label="카드 번호 세 번째 4자리"
           inputMode="numeric"
@@ -73,7 +70,6 @@ export default function CardNumber({ register, cardNumber, cardNumberErrorMessag
         <Input
           placeholder="1234"
           maxLength={4}
-          value={cardNumber.fourth}
           isError={cardNumberErrorMessage.fourth !== ''}
           aria-label="카드 번호 마지막 4자리"
           inputMode="numeric"

@@ -1,17 +1,17 @@
 import { Label, Spacing, Title } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
-import { CardCompanyType } from '@/types';
+import { CardCompanyInputType } from '@/types';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import * as S from './CardCompany.styles';
 
 interface CardCompanyProps {
-  selectedCompany: CardCompanyType | '';
-  setSelectedCompany: Dispatch<SetStateAction<CardCompanyType | ''>>;
+  selectedCompany: CardCompanyInputType;
+  setSelectedCompany: Dispatch<SetStateAction<CardCompanyInputType>>;
 }
 
 export default function CardCompany({ selectedCompany, setSelectedCompany }: CardCompanyProps) {
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value as CardCompanyType | '';
+    const value = event.target.value as CardCompanyInputType;
     setSelectedCompany(value);
   };
 

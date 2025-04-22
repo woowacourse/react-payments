@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { CardExpirationDate } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { DateType } from '@/types';
+import { CardExpirationDateType } from '@/types';
 import { fn } from '@storybook/test';
 
 export const ActionsData = {
@@ -42,7 +42,7 @@ export const Default: Story = {
     },
   },
   render: function Render(args) {
-    const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
+    const [cardExpirationDate, setCardExpirationDate] = useState<Record<CardExpirationDateType, string>>({
       month: '',
       year: '',
     });

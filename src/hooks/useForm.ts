@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 type ValidationType = { required: boolean; length?: number; errorMessage: string };
+export type RegisterType<T> = ReturnType<typeof useForm<T>>['register'];
 
 export default function useForm<T>({
   defaultValues,

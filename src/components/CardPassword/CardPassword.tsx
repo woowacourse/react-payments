@@ -1,14 +1,15 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
-import { Dispatch, SetStateAction, ChangeEvent } from 'react';
-import { ERROR_MESSAGE } from '@/constants';
-import * as S from './CardPassword.styles';
+import { CardPasswordInputType } from '@/types/input';
 import { checkAllNumber } from '@/utils/validation';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import * as S from './CardPassword.styles';
+import { ERROR_MESSAGE } from '@/constants';
 
 interface CardPasswordProps {
-  cardPassword: string;
-  setCardPassword: (value: string) => void;
-  cardPasswordErrorMessage: string;
-  setCardPasswordErrorMessage: Dispatch<SetStateAction<string>>;
+  cardPassword: CardPasswordInputType;
+  setCardPassword: (value: CardPasswordInputType) => void;
+  cardPasswordErrorMessage: CardPasswordInputType;
+  setCardPasswordErrorMessage: Dispatch<SetStateAction<CardPasswordInputType>>;
 }
 
 export default function CardPassword({

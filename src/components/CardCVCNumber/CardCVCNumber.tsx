@@ -1,13 +1,14 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
+import { CardCVCNumberInputType } from '@/types';
 import { checkAllNumber } from '@/utils/validation';
 import { Dispatch, SetStateAction } from 'react';
 
 interface CardCVCNumberProps {
-  cardCVCNumber: string;
-  setCardCVCNumber: Dispatch<SetStateAction<string>>;
-  cardCVCNumberErrorMessage: string;
-  setCardCVCNumberErrorMessage: Dispatch<SetStateAction<string>>;
+  cardCVCNumber: CardCVCNumberInputType;
+  setCardCVCNumber: Dispatch<SetStateAction<CardCVCNumberInputType>>;
+  cardCVCNumberErrorMessage: CardCVCNumberInputType;
+  setCardCVCNumberErrorMessage: Dispatch<SetStateAction<CardCVCNumberInputType>>;
   onFocus: () => void;
   onBlur: () => void;
 }

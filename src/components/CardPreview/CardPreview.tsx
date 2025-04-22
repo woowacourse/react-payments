@@ -1,15 +1,21 @@
-import * as S from './CardPreview.styles';
+import { CARD_COMPANIES, MASKING } from '@/constants';
+import { CardType } from '@/types';
+import {
+  CardCompanyInputType,
+  CardCVCNumberInputType,
+  CardExpirationDateInputType,
+  CardNumberInputType,
+} from '@/types';
 import MasterCard from '../icons/MasterCard';
 import VisaCard from '../icons/VisaCard';
-import { CardType, DateType, SequenceType, CardCompanyType } from '@/types';
-import { MASKING, CARD_COMPANIES } from '@/constants';
+import * as S from './CardPreview.styles';
 
 interface CardPreviewProps {
   cardType: CardType;
-  cardNumber: Record<SequenceType, string>;
-  cardExpirationDate: Record<DateType, string>;
-  selectedCompany: CardCompanyType | '';
-  cardCVCNumber: string;
+  cardNumber: CardNumberInputType;
+  cardExpirationDate: CardExpirationDateInputType;
+  selectedCompany: CardCompanyInputType;
+  cardCVCNumber: CardCVCNumberInputType;
   isFlipped: boolean;
 }
 

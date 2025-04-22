@@ -1,15 +1,15 @@
 import { checkValidMonth, checkValidYear } from '@/components/CardExpirationDate/utils';
-import { CardCompanyType, DateType, SequenceType } from '@/types';
+import { CardCompanyType, CardExpirationDateType, CardNumberSequenceType } from '@/types';
 
 export const checkAllNumber = (value: string) => {
   return /^[0-9]*$/.test(value);
 };
 
-export const isValidCardNumber = (cardNumber: Record<SequenceType, string>) => {
+export const isValidCardNumber = (cardNumber: Record<CardNumberSequenceType, string>) => {
   return Object.values(cardNumber).every((value) => value.length === 4);
 };
 
-export const isValidExpirationDate = (cardExpirationDate: Record<DateType, string>) => {
+export const isValidExpirationDate = (cardExpirationDate: Record<CardExpirationDateType, string>) => {
   const { month, year } = cardExpirationDate;
   return checkValidMonth(month) && checkValidYear(year);
 };
@@ -24,8 +24,8 @@ export const isValidCardInfo = ({
   cardCVCNumber,
   selectedCompany,
 }: {
-  cardNumber: Record<SequenceType, string>;
-  cardExpirationDate: Record<DateType, string>;
+  cardNumber: Record<CardNumberSequenceType, string>;
+  cardExpirationDate: Record<CardExpirationDateType, string>;
   cardCVCNumber: string;
   selectedCompany: CardCompanyType | '';
 }) => {

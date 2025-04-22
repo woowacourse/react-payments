@@ -1,21 +1,21 @@
 import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
 import { Dispatch, SetStateAction } from 'react';
 import { ERROR_MESSAGE } from '@/constants';
-import { DateType } from '@/types';
+import { CardExpirationDateType } from '@/types';
 import * as S from './CardExpirationDate.styles';
 import { checkValidMonth, checkValidYear } from './utils';
 import { getErrorMessageFromObject } from '@/utils/message';
 import { checkAllNumber } from '@/utils/validation';
-
+import { CardExpirationDateInputType } from '@/types';
 interface CardExpirationDateProps {
-  cardExpirationDate: Record<DateType, string>;
-  setCardExpirationDate: Dispatch<SetStateAction<Record<DateType, string>>>;
-  cardExpirationDateErrorMessage: Record<DateType, string>;
-  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<Record<DateType, string>>>;
+  cardExpirationDate: CardExpirationDateInputType;
+  setCardExpirationDate: Dispatch<SetStateAction<CardExpirationDateInputType>>;
+  cardExpirationDateErrorMessage: CardExpirationDateInputType;
+  setCardExpirationDateErrorMessage: Dispatch<SetStateAction<CardExpirationDateInputType>>;
 }
 
 interface HandleInputChangeParams {
-  dateType: DateType;
+  dateType: CardExpirationDateType;
   value: string;
 }
 

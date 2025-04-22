@@ -1,3 +1,4 @@
+import { getCardType } from '@/App/utils';
 import {
   CardCompany,
   CardCVCNumber,
@@ -7,14 +8,18 @@ import {
   CardPreview,
   Spacing,
 } from '@/components';
-import { CardCompanyType, DateType, SequenceType } from '@/types';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button/Button';
-import { getCardType } from '@/App/utils';
-import * as S from './RegisterPage.styles';
 import { CARD_COMPANIES } from '@/constants';
 import useForm from '@/hooks/useForm';
+import {
+  CardCompanyInputType,
+  CardCVCNumberInputType,
+  CardExpirationDateInputType,
+  CardNumberInputType,
+} from '@/types/input';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as S from './RegisterPage.styles';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -28,7 +33,7 @@ export default function RegisterPage() {
     value: cardNumber,
     errors: cardNumberErrors,
     register,
-  } = useForm<Record<SequenceType, string>>({
+  } = useForm<CardNumberInputType>({
     defaultValues: {
       first: '',
       second: '',
@@ -64,21 +69,21 @@ export default function RegisterPage() {
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
 
   // 카드 유효기간
-  const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
+  const [cardExpirationDate, setCardExpirationDate] = useState<CardExpirationDateInputType>({
     month: '',
     year: '',
   });
-  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
+  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<CardExpirationDateInputType>({
     month: '',
     year: '',
   });
 
   // 카드 CVC 번호
-  const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
-  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
+  const [cardCVCNumber, setCardCVCNumber] = useState<CardCVCNumberInputType>('');
+  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<CardCVCNumberInputType>('');
 
   // 카드사
-  const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | ''>('');
+  const [selectedCompany, setSelectedCompany] = useState<CardCompanyInputType>('');
 
   // 카드 뒤집기 상태
   const [isCardFlipped, setIsCardFlipped] = useState(false);
@@ -177,9 +182,7 @@ export default function RegisterPage() {
 
         {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
 
-        {currentStep >= 1 && (
-          <CardNumber register={register} cardNumber={cardNumber} cardNumberErrorMessage={cardNumberErrors} />
-        )}
+        {currentStep >= 1 && <CardNumber register={register} cardNumberErrorMessage={cardNumberErrors} />}
 
         {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
