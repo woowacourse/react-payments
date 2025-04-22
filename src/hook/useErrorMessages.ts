@@ -10,6 +10,7 @@ export const useErrorMessages = () => {
     MM: "",
     YY: "",
     CVC: "",
+    password: "",
   });
 
   const handleErrorMessages = (

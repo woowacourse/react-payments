@@ -6,13 +6,13 @@ import type { Dispatch, SetStateAction } from "react";
 import FormField from "../../FormField";
 
 interface CardNumberInputProps {
-  errorMessages: string;
+  errorMessage: string;
   handleErrorMessages: (key: keyof ErrorMessagesProps, message: string) => void;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
 }
 
 const CardNumberInputs = ({
-  errorMessages,
+  errorMessage,
   setCardInput,
   handleErrorMessages,
 }: CardNumberInputProps) => {
@@ -22,7 +22,7 @@ const CardNumberInputs = ({
   >)[] = ["first", "second", "third", "fourth"];
 
   return (
-    <FormField label="카드 번호" errorMessages={errorMessages} id="card-number">
+    <FormField label="카드 번호" errorMessage={errorMessage} id="card-number">
       {cardNumberKeys.map((key) => (
         <CardInput
           key={key}

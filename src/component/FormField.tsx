@@ -3,17 +3,17 @@ import styled from "styled-components";
 interface FormFieldProps {
   label: string;
   children: React.ReactNode;
-  errorMessages: string;
+  errorMessage: string;
   id: string;
 }
 
-const FormField = ({ label, children, errorMessages, id }: FormFieldProps) => {
+const FormField = ({ label, children, errorMessage, id }: FormFieldProps) => {
   return (
     <Container>
       <Label htmlFor={id}>{label}</Label>
       <InputContainer>{children}</InputContainer>
       <ErrorMessageContainer>
-        <ErrorMessage>{errorMessages}</ErrorMessage>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </ErrorMessageContainer>
     </Container>
   );

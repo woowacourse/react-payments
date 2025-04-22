@@ -6,18 +6,18 @@ import type { Dispatch, SetStateAction } from "react";
 import type { CardInputProps } from "../../../types/CardInputTypes";
 
 interface CVCInputsProps {
-  errorMessages: string;
+  errorMessage: string;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesProps, message: string) => void;
 }
 
 const CVCInputs = ({
-  errorMessages,
+  errorMessage,
   setCardInput,
   handleErrorMessages,
 }: CVCInputsProps) => {
   return (
-    <FormField label="CVC" errorMessages={errorMessages} id="cvc">
+    <FormField label="CVC" errorMessage={errorMessage} id="cvc">
       <CardInput
         id="cvc"
         maxLength={3}

@@ -9,13 +9,13 @@ import {
 } from "../../../validation/validation";
 
 interface ExpirationDateInputsProps {
-  errorMessages: string;
+  errorMessage: string;
   setCardInput: Dispatch<SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesProps, message: string) => void;
 }
 
 const ExpirationDateInputs = ({
-  errorMessages,
+  errorMessage,
   setCardInput,
   handleErrorMessages,
 }: ExpirationDateInputsProps) => {
@@ -26,7 +26,7 @@ const ExpirationDateInputs = ({
   return (
     <FormField
       label="유효기간"
-      errorMessages={errorMessages}
+      errorMessage={errorMessage}
       id="expiration-date"
     >
       {expirationDateKeys.map((key) => (

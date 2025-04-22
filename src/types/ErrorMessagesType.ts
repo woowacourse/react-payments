@@ -6,4 +6,5 @@ export interface ErrorMessagesProps {
   MM: string;
   YY: string;
   CVC: string;
+  password: string;
 }

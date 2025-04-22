@@ -6,4 +6,5 @@ export interface CardInputProps {
   MM: number | null;
   YY: number | null;
   CVC: number | null;
+  password: number | null;
 }

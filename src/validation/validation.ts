@@ -3,7 +3,7 @@ import ERROR_MESSAGE from "../constants/errorMessage";
 export const validateCardNumber = (cardNumber: string) => {
   if (cardNumber.length === 0) return;
 
-  if (isNaN(Number(cardNumber))) {
+  if (Number.isNaN(Number(cardNumber))) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 
@@ -13,7 +13,7 @@ export const validateCardNumber = (cardNumber: string) => {
 export const validateCardExpirationDateMM = (expirationDate: string) => {
   if (expirationDate.length === 0) return;
 
-  if (isNaN(Number(expirationDate))) {
+  if (Number.isNaN(Number(expirationDate))) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   if (Number(expirationDate) < 1 || Number(expirationDate) > 12) {
@@ -25,7 +25,7 @@ export const validateCardExpirationDateMM = (expirationDate: string) => {
 export const validateCardExpirationDateYY = (expirationDate: string) => {
   if (expirationDate.length === 0) return;
 
-  if (isNaN(Number(expirationDate))) {
+  if (Number.isNaN(Number(expirationDate))) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   if (Number(expirationDate) < 25 || Number(expirationDate) > 99) {
@@ -37,8 +37,12 @@ export const validateCardExpirationDateYY = (expirationDate: string) => {
 export const validateCardCVC = (cvc: string) => {
   if (cvc.length === 0) return;
 
-  if (isNaN(Number(cvc))) {
+  if (Number.isNaN(cvc)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   return "";
+};
+
+export const validateCardPassword = (password: string) => {
+  return password;
 };
