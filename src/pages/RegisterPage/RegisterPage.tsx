@@ -97,19 +97,6 @@ export default function RegisterPage() {
           cardPasswordErrorMessage={cardPasswordErrorMessage}
           setCardPasswordErrorMessage={setCardPasswordErrorMessage}
         />
-        <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
-        <CardNumber
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          cardNumberErrorMessage={cardNumberErrorMessage}
-          setCardNumberErrorMessage={setCardNumberErrorMessage}
-        />
-        <CardExpirationDate
-          cardExpirationDate={cardExpirationDate}
-          setCardExpirationDate={setCardExpirationDate}
-          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-          setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
-        />
         <CardCVCNumber
           cardCVCNumber={cardCVCNumber}
           setCardCVCNumber={setCardCVCNumber}
@@ -118,6 +105,20 @@ export default function RegisterPage() {
           onFocus={() => setIsCardFlipped(true)}
           onBlur={() => setIsCardFlipped(false)}
         />
+        <CardExpirationDate
+          cardExpirationDate={cardExpirationDate}
+          setCardExpirationDate={setCardExpirationDate}
+          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
+          setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
+        />
+        <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
+        <CardNumber
+          cardNumber={cardNumber}
+          setCardNumber={setCardNumber}
+          cardNumberErrorMessage={cardNumberErrorMessage}
+          setCardNumberErrorMessage={setCardNumberErrorMessage}
+        />
+
         {isValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
     </S.Wrapper>
