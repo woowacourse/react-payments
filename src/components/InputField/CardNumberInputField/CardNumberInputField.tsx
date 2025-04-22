@@ -40,7 +40,14 @@ function CardNumberInputField({
     cardNumberPart4: [],
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const errorStatus = Object.values(errorTypes).find(
+    (errorType) => errorType.length
+  );
+
+  const errorMessage =
+    errorStatus && errorStatus?.length !== 0
+      ? ERROR_TYPE_TO_MESSAGE[errorStatus[0]]
+      : '';
 
   const updateCardError = (
     inputName: CardNumberInputType,
@@ -99,16 +106,6 @@ function CardNumberInputField({
       isError: value.length > 0 && value.length < MAX_CARD_LENGTH,
     });
   };
-
-  useEffect(() => {
-    const errorStatus = Object.values(errorTypes).find(
-      (errorType) => errorType.length
-    );
-
-    if (errorStatus && errorStatus?.length !== 0)
-      setErrorMessage(ERROR_TYPE_TO_MESSAGE[errorStatus[0]]);
-    else setErrorMessage('');
-  }, [errorTypes]);
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
