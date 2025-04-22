@@ -16,6 +16,7 @@ import {
   CardCVCNumberInputType,
   CardExpirationDateInputType,
   CardNumberInputType,
+  CardPasswordInputType,
 } from '@/types/input';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -65,8 +66,8 @@ export default function RegisterPage() {
   });
 
   // 비밀번호
-  const [cardPassword, setCardPassword] = useState<string>('');
-  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
+  const [cardPassword, setCardPassword] = useState<CardPasswordInputType>('');
+  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<CardPasswordInputType>('');
 
   // 카드 유효기간
   const [cardExpirationDate, setCardExpirationDate] = useState<CardExpirationDateInputType>({
@@ -97,6 +98,10 @@ export default function RegisterPage() {
       state: {
         cardNumber: cardNumber.first,
         cardCompany: selectedCardCompany?.name || '',
+        cardExpirationDateMonth: cardExpirationDate.month,
+        cardExpirationDateYear: cardExpirationDate.year,
+        cardCVCNumber: cardCVCNumber,
+        cardPassword: cardPassword,
       },
     });
   };
