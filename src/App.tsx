@@ -3,6 +3,7 @@ import CardExpiryInput from "./components/CardExpiryInput/CardExpiryInput";
 import CVCInput from "./components/CVCInput/CVCInput";
 import CardPreview from "./components/CardPreview/CardPreview";
 import "./App.css";
+import CardCompanySelect from "./components/CardCompanySelect/CardCompanySelect";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <CardPreview />
       <form>
         <CardNumbersInput />
+        <CardCompanySelect />
         <CardExpiryInput />
         <CVCInput />
       </form>
