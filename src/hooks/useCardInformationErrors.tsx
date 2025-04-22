@@ -8,18 +8,21 @@ const ERROR_MESSAGE = {
   YY_VALID: "유효한 년도(25~)만 입력해주세요.",
 };
 
-const useCardInformationErrors = () => {
-  const [isErrors, setIsErrors] = useState<CardInformationErrorType>({
-    uniqueNumber: [false, false, false, false],
-    expirationDate: [false, false],
-    cvcNumber: [false],
-  });
+const initialCardInformationErrors: CardInformationErrorType = {
+  uniqueNumber: [false, false, false, false],
+  expirationDate: [false, false],
+  cvcNumber: [false],
+};
 
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>({
-    uniqueNumber: "",
-    expirationDate: "",
-    cvcNumber: "",
-  });
+const initialCardInformationErrorMessage: ErrorMessageType = {
+  uniqueNumber: "",
+  expirationDate: "",
+  cvcNumber: "",
+};
+
+const useCardInformationErrors = () => {
+  const [isErrors, setIsErrors] = useState<CardInformationErrorType>(initialCardInformationErrors);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>(initialCardInformationErrorMessage);
 
   const validateInput = (type: "uniqueNumber" | "expirationDate" | "cvcNumber", index: number, value: string) => {
     const isNumberOnly = NUMBER_ONLY_REGEX.test(value);
