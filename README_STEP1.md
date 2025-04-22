@@ -1,6 +1,6 @@
 # react-payments
 
-FE 레벨2 페이먼츠 미션
+FE 레벨2 페이먼츠 미션 STEP1
 
 ## 📍 학습 목표
 
