@@ -14,8 +14,10 @@ function BaseInputField({
 }: BaseInputFieldProps) {
   return (
     <InputFieldContainer>
-      <Label>{label}</Label>
-      <InputWrapper>{children}</InputWrapper>
+      <fieldset>
+        <Legend>{label}</Legend>
+        <InputWrapper>{children}</InputWrapper>
+      </fieldset>
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputFieldContainer>
   );
@@ -27,7 +29,8 @@ const InputFieldContainer = styled.div`
   gap: 8px;
 `;
 
-const Label = styled.p`
+const Legend = styled.legend`
+  margin-bottom: 8px;
   font-weight: 500;
   font-size: 12px;
 `;

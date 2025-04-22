@@ -6,6 +6,7 @@ import {
 } from '../../../config/inputField';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 import Input from '../../Input/Input';
+import styled from 'styled-components';
 
 interface ExpirationDateInputFieldProps {
   inputValue: Record<ExpirationDateInputType, string>;
@@ -34,18 +35,34 @@ function ExpirationDateInputField({
   return (
     <BaseInputField label="유효기간">
       {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
-        <Input
-          key={inputType}
-          type="number"
-          placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
-          value={inputValue[inputType]}
-          onChange={onChange}
-          name={inputType}
-          onBlur={onBlur}
-        />
+        <>
+          <Label htmlFor={`expiration-date-${inputType}`} />
+          <Input
+            id={`expiration-date-${inputType}`}
+            key={inputType}
+            type="number"
+            placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
+            value={inputValue[inputType]}
+            onChange={onChange}
+            name={inputType}
+            onBlur={onBlur}
+          />
+        </>
       ))}
     </BaseInputField>
   );
 }
+
+const Label = styled.label`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
 
 export default ExpirationDateInputField;
