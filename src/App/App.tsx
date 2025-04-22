@@ -5,6 +5,8 @@ import { Global } from '@emotion/react';
 import { useState } from 'react';
 import * as S from './App.styles';
 import { getCardType } from './utils';
+import Button from '@/components/Button/Button';
+import { isValidCardInfo } from '@/utils/validation';
 
 function App() {
   // 카드 번호
@@ -42,6 +44,18 @@ function App() {
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
   const cardType = getCardType(cardNumber.first);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
+  const isValid = isValidCardInfo({
+    cardNumber,
+    cardExpirationDate,
+    cardCVCNumber,
+    selectedCompany,
+  });
+
   return (
     <S.Wrapper>
       <Global styles={global} />
@@ -56,7 +70,7 @@ function App() {
         />
       </S.CardPreviewWrapper>
       <Spacing size={60} />
-      <S.CardInfoForm>
+      <S.CardInfoForm onSubmit={handleSubmit}>
         <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />
         <CardNumber
           cardNumber={cardNumber}
@@ -78,6 +92,7 @@ function App() {
           onFocus={() => setIsCardFlipped(true)}
           onBlur={() => setIsCardFlipped(false)}
         />
+        {isValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
     </S.Wrapper>
   );
