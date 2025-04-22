@@ -5,18 +5,15 @@ import {
   cardContentContainer,
   cardContentText,
   cardFrame,
-  cardLayout,
   cardType,
+  dynamicCardStyle,
 } from './Card.style';
-import { CardExpirationDate, CardNumber } from '../../../types/types';
+import { useCard } from '../../context/CardContext';
 import { identifyCardType } from '../../utils/cardTypeUtils';
 
-type CardProps = {
-  cardNumber: CardNumber;
-  cardExpirationDate: CardExpirationDate;
-};
+function Card() {
+  const { cardNumber, cardExpirationDate, cardBrandColor } = useCard();
 
-function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const cardTypeId = identifyCardType(cardNumber);
 
   const getCardTypeImage = () => {
@@ -31,7 +28,7 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
     cardExpirationDate.month || cardExpirationDate.year;
 
   return (
-    <section css={cardLayout}>
+    <section css={dynamicCardStyle(cardBrandColor)}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
         {cardTypeImage && (

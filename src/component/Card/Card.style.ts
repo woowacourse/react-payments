@@ -55,3 +55,8 @@ export const cardContentText = css`
   color: ${theme.color.white};
   ${theme.font.card.number}
 `;
+
+export const dynamicCardStyle = (cardBrandColor: string) => css`
+  ${cardLayout}
+  background-color: ${cardBrandColor};
+`;

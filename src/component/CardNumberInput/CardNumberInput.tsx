@@ -1,5 +1,4 @@
 import Input from '../@common/Input/Input';
-import { ChangeEvent } from 'react';
 import {
   errorInputStyle,
   errorMessageStyle,
@@ -10,22 +9,17 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import { CardNumber, CardNumberError } from '../../../types/types';
 import Title from '../@common/Title/Title';
+import { useCard } from '../../context/CardContext';
 
-type CardNumberInputProps = {
-  cardNumber: CardNumber;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorState: CardNumberError;
-  getCardNumberErrorMessage?: () => string | null;
-};
+function CardNumberInput() {
+  const {
+    cardNumber,
+    handleCardNumberChange,
+    cardNumberError: errorState,
+    getCardNumberErrorMessage,
+  } = useCard();
 
-function CardNumberInput({
-  cardNumber,
-  onChange,
-  errorState,
-  getCardNumberErrorMessage,
-}: CardNumberInputProps) {
   const hasError =
     errorState.first ||
     errorState.second ||
@@ -48,7 +42,7 @@ function CardNumberInput({
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.first?.toString()}
-                onChange={onChange}
+                onChange={handleCardNumberChange}
                 css={errorState.first ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -58,7 +52,7 @@ function CardNumberInput({
                 name="second"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.second?.toString()}
-                onChange={onChange}
+                onChange={handleCardNumberChange}
                 css={errorState.second ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -68,7 +62,7 @@ function CardNumberInput({
                 name="third"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.third?.toString()}
-                onChange={onChange}
+                onChange={handleCardNumberChange}
                 css={errorState.third ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -78,13 +72,13 @@ function CardNumberInput({
                 name="forth"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.forth?.toString()}
-                onChange={onChange}
+                onChange={handleCardNumberChange}
                 css={errorState.forth ? errorInputStyle : undefined}
               />
             </Input.Group>
           </article>
           {hasError && (
-            <div css={errorMessageStyle}>{getCardNumberErrorMessage?.()}</div>
+            <div css={errorMessageStyle}>{getCardNumberErrorMessage()}</div>
           )}
         </div>
       </Input.Group>

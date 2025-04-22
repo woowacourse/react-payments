@@ -10,30 +10,18 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import {
-  CardExpirationDate,
-  CardExpirationDateError,
-} from '../../../types/types';
 import Title from '../@common/Title/Title';
+import { useCard } from '../../context/CardContext';
 
-type CardPeriodInputProps = {
-  cardExpirationDate: CardExpirationDate;
-  onChange: {
-    month: (value: string) => void;
-    year: (value: string) => void;
-  };
-  errorState: CardExpirationDateError;
-  getMonthErrorMessage?: () => string | null | undefined;
-  getYearErrorMessage?: () => string | null | undefined;
-};
+function CardPeriodInput() {
+  const {
+    cardExpirationDate,
+    handleCardExpirationChange,
+    cardExpirationDateError: errorState,
+    getMonthErrorMessage,
+    getYearErrorMessage,
+  } = useCard();
 
-function CardPeriodInput({
-  cardExpirationDate,
-  onChange,
-  errorState,
-  getMonthErrorMessage,
-  getYearErrorMessage,
-}: CardPeriodInputProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <Title>
@@ -51,7 +39,9 @@ function CardPeriodInput({
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
                 value={cardExpirationDate.month}
-                onChange={(e) => onChange.month(e.target.value)}
+                onChange={(e) =>
+                  handleCardExpirationChange.month(e.target.value)
+                }
                 css={errorState.month ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -61,16 +51,18 @@ function CardPeriodInput({
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
                 value={cardExpirationDate.year}
-                onChange={(e) => onChange.year(e.target.value)}
+                onChange={(e) =>
+                  handleCardExpirationChange.year(e.target.value)
+                }
                 css={errorState.year ? errorInputStyle : undefined}
               />
             </Input.Group>
           </article>
           {errorState.month && (
-            <div css={errorMessageStyle}>{getMonthErrorMessage?.()}</div>
+            <div css={errorMessageStyle}>{getMonthErrorMessage()}</div>
           )}
           {errorState.year && !errorState.month && (
-            <div css={errorMessageStyle}>{getYearErrorMessage?.()}</div>
+            <div css={errorMessageStyle}>{getYearErrorMessage()}</div>
           )}
         </div>
       </Input.Group>

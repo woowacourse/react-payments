@@ -9,22 +9,17 @@ import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import { CardCVC } from '../../../types/types';
 import Title from '../@common/Title/Title';
+import { useCard } from '../../context/CardContext';
 
-type CardCVCInputProps = {
-  cardCVC: CardCVC;
-  onChange: (value: string) => void;
-  hasError: boolean;
-  getCardCVCErrorMessage?: () => string | null;
-};
+function CardCVCInput() {
+  const {
+    cardCVC,
+    handleCardCVCChange,
+    cardCVCError: hasError,
+    getCardCVCErrorMessage,
+  } = useCard();
 
-function CardCVCInput({
-  cardCVC,
-  onChange,
-  hasError,
-  getCardCVCErrorMessage,
-}: CardCVCInputProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <Title>
@@ -39,12 +34,12 @@ function CardCVCInput({
               name="cvc"
               maxLength={CARD_CVC.maxLength}
               value={cardCVC?.toString()}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => handleCardCVCChange(e.target.value)}
               css={hasError ? errorInputStyle : undefined}
             />
           </article>
           {hasError && (
-            <div css={errorMessageStyle}>{getCardCVCErrorMessage?.()}</div>
+            <div css={errorMessageStyle}>{getCardCVCErrorMessage()}</div>
           )}
         </div>
       </Input.Group>
