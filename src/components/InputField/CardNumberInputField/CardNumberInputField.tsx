@@ -49,7 +49,7 @@ function CardNumberInputField({
       ? ERROR_TYPE_TO_MESSAGE[errorStatus[0]]
       : '';
 
-  const updateCardError = (
+  const validateCardError = (
     inputName: CardNumberInputType,
     errorStatus: { errorType: ErrorType; isError: boolean }
   ) => {
@@ -58,18 +58,11 @@ function CardNumberInputField({
     if (errorStatus.isError) {
       const set = new Set(currentErrorType);
       set.add(errorStatus.errorType);
-      setErrorTypes((prevValue) => ({
-        ...prevValue,
-        [inputName]: Array.from(set),
-      }));
+      return Array.from(set);
     } else {
-      const filteredErrorType = currentErrorType.filter(
+      return currentErrorType.filter(
         (errorType) => errorType !== errorStatus.errorType
       );
-      setErrorTypes((prevValue) => ({
-        ...prevValue,
-        [inputName]: filteredErrorType,
-      }));
     }
   };
 
@@ -90,10 +83,16 @@ function CardNumberInputField({
     if (value.length > MAX_CARD_LENGTH) return;
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       const isError = checkCardTypeFromPrefix(value);
-      updateCardError(CARD_NUMBER_INPUT_TYPE[0], {
+
+      const updatedErrorTypes = validateCardError(CARD_NUMBER_INPUT_TYPE[0], {
         errorType: 'noneCardType',
         isError,
       });
+
+      setErrorTypes((prevValue) => ({
+        ...prevValue,
+        cardNumberPart1: updatedErrorTypes,
+      }));
     }
     setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
@@ -101,10 +100,15 @@ function CardNumberInputField({
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
-    updateCardError(name as CardNumberInputType, {
+    const updatedErrorTypes = validateCardError(name as CardNumberInputType, {
       errorType: 'shortCardSegment',
       isError: value.length > 0 && value.length < MAX_CARD_LENGTH,
     });
+
+    setErrorTypes((prevValue) => ({
+      ...prevValue,
+      [name]: updatedErrorTypes,
+    }));
   };
 
   return (
