@@ -4,6 +4,7 @@ import CardExpirationDateInput from './cardInput/CardExpirationDateInput';
 import CardNumberInput from './cardInput/CardNumberInput';
 import styles from './cardInputForm.module.css';
 import { ExpirationDateType } from '../PaymentInputPage';
+import CardIssuerSelector from './cardInput/CardIssuerSelector';
 
 interface CardInputFormProps {
   cardNumbers: string[];
@@ -20,6 +21,7 @@ function CardInputForm({
 }: CardInputFormProps) {
   return (
     <div className={styles.cardInputForm}>
+      <CardIssuerSelector />
       <CardNumberInput
         cardNumbers={cardNumbers}
         setCardNumbers={setCardNumbers}

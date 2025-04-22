@@ -2,7 +2,7 @@ import styles from './InputForm.module.css';
 
 export interface InputFormProps {
   title: string;
-  label: string;
+  label?: string;
   description?: string;
   feedbackMessage?: string;
   children: React.ReactNode;
