@@ -1,4 +1,6 @@
 import { useState } from "react";
+const MONTH_MIN = 1;
+const MONTH_MAX = 12;
 
 const useError = (initialErrorState: boolean[]) => {
   const [error, setError] = useState(initialErrorState);
@@ -17,7 +19,7 @@ const useError = (initialErrorState: boolean[]) => {
 
   const validateMonth = (v: string) => {
     const month = parseInt(v);
-    if (month >= 1 && month <= 12) {
+    if (month >= MONTH_MIN && month <= MONTH_MAX) {
       setError([false, error[1]]);
       return;
     }
