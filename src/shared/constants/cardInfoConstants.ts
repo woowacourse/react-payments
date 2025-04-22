@@ -1,0 +1,4 @@
+export const VISA_CARD_FIRST_DIGIT = '4';
+export const MASTERCARD_FIRST_DIGIT = '5';
+export const MASTERCARD_MIN_SECOND_DIGIT = 1;
+export const MASTERCARD_MAX_SECOND_DIGIT = 5;
