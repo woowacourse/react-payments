@@ -6,6 +6,8 @@ import styles from './css/cardForm.module.css';
 import useCardNumbers from '@hooks/useCardNumbers';
 import useCardExpirationDate from '@hooks/useCardExpirationDate';
 import CardCompanySelectSection from './components/SelectSection/CardCompanySelectSection';
+import { useState } from 'react';
+import useError from './hooks/useError';
 
 function App() {
   const {
@@ -24,6 +26,12 @@ function App() {
     handleCardExpirationDateBlur,
   } = useCardExpirationDate();
 
+  const [cardCompany, setCardCompany] = useState('');
+  const { error: cardCompanyError, clearError: clearCardCompanyError } =
+    useError({
+      cardCompany: false,
+    });
+
   return (
     <>
       <div className={styles.main}>
@@ -32,7 +40,13 @@ function App() {
           cardExpirationDate={cardExpirationDate}
         />
         <div className={styles.cardForm}>
-          <CardCompanySelectSection />
+          <CardCompanySelectSection
+            cardCompany={cardCompany}
+            setCardCompany={setCardCompany}
+            isError={cardCompanyError.isError.cardCompany}
+            errorMessage={cardCompanyError.errorMessage}
+            clearError={() => clearCardCompanyError('cardCompany')}
+          />
           <CardNumbersInputSection
             cardNumbers={cardNumbers}
             setCardNumbers={setCardNumbers}

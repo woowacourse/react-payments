@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import InputSection from '../common/InputSection/InputSection';
 import SelectField from '../common/SelectField/SelectField';
+import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 
 const CARD_COMPANY_SELECT_TEXT = {
   title: '카드사를 선택해주세요',
@@ -20,24 +20,43 @@ const CARD_COMPANY = [
   { label: '하나카드', value: '하나카드' },
   { label: '국민카드', value: '국민카드' },
 ];
-const CardCompanySelectSection = () => {
-  const [cardCompany, setCardCompany] = useState('');
+type CardCompanySelectSectionProps = {
+  cardCompany: string;
+  setCardCompany: (value: string) => void;
+  isError: boolean;
+  errorMessage: string;
+  clearError: () => void;
+};
+
+const CardCompanySelectSection = ({
+  cardCompany,
+  setCardCompany,
+  isError,
+  errorMessage,
+  clearError,
+}: CardCompanySelectSectionProps) => {
   return (
-    <InputSection
-      title={CARD_COMPANY_SELECT_TEXT.title}
-      description={CARD_COMPANY_SELECT_TEXT.description}
-      subtitle={CARD_COMPANY_SELECT_TEXT.subtitle}
-    >
-      <SelectField
-        name="CardCompany"
-        value={cardCompany}
-        onChange={(e) => setCardCompany(e.target.value)}
-        onBlur={() => {}}
-        isError={false}
-        placeholder="카드사를 선택해주세요"
-        options={CARD_COMPANY}
-      />
-    </InputSection>
+    <>
+      <InputSection
+        title={CARD_COMPANY_SELECT_TEXT.title}
+        description={CARD_COMPANY_SELECT_TEXT.description}
+        subtitle={CARD_COMPANY_SELECT_TEXT.subtitle}
+      >
+        <SelectField
+          name="CardCompany"
+          value={cardCompany}
+          onChange={(e) => {
+            setCardCompany(e.target.value);
+            clearError();
+          }}
+          onBlur={() => {}}
+          isError={isError}
+          placeholder="카드사를 선택해주세요"
+          options={CARD_COMPANY}
+        />
+      </InputSection>
+      <ErrorMessage message={errorMessage} />
+    </>
   );
 };
 
