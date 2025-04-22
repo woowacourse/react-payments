@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
@@ -16,7 +16,6 @@ import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface CardExpirationFieldProps {
   cardInfo: CardInfo;
-
   handleCardInfo: (
     key: keyof CardExpirationFieldProps["cardInfo"],
     value: string
@@ -30,6 +29,19 @@ function CardExpirationField({
   maxLength,
 }: CardExpirationFieldProps) {
   const [errorText, setErrorText] = useState("");
+
+  const invalidMonth = useMemo(
+    () => isInvalidMonth(cardInfo.month),
+    [cardInfo.month]
+  );
+  const invalidYear = useMemo(
+    () => isInvalidYear(cardInfo.year),
+    [cardInfo.year]
+  );
+  const expired = useMemo(
+    () => isExpired(cardInfo.month, cardInfo.year),
+    [cardInfo.month, cardInfo.year]
+  );
 
   useEffect(() => {
     setErrorText(validateExpiration(cardInfo, maxLength));
@@ -49,10 +61,7 @@ function CardExpirationField({
           }}
           maxLength={maxLength}
           placeholder="MM"
-          extraErrorCondition={
-            isInvalidMonth(cardInfo.month) ||
-            isExpired(cardInfo.month, cardInfo.year)
-          }
+          extraErrorCondition={invalidMonth || expired}
         />
         <NumberInput
           value={cardInfo.year}
@@ -61,10 +70,7 @@ function CardExpirationField({
           }}
           maxLength={maxLength}
           placeholder="YY"
-          extraErrorCondition={
-            isInvalidYear(cardInfo.year) ||
-            isExpired(cardInfo.month, cardInfo.year)
-          }
+          extraErrorCondition={invalidYear || expired}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
