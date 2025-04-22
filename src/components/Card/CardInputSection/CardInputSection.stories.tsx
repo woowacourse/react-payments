@@ -33,3 +33,10 @@ export const CvcNumber: Story = {
     type: CARD_INPUT_TYPE.cvcNumber,
   },
 };
+
+export const CardCompany: Story = {
+  decorators: [withCustomCardProvider({})],
+  args: {
+    type: CARD_INPUT_TYPE.cardCompany,
+  },
+};

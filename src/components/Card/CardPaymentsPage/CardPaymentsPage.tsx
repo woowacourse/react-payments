@@ -7,9 +7,10 @@ function CardPaymentsPage() {
   return (
     <CardPaymentsPageCSS>
       <CardPreview />
-      <CardInputSection type={CARD_INPUT_TYPE.cardNumbers} />
-      <CardInputSection type={CARD_INPUT_TYPE.expirationPeriod} />
       <CardInputSection type={CARD_INPUT_TYPE.cvcNumber} />
+      <CardInputSection type={CARD_INPUT_TYPE.expirationPeriod} />
+      <CardInputSection type={CARD_INPUT_TYPE.cardCompany} />
+      <CardInputSection type={CARD_INPUT_TYPE.cardNumbers} />
     </CardPaymentsPageCSS>
   );
 }

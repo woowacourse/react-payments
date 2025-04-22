@@ -6,6 +6,7 @@ export interface CardInputErrorType {
   cardNumbers: Record<CardPositionType, boolean>;
   expirationPeriod: Record<PeriodPositionType, boolean>;
   cvcNumber: boolean;
+  cardCompany: boolean;
 }
 
 const defaultError = {
@@ -20,6 +21,7 @@ const defaultError = {
     year: false,
   },
   cvcNumber: false,
+  cardCompany: false,
 };
 
 export function useCardInputError() {

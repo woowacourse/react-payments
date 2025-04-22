@@ -2,6 +2,7 @@ export const CARD_INPUT_TYPE = {
   cardNumbers: "cardNumbers",
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
+  cardCompany: "cardCompany",
 } as const;
 
 export const CARD_TYPE = {
@@ -28,5 +29,4 @@ export type PeriodPositionType = keyof typeof PERIOD_POSITION;
 
 export type CardNumbers = Record<CardPositionType, string>;
 export type ExpirationPeriod = Record<PeriodPositionType, string>;
-
 export type CvcNumber = string;
