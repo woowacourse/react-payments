@@ -1,11 +1,11 @@
 import { SubtitleCSS } from "./Subtitle.styled";
 
 export interface SubtitleProps {
-  subtitle: string;
+  subtitle: string | null;
 }
 
 function Subtitle({ subtitle }: SubtitleProps) {
-  return <SubtitleCSS>{subtitle}</SubtitleCSS>;
+  return subtitle !== null && <SubtitleCSS>{subtitle}</SubtitleCSS>;
 }
 
 export default Subtitle;
