@@ -21,6 +21,7 @@ export const CardPreviewWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export const CardInfoForm = styled.form`
   display: flex;
   gap: 32px;
