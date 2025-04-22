@@ -16,9 +16,17 @@ export interface PreviewState {
   expireDate: ExpireDateSlice["expireDate"];
 }
 
+export interface ValidationState {
+  isCardNumberValid: boolean;
+  isExpireDateValid: boolean;
+  isCVCValid: boolean;
+  isAllValid: boolean;
+}
+
 export interface UseAddCardReturn {
   addCardState: AddCardState;
   previewState: PreviewState;
+  validationState: ValidationState;
 }
 
 export const useAddCard = (): UseAddCardReturn => {
@@ -32,7 +40,25 @@ export const useAddCard = (): UseAddCardReturn => {
     expireDate: expire.expireDate,
   };
 
-  return { addCardState, previewState };
+  const isCardNumberValid = Object.values(card.cardNumberState).every(
+    (field) => !field.errorMessage && field.value.length === 4
+  );
+
+  const isExpireDateValid = Object.values(expire.expireDate).every(
+    (field) => !field.errorMessage && field.value.length === 2
+  );
+
+  const isCVCValid =
+    !cvc.CVCState.errorMessage && cvc.CVCState.value.length === 3;
+
+  const validationState: ValidationState = {
+    isCardNumberValid,
+    isExpireDateValid,
+    isCVCValid,
+    isAllValid: isCardNumberValid && isExpireDateValid && isCVCValid,
+  };
+
+  return { addCardState, previewState, validationState };
 };
 
 export default useAddCard;
