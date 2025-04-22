@@ -3,7 +3,7 @@ import CardFormSection from "../CardFormSection/CardFormSection";
 import CardPreview from "../CardPreview/CardPreview";
 import { CardPaymentsPageCSS } from "./CardPaymentsPage.styled";
 
-function CardPaymentsPage() {
+export default function CardPaymentsPage() {
   return (
     <CardPaymentsPageCSS>
       <CardPreview />
@@ -15,5 +15,3 @@ function CardPaymentsPage() {
     </CardPaymentsPageCSS>
   );
 }
-
-export default CardPaymentsPage;

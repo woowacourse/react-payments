@@ -39,7 +39,7 @@ const subtitleVariants: Record<CardFormType, string | null> = {
   [CARD_FORM_TYPE.password]: "비밀번호 앞 2자리",
 };
 
-function CardFormSection({ type }: CardFormSectionProps) {
+export default function CardFormSection({ type }: CardFormSectionProps) {
   const {
     hasError,
     getCardNumberErrors,
@@ -95,5 +95,3 @@ function CardFormSection({ type }: CardFormSectionProps) {
     </>
   );
 }
-
-export default CardFormSection;

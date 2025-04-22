@@ -4,8 +4,6 @@ export interface TitleProps {
   title: string;
 }
 
-function Title({ title }: TitleProps) {
+export default function Title({ title }: TitleProps) {
   return <TitleCSS>{title}</TitleCSS>;
 }
-
-export default Title;

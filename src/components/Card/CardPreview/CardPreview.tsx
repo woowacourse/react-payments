@@ -7,7 +7,7 @@ import {
   CardPreviewCSS,
 } from "./CardPreview.styled";
 
-function CardPreview() {
+export default function CardPreview() {
   const { cardNumbers, expirationPeriod } = useCard();
   const cardType = useCardType(cardNumbers);
 
@@ -34,4 +34,3 @@ function CardPreview() {
     </CardPreviewContainerCSS>
   );
 }
-export default CardPreview;

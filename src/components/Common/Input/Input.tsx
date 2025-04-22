@@ -5,8 +5,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
 }
 
-function Input({ isError = false, ...props }: InputProps) {
+export default function Input({ isError = false, ...props }: InputProps) {
   return <InputCSS $isError={isError} {...props} />;
 }
-
-export default Input;
