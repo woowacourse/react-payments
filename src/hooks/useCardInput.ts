@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
-
+import { validateCardNumbers } from '@/validations/validateCardNumbers';
 const ExpireDateIndex = {
   MONTH: 0,
   YEAR: 1,
@@ -28,30 +28,14 @@ export const useCardInput = (type: CardFormFiledType, arrLength: number, valueLe
     });
   };
 
-  const validateInput = (value: string, index: number) => {
-    if (value.length < valueLength) {
-      setErrorMessage(`${valueLength}자리의 숫자를 입력하셔야 합니다.`);
-      return false;
+  const validateInput = (value: string) => {
+    const { isValid, errorMessage } = validateCardNumbers(value, type);
+
+    if (!isValid) {
+      setErrorMessage(errorMessage);
     }
 
-    if (!new RegExp(`^\\d{${valueLength}}$`).test(value)) {
-      setErrorMessage('숫자를 입력하세요.');
-      return false;
-    }
-
-    if (type === 'expireDate') {
-      if (index === ExpireDateIndex.MONTH && (parseInt(value) < 1 || parseInt(value) > 12)) {
-        setErrorMessage('월을 잘못 입력했습니다.');
-        return false;
-      }
-
-      if (index === ExpireDateIndex.YEAR && parseInt(value) < parseInt(currentYear)) {
-        setErrorMessage('만료 년도는 현재 년도보다 낮을 수 없습니다.');
-        return false;
-      }
-    }
-
-    return true;
+    return isValid;
   };
 
   const handleBlur = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
