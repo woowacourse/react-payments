@@ -6,12 +6,12 @@ import { checkAllNumber } from '@/utils/validation';
 
 interface CardCVCNumberProps {
   register: RegisterType<{ cvc: CardCVCNumberInputType }>;
-  cardCVCNumberErrorMessage: { cvc: CardCVCNumberInputType };
+  cardCVCNumberErrors: { cvc: CardCVCNumberInputType };
   onFocus: () => void;
   onBlur: () => void;
 }
 
-export default function CardCVCNumber({ register, cardCVCNumberErrorMessage, onFocus, onBlur }: CardCVCNumberProps) {
+export default function CardCVCNumber({ register, cardCVCNumberErrors, onFocus, onBlur }: CardCVCNumberProps) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!checkAllNumber(event.target.value)) return;
   };
@@ -26,7 +26,7 @@ export default function CardCVCNumber({ register, cardCVCNumberErrorMessage, onF
         <Input
           placeholder="123"
           maxLength={3}
-          isError={cardCVCNumberErrorMessage.cvc !== ''}
+          isError={cardCVCNumberErrors.cvc !== ''}
           onFocus={onFocus}
           onBlur={onBlur}
           inputMode="numeric"
@@ -41,7 +41,7 @@ export default function CardCVCNumber({ register, cardCVCNumberErrorMessage, onF
         />
       </div>
       <Spacing size={8} />
-      <ErrorMessage>{cardCVCNumberErrorMessage.cvc}</ErrorMessage>
+      <ErrorMessage>{cardCVCNumberErrors.cvc}</ErrorMessage>
     </div>
   );
 }

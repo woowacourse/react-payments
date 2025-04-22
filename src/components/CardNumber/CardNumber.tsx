@@ -7,11 +7,11 @@ import { ChangeEvent } from 'react';
 import * as S from './CardNumber.styles';
 
 interface CardNumberProps {
-  cardNumberErrorMessage: CardNumberInputType;
+  cardNumberErrors: CardNumberInputType;
   register: RegisterType<CardNumberInputType>;
 }
 
-export default function CardNumber({ register, cardNumberErrorMessage }: CardNumberProps) {
+export default function CardNumber({ register, cardNumberErrors }: CardNumberProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     if (!checkAllNumber(value)) return;
@@ -37,7 +37,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={!!cardNumberErrorMessage.first}
+          isError={!!cardNumberErrors.first}
           aria-label="카드 번호 첫 번째 4자리"
           inputMode="numeric"
           data-sequence="1"
@@ -53,7 +53,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={!!cardNumberErrorMessage.second}
+          isError={!!cardNumberErrors.second}
           aria-label="카드 번호 두 번째 4자리"
           inputMode="numeric"
           data-sequence="2"
@@ -69,7 +69,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={!!cardNumberErrorMessage.third}
+          isError={!!cardNumberErrors.third}
           aria-label="카드 번호 세 번째 4자리"
           inputMode="numeric"
           data-sequence="3"
@@ -85,7 +85,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         <Input
           placeholder="1234"
           maxLength={4}
-          isError={!!cardNumberErrorMessage.fourth}
+          isError={!!cardNumberErrors.fourth}
           aria-label="카드 번호 마지막 4자리"
           inputMode="numeric"
           data-sequence="4"
@@ -100,7 +100,7 @@ export default function CardNumber({ register, cardNumberErrorMessage }: CardNum
         />
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>{getErrorMessageFromObject(cardNumberErrorMessage)}</ErrorMessage>
+      <ErrorMessage>{getErrorMessageFromObject(cardNumberErrors)}</ErrorMessage>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import { CARD_COMPANIES, MASKING } from '@/constants';
-import { CardType } from '@/types';
 import {
-  CardCompanyInputType,
+  CardCompanyType,
   CardCVCNumberInputType,
   CardExpirationDateInputType,
   CardNumberInputType,
+  CardType,
 } from '@/types';
 import MasterCard from '../icons/MasterCard';
 import VisaCard from '../icons/VisaCard';
@@ -14,7 +14,7 @@ interface CardPreviewProps {
   cardType: CardType;
   cardNumber: CardNumberInputType;
   cardExpirationDate: CardExpirationDateInputType;
-  selectedCompany: CardCompanyInputType;
+  selectedCompany: CardCompanyType;
   cardCVCNumber: CardCVCNumberInputType;
   isFlipped: boolean;
 }

@@ -8,10 +8,10 @@ import { RegisterType } from '@/hooks/useForm';
 
 interface CardExpirationDateProps {
   register: RegisterType<CardExpirationDateInputType>;
-  cardExpirationDateErrorMessage: CardExpirationDateInputType;
+  cardExpirationDateErrors: CardExpirationDateInputType;
 }
 
-export default function CardExpirationDate({ register, cardExpirationDateErrorMessage }: CardExpirationDateProps) {
+export default function CardExpirationDate({ register, cardExpirationDateErrors }: CardExpirationDateProps) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!checkAllNumber(event.target.value)) return;
 
@@ -33,7 +33,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrorMe
         <Input
           placeholder="MM"
           maxLength={2}
-          isError={cardExpirationDateErrorMessage.month !== ''}
+          isError={cardExpirationDateErrors.month !== ''}
           data-expiry="month"
           inputMode="numeric"
           {...register('month', {
@@ -48,7 +48,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrorMe
         <Input
           placeholder="YY"
           maxLength={2}
-          isError={cardExpirationDateErrorMessage.year !== ''}
+          isError={cardExpirationDateErrors.year !== ''}
           data-expiry="year"
           inputMode="numeric"
           {...register('year', {
@@ -61,7 +61,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrorMe
         />
       </S.InputWrapper>
       <Spacing size={8} />
-      <ErrorMessage>{getErrorMessageFromObject(cardExpirationDateErrorMessage)}</ErrorMessage>
+      <ErrorMessage>{getErrorMessageFromObject(cardExpirationDateErrors)}</ErrorMessage>
     </div>
   );
 }

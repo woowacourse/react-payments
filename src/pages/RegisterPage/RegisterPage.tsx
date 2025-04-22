@@ -50,7 +50,7 @@ export default function RegisterPage() {
     value: { company: selectedCompany },
     register: cardCompanyRegister,
     isValid: isCardCompanyValid,
-  } = useForm<{ company: CardCompanyInputType }>({
+  } = useForm<CardCompanyInputType>({
     defaultValues: {
       company: '',
     },
@@ -164,7 +164,7 @@ export default function RegisterPage() {
         {currentStep >= 4 && isExpirationDateValid && (
           <CardCVCNumber
             register={cardCVCNumberRegister}
-            cardCVCNumberErrorMessage={cardCVCNumberErrors}
+            cardCVCNumberErrors={cardCVCNumberErrors}
             onFocus={() => setIsCardFlipped(true)}
             onBlur={() => setIsCardFlipped(false)}
           />
@@ -173,13 +173,13 @@ export default function RegisterPage() {
         {currentStep >= 3 && isCardCompanyValid && (
           <CardExpirationDate
             register={cardExpirationDateRegister}
-            cardExpirationDateErrorMessage={cardExpirationDateErrors}
+            cardExpirationDateErrors={cardExpirationDateErrors}
           />
         )}
 
         {isCardNumberIsValid && <CardCompany register={cardCompanyRegister} />}
 
-        {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrorMessage={cardNumberErrors} />}
+        {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
 
         {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>

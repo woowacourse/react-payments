@@ -5,7 +5,7 @@ import { CardCompanyInputType } from '@/types';
 import * as S from './CardCompany.styles';
 
 interface CardCompanyProps {
-  register: RegisterType<{ company: CardCompanyInputType }>;
+  register: RegisterType<CardCompanyInputType>;
 }
 
 export default function CardCompany({ register }: CardCompanyProps) {
