@@ -3,6 +3,7 @@ import CardNumbersInput from './components/CardNumbersInput/CardNumbersInput';
 import CardExpiryInput from './components/CardExpiryInput/CardExpiryInput';
 import CVCInput from './components/CVCInput/CVCInput';
 import CardPreview from './components/CardPreview/CardPreview';
+import CardBrandInput from './components/CardBrandInput/CardBrandInput';
 import { CARD_VALIDATION_INFO } from './constants/cardValidationInfo';
 import './App.css';
 
@@ -13,6 +14,7 @@ function App() {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [CVC, setCVC] = useState('');
+  const [brand, setBrand] = useState('');
 
   return (
     <div className="app">
@@ -22,6 +24,7 @@ function App() {
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
         />
+        <CardBrandInput brand={brand} setBrand={setBrand} />
         <CardExpiryInput
           month={month}
           setMonth={setMonth}
