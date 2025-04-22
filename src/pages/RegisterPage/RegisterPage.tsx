@@ -15,15 +15,13 @@ import { getCardType } from '@/App/utils';
 import * as S from './RegisterPage.styles';
 import { CARD_COMPANIES } from '@/constants';
 
-type Step = 1 | 2 | 3 | 4 | 5;
+type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
 export default function RegisterPage() {
   const navigate = useNavigate();
 
   // 현재 스텝
   const [currentStep, setCurrentStep] = useState<Step>(1);
-
-  console.log(currentStep);
 
   // 비밀번호
   const [cardPassword, setCardPassword] = useState<string>('');
@@ -106,6 +104,12 @@ export default function RegisterPage() {
     }
   }, [currentStep, isCVCNumberValid]);
 
+  useEffect(() => {
+    if (currentStep === 5 && isPasswordValid) {
+      setCurrentStep(6);
+    }
+  }, [currentStep, isPasswordValid]);
+
   return (
     <S.Wrapper>
       <S.CardPreviewWrapper>
@@ -120,24 +124,16 @@ export default function RegisterPage() {
       </S.CardPreviewWrapper>
       <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
-        <CardNumber
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          cardNumberErrorMessage={cardNumberErrorMessage}
-          setCardNumberErrorMessage={setCardNumberErrorMessage}
-        />
-        {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
-
-        {currentStep >= 2 && isCardCompanyValid && (
-          <CardExpirationDate
-            cardExpirationDate={cardExpirationDate}
-            setCardExpirationDate={setCardExpirationDate}
-            cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-            setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
+        {currentStep >= 5 && isCVCNumberValid && (
+          <CardPassword
+            cardPassword={cardPassword}
+            setCardPassword={setCardPassword}
+            cardPasswordErrorMessage={cardPasswordErrorMessage}
+            setCardPasswordErrorMessage={setCardPasswordErrorMessage}
           />
         )}
 
-        {currentStep >= 3 && isExpirationDateValid && (
+        {currentStep >= 4 && isExpirationDateValid && (
           <CardCVCNumber
             cardCVCNumber={cardCVCNumber}
             setCardCVCNumber={setCardCVCNumber}
@@ -148,16 +144,27 @@ export default function RegisterPage() {
           />
         )}
 
-        {currentStep >= 4 && isCVCNumberValid && (
-          <CardPassword
-            cardPassword={cardPassword}
-            setCardPassword={setCardPassword}
-            cardPasswordErrorMessage={cardPasswordErrorMessage}
-            setCardPasswordErrorMessage={setCardPasswordErrorMessage}
+        {currentStep >= 3 && isCardCompanyValid && (
+          <CardExpirationDate
+            cardExpirationDate={cardExpirationDate}
+            setCardExpirationDate={setCardExpirationDate}
+            cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
+            setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
           />
         )}
 
-        {currentStep === 5 && isPasswordValid && <Button type="submit">확인</Button>}
+        {isCardNumberValid && <CardCompany selectedCompany={selectedCompany} setSelectedCompany={setSelectedCompany} />}
+
+        {currentStep >= 1 && (
+          <CardNumber
+            cardNumber={cardNumber}
+            setCardNumber={setCardNumber}
+            cardNumberErrorMessage={cardNumberErrorMessage}
+            setCardNumberErrorMessage={setCardNumberErrorMessage}
+          />
+        )}
+
+        {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
       </S.CardInfoForm>
     </S.Wrapper>
   );
