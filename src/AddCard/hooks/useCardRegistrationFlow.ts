@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import useControlledCardNumber from "../components/AddCardForm/components/CardNumber/hooks/useControlledCardNumber";
 import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
@@ -51,37 +51,39 @@ const useCardRegistrationFlow = () => {
   const expire = useControlledExpireDate();
   const cvc = useControlledCVC();
 
+  const maxReachedStep = useRef(0);
+
   const slices = { card, brand, expire, cvc };
 
-  const { stepIndex, allValid } = useMemo(() => {
-    let firstFail = validators.length;
+  const { currentStep, allValid } = useMemo(() => {
     let validAll = true;
+    let currentValidStep = 0;
 
-    validators.forEach((fn, i) => {
-      const result = fn(slices);
-      if (result === false) {
-        validAll = false;
-        if (firstFail === validators.length) {
-          firstFail = i;
-        }
+    for (let i = 0; i < validators.length; i++) {
+      if (validators[i](slices)) {
+        currentValidStep = i + 1;
+      } else {
+        validAll = i >= validators.length - 1;
+        break;
       }
-    });
+    }
 
-    return { stepIndex: firstFail, allValid: validAll };
+    if (currentValidStep > maxReachedStep.current) {
+      maxReachedStep.current = currentValidStep;
+    }
+
+    const stepIndex = Math.min(maxReachedStep.current, STEP_ORDER.length - 1);
+
+    return {
+      currentStep: STEP_ORDER[stepIndex],
+      allValid: validAll && currentValidStep >= validators.length,
+    };
   }, [
     card.cardNumberState,
     brand.selectedBrand,
     expire.expireDate,
     cvc.CVCState,
   ]);
-
-  // currentStep 결정
-  let currentStep: FlowStep;
-  if (stepIndex < STEP_ORDER.length) {
-    currentStep = STEP_ORDER[stepIndex];
-  } else {
-    currentStep = STEP_ORDER[STEP_ORDER.length - 1];
-  }
 
   return {
     state: { ...card, ...brand, ...expire, ...cvc },
