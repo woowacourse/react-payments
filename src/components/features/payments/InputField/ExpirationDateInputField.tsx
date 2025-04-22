@@ -41,7 +41,7 @@ function ExpirationDateInputField({
       {Object.values(EXPIRATION_DATE_INPUT_TYPE).map((inputType) => (
         <Input
           key={inputType}
-          type="number"
+          inputType="number"
           placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
           value={inputValue[inputType]}
           onChange={onChange}

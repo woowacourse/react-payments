@@ -1,29 +1,22 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
-  placeholder: string;
   isError?: boolean;
-  value: string;
-  name: string;
-  type: 'text' | 'number';
+  inputType: 'text' | 'number';
   onChange: ({ name, value }: { name: string; value: string }) => void;
-  onBlur?: (e: ChangeEvent) => void;
 }
 
 function Input({
-  placeholder,
   isError,
-  value,
-  name,
-  type,
+  inputType,
   onChange,
-  onBlur,
-}: InputProps) {
+  ...props
+}: InputProps & Omit<ComponentProps<'input'>, 'onChange'>) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
-    if (type === 'number') {
+    if (inputType === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
       return onChange({ value: numericValue, name });
     }
@@ -33,14 +26,11 @@ function Input({
 
   return (
     <StyledInput
-      placeholder={placeholder}
-      value={value}
-      inputMode={type === 'number' ? 'numeric' : 'text'}
+      inputMode={inputType === 'number' ? 'numeric' : 'text'}
       $isError={isError ?? false}
       onChange={handleTypeChange}
-      name={name}
       type="text"
-      onBlur={onBlur}
+      {...props}
     />
   );
 }
