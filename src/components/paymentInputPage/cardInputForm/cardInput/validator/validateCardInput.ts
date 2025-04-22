@@ -18,9 +18,9 @@ export function validateExpirationDateYear(month: string, year: string) {
 }
 
 export function validateCVC(cvc: string) {
-  return validatorUtils.isNumber(cvc);
+  return { IS_NUMBER_STRING: validatorUtils.isNumber(cvc) };
 }
 
 export function validateNumberString(cardNumber: string) {
-  return validatorUtils.isNumber(cardNumber);
+  return { IS_NUMBER_STRING: validatorUtils.isNumber(cardNumber) };
 }
