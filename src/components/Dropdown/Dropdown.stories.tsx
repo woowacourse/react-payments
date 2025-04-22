@@ -1,0 +1,20 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import Dropdown from "./Dropdown";
+
+const meta = {
+  title: "Component/Dropdown",
+  component: Dropdown,
+  args: {
+    itemList: ["도도", "동아리", "잼잼", "개노잼"],
+  },
+} satisfies Meta<typeof Dropdown>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Example: Story = {
+  args: {
+    itemList: ["도도", "동아리", "잼잼", "개노잼"],
+  },
+};
