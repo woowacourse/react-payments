@@ -5,14 +5,13 @@ import CardNumberSection from './components/CardNumberSection/CardNumberSection'
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import Card from './components/Card/Card';
 import CvcSection from './components/CvcSection/CvcSection';
-import { CardNumberType, CvcType } from './types';
-import { INITIAL_CARD_NUMBER, INITIAL_CVC } from './constants';
+import { CvcType } from './types';
+import { INITIAL_CVC } from './constants';
 import CardCompanySection from './components/CardCompanySection/CardCompanySection';
 import useExpiration from './hooks/useExpiration';
+import useCardNumbers from './hooks/useCardNumbers';
 
 export default function App() {
-  const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
-
   const [cvc, setCvc] = useState<CvcType>(INITIAL_CVC);
   const [company, setCompany] = useState<string>('');
 
@@ -22,11 +21,18 @@ export default function App() {
 
   const { expiration, handleExpirationChange, ref } = useExpiration();
 
+  const { inputRefs, handleCardNumberChange, cardNumbers, getCardNumberErrorMessage } = useCardNumbers();
+
   return (
     <div className={styles.appContainer}>
       <Card numbers={cardNumbers} company={company} expiration={expiration} />
       <CardCompanySection value={company} onSelect={handleSelect} />
-      <CardNumberSection cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+      <CardNumberSection
+        cardNumbers={cardNumbers}
+        onCardNumbersChange={handleCardNumberChange}
+        inputRefs={inputRefs}
+        getCardNumberErrorMessage={getCardNumberErrorMessage}
+      />
       <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={ref} />
       <CvcSection cvc={cvc} setCvc={setCvc} />
     </div>

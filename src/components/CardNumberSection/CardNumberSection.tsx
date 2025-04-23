@@ -1,44 +1,21 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction, useRef } from 'react';
 import Input from '../Input/Input';
-import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
-import { CARD_BRANDS } from '../../constants';
+import { CardNumberKey, CardNumberType } from '../../types';
 
 type Props = {
   cardNumbers: CardNumberType;
-  setCardNumbers: Dispatch<SetStateAction<CardNumberType>>;
+  onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
+  inputRefs: {
+    first: React.RefObject<HTMLInputElement | null>;
+    second: React.RefObject<HTMLInputElement | null>;
+    third: React.RefObject<HTMLInputElement | null>;
+    fourth: React.RefObject<HTMLInputElement | null>;
+  };
+  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => '' | '숫자만 입력 가능합니다.';
 };
 
-export default function CardNumberSection({ cardNumbers, setCardNumbers }: Props) {
-  const inputRefs = {
-    first: useRef<HTMLInputElement>(null),
-    second: useRef<HTMLInputElement>(null),
-    third: useRef<HTMLInputElement>(null),
-    fourth: useRef<HTMLInputElement>(null)
-  };
-
-  const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
-    const isError = !Number.isInteger(+value);
-
-    setCardNumbers((prev) => ({
-      ...prev,
-      [field]: { value, isError }
-    }));
-
-    if (field == 'fourth' || value.length !== 4) {
-      return;
-    }
-
-    const keys = Object.keys(inputRefs);
-    const nextKey = keys[keys.indexOf(field) + 1] as keyof typeof inputRefs;
-    inputRefs[nextKey].current!.focus();
-
-    if (field !== 'first') {
-      return;
-    }
-  };
-
+export default function CardNumberSection({ cardNumbers, onCardNumbersChange, inputRefs, getCardNumberErrorMessage }: Props) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
@@ -55,7 +32,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers }: Props
               isError={cardNumbers[inputKey].isError}
               placeholder={'1234'}
               onChange={(e) => {
-                handleCardNumberChange(inputKey, e.target.value);
+                onCardNumbersChange(inputKey, e.target.value);
               }}
               ref={inputRefs[inputKey]}
               maxLength={4}
@@ -68,8 +45,3 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers }: Props
     </div>
   );
 }
-
-const getCardNumberErrorMessage = (cardNumbers: CardNumberType) => {
-  const hasError = Object.values(cardNumbers).some(({ isError }) => isError);
-  return hasError ? '숫자만 입력 가능합니다.' : '';
-};
