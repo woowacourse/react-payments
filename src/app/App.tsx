@@ -6,13 +6,9 @@ import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
 
-type CardNumberState = {
-  [key in CardNumberPosition]: string;
-};
+type CardNumberState = Record<CardNumberPosition, string>;
 
-type ExpirationPeriodState = {
-  [key in ExpirationPeriod]: string;
-};
+type ExpirationPeriodState = Record<ExpirationPeriod, string>;
 
 function App() {
   const { values: cardNumber, changeValues: changeCardNumber } =
