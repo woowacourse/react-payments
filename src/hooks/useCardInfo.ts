@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CARD_BRAND_COLOR } from "../components/InputField/CardBrand/constants";
 
 export type CardInfo = {
   firstNumber: string;
@@ -8,7 +9,7 @@ export type CardInfo = {
   month: string;
   year: string;
   cvc: string;
-  cardBrand: string;
+  cardBrand: keyof typeof CARD_BRAND_COLOR | "";
 };
 
 function useCardInfo() {

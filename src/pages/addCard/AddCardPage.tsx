@@ -27,6 +27,7 @@ function AddCardPage() {
           cardInfo.fourthNumber,
         ]}
         expiration={[cardInfo.month, cardInfo.year]}
+        cardBrand={cardInfo.cardBrand}
       ></Card>
       <div>
         <Announcement main={CVC_MESSAGE.MAIN} />
