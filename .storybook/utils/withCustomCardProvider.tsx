@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { CardContext, CardContextType } from "../../src/contexts/CardContext";
+import { CARD_COMPANY } from "../../src/constants/constants";
 
 interface CardProviderProps {
   children: ReactNode;
@@ -15,13 +16,21 @@ const CustomCardProvider = ({ children, value }: CardProviderProps) => {
       fourth: "",
     },
     updateCardNumber: () => {},
+
     expirationPeriod: {
       month: "",
       year: "",
     },
     updateExpirationPeriod: () => {},
+
     cvcNumber: "",
     updateCvcNumber: () => {},
+
+    cardCompany: CARD_COMPANY.none,
+    updateCardCompany: () => {},
+
+    password: "",
+    updatePassword: () => {},
   };
 
   const contextValue = { ...defaultValue, ...value };
