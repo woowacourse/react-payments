@@ -1,10 +1,24 @@
 import styled from "styled-components";
 
 export const CardPaymentsPageCSS = styled.div`
-  margin: 0 auto;
+  width: 100vw;
   height: 100vh;
-  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+`;
+
+export const CardFormCSS = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 30%;
+  height: 700px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+`;
+
+export const CardFormScrollCSS = styled.div`
+  overflow: scroll;
 `;
