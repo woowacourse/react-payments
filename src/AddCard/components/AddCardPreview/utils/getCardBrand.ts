@@ -1,6 +1,6 @@
 import { CardBrand } from "../types";
 
-export const getCardBrand = (cardNumber: string): CardBrand => {
+const getCardBrand = (cardNumber: string): CardBrand => {
   if (cardNumber[0] === "4") {
     return "VISA";
   }
@@ -12,3 +12,4 @@ export const getCardBrand = (cardNumber: string): CardBrand => {
 
   return "DEFAULT";
 };
+export default getCardBrand;
