@@ -25,3 +25,7 @@ export const EXPIRATION_DATE = {
 export const CVC = {
   length: { min: 0, max: 3 },
 };
+
+export const CARD_PASSWORD = {
+  length: { min: 0, max: 2 },
+};

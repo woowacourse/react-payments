@@ -10,6 +10,8 @@ import CVCInputField from '../../components/features/payments/InputField/CVCInpu
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
 import { DropdownOptionType } from '../../types/dropdown';
+import CardPasswordInputField from '../../components/features/payments/InputField/CardPasswordInputField';
+import useCardPasswordValidation from '../../components/features/payments/hooks/useCardPasswordValidation';
 
 function Payments() {
   const {
@@ -36,6 +38,13 @@ function Payments() {
     handleInputValue: handleCVCInputValue,
     onBlur: onCVCInputBlur,
   } = useCVCValidation();
+
+  const {
+    inputValue: cardPasswordInputValue,
+    errorType: cardPasswordErrorType,
+    handleInputValue: handleCardPasswordInputValue,
+    onBlur: onCardPasswordInputBlur,
+  } = useCardPasswordValidation();
 
   return (
     <PaymentsLayout>
@@ -92,6 +101,17 @@ function Payments() {
             errorTypes={CVCErrorType}
             handleInputValue={handleCVCInputValue}
             onBlur={onCVCInputBlur}
+          />
+        </InputSection>
+        <InputSection
+          title="비밀번호를 입력해 주세요"
+          caption="앞의 2자리를 입력해주세요"
+        >
+          <CardPasswordInputField
+            inputValue={cardPasswordInputValue}
+            errorTypes={cardPasswordErrorType}
+            handleInputValue={handleCardPasswordInputValue}
+            onBlur={onCardPasswordInputBlur}
           />
         </InputSection>
       </PaymentsContainer>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface InputProps<T> {
   isError?: boolean;
-  inputType: 'text' | 'number';
+  inputType: 'text' | 'number' | 'password';
   name: T;
   onChange: ({ name, value }: { name: T; value: string }) => void;
 }
@@ -30,7 +30,7 @@ function Input<T>({
       inputMode={inputType === 'number' ? 'numeric' : 'text'}
       $isError={isError ?? false}
       onChange={handleTypeChange}
-      type="text"
+      type={inputType === 'password' ? 'password' : 'text'}
       {...props}
     />
   );

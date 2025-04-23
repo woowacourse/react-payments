@@ -1,0 +1,36 @@
+import { ChangeEvent } from 'react';
+import BaseInputField from '../../../common/BaseInputField/BaseInputField';
+import Input from '../../../common/Input/Input';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+
+interface CardPasswordInputFieldProps {
+  inputValue: string;
+  errorTypes: ErrorType[];
+  handleInputValue: (value: string) => void;
+  onBlur: (e: ChangeEvent) => void;
+}
+
+function CardPasswordInputField({
+  inputValue,
+  errorTypes,
+  handleInputValue,
+  onBlur,
+}: CardPasswordInputFieldProps) {
+  const errorMessage =
+    errorTypes.length !== 0 ? ERROR_TYPE_TO_MESSAGE[errorTypes[0]] : '';
+
+  return (
+    <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
+      <Input
+        inputType="password"
+        name="CardPassword"
+        value={inputValue}
+        onChange={({ value }) => handleInputValue(value)}
+        onBlur={onBlur}
+        isError={Boolean(errorTypes.length)}
+      />
+    </BaseInputField>
+  );
+}
+
+export default CardPasswordInputField;
