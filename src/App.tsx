@@ -7,6 +7,7 @@ import CardBrandInput from './components/CardBrandInput/CardBrandInput';
 import { CARD_VALIDATION_INFO } from './constants/cardValidationInfo';
 import './App.css';
 import CardPasswordInput from './components/CardPasswordInput/CardPasswordInput';
+import Button from './components/Button/Button';
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(
@@ -40,6 +41,7 @@ function App() {
         />
         <CVCInput CVC={CVC} setCVC={setCVC} />
         <CardPasswordInput password={password} setPassword={setPassword} />
+        <Button text="확인" />
       </form>
     </div>
   );
