@@ -16,7 +16,7 @@ const CardFormComplete = () => {
   const [searchParams] = useSearchParams();
   const { cardNumber, cardBrand } = Object.fromEntries(searchParams);
 
-  const handleGoToHome = () => {
+  const handleButtonClick = () => {
     goHome();
   };
 
@@ -40,7 +40,7 @@ const CardFormComplete = () => {
           </p>
         </div>
 
-        <Button variant="large" onClick={handleGoToHome}>
+        <Button variant="large" onClick={handleButtonClick}>
           처음으로 돌아가기
         </Button>
       </div>
