@@ -1,30 +1,42 @@
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 import { getCardImagePath } from '../../../entities/cardInfo/model/cardType';
+import { PREVIEW_CLASS_NAMES } from '../constants/previewClassName';
 import './preview.css';
 
 export default function Preview({ cardInfo }: { cardInfo: CardInfo }) {
   const imgSrc = getCardImagePath(cardInfo.cardNumber[0]);
+  const {
+    CONTAINER,
+    PREVIEW_CONTAINER,
+    CARD_PREVIEW,
+    PAYMENT_SIM,
+    PAYMENT_METHOD,
+    INFO_CONTAINER,
+    INFO_CARD_NUMBER_CONTAINER,
+    INFO_TEXT,
+    SECRET,
+  } = PREVIEW_CLASS_NAMES;
 
   return (
-    <div className="card-background">
-      <div className="card-preview-container">
-        <div className="card-preview payment-sim"></div>
-        <div className="card-preview payment-method">
-          {imgSrc !== '' && <img src={imgSrc} alt="cardType" className="card-preview" />}
+    <div className={CONTAINER}>
+      <div className={PREVIEW_CONTAINER}>
+        <div className={`${CARD_PREVIEW} ${PAYMENT_SIM}`}></div>
+        <div className={`${CARD_PREVIEW} ${PAYMENT_METHOD}`}>
+          {imgSrc !== '' && <img src={imgSrc} alt="cardType" className={CARD_PREVIEW} />}
         </div>
       </div>
-      <div className="card-preview-info-container">
-        <div className="card-preview-info-card-number-container">
-          <div className="card-preview-info-text">{cardInfo?.cardNumber[0]}</div>
-          <div className="card-preview-info-text">{cardInfo?.cardNumber[1]}</div>
-          <div className="card-preview-info-text secret">
+      <div className={INFO_CONTAINER}>
+        <div className={INFO_CARD_NUMBER_CONTAINER}>
+          <div className={INFO_TEXT}>{cardInfo?.cardNumber[0]}</div>
+          <div className={INFO_TEXT}>{cardInfo?.cardNumber[1]}</div>
+          <div className={`${INFO_TEXT} ${SECRET}`}>
             {'•'.repeat(cardInfo.cardNumber[2]?.length)}
           </div>
-          <div className="card-preview-info-text secret">
+          <div className={`${INFO_TEXT} ${SECRET}`}>
             {'•'.repeat(cardInfo.cardNumber[3]?.length)}
           </div>
         </div>
-        <div className="card-preview-info-text">
+        <div className={INFO_TEXT}>
           {cardInfo.cardExpirationDate.month}
           {cardInfo.cardExpirationDate.year && '/'}
           {cardInfo.cardExpirationDate.year}
