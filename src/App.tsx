@@ -14,7 +14,7 @@ export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
   const [cardLogo, setCardLogo] = useState<keyof CardBrandType | null>(null);
 
-  const { expiration, handleExpirationChange } = useExpiration();
+  const { expiration, handleExpirationChange, ref } = useExpiration();
   const [cvc, setCvc] = useState<CvcType>(INITIAL_CVC);
   const [company, setCompany] = useState<string>('');
 
@@ -27,7 +27,7 @@ export default function App() {
       <Card numbers={cardNumbers} company={company} cardLogo={cardLogo} expiration={expiration} />
       <CardCompanySection value={company} onSelect={handleSelect} />
       <CardNumberSection cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} setCardLogo={setCardLogo} />
-      <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} />
+      <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={ref} />
       <CvcSection cvc={cvc} setCvc={setCvc} />
     </div>
   );

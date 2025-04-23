@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useRef } from 'react';
 import Input from '../Input/Input';
 import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
 import { CARD_BRANDS } from '../../constants';
+import { useAutoFocusNext } from '../../hooks/useAutoNextFocus';
 
 type Props = {
   cardNumbers: CardNumberType;
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
   const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
     const isError = !Number.isInteger(+value);
 
@@ -35,18 +38,26 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
         <div className={styles.inputWrapper}>
-          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
-            <Input
-              key={index}
-              value={cardNumbers[inputKey].value}
-              isError={cardNumbers[inputKey].isError}
-              placeholder={'1234'}
-              onChange={(e) => {
-                handleCardNumberChange(inputKey, e.target.value);
-              }}
-              maxLength={4}
-            />
-          ))}
+          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => {
+            const value = cardNumbers[inputKey].value;
+
+            useAutoFocusNext(value, index, inputRefs);
+            return (
+              <Input
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
+                key={index}
+                value={cardNumbers[inputKey].value}
+                isError={cardNumbers[inputKey].isError}
+                placeholder={'1234'}
+                onChange={(e) => {
+                  handleCardNumberChange(inputKey, e.target.value);
+                }}
+                maxLength={4}
+              />
+            );
+          })}
         </div>
 
         <InputSection.Error message={getCardNumberErrorMessage(cardNumbers)} />

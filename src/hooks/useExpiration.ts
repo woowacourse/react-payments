@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ExpirationKey, ExpirationType } from '../types';
 import { INITIAL_EXPIRATION } from '../constants';
 
@@ -7,22 +7,19 @@ const useExpiration = () => {
   const handleExpirationChange = (field: ExpirationKey, value: string) => {
     const errorMessage = getErrorMessage(field, value);
 
+    if (field === 'month' && value.length === 2) {
+      ref.year.current?.focus();
+    }
+
     setExpiration((prev) => ({
       ...prev,
       [field]: { value, errorMessage }
     }));
   };
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+  const ref = { month: useRef<HTMLInputElement>(null), year: useRef<HTMLInputElement>(null) };
 
-  useEffect(() => {
-    if (expiration.month.value.length === 2) {
-      yearRef.current?.focus();
-    }
-  }, [expiration.month.value]);
-
-  return { expiration, handleExpirationChange, monthRef, yearRef };
+  return { expiration, handleExpirationChange, ref };
 };
 
 const getErrorMessage = (field: 'month' | 'year', value: string) => {
