@@ -79,25 +79,25 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
-	const inputs = orderLabels.map((label: keyof date) => {
-		return (
-			<Input
-				key={label}
-				isError={!!error[label]}
-				placeholder={placeholderMap[label]}
-				value={expirationDate[label]}
-				maxLength={INPUT_MAX_LENGTH}
-				onChange={(numbers) => onChange(label, numbers)}
-				onBlur={(numbers) => onBlur(label, numbers)}
-			/>
-		);
-	});
-
 	return (
 		<CardNumberWrap>
 			<Title>카드 유효기간을 입력해 주세요</Title>
 			<Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-			<InputField label="유효기간" inputs={inputs} errorMessage={findErrorOrder(error)} />
+			<InputField label="유효기간" errorMessage={findErrorOrder(error)}>
+				{orderLabels.map((label: keyof date) => {
+					return (
+						<Input
+							key={label}
+							isError={!!error[label]}
+							placeholder={placeholderMap[label]}
+							value={expirationDate[label]}
+							maxLength={INPUT_MAX_LENGTH}
+							onChange={(numbers) => onChange(label, numbers)}
+							onBlur={(numbers) => onBlur(label, numbers)}
+						/>
+					);
+				})}
+			</InputField>
 		</CardNumberWrap>
 	);
 };

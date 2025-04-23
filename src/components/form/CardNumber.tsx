@@ -40,23 +40,23 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH) });
 	};
 
-	const inputs = orderLabels.map((label: keyof cardNumber) => (
-		<Input
-			key={label}
-			isError={!!error[label]}
-			placeholder="1234"
-			value={cardNumber[label]}
-			maxLength={INPUT_MAX_LENGTH}
-			onChange={(numbers) => onChange(label, numbers)}
-			onBlur={(numbers) => onBlur(label, numbers)}
-		/>
-	));
-
 	return (
 		<CardNumberWrap>
 			<Title>결제할 카드 번호를 입력해 주세요</Title>
 			<Description>본인 명의의 카드만 결제 가능합니다.</Description>
-			<InputField label="카드 번호" inputs={inputs} errorMessage={findErrorOrder(error)} />
+			<InputField label="카드 번호" errorMessage={findErrorOrder(error)}>
+				{orderLabels.map((label: keyof cardNumber) => (
+					<Input
+						key={label}
+						isError={!!error[label]}
+						placeholder="1234"
+						value={cardNumber[label]}
+						maxLength={INPUT_MAX_LENGTH}
+						onChange={(numbers) => onChange(label, numbers)}
+						onBlur={(numbers) => onBlur(label, numbers)}
+					/>
+				))}
+			</InputField>
 		</CardNumberWrap>
 	);
 };
