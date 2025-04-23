@@ -3,6 +3,7 @@ import { CardNumber, CardNumberProps } from '../../types/index.types';
 import { isValidLength, isValidNumber } from '../../util/validation';
 import { NO_ERROR } from '../../constants/constant';
 import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
+import autoFocusToNext from '../../util/autoFocus';
 
 const CARD_NUMBER_LENGTH = 4;
 
@@ -39,22 +40,25 @@ function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber }: CardNum
   return (
     <StyledContainer>
       <label htmlFor="">카드 번호</label>
-      <StyledInputWrap>
-        {inputKeys.map((key) => (
-          <Input
-            key={key}
-            value={cardNumbers[key]}
-            onChange={(e) => {
-              changeCardNumber(key, e.target?.value);
-            }}
-            width="25%"
-            maxLength={CARD_NUMBER_LENGTH}
-            placeholder="1234"
-            isError={isCardNumberInvalid(cardNumbers[key])}
-            isPassword={false}
-          />
-        ))}
-      </StyledInputWrap>
+      <form>
+        <StyledInputWrap>
+          {inputKeys.map((key) => (
+            <Input
+              key={key}
+              value={cardNumbers[key]}
+              onChange={(e) => {
+                changeCardNumber(key, e.target?.value);
+                autoFocusToNext(e, CARD_NUMBER_LENGTH);
+              }}
+              width="25%"
+              maxLength={CARD_NUMBER_LENGTH}
+              placeholder="1234"
+              isError={isCardNumberInvalid(cardNumbers[key])}
+              isPassword={false}
+            />
+          ))}
+        </StyledInputWrap>
+      </form>
       <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>
     </StyledContainer>
   );

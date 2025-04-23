@@ -3,6 +3,7 @@ import { ExpirationPeriod, ExpirationPeriodProps } from '../../types/index.types
 import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from '../../util/validation';
 import { NO_ERROR, EXPIRATION_PERIOD } from '../../constants/constant';
 import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
+import autoFocusToNext from '../../util/autoFocus';
 
 const EXPIRATION_PERIOD_LENGTH = 2;
 
@@ -47,30 +48,34 @@ function CardExpirationPeriodInputs({ expirationPeriod, changeExpirationPeriod }
   return (
     <StyledContainer>
       <label htmlFor="">유효 기간</label>
-      <StyledInputWrap>
-        <Input
-          value={expirationPeriod['month']}
-          onChange={(e) => {
-            changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
-          }}
-          width="50%"
-          maxLength={EXPIRATION_PERIOD_LENGTH}
-          placeholder="MM"
-          isError={isCardExpirationPeriodMonthInvalid(expirationPeriod['month'])}
-          isPassword={false}
-        ></Input>
-        <Input
-          value={expirationPeriod['year']}
-          onChange={(e) => {
-            changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
-          }}
-          width="50%"
-          maxLength={EXPIRATION_PERIOD_LENGTH}
-          placeholder="YY"
-          isError={isCardExpirationPeriodYearInvalid(expirationPeriod['year'])}
-          isPassword={false}
-        />
-      </StyledInputWrap>
+      <form>
+        <StyledInputWrap>
+          <Input
+            value={expirationPeriod['month']}
+            onChange={(e) => {
+              changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
+              autoFocusToNext(e, EXPIRATION_PERIOD_LENGTH);
+            }}
+            width="50%"
+            maxLength={EXPIRATION_PERIOD_LENGTH}
+            placeholder="MM"
+            isError={isCardExpirationPeriodMonthInvalid(expirationPeriod['month'])}
+            isPassword={false}
+          ></Input>
+          <Input
+            value={expirationPeriod['year']}
+            onChange={(e) => {
+              changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
+              autoFocusToNext(e, EXPIRATION_PERIOD_LENGTH);
+            }}
+            width="50%"
+            maxLength={EXPIRATION_PERIOD_LENGTH}
+            placeholder="YY"
+            isError={isCardExpirationPeriodYearInvalid(expirationPeriod['year'])}
+            isPassword={false}
+          />
+        </StyledInputWrap>
+      </form>
       <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>
     </StyledContainer>
   );
