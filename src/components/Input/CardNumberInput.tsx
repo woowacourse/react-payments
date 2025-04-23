@@ -5,7 +5,7 @@ type Props = {
   onChange: (value: string) => void;
   placeholder?: string;
   errorMessage?: string;
-  type?: "text" | "password";
+  type: "text" | "password";
 };
 
 // type은 필수로 받기(이게 옵셔널일 이유를 모르겠음)

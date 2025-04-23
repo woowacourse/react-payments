@@ -36,12 +36,14 @@ export default function CardExpirationDate({
           placeholder={CONSTANT_EXPIRATION_DATE.PLACE_HOLDER_MONTH}
           value={cardExpirationDate.month}
           errorMessage={errorMessage[0]}
+          type="text"
         />
         <CardNumberInput
           onChange={(value) => handleChange(value, 1)}
           placeholder={CONSTANT_EXPIRATION_DATE.PLACE_HOLDER_YEAR}
           value={cardExpirationDate.year}
           errorMessage={errorMessage[1]}
+          type="text"
         />
       </div>
       <InputErrorMessage

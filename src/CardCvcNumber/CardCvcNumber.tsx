@@ -28,6 +28,7 @@ export default function CardCvcNumber({
         placeholder={CARD_CVC_NUMBER.PLACEHOLDER}
         value={cvcNumbers}
         errorMessage={errorMessage}
+        type="text"
       />
       <InputErrorMessage message={errorMessage} />
     </section>

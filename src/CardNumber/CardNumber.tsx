@@ -60,6 +60,7 @@ export default function CardNumber({
             value={cardNumbers[index]}
             errorMessage={errorMessage[index]}
             onChange={(value) => handleCardNumberChange(value, index)}
+            type="text"
           />
         ))}
       </div>
