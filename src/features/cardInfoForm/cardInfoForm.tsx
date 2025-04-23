@@ -13,6 +13,8 @@ import {
   getYearValidationFns,
 } from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs.domain";
 import { getCVCValidationFns } from "../../entities/cardCVCNumberInputs/CardCVCNumberInputs.domain";
+import CardTypeSection from "../cardTypeSection/CardTypeSection";
+import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 
 type CardInfoFormProps = {
   cardNumber: Record<CardNumberPosition, string>;
@@ -67,6 +69,8 @@ export default function CardInfoForm({
 
   return (
     <>
+      <CardPasswordSection />
+      <CardTypeSection />
       <CardNumberSection
         cardNumber={cardNumber}
         changeCardNumber={changeCardNumber}
