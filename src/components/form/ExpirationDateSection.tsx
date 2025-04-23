@@ -11,6 +11,7 @@ import {ExpirationDate} from '../../type/Card';
 
 const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;
+const CURRENT_YEAR = new Date().getFullYear() % 100;
 
 type Props = {
   value: ExpirationDate;
@@ -32,11 +33,11 @@ const expirationErrorRule = [
     },
   },
   {
-    error: (nowYear: number) => MESSAGE.YEAR_RANGE(nowYear),
-    validate: (date: string, order: keyof ExpirationDate, nowYear: number) => {
+    error: MESSAGE.YEAR_RANGE(CURRENT_YEAR),
+    validate: (date: string, order: keyof ExpirationDate) => {
       if (order === 'year') {
         const year = Number(date);
-        return year < nowYear && year >= 0;
+        return year < CURRENT_YEAR && year >= 0;
       }
     },
   },
@@ -51,22 +52,16 @@ const ExpirationDateSection = ({
     year: '',
   });
 
-  const nowYear = new Date().getFullYear() % 100;
-
   const handleInput = (order: keyof ExpirationDate, value: string) => {
     onExpirationDateChange(order, value);
 
     const matchedError = expirationErrorRule.find((rule) =>
-      rule.validate(value, order, nowYear)
+      rule.validate(value, order)
     );
 
     setError((prev) => ({
       ...prev,
-      [order]: matchedError
-        ? typeof matchedError.error === 'function'
-          ? matchedError.error(nowYear)
-          : matchedError.error
-        : '',
+      [order]: matchedError?.error,
     }));
   };
 
