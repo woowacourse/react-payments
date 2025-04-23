@@ -70,7 +70,10 @@ type CardPreviewProps = {
 };
 
 const CARD_IDENTIFYING_NUMBER = {
-  VISA: 4,
+  VISA: {
+    MIN: 40,
+    MAX: 49,
+  },
   MASTERCARD: {
     MIN: 51,
     MAX: 55,
@@ -85,7 +88,7 @@ const logoSrc: Record<string, LogoSrc> = {
 };
 
 const getLogoSrc = (id: number) => {
-  if (id === CARD_IDENTIFYING_NUMBER.VISA) {
+  if (CARD_IDENTIFYING_NUMBER.VISA.MIN <= id && id <= CARD_IDENTIFYING_NUMBER.VISA.MAX) {
     return logoSrc.visa;
   }
   if (CARD_IDENTIFYING_NUMBER.MASTERCARD.MIN <= id && id <= CARD_IDENTIFYING_NUMBER.MASTERCARD.MAX) {
