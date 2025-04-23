@@ -1,9 +1,10 @@
 import { ChangeEvent } from "react";
-import { CARD_FORM_TYPE } from "../../../constants/constants";
-import { useCard } from "../../../hooks/useCard";
-import { CardValidationType } from "../../../hooks/useCardValidation";
-import { isCardCompanyState } from "../../../utils/typeGuard";
-import Select from "../../Common/Select/Select";
+import { CARD_FORM_TYPE } from "../../../../constants/constants";
+import { useCard } from "../../../../hooks/useCard";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
+import { isCardCompanyState } from "../../../../utils/typeGuard";
+import Select from "../../../Common/Select/Select";
+import { CardFormFieldCSS } from "../CardFormFields.styled";
 
 const cardCompanyOptions = [
   { value: "bc", text: "BC카드" },
@@ -38,13 +39,15 @@ export default function CardCompanySelect({
   };
 
   return (
-    <Select
-      key={CARD_FORM_TYPE.cardCompany}
-      isError={cardCompanyError}
-      placeholder={PLACEHOLDER}
-      options={cardCompanyOptions}
-      value={cardCompany}
-      onChange={handleCardCompanyChange}
-    />
+    <CardFormFieldCSS>
+      <Select
+        key={CARD_FORM_TYPE.cardCompany}
+        isError={cardCompanyError}
+        placeholder={PLACEHOLDER}
+        options={cardCompanyOptions}
+        value={cardCompany}
+        onChange={handleCardCompanyChange}
+      />
+    </CardFormFieldCSS>
   );
 }

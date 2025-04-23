@@ -4,12 +4,11 @@ import Description from "../../Common/Description/Description";
 import Error from "../../Common/Error/Error";
 import Subtitle from "../../Common/Subtitle/Subtitle";
 import Title from "../../Common/Title/Title";
-import CardCompanySelect from "../CardFormFields/CardCompanySelect";
-import CardCvcInput from "../CardFormFields/CardCvcInput";
-import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput";
-import CardNumberInput from "../CardFormFields/CardNumberInput";
-import CardPasswordInput from "../CardFormFields/CardPasswordInput";
-import { CardFormFieldCSS } from "./CardFormSection.styled";
+import CardCompanySelect from "../CardFormFields/CardCompanySelect/CardCompanySelect";
+import CardCvcInput from "../CardFormFields/CardCvcInput/CardCvcInput";
+import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput/CardExpirationPeriodInput";
+import CardNumberInput from "../CardFormFields/CardNumberInput/CardNumberInput";
+import CardPasswordInput from "../CardFormFields/CardPasswordInput/CardPasswordInput";
 
 export interface CardFormSectionProps {
   type: CardFormType;
@@ -101,7 +100,7 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
       <Title title={titleVariants[type]} />
       <Description description={descriptionVariants[type]} />
       <Subtitle subtitle={subtitleVariants[type]} />
-      <CardFormFieldCSS>{renderCardFormFieldByType()}</CardFormFieldCSS>
+      {renderCardFormFieldByType()}
       <Error
         errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리?
         isVisible={hasError(type)}

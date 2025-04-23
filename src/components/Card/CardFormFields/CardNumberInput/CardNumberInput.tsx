@@ -2,10 +2,11 @@ import { ChangeEvent } from "react";
 import {
   CARD_NUMBERS_SEGMENT,
   CardNumbersSegmentType,
-} from "../../../constants/constants";
-import { useCard } from "../../../hooks/useCard";
-import { CardValidationType } from "../../../hooks/useCardValidation";
-import Input from "../../Common/Input/Input";
+} from "../../../../constants/constants";
+import { useCard } from "../../../../hooks/useCard";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
+import Input from "../../../Common/Input/Input";
+import { CardFormFieldCSS } from "../CardFormFields.styled";
 
 const cardPositions = Object.values(CARD_NUMBERS_SEGMENT);
 
@@ -32,7 +33,7 @@ export default function CardNumberInput({
   };
 
   return (
-    <>
+    <CardFormFieldCSS>
       {cardPositions.map((position) => {
         return (
           <Input
@@ -47,6 +48,6 @@ export default function CardNumberInput({
           />
         );
       })}
-    </>
+    </CardFormFieldCSS>
   );
 }

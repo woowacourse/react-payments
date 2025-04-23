@@ -2,10 +2,11 @@ import { ChangeEvent } from "react";
 import {
   EXPIRATION_PERIOD_SEGMENT,
   ExpirationPeriodSegmentType,
-} from "../../../constants/constants";
-import { useCard } from "../../../hooks/useCard";
-import { CardValidationType } from "../../../hooks/useCardValidation";
-import Input from "../../Common/Input/Input";
+} from "../../../../constants/constants";
+import { useCard } from "../../../../hooks/useCard";
+import { CardValidationType } from "../../../../hooks/useCardValidation";
+import Input from "../../../Common/Input/Input";
+import { CardFormFieldCSS } from "../CardFormFields.styled";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
 
@@ -38,7 +39,7 @@ export default function CardExpirationPeriodInput({
   };
 
   return (
-    <>
+    <CardFormFieldCSS>
       {periodPositions.map((position) => {
         return (
           <Input
@@ -53,6 +54,6 @@ export default function CardExpirationPeriodInput({
           />
         );
       })}
-    </>
+    </CardFormFieldCSS>
   );
 }
