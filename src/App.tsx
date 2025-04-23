@@ -7,7 +7,9 @@ import styled from '@emotion/styled';
 import useCardNumber from './hooks/useCardNumber';
 import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import CardCompanySelect from './components/cardInfoForm/CardCompanySelect/CardCompanySelect';
+import { CARD_COMPANY_NAME } from './components/constants/cardCompany';
 
 export const CARD_IFNO_INPUT_STEP = {
   cardCompany: 'cardCompany',
@@ -53,6 +55,24 @@ function App() {
     showNextStep,
   });
 
+  const [cardCompany, setCardCompany] = useState<
+    keyof typeof CARD_COMPANY_NAME | undefined
+  >();
+
+  const isCardCompany = (v: string): v is keyof typeof CARD_COMPANY_NAME => {
+    return v in CARD_COMPANY_NAME;
+  };
+
+  const onChangeCardCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+
+    if (isCardCompany(value)) {
+      setCardCompany(value);
+
+      showNextStep(CARD_IFNO_INPUT_STEP.validityPeriod);
+    }
+  };
+
   return (
     <AppLayout>
       <CardPreview
@@ -92,9 +112,18 @@ function App() {
             />
           </CardInputSection>
         )}
-        {/* {showRef.current.cardCompany && (
-        카드사 입력 필드
-        )} */}
+        {showRef.current.cardCompany && (
+          <CardInputSection
+            title="카드사를 선택해 주세요"
+            description="현재 국내 카드사만 가능합니다."
+            errorMessage={errorMessage ? errorMessage : ''}
+          >
+            <CardCompanySelect
+              cardCompany={cardCompany}
+              onChange={onChangeCardCompany}
+            />
+          </CardInputSection>
+        )}
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
