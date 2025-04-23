@@ -8,8 +8,8 @@ type Props = {
 
 const Select = ({ options, cardCompany, onChange }: Props) => {
 	return (
-		<SelectContainer cardCompany={cardCompany} onChange={onChange && ((e) => onChange(e.target.value))}>
-			<Option selected hidden>
+		<SelectContainer $cardCompany={cardCompany} onChange={onChange && ((e) => onChange(e.target.value))}>
+			<Option value="" hidden>
 				카드사를 선택해주세요.
 			</Option>
 			{options.map((option) => {
@@ -25,13 +25,13 @@ const Select = ({ options, cardCompany, onChange }: Props) => {
 
 export default Select;
 
-const SelectContainer = styled.select<{ cardCompany: string }>`
+const SelectContainer = styled.select<{ $cardCompany: string }>`
 	width: 100%;
 	padding: 8px;
 	margin-top: 16px;
 	border: 1px solid #acacac;
 	border-radius: 3px;
-	color: ${(props) => (props.cardCompany === "" ? "#acacac" : "#000")};
+	color: ${(props) => (props.$cardCompany === "" ? "#acacac" : "#000")};
 
 	&:focus {
 		outline: none;
