@@ -5,7 +5,7 @@ import {
 import CardNumberSection from "../cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../cardCVCNumberSection/CardCVCNumberSection";
-import useError from "../../shared/hook/useError";
+import useError from "./hooks/useError";
 import { NO_ERROR } from "../../shared/constants/constant";
 import { getCardNumberValidationFns } from "../../entities/cardNumberInputs/CardNumberInputs.domain";
 import {
