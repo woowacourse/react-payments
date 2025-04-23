@@ -53,7 +53,7 @@ function AddCardPreview({
           )}
         </span>
       </div>
-      <div className={styles.expire}>
+      <div className={styles.expire} style={{ color: textColor }}>
         <span>{expireDate.MM.value}</span>
         {(expireDate.MM.value || expireDate.YY.value) && <span>/</span>}
         <span>{expireDate.YY.value}</span>
