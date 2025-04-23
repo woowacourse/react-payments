@@ -5,7 +5,12 @@ import {
   useState,
   ChangeEvent,
 } from 'react';
-import { useCardNumber, useCardExpiration, useCardCVC } from '../hooks';
+import {
+  useCardNumber,
+  useCardExpiration,
+  useCardCVC,
+  useCardPassword,
+} from '../hooks';
 import theme from '../styles/theme';
 import {
   CardNumber,
@@ -41,6 +46,7 @@ interface CardContextType {
   cardNumberError: CardNumberError;
   handleCardNumberChange: (e: ChangeEvent<HTMLInputElement>) => void;
   getCardNumberErrorMessage: () => string | null;
+  isCardNumberValid: () => boolean;
 
   cardExpirationDate: CardExpirationDate;
   cardExpirationDateError: CardExpirationDateError;
@@ -50,11 +56,19 @@ interface CardContextType {
   };
   getMonthErrorMessage: () => string | null | undefined;
   getYearErrorMessage: () => string | null | undefined;
+  isCardExpirationValid: () => boolean;
 
   cardCVC: CardCVC;
   cardCVCError: boolean;
   handleCardCVCChange: (value: string) => void;
   getCardCVCErrorMessage: () => string | null;
+  isCardCVCValid: () => boolean;
+
+  cardPassword: string;
+  cardPasswordError: boolean;
+  handleCardPasswordChange: (value: string) => void;
+  getCardPasswordErrorMessage: () => string | null;
+  isCardPasswordValid: () => boolean;
 
   selectedCardBrand: CardBrand | null;
   setSelectedCardBrand: (brand: CardBrand) => void;
@@ -69,6 +83,7 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     cardNumberError,
     handleCardNumberChange,
     getCardNumberErrorMessage,
+    isCardNumberValid,
   } = useCardNumber();
 
   const {
@@ -77,10 +92,24 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     handleCardExpirationChange,
     getMonthErrorMessage,
     getYearErrorMessage,
+    isCardExpirationValid,
   } = useCardExpiration();
 
-  const { cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage } =
-    useCardCVC();
+  const {
+    cardCVC,
+    cardCVCError,
+    handleCardCVCChange,
+    getCardCVCErrorMessage,
+    isCardCVCValid,
+  } = useCardCVC();
+
+  const {
+    cardPassword,
+    cardPasswordError,
+    handleCardPasswordChange,
+    getCardPasswordErrorMessage,
+    isCardPasswordValid,
+  } = useCardPassword();
 
   const [selectedCardBrand, setSelectedCardBrand] = useState<CardBrand | null>(
     null
@@ -97,17 +126,26 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     cardNumberError,
     handleCardNumberChange,
     getCardNumberErrorMessage,
+    isCardNumberValid,
 
     cardExpirationDate,
     cardExpirationDateError,
     handleCardExpirationChange,
     getMonthErrorMessage,
     getYearErrorMessage,
+    isCardExpirationValid,
 
     cardCVC,
     cardCVCError,
     handleCardCVCChange,
     getCardCVCErrorMessage,
+    isCardCVCValid,
+
+    cardPassword,
+    cardPasswordError,
+    handleCardPasswordChange,
+    getCardPasswordErrorMessage,
+    isCardPasswordValid,
 
     selectedCardBrand,
     setSelectedCardBrand,
@@ -121,7 +159,7 @@ export const useCard = () => {
   const context = useContext(CardContext);
 
   if (!context) {
-    throw new Error('useCard는 CardProvider 안에서 사용되어야 합니다.');
+    throw new Error('useCard must be used within a CardProvider');
   }
 
   return context;
