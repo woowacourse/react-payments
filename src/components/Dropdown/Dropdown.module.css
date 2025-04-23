@@ -11,6 +11,10 @@
   text-align: left;
 }
 
+.open {
+  border: 1px solid var(--color-black);
+}
+
 .selected {
   color: var(--color-black);
 }
