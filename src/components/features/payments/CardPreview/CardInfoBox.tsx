@@ -32,8 +32,7 @@ function CardInfoBox({ cardNumber, expirationDate }: CardInfoBoxProps) {
       </CardNumberRow>
       <CardNumberWrapper>
         <CardInfoText>
-          {expirationDate.expirationDatePart1}/
-          {expirationDate.expirationDatePart2}
+          {expirationDate.month}/{expirationDate.year}
         </CardInfoText>
       </CardNumberWrapper>
     </CardInfoBoxContainer>
