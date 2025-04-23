@@ -4,13 +4,26 @@ import styled from "styled-components";
 
 type Props = {
 	cardNumbers: cardNumber;
+	cardCompany: string;
 	expirationDate: date;
 };
 
 type CardBrand = "none" | "mastercard" | "visa";
 
-const Card = ({ cardNumbers, expirationDate }: Props) => {
+enum CardBackgroundColor {
+	"BC카드" = "#F04651",
+	"신한카드" = "#0046FF",
+	"카카오뱅크" = "#FFE600",
+	"현대카드" = "#000",
+	"우리카드" = "#007BC8",
+	"롯데카드" = "#ED1C24",
+	"하나카드" = "#009490",
+	"국민카드" = "#6A6056",
+}
+
+const Card = ({ cardNumbers, cardCompany, expirationDate }: Props) => {
 	const [badgeBrand, setBadgeBrand] = useState<CardBrand>("none");
+	const backgroundColor = CardBackgroundColor[cardCompany as keyof typeof CardBackgroundColor] ?? "#000";
 
 	const badgeImagePath = () => {
 		if (badgeBrand === "mastercard") return "./images/Mastercard.png";
@@ -47,7 +60,7 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 	}, [cardNumbers.first]);
 
 	return (
-		<Container>
+		<Container cardBackgroundColor={backgroundColor}>
 			<Wrap>
 				<Chip />
 				<BrandBadge image={badgeImagePath()} />
@@ -73,13 +86,13 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 
 export default Card;
 
-const Container = styled.div`
+const Container = styled.div<{ cardBackgroundColor: string }>`
 	width: 212px;
 	height: 132px;
 	margin: 0 auto 45px;
 	padding: 8px 12px;
 	border-radius: 4px;
-	background: #333;
+	background: ${(props) => props.cardBackgroundColor};
 	box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
