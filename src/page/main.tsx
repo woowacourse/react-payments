@@ -70,7 +70,18 @@ const Main = () => {
         onChange={(value) => setcvcNumber(value)}
       />
 
-      <Button onClick={() => navigate(PATH.CONFIRM)}>확인</Button>
+      <Button
+        onClick={() =>
+          navigate(PATH.CONFIRM, {
+            state: {
+              firstSection: cardNumber.first,
+              cardCompany: cardCompany,
+            },
+          })
+        }
+      >
+        확인
+      </Button>
     </MainContainer>
   );
 };

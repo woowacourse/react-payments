@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import Button from '../components/button/Button';
+import {useLocation} from 'react-router';
+import {CARD_COMPANY} from '../components/constants/card';
+import {CardCompany} from '../type/Card';
 
 const Confirm = () => {
+  const location = useLocation();
+  const {firstSection, cardCompany} = location.state;
+
   return (
     <Container>
       <img src="./images/checkIcon.png" alt="체크표시" />
       <Description>
-        5111로 시작하는
+        {firstSection}로 시작하는
         <br />
-        BC카드가 등록되었어요.
+        {CARD_COMPANY[cardCompany as CardCompany]?.name}가 등록되었어요.
       </Description>
       <Button onClick={() => {}}>확인</Button>
     </Container>
