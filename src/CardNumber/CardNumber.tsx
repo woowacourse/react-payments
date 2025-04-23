@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import CardNumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
@@ -8,6 +7,7 @@ interface Props {
   handleChange: (value: string, index: number) => void;
   cardNumbers: string[];
   errorMessage: string[];
+  onComplete: () => void;
 }
 
 const CARD_NUMBER = {
@@ -21,8 +21,32 @@ export default function CardNumber({
   handleChange,
   cardNumbers,
   errorMessage,
+  onComplete,
 }: Props) {
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const handleCardNumberInputNextFocus = (value: string, index: number) => {
+    if (value.length === CARD_NUMBER.MAX_LENGTH && index < 3) {
+      const nextInput =
+        document.querySelectorAll<HTMLInputElement>("input.input-number")[
+          index + 1
+        ];
+      nextInput?.focus();
+    }
+  };
+
+  const handleCardNumberChange = (value: string, index: number) => {
+    handleChange(value, index);
+    handleCardNumberInputNextFocus(value, index);
+
+    const updatedNumbers = [...cardNumbers];
+    updatedNumbers[index] = value;
+    const isComplete = updatedNumbers.every(
+      (v) => v.length === CARD_NUMBER.MAX_LENGTH
+    );
+
+    if (isComplete) {
+      onComplete();
+    }
+  };
 
   return (
     <section className="card-company">
@@ -30,23 +54,12 @@ export default function CardNumber({
       <InputText inputValue={CARD_NUMBER.DESCRIPTION} variant="description" />
       <InputText inputValue={CARD_NUMBER.SUBTITLE} variant="subtitle" />
       <div className={styles["card-number__input"]}>
-        {[0, 1, 2, 3].map((index) => (
+        {["", "", "", ""].map((_, index) => (
           <CardNumberInput
             key={index}
-            ref={(el: HTMLInputElement | null) => {
-              inputRefs.current[index] = el;
-            }}
             value={cardNumbers[index]}
             errorMessage={errorMessage[index]}
-            onChange={(value) => {
-              handleChange(value, index);
-              if (
-                value.length === CONSTANT_CARD_NUMBER.MAX_LENGTH &&
-                index < 3
-              ) {
-                inputRefs.current[index + 1]?.focus();
-              }
-            }}
+            onChange={(value) => handleCardNumberChange(value, index)}
           />
         ))}
       </div>
