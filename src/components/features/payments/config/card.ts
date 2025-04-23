@@ -2,7 +2,7 @@ export const CARD_TYPE = {
   visa: 'visa',
   master: 'master',
   none: 'none',
-};
+} as const;
 export type CardType = keyof typeof CARD_TYPE;
 
 export const CARD_BANK = {
@@ -14,7 +14,7 @@ export const CARD_BANK = {
   lotte: { label: '롯데카드', color: '#ED1C24' },
   hana: { label: '하나카드', color: '#009490' },
   kookmin: { label: '국민카드', color: '#6A6056' },
-};
+} as const;
 export type CardBankType = keyof typeof CARD_BANK;
 
 export const CARD_NUMBER = {

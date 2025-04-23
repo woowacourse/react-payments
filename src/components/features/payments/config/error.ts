@@ -7,7 +7,7 @@ export const ERROR_TYPE = {
   shortCardPasswordSegment: 'shortCardPasswordSegment',
 } as const;
 
-export type ErrorType = (typeof ERROR_TYPE)[keyof typeof ERROR_TYPE];
+export type ErrorType = keyof typeof ERROR_TYPE;
 
 export const ERROR_TYPE_TO_MESSAGE: Record<ErrorType, string> = {
   noneCardType: '유효하지 않은 카드 번호입니다. 카드 번호를 확인해주세요',
