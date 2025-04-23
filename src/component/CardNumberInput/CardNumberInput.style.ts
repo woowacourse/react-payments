@@ -7,7 +7,6 @@ export const cardNumberInputLayout = css`
   align-items: flex-start;
 
   width: 100%;
-  padding: 3.1rem;
-  margin-top: 4.5rem;
-  gap: 1.6rem;
+  padding: 0 3.1rem 0 3.1rem;
+  gap: 16px;
 `;

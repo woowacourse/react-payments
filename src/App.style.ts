@@ -12,5 +12,5 @@ export const mainLayout = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.6rem;
+  gap: 16px;
 `;

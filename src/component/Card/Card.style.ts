@@ -11,6 +11,7 @@ export const cardLayout = css`
 
   border-radius: 5px;
   background-color: ${theme.color.cardBlack};
+  box-shadow: 3px 3px 5px 0 #00000040;
 `;
 
 export const cardContainer = css`

@@ -7,6 +7,6 @@ export const cardPeriodInputLayout = css`
   align-items: flex-start;
 
   width: 100%;
-  padding: 3.1rem;
-  gap: 1.6rem;
+  padding: 0 3.1rem 0 3.1rem;
+  gap: 16px;
 `;
