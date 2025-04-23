@@ -3,14 +3,20 @@ import { css } from "@emotion/react";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
 import useCardInformation from "./hooks/useCardInformation.tsx";
 import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
+import useValidation from "./hooks/useValidation/useValidation";
 
 function App() {
   const { cardInformationState, setCardInformationState } = useCardInformation();
+  const validation = useValidation();
 
   return (
     <div css={AppStyle}>
       <PreviewCard cardInformationState={cardInformationState} />
-      <FormContainer cardInformationState={cardInformationState} setCardInformationState={setCardInformationState} />
+      <FormContainer
+        cardInformationState={cardInformationState}
+        setCardInformationState={setCardInformationState}
+        validation={validation}
+      />
     </div>
   );
 }

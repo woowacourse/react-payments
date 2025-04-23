@@ -4,11 +4,12 @@ import { FormContainerProps } from "../../types/componentPropsType";
 import formUIControllerData from "../../constants/formUIControllerData";
 import { CardInformationType } from "../../types/CardInformationType";
 
-const FormContainer = ({ cardInformationState, setCardInformationState }: FormContainerProps) => {
+const FormContainer = ({ cardInformationState, setCardInformationState, validation }: FormContainerProps) => {
   return (
     <div css={FormContainerStyle}>
       {(Object.keys(cardInformationState) as (keyof CardInformationType)[]).map((key) => {
         const formSectionData = formUIControllerData[key];
+        const eachValidation = validation[key];
         return (
           <FormSection
             title={formSectionData.title}
@@ -17,6 +18,7 @@ const FormContainer = ({ cardInformationState, setCardInformationState }: FormCo
               ...formSectionData.inputFieldData,
               cardInformation: cardInformationState,
               setCardInformation: setCardInformationState,
+              eachValidation: eachValidation,
               informationType: key,
             }}
           />

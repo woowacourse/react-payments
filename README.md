@@ -96,8 +96,8 @@
 
 - [x] 필드 별 에러 훅 분리 (uniqueNumber, expirationDate, cvcNumber)
 - [x] 공통 유효성 검사 utils로 분리
-- [ ] 에러 훅 전체 관리 훅 생성 -> app에서 내려주기 (상위에서 관리한다)
-  - [ ] 전체 에러훅에서 개별 에러 훅들을 컴포넌트에 뿌려준다.
+- [x] 에러 훅들 전체 관리 훅 생성 -> app에서 내려주기 (상위에서 관리한다)
+  - [x] 전체 에러훅에서 개별 에러 훅들을 컴포넌트에 뿌려준다.
 - [ ] 필드 별 컴포넌트 제작 (추후 더 고민 해보고 관리할 예정)
 - [ ] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
 - [ ] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경

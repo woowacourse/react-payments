@@ -1,8 +1,10 @@
 import { CardInformationType, setCardInformationType } from "./CardInformationType";
+import { useEachValidationType, useValidationType } from "./useValidationType";
 
 export type FormContainerProps = {
   cardInformationState: CardInformationType;
   setCardInformationState: setCardInformationType;
+  validation: useValidationType;
 };
 
 export type FormSectionProps = {
@@ -21,6 +23,7 @@ export type InputFieldProps = {
   cardInformation: CardInformationType;
   setCardInformation: setCardInformationType;
   informationType: keyof CardInformationType;
+  eachValidation: useEachValidationType;
 };
 
 export type InputProps = {

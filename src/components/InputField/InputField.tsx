@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import Text from "../Text/Text";
 import Input from "../Input/Input";
-import useCardInformationErrors from "../../hooks/useCardInformationErrors";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { InputFieldProps } from "../../types/componentPropsType";
 
@@ -12,11 +11,12 @@ const InputField = ({
   cardInformation,
   setCardInformation,
   informationType,
+  eachValidation,
 }: InputFieldProps) => {
-  const { isErrors, errorMessage, validateInput } = useCardInformationErrors();
+  const { isError, errorMessage, validateInput } = eachValidation;
 
   const handleChange = (index: number, value: string) => {
-    validateInput(informationType, index, value);
+    validateInput(index, value);
 
     setCardInformation((prev) => {
       const updated = prev[informationType];
@@ -36,14 +36,11 @@ const InputField = ({
             onChange={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
-            error={isErrors[informationType][index]}
+            error={isError[index]}
           />
         ))}
       </div>
-      <ErrorMessage
-        error={isErrors[informationType].some((bool) => bool === true)}
-        message={errorMessage[informationType]}
-      />
+      <ErrorMessage error={isError.some((bool) => bool === true)} message={errorMessage} />
     </div>
   );
 };
