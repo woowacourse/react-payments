@@ -98,7 +98,8 @@
 - [x] 공통 유효성 검사 utils로 분리
 - [x] 에러 훅들 전체 관리 훅 생성 -> app에서 내려주기 (상위에서 관리한다)
   - [x] 전체 에러훅에서 개별 에러 훅들을 컴포넌트에 뿌려준다.
-- [ ] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
+- [x] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
+  - [x] formUIControllerData 타입 지정
 - [ ] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경
 - [ ] PreviewCard 컴포넌트 내부 삼항연산자로 변경
 

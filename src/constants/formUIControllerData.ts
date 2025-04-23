@@ -1,5 +1,8 @@
-const formUIControllerData = {
-  uniqueNumber: {
+import { formSectionData } from "../types";
+
+const formUIControllerData: formSectionData[] = [
+  {
+    key: "uniqueNumber",
     title: "결제할 카드 번호를 입력해 주세요",
     description: "본인 명의의 카드만 결제 가능합니다.",
     inputFieldData: {
@@ -8,7 +11,8 @@ const formUIControllerData = {
       inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
     },
   },
-  expirationDate: {
+  {
+    key: "expirationDate",
     title: "카드 유효기간을 입력해 주세요",
     description: "월/년도(MMYY)를 순서대로 입력해 주세요.",
     inputFieldData: {
@@ -17,7 +21,8 @@ const formUIControllerData = {
       inputProps: { placeholder: ["MM", "YY"], maxLength: 2 },
     },
   },
-  cvcNumber: {
+  {
+    key: "cvcNumber",
     title: "CVC 번호를 입력해 주세요",
     description: "",
     inputFieldData: {
@@ -26,6 +31,6 @@ const formUIControllerData = {
       inputProps: { placeholder: ["123"], maxLength: 3 },
     },
   },
-};
+];
 
 export default formUIControllerData;

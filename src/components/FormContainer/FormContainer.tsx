@@ -2,14 +2,12 @@ import FormSection from "../FormSection/FormSection";
 import { css } from "@emotion/react";
 import { FormContainerProps } from "../../types/componentPropsType";
 import formUIControllerData from "../../constants/formUIControllerData";
-import { CardInformationType } from "../../types/CardInformationType";
 
 const FormContainer = ({ cardInformationState, setCardInformationState, validation }: FormContainerProps) => {
   return (
     <div css={FormContainerStyle}>
-      {(Object.keys(cardInformationState) as (keyof CardInformationType)[]).map((key) => {
-        const formSectionData = formUIControllerData[key];
-        const eachValidation = validation[key];
+      {formUIControllerData.map((formSectionData) => {
+        const eachValidation = validation[formSectionData.key];
         return (
           <FormSection
             title={formSectionData.title}
@@ -19,7 +17,7 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
               cardInformation: cardInformationState,
               setCardInformation: setCardInformationState,
               eachValidation: eachValidation,
-              informationType: key,
+              informationType: formSectionData.key,
             }}
           />
         );

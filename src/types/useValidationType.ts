@@ -1,4 +1,4 @@
-import { errorStateType } from ".";
+import { cardInformationKey, errorStateType } from ".";
 
 export type useEachValidationType = {
   isError: errorStateType;
@@ -6,7 +6,6 @@ export type useEachValidationType = {
   validateInput: (index: number, value: string) => void;
 };
 
-type ValidationKey = "uniqueNumber" | "expirationDate" | "cvcNumber";
 export type useValidationType = {
-  [K in ValidationKey]: useEachValidationType;
+  [K in cardInformationKey]: useEachValidationType;
 };
