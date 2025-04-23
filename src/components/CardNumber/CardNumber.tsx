@@ -43,6 +43,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           data-sequence="1"
           {...register('first', {
             onChange: handleInputChange,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 4,
@@ -59,6 +60,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           data-sequence="2"
           {...register('second', {
             onChange: handleInputChange,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 4,
@@ -75,6 +77,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           data-sequence="3"
           {...register('third', {
             onChange: handleInputChange,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 4,
@@ -91,6 +94,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           data-sequence="4"
           {...register('fourth', {
             onChange: handleInputChange,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 4,

@@ -12,6 +12,7 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
     options?: {
       onChange?: (e: React.ChangeEvent<E>) => void;
       validation: ValidationType;
+      inputRegex?: RegExp;
     },
   ) => {
     return {
@@ -24,10 +25,13 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
 
         options?.onChange?.(e);
       },
+      onKeyDown: (e: React.KeyboardEvent<E>) => {
+        if (options?.inputRegex && !options.inputRegex.test(e.key)) e.preventDefault();
+      },
     };
   };
 
-  const isDirty = Object.values(value).some((value) => value !== '');
+  const isDirty = Object.values(value).every((value) => value !== '');
   const isValid = isDirty && Object.values(errors).every((error) => error === '');
 
   return { value, errors, register, isValid };
