@@ -8,6 +8,7 @@ import CardCVCInput from './component/CardCVCInput/CardCVCInput';
 import { appLayout, mainLayout } from './App.style';
 import { Global, ThemeProvider } from '@emotion/react';
 import { useCardNumber, useCardExpiration, useCardCVC } from './hooks';
+import CardPassword from "./component/CardPassword/CardPassword.tsx";
 
 function App() {
   const {
@@ -34,6 +35,7 @@ function App() {
       <div css={appLayout}>
         <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
         <main css={mainLayout}>
+          <CardPassword/>
           <CardBrand />
           <CardNumberInput
             cardNumber={cardNumber}

@@ -8,6 +8,7 @@ export const cardLayout = css`
   width: 21.2rem;
   height: 13.2rem;
   margin-top: 7.7rem;
+  margin-bottom: 4.5rem;
 
   border-radius: 5px;
   background-color: ${theme.color.cardBlack};

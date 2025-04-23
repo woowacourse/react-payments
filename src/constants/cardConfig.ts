@@ -15,6 +15,10 @@ export const CARD_CVC = {
   maxLength: 3,
 };
 
+export const CARD_PASSWORD = {
+  maxLength: 2,
+};
+
 export const CARD_TYPE = {
   visa: {
     startsWith: '4',
