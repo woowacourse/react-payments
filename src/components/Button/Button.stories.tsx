@@ -8,7 +8,6 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: { type: "radio" },
@@ -167,7 +166,7 @@ export const AddCardButton: Story = {
   ],
 };
 
-export const ConfirmStory: Story = {
+export const GoBackToAddCard: Story = {
   args: {
     children: "확인",
     variant: "rounded",
