@@ -63,6 +63,7 @@ const DropdownIcon = styled.div<{ isOpen: boolean }>`
   background-position: center;
   background-image: url('./assets/dropdown-arrow.png');
   transform: rotateZ(${({ isOpen }) => (isOpen ? '0deg' : '180deg')});
+  transition: transform 0.3s;
 `;
 
 const DropdownOptionsContainer = styled.div`
