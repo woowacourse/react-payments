@@ -1,7 +1,6 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent } from 'react';
 import BaseInputField from '../../../common/BaseInputField/BaseInputField';
 import Input from '../../../common/Input/Input';
-import { EXPIRATION_DATE } from '../config/card';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
@@ -9,33 +8,22 @@ import {
 } from '../config/inputField';
 
 interface ExpirationDateInputFieldProps {
-  inputValue: Record<ExpirationDateInputType, string>;
-  setInputValue: Dispatch<
-    SetStateAction<Record<ExpirationDateInputType, string>>
-  >;
+  inputValues: Record<ExpirationDateInputType, string>;
+  handleInputValue: ({
+    name,
+    value,
+  }: {
+    name: ExpirationDateInputType;
+    value: string;
+  }) => void;
+  onBlur: (e: ChangeEvent) => void;
 }
 
 function ExpirationDateInputField({
-  inputValue,
-  setInputValue,
+  inputValues,
+  handleInputValue,
+  onBlur,
 }: ExpirationDateInputFieldProps) {
-  const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= EXPIRATION_DATE.length) {
-      if (
-        name === EXPIRATION_DATE_INPUT_TYPE.expirationDatePart1 &&
-        Number(value) > EXPIRATION_DATE.month.max
-      )
-        return;
-      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
-    }
-  };
-
-  const onBlur = (e: ChangeEvent) => {
-    const { value, name } = e.target as HTMLInputElement;
-    if (value.length === EXPIRATION_DATE.padLeftThreshold)
-      setInputValue((prevValue) => ({ ...prevValue, [name]: `0${value}` }));
-  };
-
   return (
     <BaseInputField label="유효기간">
       {Object.values(EXPIRATION_DATE_INPUT_TYPE).map((inputType) => (
@@ -43,8 +31,8 @@ function ExpirationDateInputField({
           key={inputType}
           inputType="number"
           placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
-          value={inputValue[inputType]}
-          onChange={onChange}
+          value={inputValues[inputType]}
+          onChange={handleInputValue}
           name={inputType}
           onBlur={onBlur}
         />

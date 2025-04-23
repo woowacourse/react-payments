@@ -1,13 +1,12 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { ExpirationDateInputType } from '../../components/features/payments/config/inputField';
+import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
+import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
+import useExpirationDateValidation from '../../components/features/payments/hooks/useExpirationDateValidation';
 import CardNumberInputField from '../../components/features/payments/InputField/CardNumberInputField';
 import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
-import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
-import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
 
 function Payments() {
   const {
@@ -18,12 +17,11 @@ function Payments() {
     onBlur: onCardNumberBlur,
   } = useCardNumberValidation();
 
-  const [expirationDateInputValue, setExpirationDateInputValue] = useState<
-    Record<ExpirationDateInputType, string>
-  >({
-    expirationDatePart1: '',
-    expirationDatePart2: '',
-  });
+  const {
+    inputValues: expirationDateInputValues,
+    handleInputValue: handleExpirationDateInputValue,
+    onBlur: onExpirationDateBlur,
+  } = useExpirationDateValidation();
 
   const {
     inputValue: CVCInputValue,
@@ -37,7 +35,7 @@ function Payments() {
       <PaymentsContainer>
         <CardPreview
           cardNumberInputValue={cardNumberInputValues}
-          expirationDateInputValue={expirationDateInputValue}
+          expirationDateInputValue={expirationDateInputValues}
           cardType={cardType}
         />
         <InputSection
@@ -56,8 +54,9 @@ function Payments() {
           caption="월/년도(MMYY)를 순서대로 입력해 주세요."
         >
           <ExpirationDateInputField
-            inputValue={expirationDateInputValue}
-            setInputValue={setExpirationDateInputValue}
+            inputValues={expirationDateInputValues}
+            handleInputValue={handleExpirationDateInputValue}
+            onBlur={onExpirationDateBlur}
           />
         </InputSection>
         <InputSection title="CVC 번호를 입력해 주세요">
