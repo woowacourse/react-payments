@@ -6,7 +6,6 @@ import {
   isValidMonthRange,
   isValidYearRange,
 } from "../../util/validation";
-import { ExpirationPeriod } from "../../\btypes/index.types";
 
 function getCommonValidationFns(length: number, date: string) {
   return [
@@ -42,13 +41,4 @@ export function getYearValidationFns(length: number, date: string) {
     },
     ...getCommonValidationFns(length, date),
   ];
-}
-
-export function getErrorMessage(error: Record<ExpirationPeriod, string>) {
-  for (const key in error) {
-    const typedKey = key as keyof typeof error;
-    if (error[typedKey] !== NO_ERROR) {
-      return error[typedKey];
-    }
-  }
 }

@@ -16,12 +16,3 @@ export function getCVCValidationFns(length: number, CVCNumber: string) {
     { condition: () => true, errorMsg: NO_ERROR },
   ];
 }
-
-export function getErrorMessage(error: Record<"CVCNumber", string>) {
-  for (const key in error) {
-    const typedKey = key as keyof typeof error;
-    if (error[typedKey] !== NO_ERROR) {
-      return error[typedKey];
-    }
-  }
-}
