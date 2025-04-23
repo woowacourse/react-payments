@@ -5,6 +5,24 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router/Router';
 
 function App() {
+  const {
+    cardNumber,
+    cardNumberError,
+    handleCardNumberChange,
+    getCardNumberErrorMessage,
+  } = useCardNumber();
+
+  const {
+    cardExpirationDate,
+    cardExpirationDateError,
+    handleCardExpirationChange,
+    getMonthErrorMessage,
+    getYearErrorMessage,
+  } = useCardExpiration();
+
+  const { cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage } =
+    useCardCVC();
+
   return (
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyle} />
