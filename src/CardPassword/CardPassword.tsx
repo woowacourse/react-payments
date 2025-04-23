@@ -6,6 +6,7 @@ interface CardPasswordProps {
   handleChange: (value: string) => void;
   password: string;
   errorMessage: string;
+  onComplete: () => void;
 }
 
 const CARD_PASSWORD = {

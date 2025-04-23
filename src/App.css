@@ -30,4 +30,6 @@ body {
 .card-input {
   width: 100%;
   justify-self: center;
+  display: flex;
+  flex-direction: column-reverse;
 }

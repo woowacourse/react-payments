@@ -19,6 +19,11 @@ function App() {
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
   const { selectedCompany, selectCompany } = useCardCompany();
   const { password, passwordError, passwordValidate } = useCardPassword();
+  const [step, setStep] = useState(1);
+
+  const goToNextStep = () => {
+    setStep((prev) => prev + 1);
+  };
 
   return (
     <div className="App">
@@ -38,26 +43,40 @@ function App() {
           handleChange={cardNumbersValidate}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
+          onComplete={goToNextStep}
         />
-        <CardExpirationDate
-          handleChange={dateValidate}
-          cardExpirationDate={cardExpirationDate}
-          errorMessage={cardExpirationDateError}
-        />
-        <CardCvcNumber
-          handleChange={cvcNumbersValidate}
-          cvcNumbers={cvcNumbers}
-          errorMessage={cvcNumbersError}
-        />
-        <CardCompanyPicker
-          selectedCompany={selectedCompany}
-          selectCompany={selectCompany}
-        />
-        <CardPassword
-          handleChange={passwordValidate}
-          password={password}
-          errorMessage={passwordError}
-        />
+        {step >= 2 && (
+          <CardCompanyPicker
+            selectedCompany={selectedCompany}
+            selectCompany={selectCompany}
+            onComplete={goToNextStep}
+          />
+        )}
+        {step >= 3 && (
+          <CardExpirationDate
+            handleChange={dateValidate}
+            cardExpirationDate={cardExpirationDate}
+            errorMessage={cardExpirationDateError}
+            onComplete={goToNextStep}
+          />
+        )}
+        {step >= 4 && (
+          <CardCvcNumber
+            handleChange={cvcNumbersValidate}
+            cvcNumbers={cvcNumbers}
+            errorMessage={cvcNumbersError}
+            onComplete={goToNextStep}
+          />
+        )}
+
+        {step >= 5 && (
+          <CardPassword
+            handleChange={passwordValidate}
+            password={password}
+            errorMessage={passwordError}
+            onComplete={goToNextStep}
+          />
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
   cardExpirationDate: { month: string; year: string };
   errorMessage: string[];
+  onComplete: () => void;
 }
 
 const EXPIRATION_DATE = {
@@ -21,6 +22,7 @@ export default function CardExpirationDate({
   handleChange,
   cardExpirationDate,
   errorMessage,
+  onComplete,
 }: CardExpirationDateProps) {
   return (
     <section className="card-expiration-date">

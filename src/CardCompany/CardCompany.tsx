@@ -8,7 +8,9 @@ import ChevronUp from "/chevron-up.svg";
 interface Props {
   selectedCompany: CardCompanyType | null;
   selectCompany: (company: CardCompanyType) => void;
+  onComplete: () => void;
 }
+
 const CARD_COMPANY = {
   TITLE: "카드사를 선택해 주세요.",
   DESCRIPTION: "현재 국내 카드사만 가능합니다.",
@@ -18,6 +20,7 @@ const CARD_COMPANY = {
 export default function CardCompanyPicker({
   selectedCompany,
   selectCompany,
+  onComplete,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +31,7 @@ export default function CardCompanyPicker({
   const handleSelect = (company: CardCompanyType) => {
     selectCompany(company);
     setIsOpen(false);
+    onComplete();
   };
 
   return (

@@ -6,6 +6,7 @@ interface CardCvcNumberProps {
   handleChange: (value: string) => void;
   cvcNumbers: string;
   errorMessage: string;
+  onComplete: () => void;
 }
 
 const CARD_CVC_NUMBER = {
@@ -18,6 +19,7 @@ export default function CardCvcNumber({
   handleChange,
   cvcNumbers,
   errorMessage,
+  onComplete,
 }: CardCvcNumberProps) {
   return (
     <section>
