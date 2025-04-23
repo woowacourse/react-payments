@@ -24,6 +24,7 @@ export default function CardPassword({ register, cardPasswordErrors }: CardPassw
           isError={!!cardPasswordErrors.password}
           aria-label="비밀번호 앞 2자리"
           inputMode="numeric"
+          autoComplete="current-password"
           {...register('password', {
             validation: {
               required: true,
