@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CustomInput from './CustomInput';
+import CardInfoInput from './CardInfoInput';
 import {
   cardNumberValidator,
   cardExpirationDateValidator,
@@ -8,9 +8,9 @@ import {
 import { useState } from 'react';
 import '../../features/cardInfo/ui/cardInfoSection.css';
 
-const meta: Meta<typeof CustomInput> = {
-  title: 'Shared/CustomInput',
-  component: CustomInput,
+const meta: Meta<typeof CardInfoInput> = {
+  title: 'Shared/CardInfoInput',
+  component: CardInfoInput,
   tags: ['autodocs'],
   argTypes: {
     type: { control: 'text' },
@@ -23,7 +23,7 @@ const meta: Meta<typeof CustomInput> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CustomInput>;
+type Story = StoryObj<typeof CardInfoInput>;
 
 export const Default: Story = {
   render: () => {
@@ -44,7 +44,7 @@ export const Default: Story = {
       <div className="card-info-sub-section" style={{ width: '300px' }}>
         <div className="card-info-input-container">
           {Array.from({ length: 4 }, (_, index) => (
-            <CustomInput
+            <CardInfoInput
               key={`cardNumber-${index}`}
               type="text"
               placeholder="1234"
@@ -80,7 +80,7 @@ export const ExpirationDateInput: Story = {
     return (
       <div className="card-info-sub-section" style={{ width: '200px' }}>
         <div className="card-info-input-container">
-          <CustomInput
+          <CardInfoInput
             type="text"
             placeholder="MM"
             name="cardExpirationDate-month"
@@ -88,7 +88,7 @@ export const ExpirationDateInput: Story = {
             onChange={handleChange}
             error={error[0] === 0}
           />
-          <CustomInput
+          <CardInfoInput
             type="text"
             placeholder="YY"
             name="cardExpirationDate-year"
@@ -123,7 +123,7 @@ export const CVCInput: Story = {
 
     return (
       <div className="card-info-sub-section" style={{ width: '200px' }}>
-        <CustomInput
+        <CardInfoInput
           type="text"
           placeholder="CVC 입력"
           name="cardCVC"

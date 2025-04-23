@@ -1,6 +1,6 @@
-import './customInput.css';
+import './cardInfoInput.css';
 
-export interface CustomInputProps {
+export interface CardInfoInputProps {
   type: string;
   placeholder: string;
   name?: string;
@@ -9,17 +9,17 @@ export interface CustomInputProps {
   error?: boolean;
 }
 
-export default function CustomInput({
+export default function CardInfoInput({
   type,
   placeholder,
   name,
   onChange,
   maxLength,
   error,
-}: CustomInputProps) {
+}: CardInfoInputProps) {
   return (
     <input
-      className={`custom-input ${error && 'custom-input-error'}`}
+      className={`cardInfo-input ${error && 'cardInfo-input-error'}`}
       onChange={onChange}
       type={type}
       placeholder={placeholder}

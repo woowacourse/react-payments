@@ -1,5 +1,5 @@
 import './cardInfoSection.css';
-import CustomInput from '../../../shared/ui/CustomInput';
+import CardInfoInput from '../../../shared/ui/CardInfoInput';
 import { ComponentProps } from 'react';
 import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 
@@ -9,7 +9,7 @@ interface CardInfoSectionProps {
   title: string;
   description: string;
   subTitle: string;
-  inputArr: ComponentProps<typeof CustomInput>[];
+  inputArr: ComponentProps<typeof CardInfoInput>[];
   maxLength: number;
   error?: InputValidationResultProps;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -40,8 +40,8 @@ export default function CardInfoSection({
         <span className="card-info-subtitle">{subTitle}</span>
         <div className="card-info-input-container">
           {inputArr.map((input, index) => (
-            <CustomInput
-              key={`custom-input-${index}`}
+            <CardInfoInput
+              key={`cardInfo-input-${index}`}
               {...input}
               onChange={onChange}
               maxLength={maxLength}
