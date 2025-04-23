@@ -79,6 +79,7 @@ function App() {
         <CardDisplay
           cardNumbers={cardNumbers}
           cardExpirationDate={cardExpirationDate}
+          cardOwnerName={cardOwnerName}
           backgroundColor={extractCardCompanyColor(cardCompany)}
         />
 

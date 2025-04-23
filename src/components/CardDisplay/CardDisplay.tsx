@@ -7,12 +7,14 @@ import CardHeader from "./CardHeader";
 type CardDisplayProps = {
   cardNumbers: CardNumbers;
   cardExpirationDate: CardExpirationDate;
+  cardOwnerName: string;
   backgroundColor?: string;
 };
 
 const CardDisplay = ({
   cardNumbers,
   cardExpirationDate,
+  cardOwnerName,
   backgroundColor,
 }: CardDisplayProps) => {
   return (
@@ -24,6 +26,7 @@ const CardDisplay = ({
       <CardBody
         cardNumbers={cardNumbers}
         cardExpirationDate={cardExpirationDate}
+        cardOwnerName={cardOwnerName}
       />
     </div>
   );

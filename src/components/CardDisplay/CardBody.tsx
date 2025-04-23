@@ -6,12 +6,17 @@ import styles from "./cardDisplay.module.css";
 type CardBodyProps = {
   cardNumbers: CardNumbers;
   cardExpirationDate: CardExpirationDate;
+  cardOwnerName: string;
 };
 
-const CardBody = ({ cardNumbers, cardExpirationDate }: CardBodyProps) => {
+const CardBody = ({
+  cardNumbers,
+  cardExpirationDate,
+  cardOwnerName,
+}: CardBodyProps) => {
   return (
     <div className={styles.cardBody}>
-      <div className={styles.cardNumber}>
+      <div className={`${styles.cardNumber} ${styles.box}`}>
         {Object.values(cardNumbers).map((cardNumber, index) => (
           <CardNumberDisplay
             key={index}
@@ -20,9 +25,14 @@ const CardBody = ({ cardNumbers, cardExpirationDate }: CardBodyProps) => {
           />
         ))}
       </div>
-      {cardExpirationDate.month && (
-        <span>{`${cardExpirationDate.month}/${cardExpirationDate.year}`}</span>
-      )}
+      <div className={styles.box}>
+        {cardExpirationDate.month && (
+          <span>{`${cardExpirationDate.month}/${cardExpirationDate.year}`}</span>
+        )}
+      </div>
+      <div className={styles.box}>
+        <span>{cardOwnerName}</span>
+      </div>
     </div>
   );
 };

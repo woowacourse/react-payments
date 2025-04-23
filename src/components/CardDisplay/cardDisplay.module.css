@@ -16,6 +16,10 @@
 .cardNumber {
   display: flex;
   gap: 5px;
+}
+
+.box {
+  height: 20px;
   margin-bottom: 8px;
 }
 
