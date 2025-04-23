@@ -6,6 +6,7 @@ import CardPreview from './components/CardPreview/CardPreview';
 import CardBrandInput from './components/CardBrandInput/CardBrandInput';
 import { CARD_VALIDATION_INFO } from './constants/cardValidationInfo';
 import './App.css';
+import CardPasswordInput from './components/CardPasswordInput/CardPasswordInput';
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(
@@ -15,6 +16,7 @@ function App() {
   const [year, setYear] = useState('');
   const [CVC, setCVC] = useState('');
   const [brand, setBrand] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="app">
@@ -32,6 +34,7 @@ function App() {
           setYear={setYear}
         />
         <CVCInput CVC={CVC} setCVC={setCVC} />
+        <CardPasswordInput password={password} setPassword={setPassword} />
       </form>
     </div>
   );
