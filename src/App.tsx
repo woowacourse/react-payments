@@ -69,7 +69,6 @@ function App() {
 
     if (isCardCompany(value)) {
       setCardCompany(value);
-
       showNextStep(CARD_IFNO_INPUT_STEP.validityPeriod);
     }
   };
@@ -81,15 +80,11 @@ function App() {
     const originValue = e.target.value;
     const value = originValue.replace(/[^0-9]/g, '');
 
-    if (value.length > 2) {
-      return;
-    }
+    if (value.length > 2) return;
 
-    if (value.length > 0 && value.length < 2) {
-      setCardPasswordErrorMessage('잘못');
-    } else {
-      setCardPasswordErrorMessage('');
-    }
+    setCardPasswordErrorMessage(
+      value.length > 0 && value.length < 2 ? '비밀번호는 2자리입니다.' : '',
+    );
     setCardPassword(value);
   };
 
