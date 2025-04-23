@@ -12,6 +12,7 @@ import InputSection from '../../components/InputSection/InputSection';
 import CardNumberInputField from '../../components/InputField/CardNumberInputField/CardNumberInputField';
 import ExpirationDateInputField from '../../components/InputField/ExpirationDateInputField/ExpirationDateInputField';
 import CVCInputField from '../../components/InputField/CVCInputField/CVCInputField';
+import CardIssuerSelector from '../../components/InputField/CardIssuerSelector/CardIssuerSelector';
 
 function Payments() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
@@ -65,6 +66,14 @@ function Payments() {
               inputValue={expirationDateInputValue}
               setInputValue={setExpirationDateInputValue}
             />
+          </InputSection>
+        )}
+        {step >= 1 && (
+          <InputSection
+            title="카드사를 선택해 주세요"
+            caption="현재 국내 카드사만 가능합니다."
+          >
+            <CardIssuerSelector />
           </InputSection>
         )}
         {step >= 1 && (
