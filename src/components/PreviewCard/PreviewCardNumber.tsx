@@ -6,19 +6,16 @@ interface PreviewCardNumberProps {
     third: string;
     fourth: string;
   };
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardExpirationDate: string[];
 }
 
 export default function PreviewCardNumber({
   cardNumbers,
   cardExpirationDate,
 }: PreviewCardNumberProps) {
-  const { month, year } = cardExpirationDate;
+  const [month, year] = cardExpirationDate;
 
-  const expiration = month === "" ? year : `${year}/${month}`;
+  const expiration = month === "" ? year : `${month}/${year}`;
 
   return (
     <div className={styles["card-layout-number-container"]}>
