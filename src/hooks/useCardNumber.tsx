@@ -52,8 +52,7 @@ function useCardNumber({ showNextStep }: useCardNumberProps) {
       copy.some((v) => v === true) ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '',
     );
 
-    if (checkShowNextStep(copy))
-      showNextStep(CARD_IFNO_INPUT_STEP.validityPeriod);
+    if (checkShowNextStep(copy)) showNextStep(CARD_IFNO_INPUT_STEP.cardCompany);
 
     setCardNumber((prev) => {
       const newCardNumber = [...prev];
