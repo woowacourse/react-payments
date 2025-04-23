@@ -9,6 +9,8 @@ import ExpirationDateSection from '../components/form/ExpirationDateSection';
 import CardCvcSection from '../components/form/CardCvcSection';
 
 import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
+import {useNavigate} from 'react-router';
+import PATH from '../router/path';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -29,6 +31,8 @@ const Main = () => {
   const [cvcNumber, setcvcNumber] = useState('');
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   return (
     <MainContainer>
@@ -65,7 +69,13 @@ const Main = () => {
         onChange={(value) => setcvcNumber(value)}
       />
 
-      <Button>확인</Button>
+      <Button
+        onClick={() => {
+          navigate(PATH.CONFIRM);
+        }}
+      >
+        확인
+      </Button>
     </MainContainer>
   );
 };

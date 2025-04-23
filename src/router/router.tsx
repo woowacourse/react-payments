@@ -1,14 +1,15 @@
 import {createBrowserRouter, RouterProvider} from 'react-router';
 import Main from '../page/main';
 import Confirm from '../page/confirm';
+import PATH from './path';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: PATH.MAIN,
     element: <Main />,
   },
   {
-    path: '/confirm',
+    path: PATH.CONFIRM,
     element: <Confirm />,
   },
 ]);
