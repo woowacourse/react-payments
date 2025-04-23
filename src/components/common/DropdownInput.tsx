@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import useClickOutsideHandler from '../../hooks/useClickOutsideHandler';
 
 interface DropdownInputProps {
   value: string;
@@ -10,20 +11,9 @@ interface DropdownInputProps {
 
 function DropdownInput({ value, setValue, options, placeholder }: DropdownInputProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const isPlaceholder = value === '';
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-
-    return () => document.removeEventListener('click', handleClickOutside);
-  });
+  useClickOutsideHandler(dropdownRef, () => setIsOpen(false), isOpen);
+  const isPlaceholder = value === '';
 
   return (
     <DropdownInputContainer
