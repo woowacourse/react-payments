@@ -1,11 +1,9 @@
+import { CardNumber } from '@/components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { useState } from 'storybook/internal/preview-api';
-import { CardNumber } from '@/components';
 
 export const ActionsData = {
-  setCardNumber: fn(),
-  setCardNumberErrorMessage: fn(),
+  register: fn(),
 };
 
 const meta = {
@@ -16,10 +14,7 @@ const meta = {
     ...ActionsData,
   },
   argTypes: {
-    cardNumber: { control: false },
-    cardNumberErrorMessage: { control: 'object' },
-    setCardNumber: { control: false },
-    setCardNumberErrorMessage: { control: false },
+    register: { control: false },
   },
 } satisfies Meta<typeof CardNumber>;
 
@@ -30,13 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   name: '기본 상태',
   args: {
-    cardNumber: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    cardNumberErrorMessage: {
+    cardNumberErrors: {
       first: '',
       second: '',
       third: '',
@@ -44,21 +33,14 @@ export const Default: Story = {
     },
   },
   render: function Render(args) {
-    const [cardNumber, setCardNumber] = useState(args.cardNumber);
-    return <CardNumber {...args} cardNumber={cardNumber} setCardNumber={setCardNumber} />;
+    return <CardNumber {...args} />;
   },
 };
 
 export const Valid: Story = {
   name: '유효한 카드 번호 입력',
   args: {
-    cardNumber: {
-      first: '1234',
-      second: '4567',
-      third: '8910',
-      fourth: '1112',
-    },
-    cardNumberErrorMessage: {
+    cardNumberErrors: {
       first: '',
       second: '',
       third: '',
@@ -70,13 +52,7 @@ export const Valid: Story = {
 export const Error: Story = {
   name: '유효하지 않은 카드 번호 입력',
   args: {
-    cardNumber: {
-      first: 'd455',
-      second: '4565',
-      third: '1234',
-      fourth: '5678',
-    },
-    cardNumberErrorMessage: {
+    cardNumberErrors: {
       first: '숫자만 입력 가능합니다.',
       second: '',
       third: '',
