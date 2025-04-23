@@ -1,10 +1,10 @@
-import {InputHTMLAttributes} from 'react';
+import {ComponentProps} from 'react';
 import {COLORS} from '../../styles/colors';
 import styled from 'styled-components';
 
 type Props = {
   isError?: boolean;
-} & InputHTMLAttributes<HTMLInputElement>;
+} & ComponentProps<'input'>;
 
 const Input = ({
   placeholder,
