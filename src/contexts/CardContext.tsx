@@ -59,6 +59,8 @@ interface CardContextType {
   setIsValidCardCompany: React.Dispatch<React.SetStateAction<boolean>>;
   isValidExpiry: boolean;
   setIsValidExpiry: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidCVC: boolean;
+  setIsValidCVC: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -93,6 +95,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const [isValidCardNumbers, setIsValidCardNumbers] = useState(false);
   const [isValidCardCompany, setIsValidCardCompany] = useState(false);
   const [isValidExpiry, setIsValidExpiry] = useState(false);
+  const [isValidCVC, setIsValidCVC] = useState(false);
 
   useEffect(() => {
     const isAllFilled = cardNumbers.every(
@@ -110,6 +113,10 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     const isAllFilled = month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH && year.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
     if (isAllFilled && expiryHelperText === "") setIsValidExpiry(true);
   }, [month, year, expiryHelperText])
+
+  useEffect(() => {
+    if (CVC.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH && CVCHelperText === "") setIsValidCVC(true);
+  }, [CVC, CVCHelperText])
   
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -245,6 +252,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         setIsValidCardCompany,
         isValidExpiry,
         setIsValidExpiry,
+        isValidCVC,
+        setIsValidCVC
       }}
     >
       {children}

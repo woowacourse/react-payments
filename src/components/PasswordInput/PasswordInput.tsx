@@ -16,7 +16,7 @@ const PasswordInput = () => {
         <Input
           type="password"
           name="password"
-          placeholder="**"
+          placeholder="12"
           value={password}
           onChange={handlePassword}
           ref={(element) => {

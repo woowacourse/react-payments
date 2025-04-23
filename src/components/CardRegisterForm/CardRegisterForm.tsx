@@ -7,11 +7,15 @@ import { useCardContext } from "../../contexts/CardContext";
 import PasswordInput from "../PasswordInput/PasswordInput";
 
 const CardRegisterForm = () => {
-  const { isValidCardNumbers, isValidCardCompany, isValidExpiry } =
+  const { isValidCardNumbers, isValidCardCompany, isValidExpiry, isValidCVC } =
     useCardContext();
   return (
     <form>
-      <PasswordInput />
+      {isValidCVC && (
+        <div className={styles.fadeInWrapper}>
+          <PasswordInput />
+        </div>
+      )}
       {isValidExpiry && (
         <div className={styles.fadeInWrapper}>
           <CVCInput />
