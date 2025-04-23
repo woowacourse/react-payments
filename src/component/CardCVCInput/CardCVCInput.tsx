@@ -1,17 +1,10 @@
 import Input from '../@common/Input/Input';
+import Title from "../@common/Title/Title";
 import { ChangeEvent } from 'react';
-import {
-  errorInputStyle,
-  errorMessageStyle,
-  sectionTitle,
-  sectionTitleText,
-} from '../../styles/@common/text.style.ts';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
 import { CARD_CVC_ERROR, CARD_CVC } from '../../constants';
-import {
-  inputContainer,
-  inputSection,
-} from '../../styles/@common/inputContainer.style';
+import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
+import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 import { CardCVC } from "../../types";
 
 type CardCVCInputProps = {
@@ -36,9 +29,7 @@ function CardCVCInput({
 
   return (
     <div css={cardPeriodInputLayout}>
-      <div css={sectionTitle}>
-        <span css={sectionTitleText}>CVC 번호를 입력해 주세요</span>
-      </div>
+      <Title title='CVC 번호를 입력해 주세요'/>
       <Input.Group id="card-cvc">
         <div css={inputContainer}>
           <Input.Label>CVC</Input.Label>

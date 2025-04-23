@@ -1,19 +1,11 @@
 import Input from '../@common/Input/Input';
+import Title from "../@common/Title/Title";
 import { ChangeEvent } from 'react';
-import {
-  errorInputStyle,
-  errorMessageStyle,
-  sectionTitle,
-  sectionTitleSubText,
-  sectionTitleText,
-} from '../../styles/@common/text.style.ts';
+import { CardNumber, CardNumberError } from "../../types";
 import { cardNumberInputLayout } from './CardNumberInput.style';
 import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
-import {
-  inputContainer,
-  inputSection,
-} from '../../styles/@common/inputContainer.style';
-import { CardNumber, CardNumberError } from "../../types";
+import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style.ts';
+import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
@@ -37,12 +29,7 @@ function CardNumberInput({
 
   return (
     <div css={cardNumberInputLayout}>
-      <div css={sectionTitle}>
-        <span css={sectionTitleText}>결제할 카드 번호를 입력해 주세요</span>
-        <span css={sectionTitleSubText}>
-          본인 명의의 카드만 결제 가능합니다.
-        </span>
-      </div>
+      <Title title='결제할 카드 번호를 입력해 주세요' subTitle='본인 명의의 카드만 결제 가능합니다.'/>
       <Input.Group id="card-number">
         <div css={inputContainer}>
           <Input.Label>카드 번호</Input.Label>

@@ -1,19 +1,11 @@
 import Input from '../@common/Input/Input';
+import Title from "../@common/Title/Title";
 import { ChangeEvent } from 'react';
-import {
-  errorInputStyle,
-  errorMessageStyle,
-  sectionTitle,
-  sectionTitleSubText,
-  sectionTitleText,
-} from '../../styles/@common/text.style.ts';
+import { CardExpirationDate, CardExpirationDateError } from "../../types";
+import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
+import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
 import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
-import {
-  inputContainer,
-  inputSection,
-} from '../../styles/@common/inputContainer.style';
-import { CardExpirationDate, CardExpirationDateError } from "../../types";
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;
@@ -67,12 +59,7 @@ function CardPeriodInput({
 
   return (
     <div css={cardPeriodInputLayout}>
-      <div css={sectionTitle}>
-        <span css={sectionTitleText}>카드 유효기간을 입력해 주세요</span>
-        <span css={sectionTitleSubText}>
-          월/년도(MMYY)를 순서대로 입력해 주세요.
-        </span>
-      </div>
+      <Title title='카드 유효기간을 입력해 주세요' subTitle='월/년도(MMYY)를 순서대로 입력해 주세요.'/>
       <Input.Group id="card-expiration">
         <div css={inputContainer}>
           <Input.Label>유효기간</Input.Label>

@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { CardCVC } from '../types/types.ts';
+import { CardCVC } from '../types';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_CVC_ERROR, CARD_CVC } from '../constants';
 
