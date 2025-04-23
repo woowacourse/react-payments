@@ -40,6 +40,7 @@ function NumberInput({
 export default NumberInput;
 
 const Input = styled.input<{ isError: boolean }>`
+  margin-top: 6px;
   width: 100%;
   border: 1px solid
     ${({ isError, theme }) =>
@@ -47,6 +48,10 @@ const Input = styled.input<{ isError: boolean }>`
   border-radius: 2px;
   height: 32px;
   padding: 8px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray};
+  }
 
   &:focus {
     border: 1.5px solid
