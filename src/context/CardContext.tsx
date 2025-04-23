@@ -33,7 +33,7 @@ export type CardBrand =
 const cardBrandNames: Record<CardBrand, string> = {
   bc: 'BC카드',
   shinhan: '신한카드',
-  kakao: '카카오뱅크',
+  kakao: '카카오카드',
   hyundai: '현대카드',
   woori: '우리카드',
   lotte: '롯데카드',
