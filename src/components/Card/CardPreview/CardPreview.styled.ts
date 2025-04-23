@@ -18,8 +18,8 @@ export const CardPreviewContainerCSS = styled.div`
 export const CardPreviewCSS = styled.div`
   background: no-repeat center url(${CardPreviewImg});
   background-size: cover;
-  width: 230px;
-  height: 180px;
+  width: 260px;
+  height: 200px;
 
   color: #ffffff;
   font-size: 20px;

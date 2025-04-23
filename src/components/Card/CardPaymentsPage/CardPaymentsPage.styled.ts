@@ -12,8 +12,8 @@ export const CardPaymentsPageCSS = styled.div`
 export const CardFormCSS = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 700px;
+  width: 35%;
+  height: 800px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
