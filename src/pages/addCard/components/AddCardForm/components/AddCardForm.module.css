@@ -26,4 +26,5 @@
   font-weight: 700;
   width: 500px;
   letter-spacing: 1px;
+  z-index: 999;
 }

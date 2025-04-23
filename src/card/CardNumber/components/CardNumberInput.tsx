@@ -1,4 +1,4 @@
-import styles from "./CardNumberInputs.module.css";
+import styles from "./CardNumberInput.module.css";
 import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
