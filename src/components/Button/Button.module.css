@@ -1,0 +1,60 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: white;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #444;
+}
+
+.button:active:not(:disabled) {
+  background-color: #222;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.variantDefault {
+  border-radius: 0;
+}
+
+.variantRounded {
+  border-radius: 8px;
+}
+
+.sizeSmall {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.sizeMedium {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.sizeLarge {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
