@@ -71,7 +71,7 @@
 
 - [x] text 컴포넌트 스토리북 생성
 
-## 피드백 바탕 리팩토링 사항
+## 피드백 바탕 리팩토링 사항1
 
 - [x] 설계 구조 변경
   - [x] 에러 처리 로직
@@ -91,3 +91,15 @@
 - [x] errorMessage 컴포넌트 분리
 - [x] errorMessage, errorState 타입 추가
 - [x] constant (MIN_MONTH, MAX_MONTH, MIN_YEAR,NUMBER_ONLY_REGEX)추가
+
+## 피드백 바탕 리팩토링 사항2
+
+- [ ] 필드 별 에러 훅 분리 (uniqueNumber, expirationDate, cvcNumber)
+- [ ] 에러 훅 전체 관리 훅 생성 -> app에서 내려주기 (상위에서 관리한다)
+  - [ ] 전체 에러훅에서 개별 에러 훅들을 컴포넌트에 뿌려준다.
+- [ ] 필드 별 컴포넌트 제작 (추후 더 고민 해보고 관리할 예정)
+- [ ] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
+- [ ] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경
+- [ ] PreviewCard 컴포넌트 내부 삼항연산자로 변경
+
+- [ ] 전체 상태 분리? -> 에러들처럼 개별로 관리할 수 있지 않나?
