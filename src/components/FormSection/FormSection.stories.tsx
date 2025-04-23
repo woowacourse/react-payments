@@ -23,6 +23,11 @@ export const Primary: Story = {
       cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
       informationType: "uniqueNumber",
       setCardInformation: () => {},
+      eachValidation: {
+        isError: [false, false],
+        errorMessage: "",
+        validateInput: () => {},
+      },
     },
   },
   render: (args) => {

@@ -19,6 +19,11 @@ export const UniqueNumberInputField: Story = {
     inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "uniqueNumber",
+    eachValidation: {
+      isError: [false, false, false, false],
+      errorMessage: "",
+      validateInput: () => {},
+    },
   },
   render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
@@ -30,6 +35,7 @@ export const UniqueNumberInputField: Story = {
         cardInformation={value}
         setCardInformation={setCardInformation}
         informationType={args.informationType}
+        eachValidation={args.eachValidation}
       />
     );
   },
@@ -42,6 +48,11 @@ export const ExpirationDateInputField: Story = {
     inputProps: { placeholder: ["MM", "YY"], maxLength: 2 },
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "expirationDate",
+    eachValidation: {
+      isError: [false, false],
+      errorMessage: "",
+      validateInput: () => {},
+    },
   },
   render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
@@ -53,6 +64,7 @@ export const ExpirationDateInputField: Story = {
         cardInformation={value}
         setCardInformation={setCardInformation}
         informationType={args.informationType}
+        eachValidation={args.eachValidation}
       />
     );
   },
@@ -65,6 +77,11 @@ export const CvcNumberInputField: Story = {
     inputProps: { placeholder: ["123"], maxLength: 3 },
     cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
     informationType: "cvcNumber",
+    eachValidation: {
+      isError: [false, false],
+      errorMessage: "",
+      validateInput: () => {},
+    },
   },
   render: (args) => {
     const [value, setCardInformation] = useState(args.cardInformation);
@@ -76,6 +93,7 @@ export const CvcNumberInputField: Story = {
         cardInformation={value}
         setCardInformation={setCardInformation}
         informationType={args.informationType}
+        eachValidation={args.eachValidation}
       />
     );
   },

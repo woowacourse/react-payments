@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import FormContainer from "./FormContainer";
-import { useState } from "react";
 import { FormContainerProps } from "../../types/componentPropsType";
+import useCardInformation from "../../hooks/useCardInformation";
+import useValidation from "../../hooks/useValidation/useValidation";
 
 const meta = {
   title: "MyComponent/MyFormContainer",
@@ -13,11 +14,16 @@ export default meta;
 type Story = StoryObj<FormContainerProps>;
 
 export const Primary: Story = {
-  args: {
-    cardInformationState: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
-  },
-  render: (args) => {
-    const [cardInformation, setCardInformation] = useState(args.cardInformationState);
-    return <FormContainer cardInformationState={cardInformation} setCardInformationState={setCardInformation} />;
+  render: () => {
+    const { cardInformationState, setCardInformationState } = useCardInformation();
+    const validation = useValidation();
+
+    return (
+      <FormContainer
+        cardInformationState={cardInformationState}
+        setCardInformationState={setCardInformationState}
+        validation={validation}
+      />
+    );
   },
 };
