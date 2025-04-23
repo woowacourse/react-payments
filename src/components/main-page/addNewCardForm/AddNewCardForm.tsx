@@ -35,6 +35,9 @@ function AddNewCardForm() {
   const [inputOrder, setInputOrder] = useState(0);
   const viewNextInput = () => setInputOrder((prev) => prev + 1);
 
+  const [openButton, setOpenButton] = useState(false);
+  const handleOpenButton = () => setOpenButton(true);
+
   const [cardNumber, setCardNumber] = useState<CardNumberState>({
     first: INITIALIZE_VALUE,
     second: INITIALIZE_VALUE,
@@ -79,7 +82,9 @@ function AddNewCardForm() {
     <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
 
-      {inputOrder >= 4 && <CardPasswordSection password={password} changePassword={changePassword} />}
+      {inputOrder >= 4 && (
+        <CardPasswordSection password={password} changePassword={changePassword} handleOpenButton={handleOpenButton} />
+      )}
 
       {inputOrder >= 3 && (
         <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
@@ -106,7 +111,7 @@ function AddNewCardForm() {
       {inputOrder >= 0 && (
         <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
       )}
-      <Button />
+      {openButton ? <Button /> : <></>}
     </StyledFrame>
   );
 }

@@ -33,4 +33,5 @@ export type CardCVCNumberSectionProps = {
 export type CardPasswordSectionProps = {
   password: string;
   changePassword: (CVCNumber: string) => void;
+  handleOpenButton: () => void;
 };

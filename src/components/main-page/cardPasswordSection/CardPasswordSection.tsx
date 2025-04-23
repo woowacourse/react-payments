@@ -13,11 +13,11 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
-function CardPasswordSection({ password, changePassword }: CardPasswordSectionProps) {
+function CardPasswordSection({ password, changePassword, handleOpenButton }: CardPasswordSectionProps) {
   return (
     <StyledContainer>
       <SectionTitle title="비밀번호를 입력해 주세요" subTitle="앞에 2자리를 입력해주세요" />
-      <CardPasswordInputs password={password} changePassword={changePassword} />
+      <CardPasswordInputs password={password} changePassword={changePassword} handleOpenButton={handleOpenButton} />
     </StyledContainer>
   );
 }
