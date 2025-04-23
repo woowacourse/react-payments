@@ -13,8 +13,6 @@ type Props = {
 } & CardFormFiledProps;
 
 export const CVCForm = ({ cvcNumber, errorMessage, onCardInputChange, onCardInputBlur }: Props) => {
-  const isValidCVC = cvcNumber.every((cvcNumber) => cvcNumber.isValid);
-
   return (
     <CardInputLayout headerText="CVC 번호를 입력해 주세요." label="CVC">
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
@@ -36,7 +34,7 @@ export const CVCForm = ({ cvcNumber, errorMessage, onCardInputChange, onCardInpu
             height: 20px;
           `}
         >
-          {isValidCVC ? '' : errorMessage}
+          {errorMessage ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>

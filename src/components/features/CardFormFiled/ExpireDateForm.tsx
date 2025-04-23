@@ -20,7 +20,6 @@ export const ExpireDateForm = ({
   onCardExpireDateInputChange,
   onCardExpireDateInputBlur,
 }: Props) => {
-  const isValidDate = expireDate.month.isValid && expireDate.year.isValid;
   const expireDateKeys = Object.keys(expireDate) as ExpireDateInputKey[];
 
   return (
@@ -50,7 +49,7 @@ export const ExpireDateForm = ({
             height: 20px;
           `}
         >
-          {isValidDate ? '' : errorMessage}
+          {errorMessage ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>

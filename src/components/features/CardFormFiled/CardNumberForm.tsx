@@ -18,8 +18,6 @@ export const CardNumberForm = ({
   onCardInputChange,
   onCardInputBlur,
 }: Props) => {
-  const isValidCardNumber = cardNumbers.every((cardNumber) => cardNumber.isValid);
-
   return (
     <CardInputLayout
       headerText="결제할 카드 번호를 입력해 주세요."
@@ -46,7 +44,7 @@ export const CardNumberForm = ({
             height: 20px;
           `}
         >
-          {isValidCardNumber ? '' : errorMessage}
+          {errorMessage ? errorMessage : ''}
         </Text>
       </Flex>
     </CardInputLayout>
