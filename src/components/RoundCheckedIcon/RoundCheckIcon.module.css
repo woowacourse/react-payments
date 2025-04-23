@@ -1,0 +1,28 @@
+.roundCheckIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+}
+
+.checkMark {
+  width: 50%;
+  height: 50%;
+}
+
+.small {
+  width: 48px;
+  height: 48px;
+}
+
+.medium {
+  width: 64px;
+  height: 64px;
+}
+
+.large {
+  width: 80px;
+  height: 80px;
+}
