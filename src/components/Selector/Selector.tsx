@@ -1,30 +1,24 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-function Selector() {
-  const cardIssuers = {
-    bc: 'BC카드',
-    shinhan: '신한카드',
-    kakaobank: '카카오뱅크',
-    hyundai: '현대카드',
-    woori: '우리카드',
-    lotte: '롯데카드',
-    hana: '하나카드',
-    kb: '국민카드',
-  } as const;
+interface SelectorProps {
+  placeholder: string;
+  dropDownOptions: Record<string, string>;
+}
 
-  type CardIssuerKey = keyof typeof cardIssuers;
+function Selector({ dropDownOptions, placeholder }: SelectorProps) {
+  type OptionKey = keyof typeof dropDownOptions;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('카드사를 선택해주세요');
+  const [selectedValue, setSelectedValue] = useState(placeholder);
 
-  const handleSelectCardIssuers = (e: React.MouseEvent<HTMLUListElement>) => {
+  const handleSelectedOption = (e: React.MouseEvent<HTMLUListElement>) => {
     const targetId = (e.target as HTMLDivElement).id;
-    setSelectedValue(cardIssuers[targetId as CardIssuerKey]);
+    setSelectedValue(dropDownOptions[targetId as OptionKey]);
     setIsOpen(false);
   };
 
-  const cardIssuerOptions = Object.entries(cardIssuers).map(([key, label]) => ({
+  const optionsArray = Object.entries(dropDownOptions).map(([key, label]) => ({
     value: key,
     label,
   }));
@@ -33,7 +27,7 @@ function Selector() {
     <SelectorContainer>
       <DropDownDefault
         $isOpen={isOpen}
-        $isDefaultValue={selectedValue === '카드사를 선택해주세요'}
+        $isDefaultValue={selectedValue === placeholder}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {selectedValue}
@@ -42,8 +36,8 @@ function Selector() {
         src={`/img/${!isOpen ? 'chevron-up' : 'chevron-down'}.png`}
       />
       {isOpen && (
-        <DropDownContainer onClick={(e) => handleSelectCardIssuers(e)}>
-          {cardIssuerOptions.map((issuer) => (
+        <DropDownContainer onClick={(e) => handleSelectedOption(e)}>
+          {optionsArray.map((issuer) => (
             <DropDownOptions id={issuer.value}>{issuer.label}</DropDownOptions>
           ))}
         </DropDownContainer>
