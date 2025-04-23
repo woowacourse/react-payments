@@ -4,12 +4,7 @@ export const StyledSelect = styled.select<{ width?: string; isError: boolean }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
   border: 1.015px solid ${(props) => (props.isError ? "red" : "#acacac")};
-  display: flex;
-  height: 32px;
-  padding: 8px;
-  align-items: center;
-  gap: 8px;
-  flex: 1 0 0;
+  padding: 16px;
 
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
