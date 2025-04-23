@@ -19,7 +19,7 @@ export const useExpireDateInput = () => {
     month: { value: '', isValid: true },
     year: { value: '', isValid: true },
   });
-  const [errorMessage, setErrorMessage] = useState<string>('올바른 날짜를 입력해주세요.');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     setValue((prev) => {
@@ -45,8 +45,10 @@ export const useExpireDateInput = () => {
 
     if (!isValid) {
       setErrorMessage(errorMessage);
+      return isValid;
     }
 
+    setErrorMessage(null);
     return isValid;
   };
 

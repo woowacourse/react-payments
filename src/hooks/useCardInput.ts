@@ -27,7 +27,7 @@ export const useCardInput = (type: CardFormFiledType) => {
       isValid: true,
     }))
   );
-  const [errorMessage, setErrorMessage] = useState<string>('형식에 맞는 값을 입력해주세요.');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     setValue((prev) => {
@@ -42,8 +42,10 @@ export const useCardInput = (type: CardFormFiledType) => {
 
     if (!isValid) {
       setErrorMessage(errorMessage);
+      return isValid;
     }
 
+    setErrorMessage(null);
     return isValid;
   };
 
