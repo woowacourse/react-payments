@@ -5,12 +5,14 @@ import CardNumberField from "../../components/InputField/CardNumber/CardNumberFi
 import CardCVCField from "../../components/InputField/CVC/CardCVCField";
 import CardExpirationField from "../../components/InputField/Expiration/CardExpirationField";
 import {
+  CARD_BRAND_MESSAGE,
   CARD_NUMBER_MESSAGE,
   CVC_MESSAGE,
   EXPIRATION_MESSAGE,
 } from "../../constants/guide";
 import { CARD_INFO_LENGTH } from "../../constants/setting";
 import useCardInfo from "../../hooks/useCardInfo";
+import CardBrandField from "../../components/InputField/CardBrand/CardBrandField";
 
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
@@ -27,14 +29,11 @@ function AddCardPage() {
         expiration={[cardInfo.month, cardInfo.year]}
       ></Card>
       <div>
-        <Announcement
-          main={CARD_NUMBER_MESSAGE.MAIN}
-          caption={CARD_NUMBER_MESSAGE.CAPTION}
-        />
-        <CardNumberField
+        <Announcement main={CVC_MESSAGE.MAIN} />
+        <CardCVCField
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.NUMBER}
+          maxLength={CARD_INFO_LENGTH.CVC}
         />
         <Announcement
           main={EXPIRATION_MESSAGE.MAIN}
@@ -45,11 +44,19 @@ function AddCardPage() {
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.EXPIRATION}
         />
-        <Announcement main={CVC_MESSAGE.MAIN} />
-        <CardCVCField
+        <Announcement
+          main={CARD_BRAND_MESSAGE.MAIN}
+          caption={CARD_BRAND_MESSAGE.CAPTION}
+        />
+        <CardBrandField cardInfo={cardInfo} handleCardInfo={handleCardInfo} />
+        <Announcement
+          main={CARD_NUMBER_MESSAGE.MAIN}
+          caption={CARD_NUMBER_MESSAGE.CAPTION}
+        />
+        <CardNumberField
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.CVC}
+          maxLength={CARD_INFO_LENGTH.NUMBER}
         />
       </div>
     </AppContainer>

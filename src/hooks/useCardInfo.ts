@@ -8,6 +8,7 @@ export type CardInfo = {
   month: string;
   year: string;
   cvc: string;
+  cardBrand: string;
 };
 
 function useCardInfo() {
@@ -19,6 +20,7 @@ function useCardInfo() {
     month: "",
     year: "",
     cvc: "",
+    cardBrand: "",
   });
 
   function handleCardInfo(key: keyof typeof cardInfo, value: string) {

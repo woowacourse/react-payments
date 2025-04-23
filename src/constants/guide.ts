@@ -12,6 +12,11 @@ export const CVC_MESSAGE = {
   MAIN: "CVC 번호를 입력해 주세요",
 };
 
+export const CARD_BRAND_MESSAGE = {
+  MAIN: "카드사를 선택해 주세요",
+  CAPTION: "현재 국내 카드사만 가능합니다.",
+};
+
 export const ERROR_MESSAGE = {
   LENGTH: (length: number) => `입력값은 ${length}자리여야 합니다.`,
   INVALID_MONTH: "유효하지 않은 월입니다. 01-12 사이의 값을 입력하세요",
