@@ -15,12 +15,15 @@ type Period = {
   year: string;
 };
 
+type InputType = 'text' | 'password';
+
 interface InputTextsProps {
   label: string;
   placeholder: string[];
   eventHandler: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   state: string | Period | CardNumber;
   errors: boolean[];
+  type: InputType;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onComplete?: () => void;
@@ -48,6 +51,7 @@ const InputTexts = ({
   state,
   eventHandler,
   errors,
+  type,
   onFocus,
   onBlur,
   onComplete,
@@ -68,6 +72,7 @@ const InputTexts = ({
             placeholder={text}
             maxLength={text.length}
             error={errors ? errors[index] : false}
+            type={type}
             onChange={(e) => {
               eventHandler!(e, index);
               handleInput(e, index);
