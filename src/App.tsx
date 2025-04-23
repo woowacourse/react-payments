@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
+import { CardRegisterSuccessPage } from './pages/CardRegisterSuccessPage/CardRegisterSuccessPage';
 
 const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/react-payments/complete',
-    element: <div>결제 완료</div>,
+    element: <CardRegisterSuccessPage />,
   },
 ]);
 

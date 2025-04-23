@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import CardNumbersInput from '../components/CardNumbersInput/CardNumbersInput';
-import CardExpiryInput from '../components/CardExpiryInput/CardExpiryInput';
-import CVCInput from '../components/CVCInput/CVCInput';
-import CardPreview from '../components/CardPreview/CardPreview';
-import CardBrandInput from '../components/CardBrandInput/CardBrandInput';
-import { CARD_VALIDATION_INFO } from '../constants/cardValidationInfo';
-import '../App.css';
-import CardPasswordInput from '../components/CardPasswordInput/CardPasswordInput';
-import Button from '../components/Button/Button';
+import CardNumbersInput from '../../components/CardNumbersInput/CardNumbersInput';
+import CardExpiryInput from '../../components/CardExpiryInput/CardExpiryInput';
+import CVCInput from '../../components/CVCInput/CVCInput';
+import CardPreview from '../../components/CardPreview/CardPreview';
+import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
+import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import '../../App.css';
+import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
+import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
