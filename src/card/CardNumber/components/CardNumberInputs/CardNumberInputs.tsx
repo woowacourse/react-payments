@@ -11,13 +11,13 @@ import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
-  inputRefs: CardNumberInputRefs;
+  cardNumberInputRefs: CardNumberInputRefs;
   handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
 }
 
 function CardNumberInputs({
   cardNumberState,
-  inputRefs,
+  cardNumberInputRefs,
   handleCardNumberChange,
 }: CardNumberInputsProps) {
   const { first, second, third, fourth } = cardNumberState;
@@ -40,7 +40,8 @@ function CardNumberInputs({
               카드 번호
             </Label>
             <Input
-              ref={inputRefs[inputKey]}
+              autoFocus={idx === 0}
+              ref={cardNumberInputRefs[inputKey]}
               id={`card-number-${inputKey}-input`}
               role={`card-number-${inputKey}-input`}
               type="text"

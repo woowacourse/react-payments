@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 1.25rem;
   height: calc(100vh - 210px - 3rem - 1px);
-  padding: 1.5rem 0;
+  padding: 1.5rem 0 4rem;
   border-top: 1px solid #d4d4d4;
   overflow-y: auto;
   position: relative;
@@ -11,4 +11,19 @@
 
 .form::-webkit-scrollbar {
   width: 0;
+}
+
+.submitButton {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 100%;
+  background-color: #007bff;
+  padding: 1rem 0;
+  color: #f3f3f3;
+  font-size: 1.125rem;
+  font-weight: 700;
+  width: 500px;
+  letter-spacing: 1px;
 }

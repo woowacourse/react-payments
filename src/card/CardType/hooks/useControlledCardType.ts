@@ -8,9 +8,18 @@ const useControlledCardType = () => {
     setCardType(value);
   }, []);
 
+  const checkCardTypeNextStep = useCallback((cardType: CardType | null) => {
+    if (cardType === null) {
+      return false;
+    }
+
+    return true;
+  }, []);
+
   return {
     cardType,
     handleCardTypeChange,
+    isCardTypeNextStep: checkCardTypeNextStep(cardType),
   };
 };
 

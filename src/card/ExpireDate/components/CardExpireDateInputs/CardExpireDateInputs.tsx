@@ -2,10 +2,11 @@ import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 import { EXPIRE_DATE_KEYS } from "../../constants";
-import type { ExpireDateState } from "../../types";
+import type { ExpireDateInputRefs, ExpireDateState } from "../../types";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
+  expireDateInputRefs: ExpireDateInputRefs;
   handleExpireMonthChange: (value: string) => void;
   handleExpireYearChange: (value: string) => void;
   handleExpireMonthBlur: (value: string) => void;
@@ -13,6 +14,7 @@ export interface CardExpireDateInputsProps {
 
 function CardExpireDateInputs({
   expireDate,
+  expireDateInputRefs,
   handleExpireMonthChange,
   handleExpireYearChange,
   handleExpireMonthBlur,
@@ -32,6 +34,8 @@ function CardExpireDateInputs({
                 유효 기간
               </Label>
               <Input
+                ref={expireDateInputRefs[expireKey]}
+                autoFocus={idx === 0}
                 id={`expire-${expireKey}-input`}
                 type="text"
                 inputMode="numeric"

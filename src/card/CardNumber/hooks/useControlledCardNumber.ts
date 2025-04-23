@@ -54,10 +54,32 @@ const useControlledCardNumber = () => {
     []
   );
 
+  const checkCardNumberNextStep = useCallback(
+    (cardNumberState: CardNumberState) => {
+      const cardNumberValues = Object.values(cardNumberState);
+
+      const isError = cardNumberValues.some(({ isError }) => isError);
+      if (isError) {
+        return false;
+      }
+
+      const isAllFilledCardNumber = cardNumberValues.every(
+        ({ value }) => value.length === 4
+      );
+      if (!isAllFilledCardNumber) {
+        return false;
+      }
+
+      return true;
+    },
+    []
+  );
+
   return {
     cardNumberState,
-    inputRefs: cardNumberInputRefs,
+    cardNumberInputRefs,
     handleCardNumberChange,
+    isCardNumberNextStep: checkCardNumberNextStep(cardNumberState),
   };
 };
 

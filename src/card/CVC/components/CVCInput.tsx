@@ -13,6 +13,7 @@ function CVCInput({ CVCState, handleCVCChange }: CVCInputsProps) {
       <Label htmlFor="cvc-input">CVC</Label>
       <p className={styles.cvcInputs}>
         <Input
+          autoFocus={true}
           id="cvc-input"
           role="cvc-input"
           type="text"

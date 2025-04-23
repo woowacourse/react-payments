@@ -7,7 +7,6 @@ import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
 import { CardType } from "@/pages/addCard/types";
 import { CVCState } from "@card/CVC/hooks/useControlledCVC";
-import { CardOwnerState } from "@/card/CardOwner/types";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,
@@ -19,7 +18,6 @@ interface AddCardPreviewProps {
   cardType: CardType | null;
   cardNumberState: CardNumberState;
   expireDate: ExpireDateState;
-  cardOwner: CardOwnerState;
   CVCState: CVCState;
 }
 

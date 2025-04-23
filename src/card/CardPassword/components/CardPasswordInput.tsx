@@ -16,6 +16,7 @@ function CardPasswordInput({
     <div className={styles.container}>
       <Label htmlFor="card-owner-input">비밀번호 앞 2자리</Label>
       <Input
+        autoFocus={true}
         id="card-password-input"
         type="password"
         inputMode="numeric"

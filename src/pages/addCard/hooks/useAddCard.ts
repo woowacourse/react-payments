@@ -3,28 +3,63 @@ import useControlledCardNumber from "@card/CardNumber/hooks/useControlledCardNum
 import useControlledCardType from "@card/CardType/hooks/useControlledCardType";
 import useControlledCVC from "@card/CVC/hooks/useControlledCVC";
 import useControlledExpireDate from "@card/ExpireDate/hooks/useControlledExpireDate";
+import { useEffect, useState } from "react";
+import { getIsAddFormSubmit } from "../validation";
+import useAddCardFormStep from "./useAddCardFormStep";
 
 const useAddCard = () => {
-  const { cardNumberState, inputRefs, handleCardNumberChange } =
-    useControlledCardNumber();
-  const { cardType, handleCardTypeChange } = useControlledCardType();
+  const {
+    cardNumberState,
+    cardNumberInputRefs,
+    handleCardNumberChange,
+    isCardNumberNextStep,
+  } = useControlledCardNumber();
+  const { cardType, handleCardTypeChange, isCardTypeNextStep } =
+    useControlledCardType();
   const {
     expireDate,
+    expireDateInputRefs,
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
+    isExpireDateNextStep,
   } = useControlledExpireDate();
-  const { CVCState, handleCVCChange } = useControlledCVC();
+  const { CVCState, handleCVCChange, isCVCNextStep } = useControlledCVC();
   const { cardPasswordState, handleCardPasswordChange } =
     useControlledCardPassword();
+  const addCardFormSteps = useAddCardFormStep({
+    isCardNumberNextStep,
+    isCardTypeNextStep,
+    isExpireDateNextStep,
+    isCVCNextStep,
+  });
+
+  const [isAddFormSubmit, setIsAddFormSubmit] = useState(false);
+
+  useEffect(
+    function checkAddFormSubmit() {
+      setIsAddFormSubmit(
+        getIsAddFormSubmit({
+          cardNumberState,
+          cardType,
+          expireDate,
+          CVCState,
+          cardPasswordState,
+        })
+      );
+    },
+    [cardNumberState, cardType, expireDate, CVCState, cardPasswordState]
+  );
 
   const addCardState = {
+    addCardFormSteps,
     cardNumberState,
-    inputRefs,
+    cardNumberInputRefs,
     handleCardNumberChange,
     cardType,
     handleCardTypeChange,
     expireDate,
+    expireDateInputRefs,
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
@@ -32,6 +67,7 @@ const useAddCard = () => {
     handleCVCChange,
     cardPasswordState,
     handleCardPasswordChange,
+    isAddFormSubmit,
   };
 
   const previewState = {

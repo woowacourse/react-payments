@@ -25,7 +25,16 @@ const useControlledCVC = () => {
     }));
   }, []);
 
-  return { CVCState, handleCVCChange };
+  const checkCVCNextStep = useCallback(
+    ({ value, isError }: CVCState) => value.length === 3 && !isError,
+    []
+  );
+
+  return {
+    CVCState,
+    handleCVCChange,
+    isCVCNextStep: checkCVCNextStep(CVCState),
+  };
 };
 
 export default useControlledCVC;

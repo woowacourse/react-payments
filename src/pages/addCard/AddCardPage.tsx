@@ -6,13 +6,7 @@ import useAddCard from "@/pages/addCard/hooks/useAddCard";
 function AddCardPage() {
   const {
     addCardState,
-    previewState: {
-      cardType,
-      cardNumberState,
-      expireDate,
-      cardOwner,
-      CVCState,
-    },
+    previewState: { cardType, cardNumberState, expireDate, CVCState },
   } = useAddCard();
 
   return (
@@ -21,7 +15,6 @@ function AddCardPage() {
         cardType={cardType}
         cardNumberState={cardNumberState}
         expireDate={expireDate}
-        cardOwner={cardOwner}
         CVCState={CVCState}
       />
       <AddCardForm addCardState={addCardState} />
