@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import Select from '../../components/common/Select/Select';
+import Dropdown from '../../components/common/Dropdown/Dropdown';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
 import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
@@ -8,6 +9,7 @@ import CardNumberInputField from '../../components/features/payments/InputField/
 import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
+import { DropdownOptionType } from '../../types/dropdown';
 
 function Payments() {
   const {
@@ -17,6 +19,10 @@ function Payments() {
     handleValue: handleCardNumberInputValue,
     onBlur: onCardNumberBlur,
   } = useCardNumberValidation();
+
+  const [cardBankValue, setCardBankValue] = useState<DropdownOptionType | null>(
+    null
+  );
 
   const {
     inputValues: expirationDateInputValues,
@@ -54,12 +60,20 @@ function Payments() {
           title="카드사를 선택해 주세요"
           caption="현재 국내 카드사만 가능합니다."
         >
-          <Select
-            placeholder="카드사를 선택해주세요"
+          <Dropdown
             options={[
               { label: 'BC카드', value: 'bc' },
               { label: '신한카드', value: 'shinhan' },
+              { label: '카카오뱅크', value: 'kakao' },
+              { label: '현대카드', value: 'hyundai' },
+              { label: '우리카드', value: 'woori' },
+              { label: '롯데카드', value: 'lotte' },
+              { label: '하나카드', value: 'hana' },
+              { label: '국민카드', value: 'kookmin' },
             ]}
+            selectedValue={cardBankValue}
+            setSelectedValue={setCardBankValue}
+            placeholder="카드사를 선택해주세요"
           />
         </InputSection>
         <InputSection
