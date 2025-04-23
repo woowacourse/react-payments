@@ -13,14 +13,24 @@ import {
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
 
-function CardPeriodInput() {
+interface CardPeriodInputProps {
+  onNext?: () => void;
+}
+
+function CardPeriodInput(props: CardPeriodInputProps) {
+  const { onNext } = props;
   const {
     cardExpirationDate,
     handleCardExpirationChange,
     cardExpirationDateError: errorState,
     getMonthErrorMessage,
     getYearErrorMessage,
+    isCardExpirationValid,
   } = useCard();
+
+  if (isCardExpirationValid()) {
+    onNext?.();
+  }
 
   return (
     <div css={cardPeriodInputLayout}>

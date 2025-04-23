@@ -4,7 +4,7 @@ import {
   errorMessageStyle,
 } from '../../styles/@common/text.style';
 import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
-import { CARD_CVC } from '../../constants';
+import { CARD_LENGTH } from '../../constants';
 import {
   inputContainer,
   inputSection,
@@ -12,13 +12,23 @@ import {
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
 
-function CardCVCInput() {
+interface CardCVCInputProps {
+  onNext?: () => void;
+}
+
+function CardCVCInput(props: CardCVCInputProps) {
+  const { onNext } = props;
   const {
     cardCVC,
     handleCardCVCChange,
     cardCVCError: hasError,
     getCardCVCErrorMessage,
+    isCardCVCValid,
   } = useCard();
+
+  if (isCardCVCValid()) {
+    onNext?.();
+  }
 
   return (
     <div css={cardPeriodInputLayout}>
@@ -32,7 +42,7 @@ function CardCVCInput() {
             <Input
               type="text"
               name="cvc"
-              maxLength={CARD_CVC.maxLength}
+              maxLength={CARD_LENGTH.cvc}
               value={cardCVC?.toString()}
               onChange={(e) => handleCardCVCChange(e.target.value)}
               css={hasError ? errorInputStyle : undefined}

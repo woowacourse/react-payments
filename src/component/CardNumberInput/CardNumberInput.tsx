@@ -12,12 +12,18 @@ import {
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
 
-function CardNumberInput() {
+interface CardNumberInputProps {
+  onNext: () => void;
+}
+
+function CardNumberInput(props: CardNumberInputProps) {
+  const { onNext } = props;
   const {
     cardNumber,
     handleCardNumberChange,
     cardNumberError: errorState,
     getCardNumberErrorMessage,
+    isCardNumberValid,
   } = useCard();
 
   const hasError =
@@ -25,6 +31,10 @@ function CardNumberInput() {
     errorState.second ||
     errorState.third ||
     errorState.forth;
+
+  if (isCardNumberValid()) {
+    onNext();
+  }
 
   return (
     <div css={cardNumberInputLayout}>
