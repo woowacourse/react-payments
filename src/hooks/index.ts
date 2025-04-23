@@ -5,3 +5,4 @@ export * from './useCardExpirationMonth';
 export * from './useCardExpirationYear';
 export * from './useCardField';
 export * from './useCardPassword';
+export * from './useEasyNavigate';
