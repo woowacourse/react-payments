@@ -42,7 +42,11 @@ const getErrorMessage = (expirationPeriods: ExpirationPeriod) => {
   return NO_ERROR;
 };
 
-function CardExpirationPeriodInputs({ expirationPeriod, changeExpirationPeriod }: ExpirationPeriodProps) {
+function CardExpirationPeriodInputs({
+  expirationPeriod,
+  changeExpirationPeriod,
+  viewNextInput,
+}: ExpirationPeriodProps) {
   const errorMessage = getErrorMessage(expirationPeriod);
 
   return (
@@ -67,6 +71,12 @@ function CardExpirationPeriodInputs({ expirationPeriod, changeExpirationPeriod }
             onChange={(e) => {
               changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
               autoFocusToNext(e, EXPIRATION_PERIOD_LENGTH);
+
+              const isComplete = e.target.value.length === EXPIRATION_PERIOD_LENGTH && isValidNumber(e.target.value);
+
+              if (isComplete) {
+                viewNextInput();
+              }
             }}
             width="50%"
             maxLength={EXPIRATION_PERIOD_LENGTH}

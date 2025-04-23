@@ -29,7 +29,7 @@ const getErrorMessage = (CVCNumber: string) => {
   return NO_ERROR;
 };
 
-function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectionProps) {
+function CardCVCNumberInputs({ CVCNumber, changeCVCNumber, viewNextInput }: CardCVCNumberSectionProps) {
   const errorMessage = getErrorMessage(CVCNumber);
 
   return (
@@ -40,6 +40,12 @@ function CardCVCNumberInputs({ CVCNumber, changeCVCNumber }: CardCVCNumberSectio
           value={CVCNumber}
           onChange={(e) => {
             changeCVCNumber(e.target.value);
+
+            const isComplete = e.target.value.length === CVC_NUMBER_LENGTH && isValidNumber(e.target.value);
+
+            if (isComplete) {
+              viewNextInput();
+            }
           }}
           isError={isCardCVCNumberInvalid(CVCNumber)}
           isPassword={false}

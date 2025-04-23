@@ -31,6 +31,9 @@ type ExpirationPeriodState = {
 };
 
 function AddNewCardForm() {
+  const [inputOrder, setInputOrder] = useState(0);
+  const viewNextInput = () => setInputOrder((prev) => prev + 1);
+
   const [cardNumber, setCardNumber] = useState<CardNumberState>({
     first: INITIALIZE_VALUE,
     second: INITIALIZE_VALUE,
@@ -74,20 +77,34 @@ function AddNewCardForm() {
   return (
     <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
-      <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
-      <CardSelectSection
-        onSelectCardCompany={(companyName: string, color: string) => {
-          setSelectedCardCompany(companyName);
-          setCardColor(color);
-        }}
-      />
 
-      <CardExpirationPeriodSection
-        expirationPeriod={expirationPeriod}
-        changeExpirationPeriod={changeExpirationPeriod}
-      />
-      <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} />
-      <CardPasswordSection password={password} changePassword={changePassword} />
+      {inputOrder >= 4 && <CardPasswordSection password={password} changePassword={changePassword} />}
+
+      {inputOrder >= 3 && (
+        <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
+      )}
+
+      {inputOrder >= 2 && (
+        <CardExpirationPeriodSection
+          expirationPeriod={expirationPeriod}
+          changeExpirationPeriod={changeExpirationPeriod}
+          viewNextInput={viewNextInput}
+        />
+      )}
+
+      {inputOrder >= 1 && (
+        <CardSelectSection
+          onSelectCardCompany={(companyName: string, color: string) => {
+            setSelectedCardCompany(companyName);
+            setCardColor(color);
+            viewNextInput();
+          }}
+        />
+      )}
+
+      {inputOrder >= 0 && (
+        <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
+      )}
     </StyledFrame>
   );
 }

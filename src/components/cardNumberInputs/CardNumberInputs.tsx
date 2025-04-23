@@ -33,7 +33,7 @@ const getErrorMessage = (cardNumbers: CardNumber) => {
   return errorMessage;
 };
 
-function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber }: CardNumberProps) {
+function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber, viewNextInput }: CardNumberProps) {
   const errorMessage = getErrorMessage(cardNumbers);
   const inputKeys: (keyof typeof cardNumbers)[] = ['first', 'second', 'third', 'fourth'];
 
@@ -49,6 +49,13 @@ function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber }: CardNum
               onChange={(e) => {
                 changeCardNumber(key, e.target?.value);
                 autoFocusToNext(e, CARD_NUMBER_LENGTH);
+
+                const isLast = key === 'fourth';
+                const isComplete = e.target.value.length === CARD_NUMBER_LENGTH && isValidNumber(e.target.value);
+
+                if (isLast && isComplete) {
+                  viewNextInput();
+                }
               }}
               width="25%"
               maxLength={CARD_NUMBER_LENGTH}

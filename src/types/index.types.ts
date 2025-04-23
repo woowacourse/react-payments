@@ -15,16 +15,19 @@ export type ExpirationPeriod = {
 export type CardNumberProps = {
   cardNumber: CardNumber;
   changeCardNumber: (position: Position, cardNumber: string) => void;
+  viewNextInput: () => void;
 };
 
 export type ExpirationPeriodProps = {
   expirationPeriod: ExpirationPeriod;
   changeExpirationPeriod: (expirationPeriod: keyof ExpirationPeriod, date: string) => void;
+  viewNextInput: () => void;
 };
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: string;
   changeCVCNumber: (CVCNumber: string) => void;
+  viewNextInput: () => void;
 };
 
 export type CardPasswordSectionProps = {

@@ -12,11 +12,19 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
-function CardExpirationPeriodSection({ expirationPeriod, changeExpirationPeriod }: ExpirationPeriodProps) {
+function CardExpirationPeriodSection({
+  expirationPeriod,
+  changeExpirationPeriod,
+  viewNextInput,
+}: ExpirationPeriodProps) {
   return (
     <StyledContainer>
       <SectionTitle title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요." />
-      <CardExpirationPeriodInputs expirationPeriod={expirationPeriod} changeExpirationPeriod={changeExpirationPeriod} />
+      <CardExpirationPeriodInputs
+        expirationPeriod={expirationPeriod}
+        changeExpirationPeriod={changeExpirationPeriod}
+        viewNextInput={viewNextInput}
+      />
     </StyledContainer>
   );
 }
