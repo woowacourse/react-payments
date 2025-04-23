@@ -13,5 +13,5 @@ const ErrorMessage = ({ error, message }: errorMessageProps) => {
 export default ErrorMessage;
 
 const errorTextWrapperStyle = (error: boolean) => css`
-  opacity: ${error ? "1" : "0"};
+  visibility: ${error ? "visible" : "hidden"};
 `;

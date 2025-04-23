@@ -100,7 +100,7 @@
   - [x] 전체 에러훅에서 개별 에러 훅들을 컴포넌트에 뿌려준다.
 - [x] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
   - [x] formUIControllerData 타입 지정
-- [ ] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경
+- [x] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경
 - [ ] PreviewCard 컴포넌트 내부 삼항연산자로 변경
 
 - [ ] 필드 별 컴포넌트 제작 (추후 리뷰어와 논의 후, 작업 예정)
