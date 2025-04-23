@@ -58,7 +58,11 @@ const Card = ({ cardNumbers, expirationDate }: Props) => {
 					const isBlind = key === "third" || key === "fourth";
 					const displayValue = isBlind ? "•".repeat(value?.length) : value;
 
-					return <CardNumber key={key}>{displayValue}</CardNumber>;
+					return (
+						<p key={key} className="card-number-blind">
+							{displayValue}
+						</p>
+					);
 				})}
 			</CardInfoWrap>
 
@@ -105,8 +109,4 @@ const CardInfoWrap = styled.div`
 	font-size: 14px;
 	font-weight: 500;
 	color: #fff;
-`;
-
-const CardNumber = styled.p`
-	letter-spacing: 2.24px;
 `;
