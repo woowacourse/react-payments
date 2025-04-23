@@ -4,7 +4,8 @@ import {useState} from 'react';
 import CardNumberSection from './components/form/CardNumberSection';
 import ExpirationDateSection from './components/form/ExpirationDateSection';
 import CardCvcSection from './components/form/CardCvcSection';
-import {CardNumber, ExpirationDate} from './type/Card';
+import {CardCompany, CardNumber, ExpirationDate} from './type/Card';
+import CardCompanySection from './components/form/CardCompanySection';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -23,11 +24,16 @@ function App() {
   const [expirationDate, setExpirationDate] =
     useState<ExpirationDate>(INIT_EXPIRATION_DATE);
   const [cvcNumber, setcvcNumber] = useState('');
-  const [cardCompany, setCardCompany] = useState();
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
 
   return (
     <MainContainer>
-      <Card cardNumbers={cardNumber} expirationDate={expirationDate} />
+      <Card
+        cardNumbers={cardNumber}
+        expirationDate={expirationDate}
+        cardCompany={cardCompany}
+      />
+      <CardCompanySection onChange={(value) => setCardCompany(value)} />
       <CardNumberSection
         value={cardNumber}
         onChange={(order, value) =>

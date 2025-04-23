@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import {CardNumber, ExpirationDate} from '../../type/Card';
+import {CardCompany, CardNumber, ExpirationDate} from '../../type/Card';
+import {CARD_COMPANY} from '../constants/card';
 
 type Props = {
   cardNumbers: CardNumber;
   expirationDate: ExpirationDate;
+  cardCompany: CardCompany | '';
 };
 
 const BADGE_BRAND = {
@@ -47,13 +49,17 @@ const formatDate = (expirationDate: ExpirationDate) => {
   return `${month} / ${year}`;
 };
 
-const Card = ({cardNumbers, expirationDate}: Props) => {
+const Card = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   const matchedCard = cardBrandRules.find((rule) =>
     rule.validate(cardNumbers.first)
   );
 
   return (
-    <Container>
+    <Container
+      background={
+        cardCompany !== '' ? CARD_COMPANY[cardCompany]?.color : cardCompany
+      }
+    >
       <Wrap>
         <Chip />
         <BrandBadge
@@ -78,13 +84,13 @@ const Card = ({cardNumbers, expirationDate}: Props) => {
 
 export default Card;
 
-const Container = styled.div`
+const Container = styled.div<{background: string}>`
   width: 212px;
   height: 132px;
   margin: 0 auto 45px;
   padding: 8px 12px;
   border-radius: 4px;
-  background: #333;
+  background: ${(props) => (props.background ? props.background : '#333')};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 

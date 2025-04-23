@@ -13,14 +13,11 @@ type Props = {
   onChange: (value: string) => void;
 };
 
-const CardCvcSection = ({
-  value: cvcNumber,
-  onChange: onCvcNumberChange,
-}: Props) => {
+const CardCvcSection = ({value: cvcNumber, onChange}: Props) => {
   const [error, setError] = useState('');
 
   const handleInput = (value: string) => {
-    onCvcNumberChange(value);
+    onChange(value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);
