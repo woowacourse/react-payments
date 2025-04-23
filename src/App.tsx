@@ -1,16 +1,14 @@
 import GlobalStyle from './styles/globalStyle';
 import theme from './styles/theme';
 import { Global, ThemeProvider } from '@emotion/react';
-import { CardProvider } from './context/CardContext';
-import CardPaymentPage from './pages/CardPaymentPage/CardPaymentPage';
+import { RouterProvider } from 'react-router-dom';
+import router from './router/Router';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyle} />
-      <CardProvider>
-        <CardPaymentPage />
-      </CardProvider>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
