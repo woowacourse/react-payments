@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Noto Sans KR';
 }
 
 /* Input type=number 화살표 제거 */
