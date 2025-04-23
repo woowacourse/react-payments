@@ -17,8 +17,8 @@ export const Default: Story = {
       cardNumberPart4: '',
     },
     expirationDateInputValue: {
-      expirationDatePart1: '',
-      expirationDatePart2: '',
+      month: '',
+      year: '',
     },
     cardType: 'none',
   },
@@ -36,8 +36,8 @@ export const Visa: Story = {
       cardNumberPart4: '4567',
     },
     expirationDateInputValue: {
-      expirationDatePart1: '02',
-      expirationDatePart2: '25',
+      month: '02',
+      year: '25',
     },
     cardType: 'visa',
   },
@@ -55,8 +55,8 @@ export const Master: Story = {
       cardNumberPart4: '5123',
     },
     expirationDateInputValue: {
-      expirationDatePart1: '02',
-      expirationDatePart2: '25',
+      month: '02',
+      year: '25',
     },
     cardType: 'master',
   },
