@@ -27,6 +27,12 @@ const extractCardCompanyColor = (company: string) => {
   return companyData ? companyData.color : BASIC_COLOR;
 };
 
+const isFulledInput = (items, condition) => {
+  return Object.values(items).every((item) => {
+    return item.length >= condition;
+  });
+};
+
 function App() {
   const {
     cardNumbers,
@@ -56,6 +62,12 @@ function App() {
     errorMessage: cardPasswordErrorMessage,
   } = useCardPassword();
 
+  const isFulledForm =
+    isFulledInput(cardNumbers, 4) &&
+    isFulledInput(cardExpirationDate, 2) &&
+    cardCompany.length > 0 &&
+    cardPassword.length == 2;
+
   return (
     <>
       <div className={styles.main}>
@@ -64,6 +76,7 @@ function App() {
           cardExpirationDate={cardExpirationDate}
           backgroundColor={extractCardCompanyColor(cardCompany)}
         />
+
         <div className={styles.cardForm}>
           <CardPasswordInputSection
             cardPassword={cardPassword}
@@ -91,6 +104,8 @@ function App() {
             errorMessage={cardNumbersErrorMessage}
           />
         </div>
+
+        <div>{isFulledForm && <button>확인</button>}</div>
       </div>
     </>
   );
