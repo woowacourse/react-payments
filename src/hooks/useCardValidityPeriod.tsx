@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { checkValideDate } from '../utils/checkValideDate';
+import { CARD_IFNO_INPUT_STEP } from '../App';
 
 const VALIDITY_PERIOD = {
   MAX_LENGTH: 2,
 };
 
-function useCardValidityPeriod() {
+interface useCardValidityPeriodProps {
+  showNextStep: (step: keyof typeof CARD_IFNO_INPUT_STEP) => void;
+}
+
+function useCardValidityPeriod({ showNextStep }: useCardValidityPeriodProps) {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
     year: '',
@@ -65,6 +70,7 @@ function useCardValidityPeriod() {
           year: false,
           month: false,
         });
+        showNextStep(CARD_IFNO_INPUT_STEP.cvc);
       }
     }
 

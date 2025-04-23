@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CARD_IFNO_INPUT_STEP } from '../App';
 
 const ERROR_MESSAGE = {
   CARD_NUMBER_LENGTH: '카드 번호는 16자리입니다.',
@@ -9,7 +10,11 @@ const CARD_NUMBER = {
   MIN_LENGTH: 0,
 };
 
-function useCardNumber() {
+interface useCardNumberProps {
+  showNextStep: (step: keyof typeof CARD_IFNO_INPUT_STEP) => void;
+}
+
+function useCardNumber({ showNextStep }: useCardNumberProps) {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [isError, setIsError] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -47,11 +52,20 @@ function useCardNumber() {
       copy.some((v) => v === true) ? ERROR_MESSAGE.CARD_NUMBER_LENGTH : '',
     );
 
+    if (checkShowNextStep(copy))
+      showNextStep(CARD_IFNO_INPUT_STEP.validityPeriod);
+
     setCardNumber((prev) => {
       const newCardNumber = [...prev];
       newCardNumber[n] = value;
       return newCardNumber;
     });
+  };
+
+  const checkShowNextStep = (isError: boolean[]) => {
+    return (
+      isError.every((v) => v === false) && cardNumber.every((v) => v !== '')
+    );
   };
 
   return {

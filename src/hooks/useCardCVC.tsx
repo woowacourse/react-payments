@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CARD_IFNO_INPUT_STEP } from '../App';
 
 const ERROR_MESSAGE = {
   CARD_CVC_LENGTH: 'CVC는 3자리입니다.',
@@ -9,7 +10,11 @@ const CVC = {
   MIN_LENGTH: 0,
 } as const;
 
-function useCardCVC() {
+interface useCardCVCProps {
+  showNextStep: (step: keyof typeof CARD_IFNO_INPUT_STEP) => void;
+}
+
+function useCardCVC({ showNextStep }: useCardCVCProps) {
   const [cardCVC, setCardCVC] = useState('');
   const [isCardCVCError, setIsCardCVCError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,6 +33,10 @@ function useCardCVC() {
       Number(value) < CVC.MIN_LENGTH;
 
     setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_CVC_LENGTH : '');
+
+    if (!isNotValid) {
+      showNextStep(CARD_IFNO_INPUT_STEP.password);
+    }
 
     setIsCardCVCError(isNotValid);
 
