@@ -8,13 +8,14 @@ const numbersArray = Array.from({ length: 4 }).fill('') as string[];
 function CardNumberInput({
   cardNumbers,
   setCardNumbers,
+  isValid,
+  setIsValid,
 }: {
   cardNumbers: string[];
   setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
+  isValid: boolean[];
+  setIsValid: React.Dispatch<React.SetStateAction<boolean[]>>;
 }) {
-  const initialValidInputs = Array.from({ length: 4 }, () => true);
-  const [isValidInputs, setIsValidInputs] =
-    useState<boolean[]>(initialValidInputs);
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,16 +35,16 @@ function CardNumberInput({
 
   function validateCardNumber(inputCardNumber: string, dataInputId: number) {
     if (!validatorUtils.isNumber(inputCardNumber)) {
-      isValidInputs[dataInputId] = false;
-      setIsValidInputs([...isValidInputs]);
+      isValid[dataInputId] = false;
+      setIsValid([...isValid]);
     } else {
-      isValidInputs[dataInputId] = true;
-      setIsValidInputs([...isValidInputs]);
+      isValid[dataInputId] = true;
+      setIsValid([...isValid]);
     }
   }
 
   function decideShowFeedback() {
-    const hasInvalidInput = isValidInputs.some((isValid) => !isValid);
+    const hasInvalidInput = isValid.some((isValidInput) => !isValidInput);
     if (hasInvalidInput) {
       setFeedbackMessage('숫자만 입력 가능합니다.');
     } else {
@@ -60,7 +61,7 @@ function CardNumberInput({
         maxLength={4}
         value={cardNumbers[index]}
         handleInputChange={handleCardNumberChange}
-        isValidInput={isValidInputs[index]}
+        isValidInput={isValid[index]}
         dataInputId={index}
       />
     );

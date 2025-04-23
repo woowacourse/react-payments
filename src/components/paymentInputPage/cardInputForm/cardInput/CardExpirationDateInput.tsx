@@ -4,17 +4,22 @@ import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
 import { ExpirationDateType } from '../../PaymentInputPage';
 
+export interface IsValidType {
+  month: boolean;
+  year: boolean;
+}
+
 function CardExpirationDateInput({
   expirationDate,
   setExpirationDate,
+  isValid,
+  setIsValid,
 }: {
   expirationDate: ExpirationDateType;
   setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
+  isValid: IsValidType;
+  setIsValid: React.Dispatch<React.SetStateAction<IsValidType>>;
 }) {
-  const [isValidInputs, setIsValidInputs] = useState({
-    month: true,
-    year: true,
-  });
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -29,7 +34,7 @@ function CardExpirationDateInput({
   function checkIsValidType(name: string, expiryValue: string) {
     if (!validatorUtils.isNumber(expiryValue)) {
       setFeedbackMessage('숫자만 입력 가능합니다.');
-      setIsValidInputs((prev) => {
+      setIsValid((prev) => {
         return { ...prev, [name]: false };
       });
     }
@@ -43,7 +48,7 @@ function CardExpirationDateInput({
       !validatorUtils.isValidExpirationDate(expirationDate)
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValidInputs((prev) => {
+      setIsValid((prev) => {
         return { ...prev, [name]: false };
       });
       return;
@@ -59,7 +64,7 @@ function CardExpirationDateInput({
       })
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValidInputs((prev) => {
+      setIsValid((prev) => {
         return { ...prev, [name]: false };
       });
       return;
@@ -71,14 +76,14 @@ function CardExpirationDateInput({
       !validatorUtils.isValidNumberRange({ value: Number(value), min: 25 })
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValidInputs((prev) => {
+      setIsValid((prev) => {
         return { ...prev, [name]: false };
       });
       return;
     }
 
     setFeedbackMessage('');
-    setIsValidInputs((prev) => {
+    setIsValid((prev) => {
       return { ...prev, [name]: true };
     });
   }
@@ -98,7 +103,7 @@ function CardExpirationDateInput({
           value={expirationDate.month}
           handleInputChange={handleCardNumberChange}
           maxLength={2}
-          isValidInput={isValidInputs.month}
+          isValidInput={isValid.month}
         />
         <Input
           type='tel'
@@ -107,7 +112,7 @@ function CardExpirationDateInput({
           value={expirationDate.year}
           handleInputChange={handleCardNumberChange}
           maxLength={2}
-          isValidInput={isValidInputs.year}
+          isValidInput={isValid.year}
         />
       </InputForm>
     </>
