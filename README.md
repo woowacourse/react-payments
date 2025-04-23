@@ -101,7 +101,7 @@
 - [x] formUIControllerData 데이터 배열로 변경 및 필드값 key로 지정
   - [x] formUIControllerData 타입 지정
 - [x] errorMessage 컴포넌트 opacity -> visibility 속성으로 변경
-- [ ] PreviewCard 컴포넌트 내부 삼항연산자로 변경
+- [x] PreviewCard 컴포넌트 내부 삼항연산자로 변경
 
 - [ ] 필드 별 컴포넌트 제작 (추후 리뷰어와 논의 후, 작업 예정)
 - [ ] 전체 상태 분리? -> 에러들처럼 개별로 관리하고, 이를 감싸주는 전체 훅을 만든다면? -> 렌더링을 최소화할 수 있음. 다른 input값을 수정해도 해당 부분 컴포넌트만 재렌더링된다는 장점
