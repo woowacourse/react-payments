@@ -61,6 +61,15 @@ const theme = {
         lineHeight: '1.2rem',
       },
     },
+    default: {
+      text: {
+        fontFamily: 'Noto Sans KR',
+        fontSize: '2rem',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: 'normal',
+      },
+    },
   },
 };
 
