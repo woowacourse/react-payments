@@ -11,7 +11,6 @@ import {
   cardPaymentContentContainer,
   cardPaymentFormContainer,
   cardPaymentLayout,
-  cardPaymentStepContainer,
 } from './CardPayment.style';
 
 const CardPaymentPage = () => {
@@ -27,48 +26,40 @@ const CardPaymentPage = () => {
         <div css={cardPaymentFormContainer}>
           <Funnel>
             <Funnel.Step name={STEPS[0]}>
-              <div css={cardPaymentStepContainer}>
-                <CardNumberInput onNext={() => setStep(STEPS[1])} />
-              </div>
+              <CardNumberInput onNext={() => setStep(STEPS[1])} />
             </Funnel.Step>
 
             <Funnel.Step name={STEPS[1]}>
-              <div css={cardPaymentStepContainer}>
-                <Title>
-                  <Title.Text>카드사를 선택해주세요</Title.Text>
-                </Title>
-                <Dropdown
-                  placeholder="카드사를 선택해주세요"
-                  onNext={() => setStep(STEPS[2])}
-                >
-                  <Dropdown.Option value="bc">BC카드</Dropdown.Option>
-                  <Dropdown.Option value="shinhan">신한카드</Dropdown.Option>
-                  <Dropdown.Option value="kakao">카카오뱅크</Dropdown.Option>
-                  <Dropdown.Option value="hyundai">현대카드</Dropdown.Option>
-                  <Dropdown.Option value="woori">우리카드</Dropdown.Option>
-                  <Dropdown.Option value="lotte">롯데카드</Dropdown.Option>
-                  <Dropdown.Option value="hana">하나카드</Dropdown.Option>
-                  <Dropdown.Option value="kb">국민카드</Dropdown.Option>
-                </Dropdown>
-              </div>
+              <Title>
+                <Title.Text>카드사를 선택해주세요</Title.Text>
+              </Title>
+              <Dropdown
+                placeholder="카드사를 선택해주세요"
+                onNext={() => setStep(STEPS[2])}
+              >
+                <Dropdown.Option value="bc">BC카드</Dropdown.Option>
+                <Dropdown.Option value="shinhan">신한카드</Dropdown.Option>
+                <Dropdown.Option value="kakao">카카오뱅크</Dropdown.Option>
+                <Dropdown.Option value="hyundai">현대카드</Dropdown.Option>
+                <Dropdown.Option value="woori">우리카드</Dropdown.Option>
+                <Dropdown.Option value="lotte">롯데카드</Dropdown.Option>
+                <Dropdown.Option value="hana">하나카드</Dropdown.Option>
+                <Dropdown.Option value="kb">국민카드</Dropdown.Option>
+              </Dropdown>
             </Funnel.Step>
 
             <Funnel.Step name={STEPS[2]}>
-              <div css={cardPaymentStepContainer}>
+              <div>
                 <CardPeriodInput onNext={() => setStep(STEPS[3])} />
               </div>
             </Funnel.Step>
 
             <Funnel.Step name={STEPS[3]} onNext={() => {}}>
-              <div css={cardPaymentStepContainer}>
-                <CardCVCInput onNext={() => setStep(STEPS[4])} />
-              </div>
+              <CardCVCInput onNext={() => setStep(STEPS[4])} />
             </Funnel.Step>
 
-            <Funnel.Step name={STEPS[4]} onNext={() => {}}>
-              <div css={cardPaymentStepContainer}>
-                <CardPasswordInput />
-              </div>
+            <Funnel.Step name={STEPS[4]}>
+              <CardPasswordInput />
             </Funnel.Step>
           </Funnel>
         </div>
