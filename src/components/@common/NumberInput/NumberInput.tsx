@@ -1,35 +1,19 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 
 interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   setValue: (value: string) => void;
   maxLength: number;
-  extraErrorCondition?: boolean;
+  isError?: boolean;
 }
 
 function NumberInput({
   value,
   setValue,
   maxLength,
-  extraErrorCondition,
+  isError = false,
   ...rest
 }: NumberInputProps) {
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    if (value.length !== 0 && value.length !== maxLength) {
-      setIsError(true);
-      return;
-    }
-    if (extraErrorCondition) {
-      setIsError(true);
-      return;
-    }
-
-    setIsError(false);
-  }, [value, maxLength, extraErrorCondition]);
-
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
     const newValue = e.target.value;
     const numericRegex = /^[0-9]*$/;

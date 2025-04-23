@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
@@ -6,12 +6,7 @@ import {
   NumberInputContainer,
   ErrorText,
 } from "../CardField.styles";
-import {
-  isExpired,
-  isInvalidMonth,
-  isInvalidYear,
-  validateExpiration,
-} from "./utils/dateUtils";
+import { validateMonth, validateYear, validateExpiration } from "../validation";
 import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface CardExpirationFieldProps {
@@ -28,24 +23,27 @@ function CardExpirationField({
   handleCardInfo,
   maxLength,
 }: CardExpirationFieldProps) {
-  const [errorText, setErrorText] = useState("");
-
-  const invalidMonth = useMemo(
-    () => isInvalidMonth(cardInfo.month),
-    [cardInfo.month]
-  );
-  const invalidYear = useMemo(
-    () => isInvalidYear(cardInfo.year),
-    [cardInfo.year]
-  );
-  const expired = useMemo(
-    () => isExpired(cardInfo.month, cardInfo.year),
-    [cardInfo.month, cardInfo.year]
+  const monthValidation = useMemo(
+    () => validateMonth(cardInfo.month, maxLength),
+    [cardInfo.month, maxLength]
   );
 
-  useEffect(() => {
-    setErrorText(validateExpiration(cardInfo, maxLength));
-  }, [cardInfo.month, cardInfo.year, maxLength]);
+  const yearValidation = useMemo(
+    () => validateYear(cardInfo.year, maxLength),
+    [cardInfo.year, maxLength]
+  );
+
+  const expirationValidation = useMemo(
+    () => validateExpiration(cardInfo.month, cardInfo.year, maxLength),
+    [cardInfo.month, cardInfo.year, maxLength]
+  );
+
+  const errorMessage = useMemo(() => {
+    if (!monthValidation.isValid) return monthValidation.errorMessage;
+    if (!yearValidation.isValid) return yearValidation.errorMessage;
+    if (!expirationValidation.isValid) return expirationValidation.errorMessage;
+    return "";
+  }, [monthValidation, yearValidation, expirationValidation]);
 
   return (
     <NumberInputField>
@@ -61,7 +59,7 @@ function CardExpirationField({
           }}
           maxLength={maxLength}
           placeholder="MM"
-          extraErrorCondition={invalidMonth || expired}
+          isError={!monthValidation.isValid || !expirationValidation.isValid}
         />
         <NumberInput
           value={cardInfo.year}
@@ -70,10 +68,10 @@ function CardExpirationField({
           }}
           maxLength={maxLength}
           placeholder="YY"
-          extraErrorCondition={invalidYear || expired}
+          isError={!yearValidation.isValid || !expirationValidation.isValid}
         />
       </NumberInputContainer>
-      <ErrorText>{errorText}</ErrorText>
+      <ErrorText>{errorMessage}</ErrorText>
     </NumberInputField>
   );
 }

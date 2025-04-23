@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
-import { ERROR_MESSAGE } from "../../../constants/guide";
 import {
   NumberInputField,
   Label,
@@ -8,10 +7,10 @@ import {
   ErrorText,
 } from "../CardField.styles";
 import { CardInfo } from "../../../hooks/useCardInfo";
+import { validateSegmentLength } from "../validation";
 
 interface CardCVCFieldProps {
   cardInfo: CardInfo;
-
   handleCardInfo: (
     key: keyof CardCVCFieldProps["cardInfo"],
     value: string
@@ -24,15 +23,10 @@ function CardCVCField({
   handleCardInfo,
   maxLength,
 }: CardCVCFieldProps) {
-  const [errorText, setErrorText] = useState("");
-
-  useEffect(() => {
-    if (cardInfo.cvc.length === 0 || cardInfo.cvc.length === maxLength) {
-      setErrorText("");
-    } else {
-      setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
-    }
-  }, [cardInfo.cvc]);
+  const cvcValidation = useMemo(
+    () => validateSegmentLength(cardInfo.cvc, maxLength),
+    [cardInfo.cvc, maxLength]
+  );
 
   return (
     <NumberInputField>
@@ -41,14 +35,13 @@ function CardCVCField({
         <NumberInput
           id="cvc"
           value={cardInfo.cvc}
-          setValue={(value) => {
-            handleCardInfo("cvc", value);
-          }}
+          setValue={(value) => handleCardInfo("cvc", value)}
           maxLength={maxLength}
           placeholder="123"
+          isError={!cvcValidation.isValid}
         />
       </NumberInputContainer>
-      <ErrorText>{errorText}</ErrorText>
+      <ErrorText>{cvcValidation.errorMessage}</ErrorText>
     </NumberInputField>
   );
 }

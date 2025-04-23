@@ -1,18 +1,16 @@
+import { useMemo } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
-import { useState, useEffect } from "react";
-import { ERROR_MESSAGE } from "../../../constants/guide";
 import {
   NumberInputField,
   Label,
   NumberInputContainer,
   ErrorText,
 } from "../CardField.styles";
-import { hasInvalidSegment } from "../../../utils/hasInvalidSegment";
 import { CardInfo } from "../../../hooks/useCardInfo";
+import { validateSegmentLength } from "../validation";
 
 interface CardNumberFieldProps {
   cardInfo: CardInfo;
-
   handleCardInfo: (
     key: keyof CardNumberFieldProps["cardInfo"],
     value: string
@@ -25,19 +23,13 @@ function CardNumberField({
   handleCardInfo,
   maxLength,
 }: CardNumberFieldProps) {
-  const [errorText, setErrorText] = useState("");
-
-  useEffect(() => {
-    const numbers = [
-      cardInfo.firstNumber,
-      cardInfo.secondNumber,
-      cardInfo.thirdNumber,
-      cardInfo.fourthNumber,
+  const segmentValidations = useMemo(() => {
+    return [
+      validateSegmentLength(cardInfo.firstNumber, maxLength),
+      validateSegmentLength(cardInfo.secondNumber, maxLength),
+      validateSegmentLength(cardInfo.thirdNumber, maxLength),
+      validateSegmentLength(cardInfo.fourthNumber, maxLength),
     ];
-
-    const isInvalid = hasInvalidSegment(numbers, maxLength);
-    if (isInvalid) setErrorText(ERROR_MESSAGE.LENGTH(maxLength));
-    else setErrorText("");
   }, [
     cardInfo.firstNumber,
     cardInfo.secondNumber,
@@ -46,47 +38,35 @@ function CardNumberField({
     maxLength,
   ]);
 
+  const errorMessage =
+    segmentValidations.find((v) => !v.isValid)?.errorMessage || "";
+
   return (
     <NumberInputField>
       <Label id="number-label" htmlFor="first-number">
         카드 번호
       </Label>
       <NumberInputContainer role="group" aria-labelledby="number-label">
-        <NumberInput
-          id="first-number"
-          value={cardInfo.firstNumber}
-          setValue={(value) => {
-            handleCardInfo("firstNumber", value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.secondNumber}
-          setValue={(value) => {
-            handleCardInfo("secondNumber", value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.thirdNumber}
-          setValue={(value) => {
-            handleCardInfo("thirdNumber", value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
-        <NumberInput
-          value={cardInfo.fourthNumber}
-          setValue={(value) => {
-            handleCardInfo("fourthNumber", value);
-          }}
-          maxLength={maxLength}
-          placeholder="1234"
-        />
+        {(
+          [
+            "firstNumber",
+            "secondNumber",
+            "thirdNumber",
+            "fourthNumber",
+          ] as const
+        ).map((key, index) => (
+          <NumberInput
+            key={key}
+            id={index === 0 ? "first-number" : undefined}
+            value={cardInfo[key]}
+            setValue={(value) => handleCardInfo(key, value)}
+            maxLength={maxLength}
+            placeholder="1234"
+            isError={!segmentValidations[index].isValid}
+          />
+        ))}
       </NumberInputContainer>
-      <ErrorText>{errorText}</ErrorText>
+      <ErrorText>{errorMessage}</ErrorText>
     </NumberInputField>
   );
 }
