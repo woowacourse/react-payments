@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import * as S from './Dropdown.styles';
+import { useEffect, useRef, useState } from 'react';
 
 interface DropdownProps<T> {
   SelectedValue: T | null;
@@ -18,9 +18,25 @@ export default function Dropdown<T extends string>({
     onClick(item);
     setIsOpen(false);
   };
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!containerRef.current || !e.target) return;
+      if (e.target instanceof HTMLDivElement && !containerRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
   return (
-    <div style={{ position: 'relative' }}>
-      <S.DropdownButton selectedValue={SelectedValue} isOpen={isOpen} onClick={() => setIsOpen(true)}>
+    <S.DropdownContainer ref={containerRef}>
+      <S.DropdownButton selectedValue={SelectedValue} isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
         {SelectedValue ?? defaultValue}
       </S.DropdownButton>
       <S.DropdownItemList isOpen={isOpen}>
@@ -32,6 +48,6 @@ export default function Dropdown<T extends string>({
           </S.DropdownItem>
         ))}
       </S.DropdownItemList>
-    </div>
+    </S.DropdownContainer>
   );
 }

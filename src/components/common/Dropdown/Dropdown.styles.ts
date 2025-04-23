@@ -5,6 +5,10 @@ interface DropdownButtonProps<T> {
   selectedValue: T | null;
 }
 
+export const DropdownContainer = styled.div`
+  position: 'relative';
+`;
+
 export const DropdownButton = styled.p<DropdownButtonProps<string>>`
   ${(props) => (props.isOpen ? `border: 1px solid #000` : `border: 1px solid #acacac`)};
   border-radius: 4px;
