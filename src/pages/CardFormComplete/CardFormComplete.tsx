@@ -31,13 +31,11 @@ const CardFormComplete = () => {
         </Title>
 
         <div css={detailsStyle}>
-          <p>
-            <span css={cardDetailText}>카드 종류:</span>
-            <div css={cardDetailContainer}>
-              <span css={cardDetailText}>{cardNumber}로 시작하는</span>
-              <span css={cardDetailText}>{cardBrand.toUpperCase()}</span>
-            </div>
-          </p>
+          <span css={cardDetailText}>카드 종류:</span>
+          <div css={cardDetailContainer}>
+            <span css={cardDetailText}>{cardNumber}로 시작하는</span>
+            <span css={cardDetailText}>{cardBrand.toUpperCase()}</span>
+          </div>
         </div>
 
         <Button variant="large" onClick={handleButtonClick}>
