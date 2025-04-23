@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface DropdownInputProps {
   value: string;
@@ -11,9 +11,25 @@ interface DropdownInputProps {
 function DropdownInput({ value, setValue, options, placeholder }: DropdownInputProps) {
   const [isOpen, setIsOpen] = useState(false);
   const isPlaceholder = value === '';
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (isOpen && dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => document.removeEventListener('click', handleClickOutside);
+  });
 
   return (
-    <DropdownInputContainer isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
+    <DropdownInputContainer
+      isOpen={isOpen}
+      onClick={() => setIsOpen((prev) => !prev)}
+      ref={dropdownRef}>
       <DropdownLabel isPlaceholder={isPlaceholder}>
         {isPlaceholder ? placeholder : value}
       </DropdownLabel>
