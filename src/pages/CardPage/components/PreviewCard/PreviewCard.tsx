@@ -1,22 +1,9 @@
 import styled from '@emotion/styled';
-import { CARD_PREFIX } from '../../../../constants/settings';
+import { checkCardType } from './checkCardType';
 
 type PreviewCardProps = {
   cardNumber: string[];
   expirationDate: string[];
-};
-
-const checkCardType = (firstCardInput: string) => {
-  if (Number(firstCardInput[0]) === CARD_PREFIX.VISA) return './Visa.png';
-
-  const cardTypePrefix = Number(firstCardInput.slice(0, 2));
-  if (
-    cardTypePrefix >= CARD_PREFIX.MASTERCARD_MIN &&
-    cardTypePrefix <= CARD_PREFIX.MASTERCARD_MAX
-  ) {
-    return './Mastercard.png';
-  }
-  return null;
 };
 
 const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
