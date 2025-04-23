@@ -19,7 +19,7 @@ export interface FunnelProps<Steps extends NonEmptyArray<string>> {
 export interface StepProps<Steps extends NonEmptyArray<string>>
   extends PropsWithChildren {
   name: Steps[number];
-  onNext: VoidFunction;
+  onNext?: VoidFunction;
 }
 
 export const Funnel = <Steps extends NonEmptyArray<string>>(
