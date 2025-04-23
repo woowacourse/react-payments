@@ -4,12 +4,14 @@ import CardNumbersInput from "../CardNumbersInput/CardNumbersInput";
 import CVCInput from "../CVCInput/CVCInput";
 import styles from "./CardRegisterForm.module.css";
 import { useCardContext } from "../../contexts/CardContext";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 const CardRegisterForm = () => {
   const { isValidCardNumbers, isValidCardCompany, isValidExpiry } =
     useCardContext();
   return (
     <form>
+      <PasswordInput />
       {isValidExpiry && (
         <div className={styles.fadeInWrapper}>
           <CVCInput />

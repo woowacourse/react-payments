@@ -12,6 +12,7 @@ import {
   validateFirstCardNumbers,
   validateCardNumbers,
   validateCVC,
+  validatePassword
 } from "../domain/validate";
 import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
 import ERROR from "../constants/errorMessage";
@@ -26,6 +27,8 @@ interface CardContextType {
   setYear: React.Dispatch<React.SetStateAction<string>>;
   CVC: string;
   setCVC: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 
   expiryHelperText: string;
   expiryErrorIndex: number | null;
@@ -42,6 +45,10 @@ interface CardContextType {
   CVCHelperText: string;
   CVCInputRef: React.MutableRefObject<HTMLInputElement | null>;
   handleCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  passwordHelperText: string;
+  passwordInputRef: React.MutableRefObject<HTMLInputElement | null>;
+  handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   cardColor: string;
   setCardColor: React.Dispatch<React.SetStateAction<string>>;
@@ -63,6 +70,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [CVC, setCVC] = useState("");
+  const [password, setPassword] = useState("");
 
   const [expiryHelperText, setExpiryHelperText] = useState("");
   const [expiryErrorIndex, setExpiryErrorIndex] = useState<number | null>(null);
@@ -76,6 +84,9 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const [CVCHelperText, setCVCHelperText] = useState("");
   const CVCInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [passwordHelperText, setPasswordHelperText] = useState("");
+  const passwordInputRef = useRef<HTMLInputElement | null>(null);
 
   const [cardColor, setCardColor] = useState<string>("#333333");
 
@@ -176,12 +187,25 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setCVC(e.target.value);
-      validateCVC(e.target.value, 3);
+      validateCVC(e.target.value, CARD_VALIDATION_INFO.CVC_MAX_LENGTH);
       setCVCHelperText("");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setCVCHelperText(error.message);
         CVCInputRef.current?.focus();
+      }
+    }
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      setPassword(e.target.value);
+      validatePassword(e.target.value, CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH);
+      setPasswordHelperText("");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setPasswordHelperText(error.message);
+        passwordInputRef.current?.focus();
       }
     }
   };
@@ -197,6 +221,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         setYear,
         CVC,
         setCVC,
+        password,
+        setPassword,
         expiryHelperText,
         expiryErrorIndex,
         expiryInputRefs,
@@ -208,6 +234,9 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         CVCHelperText,
         CVCInputRef,
         handleCVC,
+        passwordHelperText,
+        passwordInputRef,
+        handlePassword,
         cardColor,
         setCardColor,
         isValidCardNumbers,

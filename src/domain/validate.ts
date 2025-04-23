@@ -48,7 +48,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
       if (!isCorrectLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index,
+          index
         );
     }
   });
@@ -76,6 +76,12 @@ export const validateYear = (year: string, length: number) => {
 };
 
 export const validateCVC = (number: string, length: number) => {
+  if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
+  if (!isCorrectLength(number, length))
+    throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
+};
+
+export const validatePassword = (number: string, length: number) => {
   if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
   if (!isCorrectLength(number, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);

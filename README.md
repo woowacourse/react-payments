@@ -15,7 +15,7 @@
 - [x] CVC 입력
   - [x] 숫자 외 입력 차단
   - [x] 세 자리 입력
-- [ ] 각 입력 완료 시 다음 필드로 자동 포커스 이동
+- [x] 각 입력 완료 시 다음 필드로 자동 포커스 이동
 
 #### 📌 카드 프리뷰
 
@@ -40,6 +40,7 @@
 - CardNumbersInput: 카드 번호 입력
 - CardExpiryInput: 유효기간 입력
 - CVCInput: CVC 번호 입력
+- PasswordInput: 비밀번호 앞 2자리 입력
 - CardCompanySelect: 카드사 셀렉트 박스
 - CardRegisterForm: 카드 등록 폼
 - Button
