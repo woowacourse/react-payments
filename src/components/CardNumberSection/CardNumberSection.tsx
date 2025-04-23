@@ -1,7 +1,8 @@
 import styles from './CardNumberSection.module.css';
-import { InputSection } from '../common/InputSection/InputSection';
+import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { CardLogo, CardNumber } from '../../types/card';
+import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 
 type Props = {
   cardNumbers: CardNumber;
@@ -46,13 +47,13 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
 
   return (
     <div className={styles.sectionContainer}>
-      <InputSection.TitleWrapper>
-        <InputSection.Title title="결제할 카드 번호를 입력해 주세요" />
-        <InputSection.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
-      </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
-        <InputSection.Label text="카드번호" />
-        <InputSection.InputWrapper<keyof CardNumber>
+      <FieldGroup.TitleWrapper>
+        <FieldGroup.Title title="결제할 카드 번호를 입력해 주세요" />
+        <FieldGroup.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
+      </FieldGroup.TitleWrapper>
+      <div className={styles.FieldGroup}>
+        <FieldGroup.Label text="카드번호" />
+        <InputWrapper<keyof CardNumber>
           fields={[
             { key: 'first', value: cardNumbers.first },
             { key: 'second', value: cardNumbers.second },
@@ -74,7 +75,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
           }}
           maxLength={4}
         />
-        <InputSection.Error message={Object.values(cardValidity).every((v) => v) ? '' : '숫자만 입력 가능합니다.'} />
+        <FieldGroup.Error message={Object.values(cardValidity).every((v) => v) ? '' : '숫자만 입력 가능합니다.'} />
       </div>
     </div>
   );

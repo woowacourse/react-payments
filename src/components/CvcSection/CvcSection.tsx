@@ -1,5 +1,6 @@
 import { validateCvcLengthError, validateNumberError } from '../../utils/CardInputValidations';
-import { InputSection } from '../common/InputSection/InputSection';
+import { FieldGroup } from '../common/FieldGroup/FieldGroup';
+import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 import styles from './CvcSection.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -23,19 +24,19 @@ export default function CvcSection({ cvc, setCvc }: Props) {
 
   return (
     <div className={styles.sectionContainer}>
-      <InputSection.TitleWrapper>
-        <InputSection.Title title="CVC 번호를 입력해 주세요" />
-      </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
-        <InputSection.Label text="CVC" />
-        <InputSection.InputWrapper<'cvc'>
+      <FieldGroup.TitleWrapper>
+        <FieldGroup.Title title="CVC 번호를 입력해 주세요" />
+      </FieldGroup.TitleWrapper>
+      <div className={styles.FieldGroup}>
+        <FieldGroup.Label text="CVC" />
+        <InputWrapper<'cvc'>
           fields={[{ key: 'cvc', value: cvc }]}
           onChange={handleChange}
           valid={{ cvc: cvcError.cvc === '' }}
           placeholders={{ cvc: '123' }}
           maxLength={3}
         />
-        {cvcError.cvc && <InputSection.Error message={cvcError.cvc} />}
+        {cvcError.cvc && <FieldGroup.Error message={cvcError.cvc} />}
       </div>
     </div>
   );
