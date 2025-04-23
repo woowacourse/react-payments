@@ -22,11 +22,12 @@ const meta = {
 export default meta;
 
 export const CardNumberFormStory = () => {
-  const { value: cardNumbers, handleChange, handleBlur } = useCardInput('cardNumber');
+  const { value: cardNumbers, errorMessage, handleChange, handleBlur } = useCardInput('cardNumber');
 
   return (
     <CardNumberForm
       cardNumbers={cardNumbers}
+      errorMessage={errorMessage}
       onCardInputChange={handleChange}
       onCardInputBlur={handleBlur}
     />
@@ -34,11 +35,12 @@ export const CardNumberFormStory = () => {
 };
 
 export const ExpireDateFormStory = () => {
-  const { value: expireNumber, handleChange, handleBlur } = useExpireDateInput();
+  const { value: expireNumber, errorMessage, handleChange, handleBlur } = useExpireDateInput();
 
   return (
     <ExpireDateForm
       expireDate={expireNumber}
+      errorMessage={errorMessage}
       onCardExpireDateInputChange={handleChange}
       onCardExpireDateInputBlur={handleBlur}
     />
@@ -46,9 +48,14 @@ export const ExpireDateFormStory = () => {
 };
 
 export const CVCFormStory = () => {
-  const { value: cvcNumber, handleChange, handleBlur } = useCardInput('CVC');
+  const { value: cvcNumber, errorMessage, handleChange, handleBlur } = useCardInput('CVC');
 
   return (
-    <CVCForm cvcNumber={cvcNumber} onCardInputChange={handleChange} onCardInputBlur={handleBlur} />
+    <CVCForm
+      cvcNumber={cvcNumber}
+      errorMessage={errorMessage}
+      onCardInputChange={handleChange}
+      onCardInputBlur={handleBlur}
+    />
   );
 };
