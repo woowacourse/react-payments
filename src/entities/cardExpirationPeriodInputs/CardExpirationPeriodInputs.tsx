@@ -17,41 +17,42 @@ type ExpirationPeriodProps = {
     expirationPeriod: ExpirationPeriod,
     date: string
   ) => void;
-  monthError: Record<"month", string>;
-  checkMonthValidation: ({
-    length,
-    value,
-    type,
-  }: {
-    length: number;
-    value: string;
-    type: "month";
-  }) => void;
-  getMonthErrorMessage: () => string | undefined;
-  yearError: Record<"year", string>;
-  checkYearValidation: ({
-    length,
-    value,
-    type,
-  }: {
-    length: number;
-    value: string;
-    type: "year";
-  }) => void;
-  getYearErrorMessage: () => string | undefined;
+  monthError: {
+    error: Record<"month", string>;
+    checkValidation: ({
+      length,
+      value,
+      type,
+    }: {
+      length: number;
+      value: string;
+      type: "month";
+    }) => void;
+    getErrorMessage: () => string | undefined;
+  };
+  yearError: {
+    error: Record<"year", string>;
+    checkValidation: ({
+      length,
+      value,
+      type,
+    }: {
+      length: number;
+      value: string;
+      type: "year";
+    }) => void;
+    getErrorMessage: () => string | undefined;
+  };
 };
 
 function CardExpirationPeriodInputs({
   expirationPeriod,
   changeExpirationPeriod,
   monthError,
-  checkMonthValidation,
-  getMonthErrorMessage,
   yearError,
-  checkYearValidation,
-  getYearErrorMessage,
 }: ExpirationPeriodProps) {
-  const errorMessage = getMonthErrorMessage() || getYearErrorMessage();
+  const errorMessage =
+    monthError.getErrorMessage() || yearError.getErrorMessage();
 
   return (
     <StyledContainer>
@@ -60,7 +61,7 @@ function CardExpirationPeriodInputs({
         <Input
           value={expirationPeriod.month}
           onChange={(e) => {
-            checkMonthValidation({
+            monthError.checkValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "month",
@@ -70,12 +71,12 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={monthError.month !== NO_ERROR}
+          isError={monthError.error.month !== NO_ERROR}
         ></Input>
         <Input
           value={expirationPeriod.year}
           onChange={(e) => {
-            checkYearValidation({
+            yearError.checkValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "year",
@@ -85,7 +86,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={yearError.year !== NO_ERROR}
+          isError={yearError.error.year !== NO_ERROR}
         />
       </StyledInputWrap>
       {errorMessage ? (
