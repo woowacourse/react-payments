@@ -48,6 +48,8 @@ interface CardContextType {
 
   isValidCardNumbers: boolean;
   setIsValidCardNumbers: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidCardCompany: boolean;
+  setIsValidCardCompany: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -76,18 +78,19 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const [cardColor, setCardColor] = useState<string>("#333333");
 
   const [isValidCardNumbers, setIsValidCardNumbers] = useState(false);
+  const [isValidCardCompany, setIsValidCardCompany] = useState(false);
 
   useEffect(() => {
     const isAllFilled = cardNumbers.every(
       (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
     );
   
-    if (isAllFilled && cardNumbersHelperText === "") {
-      setIsValidCardNumbers(true);
-    } else {
-      setIsValidCardNumbers(false);
-    }
+    if (isAllFilled && cardNumbersHelperText === "") setIsValidCardNumbers(true);
   }, [cardNumbers, cardNumbersHelperText]);
+
+  useEffect(() => {
+    if (cardColor !== "#333333") setIsValidCardCompany(true);
+  }, [cardColor]);
   
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -200,6 +203,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         setCardColor,
         isValidCardNumbers,
         setIsValidCardNumbers,
+        isValidCardCompany,
+        setIsValidCardCompany,
       }}
     >
       {children}
