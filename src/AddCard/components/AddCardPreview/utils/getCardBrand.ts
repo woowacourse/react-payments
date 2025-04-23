@@ -1,6 +1,6 @@
-import { CardBrand } from "../types";
+import { OverseaCardBrand } from "../types";
 
-const getCardBrand = (cardNumber: string): CardBrand => {
+const getOverseaCardBrand = (cardNumber: string): OverseaCardBrand => {
   if (cardNumber[0] === "4") {
     return "VISA";
   }
@@ -12,4 +12,4 @@ const getCardBrand = (cardNumber: string): CardBrand => {
 
   return "DEFAULT";
 };
-export default getCardBrand;
+export default getOverseaCardBrand;

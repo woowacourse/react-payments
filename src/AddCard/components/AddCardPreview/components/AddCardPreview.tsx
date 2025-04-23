@@ -2,7 +2,7 @@ import styles from "./AddCardPreview.module.css";
 import type { CardNumberState } from "../../AddCardForm/components/CardNumber/types";
 import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
 import Dot from "@components/Dot/Dot";
-import getCardBrand from "../utils/getCardBrand";
+import getOverseaCardBrand from "../utils/getCardBrand";
 import getTextColorForBackground from "../utils/getTextColorForBackground";
 import { CARD_BRAND_IMAGES } from "../constants";
 import { Brand } from "../../AddCardForm/components/CardBrand/types";
@@ -19,19 +19,19 @@ function AddCardPreview({
   expireDate,
   selectedBrand,
 }: AddCardPreviewProps) {
-  const cardBrand = getCardBrand(cardNumberState.first.value);
-
+  const overseaCardBrand = getOverseaCardBrand(cardNumberState.first.value);
   const cardColor = selectedBrand ? CARD_BRAND_COLOR[selectedBrand] : "#A0A0A0";
   const textColor = selectedBrand
     ? getTextColorForBackground(CARD_BRAND_COLOR[selectedBrand])
     : "#FFFFFF";
+
   return (
     <div className={styles.previewCard} style={{ backgroundColor: cardColor }}>
       <div className={styles.previewHeader}>
         <p className={styles.chip} />
-        {cardBrand !== "DEFAULT" && (
+        {overseaCardBrand !== "DEFAULT" && (
           <p>
-            <img src={CARD_BRAND_IMAGES[cardBrand]} alt="카드 브랜드" />
+            <img src={CARD_BRAND_IMAGES[overseaCardBrand]} alt="카드 브랜드" />
           </p>
         )}
       </div>
