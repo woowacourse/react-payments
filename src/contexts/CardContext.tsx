@@ -4,6 +4,7 @@ import {
   useState,
   PropsWithChildren,
   useRef,
+  useEffect,
 } from "react";
 import {
   validateMonth,
@@ -35,7 +36,7 @@ interface CardContextType {
   cardNumbersErrorIndex: number | null;
   cardNumbersInputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
   handleCardNumbers: (
-    index: number,
+    index: number
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   CVCHelperText: string;
@@ -44,13 +45,16 @@ interface CardContextType {
 
   cardColor: string;
   setCardColor: React.Dispatch<React.SetStateAction<string>>;
+
+  isValidCardNumbers: boolean;
+  setIsValidCardNumbers: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(
-    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""),
+    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill("")
   );
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -70,6 +74,21 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const CVCInputRef = useRef<HTMLInputElement | null>(null);
 
   const [cardColor, setCardColor] = useState<string>("#333333");
+
+  const [isValidCardNumbers, setIsValidCardNumbers] = useState(false);
+
+  useEffect(() => {
+    const isAllFilled = cardNumbers.every(
+      (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+    );
+  
+    if (isAllFilled && cardNumbersHelperText === "") {
+      setIsValidCardNumbers(true);
+    } else {
+      setIsValidCardNumbers(false);
+    }
+  }, [cardNumbers, cardNumbersHelperText]);
+  
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -113,15 +132,19 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         validateFirstCardNumbers(newCardNumbers[0]);
         validateCardNumbers(
           newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
+          CARD_VALIDATION_INFO.CARD_MAX_LENGTH
         );
+
         if (cardNumbersHelperText !== "") {
           cardNumbersInputRefs.current[index]?.focus();
         }
         setCardNumbersHelperText("");
         setCardNumbersErrorIndex(null);
 
-        if (value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH && index < CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS - 1) {
+        if (
+          value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH &&
+          index < CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS - 1
+        ) {
           cardNumbersInputRefs.current[index + 1]?.focus();
         }
       } catch (error: unknown) {
@@ -174,7 +197,9 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         CVCInputRef,
         handleCVC,
         cardColor,
-        setCardColor
+        setCardColor,
+        isValidCardNumbers,
+        setIsValidCardNumbers,
       }}
     >
       {children}
