@@ -15,7 +15,8 @@
   "homepage": "https://spoyodevelop.github.io/react-payments",
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^7.5.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
