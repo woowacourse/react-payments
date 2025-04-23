@@ -49,9 +49,7 @@ const CardPaymentPage = () => {
             </Funnel.Step>
 
             <Funnel.Step name={STEPS[2]}>
-              <div>
-                <CardPeriodInput onNext={() => setStep(STEPS[3])} />
-              </div>
+              <CardPeriodInput onNext={() => setStep(STEPS[3])} />
             </Funnel.Step>
 
             <Funnel.Step name={STEPS[3]} onNext={() => {}}>
