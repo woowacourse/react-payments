@@ -10,6 +10,7 @@ export type CardInfo = {
   year: string;
   cvc: string;
   cardBrand: keyof typeof CARD_BRAND_COLOR | "";
+  password: string;
 };
 
 function useCardInfo() {
@@ -22,6 +23,7 @@ function useCardInfo() {
     year: "",
     cvc: "",
     cardBrand: "",
+    password: "",
   });
 
   function handleCardInfo(key: keyof typeof cardInfo, value: string) {

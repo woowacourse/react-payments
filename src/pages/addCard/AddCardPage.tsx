@@ -9,10 +9,12 @@ import {
   CARD_NUMBER_MESSAGE,
   CVC_MESSAGE,
   EXPIRATION_MESSAGE,
+  PASSWORD_MESSAGE,
 } from "../../constants/guide";
 import { CARD_INFO_LENGTH } from "../../constants/setting";
 import useCardInfo from "../../hooks/useCardInfo";
 import CardBrandField from "../../components/InputField/CardBrand/CardBrandField";
+import PasswordField from "../../components/InputField/Password/PasswordField";
 
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
@@ -29,7 +31,16 @@ function AddCardPage() {
         expiration={[cardInfo.month, cardInfo.year]}
         cardBrand={cardInfo.cardBrand}
       ></Card>
-      <div>
+      <InputField>
+        <Announcement
+          main={PASSWORD_MESSAGE.MAIN}
+          caption={PASSWORD_MESSAGE.CAPTION}
+        />
+        <PasswordField
+          cardInfo={cardInfo}
+          handleCardInfo={handleCardInfo}
+          maxLength={CARD_INFO_LENGTH.PASSWORD}
+        />
         <Announcement main={CVC_MESSAGE.MAIN} />
         <CardCVCField
           cardInfo={cardInfo}
@@ -59,7 +70,7 @@ function AddCardPage() {
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
-      </div>
+      </InputField>
     </AppContainer>
   );
 }
@@ -70,4 +81,14 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const InputField = styled.div`
+  overflow-y: auto;
+  height: calc(100vh - 210px);
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
