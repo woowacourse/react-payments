@@ -1,9 +1,26 @@
 import styled from "styled-components";
-import { CARD_TYPE, CardType } from "../../../constants/constants";
+import {
+  CARD_COMPANY,
+  CARD_TYPE,
+  CardCompanyState,
+  CardType,
+} from "../../../constants/constants";
 
 const CARD_IMAGE = {
   [CARD_TYPE.visa]: "./visa.jpg",
   [CARD_TYPE.master]: "./master.jpg",
+};
+
+const CARD_COMPANY_COLOR_MAP = {
+  [CARD_COMPANY.none]: "#333333",
+  [CARD_COMPANY.bc]: "#F04651",
+  [CARD_COMPANY.shinhan]: "#0046FF",
+  [CARD_COMPANY.kakaobank]: "#FFE600",
+  [CARD_COMPANY.hyundai]: "#000000",
+  [CARD_COMPANY.woori]: "#007BC8",
+  [CARD_COMPANY.lotte]: "#ED1C24",
+  [CARD_COMPANY.hana]: "#009490",
+  [CARD_COMPANY.kb]: "#6A6056",
 };
 
 export const CardPreviewContainerCSS = styled.div`
@@ -14,15 +31,18 @@ export const CardPreviewContainerCSS = styled.div`
   padding-bottom: 30px;
 `;
 
-export const CardPreviewCSS = styled.div<{ $cardCompanyColor: string }>`
+export const CardPreviewCSS = styled.div<{ $cardCompany: CardCompanyState }>`
   width: 260px;
   height: 200px;
-  background-size: cover;
-  background-color: ${({ $cardCompanyColor }) => $cardCompanyColor};
   border-radius: 8px;
+  background-size: cover;
 
-  color: ${({ $cardCompanyColor }) =>
-    $cardCompanyColor === "#FFE600" ? "#000000" : "#ffffff"};
+  background-color: ${({ $cardCompany }) =>
+    CARD_COMPANY_COLOR_MAP[$cardCompany]};
+
+  color: ${({ $cardCompany }) =>
+    $cardCompany === CARD_COMPANY.kakaobank ? "#000" : "#fff"};
+
   font-size: 20px;
   letter-spacing: 2px;
 
