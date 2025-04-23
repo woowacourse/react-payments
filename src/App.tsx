@@ -4,6 +4,7 @@ import { useState } from "react";
 import CardNumber from "./components/form/CardNumber";
 import ExpirationDate from "./components/form/ExpirationDate";
 import CardCvc from "./components/form/CardCvc";
+import CardCompany from "./components/form/CardCompany";
 
 export type cardNumber = {
 	first: string;
@@ -29,11 +30,13 @@ function App() {
 		year: "",
 	});
 	const [cvcNumber, setCvcNumber] = useState<string>("");
+	const [cardCompany, setCardCompany] = useState<string>("");
 
 	return (
 		<MainContainer>
-			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
+			<Card cardNumbers={cardNumber} cardCompany={cardCompany} expirationDate={expirationDate} />
 			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
+			<CardCompany cardCompany={cardCompany} setCardCompany={setCardCompany} />
 			<ExpirationDate expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
 			<CardCvc cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
 		</MainContainer>
