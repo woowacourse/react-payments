@@ -16,9 +16,13 @@ const options = [
 
 interface CardBrandSelectorProps {
   setCardFrameColor: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedBrand: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CardBrandSelector = ({ setCardFrameColor }: CardBrandSelectorProps) => {
+const CardBrandSelector = ({
+  setCardFrameColor,
+  setSelectedBrand,
+}: CardBrandSelectorProps) => {
   const [selectedCardBrand, setSelectedCardBrand] = useState('');
 
   useEffect(() => {
@@ -33,7 +37,7 @@ const CardBrandSelector = ({ setCardFrameColor }: CardBrandSelectorProps) => {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setSelectedCardBrand(selectedValue);
-    console.log('선택된 카드 브랜드:', selectedValue);
+    setSelectedBrand(selectedValue);
   };
 
   return (
