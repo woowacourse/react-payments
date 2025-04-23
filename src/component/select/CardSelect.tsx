@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
-import useOutsideClick from "../hook/useOutsideClick";
+import useOutsideClick from "../../hook/useOutsideClick";
 
 interface CardSelectProps {
   defaultMessage: string;
@@ -13,7 +13,7 @@ const CardSelect = ({ defaultMessage, options }: CardSelectProps) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   useOutsideClick(backgroundRef, () => setIsOpen(false));
 
-  // @TODO 카드사 옵션 선택시 창 닫힘 및 기능 연결
+  // TODO 카드사 옵션 선택시 창 닫힘 및 기능 연결
   return (
     <SelectContainer ref={backgroundRef}>
       <SelectField onClick={() => setIsOpen(!isOpen)}>

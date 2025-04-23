@@ -1,72 +1,64 @@
-import Card from "../component/card/Card";
-import Description from "../component/Description";
-import styled from "styled-components";
-import { useState } from "react";
-import { justifyBrandLogo } from "../util/justifyBrandLogo";
-import CardNumberInputs from "../component/formSections/cardNumberInputs/CardNumberInputs";
-import type { CardInputProps } from "../types/CardInputTypes";
-import { useErrorMessages } from "../hook/useErrorMessages";
-import ExpirationDateInputs from "../component/formSections/expirationDateInputs/ExpirationDateInputs";
-import CVCInputs from "../component/formSections/cvcInputs/CVCInputs";
-import { getFirstErrorMessage } from "../util/getFirstErrorMessage";
-import CardBrandSelects from "../component/formSections/cardBrandSelects";
-import CardPasswordInputs from "../component/formSections/cardPasswordInputs";
-import DESCRIPTION_TEXT from "../constants/descriptionText";
+import Card from '../component/card/Card';
+import Description from '../component/Description';
+import styled from 'styled-components';
+import { justifyBrandLogo } from '../util/justifyBrandLogo';
+import { getFirstErrorMessage } from '../util/getFirstErrorMessage';
+import CardBrandSelects from '../component/select/CardBrandSelects';
+import DESCRIPTION_TEXT from '../constants/descriptionText';
+import useCardInputs from '../hook/useCardInputs';
+import CardLabeledInput from '../component/input/CardLabeledInput';
 
 const AddCard = () => {
-  const [cardInput, setCardInput] = useState<CardInputProps>({
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-    MM: null,
-    YY: null,
-    CVC: null,
-    password: null,
-  });
-
-  const { errorMessages, handleErrorMessages } = useErrorMessages();
+  const { cardInput, handleCardInput, errorMessages, isError } = useCardInputs();
+  const cardNumberErrorMessage = getFirstErrorMessage([
+    errorMessages.first,
+    errorMessages.second,
+    errorMessages.third,
+    errorMessages.fourth,
+  ]);
+  const expirationDateErrorMessage = getFirstErrorMessage([errorMessages.MM, errorMessages.YY]);
 
   return (
     <Wrap>
-      <Card
-        cardNumber={cardInput}
-        cardType={
-          cardInput.first ? justifyBrandLogo(cardInput.first) : "default"
-        }
-      />
+      <Card cardNumber={cardInput} cardType={cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'} />
       <Form>
-        <Description
-          headText={DESCRIPTION_TEXT.password.headText}
-          detailText={DESCRIPTION_TEXT.password.detailText}
-        />
-        <CardPasswordInputs
+        <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
+        <CardLabeledInput
+          id="password"
+          label="비밀번호 앞 2자리"
+          InputKeys={['password']}
           errorMessage={errorMessages.password}
-          handleErrorMessages={handleErrorMessages}
-          setCardInput={setCardInput}
+          handleCardInput={handleCardInput}
+          isError={isError}
+          placeholder="**"
+          maxLength={2}
         />
 
-        <Description
-          headText={DESCRIPTION_TEXT.CVC.headText}
-          detailText={DESCRIPTION_TEXT.CVC.detailText}
-        />
-        <CVCInputs
+        <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
+        <CardLabeledInput
+          id="CVC"
+          label="CVC"
+          InputKeys={['CVC']}
           errorMessage={errorMessages.CVC}
-          handleErrorMessages={handleErrorMessages}
-          setCardInput={setCardInput}
+          handleCardInput={handleCardInput}
+          isError={isError}
+          placeholder="123"
+          maxLength={3}
         />
 
         <Description
           headText={DESCRIPTION_TEXT.expirationDate.headText}
           detailText={DESCRIPTION_TEXT.expirationDate.detailText}
         />
-        <ExpirationDateInputs
-          errorMessage={getFirstErrorMessage([
-            errorMessages.YY,
-            errorMessages.MM,
-          ])}
-          handleErrorMessages={handleErrorMessages}
-          setCardInput={setCardInput}
+        <CardLabeledInput
+          id="expiration-date"
+          label="유효기간"
+          InputKeys={['MM', 'YY']}
+          errorMessage={expirationDateErrorMessage}
+          handleCardInput={handleCardInput}
+          isError={isError}
+          placeholder="MM/YY"
+          maxLength={2}
         />
 
         <Description
@@ -79,15 +71,15 @@ const AddCard = () => {
           headText={DESCRIPTION_TEXT.cardNumber.headText}
           detailText={DESCRIPTION_TEXT.cardNumber.detailText}
         />
-        <CardNumberInputs
-          errorMessage={getFirstErrorMessage([
-            errorMessages.first,
-            errorMessages.second,
-            errorMessages.third,
-            errorMessages.fourth,
-          ])}
-          handleErrorMessages={handleErrorMessages}
-          setCardInput={setCardInput}
+        <CardLabeledInput
+          id="card-number"
+          label="카드 번호"
+          InputKeys={['first', 'second', 'third', 'fourth']}
+          errorMessage={cardNumberErrorMessage}
+          isError={isError}
+          handleCardInput={handleCardInput}
+          placeholder="1234"
+          maxLength={4}
         />
       </Form>
     </Wrap>

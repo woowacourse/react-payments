@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
 
-export const useErrorMessages = () => {
+const useErrorMessages = () => {
   const [errorMessages, setErrorMessages] = useState<ErrorMessagesProps>({
     first: "",
     second: "",
@@ -25,3 +25,5 @@ export const useErrorMessages = () => {
 
   return { errorMessages, handleErrorMessages };
 };
+
+export default useErrorMessages;

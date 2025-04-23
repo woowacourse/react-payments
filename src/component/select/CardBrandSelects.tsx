@@ -1,5 +1,5 @@
 import FormField from "../FormField";
-import CardSelect from "../CardSelect";
+import CardSelect from "./CardSelect";
 import cardBrands from "../../constants/cardBrands";
 
 const CardBrandSelects = () => {
