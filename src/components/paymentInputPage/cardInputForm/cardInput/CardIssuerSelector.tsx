@@ -12,7 +12,13 @@ export const ISSUER_LIST = new Map([
   ['국민카드', 'kb'],
 ]);
 
-function CardIssuerSelector() {
+function CardIssuerSelector({
+  cardIssuer,
+  setCardIssuer,
+}: {
+  cardIssuer: string;
+  setCardIssuer: React.Dispatch<React.SetStateAction<string>>;
+}) {
   return (
     <>
       <InputForm
@@ -23,6 +29,8 @@ function CardIssuerSelector() {
           name='CardIssuer'
           placeholder='카드사를 선택해주세요'
           optionList={Array.from(ISSUER_LIST.keys())}
+          selectedValue={cardIssuer}
+          setSelectedValue={setCardIssuer}
         />
       </InputForm>
     </>

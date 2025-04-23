@@ -5,10 +5,17 @@ export interface SelectProps {
   name: string;
   placeholder: string;
   optionList: string[];
+  selectedValue: string;
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Select({ name, placeholder, optionList }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+function Select({
+  name,
+  placeholder,
+  optionList,
+  selectedValue,
+  setSelectedValue,
+}: SelectProps) {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
 
   function handleSelectClick() {
