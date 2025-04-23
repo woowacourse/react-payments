@@ -34,11 +34,7 @@ export default function CardInfoForm({
   CVCNumber,
   changeCVCNumber,
 }: CardInfoFormProps) {
-  const {
-    error: cardNumberError,
-    checkValidation: checkCardNumberValidation,
-    getErrorMessage: getCardNumberErrorMessage,
-  } = useError<Record<CardNumberPosition, string>>(
+  const cardNumberError = useError<Record<CardNumberPosition, string>>(
     {
       first: NO_ERROR,
       second: NO_ERROR,
@@ -62,11 +58,7 @@ export default function CardInfoForm({
     getYearValidationFns
   );
 
-  const {
-    error: CVCError,
-    checkValidation: checkCVCValidation,
-    getErrorMessage: getCVCErrorMessage,
-  } = useError<Record<"CVCNumber", string>>(
+  const CVCError = useError<Record<"CVCNumber", string>>(
     {
       CVCNumber: NO_ERROR,
     },
@@ -78,9 +70,7 @@ export default function CardInfoForm({
       <CardNumberSection
         cardNumber={cardNumber}
         changeCardNumber={changeCardNumber}
-        error={cardNumberError}
-        checkValidation={checkCardNumberValidation}
-        getErrorMessage={getCardNumberErrorMessage}
+        cardNumberError={cardNumberError}
       />
       <CardExpirationPeriodSection
         expirationPeriod={expirationPeriod}
@@ -91,9 +81,7 @@ export default function CardInfoForm({
       <CardCVCNumberSection
         CVCNumber={CVCNumber}
         changeCVCNumber={changeCVCNumber}
-        error={CVCError}
-        checkValidation={checkCVCValidation}
-        getErrorMessage={getCVCErrorMessage}
+        CVCError={CVCError}
       />
     </>
   );

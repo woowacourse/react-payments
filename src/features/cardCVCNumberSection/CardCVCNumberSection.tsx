@@ -5,25 +5,25 @@ import { StyledContainer } from "./CardCVCNumberSection.css";
 export type CardCVCNumberSectionProps = {
   CVCNumber: string;
   changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
-  error: Record<"CVCNumber", string>;
-  checkValidation: ({
-    length,
-    value,
-    type,
-  }: {
-    length: number;
-    value: string;
-    type: "CVCNumber";
-  }) => void;
-  getErrorMessage: () => string | undefined;
+  CVCError: {
+    error: Record<"CVCNumber", string>;
+    checkValidation: ({
+      length,
+      value,
+      type,
+    }: {
+      length: number;
+      value: string;
+      type: "CVCNumber";
+    }) => void;
+    getErrorMessage: () => string | undefined;
+  };
 };
 
 function CardCVCNumberSection({
   CVCNumber,
   changeCVCNumber,
-  error,
-  checkValidation,
-  getErrorMessage,
+  CVCError,
 }: CardCVCNumberSectionProps) {
   return (
     <StyledContainer>
@@ -31,9 +31,7 @@ function CardCVCNumberSection({
       <CardCVCNumberInputs
         CVCNumber={CVCNumber}
         changeCVCNumber={changeCVCNumber}
-        error={error}
-        checkValidation={checkValidation}
-        getErrorMessage={getErrorMessage}
+        CVCError={CVCError}
       />
     </StyledContainer>
   );

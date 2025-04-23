@@ -14,17 +14,19 @@ import {
 type CardNumberProps = {
   cardNumber: Record<CardNumberPosition, string>;
   changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
-  error: Record<CardNumberPosition, string>;
-  checkValidation: ({
-    length,
-    value,
-    type,
-  }: {
-    length: number;
-    value: string;
-    type: CardNumberPosition;
-  }) => void;
-  getErrorMessage: () => string | undefined;
+  cardNumberError: {
+    error: Record<CardNumberPosition, string>;
+    checkValidation: ({
+      length,
+      value,
+      type,
+    }: {
+      length: number;
+      value: string;
+      type: CardNumberPosition;
+    }) => void;
+    getErrorMessage: () => string | undefined;
+  };
 };
 
 const cardInputConfig = [
@@ -37,11 +39,9 @@ const cardInputConfig = [
 function CardNumberInputs({
   cardNumber,
   changeCardNumber,
-  error,
-  checkValidation,
-  getErrorMessage,
+  cardNumberError,
 }: CardNumberProps) {
-  const errorMessage = getErrorMessage();
+  const errorMessage = cardNumberError.getErrorMessage();
 
   return (
     <StyledContainer>
@@ -52,7 +52,7 @@ function CardNumberInputs({
             key={position}
             value={cardNumber[position]}
             onChange={(e) => {
-              checkValidation({
+              cardNumberError.checkValidation({
                 length: CARD_NUMBER_LENGTH,
                 value: e.target.value,
                 type: position,
@@ -62,7 +62,7 @@ function CardNumberInputs({
             width="25%"
             maxLength={CARD_NUMBER_LENGTH}
             placeholder="1234"
-            isError={error[position] !== NO_ERROR}
+            isError={cardNumberError.error[position] !== NO_ERROR}
           />
         ))}
       </StyledInputWrap>
