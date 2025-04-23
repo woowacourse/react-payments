@@ -10,6 +10,7 @@ import useCardCVC from './hooks/useCardCVC';
 import { useRef, useState } from 'react';
 import CardCompanySelect from './components/cardInfoForm/CardCompanySelect/CardCompanySelect';
 import { CARD_COMPANY_NAME } from './components/constants/cardCompany';
+import CardPasswordField from './components/cardInfoForm/CardPasswordField/CardPasswordField';
 
 export const CARD_IFNO_INPUT_STEP = {
   cardCompany: 'cardCompany',
@@ -73,6 +74,29 @@ function App() {
     }
   };
 
+  const [cardPassword, setCardPassword] = useState('');
+  const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState('');
+
+  const onChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const originValue = e.target.value;
+    const value = originValue.replace(/[^0-9]/g, '');
+
+    if (value.length > 2) {
+      return;
+    }
+
+    if (value.length > 0 && value.length < 2) {
+      setCardPasswordErrorMessage('잘못');
+    } else {
+      setCardPasswordErrorMessage('');
+    }
+    setCardPassword(value);
+  };
+
+  const check = () => {
+    return cardPassword.length > 0 && cardPassword.length < 2;
+  };
+
   return (
     <AppLayout>
       <CardPreview
@@ -81,9 +105,22 @@ function App() {
         cardCompany={cardCompany}
       />
       <CardForm>
-        {/* {showRef.current.password && (
-        비밀번호 입력 필드
-        )} */}
+        {showRef.current.password && (
+          <CardInputSection
+            title="비밀번호를 입력해 주세요"
+            description="앞의 2자리를 입력해주세요"
+            errorMessage={
+              cardPasswordErrorMessage ? cardPasswordErrorMessage : ''
+            }
+          >
+            <CardPasswordField
+              cardPassword={cardPassword}
+              isError={check()}
+              onChange={onChangeCardPassword}
+            />
+          </CardInputSection>
+        )}
+
         {showRef.current.cvc && (
           <CardInputSection
             title="CVC 번호를 입력해 주세요"
