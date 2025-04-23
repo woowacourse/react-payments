@@ -1,4 +1,22 @@
-const CARD_LABEL_INPUT_CONFIG = {
+import type { CardInputProps } from '../types/CardInputTypes';
+
+interface CardInputConfig {
+  id: string;
+  label: string;
+  InputKeys: (keyof CardInputProps)[];
+  placeholder: string;
+  maxLength: number;
+}
+
+interface CardLabeledInputConfig {
+  cardNumber: CardInputConfig;
+  expirationDate: CardInputConfig;
+  CVC: CardInputConfig;
+
+  password: CardInputConfig;
+}
+
+const CARD_LABEL_INPUT_CONFIG: CardLabeledInputConfig = {
   cardNumber: {
     id: 'card-number',
     label: '카드 번호',

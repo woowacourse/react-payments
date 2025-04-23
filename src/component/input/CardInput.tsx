@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import type { ComponentProps } from 'react';
 import type { CardInputProps } from '../../types/CardInputTypes';
-import type { isErrorProps } from '../../types/isErrorTypes';
 
 interface InputProps extends ComponentProps<'input'> {
   inputKey: keyof CardInputProps;
-  isError: isErrorProps;
+  isError: boolean;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
 }
 
@@ -15,15 +14,7 @@ const CardInput = ({ inputKey, isError, handleCardInput, ...restProps }: InputPr
     handleCardInput(inputKey, value);
   };
 
-  return (
-    <InputField
-      {...restProps}
-      onChange={handleChange}
-      inputMode="numeric"
-      pattern="[0-9]*"
-      $isError={isError[inputKey]}
-    />
-  );
+  return <InputField {...restProps} onChange={handleChange} inputMode="numeric" pattern="[0-9]*" $isError={isError} />;
 };
 
 const InputField = styled.input<{ $isError: boolean }>`

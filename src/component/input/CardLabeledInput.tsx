@@ -1,8 +1,11 @@
 import FormField from '../FormField';
 import CardInput from './CardInput';
 import type { CardInputProps } from '../../types/CardInputTypes';
-import type { isErrorProps } from '../../types/isErrorTypes';
 import type { ComponentProps } from 'react';
+
+interface isErrorsProps {
+  [key: string]: boolean;
+}
 
 interface CardInputGroupProps extends ComponentProps<'input'> {
   id: string;
@@ -10,7 +13,7 @@ interface CardInputGroupProps extends ComponentProps<'input'> {
   InputKeys: (keyof CardInputProps)[];
   errorMessage: string;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
-  isError: isErrorProps;
+  isErrors: isErrorsProps;
 }
 
 const CardLabeledInput = ({
@@ -19,14 +22,20 @@ const CardLabeledInput = ({
   InputKeys,
   errorMessage,
   handleCardInput,
-  isError,
+  isErrors,
   ...restProps
 }: CardInputGroupProps) => {
   return (
     <FormField label={label} errorMessage={errorMessage} id={id}>
       {InputKeys.map((key) => {
         return (
-          <CardInput key={key} inputKey={key} isError={isError} handleCardInput={handleCardInput} {...restProps} />
+          <CardInput
+            key={key}
+            inputKey={key}
+            isError={isErrors[key]}
+            handleCardInput={handleCardInput}
+            {...restProps}
+          />
         );
       })}
     </FormField>

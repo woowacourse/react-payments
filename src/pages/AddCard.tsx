@@ -7,9 +7,11 @@ import CardBrandSelects from '../component/select/CardBrandSelects';
 import DESCRIPTION_TEXT from '../constants/descriptionText';
 import useCardInputs from '../hook/useCardInputs';
 import CardLabeledInput from '../component/input/CardLabeledInput';
+import CARD_LABEL_INPUT_CONFIG from '../constants/cardLabeledInputConfig';
 
 const AddCard = () => {
   const { cardInput, handleCardInput, errorMessages, isError } = useCardInputs();
+
   const cardNumberErrorMessage = getFirstErrorMessage([
     errorMessages.first,
     errorMessages.second,
@@ -24,26 +26,18 @@ const AddCard = () => {
       <Form>
         <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
         <CardLabeledInput
-          id="password"
-          label="비밀번호 앞 2자리"
-          InputKeys={['password']}
+          {...CARD_LABEL_INPUT_CONFIG.password}
           errorMessage={errorMessages.password}
           handleCardInput={handleCardInput}
-          isError={isError}
-          placeholder="**"
-          maxLength={2}
+          isErrors={{ password: isError.password }}
         />
 
         <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
         <CardLabeledInput
-          id="CVC"
-          label="CVC"
-          InputKeys={['CVC']}
+          {...CARD_LABEL_INPUT_CONFIG.CVC}
           errorMessage={errorMessages.CVC}
           handleCardInput={handleCardInput}
-          isError={isError}
-          placeholder="123"
-          maxLength={3}
+          isErrors={{ CVC: isError.CVC }}
         />
 
         <Description
@@ -51,14 +45,13 @@ const AddCard = () => {
           detailText={DESCRIPTION_TEXT.expirationDate.detailText}
         />
         <CardLabeledInput
-          id="expiration-date"
-          label="유효기간"
-          InputKeys={['MM', 'YY']}
+          {...CARD_LABEL_INPUT_CONFIG.expirationDate}
           errorMessage={expirationDateErrorMessage}
           handleCardInput={handleCardInput}
-          isError={isError}
-          placeholder="MM/YY"
-          maxLength={2}
+          isErrors={{
+            MM: isError.MM,
+            YY: isError.YY,
+          }}
         />
 
         <Description
@@ -72,14 +65,15 @@ const AddCard = () => {
           detailText={DESCRIPTION_TEXT.cardNumber.detailText}
         />
         <CardLabeledInput
-          id="card-number"
-          label="카드 번호"
-          InputKeys={['first', 'second', 'third', 'fourth']}
+          {...CARD_LABEL_INPUT_CONFIG.cardNumber}
           errorMessage={cardNumberErrorMessage}
-          isError={isError}
+          isErrors={{
+            first: isError.first,
+            second: isError.second,
+            third: isError.third,
+            fourth: isError.fourth,
+          }}
           handleCardInput={handleCardInput}
-          placeholder="1234"
-          maxLength={4}
         />
       </Form>
     </Wrap>
