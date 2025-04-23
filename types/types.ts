@@ -5,6 +5,8 @@ export type CardNumber = {
   forth: number | null;
 };
 
+export type CardPassword = string | null;
+
 export interface CardNumberError extends Record<keyof CardNumber, boolean> {}
 
 export type CardExpirationDate = {
