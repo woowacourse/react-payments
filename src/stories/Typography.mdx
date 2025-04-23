@@ -1,0 +1,39 @@
+import { Meta, Typeset } from '@storybook/blocks';
+
+<Meta title="foundations/Typography" />
+
+export const typography = {
+  type: {
+    primary: '"Pretendard',
+  },
+  weight: {
+    regular: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+  },
+  size: {
+    Caption: 14,
+    Body: 18,
+    Title: 24,
+  },
+};
+
+export const SampleText = '페이먼츠 스토리북 입니다.';
+
+# Typography
+
+**Font:** Pretendard
+
+**Weights:** 400(regular), 500(medium), 700(bold)
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.Caption),
+    Number(typography.size.Body),
+    Number(typography.size.Title),
+  ]}
+  fontWeight={typography.weight.medium}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
