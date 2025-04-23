@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import * as S from '../../../features/cardInfo/ui/CardInfoSection.styles';
 import { CustomInput } from '../../../shared/ui/customInput.styles';
-import { cardNumberValidator } from '../../cardInfo/validation/cardInfoValidator';
+import { cardNumberValidator } from '../../../features/cardInfo/validation/cardInfoValidator';
 import Preview from './Preview';
 
 const meta: Meta<typeof Preview> = {

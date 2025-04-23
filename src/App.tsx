@@ -1,5 +1,5 @@
 import './App.css';
-import Preview from './features/preview/ui/Preview';
+import Preview from './widgets/preview/ui/Preview';
 import CardInfoContainer from './features/cardInfo/ui/CardInfoContainer';
 import useCardInfo from './features/cardInfo/hooks/useCardInfo';
 
