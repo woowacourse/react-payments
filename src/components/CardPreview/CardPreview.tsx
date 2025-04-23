@@ -2,16 +2,11 @@ import * as S from './CardPreview.styles';
 import MasterCard from '../logo/MasterCard';
 import VisaCard from '../logo/VisaCard';
 import { MASKING } from '../../constants';
-import { CardBrandType } from '../CardBrand/CardBrand';
+import { getCardType } from '../../utils';
+import { CardPreviewProps } from './type';
 
-interface CardPreviewProps {
-  cardType: 'visa' | 'master' | '';
-  cardNumber: Record<string, string>;
-  cardExpirationDate: Record<string, string>;
-  CardBrandType: CardBrandType | null;
-}
-
-export default function CardPreview({ cardType, cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
+export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
+  const cardType = getCardType(cardNumber.first);
   return (
     <S.CardPreviewWrapper CardBrandType={CardBrandType}>
       <S.CardPreviewTop>
@@ -20,14 +15,14 @@ export default function CardPreview({ cardType, cardNumber, cardExpirationDate, 
         {cardType === 'master' && <MasterCard width={36} />}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
-        <S.CardPreviewMiddleText>{cardNumber.first}</S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText>{cardNumber.second}</S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.first}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.second}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>
           {Array.from({ length: cardNumber.third.length }, () => {
             return MASKING;
           })}
         </S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>
           {Array.from({ length: cardNumber.fourth.length }, () => {
             return MASKING;
           })}

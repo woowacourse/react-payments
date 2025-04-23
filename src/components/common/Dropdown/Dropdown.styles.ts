@@ -6,7 +6,7 @@ interface DropdownButtonProps<T> {
 }
 
 export const DropdownContainer = styled.div`
-  position: 'relative';
+  position: relative;
 `;
 
 export const DropdownButton = styled.p<DropdownButtonProps<string>>`

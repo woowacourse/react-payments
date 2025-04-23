@@ -3,33 +3,13 @@ import Label from '../common/Label/Label';
 import Input from '../common/Input/Input';
 import Spacing from '../common/Spacing/Spacing';
 import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
-import { Dispatch, SetStateAction } from 'react';
-import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../constants';
-
-interface CardCVCNumberProps {
-  cardCVCNumber: string;
-  setCardCVCNumber: Dispatch<SetStateAction<string>>;
-  cardCVCNumberErrorMessage: string;
-  setCardCVCNumberErrorMessage: Dispatch<SetStateAction<string>>;
-}
+import { CardCVCNumberProps } from './type';
 
 export default function CardCVCNumber({
   cardCVCNumber,
-  setCardCVCNumber,
   cardCVCNumberErrorMessage,
-  setCardCVCNumberErrorMessage,
+  handleCardCVCNumberInputChange,
 }: CardCVCNumberProps) {
-  const handleInputChange = (value: string) => {
-    setCardCVCNumber(value);
-
-    if (ONLY_NUMBER_PATTERN.test(value)) {
-      setCardCVCNumberErrorMessage('');
-      return;
-    }
-
-    setCardCVCNumberErrorMessage(ERROR_MESSAGE.onlyNumber);
-  };
-
   return (
     <div>
       <Title>CVC 번호를 입력해 주세요</Title>
@@ -43,7 +23,7 @@ export default function CardCVCNumber({
           maxLength={3}
           id="card-cvc-number"
           value={cardCVCNumber}
-          onChange={(event) => handleInputChange(event.target.value)}
+          onChange={(event) => handleCardCVCNumberInputChange(event.target.value)}
           isError={cardCVCNumberErrorMessage !== ''}
         />
       </div>

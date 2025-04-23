@@ -10,7 +10,6 @@ export const StyledInput = styled.input<{ isError: boolean }>`
   }
   &:focus-visible {
     outline: none;
-    border-color: #000;
+    border: ${(props) => (props.isError ? '1px solid #f00' : '1px solid #000')};
   }
-  ${(props) => props.isError && `outline: #f00`};
 `;
