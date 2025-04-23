@@ -6,9 +6,15 @@ import styles from "./CardRegisterForm.module.css";
 import { useCardContext } from "../../contexts/CardContext";
 
 const CardRegisterForm = () => {
-  const { isValidCardNumbers, isValidCardCompany } = useCardContext();
+  const { isValidCardNumbers, isValidCardCompany, isValidExpiry } =
+    useCardContext();
   return (
     <form>
+      {isValidExpiry && (
+        <div className={styles.fadeInWrapper}>
+          <CVCInput />
+        </div>
+      )}
       {isValidCardCompany && (
         <div className={styles.fadeInWrapper}>
           <CardExpiryInput />
@@ -20,9 +26,6 @@ const CardRegisterForm = () => {
         </div>
       )}
       <CardNumbersInput />
-      {/* <CardCompanySelect />
-      <CardExpiryInput />
-      <CVCInput /> */}
     </form>
   );
 };
