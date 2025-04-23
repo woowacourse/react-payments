@@ -11,12 +11,16 @@ import CardBrandDropdown, {
   type BrandDropdownProps,
 } from "./CardBrand/components/CardBrandDropdown";
 import { FlowStep, STEP_ORDER } from "../../../hooks/useCardRegistrationFlow";
+import PasswordInputs, {
+  PasswordInputProps,
+} from "./Password/components/PasswordInputs";
 
 interface AddCardFormProps {
   addCardState: CardNumberInputsProps &
     CardExpireDateInputsProps &
     CVCInputsProps &
-    BrandDropdownProps;
+    BrandDropdownProps &
+    PasswordInputProps;
 
   currentStep: FlowStep;
 }
@@ -33,6 +37,8 @@ function AddCardForm({
     handleCVCChange,
     selectedBrand,
     setSelectedBrand,
+    passwordState,
+    handlePasswordChange,
   },
   currentStep,
 }: AddCardFormProps) {
@@ -84,6 +90,17 @@ function AddCardForm({
           title="CVC 번호를 입력해 주세요"
           InputComponents={
             <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />
+          }
+        />
+      )}
+      {currentIndex >= 4 && (
+        <CardInputBox
+          title="비밀번호를 입력해주세요"
+          InputComponents={
+            <PasswordInputs
+              passwordState={passwordState}
+              handlePasswordChange={handlePasswordChange}
+            />
           }
         />
       )}

@@ -3,12 +3,14 @@ import useControlledCardNumber from "../components/AddCardForm/components/CardNu
 import useControlledExpireDate from "../components/AddCardForm/components/ExpireDate/hooks/useControlledExpireDate";
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
 import useControlledSelectedCardBrand from "../components/AddCardForm/components/CardBrand/hooks/useControlledSelectCardBrand";
+import useControlledPassword from "../components/AddCardForm/components/Password/hooks/useControlledPassword";
 
 export type FlowStep =
   | "CARD_NUMBER"
   | "CARD_BRAND"
   | "EXPIRE_DATE"
   | "CVC"
+  | "PASSWORD"
   | "COMPLETE";
 
 export const STEP_ORDER: FlowStep[] = [
@@ -16,6 +18,7 @@ export const STEP_ORDER: FlowStep[] = [
   "CARD_BRAND",
   "EXPIRE_DATE",
   "CVC",
+  "PASSWORD",
   "COMPLETE",
 ];
 
@@ -24,6 +27,7 @@ type Slices = {
   brand: ReturnType<typeof useControlledSelectedCardBrand>;
   expire: ReturnType<typeof useControlledExpireDate>;
   cvc: ReturnType<typeof useControlledCVC>;
+  password: ReturnType<typeof useControlledPassword>;
 };
 
 export const validators = [
@@ -43,6 +47,9 @@ export const validators = [
 
   ({ cvc }: Slices) =>
     !cvc.CVCState.errorMessage && cvc.CVCState.value.length === 3,
+  ({ password }: Slices) =>
+    !password.passwordState.errorMessage &&
+    password.passwordState.value.length === 2,
 ];
 
 const useCardRegistrationFlow = () => {
@@ -50,10 +57,11 @@ const useCardRegistrationFlow = () => {
   const brand = useControlledSelectedCardBrand();
   const expire = useControlledExpireDate();
   const cvc = useControlledCVC();
+  const password = useControlledPassword();
 
   const maxReachedStep = useRef(0);
 
-  const slices = { card, brand, expire, cvc };
+  const slices = { card, brand, expire, cvc, password };
 
   const { currentStep, allValid } = useMemo(() => {
     let validAll = true;
@@ -83,10 +91,11 @@ const useCardRegistrationFlow = () => {
     brand.selectedBrand,
     expire.expireDate,
     cvc.CVCState,
+    password.passwordState,
   ]);
 
   return {
-    state: { ...card, ...brand, ...expire, ...cvc },
+    state: { ...card, ...brand, ...expire, ...cvc, ...password },
     previewState: {
       cardNumberState: card.cardNumberState,
       selectedBrand: brand.selectedBrand,
