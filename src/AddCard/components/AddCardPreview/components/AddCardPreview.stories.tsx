@@ -4,7 +4,7 @@ import { INITIAL_EXPIRE_DATE_STATE } from "../../AddCardForm/components/ExpireDa
 import { INITIAL_CARD_NUMBER_STATE } from "../../AddCardForm/components/CardNumber/constants";
 
 const meta = {
-  title: "Component/AddCardPreview",
+  title: "Component/Preview/AddCardPreview",
   component: AddCardPreview,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
@@ -60,5 +60,20 @@ export const MasterCard: Story = {
       MM: { value: "12", errorMessage: "" },
       YY: { value: "25", errorMessage: "" },
     },
+  },
+};
+export const KakaoCard: Story = {
+  args: {
+    cardNumberState: {
+      first: { value: "5134", errorMessage: "" },
+      second: { value: "1234", errorMessage: "" },
+      third: { value: "1234", errorMessage: "" },
+      fourth: { value: "1234", errorMessage: "" },
+    },
+    expireDate: {
+      MM: { value: "12", errorMessage: "" },
+      YY: { value: "25", errorMessage: "" },
+    },
+    selectedBrand: "카카오뱅크",
   },
 };
