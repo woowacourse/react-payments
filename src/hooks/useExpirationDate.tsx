@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { isValidLength, isValidMonth } from "../validation/validate";
+import { isValidMonth } from "../validation/validate";
 import { replaceAt } from "./replaceAt";
 
-const CONSTANT_USE_EXPIRATION_DATE = {
-  IS_VALID_LENGTH_ERROR: "2자리까지 입력 가능합니다.",
-  MONTH_RANGE_ERROR: "1부터 12 사이의 숫자를 입력하세요.",
+export const USE_EXPIRATION_DATE = {
+  INVALID_LENGTH: "2자리까지 입력 가능합니다.",
+  INVALID_MONTH_RANGE: "1부터 12 사이의 숫자를 입력하세요.",
   MAX_LENGTH: 2,
 } as const;
 

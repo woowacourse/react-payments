@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { isValidLength } from "../validation/validate";
 import { replaceAt } from "./replaceAt";
 
-const CONSTANT_USE_CARD_NUMBER = {
-  IS_VALID_LENGTH_ERROR: "카드 번호는 4자리 숫자여야 합니다.",
+const CARD_RULE = {
+  INVALID_CARD_NUMBER_LENGTH: "카드 번호는 4자리 숫자여야 합니다.",
   CARD_NUMBER_MAX_LENGTH: 4,
   CARD_TYPE_MAX_LENGTH: 2,
 } as const;
@@ -53,7 +52,7 @@ export default function useCardNumbers(): UseCardNumbersReturn {
     ) {
       replaceAt({
         array: cardNumbersError,
-        newValue: CONSTANT_USE_CARD_NUMBER.IS_VALID_LENGTH_ERROR,
+        newValue: CARD_RULE.INVALID_CARD_NUMBER_LENGTH,
         index: index,
         setState: setError,
       });

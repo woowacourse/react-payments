@@ -6,7 +6,7 @@ interface Props {
   useSuffix?: boolean;
 }
 
-const CONSTANT_INPUT_TITLE = " 입력해 주세요.";
+const TITLE = " 입력해 주세요.";
 
 export default function InputText({ inputValue, variant, useSuffix }: Props) {
   const className = styles[`input-${variant}`];
@@ -16,7 +16,7 @@ export default function InputText({ inputValue, variant, useSuffix }: Props) {
       <div className={className}>
         <h2>
           {inputValue}
-          {useSuffix !== false && CONSTANT_INPUT_TITLE}
+          {useSuffix !== false && TITLE}
         </h2>
       </div>
     );

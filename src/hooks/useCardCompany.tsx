@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const CARD_COMPANY = [
+export const CARD_COMPANY_INFO = [
   { value: "bc", label: "BC카드", color: "#F04651" },
   { value: "shinhan", label: "신한카드", color: "#0046FF" },
   { value: "kakao", label: "카카오뱅크", color: "#FFE600" },
@@ -11,7 +11,7 @@ export const CARD_COMPANY = [
   { value: "kb", label: "국민카드", color: "#6A6056" },
 ] as const;
 
-export type CardCompanyType = (typeof CARD_COMPANY)[number];
+export type CardCompanyType = (typeof CARD_COMPANY_INFO)[number];
 
 export default function useCardCompany() {
   const [selectedCompany, setSelectedCompany] =

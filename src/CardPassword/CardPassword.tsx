@@ -8,11 +8,11 @@ interface CardPasswordProps {
   errorMessage: string;
 }
 
-const CONSTANT_CARD_PASSWORD = {
-  INPUT_TITLE: "비밀번호를",
-  INPUT_DESCRIPTION: "앞의 2자리를 입력해주세요",
-  INPUT_SUBTITLE: "비밀번호 앞 2자리",
-  PLACE_HOLDER: "",
+const CARD_PASSWORD = {
+  TITLE: "비밀번호를",
+  DESCRIPTION: "앞의 2자리를 입력해주세요",
+  SUBTITLE: "비밀번호 앞 2자리",
+  PLACEHOLDER: "",
 } as const;
 
 export default function CardPassword({
@@ -22,21 +22,12 @@ export default function CardPassword({
 }: CardPasswordProps) {
   return (
     <section>
-      <InputText
-        inputValue={CONSTANT_CARD_PASSWORD.INPUT_TITLE}
-        variant="title"
-      />
-      <InputText
-        inputValue={CONSTANT_CARD_PASSWORD.INPUT_DESCRIPTION}
-        variant="description"
-      />
-      <InputText
-        inputValue={CONSTANT_CARD_PASSWORD.INPUT_SUBTITLE}
-        variant="subtitle"
-      />
+      <InputText inputValue={CARD_PASSWORD.TITLE} variant="title" />
+      <InputText inputValue={CARD_PASSWORD.DESCRIPTION} variant="description" />
+      <InputText inputValue={CARD_PASSWORD.SUBTITLE} variant="subtitle" />
       <CardNumberInput
         onChange={handleChange}
-        placeholder={CONSTANT_CARD_PASSWORD.PLACE_HOLDER}
+        placeholder={CARD_PASSWORD.PLACEHOLDER}
         value={password}
         errorMessage={errorMessage}
         type="password"

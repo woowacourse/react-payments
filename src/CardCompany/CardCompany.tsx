@@ -1,4 +1,4 @@
-import { CARD_COMPANY, CardCompanyType } from "../hooks/useCardCompany";
+import { CARD_COMPANY_INFO, CardCompanyType } from "../hooks/useCardCompany";
 import { useState } from "react";
 import InputText from "../components/InputText/InputText";
 import inputStyles from "../components/Input/CardNumberInput.module.css";
@@ -9,6 +9,11 @@ interface Props {
   selectedCompany: CardCompanyType | null;
   selectCompany: (company: CardCompanyType) => void;
 }
+const CARD_COMPANY = {
+  TITLE: "카드사를 선택해 주세요.",
+  DESCRIPTION: "현재 국내 카드사만 가능합니다.",
+  PLACEHOLDER: "카드사를 선택해 주세요.",
+} as const;
 
 export default function CardCompanyPicker({
   selectedCompany,
@@ -28,20 +33,17 @@ export default function CardCompanyPicker({
   return (
     <section className={styles["card-company"]}>
       <InputText
-        inputValue="카드사를 선택해 주세요."
+        inputValue={CARD_COMPANY.TITLE}
         variant="title"
         useSuffix={false}
       />
-      <InputText
-        inputValue="현재 국내 카드사만 가능합니다."
-        variant="description"
-      />
+      <InputText inputValue={CARD_COMPANY.DESCRIPTION} variant="description" />
       <button
         className={`${inputStyles["input-number"]} ${styles["dropdown-button"]}`}
         onClick={toggleDropdown}
       >
         <span className={selectedCompany ? "" : styles["placeholder-label"]}>
-          {selectedCompany ? selectedCompany.label : "카드사를 선택해 주세요"}
+          {selectedCompany ? selectedCompany.label : CARD_COMPANY.PLACEHOLDER}
         </span>
         <img
           src={ChevronUp}
@@ -52,7 +54,7 @@ export default function CardCompanyPicker({
 
       {isOpen && (
         <ul className={styles["input-number"]}>
-          {CARD_COMPANY.map((company) => (
+          {CARD_COMPANY_INFO.map((company) => (
             <li
               key={company.value}
               onClick={() => handleSelect(company)}

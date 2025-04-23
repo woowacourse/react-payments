@@ -10,10 +10,10 @@ interface Props {
   errorMessage: string[];
 }
 
-const CONSTANT_CARD_NUMBER = {
-  INPUT_TITLE: "결제할 카드 번호를",
-  INPUT_DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
-  INPUT_SUBTITLE: "카드 번호",
+const CARD_NUMBER = {
+  TITLE: "결제할 카드 번호를",
+  DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
+  SUBTITLE: "카드 번호",
   MAX_LENGTH: 4,
 } as const;
 
@@ -26,18 +26,9 @@ export default function CardNumber({
 
   return (
     <section className="card-company">
-      <InputText
-        inputValue={CONSTANT_CARD_NUMBER.INPUT_TITLE}
-        variant="title"
-      />
-      <InputText
-        inputValue={CONSTANT_CARD_NUMBER.INPUT_DESCRIPTION}
-        variant="description"
-      />
-      <InputText
-        inputValue={CONSTANT_CARD_NUMBER.INPUT_SUBTITLE}
-        variant="subtitle"
-      />
+      <InputText inputValue={CARD_NUMBER.TITLE} variant="title" />
+      <InputText inputValue={CARD_NUMBER.DESCRIPTION} variant="description" />
+      <InputText inputValue={CARD_NUMBER.SUBTITLE} variant="subtitle" />
       <div className={styles["card-number__input"]}>
         {[0, 1, 2, 3].map((index) => (
           <CardNumberInput

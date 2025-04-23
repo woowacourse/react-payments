@@ -9,12 +9,12 @@ interface CardExpirationDateProps {
   errorMessage: string[];
 }
 
-const CONSTANT_EXPIRATION_DATE = {
-  INPUT_TITLE: "유효 기간을",
-  INPUT_DESCRIPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
-  INPUT_SUBTITLE: "유효기간",
-  PLACE_HOLDER_YEAR: "YY",
-  PLACE_HOLDER_MONTH: "MM",
+const EXPIRATION_DATE = {
+  TITLE: "카드 유효기간을",
+  DESCRIPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
+  SUBTITLE: "유효기간",
+  PLACEHOLDER_YEAR: "YY",
+  PLACEHOLDER_MONTH: "MM",
 } as const;
 
 export default function CardExpirationDate({
@@ -24,18 +24,12 @@ export default function CardExpirationDate({
 }: CardExpirationDateProps) {
   return (
     <section className="card-expiration-date">
+      <InputText inputValue={EXPIRATION_DATE.TITLE} variant="title" />
       <InputText
-        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_TITLE}
-        variant="title"
-      />
-      <InputText
-        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_DESCRIPTION}
+        inputValue={EXPIRATION_DATE.DESCRIPTION}
         variant="description"
       />
-      <InputText
-        inputValue={CONSTANT_EXPIRATION_DATE.INPUT_SUBTITLE}
-        variant="subtitle"
-      />
+      <InputText inputValue={EXPIRATION_DATE.SUBTITLE} variant="subtitle" />
       <div className={styles["card-number__input"]}>
         <CardNumberInput
           onChange={(value) => handleChange(value, 0)}
