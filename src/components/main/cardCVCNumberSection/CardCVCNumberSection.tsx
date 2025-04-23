@@ -1,7 +1,7 @@
-import SectionTitle from '../sectionTitle/SectionTitle';
+import SectionTitle from '../../common/sectionTitle/SectionTitle';
 import CardCVCNumberInputs from '../cardCVCNumberInputs/CardCVCNumberInputs';
 import styled from 'styled-components';
-import { CardCVCNumberSectionProps } from '../../types/index.types';
+import { CardCVCNumberSectionProps } from '../../../types/index.types';
 
 const StyledContainer = styled.div`
   display: flex;

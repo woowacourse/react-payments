@@ -1,8 +1,8 @@
-import Input from '../input/Input';
-import { CardCVCNumberSectionProps } from '../../types/index.types';
-import { isValidLength, isValidNumber } from '../../util/validation';
-import { NO_ERROR } from '../../constants/constant';
-import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
+import Input from '../../common/input/Input';
+import { CardCVCNumberSectionProps } from '../../../types/index.types';
+import { isValidLength, isValidNumber } from '../../../util/validation';
+import { NO_ERROR } from '../../../constants/constant';
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../../styled-component/inputs';
 
 const CVC_NUMBER_LENGTH = 3;
 

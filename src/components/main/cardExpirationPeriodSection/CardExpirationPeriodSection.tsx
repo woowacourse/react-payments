@@ -1,7 +1,7 @@
-import SectionTitle from '../sectionTitle/SectionTitle';
+import SectionTitle from '../../common/sectionTitle/SectionTitle';
 import CardExpirationPeriodInputs from '../cardExpirationPeriodInputs/CardExpirationPeriodInputs';
 import styled from 'styled-components';
-import { ExpirationPeriodProps } from '../../types/index.types';
+import { ExpirationPeriodProps } from '../../../types/index.types';
 
 const StyledContainer = styled.div`
   display: flex;

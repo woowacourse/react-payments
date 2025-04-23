@@ -1,9 +1,9 @@
-import Input from '../input/Input';
-import { CardNumber, CardNumberProps } from '../../types/index.types';
-import { isValidLength, isValidNumber } from '../../util/validation';
-import { NO_ERROR } from '../../constants/constant';
-import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
-import autoFocusToNext from '../../util/autoFocus';
+import Input from '../../common/input/Input';
+import { CardNumber, CardNumberProps } from '../../../types/index.types';
+import { isValidLength, isValidNumber } from '../../../util/validation';
+import { NO_ERROR } from '../../../constants/constant';
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../../styled-component/inputs';
+import autoFocusToNext from '../../../util/autoFocus';
 
 const CARD_NUMBER_LENGTH = 4;
 

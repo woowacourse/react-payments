@@ -6,8 +6,9 @@ import CardNumberSection from '../cardNumberSection/CardNumberSection';
 import CardExpirationPeriodSection from '../cardExpirationPeriodSection/CardExpirationPeriodSection';
 import CardCVCNumberSection from '../cardCVCNumberSection/CardCVCNumberSection';
 import CardPasswordSection from '../cardPasswordSection/CardPasswordSection';
-import { INITIALIZE_VALUE } from '../../constants/constant';
-import { ExpirationPeriod, Position } from '../../types/index.types';
+import { INITIALIZE_VALUE } from '../../../constants/constant';
+import { ExpirationPeriod, Position } from '../../../types/index.types';
+import Button from '../../common/button/Button';
 
 const StyledFrame = styled.div`
   display: inline-flex;
@@ -105,6 +106,7 @@ function AddNewCardForm() {
       {inputOrder >= 0 && (
         <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
       )}
+      <Button />
     </StyledFrame>
   );
 }

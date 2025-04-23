@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { CardNumber, ExpirationPeriod } from '../../types/index.types';
-import { INITIALIZE_VALUE } from '../../constants/constant';
+import { CardNumber, ExpirationPeriod } from '../../../types/index.types';
+import { INITIALIZE_VALUE } from '../../../constants/constant';
 
 const StyledContainer = styled.div<{ backgroundColor?: string }>`
   background-color: ${(props) => props.backgroundColor || '#333333'};

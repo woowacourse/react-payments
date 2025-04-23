@@ -1,9 +1,9 @@
-import Input from '../input/Input';
-import { ExpirationPeriod, ExpirationPeriodProps } from '../../types/index.types';
-import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from '../../util/validation';
-import { NO_ERROR, EXPIRATION_PERIOD } from '../../constants/constant';
-import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
-import autoFocusToNext from '../../util/autoFocus';
+import Input from '../../common/input/Input';
+import { ExpirationPeriod, ExpirationPeriodProps } from '../../../types/index.types';
+import { isValidLength, isValidMonthRange, isValidNumber, isValidYearRange } from '../../../util/validation';
+import { NO_ERROR, EXPIRATION_PERIOD } from '../../../constants/constant';
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../../styled-component/inputs';
+import autoFocusToNext from '../../../util/autoFocus';
 
 const EXPIRATION_PERIOD_LENGTH = 2;
 

@@ -1,7 +1,7 @@
-import SectionTitle from '../sectionTitle/SectionTitle';
+import SectionTitle from '../../common/sectionTitle/SectionTitle';
 import CardNumberInputs from '../cardNumberInputs/CardNumberInputs';
 import styled from 'styled-components';
-import { CardNumberProps } from '../../types/index.types';
+import { CardNumberProps } from '../../../types/index.types';
 
 const StyledContainer = styled.div`
   display: flex;

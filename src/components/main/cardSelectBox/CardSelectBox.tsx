@@ -1,6 +1,6 @@
-import { CARD_BRANDS } from '../../constants/cardBrands';
-import { StyledContainer, StyledInputWrap } from '../../styled-component/inputs';
-import SelectBox from '../selectBox/SelectBox';
+import { CARD_BRANDS } from '../../../constants/cardBrands';
+import { StyledContainer, StyledInputWrap } from '../../../styled-component/inputs';
+import SelectBox from '../../common/selectBox/SelectBox';
 
 type CardSelectBoxProps = {
   onSelectCardCompany: (name: string, color: string) => void;

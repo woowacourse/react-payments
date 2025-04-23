@@ -14,5 +14,6 @@ export const Default: Story = {
   args: {
     expirationPeriod: { month: '12', year: '23' },
     changeExpirationPeriod: () => alert('변경'),
+    viewNextInput: () => alert('변경'),
   },
 };

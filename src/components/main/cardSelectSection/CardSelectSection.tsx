@@ -1,5 +1,5 @@
-import SectionTitle from '../sectionTitle/SectionTitle';
-import { StyledContainer } from '../../styled-component/inputs';
+import SectionTitle from '../../common/sectionTitle/SectionTitle';
+import { StyledContainer } from '../../../styled-component/inputs';
 import CardSelectBox from '../cardSelectBox/CardSelectBox';
 
 type CardSelectBoxProps = {

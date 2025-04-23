@@ -1,8 +1,8 @@
-import Input from '../input/Input';
-import { isValidLength, isValidNumber } from '../../util/validation';
-import { NO_ERROR } from '../../constants/constant';
-import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../styled-component/inputs';
-import { CardPasswordSectionProps } from '../../types/index.types';
+import Input from '../../common/input/Input';
+import { isValidLength, isValidNumber } from '../../../util/validation';
+import { NO_ERROR } from '../../../constants/constant';
+import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../../styled-component/inputs';
+import { CardPasswordSectionProps } from '../../../types/index.types';
 
 const PASSWORD_NUMBER_LENGTH = 2;
 
@@ -45,7 +45,7 @@ function CardPasswordInputs({ password, changePassword }: CardPasswordSectionPro
           isPassword={true}
           width="100%"
           maxLength={PASSWORD_NUMBER_LENGTH}
-          placeholder="123"
+          placeholder=""
         />
       </StyledInputWrap>
       <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>

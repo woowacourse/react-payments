@@ -1,7 +1,7 @@
-import SectionTitle from '../sectionTitle/SectionTitle';
+import SectionTitle from '../../common/sectionTitle/SectionTitle';
 import styled from 'styled-components';
 
-import { CardPasswordSectionProps } from '../../types/index.types';
+import { CardPasswordSectionProps } from '../../../types/index.types';
 import CardPasswordInputs from '../cardPasswordInputs/CardPasswordInputs';
 
 const StyledContainer = styled.div`

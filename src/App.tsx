@@ -1,6 +1,6 @@
 import './App.css';
 import styled from 'styled-components';
-import AddNewCardForm from './components/addNewCardForm/AddNewCardForm';
+import AddNewCardForm from './components/main/addNewCardForm/AddNewCardForm';
 
 const StyledApp = styled.div`
   display: flex;
