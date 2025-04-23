@@ -15,6 +15,7 @@ import {
 import { getCVCValidationFns } from "../../entities/cardCVCNumberInputs/CardCVCNumberInputs.domain";
 import CardTypeSection from "../cardTypeSection/CardTypeSection";
 import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
+import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
 
 type CardInfoFormProps = {
   cardNumber: Record<CardNumberPosition, string>;
@@ -97,6 +98,7 @@ export default function CardInfoForm({
         changeCVCNumber={changeCVCNumber}
         CVCError={CVCError}
       />
+      <CardSubmitButton />
     </>
   );
 }
