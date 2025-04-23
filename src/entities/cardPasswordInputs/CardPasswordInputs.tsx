@@ -1,20 +1,24 @@
 import { StyledContainer, StyledInputWrap } from "../inputs.css";
 import Input from "../../shared/input/Input";
 
-export default function CardPasswordInputs() {
+type CardPasswordInputsProps = {
+  password: {
+    values: { password: string };
+    changeValues: (type: "password", password: string) => void;
+  };
+};
+
+export default function CardPasswordInputs({
+  password,
+}: CardPasswordInputsProps) {
   return (
     <StyledContainer>
       <label htmlFor="">비밀번호 앞 2자리</label>
       <StyledInputWrap>
         <Input
-          value={""}
+          value={password.values.password}
           onChange={(e) => {
-            // changeCVCNumber("CVCNumber", e.target.value);
-            // CVCError.checkValidation({
-            //   length: CVC_NUMBER_LENGTH,
-            //   value: e.target.value,
-            //   type: "CVCNumber",
-            // });
+            password.changeValues("password", e.target.value);
           }}
           isError={false}
           width="100%"
@@ -23,9 +27,6 @@ export default function CardPasswordInputs() {
           type="password"
         />
       </StyledInputWrap>
-      {/* {errorMessage ? (
-        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-      ) : null} */}
     </StyledContainer>
   );
 }

@@ -31,6 +31,10 @@ function App() {
     CVCNumber: INITIALIZE_VALUE,
   });
 
+  const password = useCardInfo({
+    password: INITIALIZE_VALUE,
+  });
+
   return (
     <StyledApp>
       <StyledFrame>
@@ -45,6 +49,7 @@ function App() {
           changeExpirationPeriod={changeExpirationPeriod}
           CVCNumber={CVCNumber}
           changeCVCNumber={changeCVCNumber}
+          password={password}
         />
       </StyledFrame>
     </StyledApp>
