@@ -38,6 +38,8 @@ function Payments() {
 
   const [cardType, setCardType] = useState<CardType>(null);
 
+  const [step, setStep] = useState(1);
+
   return (
     <PaymentsLayout>
       <PaymentsContainer>
@@ -46,32 +48,41 @@ function Payments() {
           expirationDateInputValue={expirationDateInputValue}
           cardType={cardType}
         />
-        <InputSection
-          title="결제할 카드 번호를 입력해 주세요"
-          caption="본인 명의의 카드만 결제 가능합니다."
-        >
-          <CardNumberInputField
-            inputValue={cardNumberInputValue}
-            setInputValue={setCardNumberInputValue}
-            cardType={cardType}
-            setCardType={setCardType}
-          />
-        </InputSection>
-        <InputSection
-          title="카드 유효기간을 입력해 주세요"
-          caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-        >
-          <ExpirationDateInputField
-            inputValue={expirationDateInputValue}
-            setInputValue={setExpirationDateInputValue}
-          />
-        </InputSection>
-        <InputSection title="CVC 번호를 입력해 주세요">
-          <CVCInputField
-            inputValue={CVCInputValue}
-            setInputValue={setCVCInputValue}
-          />
-        </InputSection>
+        {step >= 3 && (
+          <InputSection title="CVC 번호를 입력해 주세요">
+            <CVCInputField
+              inputValue={CVCInputValue}
+              setInputValue={setCVCInputValue}
+            />
+          </InputSection>
+        )}
+        {step >= 2 && (
+          <InputSection
+            title="카드 유효기간을 입력해 주세요"
+            caption="월/년도(MMYY)를 순서대로 입력해 주세요."
+          >
+            <ExpirationDateInputField
+              inputValue={expirationDateInputValue}
+              setInputValue={setExpirationDateInputValue}
+            />
+          </InputSection>
+        )}
+        {step >= 1 && (
+          <InputSection
+            title="결제할 카드 번호를 입력해 주세요"
+            caption="본인 명의의 카드만 결제 가능합니다."
+          >
+            <CardNumberInputField
+              inputValue={cardNumberInputValue}
+              setInputValue={setCardNumberInputValue}
+              cardType={cardType}
+              setCardType={setCardType}
+              onComplete={() => {
+                if (step === 1) setStep(2);
+              }}
+            />
+          </InputSection>
+        )}
       </PaymentsContainer>
     </PaymentsLayout>
   );
