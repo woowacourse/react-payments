@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
-
 interface SingleSelectProps {
   options: { id: number; name: string }[];
   placeHolder: string;
