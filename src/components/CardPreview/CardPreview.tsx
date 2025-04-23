@@ -5,13 +5,14 @@ type CardPreviewProps = {
   cardNumbers: string[];
   month: string;
   year: string;
+  brand: string;
 };
 
 const VALID_VISA_CARD_START_NUMBER = 4;
 const VALID_MASTER_CARD_START_NUMBER = ['51', '52', '53', '54', '55'];
 const HIDDEN_CARD_NUMBER_INDEX = [2, 3];
 
-const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
+const CardPreview = ({ cardNumbers, month, year, brand }: CardPreviewProps) => {
   const isVisaCard = VALID_VISA_CARD_START_NUMBER === Number(cardNumbers[0][0]);
   const isMasterCard = VALID_MASTER_CARD_START_NUMBER.some((condition) =>
     cardNumbers[0].startsWith(condition)
@@ -20,7 +21,7 @@ const CardPreview = ({ cardNumbers, month, year }: CardPreviewProps) => {
     HIDDEN_CARD_NUMBER_INDEX.includes(index);
 
   return (
-    <div className={styles.preview}>
+    <div className={`${styles.preview} ${styles[brand]}`}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
       {isVisaCard && (
         <img src="./Visa.png" alt="visa" className={styles.visa} />

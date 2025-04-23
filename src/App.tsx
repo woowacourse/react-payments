@@ -20,7 +20,12 @@ function App() {
 
   return (
     <div className="app">
-      <CardPreview cardNumbers={cardNumbers} month={month} year={year} />
+      <CardPreview
+        cardNumbers={cardNumbers}
+        month={month}
+        year={year}
+        brand={brand}
+      />
       <form>
         <CardNumbersInput
           cardNumbers={cardNumbers}

@@ -1,3 +1,14 @@
+:root {
+  --BC-card-background: #f04651;
+  --shinhan-card-background: #0046ff;
+  --kakao-card-background: #ffe600;
+  --hyundai-card-background: #000000;
+  --woori-card-background: #007bc8;
+  --lotte-card-background: #ed1c24;
+  --hana-card-background: #009490;
+  --kb-card-background: #6a6056;
+}
+
 .preview {
   position: relative;
   width: 300px;
@@ -10,6 +21,38 @@
   color: white;
   font-family: monospace;
   margin: 70px 0;
+}
+
+.bc {
+  background-color: var(--BC-card-background);
+}
+
+.shinhan {
+  background-color: var(--shinhan-card-background);
+}
+
+.kakao {
+  background-color: var(--kakao-card-background);
+}
+
+.hyundai {
+  background-color: var(--hyundai-card-background);
+}
+
+.woori {
+  background-color: var(--woori-card-background);
+}
+
+.lotte {
+  background-color: var(--lotte-card-background);
+}
+
+.hana {
+  background-color: var(--hana-card-background);
+}
+
+.kb {
+  background-color: var(--kb-card-background);
 }
 
 .magnetic {
