@@ -7,6 +7,8 @@ import {
 } from 'react';
 import { NonEmptyArray } from '../../../../types/types';
 import { assert } from '../../../utils/error';
+import { slideInUp } from './Funnel.style';
+import { css } from '@emotion/react';
 
 export interface FunnelProps<Steps extends NonEmptyArray<string>> {
   steps: Steps;
@@ -35,7 +37,11 @@ export const Funnel = <Steps extends NonEmptyArray<string>>(
 
   assert(targetStep != null, `${step} step 컴포넌트를 찾지 못했습니다.`);
 
-  return targetStep;
+  const animationStyle = css`
+    animation: ${slideInUp} 0.5s ease-out forwards;
+  `;
+
+  return <div css={animationStyle}>{targetStep}</div>;
 };
 
 export const Step = <T extends NonEmptyArray<string>>(props: StepProps<T>) => {
