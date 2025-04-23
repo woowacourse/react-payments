@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+import { validateCardPassword } from '../../domain/validate';
 import InputContainer from '../InputContainer/InputContainer';
 
 type CardPasswordInputProps = {
@@ -9,9 +11,20 @@ const CardPasswordInput = ({
   password,
   setPassword,
 }: CardPasswordInputProps) => {
+  const [helperText, setHelperText] = useState('');
+  const inputRef = useRef<HTMLElement | null>(null);
+
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
+    try {
+      const { value } = e.target;
+      setPassword(value);
+      validateCardPassword(value, 2);
+    } catch (error) {
+      if (error instanceof Error) {
+        setHelperText(error.message);
+        inputRef.current?.focus();
+      }
+    }
   };
 
   return (
@@ -27,8 +40,14 @@ const CardPasswordInput = ({
           onChange={updatePassword}
           name="password"
           maxLength={2}
+          ref={(element) => {
+            inputRef.current = element;
+          }}
         />
       </div>
+      <p className="helperText" data-testid="helper-text">
+        {helperText}
+      </p>
     </InputContainer>
   );
 };

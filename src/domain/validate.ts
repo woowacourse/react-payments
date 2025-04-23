@@ -68,3 +68,9 @@ export const validateCVC = (number: string, length: number) => {
   if (invalidNumberLength(number, length))
     throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
 };
+
+export const validateCardPassword = (number: string, length: number) => {
+  if (!isNumber(number)) throw new Error(ERROR.REQUIRE.NUMBER);
+  if (invalidNumberLength(number, length))
+    throw new Error(`${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`);
+};
