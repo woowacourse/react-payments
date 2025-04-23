@@ -1,7 +1,5 @@
 import { ExpireDateInputKey } from '@/hooks/useExpireDateInput';
 
-const currentYear = new Date().getFullYear().toString().slice(-2);
-
 type ValidateExpireDateReturnType = {
   isValid: boolean;
   errorMessage: string;
@@ -12,6 +10,7 @@ export const validateExpireDate = (
   key: ExpireDateInputKey
 ): ValidateExpireDateReturnType => {
   const expireDateRegex = new RegExp(`^\\d{2}$`);
+  const currentYear = new Date().getFullYear().toString().slice(-2);
 
   if (!expireDateRegex.test(value)) {
     return { isValid: false, errorMessage: '연도와 월은 두 자리 숫자를 입력하세요. 예시: 01, 12' };
