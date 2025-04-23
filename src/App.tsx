@@ -1,6 +1,7 @@
 import GlobalStyle from './styles/globalStyle';
 import theme from './styles/theme';
 import Card from './component/Card/Card';
+import CardBrand from "./component/CardBrand/CardBrand";
 import CardNumberInput from './component/CardNumberInput/CardNumberInput';
 import CardPeriodInput from './component/CardPeriod/CardPeriodInput';
 import CardCVCInput from './component/CardCVCInput/CardCVCInput';
@@ -33,6 +34,7 @@ function App() {
       <div css={appLayout}>
         <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
         <main css={mainLayout}>
+          <CardBrand />
           <CardNumberInput
             cardNumber={cardNumber}
             onChange={handleCardNumberChange}
