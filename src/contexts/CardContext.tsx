@@ -108,6 +108,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
       if (name === "month") {
         setMonth(value);
         validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
+        expiryInputRefs.current[1]?.focus();
         validateYear(year, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
       } else if (name === "year") {
         setYear(value);
