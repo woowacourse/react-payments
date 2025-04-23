@@ -11,15 +11,21 @@ import CardPasswordInputSection from "./components/InputSection/CardPasswordInpu
 import useCardPassword from "./hooks/useCardPassword";
 
 const COMPANIES = [
-  { value: "BC", label: "BC" },
-  { value: "신한", label: "신한" },
-  { value: "카카오", label: "카카오" },
-  { value: "현대", label: "현대" },
-  { value: "우리", label: "우리" },
-  { value: "롯데", label: "롯데" },
-  { value: "하나", label: "하나" },
-  { value: "국민", label: "국민" },
+  { value: "BC카드", label: "BC카드", color: "#F04651" },
+  { value: "신한카드", label: "신한카드", color: "#0046FF" },
+  { value: "카카오뱅크", label: "카카오뱅크", color: "#FFE600" },
+  { value: "현대카드", label: "현대카드", color: "#000000" },
+  { value: "우리카드", label: "우리카드", color: "#007BC8" },
+  { value: "롯데카드", label: "롯데카드", color: "#ED1C24" },
+  { value: "하나카드", label: "하나카드", color: "#009490" },
+  { value: "국민카드", label: "국민카드", color: "#6A6056" },
 ];
+
+const extractCardCompanyColor = (company: string) => {
+  const BASIC_COLOR = "#000000";
+  const companyData = COMPANIES.find((item) => item.value === company);
+  return companyData ? companyData.color : BASIC_COLOR;
+};
 
 function App() {
   const {
@@ -56,6 +62,7 @@ function App() {
         <CardDisplay
           cardNumbers={cardNumbers}
           cardExpirationDate={cardExpirationDate}
+          backgroundColor={extractCardCompanyColor(cardCompany)}
         />
         <div className={styles.cardForm}>
           <CardPasswordInputSection

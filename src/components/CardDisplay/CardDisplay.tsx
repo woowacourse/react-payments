@@ -7,11 +7,19 @@ import CardHeader from "./CardHeader";
 type CardDisplayProps = {
   cardNumbers: CardNumbers;
   cardExpirationDate: CardExpirationDate;
+  backgroundColor?: string;
 };
 
-const CardDisplay = ({ cardNumbers, cardExpirationDate }: CardDisplayProps) => {
+const CardDisplay = ({
+  cardNumbers,
+  cardExpirationDate,
+  backgroundColor,
+}: CardDisplayProps) => {
   return (
-    <div className={`${styles.card} ${styles.basic}`}>
+    <div
+      className={`${styles.card} ${styles.basic}`}
+      style={{ backgroundColor }}
+    >
       <CardHeader cardNumbers={cardNumbers} />
       <CardBody
         cardNumbers={cardNumbers}
