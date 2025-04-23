@@ -11,9 +11,8 @@ import {
   CardNumberPosition,
   ExpirationPeriod,
 } from "../../\btypes/index.types";
-import { useState } from "react";
-import { useEffect } from "react";
 import { INITIALIZE_VALUE } from "../../shared/constants/constant";
+import { useMemo } from "react";
 
 type CardNumber = Record<CardNumberPosition, string>;
 
@@ -46,14 +45,11 @@ function getIdentifyFns(id: string) {
 }
 
 function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
-  const [logoSrc, setLogoSrc] = useState(INITIALIZE_VALUE);
-
-  useEffect(() => {
+  const logoSrc = useMemo(() => {
     const id = cardNumber.first.slice(0, 2);
-
     const identifyFns = getIdentifyFns(id);
     const identifiedLogoSrc = identifyFns.find((fn) => fn.identify());
-    setLogoSrc(identifiedLogoSrc?.logoSrc || "");
+    return identifiedLogoSrc?.logoSrc ?? INITIALIZE_VALUE;
   }, [cardNumber]);
 
   return (
