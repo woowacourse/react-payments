@@ -9,11 +9,14 @@ import {MESSAGE} from './constants/error';
 const INPUT_MAX_LENGTH = 3;
 
 type Props = {
-  cvcNumber: string;
-  onCvcNumberChange: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 };
 
-const CardCvcSection = ({cvcNumber, onCvcNumberChange}: Props) => {
+const CardCvcSection = ({
+  value: cvcNumber,
+  onChange: onCvcNumberChange,
+}: Props) => {
   const [error, setError] = useState('');
 
   const handleInput = (value: string) => {

@@ -23,8 +23,8 @@ function App() {
     <MainContainer>
       <Card cardNumbers={cardNumber} expirationDate={expirationDate} />
       <CardNumberSection
-        cardNumber={cardNumber}
-        onCardNumberChange={(order, value) =>
+        value={cardNumber}
+        onChange={(order, value) =>
           setCardNumber((prev) => ({
             ...prev,
             [order]: value,
@@ -32,8 +32,8 @@ function App() {
         }
       />
       <ExpirationDateSection
-        expirationDate={expirationDate}
-        onExpirationDateChange={(order, value) =>
+        value={expirationDate}
+        onChange={(order, value) =>
           setExpirationDate((prev) => ({
             ...prev,
             [order]: value,
@@ -41,8 +41,8 @@ function App() {
         }
       />
       <CardCvcSection
-        cvcNumber={cvcNumber}
-        onCvcNumberChange={(value) => setcvcNumber(value)}
+        value={cvcNumber}
+        onChange={(value) => setcvcNumber(value)}
       />
     </MainContainer>
   );

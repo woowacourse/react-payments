@@ -13,11 +13,14 @@ const INPUT_MAX_LENGTH = 4;
 const ORDER_LABEL = ['first', 'second', 'third', 'fourth'] as const;
 
 type Props = {
-  cardNumber: CardNumber;
-  onCardNumberChange: (order: keyof CardNumber, value: string) => void;
+  value: CardNumber;
+  onChange: (order: keyof CardNumber, value: string) => void;
 };
 
-const CardNumberSection = ({cardNumber, onCardNumberChange}: Props) => {
+const CardNumberSection = ({
+  value: cardNumber,
+  onChange: onCardNumberChange,
+}: Props) => {
   const [error, setError] = useState({
     first: '',
     second: '',

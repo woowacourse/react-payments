@@ -13,8 +13,8 @@ const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;
 
 type Props = {
-  expirationDate: ExpirationDate;
-  onExpirationDateChange: (order: keyof ExpirationDate, value: string) => void;
+  value: ExpirationDate;
+  onChange: (order: keyof ExpirationDate, value: string) => void;
 };
 
 const expirationErrorRule = [
@@ -43,8 +43,8 @@ const expirationErrorRule = [
 ];
 
 const ExpirationDateSection = ({
-  expirationDate,
-  onExpirationDateChange,
+  value: expirationDate,
+  onChange: onExpirationDateChange,
 }: Props) => {
   const [error, setError] = useState({
     month: '',
