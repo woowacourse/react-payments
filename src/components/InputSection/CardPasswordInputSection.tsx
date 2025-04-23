@@ -1,14 +1,23 @@
 import InputSection from "../common/InputSection/InputSection";
 import InputField from "../common/InputField/InputField";
+
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
+
+type CardPasswordInputSectionProps = {
+  cardPassword: string;
+  handleCardPasswordChange: (value: string) => void;
+  isError: {
+    cardPassword: boolean;
+  };
+  errorMessage: string;
+};
 
 const CardPasswordInputSection = ({
   cardPassword,
   handleCardPasswordChange,
   isError,
   errorMessage,
-}) => {
-  console.log(cardPassword);
+}: CardPasswordInputSectionProps) => {
   return (
     <>
       <InputSection
@@ -17,6 +26,7 @@ const CardPasswordInputSection = ({
         subtitle="비밀번호 앞 2자리"
       >
         <InputField
+          type="password"
           value={cardPassword}
           onChange={handleCardPasswordChange}
           isError={isError.cardPassword}
