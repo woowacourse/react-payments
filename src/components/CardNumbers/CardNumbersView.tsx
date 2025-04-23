@@ -40,6 +40,7 @@ const CardNumbersView = ({
         eventHandler={handleInputChange}
         state={cardNumbers}
         errors={errors}
+        type='text'
         onComplete={onComplete}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>

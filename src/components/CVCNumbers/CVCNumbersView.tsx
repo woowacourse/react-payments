@@ -25,6 +25,7 @@ const CVCNumbersView = ({
         state={cvcNumbers}
         eventHandler={handleInputChange}
         errors={[error]}
+        type='text'
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>

@@ -37,6 +37,7 @@ const ExpirationPeriodView = ({
         state={period}
         eventHandler={handleInputChange}
         errors={errors}
+        type='text'
         onFocus={onFocus}
         onBlur={onBlur}
         onComplete={onComplete}
