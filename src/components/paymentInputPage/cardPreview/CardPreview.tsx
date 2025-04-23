@@ -18,6 +18,7 @@ function CardPreview({
   cardNumbers,
   expirationDate,
 }: CardInformationType) {
+  const issuerClassName = ISSUER_LIST.get(cardIssuer);
   const inputCardNumber = cardNumbers[0];
   const brand = determineBrand(inputCardNumber);
 
@@ -43,7 +44,11 @@ function CardPreview({
   }
 
   return (
-    <div className={`${styles.container} ${ISSUER_LIST.get(cardIssuer)}`}>
+    <div
+      className={`${styles.container} ${
+        issuerClassName ? styles[issuerClassName] : ''
+      }`}
+    >
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
 

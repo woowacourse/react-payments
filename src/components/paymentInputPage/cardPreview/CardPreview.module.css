@@ -45,3 +45,31 @@
   letter-spacing: -8px;
   line-height: 0.7;
 }
+
+.lotte {
+  background-color: var(--lotte);
+}
+
+.shinhan {
+  background-color: var(--shinhan);
+}
+
+.kakao {
+  background-color: var(--kakao);
+}
+
+.hyundai {
+  background-color: var(--hyundai);
+}
+
+.woori {
+  background-color: var(--woori);
+}
+
+.hana {
+  background-color: var(--hana);
+}
+
+.kb {
+  background-color: var(--kb);
+}
