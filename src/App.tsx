@@ -1,7 +1,7 @@
 import './App.css';
 import Preview from './widgets/preview/ui/Preview';
-import CardInfoContainer from './features/cardInfo/ui/CardInfoContainer';
 import useCardInfo from './features/cardInfo/hooks/useCardInfo';
+import { CardInfoContainer } from './features/cardInfo/ui';
 
 function App() {
   const { cardNumber, cardExpirationDate, handleCardInfoChange, error } = useCardInfo();
