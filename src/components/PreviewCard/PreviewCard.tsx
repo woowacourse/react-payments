@@ -4,14 +4,28 @@ import useCardTypeImage from '../../hooks/useCardTypeImage';
 type PreviewCardProps = {
   cardNumber: string[];
   expirationDate: string[];
+  cardCompany: string;
 };
 
-const StyledPreviewCard = styled.div`
+type CardCompanyProps = Pick<PreviewCardProps, 'cardCompany'>;
+
+const cardCompanyColors: Record<string, string> = {
+  BC카드: '#F04651',
+  신한카드: '#0046FF',
+  카카오뱅크: '#FFE600',
+  현대카드: '#000000',
+  우리카드: '#007BC8',
+  롯데카드: '#ED1C24',
+  하나카드: '#009490',
+  국민카드: '#6A6056',
+};
+
+const StyledPreviewCard = styled.div<CardCompanyProps>`
   width: 212px;
   height: 120px;
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px rgb(0, 0, 0, 0.25);
-  background-color: #333333;
+  background-color: ${(props) => cardCompanyColors[props.cardCompany] ?? '#333333'};
   display: flex;
   flex-direction: column;
   padding: 0.8rem;
@@ -44,7 +58,6 @@ const StyledCardNumberWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
-  place-items: center;
 `;
 
 const StyledCardNumber = styled.div`
@@ -62,11 +75,11 @@ const StyledExpirationDate = styled.div`
   letter-spacing: 2.5px;
 `;
 
-const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
+const PreviewCard = ({ cardNumber, expirationDate, cardCompany }: PreviewCardProps) => {
   const cardType = useCardTypeImage(cardNumber[0]);
 
   return (
-    <StyledPreviewCard>
+    <StyledPreviewCard cardCompany={cardCompany}>
       <StyledCardHeader>
         <StyledICChip />
         {cardType && <StyledCardType src={cardType} />}
