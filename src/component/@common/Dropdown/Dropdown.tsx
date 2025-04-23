@@ -1,6 +1,5 @@
 import {
   createContext,
-  useState,
   ReactNode,
   PropsWithChildren,
   ChangeEvent,
@@ -44,11 +43,9 @@ const Dropdown = ({
   ...props
 }: PropsWithChildren<DropdownProps>) => {
   const { selectedCardBrand, setSelectedCardBrand } = useCard();
-  const [selectedOption, setSelectedOption] = useState(defaultValue);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as CardBrand;
-    setSelectedOption(value);
     setSelectedCardBrand(value);
   };
 
@@ -59,7 +56,7 @@ const Dropdown = ({
   return (
     <div css={dropdownContainer}>
       <select
-        value={selectedOption}
+        value={selectedCardBrand ?? ''}
         onChange={handleChange}
         css={dropdownSelect}
         {...props}
