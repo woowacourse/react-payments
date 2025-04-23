@@ -32,6 +32,9 @@ const App = () => {
   const [cvcNumbers, setCvcNumbers] = useState<string>('');
   const separatorRef = useRef<HTMLDivElement>(null);
   const [cardFrameColor, setCardFrameColor] = useState('#333333');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [isCardNumbersFilled, setIsCardNumbersFilled] = useState(false);
+  const [isPeriodFilled, setIsPeriodFilled] = useState(false);
 
   return (
     <Main>
@@ -41,14 +44,28 @@ const App = () => {
         separatorRef={separatorRef}
         cardFrameColor={cardFrameColor}
       />
-      <CardBrandSelector setCardFrameColor={setCardFrameColor} />
-      <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      <ExpirationPeriod
-        period={period}
-        setPeriod={setPeriod}
-        separatorRef={separatorRef}
+      {isPeriodFilled && (
+        <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+      )}
+      {selectedBrand && (
+        <ExpirationPeriod
+          period={period}
+          setPeriod={setPeriod}
+          separatorRef={separatorRef}
+          onComplete={() => setIsPeriodFilled(true)}
+        />
+      )}
+      {isCardNumbersFilled && (
+        <CardBrandSelector
+          setCardFrameColor={setCardFrameColor}
+          setSelectedBrand={setSelectedBrand}
+        />
+      )}
+      <CardNumbers
+        cardNumbers={cardNumbers}
+        setCardNumbers={setCardNumbers}
+        onComplete={() => setIsCardNumbersFilled(true)}
       />
-      <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
     </Main>
   );
 };

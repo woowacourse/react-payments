@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import SingleInput from './SingleInput';
+import { useFocusGroup } from '../../hooks/useFocusGroup';
 
 type CardNumber = {
   first: string;
@@ -22,6 +23,7 @@ interface InputTextsProps {
   errors: boolean[];
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onComplete?: () => void;
 }
 
 const getValue = (
@@ -48,18 +50,28 @@ const InputTexts = ({
   errors,
   onFocus,
   onBlur,
+  onComplete,
 }: InputTextsProps) => {
+  const { getRefCallback, handleInput } = useFocusGroup({
+    length: placeholder.length,
+    onComplete,
+  });
+
   return (
     <InputTextsContainer>
       <Label>{label}</Label>
       <Row>
         {placeholder.map((text, index) => (
           <SingleInput
+            ref={getRefCallback(index)}
             value={getValue(state, index)}
             placeholder={text}
             maxLength={text.length}
             error={errors ? errors[index] : false}
-            onChange={(e) => eventHandler!(e, index)}
+            onChange={(e) => {
+              eventHandler!(e, index);
+              handleInput(e, index);
+            }}
             onFocus={onFocus}
             onBlur={onBlur}
           />
@@ -89,17 +101,4 @@ const Row = styled.div`
   margin-bottom: 8px;
   min-width: 100%;
   gap: 10px;
-`;
-
-interface InputProps {
-  error?: boolean;
-}
-
-const Input = styled.input<InputProps>`
-  width: 100%;
-  padding: 8px;
-  border: 1px solid ${(props) => (props.error ? 'red' : '#ccc')};
-  border-radius: 2px;
-  font-size: 11px;
-  outline: none;
 `;

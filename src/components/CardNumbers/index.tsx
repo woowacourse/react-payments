@@ -12,12 +12,13 @@ type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 export interface CardNumbersProps {
   cardNumbers: CardNumber;
   setCardNumbers: React.Dispatch<React.SetStateAction<CardNumber>>;
+  onComplete?: () => void;
 }
 
 const CARD_NUMBERS_LENGTH = 4;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
-const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
+const CardNumbers = ({ cardNumbers, setCardNumbers, onComplete }: CardNumbersProps) => {
   const {
       errors,
       setErrors,
@@ -61,6 +62,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
       errorMessage={errorMessage}
       errors={errors}
       handleInputChange={handleInputChange}
+      onComplete={onComplete}
     />
   );
 };

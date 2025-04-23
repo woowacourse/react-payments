@@ -7,6 +7,7 @@ export interface ExpirationPeriodProps {
     React.SetStateAction<{ month: string; year: string }>
   >;
   separatorRef?: React.RefObject<HTMLDivElement | null>;
+  onComplete?: () => void;
 }
 
 const EXPIRATION_PERIOD_LENGTH = 2;
@@ -28,6 +29,7 @@ const ExpirationPeriod = ({
   period,
   setPeriod,
   separatorRef,
+  onComplete
 }: ExpirationPeriodProps) => {
   const { errors, setErrors, errorMessage, setErrorMessage } = useErrorMessage([
     false,
@@ -110,6 +112,7 @@ const ExpirationPeriod = ({
       handleInputChange={handleInputChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      onComplete={onComplete}
     />
   );
 };

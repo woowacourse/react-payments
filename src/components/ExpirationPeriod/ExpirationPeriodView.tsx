@@ -13,6 +13,7 @@ export interface ExpirationPeriodViewProps {
   ) => void;
   onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onComplete?: () => void;
 }
 
 const ExpirationPeriodView = ({
@@ -22,6 +23,7 @@ const ExpirationPeriodView = ({
   handleInputChange,
   onFocus,
   onBlur,
+  onComplete,
 }: ExpirationPeriodViewProps) => {
   return (
     <Container data-testid='expiration-component'>
@@ -37,6 +39,7 @@ const ExpirationPeriodView = ({
         errors={errors}
         onFocus={onFocus}
         onBlur={onBlur}
+        onComplete={onComplete}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>

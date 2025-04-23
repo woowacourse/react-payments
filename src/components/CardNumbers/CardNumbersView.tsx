@@ -18,6 +18,7 @@ export interface CardNumbersViewProps {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
+  onComplete?: () => void;
 }
 
 const CardNumbersView = ({
@@ -25,6 +26,7 @@ const CardNumbersView = ({
   errorMessage,
   errors,
   handleInputChange,
+  onComplete,
 }: CardNumbersViewProps) => {
   return (
     <Container data-testid='cardnumbers-component'>
@@ -38,6 +40,7 @@ const CardNumbersView = ({
         eventHandler={handleInputChange}
         state={cardNumbers}
         errors={errors}
+        onComplete={onComplete}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
