@@ -9,6 +9,7 @@ type CustomDropdownProps = {
 const StyledDropdownWrapper = styled.div`
   position: relative;
   width: 100%;
+  margin-bottom: 30px;
 `;
 
 const StyledSelectedOption = styled.div`
@@ -16,11 +17,12 @@ const StyledSelectedOption = styled.div`
   padding: 8px;
   background: white;
   cursor: pointer;
+  font-size: 12px;
 `;
 
 const StyledArrowButton = styled.button`
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
   width: 1rem;
   height: 1rem;
@@ -37,7 +39,7 @@ const StyledArrowImage = styled.img`
 
 const StyledOptionList = styled.ul`
   position: absolute;
-  top: 100%;
+  top: 100;
   left: 0;
   width: 100%;
   margin: 0;
@@ -51,6 +53,7 @@ const StyledOptionList = styled.ul`
 const StyledOptionItem = styled.li`
   padding: 8px;
   cursor: pointer;
+  font-size: 12px;
 
   &:hover {
     background: #f2f2f2;
@@ -93,15 +96,15 @@ const Dropdown = ({ selected, onChange }: CustomDropdownProps) => {
       </StyledSelectedOption>
       {isOpen && (
         <StyledOptionList>
-          {cardCompanies.map((company, idx) => (
+          {cardCompanies.map((value, idx) => (
             <StyledOptionItem
               key={idx}
               onClick={() => {
-                onChange(company);
+                onChange(value);
                 setIsOpen(false);
               }}
             >
-              {company}
+              {value}
             </StyledOptionItem>
           ))}
         </StyledOptionList>
