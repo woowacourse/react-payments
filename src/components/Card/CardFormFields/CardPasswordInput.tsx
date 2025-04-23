@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
-import { CARD_FORM_TYPE } from "../../../../constants/constants";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
-import Input from "../../../Common/Input/Input";
-import { useCard } from "../../../../hooks/useCard";
+import { CARD_FORM_TYPE } from "../../../constants/constants";
+import { useCard } from "../../../hooks/useCard";
+import { CardValidationType } from "../../../hooks/useCardValidation";
+import Input from "../../Common/Input/Input";
 
 const PLACEHOLDER = "비밀번호를 입력해 주세요";
 const MAX_LENGTHS = 2;

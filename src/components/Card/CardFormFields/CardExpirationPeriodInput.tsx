@@ -2,10 +2,10 @@ import { ChangeEvent } from "react";
 import {
   EXPIRATION_PERIOD_SEGMENT,
   ExpirationPeriodSegmentType,
-} from "../../../../constants/constants";
-import { useCard } from "../../../../hooks/useCard";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
-import Input from "../../../Common/Input/Input";
+} from "../../../constants/constants";
+import { useCard } from "../../../hooks/useCard";
+import { CardValidationType } from "../../../hooks/useCardValidation";
+import Input from "../../Common/Input/Input";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
 

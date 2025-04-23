@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
-import { CARD_FORM_TYPE } from "../../../../constants/constants";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
-import Select from "../../../Common/Select/Select";
-import { useCard } from "../../../../hooks/useCard";
-import { isCardCompanyState } from "../../../../utils/typeGuard";
+import { CARD_FORM_TYPE } from "../../../constants/constants";
+import { useCard } from "../../../hooks/useCard";
+import { CardValidationType } from "../../../hooks/useCardValidation";
+import { isCardCompanyState } from "../../../utils/typeGuard";
+import Select from "../../Common/Select/Select";
 
 const cardCompanyOptions = [
   { value: "bc", text: "BC카드" },

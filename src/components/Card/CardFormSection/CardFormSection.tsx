@@ -4,11 +4,11 @@ import Description from "../../Common/Description/Description";
 import Error from "../../Common/Error/Error";
 import Subtitle from "../../Common/Subtitle/Subtitle";
 import Title from "../../Common/Title/Title";
-import CardCompanySelect from "../CardFormFields/CardCompanySelect/CardCompanySelect";
-import CardCvcInput from "../CardFormFields/CardCvcInput/CardCvcInput";
-import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput/CardExpirationPeriodInput";
-import CardNumberInput from "../CardFormFields/CardNumberInput/CardNumberInput";
-import CardPasswordInput from "../CardFormFields/CardPasswordInput/CardPasswordInput";
+import CardCompanySelect from "../CardFormFields/CardCompanySelect";
+import CardCvcInput from "../CardFormFields/CardCvcInput";
+import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput";
+import CardNumberInput from "../CardFormFields/CardNumberInput";
+import CardPasswordInput from "../CardFormFields/CardPasswordInput";
 import { CardFormFieldCSS } from "./CardFormSection.styled";
 
 export interface CardFormSectionProps {

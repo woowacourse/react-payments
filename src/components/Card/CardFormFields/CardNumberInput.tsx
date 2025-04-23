@@ -2,10 +2,10 @@ import { ChangeEvent } from "react";
 import {
   CARD_NUMBERS_SEGMENT,
   CardNumbersSegmentType,
-} from "../../../../constants/constants";
-import { useCard } from "../../../../hooks/useCard";
-import Input from "../../../Common/Input/Input";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
+} from "../../../constants/constants";
+import { useCard } from "../../../hooks/useCard";
+import { CardValidationType } from "../../../hooks/useCardValidation";
+import Input from "../../Common/Input/Input";
 
 const cardPositions = Object.values(CARD_NUMBERS_SEGMENT);
 
