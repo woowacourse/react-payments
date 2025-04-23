@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 import {
+  CardIssuerSelectorType,
   CardNumberInputType,
   CVCInputValueType,
   ExpirationDateInputType,
@@ -38,8 +39,10 @@ function Payments() {
   });
 
   const [cardType, setCardType] = useState<CardType>(null);
-
   const [step, setStep] = useState(1);
+  const [cardIssuer, setCardIssuer] = useState<CardIssuerSelectorType | null>(
+    null
+  );
 
   return (
     <PaymentsLayout>
@@ -73,7 +76,7 @@ function Payments() {
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
           >
-            <CardIssuerSelector />
+            <CardIssuerSelector setCardIssuer={setCardIssuer} />
           </InputSection>
         )}
         {step >= 1 && (

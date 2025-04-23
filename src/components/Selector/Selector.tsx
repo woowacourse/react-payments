@@ -1,21 +1,28 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-interface SelectorProps {
+interface SelectorProps<T extends string> {
+  dropDownOptions: Record<string, T>;
   placeholder: string;
-  dropDownOptions: Record<string, string>;
+  onSelectChange: (value: T) => void;
 }
 
-function Selector({ dropDownOptions, placeholder }: SelectorProps) {
+function Selector<T extends string>({
+  dropDownOptions,
+  placeholder,
+  onSelectChange,
+}: SelectorProps<T>) {
   type OptionKey = keyof typeof dropDownOptions;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(placeholder);
+  const [selectedValue, setSelectedValue] = useState<T | string>(placeholder);
 
   const handleSelectedOption = (e: React.MouseEvent<HTMLUListElement>) => {
     const targetId = (e.target as HTMLDivElement).id;
-    setSelectedValue(dropDownOptions[targetId as OptionKey]);
+    const selectedTarget = dropDownOptions[targetId as OptionKey];
+    setSelectedValue(selectedTarget);
     setIsOpen(false);
+    onSelectChange(selectedTarget as T);
   };
 
   const optionsArray = Object.entries(dropDownOptions).map(([key, label]) => ({

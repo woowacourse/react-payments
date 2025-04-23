@@ -1,7 +1,13 @@
+import { Dispatch, SetStateAction } from 'react';
+import { CardIssuerSelectorType } from '../../../config/inputField';
 import Selector from '../../Selector/Selector';
 
-function CardIssuerSelector() {
-  const cardIssuers = {
+interface CardIssuerSelectorProps {
+  setCardIssuer: Dispatch<SetStateAction<CardIssuerSelectorType | null>>;
+}
+
+function CardIssuerSelector({ setCardIssuer }: CardIssuerSelectorProps) {
+  const cardIssuers: Record<string, CardIssuerSelectorType> = {
     bc: 'BC카드',
     shinhan: '신한카드',
     kakaobank: '카카오뱅크',
@@ -16,7 +22,8 @@ function CardIssuerSelector() {
     <Selector
       dropDownOptions={cardIssuers}
       placeholder="카드사를 선택해주세요"
-    ></Selector>
+      onSelectChange={(value: CardIssuerSelectorType) => setCardIssuer(value)}
+    />
   );
 }
 
