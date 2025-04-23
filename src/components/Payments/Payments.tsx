@@ -11,6 +11,7 @@ function Payments() {
       <InputSection type={INPUT_TYPE.cardNumbers} />
       <InputSection type={INPUT_TYPE.expirationPeriod} />
       <InputSection type={INPUT_TYPE.cvcNumber} />
+      <InputSection type={INPUT_TYPE.password} />
     </PaymentsCSS>
   );
 }

@@ -15,6 +15,7 @@ const titleVariants = {
   [INPUT_TYPE.expirationPeriod]: "카드 유효기간을 입력해 주세요",
   [INPUT_TYPE.cvcNumber]: "CVC 번호를 입력해 주세요",
   [INPUT_TYPE.cardBrand]: "카드사를 선택해 주세요",
+  [INPUT_TYPE.password]: "비밀번호를 입력해주세요",
 };
 
 const descriptionVariants = {
@@ -22,6 +23,7 @@ const descriptionVariants = {
   [INPUT_TYPE.expirationPeriod]: "월/년도(MMYY)를 순서대로 입력해 주세요.",
   [INPUT_TYPE.cvcNumber]: null,
   [INPUT_TYPE.cardBrand]: "현재 국내 카드사만 가능합니다.",
+  [INPUT_TYPE.password]: "앞의 2자리를 입력해주세요.",
 };
 
 const subTitleVariants = {
@@ -29,6 +31,7 @@ const subTitleVariants = {
   [INPUT_TYPE.expirationPeriod]: "유효기간",
   [INPUT_TYPE.cvcNumber]: "CVC",
   [INPUT_TYPE.cardBrand]: null,
+  [INPUT_TYPE.password]: "비밀번호 앞 2자리",
 };
 
 function InputSection({ type }: InputSectionProps) {
@@ -37,6 +40,7 @@ function InputSection({ type }: InputSectionProps) {
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,
+    validatePassword,
   } = useInputError();
 
   const getErrorVisible = (type: InputType) => {
@@ -56,6 +60,7 @@ function InputSection({ type }: InputSectionProps) {
         validateCardNumber={validateCardNumber}
         validateExpirationPeriod={validateExpirationPeriod}
         validateCvcNumber={validateCvcNumber}
+        validatePassword={validatePassword}
       />
       <Error
         errorMessage="숫자만 입력 가능합니다."

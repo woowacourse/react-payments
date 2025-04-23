@@ -11,6 +11,7 @@ import ExpirationPeriodInputs from "../ExpirationPeriodInputs/ExpirationPeriodIn
 import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
 import CvcInput from "../CvcInput/CvcInput";
 import CardBrandInput from "../CardBrandInput/CardBrandInput";
+import PasswordInput from "../PasswordInput/PasswordInput";
 
 export interface InputGroupProps {
   type: InputType;
@@ -21,6 +22,7 @@ export interface InputGroupProps {
     position: PeriodPositionType
   ) => void;
   validateCvcNumber: (value: string) => void;
+  validatePassword: (value: string) => void;
 }
 
 function InputGroup({
@@ -29,6 +31,7 @@ function InputGroup({
   validateCardNumber,
   validateExpirationPeriod,
   validateCvcNumber,
+  validatePassword,
 }: InputGroupProps) {
   const {
     cardNumbers,
@@ -39,6 +42,8 @@ function InputGroup({
     updateCvcNumber,
     cardBrand,
     updateCardBrand,
+    password,
+    updatePassword,
   } = useCard();
 
   const handleCardNumberChange = (
@@ -64,6 +69,11 @@ function InputGroup({
 
   const handleCardBrandChange = (value: string) => {
     updateCardBrand(value);
+  };
+
+  const handlePasswordChange = (value: string) => {
+    validatePassword(value);
+    updatePassword(value);
   };
 
   return (
@@ -93,6 +103,13 @@ function InputGroup({
         <CardBrandInput
           value={cardBrand}
           handleCardBrandChange={handleCardBrandChange}
+        />
+      )}
+      {type === INPUT_TYPE.password && (
+        <PasswordInput
+          value={password}
+          error={error.password}
+          handlePasswordChange={handlePasswordChange}
         />
       )}
     </InputGroupCSS>

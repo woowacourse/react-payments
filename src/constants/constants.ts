@@ -10,6 +10,7 @@ export const MAGIC_NUMBER = {
     cardNumber: 4,
     expirationPeriod: 2,
     cvcNumber: 3,
+    password: 2,
   },
 };
 
@@ -18,6 +19,7 @@ export const INPUT_TYPE = {
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
   cardBrand: "cardBrand",
+  password: "password",
 } as const;
 
 export const CARD_IMAGE = {

@@ -6,6 +6,7 @@ export interface InputErrorType {
   expirationPeriod: Record<PeriodPositionType, boolean>;
   cvcNumber: boolean;
   cardBrand: boolean;
+  password: boolean;
 }
 
 const defaultError = {
@@ -21,6 +22,7 @@ const defaultError = {
   },
   cvcNumber: false,
   cardBrand: false,
+  password: false,
 };
 const isValidNumber = (value: string) => {
   if (value === "") return true;
@@ -60,11 +62,18 @@ export function useInputError() {
       cvcNumber: !isValidNumber(value),
     }));
   };
+  const validatePassword = (value: string) => {
+    setError((prev) => ({
+      ...prev,
+      password: !isValidNumber(value),
+    }));
+  };
 
   return {
     error,
     validateCardNumber,
     validateExpirationPeriod,
     validateCvcNumber,
+    validatePassword,
   };
 }
