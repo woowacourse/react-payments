@@ -27,7 +27,11 @@ const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
       title="카드사를 선택해 주세요"
       subTitle="현재 국내 카드사만 가능합니다."
     >
-      <select value={brand} onChange={updateBrand}>
+      <select
+        className="card-brand-selector"
+        value={brand}
+        onChange={updateBrand}
+      >
         <option value="" disabled hidden>
           카드사를 선택해주세요.
         </option>
@@ -37,6 +41,7 @@ const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
           </option>
         ))}
       </select>
+      <p className="helperText" data-testid="helper-text"></p>
     </InputContainer>
   );
 };

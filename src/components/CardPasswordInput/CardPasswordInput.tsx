@@ -18,7 +18,13 @@ const CardPasswordInput = ({
     try {
       const { value } = e.target;
       setPassword(value);
+      if (value.length === 0) {
+        setHelperText('');
+        return;
+      }
       validateCardPassword(value, 2);
+      console.log('setHelperText');
+      setHelperText('');
     } catch (error) {
       if (error instanceof Error) {
         setHelperText(error.message);
@@ -32,8 +38,8 @@ const CardPasswordInput = ({
       title="비밀번호를 입력해 주세요"
       subTitle="앞의 2자리를 입력해주세요"
     >
-      <h4>비밀번호 앞 2자리</h4>
-      <div>
+      <h4 className="label">비밀번호 앞 2자리</h4>
+      <div className="inputContainer">
         <input
           type="password"
           value={password}
@@ -43,6 +49,8 @@ const CardPasswordInput = ({
           ref={(element) => {
             inputRef.current = element;
           }}
+          placeholder="비밀번호 앞 2자리"
+          className="input"
         />
       </div>
       <p className="helperText" data-testid="helper-text">
