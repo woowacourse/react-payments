@@ -16,7 +16,6 @@ export default function CardCompany({ register }: CardCompanyProps) {
       <Label id="card-company">카드사</Label>
       <Spacing size={8} />
       <S.SelectWrapper>
-        {/* @ts-expect-error TODO: select 요소 onChange 타입 확장 필요  */}
         <S.Select
           {...register('company', {
             validation: {
