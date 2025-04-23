@@ -17,7 +17,6 @@ input[type="number"] {
 
 #root {
   height: 100vh;
-  padding-top: 40px;
   display: flex;
   justify-content: center;
 }

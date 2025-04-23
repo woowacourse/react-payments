@@ -40,7 +40,7 @@ function NumberInput({
 export default NumberInput;
 
 const Input = styled.input<{ isError: boolean }>`
-  margin-top: 6px;
+  margin-top: 4px;
   width: 100%;
   border: 1px solid
     ${({ isError, theme }) =>

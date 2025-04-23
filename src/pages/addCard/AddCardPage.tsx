@@ -81,6 +81,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px 15px 0 15px;
 `;
 
 const InputField = styled.div`
