@@ -51,6 +51,7 @@ function Payments() {
           cardNumberInputValue={cardNumberInputValue}
           expirationDateInputValue={expirationDateInputValue}
           cardType={cardType}
+          cardIssuer={cardIssuer}
         />
         {step >= 3 && (
           <InputSection title="CVC 번호를 입력해 주세요">
