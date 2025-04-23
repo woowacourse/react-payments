@@ -1,24 +1,23 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction } from 'react';
-
+import { useEffect, useRef } from 'react';
 import Input from '../Input/Input';
 import { ExpirationKey, ExpirationType } from '../../types';
 
 type Props = {
   expiration: ExpirationType;
-  setExpiration: Dispatch<SetStateAction<ExpirationType>>;
+  onExpirationChange: (field: ExpirationKey, value: string) => void;
 };
 
-export default function CardExpirationSection({ expiration, setExpiration }: Props) {
-  const handleExpirationChange = (field: ExpirationKey, value: string) => {
-    const errorMessage = getErrorMessage(field, value);
+export default function CardExpirationSection({ expiration, onExpirationChange }: Props) {
+  const monthRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
 
-    setExpiration((prev) => ({
-      ...prev,
-      [field]: { value, errorMessage }
-    }));
-  };
+  useEffect(() => {
+    if (expiration.month.value.length === 2) {
+      yearRef.current?.focus();
+    }
+  }, [expiration.month.value]);
 
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
@@ -37,15 +36,17 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
             value={expiration.month.value}
             placeholder="MM"
             isError={Boolean(expiration.month.errorMessage)}
-            onChange={(e) => handleExpirationChange('month', e.target.value)}
+            onChange={(e) => onExpirationChange('month', e.target.value)}
             maxLength={2}
+            ref={monthRef}
           />
           <Input
             value={expiration.year.value}
             placeholder="YY"
-            isError={Boolean(expiration.month.errorMessage)}
-            onChange={(e) => handleExpirationChange('year', e.target.value)}
+            isError={Boolean(expiration.year.errorMessage)}
+            onChange={(e) => onExpirationChange('year', e.target.value)}
             maxLength={2}
+            ref={yearRef}
           />
         </div>
 
@@ -54,36 +55,3 @@ export default function CardExpirationSection({ expiration, setExpiration }: Pro
     </div>
   );
 }
-
-const getErrorMessage = (field: 'month' | 'year', value: string) => {
-  if (!Number.isInteger(+value)) {
-    return '숫자만 입력 가능합니다.';
-  }
-
-  if (field === 'month') {
-    return getMonthErrorMessage(value);
-  }
-
-  if (field === 'year') {
-    return getYearErrorMessage(value);
-  }
-};
-
-const getMonthErrorMessage = (value: string) => {
-  if (value == '') {
-    return '';
-  }
-
-  const month = Number(value);
-  if (month < 1 || month > 12) {
-    return '1부터 12 사이의 숫자를 입력해주세요.';
-  }
-
-  return '';
-};
-
-const getYearErrorMessage = (value: string) => {
-  if (value !== '' && value.length !== 2) {
-    return '2자리 숫자를 입력해주세요.';
-  }
-};

@@ -51,7 +51,7 @@ function Dot() {
 }
 
 export function getCardColorClass(company: string) {
-  const map: Record<string, string> = {
+  const CARD_INFO: Record<string, string> = {
     BC카드: 'bc',
     신한카드: 'shinhan',
     카카오뱅크: 'kakao',
@@ -62,5 +62,5 @@ export function getCardColorClass(company: string) {
     국민카드: 'kookmin'
   };
 
-  return map[company] ?? '';
+  return CARD_INFO[company] ?? '';
 }

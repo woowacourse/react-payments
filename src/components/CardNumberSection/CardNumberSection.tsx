@@ -1,6 +1,6 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import Input from '../Input/Input';
 import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
 import { CARD_BRANDS } from '../../constants';
@@ -41,7 +41,9 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
               value={cardNumbers[inputKey].value}
               isError={cardNumbers[inputKey].isError}
               placeholder={'1234'}
-              onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+              onChange={(e) => {
+                handleCardNumberChange(inputKey, e.target.value);
+              }}
               maxLength={4}
             />
           ))}
