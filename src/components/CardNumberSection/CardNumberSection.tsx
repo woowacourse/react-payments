@@ -4,16 +4,19 @@ import { Dispatch, SetStateAction, useRef } from 'react';
 import Input from '../Input/Input';
 import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
 import { CARD_BRANDS } from '../../constants';
-import { useAutoFocusNext } from '../../hooks/useAutoNextFocus';
 
 type Props = {
   cardNumbers: CardNumberType;
-  setCardLogo: Dispatch<SetStateAction<CardLogoKey | null>>;
   setCardNumbers: Dispatch<SetStateAction<CardNumberType>>;
 };
 
-export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  const inputRefs = useRef<HTMLInputElement[]>([]);
+export default function CardNumberSection({ cardNumbers, setCardNumbers }: Props) {
+  const inputRefs = {
+    first: useRef<HTMLInputElement>(null),
+    second: useRef<HTMLInputElement>(null),
+    third: useRef<HTMLInputElement>(null),
+    fourth: useRef<HTMLInputElement>(null)
+  };
 
   const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
     const isError = !Number.isInteger(+value);
@@ -23,10 +26,17 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
       [field]: { value, isError }
     }));
 
+    if (field == 'fourth' || value.length !== 4) {
+      return;
+    }
+
+    const keys = Object.keys(inputRefs);
+    const nextKey = keys[keys.indexOf(field) + 1] as keyof typeof inputRefs;
+    inputRefs[nextKey].current!.focus();
+
     if (field !== 'first') {
       return;
     }
-    setCardLogo(getCardBrand(value));
   };
 
   return (
@@ -38,26 +48,19 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
         <div className={styles.inputWrapper}>
-          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => {
-            const value = cardNumbers[inputKey].value;
-
-            useAutoFocusNext(value, index, inputRefs);
-            return (
-              <Input
-                ref={(el) => {
-                  inputRefs.current[index] = el;
-                }}
-                key={index}
-                value={cardNumbers[inputKey].value}
-                isError={cardNumbers[inputKey].isError}
-                placeholder={'1234'}
-                onChange={(e) => {
-                  handleCardNumberChange(inputKey, e.target.value);
-                }}
-                maxLength={4}
-              />
-            );
-          })}
+          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
+            <Input
+              key={index}
+              value={cardNumbers[inputKey].value}
+              isError={cardNumbers[inputKey].isError}
+              placeholder={'1234'}
+              onChange={(e) => {
+                handleCardNumberChange(inputKey, e.target.value);
+              }}
+              ref={inputRefs[inputKey]}
+              maxLength={4}
+            />
+          ))}
         </div>
 
         <InputSection.Error message={getCardNumberErrorMessage(cardNumbers)} />
@@ -65,11 +68,6 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
     </div>
   );
 }
-
-const getCardBrand = (value: string) => {
-  const brand = Object.values(CARD_BRANDS).find(({ match }) => match(value));
-  return brand?.name ?? null;
-};
 
 const getCardNumberErrorMessage = (cardNumbers: CardNumberType) => {
   const hasError = Object.values(cardNumbers).some(({ isError }) => isError);

@@ -1,18 +1,9 @@
 import { CARD_BRANDS } from '../../constants';
-import { CardBrandType, CardNumberType, ExpirationType } from '../../types';
+import { CardNumberType, ExpirationType } from '../../types';
 import styles from './Card.module.css';
 
-export default function Card({
-  company,
-  numbers,
-  cardLogo,
-  expiration
-}: {
-  company: string;
-  numbers: CardNumberType;
-  cardLogo: keyof CardBrandType | null;
-  expiration: ExpirationType;
-}) {
+export default function Card({ company, numbers, expiration }: { company: string; numbers: CardNumberType; expiration: ExpirationType }) {
+  const cardLogo = getCardBrand(numbers.first.value);
   return (
     <div className={`${styles.card} ${styles[getCardColorClass(company)]}`}>
       <div className={styles.chipWrapper}>
@@ -64,3 +55,7 @@ export function getCardColorClass(company: string) {
 
   return CARD_INFO[company] ?? '';
 }
+const getCardBrand = (value: string) => {
+  const brand = Object.values(CARD_BRANDS).find(({ match }) => match(value));
+  return brand?.name ?? null;
+};
