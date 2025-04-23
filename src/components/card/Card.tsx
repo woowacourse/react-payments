@@ -31,16 +31,18 @@ const cardBrandRules = [
 ];
 
 const badgeImagePath = (badgeBrand: number) => {
-  if (badgeBrand === 1) return './images/Mastercard.png';
-  if (badgeBrand === 2) return './images/Visa.png';
-
-  return '';
+  return (
+    {
+      1: './images/Mastercard.png',
+      2: './images/Visa.png',
+    }[badgeBrand] ?? ''
+  );
 };
 
 const formatDate = (expirationDate: ExpirationDate) => {
   const {month, year} = expirationDate;
 
-  if (month === '' && year === '') return;
+  if (month === '' && year === '') return '';
   if (year === '') return month;
   return `${month} / ${year}`;
 };
