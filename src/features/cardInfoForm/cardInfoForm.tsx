@@ -30,6 +30,10 @@ type CardInfoFormProps = {
     values: { password: string };
     changeValues: (type: "password", password: string) => void;
   };
+  cardType: {
+    values: { cardType: string };
+    changeValues: (type: "cardType", cardType: string) => void;
+  };
 };
 
 export default function CardInfoForm({
@@ -40,6 +44,7 @@ export default function CardInfoForm({
   CVCNumber,
   changeCVCNumber,
   password,
+  cardType,
 }: CardInfoFormProps) {
   const cardNumberError = useError<Record<CardNumberPosition, string>>(
     {
@@ -75,7 +80,7 @@ export default function CardInfoForm({
   return (
     <>
       <CardPasswordSection password={password} />
-      <CardTypeSection />
+      <CardTypeSection cardType={cardType} />
       <CardNumberSection
         cardNumber={cardNumber}
         changeCardNumber={changeCardNumber}

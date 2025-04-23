@@ -2,7 +2,14 @@ import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import Select from "../../shared/select/Select";
 import { StyledContainer } from "./CardTypeSection.css";
 
-export default function CardTypeSection() {
+type CardTypeSectionProps = {
+  cardType: {
+    values: { cardType: string };
+    changeValues: (type: "cardType", cardType: string) => void;
+  };
+};
+
+export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
   return (
     <StyledContainer>
       <SectionTitle
@@ -11,8 +18,8 @@ export default function CardTypeSection() {
       />
       <Select
         isError={false}
-        onChange={() => alert("Input changed")}
-        value="string"
+        onChange={(e) => cardType.changeValues("cardType", e.target.value)}
+        value={cardType.values.cardType}
         width="100%"
         options={[
           { value: "", label: "카드사를 선택해주세요" },

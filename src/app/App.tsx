@@ -35,6 +35,10 @@ function App() {
     password: INITIALIZE_VALUE,
   });
 
+  const cardType = useCardInfo({
+    cardType: INITIALIZE_VALUE,
+  });
+
   return (
     <StyledApp>
       <StyledFrame>
@@ -50,6 +54,7 @@ function App() {
           CVCNumber={CVCNumber}
           changeCVCNumber={changeCVCNumber}
           password={password}
+          cardType={cardType}
         />
       </StyledFrame>
     </StyledApp>
