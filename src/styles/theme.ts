@@ -52,6 +52,15 @@ const theme = {
         lineHeight: '1.5rem',
       },
     },
+    button: {
+      text2: {
+        fontFamily: 'Noto Sans KR',
+        fontSize: '1.6rem',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: '1.2rem',
+      },
+    },
   },
 };
 
