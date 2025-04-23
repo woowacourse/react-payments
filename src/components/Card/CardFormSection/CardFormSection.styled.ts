@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-export const CardFormFieldCSS = styled.div`
-  display: flex;
-  gap: 8px;
+export const CardFormSectionCSS = styled.div`
+  margin-bottom: 40px;
 `;

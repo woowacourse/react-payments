@@ -9,6 +9,7 @@ import CardCvcInput from "../CardFormFields/CardCvcInput/CardCvcInput";
 import CardExpirationPeriodInput from "../CardFormFields/CardExpirationPeriodInput/CardExpirationPeriodInput";
 import CardNumberInput from "../CardFormFields/CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../CardFormFields/CardPasswordInput/CardPasswordInput";
+import { CardFormSectionCSS } from "./CardFormSection.styled";
 
 export interface CardFormSectionProps {
   type: CardFormType;
@@ -96,7 +97,7 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
   };
 
   return (
-    <>
+    <CardFormSectionCSS>
       <Title title={titleVariants[type]} />
       <Description description={descriptionVariants[type]} />
       <Subtitle subtitle={subtitleVariants[type]} />
@@ -105,6 +106,6 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
         errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리?
         isVisible={hasError(type)}
       />
-    </>
+    </CardFormSectionCSS>
   );
 }
