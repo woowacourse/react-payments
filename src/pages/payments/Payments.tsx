@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Select from '../../components/common/Select/Select';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
 import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
@@ -47,6 +48,18 @@ function Payments() {
             errorTypes={cardNumberErrorTypes}
             handleInputValue={handleCardNumberInputValue}
             onBlur={onCardNumberBlur}
+          />
+        </InputSection>
+        <InputSection
+          title="카드사를 선택해 주세요"
+          caption="현재 국내 카드사만 가능합니다."
+        >
+          <Select
+            placeholder="카드사를 선택해주세요"
+            options={[
+              { label: 'BC카드', value: 'bc' },
+              { label: '신한카드', value: 'shinhan' },
+            ]}
           />
         </InputSection>
         <InputSection

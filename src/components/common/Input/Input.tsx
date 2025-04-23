@@ -40,7 +40,7 @@ const StyledInput = styled.input<{ $isError: boolean }>`
   width: 100%;
   height: 32px;
   border: 1px solid;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 8px;
   box-sizing: border-box;
   border-color: ${(props) => (props.$isError ? 'red' : '#acacac')};
