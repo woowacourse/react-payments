@@ -1,4 +1,9 @@
-import { INPUT_TYPE, InputType } from "../../constants/constants";
+import {
+  CardPositionType,
+  INPUT_TYPE,
+  InputType,
+  PeriodPositionType,
+} from "../../constants/constants";
 import Description from "../Description/Description";
 import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
@@ -8,6 +13,10 @@ import { useInputError } from "../../hooks/useInputError";
 
 export interface InputSectionProps {
   type: InputType;
+  onComplete: (
+    value: string,
+    position?: CardPositionType | PeriodPositionType
+  ) => void;
 }
 
 const titleVariants = {
@@ -34,7 +43,7 @@ const subTitleVariants = {
   [INPUT_TYPE.password]: "비밀번호 앞 2자리",
 };
 
-function InputSection({ type }: InputSectionProps) {
+function InputSection({ type, onComplete }: InputSectionProps) {
   const {
     error,
     validateCardNumber,
@@ -61,6 +70,7 @@ function InputSection({ type }: InputSectionProps) {
         validateExpirationPeriod={validateExpirationPeriod}
         validateCvcNumber={validateCvcNumber}
         validatePassword={validatePassword}
+        onComplete={onComplete}
       />
       <Error
         errorMessage="숫자만 입력 가능합니다."

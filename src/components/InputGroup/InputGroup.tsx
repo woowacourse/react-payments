@@ -12,6 +12,7 @@ import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
 import CvcInput from "../CvcInput/CvcInput";
 import CardBrandInput from "../CardBrandInput/CardBrandInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
+import { useEffect } from "react";
 
 export interface InputGroupProps {
   type: InputType;
@@ -23,6 +24,10 @@ export interface InputGroupProps {
   ) => void;
   validateCvcNumber: (value: string) => void;
   validatePassword: (value: string) => void;
+  onComplete: (
+    value: string,
+    position?: CardPositionType | PeriodPositionType
+  ) => void;
 }
 
 function InputGroup({
@@ -32,6 +37,7 @@ function InputGroup({
   validateExpirationPeriod,
   validateCvcNumber,
   validatePassword,
+  onComplete,
 }: InputGroupProps) {
   const {
     cardNumbers,
@@ -52,6 +58,9 @@ function InputGroup({
   ) => {
     validateCardNumber(value, position);
     updateCardNumber(value, position);
+    if (value.length === 4) {
+      onComplete(value, position);
+    }
   };
 
   const handleExpirationPeriodChange = (
@@ -60,20 +69,32 @@ function InputGroup({
   ) => {
     validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);
+    if (value.length === 2) {
+      onComplete(value, position);
+    }
   };
 
   const handleCvcNumberChange = (value: string) => {
     validateCvcNumber(value);
     updateCvcNumber(value);
+    if (value.length === 3) {
+      onComplete(value);
+    }
   };
 
   const handleCardBrandChange = (value: string) => {
     updateCardBrand(value);
+    if (value !== "") {
+      onComplete(value);
+    }
   };
 
   const handlePasswordChange = (value: string) => {
     validatePassword(value);
     updatePassword(value);
+    if (value.length === 2) {
+      onComplete(value);
+    }
   };
 
   return (

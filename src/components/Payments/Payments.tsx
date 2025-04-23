@@ -5,22 +5,44 @@ import Preview from "../Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
 
 function Payments() {
-  const { isComplete } = useCompletion();
+  const {
+    isComplete,
+    updateCardNumberIsComplete,
+    updateCardBrandIsComplete,
+    updateExpirationPeriodIsComplete,
+    updateCvcIsComplete,
+    updatePasswordIsComplete,
+  } = useCompletion();
   return (
     <PaymentsCSS>
       <Preview />
-      <InputSection type={INPUT_TYPE.cardNumbers} />
+      <InputSection
+        type={INPUT_TYPE.cardNumbers}
+        onComplete={updateCardNumberIsComplete}
+      />
       {Object.values(isComplete.cardNumbers).every(Boolean) && (
-        <InputSection type={INPUT_TYPE.cardBrand} />
+        <InputSection
+          type={INPUT_TYPE.cardBrand}
+          onComplete={updateCardBrandIsComplete}
+        />
       )}
       {isComplete.cardBrand === true && (
-        <InputSection type={INPUT_TYPE.expirationPeriod} />
+        <InputSection
+          type={INPUT_TYPE.expirationPeriod}
+          onComplete={updateExpirationPeriodIsComplete}
+        />
       )}
       {Object.values(isComplete.expirationPeriod).every(Boolean) && (
-        <InputSection type={INPUT_TYPE.cvcNumber} />
+        <InputSection
+          type={INPUT_TYPE.cvcNumber}
+          onComplete={updateCvcIsComplete}
+        />
       )}
       {isComplete.cvcNumber === true && (
-        <InputSection type={INPUT_TYPE.password} />
+        <InputSection
+          type={INPUT_TYPE.password}
+          onComplete={updatePasswordIsComplete}
+        />
       )}
     </PaymentsCSS>
   );
