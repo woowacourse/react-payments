@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
@@ -9,7 +9,7 @@ function CardExpirationDateInput({
   setExpirationDate,
 }: {
   expirationDate: ExpirationDateType;
-  setExpirationDate: Dispatch<SetStateAction<ExpirationDateType>>;
+  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
 }) {
   const [isValidInputs, setIsValidInputs] = useState({
     month: true,

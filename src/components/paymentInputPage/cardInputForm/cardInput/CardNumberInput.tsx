@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
 import { validatorUtils } from '../../../../utils/validationUtils';
@@ -10,7 +10,7 @@ function CardNumberInput({
   setCardNumbers,
 }: {
   cardNumbers: string[];
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const initialValidInputs = Array.from({ length: 4 }, () => true);
   const [isValidInputs, setIsValidInputs] =
