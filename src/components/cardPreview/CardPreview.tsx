@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { CardNumber, ExpirationPeriod } from '../../types/index.types';
 import { INITIALIZE_VALUE } from '../../constants/constant';
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{ backgroundColor?: string }>`
+  background-color: ${(props) => props.backgroundColor || '#333333'};
   display: flex;
   flex-direction: column;
   gap: 25px;
   width: 100%;
   height: 250px;
   max-width: 400px;
-  background-color: #333333;
   border-radius: 8px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
@@ -67,6 +67,7 @@ const StyledExpirationPeriod = styled.div`
 type CardPreviewProps = {
   cardNumber: CardNumber;
   expirationPeriod: ExpirationPeriod;
+  backgroundColor?: string;
 };
 
 const CARD_IDENTIFYING_NUMBER = {
@@ -97,12 +98,12 @@ const getLogoSrc = (id: number) => {
   return INITIALIZE_VALUE;
 };
 
-function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
+function CardPreview({ cardNumber, expirationPeriod, backgroundColor }: CardPreviewProps) {
   const id = Number(cardNumber['first'].slice(0, 2));
   const logoSrcString = getLogoSrc(id);
 
   return (
-    <StyledContainer>
+    <StyledContainer backgroundColor={backgroundColor}>
       <StyledIconWrap>
         <StyledMagnetic></StyledMagnetic>
         {logoSrcString !== INITIALIZE_VALUE ? (

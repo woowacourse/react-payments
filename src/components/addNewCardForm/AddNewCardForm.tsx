@@ -46,6 +46,9 @@ function AddNewCardForm() {
   const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
   const [password, setPassword] = useState(INITIALIZE_VALUE);
 
+  const [selectedCardCompany, setSelectedCardCompany] = useState('');
+  const [cardColor, setCardColor] = useState('#333333');
+
   function changeCardNumber(position: Position, cardNumber: string) {
     setCardNumber((prev) => {
       prev[position] = cardNumber;
@@ -70,9 +73,15 @@ function AddNewCardForm() {
 
   return (
     <StyledFrame>
-      <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} />
+      <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
       <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} />
-      <CardSelectSection />
+      <CardSelectSection
+        onSelectCardCompany={(companyName: string, color: string) => {
+          setSelectedCardCompany(companyName);
+          setCardColor(color);
+        }}
+      />
+
       <CardExpirationPeriodSection
         expirationPeriod={expirationPeriod}
         changeExpirationPeriod={changeExpirationPeriod}
