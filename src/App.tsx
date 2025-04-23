@@ -5,6 +5,7 @@ import CardNumber from "./components/form/CardNumber";
 import ExpirationDate from "./components/form/ExpirationDate";
 import CardCvc from "./components/form/CardCvc";
 import CardCompany from "./components/form/CardCompany";
+import CardPassword from "./components/form/CardPassword";
 
 export type cardNumber = {
 	first: string;
@@ -31,11 +32,13 @@ function App() {
 	});
 	const [cvcNumber, setCvcNumber] = useState<string>("");
 	const [cardCompany, setCardCompany] = useState<string>("");
+	const [cardPassword, setCardPassword] = useState<string>("");
 
 	return (
 		<MainContainer>
 			<Card cardNumbers={cardNumber} cardCompany={cardCompany} expirationDate={expirationDate} />
 			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
+			<CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />
 			<CardCompany cardCompany={cardCompany} setCardCompany={setCardCompany} />
 			<ExpirationDate expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
 			<CardCvc cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />

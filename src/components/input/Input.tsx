@@ -2,6 +2,7 @@ import { COLORS } from "../../styles/colors";
 import styled from "styled-components";
 
 type Props = {
+	type?: string;
 	placeholder?: string;
 	isError?: boolean;
 	value?: string;
@@ -10,9 +11,10 @@ type Props = {
 	onBlur?: (value: string) => void;
 };
 
-const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur, type = "text" }: Props) => {
 	return (
 		<TextInput
+			type={type}
 			maxLength={maxLength}
 			value={value}
 			placeholder={placeholder}

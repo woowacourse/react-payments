@@ -60,7 +60,7 @@ const Card = ({ cardNumbers, cardCompany, expirationDate }: Props) => {
 	}, [cardNumbers.first]);
 
 	return (
-		<Container cardBackgroundColor={backgroundColor}>
+		<Container $cardBackgroundColor={backgroundColor}>
 			<Wrap>
 				<Chip />
 				<BrandBadge image={badgeImagePath()} />
@@ -86,13 +86,13 @@ const Card = ({ cardNumbers, cardCompany, expirationDate }: Props) => {
 
 export default Card;
 
-const Container = styled.div<{ cardBackgroundColor: string }>`
+const Container = styled.div<{ $cardBackgroundColor: string }>`
 	width: 212px;
 	height: 132px;
 	margin: 0 auto 45px;
 	padding: 8px 12px;
 	border-radius: 4px;
-	background: ${(props) => props.cardBackgroundColor};
+	background: ${(props) => props.$cardBackgroundColor};
 	box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
