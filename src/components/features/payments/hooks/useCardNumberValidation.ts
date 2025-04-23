@@ -63,7 +63,6 @@ function useCardNumberValidation() {
     value: string;
   }) => {
     if (value.length > CARD_NUMBER.length.max) return;
-    console.log(errorTypes);
 
     if (name === CARD_NUMBER_INPUT_TYPE.cardNumberPart1) {
       const isError = checkCardTypeFromPrefix(value);

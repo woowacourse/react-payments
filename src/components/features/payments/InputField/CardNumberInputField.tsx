@@ -10,7 +10,7 @@ import {
 interface CardNumberInputFieldProps {
   inputValues: Record<CardNumberInputType, string>;
   errorTypes: Record<CardNumberInputType, ErrorType[]>;
-  handleValue: ({
+  handleInputValue: ({
     name,
     value,
   }: {
@@ -23,7 +23,7 @@ interface CardNumberInputFieldProps {
 function CardNumberInputField({
   inputValues,
   errorTypes,
-  handleValue,
+  handleInputValue,
   onBlur,
 }: CardNumberInputFieldProps) {
   const errorStatus = Object.values(errorTypes).find(
@@ -42,10 +42,10 @@ function CardNumberInputField({
           key={inputType}
           inputType="number"
           placeholder="1234"
-          value={inputValues[inputType]}
-          onChange={handleValue}
-          onBlur={onBlur}
           name={inputType}
+          value={inputValues[inputType]}
+          onChange={handleInputValue}
+          onBlur={onBlur}
           isError={Boolean(errorTypes[inputType].length)}
         />
       ))}

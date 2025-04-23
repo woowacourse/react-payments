@@ -21,5 +21,3 @@ export const EXPIRATION_DATE_INPUT_PLACEHOLDER: Record<
   expirationDatePart1: 'MM',
   expirationDatePart2: 'YY',
 };
-
-export type CVCInputValueType = 'CVCPart1';

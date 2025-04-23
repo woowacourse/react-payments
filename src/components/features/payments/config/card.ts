@@ -23,5 +23,5 @@ export const EXPIRATION_DATE = {
 };
 
 export const CVC = {
-  length: 3,
+  length: { min: 0, max: 3 },
 };

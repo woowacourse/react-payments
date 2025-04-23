@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import {
-  CVCInputValueType,
-  ExpirationDateInputType,
-} from '../../components/features/payments/config/inputField';
+import { ExpirationDateInputType } from '../../components/features/payments/config/inputField';
 import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
 import CardNumberInputField from '../../components/features/payments/InputField/CardNumberInputField';
 import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
+import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
 
 function Payments() {
-  const { inputValues, errorTypes, handleValue, onBlur, cardType } =
-    useCardNumberValidation();
+  const {
+    inputValues: cardNumberInputValues,
+    errorTypes: cardNumberErrorTypes,
+    cardType,
+    handleValue: handleCardNumberInputValue,
+    onBlur: onCardNumberBlur,
+  } = useCardNumberValidation();
 
   const [expirationDateInputValue, setExpirationDateInputValue] = useState<
     Record<ExpirationDateInputType, string>
@@ -22,17 +25,18 @@ function Payments() {
     expirationDatePart2: '',
   });
 
-  const [CVCInputValue, setCVCInputValue] = useState<
-    Record<CVCInputValueType, string>
-  >({
-    CVCPart1: '',
-  });
+  const {
+    inputValue: CVCInputValue,
+    errorType: CVCErrorType,
+    handleInputValue: handleCVCInputValue,
+    onBlur: onCVCInputBlur,
+  } = useCVCValidation();
 
   return (
     <PaymentsLayout>
       <PaymentsContainer>
         <CardPreview
-          cardNumberInputValue={inputValues}
+          cardNumberInputValue={cardNumberInputValues}
           expirationDateInputValue={expirationDateInputValue}
           cardType={cardType}
         />
@@ -41,10 +45,10 @@ function Payments() {
           caption="본인 명의의 카드만 결제 가능합니다."
         >
           <CardNumberInputField
-            inputValues={inputValues}
-            errorTypes={errorTypes}
-            handleValue={handleValue}
-            onBlur={onBlur}
+            inputValues={cardNumberInputValues}
+            errorTypes={cardNumberErrorTypes}
+            handleInputValue={handleCardNumberInputValue}
+            onBlur={onCardNumberBlur}
           />
         </InputSection>
         <InputSection
@@ -59,7 +63,9 @@ function Payments() {
         <InputSection title="CVC 번호를 입력해 주세요">
           <CVCInputField
             inputValue={CVCInputValue}
-            setInputValue={setCVCInputValue}
+            errorTypes={CVCErrorType}
+            handleInputValue={handleCVCInputValue}
+            onBlur={onCVCInputBlur}
           />
         </InputSection>
       </PaymentsContainer>
