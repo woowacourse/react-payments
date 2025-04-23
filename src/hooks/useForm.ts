@@ -8,16 +8,16 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
   const [errors, setErrors] = useState<T>(defaultValues);
   const [isValid, setIsValid] = useState(false);
 
-  const register = (
+  const register = <E extends HTMLInputElement | HTMLSelectElement>(
     currentKey: keyof T,
     options?: {
-      onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+      onChange?: (e: React.ChangeEvent<E>) => void;
       validation: ValidationType;
     },
   ) => {
     return {
       value: value[currentKey],
-      onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      onChange: (e: React.ChangeEvent<E>) => {
         setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
         if (options?.validation) {
           setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
