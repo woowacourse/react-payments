@@ -8,6 +8,7 @@ interface DropdownProps<T> {
   defaultValue: string;
   dropdownList: T[] | readonly T[];
   onChange: (value: T) => void;
+  autoFocus?: boolean;
 }
 
 function Dropdown<T extends string>({
@@ -15,6 +16,7 @@ function Dropdown<T extends string>({
   defaultValue,
   dropdownList,
   onChange,
+  autoFocus = false,
 }: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
@@ -32,6 +34,7 @@ function Dropdown<T extends string>({
     <div ref={dropdownRef} className={styles.container}>
       <input type="hidden" />
       <button
+        autoFocus={autoFocus}
         type="button"
         onClick={handleDropdownToggle}
         className={`${styles.button} ${isOpen ? styles.activeButton : ""} 

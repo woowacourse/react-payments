@@ -26,6 +26,10 @@
   padding: 0.5rem;
 }
 
+.button:focus {
+  border: 1px solid #000;
+}
+
 .textBlack {
   color: #000;
 }

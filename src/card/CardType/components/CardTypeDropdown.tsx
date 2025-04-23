@@ -19,6 +19,7 @@ function CardTypeDropdown({
         defaultValue="카드사를 선택해 주세요."
         dropdownList={CARD_TYPE_LIST}
         onChange={handleCardTypeChange}
+        autoFocus={true}
       />
     </div>
   );
