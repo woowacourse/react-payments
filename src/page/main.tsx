@@ -11,6 +11,7 @@ import CardCvcSection from '../components/form/CardCvcSection';
 import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
+import Button from '../components/button/Button';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -69,13 +70,7 @@ const Main = () => {
         onChange={(value) => setcvcNumber(value)}
       />
 
-      <Button
-        onClick={() => {
-          navigate(PATH.CONFIRM);
-        }}
-      >
-        확인
-      </Button>
+      <Button onClick={() => navigate(PATH.CONFIRM)}>확인</Button>
     </MainContainer>
   );
 };
@@ -86,13 +81,4 @@ const MainContainer = styled.div`
   width: 376px;
   padding: 77px 30px 20px;
   margin: auto;
-`;
-
-const Button = styled.div`
-  background-color: #333;
-  color: white;
-  font-weight: bold;
-  padding: 25px;
-  text-align: center;
-  cursor: pointer;
 `;
