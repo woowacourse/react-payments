@@ -4,7 +4,7 @@ import InputField from '../inputField/InputField';
 import Input from '../input/Input';
 import {useState} from 'react';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
-import {MESSAGE} from './constants/error';
+import {MESSAGE} from '../constants/error';
 
 const INPUT_MAX_LENGTH = 3;
 

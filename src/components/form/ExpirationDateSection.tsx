@@ -5,9 +5,9 @@ import Title from '../title/Title';
 import Input from '../input/Input';
 import findErrorOrder from '../../utils/findErrorOrder';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
-import {MESSAGE} from './constants/error';
 import styled from 'styled-components';
 import {ExpirationDate} from '../../type/Card';
+import {MESSAGE} from '../constants/error';
 
 const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;

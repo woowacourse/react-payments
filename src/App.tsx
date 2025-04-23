@@ -6,18 +6,24 @@ import ExpirationDateSection from './components/form/ExpirationDateSection';
 import CardCvcSection from './components/form/CardCvcSection';
 import {CardNumber, ExpirationDate} from './type/Card';
 
+const INIT_CARD_NUMBER = {
+  first: '',
+  second: '',
+  third: '',
+  fourth: '',
+};
+
+const INIT_EXPIRATION_DATE = {
+  month: '',
+  year: '',
+};
+
 function App() {
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    month: '',
-    year: '',
-  });
+  const [cardNumber, setCardNumber] = useState<CardNumber>(INIT_CARD_NUMBER);
+  const [expirationDate, setExpirationDate] =
+    useState<ExpirationDate>(INIT_EXPIRATION_DATE);
   const [cvcNumber, setcvcNumber] = useState('');
+  const [cardCompany, setCardCompany] = useState();
 
   return (
     <MainContainer>

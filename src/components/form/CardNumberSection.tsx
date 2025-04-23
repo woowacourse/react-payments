@@ -5,9 +5,9 @@ import InputField from '../inputField/InputField';
 import Title from '../title/Title';
 import findErrorOrder from '../../utils/findErrorOrder';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
-import {MESSAGE} from './constants/error';
 import styled from 'styled-components';
 import {CardNumber} from '../../type/Card';
+import {MESSAGE} from '../constants/error';
 
 const INPUT_MAX_LENGTH = 4;
 const ORDER_LABEL = ['first', 'second', 'third', 'fourth'] as const;
