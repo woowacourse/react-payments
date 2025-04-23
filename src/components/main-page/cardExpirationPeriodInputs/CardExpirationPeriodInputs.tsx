@@ -72,7 +72,17 @@ function CardExpirationPeriodInputs({
               changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
               autoFocusToNext(e, EXPIRATION_PERIOD_LENGTH);
 
-              const isComplete = e.target.value.length === EXPIRATION_PERIOD_LENGTH && isValidNumber(e.target.value);
+              const isMonthValid =
+                isValidLength(expirationPeriod.month, EXPIRATION_PERIOD_LENGTH) &&
+                isValidNumber(expirationPeriod.month) &&
+                isValidMonthRange(expirationPeriod.month);
+
+              const isYearValid =
+                isValidLength(e.target.value, EXPIRATION_PERIOD_LENGTH) &&
+                isValidNumber(e.target.value) &&
+                isValidYearRange(e.target.value);
+
+              const isComplete = isMonthValid && isYearValid;
 
               if (isComplete) {
                 viewNextInput();
