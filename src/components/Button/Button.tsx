@@ -5,10 +5,10 @@ export type ButtonVariant = "default" | "rounded";
 export type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps extends ComponentProps<"button"> {
-  variant: ButtonVariant;
-  size: ButtonSize;
-  fullWidth: boolean;
-  fixed: boolean;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  fixed?: boolean;
 }
 
 function Button({
