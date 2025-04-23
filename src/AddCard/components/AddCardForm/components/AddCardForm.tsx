@@ -1,51 +1,51 @@
 import styles from "./AddCardForm.module.css";
-import CardInputBox from "./CardInputBox/CardInputBox";
-import CardNumberInputs, {
-  type CardNumberInputsProps,
-} from "./CardNumber/components/CardNumberInputs/CardNumberInputs";
-import CardExpireDateInputs, {
-  type CardExpireDateInputsProps,
-} from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
-import CVCInputs, { type CVCInputsProps } from "./CVC/components/CVCInputs";
-import CardBrandDropdown, {
-  type BrandDropdownProps,
-} from "./CardBrand/components/CardBrandDropdown";
 import { FlowStep, STEP_ORDER } from "../../../hooks/useCardRegistrationFlow";
-import PasswordInputs, {
-  PasswordInputProps,
-} from "./Password/components/PasswordInputs";
-
+import CardInputBox from "./CardInputBox/CardInputBox";
+import CardNumberInputs from "./CardNumber/components/CardNumberInputs/CardNumberInputs";
+import CardBrandDropdown from "./CardBrand/components/CardBrandDropdown";
+import CardExpireDateInputs from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
+import CVCInputs from "./CVC/components/CVCInputs";
+import PasswordInputs from "./Password/components/PasswordInputs";
+import { CardState, CardHandlers } from "../../../types/card";
+import Button from "@/components/Button/Button";
+import { useNavigate } from "react-router";
 interface AddCardFormProps {
-  addCardState: CardNumberInputsProps &
-    CardExpireDateInputsProps &
-    CVCInputsProps &
-    BrandDropdownProps &
-    PasswordInputProps;
-
+  addCardState: CardState & CardHandlers;
   currentStep: FlowStep;
+  allValid: boolean;
 }
 
 function AddCardForm({
   addCardState: {
     cardNumberState,
-    handleCardNumberChange,
     expireDate,
+    CVCState,
+    selectedBrand,
+    passwordState,
+    handleCardNumberChange,
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
-    CVCState,
     handleCVCChange,
-    selectedBrand,
-    setSelectedBrand,
-    passwordState,
     handlePasswordChange,
+    setSelectedBrand,
   },
   currentStep,
+  allValid,
 }: AddCardFormProps) {
+  const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
+  function handleAddCardButton() {
+    navigate("/AddCardConfirm", {
+      state: {
+        firstCardNumber: cardNumberState["first"].value,
+        selectedBrand: selectedBrand,
+      },
+    });
+  }
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
       <CardInputBox
         title="결제할 카드 번호를 입력해 주세요"
         guideText="본인 명의의 카드만 결제 가능합니다."
@@ -103,6 +103,17 @@ function AddCardForm({
             />
           }
         />
+      )}
+      {allValid && (
+        <Button
+          variant="default"
+          size="large"
+          fullWidth={true}
+          fixed={true}
+          onClick={handleAddCardButton}
+        >
+          확인
+        </Button>
       )}
     </form>
   );
