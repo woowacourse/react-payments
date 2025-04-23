@@ -6,7 +6,6 @@ export type RegisterType<T extends Record<string, string>> = ReturnType<typeof u
 export default function useForm<T extends Record<string, string>>({ defaultValues }: { defaultValues: T }) {
   const [value, setValue] = useState<T>(defaultValues);
   const [errors, setErrors] = useState<T>(defaultValues);
-  const [isValid, setIsValid] = useState(false);
 
   const register = <E extends HTMLInputElement | HTMLSelectElement>(
     currentKey: keyof T,
@@ -21,18 +20,15 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
         setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
         if (options?.validation) {
           setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
-
-          setIsValid(
-            Object.entries(value).every(
-              ([key]) => validate(options.validation, currentKey === key ? e.target.value : value[key]) === '',
-            ),
-          );
         }
 
         options?.onChange?.(e);
       },
     };
   };
+
+  const isDirty = Object.values(value).some((value) => value !== '');
+  const isValid = isDirty && Object.values(errors).every((error) => error === '');
 
   return { value, errors, register, isValid };
 }
