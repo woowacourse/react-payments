@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import Card from './components/card/Card';
 import {useState} from 'react';
-import CardNumberSection from './components/form/CardNumberSection';
-import ExpirationDateSection from './components/form/ExpirationDateSection';
-import CardCvcSection from './components/form/CardCvcSection';
-import {CardCompany, CardNumber, ExpirationDate} from './type/Card';
-import CardCompanySection from './components/form/CardCompanySection';
-import PasswordSection from './components/form/PasswordSection';
+
+import Card from '../components/card/Card';
+import PasswordSection from '../components/form/PasswordSection';
+import CardCompanySection from '../components/form/CardCompanySection';
+import CardNumberSection from '../components/form/CardNumberSection';
+import ExpirationDateSection from '../components/form/ExpirationDateSection';
+import CardCvcSection from '../components/form/CardCvcSection';
+
+import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -20,7 +22,7 @@ const INIT_EXPIRATION_DATE = {
   year: '',
 };
 
-function App() {
+const Main = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(INIT_CARD_NUMBER);
   const [expirationDate, setExpirationDate] =
     useState<ExpirationDate>(INIT_EXPIRATION_DATE);
@@ -62,14 +64,25 @@ function App() {
         value={cvcNumber}
         onChange={(value) => setcvcNumber(value)}
       />
+
+      <Button>확인</Button>
     </MainContainer>
   );
-}
+};
 
-export default App;
+export default Main;
 
 const MainContainer = styled.div`
   width: 376px;
   padding: 77px 30px 20px;
   margin: auto;
+`;
+
+const Button = styled.div`
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
 `;
