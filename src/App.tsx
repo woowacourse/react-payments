@@ -78,6 +78,7 @@ function App() {
       <CardPreview
         cardNumber={cardNumber}
         cardValidityPeriod={cardValidityPeriod}
+        cardCompany={cardCompany}
       />
       <CardForm>
         {/* {showRef.current.password && (
