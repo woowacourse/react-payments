@@ -23,6 +23,7 @@ interface DropdownContextType {
 interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
   defaultValue?: string;
   placeholder?: string;
+  onNext?: () => void;
 }
 
 interface DropdownOptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
@@ -39,9 +40,10 @@ const Dropdown = ({
   children,
   defaultValue = '',
   placeholder = '카드사를 선택해주세요',
+  onNext,
   ...props
 }: PropsWithChildren<DropdownProps>) => {
-  const { setSelectedCardBrand } = useCard();
+  const { selectedCardBrand, setSelectedCardBrand } = useCard();
   const [selectedOption, setSelectedOption] = useState(defaultValue);
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -49,6 +51,10 @@ const Dropdown = ({
     setSelectedOption(value);
     setSelectedCardBrand(value);
   };
+
+  if (selectedCardBrand) {
+    onNext?.();
+  }
 
   return (
     <div css={dropdownContainer}>
