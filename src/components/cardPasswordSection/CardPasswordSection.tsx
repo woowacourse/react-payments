@@ -2,7 +2,7 @@ import SectionTitle from '../sectionTitle/SectionTitle';
 import styled from 'styled-components';
 
 import { CardPasswordSectionProps } from '../../types/index.types';
-import CardPasswordInputs from '../cardPasswordInputs/cardPasswordInputs';
+import CardPasswordInputs from '../cardPasswordInputs/CardPasswordInputs';
 
 const StyledContainer = styled.div`
   display: flex;
