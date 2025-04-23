@@ -40,7 +40,7 @@ export const validators = [
     Object.values(expire.expireDate).every(
       ({ value, errorMessage }) => !errorMessage && value.length === 2
     ),
-  // CVC
+
   ({ cvc }: Slices) =>
     !cvc.CVCState.errorMessage && cvc.CVCState.value.length === 3,
 ];
