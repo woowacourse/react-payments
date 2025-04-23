@@ -48,17 +48,20 @@ function Dropdown<T extends string>({
         )}
       </button>
       {isOpen && (
-        <ul className={styles.dropdownList}>
-          {dropdownList.map((item) => (
-            <li
-              key={item}
-              className={styles.dropdownListItem}
-              onClick={() => handleDropdownItemClick(item)}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+        <div className={styles.dropdownArea}>
+          <ul className={styles.dropdownList}>
+            {dropdownList.map((item) => (
+              <li
+                key={item}
+                className={styles.dropdownListItem}
+                onClick={() => handleDropdownItemClick(item)}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className={styles.fixedHeight} />
+        </div>
       )}
     </div>
   );
