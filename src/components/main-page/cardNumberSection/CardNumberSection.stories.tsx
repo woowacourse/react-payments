@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardNumberInputs from './CardNumberInputs';
+import CardNumberSection from './CardNumberSection';
 
 const meta = {
-  title: 'CardNumberInputs',
-  component: CardNumberInputs,
-} satisfies Meta<typeof CardNumberInputs>;
+  title: 'CardNumberSection',
+  component: CardNumberSection,
+} satisfies Meta<typeof CardNumberSection>;
 
 export default meta;
 
@@ -14,5 +14,6 @@ export const Default: Story = {
   args: {
     cardNumber: { first: '12', second: '23', third: '34', fourth: '45' },
     changeCardNumber: () => alert('변경'),
+    viewNextInput: () => alert('변경'),
   },
 };

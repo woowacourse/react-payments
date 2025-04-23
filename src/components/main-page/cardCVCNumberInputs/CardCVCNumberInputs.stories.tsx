@@ -14,5 +14,6 @@ export const Default: Story = {
   args: {
     CVCNumber: '123',
     changeCVCNumber: () => alert('변경'),
+    viewNextInput: () => alert('변경'),
   },
 };
