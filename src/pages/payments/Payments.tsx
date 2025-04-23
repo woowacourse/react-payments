@@ -12,6 +12,7 @@ import InputSection from '../../components/features/payments/InputSection/InputS
 import { DropdownOptionType } from '../../types/dropdown';
 import CardPasswordInputField from '../../components/features/payments/InputField/CardPasswordInputField';
 import useCardPasswordValidation from '../../components/features/payments/hooks/useCardPasswordValidation';
+import { CARD_BANK } from '../../components/features/payments/config/card';
 
 function Payments() {
   const {
@@ -53,6 +54,7 @@ function Payments() {
           cardNumberInputValue={cardNumberInputValues}
           expirationDateInputValue={expirationDateInputValues}
           cardType={cardType}
+          cardBank={cardBankValue}
         />
         <InputSection
           title="결제할 카드 번호를 입력해 주세요"
@@ -70,16 +72,10 @@ function Payments() {
           caption="현재 국내 카드사만 가능합니다."
         >
           <Dropdown
-            options={[
-              { label: 'BC카드', value: 'bc' },
-              { label: '신한카드', value: 'shinhan' },
-              { label: '카카오뱅크', value: 'kakao' },
-              { label: '현대카드', value: 'hyundai' },
-              { label: '우리카드', value: 'woori' },
-              { label: '롯데카드', value: 'lotte' },
-              { label: '하나카드', value: 'hana' },
-              { label: '국민카드', value: 'kookmin' },
-            ]}
+            options={Object.entries(CARD_BANK).map(([key, value]) => ({
+              label: value.label,
+              value: key,
+            }))}
             selectedValue={cardBankValue}
             setSelectedValue={setCardBankValue}
             placeholder="카드사를 선택해주세요"

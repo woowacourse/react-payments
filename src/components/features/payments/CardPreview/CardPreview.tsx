@@ -1,24 +1,27 @@
 import styled from 'styled-components';
-import { CardType } from '../config/card';
+import { CARD_BANK, CardBankType, CardType } from '../config/card';
 import {
   CardNumberInputType,
   ExpirationDateInputType,
 } from '../config/inputField';
 import CardInfoBox from './CardInfoBox';
+import { DropdownOptionType } from '../../../../types/dropdown';
 
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;
   expirationDateInputValue: Record<ExpirationDateInputType, string>;
   cardType: CardType;
+  cardBank: DropdownOptionType | null;
 }
 
 function CardPreview({
   cardNumberInputValue,
   expirationDateInputValue,
   cardType,
+  cardBank,
 }: CardPreviewProps) {
   return (
-    <Card>
+    <Card $cardBank={cardBank}>
       <CardChip />
       <CardTypeBadge src={`./img/${cardType}.png`} $cardType={cardType} />
       <CardInfoBox
@@ -29,7 +32,7 @@ function CardPreview({
   );
 }
 
-const Card = styled.div`
+const Card = styled.div<{ $cardBank: DropdownOptionType | null }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -37,7 +40,10 @@ const Card = styled.div`
   margin: 40px 0px;
   width: 212px;
   height: 132px;
-  background: #333333;
+  background: ${(props) =>
+    props.$cardBank
+      ? CARD_BANK[props.$cardBank.value as CardBankType].color
+      : '#333333'};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
   box-sizing: border-box;
