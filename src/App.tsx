@@ -6,6 +6,7 @@ import ExpirationDateSection from './components/form/ExpirationDateSection';
 import CardCvcSection from './components/form/CardCvcSection';
 import {CardCompany, CardNumber, ExpirationDate} from './type/Card';
 import CardCompanySection from './components/form/CardCompanySection';
+import PasswordSection from './components/form/PasswordSection';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -25,6 +26,7 @@ function App() {
     useState<ExpirationDate>(INIT_EXPIRATION_DATE);
   const [cvcNumber, setcvcNumber] = useState('');
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
+  const [password, setPassword] = useState('');
 
   return (
     <MainContainer>
@@ -32,6 +34,10 @@ function App() {
         cardNumbers={cardNumber}
         expirationDate={expirationDate}
         cardCompany={cardCompany}
+      />
+      <PasswordSection
+        value={password}
+        onChange={(value) => setPassword(value)}
       />
       <CardCompanySection onChange={(value) => setCardCompany(value)} />
       <CardNumberSection

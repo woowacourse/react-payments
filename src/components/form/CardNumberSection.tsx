@@ -17,10 +17,7 @@ type Props = {
   onChange: (order: keyof CardNumber, value: string) => void;
 };
 
-const CardNumberSection = ({
-  value: cardNumber,
-  onChange: onCardNumberChange,
-}: Props) => {
+const CardNumberSection = ({value, onChange}: Props) => {
   const [error, setError] = useState({
     first: '',
     second: '',
@@ -29,7 +26,7 @@ const CardNumberSection = ({
   });
 
   const handleInput = (order: keyof CardNumber, value: string) => {
-    onCardNumberChange(order, value);
+    onChange(order, value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
@@ -56,7 +53,7 @@ const CardNumberSection = ({
           <Input
             isError={error[label].length > 0}
             placeholder="1234"
-            value={cardNumber[label]}
+            value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
             onChange={(e) => handleInput(label, e.target.value)}
             onBlur={(e) => handleFocusout(label, e.target.value)}

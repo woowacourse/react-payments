@@ -43,17 +43,14 @@ const expirationErrorRule = [
   },
 ];
 
-const ExpirationDateSection = ({
-  value: expirationDate,
-  onChange: onExpirationDateChange,
-}: Props) => {
+const ExpirationDateSection = ({value, onChange}: Props) => {
   const [error, setError] = useState({
     month: '',
     year: '',
   });
 
   const handleInput = (order: keyof ExpirationDate, value: string) => {
-    onExpirationDateChange(order, value);
+    onChange(order, value);
 
     const matchedError = expirationErrorRule.find((rule) =>
       rule.validate(value, order)
@@ -79,7 +76,7 @@ const ExpirationDateSection = ({
           <Input
             isError={error[label].length > 0}
             placeholder={label === 'month' ? 'MM' : 'YY'}
-            value={expirationDate[label]}
+            value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
             onChange={(e) => handleInput(label, e.target.value)}
             onBlur={(e) => handleFocusout(label, e.target.value)}

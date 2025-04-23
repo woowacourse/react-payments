@@ -40,6 +40,7 @@ const CardNumberWrap = styled.div`
 const Select = styled.select<{$isError: boolean}>(
   (props) => `
   width:100%;
+  margin-top:16px;
   padding: 8px;
   border-radius: 2px;
   border:none;

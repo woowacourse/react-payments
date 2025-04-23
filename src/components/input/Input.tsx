@@ -7,6 +7,7 @@ type Props = {
 } & ComponentProps<'input'>;
 
 const Input = ({
+  type,
   placeholder,
   isError = false,
   value,
@@ -16,6 +17,7 @@ const Input = ({
 }: Props) => {
   return (
     <TextInput
+      type={type}
       maxLength={maxLength}
       value={value}
       placeholder={placeholder}
