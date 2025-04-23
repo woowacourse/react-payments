@@ -9,13 +9,6 @@ interface CardCompanyProps {
 }
 
 export default function CardCompany({ register }: CardCompanyProps) {
-  const { value, onChange } = register('company', {
-    validation: {
-      required: true,
-      errorMessage: '카드사를 선택해주세요.',
-    },
-  });
-
   return (
     <div>
       <Title>카드사를 선택해 주세요</Title>
@@ -23,7 +16,15 @@ export default function CardCompany({ register }: CardCompanyProps) {
       <Label id="card-company">카드사</Label>
       <Spacing size={8} />
       <S.SelectWrapper>
-        <S.Select value={value} onChange={onChange}>
+        {/* @ts-expect-error TODO: select 요소 onChange 타입 확장 필요  */}
+        <S.Select
+          {...register('company', {
+            validation: {
+              required: true,
+              errorMessage: '카드사를 선택해주세요.',
+            },
+          })}
+        >
           <option value="">카드사를 선택해주세요</option>
           {CARD_COMPANIES.map((company) => (
             <option key={company.id} value={company.id}>
