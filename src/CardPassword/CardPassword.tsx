@@ -1,9 +1,11 @@
+import { ChangeEventHandler } from "react";
 import InputText from "../components/InputText/InputText";
-import CardNumberInput from "../components/Input/CardNumberInput";
+import NumberInput from "../components/Input/CardNumberInput";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 
 interface CardPasswordProps {
   handleChange: (value: string) => void;
+  // handleChange: ChangeEventHandler<HTMLInputElement>;
   password: string;
   errorMessage: string;
   onComplete: () => void;
@@ -26,7 +28,7 @@ export default function CardPassword({
       <InputText inputValue={CARD_PASSWORD.TITLE} variant="title" />
       <InputText inputValue={CARD_PASSWORD.DESCRIPTION} variant="description" />
       <InputText inputValue={CARD_PASSWORD.SUBTITLE} variant="subtitle" />
-      <CardNumberInput
+      <NumberInput
         onChange={handleChange}
         placeholder={CARD_PASSWORD.PLACEHOLDER}
         value={password}

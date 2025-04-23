@@ -1,5 +1,5 @@
 import InputText from "../components/InputText/InputText";
-import CardNumberInput from "../components/Input/CardNumberInput";
+import NumberInput from "../components/Input/CardNumberInput";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 
 interface CardCvcNumberProps {
@@ -25,7 +25,7 @@ export default function CardCvcNumber({
     <section>
       <InputText inputValue={CARD_CVC_NUMBER.TITLE} variant="title" />
       <InputText inputValue={CARD_CVC_NUMBER.SUBTITLE} variant="subtitle" />
-      <CardNumberInput
+      <NumberInput
         onChange={handleChange}
         placeholder={CARD_CVC_NUMBER.PLACEHOLDER}
         value={cvcNumbers}

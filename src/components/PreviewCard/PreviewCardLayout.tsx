@@ -12,10 +12,7 @@ interface PreviewCardLayoutProps {
     third: string;
     fourth: string;
   };
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardExpirationDate: string[];
   cardType: CardType;
 }
 
