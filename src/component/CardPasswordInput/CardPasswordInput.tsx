@@ -12,24 +12,29 @@ import { Button } from '../@common/Button/Button';
 import Input from '../@common/Input/Input';
 import Title from '../@common/Title/Title';
 import { cardPasswordInputLayout } from './CardPasswordInput.style';
+import { useCallback } from 'react';
+import useEasyNavigate from '../../hooks/useEasyNavigate';
 
-interface CardPasswordInputProps {
-  onNext?: () => void;
-}
-
-function CardPasswordInput(props: CardPasswordInputProps) {
-  const { onNext } = props;
+function CardPasswordInput() {
+  const { goPage } = useEasyNavigate();
   const {
     cardPassword,
     handleCardPasswordChange,
     cardPasswordError: hasError,
     getCardPasswordErrorMessage,
     isCardPasswordValid,
+    selectedCardBrand,
+    cardNumber,
   } = useCard();
 
-  if (isCardPasswordValid && isCardPasswordValid()) {
-    onNext?.();
-  }
+  const handlePaymentComplete = useCallback(() => {
+    const cardNumberFirst = cardNumber.first?.toString();
+    const cardBrand = selectedCardBrand;
+
+    goPage(`/complete?cardNumber=${cardNumberFirst}&cardBrand=${cardBrand}`);
+  }, [goPage, cardNumber, selectedCardBrand]);
+
+  const isCompleteForm = cardPassword?.length === CARD_LENGTH.password;
 
   return (
     <div css={cardPasswordInputLayout}>
@@ -56,8 +61,14 @@ function CardPasswordInput(props: CardPasswordInputProps) {
           )}
         </div>
       </Input.Group>
-      {cardPassword?.length === CARD_LENGTH.password && (
-        <Button variant="large">결제하기</Button>
+      {isCompleteForm && (
+        <Button
+          variant="large"
+          onClick={handlePaymentComplete}
+          disabled={!isCardPasswordValid || !isCardPasswordValid()}
+        >
+          확인
+        </Button>
       )}
     </div>
   );
