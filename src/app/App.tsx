@@ -11,13 +11,12 @@ type CardNumberState = Record<CardNumberPosition, string>;
 type ExpirationPeriodState = Record<ExpirationPeriod, string>;
 
 function App() {
-  const { values: cardNumber, changeValues: changeCardNumber } =
-    useCardInfo<CardNumberState>({
-      first: INITIALIZE_VALUE,
-      second: INITIALIZE_VALUE,
-      third: INITIALIZE_VALUE,
-      fourth: INITIALIZE_VALUE,
-    });
+  const cardNumber = useCardInfo<CardNumberState>({
+    first: INITIALIZE_VALUE,
+    second: INITIALIZE_VALUE,
+    third: INITIALIZE_VALUE,
+    fourth: INITIALIZE_VALUE,
+  });
 
   const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
     useCardInfo<ExpirationPeriodState>({
@@ -36,12 +35,12 @@ function App() {
     <StyledApp>
       <StyledFrame>
         <CardPreview
-          cardNumber={cardNumber}
+          cardNumber={cardNumber.values}
           expirationPeriod={expirationPeriod}
         />
         <CardInfoForm
-          cardNumber={cardNumber}
-          changeCardNumber={changeCardNumber}
+          cardNumber={cardNumber.values}
+          changeCardNumber={cardNumber.changeValues}
           expirationPeriod={expirationPeriod}
           changeExpirationPeriod={changeExpirationPeriod}
           CVCNumber={CVCNumber}
