@@ -1,5 +1,5 @@
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import Button from '@/components/Button/Button';
+import Button from '@/components/common/Button/Button';
 import CheckIcon from '@/components/icons/CheckIcon';
 import * as S from './CompletePage.styles';
 

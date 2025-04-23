@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Label } from '@/components';
+import { Title } from '@/components';
 
 const meta = {
-  title: 'Label',
-  component: Label,
+  title: 'Title',
+  component: Title,
   tags: ['autodocs'],
-} satisfies Meta<typeof Label>;
+} satisfies Meta<typeof Title>;
 
 export default meta;
 
@@ -13,8 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    id: 'test',
-    children: '라벨입니다.',
+    children: '타이틀',
   },
   parameters: {
     controls: {

@@ -7,17 +7,17 @@ import {
   CardPassword,
   CardPreview,
   Spacing,
+  Button,
 } from '@/components';
-import Button from '@/components/Button/Button';
 import { CARD_COMPANIES } from '@/constants';
-import useForm from '@/hooks/useForm';
+import { useForm } from '@/hooks';
 import {
   CardCompanyInputType,
   CardCVCNumberInputType,
   CardExpirationDateInputType,
   CardNumberInputType,
   CardPasswordInputType,
-} from '@/types/input';
+} from '@/types';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './RegisterPage.styles';

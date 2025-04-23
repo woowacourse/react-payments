@@ -13,28 +13,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: '1234',
-    isError: false,
+    placeholder: '입력해주세요.',
   },
   parameters: {
     controls: {
       expanded: true,
     },
-  },
-};
-
-export const Valid: Story = {
-  args: {
-    placeholder: '1234',
-    value: '1234',
-    isError: false,
-  },
-};
-
-export const Error: Story = {
-  args: {
-    placeholder: '1234',
-    value: '우테코',
-    isError: true,
   },
 };
