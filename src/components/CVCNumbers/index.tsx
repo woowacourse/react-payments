@@ -4,12 +4,13 @@ import CVCNumbersView from './CVCNumbersView';
 export interface CVCNumbersProps {
   cvcNumbers: string;
   setCvcNumbers: React.Dispatch<React.SetStateAction<string>>;
+  onComplete?: () => void;
 }
 
 const CVC_NUMBERS_LENGTH = 3;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
-const CVCNumbers = ({ cvcNumbers, setCvcNumbers }: CVCNumbersProps) => {
+const CVCNumbers = ({ cvcNumbers, setCvcNumbers, onComplete }: CVCNumbersProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [error, setError] = useState(false);
 
@@ -31,6 +32,7 @@ const CVCNumbers = ({ cvcNumbers, setCvcNumbers }: CVCNumbersProps) => {
       errorMessage={errorMessage}
       error={error}
       handleInputChange={handleInputChange}
+      onComplete={onComplete}
     />
   );
 };

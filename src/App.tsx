@@ -5,6 +5,7 @@ import ExpirationPeriod from './components/ExpirationPeriod';
 import CVCNumbers from './components/CVCNumbers';
 import Preview from './components/Preview';
 import CardBrandSelector from './components/CardBrand/CardBrandSelector';
+import CardPassword from './components/CardPassword';
 
 type CardNumber = {
   first: string;
@@ -35,6 +36,8 @@ const App = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [isCardNumbersFilled, setIsCardNumbersFilled] = useState(false);
   const [isPeriodFilled, setIsPeriodFilled] = useState(false);
+  const [passwordNumbers, setPasswordNumbers] = useState('');
+  const [isCVCFilled, setIsCVCFilled] = useState(false);
 
   return (
     <Main>
@@ -44,8 +47,18 @@ const App = () => {
         separatorRef={separatorRef}
         cardFrameColor={cardFrameColor}
       />
+      {isCVCFilled && (
+        <CardPassword
+          passwordNumbers={passwordNumbers}
+          setPasswordNumbers={setPasswordNumbers}
+        ></CardPassword>
+      )}
       {isPeriodFilled && (
-        <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />
+        <CVCNumbers
+          cvcNumbers={cvcNumbers}
+          setCvcNumbers={setCvcNumbers}
+          onComplete={() => setIsCVCFilled(true)}
+        />
       )}
       {selectedBrand && (
         <ExpirationPeriod

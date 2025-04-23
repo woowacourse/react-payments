@@ -8,6 +8,7 @@ export interface CVCNumbersViewProps {
   errorMessage: string;
   error: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onComplete?: () => void;
 }
 
 const CVCNumbersView = ({
@@ -15,6 +16,7 @@ const CVCNumbersView = ({
   errorMessage,
   error,
   handleInputChange,
+  onComplete,
 }: CVCNumbersViewProps) => {
   return (
     <Container data-testid='cvcnumbers-component'>
@@ -26,6 +28,7 @@ const CVCNumbersView = ({
         eventHandler={handleInputChange}
         errors={[error]}
         type='text'
+        onComplete={onComplete}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
