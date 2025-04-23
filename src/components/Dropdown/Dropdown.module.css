@@ -1,11 +1,49 @@
+.dropdown,
+.dropdown::picker(select) {
+  appearance: base-select;
+}
+
 .dropdown {
   width: 100%;
   border-radius: 4px;
   border: 1px solid #acacac;
   height: 2.75rem;
-  padding: 0.5rem;
+  transition: border-color 0.4s;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  text-align: center;
 }
 
+.dropdown:hover,
 .dropdown:focus {
-  border: 1px solid #000;
+  border-color: #000;
+}
+
+.dropdown option {
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.dropdown option:hover,
+.dropdown option:focus {
+  background-color: #f5f5f5;
+}
+
+.dropdown option:checked {
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+.dropdown::picker(select) {
+  border: 1px solid #acacac;
+  padding: 4px;
+  top: calc(anchor(bottom) + 8px);
+  left: anchor(0%);
+  width: anchor(100%);
+  border-radius: 5px;
 }
