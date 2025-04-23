@@ -6,7 +6,7 @@ export type CardBrandType = (typeof CARD_BRAND_LIST)[number];
 
 interface CardBrandProps {
   CardBrandType: CardBrandType | null;
-  setCardBrandType: React.Dispatch<React.SetStateAction<CardBrandType | null>>;
+  handleDropdownChange: (value: CardBrandType) => void;
 }
 
 const CARD_BRAND_LIST = [
@@ -19,10 +19,7 @@ const CARD_BRAND_LIST = [
   '하나카드',
   '국민카드',
 ] as const;
-export default function CardBrand({ CardBrandType, setCardBrandType }: CardBrandProps) {
-  const handleDropdownChange = (value: CardBrandType) => {
-    setCardBrandType(value);
-  };
+export default function CardBrand({ CardBrandType, handleDropdownChange }: CardBrandProps) {
   return (
     <div>
       <Title description="현재 국내 카드사만 가능합니다.">카드사를 선택해 주세요</Title>

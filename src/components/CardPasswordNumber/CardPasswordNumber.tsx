@@ -29,7 +29,6 @@ export default function CardPasswordNumber({
 
     setCardPasswordErrorMessage(ERROR_MESSAGE.onlyNumber);
   };
-  console.log(cardPasswordErrorMessage);
 
   return (
     <div>

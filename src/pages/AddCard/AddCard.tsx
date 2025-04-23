@@ -7,8 +7,9 @@ import Spacing from '../../components/common/Spacing/Spacing';
 import { useState } from 'react';
 import { SequenceType } from '../../components/CardNumber/CardNumber';
 import { getCardType } from '../../utils';
-import CardBrand, { CardBrandType } from '../../components/CardBrand/CardBrand';
+import CardBrand from '../../components/CardBrand/CardBrand';
 import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
+import { useControlledCardBrand } from '../../components/CardBrand/hooks/useControlledCardBrand';
 
 export default function AddCard() {
   // 카드 번호
@@ -40,12 +41,11 @@ export default function AddCard() {
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
 
   // 카드 브랜드
-  const [CardBrandType, setCardBrandType] = useState<CardBrandType | null>(null);
 
   // 카드 비밀번호
-  const [CardPassword, setCardPassword] = useState<string>('');
+  const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
-
+  const { cardBrandType, handleDropdownChange } = useControlledCardBrand();
   const cardType = getCardType(cardNumber.first);
   return (
     <S.Wrapper>
@@ -54,7 +54,7 @@ export default function AddCard() {
           cardType={cardType}
           cardNumber={cardNumber}
           cardExpirationDate={cardExpirationDate}
-          CardBrandType={CardBrandType}
+          CardBrandType={cardBrandType}
         />
       </S.CardPreviewWrapper>
       <Spacing size={60} />
@@ -65,7 +65,7 @@ export default function AddCard() {
           cardNumberErrorMessage={cardNumberErrorMessage}
           setCardNumberErrorMessage={setCardNumberErrorMessage}
         />
-        <CardBrand CardBrandType={CardBrandType} setCardBrandType={setCardBrandType} />
+        <CardBrand CardBrandType={cardBrandType} handleDropdownChange={handleDropdownChange} />
         <CardExpirationDate
           cardExpirationDate={cardExpirationDate}
           setCardExpirationDate={setCardExpirationDate}
@@ -79,7 +79,7 @@ export default function AddCard() {
           setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
         />
         <CardPasswordNumber
-          CardPassword={CardPassword}
+          CardPassword={cardPassword}
           setCardPassword={setCardPassword}
           cardPasswordErrorMessage={cardPasswordErrorMessage}
           setCardPasswordErrorMessage={setCardPasswordErrorMessage}
