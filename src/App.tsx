@@ -1,14 +1,16 @@
 import CardNumbersInputSection from "./components/InputSection/CardNumbersInputSection";
 import CardExpirationDateInputSection from "./components/InputSection/CardExpirationDateInputSection";
 import CardCVCNumberInputSection from "./components/InputSection/CardCVCNumberInputSection";
-import styles from "./css/cardForm.module.css";
-import useCardNumbers from "./hooks/useCardNumbers";
-import useCardExpirationDate from "./hooks/useCardExpirationDate";
-import useCardCompany from "./hooks/useCardCompany";
 import CardDisplay from "./components/CardDisplay/CardDisplay";
 import CardCompanyInputSection from "./components/InputSection/CardCompanyInputSection";
 import CardPasswordInputSection from "./components/InputSection/CardPasswordInputSection";
+import CardOwnerNameInputSection from "./components/InputSection/CardOwnerNameInputSection";
+import useCardNumbers from "./hooks/useCardNumbers";
+import useCardExpirationDate from "./hooks/useCardExpirationDate";
+import useCardCompany from "./hooks/useCardCompany";
 import useCardPassword from "./hooks/useCardPassword";
+import useCardOwnerName from "./hooks/useCardOwnerName";
+import styles from "./css/cardForm.module.css";
 
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
@@ -27,7 +29,7 @@ const extractCardCompanyColor = (company: string) => {
   return companyData ? companyData.color : BASIC_COLOR;
 };
 
-const isFulledInput = (items, condition) => {
+const isFulledInput = (items, condition: number) => {
   return Object.values(items).every((item) => {
     return item.length >= condition;
   });
@@ -62,11 +64,14 @@ function App() {
     errorMessage: cardPasswordErrorMessage,
   } = useCardPassword();
 
+  const { cardOwnerName, handleCardOwnerNameChange } = useCardOwnerName();
+
   const isFulledForm =
     isFulledInput(cardNumbers, 4) &&
     isFulledInput(cardExpirationDate, 2) &&
     cardCompany.length > 0 &&
-    cardPassword.length == 2;
+    cardPassword.length == 2 &&
+    cardOwnerName.length > 0;
 
   return (
     <>
@@ -85,6 +90,10 @@ function App() {
             errorMessage={cardPasswordErrorMessage}
           />
           <CardCVCNumberInputSection />
+          <CardOwnerNameInputSection
+            cardOwnerName={cardOwnerName}
+            handleCardOwnerNameChange={handleCardOwnerNameChange}
+          />
           <CardExpirationDateInputSection
             cardExpirationDate={cardExpirationDate}
             handleCardExpirationDateChange={handleCardExpirationDateChange}
