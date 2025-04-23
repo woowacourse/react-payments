@@ -1,0 +1,49 @@
+.card-background {
+  background-color: #333333;
+  width: 212px;
+  height: 132px;
+  padding: 8px 12px;
+  color: #333333;
+  border-radius: 4px;
+}
+.card-preview-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-preview {
+  width: 36px;
+  height: 22px;
+}
+.payment-sim {
+  background-color: #ddcd78;
+  border-radius: 4px;
+}
+.card-preview-info-container {
+  display: flex;
+  flex-direction: column;
+  margin: 14px 13px 0 5px;
+  gap: 8px;
+}
+.card-preview-info-card-number-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: left;
+  min-height: 20px;
+  gap: 8px;
+}
+.card-preview-info-card-number-container div {
+  min-width: 41px;
+}
+
+.card-preview-info-text {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 2.24px;
+}
+.secret {
+  letter-spacing: -1px;
+}

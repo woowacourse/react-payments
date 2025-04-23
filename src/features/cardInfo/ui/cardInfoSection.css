@@ -1,0 +1,52 @@
+.card-info-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-info-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.card-info-description {
+  color: #8b95a1;
+  font-size: 9.5px;
+  font-weight: 400;
+}
+
+.card-info-sub-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-info-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.card-info-input-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.card-info-input-container input {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* flex: 1 1 0 → 남는 공간 비례 배분 + 줄어드는 것도 허용
+min-width: 0 → 이거 없으면 기본 최소 너비 때문에 shrink가 안 되기도 함
+box-sizing: border-box → padding 포함한 너비 계산 */
+
+.card-info-error {
+  color: #ff3d3d;
+  font-size: 9.5px;
+  font-weight: 400;
+}
