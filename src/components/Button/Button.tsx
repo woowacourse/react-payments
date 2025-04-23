@@ -1,4 +1,5 @@
 import { ComponentProps } from "react";
+import clsx from "clsx";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "default" | "rounded";
@@ -22,19 +23,18 @@ function Button({
 }: ButtonProps) {
   const shouldBeFixed = fixed || (variant === "default" && fixed !== false);
 
-  const classNames = [
-    styles.button,
-    styles[`variant${capitalizeFirstLetter(variant)}`],
-    styles[`size${capitalizeFirstLetter(size)}`],
-    fullWidth ? styles.fullWidth : "",
-    shouldBeFixed ? styles.fixed : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <button className={classNames} {...props}>
+    <button
+      className={clsx(
+        styles.button,
+        styles[`variant${capitalizeFirstLetter(variant)}`],
+        styles[`size${capitalizeFirstLetter(size)}`],
+        fullWidth && styles.fullWidth,
+        shouldBeFixed && styles.fixed,
+        className
+      )}
+      {...props}
+    >
       {children}
     </button>
   );
