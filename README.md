@@ -41,6 +41,7 @@
 - CardExpiryInput: 유효기간 입력
 - CVCInput: CVC 번호 입력
 - CardCompanySelect: 카드사 셀렉트 박스
+- CardRegisterForm: 카드 등록 폼
 - Button
   - RegisterCardButton: 등록 버튼
   - HomeButton: 등록 완료 후 홈으로 돌아가기 버튼
