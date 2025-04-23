@@ -23,6 +23,8 @@ export const PASSWORD_FRONT_MESSAGE = {
   CAPTION: '앞의 2자리를 입력해주세요',
 };
 
+export const CONFIRM_BUTTON_LABEL = '확인';
+
 export const ERROR_MESSAGE = {
   GET_LENGTH_TEXT: (length: number) => `${length}자의 숫자만 입력 가능합니다.`,
   INVALID_MONTH: '01에서 12사이의 숫자를 입력해주세요.',

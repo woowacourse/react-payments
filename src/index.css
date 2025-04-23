@@ -17,7 +17,7 @@ input[type='number'] {
 
 #root {
   display: flex;
-  padding: 20px 0px;
+  padding: 20px 0px 50px 0px;
   justify-content: center;
   align-items: center;
 }
