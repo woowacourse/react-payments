@@ -14,13 +14,14 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   const [step, setStep] = useState<Steps[number]>(defaultStep);
 
   const FunnelComponent = useMemo(() => {
-    Object.assign(
-      (props: Omit<FunnelProps<Steps>, 'step' | 'steps'>) => (
-        <Funnel<Steps> step={step} steps={steps} {...props} />
-      ),
-      { Step }
-    );
-  }, [step]);
+    const FunnelWithSteps = (
+      props: Omit<FunnelProps<Steps>, 'step' | 'steps'>
+    ) => <Funnel<Steps> step={step} steps={steps} {...props} />;
+
+    FunnelWithSteps.Step = Step;
+
+    return FunnelWithSteps;
+  }, [step, steps]);
 
   return { Funnel: FunnelComponent, step, setStep };
 };
