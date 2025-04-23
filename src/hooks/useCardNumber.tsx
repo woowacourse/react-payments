@@ -15,7 +15,8 @@ function useCardNumber() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-    const { value } = e.target;
+    const originValue = e.target.value;
+    const value = originValue.replace(/[^0-9]/g, '');
 
     if (value.length > CARD_NUMBER.MAX_LENGTH) {
       return;

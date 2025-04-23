@@ -21,7 +21,7 @@ function CardNumberField({
         {cardNumber.map((v, index) => (
           <Input
             isError={isError[index]}
-            type="number"
+            type="tel"
             name="cardNumber"
             id={`cardNumber-${index}`}
             value={v}

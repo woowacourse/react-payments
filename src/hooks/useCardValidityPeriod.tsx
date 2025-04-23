@@ -20,7 +20,8 @@ function useCardValidityPeriod() {
     e: React.ChangeEvent<HTMLInputElement>,
     type: 'month' | 'year',
   ) => {
-    const { value } = e.target;
+    const originValue = e.target.value;
+    const value = originValue.replace(/[^0-9]/g, '');
 
     if (value.length > VALIDITY_PERIOD.MAX_LENGTH) {
       return;

@@ -15,7 +15,8 @@ function useCardCVC() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const originValue = e.target.value;
+    const value = originValue.replace(/[^0-9]/g, '');
 
     if (value.length > CVC.MAX_LENGTH) {
       return;
