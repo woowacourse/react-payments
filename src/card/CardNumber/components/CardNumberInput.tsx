@@ -6,8 +6,8 @@ import type {
   CardNumberInputKey,
   CardNumberInputRefs,
   CardNumberState,
-} from "../../types";
-import { CARD_NUMBER_INPUT_KEYS } from "../../constants";
+} from "../types";
+import { CARD_NUMBER_INPUT_KEYS } from "../constants";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;

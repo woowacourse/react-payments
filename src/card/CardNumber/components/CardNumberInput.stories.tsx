@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardNumberInputs from "./CardNumberInputs";
-import { INITIAL_CARD_NUMBER_STATE } from "../../constants";
-import useControlledCardNumber from "../../hooks/useControlledCardNumber";
+import CardNumberInputs from "./CardNumberInput";
+import { INITIAL_CARD_NUMBER_STATE } from "../constants";
+import useControlledCardNumber from "../hooks/useControlledCardNumber";
 import { userEvent, expect } from "@storybook/test";
 
 const meta = {
@@ -9,7 +9,7 @@ const meta = {
   component: CardNumberInputs,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
-    inputRefs: {
+    cardNumberInputRefs: {
       first: { current: null },
       second: { current: null },
       third: { current: null },
@@ -37,13 +37,13 @@ export const Error: Story = {
 
 export const WithValidationTest: Story = {
   render: () => {
-    const { cardNumberState, inputRefs, handleCardNumberChange } =
+    const { cardNumberState, cardNumberInputRefs, handleCardNumberChange } =
       useControlledCardNumber();
 
     return (
       <CardNumberInputs
         cardNumberState={cardNumberState}
-        inputRefs={inputRefs}
+        cardNumberInputRefs={cardNumberInputRefs}
         handleCardNumberChange={handleCardNumberChange}
       />
     );

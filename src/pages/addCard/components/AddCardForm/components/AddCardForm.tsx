@@ -2,7 +2,7 @@ import styles from "./AddCardForm.module.css";
 import CardInputBox from "@card/CardInputBox/CardInputBox";
 import CardNumberInputs, {
   type CardNumberInputsProps,
-} from "@card/CardNumber/components/CardNumberInputs/CardNumberInputs";
+} from "@card/CardNumber/components/CardNumberInput";
 import CardExpireDateInputs, {
   type CardExpireDateInputsProps,
 } from "@card/ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
