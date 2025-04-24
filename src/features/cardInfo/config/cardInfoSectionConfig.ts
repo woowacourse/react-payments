@@ -1,4 +1,27 @@
-export const cardInfoSectionConfig = [
+import {
+  cardNumberValidator,
+  cardExpirationDateValidator,
+  cardCVCValidator,
+} from '../../../entities/cardInfo/model/cardInfoValidator';
+
+type InputConfig = {
+  type: string;
+  placeholder: string;
+  name: string;
+};
+
+type CardInfoSectionConfig = {
+  id: string;
+  title: string;
+  description: string;
+  subTitle: string;
+  inputArr: InputConfig[];
+  maxLength: number;
+  validator: any;
+  errorKey: string;
+};
+
+export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
   {
     id: 'cardNumber',
     title: '결제할 카드 번호를 입력해 주세요',
@@ -11,6 +34,8 @@ export const cardInfoSectionConfig = [
       { type: 'text', placeholder: '1234', name: 'cardNumber-3' },
     ],
     maxLength: 4,
+    validator: cardNumberValidator,
+    errorKey: 'cardNumberError',
   },
   {
     id: 'cardExpirationDate',
@@ -22,6 +47,8 @@ export const cardInfoSectionConfig = [
       { type: 'text', placeholder: 'YY', name: 'cardExpirationDate-year' },
     ],
     maxLength: 2,
+    validator: cardExpirationDateValidator,
+    errorKey: 'cardExpirationDateError',
   },
   {
     id: 'cardCVC',
@@ -30,5 +57,7 @@ export const cardInfoSectionConfig = [
     subTitle: 'CVC',
     inputArr: [{ type: 'text', placeholder: '123', name: 'cardCVC' }],
     maxLength: 3,
+    validator: cardCVCValidator,
+    errorKey: 'cardCVCError',
   },
 ];

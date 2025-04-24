@@ -1,23 +1,7 @@
 import { useState } from 'react';
-import {
-  cardNumberValidator,
-  cardExpirationDateValidator,
-  cardCVCValidator,
-} from '../../../entities/cardInfo/model/cardInfoValidator';
 import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
-
-const VALIDATORS = {
-  cardNumber: cardNumberValidator,
-  cardExpirationDate: cardExpirationDateValidator,
-  cardCVC: cardCVCValidator,
-};
-
-const ERROR_KEYS = {
-  cardNumber: 'cardNumberError',
-  cardExpirationDate: 'cardExpirationDateError',
-  cardCVC: 'cardCVCError',
-};
+import { cardInfoSectionConfig } from '../config/cardInfoSectionConfig';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -25,6 +9,7 @@ export default function useCardInfo() {
     cardExpirationDate: { month: '', year: '' },
     cardCVC: '',
   });
+
   const [error, setError] = useState<InputValidationResultProps>({
     cardNumberError: [-1, ''],
     cardExpirationDateError: [-1, ''],
@@ -71,15 +56,16 @@ export default function useCardInfo() {
   return { cardInfo, setCardInfo, handleCardInfoChange, error };
 }
 
-const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {
-  const validator = VALIDATORS[key];
-  const errorKey = ERROR_KEYS[key] as keyof InputValidationResultProps;
-  const [errorIndex, errorMessage] = validator(value);
+const validateAndSetError = (id: string, value: any, setError: any) => {
+  const configItem = cardInfoSectionConfig.find((item) => item.id === id);
+  if (!configItem || !configItem.validator) return;
+
+  const [errorIndex, errorMessage] = configItem.validator(value);
   setError(
     (prevError: any) =>
       ({
         ...prevError,
-        [errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
+        [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
       }) as InputValidationResultProps,
   );
 };
