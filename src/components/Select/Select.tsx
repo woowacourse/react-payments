@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import * as S from './Select.styles';
 
 interface Option {
@@ -16,6 +16,15 @@ interface SelectProps {
 
 export default function Select({ options, value, onChange, placeholder = '선택해주세요', name }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) =>
+      selectRef.current && !selectRef.current.contains(event.target as Node) && setIsOpen(false);
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleSelect = (selectedValue: string) => {
     setIsOpen(false);
@@ -32,7 +41,7 @@ export default function Select({ options, value, onChange, placeholder = '선택
   const displayText = selectedOption ? selectedOption.name : placeholder;
 
   return (
-    <S.SelectWrapper>
+    <S.SelectWrapper ref={selectRef}>
       <S.SelectButton type="button" onClick={() => setIsOpen(!isOpen)}>
         {displayText}
       </S.SelectButton>
