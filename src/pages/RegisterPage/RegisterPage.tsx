@@ -127,7 +127,9 @@ export default function RegisterPage() {
           isFlipped={isCardFlipped}
         />
       </S.CardPreviewWrapper>
+
       <Spacing size={30} />
+
       <S.CardInfoForm onSubmit={handleSubmit}>
         <If condition={currentStep === 6}>
           <Button type="submit" isFixed>
