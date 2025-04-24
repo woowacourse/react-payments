@@ -29,7 +29,7 @@ const ExpirationPeriod = ({
   period,
   setPeriod,
   separatorRef,
-  onComplete
+  onComplete,
 }: ExpirationPeriodProps) => {
   const { errors, setErrors, errorMessage, setErrorMessage } = useErrorMessage([
     false,
