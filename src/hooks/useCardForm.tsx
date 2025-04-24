@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from 'react';
 import {CardForm} from '../type/Card';
 
-const useInput = (initialData: CardForm) => {
+const useCardForm = (initialData: CardForm) => {
   const [formData, setFormData] = useState(initialData);
 
   const onChange = (
@@ -27,4 +27,4 @@ const useInput = (initialData: CardForm) => {
   return {formData, onChange};
 };
 
-export default useInput;
+export default useCardForm;

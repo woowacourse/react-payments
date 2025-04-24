@@ -6,6 +6,9 @@ import {CardCompany} from '../type/Card';
 
 const Confirm = () => {
   const location = useLocation();
+
+  if (!location.state) return <div>잘못된 경로로 들어오셨습니다.</div>;
+
   const {firstSection, cardCompany} = location.state;
 
   return (

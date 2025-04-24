@@ -11,19 +11,23 @@ const INPUT_MAX_LENGTH = 2;
 type Props = {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onError: (name: string, isError: boolean) => void;
 };
 
-const PasswordSection = ({value, onChange}: Props) => {
+const PasswordSection = ({value, onChange, onError}: Props) => {
   const [error, setError] = useState('');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
 
+    const {value, name} = e.target;
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);
+      onError(name, true);
       return;
     }
 
+    onError(name, false);
     setError('');
   };
 

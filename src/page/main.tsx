@@ -7,12 +7,13 @@ import CardCompanySection from '../components/form/CardCompanySection';
 import CardNumberSection from '../components/form/CardNumberSection';
 import ExpirationDateSection from '../components/form/ExpirationDateSection';
 import CardCvcSection from '../components/form/CardCvcSection';
+import Button from '../components/button/Button';
 
-import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
+import {CardCompany, CardForm, CardNumber, ExpirationDate} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
-import Button from '../components/button/Button';
-import useInput from '../hooks/useInput';
+import useCardForm from '../hooks/useCardForm';
+import useErrors from '../hooks/useErrors';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -27,25 +28,36 @@ const INIT_EXPIRATION_DATE = {
 };
 
 const Main = () => {
-  const {formData, onChange} = useInput({
+  const {formData, onChange} = useCardForm({
     cardNumber: INIT_CARD_NUMBER,
     expirationDate: INIT_EXPIRATION_DATE,
     cvcNumber: '',
     cardCompany: '',
     password: '',
   });
-
-  const [errors, setErrors] = useState(false);
-
+  const {isErrors, onError} = useErrors({
+    cardNumber: false,
+    expirationDate: false,
+    cvcNumber: false,
+    cardCompany: false,
+    password: false,
+  });
   const navigate = useNavigate();
 
-  const isVisible = (
-    section: CardNumber | CardCompany | ExpirationDate | string
-  ) => {
-    if (typeof section === 'string') {
-      return section !== '';
+  const isVisible = (section: keyof CardForm, maxLength: number) => {
+    // 해당 섹션에 에러가 있을 경우
+    if (isErrors[section]) {
+      console.log('에러 있음');
+      return false;
     }
-    return !Object.values(section).some((value) => value === '');
+
+    if (typeof formData[section] === 'string') {
+      return formData[section]?.length >= maxLength;
+    }
+
+    return Object.values(formData[section]).every(
+      (value) => value?.length === maxLength
+    );
   };
 
   return (
@@ -56,43 +68,54 @@ const Main = () => {
         cardCompany={formData.cardCompany}
       />
 
-      {isVisible(formData.cvcNumber) && (
-        <PasswordSection value={formData.password} onChange={onChange} />
-      )}
-
-      {isVisible(formData.expirationDate) && (
-        <CardCvcSection value={formData.cvcNumber} onChange={onChange} />
-      )}
-
-      {isVisible(formData.cardCompany) && (
-        <ExpirationDateSection
-          value={formData.expirationDate}
+      {isVisible('cvcNumber', 3) && (
+        <PasswordSection
+          value={formData.password}
           onChange={onChange}
+          onError={onError}
         />
       )}
 
-      {!errors && isVisible(formData.cardNumber) && (
+      {isVisible('expirationDate', 2) && (
+        <CardCvcSection
+          value={formData.cvcNumber}
+          onChange={onChange}
+          onError={onError}
+        />
+      )}
+
+      {isVisible('cardCompany', 1) && (
+        <ExpirationDateSection
+          value={formData.expirationDate}
+          onChange={onChange}
+          onError={onError}
+        />
+      )}
+
+      {isVisible('cardNumber', 4) && (
         <CardCompanySection onChange={onChange} name="cardCompany" />
       )}
 
       <CardNumberSection
         value={formData.cardNumber}
         onChange={onChange}
-        onError={(isError: boolean) => setErrors(isError)}
+        onError={onError}
       />
 
-      <Button
-        onClick={() =>
-          navigate(PATH.CONFIRM, {
-            state: {
-              firstSection: formData.cardNumber.first,
-              cardCompany: formData.cardCompany,
-            },
-          })
-        }
-      >
-        확인
-      </Button>
+      {isVisible('password', 2) && (
+        <Button
+          onClick={() =>
+            navigate(PATH.CONFIRM, {
+              state: {
+                firstSection: formData.cardNumber.first,
+                cardCompany: formData.cardCompany,
+              },
+            })
+          }
+        >
+          확인
+        </Button>
+      )}
     </MainContainer>
   );
 };

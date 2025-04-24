@@ -1,4 +1,4 @@
-import {ChangeEvent, ChangeEventHandler, ReactNode, useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import Description from '../description/Description';
 import Input from '../input/Input';
 import InputField from '../inputField/InputField';
@@ -21,7 +21,7 @@ const INIT_CARD_NUMBER_ERROR = {
 type Props = {
   value: CardNumber;
   onChange: (e: ChangeEvent<HTMLInputElement>, order: keyof CardNumber) => void;
-  onError: (isError: boolean) => void;
+  onError: (name: string, isError: boolean) => void;
 };
 
 const CardNumberSection = ({value, onChange, onError}: Props) => {
@@ -31,23 +31,24 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
     e: ChangeEvent<HTMLInputElement>,
     order: keyof CardNumber
   ) => {
-    const value = e.target.value;
-
     onChange(e, order);
+
+    const {value, name} = e.target;
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
-      onError(true);
+      onError(name, true);
       return;
     }
 
     if (order === ORDER_LABEL[3] && value.length < INPUT_MAX_LENGTH) {
-      onError(true);
+      setError((prev) => ({...prev, [order]: ''}));
+      onError(name, true);
       return;
     }
 
     setError((prev) => ({...prev, [order]: ''}));
-    onError(false);
+    Object.values(error).some((e) => e.length > 0) || onError(name, false);
   };
 
   const handleFocusout = (order: keyof CardNumber, value: string) => {

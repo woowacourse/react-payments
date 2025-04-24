@@ -23,6 +23,7 @@ type Props = {
     e: ChangeEvent<HTMLInputElement>,
     order: keyof ExpirationDate
   ) => void;
+  onError: (name: string, isError: boolean) => void;
 };
 
 const expirationErrorRule = [
@@ -50,7 +51,7 @@ const expirationErrorRule = [
   },
 ];
 
-const ExpirationDateSection = ({value, onChange}: Props) => {
+const ExpirationDateSection = ({value, onChange, onError}: Props) => {
   const [error, setError] = useState(INIT_EXPIRATION_DATE_ERROR);
 
   const handleInput = (
@@ -59,7 +60,7 @@ const ExpirationDateSection = ({value, onChange}: Props) => {
   ) => {
     onChange(e, order);
 
-    const value = e.target.value;
+    const {value, name} = e.target;
     const matchedError = expirationErrorRule.find((rule) =>
       rule.validate(value, order)
     );
@@ -68,6 +69,8 @@ const ExpirationDateSection = ({value, onChange}: Props) => {
       ...prev,
       [order]: matchedError?.error ?? '',
     }));
+
+    matchedError ? onError(name, true) : onError(name, false);
   };
 
   const handleFocusout = (order: keyof ExpirationDate, value: string) => {
