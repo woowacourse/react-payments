@@ -14,7 +14,7 @@ interface DefaultMessageProps {
   $isDefault: boolean;
 }
 
-const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput }: CardSelectProps) => {
+const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput, ...restProps }: CardSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectOption = (option: string) => {
@@ -29,10 +29,10 @@ const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput }: Car
   const isDefault = selectedMessage === defaultMessage;
 
   return (
-    <SelectContainer ref={backgroundRef}>
+    <SelectContainer ref={backgroundRef} {...restProps}>
       <SelectField onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
         <DefaultMessage $isDefault={isDefault}>{selectedMessage}</DefaultMessage>
-        <SelectIcon src="./selectIcon.png" alt="카드사 옵션 열기" />
+        <SelectIcon src="./selectIcon.png" alt="옵션 열기" />
       </SelectField>
       {isOpen && (
         <OptionsContainer>

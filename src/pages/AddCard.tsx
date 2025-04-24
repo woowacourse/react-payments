@@ -8,9 +8,25 @@ import DESCRIPTION_TEXT from '../constants/descriptionText';
 import useCardInputs from '../hook/useCardInputs';
 import CardLabeledInput from '../component/input/CardLabeledInput';
 import CARD_LABEL_INPUT_CONFIG from '../constants/cardLabeledInputConfig';
+// import type { CardInputProps } from '../types/CardInputTypes';
+
+// import { useState } from 'react';
 
 const AddCard = () => {
   const { cardInput, handleCardInput, errorMessages, isError } = useCardInputs();
+
+  // const STEP_SEQUENCE = ['cardNumber', 'cardBrand', 'expirationDate', 'CVC', 'password'] as const;
+  // const [stepIndex, setStepIndex] = useState(0);
+
+  // const goToNextStep = () => {
+  //   setStepIndex((prev) => prev + 1);
+  // };
+
+  // const handleStep = () => {
+  //   if (cardInput.first && cardInput.second && cardInput.third && cardInput.fourth)
+  //     if (!isError.first && !isError.second && !isError.third && !isError.fourth && cardInput.first.length !== 0) {
+  //     }
+  // };
 
   const cardNumberErrorMessage = getFirstErrorMessage([
     errorMessages.first,
@@ -27,6 +43,7 @@ const AddCard = () => {
         <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
         <CardLabeledInput
           {...CARD_LABEL_INPUT_CONFIG.password}
+          value={{ password: cardInput.password }}
           errorMessage={errorMessages.password}
           handleCardInput={handleCardInput}
           isErrors={{ password: isError.password }}
@@ -35,6 +52,7 @@ const AddCard = () => {
         <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
         <CardLabeledInput
           {...CARD_LABEL_INPUT_CONFIG.CVC}
+          value={{ CVC: cardInput.CVC }}
           errorMessage={errorMessages.CVC}
           handleCardInput={handleCardInput}
           isErrors={{ CVC: isError.CVC }}
@@ -46,6 +64,7 @@ const AddCard = () => {
         />
         <CardLabeledInput
           {...CARD_LABEL_INPUT_CONFIG.expirationDate}
+          value={{ MM: cardInput.MM, YY: cardInput.YY }}
           errorMessage={expirationDateErrorMessage}
           handleCardInput={handleCardInput}
           isErrors={{
@@ -58,7 +77,11 @@ const AddCard = () => {
           headText={DESCRIPTION_TEXT.cardBrand.headText}
           detailText={DESCRIPTION_TEXT.cardBrand.detailText}
         />
-        <CardBrandSelects cardInput={cardInput} handleCardInput={handleCardInput} />
+        <CardBrandSelects
+          {...CARD_LABEL_INPUT_CONFIG.cardBrand}
+          cardInput={cardInput}
+          handleCardInput={handleCardInput}
+        />
 
         <Description
           headText={DESCRIPTION_TEXT.cardNumber.headText}
@@ -66,6 +89,7 @@ const AddCard = () => {
         />
         <CardLabeledInput
           {...CARD_LABEL_INPUT_CONFIG.cardNumber}
+          value={{ first: cardInput.first, second: cardInput.second, third: cardInput.third, fourth: cardInput.fourth }}
           errorMessage={cardNumberErrorMessage}
           isErrors={{
             first: isError.first,

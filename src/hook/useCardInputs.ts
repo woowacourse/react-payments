@@ -11,15 +11,15 @@ import {
 
 const useCardInputs = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-    MM: null,
-    YY: null,
-    CVC: null,
-    password: null,
-    cardBrand: null,
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+    MM: '',
+    YY: '',
+    CVC: '',
+    password: '',
+    cardBrand: '',
   });
 
   const INITIAL_ERROR_STATE = {
@@ -38,13 +38,13 @@ const useCardInputs = () => {
   const handleCardInput = (inputKey: keyof CardInputProps, value: string) => {
     if (!validateCardInputs(inputKey, value)) return;
 
+    handleErrorMessages(inputKey, '');
+    setIsError(INITIAL_ERROR_STATE);
+
     setCardInput((prev: CardInputProps) => ({
       ...prev,
       [inputKey]: value,
     }));
-
-    handleErrorMessages(inputKey, '');
-    setIsError(INITIAL_ERROR_STATE);
   };
 
   const validateCardInputs = (inputKey: keyof CardInputProps, value: string) => {

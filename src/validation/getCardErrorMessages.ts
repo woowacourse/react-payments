@@ -1,9 +1,5 @@
-import ERROR_MESSAGE from "../constants/errorMessage";
-import {
-  isNumber,
-  isValidMonthRange,
-  isValidYearRange,
-} from "./validateConditions";
+import ERROR_MESSAGE from '../constants/errorMessage';
+import { isNumber, isValidMonthRange, isValidYearRange, isValidLengthYear } from './validateConditions';
 
 export const getCardNumberErrorMessage = (cardNumber: string) => {
   if (cardNumber.length === 0) return;
@@ -11,7 +7,7 @@ export const getCardNumberErrorMessage = (cardNumber: string) => {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 
-  return "";
+  return '';
 };
 
 export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
@@ -19,23 +15,24 @@ export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
-  if (isValidMonthRange(expirationDate)) {
+  if (!isValidMonthRange(expirationDate)) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH;
   }
 
-  return "";
+  return '';
 };
 
 export const getCardExpirationYYErrorMessage = (expirationDate: string) => {
   if (expirationDate.length === 0) return;
+  if (!isValidLengthYear(expirationDate)) return;
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
-  if (isValidYearRange(expirationDate)) {
+  if (!isValidYearRange(expirationDate)) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_YEAR;
   }
 
-  return "";
+  return '';
 };
 
 export const getCardCVCErrorMessage = (cvc: string) => {
@@ -44,9 +41,14 @@ export const getCardCVCErrorMessage = (cvc: string) => {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 
-  return "";
+  return '';
 };
 
 export const getCardPasswordErrorMessage = (password: string) => {
-  return password;
+  if (password.length === 0) return;
+  if (isNumber(password)) {
+    return ERROR_MESSAGE.NOT_A_NUMBER;
+  }
+
+  return '';
 };

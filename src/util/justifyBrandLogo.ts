@@ -1,13 +1,9 @@
-export const justifyBrandLogo = (cardNumber: number) => {
-  if (cardNumber.toString().startsWith("0")) return "default";
-  if (cardNumber.toString().startsWith("4")) return "visa";
+export const justifyBrandLogo = (cardNumber: string) => {
+  if (cardNumber.startsWith('0')) return 'default';
+  if (cardNumber.startsWith('4')) return 'visa';
 
-  if (
-    cardNumber.toString().startsWith("51") ||
-    cardNumber.toString().startsWith("52")
-  )
-    return "mastercard";
-  if (cardNumber >= 2221 && cardNumber <= 2720) return "mastercard";
+  if (cardNumber.startsWith('51') || cardNumber.startsWith('52')) return 'mastercard';
+  if (Number(cardNumber) >= 2221 && Number(cardNumber) <= 2720) return 'mastercard';
 
-  return "default";
+  return 'default';
 };

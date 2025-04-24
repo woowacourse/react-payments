@@ -14,7 +14,7 @@ const CardInput = ({ inputKey, isError, handleCardInput, ...restProps }: InputPr
     handleCardInput(inputKey, value);
   };
 
-  return <InputField {...restProps} onChange={handleChange} inputMode="numeric" pattern="[0-9]*" $isError={isError} />;
+  return <InputField {...restProps} onChange={handleChange} $isError={isError} />;
 };
 
 const InputField = styled.input<{ $isError: boolean }>`

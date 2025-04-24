@@ -10,9 +10,13 @@ export const isNumber = (input: string) => {
 };
 
 export const isValidYearRange = (expirationDate: string) => {
-  return Number(expirationDate) < MIN_EXPIRATION_YEAR || Number(expirationDate) > MAX_EXPIRATION_YEAR;
+  return Number(expirationDate) >= MIN_EXPIRATION_YEAR && Number(expirationDate) <= MAX_EXPIRATION_YEAR;
 };
 
 export const isValidMonthRange = (expirationDate: string) => {
-  return Number(expirationDate) < MIN_EXPIRATION_MONTH || Number(expirationDate) > MAX_EXPIRATION_MONTH;
+  return Number(expirationDate) >= MIN_EXPIRATION_MONTH && Number(expirationDate) <= MAX_EXPIRATION_MONTH;
+};
+
+export const isValidLengthYear = (expirationDate: string) => {
+  return expirationDate.length === 2;
 };

@@ -9,7 +9,7 @@ export const cardNetworkLogos = {
   default: './default.png',
 };
 
-export const cardBrands = [
+export const CARD_BRANDS = [
   'BC카드',
   '신한카드',
   '카카오뱅크',
@@ -29,4 +29,5 @@ export const cardBrandsColors = {
   롯데카드: 'var(--color-lotte-card)',
   하나카드: 'var(--color-hana-card)',
   국민카드: 'var(--color-gu-min-card)',
+  '': 'var(--color-black)',
 };
