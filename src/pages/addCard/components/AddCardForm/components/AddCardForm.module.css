@@ -13,18 +13,26 @@
   width: 0;
 }
 
-.submitButton {
+.submitButtonContainer {
+  background-color: #fff;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  width: 100%;
+  width: 500px;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+  color: #f3f3f3;
   background-color: #007bff;
   padding: 1rem 0;
-  color: #f3f3f3;
   font-size: 1.125rem;
   font-weight: 700;
-  width: 500px;
   letter-spacing: 1px;
-  z-index: 999;
+  width: 450px;
+  margin: 0 auto 0.75rem;
+  border-radius: 8px;
 }

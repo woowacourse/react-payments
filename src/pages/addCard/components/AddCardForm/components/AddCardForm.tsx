@@ -19,6 +19,9 @@ import {
 } from "@/pages/addCard/hooks/useAddCardFormStep";
 import { Fragment } from "react/jsx-runtime";
 import SwitchCase from "@/components/SwitchCase/SwitchCase";
+import { useNavigate } from "react-router";
+import { PAGE_URL } from "@/constants/pageUrl";
+import { FormEvent } from "react";
 
 interface AddCardFormProps {
   addCardState: {
@@ -50,9 +53,20 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
     handleCardPasswordChange,
     isAddFormSubmit,
   } = addCardState;
+  const navigate = useNavigate();
+
+  const handleAddCardFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    navigate(PAGE_URL.ADD_CARD_SUCCESS, {
+      state: {
+        firstCardNumber: cardNumberState.first.value,
+        cardType,
+      },
+    });
+  };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleAddCardFormSubmit}>
       {addCardFormSteps.map((step) => (
         <Fragment key={step}>
           {
@@ -128,9 +142,11 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
         </Fragment>
       ))}
       {isAddFormSubmit && (
-        <button type="submit" className={styles.submitButton}>
-          확인
-        </button>
+        <div className={styles.submitButtonContainer}>
+          <button type="submit" className={styles.submitButton}>
+            확인
+          </button>
+        </div>
       )}
     </form>
   );
