@@ -14,7 +14,11 @@ function isCardNumberComplete(cardNumbers: CardNumbersState): boolean {
   );
 }
 
-function identifyCardType(firstSegment: string): CardType | null {
+function identifyCardType(cardNumbers: CardNumbersState): CardType | null {
+  if (!isCardNumberComplete(cardNumbers)) return null;
+
+  const firstSegment = cardNumbers[CARD_NUMBERS_SEGMENT.first];
+
   if (firstSegment.startsWith("4")) return CARD_TYPE.visa;
   if (/^5[1-5]/.test(firstSegment)) return CARD_TYPE.master;
   return null;
@@ -24,10 +28,7 @@ export function useCardType(cardNumbers: CardNumbersState) {
   const [cardType, setCardType] = useState<CardType | null>(null);
 
   useEffect(() => {
-    if (!isCardNumberComplete(cardNumbers)) return;
-    const identifiedCardType = identifyCardType(
-      cardNumbers[CARD_NUMBERS_SEGMENT.first]
-    );
+    const identifiedCardType = identifyCardType(cardNumbers);
     setCardType(identifiedCardType);
   }, [cardNumbers]);
 
