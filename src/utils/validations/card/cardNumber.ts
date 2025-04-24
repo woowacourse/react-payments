@@ -1,6 +1,6 @@
-import { MAX_LENGTH } from "../../constants/constants";
-import { CardNumbersState } from "../../types/types";
-import { hasExactLength, isPositiveInteger } from "./common";
+import { MAX_LENGTH } from "../../../constants/constants";
+import { CardNumbersState } from "../../../types/types";
+import { hasExactLength, isPositiveInteger } from "../common";
 
 export const isCardNumberComplete = (
   cardNumbers: CardNumbersState

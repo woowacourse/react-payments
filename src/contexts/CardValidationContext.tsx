@@ -10,11 +10,11 @@ import {
   ExpirationPeriodSegmentType,
   PasswordErrorState,
 } from "../types/types";
-import { isErrorCardCompany } from "../utils/validations/cardCompany";
-import { isErrorCardNumber } from "../utils/validations/cardNumber";
-import { isErrorCvcNumber } from "../utils/validations/cvcNumber";
-import { isErrorExpirationPeriod } from "../utils/validations/expirationPeriod";
-import { isErrorPassword } from "../utils/validations/password";
+import { isErrorCardCompany } from "../utils/validations/card/cardCompany";
+import { isErrorCardNumber } from "../utils/validations/card/cardNumber";
+import { isErrorCvcNumber } from "../utils/validations/card/cvcNumber";
+import { isErrorExpirationPeriod } from "../utils/validations/card/expirationPeriod";
+import { isErrorPassword } from "../utils/validations/card/password";
 import { CARD_FORM_TYPE } from "./../constants/constants";
 
 export interface CardValidationContextType {
