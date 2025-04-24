@@ -145,6 +145,8 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
         return cardCompanyError.hasError;
       case CARD_FORM_TYPE.password:
         return passwordError.hasError;
+      default:
+        return false;
     }
   };
 
@@ -160,6 +162,8 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
         return cardCompanyError.errorMessage;
       case CARD_FORM_TYPE.password:
         return passwordError.errorMessage;
+      default:
+        return null;
     }
   };
 

@@ -23,6 +23,11 @@ export const Default: Story = {
 export const WithError: Story = {
   decorators: [
     withCustomCardProvider({}),
-    withCustomCardValidationProvider({ cardCompanyError: true }),
+    withCustomCardValidationProvider({
+      cardCompanyError: {
+        errorMessage: null,
+        hasError: true,
+      },
+    }),
   ],
 };

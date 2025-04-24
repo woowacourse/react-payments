@@ -25,10 +25,13 @@ export const WithError: Story = {
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
       cardNumberErrors: {
-        first: true,
-        second: false,
-        third: false,
-        fourth: false,
+        errorMessage: null,
+        hasError: {
+          first: true,
+          second: false,
+          third: false,
+          fourth: false,
+        },
       },
     }),
   ],
@@ -39,10 +42,13 @@ export const WithErrors: Story = {
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
       cardNumberErrors: {
-        first: true,
-        second: true,
-        third: true,
-        fourth: false,
+        errorMessage: null,
+        hasError: {
+          first: true,
+          second: true,
+          third: false,
+          fourth: false,
+        },
       },
     }),
   ],

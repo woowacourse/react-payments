@@ -69,10 +69,13 @@ export const CardNumbersWithError: Story = {
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
       cardNumberErrors: {
-        first: true,
-        second: true,
-        third: true,
-        fourth: true,
+        errorMessage: "숫자만 입력 가능합니다",
+        hasError: {
+          first: true,
+          second: true,
+          third: true,
+          fourth: true,
+        },
       },
     }),
   ],
@@ -86,8 +89,11 @@ export const ExpirationPeriodWithError: Story = {
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
       expirationPeriodErrors: {
-        month: true,
-        year: true,
+        errorMessage: "숫자만 입력 가능합니다",
+        hasError: {
+          month: true,
+          year: true,
+        },
       },
     }),
   ],
@@ -99,7 +105,12 @@ export const ExpirationPeriodWithError: Story = {
 export const CvcNumberWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
-    withCustomCardValidationProvider({ cvcNumberError: true }),
+    withCustomCardValidationProvider({
+      cvcNumberError: {
+        errorMessage: "숫자만 입력 가능합니다",
+        hasError: true,
+      },
+    }),
   ],
   args: {
     type: CARD_FORM_TYPE.cvcNumber,
@@ -109,7 +120,12 @@ export const CvcNumberWithError: Story = {
 export const CardCompanyWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
-    withCustomCardValidationProvider({ cardCompanyError: true }),
+    withCustomCardValidationProvider({
+      cardCompanyError: {
+        errorMessage: "카드사를 하나 선택해주세요",
+        hasError: true,
+      },
+    }),
   ],
   args: {
     type: CARD_FORM_TYPE.cardCompany,
@@ -119,7 +135,12 @@ export const CardCompanyWithError: Story = {
 export const PasswordWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
-    withCustomCardValidationProvider({ passwordError: true }),
+    withCustomCardValidationProvider({
+      passwordError: {
+        errorMessage: "숫자만 입력 가능합니다",
+        hasError: true,
+      },
+    }),
   ],
   args: {
     type: CARD_FORM_TYPE.password,

@@ -3,7 +3,11 @@ import {
   CardValidationContext,
   CardValidationContextType,
 } from "../../src/contexts/CardValidationContext";
-import { CARD_FORM_TYPE, CardFormType } from "../../src/constants/constants";
+import {
+  CARD_FORM_TYPE,
+  CardFormType,
+  ErrorMessage,
+} from "../../src/constants/constants";
 
 interface CardValidationProviderProps {
   children: ReactNode;
@@ -14,20 +18,31 @@ const CustomCardValidationProvider = ({
   children,
   value,
 }: CardValidationProviderProps) => {
+  const initialCommonState = {
+    errorMessage: null,
+    hasError: false,
+  };
+
   const defaultValue: CardValidationContextType = {
     cardNumberErrors: {
-      first: false,
-      second: false,
-      third: false,
-      fourth: false,
+      errorMessage: null,
+      hasError: {
+        first: false,
+        second: false,
+        third: false,
+        fourth: false,
+      },
     },
     expirationPeriodErrors: {
-      month: false,
-      year: false,
+      errorMessage: null,
+      hasError: {
+        month: false,
+        year: false,
+      },
     },
-    cvcNumberError: false,
-    cardCompanyError: false,
-    passwordError: false,
+    cvcNumberError: initialCommonState,
+    cardCompanyError: initialCommonState,
+    passwordError: initialCommonState,
 
     validateCardNumber: () => {},
     validateExpirationPeriod: () => {},
@@ -35,6 +50,7 @@ const CustomCardValidationProvider = ({
     validateCardCompany: () => {},
     validatePassword: () => {},
     hasErrorByType: () => false,
+    getErrorMessage: () => null,
   };
 
   const contextValue = { ...defaultValue, ...value };
@@ -42,21 +58,38 @@ const CustomCardValidationProvider = ({
   contextValue.hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return Object.values(contextValue.cardNumberErrors).some(
+        return Object.values(contextValue.cardNumberErrors.hasError).some(
           (error) => error
         );
       case CARD_FORM_TYPE.expirationPeriod:
-        return Object.values(contextValue.expirationPeriodErrors).some(
+        return Object.values(contextValue.expirationPeriodErrors.hasError).some(
           (error) => error
         );
       case CARD_FORM_TYPE.cvcNumber:
-        return contextValue.cvcNumberError;
+        return contextValue.cvcNumberError.hasError;
       case CARD_FORM_TYPE.cardCompany:
-        return contextValue.cardCompanyError;
+        return contextValue.cardCompanyError.hasError;
       case CARD_FORM_TYPE.password:
-        return contextValue.passwordError;
+        return contextValue.passwordError.hasError;
       default:
         return false;
+    }
+  };
+
+  contextValue.getErrorMessage = (type: CardFormType): ErrorMessage => {
+    switch (type) {
+      case CARD_FORM_TYPE.cardNumbers:
+        return contextValue.cardNumberErrors.errorMessage;
+      case CARD_FORM_TYPE.expirationPeriod:
+        return contextValue.expirationPeriodErrors.errorMessage;
+      case CARD_FORM_TYPE.cvcNumber:
+        return contextValue.cvcNumberError.errorMessage;
+      case CARD_FORM_TYPE.cardCompany:
+        return contextValue.cardCompanyError.errorMessage;
+      case CARD_FORM_TYPE.password:
+        return contextValue.passwordError.errorMessage;
+      default:
+        return null;
     }
   };
 
