@@ -3,52 +3,27 @@ import useControlledCardNumber from "@card/CardNumber/hooks/useControlledCardNum
 import useControlledCardType from "@card/CardType/hooks/useControlledCardType";
 import useControlledCVC from "@card/CVC/hooks/useControlledCVC";
 import useControlledExpireDate from "@card/ExpireDate/hooks/useControlledExpireDate";
-import { getIsAddFormSubmit } from "../validation";
-import useAddCardFormStep from "./useAddCardFormStep";
 
 const useAddCard = () => {
-  const { cardNumberState, isCardNumberNextStep, ...controlledCardNumber } =
-    useControlledCardNumber();
-  const { cardType, handleCardTypeChange, isCardTypeNextStep } =
-    useControlledCardType();
-  const { expireDate, isExpireDateNextStep, ...controlledExpireDate } =
-    useControlledExpireDate();
-  const { CVCState, handleCVCChange, isCVCNextStep } = useControlledCVC();
-  const { cardPasswordState, handleCardPasswordChange } =
-    useControlledCardPassword();
-  const addCardFormSteps = useAddCardFormStep({
-    isCardNumberNextStep,
-    isCardTypeNextStep,
-    isExpireDateNextStep,
-    isCVCNextStep,
-  });
+  const controlledCardNumber = useControlledCardNumber();
+  const controlledCardType = useControlledCardType();
+  const controlledExpireDate = useControlledExpireDate();
+  const controlledCVC = useControlledCVC();
+  const controlledCardPassword = useControlledCardPassword();
 
   const addCardState = {
-    addCardFormSteps,
-    cardNumberState,
-    ...controlledCardNumber,
-    cardType,
-    handleCardTypeChange,
-    expireDate,
-    ...controlledExpireDate,
-    CVCState,
-    handleCVCChange,
-    cardPasswordState,
-    handleCardPasswordChange,
-    isAddFormSubmit: getIsAddFormSubmit({
-      cardNumberState,
-      cardType,
-      expireDate,
-      CVCState,
-      cardPasswordState,
-    }),
+    controlledCardNumber,
+    controlledCardType,
+    controlledExpireDate,
+    controlledCVC,
+    controlledCardPassword,
   };
 
   const previewState = {
-    cardNumberState,
-    cardType,
-    expireDate,
-    CVCState,
+    cardNumberState: controlledCardNumber.cardNumberState,
+    cardType: controlledCardType.cardType,
+    expireDate: controlledExpireDate.expireDate,
+    CVCState: controlledCVC.CVCState,
   };
 
   return { addCardState, previewState };

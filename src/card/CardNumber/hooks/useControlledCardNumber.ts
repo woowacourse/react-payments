@@ -79,7 +79,7 @@ const useControlledCardNumber = () => {
     cardNumberState,
     cardNumberInputRefs,
     handleCardNumberChange,
-    isCardNumberNextStep: checkCardNumberNextStep(cardNumberState),
+    isNextStep: checkCardNumberNextStep(cardNumberState),
   };
 };
 

@@ -33,7 +33,7 @@ const useControlledCVC = () => {
   return {
     CVCState,
     handleCVCChange,
-    isCVCNextStep: checkCVCNextStep(CVCState),
+    isNextStep: checkCVCNextStep(CVCState),
   };
 };
 

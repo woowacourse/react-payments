@@ -12,12 +12,7 @@ const ADD_CARD_FORM_STEP_VALUES = Object.values(ADD_CARD_FORM_STEPS);
 type AddCardFormStepKey = keyof typeof ADD_CARD_FORM_STEPS;
 export type AddCardFormStep = (typeof ADD_CARD_FORM_STEPS)[AddCardFormStepKey];
 
-const useAddCardFormStep = ({
-  isCardNumberNextStep,
-  isCardTypeNextStep,
-  isExpireDateNextStep,
-  isCVCNextStep,
-}: Record<string, boolean>) => {
+const useAddCardFormStep = (stepConditions: boolean[]) => {
   const [addCardFormSteps, setAddCardFormSteps] = useState<AddCardFormStep[]>([
     ADD_CARD_FORM_STEPS.CARD_NUMBER,
   ]);
@@ -27,26 +22,14 @@ const useAddCardFormStep = ({
       const currentIndex = addCardFormSteps.length - 1;
       const nextStep = ADD_CARD_FORM_STEP_VALUES[currentIndex + 1];
 
-      const stepConditions = [
-        isCardNumberNextStep,
-        isCardTypeNextStep,
-        isExpireDateNextStep,
-        isCVCNextStep,
-      ];
       const currentStepCondition = stepConditions[currentIndex];
-
       if (!currentStepCondition) {
         return;
       }
 
       setAddCardFormSteps((prev) => [nextStep, ...prev]);
     },
-    [
-      isCardNumberNextStep,
-      isCardTypeNextStep,
-      isExpireDateNextStep,
-      isCVCNextStep,
-    ]
+    [...stepConditions]
   );
 
   return addCardFormSteps;

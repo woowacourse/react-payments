@@ -19,7 +19,7 @@ const useControlledCardType = () => {
   return {
     cardType,
     handleCardTypeChange,
-    isCardTypeNextStep: checkCardTypeNextStep(cardType),
+    isNextStep: checkCardTypeNextStep(cardType),
   };
 };
 

@@ -97,7 +97,7 @@ const useControlledExpireDate = () => {
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
-    isExpireDateNextStep: checkExpireDateNextStep(expireDate),
+    isNextStep: checkExpireDateNextStep(expireDate),
   };
 };
 

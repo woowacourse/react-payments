@@ -1,5 +1,5 @@
 import { CardNumberState } from "@/card/CardNumber/types";
-import { CardType } from "../types";
+import { CardType } from "../../../types";
 import { ExpireDateState } from "@/card/ExpireDate/types";
 import { CVCState } from "@/card/CVC/hooks/useControlledCVC";
 import { CardPasswordState } from "@/card/CardPassword/types";
