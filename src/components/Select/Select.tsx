@@ -12,20 +12,9 @@ interface SelectProps {
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
   name: string;
-  validation?: {
-    required?: boolean;
-    errorMessage?: string;
-  };
 }
 
-export default function Select({
-  options,
-  value,
-  onChange,
-  placeholder = '선택해주세요',
-  name,
-  validation,
-}: SelectProps) {
+export default function Select({ options, value, onChange, placeholder = '선택해주세요', name }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (selectedValue: string) => {
@@ -61,10 +50,6 @@ export default function Select({
         name={name}
         value={value}
         onChange={(e: ChangeEvent<HTMLSelectElement>) => handleSelect(e.target.value)}
-        {...(validation && {
-          required: validation.required,
-          'data-error-message': validation.errorMessage,
-        })}
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (

@@ -8,13 +8,6 @@ interface CardCompanyProps {
 }
 
 export default function CardCompany({ register }: CardCompanyProps) {
-  const { onChange, value } = register('company', {
-    validation: {
-      required: true,
-      errorMessage: '카드사를 선택해주세요.',
-    },
-  });
-
   return (
     <div>
       <Title>카드사를 선택해 주세요</Title>
@@ -22,15 +15,15 @@ export default function CardCompany({ register }: CardCompanyProps) {
       <Label id="card-company">카드사</Label>
       <Spacing size={8} />
       <Select
+        {...register('company', {
+          validation: {
+            required: true,
+            errorMessage: '카드사를 선택해주세요.',
+          },
+        })}
         options={CARD_COMPANIES}
-        value={value}
-        onChange={onChange}
         name="company"
         placeholder="카드사를 선택해주세요"
-        validation={{
-          required: true,
-          errorMessage: '카드사를 선택해주세요.',
-        }}
       />
       <Spacing size={8} />
     </div>
