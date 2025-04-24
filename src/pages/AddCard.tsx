@@ -22,7 +22,7 @@ const AddCard = () => {
 
   return (
     <Wrap>
-      <Card cardNumber={cardInput} cardType={cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'} />
+      <Card cardInput={cardInput} cardType={cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'} />
       <Form>
         <Description headText={DESCRIPTION_TEXT.CVC.headText} detailText={DESCRIPTION_TEXT.CVC.detailText} />
         <CardLabeledInput
