@@ -17,7 +17,7 @@ export type Props = {
   /**
    * Sets the label for the card input field.
    */
-  label: string;
+  label?: string;
 } & PropsWithChildren;
 
 export const CardInputLayout = ({ headerText, description, label, children }: Props) => {
@@ -35,19 +35,28 @@ export const CardInputLayout = ({ headerText, description, label, children }: Pr
         {headerText}
       </Text>
       {description && (
-        <Text variant="Caption" fontWeight="regular" color="GY1">
+        <Text
+          variant="Caption"
+          fontWeight="regular"
+          color="GY1"
+          css={css`
+            margin: 6px 0px 20px 0px;
+          `}
+        >
           {description}
         </Text>
       )}
-      <Text
-        variant="Body"
-        fontWeight="regular"
-        css={css`
-          margin: 6px 0px;
-        `}
-      >
-        {label}
-      </Text>
+      {label && (
+        <Text
+          variant="Body"
+          fontWeight="regular"
+          css={css`
+            margin: 6px 0px;
+          `}
+        >
+          {label}
+        </Text>
+      )}
       <Flex gap="8px" width="100%">
         {children}
       </Flex>
