@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
+import { forwardRef } from 'react';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   isError?: boolean;
 };
 
-const Input = ({ isError, ...props }: InputProps) => {
-  return <StyledInput isError={isError} {...props} />;
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, ...props }, ref) => {
+  return <StyledInput ref={ref} isError={isError} {...props} />;
+});
 
 export default Input;
 
