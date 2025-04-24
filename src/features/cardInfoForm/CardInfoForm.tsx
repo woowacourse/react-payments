@@ -15,6 +15,7 @@ import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
 import useStep from "./hooks/useStep";
 import { getPasswordValidationFns } from "../../entities/cardPasswordInputs/CardPasswordInputs.domain";
+import { StyledForm } from "./CardInfoForm.css";
 
 type CardInfoFormProps = {
   cardNumber: {
@@ -106,7 +107,7 @@ export default function CardInfoForm({
   });
 
   return (
-    <form>
+    <StyledForm>
       {step >= 4 && (
         <CardPasswordSection
           password={password}
@@ -131,6 +132,6 @@ export default function CardInfoForm({
         />
       )}
       {canSubmit && <CardSubmitButton />}
-    </form>
+    </StyledForm>
   );
 }
