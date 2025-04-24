@@ -3,9 +3,9 @@ import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
-} from '../../../config/inputField';
+} from '../../../../config/inputField';
 import BaseInputField from '../../BaseInputField/BaseInputField';
-import Input from '../../Input/Input';
+import Input from '../../../ui/Input/Input';
 import styled from 'styled-components';
 
 interface ExpirationDateInputFieldProps {

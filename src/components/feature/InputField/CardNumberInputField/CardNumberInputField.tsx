@@ -2,11 +2,11 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
-} from '../../../config/inputField';
-import { CardType } from '../../../config/card';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../config/error';
+} from '../../../../config/inputField';
+import { CardType } from '../../../../config/card';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
 import BaseInputField from '../../BaseInputField/BaseInputField';
-import Input from '../../Input/Input';
+import Input from '../../../ui/Input/Input';
 import styled from 'styled-components';
 
 interface CardNumberInputFieldProps {

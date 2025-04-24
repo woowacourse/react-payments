@@ -9,13 +9,14 @@ import {
   PasswordInputType,
 } from '../../config/inputField';
 import { CardType } from '../../config/card';
-import CardPreview from '../../components/CardPreviw/CardPreview';
-import InputSection from '../../components/InputSection/InputSection';
-import CardNumberInputField from '../../components/InputField/CardNumberInputField/CardNumberInputField';
-import ExpirationDateInputField from '../../components/InputField/ExpirationDateInputField/ExpirationDateInputField';
-import CVCInputField from '../../components/InputField/CVCInputField/CVCInputField';
-import CardIssuerSelector from '../../components/InputField/CardIssuerSelector/CardIssuerSelector';
-import PasswordInputField from '../../components/InputField/PasswordInputField/PasswordInputField';
+
+import InputSection from '../../components/feature/InputSection/InputSection';
+import CardNumberInputField from '../../components/feature/InputField/CardNumberInputField/CardNumberInputField';
+import ExpirationDateInputField from '../../components/feature/InputField/ExpirationDateInputField/ExpirationDateInputField';
+import CVCInputField from '../../components/feature/InputField/CVCInputField/CVCInputField';
+import CardIssuerSelector from '../../components/feature/InputField/CardIssuerSelector/CardIssuerSelector';
+import PasswordInputField from '../../components/feature/InputField/PasswordInputField/PasswordInputField';
+import CardPreview from '../../components/feature/CardPreviw/CardPreview';
 
 function Payments() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<

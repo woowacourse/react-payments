@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import BaseInputField from '../../BaseInputField/BaseInputField';
-import Input from '../../Input/Input';
+import Input from '../../../ui/Input/Input';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../config/error';
-import { PasswordInputType } from '../../../config/inputField';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
+import { PasswordInputType } from '../../../../config/inputField';
 
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;

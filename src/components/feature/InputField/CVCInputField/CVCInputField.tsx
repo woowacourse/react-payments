@@ -1,9 +1,9 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { CVCInputValueType } from '../../../config/inputField';
+import { CVCInputValueType } from '../../../../config/inputField';
 import BaseInputField from '../../BaseInputField/BaseInputField';
-import Input from '../../Input/Input';
+import Input from '../../../ui/Input/Input';
 import styled from 'styled-components';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../config/error';
+import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
 
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;
