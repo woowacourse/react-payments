@@ -90,6 +90,7 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
             placeholder={label === 'month' ? 'MM' : 'YY'}
             value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
+            autoFocus={label === 'month'}
             onChange={(e) => handleInput(e, label)}
             onBlur={(e) => handleFocusout(label, e.target.value)}
           />

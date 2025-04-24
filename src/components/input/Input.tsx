@@ -13,6 +13,7 @@ const Input = ({
   isError = false,
   value,
   maxLength,
+  autoFocus,
   onChange,
   onBlur,
 }: Props) => {
@@ -23,6 +24,7 @@ const Input = ({
       maxLength={maxLength}
       value={value}
       placeholder={placeholder}
+      autoFocus={autoFocus}
       onChange={onChange}
       onBlur={onBlur}
       $isError={isError}

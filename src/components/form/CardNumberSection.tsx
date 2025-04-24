@@ -71,6 +71,7 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
             placeholder="1234"
             value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
+            autoFocus={label === 'first'}
             onChange={(e) => handleInput(e, label)}
             onBlur={(e) => handleFocusout(label, e.target.value)}
           />

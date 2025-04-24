@@ -48,6 +48,7 @@ const PasswordSection = ({value, onChange, onError}: Props) => {
           isError={error.length > 0}
           placeholder="**"
           value={value}
+          autoFocus
           onChange={(e) => handleInput(e)}
           onBlur={(e) => handleFocusout(e.target.value)}
         />

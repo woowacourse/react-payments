@@ -46,6 +46,7 @@ const CardCvcSection = ({value, onChange, onError}: Props) => {
           isError={error.length > 0}
           placeholder="123"
           value={value}
+          autoFocus
           onChange={(e) => handleInput(e)}
           onBlur={(e) => handleFocusout(e.target.value)}
         />
