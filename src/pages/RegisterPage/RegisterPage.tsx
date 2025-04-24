@@ -71,11 +71,11 @@ export default function RegisterPage() {
 
   // 4. 카드 CVC 번호
   const {
-    value: { cvc: cardCVCNumber },
+    value: cardCVCNumber,
     errors: cardCVCNumberErrors,
     register: cardCVCNumberRegister,
     isValid: isCVCNumberValid,
-  } = useForm<{ cvc: CardCVCNumberInputType }>({
+  } = useForm<CardCVCNumberInputType>({
     defaultValues: {
       cvc: '',
     },
@@ -97,11 +97,12 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     const selectedCardCompany = CARD_COMPANIES.find((company) => company.id === selectedCompany);
     navigate('/complete', {
       state: {
         firstCardNumber: cardNumber.first,
-        cardCompany: selectedCardCompany?.name || '',
+        cardCompany: selectedCardCompany?.name ?? '',
       },
     });
   };
@@ -151,7 +152,7 @@ export default function RegisterPage() {
 
         {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
 
-        {currentStep === 6 && isPasswordValid && (
+        {currentStep === 6 && (
           <Button type="submit" isFixed variant="black">
             확인
           </Button>

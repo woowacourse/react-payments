@@ -58,7 +58,7 @@ export default function CardPreview({
           <S.MagneticStrip />
           <S.CVCWrapper>
             <S.CVCStrip>
-              <span>{cardCVCNumber || 'CVC'}</span>
+              <span>{cardCVCNumber.cvc || 'CVC'}</span>
             </S.CVCStrip>
           </S.CVCWrapper>
         </S.CardBack>

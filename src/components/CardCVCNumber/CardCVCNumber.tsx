@@ -4,8 +4,8 @@ import { RegisterType } from '@/hooks/useForm';
 import { CardCVCNumberInputType } from '@/types/input';
 
 interface CardCVCNumberProps {
-  register: RegisterType<{ cvc: CardCVCNumberInputType }>;
-  cardCVCNumberErrors: { cvc: CardCVCNumberInputType };
+  register: RegisterType<CardCVCNumberInputType>;
+  cardCVCNumberErrors: CardCVCNumberInputType;
   onFocus: () => void;
   onBlur: () => void;
 }
