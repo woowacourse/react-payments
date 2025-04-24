@@ -41,6 +41,7 @@ function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownButton
+        type="button"
         isOpen={isOpen}
         isSelected={!!cardInfo.cardBrand}
         onClick={toggleDropdown}

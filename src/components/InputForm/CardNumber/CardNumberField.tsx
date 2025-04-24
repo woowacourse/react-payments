@@ -5,7 +5,7 @@ import {
   Label,
   NumberInputContainer,
   ErrorText,
-} from "../CardField.styles";
+} from "../styles/CardField.styles";
 import { CardInfo } from "../../../hooks/useCardInfo";
 import { validateSegmentLength } from "../validation";
 

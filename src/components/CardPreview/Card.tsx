@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { getCardType, maskCardNumber } from "./utils/cardUtils";
 import { CARD_TYPE_PATH } from "./constants";
-import { CARD_BRAND_COLOR } from "../InputField/CardBrand/constants";
+import { CARD_BRAND_COLOR } from "../InputForm/CardBrand/constants";
 
 type CardBrand = keyof typeof CARD_TYPE_PATH;
 
