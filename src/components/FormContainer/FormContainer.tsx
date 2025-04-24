@@ -10,6 +10,7 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
         const eachValidation = validation[formSectionData.key];
         return (
           <FormSection
+            key={formSectionData.key}
             title={formSectionData.title}
             description={formSectionData.description}
             inputFieldData={{

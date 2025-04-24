@@ -9,7 +9,7 @@
 
 ## step1 기반 피드백 사항 반영
 
-- [ ] formUIControllerData 기반 map 돌릴때 컴포넌트 key 추가
+- [x] formUIControllerData 기반 map 돌릴때 컴포넌트 key 추가
 - [ ] 스토리북 jsDoc 주석 추가 (별도 타입 파일에 추가)
 - [ ] 카드 정보 상태 분리 -> 에러 훅 처럼 각각의 개별 상태 분리
 
