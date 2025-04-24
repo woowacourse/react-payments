@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useRef, useEffect } from "react";
 
 import Button from "@/components/Button/Button";
 import CardInputBox from "./CardInputBox/CardInputBox";
@@ -41,6 +42,30 @@ function AddCardForm({
   const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
 
+  const brandDropdownRef = useRef<HTMLSelectElement>(null);
+  const expireMonthInputRef = useRef<HTMLInputElement>(null);
+  const cvcInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+  const addCardButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (currentIndex === 1) {
+        brandDropdownRef.current?.focus();
+      } else if (currentIndex === 2) {
+        expireMonthInputRef.current?.focus();
+      } else if (currentIndex === 3) {
+        cvcInputRef.current?.focus();
+      } else if (currentIndex === 4) {
+        passwordInputRef.current?.focus();
+      } else if (allValid) {
+        addCardButtonRef.current?.focus();
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [currentIndex, allValid]);
+
   function handleAddCardButton() {
     navigate("/AddCardComplete", {
       state: {
@@ -69,6 +94,7 @@ function AddCardForm({
           guideText="현재 국내 카드사만 지원합니다."
           InputComponents={
             <CardBrandDropdown
+              ref={brandDropdownRef}
               selectedBrand={selectedBrand}
               setSelectedBrand={setSelectedBrand}
             />
@@ -82,6 +108,7 @@ function AddCardForm({
           guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
           InputComponents={
             <CardExpireDateInputs
+              ref={expireMonthInputRef}
               expireDate={expireDate}
               handleExpireMonthChange={handleExpireMonthChange}
               handleExpireYearChange={handleExpireYearChange}
@@ -95,23 +122,31 @@ function AddCardForm({
         <CardInputBox
           title="CVC 번호를 입력해 주세요"
           InputComponents={
-            <CVCInputs CVCState={CVCState} handleCVCChange={handleCVCChange} />
+            <CVCInputs
+              ref={cvcInputRef}
+              CVCState={CVCState}
+              handleCVCChange={handleCVCChange}
+            />
           }
         />
       )}
+
       {currentIndex >= 4 && (
         <CardInputBox
           title="비밀번호를 입력해주세요"
           InputComponents={
             <PasswordInputs
+              ref={passwordInputRef}
               passwordState={passwordState}
               handlePasswordChange={handlePasswordChange}
             />
           }
         />
       )}
+
       {allValid && (
         <Button
+          ref={addCardButtonRef}
           variant="default"
           size="large"
           fullWidth={true}
