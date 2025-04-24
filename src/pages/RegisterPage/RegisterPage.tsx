@@ -112,6 +112,7 @@ export default function RegisterPage() {
     else if (!isExpirationDateValid) setCurrentStep(3);
     else if (!isCVCNumberValid) setCurrentStep(4);
     else if (!isPasswordValid) setCurrentStep(5);
+    else setCurrentStep(6);
   }, [isCardNumberIsValid, isCardCompanyValid, isExpirationDateValid, isCVCNumberValid, isPasswordValid]);
 
   return (
