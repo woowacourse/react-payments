@@ -2,12 +2,13 @@ import "./styles/reset.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { BrowserRouter } from "react-router";
+import { HashRouter } from "react-router";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-payments">
+    {/* 서버에 따로 통신을 안한다고 가정한다면.. */}
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
