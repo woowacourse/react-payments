@@ -101,29 +101,37 @@ function App() {
         />
 
         <div className={styles.cardForm}>
-          <CardPasswordInputSection
-            cardPassword={cardPassword}
-            handleCardPasswordChange={handleCardPasswordChange}
-            isError={isCardPasswordError}
-            errorMessage={cardPasswordErrorMessage}
-          />
-          <CardCVCNumberInputSection />
-          <CardOwnerNameInputSection
-            cardOwnerName={cardOwnerName}
-            handleCardOwnerNameChange={handleCardOwnerNameChange}
-          />
-          <CardExpirationDateInputSection
-            cardExpirationDate={cardExpirationDate}
-            handleCardExpirationDateChange={handleCardExpirationDateChange}
-            isError={isCardExpirationDateError}
-            errorMessage={cardExpirationDateErrorMessage}
-          />
-          <CardCompanyInputSection
-            companies={COMPANIES}
-            selectedOption={cardCompany}
-            handleCardNumbersChange={handleCardCompanyChange}
-            errorMessage={cardCompanyErrorMessage}
-          />
+          {cardOwnerName.length > 0 && (
+            <CardPasswordInputSection
+              cardPassword={cardPassword}
+              handleCardPasswordChange={handleCardPasswordChange}
+              isError={isCardPasswordError}
+              errorMessage={cardPasswordErrorMessage}
+            />
+          )}
+          {cardOwnerName.length > 0 && <CardCVCNumberInputSection />}
+          {isFulledInput(cardExpirationDate, 2) && (
+            <CardOwnerNameInputSection
+              cardOwnerName={cardOwnerName}
+              handleCardOwnerNameChange={handleCardOwnerNameChange}
+            />
+          )}
+          {cardCompany.length > 0 && (
+            <CardExpirationDateInputSection
+              cardExpirationDate={cardExpirationDate}
+              handleCardExpirationDateChange={handleCardExpirationDateChange}
+              isError={isCardExpirationDateError}
+              errorMessage={cardExpirationDateErrorMessage}
+            />
+          )}
+          {isFulledInput(cardNumbers, 4) && (
+            <CardCompanyInputSection
+              companies={COMPANIES}
+              selectedOption={cardCompany}
+              handleCardNumbersChange={handleCardCompanyChange}
+              errorMessage={cardCompanyErrorMessage}
+            />
+          )}
           <CardNumbersInputSection
             cardNumbers={cardNumbers}
             handleCardNumbersChange={handleCardNumbersChange}
