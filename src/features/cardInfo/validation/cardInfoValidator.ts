@@ -79,3 +79,20 @@ export const cardCVCValidator = (input: string) => {
   }
   return [NO_ERROR, ''];
 };
+
+export const cardIssuerValidator = (input: string) => {
+  if (input.length === 0) {
+    return [0, '카드사를 선택해 주세요.'];
+  }
+  return [NO_ERROR, ''];
+};
+
+export const cardPasswordValidator = (input: string) => {
+  if (!isNumber(input)) {
+    return [0, '카드 비밀번호는 숫자만 입력 가능합니다.'];
+  }
+  if (input.length !== 2) {
+    return [0, '카드 비밀번호 앞 2자리를 입력해 주세요.'];
+  }
+  return [NO_ERROR, ''];
+};
