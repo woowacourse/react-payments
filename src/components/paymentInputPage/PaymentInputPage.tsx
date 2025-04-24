@@ -1,23 +1,20 @@
-import CardPreview from './cardPreview/CardPreview';
-import CardInputForm from './cardInputForm/CardInputForm';
-import styles from './PaymentInputPage.module.css';
-import { useState } from 'react';
+import CardPreview from "./cardPreview/CardPreview";
+import CardInputForm from "./cardInputForm/CardInputForm";
+import styles from "./PaymentInputPage.module.css";
+import { useState } from "react";
 
 function PaymentInputPage() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-  const [expirationDate, setExpirationDate] = useState<string[]>([]);
+  const [cardInfo, setCardInfo] = useState({
+    cardNumbers: [],
+    expirationDate: [],
+    brandName: "",
+  });
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <CardPreview
-          cardNumbers={cardNumbers}
-          expirationDate={expirationDate}
-        />
-        <CardInputForm
-          setCardNumbers={setCardNumbers}
-          setExpirationDate={setExpirationDate}
-        />
+        <CardPreview cardInfo={cardInfo} />
+        <CardInputForm setCardInfo={setCardInfo} />
       </div>
     </section>
   );

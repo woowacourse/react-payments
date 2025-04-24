@@ -6,20 +6,16 @@ import styles from "./cardInputForm.module.css";
 import CardBrandSelect from "./cardInput/CardBrandSelect";
 
 interface CardInputFormProps {
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
-  setExpirationDate: Dispatch<SetStateAction<string[]>>;
+  setCardInfo: Dispatch<SetStateAction<string[]>>;
 }
 
-function CardInputForm({
-  setCardNumbers,
-  setExpirationDate,
-}: CardInputFormProps) {
+function CardInputForm({ setCardInfo }: CardInputFormProps) {
   return (
     <div className={styles.cardInputForm}>
-      <CardNumberInput setCardNumbers={setCardNumbers} />
-      <CardExpirationDateInput setExpirationDate={setExpirationDate} />
+      <CardNumberInput setCardInfo={setCardInfo} />
+      <CardExpirationDateInput setCardInfo={setCardInfo} />
       <CardCVCInput />
-      <CardBrandSelect />
+      <CardBrandSelect setCardInfo={setCardInfo} />
     </div>
   );
 }

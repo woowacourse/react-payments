@@ -9,9 +9,9 @@ import {
 import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 function CardExpirationDateInput({
-  setExpirationDate,
+  setCardInfo,
 }: {
-  setExpirationDate: Dispatch<SetStateAction<string[]>>;
+  setCardInfo: Dispatch<SetStateAction<string[]>>;
 }) {
   const [expiration, setExpiration] = useState({
     month: "",
@@ -47,7 +47,12 @@ function CardExpirationDateInput({
       },
     });
 
-    setExpirationDate([nextMonth, nextYear]);
+    setCardInfo((prev) => {
+      return {
+        ...prev,
+        expirationDate: [nextMonth, nextYear],
+      };
+    });
   }
 
   return (

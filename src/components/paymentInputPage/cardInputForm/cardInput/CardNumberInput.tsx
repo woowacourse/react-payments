@@ -6,9 +6,9 @@ import { validateNumberString } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 function CardNumberInput({
-  setCardNumbers,
+  setCardInfo,
 }: {
-  setCardNumbers: Dispatch<SetStateAction<string[]>>;
+  setCardInfo: Dispatch<SetStateAction<string[]>>;
 }) {
   const [cardNumberInfo, setCardNumberInfo] = useState({
     cardNumbers: ["", "", "", ""],
@@ -34,7 +34,9 @@ function CardNumberInput({
       feedbackMessages: updatedMessages,
     });
 
-    setCardNumbers(updatedNumbers);
+    setCardInfo((prev) => {
+      return { ...prev, cardNumbers: updatedNumbers };
+    });
   }
 
   return (
