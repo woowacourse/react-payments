@@ -20,14 +20,20 @@ function CardInfoBox({ cardNumber, expirationDate }: CardInfoBoxProps) {
           <CardInfoText>{cardNumber.cardNumberPart2}</CardInfoText>
         </CardNumberWrapper>
         <CardNumberWrapper>
-          {Array.from({ length: cardNumber.cardNumberPart3.length }, () => (
-            <CardNumberMask />
-          ))}
+          {Array.from(
+            { length: cardNumber.cardNumberPart3.length },
+            (_, index) => (
+              <CardNumberMask key={index} />
+            )
+          )}
         </CardNumberWrapper>
         <CardNumberWrapper>
-          {Array.from({ length: cardNumber.cardNumberPart4.length }, () => (
-            <CardNumberMask />
-          ))}
+          {Array.from(
+            { length: cardNumber.cardNumberPart4.length },
+            (_, index) => (
+              <CardNumberMask key={index} />
+            )
+          )}
         </CardNumberWrapper>
       </CardNumberRow>
       <CardNumberWrapper>
@@ -43,6 +49,7 @@ const CardInfoBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: inherit;
 `;
 
 const CardNumberRow = styled.div`

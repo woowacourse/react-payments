@@ -27,7 +27,7 @@ function useCVCValidation() {
     if (value.length > CVC.length.max) return;
 
     setInputValue(value);
-    if (value.length === CVC.length.max) setIsInputComplete(true);
+    setIsInputComplete(value.length === CVC.length.max);
   };
 
   const onBlur = (e: ChangeEvent) => {

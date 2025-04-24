@@ -5,6 +5,7 @@ import { ERROR_TYPE, ErrorType } from '../config/error';
 function useCardPasswordValidation() {
   const [inputValue, setInputValue] = useState('');
   const [errorType, setErrorType] = useState<ErrorType[]>([]);
+  const [isInputComplete, setIsInputComplete] = useState(false);
 
   const updateCardError = ({
     errorType,
@@ -27,6 +28,7 @@ function useCardPasswordValidation() {
     if (Number.isNaN(Number(value))) return;
 
     setInputValue(value);
+    setIsInputComplete(value.length === CARD_PASSWORD.length.max);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -40,7 +42,7 @@ function useCardPasswordValidation() {
     });
   };
 
-  return { inputValue, errorType, handleInputValue, onBlur };
+  return { inputValue, errorType, isInputComplete, handleInputValue, onBlur };
 }
 
 export default useCardPasswordValidation;

@@ -42,6 +42,7 @@ function useExpirationDateValidation() {
       value.length === EXPIRATION_DATE.length
     )
       setIsInputComplete(true);
+    else setIsInputComplete(false);
     handleNextInputFocus(name, value);
   };
 
