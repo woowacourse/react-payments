@@ -9,6 +9,8 @@ import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
 import CardCompanyField from './components/cardInfoForm/CardCompanyField/CardCompanyField';
 import { useCardCompany } from './hooks/useCardCompany';
+import CardPasswordField from './components/cardInfoForm/CardPasswordField/CardPasswordField';
+import useCardPassword from './hooks/useCardPassword';
 
 function App() {
   const {
@@ -36,6 +38,12 @@ function App() {
     CARD_COMPANY_PLACEHOLDER,
     onClickCardCompany,
   } = useCardCompany();
+
+  const {
+    cardPassword,
+    onChangeCardPassword,
+    errorMessage: cardPasswordErrorMessage,
+  } = useCardPassword();
 
   const getErrorMessageFromList = (errorMessageList: string[]) => {
     const filteredErrorMessageList = errorMessageList.filter(
@@ -105,6 +113,17 @@ function App() {
             cardCVC={cardCVC}
             isError={Boolean(cardCVCErrorMessage)}
             onChange={onChangeCVC}
+          />
+        </CardInputSection>
+        <CardInputSection
+          title="비밀번호를 입력해 주세요"
+          description="앞의 2자리를 입력해주세요"
+          errorMessage={cardPasswordErrorMessage}
+        >
+          <CardPasswordField
+            cardPassword={cardPassword}
+            isError={Boolean(cardPasswordErrorMessage)}
+            onChange={onChangeCardPassword}
           />
         </CardInputSection>
       </CardForm>
