@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 
-export const CardBackground = styled.div`
-  background-color: #333333;
+export const CardBackground = styled.div<{ bgColor: string }>`
+  background-color: ${({ bgColor }) => bgColor};
   width: 212px;
   height: 132px;
   padding: 8px 12px;
-  color: #333333;
   border-radius: 4px;
 `;
 

@@ -1,22 +1,26 @@
 import { useEffect } from 'react';
 import { getCardImageSrc } from '../utils/getCardImageSrc';
 import * as S from './Preview.styles';
+import { getColorByCardIssuer } from '../utils/getColorByCardIssuer';
 
 export default function Preview({
+  cardIssuer,
   cardNumber,
   cardExpirationDate,
 }: {
+  cardIssuer: string;
   cardNumber: string[];
   cardExpirationDate: { month: string; year: string };
 }) {
   let imgSrc = '';
+  const bgColor = getColorByCardIssuer[cardIssuer] ?? '#333333';
 
   useEffect(() => {
     imgSrc = getCardImageSrc(cardNumber[0]);
   }, [cardNumber[0]]);
 
   return (
-    <S.CardBackground>
+    <S.CardBackground bgColor={bgColor}>
       <S.PreviewContainer>
         <S.PaymentSim />
         <S.CardPreview>{imgSrc !== '' && <S.CardImage src={imgSrc} alt='cardType' />}</S.CardPreview>
