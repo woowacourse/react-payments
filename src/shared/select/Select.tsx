@@ -8,10 +8,15 @@ type SelectProps = ComponentProps<"select"> & {
   width?: string;
 };
 
-export default function Select(props: SelectProps) {
+export default function Select({
+  width,
+  value,
+  onChange,
+  options,
+}: SelectProps) {
   return (
-    <StyledSelect {...props}>
-      {props.options.map((option) => (
+    <StyledSelect width={width} value={value} onChange={onChange}>
+      {options.map((option) => (
         <StyledOption
           key={option.value}
           value={option.value}
