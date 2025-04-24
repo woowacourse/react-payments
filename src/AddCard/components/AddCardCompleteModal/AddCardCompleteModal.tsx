@@ -1,9 +1,9 @@
 import Button from "@/components/Button/Button";
 import { useLocation, useNavigate } from "react-router";
-import styles from "./AddCardConfirmModal.module.css";
+import styles from "./AddCardCompleteModal.module.css";
 import RoundCheckIcon from "@/components/RoundCheckedIcon/RoundCheckedIcon";
 
-function AddCardConfirmModal() {
+function AddCardCompleteModal() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -41,4 +41,4 @@ function AddCardConfirmModal() {
   );
 }
 
-export default AddCardConfirmModal;
+export default AddCardCompleteModal;

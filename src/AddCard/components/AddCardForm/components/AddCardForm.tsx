@@ -36,7 +36,7 @@ function AddCardForm({
   const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
   function handleAddCardButton() {
-    navigate("/AddCardConfirm", {
+    navigate("/AddCardComplete", {
       state: {
         firstCardNumber: cardNumberState["first"].value,
         selectedBrand: selectedBrand,
