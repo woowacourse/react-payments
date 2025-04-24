@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject } from 'react';
 import BaseInputField from '../../../common/BaseInputField/BaseInputField';
 import Input from '../../../common/Input/Input';
 import {
@@ -9,6 +9,10 @@ import {
 
 interface ExpirationDateInputFieldProps {
   inputValues: Record<ExpirationDateInputType, string>;
+  inputRefs: Record<
+    ExpirationDateInputType,
+    RefObject<HTMLInputElement | null>
+  >;
   handleInputValue: ({
     name,
     value,
@@ -21,6 +25,7 @@ interface ExpirationDateInputFieldProps {
 
 function ExpirationDateInputField({
   inputValues,
+  inputRefs,
   handleInputValue,
   onBlur,
 }: ExpirationDateInputFieldProps) {
@@ -31,9 +36,10 @@ function ExpirationDateInputField({
           key={inputType}
           inputType="number"
           placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
+          name={inputType}
+          ref={inputRefs[inputType]}
           value={inputValues[inputType]}
           onChange={handleInputValue}
-          name={inputType}
           onBlur={onBlur}
         />
       ))}

@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject } from 'react';
 import BaseInputField from '../../../common/BaseInputField/BaseInputField';
 import Input from '../../../common/Input/Input';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
@@ -9,6 +9,7 @@ import {
 
 interface CardNumberInputFieldProps {
   inputValues: Record<CardNumberInputType, string>;
+  inputRefs: Record<CardNumberInputType, RefObject<HTMLInputElement | null>>;
   errorTypes: Record<CardNumberInputType, ErrorType[]>;
   handleInputValue: ({
     name,
@@ -22,6 +23,7 @@ interface CardNumberInputFieldProps {
 
 function CardNumberInputField({
   inputValues,
+  inputRefs,
   errorTypes,
   handleInputValue,
   onBlur,
@@ -43,6 +45,7 @@ function CardNumberInputField({
           inputType="number"
           placeholder="1234"
           name={inputType}
+          ref={inputRefs[inputType]}
           value={inputValues[inputType]}
           onChange={handleInputValue}
           onBlur={onBlur}

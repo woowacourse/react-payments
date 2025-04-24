@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { EXPIRATION_DATE } from '../config/card';
 import {
   EXPIRATION_DATE_INPUT_TYPE,
@@ -12,6 +12,14 @@ function useExpirationDateValidation() {
     month: '',
     year: '',
   });
+  const inputRefs: Record<
+    ExpirationDateInputType,
+    RefObject<HTMLInputElement | null>
+  > = {
+    month: useRef<HTMLInputElement | null>(null),
+    year: useRef<HTMLInputElement | null>(null),
+  };
+  const [isInputComplete, setIsInputComplete] = useState(false);
 
   const handleInputValue = ({
     name,
@@ -29,6 +37,12 @@ function useExpirationDateValidation() {
       return;
 
     setInputValues((prev) => ({ ...prev, [name]: value }));
+    if (
+      name === EXPIRATION_DATE_INPUT_TYPE.year &&
+      value.length === EXPIRATION_DATE.length
+    )
+      setIsInputComplete(true);
+    handleNextInputFocus(name, value);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -38,7 +52,26 @@ function useExpirationDateValidation() {
       setInputValues((prev) => ({ ...prev, [name]: `0${value}` }));
   };
 
-  return { inputValues, handleInputValue, onBlur };
+  const handleNextInputFocus = (
+    key: ExpirationDateInputType,
+    value: string
+  ) => {
+    if (value.length !== EXPIRATION_DATE.length || key === 'year') {
+      return;
+    }
+    const keyArray = Object.keys(EXPIRATION_DATE_INPUT_TYPE);
+
+    const currentKeyIndex = keyArray.indexOf(key);
+    const nextInputKey = keyArray[
+      currentKeyIndex + 1
+    ] as ExpirationDateInputType;
+    const nextInputRef = inputRefs[nextInputKey];
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
+
+  return { inputValues, inputRefs, isInputComplete, handleInputValue, onBlur };
 }
 
 export default useExpirationDateValidation;

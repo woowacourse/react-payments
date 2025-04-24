@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
@@ -24,6 +24,13 @@ function useCardNumberValidation() {
     cardNumberPart4: [],
   });
   const [cardType, setCardType] = useState<CardType>(CARD_TYPE.none);
+  const inputRefs = {
+    cardNumberPart1: useRef<HTMLInputElement | null>(null),
+    cardNumberPart2: useRef<HTMLInputElement | null>(null),
+    cardNumberPart3: useRef<HTMLInputElement | null>(null),
+    cardNumberPart4: useRef<HTMLInputElement | null>(null),
+  };
+  const [isInputComplete, setIsInputComplete] = useState(false);
 
   const updateCardError = (
     inputName: CardNumberInputType,
@@ -75,6 +82,12 @@ function useCardNumberValidation() {
       ...prev,
       [name]: value,
     }));
+    if (
+      name === CARD_NUMBER_INPUT_TYPE.cardNumberPart4 &&
+      value.length === CARD_NUMBER.length.max
+    )
+      setIsInputComplete(true);
+    handleNextInputFocus(name, value);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -88,7 +101,33 @@ function useCardNumberValidation() {
     });
   };
 
-  return { inputValues, errorTypes, cardType, handleValue, onBlur };
+  const handleNextInputFocus = (key: CardNumberInputType, value: string) => {
+    if (
+      value.length !== CARD_NUMBER.length.max ||
+      key === 'cardNumberPart4' ||
+      errorTypes[key].length !== 0
+    ) {
+      return;
+    }
+    const keyArray = Object.keys(CARD_NUMBER_INPUT_TYPE);
+
+    const currentKeyIndex = keyArray.indexOf(key);
+    const nextInputKey = keyArray[currentKeyIndex + 1] as CardNumberInputType;
+    const nextInputRef = inputRefs[nextInputKey];
+    if (nextInputRef.current) {
+      nextInputRef.current.focus();
+    }
+  };
+
+  return {
+    inputValues,
+    inputRefs,
+    errorTypes,
+    cardType,
+    isInputComplete,
+    handleValue,
+    onBlur,
+  };
 }
 
 export default useCardNumberValidation;

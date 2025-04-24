@@ -17,8 +17,10 @@ import { CARD_BANK } from '../../components/features/payments/config/card';
 function Payments() {
   const {
     inputValues: cardNumberInputValues,
+    inputRefs: cardNumberInputRefs,
     errorTypes: cardNumberErrorTypes,
     cardType,
+    isInputComplete: isCardNumberInputComplete,
     handleValue: handleCardNumberInputValue,
     onBlur: onCardNumberBlur,
   } = useCardNumberValidation();
@@ -26,9 +28,12 @@ function Payments() {
   const [cardBankValue, setCardBankValue] = useState<DropdownOptionType | null>(
     null
   );
+  const carBankSelected = cardBankValue !== null;
 
   const {
     inputValues: expirationDateInputValues,
+    inputRefs: expirationDateInputRefs,
+    isInputComplete: isExpirationDateInputComplete,
     handleInputValue: handleExpirationDateInputValue,
     onBlur: onExpirationDateBlur,
   } = useExpirationDateValidation();
@@ -62,6 +67,7 @@ function Payments() {
         >
           <CardNumberInputField
             inputValues={cardNumberInputValues}
+            inputRefs={cardNumberInputRefs}
             errorTypes={cardNumberErrorTypes}
             handleInputValue={handleCardNumberInputValue}
             onBlur={onCardNumberBlur}
@@ -87,6 +93,7 @@ function Payments() {
         >
           <ExpirationDateInputField
             inputValues={expirationDateInputValues}
+            inputRefs={expirationDateInputRefs}
             handleInputValue={handleExpirationDateInputValue}
             onBlur={onExpirationDateBlur}
           />
