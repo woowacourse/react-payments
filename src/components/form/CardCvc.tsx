@@ -44,5 +44,5 @@ const CardCvc = ({ cvcNumber, setCvcNumber }: Props) => {
 export default CardCvc;
 
 const CardNumberWrap = styled.div`
-	height: 130px;
+	height: 120px;
 `;

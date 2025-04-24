@@ -10,6 +10,7 @@ const Description = ({ children, color = "#8B95A1" }: Props) => {
 };
 
 const DescriptionText = styled.div`
+	margin-bottom: 16px;
 	color: ${(props) => props.color};
 	font-size: 9.5px;
 `;

@@ -28,7 +28,6 @@ export default Select;
 const SelectContainer = styled.select<{ $cardCompany: string }>`
 	width: 100%;
 	padding: 8px;
-	margin-top: 16px;
 	border: 1px solid #acacac;
 	border-radius: 3px;
 	color: ${(props) => (props.$cardCompany === "" ? "#acacac" : "#000")};
