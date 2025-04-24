@@ -78,3 +78,8 @@ export type SelectProps = {
   /** 카드 정보 상태 변경 함수 */
   setCardInformation: setCardInformationType;
 };
+
+export type ButtonProps = {
+  /** 버튼에 들어갈 텍스트 내용 */
+  text: string;
+};
