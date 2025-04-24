@@ -12,7 +12,7 @@ import {
   validateFirstCardNumbers,
   validateCardNumbers,
   validateCVC,
-  validatePassword
+  validatePassword,
 } from "../domain/validate";
 import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
 import ERROR from "../constants/errorMessage";
@@ -53,6 +53,15 @@ interface CardContextType {
   cardColor: string;
   setCardColor: React.Dispatch<React.SetStateAction<string>>;
 
+  showCardCompanySelect: boolean;
+  setShowCardCompanySelect: React.Dispatch<React.SetStateAction<boolean>>;
+  showExpiryInput: boolean;
+  setShowExpiryInput: React.Dispatch<React.SetStateAction<boolean>>;
+  showCVCInput: boolean;
+  setShowCVCInput: React.Dispatch<React.SetStateAction<boolean>>;
+  showPasswordInput: boolean;
+  setShowPasswordInput: React.Dispatch<React.SetStateAction<boolean>>;
+
   isValidCardNumbers: boolean;
   setIsValidCardNumbers: React.Dispatch<React.SetStateAction<boolean>>;
   isValidCardCompany: boolean;
@@ -61,6 +70,10 @@ interface CardContextType {
   setIsValidExpiry: React.Dispatch<React.SetStateAction<boolean>>;
   isValidCVC: boolean;
   setIsValidCVC: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidPassword: boolean;
+  setIsValidPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  isValidForm: boolean;
+  setIsValidForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -92,32 +105,86 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const [cardColor, setCardColor] = useState<string>("#333333");
 
+  const [showCardCompanySelect, setShowCardCompanySelect] = useState(false);
+  const [showExpiryInput, setShowExpiryInput] = useState(false);
+  const [showCVCInput, setShowCVCInput] = useState(false);
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
+
   const [isValidCardNumbers, setIsValidCardNumbers] = useState(false);
   const [isValidCardCompany, setIsValidCardCompany] = useState(false);
   const [isValidExpiry, setIsValidExpiry] = useState(false);
   const [isValidCVC, setIsValidCVC] = useState(false);
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(false);
 
   useEffect(() => {
     const isAllFilled = cardNumbers.every(
       (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
     );
-  
-    if (isAllFilled && cardNumbersHelperText === "") setIsValidCardNumbers(true);
+
+    if (isAllFilled && cardNumbersHelperText === "") {
+      setIsValidCardNumbers(true);
+      setShowCardCompanySelect(true);
+    }
+    else setIsValidCardNumbers(false);
   }, [cardNumbers, cardNumbersHelperText]);
 
   useEffect(() => {
-    if (cardColor !== "#333333") setIsValidCardCompany(true);
+    if (cardColor !== "#333333") {
+      setIsValidCardCompany(true);
+      setShowExpiryInput(true);
+    }
+    else setIsValidCardCompany(false);
   }, [cardColor]);
 
   useEffect(() => {
-    const isAllFilled = month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH && year.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
-    if (isAllFilled && expiryHelperText === "") setIsValidExpiry(true);
-  }, [month, year, expiryHelperText])
+    const isAllFilled =
+      month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH &&
+      year.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
+    if (isAllFilled && expiryHelperText === "") {
+      setIsValidExpiry(true);
+      setShowCVCInput(true);
+    }
+    else setIsValidExpiry(false);
+  }, [month, year, expiryHelperText]);
 
   useEffect(() => {
-    if (CVC.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH && CVCHelperText === "") setIsValidCVC(true);
-  }, [CVC, CVCHelperText])
-  
+    if (
+      CVC.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH &&
+      CVCHelperText === ""
+    ) {
+      setIsValidCVC(true);
+      setShowPasswordInput(true);
+    }
+    else setIsValidCVC(false);
+  }, [CVC, CVCHelperText]);
+
+  useEffect(() => {
+    if (
+      password.length === CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH &&
+      passwordHelperText === ""
+    )
+      setIsValidPassword(true);
+    else setIsValidPassword(false);
+  }, [password, passwordHelperText]);
+
+  useEffect(() => {
+    if (
+      isValidCardNumbers &&
+      isValidCardCompany &&
+      isValidExpiry &&
+      isValidCVC &&
+      isValidPassword
+    )
+      setIsValidForm(true);
+    else setIsValidForm(false);
+  }, [
+    isValidCardNumbers,
+    isValidCardCompany,
+    isValidExpiry,
+    isValidCVC,
+    isValidPassword,
+  ]);
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -207,7 +274,10 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setPassword(e.target.value);
-      validatePassword(e.target.value, CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH);
+      validatePassword(
+        e.target.value,
+        CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH
+      );
       setPasswordHelperText("");
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -246,6 +316,14 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         handlePassword,
         cardColor,
         setCardColor,
+        showCardCompanySelect,
+        setShowCardCompanySelect,
+        showExpiryInput,
+        setShowExpiryInput,
+        showCVCInput,
+        setShowCVCInput,
+        showPasswordInput,
+        setShowPasswordInput,
         isValidCardNumbers,
         setIsValidCardNumbers,
         isValidCardCompany,
@@ -253,7 +331,11 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         isValidExpiry,
         setIsValidExpiry,
         isValidCVC,
-        setIsValidCVC
+        setIsValidCVC,
+        isValidPassword,
+        setIsValidPassword,
+        isValidForm,
+        setIsValidForm,
       }}
     >
       {children}

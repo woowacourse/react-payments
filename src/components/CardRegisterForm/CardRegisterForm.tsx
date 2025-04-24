@@ -8,32 +8,37 @@ import PasswordInput from "../PasswordInput/PasswordInput";
 import RegisterCardButton from "../RegisterCardButton/RegisterCardButton";
 
 const CardRegisterForm = () => {
-  const { isValidCardNumbers, isValidCardCompany, isValidExpiry, isValidCVC } =
-    useCardContext();
+  const {
+    showCardCompanySelect,
+    showExpiryInput,
+    showCVCInput,
+    showPasswordInput,
+    isValidForm,
+  } = useCardContext();
   return (
     <form>
-      {isValidCVC && (
+      {showPasswordInput && (
         <div className={styles.fadeInWrapper}>
           <PasswordInput />
         </div>
       )}
-      {isValidExpiry && (
+      {showCVCInput && (
         <div className={styles.fadeInWrapper}>
           <CVCInput />
         </div>
       )}
-      {isValidCardCompany && (
+      {showExpiryInput && (
         <div className={styles.fadeInWrapper}>
           <CardExpiryInput />
         </div>
       )}
-      {isValidCardNumbers && (
+      {showCardCompanySelect && (
         <div className={styles.fadeInWrapper}>
           <CardCompanySelect />
         </div>
       )}
       <CardNumbersInput />
-      <RegisterCardButton />
+      {isValidForm && <RegisterCardButton />}
     </form>
   );
 };
