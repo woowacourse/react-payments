@@ -1,15 +1,9 @@
 import Dropdown from '../common/Dropdown/Dropdown';
 import Spacing from '../common/Spacing/Spacing';
 import Title from '../common/Title/Title';
+import { CardBrandProps } from './type';
 
-export type CardBrandType = (typeof CARD_BRAND_LIST)[number];
-
-interface CardBrandProps {
-  CardBrandType: CardBrandType | null;
-  handleDropdownChange: (value: CardBrandType) => void;
-}
-
-const CARD_BRAND_LIST = [
+export const CARD_BRAND_LIST = [
   'BC카드',
   '신한카드',
   '카카오뱅크',
@@ -19,13 +13,13 @@ const CARD_BRAND_LIST = [
   '하나카드',
   '국민카드',
 ] as const;
-export default function CardBrand({ CardBrandType, handleDropdownChange }: CardBrandProps) {
+export default function CardBrand({ cardBrandType, handleDropdownChange }: CardBrandProps) {
   return (
     <div>
       <Title description="현재 국내 카드사만 가능합니다.">카드사를 선택해 주세요</Title>
       <Spacing size={24} />
       <Dropdown
-        SelectedValue={CardBrandType}
+        SelectedValue={cardBrandType}
         defaultValue="카드사를 선택해주세요."
         dropdownList={CARD_BRAND_LIST}
         onClick={handleDropdownChange}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../constants';
 
 export const useControlledCardPasswordNumber = () => {
+  const [isCardPasswordNextStep, setIsCardPasswordNextStep] = useState<boolean>(false);
   const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
 
@@ -17,5 +18,8 @@ export const useControlledCardPasswordNumber = () => {
     setCardPassword((prev) => (prev = value));
     setCardPasswordErrorMessage((prev) => (prev = getErrorMessage(value)));
   };
-  return { cardPassword, cardPasswordErrorMessage, handleCardPasswordInputChange };
+
+  if (cardPassword.length === 2 && cardPasswordErrorMessage === '' && !isCardPasswordNextStep)
+    setIsCardPasswordNextStep(true);
+  return { cardPassword, cardPasswordErrorMessage, isCardPasswordNextStep, handleCardPasswordInputChange };
 };

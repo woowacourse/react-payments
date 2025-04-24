@@ -1,5 +1,5 @@
 export interface CardPasswordProps {
-  CardPassword: string;
+  cardPassword: string;
   cardPasswordErrorMessage: string;
   handleCardPasswordInputChange: (value: string) => void;
 }

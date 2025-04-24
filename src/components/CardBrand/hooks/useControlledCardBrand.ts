@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { CardBrandType } from '../CardBrand';
+import { CardBrandType } from '../type';
 
 export const useControlledCardBrand = () => {
-  const [cardBrandType, setCardBrandType] = useState<CardBrandType | null>(null);
+  const [isCardBrandNextStep, setIsCardBrandNextStep] = useState(false);
+  const [cardBrandTypeState, setCardBrandTypeState] = useState<CardBrandType | null>(null);
   const handleDropdownChange = (value: CardBrandType) => {
-    setCardBrandType(value);
+    setCardBrandTypeState(value);
   };
 
-  return { cardBrandType, handleDropdownChange };
+  if (cardBrandTypeState !== null && !isCardBrandNextStep) setIsCardBrandNextStep(true);
+
+  return { cardBrandTypeState, isCardBrandNextStep, handleDropdownChange };
 };

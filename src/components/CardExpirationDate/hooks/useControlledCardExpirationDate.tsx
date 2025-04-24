@@ -9,6 +9,7 @@ import {
 import { DateType, HandleInputChangeProps } from '../type';
 
 export const useControlledCardExpirationDate = () => {
+  const [isCardExpirationDateNextStep, setIsCardExpirationDateNextStep] = useState(false);
   const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
     month: '',
     year: '',
@@ -68,9 +69,14 @@ export const useControlledCardExpirationDate = () => {
     }
   };
 
+  const isCardNumberFill = Object.values(cardExpirationDate).every((number) => number.length === 2);
+  const isError = Object.values(cardExpirationDateErrorMessage).every((message) => message === '');
+  if (isCardNumberFill && isError && !isCardExpirationDateNextStep) setIsCardExpirationDateNextStep(true);
+
   return {
     cardExpirationDate,
     cardExpirationDateErrorMessage,
+    isCardExpirationDateNextStep,
     handleCardExpirationDateInputChange,
   };
 };

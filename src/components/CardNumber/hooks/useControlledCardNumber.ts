@@ -3,6 +3,7 @@ import { HandleInputChangeProps, SequenceType } from '../type';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../constants';
 
 export const useControlledCardNumber = () => {
+  const [isCardNumberNextStep, setIsCardNumberNextStep] = useState(false);
   const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
     first: '',
     second: '',
@@ -29,5 +30,9 @@ export const useControlledCardNumber = () => {
     setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: getErrorMessage(value) }));
   }, []);
 
-  return { cardNumber, cardNumberErrorMessage, handleCardNumberInputChange };
+  const isCardNumberFill = Object.values(cardNumber).every((number) => number.length === 4);
+  const isError = Object.values(cardNumberErrorMessage).every((message) => message === '');
+  if (isCardNumberFill && isError && !isCardNumberNextStep) setIsCardNumberNextStep(true);
+
+  return { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, handleCardNumberInputChange };
 };

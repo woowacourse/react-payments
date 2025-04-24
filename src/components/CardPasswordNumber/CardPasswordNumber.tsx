@@ -6,7 +6,7 @@ import Title from '../common/Title/Title';
 import { CardPasswordProps } from './type';
 
 export default function CardPasswordNumber({
-  CardPassword,
+  cardPassword,
   cardPasswordErrorMessage,
   handleCardPasswordInputChange,
 }: CardPasswordProps) {
@@ -20,7 +20,7 @@ export default function CardPasswordNumber({
         type="password"
         maxLength={2}
         id="card-password"
-        value={CardPassword}
+        value={cardPassword}
         onChange={(event) => handleCardPasswordInputChange(event.target.value)}
         isError={cardPasswordErrorMessage !== ''}
       />
