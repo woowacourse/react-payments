@@ -40,57 +40,20 @@ const subtitleVariants: Record<CardFormType, string | null> = {
 };
 
 export default function CardFormSection({ type }: CardFormSectionProps) {
-  const {
-    hasError,
-    getCardNumberErrors,
-    getExpirationPeriodErrors,
-    getCvcNumberError,
-    getCardCompanyError,
-    getPasswordError,
-    validateCardNumber,
-    validateExpirationPeriod,
-    validateCvcNumber,
-    validateCardCompany,
-    validatePassword,
-  } = useCardValidation();
+  const { hasErrorByType } = useCardValidation();
 
   const renderCardFormFieldByType = () => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return (
-          <CardNumberInput
-            cardNumberErrors={getCardNumberErrors()}
-            validateCardNumber={validateCardNumber}
-          />
-        );
+        return <CardNumberInput />;
       case CARD_FORM_TYPE.cardCompany:
-        return (
-          <CardCompanySelect
-            cardCompanyError={getCardCompanyError()}
-            validateCardCompany={validateCardCompany}
-          />
-        );
+        return <CardCompanySelect />;
       case CARD_FORM_TYPE.expirationPeriod:
-        return (
-          <CardExpirationPeriodInput
-            expirationPeriodErrors={getExpirationPeriodErrors()}
-            validateExpirationPeriod={validateExpirationPeriod}
-          />
-        );
+        return <CardExpirationPeriodInput />;
       case CARD_FORM_TYPE.cvcNumber:
-        return (
-          <CardCvcInput
-            cvcNumberError={getCvcNumberError()}
-            validateCvcNumber={validateCvcNumber}
-          />
-        );
+        return <CardCvcInput />;
       case CARD_FORM_TYPE.password:
-        return (
-          <CardPasswordInput
-            passwordError={getPasswordError()}
-            validatePassword={validatePassword}
-          />
-        );
+        return <CardPasswordInput />;
       default:
         null;
     }
@@ -103,8 +66,8 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
       <Subtitle subtitle={subtitleVariants[type]} />
       {renderCardFormFieldByType()}
       <Error
-        errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리?
-        isVisible={hasError(type)}
+        errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리
+        isVisible={hasErrorByType(type)}
       />
     </CardFormSectionCSS>
   );
