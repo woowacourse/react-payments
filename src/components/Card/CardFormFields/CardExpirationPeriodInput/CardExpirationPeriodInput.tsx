@@ -2,6 +2,8 @@ import { ChangeEvent } from "react";
 import {
   EXPIRATION_PERIOD_SEGMENT,
   ExpirationPeriodSegmentType,
+  MAX_LENGTH,
+  PLACEHOLDER,
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
@@ -9,12 +11,6 @@ import { CardFormFieldCSS } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
-
-const PLACEHOLDERS = {
-  month: "MM",
-  year: "YY",
-};
-const MAX_LENGTHS = 2;
 
 export default function CardExpirationPeriodInput() {
   const { expirationPeriod, updateExpirationPeriod } = useCard();
@@ -35,8 +31,8 @@ export default function CardExpirationPeriodInput() {
         return (
           <Input
             key={position}
-            placeholder={PLACEHOLDERS[position]}
-            maxLength={MAX_LENGTHS}
+            placeholder={PLACEHOLDER.expirationPeriod[position]}
+            maxLength={MAX_LENGTH.expirationPeriod}
             isError={expirationPeriodErrors.hasError[position]}
             value={expirationPeriod[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>

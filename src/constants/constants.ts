@@ -35,6 +35,23 @@ export const CARD_COMPANY = {
   kb: "kb",
 } as const;
 
+export const PLACEHOLDER = {
+  cardNumber: "1234",
+  expirationPeriod: {
+    month: "MM",
+    year: "YY",
+  },
+  cvcNumber: "123",
+  password: "비밀번호를 입력해 주세요",
+};
+
+export const MAX_LENGTH = {
+  cardNumber: 4,
+  expirationPeriod: 2,
+  cvcNumber: 3,
+  password: 2,
+};
+
 export type CardFormType = keyof typeof CARD_FORM_TYPE;
 export type CardType = keyof typeof CARD_TYPE;
 export type CardNumbersSegmentType = keyof typeof CARD_NUMBERS_SEGMENT;

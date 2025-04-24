@@ -1,12 +1,11 @@
 import {
   EXPIRATION_PERIOD_SEGMENT,
   ExpirationPeriodSegmentType,
+  MAX_LENGTH,
 } from "../../constants/constants";
-import { isPositiveInteger } from "./common";
+import { hasExactLength, isPositiveInteger } from "./common";
 
 const validateMonth = (value: string) => {
-  if (value.length !== 2) return "유효한 날짜를 입력해 주세요";
-
   const monthNumber = parseInt(value, 10);
   if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
     return "유효한 날짜를 입력해 주세요";
@@ -30,6 +29,8 @@ export const isErrorExpirationPeriod = (
   position: ExpirationPeriodSegmentType
 ) => {
   if (!isPositiveInteger(value)) return "숫자만 입력 가능합니다";
+  if (!hasExactLength(value, MAX_LENGTH.expirationPeriod))
+    return "유효 기간을 모두 입력해 주세요";
 
   switch (position) {
     case EXPIRATION_PERIOD_SEGMENT.month:
