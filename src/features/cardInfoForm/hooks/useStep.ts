@@ -49,6 +49,10 @@ type CardInfoFormProps = {
     error: Record<"CVCNumber", string>;
     isError: () => boolean;
   };
+  passwordError: {
+    error: Record<"password", string>;
+    isError: () => boolean;
+  };
 };
 
 export default function useStep({

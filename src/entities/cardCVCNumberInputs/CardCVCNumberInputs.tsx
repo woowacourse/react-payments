@@ -1,5 +1,4 @@
 import Input from "../../shared/input/Input";
-import { NO_ERROR } from "../../shared/constants/constant";
 import { CVC_NUMBER_LENGTH } from "./CardCVCNumberInputs.constant";
 import {
   StyledContainer,
@@ -49,7 +48,7 @@ function CardCVCNumberInputs({
               type: "CVCNumber",
             });
           }}
-          isError={CVCError.error.CVCNumber !== NO_ERROR}
+          isError={CVCError.isError()}
           width="100%"
           maxLength={CVC_NUMBER_LENGTH}
           placeholder="123"

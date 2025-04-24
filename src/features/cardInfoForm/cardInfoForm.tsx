@@ -14,6 +14,7 @@ import CardTypeSection from "../cardTypeSection/CardTypeSection";
 import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
 import useStep from "./hooks/useStep";
+import { getPasswordValidationFns } from "../../entities/cardPasswordInputs/CardPasswordInputs.domain";
 
 type CardInfoFormProps = {
   cardNumber: {
@@ -84,6 +85,13 @@ export default function CardInfoForm({
     getCVCValidationFns
   );
 
+  const passwordError = useError<Record<"password", string>>(
+    {
+      password: NO_ERROR,
+    },
+    getPasswordValidationFns
+  );
+
   const { step, canSubmit } = useStep({
     cardNumber,
     expirationPeriod,
@@ -94,11 +102,17 @@ export default function CardInfoForm({
     year,
     month,
     CVCError,
+    passwordError,
   });
 
   return (
     <>
-      {step >= 4 && <CardPasswordSection password={password} />}
+      {step >= 4 && (
+        <CardPasswordSection
+          password={password}
+          passwordError={passwordError}
+        />
+      )}
       {step >= 3 && (
         <CardCVCNumberSection CVCNumber={CVCNumber} CVCError={CVCError} />
       )}
