@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--color-button);
+  color: var(--color-white);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}

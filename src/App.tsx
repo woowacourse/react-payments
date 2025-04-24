@@ -6,6 +6,9 @@ import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
 import useExpirationDateInput from "./hooks/useExpirationDateInput";
 import useCvcNumberInput from "./hooks/useCvcNumberInput";
 import useCardNumbersInput from "./hooks/useCardNumbersInput";
+import CardBrand from "./CardBrand/CardBrand";
+import CardPassword from "./CardPassword/CardPassword";
+import Button from "./components/Button/Button";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
@@ -26,22 +29,25 @@ function App() {
         cardExpirationDate={cardExpirationDate}
       />
       <div className="card-input">
-        <CardNumber
-          handleChange={onCardNumberChange}
-          cardNumbers={cardNumbers}
-          errorMessage={cardNumbersError}
+        <CardPassword handleChange={() => {}} />
+        <CardCvcNumber
+          handleChange={onCvcNumberChange}
+          cvcNumbers={cvcNumbers}
+          errorMessage={cvcNumbersError}
         />
         <CardExpirationDate
           handleChange={onExpirationDateChange}
           cardExpirationDate={cardExpirationDate}
           errorMessage={cardExpirationDateError}
         />
-        <CardCvcNumber
-          handleChange={onCvcNumberChange}
-          cvcNumbers={cvcNumbers}
-          errorMessage={cvcNumbersError}
+        <CardNumber
+          handleChange={onCardNumberChange}
+          cardNumbers={cardNumbers}
+          errorMessage={cardNumbersError}
         />
+        <CardBrand handleChange={() => {}} />
       </div>
+      <Button text="확인" onClick={() => {}} />
     </div>
   );
 }
