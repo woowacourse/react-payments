@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import CardPasswordForm from '../../../components/domain/CardPasswordForm';
-import useCardInfo from '../../../hooks/useCardInfo';
+import useCardInfo from '../../../hooks/useCardInfoState';
 
 const meta = {
   title: 'Components/domain/CardPasswordForm',

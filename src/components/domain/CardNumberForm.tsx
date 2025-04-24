@@ -1,13 +1,11 @@
 import NumberInput from '../common/NumberInput';
-import { useState, useEffect } from 'react';
-import isZeroOrExactLength from '../../utils/isExactLength';
-import { ERROR_MESSAGE } from '../../constants/guide';
 import {
   NumberInputForm,
   Label,
   NumberInputContainer,
   ErrorText,
 } from '../../styles/CardForm.styles';
+import useCardNumberValidation from '../../hooks/Validation/useCardNumberValidation';
 
 interface CardNumberFormProps {
   cardInfo: CardInfo;
@@ -20,26 +18,7 @@ interface CardNumberFormProps {
 }
 
 function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormProps) {
-  const [errorText, setErrorText] = useState('');
-
-  useEffect(() => {
-    const condition = [
-      cardInfo.number.first,
-      cardInfo.number.second,
-      cardInfo.number.third,
-      cardInfo.number.fourth,
-    ].some((number) => {
-      if (isZeroOrExactLength(number, maxLength)) return false;
-      return true;
-    });
-    if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
-    else setErrorText('');
-  }, [
-    cardInfo.number.first,
-    cardInfo.number.second,
-    cardInfo.number.third,
-    cardInfo.number.fourth,
-  ]);
+  const { errorText } = useCardNumberValidation(cardInfo, maxLength);
 
   const NumberInputInfo = [
     {

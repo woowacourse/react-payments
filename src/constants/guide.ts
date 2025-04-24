@@ -28,5 +28,5 @@ export const CONFIRM_BUTTON_LABEL = '확인';
 export const ERROR_MESSAGE = {
   GET_LENGTH_TEXT: (length: number) => `${length}자의 숫자만 입력 가능합니다.`,
   INVALID_MONTH: '01에서 12사이의 숫자를 입력해주세요.',
-  INVALID_YEAR: '만료된 연도입니다. 25년 이후의 년도를 입력해주세요.',
+  INVALID_YEAR: '만료된 기간입니다. 현재보다 이후 기간을 입력해주세요.',
 };

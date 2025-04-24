@@ -16,7 +16,7 @@ import {
   PASSWORD_FRONT_MESSAGE,
 } from '../constants/guide';
 import { CARD_COMPANY_NAMES, CARD_INFO_LENGTH, ROUTER_PATH } from '../constants/setting';
-import useCardInfo from '../hooks/useCardInfo';
+import useCardInfo from '../hooks/useCardInfoState';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterCardPage() {
