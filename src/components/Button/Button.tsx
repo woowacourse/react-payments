@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 type buttonProps = {
   text: string;
+  onClick: () => void;
 };
 
 const StyledButton = styled.button`
@@ -11,9 +12,10 @@ const StyledButton = styled.button`
   color: #fff;
   white-space: nowrap;
   font-weight: 700;
+  cursor: pointer;
 `;
 const Button = (props: buttonProps) => {
-  return <StyledButton>{props.text}</StyledButton>;
+  return <StyledButton onClick={props.onClick}>{props.text}</StyledButton>;
 };
 
 export default Button;
