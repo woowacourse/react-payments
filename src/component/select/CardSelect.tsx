@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useRef, useState } from 'react';
 import useOutsideClick from '../../hook/useOutsideClick';
 import type { CardInputProps } from '../../types/CardInputTypes';
@@ -30,7 +30,7 @@ const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput }: Car
 
   return (
     <SelectContainer ref={backgroundRef}>
-      <SelectField onClick={() => setIsOpen(!isOpen)}>
+      <SelectField onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
         <DefaultMessage $isDefault={isDefault}>{selectedMessage}</DefaultMessage>
         <SelectIcon src="./selectIcon.png" alt="카드사 옵션 열기" />
       </SelectField>
@@ -47,13 +47,24 @@ const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput }: Car
   );
 };
 
+const slideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const SelectContainer = styled.div`
   width: 100%;
   cursor: pointer;
   position: relative;
 `;
 
-const SelectField = styled.div`
+const SelectField = styled.div<{ $isOpen: boolean }>`
   width: 100%;
   border: 1px solid var(--color-gray);
   border-radius: 4px;
@@ -63,6 +74,7 @@ const SelectField = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: ${({ $isOpen }) => ($isOpen ? '1px solid var(--color-black)' : '1px solid var(--color-gray)')};
 `;
 
 const SelectIcon = styled.img`
@@ -84,6 +96,7 @@ const OptionsContainer = styled.ul`
   box-sizing: border-box;
   position: absolute;
   top: calc(100% + 4px);
+  animation: ${slideDown} 0.3s ease;
 `;
 
 const OptionItem = styled.li`
