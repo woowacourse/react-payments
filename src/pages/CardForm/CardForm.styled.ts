@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardPaymentsPageCSS = styled.div`
+export const CardFormContainerCSS = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -10,7 +10,7 @@ export const CardPaymentsPageCSS = styled.div`
   background-color: #f7f7f7;
 `;
 
-export const CardFormCSS = styled.div`
+export const CardFormWrapperCSS = styled.div`
   display: flex;
   flex-direction: column;
   width: 28%;
