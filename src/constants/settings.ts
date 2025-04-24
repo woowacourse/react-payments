@@ -20,3 +20,8 @@ export const CARD_PREFIX = {
   MASTERCARD_MIN: 51,
   MASTERCARD_MAX: 55,
 };
+
+export const PASSWORD = {
+  FIELDS_COUNT: 1,
+  MAX_LENGTH: 2,
+};
