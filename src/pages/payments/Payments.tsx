@@ -15,10 +15,12 @@ import useCardPasswordValidation from '../../components/features/payments/hooks/
 import { CARD_BANK } from '../../components/features/payments/config/card';
 import { INPUT_STEP } from '../../components/features/payments/config/step';
 import { isAllTrue } from '../../utils/array';
+import { useNavigate } from 'react-router';
 
 function Payments() {
   const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
   const [allInputComplete, setAllInputComplete] = useState(false);
+  const navigate = useNavigate();
   const {
     inputValues: cardNumberInputValues,
     inputRefs: cardNumberInputRefs,
@@ -61,8 +63,12 @@ function Payments() {
   const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
 
-    console.log(cardNumberInputValues.cardNumberPart1);
-    console.log(cardBankValue?.label);
+    navigate('/complete', {
+      state: {
+        cardNumberPart1: cardNumberInputValues.cardNumberPart1,
+        cardBank: cardBankValue?.label,
+      },
+    });
   };
 
   useEffect(() => {
