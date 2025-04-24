@@ -1,21 +1,9 @@
-import styles from "./RegisterAnotherCardButton.module.css";
-import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
 
 const RegisterAnotherCardButton = () => {
-  const navigate = useNavigate();
-
-  const handleRegisterAnotherCard = () => {
-    navigate("/");
-  };
 
   return (
-    <button
-      type="button"
-      className={styles.registerAnotherCardButton}
-      onClick={handleRegisterAnotherCard}
-    >
-      확인
-    </button>
+    <Button name="another"/>
   );
 };
 
