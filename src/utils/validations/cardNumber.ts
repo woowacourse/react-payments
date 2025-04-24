@@ -1,5 +1,5 @@
 import { CardNumbersState } from "../../constants/constants";
-import { isNotPositiveInteger } from "./common";
+import { isPositiveInteger } from "./common";
 
 export const isCardNumberComplete = (
   cardNumbers: CardNumbersState
@@ -12,6 +12,6 @@ export const isCardNumberComplete = (
 };
 
 export const isErrorCardNumber = (value: string) => {
-  if (isNotPositiveInteger(value)) return "숫자만 입력 가능합니다";
+  if (!isPositiveInteger(value)) return "숫자만 입력 가능합니다";
   return null;
 };

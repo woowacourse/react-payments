@@ -13,6 +13,9 @@ import { createContext, ReactNode, useState } from "react";
 import { CardFormType } from "../constants/constants";
 import { isErrorCardNumber } from "../utils/validations/cardNumber";
 import { isErrorExpirationPeriod } from "../utils/validations/expirationPeriod";
+import { isErrorCvcNumber } from "../utils/validations/cvcNumber";
+import { isErrorCardCompany } from "../utils/validations/cardCompany";
+import { isErrorPassword } from "../utils/validations/password";
 
 export interface CardValidationContextType {
   cardNumberErrors: CardNumberErrorsState;
@@ -117,27 +120,27 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
   };
 
   const validateCvcNumber = (value: string) => {
-    // const errorMessage = isErrorCvcNumber(value);
-    // setCvcNumberError({
-    //   errorMessage: errorMessage,
-    //   hasError: !!errorMessage,
-    // });
+    const errorMessage = isErrorCvcNumber(value);
+    setCvcNumberError({
+      errorMessage: errorMessage,
+      hasError: !!errorMessage,
+    });
   };
 
   const validateCardCompany = (value: string) => {
-    // const errorMessage = isErrorCardCompany(value);
-    // setCardCompanyError({
-    //   errorMessage: errorMessage,
-    //   hasError: !!errorMessage,
-    // });
+    const errorMessage = isErrorCardCompany(value);
+    setCardCompanyError({
+      errorMessage: errorMessage,
+      hasError: !!errorMessage,
+    });
   };
 
   const validatePassword = (value: string) => {
-    // const errorMessage = isErrorPassword(value);
-    // setPasswordError({
-    //   errorMessage: errorMessage,
-    //   hasError: !!errorMessage,
-    // });
+    const errorMessage = isErrorPassword(value);
+    setPasswordError({
+      errorMessage: errorMessage,
+      hasError: !!errorMessage,
+    });
   };
 
   const hasErrorByType = (type: CardFormType): boolean => {
