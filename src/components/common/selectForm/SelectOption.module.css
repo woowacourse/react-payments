@@ -1,0 +1,16 @@
+.container {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--grey);
+  background-color: var(--white);
+}
+
+.item {
+  padding: 8px 10px;
+  &:hover {
+    background-color: var(--light-grey);
+  }
+}

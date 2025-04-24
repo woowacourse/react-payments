@@ -1,0 +1,7 @@
+.arrow {
+  transform: rotate(0deg);
+  transition: 0.3s ease;
+  &.reverse {
+    transform: rotate(180deg);
+  }
+}

@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.description {
+  color: var(--grey);
+}
+
+.selector {
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--grey);
+  padding: 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
