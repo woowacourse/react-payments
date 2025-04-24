@@ -1,30 +1,19 @@
-import { useState } from 'react';
 import Dropdown from '../../common/DropDown/Dropdown';
+import { CardCompanyName } from '../../../hooks/useCardCompany';
 
-type CardCompanyName = (typeof CARD_COMPANY_NAMES)[number];
+interface CardCompanyFieldProps {
+  selectedCard: CardCompanyName | null;
+  CARD_COMPANY_NAMES: readonly CardCompanyName[];
+  CARD_COMPANY_PLACEHOLDER: string;
+  onClickCardCompany: (name: CardCompanyName) => void;
+}
 
-const CARD_COMPANY_NAMES = [
-  'BC카드',
-  '신한카드',
-  '카카오뱅크',
-  '현대카드',
-  '우리카드',
-  '롯데카드',
-  '하나카드',
-  '국민카드',
-] as const;
-
-const CARD_COMPANY_PLACEHOLDER = '카드사를 선택해주세요';
-
-function CardCompanyField() {
-  const [selectedCard, setSelectedCard] = useState<CardCompanyName | null>(
-    null,
-  );
-
-  const onClickCardCompany = (name: CardCompanyName) => {
-    setSelectedCard(name);
-  };
-
+function CardCompanyField({
+  selectedCard,
+  CARD_COMPANY_NAMES,
+  CARD_COMPANY_PLACEHOLDER,
+  onClickCardCompany,
+}: CardCompanyFieldProps) {
   return (
     <Dropdown<CardCompanyName>
       placeholder={CARD_COMPANY_PLACEHOLDER}
