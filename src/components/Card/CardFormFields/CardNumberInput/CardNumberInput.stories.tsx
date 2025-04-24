@@ -1,13 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardNumberInput from "./CardNumberInput";
 import { withCustomCardProvider } from "../../../../../.storybook/utils/withCustomCardProvider";
-
-const cardNumberErrors = {
-  first: false,
-  second: false,
-  third: false,
-  fourth: false,
-};
+import { withCustomCardValidationProvider } from "../../../../../.storybook/utils/withCustomCardValidationProvider";
 
 const meta = {
   title: "CardNumberInput",
@@ -20,32 +14,36 @@ export default meta;
 type Story = StoryObj<typeof CardNumberInput>;
 
 export const Default: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cardNumberErrors: cardNumberErrors,
-    validateCardNumber: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({}),
+  ],
 };
 
 export const WithError: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cardNumberErrors: {
-      ...cardNumberErrors,
-      first: true,
-    },
-    validateCardNumber: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({
+      cardNumberErrors: {
+        first: true,
+        second: false,
+        third: false,
+        fourth: false,
+      },
+    }),
+  ],
 };
 
 export const WithErrors: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cardNumberErrors: {
-      ...cardNumberErrors,
-      first: true,
-      third: true,
-    },
-    validateCardNumber: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({
+      cardNumberErrors: {
+        first: true,
+        second: true,
+        third: true,
+        fourth: false,
+      },
+    }),
+  ],
 };

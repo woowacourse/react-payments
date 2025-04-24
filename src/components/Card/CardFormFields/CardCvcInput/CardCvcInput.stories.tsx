@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardCvcInput from "./CardCvcInput";
 import { withCustomCardProvider } from "../../../../../.storybook/utils/withCustomCardProvider";
+import { withCustomCardValidationProvider } from "../../../../../.storybook/utils/withCustomCardValidationProvider";
 
 const meta = {
   title: "CardCvcInput",
@@ -13,17 +14,15 @@ export default meta;
 type Story = StoryObj<typeof CardCvcInput>;
 
 export const Default: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cvcNumberError: false,
-    validateCvcNumber: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({}),
+  ],
 };
 
 export const WithError: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cvcNumberError: true,
-    validateCvcNumber: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({ cvcNumberError: true }),
+  ],
 };

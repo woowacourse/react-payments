@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardCompanySelect from "./CardCompanySelect";
 import { withCustomCardProvider } from "../../../../../.storybook/utils/withCustomCardProvider";
+import { withCustomCardValidationProvider } from "../../../../../.storybook/utils/withCustomCardValidationProvider";
 
 const meta = {
   title: "CardCompanySelect",
@@ -13,17 +14,15 @@ export default meta;
 type Story = StoryObj<typeof CardCompanySelect>;
 
 export const Default: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cardCompanyError: false,
-    validateCardCompany: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({}),
+  ],
 };
 
 export const WithError: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    cardCompanyError: true,
-    validateCardCompany: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({ cardCompanyError: true }),
+  ],
 };

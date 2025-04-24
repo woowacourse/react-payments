@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardPasswordInput from "./CardPasswordInput";
 import { withCustomCardProvider } from "../../../../../.storybook/utils/withCustomCardProvider";
+import { withCustomCardValidationProvider } from "../../../../../.storybook/utils/withCustomCardValidationProvider";
 
 const meta = {
   title: "CardPasswordInput",
@@ -13,17 +14,15 @@ export default meta;
 type Story = StoryObj<typeof CardPasswordInput>;
 
 export const Default: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    passwordError: false,
-    validatePassword: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({}),
+  ],
 };
 
 export const WithError: Story = {
-  decorators: [withCustomCardProvider({})],
-  args: {
-    passwordError: true,
-    validatePassword: () => {},
-  },
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({ passwordError: true }),
+  ],
 };

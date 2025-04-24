@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CardPreview from "./CardPreview";
 import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
 import { CARD_COMPANY } from "../../../constants/constants";
+import { withCustomCardValidationProvider } from "../../../../.storybook/utils/withCustomCardValidationProvider";
 
 const meta = {
   title: "CardPreview",
@@ -14,7 +15,10 @@ export default meta;
 type Story = StoryObj<typeof CardPreview>;
 
 export const NoneCompanyCard: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [
+    withCustomCardProvider({}),
+    withCustomCardValidationProvider({}),
+  ],
 };
 
 export const PartiallyMaskedCard: Story = {
@@ -31,6 +35,7 @@ export const PartiallyMaskedCard: Story = {
         year: "27",
       },
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -48,6 +53,7 @@ export const VisaCard: Story = {
         year: "25",
       },
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -65,6 +71,7 @@ export const MasterCard: Story = {
         year: "28",
       },
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -73,6 +80,7 @@ export const BCCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.bc,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -81,6 +89,7 @@ export const ShinhanCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.shinhan,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -89,6 +98,7 @@ export const KakaobankCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.kakaobank,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -97,6 +107,7 @@ export const HyundaiCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.hyundai,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -105,6 +116,7 @@ export const WooriCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.woori,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -113,6 +125,7 @@ export const LotteCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.lotte,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -121,6 +134,7 @@ export const HanaCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.hana,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
@@ -129,6 +143,7 @@ export const KBCard: Story = {
     withCustomCardProvider({
       cardCompany: CARD_COMPANY.kb,
     }),
+    withCustomCardValidationProvider({}),
   ],
 };
 
