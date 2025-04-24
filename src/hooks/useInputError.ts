@@ -30,6 +30,17 @@ const isValidNumber = (value: string) => {
   return !isNaN(number) && Number.isInteger(number) && number >= 0;
 };
 
+const isValidMonthAndYear = (value: string, position: PeriodPositionType) => {
+  if (position === "month") {
+    const num = Number(value);
+    return !isNaN(num) && Number.isInteger(num) && num >= 1 && num <= 12;
+  }
+  if (position === "year") {
+    const num = Number(value);
+    return !isNaN(num) && Number.isInteger(num) && num >= 25 && num <= 99;
+  }
+};
+
 export function useInputError() {
   const [error, setError] = useState<InputErrorType>(defaultError);
 
@@ -51,7 +62,7 @@ export function useInputError() {
       ...prev,
       expirationPeriod: {
         ...prev.expirationPeriod,
-        [position]: !isValidNumber(value),
+        [position]: !isValidMonthAndYear(value, position),
       },
     }));
   };
