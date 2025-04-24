@@ -12,3 +12,7 @@
 .fadeInWrapper {
   animation: slideFadeIn 0.5s ease-out;
 }
+
+form {
+  padding-bottom: 60px;
+}

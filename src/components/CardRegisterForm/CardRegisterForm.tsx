@@ -5,6 +5,7 @@ import CVCInput from "../CVCInput/CVCInput";
 import styles from "./CardRegisterForm.module.css";
 import { useCardContext } from "../../contexts/CardContext";
 import PasswordInput from "../PasswordInput/PasswordInput";
+import RegisterCardButton from "../RegisterCardButton/RegisterCardButton";
 
 const CardRegisterForm = () => {
   const { isValidCardNumbers, isValidCardCompany, isValidExpiry, isValidCVC } =
@@ -32,6 +33,7 @@ const CardRegisterForm = () => {
         </div>
       )}
       <CardNumbersInput />
+      <RegisterCardButton />
     </form>
   );
 };
