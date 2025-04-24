@@ -36,7 +36,6 @@ const CardPage = () => {
   const [cardCompany, setCardCompany] = useState<string>('');
 
   const handleCardCompanySelect = (value: string) => {
-    console.log(value);
     setCardCompany(value);
   };
 
