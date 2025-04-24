@@ -1,15 +1,10 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../CardPage/CardPage';
 import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback } from 'react';
-
-type PasswordInputProps = {
-  values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
-};
+import { useCallback, useEffect } from 'react';
+import { InputProps } from '../../types/input';
 
 const StyledPasswordInput = styled.div`
   width: 100%;
@@ -33,12 +28,21 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
-const PasswordInput = ({ values, onChange }: PasswordInputProps) => {
+const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
   const validationCallback = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 2),
     []
   );
-  const { isError, errorMessage, validate } = useInputValidation([false], validationCallback);
+  const { isError, errorMessage, validate } = useInputValidation(
+    [false, false],
+    validationCallback
+  );
+
+  useEffect(() => {
+    const isValid =
+      isError.every((error) => error === false) && values.every((value) => value.length === 2);
+    onValidChange(isValid);
+  }, [isError, values, onValidChange]);
 
   return (
     <StyledPasswordInput>

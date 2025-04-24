@@ -1,15 +1,10 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../CardPage/CardPage';
 import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback } from 'react';
-
-type CVCInputProps = {
-  values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
-};
+import { useCallback, useEffect } from 'react';
+import { InputProps } from '../../types/input';
 
 const StyledCVCInput = styled.div`
   width: 100%;
@@ -33,12 +28,18 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
-const CVCInput = ({ values, onChange }: CVCInputProps) => {
+const CVCInput = ({ values, onChange, onValidChange }: InputProps) => {
   const validationCallback = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 3),
     []
   );
   const { isError, errorMessage, validate } = useInputValidation([false], validationCallback);
+
+  useEffect(() => {
+    const isValid =
+      isError.every((error) => error === false) && values.every((value) => value.length === 3);
+    onValidChange(isValid);
+  }, [isError, values, onValidChange]);
 
   return (
     <StyledCVCInput>

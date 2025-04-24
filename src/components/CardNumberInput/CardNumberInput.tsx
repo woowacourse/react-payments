@@ -4,12 +4,8 @@ import { HandleInputParams } from '../CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import { inputValidation } from '../../validators/inputValidator';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback, useRef } from 'react';
-
-type CardNumberInputProps = {
-  values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
-};
+import { useCallback, useEffect, useRef } from 'react';
+import { InputProps } from '../../types/input';
 
 const StyledCardNumberInput = styled.div`
   width: 100%;
@@ -34,7 +30,7 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
-const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
+const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
   const validationCallback = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 4),
     []
@@ -46,6 +42,12 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
   );
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  useEffect(() => {
+    const isValid =
+      isError.every((error) => error === false) && values.every((value) => value.length === 4);
+    onValidChange(isValid);
+  }, [isError, values, onValidChange]);
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
