@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import InputForm from "../../../common/inputForm/InputForm";
 import Input from "../../../common/inputForm/input/Input";
 import { CARD_INFO } from "../../constants/CardInfo";
@@ -14,6 +14,8 @@ function CardNumberInput({
     cardNumbers: ["", "", "", ""],
     feedbackMessages: ["", "", "", ""],
   });
+
+  const inputRefs = useRef([null, null, null, null]);
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -37,6 +39,10 @@ function CardNumberInput({
     setCardInfo((prev) => {
       return { ...prev, cardNumbers: updatedNumbers };
     });
+
+    if (value.length === 4) {
+      inputRefs.current[index + 1].focus();
+    }
   }
 
   return (
@@ -48,6 +54,7 @@ function CardNumberInput({
     >
       {cardNumberInfo.cardNumbers.map((number, i) => (
         <Input
+          ref={(el) => (inputRefs.current[i] = el)}
           key={i}
           type="tel"
           name={`cardNumber-${i}`}

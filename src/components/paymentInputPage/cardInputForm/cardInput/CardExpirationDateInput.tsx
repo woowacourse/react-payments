@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import Input from "../../../common/inputForm/input/Input";
 import InputForm from "../../../common/inputForm/InputForm";
 import { CARD_INFO } from "../../constants/CardInfo";
@@ -22,7 +22,9 @@ function CardExpirationDateInput({
     },
   });
 
-  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  const inputRefs = useRef([null, null, null, null]);
+
+  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>, i) {
     const { name, value } = e.target;
 
     const next = {
@@ -53,6 +55,11 @@ function CardExpirationDateInput({
         expirationDate: [nextMonth, nextYear],
       };
     });
+
+    if (value.length === 2) {
+      console.log("index", i);
+      inputRefs.current[i + 1].focus();
+    }
   }
 
   return (
@@ -64,19 +71,20 @@ function CardExpirationDateInput({
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
     >
-      {["MONTH", "YEAR"].map((field) => {
+      {["MONTH", "YEAR"].map((field, i) => {
         const name = field.toLowerCase() as "month" | "year";
         const isValid = expiration.feedbackMessage[name] === "";
 
         return (
           <Input
+            ref={(el) => (inputRefs.current[i] = el)}
             key={name}
             type="tel"
             name={name}
             value={expiration[name]}
             isValid={isValid}
             placeholder={field === "MONTH" ? "MM" : "YY"}
-            onChange={onChangeHandler}
+            onChange={(e) => onChangeHandler(e, i)}
             maxLength={CARD_INFO.EXPIRATION_DATE_LENGTH_PART}
           />
         );
