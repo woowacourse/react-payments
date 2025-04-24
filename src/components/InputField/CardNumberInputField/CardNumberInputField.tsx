@@ -47,7 +47,7 @@ function CardNumberInputField({
 
   const isComplete = !Boolean(
     Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== 4
+      (cardNumberValue) => cardNumberValue.length !== MAX_CARD_LENGTH
     ).length
   );
   if (isComplete && !errorMessage) onComplete?.();

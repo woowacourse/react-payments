@@ -61,7 +61,7 @@ function Payments() {
           cardType={cardType}
           cardIssuer={cardIssuer}
         />
-        {step >= 1 && (
+        {step >= 5 && (
           <InputSection
             title="비밀번호를 입력해 주세요"
             caption="앞의 2자리를 입력해주세요"
@@ -70,7 +70,7 @@ function Payments() {
               inputValue={passwordInputValue}
               setInputValue={setPasswordInputValue}
               onComplete={() => {
-                if (step === 4) setStep(5);
+                if (step === 5) setStep(6);
               }}
             />
           </InputSection>
@@ -81,7 +81,7 @@ function Payments() {
               inputValue={CVCInputValue}
               setInputValue={setCVCInputValue}
               onComplete={() => {
-                if (step === 3) setStep(4);
+                if (step === 4) setStep(5);
               }}
             />
           </InputSection>
@@ -94,6 +94,9 @@ function Payments() {
             <ExpirationDateInputField
               inputValue={expirationDateInputValue}
               setInputValue={setExpirationDateInputValue}
+              onComplete={() => {
+                if (step === 3) setStep(4);
+              }}
             />
           </InputSection>
         )}

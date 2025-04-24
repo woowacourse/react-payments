@@ -25,7 +25,7 @@ function CVCInputField({
 
   const isComplete = !Boolean(
     Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== 4
+      (cardNumberValue) => cardNumberValue.length !== MAX_CVC_LENGTH
     ).length
   );
   if (isComplete && !errorMessage) onComplete?.();
