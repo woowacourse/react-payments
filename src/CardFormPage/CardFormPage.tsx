@@ -9,6 +9,7 @@ import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardNumber from "./CardNumber/CarNumber";
 import CardBrand from "./CardBrand/CardBrand";
 import Button from "../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function CardFormPage() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
@@ -20,6 +21,12 @@ export default function CardFormPage() {
   } = useExpirationDateInput();
   const { cvcNumbers, cvcNumbersError, onCvcNumberChange } =
     useCvcNumberInput();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate("/result");
+  };
 
   return (
     <div className={styles["card-form-page"]}>
@@ -47,7 +54,7 @@ export default function CardFormPage() {
         />
         <CardBrand handleChange={() => {}} />
       </div>
-      <Button text="확인" onClick={() => {}} />
+      <Button text="확인" onClick={handleSubmit} />
     </div>
   );
 }
