@@ -11,6 +11,7 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
 import useCardBrandSelect from "../../hooks/useCardBrandSelect";
+import useCardPassword from "../../hooks/useCardPassword";
 
 export default function CardFormPage() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
@@ -23,6 +24,7 @@ export default function CardFormPage() {
   const { cvcNumbers, cvcNumbersError, onCvcNumberChange } =
     useCvcNumberInput();
   const { cardBrand, cardBrandError, onCardBrandChange } = useCardBrandSelect();
+  const { password, passwordError, onPasswordChange } = useCardPassword();
 
   const navigate = useNavigate();
 
@@ -44,7 +46,11 @@ export default function CardFormPage() {
         cardExpirationDate={cardExpirationDate}
       />
       <div className={styles["card-form"]}>
-        <CardPassword handleChange={() => {}} />
+        <CardPassword
+          handleChange={onPasswordChange}
+          password={password}
+          errorMessage={passwordError}
+        />
         <CardCvcNumber
           handleChange={onCvcNumberChange}
           cvcNumbers={cvcNumbers}

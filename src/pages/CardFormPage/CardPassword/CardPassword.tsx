@@ -1,10 +1,11 @@
 import styles from "./CardPassword.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
-import { useState } from "react";
 
 interface CardPasswordProps {
   handleChange: (value: string) => void;
+  password: string;
+  errorMessage: string;
 }
 
 const CARD_PASSWORD_LABEL = {
@@ -13,26 +14,24 @@ const CARD_PASSWORD_LABEL = {
   SUBTITLE: "비밀번호 앞 2자리",
 } as const;
 
-export default function CardPassword({ handleChange }: CardPasswordProps) {
-  const [password, setPassword] = useState("");
-
-  const onPasswordChange = (value: string) => {
-    setPassword(value);
-  };
-
+export default function CardPassword({
+  handleChange,
+  password,
+  errorMessage,
+}: CardPasswordProps) {
   return (
     <section className={styles["card-password"]}>
       <Text textType="title">{CARD_PASSWORD_LABEL.TITLE}</Text>
       <Text textType="description">{CARD_PASSWORD_LABEL.DESCRIPTION}</Text>
       <Text textType="subtitle">{CARD_PASSWORD_LABEL.SUBTITLE}</Text>
       <Input
-        onChange={onPasswordChange}
+        onChange={handleChange}
         value={password}
         textType="password"
         placeholder=""
-        // errorMessage={errorMessage}
+        errorMessage={errorMessage}
       />
-      <Text textType="error">{""}</Text>
+      <Text textType="error">{errorMessage}</Text>
     </section>
   );
 }
