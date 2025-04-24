@@ -11,8 +11,7 @@ export default function CardCVCSection({
   error: ErrorProps;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const isError =
-    error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
+  const isError = error && error['cardCVCError'].errorIndex !== -1 && error['cardCVCError'].errorMessage !== '';
 
   return (
     <S.CardInfoMainSection>
@@ -29,11 +28,11 @@ export default function CardCVCSection({
               {...input}
               onChange={onChange}
               maxLength={3}
-              error={isError && error['cardExpirationDateError'].errorIndex === index}
+              error={isError}
             />
           ))}
         </S.CardInfoInputContainer>
-        <S.CardInfoError>{error && error['cardExpirationDateError'].errorMessage}</S.CardInfoError>
+        <S.CardInfoError>{error && error['cardCVCError'].errorMessage}</S.CardInfoError>
       </S.CardInfoSubSection>
     </S.CardInfoMainSection>
   );
