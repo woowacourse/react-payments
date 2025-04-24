@@ -1,6 +1,6 @@
 import { Label, Select, Spacing, Title } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
-import { RegisterType } from '@/hooks/useForm';
+import { RegisterType } from '@/hooks';
 import { CardCompanyInputType } from '@/types';
 
 interface CardCompanyProps {

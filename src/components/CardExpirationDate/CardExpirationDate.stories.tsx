@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CardExpirationDate } from '@/components';
-import useForm from '@/hooks/useForm';
+import { useForm } from '@/hooks';
 import { CardExpirationDateInputType } from '@/types/input';
 
 const meta = {

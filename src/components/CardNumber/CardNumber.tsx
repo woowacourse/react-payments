@@ -1,5 +1,5 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
-import { RegisterType } from '@/hooks/useForm';
+import { RegisterType } from '@/hooks';
 import { CardNumberInputType } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
 import { ChangeEvent } from 'react';

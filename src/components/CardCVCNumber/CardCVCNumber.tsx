@@ -1,6 +1,6 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { RegisterType } from '@/hooks/useForm';
+import { RegisterType } from '@/hooks';
 import { CardCVCNumberInputType } from '@/types/input';
 
 interface CardCVCNumberProps {

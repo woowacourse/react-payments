@@ -1,6 +1,6 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { RegisterType } from '@/hooks/useForm';
+import { RegisterType } from '@/hooks';
 import { CardExpirationDateInputType } from '@/types';
 import { getErrorMessageFromObject } from '@/utils/message';
 import * as S from './CardExpirationDate.styles';

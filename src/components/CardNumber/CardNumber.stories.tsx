@@ -1,6 +1,6 @@
 import { CardNumber } from '@/components';
 import type { Meta, StoryObj } from '@storybook/react';
-import useForm from '@/hooks/useForm';
+import { useForm } from '@/hooks';
 import { CardNumberInputType } from '@/types/input';
 
 const meta = {
