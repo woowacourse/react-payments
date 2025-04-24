@@ -1,4 +1,3 @@
-import useCardCVCNumber from '../../hooks/useCardCVCNumber';
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
@@ -9,15 +8,21 @@ const CARD_CVC_NUMBER_TEXT = {
   subtitle: 'CVC',
 };
 
-const CardCVCNumberInputSection = () => {
-  const {
-    cardCVCNumber,
-    setCardCVCNumber,
-    handleCardCVCBlur,
-    isError,
-    errorMessage,
-  } = useCardCVCNumber();
+type CardCVCNumberInputSectionProps = {
+  cardCVCNumber: string;
+  setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardCVCBlur: () => void;
+  isError: { cvcNumber: boolean };
+  errorMessage: string;
+};
 
+const CardCVCNumberInputSection = ({
+  cardCVCNumber,
+  setCardCVCNumber,
+  handleCardCVCBlur,
+  isError,
+  errorMessage,
+}: CardCVCNumberInputSectionProps) => {
   return (
     <>
       <InputSection

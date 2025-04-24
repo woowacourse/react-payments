@@ -6,10 +6,11 @@ import styles from './css/cardForm.module.css';
 import useCardNumbers from '@hooks/useCardNumbers';
 import useCardExpirationDate from '@hooks/useCardExpirationDate';
 import CardCompanySelectSection from './components/SelectSection/CardCompanySelectSection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useError from './hooks/useError';
 import ConfirmButton from './components/common/ComfirmButton/ConfirmButton';
 import buttonStyle from './css/button.module.css';
+import useCardCVCNumber from './hooks/useCardCVCNumber';
 
 function App() {
   const {
@@ -28,11 +29,47 @@ function App() {
     handleCardExpirationDateBlur,
   } = useCardExpirationDate();
 
+  const {
+    cardCVCNumber,
+    setCardCVCNumber,
+    handleCardCVCBlur,
+    isError: isCardCVCNumberError,
+    errorMessage: cardCVCNumberErrorMessage,
+  } = useCardCVCNumber();
+
   const [cardCompany, setCardCompany] = useState('');
   const { error: cardCompanyError, clearError: clearCardCompanyError } =
     useError({
       cardCompany: false,
     });
+
+  const canSubmit =
+    canSubmitValidLength({
+      state: cardNumbers,
+      isError: isCardNumbersError,
+      validLength: {
+        firstNumber: 4,
+        secondNumber: 4,
+        thirdNumber: 4,
+        fourthNumber: 4,
+      },
+    }) &&
+    canSubmitValidLength({
+      state: cardExpirationDate,
+      isError: isCardExpirationDateError,
+      validLength: {
+        month: 2,
+        year: 2,
+      },
+    }) &&
+    cardCompany !== '' &&
+    canSubmitValidLength({
+      state: cardCVCNumber,
+      isError: isCardCVCNumberError,
+      validLength: 3,
+    });
+
+  console.log('canSubmit', canSubmit);
 
   return (
     <>
@@ -65,17 +102,45 @@ function App() {
             isError={isCardExpirationDateError}
             errorMessage={cardExpirationDateErrorMessage}
           />
-          <CardCVCNumberInputSection />
+          <CardCVCNumberInputSection
+            cardCVCNumber={cardCVCNumber}
+            setCardCVCNumber={setCardCVCNumber}
+            handleCardCVCBlur={handleCardCVCBlur}
+            isError={isCardCVCNumberError}
+            errorMessage={cardCVCNumberErrorMessage}
+          />
         </div>
-        <ConfirmButton
-          type="submit"
-          text="확인"
-          onClick={() => {}}
-          className={buttonStyle.cardConfirm}
-        />
+        {canSubmit && (
+          <ConfirmButton
+            type="submit"
+            text="확인"
+            onClick={() => {}}
+            className={buttonStyle.cardConfirm}
+          />
+        )}
       </div>
     </>
   );
 }
 
 export default App;
+
+const canSubmitValidLength = ({ state, isError, validLength }) => {
+  let isStateLengthValid = false;
+  if (typeof state === 'object') {
+    isStateLengthValid = Object.entries(state).every(([key, value]) => {
+      if (typeof value !== 'string') {
+        return false;
+      }
+      const length = value.length;
+
+      return length === validLength[key];
+    });
+  } else if (typeof state === 'string') {
+    isStateLengthValid = state.length === validLength;
+  }
+
+  const isErrorValid = Object.values(isError).every((value) => value === false);
+
+  return isStateLengthValid === true && isErrorValid === true;
+};
