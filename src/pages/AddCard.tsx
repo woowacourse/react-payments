@@ -16,6 +16,7 @@ import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
 import { CVCInput } from '../component/cardDetails/CVCInput';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
+import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 
 const Wrap = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const Wrap = styled.div`
   padding: 30px;
   background-color: ${({ theme }) => theme.colors.white};
   padding-top: 77px;
-  height: 700px;
+  height: 100%;
   gap: 45px;
 `;
 
@@ -46,6 +47,7 @@ const AddCard = () => {
     MM: null,
     YY: null,
     CVC: null,
+    secretNumber: null,
   });
 
   const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
@@ -57,6 +59,7 @@ const AddCard = () => {
     YY: '',
     CVC: '',
     cardBrand: '',
+    secretNumber: '',
   });
 
   const handleErrorMessages = (
@@ -96,6 +99,11 @@ const AddCard = () => {
         cardColor={cardInput.cardBrand}
       />
       <Form>
+        <SecretNumberInput
+          errorMessages={errorMessages}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
+        />
         <CardBrandSelect
           setCardInput={setCardInput}
           onColorChange={color => {

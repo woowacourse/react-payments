@@ -7,6 +7,7 @@ interface InputProps {
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
   onChange: (value: string) => void;
+  type?: string;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -30,12 +31,13 @@ const Input = ({
   validate,
   handleErrorMessage,
   onChange,
+  type = 'text',
 }: InputProps) => {
   const [isError, setIsError] = useState(false);
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const errorMessage = validate(value);
+    const inputValue = e.target.value;
+    const errorMessage = validate(inputValue);
     if (errorMessage && errorMessage.length > 0) {
       handleErrorMessage(errorMessage);
       setIsError(true);
@@ -44,7 +46,7 @@ const Input = ({
 
     handleErrorMessage('');
     setIsError(false);
-    onChange(value);
+    onChange(inputValue);
   };
 
   return (
@@ -55,6 +57,7 @@ const Input = ({
       inputMode="numeric"
       pattern="[0-9]*"
       $isError={isError}
+      type={type}
     />
   );
 };
