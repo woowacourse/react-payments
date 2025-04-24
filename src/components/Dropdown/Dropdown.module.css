@@ -1,6 +1,5 @@
 .wrapper {
   position: relative; /* 기준점 필수 */
-  width: 315px;
 }
 
 .selectBox {

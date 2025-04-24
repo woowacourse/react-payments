@@ -1,11 +1,25 @@
-.appContainer {
+.wrapper {
   display: flex;
   flex-direction: column;
-  width: 315px;
-  margin: auto;
-  gap: 45px;
-  height: 100vh;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 370px;
+}
+.app {
+  height: 700px;
+  display: flex;
   justify-content: center;
+}
+.inputSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .inputWrapper {

@@ -1,9 +1,11 @@
 :root {
   --color-white: #ffffff;
+
   --color-black: #000000;
   --color-gray-10: #acacac;
   --color-gray-20: #8b95a1;
   --color-gray-30: #4f4f4f;
+
   --color-red: #ff3d3d;
   --color-bc: #f04651; /* BC카드 */
   --color-shinhan: #0046ff; /* 신한카드 */

@@ -8,7 +8,7 @@ const useCvc = () => {
 
   const handleCvcChange = (value: string) => {
     const errorMessage = getCvcErrorMessage(value);
-    if (!isNumber(value)) {
+    if (!isNumber(value) && value.length !== 0) {
       return;
     }
     setCvc({ errorMessage, value });

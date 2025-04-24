@@ -20,7 +20,7 @@ const useCardNumbers = () => {
     }
     setCardNumbers((prev) => ({
       ...prev,
-      [field]: { value, isError: !isNumber(value) && !isValidCardNumberLength(value) }
+      [field]: { value, isError: !isValidCardNumberLength(value) }
     }));
 
     if (field == 'fourth' || value.length !== 4) {

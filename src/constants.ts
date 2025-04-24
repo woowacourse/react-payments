@@ -5,6 +5,12 @@ export const INITIAL_CARD_NUMBER = {
   fourth: { value: '', isError: false }
 } as const;
 
+export const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
+
+export const INITIAL_CVC = { value: '', errorMessage: '' };
+
+export const INITIAL_PASSWORD = { value: '', errorMessage: '' };
+export const CARD_COMPANY = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
 export const CARD_BRANDS = {
   VISA: {
     name: 'VISA',
@@ -20,9 +26,3 @@ export const CARD_BRANDS = {
     }
   }
 } as const;
-
-export const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
-
-export const INITIAL_CVC = { value: '', errorMessage: '' };
-
-export const CARD_COMPANY = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
