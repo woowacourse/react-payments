@@ -5,10 +5,11 @@ import CardBrand from "./component/CardBrand/CardBrand";
 import CardNumberInput from './component/CardNumberInput/CardNumberInput';
 import CardPeriodInput from './component/CardPeriod/CardPeriodInput';
 import CardCVCInput from './component/CardCVCInput/CardCVCInput';
+import CardPassword from "./component/CardPassword/CardPassword";
+import Button from "./component/@common/Button/Button";
 import { appLayout, mainLayout } from './App.style';
 import { Global, ThemeProvider } from '@emotion/react';
 import { useCardNumber, useCardExpiration, useCardCVC } from './hooks';
-import CardPassword from "./component/CardPassword/CardPassword.tsx";
 
 function App() {
   const {
@@ -56,6 +57,7 @@ function App() {
             hasError={cardCVCError}
             getCardCVCErrorMessage={getCardCVCErrorMessage}
           />
+          <Button content='확인' style="bottom"/>
         </main>
       </div>
     </ThemeProvider>
