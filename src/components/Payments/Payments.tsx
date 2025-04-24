@@ -5,13 +5,8 @@ import { useCompletion } from "../../hooks/useCompletion";
 import { useInputError } from "../../hooks/useInputError";
 import Preview from "../Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
+import { useVisibleSteps } from "../../hooks/useVisibleSteps";
 function Payments() {
-  const [visible, setVisible] = useState({
-    cardBrand: false,
-    expirationPeriod: false,
-    cvcNumber: false,
-    password: false,
-  });
   const {
     isComplete,
     updateCardNumberIsComplete,
@@ -20,24 +15,9 @@ function Payments() {
     updateCvcIsComplete,
     updatePasswordIsComplete,
   } = useCompletion();
+  const visible = useVisibleSteps(isComplete);
 
   const { error, validators } = useInputError();
-
-  useEffect(() => {
-    console.log(visible);
-    if (Object.values(isComplete.cardNumbers).every(Boolean)) {
-      setVisible((prev) => ({ ...prev, cardBrand: true }));
-    }
-    if (isComplete.cardBrand) {
-      setVisible((prev) => ({ ...prev, expirationPeriod: true }));
-    }
-    if (Object.values(isComplete.expirationPeriod).every(Boolean)) {
-      setVisible((prev) => ({ ...prev, cvcNumber: true }));
-    }
-    if (isComplete.cvcNumber) {
-      setVisible((prev) => ({ ...prev, password: true }));
-    }
-  }, [isComplete]);
 
   return (
     <PaymentsCSS>
