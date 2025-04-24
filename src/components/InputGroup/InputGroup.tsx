@@ -57,9 +57,7 @@ function InputGroup({
   ) => {
     validateCardNumber(value, position);
     updateCardNumber(value, position);
-    if (value.length === 4) {
-      onComplete(value, position);
-    }
+    onComplete(value, position);
   };
 
   const handleExpirationPeriodChange = (
@@ -68,32 +66,24 @@ function InputGroup({
   ) => {
     validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);
-    if (value.length === 2) {
-      onComplete(value, position);
-    }
+    onComplete(value, position);
   };
 
   const handleCvcNumberChange = (value: string) => {
     validateCvcNumber(value);
     updateCvcNumber(value);
-    if (value.length === 3) {
-      onComplete(value);
-    }
+    onComplete(value);
   };
 
   const handleCardBrandChange = (value: string) => {
     updateCardBrand(value);
-    if (value !== "") {
-      onComplete(value);
-    }
+    onComplete(value);
   };
 
   const handlePasswordChange = (value: string) => {
     validatePassword(value);
     updatePassword(value);
-    if (value.length === 2) {
-      onComplete(value);
-    }
+    onComplete(value);
   };
 
   return (

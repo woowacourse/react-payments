@@ -33,23 +33,19 @@ export function useCompletion() {
 
   const updateCardNumberIsComplete = (value: string, position?: Position) => {
     if (!position) return;
-    if (value.length === 4) {
-      setIsComplete((prev) => ({
-        ...prev,
-        cardNumbers: {
-          ...prev.cardNumbers,
-          [position]: true,
-        },
-      }));
-    }
+    setIsComplete((prev) => ({
+      ...prev,
+      cardNumbers: {
+        ...prev.cardNumbers,
+        [position]: value.length === 4,
+      },
+    }));
   };
   const updateCardBrandIsComplete = (value: string) => {
-    if (value !== "") {
-      setIsComplete((prev) => ({
-        ...prev,
-        cardBrand: true,
-      }));
-    }
+    setIsComplete((prev) => ({
+      ...prev,
+      cardBrand: value !== "",
+    }));
   };
   const updateExpirationPeriodIsComplete = (
     value: string,
@@ -57,31 +53,25 @@ export function useCompletion() {
   ) => {
     if (!position) return;
 
-    if (value.length === 2) {
-      setIsComplete((prev) => ({
-        ...prev,
-        expirationPeriod: {
-          ...prev.expirationPeriod,
-          [position]: true,
-        },
-      }));
-    }
+    setIsComplete((prev) => ({
+      ...prev,
+      expirationPeriod: {
+        ...prev.expirationPeriod,
+        [position]: value.length === 2,
+      },
+    }));
   };
   const updateCvcIsComplete = (value: string) => {
-    if (value.length === 3) {
-      setIsComplete((prev) => ({
-        ...prev,
-        cvcNumber: true,
-      }));
-    }
+    setIsComplete((prev) => ({
+      ...prev,
+      cvcNumber: value.length === 3,
+    }));
   };
   const updatePasswordIsComplete = (value: string) => {
-    if (value.length === 2) {
-      setIsComplete((prev) => ({
-        ...prev,
-        password: true,
-      }));
-    }
+    setIsComplete((prev) => ({
+      ...prev,
+      password: value.length === 2,
+    }));
   };
 
   return {

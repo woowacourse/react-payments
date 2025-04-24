@@ -7,4 +7,5 @@ export const PaymentsCSS = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 60px;
 `;

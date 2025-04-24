@@ -82,8 +82,6 @@ function InputSection({
       error.cardBrand,
       error.password,
     ].every((v) => v === false);
-    console.log(error);
-    console.log(isAllErrorFree);
 
     if (isAllComplete && isAllErrorFree) {
       setShowButton(true);
