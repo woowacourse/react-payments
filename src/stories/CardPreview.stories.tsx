@@ -31,6 +31,7 @@ export const Default: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
+    cardBrand: '현대카드',
   },
   argTypes: {
     cardNumbers: {
@@ -49,6 +50,7 @@ export const VisaCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
+    cardBrand: '현대카드',
   },
   argTypes: {
     cardNumbers: {
@@ -67,6 +69,7 @@ export const MasterCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
+    cardBrand: '현대카드',
   },
   argTypes: {
     cardNumbers: {
