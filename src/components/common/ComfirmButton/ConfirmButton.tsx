@@ -1,9 +1,10 @@
+import { MouseEventHandler } from 'react';
 import style from './confirmButton.module.css';
 
 type ConfirmButtonProps = {
   type: 'button' | 'submit' | 'reset';
   text: string;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   className?: string;
 };
 
