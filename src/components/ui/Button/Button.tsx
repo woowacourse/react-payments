@@ -27,7 +27,6 @@ const StyledButton = styled.button<{ $color: string; $background: string }>`
 
   color: ${(props) => props.$color};
   text-align: center;
-  font-family: Noto Sans KR;
   font-weight: 700;
   font-size: 16px;
   background-color: ${(props) => props.$background};

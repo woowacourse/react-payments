@@ -59,6 +59,7 @@ function Payments() {
     CVC: false,
     password: false,
   });
+  const [isComplete, setIsComplete] = useState(false);
 
   type FieldName = 'cardNumber' | 'expirationDate' | 'CVC' | 'password';
 
@@ -77,94 +78,126 @@ function Payments() {
 
   return (
     <PaymentsLayout>
-      <PaymentsContainer>
-        <CardPreview
-          cardNumberInputValue={cardNumberInputValue}
-          expirationDateInputValue={expirationDateInputValue}
-          cardType={cardType}
-          cardIssuer={cardIssuer}
-        />
-        {step >= 5 && (
-          <InputSection
-            title="비밀번호를 입력해 주세요"
-            caption="앞의 2자리를 입력해주세요"
-          >
-            <PasswordInputField
-              inputValue={passwordInputValue}
-              setInputValue={setPasswordInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('password', isComplete);
-                if (step === 5 && isComplete) setStep(6);
-              }}
-            />
-          </InputSection>
-        )}
-        {step >= 4 && (
-          <InputSection title="CVC 번호를 입력해 주세요">
-            <CVCInputField
-              inputValue={CVCInputValue}
-              setInputValue={setCVCInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('CVC', isComplete);
-                if (step === 4 && isComplete) setStep(5);
-              }}
-            />
-          </InputSection>
-        )}
-        {step >= 3 && (
-          <InputSection
-            title="카드 유효기간을 입력해 주세요"
-            caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-          >
-            <ExpirationDateInputField
-              inputValue={expirationDateInputValue}
-              setInputValue={setExpirationDateInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('expirationDate', isComplete);
-                if (step === 3 && isComplete) setStep(4);
-              }}
-            />
-          </InputSection>
-        )}
-        {step >= 2 && (
-          <InputSection
-            title="카드사를 선택해 주세요"
-            caption="현재 국내 카드사만 가능합니다."
-          >
-            <CardIssuerSelector
-              setCardIssuer={setCardIssuer}
-              onComplete={() => {
-                if (step === 2) setStep(3);
-              }}
-            />
-          </InputSection>
-        )}
-        {step >= 1 && (
-          <InputSection
-            title="결제할 카드 번호를 입력해 주세요"
-            caption="본인 명의의 카드만 결제 가능합니다."
-          >
-            <CardNumberInputField
-              inputValue={cardNumberInputValue}
-              setInputValue={setCardNumberInputValue}
-              cardType={cardType}
-              setCardType={setCardType}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('cardNumber', isComplete);
-                if (step === 1 && isComplete) setStep(2);
-              }}
-            />
-          </InputSection>
-        )}
-      </PaymentsContainer>
-      {step >= 6 && isAllFieldComplete && (
+      {!isComplete && (
+        <PaymentsContainer>
+          <CardPreview
+            cardNumberInputValue={cardNumberInputValue}
+            expirationDateInputValue={expirationDateInputValue}
+            cardType={cardType}
+            cardIssuer={cardIssuer}
+          />
+          {step >= 5 && (
+            <InputSection
+              title="비밀번호를 입력해 주세요"
+              caption="앞의 2자리를 입력해주세요"
+            >
+              <PasswordInputField
+                inputValue={passwordInputValue}
+                setInputValue={setPasswordInputValue}
+                onComplete={(isComplete: boolean) => {
+                  updateCompleteStatus('password', isComplete);
+                  if (step === 5 && isComplete) setStep(6);
+                }}
+              />
+            </InputSection>
+          )}
+          {step >= 4 && (
+            <InputSection title="CVC 번호를 입력해 주세요">
+              <CVCInputField
+                inputValue={CVCInputValue}
+                setInputValue={setCVCInputValue}
+                onComplete={(isComplete: boolean) => {
+                  updateCompleteStatus('CVC', isComplete);
+                  if (step === 4 && isComplete) setStep(5);
+                }}
+              />
+            </InputSection>
+          )}
+          {step >= 3 && (
+            <InputSection
+              title="카드 유효기간을 입력해 주세요"
+              caption="월/년도(MMYY)를 순서대로 입력해 주세요."
+            >
+              <ExpirationDateInputField
+                inputValue={expirationDateInputValue}
+                setInputValue={setExpirationDateInputValue}
+                onComplete={(isComplete: boolean) => {
+                  updateCompleteStatus('expirationDate', isComplete);
+                  if (step === 3 && isComplete) setStep(4);
+                }}
+              />
+            </InputSection>
+          )}
+          {step >= 2 && (
+            <InputSection
+              title="카드사를 선택해 주세요"
+              caption="현재 국내 카드사만 가능합니다."
+            >
+              <CardIssuerSelector
+                setCardIssuer={setCardIssuer}
+                onComplete={() => {
+                  if (step === 2) setStep(3);
+                }}
+              />
+            </InputSection>
+          )}
+          {step >= 1 && (
+            <InputSection
+              title="결제할 카드 번호를 입력해 주세요"
+              caption="본인 명의의 카드만 결제 가능합니다."
+            >
+              <CardNumberInputField
+                inputValue={cardNumberInputValue}
+                setInputValue={setCardNumberInputValue}
+                cardType={cardType}
+                setCardType={setCardType}
+                onComplete={(isComplete: boolean) => {
+                  updateCompleteStatus('cardNumber', isComplete);
+                  if (step === 1 && isComplete) setStep(2);
+                }}
+              />
+            </InputSection>
+          )}
+        </PaymentsContainer>
+      )}
+
+      {isComplete && (
+        <PaymentsCompleteContainer>
+          <CheckIcon src="./img/check-filled.png" />
+          <SuccessMessage>
+            {`${cardNumberInputValue.cardNumberPart1}로 시작하는`}
+            <br />
+            {` ${cardIssuer}가 등록되었어요.`}
+          </SuccessMessage>
+          <Button
+            buttonText="확인"
+            buttonType="default"
+            onClick={() => !isComplete && setIsComplete(true)}
+          />
+        </PaymentsCompleteContainer>
+      )}
+      {step >= 6 && isAllFieldComplete && !isComplete && (
         <ButtonContainer>
-          <Button buttonText="확인" buttonType="default" onClick={() => {}} />
+          <Button
+            buttonText="확인"
+            buttonType="default"
+            onClick={() => !isComplete && setIsComplete(true)}
+          />
         </ButtonContainer>
       )}
     </PaymentsLayout>
   );
 }
+
+const CheckIcon = styled.img`
+  width: 76px;
+`;
+
+const SuccessMessage = styled.p`
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -189,6 +222,22 @@ const PaymentsContainer = styled.div`
   box-sizing: border-box;
   padding: 44px 28px;
   align-items: center;
+  width: 376px;
+  height: 100%;
+  min-height: 100%;
+  background-color: white;
+  border: 1px solid lightgray;
+  overflow: auto;
+`;
+
+const PaymentsCompleteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+  padding: 44px 28px;
   width: 376px;
   height: 100%;
   min-height: 100%;

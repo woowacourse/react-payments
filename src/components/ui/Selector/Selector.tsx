@@ -40,7 +40,7 @@ function Selector<T extends string>({
         {selectedValue}
       </DropDownDefault>
       <DropDownIcon
-        src={`/img/${!isOpen ? 'chevron-up' : 'chevron-down'}.png`}
+        src={`./img/${!isOpen ? 'chevron-up' : 'chevron-down'}.png`}
       />
       {isOpen && (
         <DropDownContainer onClick={(e) => handleSelectedOption(e)}>
