@@ -4,7 +4,6 @@ import { ComponentProps } from 'react';
 import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 
 interface CardInfoSectionProps {
-  key: string;
   id: string;
   title: string;
   description: string;
@@ -16,7 +15,6 @@ interface CardInfoSectionProps {
 }
 
 export default function CardInfoSection({
-  key,
   id,
   title,
   description,
@@ -27,8 +25,6 @@ export default function CardInfoSection({
   onChange,
 }: CardInfoSectionProps) {
   const errorKey = `${id}Error`;
-  console.log('o-o key', key);
-  console.log('o-o idid', id);
 
   return (
     <section className="card-info-section">
@@ -41,7 +37,7 @@ export default function CardInfoSection({
         <div className="card-info-input-container">
           {inputArr.map((input, index) => (
             <CardInfoInput
-              key={`cardInfo-input-${index}`}
+              key={index}
               {...input}
               onChange={onChange}
               maxLength={maxLength}

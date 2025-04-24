@@ -13,7 +13,7 @@ export default function CardInfoContainer({
   return (
     <div className="card-info-container">
       {cardInfoSectionConfig.map((data, index) => (
-        <CardInfoSection key={`data.title-${index}`} {...data} onChange={onChange} error={error} />
+        <CardInfoSection key={index} {...data} onChange={onChange} error={error} />
       ))}
     </div>
   );
