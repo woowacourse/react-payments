@@ -12,7 +12,6 @@ interface CardLabeledInputConfig {
   cardNumber: CardInputConfig;
   expirationDate: CardInputConfig;
   CVC: CardInputConfig;
-
   password: CardInputConfig;
 }
 

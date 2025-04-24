@@ -1,13 +1,13 @@
-import { useState } from "react";
-import type { CardInputProps } from "../types/CardInputTypes";
-import useErrorMessages from "./useErrorMessages";
+import { useState } from 'react';
+import type { CardInputProps } from '../types/CardInputTypes';
+import useErrorMessages from './useErrorMessages';
 import {
   getCardNumberErrorMessage,
   getCardExpirationMMErrorMessage,
   getCardExpirationYYErrorMessage,
   getCardCVCErrorMessage,
   getCardPasswordErrorMessage,
-} from "../validation/getCardErrorMessages";
+} from '../validation/getCardErrorMessages';
 
 const useCardInputs = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
@@ -19,8 +19,10 @@ const useCardInputs = () => {
     YY: null,
     CVC: null,
     password: null,
+    cardBrand: null,
   });
-  const [isError, setIsError] = useState({
+
+  const INITIAL_ERROR_STATE = {
     first: false,
     second: false,
     third: false,
@@ -29,33 +31,25 @@ const useCardInputs = () => {
     YY: false,
     CVC: false,
     password: false,
-  });
+  };
+  const [isError, setIsError] = useState(INITIAL_ERROR_STATE);
   const { errorMessages, handleErrorMessages } = useErrorMessages();
 
   const handleCardInput = (inputKey: keyof CardInputProps, value: string) => {
     if (!validateCardInputs(inputKey, value)) return;
 
-    handleErrorMessages(inputKey, "");
-    setIsError({
-      first: false,
-      second: false,
-      third: false,
-      fourth: false,
-      MM: false,
-      YY: false,
-      CVC: false,
-      password: false,
-    });
     setCardInput((prev: CardInputProps) => ({
       ...prev,
       [inputKey]: value,
     }));
+
+    handleErrorMessages(inputKey, '');
+    setIsError(INITIAL_ERROR_STATE);
   };
 
-  const validateCardInputs = (
-    inputKey: keyof CardInputProps,
-    value: string
-  ) => {
+  const validateCardInputs = (inputKey: keyof CardInputProps, value: string) => {
+    if (inputKey === 'cardBrand') return true;
+
     const errorMessage = matchingErrorMessageFunc[inputKey](value);
     if (errorMessage && errorMessage.length > 0) {
       handleErrorMessages(inputKey, errorMessage);

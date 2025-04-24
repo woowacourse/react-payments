@@ -7,4 +7,5 @@ export interface CardInputProps {
   YY: number | null;
   CVC: number | null;
   password: number | null;
+  cardBrand: string | null;
 }

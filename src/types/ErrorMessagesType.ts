@@ -7,4 +7,5 @@ export interface ErrorMessagesProps {
   YY: string;
   CVC: string;
   password: string;
+  cardBrand: string;
 }

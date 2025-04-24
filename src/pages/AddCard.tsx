@@ -58,7 +58,7 @@ const AddCard = () => {
           headText={DESCRIPTION_TEXT.cardBrand.headText}
           detailText={DESCRIPTION_TEXT.cardBrand.detailText}
         />
-        <CardBrandSelects />
+        <CardBrandSelects cardInput={cardInput} handleCardInput={handleCardInput} />
 
         <Description
           headText={DESCRIPTION_TEXT.cardNumber.headText}

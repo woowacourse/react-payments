@@ -1,29 +1,45 @@
-import styled from "styled-components";
-import { useRef, useState } from "react";
-import useOutsideClick from "../../hook/useOutsideClick";
+import styled from 'styled-components';
+import { useRef, useState } from 'react';
+import useOutsideClick from '../../hook/useOutsideClick';
+import type { CardInputProps } from '../../types/CardInputTypes';
 
 interface CardSelectProps {
   defaultMessage: string;
   options: string[];
+  handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
+  cardInput: CardInputProps;
 }
 
-const CardSelect = ({ defaultMessage, options }: CardSelectProps) => {
+interface DefaultMessageProps {
+  $isDefault: boolean;
+}
+
+const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput }: CardSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSelectOption = (option: string) => {
+    handleCardInput('cardBrand', option);
+    setIsOpen(false);
+  };
 
   const backgroundRef = useRef<HTMLDivElement>(null);
   useOutsideClick(backgroundRef, () => setIsOpen(false));
 
-  // TODO 카드사 옵션 선택시 창 닫힘 및 기능 연결
+  const selectedMessage = cardInput.cardBrand || defaultMessage;
+  const isDefault = selectedMessage === defaultMessage;
+
   return (
     <SelectContainer ref={backgroundRef}>
       <SelectField onClick={() => setIsOpen(!isOpen)}>
-        <DefaultMessage>{defaultMessage}</DefaultMessage>
+        <DefaultMessage $isDefault={isDefault}>{selectedMessage}</DefaultMessage>
         <SelectIcon src="./selectIcon.png" alt="카드사 옵션 열기" />
       </SelectField>
       {isOpen && (
         <OptionsContainer>
           {options.map((brand) => (
-            <OptionItem key={brand}>{brand}</OptionItem>
+            <OptionItem key={brand} onClick={() => handleSelectOption(brand)}>
+              {brand}
+            </OptionItem>
           ))}
         </OptionsContainer>
       )}
@@ -53,9 +69,9 @@ const SelectIcon = styled.img`
   width: 16px;
 `;
 
-const DefaultMessage = styled.p`
+const DefaultMessage = styled.p<DefaultMessageProps>`
   font-size: var(--font-size-body);
-  color: var(--color-gray);
+  color: ${({ $isDefault }) => ($isDefault ? 'var(--color-gray)' : 'var(--color-black)')};
 `;
 
 const OptionsContainer = styled.ul`
