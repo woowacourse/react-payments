@@ -25,12 +25,12 @@ function CardNumberInput({
     const value = target.value;
     const dataInputId = Number(target.dataset.inputId);
 
-    updateCarNumber(value, dataInputId);
+    updateCardNumber(value, dataInputId);
     validateCardNumber(value, dataInputId);
     decideShowFeedback();
   }
 
-  function updateCarNumber(inputCardNumber: string, dataInputId: number) {
+  function updateCardNumber(inputCardNumber: string, dataInputId: number) {
     numbersArray[dataInputId] = inputCardNumber;
     setCardNumbers([...numbersArray]);
   }
