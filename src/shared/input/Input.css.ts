@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const StyledInput = styled.input<{ width?: string; isError: boolean }>`
+export const StyledInput = styled.input.withConfig({
+  shouldForwardProp: (prop) => prop !== "isError",
+})<{ width?: string; isError: boolean }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
   border: 1.015px solid ${(props) => (props.isError ? "red" : "#acacac")};

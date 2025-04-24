@@ -12,7 +12,9 @@ const cardTypeColors = {
   국민카드: "#6A6056",
 };
 
-export const StyledContainer = styled.div<{
+export const StyledContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "cardType",
+})<{
   cardType: keyof typeof cardTypeColors | "";
 }>`
   display: flex;
