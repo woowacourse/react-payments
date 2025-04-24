@@ -4,7 +4,7 @@ import { HandleInputParams } from '../../pages/CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import useExpDateValidation from '../../hooks/useExpDateValidation';
 import { expirationDateValidation } from '../../validators/expirationDateValidator';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { InputProps } from '../../types/input';
 
 const StyledExpirationDateInput = styled.div`
@@ -42,6 +42,8 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
     validationCallback
   );
 
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
   useEffect(() => {
     const isValid =
       isError.every((error) => error === false) && values.every((value) => value.length === 2);
@@ -61,6 +63,9 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
             maxLength={2}
             placeholder={placeHolders[idx]}
             isError={isError[idx]}
+            ref={(el) => {
+              inputRefs.current[idx] = el;
+            }}
           />
         ))}
       </StyledInputWrapper>
