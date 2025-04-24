@@ -1,10 +1,14 @@
 .registerCardButton {
-    width: 400px;
-    background-color: #333333;
-    color: white;
-    height: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    position: fixed;
-    bottom: 0;
+  width: 400px;
+  background-color: #333333;
+  color: white;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  position: fixed;
+  bottom: 0;
+}
+
+.registerCardButton:hover {
+  cursor: pointer;
 }

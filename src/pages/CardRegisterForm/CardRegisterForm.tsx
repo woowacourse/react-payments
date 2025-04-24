@@ -1,11 +1,11 @@
-import CardCompanySelect from "../CardCompanySelect/CardCompanySelect";
-import CardExpiryInput from "../CardExpiryInput/CardExpiryInput";
-import CardNumbersInput from "../CardNumbersInput/CardNumbersInput";
-import CVCInput from "../CVCInput/CVCInput";
+import CardCompanySelect from "../../components/CardCompanySelect/CardCompanySelect";
+import CardExpiryInput from "../../components/CardExpiryInput/CardExpiryInput";
+import CardNumbersInput from "../../components/CardNumbersInput/CardNumbersInput";
+import CVCInput from "../../components/CVCInput/CVCInput";
 import styles from "./CardRegisterForm.module.css";
 import { useCardContext } from "../../contexts/CardContext";
-import PasswordInput from "../PasswordInput/PasswordInput";
-import RegisterCardButton from "../RegisterCardButton/RegisterCardButton";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import RegisterCardButton from "../../components/RegisterCardButton/RegisterCardButton";
 
 const CardRegisterForm = () => {
   const {
