@@ -1,9 +1,9 @@
-import Title from "../@common/Title/Title.tsx";
-import Input from "../@common/Input/Input.tsx";
-import {inputContainer, inputSection} from "../../styles/@common/inputContainer.style.ts";
+import Title from "../@common/Title/Title";
+import Input from "../@common/Input/Input";
+import {inputContainer, inputSection} from "../../styles/@common/inputContainer.style";
 import {CARD_PASSWORD} from "../../constants";
-import {errorInputStyle, errorMessageStyle} from "../../styles/@common/text.style.ts";
-import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style.ts";
+// import {errorInputStyle, errorMessageStyle} from "../../styles/@common/text.style";
+import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style";
 
 function CardPassword() {
   return (
