@@ -2,27 +2,40 @@ import { CardInformationType, setCardInformationType } from "./CardInformationTy
 import { useEachValidationType, useValidationType } from "./useValidationType";
 
 export type FormContainerProps = {
+  /** 카드 정보 상태값 */
   cardInformationState: CardInformationType;
+  /** 카드 정보 상태 변경 함수 */
   setCardInformationState: setCardInformationType;
+  /** 입력값에 대한 유효성 검사 훅을 담은 배열 */
   validation: useValidationType;
 };
 
 export type FormSectionProps = {
+  /** 섹션 제목 */
   title: string;
+  /** 섹션 설명 */
   description: string;
+  /** 입력 필드에 대한 설정 정보 */
   inputFieldData: InputFieldProps;
 };
 
 export type InputFieldProps = {
+  /** 입력 필드 라벨 */
   label: string;
+  /** 필드 내 input 개수 */
   inputNumber: number;
+  /** 개별 input 필드 설정 */
   inputProps: {
     placeholder: string[];
     maxLength: number;
   };
+  /** 카드 정보 상태값 */
   cardInformation: CardInformationType;
+  /** 카드 정보 상태 변경 함수 */
   setCardInformation: setCardInformationType;
+  /** 이 필드가 담당하는 카드 정보 타입 */
   informationType: keyof CardInformationType;
+  /** 해당 필드에 대한 개별 유효성 검사 */
   eachValidation: useEachValidationType;
 };
 
@@ -40,9 +53,16 @@ export type InputProps = {
 };
 
 export type errorMessageProps = {
+  /** 에러 여부 */
   error: boolean;
+  /** 에러 메시지 텍스트 */
   message: string;
 };
 
 type TextType = "title" | "description" | "label" | "error";
-export type TextProps = { type: TextType; text: string };
+export type TextProps = {
+  /** 텍스트 유형 */
+  type: TextType;
+  /** 실제 텍스트 내용 */
+  text: string;
+};
