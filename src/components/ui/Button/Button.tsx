@@ -1,14 +1,21 @@
 import styled from 'styled-components';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonText: string;
-  color: string;
-  background: string;
+  buttonType: 'default';
 }
 
-function Button({ buttonText, color, background }: ButtonProps) {
+function Button({ buttonText, buttonType, onClick }: ButtonProps) {
+  let color = '';
+  let background = '';
+
+  if (buttonType === 'default') {
+    color = '#fff';
+    background = '#333333';
+  }
+
   return (
-    <StyledButton $color={color} $background={background}>
+    <StyledButton $color={color} $background={background} onClick={onClick}>
       {buttonText}
     </StyledButton>
   );
@@ -24,6 +31,7 @@ const StyledButton = styled.button<{ $color: string; $background: string }>`
   font-weight: 700;
   font-size: 16px;
   background-color: ${(props) => props.$background};
+  cursor: pointer;
 `;
 
 export default Button;

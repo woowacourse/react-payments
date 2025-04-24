@@ -159,7 +159,7 @@ function Payments() {
       </PaymentsContainer>
       {step >= 6 && isAllFieldComplete && (
         <ButtonContainer>
-          <Button buttonText="확인" color="#fff" background="#333333" />
+          <Button buttonText="확인" buttonType="default" onClick={() => {}} />
         </ButtonContainer>
       )}
     </PaymentsLayout>
