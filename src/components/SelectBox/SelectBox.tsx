@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-type SelectBoxProps = React.HTMLAttributes<HTMLElement> & {
+type SelectBoxProps = React.SelectHTMLAttributes<HTMLElement> & {
   placeHolder?: string;
   values?: string[];
 };
