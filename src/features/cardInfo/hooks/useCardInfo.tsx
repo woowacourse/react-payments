@@ -3,6 +3,7 @@ import { InputValidationResultProps } from '../../../entities/cardInfo/model/car
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 import { cardInfoSectionConfig } from '../config/cardInfoSectionConfig';
 import { NO_ERROR, ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
+import { CardInfoType } from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -20,29 +21,29 @@ export default function useCardInfo() {
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name.startsWith('cardNumber')) {
+    if (name.startsWith(CardInfoType.NUMBER)) {
       const index = Number(name[name.length - 1]);
       setCardInfo((prev) => {
         const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
-        validateAndSetError('cardNumber', updatedNumbers, setError);
+        validateAndSetError(CardInfoType.NUMBER, updatedNumbers, setError);
         return { ...prev, cardNumber: updatedNumbers };
       });
       return;
     }
 
-    if (name.startsWith('cardExpirationDate')) {
+    if (name.startsWith(CardInfoType.EXPDATE)) {
       const key = name.split('-')[1] as 'month' | 'year';
       setCardInfo((prev) => {
         const updateDate = { ...prev.cardExpirationDate, [key]: value };
-        validateAndSetError('cardExpirationDate', updateDate, setError);
+        validateAndSetError(CardInfoType.EXPDATE, updateDate, setError);
         return { ...prev, cardExpirationDate: updateDate };
       });
       return;
     }
 
-    if (name.startsWith('cardCVC')) {
+    if (name.startsWith(CardInfoType.CVC)) {
       setCardInfo((prev) => {
-        validateAndSetError('cardCVC', value, setError);
+        validateAndSetError(CardInfoType.CVC, value, setError);
         return { ...prev, cardCVC: value };
       });
       return;
