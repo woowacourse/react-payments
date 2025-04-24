@@ -46,3 +46,12 @@ export type ExpirationPeriodState = Record<ExpirationPeriodSegmentType, string>;
 export type CvcNumberState = string;
 export type CardCompanyState = (typeof CARD_COMPANY)[keyof typeof CARD_COMPANY];
 export type PasswordState = string;
+
+export type CardNumberErrorsState = Record<CardNumbersSegmentType, boolean>;
+export type ExpirationPeriodErrorsState = Record<
+  ExpirationPeriodSegmentType,
+  boolean
+>;
+export type CvcNumberErrorState = boolean;
+export type CardCompanyErrorState = boolean;
+export type PasswordErrorState = boolean;

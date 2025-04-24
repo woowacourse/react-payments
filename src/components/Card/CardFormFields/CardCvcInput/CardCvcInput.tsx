@@ -1,7 +1,9 @@
 import { ChangeEvent } from "react";
-import { CARD_FORM_TYPE } from "../../../../constants/constants";
+import {
+  CARD_FORM_TYPE,
+  CvcNumberErrorState,
+} from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldCSS } from "../CardFormFields.styled";
 
@@ -9,7 +11,7 @@ const PLACEHOLDERS = "123";
 const MAX_LENGTHS = 3;
 
 export interface CardCvcInputProps {
-  cvcNumberError: CardValidationType["cvcNumber"];
+  cvcNumberError: CvcNumberErrorState;
   validateCvcNumber: (value: string) => void;
 }
 

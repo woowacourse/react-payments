@@ -1,7 +1,9 @@
 import { ChangeEvent } from "react";
-import { CARD_FORM_TYPE } from "../../../../constants/constants";
+import {
+  CARD_FORM_TYPE,
+  CardCompanyErrorState,
+} from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
-import { CardValidationType } from "../../../../hooks/useCardValidation";
 import { isCardCompanyState } from "../../../../utils/typeGuard";
 import Select from "../../../Common/Select/Select";
 import { CardFormFieldCSS } from "../CardFormFields.styled";
@@ -20,7 +22,7 @@ const cardCompanyOptions = [
 const PLACEHOLDER = "카드사를 선택해 주세요";
 
 export interface CardCompanySelectProps {
-  cardCompanyError: CardValidationType["cardCompany"];
+  cardCompanyError: CardCompanyErrorState;
   validateCardCompany: (value: string) => void;
 }
 
