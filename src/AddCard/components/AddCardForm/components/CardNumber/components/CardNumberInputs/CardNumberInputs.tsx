@@ -1,10 +1,9 @@
 import styles from "./CardNumberInputs.module.css";
-import Label from "@components/Label/Label";
-import Input from "@components/Input/Input";
-
 import type { CardNumberInputKey, CardNumberState } from "../../types";
 import { CARD_NUMBER_LENGTH, CARD_NUMBER_INPUT_KEYS } from "../../constants";
-
+import Label from "@components/Label/Label";
+import Input from "@components/Input/Input";
+import { useAutoFocus } from "../../../../../../hooks/useAutoFocus";
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
   handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
@@ -16,16 +15,25 @@ function CardNumberInputs({
 }: CardNumberInputsProps) {
   const { first, second, third, fourth } = cardNumberState;
 
+  const { inputRefs, handleAutoFocus } = useAutoFocus<CardNumberInputKey>(
+    CARD_NUMBER_INPUT_KEYS
+  );
+
   const errorMessages = [
     first.errorMessage,
     second.errorMessage,
     third.errorMessage,
     fourth.errorMessage,
   ].filter((msg): msg is string => !!msg);
-  //sick hack
+  //cool hack
   const latestErrorMessage = errorMessages.length
     ? errorMessages[errorMessages.length - 1]
     : "";
+
+  const handleInputChange = (key: CardNumberInputKey, value: string) => {
+    handleCardNumberChange(key, value);
+    handleAutoFocus(key, value, CARD_NUMBER_INPUT_KEYS, CARD_NUMBER_LENGTH);
+  };
 
   return (
     <div className={styles.container}>
@@ -45,7 +53,8 @@ function CardNumberInputs({
               placeholder="1234"
               isError={Boolean(cardNumberState[inputKey].errorMessage)}
               value={cardNumberState[inputKey].value}
-              onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+              onChange={(e) => handleInputChange(inputKey, e.target.value)}
+              ref={inputRefs[inputKey]}
             />
           </p>
         ))}

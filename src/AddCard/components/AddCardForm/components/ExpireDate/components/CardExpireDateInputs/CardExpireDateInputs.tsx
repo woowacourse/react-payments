@@ -3,7 +3,8 @@ import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 import { EXPIRE_DATE_KEYS, EXPIRE_DATE_LENGTH } from "../../constants";
-import type { ExpireDateState } from "../../types";
+import { ExpireDateInputKey, type ExpireDateState } from "../../types";
+import { useAutoFocus } from "../../../../../../hooks/useAutoFocus";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
@@ -25,9 +26,17 @@ const CardExpireDateInputs = forwardRef<
     },
     ref
   ) => {
-    const changeEvent = {
+    const { inputRefs, handleAutoFocus } =
+      useAutoFocus<ExpireDateInputKey>(EXPIRE_DATE_KEYS);
+
+    const changeHandlers = {
       MM: handleExpireMonthChange,
       YY: handleExpireYearChange,
+    };
+
+    const handleInputChange = (key: ExpireDateInputKey, value: string) => {
+      changeHandlers[key](value);
+      handleAutoFocus(key, value, EXPIRE_DATE_KEYS, EXPIRE_DATE_LENGTH);
     };
 
     return (
@@ -43,14 +52,14 @@ const CardExpireDateInputs = forwardRef<
                   유효 기간
                 </Label>
                 <Input
-                  ref={idx === 0 ? ref : undefined}
+                  ref={idx === 0 ? ref : inputRefs[expireKey]}
                   id={`expire-${expireKey}-input`}
                   type="text"
                   maxLength={EXPIRE_DATE_LENGTH}
                   placeholder={expireKey}
                   isError={Boolean(expireDate[expireKey].errorMessage)}
                   value={expireDate[expireKey].value}
-                  onChange={(e) => changeEvent[expireKey](e.target.value)}
+                  onChange={(e) => handleInputChange(expireKey, e.target.value)}
                   onBlur={
                     idx === 0
                       ? (e) => handleExpireMonthBlur(e.target.value)
@@ -71,5 +80,7 @@ const CardExpireDateInputs = forwardRef<
     );
   }
 );
+
+CardExpireDateInputs.displayName = "CardExpireDateInputs";
 
 export default CardExpireDateInputs;
