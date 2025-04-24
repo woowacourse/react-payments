@@ -29,10 +29,18 @@ const CardExpiryInput = ({
     try {
       if (name === 'month') {
         setMonth(value);
+        if (value.length === 0) {
+          setHelperText('');
+          return;
+        }
         validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         validateYear(year, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
       } else if (name === 'year') {
         setYear(value);
+        if (value.length === 0) {
+          setHelperText('');
+          return;
+        }
         validateMonth(month, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         validateYear(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
       }

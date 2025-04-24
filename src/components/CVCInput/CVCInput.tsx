@@ -14,8 +14,13 @@ const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
   const inputRef = useRef<HTMLElement | null>(null);
 
   const updateCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     try {
-      setCVC(e.target.value);
+      setCVC(value);
+      if (value.length === 0) {
+        setHelperText('');
+        return;
+      }
       validateCVC(e.target.value, 3);
       setHelperText('');
     } catch (error: unknown) {
