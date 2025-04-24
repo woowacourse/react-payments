@@ -12,6 +12,7 @@ import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import Button from '../components/button/Button';
+import useInput from '../hooks/useInput';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -26,12 +27,13 @@ const INIT_EXPIRATION_DATE = {
 };
 
 const Main = () => {
-  const [cardNumber, setCardNumber] = useState<CardNumber>(INIT_CARD_NUMBER);
-  const [expirationDate, setExpirationDate] =
-    useState<ExpirationDate>(INIT_EXPIRATION_DATE);
-  const [cvcNumber, setCvcNumber] = useState('');
-  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
-  const [password, setPassword] = useState('');
+  const {formData, onChange} = useInput({
+    cardNumber: INIT_CARD_NUMBER,
+    expirationDate: INIT_EXPIRATION_DATE,
+    cvcNumber: '',
+    cardCompany: '',
+    password: '',
+  });
 
   const [errors, setErrors] = useState(false);
 
@@ -49,50 +51,33 @@ const Main = () => {
   return (
     <MainContainer>
       <Card
-        cardNumbers={cardNumber}
-        expirationDate={expirationDate}
-        cardCompany={cardCompany}
+        cardNumbers={formData.cardNumber}
+        expirationDate={formData.expirationDate}
+        cardCompany={formData.cardCompany}
       />
 
-      {isVisible(cvcNumber) && (
-        <PasswordSection
-          value={password}
-          onChange={(value) => setPassword(value)}
-        />
+      {isVisible(formData.cvcNumber) && (
+        <PasswordSection value={formData.password} onChange={onChange} />
       )}
 
-      {isVisible(expirationDate) && (
-        <CardCvcSection
-          value={cvcNumber}
-          onChange={(value) => setCvcNumber(value)}
-        />
+      {isVisible(formData.expirationDate) && (
+        <CardCvcSection value={formData.cvcNumber} onChange={onChange} />
       )}
 
-      {isVisible(cardCompany) && (
+      {isVisible(formData.cardCompany) && (
         <ExpirationDateSection
-          value={expirationDate}
-          onChange={(order, value) =>
-            setExpirationDate((prev) => ({
-              ...prev,
-              [order]: value,
-            }))
-          }
+          value={formData.expirationDate}
+          onChange={onChange}
         />
       )}
 
-      {/* 에러가 있을 경우 다음 섹션을 보여주지 않음 */}
-      {!errors && isVisible(cardNumber) && (
-        <CardCompanySection onChange={(value) => setCardCompany(value)} />
+      {!errors && isVisible(formData.cardNumber) && (
+        <CardCompanySection onChange={onChange} name="cardCompany" />
       )}
 
       <CardNumberSection
-        value={cardNumber}
-        onChange={(order, value) =>
-          setCardNumber((prev) => ({
-            ...prev,
-            [order]: value,
-          }))
-        }
+        value={formData.cardNumber}
+        onChange={onChange}
         onError={(isError: boolean) => setErrors(isError)}
       />
 
@@ -100,8 +85,8 @@ const Main = () => {
         onClick={() =>
           navigate(PATH.CONFIRM, {
             state: {
-              firstSection: cardNumber.first,
-              cardCompany: cardCompany,
+              firstSection: formData.cardNumber.first,
+              cardCompany: formData.cardCompany,
             },
           })
         }

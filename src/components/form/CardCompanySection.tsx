@@ -3,21 +3,19 @@ import Title from '../title/Title';
 import Description from '../description/Description';
 import {COLORS} from '../../styles/colors';
 import {CARD_COMPANY} from '../constants/card';
-import {CardCompany} from '../../type/Card';
+import {ChangeEvent} from 'react';
 
 type Props = {
-  onChange: (value: CardCompany) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  name: string;
 };
 
-const CardCompanySection = ({onChange}: Props) => {
+const CardCompanySection = ({onChange, name}: Props) => {
   return (
     <CardNumberWrap>
       <Title>카드사를 선택해 주세요</Title>
       <Description>현재 국내 카드사만 가능합니다.</Description>
-      <Select
-        onChange={(e) => onChange(e.target.value as CardCompany)}
-        $isError={false}
-      >
+      <Select name={name} onChange={(e) => onChange(e)} $isError={false}>
         <option value="" hidden>
           카드사를 선택해주세요
         </option>

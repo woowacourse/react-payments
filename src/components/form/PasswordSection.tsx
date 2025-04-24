@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Title from '../title/Title';
 import InputField from '../inputField/InputField';
 import Input from '../input/Input';
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from '../constants/error';
 
@@ -10,14 +10,14 @@ const INPUT_MAX_LENGTH = 2;
 
 type Props = {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const PasswordSection = ({value, onChange}: Props) => {
   const [error, setError] = useState('');
 
-  const handleInput = (value: string) => {
-    onChange(value);
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);
@@ -38,12 +38,13 @@ const PasswordSection = ({value, onChange}: Props) => {
       <Title>비밀번호를 입력해 주세요</Title>
       <InputField label="비밀번호 앞 2자리" errorMessage={error}>
         <Input
+          name="password"
           type="password"
           maxLength={INPUT_MAX_LENGTH}
           isError={error.length > 0}
           placeholder="**"
           value={value}
-          onChange={(e) => handleInput(e.target.value)}
+          onChange={(e) => handleInput(e)}
           onBlur={(e) => handleFocusout(e.target.value)}
         />
       </InputField>

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {ChangeEvent, ChangeEventHandler, ReactNode, useState} from 'react';
 import Description from '../description/Description';
 import Input from '../input/Input';
 import InputField from '../inputField/InputField';
@@ -20,15 +20,20 @@ const INIT_CARD_NUMBER_ERROR = {
 
 type Props = {
   value: CardNumber;
-  onChange: (order: keyof CardNumber, value: string) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>, order: keyof CardNumber) => void;
   onError: (isError: boolean) => void;
 };
 
 const CardNumberSection = ({value, onChange, onError}: Props) => {
   const [error, setError] = useState(INIT_CARD_NUMBER_ERROR);
 
-  const handleInput = (order: keyof CardNumber, value: string) => {
-    onChange(order, value);
+  const handleInput = (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof CardNumber
+  ) => {
+    const value = e.target.value;
+
+    onChange(e, order);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
@@ -60,11 +65,12 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
       <InputField label="카드 번호" errorMessage={findErrorOrder(error)}>
         {ORDER_LABEL.map((label) => (
           <Input
+            name="cardNumber"
             isError={error[label].length > 0}
             placeholder="1234"
             value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
-            onChange={(e) => handleInput(label, e.target.value)}
+            onChange={(e) => handleInput(e, label)}
             onBlur={(e) => handleFocusout(label, e.target.value)}
           />
         ))}

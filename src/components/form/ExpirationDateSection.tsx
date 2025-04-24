@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import Description from '../description/Description';
 import InputField from '../inputField/InputField';
 import Title from '../title/Title';
@@ -19,7 +19,10 @@ const INIT_EXPIRATION_DATE_ERROR = {
 
 type Props = {
   value: ExpirationDate;
-  onChange: (order: keyof ExpirationDate, value: string) => void;
+  onChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof ExpirationDate
+  ) => void;
 };
 
 const expirationErrorRule = [
@@ -50,9 +53,13 @@ const expirationErrorRule = [
 const ExpirationDateSection = ({value, onChange}: Props) => {
   const [error, setError] = useState(INIT_EXPIRATION_DATE_ERROR);
 
-  const handleInput = (order: keyof ExpirationDate, value: string) => {
-    onChange(order, value);
+  const handleInput = (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof ExpirationDate
+  ) => {
+    onChange(e, order);
 
+    const value = e.target.value;
     const matchedError = expirationErrorRule.find((rule) =>
       rule.validate(value, order)
     );
@@ -75,11 +82,12 @@ const ExpirationDateSection = ({value, onChange}: Props) => {
       <InputField label="유효기간" errorMessage={findErrorOrder(error)}>
         {ORDER_LABEL.map((label) => (
           <Input
+            name="expirationDate"
             isError={error[label].length > 0}
             placeholder={label === 'month' ? 'MM' : 'YY'}
             value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
-            onChange={(e) => handleInput(label, e.target.value)}
+            onChange={(e) => handleInput(e, label)}
             onBlur={(e) => handleFocusout(label, e.target.value)}
           />
         ))}

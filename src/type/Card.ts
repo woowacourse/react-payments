@@ -19,3 +19,11 @@ export type CardCompany =
   | 'LOTTE'
   | 'HANA'
   | 'KOOKMIN';
+
+export type CardForm = {
+  cardNumber: CardNumber;
+  expirationDate: ExpirationDate;
+  cvcNumber: string;
+  cardCompany: CardCompany | '';
+  password: string;
+};
