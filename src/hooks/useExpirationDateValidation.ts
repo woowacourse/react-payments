@@ -62,10 +62,30 @@ function useExpirationDateValidation(values: string[]) {
     }
   };
 
+  const validateAll = (inputValues: string[] = values) => {
+    if (inputValues[0].length !== 2 || inputValues[1].length !== 2) {
+      return [true, true];
+    }
+
+    try {
+      checkValidMonth(inputValues[0]);
+      checkValidYear(inputValues[1]);
+      checkTotalExpirationDate(inputValues[0], inputValues[1]);
+      return [false, false];
+    } catch (error) {
+      if (error instanceof TotalDateError) {
+        return [true, true];
+      }
+
+      return [true, false];
+    }
+  };
+
   return {
     isErrorStates,
     errorMessage,
     checkValidExpirationDate,
+    validateAll,
   };
 }
 

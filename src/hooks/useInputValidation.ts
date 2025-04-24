@@ -30,10 +30,22 @@ function useInputValidation(initialErrorState: boolean[], validationFn: (value: 
     }
   };
 
+  const validateAll = (values: string[]) => {
+    return values.map((value) => {
+      try {
+        validationFn(value);
+        return false;
+      } catch (error) {
+        return true;
+      }
+    });
+  };
+
   return {
     isErrorStates,
     errorMessage,
     validate,
+    validateAll,
   };
 }
 
