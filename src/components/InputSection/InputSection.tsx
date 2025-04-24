@@ -10,6 +10,9 @@ import InputGroup from "../InputGroup/InputGroup";
 import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
 import { useInputError } from "../../hooks/useInputError";
+import Button from "../Button/Button";
+import { CompletionState } from "../../hooks/useCompletion";
+import { useEffect, useState } from "react";
 
 export interface InputSectionProps {
   type: InputType;
@@ -17,6 +20,7 @@ export interface InputSectionProps {
     value: string,
     position?: CardPositionType | PeriodPositionType
   ) => void;
+  isComplete: CompletionState;
 }
 
 const titleVariants = {
@@ -43,7 +47,7 @@ const subTitleVariants = {
   [INPUT_TYPE.password]: "비밀번호 앞 2자리",
 };
 
-function InputSection({ type, onComplete }: InputSectionProps) {
+function InputSection({ type, onComplete, isComplete }: InputSectionProps) {
   const {
     error,
     validateCardNumber,
@@ -52,6 +56,34 @@ function InputSection({ type, onComplete }: InputSectionProps) {
     validatePassword,
   } = useInputError();
 
+  const [showButton, setShowButton] = useState(false);
+  console.log(error);
+
+  useEffect(() => {
+    if (type !== INPUT_TYPE.password) return;
+    const isAllComplete =
+      Object.values(isComplete.cardNumbers).every(Boolean) &&
+      isComplete.cardBrand &&
+      Object.values(isComplete.expirationPeriod).every(Boolean) &&
+      isComplete.cvcNumber &&
+      isComplete.password;
+
+    const isAllErrorFree = [
+      ...Object.values(error.cardNumbers),
+      ...Object.values(error.expirationPeriod),
+      error.cvcNumber,
+      error.cardBrand,
+      error.password,
+    ].every((v) => v === false);
+    console.log(error);
+    console.log(isAllErrorFree);
+
+    if (isAllComplete && isAllErrorFree) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  }, [type, isComplete, error]);
   const getErrorVisible = (type: InputType) => {
     return type === INPUT_TYPE.cvcNumber
       ? error[type]
@@ -76,6 +108,7 @@ function InputSection({ type, onComplete }: InputSectionProps) {
         errorMessage="숫자만 입력 가능합니다."
         isVisible={getErrorVisible(type)}
       />
+      {showButton && <Button />}
     </>
   );
 }

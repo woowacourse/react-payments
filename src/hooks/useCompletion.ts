@@ -3,7 +3,7 @@ import { CardPositionType, PeriodPositionType } from "../constants/constants";
 
 type Position = CardPositionType | PeriodPositionType | undefined;
 
-type CompletionState = {
+export type CompletionState = {
   cardNumbers: Record<CardPositionType, boolean>;
   cardBrand: boolean;
   expirationPeriod: Record<PeriodPositionType, boolean>;

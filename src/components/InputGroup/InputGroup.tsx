@@ -12,7 +12,6 @@ import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
 import CvcInput from "../CvcInput/CvcInput";
 import CardBrandInput from "../CardBrandInput/CardBrandInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
-import { useEffect } from "react";
 
 export interface InputGroupProps {
   type: InputType;
