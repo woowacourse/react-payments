@@ -7,11 +7,8 @@ import {
   StyledCardNumber,
   StyledExpirationPeriod,
 } from "./CardPreview.css";
-import { CardTypeList } from "../../\btypes/index.types";
-import {
-  CardNumberPosition,
-  ExpirationPeriod,
-} from "../../\btypes/index.types";
+import { CardTypeList } from "../../types/index.types";
+import { CardNumberPosition, ExpirationPeriod } from "../../types/index.types";
 import { INITIALIZE_VALUE } from "../../shared/constants/constant";
 import { useMemo } from "react";
 

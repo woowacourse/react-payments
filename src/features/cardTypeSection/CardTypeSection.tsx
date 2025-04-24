@@ -6,6 +6,7 @@ type CardTypeSectionProps = {
   cardType: {
     values: { cardType: string };
     changeValues: (type: "cardType", cardType: string) => void;
+    isFullFilled: () => boolean;
   };
 };
 

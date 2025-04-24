@@ -29,14 +29,24 @@ export default function useError<T extends {}>(
     });
   }
 
-  function getErrorMessage() {
-    for (const key in error) {
-      const typedKey = key as keyof typeof error;
-      if (error[typedKey] !== NO_ERROR) {
-        return error[typedKey];
+  function findFirstError(errorObj: Record<string, string>) {
+    for (const key in errorObj) {
+      const typedKey = key as keyof typeof errorObj;
+      if (errorObj[typedKey] !== NO_ERROR) {
+        return { key: typedKey, value: errorObj[typedKey] };
       }
     }
+    return null;
   }
 
-  return { error, checkValidation, getErrorMessage };
+  function getErrorMessage() {
+    const result = findFirstError(error);
+    return result?.value;
+  }
+
+  function isError() {
+    return !!findFirstError(error);
+  }
+
+  return { error, checkValidation, getErrorMessage, isError };
 }

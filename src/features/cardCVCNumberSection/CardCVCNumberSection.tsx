@@ -6,6 +6,7 @@ export type CardCVCNumberSectionProps = {
   CVCNumber: {
     values: { CVCNumber: string };
     changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+    isFullFilled: () => boolean;
   };
   CVCError: {
     error: Record<"CVCNumber", string>;
@@ -19,6 +20,7 @@ export type CardCVCNumberSectionProps = {
       type: "CVCNumber";
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
 };
 

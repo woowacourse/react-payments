@@ -6,7 +6,7 @@ import {
   ExpirationPeriod,
   CardNumberPosition,
   CardTypeList,
-} from "../types/index.types";
+} from "../types/index.types.ts";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
 
@@ -15,29 +15,44 @@ type CardNumberState = Record<CardNumberPosition, string>;
 type ExpirationPeriodState = Record<ExpirationPeriod, string>;
 
 function App() {
-  const cardNumber = useCardInfo<CardNumberState>({
-    first: INITIALIZE_VALUE,
-    second: INITIALIZE_VALUE,
-    third: INITIALIZE_VALUE,
-    fourth: INITIALIZE_VALUE,
-  });
+  const cardNumber = useCardInfo<CardNumberState>(
+    {
+      first: INITIALIZE_VALUE,
+      second: INITIALIZE_VALUE,
+      third: INITIALIZE_VALUE,
+      fourth: INITIALIZE_VALUE,
+    },
+    4
+  );
 
-  const expirationPeriod = useCardInfo<ExpirationPeriodState>({
-    month: INITIALIZE_VALUE,
-    year: INITIALIZE_VALUE,
-  });
+  const expirationPeriod = useCardInfo<ExpirationPeriodState>(
+    {
+      month: INITIALIZE_VALUE,
+      year: INITIALIZE_VALUE,
+    },
+    2
+  );
 
-  const CVCNumber = useCardInfo({
-    CVCNumber: INITIALIZE_VALUE,
-  });
+  const CVCNumber = useCardInfo(
+    {
+      CVCNumber: INITIALIZE_VALUE,
+    },
+    3
+  );
 
-  const password = useCardInfo({
-    password: INITIALIZE_VALUE,
-  });
+  const password = useCardInfo(
+    {
+      password: INITIALIZE_VALUE,
+    },
+    2
+  );
 
-  const cardType = useCardInfo<{ cardType: keyof CardTypeList | "" }>({
-    cardType: INITIALIZE_VALUE,
-  });
+  const cardType = useCardInfo<{ cardType: keyof CardTypeList | "" }>(
+    {
+      cardType: INITIALIZE_VALUE,
+    },
+    20
+  );
 
   return (
     <StyledApp>
@@ -48,8 +63,7 @@ function App() {
           cardType={cardType.values.cardType}
         />
         <CardInfoForm
-          cardNumber={cardNumber.values}
-          changeCardNumber={cardNumber.changeValues}
+          cardNumber={cardNumber}
           expirationPeriod={expirationPeriod}
           CVCNumber={CVCNumber}
           password={password}

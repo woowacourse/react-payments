@@ -1,11 +1,17 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardNumberInputs from "../../entities/cardNumberInputs/CardNumberInputs";
 import { StyledContainer } from "./cardNumberSection.css";
-import { CardNumberPosition } from "../../\btypes/index.types";
+import { CardNumberPosition } from "../../types/index.types";
 
 type CardNumberProps = {
-  cardNumber: Record<CardNumberPosition, string>;
-  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+  cardNumber: {
+    values: Record<CardNumberPosition, string>;
+    changeValues: (
+      cardNumberPosition: CardNumberPosition,
+      cardNumber: string
+    ) => void;
+    isFullFilled: () => boolean;
+  };
   cardNumberError: {
     error: Record<CardNumberPosition, string>;
     checkValidation: ({
@@ -18,14 +24,11 @@ type CardNumberProps = {
       type: CardNumberPosition;
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
 };
 
-function CardNumberSection({
-  cardNumber,
-  changeCardNumber,
-  cardNumberError,
-}: CardNumberProps) {
+function CardNumberSection({ cardNumber, cardNumberError }: CardNumberProps) {
   return (
     <StyledContainer>
       <SectionTitle
@@ -34,7 +37,6 @@ function CardNumberSection({
       />
       <CardNumberInputs
         cardNumber={cardNumber}
-        changeCardNumber={changeCardNumber}
         cardNumberError={cardNumberError}
       />
     </StyledContainer>

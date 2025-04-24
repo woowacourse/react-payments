@@ -1,4 +1,4 @@
-import { CardNumberPosition } from "./../../types/index.types";
+import { CardNumberPosition } from "../../types/index.types";
 
 export const CARD_NUMBER_LENGTH = 4;
 

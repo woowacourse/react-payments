@@ -1,7 +1,4 @@
-import {
-  CardNumberPosition,
-  ExpirationPeriod,
-} from "../../\btypes/index.types";
+import { CardNumberPosition, ExpirationPeriod } from "../../types/index.types";
 import CardNumberSection from "../cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../cardCVCNumberSection/CardCVCNumberSection";
@@ -19,29 +16,38 @@ import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
 import { useState } from "react";
 
 type CardInfoFormProps = {
-  cardNumber: Record<CardNumberPosition, string>;
-  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+  cardNumber: {
+    values: Record<CardNumberPosition, string>;
+    changeValues: (
+      cardNumberPosition: CardNumberPosition,
+      cardNumber: string
+    ) => void;
+    isFullFilled: () => boolean;
+  };
   expirationPeriod: {
     values: Record<ExpirationPeriod, string>;
     changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+    isFullFilled: () => boolean;
   };
   CVCNumber: {
     values: { CVCNumber: string };
     changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+    isFullFilled: () => boolean;
   };
   password: {
     values: { password: string };
     changeValues: (type: "password", password: string) => void;
+    isFullFilled: () => boolean;
   };
   cardType: {
     values: { cardType: string };
     changeValues: (type: "cardType", cardType: string) => void;
+    isFullFilled: () => boolean;
   };
 };
 
 export default function CardInfoForm({
   cardNumber,
-  changeCardNumber,
   expirationPeriod,
   CVCNumber,
   password,
@@ -98,7 +104,6 @@ export default function CardInfoForm({
       {step >= 0 && (
         <CardNumberSection
           cardNumber={cardNumber}
-          changeCardNumber={changeCardNumber}
           cardNumberError={cardNumberError}
         />
       )}

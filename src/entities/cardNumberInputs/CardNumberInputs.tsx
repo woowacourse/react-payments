@@ -1,5 +1,5 @@
 import Input from "../../shared/input/Input";
-import { CardNumberPosition } from "../../\btypes/index.types";
+import { CardNumberPosition } from "../../types/index.types";
 import { NO_ERROR } from "../../shared/constants/constant";
 import {
   CARD_NUMBER_LENGTH,
@@ -12,8 +12,14 @@ import {
 } from "../inputs.css";
 
 type CardNumberProps = {
-  cardNumber: Record<CardNumberPosition, string>;
-  changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
+  cardNumber: {
+    values: Record<CardNumberPosition, string>;
+    changeValues: (
+      cardNumberPosition: CardNumberPosition,
+      cardNumber: string
+    ) => void;
+    isFullFilled: () => boolean;
+  };
   cardNumberError: {
     error: Record<CardNumberPosition, string>;
     checkValidation: ({
@@ -26,6 +32,7 @@ type CardNumberProps = {
       type: CardNumberPosition;
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
 };
 
@@ -36,11 +43,7 @@ const cardInputConfig = [
   CARD_NUMBER_POSITION.FOURTH,
 ];
 
-function CardNumberInputs({
-  cardNumber,
-  changeCardNumber,
-  cardNumberError,
-}: CardNumberProps) {
+function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
   const errorMessage = cardNumberError.getErrorMessage();
 
   return (
@@ -50,14 +53,14 @@ function CardNumberInputs({
         {cardInputConfig.map((position) => (
           <Input
             key={position}
-            value={cardNumber[position]}
+            value={cardNumber.values[position]}
             onChange={(e) => {
               cardNumberError.checkValidation({
                 length: CARD_NUMBER_LENGTH,
                 value: e.target.value,
                 type: position,
               });
-              changeCardNumber(position, e.target?.value);
+              cardNumber.changeValues(position, e.target?.value);
             }}
             width="25%"
             maxLength={CARD_NUMBER_LENGTH}

@@ -1,12 +1,13 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardExpirationPeriodInputs from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
 import { StyledContainer } from "./CardExpirationPeriodSection.css";
-import { ExpirationPeriod } from "../../\btypes/index.types";
+import { ExpirationPeriod } from "../../types/index.types";
 
 export type ExpirationPeriodProps = {
   expirationPeriod: {
     values: Record<ExpirationPeriod, string>;
     changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+    isFullFilled: () => boolean;
   };
   monthError: {
     error: Record<"month", string>;
@@ -20,6 +21,7 @@ export type ExpirationPeriodProps = {
       type: "month";
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
   yearError: {
     error: Record<"year", string>;
@@ -33,6 +35,7 @@ export type ExpirationPeriodProps = {
       type: "year";
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
 };
 

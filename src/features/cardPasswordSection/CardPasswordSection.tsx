@@ -6,6 +6,7 @@ type CardPasswordSectionProps = {
   password: {
     values: { password: string };
     changeValues: (type: "password", password: string) => void;
+    isFullFilled: () => boolean;
   };
 };
 

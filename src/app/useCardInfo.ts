@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export default function useCardInfo<T extends Record<string, string>>(
-  initialValues: T
+  initialValues: T,
+  maxLength: number
 ) {
   const [values, setValues] = useState<T>(initialValues);
 
@@ -12,8 +13,13 @@ export default function useCardInfo<T extends Record<string, string>>(
     }));
   }
 
+  function isFullFilled() {
+    return Object.values(values).every((value) => value.length === maxLength);
+  }
+
   return {
     values,
     changeValues,
+    isFullFilled,
   };
 }

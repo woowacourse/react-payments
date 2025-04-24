@@ -1,5 +1,5 @@
 import Input from "../../shared/input/Input";
-import { ExpirationPeriod } from "../../\btypes/index.types";
+import { ExpirationPeriod } from "../../types/index.types.ts";
 import { NO_ERROR } from "../../shared/constants/constant";
 import {
   EXPIRATION_PERIOD,
@@ -15,6 +15,7 @@ type ExpirationPeriodProps = {
   expirationPeriod: {
     values: Record<ExpirationPeriod, string>;
     changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+    isFullFilled: () => boolean;
   };
   monthError: {
     error: Record<"month", string>;
@@ -28,6 +29,7 @@ type ExpirationPeriodProps = {
       type: "month";
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
   yearError: {
     error: Record<"year", string>;
@@ -41,6 +43,7 @@ type ExpirationPeriodProps = {
       type: "year";
     }) => void;
     getErrorMessage: () => string | undefined;
+    isError: () => boolean;
   };
 };
 

@@ -1,4 +1,4 @@
-import { ExpirationPeriod } from "./../../types/index.types";
+import { ExpirationPeriod } from "../../types/index.types";
 
 export const EXPIRATION_PERIOD: Record<"MONTH" | "YEAR", ExpirationPeriod> = {
   MONTH: "month",
