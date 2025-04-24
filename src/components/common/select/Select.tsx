@@ -58,7 +58,6 @@ function Select({
               key={`option-${value}`}
               className={`${styles.optionList}`}
               onClick={selectOption}
-              aria-option
             >
               {value}
             </li>
