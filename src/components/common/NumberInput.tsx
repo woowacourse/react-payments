@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import useNumberInputError from '../../hooks/useNumberInputError';
 
 interface NumberInputProps {
   value: string;
   setValue: (value: string) => void;
   maxLength: number;
   placeholder: string;
-  extraErrorCondition?: boolean;
+  isError: boolean;
   isHidden?: boolean;
 }
 
@@ -15,11 +14,9 @@ function NumberInput({
   setValue,
   maxLength,
   placeholder,
-  extraErrorCondition,
+  isError,
   isHidden = false,
 }: NumberInputProps) {
-  const { isError } = useNumberInputError(value, maxLength, extraErrorCondition);
-
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
     const isNumeric = /^[0-9]*$/.test(e.target.value);
 

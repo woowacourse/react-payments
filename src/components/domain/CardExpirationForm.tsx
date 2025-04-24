@@ -18,20 +18,18 @@ interface CardExpirationFormProps {
 }
 
 function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirationFormProps) {
-  const { errorText } = useCardExpirationValidation(cardInfo, maxLength);
+  const { isError, errorText } = useCardExpirationValidation(cardInfo, maxLength);
 
   const InputInfo = [
     {
       value: cardInfo.expiration.month,
       setValue: (value: string) => handleCardInfo('expiration', value, 'month'),
       placeholder: 'MM',
-      // extraErrorCondition: cardInfo.expiration.month !== '' && !isValidMonth,
     },
     {
       value: cardInfo.expiration.year,
       setValue: (value: string) => handleCardInfo('expiration', value, 'year'),
       placeholder: 'YY',
-      // extraErrorCondition: cardInfo.expiration.year !== '' && !isValidYear,
     },
   ];
 
@@ -46,7 +44,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
             setValue={inputInfo.setValue}
             maxLength={maxLength}
             placeholder={inputInfo.placeholder}
-            // extraErrorCondition={inputInfo.extraErrorCondition}
+            isError={isError[index]}
           />
         ))}
       </NumberInputContainer>

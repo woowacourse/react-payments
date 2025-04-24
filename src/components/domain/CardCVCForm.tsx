@@ -14,7 +14,7 @@ interface CardCVCFormProps {
 }
 
 function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) {
-  const { errorText } = useCardCVCValidation(cardInfo, maxLength);
+  const { isError, errorText } = useCardCVCValidation(cardInfo, maxLength);
 
   return (
     <NumberInputForm>
@@ -27,6 +27,7 @@ function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) 
           }}
           maxLength={maxLength}
           placeholder="123"
+          isError={isError}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>

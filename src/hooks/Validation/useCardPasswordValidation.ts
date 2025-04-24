@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 import { ERROR_MESSAGE } from '../../constants/guide';
 import isZeroOrExactLength from '../../utils/isExactLength';
 
-function useCardCVCValidation(cardInfo: CardInfo, maxLength: number) {
+function useCardPasswordValidation(cardInfo: CardInfo, maxLength: number) {
   const [errorText, setErrorText] = useState('');
   let isError = false;
 
-  if (!isZeroOrExactLength(cardInfo.cvc, maxLength)) isError = true;
+  if (!isZeroOrExactLength(cardInfo.passwordFront, maxLength)) isError = true;
 
   useEffect(() => {
     if (isError) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
-  }, [cardInfo.cvc]);
+  }, [cardInfo.passwordFront]);
 
   return { isError, errorText };
 }
 
-export default useCardCVCValidation;
+export default useCardPasswordValidation;

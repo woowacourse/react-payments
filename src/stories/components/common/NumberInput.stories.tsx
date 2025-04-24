@@ -12,20 +12,53 @@ export default meta;
 
 export const CardNumber = () => {
   const [value, setValue] = useState('');
-  return <NumberInput value={value} setValue={setValue} maxLength={4} placeholder="1234" />;
+  return (
+    <NumberInput
+      value={value}
+      setValue={setValue}
+      maxLength={4}
+      placeholder="1234"
+      isError={false}
+    />
+  );
+};
+
+export const CardNumberError = () => {
+  const [value, setValue] = useState('');
+  return (
+    <NumberInput
+      value={value}
+      setValue={setValue}
+      maxLength={4}
+      placeholder="1234"
+      isError={true}
+    />
+  );
 };
 
 export const CVCNumber = () => {
   const [value, setValue] = useState('');
-  return <NumberInput value={value} setValue={setValue} maxLength={3} placeholder="123" />;
+  return (
+    <NumberInput
+      value={value}
+      setValue={setValue}
+      maxLength={3}
+      placeholder="123"
+      isError={false}
+    />
+  );
 };
 
 export const ExpirationMonth = () => {
   const [value, setValue] = useState('');
-  return <NumberInput value={value} setValue={setValue} maxLength={2} placeholder="MM" />;
+  return (
+    <NumberInput value={value} setValue={setValue} maxLength={2} placeholder="MM" isError={false} />
+  );
 };
 
 export const ExpirationYear = () => {
   const [value, setValue] = useState('');
-  return <NumberInput value={value} setValue={setValue} maxLength={2} placeholder="YY" />;
+  return (
+    <NumberInput value={value} setValue={setValue} maxLength={2} placeholder="YY" isError={false} />
+  );
 };

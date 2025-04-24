@@ -4,27 +4,19 @@ import { ERROR_MESSAGE } from '../../constants/guide';
 
 function useCardNumberValidation(cardInfo: CardInfo, maxLength: number) {
   const [errorText, setErrorText] = useState('');
-  const isError = errorText !== '';
+  const isError = Array.from<boolean>({ length: Object.keys(cardInfo.number).length }).fill(false);
 
-  const condition = [
-    cardInfo.number.first,
-    cardInfo.number.second,
-    cardInfo.number.third,
-    cardInfo.number.fourth,
-  ].some((number) => {
-    if (isZeroOrExactLength(number, maxLength)) return false;
-    return true;
+  Object.values(cardInfo.number).forEach((number, index) => {
+    if (!isZeroOrExactLength(number, maxLength)) {
+      isError[index] = true;
+    }
   });
+  const isExactDigits = isError.some((value) => value);
 
   useEffect(() => {
-    if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
+    if (isExactDigits) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
-  }, [
-    cardInfo.number.first,
-    cardInfo.number.second,
-    cardInfo.number.third,
-    cardInfo.number.fourth,
-  ]);
+  }, Object.values(cardInfo.number));
 
   return { isError, errorText };
 }

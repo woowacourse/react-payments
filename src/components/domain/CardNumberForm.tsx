@@ -18,7 +18,7 @@ interface CardNumberFormProps {
 }
 
 function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormProps) {
-  const { errorText } = useCardNumberValidation(cardInfo, maxLength);
+  const { isError, errorText } = useCardNumberValidation(cardInfo, maxLength);
 
   const NumberInputInfo = [
     {
@@ -50,6 +50,7 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
             setValue={inputInfo.setValue}
             maxLength={maxLength}
             placeholder="1234"
+            isError={isError[index]}
           />
         ))}
       </NumberInputContainer>
