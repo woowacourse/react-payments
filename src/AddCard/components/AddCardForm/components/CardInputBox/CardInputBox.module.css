@@ -4,6 +4,7 @@
   font-family: "Noto Sans KR";
   font-size: 1.5rem;
   font-weight: 700;
+  animation: fadeInDown 0.5s ease-out;
 }
 
 .guideText {
@@ -11,4 +12,26 @@
   color: #8b95a1;
   font-family: "Noto Sans KR";
   font-size: 0.9rem;
+  line-height: 1.4;
+  animation: fadeIn 0.7s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
