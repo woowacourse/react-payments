@@ -4,7 +4,7 @@ import { HandleInputParams } from '../CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import { inputValidation } from '../../validators/inputValidator';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 type CardNumberInputProps = {
   values: string[];
@@ -45,6 +45,15 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
     validationCallback
   );
 
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  const handleChange = ({ e, idx }: HandleInputParams) => {
+    onChange({ e, idx });
+    if (e.target.value.length === 4 && idx < 3) {
+      inputRefs.current[idx + 1]?.focus();
+    }
+  };
+
   return (
     <StyledCardNumberInput>
       <StyledLabel>카드 번호</StyledLabel>
@@ -53,11 +62,14 @@ const CardNumberInput = ({ values, onChange }: CardNumberInputProps) => {
           <Input
             key={idx}
             value={value}
-            onChange={(e) => onChange({ e, idx })}
+            onChange={(e) => handleChange({ e, idx })}
             onBlur={(e) => validate({ e, idx })}
             maxLength={4}
             placeholder={'1234'}
             isError={isError[idx]}
+            ref={(el) => {
+              inputRefs.current[idx] = el;
+            }}
           />
         ))}
       </StyledInputWrapper>
