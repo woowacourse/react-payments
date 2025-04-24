@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type ValidationType = { required: boolean; length?: number; errorMessage: string };
+type ValidationType = { required: boolean; length?: number; errorMessage: string; validateRegex?: RegExp };
 export type RegisterType<T extends Record<string, string>> = ReturnType<typeof useForm<T>>['register'];
 
 export default function useForm<T extends Record<string, string>>({ defaultValues }: { defaultValues: T }) {
@@ -18,16 +18,13 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
     return {
       value: value[currentKey],
       onChange: (e: React.ChangeEvent<E>) => {
-        if (options?.inputRegex && !options.inputRegex.test(e.target.value)) {
-          return;
-        }
-
-        setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
-        if (options?.validation) {
-          setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
-        }
+        if (options?.inputRegex && !options.inputRegex.test(e.target.value)) return;
 
         options?.onChange?.(e);
+        setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
+
+        if (options?.validation)
+          setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
       },
     };
   };
@@ -44,6 +41,10 @@ function validate(validation: ValidationType, value: string) {
   }
 
   if (validation.length && value.length < validation.length) {
+    return validation.errorMessage;
+  }
+
+  if (validation.validateRegex && !validation.validateRegex.test(value)) {
     return validation.errorMessage;
   }
 

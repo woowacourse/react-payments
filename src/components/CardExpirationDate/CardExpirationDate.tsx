@@ -35,11 +35,12 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           inputMode="numeric"
           {...register('month', {
             onChange: handleInputChange,
-            inputRegex: /^(0?[1-9]|1[0-2])$/,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 2,
               errorMessage: ERROR_MESSAGE.cardExpirationDate.month,
+              validateRegex: /^(0?[1-9]|1[0-2])$/,
             },
           })}
         />
