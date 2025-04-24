@@ -27,8 +27,8 @@ function Button({
     <button
       className={clsx(
         styles.button,
-        styles[`variant${capitalizeFirstLetter(variant)}`],
-        styles[`size${capitalizeFirstLetter(size)}`],
+        styles[variant],
+        styles[size],
         fullWidth && styles.fullWidth,
         shouldBeFixed && styles.fixed,
         className
@@ -38,10 +38,6 @@ function Button({
       {children}
     </button>
   );
-}
-
-function capitalizeFirstLetter(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export default Button;
