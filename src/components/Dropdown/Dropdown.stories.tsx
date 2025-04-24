@@ -14,8 +14,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Example: Story = {
-  args: {
-    itemList: ["도도", "동아리", "잼잼", "개노잼"],
-  },
-};
+export const Default: Story = {};

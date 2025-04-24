@@ -1,8 +1,3 @@
-.dropdown,
-.dropdown::picker(select) {
-  appearance: base-select;
-}
-
 .dropdown {
   width: 100%;
   border-radius: 4px;
@@ -15,6 +10,11 @@
   align-items: center;
   justify-content: center;
   padding: 0 12px;
+}
+/* 사파리 지원이 안되던데용, 근데 시멘틱 meaning을 날리기는 싫어서 이렇게 구성했습니다. */
+.dropdown,
+.dropdown::picker(select) {
+  appearance: base-select;
 }
 
 .dropdown:hover,

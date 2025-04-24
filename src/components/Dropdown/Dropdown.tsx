@@ -3,7 +3,7 @@ import styles from "./Dropdown.module.css";
 
 interface InputProps extends ComponentProps<"select"> {
   itemList: string[];
-  placeholder: string;
+  placeholder?: string;
 }
 
 function Dropdown({ itemList, placeholder, ...props }: InputProps) {
