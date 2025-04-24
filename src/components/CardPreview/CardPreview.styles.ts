@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CardBrandType } from '../CardBrand/CardBrand';
+import { CardBrandType } from '../CardBrand/type';
 
 const cardPreviewBackgroundColor = {
   BC카드: '#F04651;',
