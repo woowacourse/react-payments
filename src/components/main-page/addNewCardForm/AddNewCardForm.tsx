@@ -9,6 +9,7 @@ import CardPasswordSection from '../cardPasswordSection/CardPasswordSection';
 import { INITIALIZE_VALUE } from '../../../constants/constant';
 import { ExpirationPeriod, Position } from '../../../types/index.types';
 import Button from '../../common/button/Button';
+import { useCardInfo } from '../CardInfoContext';
 
 const StyledFrame = styled.div`
   display: inline-flex;
@@ -23,43 +24,31 @@ const StyledFrame = styled.div`
   box-sizing: border-box;
 `;
 
-type CardNumberState = {
-  [key in Position]: string;
-};
-
 type ExpirationPeriodState = {
   [key in keyof ExpirationPeriod]: string;
 };
 
 function AddNewCardForm() {
-  const [inputOrder, setInputOrder] = useState(0);
-  const viewNextInput = () => setInputOrder((prev) => prev + 1);
+  const [step, setStep] = useState(0);
+  const viewNextInput = () => setStep((prev) => prev + 1);
 
   const [openButton, setOpenButton] = useState(false);
   const handleOpenButton = () => setOpenButton(true);
-
-  const [cardNumber, setCardNumber] = useState<CardNumberState>({
-    first: INITIALIZE_VALUE,
-    second: INITIALIZE_VALUE,
-    third: INITIALIZE_VALUE,
-    fourth: INITIALIZE_VALUE,
-  });
 
   const [expirationPeriod, setExpirationPeriod] = useState<ExpirationPeriodState>({
     month: INITIALIZE_VALUE,
     year: INITIALIZE_VALUE,
   });
-
   const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
   const [password, setPassword] = useState(INITIALIZE_VALUE);
-
-  const [selectedCardCompany, setSelectedCardCompany] = useState('');
   const [cardColor, setCardColor] = useState('#333333');
 
-  function changeCardNumber(position: Position, cardNumber: string) {
-    setCardNumber((prev) => {
-      prev[position] = cardNumber;
-      return { ...prev };
+  const { cardNumber, setCardNumber, setSelectedCardCompany } = useCardInfo();
+
+  function changeCardNumber(position: Position, number: string) {
+    setCardNumber({
+      ...cardNumber,
+      [position]: number,
     });
   }
 
@@ -82,15 +71,15 @@ function AddNewCardForm() {
     <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
 
-      {inputOrder >= 4 && (
+      {step >= 4 && (
         <CardPasswordSection password={password} changePassword={changePassword} handleOpenButton={handleOpenButton} />
       )}
 
-      {inputOrder >= 3 && (
+      {step >= 3 && (
         <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
       )}
 
-      {inputOrder >= 2 && (
+      {step >= 2 && (
         <CardExpirationPeriodSection
           expirationPeriod={expirationPeriod}
           changeExpirationPeriod={changeExpirationPeriod}
@@ -98,7 +87,7 @@ function AddNewCardForm() {
         />
       )}
 
-      {inputOrder >= 1 && (
+      {step >= 1 && (
         <CardSelectSection
           onSelectCardCompany={(companyName: string, color: string) => {
             setSelectedCardCompany(companyName);
@@ -108,10 +97,10 @@ function AddNewCardForm() {
         />
       )}
 
-      {inputOrder >= 0 && (
+      {step >= 0 && (
         <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
       )}
-      {openButton ? <Button /> : <></>}
+      {openButton && <Button />}
     </StyledFrame>
   );
 }

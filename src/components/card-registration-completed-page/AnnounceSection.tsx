@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../common/button/Button';
+import { useCardInfo } from '../main-page/CardInfoContext';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ const StyledContainer = styled.div`
   align-items: center;
   gap: 25px;
 `;
+
 const StyledIconWrap = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,14 +38,16 @@ const checkSrc: Record<string, CheckSrc> = {
 };
 
 export default function AnnounceSection() {
+  const { cardNumber, selectedCardCompany } = useCardInfo();
+
   return (
     <StyledContainer>
       <StyledIconWrap>
-        <img src={checkSrc.check}></img>
+        <img src={checkSrc.check} alt="체크 아이콘" />
       </StyledIconWrap>
       <StyledAnnounce>
-        5511로 시작하는 <br />
-        BC카드가 등록되었어요.
+        {cardNumber.first || '----'}로 시작하는 <br />
+        {selectedCardCompany || '카드사'}가 등록되었어요.
       </StyledAnnounce>
       <Button />
     </StyledContainer>
