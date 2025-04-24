@@ -99,3 +99,25 @@ export const cardPasswordValidator = (input: string) => {
   }
   return [NO_ERROR, ''];
 };
+
+export const confirmButtonValidator = ({
+  cardNumber,
+  cardExpirationDate,
+  cardCVC,
+  cardIssuer,
+  cardPassword,
+}: {
+  cardNumber: string[];
+  cardExpirationDate: { month: string; year: string };
+  cardCVC: string;
+  cardIssuer: string;
+  cardPassword: string;
+}) => {
+  return (
+    cardNumberValidator(cardNumber)[0] === NO_ERROR &&
+    cardExpirationDateValidator(cardExpirationDate)[0] === NO_ERROR &&
+    cardCVCValidator(cardCVC)[0] === NO_ERROR &&
+    cardIssuerValidator(cardIssuer)[0] === NO_ERROR &&
+    cardPasswordValidator(cardPassword)[0] === NO_ERROR
+  );
+};
