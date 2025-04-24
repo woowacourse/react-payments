@@ -63,12 +63,11 @@ export default function useStep({
   CVCError,
 }: CardInfoFormProps) {
   const calculatedStep = useMemo(() => {
-    if (!cardNumber.isFullFilled() || cardNumberError.isError()) return 0;
-    if (!cardType.isFullFilled()) return 1;
-    if (!expirationPeriod.isFullFilled() || month.isError() || year.isError())
-      return 2;
-    if (!CVCNumber.isFullFilled() || CVCError.isError()) return 3;
-    if (!password.isFullFilled()) return 4;
+    if (!isCardNumberOk(cardNumber, cardNumberError)) return 0;
+    if (!isCardTypeOk(cardType)) return 1;
+    if (!isExpirationOk(expirationPeriod, year, month)) return 2;
+    if (!isCVCNumberOk(CVCNumber, CVCError)) return 3;
+    if (!isPasswordOk(password)) return 4;
     return 5;
   }, [
     cardNumber,
@@ -88,5 +87,43 @@ export default function useStep({
     setStep((prevStep) => Math.max(prevStep, calculatedStep));
   }, [calculatedStep]);
 
-  return step;
+  function isCompletedCardInfo() {
+    return calculatedStep === 5;
+  }
+
+  return { step, canSubmit: isCompletedCardInfo() };
+}
+
+function isCardNumberOk(
+  cardNumber: { isFullFilled: () => boolean },
+  cardNumberError: { isError: () => boolean }
+) {
+  return cardNumber.isFullFilled() && cardNumberError.isError() === false;
+}
+
+function isCardTypeOk(cardType: { isFullFilled: () => boolean }) {
+  return cardType.isFullFilled();
+}
+
+function isExpirationOk(
+  expirationPeriod: { isFullFilled: () => boolean },
+  year: { isError: () => boolean },
+  month: { isError: () => boolean }
+) {
+  return (
+    expirationPeriod.isFullFilled() &&
+    year.isError() === false &&
+    month.isError() === false
+  );
+}
+
+function isCVCNumberOk(
+  CVCNumber: { isFullFilled: () => boolean },
+  CVCError: { isError: () => boolean }
+) {
+  return CVCNumber.isFullFilled() && CVCError.isError() === false;
+}
+
+function isPasswordOk(password: { isFullFilled: () => boolean }) {
+  return password.isFullFilled();
 }

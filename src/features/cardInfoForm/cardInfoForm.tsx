@@ -84,7 +84,7 @@ export default function CardInfoForm({
     getCVCValidationFns
   );
 
-  const step = useStep({
+  const { step, canSubmit } = useStep({
     cardNumber,
     expirationPeriod,
     CVCNumber,
@@ -116,7 +116,7 @@ export default function CardInfoForm({
           cardNumberError={cardNumberError}
         />
       )}
-      <CardSubmitButton />
+      {canSubmit && <CardSubmitButton />}
     </>
   );
 }
