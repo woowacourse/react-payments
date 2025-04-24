@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {useState} from 'react';
 
 import Card from '../components/card/Card';
 import PasswordSection from '../components/form/PasswordSection';
@@ -9,7 +8,7 @@ import ExpirationDateSection from '../components/form/ExpirationDateSection';
 import CardCvcSection from '../components/form/CardCvcSection';
 import Button from '../components/button/Button';
 
-import {CardCompany, CardForm, CardNumber, ExpirationDate} from '../type/Card';
+import {CardForm} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import useCardForm from '../hooks/useCardForm';
@@ -45,11 +44,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   const isVisible = (section: keyof CardForm, maxLength: number) => {
-    // 해당 섹션에 에러가 있을 경우
-    if (isErrors[section]) {
-      console.log('에러 있음');
-      return false;
-    }
+    if (isErrors[section]) return false;
 
     if (typeof formData[section] === 'string') {
       return formData[section]?.length >= maxLength;

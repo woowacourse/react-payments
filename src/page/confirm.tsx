@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import Button from '../components/button/Button';
-import {useLocation} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 import {CARD_COMPANY} from '../components/constants/card';
 import {CardCompany} from '../type/Card';
 
 const Confirm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (!location.state) return <div>잘못된 경로로 들어오셨습니다.</div>;
 
@@ -19,7 +20,7 @@ const Confirm = () => {
         <br />
         {CARD_COMPANY[cardCompany as CardCompany]?.name}가 등록되었어요.
       </Description>
-      <Button onClick={() => {}}>확인</Button>
+      <Button onClick={() => navigate(-1)}>확인</Button>
     </Container>
   );
 };
