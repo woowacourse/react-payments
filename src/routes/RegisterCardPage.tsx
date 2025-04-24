@@ -68,7 +68,10 @@ function RegisterCardPage() {
           maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
         />
       </FormContainer>
-      <BottomButton label={CONFIRM_BUTTON_LABEL} onClick={() => navigate(ROUTER_PATH.COMPLETE)} />
+      <BottomButton
+        label={CONFIRM_BUTTON_LABEL}
+        onClick={() => navigate(ROUTER_PATH.COMPLETE, { state: { cardInfo } })}
+      />
     </>
   );
 }

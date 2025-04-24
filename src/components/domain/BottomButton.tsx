@@ -14,14 +14,7 @@ function BottomButton({ label, onClick }: BottomButtonProps) {
 export default BottomButton;
 
 const BottomButtonContainer = styled.button`
-  cursor: pointer;
   width: ${VIEWPORT.MOBILE}px;
-  height: 50px;
-  font-weight: bold;
-  background-color: #333;
-  color: white;
-  border: none;
-  transition: background-color 0.3s;
   position: fixed;
   bottom: 0;
   left: 50%;

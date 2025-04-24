@@ -18,7 +18,20 @@ input[type='number'] {
 
 #root {
   display: flex;
-  padding: 20px 0px 50px 0px;
   justify-content: center;
   align-items: center;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  background-color: #333;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #222;
 }
