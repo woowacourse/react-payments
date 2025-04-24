@@ -3,8 +3,8 @@ import { CARD_COMPANY, CARD_TYPE } from "../../../constants/constants";
 import { CardCompanyState, CardType } from "../../../types/types";
 
 const CARD_IMAGE = {
-  [CARD_TYPE.visa]: "./visa.jpg",
-  [CARD_TYPE.master]: "./master.jpg",
+  [CARD_TYPE.visa]: "./visa.svg",
+  [CARD_TYPE.master]: "./master.svg",
 };
 
 const CARD_COMPANY_COLOR_MAP = {
@@ -21,10 +21,9 @@ const CARD_COMPANY_COLOR_MAP = {
 
 export const CardPreviewContainerCSS = styled.div`
   width: 100%;
-  height: 250px;
+  height: 230px;
   display: flex;
   justify-content: center;
-  padding-bottom: 30px;
 `;
 
 export const CardPreviewCSS = styled.div<{ $cardCompany: CardCompanyState }>`
