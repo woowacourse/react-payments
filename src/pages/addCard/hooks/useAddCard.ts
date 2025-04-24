@@ -3,7 +3,6 @@ import useControlledCardNumber from "@card/CardNumber/hooks/useControlledCardNum
 import useControlledCardType from "@card/CardType/hooks/useControlledCardType";
 import useControlledCVC from "@card/CVC/hooks/useControlledCVC";
 import useControlledExpireDate from "@card/ExpireDate/hooks/useControlledExpireDate";
-import { useEffect, useState } from "react";
 import { getIsAddFormSubmit } from "../validation";
 import useAddCardFormStep from "./useAddCardFormStep";
 
@@ -34,23 +33,6 @@ const useAddCard = () => {
     isCVCNextStep,
   });
 
-  const [isAddFormSubmit, setIsAddFormSubmit] = useState(false);
-
-  useEffect(
-    function checkAddFormSubmit() {
-      setIsAddFormSubmit(
-        getIsAddFormSubmit({
-          cardNumberState,
-          cardType,
-          expireDate,
-          CVCState,
-          cardPasswordState,
-        })
-      );
-    },
-    [cardNumberState, cardType, expireDate, CVCState, cardPasswordState]
-  );
-
   const addCardState = {
     addCardFormSteps,
     cardNumberState,
@@ -67,7 +49,13 @@ const useAddCard = () => {
     handleCVCChange,
     cardPasswordState,
     handleCardPasswordChange,
-    isAddFormSubmit,
+    isAddFormSubmit: getIsAddFormSubmit({
+      cardNumberState,
+      cardType,
+      expireDate,
+      CVCState,
+      cardPasswordState,
+    }),
   };
 
   const previewState = {
