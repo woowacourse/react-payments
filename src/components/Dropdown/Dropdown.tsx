@@ -36,6 +36,7 @@ function Dropdown<T extends string>({
       <button
         autoFocus={autoFocus}
         type="button"
+        role="dropdown-button"
         onClick={handleDropdownToggle}
         className={`${styles.button} ${isOpen ? styles.activeButton : ""} 
         ${selectedValue ? styles.textBlack : ""}`}
@@ -52,6 +53,7 @@ function Dropdown<T extends string>({
           <ul className={styles.dropdownList}>
             {dropdownList.map((item) => (
               <li
+                role="dropdown-item"
                 key={item}
                 className={styles.dropdownListItem}
                 onClick={() => handleDropdownItemClick(item)}
