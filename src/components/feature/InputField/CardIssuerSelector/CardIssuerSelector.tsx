@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { CardIssuerSelectorType } from '../../../../config/inputField';
-import Selector from '../../../Selector/Selector';
+import Selector from '../../../ui/Selector/Selector';
 
 interface CardIssuerSelectorProps {
   setCardIssuer: Dispatch<SetStateAction<CardIssuerSelectorType | null>>;
