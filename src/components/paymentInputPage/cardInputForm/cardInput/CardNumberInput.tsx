@@ -10,8 +10,6 @@ export interface CardNumberInputProps {
   setIsValid: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
-const numbersArray = Array.from({ length: 4 }).fill('') as string[];
-
 function CardNumberInput({
   cardNumbers,
   setCardNumbers,
@@ -31,8 +29,10 @@ function CardNumberInput({
   }
 
   function updateCardNumber(inputCardNumber: string, dataInputId: number) {
-    numbersArray[dataInputId] = inputCardNumber;
-    setCardNumbers([...numbersArray]);
+    const newCardNumbers = [...cardNumbers];
+    newCardNumbers[dataInputId] = inputCardNumber;
+
+    setCardNumbers(newCardNumbers);
   }
 
   function validateCardNumber(inputCardNumber: string, dataInputId: number) {
