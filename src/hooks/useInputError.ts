@@ -71,9 +71,11 @@ export function useInputError() {
 
   return {
     error,
-    validateCardNumber,
-    validateExpirationPeriod,
-    validateCvcNumber,
-    validatePassword,
+    validators: {
+      validateCardNumber,
+      validateExpirationPeriod,
+      validateCvcNumber,
+      validatePassword,
+    },
   };
 }

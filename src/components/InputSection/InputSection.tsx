@@ -9,10 +9,10 @@ import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
 import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
-import { useInputError } from "../../hooks/useInputError";
 import Button from "../Button/Button";
 import { CompletionState } from "../../hooks/useCompletion";
 import { useEffect, useState } from "react";
+import { InputErrorType } from "../../hooks/useInputError";
 
 export interface InputSectionProps {
   type: InputType;
@@ -21,6 +21,16 @@ export interface InputSectionProps {
     position?: CardPositionType | PeriodPositionType
   ) => void;
   isComplete: CompletionState;
+  error: InputErrorType;
+  validators: {
+    validateCardNumber: (value: string, position: CardPositionType) => void;
+    validateExpirationPeriod: (
+      value: string,
+      position: PeriodPositionType
+    ) => void;
+    validateCvcNumber: (value: string) => void;
+    validatePassword: (value: string) => void;
+  };
 }
 
 const titleVariants = {
@@ -47,17 +57,14 @@ const subTitleVariants = {
   [INPUT_TYPE.password]: "비밀번호 앞 2자리",
 };
 
-function InputSection({ type, onComplete, isComplete }: InputSectionProps) {
-  const {
-    error,
-    validateCardNumber,
-    validateExpirationPeriod,
-    validateCvcNumber,
-    validatePassword,
-  } = useInputError();
-
+function InputSection({
+  type,
+  onComplete,
+  isComplete,
+  error,
+  validators,
+}: InputSectionProps) {
   const [showButton, setShowButton] = useState(false);
-  console.log(error);
 
   useEffect(() => {
     if (type !== INPUT_TYPE.password) return;
@@ -98,10 +105,10 @@ function InputSection({ type, onComplete, isComplete }: InputSectionProps) {
       <InputGroup
         type={type}
         error={error}
-        validateCardNumber={validateCardNumber}
-        validateExpirationPeriod={validateExpirationPeriod}
-        validateCvcNumber={validateCvcNumber}
-        validatePassword={validatePassword}
+        validateCardNumber={validators.validateCardNumber}
+        validateExpirationPeriod={validators.validateExpirationPeriod}
+        validateCvcNumber={validators.validateCvcNumber}
+        validatePassword={validators.validatePassword}
         onComplete={onComplete}
       />
       <Error
