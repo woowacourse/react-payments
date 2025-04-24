@@ -1,4 +1,5 @@
 import * as S from './Dropdown.styles';
+import ArrowIcon from '../../Icon/ArrowIcon';
 import { useEffect, useRef, useState } from 'react';
 
 interface DropdownProps<T> {
@@ -36,8 +37,14 @@ export default function Dropdown<T extends string>({
   }, []);
   return (
     <S.DropdownContainer ref={containerRef}>
-      <S.DropdownButton selectedValue={SelectedValue} isOpen={isOpen} onClick={() => setIsOpen((prev) => !prev)}>
+      <S.DropdownButton
+        type="button"
+        selectedValue={SelectedValue}
+        isOpen={isOpen}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         {SelectedValue ?? defaultValue}
+        <ArrowIcon color={isOpen ? ` #000` : `#acacac`} rotate={isOpen ? `180deg` : `0deg`} />
       </S.DropdownButton>
       <S.DropdownItemList isOpen={isOpen}>
         {dropdownList.map((item) => (

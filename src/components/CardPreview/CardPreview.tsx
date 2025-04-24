@@ -1,6 +1,6 @@
 import * as S from './CardPreview.styles';
-import MasterCard from '../logo/MasterCard';
-import VisaCard from '../logo/VisaCard';
+import MasterCard from '../Icon/MasterCard';
+import VisaCard from '../Icon/VisaCard';
 import { MASKING } from '../../constants';
 import { getCardType } from '../../utils';
 import { CardPreviewProps } from './type';

@@ -1,5 +1,5 @@
 import * as S from './AddCardComplete.styles';
-import CompleteIcon from '../../components/logo/completeIcon';
+import CompleteIcon from '../../components/Icon/completeIcon';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 

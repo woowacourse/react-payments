@@ -9,14 +9,18 @@ export const DropdownContainer = styled.div`
   position: relative;
 `;
 
-export const DropdownButton = styled.p<DropdownButtonProps<string>>`
+export const DropdownButton = styled.button<DropdownButtonProps<string>>`
   ${(props) => (props.isOpen ? `border: 1px solid #000` : `border: 1px solid #acacac`)};
   border-radius: 4px;
   padding: 14px 10px;
   width: 100%;
   ${(props) => (props.selectedValue ? `color: #000` : `color: #acacac`)};
   font-size: 13px;
+  background: #fff;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &::placeholder {
     color: #acacac;
   }
