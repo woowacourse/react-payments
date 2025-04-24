@@ -4,53 +4,8 @@ import useControlledExpireDate from "../components/AddCardForm/components/Expire
 import useControlledCVC from "../components/AddCardForm/components/CVC/hooks/useControlledCVC";
 import useControlledSelectedCardBrand from "../components/AddCardForm/components/CardBrand/hooks/useControlledSelectCardBrand";
 import useControlledPassword from "../components/AddCardForm/components/Password/hooks/useControlledPassword";
-
-export type FlowStep =
-  | "CARD_NUMBER"
-  | "CARD_BRAND"
-  | "EXPIRE_DATE"
-  | "CVC"
-  | "PASSWORD"
-  | "COMPLETE";
-
-export const STEP_ORDER: FlowStep[] = [
-  "CARD_NUMBER",
-  "CARD_BRAND",
-  "EXPIRE_DATE",
-  "CVC",
-  "PASSWORD",
-  "COMPLETE",
-];
-
-type Slices = {
-  card: ReturnType<typeof useControlledCardNumber>;
-  brand: ReturnType<typeof useControlledSelectedCardBrand>;
-  expire: ReturnType<typeof useControlledExpireDate>;
-  cvc: ReturnType<typeof useControlledCVC>;
-  password: ReturnType<typeof useControlledPassword>;
-};
-
-export const validators = [
-  ({ card }: Slices) =>
-    Object.values(card.cardNumberState).every(
-      ({ value, errorMessage }) => !errorMessage && value.length === 4
-    ),
-
-  ({ brand }: Slices) => {
-    return brand.selectedBrand != null;
-  },
-
-  ({ expire }: Slices) =>
-    Object.values(expire.expireDate).every(
-      ({ value, errorMessage }) => !errorMessage && value.length === 2
-    ),
-
-  ({ cvc }: Slices) =>
-    !cvc.CVCState.errorMessage && cvc.CVCState.value.length === 3,
-  ({ password }: Slices) =>
-    !password.passwordState.errorMessage &&
-    password.passwordState.value.length === 2,
-];
+import { STEP_ORDER } from "../constants";
+import { validators } from "../validation";
 
 const useCardRegistrationFlow = () => {
   const card = useControlledCardNumber();

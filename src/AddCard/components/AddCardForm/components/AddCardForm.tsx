@@ -1,14 +1,19 @@
-import styles from "./AddCardForm.module.css";
-import { FlowStep, STEP_ORDER } from "../../../hooks/useCardRegistrationFlow";
+import { useNavigate } from "react-router";
+
+import Button from "@/components/Button/Button";
 import CardInputBox from "./CardInputBox/CardInputBox";
 import CardNumberInputs from "./CardNumber/components/CardNumberInputs/CardNumberInputs";
 import CardBrandDropdown from "./CardBrand/components/CardBrandDropdown";
 import CardExpireDateInputs from "./ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
 import CVCInputs from "./CVC/components/CVCInputs";
 import PasswordInputs from "./Password/components/PasswordInputs";
-import { CardState, CardHandlers } from "../../../types/card";
-import Button from "@/components/Button/Button";
-import { useNavigate } from "react-router";
+
+import { STEP_ORDER } from "@/AddCard/constants";
+import type { FlowStep } from "@/AddCard/types/hook";
+import type { CardState, CardHandlers } from "@/AddCard/types/card";
+
+import styles from "./AddCardForm.module.css";
+
 interface AddCardFormProps {
   addCardState: CardState & CardHandlers;
   currentStep: FlowStep;
@@ -35,6 +40,7 @@ function AddCardForm({
 }: AddCardFormProps) {
   const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
+
   function handleAddCardButton() {
     navigate("/AddCardComplete", {
       state: {
