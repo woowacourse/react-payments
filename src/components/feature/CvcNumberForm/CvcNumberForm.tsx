@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import Input from "../Input/Input";
-import Text from "../Text/Text";
-import { CvcNumberStateType } from "../../types/CardInformationType";
-import useError from "../../hooks/useError";
-import cvcNumberSpec from "./CvcNumberSpec";
+import Input from "../../common/Input/Input";
+import Text from "../../common/Text/Text";
+import { CvcNumberStateType } from "../../../types/CardInformationType";
+import useError from "../../../hooks/useError";
+import cvcNumberSpec from "./cvcNumberSpec";
 
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
   const { error, errorMessage, validateInputType } = useError([false]);

@@ -1,20 +1,18 @@
 import { css } from "@emotion/react";
-import Input from "../Input/Input";
-import Text from "../Text/Text";
-import { ExpirationDateStateType } from "../../types/CardInformationType";
-import useError from "../../hooks/useError";
-import expirationDateSpec from "./ExpirationDateSpec";
+import Input from "../../common/Input/Input";
+import Text from "../../common/Text/Text";
+import { UniqueNumberStateType } from "../../../types/CardInformationType";
+import useError from "../../../hooks/useError";
+import uniqueNumberSpec from "./uniqueNumberSpec";
 
-const { title, description, inputFieldData } = expirationDateSpec;
-
-const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
-  const { error, errorMessage, validateInputType, validateMonth } = useError([false, false]);
+const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
+  const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
+  const { title, description, inputFieldData } = uniqueNumberSpec;
+  const { label, inputNumber, inputProps } = inputFieldData;
 
   const handleChange = (v: string, index: number) => {
     if (validateInputType(v, index)) {
-      if (index === 0) validateMonth(v);
-      dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
-      return;
+      dispatch({ type: "SET_UNIQUE_NUMBER", index, value: v });
     }
   };
 
@@ -26,23 +24,25 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
       </div>
 
       <div css={inputFieldStyle}>
-        <Text text={inputFieldData.label} size="12px" color="#0a0d13" weight={500} lineHeight="15px" />
+        <Text text={label} size="12px" color="#0a0d13" weight={500} lineHeight="15px" />
         <div css={inputWrapperStyle}>
-          {Array.from({ length: inputFieldData.inputNumber }).map((_, index: number) => {
-            const { placeholder, maxLength } = inputFieldData.inputProps;
-
+          {Array.from({ length: inputNumber }).map((_, index: number) => {
+            const { placeholder, maxLength } = inputProps;
             return (
               <Input
+                key={index}
                 placeholder={placeholder[index]}
-                value={expirationDateState[index]}
-                onChange={(v) => handleChange(v, index)}
+                value={uniqueNumberState[index]}
                 maxLength={maxLength}
+                onChange={(v) => handleChange(v, index)}
                 error={error[index]}
+                type={index > 1 ? "password" : "text"}
               />
             );
           })}
         </div>
-        <div css={errorTextWrapperStyle(error[0] || error[1])}>
+
+        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>
@@ -80,4 +80,4 @@ const FormSectionWrapperStyle = css`
   gap: 16px;
 `;
 
-export default ExpirationDateForm;
+export default UniqueNumberForm;

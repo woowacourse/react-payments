@@ -1,15 +1,23 @@
 import "./App.css";
 import { css } from "@emotion/react";
-import FormContainer from "./components/FormContainer/FormContainer.tsx";
 import useCardInformation from "./hooks/useCardInformation.tsx";
-import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
+import PreviewCard from "./components/feature/PreviewCard/PreviewCard.tsx";
+import UniqueNumberForm from "./components/feature/UniqueNumberForm/UniqueNumberForm.tsx";
+import ExpirationDateForm from "./components/feature/ExpirationDateForm/ExpirationDateForm.tsx";
+import CvcNumberForm from "./components/feature/CvcNumberForm/CvcNumberForm.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
+  const { uniqueNumber, expirationDate, cvcNumber } = cardState;
+
   return (
     <div css={AppStyle}>
       <PreviewCard uniqueNumber={cardState.uniqueNumber} expirationDate={cardState.expirationDate} />
-      <FormContainer cardState={cardState} dispatch={dispatch} />
+      <div css={FormContainerStyle}>
+        <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+        <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
+        <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
+      </div>
     </div>
   );
 }
@@ -23,6 +31,12 @@ const AppStyle = css`
   align-items: center;
   gap: 45px;
   border-radius: 20px;
+`;
+
+const FormContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 export default App;
