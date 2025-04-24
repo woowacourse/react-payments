@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react';
-import useCardInfo from '../hooks/useCardInfo';
-import CardPasswordForm from '../components/domain/CardPasswordForm';
+import CardPasswordForm from '../../../components/domain/CardPasswordForm';
+import useCardInfo from '../../../hooks/useCardInfo';
 
 const meta = {
-  title: 'CardPasswordForm',
+  title: 'Components/domain/CardPasswordForm',
   component: CardPasswordForm,
   tags: ['autodocs'],
 } satisfies Meta<typeof CardPasswordForm>;

@@ -1,10 +1,10 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
-import DropdownInput from '../components/common/DropdownInput';
-import { CARD_COMPANY_NAMES } from '../constants/setting';
+import DropdownInput from '../../../components/common/DropdownInput';
+import { CARD_COMPANY_NAMES } from '../../../constants/setting';
 
 const meta = {
-  title: 'DropdownInput',
+  title: 'Components/common/DropdownInput',
   component: DropdownInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof DropdownInput>;

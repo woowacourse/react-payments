@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react';
-import CardExpirationForm from '../components/domain/CardExpirationForm';
-import useCardInfo from '../hooks/useCardInfo';
+import CardExpirationForm from '../../../components/domain/CardExpirationForm';
+import useCardInfo from '../../../hooks/useCardInfo';
 
 const meta = {
-  title: 'CardExpirationForm',
+  title: 'Components/domain/CardExpirationForm',
   component: CardExpirationForm,
   tags: ['autodocs'],
 } satisfies Meta<typeof CardExpirationForm>;

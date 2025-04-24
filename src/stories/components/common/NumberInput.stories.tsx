@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react';
-import NumberInput from '../components/common/NumberInput';
 import { useState } from 'react';
+import NumberInput from '../../../components/common/NumberInput';
 
 const meta = {
-  title: 'NumberInput',
+  title: 'Components/common/NumberInput',
   component: NumberInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof NumberInput>;

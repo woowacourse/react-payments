@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BottomButton from '../components/domain/BottomButton';
-import { CONFIRM_BUTTON_LABEL } from '../constants/guide';
+import BottomButton from '../../../components/domain/BottomButton';
+import { CONFIRM_BUTTON_LABEL } from '../../../constants/guide';
 
 const meta = {
-  title: 'Bottom Button',
+  title: 'Components/domain/Bottom Button',
   component: BottomButton,
   tags: ['autodocs'],
 } satisfies Meta<typeof BottomButton>;

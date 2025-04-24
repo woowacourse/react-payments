@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react';
-import CardCVCForm from '../components/domain/CardCVCForm';
-import useCardInfo from '../hooks/useCardInfo';
+import CardCVCForm from '../../../components/domain/CardCVCForm';
+import useCardInfo from '../../../hooks/useCardInfo';
 
 const meta = {
-  title: 'CardCVCForm',
+  title: 'Components/domain/CardCVCForm',
   component: CardCVCForm,
   tags: ['autodocs'],
 } satisfies Meta<typeof CardCVCForm>;

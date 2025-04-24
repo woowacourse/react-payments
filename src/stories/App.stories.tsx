@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import App from '../App';
 import { MemoryRouter } from 'react-router-dom';
+import { ROUTER_PATH } from '../constants/setting';
 
 const meta = {
   title: 'App',
@@ -8,7 +9,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={[ROUTER_PATH.MAIN]}>
         <Story />
       </MemoryRouter>
     ),
