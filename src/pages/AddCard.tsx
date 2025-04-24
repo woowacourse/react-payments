@@ -90,6 +90,43 @@ const AddCard = () => {
     return filterErrorMessage[0];
   };
 
+  const isFormComplete = () => {
+    // 카드 번호 확인
+    const isCardNumberComplete =
+      cardInput.first !== null &&
+      cardInput.second !== null &&
+      cardInput.third !== null &&
+      cardInput.fourth !== null;
+
+    // 유효기간 확인
+    const isExpiryDateComplete = cardInput.MM !== null && cardInput.YY !== null;
+
+    // CVC 확인
+    const isCVCComplete = cardInput.CVC !== null;
+
+    // 카드사 선택 확인
+    const isCardBrandSelected =
+      cardInput.cardBrand !== undefined && cardInput.cardBrand !== null;
+
+    // 에러 메시지 없는지 확인
+    const hasNoErrors =
+      !errorMessages.first &&
+      !errorMessages.second &&
+      !errorMessages.third &&
+      !errorMessages.fourth &&
+      !errorMessages.MM &&
+      !errorMessages.YY &&
+      !errorMessages.CVC;
+
+    // 모든 조건이 충족되었는지 확인
+    return (
+      isCardNumberComplete &&
+      isExpiryDateComplete &&
+      isCVCComplete &&
+      isCardBrandSelected &&
+      hasNoErrors
+    );
+  };
   return (
     <>
       <Wrap>
@@ -138,7 +175,7 @@ const AddCard = () => {
           />
         </Form>
       </Wrap>
-      <SubmitButton />
+      {isFormComplete() && <SubmitButton />}
     </>
   );
 };
