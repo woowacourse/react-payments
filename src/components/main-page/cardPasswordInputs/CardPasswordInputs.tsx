@@ -29,7 +29,7 @@ const getErrorMessage = (password: string) => {
   return NO_ERROR;
 };
 
-function CardPasswordInputs({ password, changePassword, handleOpenButton }: CardPasswordSectionProps) {
+function CardPasswordInputs({ password, changePassword }: CardPasswordSectionProps) {
   const errorMessage = getErrorMessage(password);
 
   return (
@@ -40,12 +40,6 @@ function CardPasswordInputs({ password, changePassword, handleOpenButton }: Card
           value={password}
           onChange={(e) => {
             changePassword(e.target.value);
-
-            const isComplete = e.target.value.length === PASSWORD_NUMBER_LENGTH;
-
-            if (isComplete) {
-              handleOpenButton();
-            }
           }}
           isError={isCardPasswordInvalid(password)}
           isPassword={true}

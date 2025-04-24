@@ -14,6 +14,5 @@ export const Default: Story = {
   args: {
     password: '12',
     changePassword: () => alert('변경'),
-    handleOpenButton: () => alert('변경'),
   },
 };
