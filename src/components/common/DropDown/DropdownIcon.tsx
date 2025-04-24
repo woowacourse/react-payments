@@ -17,9 +17,9 @@ function DropdownIcon({ toggleOpen }: DropdownIconProps) {
         <path
           d="M1.04019 0.729874L4.86012 4.5498L8.68005 0.729874"
           stroke={toggleOpen ? 'black' : 'gray'}
-          stroke-width="1.32867"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.32867"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </DropdownIconWrapper>
