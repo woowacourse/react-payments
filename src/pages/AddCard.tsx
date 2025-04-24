@@ -15,6 +15,7 @@ import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
 import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
 import { CVCInput } from '../component/cardDetails/CVCInput';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
+import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 
 const Wrap = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const AddCard = () => {
     MM: '',
     YY: '',
     CVC: '',
+    cardBrand: '',
   });
 
   const handleErrorMessages = (
@@ -91,8 +93,18 @@ const AddCard = () => {
         cardType={
           cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'
         }
+        cardColor={cardInput.cardBrand}
       />
       <Form>
+        <CardBrandSelect
+          setCardInput={setCardInput}
+          onColorChange={color => {
+            setCardInput(prev => ({
+              ...prev,
+              cardBrand: color,
+            }));
+          }}
+        />
         <CardNumberInput
           cardInput={cardInput}
           setCardInput={setCardInput}

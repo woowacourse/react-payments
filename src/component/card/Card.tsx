@@ -6,13 +6,15 @@ import { maskingNumber } from './util/maskingNumber';
 interface CardProps {
   cardNumber: CardInputProps | null;
   cardType: 'visa' | 'mastercard' | 'default';
+  cardColor?: string;
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ $cardColor?: string }>`
   box-sizing: border-box;
   width: 212px;
   height: 132px;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ $cardColor, theme }) =>
+    $cardColor || theme.colors.black};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.1);
   padding: 8px 12px;
@@ -57,9 +59,9 @@ const CardNumberContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-const Card = ({ cardNumber, cardType }: CardProps) => {
+const Card = ({ cardNumber, cardType, cardColor }: CardProps) => {
   return (
-    <CardContainer>
+    <CardContainer $cardColor={cardColor}>
       <ChipContainer>
         <CardGoldChip />
         <CardBrandLogo src={cardBrandLogo[cardType]} />
