@@ -17,6 +17,6 @@ export const getColorByCardIssuer = (cardType: string) => {
     case '국민카드':
       return '#6A6056';
     default:
-      return 'white';
+      return '#333333';
   }
 };
