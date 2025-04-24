@@ -5,6 +5,7 @@ export const CARD_NUMBER = {
 };
 
 export const EXPIRATION_DATE = {
+  FIELDS_COUNT: 2,
   MAX_LENGTH: 2,
   PLACEHOLDER: ['MM', 'YY'],
 };

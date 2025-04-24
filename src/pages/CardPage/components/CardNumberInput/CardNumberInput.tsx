@@ -5,6 +5,7 @@ import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
 import { checkInputValidation } from '../../../../validators/checkInputValidator';
 import { CARD_NUMBER } from '../../../../constants/settings';
+import useInputRef from '../../../../hooks/useInputRef';
 
 type CardNumberInputProps = {
   values: string[];
@@ -19,6 +20,7 @@ const CardNumberInput = ({
   onComplete,
   onValidityChange,
 }: CardNumberInputProps) => {
+  const { setInputRef, focusNextInput } = useInputRef(CARD_NUMBER.FIELDS_COUNT);
   const { isErrorStates, errorMessage, validate, validateAll } = useInputValidation(
     Array.from({ length: CARD_NUMBER.FIELDS_COUNT }, () => false),
     (value) => checkInputValidation(value, CARD_NUMBER.MAX_LENGTH)
@@ -40,6 +42,10 @@ const CardNumberInput = ({
     if (onComplete && isValid) {
       onComplete();
     }
+
+    if (value.length === CARD_NUMBER.MAX_LENGTH) {
+      focusNextInput(idx);
+    }
   };
 
   return (
@@ -55,6 +61,7 @@ const CardNumberInput = ({
             placeholder={CARD_NUMBER.PLACEHOLDER}
             isError={isErrorStates[idx]}
             id={`number-card-${idx}`}
+            ref={(el) => setInputRef(el, idx)}
           />
         ))}
       </StyledInputWrapper>

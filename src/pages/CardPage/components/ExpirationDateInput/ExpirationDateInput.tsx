@@ -4,6 +4,7 @@ import HelperText from '../../../../components/HelperText/HelperText';
 import { HandleInputParams } from '../../CardPage';
 import { EXPIRATION_DATE } from '../../../../constants/settings';
 import useExpirationDateValidation from '../../../../hooks/useExpirationDateValidation';
+import useInputRef from '../../../../hooks/useInputRef';
 
 type ExpirationDateInputProps = {
   values: string[];
@@ -18,6 +19,7 @@ const ExpirationDateInput = ({
   onComplete,
   onValidityChange,
 }: ExpirationDateInputProps) => {
+  const { setInputRef, focusNextInput } = useInputRef(EXPIRATION_DATE.FIELDS_COUNT);
   const { isErrorStates, errorMessage, checkValidExpirationDate, validateAll } =
     useExpirationDateValidation(values);
 
@@ -37,6 +39,10 @@ const ExpirationDateInput = ({
     if (onComplete && isValid) {
       onComplete();
     }
+
+    if (value.length === EXPIRATION_DATE.MAX_LENGTH) {
+      focusNextInput(idx);
+    }
   };
 
   return (
@@ -52,6 +58,7 @@ const ExpirationDateInput = ({
             placeholder={EXPIRATION_DATE.PLACEHOLDER[idx]}
             isError={isErrorStates[idx]}
             id={`expiration-date-${idx}`}
+            ref={(el) => setInputRef(el, idx)}
           />
         ))}
       </StyledInputWrapper>
