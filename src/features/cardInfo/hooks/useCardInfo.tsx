@@ -42,12 +42,6 @@ export default function useCardInfo() {
     cardPasswordError: { errorIndex: NO_ERROR, errorMessage: '' },
   });
 
-  console.log('cardNumber', cardNumber);
-  console.log('cardExpirationDate', cardExpirationDate);
-  console.log('cardCVC', cardCVC);
-  console.log('cardIssuer', cardIssuer);
-  console.log('cardPassword', cardPassword);
-
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
