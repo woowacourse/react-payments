@@ -1,9 +1,11 @@
 import type { Meta } from '@storybook/react';
 
+import { CardBrandSelectForm } from '@/components/features/CardFormFiled/CardBrandSelectForm';
 import { CardNumberForm } from '@/components/features/CardFormFiled/CardNumberForm';
 import { CardPasswordForm } from '@/components/features/CardFormFiled/CardPasswordForm';
 import { CVCForm } from '@/components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from '@/components/features/CardFormFiled/ExpireDateForm';
+import { useBrandSelectInput } from '@/hooks/useBrandSelectInput';
 import { useCardInput } from '@/hooks/useCardInput';
 import { useExpireDateInput } from '@/hooks/useExpireDateInput';
 
@@ -70,6 +72,19 @@ export const CardPasswordFormStory = () => {
       errorMessage={errorMessage}
       onCardInputChange={handleChange}
       onCardInputBlur={handleBlur}
+    />
+  );
+};
+
+export const CardBrandFormStory = () => {
+  const { isOpen, selectedItem, handleItemClick, handleToggle } = useBrandSelectInput();
+
+  return (
+    <CardBrandSelectForm
+      isOpen={isOpen}
+      selectedItem={selectedItem}
+      onBrandItemClick={handleItemClick}
+      onToggle={handleToggle}
     />
   );
 };
