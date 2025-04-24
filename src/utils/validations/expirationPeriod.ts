@@ -5,6 +5,8 @@ import {
 import { isPositiveInteger } from "./common";
 
 const validateMonth = (value: string) => {
+  if (value.length !== 2) return "유효한 날짜를 입력해 주세요";
+
   const monthNumber = parseInt(value, 10);
   if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
     return "유효한 날짜를 입력해 주세요";
