@@ -7,6 +7,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { CARD_STEP, CARD_STEPS } from './constants';
 import { AddCardFormProps } from './types';
 import Button from './components/Button/Button';
+import { useNavigate } from 'react-router';
 
 export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
   const {
@@ -104,6 +105,8 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     isCardExpirationDateError &&
     isCardCVCNumberError &&
     isCardPasswordError && <Button>확인</Button>;
+
+  const navigate = useNavigate();
   return (
     <form
       style={{
@@ -113,6 +116,15 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
         padding: '0 32px',
         height: 'calc(100vh - 392px)',
         overflowY: 'auto',
+      }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        navigate('/complete', {
+          state: {
+            cardNumber,
+            cardBrandTypeState,
+          },
+        });
       }}
     >
       {renderContents}

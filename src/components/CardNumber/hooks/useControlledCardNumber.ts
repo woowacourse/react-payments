@@ -22,6 +22,10 @@ export const useControlledCardNumber = () => {
       return ERROR_MESSAGE.onlyNumber;
     }
 
+    if (value.length < 4) {
+      return '4자리 숫자를 입력해 주세요';
+    }
+
     return '';
   };
 
