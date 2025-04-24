@@ -15,7 +15,6 @@ export const Default: Story = {
     width: "100%",
     onChange: () => alert("Input changed"),
     value: "string",
-    isError: false,
     options: [
       { value: "", label: "카드사를 선택해주세요" },
       { value: "비자", label: "비자" },

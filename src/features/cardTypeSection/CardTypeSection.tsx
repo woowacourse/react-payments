@@ -36,7 +36,6 @@ export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
         subTitle="현재 국내 카드사만 가능합니다."
       />
       <Select
-        isError={false}
         onChange={(e) => cardType.changeValues("cardType", e.target.value)}
         value={cardType.values.cardType}
         width="100%"

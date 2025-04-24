@@ -5,7 +5,6 @@ type SelectProps = ComponentProps<"select"> & {
   options: Array<{ value: string; label: string; default?: boolean }>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string;
-  isError: boolean;
   width?: string;
 };
 

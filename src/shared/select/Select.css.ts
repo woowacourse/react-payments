@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const StyledSelect = styled.select<{ width?: string; isError: boolean }>`
+export const StyledSelect = styled.select<{ width?: string }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
-  border: 1.015px solid ${(props) => (props.isError ? "red" : "#acacac")};
+  border: 1.015px solid "#acacac";
   padding: 16px;
 
   &::-webkit-outer-spin-button {
