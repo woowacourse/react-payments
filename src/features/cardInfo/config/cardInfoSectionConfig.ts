@@ -3,6 +3,7 @@ import {
   cardExpirationDateValidator,
   cardCVCValidator,
 } from '../../../entities/cardInfo/model/cardInfoValidator';
+import { ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
 
 type InputConfig = {
   type: string;
@@ -35,7 +36,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     ],
     maxLength: 4,
     validator: cardNumberValidator,
-    errorKey: 'cardNumberError',
+    errorKey: ErrorKey.CARD_NUMBER,
   },
   {
     id: 'cardExpirationDate',
@@ -48,7 +49,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     ],
     maxLength: 2,
     validator: cardExpirationDateValidator,
-    errorKey: 'cardExpirationDateError',
+    errorKey: ErrorKey.CARD_EXPIRATION_DATE,
   },
   {
     id: 'cardCVC',
@@ -58,6 +59,6 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     inputArr: [{ type: 'text', placeholder: '123', name: 'cardCVC' }],
     maxLength: 3,
     validator: cardCVCValidator,
-    errorKey: 'cardCVCError',
+    errorKey: ErrorKey.CARD_CVC,
   },
 ];

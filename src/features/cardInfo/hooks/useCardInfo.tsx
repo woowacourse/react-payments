@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 import { cardInfoSectionConfig } from '../config/cardInfoSectionConfig';
+import { NO_ERROR, ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -11,9 +12,9 @@ export default function useCardInfo() {
   });
 
   const [error, setError] = useState<InputValidationResultProps>({
-    cardNumberError: [-1, ''],
-    cardExpirationDateError: [-1, ''],
-    cardCVCError: [-1, ''],
+    [ErrorKey.CARD_NUMBER]: NO_ERROR,
+    [ErrorKey.CARD_EXPIRATION_DATE]: NO_ERROR,
+    [ErrorKey.CARD_CVC]: NO_ERROR,
   });
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +66,7 @@ const validateAndSetError = (id: string, value: any, setError: any) => {
     (prevError: any) =>
       ({
         ...prevError,
-        [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
+        [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : NO_ERROR,
       }) as InputValidationResultProps,
   );
 };
