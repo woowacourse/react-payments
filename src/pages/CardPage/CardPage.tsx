@@ -10,6 +10,7 @@ import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Dropdown from '../../components/Dropdown/Dropdown';
 import { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -42,8 +43,14 @@ const CardPage = () => {
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   const handleCardCompanySelect = (value: string) => {
     setCardCompany(value);
+  };
+
+  const navigateToSuccessPage = () => {
+    navigate(`/registered?cardNumber=${cardNumber[0]}&cardCompany=${cardCompany}`);
   };
 
   useEffect(() => {
@@ -88,7 +95,7 @@ const CardPage = () => {
         onChange={handleCardNumberInput}
         onValidChange={setCardNumberValid}
       />
-      {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK}></Button>}
+      {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK} onClick={navigateToSuccessPage}></Button>}
     </StyledCardPage>
   );
 };
