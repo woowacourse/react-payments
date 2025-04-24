@@ -1,0 +1,17 @@
+.select {
+  width: 100%;
+  height: 32px;
+  border: var(--color-input) 1px solid;
+  border-radius: 4px;
+}
+
+.select::placeholder {
+  color: var(--color-input);
+}
+
+.select:focus {
+  outline-color: var(--color-black) 1px solid;
+}
+.select.error {
+  outline: 1px solid var(--color-error);
+}
