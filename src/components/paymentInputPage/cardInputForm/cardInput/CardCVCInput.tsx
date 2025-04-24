@@ -1,16 +1,20 @@
-import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
 
 export interface CardCVCInputProps {
+  cardCVC: string;
+  setCardCVC: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardCVCInput({ isValid, setIsValid }: CardCVCInputProps) {
-  const [cardCVC, setCardCVC] = useState('');
-
+function CardCVCInput({
+  cardCVC,
+  setCardCVC,
+  isValid,
+  setIsValid,
+}: CardCVCInputProps) {
   function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
     const value = target.value;

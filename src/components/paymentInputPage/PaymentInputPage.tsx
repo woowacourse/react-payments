@@ -15,6 +15,7 @@ function PaymentInputPage() {
     month: '',
     year: '',
   });
+  const [cardCVC, setCardCVC] = useState('');
 
   return (
     <section className={styles.section}>
@@ -25,12 +26,14 @@ function PaymentInputPage() {
           expirationDate={expirationDate}
         />
         <CardInputForm
+          cardCVC={cardCVC}
           cardIssuer={cardIssuer}
           cardNumbers={cardNumbers}
           expirationDate={expirationDate}
           setCardIssuer={setCardIssuer}
           setCardNumbers={setCardNumbers}
           setExpirationDate={setExpirationDate}
+          setCardCVC={setCardCVC}
         />
       </div>
     </section>
