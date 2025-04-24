@@ -17,6 +17,7 @@ function CardPasswordInput({
       <Label htmlFor="card-owner-input">비밀번호 앞 2자리</Label>
       <Input
         autoFocus={true}
+        role="card-password-input"
         id="card-password-input"
         type="password"
         inputMode="numeric"
@@ -28,7 +29,7 @@ function CardPasswordInput({
         onChange={(e) => handleCardPasswordChange(e.target.value)}
       />
       {cardPasswordState.errorMessage && (
-        <span className={styles.errorMessage}>
+        <span id="error-message" className={styles.errorMessage}>
           {cardPasswordState.errorMessage}
         </span>
       )}
