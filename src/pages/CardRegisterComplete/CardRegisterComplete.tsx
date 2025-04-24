@@ -1,11 +1,25 @@
+import styles from "./CardRegisterComplete.module.css";
+import { useCardContext } from "../../contexts/CardContext";
+import { CARD_COMPANIES } from "../../components/CardCompanySelect/CardCompanySelect";
+
 const CardRegisterComplete = () => {
-    return (
-      <div>
-        <h2>🎉 카드가 등록되었습니다!</h2>
-        <p>이제 결제를 진행하실 수 있어요.</p>
-      </div>
-    );
-  };
-  
-  export default CardRegisterComplete;
-  
+  const { cardNumbers, cardColor } = useCardContext();
+  const selectedCompany = CARD_COMPANIES.find(
+    (company) => company.color === cardColor
+  )?.name;
+
+  return (
+    <div className={styles.wrapper}>
+      <img
+        src="../../complete.png"
+        alt="완료 아이콘"
+        className={styles.completeIcon}
+      />
+      <h2 className={styles.registerCardText}>{`${cardNumbers[0]}로 시작하는`} <br/> {`${selectedCompany}가 등록되었어요.`}</h2>
+      {/* <RegisterCardButton /> */}
+      {/* <button>확인</button> */}
+    </div>
+  );
+};
+
+export default CardRegisterComplete;

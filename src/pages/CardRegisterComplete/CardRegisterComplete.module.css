@@ -1,0 +1,17 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.completeIcon {
+  width: 70px;
+}
+
+.registerCardText {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

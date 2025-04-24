@@ -3,7 +3,7 @@ import styles from "./CardCompanySelect.module.css";
 import InputContainer from "../InputContainer/InputContainer";
 import { useCardContext } from "../../contexts/CardContext";
 
-const CARD_COMPANIES = [
+export const CARD_COMPANIES = [
   { name: "BC카드", color: "#F04651" },
   { name: "신한카드", color: "#0046FF" },
   { name: "카카오뱅크", color: "#FFE600" },
