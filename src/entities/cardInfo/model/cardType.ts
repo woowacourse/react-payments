@@ -2,7 +2,7 @@ import { CARD_IMAGE_PATH } from '../../../shared/assets/constants/cardImagePaths
 import { CARD_TYPE_RULE, CardType } from '../constants/cardTypeConstants';
 
 const getCardType = (cardNumber: string) => {
-  const first = cardNumber[0];
+  const first = Number(cardNumber[0]);
   const second = Number(cardNumber[1]);
 
   if (first === CARD_TYPE_RULE.VISA.FIRST_DIGIT) return CardType.VISA;
