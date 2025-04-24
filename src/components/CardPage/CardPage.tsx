@@ -9,6 +9,7 @@ import useInputArrayState from '../../hooks/useInputArrayState';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import Dropdown from '../Dropdown/Dropdown';
 import { useEffect, useState } from 'react';
+import Button from '../Button/Button';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -86,7 +87,7 @@ const CardPage = () => {
         onChange={handleCardNumberInput}
         onValidChange={setCardNumberValid}
       />
-      {isFormValid && <button>확인</button>}
+      {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK}></Button>}
     </StyledCardPage>
   );
 };

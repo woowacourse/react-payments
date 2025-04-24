@@ -12,4 +12,6 @@ export const CARD_PAGE_TEXT = {
 
   PASSWORD_TITLE: '비밀번호를 입력해 주세요',
   PASSWORD_SUBTITLE: '앞의 2자리를 입력해 주세요',
+
+  CHECK: '확인',
 };
