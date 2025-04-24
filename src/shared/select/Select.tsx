@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 import { StyledSelect, StyledOption } from "./Select.css";
 
 type SelectProps = ComponentProps<"select"> & {
-  options: Array<{ value: string; label: string }>;
+  options: Array<{ value: string; label: string; default?: boolean }>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string;
   isError: boolean;
@@ -13,7 +13,11 @@ export default function Select(props: SelectProps) {
   return (
     <StyledSelect {...props}>
       {props.options.map((option) => (
-        <StyledOption key={option.value} value={option.value}>
+        <StyledOption
+          key={option.value}
+          value={option.value}
+          disabled={option.default}
+        >
           {option.label}
         </StyledOption>
       ))}
