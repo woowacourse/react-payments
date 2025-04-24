@@ -153,7 +153,7 @@ export default function RegisterPage() {
         {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
 
         {currentStep === 6 && (
-          <Button type="submit" isFixed variant="black">
+          <Button type="submit" isFixed>
             확인
           </Button>
         )}
