@@ -30,3 +30,10 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const Fixed: Story = {
+  args: {
+    children: '결제하기',
+    isFixed: true,
+  },
+};

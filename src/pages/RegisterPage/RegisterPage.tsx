@@ -174,7 +174,11 @@ export default function RegisterPage() {
 
         {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
 
-        {currentStep === 6 && isPasswordValid && <Button type="submit">확인</Button>}
+        {currentStep === 6 && isPasswordValid && (
+          <Button type="submit" isFixed variant="black">
+            확인
+          </Button>
+        )}
       </S.CardInfoForm>
     </S.Wrapper>
   );
