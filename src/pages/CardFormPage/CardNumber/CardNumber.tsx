@@ -3,6 +3,7 @@ import styles from "./CardNumber.module.css";
 import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
 import Text from "../../../components/Text/Text";
+import { useRef } from "react";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;
@@ -21,6 +22,15 @@ export default function CardNumber({
   cardNumbers,
   errorMessage,
 }: CardNumberProps) {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const handleInputChange = (value: string, index: number) => {
+    handleChange(value, index);
+    if (value.length === 4 && index < CARD_NUMBER_FIELDS.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
   const firstError =
     CARD_NUMBER_FIELDS.map(
       (_, idx) => errorMessage[indexToCardNumberKey(idx)]
@@ -34,10 +44,13 @@ export default function CardNumber({
       <div className={styles["card-number__input"]}>
         {CARD_NUMBER_FIELDS.map((key, idx) => (
           <Input
+            ref={(el) => {
+              inputRefs.current[idx] = el!;
+            }}
             key={key}
             value={cardNumbers[key]}
             errorMessage={errorMessage[key]}
-            onChange={(value) => handleChange(value, idx)}
+            onChange={(value) => handleInputChange(value, idx)}
           />
         ))}
       </div>
