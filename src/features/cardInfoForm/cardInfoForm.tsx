@@ -106,7 +106,7 @@ export default function CardInfoForm({
   });
 
   return (
-    <>
+    <form>
       {step >= 4 && (
         <CardPasswordSection
           password={password}
@@ -131,12 +131,6 @@ export default function CardInfoForm({
         />
       )}
       {canSubmit && <CardSubmitButton />}
-    </>
+    </form>
   );
 }
-
-// step을 바꾸는 조건
-/*
-1. 해당 섹션의 input에 모든 값이 채워져 있다.
-2. 해당 섹션에 에러가 없다.
-*/
