@@ -20,12 +20,12 @@ const ExpirationDateInput = ({
   onValidityChange,
 }: ExpirationDateInputProps) => {
   const { setInputRef, focusNextInput } = useInputRef(EXPIRATION_DATE.FIELDS_COUNT);
-  const { isErrorStates, errorMessage, checkValidExpirationDate, validateAll } =
+  const { isErrorStates, errorMessage, validate, validateAll } =
     useExpirationDateValidation(values);
 
   const handleChange = ({ value, idx }: { value: string; idx: number }) => {
     onChange({ value, idx });
-    checkValidExpirationDate({ value, idx });
+    validate({ value, idx });
 
     const updatedValues = [...values];
     updatedValues[idx] = value;

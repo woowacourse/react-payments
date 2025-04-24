@@ -12,7 +12,7 @@ function useExpirationDateValidation(values: string[]) {
   const [isErrorStates, setIsErrorStates] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const checkValidExpirationDate = ({ value, idx }: HandleInputParams) => {
+  const validate = ({ value, idx }: HandleInputParams) => {
     try {
       checkNumber(value);
 
@@ -84,7 +84,7 @@ function useExpirationDateValidation(values: string[]) {
   return {
     isErrorStates,
     errorMessage,
-    checkValidExpirationDate,
+    validate,
     validateAll,
   };
 }
