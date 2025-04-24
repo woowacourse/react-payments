@@ -6,6 +6,7 @@ import CardExpirationSection from './components/CardExpirationSection/CardExpira
 import CardPreview from './components/CardPreview/CardPreview';
 import CvcSection from './components/CvcSection/CvcSection';
 import { CardLogo, CardNumber, Expiration } from './types/card';
+import CardCompanySection from './components/CardCompanySection/CardCompanySection';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
@@ -17,6 +18,7 @@ export default function App() {
     <div className={styles.appContainer}>
       <CardPreview numbers={cardNumbers} cardLogo={cardLogo} expiration={expiration} />
       <CardNumberSection cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} setCardLogo={setCardLogo} />
+      <CardCompanySection />
       <CardExpirationSection expiration={expiration} setExpiration={setExpiration} />
       <CvcSection cvc={cvc} setCvc={setCvc} />
     </div>

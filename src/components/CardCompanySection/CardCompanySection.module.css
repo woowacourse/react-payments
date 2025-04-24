@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldGroup {
+  height: 77px;
+}
+
+.selectWrapper {
+  display: absolute;
+}
+
+.select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border: 1px solid var(--color-black);
+}
+
+.select option {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.icon {
+  width: 15.28px;
+  height: 15.28px;
+  position: relative;
+  bottom: 28px;
+  left: 290px;
+  color: var(--color-gray-10);
+}
