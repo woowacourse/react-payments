@@ -11,6 +11,7 @@ const meta = {
   component: CardExpireDateInputs,
   args: {
     expireDate: INITIAL_EXPIRE_DATE_STATE,
+    expireDateInputRefs: { MM: { current: null }, YY: { current: null } },
     handleExpireYearChange: () => {},
     handleExpireMonthBlur: () => {},
     handleExpireMonthChange: () => {},
@@ -37,6 +38,7 @@ export const WithValidationTest: Story = {
   render: () => {
     const {
       expireDate,
+      expireDateInputRefs,
       handleExpireYearChange,
       handleExpireMonthChange,
       handleExpireMonthBlur,
@@ -45,6 +47,7 @@ export const WithValidationTest: Story = {
     return (
       <CardExpireDateInputs
         expireDate={expireDate}
+        expireDateInputRefs={expireDateInputRefs}
         handleExpireYearChange={handleExpireYearChange}
         handleExpireMonthChange={handleExpireMonthChange}
         handleExpireMonthBlur={handleExpireMonthBlur}
