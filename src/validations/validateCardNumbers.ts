@@ -1,7 +1,9 @@
+import { ValidateReturnType } from './validate.types';
+
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
 import { CardInputTypeOptions } from '@/hooks/useCardInput';
 
-export const validateCardNumbers = (value: string, type: CardFormFiledType) => {
+export const validateCardNumbers = (value: string, type: CardFormFiledType): ValidateReturnType => {
   const cardNumberRegex = new RegExp(`^\\d{${CardInputTypeOptions[type].valueLength}}$`);
 
   if (!cardNumberRegex.test(value)) {
@@ -11,5 +13,5 @@ export const validateCardNumbers = (value: string, type: CardFormFiledType) => {
     };
   }
 
-  return { isValid: true, errorMessage: '' };
+  return { isValid: true, errorMessage: null };
 };

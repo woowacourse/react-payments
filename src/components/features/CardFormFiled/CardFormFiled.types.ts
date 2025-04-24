@@ -1,7 +1,7 @@
 import { ExpireDateInputKey } from '@/hooks/useExpireDateInput';
 
 export type CardFormFiledProps = {
-  errorMessage?: string;
+  errorMessage: string | null;
   onCardInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   onCardInputBlur: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 };

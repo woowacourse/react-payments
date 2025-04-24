@@ -1,14 +1,8 @@
+import { ValidateReturnType } from './validate.types';
+
 import { ExpireDateInputKey } from '@/hooks/useExpireDateInput';
 
-type ValidateExpireDateReturnType = {
-  isValid: boolean;
-  errorMessage: string;
-};
-
-export const validateExpireDate = (
-  value: string,
-  key: ExpireDateInputKey
-): ValidateExpireDateReturnType => {
+export const validateExpireDate = (value: string, key: ExpireDateInputKey): ValidateReturnType => {
   const expireDateRegex = new RegExp(`^\\d{2}$`);
   const currentYear = new Date().getFullYear().toString().slice(-2);
 
@@ -30,5 +24,5 @@ export const validateExpireDate = (
     };
   }
 
-  return { isValid: true, errorMessage: '' };
+  return { isValid: true, errorMessage: null };
 };
