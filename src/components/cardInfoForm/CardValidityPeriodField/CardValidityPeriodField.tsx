@@ -30,7 +30,7 @@ function CardValidityPeriodField({
 
   return (
     <div>
-      <Label htmlFor={`cardValidityPeriod-${month}`} id="cardValidityPeriod">
+      <Label htmlFor="cardValidityPeriod-month" id="cardValidityPeriod">
         유효기간
       </Label>
       <InputWrapper>
@@ -38,7 +38,7 @@ function CardValidityPeriodField({
           isError={isErrorMonth}
           type="tel"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${month}`}
+          id="cardValidityPeriod-month"
           value={month}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'month')}
@@ -50,7 +50,7 @@ function CardValidityPeriodField({
           isError={isErrorYear}
           type="tel"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${year}`}
+          id="cardValidityPeriod-year"
           value={year}
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'year')}
