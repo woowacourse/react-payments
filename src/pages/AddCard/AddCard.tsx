@@ -53,29 +53,6 @@ export default function AddCard() {
         isCardPasswordNextStep={isCardPasswordNextStep}
         handleCardPasswordInputChange={handleCardPasswordInputChange}
       />
-      {/* <S.CardInfoForm>
-        <CardNumber
-          cardNumber={cardNumber}
-          cardNumberErrorMessage={cardNumberErrorMessage}
-          handleCardNumberInputChange={handleCardNumberInputChange}
-        />
-        <CardBrand CardBrandType={cardBrandType} handleDropdownChange={handleDropdownChange} />
-        <CardExpirationDate
-          cardExpirationDate={cardExpirationDate}
-          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-          handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
-        />
-        <CardCVCNumber
-          cardCVCNumber={cardCVCNumber}
-          cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-          handleCardCVCNumberInputChange={handleCardCVCNumberInputChange}
-        />
-        <CardPasswordNumber
-          CardPassword={cardPassword}
-          cardPasswordErrorMessage={cardPasswordErrorMessage}
-          handleCardPasswordInputChange={handleCardPasswordInputChange}
-        />
-      </S.CardInfoForm> */}
     </S.Wrapper>
   );
 }
