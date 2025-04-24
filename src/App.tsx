@@ -10,7 +10,7 @@ function App() {
   return (
     <S.AppContainer>
       <S.CardContainer>
-        <Preview cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
+        <Preview cardIssuer={cardIssuer} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
         <CardInfoContainer
           cardNumber={cardNumber}
           cardExpirationDate={cardExpirationDate}
