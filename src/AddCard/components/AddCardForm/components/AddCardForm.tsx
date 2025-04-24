@@ -46,6 +46,7 @@ function AddCardForm({
   const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
   const {
+    firstCardNumberInputRef,
     brandDropdownRef,
     expireMonthInputRef,
     cvcInputRef,
@@ -69,6 +70,7 @@ function AddCardForm({
         guideText="본인 명의의 카드만 결제 가능합니다."
         InputComponents={
           <CardNumberInputs
+            ref={firstCardNumberInputRef}
             cardNumberState={cardNumberState}
             handleCardNumberChange={handleCardNumberChange}
           />

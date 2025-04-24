@@ -3,6 +3,7 @@ import { STEP_ORDER } from "@/AddCard/constants";
 import type { FlowStep } from "@/AddCard/types/hook";
 
 interface FocusRefs {
+  firstCardNumberInputRef: React.RefObject<HTMLInputElement | null>;
   brandDropdownRef: React.RefObject<HTMLSelectElement | null>;
   expireMonthInputRef: React.RefObject<HTMLInputElement | null>;
   cvcInputRef: React.RefObject<HTMLInputElement | null>;
@@ -14,6 +15,7 @@ export function useFocusControl(
   currentStep: FlowStep,
   allValid: boolean
 ): FocusRefs {
+  const firstCardNumberInputRef = useRef<HTMLInputElement>(null);
   const brandDropdownRef = useRef<HTMLSelectElement>(null);
   const expireMonthInputRef = useRef<HTMLInputElement>(null);
   const cvcInputRef = useRef<HTMLInputElement>(null);
@@ -24,7 +26,9 @@ export function useFocusControl(
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (currentIndex === 1) {
+      if (currentIndex === 0) {
+        firstCardNumberInputRef.current?.focus();
+      } else if (currentIndex === 1) {
         brandDropdownRef.current?.focus();
       } else if (currentIndex === 2) {
         expireMonthInputRef.current?.focus();
@@ -41,6 +45,7 @@ export function useFocusControl(
   }, [currentIndex, allValid]);
 
   return {
+    firstCardNumberInputRef,
     brandDropdownRef,
     expireMonthInputRef,
     cvcInputRef,
