@@ -3,9 +3,13 @@ import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
 
-function CardCVCInput() {
+export interface CardCVCInputProps {
+  isValid: boolean;
+  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CardCVCInput({ isValid, setIsValid }: CardCVCInputProps) {
   const [cardCVC, setCardCVC] = useState('');
-  const [isValid, setIsValid] = useState(true);
 
   function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
