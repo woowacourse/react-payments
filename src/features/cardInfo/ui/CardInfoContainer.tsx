@@ -14,7 +14,6 @@ const CardInfoWrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   margin: 45px 0;
-  margin-bottom: 80px;
 `;
 
 export default function CardInfoContainer({

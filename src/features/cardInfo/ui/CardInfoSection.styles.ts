@@ -46,5 +46,6 @@ export const CardInfoError = styled.span`
 
 export const CardSelection = styled.select`
   width: 100%;
+  max-width: 100%;
   padding: 8px;
 `;
