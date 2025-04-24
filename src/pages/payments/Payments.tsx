@@ -53,11 +53,14 @@ function Payments() {
           cardType={cardType}
           cardIssuer={cardIssuer}
         />
-        {step >= 4 && (
+        {step >= 1 && (
           <InputSection title="CVC 번호를 입력해 주세요">
             <CVCInputField
               inputValue={CVCInputValue}
               setInputValue={setCVCInputValue}
+              onComplete={() => {
+                if (step === 3) setStep(4);
+              }}
             />
           </InputSection>
         )}
