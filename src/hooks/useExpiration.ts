@@ -8,7 +8,7 @@ const useExpiration = () => {
     const errorMessage = getErrorMessage(field, value);
 
     if (field === 'month' && value.length === 2) {
-      ref.year.current?.focus();
+      inputRef.year.current?.focus();
     }
 
     setExpiration((prev) => ({
@@ -17,9 +17,9 @@ const useExpiration = () => {
     }));
   };
 
-  const ref = { month: useRef<HTMLInputElement>(null), year: useRef<HTMLInputElement>(null) };
+  const inputRef = { month: useRef<HTMLInputElement>(null), year: useRef<HTMLInputElement>(null) };
 
-  return { expiration, handleExpirationChange, ref };
+  return { expiration, handleExpirationChange, inputRef };
 };
 
 const getErrorMessage = (field: 'month' | 'year', value: string) => {
