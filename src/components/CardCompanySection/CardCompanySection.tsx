@@ -5,10 +5,11 @@ import { Dispatch, SetStateAction } from 'react';
 import { CardCompany } from '../../types/card';
 
 type Props = {
+  cardCompany: CardCompany;
   setCardCompany: Dispatch<SetStateAction<CardCompany>>;
 };
 
-export default function CardCompanySection({ setCardCompany }: Props) {
+export default function CardCompanySection({ cardCompany, setCardCompany }: Props) {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCardCompany(e.target.value as CardCompany);
   };
@@ -20,7 +21,6 @@ export default function CardCompanySection({ setCardCompany }: Props) {
         <FieldGroup.SubTitle title="현재 국내 카드사만 가능합니다." />
       </FieldGroup.TitleWrapper>
       <div className={styles.fieldGroup}>
-        <FieldGroup.Label text="카드사" />
         <div className={styles.selectWrapper}>
           <select className={styles.select} defaultValue="default" onChange={handleSelectChange}>
             <option value="default" disabled hidden>
@@ -35,8 +35,11 @@ export default function CardCompanySection({ setCardCompany }: Props) {
             <option value="하나카드">하나카드</option>
             <option value="국민카드">국민카드</option>
           </select>
-          <IoIosArrowUp className={styles.icon} />
-          {/* <IoIosArrowDown /> */}
+          {cardCompany ? (
+            <IoIosArrowDown className={styles.icon} style={{ color: 'var(--color-black)' }} />
+          ) : (
+            <IoIosArrowUp className={styles.icon} style={{ color: 'var(--color-gray-10)' }} />
+          )}
         </div>
       </div>
     </div>

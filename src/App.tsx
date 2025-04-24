@@ -19,7 +19,7 @@ export default function App() {
     <div className={styles.appContainer}>
       <CardPreview numbers={cardNumbers} cardLogo={cardLogo} cardCompany={cardCompany} expiration={expiration} />
       <CardNumberSection cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} setCardLogo={setCardLogo} />
-      <CardCompanySection setCardCompany={setCardCompany} />
+      <CardCompanySection cardCompany={cardCompany} setCardCompany={setCardCompany} />
       <CardExpirationSection expiration={expiration} setExpiration={setExpiration} />
       <CvcSection cvc={cvc} setCvc={setCvc} />
     </div>
