@@ -29,10 +29,11 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
     };
   };
 
-  const isDirty = Object.values(value).every((value) => value !== '');
+  const isDirty = Object.values(errors).some((error) => error === '');
+  const isAllDirty = Object.values(value).every((value) => value !== '');
   const isValid = isDirty && Object.values(errors).every((error) => error === '');
 
-  return { value, errors, register, isValid };
+  return { value, errors, register, isValid, isDirty, isAllDirty };
 }
 
 function validate(validation: ValidationType, value: string) {
