@@ -1,18 +1,12 @@
+import { getCardType } from '@/App/utils';
 import { CARD_COMPANIES, MASKING } from '@/constants';
+import { CardCompanyType, CardCVCNumberInputType, CardExpirationDateInputType, CardNumberInputType } from '@/types';
 import { useTheme } from '@emotion/react';
-import {
-  CardCompanyType,
-  CardCVCNumberInputType,
-  CardExpirationDateInputType,
-  CardNumberInputType,
-  CardType,
-} from '@/types';
 import MasterCard from '../icons/MasterCard';
 import VisaCard from '../icons/VisaCard';
 import * as S from './CardPreview.styles';
 
 interface CardPreviewProps {
-  cardType: CardType;
   cardNumber: CardNumberInputType;
   cardExpirationDate: CardExpirationDateInputType;
   selectedCompany: CardCompanyType;
@@ -21,7 +15,6 @@ interface CardPreviewProps {
 }
 
 export default function CardPreview({
-  cardType,
   cardNumber,
   cardExpirationDate,
   selectedCompany,
@@ -39,8 +32,8 @@ export default function CardPreview({
         <S.CardFront>
           <S.CardPreviewTop>
             <S.ICChip />
-            {cardType === 'visa' && <VisaCard width={36} />}
-            {cardType === 'master' && <MasterCard width={36} />}
+            {getCardType(cardNumber.first) === 'visa' && <VisaCard width={36} />}
+            {getCardType(cardNumber.first) === 'master' && <MasterCard width={36} />}
           </S.CardPreviewTop>
           <S.CardPreviewMiddle>
             <S.CardPreviewNumber>{cardNumber.first}</S.CardPreviewNumber>

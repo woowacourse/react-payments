@@ -1,5 +1,5 @@
-import { getCardType } from '@/App/utils';
 import {
+  Button,
   CardCompany,
   CardCVCNumber,
   CardExpirationDate,
@@ -7,7 +7,6 @@ import {
   CardPassword,
   CardPreview,
   Spacing,
-  Button,
 } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
 import { useForm } from '@/hooks';
@@ -120,7 +119,6 @@ export default function RegisterPage() {
     <S.Wrapper>
       <S.CardPreviewWrapper>
         <CardPreview
-          cardType={getCardType(cardNumber.first)}
           cardNumber={cardNumber}
           cardExpirationDate={cardExpirationDate}
           selectedCompany={selectedCompany}
