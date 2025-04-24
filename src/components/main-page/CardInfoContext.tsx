@@ -13,13 +13,6 @@ type CardInfoContextType = {
   resetCardInfo: () => void;
 };
 
-const defaultCardNumber: CardNumber = {
-  first: '',
-  second: '',
-  third: '',
-  fourth: '',
-};
-
 const CardInfoContext = createContext<CardInfoContextType | undefined>(undefined);
 
 export const CardInfoProvider = ({ children }: { children: ReactNode }) => {

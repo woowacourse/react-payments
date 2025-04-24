@@ -25,6 +25,15 @@ const StyledFrame = styled.div`
   box-sizing: border-box;
 `;
 
+const StepContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+`;
+
 type ExpirationPeriodState = {
   [key in keyof ExpirationPeriod]: string;
 };
@@ -76,36 +85,45 @@ function AddNewCardForm() {
   return (
     <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
+      <StepContainer>
+        {step >= 4 && (
+          <CardPasswordSection
+            password={password}
+            changePassword={changePassword}
+            handleOpenButton={handleOpenButton}
+          />
+        )}
 
-      {step >= 4 && (
-        <CardPasswordSection password={password} changePassword={changePassword} handleOpenButton={handleOpenButton} />
-      )}
+        {step >= 3 && (
+          <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
+        )}
 
-      {step >= 3 && (
-        <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
-      )}
+        {step >= 2 && (
+          <CardExpirationPeriodSection
+            expirationPeriod={expirationPeriod}
+            changeExpirationPeriod={changeExpirationPeriod}
+            viewNextInput={viewNextInput}
+          />
+        )}
 
-      {step >= 2 && (
-        <CardExpirationPeriodSection
-          expirationPeriod={expirationPeriod}
-          changeExpirationPeriod={changeExpirationPeriod}
-          viewNextInput={viewNextInput}
-        />
-      )}
+        {step >= 1 && (
+          <CardSelectSection
+            onSelectCardCompany={(companyName: string, color: string) => {
+              setSelectedCardCompany(companyName);
+              setCardColor(color);
+              viewNextInput();
+            }}
+          />
+        )}
 
-      {step >= 1 && (
-        <CardSelectSection
-          onSelectCardCompany={(companyName: string, color: string) => {
-            setSelectedCardCompany(companyName);
-            setCardColor(color);
-            viewNextInput();
-          }}
-        />
-      )}
-
-      {step >= 0 && (
-        <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
-      )}
+        {step >= 0 && (
+          <CardNumberSection
+            cardNumber={cardNumber}
+            changeCardNumber={changeCardNumber}
+            viewNextInput={viewNextInput}
+          />
+        )}
+      </StepContainer>
       {openButton && <Button onClick={handleSubmit} />}
     </StyledFrame>
   );
