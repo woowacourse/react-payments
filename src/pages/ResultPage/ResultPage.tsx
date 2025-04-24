@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../components/Button/Button";
-import Text from "../components/Text/Text";
+import Button from "../../components/Button/Button";
+import Text from "../../components/Text/Text";
 import styles from "./ResultPage.module.css";
 
 export default function ResultPage() {

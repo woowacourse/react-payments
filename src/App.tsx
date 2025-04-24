@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import CardFormPage from "./CardFormPage/CardFormPage";
-import ResultPage from "./ResultPage/ResultPage";
+import ResultPage from "./pages/ResultPage/ResultPage";
+import CardFormPage from "./pages/CardFormPage/CardFormPage";
 
 function App() {
   return (

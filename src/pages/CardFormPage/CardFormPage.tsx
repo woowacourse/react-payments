@@ -1,15 +1,15 @@
 import styles from "./CardFormPage.module.css";
-import PreviewCardLayout from "../components/PreviewCard/PreviewCardLayout";
-import useCardNumbersInput from "../hooks/useCardNumbersInput";
-import useCvcNumberInput from "../hooks/useCvcNumberInput";
-import useExpirationDateInput from "../hooks/useExpirationDateInput";
+import useCardNumbersInput from "../../hooks/useCardNumbersInput";
+import useCvcNumberInput from "../../hooks/useCvcNumberInput";
+import useExpirationDateInput from "../../hooks/useExpirationDateInput";
 import CardPassword from "./CardPassword/CardPassword";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardNumber from "./CardNumber/CarNumber";
 import CardBrand from "./CardBrand/CardBrand";
-import Button from "../components/Button/Button";
+import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
 
 export default function CardFormPage() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =

@@ -1,8 +1,8 @@
-import Input from "../../components/Input/Input";
+import Input from "../../../components/Input/Input";
 import styles from "./CardNumber.module.css";
-import { indexToCardNumberKey } from "../../utils/indexToCardNumberKey";
-import { CARD_NUMBER_FIELDS, type CardKey } from "../../types/cardKeyTypes";
-import Text from "../../components/Text/Text";
+import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
+import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
+import Text from "../../../components/Text/Text";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;

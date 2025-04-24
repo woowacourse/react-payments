@@ -1,11 +1,11 @@
-import Input from "../../components/Input/Input";
+import Input from "../../../components/Input/Input";
 import styles from "./CardExpirationDate.module.css";
 import {
   EXPIRATION_FIELDS,
   type ExpirationKey,
-} from "../../types/cardKeyTypes";
-import { indexToExpirationKey } from "../../utils/indexToExpirationKey";
-import Text from "../../components/Text/Text";
+} from "../../../types/cardKeyTypes";
+import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
+import Text from "../../../components/Text/Text";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;

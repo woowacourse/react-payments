@@ -1,6 +1,6 @@
 import styles from "./CardBrand.module.css";
-import Text from "../../components/Text/Text";
-import Select from "../../components/Select/select";
+import Text from "../../../components/Text/Text";
+import Select from "../../../components/Select/select";
 
 interface CardBrandProps {
   handleChange: (value: string, index: number) => void;

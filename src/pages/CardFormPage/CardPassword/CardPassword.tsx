@@ -1,6 +1,6 @@
 import styles from "./CardPassword.module.css";
-import Input from "../../components/Input/Input";
-import Text from "../../components/Text/Text";
+import Input from "../../../components/Input/Input";
+import Text from "../../../components/Text/Text";
 import { useState } from "react";
 
 interface CardPasswordProps {
