@@ -7,24 +7,30 @@ import ExpirationDateForm from "./components/feature/ExpirationDateForm/Expirati
 import CvcNumberForm from "./components/feature/CvcNumberForm/CvcNumberForm.tsx";
 import PasswordForm from "./components/feature/PasswordForm/PasswordForm.tsx";
 import CardIssuerForm from "./components/feature/CardIssuerForm/CardIssuerForm.tsx";
+import Button from "./components/common/Button/Button.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
 
   return (
-    <div css={AppStyle}>
-      <PreviewCard
-        uniqueNumber={cardState.uniqueNumber}
-        expirationDate={cardState.expirationDate}
-        cardIssuer={cardState.cardIssuer}
-      />
-      <div css={FormContainerStyle}>
-        <PasswordForm passwordState={password} dispatch={dispatch} />
-        <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
-        <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
-        <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />
-        <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+    <div>
+      <div css={AppStyle}>
+        <PreviewCard
+          uniqueNumber={cardState.uniqueNumber}
+          expirationDate={cardState.expirationDate}
+          cardIssuer={cardState.cardIssuer}
+        />
+        <div css={FormContainerStyle}>
+          <PasswordForm passwordState={password} dispatch={dispatch} />
+          <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
+          <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
+          <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />
+          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+        </div>
+        <div css={ButtonContainerStyle}>
+          <Button text={"확인"} />
+        </div>
       </div>
     </div>
   );
@@ -39,12 +45,22 @@ const AppStyle = css`
   align-items: center;
   gap: 45px;
   border-radius: 20px;
+  position: relative;
 `;
 
 const FormContainerStyle = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 400px;
+  overflow-y: auto;
+`;
+
+const ButtonContainerStyle = css`
+  width: 436px;
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
 `;
 
 export default App;
