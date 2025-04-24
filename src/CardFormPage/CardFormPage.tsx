@@ -25,7 +25,12 @@ export default function CardFormPage() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate("/result");
+    navigate("/result", {
+      state: {
+        firstCardNumber: cardNumbers.FIRST,
+        cardBrand: cardType,
+      },
+    });
   };
 
   return (
