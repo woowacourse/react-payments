@@ -1,9 +1,6 @@
+import React, { useState, useRef, useEffect } from 'react';
 import Card from '../component/card/Card';
-
 import styled from 'styled-components';
-
-import { useState } from 'react';
-
 import { CardInputProps } from '../types/CardInputTypes';
 import {
   validateCardExpirationDateMM,
@@ -39,6 +36,17 @@ const Form = styled.div`
   gap: 16px;
 `;
 
+const FormSection = styled.div<{ isVisible: boolean }>`
+  width: 100%;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  height: ${({ isVisible }) => (isVisible ? 'auto' : 0)};
+  overflow: hidden;
+  transition:
+    opacity 0.3s ease,
+    height 0.3s ease;
+  margin-bottom: ${({ isVisible }) => (isVisible ? '16px' : 0)};
+`;
+
 const AddCard = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
     first: null,
@@ -62,6 +70,94 @@ const AddCard = () => {
     cardBrand: '',
     secretNumber: '',
   });
+
+  const cardNumberRef = useRef<HTMLDivElement>(null);
+  const cardBrandRef = useRef<HTMLDivElement>(null);
+  const secretNumberRef = useRef<HTMLDivElement>(null);
+  const expiryDateRef = useRef<HTMLDivElement>(null);
+  const cvcRef = useRef<HTMLDivElement>(null);
+
+  const [visibleSteps, setVisibleSteps] = useState({
+    cardNumber: true,
+    cardBrand: false,
+    secretNumber: false,
+    expiryDate: false,
+    cvc: false,
+  });
+
+  const isCardNumberComplete = () => {
+    const allFieldsFilled =
+      cardInput.first !== null &&
+      cardInput.second !== null &&
+      cardInput.third !== null &&
+      cardInput.fourth !== null;
+
+    const noErrors =
+      !errorMessages.first &&
+      !errorMessages.second &&
+      !errorMessages.third &&
+      !errorMessages.fourth;
+
+    const correctLength =
+      cardInput.first !== null &&
+      String(cardInput.first).length === 4 &&
+      cardInput.second !== null &&
+      String(cardInput.second).length === 4 &&
+      cardInput.third !== null &&
+      String(cardInput.third).length === 4 &&
+      cardInput.fourth !== null &&
+      String(cardInput.fourth).length === 4;
+
+    return allFieldsFilled && noErrors && correctLength;
+  };
+
+  const isCardBrandComplete = () => {
+    return (
+      cardInput.cardBrand !== undefined &&
+      cardInput.cardBrand !== null &&
+      cardInput.cardBrand !== '' &&
+      !errorMessages.cardBrand
+    );
+  };
+
+  const isSecretNumberComplete = () => {
+    const secretNumberStr = String(cardInput.secretNumber || '');
+    return (
+      cardInput.secretNumber !== null &&
+      !errorMessages.secretNumber &&
+      (secretNumberStr.length === 2 || secretNumberStr.length === 4)
+    );
+  };
+
+  const isExpiryDateComplete = () => {
+    const mmStr = String(cardInput.MM || '');
+    const yyStr = String(cardInput.YY || '');
+
+    const validMM =
+      cardInput.MM !== null &&
+      mmStr.length === 2 &&
+      parseInt(mmStr) >= 1 &&
+      parseInt(mmStr) <= 12;
+    const validYY = cardInput.YY !== null && yyStr.length === 2;
+
+    return validMM && validYY && !errorMessages.MM && !errorMessages.YY;
+  };
+
+  const isCVCComplete = () => {
+    const cvcStr = String(cardInput.CVC || '');
+
+    return cardInput.CVC !== null && !errorMessages.CVC && cvcStr.length === 3;
+  };
+
+  const isFormComplete = () => {
+    return (
+      isSecretNumberComplete() &&
+      isCardBrandComplete() &&
+      isCardNumberComplete() &&
+      isExpiryDateComplete() &&
+      isCVCComplete()
+    );
+  };
 
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
@@ -90,43 +186,51 @@ const AddCard = () => {
     return filterErrorMessage[0];
   };
 
-  const isFormComplete = () => {
-    // 카드 번호 확인
-    const isCardNumberComplete =
-      cardInput.first !== null &&
-      cardInput.second !== null &&
-      cardInput.third !== null &&
-      cardInput.fourth !== null;
+  useEffect(() => {
+    if (isCardNumberComplete() && !visibleSteps.cardBrand) {
+      setVisibleSteps(prev => ({ ...prev, cardBrand: true }));
+      setTimeout(() => {
+        cardBrandRef.current?.querySelector('select')?.focus();
+      }, 300);
+    }
 
-    // 유효기간 확인
-    const isExpiryDateComplete = cardInput.MM !== null && cardInput.YY !== null;
+    if (
+      isCardBrandComplete() &&
+      isCardNumberComplete() &&
+      !visibleSteps.secretNumber
+    ) {
+      setVisibleSteps(prev => ({ ...prev, secretNumber: true }));
+      setTimeout(() => {
+        secretNumberRef.current?.querySelector('input')?.focus();
+      }, 300);
+    }
 
-    // CVC 확인
-    const isCVCComplete = cardInput.CVC !== null;
+    if (
+      isSecretNumberComplete() &&
+      isCardBrandComplete() &&
+      isCardNumberComplete() &&
+      !visibleSteps.expiryDate
+    ) {
+      setVisibleSteps(prev => ({ ...prev, expiryDate: true }));
+      setTimeout(() => {
+        expiryDateRef.current?.querySelector('input')?.focus();
+      }, 300);
+    }
 
-    // 카드사 선택 확인
-    const isCardBrandSelected =
-      cardInput.cardBrand !== undefined && cardInput.cardBrand !== null;
+    if (
+      isExpiryDateComplete() &&
+      isSecretNumberComplete() &&
+      isCardBrandComplete() &&
+      isCardNumberComplete() &&
+      !visibleSteps.cvc
+    ) {
+      setVisibleSteps(prev => ({ ...prev, cvc: true }));
+      setTimeout(() => {
+        cvcRef.current?.querySelector('input')?.focus();
+      }, 300);
+    }
+  }, [cardInput, errorMessages, visibleSteps]);
 
-    // 에러 메시지 없는지 확인
-    const hasNoErrors =
-      !errorMessages.first &&
-      !errorMessages.second &&
-      !errorMessages.third &&
-      !errorMessages.fourth &&
-      !errorMessages.MM &&
-      !errorMessages.YY &&
-      !errorMessages.CVC;
-
-    // 모든 조건이 충족되었는지 확인
-    return (
-      isCardNumberComplete &&
-      isExpiryDateComplete &&
-      isCVCComplete &&
-      isCardBrandSelected &&
-      hasNoErrors
-    );
-  };
   return (
     <>
       <Wrap>
@@ -138,41 +242,62 @@ const AddCard = () => {
           cardColor={cardInput.cardBrand}
         />
         <Form>
-          <SecretNumberInput
-            errorMessages={errorMessages}
-            setCardInput={setCardInput}
-            handleErrorMessages={handleErrorMessages}
-          />
-          <CardBrandSelect
-            setCardInput={setCardInput}
-            onColorChange={color => {
-              setCardInput(prev => ({
-                ...prev,
-                cardBrand: color,
-              }));
-            }}
-          />
-          <CardNumberInput
-            cardInput={cardInput}
-            setCardInput={setCardInput}
-            errorMessages={errorMessages}
-            handleErrorMessages={handleErrorMessages}
-            handleCardNumberErrorMessages={handleCardNumberErrorMessages}
-          />
+          {visibleSteps.cvc && (
+            <FormSection isVisible={true} ref={cvcRef}>
+              <CVCInput
+                validateCardCVC={validateCardCVC}
+                setCardInput={setCardInput}
+                handleErrorMessages={handleErrorMessages}
+                errorMessages={errorMessages}
+              />
+            </FormSection>
+          )}
 
-          <ExpiryDateInput
-            handlePeriodErrorMessages={handlePeriodErrorMessages}
-            validateCardExpirationDateMM={validateCardExpirationDateMM}
-            validateCardExpirationDateYY={validateCardExpirationDateYY}
-            setCardInput={setCardInput}
-            handleErrorMessages={handleErrorMessages}
-          />
-          <CVCInput
-            validateCardCVC={validateCardCVC}
-            setCardInput={setCardInput}
-            handleErrorMessages={handleErrorMessages}
-            errorMessages={errorMessages}
-          />
+          {visibleSteps.expiryDate && (
+            <FormSection isVisible={true} ref={expiryDateRef}>
+              <ExpiryDateInput
+                handlePeriodErrorMessages={handlePeriodErrorMessages}
+                validateCardExpirationDateMM={validateCardExpirationDateMM}
+                validateCardExpirationDateYY={validateCardExpirationDateYY}
+                setCardInput={setCardInput}
+                handleErrorMessages={handleErrorMessages}
+              />
+            </FormSection>
+          )}
+
+          {visibleSteps.secretNumber && (
+            <FormSection isVisible={true} ref={secretNumberRef}>
+              <SecretNumberInput
+                errorMessages={errorMessages}
+                setCardInput={setCardInput}
+                handleErrorMessages={handleErrorMessages}
+              />
+            </FormSection>
+          )}
+
+          {visibleSteps.cardBrand && (
+            <FormSection isVisible={true} ref={cardBrandRef}>
+              <CardBrandSelect
+                setCardInput={setCardInput}
+                onColorChange={color => {
+                  setCardInput(prev => ({
+                    ...prev,
+                    cardBrand: color,
+                  }));
+                }}
+              />
+            </FormSection>
+          )}
+
+          <FormSection isVisible={visibleSteps.cardNumber} ref={cardNumberRef}>
+            <CardNumberInput
+              cardInput={cardInput}
+              setCardInput={setCardInput}
+              errorMessages={errorMessages}
+              handleErrorMessages={handleErrorMessages}
+              handleCardNumberErrorMessages={handleCardNumberErrorMessages}
+            />
+          </FormSection>
         </Form>
       </Wrap>
       {isFormComplete() && <SubmitButton />}
