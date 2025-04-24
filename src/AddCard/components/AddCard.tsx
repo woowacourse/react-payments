@@ -1,7 +1,7 @@
 import styles from "./AddCard.module.css";
 import AddCardForm from "./AddCardForm/components/AddCardForm";
 import AddCardPreview from "./AddCardPreview/components/AddCardPreview";
-import useCardRegistrationFlow from "../hooks/useCardRegistrationFlow";
+import useCardRegistrationFlow from "../hooks";
 
 function AddCard() {
   const { state, previewState, currentStep, allValid } =

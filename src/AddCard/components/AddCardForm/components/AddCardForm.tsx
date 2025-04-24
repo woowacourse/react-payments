@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import { useRef, useEffect } from "react";
 
 import Button from "@/components/Button/Button";
 import CardInputBox from "./CardInputBox/CardInputBox";
@@ -14,6 +13,7 @@ import type { FlowStep } from "@/AddCard/types/hook";
 import type { CardState, CardHandlers } from "@/AddCard/types/card";
 
 import styles from "./AddCardForm.module.css";
+import { useFocusControl } from "@/AddCard/hooks/useFocusControl";
 
 interface AddCardFormProps {
   addCardState: CardState & CardHandlers;
@@ -24,47 +24,34 @@ interface AddCardFormProps {
 function AddCardForm({
   addCardState: {
     cardNumberState,
-    expireDate,
-    CVCState,
-    selectedBrand,
-    passwordState,
     handleCardNumberChange,
+
+    selectedBrand,
+    setSelectedBrand,
+
+    expireDate,
     handleExpireMonthChange,
     handleExpireYearChange,
     handleExpireMonthBlur,
+
+    CVCState,
     handleCVCChange,
+
+    passwordState,
     handlePasswordChange,
-    setSelectedBrand,
   },
   currentStep,
   allValid,
 }: AddCardFormProps) {
   const navigate = useNavigate();
   const currentIndex = STEP_ORDER.indexOf(currentStep);
-
-  const brandDropdownRef = useRef<HTMLSelectElement>(null);
-  const expireMonthInputRef = useRef<HTMLInputElement>(null);
-  const cvcInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-  const addCardButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (currentIndex === 1) {
-        brandDropdownRef.current?.focus();
-      } else if (currentIndex === 2) {
-        expireMonthInputRef.current?.focus();
-      } else if (currentIndex === 3) {
-        cvcInputRef.current?.focus();
-      } else if (currentIndex === 4) {
-        passwordInputRef.current?.focus();
-      } else if (allValid) {
-        addCardButtonRef.current?.focus();
-      }
-    }, 0);
-
-    return () => clearTimeout(timeoutId);
-  }, [currentIndex, allValid]);
+  const {
+    brandDropdownRef,
+    expireMonthInputRef,
+    cvcInputRef,
+    passwordInputRef,
+    addCardButtonRef,
+  } = useFocusControl(currentStep, allValid);
 
   function handleAddCardButton() {
     navigate("/AddCardComplete", {
