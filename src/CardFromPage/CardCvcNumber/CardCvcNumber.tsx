@@ -1,6 +1,6 @@
 import styles from "./CardCvcNumber.module.css";
-import Input from "../components/Input/Input";
-import Text from "../components/Text/Text";
+import Input from "../../components/Input/Input";
+import Text from "../../components/Text/Text";
 
 interface CardCvcNumberProps {
   handleChange: (value: string) => void;
