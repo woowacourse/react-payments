@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import type { CardInputProps } from "../../types/CardInputTypes";
-import CardNumber from "./CardNumber";
-import cardNetworkLogos from "../../constants/cardNetworkLogos";
+import styled from 'styled-components';
+import type { CardInputProps } from '../../types/CardInputTypes';
+import CardNumber from './CardNumber';
+import cardNetworkLogos from '../../constants/cardConstants';
 
 interface CardProps {
   cardNumber: CardInputProps | null;
-  cardType: "visa" | "mastercard" | "default";
+  cardType: 'visa' | 'mastercard' | 'default';
 }
 
 const Card = ({ cardNumber, cardType }: CardProps) => {

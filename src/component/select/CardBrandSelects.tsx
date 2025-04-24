@@ -1,6 +1,6 @@
 import FormField from '../FormField';
 import CardSelect from './CardSelect';
-import cardBrands from '../../constants/cardBrands';
+import { cardBrands } from '../../constants/cardConstants';
 import type { CardInputProps } from '../../types/CardInputTypes';
 
 interface CardBrandSelectsProps {
