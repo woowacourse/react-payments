@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Dropdown from '../../components/common/Dropdown/Dropdown';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
@@ -57,6 +57,13 @@ function Payments() {
     handleInputValue: handleCardPasswordInputValue,
     onBlur: onCardPasswordInputBlur,
   } = useCardPasswordValidation();
+
+  const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+
+    console.log(cardNumberInputValues.cardNumberPart1);
+    console.log(cardBankValue?.label);
+  };
 
   useEffect(() => {
     if (inputStep === INPUT_STEP.cardNumber) {
@@ -166,7 +173,9 @@ function Payments() {
           </InputSection>
 
           {allInputComplete ? (
-            <PaymentsSubmitButton>확인</PaymentsSubmitButton>
+            <PaymentsSubmitButton onClick={handleSubmit}>
+              확인
+            </PaymentsSubmitButton>
           ) : null}
         </PaymentsInputForm>
       </PaymentsContainer>
