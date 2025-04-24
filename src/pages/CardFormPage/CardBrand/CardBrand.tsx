@@ -4,6 +4,8 @@ import Select from "../../../components/Select/select";
 
 interface CardBrandProps {
   handleChange: (brand: string) => void;
+  handleStep: () => void;
+  step: number;
   errorMessage: string;
 }
 
@@ -26,14 +28,26 @@ const CARD_BRANDS = [
 
 export default function CardBrand({
   handleChange,
+  step,
+  handleStep,
   errorMessage,
 }: CardBrandProps) {
+  const handleSelectChange = (value: string) => {
+    handleChange(value);
+    if (value && step === 0) {
+      handleStep();
+    }
+  };
+
   return (
     <section className={styles["card-brand"]}>
       <Text textType="title">{CARD_NUMBER_LABEL.TITLE}</Text>
       <Text textType="description">{CARD_NUMBER_LABEL.DESCRIPTION}</Text>
       <div className={styles["card-brand-select"]}>
-        <Select options={CARD_BRANDS} handleChange={handleChange}></Select>
+        <Select
+          options={CARD_BRANDS}
+          handleChange={handleSelectChange}
+        ></Select>
       </div>
       <Text textType="error">{errorMessage}</Text>
     </section>

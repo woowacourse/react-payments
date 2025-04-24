@@ -58,6 +58,7 @@ export default function CardFormPage() {
         {step > 2 && (
           <CardCvcNumber
             handleChange={onCvcNumberChange}
+            step={step}
             handleStep={nextStep}
             cvcNumbers={cvcNumbers}
             errorMessage={cvcNumbersError}
@@ -66,6 +67,7 @@ export default function CardFormPage() {
         {step > 1 && (
           <CardExpirationDate
             handleChange={onExpirationDateChange}
+            step={step}
             handleStep={nextStep}
             cardExpirationDate={cardExpirationDate}
             errorMessage={cardExpirationDateError}
@@ -74,6 +76,7 @@ export default function CardFormPage() {
         {step > 0 && (
           <CardNumber
             handleChange={onCardNumberChange}
+            step={step}
             handleStep={nextStep}
             cardNumbers={cardNumbers}
             errorMessage={cardNumbersError}
@@ -81,6 +84,7 @@ export default function CardFormPage() {
         )}
         <CardBrand
           handleChange={onCardBrandChange}
+          step={step}
           handleStep={nextStep}
           errorMessage={cardBrandError}
         />

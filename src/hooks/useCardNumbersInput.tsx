@@ -6,7 +6,7 @@ import type { CardKey } from "../types/cardKeyTypes";
 import { useError } from "./useError";
 
 const CARD_NUMBER_LIMIT = {
-  CARD_NUMBER_MAX_LENGTH: 4,
+  CARD_NUMBER_MAX_LENGTH: 5,
   CARD_TYPE_MAX_LENGTH: 2,
 } as const;
 
@@ -60,6 +60,8 @@ export default function useCardNumbersInput() {
       0,
       CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH
     );
+
+    console.log("trimmedValue", trimmedValue);
 
     const newCardNumbers = { ...cardNumbers, [key]: trimmedValue };
     setCardNumbers(newCardNumbers);

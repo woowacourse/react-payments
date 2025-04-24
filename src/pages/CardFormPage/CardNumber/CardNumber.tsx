@@ -7,6 +7,8 @@ import { useRef } from "react";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;
+  handleStep: () => void;
+  step: number;
   cardNumbers: Record<CardKey, string>;
   errorMessage: Record<CardKey, string>;
 }
@@ -19,22 +21,28 @@ const CARD_NUMBER_LABEL = {
 
 export default function CardNumber({
   handleChange,
+  handleStep,
+  step,
   cardNumbers,
   errorMessage,
 }: CardNumberProps) {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const handleInputChange = (value: string, index: number) => {
-    handleChange(value, index);
-    if (value.length === 4 && index < CARD_NUMBER_FIELDS.length - 1) {
-      inputRefs.current[index + 1].focus();
-    }
-  };
-
   const firstError =
     CARD_NUMBER_FIELDS.map(
       (_, idx) => errorMessage[indexToCardNumberKey(idx)]
     ).find((msg) => msg) || "";
+
+  const handleInputChange = (value: string, index: number) => {
+    handleChange(value, index);
+    if (value.length < 4) return;
+    if (index < CARD_NUMBER_FIELDS.length - 1)
+      inputRefs.current[index + 1].focus();
+    if (canGoToNextStep(step, index, value, firstError)) {
+      handleStep();
+      return;
+    }
+  };
 
   return (
     <section className={styles["card-number"]}>
@@ -57,4 +65,20 @@ export default function CardNumber({
       <Text textType="error">{firstError}</Text>
     </section>
   );
+}
+
+function canGoToNextStep(
+  step: number,
+  index: number,
+  value: string,
+  errorMessage: string
+) {
+  if (
+    step === 1 &&
+    index === CARD_NUMBER_FIELDS.length - 1 &&
+    value.length === 4 &&
+    !errorMessage
+  )
+    return true;
+  return false;
 }

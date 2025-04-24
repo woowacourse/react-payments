@@ -9,7 +9,7 @@ import { indexToExpirationKey } from "../utils/indexToExpirationKey";
 import { useError } from "./useError";
 
 const EXPIRATION_DATE_LIMIT = {
-  MAX_LENGTH: 2,
+  MAX_LENGTH: 3,
   MIN_MONTH: 1,
   MAX_MONTH: 12,
 };

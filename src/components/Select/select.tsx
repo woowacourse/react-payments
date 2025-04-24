@@ -14,6 +14,7 @@ export default function Select({ handleChange, options }: SelectProps) {
       defaultValue="default"
       className={styles["select"]}
       onChange={handleSelectChange}
+      autoFocus
     >
       <option value="default" disabled hidden>
         카드사를 선택해주세요
