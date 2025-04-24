@@ -1,5 +1,10 @@
 # react-payments
 
+<details> 
+<summary>
+Step1
+</summary>
+
 ## 🎯 구현 기능 목록
 
 ### 카드 번호 입력 및 식별
@@ -78,6 +83,7 @@
   - label
   - Input(common) 4개
 - 카드 유효기간
+
   - 월 2자리
     - label
     - Input(common)
@@ -85,12 +91,9 @@
     - label
     - Input(common)
 
-### CVC 번호 컴포넌트에 필요한 상태 (자체적으로 상태 가짐)
-
 - cvc번호
-  - 자체적으로 상태를 갖는 이유
-    - form 컴포넌트에서 formData로 가져올 수 있기 때문이다.
-    - 카드 프리뷰 에도 필요하지 않기 때문이다.
+  - form 컴포넌트에서 formData로 가져올 수 있기 때문이다.
+  - 카드 프리뷰 에는 필요하지 않으나 errorMessage를 전달하기 위해 상위에서 전달
 
 ### 카드 UI 만들 때 필요한 상태 (상위에서 전달 받음)
 
@@ -101,3 +104,5 @@
 
 - 컴포넌트
 - UI빼고 전부다 도메인?
+
+</details>
