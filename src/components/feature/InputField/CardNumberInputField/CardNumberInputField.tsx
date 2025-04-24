@@ -14,7 +14,7 @@ interface CardNumberInputFieldProps {
   setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
   cardType: CardType;
   setCardType: Dispatch<SetStateAction<CardType>>;
-  onComplete: () => void;
+  onComplete: (isComplete: boolean) => void;
 }
 
 const MAX_CARD_LENGTH = 4;
@@ -50,7 +50,7 @@ function CardNumberInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_CARD_LENGTH
     ).length
   );
-  if (isComplete && !errorMessage) onComplete?.();
+  onComplete?.(isComplete && !Boolean(errorMessage));
 
   const validateCardError = (
     inputName: CardNumberInputType,

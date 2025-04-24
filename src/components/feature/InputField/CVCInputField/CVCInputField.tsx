@@ -8,7 +8,7 @@ import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;
   setInputValue: Dispatch<SetStateAction<Record<CVCInputValueType, string>>>;
-  onComplete: () => void;
+  onComplete: (isComplete: boolean) => void;
 }
 
 const MAX_CVC_LENGTH = 3;
@@ -28,7 +28,7 @@ function CVCInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_CVC_LENGTH
     ).length
   );
-  if (isComplete && !errorMessage) onComplete?.();
+  onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= MAX_CVC_LENGTH)

@@ -53,6 +53,27 @@ function Payments() {
   const [cardIssuer, setCardIssuer] = useState<CardIssuerSelectorType | null>(
     null
   );
+  const [isFieldComplete, setIsFieldComplete] = useState({
+    cardNumber: false,
+    expirationDate: false,
+    CVC: false,
+    password: false,
+  });
+
+  type FieldName = 'cardNumber' | 'expirationDate' | 'CVC' | 'password';
+
+  const isAllFieldComplete = !Boolean(
+    Object.values(isFieldComplete).filter((isComplete) => isComplete === false)
+      .length
+  );
+
+  const updateCompleteStatus = (fieldName: FieldName, status: boolean) => {
+    if (isFieldComplete[fieldName] === status) return;
+    setIsFieldComplete((prev) => ({
+      ...prev,
+      [fieldName]: status,
+    }));
+  };
 
   return (
     <PaymentsLayout>
@@ -71,8 +92,9 @@ function Payments() {
             <PasswordInputField
               inputValue={passwordInputValue}
               setInputValue={setPasswordInputValue}
-              onComplete={() => {
-                if (step === 5) setStep(6);
+              onComplete={(isComplete: boolean) => {
+                updateCompleteStatus('password', isComplete);
+                if (step === 5 && isComplete) setStep(6);
               }}
             />
           </InputSection>
@@ -82,8 +104,9 @@ function Payments() {
             <CVCInputField
               inputValue={CVCInputValue}
               setInputValue={setCVCInputValue}
-              onComplete={() => {
-                if (step === 4) setStep(5);
+              onComplete={(isComplete: boolean) => {
+                updateCompleteStatus('CVC', isComplete);
+                if (step === 4 && isComplete) setStep(5);
               }}
             />
           </InputSection>
@@ -96,8 +119,9 @@ function Payments() {
             <ExpirationDateInputField
               inputValue={expirationDateInputValue}
               setInputValue={setExpirationDateInputValue}
-              onComplete={() => {
-                if (step === 3) setStep(4);
+              onComplete={(isComplete: boolean) => {
+                updateCompleteStatus('expirationDate', isComplete);
+                if (step === 3 && isComplete) setStep(4);
               }}
             />
           </InputSection>
@@ -125,14 +149,15 @@ function Payments() {
               setInputValue={setCardNumberInputValue}
               cardType={cardType}
               setCardType={setCardType}
-              onComplete={() => {
-                if (step === 1) setStep(2);
+              onComplete={(isComplete: boolean) => {
+                updateCompleteStatus('cardNumber', isComplete);
+                if (step === 1 && isComplete) setStep(2);
               }}
             />
           </InputSection>
         )}
       </PaymentsContainer>
-      {step >= 1 && (
+      {step >= 6 && isAllFieldComplete && (
         <ButtonContainer>
           <Button buttonText="확인" color="#fff" background="#333333" />
         </ButtonContainer>

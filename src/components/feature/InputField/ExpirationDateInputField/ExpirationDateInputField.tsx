@@ -13,7 +13,7 @@ interface ExpirationDateInputFieldProps {
   setInputValue: Dispatch<
     SetStateAction<Record<ExpirationDateInputType, string>>
   >;
-  onComplete: () => void;
+  onComplete: (isComplete: boolean) => void;
 }
 
 const MAX_DATE_LENGTH = 2;
@@ -29,8 +29,8 @@ function ExpirationDateInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_DATE_LENGTH
     ).length
   );
+  onComplete?.(isComplete);
 
-  if (isComplete) onComplete?.();
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= MAX_DATE_LENGTH) {
       if (name === 'expirationDatePart1' && Number(value) > MAX_MONTH_VALUE)

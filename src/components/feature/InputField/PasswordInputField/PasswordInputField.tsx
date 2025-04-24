@@ -8,7 +8,7 @@ import { PasswordInputType } from '../../../../config/inputField';
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;
   setInputValue: Dispatch<SetStateAction<Record<PasswordInputType, string>>>;
-  onComplete: () => void;
+  onComplete: (isComplete: boolean) => void;
 }
 
 const MAX_PASSWORD_LENGTH = 2;
@@ -28,7 +28,7 @@ function PasswordInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_PASSWORD_LENGTH
     ).length
   );
-  if (isComplete && !errorMessage) onComplete?.();
+  onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
     if (value.length <= MAX_PASSWORD_LENGTH)
