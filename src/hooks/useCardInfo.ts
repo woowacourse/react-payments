@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CARD_BRAND_COLOR } from "../components/InputField/CardBrand/constants";
+import { CARD_BRAND_COLOR } from "../components/InputForm/CardBrand/constants";
 
 export type CardInfo = {
   firstNumber: string;

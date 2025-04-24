@@ -1,23 +1,22 @@
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Announcement from "../../components/@common/Announcement/Announcement";
 import Card from "../../components/CardPreview/Card";
-import CardNumberField from "../../components/InputField/CardNumber/CardNumberField";
-import CardCVCField from "../../components/InputField/CVC/CardCVCField";
-import CardExpirationField from "../../components/InputField/Expiration/CardExpirationField";
-import {
-  CARD_BRAND_MESSAGE,
-  CARD_NUMBER_MESSAGE,
-  CVC_MESSAGE,
-  EXPIRATION_MESSAGE,
-  PASSWORD_MESSAGE,
-} from "../../constants/guide";
-import { CARD_INFO_LENGTH } from "../../constants/setting";
 import useCardInfo from "../../hooks/useCardInfo";
-import CardBrandField from "../../components/InputField/CardBrand/CardBrandField";
-import PasswordField from "../../components/InputField/Password/PasswordField";
+import { STEPS } from "./constants";
+import { AddCardForm } from "../../components/InputForm/AddCardForm";
 
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+  useEffect(() => {
+    const isCurrentStepValid = STEPS[currentStepIndex].validate(cardInfo);
+    const isLastStep = currentStepIndex === STEPS.length - 1;
+
+    if (isCurrentStepValid && !isLastStep) {
+      setCurrentStepIndex(currentStepIndex + 1);
+    }
+  }, [cardInfo, currentStepIndex]);
 
   return (
     <AppContainer>
@@ -30,50 +29,16 @@ function AddCardPage() {
         ]}
         expiration={[cardInfo.month, cardInfo.year]}
         cardBrand={cardInfo.cardBrand}
-      ></Card>
-      <InputField>
-        <Announcement
-          main={PASSWORD_MESSAGE.MAIN}
-          caption={PASSWORD_MESSAGE.CAPTION}
-        />
-        <PasswordField
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.PASSWORD}
-        />
-        <Announcement main={CVC_MESSAGE.MAIN} />
-        <CardCVCField
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.CVC}
-        />
-        <Announcement
-          main={EXPIRATION_MESSAGE.MAIN}
-          caption={EXPIRATION_MESSAGE.CAPTION}
-        />
-        <CardExpirationField
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.EXPIRATION}
-        />
-        <Announcement
-          main={CARD_BRAND_MESSAGE.MAIN}
-          caption={CARD_BRAND_MESSAGE.CAPTION}
-        />
-        <CardBrandField cardInfo={cardInfo} handleCardInfo={handleCardInfo} />
-        <Announcement
-          main={CARD_NUMBER_MESSAGE.MAIN}
-          caption={CARD_NUMBER_MESSAGE.CAPTION}
-        />
-        <CardNumberField
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.NUMBER}
-        />
-      </InputField>
+      />
+      <AddCardForm
+        currentStepIndex={currentStepIndex}
+        cardInfo={cardInfo}
+        handleCardInfo={handleCardInfo}
+      />
     </AppContainer>
   );
 }
+
 export default AddCardPage;
 
 const AppContainer = styled.div`
@@ -82,14 +47,4 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px 15px 0 15px;
-`;
-
-const InputField = styled.div`
-  overflow-y: auto;
-  height: calc(100vh - 210px);
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 `;
