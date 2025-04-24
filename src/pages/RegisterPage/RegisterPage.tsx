@@ -83,7 +83,6 @@ export default function RegisterPage() {
 
   // 5. 비밀번호
   const {
-    value: { password: cardPassword },
     errors: cardPasswordErrors,
     register: cardPasswordRegister,
     isValid: isPasswordValid,
@@ -96,19 +95,13 @@ export default function RegisterPage() {
   // 카드 뒤집기 상태
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
-  const cardType = getCardType(cardNumber.first);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const selectedCardCompany = CARD_COMPANIES.find((company) => company.id === selectedCompany);
     navigate('/complete', {
       state: {
-        cardNumber: cardNumber.first,
+        firstCardNumber: cardNumber.first,
         cardCompany: selectedCardCompany?.name || '',
-        cardExpirationDateMonth: cardExpirationDate.month,
-        cardExpirationDateYear: cardExpirationDate.year,
-        cardCVCNumber,
-        cardPassword,
       },
     });
   };
@@ -147,7 +140,7 @@ export default function RegisterPage() {
     <S.Wrapper>
       <S.CardPreviewWrapper>
         <CardPreview
-          cardType={cardType}
+          cardType={getCardType(cardNumber.first)}
           cardNumber={cardNumber}
           cardExpirationDate={cardExpirationDate}
           selectedCompany={selectedCompany}

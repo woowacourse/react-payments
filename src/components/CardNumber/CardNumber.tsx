@@ -11,7 +11,7 @@ interface CardNumberProps {
 }
 
 export default function CardNumber({ register, cardNumberErrors }: CardNumberProps) {
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumberInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
     if (value.length < 4) return;
@@ -38,7 +38,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="1"
           {...register('first', {
-            onChange: handleInputChange,
+            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -55,7 +55,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="2"
           {...register('second', {
-            onChange: handleInputChange,
+            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -72,7 +72,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="3"
           {...register('third', {
-            onChange: handleInputChange,
+            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -89,7 +89,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="4"
           {...register('fourth', {
-            onChange: handleInputChange,
+            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,

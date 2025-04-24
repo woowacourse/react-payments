@@ -11,7 +11,7 @@ interface CardExpirationDateProps {
 }
 
 export default function CardExpirationDate({ register, cardExpirationDateErrors }: CardExpirationDateProps) {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardExpirationInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length === 2 && event.target.dataset.expiry === 'month') {
       const nextInput = document.querySelector(`input[data-expiry="year"]`) as HTMLInputElement;
       if (nextInput) {
@@ -34,7 +34,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           data-expiry="month"
           inputMode="numeric"
           {...register('month', {
-            onChange: handleInputChange,
+            onChange: handleCardExpirationInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
