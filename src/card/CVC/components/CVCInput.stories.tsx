@@ -4,7 +4,7 @@ import { expect, userEvent } from "@storybook/test";
 import CVCInput from "./CVCInput";
 
 const meta = {
-  title: "Component/CVCInput",
+  title: "Card/CVCInput",
   component: CVCInput,
   args: { CVCState: { isError: false, value: "" }, handleCVCChange: () => {} },
 } satisfies Meta<typeof CVCInput>;

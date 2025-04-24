@@ -5,7 +5,7 @@ import { userEvent, expect } from "@storybook/test";
 import { CARD_TYPE_LIST } from "../constants";
 
 const meta = {
-  title: "Component/CardTypeDropdown",
+  title: "Card/CardTypeDropdown",
   component: CardTypeDropdown,
   args: {
     cardType: null,

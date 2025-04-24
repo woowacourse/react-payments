@@ -5,7 +5,7 @@ import useControlledCardPassword from "../hooks/useControlledCardPassword";
 import { CARD_PASSWORD_ERROR_MESSAGE } from "../constants";
 
 const meta = {
-  title: "Component/CardPasswordInput",
+  title: "Card/CardPasswordInput",
   component: CardPasswordInput,
   args: {
     cardPasswordState: { value: "", errorMessage: "" },
