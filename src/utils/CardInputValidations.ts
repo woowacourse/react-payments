@@ -22,3 +22,9 @@ export function validateCvcLengthError(value: string) {
     return 'CVC는 3자리여야 합니다.';
   }
 }
+
+export function validatePasswordLengthError(value: string) {
+  if (value !== '' && value.length !== 2) {
+    return '비밀번호는 2자리여야 합니다.';
+  }
+}

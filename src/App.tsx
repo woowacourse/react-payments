@@ -7,6 +7,7 @@ import CardPreview from './components/CardPreview/CardPreview';
 import CvcSection from './components/CvcSection/CvcSection';
 import { CardCompany, CardLogo, CardNumber, Expiration } from './types/card';
 import CardCompanySection from './components/CardCompanySection/CardCompanySection';
+import CardPasswordSection from './components/CardPasswordSection/CardPasswordSection';
 
 export default function App() {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
@@ -14,6 +15,7 @@ export default function App() {
   const [cardCompany, setCardCompany] = useState<CardCompany>('');
   const [expiration, setExpiration] = useState<Expiration>({ month: '', year: '' });
   const [cvc, setCvc] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   return (
     <div className={styles.appContainer}>
@@ -22,6 +24,7 @@ export default function App() {
       <CardCompanySection cardCompany={cardCompany} setCardCompany={setCardCompany} />
       <CardExpirationSection expiration={expiration} setExpiration={setExpiration} />
       <CvcSection cvc={cvc} setCvc={setCvc} />
+      <CardPasswordSection password={password} setPassword={setPassword} />
     </div>
   );
 }
