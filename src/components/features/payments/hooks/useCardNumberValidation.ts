@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
@@ -118,6 +118,12 @@ function useCardNumberValidation() {
       nextInputRef.current.focus();
     }
   };
+
+  useEffect(() => {
+    if (inputRefs.cardNumberPart1.current) {
+      inputRefs.cardNumberPart1.current.focus();
+    }
+  }, []);
 
   return {
     inputValues,

@@ -5,6 +5,7 @@ import { ERROR_TYPE, ErrorType } from '../config/error';
 function useCVCValidation() {
   const [inputValue, setInputValue] = useState('');
   const [errorType, setErrorType] = useState<ErrorType[]>([]);
+  const [isInputComplete, setIsInputComplete] = useState(false);
 
   const updateCardError = ({
     errorType,
@@ -26,6 +27,7 @@ function useCVCValidation() {
     if (value.length > CVC.length.max) return;
 
     setInputValue(value);
+    if (value.length === CVC.length.max) setIsInputComplete(true);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -37,7 +39,7 @@ function useCVCValidation() {
     });
   };
 
-  return { inputValue, errorType, handleInputValue, onBlur };
+  return { inputValue, errorType, isInputComplete, handleInputValue, onBlur };
 }
 
 export default useCVCValidation;
