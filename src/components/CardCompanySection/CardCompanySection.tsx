@@ -1,8 +1,18 @@
 import styles from './CardCompanySection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
+import { Dispatch, SetStateAction } from 'react';
+import { CardCompany } from '../../types/card';
 
-export default function CardCompanySection() {
+type Props = {
+  setCardCompany: Dispatch<SetStateAction<CardCompany>>;
+};
+
+export default function CardCompanySection({ setCardCompany }: Props) {
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCardCompany(e.target.value as CardCompany);
+  };
+
   return (
     <div className={styles.container}>
       <FieldGroup.TitleWrapper>
@@ -12,18 +22,18 @@ export default function CardCompanySection() {
       <div className={styles.fieldGroup}>
         <FieldGroup.Label text="카드사" />
         <div className={styles.selectWrapper}>
-          <select className={styles.select} defaultValue="default">
+          <select className={styles.select} defaultValue="default" onChange={handleSelectChange}>
             <option value="default" disabled hidden>
               카드를 선택해주세요
             </option>
-            <option value="bc">BC카드</option>
-            <option value="shinhan">신한카드</option>
-            <option value="kakao">카카오뱅크</option>
-            <option value="hyundai">현대카드</option>
-            <option value="woori">우리카드</option>
-            <option value="lotte">롯데카드</option>
-            <option value="hana">하나카드</option>
-            <option value="kb">국민카드</option>
+            <option value="BC카드">BC카드</option>
+            <option value="신한카드">신한카드</option>
+            <option value="카카오뱅크">카카오뱅크</option>
+            <option value="현대카드">현대카드</option>
+            <option value="우리카드">우리카드</option>
+            <option value="롯데카드">롯데카드</option>
+            <option value="하나카드">하나카드</option>
+            <option value="국민카드">국민카드</option>
           </select>
           <IoIosArrowUp className={styles.icon} />
           {/* <IoIosArrowDown /> */}

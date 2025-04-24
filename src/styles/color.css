@@ -4,4 +4,13 @@
   --color-gray-10: #acacac;
   --color-gray-20: #8b95a1;
   --color-red: #ff3d3d;
+
+  --color-card-BC카드: #f04651;
+  --color-card-신한카드: #0046ff;
+  --color-card-카카오뱅크: #ffe600;
+  --color-card-현대카드: #000000;
+  --color-card-우리카드: #007bc8;
+  --color-card-롯데카드: #ed1c24;
+  --color-card-하나카드: #009490;
+  --color-card-국민카드: #6a6056;
 }
