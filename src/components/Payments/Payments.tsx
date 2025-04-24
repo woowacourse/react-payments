@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import InputSection from "../\bInputSection/InputSection";
 import { INPUT_TYPE } from "../../constants/constants";
 import { useCompletion } from "../../hooks/useCompletion";

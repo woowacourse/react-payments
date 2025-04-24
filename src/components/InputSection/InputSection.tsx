@@ -90,9 +90,13 @@ function InputSection({
     }
   }, [type, isComplete, error]);
   const getErrorVisible = (type: InputType) => {
-    return type === INPUT_TYPE.cvcNumber
-      ? error[type]
-      : Object.values(error[type] ?? {}).some((value: boolean) => value);
+    if (type === INPUT_TYPE.cvcNumber) {
+      return error.cvcNumber;
+    }
+    if (type === INPUT_TYPE.password) {
+      return error.password;
+    }
+    return Object.values(error[type] ?? {}).some((value: boolean) => value);
   };
 
   return (
