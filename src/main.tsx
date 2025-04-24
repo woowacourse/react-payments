@@ -2,17 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import RegisterComplete from "./pages/RegisterComplete/RegisterComplete";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { ContainerCSS, WrapperCSS } from "./styles/Layout.styled";
+import { ContainerStyles, WrapperStyles } from "./styles/Layout.styled";
 import CardForm from "./pages/CardForm/CardForm";
 import { GlobalStyles } from "./styles/Global.styled";
 
 function Layout() {
   return (
-    <ContainerCSS>
-      <WrapperCSS>
+    <ContainerStyles>
+      <WrapperStyles>
         <Outlet />
-      </WrapperCSS>
-    </ContainerCSS>
+      </WrapperStyles>
+    </ContainerStyles>
   );
 }
 

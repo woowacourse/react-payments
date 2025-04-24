@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const RegisterCompleteCSS = styled.div`
+export const RegisterCompleteStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -10,16 +10,16 @@ export const RegisterCompleteCSS = styled.div`
   height: 100%;
 `;
 
-export const CheckImgCSS = styled.img`
+export const CheckImgStyles = styled.img`
   width: 100px;
   height: 100px;
 `;
 
-export const CompletionMessageCSS = styled.div`
+export const CompletionMessageStyles = styled.div`
   text-align: center;
 `;
 
-export const CompletionTitleCSS = styled.h1`
+export const CompletionTitleStyles = styled.h1`
   margin: 0;
   padding: 0;
 `;

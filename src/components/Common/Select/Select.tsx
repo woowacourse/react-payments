@@ -1,5 +1,5 @@
 import React from "react";
-import { OptionCSS, SelectCSS } from "./Select.styled";
+import { OptionStyles, SelectStyles } from "./Select.styled";
 
 interface Option {
   value: string;
@@ -20,15 +20,15 @@ export default function Select({
   ...props
 }: SelectProps) {
   return (
-    <SelectCSS $isError={isError} {...props}>
-      <OptionCSS value="">{placeholder}</OptionCSS>
+    <SelectStyles $isError={isError} {...props}>
+      <OptionStyles value="">{placeholder}</OptionStyles>
       {options.map(({ value, text }) => {
         return (
-          <OptionCSS key={value} value={value}>
+          <OptionStyles key={value} value={value}>
             {text}
-          </OptionCSS>
+          </OptionStyles>
         );
       })}
-    </SelectCSS>
+    </SelectStyles>
   );
 }

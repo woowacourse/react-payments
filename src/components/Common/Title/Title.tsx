@@ -1,9 +1,9 @@
-import { TitleCSS } from "./Title.styled";
+import { TitleStyles } from "./Title.styled";
 
 export interface TitleProps {
   title: string;
 }
 
 export default function Title({ title }: TitleProps) {
-  return <TitleCSS>{title}</TitleCSS>;
+  return <TitleStyles>{title}</TitleStyles>;
 }

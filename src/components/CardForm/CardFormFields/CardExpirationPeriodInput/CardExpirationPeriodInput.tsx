@@ -6,7 +6,7 @@ import {
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
-import { CardFormFieldCSS } from "../CardFormFields.styled";
+import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 import { ExpirationPeriodSegmentType } from "../../../../types/types";
 
@@ -26,7 +26,7 @@ export default function CardExpirationPeriodInput() {
   };
 
   return (
-    <CardFormFieldCSS>
+    <CardFormFieldStyles>
       {periodPositions.map((position) => {
         return (
           <Input
@@ -44,6 +44,6 @@ export default function CardExpirationPeriodInput() {
           />
         );
       })}
-    </CardFormFieldCSS>
+    </CardFormFieldStyles>
   );
 }

@@ -6,7 +6,7 @@ import {
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
-import { CardFormFieldCSS } from "../CardFormFields.styled";
+import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 import { CardNumbersSegmentType } from "../../../../types/types";
 
@@ -25,7 +25,7 @@ export default function CardNumberInput() {
   };
 
   return (
-    <CardFormFieldCSS>
+    <CardFormFieldStyles>
       {cardPositions.map((position) => {
         return (
           <Input
@@ -43,6 +43,6 @@ export default function CardNumberInput() {
           />
         );
       })}
-    </CardFormFieldCSS>
+    </CardFormFieldStyles>
   );
 }

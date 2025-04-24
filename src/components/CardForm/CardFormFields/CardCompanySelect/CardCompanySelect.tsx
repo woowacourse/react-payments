@@ -3,7 +3,7 @@ import { CARD_FORM_TYPE } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import { isCardCompanyState } from "../../../../utils/typeGuard";
 import Select from "../../../Common/Select/Select";
-import { CardFormFieldCSS } from "../CardFormFields.styled";
+import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 
 const cardCompanyOptions = [
@@ -32,7 +32,7 @@ export default function CardCompanySelect() {
   };
 
   return (
-    <CardFormFieldCSS>
+    <CardFormFieldStyles>
       <Select
         key={CARD_FORM_TYPE.cardCompany}
         isError={cardCompanyError.hasError}
@@ -42,6 +42,6 @@ export default function CardCompanySelect() {
         onChange={handleCardCompanyChange}
         onBlur={handleCardCompanyChange}
       />
-    </CardFormFieldCSS>
+    </CardFormFieldStyles>
   );
 }

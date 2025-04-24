@@ -19,14 +19,14 @@ const CARD_COMPANY_COLOR_MAP = {
   [CARD_COMPANY.kb]: "#6A6056",
 };
 
-export const CardPreviewContainerCSS = styled.div`
+export const CardPreviewContainerStyles = styled.div`
   width: 100%;
   height: 230px;
   display: flex;
   justify-content: center;
 `;
 
-export const CardPreviewCSS = styled.div<{ $cardCompany: CardCompanyState }>`
+export const CardPreviewStyles = styled.div<{ $cardCompany: CardCompanyState }>`
   width: 260px;
   height: 200px;
   border-radius: 8px;
@@ -49,12 +49,12 @@ export const CardPreviewCSS = styled.div<{ $cardCompany: CardCompanyState }>`
   position: relative;
 `;
 
-export const CardTopContainerCSS = styled.div`
+export const CardTopContainerStyles = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const CardICChipCSS = styled.div`
+export const CardICChipStyles = styled.div`
   background-color: #ddcd78;
   width: 44px;
   height: 30px;
@@ -64,7 +64,7 @@ export const CardICChipCSS = styled.div`
   top: 18px;
 `;
 
-export const CardTypeCSS = styled.div<{ $cardType: CardType }>`
+export const CardTypeStyles = styled.div<{ $cardType: CardType }>`
   background: no-repeat url(${(props) => CARD_IMAGE[props.$cardType]});
   background-size: cover;
   width: 44px;
@@ -75,7 +75,7 @@ export const CardTypeCSS = styled.div<{ $cardType: CardType }>`
   top: 18px;
 `;
 
-export const CardNumbersGroupCSS = styled.div`
+export const CardNumbersGroupStyles = styled.div`
   display: flex;
   gap: 7px;
 `;

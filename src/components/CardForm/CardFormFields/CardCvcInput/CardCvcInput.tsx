@@ -6,7 +6,7 @@ import {
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
-import { CardFormFieldCSS } from "../CardFormFields.styled";
+import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 
 export default function CardCvcInput() {
@@ -19,7 +19,7 @@ export default function CardCvcInput() {
   };
 
   return (
-    <CardFormFieldCSS>
+    <CardFormFieldStyles>
       <Input
         key={CARD_FORM_TYPE.cvcNumber}
         placeholder={PLACEHOLDER.cvcNumber}
@@ -33,6 +33,6 @@ export default function CardCvcInput() {
           handleCvcNumberChange(e.target.value)
         }
       />
-    </CardFormFieldCSS>
+    </CardFormFieldStyles>
   );
 }

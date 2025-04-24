@@ -1,9 +1,9 @@
 import Button from "../../components/Common/Button/Button";
 import {
-  RegisterCompleteCSS,
-  CheckImgCSS,
-  CompletionMessageCSS,
-  CompletionTitleCSS,
+  RegisterCompleteStyles,
+  CheckImgStyles,
+  CompletionMessageStyles,
+  CompletionTitleStyles,
 } from "./RegisterComplete.styled";
 
 export default function RegisterComplete() {
@@ -11,13 +11,13 @@ export default function RegisterComplete() {
   // const { cardFirstSegment, cardCompany } = state || {};
 
   return (
-    <RegisterCompleteCSS>
-      <CheckImgCSS src="./check.svg" alt="check" />
-      <CompletionMessageCSS>
-        <CompletionTitleCSS>5511로 시작하는</CompletionTitleCSS>
-        <CompletionTitleCSS>BC카드가 등록되었어요.</CompletionTitleCSS>
-      </CompletionMessageCSS>
+    <RegisterCompleteStyles>
+      <CheckImgStyles src="./check.svg" alt="check" />
+      <CompletionMessageStyles>
+        <CompletionTitleStyles>5511로 시작하는</CompletionTitleStyles>
+        <CompletionTitleStyles>BC카드가 등록되었어요.</CompletionTitleStyles>
+      </CompletionMessageStyles>
       <Button type="button" text="확인" />
-    </RegisterCompleteCSS>
+    </RegisterCompleteStyles>
   );
 }

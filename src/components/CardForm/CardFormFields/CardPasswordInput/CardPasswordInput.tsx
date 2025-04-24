@@ -6,7 +6,7 @@ import {
 } from "../../../../constants/constants";
 import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
-import { CardFormFieldCSS } from "../CardFormFields.styled";
+import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 
 export default function CardPasswordInput() {
@@ -19,7 +19,7 @@ export default function CardPasswordInput() {
   };
 
   return (
-    <CardFormFieldCSS>
+    <CardFormFieldStyles>
       <Input
         key={CARD_FORM_TYPE.password}
         type="password"
@@ -34,6 +34,6 @@ export default function CardPasswordInput() {
           handlePasswordChange(e.target.value)
         }
       />
-    </CardFormFieldCSS>
+    </CardFormFieldStyles>
   );
 }

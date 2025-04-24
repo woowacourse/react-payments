@@ -3,12 +3,12 @@ import { useCard } from "../../../hooks/useCard";
 import { useCardType } from "../../../hooks/useCardType";
 import { useCardValidation } from "../../../hooks/useCardValidation";
 import {
-  CardNumbersGroupCSS,
-  CardTypeCSS,
-  CardPreviewContainerCSS,
-  CardPreviewCSS,
-  CardTopContainerCSS,
-  CardICChipCSS,
+  CardNumbersGroupStyles,
+  CardTypeStyles,
+  CardPreviewContainerStyles,
+  CardPreviewStyles,
+  CardTopContainerStyles,
+  CardICChipStyles,
 } from "./CardPreview.styled";
 
 export default function CardPreview() {
@@ -17,16 +17,16 @@ export default function CardPreview() {
   const { hasErrorByType } = useCardValidation();
 
   return (
-    <CardPreviewContainerCSS>
-      <CardPreviewCSS $cardCompany={cardCompany}>
-        <CardTopContainerCSS>
-          <CardICChipCSS />
+    <CardPreviewContainerStyles>
+      <CardPreviewStyles $cardCompany={cardCompany}>
+        <CardTopContainerStyles>
+          <CardICChipStyles />
           {!hasErrorByType(CARD_FORM_TYPE.cardNumbers) && cardType !== null && (
-            <CardTypeCSS $cardType={cardType} />
+            <CardTypeStyles $cardType={cardType} />
           )}
-        </CardTopContainerCSS>
+        </CardTopContainerStyles>
 
-        <CardNumbersGroupCSS>
+        <CardNumbersGroupStyles>
           <span>{cardNumbers.first}</span>
           <span>{cardNumbers.second}</span>
           <span>
@@ -35,14 +35,14 @@ export default function CardPreview() {
           <span>
             {cardNumbers.fourth && "*".repeat(cardNumbers.fourth.length)}
           </span>
-        </CardNumbersGroupCSS>
+        </CardNumbersGroupStyles>
 
         {(expirationPeriod.month || expirationPeriod.year) && (
           <span>
             {expirationPeriod.month}/{expirationPeriod.year}
           </span>
         )}
-      </CardPreviewCSS>
-    </CardPreviewContainerCSS>
+      </CardPreviewStyles>
+    </CardPreviewContainerStyles>
   );
 }

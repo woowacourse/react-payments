@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerCSS = styled.div`
+export const ContainerStyles = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -10,7 +10,7 @@ export const ContainerCSS = styled.div`
   background-color: #f7f7f7;
 `;
 
-export const WrapperCSS = styled.div`
+export const WrapperStyles = styled.div`
   display: flex;
   flex-direction: column;
   width: 28%;
