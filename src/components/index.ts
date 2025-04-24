@@ -10,3 +10,4 @@ export { default as CardCVCNumber } from './CardCVCNumber/CardCVCNumber';
 export { default as CardPreview } from './CardPreview/CardPreview';
 export { default as CardCompany } from './CardCompany/CardCompany';
 export { default as CardPassword } from './CardPassword/CardPassword';
+export { default as Select } from './Select/Select';
