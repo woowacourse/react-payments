@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { cardNumberValidator, cardExpirationDateValidator, cardCVCValidator } from '../validation/cardInfoValidator';
+import {
+  cardNumberValidator,
+  cardExpirationDateValidator,
+  cardCVCValidator,
+  cardIssuerValidator,
+  cardPasswordValidator,
+} from '../validation/cardInfoValidator';
 import { ErrorProps } from '../../../shared/model/types';
 import { NO_ERROR } from '../../../shared/constants/errorConstants';
 
@@ -7,12 +13,16 @@ const VALIDATORS = {
   cardNumber: cardNumberValidator,
   cardExpirationDate: cardExpirationDateValidator,
   cardCVC: cardCVCValidator,
+  cardIssuer: cardIssuerValidator,
+  cardPassword: cardPasswordValidator,
 };
 
 const ERROR_KEYS = {
   cardNumber: 'cardNumberError',
   cardExpirationDate: 'cardExpirationDateError',
   cardCVC: 'cardCVCError',
+  cardIssuer: 'cardIssuerError',
+  cardPassword: 'cardPasswordError',
 };
 
 export default function useCardInfo() {
@@ -22,13 +32,23 @@ export default function useCardInfo() {
     year: '',
   });
   const [cardCVC, setCardCVC] = useState<string>('');
+  const [cardIssuer, setCardIssuer] = useState<string>('');
+  const [cardPassword, setCardPassword] = useState<string>('');
   const [error, setError] = useState<ErrorProps>({
     cardNumberError: { errorIndex: NO_ERROR, errorMessage: '' },
     cardExpirationDateError: { errorIndex: NO_ERROR, errorMessage: '' },
     cardCVCError: { errorIndex: NO_ERROR, errorMessage: '' },
+    cardIssuerError: { errorIndex: NO_ERROR, errorMessage: '' },
+    cardPasswordError: { errorIndex: NO_ERROR, errorMessage: '' },
   });
 
-  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  console.log('cardNumber', cardNumber);
+  console.log('cardExpirationDate', cardExpirationDate);
+  console.log('cardCVC', cardCVC);
+  console.log('cardIssuer', cardIssuer);
+  console.log('cardPassword', cardPassword);
+
+  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith('cardNumber')) {
@@ -38,26 +58,32 @@ export default function useCardInfo() {
         validateAndSetError('cardNumber', updatedNumbers, setError);
         return updatedNumbers;
       });
-    }
-
-    if (name.startsWith('cardExpirationDate')) {
+    } else if (name.startsWith('cardExpirationDate')) {
       const key = name.split('-')[1] as 'month' | 'year';
       setCardExpirationDate((prev) => {
         const updateDate = { ...prev, [key]: value };
         validateAndSetError('cardExpirationDate', updateDate, setError);
         return updateDate;
       });
-    }
-
-    if (name.startsWith('cardCVC')) {
+    } else if (name.startsWith('cardCVC')) {
       setCardCVC(() => {
         validateAndSetError('cardCVC', value, setError);
+        return value;
+      });
+    } else if (name.startsWith('cardIssuer')) {
+      setCardIssuer(() => {
+        validateAndSetError('cardIssuer', value, setError);
+        return value;
+      });
+    } else if (name.startsWith('cardPassword')) {
+      setCardPassword(() => {
+        validateAndSetError('cardPassword', value, setError);
         return value;
       });
     }
   };
 
-  return { cardNumber, cardExpirationDate, cardCVC, handleCardInfoChange, error };
+  return { cardNumber, cardExpirationDate, cardIssuer, handleCardInfoChange, error };
 }
 
 const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {

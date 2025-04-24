@@ -6,4 +6,6 @@ export interface ErrorProps {
   cardNumberError: { errorIndex: number; errorMessage: string };
   cardExpirationDateError: { errorIndex: number; errorMessage: string };
   cardCVCError: { errorIndex: number; errorMessage: string };
+  cardIssuerError: { errorIndex: number; errorMessage: string };
+  cardPasswordError: { errorIndex: number; errorMessage: string };
 }

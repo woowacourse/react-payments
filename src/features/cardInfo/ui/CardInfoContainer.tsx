@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import CardNumberSection from './CardNumberSection';
 import CardExpirationDateSection from './CardExpirationDateSection';
 import CardCVCSection from './CardCVCSection';
+import CardSelection from './CardSelection';
+import CardPasswordSection from './CardPasswordSection';
 
 const CardInfoWrapper = styled.div`
   width: 100%;
@@ -13,17 +15,21 @@ const CardInfoWrapper = styled.div`
 `;
 
 export default function CardInfoContainer({
+  cardIssuer,
   onChange,
   error,
 }: {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  cardIssuer: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   error: ErrorProps;
 }) {
   return (
     <CardInfoWrapper>
-      <CardNumberSection error={error} onChange={onChange} />
-      <CardExpirationDateSection error={error} onChange={onChange} />
+      <CardPasswordSection error={error} onChange={onChange} />
       <CardCVCSection error={error} onChange={onChange} />
+      <CardExpirationDateSection error={error} onChange={onChange} />
+      <CardNumberSection error={error} onChange={onChange} />
+      <CardSelection cardIssuer={cardIssuer} error={error} onChange={onChange} />
     </CardInfoWrapper>
   );
 }
