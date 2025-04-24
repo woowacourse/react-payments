@@ -12,6 +12,7 @@ import {
 import { createContext, ReactNode, useState } from "react";
 import { CardFormType } from "../constants/constants";
 import { isErrorCardNumber } from "../utils/validations/cardNumber";
+import { isErrorExpirationPeriod } from "../utils/validations/expirationPeriod";
 
 export interface CardValidationContextType {
   cardNumberErrors: CardNumberErrorsState;
@@ -97,14 +98,22 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     value: string,
     position: ExpirationPeriodSegmentType
   ) => {
-    // const errorMessage = isErrorCardNumber(value);
-    // setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) => ({
-    //   errorMessage: errorMessage,
-    //   hasError: {
-    //     ...prev.hasError,
-    //     [position]: !!errorMessage,
-    //   },
-    // }));
+    const errorMessage = isErrorExpirationPeriod(value, position);
+    setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) => {
+      const newHasError = {
+        ...prev.hasError,
+        [position]: !!errorMessage,
+      };
+
+      const hasAnyError = Object.values(newHasError).some(Boolean);
+      const finalErrorMessage =
+        errorMessage || (hasAnyError ? prev.errorMessage : null);
+
+      return {
+        errorMessage: finalErrorMessage,
+        hasError: newHasError,
+      };
+    });
   };
 
   const validateCvcNumber = (value: string) => {

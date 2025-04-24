@@ -11,16 +11,7 @@ export const isCardNumberComplete = (
   );
 };
 
-const cardNumberValidations = [
-  {
-    test: (value: string) => isNotPositiveInteger(value),
-    message: "숫자만 입력 가능합니다",
-  },
-];
-
 export const isErrorCardNumber = (value: string) => {
-  for (const validation of cardNumberValidations) {
-    if (validation.test(value)) return validation.message;
-  }
+  if (isNotPositiveInteger(value)) return "숫자만 입력 가능합니다";
   return null;
 };
