@@ -20,11 +20,11 @@ function App() {
         cardIssuer={cardState.cardIssuer}
       />
       <div css={FormContainerStyle}>
-        <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
-        <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
-        <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
         <PasswordForm passwordState={password} dispatch={dispatch} />
+        <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
+        <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
         <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />
+        <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
       </div>
     </div>
   );

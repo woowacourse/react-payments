@@ -8,27 +8,32 @@ type SelectPropsType = {
 };
 
 const Select = ({ optionList, value, setValue }: SelectPropsType) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setdropdownOpen] = useState(false);
 
-  const toggleDropdownOpen = () => setDropdownOpen((prev) => !prev);
-  const handleOptionClick = (value: string) => {
-    setValue(value);
-    setDropdownOpen(false);
+  const toggleDropdownOpen = () => setdropdownOpen((prev) => !prev);
+  const closeDropdown = () => setdropdownOpen(false);
+
+  const handleOption = (v: string) => {
+    setValue(v);
+    setdropdownOpen(false);
   };
 
   return (
-    <div css={selectBoxStyle}>
-      <div css={selectedValueStyle(dropdownOpen)}>
+    <div tabIndex={0} onBlur={closeDropdown} css={selectBoxStyle}>
+      <div css={selectedValueStyle(dropdownOpen)} onClick={toggleDropdownOpen}>
         <div css={selectedValueTextStyle(Boolean(value))}>{value ?? "선택해 주세요."}</div>
-        <img css={iconStyle} src={dropdownOpen ? "chevron-down.svg" : "chevron-up.svg"} onClick={toggleDropdownOpen} />
+        <img css={iconStyle} src={dropdownOpen ? "chevron-down.svg" : "chevron-up.svg"} />
       </div>
-      <ul css={optionListStyle(dropdownOpen)}>
-        {optionList.map((value: string, index: number) => (
-          <li key={index} css={optionStyle} onClick={() => handleOptionClick(value)}>
-            {value}
-          </li>
-        ))}
-      </ul>
+
+      {dropdownOpen && (
+        <ul css={optionListStyle}>
+          {optionList.map((opt, idx) => (
+            <li key={idx} css={optionStyle} onClick={() => handleOption(opt)}>
+              {opt}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
@@ -37,42 +42,43 @@ export default Select;
 
 const selectBoxStyle = css`
   width: 100%;
-  height: 50px;
+  height: 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
+  margin-bottom: 10px;
 `;
 
-const selectedValueStyle = (dropdownOpen: boolean) => css`
+const selectedValueStyle = (dropdowndropdownOpen: boolean) => css`
   width: 100%;
-  height: 31.28px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  border: 1px solid ${dropdownOpen ? "#000000" : "#acacac"};
+  padding: 8px 0px;
+  border: 1px solid ${dropdowndropdownOpen ? "#000000" : "#acacac"};
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const selectedValueTextStyle = (isSelected: boolean) => css`
   font-size: 11px;
   color: ${isSelected ? "#000000" : "#ACACAC"};
+  padding: 0 0 0 8px;
 `;
 
 const iconStyle = css`
   width: 8px;
   height: 4px;
-  cursor: pointer;
+  padding: 0 8px 0 0;
 `;
 
-const optionListStyle = (dropdownOpen: boolean) => css`
+const optionListStyle = css`
   width: 100%;
   border: 1px solid #acacac;
   border-radius: 5.31px;
-  opacity: ${dropdownOpen ? 1 : 0};
-  margin: 0;
-  padding: 0;
+  z-index: 100;
 `;
 
 const optionStyle = css`
