@@ -7,6 +7,8 @@ import styled from '@emotion/styled';
 import useCardNumber from './hooks/useCardNumber';
 import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
+import CardCompanyField from './components/cardInfoForm/CardCompanyField/CardCompanyField';
+import { useCardCompany } from './hooks/useCardCompany';
 
 function App() {
   const {
@@ -26,6 +28,14 @@ function App() {
     onChangeCVC,
     errorMessage: cardCVCErrorMessage,
   } = useCardCVC();
+
+  const {
+    selectedCard,
+    CARD_COMPANY_NAMES,
+    CARD_COMPANY_COLORS,
+    CARD_COMPANY_PLACEHOLDER,
+    onClickCardCompany,
+  } = useCardCompany();
 
   const getErrorMessageFromList = (errorMessageList: string[]) => {
     const filteredErrorMessageList = errorMessageList.filter(
@@ -56,6 +66,18 @@ function App() {
               Boolean(errorMessage),
             )}
             onChange={onChange}
+          />
+        </CardInputSection>
+        <CardInputSection
+          title="카드사를 선택해 주세요"
+          description="현재 국내 카드사만 가능합니다."
+          errorMessage={''}
+        >
+          <CardCompanyField
+            selectedCard={selectedCard}
+            CARD_COMPANY_NAMES={CARD_COMPANY_NAMES}
+            CARD_COMPANY_PLACEHOLDER={CARD_COMPANY_PLACEHOLDER}
+            onClickCardCompany={onClickCardCompany}
           />
         </CardInputSection>
         <CardInputSection
