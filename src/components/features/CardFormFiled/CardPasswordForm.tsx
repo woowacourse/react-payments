@@ -22,7 +22,7 @@ export const CardPasswordForm = ({
     <CardInputLayout
       headerText="비밀번호를 입력해 주세요."
       description="앞의 2자리를 입력해 주세요."
-      label="비밀번화 앞 2자리"
+      label="비밀번호 앞 2자리"
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
         {password.map((password, index) => (
