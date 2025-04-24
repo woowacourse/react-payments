@@ -14,7 +14,11 @@ function App() {
 
   return (
     <div css={AppStyle}>
-      <PreviewCard uniqueNumber={cardState.uniqueNumber} expirationDate={cardState.expirationDate} />
+      <PreviewCard
+        uniqueNumber={cardState.uniqueNumber}
+        expirationDate={cardState.expirationDate}
+        cardIssuer={cardState.cardIssuer}
+      />
       <div css={FormContainerStyle}>
         <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
         <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
