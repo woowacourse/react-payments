@@ -49,4 +49,5 @@ box-sizing: border-box → padding 포함한 너비 계산 */
   color: #ff3d3d;
   font-size: 9.5px;
   font-weight: 400;
+  height: 9.5px;
 }
