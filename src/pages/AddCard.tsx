@@ -9,10 +9,19 @@ import CARD_LABEL_INPUT_CONFIG from '../constants/cardLabeledInputConfig';
 import { useEffect } from 'react';
 import useCardFormStep from '../hook/useCardFormStep';
 import CardDescriptiveSelect from '../component/select/CardDescriptiveSelect';
+import Button from '../component/Button';
+import { useNavigate } from 'react-router-dom';
 
 const AddCard = () => {
   const { cardInput, handleCardInput, errorMessages, isError } = useForm();
   const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, isError });
+
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    sessionStorage.setItem('firstCardNumber', JSON.stringify(cardInput.first));
+    sessionStorage.setItem('cardBrand', JSON.stringify(cardInput.cardBrand));
+    navigate('/success');
+  };
 
   useEffect(() => {
     handleStepIndex();
@@ -27,9 +36,14 @@ const AddCard = () => {
   const expirationDateErrorMessage = getFirstErrorMessage([errorMessages.MM, errorMessages.YY]);
 
   return (
-    <Wrap>
+    <>
       <Card cardInput={cardInput} cardType={cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'} />
       <Form>
+        {stepIndex >= 5 && (
+          <ButtonContainer>
+            <Button text="확인" handleCLick={handleSubmit} />
+          </ButtonContainer>
+        )}
         {stepIndex >= 4 && (
           <CardDescriptiveInput
             config={CARD_LABEL_INPUT_CONFIG.password}
@@ -81,21 +95,9 @@ const AddCard = () => {
           />
         )}
       </Form>
-    </Wrap>
+    </>
   );
 };
-
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 376px;
-  padding: 30px;
-  background-color: var(--color-white);
-  padding-top: 77px;
-  min-height: 700px;
-  gap: 45px;
-`;
 
 const Form = styled.form`
   display: flex;
@@ -103,6 +105,17 @@ const Form = styled.form`
   align-items: flex-start;
   width: 100%;
   gap: 16px;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  width: 436px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background-color: var(--color-black);
 `;
 
 export default AddCard;

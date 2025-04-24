@@ -42,7 +42,7 @@ const useCardFormStep = ({ cardInput, isError }: UseCardFormStepProps) => {
     if (stepIndex === 1 && isFormSelectComplete(cardBrandSelectKeys)) setStepIndex(stepIndex + 1);
     if (stepIndex === 2 && isExpirationDateComplete) setStepIndex(stepIndex + 1);
     if (stepIndex === 3 && isCVCComplete) setStepIndex(stepIndex + 1);
-    if (stepIndex === 4 && isFormAllComplete && isFormValid()) console.log('버튼!');
+    if (stepIndex === 4 && isFormAllComplete && isFormValid()) setStepIndex(stepIndex + 1);
   };
 
   return { stepIndex, handleStepIndex };

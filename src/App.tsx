@@ -1,11 +1,12 @@
-import AddCard from "./pages/AddCard";
-import GlobalStyles from "./GlobalStyles";
+import GlobalStyles from './GlobalStyles';
+import router from './routes';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <AddCard />
+      <RouterProvider router={router} />
     </>
   );
 }
