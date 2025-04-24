@@ -7,11 +7,15 @@ import CardPeriodInput from './components/CardPeriod/CardPeriodInput';
 import CardCVCInput from './components/CardCVCInput/CardCVCInput';
 import CardPassword from "./components/CardPassword/CardPassword";
 import Button from "./components/@common/Button/Button";
-import { appLayout, mainLayout } from './App.style';
-import { Global, ThemeProvider } from '@emotion/react';
-import { useCardNumber, useCardExpiration, useCardCVC } from './hooks';
+import {appLayout, mainLayout} from './App.style';
+import {Global, ThemeProvider} from '@emotion/react';
+import {useCardNumber, useCardExpiration, useCardCVC} from './hooks';
+import {useState} from "react";
+import {CardBrandType} from "./types";
 
 function App() {
+  const [brand, setBrand] = useState<CardBrandType | null>(null);
+
   const {
     cardNumber,
     cardNumberError,
@@ -27,17 +31,17 @@ function App() {
     getYearErrorMessage,
   } = useCardExpiration();
 
-  const { cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage } =
+  const {cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage} =
     useCardCVC();
 
   return (
     <ThemeProvider theme={theme}>
       <Global styles={GlobalStyle} />
       <div css={appLayout}>
-        <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
+        <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} brand={brand} />
         <main css={mainLayout}>
-          <CardPassword/>
-          <CardBrand />
+          <CardPassword />
+          <CardBrand value={brand} onChange={(newBrand) => setBrand(newBrand)} />
           <CardNumberInput
             cardNumber={cardNumber}
             onChange={handleCardNumberChange}
@@ -57,7 +61,7 @@ function App() {
             hasError={cardCVCError}
             getCardCVCErrorMessage={getCardCVCErrorMessage}
           />
-          <Button content='확인' style="bottom"/>
+          <Button content='확인' style="bottom" />
         </main>
       </div>
     </ThemeProvider>

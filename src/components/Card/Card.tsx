@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { MasterCard, Visa } from '../../asset/image';
 import {
   cardContainer,
@@ -9,14 +10,18 @@ import {
   cardType,
 } from './Card.style';
 import { CARD_TYPE } from '../../constants';
-import { CardExpirationDate, CardNumber } from "../../types";
+import { CardBrandType, CardExpirationDate, CardNumber } from "../../types";
+import { css, useTheme } from "@emotion/react";
 
 type CardProps = {
   cardNumber: CardNumber;
   cardExpirationDate: CardExpirationDate;
+  brand: CardBrandType | null;
 };
 
-function Card({ cardNumber, cardExpirationDate }: CardProps) {
+function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
+  const theme = useTheme();
+
   const { first, second, third, forth } = cardNumber;
 
   const firstString = first?.toString();
@@ -40,8 +45,10 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
 
   const hasFilledExpirationField = Boolean(cardExpirationDate.month || cardExpirationDate.year);
 
+  const brandBackground = brand ? css`background-color: ${theme.color.cardBrand[brand]};` : undefined;
+
   return (
-    <section css={cardLayout}>
+    <section css={[cardLayout, brandBackground]}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
         {checkCardType() && (
