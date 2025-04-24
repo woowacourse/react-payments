@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { CARD_COMPANIES } from '@/constants';
 import Select from './Select';
 
 const meta = {
@@ -13,19 +14,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-const mockOptions = [
-  { id: 'option1', name: '옵션 1' },
-  { id: 'option2', name: '옵션 2' },
-  { id: 'option3', name: '옵션 3' },
-  { id: 'option4', name: '옵션 4' },
-] as const;
-
 export const Default: Story = {
   args: {
-    options: mockOptions,
+    options: CARD_COMPANIES,
     value: '',
-    name: 'select',
-    placeholder: '선택해주세요',
+    name: 'company',
+    placeholder: '카드사를 선택해주세요',
     onChange: (e) => console.log('Selected:', e.target.value),
   },
 };
@@ -33,7 +27,7 @@ export const Default: Story = {
 export const WithValue: Story = {
   args: {
     ...Default.args,
-    value: 'option2',
+    value: 'shinhan',
   },
 };
 
@@ -42,7 +36,7 @@ export const WithValidation: Story = {
     ...Default.args,
     validation: {
       required: true,
-      errorMessage: '필수 선택 항목입니다.',
+      errorMessage: '카드사를 선택해주세요.',
     },
   },
 };
@@ -50,7 +44,7 @@ export const WithValidation: Story = {
 export const CustomPlaceholder: Story = {
   args: {
     ...Default.args,
-    placeholder: '원하시는 항목을 선택해주세요',
+    placeholder: '원하시는 카드사를 선택해주세요',
   },
 };
 
