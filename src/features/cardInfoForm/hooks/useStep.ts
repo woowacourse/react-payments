@@ -65,13 +65,14 @@ export default function useStep({
   year,
   month,
   CVCError,
+  passwordError,
 }: CardInfoFormProps) {
   const calculatedStep = useMemo(() => {
     if (!isCardNumberOk(cardNumber, cardNumberError)) return 0;
     if (!isCardTypeOk(cardType)) return 1;
     if (!isExpirationOk(expirationPeriod, year, month)) return 2;
     if (!isCVCNumberOk(CVCNumber, CVCError)) return 3;
-    if (!isPasswordOk(password)) return 4;
+    if (!isPasswordOk(password, passwordError)) return 4;
     return 5;
   }, [
     cardNumber,
@@ -128,6 +129,9 @@ function isCVCNumberOk(
   return CVCNumber.isFullFilled() && CVCError.isError() === false;
 }
 
-function isPasswordOk(password: { isFullFilled: () => boolean }) {
-  return password.isFullFilled();
+function isPasswordOk(
+  password: { isFullFilled: () => boolean },
+  passwordError: { isError: () => boolean }
+) {
+  return password.isFullFilled() && passwordError.isError() === false;
 }
