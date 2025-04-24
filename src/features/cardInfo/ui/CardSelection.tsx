@@ -1,23 +1,15 @@
 import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
-import { useState } from 'react';
-
-const inputArr = [
-  { type: 'text', placeholder: '1234', name: 'cardNumber-0' },
-  { type: 'text', placeholder: '1234', name: 'cardNumber-1' },
-  { type: 'text', placeholder: '1234', name: 'cardNumber-2' },
-  { type: 'text', placeholder: '1234', name: 'cardNumber-3' },
-];
 
 export default function CardSelection({
+  cardIssuer,
   error,
   onChange,
 }: {
+  cardIssuer: string;
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }) {
-  const [select, setSelect] = useState('');
-
   return (
     <S.CardInfoMainSection>
       <div>
@@ -27,10 +19,19 @@ export default function CardSelection({
       <S.CardInfoSubSection>
         <S.CardInfoInputContainer>
           {
-            <select value={select} onChange={(e) => setSelect(e.target.value)}>
-              <option value='국민'>테스트1</option>
-              <option value='하나'>테스트2</option>
-            </select>
+            <S.CardSelection value={cardIssuer} onChange={onChange} name='cardIssuer'>
+              <option value='' disabled hidden>
+                카드사를 선택해주세요
+              </option>
+              <option value='BC카드'>BC카드</option>
+              <option value='신한카드'>신한카드</option>
+              <option value='카카오뱅크'>카카오뱅크</option>
+              <option value='현대카드'>현대카드</option>
+              <option value='우리카드'>우리카드</option>
+              <option value='롯데카드'>롯데카드</option>
+              <option value='하나카드'>하나카드</option>
+              <option value='국민카드'>국민카드</option>
+            </S.CardSelection>
           }
         </S.CardInfoInputContainer>
         <S.CardInfoError>{error && error['cardNumberError'].errorMessage}</S.CardInfoError>

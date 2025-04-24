@@ -1,4 +1,4 @@
-export const getColorByCard = (cardType: string) => {
+export const getColorByCardIssuer = (cardType: string) => {
   switch (cardType) {
     case 'BC카드':
       return '#F04651';
