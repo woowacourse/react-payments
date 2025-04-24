@@ -5,4 +5,5 @@ export const StyledButton = styled.button`
   padding: 20px;
   background: rgba(51, 51, 51, 1);
   color: white;
+  cursor: pointer;
 `;
