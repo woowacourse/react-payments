@@ -66,3 +66,12 @@ export type TextProps = {
   /** 실제 텍스트 내용 */
   text: string;
 };
+
+export type SelectProps = {
+  /** select 옵션에 들어갈 데이터들 */
+  options: ("BC카드" | "신한카드" | "카카오뱅크" | "현대카드" | "우리카드" | "롯데카드" | "하나카드" | "국민카드")[];
+  /** select 초기에 보여질 텍스트 라벨 */
+  placeholder: string;
+  /** 카드 정보 상태 변경 함수 */
+  setCardInformation: setCardInformationType;
+};
