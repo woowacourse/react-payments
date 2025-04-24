@@ -1,13 +1,10 @@
 import { ReactNode } from "react";
+import { CARD_FORM_TYPE } from "../../src/constants/constants";
 import {
   CardValidationContext,
   CardValidationContextType,
 } from "../../src/contexts/CardValidationContext";
-import {
-  CARD_FORM_TYPE,
-  CardFormType,
-  ErrorMessage,
-} from "../../src/constants/constants";
+import { CardFormType, ErrorMessage } from "../../src/types/types";
 
 interface CardValidationProviderProps {
   children: ReactNode;

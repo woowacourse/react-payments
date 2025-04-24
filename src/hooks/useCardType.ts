@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  CARD_NUMBERS_SEGMENT,
-  CARD_TYPE,
-  CardNumbersState,
-  CardType,
-} from "../constants/constants";
+import { CARD_NUMBERS_SEGMENT, CARD_TYPE } from "../constants/constants";
+import { CardNumbersState, CardType } from "../types/types";
 import { isCardNumberComplete } from "../utils/validations/cardNumber";
 
 function identifyCardType(cardNumbers: CardNumbersState): CardType | null {

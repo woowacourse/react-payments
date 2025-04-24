@@ -1,6 +1,7 @@
+import { createContext, ReactNode, useState } from "react";
 import {
-  CARD_FORM_TYPE,
   CardCompanyErrorState,
+  CardFormType,
   CardNumberErrorsState,
   CardNumbersSegmentType,
   CvcNumberErrorState,
@@ -8,14 +9,13 @@ import {
   ExpirationPeriodErrorsState,
   ExpirationPeriodSegmentType,
   PasswordErrorState,
-} from "./../constants/constants";
-import { createContext, ReactNode, useState } from "react";
-import { CardFormType } from "../constants/constants";
-import { isErrorCardNumber } from "../utils/validations/cardNumber";
-import { isErrorExpirationPeriod } from "../utils/validations/expirationPeriod";
-import { isErrorCvcNumber } from "../utils/validations/cvcNumber";
+} from "../types/types";
 import { isErrorCardCompany } from "../utils/validations/cardCompany";
+import { isErrorCardNumber } from "../utils/validations/cardNumber";
+import { isErrorCvcNumber } from "../utils/validations/cvcNumber";
+import { isErrorExpirationPeriod } from "../utils/validations/expirationPeriod";
 import { isErrorPassword } from "../utils/validations/password";
+import { CARD_FORM_TYPE } from "./../constants/constants";
 
 export interface CardValidationContextType {
   cardNumberErrors: CardNumberErrorsState;

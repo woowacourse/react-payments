@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react";
 import {
   EXPIRATION_PERIOD_SEGMENT,
-  ExpirationPeriodSegmentType,
   MAX_LENGTH,
   PLACEHOLDER,
 } from "../../../../constants/constants";
@@ -9,6 +8,7 @@ import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldCSS } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
+import { ExpirationPeriodSegmentType } from "../../../../types/types";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
 

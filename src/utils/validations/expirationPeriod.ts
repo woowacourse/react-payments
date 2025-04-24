@@ -1,8 +1,8 @@
 import {
   EXPIRATION_PERIOD_SEGMENT,
-  ExpirationPeriodSegmentType,
   MAX_LENGTH,
 } from "../../constants/constants";
+import { ExpirationPeriodSegmentType } from "../../types/types";
 import { hasExactLength, isPositiveInteger } from "./common";
 
 const validateMonth = (value: string) => {

@@ -1,10 +1,6 @@
 import styled from "styled-components";
-import {
-  CARD_COMPANY,
-  CARD_TYPE,
-  CardCompanyState,
-  CardType,
-} from "../../../constants/constants";
+import { CARD_COMPANY, CARD_TYPE } from "../../../constants/constants";
+import { CardCompanyState, CardType } from "../../../types/types";
 
 const CARD_IMAGE = {
   [CARD_TYPE.visa]: "./visa.jpg",

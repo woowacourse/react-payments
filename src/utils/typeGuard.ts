@@ -1,4 +1,5 @@
-import { CARD_COMPANY, CardCompanyState } from "../constants/constants";
+import { CARD_COMPANY } from "../constants/constants";
+import { CardCompanyState } from "../types/types";
 
 export const isCardCompanyState = (
   value: string

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
+import { CARD_COMPANY } from "../constants/constants";
 import {
-  CARD_COMPANY,
   CardCompanyState,
   CardNumbersSegmentType,
   CardNumbersState,
@@ -8,7 +8,7 @@ import {
   ExpirationPeriodSegmentType,
   ExpirationPeriodState,
   PasswordState,
-} from "../constants/constants";
+} from "../types/types";
 
 export interface CardContextType {
   cardNumbers: CardNumbersState;

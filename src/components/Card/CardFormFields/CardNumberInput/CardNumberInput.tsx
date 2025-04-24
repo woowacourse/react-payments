@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react";
 import {
   CARD_NUMBERS_SEGMENT,
-  CardNumbersSegmentType,
   MAX_LENGTH,
   PLACEHOLDER,
 } from "../../../../constants/constants";
@@ -9,6 +8,7 @@ import { useCard } from "../../../../hooks/useCard";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldCSS } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
+import { CardNumbersSegmentType } from "../../../../types/types";
 
 const cardPositions = Object.values(CARD_NUMBERS_SEGMENT);
 
