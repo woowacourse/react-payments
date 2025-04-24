@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
-import CardCVCInput from './cardInput/CardCVCInput';
-import CardExpirationDateInput from './cardInput/CardExpirationDateInput';
-import CardNumberInput from './cardInput/CardNumberInput';
-import styles from './cardInputForm.module.css';
+import { Dispatch, SetStateAction } from "react";
+import CardCVCInput from "./cardInput/CardCVCInput";
+import CardExpirationDateInput from "./cardInput/CardExpirationDateInput";
+import CardNumberInput from "./cardInput/CardNumberInput";
+import styles from "./cardInputForm.module.css";
+import CardBrandSelect from "./cardInput/CardBrandSelect";
 
 interface CardInputFormProps {
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
@@ -18,6 +19,7 @@ function CardInputForm({
       <CardNumberInput setCardNumbers={setCardNumbers} />
       <CardExpirationDateInput setExpirationDate={setExpirationDate} />
       <CardCVCInput />
+      <CardBrandSelect />
     </div>
   );
 }
