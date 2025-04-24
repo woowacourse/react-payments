@@ -50,6 +50,11 @@ export const CARD_BRAND_COLORS: Record<string, string> = {
   국민카드: "#6A6056",
 };
 
+export const ERROR_MESSAGE = {
+  default: "숫자만 입력 가능합니다.",
+  month: "유효한 월을 입력해주세요.",
+  year: "유효한 연도를 입력해주세요.",
+};
 export type InputType = keyof typeof INPUT_TYPE;
 export type CardImageType = keyof typeof CARD_IMAGE;
 export type CardPositionType = keyof typeof CARD_POSITION;

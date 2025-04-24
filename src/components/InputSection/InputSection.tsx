@@ -1,5 +1,6 @@
 import {
   CardPositionType,
+  ERROR_MESSAGE,
   INPUT_TYPE,
   InputType,
   PeriodPositionType,
@@ -99,6 +100,16 @@ function InputSection({
     return Object.values(error[type] ?? {}).some((value: boolean) => value);
   };
 
+  const getErrorType = () => {
+    if (error.expirationPeriod.month === true) {
+      return "month";
+    }
+    if (error.expirationPeriod.year === true) {
+      return "year";
+    }
+    return "default";
+  };
+
   return (
     <>
       <Title title={titleVariants[type]} />
@@ -114,7 +125,7 @@ function InputSection({
         onComplete={onComplete}
       />
       <Error
-        errorMessage="숫자만 입력 가능합니다."
+        errorMessage={ERROR_MESSAGE[getErrorType()]}
         isVisible={getErrorVisible(type)}
       />
       {showButton && <Button />}
