@@ -15,12 +15,12 @@ export const CardFormCSS = styled.div`
   flex-direction: column;
   width: 28%;
   height: 800px;
-  padding: 20px 10px;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
 `;
 
 export const CardFormScrollCSS = styled.div`
   overflow: scroll;
-  padding: 0 30px;
+  padding: 0 20px;
 `;
