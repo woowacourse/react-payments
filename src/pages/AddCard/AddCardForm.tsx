@@ -4,38 +4,11 @@ import CardExpirationDate from '../../components/CardExpirationDate/CardExpirati
 import CardCVCNumber from '../../components/CardCVCNumber/CardCVCNumber';
 import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
 import { Fragment, useEffect, useState } from 'react';
-import { CardNumberProps } from '../../components/CardNumber/type';
-import { CardBrandProps, CardBrandType } from '../../components/CardBrand/type';
-import { CardExpirationDateProps } from '../../components/CardExpirationDate/type';
-import { CardCVCNumberProps } from '../../components/CardCVCNumber/type';
-import { CardPasswordProps } from '../../components/CardPasswordNumber/type';
-
-const CARD_STEPS = {
-  CARD_NUMBERS: '카드 번호',
-  CARD_BRAND: '카드 브랜드',
-  CARD_EXPIRATION_DATE: '카드 유효기간',
-  CARD_CVC_NUMBER: '카드 CVC',
-  CARD_PASSWORD: '카드 비밀번호',
-} as const;
-
-const initialCardStep = Object.values(CARD_STEPS)[0];
-
-interface AddCardFormProps
-  extends CardPasswordProps,
-    CardCVCNumberProps,
-    CardExpirationDateProps,
-    CardBrandProps,
-    CardNumberProps {
-  cardBrandTypeState: CardBrandType | null;
-  isCardNumberNextStep: boolean;
-  isCardExpirationDateNextStep: boolean;
-  isCardBrandNextStep: boolean;
-  isCardCVCNumberNextStep: boolean;
-  isCardPasswordNextStep: boolean;
-}
+import { CARD_STEP, CARD_STEPS } from './constants';
+import { AddCardFormProps } from './types';
+import Button from './components/Button/Button';
 
 export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
-  console.log(addFormState);
   const {
     cardNumber,
     cardNumberErrorMessage,
@@ -58,7 +31,7 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     handleCardPasswordInputChange,
   } = addFormState;
 
-  const [steps, setSteps] = useState<string[]>([initialCardStep]);
+  const [steps, setSteps] = useState<string[]>([CARD_STEP[0]]);
 
   useEffect(() => {
     const currentStepIndex = steps.length - 1;
@@ -120,5 +93,30 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
       </Fragment>
     );
   });
-  return <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>{renderContents}</div>;
+
+  const isCardNumberError = Object.values(cardNumberErrorMessage).every((message) => message === '');
+  const isCardExpirationDateError = Object.values(cardExpirationDateErrorMessage).every((message) => message === '');
+  const isCardCVCNumberError = Object.values(cardCVCNumberErrorMessage).every((message) => message === '');
+  const isCardPasswordError = Object.values(cardPasswordErrorMessage).every((message) => message === '');
+
+  const button = isCardPasswordNextStep &&
+    isCardNumberError &&
+    isCardExpirationDateError &&
+    isCardCVCNumberError &&
+    isCardPasswordError && <Button>확인</Button>;
+  return (
+    <form
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '32px',
+        padding: '0 32px',
+        height: 'calc(100vh - 392px)',
+        overflowY: 'auto',
+      }}
+    >
+      {renderContents}
+      {button}
+    </form>
+  );
 }
