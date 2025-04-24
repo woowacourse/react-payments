@@ -13,8 +13,8 @@ function TitleWrapper({ children }: { children: ReactNode }) {
   return <div className={styles.titleWrapper}>{children}</div>;
 }
 
-function Label({ text }: { text: string }) {
-  return <label className={styles.fieldLabel}>{text}</label>;
+function Label({ text, hidden }: { text: string; hidden?: boolean }) {
+  return !hidden && <label className={styles.fieldLabel}>{text}</label>;
 }
 
 function Error({ message }: { message: string }) {
