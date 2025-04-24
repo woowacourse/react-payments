@@ -1,18 +1,20 @@
 import { useMemo } from "react";
 import { CARD_INFO } from "../constants/CardInfo";
 import styles from "./CardPreview.module.css";
+import { CARD_BACKGROUND_COLOR } from "./constants/DisplayData";
 
 export type CardInformationType = {
   cardNumbers: string[];
   expirationDate: string[];
 };
 
-function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
-  const { brandName } = useMemo(() => {
+function CardPreview({ cardInfo }: CardInformationType) {
+  const { cardNumbers, expirationDate, brandName } = cardInfo;
+  const { cardType } = useMemo(() => {
     const firstNumber = cardNumbers[0] ?? "";
 
     if (firstNumber.startsWith(CARD_INFO.VISA_START_NUMBER.toString())) {
-      return { brandName: "Visa" };
+      return { cardType: "Visa" };
     }
 
     const isMaster = CARD_INFO.MASTER_START_NUMBERS.some((startNumber) =>
@@ -20,7 +22,7 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
     );
 
     return {
-      brandName: isMaster ? "Mastercard" : "",
+      cardType: isMaster ? "Mastercard" : "",
     };
   }, [cardNumbers]);
 
@@ -32,13 +34,20 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
   }, [cardNumbers]);
 
   return (
-    <div className={styles.container}>
+    <div
+      style={
+        brandName === ""
+          ? {}
+          : { backgroundColor: CARD_BACKGROUND_COLOR[brandName] }
+      }
+      className={styles.container}
+    >
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
-        {brandName !== "" && (
+        {cardType !== "" && (
           <img
-            src={`./${brandName}.png`}
-            alt={`${brandName} logo`}
+            src={`./${cardType}.png`}
+            alt={`${cardType} logo`}
             className={styles.logoBrand}
           />
         )}

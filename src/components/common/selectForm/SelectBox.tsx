@@ -1,16 +1,18 @@
 import SelectOption from "./SelectOption";
 import styles from "./SelectBox.module.css";
 import ArrowSvg from "./assets/ArrowSvg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SelectBoxProps {
   title: string;
   description?: string;
   placeholder: string;
   options: string[];
+  onSelectHandler?: (value: string) => void;
 }
 
 const SelectBox = ({
+  onSelectHandler,
   placeholder,
   title,
   description,
@@ -27,6 +29,10 @@ const SelectBox = ({
       isOpened: !selectState.isOpened,
     });
   }
+
+  useEffect(() => {
+    if (onSelectHandler) onSelectHandler(selectState.selectedOption);
+  }, [selectState.selectedOption]);
 
   return (
     <div className={styles.container}>
