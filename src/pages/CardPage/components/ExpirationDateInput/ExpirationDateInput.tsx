@@ -8,26 +8,50 @@ import useExpirationDateValidation from '../../../../hooks/useExpirationDateVali
 type ExpirationDateInputProps = {
   values: string[];
   onChange: ({ value, idx }: HandleInputParams) => void;
+  onComplete?: () => void;
+  onValidityChange?: (isValid: boolean) => void;
 };
 
-const ExpirationDateInput = ({ values, onChange }: ExpirationDateInputProps) => {
-  const { isErrorStates, errorMessage, checkValidExpirationDate } =
+const ExpirationDateInput = ({
+  values,
+  onChange,
+  onComplete,
+  onValidityChange,
+}: ExpirationDateInputProps) => {
+  const { isErrorStates, errorMessage, checkValidExpirationDate, validateAll } =
     useExpirationDateValidation(values);
+
+  const handleChange = ({ value, idx }: { value: string; idx: number }) => {
+    onChange({ value, idx });
+    checkValidExpirationDate({ value, idx });
+
+    const updatedValues = [...values];
+    updatedValues[idx] = value;
+
+    const isValid = validateAll(updatedValues).every((isError) => !isError);
+
+    if (onValidityChange) {
+      onValidityChange(isValid);
+    }
+
+    if (onComplete && isValid) {
+      onComplete();
+    }
+  };
 
   return (
     <StyledExpirationDateInput>
-      <StyledLabel htmlFor="expiration-date">유효기간</StyledLabel>
+      <StyledLabel htmlFor="expiration-date-0">유효기간</StyledLabel>
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
             key={idx}
             value={value}
-            onChange={(e) => onChange({ value: e.target.value, idx })}
-            onBlur={(e) => checkValidExpirationDate({ value: e.target.value, idx })}
+            onChange={(e) => handleChange({ value: e.target.value, idx })}
             maxLength={EXPIRATION_DATE.MAX_LENGTH}
             placeholder={EXPIRATION_DATE.PLACEHOLDER[idx]}
             isError={isErrorStates[idx]}
-            id="expiration-date"
+            id={`expiration-date-${idx}`}
           />
         ))}
       </StyledInputWrapper>

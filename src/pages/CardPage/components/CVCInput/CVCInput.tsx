@@ -9,13 +9,33 @@ import { CVC } from '../../../../constants/settings';
 type CVCInputProps = {
   values: string[];
   onChange: ({ value, idx }: HandleInputParams) => void;
+  onComplete?: () => void;
+  onValidityChange?: (isValid: boolean) => void;
 };
 
-const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const { isErrorStates, errorMessage, validate } = useInputValidation(
+const CVCInput = ({ values, onChange, onComplete, onValidityChange }: CVCInputProps) => {
+  const { isErrorStates, errorMessage, validate, validateAll } = useInputValidation(
     Array.from({ length: CVC.FIELDS_COUNT }, () => false),
     (value) => checkInputValidation(value, CVC.MAX_LENGTH)
   );
+
+  const handleChange = ({ value, idx }: { value: string; idx: number }) => {
+    onChange({ value, idx });
+    validate({ value, idx });
+
+    const updatedValues = [...values];
+    updatedValues[idx] = value;
+
+    const isValid = validateAll(updatedValues).every((isError) => !isError);
+
+    if (onValidityChange) {
+      onValidityChange(isValid);
+    }
+
+    if (onComplete && isValid) {
+      onComplete();
+    }
+  };
 
   return (
     <StyledCVCInput>
@@ -25,8 +45,7 @@ const CVCInput = ({ values, onChange }: CVCInputProps) => {
           <Input
             key={idx}
             value={value}
-            onChange={(e) => onChange({ value: e.target.value, idx })}
-            onBlur={(e) => validate({ value: e.target.value, idx })}
+            onChange={(e) => handleChange({ value: e.target.value, idx })}
             maxLength={CVC.MAX_LENGTH}
             placeholder={CVC.PLACEHOLDER}
             isError={isErrorStates[idx]}
