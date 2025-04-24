@@ -83,7 +83,7 @@ export default function useCardInfo() {
     }
   };
 
-  return { cardNumber, cardExpirationDate, cardIssuer, handleCardInfoChange, error };
+  return { cardNumber, cardExpirationDate, cardCVC, cardIssuer, cardPassword, handleCardInfoChange, error };
 }
 
 const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {
