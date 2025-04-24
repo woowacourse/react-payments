@@ -37,6 +37,7 @@ const InputField = ({
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
             error={isError[index]}
+            masking={inputProps.masking}
           />
         ))}
       </div>

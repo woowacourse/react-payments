@@ -11,6 +11,6 @@ export type formSectionData = {
   inputFieldData: {
     label: string;
     inputNumber: number;
-    inputProps: { placeholder: string[]; maxLength: number };
+    inputProps: { placeholder: string[]; maxLength: number; masking?: boolean };
   };
 };

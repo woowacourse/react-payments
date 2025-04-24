@@ -38,7 +38,7 @@ const formUIControllerData: formSectionData[] = [
     inputFieldData: {
       label: "비밀번호 앞 2자리",
       inputNumber: 1,
-      inputProps: { placeholder: [""], maxLength: 2 },
+      inputProps: { placeholder: [""], maxLength: 2, masking: true },
     },
   },
 ];

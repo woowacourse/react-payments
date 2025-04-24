@@ -2,9 +2,10 @@ import { css } from "@emotion/react";
 import { InputProps } from "../../types/componentPropsType";
 
 /** input 컴포넌트 */
-const Input = ({ placeholder, maxLength, value, error, onChange }: InputProps) => {
+const Input = ({ placeholder, maxLength, value, error, onChange, masking }: InputProps) => {
   return (
     <input
+      type={masking ? "password" : "text"}
       css={inputStyle(error)}
       onChange={(e) => onChange(e.target.value)}
       value={value}

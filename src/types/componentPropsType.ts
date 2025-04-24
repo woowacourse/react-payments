@@ -28,6 +28,7 @@ export type InputFieldProps = {
   inputProps: {
     placeholder: string[];
     maxLength: number;
+    masking?: boolean;
   };
   /** 카드 정보 상태값 */
   cardInformation: CardInformationType;
@@ -50,6 +51,8 @@ export type InputProps = {
   error: boolean;
   /** 입력값이 변경될 때 호출되는 콜백 함수 */
   onChange: (value: string) => void;
+  /** 입력값이 마스킹 처리가 되어야하는 경우 */
+  masking?: boolean;
 };
 
 export type errorMessageProps = {
