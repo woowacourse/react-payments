@@ -1,20 +1,5 @@
-import type { CardInputProps } from '../types/CardInputTypes';
+import type { CardInputConfig, CardSelectConfig } from '../types/CardConfigTypes';
 import { CARD_BRANDS } from './cardConstants';
-
-interface CardInputConfig {
-  id: string;
-  label: string;
-  InputKeys: (keyof CardInputProps)[];
-  placeholder: string;
-  maxLength: number;
-}
-
-interface CardSelectConfig {
-  id: string;
-  label: string;
-  options: string[];
-  defaultMessage: string;
-}
 
 interface CardLabeledInputConfig {
   cardNumber: CardInputConfig;
@@ -28,7 +13,7 @@ const CARD_LABEL_INPUT_CONFIG: CardLabeledInputConfig = {
   cardNumber: {
     id: 'card-number',
     label: '카드 번호',
-    InputKeys: ['first', 'second', 'third', 'fourth'],
+    inputKeys: ['first', 'second', 'third', 'fourth'],
     placeholder: '1234',
     maxLength: 4,
   },
@@ -41,21 +26,21 @@ const CARD_LABEL_INPUT_CONFIG: CardLabeledInputConfig = {
   expirationDate: {
     id: 'expiration-date',
     label: '유효기간',
-    InputKeys: ['MM', 'YY'],
+    inputKeys: ['MM', 'YY'],
     placeholder: 'MM/YY',
     maxLength: 2,
   },
   CVC: {
     id: 'CVC',
     label: 'CVC',
-    InputKeys: ['CVC'],
+    inputKeys: ['CVC'],
     placeholder: '123',
     maxLength: 3,
   },
   password: {
     id: 'password',
     label: '비밀번호',
-    InputKeys: ['password'],
+    inputKeys: ['password'],
     placeholder: '**',
     maxLength: 2,
   },

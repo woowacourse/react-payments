@@ -1,6 +1,7 @@
 import FormField from '../FormField';
 import CardInput from './CardInput';
 import type { CardInputProps } from '../../types/CardInputTypes';
+import type { CardInputConfig } from '../../types/CardConfigTypes';
 
 interface ValueProps {
   [key: string]: string;
@@ -11,28 +12,17 @@ interface isErrorsProps {
 }
 
 interface CardInputGroupProps {
-  id: string;
-  label: string;
-  InputKeys: (keyof CardInputProps)[];
+  config: CardInputConfig;
   errorMessage: string;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
   isErrors: isErrorsProps;
   value: ValueProps;
 }
 
-const CardLabeledInput = ({
-  id,
-  label,
-  InputKeys,
-  errorMessage,
-  handleCardInput,
-  isErrors,
-  value,
-  ...restProps
-}: CardInputGroupProps) => {
+const CardLabeledInput = ({ config, errorMessage, handleCardInput, isErrors, value }: CardInputGroupProps) => {
   return (
-    <FormField label={label} errorMessage={errorMessage} id={id}>
-      {InputKeys.map((key) => {
+    <FormField label={config.label} errorMessage={errorMessage} id={config.id}>
+      {config.inputKeys.map((key) => {
         return (
           <CardInput
             key={key}
@@ -40,7 +30,8 @@ const CardLabeledInput = ({
             isError={isErrors[key]}
             handleCardInput={handleCardInput}
             value={value[key]}
-            {...restProps}
+            placeholder={config.placeholder}
+            maxLength={config.maxLength}
           />
         );
       })}

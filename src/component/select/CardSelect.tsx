@@ -2,19 +2,19 @@ import styled, { keyframes } from 'styled-components';
 import { useRef, useState } from 'react';
 import useOutsideClick from '../../hook/useOutsideClick';
 import type { CardInputProps } from '../../types/CardInputTypes';
+import type { CardSelectConfig } from '../../types/CardConfigTypes';
 
 interface CardSelectProps {
-  defaultMessage: string;
-  options: string[];
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
-  cardInput: CardInputProps;
+  value: string;
+  config: CardSelectConfig;
 }
 
 interface DefaultMessageProps {
   $isDefault: boolean;
 }
 
-const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput, ...restProps }: CardSelectProps) => {
+const CardSelect = ({ handleCardInput, value, config }: CardSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectOption = (option: string) => {
@@ -25,18 +25,18 @@ const CardSelect = ({ defaultMessage, options, handleCardInput, cardInput, ...re
   const backgroundRef = useRef<HTMLDivElement>(null);
   useOutsideClick(backgroundRef, () => setIsOpen(false));
 
-  const selectedMessage = cardInput.cardBrand || defaultMessage;
-  const isDefault = selectedMessage === defaultMessage;
+  const selectedMessage = value.length !== 0 ? value : config.defaultMessage;
+  const isDefault = selectedMessage === config.defaultMessage;
 
   return (
-    <SelectContainer ref={backgroundRef} {...restProps}>
+    <SelectContainer ref={backgroundRef}>
       <SelectField onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
         <DefaultMessage $isDefault={isDefault}>{selectedMessage}</DefaultMessage>
         <SelectIcon src="./selectIcon.png" alt="옵션 열기" />
       </SelectField>
       {isOpen && (
         <OptionsContainer>
-          {options.map((brand) => (
+          {config.options.map((brand) => (
             <OptionItem key={brand} onClick={() => handleSelectOption(brand)}>
               {brand}
             </OptionItem>

@@ -9,7 +9,7 @@ import {
   getCardPasswordErrorMessage,
 } from '../validation/getCardErrorMessages';
 
-const useCardInputs = () => {
+const useForm = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
     first: '',
     second: '',
@@ -78,4 +78,4 @@ const useCardInputs = () => {
   return { cardInput, handleCardInput, isError, errorMessages };
 };
 
-export default useCardInputs;
+export default useForm;
