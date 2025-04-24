@@ -24,27 +24,27 @@
   cursor: not-allowed;
 }
 
-.variantDefault {
+.default {
   border-radius: 0;
 }
 
-.variantRounded {
+.rounded {
   border-radius: 8px;
 }
 
-.sizeSmall {
+.small {
   padding: 6px 12px;
   font-size: 12px;
 }
 
-.sizeMedium {
+.medium {
   padding: 8px 16px;
   font-size: 14px;
 }
 
-.sizeLarge {
-  padding: 12px 24px;
-  font-size: 16px;
+.large {
+  padding: 15px 30px;
+  font-size: 22px;
 }
 
 .fullWidth {
