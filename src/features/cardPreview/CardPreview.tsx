@@ -7,6 +7,7 @@ import {
   StyledCardNumber,
   StyledExpirationPeriod,
 } from "./CardPreview.css";
+import { CardTypeList } from "../../\btypes/index.types";
 import {
   CardNumberPosition,
   ExpirationPeriod,
@@ -19,6 +20,7 @@ type CardNumber = Record<CardNumberPosition, string>;
 type CardPreviewProps = {
   cardNumber: CardNumber;
   expirationPeriod: Record<ExpirationPeriod, string>;
+  cardType: keyof CardTypeList | "";
 };
 
 const CARD_IDENTIFYING_NUMBER = {
@@ -44,7 +46,11 @@ function getIdentifyFns(id: string) {
   ];
 }
 
-function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
+function CardPreview({
+  cardNumber,
+  expirationPeriod,
+  cardType,
+}: CardPreviewProps) {
   const logoSrc = useMemo(() => {
     const id = cardNumber.first.slice(0, 2);
     const identifyFns = getIdentifyFns(id);
@@ -53,7 +59,7 @@ function CardPreview({ cardNumber, expirationPeriod }: CardPreviewProps) {
   }, [cardNumber]);
 
   return (
-    <StyledContainer>
+    <StyledContainer cardType={cardType}>
       <StyledIconWrap>
         <StyledMagnetic></StyledMagnetic>
         {logoSrc !== INITIALIZE_VALUE ? (

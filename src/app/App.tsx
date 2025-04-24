@@ -2,7 +2,11 @@ import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
 import CardInfoForm from "../features/cardInfoForm/cardInfoForm.tsx";
-import { ExpirationPeriod, CardNumberPosition } from "../types/index.types";
+import {
+  ExpirationPeriod,
+  CardNumberPosition,
+  CardTypeList,
+} from "../types/index.types";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
 import useCardInfo from "./useCardInfo.ts";
 
@@ -35,7 +39,7 @@ function App() {
     password: INITIALIZE_VALUE,
   });
 
-  const cardType = useCardInfo({
+  const cardType = useCardInfo<{ cardType: keyof CardTypeList | "" }>({
     cardType: INITIALIZE_VALUE,
   });
 
@@ -45,6 +49,7 @@ function App() {
         <CardPreview
           cardNumber={cardNumber.values}
           expirationPeriod={expirationPeriod}
+          cardType={cardType.values.cardType}
         />
         <CardInfoForm
           cardNumber={cardNumber.values}

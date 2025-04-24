@@ -9,7 +9,25 @@ type CardTypeSectionProps = {
   };
 };
 
+const cardTypes = {
+  BC카드: "BC카드",
+  신한카드: "신한카드",
+  카카오뱅크: "카카오뱅크",
+  현대카드: "현대카드",
+  우리카드: "우리카드",
+  롯데카드: "롯데카드",
+  하나카드: "하나카드",
+  국민카드: "국민카드",
+};
+
 export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
+  const options = [
+    { value: "", label: "카드사를 선택해주세요", default: true },
+    ...Object.entries(cardTypes).map(([key, value]) => ({
+      value: key,
+      label: value,
+    })),
+  ];
   return (
     <StyledContainer>
       <SectionTitle
@@ -21,12 +39,7 @@ export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
         onChange={(e) => cardType.changeValues("cardType", e.target.value)}
         value={cardType.values.cardType}
         width="100%"
-        options={[
-          { value: "", label: "카드사를 선택해주세요" },
-          { value: "비자", label: "비자" },
-          { value: "마스터카드", label: "마스터카드" },
-          { value: "아멕스", label: "아멕스" },
-        ]}
+        options={options}
       />
     </StyledContainer>
   );

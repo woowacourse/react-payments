@@ -1,13 +1,29 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled.div`
+const cardTypeColors = {
+  "": "#000000",
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: "#6A6056",
+};
+
+export const StyledContainer = styled.div<{
+  cardType: keyof typeof cardTypeColors | "";
+}>`
   display: flex;
   flex-direction: column;
   gap: 25px;
   height: 250px;
   max-width: 400px;
   width: 100%;
-  background-color: #333333;
+  background-color: ${({ cardType }) => {
+    return cardTypeColors[cardType] || "#000000";
+  }};
   border-radius: 8px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
