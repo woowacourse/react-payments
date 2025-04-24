@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardNumbersInput from '../../components/CardNumbersInput/CardNumbersInput';
 import CardExpiryInput from '../../components/CardExpiryInput/CardExpiryInput';
 import CVCInput from '../../components/CVCInput/CVCInput';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
-import '../../App.css';
 import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
 import Button from '../../components/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import '../../App.css';
 
 const HomePage = () => {
   const [cardNumbers, setCardNumbers] = useState(
@@ -20,6 +20,7 @@ const HomePage = () => {
   const [brand, setBrand] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +34,20 @@ const HomePage = () => {
     };
     navigate('/react-payments/complete', { state: formData });
   };
+
+  const resetForm = () => {
+    setCardNumbers(['', '', '', '']);
+    setMonth('');
+    setYear('');
+    setCVC('');
+    setBrand('');
+    setPassword('');
+  };
+
+  // 페이지 로드 시 초기화 트리거 확인
+  useEffect(() => {
+    resetForm();
+  }, [location.state]);
 
   return (
     <div className="app">

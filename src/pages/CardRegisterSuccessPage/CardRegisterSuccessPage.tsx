@@ -1,13 +1,18 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import styles from './CardRegisterSuccessPage.module.css';
 import { CARD_BRANDS } from '../../constants/cardBrand';
 
 export const CardRegisterSuccessPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { cardNumbers, brand } = location.state as {
     cardNumbers: string[];
     brand: keyof typeof CARD_BRANDS;
+  };
+
+  const handleClick = () => {
+    navigate('/react-payments/');
   };
 
   return (
@@ -21,7 +26,7 @@ export const CardRegisterSuccessPage = () => {
         <p className={styles.text}>
           {cardNumbers[0]}로 시작하는 {CARD_BRANDS[brand]}카드가 등록되었어요.
         </p>
-        <Button text="확인" />
+        <Button text="확인" onClick={handleClick} />
       </div>
     </div>
   );
