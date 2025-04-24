@@ -5,13 +5,14 @@ import useExpirationDateInput from "../../hooks/useExpirationDateInput";
 import CardPassword from "./CardPassword/CardPassword";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
-import CardNumber from "./CardNumber/CarNumber";
+import CardNumber from "./CardNumber/CardNumber";
 import CardBrand from "./CardBrand/CardBrand";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
 import useCardBrandSelect from "../../hooks/useCardBrandSelect";
 import useCardPassword from "../../hooks/useCardPassword";
+import useStep from "../../hooks/useStep";
 
 export default function CardFormPage() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
@@ -25,6 +26,7 @@ export default function CardFormPage() {
     useCvcNumberInput();
   const { cardBrand, cardBrandError, onCardBrandChange } = useCardBrandSelect();
   const { password, passwordError, onPasswordChange } = useCardPassword();
+  const { step, nextStep } = useStep();
 
   const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ export default function CardFormPage() {
     navigate("/result", {
       state: {
         firstCardNumber: cardNumbers.FIRST,
-        cardBrand: cardType,
+        cardBrand: cardBrand,
       },
     });
   };
@@ -46,28 +48,40 @@ export default function CardFormPage() {
         cardExpirationDate={cardExpirationDate}
       />
       <div className={styles["card-form"]}>
-        <CardPassword
-          handleChange={onPasswordChange}
-          password={password}
-          errorMessage={passwordError}
-        />
-        <CardCvcNumber
-          handleChange={onCvcNumberChange}
-          cvcNumbers={cvcNumbers}
-          errorMessage={cvcNumbersError}
-        />
-        <CardExpirationDate
-          handleChange={onExpirationDateChange}
-          cardExpirationDate={cardExpirationDate}
-          errorMessage={cardExpirationDateError}
-        />
-        <CardNumber
-          handleChange={onCardNumberChange}
-          cardNumbers={cardNumbers}
-          errorMessage={cardNumbersError}
-        />
+        {step > 3 && (
+          <CardPassword
+            handleChange={onPasswordChange}
+            password={password}
+            errorMessage={passwordError}
+          />
+        )}
+        {step > 2 && (
+          <CardCvcNumber
+            handleChange={onCvcNumberChange}
+            handleStep={nextStep}
+            cvcNumbers={cvcNumbers}
+            errorMessage={cvcNumbersError}
+          />
+        )}
+        {step > 1 && (
+          <CardExpirationDate
+            handleChange={onExpirationDateChange}
+            handleStep={nextStep}
+            cardExpirationDate={cardExpirationDate}
+            errorMessage={cardExpirationDateError}
+          />
+        )}
+        {step > 0 && (
+          <CardNumber
+            handleChange={onCardNumberChange}
+            handleStep={nextStep}
+            cardNumbers={cardNumbers}
+            errorMessage={cardNumbersError}
+          />
+        )}
         <CardBrand
           handleChange={onCardBrandChange}
+          handleStep={nextStep}
           errorMessage={cardBrandError}
         />
       </div>

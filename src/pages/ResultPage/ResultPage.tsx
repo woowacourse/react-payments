@@ -12,7 +12,7 @@ export default function ResultPage() {
     <div className={styles["result-page"]}>
       <img className={styles["check-icon"]} src="./check-icon.png" />
 
-      <Text textType="title">{`${firstCardNumber}로 시작하는 ${cardBrand}카드가 등록되었어요.`}</Text>
+      <Text textType="title">{`${firstCardNumber}로 시작하는 ${cardBrand}가 등록되었어요.`}</Text>
       <Button
         text="확인"
         onClick={() => {
