@@ -11,7 +11,7 @@
   justify-content: center;
   padding: 0 12px;
 }
-/* 사파리 지원이 안되던데용, 근데 시멘틱 meaning을 날리기는 싫어서 이렇게 구성했습니다. */
+/* 실험적 기능이니, 사파리는 지원하지 않습니다.  */
 .dropdown,
 .dropdown::picker(select) {
   appearance: base-select;
