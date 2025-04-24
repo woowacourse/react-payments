@@ -1,6 +1,11 @@
 .basic {
   background-color: #333333;
   color: white;
-  flex-grow: 1;
+  border: none;
+}
+
+.registrationComplete {
+  background-color: #333333;
+  color: white;
   border: none;
 }

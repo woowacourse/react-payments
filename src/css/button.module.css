@@ -7,4 +7,13 @@
   width: 90%;
   height: 44px;
   border-radius: 8px;
+  margin: 0 auto;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin: 0 auto;
 }

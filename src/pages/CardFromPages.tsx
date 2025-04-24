@@ -2,8 +2,7 @@ import CardCVCNumberInputSection from '@InputSectionComponents/CardCVCNumberInpu
 import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSection';
 import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
 import CardDisplay from '@CardDisplayComponents/CardDisplay';
-import styles from '../css/cardForm.module.css';
-import useCardNumbers from '@hooks/useCardNumbers';
+import styles from './cardForm.module.css';
 import useCardExpirationDate from '@hooks/useCardExpirationDate';
 import { useEffect, useState } from 'react';
 import buttonStyle from '../css/button.module.css';
@@ -12,16 +11,15 @@ import useError from '@/hooks/useError';
 import useCardCVCNumber from '@/hooks/useCardCVCNumber';
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
+import { CardNumbersOptions } from '@/types/CardNumbers';
 
-const CardFormPages = () => {
-  const {
-    cardNumbers,
-    setCardNumbers,
-    isError: isCardNumbersError,
-    errorMessage: cardNumbersErrorMessage,
-    handleCardNumbersBlur,
-  } = useCardNumbers();
-
+const CardFormPages = ({
+  cardNumbers,
+  setCardNumbers,
+  isError: isCardNumbersError,
+  errorMessage: cardNumbersErrorMessage,
+  handleCardNumbersBlur,
+}: CardNumbersOptions) => {
   const {
     cardExpirationDate,
     setCardExpirationDate,
@@ -123,40 +121,38 @@ const CardFormPages = () => {
   }, [cardCompany, cardNumbers, cardCVCNumber, cardExpirationDate]);
 
   const nav = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     nav('/complete');
   };
 
   return (
     <>
-      <div className={styles.main}>
-        <CardDisplay
-          cardNumbers={cardNumbers}
-          cardExpirationDate={cardExpirationDate}
-          cardCompany={cardCompany}
-        />
+      <CardDisplay
+        cardNumbers={cardNumbers}
+        cardExpirationDate={cardExpirationDate}
+        cardCompany={cardCompany}
+      />
 
-        <div className={styles.cardForm}>
-          {inputCompletion.map((isCompleted, index) => {
-            if (isCompleted) return inputSections[index + 1];
-          })}
-          <CardNumbersInputSection
-            cardNumbers={cardNumbers}
-            setCardNumbers={setCardNumbers}
-            handleCardNumbersBlur={handleCardNumbersBlur}
-            isError={isCardNumbersError}
-            errorMessage={cardNumbersErrorMessage}
-          />
-        </div>
-        {inputCompletion.every((value) => value) && (
-          <ConfirmButton
-            type="submit"
-            text="확인"
-            onClick={handleSubmit}
-            className={buttonStyle.cardConfirm}
-          />
-        )}
+      <div className={styles.cardForm}>
+        {inputCompletion.map((isCompleted, index) => {
+          if (isCompleted) return inputSections[index + 1];
+        })}
+        <CardNumbersInputSection
+          cardNumbers={cardNumbers}
+          setCardNumbers={setCardNumbers}
+          handleCardNumbersBlur={handleCardNumbersBlur}
+          isError={isCardNumbersError}
+          errorMessage={cardNumbersErrorMessage}
+        />
       </div>
+      {inputCompletion.every((value) => value) && (
+        <ConfirmButton
+          type="submit"
+          text="확인"
+          onClick={handleSubmit}
+          className={buttonStyle.cardConfirm}
+        />
+      )}
     </>
   );
 };
