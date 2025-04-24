@@ -22,16 +22,12 @@ function App() {
     fourth: INITIALIZE_VALUE,
   });
 
-  const { values: expirationPeriod, changeValues: changeExpirationPeriod } =
-    useCardInfo<ExpirationPeriodState>({
-      month: INITIALIZE_VALUE,
-      year: INITIALIZE_VALUE,
-    });
+  const expirationPeriod = useCardInfo<ExpirationPeriodState>({
+    month: INITIALIZE_VALUE,
+    year: INITIALIZE_VALUE,
+  });
 
-  const {
-    values: { CVCNumber },
-    changeValues: changeCVCNumber,
-  } = useCardInfo({
+  const CVCNumber = useCardInfo({
     CVCNumber: INITIALIZE_VALUE,
   });
 
@@ -48,16 +44,14 @@ function App() {
       <StyledFrame>
         <CardPreview
           cardNumber={cardNumber.values}
-          expirationPeriod={expirationPeriod}
+          expirationPeriod={expirationPeriod.values}
           cardType={cardType.values.cardType}
         />
         <CardInfoForm
           cardNumber={cardNumber.values}
           changeCardNumber={cardNumber.changeValues}
           expirationPeriod={expirationPeriod}
-          changeExpirationPeriod={changeExpirationPeriod}
           CVCNumber={CVCNumber}
-          changeCVCNumber={changeCVCNumber}
           password={password}
           cardType={cardType}
         />

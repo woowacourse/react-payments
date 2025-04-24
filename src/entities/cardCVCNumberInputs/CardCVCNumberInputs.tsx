@@ -8,8 +8,10 @@ import {
 } from "../inputs.css";
 
 export type CardCVCNumberSectionProps = {
-  CVCNumber: string;
-  changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
+  CVCNumber: {
+    values: { CVCNumber: string };
+    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+  };
   CVCError: {
     error: Record<"CVCNumber", string>;
     checkValidation: ({
@@ -27,7 +29,6 @@ export type CardCVCNumberSectionProps = {
 
 function CardCVCNumberInputs({
   CVCNumber,
-  changeCVCNumber,
   CVCError,
 }: CardCVCNumberSectionProps) {
   const errorMessage = CVCError.getErrorMessage();
@@ -37,9 +38,9 @@ function CardCVCNumberInputs({
       <label htmlFor="">CVC</label>
       <StyledInputWrap>
         <Input
-          value={CVCNumber}
+          value={CVCNumber.values.CVCNumber}
           onChange={(e) => {
-            changeCVCNumber("CVCNumber", e.target.value);
+            CVCNumber.changeValues("CVCNumber", e.target.value);
             CVCError.checkValidation({
               length: CVC_NUMBER_LENGTH,
               value: e.target.value,

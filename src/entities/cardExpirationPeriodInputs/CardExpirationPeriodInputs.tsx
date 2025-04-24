@@ -12,11 +12,10 @@ import {
 } from "../inputs.css";
 
 type ExpirationPeriodProps = {
-  expirationPeriod: Record<ExpirationPeriod, string>;
-  changeExpirationPeriod: (
-    expirationPeriod: ExpirationPeriod,
-    date: string
-  ) => void;
+  expirationPeriod: {
+    values: Record<ExpirationPeriod, string>;
+    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+  };
   monthError: {
     error: Record<"month", string>;
     checkValidation: ({
@@ -47,7 +46,6 @@ type ExpirationPeriodProps = {
 
 function CardExpirationPeriodInputs({
   expirationPeriod,
-  changeExpirationPeriod,
   monthError,
   yearError,
 }: ExpirationPeriodProps) {
@@ -59,14 +57,17 @@ function CardExpirationPeriodInputs({
       <label htmlFor="">유효 기간</label>
       <StyledInputWrap>
         <Input
-          value={expirationPeriod.month}
+          value={expirationPeriod.values.month}
           onChange={(e) => {
             monthError.checkValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "month",
             });
-            changeExpirationPeriod(EXPIRATION_PERIOD.MONTH, e.target.value);
+            expirationPeriod.changeValues(
+              EXPIRATION_PERIOD.MONTH,
+              e.target.value
+            );
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
@@ -74,14 +75,17 @@ function CardExpirationPeriodInputs({
           isError={monthError.error.month !== NO_ERROR}
         ></Input>
         <Input
-          value={expirationPeriod.year}
+          value={expirationPeriod.values.year}
           onChange={(e) => {
             yearError.checkValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "year",
             });
-            changeExpirationPeriod(EXPIRATION_PERIOD.YEAR, e.target.value);
+            expirationPeriod.changeValues(
+              EXPIRATION_PERIOD.YEAR,
+              e.target.value
+            );
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}

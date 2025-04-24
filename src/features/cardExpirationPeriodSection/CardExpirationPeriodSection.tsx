@@ -4,11 +4,10 @@ import { StyledContainer } from "./CardExpirationPeriodSection.css";
 import { ExpirationPeriod } from "../../\btypes/index.types";
 
 export type ExpirationPeriodProps = {
-  expirationPeriod: Record<ExpirationPeriod, string>;
-  changeExpirationPeriod: (
-    expirationPeriod: ExpirationPeriod,
-    date: string
-  ) => void;
+  expirationPeriod: {
+    values: Record<ExpirationPeriod, string>;
+    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+  };
   monthError: {
     error: Record<"month", string>;
     checkValidation: ({
@@ -39,7 +38,6 @@ export type ExpirationPeriodProps = {
 
 function CardExpirationPeriodSection({
   expirationPeriod,
-  changeExpirationPeriod,
   monthError,
   yearError,
 }: ExpirationPeriodProps) {
@@ -51,7 +49,6 @@ function CardExpirationPeriodSection({
       />
       <CardExpirationPeriodInputs
         expirationPeriod={expirationPeriod}
-        changeExpirationPeriod={changeExpirationPeriod}
         monthError={monthError}
         yearError={yearError}
       />

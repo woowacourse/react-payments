@@ -3,8 +3,10 @@ import CardCVCNumberInputs from "../../entities/cardCVCNumberInputs/CardCVCNumbe
 import { StyledContainer } from "./CardCVCNumberSection.css";
 
 export type CardCVCNumberSectionProps = {
-  CVCNumber: string;
-  changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
+  CVCNumber: {
+    values: { CVCNumber: string };
+    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+  };
   CVCError: {
     error: Record<"CVCNumber", string>;
     checkValidation: ({
@@ -22,17 +24,12 @@ export type CardCVCNumberSectionProps = {
 
 function CardCVCNumberSection({
   CVCNumber,
-  changeCVCNumber,
   CVCError,
 }: CardCVCNumberSectionProps) {
   return (
     <StyledContainer>
       <SectionTitle title="CVC 번호를 입력해 주세요" />
-      <CardCVCNumberInputs
-        CVCNumber={CVCNumber}
-        changeCVCNumber={changeCVCNumber}
-        CVCError={CVCError}
-      />
+      <CardCVCNumberInputs CVCNumber={CVCNumber} CVCError={CVCError} />
     </StyledContainer>
   );
 }

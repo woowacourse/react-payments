@@ -21,13 +21,14 @@ import { useState } from "react";
 type CardInfoFormProps = {
   cardNumber: Record<CardNumberPosition, string>;
   changeCardNumber: (position: CardNumberPosition, cardNumber: string) => void;
-  expirationPeriod: Record<ExpirationPeriod, string>;
-  changeExpirationPeriod: (
-    expirationPeriod: ExpirationPeriod,
-    date: string
-  ) => void;
-  CVCNumber: string;
-  changeCVCNumber: (type: "CVCNumber", CVCNumber: string) => void;
+  expirationPeriod: {
+    values: Record<ExpirationPeriod, string>;
+    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+  };
+  CVCNumber: {
+    values: { CVCNumber: string };
+    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+  };
   password: {
     values: { password: string };
     changeValues: (type: "password", password: string) => void;
@@ -42,13 +43,11 @@ export default function CardInfoForm({
   cardNumber,
   changeCardNumber,
   expirationPeriod,
-  changeExpirationPeriod,
   CVCNumber,
-  changeCVCNumber,
   password,
   cardType,
 }: CardInfoFormProps) {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(5);
   const nextStep = () => setStep((prev) => prev + 1);
 
   const cardNumberError = useError<Record<CardNumberPosition, string>>(
@@ -84,6 +83,18 @@ export default function CardInfoForm({
 
   return (
     <>
+      {step >= 4 && <CardPasswordSection password={password} />}
+      {step >= 3 && (
+        <CardCVCNumberSection CVCNumber={CVCNumber} CVCError={CVCError} />
+      )}
+      {step >= 2 && (
+        <CardExpirationPeriodSection
+          expirationPeriod={expirationPeriod}
+          monthError={month}
+          yearError={year}
+        />
+      )}
+      {step >= 1 && <CardTypeSection cardType={cardType} />}
       {step >= 0 && (
         <CardNumberSection
           cardNumber={cardNumber}
@@ -91,24 +102,6 @@ export default function CardInfoForm({
           cardNumberError={cardNumberError}
         />
       )}
-      {step >= 1 && <CardTypeSection cardType={cardType} />}
-      {step >= 2 && (
-        <CardExpirationPeriodSection
-          expirationPeriod={expirationPeriod}
-          changeExpirationPeriod={changeExpirationPeriod}
-          monthError={month}
-          yearError={year}
-        />
-      )}
-      {step >= 3 && (
-        <CardCVCNumberSection
-          CVCNumber={CVCNumber}
-          changeCVCNumber={changeCVCNumber}
-          CVCError={CVCError}
-        />
-      )}
-      {step >= 4 && <CardPasswordSection password={password} />}
-
       <CardSubmitButton />
     </>
   );
