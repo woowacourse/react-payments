@@ -18,34 +18,69 @@ export default function useCardInfo() {
     [ErrorKey.CARD_CVC]: NO_ERROR,
   });
 
+  const validateCardNumber = (cardNumber: string[]) => {
+    validateField(CardInfoType.NUMBER, cardNumber);
+  };
+
+  const validateExpirationDate = (expirationDate: { month: string; year: string }) => {
+    validateField(CardInfoType.EXPDATE, expirationDate);
+  };
+
+  const validateCVC = (cvc: string) => {
+    validateField(CardInfoType.CVC, cvc);
+  };
+
+  const validateField = (id: string, value: any) => {
+    const configItem = cardInfoSectionConfig.find((item) => item.id === id);
+    if (!configItem || !configItem.validator) return;
+
+    const [errorIndex, errorMessage] = configItem.validator(value);
+    setError((prevError) => ({
+      ...prevError,
+      [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : NO_ERROR,
+    }));
+  };
+
+  const handleCardNumberChange = (index: number, value: string) => {
+    setCardInfo((prev) => {
+      const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
+      validateCardNumber(updatedNumbers);
+      return { ...prev, cardNumber: updatedNumbers };
+    });
+  };
+
+  const handleExpirationDateChange = (key: 'month' | 'year', value: string) => {
+    setCardInfo((prev) => {
+      const updateDate = { ...prev.cardExpirationDate, [key]: value };
+      validateExpirationDate(updateDate);
+      return { ...prev, cardExpirationDate: updateDate };
+    });
+  };
+
+  const handleCVCChange = (value: string) => {
+    setCardInfo((prev) => {
+      validateCVC(value);
+      return { ...prev, cardCVC: value };
+    });
+  };
+
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith(CardInfoType.NUMBER)) {
       const index = Number(name[name.length - 1]);
-      setCardInfo((prev) => {
-        const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
-        validateAndSetError(CardInfoType.NUMBER, updatedNumbers, setError);
-        return { ...prev, cardNumber: updatedNumbers };
-      });
+      handleCardNumberChange(index, value);
       return;
     }
 
     if (name.startsWith(CardInfoType.EXPDATE)) {
       const key = name.split('-')[1] as 'month' | 'year';
-      setCardInfo((prev) => {
-        const updateDate = { ...prev.cardExpirationDate, [key]: value };
-        validateAndSetError(CardInfoType.EXPDATE, updateDate, setError);
-        return { ...prev, cardExpirationDate: updateDate };
-      });
+      handleExpirationDateChange(key, value);
       return;
     }
 
     if (name.startsWith(CardInfoType.CVC)) {
-      setCardInfo((prev) => {
-        validateAndSetError(CardInfoType.CVC, value, setError);
-        return { ...prev, cardCVC: value };
-      });
+      handleCVCChange(value);
       return;
     }
 
@@ -55,19 +90,5 @@ export default function useCardInfo() {
     }));
   };
 
-  return { cardInfo, setCardInfo, handleCardInfoChange, error };
+  return { cardInfo, handleCardInfoChange, error };
 }
-
-const validateAndSetError = (id: string, value: any, setError: any) => {
-  const configItem = cardInfoSectionConfig.find((item) => item.id === id);
-  if (!configItem || !configItem.validator) return;
-
-  const [errorIndex, errorMessage] = configItem.validator(value);
-  setError(
-    (prevError: any) =>
-      ({
-        ...prevError,
-        [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : NO_ERROR,
-      }) as InputValidationResultProps,
-  );
-};
