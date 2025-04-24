@@ -9,7 +9,6 @@ interface CardPasswordProps {
 }
 
 export default function CardPassword({ register, cardPasswordErrors }: CardPasswordProps) {
-  console.log(cardPasswordErrors);
   return (
     <div>
       <Title description="앞의 2자리를 입력해주세요">비밀번호를 입력해 주세요</Title>
@@ -26,6 +25,7 @@ export default function CardPassword({ register, cardPasswordErrors }: CardPassw
           inputMode="numeric"
           autoComplete="current-password"
           {...register('password', {
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 2,

@@ -177,7 +177,7 @@ export default function RegisterPage() {
           />
         )}
 
-        {isCardNumberIsValid && <CardCompany register={cardCompanyRegister} />}
+        {currentStep >= 2 && <CardCompany register={cardCompanyRegister} />}
 
         {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
 

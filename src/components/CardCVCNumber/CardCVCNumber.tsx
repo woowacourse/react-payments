@@ -1,8 +1,7 @@
-import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
+import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
 import { RegisterType } from '@/hooks/useForm';
 import { CardCVCNumberInputType } from '@/types/input';
-import { checkAllNumber } from '@/utils/validation';
 
 interface CardCVCNumberProps {
   register: RegisterType<{ cvc: CardCVCNumberInputType }>;
@@ -12,10 +11,6 @@ interface CardCVCNumberProps {
 }
 
 export default function CardCVCNumber({ register, cardCVCNumberErrors, onFocus, onBlur }: CardCVCNumberProps) {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!checkAllNumber(event.target.value)) return;
-  };
-
   return (
     <div>
       <Title>CVC 번호를 입력해 주세요</Title>
@@ -31,7 +26,7 @@ export default function CardCVCNumber({ register, cardCVCNumberErrors, onFocus, 
           onBlur={onBlur}
           inputMode="numeric"
           {...register('cvc', {
-            onChange: handleInputChange,
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 3,

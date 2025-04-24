@@ -18,15 +18,16 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
     return {
       value: value[currentKey],
       onChange: (e: React.ChangeEvent<E>) => {
+        if (options?.inputRegex && !options.inputRegex.test(e.target.value)) {
+          return;
+        }
+
         setValue((prev) => ({ ...prev, [currentKey]: e.target.value }));
         if (options?.validation) {
           setErrors((prev) => ({ ...prev, [currentKey]: validate(options.validation, e.target.value) }));
         }
 
         options?.onChange?.(e);
-      },
-      onKeyDown: (e: React.KeyboardEvent<E>) => {
-        if (options?.inputRegex && !options.inputRegex.test(e.key)) e.preventDefault();
       },
     };
   };

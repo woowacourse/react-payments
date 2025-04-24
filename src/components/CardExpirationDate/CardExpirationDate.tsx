@@ -1,10 +1,9 @@
-import { Title, Label, Input, Spacing, ErrorMessage } from '@/components';
+import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import * as S from './CardExpirationDate.styles';
-import { getErrorMessageFromObject } from '@/utils/message';
-import { checkAllNumber } from '@/utils/validation';
-import { CardExpirationDateInputType } from '@/types';
 import { RegisterType } from '@/hooks/useForm';
+import { CardExpirationDateInputType } from '@/types';
+import { getErrorMessageFromObject } from '@/utils/message';
+import * as S from './CardExpirationDate.styles';
 
 interface CardExpirationDateProps {
   register: RegisterType<CardExpirationDateInputType>;
@@ -13,8 +12,6 @@ interface CardExpirationDateProps {
 
 export default function CardExpirationDate({ register, cardExpirationDateErrors }: CardExpirationDateProps) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!checkAllNumber(event.target.value)) return;
-
     if (event.target.value.length === 2 && event.target.dataset.expiry === 'month') {
       const nextInput = document.querySelector(`input[data-expiry="year"]`) as HTMLInputElement;
       if (nextInput) {
@@ -38,6 +35,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           inputMode="numeric"
           {...register('month', {
             onChange: handleInputChange,
+            inputRegex: /^(0?[1-9]|1[0-2])$/,
             validation: {
               required: true,
               length: 2,
@@ -52,6 +50,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           data-expiry="year"
           inputMode="numeric"
           {...register('year', {
+            inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
               length: 2,

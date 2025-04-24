@@ -2,7 +2,6 @@ import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { RegisterType } from '@/hooks/useForm';
 import { CardNumberInputType } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
-import { checkAllNumber } from '@/utils/validation';
 import { ChangeEvent } from 'react';
 import * as S from './CardNumber.styles';
 
@@ -14,16 +13,13 @@ interface CardNumberProps {
 export default function CardNumber({ register, cardNumberErrors }: CardNumberProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    if (!checkAllNumber(value)) return;
 
-    if (value.length === 4) {
-      const currentSequenceNumber = Number(document.activeElement?.getAttribute('data-sequence'));
-      const nextInput = document.querySelector(
-        `input[data-sequence="${currentSequenceNumber + 1}"]`,
-      ) as HTMLInputElement;
-      if (nextInput) {
-        nextInput.focus();
-      }
+    if (value.length < 4) return;
+
+    const currentSequenceNumber = Number(document.activeElement?.getAttribute('data-sequence'));
+    const nextInput = document.querySelector(`input[data-sequence="${currentSequenceNumber + 1}"]`) as HTMLInputElement;
+    if (nextInput) {
+      nextInput.focus();
     }
   };
 
