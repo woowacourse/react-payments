@@ -23,7 +23,15 @@ const HomePage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/react-payments/complete');
+    const formData = {
+      cardNumbers,
+      month,
+      year,
+      CVC,
+      brand,
+      password,
+    };
+    navigate('/react-payments/complete', { state: formData });
   };
 
   return (
