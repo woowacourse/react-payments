@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import CVCInput from '../CVCInput/CVCInput';
-import CardNumberInput from '../CardNumberInput/CardNumberInput';
-import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
-import PreviewCard from '../PreviewCard/PreviewCard';
-import Text from '../Text/Text';
+import CVCInput from '../../components/CVCInput/CVCInput';
+import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
+import ExpirationDateInput from '../../components/ExpirationDateInput/ExpirationDateInput';
+import PreviewCard from '../../components/PreviewCard/PreviewCard';
+import Text from '../../components/Text/Text';
 import { CARD_PAGE_TEXT } from './cardPageText';
 import useInputArrayState from '../../hooks/useInputArrayState';
-import PasswordInput from '../PasswordInput/PasswordInput';
-import Dropdown from '../Dropdown/Dropdown';
+import PasswordInput from '../../components/PasswordInput/PasswordInput';
+import Dropdown from '../../components/Dropdown/Dropdown';
 import { useEffect, useState } from 'react';
-import Button from '../Button/Button';
+import Button from '../../components/Button/Button';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -80,6 +80,7 @@ const CardPage = () => {
       <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
       <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
       <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />
+
       <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
       <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
       <CardNumberInput

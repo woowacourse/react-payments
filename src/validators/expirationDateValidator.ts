@@ -1,4 +1,4 @@
-import { HandleInputParams } from '../components/CardPage/CardPage';
+import { HandleInputParams } from '../pages/CardPage/CardPage';
 import { ERROR_MESSAGES } from './errorMessages';
 import { checkNumber, checkValidLength } from './inputValidator';
 

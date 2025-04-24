@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HandleInputParams } from '../components/CardPage/CardPage';
+import { HandleInputParams } from '../pages/CardPage/CardPage';
 import useErrorArrayState from './useErrorStateUpdate';
 
 function useExpDateValidation(

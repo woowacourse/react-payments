@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../CardPage/CardPage';
+import { HandleInputParams } from '../../pages/CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import useExpDateValidation from '../../hooks/useExpDateValidation';
 import { expirationDateValidation } from '../../validators/expirationDateValidator';
