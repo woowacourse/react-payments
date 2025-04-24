@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Payments from './payments';
+import Payments from './Payments';
 
 const meta = {
   title: 'Payments',

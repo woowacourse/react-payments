@@ -4,7 +4,7 @@ import styled from 'styled-components';
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   isError?: boolean;
-  inputType: 'number' | 'text';
+  inputType: 'number' | 'text' | 'password';
   onChange: ({ name, value }: { name: string; value: string }) => void;
 }
 
@@ -38,7 +38,7 @@ function Input({
       $isError={isError ?? false}
       onChange={handleTypeChange}
       name={name}
-      type="text"
+      type={inputType === 'password' ? 'password' : 'text'}
       onBlur={onBlur}
     />
   );

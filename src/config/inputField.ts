@@ -16,7 +16,7 @@ export const EXPIRATION_DATE_INPUT_PLACEHOLDER: Record<
   expirationDatePart2: 'YY',
 };
 
-// 카드 유효히간 타입
+// 카드 유효기간 타입
 export const EXPIRATION_DATE_INPUT_TYPE = [
   'expirationDatePart1',
   'expirationDatePart2',
@@ -39,3 +39,7 @@ export const CARD_ISSUER_TYPE = [
   '국민카드',
 ] as const;
 export type CardIssuerSelectorType = (typeof CARD_ISSUER_TYPE)[number];
+
+// 카드 비밀번호 타입
+export const PASSWORD_INPUT_TYPE = ['passwordPart1'] as const;
+export type PasswordInputType = (typeof PASSWORD_INPUT_TYPE)[number];

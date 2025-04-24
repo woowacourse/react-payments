@@ -6,6 +6,7 @@ import {
   CardNumberInputType,
   CVCInputValueType,
   ExpirationDateInputType,
+  PasswordInputType,
 } from '../../config/inputField';
 import { CardType } from '../../config/card';
 import CardPreview from '../../components/CardPreviw/CardPreview';
@@ -14,6 +15,7 @@ import CardNumberInputField from '../../components/InputField/CardNumberInputFie
 import ExpirationDateInputField from '../../components/InputField/ExpirationDateInputField/ExpirationDateInputField';
 import CVCInputField from '../../components/InputField/CVCInputField/CVCInputField';
 import CardIssuerSelector from '../../components/InputField/CardIssuerSelector/CardIssuerSelector';
+import PasswordInputField from '../../components/InputField/PasswordInputField/PasswordInputField';
 
 function Payments() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
@@ -38,6 +40,12 @@ function Payments() {
     CVCPart1: '',
   });
 
+  const [passwordInputValue, setPasswordInputValue] = useState<
+    Record<PasswordInputType, string>
+  >({
+    passwordPart1: '',
+  });
+
   const [cardType, setCardType] = useState<CardType>(null);
   const [step, setStep] = useState(1);
   const [cardIssuer, setCardIssuer] = useState<CardIssuerSelectorType | null>(
@@ -54,6 +62,20 @@ function Payments() {
           cardIssuer={cardIssuer}
         />
         {step >= 1 && (
+          <InputSection
+            title="비밀번호를 입력해 주세요"
+            caption="앞의 2자리를 입력해주세요"
+          >
+            <PasswordInputField
+              inputValue={passwordInputValue}
+              setInputValue={setPasswordInputValue}
+              onComplete={() => {
+                if (step === 4) setStep(5);
+              }}
+            />
+          </InputSection>
+        )}
+        {step >= 4 && (
           <InputSection title="CVC 번호를 입력해 주세요">
             <CVCInputField
               inputValue={CVCInputValue}
