@@ -14,7 +14,7 @@ export default function useCardInfo<T extends Record<string, string>>(
   }
 
   function isFullFilled() {
-    return Object.values(values).every((value) => value.length === maxLength);
+    return Object.values(values).every((value) => value.length >= maxLength);
   }
 
   return {

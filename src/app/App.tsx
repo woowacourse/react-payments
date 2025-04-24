@@ -51,7 +51,7 @@ function App() {
     {
       cardType: INITIALIZE_VALUE,
     },
-    20
+    2
   );
 
   return (

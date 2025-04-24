@@ -13,7 +13,7 @@ import { getCVCValidationFns } from "../../entities/cardCVCNumberInputs/CardCVCN
 import CardTypeSection from "../cardTypeSection/CardTypeSection";
 import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
-import { useState } from "react";
+import useStep from "./hooks/useStep";
 
 type CardInfoFormProps = {
   cardNumber: {
@@ -53,9 +53,6 @@ export default function CardInfoForm({
   password,
   cardType,
 }: CardInfoFormProps) {
-  const [step, setStep] = useState(5);
-  const nextStep = () => setStep((prev) => prev + 1);
-
   const cardNumberError = useError<Record<CardNumberPosition, string>>(
     {
       first: NO_ERROR,
@@ -86,6 +83,18 @@ export default function CardInfoForm({
     },
     getCVCValidationFns
   );
+
+  const step = useStep({
+    cardNumber,
+    expirationPeriod,
+    CVCNumber,
+    password,
+    cardType,
+    cardNumberError,
+    year,
+    month,
+    CVCError,
+  });
 
   return (
     <>
