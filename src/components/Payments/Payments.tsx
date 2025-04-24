@@ -16,20 +16,11 @@ function Payments() {
   return (
     <PaymentsCSS>
       <Preview />
-      <InputSection
-        type={INPUT_TYPE.cardNumbers}
-        onComplete={updateCardNumberIsComplete}
-      />
-      {Object.values(isComplete.cardNumbers).every(Boolean) && (
+
+      {isComplete.cvcNumber === true && (
         <InputSection
-          type={INPUT_TYPE.cardBrand}
-          onComplete={updateCardBrandIsComplete}
-        />
-      )}
-      {isComplete.cardBrand === true && (
-        <InputSection
-          type={INPUT_TYPE.expirationPeriod}
-          onComplete={updateExpirationPeriodIsComplete}
+          type={INPUT_TYPE.password}
+          onComplete={updatePasswordIsComplete}
         />
       )}
       {Object.values(isComplete.expirationPeriod).every(Boolean) && (
@@ -38,12 +29,22 @@ function Payments() {
           onComplete={updateCvcIsComplete}
         />
       )}
-      {isComplete.cvcNumber === true && (
+      {isComplete.cardBrand === true && (
         <InputSection
-          type={INPUT_TYPE.password}
-          onComplete={updatePasswordIsComplete}
+          type={INPUT_TYPE.expirationPeriod}
+          onComplete={updateExpirationPeriodIsComplete}
         />
       )}
+      {Object.values(isComplete.cardNumbers).every(Boolean) && (
+        <InputSection
+          type={INPUT_TYPE.cardBrand}
+          onComplete={updateCardBrandIsComplete}
+        />
+      )}
+      <InputSection
+        type={INPUT_TYPE.cardNumbers}
+        onComplete={updateCardNumberIsComplete}
+      />
     </PaymentsCSS>
   );
 }
