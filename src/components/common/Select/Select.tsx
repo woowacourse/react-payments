@@ -37,6 +37,7 @@ export default Select;
 
 const selectBoxStyle = css`
   width: 100%;
+  height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,6 +79,7 @@ const optionStyle = css`
   display: flex;
   align-items: center;
   height: 30.94px;
+  background-color: white;
   color: #4f4f4f;
   font-size: 11px;
   font-weight: 400;

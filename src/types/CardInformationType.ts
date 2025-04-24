@@ -25,17 +25,24 @@ export type PasswordStateType = {
   dispatch: Dispatch<Action>;
 };
 
+export type CardIssuerStateType = {
+  cardIssuerState: (string | null)[];
+  dispatch: Dispatch<Action>;
+};
+
 type Action =
   | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
   | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
   | { type: "SET_CVC_NUMBER"; value: string }
-  | { type: "SET_PASSWORD"; value: string };
+  | { type: "SET_PASSWORD"; value: string }
+  | { type: "SET_CARD_ISSUER"; value: string };
 
 export type CardInformationType = {
   uniqueNumber: string[];
   expirationDate: string[];
   cvcNumber: string[];
   password: string[];
+  cardIssuer: (string | null)[];
 };
 
 export type CardType = "visa" | "master" | "none";

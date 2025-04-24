@@ -6,10 +6,11 @@ import UniqueNumberForm from "./components/feature/UniqueNumberForm/UniqueNumber
 import ExpirationDateForm from "./components/feature/ExpirationDateForm/ExpirationDateForm.tsx";
 import CvcNumberForm from "./components/feature/CvcNumberForm/CvcNumberForm.tsx";
 import PasswordForm from "./components/feature/PasswordForm/PasswordForm.tsx";
+import CardIssuerForm from "./components/feature/CardIssuerForm/CardIssuerForm.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
-  const { uniqueNumber, expirationDate, cvcNumber, password } = cardState;
+  const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
 
   return (
     <div css={AppStyle}>
@@ -19,6 +20,7 @@ function App() {
         <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
         <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
         <PasswordForm passwordState={password} dispatch={dispatch} />
+        <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />
       </div>
     </div>
   );

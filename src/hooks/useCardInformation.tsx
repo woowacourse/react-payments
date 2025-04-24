@@ -6,13 +6,15 @@ const initialCardInfo: CardInformationType = {
   expirationDate: ["", ""],
   cvcNumber: [""],
   password: [""],
+  cardIssuer: [null],
 };
 
 type Action =
   | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
   | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
   | { type: "SET_CVC_NUMBER"; value: string }
-  | { type: "SET_PASSWORD"; value: string };
+  | { type: "SET_PASSWORD"; value: string }
+  | { type: "SET_CARD_ISSUER"; value: string | null };
 
 function reducer(state: CardInformationType, action: Action): CardInformationType {
   switch (action.type) {
@@ -33,6 +35,9 @@ function reducer(state: CardInformationType, action: Action): CardInformationTyp
 
     case "SET_PASSWORD":
       return { ...state, password: [action.value] };
+
+    case "SET_CARD_ISSUER":
+      return { ...state, cardIssuer: [action.value] };
 
     default:
       return state;
