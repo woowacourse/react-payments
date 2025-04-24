@@ -77,6 +77,9 @@ export const cardCVCValidator = (input: string) => {
   if (!isNumber(input)) {
     return [0, 'CVC는 숫자만 입력 가능합니다.'];
   }
+  if (input.length !== 3) {
+    return [0, 'CVC는 3자리 숫자여야 합니다.'];
+  }
   return [NO_ERROR, ''];
 };
 
