@@ -64,6 +64,7 @@ function CardPreview({
         {displayCardNumbers.map((number, index) => {
           return (
             <p
+              key={`card-number-${index}`}
               className={`${styles.cardNumber} ${
                 index >= 2 ? styles.maskingCardNumber : ''
               }`}
