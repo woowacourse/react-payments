@@ -12,7 +12,7 @@ type Props = {
     third: React.RefObject<HTMLInputElement | null>;
     fourth: React.RefObject<HTMLInputElement | null>;
   };
-  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => '' | '숫자만 입력 가능합니다.';
+  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
 };
 
 export default function CardNumberSection({ cardNumbers, onCardNumbersChange, inputRefs, getCardNumberErrorMessage }: Props) {

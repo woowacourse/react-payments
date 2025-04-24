@@ -1,9 +1,5 @@
 import styles from './CardTypeSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
-import { Dispatch, SetStateAction } from 'react';
-import Input from '../Input/Input';
-import { CardLogoKey, CardNumberKey, CardNumberType } from '../../types';
-import { CARD_BRANDS } from '../../constants';
 
 type Props = {};
 

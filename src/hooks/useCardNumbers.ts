@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react';
 import { INITIAL_CARD_NUMBER } from '../constants';
 import { CardNumberType } from '../types';
+import { isNumber } from '../utils/isNumber';
+
+const isValidCardNumberLength = (value: string) => value.length === 0 || value.length === 4;
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
@@ -12,11 +15,12 @@ const useCardNumbers = () => {
   };
 
   const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
-    const isError = !Number.isInteger(+value);
-
+    if (value !== '' && !isNumber(value)) {
+      return;
+    }
     setCardNumbers((prev) => ({
       ...prev,
-      [field]: { value, isError }
+      [field]: { value, isError: !isNumber(value) && !isValidCardNumberLength(value) }
     }));
 
     if (field == 'fourth' || value.length !== 4) {
@@ -33,11 +37,20 @@ const useCardNumbers = () => {
   };
 
   const getCardNumberErrorMessage = (cardNumbers: CardNumberType) => {
-    const hasError = Object.values(cardNumbers).some(({ isError }) => isError);
-    return hasError ? '숫자만 입력 가능합니다.' : '';
+    for (const { value } of Object.values(cardNumbers)) {
+      if (!isValidCardNumberLength(value)) {
+        return ERROR_MESSAGES.INVALID_LENGTH;
+      }
+    }
+
+    return '';
   };
 
   return { inputRefs, handleCardNumberChange, cardNumbers, getCardNumberErrorMessage };
 };
 
 export default useCardNumbers;
+
+export const ERROR_MESSAGES = {
+  INVALID_LENGTH: '4자리 숫자를 입력해주세요.'
+};
