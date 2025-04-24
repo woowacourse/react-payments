@@ -1,5 +1,5 @@
 .form {
   display: flex;
   flex-direction: column-reverse;
-  gap: 3rem;
+  gap: 1.8rem 0;
 }
