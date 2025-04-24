@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 
 import { CardNumberForm } from '@/components/features/CardFormFiled/CardNumberForm';
+import { CardPasswordForm } from '@/components/features/CardFormFiled/CardPasswordForm';
 import { CVCForm } from '@/components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from '@/components/features/CardFormFiled/ExpireDateForm';
 import { useCardInput } from '@/hooks/useCardInput';
@@ -53,6 +54,19 @@ export const CVCFormStory = () => {
   return (
     <CVCForm
       cvcNumber={cvcNumber}
+      errorMessage={errorMessage}
+      onCardInputChange={handleChange}
+      onCardInputBlur={handleBlur}
+    />
+  );
+};
+
+export const CardPasswordFormStory = () => {
+  const { value: password, errorMessage, handleChange, handleBlur } = useCardInput('password');
+
+  return (
+    <CardPasswordForm
+      password={password}
       errorMessage={errorMessage}
       onCardInputChange={handleChange}
       onCardInputBlur={handleBlur}

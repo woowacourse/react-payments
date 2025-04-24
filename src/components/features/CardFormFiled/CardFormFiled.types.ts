@@ -17,4 +17,4 @@ export type CardExpireDateFiledType = {
   ) => void;
 } & Pick<CardFormFiledProps, 'errorMessage'>;
 
-export type CardFormFiledType = 'cardNumber' | 'CVC';
+export type CardFormFiledType = 'cardNumber' | 'CVC' | 'password';

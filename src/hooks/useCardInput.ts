@@ -18,6 +18,11 @@ export const CardInputTypeOptions = {
     valueLength: 3,
     arrLength: 1,
   },
+
+  password: {
+    valueLength: 2,
+    arrLength: 1,
+  },
 };
 
 export const useCardInput = (type: CardFormFiledType) => {

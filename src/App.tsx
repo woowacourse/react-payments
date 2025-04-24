@@ -1,6 +1,7 @@
 import { AppLayout } from './components/common/AppLayout';
 import { Flex } from './components/common/Flex';
 import { CardNumberForm } from './components/features/CardFormFiled/CardNumberForm';
+import { CardPasswordForm } from './components/features/CardFormFiled/CardPasswordForm';
 import { CVCForm } from './components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from './components/features/CardFormFiled/ExpireDateForm';
 import { CardPreview } from './components/features/CardPreview';
@@ -29,12 +30,25 @@ function App() {
     handleBlur: handleCVCBlur,
   } = useCardInput('CVC');
 
+  const {
+    value: password,
+    errorMessage: passwordErrorMessage,
+    handleChange: handlePasswordChange,
+    handleBlur: handlePasswordBlur,
+  } = useCardInput('password');
+
   return (
     <AppLayout>
       <Flex padding="20px 0">
         <CardPreview cardNumbers={cardNumbers} expireDate={expireDate} />
       </Flex>
       <Flex direction="column" gap="10px" margin="30px 0">
+        <CardPasswordForm
+          password={password}
+          errorMessage={passwordErrorMessage}
+          onCardInputChange={handlePasswordChange}
+          onCardInputBlur={handlePasswordBlur}
+        />
         <CardNumberForm
           cardNumbers={cardNumbers}
           errorMessage={cardErrorMessage}
