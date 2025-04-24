@@ -2,12 +2,17 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 type Prop = {
+	type: "button" | "submit";
 	children?: string | ReactNode;
 	onClick?: () => void;
 };
 
-const Button = ({ children, onClick }: Prop) => {
-	return <ButtonStyled onClick={onClick}>{children}</ButtonStyled>;
+const Button = ({ type, children, onClick }: Prop) => {
+	return (
+		<ButtonStyled type={type} onClick={onClick}>
+			{children}
+		</ButtonStyled>
+	);
 };
 
 export default Button;
