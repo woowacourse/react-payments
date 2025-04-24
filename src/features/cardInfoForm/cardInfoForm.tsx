@@ -16,6 +16,7 @@ import { getCVCValidationFns } from "../../entities/cardCVCNumberInputs/CardCVCN
 import CardTypeSection from "../cardTypeSection/CardTypeSection";
 import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
+import { useState } from "react";
 
 type CardInfoFormProps = {
   cardNumber: Record<CardNumberPosition, string>;
@@ -47,6 +48,9 @@ export default function CardInfoForm({
   password,
   cardType,
 }: CardInfoFormProps) {
+  const [step, setStep] = useState(0);
+  const nextStep = () => setStep((prev) => prev + 1);
+
   const cardNumberError = useError<Record<CardNumberPosition, string>>(
     {
       first: NO_ERROR,
@@ -80,25 +84,38 @@ export default function CardInfoForm({
 
   return (
     <>
-      <CardPasswordSection password={password} />
-      <CardTypeSection cardType={cardType} />
-      <CardNumberSection
-        cardNumber={cardNumber}
-        changeCardNumber={changeCardNumber}
-        cardNumberError={cardNumberError}
-      />
-      <CardExpirationPeriodSection
-        expirationPeriod={expirationPeriod}
-        changeExpirationPeriod={changeExpirationPeriod}
-        monthError={month}
-        yearError={year}
-      />
-      <CardCVCNumberSection
-        CVCNumber={CVCNumber}
-        changeCVCNumber={changeCVCNumber}
-        CVCError={CVCError}
-      />
+      {step >= 0 && (
+        <CardNumberSection
+          cardNumber={cardNumber}
+          changeCardNumber={changeCardNumber}
+          cardNumberError={cardNumberError}
+        />
+      )}
+      {step >= 1 && <CardTypeSection cardType={cardType} />}
+      {step >= 2 && (
+        <CardExpirationPeriodSection
+          expirationPeriod={expirationPeriod}
+          changeExpirationPeriod={changeExpirationPeriod}
+          monthError={month}
+          yearError={year}
+        />
+      )}
+      {step >= 3 && (
+        <CardCVCNumberSection
+          CVCNumber={CVCNumber}
+          changeCVCNumber={changeCVCNumber}
+          CVCError={CVCError}
+        />
+      )}
+      {step >= 4 && <CardPasswordSection password={password} />}
+
       <CardSubmitButton />
     </>
   );
 }
+
+// step을 바꾸는 조건
+/*
+1. 해당 섹션의 input에 모든 값이 채워져 있다.
+2. 해당 섹션에 에러가 없다.
+*/
