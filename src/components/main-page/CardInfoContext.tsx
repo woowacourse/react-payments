@@ -10,6 +10,7 @@ type CardInfoContextType = {
   selectedCardCompany: string;
   setCardNumber: (cardNumber: CardNumber) => void;
   setSelectedCardCompany: (company: string) => void;
+  resetCardInfo: () => void;
 };
 
 const defaultCardNumber: CardNumber = {
@@ -21,27 +22,23 @@ const defaultCardNumber: CardNumber = {
 
 const CardInfoContext = createContext<CardInfoContextType | undefined>(undefined);
 
-type Props = {
-  children: ReactNode;
-};
-
-export function CardInfoProvider({ children }: Props) {
-  const [cardNumber, setCardNumber] = useState<CardNumber>(defaultCardNumber);
+export const CardInfoProvider = ({ children }: { children: ReactNode }) => {
+  const [cardNumber, setCardNumber] = useState({ first: '', second: '', third: '', fourth: '' });
   const [selectedCardCompany, setSelectedCardCompany] = useState('');
+
+  const resetCardInfo = () => {
+    setCardNumber({ first: '', second: '', third: '', fourth: '' });
+    setSelectedCardCompany('');
+  };
 
   return (
     <CardInfoContext.Provider
-      value={{
-        cardNumber,
-        selectedCardCompany,
-        setCardNumber,
-        setSelectedCardCompany,
-      }}
+      value={{ cardNumber, setCardNumber, selectedCardCompany, setSelectedCardCompany, resetCardInfo }}
     >
       {children}
     </CardInfoContext.Provider>
   );
-}
+};
 
 export function useCardInfo() {
   const context = useContext(CardInfoContext);

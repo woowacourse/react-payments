@@ -10,12 +10,13 @@ import { INITIALIZE_VALUE } from '../../../constants/constant';
 import { ExpirationPeriod, Position } from '../../../types/index.types';
 import Button from '../../common/button/Button';
 import { useCardInfo } from '../CardInfoContext';
+import { useNavigate } from 'react-router-dom';
 
 const StyledFrame = styled.div`
   display: inline-flex;
   padding: 77px 30px 19px 31px;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 45px;
   background-color: white;
@@ -44,6 +45,7 @@ function AddNewCardForm() {
   const [cardColor, setCardColor] = useState('#333333');
 
   const { cardNumber, setCardNumber, setSelectedCardCompany } = useCardInfo();
+  const navigate = useNavigate();
 
   function changeCardNumber(position: Position, number: string) {
     setCardNumber({
@@ -65,6 +67,10 @@ function AddNewCardForm() {
 
   function changePassword(password: string) {
     setPassword(password);
+  }
+
+  function handleSubmit() {
+    navigate('/announce');
   }
 
   return (
@@ -100,7 +106,7 @@ function AddNewCardForm() {
       {step >= 0 && (
         <CardNumberSection cardNumber={cardNumber} changeCardNumber={changeCardNumber} viewNextInput={viewNextInput} />
       )}
-      {openButton && <Button />}
+      {openButton && <Button onClick={handleSubmit} />}
     </StyledFrame>
   );
 }

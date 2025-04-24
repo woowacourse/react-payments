@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '../common/button/Button';
 import { useCardInfo } from '../main-page/CardInfoContext';
+import { useNavigate } from 'react-router-dom';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -38,7 +39,14 @@ const checkSrc: Record<string, CheckSrc> = {
 };
 
 export default function AnnounceSection() {
-  const { cardNumber, selectedCardCompany } = useCardInfo();
+  const { cardNumber, selectedCardCompany, resetCardInfo } = useCardInfo();
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    resetCardInfo();
+    navigate('/add-card');
+  };
 
   return (
     <StyledContainer>
@@ -49,7 +57,7 @@ export default function AnnounceSection() {
         {cardNumber.first || '----'}로 시작하는 <br />
         {selectedCardCompany || '카드사'}가 등록되었어요.
       </StyledAnnounce>
-      <Button />
+      <Button onClick={handleButtonClick} />
     </StyledContainer>
   );
 }

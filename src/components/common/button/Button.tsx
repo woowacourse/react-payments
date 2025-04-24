@@ -14,8 +14,12 @@ const StyledButton = styled.button`
   line-height: 12px;
 `;
 
-function Button() {
-  return <StyledButton>확인</StyledButton>;
+type ButtonProps = {
+  onClick: () => void;
+};
+
+function Button({ onClick }: ButtonProps) {
+  return <StyledButton onClick={onClick}>확인</StyledButton>;
 }
 
 export default Button;
