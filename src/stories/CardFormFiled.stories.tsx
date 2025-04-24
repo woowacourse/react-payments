@@ -77,14 +77,14 @@ export const CardPasswordFormStory = () => {
 };
 
 export const CardBrandFormStory = () => {
-  const { isOpen, selectedItem, handleItemClick, handleToggle } = useBrandSelectInput();
+  const { isOpen, selectedItem, handleItemSelect, handleToggleSelect } = useBrandSelectInput();
 
   return (
     <CardBrandSelectForm
       isOpen={isOpen}
       selectedItem={selectedItem}
-      onBrandItemClick={handleItemClick}
-      onToggle={handleToggle}
+      onItemSelect={handleItemSelect}
+      onToggle={handleToggleSelect}
     />
   );
 };
