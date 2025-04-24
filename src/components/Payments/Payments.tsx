@@ -1,6 +1,7 @@
 import InputSection from "../\bInputSection/InputSection";
 import { INPUT_TYPE } from "../../constants/constants";
 import { useCompletion } from "../../hooks/useCompletion";
+import Button from "../Button/Button";
 import Preview from "../Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
 
@@ -45,6 +46,7 @@ function Payments() {
         type={INPUT_TYPE.cardNumbers}
         onComplete={updateCardNumberIsComplete}
       />
+      <Button />
     </PaymentsCSS>
   );
 }
