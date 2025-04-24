@@ -16,6 +16,15 @@ import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
 
+import {
+  isCardNumberComplete,
+  isCardBrandComplete,
+  isSecretNumberComplete,
+  isExpiryDateComplete,
+  isCVCComplete,
+  isFormComplete,
+} from '../validation/validationCardCompleting';
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -85,80 +94,6 @@ const AddCard = () => {
     cvc: false,
   });
 
-  const isCardNumberComplete = () => {
-    const allFieldsFilled =
-      cardInput.first !== null &&
-      cardInput.second !== null &&
-      cardInput.third !== null &&
-      cardInput.fourth !== null;
-
-    const noErrors =
-      !errorMessages.first &&
-      !errorMessages.second &&
-      !errorMessages.third &&
-      !errorMessages.fourth;
-
-    const correctLength =
-      cardInput.first !== null &&
-      String(cardInput.first).length === 4 &&
-      cardInput.second !== null &&
-      String(cardInput.second).length === 4 &&
-      cardInput.third !== null &&
-      String(cardInput.third).length === 4 &&
-      cardInput.fourth !== null &&
-      String(cardInput.fourth).length === 4;
-
-    return allFieldsFilled && noErrors && correctLength;
-  };
-
-  const isCardBrandComplete = () => {
-    return (
-      cardInput.cardBrand !== undefined &&
-      cardInput.cardBrand !== null &&
-      cardInput.cardBrand !== '' &&
-      !errorMessages.cardBrand
-    );
-  };
-
-  const isSecretNumberComplete = () => {
-    const secretNumberStr = String(cardInput.secretNumber || '');
-    return (
-      cardInput.secretNumber !== null &&
-      !errorMessages.secretNumber &&
-      (secretNumberStr.length === 2 || secretNumberStr.length === 4)
-    );
-  };
-
-  const isExpiryDateComplete = () => {
-    const mmStr = String(cardInput.MM || '');
-    const yyStr = String(cardInput.YY || '');
-
-    const validMM =
-      cardInput.MM !== null &&
-      mmStr.length === 2 &&
-      parseInt(mmStr) >= 1 &&
-      parseInt(mmStr) <= 12;
-    const validYY = cardInput.YY !== null && yyStr.length === 2;
-
-    return validMM && validYY && !errorMessages.MM && !errorMessages.YY;
-  };
-
-  const isCVCComplete = () => {
-    const cvcStr = String(cardInput.CVC || '');
-
-    return cardInput.CVC !== null && !errorMessages.CVC && cvcStr.length === 3;
-  };
-
-  const isFormComplete = () => {
-    return (
-      isSecretNumberComplete() &&
-      isCardBrandComplete() &&
-      isCardNumberComplete() &&
-      isExpiryDateComplete() &&
-      isCVCComplete()
-    );
-  };
-
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
     message: string,
@@ -187,7 +122,10 @@ const AddCard = () => {
   };
 
   useEffect(() => {
-    if (isCardNumberComplete() && !visibleSteps.cardBrand) {
+    if (
+      isCardNumberComplete(cardInput, errorMessages) &&
+      !visibleSteps.cardBrand
+    ) {
       setVisibleSteps(prev => ({ ...prev, cardBrand: true }));
       setTimeout(() => {
         cardBrandRef.current?.querySelector('select')?.focus();
@@ -195,8 +133,8 @@ const AddCard = () => {
     }
 
     if (
-      isCardBrandComplete() &&
-      isCardNumberComplete() &&
+      isCardBrandComplete(cardInput, errorMessages) &&
+      isCardNumberComplete(cardInput, errorMessages) &&
       !visibleSteps.secretNumber
     ) {
       setVisibleSteps(prev => ({ ...prev, secretNumber: true }));
@@ -206,9 +144,9 @@ const AddCard = () => {
     }
 
     if (
-      isSecretNumberComplete() &&
-      isCardBrandComplete() &&
-      isCardNumberComplete() &&
+      isSecretNumberComplete(cardInput, errorMessages) &&
+      isCardBrandComplete(cardInput, errorMessages) &&
+      isCardNumberComplete(cardInput, errorMessages) &&
       !visibleSteps.expiryDate
     ) {
       setVisibleSteps(prev => ({ ...prev, expiryDate: true }));
@@ -218,10 +156,10 @@ const AddCard = () => {
     }
 
     if (
-      isExpiryDateComplete() &&
-      isSecretNumberComplete() &&
-      isCardBrandComplete() &&
-      isCardNumberComplete() &&
+      isExpiryDateComplete(cardInput, errorMessages) &&
+      isSecretNumberComplete(cardInput, errorMessages) &&
+      isCardBrandComplete(cardInput, errorMessages) &&
+      isCardNumberComplete(cardInput, errorMessages) &&
       !visibleSteps.cvc
     ) {
       setVisibleSteps(prev => ({ ...prev, cvc: true }));
@@ -300,7 +238,7 @@ const AddCard = () => {
           </FormSection>
         </Form>
       </Wrap>
-      {isFormComplete() && <SubmitButton />}
+      {isFormComplete(cardInput, errorMessages) && <SubmitButton />}
     </>
   );
 };
