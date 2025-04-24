@@ -10,6 +10,7 @@ import CardBrand from "./CardBrand/CardBrand";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
+import useCardBrandSelect from "../../hooks/useCardBrandSelect";
 
 export default function CardFormPage() {
   const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
@@ -21,6 +22,7 @@ export default function CardFormPage() {
   } = useExpirationDateInput();
   const { cvcNumbers, cvcNumbersError, onCvcNumberChange } =
     useCvcNumberInput();
+  const { cardBrand, cardBrandError, onCardBrandChange } = useCardBrandSelect();
 
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ export default function CardFormPage() {
   return (
     <div className={styles["card-form-page"]}>
       <PreviewCardLayout
+        cardBrand={cardBrand}
         cardNumbers={cardNumbers}
         cardType={cardType}
         cardExpirationDate={cardExpirationDate}
@@ -57,7 +60,10 @@ export default function CardFormPage() {
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
         />
-        <CardBrand handleChange={() => {}} />
+        <CardBrand
+          handleChange={onCardBrandChange}
+          errorMessage={cardBrandError}
+        />
       </div>
       <Button text="확인" onClick={handleSubmit} />
     </div>

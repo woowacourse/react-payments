@@ -3,7 +3,8 @@ import Text from "../../../components/Text/Text";
 import Select from "../../../components/Select/select";
 
 interface CardBrandProps {
-  handleChange: (value: string, index: number) => void;
+  handleChange: (brand: string) => void;
+  errorMessage: string;
 }
 
 const CARD_NUMBER_LABEL = {
@@ -23,15 +24,18 @@ const CARD_BRANDS = [
   "국민카드",
 ];
 
-export default function CardBrand({ handleChange }: CardBrandProps) {
+export default function CardBrand({
+  handleChange,
+  errorMessage,
+}: CardBrandProps) {
   return (
     <section className={styles["card-brand"]}>
       <Text textType="title">{CARD_NUMBER_LABEL.TITLE}</Text>
       <Text textType="description">{CARD_NUMBER_LABEL.DESCRIPTION}</Text>
       <div className={styles["card-brand-select"]}>
-        <Select options={CARD_BRANDS}></Select>
+        <Select options={CARD_BRANDS} handleChange={handleChange}></Select>
       </div>
-      <Text textType="error">{""}</Text>
+      <Text textType="error">{errorMessage}</Text>
     </section>
   );
 }
