@@ -17,6 +17,7 @@ import { CVCInput } from '../component/cardDetails/CVCInput';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
+import { SubmitButton } from '../component/SubmitButton';
 
 const Wrap = styled.div`
   display: flex;
@@ -90,52 +91,55 @@ const AddCard = () => {
   };
 
   return (
-    <Wrap>
-      <Card
-        cardNumber={cardInput}
-        cardType={
-          cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'
-        }
-        cardColor={cardInput.cardBrand}
-      />
-      <Form>
-        <SecretNumberInput
-          errorMessages={errorMessages}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
+    <>
+      <Wrap>
+        <Card
+          cardNumber={cardInput}
+          cardType={
+            cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'
+          }
+          cardColor={cardInput.cardBrand}
         />
-        <CardBrandSelect
-          setCardInput={setCardInput}
-          onColorChange={color => {
-            setCardInput(prev => ({
-              ...prev,
-              cardBrand: color,
-            }));
-          }}
-        />
-        <CardNumberInput
-          cardInput={cardInput}
-          setCardInput={setCardInput}
-          errorMessages={errorMessages}
-          handleErrorMessages={handleErrorMessages}
-          handleCardNumberErrorMessages={handleCardNumberErrorMessages}
-        />
+        <Form>
+          <SecretNumberInput
+            errorMessages={errorMessages}
+            setCardInput={setCardInput}
+            handleErrorMessages={handleErrorMessages}
+          />
+          <CardBrandSelect
+            setCardInput={setCardInput}
+            onColorChange={color => {
+              setCardInput(prev => ({
+                ...prev,
+                cardBrand: color,
+              }));
+            }}
+          />
+          <CardNumberInput
+            cardInput={cardInput}
+            setCardInput={setCardInput}
+            errorMessages={errorMessages}
+            handleErrorMessages={handleErrorMessages}
+            handleCardNumberErrorMessages={handleCardNumberErrorMessages}
+          />
 
-        <ExpiryDateInput
-          handlePeriodErrorMessages={handlePeriodErrorMessages}
-          validateCardExpirationDateMM={validateCardExpirationDateMM}
-          validateCardExpirationDateYY={validateCardExpirationDateYY}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
-        />
-        <CVCInput
-          validateCardCVC={validateCardCVC}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
-          errorMessages={errorMessages}
-        />
-      </Form>
-    </Wrap>
+          <ExpiryDateInput
+            handlePeriodErrorMessages={handlePeriodErrorMessages}
+            validateCardExpirationDateMM={validateCardExpirationDateMM}
+            validateCardExpirationDateYY={validateCardExpirationDateYY}
+            setCardInput={setCardInput}
+            handleErrorMessages={handleErrorMessages}
+          />
+          <CVCInput
+            validateCardCVC={validateCardCVC}
+            setCardInput={setCardInput}
+            handleErrorMessages={handleErrorMessages}
+            errorMessages={errorMessages}
+          />
+        </Form>
+      </Wrap>
+      <SubmitButton />
+    </>
   );
 };
 
