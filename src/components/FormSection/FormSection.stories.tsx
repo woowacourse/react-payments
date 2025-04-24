@@ -20,7 +20,7 @@ export const Primary: Story = {
       label: "카드번호",
       inputNumber: 4,
       inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
-      cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""] },
+      cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""], password: [""] },
       informationType: "uniqueNumber",
       setCardInformation: () => {},
       eachValidation: {

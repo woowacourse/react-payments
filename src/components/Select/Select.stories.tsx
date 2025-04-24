@@ -23,6 +23,7 @@ export const Primary: Story = {
       uniqueNumber: ["", "", "", ""],
       expirationDate: ["", ""],
       cvcNumber: [""],
+      password: [""],
     });
 
     return <Select options={args.options} placeholder={args.placeholder} setCardInformation={setCardInformation} />;
