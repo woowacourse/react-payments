@@ -11,6 +11,9 @@ import useCardCompany from "./hooks/useCardCompany";
 import useCardPassword from "./hooks/useCardPassword";
 import useCardOwnerName from "./hooks/useCardOwnerName";
 import styles from "./css/cardForm.module.css";
+import { useState } from "react";
+import CardComplete from "./components/Complete/CardComplete";
+import Button from "./components/common/Button/Button";
 
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
@@ -73,6 +76,20 @@ function App() {
     cardPassword.length == 2 &&
     cardOwnerName.length > 0;
 
+  const [newCard, setNewCard] = useState(null);
+
+  const onClick = () => {
+    setNewCard({
+      cardNumbers,
+      cardExpirationDate,
+      cardCompany,
+      cardPassword,
+      cardOwnerName,
+    });
+  };
+
+  console.log(newCard);
+
   return (
     <>
       <div className={styles.main}>
@@ -115,7 +132,8 @@ function App() {
           />
         </div>
 
-        <div>{isFulledForm && <button>확인</button>}</div>
+        <div>{isFulledForm && <Button text="확인" onClick={onClick} />}</div>
+        <div>{newCard && <CardComplete newCard={newCard} />}</div>
       </div>
     </>
   );
