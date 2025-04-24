@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import Description from '../Description';
 import CardLabeledInput from './CardLabeledInput';
 import type { CardInputProps } from '../../types/CardInputTypes';
 import type { CardInputConfig } from '../../types/CardConfigTypes';
+import { FormSectionContainer } from '../../styles/FormSectionStyle';
 
 interface ValueProps {
   [key: string]: string | string;
@@ -35,7 +35,7 @@ const CardDescriptiveInput = ({
   handleCardInput,
 }: CardDescriptiveInputProps) => {
   return (
-    <>
+    <FormSectionContainer>
       <Description headText={descriptionText.headText} detailText={descriptionText.detailText} />
       <CardLabeledInput
         config={config}
@@ -44,10 +44,8 @@ const CardDescriptiveInput = ({
         handleCardInput={handleCardInput}
         isErrors={isErrors}
       />
-    </>
+    </FormSectionContainer>
   );
 };
-
-const Container = styled.div``;
 
 export default CardDescriptiveInput;

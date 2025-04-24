@@ -1,8 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useRef, useState } from 'react';
 import useOutsideClick from '../../hook/useOutsideClick';
 import type { CardInputProps } from '../../types/CardInputTypes';
 import type { CardSelectConfig } from '../../types/CardConfigTypes';
+import { slideDown } from '../../animation/animation';
 
 interface CardSelectProps {
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
@@ -47,17 +48,6 @@ const CardSelect = ({ handleCardInput, value, config }: CardSelectProps) => {
   );
 };
 
-const slideDown = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 const SelectContainer = styled.div`
   width: 100%;
   cursor: pointer;
@@ -101,7 +91,7 @@ const OptionsContainer = styled.ul`
 
 const OptionItem = styled.li`
   background-color: var(--color-white);
-  font-size: var(--font-size-body);
+  font-size: var(--font-size-subheader);
   cursor: pointer;
   padding: 8px;
   box-sizing: border-box;
