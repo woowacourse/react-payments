@@ -13,7 +13,7 @@ const PasswordInputs = forwardRef<HTMLInputElement, PasswordInputsProps>(
   ({ passwordState, handlePasswordChange }, ref) => {
     return (
       <div className={styles.container}>
-        <Label htmlFor="password-input">비밀번호</Label>
+        <Label htmlFor="password-input">비밀번호 앞 2자리</Label>
         <p className={styles.passwordInputs}>
           <Input
             ref={ref}
