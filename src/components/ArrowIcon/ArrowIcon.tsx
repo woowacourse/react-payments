@@ -1,9 +1,10 @@
+type Direction = "up" | "right" | "down" | "left";
 interface ArrowIconProps {
-  direction: "up" | "right" | "down" | "left";
+  direction: Direction;
   color?: string;
 }
 
-const rotations = {
+const rotations: Record<Direction, string> = {
   up: "0",
   right: "90",
   down: "180",
