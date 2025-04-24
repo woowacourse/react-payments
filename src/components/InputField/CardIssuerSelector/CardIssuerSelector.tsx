@@ -4,9 +4,13 @@ import Selector from '../../Selector/Selector';
 
 interface CardIssuerSelectorProps {
   setCardIssuer: Dispatch<SetStateAction<CardIssuerSelectorType | null>>;
+  onComplete: () => void;
 }
 
-function CardIssuerSelector({ setCardIssuer }: CardIssuerSelectorProps) {
+function CardIssuerSelector({
+  setCardIssuer,
+  onComplete,
+}: CardIssuerSelectorProps) {
   const cardIssuers: Record<string, CardIssuerSelectorType> = {
     bc: 'BC카드',
     shinhan: '신한카드',
@@ -22,7 +26,10 @@ function CardIssuerSelector({ setCardIssuer }: CardIssuerSelectorProps) {
     <Selector
       dropDownOptions={cardIssuers}
       placeholder="카드사를 선택해주세요"
-      onSelectChange={(value: CardIssuerSelectorType) => setCardIssuer(value)}
+      onSelectChange={(value: CardIssuerSelectorType) => {
+        setCardIssuer(value);
+        onComplete?.();
+      }}
     />
   );
 }

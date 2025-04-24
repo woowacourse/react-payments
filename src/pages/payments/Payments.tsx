@@ -53,7 +53,7 @@ function Payments() {
           cardType={cardType}
           cardIssuer={cardIssuer}
         />
-        {step >= 3 && (
+        {step >= 4 && (
           <InputSection title="CVC 번호를 입력해 주세요">
             <CVCInputField
               inputValue={CVCInputValue}
@@ -61,7 +61,7 @@ function Payments() {
             />
           </InputSection>
         )}
-        {step >= 2 && (
+        {step >= 3 && (
           <InputSection
             title="카드 유효기간을 입력해 주세요"
             caption="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -72,12 +72,17 @@ function Payments() {
             />
           </InputSection>
         )}
-        {step >= 1 && (
+        {step >= 2 && (
           <InputSection
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
           >
-            <CardIssuerSelector setCardIssuer={setCardIssuer} />
+            <CardIssuerSelector
+              setCardIssuer={setCardIssuer}
+              onComplete={() => {
+                if (step === 2) setStep(3);
+              }}
+            />
           </InputSection>
         )}
         {step >= 1 && (
