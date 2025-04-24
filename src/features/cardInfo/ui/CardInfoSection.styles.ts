@@ -19,6 +19,7 @@ export const CardInfoDescription = styled.span`
 `;
 
 export const CardInfoSubSection = styled.div`
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   gap: 8px;
