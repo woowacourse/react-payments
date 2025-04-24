@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 400px;
+  min-width: 399px;
   min-height: 800px;
 }
 .description {
