@@ -29,11 +29,22 @@ const Main = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(INIT_CARD_NUMBER);
   const [expirationDate, setExpirationDate] =
     useState<ExpirationDate>(INIT_EXPIRATION_DATE);
-  const [cvcNumber, setcvcNumber] = useState('');
+  const [cvcNumber, setCvcNumber] = useState('');
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const [password, setPassword] = useState('');
 
+  const [errors, setErrors] = useState(false);
+
   const navigate = useNavigate();
+
+  const isVisible = (
+    section: CardNumber | CardCompany | ExpirationDate | string
+  ) => {
+    if (typeof section === 'string') {
+      return section !== '';
+    }
+    return !Object.values(section).some((value) => value === '');
+  };
 
   return (
     <MainContainer>
@@ -42,11 +53,38 @@ const Main = () => {
         expirationDate={expirationDate}
         cardCompany={cardCompany}
       />
-      <PasswordSection
-        value={password}
-        onChange={(value) => setPassword(value)}
-      />
-      <CardCompanySection onChange={(value) => setCardCompany(value)} />
+
+      {isVisible(cvcNumber) && (
+        <PasswordSection
+          value={password}
+          onChange={(value) => setPassword(value)}
+        />
+      )}
+
+      {isVisible(expirationDate) && (
+        <CardCvcSection
+          value={cvcNumber}
+          onChange={(value) => setCvcNumber(value)}
+        />
+      )}
+
+      {isVisible(cardCompany) && (
+        <ExpirationDateSection
+          value={expirationDate}
+          onChange={(order, value) =>
+            setExpirationDate((prev) => ({
+              ...prev,
+              [order]: value,
+            }))
+          }
+        />
+      )}
+
+      {/* 에러가 있을 경우 다음 섹션을 보여주지 않음 */}
+      {!errors && isVisible(cardNumber) && (
+        <CardCompanySection onChange={(value) => setCardCompany(value)} />
+      )}
+
       <CardNumberSection
         value={cardNumber}
         onChange={(order, value) =>
@@ -55,19 +93,7 @@ const Main = () => {
             [order]: value,
           }))
         }
-      />
-      <ExpirationDateSection
-        value={expirationDate}
-        onChange={(order, value) =>
-          setExpirationDate((prev) => ({
-            ...prev,
-            [order]: value,
-          }))
-        }
-      />
-      <CardCvcSection
-        value={cvcNumber}
-        onChange={(value) => setcvcNumber(value)}
+        onError={(isError: boolean) => setErrors(isError)}
       />
 
       <Button

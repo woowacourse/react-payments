@@ -12,6 +12,10 @@ import {MESSAGE} from '../constants/error';
 const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;
 const CURRENT_YEAR = new Date().getFullYear() % 100;
+const INIT_EXPIRATION_DATE_ERROR = {
+  month: '',
+  year: '',
+};
 
 type Props = {
   value: ExpirationDate;
@@ -44,10 +48,7 @@ const expirationErrorRule = [
 ];
 
 const ExpirationDateSection = ({value, onChange}: Props) => {
-  const [error, setError] = useState({
-    month: '',
-    year: '',
-  });
+  const [error, setError] = useState(INIT_EXPIRATION_DATE_ERROR);
 
   const handleInput = (order: keyof ExpirationDate, value: string) => {
     onChange(order, value);
@@ -58,7 +59,7 @@ const ExpirationDateSection = ({value, onChange}: Props) => {
 
     setError((prev) => ({
       ...prev,
-      [order]: matchedError?.error,
+      [order]: matchedError?.error ?? '',
     }));
   };
 

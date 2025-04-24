@@ -11,29 +11,38 @@ import {MESSAGE} from '../constants/error';
 
 const INPUT_MAX_LENGTH = 4;
 const ORDER_LABEL = ['first', 'second', 'third', 'fourth'] as const;
+const INIT_CARD_NUMBER_ERROR = {
+  first: '',
+  second: '',
+  third: '',
+  fourth: '',
+};
 
 type Props = {
   value: CardNumber;
   onChange: (order: keyof CardNumber, value: string) => void;
+  onError: (isError: boolean) => void;
 };
 
-const CardNumberSection = ({value, onChange}: Props) => {
-  const [error, setError] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
+const CardNumberSection = ({value, onChange, onError}: Props) => {
+  const [error, setError] = useState(INIT_CARD_NUMBER_ERROR);
 
   const handleInput = (order: keyof CardNumber, value: string) => {
     onChange(order, value);
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
+      onError(true);
+      return;
+    }
+
+    if (order === ORDER_LABEL[3] && value.length < INPUT_MAX_LENGTH) {
+      onError(true);
       return;
     }
 
     setError((prev) => ({...prev, [order]: ''}));
+    onError(false);
   };
 
   const handleFocusout = (order: keyof CardNumber, value: string) => {
