@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 export type CardCompanyName = (typeof CARD_COMPANY_NAMES)[number];
+export type CardCompanyColor =
+  (typeof CARD_COMPANY_COLORS)[keyof typeof CARD_COMPANY_COLORS];
 
 const CARD_COMPANY_COLORS = {
   BC카드: '#F04651',
@@ -11,6 +13,7 @@ const CARD_COMPANY_COLORS = {
   롯데카드: '#ED1C24',
   하나카드: '#009490',
   국민카드: '#6A6056',
+  기본: '#333333',
 } as const;
 
 const CARD_COMPANY_NAMES = [
@@ -38,7 +41,10 @@ export const useCardCompany = () => {
   return {
     selectedCard,
     CARD_COMPANY_NAMES,
-    CARD_COMPANY_COLORS,
+    CARD_COMPANY_COLORS:
+      selectedCard === null
+        ? CARD_COMPANY_COLORS['기본']
+        : CARD_COMPANY_COLORS[selectedCard],
     CARD_COMPANY_PLACEHOLDER,
     onClickCardCompany,
   };

@@ -53,6 +53,7 @@ function App() {
       <CardPreview
         cardNumber={cardNumber}
         cardValidityPeriod={cardValidityPeriod}
+        CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}
       />
       <CardForm>
         <CardInputSection
