@@ -33,8 +33,6 @@ export default function CardPasswordInputs({
 }: CardPasswordInputsProps) {
   const errorMessage = passwordError.getErrorMessage();
 
-  console.log(errorMessage);
-
   return (
     <StyledContainer>
       <label htmlFor="">비밀번호 앞 2자리</label>
