@@ -54,6 +54,17 @@ export default function useExpirationDateInput() {
       return false;
     }
 
+    if (key === "YEAR" && value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH) {
+      const currentYear = new Date().getFullYear() % 100;
+      if (Number(value) < currentYear) {
+        setErrorMessage(
+          `유효한 년도가 아닙니다. ${currentYear}년 이후의 년도를 입력하세요.`,
+          key
+        );
+        return false;
+      }
+    }
+
     setErrorMessage("", key);
     return true;
   };
