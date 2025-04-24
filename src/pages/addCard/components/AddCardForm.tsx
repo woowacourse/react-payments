@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { STEPS } from "../../pages/addCard/constants";
-import Announcement from "../@common/Announcement/Announcement";
-import { CardInfo } from "../../hooks/useCardInfo";
+import { STEPS } from "../constants";
+import Announcement from "../../../components/@common/Announcement/Announcement";
+import { CardInfo } from "../../../hooks/useCardInfo";
 
 interface AddCardFormProps {
   currentStepIndex: number;

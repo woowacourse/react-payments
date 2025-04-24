@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Card from "../../components/CardPreview/Card";
-import useCardInfo from "../../hooks/useCardInfo";
 import { STEPS } from "./constants";
-import { AddCardForm } from "../../components/InputForm/AddCardForm";
+import useCardInfo from "../../hooks/useCardInfo";
+import Card from "../../components/CardPreview/Card";
+import { AddCardForm } from "./components/AddCardForm";
 
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
