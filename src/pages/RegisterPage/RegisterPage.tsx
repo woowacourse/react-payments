@@ -6,6 +6,7 @@ import {
   CardNumber,
   CardPassword,
   CardPreview,
+  If,
   Spacing,
 } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
@@ -128,33 +129,39 @@ export default function RegisterPage() {
       </S.CardPreviewWrapper>
       <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
-        {currentStep >= 5 && <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />}
+        <If condition={currentStep === 6}>
+          <Button type="submit" isFixed>
+            확인
+          </Button>
+        </If>
 
-        {currentStep >= 4 && (
+        <If condition={currentStep >= 5}>
+          <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
+        </If>
+
+        <If condition={currentStep >= 4}>
           <CardCVCNumber
             register={cardCVCNumberRegister}
             cardCVCNumberErrors={cardCVCNumberErrors}
             onFocus={() => setIsCardFlipped(true)}
             onBlur={() => setIsCardFlipped(false)}
           />
-        )}
+        </If>
 
-        {currentStep >= 3 && (
+        <If condition={currentStep >= 3}>
           <CardExpirationDate
             register={cardExpirationDateRegister}
             cardExpirationDateErrors={cardExpirationDateErrors}
           />
-        )}
+        </If>
 
-        {currentStep >= 2 && <CardCompany register={cardCompanyRegister} />}
+        <If condition={currentStep >= 2}>
+          <CardCompany register={cardCompanyRegister} />
+        </If>
 
-        {currentStep >= 1 && <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />}
-
-        {currentStep === 6 && (
-          <Button type="submit" isFixed>
-            확인
-          </Button>
-        )}
+        <If condition={currentStep >= 1}>
+          <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />
+        </If>
       </S.CardInfoForm>
     </S.Wrapper>
   );
