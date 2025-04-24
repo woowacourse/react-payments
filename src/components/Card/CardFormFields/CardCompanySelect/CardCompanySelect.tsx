@@ -40,6 +40,7 @@ export default function CardCompanySelect() {
         options={cardCompanyOptions}
         value={cardCompany}
         onChange={handleCardCompanyChange}
+        onBlur={handleCardCompanyChange}
       />
     </CardFormFieldCSS>
   );

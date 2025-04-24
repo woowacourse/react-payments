@@ -38,6 +38,9 @@ export default function CardNumberInput() {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCardNumberChange(e.target.value, position)
             }
+            onBlur={(e: ChangeEvent<HTMLInputElement>) =>
+              handleCardNumberChange(e.target.value, position)
+            }
           />
         );
       })}

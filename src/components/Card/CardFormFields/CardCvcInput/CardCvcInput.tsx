@@ -28,6 +28,9 @@ export default function CardCvcInput() {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleCvcNumberChange(e.target.value)
         }
+        onBlur={(e: ChangeEvent<HTMLInputElement>) =>
+          handleCvcNumberChange(e.target.value)
+        }
       />
     </CardFormFieldCSS>
   );

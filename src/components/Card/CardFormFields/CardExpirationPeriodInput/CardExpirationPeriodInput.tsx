@@ -42,6 +42,9 @@ export default function CardExpirationPeriodInput() {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleExpirationPeriodChange(e.target.value, position)
             }
+            onBlur={(e: ChangeEvent<HTMLInputElement>) =>
+              handleExpirationPeriodChange(e.target.value, position)
+            }
           />
         );
       })}

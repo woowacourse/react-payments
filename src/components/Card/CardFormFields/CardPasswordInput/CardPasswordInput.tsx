@@ -29,6 +29,9 @@ export default function CardPasswordInput() {
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handlePasswordChange(e.target.value)
         }
+        onBlur={(e: ChangeEvent<HTMLInputElement>) =>
+          handlePasswordChange(e.target.value)
+        }
       />
     </CardFormFieldCSS>
   );
