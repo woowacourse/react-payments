@@ -28,6 +28,7 @@ export default function CardPasswordInput({
     <CardFormFieldCSS>
       <Input
         key={CARD_FORM_TYPE.password}
+        type="password"
         placeholder={PLACEHOLDER}
         maxLength={MAX_LENGTHS}
         isError={passwordError}
