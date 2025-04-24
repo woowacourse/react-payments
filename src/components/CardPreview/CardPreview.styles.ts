@@ -7,7 +7,7 @@ export const CardPreviewContainer = styled.div`
 export const CardPreviewWrapper = styled.div<{ backgroundColor?: string; isFlipped: boolean }>`
   width: 212px;
   height: 132px;
-  background-color: ${({ backgroundColor }) => backgroundColor || '#333'};
+  background-color: ${({ backgroundColor, theme }) => backgroundColor || theme.colors.card.default};
   border-radius: 4px;
   position: relative;
   transform-style: preserve-3d;
@@ -24,7 +24,7 @@ export const CardFront = styled.div`
   flex-direction: column;
   gap: 14px;
   padding: 8px 12px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.card.text};
   font-size: 18px;
 `;
 
@@ -37,14 +37,14 @@ export const CardBack = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px 12px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.card.text};
   font-size: 18px;
 `;
 
 export const MagneticStrip = styled.div`
   width: 100%;
   height: 24px;
-  background-color: #2c2c2c;
+  background-color: ${({ theme }) => theme.colors.card.magnetic};
   margin-top: 16px;
 `;
 
@@ -54,8 +54,8 @@ export const CVCWrapper = styled.div`
 `;
 
 export const CVCStrip = styled.div`
-  background-color: #fff;
-  color: #000;
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
   padding: 4px 8px;
   text-align: right;
   font-size: 14px;
@@ -71,8 +71,8 @@ export const CardPreviewTop = styled.div`
 export const ICChip = styled.div`
   width: 36px;
   height: 22px;
-  background-color: #ddcd78;
-  border: 0.5px solid #ddcd78;
+  background-color: ${({ theme }) => theme.colors.card.chip};
+  border: 0.5px solid ${({ theme }) => theme.colors.card.chip};
   border-radius: 2.5px;
 `;
 

@@ -1,4 +1,5 @@
 import { CARD_COMPANIES, MASKING } from '@/constants';
+import { useTheme } from '@emotion/react';
 import {
   CardCompanyType,
   CardCVCNumberInputType,
@@ -27,9 +28,10 @@ export default function CardPreview({
   cardCVCNumber,
   isFlipped,
 }: CardPreviewProps) {
+  const theme = useTheme();
   const selectedCardColor = selectedCompany
     ? CARD_COMPANIES.find((company) => company.id === selectedCompany)?.color
-    : '#333';
+    : theme.colors.card.default;
 
   return (
     <S.CardPreviewContainer>

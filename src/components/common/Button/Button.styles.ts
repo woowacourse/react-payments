@@ -8,8 +8,8 @@ export const Button = styled.button<ButtonProps>`
   width: 100%;
   max-width: 480px;
   height: 48px;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -29,15 +29,15 @@ export const Button = styled.button<ButtonProps>`
   `}
 
   &:hover {
-    background-color: #333333;
+    background-color: ${({ theme }) => theme.colors.darkGray};
   }
 
   &:active {
-    background-color: #666666;
+    background-color: ${({ theme }) => theme.colors.mediumGray};
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: ${({ theme }) => theme.colors.disabled};
     cursor: not-allowed;
   }
 `;

@@ -9,22 +9,22 @@ export const SelectButton = styled.button`
   width: 100%;
   padding: 8px 16px;
   padding-right: 40px;
-  border: 1px solid #d7d7d7;
+  border: 1px solid ${({ theme }) => theme.colors.border.default};
   border-radius: 8px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.background.white};
   font-size: 16px;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
   text-align: left;
   position: relative;
 
   &:focus {
     outline: none;
-    border-color: #666;
+    border-color: ${({ theme }) => theme.colors.border.hover};
   }
 
   &:hover {
-    border-color: #666;
+    border-color: ${({ theme }) => theme.colors.border.hover};
   }
 
   &::after {
@@ -37,7 +37,7 @@ export const SelectButton = styled.button`
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #666;
+    border-top: 6px solid ${({ theme }) => theme.colors.border.hover};
     pointer-events: none;
   }
 `;
@@ -61,12 +61,13 @@ export const DropdownList = styled.ul<{ isOpen: boolean }>`
 export const DropdownItem = styled.li<{ isSelected: boolean }>`
   padding: 12px 16px;
   font-size: 14px;
-  color: #333;
+  color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? '#f8f9fa' : 'white')};
+  background-color: ${({ theme, isSelected }) =>
+    isSelected ? theme.colors.background.hover : theme.colors.background.white};
 
   &:hover {
-    background-color: #f8f9fa;
+    background-color: ${({ theme }) => theme.colors.background.hover};
   }
 `;
 

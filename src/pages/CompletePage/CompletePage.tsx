@@ -17,10 +17,7 @@ export default function CompletePage() {
     navigate('/', { replace: true });
   };
 
-  if (!state?.firstCardNumber || !state?.cardCompany) {
-    return <Navigate to="/" replace />;
-  }
-
+  if (!state?.firstCardNumber || !state?.cardCompany) return <Navigate to="/" replace />;
   return (
     <S.Wrapper>
       <S.IconWrapper>
