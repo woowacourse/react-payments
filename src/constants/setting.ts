@@ -37,3 +37,8 @@ export const CARD_INFO_LENGTH = {
   CVC: 3,
   PASSWORD_FRONT: 2,
 };
+
+export const ROUTER_PATH: Record<string, string> = {
+  MAIN: '/',
+  COMPLETE: '/complete',
+};

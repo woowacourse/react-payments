@@ -15,11 +15,13 @@ import {
   EXPIRATION_MESSAGE,
   PASSWORD_FRONT_MESSAGE,
 } from '../constants/guide';
-import { CARD_COMPANY_NAMES, CARD_INFO_LENGTH } from '../constants/setting';
+import { CARD_COMPANY_NAMES, CARD_INFO_LENGTH, ROUTER_PATH } from '../constants/setting';
 import useCardInfo from '../hooks/useCardInfo';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -66,7 +68,7 @@ function RegisterCardPage() {
           maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
         />
       </FormContainer>
-      <BottomButton label={CONFIRM_BUTTON_LABEL} />
+      <BottomButton label={CONFIRM_BUTTON_LABEL} onClick={() => navigate(ROUTER_PATH.COMPLETE)} />
     </>
   );
 }
