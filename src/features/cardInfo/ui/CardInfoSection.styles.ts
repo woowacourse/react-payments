@@ -42,3 +42,8 @@ export const CardInfoError = styled.span`
   font-size: 9.5px;
   font-weight: 400;
 `;
+
+export const CardSelection = styled.select`
+  width: 100%;
+  padding: 8px;
+`;
