@@ -7,22 +7,12 @@ import { getIsAddFormSubmit } from "../validation";
 import useAddCardFormStep from "./useAddCardFormStep";
 
 const useAddCard = () => {
-  const {
-    cardNumberState,
-    cardNumberInputRefs,
-    handleCardNumberChange,
-    isCardNumberNextStep,
-  } = useControlledCardNumber();
+  const { cardNumberState, isCardNumberNextStep, ...controlledCardNumber } =
+    useControlledCardNumber();
   const { cardType, handleCardTypeChange, isCardTypeNextStep } =
     useControlledCardType();
-  const {
-    expireDate,
-    expireDateInputRefs,
-    handleExpireMonthChange,
-    handleExpireYearChange,
-    handleExpireMonthBlur,
-    isExpireDateNextStep,
-  } = useControlledExpireDate();
+  const { expireDate, isExpireDateNextStep, ...controlledExpireDate } =
+    useControlledExpireDate();
   const { CVCState, handleCVCChange, isCVCNextStep } = useControlledCVC();
   const { cardPasswordState, handleCardPasswordChange } =
     useControlledCardPassword();
@@ -36,15 +26,11 @@ const useAddCard = () => {
   const addCardState = {
     addCardFormSteps,
     cardNumberState,
-    cardNumberInputRefs,
-    handleCardNumberChange,
+    ...controlledCardNumber,
     cardType,
     handleCardTypeChange,
     expireDate,
-    expireDateInputRefs,
-    handleExpireMonthChange,
-    handleExpireYearChange,
-    handleExpireMonthBlur,
+    ...controlledExpireDate,
     CVCState,
     handleCVCChange,
     cardPasswordState,
