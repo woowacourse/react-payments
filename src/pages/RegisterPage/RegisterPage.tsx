@@ -107,34 +107,12 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
-    if (currentStep === 1 && isCardNumberIsValid) {
-      setCurrentStep(2);
-    }
-  }, [currentStep, isCardNumberIsValid]);
-
-  useEffect(() => {
-    if (currentStep === 2 && isCardCompanyValid) {
-      setCurrentStep(3);
-    }
-  }, [currentStep, isCardCompanyValid]);
-
-  useEffect(() => {
-    if (currentStep === 3 && isExpirationDateValid) {
-      setCurrentStep(4);
-    }
-  }, [currentStep, isExpirationDateValid]);
-
-  useEffect(() => {
-    if (currentStep === 4 && isCVCNumberValid) {
-      setCurrentStep(5);
-    }
-  }, [currentStep, isCVCNumberValid]);
-
-  useEffect(() => {
-    if (currentStep === 5 && isPasswordValid) {
-      setCurrentStep(6);
-    }
-  }, [currentStep, isPasswordValid]);
+    if (!isCardNumberIsValid) setCurrentStep(1);
+    else if (!isCardCompanyValid) setCurrentStep(2);
+    else if (!isExpirationDateValid) setCurrentStep(3);
+    else if (!isCVCNumberValid) setCurrentStep(4);
+    else if (!isPasswordValid) setCurrentStep(5);
+  }, [isCardNumberIsValid, isCardCompanyValid, isExpirationDateValid, isCVCNumberValid, isPasswordValid]);
 
   return (
     <S.Wrapper>
@@ -150,11 +128,9 @@ export default function RegisterPage() {
       </S.CardPreviewWrapper>
       <Spacing size={30} />
       <S.CardInfoForm onSubmit={handleSubmit}>
-        {currentStep >= 5 && isCVCNumberValid && (
-          <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
-        )}
+        {currentStep >= 5 && <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />}
 
-        {currentStep >= 4 && isExpirationDateValid && (
+        {currentStep >= 4 && (
           <CardCVCNumber
             register={cardCVCNumberRegister}
             cardCVCNumberErrors={cardCVCNumberErrors}
@@ -163,7 +139,7 @@ export default function RegisterPage() {
           />
         )}
 
-        {currentStep >= 3 && isCardCompanyValid && (
+        {currentStep >= 3 && (
           <CardExpirationDate
             register={cardExpirationDateRegister}
             cardExpirationDateErrors={cardExpirationDateErrors}
