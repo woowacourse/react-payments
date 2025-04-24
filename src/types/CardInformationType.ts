@@ -20,15 +20,22 @@ export type UniqueNumberStateType = {
   dispatch: Dispatch<Action>;
 };
 
+export type PasswordStateType = {
+  passwordState: string[];
+  dispatch: Dispatch<Action>;
+};
+
 type Action =
   | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
   | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
-  | { type: "SET_CVC_NUMBER"; value: string };
+  | { type: "SET_CVC_NUMBER"; value: string }
+  | { type: "SET_PASSWORD"; value: string };
 
 export type CardInformationType = {
   uniqueNumber: string[];
   expirationDate: string[];
   cvcNumber: string[];
+  password: string[];
 };
 
 export type CardType = "visa" | "master" | "none";

@@ -1,18 +1,19 @@
-import { css } from "@emotion/react";
-import Input from "../../common/Input/Input";
+import passwordSpec from "./PasswordSpec";
 import Text from "../../common/Text/Text";
-import { UniqueNumberStateType } from "../../../types/CardInformationType";
+import Input from "../../common/Input/Input";
 import useError from "../../../hooks/useError";
-import uniqueNumberSpec from "./uniqueNumberSpec";
+import { PasswordStateType } from "../../../types/CardInformationType";
+import { css } from "@emotion/react";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
-  const { title, description, inputFieldData } = uniqueNumberSpec;
-  const { label, inputNumber, inputProps } = inputFieldData;
+const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
+  const { error, errorMessage, validateInputType } = useError([false]);
+  const { title, description, inputFieldData } = passwordSpec;
+  const { label, inputProps } = inputFieldData;
+  const { placeholder, maxLength } = inputProps;
 
   const handleChange = (v: string, index: number) => {
     if (validateInputType(v, index)) {
-      dispatch({ type: "SET_UNIQUE_NUMBER", index: index, value: v });
+      dispatch({ type: "SET_PASSWORD", value: v });
     }
   };
 
@@ -26,29 +27,24 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
       <div css={inputFieldStyle}>
         <Text text={label} size="12px" color="#0a0d13" weight={500} lineHeight="15px" />
         <div css={inputWrapperStyle}>
-          {Array.from({ length: inputNumber }).map((_, index: number) => {
-            const { placeholder, maxLength } = inputProps;
-            return (
-              <Input
-                key={index}
-                placeholder={placeholder[index]}
-                value={uniqueNumberState[index]}
-                maxLength={maxLength}
-                onChange={(v) => handleChange(v, index)}
-                error={error[index]}
-                type={index > 1 ? "password" : "text"}
-              />
-            );
-          })}
+          <Input
+            placeholder={placeholder[0]}
+            maxLength={maxLength}
+            value={passwordState[0]}
+            onChange={(v) => handleChange(v, 0)}
+            error={error[0]}
+            type="password"
+          />
         </div>
-
-        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
+        <div css={errorTextWrapperStyle(error[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>
     </div>
   );
 };
+
+export default PasswordForm;
 
 const inputWrapperStyle = css`
   gap: 10px;
@@ -79,5 +75,3 @@ const FormSectionWrapperStyle = css`
   flex-direction: column;
   gap: 16px;
 `;
-
-export default UniqueNumberForm;

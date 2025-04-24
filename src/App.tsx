@@ -5,10 +5,11 @@ import PreviewCard from "./components/feature/PreviewCard/PreviewCard.tsx";
 import UniqueNumberForm from "./components/feature/UniqueNumberForm/UniqueNumberForm.tsx";
 import ExpirationDateForm from "./components/feature/ExpirationDateForm/ExpirationDateForm.tsx";
 import CvcNumberForm from "./components/feature/CvcNumberForm/CvcNumberForm.tsx";
+import PasswordForm from "./components/feature/PasswordForm/PasswordForm.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
-  const { uniqueNumber, expirationDate, cvcNumber } = cardState;
+  const { uniqueNumber, expirationDate, cvcNumber, password } = cardState;
 
   return (
     <div css={AppStyle}>
@@ -17,6 +18,7 @@ function App() {
         <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
         <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
         <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
+        <PasswordForm passwordState={password} dispatch={dispatch} />
       </div>
     </div>
   );

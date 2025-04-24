@@ -62,7 +62,7 @@
   - [x] ExpirationDateForm 스토리북 생성
   - [x] CvcNumberForm 컴포넌트 구현
   - [x] CvcNumberForm 스토리북 생성
-  - [ ] PasswordForm 컴포넌트 구현
+  - [x] PasswordForm 컴포넌트 구현
   - [ ] PasswordForm 스토리북 생성
   - [ ] Select 컴포넌트 구현
   - [ ] Select 스토리북 생성

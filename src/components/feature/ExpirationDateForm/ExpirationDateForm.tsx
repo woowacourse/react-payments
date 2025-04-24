@@ -33,6 +33,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
 
             return (
               <Input
+                key={index}
                 placeholder={placeholder[index]}
                 value={expirationDateState[index]}
                 onChange={(v) => handleChange(v, index)}
