@@ -1,5 +1,7 @@
+import { CARD_FORM_TYPE } from "../../../constants/constants";
 import { useCard } from "../../../hooks/useCard";
 import { useCardType } from "../../../hooks/useCardType";
+import { useCardValidation } from "../../../hooks/useCardValidation";
 import {
   CardNumbersGroupCSS,
   CardTypeCSS,
@@ -12,13 +14,16 @@ import {
 export default function CardPreview() {
   const { cardNumbers, expirationPeriod, cardCompany } = useCard();
   const cardType = useCardType(cardNumbers);
+  const { hasErrorByType } = useCardValidation();
 
   return (
     <CardPreviewContainerCSS>
       <CardPreviewCSS $cardCompany={cardCompany}>
         <CardTopContainerCSS>
           <CardICChipCSS />
-          {cardType !== null && <CardTypeCSS $cardType={cardType} />}
+          {!hasErrorByType(CARD_FORM_TYPE.cardNumbers) && cardType !== null && (
+            <CardTypeCSS $cardType={cardType} />
+          )}
         </CardTopContainerCSS>
 
         <CardNumbersGroupCSS>
