@@ -153,6 +153,9 @@ const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }
 
+  button{
+	  all: unset; 
+  }
 
       
   `;

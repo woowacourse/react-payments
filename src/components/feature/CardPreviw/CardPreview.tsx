@@ -53,6 +53,7 @@ const Card = styled.div<{ $cardBackground: string }>`
   margin: 40px 0px;
   width: 212px;
   height: 132px;
+  min-height: 132px;
   background: ${(props) => props.$cardBackground};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;

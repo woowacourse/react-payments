@@ -17,6 +17,7 @@ import CVCInputField from '../../components/feature/InputField/CVCInputField/CVC
 import CardIssuerSelector from '../../components/feature/InputField/CardIssuerSelector/CardIssuerSelector';
 import PasswordInputField from '../../components/feature/InputField/PasswordInputField/PasswordInputField';
 import CardPreview from '../../components/feature/CardPreviw/CardPreview';
+import Button from '../../components/ui/Button/Button';
 
 function Payments() {
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
@@ -131,18 +132,32 @@ function Payments() {
           </InputSection>
         )}
       </PaymentsContainer>
+      {step >= 1 && (
+        <ButtonContainer>
+          <Button buttonText="확인" color="#fff" background="#333333" />
+        </ButtonContainer>
+      )}
     </PaymentsLayout>
   );
 }
 
+const ButtonContainer = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  width: 376px;
+`;
+
 const PaymentsLayout = styled.div`
-  height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 `;
 
 const PaymentsContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -150,9 +165,11 @@ const PaymentsContainer = styled.div`
   padding: 44px 28px;
   align-items: center;
   width: 376px;
+  height: 100%;
   min-height: 100%;
   background-color: white;
   border: 1px solid lightgray;
+  overflow: auto;
 `;
 
 export default Payments;
