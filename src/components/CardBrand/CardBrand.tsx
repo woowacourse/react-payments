@@ -13,13 +13,13 @@ export const CARD_BRAND_LIST = [
   '하나카드',
   '국민카드',
 ] as const;
-export default function CardBrand({ cardBrandType, handleDropdownChange }: CardBrandProps) {
+export default function CardBrand({ cardBrandTypeState, handleDropdownChange }: CardBrandProps) {
   return (
     <div>
       <Title description="현재 국내 카드사만 가능합니다.">카드사를 선택해 주세요</Title>
       <Spacing size={24} />
       <Dropdown
-        SelectedValue={cardBrandType}
+        SelectedValue={cardBrandTypeState}
         defaultValue="카드사를 선택해주세요."
         dropdownList={CARD_BRAND_LIST}
         onClick={handleDropdownChange}

@@ -1,14 +1,14 @@
-import { Fragment, useEffect, useState } from 'react';
 import CardNumber from '../../components/CardNumber/CardNumber';
-import { CardNumberProps } from '../../components/CardNumber/type';
 import CardBrand from '../../components/CardBrand/CardBrand';
-import { CardBrandProps, CardBrandType } from '../../components/CardBrand/type';
 import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
-import { CardExpirationDateProps } from '../../components/CardExpirationDate/type';
 import CardCVCNumber from '../../components/CardCVCNumber/CardCVCNumber';
+import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
+import { Fragment, useEffect, useState } from 'react';
+import { CardNumberProps } from '../../components/CardNumber/type';
+import { CardBrandProps, CardBrandType } from '../../components/CardBrand/type';
+import { CardExpirationDateProps } from '../../components/CardExpirationDate/type';
 import { CardCVCNumberProps } from '../../components/CardCVCNumber/type';
 import { CardPasswordProps } from '../../components/CardPasswordNumber/type';
-import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
 
 const CARD_STEPS = {
   CARD_NUMBERS: '카드 번호',
@@ -26,7 +26,7 @@ interface AddCardFormProps
     CardExpirationDateProps,
     CardBrandProps,
     CardNumberProps {
-  cardBrandType: CardBrandType | null;
+  cardBrandTypeState: CardBrandType | null;
   isCardNumberNextStep: boolean;
   isCardExpirationDateNextStep: boolean;
   isCardBrandNextStep: boolean;
@@ -34,27 +34,30 @@ interface AddCardFormProps
   isCardPasswordNextStep: boolean;
 }
 
-export default function AddCardForm({
-  cardNumber,
-  cardNumberErrorMessage,
-  isCardNumberNextStep,
-  handleCardNumberInputChange,
-  cardBrandType,
-  isCardBrandNextStep,
-  handleDropdownChange,
-  cardExpirationDate,
-  cardExpirationDateErrorMessage,
-  isCardExpirationDateNextStep,
-  handleCardExpirationDateInputChange,
-  cardCVCNumber,
-  cardCVCNumberErrorMessage,
-  isCardCVCNumberNextStep,
-  handleCardCVCNumberInputChange,
-  cardPassword,
-  cardPasswordErrorMessage,
-  isCardPasswordNextStep,
-  handleCardPasswordInputChange,
-}: AddCardFormProps) {
+export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
+  console.log(addFormState);
+  const {
+    cardNumber,
+    cardNumberErrorMessage,
+    isCardNumberNextStep,
+    handleCardNumberInputChange,
+    cardBrandTypeState,
+    isCardBrandNextStep,
+    handleDropdownChange,
+    cardExpirationDate,
+    cardExpirationDateErrorMessage,
+    isCardExpirationDateNextStep,
+    handleCardExpirationDateInputChange,
+    cardCVCNumber,
+    cardCVCNumberErrorMessage,
+    isCardCVCNumberNextStep,
+    handleCardCVCNumberInputChange,
+    cardPassword,
+    cardPasswordErrorMessage,
+    isCardPasswordNextStep,
+    handleCardPasswordInputChange,
+  } = addFormState;
+
   const [steps, setSteps] = useState<string[]>([initialCardStep]);
 
   useEffect(() => {
@@ -91,7 +94,7 @@ export default function AddCardForm({
           />
         )}
         {step === CARD_STEPS.CARD_BRAND && (
-          <CardBrand cardBrandType={cardBrandType} handleDropdownChange={handleDropdownChange} />
+          <CardBrand cardBrandTypeState={cardBrandTypeState} handleDropdownChange={handleDropdownChange} />
         )}
         {step === CARD_STEPS.CARD_EXPIRATION_DATE && (
           <CardExpirationDate
