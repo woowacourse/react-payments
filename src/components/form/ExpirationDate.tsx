@@ -8,6 +8,7 @@ import findErrorOrder from "../../utils/findErrorOrder";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
+import { isValidMonth, isValidYear } from "../../utils/validation";
 
 const INPUT_MAX_LENGTH = 2;
 
@@ -42,8 +43,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	};
 
 	const validateMonthRange = (value: string): boolean => {
-		const month = Number(value);
-		if (month < 1 || month > 12) {
+		if (!isValidMonth(value)) {
 			setError((prev) => ({ ...prev, month: MESSAGE.MONTH_RANGE }));
 			return false;
 		}
@@ -51,8 +51,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 	};
 
 	const validateYearRange = (value: string): boolean => {
-		const year = Number(value);
-		if (year < CURRENT_YEAR && year >= 0) {
+		if (!isValidYear(value)) {
 			setError((prev) => ({ ...prev, year: MESSAGE.YEAR_RANGE(CURRENT_YEAR) }));
 			return false;
 		}
