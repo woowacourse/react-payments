@@ -33,7 +33,7 @@ export default function CardNumberInput() {
             key={position}
             placeholder={PLACEHOLDERS}
             maxLength={MAX_LENGTHS}
-            isError={cardNumberErrors[position]}
+            isError={cardNumberErrors.hasError[position]}
             value={cardNumbers[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCardNumberChange(e.target.value, position)

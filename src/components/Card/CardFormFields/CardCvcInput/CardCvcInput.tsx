@@ -23,7 +23,7 @@ export default function CardCvcInput() {
         key={CARD_FORM_TYPE.cvcNumber}
         placeholder={PLACEHOLDERS}
         maxLength={MAX_LENGTHS}
-        isError={cvcNumberError}
+        isError={cvcNumberError.hasError}
         value={cvcNumber}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleCvcNumberChange(e.target.value)

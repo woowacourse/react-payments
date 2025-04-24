@@ -4,13 +4,14 @@ import {
   CardNumberErrorsState,
   CardNumbersSegmentType,
   CvcNumberErrorState,
+  ErrorMessage,
   ExpirationPeriodErrorsState,
   ExpirationPeriodSegmentType,
   PasswordErrorState,
 } from "./../constants/constants";
 import { createContext, ReactNode, useState } from "react";
 import { CardFormType } from "../constants/constants";
-import { isEmpty, isNotNumber } from "../utils/validation";
+import { isErrorCardNumber } from "../utils/validations/cardNumber";
 
 export interface CardValidationContextType {
   cardNumberErrors: CardNumberErrorsState;
@@ -29,22 +30,30 @@ export interface CardValidationContextType {
   validatePassword: (value: string) => void;
 
   hasErrorByType: (type: CardFormType) => boolean;
+  getErrorMessage: (type: CardFormType) => string | null;
 }
 
-const initialState = {
-  cardNumbers: {
+const initialCardNumbersState = {
+  errorMessage: null,
+  hasError: {
     first: false,
     second: false,
     third: false,
     fourth: false,
   },
-  expirationPeriod: {
+};
+
+const initialExpirationPeriodState = {
+  errorMessage: null,
+  hasError: {
     month: false,
     year: false,
   },
-  cvcNumber: false,
-  cardCompany: false,
-  password: false,
+};
+
+const initialCommonState = {
+  errorMessage: null,
+  hasError: false,
 };
 
 export const CardValidationContext =
@@ -52,62 +61,105 @@ export const CardValidationContext =
 
 export function CardValidationProvider({ children }: { children: ReactNode }) {
   const [cardNumberErrors, setCardNumberErrors] =
-    useState<CardNumberErrorsState>(initialState.cardNumbers);
+    useState<CardNumberErrorsState>(initialCardNumbersState);
   const [expirationPeriodErrors, setExpirationPeriodErrors] =
-    useState<ExpirationPeriodErrorsState>(initialState.expirationPeriod);
-  const [cvcNumberError, setCvcNumberError] = useState<CvcNumberErrorState>(
-    initialState.cvcNumber
-  );
+    useState<ExpirationPeriodErrorsState>(initialExpirationPeriodState);
+  const [cvcNumberError, setCvcNumberError] =
+    useState<CvcNumberErrorState>(initialCommonState);
   const [cardCompanyError, setCardCompanyError] =
-    useState<CardCompanyErrorState>(initialState.cardCompany);
-  const [passwordError, setPasswordError] = useState<PasswordErrorState>(
-    initialState.password
-  );
+    useState<CardCompanyErrorState>(initialCommonState);
+  const [passwordError, setPasswordError] =
+    useState<PasswordErrorState>(initialCommonState);
 
   const validateCardNumber = (
     value: string,
     position: CardNumbersSegmentType
   ) => {
-    setCardNumberErrors((prev) => ({
-      ...prev,
-      [position]: isNotNumber(value),
-    }));
+    const errorMessage = isErrorCardNumber(value);
+    setCardNumberErrors((prev: CardNumberErrorsState) => {
+      const newHasError = {
+        ...prev.hasError,
+        [position]: !!errorMessage,
+      };
+
+      const hasAnyError = Object.values(newHasError).some(Boolean);
+      const finalErrorMessage =
+        errorMessage || (hasAnyError ? prev.errorMessage : null);
+
+      return {
+        errorMessage: finalErrorMessage,
+        hasError: newHasError,
+      };
+    });
   };
 
   const validateExpirationPeriod = (
     value: string,
     position: ExpirationPeriodSegmentType
   ) => {
-    setExpirationPeriodErrors((prev) => ({
-      ...prev,
-      [position]: isNotNumber(value),
-    }));
+    // const errorMessage = isErrorCardNumber(value);
+    // setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) => ({
+    //   errorMessage: errorMessage,
+    //   hasError: {
+    //     ...prev.hasError,
+    //     [position]: !!errorMessage,
+    //   },
+    // }));
   };
 
   const validateCvcNumber = (value: string) => {
-    setCvcNumberError(isNotNumber(value));
+    // const errorMessage = isErrorCvcNumber(value);
+    // setCvcNumberError({
+    //   errorMessage: errorMessage,
+    //   hasError: !!errorMessage,
+    // });
   };
 
   const validateCardCompany = (value: string) => {
-    setCardCompanyError(isEmpty(value));
+    // const errorMessage = isErrorCardCompany(value);
+    // setCardCompanyError({
+    //   errorMessage: errorMessage,
+    //   hasError: !!errorMessage,
+    // });
   };
 
   const validatePassword = (value: string) => {
-    setPasswordError(isNotNumber(value));
+    // const errorMessage = isErrorPassword(value);
+    // setPasswordError({
+    //   errorMessage: errorMessage,
+    //   hasError: !!errorMessage,
+    // });
   };
 
   const hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return Object.values(cardNumberErrors).some((state) => state);
+        return Object.values(cardNumberErrors.hasError).some((state) => state);
       case CARD_FORM_TYPE.expirationPeriod:
-        return Object.values(expirationPeriodErrors).some((state) => state);
+        return Object.values(expirationPeriodErrors.hasError).some(
+          (state) => state
+        );
       case CARD_FORM_TYPE.cvcNumber:
-        return cvcNumberError;
+        return cvcNumberError.hasError;
       case CARD_FORM_TYPE.cardCompany:
-        return cardCompanyError;
+        return cardCompanyError.hasError;
       case CARD_FORM_TYPE.password:
-        return passwordError;
+        return passwordError.hasError;
+    }
+  };
+
+  const getErrorMessage = (type: CardFormType): ErrorMessage => {
+    switch (type) {
+      case CARD_FORM_TYPE.cardNumbers:
+        return cardNumberErrors.errorMessage;
+      case CARD_FORM_TYPE.expirationPeriod:
+        return expirationPeriodErrors.errorMessage;
+      case CARD_FORM_TYPE.cvcNumber:
+        return cvcNumberError.errorMessage;
+      case CARD_FORM_TYPE.cardCompany:
+        return cardCompanyError.errorMessage;
+      case CARD_FORM_TYPE.password:
+        return passwordError.errorMessage;
     }
   };
 
@@ -127,6 +179,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
         validatePassword,
 
         hasErrorByType,
+        getErrorMessage,
       }}
     >
       {children}

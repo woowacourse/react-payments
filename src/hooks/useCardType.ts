@@ -5,14 +5,7 @@ import {
   CardNumbersState,
   CardType,
 } from "../constants/constants";
-
-function isCardNumberComplete(cardNumbers: CardNumbersState): boolean {
-  const CARD_SEGMENT_NUMBER_LENGTH = 4;
-
-  return Object.values(cardNumbers).every(
-    (segment) => segment.length === CARD_SEGMENT_NUMBER_LENGTH
-  );
-}
+import { isCardNumberComplete } from "../utils/validations/cardNumber";
 
 function identifyCardType(cardNumbers: CardNumbersState): CardType | null {
   if (!isCardNumberComplete(cardNumbers)) return null;

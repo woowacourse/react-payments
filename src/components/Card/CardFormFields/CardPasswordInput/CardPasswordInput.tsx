@@ -24,7 +24,7 @@ export default function CardPasswordInput() {
         type="password"
         placeholder={PLACEHOLDER}
         maxLength={MAX_LENGTHS}
-        isError={passwordError}
+        isError={passwordError.hasError}
         value={password}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handlePasswordChange(e.target.value)

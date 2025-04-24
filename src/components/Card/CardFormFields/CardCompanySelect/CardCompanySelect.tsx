@@ -35,7 +35,7 @@ export default function CardCompanySelect() {
     <CardFormFieldCSS>
       <Select
         key={CARD_FORM_TYPE.cardCompany}
-        isError={cardCompanyError}
+        isError={cardCompanyError.hasError}
         placeholder={PLACEHOLDER}
         options={cardCompanyOptions}
         value={cardCompany}

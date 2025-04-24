@@ -37,7 +37,7 @@ export default function CardExpirationPeriodInput() {
             key={position}
             placeholder={PLACEHOLDERS[position]}
             maxLength={MAX_LENGTHS}
-            isError={expirationPeriodErrors[position]}
+            isError={expirationPeriodErrors.hasError[position]}
             value={expirationPeriod[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleExpirationPeriodChange(e.target.value, position)

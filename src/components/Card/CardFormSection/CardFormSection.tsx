@@ -40,7 +40,7 @@ const subtitleVariants: Record<CardFormType, string | null> = {
 };
 
 export default function CardFormSection({ type }: CardFormSectionProps) {
-  const { hasErrorByType } = useCardValidation();
+  const { hasErrorByType, getErrorMessage } = useCardValidation();
 
   const renderCardFormFieldByType = () => {
     switch (type) {
@@ -66,7 +66,7 @@ export default function CardFormSection({ type }: CardFormSectionProps) {
       <Subtitle subtitle={subtitleVariants[type]} />
       {renderCardFormFieldByType()}
       <Error
-        errorMessage="숫자만 입력 가능합니다." // TODO: errorMessage도 훅에서 관리
+        errorMessage={getErrorMessage(type)}
         isVisible={hasErrorByType(type)}
       />
     </CardFormSectionCSS>

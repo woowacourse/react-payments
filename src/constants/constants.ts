@@ -47,11 +47,21 @@ export type CvcNumberState = string;
 export type CardCompanyState = (typeof CARD_COMPANY)[keyof typeof CARD_COMPANY];
 export type PasswordState = string;
 
-export type CardNumberErrorsState = Record<CardNumbersSegmentType, boolean>;
-export type ExpirationPeriodErrorsState = Record<
-  ExpirationPeriodSegmentType,
-  boolean
->;
-export type CvcNumberErrorState = boolean;
-export type CardCompanyErrorState = boolean;
-export type PasswordErrorState = boolean;
+export type ErrorMessage = string | null;
+interface CommonErrorState {
+  errorMessage: ErrorMessage;
+  hasError: boolean;
+}
+
+export interface CardNumberErrorsState {
+  errorMessage: ErrorMessage;
+  hasError: Record<CardNumbersSegmentType, boolean>;
+}
+export interface ExpirationPeriodErrorsState {
+  errorMessage: ErrorMessage;
+  hasError: Record<ExpirationPeriodSegmentType, boolean>;
+}
+
+export type CvcNumberErrorState = CommonErrorState;
+export type CardCompanyErrorState = CommonErrorState;
+export type PasswordErrorState = CommonErrorState;
