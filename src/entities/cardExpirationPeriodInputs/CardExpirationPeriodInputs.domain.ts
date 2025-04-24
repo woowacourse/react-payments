@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "./CardExpirationPeriodInputs.constant";
-import { NO_ERROR } from "../../shared/constants/constant";
+import { INITIALIZE_VALUE, NO_ERROR } from "../../shared/constants/constant";
 import {
   isValidLength,
   isValidNumber,
@@ -9,7 +9,7 @@ import {
 
 function getCommonValidationFns(length: number, date: string) {
   return [
-    { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+    { condition: () => date === INITIALIZE_VALUE, errorMsg: NO_ERROR },
     {
       condition: () => !isValidLength(date, length),
       errorMsg: ERROR_MESSAGE.LENGTH,
@@ -23,7 +23,7 @@ function getCommonValidationFns(length: number, date: string) {
 
 export function getMonthValidationFns(length: number, date: string) {
   return [
-    { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+    { condition: () => date === INITIALIZE_VALUE, errorMsg: NO_ERROR },
     {
       condition: () => !isValidMonthRange(date),
       errorMsg: ERROR_MESSAGE.MONTH_RANGE,
@@ -34,7 +34,7 @@ export function getMonthValidationFns(length: number, date: string) {
 
 export function getYearValidationFns(length: number, date: string) {
   return [
-    { condition: () => date === NO_ERROR, errorMsg: NO_ERROR },
+    { condition: () => date === INITIALIZE_VALUE, errorMsg: NO_ERROR },
     {
       condition: () => !isValidYearRange(date),
       errorMsg: ERROR_MESSAGE.YEAR_RANGE,
