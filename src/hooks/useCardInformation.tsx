@@ -5,6 +5,7 @@ const initialCardInformation: CardInformationType = {
   uniqueNumber: ["", "", "", ""],
   expirationDate: ["", ""],
   cvcNumber: [""],
+  password: [""],
 };
 
 const useCardInformation = () => {

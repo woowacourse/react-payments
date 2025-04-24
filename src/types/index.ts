@@ -2,7 +2,7 @@ export type errorStateType = boolean[];
 
 export type ExpirationValidationType = "MM" | "YY";
 
-export type cardInformationKey = "uniqueNumber" | "expirationDate" | "cvcNumber";
+export type cardInformationKey = "uniqueNumber" | "expirationDate" | "cvcNumber" | "password";
 
 export type formSectionData = {
   key: cardInformationKey;
