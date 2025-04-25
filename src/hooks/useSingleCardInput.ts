@@ -1,0 +1,43 @@
+import { useCallback, useState } from 'react';
+
+import { CardInputItem } from './useCardFormState';
+
+import { validationCardInfo } from '@/utils/validation';
+
+type Props = {
+  state: CardInputItem;
+  setState: (state: CardInputItem) => void;
+  onValid: VoidFunction;
+  valueLength: number;
+};
+
+export const useSingleCardInput = ({ state, setState, onValid, valueLength }: Props) => {
+  const [error, setError] = useState<string>('');
+
+  const validateInput = useCallback((value: string) => {
+    return validationCardInfo(value, valueLength);
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    const { isValid, errorMessage: validateErrorMessage } = validateInput(newValue);
+
+    const updatedState = { value: newValue, isValid: isValid };
+    setState(updatedState);
+    if (!isValid) return setError(validateErrorMessage);
+
+    checkAndProceed(updatedState);
+  };
+
+  const checkAndProceed = (state: CardInputItem) => {
+    if (state.value.length === valueLength && state.isValid) {
+      onValid();
+    }
+  };
+
+  return {
+    state,
+    error,
+    handleChange,
+  };
+};
