@@ -1,49 +1,48 @@
 import styles from './CardNumberSection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { CardLogo, CardNumber } from '../../types/card';
+import { useEffect } from 'react';
+import { CardNumber } from '../../types/card';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 
 type Props = {
   cardNumbers: CardNumber;
-  setCardLogo: Dispatch<SetStateAction<CardLogo>>;
-  setCardNumbers: Dispatch<SetStateAction<CardNumber>>;
+  handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
+  cardNumberError: string;
+  handleNumberChange: (cardNumbers: CardNumber) => void;
 };
 
-export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  const [cardValidity, setCardValidity] = useState<Record<keyof CardNumber, boolean>>({
-    first: true,
-    second: true,
-    third: true,
-    fourth: true
-  });
+export default function CardNumberSection({
+  cardNumbers,
+  handleCardNumberChange,
+  cardNumberError,
+  handleNumberChange
+}: Props) {
+  const hasAnyInput = Object.values(cardNumbers).some((value) => value.length > 0);
 
-  const handleCardNumberChange = (key: keyof CardNumber, value: string) => {
-    setCardNumbers((prev) => ({ ...prev, [key]: value }));
-
-    const isValidNumber = validateNumberValidity(value);
-    setCardValidity((prev) => ({ ...prev, [key]: isValidNumber }));
-
-    const first = key === 'first' ? value : cardNumbers.first;
-    updateCardLogoFromNumbers(first);
+  const isEachTouched = {
+    first: cardNumbers.first.length > 0,
+    second: cardNumbers.second.length > 0,
+    third: cardNumbers.third.length > 0,
+    fourth: cardNumbers.fourth.length > 0
   };
 
-  function validateNumberValidity(value: string): boolean {
-    return /^[0-9]*$/.test(value);
-  }
+  const isEachValid = {
+    first: !isEachTouched.first || (cardNumbers.first.length === 4 && /^[0-9]+$/.test(cardNumbers.first)),
+    second: !isEachTouched.second || (cardNumbers.second.length === 4 && /^[0-9]+$/.test(cardNumbers.second)),
+    third: !isEachTouched.third || (cardNumbers.third.length === 4 && /^[0-9]+$/.test(cardNumbers.third)),
+    fourth: !isEachTouched.fourth || (cardNumbers.fourth.length === 4 && /^[0-9]+$/.test(cardNumbers.fourth))
+  };
 
-  function updateCardLogoFromNumbers(numbers: string) {
-    if (numbers.startsWith('4')) {
-      setCardLogo('visa');
-      return;
-    }
-    if (51 <= Number(numbers.slice(0, 2)) && Number(numbers.slice(0, 2)) <= 55) {
-      setCardLogo('master');
-      return;
-    }
+  useEffect(() => {
+    handleNumberChange(cardNumbers);
+  }, [cardNumbers, handleNumberChange]);
 
-    return setCardLogo('');
-  }
+  const handleKeyChange = (key: keyof CardNumber, value: string) => {
+    handleCardNumberChange(key, value);
+    if (key === 'first') {
+      handleNumberChange({ ...cardNumbers, [key]: value });
+    }
+  };
 
   return (
     <div className={styles.sectionContainer}>
@@ -60,13 +59,8 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
             { key: 'third', value: cardNumbers.third },
             { key: 'fourth', value: cardNumbers.fourth }
           ]}
-          onChange={handleCardNumberChange}
-          valid={{
-            first: cardValidity.first,
-            second: cardValidity.second,
-            third: cardValidity.third,
-            fourth: cardValidity.fourth
-          }}
+          onChange={handleKeyChange}
+          valid={isEachValid}
           placeholders={{
             first: '1234',
             second: '1234',
@@ -75,7 +69,7 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
           }}
           maxLength={4}
         />
-        <FieldGroup.Error message={Object.values(cardValidity).every((v) => v) ? '' : '숫자만 입력 가능합니다.'} />
+        {hasAnyInput && cardNumberError && <FieldGroup.Error message={cardNumberError} />}
       </div>
     </div>
   );
