@@ -21,7 +21,7 @@ function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const shouldBeFixed = fixed || variant === "default";
+  const shouldBeFixed = fixed || (variant === "default" && fixed !== false);
 
   return (
     <button
