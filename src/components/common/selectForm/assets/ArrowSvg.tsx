@@ -21,9 +21,9 @@ const ArrowSvg = ({ isOpened, color }: ArrowSvgProp) => {
       <path
         d="M4.04019 5.72987L7.86012 9.5498L11.6801 5.72987"
         stroke={color}
-        stroke-width="1.32867"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.32867"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

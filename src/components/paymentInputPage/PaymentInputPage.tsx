@@ -14,7 +14,7 @@ function PaymentInputPage() {
     <section className={styles.section}>
       <div className={styles.container}>
         <CardPreview cardInfo={cardInfo} />
-        <CardInputForm setCardInfo={setCardInfo} />
+        <CardInputForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
       </div>
     </section>
   );

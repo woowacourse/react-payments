@@ -1,11 +1,16 @@
 import SelectBox from "../../../common/selectForm/SelectBox";
 import CARD from "./constants/Card";
 
-const CardBrandSelect = ({ setCardInfo }) => {
+const CardBrandSelect = ({ setCardInfo, setValidState }) => {
   function onSelectHandler(value: string) {
     setCardInfo((prev) => {
       return { ...prev, brandName: value };
     });
+    if (value !== "") {
+      setValidState((prev) => {
+        return { ...prev, cardBrandSelect: true };
+      });
+    }
   }
 
   return (

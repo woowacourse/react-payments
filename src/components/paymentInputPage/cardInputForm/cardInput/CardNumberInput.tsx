@@ -7,8 +7,10 @@ import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 function CardNumberInput({
   setCardInfo,
+  setValidState,
 }: {
   setCardInfo: Dispatch<SetStateAction<string[]>>;
+  setValidState: Dispatch<SetStateAction<{}>>;
 }) {
   const [cardNumberInfo, setCardNumberInfo] = useState({
     cardNumbers: ["", "", "", ""],
@@ -40,8 +42,20 @@ function CardNumberInput({
       return { ...prev, cardNumbers: updatedNumbers };
     });
 
-    if (value.length === 4) {
+    if (value.length === 4 && index < 3) {
       inputRefs.current[index + 1].focus();
+    } else if (
+      value.length === 4 &&
+      index === 3 &&
+      cardNumberInfo.feedbackMessages.some((message) => message === "")
+    ) {
+      setValidState((prev) => {
+        console.log("prev -> ", prev);
+        return {
+          ...prev,
+          cardNumberInput: true,
+        };
+      });
     }
   }
 

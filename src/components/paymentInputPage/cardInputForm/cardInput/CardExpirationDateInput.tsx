@@ -10,8 +10,10 @@ import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage
 
 function CardExpirationDateInput({
   setCardInfo,
+  setValidState,
 }: {
   setCardInfo: Dispatch<SetStateAction<string[]>>;
+  setValidState: Dispatch<SetStateAction<{}>>;
 }) {
   const [expiration, setExpiration] = useState({
     month: "",
@@ -56,9 +58,20 @@ function CardExpirationDateInput({
       };
     });
 
-    if (value.length === 2) {
-      console.log("index", i);
+    if (value.length === 2 && i !== 1) {
       inputRefs.current[i + 1].focus();
+    } else if (
+      value.length === 2 &&
+      i === 1 &&
+      (monthError && yearError) === ""
+    ) {
+      console.log("123");
+      setValidState((prev) => {
+        return {
+          ...prev,
+          cardExpirationDateInput: true,
+        };
+      });
     }
   }
 
