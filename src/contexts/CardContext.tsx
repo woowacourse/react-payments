@@ -35,7 +35,6 @@ export interface CardContextType {
   updatePassword: React.Dispatch<React.SetStateAction<PasswordState>>;
 
   areAllFieldsFilled: () => boolean;
-  isFormComplete: boolean;
 }
 
 const initialState = {
@@ -102,8 +101,6 @@ export function CardProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const isFormComplete = areAllFieldsFilled();
-
   return (
     <CardContext.Provider
       value={{
@@ -123,7 +120,6 @@ export function CardProvider({ children }: { children: ReactNode }) {
         updatePassword: setPassword,
 
         areAllFieldsFilled,
-        isFormComplete,
       }}
     >
       {children}

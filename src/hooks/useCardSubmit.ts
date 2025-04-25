@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCard } from "./useCard";
+import { useCardValidation } from "./useCardValidation";
 
 const CARD_COMPANY_INFO = {
   "": "",
@@ -15,8 +16,11 @@ const CARD_COMPANY_INFO = {
 };
 
 export function useCardSubmit() {
-  const { cardCompany, cardNumbers, isFormComplete } = useCard();
+  const { cardCompany, cardNumbers, areAllFieldsFilled } = useCard();
+  const { areAllFieldsValid } = useCardValidation();
   const navigate = useNavigate();
+
+  const isFormComplete = areAllFieldsFilled() && areAllFieldsValid();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

@@ -35,6 +35,7 @@ export interface CardValidationContextType {
 
   hasErrorByType: (type: CardFormType) => boolean;
   getErrorMessage: (type: CardFormType) => string | null;
+  areAllFieldsValid: () => boolean;
 }
 
 const initialCardNumbersState = {
@@ -179,6 +180,10 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const areAllFieldsValid = (): boolean => {
+    return Object.values(CARD_FORM_TYPE).every((type) => !hasErrorByType(type));
+  };
+
   return (
     <CardValidationContext.Provider
       value={{
@@ -196,6 +201,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
 
         hasErrorByType,
         getErrorMessage,
+        areAllFieldsValid,
       }}
     >
       {children}
