@@ -6,7 +6,7 @@ import { cardNumberValidator } from '../../../features/cardInfo/validation/cardI
 import Preview from './Preview';
 
 const meta: Meta<typeof Preview> = {
-  title: 'Features/Preview',
+  title: 'Widgets/Preview',
   component: Preview,
   tags: ['autodocs'],
   argTypes: {
