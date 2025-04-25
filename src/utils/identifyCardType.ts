@@ -1,11 +1,11 @@
 import { CARD_NUMBERS_SEGMENT, CARD_TYPE } from "../constants/constants";
 import { CardNumbersState, CardType } from "../types/types";
-import { isCardNumberComplete } from "./validations/card/cardNumber";
+import { isCardNumberFilled } from "./validations/card/cardNumber";
 
 export const identifyCardType = (
   cardNumbers: CardNumbersState
 ): CardType | null => {
-  if (!isCardNumberComplete(cardNumbers)) return null;
+  if (!isCardNumberFilled(cardNumbers)) return null;
 
   const firstSegment = cardNumbers[CARD_NUMBERS_SEGMENT.first];
 

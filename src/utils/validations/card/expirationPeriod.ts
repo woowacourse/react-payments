@@ -2,10 +2,13 @@ import {
   EXPIRATION_PERIOD_SEGMENT,
   MAX_LENGTH,
 } from "../../../constants/constants";
-import { ExpirationPeriodSegmentType } from "../../../types/types";
+import {
+  ExpirationPeriodSegmentType,
+  ExpirationPeriodState,
+} from "../../../types/types";
 import { hasExactLength, isPositiveInteger } from "../common";
 
-const validateMonth = (value: string) => {
+const validateMonth = (value: string): string | null => {
   const monthNumber = parseInt(value, 10);
   if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
     return "유효한 날짜를 입력해 주세요";
@@ -14,7 +17,7 @@ const validateMonth = (value: string) => {
   return null;
 };
 
-const validateYear = (value: string) => {
+const validateYear = (value: string): string | null => {
   const yearNumber = parseInt(value, 10);
   const currentYear = new Date().getFullYear() % 100;
   if (isNaN(yearNumber) || yearNumber < currentYear) {
@@ -27,7 +30,7 @@ const validateYear = (value: string) => {
 export const isErrorExpirationPeriod = (
   value: string,
   position: ExpirationPeriodSegmentType
-) => {
+): string | null => {
   if (!isPositiveInteger(value)) return "숫자만 입력 가능합니다";
   if (!hasExactLength(value, MAX_LENGTH.expirationPeriod))
     return "유효 기간을 모두 입력해 주세요";
@@ -40,4 +43,12 @@ export const isErrorExpirationPeriod = (
     default:
       return null;
   }
+};
+
+export const isExpirationPeriodFilled = (
+  expirationPeriod: ExpirationPeriodState
+): boolean => {
+  return Object.values(expirationPeriod).every((segment: string) =>
+    hasExactLength(segment, MAX_LENGTH.expirationPeriod)
+  );
 };

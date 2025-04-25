@@ -9,6 +9,11 @@ import {
   ExpirationPeriodState,
   PasswordState,
 } from "../types/types";
+import { isCardNumberFilled } from "../utils/validations/card/cardNumber";
+import { isCardCompanySelected } from "../utils/validations/card/cardCompany";
+import { isCvcNumberFilled } from "../utils/validations/card/cvcNumber";
+import { isExpirationPeriodFilled } from "../utils/validations/card/expirationPeriod";
+import { isPasswordFilled } from "../utils/validations/card/password";
 
 export interface CardContextType {
   cardNumbers: CardNumbersState;
@@ -28,6 +33,9 @@ export interface CardContextType {
 
   password: PasswordState;
   updatePassword: React.Dispatch<React.SetStateAction<PasswordState>>;
+
+  areAllFieldsFilled: () => boolean;
+  isFormComplete: boolean;
 }
 
 const initialState = {
@@ -84,6 +92,18 @@ export function CardProvider({ children }: { children: ReactNode }) {
     }));
   };
 
+  const areAllFieldsFilled = (): boolean => {
+    return (
+      isCardNumberFilled(cardNumbers) &&
+      isExpirationPeriodFilled(expirationPeriod) &&
+      isCvcNumberFilled(cvcNumber) &&
+      isCardCompanySelected(cardCompany) &&
+      isPasswordFilled(password)
+    );
+  };
+
+  const isFormComplete = areAllFieldsFilled();
+
   return (
     <CardContext.Provider
       value={{
@@ -101,6 +121,9 @@ export function CardProvider({ children }: { children: ReactNode }) {
 
         password,
         updatePassword: setPassword,
+
+        areAllFieldsFilled,
+        isFormComplete,
       }}
     >
       {children}
