@@ -29,9 +29,16 @@ function ExpirationDateInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_DATE_LENGTH
     ).length
   );
+
   onComplete?.(isComplete);
 
-  const onChange = ({ name, value }: { name: string; value: string }) => {
+  const onExpirationDateChange = ({
+    name,
+    value,
+  }: {
+    name: string;
+    value: string;
+  }) => {
     if (value.length <= MAX_DATE_LENGTH) {
       if (name === 'expirationDatePart1' && Number(value) > MAX_MONTH_VALUE)
         return;
@@ -39,7 +46,7 @@ function ExpirationDateInputField({
     }
   };
 
-  const onBlur = (e: ChangeEvent) => {
+  const onExpirationDateBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     if (value.length === 1)
       setInputValue((prevValue) => ({ ...prevValue, [name]: `0${value}` }));
@@ -56,9 +63,9 @@ function ExpirationDateInputField({
             inputType="number"
             placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
             value={inputValue[inputType]}
-            onChange={onChange}
+            onChange={onExpirationDateChange}
             name={inputType}
-            onBlur={onBlur}
+            onBlur={onExpirationDateBlur}
           />
         </>
       ))}

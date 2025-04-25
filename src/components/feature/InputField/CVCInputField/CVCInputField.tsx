@@ -1,10 +1,11 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import {
   CVC_INPUT_TYPE,
   CVCInputValueType,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 
@@ -24,21 +25,14 @@ function CVCInputField({
   const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler([...CVC_INPUT_TYPE], inputValue, MAX_CVC_LENGTH);
 
+  const { onChange, onBlur } = useInputFieldHandler({
+    validateInputError,
+    setInputValue,
+    maxLength: MAX_CVC_LENGTH,
+    inputErrorType: 'shortCVCSegment',
+  });
+
   onComplete?.(isComplete && !Boolean(errorMessage));
-
-  const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length > MAX_CVC_LENGTH) return;
-    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
-  };
-
-  const onBlur = (e: ChangeEvent) => {
-    const { name, value } = e.target as HTMLInputElement;
-
-    validateInputError(name as CVCInputValueType, {
-      errorType: 'shortCVCSegment',
-      isError: value.length < MAX_CVC_LENGTH,
-    });
-  };
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>

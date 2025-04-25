@@ -7,17 +7,13 @@ import {
   PasswordInputType,
 } from '../config/inputField';
 
-export const useInputErrorHandler = <
+export function useInputErrorHandler<
   T extends
     | CardNumberInputType
     | CVCInputValueType
     | ExpirationDateInputType
     | PasswordInputType,
->(
-  initialKeys: T[],
-  inputValue: Record<T, string>,
-  completeCondition: number
-) => {
+>(initialKeys: T[], inputValue: Record<T, string>, completeCondition: number) {
   const [errorTypes, setErrorTypes] = useState<Record<T, ErrorType[]>>(
     initialKeys.reduce(
       (acc, key) => {
@@ -68,4 +64,4 @@ export const useInputErrorHandler = <
   };
 
   return { errorTypes, errorMessage, isComplete, validateInputError };
-};
+}

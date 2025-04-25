@@ -1,10 +1,11 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import {
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 
@@ -28,20 +29,14 @@ function PasswordInputField({
       MAX_PASSWORD_LENGTH
     );
 
+  const { onChange, onBlur } = useInputFieldHandler({
+    validateInputError,
+    setInputValue,
+    inputErrorType: 'shortPasswordSegment',
+    maxLength: MAX_PASSWORD_LENGTH,
+  });
+
   onComplete?.(isComplete && !Boolean(errorMessage));
-
-  const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length > MAX_PASSWORD_LENGTH) return;
-    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
-  };
-
-  const onBlur = (e: ChangeEvent) => {
-    const { name, value } = e.target as HTMLInputElement;
-    validateInputError(name as PasswordInputType, {
-      errorType: 'shortPasswordSegment',
-      isError: value.length < MAX_PASSWORD_LENGTH,
-    });
-  };
 
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>

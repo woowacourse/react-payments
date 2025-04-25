@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { CardType } from '../../../../config/card';
 import {
@@ -6,6 +6,7 @@ import {
   CardNumberInputType,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 
@@ -34,6 +35,13 @@ function CardNumberInputField({
       MAX_CARD_LENGTH
     );
 
+  const { onChange, onBlur } = useInputFieldHandler({
+    validateInputError,
+    setInputValue,
+    inputErrorType: 'shortCardSegment',
+    maxLength: MAX_CARD_LENGTH,
+  });
+
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const checkCardTypeFromPrefix = (value: string) => {
@@ -47,8 +55,14 @@ function CardNumberInputField({
     return false;
   };
 
-  const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length > MAX_CARD_LENGTH) return;
+  const onCardNumberChange = ({
+    name,
+    value,
+  }: {
+    name: string;
+    value: string;
+  }) => {
+    onChange({ name, value });
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       const isError = checkCardTypeFromPrefix(value);
 
@@ -57,16 +71,6 @@ function CardNumberInputField({
         isError,
       });
     }
-    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
-  };
-
-  const onBlur = (e: ChangeEvent) => {
-    const { value, name } = e.target as HTMLInputElement;
-
-    validateInputError(name as CardNumberInputType, {
-      errorType: 'shortCardSegment',
-      isError: value.length < MAX_CARD_LENGTH,
-    });
   };
 
   return (
@@ -80,7 +84,7 @@ function CardNumberInputField({
             inputType="number"
             placeholder="1234"
             value={inputValue[inputType]}
-            onChange={onChange}
+            onChange={onCardNumberChange}
             onBlur={onBlur}
             name={inputType}
             isError={Boolean(errorTypes[inputType].length)}
