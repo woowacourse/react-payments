@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
-  "homepage": "https://beomtae.github.io/react-payments",
+  "homepage": "https://beomtae.github.io",
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
