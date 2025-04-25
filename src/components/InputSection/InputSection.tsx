@@ -14,6 +14,8 @@ import Button from "../Button/Button";
 import { CompletionState } from "../../hooks/useCompletion";
 import { useEffect, useState } from "react";
 import { InputErrorType } from "../../hooks/useInputError";
+import { useCard } from "../../hooks/useCard";
+import { useNavigate } from "react-router-dom";
 
 export interface InputSectionProps {
   type: InputType;
@@ -66,6 +68,17 @@ function InputSection({
   validators,
 }: InputSectionProps) {
   const [showButton, setShowButton] = useState(false);
+  const { cardNumbers, cardBrand } = useCard();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/success", {
+      state: {
+        cardNumber: `${cardNumbers.first}`,
+        cardBrand: `${cardBrand}`,
+      },
+    });
+  };
 
   useEffect(() => {
     if (type !== INPUT_TYPE.password) return;
@@ -128,7 +141,7 @@ function InputSection({
         errorMessage={ERROR_MESSAGE[getErrorType()]}
         isVisible={getErrorVisible(type)}
       />
-      {showButton && <Button />}
+      {showButton && <Button variant="home" onClick={handleClick} />}
     </>
   );
 }

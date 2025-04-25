@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const ButtonCSS = styled.button`
-  position: fixed;
-  width: 30%;
   height: 52px;
 
   font-weight: 700;
@@ -11,5 +9,15 @@ export const ButtonCSS = styled.button`
   background-color: black;
   color: white;
 
-  bottom: 0;
+  cursor: pointer;
+
+  &.success {
+    width: 100%;
+  }
+
+  &.home {
+    position: fixed;
+    width: 30%;
+    bottom: 0;
+  }
 `;

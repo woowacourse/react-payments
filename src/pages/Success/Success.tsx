@@ -1,12 +1,30 @@
-import { SuccessContainer } from "./Success.styled";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  SuccessContainerCSS,
+  SuccessImgCSS,
+  SuccessTextCSS,
+} from "./Success.styled";
 import check from "/check.svg";
+import Button from "../../components/Button/Button";
 
 function Success() {
+  const location = useLocation();
+  const { cardNumber, cardBrand } = location.state || {};
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
   return (
     <>
-      <SuccessContainer>
-        <img src={check} />
-      </SuccessContainer>
+      <SuccessContainerCSS>
+        <SuccessImgCSS src={check} />
+        <SuccessTextCSS>
+          <p>{cardNumber}로 시작하는</p>
+          <p>{cardBrand}가 등록되었어요.</p>
+        </SuccessTextCSS>
+        <Button variant="success" onClick={handleClick} />
+      </SuccessContainerCSS>
     </>
   );
 }

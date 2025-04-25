@@ -1,7 +1,16 @@
 import { ButtonCSS } from "./Button.styled";
 
-function Button() {
-  return <ButtonCSS>확인</ButtonCSS>;
+interface ButtonProps {
+  onClick: () => void;
+  variant: "success" | "home";
+}
+
+function Button({ onClick, variant }: ButtonProps) {
+  return (
+    <ButtonCSS type="button" className={variant} onClick={onClick}>
+      확인
+    </ButtonCSS>
+  );
 }
 
 export default Button;
