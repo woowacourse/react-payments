@@ -1,5 +1,4 @@
 import { CardInfoProps, ErrorProps } from '../../../shared/model/types';
-import styled from '@emotion/styled';
 import CardNumberSection from './CardNumberSection';
 import CardExpirationDateSection from './CardExpirationDateSection';
 import CardCVCSection from './CardCVCSection';
