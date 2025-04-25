@@ -21,7 +21,7 @@ function PasswordInputField({
   setInputValue,
   onComplete,
 }: PasswordInputFieldProps) {
-  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+  const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler(
       [...PASSWORD_INPUT_TYPE],
       inputValue,
@@ -31,28 +31,18 @@ function PasswordInputField({
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= MAX_PASSWORD_LENGTH)
-      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
+    if (value.length > MAX_PASSWORD_LENGTH) return;
+    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   const onBlur = (e: ChangeEvent) => {
-    const { value } = e.target as HTMLInputElement;
-    const isValidLength = value.length === MAX_PASSWORD_LENGTH;
-
-    const currentErrorType = errorTypes['passwordPart1'];
-
-    if (!isValidLength) {
-      const set = new Set(currentErrorType);
-      set.add('shortPasswordSegment');
-      setErrorTypes(() => ({ ['passwordPart1']: Array.from(set) }));
-    } else {
-      setErrorTypes(() => ({
-        ['passwordPart1']: currentErrorType.filter(
-          (errorType) => errorType !== 'shortPasswordSegment'
-        ),
-      }));
-    }
+    const { name, value } = e.target as HTMLInputElement;
+    validateInputError(name as PasswordInputType, {
+      errorType: 'shortPasswordSegment',
+      isError: value.length < MAX_PASSWORD_LENGTH,
+    });
   };
+
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
       {PASSWORD_INPUT_TYPE.map((inputType) => (

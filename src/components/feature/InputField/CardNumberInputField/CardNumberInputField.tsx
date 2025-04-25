@@ -1,7 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { CardType } from '../../../../config/card';
-import { ErrorType } from '../../../../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
@@ -28,7 +27,7 @@ function CardNumberInputField({
   setCardType,
   onComplete,
 }: CardNumberInputFieldProps) {
-  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+  const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler(
       [...CARD_NUMBER_INPUT_TYPE],
       inputValue,
@@ -37,33 +36,14 @@ function CardNumberInputField({
 
   onComplete?.(isComplete && !Boolean(errorMessage));
 
-  const validateCardError = (
-    inputName: CardNumberInputType,
-    errorStatus: { errorType: ErrorType; isError: boolean }
-  ) => {
-    const currentErrorType = errorTypes[inputName];
-
-    if (errorStatus.isError) {
-      const set = new Set(currentErrorType);
-      set.add(errorStatus.errorType);
-      return Array.from(set);
-    } else {
-      return currentErrorType.filter(
-        (errorType) => errorType !== errorStatus.errorType
-      );
-    }
-  };
-
   const checkCardTypeFromPrefix = (value: string) => {
     if (value.length > CARD_TYPE_ID_LENGTH) {
       if (cardType === null) return true;
       return false;
     }
-
     if (value[0] === '4') setCardType('visa');
     else if (Number(value) >= 51 && Number(value) <= 55) setCardType('master');
     else setCardType(null);
-
     return false;
   };
 
@@ -72,15 +52,10 @@ function CardNumberInputField({
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       const isError = checkCardTypeFromPrefix(value);
 
-      const updatedErrorTypes = validateCardError(CARD_NUMBER_INPUT_TYPE[0], {
+      validateInputError(name, {
         errorType: 'noneCardType',
         isError,
       });
-
-      setErrorTypes((prevValue) => ({
-        ...prevValue,
-        cardNumberPart1: updatedErrorTypes,
-      }));
     }
     setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
@@ -88,15 +63,10 @@ function CardNumberInputField({
   const onBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
-    const updatedErrorTypes = validateCardError(name as CardNumberInputType, {
+    validateInputError(name as CardNumberInputType, {
       errorType: 'shortCardSegment',
-      isError: value.length > 0 && value.length < MAX_CARD_LENGTH,
+      isError: value.length < MAX_CARD_LENGTH,
     });
-
-    setErrorTypes((prevValue) => ({
-      ...prevValue,
-      [name]: updatedErrorTypes,
-    }));
   };
 
   return (

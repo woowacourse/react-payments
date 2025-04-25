@@ -40,9 +40,32 @@ export const useInputErrorHandler = <
 
   const isComplete = !Boolean(
     (Object.values(inputValue) as string[]).filter(
-      (cardNumberValue) => cardNumberValue.length !== completeCondition
+      (value) => value.length !== completeCondition
     ).length
   );
 
-  return { errorTypes, setErrorTypes, errorMessage, isComplete };
+  const validateInputError = (
+    inputName: T,
+    errorStatus: { errorType: ErrorType; isError: boolean }
+  ) => {
+    const currentErrorType = errorTypes[inputName];
+
+    if (errorStatus.isError) {
+      const set = new Set(currentErrorType);
+      set.add(errorStatus.errorType);
+      setErrorTypes((prevValue) => ({
+        ...prevValue,
+        [inputName]: Array.from(set),
+      }));
+    } else {
+      setErrorTypes((prevValue) => ({
+        ...prevValue,
+        [inputName]: currentErrorType.filter(
+          (errorType) => errorType !== errorStatus.errorType
+        ),
+      }));
+    }
+  };
+
+  return { errorTypes, errorMessage, isComplete, validateInputError };
 };

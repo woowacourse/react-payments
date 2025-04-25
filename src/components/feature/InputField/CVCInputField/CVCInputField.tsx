@@ -21,33 +21,23 @@ function CVCInputField({
   setInputValue,
   onComplete,
 }: CVCInputFieldProps) {
-  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+  const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler([...CVC_INPUT_TYPE], inputValue, MAX_CVC_LENGTH);
 
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
-    if (value.length <= MAX_CVC_LENGTH)
-      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
+    if (value.length > MAX_CVC_LENGTH) return;
+    setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   const onBlur = (e: ChangeEvent) => {
-    const { value } = e.target as HTMLInputElement;
-    const isValidLength = value.length === MAX_CVC_LENGTH;
+    const { name, value } = e.target as HTMLInputElement;
 
-    const currentErrorType = errorTypes['CVCPart1'];
-
-    if (!isValidLength) {
-      const set = new Set(currentErrorType);
-      set.add('shortCVCSegment');
-      setErrorTypes(() => ({ ['CVCPart1']: Array.from(set) }));
-    } else {
-      setErrorTypes(() => ({
-        ['CVCPart1']: currentErrorType.filter(
-          (errorType) => errorType !== 'shortCVCSegment'
-        ),
-      }));
-    }
+    validateInputError(name as CVCInputValueType, {
+      errorType: 'shortCVCSegment',
+      isError: value.length < MAX_CVC_LENGTH,
+    });
   };
 
   return (
