@@ -10,6 +10,8 @@ export const CustomLinkButton = styled.button<{ css?: SerializedStyles }>`
   background-color: #333333;
   color: white;
 
+  transition: background-color 0.2s ease-in-out;
+
   ${({ css }) => css};
 
   &:hover {
