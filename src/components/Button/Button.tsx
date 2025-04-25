@@ -1,5 +1,6 @@
 import styles from "./Button.module.css";
 import { useNavigate } from "react-router-dom";
+import { useCardContext } from "../../contexts/CardContext";
 
 type ButtonProps = {
   name: "register" | "another";
@@ -7,6 +8,12 @@ type ButtonProps = {
 
 const Button = ({ name }: ButtonProps) => {
   const navigate = useNavigate();
+  const { resetCardForm } = useCardContext();
+
+  const handleRegisterAnotherCard = () => {
+    resetCardForm();
+    navigate("/");
+  }
 
   return (
     <button
@@ -19,7 +26,7 @@ const Button = ({ name }: ButtonProps) => {
       onClick={
         name === "register"
           ? () => navigate("/card/register/complete")
-          : () => navigate("/")
+          : () => handleRegisterAnotherCard()
       }
     >
       확인

@@ -74,6 +74,8 @@ interface CardContextType {
   setIsValidPassword: React.Dispatch<React.SetStateAction<boolean>>;
   isValidForm: boolean;
   setIsValidForm: React.Dispatch<React.SetStateAction<boolean>>;
+
+  resetCardForm: () => void; 
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -287,6 +289,28 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const resetCardForm = () => {
+    setCardNumbers(Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""));
+    setCardColor("#333333");
+    setMonth("");
+    setYear("");
+    setCVC("");
+    setPassword("");
+  
+    setIsValidCardNumbers(false);
+    setIsValidCardCompany(false); 
+    setIsValidExpiry(false);      
+    setIsValidCVC(false);          
+    setIsValidPassword(false);
+    setIsValidForm(false);
+
+    setShowCardCompanySelect(false);
+    setShowExpiryInput(false);
+    setShowCVCInput(false);
+    setShowPasswordInput(false);
+  };
+  
+
   return (
     <CardContext.Provider
       value={{
@@ -336,6 +360,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         setIsValidPassword,
         isValidForm,
         setIsValidForm,
+        resetCardForm,
       }}
     >
       {children}
