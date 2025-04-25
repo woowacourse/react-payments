@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
         path: 'confirm',
         element: <Confirm />,
       },
+      {
+        path: '',
+        element: <NotFound />,
+      },
     ],
   },
   {

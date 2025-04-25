@@ -12,7 +12,7 @@
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
-  "homepage": "https://keemsebin.github.io/react-payments/card/activate",
+  "homepage": "https://keemsebin.github.io/react-payments/",
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
