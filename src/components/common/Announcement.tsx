@@ -7,29 +7,31 @@ interface AnnouncementProps {
 
 function Announcement({ main, caption }: AnnouncementProps) {
   return (
-    <AnnouncementContainer>
-      <MainTitle>{main}</MainTitle>
-      <Caption>{caption ?? ''}</Caption>
-    </AnnouncementContainer>
+    <S.AnnouncementContainer>
+      <S.MainTitle>{main}</S.MainTitle>
+      <S.Caption>{caption ?? ''}</S.Caption>
+    </S.AnnouncementContainer>
   );
 }
 
 export default Announcement;
 
-const AnnouncementContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
+const S = {
+  AnnouncementContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  `,
 
-const MainTitle = styled.p`
-  margin-top: 16px;
-  font-size: 18px;
-  font-weight: 700;
-`;
+  MainTitle: styled.p`
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+  `,
 
-const Caption = styled.p`
-  color: #8b95a1;
-  font-size: 9.5px;
-  margin-bottom: 16px;
-`;
+  Caption: styled.p`
+    color: #8b95a1;
+    font-size: 9.5px;
+    margin-bottom: 16px;
+  `,
+};

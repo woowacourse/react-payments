@@ -7,24 +7,26 @@ import { ROUTER_PATH } from './constants/setting';
 
 function App() {
   return (
-    <AppContainer>
+    <S.AppContainer>
       <Routes>
         <Route path={ROUTER_PATH.MAIN} element={<RegisterCardPage />} />
         <Route path={ROUTER_PATH.COMPLETE} element={<CompletePage />} />
       </Routes>
-    </AppContainer>
+    </S.AppContainer>
   );
 }
 
 export default App;
 
-const AppContainer = styled.div`
-  width: ${VIEWPORT.MOBILE}px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #acacac;
-  padding: 20px;
-`;
+const S = {
+  AppContainer: styled.div`
+    width: ${VIEWPORT.MOBILE}px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #acacac;
+    padding: 20px;
+  `,
+};

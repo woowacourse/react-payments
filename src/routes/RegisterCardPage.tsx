@@ -35,7 +35,7 @@ function RegisterCardPage() {
         company={cardInfo.company}
         expiration={{ month: cardInfo.expiration.month, year: cardInfo.expiration.year }}
       />
-      <FormContainer>
+      <S.FormContainer>
         <Announcement main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
         <CardNumberForm
           cardInfo={cardInfo}
@@ -67,7 +67,7 @@ function RegisterCardPage() {
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
         />
-      </FormContainer>
+      </S.FormContainer>
       <BottomButton
         label={CONFIRM_BUTTON_LABEL}
         onClick={() => navigate(ROUTER_PATH.COMPLETE, { state: { cardInfo } })}
@@ -78,8 +78,10 @@ function RegisterCardPage() {
 
 export default RegisterCardPage;
 
-const FormContainer = styled.div`
-  width: 100%;
-  height: 65vh;
-  overflow-y: auto;
-`;
+const S = {
+  FormContainer: styled.div`
+    width: 100%;
+    height: 65vh;
+    overflow-y: auto;
+  `,
+};

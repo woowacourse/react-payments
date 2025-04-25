@@ -8,19 +8,21 @@ interface BottomButtonProps {
 }
 
 function BottomButton({ label, onClick }: BottomButtonProps) {
-  return <BottomButtonContainer onClick={onClick}>{label}</BottomButtonContainer>;
+  return <S.BottomButtonContainer onClick={onClick}>{label}</S.BottomButtonContainer>;
 }
 
 export default BottomButton;
 
-const BottomButtonContainer = styled.button`
-  width: ${VIEWPORT.MOBILE}px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+const S = {
+  BottomButtonContainer: styled.button`
+    width: ${VIEWPORT.MOBILE}px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 
-  &:hover {
-    background-color: #222;
-  }
-`;
+    &:hover {
+      background-color: #222;
+    }
+  `,
+};

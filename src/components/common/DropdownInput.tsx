@@ -16,72 +16,74 @@ function DropdownInput({ value, setValue, options, placeholder }: DropdownInputP
   const isPlaceholder = value === '';
 
   return (
-    <DropdownInputContainer
+    <S.DropdownInputContainer
       isOpen={isOpen}
       onClick={() => setIsOpen((prev) => !prev)}
       ref={dropdownRef}>
-      <DropdownLabel isPlaceholder={isPlaceholder}>
+      <S.DropdownLabel isPlaceholder={isPlaceholder}>
         {isPlaceholder ? placeholder : value}
-      </DropdownLabel>
-      <DropdownIcon isOpen={isOpen} />
+      </S.DropdownLabel>
+      <S.DropdownIcon isOpen={isOpen} />
       {isOpen && (
-        <DropdownOptionsContainer>
+        <S.DropdownOptionsContainer>
           {options.map((option, index) => (
-            <DropdownOption key={index} onClick={() => setValue(option)}>
+            <S.DropdownOption key={index} onClick={() => setValue(option)}>
               {option}
-            </DropdownOption>
+            </S.DropdownOption>
           ))}
-        </DropdownOptionsContainer>
+        </S.DropdownOptionsContainer>
       )}
-    </DropdownInputContainer>
+    </S.DropdownInputContainer>
   );
 }
 
 export default DropdownInput;
 
-const DropdownInputContainer = styled.div<{ isOpen: boolean }>`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 6px 8px;
-  border: 1px solid ${({ isOpen }) => (isOpen ? '#000' : '#acacac')};
-  border-radius: 2px;
-  user-select: none;
-`;
+const S = {
+  DropdownInputContainer: styled.div<{ isOpen: boolean }>`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid ${({ isOpen }) => (isOpen ? '#000' : '#acacac')};
+    border-radius: 2px;
+    user-select: none;
+  `,
 
-const DropdownLabel = styled.p<{ isPlaceholder: boolean }>`
-  color: ${({ isPlaceholder }) => (isPlaceholder ? '#acacac' : '#000')};
-`;
+  DropdownLabel: styled.p<{ isPlaceholder: boolean }>`
+    color: ${({ isPlaceholder }) => (isPlaceholder ? '#acacac' : '#000')};
+  `,
 
-const DropdownIcon = styled.div<{ isOpen: boolean }>`
-  width: 15px;
-  height: 15px;
-  border-radius: 2px;
-  background-size: cover;
-  background-position: center;
-  background-image: url('./assets/dropdown-arrow.png');
-  transform: rotateZ(${({ isOpen }) => (isOpen ? '0deg' : '180deg')});
-  transition: transform 0.3s;
-`;
+  DropdownIcon: styled.div<{ isOpen: boolean }>`
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('./assets/dropdown-arrow.png');
+    transform: rotateZ(${({ isOpen }) => (isOpen ? '0deg' : '180deg')});
+    transition: transform 0.3s;
+  `,
 
-const DropdownOptionsContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 45px;
-  left: 0px;
-  z-index: 10;
-  border: 1px solid #acacac;
-  background: white;
-  border-radius: 2px;
-`;
+  DropdownOptionsContainer: styled.div`
+    position: absolute;
+    width: 100%;
+    top: 45px;
+    left: 0px;
+    z-index: 10;
+    border: 1px solid #acacac;
+    background: white;
+    border-radius: 2px;
+  `,
 
-const DropdownOption = styled.div`
-  padding: 6px 8px;
-  transition: 0.3s all;
+  DropdownOption: styled.div`
+    padding: 6px 8px;
+    transition: 0.3s all;
 
-  &:hover {
-    background-color: #eee;
-  }
-`;
+    &:hover {
+      background-color: #eee;
+    }
+  `,
+};

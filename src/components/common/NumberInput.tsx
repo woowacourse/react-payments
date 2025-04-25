@@ -26,7 +26,7 @@ function NumberInput({
   }
 
   return (
-    <Input
+    <S.Input
       value={value}
       maxLength={maxLength}
       placeholder={placeholder}
@@ -39,15 +39,17 @@ function NumberInput({
 
 export default NumberInput;
 
-const Input = styled.input<{ isError: boolean }>`
-  width: 100%;
-  border: 1px solid ${({ isError }) => (isError ? '#FF3D3D' : '#ACACAC')};
-  border-radius: 2px;
-  height: 32px;
-  padding: 8px;
+const S = {
+  Input: styled.input<{ isError: boolean }>`
+    width: 100%;
+    border: 1px solid ${({ isError }) => (isError ? '#FF3D3D' : '#ACACAC')};
+    border-radius: 2px;
+    height: 32px;
+    padding: 8px;
 
-  &:focus {
-    border: 1.5px solid ${({ isError }) => (isError ? '#FF3D3D' : '#000')};
-    outline: none;
-  }
-`;
+    &:focus {
+      border: 1.5px solid ${({ isError }) => (isError ? '#FF3D3D' : '#000')};
+      outline: none;
+    }
+  `,
+};

@@ -13,58 +13,60 @@ const Card = ({ cardNumber, company, expiration }: CardProps) => {
   const cardType = getCardType(cardNumber[0]);
 
   return (
-    <CardContainer company={company}>
-      <CardHeader>
-        <CardIC />
-        {cardType !== 'None' && <CardType src={CARD_TYPE_PATH[cardType]} alt={cardType} />}
-      </CardHeader>
+    <S.CardContainer company={company}>
+      <S.CardHeader>
+        <S.CardIC />
+        {cardType !== 'None' && <S.CardType src={CARD_TYPE_PATH[cardType]} alt={cardType} />}
+      </S.CardHeader>
 
-      <CardInfo>
+      <S.CardInfo>
         <p>{getMaskedCardNumber(cardNumber).join(' ')}</p>
         <p>
           {expiration.year === '' ? expiration.month : `${expiration.month} / ${expiration.year}`}
         </p>
-      </CardInfo>
-    </CardContainer>
+      </S.CardInfo>
+    </S.CardContainer>
   );
 };
 
 export default Card;
 
-const CardContainer = styled.div<{ company: keyof typeof CARD_COMPANY_COLORS }>`
-  width: 212px;
-  height: 132px;
-  color: ${({ company }) => (company === '카카오뱅크' ? '#333' : 'white')};
-  padding: 8px 12px;
-  border-radius: 4px;
-  background: ${({ company }) => CARD_COMPANY_COLORS[company]};
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
-  margin-bottom: 30px;
-`;
+const S = {
+  CardContainer: styled.div<{ company: keyof typeof CARD_COMPANY_COLORS }>`
+    width: 212px;
+    height: 132px;
+    color: ${({ company }) => (company === '카카오뱅크' ? '#333' : 'white')};
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: ${({ company }) => CARD_COMPANY_COLORS[company]};
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+  `,
 
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 14px;
-`;
+  CardHeader: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  `,
 
-const CardIC = styled.div`
-  width: 36px;
-  height: 22px;
-  background: #ddcd78;
-  border-radius: 2px;
-  stroke-width: 0.5px;
-  stroke: rgba(221, 205, 120, 0.1);
-`;
+  CardIC: styled.div`
+    width: 36px;
+    height: 22px;
+    background: #ddcd78;
+    border-radius: 2px;
+    stroke-width: 0.5px;
+    stroke: rgba(221, 205, 120, 0.1);
+  `,
 
-const CardType = styled.img`
-  width: 36px;
-  height: 22px;
-`;
+  CardType: styled.img`
+    width: 36px;
+    height: 22px;
+  `,
 
-const CardInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  letter-spacing: 1.5px;
-`;
+  CardInfo: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    letter-spacing: 1.5px;
+  `,
+};
