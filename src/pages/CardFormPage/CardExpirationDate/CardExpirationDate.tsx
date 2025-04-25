@@ -6,6 +6,7 @@ import {
 } from "../../../types/cardKeyTypes";
 import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
 import Text from "../../../components/Text/Text";
+import { useRef } from "react";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
@@ -30,6 +31,8 @@ export default function CardExpirationDate({
   cardExpirationDate,
   errorMessage,
 }: CardExpirationDateProps) {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
   const firstError =
     EXPIRATION_FIELDS.map(
       (_, idx) => errorMessage[indexToExpirationKey(idx)]
@@ -37,6 +40,9 @@ export default function CardExpirationDate({
 
   const handleInputChange = (value: string, index: number) => {
     handleChange(value, index);
+    if (value.length < 2) return;
+    if (index < EXPIRATION_FIELDS.length - 1)
+      inputRefs.current[index + 1].focus();
     if (canGoToNextStep(step, index, value, firstError)) {
       handleStep();
     }
@@ -47,20 +53,22 @@ export default function CardExpirationDate({
       <Text textType="title">{EXPIRATION_DATE_LABEL.TITLE}</Text>
       <Text textType="description">{EXPIRATION_DATE_LABEL.DESCRIPTION}</Text>
       <Text textType="subtitle">{EXPIRATION_DATE_LABEL.SUBTITLE}</Text>
+
       <div className={styles["card-number__input"]}>
-        <Input
-          onChange={(value) => handleInputChange(value, 0)}
-          placeholder={EXPIRATION_DATE_LABEL.PLACE_HOLDER_MOMTH}
-          value={cardExpirationDate.MONTH}
-          errorMessage={errorMessage.MONTH}
-        />
-        <Input
-          onChange={(value) => handleInputChange(value, 1)}
-          placeholder={EXPIRATION_DATE_LABEL.PLACE_HOLDER_YEAR}
-          value={cardExpirationDate.YEAR}
-          errorMessage={errorMessage.YEAR}
-        />
+        {Array.from({ length: EXPIRATION_FIELDS.length }, (_, idx) => (
+          <Input
+            key={idx}
+            ref={(el) => {
+              inputRefs.current[idx] = el!;
+            }}
+            onChange={(value) => handleInputChange(value, idx)}
+            value={cardExpirationDate[indexToExpirationKey(idx)]}
+            errorMessage={errorMessage[indexToExpirationKey(idx)]}
+            placeholder="12"
+          />
+        ))}
       </div>
+
       <Text textType="error">{firstError}</Text>
     </section>
   );

@@ -20,7 +20,7 @@ export default function useCardPassword() {
   };
 
   const onPasswordChange = (value: string) => {
-    setPassword(value.slice(0, 3));
+    setPassword(value.slice(0, 2));
     validatePassword(value);
   };
 
