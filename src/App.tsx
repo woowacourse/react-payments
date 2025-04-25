@@ -3,6 +3,7 @@ import CardInputSection from './components/cardInfoForm/CardInputSection/CardInp
 import CardNumberField from './components/cardInfoForm/CardNumberField/CardNumberField';
 import CardValidityPeriodField from './components/cardInfoForm/CardValidityPeriodField/CardValidityPeriodField';
 import CardCVCField from './components/cardInfoForm/CardCVCField/CardCVCField';
+import Button from './components/common/Button/Button';
 import styled from '@emotion/styled';
 import useCardNumber from './hooks/useCardNumber';
 import useCardValidityPeriod from './hooks/useCardValidityPeriod';
@@ -137,9 +138,11 @@ function App() {
             onChange={onChangeCardPassword}
           />
         </CardInputSection>
-        <CardFormButtonWrapper>
-          {canSubmit && <CardFormButton>확인</CardFormButton>}
-        </CardFormButtonWrapper>
+        {canSubmit && (
+          <CardFormButtonWrapper>
+            <Button customStyle={cardFormButtonStyle} text="확인" />
+          </CardFormButtonWrapper>
+        )}
       </CardForm>
     </AppLayout>
   );
@@ -171,17 +174,16 @@ const CardFormButtonWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const CardFormButton = styled.button`
-  width: 376px;
-  height: 50px;
-  background-color: #000000;
-  color: #ffffff;
-  border: none;
+const cardFormButtonStyle = {
+  width: '376px',
+  height: '50px',
+  backgroundColor: '#000000',
+  color: '#ffffff',
+  border: 'none',
+  transition: 'background-color 0.3s ease-in-out',
+  cursor: 'pointer',
 
-  transition: background-color 0.3s ease-in-out;
-
-  cursor: pointer;
-  &:hover {
-    background-color: #18529a80;
-  }
-`;
+  ':hover': {
+    backgroundColor: '#697a9080',
+  },
+};
