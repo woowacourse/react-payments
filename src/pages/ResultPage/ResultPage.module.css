@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   justify-self: center;
+  text-align: center;
+  gap: 25px;
 
   height: 100vh;
 }

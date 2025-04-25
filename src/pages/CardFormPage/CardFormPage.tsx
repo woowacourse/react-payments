@@ -46,7 +46,7 @@ export default function CardFormPage() {
         cardNumbers={cardNumbers}
         cardExpirationDate={cardExpirationDate}
       />
-      <div className={styles["card-form"]}>
+      <form className={styles["card-form"]}>
         {step > 3 && (
           <CardPassword
             handleChange={onPasswordChange}
@@ -87,7 +87,7 @@ export default function CardFormPage() {
           handleStep={nextStep}
           errorMessage={cardBrandError}
         />
-      </div>
+      </form>
       <Button text="확인" onClick={handleSubmit} />
     </div>
   );
