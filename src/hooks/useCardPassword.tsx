@@ -5,7 +5,7 @@ export default function useCardPassword() {
   const [passwordError, setPasswordError] = useState("");
 
   const validatePassword = (value: string) => {
-    if (value.length > 3) {
+    if (value.length > 2) {
       setPasswordError("비밀번호 앞 2자리만 입력해주세요.");
       return false;
     }

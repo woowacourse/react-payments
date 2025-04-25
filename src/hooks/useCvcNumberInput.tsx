@@ -2,7 +2,7 @@ import { useState } from "react";
 import { isNumber, isUnderMaxLength } from "../validation/validate";
 
 const CVC_NUMBER_LIMIT = {
-  MAX_CVC_LENGTH: 4,
+  MAX_CVC_LENGTH: 3,
 } as const;
 
 const CVC_NUMBER_ERROR_MESSAGE = {
