@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import { CardInformationType } from "../../types/CardInformationType";
 import useCardType from "../../hooks/useCardType";
+import { CompanyType } from "../../types";
+import { CARD_COMPANY_COLORS } from "../../constants/constant";
 
 const separateCard = {
   visa: "Visa.png",
@@ -8,12 +10,12 @@ const separateCard = {
 };
 
 const PreviewCard = ({ cardInformationState }: { cardInformationState: CardInformationType }) => {
-  const { uniqueNumber, expirationDate } = cardInformationState;
+  const { uniqueNumber, expirationDate, company } = cardInformationState;
   const [MM, YY] = expirationDate;
   const cardType = useCardType(cardInformationState.uniqueNumber[0]);
 
   return (
-    <div css={previewCardStyle}>
+    <div css={previewCardStyle(company)}>
       <div css={TopStyle}>
         <div css={magneticStyle}></div>
         {cardType !== "none" && <img css={cardImageStyle} src={separateCard[cardType]} alt={cardType} />}
@@ -44,16 +46,16 @@ const PreviewCard = ({ cardInformationState }: { cardInformationState: CardInfor
 
 export default PreviewCard;
 
-const previewCardStyle = css`
+const previewCardStyle = (company: CompanyType) => css`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: #333;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   padding: 8px 12px;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  background-color: ${!company ? "#333333" : CARD_COMPANY_COLORS[company]};
 `;
 
 const TopStyle = css`

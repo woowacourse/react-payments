@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { useEffect, useRef, useState } from "react";
 import { SelectProps } from "../../types/componentPropsType";
+import { CompanyType } from "../../types";
 
 const arrow = {
   up: "upArrow.svg",
@@ -23,7 +24,7 @@ const Select = ({
   const [selected, setSelected] = useState(placeholder);
   const selectRef = useRef<HTMLDivElement>(null);
 
-  const handleSelect = (item: string) => {
+  const handleSelect = (item: CompanyType) => {
     setSelected(item);
     setIsSelect(true);
     setIsOpen(false);

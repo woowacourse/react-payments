@@ -1,3 +1,4 @@
+import { CompanyType } from ".";
 import { CardInformationType, setCardInformationType } from "./CardInformationType";
 import { useEachValidationType, useValidationType } from "./useValidationType";
 
@@ -83,7 +84,7 @@ export type TextProps = {
 
 export type SelectProps = {
   /** select 옵션에 들어갈 데이터들 */
-  options: ("BC카드" | "신한카드" | "카카오뱅크" | "현대카드" | "우리카드" | "롯데카드" | "하나카드" | "국민카드")[];
+  options: CompanyType[];
   /** select 초기에 보여질 텍스트 라벨 */
   placeholder: string;
   /** 이 필드가 담당하는 카드 정보 타입 */

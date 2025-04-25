@@ -4,7 +4,7 @@ export type ExpirationValidationType = "MM" | "YY";
 
 export type cardInformationKey = "uniqueNumber" | "expirationDate" | "cvcNumber" | "password" | "company";
 
-export type companyType = (
+export type CompanyType =
   | "BC카드"
   | "신한카드"
   | "카카오뱅크"
@@ -13,7 +13,7 @@ export type companyType = (
   | "롯데카드"
   | "하나카드"
   | "국민카드"
-)[];
+  | "";
 
 export type InputFormSectionData = {
   key: "uniqueNumber" | "expirationDate" | "cvcNumber" | "password";
@@ -37,7 +37,7 @@ export type SelectFormSectionData = {
   description: string;
   type: "select";
   fieldData: {
-    options: companyType;
+    options: CompanyType[];
     placeholder: string;
   };
 };
