@@ -10,6 +10,7 @@ import {
 } from './Card.style';
 import { useCard } from '../../context/CardContext';
 import { identifyCardType } from '../../utils/cardTypeUtils';
+import { maskCardValue } from '../../utils';
 
 function Card() {
   const { cardNumber, cardExpirationDate, cardBrandColor } = useCard();
@@ -27,6 +28,16 @@ function Card() {
   const hasCardExpirationDate =
     cardExpirationDate.month || cardExpirationDate.year;
 
+  // 카드 번호 값 처리 함수
+  const getDisplayCardValue = (
+    value: string | undefined,
+    fieldName: string
+  ) => {
+    // third와 forth 필드만 마스킹 처리
+    const shouldMask = fieldName === 'third' || fieldName === 'forth';
+    return maskCardValue(value, shouldMask);
+  };
+
   return (
     <section css={dynamicCardStyle(cardBrandColor)}>
       <div css={cardContainer}>
@@ -39,9 +50,9 @@ function Card() {
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          {Object.values(cardNumber).map((value, index) => (
+          {Object.entries(cardNumber).map(([fieldName, value], index) => (
             <span key={index} css={cardContentText}>
-              {value}
+              {getDisplayCardValue(value?.toString(), fieldName)}
             </span>
           ))}
         </div>

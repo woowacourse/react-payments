@@ -14,3 +14,12 @@ export const handleAutoFocus = (
     }
   }
 };
+
+export const maskCardValue = (
+  value: string | undefined,
+  mask: boolean
+): string => {
+  if (!value) return '';
+
+  return mask ? '*'.repeat(value.length) : value;
+};
