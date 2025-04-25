@@ -5,7 +5,7 @@ import Description from '../Description';
 
 interface CardBrandSelectProps {
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
-  onColorChange: (color: string) => void;
+  onColorChange: (color: string, brand: string) => void;
 }
 
 const CardBrandsColor = {
@@ -53,7 +53,7 @@ export const CardBrandSelect: React.FC<CardBrandSelectProps> = ({
       CardBrandsColor[selectedBrand as keyof typeof CardBrandsColor] ||
       '#000000';
 
-    onColorChange(selectedColor);
+    onColorChange(selectedColor, selectedBrand);
 
     setCardInput((prev: CardInputProps) => ({
       ...prev,

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Wrap } from './AddCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CheckMarKContainer = styled.img`
   display: flex;
@@ -37,13 +37,18 @@ const ContirmButton = styled.button`
 
 export const Confirm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { cardNumber, cardBrand } = location.state || {
+    cardNumber: '',
+    cardBrand: '',
+  };
 
   return (
     <Wrap>
       <CheckMarKContainer src="./checkmark.png" alt="check" />
       <ConfirmTextContainer>
-        <ConfirmText>5511로 시작하는</ConfirmText>
-        <ConfirmText>BC카드가 등록되었어요.</ConfirmText>
+        <ConfirmText>{cardNumber}로 시작하는</ConfirmText>
+        <ConfirmText>{cardBrand}가 등록되었어요.</ConfirmText>
       </ConfirmTextContainer>
       <ContirmButton onClick={() => navigate('/')}>확인</ContirmButton>
     </Wrap>

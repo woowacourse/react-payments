@@ -67,6 +67,7 @@ const AddCard = () => {
     CVC: null,
     secretNumber: null,
   });
+  const [selectedCardBrand, setSelectedCardBrand] = useState<string>('');
 
   const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
     first: '',
@@ -216,11 +217,12 @@ const AddCard = () => {
             <FormSection isVisible={true} ref={cardBrandRef}>
               <CardBrandSelect
                 setCardInput={setCardInput}
-                onColorChange={color => {
+                onColorChange={(color, brand) => {
                   setCardInput(prev => ({
                     ...prev,
                     cardBrand: color,
                   }));
+                  setSelectedCardBrand(brand);
                 }}
               />
             </FormSection>
@@ -237,7 +239,12 @@ const AddCard = () => {
           </FormSection>
         </Form>
       </Wrap>
-      {isFormComplete(cardInput, errorMessages) && <SubmitButton />}
+      {isFormComplete(cardInput, errorMessages) && (
+        <SubmitButton
+          cardNumber={cardInput.first}
+          cardBrand={selectedCardBrand}
+        />
+      )}
     </>
   );
 };

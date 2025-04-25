@@ -9,7 +9,7 @@ import { Confirm } from './pages/Confirm';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter basename="/react-payments">
+      <BrowserRouter basename="/react-payments/">
         <Routes>
           <Route path="/" element={<AddCard />} />
           <Route path="/confirm" element={<Confirm />} />

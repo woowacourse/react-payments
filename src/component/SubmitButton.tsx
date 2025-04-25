@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
+interface SubmitButtonProps {
+  cardNumber: number | null;
+  cardBrand: string | undefined;
+}
+
 const Button = styled.button`
   width: 100%;
   height: 52px;
@@ -11,7 +16,13 @@ const Button = styled.button`
   align-items: center;
 `;
 
-export const SubmitButton = () => {
+export const SubmitButton = ({ cardNumber, cardBrand }: SubmitButtonProps) => {
   const navigate = useNavigate();
-  return <Button onClick={() => navigate('/confirm')}>확인</Button>;
+  return (
+    <Button
+      onClick={() => navigate('/confirm', { state: { cardNumber, cardBrand } })}
+    >
+      확인
+    </Button>
+  );
 };
