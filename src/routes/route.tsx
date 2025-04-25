@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 
 import App from '@/App';
 
@@ -6,7 +6,7 @@ import { CardForm } from '@/pages/CardForm';
 import { Confirm } from '@/pages/Confirm';
 import { NotFound } from '@/pages/NotFound';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: 'card',
     element: <App />,
