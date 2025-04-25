@@ -4,7 +4,7 @@ import { Props } from '.';
 
 export const StyledFlexBox = styled.div<Props>`
   display: flex;
-  flex-direction: ${({ direction = 'column' }) => direction};
+  flex-direction: ${({ direction = 'row' }) => direction};
   justify-content: ${({ justifyContent = 'center' }) => justifyContent};
   align-items: ${({ alignItems = 'center' }) => alignItems};
   gap: ${({ gap = 0 }) => (typeof gap === 'number' ? `${gap}px` : gap)};
