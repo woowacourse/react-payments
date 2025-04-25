@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import CardPage from '../../pages/CardPage/CardPage';
-import CompletePage from '../../pages/CompletePage/CompletePage';
+import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 
 export const router = () => {
   return createBrowserRouter([
@@ -9,8 +9,8 @@ export const router = () => {
       element: <CardPage />,
     },
     {
-      path: '/complete',
-      element: <CompletePage />,
+      path: '/register',
+      element: <RegisterPage />,
     },
   ]);
 };

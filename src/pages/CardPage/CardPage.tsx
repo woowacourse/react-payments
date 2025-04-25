@@ -29,7 +29,7 @@ function CardPage() {
         <CardInfoContainer cardInfo={cardInfo} onChange={handleCardInfoChange} error={error} />
         {confirmButtonValidator({ ...cardInfo }) && (
           <CustomLinkButton
-            path='complete'
+            path='register'
             css={css`
               position: fixed;
               bottom: 0;
