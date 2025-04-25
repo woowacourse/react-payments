@@ -1,4 +1,4 @@
-import { Children, ComponentProps, ComponentPropsWithoutRef, useState } from 'react';
+import { ComponentProps, ComponentPropsWithoutRef, useState } from 'react';
 
 import {
   StyledSelectContainer,
@@ -8,6 +8,7 @@ import {
   StyledOptionsContainer,
 } from './Select.styled';
 
+import Arrow from '../../../../public/images/arrow.png';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
 
@@ -26,7 +27,7 @@ export const Select = ({ selectedOptions, children, ...props }: Props) => {
       <StyledTriggerButton>
         <Flex justifyContent="space-between">
           <Text variant="Body">{selectedOptions ?? '전체'}</Text>
-          <StyledSelectIcon isOpen={isOpen} src="/public/images/arrow.png" alt="arrow" />
+          <StyledSelectIcon isOpen={isOpen} src={Arrow} alt="arrow" />
         </Flex>
       </StyledTriggerButton>
 

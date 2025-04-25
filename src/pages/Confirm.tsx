@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import Check from '../../public/images/check.png';
 import { Button } from '@/components/common/Button';
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
@@ -37,7 +38,7 @@ export const Confirm = () => {
   return (
     <Flex width="100%" height="100dvh">
       <Flex direction="column" width="100%" gap="40px" padding="0 30px">
-        <img src="/public/images/check.png" width={80} />
+        <img src={Check} width={80} />
         <Text
           variant="Title"
           fontWeight="bold"
