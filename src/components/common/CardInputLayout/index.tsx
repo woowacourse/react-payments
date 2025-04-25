@@ -17,7 +17,7 @@ export type Props = {
   /**
    * Sets the label for the card input field.
    */
-  label: string;
+  label?: string;
 } & PropsWithChildren;
 
 export const CardInputLayout = ({ headerText, description, label, children }: Props) => {
@@ -27,6 +27,7 @@ export const CardInputLayout = ({ headerText, description, label, children }: Pr
       justifyContent="flex-start"
       alignItems="flex-start"
       width="100%"
+      flex={0}
       css={css`
         max-width: 500px;
       `}
