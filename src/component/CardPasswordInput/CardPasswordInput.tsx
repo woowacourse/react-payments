@@ -51,6 +51,7 @@ function CardPasswordInput() {
               name="password"
               maxLength={CARD_LENGTH.password}
               value={cardPassword?.toString()}
+              autoFocus
               onChange={(e) => handleCardPasswordChange(e.target.value)}
               css={hasError ? errorInputStyle : undefined}
               placeholder="앞 2자리"

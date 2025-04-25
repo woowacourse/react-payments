@@ -42,6 +42,7 @@ function CardCVCInput(props: CardCVCInputProps) {
               type="text"
               name="cvc"
               maxLength={CARD_LENGTH.cvc}
+              autoFocus
               value={cardCVC?.toString()}
               onChange={(e) => handleCardCVCChange(e.target.value)}
               css={hasError ? errorInputStyle : undefined}

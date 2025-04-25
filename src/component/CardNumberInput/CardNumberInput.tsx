@@ -64,6 +64,7 @@ function CardNumberInput(props: CardNumberInputProps) {
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.first?.toString()}
+                autoFocus
                 onChange={handleInputChange}
                 css={errorState.first ? errorInputStyle : undefined}
               />

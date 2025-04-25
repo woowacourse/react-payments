@@ -56,6 +56,7 @@ function CardPeriodInput(props: CardPeriodInputProps) {
                 type="text"
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
+                autoFocus
                 value={cardExpirationDate.month}
                 onChange={handleMonthChange}
                 css={errorState.month ? errorInputStyle : undefined}
