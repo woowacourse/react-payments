@@ -1,8 +1,8 @@
-import InputSection from "../\bInputSection/InputSection";
+import InputSection from "../../components/InputSection/InputSection";
 import { INPUT_TYPE } from "../../constants/constants";
 import { useCompletion } from "../../hooks/useCompletion";
 import { useInputError } from "../../hooks/useInputError";
-import Preview from "../Preview/Preview";
+import Preview from "../../components/Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
 import { useVisibleSteps } from "../../hooks/useVisibleSteps";
 function Payments() {
