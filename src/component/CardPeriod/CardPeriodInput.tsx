@@ -4,7 +4,6 @@ import {
   errorMessageStyle,
 } from '../../styles/@common/text.style';
 
-import { cardPeriodInputLayout } from './CardPeriodInput.style';
 import { CARD_EXPIRATION } from '../../constants';
 import {
   inputContainer,
@@ -33,6 +32,7 @@ function CardPeriodInput(props: CardPeriodInputProps) {
     onNext?.();
   }
 
+  // 월(month) 입력 핸들러
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleCardExpirationChange.month(e.target.value);
     const fieldMappings = {
@@ -42,12 +42,11 @@ function CardPeriodInput(props: CardPeriodInputProps) {
   };
 
   return (
-    <div css={cardPeriodInputLayout}>
+    <>
       <Title>
         <Title.Text>카드 유효기간을 입력해 주세요</Title.Text>
         <Title.SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</Title.SubTitle>
       </Title>
-
       <Input.Group id="card-expiration">
         <div css={inputContainer}>
           <Input.Label>유효기간</Input.Label>
@@ -83,7 +82,7 @@ function CardPeriodInput(props: CardPeriodInputProps) {
           )}
         </div>
       </Input.Group>
-    </div>
+    </>
   );
 }
 

@@ -11,7 +11,6 @@ import {
 import { Button } from '../@common/Button/Button';
 import Input from '../@common/Input/Input';
 import Title from '../@common/Title/Title';
-import { cardPasswordInputLayout } from './CardPasswordInput.style';
 import { useCallback } from 'react';
 import useEasyNavigate from '../../hooks/useEasyNavigate';
 
@@ -37,7 +36,8 @@ function CardPasswordInput() {
   const isCompleteForm = cardPassword?.length === CARD_LENGTH.password;
 
   return (
-    <div css={cardPasswordInputLayout}>
+    <>
+      {' '}
       <Title>
         <Title.Text>카드 비밀번호를 입력해 주세요</Title.Text>
         <Title.SubTitle>앞의 2자리를 입력해주세요</Title.SubTitle>
@@ -70,7 +70,7 @@ function CardPasswordInput() {
           확인
         </Button>
       )}
-    </div>
+    </>
   );
 }
 

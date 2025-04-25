@@ -3,7 +3,6 @@ import theme from '../../../styles/theme';
 
 export const dropdownContainer = css`
   position: relative;
-  padding: 3.1rem;
   width: 100%;
 `;
 
@@ -22,8 +21,8 @@ export const dropdownSelect = css`
 
 export const dropdownArrow = css`
   position: absolute;
-  right: 4rem;
-  top: 40%;
+  right: 1rem;
+  top: 25%;
   pointer-events: none;
 `;
 

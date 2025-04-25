@@ -4,8 +4,8 @@ export const cardPaymentLayout = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 20px;
+  min-height: 100vh;
 `;
 
 export const cardPaymentContentContainer = css`
@@ -14,9 +14,6 @@ export const cardPaymentContentContainer = css`
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 36rem;
   gap: 6rem;
-`;
-
-export const cardPaymentFormContainer = css`
-  width: 100%;
 `;

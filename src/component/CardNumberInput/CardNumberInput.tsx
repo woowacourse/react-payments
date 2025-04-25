@@ -3,7 +3,6 @@ import {
   errorInputStyle,
   errorMessageStyle,
 } from '../../styles/@common/text.style';
-import { cardNumberInputLayout } from './CardNumberInput.style';
 import { CARD_NUMBER } from '../../constants';
 import {
   inputContainer,
@@ -50,7 +49,7 @@ function CardNumberInput(props: CardNumberInputProps) {
   };
 
   return (
-    <div css={cardNumberInputLayout}>
+    <>
       <Title>
         <Title.Text>결제할 카드 번호를 입력해 주세요</Title.Text>
         <Title.SubTitle>본인 명의의 카드만 결제 가능합니다.</Title.SubTitle>
@@ -105,7 +104,7 @@ function CardNumberInput(props: CardNumberInputProps) {
           )}
         </div>
       </Input.Group>
-    </div>
+    </>
   );
 }
 

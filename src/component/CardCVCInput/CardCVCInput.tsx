@@ -3,7 +3,6 @@ import {
   errorInputStyle,
   errorMessageStyle,
 } from '../../styles/@common/text.style';
-import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
 import { CARD_LENGTH } from '../../constants';
 import {
   inputContainer,
@@ -31,7 +30,7 @@ function CardCVCInput(props: CardCVCInputProps) {
   }
 
   return (
-    <div css={cardPeriodInputLayout}>
+    <>
       <Title>
         <Title.Text>CVC 번호를 입력해 주세요</Title.Text>
       </Title>
@@ -53,7 +52,7 @@ function CardCVCInput(props: CardCVCInputProps) {
           )}
         </div>
       </Input.Group>
-    </div>
+    </>
   );
 }
 
