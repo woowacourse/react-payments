@@ -20,7 +20,8 @@ export type HandleInputParams = {
 const StyledCardPage = styled.div`
   width: 40%;
   min-width: 400px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  display: flex;
   height: auto;
   margin: 0 auto;
   display: flex;
@@ -28,6 +29,33 @@ const StyledCardPage = styled.div`
   gap: 10px;
   padding: 30px;
   overflow-y: auto;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
+`;
+
+const CardNumberSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const PasswordSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const CVCSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const ExpirationDateSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+const DropdownSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const CardPage = () => {
@@ -50,7 +78,12 @@ const CardPage = () => {
   };
 
   const navigateToSuccessPage = () => {
-    navigate(`/registered?cardNumber=${cardNumber[0]}&cardCompany=${cardCompany}`);
+    navigate(`/registered`, {
+      state: {
+        cardNumber: `${cardNumber[0]}`,
+        cardCompany: `${cardCompany}`,
+      },
+    });
   };
 
   useEffect(() => {
@@ -68,33 +101,54 @@ const CardPage = () => {
         expirationDate={expirationDate}
         cardCompany={cardCompany}
       />
-      <Text type="title" text={CARD_PAGE_TEXT.PASSWORD_TITLE} />
-      <Text type="subTitle" text={CARD_PAGE_TEXT.PASSWORD_SUBTITLE} />
-      <PasswordInput
-        values={password}
-        onChange={handlePasswordInput}
-        onValidChange={setPasswordValid}
-      />
-      <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
-      <CVCInput values={cvc} onChange={handleCVCInput} onValidChange={setCvcValid} />
-      <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
-      <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
-      <ExpirationDateInput
-        values={expirationDate}
-        onChange={handleExpirationDateInput}
-        onValidChange={setExpirationValid}
-      />
-      <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
-      <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
-      <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />
 
-      <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
-      <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
-      <CardNumberInput
-        values={cardNumber}
-        onChange={handleCardNumberInput}
-        onValidChange={setCardNumberValid}
-      />
+      {cardNumberValid && cardCompany !== '' && expirationValid && cvcValid && (
+        <PasswordSection>
+          <Text type="title" text={CARD_PAGE_TEXT.PASSWORD_TITLE} />
+          <Text type="subTitle" text={CARD_PAGE_TEXT.PASSWORD_SUBTITLE} />
+          <PasswordInput
+            values={password}
+            onChange={handlePasswordInput}
+            onValidChange={setPasswordValid}
+          />
+        </PasswordSection>
+      )}
+
+      {cardNumberValid && cardCompany !== '' && expirationValid && (
+        <CVCSection>
+          <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
+          <CVCInput values={cvc} onChange={handleCVCInput} onValidChange={setCvcValid} />
+        </CVCSection>
+      )}
+
+      {cardNumberValid && cardCompany !== '' && (
+        <ExpirationDateSection>
+          <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
+          <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
+          <ExpirationDateInput
+            values={expirationDate}
+            onChange={handleExpirationDateInput}
+            onValidChange={setExpirationValid}
+          />
+        </ExpirationDateSection>
+      )}
+
+      {cardNumberValid && (
+        <DropdownSection>
+          <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
+          <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
+          <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />
+        </DropdownSection>
+      )}
+      <CardNumberSection>
+        <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
+        <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
+        <CardNumberInput
+          values={cardNumber}
+          onChange={handleCardNumberInput}
+          onValidChange={setCardNumberValid}
+        />
+      </CardNumberSection>
       {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK} onClick={navigateToSuccessPage}></Button>}
     </StyledCardPage>
   );

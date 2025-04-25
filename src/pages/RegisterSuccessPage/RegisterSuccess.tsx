@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 
@@ -32,21 +32,21 @@ const StyledTextWrapper = styled.div`
 `;
 
 const RegisterSuccess = () => {
-  const [searchParams] = useSearchParams();
-  const cardFirstNumbers = searchParams.get('cardNumber');
-  const cardCompany = searchParams.get('cardCompany');
-
   const navigate = useNavigate();
 
   const navigateToCardPage = () => {
     navigate(`/`);
   };
 
+  const location = useLocation();
+  const cardNumber = location.state.cardNumber;
+  const cardCompany = location.state.cardCompany;
+
   return (
     <StyledPage>
       <StyledImage src="./success.png"></StyledImage>
       <StyledTextWrapper>
-        <Text type="title" text={`${cardFirstNumbers}로 시작하는`}></Text>
+        <Text type="title" text={`${cardNumber}로 시작하는`}></Text>
         <Text type="title" text={`${cardCompany}가 등록되었어요.`}></Text>
       </StyledTextWrapper>
       <Button text="확인" onClick={navigateToCardPage}></Button>
