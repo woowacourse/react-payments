@@ -10,7 +10,7 @@ import Success from "./pages/Success/Success";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename="/react-payments">
         <CardProvider>
           <Routes>
             <Route path="/" element={<Payments />} />
