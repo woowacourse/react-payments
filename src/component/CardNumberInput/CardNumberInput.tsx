@@ -41,9 +41,9 @@ function CardNumberInput(props: CardNumberInputProps) {
     handleCardNumberChange(e);
 
     const fieldMappings = {
-      second: 'second',
-      third: 'third',
-      fourth: 'forth',
+      first: 'second',
+      second: 'third',
+      third: 'forth',
     };
 
     handleAutoFocus(e, CARD_NUMBER.maxLength, fieldMappings);
