@@ -25,7 +25,7 @@ import {
   isFormComplete,
 } from '../validation/validationCardCompleting';
 
-const Wrap = styled.div`
+export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +86,6 @@ const AddCard = () => {
   const expiryDateRef = useRef<HTMLDivElement>(null);
   const cvcRef = useRef<HTMLDivElement>(null);
 
-  // 순서 변경에 따른 visibleSteps 초기 상태 유지
   const [visibleSteps, setVisibleSteps] = useState({
     cardNumber: true,
     cardBrand: false,
@@ -180,7 +179,6 @@ const AddCard = () => {
           cardColor={cardInput.cardBrand}
         />
         <Form>
-          {/* 비밀번호 (맨 위) - 마지막 단계 */}
           {visibleSteps.secretNumber && (
             <FormSection isVisible={true} ref={secretNumberRef}>
               <SecretNumberInput
