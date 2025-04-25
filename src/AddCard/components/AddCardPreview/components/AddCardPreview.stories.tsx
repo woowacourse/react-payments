@@ -4,7 +4,7 @@ import { INITIAL_EXPIRE_DATE_STATE } from "../../AddCardForm/components/ExpireDa
 import { INITIAL_CARD_NUMBER_STATE } from "../../AddCardForm/components/CardNumber/constants";
 
 const meta = {
-  title: "Component/Preview/AddCardPreview",
+  title: "Components/Preview/AddCardPreview",
   component: AddCardPreview,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,

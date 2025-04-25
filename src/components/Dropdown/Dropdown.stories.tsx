@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Dropdown from "./Dropdown";
 
 const meta = {
-  title: "Component/Dropdown",
+  title: "Components/Dropdown",
   component: Dropdown,
   args: {
     placeholder: "개노잼 노라라",

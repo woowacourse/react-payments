@@ -4,7 +4,7 @@ import { expect, userEvent } from "@storybook/test";
 import CVCInputs from "./CVCInputs";
 
 const meta = {
-  title: "Component/AddCard/CVCInput",
+  title: "Components/AddCard/CVCInput",
   component: CVCInputs,
   tags: ["autodocs"],
   args: {

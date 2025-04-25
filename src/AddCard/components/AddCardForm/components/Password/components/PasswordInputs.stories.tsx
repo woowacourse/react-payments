@@ -5,7 +5,7 @@ import PasswordInputs from "./PasswordInputs";
 import useControlledPassword from "../hooks/useControlledPassword";
 
 const meta = {
-  title: "Component/AddCard/PasswordsInput",
+  title: "Components/AddCard/PasswordsInput",
   component: PasswordInputs,
   tags: ["autodocs"],
   args: {

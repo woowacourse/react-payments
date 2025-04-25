@@ -3,7 +3,7 @@ import Button from "./Button";
 
 // 메타데이터 정의
 const meta = {
-  title: "Component/Button",
+  title: "Components/Button",
   component: Button,
   parameters: {
     layout: "centered",

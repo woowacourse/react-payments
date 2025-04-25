@@ -5,7 +5,7 @@ import useControlledCardNumber from "../../hooks/useControlledCardNumber";
 import { userEvent, expect } from "@storybook/test";
 
 const meta = {
-  title: "Component/AddCard/CardNumberInputs",
+  title: "Components/AddCard/CardNumberInputs",
   component: CardNumberInputs,
   args: {
     cardNumberState: INITIAL_CARD_NUMBER_STATE,
