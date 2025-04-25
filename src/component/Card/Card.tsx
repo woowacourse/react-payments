@@ -28,12 +28,10 @@ function Card() {
   const hasCardExpirationDate =
     cardExpirationDate.month || cardExpirationDate.year;
 
-  // 카드 번호 값 처리 함수
   const getDisplayCardValue = (
     value: string | undefined,
     fieldName: string
   ) => {
-    // third와 forth 필드만 마스킹 처리
     const shouldMask = fieldName === 'third' || fieldName === 'forth';
     return maskCardValue(value, shouldMask);
   };
