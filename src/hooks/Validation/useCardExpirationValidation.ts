@@ -10,7 +10,7 @@ function useCardExpirationValidation(cardInfo: CardInfo, maxLength: number) {
   const isValidMonth = Number(month) >= 1 && Number(month) <= 12;
   const isValidYear = isOverThanToday(Number(month), Number(year));
 
-  const isError = [
+  const isCardExpirationError = [
     !isZeroOrExactLength(month, maxLength) || (month !== '' && !isValidMonth),
     !isZeroOrExactLength(year, maxLength) || (month !== '' && year !== '' && !isValidYear),
   ];
@@ -34,7 +34,7 @@ function useCardExpirationValidation(cardInfo: CardInfo, maxLength: number) {
     setErrorText('');
   }, [month, year]);
 
-  return { isError, errorText };
+  return { isCardExpirationError, errorText };
 }
 
 export default useCardExpirationValidation;

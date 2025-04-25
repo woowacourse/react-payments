@@ -4,16 +4,16 @@ import isZeroOrExactLength from '../../utils/isExactLength';
 
 function useCardPasswordValidation(cardInfo: CardInfo, maxLength: number) {
   const [errorText, setErrorText] = useState('');
-  let isError = false;
+  let isCardPasswordError = false;
 
-  if (!isZeroOrExactLength(cardInfo.passwordFront, maxLength)) isError = true;
+  if (!isZeroOrExactLength(cardInfo.passwordFront, maxLength)) isCardPasswordError = true;
 
   useEffect(() => {
-    if (isError) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
+    if (isCardPasswordError) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
   }, [cardInfo.passwordFront]);
 
-  return { isError, errorText };
+  return { isCardPasswordError, errorText };
 }
 
 export default useCardPasswordValidation;

@@ -18,7 +18,7 @@ interface CardExpirationFormProps {
 }
 
 function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirationFormProps) {
-  const { isError, errorText } = useCardExpirationValidation(cardInfo, maxLength);
+  const { isCardExpirationError, errorText } = useCardExpirationValidation(cardInfo, maxLength);
 
   const InputInfo = [
     {
@@ -44,7 +44,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
             setValue={inputInfo.setValue}
             maxLength={maxLength}
             placeholder={inputInfo.placeholder}
-            isError={isError[index]}
+            isError={isCardExpirationError[index]}
           />
         ))}
       </NumberInputContainer>

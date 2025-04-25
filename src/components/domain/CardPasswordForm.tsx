@@ -14,7 +14,7 @@ interface CardPasswordProps {
 }
 
 function CardPasswordForm({ cardInfo, handleCardInfo, maxLength }: CardPasswordProps) {
-  const { isError, errorText } = useCardPasswordValidation(cardInfo, maxLength);
+  const { isCardPasswordError, errorText } = useCardPasswordValidation(cardInfo, maxLength);
 
   return (
     <NumberInputForm>
@@ -28,7 +28,7 @@ function CardPasswordForm({ cardInfo, handleCardInfo, maxLength }: CardPasswordP
           maxLength={maxLength}
           placeholder="**"
           isHidden={true}
-          isError={isError}
+          isError={isCardPasswordError}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>

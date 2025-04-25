@@ -18,9 +18,11 @@ import {
 import { CARD_COMPANY_NAMES, CARD_INFO_LENGTH, ROUTER_PATH } from '../constants/setting';
 import useCardInfo from '../hooks/useCardInfoState';
 import { useNavigate } from 'react-router-dom';
+import useCardInfoValidation from '../hooks/useCardInfoValidation';
 
 function RegisterCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
+  const isCardInfoError = useCardInfoValidation(cardInfo);
   const navigate = useNavigate();
 
   return (
@@ -68,10 +70,12 @@ function RegisterCardPage() {
           maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
         />
       </S.FormContainer>
-      <BottomButton
-        label={CONFIRM_BUTTON_LABEL}
-        onClick={() => navigate(ROUTER_PATH.COMPLETE, { state: { cardInfo } })}
-      />
+      {!isCardInfoError && (
+        <BottomButton
+          label={CONFIRM_BUTTON_LABEL}
+          onClick={() => navigate(ROUTER_PATH.COMPLETE, { state: { cardInfo } })}
+        />
+      )}
     </>
   );
 }

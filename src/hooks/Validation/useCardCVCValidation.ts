@@ -4,16 +4,16 @@ import isZeroOrExactLength from '../../utils/isExactLength';
 
 function useCardCVCValidation(cardInfo: CardInfo, maxLength: number) {
   const [errorText, setErrorText] = useState('');
-  let isError = false;
+  let isCardCVCError = false;
 
-  if (!isZeroOrExactLength(cardInfo.cvc, maxLength)) isError = true;
+  if (!isZeroOrExactLength(cardInfo.cvc, maxLength)) isCardCVCError = true;
 
   useEffect(() => {
-    if (isError) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
+    if (isCardCVCError) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
     else setErrorText('');
   }, [cardInfo.cvc]);
 
-  return { isError, errorText };
+  return { isCardCVCError, errorText };
 }
 
 export default useCardCVCValidation;
