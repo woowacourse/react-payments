@@ -9,16 +9,16 @@ import { Flex } from '@/components/common/Flex';
 
 export type Props = {
   /**
-   * Sets the button type
+   * Disables the submit button when true.
    * @default true
    */
   disabled?: boolean;
   /**
-   * Sets the button type
+   * Callback function invoked when the form is submitted.
    */
   onSubmit: () => void;
   /**
-   * Sets the button type
+   * Form content to be rendered inside the layout.
    */
   children: ReactNode;
 } & ComponentProps<'form'>;
