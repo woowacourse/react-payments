@@ -16,23 +16,12 @@ const useControlledCardNumber = () => {
       }
 
       const numeric = Number(value);
-
-      if (isNumericNaN(numeric)) {
-        setCardNumberState((prev) => ({
-          ...prev,
-          [key]: {
-            ...prev[key],
-            errorMessage: validateCardNumber(value),
-          },
-        }));
-        return;
-      }
-
+      const errorMessage = validateCardNumber(value);
       setCardNumberState((prev) => ({
         ...prev,
         [key]: {
-          value,
-          errorMessage: validateCardNumber(value),
+          value: isNumericNaN(numeric) ? prev[key].value : value,
+          errorMessage,
         },
       }));
     },
