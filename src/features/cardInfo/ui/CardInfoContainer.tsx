@@ -7,14 +7,7 @@ import CardSelection from './CardSelection';
 import CardPasswordSection from './CardPasswordSection';
 import { cardCVCValidator, cardExpirationDateValidator, cardNumberValidator } from '../validation/cardInfoValidator';
 import { NO_ERROR } from '../../../shared/constants/errorConstants';
-
-const CardInfoWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 45px 0;
-`;
+import * as S from './CardInfoContainer.styles';
 
 export default function CardInfoContainer({
   cardInfo,
@@ -26,16 +19,26 @@ export default function CardInfoContainer({
   error: ErrorProps;
 }) {
   return (
-    <CardInfoWrapper>
-      {cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR && <CardPasswordSection error={error} onChange={onChange} />}
-      {cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR && (
+    <S.CardInfoWrapper>
+      <S.AnimatedSection className={cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR ? 'visible' : ''}>
+        <CardPasswordSection error={error} onChange={onChange} />
+      </S.AnimatedSection>
+
+      <S.AnimatedSection
+        className={cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR ? 'visible' : ''}
+      >
         <CardCVCSection error={error} onChange={onChange} />
-      )}
-      {cardInfo.cardIssuer !== '' && <CardExpirationDateSection error={error} onChange={onChange} />}
-      {cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR && (
+      </S.AnimatedSection>
+
+      <S.AnimatedSection className={cardInfo.cardIssuer !== '' ? 'visible' : ''}>
+        <CardExpirationDateSection error={error} onChange={onChange} />
+      </S.AnimatedSection>
+
+      <S.AnimatedSection className={cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR ? 'visible' : ''}>
         <CardSelection cardIssuer={cardInfo.cardIssuer} error={error} onChange={onChange} />
-      )}
+      </S.AnimatedSection>
+
       <CardNumberSection error={error} onChange={onChange} />
-    </CardInfoWrapper>
+    </S.CardInfoWrapper>
   );
 }
