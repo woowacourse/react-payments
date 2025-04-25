@@ -1,4 +1,8 @@
-import { CardNumberPosition, ExpirationPeriod } from "../../types/index.types";
+import {
+  CardNumberPosition,
+  CardTypeList,
+  ExpirationPeriod,
+} from "../../types/index.types";
 import CardNumberSection from "../cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../cardCVCNumberSection/CardCVCNumberSection";
@@ -42,7 +46,7 @@ type CardInfoFormProps = {
     isFullFilled: () => boolean;
   };
   cardType: {
-    values: { cardType: string };
+    values: { cardType: keyof CardTypeList | "" };
     changeValues: (type: "cardType", cardType: string) => void;
     isFullFilled: () => boolean;
   };
@@ -131,7 +135,12 @@ export default function CardInfoForm({
           cardNumberError={cardNumberError}
         />
       )}
-      {canSubmit && <CardSubmitButton />}
+      {canSubmit && (
+        <CardSubmitButton
+          cardType={cardType.values.cardType}
+          firstCardNumber={cardNumber.values.first}
+        />
+      )}
     </StyledForm>
   );
 }

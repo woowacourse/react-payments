@@ -65,10 +65,12 @@ export const StyledCardNumberWrap = styled.div`
 `;
 export const StyledCardNumber = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
   font-size: 25px;
   font-weight: 500;
   text-align: left;
-  letter-spacing: 16%;
+  letter-spacing: 5px;
   color: #ffffff;
 `;
 
