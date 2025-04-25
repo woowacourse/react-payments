@@ -51,8 +51,8 @@ export default function HomePage() {
           inputRefs={cardInputRefs}
           getCardNumberErrorMessage={getCardNumberErrorMessage}
         />
+        {buttonVisible && <Button>확인</Button>}
       </form>
-      {buttonVisible && <Button>확인</Button>}
     </div>
   );
 }
