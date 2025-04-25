@@ -90,7 +90,14 @@ const CardRegisterPage = () => {
           onComplete={() => setIsCardNumbersFilled(true)}
         />
 
-        {isAllValid && <SubmitButton>확인</SubmitButton>}
+        {isAllValid && (
+          <SubmitButton
+            cardFirstPartNumbers={cardNumbers.first}
+            cardBrandName={selectedBrand}
+          >
+            확인
+          </SubmitButton>
+        )}
       </CardRegisterForm>
     </Main>
   );
