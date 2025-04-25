@@ -6,7 +6,7 @@ import { isNumber } from '../utils/isNumber';
 const useExpiration = () => {
   const [expiration, setExpiration] = useState<ExpirationType>(INITIAL_EXPIRATION);
 
-  const inputRef = {
+  const expirationRef = {
     month: useRef<HTMLInputElement>(null),
     year: useRef<HTMLInputElement>(null)
   };
@@ -15,7 +15,7 @@ const useExpiration = () => {
     const errorMessage = getErrorMessage(field, value);
 
     if (field === 'month' && value.length === EXPIRATION_RULES.MONTH_LENGTH) {
-      inputRef.year.current?.focus();
+      expirationRef.year.current?.focus();
     }
 
     if (!isNumber(value) && value !== '') {
@@ -28,7 +28,7 @@ const useExpiration = () => {
     }));
   };
 
-  return { expiration, handleExpirationChange, inputRef };
+  return { expiration, handleExpirationChange, expirationRef };
 };
 
 const getErrorMessage = (field: 'month' | 'year', value: string) => {

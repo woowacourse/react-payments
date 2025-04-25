@@ -1,14 +1,13 @@
-import { ChangeEvent } from 'react';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './PasswordSection.module.css';
 
-type Props = {
+export type PasswordSectionProps = {
   password: { value: string; errorMessage: string };
   handlePasswordChange: (value: string) => void;
 };
 
-export default function PasswordSection({ password, handlePasswordChange }: Props) {
+export default function PasswordSection({ password, handlePasswordChange }: PasswordSectionProps) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

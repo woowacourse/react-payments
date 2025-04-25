@@ -1,9 +1,10 @@
 import { CARD_BRANDS } from '../../constants';
 import { CardNumberType, ExpirationType } from '../../types';
-import styles from './Card.module.css';
+import Dot from '../Dot/Dot';
+import styles from './CardPreview.module.css';
 
-export default function Card({ company, numbers, expiration }: { company: string; numbers: CardNumberType; expiration: ExpirationType }) {
-  const cardLogo = getCardBrand(numbers.first.value);
+export default function CardPreview({ company, cardNumbers, expiration }: { company: string; cardNumbers: CardNumberType; expiration: ExpirationType }) {
+  const cardLogo = getCardBrand(cardNumbers.first.value);
   return (
     <div className={`${styles.card} ${styles[getCardColorClass(company)]}`}>
       <div className={styles.chipWrapper}>
@@ -13,13 +14,13 @@ export default function Card({ company, numbers, expiration }: { company: string
       </div>
       <div className={styles.numberWrapper}>
         <div className={styles.cardNumberWrapper}>
-          {[numbers.first, numbers.second].map(({ value }, index) => (
+          {[cardNumbers.first, cardNumbers.second].map(({ value }, index) => (
             <p className={styles.cardNumber} key={index}>
               {value}
             </p>
           ))}
 
-          {[numbers.third, numbers.fourth].map(({ value }, i) => (
+          {[cardNumbers.third, cardNumbers.fourth].map(({ value }, i) => (
             <div key={i} className={styles.dotWrapper}>
               {Array.from({ length: value.length }).map((_, j) => (
                 <Dot key={j} />
@@ -35,10 +36,6 @@ export default function Card({ company, numbers, expiration }: { company: string
       </div>
     </div>
   );
-}
-
-function Dot() {
-  return <div className={styles.dot} />;
 }
 
 export function getCardColorClass(company: string) {

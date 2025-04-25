@@ -7,7 +7,7 @@ const isValidCardNumberLength = (value: string) => value.length === 0 || value.l
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
-  const inputRefs = {
+  const cardInputRefs = {
     first: useRef<HTMLInputElement>(null),
     second: useRef<HTMLInputElement>(null),
     third: useRef<HTMLInputElement>(null),
@@ -31,9 +31,9 @@ const useCardNumbers = () => {
   };
 
   const handleFocusMove = (field: keyof CardNumberType) => {
-    const keys = Object.keys(inputRefs);
-    const nextKey = keys[keys.indexOf(field) + 1] as keyof typeof inputRefs;
-    inputRefs[nextKey].current!.focus();
+    const keys = Object.keys(cardInputRefs);
+    const nextKey = keys[keys.indexOf(field) + 1] as keyof typeof cardInputRefs;
+    cardInputRefs[nextKey].current!.focus();
   };
 
   const getCardNumberErrorMessage = (cardNumbers: CardNumberType) => {
@@ -46,7 +46,7 @@ const useCardNumbers = () => {
     return '';
   };
 
-  return { inputRefs, handleCardNumberChange, cardNumbers, getCardNumberErrorMessage };
+  return { cardInputRefs, handleCardNumberChange, cardNumbers, getCardNumberErrorMessage };
 };
 
 export default useCardNumbers;
