@@ -17,7 +17,7 @@ export const StyledInputContainer = styled.input<Pick<Props, 'isValid'>>`
   ${({ isValid }) => 'border-color : ' + (isValid ? `${colors.GY1}` : `${colors.red}`)};
 
   &:focus {
-    border-color: black;
+    ${({ isValid }) => 'border-color : ' + (isValid ? `${colors.black}` : `${colors.red}`)};
   }
 
   &:disabled {
