@@ -2,18 +2,17 @@ import styles from "./PreviewCardLayout.module.css";
 import PreviewCardLogo from "./PreviewCardLogo";
 import PreviewCardNumber from "./PreviewCardNumber";
 import type { CardKey, ExpirationKey } from "../../types/cardKeyTypes";
+import { getCardType } from "../../utils/getCardType";
 
 interface PreviewCardLayoutProps {
   cardBrand: string;
   cardNumbers: Record<CardKey, string>;
   cardExpirationDate: Record<ExpirationKey, string>;
-  cardType: string;
 }
 
 export default function PreviewCardLayout({
   cardBrand,
   cardNumbers,
-  cardType,
   cardExpirationDate,
 }: PreviewCardLayoutProps) {
   return (
@@ -21,7 +20,7 @@ export default function PreviewCardLayout({
       className={`${styles["card-layout"]} ${getCardBrandClassName(cardBrand)}`}
     >
       <div className={styles["card-chip"]}></div>
-      <PreviewCardLogo cardType={cardType} />
+      <PreviewCardLogo cardType={getCardType(cardNumbers.FIRST)} />
       <PreviewCardNumber
         cardNumbers={cardNumbers}
         cardExpirationDate={cardExpirationDate}

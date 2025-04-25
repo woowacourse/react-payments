@@ -15,7 +15,7 @@ import useCardPassword from "../../hooks/useCardPassword";
 import useStep from "../../hooks/useStep";
 
 export default function CardFormPage() {
-  const { cardNumbers, cardType, cardNumbersError, onCardNumberChange } =
+  const { cardNumbers, cardNumbersError, onCardNumberChange } =
     useCardNumbersInput();
   const {
     cardExpirationDate,
@@ -44,7 +44,6 @@ export default function CardFormPage() {
       <PreviewCardLayout
         cardBrand={cardBrand}
         cardNumbers={cardNumbers}
-        cardType={cardType}
         cardExpirationDate={cardExpirationDate}
       />
       <div className={styles["card-form"]}>

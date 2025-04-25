@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { isNumber, isUnderMaxLength } from "../validation/validate";
-import { getCardType } from "../utils/getCardType";
 import { indexToCardNumberKey } from "../utils/indexToCardNumberKey";
 import type { CardKey } from "../types/cardKeyTypes";
 import { useError } from "./useError";
@@ -33,7 +32,6 @@ export default function useCardNumbersInput() {
   const [cardNumbers, setCardNumbers] = useState(CARD_NUMBERS);
   const { error: cardNumbersError, setErrorMessage } =
     useError<CardKey>(CARD_NUMBERS_ERROR);
-  const [cardType, setCardType] = useState("default");
 
   const validateCardNumbers = (value: string, key: CardKey) => {
     if (
@@ -65,15 +63,7 @@ export default function useCardNumbersInput() {
 
     const newCardNumbers = { ...cardNumbers, [key]: trimmedValue };
     setCardNumbers(newCardNumbers);
-
-    if (key === "FIRST") {
-      setCardType(
-        getCardType(
-          Number(value.slice(0, CARD_NUMBER_LIMIT.CARD_TYPE_MAX_LENGTH))
-        )
-      );
-    }
   };
 
-  return { cardNumbers, cardType, cardNumbersError, onCardNumberChange };
+  return { cardNumbers, cardNumbersError, onCardNumberChange };
 }
