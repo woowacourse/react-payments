@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import Announcement from '../components/common/Announcement';
+import Title from '../components/common/Title';
 import DropdownInput from '../components/common/DropdownInput';
 import BottomButton from '../components/domain/BottomButton';
 import Card from '../components/domain/Card';
@@ -36,32 +36,32 @@ function RegisterCardPage() {
         expiration={{ month: cardInfo.expiration.month, year: cardInfo.expiration.year }}
       />
       <S.FormContainer>
-        <Announcement main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
+        <Title main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
         <CardNumberForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
-        <Announcement main={CARD_COMPANY_MESSAGE.MAIN} caption={CARD_COMPANY_MESSAGE.CAPTION} />
+        <Title main={CARD_COMPANY_MESSAGE.MAIN} caption={CARD_COMPANY_MESSAGE.CAPTION} />
         <DropdownInput
           value={cardInfo.company}
           setValue={(value) => handleCardInfo('company', value)}
           options={CARD_COMPANY_NAMES}
           placeholder={CARD_COMPANY_MESSAGE.PLACEHOLDER}
         />
-        <Announcement main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
+        <Title main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
         <CardExpirationForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.EXPIRATION}
         />
-        <Announcement main={CVC_MESSAGE.MAIN} />
+        <Title main={CVC_MESSAGE.MAIN} />
         <CardCVCForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.CVC}
         />
-        <Announcement main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
+        <Title main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
         <CardPasswordForm
           cardInfo={cardInfo}
           handleCardInfo={handleCardInfo}

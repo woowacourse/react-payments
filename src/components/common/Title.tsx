@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-interface AnnouncementProps {
+interface TitleProps {
   main: string;
   caption?: string;
 }
 
-function Announcement({ main, caption }: AnnouncementProps) {
+function Title({ main, caption }: TitleProps) {
   return (
     <S.AnnouncementContainer>
       <S.MainTitle>{main}</S.MainTitle>
@@ -14,7 +14,7 @@ function Announcement({ main, caption }: AnnouncementProps) {
   );
 }
 
-export default Announcement;
+export default Title;
 
 const S = {
   AnnouncementContainer: styled.div`
