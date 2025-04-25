@@ -56,6 +56,17 @@ function App() {
     return filteredErrorMessageList[0];
   };
 
+  const canSubmit =
+    selectedCard !== null &&
+    cardNumber.every((value) => value !== '') &&
+    Object.values(cardValidityPeriod).every((value) => value !== '') &&
+    cardCVC !== '' &&
+    cardPassword !== '' &&
+    !getErrorMessageFromList(cardNumberErrorMessage) &&
+    !getErrorMessageFromList(Object.values(cardValidityPeriodErrorMessage)) &&
+    !cardCVCErrorMessage &&
+    !cardPasswordErrorMessage;
+
   return (
     <AppLayout>
       <CardPreview
@@ -126,6 +137,7 @@ function App() {
             onChange={onChangeCardPassword}
           />
         </CardInputSection>
+        {canSubmit && <CardFormButton>확인</CardFormButton>}
       </CardForm>
     </AppLayout>
   );
@@ -148,4 +160,19 @@ const CardForm = styled.form`
   flex-direction: column;
   gap: 38px;
   margin-top: 45px;
+`;
+
+const CardFormButton = styled.button`
+  width: 100%;
+  height: 50px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+
+  transition: background-color 0.3s ease-in-out;
+
+  cursor: pointer;
+  &:hover {
+    background-color: #18529a80;
+  }
 `;
