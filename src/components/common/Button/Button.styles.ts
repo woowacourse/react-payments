@@ -26,6 +26,7 @@ export const Button = styled.button<ButtonProps>`
     transform: translateX(-50%);
     border-radius: 0;
     max-width: 480px;
+    z-index: 1;
   `}
 
   &:hover {

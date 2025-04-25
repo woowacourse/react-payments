@@ -5,6 +5,7 @@ export { default as Spacing } from './common/Spacing/Spacing';
 export { default as ErrorMessage } from './common/ErrorMessage/ErrorMessage';
 export { default as Button } from './common/Button/Button';
 export { default as If } from './common/If/If';
+export { default as Select } from './common/Select/Select';
 
 export { default as CardNumber } from './CardNumber/CardNumber';
 export { default as CardExpirationDate } from './CardExpirationDate/CardExpirationDate';
@@ -12,4 +13,5 @@ export { default as CardCVCNumber } from './CardCVCNumber/CardCVCNumber';
 export { default as CardPreview } from './CardPreview/CardPreview';
 export { default as CardCompany } from './CardCompany/CardCompany';
 export { default as CardPassword } from './CardPassword/CardPassword';
-export { default as Select } from './Select/Select';
+
+export * from './common/icons';

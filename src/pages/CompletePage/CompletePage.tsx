@@ -1,6 +1,5 @@
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import Button from '@/components/common/Button/Button';
-import CheckIcon from '@/components/icons/CheckIcon';
+import { Button, CheckIcon } from '@/components';
 import * as S from './CompletePage.styles';
 
 interface LocationState {

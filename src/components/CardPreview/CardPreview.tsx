@@ -1,10 +1,9 @@
-import { getCardType } from '@/App/utils';
 import { CARD_COMPANIES, MASKING } from '@/constants';
 import { CardCompanyType, CardCVCNumberInputType, CardExpirationDateInputType, CardNumberInputType } from '@/types';
 import { useTheme } from '@emotion/react';
-import MasterCard from '../icons/MasterCard';
-import VisaCard from '../icons/VisaCard';
 import * as S from './CardPreview.styles';
+import { getCardType } from '@/app/utils';
+import { MasterCard, VisaCard } from '../common/icons';
 
 interface CardPreviewProps {
   cardNumber: CardNumberInputType;
