@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 interface SelectorProps<T extends string> {
-  dropDownOptions: Record<string, T>;
+  dropDownOptions: T[];
   placeholder: string;
   onSelectChange: (value: T) => void;
 }
@@ -12,23 +12,15 @@ function Selector<T extends string>({
   placeholder,
   onSelectChange,
 }: SelectorProps<T>) {
-  type OptionKey = keyof typeof dropDownOptions;
-
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<T | string>(placeholder);
 
   const handleSelectedOption = (e: React.MouseEvent<HTMLUListElement>) => {
     const targetId = (e.target as HTMLDivElement).id;
-    const selectedTarget = dropDownOptions[targetId as OptionKey];
-    setSelectedValue(selectedTarget);
+    setSelectedValue(targetId as T);
     setIsOpen(false);
-    onSelectChange(selectedTarget as T);
+    onSelectChange(targetId as T);
   };
-
-  const optionsArray = Object.entries(dropDownOptions).map(([key, label]) => ({
-    value: key,
-    label,
-  }));
 
   return (
     <SelectorContainer>
@@ -44,8 +36,8 @@ function Selector<T extends string>({
       />
       {isOpen && (
         <DropDownContainer onClick={(e) => handleSelectedOption(e)}>
-          {optionsArray.map((issuer) => (
-            <DropDownOptions id={issuer.value}>{issuer.label}</DropDownOptions>
+          {dropDownOptions.map((option) => (
+            <DropDownOptions id={option}>{option}</DropDownOptions>
           ))}
         </DropDownContainer>
       )}
