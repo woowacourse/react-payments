@@ -3,5 +3,6 @@
   width: 100%;
   color: var(--color-white);
   font-weight: 700;
-  padding: 20px;
+  padding: 8px;
+  border-radius: 5px;
 }

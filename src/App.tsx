@@ -8,7 +8,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="complete" element={<CompletePage />} />
+        <Route path="/complete" element={<CompletePage />} />
       </Route>
     </Routes>
   );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import styles from './HomePage.module.css';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from '../../components/CardExpirationSection/CardExpirationSection';
@@ -13,6 +13,7 @@ import usePassword from '../../hooks/usePassword';
 import Spacing from '../../components/Spacing/Spacing';
 import { CardNumberType, CvcType, ExpirationType, PasswordType } from '../../types';
 import Button from '../../components/Button/Button';
+import { useNavigate } from 'react-router';
 
 export default function HomePage() {
   const [company, setCompany] = useState<string>('');
@@ -27,8 +28,20 @@ export default function HomePage() {
   const { password, handlePasswordChange } = usePassword();
 
   const buttonVisible = isButtonVisible({ cardNumbers, expiration, cvc, password, company });
+
+  const navigate = useNavigate();
+
+  const handleGoCompletePage = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate('/complete', {
+      state: {
+        firstCardNumber: cardNumbers.first.value,
+        company
+      }
+    });
+  };
   return (
-    <div className={styles.wrapper}>
+    <form className={styles.wrapper} onSubmit={(e) => handleGoCompletePage(e)}>
       <Card numbers={cardNumbers} company={company} expiration={expiration} />
       <Spacing size={45} />
       <div className={styles.inputSectionWrapper}>
@@ -44,9 +57,10 @@ export default function HomePage() {
         />
       </div>
       <Button>확인</Button>
-    </div>
+    </form>
   );
 }
+
 const isButtonVisible = ({
   cardNumbers,
   expiration,
