@@ -1,13 +1,12 @@
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import BaseInputField from '../../BaseInputField/BaseInputField';
-import Input from '../../../ui/Input/Input';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
 import {
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import Input from '../../../ui/Input/Input';
+import BaseInputField from '../../BaseInputField/BaseInputField';
 
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;
