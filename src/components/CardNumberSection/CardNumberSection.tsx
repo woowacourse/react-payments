@@ -1,6 +1,5 @@
 import styles from './CardNumberSection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
-import { useEffect } from 'react';
 import { CardNumber } from '../../types/card';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 
@@ -8,15 +7,9 @@ type Props = {
   cardNumbers: CardNumber;
   handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
   cardNumberError: string;
-  handleNumberChange: (cardNumbers: CardNumber) => void;
 };
 
-export default function CardNumberSection({
-  cardNumbers,
-  handleCardNumberChange,
-  cardNumberError,
-  handleNumberChange
-}: Props) {
+export default function CardNumberSection({ cardNumbers, handleCardNumberChange, cardNumberError }: Props) {
   const hasAnyInput = Object.values(cardNumbers).some((value) => value.length > 0);
 
   const isEachTouched = {
@@ -33,15 +26,8 @@ export default function CardNumberSection({
     fourth: !isEachTouched.fourth || (cardNumbers.fourth.length === 4 && /^[0-9]+$/.test(cardNumbers.fourth))
   };
 
-  useEffect(() => {
-    handleNumberChange(cardNumbers);
-  }, [cardNumbers, handleNumberChange]);
-
   const handleKeyChange = (key: keyof CardNumber, value: string) => {
     handleCardNumberChange(key, value);
-    if (key === 'first') {
-      handleNumberChange({ ...cardNumbers, [key]: value });
-    }
   };
 
   return (
