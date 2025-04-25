@@ -15,9 +15,9 @@ function CheckIcon({ fill = "#333333" }: CheckIconProps) {
       <path
         d="M23 34.0377L35.0471 48L55 28"
         stroke="white"
-        stroke-width="7.49999"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="7.49999"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
