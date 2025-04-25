@@ -14,8 +14,8 @@ const ProgressBar = ({
   allValid,
   stepLabels,
 }: ProgressBarProps) => {
-  const currentStepNumber = STEP_ORDER_INDEX[currentStep] || 1;
-  const showError = currentStep === "COMPLETE" && allValid === false;
+  const currentStepNumber = STEP_ORDER_INDEX[currentStep] ?? 1;
+  const showValidationError = currentStep === "COMPLETE" && !allValid;
 
   return (
     <div className={styles.progressBarContainer}>
@@ -29,9 +29,14 @@ const ProgressBar = ({
               className={clsx(
                 styles.step,
                 stepNumber <= currentStepNumber && styles.active,
-                showError && styles.error
+                showValidationError && styles.error
               )}
               aria-label={`Step ${stepNumber}: ${label}`}
+              role="region"
+              aria-current={
+                stepNumber === currentStepNumber ? "step" : undefined
+              }
+              aria-selected={stepNumber <= currentStepNumber}
             >
               <div className={styles.stepCircle}>{stepNumber}</div>
               <div className={styles.stepBar}>
@@ -39,20 +44,23 @@ const ProgressBar = ({
                   className={clsx(
                     styles.stepBarFill,
                     stepNumber <= currentStepNumber && styles.active,
-                    showError && styles.error
+                    showValidationError && styles.error
                   )}
                   style={{
                     width: stepNumber <= currentStepNumber ? "100%" : "0%",
                   }}
+                  aria-hidden="true"
                 />
               </div>
-              {!showError && <div className={styles.stepLabel}>{label}</div>}
+              {!showValidationError && (
+                <div className={styles.stepLabel}>{label}</div>
+              )}
             </div>
           );
         })}
       </div>
 
-      {showError && (
+      {showValidationError && (
         <span className={styles.errorMessage}>
           입력값이 유효하지 않으니 다시 입력해주세요!
         </span>
