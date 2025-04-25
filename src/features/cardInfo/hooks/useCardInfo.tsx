@@ -44,7 +44,6 @@ export default function useCardInfo() {
 
   const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-
     if (name.startsWith('cardNumber')) {
       const index = Number(name[name.length - 1]);
       setCardNumber((prev) => {
@@ -77,7 +76,15 @@ export default function useCardInfo() {
     }
   };
 
-  return { cardNumber, cardExpirationDate, cardCVC, cardIssuer, cardPassword, handleCardInfoChange, error };
+  const cardInfo = {
+    cardNumber,
+    cardExpirationDate,
+    cardCVC,
+    cardIssuer,
+    cardPassword,
+  };
+
+  return { cardInfo, handleCardInfoChange, error };
 }
 
 const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {

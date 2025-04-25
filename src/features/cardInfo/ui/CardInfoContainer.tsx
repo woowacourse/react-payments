@@ -1,4 +1,4 @@
-import { ErrorProps } from '../../../shared/model/types';
+import { CardInfoProps, ErrorProps } from '../../../shared/model/types';
 import styled from '@emotion/styled';
 import CardNumberSection from './CardNumberSection';
 import CardExpirationDateSection from './CardExpirationDateSection';
@@ -17,31 +17,23 @@ const CardInfoWrapper = styled.div`
 `;
 
 export default function CardInfoContainer({
-  cardNumber,
-  cardExpirationDate,
-  cardCVC,
-  cardIssuer,
-  cardPassword,
+  cardInfo,
   onChange,
   error,
 }: {
-  cardNumber: string[];
-  cardExpirationDate: { month: string; year: string };
-  cardCVC: string;
-  cardIssuer: string;
-  cardPassword: string;
+  cardInfo: CardInfoProps;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   error: ErrorProps;
 }) {
   return (
     <CardInfoWrapper>
-      {cardCVCValidator(cardCVC)[0] === NO_ERROR && <CardPasswordSection error={error} onChange={onChange} />}
-      {cardExpirationDateValidator(cardExpirationDate)[0] === NO_ERROR && (
+      {cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR && <CardPasswordSection error={error} onChange={onChange} />}
+      {cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR && (
         <CardCVCSection error={error} onChange={onChange} />
       )}
-      {cardIssuer !== '' && <CardExpirationDateSection error={error} onChange={onChange} />}
-      {cardNumberValidator(cardNumber)[0] === NO_ERROR && (
-        <CardSelection cardIssuer={cardIssuer} error={error} onChange={onChange} />
+      {cardInfo.cardIssuer !== '' && <CardExpirationDateSection error={error} onChange={onChange} />}
+      {cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR && (
+        <CardSelection cardIssuer={cardInfo.cardIssuer} error={error} onChange={onChange} />
       )}
       <CardNumberSection error={error} onChange={onChange} />
     </CardInfoWrapper>
