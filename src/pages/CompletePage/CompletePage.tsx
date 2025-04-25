@@ -3,7 +3,7 @@ import styles from './CompletePage.module.css';
 export default function CompletePage() {
   return (
     <div className={styles.wrapper}>
-      <img src="/images/checkIcon.png" />
+      <img src="/images/checkIcon.png" width={76} height={76} />
       <h2>
         5511로 시작하는 <br />
         BC카드가 등록되었어요.

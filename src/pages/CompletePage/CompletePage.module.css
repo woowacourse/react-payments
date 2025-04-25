@@ -3,3 +3,8 @@
   flex-direction: column;
   gap: 25px;
 }
+
+.icon {
+  width: 76px;
+  height: 76px;
+}

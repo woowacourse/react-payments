@@ -28,24 +28,22 @@ export default function HomePage() {
 
   const buttonVisible = isButtonVisible({ cardNumbers, expiration, cvc, password, company });
   return (
-    <div className={styles.app}>
-      <div className={styles.wrapper}>
-        <Card numbers={cardNumbers} company={company} expiration={expiration} />
-        <Spacing size={45} />
-        <div className={styles.inputSectionWrapper}>
-          <PasswordSection password={password} handlePasswordChange={handlePasswordChange} />
-          <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />
-          <CardCompanySection value={company} onSelect={handleSelect} />
-          <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={inputRef} />
-          <CardNumberSection
-            cardNumbers={cardNumbers}
-            onCardNumbersChange={handleCardNumberChange}
-            inputRefs={inputRefs}
-            getCardNumberErrorMessage={getCardNumberErrorMessage}
-          />
-        </div>
-        <Button>확인</Button>
+    <div className={styles.wrapper}>
+      <Card numbers={cardNumbers} company={company} expiration={expiration} />
+      <Spacing size={45} />
+      <div className={styles.inputSectionWrapper}>
+        <PasswordSection password={password} handlePasswordChange={handlePasswordChange} />
+        <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />
+        <CardCompanySection value={company} onSelect={handleSelect} />
+        <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={inputRef} />
+        <CardNumberSection
+          cardNumbers={cardNumbers}
+          onCardNumbersChange={handleCardNumberChange}
+          inputRefs={inputRefs}
+          getCardNumberErrorMessage={getCardNumberErrorMessage}
+        />
       </div>
+      <Button>확인</Button>
     </div>
   );
 }
