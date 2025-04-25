@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import type { Ref } from "react";
 import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
@@ -11,75 +11,66 @@ export interface CardExpireDateInputsProps {
   handleExpireMonthChange: (value: string) => void;
   handleExpireYearChange: (value: string) => void;
   handleExpireMonthBlur: (value: string) => void;
+  ref: Ref<HTMLInputElement>;
 }
 
-const CardExpireDateInputs = forwardRef<
-  HTMLInputElement,
-  CardExpireDateInputsProps
->(
-  (
-    {
-      expireDate,
-      handleExpireMonthChange,
-      handleExpireYearChange,
-      handleExpireMonthBlur,
-    },
-    ref
-  ) => {
-    const { inputRefs, handleAutoFocus } =
-      useAutoFocus<ExpireDateInputKey>(EXPIRE_DATE_KEYS);
+function CardExpireDateInputs({
+  expireDate,
+  handleExpireMonthChange,
+  handleExpireYearChange,
+  handleExpireMonthBlur,
+  ref,
+}: CardExpireDateInputsProps) {
+  const { inputRefs, handleAutoFocus } =
+    useAutoFocus<ExpireDateInputKey>(EXPIRE_DATE_KEYS);
 
-    const changeHandlers = {
-      MM: handleExpireMonthChange,
-      YY: handleExpireYearChange,
-    };
+  const changeHandlers = {
+    MM: handleExpireMonthChange,
+    YY: handleExpireYearChange,
+  };
 
-    const handleInputChange = (key: ExpireDateInputKey, value: string) => {
-      changeHandlers[key](value);
-      handleAutoFocus(key, value, EXPIRE_DATE_KEYS, EXPIRE_DATE_LENGTH);
-    };
+  const handleInputChange = (key: ExpireDateInputKey, value: string) => {
+    changeHandlers[key](value);
+    handleAutoFocus(key, value, EXPIRE_DATE_KEYS, EXPIRE_DATE_LENGTH);
+  };
 
-    return (
-      <div className={styles.container}>
-        <div className={styles.expireDateInputContainer}>
-          {EXPIRE_DATE_KEYS.map((expireKey, idx) => {
-            return (
-              <p className={styles.expireDateInputBox} key={expireKey}>
-                <Label
-                  htmlFor={`expire-${expireKey}-input`}
-                  isHidden={idx !== 0}
-                >
-                  유효 기간
-                </Label>
-                <Input
-                  ref={idx === 0 ? ref : inputRefs[expireKey]}
-                  id={`expire-${expireKey}-input`}
-                  type="text"
-                  maxLength={EXPIRE_DATE_LENGTH}
-                  placeholder={expireKey}
-                  isError={Boolean(expireDate[expireKey].errorMessage)}
-                  value={expireDate[expireKey].value}
-                  onChange={(e) => handleInputChange(expireKey, e.target.value)}
-                  onBlur={
-                    idx === 0
-                      ? (e) => handleExpireMonthBlur(e.target.value)
-                      : undefined
-                  }
-                />
-                <span
-                  id={`${expireKey}-error-message`}
-                  className={styles.errorMessage}
-                >
-                  {expireDate[expireKey].errorMessage}
-                </span>
-              </p>
-            );
-          })}
-        </div>
+  return (
+    <div className={styles.container}>
+      <div className={styles.expireDateInputContainer}>
+        {EXPIRE_DATE_KEYS.map((expireKey, idx) => {
+          return (
+            <p className={styles.expireDateInputBox} key={expireKey}>
+              <Label htmlFor={`expire-${expireKey}-input`} isHidden={idx !== 0}>
+                유효 기간
+              </Label>
+              <Input
+                ref={idx === 0 ? ref : inputRefs[expireKey]}
+                id={`expire-${expireKey}-input`}
+                type="text"
+                maxLength={EXPIRE_DATE_LENGTH}
+                placeholder={expireKey}
+                isError={Boolean(expireDate[expireKey].errorMessage)}
+                value={expireDate[expireKey].value}
+                onChange={(e) => handleInputChange(expireKey, e.target.value)}
+                onBlur={
+                  idx === 0
+                    ? (e) => handleExpireMonthBlur(e.target.value)
+                    : undefined
+                }
+              />
+              <span
+                id={`${expireKey}-error-message`}
+                className={styles.errorMessage}
+              >
+                {expireDate[expireKey].errorMessage}
+              </span>
+            </p>
+          );
+        })}
       </div>
-    );
-  }
-);
+    </div>
+  );
+}
 
 CardExpireDateInputs.displayName = "CardExpireDateInputs";
 
