@@ -59,6 +59,7 @@ export default function CardNumber({
             value={cardNumbers[key]}
             errorMessage={errorMessage[key]}
             onChange={(value) => handleInputChange(value, idx)}
+            autoFocus={idx === 0}
           />
         ))}
       </div>

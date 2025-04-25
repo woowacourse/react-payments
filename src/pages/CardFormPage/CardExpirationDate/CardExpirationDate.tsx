@@ -65,6 +65,7 @@ export default function CardExpirationDate({
             value={cardExpirationDate[indexToExpirationKey(idx)]}
             errorMessage={errorMessage[indexToExpirationKey(idx)]}
             placeholder="12"
+            autoFocus={idx === 0}
           />
         ))}
       </div>

@@ -30,6 +30,7 @@ export default function CardPassword({
         textType="password"
         placeholder=""
         errorMessage={errorMessage}
+        autoFocus={true}
       />
       <Text textType="error">{errorMessage}</Text>
     </section>

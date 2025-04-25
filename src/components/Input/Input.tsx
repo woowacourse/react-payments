@@ -7,6 +7,7 @@ type InputProps = {
   value: string;
   placeholder?: string;
   errorMessage?: string;
+  autoFocus?: boolean;
 };
 
 export type TextType = "text" | "password";
@@ -22,6 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange,
       placeholder = DEFAULT_PLACEHOLDER,
       errorMessage = DEFAULT_ERROR_MESSAGE,
+      autoFocus = false,
     },
     ref
   ) => {
@@ -39,6 +41,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         placeholder={placeholder}
         value={value}
         onChange={handleInputChange}
+        autoFocus={autoFocus}
       />
     );
   }

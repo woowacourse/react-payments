@@ -39,6 +39,7 @@ export default function CardCvcNumber({
         placeholder={CARD_CVC_NUMBER_LABEL.PLACE_HOLDER}
         value={cvcNumbers}
         errorMessage={errorMessage}
+        autoFocus={true}
       />
       <Text textType="error">{errorMessage}</Text>
     </section>
