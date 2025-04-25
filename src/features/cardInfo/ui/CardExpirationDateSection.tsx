@@ -1,6 +1,7 @@
 import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
 import CustomInput from '../../../shared/ui/CustomInput';
+import { useRef } from 'react';
 
 const inputArr = [
   { type: 'text', placeholder: 'MM', name: 'cardExpirationDate-month' },
@@ -16,6 +17,15 @@ export default function CardExpirationDateSection({
 }) {
   const isError =
     error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    onChange(e);
+
+    if (e.target.value.length === 2 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
 
   return (
     <S.CardInfoMainSection>
@@ -30,7 +40,10 @@ export default function CardExpirationDateSection({
             <CustomInput
               key={`cardExpirationDate-custom-input-${index}`}
               {...input}
-              onChange={onChange}
+              onChange={(e) => handleInputChange(e, index)}
+              ref={(el: HTMLInputElement | null) => {
+                inputRefs.current[index] = el;
+              }}
               maxLength={2}
               error={isError && error['cardExpirationDateError'].errorIndex === index}
             />
