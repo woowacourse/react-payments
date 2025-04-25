@@ -7,18 +7,34 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
   return (
     <div css={FormContainerStyle}>
       {formUIControllerData.map((formSectionData) => {
-        const eachValidation = validation[formSectionData.key];
+        if (formSectionData.type === "input") {
+          const eachValidation = validation[formSectionData.key];
+          return (
+            <FormSection
+              key={formSectionData.key}
+              type="input"
+              title={formSectionData.title}
+              description={formSectionData.description}
+              fieldData={{
+                ...formSectionData.fieldData,
+                cardInformation: cardInformationState,
+                setCardInformation: setCardInformationState,
+                eachValidation: eachValidation,
+                informationType: formSectionData.key,
+              }}
+            />
+          );
+        }
+
         return (
           <FormSection
             key={formSectionData.key}
+            type="select"
             title={formSectionData.title}
             description={formSectionData.description}
-            inputFieldData={{
-              ...formSectionData.inputFieldData,
-              cardInformation: cardInformationState,
+            fieldData={{
+              ...formSectionData.fieldData,
               setCardInformation: setCardInformationState,
-              eachValidation: eachValidation,
-              informationType: formSectionData.key,
             }}
           />
         );

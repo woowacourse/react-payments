@@ -10,14 +10,25 @@ export type FormContainerProps = {
   validation: useValidationType;
 };
 
-export type FormSectionProps = {
+export type InputFormSectionProps = {
   /** 섹션 제목 */
   title: string;
   /** 섹션 설명 */
   description: string;
+  /** 필드 타입 */
+  type: "input";
   /** 입력 필드에 대한 설정 정보 */
-  inputFieldData: InputFieldProps;
+  fieldData: InputFieldProps;
 };
+
+export type SelectFormSectionProps = {
+  title: string;
+  description: string;
+  type: "select";
+  fieldData: SelectProps;
+};
+
+export type FormSectionProps = InputFormSectionProps | SelectFormSectionProps;
 
 export type InputFieldProps = {
   /** 입력 필드 라벨 */
