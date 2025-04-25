@@ -12,6 +12,7 @@ import {
 } from '../../styles/@common/inputContainer.style';
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
+import { handleAutoFocus } from '../../utils';
 
 interface CardPeriodInputProps {
   onNext?: () => void;
@@ -32,6 +33,14 @@ function CardPeriodInput(props: CardPeriodInputProps) {
     onNext?.();
   }
 
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleCardExpirationChange.month(e.target.value);
+    const fieldMappings = {
+      month: 'year',
+    };
+    handleAutoFocus(e, CARD_EXPIRATION.monthLength, fieldMappings);
+  };
+
   return (
     <div css={cardPeriodInputLayout}>
       <Title>
@@ -49,9 +58,7 @@ function CardPeriodInput(props: CardPeriodInputProps) {
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
                 value={cardExpirationDate.month}
-                onChange={(e) =>
-                  handleCardExpirationChange.month(e.target.value)
-                }
+                onChange={handleMonthChange}
                 css={errorState.month ? errorInputStyle : undefined}
               />
             </Input.Group>

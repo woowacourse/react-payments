@@ -11,6 +11,7 @@ import {
 } from '../../styles/@common/inputContainer.style';
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
+import { handleAutoFocus } from '../../utils';
 
 interface CardNumberInputProps {
   onNext: () => void;
@@ -36,6 +37,18 @@ function CardNumberInput(props: CardNumberInputProps) {
     onNext();
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleCardNumberChange(e);
+
+    const fieldMappings = {
+      second: 'second',
+      third: 'third',
+      fourth: 'forth',
+    };
+
+    handleAutoFocus(e, CARD_NUMBER.maxLength, fieldMappings);
+  };
+
   return (
     <div css={cardNumberInputLayout}>
       <Title>
@@ -52,7 +65,7 @@ function CardNumberInput(props: CardNumberInputProps) {
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.first?.toString()}
-                onChange={handleCardNumberChange}
+                onChange={handleInputChange}
                 css={errorState.first ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -62,7 +75,7 @@ function CardNumberInput(props: CardNumberInputProps) {
                 name="second"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.second?.toString()}
-                onChange={handleCardNumberChange}
+                onChange={handleInputChange}
                 css={errorState.second ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -72,7 +85,7 @@ function CardNumberInput(props: CardNumberInputProps) {
                 name="third"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.third?.toString()}
-                onChange={handleCardNumberChange}
+                onChange={handleInputChange}
                 css={errorState.third ? errorInputStyle : undefined}
               />
             </Input.Group>
@@ -82,7 +95,7 @@ function CardNumberInput(props: CardNumberInputProps) {
                 name="forth"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.forth?.toString()}
-                onChange={handleCardNumberChange}
+                onChange={handleInputChange}
                 css={errorState.forth ? errorInputStyle : undefined}
               />
             </Input.Group>
