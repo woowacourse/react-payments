@@ -10,12 +10,14 @@ interface AddCardFormProps {
     key: keyof AddCardFormProps["cardInfo"],
     value: string
   ) => void;
+  isFormsCompleted: boolean;
 }
 
 export function AddCardForm({
   currentStepIndex,
   cardInfo,
   handleCardInfo,
+  isFormsCompleted,
 }: AddCardFormProps) {
   const visibleSteps = [];
 
@@ -35,7 +37,12 @@ export function AddCardForm({
     );
   }
 
-  return <InputForm>{visibleSteps}</InputForm>;
+  return (
+    <InputForm>
+      {visibleSteps}
+      {isFormsCompleted && <SubmitButton>확인</SubmitButton>}
+    </InputForm>
+  );
 }
 
 const InputForm = styled.form`
@@ -46,4 +53,16 @@ const InputForm = styled.form`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+  padding-bottom: 55px;
+`;
+
+const SubmitButton = styled.button`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 375px;
+  padding: 15px 100px;
+  color: white;
+  background: ${({ theme }) => theme.colors.black};
 `;

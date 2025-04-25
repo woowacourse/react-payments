@@ -8,10 +8,14 @@ import { AddCardForm } from "./components/AddCardForm";
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [isFormsCompleted, setIsFormsCompleted] = useState(false);
 
   useEffect(() => {
     const isCurrentStepValid = STEPS[currentStepIndex].validate(cardInfo);
     const isLastStep = currentStepIndex === STEPS.length - 1;
+
+    const isAllStepsValid = STEPS.every((step) => step.validate(cardInfo));
+    setIsFormsCompleted(isAllStepsValid);
 
     if (isCurrentStepValid && !isLastStep) {
       setCurrentStepIndex(currentStepIndex + 1);
@@ -19,7 +23,7 @@ function AddCardPage() {
   }, [cardInfo, currentStepIndex]);
 
   return (
-    <AppContainer>
+    <AddCardContainer>
       <Card
         cardNumber={[
           cardInfo.firstNumber,
@@ -34,14 +38,15 @@ function AddCardPage() {
         currentStepIndex={currentStepIndex}
         cardInfo={cardInfo}
         handleCardInfo={handleCardInfo}
+        isFormsCompleted={isFormsCompleted}
       />
-    </AppContainer>
+    </AddCardContainer>
   );
 }
 
 export default AddCardPage;
 
-const AppContainer = styled.div`
+const AddCardContainer = styled.div`
   width: 376px;
   display: flex;
   flex-direction: column;
