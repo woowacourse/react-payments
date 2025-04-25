@@ -1,13 +1,14 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
+import { CardType } from '../../../../config/card';
+import { ErrorType } from '../../../../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
 } from '../../../../config/inputField';
-import { CardType } from '../../../../config/card';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
-import BaseInputField from '../../BaseInputField/BaseInputField';
+import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import Input from '../../../ui/Input/Input';
-import styled from 'styled-components';
+import BaseInputField from '../../BaseInputField/BaseInputField';
 
 interface CardNumberInputFieldProps {
   inputValue: Record<CardNumberInputType, string>;
@@ -27,29 +28,13 @@ function CardNumberInputField({
   setCardType,
   onComplete,
 }: CardNumberInputFieldProps) {
-  const [errorTypes, setErrorTypes] = useState<
-    Record<CardNumberInputType, ErrorType[]>
-  >({
-    cardNumberPart1: [],
-    cardNumberPart2: [],
-    cardNumberPart3: [],
-    cardNumberPart4: [],
-  });
+  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+    useInputErrorHandler(
+      [...CARD_NUMBER_INPUT_TYPE],
+      inputValue,
+      MAX_CARD_LENGTH
+    );
 
-  const errorStatus = Object.values(errorTypes).find(
-    (errorType) => errorType.length
-  );
-
-  const errorMessage =
-    errorStatus && errorStatus?.length !== 0
-      ? ERROR_TYPE_TO_MESSAGE[errorStatus[0]]
-      : '';
-
-  const isComplete = !Boolean(
-    Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== MAX_CARD_LENGTH
-    ).length
-  );
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const validateCardError = (

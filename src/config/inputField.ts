@@ -25,7 +25,8 @@ export type ExpirationDateInputType =
   (typeof EXPIRATION_DATE_INPUT_TYPE)[number];
 
 // 카드 CVC 타입
-export type CVCInputValueType = 'CVCPart1';
+export const CVC_INPUT_TYPE = ['CVCPart1'] as const;
+export type CVCInputValueType = (typeof CVC_INPUT_TYPE)[number];
 
 // 카드사 타입
 export const CARD_ISSUER_TYPE = [

@@ -1,9 +1,13 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { CVCInputValueType } from '../../../../config/inputField';
+import {
+  CVC_INPUT_TYPE,
+  CVCInputValueType,
+} from '../../../../config/inputField';
 import BaseInputField from '../../BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import styled from 'styled-components';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
+import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;
@@ -18,16 +22,9 @@ function CVCInputField({
   setInputValue,
   onComplete,
 }: CVCInputFieldProps) {
-  const [errorTypes, setErrorTypes] = useState<ErrorType[]>([]);
+  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+    useInputErrorHandler([...CVC_INPUT_TYPE], inputValue, MAX_CVC_LENGTH);
 
-  const errorMessage =
-    errorTypes?.length !== 0 ? ERROR_TYPE_TO_MESSAGE[errorTypes[0]] : '';
-
-  const isComplete = !Boolean(
-    Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== MAX_CVC_LENGTH
-    ).length
-  );
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
@@ -39,30 +36,38 @@ function CVCInputField({
     const { value } = e.target as HTMLInputElement;
     const isValidLength = value.length === MAX_CVC_LENGTH;
 
+    const currentErrorType = errorTypes['CVCPart1'];
+
     if (!isValidLength) {
-      const set = new Set(errorTypes);
+      const set = new Set(currentErrorType);
       set.add('shortCVCSegment');
-      setErrorTypes(() => Array.from(set));
+      setErrorTypes(() => ({ ['CVCPart1']: Array.from(set) }));
     } else {
-      setErrorTypes(() =>
-        errorTypes.filter((errorType) => errorType !== 'shortCVCSegment')
-      );
+      setErrorTypes(() => ({
+        ['CVCPart1']: currentErrorType.filter(
+          (errorType) => errorType !== 'shortCVCSegment'
+        ),
+      }));
     }
   };
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>
-      <Label htmlFor="CVC-input" />
-      <Input
-        id="CVC-input"
-        inputType="number"
-        placeholder="123"
-        value={inputValue.CVCPart1}
-        onChange={onChange}
-        name="CVCPart1"
-        onBlur={onBlur}
-        isError={Boolean(errorTypes.length)}
-      />
+      {CVC_INPUT_TYPE.map((inputType) => (
+        <>
+          <Label htmlFor="CVC-input" />
+          <Input
+            id="CVC-input"
+            inputType="number"
+            placeholder="123"
+            value={inputValue.CVCPart1}
+            onChange={onChange}
+            name="CVCPart1"
+            onBlur={onBlur}
+            isError={Boolean(errorTypes[inputType].length)}
+          />
+        </>
+      ))}
     </BaseInputField>
   );
 }

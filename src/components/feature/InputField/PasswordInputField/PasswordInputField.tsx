@@ -3,7 +3,11 @@ import BaseInputField from '../../BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../../../../config/error';
-import { PasswordInputType } from '../../../../config/inputField';
+import {
+  PASSWORD_INPUT_TYPE,
+  PasswordInputType,
+} from '../../../../config/inputField';
+import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;
@@ -18,16 +22,13 @@ function PasswordInputField({
   setInputValue,
   onComplete,
 }: PasswordInputFieldProps) {
-  const [errorTypes, setErrorTypes] = useState<ErrorType[]>([]);
+  const { errorTypes, setErrorTypes, errorMessage, isComplete } =
+    useInputErrorHandler(
+      [...PASSWORD_INPUT_TYPE],
+      inputValue,
+      MAX_PASSWORD_LENGTH
+    );
 
-  const errorMessage =
-    errorTypes?.length !== 0 ? ERROR_TYPE_TO_MESSAGE[errorTypes[0]] : '';
-
-  const isComplete = !Boolean(
-    Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== MAX_PASSWORD_LENGTH
-    ).length
-  );
   onComplete?.(isComplete && !Boolean(errorMessage));
 
   const onChange = ({ name, value }: { name: string; value: string }) => {
@@ -39,29 +40,37 @@ function PasswordInputField({
     const { value } = e.target as HTMLInputElement;
     const isValidLength = value.length === MAX_PASSWORD_LENGTH;
 
+    const currentErrorType = errorTypes['passwordPart1'];
+
     if (!isValidLength) {
-      const set = new Set(errorTypes);
+      const set = new Set(currentErrorType);
       set.add('shortPasswordSegment');
-      setErrorTypes(() => Array.from(set));
+      setErrorTypes(() => ({ ['passwordPart1']: Array.from(set) }));
     } else {
-      setErrorTypes(() =>
-        errorTypes.filter((errorType) => errorType !== 'shortPasswordSegment')
-      );
+      setErrorTypes(() => ({
+        ['passwordPart1']: currentErrorType.filter(
+          (errorType) => errorType !== 'shortPasswordSegment'
+        ),
+      }));
     }
   };
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
-      <Label htmlFor="password-input" />
-      <Input
-        id="password-input"
-        inputType="password"
-        placeholder="비밀번호 앞 2자리"
-        value={inputValue.passwordPart1}
-        onChange={onChange}
-        name="passwordPart1"
-        onBlur={onBlur}
-        isError={Boolean(errorTypes.length)}
-      />
+      {PASSWORD_INPUT_TYPE.map((inputType) => (
+        <>
+          <Label htmlFor="password-input" />
+          <Input
+            id="password-input"
+            inputType="password"
+            placeholder="비밀번호 앞 2자리"
+            value={inputValue.passwordPart1}
+            onChange={onChange}
+            name="passwordPart1"
+            onBlur={onBlur}
+            isError={Boolean(errorTypes[inputType].length)}
+          />
+        </>
+      ))}
     </BaseInputField>
   );
 }
