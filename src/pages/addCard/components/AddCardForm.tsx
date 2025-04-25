@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { STEPS } from "../constants";
 import Announcement from "../../../components/@common/Announcement/Announcement";
 import { CardInfo } from "../../../hooks/useCardInfo";
+import { useNavigate } from "react-router-dom";
 
 interface AddCardFormProps {
   currentStepIndex: number;
@@ -20,6 +21,12 @@ export function AddCardForm({
   isFormsCompleted,
 }: AddCardFormProps) {
   const visibleSteps = [];
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate("/success");
+  };
 
   for (let i = currentStepIndex; i >= 0; i--) {
     const step = STEPS[i];
@@ -38,9 +45,9 @@ export function AddCardForm({
   }
 
   return (
-    <InputForm>
+    <InputForm onSubmit={handleSubmit}>
       {visibleSteps}
-      {isFormsCompleted && <SubmitButton>확인</SubmitButton>}
+      {isFormsCompleted && <SubmitButton type="submit">확인</SubmitButton>}
     </InputForm>
   );
 }
