@@ -37,7 +37,7 @@ export const Confirm = () => {
   return (
     <Flex width="100%" height="100dvh">
       <Flex direction="column" width="100%" gap="40px" padding="0 30px">
-        <img src="/images/check.png" width={80} />
+        <img src="./images/check.png" width={80} />
         <Text
           variant="Title"
           fontWeight="bold"

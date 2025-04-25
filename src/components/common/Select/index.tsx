@@ -26,7 +26,7 @@ export const Select = ({ selectedOptions, children, ...props }: Props) => {
       <StyledTriggerButton>
         <Flex justifyContent="space-between">
           <Text variant="Body">{selectedOptions ?? '전체'}</Text>
-          <StyledSelectIcon isOpen={isOpen} src="/images/arrow.png" alt="arrow" />
+          <StyledSelectIcon isOpen={isOpen} src="./images/arrow.png" alt="arrow" />
         </Flex>
       </StyledTriggerButton>
 
