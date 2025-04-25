@@ -18,7 +18,9 @@
 .button:active:not(:disabled) {
   background-color: #222;
 }
-
+.button:focus-visible {
+  outline: 2px solid #007bff;
+}
 .button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
