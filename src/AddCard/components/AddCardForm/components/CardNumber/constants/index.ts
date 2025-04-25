@@ -14,7 +14,7 @@ export const INITIAL_CARD_NUMBER_STATE: CardNumberState = {
   fourth: { value: "", errorMessage: "" },
 } as const;
 
-export const EXPIRE_DATE_ERROR_MESSAGE = {
+export const CARD_NUMBER_ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
   INVALID_CARD_LENGTH: "4자리의 숫자만 입력 가능합니다.",
 } as const;

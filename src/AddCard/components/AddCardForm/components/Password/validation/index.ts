@@ -6,10 +6,10 @@ export const validatePassword = (passwordNumber: string) => {
     return PASSWORD_ERROR_MESSAGE.INVALID_NUMBER;
   }
 
-  const isInvalidLength =
+  const isValidLength =
     passwordNumber.length === 0 ||
     passwordNumber.length === PASSWORD_INPUT_LENGTH;
-  if (!isInvalidLength) {
+  if (!isValidLength) {
     return PASSWORD_ERROR_MESSAGE.INVALID_PASSWORD_LENGTH;
   }
 
