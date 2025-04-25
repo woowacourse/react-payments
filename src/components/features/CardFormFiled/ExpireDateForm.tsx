@@ -1,39 +1,48 @@
 import { css } from '@emotion/react';
 
-import { CardFormFiledProps } from './CardFormFiled.types';
+import { CardFormProps, FormData } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardInputType } from '@/hooks/useCardInput';
-
-type Props = {
-  expireDate: CardInputType[];
-} & CardFormFiledProps;
+import { CardForm } from '@/hooks/useCardFormState';
+import { useExpireDate } from '@/hooks/useExpireDate';
 
 const ExpireDatePlaceholder = ['MM', 'YY'];
 
-export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: Props) => {
-  const isInvalidDate = expireDate.some((expireDate) => !expireDate.isValid);
+type Props<T> = CardFormProps & FormData<T>;
+export const ExpireDateForm = ({ context, onNext }: Props<CardForm['expireDate']>) => {
+  const { state: expireDateFormData, setState: setExpireDateFormData } = context;
+
+  const { expireDates, error, handleChange, setInputRef } = useExpireDate({
+    expireDates: expireDateFormData,
+    setExpireDates: setExpireDateFormData,
+    onValid: onNext,
+  });
+
+  const isValid = expireDates.every((expireDate) => expireDate.isValid);
 
   return (
     <CardInputLayout
       headerText="카드 유효기간을 입력해 주세요."
-      description="월/년도(MMYY)를 순서대로 입력해 주세요."
+      description="월/년도(MM/YY)를 순서대로 입력해 주세요."
       label="유효기간"
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
         <Flex gap="8px" width="100%">
-          {expireDate.map((date, index) => (
+          {expireDates.map((date, index) => (
             <Input
+              autoFocus={index === 0 && date.value.length === 0}
               key={`expire-${index}`}
               value={date.value}
               maxLength={2}
-              onChange={(e) => onChange(index, e)}
-              onBlur={(e) => onBlur(index, e)}
+              onChange={(e) => handleChange(index, e)}
               isValid={date.isValid}
               placeholder={ExpireDatePlaceholder[index]}
+              ref={(el) => {
+                if (el) setInputRef(el, index);
+              }}
             />
           ))}
         </Flex>
@@ -44,7 +53,7 @@ export const ExpireDateForm = ({ expireDate, errorMessage, onChange, onBlur }: P
             height: 20px;
           `}
         >
-          {isInvalidDate ? errorMessage : ''}
+          {!isValid ? error : ''}
         </Text>
       </Flex>
     </CardInputLayout>
