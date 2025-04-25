@@ -7,7 +7,7 @@ import {
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import Input from '../../../ui/Input/Input';
-import BaseInputField from '../../BaseInputField/BaseInputField';
+import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;

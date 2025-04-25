@@ -10,7 +10,7 @@ import {
 } from '../../config/inputField';
 import { CardType } from '../../config/card';
 
-import InputSection from '../../components/feature/InputSection/InputSection';
+import InputSection from '../../components/ui/InputSection/InputSection';
 import CardNumberInputField from '../../components/feature/InputField/CardNumberInputField/CardNumberInputField';
 import ExpirationDateInputField from '../../components/feature/InputField/ExpirationDateInputField/ExpirationDateInputField';
 import CVCInputField from '../../components/feature/InputField/CVCInputField/CVCInputField';

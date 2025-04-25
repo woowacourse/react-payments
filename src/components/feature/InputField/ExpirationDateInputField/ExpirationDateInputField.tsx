@@ -4,7 +4,7 @@ import {
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
 } from '../../../../config/inputField';
-import BaseInputField from '../../BaseInputField/BaseInputField';
+import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import styled from 'styled-components';
 
