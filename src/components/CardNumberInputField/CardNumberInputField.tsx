@@ -3,7 +3,7 @@ import { RegisterType } from '@/hooks';
 import { CardNumberInputType } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
 import { ChangeEvent } from 'react';
-import * as S from './CardNumber.styles';
+import * as S from './CardNumberInputField.styles';
 
 interface CardNumberProps {
   cardNumberErrors: CardNumberInputType;

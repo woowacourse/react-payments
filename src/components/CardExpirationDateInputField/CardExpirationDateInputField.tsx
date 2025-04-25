@@ -3,7 +3,7 @@ import { ERROR_MESSAGE } from '@/constants';
 import { RegisterType } from '@/hooks';
 import { CardExpirationDateInputType } from '@/types';
 import { getErrorMessageFromObject } from '@/utils/message';
-import * as S from './CardExpirationDate.styles';
+import * as S from './CardExpirationDateInputField.styles';
 
 interface CardExpirationDateProps {
   register: RegisterType<CardExpirationDateInputType>;

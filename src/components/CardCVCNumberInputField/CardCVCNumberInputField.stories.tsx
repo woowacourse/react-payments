@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CardCVCNumber } from '@/components';
 import { useForm } from '@/hooks';
 import { CardCVCNumberInputType } from '@/types/input';
+import { CardCVCNumberInputField } from '..';
 
 const meta = {
-  title: 'Components/CardCVCNumber',
-  component: CardCVCNumber,
+  title: 'Components/CardCVCNumberInputField',
+  component: CardCVCNumberInputField,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -15,12 +15,12 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof CardCVCNumber>;
+} satisfies Meta<typeof CardCVCNumberInputField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const CardCVCNumberWrapper = ({ errors = { cvc: '' } }) => {
+const CardCVCNumberInputFieldWrapper = ({ errors = { cvc: '' } }) => {
   const { register, errors: formErrors } = useForm<CardCVCNumberInputType>({
     defaultValues: {
       cvc: '',
@@ -28,7 +28,7 @@ const CardCVCNumberWrapper = ({ errors = { cvc: '' } }) => {
   });
 
   return (
-    <CardCVCNumber
+    <CardCVCNumberInputField
       register={register}
       cardCVCNumberErrors={errors || formErrors}
       onFocus={() => {}}
@@ -47,7 +47,7 @@ export const Default: Story = {
     onFocus: () => {},
     onBlur: () => {},
   },
-  render: () => <CardCVCNumberWrapper />,
+  render: () => <CardCVCNumberInputFieldWrapper />,
 };
 
 export const WithErrors: Story = {
@@ -61,7 +61,7 @@ export const WithErrors: Story = {
     onBlur: () => {},
   },
   render: () => (
-    <CardCVCNumberWrapper
+    <CardCVCNumberInputFieldWrapper
       errors={{
         cvc: 'CVC 번호는 3자리 숫자여야 합니다.',
       }}
@@ -86,6 +86,13 @@ export const Filled: Story = {
       },
     });
 
-    return <CardCVCNumber register={register} cardCVCNumberErrors={{ cvc: '' }} onFocus={() => {}} onBlur={() => {}} />;
+    return (
+      <CardCVCNumberInputField
+        register={register}
+        cardCVCNumberErrors={{ cvc: '' }}
+        onFocus={() => {}}
+        onBlur={() => {}}
+      />
+    );
   },
 };

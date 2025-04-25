@@ -7,11 +7,11 @@ export { default as Button } from './common/Button/Button';
 export { default as If } from './common/If/If';
 export { default as Select } from './common/Select/Select';
 
-export { default as CardNumber } from './CardNumber/CardNumber';
-export { default as CardExpirationDate } from './CardExpirationDate/CardExpirationDate';
-export { default as CardCVCNumber } from './CardCVCNumber/CardCVCNumber';
+export { default as CardNumberInputField } from './CardNumberInputField/CardNumberInputField';
+export { default as CardExpirationDateInputField } from './CardExpirationDateInputField/CardExpirationDateInputField';
+export { default as CardCVCNumberInputField } from './CardCVCNumberInputField/CardCVCNumberInputField';
 export { default as CardPreview } from './CardPreview/CardPreview';
-export { default as CardCompany } from './CardCompany/CardCompany';
-export { default as CardPassword } from './CardPassword/CardPassword';
+export { default as CardCompanyInputField } from './CardCompanyInputField/CardCompanyInputField';
+export { default as CardPasswordInputField } from './CardPasswordInputField/CardPasswordInputField';
 
 export * from './common/icons';

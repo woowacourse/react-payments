@@ -1,10 +1,10 @@
 import {
   Button,
-  CardCompany,
-  CardCVCNumber,
-  CardExpirationDate,
-  CardNumber,
-  CardPassword,
+  CardCompanyInputField,
+  CardCVCNumberInputField,
+  CardExpirationDateInputField,
+  CardNumberInputField,
+  CardPasswordInputField,
   CardPreview,
   If,
   Spacing,
@@ -138,11 +138,11 @@ export default function RegisterPage() {
         </If>
 
         <If condition={currentStep >= 5}>
-          <CardPassword register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
+          <CardPasswordInputField register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
         </If>
 
         <If condition={currentStep >= 4}>
-          <CardCVCNumber
+          <CardCVCNumberInputField
             register={cardCVCNumberRegister}
             cardCVCNumberErrors={cardCVCNumberErrors}
             onFocus={() => setIsCardFlipped(true)}
@@ -151,18 +151,18 @@ export default function RegisterPage() {
         </If>
 
         <If condition={currentStep >= 3}>
-          <CardExpirationDate
+          <CardExpirationDateInputField
             register={cardExpirationDateRegister}
             cardExpirationDateErrors={cardExpirationDateErrors}
           />
         </If>
 
         <If condition={currentStep >= 2}>
-          <CardCompany register={cardCompanyRegister} />
+          <CardCompanyInputField register={cardCompanyRegister} />
         </If>
 
         <If condition={currentStep >= 1}>
-          <CardNumber register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />
+          <CardNumberInputField register={cardNumberRegister} cardNumberErrors={cardNumberErrors} />
         </If>
       </S.CardInfoForm>
     </S.Wrapper>

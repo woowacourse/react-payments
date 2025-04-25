@@ -51,8 +51,10 @@ export const MasterCard: Story = {
       month: '12',
       year: '25',
     },
-    selectedCompany: 'samsung',
-    cardCVCNumber: '',
+    selectedCompany: 'bc',
+    cardCVCNumber: {
+      cvc: '123',
+    },
     isFlipped: false,
   },
 };

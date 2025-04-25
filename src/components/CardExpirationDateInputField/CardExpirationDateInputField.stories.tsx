@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CardExpirationDate } from '@/components';
+import { CardExpirationDateInputField } from '@/components';
 import { useForm } from '@/hooks';
 import { CardExpirationDateInputType } from '@/types/input';
 
 const meta = {
-  title: 'Components/CardExpirationDate',
-  component: CardExpirationDate,
+  title: 'Components/CardExpirationDateInputField',
+  component: CardExpirationDateInputField,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -15,12 +15,12 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof CardExpirationDate>;
+} satisfies Meta<typeof CardExpirationDateInputField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const CardExpirationDateWrapper = ({ errors = { month: '', year: '' } }) => {
+const CardExpirationDateInputFieldWrapper = ({ errors = { month: '', year: '' } }) => {
   const { register, errors: formErrors } = useForm<CardExpirationDateInputType>({
     defaultValues: {
       month: '',
@@ -28,7 +28,7 @@ const CardExpirationDateWrapper = ({ errors = { month: '', year: '' } }) => {
     },
   });
 
-  return <CardExpirationDate register={register} cardExpirationDateErrors={errors || formErrors} />;
+  return <CardExpirationDateInputField register={register} cardExpirationDateErrors={errors || formErrors} />;
 };
 
 export const Default: Story = {
@@ -39,7 +39,7 @@ export const Default: Story = {
       onChange: () => {},
     }),
   },
-  render: () => <CardExpirationDateWrapper />,
+  render: () => <CardExpirationDateInputFieldWrapper />,
 };
 
 export const WithErrors: Story = {
@@ -54,7 +54,7 @@ export const WithErrors: Story = {
     }),
   },
   render: () => (
-    <CardExpirationDateWrapper
+    <CardExpirationDateInputFieldWrapper
       errors={{
         month: '유효한 월(01-12)을 입력해주세요.',
         year: '',
@@ -79,6 +79,6 @@ export const Filled: Story = {
       },
     });
 
-    return <CardExpirationDate register={register} cardExpirationDateErrors={{ month: '', year: '' }} />;
+    return <CardExpirationDateInputField register={register} cardExpirationDateErrors={{ month: '', year: '' }} />;
   },
 };
