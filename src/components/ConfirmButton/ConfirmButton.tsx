@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import SingleButton from '../common/SingleButton';
+import { useNavigate } from 'react-router-dom';
 
 interface SubmitButtonProps {
   disabled?: boolean;
@@ -7,8 +8,18 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton = ({ disabled, children }: SubmitButtonProps) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    navigate('/card-register', { replace: true });
+  };
+
   return (
-    <StyledSingleButton type='submit' disabled={disabled}>
+    <StyledSingleButton
+      type='button'
+      disabled={disabled}
+      onClick={handleOnClick}
+    >
       {children}
     </StyledSingleButton>
   );
