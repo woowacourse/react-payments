@@ -25,7 +25,9 @@ const CardCompanySelect = () => {
     setSelected(option);
     setIsOpen(false);
 
-    const selectedCompany = CARD_COMPANIES.find((company) => company.name === option);
+    const selectedCompany = CARD_COMPANIES.find(
+      (company) => company.name === option
+    );
     if (selectedCompany) setCardColor(selectedCompany.color);
   };
 

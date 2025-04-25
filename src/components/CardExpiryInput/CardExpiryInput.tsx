@@ -3,6 +3,7 @@ import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
+import { useEffect } from "react";
 
 const CardExpiryInput = () => {
   const {
@@ -13,6 +14,10 @@ const CardExpiryInput = () => {
     expiryErrorIndex,
     expiryInputRefs,
   } = useCardContext();
+
+  useEffect(() => {
+    expiryInputRefs.current[0]?.focus();
+  }, []);
 
   return (
     <InputContainer

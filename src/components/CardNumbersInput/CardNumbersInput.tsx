@@ -3,6 +3,7 @@ import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
+import { useEffect } from "react";
 
 const CardNumbersInput = () => {
   const {
@@ -12,6 +13,10 @@ const CardNumbersInput = () => {
     cardNumbersInputRefs,
     handleCardNumbers,
   } = useCardContext();
+
+  useEffect(() => {
+    cardNumbersInputRefs.current[0]?.focus();
+  }, []);
 
   return (
     <InputContainer

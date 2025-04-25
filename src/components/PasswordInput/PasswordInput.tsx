@@ -2,10 +2,15 @@ import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
 import { useCardContext } from "../../contexts/CardContext";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { useEffect } from "react";
 
 const PasswordInput = () => {
   const { password, passwordHelperText, passwordInputRef, handlePassword } =
     useCardContext();
+
+  useEffect(() => {
+    passwordInputRef.current?.focus();
+  }, []);
   return (
     <InputContainer
       title="비밀번호를 입력해 주세요"

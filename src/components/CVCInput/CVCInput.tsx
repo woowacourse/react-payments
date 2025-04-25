@@ -3,9 +3,14 @@ import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
+import { useEffect } from "react";
 
 const CVCInput = () => {
   const { CVC, CVCHelperText, CVCInputRef, handleCVC } = useCardContext();
+
+  useEffect(() => {
+    CVCInputRef.current?.focus();
+  }, []);
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
