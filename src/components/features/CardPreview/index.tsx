@@ -8,20 +8,25 @@ import {
 
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
-import { CardInputType } from '@/hooks/useCardInput';
+import { CardBrand } from '@/constants/brandColors';
+import { CardInputItem } from '@/hooks/useCardFormState';
 
 type Props = {
   /**
    * 카드 번호를 입력받는 배열입니다.
    */
-  cardNumbers: CardInputType[];
+  cardNumbers: CardInputItem[];
+  /**
+   * 카드 브랜드를 입력받는 문자열입니다.
+   */
+  cardBrand?: CardBrand | null;
   /**
    * 카드 유효기간을 입력받는 배열입니다.
    */
-  expireDate: CardInputType[];
+  expireDate: CardInputItem[];
 };
 
-export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
+export const CardPreview = ({ cardNumbers, cardBrand, expireDate }: Props) => {
   const cardTypeCheck = (() => {
     if (cardNumbers[0].value.startsWith('4')) {
       return './images/Visa.png';
@@ -42,7 +47,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   };
 
   return (
-    <StyledCardContainer>
+    <StyledCardContainer cardBrand={cardBrand}>
       <StyledICCheapContainer />
       {cardTypeCheck && <StyledCardTypeIcon src={cardTypeCheck} alt="cardType" />}
       <Flex direction="column" alignItems="flex-start" padding="70px 25px 0px 25px" gap="10px">
@@ -72,7 +77,7 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
             text-align: left;
           `}
         >
-          {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
+          {expireDate[0]?.value ? expireDate?.map((date) => date.value).join(' / ') : ''}
         </Text>
       </Flex>
     </StyledCardContainer>
