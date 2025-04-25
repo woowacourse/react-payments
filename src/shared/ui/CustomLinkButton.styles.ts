@@ -10,6 +10,8 @@ export const CustomLinkButton = styled.button<{ css?: SerializedStyles }>`
   background-color: #333333;
   color: white;
 
+  ${({ css }) => css};
+
   &:hover {
     background-color: rgb(22, 22, 22);
     cursor: pointer;
