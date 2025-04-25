@@ -74,6 +74,8 @@ interface CardContextType {
   setIsValidPassword: React.Dispatch<React.SetStateAction<boolean>>;
   isValidForm: boolean;
   setIsValidForm: React.Dispatch<React.SetStateAction<boolean>>;
+  isSubmitted: boolean;
+  setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 
   resetCardForm: () => void; 
 }
@@ -118,6 +120,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const [isValidCVC, setIsValidCVC] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     const isAllFilled = cardNumbers.every(
@@ -361,6 +364,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         isValidForm,
         setIsValidForm,
         resetCardForm,
+        isSubmitted,
+        setIsSubmitted,
       }}
     >
       {children}

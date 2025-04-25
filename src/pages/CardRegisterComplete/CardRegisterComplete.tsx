@@ -2,12 +2,23 @@ import styles from "./CardRegisterComplete.module.css";
 import { useCardContext } from "../../contexts/CardContext";
 import { CARD_COMPANIES } from "../../components/CardCompanySelect/CardCompanySelect";
 import RegisterAnotherCardButton from "../../components/RegisterAnotherCardButton/RegisterAnotherCardButton";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CardRegisterComplete = () => {
-  const { cardNumbers, cardColor } = useCardContext();
+  const { cardNumbers, cardColor, isSubmitted, setIsSubmitted } = useCardContext();
+  const navigate = useNavigate();
   const selectedCompany = CARD_COMPANIES.find(
     (company) => company.color === cardColor
   )?.name;
+
+  useEffect(() => {
+    if (!isSubmitted) navigate("/");
+
+    // return () => {
+    //   setIsSubmitted(false);
+    // };
+  }, [isSubmitted, navigate])
 
   return (
     <div className={styles.wrapper}>

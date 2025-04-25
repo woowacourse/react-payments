@@ -8,11 +8,19 @@ type ButtonProps = {
 
 const Button = ({ name }: ButtonProps) => {
   const navigate = useNavigate();
-  const { resetCardForm } = useCardContext();
+  const { resetCardForm, setIsSubmitted } = useCardContext();
+
+  const handleRegisterCard = () => {
+    navigate("/card/register/complete");
+    setIsSubmitted(true);
+  }
 
   const handleRegisterAnotherCard = () => {
     resetCardForm();
+    
     navigate("/");
+    location.reload();
+    setIsSubmitted(false);
   }
 
   return (
@@ -25,7 +33,7 @@ const Button = ({ name }: ButtonProps) => {
       }
       onClick={
         name === "register"
-          ? () => navigate("/card/register/complete")
+          ? () => handleRegisterCard()
           : () => handleRegisterAnotherCard()
       }
     >
