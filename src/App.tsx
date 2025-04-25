@@ -57,16 +57,26 @@ function App() {
     return filteredErrorMessageList[0];
   };
 
-  const canSubmit =
-    selectedCard !== null &&
+  const cardNumberOkay =
     cardNumber.every((value) => value !== '') &&
+    !getErrorMessageFromList(cardNumberErrorMessage);
+
+  const cardCompanyOkay = selectedCard !== null;
+
+  const cardValidityPeriodOkay =
     Object.values(cardValidityPeriod).every((value) => value !== '') &&
-    cardCVC !== '' &&
-    cardPassword !== '' &&
-    !getErrorMessageFromList(cardNumberErrorMessage) &&
-    !getErrorMessageFromList(Object.values(cardValidityPeriodErrorMessage)) &&
-    !cardCVCErrorMessage &&
-    !cardPasswordErrorMessage;
+    !getErrorMessageFromList(Object.values(cardValidityPeriodErrorMessage));
+
+  const cardCVCOkay = cardCVC !== '' && !cardCVCErrorMessage;
+
+  const cardPasswordOkay = cardPassword !== '' && !cardPasswordErrorMessage;
+
+  const canSubmit =
+    cardNumberOkay &&
+    cardCompanyOkay &&
+    cardValidityPeriodOkay &&
+    cardCVCOkay &&
+    cardPasswordOkay;
 
   return (
     <AppLayout>
