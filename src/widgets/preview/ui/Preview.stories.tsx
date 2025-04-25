@@ -47,7 +47,7 @@ export const Default: Story = {
 
     return (
       <main className='card-container' style={{ gap: '20px' }}>
-        <Preview cardNumber={cardNumbers} cardExpirationDate={{ month: '04', year: '21' }} />
+        <Preview cardNumber={cardNumbers} cardExpirationDate={{ month: '04', year: '21' }} cardIssuer={'BC카드'} />
         <S.CardInfoSubSection style={{ width: '300px' }}>
           <S.CardInfoInputContainer>
             {Array.from({ length: 4 }, (_, index) => (
