@@ -1,16 +1,16 @@
 import CardPreview from './components/CardPreview/CardPreview';
-import CardInputSection from './components/cardInfoForm/CardInputSection/CardInputSection';
-import CardNumberField from './components/cardInfoForm/CardNumberField/CardNumberField';
-import CardValidityPeriodField from './components/cardInfoForm/CardValidityPeriodField/CardValidityPeriodField';
-import CardCVCField from './components/cardInfoForm/CardCVCField/CardCVCField';
-import Button from './components/common/Button/Button';
+import CardInfoForm from './components/CardInfoForm/CardInfoForm';
+import CardInputSection from './components/CardInfoForm/CardInputSection/CardInputSection';
+import CardNumberField from './components/CardInfoForm/CardNumberField/CardNumberField';
+import CardValidityPeriodField from './components/CardInfoForm/CardValidityPeriodField/CardValidityPeriodField';
+import CardCVCField from './components/CardInfoForm/CardCVCField/CardCVCField';
+import CardCompanyField from './components/CardInfoForm/CardCompanyField/CardCompanyField';
+import CardPasswordField from './components/CardInfoForm/CardPasswordField/CardPasswordField';
 import styled from '@emotion/styled';
 import useCardNumber from './hooks/useCardNumber';
 import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
-import CardCompanyField from './components/cardInfoForm/CardCompanyField/CardCompanyField';
 import { useCardCompany } from './hooks/useCardCompany';
-import CardPasswordField from './components/cardInfoForm/CardPasswordField/CardPasswordField';
 import useCardPassword from './hooks/useCardPassword';
 
 function App() {
@@ -75,7 +75,7 @@ function App() {
         cardValidityPeriod={cardValidityPeriod}
         CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}
       />
-      <CardForm>
+      <CardInfoForm canSubmit={canSubmit}>
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
@@ -138,12 +138,7 @@ function App() {
             onChange={onChangeCardPassword}
           />
         </CardInputSection>
-        {canSubmit && (
-          <CardFormButtonWrapper>
-            <Button customStyle={cardFormButtonStyle} text="확인" />
-          </CardFormButtonWrapper>
-        )}
-      </CardForm>
+      </CardInfoForm>
     </AppLayout>
   );
 }
@@ -159,31 +154,3 @@ const AppLayout = styled.main`
   margin: 0 auto;
   padding: 70px 30px;
 `;
-
-const CardForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 38px;
-  margin-top: 45px;
-`;
-
-const CardFormButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const cardFormButtonStyle = {
-  width: '376px',
-  height: '50px',
-  backgroundColor: '#000000',
-  color: '#ffffff',
-  border: 'none',
-  transition: 'background-color 0.3s ease-in-out',
-  cursor: 'pointer',
-
-  ':hover': {
-    backgroundColor: '#697a9080',
-  },
-};
