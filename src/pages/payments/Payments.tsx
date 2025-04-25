@@ -1,21 +1,23 @@
 import { MouseEventHandler, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import Dropdown from '../../components/common/Dropdown/Dropdown';
+import FooterButton from '../../components/common/FooterButton/FooterButton';
+import MobileLayoutContainer from '../../components/common/MobileLayoutContainer/MobileLayoutContainer';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
+import { CARD_BANK } from '../../components/features/payments/config/card';
+import { INPUT_STEP } from '../../components/features/payments/config/step';
 import useCardNumberValidation from '../../components/features/payments/hooks/useCardNumberValidation';
+import useCardPasswordValidation from '../../components/features/payments/hooks/useCardPasswordValidation';
 import useCVCValidation from '../../components/features/payments/hooks/useCVCValidation';
 import useExpirationDateValidation from '../../components/features/payments/hooks/useExpirationDateValidation';
 import CardNumberInputField from '../../components/features/payments/InputField/CardNumberInputField';
+import CardPasswordInputField from '../../components/features/payments/InputField/CardPasswordInputField';
 import CVCInputField from '../../components/features/payments/InputField/CVCInputField';
 import ExpirationDateInputField from '../../components/features/payments/InputField/ExpirationDateInputField';
 import InputSection from '../../components/features/payments/InputSection/InputSection';
 import { DropdownOptionType } from '../../types/dropdown';
-import CardPasswordInputField from '../../components/features/payments/InputField/CardPasswordInputField';
-import useCardPasswordValidation from '../../components/features/payments/hooks/useCardPasswordValidation';
-import { CARD_BANK } from '../../components/features/payments/config/card';
-import { INPUT_STEP } from '../../components/features/payments/config/step';
 import { isAllTrue } from '../../utils/array';
-import { useNavigate } from 'react-router';
 
 function Payments() {
   const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
@@ -100,7 +102,7 @@ function Payments() {
   ]);
 
   return (
-    <PaymentsLayout>
+    <MobileLayoutContainer>
       <PaymentsContainer>
         <CardPreview
           cardNumberInputValue={cardNumberInputValues}
@@ -179,34 +181,26 @@ function Payments() {
           </InputSection>
 
           {allInputComplete ? (
-            <PaymentsSubmitButton onClick={handleSubmit}>
-              확인
-            </PaymentsSubmitButton>
+            <SubmitButtonWrapper>
+              <FooterButton size="large" onClick={handleSubmit}>
+                확인
+              </FooterButton>
+            </SubmitButtonWrapper>
           ) : null}
         </PaymentsInputForm>
       </PaymentsContainer>
-    </PaymentsLayout>
+    </MobileLayoutContainer>
   );
 }
-
-const PaymentsLayout = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 const PaymentsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
   box-sizing: border-box;
   padding: 44px 28px;
-  align-items: center;
-  width: 376px;
   min-height: 100vh;
-  background-color: white;
-  border: 1px solid lightgray;
 `;
 
 const PaymentsInputForm = styled.form`
@@ -215,17 +209,9 @@ const PaymentsInputForm = styled.form`
   gap: 16px;
 `;
 
-const PaymentsSubmitButton = styled.button`
+const SubmitButtonWrapper = styled.div`
   position: sticky;
   bottom: 20px;
-  cursor: pointer;
-  width: 100%;
-  padding: 20px;
-  background-color: #333333;
-  color: #f3f3f3;
-  font-weight: 700;
-  font-size: 16px;
-  border: none;
 `;
 
 export default Payments;
