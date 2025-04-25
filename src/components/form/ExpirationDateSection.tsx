@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useRef, useState} from 'react';
 import Description from '../description/Description';
 import InputField from '../inputField/InputField';
 import Title from '../title/Title';
@@ -53,7 +53,10 @@ const expirationErrorRule = [
 
 const ExpirationDateSection = ({value, onChange, onError}: Props) => {
   const [error, setError] = useState(INIT_EXPIRATION_DATE_ERROR);
-
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
   const handleInput = (
     e: ChangeEvent<HTMLInputElement>,
     order: keyof ExpirationDate
@@ -71,6 +74,11 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
     }));
 
     matchedError ? onError(name, true) : onError(name, false);
+
+    const index = ORDER_LABEL.findIndex((i) => i === order);
+
+    if (value.length === INPUT_MAX_LENGTH && inputRefs[index + 1])
+      inputRefs[index + 1].current?.focus();
   };
 
   const handleFocusout = (order: keyof ExpirationDate, value: string) => {
@@ -83,8 +91,9 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
       <Title>카드 유효기간을 입력해 주세요</Title>
       <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
       <InputField label="유효기간" errorMessage={findErrorOrder(error)}>
-        {ORDER_LABEL.map((label) => (
+        {ORDER_LABEL.map((label, idx) => (
           <Input
+            ref={inputRefs[idx]}
             name="expirationDate"
             isError={error[label].length > 0}
             placeholder={label === 'month' ? 'MM' : 'YY'}

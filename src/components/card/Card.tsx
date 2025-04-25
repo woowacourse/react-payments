@@ -69,7 +69,7 @@ const Card = ({cardNumbers, expirationDate, cardCompany}: Props) => {
 
       <CardInfoWrap>
         {Object.entries(cardNumbers).map(([key, value]) => (
-          <CardNumbers key={key} blind={key === 'third' || key === 'fourth'}>
+          <CardNumbers key={key} $blind={key === 'third' || key === 'fourth'}>
             {key === 'third' || key === 'fourth'
               ? '•'.repeat(value?.length)
               : value}
@@ -122,6 +122,6 @@ const CardInfoWrap = styled.div`
   color: #fff;
 `;
 
-const CardNumbers = styled.p<{blind: boolean}>`
-  letter-spacing: ${(props) => (props.blind ? '' : '2.24px')};
+const CardNumbers = styled.p<{$blind: boolean}>`
+  letter-spacing: ${(props) => (props.$blind ? '' : '2.24px')};
 `;
