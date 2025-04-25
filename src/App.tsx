@@ -137,7 +137,9 @@ function App() {
             onChange={onChangeCardPassword}
           />
         </CardInputSection>
-        {canSubmit && <CardFormButton>확인</CardFormButton>}
+        <CardFormButtonWrapper>
+          {canSubmit && <CardFormButton>확인</CardFormButton>}
+        </CardFormButtonWrapper>
       </CardForm>
     </AppLayout>
   );
@@ -162,8 +164,15 @@ const CardForm = styled.form`
   margin-top: 45px;
 `;
 
+const CardFormButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
 const CardFormButton = styled.button`
-  width: 100%;
+  width: 376px;
   height: 50px;
   background-color: #000000;
   color: #ffffff;
