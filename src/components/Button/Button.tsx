@@ -6,6 +6,7 @@ type buttonProps = {
 };
 
 const StyledButton = styled.button`
+  width: 100%;
   height: 52px;
   gap: 10px;
   background-color: #333333;
@@ -13,6 +14,7 @@ const StyledButton = styled.button`
   white-space: nowrap;
   font-weight: 700;
   cursor: pointer;
+  margin-top: 20px;
 `;
 const Button = (props: buttonProps) => {
   return <StyledButton onClick={props.onClick}>{props.text}</StyledButton>;
