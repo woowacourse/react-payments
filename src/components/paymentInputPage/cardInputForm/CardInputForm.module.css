@@ -1,5 +1,16 @@
 .cardInputForm {
+  height: 540px;
   display: flex;
   flex-direction: column;
   gap: 26px;
+}
+
+.inputBox {
+  height: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.inputBox::-webkit-scrollbar {
+  display: none;
 }

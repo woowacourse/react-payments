@@ -18,7 +18,7 @@ export function getExpirationFirstErrorMessage(
 
 export function getFirstErrorMessage(
   errorResult: Record<string, boolean>,
-  fieldKey: "CVC" | "NUMBER"
+  fieldKey: "CVC" | "NUMBER" | "PASSWORD"
 ): string {
   const firstError = Object.entries(errorResult).find(
     ([, isValid]) => !isValid

@@ -13,6 +13,9 @@ const ERROR_MESSAGE = {
   CVC: {
     IS_NUMBER_STRING: "숫자를 입력해주세요",
   },
+  PASSWORD: {
+    IS_NUMBER_STRING: "비밀번호는 숫자 2자리입니다",
+  },
   NUMBER: {
     IS_NUMBER_STRING: "숫자를 입력해주세요",
   },

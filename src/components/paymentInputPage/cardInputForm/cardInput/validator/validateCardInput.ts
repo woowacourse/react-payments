@@ -21,6 +21,10 @@ export function validateCVC(cvc: string) {
   return { IS_NUMBER_STRING: validatorUtils.isNumber(cvc) };
 }
 
+export function validatePassword(password: string) {
+  return { IS_NUMBER_STRING: validatorUtils.isNumber(password) };
+}
+
 export function validateNumberString(cardNumber: string) {
   return { IS_NUMBER_STRING: validatorUtils.isNumber(cardNumber) };
 }
