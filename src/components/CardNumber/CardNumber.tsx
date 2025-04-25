@@ -25,6 +25,7 @@ export default function CardNumber({
           <Input
             key={sequence}
             type="text"
+            autoFocus={index === 0}
             placeholder="1234"
             maxLength={4}
             id={index === 0 ? 'card-number' : undefined}

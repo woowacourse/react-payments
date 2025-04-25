@@ -25,6 +25,7 @@ export default function CardExpirationDate({
           <Input
             key={dateType}
             type="text"
+            autoFocus={index === 0}
             placeholder={dateType === 'month' ? 'MM' : 'YY'}
             maxLength={2}
             id={index === 0 ? 'card-expiration-date' : undefined}

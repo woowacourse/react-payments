@@ -21,6 +21,7 @@ export default function CardCVCNumber({
           type="text"
           placeholder="123"
           maxLength={3}
+          autoFocus
           id="card-cvc-number"
           value={cardCVCNumber}
           onChange={(event) => handleCardCVCNumberInputChange(event.target.value)}

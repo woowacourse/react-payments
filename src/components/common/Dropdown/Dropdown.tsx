@@ -39,6 +39,7 @@ export default function Dropdown<T extends string>({
     <S.DropdownContainer ref={containerRef}>
       <S.DropdownButton
         type="button"
+        autoFocus
         selectedValue={SelectedValue}
         isOpen={isOpen}
         onClick={() => setIsOpen((prev) => !prev)}

@@ -19,6 +19,7 @@ export default function CardPasswordNumber({
       <Input
         type="password"
         maxLength={2}
+        autoFocus
         id="card-password"
         value={cardPassword}
         onChange={(event) => handleCardPasswordInputChange(event.target.value)}
