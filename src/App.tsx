@@ -8,6 +8,10 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Navigate to='/card-register' replace />} />
         <Route path='/card-register' element={<CardRegisterPage />} />
+        <Route
+          path='/card-register-complete'
+          element={<CardRegisterCompletePage />}
+        />
       </Routes>
     </BrowserRouter>
   );
