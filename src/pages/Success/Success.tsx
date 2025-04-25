@@ -6,13 +6,16 @@ import {
 } from "./Success.styled";
 import check from "/check.svg";
 import Button from "../../components/Button/Button";
+import { useCard } from "../../hooks/useCard";
 
 function Success() {
+  const { resetCard } = useCard();
   const location = useLocation();
   const { cardNumber, cardBrand } = location.state || {};
 
   const navigate = useNavigate();
   const handleClick = () => {
+    resetCard();
     navigate("/");
   };
   return (

@@ -35,6 +35,8 @@ export interface CardContextType {
 
   password: Password;
   updatePassword: (value: string) => void;
+
+  resetCard: () => void;
 }
 
 interface CardProviderProps {
@@ -68,6 +70,14 @@ export function CardProvider({ children }: CardProviderProps) {
   const [cvcNumber, setCvcNumber] = useState<CvcNumber>(defaultCvcNumber);
   const [cardBrand, setCardBrand] = useState<CardBrand>(defaultCardBrand);
   const [password, setPassword] = useState<Password>(defaultPassword);
+
+  const resetCard = () => {
+    setCardNumbers(defaultCardNumbers);
+    setCardBrand("");
+    setExpirationPeriod(defaultExpirationPeriod);
+    setCvcNumber("");
+    setPassword("");
+  };
 
   const updateCardNumber = (value: string, position: CardPositionType) => {
     setCardNumbers((prevNumbers) => ({
@@ -111,6 +121,8 @@ export function CardProvider({ children }: CardProviderProps) {
 
         password,
         updatePassword,
+
+        resetCard,
       }}
     >
       {children}
