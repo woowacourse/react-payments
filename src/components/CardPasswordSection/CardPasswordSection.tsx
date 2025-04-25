@@ -1,4 +1,4 @@
-import { validateNumberError, validatePasswordLengthError } from '../../utils/CardInputValidations';
+import { validateNumberError, validatePasswordLengthError } from '../../utils/cardInputValidations';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 import styles from './CardPasswordSection.module.css';

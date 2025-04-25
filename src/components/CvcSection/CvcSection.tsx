@@ -1,4 +1,4 @@
-import { validateCvcLengthError, validateNumberError } from '../../utils/CardInputValidations';
+import { validateCvcLengthError, validateNumberError } from '../../utils/cardInputValidations';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 import styles from './CvcSection.module.css';

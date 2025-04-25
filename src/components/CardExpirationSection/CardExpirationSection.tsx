@@ -5,7 +5,7 @@ import {
   validateMonthRangeError,
   validateNumberError,
   validateYearLengthError
-} from '../../utils/CardInputValidations';
+} from '../../utils/cardInputValidations';
 import { Expiration } from '../../types/card';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 
