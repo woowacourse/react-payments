@@ -9,106 +9,103 @@ import { useInput } from '../../hooks/useInput';
 import CardCompanySelectBox from './components/CardCompanySelectBox/CardCompanySelectBox';
 import PasswordInput from './components/PasswordInput/PasswordInput';
 import { useSelect } from '../../hooks/useSelect';
-import { useState } from 'react';
 import Button from '../../components/Button/Button';
+import useTotalInputValidation from '../../hooks/useTotalInputValidation';
+import useStep from '../../hooks/useStep';
+import { useNavigate } from 'react-router-dom';
 
 export type HandleInputParams = {
   value: string;
   idx: number;
 };
 
-enum InputStep {
-  CARD_NUMBER = 0,
-  CARD_COMPANY = 1,
-  EXPIRATION_DATE = 2,
-  CVC = 3,
-  PASSWORD = 4,
-  COMPLETED = 5,
-}
-
 const CardPage = () => {
+  const navigate = useNavigate();
   const [cardNumber, handleCardNumberInput] = useInput(['', '', '', '']);
   const [cardCompany, handleCardCompanyInput] = useSelect('');
   const [expirationDate, handleExpirationDateInput] = useInput(['', '']);
   const [cvc, handleCVCInput] = useInput(['']);
   const [password, handlePasswordInput] = useInput(['']);
 
-  const [currentStep, setCurrentStep] = useState<InputStep>(InputStep.CARD_NUMBER);
-  const [isValidInput, setIsValidInput] = useState(Array.from({ length: 5 }, () => false));
+  const { goToNextStep, isAtLeastAtStep, InputStep } = useStep();
+  const { updateValidity, isAllValid } = useTotalInputValidation(5);
 
-  const updateValidity = (step: InputStep, isValid: boolean) => {
-    setIsValidInput((prev) => {
-      const updated = [...prev];
-      updated[step] = isValid;
-      return updated;
+  const handleCardRegister = () => {
+    navigate('/card/complete', {
+      state: {
+        cardNumber,
+        cardCompany,
+      },
     });
   };
 
-  const isPossibleEnrollCard = isValidInput.every((isValid) => isValid);
-
   return (
     <StyledCardPage>
-      <PreviewCard cardNumber={cardNumber} expirationDate={expirationDate} />
-      {currentStep >= InputStep.PASSWORD && (
+      <PreviewCard
+        cardNumber={cardNumber}
+        expirationDate={expirationDate}
+        cardCompany={cardCompany}
+      />
+      {isAtLeastAtStep(InputStep.PASSWORD) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.PASSWORD_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.PASSWORD_SUBTITLE} />
           <PasswordInput
             values={password}
             onChange={handlePasswordInput}
-            onComplete={() => setCurrentStep(InputStep.COMPLETED)}
+            onComplete={() => goToNextStep(InputStep.PASSWORD)}
             onValidityChange={(isValid) => updateValidity(InputStep.PASSWORD, isValid)}
           />
         </>
       )}
-      {currentStep >= InputStep.CVC && (
+      {isAtLeastAtStep(InputStep.CVC) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
           <CVCInput
             values={cvc}
             onChange={handleCVCInput}
-            onComplete={() => setCurrentStep(InputStep.PASSWORD)}
+            onComplete={() => goToNextStep(InputStep.CVC)}
             onValidityChange={(isValid) => updateValidity(InputStep.CVC, isValid)}
           />
         </>
       )}
-      {currentStep >= InputStep.EXPIRATION_DATE && (
+      {isAtLeastAtStep(InputStep.EXPIRATION_DATE) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
           <ExpirationDateInput
             values={expirationDate}
             onChange={handleExpirationDateInput}
-            onComplete={() => setCurrentStep(InputStep.CVC)}
+            onComplete={() => goToNextStep(InputStep.EXPIRATION_DATE)}
             onValidityChange={(isValid) => updateValidity(InputStep.EXPIRATION_DATE, isValid)}
           />
         </>
       )}
-      {currentStep >= InputStep.CARD_COMPANY && (
+      {isAtLeastAtStep(InputStep.CARD_COMPANY) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
           <CardCompanySelectBox
             value={cardCompany}
             onChange={handleCardCompanyInput}
-            onComplete={() => setCurrentStep(InputStep.EXPIRATION_DATE)}
+            onComplete={() => goToNextStep(InputStep.CARD_COMPANY)}
             onValidityChange={(isValid) => updateValidity(InputStep.CARD_COMPANY, isValid)}
           />
         </>
       )}
-      {currentStep >= InputStep.CARD_NUMBER && (
+      {isAtLeastAtStep(InputStep.CARD_NUMBER) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
           <CardNumberInput
             values={cardNumber}
             onChange={handleCardNumberInput}
-            onComplete={() => setCurrentStep(InputStep.CARD_COMPANY)}
+            onComplete={() => goToNextStep(InputStep.CARD_NUMBER)}
             onValidityChange={(isValid) => updateValidity(InputStep.CARD_NUMBER, isValid)}
           />
         </>
       )}
-      {isPossibleEnrollCard && <Button>등록</Button>}
+      {isAllValid() && <Button onClick={handleCardRegister}>확인</Button>}
     </StyledCardPage>
   );
 };
