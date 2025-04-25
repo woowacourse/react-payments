@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputGroup from "./InputGroup";
 import { INPUT_TYPE } from "../../constants/constants";
-import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
 
 const defaultError = {
   cardNumbers: {
@@ -15,13 +15,15 @@ const defaultError = {
     year: false,
   },
   cvcNumber: false,
+  cardBrand: false,
+  password: false,
 };
 
 const meta = {
   title: "InputGroup",
   component: InputGroup,
   tags: ["autodocs"],
-  decorators: [withCustomCardProvider({})],
+  decorators: [withCardProviders({})],
 } satisfies Meta<typeof InputGroup>;
 
 export default meta;
@@ -30,7 +32,7 @@ type Story = StoryObj<typeof InputGroup>;
 
 export const CardNumber: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "1111",
         second: "2222",
@@ -47,7 +49,7 @@ export const CardNumber: Story = {
 
 export const ExpirationPeriod: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       expirationPeriod: {
         month: "03",
         year: "28",
@@ -62,7 +64,7 @@ export const ExpirationPeriod: Story = {
 
 export const CvcNumber: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cvcNumber: "111",
     }),
   ],
@@ -74,7 +76,7 @@ export const CvcNumber: Story = {
 
 export const WithCardNumberError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "123a",
         second: "4567",
@@ -97,13 +99,15 @@ export const WithCardNumberError: Story = {
         year: false,
       },
       cvcNumber: false,
+      cardBrand: false,
+      password: false,
     },
   },
 };
 
 export const WithExpirationPeriodError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       expirationPeriod: {
         month: "ab",
         year: "25",
@@ -124,13 +128,15 @@ export const WithExpirationPeriodError: Story = {
         year: false,
       },
       cvcNumber: false,
+      cardBrand: false,
+      password: false,
     },
   },
 };
 
 export const WithCvcNumberError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cvcNumber: "12a", // 숫자가 아닌 값 포함
     }),
   ],
@@ -148,6 +154,8 @@ export const WithCvcNumberError: Story = {
         year: false,
       },
       cvcNumber: true, // CVC 입력에 에러 표시
+      cardBrand: false,
+      password: false,
     },
   },
 };

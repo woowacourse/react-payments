@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { INPUT_TYPE } from "../../constants/constants";
 import InputSection from "./InputSection";
-import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
-
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
+import { withRouter } from "../../../.storybook/withRouter";
 const meta = {
   title: "InputSection",
   component: InputSection,
@@ -14,22 +14,86 @@ export default meta;
 type Story = StoryObj<typeof InputSection>;
 
 export const CardNumbers: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [withRouter, withCardProviders({})],
+
   args: {
     type: INPUT_TYPE.cardNumbers,
+    validators: {
+      validateCardNumber: () => {},
+      validateExpirationPeriod: () => {},
+      validateCvcNumber: () => {},
+      validatePassword: () => {},
+    },
+    onComplete: () => {},
+    isComplete: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
+    error: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
   },
 };
 
 export const ExpirationPeriod: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [withRouter, withCardProviders({})],
   args: {
     type: INPUT_TYPE.expirationPeriod,
+    validators: {
+      validateCardNumber: () => {},
+      validateExpirationPeriod: () => {},
+      validateCvcNumber: () => {},
+      validatePassword: () => {},
+    },
+    onComplete: () => {},
+    isComplete: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
+    error: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
   },
 };
 
 export const cvcNumber: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [withRouter, withCardProviders({})],
   args: {
     type: INPUT_TYPE.cvcNumber,
+    validators: {
+      validateCardNumber: () => {},
+      validateExpirationPeriod: () => {},
+      validateCvcNumber: () => {},
+      validatePassword: () => {},
+    },
+    onComplete: () => {},
+    isComplete: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
+    error: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
   },
 };

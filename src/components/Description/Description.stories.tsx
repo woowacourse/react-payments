@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Description from "./Description";
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
 
 const meta = {
   title: "Description",
@@ -15,4 +16,5 @@ export const Default: Story = {
   args: {
     description: "본인 명의의 카드만 결제 가능합니다.",
   },
+  decorators: [withCardProviders({})],
 };

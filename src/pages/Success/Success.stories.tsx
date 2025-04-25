@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Payments from "./Payments";
 import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
 import { withRouter } from "../../../.storybook/withRouter";
+import Success from "./Success";
 const meta = {
-  title: "Payments",
-  component: Payments,
+  title: "Success",
+  component: Success,
   tags: ["autodocs"],
-} satisfies Meta<typeof Payments>;
+} satisfies Meta<typeof Success>;
 
 export default meta;
 
