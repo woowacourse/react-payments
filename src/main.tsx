@@ -5,12 +5,18 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ContainerStyles, WrapperStyles } from "./styles/Layout.styled";
 import CardForm from "./pages/CardForm/CardForm";
 import { GlobalStyles } from "./styles/Global.styled";
+import { CardProvider } from "./contexts/CardContext";
+import { CardValidationProvider } from "./contexts/CardValidationContext";
 
 function Layout() {
   return (
     <ContainerStyles>
       <WrapperStyles>
-        <Outlet />
+        <CardProvider>
+          <CardValidationProvider>
+            <Outlet />
+          </CardValidationProvider>
+        </CardProvider>
       </WrapperStyles>
     </ContainerStyles>
   );

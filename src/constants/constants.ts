@@ -35,6 +35,17 @@ export const CARD_COMPANY = {
   kb: "kb",
 } as const;
 
+export const CARD_COMPANY_INFO = [
+  { value: "bc", text: "BC카드" },
+  { value: "shinhan", text: "신한카드" },
+  { value: "kakaobank", text: "카카오뱅크" },
+  { value: "hyundai", text: "현대카드" },
+  { value: "woori", text: "우리카드" },
+  { value: "lotte", text: "롯데카드" },
+  { value: "hana", text: "하나카드" },
+  { value: "kb", text: "국민카드" },
+];
+
 export const PLACEHOLDER = {
   cardNumber: "1234",
   expirationPeriod: {

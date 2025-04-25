@@ -17,6 +17,7 @@ export const CheckImgStyles = styled.img`
 
 export const CompletionMessageStyles = styled.div`
   text-align: center;
+  line-height: 1.5;
 `;
 
 export const CompletionTitleStyles = styled.h1`
