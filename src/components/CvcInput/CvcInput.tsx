@@ -21,6 +21,7 @@ function CvcInput({ value, error, handleCvcNumberChange }: CvcInputProps) {
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         handleCvcNumberChange(e.target.value)
       }
+      autoFocus={true}
     />
   );
 }

@@ -35,6 +35,7 @@ function ExpirationPeriodInputs({
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleExpirationPeriodChange(e.target.value, PERIOD_POSITION.month)
         }
+        autoFocus={true}
       />
       <Input
         placeholder={year}

@@ -31,6 +31,7 @@ function CardNumberInputs({
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleCardNumberChange(e.target.value, CARD_POSITION.first)
         }
+        autoFocus={true}
       />
       <Input
         placeholder={cardNumberPlaceholder}

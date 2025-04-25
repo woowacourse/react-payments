@@ -20,6 +20,7 @@ function PasswordInput({ value, error, handlePasswordChange }: PasswordProps) {
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         handlePasswordChange(e.target.value)
       }
+      autoFocus={true}
     />
   );
 }
