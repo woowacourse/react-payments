@@ -55,6 +55,9 @@ const CardNumberInputs = forwardRef<HTMLInputElement, CardNumberInputsProps>(
                 value={cardNumberState[inputKey].value}
                 onChange={(e) => handleInputChange(inputKey, e.target.value)}
                 ref={idx === 0 ? ref : inputRefs[inputKey]}
+                aria-describedby={
+                  latestErrorMessage ? "card-number-error-message" : undefined
+                }
               />
             </p>
           ))}
