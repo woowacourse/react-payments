@@ -3,10 +3,10 @@ import * as S from './CustomLinkButton.styles';
 import { SerializedStyles } from '@emotion/react';
 
 export default function CustomLinkButton({ path, css }: { path: string; css?: SerializedStyles }) {
-  const router = useNavigate();
+  const navigate = useNavigate();
 
   const handleLinkClick = () => {
-    router(`/${path}`);
+    navigate(`/${path}`);
   };
   return (
     <S.CustomLinkButton onClick={handleLinkClick} css={css} type='button'>
