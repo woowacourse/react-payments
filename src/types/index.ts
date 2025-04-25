@@ -2,9 +2,9 @@ export type errorStateType = boolean[];
 
 export type ExpirationValidationType = "MM" | "YY";
 
-export type cardInformationKey = "uniqueNumber" | "expirationDate" | "cvcNumber" | "password";
+export type cardInformationKey = "uniqueNumber" | "expirationDate" | "cvcNumber" | "password" | "company";
 
-export type cardCompanyType = (
+export type companyType = (
   | "BC카드"
   | "신한카드"
   | "카카오뱅크"
@@ -16,7 +16,7 @@ export type cardCompanyType = (
 )[];
 
 export type InputFormSectionData = {
-  key: cardInformationKey;
+  key: "uniqueNumber" | "expirationDate" | "cvcNumber" | "password";
   title: string;
   description: string;
   type: "input";
@@ -32,12 +32,12 @@ export type InputFormSectionData = {
 };
 
 export type SelectFormSectionData = {
-  key: "cardCompany";
+  key: "company";
   title: string;
   description: string;
   type: "select";
   fieldData: {
-    options: cardCompanyType;
+    options: companyType;
     placeholder: string;
   };
 };

@@ -7,5 +7,5 @@ export type useEachValidationType = {
 };
 
 export type useValidationType = {
-  [K in cardInformationKey]: useEachValidationType;
+  [K in Exclude<cardInformationKey, "company">]: useEachValidationType;
 };

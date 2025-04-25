@@ -34,6 +34,7 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
             description={formSectionData.description}
             fieldData={{
               ...formSectionData.fieldData,
+              informationType: formSectionData.key,
               setCardInformation: setCardInformationState,
             }}
           />

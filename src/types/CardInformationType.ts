@@ -3,6 +3,7 @@ export type CardInformationType = {
   expirationDate: [string, string];
   cvcNumber: [string];
   password: [string];
+  company: string;
 };
 
 export type setCardInformationType = React.Dispatch<React.SetStateAction<CardInformationType>>;

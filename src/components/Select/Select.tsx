@@ -7,7 +7,12 @@ const arrow = {
   down: "downArrow.svg",
 };
 
-const Select = ({ options, placeholder, setCardInformation }: SelectProps) => {
+const Select = ({
+  options,
+  placeholder,
+  setCardInformation /** 이 필드가 담당하는 카드 정보 타입 */,
+  informationType,
+}: SelectProps) => {
   // 모달 열고 닫기 상태
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +29,9 @@ const Select = ({ options, placeholder, setCardInformation }: SelectProps) => {
     setIsOpen(false);
 
     // 상태 업데이트
-    // setCardInformation
+    setCardInformation((prev) => {
+      return { ...prev, [informationType]: item };
+    });
   };
 
   // 외부 클릭 시 닫기
