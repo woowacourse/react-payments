@@ -4,28 +4,32 @@ import { CardType } from '../../../../config/card';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
+  FieldName,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
-import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
+import Input from '../../../ui/Input/Input';
 
 interface CardNumberInputFieldProps {
   inputValue: Record<CardNumberInputType, string>;
   setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
   cardType: CardType;
-  setCardType: Dispatch<SetStateAction<CardType>>;
-  onComplete: (isComplete: boolean) => void;
+  onComplete: ({
+    isComplete,
+    fieldName,
+  }: {
+    isComplete: boolean;
+    fieldName: FieldName;
+  }) => void;
 }
 
 const MAX_CARD_LENGTH = 4;
-const CARD_TYPE_ID_LENGTH = 2;
 
 function CardNumberInputField({
   inputValue,
   setInputValue,
   cardType,
-  setCardType,
   onComplete,
 }: CardNumberInputFieldProps) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
@@ -42,18 +46,10 @@ function CardNumberInputField({
     maxLength: MAX_CARD_LENGTH,
   });
 
-  onComplete?.(isComplete && !Boolean(errorMessage));
-
-  const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length > CARD_TYPE_ID_LENGTH) {
-      if (cardType === null) return true;
-      return false;
-    }
-    if (value[0] === '4') setCardType('visa');
-    else if (Number(value) >= 51 && Number(value) <= 55) setCardType('master');
-    else setCardType(null);
-    return false;
-  };
+  onComplete?.({
+    isComplete: isComplete && !Boolean(errorMessage),
+    fieldName: 'cardNumber',
+  });
 
   const onCardNumberChange = ({
     name,
@@ -64,11 +60,9 @@ function CardNumberInputField({
   }) => {
     onChange({ name, value });
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
-      const isError = checkCardTypeFromPrefix(value);
-
       validateInputError(name, {
         errorType: 'noneCardType',
-        isError,
+        isError: cardType === null,
       });
     }
   };

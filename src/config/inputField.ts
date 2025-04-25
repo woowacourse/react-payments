@@ -44,3 +44,6 @@ export type CardIssuerSelectorType = (typeof CARD_ISSUER_TYPE)[number];
 // 카드 비밀번호 타입
 export const PASSWORD_INPUT_TYPE = ['passwordPart1'] as const;
 export type PasswordInputType = (typeof PASSWORD_INPUT_TYPE)[number];
+
+// payments inputFiled 타입
+export type FieldName = 'cardNumber' | 'expirationDate' | 'CVC' | 'password';

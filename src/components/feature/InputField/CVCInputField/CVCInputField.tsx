@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   CVC_INPUT_TYPE,
   CVCInputValueType,
+  FieldName,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
@@ -12,7 +13,13 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 interface CVCInputFieldProps {
   inputValue: Record<CVCInputValueType, string>;
   setInputValue: Dispatch<SetStateAction<Record<CVCInputValueType, string>>>;
-  onComplete: (isComplete: boolean) => void;
+  onComplete: ({
+    isComplete,
+    fieldName,
+  }: {
+    isComplete: boolean;
+    fieldName: FieldName;
+  }) => void;
 }
 
 const MAX_CVC_LENGTH = 3;
@@ -32,7 +39,10 @@ function CVCInputField({
     inputErrorType: 'shortCVCSegment',
   });
 
-  onComplete?.(isComplete && !Boolean(errorMessage));
+  onComplete?.({
+    isComplete: isComplete && !Boolean(errorMessage),
+    fieldName: 'CVC',
+  });
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>

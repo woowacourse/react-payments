@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import {
+  FieldName,
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
@@ -12,7 +13,13 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 interface PasswordInputFieldProps {
   inputValue: Record<PasswordInputType, string>;
   setInputValue: Dispatch<SetStateAction<Record<PasswordInputType, string>>>;
-  onComplete: (isComplete: boolean) => void;
+  onComplete: ({
+    isComplete,
+    fieldName,
+  }: {
+    isComplete: boolean;
+    fieldName: FieldName;
+  }) => void;
 }
 
 const MAX_PASSWORD_LENGTH = 2;
@@ -36,7 +43,10 @@ function PasswordInputField({
     maxLength: MAX_PASSWORD_LENGTH,
   });
 
-  onComplete?.(isComplete && !Boolean(errorMessage));
+  onComplete?.({
+    isComplete: isComplete && !Boolean(errorMessage),
+    fieldName: 'password',
+  });
 
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>

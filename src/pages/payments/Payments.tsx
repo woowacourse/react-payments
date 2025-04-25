@@ -6,19 +6,19 @@ import {
   CardNumberInputType,
   CVCInputValueType,
   ExpirationDateInputType,
+  FieldName,
   PasswordInputType,
 } from '../../config/inputField';
-import { CardType } from '../../config/card';
 
-import InputSection from '../../components/ui/InputSection/InputSection';
-import CardNumberInputField from '../../components/feature/InputField/CardNumberInputField/CardNumberInputField';
-import ExpirationDateInputField from '../../components/feature/InputField/ExpirationDateInputField/ExpirationDateInputField';
+import { useNavigate } from 'react-router-dom';
+import CardPreview from '../../components/feature/CardPreviw/CardPreview';
 import CVCInputField from '../../components/feature/InputField/CVCInputField/CVCInputField';
 import CardIssuerSelector from '../../components/feature/InputField/CardIssuerSelector/CardIssuerSelector';
+import CardNumberInputField from '../../components/feature/InputField/CardNumberInputField/CardNumberInputField';
+import ExpirationDateInputField from '../../components/feature/InputField/ExpirationDateInputField/ExpirationDateInputField';
 import PasswordInputField from '../../components/feature/InputField/PasswordInputField/PasswordInputField';
-import CardPreview from '../../components/feature/CardPreviw/CardPreview';
 import Button from '../../components/ui/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import InputSection from '../../components/ui/InputSection/InputSection';
 
 function Payments() {
   const navigate = useNavigate();
@@ -50,11 +50,12 @@ function Payments() {
     passwordPart1: '',
   });
 
-  const [cardType, setCardType] = useState<CardType>(null);
-  const [step, setStep] = useState(1);
   const [cardIssuer, setCardIssuer] = useState<CardIssuerSelectorType | null>(
     null
   );
+
+  const [step, setStep] = useState(1);
+
   const [isFieldComplete, setIsFieldComplete] = useState({
     cardNumber: false,
     expirationDate: false,
@@ -62,30 +63,35 @@ function Payments() {
     password: false,
   });
 
-  type FieldName = 'cardNumber' | 'expirationDate' | 'CVC' | 'password';
+  const updateCompleteStatus = ({
+    isComplete,
+    fieldName,
+    targetStep,
+  }: {
+    isComplete: boolean;
+    fieldName: FieldName;
+    targetStep: number;
+  }) => {
+    if (isFieldComplete[fieldName] === isComplete) return;
+    if (step === targetStep && isComplete) setStep(targetStep + 1);
+
+    setIsFieldComplete((prev) => ({
+      ...prev,
+      [fieldName]: isComplete,
+    }));
+  };
+
+  const checkCardType = (value: string) => {
+    if (value[0] === '4') return 'visa';
+    else if (Number(value) >= 51 && Number(value) <= 55) return 'master';
+    return null;
+  };
+  const cardType = checkCardType(cardNumberInputValue.cardNumberPart1);
 
   const isAllFieldComplete = !Boolean(
     Object.values(isFieldComplete).filter((isComplete) => isComplete === false)
       .length
   );
-
-  const updateCompleteStatus = (fieldName: FieldName, status: boolean) => {
-    if (isFieldComplete[fieldName] === status) return;
-    setIsFieldComplete((prev) => ({
-      ...prev,
-      [fieldName]: status,
-    }));
-  };
-
-  const handleSubmit = () => {
-    const cardNumber = cardNumberInputValue.cardNumberPart1;
-    navigate(`/payments/complete`, {
-      state: {
-        cardNumber,
-        cardIssuer,
-      },
-    });
-  };
 
   return (
     <PaymentsLayout>
@@ -104,10 +110,9 @@ function Payments() {
             <PasswordInputField
               inputValue={passwordInputValue}
               setInputValue={setPasswordInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('password', isComplete);
-                if (step === 5 && isComplete) setStep(6);
-              }}
+              onComplete={(state) =>
+                updateCompleteStatus({ ...state, targetStep: 5 })
+              }
             />
           </InputSection>
         )}
@@ -116,10 +121,9 @@ function Payments() {
             <CVCInputField
               inputValue={CVCInputValue}
               setInputValue={setCVCInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('CVC', isComplete);
-                if (step === 4 && isComplete) setStep(5);
-              }}
+              onComplete={(state) =>
+                updateCompleteStatus({ ...state, targetStep: 4 })
+              }
             />
           </InputSection>
         )}
@@ -131,10 +135,9 @@ function Payments() {
             <ExpirationDateInputField
               inputValue={expirationDateInputValue}
               setInputValue={setExpirationDateInputValue}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('expirationDate', isComplete);
-                if (step === 3 && isComplete) setStep(4);
-              }}
+              onComplete={(state) =>
+                updateCompleteStatus({ ...state, targetStep: 3 })
+              }
             />
           </InputSection>
         )}
@@ -160,11 +163,9 @@ function Payments() {
               inputValue={cardNumberInputValue}
               setInputValue={setCardNumberInputValue}
               cardType={cardType}
-              setCardType={setCardType}
-              onComplete={(isComplete: boolean) => {
-                updateCompleteStatus('cardNumber', isComplete);
-                if (step === 1 && isComplete) setStep(2);
-              }}
+              onComplete={(state) =>
+                updateCompleteStatus({ ...state, targetStep: 1 })
+              }
             />
           </InputSection>
         )}
@@ -175,7 +176,14 @@ function Payments() {
           <Button
             buttonText="확인"
             buttonType="default"
-            onClick={handleSubmit}
+            onClick={() =>
+              navigate(`/payments/complete`, {
+                state: {
+                  cardNumber: cardNumberInputValue.cardNumberPart1,
+                  cardIssuer,
+                },
+              })
+            }
           />
         </ButtonContainer>
       )}
@@ -206,6 +214,7 @@ const PaymentsContainer = styled.div`
   box-sizing: border-box;
   padding: 44px 28px;
   align-items: center;
+  height: 100vh;
   width: 376px;
   min-height: 100%;
   background-color: white;

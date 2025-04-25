@@ -3,6 +3,7 @@ import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
+  FieldName,
 } from '../../../../config/inputField';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
@@ -13,7 +14,13 @@ interface ExpirationDateInputFieldProps {
   setInputValue: Dispatch<
     SetStateAction<Record<ExpirationDateInputType, string>>
   >;
-  onComplete: (isComplete: boolean) => void;
+  onComplete: ({
+    isComplete,
+    fieldName,
+  }: {
+    isComplete: boolean;
+    fieldName: FieldName;
+  }) => void;
 }
 
 const MAX_DATE_LENGTH = 2;
@@ -30,7 +37,10 @@ function ExpirationDateInputField({
     ).length
   );
 
-  onComplete?.(isComplete);
+  onComplete?.({
+    isComplete,
+    fieldName: 'expirationDate',
+  });
 
   const onExpirationDateChange = ({
     name,
