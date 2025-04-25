@@ -1,10 +1,11 @@
+import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CardFormSection from "../../components/CardForm/CardFormSection/CardFormSection";
 import CardPreview from "../../components/CardForm/CardPreview/CardPreview";
 import Button from "../../components/Common/Button/Button";
 import { CARD_FORM_TYPE } from "../../constants/constants";
-import { CardFormScrollStyles } from "./CardForm.styled";
 import { useCard } from "../../hooks/useCard";
+import { CardFormScrollStyles, CardFormStyles } from "./CardForm.styled";
 
 const CARD_COMPANY_INFO = {
   "": "",
@@ -22,7 +23,8 @@ export default function CardForm() {
   const { cardCompany, cardNumbers } = useCard();
   const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     navigate("/register-complete", {
       state: {
         cardFirstSegment: cardNumbers.first,
@@ -32,7 +34,7 @@ export default function CardForm() {
   };
 
   return (
-    <>
+    <CardFormStyles onSubmit={handleSubmit}>
       <CardPreview />
       <CardFormScrollStyles>
         <CardFormSection type={CARD_FORM_TYPE.password} />
@@ -41,7 +43,7 @@ export default function CardForm() {
         <CardFormSection type={CARD_FORM_TYPE.cardCompany} />
         <CardFormSection type={CARD_FORM_TYPE.cardNumbers} />
       </CardFormScrollStyles>
-      <Button type="button" text="확인" onClick={handleRegister} />
-    </>
+      <Button type="submit" text="확인" />
+    </CardFormStyles>
   );
 }

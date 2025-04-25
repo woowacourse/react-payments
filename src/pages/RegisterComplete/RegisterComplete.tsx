@@ -1,15 +1,19 @@
 import { useLocation } from "react-router-dom";
 import Button from "../../components/Common/Button/Button";
 import {
-  RegisterCompleteStyles,
   CheckImgStyles,
   CompletionMessageStyles,
   CompletionTitleStyles,
+  RegisterCompleteStyles,
 } from "./RegisterComplete.styled";
 
 export default function RegisterComplete() {
   const { state } = useLocation();
   const { cardFirstSegment, cardName } = state || {};
+
+  const handleConfirm = () => {
+    window.location.href = "/";
+  };
 
   return (
     <RegisterCompleteStyles>
@@ -22,7 +26,7 @@ export default function RegisterComplete() {
           {cardName}가 등록되었어요.
         </CompletionTitleStyles>
       </CompletionMessageStyles>
-      <Button type="button" text="확인" />
+      <Button type="button" text="확인" onClick={handleConfirm} />
     </RegisterCompleteStyles>
   );
 }
