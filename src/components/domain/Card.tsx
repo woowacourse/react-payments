@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { CARD_COMPANY_COLORS, CARD_TYPE_PATH } from '../../constants/setting';
 import getCardType from '../../utils/getCardType';
+import getMaskedCardNumber from '../../utils/getMaskedCardNumber';
 
 interface CardProps {
   cardNumber: string[];
@@ -11,13 +12,6 @@ interface CardProps {
 const Card = ({ cardNumber, company, expiration }: CardProps) => {
   const cardType = getCardType(cardNumber[0]);
 
-  function maskCardNumber(cardNumber: string[]) {
-    return [
-      ...cardNumber.slice(0, 2),
-      ...cardNumber.slice(2).map((letter) => '·'.repeat(letter.length)),
-    ];
-  }
-
   return (
     <CardContainer company={company}>
       <CardHeader>
@@ -26,7 +20,7 @@ const Card = ({ cardNumber, company, expiration }: CardProps) => {
       </CardHeader>
 
       <CardInfo>
-        <p>{maskCardNumber(cardNumber).join(' ')}</p>
+        <p>{getMaskedCardNumber(cardNumber).join(' ')}</p>
         <p>
           {expiration.year === '' ? expiration.month : `${expiration.month} / ${expiration.year}`}
         </p>
