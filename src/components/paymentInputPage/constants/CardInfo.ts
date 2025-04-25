@@ -8,6 +8,7 @@ export const CARD_INFO: ICardInfo = {
   EXPIRATION_DATE_LENGTH_PART: 2,
   MASKING_STRING: "•",
   EXPIRATION_SPLIT: "/",
+  PASSWORD_LENGTH: 2,
 };
 
 interface ICardInfo {
@@ -20,4 +21,5 @@ interface ICardInfo {
   EXPIRATION_DATE_LENGTH_PART: number;
   MASKING_STRING: string;
   EXPIRATION_SPLIT: string;
+  PASSWORD_LENGTH: number;
 }
