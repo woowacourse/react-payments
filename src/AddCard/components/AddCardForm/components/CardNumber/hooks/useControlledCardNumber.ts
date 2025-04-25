@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { isNaN } from "../../../../../../utils/isNaN";
+import { isNumericNaN } from "@/utils/isNumericNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
 import { CARD_NUMBER_LENGTH, INITIAL_CARD_NUMBER_STATE } from "../constants";
 import { validateCardNumber } from "../validation";
@@ -17,7 +17,7 @@ const useControlledCardNumber = () => {
 
       const numeric = Number(value);
 
-      if (isNaN(numeric)) {
+      if (isNumericNaN(numeric)) {
         setCardNumberState((prev) => ({
           ...prev,
           [key]: {

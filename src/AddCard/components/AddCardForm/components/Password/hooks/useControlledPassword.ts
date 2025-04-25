@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { PASSWORD_INPUT_LENGTH } from "../constants";
 import { validatePassword } from "../validation";
+import { isNumericNaN } from "@/utils/isNumericNaN";
 
 const useControlledPassword = () => {
   const [passwordState, setPasswordState] = useState({
@@ -14,7 +15,7 @@ const useControlledPassword = () => {
     }
     const numeric = Number(value);
 
-    if (Number.isNaN(numeric)) {
+    if (isNumericNaN(numeric)) {
       setPasswordState((prevState) => ({
         ...prevState,
         errorMessage: validatePassword(value),

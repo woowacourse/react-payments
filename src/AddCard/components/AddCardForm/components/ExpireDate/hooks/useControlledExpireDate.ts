@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { EXPIRE_DATE_LENGTH, INITIAL_EXPIRE_DATE_STATE } from "../constants";
 import { ExpireDateState } from "../types";
 import { validateMonth, validateYear } from "../validation";
+import { isNumericNaN } from "@/utils/isNumericNaN";
 
 const useControlledExpireDate = () => {
   const [expireDate, setExpireDate] = useState<ExpireDateState>(
@@ -15,7 +16,7 @@ const useControlledExpireDate = () => {
 
     const numeric = Number(value);
 
-    if (Number.isNaN(numeric)) {
+    if (isNumericNaN(numeric)) {
       setExpireDate((prevState) => ({
         ...prevState,
         MM: {
@@ -57,7 +58,7 @@ const useControlledExpireDate = () => {
 
     const numeric = Number(value);
 
-    if (Number.isNaN(numeric)) {
+    if (isNumericNaN(numeric)) {
       setExpireDate((prevState) => ({
         ...prevState,
         YY: {
