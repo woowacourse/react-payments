@@ -1,12 +1,14 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, useRef } from 'react';
 import styles from './Input.module.css';
 
 type InputAttribute = Pick<
   ComponentProps<'input'>,
-  'type' | 'name' | 'id' | 'placeholder' | 'maxLength' | 'value'
+  'type' | 'name' | 'id' | 'placeholder' | 'autoFocus'
 >;
 
 export interface InputProps extends InputAttribute {
+  value: string;
+  maxLength: number;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isValidInput: boolean;
   dataInputId?: number;
@@ -21,8 +23,27 @@ function Input({
   value,
   handleInputChange,
   isValidInput,
+  autoFocus,
   dataInputId,
 }: InputProps) {
+  const ref = useRef<HTMLInputElement>(null);
+
+  function moveFocusNextInput(e: React.ChangeEvent<HTMLInputElement>) {
+    if (ref.current) {
+      ref.current.focus();
+    }
+
+    const nextInput = e.target.nextElementSibling as HTMLInputElement;
+    if (ref.current && nextInput && value.length === maxLength - 1) {
+      nextInput.focus();
+    }
+  }
+
+  function onChangeInputHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    handleInputChange(e);
+    moveFocusNextInput(e);
+  }
+
   return (
     <input
       type={type}
@@ -31,9 +52,11 @@ function Input({
       placeholder={placeholder}
       maxLength={maxLength}
       value={value}
-      onChange={handleInputChange}
+      onChange={onChangeInputHandler}
+      autoFocus={autoFocus}
       className={`${styles.input} ${!isValidInput && styles.isNotValid} tx-md`}
       data-input-id={dataInputId}
+      ref={ref}
     />
   );
 }

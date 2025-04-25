@@ -49,6 +49,7 @@ function CardCVCInput({
           maxLength={3}
           value={cardCVC}
           handleInputChange={handleCVCNumberChange}
+          autoFocus={true}
           isValidInput={isValid}
         />
       </InputForm>

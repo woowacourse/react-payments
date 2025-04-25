@@ -105,6 +105,7 @@ function CardExpirationDateInput({
           value={expirationDate.month}
           handleInputChange={handleCardNumberChange}
           maxLength={2}
+          autoFocus={true}
           isValidInput={isValid.month}
         />
         <Input
