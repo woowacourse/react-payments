@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   PARSE_RULE,
   CARD_NUMBER_RULE,
@@ -8,6 +8,19 @@ import {
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const setInputRef = (el: HTMLInputElement | null, index: number) => {
+    if (el) {
+      inputRefs.current[index] = el;
+    }
+  };
+
+  const focusNextInput = (index: number) => {
+    if (index < cardNumber.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const { value } = e.target;
@@ -39,12 +52,17 @@ function useCardNumber() {
       newCardNumber[n] = value;
       return newCardNumber;
     });
+
+    if (checkValidCardNumber(value)) {
+      focusNextInput(n);
+    }
   };
 
   return {
     cardNumber,
     onChange,
     errorMessage,
+    setInputRef,
   };
 }
 
