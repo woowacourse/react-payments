@@ -1,31 +1,40 @@
 import * as S from './CardPreview.styles';
-import { CardPreviewProps } from './type';
 import VisaCard from '../../../../components/Icon/VisaCard';
 import MasterCard from '../../../../components/Icon/MasterCard';
+import Masking from './components/Masking';
+import { CardPreviewProps } from './type';
 import { getCardType } from '../../../../utils';
-import { MASKING } from '../../../../constants';
 
 export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
-  const cardType = getCardType(cardNumber.first);
+  const cardType = () => {
+    switch (getCardType(cardNumber.first)) {
+      case 'visa':
+        return <VisaCard width={36} />;
+      case 'master':
+        return <MasterCard width={36} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <S.CardPreviewWrapper CardBrandType={CardBrandType}>
       <S.CardPreviewTop>
         <S.ICChip />
-        {cardType === 'visa' && <VisaCard width={36} />}
-        {cardType === 'master' && <MasterCard width={36} />}
+        {cardType()}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
         <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.first}</S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.second}</S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>
-          {Array.from({ length: cardNumber.third.length }, () => {
-            return MASKING;
-          })}
+        <S.CardPreviewMiddleText>
+          {Array.from({ length: cardNumber.third.length }, () => (
+            <Masking CardBrandType={CardBrandType} />
+          ))}
         </S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>
-          {Array.from({ length: cardNumber.fourth.length }, () => {
-            return MASKING;
-          })}
+        <S.CardPreviewMiddleText>
+          {Array.from({ length: cardNumber.fourth.length }, () => (
+            <Masking CardBrandType={CardBrandType} />
+          ))}
         </S.CardPreviewMiddleText>
       </S.CardPreviewMiddle>
       <S.CardPreviewDateBox>

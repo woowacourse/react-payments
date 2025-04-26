@@ -1,16 +1,6 @@
 import styled from '@emotion/styled';
 import { CardBrandType } from '../../../../domain/card/CardBrand/type';
-
-const cardPreviewBackgroundColor = {
-  BC카드: '#F04651;',
-  신한카드: '#0046FF;',
-  카카오뱅크: '#FFE600;',
-  현대카드: '#000000;',
-  우리카드: '#007BC8;',
-  롯데카드: '#ED1C24;',
-  하나카드: '#009490;',
-  국민카드: '#6A6056;',
-} as const;
+import { cardPreviewBackgroundColor } from './constants';
 
 export const CardPreviewWrapper = styled.div<{ CardBrandType: CardBrandType | null }>`
   width: 340px;
@@ -19,7 +9,7 @@ export const CardPreviewWrapper = styled.div<{ CardBrandType: CardBrandType | nu
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  padding: 8px 12px;
+  padding: 20px;
   gap: 28px;
   color: #fff;
   font-size: 18px;
@@ -38,16 +28,19 @@ export const ICChip = styled.div`
 
 export const CardPreviewMiddle = styled.div`
   display: flex;
-  gap: 38px;
+  gap: 32px;
   align-items: center;
   text-align: center;
   vertical-align: middle;
   padding-left: 10px;
 `;
 
-export const CardPreviewMiddleText = styled.span<{ CardBrandType: CardBrandType | null }>`
+export const CardPreviewMiddleText = styled.span<{ CardBrandType?: CardBrandType | null }>`
+  display: flex;
+  gap: 4px;
   font-size: 22px;
   ${(props) => `color:${props.CardBrandType === '카카오뱅크' ? '#000;' : '#fff;'}`}
+  letter-spacing: 0.2rem;
 `;
 
 export const CardPreviewDateBox = styled.div`
