@@ -1,7 +1,8 @@
 import * as S from './AddCardComplete.styles';
-import CompleteIcon from '../../components/Icon/completeIcon';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import CompleteIcon from '../../components/Icon/CompleteIcon';
+import Button from '../../components/Button/Button';
 
 export default function AddCardComplete() {
   const location = useLocation();
@@ -27,9 +28,9 @@ export default function AddCardComplete() {
           {cardBrandTypeState}가 등록되었습니다.
         </S.CompleteCardInfoText>
       </S.CompleteCardInfoBox>
-      <S.CompleteCardButton type="button" onClick={redirectToHome}>
+      <Button type={'button'} onClick={redirectToHome} borderRadius={'8px'}>
         확인하기
-      </S.CompleteCardButton>
+      </Button>
     </S.Wrapper>
   );
 }

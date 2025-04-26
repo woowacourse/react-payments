@@ -1,12 +1,13 @@
+import * as S from './AddCardForm.styles';
 import CardNumber from '../../../../domain/card/CardNumber/CardNumber';
 import CardBrand from '../../../../domain/card/CardBrand/CardBrand';
 import CardExpirationDate from '../../../../domain/card/CardExpirationDate/CardExpirationDate';
 import CardCVCNumber from '../../../../domain/card/CardCVCNumber/CardCVCNumber';
 import CardPasswordNumber from '../../../../domain/card/CardPasswordNumber/CardPasswordNumber';
+import Button from '../../../../components/Button/Button';
+import { AddCardFormProps } from '../../types';
 import { Fragment, useEffect, useState } from 'react';
 import { CARD_STEP, CARD_STEPS } from '../../constants';
-import { AddCardFormProps } from '../../types';
-import Button from '../../../../components/Button/Button';
 import { useNavigate } from 'react-router';
 
 export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
@@ -104,19 +105,15 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     isCardNumberError &&
     isCardExpirationDateError &&
     isCardCVCNumberError &&
-    isCardPasswordError && <Button>확인</Button>;
+    isCardPasswordError && (
+      <S.CardAddFromButtonWrapper>
+        <Button type={'submit'}>확인</Button>
+      </S.CardAddFromButtonWrapper>
+    );
 
   const navigate = useNavigate();
   return (
-    <form
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '32px',
-        padding: '0 32px',
-        height: 'calc(100vh - 392px)',
-        overflowY: 'auto',
-      }}
+    <S.CardAddFrom
       onSubmit={(e) => {
         e.preventDefault();
         navigate('/complete', {
@@ -129,6 +126,6 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     >
       {renderContents}
       {button}
-    </form>
+    </S.CardAddFrom>
   );
 }

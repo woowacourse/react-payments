@@ -1,6 +1,15 @@
 import * as S from './Button.styles';
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
-export default function Button({ children }: PropsWithChildren) {
-  return <S.AddCardFormButton type="submit">{children}</S.AddCardFormButton>;
+export interface ButtonProps extends React.ComponentProps<'button'> {
+  children?: ReactNode;
+  borderRadius?: string;
+}
+
+export default function Button({ children, type, borderRadius, onClick }: ButtonProps) {
+  return (
+    <S.StyledButton type={type} onClick={onClick} borderRadius={borderRadius}>
+      {children}
+    </S.StyledButton>
+  );
 }
