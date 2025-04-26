@@ -1,3 +1,4 @@
+import { isNumericNaN } from "@/utils/isNumericNaN";
 import { useRef, RefObject } from "react";
 
 type InputRefs<T extends string> = Record<
@@ -29,13 +30,15 @@ export function useAutoFocus<T extends string>(
     keys: T[],
     maxLength: number
   ) => {
-    if (value.length === maxLength) {
-      const currentIndex = keys.indexOf(currentKey);
-      const nextKey = keys[currentIndex + 1];
+    if (value.length !== maxLength) return;
 
-      if (nextKey && inputRefs[nextKey]?.current) {
-        inputRefs[nextKey].current?.focus();
-      }
+    const numeric = Number(value);
+    if (isNumericNaN(numeric)) return;
+
+    const idx = keys.indexOf(currentKey);
+    const nextKey = keys[idx + 1];
+    if (nextKey && inputRefs[nextKey]?.current) {
+      inputRefs[nextKey].current.focus();
     }
   };
 
