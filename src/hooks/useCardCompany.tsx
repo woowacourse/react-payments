@@ -29,7 +29,7 @@ const CARD_COMPANY_NAMES = [
 
 const CARD_COMPANY_PLACEHOLDER = '카드사를 선택해주세요';
 
-export const useCardCompany = () => {
+const useCardCompany = () => {
   const [selectedCard, setSelectedCard] = useState<CardCompanyName | null>(
     null,
   );
@@ -49,3 +49,5 @@ export const useCardCompany = () => {
     onClickCardCompany,
   };
 };
+
+export default useCardCompany;

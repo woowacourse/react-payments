@@ -1,7 +1,7 @@
 import useCardNumber from './useCardNumber';
 import useCardValidityPeriod from './useCardValidityPeriod';
 import useCardCVC from './useCardCVC';
-import { useCardCompany } from './useCardCompany';
+import useCardCompany from './useCardCompany';
 import useCardPassword from './useCardPassword';
 import useStep from './useStep';
 
