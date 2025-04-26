@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
+import { CARD_PASSWORD_NUMBER_ERROR_MESSAGE, CARD_PASSWORD_NUMBER_MAX_LENGTH } from '../constants';
 
 export const useControlledCardPasswordNumber = () => {
   const [isCardPasswordNextStep, setIsCardPasswordNextStep] = useState<boolean>(false);
@@ -11,8 +12,8 @@ export const useControlledCardPasswordNumber = () => {
       return ERROR_MESSAGE.onlyNumber;
     }
 
-    if (value.length < 2) {
-      return '2자리 숫자를 입력해 주세요';
+    if (value.length < CARD_PASSWORD_NUMBER_MAX_LENGTH) {
+      return CARD_PASSWORD_NUMBER_ERROR_MESSAGE.minLength;
     }
 
     return '';
@@ -23,7 +24,11 @@ export const useControlledCardPasswordNumber = () => {
     setCardPasswordErrorMessage((prev) => (prev = getErrorMessage(value)));
   };
 
-  if (cardPassword.length === 2 && cardPasswordErrorMessage === '' && !isCardPasswordNextStep)
+  if (
+    cardPassword.length === CARD_PASSWORD_NUMBER_MAX_LENGTH &&
+    cardPasswordErrorMessage === '' &&
+    !isCardPasswordNextStep
+  )
     setIsCardPasswordNextStep(true);
   return { cardPassword, cardPasswordErrorMessage, isCardPasswordNextStep, handleCardPasswordInputChange };
 };

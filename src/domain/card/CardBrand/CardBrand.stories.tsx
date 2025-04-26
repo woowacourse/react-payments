@@ -2,7 +2,7 @@ import CardBrand from './CardBrand';
 import type { Meta } from '@storybook/react';
 import { useState } from 'storybook/internal/preview-api';
 import { useControlledCardBrand } from './hooks/useControlledCardBrand';
-import { CardBrandType } from './type';
+import { CardBrandType } from './types';
 
 const meta = {
   title: 'card/CardBrand',

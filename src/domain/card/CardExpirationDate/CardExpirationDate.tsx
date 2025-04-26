@@ -1,6 +1,6 @@
 import * as S from './CardExpirationDate.styles';
 import { getFirstErrorMessage } from '../../../utils';
-import { CardExpirationDateProps, DateType } from './type';
+import { CardExpirationDateProps, DateType } from './types';
 import Title from '../../../components/Title/Title';
 import Spacing from '../../../components/Spacing/Spacing';
 import Label from '../../../components/Label/Label';

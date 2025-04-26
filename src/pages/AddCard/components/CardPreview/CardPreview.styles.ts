@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CardBrandType } from '../../../../domain/card/CardBrand/type';
+import { CardBrandType } from '../../../../domain/card/CardBrand/types';
 import { cardPreviewBackgroundColor } from './constants';
 
 export const CardPreviewWrapper = styled.div<{ CardBrandType: CardBrandType | null }>`

@@ -3,7 +3,7 @@ import Input from '../../../components/Input/Input';
 import Label from '../../../components/Label/Label';
 import Spacing from '../../../components/Spacing/Spacing';
 import Title from '../../../components/Title/Title';
-import { CardCVCNumberProps } from './type';
+import { CardCVCNumberProps } from './types';
 
 export default function CardCVCNumber({
   cardCVCNumber,

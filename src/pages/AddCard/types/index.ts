@@ -1,8 +1,8 @@
-import { CardNumberProps } from '../../../domain/card/CardNumber/type';
-import { CardBrandProps, CardBrandType } from '../../../domain/card/CardBrand/type';
-import { CardExpirationDateProps } from '../../../domain/card/CardExpirationDate/type';
-import { CardCVCNumberProps } from '../../../domain/card/CardCVCNumber/type';
-import { CardPasswordProps } from '../../../domain/card/CardPasswordNumber/type';
+import { CardNumberProps } from '../../../domain/card/CardNumber/types';
+import { CardBrandProps, CardBrandType } from '../../../domain/card/CardBrand/types';
+import { CardExpirationDateProps } from '../../../domain/card/CardExpirationDate/types';
+import { CardCVCNumberProps } from '../../../domain/card/CardCVCNumber/types';
+import { CardPasswordProps } from '../../../domain/card/CardPasswordNumber/types';
 
 export interface AddCardFormProps
   extends CardPasswordProps,

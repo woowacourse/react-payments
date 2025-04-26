@@ -1,4 +1,4 @@
-import { CARD_BRAND_LIST } from '../CardBrand';
+import { CARD_BRAND_LIST } from '../constants';
 
 export type CardBrandType = (typeof CARD_BRAND_LIST)[number];
 

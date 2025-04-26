@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
+import { CVC_ERROR_MESSAGE, CVC_NUMBER_MAX_LENGTH } from '../constants';
 
 export const useControlledCardCVCNumber = () => {
   const [isCardCVCNumberNextStep, setIsCardCVCNumberNextStep] = useState<boolean>(false);
@@ -11,8 +12,8 @@ export const useControlledCardCVCNumber = () => {
       return ERROR_MESSAGE.onlyNumber;
     }
 
-    if (value.length < 3) {
-      return '3자리 숫자를 입력해 주세요';
+    if (value.length < CVC_NUMBER_MAX_LENGTH) {
+      return CVC_ERROR_MESSAGE.minLength;
     }
 
     return '';
@@ -22,7 +23,7 @@ export const useControlledCardCVCNumber = () => {
     setCardCVCNumber((prev) => (prev = value));
     setCardCVCNumberErrorMessage((prev) => (prev = getErrorMessage(value)));
   };
-  if (cardCVCNumber.length === 3 && cardCVCNumberErrorMessage === '' && !isCardCVCNumberNextStep)
+  if (cardCVCNumber.length === CVC_NUMBER_MAX_LENGTH && cardCVCNumberErrorMessage === '' && !isCardCVCNumberNextStep)
     setIsCardCVCNumberNextStep(true);
 
   return { cardCVCNumber, cardCVCNumberErrorMessage, isCardCVCNumberNextStep, handleCardCVCNumberInputChange };

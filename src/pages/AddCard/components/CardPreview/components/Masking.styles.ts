@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CardBrandType } from '../../../../../domain/card/CardBrand/type';
+import { CardBrandType } from '../../../../../domain/card/CardBrand/types';
 
 export const StyledMasking = styled.div<{ CardBrandType: CardBrandType | null }>`
   width: 10px;

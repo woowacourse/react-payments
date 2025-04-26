@@ -3,7 +3,7 @@ import Input from '../../../components/Input/Input';
 import Label from '../../../components/Label/Label';
 import Spacing from '../../../components/Spacing/Spacing';
 import Title from '../../../components/Title/Title';
-import { CardPasswordProps } from './type';
+import { CardPasswordProps } from './types';
 
 export default function CardPasswordNumber({
   cardPassword,

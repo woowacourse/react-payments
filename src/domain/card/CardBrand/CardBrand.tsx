@@ -1,18 +1,9 @@
 import Dropdown from '../../../components/Dropdown/Dropdown';
 import Spacing from '../../../components/Spacing/Spacing';
 import Title from '../../../components/Title/Title';
-import { CardBrandProps } from './type';
+import { CARD_BRAND_LIST } from './constants';
+import { CardBrandProps } from './types';
 
-export const CARD_BRAND_LIST = [
-  'BC카드',
-  '신한카드',
-  '카카오뱅크',
-  '현대카드',
-  '우리카드',
-  '롯데카드',
-  '하나카드',
-  '국민카드',
-] as const;
 export default function CardBrand({ cardBrandTypeState, handleDropdownChange }: CardBrandProps) {
   return (
     <div>

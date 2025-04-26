@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardBrandType } from '../type';
+import { CardBrandType } from '../types';
 
 export const useControlledCardBrand = () => {
   const [isCardBrandNextStep, setIsCardBrandNextStep] = useState(false);

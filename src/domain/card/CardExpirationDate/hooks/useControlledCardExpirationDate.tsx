@@ -6,7 +6,8 @@ import {
   MIN_VALID_MONTH,
   ONLY_NUMBER_PATTERN,
 } from '../../../../constants';
-import { DateType, HandleInputChangeProps } from '../type';
+import { DateType, HandleInputChangeProps } from '../types';
+import { EXPIRATION_DATE_ERROR_MESSAGE, EXPIRATION_DATE_MAX_LENGTH } from '../constants';
 
 export const useControlledCardExpirationDate = () => {
   const [isCardExpirationDateNextStep, setIsCardExpirationDateNextStep] = useState(false);
@@ -34,10 +35,10 @@ export const useControlledCardExpirationDate = () => {
       return;
     }
 
-    if (value.length < 2) {
+    if (value.length < EXPIRATION_DATE_MAX_LENGTH) {
       setCardExpirationDateErrorMessage({
         ...cardExpirationDateErrorMessage,
-        [dateType]: '2자리 숫자를 입력해 주세요',
+        [dateType]: EXPIRATION_DATE_ERROR_MESSAGE.minLength,
       });
       return;
     }
@@ -83,7 +84,9 @@ export const useControlledCardExpirationDate = () => {
     cardExpirationDateRefs.current[nextSequence]?.focus();
   };
 
-  const isCardNumberFill = Object.values(cardExpirationDate).every((number) => number.length === 2);
+  const isCardNumberFill = Object.values(cardExpirationDate).every(
+    (number) => number.length === EXPIRATION_DATE_MAX_LENGTH,
+  );
   const isError = Object.values(cardExpirationDateErrorMessage).every((message) => message === '');
   if (isCardNumberFill && isError && !isCardExpirationDateNextStep) setIsCardExpirationDateNextStep(true);
 

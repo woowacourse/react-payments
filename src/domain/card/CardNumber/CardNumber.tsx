@@ -1,11 +1,12 @@
 import * as S from './CardNumber.styles';
-import { getFirstErrorMessage } from '../../../utils';
-import { CardNumberProps, SequenceType } from './type';
 import Title from '../../../components/Title/Title';
 import Spacing from '../../../components/Spacing/Spacing';
 import Label from '../../../components/Label/Label';
 import Input from '../../../components/Input/Input';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import { getFirstErrorMessage } from '../../../utils';
+import { CardNumberProps } from './types';
+import { cardNumberInputSequences } from './constants';
 
 export default function CardNumber({
   cardNumberRefs,
@@ -13,7 +14,6 @@ export default function CardNumber({
   cardNumberErrorMessage,
   handleCardNumberInputChange,
 }: CardNumberProps) {
-  const cardNumberInputSequences: SequenceType[] = ['first', 'second', 'third', 'fourth'];
   return (
     <div>
       <Title description="본인 명의의 카드만 결제 가능합니다.">결제할 카드 번호를 입력해 주세요</Title>
