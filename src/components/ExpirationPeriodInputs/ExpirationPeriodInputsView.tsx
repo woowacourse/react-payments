@@ -1,7 +1,7 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { ExpirationPeriodInfo } from '../../types/models';
-import { Container, ErrorMessage } from '../common/styled';
+import { Container, ErrorMessage } from '../common/Styled';
 
 interface ExpirationPeriodInputsViewProps {
   expiryDateInfo: ExpirationPeriodInfo[];
