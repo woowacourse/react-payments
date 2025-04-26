@@ -1,38 +1,28 @@
 import { useMultipleInputFields } from '../../hooks/useCardInputHooks';
-import { isNumeric, isValidSegment } from '../../utils/cardValidation';
+import { isValidNumberSegment } from '../../utils/cardValidation';
 import NumberInputsView from './NumberInputsView';
 
 interface NumberInputsProps {
-  numbers: string[];
   handleNumbersChange: (newNumbers: string[]) => void;
 }
 
-const NumberInputs = ({ numbers, handleNumbersChange }: NumberInputsProps) => {
-  const placeholders = numbers.map(() => '1234');
+const NUMBER_MAX_LENGTH = 4;
 
-  const validateNumberSegment = (
-    value: string,
-    _index: number,
-    maxLength: number
-  ) => {
-    const isValidValue = isNumeric(value) && isValidSegment(value, maxLength);
-    return {
-      isValid: isValidValue,
-      errorMessage: isValidValue ? '' : '숫자만 입력 가능합니다.',
-    };
-  };
+const NumberInputs = ({ handleNumbersChange }: NumberInputsProps) => {
+  const initialNumbers = ['', '', '', ''];
+  const placeholders = ['1234', '1234', '1234', '1234'];
 
-  const [fieldStates, handleFieldChange] = useMultipleInputFields(
-    numbers,
+  const [numbersInfo, handleFieldChange] = useMultipleInputFields(
+    initialNumbers,
     placeholders,
-    4,
-    validateNumberSegment,
+    NUMBER_MAX_LENGTH,
+    isValidNumberSegment,
     handleNumbersChange
   );
 
   return (
     <NumberInputsView
-      numbersInfo={fieldStates}
+      numbersInfo={numbersInfo}
       handleInputChange={handleFieldChange}
     />
   );

@@ -49,14 +49,12 @@ const App = () => {
         <PasswordInput />
         <CVCNumberInput />
         <ExpirationPeriodInputs
-          period={period}
           handlePeriodChange={handlePeriodChange}
           showPeriodSeparator={showPeriodSeparator}
           hidePeriodSeparator={hidePeriodSeparator}
         />
         <BrandSelect brand={brand} handleBrandChange={handleBrandChange} />
         <NumberInputs
-          numbers={numbers}
           handleNumbersChange={handleNumbersChange}
         />
       </Main>

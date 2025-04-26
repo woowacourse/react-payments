@@ -3,31 +3,32 @@ import { isValidExpirationSegment } from '../../utils/cardValidation';
 import ExpirationPeriodInputsView from './ExpirationPeriodInputsView';
 
 interface ExpirationPeriodInputsProps {
-  period: string[];
   handlePeriodChange: (newPeriod: string[]) => void;
   showPeriodSeparator: (e: React.FocusEvent<HTMLInputElement>) => void;
   hidePeriodSeparator: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+const EXPIRY_DATE_MAX_LENGTH = 2;
+
 const ExpirationPeriodInputs = ({
-  period,
   handlePeriodChange,
   showPeriodSeparator,
   hidePeriodSeparator,
 }: ExpirationPeriodInputsProps) => {
+  const initialExpiryDate = ['', ''];
   const placeholders = ['MM', 'YY'];
 
-  const [fieldStates, handleFieldChange] = useMultipleInputFields(
-    period,
+  const [expiryDateInfo, handleFieldChange] = useMultipleInputFields(
+    initialExpiryDate,
     placeholders,
-    2,
+    EXPIRY_DATE_MAX_LENGTH,
     isValidExpirationSegment,
     handlePeriodChange
   );
 
   return (
     <ExpirationPeriodInputsView
-      expiryDateInfo={fieldStates}
+      expiryDateInfo={expiryDateInfo}
       handleInputChange={handleFieldChange}
       onFocus={showPeriodSeparator}
       onBlur={hidePeriodSeparator}

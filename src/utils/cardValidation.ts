@@ -6,6 +6,14 @@ function isValidSegment(value: string, maxLength: number): boolean {
   return value.length <= maxLength;
 }
 
+const isValidNumberSegment = (value: string, _: number, maxLength: number) => {
+  const isValidValue = isNumeric(value) && isValidSegment(value, maxLength);
+  return {
+    isValid: isValidValue,
+    errorMessage: isValidValue ? '' : '숫자만 입력 가능합니다.',
+  };
+};
+
 const ERROR_MESSAGE = {
   INVALID_YEAR: '올바른 유효기간을 입력하세요. (YY: 00~99)',
   INVALID_MONTH: '올바른 유효기간을 입력하세요. (MM: 01~12)',
@@ -81,8 +89,7 @@ function validatePasswordSegment(value: string): {
 
 export type { ExpirationValidationResult };
 export {
-  isNumeric,
-  isValidSegment,
+  isValidNumberSegment,
   isValidExpirationSegment,
   validateCvcNumber,
   validatePasswordSegment,
