@@ -2,18 +2,18 @@ import { css } from "@emotion/react";
 import { useEffect, useRef, useState } from "react";
 import { SelectProps } from "../../types/componentPropsType";
 import { CompanyType } from "../../types";
+import { CardInformationType } from "../../types/CardInformationType";
 
 const arrow = {
   up: "upArrow.svg",
   down: "downArrow.svg",
 };
 
-const Select = ({
+const Select = <T extends Extract<keyof CardInformationType, "company">>({
   options,
   placeholder,
   setCardInformation /** 이 필드가 담당하는 카드 정보 타입 */,
-  informationType,
-}: SelectProps) => {
+}: SelectProps<T>) => {
   // 모달 열고 닫기 상태
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,9 +30,7 @@ const Select = ({
     setIsOpen(false);
 
     // 상태 업데이트
-    setCardInformation((prev) => {
-      return { ...prev, [informationType]: item };
-    });
+    setCardInformation(item);
   };
 
   // 외부 클릭 시 닫기

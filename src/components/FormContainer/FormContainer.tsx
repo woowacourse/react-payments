@@ -1,8 +1,10 @@
-import FormSection from "../FormSection/FormSection";
 import { css } from "@emotion/react";
 import { FormContainerProps } from "../../types/componentPropsType";
 import formUIControllerData from "../../constants/formUIControllerData";
 import { useState } from "react";
+import FormSectionSelect from "../FormSection/FormSectionSelect";
+import FormSectionInput from "../FormSection/FormSectionInput";
+import { CardInformationType } from "../../types/CardInformationType";
 
 const FormContainer = ({ cardInformationState, setCardInformationState, validation }: FormContainerProps) => {
   const [step, setStep] = useState(0);
@@ -14,38 +16,43 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
         .slice(0, step + 1)
         .reverse()
         .map((formSectionData) => {
-          if (formSectionData.type === "input") {
-            const eachValidation = validation[formSectionData.key];
+          if (formSectionData.key === "company") {
+            const setState = setCardInformationState.company;
             return (
-              <FormSection
-                key={formSectionData.key}
+              <FormSectionSelect
+                key="company"
+                type="select"
+                title={formSectionData.title}
+                description={formSectionData.description}
+                fieldData={{
+                  ...formSectionData.fieldData,
+                  setCardInformation: setState,
+                }}
+              />
+            );
+          } else {
+            // key가 'uniqueNumber' | 'expirationDate' | 'cvcNumber' | 'password'
+            const key = formSectionData.key;
+            const state = cardInformationState[key];
+            const setState = setCardInformationState[key] as React.Dispatch<
+              React.SetStateAction<CardInformationType[typeof key]>
+            >;
+            const eachValidation = validation[key];
+            return (
+              <FormSectionInput
+                key={key}
                 type="input"
                 title={formSectionData.title}
                 description={formSectionData.description}
                 fieldData={{
                   ...formSectionData.fieldData,
-                  cardInformation: cardInformationState,
-                  setCardInformation: setCardInformationState,
-                  eachValidation: eachValidation,
-                  informationType: formSectionData.key,
+                  cardInformation: state,
+                  setCardInformation: setState,
+                  eachValidation,
                 }}
               />
             );
           }
-
-          return (
-            <FormSection
-              key={formSectionData.key}
-              type="select"
-              title={formSectionData.title}
-              description={formSectionData.description}
-              fieldData={{
-                ...formSectionData.fieldData,
-                informationType: formSectionData.key,
-                setCardInformation: setCardInformationState,
-              }}
-            />
-          );
         })}
     </div>
   );

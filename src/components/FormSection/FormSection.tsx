@@ -1,17 +1,15 @@
 import Text from "../Text/Text";
-import InputField from "../InputField/InputField";
 import { css } from "@emotion/react";
-import { FormSectionProps } from "../../types/componentPropsType";
-import Select from "../Select/Select";
+import { FormSectionBaseProps } from "../../types/componentPropsType";
 
-const FormSection = ({ title, description, type, fieldData }: FormSectionProps) => {
+const FormSection = ({ title, description, children }: FormSectionBaseProps) => {
   return (
     <div css={FormSectionWrapperStyle}>
       <div css={TextWrapperStyle}>
         <Text type="title" text={title} />
         <Text type="description" text={description} />
       </div>
-      {type === "input" ? <InputField {...fieldData} /> : <Select {...fieldData} />}
+      {children}
     </div>
   );
 };

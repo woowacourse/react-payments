@@ -3,25 +3,25 @@ import Text from "../Text/Text";
 import Input from "../Input/Input";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { InputFieldProps } from "../../types/componentPropsType";
+import { CardInformationType } from "../../types/CardInformationType";
 
-const InputField = ({
+const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   label,
   inputNumber,
   inputProps,
   cardInformation,
   setCardInformation,
-  informationType,
   eachValidation,
-}: InputFieldProps) => {
+}: InputFieldProps<T>) => {
   const { isError, errorMessage, validateInput } = eachValidation;
 
   const handleChange = (index: number, value: string) => {
     validateInput(index, value);
 
     setCardInformation((prev) => {
-      const updated = prev[informationType];
+      const updated = [...prev];
       updated[index] = value;
-      return { ...prev, [informationType]: updated };
+      return updated as CardInformationType[T];
     });
   };
 
@@ -32,7 +32,7 @@ const InputField = ({
         {Array.from({ length: inputNumber }).map((_, index) => (
           <Input
             key={index}
-            value={cardInformation[informationType][index] ?? ""}
+            value={cardInformation[index] ?? ""}
             onChange={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
