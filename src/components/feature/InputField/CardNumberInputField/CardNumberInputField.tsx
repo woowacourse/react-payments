@@ -33,11 +33,7 @@ function CardNumberInputField({
   onComplete,
 }: CardNumberInputFieldProps) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputErrorHandler(
-      [...CARD_NUMBER_INPUT_TYPE],
-      inputValue,
-      MAX_CARD_LENGTH
-    );
+    useInputErrorHandler(inputValue, MAX_CARD_LENGTH);
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,

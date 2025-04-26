@@ -1,19 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
-import {
-  CardNumberInputType,
-  CVCInputValueType,
-  ExpirationDateInputType,
-  PasswordInputType,
-} from '../config/inputField';
 import { ErrorType } from '../config/error';
+import { InputFieldType } from '../config/inputField';
 
-interface useInputFieldHandlerProps<
-  T extends
-    | CardNumberInputType
-    | CVCInputValueType
-    | ExpirationDateInputType
-    | PasswordInputType,
-> {
+interface useInputFieldHandlerProps<T extends InputFieldType> {
   validateInputError?: (
     inputName: T,
     errorStatus: { errorType: ErrorType; isError: boolean }
@@ -23,13 +12,7 @@ interface useInputFieldHandlerProps<
   inputErrorType: ErrorType;
 }
 
-export function useInputFieldHandler<
-  T extends
-    | CardNumberInputType
-    | CVCInputValueType
-    | ExpirationDateInputType
-    | PasswordInputType,
->({
+export function useInputFieldHandler<T extends InputFieldType>({
   validateInputError,
   setInputValue,
   maxLength,

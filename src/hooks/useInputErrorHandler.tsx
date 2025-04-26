@@ -1,21 +1,13 @@
 import { useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
-import {
-  CardNumberInputType,
-  CVCInputValueType,
-  ExpirationDateInputType,
-  PasswordInputType,
-} from '../config/inputField';
+import { InputFieldType } from '../config/inputField';
 
-export function useInputErrorHandler<
-  T extends
-    | CardNumberInputType
-    | CVCInputValueType
-    | ExpirationDateInputType
-    | PasswordInputType,
->(initialKeys: T[], inputValue: Record<T, string>, completeCondition: number) {
+export function useInputErrorHandler<T extends InputFieldType>(
+  inputValue: Record<T, string>,
+  completeCondition: number
+) {
   const [errorTypes, setErrorTypes] = useState<Record<T, ErrorType[]>>(
-    initialKeys.reduce(
+    (Object.keys(inputValue) as T[]).reduce(
       (acc, key) => {
         acc[key] = [];
         return acc;
