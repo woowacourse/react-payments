@@ -13,20 +13,58 @@ function Dropdown<T extends string>(props: DropdownProps<T>) {
   const { placeholder, items, selectedValue, onClick } = props;
   const [toggleOpen, setToggleOpen] = useState(false);
 
-  const onClickDropdown = () => {
+  const toggleDropdownState = () => {
     setToggleOpen((prev) => !prev);
+  };
+
+  const onClickDropdown = () => {
+    toggleDropdownState();
+  };
+
+  const onEnterDropdown = (e: React.KeyboardEvent) => {
+    const { key } = e;
+
+    if (key === 'Enter') {
+      toggleDropdownState();
+      return true;
+    }
+    return false;
+  };
+
+  const handleItemClick = (item: T) => {
+    onClick(item);
+    onClickDropdown();
+  };
+
+  const handleItemEnter = (e: React.KeyboardEvent, item: T) => {
+    const isEnterKey = onEnterDropdown(e);
+    if (isEnterKey) {
+      onClick(item);
+    }
   };
 
   return (
     <Wrapper>
-      <Select toggleOpen={toggleOpen} onClick={onClickDropdown}>
+      <Select
+        toggleOpen={toggleOpen}
+        onClick={onClickDropdown}
+        onKeyDown={onEnterDropdown}
+        tabIndex={0}
+      >
         {selectedValue === null ? placeholder : selectedValue}
         <DropdownIcon toggleOpen={toggleOpen} />
       </Select>
       {toggleOpen && (
         <UnorderedList>
           {items.map((item) => (
-            <Item key={item} onClick={() => onClick(item)}>
+            <Item
+              key={item}
+              onClick={() => handleItemClick(item)}
+              onKeyDown={(e) => {
+                handleItemEnter(e, item);
+              }}
+              tabIndex={0}
+            >
               {item}
             </Item>
           ))}
@@ -56,6 +94,10 @@ const Select = styled.div<{ toggleOpen: boolean }>`
   color: ${({ toggleOpen }) => (toggleOpen ? 'black' : 'gray')};
   cursor: pointer;
   position: relative;
+
+  &:focus {
+    border: 1px solid black;
+  }
 `;
 
 const UnorderedList = styled.ul`
@@ -94,6 +136,9 @@ const Item = styled.li`
   outline: none;
 
   &:hover {
+    background-color: #f0f0f0b3;
+  }
+  &:focus {
     background-color: #f0f0f0b3;
   }
 `;
