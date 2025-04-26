@@ -4,8 +4,9 @@ import Text from "../../common/Text/Text";
 import { CvcNumberStateType } from "../../../types/CardInformationType";
 import useError from "../../../hooks/useError";
 import cvcNumberSpec from "./cvcNumberSpec";
+import { useEffect } from "react";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
+const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStateType) => {
   const { error, errorMessage, validateInputType, validateLength } = useError([false]);
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
@@ -19,6 +20,12 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
     validateLength(value, 0, maxLength);
     dispatch({ type: "SET_CVC_NUMBER", value: value });
   };
+
+  useEffect(() => {
+    if (error[0] === false && cvcNumberState[0] !== "") {
+      openNextForm("cvcNumber");
+    }
+  }, [error]);
 
   return (
     <div css={FormSectionWrapperStyle}>

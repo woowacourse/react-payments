@@ -8,10 +8,12 @@ import CvcNumberForm from "./components/feature/CvcNumberForm/CvcNumberForm.tsx"
 import PasswordForm from "./components/feature/PasswordForm/PasswordForm.tsx";
 import CardIssuerForm from "./components/feature/CardIssuerForm/CardIssuerForm.tsx";
 import Button from "./components/common/Button/Button.tsx";
+import useOpenForm from "./hooks/useOpenForm.tsx";
 
 function App() {
   const { cardState, dispatch } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
+  const { openNextForm, isFormOpen } = useOpenForm();
 
   return (
     <div>
@@ -22,11 +24,17 @@ function App() {
           cardIssuer={cardState.cardIssuer}
         />
         <div css={FormContainerStyle}>
-          <PasswordForm passwordState={password} dispatch={dispatch} />
-          <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />
-          <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />
-          <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />
-          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+          {isFormOpen("password") && <PasswordForm passwordState={password} dispatch={dispatch} />}
+          {isFormOpen("cvcNumber") && (
+            <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} openNextForm={openNextForm} />
+          )}
+          {isFormOpen("expirationDate") && (
+            <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} openNextForm={openNextForm} />
+          )}
+          {isFormOpen("cardIssuer") && (
+            <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} openNextForm={openNextForm} />
+          )}
+          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} openNextForm={openNextForm} />
         </div>
         <div css={ButtonContainerStyle}>
           <Button text={"확인"} />

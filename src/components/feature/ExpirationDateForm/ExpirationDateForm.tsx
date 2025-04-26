@@ -4,11 +4,11 @@ import Text from "../../common/Text/Text";
 import { ExpirationDateStateType } from "../../../types/CardInformationType";
 import useError from "../../../hooks/useError";
 import expirationDateSpec from "./expirationDateSpec";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
+const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: ExpirationDateStateType) => {
   const { error, errorMessage, validateInputType, validateMonth, validateLength } = useError([false, false]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -33,6 +33,12 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
     }
     return;
   };
+
+  useEffect(() => {
+    if (error.every((e) => e === false) && expirationDateState.every((e) => e !== "")) {
+      openNextForm("expirationDate");
+    }
+  }, [error]);
 
   return (
     <div css={FormSectionWrapperStyle}>

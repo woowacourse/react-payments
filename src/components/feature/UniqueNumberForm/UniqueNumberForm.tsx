@@ -6,7 +6,7 @@ import useError from "../../../hooks/useError";
 import uniqueNumberSpec from "./uniqueNumberSpec";
 import { useRef, useEffect } from "react";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
+const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
   const { error, errorMessage, validateInputType, validateLength } = useError([false, false, false, false]);
@@ -29,6 +29,12 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
       inputRefs.current[index + 1]?.focus();
     }
   };
+
+  useEffect(() => {
+    if (error.every((e) => e === false) && uniqueNumberState.every((e) => e !== "")) {
+      openNextForm("uniqueNumber");
+    }
+  }, [error]);
 
   return (
     <div css={FormSectionWrapperStyle}>
