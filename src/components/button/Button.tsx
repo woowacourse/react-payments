@@ -1,13 +1,14 @@
-import {ReactNode} from 'react';
+import {ComponentProps} from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  children: ReactNode;
-  onClick: () => void;
-};
+type Props = ComponentProps<'button'>;
 
-const Button = ({children, onClick}: Props) => {
-  return <Container onClick={onClick}>{children}</Container>;
+const Button = ({children, onClick, style}: Props) => {
+  return (
+    <Container onClick={onClick} style={style}>
+      {children}
+    </Container>
+  );
 };
 
 export default Button;
