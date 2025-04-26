@@ -1,25 +1,20 @@
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import { useCardRouter } from '../../hooks/useCardRouter';
 
 const CardCompletePage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { cardNumber, cardCompany } = location.state || {};
-
-  const handleBackToHome = () => {
-    navigate('/');
-  };
+  const { cardInfo, navigateToHome } = useCardRouter();
+  const { cardNumber, cardCompany } = cardInfo;
 
   return (
     <StyledCardCompletePage>
       <StyledIcon src="/check.png" />
       <StyledTitle>
-        {cardNumber[0]}로 시작하는 <br />
+        {cardNumber && cardNumber[0]}로 시작하는 <br />
         {cardCompany}가 등록되었어요.
       </StyledTitle>
 
-      <Button style={{ borderRadius: '8px' }} onClick={handleBackToHome}>
+      <Button style={{ borderRadius: '8px' }} onClick={navigateToHome}>
         확인
       </Button>
     </StyledCardCompletePage>
