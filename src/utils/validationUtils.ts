@@ -11,17 +11,17 @@ export const validatorUtils = {
     min?: number;
     max?: number;
   }) => value >= min && value <= max,
-  isValidExpirationDate: ({ month, year }: { month: string; year: string }) => {
+  isValidExpiryDate: ({ month, year }: { month: string; year: string }) => {
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth() + 1;
 
-    const expirationYear = 2000 + Number(year);
-    const expirationMonth = Number(month);
+    const expiryYear = 2000 + Number(year);
+    const expiryMonth = Number(month);
 
     return (
-      expirationYear > currentYear ||
-      (expirationYear === currentYear && expirationMonth >= currentMonth)
+      expiryYear > currentYear ||
+      (expiryYear === currentYear && expiryMonth >= currentMonth)
     );
   },
 };

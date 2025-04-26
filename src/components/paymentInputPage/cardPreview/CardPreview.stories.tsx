@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    expirationDate: { month: '12', year: '25' },
+    expiryDate: { month: '12', year: '25' },
   },
 
   decorators: [
@@ -37,7 +37,7 @@ export const Default: Story = {
 
 export const VisaUI: Story = {
   args: {
-    expirationDate: { month: '12', year: '25' },
+    expiryDate: { month: '12', year: '25' },
   },
 
   decorators: [
@@ -68,7 +68,7 @@ export const VisaUI: Story = {
 
 export const MasterUI: Story = {
   args: {
-    expirationDate: { month: '12', year: '25' },
+    expiryDate: { month: '12', year: '25' },
   },
 
   decorators: [

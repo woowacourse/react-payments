@@ -2,34 +2,34 @@ import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validatorUtils } from '../../../../utils/validationUtils';
-import { ExpirationDateType } from '../../PaymentInputPage';
+import { ExpiryDateType } from '../../PaymentInputPage';
 
 export interface IsValidType {
   month: boolean;
   year: boolean;
 }
 
-export interface CardExpirationDateInputProps {
-  expirationDate: ExpirationDateType;
-  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
+export interface CardExpiryDateInputProps {
+  expiryDate: ExpiryDateType;
+  setExpiryDate: React.Dispatch<React.SetStateAction<ExpiryDateType>>;
   isValid: IsValidType;
   setIsValid: React.Dispatch<React.SetStateAction<IsValidType>>;
 }
 
-function CardExpirationDateInput({
-  expirationDate,
-  setExpirationDate,
+function CardExpiryDateInput({
+  expiryDate,
+  setExpiryDate,
   isValid,
   setIsValid,
-}: CardExpirationDateInputProps) {
+}: CardExpiryDateInputProps) {
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
     const { name, value } = target;
 
-    setExpirationDate({ ...expirationDate, [name]: value });
-    checkIsValidExpiration(name, value);
+    setExpiryDate({ ...expiryDate, [name]: value });
+    checkIsValidExpiry(name, value);
     checkIsValidType(name, value);
   }
 
@@ -42,12 +42,12 @@ function CardExpirationDateInput({
     }
   }
 
-  function checkIsValidExpiration(name: string, value: string) {
-    const { month, year } = expirationDate;
+  function checkIsValidExpiry(name: string, value: string) {
+    const { month, year } = expiryDate;
     if (
       month !== '' &&
       year !== '' &&
-      !validatorUtils.isValidExpirationDate(expirationDate)
+      !validatorUtils.isValidExpiryDate(expiryDate)
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
       setIsValid((prev) => {
@@ -102,7 +102,7 @@ function CardExpirationDateInput({
           type='tel'
           name='month'
           placeholder='MM'
-          value={expirationDate.month}
+          value={expiryDate.month}
           handleInputChange={handleCardNumberChange}
           maxLength={2}
           autoFocus={true}
@@ -113,7 +113,7 @@ function CardExpirationDateInput({
           type='tel'
           name='year'
           placeholder='YY'
-          value={expirationDate.year}
+          value={expiryDate.year}
           handleInputChange={handleCardNumberChange}
           maxLength={2}
           isRequired={true}
@@ -123,4 +123,4 @@ function CardExpirationDateInput({
     </>
   );
 }
-export default CardExpirationDateInput;
+export default CardExpiryDateInput;

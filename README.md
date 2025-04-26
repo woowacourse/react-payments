@@ -118,8 +118,8 @@ src/
 │   │   │   ├── cardInputForm.ts          # 카드 번호, 유효기간, CVC를 포함하는 폼 컴포넌트
 │   │   │   ├── cardNumberInput/
 │   │   │   │   └── cardNumberInput.ts    # 카드 번호 입력 필드
-│   │   │   ├── cardExpirationDateInput/
-│   │   │   │   └── cardExpirationDateInput.ts  # 유효기간 입력 필드
+│   │   │   ├── cardExpiryDateInput/
+│   │   │   │   └── cardExpiryDateInput.ts  # 유효기간 입력 필드
 │   │   │   └── cardCVCInput/
 │   │   │       └── cardCVCInput.ts       # CVC 입력 필드
 │   │   │

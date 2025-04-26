@@ -1,8 +1,8 @@
 import CardCVCInput from './cardInput/CardCVCInput';
-import CardExpirationDateInput from './cardInput/CardExpirationDateInput';
+import CardExpiryDateInput from './cardInput/CardExpiryDateInput';
 import CardNumberInput from './cardInput/CardNumberInput';
 import styles from './cardInputForm.module.css';
-import { ExpirationDateType } from '../PaymentInputPage';
+import { ExpiryDateType } from '../PaymentInputPage';
 import CardIssuerSelector from './cardInput/CardIssuerSelector';
 import CardSubmitButton from './CardSubmitButton';
 import { ROUTER } from '../../../global/constants';
@@ -10,16 +10,16 @@ import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
 
 interface CardInputFormProps {
-  expirationDate: ExpirationDateType;
+  expiryDate: ExpiryDateType;
   cardCVC: string;
-  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
+  setExpiryDate: React.Dispatch<React.SetStateAction<ExpiryDateType>>;
   setCardCVC: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function CardInputForm({
-  expirationDate,
+  expiryDate,
   cardCVC,
-  setExpirationDate,
+  setExpiryDate,
   setCardCVC,
 }: CardInputFormProps) {
   const {
@@ -49,9 +49,9 @@ function CardInputForm({
         isValid={isCardNumberValid}
         setIsValid={setIsCardNumberValid}
       />
-      <CardExpirationDateInput
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
+      <CardExpiryDateInput
+        expiryDate={expiryDate}
+        setExpiryDate={setExpiryDate}
         isValid={isExpiryDateValid}
         setIsValid={setIsExpiryDateValid}
       />

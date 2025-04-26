@@ -8,9 +8,9 @@ const meta = {
   title: 'CardInputForm',
   component: CardInputForm,
   args: {
-    expirationDate: { month: '', year: '' },
+    expiryDate: { month: '', year: '' },
     cardCVC: '',
-    setExpirationDate: () => {},
+    setExpiryDate: () => {},
     setCardCVC: () => {},
   },
   decorators: [

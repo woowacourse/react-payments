@@ -1,10 +1,10 @@
 import useCard from '../../../hooks/useCard';
 import { ISSUER_LIST } from '../cardInputForm/cardInput/CardIssuerSelector';
-import { ExpirationDateType } from '../PaymentInputPage';
+import { ExpiryDateType } from '../PaymentInputPage';
 import styles from './CardPreview.module.css';
 
 export type CardInformationType = {
-  expirationDate: ExpirationDateType;
+  expiryDate: ExpiryDateType;
 };
 
 export const BRAND_IMAGE = {
@@ -12,7 +12,7 @@ export const BRAND_IMAGE = {
   master: './Mastercard.png',
 };
 
-function CardPreview({ expirationDate }: CardInformationType) {
+function CardPreview({ expiryDate }: CardInformationType) {
   const { cardNumbers, cardIssuer } = useCard();
   const issuerClassName = ISSUER_LIST.get(cardIssuer);
   const inputCardNumber = cardNumbers[0];
@@ -71,8 +71,8 @@ function CardPreview({ expirationDate }: CardInformationType) {
         })}
       </div>
       <p className={`${styles.cardNumber} tx-md`}>
-        {expirationDate.month !== '' || expirationDate.year !== ''
-          ? `${expirationDate.month}/${expirationDate.year}`
+        {expiryDate.month !== '' || expiryDate.year !== ''
+          ? `${expiryDate.month}/${expiryDate.year}`
           : ''}
       </p>
     </div>
