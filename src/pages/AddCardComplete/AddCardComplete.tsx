@@ -9,7 +9,7 @@ export default function AddCardComplete() {
   const { cardNumber, cardBrandTypeState } = { ...location.state };
   const navigate = useNavigate();
   const redirectToHome = () => {
-    navigate('/');
+    navigate('/react-payments');
   };
   useEffect(() => {
     if (!location.state) {

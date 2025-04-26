@@ -6,8 +6,8 @@ import NotFound from './pages/NotFound/NotFound';
 function App() {
   return (
     <Routes>
-      <Route path="complete" element={<AddCardComplete />} />
-      <Route index element={<AddCard />} />
+      <Route path="/react-payments/complete" element={<AddCardComplete />} />
+      <Route path="/react-payments" element={<AddCard />} />
       <Route path={'*'} element={<NotFound />} />
     </Routes>
   );

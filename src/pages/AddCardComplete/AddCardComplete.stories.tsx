@@ -12,9 +12,9 @@ const withRouter =
   }) =>
   (Story: any) => {
     return (
-      <MemoryRouter initialEntries={[{ pathname: '/complete', state: initialState }]}>
+      <MemoryRouter initialEntries={[{ pathname: '/react-payments/complete', state: initialState }]}>
         <Routes>
-          <Route path="/complete" element={<Story />} />
+          <Route path="/react-payments/complete" element={<Story />} />
         </Routes>
       </MemoryRouter>
     );
