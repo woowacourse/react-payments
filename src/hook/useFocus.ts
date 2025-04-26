@@ -1,9 +1,14 @@
 import { useRef } from 'react';
 import type { CardInputProps } from '../types/CardInputTypes';
+import { useEffect } from 'react';
 
 const useFocus = (inputKeys: string[]) => {
   const inputRefsArray = inputKeys.map((key) => [key, useRef<HTMLInputElement>(null)]);
   const inputRefsObject = Object.fromEntries(inputRefsArray);
+
+  useEffect(() => {
+    inputRefsObject[inputKeys[0]].current?.focus();
+  }, []);
 
   const handleFocus = (key: keyof CardInputProps, maxLength: number) => {
     const currentIndex = inputKeys.indexOf(key);

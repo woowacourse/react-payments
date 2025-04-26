@@ -12,6 +12,7 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_179054950321022",
     "predeploy": "npm run build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

@@ -2,7 +2,6 @@ import FormField from '../FormField';
 import CardInput from './CardInput';
 import type { CardInputProps } from '../../types/CardInputTypes';
 import type { CardInputConfig } from '../../types/CardConfigTypes';
-import { useEffect } from 'react';
 import useFocus from '../../hook/useFocus';
 
 interface ValueProps {
@@ -23,10 +22,6 @@ interface CardInputGroupProps {
 
 const CardLabeledInput = ({ config, errorMessage, handleCardInput, isErrors, value }: CardInputGroupProps) => {
   const { inputRefsObject, handleFocus } = useFocus(config.inputKeys);
-
-  useEffect(() => {
-    inputRefsObject[config.inputKeys[0]].current?.focus();
-  }, []);
 
   return (
     <FormField label={config.label} errorMessage={errorMessage} id={config.id}>
