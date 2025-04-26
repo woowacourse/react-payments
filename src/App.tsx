@@ -139,11 +139,14 @@ function App() {
 export default App;
 
 const AppLayout = styled.main`
-  width: 376px;
+  width: 100%;
+  max-width: 400px;
 
   display: flex;
   flex-direction: column;
 
   margin: 0 auto;
   padding: 70px 30px;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
 `;
