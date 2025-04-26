@@ -6,15 +6,20 @@ interface InputProps extends ComponentProps<'input'> {
   inputKey: keyof CardInputProps;
   isError: boolean;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
+  ref: React.RefObject<HTMLInputElement | null>;
+  handleFocus: (key: keyof CardInputProps, maxLength: number) => void;
 }
 
-const CardInput = ({ inputKey, isError, handleCardInput, ...restProps }: InputProps) => {
+const CardInput = ({ inputKey, isError, handleCardInput, ref, handleFocus, ...restProps }: InputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     handleCardInput(inputKey, value);
+    if (restProps.maxLength) {
+      handleFocus(inputKey, restProps.maxLength);
+    }
   };
 
-  return <InputField {...restProps} onChange={handleChange} $isError={isError} />;
+  return <InputField {...restProps} onChange={handleChange} $isError={isError} ref={ref} />;
 };
 
 const InputField = styled.input<{ $isError: boolean }>`

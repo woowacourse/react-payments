@@ -44,6 +44,7 @@ const AddCard = () => {
             <Button text="확인" handleCLick={handleSubmit} />
           </ButtonContainer>
         )}
+
         {stepIndex >= 4 && (
           <CardDescriptiveInput
             config={CARD_LABEL_INPUT_CONFIG.password}
