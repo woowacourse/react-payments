@@ -3,7 +3,7 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { CVCNumberInfo } from '../../types/models';
 
-export interface CVCNumberInputViewProps {
+interface CVCNumberInputViewProps {
   cvcNumberInfo: CVCNumberInfo;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

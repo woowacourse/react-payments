@@ -3,7 +3,7 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { ExpirationPeriodInfo } from '../../types/models';
 
-export interface ExpirationPeriodInputsViewProps {
+interface ExpirationPeriodInputsViewProps {
   expiryDateInfo: ExpirationPeriodInfo[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-export interface PreviewViewProps {
+interface PreviewViewProps {
   cardNumbers: string[];
   period: string[];
   isPeriodSeparatorShowing: boolean;
-  cardMethodSrc: string | null;
+  cardBrandSrc: string | null;
 }
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
@@ -14,15 +14,15 @@ const PreviewView = ({
   cardNumbers,
   period,
   isPeriodSeparatorShowing,
-  cardMethodSrc,
+  cardBrandSrc,
 }: PreviewViewProps) => {
   return (
     <PreviewContainer data-testid="preview-component">
       <CardFrame>
         <ICChip />
-        {cardMethodSrc && (
-          <CardMethod
-            src={cardMethodSrc}
+        {cardBrandSrc && (
+          <CardBrand
+            src={cardBrandSrc}
             data-testid="card-method"
             alt="Card Method"
           />
@@ -135,7 +135,7 @@ const Separator = styled.span`
   color: ${({ theme }) => theme.colors.cardText};
 `;
 
-const CardMethod = styled.img`
+const CardBrand = styled.img`
   width: 36px;
   height: 22px;
   position: absolute;

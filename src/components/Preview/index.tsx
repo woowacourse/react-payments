@@ -17,7 +17,7 @@ const Preview = ({
   period,
   isPeriodSeparatorShowing,
 }: PreviewProps) => {
-  const getCardMethodSrc = () => {
+  const getcardBrandSrc = () => {
     if (cardNumbers[0].startsWith(VISA_CARD_PREFIXES)) {
       return './images/visa.svg';
     }
@@ -37,7 +37,7 @@ const Preview = ({
       cardNumbers={cardNumbers}
       period={period}
       isPeriodSeparatorShowing={isPeriodSeparatorShowing}
-      cardMethodSrc={getCardMethodSrc()}
+      cardBrandSrc={getcardBrandSrc()}
     />
   );
 };

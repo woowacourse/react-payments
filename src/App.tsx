@@ -6,10 +6,12 @@ import CVCNumberInput from './components/CVCNumberInput';
 import Preview from './components/Preview';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
+import CardBrandSelect from './components/CardBrandSelect';
 
 const App = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
+  const [cardBrand, setCardBrand] = useState<string>('');
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
 
@@ -29,6 +31,10 @@ const App = () => {
     setPeriod(newPeriod);
   }, []);
 
+  const handleCardBrandChange = useCallback((newCardBrand: string) => {
+    setCardBrand(newCardBrand);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Main>
@@ -38,17 +44,21 @@ const App = () => {
           isPeriodSeparatorShowing={isPeriodSeparatorShowing}
         />
 
-        <CardNumberInputs
-          cardNumbers={cardNumbers}
-          handleCardNumbersChange={handleCardNumbersChange}
-        />
+        <CVCNumberInput />
         <ExpirationPeriodInputs
           period={period}
           handlePeriodChange={handlePeriodChange}
           showPeriodSeparator={showPeriodSeparator}
           hidePeriodSeparator={hidePeriodSeparator}
         />
-        <CVCNumberInput />
+        <CardBrandSelect
+          cardBrand={cardBrand}
+          handleCardBrandChange={handleCardBrandChange}
+        />
+        <CardNumberInputs
+          cardNumbers={cardNumbers}
+          handleCardNumbersChange={handleCardNumbersChange}
+        />
       </Main>
     </ThemeProvider>
   );
