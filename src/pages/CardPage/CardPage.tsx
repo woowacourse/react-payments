@@ -92,7 +92,7 @@ const CardPage = () => {
     } else {
       setIsFormValid(false);
     }
-  }, [cardNumberValid, cvcValid]);
+  }, [cardNumberValid, cvcValid, expirationValid, passwordValid]);
 
   return (
     <StyledCardPage>
