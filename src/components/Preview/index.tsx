@@ -44,9 +44,9 @@ const Preview = ({
   useEffect(() => {
     const firstInputValue = cardNumbers.first;
     if (isVisa(firstInputValue)) {
-      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/visa.svg`);
+      setCardMethodSrc(`/images/visa.svg`);
     } else if (isMastercard(firstInputValue)) {
-      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/Mastercard.svg`);
+      setCardMethodSrc(`/images/Mastercard.svg`);
     } else {
       setCardMethodSrc('');
     }
