@@ -1,6 +1,6 @@
 import { CompanyType } from ".";
 import { CardInformationType, setCardInformationType } from "./CardInformationType";
-import { useEachValidationType, useValidationType } from "./useValidationType";
+import { useEachValidationType, validationFieldType } from "./useValidationType";
 
 export type FormContainerProps = {
   /** 카드 정보 상태값 */
@@ -8,7 +8,7 @@ export type FormContainerProps = {
   /** 카드 정보 상태 변경 함수 */
   setCardInformationState: setCardInformationType;
   /** 입력값에 대한 유효성 검사 훅을 담은 배열 */
-  validation: useValidationType;
+  validation: validationFieldType;
 };
 
 export type InputFormSectionProps = {
@@ -49,7 +49,7 @@ export type InputFieldProps = {
   /** 이 필드가 담당하는 카드 정보 타입 */
   informationType: Exclude<keyof CardInformationType, "company">;
   /** 해당 필드에 대한 개별 유효성 검사 */
-  eachValidation: useEachValidationType;
+  eachValidation: Exclude<useEachValidationType, "isComplete">;
 };
 
 export type InputProps = {
