@@ -17,7 +17,7 @@ export const useCVCValidation = (): [
         setErrorMessage('');
         return;
       }
-      validateCVC(value, CARD_VALIDATION_INFO.CVC_MAX_LENGTH); // 유효성 검사 함수 호출
+      validateCVC(value, CARD_VALIDATION_INFO.CVC_MAX_LENGTH);
       setErrorMessage('');
     } catch (error: unknown) {
       if (error instanceof Error) {

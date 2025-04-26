@@ -10,15 +10,19 @@ type CardBrandInputProps = {
 };
 
 const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
-  const { checkInputsComplete } = useConfirmButton();
+  const { checkInputsComplete, updateDisplayInputs, displayInputs } =
+    useConfirmButton();
 
   const updateBrand = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setBrand(e.target.value);
     const isValid = e.target.value !== '';
-    console.log(isValid, brand);
     checkInputsComplete('brand', isValid);
+    if (isValid) updateDisplayInputs('expiry', isValid);
   };
 
+  if (!displayInputs.brand) {
+    return;
+  }
   return (
     <InputContainer
       title={INPUT_CONTAINER.CARD_BRAND.TITLE}

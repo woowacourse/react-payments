@@ -4,6 +4,14 @@ const ConfirmButtonContext = createContext<{
   isActive: boolean;
   setIsActive: (active: boolean) => void;
   checkInputsComplete: (input: string, isComplete: boolean) => void;
+  updateDisplayInputs: (input: string, isComplete: boolean) => void;
+  displayInputs: {
+    cardNumbers: boolean;
+    expiry: boolean;
+    CVC: boolean;
+    brand: boolean;
+    password: boolean;
+  };
 } | null>(null);
 
 export const ConfirmButtonProvider = ({
@@ -20,6 +28,13 @@ export const ConfirmButtonProvider = ({
     brand: false,
     password: false,
   });
+  const [displayInputs, setDisplayInputs] = useState({
+    cardNumbers: false,
+    expiry: false,
+    CVC: false,
+    brand: false,
+    password: false,
+  });
 
   const checkInputsComplete = (input: string, isComplete: boolean) => {
     setInputsComplete((prev) => {
@@ -31,14 +46,29 @@ export const ConfirmButtonProvider = ({
         (value) => value === true
       );
       setIsActive(allInputsComplete);
-      console.log(updatedInputs);
+      return updatedInputs;
+    });
+  };
+
+  const updateDisplayInputs = (input: string, isComplete: boolean) => {
+    setDisplayInputs((prev) => {
+      const updatedInputs = {
+        ...prev,
+        [input]: isComplete,
+      };
       return updatedInputs;
     });
   };
 
   return (
     <ConfirmButtonContext.Provider
-      value={{ isActive, setIsActive, checkInputsComplete }}
+      value={{
+        isActive,
+        setIsActive,
+        checkInputsComplete,
+        updateDisplayInputs,
+        displayInputs,
+      }}
     >
       {children}
     </ConfirmButtonContext.Provider>

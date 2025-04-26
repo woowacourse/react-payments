@@ -12,7 +12,7 @@ const CardPasswordInput = ({
   setPassword,
 }: CardPasswordInputProps) => {
   const [isError, errorMessage, validate] = useCardPasswordValidation();
-  const { checkInputsComplete } = useConfirmButton();
+  const { checkInputsComplete, displayInputs } = useConfirmButton();
 
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -22,6 +22,9 @@ const CardPasswordInput = ({
     checkInputsComplete('password', isValid);
   };
 
+  if (!displayInputs.password) {
+    return;
+  }
   return (
     <InputContainer
       title="비밀번호를 입력해 주세요"

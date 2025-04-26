@@ -14,7 +14,7 @@ const CardNumbersInput = ({
   setCardNumbers,
 }: CardNumbersInputProps) => {
   const [isErrors, errorMessage, validate] = useCardNumbersValidation();
-  const { checkInputsComplete } = useConfirmButton();
+  const { checkInputsComplete, updateDisplayInputs } = useConfirmButton();
 
   const updateCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -28,6 +28,7 @@ const CardNumbersInput = ({
       (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
     );
     checkInputsComplete('cardNumbers', isValid);
+    if (isValid) updateDisplayInputs('brand', true);
   };
 
   const isDisabled = (index: number) => {

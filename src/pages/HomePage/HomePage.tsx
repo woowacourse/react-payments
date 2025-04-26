@@ -57,19 +57,19 @@ const HomePage = () => {
         brand={brand}
       />
       <form onSubmit={handleSubmit}>
-        <CardNumbersInput
-          cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
-        />
-        <CardBrandInput brand={brand} setBrand={setBrand} />
+        <CardPasswordInput password={password} setPassword={setPassword} />
+        <CVCInput CVC={CVC} setCVC={setCVC} />
         <CardExpiryInput
           month={month}
           setMonth={setMonth}
           year={year}
           setYear={setYear}
         />
-        <CVCInput CVC={CVC} setCVC={setCVC} />
-        <CardPasswordInput password={password} setPassword={setPassword} />
+        <CardBrandInput brand={brand} setBrand={setBrand} />
+        <CardNumbersInput
+          cardNumbers={cardNumbers}
+          setCardNumbers={setCardNumbers}
+        />
         <Button text="확인" />
       </form>
     </div>

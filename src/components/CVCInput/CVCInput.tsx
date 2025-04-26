@@ -11,7 +11,8 @@ type CVCInputProps = {
 
 const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
   const [isErrors, errorMessage, validate] = useCVCValidation();
-  const { checkInputsComplete } = useConfirmButton();
+  const { checkInputsComplete, updateDisplayInputs, displayInputs } =
+    useConfirmButton();
 
   const updateCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -19,8 +20,12 @@ const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
     validate(e.target.value);
     const isValid = value.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH;
     checkInputsComplete('CVC', isValid);
+    if (isValid) updateDisplayInputs('password', isValid);
   };
 
+  if (!displayInputs.CVC) {
+    return;
+  }
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
       <h4 className="label">CVC</h4>

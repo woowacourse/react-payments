@@ -18,7 +18,7 @@ export const useCardExpiryValidation = (): [
           setErrorMessage('');
           return;
         }
-        validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH); // 유효성 검사 함수 호출
+        validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         setIsErrors([false, isErrors[1]]);
         setErrorMessage('');
       } else if (name === 'year') {
@@ -27,7 +27,7 @@ export const useCardExpiryValidation = (): [
           setErrorMessage('');
           return;
         }
-        validateYear(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH); // 유효성 검사 함수 호출
+        validateYear(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
         setIsErrors([isErrors[0], false]);
         setErrorMessage('');
       }
