@@ -12,16 +12,8 @@ import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
 import { useCardCompany } from './hooks/useCardCompany';
 import useCardPassword from './hooks/useCardPassword';
-import { useEffect, useState } from 'react';
-
-export type StepType = keyof typeof STEP;
-const STEP = {
-  CardNumber: 'CardNumber',
-  CardCompany: 'CardCompany',
-  CardValidityPeriod: 'CardValidityPeriod',
-  CardCVC: 'CardCVC',
-  CardPassword: 'CardPassword',
-} as const;
+import { STEP } from './constants/step';
+import useStep from './hooks/useStep';
 
 function App() {
   const {
@@ -88,32 +80,12 @@ function App() {
     cardCVCOkay &&
     cardPasswordOkay;
 
-  const [step, setStep] = useState({
-    CardNumber: true,
-    CardCompany: false,
-    CardValidityPeriod: false,
-    CardCVC: false,
-    CardPassword: false,
+  const { step } = useStep({
+    cardCVCOkay,
+    cardCompanyOkay,
+    cardNumberOkay,
+    cardValidityPeriodOkay,
   });
-
-  const handleNextStep = (newStep: StepType) => {
-    setStep((steps) => ({ ...steps, [newStep]: true }));
-  };
-
-  useEffect(() => {
-    if (cardNumberOkay) {
-      handleNextStep(STEP.CardCompany);
-    }
-    if (cardCompanyOkay) {
-      handleNextStep(STEP.CardValidityPeriod);
-    }
-    if (cardValidityPeriodOkay) {
-      handleNextStep(STEP.CardCVC);
-    }
-    if (cardCVCOkay) {
-      handleNextStep(STEP.CardPassword);
-    }
-  }, [cardCVCOkay, cardCompanyOkay, cardNumberOkay, cardValidityPeriodOkay]);
 
   return (
     <AppLayout>
