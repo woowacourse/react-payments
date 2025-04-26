@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
@@ -6,6 +5,12 @@ import { HandleInputParams } from '../../CardPage';
 import { checkInputValidation } from '../../../../validators/checkInputValidator';
 import { CARD_NUMBER } from '../../../../constants/settings';
 import useInputRef from '../../../../hooks/useInputRef';
+import {
+  StyledCardNumberInput,
+  StyledHelperTextWrapper,
+  StyledInputWrapper,
+  StyledLabel,
+} from './CardNumberInput.styles';
 
 type CardNumberInputProps = {
   values: string[];
@@ -73,26 +78,3 @@ const CardNumberInput = ({
 };
 
 export default CardNumberInput;
-
-const StyledCardNumberInput = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 12px;
-  margin-bottom: 5px;
-`;
-
-const StyledInputWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
-`;

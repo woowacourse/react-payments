@@ -1,10 +1,15 @@
-import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
 import { checkInputValidation } from '../../../../validators/checkInputValidator';
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
 import { CVC } from '../../../../constants/settings';
+import {
+  StyledCVCInput,
+  StyledHelperTextWrapper,
+  StyledInputWrapper,
+  StyledLabel,
+} from './CVCInput.styles';
 
 type CVCInputProps = {
   values: string[];
@@ -61,25 +66,3 @@ const CVCInput = ({ values, onChange, onComplete, onValidityChange }: CVCInputPr
 };
 
 export default CVCInput;
-
-const StyledCVCInput = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 12px;
-  margin-bottom: 5px;
-`;
-
-const StyledInputWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 5px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
-`;

@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { CARD_PAGE_TEXT } from '../../constants/cardPageText';
 import PreviewCard from './components/PreviewCard/PreviewCard';
 import Text from '../../components/Text/Text';
@@ -13,6 +12,7 @@ import Button from '../../components/Button/Button';
 import useTotalInputValidation from '../../hooks/useTotalInputValidation';
 import useStep from '../../hooks/useStep';
 import { useCardRouter } from '../../hooks/useCardRouter';
+import { ButtonContainer, StyledCardPage } from './CardPage.styles';
 
 export type HandleInputParams = {
   value: string;
@@ -29,13 +29,6 @@ const CardPage = () => {
   const { goToNextStep, isPassedStep, InputStep } = useStep();
   const { updateValidity, isAllValid } = useTotalInputValidation(5);
   const { navigateToCardComplete } = useCardRouter();
-
-  const handleCardRegister = () => {
-    navigateToCardComplete({
-      cardNumber,
-      cardCompany,
-    });
-  };
 
   return (
     <StyledCardPage>
@@ -105,7 +98,16 @@ const CardPage = () => {
       )}
       {isAllValid() && (
         <ButtonContainer>
-          <Button onClick={handleCardRegister}>확인</Button>
+          <Button
+            onClick={() =>
+              navigateToCardComplete({
+                cardNumber,
+                cardCompany,
+              })
+            }
+          >
+            확인
+          </Button>
         </ButtonContainer>
       )}
     </StyledCardPage>
@@ -113,23 +115,3 @@ const CardPage = () => {
 };
 
 export default CardPage;
-
-const StyledCardPage = styled.div`
-  width: 40%;
-  min-width: 400px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 30px;
-  position: relative;
-`;
-
-const ButtonContainer = styled.div`
-  position: fixed;
-  bottom: 0px;
-  width: inherit;
-  max-width: inherit;
-  min-width: inherit;
-`;

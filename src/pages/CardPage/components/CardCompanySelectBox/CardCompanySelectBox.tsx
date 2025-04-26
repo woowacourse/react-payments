@@ -1,6 +1,7 @@
-import styled from '@emotion/styled';
 import SelectBox from '../../../../components/SelectBox/SelectBox';
 import { ChangeEvent } from 'react';
+import { CARD_COMPANY, CARD_COMPANY_PLACEHOLDER } from '../../../../constants/settings';
+import { StyledCardCompanySelectBox } from './CardCompanySelectBox.styles';
 
 type CardCompanySelectProps = {
   value: string;
@@ -15,18 +16,6 @@ const CardCompanySelectBox = ({
   onComplete,
   onValidityChange,
 }: CardCompanySelectProps) => {
-  const placeHolder = '카드사를 선택해주세요';
-  const cardCompany = [
-    'BC카드',
-    '신한카드',
-    '삼성카드',
-    '현대카드',
-    '롯데카드',
-    '우리카드',
-    '하나카드',
-    'NH농협카드',
-  ];
-
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     onChange({ value: e.target.value });
     onComplete && onComplete();
@@ -36,8 +25,8 @@ const CardCompanySelectBox = ({
   return (
     <StyledCardCompanySelectBox>
       <SelectBox
-        placeHolder={placeHolder}
-        values={cardCompany}
+        placeHolder={CARD_COMPANY_PLACEHOLDER}
+        values={CARD_COMPANY}
         value={value}
         onChange={handleChange}
       />
@@ -46,11 +35,3 @@ const CardCompanySelectBox = ({
 };
 
 export default CardCompanySelectBox;
-
-const StyledCardCompanySelectBox = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  padding-bottom: 30px;
-`;

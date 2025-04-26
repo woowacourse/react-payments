@@ -1,10 +1,15 @@
-import styled from '@emotion/styled';
 import Input from '../../../../components/Input/Input';
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
 import { checkPasswordValidation } from '../../../../validators/checkInputValidator';
 import { PASSWORD } from '../../../../constants/settings';
+import {
+  StyledCardNumberInput,
+  StyledHelperTextWrapper,
+  StyledInputWrapper,
+  StyledLabel,
+} from './PasswordInput.styles';
 
 type CardNumberInputProps = {
   values: string[];
@@ -66,26 +71,3 @@ const PasswordInput = ({
 };
 
 export default PasswordInput;
-
-const StyledCardNumberInput = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 12px;
-  margin-bottom: 5px;
-`;
-
-const StyledInputWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 10px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
-`;
