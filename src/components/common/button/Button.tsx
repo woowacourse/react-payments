@@ -7,9 +7,9 @@ type ButtonAttribute = Pick<
 >;
 
 export interface ButtonProps extends ButtonAttribute {
-  handleButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   title: string;
   className: string;
+  handleButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function Button({

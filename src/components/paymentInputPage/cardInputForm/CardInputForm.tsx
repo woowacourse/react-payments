@@ -4,8 +4,10 @@ import CardNumberInput from './cardInput/CardNumberInput';
 import styles from './cardInputForm.module.css';
 import { ExpirationDateType } from '../PaymentInputPage';
 import CardIssuerSelector from './cardInput/CardIssuerSelector';
-import { useState } from 'react';
 import CardSubmitButton from './CardSubmitButton';
+import { ROUTER } from '../../../global/constants';
+import { useNavigate } from 'react-router-dom';
+import useValidateForm from '../../../hooks/useValidateForm';
 
 interface CardInputFormProps {
   expirationDate: ExpirationDateType;
@@ -20,36 +22,38 @@ function CardInputForm({
   setExpirationDate,
   setCardCVC,
 }: CardInputFormProps) {
-  const [isCardNumberValid, setCardNumberIsValid] = useState<boolean[]>([
-    true,
-    true,
-    true,
-    true,
-  ]);
-  const [isExpirationDateValid, setIsExpirationDateValid] = useState({
-    month: true,
-    year: true,
-  });
-  const [isCVCValid, setIsCVCValid] = useState<boolean>(true);
+  const {
+    isCardNumberValid,
+    setIsCardNumberValid,
+    isExpiryDateValid,
+    setIsExpiryDateValid,
+    isCVCValid,
+    setIsCVCValid,
+    isFormValid,
+    ref,
+  } = useValidateForm();
 
-  const isTotalNumbersValid = isCardNumberValid.every((valid) => valid);
-  const isTotalExpirationDateValid =
-    isExpirationDateValid.month && isExpirationDateValid.year;
-  const isFormValid =
-    isTotalNumbersValid && isTotalExpirationDateValid && isCVCValid;
+  const navigate = useNavigate();
+  function submitCardInfo(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (isFormValid()) {
+      navigate(ROUTER.registerComplete);
+    }
+  }
 
   return (
-    <div className={styles.cardInputForm}>
+    <form className={styles.cardInputForm} onSubmit={submitCardInfo} ref={ref}>
       <CardIssuerSelector />
       <CardNumberInput
         isValid={isCardNumberValid}
-        setIsValid={setCardNumberIsValid}
+        setIsValid={setIsCardNumberValid}
       />
       <CardExpirationDateInput
         expirationDate={expirationDate}
         setExpirationDate={setExpirationDate}
-        isValid={isExpirationDateValid}
-        setIsValid={setIsExpirationDateValid}
+        isValid={isExpiryDateValid}
+        setIsValid={setIsExpiryDateValid}
       />
       <CardCVCInput
         cardCVC={cardCVC}
@@ -57,8 +61,8 @@ function CardInputForm({
         isValid={isCVCValid}
         setIsValid={setIsCVCValid}
       />
-      {isFormValid && <CardSubmitButton isFormValid={isFormValid} />}
-    </div>
+      {isFormValid() && <CardSubmitButton />}
+    </form>
   );
 }
 export default CardInputForm;
