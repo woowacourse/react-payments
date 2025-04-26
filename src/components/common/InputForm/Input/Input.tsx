@@ -37,7 +37,12 @@ function Input({
     }
 
     const nextInput = e.target.nextElementSibling as HTMLInputElement;
-    if (ref.current && nextInput && value.length === maxLength - 1) {
+    if (
+      ref.current &&
+      nextInput &&
+      value.length === maxLength - 1 &&
+      nextInput.value.length !== maxLength
+    ) {
       nextInput.focus();
     }
   }

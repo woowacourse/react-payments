@@ -46,7 +46,7 @@ function CardExpiryDateInput({
     const { month, year } = expiryDate;
     if (
       name === 'month' &&
-      value !== '' &&
+      value.length === 2 &&
       !validatorUtils.isValidNumberRange({
         value: Number(value),
         min: 1,
@@ -62,7 +62,7 @@ function CardExpiryDateInput({
 
     if (
       name === 'year' &&
-      value !== '' &&
+      value.length === 2 &&
       !validatorUtils.isValidNumberRange({ value: Number(value), min: 25 })
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
@@ -73,8 +73,8 @@ function CardExpiryDateInput({
     }
 
     if (
-      month !== '' &&
-      year !== '' &&
+      month.length === 2 &&
+      year.length === 2 &&
       !validatorUtils.isValidExpiryDate(expiryDate)
     ) {
       setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
