@@ -1,63 +1,43 @@
-import { useCallback, useState } from 'react';
-import styled from '@emotion/styled';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './styles/theme';
+import { CardFormProvider, useCardForm } from './contexts/CardFormContext';
+import Preview from './components/Preview';
+import BrandSelect from './components/BrandSelect';
 import NumberInputs from './components/NumberInputs';
 import ExpirationPeriodInputs from './components/ExpirationPeriodInputs';
 import CVCNumberInput from './components/CVCNumberInput';
-import Preview from './components/Preview';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from './styles/theme';
-import BrandSelect from './components/BrandSelect';
 import PasswordInput from './components/PasswordInput';
+import styled from '@emotion/styled';
+
+const ConfirmButton = () => {
+  const { isFormValid } = useCardForm();
+  return <>{isFormValid && <SubmitButton type="submit">확인</SubmitButton>}</>;
+};
 
 const App = () => {
-  const [numbers, setNumbers] = useState<string[]>(['', '', '', '']);
-  const [period, setPeriod] = useState<string[]>(['', '']);
-  const [brand, setBrand] = useState<string>('');
-  const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
-    useState<boolean>(false);
-
-  const showPeriodSeparator = useCallback(() => {
-    setIsPeriodSeparatorShowing(true);
-  }, []);
-
-  const hidePeriodSeparator = useCallback(() => {
-    setIsPeriodSeparatorShowing(period.some((p) => p !== ''));
-  }, [period]);
-
-  const handleNumbersChange = useCallback((newNumbers: string[]) => {
-    setNumbers(newNumbers);
-  }, []);
-
-  const handlePeriodChange = useCallback((newPeriod: string[]) => {
-    setPeriod(newPeriod);
-  }, []);
-
-  const handleBrandChange = useCallback((newBrand: string) => {
-    setBrand(newBrand);
-  }, []);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert('카드 정보가 제출되었습니다.');
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <Main>
-        <Preview
-          numbers={numbers}
-          period={period}
-          brand={brand}
-          isPeriodSeparatorShowing={isPeriodSeparatorShowing}
-        />
+      <CardFormProvider>
+        <Main>
+          <Preview />
 
-        <PasswordInput />
-        <CVCNumberInput />
-        <ExpirationPeriodInputs
-          handlePeriodChange={handlePeriodChange}
-          showPeriodSeparator={showPeriodSeparator}
-          hidePeriodSeparator={hidePeriodSeparator}
-        />
-        <BrandSelect brand={brand} handleBrandChange={handleBrandChange} />
-        <NumberInputs
-          handleNumbersChange={handleNumbersChange}
-        />
-      </Main>
+          <form onSubmit={onSubmit}>
+            <Column>
+              <PasswordInput />
+              <CVCNumberInput />
+              <ExpirationPeriodInputs />
+              <BrandSelect />
+              <NumberInputs />
+            </Column>
+            <ConfirmButton />
+          </form>
+        </Main>
+      </CardFormProvider>
     </ThemeProvider>
   );
 };
@@ -68,11 +48,32 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 43px 28px 0;
   margin: 0 auto;
   width: 376px;
   height: 100dvh;
   background-color: ${({ theme }) => theme.colors.background};
   gap: 24px;
   overflow: auto;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0 28px;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.cardBrandColors.default};
+  color: ${({ theme }) => theme.colors.cardText};
+  font-size: 16px;
+  font-weight: 700;
+  position: sticky;
+  bottom: 0;
+  height: 52px;
+  cursor: pointer;
+  text-align: center;
+  border: none;
 `;
