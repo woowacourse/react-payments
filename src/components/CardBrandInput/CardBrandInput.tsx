@@ -1,6 +1,7 @@
 import React from 'react';
 import InputContainer from '../InputContainer/InputContainer';
-import { CARD_BRANDS } from '../../constants/cardBrand';
+import { CARD_BRANDS, OPTION_MESSAGE } from '../../constants/cardBrand';
+import { INPUT_CONTAINER } from '../../constants/title';
 
 type CardBrandInputProps = {
   brand: string;
@@ -14,8 +15,8 @@ const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
 
   return (
     <InputContainer
-      title="카드사를 선택해 주세요"
-      subTitle="현재 국내 카드사만 가능합니다."
+      title={INPUT_CONTAINER.CARD_BRAND.TITLE}
+      subTitle={INPUT_CONTAINER.CARD_BRAND.SUBTITLE}
     >
       <select
         className="card-brand-selector"
@@ -23,7 +24,7 @@ const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
         onChange={updateBrand}
       >
         <option value="" disabled hidden>
-          카드사를 선택해주세요.
+          {OPTION_MESSAGE.SELECT_CARD_BRAND}
         </option>
         {Object.entries(CARD_BRANDS).map(([key, value], index) => (
           <option key={index} value={key}>
