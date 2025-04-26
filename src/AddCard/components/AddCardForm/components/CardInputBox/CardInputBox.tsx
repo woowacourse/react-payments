@@ -1,5 +1,5 @@
 import styles from "./CardInputBox.module.css";
-import { ReactNode } from "react";
+import { ReactNode, useId } from "react";
 
 interface CardInputBoxProps {
   title: string;
@@ -12,12 +12,24 @@ function CardInputBox({
   guideText,
   InputComponents,
 }: CardInputBoxProps) {
+  const id = useId();
+  const guideId = `${id}-guide`;
+
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>{title}</h3>
-      {guideText && <p className={styles.guideText}>{guideText}</p>}
-      {InputComponents}
-    </div>
+    <fieldset
+      className={styles.container}
+      aria-describedby={guideText ? guideId : undefined}
+    >
+      <legend className={styles.title}>{title}</legend>
+
+      {guideText && (
+        <p id={guideId} className={styles.guideText}>
+          {guideText}
+        </p>
+      )}
+
+      <div className={styles.inputWrapper}>{InputComponents}</div>
+    </fieldset>
   );
 }
 
