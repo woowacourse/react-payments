@@ -11,6 +11,10 @@ interface FocusRefs {
   addCardButtonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
+const isFlowStep = (step: string): step is FlowStep => {
+  return STEP_ORDER.includes(step as FlowStep);
+};
+
 export function useFocusControl(
   currentStep: FlowStep,
   allValid: boolean
@@ -22,19 +26,19 @@ export function useFocusControl(
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const addCardButtonRef = useRef<HTMLButtonElement>(null);
 
-  const currentIndex = STEP_ORDER.indexOf(currentStep);
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (currentIndex === 0) {
+      if (!isFlowStep(currentStep)) return;
+
+      if (currentStep === "CARD_NUMBER") {
         firstCardNumberInputRef.current?.focus();
-      } else if (currentIndex === 1) {
+      } else if (currentStep === "CARD_BRAND") {
         brandDropdownRef.current?.focus();
-      } else if (currentIndex === 2) {
+      } else if (currentStep === "EXPIRE_DATE") {
         expireMonthInputRef.current?.focus();
-      } else if (currentIndex === 3) {
+      } else if (currentStep === "CVC") {
         cvcInputRef.current?.focus();
-      } else if (currentIndex === 4) {
+      } else if (currentStep === "PASSWORD") {
         passwordInputRef.current?.focus();
       } else if (allValid) {
         addCardButtonRef.current?.focus();
@@ -42,7 +46,7 @@ export function useFocusControl(
     }, 0);
 
     return () => clearTimeout(timeoutId);
-  }, [currentIndex, allValid]);
+  }, [currentStep, allValid]);
 
   return {
     firstCardNumberInputRef,
