@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DropdownIcon from './DropdownIcon';
 
 interface DropdownProps<T> {
@@ -43,14 +43,22 @@ function Dropdown<T extends string>(props: DropdownProps<T>) {
     }
   };
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedValue === null && wrapperRef.current) {
+      wrapperRef.current.focus();
+    }
+  }, [selectedValue]);
+
   return (
-    <Wrapper>
-      <Select
-        toggleOpen={toggleOpen}
-        onClick={onClickDropdown}
-        onKeyDown={onEnterDropdown}
-        tabIndex={0}
-      >
+    <Wrapper
+      tabIndex={0}
+      onClick={onClickDropdown}
+      onKeyDown={onEnterDropdown}
+      ref={wrapperRef}
+    >
+      <Select toggleOpen={toggleOpen}>
         {selectedValue === null ? placeholder : selectedValue}
         <DropdownIcon toggleOpen={toggleOpen} />
       </Select>
@@ -113,6 +121,9 @@ const UnorderedList = styled.ul`
   animation: appear 0.3s ease-in-out;
 
   width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+
   border: 1px solid gray;
   background-color: white;
   border: 1px solid gray;
