@@ -128,7 +128,7 @@ export default function AddCardForm({
     <S.CardAddFrom
       onSubmit={(e) => {
         e.preventDefault();
-        navigate('/react-payments/complete', {
+        navigate('/complete', {
           state: {
             cardNumber,
             cardBrandTypeState,

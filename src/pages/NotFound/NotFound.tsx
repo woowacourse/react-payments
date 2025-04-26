@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 export default function NotFound() {
   const navigate = useNavigate();
   const redirectToHome = () => {
-    navigate('/react-payments');
+    navigate('/');
   };
 
   return (

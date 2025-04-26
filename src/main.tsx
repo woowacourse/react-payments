@@ -6,7 +6,7 @@ import GlobalStyle from './GlobalStyle.styles.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <GlobalStyle />
       <App />
     </BrowserRouter>
