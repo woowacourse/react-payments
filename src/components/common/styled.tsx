@@ -18,4 +18,15 @@ const ErrorMessage = styled.div`
   height: ${({ theme }) => theme.fontSizes.caption};
 `;
 
-export { Container, ErrorMessage };
+const Button = styled.button`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.cardBrandColors.default};
+  color: ${({ theme }) => theme.colors.cardText};
+  font-size: ${({ theme }) => theme.fontSizes.button};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  cursor: pointer;
+  text-align: center;
+  border: none;
+`;
+
+export { Container, ErrorMessage, Button };
