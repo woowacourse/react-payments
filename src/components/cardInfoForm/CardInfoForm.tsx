@@ -57,13 +57,13 @@ const CardFormButtonWrapper = styled.div`
 const cardFormButtonStyle = {
   width: '376px',
   height: '50px',
-  backgroundColor: '#000000',
+  backgroundColor: '#000000ba',
   color: '#ffffff',
   border: 'none',
   transition: 'background-color 0.3s ease-in-out',
   cursor: 'pointer',
 
   ':hover': {
-    backgroundColor: '#697a9080',
+    backgroundColor: '#000000',
   },
 };
