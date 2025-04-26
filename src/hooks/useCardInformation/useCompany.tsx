@@ -4,7 +4,9 @@ import { CompanyType } from "../../types";
 const useCompany = () => {
   const [company, setCompany] = useState<CompanyType>("");
 
-  return { company, setCompany };
+  const isCompanyComplete = company !== "";
+
+  return { company, setCompany, isCompanyComplete };
 };
 
 export default useCompany;

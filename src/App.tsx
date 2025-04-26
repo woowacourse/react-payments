@@ -7,7 +7,7 @@ import useCardInformation from "./hooks/\buseCardInformation/useCardInformation.
 // import useStep from "./hooks/useStep.tsx";
 
 function App() {
-  const { cardInformationState, setCardInformationState } = useCardInformation();
+  const { cardInformationState, setCardInformationState, isStateCompletes } = useCardInformation();
   const { validation, isCompletes } = useValidation();
 
   // useStep 훅 안에서 에러+상태를 확인해서 step을 업데이트 한다.

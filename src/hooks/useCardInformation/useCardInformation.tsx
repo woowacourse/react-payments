@@ -6,11 +6,11 @@ import useCompany from "./useCompany";
 import { CardInformationType, setCardInformationType } from "../../types/CardInformationType";
 
 const useCardInformation = () => {
-  const { uniqueNumber, setUniqueNumber } = useUniqueNumber();
-  const { expirationDate, setExpirationDate } = useExpirationDate();
-  const { cvcNumber, setCvcNumber } = useCvcNumber();
-  const { password, setPassword } = usePassword();
-  const { company, setCompany } = useCompany();
+  const { uniqueNumber, setUniqueNumber, isUniqueNumberComplete } = useUniqueNumber();
+  const { expirationDate, setExpirationDate, isExpirationDateComplete } = useExpirationDate();
+  const { cvcNumber, setCvcNumber, isCvcNumberComplete } = useCvcNumber();
+  const { password, setPassword, isPasswordComplete } = usePassword();
+  const { company, setCompany, isCompanyComplete } = useCompany();
 
   const cardInformationState: CardInformationType = {
     uniqueNumber,
@@ -28,7 +28,15 @@ const useCardInformation = () => {
     company: setCompany,
   };
 
-  return { cardInformationState, setCardInformationState };
+  const isStateCompletes = {
+    uniqueNumber: isUniqueNumberComplete,
+    expirationDate: isExpirationDateComplete,
+    cvcNumber: isCvcNumberComplete,
+    password: isPasswordComplete,
+    company: isCompanyComplete,
+  };
+
+  return { cardInformationState, setCardInformationState, isStateCompletes };
 };
 
 export default useCardInformation;

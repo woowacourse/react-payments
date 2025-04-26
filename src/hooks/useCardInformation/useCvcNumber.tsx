@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { CvcNumberType } from "../../types/CardInformationType";
+import useCheckLengthComplete from "../useCheckLengthComplete";
+import { CVC_NUMBER_MAX_LENGTH } from "../../constants/constant";
 
 const useCvcNumber = () => {
   const [cvcNumber, setCvcNumber] = useState<CvcNumberType>([""]);
 
-  return { cvcNumber, setCvcNumber };
+  const isCvcNumberComplete = useCheckLengthComplete(cvcNumber, CVC_NUMBER_MAX_LENGTH);
+
+  return { cvcNumber, setCvcNumber, isCvcNumberComplete };
 };
 
 export default useCvcNumber;
