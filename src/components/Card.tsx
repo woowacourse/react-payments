@@ -12,6 +12,8 @@ import useCardPassword from "../hooks/useCardPassword";
 import useCardOwnerName from "../hooks/useCardOwnerName";
 import styles from "../css/cardForm.module.css";
 import Button from "./common/Button/Button";
+import { CardNumbers } from "../types/CardNumbers";
+import CardExpirationDate from "../types/CardExpirationDate";
 
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
@@ -30,13 +32,23 @@ const extractCardCompanyColor = (company: string) => {
   return companyData ? companyData.color : BASIC_COLOR;
 };
 
-const isFulledInput = (items, condition: number) => {
+const isFulledInput = (items: { [key: string]: string }, condition: number) => {
   return Object.values(items).every((item) => {
     return item.length >= condition;
   });
 };
 
-function Card({ setNewCard }) {
+interface CardProps {
+  setNewCard: (cardData: {
+    cardNumbers: CardNumbers;
+    cardExpirationDate: CardExpirationDate;
+    cardCompany: string;
+    cardPassword: string;
+    cardOwnerName: string;
+  }) => void;
+}
+
+function Card({ setNewCard }: CardProps) {
   const {
     cardNumbers,
     handleCardNumbersChange,
