@@ -34,6 +34,7 @@ function CardNumberField({
             min={0}
             max={9999}
             ref={(el) => setInputRef(el, index)}
+            autoFocus={index === 0 && v.length === 0}
           />
         ))}
       </InputWrapper>
