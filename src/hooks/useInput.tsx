@@ -1,7 +1,6 @@
 import {ChangeEvent, useState} from 'react';
-import {CardForm} from '../type/Card';
 
-const useInput = (initialData: CardForm) => {
+const useInput = <T extends Record<string, any>>(initialData: T) => {
   const [formData, setFormData] = useState(initialData);
 
   const onChange = (
