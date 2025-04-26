@@ -59,8 +59,6 @@ export default function useCardNumbersInput() {
       CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH
     );
 
-    console.log("trimmedValue", trimmedValue);
-
     const newCardNumbers = { ...cardNumbers, [key]: trimmedValue };
     setCardNumbers(newCardNumbers);
   };
