@@ -5,7 +5,7 @@ import CustomLinkButton from '../../shared/ui/CustomLinkButton';
 import * as S from './RegisterPage.styles';
 
 export default function RegisterPage() {
-  const { cardInfos } = useCardInfoContext();
+  const { cardInfo } = useCardInfoContext();
 
   return (
     <S.RegisterPageContainer>
@@ -15,8 +15,8 @@ export default function RegisterPage() {
         </S.RegisterCircle>
       </S.RegisterImageContainer>
       <S.RegisterMainContainer>
-        <span>{cardInfos.cardNumber[0]}로 시작하는</span>
-        <span>{cardInfos.cardIssuer}가 등록되었어요.</span>
+        <span>{cardInfo.cardNumber[0]}로 시작하는</span>
+        <span>{cardInfo.cardIssuer}가 등록되었어요.</span>
       </S.RegisterMainContainer>
       <CustomLinkButton
         path=''

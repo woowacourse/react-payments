@@ -1,4 +1,3 @@
-import { CardInfoProps, ErrorProps } from '../../../shared/model/types';
 import CardNumberSection from './CardNumberSection';
 import CardExpirationDateSection from './CardExpirationDateSection';
 import CardCVCSection from './CardCVCSection';
@@ -7,16 +6,11 @@ import CardPasswordSection from './CardPasswordSection';
 import { cardCVCValidator, cardExpirationDateValidator, cardNumberValidator } from '../validation/cardInfoValidator';
 import { NO_ERROR } from '../../../shared/constants/errorConstants';
 import * as S from './CardInfoContainer.styles';
+import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
 
-export default function CardInfoContainer({
-  cardInfo,
-  onChange,
-  error,
-}: {
-  cardInfo: CardInfoProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  error: ErrorProps;
-}) {
+export default function CardInfoContainer() {
+  const { cardInfo, updateCardInfo: onChange, error } = useCardInfoContext();
+
   return (
     <S.CardInfoWrapper>
       <S.AnimatedSection className={cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR ? 'visible' : ''}>

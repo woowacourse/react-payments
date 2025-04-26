@@ -2,7 +2,6 @@ import React from 'react';
 import { CustomInputProps } from '../model/types';
 import * as S from './customInput.styles';
 
-// Forward the ref to allow it to be passed correctly
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
   ({ type, placeholder, name, onChange, maxLength, error }: CustomInputProps, ref) => {
     return (
@@ -10,10 +9,10 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
         type={type}
         placeholder={placeholder}
         name={name}
-        onChange={onChange}
+        onBlur={onChange}
         maxLength={maxLength}
         error={error}
-        ref={ref} // Now ref is passed correctly
+        ref={ref}
       />
     );
   }

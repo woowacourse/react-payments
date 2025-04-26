@@ -1,3 +1,4 @@
+import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
 import {
   MASTERCARD_FIRST_DIGIT,
   MASTERCARD_MAX_SECOND_DIGIT,
@@ -100,24 +101,14 @@ export const cardPasswordValidator = (input: string) => {
   return [NO_ERROR, ''];
 };
 
-export const confirmButtonValidator = ({
-  cardNumber,
-  cardExpirationDate,
-  cardCVC,
-  cardIssuer,
-  cardPassword,
-}: {
-  cardNumber: string[];
-  cardExpirationDate: { month: string; year: string };
-  cardCVC: string;
-  cardIssuer: string;
-  cardPassword: string;
-}) => {
+export const confirmButtonValidator = () => {
+  const { cardInfo } = useCardInfoContext();
+
   return (
-    cardNumberValidator(cardNumber)[0] === NO_ERROR &&
-    cardExpirationDateValidator(cardExpirationDate)[0] === NO_ERROR &&
-    cardCVCValidator(cardCVC)[0] === NO_ERROR &&
-    cardIssuerValidator(cardIssuer)[0] === NO_ERROR &&
-    cardPasswordValidator(cardPassword)[0] === NO_ERROR
+    cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR &&
+    cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR &&
+    cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR &&
+    cardIssuerValidator(cardInfo.cardIssuer)[0] === NO_ERROR &&
+    cardPasswordValidator(cardInfo.cardPassword)[0] === NO_ERROR
   );
 };

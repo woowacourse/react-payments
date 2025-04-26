@@ -2,22 +2,17 @@ import { useEffect } from 'react';
 import { getCardImageSrc } from '../utils/getCardImageSrc';
 import * as S from './Preview.styles';
 import { getColorByCardIssuer } from '../utils/getColorByCardIssuer';
+import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
 
-export default function Preview({
-  cardIssuer,
-  cardNumber,
-  cardExpirationDate,
-}: {
-  cardIssuer: string;
-  cardNumber: string[];
-  cardExpirationDate: { month: string; year: string };
-}) {
+export default function Preview() {
+  const { cardInfo } = useCardInfoContext();
+
   let imgSrc = '';
-  const bgColor = getColorByCardIssuer[cardIssuer] ?? '#333333';
+  const bgColor = getColorByCardIssuer[cardInfo.cardIssuer] ?? '#333333';
 
   useEffect(() => {
-    imgSrc = getCardImageSrc(cardNumber[0]);
-  }, [cardNumber[0]]);
+    imgSrc = getCardImageSrc(cardInfo.cardNumber[0]);
+  }, [cardInfo.cardNumber[0]]);
 
   return (
     <S.CardBackground bgColor={bgColor}>
@@ -27,15 +22,15 @@ export default function Preview({
       </S.PreviewContainer>
       <S.CardInfoContainer>
         <S.CardNumberContainer>
-          <S.InfoText>{cardNumber[0]}</S.InfoText>
-          <S.InfoText>{cardNumber[1]}</S.InfoText>
-          <S.Secret>{'•'.repeat(cardNumber[2]?.length)}</S.Secret>
-          <S.Secret>{'•'.repeat(cardNumber[3]?.length)}</S.Secret>
+          <S.InfoText>{cardInfo.cardNumber[0]}</S.InfoText>
+          <S.InfoText>{cardInfo.cardNumber[1]}</S.InfoText>
+          <S.Secret>{'•'.repeat(cardInfo.cardNumber[2]?.length)}</S.Secret>
+          <S.Secret>{'•'.repeat(cardInfo.cardNumber[3]?.length)}</S.Secret>
         </S.CardNumberContainer>
         <S.InfoText>
-          {cardExpirationDate.month}
-          {cardExpirationDate.year && '/'}
-          {cardExpirationDate.year}
+          {cardInfo.cardExpirationDate.month}
+          {cardInfo.cardExpirationDate.year && '/'}
+          {cardInfo.cardExpirationDate.year}
         </S.InfoText>
       </S.CardInfoContainer>
     </S.CardBackground>
