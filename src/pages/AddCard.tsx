@@ -13,10 +13,11 @@ import Button from '../component/Button';
 import { useNavigate } from 'react-router-dom';
 
 const AddCard = () => {
+  const navigate = useNavigate();
+
   const { cardInput, handleCardInput, errorMessages, isError } = useForm();
   const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, isError });
 
-  const navigate = useNavigate();
   const handleSubmit = () => {
     sessionStorage.setItem('firstCardNumber', JSON.stringify(cardInput.first));
     sessionStorage.setItem('cardBrand', JSON.stringify(cardInput.cardBrand));
@@ -41,7 +42,7 @@ const AddCard = () => {
       <Form>
         {stepIndex >= 5 && (
           <ButtonContainer>
-            <Button text="확인" handleCLick={handleSubmit} />
+            <Button text="확인" handleClick={handleSubmit} />
           </ButtonContainer>
         )}
 

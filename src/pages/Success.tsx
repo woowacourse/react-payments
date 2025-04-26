@@ -3,6 +3,8 @@ import Button from '../component/Button';
 import { slideDown } from '../animation/animation';
 import { useNavigate } from 'react-router-dom';
 const Success = () => {
+  const navigate = useNavigate();
+
   const storedCardNumber = sessionStorage.getItem('firstCardNumber');
   const storedCardBrand = sessionStorage.getItem('cardBrand');
 
@@ -13,8 +15,6 @@ const Success = () => {
     return <Message>오류가 발생했어요! 다시 시도해 주세요.</Message>;
   }
 
-  const navigate = useNavigate();
-
   return (
     <Container>
       <Icon src="./checkIcon.png" />
@@ -22,7 +22,7 @@ const Success = () => {
         {cardNumber}로 시작하는 <br />
         {brand}가 등록되었어요
       </Message>
-      <Button text="확인" handleCLick={() => navigate('/')} />
+      <Button text="확인" handleClick={() => navigate('/')} />
     </Container>
   );
 };
