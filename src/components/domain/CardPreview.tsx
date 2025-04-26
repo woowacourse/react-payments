@@ -3,13 +3,13 @@ import { CARD_COMPANY_COLORS, CARD_TYPE_PATH } from '../../constants/setting';
 import getCardType from '../../utils/getCardType';
 import getMaskedCardNumber from '../../utils/getMaskedCardNumber';
 
-interface CardProps {
+interface CardPreviewProps {
   cardNumber: string[];
   company: keyof typeof CARD_COMPANY_COLORS;
   expiration: { month: string; year: string };
 }
 
-const Card = ({ cardNumber, company, expiration }: CardProps) => {
+const CardPreview = ({ cardNumber, company, expiration }: CardPreviewProps) => {
   const cardType = getCardType(cardNumber[0]);
 
   return (
@@ -29,7 +29,7 @@ const Card = ({ cardNumber, company, expiration }: CardProps) => {
   );
 };
 
-export default Card;
+export default CardPreview;
 
 const S = {
   CardContainer: styled.div<{ company: keyof typeof CARD_COMPANY_COLORS }>`

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Title from '../components/common/Title';
 import DropdownInput from '../components/common/DropdownInput';
 import BottomButton from '../components/domain/BottomButton';
-import Card from '../components/domain/Card';
+import CardPreview from '../components/domain/CardPreview';
 import CardCVCForm from '../components/domain/CardCVCForm';
 import CardExpirationForm from '../components/domain/CardExpirationForm';
 import CardNumberForm from '../components/domain/CardNumberForm';
@@ -29,7 +29,7 @@ function RegisterCardPage() {
 
   return (
     <>
-      <Card
+      <CardPreview
         cardNumber={[
           cardInfo.number.first,
           cardInfo.number.second,
