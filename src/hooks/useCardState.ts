@@ -65,7 +65,7 @@ export interface CardContextType {
 
 export const useCardState = (): CardContextType => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(
-    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""),
+    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill("")
   );
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
