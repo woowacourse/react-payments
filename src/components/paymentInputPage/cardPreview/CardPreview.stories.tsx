@@ -4,6 +4,9 @@ import CardPreview from './CardPreview';
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
+  args: {
+    cardIssuer: '',
+  },
 } satisfies Meta<typeof CardPreview>;
 
 export default meta;
