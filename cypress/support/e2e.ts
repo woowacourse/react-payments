@@ -14,4 +14,17 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      fillCreditCardNumber(
+        first: string,
+        second: string,
+        third: string,
+        fourth: string
+      ): Chainable<Element>;
+    }
+  }
+}
