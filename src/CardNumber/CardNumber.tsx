@@ -1,4 +1,4 @@
-import CardNumberInput from "../components/Input/CardNumberInput";
+import NumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 import styles from "./CardNumber.module.css";
@@ -23,13 +23,11 @@ export default function CardNumber({
   errorMessage,
   onComplete,
 }: Props) {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const handleCardNumberInputNextFocus = (value: string, index: number) => {
     if (value.length === CARD_NUMBER.MAX_LENGTH && index < 3) {
-      const nextInput =
-        document.querySelectorAll<HTMLInputElement>("input.input-number")[
-          index + 1
-        ];
-      nextInput?.focus();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
@@ -38,7 +36,6 @@ export default function CardNumber({
     handleCardNumberInputNextFocus(value, index);
 
     const updatedNumbers = [...cardNumbers];
-    updatedNumbers[index] = value;
     const isComplete = updatedNumbers.every(
       (v) => v.length === CARD_NUMBER.MAX_LENGTH
     );
@@ -55,7 +52,10 @@ export default function CardNumber({
       <InputText inputValue={CARD_NUMBER.SUBTITLE} variant="subtitle" />
       <div className={styles["card-number__input"]}>
         {["", "", "", ""].map((_, index) => (
-          <CardNumberInput
+          <NumberInput
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             key={index}
             value={cardNumbers[index]}
             errorMessage={errorMessage[index]}
