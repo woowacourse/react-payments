@@ -1,27 +1,13 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent } from 'react';
+import styled from 'styled-components';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
-  FieldName,
 } from '../../../../config/inputField';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
-import styled from 'styled-components';
-
-interface ExpirationDateInputFieldProps {
-  inputValue: Record<ExpirationDateInputType, string>;
-  setInputValue: Dispatch<
-    SetStateAction<Record<ExpirationDateInputType, string>>
-  >;
-  onComplete: ({
-    isComplete,
-    fieldName,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-  }) => void;
-}
+import { InputFieldProps } from '../Inputfield';
 
 const MAX_DATE_LENGTH = 2;
 const MAX_MONTH_VALUE = 12;
@@ -30,7 +16,7 @@ function ExpirationDateInputField({
   inputValue,
   setInputValue,
   onComplete,
-}: ExpirationDateInputFieldProps) {
+}: InputFieldProps<ExpirationDateInputType>) {
   const isComplete = !Boolean(
     Object.values(inputValue).filter(
       (cardNumberValue) => cardNumberValue.length !== MAX_DATE_LENGTH

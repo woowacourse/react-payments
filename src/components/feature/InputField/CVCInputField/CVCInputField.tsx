@@ -1,26 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import {
   CVC_INPUT_TYPE,
   CVCInputValueType,
-  FieldName,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
-import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
-
-interface CVCInputFieldProps {
-  inputValue: Record<CVCInputValueType, string>;
-  setInputValue: Dispatch<SetStateAction<Record<CVCInputValueType, string>>>;
-  onComplete: ({
-    isComplete,
-    fieldName,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-  }) => void;
-}
+import Input from '../../../ui/Input/Input';
+import { InputFieldProps } from '../Inputfield';
 
 const MAX_CVC_LENGTH = 3;
 
@@ -28,7 +15,7 @@ function CVCInputField({
   inputValue,
   setInputValue,
   onComplete,
-}: CVCInputFieldProps) {
+}: InputFieldProps<CVCInputValueType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler(inputValue, MAX_CVC_LENGTH);
 

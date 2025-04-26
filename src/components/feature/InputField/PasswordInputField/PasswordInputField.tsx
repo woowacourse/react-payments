@@ -1,26 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import {
-  FieldName,
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
-import Input from '../../../ui/Input/Input';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
-
-interface PasswordInputFieldProps {
-  inputValue: Record<PasswordInputType, string>;
-  setInputValue: Dispatch<SetStateAction<Record<PasswordInputType, string>>>;
-  onComplete: ({
-    isComplete,
-    fieldName,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-  }) => void;
-}
+import Input from '../../../ui/Input/Input';
+import { InputFieldProps } from '../Inputfield';
 
 const MAX_PASSWORD_LENGTH = 2;
 
@@ -28,7 +15,7 @@ function PasswordInputField({
   inputValue,
   setInputValue,
   onComplete,
-}: PasswordInputFieldProps) {
+}: InputFieldProps<PasswordInputType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler(inputValue, MAX_PASSWORD_LENGTH);
 

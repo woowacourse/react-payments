@@ -1,27 +1,17 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { CardType } from '../../../../config/card';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
-  FieldName,
 } from '../../../../config/inputField';
 import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
+import { InputFieldProps } from '../Inputfield';
 
-interface CardNumberInputFieldProps {
-  inputValue: Record<CardNumberInputType, string>;
-  setInputValue: Dispatch<SetStateAction<Record<CardNumberInputType, string>>>;
-  cardType: CardType;
-  onComplete: ({
-    isComplete,
-    fieldName,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-  }) => void;
+interface onCardNumberChangeProps {
+  name: string;
+  value: string;
 }
 
 const MAX_CARD_LENGTH = 4;
@@ -31,7 +21,7 @@ function CardNumberInputField({
   setInputValue,
   cardType,
   onComplete,
-}: CardNumberInputFieldProps) {
+}: InputFieldProps<CardNumberInputType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
     useInputErrorHandler(inputValue, MAX_CARD_LENGTH);
 
@@ -47,13 +37,7 @@ function CardNumberInputField({
     fieldName: 'cardNumber',
   });
 
-  const onCardNumberChange = ({
-    name,
-    value,
-  }: {
-    name: string;
-    value: string;
-  }) => {
+  const onCardNumberChange = ({ name, value }: onCardNumberChangeProps) => {
     onChange({ name, value });
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       validateInputError(name, {
