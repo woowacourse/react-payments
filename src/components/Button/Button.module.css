@@ -9,6 +9,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   position: relative;
+  width: 100%;
 }
 
 .button:hover:not(:disabled) {
@@ -47,16 +48,4 @@
 .large {
   padding: 15px 30px;
   font-size: 22px;
-}
-
-.fullWidth {
-  width: 100%;
-}
-
-.fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
 }
