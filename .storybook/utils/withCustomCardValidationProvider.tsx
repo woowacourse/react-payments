@@ -48,6 +48,7 @@ const CustomCardValidationProvider = ({
     validatePassword: () => {},
     hasErrorByType: () => false,
     getErrorMessage: () => null,
+    areAllFieldsValid: () => false,
   };
 
   const contextValue = { ...defaultValue, ...value };

@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
-import { CARD_COMPANY } from "../constants/constants";
+import { CARD_COMPANY, CARD_FORM_TYPE } from "../constants/constants";
 import {
   CardCompanyState,
+  CardFormType,
   CardNumbersSegmentType,
   CardNumbersState,
   CvcNumberState,
@@ -34,6 +35,7 @@ export interface CardContextType {
   password: PasswordState;
   updatePassword: React.Dispatch<React.SetStateAction<PasswordState>>;
 
+  isFieldFilled: (type: CardFormType) => boolean;
   areAllFieldsFilled: () => boolean;
 }
 
@@ -91,14 +93,25 @@ export function CardProvider({ children }: { children: ReactNode }) {
     }));
   };
 
+  const isFieldFilled = (type: CardFormType): boolean => {
+    switch (type) {
+      case CARD_FORM_TYPE.cardNumbers:
+        return isCardNumberFilled(cardNumbers);
+      case CARD_FORM_TYPE.expirationPeriod:
+        return isExpirationPeriodFilled(expirationPeriod);
+      case CARD_FORM_TYPE.cvcNumber:
+        return isCvcNumberFilled(cvcNumber);
+      case CARD_FORM_TYPE.cardCompany:
+        return isCardCompanySelected(cardCompany);
+      case CARD_FORM_TYPE.password:
+        return isPasswordFilled(password);
+      default:
+        return false;
+    }
+  };
+
   const areAllFieldsFilled = (): boolean => {
-    return (
-      isCardNumberFilled(cardNumbers) &&
-      isExpirationPeriodFilled(expirationPeriod) &&
-      isCvcNumberFilled(cvcNumber) &&
-      isCardCompanySelected(cardCompany) &&
-      isPasswordFilled(password)
-    );
+    return Object.values(CARD_FORM_TYPE).every((type) => isFieldFilled(type));
   };
 
   return (
@@ -119,6 +132,7 @@ export function CardProvider({ children }: { children: ReactNode }) {
         password,
         updatePassword: setPassword,
 
+        isFieldFilled,
         areAllFieldsFilled,
       }}
     >

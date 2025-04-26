@@ -31,6 +31,9 @@ const CustomCardProvider = ({ children, value }: CardProviderProps) => {
 
     password: "",
     updatePassword: () => {},
+
+    isFieldFilled: () => false,
+    areAllFieldsFilled: () => false,
   };
 
   const contextValue = { ...defaultValue, ...value };
