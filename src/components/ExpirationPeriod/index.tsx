@@ -71,12 +71,10 @@ const ExpirationPeriod = ({
     index: number
   ) => {
     const value = e.target.value;
-    // console.log(value);
 
     if (!isNumeric(value)) {
       setErrorMessage(ERROR_MESSAGE.INVALID_CHARACTER);
       setErrors((prev) => updateErrors(prev, index, true));
-      // console.log(`1 ${value}`);
       return;
     }
 

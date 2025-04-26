@@ -25,7 +25,6 @@ const CardPassword = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log(value);
     if (/^[0-9]*$/.test(value) && value.length <= PASSWORD_NUMBERS_LENGTH) {
       setErrorMessage('');
       setError(false);
