@@ -51,6 +51,7 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
+    validate({ e, idx });
     if (e.target.value.length === 4 && idx < 3) {
       inputRefs.current[idx + 1]?.focus();
     }
@@ -65,7 +66,6 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
             key={idx}
             value={value}
             onChange={(e) => handleChange({ e, idx })}
-            onBlur={(e) => validate({ e, idx })}
             maxLength={4}
             placeholder={'1234'}
             isError={isError[idx]}

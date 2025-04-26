@@ -50,6 +50,14 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
     onValidChange(isValid);
   }, [isError, values, onValidChange]);
 
+  const handleChange = ({ e, idx }: HandleInputParams) => {
+    onChange({ e, idx });
+    validateExpirationDate({ e, idx });
+    if (e.target.value.length === 2 && idx < 1) {
+      inputRefs.current[idx + 1]?.focus();
+    }
+  };
+
   return (
     <StyledExpirationDateInput>
       <StyledLabel>유효기간</StyledLabel>
@@ -58,8 +66,7 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
           <Input
             key={idx}
             value={value}
-            onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => validateExpirationDate({ e, idx })}
+            onChange={(e) => handleChange({ e, idx })}
             maxLength={2}
             placeholder={placeHolders[idx]}
             isError={isError[idx]}
