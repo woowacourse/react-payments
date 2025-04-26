@@ -117,9 +117,11 @@ export const AddCardButton: Story = {
 
   decorators: [
     (Story) => (
-      <FullWidthFixed>
-        <Story />
-      </FullWidthFixed>
+      <div style={{ height: "300px", position: "relative" }}>
+        <FullWidthFixed>
+          <Story />
+        </FullWidthFixed>
+      </div>
     ),
   ],
 };
