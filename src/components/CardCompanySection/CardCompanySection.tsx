@@ -15,7 +15,7 @@ export default function CardCompanySection({ cardCompany, handleSelectChange }: 
         <FieldGroup.Title title="카드사를 선택해 주세요" />
         <FieldGroup.SubTitle title="현재 국내 카드사만 가능합니다." />
       </FieldGroup.TitleWrapper>
-      <div className={styles.fieldGroup}>
+      <div>
         <FieldGroup.Label text="카드사" hidden />
         <div className={styles.selectWrapper}>
           <select className={styles.select} defaultValue="default" onChange={handleSelectChange}>
