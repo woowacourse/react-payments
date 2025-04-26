@@ -5,7 +5,7 @@ import { CardInfoProvider } from './app/context/cardInfo/CardInfoProvider';
 function App() {
   return (
     <CardInfoProvider>
-      <RouterProvider router={router()} />
+      <RouterProvider router={router} />
     </CardInfoProvider>
   );
 }
