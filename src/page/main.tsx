@@ -52,6 +52,7 @@ const Main = () => {
     },
     INIT_FORM_DATA
   );
+
   const navigate = useNavigate();
 
   const isVisible = (section: keyof CardForm, maxLength: number) => {

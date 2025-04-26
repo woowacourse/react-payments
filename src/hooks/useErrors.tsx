@@ -28,31 +28,36 @@ const useErrors = <
     );
 
     if (order) {
-      setErrorMessages((prev) => ({
+      setErrorMessages((prev) => {
+        const updatedMessages = {
+          ...prev,
+          [name]: {
+            ...prev[name],
+            [order]: matchedError?.error ?? '',
+          },
+        };
+
+        const hasError = Object.values(updatedMessages[name]).some(
+          (msg) => msg !== ''
+        );
+        onError(name, hasError);
+
+        return updatedMessages;
+      });
+      return;
+    }
+
+    setErrorMessages((prev) => {
+      const updatedMessages = {
         ...prev,
-        [name]: {
-          ...prev[name],
-          [order]: matchedError?.error ?? '',
-        },
-      }));
+        [name]: matchedError?.error ?? '',
+      };
 
-      if (Object.values(errorMessages[name]).some((value) => value !== '')) {
-        onError(name, true);
-        return;
-      }
+      const hasError = updatedMessages[name].length > 0;
+      onError(name, hasError);
 
-      onError(name, false);
-      return;
-    }
-
-    setErrorMessages((prev) => ({...prev, [name]: matchedError?.error ?? ''}));
-
-    if (errorMessages[name].length > 0) {
-      onError(name, true);
-      return;
-    }
-
-    onError(name, false);
+      return updatedMessages;
+    });
   };
 
   const onFocusout = (

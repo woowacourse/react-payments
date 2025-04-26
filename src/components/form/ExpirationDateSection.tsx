@@ -77,6 +77,7 @@ const ExpirationDateSection = ({
       <InputField label="유효기간" errorMessage={findErrorOrder(errorMessage)}>
         {ORDER_LABEL.map((label, idx) => (
           <Input
+            key={label}
             ref={inputRefs[idx]}
             name="expirationDate"
             isError={errorMessage[label].length > 0}
