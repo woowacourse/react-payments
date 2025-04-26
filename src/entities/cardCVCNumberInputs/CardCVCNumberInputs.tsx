@@ -5,6 +5,7 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+import useAutoFocus from "../../features/hooks/useAutoFocus";
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: {
@@ -34,11 +35,20 @@ function CardCVCNumberInputs({
 }: CardCVCNumberSectionProps) {
   const errorMessage = CVCError.getErrorMessage();
 
+  const { inputRefs, handleKeyDown } = useAutoFocus({
+    inputCount: 1,
+    inputMaxLength: CVC_NUMBER_LENGTH,
+  });
+
   return (
     <StyledContainer>
       <label htmlFor="">CVC</label>
       <StyledInputWrap>
         <Input
+          ref={inputRefs[0]}
+          onKeyDown={(e) => {
+            handleKeyDown(e, 0);
+          }}
           value={CVCNumber.values.CVCNumber}
           onChange={(e) => {
             CVCNumber.changeValues("CVCNumber", e.target.value);

@@ -10,6 +10,7 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+import useAutoFocus from "../../features/hooks/useAutoFocus";
 
 type CardNumberProps = {
   cardNumber: {
@@ -46,13 +47,20 @@ const cardInputConfig = [
 function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
   const errorMessage = cardNumberError.getErrorMessage();
 
+  const { inputRefs, handleKeyDown } = useAutoFocus({
+    inputCount: cardInputConfig.length,
+    inputMaxLength: CARD_NUMBER_LENGTH,
+  });
+
   return (
     <StyledContainer>
       <label htmlFor="">카드 번호</label>
       <StyledInputWrap>
-        {cardInputConfig.map((position) => (
+        {cardInputConfig.map((position, idx) => (
           <Input
             key={position}
+            ref={inputRefs[idx]}
+            onKeyDown={(e) => handleKeyDown(e, idx)}
             value={cardNumber.values[position]}
             onChange={(e) => {
               cardNumberError.checkValidation({

@@ -10,6 +10,7 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../inputs.css";
+import useAutoFocus from "../../features/hooks/useAutoFocus.ts";
 
 type ExpirationPeriodProps = {
   expirationPeriod: {
@@ -55,11 +56,18 @@ function CardExpirationPeriodInputs({
   const errorMessage =
     monthError.getErrorMessage() || yearError.getErrorMessage();
 
+  const { inputRefs, handleKeyDown } = useAutoFocus({
+    inputCount: 2,
+    inputMaxLength: EXPIRATION_PERIOD_LENGTH,
+  });
+
   return (
     <StyledContainer>
       <label htmlFor="">유효 기간</label>
       <StyledInputWrap>
         <Input
+          ref={inputRefs[0]}
+          onKeyDown={(e) => handleKeyDown(e, 0)}
           value={expirationPeriod.values.month}
           onChange={(e) => {
             monthError.checkValidation({
@@ -78,6 +86,8 @@ function CardExpirationPeriodInputs({
           isError={monthError.error.month !== NO_ERROR}
         ></Input>
         <Input
+          ref={inputRefs[1]}
+          onKeyDown={(e) => handleKeyDown(e, 1)}
           value={expirationPeriod.values.year}
           onChange={(e) => {
             yearError.checkValidation({
