@@ -26,6 +26,7 @@ function CardPasswordField({
           placeholder="12"
           min={0}
           max={99}
+          autoFocus={cardPassword.length === 0 && !isError}
         />
       </InputWrapper>
     </div>

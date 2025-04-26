@@ -22,6 +22,7 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
           placeholder="123"
           min={0}
           max={999}
+          autoFocus={cardCVC.length === 0 && !isError}
         />
       </InputWrapper>
     </div>
