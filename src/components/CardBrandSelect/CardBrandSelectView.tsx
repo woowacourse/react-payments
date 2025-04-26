@@ -1,6 +1,6 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputSelect from '../common/InputSelect';
-import { Container, ErrorMessage } from '../../styles/common';
+import { Container, ErrorMessage } from '../common/styled';
 
 interface CardBrandSelectViewProps {
   cardBrandInfo: string;

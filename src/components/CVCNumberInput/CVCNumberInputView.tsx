@@ -1,7 +1,7 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { CVCNumberInfo } from '../../types/models';
-import { Container, ErrorMessage } from '../../styles/common';
+import { Container, ErrorMessage } from '../common/styled';
 
 interface CVCNumberInputViewProps {
   cvcNumberInfo: CVCNumberInfo;
