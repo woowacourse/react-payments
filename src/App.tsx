@@ -6,7 +6,7 @@ import CardRegisterComplete from "./pages/CardRegisterComplete/CardRegisterCompl
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <Routes>
         <Route
           path="/"
