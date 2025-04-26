@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import Button from '../../components/common/Button/Button';
 import styles from './CardRegisterSuccessPage.module.css';
 import { CARD_BRANDS } from '../../constants/cardBrand';
 

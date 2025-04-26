@@ -6,7 +6,7 @@ import CardPreview from '../../components/CardPreview/CardPreview';
 import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
-import Button from '../../components/Button/Button';
+import Button from '../../components/common/Button/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../App.css';
 
