@@ -1,4 +1,4 @@
-import { CardBrandType } from '../../../domain/card/CardBrand/CardBrand';
+import { CardBrandType } from '../../../../../domain/card/CardBrand/type';
 
 export interface CardPreviewProps {
   cardNumber: Record<string, string>;

@@ -8,3 +8,5 @@ export const cardPreviewBackgroundColor = {
   하나카드: '#009490;',
   국민카드: '#6A6056;',
 } as const;
+
+export const DATE_SEPARATOR = ' / ';

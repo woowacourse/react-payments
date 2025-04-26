@@ -4,6 +4,7 @@ import MasterCard from '../../../../components/Icon/MasterCard';
 import Masking from './components/Masking';
 import { CardPreviewProps } from './type';
 import { getCardType } from '../../../../utils';
+import { DATE_SEPARATOR } from './constants';
 
 export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
   const cardType = () => {
@@ -27,20 +28,20 @@ export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandT
         <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.first}</S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.second}</S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText>
-          {Array.from({ length: cardNumber.third.length }, () => (
-            <Masking CardBrandType={CardBrandType} />
+          {Array.from({ length: cardNumber.third.length }, (_, index) => (
+            <Masking key={`third-masking-${index}`} CardBrandType={CardBrandType} />
           ))}
         </S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText>
-          {Array.from({ length: cardNumber.fourth.length }, () => (
-            <Masking CardBrandType={CardBrandType} />
+          {Array.from({ length: cardNumber.fourth.length }, (_, index) => (
+            <Masking key={`fourth-masking-${index}`} CardBrandType={CardBrandType} />
           ))}
         </S.CardPreviewMiddleText>
       </S.CardPreviewMiddle>
       <S.CardPreviewDateBox>
         <S.CardPreviewDateBoxText
           CardBrandType={CardBrandType}
-        >{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
+        >{`${cardExpirationDate.month}${cardExpirationDate.year && DATE_SEPARATOR}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
       </S.CardPreviewDateBox>
     </S.CardPreviewWrapper>
   );
