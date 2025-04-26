@@ -41,6 +41,7 @@ const App = () => {
         <Preview
           cardNumbers={cardNumbers}
           period={period}
+          cardBrand={cardBrand}
           isPeriodSeparatorShowing={isPeriodSeparatorShowing}
         />
 
