@@ -2,7 +2,7 @@ import Title from "../title/Title";
 import InputField from "../inputField/InputField";
 import Input from "../input/Input";
 import Description from "../description/Description";
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
@@ -14,7 +14,7 @@ type Props = {
 	setCardPassword: Dispatch<SetStateAction<string>>;
 };
 
-const CardPassword = ({ cardPassword, setCardPassword }: Props) => {
+const CardPassword = React.memo(({ cardPassword, setCardPassword }: Props) => {
 	const [error, setError] = useState("");
 
 	const onChange = (value: string) => {
@@ -41,7 +41,7 @@ const CardPassword = ({ cardPassword, setCardPassword }: Props) => {
 			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardPassword;
 

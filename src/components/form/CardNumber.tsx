@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Description from "../description/Description";
 import Input from "../input/Input";
 import InputField from "../inputField/InputField";
 import Title from "../title/Title";
 import findErrorOrder from "../../utils/findErrorOrder";
-import { cardNumber } from "../../App";
+import { cardNumber } from "../page/CardInfo";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
@@ -16,7 +16,7 @@ type Props = {
 	setCardNumber: Dispatch<SetStateAction<cardNumber>>;
 };
 
-const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
+const CardNumber = React.memo(({ cardNumber, setCardNumber }: Props) => {
 	const [error, setError] = useState({
 		first: "",
 		second: "",
@@ -59,7 +59,7 @@ const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
 			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardNumber;
 

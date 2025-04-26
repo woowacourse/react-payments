@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { date } from "../../App";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { date } from "../page/CardInfo";
 import Description from "../description/Description";
 import InputField from "../inputField/InputField";
 import Title from "../title/Title";
@@ -17,7 +17,7 @@ type Props = {
 	setExpirationDate: Dispatch<SetStateAction<date>>;
 };
 
-const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
+const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: Props) => {
 	const [error, setError] = useState({
 		month: "",
 		year: "",
@@ -99,7 +99,7 @@ const ExpirationDate = ({ expirationDate, setExpirationDate }: Props) => {
 			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default ExpirationDate;
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Title from "../title/Title";
 import InputField from "../inputField/InputField";
 import Input from "../input/Input";
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { MESSAGE } from "./constants/error";
 
@@ -13,7 +13,7 @@ type Props = {
 	setCvcNumber: Dispatch<SetStateAction<string>>;
 };
 
-const CardCvc = ({ cvcNumber, setCvcNumber }: Props) => {
+const CardCvc = React.memo(({ cvcNumber, setCvcNumber }: Props) => {
 	const [error, setError] = useState("");
 
 	const onChange = (value: string) => {
@@ -39,7 +39,7 @@ const CardCvc = ({ cvcNumber, setCvcNumber }: Props) => {
 			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardCvc;
 

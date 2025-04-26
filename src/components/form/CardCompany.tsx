@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Description from "../description/Description";
 import Title from "../title/Title";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Select from "../select/Select";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 
 export const CARD_COMPANIES = ["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"];
 
-const CardCompany = ({ cardCompany, setCardCompany }: Props) => {
+const CardCompany = React.memo(({ cardCompany, setCardCompany }: Props) => {
 	const onChange = (value: string): void => {
 		setCardCompany(value);
 	};
@@ -23,7 +23,7 @@ const CardCompany = ({ cardCompany, setCardCompany }: Props) => {
 			<Select options={CARD_COMPANIES} cardCompany={cardCompany} onChange={onChange} />
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardCompany;
 
