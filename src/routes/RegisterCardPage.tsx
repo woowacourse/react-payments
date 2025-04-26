@@ -19,11 +19,13 @@ import { CARD_COMPANY_NAMES, CARD_INFO_LENGTH, ROUTER_PATH } from '../constants/
 import useCardInfo from '../hooks/useCardInfoState';
 import { useNavigate } from 'react-router-dom';
 import useCardInfoValidation from '../hooks/useCardInfoValidation';
+import useDynamicRenderingStep from '../hooks/useDynamicRenderingStep';
 
 function RegisterCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
   const isCardInfoError = useCardInfoValidation(cardInfo);
   const navigate = useNavigate();
+  const { step } = useDynamicRenderingStep(cardInfo);
 
   return (
     <>
@@ -44,31 +46,47 @@ function RegisterCardPage() {
           handleCardInfo={handleCardInfo}
           maxLength={CARD_INFO_LENGTH.NUMBER}
         />
-        <Title main={CARD_COMPANY_MESSAGE.MAIN} caption={CARD_COMPANY_MESSAGE.CAPTION} />
-        <DropdownInput
-          value={cardInfo.company}
-          setValue={(value) => handleCardInfo('company', value)}
-          options={CARD_COMPANY_NAMES}
-          placeholder={CARD_COMPANY_MESSAGE.PLACEHOLDER}
-        />
-        <Title main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
-        <CardExpirationForm
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.EXPIRATION}
-        />
-        <Title main={CVC_MESSAGE.MAIN} />
-        <CardCVCForm
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.CVC}
-        />
-        <Title main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
-        <CardPasswordForm
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
-        />
+        {step >= 1 && (
+          <>
+            <Title main={CARD_COMPANY_MESSAGE.MAIN} caption={CARD_COMPANY_MESSAGE.CAPTION} />
+            <DropdownInput
+              value={cardInfo.company}
+              setValue={(value) => handleCardInfo('company', value)}
+              options={CARD_COMPANY_NAMES}
+              placeholder={CARD_COMPANY_MESSAGE.PLACEHOLDER}
+            />
+          </>
+        )}
+        {step >= 2 && (
+          <>
+            <Title main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
+            <CardExpirationForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.EXPIRATION}
+            />
+          </>
+        )}
+        {step >= 3 && (
+          <>
+            <Title main={CVC_MESSAGE.MAIN} />
+            <CardCVCForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.CVC}
+            />
+          </>
+        )}
+        {step >= 4 && (
+          <>
+            <Title main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
+            <CardPasswordForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
+            />
+          </>
+        )}
       </S.FormContainer>
       {!isCardInfoError && (
         <BottomButton

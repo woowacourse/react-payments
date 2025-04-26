@@ -23,8 +23,6 @@ function useCardInfoValidation(cardInfo: CardInfo) {
     cardInfo.passwordFront,
   ].some((value) => value === '');
 
-  cardInfo.company === '';
-
   return (
     isCardNumberError.some((isError) => isError) ||
     isCardExpirationError.some((isError) => isError) ||
