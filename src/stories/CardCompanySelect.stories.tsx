@@ -35,7 +35,9 @@ export const Valid_CardCompanySelect: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
+    const cardSelectBox = canvas.getByText(
+      INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER,
+    );
     await userEvent.click(cardSelectBox);
 
     const option = canvas.getByText("BC카드");

@@ -11,19 +11,19 @@ const CardRegisterComplete = () => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const selectedCompany = CARD_COMPANIES.find(
-    (company) => company.color === cardColor
+    (company) => company.color === cardColor,
   )?.name;
 
   useEffect(() => {
     if (!isSubmitted) navigate("/");
-  }, [isSubmitted, navigate])
+  }, [isSubmitted, navigate]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key == "Enter") {
         buttonRef.current?.click();
       }
-    }
+    };
 
     window.addEventListener("keydown", handleKeyDown);
 
@@ -39,8 +39,11 @@ const CardRegisterComplete = () => {
         alt="완료 아이콘"
         className={styles.completeIcon}
       />
-      <h2 className={styles.registerCardText}>{`${cardNumbers[0]}로 시작하는`} <br/> {`${selectedCompany}가 등록되었어요.`}</h2>
-      <RegisterAnotherCardButton ref={buttonRef}/>
+      <h2 className={styles.registerCardText}>
+        {`${cardNumbers[0]}로 시작하는`} <br />{" "}
+        {`${selectedCompany}가 등록되었어요.`}
+      </h2>
+      <RegisterAnotherCardButton ref={buttonRef} />
     </div>
   );
 };

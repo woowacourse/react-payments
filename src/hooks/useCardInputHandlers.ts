@@ -46,7 +46,7 @@ export const useCardInputHandlers = (cardState: CardContextType) => {
         validateFirstCardNumbers(newCardNumbers[0]);
         validateCardNumbers(
           newCardNumbers,
-          CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+          CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
         );
 
         if (cardNumbersHelperText !== "") {
@@ -124,7 +124,7 @@ export const useCardInputHandlers = (cardState: CardContextType) => {
       setPassword(e.target.value);
       validatePassword(
         e.target.value,
-        CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH
+        CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH,
       );
       setPasswordHelperText("");
     } catch (error: unknown) {

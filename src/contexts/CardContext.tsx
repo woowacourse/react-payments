@@ -1,13 +1,12 @@
-import {
-  createContext,
-  useContext,
-  PropsWithChildren,
-} from "react";
+import { createContext, useContext, PropsWithChildren } from "react";
 import { useCardState } from "../hooks/useCardState";
 import { useCardInputHandlers } from "../hooks/useCardInputHandlers";
 import { useCardValidation } from "../hooks/useCardValidation";
 
-const CardContext = createContext<ReturnType<typeof useCardState> & ReturnType<typeof useCardInputHandlers> | null>(null);
+const CardContext = createContext<
+  | (ReturnType<typeof useCardState> & ReturnType<typeof useCardInputHandlers>)
+  | null
+>(null);
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
   const cardState = useCardState();

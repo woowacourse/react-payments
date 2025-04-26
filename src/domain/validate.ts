@@ -48,7 +48,7 @@ export const validateCardNumbers = (number: string[], length: number) => {
       if (!isCorrectLength(num, length))
         throw new CustomCardNumbersError(
           `${length}${ERROR.REQUIRE.SPECIFIC_LENGTH}`,
-          index
+          index,
         );
     }
   });

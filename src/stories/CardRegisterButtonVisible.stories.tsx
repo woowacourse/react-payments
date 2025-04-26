@@ -58,7 +58,9 @@ export const VisibleWhenFormValid: Story = {
     await userEvent.type(cardInputs[3], "8765");
 
     // 카드사 선택
-    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
+    const cardSelectBox = canvas.getByText(
+      INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER,
+    );
     await userEvent.click(cardSelectBox);
     const option = canvas.getByText("BC카드");
     await userEvent.click(option);
@@ -84,7 +86,7 @@ export const VisibleWhenFormValid: Story = {
 
     // 최종적으로 확인 버튼이 있는지 확인
     await expect(
-      canvas.getByRole("button", { name: "확인" })
+      canvas.getByRole("button", { name: "확인" }),
     ).toBeInTheDocument();
   },
 };
@@ -110,7 +112,9 @@ export const InvisibleWhenFormInvalid: Story = {
     await userEvent.clear(cardInputs[3]);
     await userEvent.type(cardInputs[3], "8765");
 
-    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
+    const cardSelectBox = canvas.getByText(
+      INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER,
+    );
     await userEvent.click(cardSelectBox);
     const option = canvas.getByText("BC카드");
     await userEvent.click(option);
@@ -134,7 +138,7 @@ export const InvisibleWhenFormInvalid: Story = {
 
     // 최종: "확인" 버튼이 없어야 함
     await expect(
-      canvas.queryByRole("button", { name: "확인" })
+      canvas.queryByRole("button", { name: "확인" }),
     ).not.toBeInTheDocument();
   },
 };

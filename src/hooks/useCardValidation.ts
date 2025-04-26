@@ -3,7 +3,7 @@ import { useCardState } from "./useCardState";
 import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 export const useCardValidation = (
-  cardState: ReturnType<typeof useCardState>
+  cardState: ReturnType<typeof useCardState>,
 ) => {
   const {
     cardNumbers,
@@ -35,7 +35,7 @@ export const useCardValidation = (
 
   useEffect(() => {
     const isAllFilled = cardNumbers.every(
-      (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+      (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
     );
     if (isAllFilled && cardNumbersHelperText === "") {
       setIsValidCardNumbers(true);
