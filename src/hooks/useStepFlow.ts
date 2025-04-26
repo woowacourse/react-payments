@@ -1,8 +1,8 @@
-// pages/useStepFlow.ts
+import { STEPS } from './../constants';
 import { useEffect } from 'react';
 import { CardFormProps } from '../components/CardForm/CardForm';
 
-type StepName = '카드번호' | '유효기간' | '카드사' | 'CVC' | '비밀번호';
+type StepName = (typeof STEPS)[number];
 
 export function useStepFlow({ formState, setStep }: { formState: CardFormProps; setStep: (step: StepName) => void }) {
   const { cardNumbers, expiration, company, cvc } = formState;

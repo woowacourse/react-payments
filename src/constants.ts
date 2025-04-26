@@ -26,3 +26,5 @@ export const CARD_BRANDS = {
     }
   }
 } as const;
+
+export const STEPS = ['카드번호', '유효기간', '카드사', 'CVC', '비밀번호'] as const;

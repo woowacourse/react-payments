@@ -6,36 +6,34 @@ import CardCompanySection, { CardCompanySectionProps } from '../../components/Ca
 import CvcSection, { CvcSectionProps } from '../../components/CvcSection/CvcSection';
 import PasswordSection, { PasswordSectionProps } from '../../components/PasswordSection/PasswordSection';
 import Button from '../../components/Button/Button';
-import styles from '../../../src/pages/HomePage/HomePage.module.css'; // 같은 스타일 재사용
+import styles from '../../../src/pages/HomePage/HomePage.module.css';
+import { isFormValid } from '../../validation/isFormValid';
+import { useNavigate } from 'react-router';
+import { useStack } from '../../hooks/useStack';
+import { useStepFlow } from '../../hooks/useStepFlow';
+import { STEPS } from '../../constants';
 
 export type CardFormProps = {
   cardNumbers: CardNumberSectionProps['cardNumbers'];
   onCardNumbersChange: CardNumberSectionProps['onCardNumbersChange'];
   cardInputRefs: CardNumberSectionProps['inputRefs'];
   getCardNumberErrorMessage: CardNumberSectionProps['getCardNumberErrorMessage'];
-
   expiration: CardExpirationSectionProps['expiration'];
   handleExpirationChange: CardExpirationSectionProps['onExpirationChange'];
   expirationRef: CardExpirationSectionProps['ref'];
-
   company: CardCompanySectionProps['value'];
   handleCompanySelect: CardCompanySectionProps['onSelect'];
-
   cvc: CvcSectionProps['cvc'];
   handleCvcChange: CvcSectionProps['handleCvcChange'];
-
   password: PasswordSectionProps['password'];
   handlePasswordChange: PasswordSectionProps['handlePasswordChange'];
 };
 
 type Props = {
   formState: CardFormProps;
-  Stack: any;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  buttonVisible: boolean;
 };
 
-export function CardForm({ formState, Stack, handleSubmit, buttonVisible }: Props) {
+export function CardForm({ formState }: Props) {
   const {
     cardNumbers,
     onCardNumbersChange,
@@ -52,8 +50,32 @@ export function CardForm({ formState, Stack, handleSubmit, buttonVisible }: Prop
     handlePasswordChange
   } = formState;
 
+  const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
+
+  useStepFlow({ formState, setStep });
+
+  const navigate = useNavigate();
+
+  const handleGoCompletePage = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate('/complete', {
+      state: {
+        firstCardNumber: formState.cardNumbers.first.value,
+        company: formState.company
+      }
+    });
+  };
+
+  const buttonVisible = isFormValid({
+    cardNumbers: formState.cardNumbers,
+    expiration: formState.expiration,
+    cvc: formState.cvc,
+    password: formState.password,
+    company: formState.company
+  });
+
   return (
-    <form className={styles.inputSectionWrapper} onSubmit={handleSubmit}>
+    <form className={styles.inputSectionWrapper} onSubmit={handleGoCompletePage}>
       <Stack>
         <Stack.Step name="카드번호">
           <CardNumberSection

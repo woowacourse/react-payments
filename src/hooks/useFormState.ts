@@ -12,7 +12,6 @@ export function useFormState() {
   const { password, handlePasswordChange } = usePassword();
 
   return {
-    // 이름 바꿔주기
     cardNumbers,
     onCardNumbersChange: handleCardNumbersChange,
     cardInputRefs,
