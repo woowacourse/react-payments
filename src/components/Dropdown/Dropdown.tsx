@@ -49,7 +49,7 @@ export default function Dropdown<T extends string>({
       </S.DropdownButton>
       <S.DropdownItemList isOpen={isOpen}>
         {dropdownList.map((item) => (
-          <S.DropdownItem key={item}>
+          <S.DropdownItem key={item} tabIndex={isOpen ? 0 : -1}>
             <S.DropdownItemButton type="button" onClick={() => handleDropdownChange(item)}>
               {item}
             </S.DropdownItemButton>
