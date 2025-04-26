@@ -29,7 +29,7 @@ export default function AddCardComplete() {
         </S.CompleteCardInfoText>
       </S.CompleteCardInfoBox>
       <Button type={'button'} onClick={redirectToHome} borderRadius={'8px'}>
-        확인하기
+        확인
       </Button>
     </S.Wrapper>
   );
