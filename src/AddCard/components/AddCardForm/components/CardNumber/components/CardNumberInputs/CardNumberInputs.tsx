@@ -28,8 +28,10 @@ function CardNumberInputs({
     second.errorMessage,
     third.errorMessage,
     fourth.errorMessage,
-  ].filter((msg): msg is string => !!msg);
-  //cool hack
+    // `!!msg`로 null, undefined, 빈 문자열, 0, NaN 같은 falsy 값을 걸러내고,
+    // `msg.trim() !== ''`로 공백만 있는 문자열까지 모두 필터링합니다.
+  ].filter((msg): msg is string => !!msg && msg.trim() !== "");
+
   const latestErrorMessage = errorMessages.length
     ? errorMessages[errorMessages.length - 1]
     : "";
