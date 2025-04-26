@@ -13,6 +13,8 @@ type InputWrapperProps<T extends string = string> = {
   valid: Record<T, boolean>;
   placeholders?: Record<T, string>;
   maxLength: number;
+  inputRefs?: Record<T, React.RefObject<HTMLInputElement | null>>;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>, currentField: T) => void;
 };
 
 export function InputWrapper<T extends string = string>({
@@ -21,7 +23,9 @@ export function InputWrapper<T extends string = string>({
   onChange,
   valid,
   placeholders = {} as Record<T, string>,
-  maxLength
+  maxLength,
+  inputRefs = {} as Record<T, React.RefObject<HTMLInputElement | null>>,
+  onKeyDown
 }: InputWrapperProps<T>) {
   return (
     <div className={styles.inputWrapper}>
@@ -34,6 +38,8 @@ export function InputWrapper<T extends string = string>({
           placeholder={placeholders[field.key]}
           onChange={(e) => onChange(field.key, e.target.value)}
           maxLength={maxLength}
+          ref={inputRefs[field.key]}
+          onKeyDown={(e) => onKeyDown?.(e, field.key)}
         />
       ))}
     </div>

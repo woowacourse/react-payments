@@ -2,7 +2,7 @@ import styles from './CardNumberSection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { CardNumber } from '../../types/card';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
-
+import { useRef } from 'react';
 type Props = {
   cardNumbers: CardNumber;
   handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
@@ -10,6 +10,19 @@ type Props = {
 };
 
 export default function CardNumberSection({ cardNumbers, handleCardNumberChange, cardNumberError }: Props) {
+  const firstInputRef = useRef<HTMLInputElement>(null);
+  const secondInputRef = useRef<HTMLInputElement>(null);
+  const thirdInputRef = useRef<HTMLInputElement>(null);
+  const fourthInputRef = useRef<HTMLInputElement>(null);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, currentField: string) => {
+    if (e.key === 'Backspace' && e.currentTarget.value === '') {
+      if (currentField === 'second') firstInputRef.current?.focus();
+      if (currentField === 'third') secondInputRef.current?.focus();
+      if (currentField === 'fourth') thirdInputRef.current?.focus();
+    }
+  };
+
   const hasAnyInput = Object.values(cardNumbers).some((value) => value.length > 0);
 
   const isEachTouched = {
@@ -28,6 +41,12 @@ export default function CardNumberSection({ cardNumbers, handleCardNumberChange,
 
   const handleKeyChange = (key: keyof CardNumber, value: string) => {
     handleCardNumberChange(key, value);
+
+    if (value.length === 4) {
+      if (key === 'first') secondInputRef.current?.focus();
+      else if (key === 'second') thirdInputRef.current?.focus();
+      else if (key === 'third') fourthInputRef.current?.focus();
+    }
   };
 
   return (
@@ -54,6 +73,13 @@ export default function CardNumberSection({ cardNumbers, handleCardNumberChange,
             fourth: '1234'
           }}
           maxLength={4}
+          inputRefs={{
+            first: firstInputRef,
+            second: secondInputRef,
+            third: thirdInputRef,
+            fourth: fourthInputRef
+          }}
+          onKeyDown={handleKeyDown}
         />
         {hasAnyInput && cardNumberError && <FieldGroup.Error message={cardNumberError} />}
       </div>
