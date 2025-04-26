@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./ProgressBar.module.css";
 import type { FlowStep } from "@/AddCard/types/hook";
-import { STEP_ORDER_INDEX } from "@/AddCard/constants";
+import { STEP_ORDER } from "@/AddCard/constants";
 
 interface ProgressBarProps {
   currentStep: FlowStep;
@@ -14,7 +14,7 @@ const ProgressBar = ({
   allValid,
   stepLabels,
 }: ProgressBarProps) => {
-  const currentStepNumber = STEP_ORDER_INDEX[currentStep] ?? 1;
+  const currentStepNumber = STEP_ORDER.indexOf(currentStep) + 1;
   const showValidationError = currentStep === "COMPLETE" && !allValid;
 
   return (
@@ -44,11 +44,9 @@ const ProgressBar = ({
                   className={clsx(
                     styles.stepBarFill,
                     stepNumber <= currentStepNumber && styles.active,
+                    stepNumber <= currentStepNumber && styles.completed,
                     showValidationError && styles.error
                   )}
-                  style={{
-                    width: stepNumber <= currentStepNumber ? "100%" : "0%",
-                  }}
                   aria-hidden="true"
                 />
               </div>
