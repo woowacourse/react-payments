@@ -1,12 +1,20 @@
 import React, { useState, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import Preview from '../components/Preview';
+import Preview from '../../components/Preview';
 import { within, waitFor, expect } from '@storybook/test';
 
 const meta: Meta<typeof Preview> = {
   title: 'Components/Preview Container',
   component: Preview,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          '카드 번호와 유효기간 입력 정보를 실시간으로 카드에 보여주는 컴포넌트입니다. 카드 브랜드(VISA, Mastercard)를 자동으로 인식하여 로고를 표시합니다.',
+      },
+    },
+  },
 };
 
 export default meta;
@@ -38,6 +46,7 @@ const Wrapper = ({
       cardNumbers={cardNumbers}
       period={period}
       separatorRef={separatorRef}
+      cardFrameColor='#333333'
     />
   );
 };
@@ -64,9 +73,7 @@ export const Visa: Story = {
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe(
-        `${import.meta.env.BASE_URL}/images/visa.svg`
-      )
+      expect(cardMethodImg?.getAttribute('src')).toBe(`/images/visa.svg`)
     );
   },
 };
@@ -93,9 +100,7 @@ export const Mastercard: Story = {
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe(
-        `${import.meta.env.BASE_URL}/images/Mastercard.svg`
-      )
+      expect(cardMethodImg?.getAttribute('src')).toBe(`/images/Mastercard.svg`)
     );
   },
 };
