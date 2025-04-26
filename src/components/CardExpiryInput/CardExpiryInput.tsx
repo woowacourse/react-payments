@@ -1,10 +1,7 @@
-import { useRef, useState } from 'react';
 import InputContainer from '../InputContainer/InputContainer';
-import { validateMonth } from '../../domain/validate';
-import { validateYear } from '../../domain/validate';
 import { INPUT_CONTAINER } from '../../constants/title';
-import ERROR from '../../constants/errorMessage';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { useCardExpiryValidation } from '../../hooks/useExpiryInputValidation';
 
 type CardExpiryInputProps = {
   month: string;
@@ -19,48 +16,17 @@ const CardExpiryInput = ({
   year,
   setYear,
 }: CardExpiryInputProps) => {
-  const [helperText, setHelperText] = useState('');
-  const [errorIndex, setErrorIndex] = useState<number | null>(null);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [isErrors, errorMessage, validate] = useCardExpiryValidation();
+  const [isMonthError, isYearError] = isErrors;
 
   const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    try {
-      if (name === 'month') {
-        setMonth(value);
-        if (value.length === 0) {
-          setHelperText('');
-          return;
-        }
-        validateMonth(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
-        validateYear(year, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
-      } else if (name === 'year') {
-        setYear(value);
-        if (value.length === 0) {
-          setHelperText('');
-          return;
-        }
-        validateMonth(month, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
-        validateYear(value, CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH);
-      }
-      setHelperText('');
-      setErrorIndex(null);
-    } catch (error: unknown) {
-      catchError(error);
+    if (name === 'month') {
+      setMonth(value);
+    } else if (name === 'year') {
+      setYear(value);
     }
-  };
-
-  const catchError = (error: unknown) => {
-    if (!(error instanceof Error)) return;
-    if (error.message === ERROR.EXPIRY.INVALID_MONTH) {
-      inputRefs.current[0]?.focus();
-      setErrorIndex(0);
-    } else if (error.message === ERROR.EXPIRY.INVALID_YEAR) {
-      inputRefs.current[1]?.focus();
-      setErrorIndex(1);
-    }
-    setHelperText(error.message);
+    validate(name, value);
   };
 
   return (
@@ -76,11 +42,9 @@ const CardExpiryInput = ({
           placeholder="MM"
           value={month}
           onChange={updateDate}
-          ref={(element) => {
-            inputRefs.current.push(element);
-          }}
-          className={`input ${errorIndex === 0 && 'errorInput'}`}
+          className={`input ${isMonthError ? 'errorInput' : ''}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
+          disabled={isYearError}
         />
         <input
           type="text"
@@ -88,15 +52,13 @@ const CardExpiryInput = ({
           placeholder="YY"
           value={year}
           onChange={updateDate}
-          ref={(element) => {
-            inputRefs.current.push(element);
-          }}
-          className={`input ${errorIndex === 1 && 'errorInput'}`}
+          className={`input ${isYearError ? 'errorInput' : ''}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
+          disabled={isMonthError}
         />
       </div>
       <p className="helperText" data-testid="helper-text">
-        {helperText}
+        {errorMessage}
       </p>
     </InputContainer>
   );
