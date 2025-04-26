@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import SingleButton from '../common/SingleButton';
 import { useNavigate } from 'react-router-dom';
 
-interface SubmitButtonProps {
+interface ConfirmButtonProps {
   disabled?: boolean;
   children: React.ReactNode;
 }
 
-const SubmitButton = ({ disabled, children }: SubmitButtonProps) => {
+const ConfirmButton = ({ disabled, children }: ConfirmButtonProps) => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -25,7 +25,7 @@ const SubmitButton = ({ disabled, children }: SubmitButtonProps) => {
   );
 };
 
-export default SubmitButton;
+export default ConfirmButton;
 
 const StyledSingleButton = styled(SingleButton)`
   background: #333;
