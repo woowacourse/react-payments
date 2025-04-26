@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import styles from './HomePage.module.css';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from '../../components/CardExpirationSection/CardExpirationSection';
@@ -36,15 +36,23 @@ export default function HomePage() {
       }
     });
   };
+
+  const isCardNumbersValid = Object.values(cardNumbers).every(({ value, isError }) => value.length === 4 && !isError);
+  const isExpirationValid = Object.values(expiration).every(({ value, errorMessage }) => value.length === 2 && errorMessage === '');
+  const isCvcValid = cvc.value.length === 3 && cvc.errorMessage === '';
+  const isCompanyValid = company !== '';
+
   return (
     <div className={styles.wrapper}>
       <CardPreview cardNumbers={cardNumbers} company={company} expiration={expiration} />
       <Spacing size={45} />
       <form className={styles.inputSectionWrapper} onSubmit={(e) => handleGoCompletePage(e)}>
-        <PasswordSection password={password} handlePasswordChange={handlePasswordChange} />
-        <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />
-        <CardCompanySection value={company} onSelect={handleCompanySelect} />
-        <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={expirationRef} />
+        {isCardNumbersValid && isExpirationValid && isCvcValid && isCompanyValid && (
+          <PasswordSection password={password} handlePasswordChange={handlePasswordChange} />
+        )}
+        {isCardNumbersValid && isExpirationValid && isCompanyValid && <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />}
+        {isCardNumbersValid && isExpirationValid && <CardCompanySection value={company} onSelect={handleCompanySelect} />}
+        {isCardNumbersValid && <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={expirationRef} />}
         <CardNumberSection
           cardNumbers={cardNumbers}
           onCardNumbersChange={handleCardNumberChange}
@@ -56,3 +64,38 @@ export default function HomePage() {
     </div>
   );
 }
+
+// useFunnel.tsx
+
+import { ReactElement, ReactNode } from 'react';
+
+export interface StepProps {
+  name: string;
+  children: ReactNode;
+}
+
+export interface FunnelProps {
+  children: Array<ReactElement<StepProps>>;
+}
+
+export const useFunnel = (defaultStep: string) => {
+  // state를 통해 현재 스텝을 관리한다.
+  // setStep 함수를 통해 현재 스텝을 변경할 수 있다.
+  const [step, setStep] = useState(defaultStep);
+
+  // 각 단계를 나타내는 Step 컴포넌트
+  // children을 통해 각 스텝의 컨텐츠를 렌더링 한다.
+  const Step = (props: StepProps): ReactElement => {
+    return <>{props.children}</>;
+  };
+
+  // 여러 단계의 Step 컴포넌트 중 현재 활성화된 스텝을 렌더링하는 Funnel
+  // find를 통해 Step 중 현재 Step을 찾아 렌더링
+  const Funnel = ({ children }: FunnelProps) => {
+    const targetStep = children.find((childStep) => childStep.props.name === step);
+
+    return <>{targetStep}</>;
+  };
+
+  return { Funnel, Step, setStep, currentStep: step } as const;
+};
