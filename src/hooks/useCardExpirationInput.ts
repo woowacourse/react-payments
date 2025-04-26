@@ -1,40 +1,40 @@
 import { useMemo, useState } from 'react';
-import { Expiration } from '../types/card';
+import { CardExpiration } from '../types/card';
 import { validateMonthRangeError, validateNumberError, validateYearLengthError } from '../utils/cardInputValidations';
 
 export function useCardExpirationInput() {
-  const [expiration, setExpiration] = useState<Expiration>({ month: '', year: '' });
+  const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: '', year: '' });
 
-  const expirationError = useMemo(() => {
-    const errors: Expiration = {
+  const cardExpirationError = useMemo(() => {
+    const errors: CardExpiration = {
       month: '',
       year: ''
     };
 
-    if (expiration.month !== '') {
-      const numError = validateNumberError(expiration.month);
+    if (cardExpiration.month !== '') {
+      const numError = validateNumberError(cardExpiration.month);
       if (numError) errors.month = numError;
 
-      const monthRangeError = validateMonthRangeError(expiration.month);
+      const monthRangeError = validateMonthRangeError(cardExpiration.month);
       if (monthRangeError) errors.month = monthRangeError;
     }
 
-    if (expiration.year !== '') {
-      const numError = validateNumberError(expiration.year);
+    if (cardExpiration.year !== '') {
+      const numError = validateNumberError(cardExpiration.year);
       if (numError) {
         errors.year = numError;
       } else {
-        const yearLengthError = validateYearLengthError(expiration.year);
+        const yearLengthError = validateYearLengthError(cardExpiration.year);
         if (yearLengthError) errors.year = yearLengthError;
       }
     }
 
     return errors;
-  }, [expiration]);
+  }, [cardExpiration]);
 
-  const handleExpirationChange = (key: keyof Expiration, value: string) => {
-    setExpiration((prev) => ({ ...prev, [key]: value }));
+  const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
+    setCardExpiration((prev) => ({ ...prev, [key]: value }));
   };
 
-  return { expiration, handleExpirationChange, expirationError };
+  return { cardExpiration, handleCardExpirationChange, cardExpirationError };
 }

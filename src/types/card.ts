@@ -11,7 +11,7 @@ export type CardCompany =
   | '국민카드'
   | '';
 
-export type Expiration = {
+export type CardExpiration = {
   month: string;
   year: string;
 };

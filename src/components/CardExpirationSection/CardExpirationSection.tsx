@@ -1,16 +1,20 @@
 import styles from './CardExpirationSection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
-import { Expiration } from '../../types/card';
+import { CardExpiration } from '../../types/card';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 
 type Props = {
-  expiration: Expiration;
-  handleExpirationChange: (key: keyof Expiration, value: string) => void;
-  expirationError: Expiration;
+  cardExpiration: CardExpiration;
+  handleCardExpirationChange: (key: keyof CardExpiration, value: string) => void;
+  cardExpirationError: CardExpiration;
 };
 
-export default function CardExpirationSection({ expiration, handleExpirationChange, expirationError }: Props) {
-  const hasAnyInput = Object.values(expiration).some((value) => value.length > 0);
+export default function CardExpirationSection({
+  cardExpiration,
+  handleCardExpirationChange,
+  cardExpirationError
+}: Props) {
+  const hasAnyInput = Object.values(cardExpiration).some((value) => value.length > 0);
 
   return (
     <div className={styles.sectionContainer}>
@@ -22,21 +26,21 @@ export default function CardExpirationSection({ expiration, handleExpirationChan
         <FieldGroup.Label text="유효기간" />
         <InputWrapper<'month' | 'year'>
           fields={[
-            { key: 'month', value: expiration.month },
-            { key: 'year', value: expiration.year }
+            { key: 'month', value: cardExpiration.month },
+            { key: 'year', value: cardExpiration.year }
           ]}
-          onChange={handleExpirationChange}
+          onChange={handleCardExpirationChange}
           valid={{
-            month: !expirationError.month,
-            year: !expirationError.year
+            month: !cardExpirationError.month,
+            year: !cardExpirationError.year
           }}
           placeholders={{ month: 'MM', year: 'YY' }}
           maxLength={2}
         />
         {hasAnyInput && (
           <>
-            {expirationError.month && <FieldGroup.Error message={expirationError.month} />}
-            {expirationError.year && <FieldGroup.Error message={expirationError.year} />}
+            {cardExpirationError.month && <FieldGroup.Error message={cardExpirationError.month} />}
+            {cardExpirationError.year && <FieldGroup.Error message={cardExpirationError.year} />}
           </>
         )}
       </div>

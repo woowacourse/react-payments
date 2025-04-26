@@ -1,14 +1,14 @@
-import { CardLogo, Expiration, CardNumber, CardCompany } from '../../types/card';
+import { CardLogo, CardExpiration, CardNumber, CardCompany } from '../../types/card';
 import styles from './CardPreview.module.css';
 
 type Props = {
   numbers: CardNumber;
   cardLogo: CardLogo;
   cardCompany: CardCompany;
-  expiration: Expiration;
+  cardExpiration: CardExpiration;
 };
 
-export default function CardPreview({ numbers, cardLogo, cardCompany, expiration }: Props) {
+export default function CardPreview({ numbers, cardLogo, cardCompany, cardExpiration }: Props) {
   const numberKeys: (keyof CardNumber)[] = ['first', 'second', 'third', 'fourth'];
   const bgColorName = cardCompany ? `--color-card-${cardCompany}` : '--color-black';
 
@@ -40,9 +40,9 @@ export default function CardPreview({ numbers, cardLogo, cardCompany, expiration
           ))}
         </div>
         <div className={styles.cardNumber}>
-          {expiration.month}
-          {expiration.month && '/'}
-          {expiration.year}
+          {cardExpiration.month}
+          {cardExpiration.month && '/'}
+          {cardExpiration.year}
         </div>
       </div>
     </div>

@@ -17,14 +17,19 @@ import { useCardPasswordInput } from './hooks/useCardPasswordInput.ts';
 export default function App() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
   const [cardCompany, setCardCompany] = useState<CardCompany>('');
-  const { expiration, handleExpirationChange, expirationError } = useCardExpirationInput();
+  const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
   const { cvc, handleCvcChange, cvcError } = useCvcInput();
   const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();
   const cardLogo = useMemo<CardLogo>(() => handleCardLogoChange(cardNumbers.first), [cardNumbers.first]);
 
   return (
     <div className={styles.appContainer}>
-      <CardPreview numbers={cardNumbers} cardLogo={cardLogo} cardCompany={cardCompany} expiration={expiration} />
+      <CardPreview
+        numbers={cardNumbers}
+        cardLogo={cardLogo}
+        cardCompany={cardCompany}
+        cardExpiration={cardExpiration}
+      />
       <CardNumberSection
         cardNumbers={cardNumbers}
         handleCardNumberChange={handleCardNumberChange}
@@ -32,9 +37,9 @@ export default function App() {
       />
       <CardCompanySection cardCompany={cardCompany} setCardCompany={setCardCompany} />
       <CardExpirationSection
-        expiration={expiration}
-        handleExpirationChange={handleExpirationChange}
-        expirationError={expirationError}
+        cardExpiration={cardExpiration}
+        handleCardExpirationChange={handleCardExpirationChange}
+        cardExpirationError={cardExpirationError}
       />
       <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
       <CardPasswordSection
