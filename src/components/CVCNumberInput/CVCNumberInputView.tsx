@@ -1,11 +1,11 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
-import { CVCNumberInfo } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
+import { InputFieldState } from '../../types/models';
 
 interface CVCNumberInputViewProps {
-  cvcNumberInfo: CVCNumberInfo;
+  cvcNumberInfo: InputFieldState;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -22,7 +22,7 @@ const CVCNumberInputView = ({
         onChange={handleInputChange}
       />
       <ErrorMessage>
-        {cvcNumberInfo.isError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
+        {cvcNumberInfo.hasError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
       </ErrorMessage>
     </Container>
   );
