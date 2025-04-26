@@ -57,9 +57,9 @@ function Input({
       onChange={onChangeInputHandler}
       autoFocus={autoFocus}
       required={isRequired}
-      className={`${styles.input} ${
+      className={`${styles.input} tx-md ${
         !isValidInput ? styles.isNotValid : ''
-      } tx-md`}
+      }`}
       data-input-id={dataInputId}
       ref={ref}
     />
