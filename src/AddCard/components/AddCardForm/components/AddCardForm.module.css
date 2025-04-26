@@ -1,5 +1,23 @@
 .form {
   display: flex;
+  flex-direction: column;
+  gap: 1.8rem 0;
+  width: 100%;
+}
+
+.inputsContainer {
+  display: flex;
   flex-direction: column-reverse;
   gap: 1.8rem 0;
+}
+
+.buttonWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  background: #333;
+  z-index: 1;
 }

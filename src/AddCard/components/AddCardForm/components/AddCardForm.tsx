@@ -70,85 +70,88 @@ function AddCardForm({
       aria-label="카드 등록 양식"
       role="form"
     >
-      <CardInputBox
-        title="결제할 카드 번호를 입력해 주세요"
-        guideText="본인 명의의 카드만 결제 가능합니다."
-        InputComponents={
-          <CardNumberInputs
-            ref={firstCardNumberInputRef}
-            cardNumberState={cardNumberState}
-            handleCardNumberChange={handleCardNumberChange}
+      <div className={styles.inputsContainer}>
+        <CardInputBox
+          title="결제할 카드 번호를 입력해 주세요"
+          guideText="본인 명의의 카드만 결제 가능합니다."
+          InputComponents={
+            <CardNumberInputs
+              ref={firstCardNumberInputRef}
+              cardNumberState={cardNumberState}
+              handleCardNumberChange={handleCardNumberChange}
+            />
+          }
+        />
+
+        {currentIndex >= 1 && (
+          <CardInputBox
+            title="카드사를 선택해 주세요"
+            guideText="현재 국내 카드사만 지원합니다."
+            InputComponents={
+              <CardBrandDropdown
+                ref={brandDropdownRef}
+                selectedBrand={selectedBrand}
+                setSelectedBrand={setSelectedBrand}
+              />
+            }
           />
-        }
-      />
+        )}
 
-      {currentIndex >= 1 && (
-        <CardInputBox
-          title="카드사를 선택해 주세요"
-          guideText="현재 국내 카드사만 지원합니다."
-          InputComponents={
-            <CardBrandDropdown
-              ref={brandDropdownRef}
-              selectedBrand={selectedBrand}
-              setSelectedBrand={setSelectedBrand}
-            />
-          }
-        />
-      )}
+        {currentIndex >= 2 && (
+          <CardInputBox
+            title="카드 유효기간을 입력해 주세요"
+            guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
+            InputComponents={
+              <CardExpireDateInputs
+                ref={expireMonthInputRef}
+                expireDate={expireDate}
+                handleExpireMonthChange={handleExpireMonthChange}
+                handleExpireYearChange={handleExpireYearChange}
+                handleExpireMonthBlur={handleExpireMonthBlur}
+              />
+            }
+          />
+        )}
 
-      {currentIndex >= 2 && (
-        <CardInputBox
-          title="카드 유효기간을 입력해 주세요"
-          guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
-          InputComponents={
-            <CardExpireDateInputs
-              ref={expireMonthInputRef}
-              expireDate={expireDate}
-              handleExpireMonthChange={handleExpireMonthChange}
-              handleExpireYearChange={handleExpireYearChange}
-              handleExpireMonthBlur={handleExpireMonthBlur}
-            />
-          }
-        />
-      )}
+        {currentIndex >= 3 && (
+          <CardInputBox
+            title="CVC 번호를 입력해 주세요"
+            InputComponents={
+              <CVCInputs
+                ref={cvcInputRef}
+                CVCState={CVCState}
+                handleCVCChange={handleCVCChange}
+              />
+            }
+          />
+        )}
 
-      {currentIndex >= 3 && (
-        <CardInputBox
-          title="CVC 번호를 입력해 주세요"
-          InputComponents={
-            <CVCInputs
-              ref={cvcInputRef}
-              CVCState={CVCState}
-              handleCVCChange={handleCVCChange}
-            />
-          }
-        />
-      )}
-
-      {currentIndex >= 4 && (
-        <CardInputBox
-          title="비밀번호를 입력해주세요"
-          InputComponents={
-            <PasswordInputs
-              ref={passwordInputRef}
-              passwordState={passwordState}
-              handlePasswordChange={handlePasswordChange}
-            />
-          }
-        />
-      )}
+        {currentIndex >= 4 && (
+          <CardInputBox
+            title="비밀번호를 입력해주세요"
+            InputComponents={
+              <PasswordInputs
+                ref={passwordInputRef}
+                passwordState={passwordState}
+                handlePasswordChange={handlePasswordChange}
+              />
+            }
+          />
+        )}
+      </div>
 
       {allValid && (
-        <Button
-          ref={addCardButtonRef}
-          variant="default"
-          size="large"
-          fullWidth={true}
-          fixed={true}
-          onClick={handleAddCardButton}
-        >
-          확인
-        </Button>
+        <div className={styles.buttonWrapper}>
+          <Button
+            ref={addCardButtonRef}
+            variant="default"
+            size="large"
+            fullWidth={true}
+            onClick={handleAddCardButton}
+          >
+            확인
+          </Button>
+        </div>
       )}
     </form>
   );
