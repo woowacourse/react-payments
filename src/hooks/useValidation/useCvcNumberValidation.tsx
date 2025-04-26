@@ -2,7 +2,7 @@ import { useState } from "react";
 import { errorStateType } from "../../types";
 import { validateNumberOnly } from "../../utils/validation";
 import { useEachValidationType } from "../../types/useValidationType";
-import useCheckComplete from "./useCheckComplete";
+import useErrorCheckComplete from "../useErrorCheckComplete";
 
 const useCvcNumberValidation = (): useEachValidationType => {
   const [isError, setIsError] = useState<errorStateType>([false]);
@@ -20,7 +20,7 @@ const useCvcNumberValidation = (): useEachValidationType => {
     setErrorMessage(message);
   };
 
-  const isComplete = useCheckComplete(isError);
+  const isComplete = useErrorCheckComplete(isError);
 
   return { isError, isComplete, errorMessage, validateInput };
 };
