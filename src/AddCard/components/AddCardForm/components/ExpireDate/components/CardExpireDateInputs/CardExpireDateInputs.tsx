@@ -37,14 +37,17 @@ function CardExpireDateInputs({
   return (
     <div className={styles.container}>
       <div className={styles.expireDateInputContainer}>
-        {EXPIRE_DATE_KEYS.map((expireKey, idx) => {
+        {EXPIRE_DATE_KEYS.map((expireKey) => {
           return (
             <p className={styles.expireDateInputBox} key={expireKey}>
-              <Label htmlFor={`expire-${expireKey}-input`} isHidden={idx !== 0}>
+              <Label
+                htmlFor={`expire-${expireKey}-input`}
+                isHidden={expireKey !== "MM"}
+              >
                 유효 기간
               </Label>
               <Input
-                ref={idx === 0 ? ref : inputRefs[expireKey]}
+                ref={expireKey === "MM" ? ref : inputRefs[expireKey]}
                 id={`expire-${expireKey}-input`}
                 type="text"
                 maxLength={EXPIRE_DATE_LENGTH}
@@ -53,7 +56,7 @@ function CardExpireDateInputs({
                 value={expireDate[expireKey].value}
                 onChange={(e) => handleInputChange(expireKey, e.target.value)}
                 onBlur={
-                  idx === 0
+                  expireKey === "MM"
                     ? (e) => handleExpireMonthBlur(e.target.value)
                     : undefined
                 }
