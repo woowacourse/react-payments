@@ -1,15 +1,13 @@
-import { ReactNode } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
-type Prop = {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
 	type: "button" | "submit";
-	children?: string | ReactNode;
-	onClick?: () => void;
-};
+}
 
-const Button = ({ type, children, onClick }: Prop) => {
+const Button = ({ type, children, onClick, ...rest }: ButtonProps) => {
 	return (
-		<ButtonStyled type={type} onClick={onClick}>
+		<ButtonStyled type={type} onClick={onClick} {...rest}>
 			{children}
 		</ButtonStyled>
 	);
