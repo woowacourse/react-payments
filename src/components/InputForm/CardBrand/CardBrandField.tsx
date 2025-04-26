@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { CardInfo } from "../../../hooks/useCardInfo";
 import { CARD_BRAND_LIST } from "./constants";
+import useDropDown from "../../../hooks/useDropDown";
 
 interface CardBrandFieldProps {
   cardInfo: CardInfo;
@@ -12,29 +12,12 @@ interface CardBrandFieldProps {
 }
 
 function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const { isOpen, toggleDropdown, closeDropdown, dropdownRef } = useDropDown();
 
   const selectBrand = (value: string) => {
     handleCardInfo("cardBrand", value);
-    setIsOpen(false);
+    closeDropdown();
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
 
   const displayText = cardInfo.cardBrand || "카드사를 선택해주세요";
 
