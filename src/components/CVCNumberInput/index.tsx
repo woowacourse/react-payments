@@ -1,26 +1,14 @@
-import { useInputField } from '../../hooks/useCardInputHooks';
-import { validateCvcNumber } from '../../utils/cardValidation';
+import { useCardForm } from '../../contexts/CardFormContext';
 import CVCNumberInputView from './CVCNumberInputView';
 
-const CVC_NUMBER_MAX_LENGTH = 3;
-
-const CvcNumberInput = () => {
-  const initialCvcNumber = '';
-  const placeholder = '123';
-
-  const [cvcNumberInfo, handleFieldChange] = useInputField(
-    initialCvcNumber,
-    placeholder,
-    CVC_NUMBER_MAX_LENGTH,
-    validateCvcNumber
-  );
-
+const CVCNumberInput = () => {
+  const { cvcField, handleCvcFieldChange } = useCardForm();
   return (
     <CVCNumberInputView
-      cvcNumberInfo={cvcNumberInfo}
-      handleInputChange={handleFieldChange}
+      cvcNumberInfo={cvcField}
+      handleInputChange={handleCvcFieldChange}
     />
   );
 };
 
-export default CvcNumberInput;
+export default CVCNumberInput;
