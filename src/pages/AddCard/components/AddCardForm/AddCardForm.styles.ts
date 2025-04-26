@@ -11,8 +11,8 @@ export const CardAddFrom = styled.form`
 
 export const CardAddFromButtonWrapper = styled.div`
   position: fixed;
-  bottom: 0fixed;
-  left: 50%fixed;
-  transform: translateX(-50%) fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 480px;
 `;

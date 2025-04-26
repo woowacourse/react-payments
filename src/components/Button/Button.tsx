@@ -8,7 +8,7 @@ export interface ButtonProps extends React.ComponentProps<'button'> {
 
 export default function Button({ children, type, borderRadius, onClick }: ButtonProps) {
   return (
-    <S.StyledButton type={type} onClick={onClick} borderRadius={borderRadius}>
+    <S.StyledButton autoFocus type={type} onClick={onClick} borderRadius={borderRadius}>
       {children}
     </S.StyledButton>
   );
