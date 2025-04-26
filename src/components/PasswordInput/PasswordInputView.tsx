@@ -1,11 +1,11 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
-import { PasswordInfo } from '../../types/models';
+import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
 
 interface PasswordInputViewProps {
-  passwordInfo: PasswordInfo;
+  passwordInfo: InputFieldState;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -26,7 +26,7 @@ const PasswordInputView = ({
         onChange={handleInputChange}
       />
       <ErrorMessage>
-        {passwordInfo.isError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
+        {passwordInfo.hasError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
       </ErrorMessage>
     </Container>
   );

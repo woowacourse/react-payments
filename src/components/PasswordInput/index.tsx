@@ -1,33 +1,19 @@
-import { useState } from 'react';
-import { isNumeric, isValidSegment } from '../../utils/cardValidation';
-import { PasswordInfo } from '../../types/models';
+import { useInputField } from '../../hooks/useCardInputHooks';
+import { validatePasswordSegment } from '../../utils/cardValidation';
 import PasswordInputView from './PasswordInputView';
 
-const PASSWORD_LENGTH = 2;
-
 const PasswordInput = () => {
-  const [passwordInfo, setPasswordInfo] = useState<PasswordInfo>(() => ({
-    number: '',
-    isError: false,
-    placeholder: '**',
-    numberSegmentLength: PASSWORD_LENGTH,
-  }));
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const valid = isNumeric(value) && isValidSegment(value, PASSWORD_LENGTH);
-
-    setPasswordInfo((prev) => ({
-      ...prev,
-      number: valid ? value : prev.number,
-      isError: !valid,
-    }));
-  };
+  const [fieldState, handleFieldChange] = useInputField(
+    '',
+    '**',
+    2,
+    validatePasswordSegment
+  );
 
   return (
     <PasswordInputView
-      passwordInfo={passwordInfo}
-      handleInputChange={handleInputChange}
+      passwordInfo={fieldState}
+      handleInputChange={handleFieldChange}
     />
   );
 };
