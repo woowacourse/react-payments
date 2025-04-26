@@ -8,6 +8,7 @@ const meta = {
   args: {
     cardNumber: ["1234", "5678", "9012", "3456"],
     expiration: ["12", "12"],
+    cardBrand: "",
   },
 } satisfies Meta<typeof Card>;
 
@@ -20,11 +21,13 @@ export const Visa: Story = {
   args: {
     ...meta.args,
     cardNumber: ["4123", "1234", "1234", "1234"],
+    cardBrand: "카카오뱅크",
   },
 };
 export const MasterCard: Story = {
   args: {
     ...meta.args,
     cardNumber: ["5123", "4567", "8910", "1112"],
+    cardBrand: "신한카드",
   },
 };
