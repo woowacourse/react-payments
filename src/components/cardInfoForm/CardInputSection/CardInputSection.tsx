@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
+import { StepType } from '../../../App';
 
 interface CardInputSectionProps {
   title: string;
   description?: string;
   errorMessage: string;
   children: React.ReactElement;
+  name: StepType;
 }
 
 function CardInputSection({
@@ -12,9 +14,10 @@ function CardInputSection({
   description,
   errorMessage,
   children,
+  name,
 }: CardInputSectionProps) {
   return (
-    <section>
+    <section id={name}>
       <Title>{title}</Title>
       {description && <Description>{description}</Description>}
       {children}

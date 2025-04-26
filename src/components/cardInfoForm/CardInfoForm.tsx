@@ -1,18 +1,34 @@
 import styled from '@emotion/styled';
-
 import Button from '../common/Button/Button';
+import { StepType } from '../../App';
 
 interface CardInfoFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   canSubmit: boolean;
-  children: React.ReactNode;
+  children: React.ReactElement<{ name: StepType }>[];
+  step: Record<StepType, boolean>;
 }
 
 function CardInfoForm(props: CardInfoFormProps) {
-  const { canSubmit, children } = props;
+  const { canSubmit, children, step } = props;
+
+  const completedSteps = new Set(
+    Object.entries(step)
+      .map(([componentName, isCompleted]) => {
+        if (isCompleted) {
+          return componentName;
+        }
+        return null;
+      })
+      .filter(Boolean),
+  );
+
+  const filteredChildren = children
+    .filter((child) => completedSteps.has(child.props.name))
+    .reverse();
 
   return (
     <CardForm>
-      {children}
+      {filteredChildren}
       {canSubmit && (
         <CardFormButtonWrapper>
           <Button customStyle={cardFormButtonStyle} text="확인" />

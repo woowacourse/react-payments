@@ -12,6 +12,16 @@ import useCardValidityPeriod from './hooks/useCardValidityPeriod';
 import useCardCVC from './hooks/useCardCVC';
 import { useCardCompany } from './hooks/useCardCompany';
 import useCardPassword from './hooks/useCardPassword';
+import { useEffect, useState } from 'react';
+
+export type StepType = keyof typeof STEP;
+const STEP = {
+  CardNumber: 'CardNumber',
+  CardCompany: 'CardCompany',
+  CardValidityPeriod: 'CardValidityPeriod',
+  CardCVC: 'CardCVC',
+  CardPassword: 'CardPassword',
+} as const;
 
 function App() {
   const {
@@ -78,6 +88,33 @@ function App() {
     cardCVCOkay &&
     cardPasswordOkay;
 
+  const [step, setStep] = useState({
+    CardNumber: true,
+    CardCompany: false,
+    CardValidityPeriod: false,
+    CardCVC: false,
+    CardPassword: false,
+  });
+
+  const handleNextStep = (newStep: StepType) => {
+    setStep((steps) => ({ ...steps, [newStep]: true }));
+  };
+
+  useEffect(() => {
+    if (cardNumberOkay) {
+      handleNextStep(STEP.CardCompany);
+    }
+    if (cardCompanyOkay) {
+      handleNextStep(STEP.CardValidityPeriod);
+    }
+    if (cardValidityPeriodOkay) {
+      handleNextStep(STEP.CardCVC);
+    }
+    if (cardCVCOkay) {
+      handleNextStep(STEP.CardPassword);
+    }
+  }, [cardCVCOkay, cardCompanyOkay, cardNumberOkay, cardValidityPeriodOkay]);
+
   return (
     <AppLayout>
       <CardPreview
@@ -85,11 +122,12 @@ function App() {
         cardValidityPeriod={cardValidityPeriod}
         CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}
       />
-      <CardInfoForm canSubmit={canSubmit}>
+      <CardInfoForm canSubmit={canSubmit} step={step}>
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."
           errorMessage={getErrorMessageFromList(cardNumberErrorMessage)}
+          name={STEP.CardNumber}
         >
           <CardNumberField
             cardNumber={cardNumber}
@@ -103,6 +141,7 @@ function App() {
           title="카드사를 선택해 주세요"
           description="현재 국내 카드사만 가능합니다."
           errorMessage={''}
+          name={STEP.CardCompany}
         >
           <CardCompanyField
             selectedCard={selectedCard}
@@ -117,6 +156,7 @@ function App() {
           errorMessage={getErrorMessageFromList(
             Object.values(cardValidityPeriodErrorMessage),
           )}
+          name={STEP.CardValidityPeriod}
         >
           <CardValidityPeriodField
             cardValidityPeriod={cardValidityPeriod}
@@ -130,6 +170,7 @@ function App() {
         <CardInputSection
           title="CVC 번호를 입력해 주세요"
           errorMessage={cardCVCErrorMessage}
+          name={STEP.CardCVC}
         >
           <CardCVCField
             cardCVC={cardCVC}
@@ -141,6 +182,7 @@ function App() {
           title="비밀번호를 입력해 주세요"
           description="앞의 2자리를 입력해주세요"
           errorMessage={cardPasswordErrorMessage}
+          name={STEP.CardPassword}
         >
           <CardPasswordField
             cardPassword={cardPassword}
