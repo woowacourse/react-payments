@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react';
-import { validateCardPassword } from '../../domain/validate';
 import InputContainer from '../InputContainer/InputContainer';
+import { useCardPasswordValidation } from '../../hooks/useCardPasswordValidation';
 
 type CardPasswordInputProps = {
   password: string;
@@ -11,26 +10,12 @@ const CardPasswordInput = ({
   password,
   setPassword,
 }: CardPasswordInputProps) => {
-  const [helperText, setHelperText] = useState('');
-  const inputRef = useRef<HTMLElement | null>(null);
+  const [isError, errorMessage, validate] = useCardPasswordValidation();
 
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    try {
-      const { value } = e.target;
-      setPassword(value);
-      if (value.length === 0) {
-        setHelperText('');
-        return;
-      }
-      validateCardPassword(value, 2);
-      console.log('setHelperText');
-      setHelperText('');
-    } catch (error) {
-      if (error instanceof Error) {
-        setHelperText(error.message);
-        inputRef.current?.focus();
-      }
-    }
+    const { value } = e.target;
+    setPassword(value);
+    validate(value);
   };
 
   return (
@@ -46,15 +31,12 @@ const CardPasswordInput = ({
           onChange={updatePassword}
           name="password"
           maxLength={2}
-          ref={(element) => {
-            inputRef.current = element;
-          }}
           placeholder="비밀번호 앞 2자리"
-          className="input"
+          className={`input ${isError ? 'errorInput' : ''}`}
         />
       </div>
       <p className="helperText" data-testid="helper-text">
-        {helperText}
+        {errorMessage}
       </p>
     </InputContainer>
   );
