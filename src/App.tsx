@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router";
 import { PAGE_URL } from "./constants/pageUrl";
-import AddCardPage from "./pages/addCard/AddCardPage";
+import AddCardPage from "./pages/add-card/AddCardPage";
 import HomePage from "./pages/home/HomePage";
-import AddCardSuccessPage from "./pages/addCard/success/AddCardSuccessPage";
+import AddCardSuccessPage from "./pages/add-card/success/AddCardSuccessPage";
 
 function App() {
   return (
