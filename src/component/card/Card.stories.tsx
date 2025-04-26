@@ -91,3 +91,20 @@ export const InputExpiration: Story = {
   },
   render: (args) => <Card cardInput={args.cardInput} cardType="default" />,
 };
+
+export const SelectCardBrand: Story = {
+  args: {
+    cardInput: {
+      first: '1111',
+      second: '2222',
+      third: '3333',
+      fourth: '4444',
+      MM: '12',
+      YY: '25',
+      CVC: '',
+      password: '',
+      cardBrand: 'BC카드',
+    },
+  },
+  render: (args) => <Card cardInput={args.cardInput} cardType="default" />,
+};
