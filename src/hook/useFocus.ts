@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import type { CardInputProps } from '../types/CardInputTypes';
 
-const useFocus = (inputKeys: string[], maxLength: number) => {
+const useFocus = (inputKeys: string[]) => {
   const inputRefsArray = inputKeys.map((key) => [key, useRef<HTMLInputElement>(null)]);
   const inputRefsObject = Object.fromEntries(inputRefsArray);
 

@@ -23,7 +23,6 @@ export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
   if (!isValidFormatMonth(expirationDate)) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_FORMAT;
   }
-
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
