@@ -13,14 +13,14 @@ const InputSelect = ({ value, onChange }: InputSelectProps) => {
           <option value="" disabled hidden>
             카드사를 선택해주세요
           </option>
-          <option value="bc">BC카드</option>
-          <option value="shinhan">신한카드</option>
-          <option value="kakao">카카오뱅크</option>
-          <option value="hyundai">현대카드</option>
-          <option value="woori">우리카드</option>
-          <option value="lotte">롯데카드</option>
-          <option value="hana">하나카드</option>
-          <option value="kb">국민카드</option>
+          <option value="BC">BC카드</option>
+          <option value="신한">신한카드</option>
+          <option value="카카오">카카오뱅크</option>
+          <option value="현대">현대카드</option>
+          <option value="우리">우리카드</option>
+          <option value="롯데">롯데카드</option>
+          <option value="하나">하나카드</option>
+          <option value="국민">국민카드</option>
         </Select>
       </Row>
     </InputSelectContainer>
