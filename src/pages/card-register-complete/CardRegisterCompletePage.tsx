@@ -1,25 +1,39 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Image from '../../components/common/Image';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
+import { useEffect } from 'react';
 
-interface CardRegisterCompletePageProps {
-  cardNumberFirstPart: string;
+interface CardRegisterCompleteInfo {
+  cardFirstPartNumbers: string;
   cardBrandName: string;
 }
 
-const CardRegisterCompletePage = ({
-  cardNumberFirstPart,
-  cardBrandName,
-}: CardRegisterCompletePageProps) => {
+const CardRegisterCompletePage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const cardInfo = location.state as CardRegisterCompleteInfo | null;
+
+  useEffect(() => {
+    if (!cardInfo) {
+      navigate('/card-register', { replace: true });
+    } else {
+      window.history.replaceState(null, '', window.location.href);
+    }
+  }, []);
+
+  if (!cardInfo) return null;
+
   const completeIconSrc = `${import.meta.env.BASE_URL}images/checkIcon.svg`;
 
   return (
     <Main>
       <Image src={completeIconSrc} alt='Complete Icon' width={76} height={76} />
       <InfoMessage>
-        {cardNumberFirstPart}로 시작하는
+        {cardInfo.cardFirstPartNumbers}로 시작하는
         <br />
-        {cardBrandName}가 등록되었습니다.
+        {cardInfo.cardBrandName}가 등록되었습니다.
       </InfoMessage>
       <ConfirmButton>확인</ConfirmButton>
     </Main>
