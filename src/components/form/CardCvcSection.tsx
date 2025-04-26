@@ -21,6 +21,7 @@ const CardCvcSection = ({value, onChange, onError}: Props) => {
     onChange(e);
 
     const {value, name} = e.target;
+
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);
       onError(name, true);
@@ -31,9 +32,13 @@ const CardCvcSection = ({value, onChange, onError}: Props) => {
     onError(name, false);
   };
 
-  const handleFocusout = (value: string) => {
-    if (value.length < INPUT_MAX_LENGTH)
+  const handleFocusout = (e: ChangeEvent<HTMLInputElement>) => {
+    const {value, name} = e.target;
+
+    if (value.length < INPUT_MAX_LENGTH) {
       setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
+      onError(name, true);
+    }
   };
 
   return (
@@ -47,8 +52,8 @@ const CardCvcSection = ({value, onChange, onError}: Props) => {
           placeholder="123"
           value={value}
           autoFocus
-          onChange={(e) => handleInput(e)}
-          onBlur={(e) => handleFocusout(e.target.value)}
+          onChange={handleInput}
+          onBlur={handleFocusout}
         />
       </InputField>
     </CardNumberWrap>

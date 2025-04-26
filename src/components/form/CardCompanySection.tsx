@@ -15,7 +15,7 @@ const CardCompanySection = ({onChange, name}: Props) => {
     <CardNumberWrap>
       <Title>카드사를 선택해 주세요</Title>
       <Description>현재 국내 카드사만 가능합니다.</Description>
-      <Select name={name} onChange={(e) => onChange(e)} $isError={false}>
+      <Select name={name} onChange={onChange} $isError={false}>
         <option value="" hidden>
           카드사를 선택해주세요
         </option>

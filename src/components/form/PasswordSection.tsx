@@ -21,6 +21,7 @@ const PasswordSection = ({value, onChange, onError}: Props) => {
     onChange(e);
 
     const {value, name} = e.target;
+
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError(MESSAGE.INVALID_NUMBER);
       onError(name, true);
@@ -31,9 +32,12 @@ const PasswordSection = ({value, onChange, onError}: Props) => {
     setError('');
   };
 
-  const handleFocusout = (value: string) => {
+  const handleFocusout = (e: ChangeEvent<HTMLInputElement>) => {
+    const {value, name} = e.target;
+
     if (value.length < INPUT_MAX_LENGTH) {
       setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
+      onError(name, true);
     }
   };
 
@@ -49,8 +53,8 @@ const PasswordSection = ({value, onChange, onError}: Props) => {
           placeholder="**"
           value={value}
           autoFocus
-          onChange={(e) => handleInput(e)}
-          onBlur={(e) => handleFocusout(e.target.value)}
+          onChange={handleInput}
+          onBlur={handleFocusout}
         />
       </InputField>
     </CardNumberWrap>

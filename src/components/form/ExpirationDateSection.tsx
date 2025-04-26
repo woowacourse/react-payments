@@ -57,6 +57,7 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
   const handleInput = (
     e: ChangeEvent<HTMLInputElement>,
     order: keyof ExpirationDate
@@ -64,6 +65,7 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
     onChange(e, order);
 
     const {value, name} = e.target;
+
     const matchedError = expirationErrorRule.find((rule) =>
       rule.validate(value, order)
     );
@@ -75,15 +77,22 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
 
     matchedError ? onError(name, true) : onError(name, false);
 
-    const index = ORDER_LABEL.findIndex((i) => i === order);
+    const refIndex = ORDER_LABEL.findIndex((i) => i === order);
 
-    if (value.length === INPUT_MAX_LENGTH && inputRefs[index + 1])
-      inputRefs[index + 1].current?.focus();
+    if (value.length === INPUT_MAX_LENGTH && inputRefs[refIndex + 1])
+      inputRefs[refIndex + 1].current?.focus();
   };
 
-  const handleFocusout = (order: keyof ExpirationDate, value: string) => {
-    if (value.length < INPUT_MAX_LENGTH)
+  const handleFocusout = (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof ExpirationDate
+  ) => {
+    const {value, name} = e.target;
+
+    if (value.length < INPUT_MAX_LENGTH) {
       setError((prev) => ({...prev, [order]: MESSAGE.MONTH_FORMAT}));
+      onError(name, true);
+    }
   };
 
   return (
@@ -101,7 +110,7 @@ const ExpirationDateSection = ({value, onChange, onError}: Props) => {
             maxLength={INPUT_MAX_LENGTH}
             autoFocus={label === 'month'}
             onChange={(e) => handleInput(e, label)}
-            onBlur={(e) => handleFocusout(label, e.target.value)}
+            onBlur={(e) => handleFocusout(e, label)}
           />
         ))}
       </InputField>

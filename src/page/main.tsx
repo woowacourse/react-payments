@@ -6,13 +6,13 @@ import CardNumberSection from '../components/form/CardNumberSection';
 import ExpirationDateSection from '../components/form/ExpirationDateSection';
 import CardCvcSection from '../components/form/CardCvcSection';
 import Button from '../components/button/Button';
+import CardPreview from '../components/cardPreview/CardPreview';
 
 import {CardForm} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
-import useCardForm from '../hooks/useCardForm';
+import useInput from '../hooks/useInput';
 import useErrors from '../hooks/useErrors';
-import CardPreview from '../components/cardPreview/CardPreview';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -26,21 +26,32 @@ const INIT_EXPIRATION_DATE = {
   year: '',
 };
 
+const INIT_FORM_DATA = {
+  cardNumber: INIT_CARD_NUMBER,
+  expirationDate: INIT_EXPIRATION_DATE,
+  cvcNumber: '',
+  cardCompany: '',
+  password: '',
+};
+
 const Main = () => {
-  const {formData, onChange} = useCardForm({
+  const {formData, onChange} = useInput({
     cardNumber: INIT_CARD_NUMBER,
     expirationDate: INIT_EXPIRATION_DATE,
     cvcNumber: '',
     cardCompany: '',
     password: '',
   });
-  const {isErrors, onError} = useErrors({
-    cardNumber: false,
-    expirationDate: false,
-    cvcNumber: false,
-    cardCompany: false,
-    password: false,
-  });
+  const {isErrors, onError} = useErrors(
+    {
+      cardNumber: false,
+      expirationDate: false,
+      cvcNumber: false,
+      cardCompany: false,
+      password: false,
+    },
+    INIT_FORM_DATA
+  );
   const navigate = useNavigate();
 
   const isVisible = (section: keyof CardForm, maxLength: number) => {

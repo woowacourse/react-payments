@@ -38,6 +38,7 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
     order: keyof CardNumber
   ) => {
     onChange(e, order);
+
     const {value, name} = e.target;
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
@@ -55,19 +56,26 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
     setError((prev) => ({...prev, [order]: ''}));
     Object.values(error).some((e) => e.length > 0) || onError(name, false);
 
-    // if (value.length === INPUT_MAX_LENGTH) nextElementSibling?.focus();
-    const index = ORDER_LABEL.findIndex((i) => i === order);
+    const refIndex = ORDER_LABEL.findIndex((i) => i === order);
 
-    if (value.length === INPUT_MAX_LENGTH && inputRefs[index + 1])
-      inputRefs[index + 1].current?.focus();
+    if (value.length === INPUT_MAX_LENGTH && inputRefs[refIndex + 1])
+      inputRefs[refIndex + 1].current?.focus();
   };
 
-  const handleFocusout = (order: keyof CardNumber, value: string) => {
-    if (value.length < INPUT_MAX_LENGTH)
+  const handleFocusout = (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof CardNumber
+  ) => {
+    const {value, name} = e.target;
+
+    if (value.length < INPUT_MAX_LENGTH) {
       setError((prev) => ({
         ...prev,
         [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH),
       }));
+
+      onError(name, true);
+    }
   };
 
   return (
@@ -86,7 +94,7 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
             maxLength={INPUT_MAX_LENGTH}
             autoFocus={label === 'first'}
             onChange={(e) => handleInput(e, label)}
-            onBlur={(e) => handleFocusout(label, e.target.value)}
+            onBlur={(e) => handleFocusout(e, label)}
           />
         ))}
       </InputField>
