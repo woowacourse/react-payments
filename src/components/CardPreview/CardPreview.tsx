@@ -54,7 +54,7 @@ function CardPreview({
   return (
     <Card CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}>
       <IcChip />
-      <CardInfoWrapper>
+      <CardInfoWrapper CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}>
         <CardNumberWrapper>
           {cardNumber.map((number, index) => {
             if (index < CARD_PREVIEW_RULE.SENSITIVE_INFO) {
@@ -98,7 +98,7 @@ const IcChip = styled.div`
   position: absolute;
 `;
 
-const CardInfoWrapper = styled.div`
+const CardInfoWrapper = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -108,7 +108,8 @@ const CardInfoWrapper = styled.div`
 
   font-size: 14px;
   font-weight: 500;
-  color: #ffffff;
+  color: ${({ CARD_COMPANY_COLORS }) =>
+    CARD_COMPANY_COLORS === '#FFE600' ? '#000000' : ' #ffffff'};
 `;
 
 const CardNumberWrapper = styled.div`
