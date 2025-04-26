@@ -1,11 +1,11 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
-import { NumberInfo } from '../../types/models';
+import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
 
 interface NumberInputsViewProps {
-  numbersInfo: NumberInfo[];
+  numbersInfo: InputFieldState[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -28,7 +28,7 @@ const NumberInputsView = ({
         onChange={handleInputChange}
       />
       <ErrorMessage>
-        {numbersInfo.some((data) => data.isError)
+        {numbersInfo.some((data) => data.hasError)
           ? ERROR_MESSAGE.INVALID_CHARACTER
           : ''}
       </ErrorMessage>

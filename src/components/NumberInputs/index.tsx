@@ -1,57 +1,39 @@
-import { useEffect, useState } from 'react';
-import NumberInputsView from './NumberInputsView';
-import { NumberInfo } from '../../types/models';
+import { useMultipleInputFields } from '../../hooks/useCardInputHooks';
 import { isNumeric, isValidSegment } from '../../utils/cardValidation';
+import NumberInputsView from './NumberInputsView';
 
 interface NumberInputsProps {
   numbers: string[];
   handleNumbersChange: (newNumbers: string[]) => void;
 }
 
-const NUMBERS_LENGTH = 4;
+const NumberInputs = ({ numbers, handleNumbersChange }: NumberInputsProps) => {
+  const placeholders = numbers.map(() => '1234');
 
-const NumberInputs = ({
-  numbers,
-  handleNumbersChange,
-}: NumberInputsProps) => {
-  const [numbersInfo, setNumbersInfo] = useState<NumberInfo[]>(() =>
-    numbers.map((number) => ({
-      number,
-      isError: false,
-      placeholder: '1234',
-      numberSegmentLength: NUMBERS_LENGTH,
-    }))
-  );
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+  const validateNumberSegment = (
+    value: string,
+    _index: number,
+    maxLength: number
   ) => {
-    const { value } = e.target;
-    const valid =
-      isNumeric(value) && isValidSegment(value, NUMBERS_LENGTH);
-
-    setNumbersInfo((prev) =>
-      prev.map((info, i) =>
-        i === index
-          ? {
-              ...info,
-              number: valid ? value : info.number,
-              isError: !valid,
-            }
-          : info
-      )
-    );
+    const isValidValue = isNumeric(value) && isValidSegment(value, maxLength);
+    return {
+      isValid: isValidValue,
+      errorMessage: isValidValue ? '' : '숫자만 입력 가능합니다.',
+    };
   };
 
-  useEffect(() => {
-    handleNumbersChange(numbersInfo.map((info) => info.number));
-  }, [numbersInfo]);
+  const [fieldStates, handleFieldChange] = useMultipleInputFields(
+    numbers,
+    placeholders,
+    4,
+    validateNumberSegment,
+    handleNumbersChange
+  );
 
   return (
     <NumberInputsView
-      numbersInfo={numbersInfo}
-      handleInputChange={handleInputChange}
+      numbersInfo={fieldStates}
+      handleInputChange={handleFieldChange}
     />
   );
 };
