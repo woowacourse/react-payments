@@ -1,11 +1,16 @@
 import styled from "@emotion/styled";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CheckIcon } from "../../components/@common/CheckIcon/CheckIcon";
 import Button from "../../components/@common/Button/Button";
 
 function SuccessPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const cardInfo = location.state.cardInfo;
+
+  function handleSubmit() {
+    navigate("/");
+  }
 
   return (
     <SuccessContainer>
@@ -14,7 +19,7 @@ function SuccessPage() {
         {cardInfo.firstNumber}로 시작하는
         <br /> {cardInfo.cardBrand}가 등록되었어요.
       </SuccessMessage>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={handleSubmit}>
         <Button>확인</Button>
       </ButtonWrapper>
     </SuccessContainer>
