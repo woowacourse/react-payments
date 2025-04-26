@@ -17,14 +17,14 @@ function useStep(initialStep: InputStep = InputStep.CARD_NUMBER) {
     setCurrentStep((prev) => (prev < InputStep.COMPLETED ? prev + 1 : prev));
   };
 
-  const isAtLeastAtStep = (step: InputStep) => {
+  const isPassedStep = (step: InputStep) => {
     return currentStep >= step;
   };
 
   return {
     currentStep,
     goToNextStep,
-    isAtLeastAtStep,
+    isPassedStep,
     InputStep,
   };
 }

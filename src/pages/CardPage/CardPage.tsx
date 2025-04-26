@@ -12,7 +12,7 @@ import { useSelect } from '../../hooks/useSelect';
 import Button from '../../components/Button/Button';
 import useTotalInputValidation from '../../hooks/useTotalInputValidation';
 import useStep from '../../hooks/useStep';
-import { useNavigate } from 'react-router-dom';
+import { useCardRouter } from '../../hooks/useCardRouter';
 
 export type HandleInputParams = {
   value: string;
@@ -20,22 +20,20 @@ export type HandleInputParams = {
 };
 
 const CardPage = () => {
-  const navigate = useNavigate();
   const [cardNumber, handleCardNumberInput] = useInput(['', '', '', '']);
   const [cardCompany, handleCardCompanyInput] = useSelect('');
   const [expirationDate, handleExpirationDateInput] = useInput(['', '']);
   const [cvc, handleCVCInput] = useInput(['']);
   const [password, handlePasswordInput] = useInput(['']);
 
-  const { goToNextStep, isAtLeastAtStep, InputStep } = useStep();
+  const { goToNextStep, isPassedStep, InputStep } = useStep();
   const { updateValidity, isAllValid } = useTotalInputValidation(5);
+  const { navigateToCardComplete } = useCardRouter();
 
   const handleCardRegister = () => {
-    navigate('/card/complete', {
-      state: {
-        cardNumber,
-        cardCompany,
-      },
+    navigateToCardComplete({
+      cardNumber,
+      cardCompany,
     });
   };
 
@@ -46,7 +44,7 @@ const CardPage = () => {
         expirationDate={expirationDate}
         cardCompany={cardCompany}
       />
-      {isAtLeastAtStep(InputStep.PASSWORD) && (
+      {isPassedStep(InputStep.PASSWORD) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.PASSWORD_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.PASSWORD_SUBTITLE} />
@@ -58,7 +56,7 @@ const CardPage = () => {
           />
         </>
       )}
-      {isAtLeastAtStep(InputStep.CVC) && (
+      {isPassedStep(InputStep.CVC) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
           <CVCInput
@@ -69,7 +67,7 @@ const CardPage = () => {
           />
         </>
       )}
-      {isAtLeastAtStep(InputStep.EXPIRATION_DATE) && (
+      {isPassedStep(InputStep.EXPIRATION_DATE) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
@@ -81,7 +79,7 @@ const CardPage = () => {
           />
         </>
       )}
-      {isAtLeastAtStep(InputStep.CARD_COMPANY) && (
+      {isPassedStep(InputStep.CARD_COMPANY) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
@@ -93,7 +91,7 @@ const CardPage = () => {
           />
         </>
       )}
-      {isAtLeastAtStep(InputStep.CARD_NUMBER) && (
+      {isPassedStep(InputStep.CARD_NUMBER) && (
         <>
           <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
           <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
@@ -105,7 +103,11 @@ const CardPage = () => {
           />
         </>
       )}
-      {isAllValid() && <Button onClick={handleCardRegister}>확인</Button>}
+      {isAllValid() && (
+        <ButtonContainer>
+          <Button onClick={handleCardRegister}>확인</Button>
+        </ButtonContainer>
+      )}
     </StyledCardPage>
   );
 };
@@ -121,4 +123,13 @@ const StyledCardPage = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 30px;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  position: fixed;
+  bottom: 0px;
+  width: inherit;
+  max-width: inherit;
+  min-width: inherit;
 `;
