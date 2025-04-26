@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardCVCNumber from './CardCVCNumber';
 import { useState } from '@storybook/preview-api';
-import { ERROR_MESSAGE } from '../../constants';
+import { ERROR_MESSAGE } from '../../../constants';
 
 const meta = {
   title: 'CardCVCNumber',

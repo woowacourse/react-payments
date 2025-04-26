@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardExpirationDate, { DateType } from './CardExpirationDate';
 import { useState } from 'storybook/internal/preview-api';
-import { ERROR_MESSAGE } from '../../constants';
+import { ERROR_MESSAGE } from '../../../constants';
 
 const meta = {
   title: 'CardExpirationDate',

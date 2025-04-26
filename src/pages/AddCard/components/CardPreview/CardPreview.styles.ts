@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CardBrandType } from '../CardBrand/type';
+import { CardBrandType } from '../../../../domain/card/CardBrand/type';
 
 const cardPreviewBackgroundColor = {
   BC카드: '#F04651;',
@@ -59,6 +59,7 @@ export const CardPreviewDateBox = styled.div`
   padding-left: 10px;
 `;
 
-export const CardPreviewDateBoxText = styled.span`
+export const CardPreviewDateBoxText = styled.span<{ CardBrandType: CardBrandType | null }>`
   font-size: 22px;
+  ${(props) => `color:${props.CardBrandType === '카카오뱅크' ? '#000;' : '#fff;'}`}
 `;

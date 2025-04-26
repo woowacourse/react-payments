@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../constants';
+import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 
 export const useControlledCardPasswordNumber = () => {
   const [isCardPasswordNextStep, setIsCardPasswordNextStep] = useState<boolean>(false);

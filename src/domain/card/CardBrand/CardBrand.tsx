@@ -1,6 +1,6 @@
-import Dropdown from '../common/Dropdown/Dropdown';
-import Spacing from '../common/Spacing/Spacing';
-import Title from '../common/Title/Title';
+import Dropdown from '../../../components/Dropdown/Dropdown';
+import Spacing from '../../../components/Spacing/Spacing';
+import Title from '../../../components/Title/Title';
 import { CardBrandProps } from './type';
 
 export const CARD_BRAND_LIST = [

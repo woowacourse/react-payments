@@ -1,5 +1,5 @@
+import ArrowIcon from '../Icon/ArrowIcon';
 import * as S from './Dropdown.styles';
-import ArrowIcon from '../../Icon/ArrowIcon';
 import { useEffect, useRef, useState } from 'react';
 
 interface DropdownProps<T> {

@@ -1,8 +1,8 @@
-import { useControlledCardBrand } from '../../../components/CardBrand/hooks/useControlledCardBrand';
-import { useControlledCardNumber } from '../../../components/CardNumber/hooks/useControlledCardNumber';
-import { useControlledCardExpirationDate } from '../../../components/CardExpirationDate/hooks/useControlledCardExpirationDate';
-import { useControlledCardCVCNumber } from '../../../components/CardCVCNumber/hooks/useControlledCardCVCNumber';
-import { useControlledCardPasswordNumber } from '../../../components/CardPasswordNumber/hooks/useControlledCardPasswordNumber';
+import { useControlledCardBrand } from '../../../domain/card/CardBrand/hooks/useControlledCardBrand';
+import { useControlledCardNumber } from '../../../domain/card/CardNumber/hooks/useControlledCardNumber';
+import { useControlledCardExpirationDate } from '../../../domain/card/CardExpirationDate/hooks/useControlledCardExpirationDate';
+import { useControlledCardCVCNumber } from '../../../domain/card/CardCVCNumber/hooks/useControlledCardCVCNumber';
+import { useControlledCardPasswordNumber } from '../../../domain/card/CardPasswordNumber/hooks/useControlledCardPasswordNumber';
 
 export const useControlledAddCardState = () => {
   const { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, handleCardNumberInputChange } =

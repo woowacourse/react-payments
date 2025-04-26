@@ -5,7 +5,7 @@ import {
   MAX_VALID_MONTH,
   MIN_VALID_MONTH,
   ONLY_NUMBER_PATTERN,
-} from '../../../constants';
+} from '../../../../constants';
 import { DateType, HandleInputChangeProps } from '../type';
 
 export const useControlledCardExpirationDate = () => {

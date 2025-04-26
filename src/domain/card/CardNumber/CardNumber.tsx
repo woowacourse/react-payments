@@ -1,11 +1,11 @@
 import * as S from './CardNumber.styles';
-import Title from '../common/Title/Title';
-import Label from '../common/Label/Label';
-import Input from '../common/Input/Input';
-import Spacing from '../common/Spacing/Spacing';
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
-import { getFirstErrorMessage } from '../../utils';
+import { getFirstErrorMessage } from '../../../utils';
 import { CardNumberProps, SequenceType } from './type';
+import Title from '../../../components/Title/Title';
+import Spacing from '../../../components/Spacing/Spacing';
+import Label from '../../../components/Label/Label';
+import Input from '../../../components/Input/Input';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 export default function CardNumber({
   cardNumber,

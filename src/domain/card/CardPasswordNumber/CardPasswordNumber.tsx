@@ -1,8 +1,8 @@
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
-import Input from '../common/Input/Input';
-import Label from '../common/Label/Label';
-import Spacing from '../common/Spacing/Spacing';
-import Title from '../common/Title/Title';
+import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import Input from '../../../components/Input/Input';
+import Label from '../../../components/Label/Label';
+import Spacing from '../../../components/Spacing/Spacing';
+import Title from '../../../components/Title/Title';
 import { CardPasswordProps } from './type';
 
 export default function CardPasswordNumber({

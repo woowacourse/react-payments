@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { HandleInputChangeProps, SequenceType } from '../type';
-import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../constants';
+import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 
 export const useControlledCardNumber = () => {
   const [isCardNumberNextStep, setIsCardNumberNextStep] = useState(false);

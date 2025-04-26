@@ -1,7 +1,7 @@
 import * as S from './AddCard.styles';
-import CardPreview from '../../components/CardPreview/CardPreview';
-import Spacing from '../../components/common/Spacing/Spacing';
-import AddCardForm from './AddCardForm';
+import CardPreview from './components/CardPreview/CardPreview';
+import Spacing from '../../components/Spacing/Spacing';
+import AddCardForm from './components/AddCardForm/AddCardForm';
 import { useControlledAddCardState } from './hooks/useControlledAddCardState';
 
 export default function AddCard() {

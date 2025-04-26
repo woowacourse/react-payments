@@ -1,9 +1,9 @@
 import * as S from './CardPreview.styles';
-import MasterCard from '../Icon/MasterCard';
-import VisaCard from '../Icon/VisaCard';
-import { MASKING } from '../../constants';
-import { getCardType } from '../../utils';
 import { CardPreviewProps } from './type';
+import VisaCard from '../../../../components/Icon/VisaCard';
+import MasterCard from '../../../../components/Icon/MasterCard';
+import { getCardType } from '../../../../utils';
+import { MASKING } from '../../../../constants';
 
 export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
   const cardType = getCardType(cardNumber.first);
@@ -29,7 +29,9 @@ export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandT
         </S.CardPreviewMiddleText>
       </S.CardPreviewMiddle>
       <S.CardPreviewDateBox>
-        <S.CardPreviewDateBoxText>{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
+        <S.CardPreviewDateBoxText
+          CardBrandType={CardBrandType}
+        >{`${cardExpirationDate.month}${cardExpirationDate.year && ' / '}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
       </S.CardPreviewDateBox>
     </S.CardPreviewWrapper>
   );

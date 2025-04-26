@@ -1,12 +1,12 @@
-import CardNumber from '../../components/CardNumber/CardNumber';
-import CardBrand from '../../components/CardBrand/CardBrand';
-import CardExpirationDate from '../../components/CardExpirationDate/CardExpirationDate';
-import CardCVCNumber from '../../components/CardCVCNumber/CardCVCNumber';
-import CardPasswordNumber from '../../components/CardPasswordNumber/CardPasswordNumber';
+import CardNumber from '../../../../domain/card/CardNumber/CardNumber';
+import CardBrand from '../../../../domain/card/CardBrand/CardBrand';
+import CardExpirationDate from '../../../../domain/card/CardExpirationDate/CardExpirationDate';
+import CardCVCNumber from '../../../../domain/card/CardCVCNumber/CardCVCNumber';
+import CardPasswordNumber from '../../../../domain/card/CardPasswordNumber/CardPasswordNumber';
 import { Fragment, useEffect, useState } from 'react';
-import { CARD_STEP, CARD_STEPS } from './constants';
-import { AddCardFormProps } from './types';
-import Button from './components/Button/Button';
+import { CARD_STEP, CARD_STEPS } from '../../constants';
+import { AddCardFormProps } from '../../types';
+import Button from '../../../../components/Button/Button';
 import { useNavigate } from 'react-router';
 
 export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
