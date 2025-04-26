@@ -8,24 +8,28 @@ import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import styled from 'styled-components';
 import {CardNumber} from '../../type/Card';
 import {MESSAGE} from '../constants/error';
+import {FormFieldProps} from '../../type/FormField';
 
 const INPUT_MAX_LENGTH = 4;
 const ORDER_LABEL = ['first', 'second', 'third', 'fourth'] as const;
-const INIT_CARD_NUMBER_ERROR = {
-  first: '',
-  second: '',
-  third: '',
-  fourth: '',
-};
 
-type Props = {
-  value: CardNumber;
-  onChange: (e: ChangeEvent<HTMLInputElement>, order: keyof CardNumber) => void;
-  onError: (name: string, isError: boolean) => void;
-};
+type Props = FormFieldProps<CardNumber, keyof CardNumber>;
 
-const CardNumberSection = ({value, onChange, onError}: Props) => {
-  const [error, setError] = useState(INIT_CARD_NUMBER_ERROR);
+const errorRule = [
+  {
+    error: MESSAGE.INVALID_NUMBER,
+    validate: (cardNumber: string) =>
+      !isNumberWithinRange(cardNumber, INPUT_MAX_LENGTH),
+  },
+];
+
+const CardNumberSection = ({
+  value,
+  onChange,
+  onValidate,
+  onFocusout,
+  errorMessage,
+}: Props) => {
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -39,62 +43,42 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
   ) => {
     onChange(e, order);
 
-    const {value, name} = e.target;
-
-    if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-      setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));
-      onError(name, true);
-      return;
-    }
-
-    if (order === ORDER_LABEL[3] && value.length < INPUT_MAX_LENGTH) {
-      setError((prev) => ({...prev, [order]: ''}));
-      onError(name, true);
-      return;
-    }
-
-    setError((prev) => ({...prev, [order]: ''}));
-    Object.values(error).some((e) => e.length > 0) || onError(name, false);
+    onValidate(errorRule, e, order);
 
     const refIndex = ORDER_LABEL.findIndex((i) => i === order);
 
-    if (value.length === INPUT_MAX_LENGTH && inputRefs[refIndex + 1])
+    if (
+      errorMessage[order].length === 0 &&
+      e.target.value.length === INPUT_MAX_LENGTH &&
+      inputRefs[refIndex + 1]
+    )
       inputRefs[refIndex + 1].current?.focus();
-  };
-
-  const handleFocusout = (
-    e: ChangeEvent<HTMLInputElement>,
-    order: keyof CardNumber
-  ) => {
-    const {value, name} = e.target;
-
-    if (value.length < INPUT_MAX_LENGTH) {
-      setError((prev) => ({
-        ...prev,
-        [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH),
-      }));
-
-      onError(name, true);
-    }
   };
 
   return (
     <CardNumberWrap>
       <Title>결제할 카드 번호를 입력해 주세요</Title>
       <Description>본인 명의의 카드만 결제 가능합니다.</Description>
-      <InputField label="카드 번호" errorMessage={findErrorOrder(error)}>
+      <InputField label="카드 번호" errorMessage={findErrorOrder(errorMessage)}>
         {ORDER_LABEL.map((label, idx) => (
           <Input
             key={label}
             ref={inputRefs[idx]}
             name="cardNumber"
-            isError={error[label].length > 0}
+            isError={errorMessage[label].length > 0}
             placeholder="1234"
             value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
             autoFocus={label === 'first'}
             onChange={(e) => handleInput(e, label)}
-            onBlur={(e) => handleFocusout(e, label)}
+            onBlur={(e) =>
+              onFocusout(
+                e,
+                INPUT_MAX_LENGTH,
+                MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH),
+                label
+              )
+            }
           />
         ))}
       </InputField>

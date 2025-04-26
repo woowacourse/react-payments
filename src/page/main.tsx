@@ -42,7 +42,7 @@ const Main = () => {
     cardCompany: '',
     password: '',
   });
-  const {isErrors, onError} = useErrors(
+  const {isErrors, errorMessages, onValidate, onFocusout} = useErrors(
     {
       cardNumber: false,
       expirationDate: false,
@@ -78,7 +78,9 @@ const Main = () => {
         <PasswordSection
           value={formData.password}
           onChange={onChange}
-          onError={onError}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.password}
         />
       )}
 
@@ -86,7 +88,9 @@ const Main = () => {
         <CardCvcSection
           value={formData.cvcNumber}
           onChange={onChange}
-          onError={onError}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.cvcNumber}
         />
       )}
 
@@ -94,7 +98,9 @@ const Main = () => {
         <ExpirationDateSection
           value={formData.expirationDate}
           onChange={onChange}
-          onError={onError}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.expirationDate}
         />
       )}
 
@@ -105,7 +111,9 @@ const Main = () => {
       <CardNumberSection
         value={formData.cardNumber}
         onChange={onChange}
-        onError={onError}
+        onValidate={onValidate}
+        onFocusout={onFocusout}
+        errorMessage={errorMessages.cardNumber}
       />
 
       {isVisible('password', 2) && (

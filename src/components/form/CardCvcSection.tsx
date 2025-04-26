@@ -2,58 +2,53 @@ import styled from 'styled-components';
 import Title from '../title/Title';
 import InputField from '../inputField/InputField';
 import Input from '../input/Input';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent} from 'react';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from '../constants/error';
+import {FormFieldProps} from '../../type/FormField';
 
 const INPUT_MAX_LENGTH = 3;
 
-type Props = {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onError: (name: string, isError: boolean) => void;
-};
+type Props = FormFieldProps<string, string>;
 
-const CardCvcSection = ({value, onChange, onError}: Props) => {
-  const [error, setError] = useState('');
+const errorRule = [
+  {
+    error: MESSAGE.INVALID_NUMBER,
+    validate: (cvc: string) => !isNumberWithinRange(cvc, INPUT_MAX_LENGTH),
+  },
+];
 
+const CardCvcSection = ({
+  value,
+  onChange,
+  onValidate,
+  onFocusout,
+  errorMessage,
+}: Props) => {
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
-
-    const {value, name} = e.target;
-
-    if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-      setError(MESSAGE.INVALID_NUMBER);
-      onError(name, true);
-      return;
-    }
-
-    setError('');
-    onError(name, false);
-  };
-
-  const handleFocusout = (e: ChangeEvent<HTMLInputElement>) => {
-    const {value, name} = e.target;
-
-    if (value.length < INPUT_MAX_LENGTH) {
-      setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
-      onError(name, true);
-    }
+    onValidate(errorRule, e);
   };
 
   return (
     <CardNumberWrap>
       <Title>CVC 번호를 입력해 주세요</Title>
-      <InputField label="CVC" errorMessage={error}>
+      <InputField label="CVC" errorMessage={errorMessage}>
         <Input
           name="cvcNumber"
           maxLength={INPUT_MAX_LENGTH}
-          isError={error.length > 0}
+          isError={errorMessage.length > 0}
           placeholder="123"
           value={value}
           autoFocus
           onChange={handleInput}
-          onBlur={handleFocusout}
+          onBlur={(e) =>
+            onFocusout(
+              e,
+              INPUT_MAX_LENGTH,
+              MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH)
+            )
+          }
         />
       </InputField>
     </CardNumberWrap>
