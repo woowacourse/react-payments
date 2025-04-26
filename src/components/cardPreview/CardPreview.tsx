@@ -49,7 +49,7 @@ const formatDate = (expirationDate: ExpirationDate) => {
   return `${month} / ${year}`;
 };
 
-const Card = ({cardNumbers, expirationDate, cardCompany}: Props) => {
+const CardPreview = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   const matchedCard = cardBrandRules.find((rule) =>
     rule.validate(cardNumbers.first)
   );
@@ -82,7 +82,7 @@ const Card = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   );
 };
 
-export default Card;
+export default CardPreview;
 
 const Container = styled.div<{background: string}>`
   width: 212px;

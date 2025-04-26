@@ -38,7 +38,7 @@ const CardNumberSection = ({value, onChange, onError}: Props) => {
     order: keyof CardNumber
   ) => {
     onChange(e, order);
-    const {value, name, nextElementSibling} = e.target;
+    const {value, name} = e.target;
 
     if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
       setError((prev) => ({...prev, [order]: MESSAGE.INVALID_NUMBER}));

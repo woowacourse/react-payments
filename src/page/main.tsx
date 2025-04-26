@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import Card from '../components/card/Card';
 import PasswordSection from '../components/form/PasswordSection';
 import CardCompanySection from '../components/form/CardCompanySection';
 import CardNumberSection from '../components/form/CardNumberSection';
@@ -13,6 +12,7 @@ import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import useCardForm from '../hooks/useCardForm';
 import useErrors from '../hooks/useErrors';
+import CardPreview from '../components/cardPreview/CardPreview';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -57,7 +57,7 @@ const Main = () => {
 
   return (
     <MainContainer>
-      <Card
+      <CardPreview
         cardNumbers={formData.cardNumber}
         expirationDate={formData.expirationDate}
         cardCompany={formData.cardCompany}
