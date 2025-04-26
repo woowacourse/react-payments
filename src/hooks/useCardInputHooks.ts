@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { InputFieldState } from '../types/models';
 
 type FieldValidationFunction = (value: string) => {
@@ -44,8 +44,7 @@ function useMultipleInputFields(
   initialValues: string[],
   placeholders: string[],
   maximumLength: number,
-  validationFunction: MultipleFieldValidationFunction,
-  onValuesChange: (values: string[]) => void
+  validationFunction: MultipleFieldValidationFunction
 ): [
   InputFieldState[],
   (event: ChangeEvent<HTMLInputElement>, index: number) => void
@@ -83,10 +82,6 @@ function useMultipleInputFields(
       )
     );
   };
-
-  useEffect(() => {
-    onValuesChange(fieldStates.map((s) => s.value));
-  }, [fieldStates, onValuesChange]);
 
   return [fieldStates, handleChange];
 }
