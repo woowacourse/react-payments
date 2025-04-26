@@ -12,12 +12,12 @@ import { isValidMonth, isValidYear } from "../../utils/validation";
 
 const INPUT_MAX_LENGTH = 2;
 
-type Props = {
+interface ExpirationDateProps {
 	expirationDate: date;
 	setExpirationDate: Dispatch<SetStateAction<date>>;
-};
+}
 
-const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: Props) => {
+const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: ExpirationDateProps) => {
 	const [error, setError] = useState({
 		month: "",
 		year: "",

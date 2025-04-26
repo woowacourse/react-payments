@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { cardNumber, date } from "../../App";
+import { cardNumber, date } from "../page/CardInfo";
 import styled from "styled-components";
 
-type Props = {
+interface CardProps {
 	cardNumbers: cardNumber;
 	cardCompany: string;
 	expirationDate: date;
-};
+}
 
 type CardBrand = "none" | "mastercard" | "visa";
 
@@ -21,7 +21,7 @@ enum CardBackgroundColor {
 	"국민카드" = "#6A6056",
 }
 
-const Card = ({ cardNumbers, cardCompany, expirationDate }: Props) => {
+const Card = ({ cardNumbers, cardCompany, expirationDate }: CardProps) => {
 	const [badgeBrand, setBadgeBrand] = useState<CardBrand>("none");
 	const backgroundColor = CardBackgroundColor[cardCompany as keyof typeof CardBackgroundColor] ?? "#000";
 

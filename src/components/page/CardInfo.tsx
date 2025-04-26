@@ -10,17 +10,17 @@ import useCardForm from "../../hooks/useCardForm";
 import Button from "../button/Button";
 import styled from "styled-components";
 
-export type cardNumber = {
+export interface cardNumber {
 	first: string;
 	second: string;
 	third: string;
 	fourth: string;
-};
+}
 
-export type date = {
+export interface date {
 	month: string;
 	year: string;
-};
+}
 
 function App() {
 	const navigate = useNavigate();

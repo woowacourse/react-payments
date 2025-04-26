@@ -8,12 +8,12 @@ import { MESSAGE } from "./constants/error";
 
 const INPUT_MAX_LENGTH = 3;
 
-type Props = {
+interface CardCvcProps {
 	cvcNumber: string;
 	setCvcNumber: Dispatch<SetStateAction<string>>;
-};
+}
 
-const CardCvc = React.memo(({ cvcNumber, setCvcNumber }: Props) => {
+const CardCvc = React.memo(({ cvcNumber, setCvcNumber }: CardCvcProps) => {
 	const [error, setError] = useState("");
 
 	const onChange = (value: string) => {

@@ -9,12 +9,12 @@ import styled from "styled-components";
 
 const INPUT_MAX_LENGTH = 2;
 
-type Props = {
+interface CardPasswordProps {
 	cardPassword: string;
 	setCardPassword: Dispatch<SetStateAction<string>>;
-};
+}
 
-const CardPassword = React.memo(({ cardPassword, setCardPassword }: Props) => {
+const CardPassword = React.memo(({ cardPassword, setCardPassword }: CardPasswordProps) => {
 	const [error, setError] = useState("");
 
 	const onChange = (value: string) => {

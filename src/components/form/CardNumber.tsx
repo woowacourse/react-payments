@@ -11,12 +11,12 @@ import styled from "styled-components";
 
 const INPUT_MAX_LENGTH = 4;
 
-type Props = {
+type CardNumberProps = {
 	cardNumber: cardNumber;
 	setCardNumber: Dispatch<SetStateAction<cardNumber>>;
 };
 
-const CardNumber = React.memo(({ cardNumber, setCardNumber }: Props) => {
+const CardNumber = React.memo(({ cardNumber, setCardNumber }: CardNumberProps) => {
 	const [error, setError] = useState({
 		first: "",
 		second: "",
