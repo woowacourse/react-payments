@@ -8,6 +8,9 @@ import { GlobalStyles } from "./styles/Global.styled";
 import { CardProvider } from "./contexts/CardContext";
 import { CardValidationProvider } from "./contexts/CardValidationContext";
 
+const isProduction = import.meta.env.PROD;
+const basePath = isProduction ? "/react-payments" : "";
+
 function Layout() {
   return (
     <ContainerStyles>
@@ -22,22 +25,27 @@ function Layout() {
   );
 }
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <CardForm />,
+        },
+        {
+          path: "/register-complete",
+          element: <RegisterComplete />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <CardForm />,
-      },
-      {
-        path: "/register-complete",
-        element: <RegisterComplete />,
-      },
-    ],
-  },
-]);
+    basename: basePath,
+  }
+);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
