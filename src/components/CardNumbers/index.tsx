@@ -1,5 +1,6 @@
 import CardNumbersView from './CardNumbersView';
 import { useErrorMessage } from '../../hooks/useErrorMessage';
+import { useEffect } from 'react';
 
 type CardNumber = {
   first: string;
@@ -13,19 +14,28 @@ export interface CardNumbersProps {
   cardNumbers: CardNumber;
   setCardNumbers: React.Dispatch<React.SetStateAction<CardNumber>>;
   onComplete?: () => void;
+  setCardNumbersError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CARD_NUMBERS_LENGTH = 4;
 const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
-const CardNumbers = ({ cardNumbers, setCardNumbers, onComplete }: CardNumbersProps) => {
-  const {
-      errors,
-      setErrors,
-      errorMessage,
-      setErrorMessage,
-    } = useErrorMessage([false, false]);
+const CardNumbers = ({
+  cardNumbers,
+  setCardNumbers,
+  onComplete,
+  setCardNumbersError,
+}: CardNumbersProps) => {
+  const { errors, setErrors, errorMessage, setErrorMessage } = useErrorMessage([
+    false,
+    false,
+  ]);
   const keyMap: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
+
+  useEffect(() => {
+    const hasError = errors.some((error) => error === true);
+    setCardNumbersError(hasError);
+  }, [errors]);
 
   const updateErrors = (
     prev: boolean[],

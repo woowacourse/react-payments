@@ -40,8 +40,17 @@ const CardRegisterPage = () => {
   const [isPeriodFilled, setIsPeriodFilled] = useState(false);
   const [passwordNumbers, setPasswordNumbers] = useState('');
   const [isCVCFilled, setIsCVCFilled] = useState(false);
+  //유효성 검증을 관리하는 상태
+  const [cardNumbersError, setCardNumbersError] = useState(false);
+  const [expirationPeriodError, setExpirationPeriodError] = useState(false);
+  const [cvcError, setCvcError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const isAllValid =
+    !cardNumbersError &&
+    !expirationPeriodError &&
+    !cvcError &&
+    !passwordError &&
     isCardNumbersFilled &&
     selectedBrand &&
     isPeriodFilled &&
@@ -61,6 +70,7 @@ const CardRegisterPage = () => {
           <CardPassword
             passwordNumbers={passwordNumbers}
             setPasswordNumbers={setPasswordNumbers}
+            setPasswordError={setPasswordError}
           ></CardPassword>
         )}
         {isPeriodFilled && (
@@ -68,6 +78,7 @@ const CardRegisterPage = () => {
             cvcNumbers={cvcNumbers}
             setCvcNumbers={setCvcNumbers}
             onComplete={() => setIsCVCFilled(true)}
+            setCvcError={setCvcError}
           />
         )}
         {selectedBrand && (
@@ -76,6 +87,7 @@ const CardRegisterPage = () => {
             setPeriod={setPeriod}
             separatorRef={separatorRef}
             onComplete={() => setIsPeriodFilled(true)}
+            setExpirationPeriodError={setExpirationPeriodError}
           />
         )}
         {isCardNumbersFilled && (
@@ -88,6 +100,7 @@ const CardRegisterPage = () => {
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
           onComplete={() => setIsCardNumbersFilled(true)}
+          setCardNumbersError={setCardNumbersError}
         />
 
         {isAllValid && (

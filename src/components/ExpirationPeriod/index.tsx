@@ -1,5 +1,6 @@
 import ExpirationPeriodView from './ExpirationPeriodView';
 import { useErrorMessage } from '../../hooks/useErrorMessage';
+import { use, useEffect } from 'react';
 
 export interface ExpirationPeriodProps {
   period: { month: string; year: string };
@@ -8,6 +9,7 @@ export interface ExpirationPeriodProps {
   >;
   separatorRef?: React.RefObject<HTMLDivElement | null>;
   onComplete?: () => void;
+  setExpirationPeriodError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EXPIRATION_PERIOD_LENGTH = 2;
@@ -30,11 +32,17 @@ const ExpirationPeriod = ({
   setPeriod,
   separatorRef,
   onComplete,
+  setExpirationPeriodError,
 }: ExpirationPeriodProps) => {
   const { errors, setErrors, errorMessage, setErrorMessage } = useErrorMessage([
     false,
     false,
   ]);
+
+  useEffect(() => {
+    const hasError = errors.some((error) => error === true);
+    setExpirationPeriodError(hasError);
+  }, [errors]);
 
   const isNumeric = (value: string) => /^[0-9]*$/.test(value);
 

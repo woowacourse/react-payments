@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CVCNumbersView from './CVCNumbersView';
 
 export interface CVCNumbersProps {
   cvcNumbers: string;
   setCvcNumbers: React.Dispatch<React.SetStateAction<string>>;
   onComplete?: () => void;
+  setCvcError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CVC_NUMBERS_LENGTH = 3;
@@ -14,9 +15,15 @@ const CVCNumbers = ({
   cvcNumbers,
   setCvcNumbers,
   onComplete,
+  setCvcError,
 }: CVCNumbersProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const hasError = error;
+    setCvcError(hasError);
+  }, [error]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
