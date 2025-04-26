@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Button from '../common/Button/Button';
-import { StepType } from '../../App';
+import { StepType } from '../../constants/step';
 
 interface CardInfoFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   canSubmit: boolean;

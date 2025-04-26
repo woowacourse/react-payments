@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { StepType } from '../../../App';
+import { StepType } from '../../../constants/step';
 
 interface CardInputSectionProps {
   title: string;
