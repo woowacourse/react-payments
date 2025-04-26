@@ -5,12 +5,14 @@ interface CardNumberFieldProps {
   cardNumber: string[];
   isError: boolean[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  setInputRef: (el: HTMLInputElement | null, index: number) => void;
 }
 
 function CardNumberField({
   cardNumber,
   isError,
   onChange,
+  setInputRef,
 }: CardNumberFieldProps) {
   return (
     <div>
@@ -31,6 +33,7 @@ function CardNumberField({
             placeholder="1234"
             min={0}
             max={9999}
+            ref={(el) => setInputRef(el, index)}
           />
         ))}
       </InputWrapper>

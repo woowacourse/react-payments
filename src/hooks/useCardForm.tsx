@@ -10,6 +10,7 @@ const useCardForm = () => {
     cardNumber,
     onChangeCardNumber,
     errorMessage: cardNumberErrorMessage,
+    setInputRef: setCardNumberInputRef,
   } = useCardNumber();
 
   const {
@@ -112,6 +113,9 @@ const useCardForm = () => {
       canSubmit,
       step,
       STEP_NAME,
+    },
+    setInputRef: {
+      setCardNumberInputRef,
     },
   };
 };

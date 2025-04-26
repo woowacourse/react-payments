@@ -11,8 +11,14 @@ import styled from '@emotion/styled';
 import useCardForm from './hooks/useCardForm';
 
 function App() {
-  const { formData, eventHandlers, cardCompany, validation, status } =
-    useCardForm();
+  const {
+    formData,
+    eventHandlers,
+    cardCompany,
+    validation,
+    status,
+    setInputRef,
+  } = useCardForm();
 
   const {
     cardNumber,
@@ -46,6 +52,8 @@ function App() {
 
   const { canSubmit, step, STEP_NAME } = status;
 
+  const { setCardNumberInputRef } = setInputRef;
+
   return (
     <AppLayout>
       <CardPreview
@@ -66,6 +74,7 @@ function App() {
               Boolean(errorMessage),
             )}
             onChange={onChangeCardNumber}
+            setInputRef={setCardNumberInputRef}
           />
         </CardInputSection>
         <CardInputSection

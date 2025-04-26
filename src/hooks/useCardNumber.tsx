@@ -56,7 +56,10 @@ function useCardNumber() {
       return newCardNumber;
     });
 
-    if (checkValidCardNumber(value)) {
+    if (
+      value.length === PARSE_RULE.length &&
+      checkValidCardNumber(value) === false
+    ) {
       focusNextInput(n);
     }
   };
