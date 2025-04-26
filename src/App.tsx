@@ -49,7 +49,6 @@ export default function App() {
           cardExpirationError={cardExpirationError}
         />
       )}
-
       {Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError && (
         <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
       )}

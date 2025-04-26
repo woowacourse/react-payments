@@ -7,6 +7,7 @@ type InputField<T extends string = string> = {
 };
 
 type InputWrapperProps<T extends string = string> = {
+  type?: string;
   fields: InputField<T>[];
   onChange: (key: T, value: string) => void;
   valid: Record<T, boolean>;
@@ -15,6 +16,7 @@ type InputWrapperProps<T extends string = string> = {
 };
 
 export function InputWrapper<T extends string = string>({
+  type,
   fields,
   onChange,
   valid,
@@ -25,6 +27,7 @@ export function InputWrapper<T extends string = string>({
     <div className={styles.inputWrapper}>
       {fields.map((field) => (
         <Input
+          type={type}
           key={field.key}
           value={field.value}
           isValid={valid[field.key]}

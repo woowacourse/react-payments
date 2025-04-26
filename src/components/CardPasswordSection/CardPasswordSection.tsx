@@ -18,6 +18,7 @@ export default function CardPasswordSection({ cardPassword, handleCardPasswordCh
       <div className={styles.FieldGroup}>
         <FieldGroup.Label text="비밀번호 앞 2자리" />
         <InputWrapper<'cardPassword'>
+          type="password"
           fields={[{ key: 'cardPassword', value: cardPassword }]}
           onChange={handleCardPasswordChange}
           valid={{ cardPassword: cardPasswordError === '' }}
