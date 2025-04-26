@@ -16,6 +16,7 @@ import type { AddCardCompleteLocationState } from "@/AddCard/types/location";
 import styles from "./AddCardForm.module.css";
 import { useFocusControl } from "@/AddCard/hooks/useFocusControl";
 import { locations } from "@/AddCard/constants/locations";
+import FullWidthFixed from "@/layout/FullWidthFixed";
 
 interface AddCardFormProps {
   addCardState: CardState & CardHandlers;
@@ -145,15 +146,16 @@ function AddCardForm({
 
       {allValid && (
         <div className={styles.buttonWrapper}>
-          <Button
-            ref={addCardButtonRef}
-            variant="default"
-            size="large"
-            fullWidth={true}
-            onClick={handleAddCardButton}
-          >
-            확인
-          </Button>
+          <FullWidthFixed>
+            <Button
+              ref={addCardButtonRef}
+              variant="default"
+              size="large"
+              onClick={handleAddCardButton}
+            >
+              확인
+            </Button>
+          </FullWidthFixed>
         </div>
       )}
     </form>

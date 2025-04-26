@@ -43,11 +43,11 @@ function AddCardCompleteModal() {
             가 등록되었어요!
           </span>
         </p>
+
         <Button
           size="large"
           onClick={handleAddCardConfirmButton}
           variant="rounded"
-          fullWidth={true}
           aria-label="확인 및 홈으로 이동"
         >
           확인

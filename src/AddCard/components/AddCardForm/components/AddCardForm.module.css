@@ -18,6 +18,4 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: 400px;
-  background: #333;
-  z-index: 1;
 }
