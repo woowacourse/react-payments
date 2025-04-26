@@ -61,7 +61,7 @@ function CardPreview({
               return <CardNumber key={index}>{number}</CardNumber>;
             }
             return (
-              <CardNumber key={index}>{'*'.repeat(number.length)}</CardNumber>
+              <CardNumber key={index}>{'⦁'.repeat(number.length)}</CardNumber>
             );
           })}
         </CardNumberWrapper>
@@ -78,8 +78,8 @@ function CardPreview({
 export default CardPreview;
 
 const Card = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
-  width: 212px;
-  height: 132px;
+  width: 252px;
+  height: 152px;
   border-radius: 4px;
   background: ${({ CARD_COMPANY_COLORS }) => CARD_COMPANY_COLORS};
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -99,6 +99,7 @@ const IcChip = styled.div`
 `;
 
 const CardInfoWrapper = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -110,6 +111,7 @@ const CardInfoWrapper = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
   font-weight: 500;
   color: ${({ CARD_COMPANY_COLORS }) =>
     CARD_COMPANY_COLORS === '#FFE600' ? '#000000' : ' #ffffff'};
+  letter-spacing: 2px;
 `;
 
 const CardNumberWrapper = styled.div`
@@ -118,7 +120,7 @@ const CardNumberWrapper = styled.div`
 `;
 
 const CardNumber = styled.span`
-  width: 34px;
+  width: auto;
   height: 20px;
   font-weight: 500;
   font-size: 14px;
