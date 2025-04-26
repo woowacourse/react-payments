@@ -1,37 +1,38 @@
 import styles from "./CardNumberInput.module.css";
+import type { ChangeEvent, ComponentProps } from "react";
 
 type Props = {
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
   errorMessage?: string;
-  type: "text" | "password";
-};
+} & Omit<ComponentProps<"input">, "onChange"> & {
+    onChange: (value: string) => void;
+  };
 
 export default function NumberInput({
-
-export default function CardNumberInput({
   value,
   onChange,
   placeholder = "1234",
   errorMessage = "",
   type = "text",
+  ref,
 }: Props) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    if (/^\d*$/.test(newValue)) {
-      onChange(newValue);
+  const handleNumberInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const isNumberValue = /^\d*$/.test(e.target.value);
+
+    if (isNumberValue) {
+      // onChange = (value) => handleCardNumberChange(value, index)임.
+      onChange?.(e.target.value);
     }
   };
 
   return (
     <input
+      ref={ref}
       className={`${styles["input-number"]} ${
         errorMessage ? styles["error"] : ""
       }`}
       placeholder={placeholder}
-      value={value}
-      onChange={handleChange}
+      value={value} // state
+      onChange={handleNumberInputChange} // setter
       type={type}
     />
   );
