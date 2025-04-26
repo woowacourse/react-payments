@@ -1,39 +1,19 @@
-// pages/CardForm.tsx
 import { FormEvent } from 'react';
-import CardNumberSection, { CardNumberSectionProps } from '../../components/CardNumberSection/CardNumberSection';
-import CardExpirationSection, { CardExpirationSectionProps } from '../../components/CardExpirationSection/CardExpirationSection';
-import CardCompanySection, { CardCompanySectionProps } from '../../components/CardCompanySection/CardCompanySection';
-import CvcSection, { CvcSectionProps } from '../../components/CvcSection/CvcSection';
-import PasswordSection, { PasswordSectionProps } from '../../components/PasswordSection/PasswordSection';
+import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
+import CardExpirationSection from '../../components/CardExpirationSection/CardExpirationSection';
+import CardCompanySection from '../../components/CardCompanySection/CardCompanySection';
+import CvcSection from '../../components/CvcSection/CvcSection';
+import PasswordSection from '../../components/PasswordSection/PasswordSection';
 import Button from '../../components/Button/Button';
-import styles from '../../../src/pages/HomePage/HomePage.module.css';
-import { isFormValid } from '../../validation/isFormValid';
 import { useNavigate } from 'react-router';
 import { useStack } from '../../hooks/useStack';
 import { useStepFlow } from '../../hooks/useStepFlow';
+import { isFormValid } from '../../validation/isFormValid';
 import { STEPS } from '../../constants';
+import styles from '../../../src/pages/HomePage/HomePage.module.css';
+import { useFormContext } from '../../contexts/useFormContext';
 
-export type CardFormProps = {
-  cardNumbers: CardNumberSectionProps['cardNumbers'];
-  onCardNumbersChange: CardNumberSectionProps['onCardNumbersChange'];
-  cardInputRefs: CardNumberSectionProps['inputRefs'];
-  getCardNumberErrorMessage: CardNumberSectionProps['getCardNumberErrorMessage'];
-  expiration: CardExpirationSectionProps['expiration'];
-  handleExpirationChange: CardExpirationSectionProps['onExpirationChange'];
-  expirationRef: CardExpirationSectionProps['ref'];
-  company: CardCompanySectionProps['value'];
-  handleCompanySelect: CardCompanySectionProps['onSelect'];
-  cvc: CvcSectionProps['cvc'];
-  handleCvcChange: CvcSectionProps['handleCvcChange'];
-  password: PasswordSectionProps['password'];
-  handlePasswordChange: PasswordSectionProps['handlePasswordChange'];
-};
-
-type Props = {
-  formState: CardFormProps;
-};
-
-export function CardForm({ formState }: Props) {
+export function CardForm() {
   const {
     cardNumbers,
     onCardNumbersChange,
@@ -48,11 +28,11 @@ export function CardForm({ formState }: Props) {
     handleCvcChange,
     password,
     handlePasswordChange
-  } = formState;
+  } = useFormContext();
 
   const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
 
-  useStepFlow({ formState, setStep });
+  useStepFlow({ formState: useFormContext(), setStep });
 
   const navigate = useNavigate();
 
@@ -60,18 +40,18 @@ export function CardForm({ formState }: Props) {
     e.preventDefault();
     navigate('/complete', {
       state: {
-        firstCardNumber: formState.cardNumbers.first.value,
-        company: formState.company
+        firstCardNumber: cardNumbers.first.value,
+        company
       }
     });
   };
 
   const buttonVisible = isFormValid({
-    cardNumbers: formState.cardNumbers,
-    expiration: formState.expiration,
-    cvc: formState.cvc,
-    password: formState.password,
-    company: formState.company
+    cardNumbers,
+    expiration,
+    cvc,
+    password,
+    company
   });
 
   return (

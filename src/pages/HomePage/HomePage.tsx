@@ -1,3 +1,4 @@
+import { FormContext } from '../../contexts/useFormContext';
 import styles from './HomePage.module.css';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import Spacing from '../../components/Spacing/Spacing';
@@ -8,10 +9,12 @@ export default function HomePage() {
   const formState = useFormState();
 
   return (
-    <div className={styles.wrapper}>
-      <CardPreview cardNumbers={formState.cardNumbers} company={formState.company} expiration={formState.expiration} />
-      <Spacing size={45} />
-      <CardForm formState={formState} />
-    </div>
+    <FormContext.Provider value={formState}>
+      <div className={styles.wrapper}>
+        <CardPreview />
+        <Spacing size={45} />
+        <CardForm />
+      </div>
+    </FormContext.Provider>
   );
 }
