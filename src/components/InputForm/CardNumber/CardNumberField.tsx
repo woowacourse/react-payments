@@ -1,4 +1,3 @@
-import { useMemo, useRef } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
@@ -7,7 +6,7 @@ import {
   ErrorText,
 } from "../styles/CardField.styles";
 import { CardInfo } from "../../../hooks/useCardInfo";
-import { validateSegmentLength } from "../validation";
+import useCardNumberField from "./hooks/useCardNumberField";
 
 interface CardNumberFieldProps {
   cardInfo: CardInfo;
@@ -23,31 +22,8 @@ function CardNumberField({
   handleCardInfo,
   maxLength,
 }: CardNumberFieldProps) {
-  const secondInputRef = useRef<HTMLInputElement>(null);
-  const thirdInputRef = useRef<HTMLInputElement>(null);
-  const fourthInputRef = useRef<HTMLInputElement>(null);
-
-  const segmentValidations = useMemo(() => {
-    return [
-      validateSegmentLength(cardInfo.firstNumber, maxLength),
-      validateSegmentLength(cardInfo.secondNumber, maxLength),
-      validateSegmentLength(cardInfo.thirdNumber, maxLength),
-      validateSegmentLength(cardInfo.fourthNumber, maxLength),
-    ];
-  }, [
-    cardInfo.firstNumber,
-    cardInfo.secondNumber,
-    cardInfo.thirdNumber,
-    cardInfo.fourthNumber,
-    maxLength,
-  ]);
-
-  const errorMessage =
-    segmentValidations.find((v) => !v.isValid)?.errorMessage || "";
-
-  const focusSecondInput = () => secondInputRef.current?.focus();
-  const focusThirdInput = () => thirdInputRef.current?.focus();
-  const focusFourthInput = () => fourthInputRef.current?.focus();
+  const { refs, focusHandlers, segmentValidations, errorMessage } =
+    useCardNumberField(cardInfo, maxLength);
 
   return (
     <NumberInputField>
@@ -73,20 +49,20 @@ function CardNumberField({
             isError={!segmentValidations[index].isValid}
             ref={
               index === 1
-                ? secondInputRef
+                ? refs.second
                 : index === 2
-                ? thirdInputRef
+                ? refs.third
                 : index === 3
-                ? fourthInputRef
+                ? refs.fourth
                 : undefined
             }
             onComplete={
               index === 0
-                ? focusSecondInput
+                ? focusHandlers.second
                 : index === 1
-                ? focusThirdInput
+                ? focusHandlers.third
                 : index === 2
-                ? focusFourthInput
+                ? focusHandlers.fourth
                 : undefined
             }
           />
