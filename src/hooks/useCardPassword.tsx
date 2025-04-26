@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 import { isValidLength } from "../validation/validate";
 
 const USE_CARD_PASSWORD = {
@@ -10,7 +10,6 @@ interface UseCardPasswordReturn {
   password: string;
   passwordError: string;
   passwordValidate: (value: string) => void;
-  // passwordValidate: ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function useCardPassword(): UseCardPasswordReturn {
@@ -18,8 +17,6 @@ export default function useCardPassword(): UseCardPasswordReturn {
   const [passwordError, setError] = useState("");
 
   const passwordValidate = (value: string) => {
-    // const passwordValidate: ChangeEventHandler<HTMLInputElement> = (e) => {
-    // const value = e.target.value;
     if (!isValidLength(value.length, USE_CARD_PASSWORD.MAX_LENGTH)) {
       setError(USE_CARD_PASSWORD.IMVALID_LENGTH_ERROR);
       return;
