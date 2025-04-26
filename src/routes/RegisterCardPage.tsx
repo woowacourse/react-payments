@@ -40,12 +40,39 @@ function RegisterCardPage() {
         expiration={{ month: cardInfo.expiration.month, year: cardInfo.expiration.year }}
       />
       <S.FormContainer>
-        <Title main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
-        <CardNumberForm
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={CARD_INFO_LENGTH.NUMBER}
-        />
+        {step >= 4 && (
+          <>
+            <Title main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
+            <CardPasswordForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
+            />
+          </>
+        )}
+
+        {step >= 3 && (
+          <>
+            <Title main={CVC_MESSAGE.MAIN} />
+            <CardCVCForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.CVC}
+            />
+          </>
+        )}
+
+        {step >= 2 && (
+          <>
+            <Title main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
+            <CardExpirationForm
+              cardInfo={cardInfo}
+              handleCardInfo={handleCardInfo}
+              maxLength={CARD_INFO_LENGTH.EXPIRATION}
+            />
+          </>
+        )}
+
         {step >= 1 && (
           <>
             <Title main={CARD_COMPANY_MESSAGE.MAIN} caption={CARD_COMPANY_MESSAGE.CAPTION} />
@@ -57,36 +84,13 @@ function RegisterCardPage() {
             />
           </>
         )}
-        {step >= 2 && (
-          <>
-            <Title main={EXPIRATION_MESSAGE.MAIN} caption={EXPIRATION_MESSAGE.CAPTION} />
-            <CardExpirationForm
-              cardInfo={cardInfo}
-              handleCardInfo={handleCardInfo}
-              maxLength={CARD_INFO_LENGTH.EXPIRATION}
-            />
-          </>
-        )}
-        {step >= 3 && (
-          <>
-            <Title main={CVC_MESSAGE.MAIN} />
-            <CardCVCForm
-              cardInfo={cardInfo}
-              handleCardInfo={handleCardInfo}
-              maxLength={CARD_INFO_LENGTH.CVC}
-            />
-          </>
-        )}
-        {step >= 4 && (
-          <>
-            <Title main={PASSWORD_FRONT_MESSAGE.MAIN} caption={PASSWORD_FRONT_MESSAGE.CAPTION} />
-            <CardPasswordForm
-              cardInfo={cardInfo}
-              handleCardInfo={handleCardInfo}
-              maxLength={CARD_INFO_LENGTH.PASSWORD_FRONT}
-            />
-          </>
-        )}
+
+        <Title main={CARD_NUMBER_MESSAGE.MAIN} caption={CARD_NUMBER_MESSAGE.CAPTION} />
+        <CardNumberForm
+          cardInfo={cardInfo}
+          handleCardInfo={handleCardInfo}
+          maxLength={CARD_INFO_LENGTH.NUMBER}
+        />
       </S.FormContainer>
       {!isCardInfoError && (
         <BottomButton
