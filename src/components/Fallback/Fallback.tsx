@@ -8,7 +8,7 @@ interface FallbackProps {
   onButtonClick?: () => void;
 }
 
-export default function FallbackComponent({
+export default function Fallback({
   message,
   buttonText = "홈으로 이동",
   onButtonClick,
