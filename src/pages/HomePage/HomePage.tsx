@@ -44,7 +44,6 @@ const HomePage = () => {
     setPassword('');
   };
 
-  // 페이지 로드 시 초기화 트리거 확인
   useEffect(() => {
     resetForm();
   }, [location.state]);

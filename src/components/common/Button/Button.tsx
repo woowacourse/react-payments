@@ -1,3 +1,4 @@
+import { useConfirmButton } from '../../../hooks/confirmButtonContext';
 import styles from './Button.module.css';
 
 type ButtonProps = {
@@ -5,9 +6,15 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-const Button = ({ text, onClick }: ButtonProps) => {
+const Button = ({ text, onClick = () => {} }: ButtonProps) => {
+  const { isActive } = useConfirmButton();
+
   return (
-    <button className={styles.button} type="submit" onClick={onClick}>
+    <button
+      className={`${styles.button} ${isActive ? styles.active : ''}`}
+      type="submit"
+      onClick={onClick}
+    >
       {text}
     </button>
   );

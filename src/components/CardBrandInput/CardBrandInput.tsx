@@ -2,6 +2,7 @@ import React from 'react';
 import InputContainer from '../InputContainer/InputContainer';
 import { CARD_BRANDS, OPTION_MESSAGE } from '../../constants/cardBrand';
 import { INPUT_CONTAINER } from '../../constants/title';
+import { useConfirmButton } from '../../hooks/confirmButtonContext';
 
 type CardBrandInputProps = {
   brand: string;
@@ -9,8 +10,13 @@ type CardBrandInputProps = {
 };
 
 const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
+  const { checkInputsComplete } = useConfirmButton();
+
   const updateBrand = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setBrand(e.target.value);
+    const isValid = e.target.value !== '';
+    console.log(isValid, brand);
+    checkInputsComplete('brand', isValid);
   };
 
   return (

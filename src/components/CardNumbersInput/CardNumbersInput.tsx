@@ -2,6 +2,7 @@ import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import { useCardNumbersValidation } from '../../hooks/useCardNumbersValidation';
+import { useConfirmButton } from '../../hooks/confirmButtonContext';
 
 type CardNumbersInputProps = {
   cardNumbers: string[];
@@ -13,6 +14,7 @@ const CardNumbersInput = ({
   setCardNumbers,
 }: CardNumbersInputProps) => {
   const [isErrors, errorMessage, validate] = useCardNumbersValidation();
+  const { checkInputsComplete } = useConfirmButton();
 
   const updateCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -22,6 +24,10 @@ const CardNumbersInput = ({
     newCardNumbers[index] = e.target.value;
     setCardNumbers(newCardNumbers);
     validate(newCardNumbers, index);
+    const isValid = newCardNumbers.every(
+      (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+    );
+    checkInputsComplete('cardNumbers', isValid);
   };
 
   const isDisabled = (index: number) => {

@@ -1,4 +1,5 @@
 .button {
+  display: none;
   background-color: #333333;
   color: #ffffff;
   border: none;
@@ -7,4 +8,8 @@
   cursor: pointer;
   margin-bottom: 40px;
   border-radius: 5px;
+}
+
+.active {
+  display: block;
 }

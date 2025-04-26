@@ -1,5 +1,6 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { useCardPasswordValidation } from '../../hooks/useCardPasswordValidation';
+import { useConfirmButton } from '../../hooks/confirmButtonContext';
 
 type CardPasswordInputProps = {
   password: string;
@@ -11,11 +12,14 @@ const CardPasswordInput = ({
   setPassword,
 }: CardPasswordInputProps) => {
   const [isError, errorMessage, validate] = useCardPasswordValidation();
+  const { checkInputsComplete } = useConfirmButton();
 
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPassword(value);
     validate(value);
+    const isValid = value.length === 2;
+    checkInputsComplete('password', isValid);
   };
 
   return (

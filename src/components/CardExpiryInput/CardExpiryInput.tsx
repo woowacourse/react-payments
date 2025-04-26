@@ -2,6 +2,7 @@ import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import { useCardExpiryValidation } from '../../hooks/useExpiryInputValidation';
+import { useConfirmButton } from '../../hooks/confirmButtonContext';
 
 type CardExpiryInputProps = {
   month: string;
@@ -18,13 +19,20 @@ const CardExpiryInput = ({
 }: CardExpiryInputProps) => {
   const [isErrors, errorMessage, validate] = useCardExpiryValidation();
   const [isMonthError, isYearError] = isErrors;
+  const { checkInputsComplete } = useConfirmButton();
 
   const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === 'month') {
       setMonth(value);
+      const isValid =
+        value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
+      checkInputsComplete('month', isValid);
     } else if (name === 'year') {
       setYear(value);
+      const isValid =
+        value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
+      checkInputsComplete('year', isValid);
     }
     validate(name, value);
   };
