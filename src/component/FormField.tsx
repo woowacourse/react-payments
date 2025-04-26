@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface FormFieldProps {
   label: string;
@@ -20,6 +20,7 @@ const FormField = ({ label, children, errorMessage, id }: FormFieldProps) => {
 };
 
 export const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   gap: 10px;
 `;
