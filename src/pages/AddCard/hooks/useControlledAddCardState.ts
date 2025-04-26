@@ -5,13 +5,14 @@ import { useControlledCardCVCNumber } from '../../../domain/card/CardCVCNumber/h
 import { useControlledCardPasswordNumber } from '../../../domain/card/CardPasswordNumber/hooks/useControlledCardPasswordNumber';
 
 export const useControlledAddCardState = () => {
-  const { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, handleCardNumberInputChange } =
+  const { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, cardNumberRefs, handleCardNumberInputChange } =
     useControlledCardNumber();
   const { cardBrandTypeState, isCardBrandNextStep, handleDropdownChange } = useControlledCardBrand();
   const {
     cardExpirationDate,
     cardExpirationDateErrorMessage,
     isCardExpirationDateNextStep,
+    cardExpirationDateRefs,
     handleCardExpirationDateInputChange,
   } = useControlledCardExpirationDate();
   const { cardCVCNumber, cardCVCNumberErrorMessage, isCardCVCNumberNextStep, handleCardCVCNumberInputChange } =
@@ -23,6 +24,7 @@ export const useControlledAddCardState = () => {
     cardNumber,
     cardNumberErrorMessage,
     isCardNumberNextStep,
+    cardNumberRefs,
     handleCardNumberInputChange,
     cardBrandTypeState,
     isCardBrandNextStep,
@@ -30,6 +32,7 @@ export const useControlledAddCardState = () => {
     cardExpirationDate,
     cardExpirationDateErrorMessage,
     isCardExpirationDateNextStep,
+    cardExpirationDateRefs,
     handleCardExpirationDateInputChange,
     cardCVCNumber,
     cardCVCNumberErrorMessage,

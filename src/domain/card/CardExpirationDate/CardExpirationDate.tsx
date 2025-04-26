@@ -8,6 +8,7 @@ import Input from '../../../components/Input/Input';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 export default function CardExpirationDate({
+  cardExpirationDateRefs,
   cardExpirationDate,
   cardExpirationDateErrorMessage,
   handleCardExpirationDateInputChange,
@@ -24,6 +25,11 @@ export default function CardExpirationDate({
         {CardExpirationDateInputTypes.map((dateType, index) => (
           <Input
             key={dateType}
+            ref={(el: HTMLInputElement | null) => {
+              if (el) {
+                cardExpirationDateRefs.current[dateType] = el;
+              }
+            }}
             type="text"
             autoFocus={index === 0}
             placeholder={dateType === 'month' ? 'MM' : 'YY'}
@@ -32,6 +38,7 @@ export default function CardExpirationDate({
             value={cardExpirationDate[dateType]}
             onChange={(event) =>
               handleCardExpirationDateInputChange({
+                index,
                 value: event.target.value,
                 dateType,
               })

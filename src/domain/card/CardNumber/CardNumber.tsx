@@ -8,12 +8,12 @@ import Input from '../../../components/Input/Input';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 
 export default function CardNumber({
+  cardNumberRefs,
   cardNumber,
   cardNumberErrorMessage,
   handleCardNumberInputChange,
 }: CardNumberProps) {
   const cardNumberInputSequences: SequenceType[] = ['first', 'second', 'third', 'fourth'];
-
   return (
     <div>
       <Title description="본인 명의의 카드만 결제 가능합니다.">결제할 카드 번호를 입력해 주세요</Title>
@@ -24,6 +24,11 @@ export default function CardNumber({
         {cardNumberInputSequences.map((sequence, index) => (
           <Input
             key={sequence}
+            ref={(el: HTMLInputElement | null) => {
+              if (el) {
+                cardNumberRefs.current[sequence] = el;
+              }
+            }}
             type="text"
             autoFocus={index === 0}
             placeholder="1234"
@@ -32,6 +37,7 @@ export default function CardNumber({
             value={cardNumber[sequence]}
             onChange={(event) => {
               handleCardNumberInputChange({
+                index,
                 value: event.target.value,
                 sequence,
               });

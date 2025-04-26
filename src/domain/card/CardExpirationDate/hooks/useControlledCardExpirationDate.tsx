@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   DECIMAL_RADIX,
   ERROR_MESSAGE,
@@ -18,8 +18,11 @@ export const useControlledCardExpirationDate = () => {
     month: '',
     year: '',
   });
-
-  const handleCardExpirationDateInputChange = ({ value, dateType }: HandleInputChangeProps) => {
+  const cardExpirationDateRefs = useRef<{ [key in DateType]: HTMLInputElement | null }>({
+    month: null,
+    year: null,
+  });
+  const handleCardExpirationDateInputChange = ({ index, value, dateType }: HandleInputChangeProps) => {
     setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
     setCardExpirationDateErrorMessage({
       ...cardExpirationDateErrorMessage,
@@ -75,6 +78,9 @@ export const useControlledCardExpirationDate = () => {
         });
       }
     }
+
+    const nextSequence = Object.keys(cardExpirationDateRefs.current)[index + 1] as DateType;
+    cardExpirationDateRefs.current[nextSequence]?.focus();
   };
 
   const isCardNumberFill = Object.values(cardExpirationDate).every((number) => number.length === 2);
@@ -85,6 +91,7 @@ export const useControlledCardExpirationDate = () => {
     cardExpirationDate,
     cardExpirationDateErrorMessage,
     isCardExpirationDateNextStep,
+    cardExpirationDateRefs,
     handleCardExpirationDateInputChange,
   };
 };

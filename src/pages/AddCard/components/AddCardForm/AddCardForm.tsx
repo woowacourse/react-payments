@@ -15,6 +15,7 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     cardNumber,
     cardNumberErrorMessage,
     isCardNumberNextStep,
+    cardNumberRefs,
     handleCardNumberInputChange,
     cardBrandTypeState,
     isCardBrandNextStep,
@@ -22,6 +23,7 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     cardExpirationDate,
     cardExpirationDateErrorMessage,
     isCardExpirationDateNextStep,
+    cardExpirationDateRefs,
     handleCardExpirationDateInputChange,
     cardCVCNumber,
     cardCVCNumberErrorMessage,
@@ -63,6 +65,7 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
       <Fragment key={step}>
         {step === CARD_STEPS.CARD_NUMBERS && (
           <CardNumber
+            cardNumberRefs={cardNumberRefs}
             cardNumber={cardNumber}
             cardNumberErrorMessage={cardNumberErrorMessage}
             handleCardNumberInputChange={handleCardNumberInputChange}
@@ -73,6 +76,7 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
         )}
         {step === CARD_STEPS.CARD_EXPIRATION_DATE && (
           <CardExpirationDate
+            cardExpirationDateRefs={cardExpirationDateRefs}
             cardExpirationDate={cardExpirationDate}
             cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
             handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
