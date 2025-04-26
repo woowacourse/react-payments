@@ -56,7 +56,7 @@ function useStep({
     cardCVCOkay,
   ]);
 
-  return { step };
+  return { step, STEP_NAME: STEP };
 }
 
 export default useStep;
