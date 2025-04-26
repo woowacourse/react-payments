@@ -8,6 +8,8 @@ const CardExpirationDateInputSection = ({
   handleCardExpirationDateChange,
   isError,
   errorMessage,
+  setRef,
+  moveFocus,
 }: CardExpirationDateOptions) => {
   return (
     <>
@@ -17,17 +19,27 @@ const CardExpirationDateInputSection = ({
         subtitle="유효기간"
       >
         <InputField
+          id={5}
           value={cardExpirationDate.month}
-          onChange={handleCardExpirationDateChange("month")}
+          onChange={(value) => {
+            handleCardExpirationDateChange("month")(value);
+            if (cardExpirationDate["month"].length === 2) moveFocus(5);
+          }}
           isError={isError.month}
           placeholder="MM"
-        ></InputField>
+          setRef={setRef}
+        />
         <InputField
+          id={6}
           value={cardExpirationDate.year}
-          onChange={handleCardExpirationDateChange("year")}
+          onChange={(value) => {
+            handleCardExpirationDateChange("year")(value);
+            if (cardExpirationDate["year"].length === 2) moveFocus(6);
+          }}
           isError={isError.year}
           placeholder="YY"
-        ></InputField>
+          setRef={setRef}
+        />
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>

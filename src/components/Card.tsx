@@ -12,8 +12,8 @@ import useCardPassword from "../hooks/useCardPassword";
 import useCardOwnerName from "../hooks/useCardOwnerName";
 import styles from "../css/cardForm.module.css";
 import Button from "./common/Button/Button";
-import { CardNumbers } from "../types/CardNumbers";
-import CardExpirationDate from "../types/CardExpirationDate";
+import { useAutoFocus } from "../hooks/useAutoFocus";
+import NewCard from "../types/NewCard";
 
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
@@ -39,13 +39,7 @@ const isFulledInput = (items: { [key: string]: string }, condition: number) => {
 };
 
 interface CardProps {
-  setNewCard: (cardData: {
-    cardNumbers: CardNumbers;
-    cardExpirationDate: CardExpirationDate;
-    cardCompany: string;
-    cardPassword: string;
-    cardOwnerName: string;
-  }) => void;
+  setNewCard: (cardData: NewCard | {}) => void;
 }
 
 function Card({ setNewCard }: CardProps) {
@@ -83,8 +77,7 @@ function Card({ setNewCard }: CardProps) {
     isFulledInput(cardNumbers, 4) &&
     isFulledInput(cardExpirationDate, 2) &&
     cardCompany.length > 0 &&
-    cardPassword.length == 2 &&
-    cardOwnerName.length > 0;
+    cardPassword.length == 2;
 
   const onClick = () => {
     setNewCard({
@@ -95,6 +88,8 @@ function Card({ setNewCard }: CardProps) {
       cardOwnerName,
     });
   };
+
+  const { setRef, moveFocus } = useAutoFocus();
 
   return (
     <>
@@ -107,20 +102,18 @@ function Card({ setNewCard }: CardProps) {
         />
 
         <div className={styles.cardForm}>
-          {cardOwnerName.length > 0 && (
+          {true && (
             <CardPasswordInputSection
               cardPassword={cardPassword}
               handleCardPasswordChange={handleCardPasswordChange}
               isError={isCardPasswordError}
               errorMessage={cardPasswordErrorMessage}
+              setRef={setRef}
+              moveFocus={moveFocus}
             />
           )}
-          {cardOwnerName.length > 0 && <CardCVCNumberInputSection />}
           {isFulledInput(cardExpirationDate, 2) && (
-            <CardOwnerNameInputSection
-              cardOwnerName={cardOwnerName}
-              handleCardOwnerNameChange={handleCardOwnerNameChange}
-            />
+            <CardCVCNumberInputSection setRef={setRef} moveFocus={moveFocus} />
           )}
           {cardCompany.length > 0 && (
             <CardExpirationDateInputSection
@@ -128,6 +121,8 @@ function Card({ setNewCard }: CardProps) {
               handleCardExpirationDateChange={handleCardExpirationDateChange}
               isError={isCardExpirationDateError}
               errorMessage={cardExpirationDateErrorMessage}
+              setRef={setRef}
+              moveFocus={moveFocus}
             />
           )}
           {isFulledInput(cardNumbers, 4) && (
@@ -136,6 +131,8 @@ function Card({ setNewCard }: CardProps) {
               selectedOption={cardCompany}
               handleCardNumbersChange={handleCardCompanyChange}
               errorMessage={cardCompanyErrorMessage}
+              setRef={setRef}
+              moveFocus={moveFocus}
             />
           )}
           <CardNumbersInputSection
@@ -143,6 +140,8 @@ function Card({ setNewCard }: CardProps) {
             handleCardNumbersChange={handleCardNumbersChange}
             isError={isCardNumbersError}
             errorMessage={cardNumbersErrorMessage}
+            setRef={setRef}
+            moveFocus={moveFocus}
           />
         </div>
 

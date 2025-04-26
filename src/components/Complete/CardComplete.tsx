@@ -1,9 +1,10 @@
 import cardComplete from "../../public/completeIcon.png";
+import NewCard from "../../types/NewCard";
 import Button from "../common/Button/Button";
 
 import styles from "./CardComplete.module.css";
 
-const CardComplete = ({ newCard }) => {
+const CardComplete = ({ newCard }: { newCard: NewCard }) => {
   if (Object.keys(newCard).length === 0) {
     return <p>카드 정보가 없습니다</p>;
   }

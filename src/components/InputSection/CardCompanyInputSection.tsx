@@ -12,6 +12,10 @@ type CardCompanyOptions = {
   selectedOption: string;
   handleCardNumbersChange: (selected: string) => void;
   errorMessage: string;
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
 };
 
 const CardCompanyInputSection = ({
@@ -19,6 +23,8 @@ const CardCompanyInputSection = ({
   selectedOption,
   handleCardNumbersChange,
   errorMessage,
+  setRef,
+  moveFocus,
 }: CardCompanyOptions) => {
   return (
     <>
@@ -28,8 +34,12 @@ const CardCompanyInputSection = ({
       >
         <SelectField
           value={selectedOption}
-          onChange={handleCardNumbersChange}
+          onChange={(value) => {
+            handleCardNumbersChange(value);
+            moveFocus(4);
+          }}
           options={companies}
+          ref={setRef(4)}
         />
         {<ErrorMessage message={errorMessage} />}
       </InputSection>

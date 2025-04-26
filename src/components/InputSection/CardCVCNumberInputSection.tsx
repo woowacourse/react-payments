@@ -3,7 +3,7 @@ import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 
-const CardCVCNumberInputSection = () => {
+const CardCVCNumberInputSection = ({ setRef, moveFocus }) => {
   const { cardCVCNumber, handleCardCVCNumberChange, isError, errorMessage } =
     useCardCVCNumber();
 
@@ -15,11 +15,16 @@ const CardCVCNumberInputSection = () => {
         subtitle="CVC"
       >
         <InputField
+          id={7}
           value={cardCVCNumber}
-          onChange={handleCardCVCNumberChange}
+          onChange={(value) => {
+            handleCardCVCNumberChange(value);
+            if (cardCVCNumber.length === 3) moveFocus(7);
+          }}
           isError={isError.cvcNumber}
           placeholder="123"
-        ></InputField>
+          setRef={setRef}
+        />
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>

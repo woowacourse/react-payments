@@ -17,6 +17,7 @@ const CardPasswordInputSection = ({
   handleCardPasswordChange,
   isError,
   errorMessage,
+  setRef,
 }: CardPasswordInputSectionProps) => {
   return (
     <>
@@ -26,12 +27,14 @@ const CardPasswordInputSection = ({
         subtitle="비밀번호 앞 2자리"
       >
         <InputField
+          id={8}
           type="password"
           value={cardPassword}
           onChange={handleCardPasswordChange}
           isError={isError.cardPassword}
           placeholder="**"
-        ></InputField>
+          setRef={setRef}
+        />
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>
