@@ -7,6 +7,7 @@ interface NumberInputProps {
   placeholder: string;
   isError: boolean;
   isHidden?: boolean;
+  inputRef?: (element: HTMLInputElement | null) => void;
 }
 
 function NumberInput({
@@ -16,6 +17,7 @@ function NumberInput({
   placeholder,
   isError,
   isHidden = false,
+  inputRef,
 }: NumberInputProps) {
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
     const isNumeric = /^[0-9]*$/.test(e.target.value);
@@ -27,6 +29,7 @@ function NumberInput({
 
   return (
     <S.Input
+      ref={inputRef}
       value={value}
       maxLength={maxLength}
       placeholder={placeholder}

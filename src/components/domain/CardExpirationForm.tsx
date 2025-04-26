@@ -6,6 +6,7 @@ import {
   ErrorText,
 } from '../../styles/CardForm.styles';
 import useCardExpirationValidation from '../../hooks/Validation/useCardExpirationValidation';
+import { useRef } from 'react';
 
 interface CardExpirationFormProps {
   cardInfo: CardInfo;
@@ -19,8 +20,9 @@ interface CardExpirationFormProps {
 
 function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirationFormProps) {
   const { isCardExpirationError, errorText } = useCardExpirationValidation(cardInfo, maxLength);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const InputInfo = [
+  const ExpirationInputInfo = [
     {
       value: cardInfo.expiration.month,
       setValue: (value: string) => handleCardInfo('expiration', value, 'month'),
@@ -33,18 +35,28 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
     },
   ];
 
+  function handleChange(value: string, index: number) {
+    ExpirationInputInfo[index].setValue(value);
+
+    if (value.length === maxLength) {
+      if (index === inputRefs.current.length - 1) inputRefs.current[index]?.blur();
+      else inputRefs.current[index + 1]?.focus();
+    }
+  }
+
   return (
     <NumberInputForm>
       <Label>유효기간</Label>
       <NumberInputContainer>
-        {InputInfo.map((inputInfo, index) => (
+        {ExpirationInputInfo.map((inputInfo, index) => (
           <NumberInput
             key={index}
             value={inputInfo.value}
-            setValue={inputInfo.setValue}
+            setValue={(value: string) => handleChange(value, index)}
             maxLength={maxLength}
             placeholder={inputInfo.placeholder}
             isError={isCardExpirationError[index]}
+            inputRef={(element) => (inputRefs.current[index] = element)}
           />
         ))}
       </NumberInputContainer>

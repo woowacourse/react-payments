@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import NumberInput from '../common/NumberInput';
 import {
   NumberInputForm,
@@ -19,6 +20,7 @@ interface CardNumberFormProps {
 
 function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormProps) {
   const { isCardNumberError, errorText } = useCardNumberValidation(cardInfo, maxLength);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const NumberInputInfo = [
     {
@@ -39,6 +41,15 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
     },
   ];
 
+  function handleChange(value: string, index: number) {
+    NumberInputInfo[index].setValue(value);
+
+    if (value.length === maxLength) {
+      if (index === inputRefs.current.length - 1) inputRefs.current[index]?.blur();
+      else inputRefs.current[index + 1]?.focus();
+    }
+  }
+
   return (
     <NumberInputForm>
       <Label>카드 번호</Label>
@@ -47,10 +58,11 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
           <NumberInput
             key={index}
             value={inputInfo.value}
-            setValue={inputInfo.setValue}
+            setValue={(value: string) => handleChange(value, index)}
             maxLength={maxLength}
             placeholder="1234"
             isError={isCardNumberError[index]}
+            inputRef={(element) => (inputRefs.current[index] = element)}
           />
         ))}
       </NumberInputContainer>
