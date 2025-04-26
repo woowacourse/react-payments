@@ -17,7 +17,7 @@ const CardPasswordView = ({
   handleInputChange,
 }: CardPasswordViewProps) => {
   return (
-    <Container data-testid='passwordNumbers-component'>
+    <Container data-testid='cardpassword-component'>
       <FormLabel
         title='비밀번호를 입력해 주세요'
         caption='앞의 2자리를 입력해주세요'
