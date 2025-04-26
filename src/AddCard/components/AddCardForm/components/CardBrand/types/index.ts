@@ -7,5 +7,3 @@ export type Brand =
   | "롯데카드"
   | "하나카드"
   | "국민카드";
-
-export type HexColor = `#${string}`;

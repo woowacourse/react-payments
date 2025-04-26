@@ -1,5 +1,5 @@
-import { Brand, HexColor } from "../types";
-
+import type { Brand } from "../types";
+import type { HexColor } from "@/utils/types";
 export const CARD_BRAND_COLOR: { [B in Brand]: HexColor } = {
   BC카드: "#F04651",
   신한카드: "#0046FF",
