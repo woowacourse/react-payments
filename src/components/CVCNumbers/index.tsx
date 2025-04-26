@@ -21,9 +21,9 @@ const CVCNumbers = ({
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const hasError = error;
+    const hasError = error || cvcNumbers.length !== 3;
     setCvcError(hasError);
-  }, [error]);
+  }, [error, cvcNumbers]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
