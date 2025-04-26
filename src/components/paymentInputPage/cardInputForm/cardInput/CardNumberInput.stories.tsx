@@ -7,8 +7,6 @@ const meta = {
   title: 'CardNumberInput',
   component: CardNumberInput,
   args: {
-    cardNumbers: [],
-    setCardNumbers: () => {},
     setIsValid: () => {},
   },
 } satisfies Meta<typeof CardNumberInput>;
