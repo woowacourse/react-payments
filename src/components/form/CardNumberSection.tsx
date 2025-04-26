@@ -1,4 +1,4 @@
-import {ChangeEvent, useRef, useState} from 'react';
+import {ChangeEvent, useRef} from 'react';
 import Description from '../description/Description';
 import Input from '../input/Input';
 import InputField from '../inputField/InputField';

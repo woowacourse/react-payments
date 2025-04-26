@@ -14,32 +14,6 @@ const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;
 const CURRENT_YEAR = new Date().getFullYear() % 100;
 
-// type Props = {
-//   value: ExpirationDate;
-//   onChange: (
-//     e: ChangeEvent<HTMLInputElement>,
-//     order: keyof ExpirationDate
-//   ) => void;
-//   onValidate: (
-//     validateRule: {
-//       error: string;
-//       validate: (
-//         date: string,
-//         order: keyof ExpirationDate
-//       ) => boolean | undefined;
-//     }[],
-//     e: ChangeEvent<HTMLInputElement>,
-//     order: keyof ExpirationDate
-//   ) => void;
-//   onFocusout: (
-//     e: ChangeEvent<HTMLInputElement>,
-//     order: keyof ExpirationDate,
-//     maxLength: number,
-//     message: string
-//   ) => void;
-//   errorMessage: ExpirationDate;
-// };
-
 type Props = FormFieldProps<ExpirationDate, keyof ExpirationDate>;
 
 const expirationErrorRule = [

@@ -36,8 +36,6 @@ const useErrors = <
         },
       }));
 
-      console.log(Object.values(errorMessages[name]));
-
       if (Object.values(errorMessages[name]).some((value) => value !== '')) {
         onError(name, true);
         return;
