@@ -2,13 +2,14 @@ import Button from "@/components/Button/Button";
 import { useLocation, useNavigate } from "react-router";
 import styles from "./AddCardCompleteModal.module.css";
 import RoundCheckIcon from "@/components/RoundCheckedIcon/RoundCheckedIcon";
+import type { AddCardCompleteLocationState } from "@/AddCard/types/location";
 
 function AddCardCompleteModal() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const { firstCardNumber = "****", selectedBrand = "현대카드" } =
-    location.state || {};
+    (location.state as AddCardCompleteLocationState) || {};
 
   function handleAddCardConfirmButton() {
     navigate("/");
