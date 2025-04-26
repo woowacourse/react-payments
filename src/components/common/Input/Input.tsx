@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.ComponentProps<'input'> {
   isError: boolean;
   type?: string;
   placeholder?: string;
