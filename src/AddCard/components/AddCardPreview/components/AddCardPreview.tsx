@@ -3,7 +3,7 @@ import type { CardNumberState } from "../../AddCardForm/components/CardNumber/ty
 import type { ExpireDateState } from "../../AddCardForm/components/ExpireDate/types";
 import Dot from "@components/Dot/Dot";
 import getOverseaCardBrand from "../utils/getCardBrand";
-import getTextColorForBackground from "../utils/getTextColorForBackground";
+import getTextColorForBackground from "../../../../utils/getTextColorForBackground";
 import { CARD_BRAND_IMAGES } from "../constants";
 import { Brand } from "../../AddCardForm/components/CardBrand/types";
 import { CARD_BRAND_COLOR } from "../../AddCardForm/components/CardBrand/constants";
