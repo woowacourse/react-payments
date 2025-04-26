@@ -50,6 +50,8 @@ export default function CardFormPage() {
         {step > 3 && (
           <CardPassword
             handleChange={onPasswordChange}
+            step={step}
+            handleStep={nextStep}
             password={password}
             errorMessage={passwordError}
           />
@@ -88,7 +90,7 @@ export default function CardFormPage() {
           errorMessage={cardBrandError}
         />
       </form>
-      <Button text="확인" onClick={handleSubmit} />
+      {step > 4 && <Button text="확인" onClick={handleSubmit} />}
     </div>
   );
 }

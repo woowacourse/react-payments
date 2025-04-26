@@ -4,6 +4,8 @@ import Text from "../../../components/Text/Text";
 
 interface CardPasswordProps {
   handleChange: (value: string) => void;
+  handleStep: () => void;
+  step: number;
   password: string;
   errorMessage: string;
 }
@@ -16,16 +18,25 @@ const CARD_PASSWORD_LABEL = {
 
 export default function CardPassword({
   handleChange,
+  handleStep,
+  step,
   password,
   errorMessage,
 }: CardPasswordProps) {
+  const handleInputChange = (value: string) => {
+    handleChange(value);
+    if (canGoToNextStep(step, value, errorMessage)) {
+      handleStep();
+    }
+  };
+
   return (
     <section className={styles["card-password"]}>
       <Text textType="title">{CARD_PASSWORD_LABEL.TITLE}</Text>
       <Text textType="description">{CARD_PASSWORD_LABEL.DESCRIPTION}</Text>
       <Text textType="subtitle">{CARD_PASSWORD_LABEL.SUBTITLE}</Text>
       <Input
-        onChange={handleChange}
+        onChange={handleInputChange}
         value={password}
         textType="password"
         placeholder=""
@@ -35,4 +46,8 @@ export default function CardPassword({
       <Text textType="error">{errorMessage}</Text>
     </section>
   );
+}
+
+function canGoToNextStep(step: number, value: string, errorMessage: string) {
+  return step === 4 && value.length === 2 && errorMessage === "";
 }

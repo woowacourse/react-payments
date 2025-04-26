@@ -4,6 +4,7 @@ import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
+import { moveFocusToNextInput } from "../../../utils/moveFoucseToNextInput";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;
@@ -35,12 +36,13 @@ export default function CardNumber({
 
   const handleInputChange = (value: string, index: number) => {
     handleChange(value, index);
+
     if (value.length < 4) return;
-    if (index < CARD_NUMBER_FIELDS.length - 1)
-      inputRefs.current[index + 1].focus();
+
+    moveFocusToNextInput(inputRefs, CARD_NUMBER_FIELDS.length, index);
+
     if (canGoToNextStep(step, index, value, firstError)) {
       handleStep();
-      return;
     }
   };
 
@@ -68,18 +70,16 @@ export default function CardNumber({
   );
 }
 
-function canGoToNextStep(
+const canGoToNextStep = (
   step: number,
   index: number,
   value: string,
   errorMessage: string
-) {
-  if (
+) => {
+  return (
     step === 1 &&
     index === CARD_NUMBER_FIELDS.length - 1 &&
     value.length === 4 &&
-    !errorMessage
-  )
-    return true;
-  return false;
-}
+    errorMessage === ""
+  );
+};

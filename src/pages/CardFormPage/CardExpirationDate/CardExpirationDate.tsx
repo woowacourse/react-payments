@@ -7,6 +7,7 @@ import {
 import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
+import { moveFocusToNextInput } from "../../../utils/moveFoucseToNextInput";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
@@ -40,9 +41,11 @@ export default function CardExpirationDate({
 
   const handleInputChange = (value: string, index: number) => {
     handleChange(value, index);
+
     if (value.length < 2) return;
-    if (index < EXPIRATION_FIELDS.length - 1)
-      inputRefs.current[index + 1].focus();
+
+    moveFocusToNextInput(inputRefs, EXPIRATION_FIELDS.length, index);
+
     if (canGoToNextStep(step, index, value, firstError)) {
       handleStep();
     }
@@ -81,7 +84,10 @@ function canGoToNextStep(
   value: string,
   errorMessage: string
 ) {
-  if (step === 2 && !errorMessage && index === 1 && value.length === 2)
-    return true;
-  return false;
+  return (
+    step === 2 &&
+    index === EXPIRATION_FIELDS.length - 1 &&
+    value.length === 2 &&
+    errorMessage === ""
+  );
 }

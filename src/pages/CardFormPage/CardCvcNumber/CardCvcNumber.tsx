@@ -25,7 +25,7 @@ export default function CardCvcNumber({
 }: CardCvcNumberProps) {
   const handleInputChange = (value: string) => {
     handleChange(value);
-    if (value.length === 3 && step === 3) {
+    if (canGoToNextStep(step, value, errorMessage)) {
       handleStep();
     }
   };
@@ -44,4 +44,8 @@ export default function CardCvcNumber({
       <Text textType="error">{errorMessage}</Text>
     </section>
   );
+}
+
+function canGoToNextStep(step: number, value: string, errorMessage: string) {
+  return step === 3 && value.length === 3 && errorMessage === "";
 }
