@@ -4,18 +4,34 @@ import Text from "../../common/Text/Text";
 import { ExpirationDateStateType } from "../../../types/CardInformationType";
 import useError from "../../../hooks/useError";
 import expirationDateSpec from "./expirationDateSpec";
+import { useRef } from "react";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
 const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
-  const { error, errorMessage, validateInputType, validateMonth } = useError([false, false]);
+  const { error, errorMessage, validateInputType, validateMonth, validateLength } = useError([false, false]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (v: string, index: number) => {
-    if (validateInputType(v, index)) {
-      if (index === 0) validateMonth(v);
-      dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
+    if (!validateInputType(v, index)) {
       return;
     }
+
+    if (index === 0 && !validateMonth(v)) {
+      dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v });
+      return;
+    }
+
+    if (index === 1 && !validateLength(v, index, inputFieldData.inputProps.maxLength)) {
+      dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v });
+      return;
+    }
+
+    dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
+    if (v.length === expirationDateSpec.inputFieldData.inputProps.maxLength && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+    return;
   };
 
   return (
@@ -39,6 +55,9 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
                 onChange={(v) => handleChange(v, index)}
                 maxLength={maxLength}
                 error={error[index]}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
               />
             );
           })}

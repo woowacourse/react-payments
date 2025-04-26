@@ -6,15 +6,18 @@ import useError from "../../../hooks/useError";
 import cvcNumberSpec from "./cvcNumberSpec";
 
 const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false]);
+  const { error, errorMessage, validateInputType, validateLength } = useError([false]);
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
 
   const handleChange = (value: string) => {
-    if (validateInputType(value, 0)) {
-      dispatch({ type: "SET_CVC_NUMBER", value: value });
+    if (!validateInputType(value, 0)) {
+      return;
     }
+
+    validateLength(value, 0, maxLength);
+    dispatch({ type: "SET_CVC_NUMBER", value: value });
   };
 
   return (

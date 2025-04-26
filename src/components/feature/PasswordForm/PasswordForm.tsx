@@ -6,15 +6,18 @@ import { PasswordStateType } from "../../../types/CardInformationType";
 import { css } from "@emotion/react";
 
 const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false]);
+  const { error, errorMessage, validateInputType, validateLength } = useError([false]);
   const { title, description, inputFieldData } = passwordSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
 
   const handleChange = (v: string, index: number) => {
-    if (validateInputType(v, index)) {
-      dispatch({ type: "SET_PASSWORD", value: v });
+    if (!validateInputType(v, index)) {
+      return;
     }
+
+    validateLength(v, index, maxLength);
+    dispatch({ type: "SET_PASSWORD", value: v });
   };
 
   return (

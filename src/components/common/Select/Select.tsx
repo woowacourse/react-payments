@@ -78,7 +78,7 @@ const optionListStyle = css`
   width: 100%;
   border: 1px solid #acacac;
   border-radius: 5.31px;
-  z-index: 100;
+  z-index: 200;
 `;
 
 const optionStyle = css`

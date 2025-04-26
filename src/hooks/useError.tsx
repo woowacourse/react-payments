@@ -6,6 +6,17 @@ const useError = (initialErrorState: boolean[]) => {
   const [error, setError] = useState(initialErrorState);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const validateLength = (v: string, index: number, maxLength: number) => {
+    if (v.length === maxLength) {
+      setError((prev) => prev.map((item, i) => (i === index ? false : item)));
+      return true;
+    }
+
+    setError((prev) => prev.map((item, i) => (i === index ? true : item)));
+    setErrorMessage(`${maxLength}글자를 입력해 주세요.`);
+    return false;
+  };
+
   const validateInputType = (v: string, index: number) => {
     if (/^[0-9]*$/.test(v)) {
       setError((prev) => prev.map((item, i) => (i === index ? false : item)));
@@ -21,14 +32,15 @@ const useError = (initialErrorState: boolean[]) => {
     const month = parseInt(v);
     if (month >= MONTH_MIN && month <= MONTH_MAX) {
       setError([false, error[1]]);
-      return;
+      return true;
     }
 
     setError([true, error[1]]);
     setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
+    return false;
   };
 
-  return { error, errorMessage, validateMonth, validateInputType };
+  return { error, errorMessage, validateMonth, validateInputType, validateLength };
 };
 
 export default useError;

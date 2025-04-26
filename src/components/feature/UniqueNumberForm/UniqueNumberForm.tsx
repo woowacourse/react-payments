@@ -4,15 +4,29 @@ import Text from "../../common/Text/Text";
 import { UniqueNumberStateType } from "../../../types/CardInformationType";
 import useError from "../../../hooks/useError";
 import uniqueNumberSpec from "./uniqueNumberSpec";
+import { useRef, useEffect } from "react";
 
 const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
+  const { error, errorMessage, validateInputType, validateLength } = useError([false, false, false, false]);
+
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
 
   const handleChange = (v: string, index: number) => {
-    if (validateInputType(v, index)) {
-      dispatch({ type: "SET_UNIQUE_NUMBER", index: index, value: v });
+    if (!validateInputType(v, index)) {
+      return;
+    }
+
+    validateLength(v, index, inputProps.maxLength);
+
+    dispatch({ type: "SET_UNIQUE_NUMBER", index: index, value: v });
+    if (v.length === inputProps.maxLength && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
@@ -37,6 +51,9 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
                 onChange={(v) => handleChange(v, index)}
                 error={error[index]}
                 type={index > 1 ? "password" : "text"}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
               />
             );
           })}

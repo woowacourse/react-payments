@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { forwardRef } from "react";
 
 type InputProps = {
   placeholder: string;
@@ -8,18 +9,24 @@ type InputProps = {
   onChange: (value: string) => void;
   type?: string;
 };
-const Input = ({ placeholder, maxLength, value, error, onChange, type }: InputProps) => {
-  return (
-    <input
-      css={inputStyle(error)}
-      onChange={(e) => onChange(e.target.value)}
-      value={value}
-      placeholder={placeholder}
-      maxLength={maxLength}
-      type={type}
-    />
-  );
-};
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ placeholder, maxLength, value, error, onChange, type = "text" }, ref) => {
+    return (
+      <input
+        ref={ref}
+        css={inputStyle(error)}
+        onChange={(e) => onChange(e.target.value)}
+        value={value}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        type={type}
+      />
+    );
+  },
+);
+
+Input.displayName = "Input";
 
 const inputStyle = (error: boolean) => css`
   width: 100%;
@@ -33,8 +40,6 @@ const inputStyle = (error: boolean) => css`
     font-weight: 400;
     font-size: 11px;
     line-height: 14.88px;
-    letter-spacing: 0%;
-    vertical-align: middle;
     color: #acacac;
   }
 

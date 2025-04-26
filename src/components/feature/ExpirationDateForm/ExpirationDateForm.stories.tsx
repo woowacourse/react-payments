@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ExpirationDateForm from "./ExpirationDateForm";
-import { useState } from "react";
 
 const meta = {
   title: "MyComponent/ExpirationDateForm",
