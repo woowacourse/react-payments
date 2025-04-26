@@ -52,4 +52,5 @@ const AddCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px 15px 0 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 `;
