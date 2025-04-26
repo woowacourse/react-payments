@@ -1,19 +1,10 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
-import {
-  NumberInfo,
-  CVCNumberInfo,
-  ExpirationPeriodInfo,
-  PasswordInfo,
-} from '../../types/models';
+import { InputFieldState } from '../../types/models';
 
 interface InputTextsProps {
   label: string;
-  dataModels:
-    | NumberInfo[]
-    | ExpirationPeriodInfo[]
-    | CVCNumberInfo
-    | PasswordInfo;
+  dataModels: InputFieldState | InputFieldState[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -45,24 +36,24 @@ const InputTexts = ({
               key={index}
               type={type}
               placeholder={data.placeholder}
-              maxLength={data.numberSegmentLength}
-              value={data.number}
+              maxLength={data.maximumLength}
+              value={data.value}
               onChange={onChangeAt(index)}
               onFocus={onFocus}
               onBlur={onBlur}
-              isError={data.isError}
+              isError={data.hasError}
             />
           ))
         ) : (
           <Input
             type={type}
             placeholder={dataModels.placeholder}
-            maxLength={dataModels.numberSegmentLength}
-            value={dataModels.number}
+            maxLength={dataModels.maximumLength}
+            value={dataModels.value}
             onChange={onChangeAt(0)}
             onFocus={onFocus}
             onBlur={onBlur}
-            isError={dataModels.isError}
+            isError={dataModels.hasError}
           />
         )}
       </Row>

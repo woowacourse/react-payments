@@ -9,23 +9,27 @@ function isValidSegment(value: string, maxLength: number): boolean {
 const ERROR_MESSAGE = {
   INVALID_YEAR: '올바른 유효기간을 입력하세요. (YY: 00~99)',
   INVALID_MONTH: '올바른 유효기간을 입력하세요. (MM: 01~12)',
-  INVALID_LENGTH: '올바른 유효기간을 입력하세요. (MM/YY)',
+  INVALID_LENGTH: '올바른 입력 길이를 확인하세요.',
   INVALID_CHARACTER: '숫자만 입력 가능합니다.',
 } as const;
 
-const MONTH = { MIN: 1, MAX: 12 } as const;
-const YEAR = { MIN: 0, MAX: 99 } as const;
-
 interface ExpirationValidationResult {
-  valid: boolean;
+  isValid: boolean;
   errorMessage: string;
 }
 
-function isInRange(value: string, index: number): number {
+const MONTH_RANGE = { MIN: 1, MAX: 12 } as const;
+const YEAR_RANGE = { MIN: 0, MAX: 99 } as const;
+
+function getExpirationError(value: string, index: number): string {
   const num = Number(value);
-  if (index === 0 && (num < MONTH.MIN || num > MONTH.MAX)) return 1;
-  if (index === 1 && (num < YEAR.MIN || num > YEAR.MAX)) return 2;
-  return 0;
+  if (index === 0 && (num < MONTH_RANGE.MIN || num > MONTH_RANGE.MAX)) {
+    return ERROR_MESSAGE.INVALID_MONTH;
+  }
+  if (index === 1 && (num < YEAR_RANGE.MIN || num > YEAR_RANGE.MAX)) {
+    return ERROR_MESSAGE.INVALID_YEAR;
+  }
+  return '';
 }
 
 function isValidExpirationSegment(
@@ -34,21 +38,54 @@ function isValidExpirationSegment(
   maxLength: number
 ): ExpirationValidationResult {
   if (!isNumeric(value)) {
-    return { valid: false, errorMessage: ERROR_MESSAGE.INVALID_CHARACTER };
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CHARACTER };
   }
   if (!isValidSegment(value, maxLength)) {
-    return { valid: false, errorMessage: ERROR_MESSAGE.INVALID_LENGTH };
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_LENGTH };
   }
   if (value.length < maxLength) {
-    return { valid: true, errorMessage: '' };
+    return { isValid: true, errorMessage: '' };
   }
-  if (isInRange(value, index) === 1) {
-    return { valid: false, errorMessage: ERROR_MESSAGE.INVALID_MONTH };
+  const rangeError = getExpirationError(value, index);
+  if (rangeError) {
+    return { isValid: false, errorMessage: rangeError };
   }
-  if (isInRange(value, index) === 2) {
-    return { valid: false, errorMessage: ERROR_MESSAGE.INVALID_YEAR };
-  }
-  return { valid: true, errorMessage: '' };
+  return { isValid: true, errorMessage: '' };
 }
 
-export { isNumeric, isValidSegment, isValidExpirationSegment, ERROR_MESSAGE };
+function validateCvcNumber(value: string): {
+  isValid: boolean;
+  errorMessage: string;
+} {
+  if (!isNumeric(value)) {
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CHARACTER };
+  }
+  if (!isValidSegment(value, 3)) {
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_LENGTH };
+  }
+  return { isValid: true, errorMessage: '' };
+}
+
+function validatePasswordSegment(value: string): {
+  isValid: boolean;
+  errorMessage: string;
+} {
+  if (!isNumeric(value)) {
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CHARACTER };
+  }
+  if (!isValidSegment(value, 2)) {
+    return { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_LENGTH };
+  }
+  return { isValid: true, errorMessage: '' };
+}
+
+export type { ExpirationValidationResult };
+export {
+  isNumeric,
+  isValidSegment,
+  isValidExpirationSegment,
+  validateCvcNumber,
+  validatePasswordSegment,
+  getExpirationError,
+  ERROR_MESSAGE,
+};

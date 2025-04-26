@@ -22,7 +22,7 @@ const App = () => {
 
   const hidePeriodSeparator = useCallback(() => {
     setIsPeriodSeparatorShowing(period.some((p) => p !== ''));
-  }, []);
+  }, [period]);
 
   const handleNumbersChange = useCallback((newNumbers: string[]) => {
     setNumbers(newNumbers);
