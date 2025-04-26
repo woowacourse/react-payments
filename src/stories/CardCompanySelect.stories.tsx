@@ -11,7 +11,7 @@ const meta: Meta<typeof CardCompanySelect> = {
     docs: {
       description: {
         component:
-          "CardCompanySelect은 카드 등록 과정에서 사용자가 카드사를 선택할 수 있도록 돕는 커스텀 드롭다운 컴포넌트입니다.\n" +
+          "💳 CardCompanySelect은 카드 등록 과정에서 사용자가 카드사를 선택할 수 있도록 돕는 커스텀 드롭다운 컴포넌트입니다.\n" +
           " - 카드사 목록을 제공하고, 선택한 카드사에 따라 카드 프리뷰 색상이 변경됩니다.\n" +
           " - 선택한 카드사에 해당하는 색상을 전역 상태(cardColor)에 저장합니다.\n" +
           " - 기본 상태에서는 '카드사를 선택해주세요' 플레이스홀더를 표시합니다.\n" +
