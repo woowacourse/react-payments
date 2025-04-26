@@ -1,93 +1,90 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import CardNumber, { SequenceType } from './CardNumber';
-import { useState } from 'storybook/internal/preview-api';
+import type { Meta } from '@storybook/react';
+import CardNumber from './CardNumber';
+import { useControlledCardNumber } from './hooks/useControlledCardNumber';
+import { useState } from 'react';
 
 const meta = {
-  title: 'CardNumber',
+  title: 'card/CardNumber',
   component: CardNumber,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const { cardNumberRefs, cardNumber, cardNumberErrorMessage, handleCardNumberInputChange } =
+        useControlledCardNumber();
+
+      return (
+        <Story
+          args={{
+            cardNumberRefs,
+            cardNumber,
+            cardNumberErrorMessage,
+            handleCardNumberInputChange,
+          }}
+        />
+      );
+    },
+  ],
 } satisfies Meta<typeof CardNumber>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Default = {};
 
-export const Default: Story = {
-  args: {
-    cardNumber: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    setCardNumber: () => {},
-    cardNumberErrorMessage: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    setCardNumberErrorMessage: () => {},
-  },
-  render: function Render(args) {
-    const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
-    const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState({
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
-    return (
-      <CardNumber
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        cardNumberErrorMessage={cardNumberErrorMessage}
-        setCardNumberErrorMessage={setCardNumberErrorMessage}
-      ></CardNumber>
-    );
-  },
-};
+export const Valid = {
+  render: function Render() {
+    const { cardNumberRefs, handleCardNumberInputChange } = useControlledCardNumber();
 
-export const Valid: Story = {
-  args: {
-    cardNumber: {
+    const [cardNumber] = useState({
       first: '1234',
       second: '4567',
       third: '8910',
       fourth: '1112',
-    },
-    setCardNumber: () => {},
-    cardNumberErrorMessage: {
+    });
+
+    const [cardNumberErrorMessage] = useState({
       first: '',
       second: '',
       third: '',
       fourth: '',
-    },
-    setCardNumberErrorMessage: () => {},
+    });
+
+    return (
+      <CardNumber
+        cardNumberRefs={cardNumberRefs}
+        cardNumber={cardNumber}
+        cardNumberErrorMessage={cardNumberErrorMessage}
+        handleCardNumberInputChange={handleCardNumberInputChange}
+      />
+    );
   },
 };
 
-export const Error: Story = {
-  args: {
-    cardNumber: {
+export const Error = {
+  render: function Render() {
+    const { cardNumberRefs, handleCardNumberInputChange } = useControlledCardNumber();
+
+    const [cardNumber] = useState({
       first: 'd455',
       second: 's4565',
       third: '1234',
       fourth: '5678',
-    },
-    setCardNumber: () => {},
-    cardNumberErrorMessage: {
+    });
+
+    const [cardNumberErrorMessage] = useState({
       first: '숫자만 입력 가능합니다.',
       second: '숫자만 입력 가능합니다.',
       third: '',
       fourth: '',
-    },
-    setCardNumberErrorMessage: () => {},
+    });
+
+    return (
+      <CardNumber
+        cardNumberRefs={cardNumberRefs}
+        cardNumber={cardNumber}
+        cardNumberErrorMessage={cardNumberErrorMessage}
+        handleCardNumberInputChange={handleCardNumberInputChange}
+      />
+    );
   },
   parameters: {
     controls: {

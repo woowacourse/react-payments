@@ -1,58 +1,66 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import CardCVCNumber from './CardCVCNumber';
+import type { Meta } from '@storybook/react';
 import { useState } from '@storybook/preview-api';
 import { ERROR_MESSAGE } from '../../../constants';
+import { useControlledCardCVCNumber } from './hooks/useControlledCardCVCNumber';
 
 const meta = {
-  title: 'CardCVCNumber',
+  title: 'card/CardCVCNumber',
   component: CardCVCNumber,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const { cardCVCNumber, cardCVCNumberErrorMessage, handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
+
+      return (
+        <Story
+          args={{
+            cardCVCNumber,
+            cardCVCNumberErrorMessage,
+            handleCardCVCNumberInputChange,
+          }}
+        />
+      );
+    },
+  ],
 } satisfies Meta<typeof CardCVCNumber>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Default = {};
 
-export const Default: Story = {
-  args: {
-    cardCVCNumber: '',
-    cardCVCNumberErrorMessage: '',
-    setCardCVCNumber: () => {},
-    setCardCVCNumberErrorMessage: () => {},
-  },
-  render: function Render(args) {
-    const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
-    const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
+export const Valid = {
+  render: function Render() {
+    const { handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
+
+    const [cardCVCNumber] = useState('313');
+
+    const [cardCVCNumberErrorMessage] = useState('');
+
     return (
       <CardCVCNumber
         cardCVCNumber={cardCVCNumber}
-        setCardCVCNumber={setCardCVCNumber}
         cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-        setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
-      ></CardCVCNumber>
+        handleCardCVCNumberInputChange={handleCardCVCNumberInputChange}
+      />
     );
   },
 };
 
-export const Valid: Story = {
-  args: {
-    cardCVCNumber: '313',
-    cardCVCNumberErrorMessage: '',
-    setCardCVCNumber: () => {},
-    setCardCVCNumberErrorMessage: () => {},
-  },
-};
+export const Error = {
+  render: function Render() {
+    const { handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
 
-export const Error: Story = {
-  args: {
-    cardCVCNumber: '우테코',
-    cardCVCNumberErrorMessage: ERROR_MESSAGE.onlyNumber,
-    setCardCVCNumber: () => {},
-    setCardCVCNumberErrorMessage: () => {},
-  },
-  parameters: {
-    controls: {
-      expanded: true,
-    },
+    const [cardCVCNumber] = useState('우테코');
+
+    const [cardCVCNumberErrorMessage] = useState(ERROR_MESSAGE.onlyNumber);
+
+    return (
+      <CardCVCNumber
+        cardCVCNumber={cardCVCNumber}
+        cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
+        handleCardCVCNumberInputChange={handleCardCVCNumberInputChange}
+      />
+    );
   },
 };

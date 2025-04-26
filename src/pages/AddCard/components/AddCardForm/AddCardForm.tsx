@@ -10,7 +10,13 @@ import { Fragment, useEffect, useState } from 'react';
 import { CARD_STEP, CARD_STEPS } from '../../constants';
 import { useNavigate } from 'react-router';
 
-export default function AddCardForm({ addFormState }: { addFormState: AddCardFormProps }) {
+export default function AddCardForm({
+  addFormState,
+  _testModeSteps,
+}: {
+  addFormState: AddCardFormProps;
+  _testModeSteps?: string[];
+}) {
   const {
     cardNumber,
     cardNumberErrorMessage,
@@ -35,9 +41,11 @@ export default function AddCardForm({ addFormState }: { addFormState: AddCardFor
     handleCardPasswordInputChange,
   } = addFormState;
 
-  const [steps, setSteps] = useState<string[]>([CARD_STEP[0]]);
+  const [steps, setSteps] = useState<string[]>(_testModeSteps || [CARD_STEP[0]]);
 
   useEffect(() => {
+    if (_testModeSteps) return;
+
     const currentStepIndex = steps.length - 1;
     const stepProgression = [
       isCardNumberNextStep,

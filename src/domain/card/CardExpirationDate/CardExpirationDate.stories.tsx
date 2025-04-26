@@ -1,82 +1,86 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import CardExpirationDate, { DateType } from './CardExpirationDate';
+import CardExpirationDate from './CardExpirationDate';
+import type { Meta } from '@storybook/react';
 import { useState } from 'storybook/internal/preview-api';
 import { ERROR_MESSAGE } from '../../../constants';
+import { useControlledCardExpirationDate } from './hooks/useControlledCardExpirationDate';
 
 const meta = {
-  title: 'CardExpirationDate',
+  title: 'card/CardExpirationDate',
   component: CardExpirationDate,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const {
+        cardExpirationDate,
+        cardExpirationDateErrorMessage,
+        cardExpirationDateRefs,
+        handleCardExpirationDateInputChange,
+      } = useControlledCardExpirationDate();
+
+      return (
+        <Story
+          args={{
+            cardExpirationDateRefs,
+            cardExpirationDate,
+            cardExpirationDateErrorMessage,
+            handleCardExpirationDateInputChange,
+          }}
+        />
+      );
+    },
+  ],
 } satisfies Meta<typeof CardExpirationDate>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Default = {};
 
-export const Default: Story = {
-  args: {
-    cardExpirationDate: {
-      month: '',
-      year: '',
-    },
-    setCardExpirationDate: () => {},
-    cardExpirationDateErrorMessage: {
-      month: '',
-      year: '',
-    },
-    setCardExpirationDateErrorMessage: () => {},
-  },
-  render: function Render(args) {
-    const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
+export const Valid = {
+  render: function Render() {
+    const { cardExpirationDateRefs, handleCardExpirationDateInputChange } = useControlledCardExpirationDate();
+
+    const [cardExpirationDate] = useState({
+      month: '12',
+      year: '25',
+    });
+
+    const [cardExpirationDateErrorMessage] = useState({
       month: '',
       year: '',
     });
-    const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
-      month: '',
-      year: '',
-    });
+
     return (
       <CardExpirationDate
+        cardExpirationDateRefs={cardExpirationDateRefs}
         cardExpirationDate={cardExpirationDate}
-        setCardExpirationDate={setCardExpirationDate}
         cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-        setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
-      ></CardExpirationDate>
+        handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
+      />
     );
   },
 };
 
-export const Valid: Story = {
-  args: {
-    cardExpirationDate: {
-      month: '12',
-      year: '25',
-    },
-    setCardExpirationDate: () => {},
-    cardExpirationDateErrorMessage: {
-      month: '',
-      year: '',
-    },
-    setCardExpirationDateErrorMessage: () => {},
-  },
-};
+export const Error = {
+  render: function Render() {
+    const { cardExpirationDateRefs, handleCardExpirationDateInputChange } = useControlledCardExpirationDate();
 
-export const Error: Story = {
-  args: {
-    cardExpirationDate: {
-      month: '32',
-      year: '21',
-    },
-    setCardExpirationDate: () => {},
-    cardExpirationDateErrorMessage: {
+    const [cardExpirationDate] = useState({
+      month: '13',
+      year: '24',
+    });
+
+    const [cardExpirationDateErrorMessage] = useState({
       month: ERROR_MESSAGE.validMonth,
       year: ERROR_MESSAGE.pastYear,
-    },
-    setCardExpirationDateErrorMessage: () => {},
-  },
-  parameters: {
-    controls: {
-      expanded: true,
-    },
+    });
+
+    return (
+      <CardExpirationDate
+        cardExpirationDateRefs={cardExpirationDateRefs}
+        cardExpirationDate={cardExpirationDate}
+        cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
+        handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
+      />
+    );
   },
 };

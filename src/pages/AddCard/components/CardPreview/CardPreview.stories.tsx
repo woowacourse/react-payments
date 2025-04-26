@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from './CardPreview';
 
 const meta = {
-  title: 'CardPreview',
+  title: 'Pages/AddCard/CardPreview',
   component: CardPreview,
   tags: ['autodocs'],
 } satisfies Meta<typeof CardPreview>;
@@ -23,6 +23,6 @@ export const Default: Story = {
       third: '1232',
       fourth: '2353',
     },
-    cardType: 'master',
+    CardBrandType: 'BC카드',
   },
 };

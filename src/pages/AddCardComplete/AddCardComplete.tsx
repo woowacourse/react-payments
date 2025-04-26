@@ -1,8 +1,8 @@
 import * as S from './AddCardComplete.styles';
-import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router';
 import CompleteIcon from '../../components/Icon/CompleteIcon';
 import Button from '../../components/Button/Button';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 export default function AddCardComplete() {
   const location = useLocation();
