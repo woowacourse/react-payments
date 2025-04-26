@@ -31,22 +31,32 @@ export default function App() {
         cardCompany={cardCompany}
         cardExpiration={cardExpiration}
       />
+      {cvc && !cvcError && (
+        <CardPasswordSection
+          cardPassword={cardPassword}
+          handleCardPasswordChange={handleCardPasswordChange}
+          cardPasswordError={cardPasswordError}
+        />
+      )}
+      {Object.values(cardExpiration).every((value) => value !== '') &&
+        Object.values(cardExpirationError).every((value) => value === '') && (
+          <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
+        )}
+      {cardCompany && (
+        <CardExpirationSection
+          cardExpiration={cardExpiration}
+          handleCardExpirationChange={handleCardExpirationChange}
+          cardExpirationError={cardExpirationError}
+        />
+      )}
+
+      {Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError && (
+        <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
+      )}
       <CardNumberSection
         cardNumbers={cardNumbers}
         handleCardNumberChange={handleCardNumberChange}
         cardNumberError={cardNumberError}
-      />
-      <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
-      <CardExpirationSection
-        cardExpiration={cardExpiration}
-        handleCardExpirationChange={handleCardExpirationChange}
-        cardExpirationError={cardExpirationError}
-      />
-      <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
-      <CardPasswordSection
-        cardPassword={cardPassword}
-        handleCardPasswordChange={handleCardPasswordChange}
-        cardPasswordError={cardPasswordError}
       />
     </div>
   );
