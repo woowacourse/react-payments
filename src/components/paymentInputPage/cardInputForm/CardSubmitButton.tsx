@@ -1,16 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../common/button/Button';
 import styles from './CardInputForm.module.css';
+import { ROUTER } from '../../../global/constants';
 
 interface CardSubmitButtonProps {
   isFormValid: boolean;
 }
 
 function CardSubmitButton({ isFormValid }: CardSubmitButtonProps) {
+  const navigate = useNavigate();
+
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     if (isFormValid) {
-      // router로 확인 페이지 넘어가기
+      navigate(ROUTER.registerComplete);
     }
   }
 
