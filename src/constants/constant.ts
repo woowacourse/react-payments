@@ -1,5 +1,10 @@
 import { CompanyType } from "../types";
 
+export const UNIQUE_NUMBER_MAX_LENGTH = 4;
+export const EXPIRATION_DATE_MAX_LENGTH = 2;
+export const CVC_NUMBER_MAX_LENGTH = 3;
+export const PASSWORD_MAX_LENGTH = 2;
+
 export const MIN_MONTH = 1;
 export const MAX_MONTH = 12;
 

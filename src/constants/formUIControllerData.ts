@@ -1,4 +1,10 @@
 import { formSectionData } from "../types";
+import {
+  CVC_NUMBER_MAX_LENGTH,
+  EXPIRATION_DATE_MAX_LENGTH,
+  PASSWORD_MAX_LENGTH,
+  UNIQUE_NUMBER_MAX_LENGTH,
+} from "./constant";
 
 const formUIControllerData: formSectionData[] = [
   {
@@ -9,7 +15,7 @@ const formUIControllerData: formSectionData[] = [
     fieldData: {
       label: "카드번호",
       inputNumber: 4,
-      inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
+      inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: UNIQUE_NUMBER_MAX_LENGTH },
     },
   },
   {
@@ -30,7 +36,7 @@ const formUIControllerData: formSectionData[] = [
     fieldData: {
       label: "유효기간",
       inputNumber: 2,
-      inputProps: { placeholder: ["MM", "YY"], maxLength: 2 },
+      inputProps: { placeholder: ["MM", "YY"], maxLength: EXPIRATION_DATE_MAX_LENGTH },
     },
   },
   {
@@ -41,7 +47,7 @@ const formUIControllerData: formSectionData[] = [
     fieldData: {
       label: "cvc",
       inputNumber: 1,
-      inputProps: { placeholder: ["123"], maxLength: 3 },
+      inputProps: { placeholder: ["123"], maxLength: CVC_NUMBER_MAX_LENGTH },
     },
   },
   {
@@ -52,7 +58,7 @@ const formUIControllerData: formSectionData[] = [
     fieldData: {
       label: "비밀번호 앞 2자리",
       inputNumber: 1,
-      inputProps: { placeholder: [""], maxLength: 2, masking: true },
+      inputProps: { placeholder: [""], maxLength: PASSWORD_MAX_LENGTH, masking: true },
     },
   },
 ];
