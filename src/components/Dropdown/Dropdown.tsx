@@ -4,7 +4,7 @@ import styles from "./Dropdown.module.css";
 interface InputProps extends ComponentProps<"select"> {
   options: string[];
   placeholder?: string;
-  ref: Ref<HTMLSelectElement>;
+  ref?: Ref<HTMLSelectElement>;
 }
 
 function Dropdown({ options, placeholder, ref, ...props }: InputProps) {

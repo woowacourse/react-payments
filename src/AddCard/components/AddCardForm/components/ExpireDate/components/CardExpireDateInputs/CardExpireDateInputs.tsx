@@ -11,7 +11,7 @@ export interface CardExpireDateInputsProps {
   handleExpireMonthChange: (value: string) => void;
   handleExpireYearChange: (value: string) => void;
   handleExpireMonthBlur: (value: string) => void;
-  ref: Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 function CardExpireDateInputs({

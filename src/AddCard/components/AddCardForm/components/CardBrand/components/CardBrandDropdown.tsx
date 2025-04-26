@@ -7,7 +7,7 @@ import type { Ref } from "react";
 export interface BrandDropdownProps {
   selectedBrand: Brand | null;
   setSelectedBrand: (value: Brand) => void;
-  ref: Ref<HTMLSelectElement>;
+  ref?: Ref<HTMLSelectElement>;
 }
 
 function CardBrandDropdown({

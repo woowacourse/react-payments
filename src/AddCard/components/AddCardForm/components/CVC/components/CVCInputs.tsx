@@ -7,7 +7,7 @@ import { Ref } from "react";
 export interface CVCInputsProps {
   CVCState: { value: string; errorMessage: string };
   handleCVCChange: (value: string) => void;
-  ref: Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 function CVCInputs({ CVCState, handleCVCChange, ref }: CVCInputsProps) {

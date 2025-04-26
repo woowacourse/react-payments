@@ -9,7 +9,7 @@ import { useAutoFocus } from "../../../../../../hooks/useAutoFocus";
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
   handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
-  ref: Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 }
 
 function CardNumberInputs({
