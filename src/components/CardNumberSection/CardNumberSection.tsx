@@ -27,7 +27,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, in
         <div className={styles.inputWrapper}>
           {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
             <Input
-              key={index}
+              key={inputKey}
               value={cardNumbers[inputKey].value}
               isError={cardNumbers[inputKey].isError}
               placeholder={'1234'}
