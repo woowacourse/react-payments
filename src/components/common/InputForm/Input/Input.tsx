@@ -11,6 +11,7 @@ export interface InputProps extends InputAttribute {
   maxLength: number;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isValidInput: boolean;
+  isRequired?: boolean;
   dataInputId?: number;
 }
 
@@ -24,6 +25,7 @@ function Input({
   handleInputChange,
   isValidInput,
   autoFocus,
+  isRequired,
   dataInputId,
 }: InputProps) {
   const ref = useRef<HTMLInputElement>(null);
@@ -54,7 +56,10 @@ function Input({
       value={value}
       onChange={onChangeInputHandler}
       autoFocus={autoFocus}
-      className={`${styles.input} ${!isValidInput && styles.isNotValid} tx-md`}
+      required={isRequired}
+      className={`${styles.input} ${
+        !isValidInput ? styles.isNotValid : ''
+      } tx-md`}
       data-input-id={dataInputId}
       ref={ref}
     />

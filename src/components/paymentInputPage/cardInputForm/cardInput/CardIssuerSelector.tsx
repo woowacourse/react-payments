@@ -28,6 +28,7 @@ function CardIssuerSelector() {
           optionList={Array.from(ISSUER_LIST.keys())}
           selectedValue={cardIssuer}
           setSelectedValue={setCardIssuer}
+          isRequired={true}
         />
       </InputForm>
     </>

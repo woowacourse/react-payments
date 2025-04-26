@@ -7,6 +7,7 @@ export interface SelectProps {
   optionList: string[];
   selectedValue: string;
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  isRequired?: boolean;
 }
 
 function Select({
@@ -15,6 +16,7 @@ function Select({
   optionList,
   selectedValue,
   setSelectedValue,
+  isRequired,
 }: SelectProps) {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
 
@@ -39,6 +41,7 @@ function Select({
           placeholder={placeholder}
           value={selectedValue}
           onClick={handleSelectClick}
+          required={isRequired}
           readOnly
         />
         <img

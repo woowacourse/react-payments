@@ -60,6 +60,7 @@ function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
         handleInputChange={handleCardNumberChange}
         isValidInput={isValid[index]}
         autoFocus={index === 0}
+        isRequired={true}
         dataInputId={index}
       />
     );

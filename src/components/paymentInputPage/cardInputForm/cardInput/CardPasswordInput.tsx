@@ -48,6 +48,7 @@ function CardPasswordInput({
           handleInputChange={handlePasswordChange}
           maxLength={2}
           autoFocus={true}
+          isRequired={true}
           isValidInput={isValid}
         />
       </InputForm>
