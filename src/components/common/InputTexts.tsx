@@ -42,6 +42,7 @@ const InputTexts = ({
               onFocus={onFocus}
               onBlur={onBlur}
               isError={data.hasError}
+              autoComplete="off"
             />
           ))
         ) : (
@@ -54,6 +55,7 @@ const InputTexts = ({
             onFocus={onFocus}
             onBlur={onBlur}
             isError={dataModels.hasError}
+            autoComplete="off"
           />
         )}
       </Row>
