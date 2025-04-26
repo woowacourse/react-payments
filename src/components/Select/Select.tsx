@@ -102,6 +102,7 @@ const optionListStyle = css`
   border: 1px solid #acacac;
   background: #fff;
   z-index: 10;
+  box-sizing: border-box;
 `;
 
 const optionItemStyle = css`

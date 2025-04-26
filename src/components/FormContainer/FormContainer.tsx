@@ -58,7 +58,9 @@ export default FormContainer;
 
 const FormContainerStyle = css`
   width: 100%;
+  height: 63%;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-y: scroll;
 `;

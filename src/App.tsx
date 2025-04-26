@@ -38,8 +38,10 @@ function App() {
 export default App;
 
 const AppStyle = css`
+  box-sizing: border-box;
+  height: calc(100% - 70px);
   position: relative;
-  width: 376px;
+  width: 400px;
   background-color: #ffffff;
   padding: 77px 30px 20px;
   display: flex;
@@ -53,4 +55,5 @@ const ButtonWrapperStyle = css`
   position: absolute;
   width: 100%;
   bottom: 20px;
+  z-index: 99;
 `;
