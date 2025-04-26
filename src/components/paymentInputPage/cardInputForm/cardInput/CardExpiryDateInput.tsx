@@ -104,6 +104,7 @@ function CardExpiryDateInput({
           placeholder='MM'
           value={expiryDate.month}
           handleInputChange={handleCardNumberChange}
+          minLength={2}
           maxLength={2}
           autoFocus={true}
           isRequired={true}
@@ -115,6 +116,7 @@ function CardExpiryDateInput({
           placeholder='YY'
           value={expiryDate.year}
           handleInputChange={handleCardNumberChange}
+          minLength={2}
           maxLength={2}
           isRequired={true}
           isValidInput={isValid.year}

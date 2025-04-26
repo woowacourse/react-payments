@@ -3,7 +3,7 @@ import styles from './Input.module.css';
 
 type InputAttribute = Pick<
   ComponentProps<'input'>,
-  'type' | 'name' | 'id' | 'placeholder' | 'autoFocus'
+  'type' | 'name' | 'id' | 'minLength' | 'placeholder' | 'autoFocus'
 >;
 
 export interface InputProps extends InputAttribute {
@@ -20,6 +20,7 @@ function Input({
   name,
   id,
   placeholder,
+  minLength,
   maxLength,
   value,
   handleInputChange,
@@ -52,6 +53,7 @@ function Input({
       name={name}
       id={id}
       placeholder={placeholder}
+      minLength={minLength}
       maxLength={maxLength}
       value={value}
       onChange={onChangeInputHandler}

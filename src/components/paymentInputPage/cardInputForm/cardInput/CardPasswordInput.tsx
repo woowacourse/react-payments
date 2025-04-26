@@ -46,6 +46,7 @@ function CardPasswordInput({
           name='password'
           value={password}
           handleInputChange={handlePasswordChange}
+          minLength={2}
           maxLength={2}
           autoFocus={true}
           isRequired={true}

@@ -55,6 +55,7 @@ function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
         type='tel'
         name='cardNumber'
         placeholder='1234'
+        minLength={4}
         maxLength={4}
         value={cardNumbers[index]}
         handleInputChange={handleCardNumberChange}

@@ -46,6 +46,7 @@ function CardCVCInput({
           type='tel'
           name='cardCVC'
           placeholder='123'
+          minLength={3}
           maxLength={3}
           value={cardCVC}
           handleInputChange={handleCVCNumberChange}
