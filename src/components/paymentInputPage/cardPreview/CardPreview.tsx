@@ -7,7 +7,7 @@ export type CardInformationType = {
   expirationDate: ExpirationDateType;
 };
 
-const BRAND_IMAGE = {
+export const BRAND_IMAGE = {
   visa: './Visa.png',
   master: './Mastercard.png',
 };
