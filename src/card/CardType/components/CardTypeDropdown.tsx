@@ -1,7 +1,7 @@
 import styles from "./CardTypeDropdown.module.css";
 import { CARD_TYPE_LIST } from "@/card/CardType/constants";
 import Dropdown from "@/components/Dropdown/Dropdown";
-import { CardType } from "@/pages/addCard/types";
+import type { CardType } from "@/pages/add-card/types";
 
 export interface CardTypeDropdownProps {
   cardType: CardType | null;

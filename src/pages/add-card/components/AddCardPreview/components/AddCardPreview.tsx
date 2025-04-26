@@ -5,8 +5,8 @@ import VisaCardImage from "@assets/icons/visa-card.svg";
 import MasterCardImage from "@assets/icons/master-card.svg";
 import Dot from "@components/Dot/Dot";
 import { getCardBrand } from "../utils";
-import { CardType } from "@/pages/addCard/types";
-import { CVCState } from "@card/CVC/hooks/useControlledCVC";
+import type { CardType } from "@/pages/add-card/types";
+import type { CVCState } from "@card/CVC/hooks/useControlledCVC";
 
 const CARD_BRAND_IMAGES = {
   VISA: VisaCardImage,

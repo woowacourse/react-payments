@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import type { CardType } from "@/pages/addCard/types";
+import type { CardType } from "@/pages/add-card/types";
 
 const useControlledCardType = () => {
   const [cardType, setCardType] = useState<CardType | null>(null);
