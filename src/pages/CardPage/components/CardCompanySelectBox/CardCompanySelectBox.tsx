@@ -41,9 +41,6 @@ const CardCompanySelectBox = ({
         value={value}
         onChange={handleChange}
       />
-      <StyledHelperTextWrapper>
-        {/* {errorMessage.length > 0 && <HelperText text={errorMessage} type={'isError'}></HelperText>} */}
-      </StyledHelperTextWrapper>
     </StyledCardCompanySelectBox>
   );
 };
@@ -55,8 +52,5 @@ const StyledCardCompanySelectBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-`;
-
-const StyledHelperTextWrapper = styled.div`
-  height: 30px;
+  padding-bottom: 30px;
 `;
