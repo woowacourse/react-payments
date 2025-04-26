@@ -1,26 +1,12 @@
-import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { STEPS } from "./constants";
 import useCardInfo from "../../hooks/useCardInfo";
 import Card from "../../components/CardPreview/Card";
 import { AddCardForm } from "./components/AddCardForm";
+import { useStepManager } from "./hooks/useStepManager";
 
 function AddCardPage() {
   const { cardInfo, handleCardInfo } = useCardInfo();
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [isFormsCompleted, setIsFormsCompleted] = useState(false);
-
-  useEffect(() => {
-    const isCurrentStepValid = STEPS[currentStepIndex].validate(cardInfo);
-    const isLastStep = currentStepIndex === STEPS.length - 1;
-
-    const isAllStepsValid = STEPS.every((step) => step.validate(cardInfo));
-    setIsFormsCompleted(isAllStepsValid);
-
-    if (isCurrentStepValid && !isLastStep) {
-      setCurrentStepIndex(currentStepIndex + 1);
-    }
-  }, [cardInfo, currentStepIndex]);
+  const { currentStepIndex, isFormsCompleted } = useStepManager(cardInfo);
 
   return (
     <AddCardContainer>
