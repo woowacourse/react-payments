@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { CardNumberInfo } from '../../types/models';
+import { Container, ErrorMessage } from '../../styles/common';
 
 interface CardNumberInputsViewProps {
   cardNumbersInfo: CardNumberInfo[];
@@ -36,21 +36,3 @@ const CardNumberInputsView = ({
 };
 
 export default CardNumberInputsView;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-`;
-
-const ErrorMessage = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  font-size: ${({ theme }) => theme.fontSizes.caption};
-  line-height: 100%;
-  letter-spacing: 0%;
-  vertical-align: middle;
-  color: ${({ theme }) => theme.colors.error};
-  height: ${({ theme }) => theme.fontSizes.caption};
-`;
