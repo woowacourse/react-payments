@@ -11,6 +11,10 @@ export const useControlledCardCVCNumber = () => {
       return ERROR_MESSAGE.onlyNumber;
     }
 
+    if (value.length < 3) {
+      return '3자리 숫자를 입력해 주세요';
+    }
+
     return '';
   };
 

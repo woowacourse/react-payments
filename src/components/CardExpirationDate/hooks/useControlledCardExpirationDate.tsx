@@ -31,6 +31,14 @@ export const useControlledCardExpirationDate = () => {
       return;
     }
 
+    if (value.length < 2) {
+      setCardExpirationDateErrorMessage({
+        ...cardExpirationDateErrorMessage,
+        [dateType]: '2자리 숫자를 입력해 주세요',
+      });
+      return;
+    }
+
     const valueAsNumber = parseInt(value, DECIMAL_RADIX);
 
     if (dateType === 'month') {

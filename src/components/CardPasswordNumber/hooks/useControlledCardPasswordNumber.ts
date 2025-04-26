@@ -11,6 +11,10 @@ export const useControlledCardPasswordNumber = () => {
       return ERROR_MESSAGE.onlyNumber;
     }
 
+    if (value.length < 2) {
+      return '2자리 숫자를 입력해 주세요';
+    }
+
     return '';
   };
 
