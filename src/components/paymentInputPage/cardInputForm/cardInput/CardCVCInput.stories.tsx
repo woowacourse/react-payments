@@ -6,6 +6,12 @@ import CardCVCInput from './CardCVCInput';
 const meta = {
   title: 'CardCVCInput',
   component: CardCVCInput,
+  args: {
+    cardCVC: '',
+    setCardCVC: () => {},
+    isValid: true,
+    setIsValid: () => {},
+  },
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;

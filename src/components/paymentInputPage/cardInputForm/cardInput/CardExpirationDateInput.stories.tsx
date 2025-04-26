@@ -9,6 +9,8 @@ const meta = {
   args: {
     expirationDate: { month: '', year: '' },
     setExpirationDate: () => {},
+    isValid: { month: true, year: true },
+    setIsValid: () => {},
   },
 } satisfies Meta<typeof CardExpirationDateInput>;
 
