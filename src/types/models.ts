@@ -1,21 +1,29 @@
-export interface NumberInfo {
+interface NumberInfo {
   number: string;
   isError: boolean;
   placeholder: string;
   numberSegmentLength: number;
 }
 
-export interface CVCNumberInfo {
+interface CVCNumberInfo {
+  number: string;
+  isError: boolean;
+  placeholder: string;
+  numberSegmentLength: number;
+}
+interface PasswordInfo {
   number: string;
   isError: boolean;
   placeholder: string;
   numberSegmentLength: number;
 }
 
-export interface ExpirationPeriodInfo {
+interface ExpirationPeriodInfo {
   number: string;
   isError: boolean;
   placeholder: string;
   numberSegmentLength: number;
   errorMessage: string;
 }
+
+export type { NumberInfo, CVCNumberInfo, PasswordInfo, ExpirationPeriodInfo };

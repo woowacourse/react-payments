@@ -7,6 +7,7 @@ import Preview from './components/Preview';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
 import BrandSelect from './components/BrandSelect';
+import PasswordInput from './components/PasswordInput';
 
 const App = () => {
   const [numbers, setNumbers] = useState<string[]>(['', '', '', '']);
@@ -45,6 +46,7 @@ const App = () => {
           isPeriodSeparatorShowing={isPeriodSeparatorShowing}
         />
 
+        <PasswordInput />
         <CVCNumberInput />
         <ExpirationPeriodInputs
           period={period}
@@ -74,4 +76,5 @@ const Main = styled.main`
   height: 100dvh;
   background-color: ${({ theme }) => theme.colors.background};
   gap: 24px;
+  overflow: auto;
 `;

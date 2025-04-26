@@ -15,17 +15,24 @@ type Story = StoryObj<typeof Preview>;
 interface PreviewProps {
   initialCardNumbers: string[];
   initialPeriod: string[];
+  initialBrand: string;
 }
 
-const Wrapper = ({ initialCardNumbers, initialPeriod }: PreviewProps) => {
+const Wrapper = ({
+  initialCardNumbers,
+  initialPeriod,
+  initialBrand,
+}: PreviewProps) => {
   const [cardNumbers] = useState<string[]>(initialCardNumbers);
   const [period] = useState<string[]>(initialPeriod);
+  const [brand] = useState<string>(initialBrand);
   const isPeriodSeparatorShowing = period.some((p) => p !== '');
 
   return (
     <Preview
-      cardNumbers={cardNumbers}
+      numbers={cardNumbers}
       period={period}
+      brand={brand}
       isPeriodSeparatorShowing={isPeriodSeparatorShowing}
     />
   );
@@ -36,6 +43,7 @@ export const Visa: Story = {
     <Wrapper
       initialCardNumbers={['4123', '1234', '1234', '1234']}
       initialPeriod={['05', '23']}
+      initialBrand="bc"
     />
   ),
   play: async ({ canvasElement }) => {
@@ -53,6 +61,7 @@ export const Mastercard: Story = {
     <Wrapper
       initialCardNumbers={['5310', '1234', '1234', '1234']}
       initialPeriod={['06', '24']}
+      initialBrand="shinhan"
     />
   ),
   play: async ({ canvasElement }) => {
@@ -70,6 +79,7 @@ export const NoLogo: Story = {
     <Wrapper
       initialCardNumbers={['1234', '1234', '1234', '1234']}
       initialPeriod={['07', '25']}
+      initialBrand="kakao"
     />
   ),
   play: async ({ canvasElement }) => {
