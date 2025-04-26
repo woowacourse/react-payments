@@ -1,19 +1,37 @@
+// src/AddCard/components/AddCardCompleteModal/AddCardCompleteModal.tsx
 import Button from "@/components/Button/Button";
 import { useLocation, useNavigate } from "react-router";
+
 import styles from "./AddCardCompleteModal.module.css";
 import RoundCheckIcon from "@/components/RoundCheckedIcon/RoundCheckedIcon";
 import type { AddCardCompleteLocationState } from "@/AddCard/types/location";
+import Fallback from "@/components/Fallback/Fallback";
 
-function AddCardCompleteModal() {
+export default function AddCardCompleteModal() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { firstCardNumber = "****", selectedBrand = "현대카드" } =
-    (location.state as AddCardCompleteLocationState) || {};
-
-  function handleAddCardConfirmButton() {
-    navigate("/");
+  if (!location.state) {
+    return (
+      <Fallback
+        message="비정상적 접근입니다."
+        buttonText="홈으로 돌아가기"
+        onButtonClick={() => navigate("/")}
+      />
+    );
   }
+
+  const { firstCardNumber, selectedBrand } =
+    location.state as AddCardCompleteLocationState;
+
+  let displayBrand = selectedBrand;
+  if (selectedBrand === "카카오뱅크") {
+    displayBrand += " 카드";
+  }
+
+  const handleAddCardConfirmButton = () => {
+    navigate("/");
+  };
 
   return (
     <div
@@ -37,17 +55,14 @@ function AddCardCompleteModal() {
             id="card-complete-brand-description"
             className={styles.detailsSpan}
           >
-            {selectedBrand === "카카오뱅크"
-              ? selectedBrand + " 카드"
-              : selectedBrand}
-            가 등록되었어요!
+            {displayBrand}가 등록되었어요!
           </span>
         </p>
 
         <Button
           size="large"
-          onClick={handleAddCardConfirmButton}
           variant="rounded"
+          onClick={handleAddCardConfirmButton}
           aria-label="확인 및 홈으로 이동"
         >
           확인
@@ -56,5 +71,3 @@ function AddCardCompleteModal() {
     </div>
   );
 }
-
-export default AddCardCompleteModal;
