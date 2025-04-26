@@ -1,6 +1,6 @@
 import ExpirationPeriodView from './ExpirationPeriodView';
 import { useErrorMessage } from '../../hooks/useErrorMessage';
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export interface ExpirationPeriodProps {
   period: { month: string; year: string };
@@ -48,12 +48,20 @@ const ExpirationPeriod = ({
 
   const isValidMonth = (value: string) => {
     const month = Number(value);
-    return value.length === 2 && month >= MONTH.MIN && month <= MONTH.MAX;
+    return (
+      value.length === EXPIRATION_PERIOD_LENGTH &&
+      month >= MONTH.MIN &&
+      month <= MONTH.MAX
+    );
   };
 
   const isValidYear = (value: string) => {
     const year = Number(value);
-    return value.length === 2 && year >= YEAR.MIN && year <= YEAR.MAX;
+    return (
+      value.length === EXPIRATION_PERIOD_LENGTH &&
+      year >= YEAR.MIN &&
+      year <= YEAR.MAX
+    );
   };
 
   const updateErrors = (
