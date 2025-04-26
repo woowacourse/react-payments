@@ -2,15 +2,11 @@
 
 describe("Addcard Fail Flow", () => {
   beforeEach(() => {
-    cy.visit("localhost:5173");
+    cy.visit("localhost:5173/react-payments");
   });
 
-  it("should stop user to being add card if one field is invalid", () => {
-    cy.get("#card-number-first-input").type("1234");
-    cy.get("#card-number-second-input").type("5678");
-    cy.get("#card-number-third-input").type("9012");
-    cy.get("#card-number-fourth-input").type("3456");
-
+  it("하나라도 invalid한 인풋이 있으면 유저가 카드 등록을 할수 없게 해야한다.", () => {
+    cy.fillCreditCardNumber("1234", "5678", "9012", "3456");
     cy.get("select").select("BC카드");
 
     cy.get("#expire-MM-input").type("12");

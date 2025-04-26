@@ -2,14 +2,11 @@
 
 describe("Addcard Success Flow", () => {
   beforeEach(() => {
-    cy.visit("localhost:5173");
+    cy.visit("localhost:5173/react-payments");
   });
 
-  it("should complete the entire card registration flow", () => {
-    cy.get("#card-number-first-input").type("1234");
-    cy.get("#card-number-second-input").type("5678");
-    cy.get("#card-number-third-input").type("9012");
-    cy.get("#card-number-fourth-input").type("3456");
+  it("유저가 카드를 등록할수 있어야 한다.", () => {
+    cy.fillCreditCardNumber("1234", "5678", "9012", "3456");
 
     cy.get('[class*="_cardNumber_"]> :nth-child(1)').contains("1234");
     cy.get('[class*="_cardNumber_"]> :nth-child(2)').contains("5678");
