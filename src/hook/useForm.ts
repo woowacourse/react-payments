@@ -22,7 +22,7 @@ const useForm = () => {
     cardBrand: '',
   });
 
-  const INITIAL_ERROR_STATE = {
+  const [isError, setIsError] = useState({
     first: false,
     second: false,
     third: false,
@@ -31,15 +31,17 @@ const useForm = () => {
     YY: false,
     CVC: false,
     password: false,
-  };
-  const [isError, setIsError] = useState(INITIAL_ERROR_STATE);
+  });
   const { errorMessages, handleErrorMessages } = useErrorMessages();
 
   const handleCardInput = (inputKey: keyof CardInputProps, value: string) => {
     if (!validateCardInputs(inputKey, value)) return;
 
     handleErrorMessages(inputKey, '');
-    setIsError(INITIAL_ERROR_STATE);
+    setIsError((prev) => ({
+      ...prev,
+      [inputKey]: false,
+    }));
 
     setCardInput((prev: CardInputProps) => ({
       ...prev,

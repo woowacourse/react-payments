@@ -27,7 +27,7 @@ const CARD_LABEL_INPUT_CONFIG: CardLabeledInputConfig = {
     id: 'expiration-date',
     label: '유효기간',
     inputKeys: ['MM', 'YY'],
-    placeholder: 'MM/YY',
+    placeholder: '08',
     maxLength: 2,
   },
   CVC: {

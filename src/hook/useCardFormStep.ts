@@ -43,6 +43,7 @@ const useCardFormStep = ({ cardInput, isError }: UseCardFormStepProps) => {
     if (stepIndex === 2 && isExpirationDateComplete) setStepIndex(stepIndex + 1);
     if (stepIndex === 3 && isCVCComplete) setStepIndex(stepIndex + 1);
     if (stepIndex === 4 && isFormAllComplete && isFormValid()) setStepIndex(stepIndex + 1);
+    if (stepIndex === 5 && (!isFormValid() || !isFormAllComplete)) setStepIndex(4);
   };
 
   return { stepIndex, handleStepIndex };

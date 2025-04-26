@@ -1,5 +1,11 @@
 import ERROR_MESSAGE from '../constants/errorMessage';
-import { isNumber, isValidMonthRange, isValidYearRange, isValidLengthYear } from './validateConditions';
+import {
+  isNumber,
+  isValidMonthRange,
+  isValidYearRange,
+  isValidLengthYear,
+  isValidFormatMonth,
+} from './validateConditions';
 
 export const getCardNumberErrorMessage = (cardNumber: string) => {
   if (cardNumber.length === 0) return;
@@ -12,6 +18,12 @@ export const getCardNumberErrorMessage = (cardNumber: string) => {
 
 export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
   if (expirationDate.length === 0) return;
+  if (expirationDate === '0') return;
+
+  if (!isValidFormatMonth(expirationDate)) {
+    return ERROR_MESSAGE.INVALID_EXPIRATION_FORMAT;
+  }
+
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
@@ -25,6 +37,7 @@ export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
 export const getCardExpirationYYErrorMessage = (expirationDate: string) => {
   if (expirationDate.length === 0) return;
   if (!isValidLengthYear(expirationDate)) return;
+
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }

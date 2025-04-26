@@ -20,3 +20,7 @@ export const isValidMonthRange = (expirationDate: string) => {
 export const isValidLengthYear = (expirationDate: string) => {
   return expirationDate.length === 2;
 };
+
+export const isValidFormatMonth = (expirationDate: string) => {
+  return expirationDate.startsWith('0') || expirationDate.startsWith('1');
+};
