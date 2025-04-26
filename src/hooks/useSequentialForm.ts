@@ -12,7 +12,7 @@ const formSequence = [
   CARD_FORM_TYPE.password,
 ];
 
-const initialActiveState = {
+const initialVisibleState = {
   [CARD_FORM_TYPE.cardNumbers]: true,
   [CARD_FORM_TYPE.cardCompany]: false,
   [CARD_FORM_TYPE.expirationPeriod]: false,
@@ -29,9 +29,9 @@ const initialFilledState = {
 };
 
 export default function useSequentialForm() {
-  const [activeFields, setActiveFields] =
-    useState<Record<CardFormType, boolean>>(initialActiveState);
-  const [currentActiveField, setCurrentActiveField] = useState<CardFormType>(
+  const [visibleFields, setVisibleFields] =
+    useState<Record<CardFormType, boolean>>(initialVisibleState);
+  const [currentField, setCurrentField] = useState<CardFormType>(
     CARD_FORM_TYPE.cardNumbers
   );
   const filledState = useRef(initialFilledState);
@@ -39,8 +39,8 @@ export default function useSequentialForm() {
   const { hasErrorByType } = useCardValidation();
   const { isFieldFilled } = useCard();
 
-  const checkFieldComplete = (isFieldComplete: boolean) => {
-    switch (currentActiveField) {
+  const updateFieldCompletionState = (isFieldComplete: boolean): boolean => {
+    switch (currentField) {
       case CARD_FORM_TYPE.cardNumbers:
         if (
           filledState.current[CARD_FORM_TYPE.cardNumbers] !== isFieldComplete
@@ -84,32 +84,30 @@ export default function useSequentialForm() {
     }
   };
 
-  const activeNextField = () => {
-    const currentIndex = formSequence.indexOf(currentActiveField);
+  const showNextField = () => {
+    const currentIndex = formSequence.indexOf(currentField);
     if (currentIndex < formSequence.length - 1) {
       const nextField = formSequence[currentIndex + 1];
 
-      setActiveFields((prev) => ({
+      setVisibleFields((prev) => ({
         ...prev,
         [nextField]: true,
       }));
 
-      setCurrentActiveField(nextField);
+      setCurrentField(nextField);
     }
   };
 
   useEffect(() => {
     const isFieldComplete =
-      isFieldFilled(currentActiveField) && !hasErrorByType(currentActiveField);
+      isFieldFilled(currentField) && !hasErrorByType(currentField);
 
-    const isStateChanged = checkFieldComplete(isFieldComplete);
+    const isStateChanged = updateFieldCompletionState(isFieldComplete);
 
-    if (isStateChanged && isFieldComplete) activeNextField();
-  }, [currentActiveField, isFieldFilled, hasErrorByType]);
+    if (isStateChanged && isFieldComplete) showNextField();
+  }, [currentField, isFieldFilled, hasErrorByType]);
 
-  const shouldShowField = (type: CardFormType): boolean => {
-    return activeFields[type];
-  };
+  const shouldShowField = (type: CardFormType): boolean => visibleFields[type];
 
   return shouldShowField;
 }
