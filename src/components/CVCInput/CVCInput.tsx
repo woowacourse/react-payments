@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
 import InputContainer from '../InputContainer/InputContainer';
-import { validateCVC } from '../../domain/validate';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { useCVCValidation } from '../../hooks/useCVCValidation';
 
 type CVCInputProps = {
   CVC: string;
@@ -10,25 +9,12 @@ type CVCInputProps = {
 };
 
 const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
-  const [helperText, setHelperText] = useState('');
-  const inputRef = useRef<HTMLElement | null>(null);
+  const [isErrors, errorMessage, validate] = useCVCValidation();
 
   const updateCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    try {
-      setCVC(value);
-      if (value.length === 0) {
-        setHelperText('');
-        return;
-      }
-      validateCVC(e.target.value, 3);
-      setHelperText('');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setHelperText(error.message);
-        inputRef.current?.focus();
-      }
-    }
+    setCVC(value);
+    validate(e.target.value);
   };
 
   return (
@@ -40,15 +26,12 @@ const CVCInput = ({ CVC, setCVC }: CVCInputProps) => {
           placeholder="123"
           value={CVC}
           onChange={updateCVC}
-          ref={(element) => {
-            inputRef.current = element;
-          }}
-          className={`input ${helperText !== '' && 'errorInput'}`}
+          className={`input ${isErrors ? 'errorInput' : ''}`}
           maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
         />
       </div>
       <p className="helperText" data-testid="helper-text">
-        {helperText}
+        {errorMessage}
       </p>
     </InputContainer>
   );
