@@ -1,11 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import './styles/index.css';
 import styles from './App.module.css';
 import CardNumberSection from './components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
 import CardPreview from './components/CardPreview/CardPreview';
 import CvcSection from './components/CvcSection/CvcSection';
-import { CardCompany, CardLogo } from './types/card';
+import { CardLogo } from './types/card';
 import CardCompanySection from './components/CardCompanySection/CardCompanySection';
 import CardPasswordSection from './components/CardPasswordSection/CardPasswordSection';
 import { useCardNumberInput } from './hooks/useCardNumberInput';
@@ -13,10 +13,11 @@ import { useCardExpirationInput } from './hooks/useCardExpirationInput';
 import { useCvcInput } from './hooks/useCvcInput';
 import { handleCardLogoChange } from './utils/cardLogoUtils.ts';
 import { useCardPasswordInput } from './hooks/useCardPasswordInput.ts';
+import { useCardCompanySelect } from './hooks/useCardCompanySelect.ts';
 
 export default function App() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
-  const [cardCompany, setCardCompany] = useState<CardCompany>('');
+  const { cardCompany, handleSelectChange } = useCardCompanySelect();
   const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
   const { cvc, handleCvcChange, cvcError } = useCvcInput();
   const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();
@@ -35,7 +36,7 @@ export default function App() {
         handleCardNumberChange={handleCardNumberChange}
         cardNumberError={cardNumberError}
       />
-      <CardCompanySection cardCompany={cardCompany} setCardCompany={setCardCompany} />
+      <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
       <CardExpirationSection
         cardExpiration={cardExpiration}
         handleCardExpirationChange={handleCardExpirationChange}

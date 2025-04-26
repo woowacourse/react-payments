@@ -1,19 +1,14 @@
 import styles from './CardCompanySection.module.css';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
-import { Dispatch, SetStateAction } from 'react';
 import { CardCompany } from '../../types/card';
 
 type Props = {
   cardCompany: CardCompany;
-  setCardCompany: Dispatch<SetStateAction<CardCompany>>;
+  handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-export default function CardCompanySection({ cardCompany, setCardCompany }: Props) {
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCardCompany(e.target.value as CardCompany);
-  };
-
+export default function CardCompanySection({ cardCompany, handleSelectChange }: Props) {
   return (
     <div className={styles.container}>
       <FieldGroup.TitleWrapper>
