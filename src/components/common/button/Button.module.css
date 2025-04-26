@@ -1,0 +1,8 @@
+.button {
+  height: 52px;
+}
+
+.buttonPrimary {
+  background-color: var(--black);
+  color: var(--white);
+}
