@@ -21,3 +21,5 @@ export type setCardInformationType = {
   company: React.Dispatch<React.SetStateAction<CompanyType>>;
 };
 export type CardType = "visa" | "master" | "none";
+
+export type isStateCompletesType = Record<keyof CardInformationType, boolean>;

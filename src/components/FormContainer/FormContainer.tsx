@@ -1,17 +1,13 @@
 import { css } from "@emotion/react";
 import { FormContainerProps } from "../../types/componentPropsType";
 import formUIControllerData from "../../constants/formUIControllerData";
-import { useState } from "react";
 import FormSectionSelect from "../FormSection/FormSectionSelect";
 import FormSectionInput from "../FormSection/FormSectionInput";
 import { CardInformationType } from "../../types/CardInformationType";
 
-const FormContainer = ({ cardInformationState, setCardInformationState, validation }: FormContainerProps) => {
-  const [step, setStep] = useState(0);
-
+const FormContainer = ({ cardInformationState, setCardInformationState, validation, step }: FormContainerProps) => {
   return (
     <div css={FormContainerStyle}>
-      <button onClick={() => setStep(step + 1)}></button>
       {formUIControllerData
         .slice(0, step + 1)
         .reverse()

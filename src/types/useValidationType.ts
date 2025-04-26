@@ -9,7 +9,7 @@ export type useEachValidationType = {
 
 export type useValidationType = {
   validation: validationFieldType;
-  isCompletes: isCompletesFieldType;
+  isErrorCompletes: isErrorCompletesType;
 };
 
 // 🔥 새로 추가
@@ -17,6 +17,6 @@ export type validationFieldType = {
   [K in Exclude<cardInformationKey, "company">]: Exclude<useEachValidationType, "isComplete">;
 };
 
-export type isCompletesFieldType = {
+export type isErrorCompletesType = {
   [K in Exclude<cardInformationKey, "company">]: Extract<useEachValidationType, "isComplete">;
 };

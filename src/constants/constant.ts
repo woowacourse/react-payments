@@ -12,6 +12,8 @@ export const MIN_YEAR = 25;
 
 export const NUMBER_ONLY_REGEX = /^[0-9]*$/;
 
+export const STEP_ORDER = ["uniqueNumber", "company", "expirationDate", "cvcNumber", "password"] as const;
+
 export const ERROR_MESSAGE = {
   IS_NOT_NUMBER: "숫자값만 입력해주세요.",
   MM_VALID: "유효한 월(1~12)만 입력해주세요.",

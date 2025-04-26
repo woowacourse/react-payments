@@ -3,7 +3,7 @@ import useExpirationDate from "./useExpirationDate";
 import useCvcNumber from "./useCvcNumber";
 import usePassword from "./usePassword";
 import useCompany from "./useCompany";
-import { CardInformationType, setCardInformationType } from "../../types/CardInformationType";
+import { CardInformationType, isStateCompletesType, setCardInformationType } from "../../types/CardInformationType";
 
 const useCardInformation = () => {
   const { uniqueNumber, setUniqueNumber, isUniqueNumberComplete } = useUniqueNumber();
@@ -28,7 +28,7 @@ const useCardInformation = () => {
     company: setCompany,
   };
 
-  const isStateCompletes = {
+  const isStateCompletes: isStateCompletesType = {
     uniqueNumber: isUniqueNumberComplete,
     expirationDate: isExpirationDateComplete,
     cvcNumber: isCvcNumberComplete,

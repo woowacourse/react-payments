@@ -9,6 +9,8 @@ export type FormContainerProps = {
   setCardInformationState: setCardInformationType;
   /** 입력값에 대한 유효성 검사 훅을 담은 배열 */
   validation: validationFieldType;
+  /** 단계별 step */
+  step: number;
 };
 
 export type InputFormSectionProps<T extends Exclude<keyof CardInformationType, "company">> = {

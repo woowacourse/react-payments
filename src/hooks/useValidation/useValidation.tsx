@@ -1,7 +1,7 @@
 import useExpirationDateValidation from "./useExpirationDateValidation";
 import useCvcNumberValidation from "./useCvcNumberValidation";
 import useUniqueNumberValidation from "./useUniqueNumberValidation";
-import { isCompletesFieldType, useValidationType, validationFieldType } from "../../types/useValidationType";
+import { isErrorCompletesType, useValidationType, validationFieldType } from "../../types/useValidationType";
 import usePasswordValidation from "./usePasswordValidation";
 
 const useValidation = (): useValidationType => {
@@ -23,13 +23,13 @@ const useValidation = (): useValidationType => {
     }),
   ) as validationFieldType;
 
-  const isCompletes = Object.fromEntries(
+  const isErrorCompletes = Object.fromEntries(
     Object.entries(validations).map(([key, { isComplete }]) => [key, isComplete]),
-  ) as isCompletesFieldType;
+  ) as isErrorCompletesType;
 
   return {
     validation,
-    isCompletes,
+    isErrorCompletes,
   };
 };
 
