@@ -1,17 +1,23 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 import {
-  CardNumberInfo,
+  NumberInfo,
   CVCNumberInfo,
   ExpirationPeriodInfo,
+  PasswordInfo,
 } from '../../types/models';
 
 interface InputTextsProps {
   label: string;
-  dataModels: CardNumberInfo[] | ExpirationPeriodInfo[] | CVCNumberInfo;
+  dataModels:
+    | NumberInfo[]
+    | ExpirationPeriodInfo[]
+    | CVCNumberInfo
+    | PasswordInfo;
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  type?: string;
 }
 
 const InputTexts = ({
@@ -20,6 +26,7 @@ const InputTexts = ({
   onChange,
   onFocus,
   onBlur,
+  type = 'text',
 }: InputTextsProps) => {
   const onChangeAt = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +43,7 @@ const InputTexts = ({
           dataModels.map((data, index) => (
             <Input
               key={index}
-              type="text"
+              type={type}
               placeholder={data.placeholder}
               maxLength={data.numberSegmentLength}
               value={data.number}
@@ -48,7 +55,7 @@ const InputTexts = ({
           ))
         ) : (
           <Input
-            type="text"
+            type={type}
             placeholder={dataModels.placeholder}
             maxLength={dataModels.numberSegmentLength}
             value={dataModels.number}

@@ -2,9 +2,9 @@ import { theme } from '../../styles/theme';
 import PreviewView from './PreviewView';
 
 interface PreviewProps {
-  cardNumbers: string[];
+  numbers: string[];
   period: string[];
-  cardBrand: string;
+  brand: string;
   isPeriodSeparatorShowing: boolean;
 }
 
@@ -15,27 +15,27 @@ const MASTERCARD_CARD_PREFIXES = {
 } as const;
 
 const Preview = ({
-  cardNumbers,
+  numbers,
   period,
-  cardBrand,
+  brand,
   isPeriodSeparatorShowing,
 }: PreviewProps) => {
   const getCardBrandColor = () => {
     type ColorKey = keyof typeof theme.colors.cardBrandColors;
-    const key = cardBrand as ColorKey;
+    const key = brand as ColorKey;
     return (
       theme.colors.cardBrandColors[key] || theme.colors.cardBrandColors.default
     );
   };
 
   const getCardMethodSrc = () => {
-    if (cardNumbers[0].startsWith(VISA_CARD_PREFIXES)) {
+    if (numbers[0].startsWith(VISA_CARD_PREFIXES)) {
       return './images/visa.svg';
     }
 
     if (
-      Number(cardNumbers[0].slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
-      Number(cardNumbers[0].slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
+      Number(numbers[0].slice(0, 2)) >= MASTERCARD_CARD_PREFIXES.MIN &&
+      Number(numbers[0].slice(0, 2)) <= MASTERCARD_CARD_PREFIXES.MAX
     ) {
       return './images/master.svg';
     }
@@ -45,7 +45,7 @@ const Preview = ({
 
   return (
     <PreviewView
-      cardNumbers={cardNumbers}
+      numbers={numbers}
       period={period}
       cardBrandColor={getCardBrandColor()}
       isPeriodSeparatorShowing={isPeriodSeparatorShowing}

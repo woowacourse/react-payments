@@ -1,17 +1,17 @@
 import { useCallback, useState } from 'react';
 import styled from '@emotion/styled';
-import CardNumberInputs from './components/CardNumberInputs';
+import NumberInputs from './components/NumberInputs';
 import ExpirationPeriodInputs from './components/ExpirationPeriodInputs';
 import CVCNumberInput from './components/CVCNumberInput';
 import Preview from './components/Preview';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
-import CardBrandSelect from './components/CardBrandSelect';
+import BrandSelect from './components/BrandSelect';
 
 const App = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const [numbers, setNumbers] = useState<string[]>(['', '', '', '']);
   const [period, setPeriod] = useState<string[]>(['', '']);
-  const [cardBrand, setCardBrand] = useState<string>('');
+  const [brand, setBrand] = useState<string>('');
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
 
@@ -23,25 +23,25 @@ const App = () => {
     setIsPeriodSeparatorShowing(period.some((p) => p !== ''));
   }, []);
 
-  const handleCardNumbersChange = useCallback((newCardNumbers: string[]) => {
-    setCardNumbers(newCardNumbers);
+  const handleNumbersChange = useCallback((newNumbers: string[]) => {
+    setNumbers(newNumbers);
   }, []);
 
   const handlePeriodChange = useCallback((newPeriod: string[]) => {
     setPeriod(newPeriod);
   }, []);
 
-  const handleCardBrandChange = useCallback((newCardBrand: string) => {
-    setCardBrand(newCardBrand);
+  const handleBrandChange = useCallback((newBrand: string) => {
+    setBrand(newBrand);
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <Main>
         <Preview
-          cardNumbers={cardNumbers}
+          numbers={numbers}
           period={period}
-          cardBrand={cardBrand}
+          brand={brand}
           isPeriodSeparatorShowing={isPeriodSeparatorShowing}
         />
 
@@ -52,13 +52,10 @@ const App = () => {
           showPeriodSeparator={showPeriodSeparator}
           hidePeriodSeparator={hidePeriodSeparator}
         />
-        <CardBrandSelect
-          cardBrand={cardBrand}
-          handleCardBrandChange={handleCardBrandChange}
-        />
-        <CardNumberInputs
-          cardNumbers={cardNumbers}
-          handleCardNumbersChange={handleCardNumbersChange}
+        <BrandSelect brand={brand} handleBrandChange={handleBrandChange} />
+        <NumberInputs
+          numbers={numbers}
+          handleNumbersChange={handleNumbersChange}
         />
       </Main>
     </ThemeProvider>

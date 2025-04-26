@@ -1,26 +1,26 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputSelect from '../common/InputSelect';
-import { Container, ErrorMessage } from '../common/styled';
+import { Container, ErrorMessage } from '../common/Styled';
 
-interface CardBrandSelectViewProps {
-  cardBrandInfo: string;
+interface BrandSelectViewProps {
+  brand: string;
   handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const CardBrandSelectView = ({
-  cardBrandInfo,
+const BrandSelectView = ({
+  brand,
   handleSelectChange,
-}: CardBrandSelectViewProps) => {
+}: BrandSelectViewProps) => {
   return (
-    <Container data-testid="cardbrand-component">
+    <Container data-testid="brand-component">
       <InputAreaHeader
         title="카드사를 선택해 주세요"
         caption="현재 국내 카드사만 가능합니다."
       />
-      <InputSelect value={cardBrandInfo} onChange={handleSelectChange} />
+      <InputSelect value={brand} onChange={handleSelectChange} />
       <ErrorMessage></ErrorMessage>
     </Container>
   );
 };
 
-export default CardBrandSelectView;
+export default BrandSelectView;

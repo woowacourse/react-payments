@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 
 interface PreviewViewProps {
-  cardNumbers: string[];
+  numbers: string[];
   period: string[];
   cardBrandColor: string;
   isPeriodSeparatorShowing: boolean;
   cardMethodSrc: string | null;
 }
 
-const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
+const NUMBER_VISIBLE_THRESHOLD = 2;
 const SEPARATOR = '/';
 
 const PreviewView = ({
-  cardNumbers,
+  numbers,
   period,
   cardBrandColor,
   isPeriodSeparatorShowing,
@@ -30,9 +30,9 @@ const PreviewView = ({
           />
         )}
         <CardNumberArea>
-          {cardNumbers.map((number, index) => (
+          {numbers.map((number, index) => (
             <CardNumber key={index}>
-              {index < CARD_NUMBER_VISIBLE_THRESHOLD
+              {index < NUMBER_VISIBLE_THRESHOLD
                 ? number
                 : '•'.repeat(number.length)}
             </CardNumber>

@@ -1,4 +1,4 @@
-export interface CardNumberInfo {
+export interface NumberInfo {
   number: string;
   isError: boolean;
   placeholder: string;

@@ -1,27 +1,24 @@
 import { useCallback, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import CardNumberInputs from '../components/CardNumberInputs';
+import NumberInputs from '../components/NumberInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
 
-const meta: Meta<typeof CardNumberInputs> = {
-  title: 'Components/CardNumberInputs Container',
-  component: CardNumberInputs,
+const meta: Meta<typeof NumberInputs> = {
+  title: 'Components/NumberInputs Container',
+  component: NumberInputs,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof CardNumberInputs>;
+type Story = StoryObj<typeof NumberInputs>;
 
 const Wrapper = () => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const handleCardNumbersChange = useCallback((newCardNumbers: string[]) => {
-    setCardNumbers(newCardNumbers);
+  const [numbers, setNumbers] = useState<string[]>(['', '', '', '']);
+  const handleNumbersChange = useCallback((newNumbers: string[]) => {
+    setNumbers(newNumbers);
   }, []);
   return (
-    <CardNumberInputs
-      cardNumbers={cardNumbers}
-      handleCardNumbersChange={handleCardNumbersChange}
-    />
+    <NumberInputs numbers={numbers} handleNumbersChange={handleNumbersChange} />
   );
 };
 
@@ -29,7 +26,7 @@ export const ValidInput: Story = {
   render: () => <Wrapper />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const container = await canvas.findByTestId('cardnumbers-component');
+    const container = await canvas.findByTestId('numbers-component');
     const inputs = container.querySelectorAll('input');
     for (let i = 0; i < inputs.length; i++) {
       await userEvent.clear(inputs[i]);
@@ -46,7 +43,7 @@ export const InvalidInput: Story = {
   render: () => <Wrapper />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const container = await canvas.findByTestId('cardnumbers-component');
+    const container = await canvas.findByTestId('numbers-component');
     const firstInput = container.querySelectorAll('input')[0];
     await userEvent.clear(firstInput);
     await userEvent.type(firstInput, 'abcd');
@@ -62,7 +59,7 @@ export const MixedInput: Story = {
   render: () => <Wrapper />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const container = await canvas.findByTestId('cardnumbers-component');
+    const container = await canvas.findByTestId('numbers-component');
     const inputs = container.querySelectorAll('input');
     await userEvent.clear(inputs[0]);
     await userEvent.type(inputs[0], '1234');
