@@ -1,10 +1,10 @@
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
-import { ExpirationPeriodInfo } from '../../types/models';
+import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 
 interface ExpirationPeriodInputsViewProps {
-  expiryDateInfo: ExpirationPeriodInfo[];
+  expiryDateInfo: InputFieldState[];
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -20,7 +20,7 @@ const ExpirationPeriodInputsView = ({
   onBlur,
 }: ExpirationPeriodInputsViewProps) => {
   const errorMessage =
-    expiryDateInfo.find((info) => info.isError)?.errorMessage ?? '';
+    expiryDateInfo.find((info) => info.hasError)?.errorMessage ?? '';
 
   return (
     <Container data-testid="expiration-component">
