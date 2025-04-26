@@ -33,9 +33,21 @@ const CardNumbers = ({
   const keyMap: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
 
   useEffect(() => {
-    const hasError = errors.some((error) => error === true);
+    const hasError =
+      errors.some((error) => error === true) ||
+      !isCardNumbersLengthValid(cardNumbers);
+
     setCardNumbersError(hasError);
-  }, [errors]);
+  }, [errors, cardNumbers]);
+
+  const isCardNumbersLengthValid = (cardNumbers: CardNumber) => {
+    return (
+      cardNumbers.first.length === 4 &&
+      cardNumbers.second.length === 4 &&
+      cardNumbers.third.length === 4 &&
+      cardNumbers.fourth.length === 4
+    );
+  };
 
   const updateErrors = (
     prev: boolean[],
