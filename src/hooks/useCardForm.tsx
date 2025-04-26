@@ -17,6 +17,7 @@ const useCardForm = () => {
     cardValidityPeriod,
     onChangeCardValidityPeriod,
     errorMessage: cardValidityPeriodErrorMessage,
+    setInputRef: setCardValidityPeriodInputRef,
   } = useCardValidityPeriod();
 
   const {
@@ -116,6 +117,7 @@ const useCardForm = () => {
     },
     setInputRef: {
       setCardNumberInputRef,
+      setCardValidityPeriodInputRef,
     },
   };
 };

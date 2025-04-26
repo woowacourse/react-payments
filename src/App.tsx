@@ -52,7 +52,7 @@ function App() {
 
   const { canSubmit, step, STEP_NAME } = status;
 
-  const { setCardNumberInputRef } = setInputRef;
+  const { setCardNumberInputRef, setCardValidityPeriodInputRef } = setInputRef;
 
   return (
     <AppLayout>
@@ -105,6 +105,7 @@ function App() {
               year: Boolean(cardValidityPeriodErrorMessage.year),
             }}
             onChange={onChangeCardValidityPeriod}
+            setCardValidityPeriodInputRef={setCardValidityPeriodInputRef}
           />
         </CardInputSection>
         <CardInputSection

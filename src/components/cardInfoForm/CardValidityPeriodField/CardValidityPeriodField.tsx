@@ -18,12 +18,17 @@ interface CardValidityPeriodFieldProps {
     e: React.ChangeEvent<HTMLInputElement>,
     index: 'month' | 'year',
   ) => void;
+  setCardValidityPeriodInputRef: (
+    el: HTMLInputElement | null,
+    index: number,
+  ) => void;
 }
 
 function CardValidityPeriodField({
   cardValidityPeriod,
   isError,
   onChange,
+  setCardValidityPeriodInputRef,
 }: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
   const { month: isErrorMonth, year: isErrorYear } = isError;
@@ -45,6 +50,8 @@ function CardValidityPeriodField({
           placeholder="MM"
           min={0}
           max={99}
+          ref={(el) => setCardValidityPeriodInputRef(el, 0)}
+          autoFocus={month.length === 0 && !isErrorMonth}
         />
         <Input
           isError={isErrorYear}
@@ -57,6 +64,7 @@ function CardValidityPeriodField({
           placeholder="YY"
           min={0}
           max={99}
+          ref={(el) => setCardValidityPeriodInputRef(el, 1)}
         />
       </InputWrapper>
     </div>

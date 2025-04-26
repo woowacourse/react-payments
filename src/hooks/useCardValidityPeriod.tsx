@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { validateCardValidityPeriod } from '../validations/cardValidityPeriod';
 import { PARSE_RULE } from '../constants/cardValidityPeriod';
 
@@ -12,6 +12,20 @@ function useCardValidityPeriod() {
     month: '',
     year: '',
   });
+
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const setInputRef = (el: HTMLInputElement | null, index: number) => {
+    if (el) {
+      inputRefs.current[index] = el;
+    }
+  };
+
+  const focusNextInput = (index: number) => {
+    if (index < Object.values(cardValidityPeriod).length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
 
   const onChangeCardValidityPeriod = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -42,12 +56,17 @@ function useCardValidityPeriod() {
     });
 
     setErrorMessage(newErrorMessage);
+
+    if (nextMonth !== '' && newErrorMessage.month === '') {
+      focusNextInput(0);
+    }
   };
 
   return {
     cardValidityPeriod,
     onChangeCardValidityPeriod,
     errorMessage,
+    setInputRef,
   };
 }
 
