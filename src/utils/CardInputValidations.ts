@@ -23,7 +23,7 @@ export function validateCvcLengthError(value: string) {
   }
 }
 
-export function validatePasswordLengthError(value: string) {
+export function validateCardPasswordLengthError(value: string) {
   if (value !== '' && value.length !== 2) {
     return '비밀번호는 2자리여야 합니다.';
   }
