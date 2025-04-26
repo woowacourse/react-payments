@@ -6,13 +6,14 @@ import {
   CompletionTitleStyles,
   RegisterCompleteStyles,
 } from "./RegisterComplete.styled";
+import { basePath } from "../../constants/router";
 
 export default function RegisterComplete() {
   const { state } = useLocation();
   const { cardFirstSegment, cardName } = state || {};
 
   const handleConfirm = () => {
-    window.location.href = "/";
+    window.location.href = `${window.location.origin}${basePath}`;
   };
 
   return (

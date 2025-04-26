@@ -7,9 +7,7 @@ import CardForm from "./pages/CardForm/CardForm";
 import { GlobalStyles } from "./styles/Global.styled";
 import { CardProvider } from "./contexts/CardContext";
 import { CardValidationProvider } from "./contexts/CardValidationContext";
-
-const isProduction = import.meta.env.PROD;
-const basePath = isProduction ? "/react-payments" : "";
+import { basePath } from "./constants/router";
 
 function Layout() {
   return (
