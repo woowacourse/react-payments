@@ -51,4 +51,4 @@ function isValidExpirationSegment(
   return { valid: true, errorMessage: '' };
 }
 
-export { isNumeric, isValidSegment, isValidExpirationSegment };
+export { isNumeric, isValidSegment, isValidExpirationSegment, ERROR_MESSAGE };

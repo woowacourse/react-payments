@@ -2,13 +2,12 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { PasswordInfo } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
+import { ERROR_MESSAGE } from '../../utils/cardValidation';
 
 interface PasswordInputViewProps {
   passwordInfo: PasswordInfo;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
-const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const PasswordInputView = ({
   passwordInfo,
@@ -26,7 +25,9 @@ const PasswordInputView = ({
         label="비밀번호 앞 2자리"
         onChange={handleInputChange}
       />
-      <ErrorMessage>{passwordInfo.isError ? ERROR_MESSAGE : ''}</ErrorMessage>
+      <ErrorMessage>
+        {passwordInfo.isError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
+      </ErrorMessage>
     </Container>
   );
 };

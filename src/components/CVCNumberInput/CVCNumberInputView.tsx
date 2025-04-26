@@ -2,13 +2,12 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { CVCNumberInfo } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
+import { ERROR_MESSAGE } from '../../utils/cardValidation';
 
 interface CVCNumberInputViewProps {
   cvcNumberInfo: CVCNumberInfo;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
-const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const CVCNumberInputView = ({
   cvcNumberInfo,
@@ -22,7 +21,9 @@ const CVCNumberInputView = ({
         label="CVC"
         onChange={handleInputChange}
       />
-      <ErrorMessage>{cvcNumberInfo.isError ? ERROR_MESSAGE : ''}</ErrorMessage>
+      <ErrorMessage>
+        {cvcNumberInfo.isError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
+      </ErrorMessage>
     </Container>
   );
 };

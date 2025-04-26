@@ -2,6 +2,7 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { NumberInfo } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
+import { ERROR_MESSAGE } from '../../utils/cardValidation';
 
 interface NumberInputsViewProps {
   numbersInfo: NumberInfo[];
@@ -10,8 +11,6 @@ interface NumberInputsViewProps {
     index: number
   ) => void;
 }
-
-const ERROR_MESSAGE = '숫자만 입력 가능합니다.';
 
 const NumberInputsView = ({
   numbersInfo,
@@ -29,7 +28,9 @@ const NumberInputsView = ({
         onChange={handleInputChange}
       />
       <ErrorMessage>
-        {numbersInfo.some((data) => data.isError) ? ERROR_MESSAGE : ''}
+        {numbersInfo.some((data) => data.isError)
+          ? ERROR_MESSAGE.INVALID_CHARACTER
+          : ''}
       </ErrorMessage>
     </Container>
   );
