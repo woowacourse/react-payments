@@ -3,13 +3,13 @@ import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { ExpirationKey, ExpirationType } from '../../types';
 
-type Props = {
+type CardExpirationSectionProps = {
   expiration: ExpirationType;
   onExpirationChange: (field: ExpirationKey, value: string) => void;
   ref: { month: React.RefObject<HTMLInputElement | null>; year: React.RefObject<HTMLInputElement | null> };
 };
 
-export default function CardExpirationSection({ expiration, onExpirationChange, ref }: Props) {
+export default function CardExpirationSection({ expiration, onExpirationChange, ref }: CardExpirationSectionProps) {
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
   return (

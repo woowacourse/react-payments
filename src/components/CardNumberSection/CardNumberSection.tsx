@@ -3,7 +3,7 @@ import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { CardNumberKey, CardNumberType } from '../../types';
 
-type Props = {
+type CardNumberSectionProps = {
   cardNumbers: CardNumberType;
   onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
   inputRefs: {
@@ -15,7 +15,7 @@ type Props = {
   getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
 };
 
-export default function CardNumberSection({ cardNumbers, onCardNumbersChange, inputRefs, getCardNumberErrorMessage }: Props) {
+export default function CardNumberSection({ cardNumbers, onCardNumbersChange, inputRefs, getCardNumberErrorMessage }: CardNumberSectionProps) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
@@ -25,7 +25,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, in
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
         <div className={styles.inputWrapper}>
-          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
+          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey) => (
             <Input
               key={inputKey}
               value={cardNumbers[inputKey].value}

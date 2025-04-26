@@ -2,7 +2,12 @@ import { CARD_COMPANY } from '../../constants';
 import Dropdown2 from '../Dropdown/Dropdown2';
 import { InputSection } from '../InputSection/InputSection';
 
-export default function CardCompanySection({ value, onSelect }: { value: string; onSelect: (value: string) => void }) {
+type CardCompanySectionProps = {
+  value: string;
+  onSelect: (value: string) => void;
+};
+
+export default function CardCompanySection({ value, onSelect }: CardCompanySectionProps) {
   return (
     <div>
       <InputSection.TitleWrapper>

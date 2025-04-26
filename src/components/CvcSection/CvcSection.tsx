@@ -3,12 +3,12 @@ import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
 
-export type CvcSection = {
+export type CvcSectionProps = {
   cvc: CvcType;
   handleCvcChange: (value: string) => void;
 };
 
-export default function CvcSection({ cvc, handleCvcChange }: CvcSection) {
+export default function CvcSection({ cvc, handleCvcChange }: CvcSectionProps) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
