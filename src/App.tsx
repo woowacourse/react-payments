@@ -10,13 +10,14 @@ import CardCompanySection from './components/CardCompanySection/CardCompanySecti
 import CardPasswordSection from './components/CardPasswordSection/CardPasswordSection';
 import { useCardNumberInput } from './hooks/useCardNumberInput';
 import { useCardExpirationInput } from './hooks/useCardExpirationInput';
+import { useCvcInput } from './hooks/useCvcInput';
 import { handleCardLogoChange } from './utils/cardLogoUtils.ts';
 
 export default function App() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
   const [cardCompany, setCardCompany] = useState<CardCompany>('');
   const { expiration, handleExpirationChange, expirationError } = useCardExpirationInput();
-  const [cvc, setCvc] = useState<string>('');
+  const { cvc, handleCvcChange, cvcError } = useCvcInput();
   const [password, setPassword] = useState<string>('');
   const cardLogo = useMemo<CardLogo>(() => handleCardLogoChange(cardNumbers.first), [cardNumbers.first]);
 
@@ -34,7 +35,7 @@ export default function App() {
         handleExpirationChange={handleExpirationChange}
         expirationError={expirationError}
       />
-      <CvcSection cvc={cvc} setCvc={setCvc} />
+      <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
       <CardPasswordSection password={password} setPassword={setPassword} />
     </div>
   );

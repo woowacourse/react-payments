@@ -1,27 +1,14 @@
-import { validateCvcLengthError, validateNumberError } from '../../utils/cardInputValidations';
 import { FieldGroup } from '../common/FieldGroup/FieldGroup';
 import { InputWrapper } from '../common/InputWrapper/InputWrapper';
 import styles from './CvcSection.module.css';
-import { Dispatch, SetStateAction, useState } from 'react';
 
 type Props = {
   cvc: string;
-  setCvc: Dispatch<SetStateAction<string>>;
+  handleCvcChange: (key: string, value: string) => void;
+  cvcError: string;
 };
 
-export default function CvcSection({ cvc, setCvc }: Props) {
-  const [cvcError, setCvcError] = useState<Record<'cvc', string>>({ cvc: '' });
-
-  const handleChange = (key: 'cvc', value: string) => {
-    setCvc(value);
-    const errorMsg = getCvcError(value) || '';
-    setCvcError((prev) => ({ ...prev, [key]: errorMsg }));
-  };
-
-  function getCvcError(value: string): string {
-    return validateNumberError(value) || validateCvcLengthError(value) || '';
-  }
-
+export default function CvcSection({ cvc, handleCvcChange, cvcError }: Props) {
   return (
     <div className={styles.sectionContainer}>
       <FieldGroup.TitleWrapper>
@@ -31,12 +18,12 @@ export default function CvcSection({ cvc, setCvc }: Props) {
         <FieldGroup.Label text="CVC" />
         <InputWrapper<'cvc'>
           fields={[{ key: 'cvc', value: cvc }]}
-          onChange={handleChange}
-          valid={{ cvc: cvcError.cvc === '' }}
+          onChange={handleCvcChange}
+          valid={{ cvc: cvcError === '' }}
           placeholders={{ cvc: '123' }}
           maxLength={3}
         />
-        {cvcError.cvc && <FieldGroup.Error message={cvcError.cvc} />}
+        {cvcError && <FieldGroup.Error message={cvcError} />}
       </div>
     </div>
   );
