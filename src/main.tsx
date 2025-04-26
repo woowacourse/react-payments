@@ -7,7 +7,7 @@ import App from "./App.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.VITE_PUBLIC_URL}>
       <MobileLayout>
         <App />
       </MobileLayout>
