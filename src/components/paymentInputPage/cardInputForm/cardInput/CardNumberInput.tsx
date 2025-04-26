@@ -2,20 +2,15 @@ import { useState } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
 import { validatorUtils } from '../../../../utils/validationUtils';
+import useCard from '../../../../hooks/useCard';
 
 export interface CardNumberInputProps {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
   isValid: boolean[];
   setIsValid: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
-function CardNumberInput({
-  cardNumbers,
-  setCardNumbers,
-  isValid,
-  setIsValid,
-}: CardNumberInputProps) {
+function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
+  const { cardNumbers, setCardNumbers } = useCard();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {

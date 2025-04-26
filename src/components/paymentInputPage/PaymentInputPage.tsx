@@ -9,8 +9,6 @@ export interface ExpirationDateType {
 }
 
 function PaymentInputPage() {
-  const [cardIssuer, setCardIssuer] = useState('');
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
     month: '',
     year: '',
@@ -20,18 +18,10 @@ function PaymentInputPage() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <CardPreview
-          cardIssuer={cardIssuer}
-          cardNumbers={cardNumbers}
-          expirationDate={expirationDate}
-        />
+        <CardPreview expirationDate={expirationDate} />
         <CardInputForm
           cardCVC={cardCVC}
-          cardIssuer={cardIssuer}
-          cardNumbers={cardNumbers}
           expirationDate={expirationDate}
-          setCardIssuer={setCardIssuer}
-          setCardNumbers={setCardNumbers}
           setExpirationDate={setExpirationDate}
           setCardCVC={setCardCVC}
         />

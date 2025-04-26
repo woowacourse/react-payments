@@ -1,3 +1,4 @@
+import useCard from '../../../../hooks/useCard';
 import InputForm from '../../../common/inputForm/InputForm';
 import Select from '../../../common/select/Select';
 
@@ -12,13 +13,9 @@ export const ISSUER_LIST = new Map([
   ['국민카드', 'kb'],
 ]);
 
-function CardIssuerSelector({
-  cardIssuer,
-  setCardIssuer,
-}: {
-  cardIssuer: string;
-  setCardIssuer: React.Dispatch<React.SetStateAction<string>>;
-}) {
+function CardIssuerSelector() {
+  const { cardIssuer, setCardIssuer } = useCard();
+
   return (
     <>
       <InputForm

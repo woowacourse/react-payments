@@ -8,23 +8,15 @@ import { useState } from 'react';
 import CardSubmitButton from './CardSubmitButton';
 
 interface CardInputFormProps {
-  cardIssuer: string;
-  cardNumbers: string[];
   expirationDate: ExpirationDateType;
   cardCVC: string;
-  setCardIssuer: React.Dispatch<React.SetStateAction<string>>;
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
   setCardCVC: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function CardInputForm({
-  cardIssuer,
-  cardNumbers,
   expirationDate,
   cardCVC,
-  setCardIssuer,
-  setCardNumbers,
   setExpirationDate,
   setCardCVC,
 }: CardInputFormProps) {
@@ -48,13 +40,8 @@ function CardInputForm({
 
   return (
     <div className={styles.cardInputForm}>
-      <CardIssuerSelector
-        cardIssuer={cardIssuer}
-        setCardIssuer={setCardIssuer}
-      />
+      <CardIssuerSelector />
       <CardNumberInput
-        cardNumbers={cardNumbers}
-        setCardNumbers={setCardNumbers}
         isValid={isCardNumberValid}
         setIsValid={setCardNumberIsValid}
       />
