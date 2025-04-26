@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview, { BRAND_IMAGE } from './CardPreview';
 import { CardContext } from '../../../contexts/CardContext';
 import { expect, within } from '@storybook/test';
-import styles from './CardPreview.module.css';
 
 const meta = {
   title: 'CardPreview',

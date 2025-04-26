@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardInputForm from './CardInputForm';
-import { expect, userEvent, within } from '@storybook/test';
+import { userEvent, within } from '@storybook/test';
 import { CardProvider } from '../../../contexts/CardContext';
-import styles from '../../common/inputForm/input/Input.module.css';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const meta = {
   title: 'CardInputForm',
