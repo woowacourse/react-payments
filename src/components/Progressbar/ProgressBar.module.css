@@ -84,6 +84,10 @@
   background-color: #ef4444;
 }
 
+.stepBarFill.completed {
+  width: 100%;
+}
+
 .stepLabel {
   font-size: 12px;
   color: #888;
