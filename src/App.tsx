@@ -14,6 +14,7 @@ import { useCvcInput } from './hooks/useCvcInput';
 import { handleCardLogoChange } from './utils/cardLogoUtils.ts';
 import { useCardPasswordInput } from './hooks/useCardPasswordInput.ts';
 import { useCardCompanySelect } from './hooks/useCardCompanySelect.ts';
+import Button from './components/common/Button/Button.tsx';
 
 export default function App() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
@@ -52,11 +53,13 @@ export default function App() {
       {Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError && (
         <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
       )}
+
       <CardNumberSection
         cardNumbers={cardNumbers}
         handleCardNumberChange={handleCardNumberChange}
         cardNumberError={cardNumberError}
       />
+      {cardPassword && !cardPasswordError && <Button text="확인" height="52px" />}
     </div>
   );
 }
