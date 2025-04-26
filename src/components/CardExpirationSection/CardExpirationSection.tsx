@@ -3,7 +3,7 @@ import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { ExpirationKey, ExpirationType } from '../../types';
 
-type CardExpirationSectionProps = {
+export type CardExpirationSectionProps = {
   expiration: ExpirationType;
   onExpirationChange: (field: ExpirationKey, value: string) => void;
   ref: { month: React.RefObject<HTMLInputElement | null>; year: React.RefObject<HTMLInputElement | null> };

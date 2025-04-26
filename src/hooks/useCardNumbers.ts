@@ -14,7 +14,7 @@ const useCardNumbers = () => {
     fourth: useRef<HTMLInputElement>(null)
   };
 
-  const handleCardNumberChange = (field: keyof CardNumberType, value: string) => {
+  const handleCardNumbersChange = (field: keyof CardNumberType, value: string) => {
     if (value !== '' && !isNumber(value)) {
       return;
     }
@@ -46,7 +46,7 @@ const useCardNumbers = () => {
     return '';
   };
 
-  return { cardInputRefs, handleCardNumberChange, cardNumbers, getCardNumberErrorMessage };
+  return { cardInputRefs, handleCardNumbersChange, cardNumbers, getCardNumberErrorMessage };
 };
 
 export default useCardNumbers;

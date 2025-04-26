@@ -2,7 +2,7 @@ import { CARD_COMPANY } from '../../constants';
 import Dropdown2 from '../Dropdown/Dropdown2';
 import { InputSection } from '../InputSection/InputSection';
 
-type CardCompanySectionProps = {
+export type CardCompanySectionProps = {
   value: string;
   onSelect: (value: string) => void;
 };

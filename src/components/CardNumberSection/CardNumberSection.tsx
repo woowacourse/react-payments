@@ -3,7 +3,7 @@ import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { CardNumberKey, CardNumberType } from '../../types';
 
-type CardNumberSectionProps = {
+export type CardNumberSectionProps = {
   cardNumbers: CardNumberType;
   onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
   inputRefs: {
