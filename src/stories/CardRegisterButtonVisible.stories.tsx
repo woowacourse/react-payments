@@ -4,6 +4,7 @@ import RegisterCardButton from "../components/RegisterCardButton/RegisterCardBut
 import CardRegisterForm from "../pages/CardRegisterForm/CardRegisterForm";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { INPUT_CONTAINER } from "../constants/title";
 
 const meta: Meta<typeof RegisterCardButton> = {
   title: "Components/RegisterCardButton",
@@ -57,7 +58,7 @@ export const VisibleWhenFormValid: Story = {
     await userEvent.type(cardInputs[3], "8765");
 
     // 카드사 선택
-    const cardSelectBox = canvas.getByText("카드사를 선택해주세요");
+    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
     await userEvent.click(cardSelectBox);
     const option = canvas.getByText("BC카드");
     await userEvent.click(option);
@@ -97,27 +98,23 @@ export const InvisibleWhenFormInvalid: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // 카드 번호 입력 (일부러 틀린 값 입력 - 두 번째 input 길이 부족)
     const cardInputs = canvas.getAllByPlaceholderText("1234");
     await userEvent.clear(cardInputs[0]);
     await userEvent.type(cardInputs[0], "4123");
 
     await userEvent.clear(cardInputs[1]);
-    await userEvent.type(cardInputs[1], "5678"); // <-- 일부러 짧게 입력
-
+    await userEvent.type(cardInputs[1], "5678");
     await userEvent.clear(cardInputs[2]);
     await userEvent.type(cardInputs[2], "3333");
 
     await userEvent.clear(cardInputs[3]);
     await userEvent.type(cardInputs[3], "8765");
 
-    // 카드사 선택
-    const cardSelectBox = canvas.getByText("카드사를 선택해주세요");
+    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
     await userEvent.click(cardSelectBox);
     const option = canvas.getByText("BC카드");
     await userEvent.click(option);
 
-    // 만료일 입력
     const monthInput = canvas.getByPlaceholderText("MM");
     const yearInput = canvas.getByPlaceholderText("YY");
     await userEvent.clear(monthInput);
@@ -126,17 +123,16 @@ export const InvisibleWhenFormInvalid: Story = {
     await userEvent.clear(yearInput);
     await userEvent.type(yearInput, "25");
 
-    // CVC 입력
     const cvcInput = canvas.getByPlaceholderText("123");
     await userEvent.clear(cvcInput);
     await userEvent.type(cvcInput, "123");
 
-    // 비밀번호 입력
+    // 유효하지 않은 비밀번호 입력
     const passwordInput = canvas.getByPlaceholderText("12");
     await userEvent.clear(passwordInput);
     await userEvent.type(passwordInput, "1");
 
-    // ✅ 최종: "확인" 버튼이 없어야 함
+    // 최종: "확인" 버튼이 없어야 함
     await expect(
       canvas.queryByRole("button", { name: "확인" })
     ).not.toBeInTheDocument();

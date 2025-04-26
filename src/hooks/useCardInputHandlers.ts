@@ -6,7 +6,7 @@ import {
   validateCVC,
   validatePassword,
 } from "../domain/validate";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 import ERROR from "../constants/errorMessage";
 import CustomCardNumbersError from "../error/CustomCardNumbersError";
 import { CardContextType } from "./useCardState";

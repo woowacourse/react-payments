@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useCardState } from "./useCardState";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 export const useCardValidation = (
   cardState: ReturnType<typeof useCardState>

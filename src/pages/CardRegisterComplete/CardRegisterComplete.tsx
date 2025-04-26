@@ -1,6 +1,6 @@
 import styles from "./CardRegisterComplete.module.css";
 import { useCardContext } from "../../contexts/CardContext";
-import { CARD_COMPANIES } from "../../components/CardCompanySelect/CardCompanySelect";
+import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
 import RegisterAnotherCardButton from "../../components/RegisterAnotherCardButton/RegisterAnotherCardButton";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";

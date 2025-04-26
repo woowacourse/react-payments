@@ -1,8 +1,9 @@
 import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
 import { useCardContext } from "../../contexts/CardContext";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import { useEffect } from "react";
+import { INPUT_CONTAINER } from "../../constants/title";
 
 const PasswordInput = () => {
   const { password, passwordHelperText, passwordInputRef, handlePassword } =
@@ -13,8 +14,8 @@ const PasswordInput = () => {
   }, []);
   return (
     <InputContainer
-      title="비밀번호를 입력해 주세요"
-      subTitle="앞의 2자리를 입력해주세요"
+      title={INPUT_CONTAINER.PASSWORD.TITLE}
+      subTitle={INPUT_CONTAINER.PASSWORD.SUBTITLE}
     >
       <label className="label">비밀번호 앞 2자리</label>
       <div className="inputContainer">

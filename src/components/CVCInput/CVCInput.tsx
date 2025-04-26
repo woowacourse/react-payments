@@ -1,6 +1,6 @@
 import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
 import { useEffect } from "react";

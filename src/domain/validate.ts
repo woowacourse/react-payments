@@ -1,6 +1,6 @@
 import ERROR from "../constants/errorMessage";
 import CustomCardNumbersError from "../error/CustomCardNumbersError";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 const isNumber = (number: string) => {
   if (isNaN(Number(number))) return false;

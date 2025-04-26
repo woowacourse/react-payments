@@ -3,7 +3,7 @@ import PasswordInput from "../components/PasswordInput/PasswordInput";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 const meta: Meta<typeof PasswordInput> = {
   title: "Components/PasswordInput",

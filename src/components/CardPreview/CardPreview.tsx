@@ -1,5 +1,5 @@
 import { useCardContext } from "../../contexts/CardContext";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import styles from "./CardPreview.module.css";
 
 const displayCardNumber = (blockValue: string, index: number) => {

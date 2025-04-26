@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 export interface CardContextType {
   cardNumbers: string[];

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CardCompanySelect from "../components/CardCompanySelect/CardCompanySelect";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import { INPUT_CONTAINER } from "../constants/title";
 
 const meta: Meta<typeof CardCompanySelect> = {
   title: "Components/CardCompanySelect",
@@ -23,7 +24,7 @@ const meta: Meta<typeof CardCompanySelect> = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof CardCompanySelect>;
 
 const Template = () => {
   return <CardCompanySelect />;
@@ -34,7 +35,7 @@ export const Valid_CardCompanySelect: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const cardSelectBox = canvas.getByText("카드사를 선택해주세요");
+    const cardSelectBox = canvas.getByText(INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER);
     await userEvent.click(cardSelectBox);
 
     const option = canvas.getByText("BC카드");
