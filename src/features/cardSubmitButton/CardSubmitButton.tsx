@@ -14,7 +14,8 @@ export default function CardSubmitButton({
 }: CardSubmitButtonProps) {
   const navigate = useNavigate();
 
-  const submitCardInfo = () => {
+  const submitCardInfo = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
     navigate("/complete", { state: { cardType, firstCardNumber } });
   };
 

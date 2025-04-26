@@ -1,7 +1,7 @@
 import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
-import CardInfoForm from "../features/cardInfoForm/cardInfoForm.tsx";
+import CardInfoForm from "../features/cardInfoForm/CardInfoForm.tsx";
 import {
   ExpirationPeriod,
   CardNumberPosition,
