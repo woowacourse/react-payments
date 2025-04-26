@@ -6,6 +6,8 @@
 }
 
 .selectedInputContainer {
+  width: 100%;
+  display: flex;
   position: relative;
 }
 
@@ -31,7 +33,7 @@
 .selectedIcon {
   position: absolute;
   top: 18px;
-  right: 0px;
+  right: 11px;
 }
 
 .optionBox {
