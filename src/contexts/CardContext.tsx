@@ -306,6 +306,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     setIsValidCVC(false);          
     setIsValidPassword(false);
     setIsValidForm(false);
+    setIsSubmitted(false);
 
     setShowCardCompanySelect(false);
     setShowExpiryInput(false);
