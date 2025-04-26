@@ -9,13 +9,22 @@ import Input from "../../../Common/Input/Input";
 import { CardFormFieldStyles } from "../CardFormFields.styled";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 import { ExpirationPeriodSegmentType } from "../../../../types/types";
+import useFieldFocus from "../../../../hooks/useFieldFocus";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
+
+const expirationPeriodSequence = [
+  "expirationPeriod-month",
+  "expirationPeriod-year",
+];
 
 export default function CardExpirationPeriodInput() {
   const { expirationPeriod, updateExpirationPeriod } = useCard();
   const { expirationPeriodErrors, validateExpirationPeriod } =
     useCardValidation();
+  const { registerRef, handleInputChange } = useFieldFocus(
+    expirationPeriodSequence
+  );
 
   const handleExpirationPeriodChange = (
     value: string,
@@ -23,11 +32,12 @@ export default function CardExpirationPeriodInput() {
   ) => {
     validateExpirationPeriod(value, position);
     updateExpirationPeriod(value, position);
+    handleInputChange(`expirationPeriod-${position}`);
   };
 
   return (
     <CardFormFieldStyles>
-      {periodPositions.map((position) => {
+      {periodPositions.map((position, index) => {
         return (
           <Input
             key={position}
@@ -41,6 +51,10 @@ export default function CardExpirationPeriodInput() {
             onBlur={(e: ChangeEvent<HTMLInputElement>) =>
               handleExpirationPeriodChange(e.target.value, position)
             }
+            ref={(element) =>
+              registerRef(`expirationPeriod-${position}`, element)
+            }
+            autoFocus={index === 0}
           />
         );
       })}

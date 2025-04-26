@@ -1,10 +1,11 @@
 import { InputHTMLAttributes } from "react";
 import { InputStyles } from "./Input.styled";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
-export default function Input({ isError = false, ...props }: InputProps) {
-  return <InputStyles $isError={isError} {...props} />;
+export default function Input({ isError = false, ref, ...props }: InputProps) {
+  return <InputStyles $isError={isError} ref={ref} {...props} />;
 }

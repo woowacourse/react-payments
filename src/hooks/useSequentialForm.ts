@@ -35,7 +35,6 @@ export default function useSequentialForm() {
     CARD_FORM_TYPE.cardNumbers
   );
   const filledState = useRef(initialFilledState);
-
   const { hasErrorByType } = useCardValidation();
   const { isFieldFilled } = useCard();
 

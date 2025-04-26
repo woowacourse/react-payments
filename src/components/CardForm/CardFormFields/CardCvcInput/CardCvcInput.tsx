@@ -32,6 +32,7 @@ export default function CardCvcInput() {
         onBlur={(e: ChangeEvent<HTMLInputElement>) =>
           handleCvcNumberChange(e.target.value)
         }
+        autoFocus
       />
     </CardFormFieldStyles>
   );

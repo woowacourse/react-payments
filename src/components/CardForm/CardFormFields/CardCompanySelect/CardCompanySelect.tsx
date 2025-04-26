@@ -33,6 +33,7 @@ export default function CardCompanySelect() {
         value={cardCompany}
         onChange={handleCardCompanyChange}
         onBlur={handleCardCompanyChange}
+        autoFocus
       />
     </CardFormFieldStyles>
   );

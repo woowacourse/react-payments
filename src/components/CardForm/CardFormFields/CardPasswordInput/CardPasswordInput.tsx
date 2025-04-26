@@ -33,6 +33,7 @@ export default function CardPasswordInput() {
         onBlur={(e: ChangeEvent<HTMLInputElement>) =>
           handlePasswordChange(e.target.value)
         }
+        autoFocus
       />
     </CardFormFieldStyles>
   );
