@@ -8,7 +8,7 @@ import useStep from './useStep';
 const useCardForm = () => {
   const {
     cardNumber,
-    onChange: onChangeCardNumber,
+    onChangeCardNumber,
     errorMessage: cardNumberErrorMessage,
   } = useCardNumber();
 

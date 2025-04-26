@@ -22,7 +22,10 @@ function useCardNumber() {
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
+  const onChangeCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    n: number,
+  ) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -60,7 +63,7 @@ function useCardNumber() {
 
   return {
     cardNumber,
-    onChange,
+    onChangeCardNumber,
     errorMessage,
     setInputRef,
   };
