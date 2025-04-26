@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
@@ -23,6 +23,8 @@ function CardExpirationField({
   handleCardInfo,
   maxLength,
 }: CardExpirationFieldProps) {
+  const yearInputRef = useRef<HTMLInputElement>(null);
+
   const monthValidation = useMemo(
     () => validateMonth(cardInfo.month, maxLength),
     [cardInfo.month, maxLength]
@@ -45,6 +47,17 @@ function CardExpirationField({
     return "";
   }, [monthValidation, yearValidation, expirationValidation]);
 
+  const handleMonthChange = (value: string) => {
+    handleCardInfo("month", value);
+
+    if (value.length === maxLength) {
+      const monthNum = parseInt(value, 10);
+      if (monthNum >= 1 && monthNum <= 12) {
+        yearInputRef.current?.focus();
+      }
+    }
+  };
+
   return (
     <NumberInputField>
       <Label id="expiration-label" htmlFor="expiration-month">
@@ -54,14 +67,13 @@ function CardExpirationField({
         <NumberInput
           id="expiration-month"
           value={cardInfo.month}
-          setValue={(value) => {
-            handleCardInfo("month", value);
-          }}
+          setValue={handleMonthChange}
           maxLength={maxLength}
           placeholder="MM"
           isError={!monthValidation.isValid || !expirationValidation.isValid}
         />
         <NumberInput
+          ref={yearInputRef}
           value={cardInfo.year}
           setValue={(value) => {
             handleCardInfo("year", value);

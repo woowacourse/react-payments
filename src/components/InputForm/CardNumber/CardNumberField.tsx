@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import NumberInput from "../../@common/NumberInput/NumberInput";
 import {
   NumberInputField,
@@ -23,6 +23,10 @@ function CardNumberField({
   handleCardInfo,
   maxLength,
 }: CardNumberFieldProps) {
+  const secondInputRef = useRef<HTMLInputElement>(null);
+  const thirdInputRef = useRef<HTMLInputElement>(null);
+  const fourthInputRef = useRef<HTMLInputElement>(null);
+
   const segmentValidations = useMemo(() => {
     return [
       validateSegmentLength(cardInfo.firstNumber, maxLength),
@@ -40,6 +44,10 @@ function CardNumberField({
 
   const errorMessage =
     segmentValidations.find((v) => !v.isValid)?.errorMessage || "";
+
+  const focusSecondInput = () => secondInputRef.current?.focus();
+  const focusThirdInput = () => thirdInputRef.current?.focus();
+  const focusFourthInput = () => fourthInputRef.current?.focus();
 
   return (
     <NumberInputField>
@@ -63,6 +71,24 @@ function CardNumberField({
             maxLength={maxLength}
             placeholder="1234"
             isError={!segmentValidations[index].isValid}
+            ref={
+              index === 1
+                ? secondInputRef
+                : index === 2
+                ? thirdInputRef
+                : index === 3
+                ? fourthInputRef
+                : undefined
+            }
+            onComplete={
+              index === 0
+                ? focusSecondInput
+                : index === 1
+                ? focusThirdInput
+                : index === 2
+                ? focusFourthInput
+                : undefined
+            }
           />
         ))}
       </NumberInputContainer>
