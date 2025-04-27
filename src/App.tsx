@@ -9,11 +9,13 @@ import PasswordForm from "./components/feature/PasswordForm/PasswordForm.tsx";
 import CardIssuerForm from "./components/feature/CardIssuerForm/CardIssuerForm.tsx";
 import Button from "./components/common/Button/Button.tsx";
 import useOpenForm from "./hooks/useOpenForm.tsx";
+import useCardError from "./hooks/useCardError.tsx";
 
 function App() {
-  const { cardState, dispatch } = useCardInformation();
+  const { cardState, dispatch, allComplete } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
   const { openNextForm, isFormOpen } = useOpenForm();
+  const { cardErrorState, dispatchError, allClear } = useCardError();
 
   return (
     <div>
@@ -24,21 +26,48 @@ function App() {
           cardIssuer={cardState.cardIssuer}
         />
         <div css={FormContainerStyle}>
-          {isFormOpen("password") && <PasswordForm passwordState={password} dispatch={dispatch} />}
+          {isFormOpen("password") && (
+            <PasswordForm
+              passwordState={password}
+              dispatch={dispatch}
+              errorState={cardErrorState.password}
+              dispatchError={dispatchError}
+            />
+          )}
           {isFormOpen("cvcNumber") && (
-            <CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} openNextForm={openNextForm} />
+            <CvcNumberForm
+              cvcNumberState={cvcNumber}
+              dispatch={dispatch}
+              openNextForm={openNextForm}
+              errorState={cardErrorState.cvcNumber}
+              dispatchError={dispatchError}
+            />
           )}
           {isFormOpen("expirationDate") && (
-            <ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} openNextForm={openNextForm} />
+            <ExpirationDateForm
+              expirationDateState={expirationDate}
+              dispatch={dispatch}
+              openNextForm={openNextForm}
+              errorState={cardErrorState.expirationDate}
+              dispatchError={dispatchError}
+            />
           )}
           {isFormOpen("cardIssuer") && (
             <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} openNextForm={openNextForm} />
           )}
-          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} openNextForm={openNextForm} />
+          <UniqueNumberForm
+            uniqueNumberState={uniqueNumber}
+            dispatch={dispatch}
+            openNextForm={openNextForm}
+            errorState={cardErrorState.uniqueNumber}
+            dispatchError={dispatchError}
+          />
         </div>
-        <div css={ButtonContainerStyle}>
-          <Button text={"확인"} />
-        </div>
+        {allComplete() && allClear() && (
+          <div css={ButtonContainerStyle}>
+            <Button text={"확인"} />
+          </div>
+        )}
       </div>
     </div>
   );

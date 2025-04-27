@@ -8,8 +8,17 @@ import { useRef, useEffect } from "react";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: ExpirationDateStateType) => {
-  const { error, errorMessage, validateInputType, validateMonth, validateLength } = useError([false, false]);
+const ExpirationDateForm = ({
+  expirationDateState,
+  dispatch,
+  openNextForm,
+  errorState,
+  dispatchError,
+}: ExpirationDateStateType) => {
+  const { errorMessage, validateInputType, validateMonth, validateLength } = useError(
+    dispatchError,
+    "SET_EXPIRATION_DATE_ERROR",
+  );
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (v: string, index: number) => {
@@ -35,10 +44,10 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: Exp
   };
 
   useEffect(() => {
-    if (error.every((e) => e === false) && expirationDateState.every((e) => e !== "")) {
+    if (errorState.every((e) => e === false) && expirationDateState.every((e) => e !== "")) {
       openNextForm("expirationDate");
     }
-  }, [error]);
+  }, [errorState]);
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -60,7 +69,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: Exp
                 value={expirationDateState[index]}
                 onChange={(v) => handleChange(v, index)}
                 maxLength={maxLength}
-                error={error[index]}
+                error={errorState[index]}
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}
@@ -68,7 +77,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: Exp
             );
           })}
         </div>
-        <div css={errorTextWrapperStyle(error[0] || error[1])}>
+        <div css={errorTextWrapperStyle(errorState[0] || errorState[1])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

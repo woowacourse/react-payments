@@ -5,8 +5,8 @@ import useError from "../../../hooks/useError";
 import { PasswordStateType } from "../../../types/CardInformationType";
 import { css } from "@emotion/react";
 
-const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
-  const { error, errorMessage, validateInputType, validateLength } = useError([false]);
+const PasswordForm = ({ passwordState, dispatch, errorState, dispatchError }: PasswordStateType) => {
+  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_PASSWORD_ERROR");
   const { title, description, inputFieldData } = passwordSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
@@ -35,11 +35,11 @@ const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
             maxLength={maxLength}
             value={passwordState[0]}
             onChange={(v) => handleChange(v, 0)}
-            error={error[0]}
+            error={errorState[0]}
             type="password"
           />
         </div>
-        <div css={errorTextWrapperStyle(error[0])}>
+        <div css={errorTextWrapperStyle(errorState[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

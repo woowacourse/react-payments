@@ -6,10 +6,16 @@ import useError from "../../../hooks/useError";
 import uniqueNumberSpec from "./uniqueNumberSpec";
 import { useRef, useEffect } from "react";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueNumberStateType) => {
+const UniqueNumberForm = ({
+  uniqueNumberState,
+  dispatch,
+  openNextForm,
+  errorState,
+  dispatchError,
+}: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
-  const { error, errorMessage, validateInputType, validateLength } = useError([false, false, false, false]);
+  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_UNIQUE_NUMBER_ERROR");
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -31,10 +37,10 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
   };
 
   useEffect(() => {
-    if (error.every((e) => e === false) && uniqueNumberState.every((e) => e !== "")) {
+    if (errorState.every((e) => e === false) && uniqueNumberState.every((e) => e !== "")) {
       openNextForm("uniqueNumber");
     }
-  }, [error]);
+  }, [errorState]);
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -55,7 +61,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
                 value={uniqueNumberState[index]}
                 maxLength={maxLength}
                 onChange={(v) => handleChange(v, index)}
-                error={error[index]}
+                error={errorState[index]}
                 type={index > 1 ? "password" : "text"}
                 ref={(el) => {
                   inputRefs.current[index] = el;
@@ -65,7 +71,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
           })}
         </div>
 
-        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
+        <div css={errorTextWrapperStyle(errorState.some((bool) => bool === true))}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

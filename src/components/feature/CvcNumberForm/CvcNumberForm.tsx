@@ -6,8 +6,8 @@ import useError from "../../../hooks/useError";
 import cvcNumberSpec from "./cvcNumberSpec";
 import { useEffect } from "react";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStateType) => {
-  const { error, errorMessage, validateInputType, validateLength } = useError([false]);
+const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm, errorState, dispatchError }: CvcNumberStateType) => {
+  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_CVC_NUMBER_ERROR");
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
@@ -22,10 +22,10 @@ const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStat
   };
 
   useEffect(() => {
-    if (error[0] === false && cvcNumberState[0] !== "") {
+    if (errorState[0] === false && cvcNumberState[0] !== "") {
       openNextForm("cvcNumber");
     }
-  }, [error]);
+  }, [errorState]);
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -42,10 +42,10 @@ const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStat
             maxLength={maxLength}
             value={cvcNumberState[0]}
             onChange={(v) => handleChange(v)}
-            error={error[0]}
+            error={errorState[0]}
           />
         </div>
-        <div css={errorTextWrapperStyle(error[0])}>
+        <div css={errorTextWrapperStyle(errorState[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

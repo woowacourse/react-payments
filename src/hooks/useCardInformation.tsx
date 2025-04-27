@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { CardInformationType } from "../types/CardInformationType";
+import { CardInformationType, Action } from "../types/CardInformationType";
 
 const initialCardInfo: CardInformationType = {
   uniqueNumber: ["", "", "", ""],
@@ -8,13 +8,6 @@ const initialCardInfo: CardInformationType = {
   password: [""],
   cardIssuer: [null],
 };
-
-type Action =
-  | { type: "SET_UNIQUE_NUMBER"; index: number; value: string }
-  | { type: "SET_EXPIRATION_DATE"; index: number; value: string }
-  | { type: "SET_CVC_NUMBER"; value: string }
-  | { type: "SET_PASSWORD"; value: string }
-  | { type: "SET_CARD_ISSUER"; value: string | null };
 
 function reducer(state: CardInformationType, action: Action): CardInformationType {
   switch (action.type) {
@@ -47,7 +40,11 @@ function reducer(state: CardInformationType, action: Action): CardInformationTyp
 const useCardInformation = () => {
   const [cardState, dispatch] = useReducer(reducer, initialCardInfo);
 
-  return { cardState, dispatch };
+  const allComplete = () => {
+    return Object.values(cardState).every((field) => field.every((value) => value !== ""));
+  };
+
+  return { cardState, dispatch, allComplete };
 };
 
 export default useCardInformation;
