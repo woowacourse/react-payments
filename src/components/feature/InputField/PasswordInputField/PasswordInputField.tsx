@@ -37,7 +37,7 @@ function PasswordInputField({
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
       {PASSWORD_INPUT_TYPE.map((inputType) => (
-        <>
+        <div key={inputType}>
           <Label htmlFor="password-input" />
           <Input
             id="password-input"
@@ -49,7 +49,7 @@ function PasswordInputField({
             onBlur={onBlur}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </>
+        </div>
       ))}
     </BaseInputField>
   );

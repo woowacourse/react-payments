@@ -53,11 +53,10 @@ function CardNumberInputField({
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
       {CARD_NUMBER_INPUT_TYPE.map((inputType) => (
-        <>
+        <div key={inputType}>
           <Label htmlFor={`card-number-input-${inputType}`} />
           <Input
             id={`card-number-input-${inputType}`}
-            key={inputType}
             inputType="number"
             placeholder="1234"
             value={inputValue[inputType]}
@@ -66,7 +65,7 @@ function CardNumberInputField({
             name={inputType}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </>
+        </div>
       ))}
     </BaseInputField>
   );

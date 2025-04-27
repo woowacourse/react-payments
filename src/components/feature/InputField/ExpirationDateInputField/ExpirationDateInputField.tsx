@@ -58,11 +58,10 @@ function ExpirationDateInputField({
   return (
     <BaseInputField label="유효기간">
       {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
-        <>
+        <div key={inputType}>
           <Label htmlFor={`expiration-date-${inputType}`} />
           <Input
             id={`expiration-date-${inputType}`}
-            key={inputType}
             inputType="number"
             placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
             value={inputValue[inputType]}
@@ -70,7 +69,7 @@ function ExpirationDateInputField({
             name={inputType}
             onBlur={onExpirationDateBlur}
           />
-        </>
+        </div>
       ))}
     </BaseInputField>
   );

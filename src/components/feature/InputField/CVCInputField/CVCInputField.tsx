@@ -37,7 +37,7 @@ function CVCInputField({
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>
       {CVC_INPUT_TYPE.map((inputType) => (
-        <>
+        <div key={inputType}>
           <Label htmlFor="CVC-input" />
           <Input
             id="CVC-input"
@@ -49,7 +49,7 @@ function CVCInputField({
             onBlur={onBlur}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </>
+        </div>
       ))}
     </BaseInputField>
   );
