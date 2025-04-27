@@ -9,11 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
 import CardPasswordInput from './cardInput/PasswordInput';
 import { useState } from 'react';
+import useRender from '../../../hooks/useRender';
 
 function CardInputForm() {
   const {
     isCardNumberValid,
     setIsCardNumberValid,
+    isIssuerValid,
+    setIsIssuerValid,
     isExpiryDateValid,
     setIsExpiryDateValid,
     isCVCValid,
@@ -40,6 +43,43 @@ function CardInputForm() {
     }
   }
 
+  const inputs = [
+    {
+      Component: CardNumberInput,
+      props: {
+        isValid: isCardNumberValid,
+        setIsValid: setIsCardNumberValid,
+      },
+    },
+    {
+      Component: CardIssuerSelector,
+      props: { isValid: isIssuerValid, setIsValid: setIsIssuerValid },
+    },
+    {
+      Component: CardExpiryDateInput,
+      props: {
+        isValid: isExpiryDateValid,
+        setIsValid: setIsExpiryDateValid,
+      },
+    },
+    {
+      Component: CardCVCInput,
+      props: {
+        isValid: isCVCValid,
+        setIsValid: setIsCVCValid,
+      },
+    },
+    {
+      Component: CardPasswordInput,
+      props: {
+        isValid: isPasswordValid,
+        setIsValid: setIsPasswordValid,
+      },
+    },
+  ];
+
+  const renderList = useRender(inputs, ref);
+
   return (
     <form
       className={styles.cardInputForm}
@@ -47,20 +87,10 @@ function CardInputForm() {
       onInput={changeValidation}
       ref={ref}
     >
-      <CardIssuerSelector />
-      <CardNumberInput
-        isValid={isCardNumberValid}
-        setIsValid={setIsCardNumberValid}
-      />
-      <CardExpiryDateInput
-        isValid={isExpiryDateValid}
-        setIsValid={setIsExpiryDateValid}
-      />
-      <CardCVCInput isValid={isCVCValid} setIsValid={setIsCVCValid} />
-      <CardPasswordInput
-        isValid={isPasswordValid}
-        setIsValid={setIsPasswordValid}
-      />
+      {renderList.map(({ Component, props }, index) => {
+        return <Component key={index} {...props} />;
+      })}
+
       {isDataValid && isFormValid && <CardSubmitButton />}
     </form>
   );
