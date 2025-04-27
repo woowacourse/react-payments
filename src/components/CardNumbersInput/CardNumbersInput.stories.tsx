@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardNumbersInput from './CardNumbersInput';
-import { useState } from 'react';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import ERROR from '../../constants/errorMessage';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CardFormProvider } from '../../context/CardFormContext';
 
 const meta: Meta<typeof CardNumbersInput> = {
   title: 'Components/CardNumbersInput',
@@ -16,14 +16,10 @@ export default meta;
 type Story = StoryObj<typeof CardNumbersInput>;
 
 const Template = () => {
-  const [cardNumbers, setCardNumbers] = useState(
-    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill('')
-  );
   return (
-    <CardNumbersInput
-      cardNumbers={cardNumbers}
-      setCardNumbers={setCardNumbers}
-    />
+    <CardFormProvider>
+      <CardNumbersInput />
+    </CardFormProvider>
   );
 };
 

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CVCInput from './CVCInput';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import { useState } from 'react';
 import ERROR from '../../constants/errorMessage';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CardFormProvider } from '../../context/CardFormContext';
 
 const meta: Meta<typeof CVCInput> = {
   title: 'Components/CVCInput',
@@ -17,9 +17,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const Template = () => {
-  const [CVC, setCVC] = useState('');
-
-  return <CVCInput CVC={CVC} setCVC={setCVC} />;
+  return (
+    <CardFormProvider>
+      <CVCInput />
+    </CardFormProvider>
+  );
 };
 
 export const emptyInput: Story = {

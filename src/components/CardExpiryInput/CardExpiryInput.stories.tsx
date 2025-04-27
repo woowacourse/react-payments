@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardExpiryInput from './CardExpiryInput';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import ERROR from '../../constants/errorMessage';
+import { CardFormProvider } from '../../context/CardFormContext';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+// import { ConfirmButtonProvider } from '../../context/confirmButtonContext';
 
 const meta: Meta<typeof CardExpiryInput> = {
   title: 'Components/CardExpiryInput',
@@ -16,16 +18,10 @@ export default meta;
 type Story = StoryObj<typeof CardExpiryInput>;
 
 const Template = () => {
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-
   return (
-    <CardExpiryInput
-      month={month}
-      setMonth={setMonth}
-      year={year}
-      setYear={setYear}
-    />
+    <CardFormProvider>
+      <CardExpiryInput />
+    </CardFormProvider>
   );
 };
 
