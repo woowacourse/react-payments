@@ -1,18 +1,19 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import Input from "../../../../../../components/common/inputField/input/Input";
-import InputField from "../../../../../../components/common/inputField/InputField";
+import InputForm from "../../../../../../components/common/inputField/InputField";
 import { CARD_INFO } from "../../constants/CardInfo";
 import {
   validateExpirationDateMonth,
   validateExpirationDateYear,
 } from "./validator/validateCardInput";
 import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardExpirationDateInput({
-  handleExpirationDateChange,
+  setCardInfo,
   setValidState,
 }: {
-  handleExpirationDateChange: (expirationDate: string[]) => void;
+  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
   setValidState: Dispatch<SetStateAction<Record<string, boolean>>>;
 }) {
   const [expiration, setExpiration] = useState({
@@ -56,7 +57,12 @@ function CardExpirationDateInput({
       },
     });
 
-    handleExpirationDateChange([nextMonth, nextYear]);
+    setCardInfo((prev) => {
+      return {
+        ...prev,
+        expirationDate: [nextMonth, nextYear],
+      };
+    });
 
     if (value.length === 2 && i !== 1) {
       inputRefs.current[i + 1]?.focus();
@@ -65,6 +71,7 @@ function CardExpirationDateInput({
       i === 1 &&
       (monthError && yearError) === ""
     ) {
+      console.log("123");
       setValidState((prev) => {
         return {
           ...prev,
@@ -75,7 +82,7 @@ function CardExpirationDateInput({
   }
 
   return (
-    <InputField
+    <InputForm
       feedbackMessage={
         expiration.feedbackMessage.month || expiration.feedbackMessage.year
       }
@@ -103,7 +110,7 @@ function CardExpirationDateInput({
           />
         );
       })}
-    </InputField>
+    </InputForm>
   );
 }
 

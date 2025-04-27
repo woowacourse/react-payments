@@ -2,11 +2,16 @@ import SelectBox from "../../../../../../components/common/selectForm/SelectBox"
 import { TCardBrand } from "../../cardPreview/constants/DisplayData";
 import CARD from "./constants/Card";
 
-const CardBrandSelect = ({ setCardInfo, setValidState }) => {
+interface CardBrandSelectProps {
+  handleBrandNameChange: (brandName: string) => void;
+}
+
+const CardBrandSelect = ({
+  handleBrandNameChange,
+  setValidState,
+}: CardBrandSelectProps) => {
   function onSelectHandler(value: TCardBrand) {
-    setCardInfo((prev) => {
-      return { ...prev, brandName: value };
-    });
+    handleBrandNameChange(value);
     if (value !== "") {
       setValidState((prev) => {
         return { ...prev, cardBrandSelect: true };

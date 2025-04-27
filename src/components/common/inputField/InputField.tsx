@@ -1,6 +1,6 @@
-import styles from "./InputForm.module.css";
+import styles from "./InputField.module.css";
 
-export interface InputFormProps {
+export interface InputFieldProps {
   title: string;
   label: string;
   description?: string;
@@ -8,13 +8,13 @@ export interface InputFormProps {
   children: React.ReactNode;
 }
 
-function InputForm({
+function InputField({
   title,
   label,
   description,
   feedbackMessage,
   children,
-}: InputFormProps) {
+}: InputFieldProps) {
   return (
     <div className={styles.container}>
       <div className={styles.titleBox}>
@@ -32,4 +32,4 @@ function InputForm({
   );
 }
 
-export default InputForm;
+export default InputField;

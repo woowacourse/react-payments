@@ -16,11 +16,36 @@ function PaymentInputPage() {
     brandName: null,
   });
 
+  const handleCardNumbersChange = (newCardNumbers: string[]) => {
+    setCardInfo((prev) => ({
+      ...prev,
+      cardNumbers: newCardNumbers,
+    }));
+  };
+
+  const handleExpirationDateChange = (newExpirationDate: string[]) => {
+    setCardInfo((prev) => ({
+      ...prev,
+      expirationDate: newExpirationDate,
+    }));
+  };
+  const handleBrandNameChange = (newBrandName: TCardBrand | null) => {
+    setCardInfo((prev) => ({
+      ...prev,
+      brandName: newBrandName,
+    }));
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <CardPreview cardInfo={cardInfo} />
-        <CardInputForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
+        <CardInputForm
+          cardInfo={cardInfo}
+          handleCardNumbersChange={handleCardNumbersChange}
+          handleExpirationDateChange={handleExpirationDateChange}
+          handleBrandNameChange={handleBrandNameChange}
+        />
       </div>
     </section>
   );

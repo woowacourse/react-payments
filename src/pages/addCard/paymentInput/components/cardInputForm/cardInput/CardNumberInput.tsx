@@ -1,19 +1,18 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import InputField from "../../../../../../components/common/inputField/InputField";
+import InputForm from "../../../../../../components/common/inputField/InputField";
 import Input from "../../../../../../components/common/inputField/input/Input";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validateNumberString } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
-
-interface CardNumberInputProps {
-  handleCardNumbersChange: (cardNumbers: string[]) => void;
-  setValidState: Dispatch<SetStateAction<Record<string, boolean>>>;
-}
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardNumberInput({
-  handleCardNumbersChange,
+  setCardInfo,
   setValidState,
-}: CardNumberInputProps) {
+}: {
+  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
+  setValidState: Dispatch<SetStateAction<Record<string, boolean>>>;
+}) {
   const [cardNumberInfo, setCardNumberInfo] = useState({
     cardNumbers: ["", "", "", ""],
     feedbackMessages: ["", "", "", ""],
@@ -40,17 +39,16 @@ function CardNumberInput({
       feedbackMessages: updatedMessages,
     });
 
-    handleCardNumbersChange(updatedNumbers);
+    setCardInfo((prev) => {
+      return { ...prev, cardNumbers: updatedNumbers };
+    });
 
-    if (
-      value.length === 4 &&
-      index < 3 &&
-      updatedNumbers.some((number) => number.length !== 4)
-    ) {
+    if (value.length === 4 && index < 3) {
       inputRefs.current[index + 1].focus();
     } else if (
-      updatedNumbers.every((number) => number.length === 4) &&
-      updatedMessages.every((message) => message === "")
+      value.length === 4 &&
+      index === 3 &&
+      cardNumberInfo.feedbackMessages.some((message) => message === "")
     ) {
       setValidState((prev) => {
         console.log("prev -> ", prev);
@@ -59,21 +57,11 @@ function CardNumberInput({
           cardNumberInput: true,
         };
       });
-    } else if (
-      value.length < 4 ||
-      updatedMessages.some((message) => message !== "")
-    ) {
-      setValidState((prev) => {
-        return {
-          ...prev,
-          cardNumberInput: false,
-        };
-      });
     }
   }
 
   return (
-    <InputField
+    <InputForm
       feedbackMessage={cardNumberInfo.feedbackMessages.find((msg) => msg) || ""}
       title="결제할 카드 번호를 입력해주세요."
       description="본인 명의의 카드만 결제 가능합니다."
@@ -92,7 +80,7 @@ function CardNumberInput({
           isValid={cardNumberInfo.feedbackMessages[i] === ""}
         />
       ))}
-    </InputField>
+    </InputForm>
   );
 }
 

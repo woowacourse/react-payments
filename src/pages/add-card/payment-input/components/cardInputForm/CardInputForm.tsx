@@ -11,10 +11,17 @@ import { useNavigate } from "react-router";
 import Button from "../../../../../components/common/button/Button";
 interface CardInputFormProps {
   cardInfo: CardInfo;
-  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
+  handleCardNumbersChange: (cardNumbers: string[]) => void;
+  handleExpirationDateChange: (expirationDate: string[]) => void;
+  handleBrandNameChange: (brandName: string) => void;
 }
 
-function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
+function CardInputForm({
+  cardInfo,
+  handleCardNumbersChange,
+  handleExpirationDateChange,
+  handleBrandNameChange,
+}: CardInputFormProps) {
   const { brandName } = cardInfo;
   const [validState, setValidState] = useState<Record<string, boolean>>({
     cardNumberInput: false,
@@ -57,18 +64,18 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
           {validState.cardBrandSelect && (
             <CardExpirationDateInput
               setValidState={setValidState}
-              setCardInfo={setCardInfo}
+              handleExpirationDateChange={handleExpirationDateChange}
             />
           )}
           {validState.cardNumberInput && (
             <CardBrandSelect
               setValidState={setValidState}
-              setCardInfo={setCardInfo}
+              handleBrandNameChange={handleBrandNameChange}
             />
           )}
           <CardNumberInput
             setValidState={setValidState}
-            setCardInfo={setCardInfo}
+            handleCardNumbersChange={handleCardNumbersChange}
           />
         </div>
         <div className={styles.fadeBottom}></div>

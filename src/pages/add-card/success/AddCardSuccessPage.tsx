@@ -5,7 +5,6 @@ import { CARD_BACKGROUND_COLOR } from "../payment-input/components/cardPreview/c
 
 interface AddCardSuccessPageProps {
   cardNumber: string;
-  onConfirm: () => void;
   brandName: string;
 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Input from "../../../../../../components/common/inputForm/input/Input";
-import InputForm from "../../../../../../components/common/inputForm/InputForm";
+import Input from "../../../../../../components/common/inputField/input/Input";
+import InputField from "../../../../../../components/common/inputField/InputField";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validatePassword } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
@@ -31,7 +31,7 @@ function CardPasswordInput({ setValidState }) {
   }
 
   return (
-    <InputForm
+    <InputField
       title="비밀번호를 입력해 주세요."
       label="비밀번호 앞 2자리"
       feedbackMessage={feedbackMessage}
@@ -43,7 +43,7 @@ function CardPasswordInput({ setValidState }) {
         onChange={onChangeHandler}
         isValid={feedbackMessage === ""}
       />
-    </InputForm>
+    </InputField>
   );
 }
 

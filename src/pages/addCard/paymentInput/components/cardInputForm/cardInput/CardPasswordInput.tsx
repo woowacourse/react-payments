@@ -1,51 +1,50 @@
 import { useState } from "react";
 import Input from "../../../../../../components/common/inputField/input/Input";
-import InputField from "../../../../../../components/common/inputField/InputField";
+import InputForm from "../../../../../../components/common/inputField/InputField";
 import { CARD_INFO } from "../../constants/CardInfo";
-import { validateCVC } from "./validator/validateCardInput";
+import { validatePassword } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
-function CardCVCInput({ setValidState }) {
+function CardPasswordInput({ setValidState }) {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.target;
-    const errorResult = validateCVC(value);
-    const errorMessage = getFirstErrorMessage(errorResult, "CVC");
+    const password = e.target.value;
+    const errorResult = validatePassword(password);
+    const errorMessage = getFirstErrorMessage(errorResult, "PASSWORD");
     setFeedbackMessage(errorMessage);
-    if (value.length === 3 && errorMessage === "") {
+    if (password.length === 2 && errorMessage === "") {
       setValidState((prev) => {
         return {
           ...prev,
-          cardCVCInput: true,
+          cardPasswordInput: true,
         };
       });
     } else if (errorMessage !== "") {
       setValidState((prev) => {
         return {
           ...prev,
-          cardCVCInput: false,
+          cardPasswordInput: false,
         };
       });
     }
   }
 
   return (
-    <InputField
-      title="CVC 번호를 입력해 주세요."
-      label="CVC"
+    <InputForm
+      title="비밀번호를 입력해 주세요."
+      label="비밀번호 앞 2자리"
       feedbackMessage={feedbackMessage}
     >
       <Input
-        type="tel"
-        name="cardCVC"
-        placeholder="123"
-        maxLength={CARD_INFO.CVC_LENGTH}
+        type="password"
+        name="cardPassword"
+        maxLength={CARD_INFO.PASSWORD_LENGTH}
         onChange={onChangeHandler}
         isValid={feedbackMessage === ""}
       />
-    </InputField>
+    </InputForm>
   );
 }
 
-export default CardCVCInput;
+export default CardPasswordInput;
