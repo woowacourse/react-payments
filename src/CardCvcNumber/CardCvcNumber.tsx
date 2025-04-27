@@ -1,6 +1,7 @@
 import InputText from "../components/InputText/InputText";
 import NumberInput from "../components/Input/CardNumberInput";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
+import useCvcNumberInputHandler from "../hooks/useCvcNumber/useCvcNumberInputHandler";
 
 interface CardCvcNumberProps {
   handleChange: (value: string) => void;
@@ -21,13 +22,12 @@ export default function CardCvcNumber({
   errorMessage,
   onComplete,
 }: CardCvcNumberProps) {
-  const handleCardCvcNumberChange = (value: string) => {
-    handleChange(value);
-
-    if (value.length === 3) {
-      onComplete();
-    }
-  };
+  const { handleCardCvcNumberChange } = useCvcNumberInputHandler(
+    cvcNumbers,
+    errorMessage,
+    handleChange,
+    onComplete
+  );
 
   return (
     <section>

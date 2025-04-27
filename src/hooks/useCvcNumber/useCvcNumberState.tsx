@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { isValidLength } from "../validation/validate";
-import { updateArrayAt } from "../utils/updateArrayAt";
+import { isValidLength } from "../../validation/validate";
+import { updateArrayAt } from "../../utils/updateArrayAt";
 
 const USE_CVC_NUMBER = {
   INVALID_LENGTH_ERROR: "CVC 번호는 3자리 숫자여야 합니다.",
