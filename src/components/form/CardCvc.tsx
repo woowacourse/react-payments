@@ -10,7 +10,6 @@ interface CardCvcProps {
 	onChange: (value: string) => void;
 	onBlur: (value: string) => void;
 	error: string;
-	// setCvcNumber: Dispatch<SetStateAction<string>>;
 }
 
 const CardCvc = React.memo(({ cvcNumber, onChange, onBlur, error }: CardCvcProps) => {
