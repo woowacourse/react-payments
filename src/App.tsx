@@ -53,13 +53,18 @@ export default function App() {
       {Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError && (
         <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
       )}
-
       <CardNumberSection
         cardNumbers={cardNumbers}
         handleCardNumberChange={handleCardNumberChange}
         cardNumberError={cardNumberError}
       />
-      {cardPassword && !cardPasswordError && <Button text="확인" height="52px" />}
+      {Object.values(cardNumbers).every((value) => value !== '') &&
+        !cardNumberError &&
+        cardCompany &&
+        cvc &&
+        !cvcError &&
+        cardPassword &&
+        !cardPasswordError && <Button text="확인" height="52px" />}
     </div>
   );
 }
