@@ -4,7 +4,7 @@ import {
   StyledErrorMessage,
 } from "../../css/inputs.css";
 import { CardPasswordInputsProps } from "../types/CardPasswordInputs.types";
-import Input from "../../../shared/input/Input";
+import Input from "../../../shared/input/ui/Input";
 import useAutoFocus from "../../hooks/useAutoFocus";
 
 export default function CardPasswordInputs({

@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef } from "react";
 import {
   CardNumberPosition,
   ExpirationPeriod,
 } from "../../../shared/types/index.types";
 
 export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
-  const [step, setStep] = useState(0);
+  const stepRef = useRef(0);
 
   const calculatedStep = useMemo(() => {
     if (!isCardNumberOk(cardInfo.cardNumber, errorInfo.cardNumberError))
@@ -24,15 +24,13 @@ export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
     return 5;
   }, [cardInfo, errorInfo]);
 
-  useEffect(() => {
-    setStep((prevStep) => Math.max(prevStep, calculatedStep));
-  }, [calculatedStep]);
+  stepRef.current = Math.max(stepRef.current, calculatedStep);
 
   function isCompletedCardInfo() {
-    return calculatedStep === 5;
+    return stepRef.current === 5;
   }
 
-  return { step, canSubmit: isCompletedCardInfo() };
+  return { step: stepRef.current, canSubmit: isCompletedCardInfo() };
 }
 
 function isCardNumberOk(

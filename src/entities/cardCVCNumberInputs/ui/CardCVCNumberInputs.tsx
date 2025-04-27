@@ -1,4 +1,4 @@
-import Input from "../../../shared/input/Input";
+import Input from "../../../shared/input/ui/Input";
 import { CVC_NUMBER_LENGTH } from "../constants/CardCVCNumberInputs.constant";
 import { CardCVCNumberSectionProps } from "../types/CardCVCNumber.types";
 import {

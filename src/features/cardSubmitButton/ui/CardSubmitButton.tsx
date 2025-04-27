@@ -1,4 +1,4 @@
-import Button from "../../../shared/button/Button";
+import Button from "../../../shared/button/ui/Button";
 import { CardTypeList } from "../../../shared/types/index.types";
 import {
   StyledButtonContainer,

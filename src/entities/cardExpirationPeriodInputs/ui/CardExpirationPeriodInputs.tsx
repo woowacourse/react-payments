@@ -1,4 +1,4 @@
-import Input from "../../../shared/input/Input";
+import Input from "../../../shared/input/ui/Input";
 import { NO_ERROR } from "../../../shared/constants/constant";
 import {
   EXPIRATION_PERIOD,

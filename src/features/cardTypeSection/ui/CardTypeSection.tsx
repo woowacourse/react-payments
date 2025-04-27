@@ -1,5 +1,5 @@
 import SectionTitle from "../../../entities/sectionTitle/ui/SectionTitle";
-import Select from "../../../shared/select/Select";
+import Select from "../../../shared/select/ui/Select";
 import { CardTypeSectionProps } from "../types/CardType.types";
 import { CARD_TYPES } from "../constants/CardType.constant";
 import { StyledContainer } from "../css/CardTypeSection.css";
