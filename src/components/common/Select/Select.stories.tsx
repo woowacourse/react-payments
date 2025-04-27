@@ -34,10 +34,6 @@ export const WithValue: Story = {
 export const WithValidation: Story = {
   args: {
     ...Default.args,
-    validation: {
-      required: true,
-      errorMessage: '카드사를 선택해주세요.',
-    },
   },
 };
 

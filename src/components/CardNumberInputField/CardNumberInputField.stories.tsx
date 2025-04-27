@@ -1,11 +1,11 @@
-import { CardNumber } from '@/components';
+import { CardNumberInputField } from '@/components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useForm } from '@/hooks';
 import { CardNumberInputType } from '@/types/input';
 
 const meta = {
-  title: 'Components/CardNumber',
-  component: CardNumber,
+  title: 'Components/CardNumberInputField',
+  component: CardNumberInputField,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -16,7 +16,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof CardNumber>;
+} satisfies Meta<typeof CardNumberInputField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -31,7 +31,7 @@ const CardNumberWrapper = ({ errors = { first: '', second: '', third: '', fourth
     },
   });
 
-  return <CardNumber register={register} cardNumberErrors={errors || formErrors} />;
+  return <CardNumberInputField register={register} cardNumberErrors={errors || formErrors} />;
 };
 
 export const Default: Story = {
@@ -88,6 +88,8 @@ export const Filled: Story = {
       },
     });
 
-    return <CardNumber register={register} cardNumberErrors={{ first: '', second: '', third: '', fourth: '' }} />;
+    return (
+      <CardNumberInputField register={register} cardNumberErrors={{ first: '', second: '', third: '', fourth: '' }} />
+    );
   },
 };

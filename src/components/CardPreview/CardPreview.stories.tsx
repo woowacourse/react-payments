@@ -21,7 +21,6 @@ type Story = StoryObj<typeof meta>;
 
 export const VisaCard: Story = {
   args: {
-    cardType: 'visa',
     cardNumber: {
       first: '4242',
       second: '4242',
@@ -33,14 +32,15 @@ export const VisaCard: Story = {
       year: '25',
     },
     selectedCompany: 'shinhan',
-    cardCVCNumber: '',
+    cardCVCNumber: {
+      cvc: '123',
+    },
     isFlipped: false,
   },
 };
 
 export const MasterCard: Story = {
   args: {
-    cardType: 'master',
     cardNumber: {
       first: '5555',
       second: '5555',
@@ -61,7 +61,6 @@ export const MasterCard: Story = {
 
 export const FlippedCard: Story = {
   args: {
-    cardType: 'visa',
     cardNumber: {
       first: '4242',
       second: '4242',
@@ -73,7 +72,9 @@ export const FlippedCard: Story = {
       year: '25',
     },
     selectedCompany: 'shinhan',
-    cardCVCNumber: '123',
+    cardCVCNumber: {
+      cvc: '123',
+    },
     isFlipped: true,
   },
 };
