@@ -19,18 +19,23 @@ export default function CardInfoForm({
   const { cardNumberError, monthError, yearError, CVCError, passwordError } =
     useAllError();
 
-  const { step, canSubmit } = useStep({
+  const cardInfo = {
     cardNumber,
     expirationPeriod,
     CVCNumber,
     password,
     cardType,
+  };
+
+  const errorInfo = {
     cardNumberError,
-    yearError,
     monthError,
+    yearError,
     CVCError,
     passwordError,
-  });
+  };
+
+  const { step, canSubmit } = useStep({ cardInfo, errorInfo });
 
   return (
     <StyledForm>

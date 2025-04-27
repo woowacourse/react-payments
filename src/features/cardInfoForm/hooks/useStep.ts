@@ -4,89 +4,25 @@ import {
   ExpirationPeriod,
 } from "../../../shared/types/index.types";
 
-type CardInfoFormProps = {
-  cardNumber: {
-    values: Record<CardNumberPosition, string>;
-    changeValues: (
-      cardNumberPosition: CardNumberPosition,
-      cardNumber: string
-    ) => void;
-    isFullFilled: () => boolean;
-  };
-  expirationPeriod: {
-    values: Record<ExpirationPeriod, string>;
-    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
-    isFullFilled: () => boolean;
-  };
-  CVCNumber: {
-    values: { CVCNumber: string };
-    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
-    isFullFilled: () => boolean;
-  };
-  password: {
-    values: { password: string };
-    changeValues: (type: "password", password: string) => void;
-    isFullFilled: () => boolean;
-  };
-  cardType: {
-    values: { cardType: string };
-    changeValues: (type: "cardType", cardType: string) => void;
-    isFullFilled: () => boolean;
-  };
-  cardNumberError: {
-    error: Record<CardNumberPosition, string>;
-    isError: () => boolean;
-  };
-  yearError: {
-    error: Record<"year", string>;
-    isError: () => boolean;
-  };
-  monthError: {
-    error: Record<"month", string>;
-    isError: () => boolean;
-  };
-  CVCError: {
-    error: Record<"CVCNumber", string>;
-    isError: () => boolean;
-  };
-  passwordError: {
-    error: Record<"password", string>;
-    isError: () => boolean;
-  };
-};
-
-export default function useStep({
-  cardNumber,
-  expirationPeriod,
-  CVCNumber,
-  password,
-  cardType,
-  cardNumberError,
-  yearError,
-  monthError,
-  CVCError,
-  passwordError,
-}: CardInfoFormProps) {
-  const calculatedStep = useMemo(() => {
-    if (!isCardNumberOk(cardNumber, cardNumberError)) return 0;
-    if (!isCardTypeOk(cardType)) return 1;
-    if (!isExpirationOk(expirationPeriod, yearError, monthError)) return 2;
-    if (!isCVCNumberOk(CVCNumber, CVCError)) return 3;
-    if (!isPasswordOk(password, passwordError)) return 4;
-    return 5;
-  }, [
-    cardNumber,
-    cardNumberError.error,
-    cardType,
-    expirationPeriod,
-    monthError.error,
-    yearError.error,
-    CVCNumber,
-    CVCError.error,
-    password,
-  ]);
-
+export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
   const [step, setStep] = useState(0);
+
+  const calculatedStep = useMemo(() => {
+    if (!isCardNumberOk(cardInfo.cardNumber, errorInfo.cardNumberError))
+      return 0;
+    if (!isCardTypeOk(cardInfo.cardType)) return 1;
+    if (
+      !isExpirationOk(
+        cardInfo.expirationPeriod,
+        errorInfo.yearError,
+        errorInfo.monthError
+      )
+    )
+      return 2;
+    if (!isCVCNumberOk(cardInfo.CVCNumber, errorInfo.CVCError)) return 3;
+    if (!isPasswordOk(cardInfo.password, errorInfo.passwordError)) return 4;
+    return 5;
+  }, [cardInfo, errorInfo]);
 
   useEffect(() => {
     setStep((prevStep) => Math.max(prevStep, calculatedStep));
@@ -135,3 +71,58 @@ function isPasswordOk(
 ) {
   return password.isFullFilled() && passwordError.isError() === false;
 }
+
+type CardInfoFormProps = {
+  cardInfo: {
+    cardNumber: {
+      values: Record<CardNumberPosition, string>;
+      changeValues: (
+        cardNumberPosition: CardNumberPosition,
+        cardNumber: string
+      ) => void;
+      isFullFilled: () => boolean;
+    };
+    expirationPeriod: {
+      values: Record<ExpirationPeriod, string>;
+      changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
+      isFullFilled: () => boolean;
+    };
+    CVCNumber: {
+      values: { CVCNumber: string };
+      changeValues: (type: "CVCNumber", CVCNumber: string) => void;
+      isFullFilled: () => boolean;
+    };
+    password: {
+      values: { password: string };
+      changeValues: (type: "password", password: string) => void;
+      isFullFilled: () => boolean;
+    };
+    cardType: {
+      values: { cardType: string };
+      changeValues: (type: "cardType", cardType: string) => void;
+      isFullFilled: () => boolean;
+    };
+  };
+  errorInfo: {
+    cardNumberError: {
+      error: Record<CardNumberPosition, string>;
+      isError: () => boolean;
+    };
+    yearError: {
+      error: Record<"year", string>;
+      isError: () => boolean;
+    };
+    monthError: {
+      error: Record<"month", string>;
+      isError: () => boolean;
+    };
+    CVCError: {
+      error: Record<"CVCNumber", string>;
+      isError: () => boolean;
+    };
+    passwordError: {
+      error: Record<"password", string>;
+      isError: () => boolean;
+    };
+  };
+};
