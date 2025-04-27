@@ -1,9 +1,14 @@
-import useCardCVCNumber from "../../hooks/useCardCVCNumber";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 
 type CardCVCNumberInputSectionProps = {
+  cardCVCNumber: string;
+  handleCardCVCNumberChange: (value: string) => void;
+  isError: {
+    cvcNumber: boolean;
+  };
+  errorMessage: string;
   setRef: (
     index: number
   ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
@@ -11,11 +16,13 @@ type CardCVCNumberInputSectionProps = {
 };
 
 const CardCVCNumberInputSection = ({
+  cardCVCNumber,
+  handleCardCVCNumberChange,
+  isError,
+  errorMessage,
   setRef,
   moveFocus,
 }: CardCVCNumberInputSectionProps) => {
-  const { cardCVCNumber, handleCardCVCNumberChange, isError, errorMessage } =
-    useCardCVCNumber();
 
   return (
     <>
