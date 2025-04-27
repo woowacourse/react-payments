@@ -1,14 +1,10 @@
-import { CvcType } from '../../types';
+import { useFormContext } from '../../contexts/useFormContext';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './CvcSection.module.css';
 
-export type CvcSectionProps = {
-  cvc: CvcType;
-  handleCvcChange: (value: string) => void;
-};
-
-export default function CvcSection({ cvc, handleCvcChange }: CvcSectionProps) {
+export default function CvcSection() {
+  const { cvc, handleCvcChange } = useFormContext();
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

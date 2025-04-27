@@ -1,15 +1,11 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
-import { ExpirationKey, ExpirationType } from '../../types';
+import { useFormContext } from '../../contexts/useFormContext';
 
-export type CardExpirationSectionProps = {
-  expiration: ExpirationType;
-  onExpirationChange: (field: ExpirationKey, value: string) => void;
-  ref: { month: React.RefObject<HTMLInputElement | null>; year: React.RefObject<HTMLInputElement | null> };
-};
+export default function CardExpirationSection() {
+  const { expiration, expirationRef, handleExpirationChange } = useFormContext();
 
-export default function CardExpirationSection({ expiration, onExpirationChange, ref }: CardExpirationSectionProps) {
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
   return (
@@ -27,17 +23,17 @@ export default function CardExpirationSection({ expiration, onExpirationChange, 
             value={expiration.month.value}
             placeholder="MM"
             isError={Boolean(expiration.month.errorMessage)}
-            onChange={(e) => onExpirationChange('month', e.target.value)}
+            onChange={(e) => handleExpirationChange('month', e.target.value)}
             maxLength={2}
-            ref={ref.month}
+            ref={expirationRef.month}
           />
           <Input
             value={expiration.year.value}
             placeholder="YY"
             isError={Boolean(expiration.year.errorMessage)}
-            onChange={(e) => onExpirationChange('year', e.target.value)}
+            onChange={(e) => handleExpirationChange('year', e.target.value)}
             maxLength={2}
-            ref={ref.year}
+            ref={expirationRef.year}
           />
         </div>
 

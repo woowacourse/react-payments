@@ -14,8 +14,7 @@ import styles from '../../../src/pages/HomePage/HomePage.module.css';
 import { useFormContext } from '../../contexts/useFormContext';
 
 export function CardForm() {
-  const { cardNumbers, expiration, handleExpirationChange, expirationRef, company, handleCompanySelect, cvc, handleCvcChange, password, handlePasswordChange } =
-    useFormContext();
+  const { cardNumbers, expiration, company, cvc, password } = useFormContext();
 
   const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
 
@@ -49,18 +48,18 @@ export function CardForm() {
         </Stack.Step>
 
         <Stack.Step name="카드사">
-          <CardCompanySection value={company} onSelect={handleCompanySelect} />
+          <CardCompanySection />
         </Stack.Step>
 
         <Stack.Step name="유효기간">
-          <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={expirationRef} />
+          <CardExpirationSection />
         </Stack.Step>
         <Stack.Step name="CVC">
-          <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />
+          <CvcSection />
         </Stack.Step>
 
         <Stack.Step name="비밀번호">
-          <PasswordSection password={password} handlePasswordChange={handlePasswordChange} />
+          <PasswordSection />
         </Stack.Step>
       </Stack>
       {buttonVisible && <Button>확인</Button>}

@@ -1,9 +1,10 @@
 import { createContext, useContext } from 'react';
-import { CardExpirationSectionProps } from '../components/CardExpirationSection/CardExpirationSection';
-import { CardCompanySectionProps } from '../components/CardCompanySection/CardCompanySection';
-import { CvcSectionProps } from '../components/CvcSection/CvcSection';
-import { PasswordSectionProps } from '../components/PasswordSection/PasswordSection';
-import { CardNumberType } from '../types';
+import { CardNumberType, CvcType, ExpirationKey, ExpirationType } from '../types';
+
+export type PasswordSectionProps = {
+  password: { value: string; errorMessage: string };
+  handlePasswordChange: (value: string) => void;
+};
 
 export type CardNumberSectionProps = {
   cardNumbers: CardNumberType;
@@ -15,6 +16,22 @@ export type CardNumberSectionProps = {
     fourth: React.RefObject<HTMLInputElement | null>;
   };
   getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
+};
+
+export type CardCompanySectionProps = {
+  value: string;
+  onSelect: (value: string) => void;
+};
+
+export type CardExpirationSectionProps = {
+  expiration: ExpirationType;
+  onExpirationChange: (field: ExpirationKey, value: string) => void;
+  ref: { month: React.RefObject<HTMLInputElement | null>; year: React.RefObject<HTMLInputElement | null> };
+};
+
+export type CvcSectionProps = {
+  cvc: CvcType;
+  handleCvcChange: (value: string) => void;
 };
 
 export type CardFormProps = {
