@@ -1,7 +1,7 @@
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
-import { getCardImagePath } from '../../../entities/cardInfo/model/cardType';
 import { PREVIEW_CLASS_NAMES } from '../constants/previewClassName';
 import { getCardImagePath } from '../../../entities/cardInfo/utils/cardTypeUtils';
+import { getCardCompanyColor } from '../../../entities/cardInfo/utils/cardCompanyUtils';
 import './preview.css';
 
 export default function Preview({ cardInfo }: { cardInfo: CardInfo }) {
@@ -18,8 +18,10 @@ export default function Preview({ cardInfo }: { cardInfo: CardInfo }) {
     SECRET,
   } = PREVIEW_CLASS_NAMES;
 
+  const cardBackgroundColor = getCardCompanyColor(cardInfo.cardCompany);
+
   return (
-    <div className={CONTAINER}>
+    <div className={CONTAINER} style={{ backgroundColor: cardBackgroundColor }}>
       <div className={PREVIEW_CONTAINER}>
         <div className={`${CARD_PREVIEW} ${PAYMENT_SIM}`}></div>
         <div className={`${CARD_PREVIEW} ${PAYMENT_METHOD}`}>
