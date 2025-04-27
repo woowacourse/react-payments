@@ -12,17 +12,15 @@ const inputArr = [
 
 export default function CardNumberSection({
   error,
-  onChange,
+  onBlur,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const isError = error && error['cardNumberError'].errorIndex !== -1 && error['cardNumberError'].errorMessage !== '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    onChange(e);
-
+  const handleRef = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.value.length === 4 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -41,7 +39,8 @@ export default function CardNumberSection({
             <CustomInput
               key={`cardNumber-custom-input-${index}`}
               {...input}
-              onChange={(e) => handleInputChange(e, index)}
+              onBlur={onBlur}
+              handleRef={(e: React.ChangeEvent<HTMLInputElement>) => handleRef(e, index)}
               maxLength={4}
               error={isError && error['cardNumberError'].errorIndex === index}
               ref={(el: HTMLInputElement | null) => {

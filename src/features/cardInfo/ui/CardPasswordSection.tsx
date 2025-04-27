@@ -4,10 +4,10 @@ import CustomInput from '../../../shared/ui/CustomInput';
 
 export default function CardPasswordSection({
   error,
-  onChange,
+  onBlur,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const isError =
     error && error['cardPasswordError'].errorIndex !== -1 && error['cardPasswordError'].errorMessage !== '';
@@ -25,7 +25,7 @@ export default function CardPasswordSection({
             key={`password-custom-input`}
             type='password'
             name='cardPassword'
-            onChange={onChange}
+            onBlur={onBlur}
             maxLength={2}
             error={isError}
           />

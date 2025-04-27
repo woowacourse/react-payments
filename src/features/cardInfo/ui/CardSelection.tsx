@@ -4,11 +4,11 @@ import { ErrorProps } from '../../../shared/model/types';
 export default function CardSelection({
   cardIssuer,
   error,
-  onChange,
+  onBlur,
 }: {
   cardIssuer: string;
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }) {
   return (
     <S.CardInfoMainSection>
@@ -19,7 +19,7 @@ export default function CardSelection({
       <S.CardInfoSubSection>
         <S.CardInfoInputContainer>
           {
-            <S.CardSelection value={cardIssuer} onChange={onChange} name='cardIssuer'>
+            <S.CardSelection value={cardIssuer} onChange={onBlur} name='cardIssuer'>
               <option value='' disabled hidden>
                 카드사를 선택해주세요
               </option>

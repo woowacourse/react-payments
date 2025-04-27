@@ -6,10 +6,10 @@ const inputArr = [{ type: 'text', placeholder: '123', name: 'cardCVC' }];
 
 export default function CardCVCSection({
   error,
-  onChange,
+  onBlur,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const isError = error && error['cardCVCError'].errorIndex !== -1 && error['cardCVCError'].errorMessage !== '';
 
@@ -26,7 +26,7 @@ export default function CardCVCSection({
             <CustomInput
               key={`cardExpirationDate-custom-input-${index}`}
               {...input}
-              onChange={onChange}
+              onBlur={onBlur}
               maxLength={3}
               error={isError}
             />

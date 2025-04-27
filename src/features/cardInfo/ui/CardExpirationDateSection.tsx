@@ -10,18 +10,16 @@ const inputArr = [
 
 export default function CardExpirationDateSection({
   error,
-  onChange,
+  onBlur,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   const isError =
     error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    onChange(e);
-
+  const handleRef = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.value.length === 2 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -40,7 +38,8 @@ export default function CardExpirationDateSection({
             <CustomInput
               key={`cardExpirationDate-custom-input-${index}`}
               {...input}
-              onChange={(e) => handleInputChange(e, index)}
+              onBlur={onBlur}
+              handleRef={(e: React.ChangeEvent<HTMLInputElement>) => handleRef(e, index)}
               ref={(el: HTMLInputElement | null) => {
                 inputRefs.current[index] = el;
               }}

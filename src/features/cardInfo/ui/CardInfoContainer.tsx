@@ -9,29 +9,29 @@ import * as S from './CardInfoContainer.styles';
 import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
 
 export default function CardInfoContainer() {
-  const { cardInfo, updateCardInfo: onChange, error } = useCardInfoContext();
+  const { cardInfo, updateCardInfo, error } = useCardInfoContext();
 
   return (
     <S.CardInfoWrapper>
       <S.AnimatedSection className={cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR ? 'visible' : ''}>
-        <CardPasswordSection error={error} onChange={onChange} />
+        <CardPasswordSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
       <S.AnimatedSection
         className={cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR ? 'visible' : ''}
       >
-        <CardCVCSection error={error} onChange={onChange} />
+        <CardCVCSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
       <S.AnimatedSection className={cardInfo.cardIssuer !== '' ? 'visible' : ''}>
-        <CardExpirationDateSection error={error} onChange={onChange} />
+        <CardExpirationDateSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
       <S.AnimatedSection className={cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR ? 'visible' : ''}>
-        <CardSelection cardIssuer={cardInfo.cardIssuer} error={error} onChange={onChange} />
+        <CardSelection cardIssuer={cardInfo.cardIssuer} error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
-      <CardNumberSection error={error} onChange={onChange} />
+      <CardNumberSection error={error} onBlur={updateCardInfo} />
     </S.CardInfoWrapper>
   );
 }
