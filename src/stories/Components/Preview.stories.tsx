@@ -73,7 +73,9 @@ export const Visa: Story = {
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe(`/images/visa.svg`)
+      expect(cardMethodImg?.getAttribute('src')).toBe(
+        `${import.meta.env.BASE_URL}images/visa.svg`
+      )
     );
   },
 };
@@ -100,7 +102,9 @@ export const Mastercard: Story = {
     const cardMethodImg = await canvas.findByTestId('card-method');
     expect(cardMethodImg).toBeDefined();
     await waitFor(() =>
-      expect(cardMethodImg?.getAttribute('src')).toBe(`/images/Mastercard.svg`)
+      expect(cardMethodImg?.getAttribute('src')).toBe(
+        `${import.meta.env.BASE_URL}images/Mastercard.svg`
+      )
     );
   },
 };
