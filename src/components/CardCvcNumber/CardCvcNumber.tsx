@@ -1,7 +1,7 @@
-import InputText from "../components/InputText/InputText";
-import NumberInput from "../components/Input/CardNumberInput";
-import InputErrorMessage from "../components/Input/InputErrorMessage";
-import useCvcNumberInputHandler from "../hooks/useCvcNumber/useCvcNumberInputHandler";
+import InputText from "../InputText/InputText";
+import NumberInput from "../Input/CardNumberInput";
+import InputErrorMessage from "../Input/InputErrorMessage";
+import useCvcNumberInputHandler from "../../hooks/useCvcNumber/useCvcNumberInputHandler";
 
 interface CardCvcNumberProps {
   handleChange: (value: string) => void;

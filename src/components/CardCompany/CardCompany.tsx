@@ -1,11 +1,11 @@
 import {
   CARD_COMPANY_INFO,
   CardCompanyType,
-} from "../hooks/useCardCompany/useCardCompanyState";
-import useCardCompanyState from "../hooks/useCardCompany/useCardCompanyState";
-import useCardCompanyInputHandler from "../hooks/useCardCompany/useCardCompanyInputHandler";
-import InputText from "../components/InputText/InputText";
-import inputStyles from "../components/Input/CardNumberInput.module.css";
+} from "../../hooks/useCardCompany/useCardCompanyState";
+import useCardCompanyState from "../../hooks/useCardCompany/useCardCompanyState";
+import useCardCompanyInputHandler from "../../hooks/useCardCompany/useCardCompanyInputHandler";
+import InputText from "../InputText/InputText";
+import inputStyles from "../Input/CardNumberInput.module.css";
 import styles from "./CardCompany.module.css";
 import ChevronUp from "/chevron-up.svg";
 

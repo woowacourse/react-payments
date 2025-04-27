@@ -1,16 +1,17 @@
 import "./App.css";
 import { useState } from "react";
-import CardNumber from "./CardNumber/CardNumber";
-import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
-import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
+import CardNumber from "./components/CardNumber/CardNumber";
+import CardExpirationDate from "./components/CardExpirationDate/CardExpirationDate";
+import CardCvcNumber from "./components/CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import CardCompanyPicker from "./CardCompany/CardCompany";
-import CardPassword from "./CardPassword/CardPassword";
+import CardCompanyPicker from "./components/CardCompany/CardCompany";
+import CardPassword from "./components/CardPassword/CardPassword";
 import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
 import useCvcNumberState from "./hooks/useCvcNumber/useCvcNumberState";
 import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
 import useCardPasswordState from "./hooks/useCardPassword/useCardPasswordState";
+import CheckButton from "./components/CheckButton";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, handleChange } =
@@ -79,6 +80,9 @@ function App() {
             onComplete={goToNextStep}
           />
         )}
+      </div>
+      <div className="checkButton-container">
+        {step >= 6 && <CheckButton />}
       </div>
     </div>
   );

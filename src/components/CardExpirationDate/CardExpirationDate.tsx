@@ -1,8 +1,8 @@
-import InputErrorMessage from "../components/Input/InputErrorMessage";
-import NumberInput from "../components/Input/CardNumberInput";
-import InputText from "../components/InputText/InputText";
+import InputErrorMessage from "../Input/InputErrorMessage";
+import NumberInput from "../Input/CardNumberInput";
+import InputText from "../InputText/InputText";
 import styles from "./CardExpirationDate.module.css";
-import useExpirationDateInputHandler from "../hooks/useExpirationDate/useExpirationDateInputHandler";
+import useExpirationDateInputHandler from "../../hooks/useExpirationDate/useExpirationDateInputHandler";
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
   cardExpirationDate: string[];

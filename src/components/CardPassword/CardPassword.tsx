@@ -1,7 +1,7 @@
-import InputText from "../components/InputText/InputText";
-import NumberInput from "../components/Input/CardNumberInput";
-import InputErrorMessage from "../components/Input/InputErrorMessage";
-import useCardPasswordInputHandler from "../hooks/useCardPassword/useCardPasswordInputHandler";
+import InputText from "../InputText/InputText";
+import NumberInput from "../Input/CardNumberInput";
+import InputErrorMessage from "../Input/InputErrorMessage";
+import useCardPasswordInputHandler from "../../hooks/useCardPassword/useCardPasswordInputHandler";
 interface CardPasswordProps {
   handleChange: (value: string) => void;
   password: string;

@@ -1,8 +1,8 @@
-import NumberInput from "../components/Input/CardNumberInput";
-import InputText from "../components/InputText/InputText";
-import InputErrorMessage from "../components/Input/InputErrorMessage";
+import NumberInput from "../Input/CardNumberInput";
+import InputText from "../InputText/InputText";
+import InputErrorMessage from "../Input/InputErrorMessage";
 import styles from "./CardNumber.module.css";
-import useCardNumberInputHandler from "../hooks/useCardNumber/useCardNumberInputHandler";
+import useCardNumberInputHandler from "../../hooks/useCardNumber/useCardNumberInputHandler";
 
 interface Props {
   handleChange: (value: string, index: number) => void;
