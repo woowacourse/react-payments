@@ -7,7 +7,7 @@ import {
 } from '../../../../config/inputField';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
-import { InputFieldProps } from '../Inputfield';
+import { InputFieldProps } from '../InputfieldProps';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 
