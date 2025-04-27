@@ -10,43 +10,43 @@ import { getCVCValidationFns } from "../../../entities/cardCVCNumberInputs/CardC
 import { getPasswordValidationFns } from "../../../entities/cardPasswordInputs/CardPasswordInputs.domain";
 
 export function useAllError() {
-  const cardNumberError = useError<Record<CardNumberPosition, string>>(
-    {
+  const cardNumberError = useError<Record<CardNumberPosition, string>>({
+    initError: {
       first: NO_ERROR,
       second: NO_ERROR,
       third: NO_ERROR,
       fourth: NO_ERROR,
     },
-    getCardNumberValidationFns
-  );
+    getValidationFns: getCardNumberValidationFns,
+  });
 
-  const monthError = useError<Record<"month", string>>(
-    {
+  const monthError = useError<Record<"month", string>>({
+    initError: {
       month: NO_ERROR,
     },
-    getMonthValidationFns
-  );
+    getValidationFns: getMonthValidationFns,
+  });
 
-  const yearError = useError<Record<"year", string>>(
-    {
+  const yearError = useError<Record<"year", string>>({
+    initError: {
       year: NO_ERROR,
     },
-    getYearValidationFns
-  );
+    getValidationFns: getYearValidationFns,
+  });
 
-  const CVCError = useError<Record<"CVCNumber", string>>(
-    {
+  const CVCError = useError<Record<"CVCNumber", string>>({
+    initError: {
       CVCNumber: NO_ERROR,
     },
-    getCVCValidationFns
-  );
+    getValidationFns: getCVCValidationFns,
+  });
 
-  const passwordError = useError<Record<"password", string>>(
-    {
+  const passwordError = useError<Record<"password", string>>({
+    initError: {
       password: NO_ERROR,
     },
-    getPasswordValidationFns
-  );
+    getValidationFns: getPasswordValidationFns,
+  });
 
   return {
     cardNumberError,

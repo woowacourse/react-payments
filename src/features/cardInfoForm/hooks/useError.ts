@@ -12,10 +12,15 @@ type getValidationFnsType = (
   value: string
 ) => { condition: () => boolean; errorMsg: string }[];
 
-export default function useError<T extends {}>(
-  initError: T,
-  getValidationFns: getValidationFnsType
-) {
+type UseErrorProps<T> = {
+  initError: T;
+  getValidationFns: getValidationFnsType;
+};
+
+export default function useError<T extends {}>({
+  initError,
+  getValidationFns,
+}: UseErrorProps<T>) {
   const [error, setError] = useState<T>(initError);
 
   function checkValidation({ length, value, type }: checkValidationType<T>) {
