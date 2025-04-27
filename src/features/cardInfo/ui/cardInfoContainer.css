@@ -4,4 +4,6 @@
   flex-direction: column;
   gap: 16px;
   margin: 45px 0 0;
+  padding: 0 30px;
+  box-sizing: border-box;
 }

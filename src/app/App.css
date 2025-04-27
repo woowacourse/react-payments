@@ -4,14 +4,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  margin: 4.8rem 0 0 0;
 }
 
 .card-container {
-  width: 375px;
+  width: 23rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px 30px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 1.25rem 10rem;
+  background-color: #333333;
+  color: #f3f3f3;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.submit-button:hover {
+  background-color: #1a2530;
 }

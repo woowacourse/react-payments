@@ -4,13 +4,19 @@ import CardInfoContainer from '../features/cardInfo/ui/CardInfoContainer';
 import useCardInfo from '../features/cardInfo/hooks/useCardInfo';
 
 function App() {
-  const { cardInfo, handleCardInfoChange, error } = useCardInfo();
+  const { cardInfo, handleCardInfoChange, error, currentSection, isAllSectionsCompleted } =
+    useCardInfo();
 
   return (
     <div className="app-container">
       <main className="card-container">
         <Preview cardInfo={cardInfo} />
-        <CardInfoContainer onChange={handleCardInfoChange} error={error} />
+        <CardInfoContainer
+          onChange={handleCardInfoChange}
+          error={error}
+          currentSection={currentSection}
+        />
+        {isAllSectionsCompleted && <button className="submit-button">확인</button>}
       </main>
     </div>
   );
