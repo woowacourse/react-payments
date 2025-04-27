@@ -23,6 +23,7 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
           placeholder="123"
           maxLength={3}
           regexString={/^\d*$/}
+          autoFocus={true}
         />
       </InputWrapper>
     </div>

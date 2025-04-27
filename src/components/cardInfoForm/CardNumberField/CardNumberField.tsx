@@ -31,6 +31,7 @@ function CardNumberField({
             placeholder="1234"
             maxLength={4}
             regexString={/^\d*$/}
+            autoFocus={index === 0 ? true : false}
           />
         ))}
       </InputWrapper>

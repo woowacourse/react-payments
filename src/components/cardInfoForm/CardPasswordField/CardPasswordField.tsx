@@ -25,6 +25,7 @@ function CardPasswordField({
           onChange={onChange}
           maxLength={2}
           regexString={/^\d*$/}
+          autoFocus={true}
         />
       </InputWrapper>
     </div>

@@ -45,6 +45,7 @@ function CardValidityPeriodField({
           placeholder="MM"
           maxLength={2}
           regexString={/^\d*$/}
+          autoFocus={true}
         />
         <Input
           isError={isErrorYear}
