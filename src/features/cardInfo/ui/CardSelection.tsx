@@ -1,6 +1,8 @@
 import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
 
+const cardIssuers = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
+
 export default function CardSelection({
   cardIssuer,
   error,
@@ -23,14 +25,11 @@ export default function CardSelection({
               <option value='' disabled hidden>
                 카드사를 선택해주세요
               </option>
-              <option value='BC카드'>BC카드</option>
-              <option value='신한카드'>신한카드</option>
-              <option value='카카오뱅크'>카카오뱅크</option>
-              <option value='현대카드'>현대카드</option>
-              <option value='우리카드'>우리카드</option>
-              <option value='롯데카드'>롯데카드</option>
-              <option value='하나카드'>하나카드</option>
-              <option value='국민카드'>국민카드</option>
+              {cardIssuers.map((cardIssuer, index) => (
+                <option key={`${cardIssuer}-${index}`} value={cardIssuer}>
+                  {cardIssuer}
+                </option>
+              ))}
             </S.CardSelection>
           }
         </S.CardInfoInputContainer>
