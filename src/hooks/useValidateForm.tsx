@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function useValidateForm() {
   const [isCardNumberValid, setIsCardNumberValid] = useState<boolean[]>([
@@ -13,20 +13,27 @@ function useValidateForm() {
   });
   const [isCVCValid, setIsCVCValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-
-  const isTotalNumbersValid = isCardNumberValid.every((valid) => valid);
-  const isTotalExpiryDateValid =
-    isExpiryDateValid.month && isExpiryDateValid.year;
-  const isTotalDataValid =
-    isTotalNumbersValid &&
-    isTotalExpiryDateValid &&
-    isCVCValid &&
-    isPasswordValid;
-
+  const [isDataValid, setIsDataValid] = useState(false);
   const ref = useRef<HTMLFormElement>(null);
-  function isFormValid() {
-    return isTotalDataValid && ref.current && ref.current.checkValidity();
-  }
+
+  useEffect(() => {
+    const isTotalNumbersValid = isCardNumberValid.every((valid) => valid);
+    const isTotalExpiryDateValid =
+      isExpiryDateValid.month && isExpiryDateValid.year;
+    const isTotalDataValid =
+      isTotalNumbersValid &&
+      isTotalExpiryDateValid &&
+      isCVCValid &&
+      isPasswordValid;
+
+    setIsDataValid(isTotalDataValid);
+  }, [
+    isCardNumberValid,
+    isExpiryDateValid,
+    isCVCValid,
+    isPasswordValid,
+    setIsDataValid,
+  ]);
 
   return {
     isCardNumberValid,
@@ -37,7 +44,7 @@ function useValidateForm() {
     setIsCVCValid,
     isPasswordValid,
     setIsPasswordValid,
-    isFormValid,
+    isDataValid,
     ref,
   };
 }

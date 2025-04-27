@@ -9,6 +9,7 @@ import { ROUTER } from '../../../global/constants';
 import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
 import CardPasswordInput from './cardInput/CardPasswordInput';
+import { useState } from 'react';
 
 interface CardInputFormProps {
   expiryDate: ExpiryDateType;
@@ -32,21 +33,33 @@ function CardInputForm({
     setIsCVCValid,
     isPasswordValid,
     setIsPasswordValid,
-    isFormValid,
+    isDataValid,
     ref,
   } = useValidateForm();
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const navigate = useNavigate();
   function submitCardInfo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (isFormValid()) {
-      navigate(ROUTER.registerComplete);
+    navigate(ROUTER.registerComplete);
+  }
+
+  function changeValidation() {
+    const target = ref.current;
+
+    if (target) {
+      setIsFormValid(target.checkValidity());
     }
   }
 
   return (
-    <form className={styles.cardInputForm} onSubmit={submitCardInfo} ref={ref}>
+    <form
+      className={styles.cardInputForm}
+      onSubmit={submitCardInfo}
+      onInput={changeValidation}
+      ref={ref}
+    >
       <CardIssuerSelector />
       <CardNumberInput
         isValid={isCardNumberValid}
@@ -68,7 +81,7 @@ function CardInputForm({
         isValid={isPasswordValid}
         setIsValid={setIsPasswordValid}
       />
-      {isFormValid() && <CardSubmitButton />}
+      {isDataValid && isFormValid && <CardSubmitButton />}
     </form>
   );
 }

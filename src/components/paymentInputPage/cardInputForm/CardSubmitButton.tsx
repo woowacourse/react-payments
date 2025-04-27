@@ -4,7 +4,7 @@ import styles from './CardInputForm.module.css';
 function CardSubmitButton() {
   return (
     <Button
-      type='button'
+      type='submit'
       name='CardSubmitButton'
       title='확인'
       className={`${styles.submitButton}`}
