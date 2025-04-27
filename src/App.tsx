@@ -5,12 +5,12 @@ import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
 import CardCompanyPicker from "./CardCompany/CardCompany";
-import useCardPassword from "./hooks/useCardPassword";
 import CardPassword from "./CardPassword/CardPassword";
 import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
 import useCvcNumberState from "./hooks/useCvcNumber/useCvcNumberState";
 import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
+import useCardPasswordState from "./hooks/useCardPassword/useCardPasswordState";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, handleChange } =
@@ -20,7 +20,7 @@ function App() {
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } =
     useCvcNumberState();
   const { selectedCompany, selectCompany } = useCardCompanyState();
-  const { password, passwordError, passwordValidate } = useCardPassword();
+  const { password, passwordError, passwordValidate } = useCardPasswordState();
   const [step, setStep] = useState(1);
 
   const goToNextStep = () => {

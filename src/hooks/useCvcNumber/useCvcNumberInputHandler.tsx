@@ -3,7 +3,6 @@ const CVC_RULE = {
 } as const;
 
 export default function useCvcNumberInputHandler(
-  cvcNumbers: string,
   cvcNumbersError: string,
   handleChange: (value: string) => void,
   onComplete: () => void

@@ -1,7 +1,7 @@
 import InputText from "../components/InputText/InputText";
 import NumberInput from "../components/Input/CardNumberInput";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
-
+import useCardPasswordInputHandler from "../hooks/useCardPassword/useCardPasswordInputHandler";
 interface CardPasswordProps {
   handleChange: (value: string) => void;
   password: string;
@@ -22,14 +22,10 @@ export default function CardPassword({
   errorMessage,
   onComplete,
 }: CardPasswordProps) {
-  const handleCardPasswordChange = (value: string) => {
-    handleChange(value);
-
-    if (value.length === 2) {
-      onComplete();
-      console.log("finished");
-    }
-  };
+  const { handleCardPasswordChange } = useCardPasswordInputHandler(
+    handleChange,
+    onComplete
+  );
 
   return (
     <section>

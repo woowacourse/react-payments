@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isValidLength } from "../validation/validate";
+import { isValidLength } from "../../validation/validate";
 
 const USE_CARD_PASSWORD = {
   IMVALID_LENGTH_ERROR: "카드 비밀번호는 2자리 숫자여야 합니다.",

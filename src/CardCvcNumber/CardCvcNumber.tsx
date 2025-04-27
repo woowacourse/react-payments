@@ -23,7 +23,6 @@ export default function CardCvcNumber({
   onComplete,
 }: CardCvcNumberProps) {
   const { handleCardCvcNumberChange } = useCvcNumberInputHandler(
-    cvcNumbers,
     errorMessage,
     handleChange,
     onComplete
