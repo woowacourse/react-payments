@@ -2,18 +2,22 @@ import { css } from "@emotion/react";
 import Button from "../components/common/Button/Button";
 import Text from "../components/common/Text/Text";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 const CardResistrationCompletePage = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     navigate("/");
   };
+  const location = useLocation();
+  const cardState = location.state;
+
   return (
     <div css={AppStyle}>
       <img css={IconStyle} src={"check.svg"} />
       <div css={TextWrapper}>
-        <Text text={"5511로 시작하는"} weight={"700"} size={"30px"} />
-        <Text text={"BC카드가 등록되었어요."} weight={"700"} size={"30px"} />
+        <Text text={`${cardState.uniqueNumber[0]}로 시작하는`} weight={"700"} size={"30px"} />
+        <Text text={`${cardState.cardIssuer}가 등록되었어요.`} weight={"700"} size={"30px"} />
       </div>
       <Button text={"확인"} rounded={true} onClick={handleButtonClick} />
     </div>

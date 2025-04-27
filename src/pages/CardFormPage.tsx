@@ -39,7 +39,7 @@ function CardFormPage() {
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate("/complete");
+    navigate("/complete", { state: cardState });
   };
 
   return (
