@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { cardNumber, date } from "../page/CardInfo";
+import { CardNumberType } from "../../hooks/useCardNumber";
+import { ExpirationDateType } from "../../hooks/useExpirationDate";
 import styled from "styled-components";
 
 interface CardProps {
-	cardNumbers: cardNumber;
+	cardNumbers: CardNumberType;
 	cardCompany: string;
-	expirationDate: date;
+	expirationDate: ExpirationDateType;
 }
-
-type CardBrand = "none" | "mastercard" | "visa";
 
 enum CardBackgroundColor {
 	"BC카드" = "#F04651",
@@ -22,29 +20,15 @@ enum CardBackgroundColor {
 }
 
 const Card = ({ cardNumbers, cardCompany, expirationDate }: CardProps) => {
-	const [badgeBrand, setBadgeBrand] = useState<CardBrand>("none");
 	const backgroundColor = CardBackgroundColor[cardCompany as keyof typeof CardBackgroundColor] ?? "#000";
 
-	const badgeImagePath = () => {
-		if (badgeBrand === "mastercard") return "./images/Mastercard.png";
-		if (badgeBrand === "visa") return "./images/Visa.png";
+	const getBadgeImagePath = (firstNumber: string) => {
+		if (firstNumber.startsWith("4")) return "./images/Visa.png";
+
+		const firstTwoDigits = parseInt(firstNumber.slice(0, 2), 10);
+		if (firstTwoDigits >= 51 && firstTwoDigits <= 55) return "./images/Mastercard.png";
 
 		return "";
-	};
-
-	const findCardBrand = (firstInputElementValues: string): CardBrand => {
-		if (firstInputElementValues.startsWith("4")) return "visa";
-
-		const firstTwoDigits = parseInt(firstInputElementValues.slice(0, 2));
-		if (firstTwoDigits >= 51 && firstTwoDigits <= 55) return "mastercard";
-
-		return "none";
-	};
-
-	const settingBadgeBrand = () => {
-		const firstInputElementValues = String(cardNumbers.first);
-		const brandName = findCardBrand(firstInputElementValues);
-		setBadgeBrand(brandName);
 	};
 
 	const formatDate = () => {
@@ -55,15 +39,11 @@ const Card = ({ cardNumbers, cardCompany, expirationDate }: CardProps) => {
 		return `${month} / ${year}`;
 	};
 
-	useEffect(() => {
-		settingBadgeBrand();
-	}, [cardNumbers.first]);
-
 	return (
 		<Container $cardBackgroundColor={backgroundColor}>
 			<Wrap>
 				<Chip />
-				<BrandBadge image={badgeImagePath()} />
+				<BrandBadge image={getBadgeImagePath(cardNumbers.first)} />
 			</Wrap>
 
 			<CardInfoWrap>
