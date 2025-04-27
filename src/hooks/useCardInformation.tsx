@@ -40,6 +40,10 @@ function reducer(state: CardInformationType, action: Action): CardInformationTyp
 const useCardInformation = () => {
   const [cardState, dispatch] = useReducer(reducer, initialCardInfo);
 
+  const allComplete = () => {
+    return Object.values(cardState).every((field) => field.every((value) => value !== ""));
+  };
+
   const uniqueNumberComplete = () => {
     return cardState.uniqueNumber.every((value) => value !== "");
   };
@@ -60,6 +64,7 @@ const useCardInformation = () => {
   return {
     cardState,
     dispatch,
+    allComplete,
     uniqueNumberComplete,
     expirationDateComplete,
     cvcNumberComplete,

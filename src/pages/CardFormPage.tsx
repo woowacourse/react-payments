@@ -13,8 +13,15 @@ import useCardError from "../hooks/useCardError.tsx";
 import { useNavigate } from "react-router";
 
 function CardFormPage() {
-  const { cardState, dispatch, uniqueNumberComplete, expirationDateComplete, cvcNumberComplete, cardIssuerComplete } =
-    useCardInformation();
+  const {
+    cardState,
+    dispatch,
+    allComplete,
+    uniqueNumberComplete,
+    expirationDateComplete,
+    cvcNumberComplete,
+    cardIssuerComplete,
+  } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
   const { cardErrorState, dispatchError, allClear, uniqueNumberClear, expirationDateClear, cvcNumberClear } =
     useCardError();
@@ -81,7 +88,7 @@ function CardFormPage() {
             dispatchError={dispatchError}
           />
         </div>
-        {isFormOpen("password") && allClear() && (
+        {isFormOpen("password") && allComplete() && allClear() && (
           <div css={ButtonContainerStyle}>
             <Button text={"확인"} onClick={handleButtonClick} />
           </div>

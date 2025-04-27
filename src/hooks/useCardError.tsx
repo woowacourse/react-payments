@@ -49,11 +49,11 @@ const useCardError = () => {
   };
 
   const cvcNumberClear = () => {
-    return cardErrorState.cvcNumber.every((value) => value === false);
+    return cardErrorState.cvcNumber[0] === false;
   };
 
   const passwordClear = () => {
-    return cardErrorState.password.every((value) => value === false);
+    return cardErrorState.password[0] === false;
   };
 
   return {
