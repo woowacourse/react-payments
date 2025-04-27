@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import { InputFieldType } from '../config/inputField';
 
@@ -21,43 +21,46 @@ export function useInputError<T extends InputFieldType>({
     )
   );
 
-  const errorStatus =
-    (Object.values(errorTypes) as ErrorType[][]).find(
-      (arr) => arr.length > 0
-    ) ?? [];
+  const errorMessage = useMemo(() => {
+    const currentErrorStatus = (
+      Object.values(errorTypes) as ErrorType[][]
+    ).find((arr) => arr.length > 0);
 
-  const errorMessage =
-    errorStatus && errorStatus?.length !== 0
-      ? ERROR_TYPE_TO_MESSAGE[errorStatus[0]]
-      : '';
+    const currentErrorType = currentErrorStatus?.[0];
 
-  const isComplete = !Boolean(
-    (Object.values(inputValue) as string[]).filter(
-      (value) => value.length !== completeCondition
-    ).length
-  );
+    return currentErrorType ? ERROR_TYPE_TO_MESSAGE[currentErrorType] : '';
+  }, [errorTypes]);
+
+  const isComplete = useMemo(() => {
+    return !Boolean(
+      (Object.values(inputValue) as string[]).filter(
+        (value) => value.length !== completeCondition
+      ).length
+    );
+  }, [inputValue, completeCondition]);
 
   const validateInputError = (
     inputName: T,
-    errorStatus: { errorType: ErrorType; isError: boolean }
+    { errorType, isError }: { errorType: ErrorType; isError: boolean }
   ) => {
-    const currentErrorType = errorTypes[inputName];
+    setErrorTypes((prevValue) => {
+      const currentErrorType = errorTypes[inputName];
 
-    if (errorStatus.isError) {
-      const set = new Set(currentErrorType);
-      set.add(errorStatus.errorType);
-      setErrorTypes((prevValue) => ({
-        ...prevValue,
-        [inputName]: Array.from(set),
-      }));
-    } else {
-      setErrorTypes((prevValue) => ({
-        ...prevValue,
-        [inputName]: currentErrorType.filter(
-          (errorType) => errorType !== errorStatus.errorType
-        ),
-      }));
-    }
+      if (isError) {
+        const set = new Set(currentErrorType).add(errorType);
+        return {
+          ...prevValue,
+          [inputName]: Array.from(set),
+        };
+      } else {
+        return {
+          ...prevValue,
+          [inputName]: currentErrorType.filter(
+            (errorType) => errorType !== errorType
+          ),
+        };
+      }
+    });
   };
 
   return { errorTypes, errorMessage, isComplete, validateInputError };
