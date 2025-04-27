@@ -22,6 +22,7 @@ export const defaultButton = css`
     color: ${theme.color.white};
     font-weight: 700;
     font-size: 15px;
+    cursor: pointer;
 
     width: 320px;
     height: 44px;
@@ -37,7 +38,8 @@ export const bottomButton = css`
     color: ${theme.color.white};
     font-weight: 700;
     font-size: 16px;
+    cursor: pointer;
     
-    width: 100%;
+    width: 428px;
     height: 52px;
 `;

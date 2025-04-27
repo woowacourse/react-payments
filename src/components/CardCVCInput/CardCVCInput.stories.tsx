@@ -7,6 +7,9 @@ const meta: Meta<typeof CardCVCInput> = {
   argTypes: {
     onChange: { action: 'changed' },
   },
+  parameters: {
+    layout: 'centered',
+  },
 };
 
 export default meta;
