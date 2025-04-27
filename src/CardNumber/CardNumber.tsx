@@ -2,6 +2,7 @@ import NumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 import styles from "./CardNumber.module.css";
+import { useRef } from "react";
 
 interface Props {
   handleChange: (value: string, index: number) => void;
@@ -36,6 +37,7 @@ export default function CardNumber({
     handleCardNumberInputNextFocus(value, index);
 
     const updatedNumbers = [...cardNumbers];
+    updatedNumbers[index] = value;
     const isComplete = updatedNumbers.every(
       (v) => v.length === CARD_NUMBER.MAX_LENGTH
     );

@@ -20,14 +20,24 @@ export default function CardPassword({
   handleChange,
   password,
   errorMessage,
+  onComplete,
 }: CardPasswordProps) {
+  const handleCardPasswordChange = (value: string) => {
+    handleChange(value);
+
+    if (value.length === 2) {
+      onComplete();
+      console.log("finished");
+    }
+  };
+
   return (
     <section>
       <InputText inputValue={CARD_PASSWORD.TITLE} variant="title" />
       <InputText inputValue={CARD_PASSWORD.DESCRIPTION} variant="description" />
       <InputText inputValue={CARD_PASSWORD.SUBTITLE} variant="subtitle" />
       <NumberInput
-        onChange={handleChange}
+        onChange={handleCardPasswordChange}
         placeholder={CARD_PASSWORD.PLACEHOLDER}
         value={password}
         errorMessage={errorMessage}

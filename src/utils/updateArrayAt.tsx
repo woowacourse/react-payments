@@ -1,6 +1,6 @@
 import React from "react";
 
-export function replaceAt<T>({
+export function updateArrayAt<T>({
   array,
   newValue,
   index,

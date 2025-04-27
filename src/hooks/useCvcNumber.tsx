@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isValidLength } from "../validation/validate";
-import { replaceAt } from "./replaceAt";
+import { updateArrayAt } from "../utils/updateArrayAt";
 
 const USE_CVC_NUMBER = {
   INVALID_LENGTH_ERROR: "CVC 번호는 3자리 숫자여야 합니다.",
@@ -19,7 +19,7 @@ export default function useCvcNumber(): UseCvcNumberReturn {
 
   const cvcNumbersValidate = (value: string) => {
     if (!isValidLength(value.length, USE_CVC_NUMBER.MAX_CVC_LENGTH)) {
-      replaceAt({
+      updateArrayAt({
         array: cvcNumbersError,
         newValue: USE_CVC_NUMBER.INVALID_LENGTH_ERROR,
         index: 0,
@@ -32,7 +32,7 @@ export default function useCvcNumber(): UseCvcNumberReturn {
     newCvcNumbers[0] = value.slice(0, USE_CVC_NUMBER.MAX_CVC_LENGTH);
     setCardCvcNumbers(newCvcNumbers);
 
-    replaceAt({
+    updateArrayAt({
       array: cvcNumbersError,
       newValue: "",
       index: 0,

@@ -21,12 +21,20 @@ export default function CardCvcNumber({
   errorMessage,
   onComplete,
 }: CardCvcNumberProps) {
+  const handleCardCvcNumberChange = (value: string) => {
+    handleChange(value);
+
+    if (value.length === 3) {
+      onComplete();
+    }
+  };
+
   return (
     <section>
       <InputText inputValue={CARD_CVC_NUMBER.TITLE} variant="title" />
       <InputText inputValue={CARD_CVC_NUMBER.SUBTITLE} variant="subtitle" />
       <NumberInput
-        onChange={handleChange}
+        onChange={handleCardCvcNumberChange}
         placeholder={CARD_CVC_NUMBER.PLACEHOLDER}
         value={cvcNumbers}
         errorMessage={errorMessage}

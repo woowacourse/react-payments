@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import CardNumber from "./CardNumber/CardNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
@@ -12,7 +13,7 @@ import useCardPassword from "./hooks/useCardPassword";
 import CardPassword from "./CardPassword/CardPassword";
 
 function App() {
-  const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
+  const { cardNumbers, cardType, cardNumbersError, handleCardNumbersChange } =
     useCardNumbers();
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
     useExpirationDate();
@@ -40,7 +41,7 @@ function App() {
       />
       <div className="card-input">
         <CardNumber
-          handleChange={cardNumbersValidate}
+          handleChange={handleCardNumbersChange}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
           onComplete={goToNextStep}

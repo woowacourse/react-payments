@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { replaceAt } from "./replaceAt";
-
+import { updateArrayAt } from "../utils/updateArrayAt";
 const CARD_RULE = {
   INVALID_CARD_NUMBER_LENGTH: "카드 번호는 4자리 숫자여야 합니다.",
   CARD_NUMBER_MAX_LENGTH: 4,
@@ -29,7 +28,7 @@ interface UseCardNumbersReturn {
   cardNumbers: string[];
   cardNumbersError: string[];
   cardType: CardType;
-  cardNumbersValidate: (value: string, index: number) => void;
+  handleCardNumbersChange: (value: string, index: number) => void;
 }
 
 export default function useCardNumbers(): UseCardNumbersReturn {
@@ -37,20 +36,31 @@ export default function useCardNumbers(): UseCardNumbersReturn {
   const [cardNumbersError, setError] = useState(["", "", "", ""]);
   const [cardType, setCardType] = useState<CardType>("default");
 
-  const cardNumbersValidate = (value: string, index: number) => {
-    const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = value.slice(
-      0,
-      CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
-    );
+  const isValidateCardNumbers = (value: string) => {
+    return value.length > 0 && value.length < CARD_RULE.CARD_NUMBER_MAX_LENGTH;
+  };
 
-    if (
-      !isValidLength(
-        value.length,
-        CONSTANT_USE_CARD_NUMBER.CARD_NUMBER_MAX_LENGTH
-      )
-    ) {
-      replaceAt({
+  const handleCardNumbersChange = (value: string, index: number) => {
+    if (value.length > CARD_RULE.CARD_NUMBER_MAX_LENGTH) {
+      return;
+    }
+
+    updateArrayAt({
+      array: cardNumbers,
+      newValue: value,
+      index: index,
+      setState: setCardNumbers,
+    });
+
+    if (index === 0) {
+      setCardType(
+        getCardType(Number(value.slice(0, CARD_RULE.CARD_TYPE_MAX_LENGTH)))
+      );
+    }
+
+    const isInvalid = isValidateCardNumbers(value);
+    if (isInvalid) {
+      updateArrayAt({
         array: cardNumbersError,
         newValue: CARD_RULE.INVALID_CARD_NUMBER_LENGTH,
         index: index,
@@ -59,14 +69,7 @@ export default function useCardNumbers(): UseCardNumbersReturn {
       return;
     }
 
-    setCardNumbers(newCardNumbers);
-    setCardType(
-      getCardType(
-        Number(value.slice(0, CONSTANT_USE_CARD_NUMBER.CARD_TYPE_MAX_LENGTH))
-      )
-    );
-
-    replaceAt({
+    updateArrayAt({
       array: cardNumbersError,
       newValue: "",
       index: index,
@@ -74,7 +77,12 @@ export default function useCardNumbers(): UseCardNumbersReturn {
     });
   };
 
-  return { cardNumbers, cardType, cardNumbersError, cardNumbersValidate };
+  return {
+    cardNumbers,
+    cardType,
+    cardNumbersError,
+    handleCardNumbersChange,
+  };
 }
 
 function getCardType(firstTwoDigits: number): CardType {

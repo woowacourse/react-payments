@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isValidMonth } from "../validation/validate";
-import { replaceAt } from "./replaceAt";
+import { updateArrayAt } from "../utils/updateArrayAt";
 
 export const USE_EXPIRATION_DATE = {
   INVALID_LENGTH: "2자리까지 입력 가능합니다.",
@@ -9,57 +9,47 @@ export const USE_EXPIRATION_DATE = {
 } as const;
 
 interface UseExpirationDateReturn {
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardExpirationDate: string[];
   cardExpirationDateError: string[];
   dateValidate: (value: string, index: number) => void;
 }
 
+export const getExpirationErrorMessage = (value: string, index: number) => {
+  if (value.length > 0 && value.length < USE_EXPIRATION_DATE.MAX_LENGTH) {
+    return USE_EXPIRATION_DATE.INVALID_LENGTH;
+  }
+
+  if (
+    index === 0 &&
+    value.length === USE_EXPIRATION_DATE.MAX_LENGTH &&
+    !isValidMonth(Number(value))
+  ) {
+    return USE_EXPIRATION_DATE.INVALID_MONTH_RANGE;
+  }
+
+  return "";
+};
+
 export default function useExpirationDate(): UseExpirationDateReturn {
-  const [cardExpirationDate, setCardExpirationDate] = useState({
-    month: "",
-    year: "",
-  });
+  const [cardExpirationDate, setCardExpirationDate] = useState(["", ""]);
   const [cardExpirationDateError, setError] = useState(["", ""]);
 
-  const dateValidate = (value: string, index: number) => {
-    const newValue = value.slice(0, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH);
-    const key = index === 0 ? "month" : "year";
-
-    if (!isValidLength(value.length, CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH)) {
-      replaceAt({
-        array: cardExpirationDateError,
-        newValue: CONSTANT_USE_EXPIRATION_DATE.IS_VALID_LENGTH_ERROR,
-        index: index,
-        setState: setError,
-      });
+  const handleExpirationDateChange = (value: string, index: number) => {
+    if (value.length > USE_EXPIRATION_DATE.MAX_LENGTH) {
       return;
     }
 
-    if (
-      index === 0 &&
-      value.length === CONSTANT_USE_EXPIRATION_DATE.MAX_LENGTH &&
-      !isValidMonth(Number(value))
-    ) {
-      replaceAt({
-        array: cardExpirationDateError,
-        newValue: CONSTANT_USE_EXPIRATION_DATE.MONTH_RANGE_ERROR,
-        index: index,
-        setState: setError,
-      });
-      return;
-    }
+    updateArrayAt({
+      array: cardExpirationDate,
+      newValue: value,
+      index: index,
+      setState: setCardExpirationDate,
+    });
 
-    setCardExpirationDate((prev) => ({
-      ...prev,
-      [key]: newValue,
-    }));
-
-    replaceAt({
+    const errorMessage = getExpirationErrorMessage(value, index);
+    updateArrayAt({
       array: cardExpirationDateError,
-      newValue: "",
+      newValue: errorMessage,
       index: index,
       setState: setError,
     });
@@ -68,6 +58,6 @@ export default function useExpirationDate(): UseExpirationDateReturn {
   return {
     cardExpirationDate,
     cardExpirationDateError,
-    dateValidate,
+    dateValidate: handleExpirationDateChange,
   };
 }
