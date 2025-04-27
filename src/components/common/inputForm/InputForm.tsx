@@ -24,16 +24,9 @@ function InputForm({
       <div className={styles.inputBox}>
         <label className="tx-lg">{label}</label>
         <div className={styles.inputContainer}>{children}</div>
-        <p
-          style={
-            feedbackMessage
-              ? { visibility: "visible" }
-              : { visibility: "hidden" }
-          }
-          className={`${styles.feedbackMessage}`}
-        >
-          {feedbackMessage}
-        </p>
+        {feedbackMessage && (
+          <p className={`${styles.feedbackMessage} tx-lg`}>{feedbackMessage}</p>
+        )}
       </div>
     </div>
   );

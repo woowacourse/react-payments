@@ -8,6 +8,7 @@ import CardPasswordInput from "./cardInput/CardPasswordInput";
 import SubmitButton from "../../../../../components/common/inputForm/button/SubmitButton";
 import { CARD_BACKGROUND_COLOR } from "../cardPreview/constants/DisplayData";
 import { CardInfo } from "../../PaymentInputPage";
+import { useNavigate } from "react-router";
 interface CardInputFormProps {
   cardInfo: CardInfo;
   setCardInfo: Dispatch<SetStateAction<CardInfo>>;
@@ -23,42 +24,46 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
     cardPasswordInput: false,
   });
   const [isVisibleSubmitButton, setIsVisibleSubmitButton] = useState(false);
-  console.log("condition 모두 체크 -> ", validState);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isAllValid = Object.values(validState).every(
       (condition) => condition
     );
     setIsVisibleSubmitButton(isAllValid);
-    console.log("isVisibleSubmitButton", isVisibleSubmitButton);
   }, [validState]);
 
   return (
     <form className={styles.cardInputForm}>
-      <div className={styles.inputBox}>
-        {validState.cardCVCInput && (
-          <CardPasswordInput setValidState={setValidState} />
-        )}
-        {validState.cardExpirationDateInput && (
-          <CardCVCInput setValidState={setValidState} />
-        )}
-        {validState.cardBrandSelect && (
-          <CardExpirationDateInput
+      <div className={styles.inputBoxWrapper}>
+        <div className={styles.inputBox}>
+          {validState.cardCVCInput && (
+            <CardPasswordInput setValidState={setValidState} />
+          )}
+          {validState.cardExpirationDateInput && (
+            <CardCVCInput setValidState={setValidState} />
+          )}
+          {validState.cardBrandSelect && (
+            <CardExpirationDateInput
+              setValidState={setValidState}
+              setCardInfo={setCardInfo}
+            />
+          )}
+          {validState.cardNumberInput && (
+            <CardBrandSelect
+              setValidState={setValidState}
+              setCardInfo={setCardInfo}
+            />
+          )}
+          <CardNumberInput
             setValidState={setValidState}
             setCardInfo={setCardInfo}
           />
-        )}
-        {validState.cardNumberInput && (
-          <CardBrandSelect
-            setValidState={setValidState}
-            setCardInfo={setCardInfo}
-          />
-        )}
-        <CardNumberInput
-          setValidState={setValidState}
-          setCardInfo={setCardInfo}
-        />
+        </div>
+        <div className={styles.fadeBottom}></div>
       </div>
+
       {isVisibleSubmitButton && (
         <SubmitButton backgroundColor={CARD_BACKGROUND_COLOR[brandName]}>
           확인

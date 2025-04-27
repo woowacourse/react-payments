@@ -1,7 +1,9 @@
 .container {
+  height: 120px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .inputForm {
@@ -14,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .inputBox {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 label {
@@ -30,7 +32,7 @@ label {
 .titleBox {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 
   & p {
     color: var(--grey);
@@ -39,5 +41,4 @@ label {
 
 .feedbackMessage {
   color: var(--red);
-  height: 18px;
 }

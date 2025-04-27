@@ -1,11 +1,12 @@
 .container {
   position: absolute;
-  top: 120px;
+  top: 110px;
   width: 100%;
   border: 1px solid var(--grey);
   border-radius: 4px;
   color: var(--grey);
   background-color: var(--white);
+  box-sizing: border-box;
 }
 
 .item {

@@ -10,6 +10,7 @@
   color: var(--white);
   padding: 14px;
   box-shadow: 1px 0px 5px #444;
+  margin-bottom: 20px;
 }
 
 .cardNumberBox {
