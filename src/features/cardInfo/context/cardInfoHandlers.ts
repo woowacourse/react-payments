@@ -6,7 +6,7 @@ import {
   cardIssuerValidator,
   cardNumberValidator,
   cardPasswordValidator,
-} from '../../../features/cardInfo/validation/cardInfoValidator';
+} from '../validation/cardInfoValidator';
 
 const VALIDATORS = {
   cardNumber: cardNumberValidator,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardPage from './CardPage';
-import { CardInfoProvider } from '../../app/context/cardInfo/CardInfoProvider';
+import { CardInfoProvider } from '../../features/cardInfo/context/CardInfoContext';
 import { MemoryRouter } from 'react-router';
 
 function CardPageWithContext() {

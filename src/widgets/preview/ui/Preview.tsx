@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { getCardImageSrc } from '../utils/getCardImageSrc';
 import * as S from './Preview.styles';
 import { getColorByCardIssuer } from '../utils/getColorByCardIssuer';
-import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
+import { useCardInfoContext } from '../../../features/cardInfo/context/CardInfoContext';
 
 export default function Preview() {
   const { cardInfo } = useCardInfoContext();

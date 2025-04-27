@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useCardInfoContext } from '../../app/context/cardInfo/CardInfoProvider';
+import { useCardInfoContext } from '../../features/cardInfo/context/CardInfoContext';
 import CustomLinkButton from '../../shared/ui/CustomLinkButton';
 ``;
 import * as S from './RegisterPage.styles';

@@ -6,7 +6,7 @@ import CardPasswordSection from './CardPasswordSection';
 import { cardCVCValidator, cardExpirationDateValidator, cardNumberValidator } from '../validation/cardInfoValidator';
 import { NO_ERROR } from '../../../shared/constants/errorConstants';
 import * as S from './CardInfoContainer.styles';
-import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
+import { useCardInfoContext } from '../context/CardInfoContext';
 
 export default function CardInfoContainer() {
   const { cardInfo, updateCardInfo, error } = useCardInfoContext();

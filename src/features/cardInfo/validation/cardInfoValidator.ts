@@ -1,4 +1,4 @@
-import { useCardInfoContext } from '../../../app/context/cardInfo/CardInfoProvider';
+import { useCardInfoContext } from '../context/CardInfoContext';
 import {
   MASTERCARD_FIRST_DIGIT,
   MASTERCARD_MAX_SECOND_DIGIT,
