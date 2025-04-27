@@ -1,5 +1,4 @@
-import CompletePage from '@/pages/CompletePage/CompletePage';
-import RegisterPage from '@/pages/RegisterPage/RegisterPage';
+import { CompletePage, RegisterPage } from '@/pages';
 import { Global, ThemeProvider } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
 import global from '../styles/global';
