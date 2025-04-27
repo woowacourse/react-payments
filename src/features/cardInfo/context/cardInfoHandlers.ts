@@ -32,6 +32,7 @@ const validateAndSetError = (
   const validator = VALIDATORS[key];
   const errorKey = ERROR_KEYS[key] as keyof ErrorProps;
   const [errorIndex, errorMessage] = validator(value);
+
   setError((prevError) => ({
     ...prevError,
     [errorKey]: errorIndex !== NO_ERROR ? { errorIndex, errorMessage } : { errorIndex: NO_ERROR, errorMessage: '' },
@@ -45,6 +46,7 @@ export const handleCardNumberChange = (
   setError: React.Dispatch<React.SetStateAction<ErrorProps>>
 ) => {
   const index = Number(name[name.length - 1]);
+
   setCardNumber((prev) => {
     const updatedNumbers = prev.map((num, i) => (i === index ? value : num));
     validateAndSetError('cardNumber', updatedNumbers, setError);
@@ -59,10 +61,11 @@ export const handleCardExpirationDateChange = (
   setError: React.Dispatch<React.SetStateAction<ErrorProps>>
 ) => {
   const key = name.split('-')[1] as 'month' | 'year';
+
   setCardExpirationDate((prev) => {
-    const updateDate = { ...prev, [key]: value };
-    validateAndSetError('cardExpirationDate', updateDate, setError);
-    return updateDate;
+    const updatedDate = { ...prev, [key]: value };
+    validateAndSetError('cardExpirationDate', updatedDate, setError);
+    return updatedDate;
   });
 };
 
@@ -71,10 +74,8 @@ export const handleCardCVCChange = (
   setCardCVC: React.Dispatch<React.SetStateAction<string>>,
   setError: React.Dispatch<React.SetStateAction<ErrorProps>>
 ) => {
-  setCardCVC(() => {
-    validateAndSetError('cardCVC', value, setError);
-    return value;
-  });
+  setCardCVC(value);
+  validateAndSetError('cardCVC', value, setError);
 };
 
 export const handleCardIssuerChange = (
@@ -82,10 +83,8 @@ export const handleCardIssuerChange = (
   setCardIssuer: React.Dispatch<React.SetStateAction<string>>,
   setError: React.Dispatch<React.SetStateAction<ErrorProps>>
 ) => {
-  setCardIssuer(() => {
-    validateAndSetError('cardIssuer', value, setError);
-    return value;
-  });
+  setCardIssuer(value);
+  validateAndSetError('cardIssuer', value, setError);
 };
 
 export const handleCardPasswordChange = (
@@ -93,8 +92,6 @@ export const handleCardPasswordChange = (
   setCardPassword: React.Dispatch<React.SetStateAction<string>>,
   setError: React.Dispatch<React.SetStateAction<ErrorProps>>
 ) => {
-  setCardPassword(() => {
-    validateAndSetError('cardPassword', value, setError);
-    return value;
-  });
+  setCardPassword(value);
+  validateAndSetError('cardPassword', value, setError);
 };
