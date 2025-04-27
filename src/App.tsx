@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import FormContainer from "./components/FormContainer/FormContainer.tsx";
 import PreviewCard from "./components/PreviewCard/PreviewCard.tsx";
 import useValidation from "./hooks/useValidation/useValidation";
-import useCardInformation from "./hooks/\buseCardInformation/useCardInformation.tsx";
+import useCardInformation from "./hooks/useCardInformation/useCardInformation.tsx";
 import useStep from "./hooks/useStep.tsx";
 import useAllComplete from "./hooks/useAllComplete.tsx";
 import Button from "./components/Button/Button.tsx";
