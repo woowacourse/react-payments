@@ -24,8 +24,8 @@ function App() {
   const { password, passwordError, passwordValidate } = useCardPasswordState();
   const [step, setStep] = useState(1);
 
-  const goToNextStep = () => {
-    setStep((prev) => prev + 1);
+  const goToStep = (targetStep: number) => {
+    setStep(targetStep);
   };
 
   return (
@@ -46,13 +46,13 @@ function App() {
           handleChange={handleChange}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
-          onComplete={goToNextStep}
+          onComplete={() => goToStep(2)}
         />
         {step >= 2 && (
           <CardCompanyPicker
             selectedCompany={selectedCompany}
             selectCompany={selectCompany}
-            onComplete={goToNextStep}
+            onComplete={() => goToStep(3)}
           />
         )}
         {step >= 3 && (
@@ -60,7 +60,7 @@ function App() {
             handleChange={dateValidate}
             cardExpirationDate={cardExpirationDate}
             errorMessage={cardExpirationDateError}
-            onComplete={goToNextStep}
+            onComplete={() => goToStep(4)}
           />
         )}
         {step >= 4 && (
@@ -68,7 +68,7 @@ function App() {
             handleChange={cvcNumbersValidate}
             cvcNumbers={cvcNumbers}
             errorMessage={cvcNumbersError}
-            onComplete={goToNextStep}
+            onComplete={() => goToStep(5)}
           />
         )}
 
@@ -77,7 +77,7 @@ function App() {
             handleChange={passwordValidate}
             password={password}
             errorMessage={passwordError}
-            onComplete={goToNextStep}
+            onComplete={() => goToStep(6)}
           />
         )}
       </div>
