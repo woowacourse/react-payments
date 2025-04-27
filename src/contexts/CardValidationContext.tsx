@@ -14,6 +14,10 @@ import {
   PasswordErrorState,
 } from "../types/validation";
 import {
+  updateMultiFieldErrorState,
+  updateSimpleErrorState,
+} from "../utils/updateErrorState";
+import {
   isErrorCardCompany,
   isErrorCardNumber,
   isErrorCvcNumber,
@@ -85,21 +89,13 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     position: CardNumbersSegmentType
   ) => {
     const errorMessage = isErrorCardNumber(value);
-    setCardNumberErrors((prev: CardNumberErrorsState) => {
-      const newHasError = {
-        ...prev.hasError,
-        [position]: !!errorMessage,
-      };
-
-      const hasAnyError = Object.values(newHasError).some(Boolean);
-      const finalErrorMessage =
-        errorMessage || (hasAnyError ? prev.errorMessage : null);
-
-      return {
-        errorMessage: finalErrorMessage,
-        hasError: newHasError,
-      };
-    });
+    setCardNumberErrors((prev: CardNumberErrorsState) =>
+      updateMultiFieldErrorState<CardNumbersSegmentType>(
+        errorMessage,
+        position,
+        prev
+      )
+    );
   };
 
   const validateExpirationPeriod = (
@@ -107,45 +103,28 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     position: ExpirationPeriodSegmentType
   ) => {
     const errorMessage = isErrorExpirationPeriod(value, position);
-    setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) => {
-      const newHasError = {
-        ...prev.hasError,
-        [position]: !!errorMessage,
-      };
-
-      const hasAnyError = Object.values(newHasError).some(Boolean);
-      const finalErrorMessage =
-        errorMessage || (hasAnyError ? prev.errorMessage : null);
-
-      return {
-        errorMessage: finalErrorMessage,
-        hasError: newHasError,
-      };
-    });
+    setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) =>
+      updateMultiFieldErrorState<ExpirationPeriodSegmentType>(
+        errorMessage,
+        position,
+        prev
+      )
+    );
   };
 
   const validateCvcNumber = (value: string) => {
     const errorMessage = isErrorCvcNumber(value);
-    setCvcNumberError({
-      errorMessage: errorMessage,
-      hasError: !!errorMessage,
-    });
+    setCvcNumberError(updateSimpleErrorState(errorMessage));
   };
 
   const validateCardCompany = (value: string) => {
     const errorMessage = isErrorCardCompany(value);
-    setCardCompanyError({
-      errorMessage: errorMessage,
-      hasError: !!errorMessage,
-    });
+    setCardCompanyError(updateSimpleErrorState(errorMessage));
   };
 
   const validatePassword = (value: string) => {
     const errorMessage = isErrorPassword(value);
-    setPasswordError({
-      errorMessage: errorMessage,
-      hasError: !!errorMessage,
-    });
+    setPasswordError(updateSimpleErrorState(errorMessage));
   };
 
   const hasErrorByType = (type: CardFormType): boolean => {
