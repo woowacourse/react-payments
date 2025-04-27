@@ -2,7 +2,7 @@ import { CARD_COMPANIES, MASKING } from '@/constants';
 import { CardCompanyType, CardCVCNumberInputType, CardExpirationDateInputType, CardNumberInputType } from '@/types';
 import { useTheme } from '@emotion/react';
 import * as S from './CardPreview.styles';
-import { getCardType } from '@/app/utils';
+import { getCardType } from '@/App/utils';
 import { MasterCard, VisaCard } from '../common/icons';
 
 interface CardPreviewProps {
