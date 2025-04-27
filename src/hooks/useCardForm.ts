@@ -15,19 +15,14 @@ function useCardForm() {
   const password = useFormField(INPUTARRAY_LENGTH.PASSWORD);
 
   const [cardCompany, setCardCompany] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleCardCompanySelect = (value: string) => {
     setCardCompany(value);
   };
 
-  useEffect(() => {
-    if (cardNumber.isValid && expirationDate.isValid && cvc.isValid && password.isValid) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
-  }, [cardNumber.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
+  const getIsAllFormValid = () => {
+    return cardNumber.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
+  };
 
   return {
     cardNumber,
@@ -36,7 +31,7 @@ function useCardForm() {
     password,
     cardCompany,
     handleCardCompanySelect,
-    isFormValid,
+    isFormValid: getIsAllFormValid(),
   };
 }
 
