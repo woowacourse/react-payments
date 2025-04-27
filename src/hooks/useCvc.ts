@@ -14,8 +14,7 @@ const useCvc = () => {
     setCvc({ errorMessage, value });
   };
 
-  const cvcRef = useRef<HTMLButtonElement>(null);
-  return { cvc, handleCvcChange, cvcRef };
+  return { cvc, handleCvcChange };
 };
 
 const getCvcErrorMessage = (value: string) => {

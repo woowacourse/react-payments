@@ -7,9 +7,9 @@ import usePassword from './usePassword';
 export function useFormState() {
   const { cardNumbers, handleCardNumbersChange, cardInputRefs, getCardNumberErrorMessage } = useCardNumbers();
   const { expiration, handleExpirationChange, expirationRef } = useExpiration();
-  const { company, handleCompanySelect, companyRef } = useCompany();
-  const { cvc, handleCvcChange, cvcRef } = useCvc();
-  const { password, handlePasswordChange, passwordRef } = usePassword();
+  const { company, handleCompanySelect } = useCompany();
+  const { cvc, handleCvcChange } = useCvc();
+  const { password, handlePasswordChange } = usePassword();
 
   return {
     cardNumbers,
@@ -23,14 +23,11 @@ export function useFormState() {
 
     company,
     handleCompanySelect,
-    componyRef: companyRef,
 
     cvc,
     handleCvcChange,
-    cvcRef,
 
     password,
-    handlePasswordChange,
-    passwordRef
+    handlePasswordChange
   };
 }

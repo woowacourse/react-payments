@@ -7,9 +7,7 @@ const useCompany = () => {
     setCompany(value);
   };
 
-  const companyRef = useRef<HTMLInputElement>(null);
-
-  return { company, handleCompanySelect, companyRef };
+  return { company, handleCompanySelect };
 };
 
 export default useCompany;

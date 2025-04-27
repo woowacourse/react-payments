@@ -16,8 +16,7 @@ const usePassword = () => {
     }));
   };
 
-  const passwordRef = useRef<HTMLInputElement>(null);
-  return { password, handlePasswordChange, passwordRef };
+  return { password, handlePasswordChange };
 };
 
 export default usePassword;
