@@ -62,7 +62,7 @@ function AddCardForm({
       firstCardNumber: cardNumberState["first"].value,
       selectedBrand: selectedBrand,
     };
-    navigate(locations.ADD_CARD_COMPLETE.pathname, { state });
+    navigate(locations.ADD_CARD_COMPLETE, { state });
   }
 
   return (
