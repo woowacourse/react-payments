@@ -68,7 +68,7 @@ export const CardNumbersWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      cardNumberErrors: {
+      cardNumberError: {
         errorMessage: "숫자만 입력 가능합니다",
         hasError: {
           first: true,
@@ -88,7 +88,7 @@ export const ExpirationPeriodWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      expirationPeriodErrors: {
+      expirationPeriodError: {
         errorMessage: "숫자만 입력 가능합니다",
         hasError: {
           month: true,

@@ -22,7 +22,7 @@ const CustomCardValidationProvider = ({
   };
 
   const defaultValue: CardValidationContextType = {
-    cardNumberErrors: {
+    cardNumberError: {
       errorMessage: null,
       hasError: {
         first: false,
@@ -31,7 +31,7 @@ const CustomCardValidationProvider = ({
         fourth: false,
       },
     },
-    expirationPeriodErrors: {
+    expirationPeriodError: {
       errorMessage: null,
       hasError: {
         month: false,
@@ -57,11 +57,11 @@ const CustomCardValidationProvider = ({
   contextValue.hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return Object.values(contextValue.cardNumberErrors.hasError).some(
+        return Object.values(contextValue.cardNumberError.hasError).some(
           (error) => error
         );
       case CARD_FORM_TYPE.expirationPeriod:
-        return Object.values(contextValue.expirationPeriodErrors.hasError).some(
+        return Object.values(contextValue.expirationPeriodError.hasError).some(
           (error) => error
         );
       case CARD_FORM_TYPE.cvcNumber:
@@ -78,9 +78,9 @@ const CustomCardValidationProvider = ({
   contextValue.getErrorMessage = (type: CardFormType): ErrorMessage => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return contextValue.cardNumberErrors.errorMessage;
+        return contextValue.cardNumberError.errorMessage;
       case CARD_FORM_TYPE.expirationPeriod:
-        return contextValue.expirationPeriodErrors.errorMessage;
+        return contextValue.expirationPeriodError.errorMessage;
       case CARD_FORM_TYPE.cvcNumber:
         return contextValue.cvcNumberError.errorMessage;
       case CARD_FORM_TYPE.cardCompany:

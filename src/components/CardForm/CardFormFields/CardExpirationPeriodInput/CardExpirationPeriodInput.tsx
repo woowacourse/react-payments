@@ -20,7 +20,7 @@ const expirationPeriodSequence = [
 
 export default function CardExpirationPeriodInput() {
   const { expirationPeriod, updateExpirationPeriod } = useCard();
-  const { expirationPeriodErrors, validateExpirationPeriod } =
+  const { expirationPeriodError, validateExpirationPeriod } =
     useCardValidation();
   const { registerRef, handleInputChange } = useFieldFocus(
     expirationPeriodSequence
@@ -43,7 +43,7 @@ export default function CardExpirationPeriodInput() {
             key={position}
             placeholder={PLACEHOLDER.expirationPeriod[position]}
             maxLength={MAX_LENGTH.expirationPeriod}
-            isError={expirationPeriodErrors.hasError[position]}
+            isError={expirationPeriodError.hasError[position]}
             value={expirationPeriod[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleExpirationPeriodChange(e.target.value, position)

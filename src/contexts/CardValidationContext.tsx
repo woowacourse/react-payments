@@ -7,10 +7,10 @@ import {
 } from "../types/card";
 import {
   CardCompanyErrorState,
-  CardNumberErrorsState,
+  CardNumberErrorState,
   CvcNumberErrorState,
   ErrorMessage,
-  ExpirationPeriodErrorsState,
+  ExpirationPeriodErrorState,
   PasswordErrorState,
 } from "../types/validation";
 import {
@@ -26,8 +26,8 @@ import {
 } from "../utils/validations/validators";
 
 export interface CardValidationContextType {
-  cardNumberErrors: CardNumberErrorsState;
-  expirationPeriodErrors: ExpirationPeriodErrorsState;
+  cardNumberError: CardNumberErrorState;
+  expirationPeriodError: ExpirationPeriodErrorState;
   cvcNumberError: CvcNumberErrorState;
   cardCompanyError: CardCompanyErrorState;
   passwordError: PasswordErrorState;
@@ -73,10 +73,11 @@ export const CardValidationContext =
   createContext<CardValidationContextType | null>(null);
 
 export function CardValidationProvider({ children }: { children: ReactNode }) {
-  const [cardNumberErrors, setCardNumberErrors] =
-    useState<CardNumberErrorsState>(initialCardNumbersState);
-  const [expirationPeriodErrors, setExpirationPeriodErrors] =
-    useState<ExpirationPeriodErrorsState>(initialExpirationPeriodState);
+  const [cardNumberError, setCardNumberError] = useState<CardNumberErrorState>(
+    initialCardNumbersState
+  );
+  const [expirationPeriodError, setExpirationPeriodError] =
+    useState<ExpirationPeriodErrorState>(initialExpirationPeriodState);
   const [cvcNumberError, setCvcNumberError] =
     useState<CvcNumberErrorState>(initialCommonState);
   const [cardCompanyError, setCardCompanyError] =
@@ -89,7 +90,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     position: CardNumbersSegmentType
   ) => {
     const errorMessage = isErrorCardNumber(value);
-    setCardNumberErrors((prev: CardNumberErrorsState) =>
+    setCardNumberError((prev: CardNumberErrorState) =>
       updateMultiFieldErrorState<CardNumbersSegmentType>(
         errorMessage,
         position,
@@ -103,7 +104,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
     position: ExpirationPeriodSegmentType
   ) => {
     const errorMessage = isErrorExpirationPeriod(value, position);
-    setExpirationPeriodErrors((prev: ExpirationPeriodErrorsState) =>
+    setExpirationPeriodError((prev: ExpirationPeriodErrorState) =>
       updateMultiFieldErrorState<ExpirationPeriodSegmentType>(
         errorMessage,
         position,
@@ -130,9 +131,9 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
   const hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return Object.values(cardNumberErrors.hasError).some((state) => state);
+        return Object.values(cardNumberError.hasError).some((state) => state);
       case CARD_FORM_TYPE.expirationPeriod:
-        return Object.values(expirationPeriodErrors.hasError).some(
+        return Object.values(expirationPeriodError.hasError).some(
           (state) => state
         );
       case CARD_FORM_TYPE.cvcNumber:
@@ -149,9 +150,9 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
   const getErrorMessage = (type: CardFormType): ErrorMessage => {
     switch (type) {
       case CARD_FORM_TYPE.cardNumbers:
-        return cardNumberErrors.errorMessage;
+        return cardNumberError.errorMessage;
       case CARD_FORM_TYPE.expirationPeriod:
-        return expirationPeriodErrors.errorMessage;
+        return expirationPeriodError.errorMessage;
       case CARD_FORM_TYPE.cvcNumber:
         return cvcNumberError.errorMessage;
       case CARD_FORM_TYPE.cardCompany:
@@ -170,8 +171,8 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
   return (
     <CardValidationContext.Provider
       value={{
-        cardNumberErrors,
-        expirationPeriodErrors,
+        cardNumberError,
+        expirationPeriodError,
         cvcNumberError,
         cardCompanyError,
         passwordError,

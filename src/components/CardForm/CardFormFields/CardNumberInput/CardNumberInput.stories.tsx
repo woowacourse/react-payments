@@ -24,7 +24,7 @@ export const WithError: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      cardNumberErrors: {
+      cardNumberError: {
         errorMessage: null,
         hasError: {
           first: true,
@@ -41,7 +41,7 @@ export const WithErrors: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      cardNumberErrors: {
+      cardNumberError: {
         errorMessage: null,
         hasError: {
           first: true,

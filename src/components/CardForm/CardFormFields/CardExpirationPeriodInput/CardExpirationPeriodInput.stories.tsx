@@ -24,7 +24,7 @@ export const WithError: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      expirationPeriodErrors: {
+      expirationPeriodError: {
         errorMessage: null,
         hasError: {
           month: true,
@@ -39,7 +39,7 @@ export const WithErrors: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
-      expirationPeriodErrors: {
+      expirationPeriodError: {
         errorMessage: null,
         hasError: {
           month: true,

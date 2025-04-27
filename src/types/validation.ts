@@ -6,11 +6,11 @@ interface CommonErrorState {
   hasError: boolean;
 }
 
-export interface CardNumberErrorsState {
+export interface CardNumberErrorState {
   errorMessage: ErrorMessage;
   hasError: Record<CardNumbersSegmentType, boolean>;
 }
-export interface ExpirationPeriodErrorsState {
+export interface ExpirationPeriodErrorState {
   errorMessage: ErrorMessage;
   hasError: Record<ExpirationPeriodSegmentType, boolean>;
 }

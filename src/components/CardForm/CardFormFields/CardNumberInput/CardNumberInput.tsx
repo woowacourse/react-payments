@@ -22,7 +22,7 @@ const cardNumberSequence = [
 
 export default function CardNumberInput() {
   const { cardNumbers, updateCardNumber } = useCard();
-  const { cardNumberErrors, validateCardNumber } = useCardValidation();
+  const { cardNumberError, validateCardNumber } = useCardValidation();
   const { registerRef, handleInputChange } = useFieldFocus(cardNumberSequence);
 
   const handleCardNumberChange = (
@@ -42,7 +42,7 @@ export default function CardNumberInput() {
             key={position}
             placeholder={PLACEHOLDER.cardNumber}
             maxLength={MAX_LENGTH.cardNumber}
-            isError={cardNumberErrors.hasError[position]}
+            isError={cardNumberError.hasError[position]}
             value={cardNumbers[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCardNumberChange(e.target.value, position)
