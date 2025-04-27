@@ -29,15 +29,18 @@ function CardExpiryDateInput({
     const { name, value } = target;
 
     setExpiryDate({ ...expiryDate, [name]: value });
-    checkIsValidExpiry(name, value);
-    checkIsValidType(name, value);
+    checkIsValidInput(name, value);
   }
 
-  function checkIsValidType(name: string, value: string) {
+  function checkIsValidInput(name: string, value: string) {
     const { isValid, message } = validate.checkNumberInput(value);
+    if (!isValid) {
+      setFeedbackMessage(message);
+      setIsValid((prev) => ({ ...prev, [name]: isValid }));
+      return;
+    }
 
-    setFeedbackMessage(message);
-    setIsValid((prev) => ({ ...prev, [name]: isValid }));
+    checkIsValidExpiry(name, value);
   }
 
   function checkIsValidExpiry(name: string, value: string) {
