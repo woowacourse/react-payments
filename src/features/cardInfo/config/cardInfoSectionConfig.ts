@@ -4,7 +4,10 @@ import {
   cardCVCValidator,
 } from '../../../entities/cardInfo/model/cardInfoValidator';
 import { ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
-import { CardInfoType } from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
+import {
+  CardInfoType,
+  CARD_INFO_VALID_RULE,
+} from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
 
 type InputConfig = {
   type: string;
@@ -35,7 +38,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
       { type: 'text', placeholder: '1234', name: `${CardInfoType.NUMBER}-2` },
       { type: 'text', placeholder: '1234', name: `${CardInfoType.NUMBER}-3` },
     ],
-    maxLength: 4,
+    maxLength: CARD_INFO_VALID_RULE[CardInfoType.NUMBER].MAX_LENGTH,
     validator: cardNumberValidator,
     errorKey: ErrorKey.CARD_NUMBER,
   },
@@ -48,7 +51,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
       { type: 'text', placeholder: 'MM', name: `${CardInfoType.EXPDATE}-month` },
       { type: 'text', placeholder: 'YY', name: `${CardInfoType.EXPDATE}-year` },
     ],
-    maxLength: 2,
+    maxLength: CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH,
     validator: cardExpirationDateValidator,
     errorKey: ErrorKey.CARD_EXPIRATION_DATE,
   },
@@ -58,7 +61,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     description: '',
     subTitle: 'CVC',
     inputArr: [{ type: 'text', placeholder: '123', name: CardInfoType.CVC }],
-    maxLength: 3,
+    maxLength: CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH,
     validator: cardCVCValidator,
     errorKey: ErrorKey.CARD_CVC,
   },
