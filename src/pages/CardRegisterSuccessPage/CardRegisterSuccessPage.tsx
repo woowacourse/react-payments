@@ -24,10 +24,10 @@ export const CardRegisterSuccessPage = () => {
           src="./check.png"
           alt="체크 아이콘"
         />
-        <p className={styles.text}>
+        <p className={styles.text} data-testid="success-message">
           {firstCardNumbers}로 시작하는
           <br />
-          {CARD_BRANDS[brand]}카드가 등록되었어요.
+          {CARD_BRANDS[brand]}가 등록되었어요.
         </p>
         <Button text="확인" onClick={handleClick} />
       </div>

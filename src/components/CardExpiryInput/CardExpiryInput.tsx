@@ -14,9 +14,6 @@ const CardExpiryInput = () => {
   } = useCardFormContext();
   const [isMonthError, isYearError] = expireErrors;
 
-  // if (!inputsState.expiry.isVisible) {
-  //   return;
-  // }
   return (
     <InputContainer
       title={INPUT_CONTAINER.EXPIRE.TITLE}
