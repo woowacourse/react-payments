@@ -1,5 +1,5 @@
 export const CARD_FORM_TYPE = {
-  cardNumbers: "cardNumbers",
+  cardNumber: "cardNumber",
   expirationPeriod: "expirationPeriod",
   cvcNumber: "cvcNumber",
   cardCompany: "cardCompany",

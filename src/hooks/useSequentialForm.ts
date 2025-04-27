@@ -5,7 +5,7 @@ import { useCard } from "./useCard";
 import { useCardValidation } from "./useCardValidation";
 
 const formSequence = [
-  CARD_FORM_TYPE.cardNumbers,
+  CARD_FORM_TYPE.cardNumber,
   CARD_FORM_TYPE.cardCompany,
   CARD_FORM_TYPE.expirationPeriod,
   CARD_FORM_TYPE.cvcNumber,
@@ -13,7 +13,7 @@ const formSequence = [
 ];
 
 const initialState = {
-  [CARD_FORM_TYPE.cardNumbers]: false,
+  [CARD_FORM_TYPE.cardNumber]: false,
   [CARD_FORM_TYPE.cardCompany]: false,
   [CARD_FORM_TYPE.expirationPeriod]: false,
   [CARD_FORM_TYPE.cvcNumber]: false,
@@ -23,9 +23,9 @@ const initialState = {
 export default function useSequentialForm() {
   const [visibleFields, setVisibleFields] = useState<
     Record<CardFormType, boolean>
-  >({ ...initialState, [CARD_FORM_TYPE.cardNumbers]: true });
+  >({ ...initialState, [CARD_FORM_TYPE.cardNumber]: true });
   const [currentField, setCurrentField] = useState<CardFormType>(
-    CARD_FORM_TYPE.cardNumbers
+    CARD_FORM_TYPE.cardNumber
   );
   const filledState = useRef(initialState);
   const { hasErrorByType } = useCardValidation();

@@ -9,7 +9,7 @@ interface CardProviderProps {
 
 const CustomCardProvider = ({ children, value }: CardProviderProps) => {
   const defaultValue: CardContextType = {
-    cardNumbers: {
+    cardNumber: {
       first: "",
       second: "",
       third: "",

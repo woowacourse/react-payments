@@ -75,7 +75,7 @@ export const CardTypeStyles = styled.div<{ $cardType: CardType }>`
   top: 18px;
 `;
 
-export const CardNumbersGroupStyles = styled.div`
+export const CardNumberGroupStyles = styled.div`
   display: flex;
   gap: 7px;
 `;

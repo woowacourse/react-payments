@@ -1,13 +1,13 @@
 import { CARD_COMPANY, MAX_LENGTH } from "../../constants/card";
 import {
   CardCompanyState,
-  CardNumbersState,
+  CardNumberState,
   ExpirationPeriodState,
 } from "../../types/card";
 import { hasExactLength } from "./common";
 
-export const isCardNumberFilled = (cardNumbers: CardNumbersState): boolean => {
-  return Object.values(cardNumbers).every((segment: string) =>
+export const isCardNumberFilled = (cardNumber: CardNumberState): boolean => {
+  return Object.values(cardNumber).every((segment: string) =>
     hasExactLength(segment, MAX_LENGTH.cardNumber)
   );
 };

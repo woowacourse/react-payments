@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState } from "react";
 import { CARD_FORM_TYPE } from "../constants/card";
 import {
   CardFormType,
-  CardNumbersSegmentType,
+  CardNumberSegmentType,
   ExpirationPeriodSegmentType,
 } from "../types/card";
 import {
@@ -32,7 +32,7 @@ export interface CardValidationContextType {
   cardCompanyError: CardCompanyErrorState;
   passwordError: PasswordErrorState;
 
-  validateCardNumber: (value: string, position: CardNumbersSegmentType) => void;
+  validateCardNumber: (value: string, position: CardNumberSegmentType) => void;
   validateExpirationPeriod: (
     value: string,
     position: ExpirationPeriodSegmentType
@@ -46,7 +46,7 @@ export interface CardValidationContextType {
   areAllFieldsValid: () => boolean;
 }
 
-const initialCardNumbersState = {
+const initialCardNumberState = {
   errorMessage: null,
   hasError: {
     first: false,
@@ -74,7 +74,7 @@ export const CardValidationContext =
 
 export function CardValidationProvider({ children }: { children: ReactNode }) {
   const [cardNumberError, setCardNumberError] = useState<CardNumberErrorState>(
-    initialCardNumbersState
+    initialCardNumberState
   );
   const [expirationPeriodError, setExpirationPeriodError] =
     useState<ExpirationPeriodErrorState>(initialExpirationPeriodState);
@@ -87,11 +87,11 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
 
   const validateCardNumber = (
     value: string,
-    position: CardNumbersSegmentType
+    position: CardNumberSegmentType
   ) => {
     const errorMessage = isErrorCardNumber(value);
     setCardNumberError((prev: CardNumberErrorState) =>
-      updateMultiFieldErrorState<CardNumbersSegmentType>(
+      updateMultiFieldErrorState<CardNumberSegmentType>(
         errorMessage,
         position,
         prev
@@ -130,7 +130,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
 
   const hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
-      case CARD_FORM_TYPE.cardNumbers:
+      case CARD_FORM_TYPE.cardNumber:
         return Object.values(cardNumberError.hasError).some((state) => state);
       case CARD_FORM_TYPE.expirationPeriod:
         return Object.values(expirationPeriodError.hasError).some(
@@ -149,7 +149,7 @@ export function CardValidationProvider({ children }: { children: ReactNode }) {
 
   const getErrorMessage = (type: CardFormType): ErrorMessage => {
     switch (type) {
-      case CARD_FORM_TYPE.cardNumbers:
+      case CARD_FORM_TYPE.cardNumber:
         return cardNumberError.errorMessage;
       case CARD_FORM_TYPE.expirationPeriod:
         return expirationPeriodError.errorMessage;

@@ -14,13 +14,13 @@ export default meta;
 
 type Story = StoryObj<typeof CardFormSection>;
 
-export const CardNumbers: Story = {
+export const CardNumber: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({}),
   ],
   args: {
-    type: CARD_FORM_TYPE.cardNumbers,
+    type: CARD_FORM_TYPE.cardNumber,
   },
 };
 
@@ -64,7 +64,7 @@ export const Password: Story = {
   },
 };
 
-export const CardNumbersWithError: Story = {
+export const CardNumberWithError: Story = {
   decorators: [
     withCustomCardProvider({}),
     withCustomCardValidationProvider({
@@ -80,7 +80,7 @@ export const CardNumbersWithError: Story = {
     }),
   ],
   args: {
-    type: CARD_FORM_TYPE.cardNumbers,
+    type: CARD_FORM_TYPE.cardNumber,
   },
 };
 

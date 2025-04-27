@@ -7,7 +7,7 @@ import {
 import { useCard } from "../../../../hooks/useCard";
 import { useCardValidation } from "../../../../hooks/useCardValidation";
 import useFieldFocus from "../../../../hooks/useFieldFocus";
-import { CardNumbersSegmentType } from "../../../../types/card";
+import { CardNumberSegmentType } from "../../../../types/card";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldStyles } from "../CardFormFields.styled";
 
@@ -21,13 +21,13 @@ const cardNumberSequence = [
 ];
 
 export default function CardNumberInput() {
-  const { cardNumbers, updateCardNumber } = useCard();
+  const { cardNumber, updateCardNumber } = useCard();
   const { cardNumberError, validateCardNumber } = useCardValidation();
   const { registerRef, handleInputChange } = useFieldFocus(cardNumberSequence);
 
   const handleCardNumberChange = (
     value: string,
-    position: CardNumbersSegmentType
+    position: CardNumberSegmentType
   ) => {
     validateCardNumber(value, position);
     updateCardNumber(value, position);
@@ -43,7 +43,7 @@ export default function CardNumberInput() {
             placeholder={PLACEHOLDER.cardNumber}
             maxLength={MAX_LENGTH.cardNumber}
             isError={cardNumberError.hasError[position]}
-            value={cardNumbers[position]}
+            value={cardNumber[position]}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleCardNumberChange(e.target.value, position)
             }

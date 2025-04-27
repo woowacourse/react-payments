@@ -1,4 +1,4 @@
-import { CardNumbersSegmentType, ExpirationPeriodSegmentType } from "./card";
+import { CardNumberSegmentType, ExpirationPeriodSegmentType } from "./card";
 
 export type ErrorMessage = string | null;
 interface CommonErrorState {
@@ -8,7 +8,7 @@ interface CommonErrorState {
 
 export interface CardNumberErrorState {
   errorMessage: ErrorMessage;
-  hasError: Record<CardNumbersSegmentType, boolean>;
+  hasError: Record<CardNumberSegmentType, boolean>;
 }
 export interface ExpirationPeriodErrorState {
   errorMessage: ErrorMessage;

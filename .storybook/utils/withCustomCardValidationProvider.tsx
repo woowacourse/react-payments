@@ -56,7 +56,7 @@ const CustomCardValidationProvider = ({
 
   contextValue.hasErrorByType = (type: CardFormType): boolean => {
     switch (type) {
-      case CARD_FORM_TYPE.cardNumbers:
+      case CARD_FORM_TYPE.cardNumber:
         return Object.values(contextValue.cardNumberError.hasError).some(
           (error) => error
         );
@@ -77,7 +77,7 @@ const CustomCardValidationProvider = ({
 
   contextValue.getErrorMessage = (type: CardFormType): ErrorMessage => {
     switch (type) {
-      case CARD_FORM_TYPE.cardNumbers:
+      case CARD_FORM_TYPE.cardNumber:
         return contextValue.cardNumberError.errorMessage;
       case CARD_FORM_TYPE.expirationPeriod:
         return contextValue.expirationPeriodError.errorMessage;

@@ -26,8 +26,8 @@ export default function CardForm() {
         {shouldShowField(CARD_FORM_TYPE.cardCompany) && (
           <CardFormSection type={CARD_FORM_TYPE.cardCompany} />
         )}
-        {shouldShowField(CARD_FORM_TYPE.cardNumbers) && (
-          <CardFormSection type={CARD_FORM_TYPE.cardNumbers} />
+        {shouldShowField(CARD_FORM_TYPE.cardNumber) && (
+          <CardFormSection type={CARD_FORM_TYPE.cardNumber} />
         )}
       </CardFormScrollStyles>
       {isFormComplete && <Button type="submit" text="확인" />}

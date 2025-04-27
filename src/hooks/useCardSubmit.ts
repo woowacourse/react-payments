@@ -5,7 +5,7 @@ import { useCard } from "./useCard";
 import { useCardValidation } from "./useCardValidation";
 
 export function useCardSubmit() {
-  const { cardCompany, cardNumbers, areAllFieldsFilled } = useCard();
+  const { cardCompany, cardNumber, areAllFieldsFilled } = useCard();
   const { areAllFieldsValid } = useCardValidation();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export function useCardSubmit() {
     );
     navigate("/register-complete", {
       state: {
-        cardFirstSegment: cardNumbers.first,
+        cardFirstSegment: cardNumber.first,
         cardName: selectedCard ? selectedCard.text : "카드",
       },
     });

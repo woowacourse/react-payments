@@ -3,8 +3,8 @@ import { CARD_COMPANY, CARD_FORM_TYPE } from "../constants/card";
 import {
   CardCompanyState,
   CardFormType,
-  CardNumbersSegmentType,
-  CardNumbersState,
+  CardNumberSegmentType,
+  CardNumberState,
   CvcNumberState,
   ExpirationPeriodSegmentType,
   ExpirationPeriodState,
@@ -19,8 +19,8 @@ import {
 } from "../utils/validations/filledCheckers";
 
 export interface CardContextType {
-  cardNumbers: CardNumbersState;
-  updateCardNumber: (number: string, position: CardNumbersSegmentType) => void;
+  cardNumber: CardNumberState;
+  updateCardNumber: (number: string, position: CardNumberSegmentType) => void;
 
   expirationPeriod: ExpirationPeriodState;
   updateExpirationPeriod: (
@@ -42,7 +42,7 @@ export interface CardContextType {
 }
 
 const initialState = {
-  cardNumbers: {
+  cardNumber: {
     first: "",
     second: "",
     third: "",
@@ -60,8 +60,8 @@ const initialState = {
 export const CardContext = createContext<CardContextType | null>(null);
 
 export function CardProvider({ children }: { children: ReactNode }) {
-  const [cardNumbers, setCardNumbers] = useState<CardNumbersState>(
-    initialState.cardNumbers
+  const [cardNumber, setCardNumber] = useState<CardNumberState>(
+    initialState.cardNumber
   );
   const [expirationPeriod, setExpirationPeriod] =
     useState<ExpirationPeriodState>(initialState.expirationPeriod);
@@ -75,12 +75,9 @@ export function CardProvider({ children }: { children: ReactNode }) {
     initialState.password
   );
 
-  const updateCardNumber = (
-    value: string,
-    position: CardNumbersSegmentType
-  ) => {
-    setCardNumbers((prevNumbers) => ({
-      ...prevNumbers,
+  const updateCardNumber = (value: string, position: CardNumberSegmentType) => {
+    setCardNumber((prevCardNumber) => ({
+      ...prevCardNumber,
       [position]: value,
     }));
   };
@@ -97,8 +94,8 @@ export function CardProvider({ children }: { children: ReactNode }) {
 
   const isFieldFilled = (type: CardFormType): boolean => {
     switch (type) {
-      case CARD_FORM_TYPE.cardNumbers:
-        return isCardNumberFilled(cardNumbers);
+      case CARD_FORM_TYPE.cardNumber:
+        return isCardNumberFilled(cardNumber);
       case CARD_FORM_TYPE.expirationPeriod:
         return isExpirationPeriodFilled(expirationPeriod);
       case CARD_FORM_TYPE.cvcNumber:
@@ -119,7 +116,7 @@ export function CardProvider({ children }: { children: ReactNode }) {
   return (
     <CardContext.Provider
       value={{
-        cardNumbers,
+        cardNumber,
         updateCardNumber,
 
         expirationPeriod,
