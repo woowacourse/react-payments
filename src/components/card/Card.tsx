@@ -43,7 +43,7 @@ const Card = ({ cardNumbers, cardCompany, expirationDate }: CardProps) => {
 		<Container $cardBackgroundColor={backgroundColor}>
 			<Wrap>
 				<Chip />
-				<BrandBadge image={getBadgeImagePath(cardNumbers.first)} />
+				{getBadgeImagePath(cardNumbers.first) && <BrandBadge src={getBadgeImagePath(cardNumbers.first)} alt="brand badge" />}
 			</Wrap>
 
 			<CardInfoWrap>
@@ -83,12 +83,11 @@ const Chip = styled.div`
 	border-radius: 5px;
 `;
 
-const BrandBadge = styled.div<{ image: string }>`
-	background-image: url("${(props) => props.image}");
-	background-size: cover;
+const BrandBadge = styled.img`
 	width: 36px;
 	height: 22px;
 	border-radius: 5px;
+	object-fit: cover;
 `;
 
 const Wrap = styled.div`
