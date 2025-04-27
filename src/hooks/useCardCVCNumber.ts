@@ -5,7 +5,7 @@ import isValidStringLength from './validate/isValidStringLength';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 import isInteger from './validate/isInteger';
 
-type useCardCVCNumberOptions = {
+export type useCardCVCNumberOptions = {
   cardCVCNumber: string;
   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleCardCVCBlur: () => void;

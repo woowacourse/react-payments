@@ -29,7 +29,6 @@ const MAX_INPUT_LENGTH = 4;
 
 const useCardNumbers = (): CardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
-
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {

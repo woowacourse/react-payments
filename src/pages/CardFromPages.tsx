@@ -10,11 +10,17 @@ import useError from '@/hooks/useError';
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
 import { CardNumbersOptions } from '@/types/CardNumbers';
+import { CardExpirationDateOptions } from '@/types/CardExpirationDateOptions';
+import { useCardCVCNumberOptions } from '@/hooks/useCardCVCNumber';
+import useFieldCompletion from '@/hooks/useFieldCompletion';
+import { CardPasswordOptions } from '@/hooks/useCardPassword';
+import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
 
 type CardFormPagesProps = {
   cardNumbersForm: CardNumbersOptions;
-  cardCVCNumberForm: any;
-  cardExpirationDateForm: any;
+  cardCVCNumberForm: useCardCVCNumberOptions;
+  cardExpirationDateForm: CardExpirationDateOptions;
+  cardPasswordForm: CardPasswordOptions;
   canSubmit: () => boolean;
 };
 
@@ -22,6 +28,7 @@ const CardFormPages = ({
   cardNumbersForm,
   cardCVCNumberForm,
   cardExpirationDateForm,
+  cardPasswordForm,
   canSubmit,
 }: CardFormPagesProps) => {
   const [cardCompany, setCardCompany] = useState('');
@@ -30,71 +37,12 @@ const CardFormPages = ({
       cardCompany: false,
     });
 
-  const [inputCompletion, setInputCompletion] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
-  const inputSections = [
-    <CardNumbersInputSection {...cardNumbersForm} />,
-    <CardCompanySelectSection
-      cardCompany={cardCompany}
-      setCardCompany={setCardCompany}
-      isError={cardCompanyError.isError.cardCompany}
-      errorMessage={cardCompanyError.errorMessage}
-      clearError={() => clearCardCompanyError('cardCompany')}
-    />,
-    <CardExpirationDateInputSection {...cardExpirationDateForm} />,
-    <CardCVCNumberInputSection {...cardCVCNumberForm} />,
-  ];
-
-  useEffect(() => {
-    setInputCompletion((prev) => {
-      const newCompletion = [...prev];
-      if (inputCompletion[0] === false) {
-        newCompletion[0] = canSubmitValidLength({
-          state: cardNumbersForm.cardNumbers,
-          isError: cardNumbersForm.isError,
-          validLength: {
-            firstNumber: 4,
-            secondNumber: 4,
-            thirdNumber: 4,
-            fourthNumber: 4,
-          },
-        });
-      }
-      if (inputCompletion[1] === false) {
-        newCompletion[1] = cardCompany !== '';
-      }
-      if (inputCompletion[2] === false) {
-        newCompletion[2] = canSubmitValidLength({
-          state: cardExpirationDateForm.cardExpirationDate,
-          isError: cardExpirationDateForm.isCardExpirationDateError,
-          validLength: {
-            month: 2,
-            year: 2,
-          },
-        });
-      }
-      if (inputCompletion[3] === false) {
-        console.log('들어옴!');
-        newCompletion[3] = canSubmitValidLength({
-          state: cardCVCNumberForm.cardCVCNumber,
-          isError: cardCVCNumberForm.isCardCVCNumberError,
-          validLength: 3,
-        });
-        console.log('cardCVCNumber', cardCVCNumberForm.cardCVCNumber);
-      }
-
-      return newCompletion;
-    });
-  }, [
+  const isFieldCompletetion = useFieldCompletion({
+    cardNumbersForm,
     cardCompany,
-    cardNumbersForm.cardNumbers,
-    cardCVCNumberForm.cardCVCNumber,
-    cardExpirationDateForm.cardExpirationDate,
-  ]);
+    cardExpirationDateForm,
+    cardCVCNumberForm,
+  });
 
   const nav = useNavigate();
   const handleSubmit = () => {
@@ -110,9 +58,25 @@ const CardFormPages = ({
       />
 
       <div className={styles.cardForm}>
-        {inputCompletion.map((isCompleted, index) => {
-          if (isCompleted) return inputSections[index + 1];
-        })}
+        {isFieldCompletetion[3] && (
+          <CardPasswordInputSection {...cardPasswordForm} />
+        )}
+
+        {isFieldCompletetion[2] && (
+          <CardCVCNumberInputSection {...cardCVCNumberForm} />
+        )}
+        {isFieldCompletetion[1] && (
+          <CardExpirationDateInputSection {...cardExpirationDateForm} />
+        )}
+        {isFieldCompletetion[0] && (
+          <CardCompanySelectSection
+            cardCompany={cardCompany}
+            setCardCompany={setCardCompany}
+            isError={cardCompanyError.isError.cardCompany}
+            errorMessage={cardCompanyError.errorMessage}
+            clearError={() => clearCardCompanyError('cardCompany')}
+          />
+        )}
         <CardNumbersInputSection {...cardNumbersForm} />
       </div>
       {canSubmit() && (
@@ -128,7 +92,3 @@ const CardFormPages = ({
 };
 
 export default CardFormPages;
-
-const canSubmitValidLength = ({ state, isError, validLength }) => {
-  return true;
-};

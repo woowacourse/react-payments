@@ -10,6 +10,7 @@ function App() {
     cardNumbersForm,
     cardCVCNumberForm,
     cardExpirationDateForm,
+    cardPasswordForm,
     canSubmit,
     resetForm,
   } = useCardForm();
@@ -26,6 +27,7 @@ function App() {
                   cardNumbersForm={cardNumbersForm}
                   cardCVCNumberForm={cardCVCNumberForm}
                   cardExpirationDateForm={cardExpirationDateForm}
+                  cardPasswordForm={cardPasswordForm}
                   canSubmit={canSubmit}
                 />
               }

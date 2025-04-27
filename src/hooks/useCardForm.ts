@@ -1,16 +1,19 @@
 import useCardCVCNumber from './useCardCVCNumber';
 import useCardExpirationDate from './useCardExpirationDate';
 import useCardNumbers from './useCardNumbers';
+import useCardPassword from './useCardPassword';
 
 const useCardForm = () => {
   const cardNumbersForm = useCardNumbers();
   const cardCVCNumberForm = useCardCVCNumber();
   const cardExpirationDateForm = useCardExpirationDate();
+  const cardPasswordForm = useCardPassword(); // Assuming you have a useCardPassword hook
 
   const getCardInfo = () => ({
     cardNumbers: cardNumbersForm.cardNumbers,
     cardCVCNumber: cardCVCNumberForm.cardCVCNumber,
     cardExpirationDate: cardExpirationDateForm.cardExpirationDate,
+    cardPassword: cardPasswordForm.cardPassword,
   });
 
   const canSubmit = (): boolean => {
@@ -31,10 +34,15 @@ const useCardForm = () => {
         (isError) => !isError
       );
 
+    const canCardPasswordSubmit =
+      cardPasswordForm.cardPassword.length === 2 &&
+      Object.values(cardPasswordForm.isError).every((isError) => !isError);
+
     return (
       canCardNumbersSubmit &&
       canCardCVCNumberSubmit &&
-      canCardExpirationDateSubmit
+      canCardExpirationDateSubmit &&
+      canCardPasswordSubmit
     );
   };
 
@@ -42,12 +50,14 @@ const useCardForm = () => {
     cardNumbersForm.resetCardNumbers();
     cardCVCNumberForm.resetCardCVCNumber();
     cardExpirationDateForm.resetCardExpirationDate();
+    cardPasswordForm.resetCardPassword();
   };
 
   return {
     cardNumbersForm,
     cardCVCNumberForm,
     cardExpirationDateForm,
+    cardPasswordForm,
     getCardInfo,
     canSubmit,
     resetForm,
