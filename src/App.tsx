@@ -1,7 +1,7 @@
 import './App.css';
 import styled from 'styled-components';
 import AddNewCardForm from './components/main-page/addNewCardForm/AddNewCardForm';
-import AnnounceForm from './components/card-registration-completed-page/AnnounceForm';
+import AnnounceForm from './components/card-registration-completed-page/announceForm/AnnounceForm';
 import { CardInfoProvider } from './components/main-page/CardInfoContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
