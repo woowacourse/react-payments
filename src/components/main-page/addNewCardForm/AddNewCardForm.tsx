@@ -148,7 +148,7 @@ function AddNewCardForm() {
           />
         )}
       </StepContainer>
-      {isValidForm() && <Button onClick={handleSubmit} />}
+      {step >= 4 && isValidForm() && <Button onClick={handleSubmit} />}
     </StyledFrame>
   );
 }
