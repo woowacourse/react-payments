@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import RegisterComplete from "./pages/RegisterComplete/RegisterComplete";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { ContainerStyles, WrapperStyles } from "./styles/Layout.styled";
-import CardForm from "./pages/CardForm/CardForm";
-import { GlobalStyles } from "./styles/Global.styled";
+import { basePath } from "./config/router";
 import { CardProvider } from "./contexts/CardContext";
 import { CardValidationProvider } from "./contexts/CardValidationContext";
-import { basePath } from "./config/router";
+import CardForm from "./pages/CardForm/CardForm";
+import RegisterComplete from "./pages/RegisterComplete/RegisterComplete";
+import { GlobalStyles } from "./styles/Global.styled";
+import { ContainerStyles, WrapperStyles } from "./styles/Layout.styled";
 
 function Layout() {
   return (

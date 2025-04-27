@@ -1,8 +1,8 @@
+import { useContext } from "react";
 import {
   CardValidationContext,
   CardValidationContextType,
 } from "./../contexts/CardValidationContext";
-import { useContext } from "react";
 
 export const useCardValidation = (): CardValidationContextType => {
   const context = useContext(CardValidationContext);

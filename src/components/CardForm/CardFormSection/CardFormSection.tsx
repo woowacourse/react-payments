@@ -1,6 +1,6 @@
-import { CARD_FORM_TYPE } from "../../../constants/constants";
+import { CARD_FORM_TYPE } from "../../../constants/card";
 import { useCardValidation } from "../../../hooks/useCardValidation";
-import { CardFormType } from "../../../types/types";
+import { CardFormType } from "../../../types/card";
 import Description from "../../Common/Description/Description";
 import Error from "../../Common/Error/Error";
 import Subtitle from "../../Common/Subtitle/Subtitle";

@@ -3,11 +3,11 @@ import {
   CARD_FORM_TYPE,
   MAX_LENGTH,
   PLACEHOLDER,
-} from "../../../../constants/constants";
+} from "../../../../constants/card";
 import { useCard } from "../../../../hooks/useCard";
+import { useCardValidation } from "../../../../hooks/useCardValidation";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldStyles } from "../CardFormFields.styled";
-import { useCardValidation } from "../../../../hooks/useCardValidation";
 
 export default function CardPasswordInput() {
   const { password, updatePassword } = useCard();

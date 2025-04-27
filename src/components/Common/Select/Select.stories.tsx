@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { CARD_COMPANY_INFO, PLACEHOLDER } from "../../../constants/card";
 import Select from "./Select";
-import { CARD_COMPANY_INFO } from "../../../constants/constants";
 
 const meta = {
   title: "Select",
@@ -19,13 +19,13 @@ const defaultArgs = {
 export const Default: Story = {
   args: {
     ...defaultArgs,
-    placeholder: "카드사를 선택해주세요",
   },
 };
 
-export const WithoutPlaceholder: Story = {
+export const WithPlaceholder: Story = {
   args: {
     ...defaultArgs,
+    placeholder: PLACEHOLDER.cardCompany,
   },
 };
 

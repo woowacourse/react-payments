@@ -6,11 +6,6 @@ export const CARD_FORM_TYPE = {
   password: "password",
 } as const;
 
-export const CARD_TYPE = {
-  visa: "visa",
-  master: "master",
-} as const;
-
 export const CARD_NUMBERS_SEGMENT = {
   first: "first",
   second: "second",
@@ -21,6 +16,11 @@ export const CARD_NUMBERS_SEGMENT = {
 export const EXPIRATION_PERIOD_SEGMENT = {
   month: "month",
   year: "year",
+} as const;
+
+export const CARD_TYPE = {
+  visa: "visa",
+  master: "master",
 } as const;
 
 export const CARD_COMPANY = {
@@ -53,12 +53,13 @@ export const PLACEHOLDER = {
     year: "YY",
   },
   cvcNumber: "123",
+  cardCompany: "카드사를 선택해 주세요",
   password: "비밀번호를 입력해 주세요",
-};
+} as const;
 
 export const MAX_LENGTH = {
   cardNumber: 4,
   expirationPeriod: 2,
   cvcNumber: 3,
   password: 2,
-};
+} as const;

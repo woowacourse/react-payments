@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 export default function useFieldFocus(fieldSequence: string[] = []) {
   const refs = useRef<

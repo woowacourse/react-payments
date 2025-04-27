@@ -1,12 +1,12 @@
 import { useLocation } from "react-router-dom";
 import Button from "../../components/Common/Button/Button";
+import { basePath } from "../../config/router";
 import {
   CheckImgStyles,
   CompletionMessageStyles,
   CompletionTitleStyles,
   RegisterCompleteStyles,
 } from "./RegisterComplete.styled";
-import { basePath } from "../../config/router";
 
 export default function RegisterComplete() {
   const { state } = useLocation();

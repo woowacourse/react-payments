@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import RegisterComplete from "./RegisterComplete";
 import { MemoryRouter } from "react-router-dom";
+import RegisterComplete from "./RegisterComplete";
 
 const meta = {
   title: "RegisterComplete",

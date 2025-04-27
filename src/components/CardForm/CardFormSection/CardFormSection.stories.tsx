@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CARD_FORM_TYPE } from "../../../constants/constants";
-import CardFormSection from "./CardFormSection";
 import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
 import { withCustomCardValidationProvider } from "../../../../.storybook/utils/withCustomCardValidationProvider";
+import { CARD_FORM_TYPE } from "../../../constants/card";
+import CardFormSection from "./CardFormSection";
 
 const meta = {
   title: "CardFormSection",

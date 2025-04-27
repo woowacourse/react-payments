@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { CARD_FORM_TYPE } from "../constants/constants";
-import { CardFormType } from "../types/types";
-import { useCardValidation } from "./useCardValidation";
+import { useEffect, useRef, useState } from "react";
+import { CARD_FORM_TYPE } from "../constants/card";
+import { CardFormType } from "../types/card";
 import { useCard } from "./useCard";
+import { useCardValidation } from "./useCardValidation";
 
 const formSequence = [
   CARD_FORM_TYPE.cardNumbers,

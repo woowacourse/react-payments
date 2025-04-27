@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPreview from "./CardPreview";
 import { withCustomCardProvider } from "../../../../.storybook/utils/withCustomCardProvider";
-import { CARD_COMPANY } from "../../../constants/constants";
 import { withCustomCardValidationProvider } from "../../../../.storybook/utils/withCustomCardValidationProvider";
+import { CARD_COMPANY } from "../../../constants/card";
+import CardPreview from "./CardPreview";
 
 const defaultCardNumbers = {
   first: "1111",

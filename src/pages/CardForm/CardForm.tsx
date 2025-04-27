@@ -1,10 +1,10 @@
 import CardFormSection from "../../components/CardForm/CardFormSection/CardFormSection";
 import CardPreview from "../../components/CardForm/CardPreview/CardPreview";
 import Button from "../../components/Common/Button/Button";
+import { CARD_FORM_TYPE } from "../../constants/card";
 import { useCardSubmit } from "../../hooks/useCardSubmit";
 import useSequentialForm from "../../hooks/useSequentialForm";
 import { CardFormScrollStyles, CardFormStyles } from "./CardForm.styled";
-import { CARD_FORM_TYPE } from "../../constants/constants";
 
 export default function CardForm() {
   const { handleSubmit, isFormComplete } = useCardSubmit();

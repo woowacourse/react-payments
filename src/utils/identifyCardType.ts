@@ -1,6 +1,6 @@
-import { CARD_NUMBERS_SEGMENT, CARD_TYPE } from "../constants/constants";
-import { CardNumbersState, CardType } from "../types/types";
-import { isCardNumberFilled } from "./validations/card/cardNumber";
+import { CARD_NUMBERS_SEGMENT, CARD_TYPE } from "../constants/card";
+import { CardNumbersState, CardType } from "../types/card";
+import { isCardNumberFilled } from "./validations/filledCheckers";
 
 export const identifyCardType = (
   cardNumbers: CardNumbersState

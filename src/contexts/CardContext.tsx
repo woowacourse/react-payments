@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { CARD_COMPANY, CARD_FORM_TYPE } from "../constants/constants";
+import { CARD_COMPANY, CARD_FORM_TYPE } from "../constants/card";
 import {
   CardCompanyState,
   CardFormType,
@@ -9,12 +9,14 @@ import {
   ExpirationPeriodSegmentType,
   ExpirationPeriodState,
   PasswordState,
-} from "../types/types";
-import { isCardNumberFilled } from "../utils/validations/card/cardNumber";
-import { isCardCompanySelected } from "../utils/validations/card/cardCompany";
-import { isCvcNumberFilled } from "../utils/validations/card/cvcNumber";
-import { isExpirationPeriodFilled } from "../utils/validations/card/expirationPeriod";
-import { isPasswordFilled } from "../utils/validations/card/password";
+} from "../types/card";
+import {
+  isCardCompanySelected,
+  isCardNumberFilled,
+  isCvcNumberFilled,
+  isExpirationPeriodFilled,
+  isPasswordFilled,
+} from "../utils/validations/filledCheckers";
 
 export interface CardContextType {
   cardNumbers: CardNumbersState;

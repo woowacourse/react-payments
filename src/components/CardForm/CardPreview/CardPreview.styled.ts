@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CARD_COMPANY, CARD_TYPE } from "../../../constants/constants";
-import { CardCompanyState, CardType } from "../../../types/types";
+import { CARD_COMPANY, CARD_TYPE } from "../../../constants/card";
+import { CardCompanyState, CardType } from "../../../types/card";
 
 const CARD_IMAGE = {
   [CARD_TYPE.visa]: "./visa.svg",

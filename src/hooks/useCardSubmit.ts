@@ -1,8 +1,8 @@
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { CARD_COMPANY_INFO } from "../constants/card";
 import { useCard } from "./useCard";
 import { useCardValidation } from "./useCardValidation";
-import { CARD_COMPANY_INFO } from "../constants/constants";
 
 export function useCardSubmit() {
   const { cardCompany, cardNumbers, areAllFieldsFilled } = useCard();

@@ -1,14 +1,14 @@
-import { CARD_FORM_TYPE } from "../../../constants/constants";
+import { CARD_FORM_TYPE } from "../../../constants/card";
 import { useCard } from "../../../hooks/useCard";
 import { useCardValidation } from "../../../hooks/useCardValidation";
 import { identifyCardType } from "../../../utils/identifyCardType";
 import {
+  CardICChipStyles,
   CardNumbersGroupStyles,
-  CardTypeStyles,
   CardPreviewContainerStyles,
   CardPreviewStyles,
   CardTopContainerStyles,
-  CardICChipStyles,
+  CardTypeStyles,
 } from "./CardPreview.styled";
 
 export default function CardPreview() {

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
+import { CARD_COMPANY } from "../../src/constants/card";
 import { CardContext, CardContextType } from "../../src/contexts/CardContext";
-import { CARD_COMPANY } from "../../src/constants/constants";
 
 interface CardProviderProps {
   children: ReactNode;

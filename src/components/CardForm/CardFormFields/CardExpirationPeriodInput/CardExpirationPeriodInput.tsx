@@ -3,13 +3,13 @@ import {
   EXPIRATION_PERIOD_SEGMENT,
   MAX_LENGTH,
   PLACEHOLDER,
-} from "../../../../constants/constants";
+} from "../../../../constants/card";
 import { useCard } from "../../../../hooks/useCard";
+import { useCardValidation } from "../../../../hooks/useCardValidation";
+import useFieldFocus from "../../../../hooks/useFieldFocus";
+import { ExpirationPeriodSegmentType } from "../../../../types/card";
 import Input from "../../../Common/Input/Input";
 import { CardFormFieldStyles } from "../CardFormFields.styled";
-import { useCardValidation } from "../../../../hooks/useCardValidation";
-import { ExpirationPeriodSegmentType } from "../../../../types/types";
-import useFieldFocus from "../../../../hooks/useFieldFocus";
 
 const periodPositions = Object.values(EXPIRATION_PERIOD_SEGMENT);
 
