@@ -22,7 +22,7 @@
 
 - 동적 입력 UI 구현
 
-  - [ ] 입력 필드는 사용자의 입력이 완료되면 다음 필드로 자동으로 이동한다.
+  - [x] 입력 필드는 사용자의 입력이 완료되면 다음 필드로 자동으로 이동한다.
 
 - 카드사 선택
 
@@ -42,50 +42,4 @@
 - 카드 등록 완료 및 네비게이션
 
   - [x] 확인 버튼을 클릭하면 사용자는 카드 등록 완료 페이지로 이동한다.
-  - [ ] 카드 등록 완료 페이지에서는 카드 등록이 성공적으로 완료되었다는 메시지와 함께, 다시 카드 등록 페이지로 돌아갈 수 있는 확인 버튼을 제공한다.
-
-## 고민되던점
-
-- inputFieldContainer를 만들어야 할지 고민이 된다.
-
-  - input이 다 채워졌을 때 그 이벤트를 누가 받을건지에 대해 고민이 있었음. payments가 받아야 할지, 아님 InputFieldContainer 컴포넌트를 만들어서 걔가 관리할 수 있도록 해야할지.
-  - 근데 현재는 payments 에서 관리하는데 아래 이유 참고
-  - props로 전달해줘야 하는게 넘 많다. InputFieldContainer를 만들게 되면 파일 따로 분리해야함. 따라서 CardPreview랑 값을 공유하는 카드넘버, 유효기간은 payments에 위치해있어야 해서 너무 많은 props를 전달해야 하는 문제가 생김
-
-- 라우터를 사용햇을 때 url로 완료 페이지에 접근할 수 잇는 부분이 신경이 쓰인다. 어떻게 수정 가능할지 모르겠음
-
-  - 일단 제어 가능한 방법은 <ProtectedRoute> 쓰는 방식 정도가 잇는 것 같은데 아직 잘 모르겠다 ..
-
-- 하나의 컴포넌트에 대해서 여러개의 커스텀훅이 생기는게 좋은 방향인지 모르겠다.
-
-  - 커스텀훅을 이번에 처음 만들어봐서 이렇게 많은 커스텀 훅을 사용해도 되는건지 잘 모르겠다. 뭔가 커스텀 훅이라고 하면 하나의 큰 기능을 담당하는 공통으로 사용가능한 함수의 느낌이 강했다. 근데 내가 만든건 공통된 로직을 빼서 사용한 "함수분리"의 의미가 더 큰 것 같다.
-  - 지금으로써는 가장 많은 카드숫자 입력 컴포넌트의 경우 세개의 커스텀 훅이 생기게 되는건데 기능을 너무 많이 담당하고 있는건가? 하는 고민이 생긴다.
-  - 하나의 컴포넌트에 너무 많은 역할을 제공하려 했던건지, 아니면 커스텀 훅을 너무 세분화해서 사용하려 해서 생긴 문제인건지 고민이 된다.
-  - 하나의 컴포넌트에 대해서 기능을 수행하는 useCardNumberInputField 라는 커스텀 훅을 만들게 된다면 코드는 간단해질 것 같은데 다른 컴포넌트에서도 같은 기능을 수행하는 비슷한 기능들이 있어서 지금의 방식이 더 맞는 것 같다는 판단이 되는데 어떻게 생각하는지 궁금하다.
-
-- const inputPart = Number(name.match(/\d+/)?.[0]) - 1;
-
-  - 이런식으로 name에서 값을 가져오는게 좋은걸끼? UI가 상태의 원천이 되면 안된다고 들었다
-  - ref를 제어하기 위한 number라는 객체를 따로 만들어서 관리하는게 좋을지 고민된다.
-
-- ```javascript
-  const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError({ inputValue, completeCondition: MAX_CARD_LENGTH });
-
-  const { onChange, onBlur } = useInputFieldHandler({
-    validateInputError,
-    setInputValue,
-    inputErrorType: 'shortCardSegment',
-    maxLength: MAX_CARD_LENGTH,
-    inputRefs,
-    errorMessage,
-  });
-  ```
-
-  원래는 이런 훅이였는데 useinputError에서 가져오는 값들을 useinputFieldHandler에서 너무 많이 사용하고 있어서 결국 하나로 통일하게 됨.
-
-  - 역할 분리 입장에선 훅을 나누는게 좋을 것 같은데 겹치는 props도 너무 많기도 하고 useInputError에서 나온 값을 inputHandler에서만 사용해서 너무 불필요한 구분인 것 같다는 생각이 듦.
-
-## 알게된 점
-
-- useMemo / useState / useRef 차이점 및 사용하는 순간
+  - [x] 카드 등록 완료 페이지에서는 카드 등록이 성공적으로 완료되었다는 메시지와 함께, 다시 카드 등록 페이지로 돌아갈 수 있는 확인 버튼을 제공한다.
