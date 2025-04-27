@@ -3,6 +3,7 @@ import { FieldName, InputFieldType } from '../../../config/inputField';
 import { CardType } from '../../../config/card';
 
 export interface InputFieldProps<T extends InputFieldType> {
+  isFocused?: boolean;
   inputValue: Record<T, string>;
   setInputValue: Dispatch<SetStateAction<Record<T, string>>>;
   cardType?: CardType;

@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
@@ -12,6 +12,7 @@ import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 
 function ExpirationDateInputField({
+  isFocused,
   inputValue,
   setInputValue,
   onComplete,
@@ -36,6 +37,12 @@ function ExpirationDateInputField({
     if (value.length === 1)
       setInputValue((prevValue) => ({ ...prevValue, [name]: `0${value}` }));
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      inputRefs.current[0]?.focus();
+    }
+  }, []);
 
   return (
     <BaseInputField label="유효기간">

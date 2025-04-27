@@ -9,9 +9,10 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 function CVCInputField({
+  isFocused,
   inputValue,
   setInputValue,
   onComplete,
@@ -36,6 +37,12 @@ function CVCInputField({
     inputValue,
     onComplete,
   });
+
+  useEffect(() => {
+    if (isFocused) {
+      inputRefs.current[0]?.focus();
+    }
+  }, []);
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>

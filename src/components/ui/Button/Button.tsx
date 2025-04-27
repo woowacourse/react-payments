@@ -1,21 +1,39 @@
-import { ComponentProps } from 'react';
+import React, { ComponentProps, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps extends ComponentProps<'button'> {
+  isFocused?: boolean;
   buttonText: string;
   buttonType: 'default';
 }
 
-function Button({ buttonText, buttonType, onClick }: ButtonProps) {
+function Button({ isFocused, buttonText, buttonType, onClick }: ButtonProps) {
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   let color = '';
   let background = '';
+  let check = '';
 
   if (buttonType === 'default') {
     color = '#fff';
     background = '#333333';
   }
+
+  const keyDownHandler = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && isFocused) buttonRef.current?.click();
+  };
+
+  useEffect(() => {
+    buttonRef.current?.focus();
+  }, [check]);
+
   return (
-    <StyledButton $color={color} $background={background} onClick={onClick}>
+    <StyledButton
+      ref={buttonRef}
+      onKeyDown={keyDownHandler}
+      $color={color}
+      $background={background}
+      onClick={onClick}
+    >
       {buttonText}
     </StyledButton>
   );

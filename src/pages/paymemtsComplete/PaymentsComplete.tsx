@@ -21,6 +21,7 @@ function PaymentsComplete() {
           {` ${cardIssuer}가 등록되었어요.`}
         </SuccessMessage>
         <Button
+          isFocused={true}
           buttonText="확인"
           buttonType="default"
           onClick={handleRestart}

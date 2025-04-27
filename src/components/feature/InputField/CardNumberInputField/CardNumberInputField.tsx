@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   CARD_NUMBER_INPUT_TYPE,
@@ -17,9 +17,10 @@ interface onCardNumberChangeProps {
 }
 
 function CardNumberInputField({
+  isFocused,
   inputValue,
-  setInputValue,
   cardType,
+  setInputValue,
   onComplete,
 }: InputFieldProps<CardNumberInputType>) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -52,6 +53,12 @@ function CardNumberInputField({
       });
     }
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      inputRefs.current[0]?.focus();
+    }
+  }, []);
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
