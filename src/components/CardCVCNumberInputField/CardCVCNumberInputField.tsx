@@ -25,6 +25,7 @@ export default function CardCVCNumber({ register, cardCVCNumberErrors, onFocus, 
           onFocus={onFocus}
           onBlur={onBlur}
           inputMode="numeric"
+          data-sequence="8"
           {...register('cvc', {
             inputRegex: /^[0-9]*$/,
             validation: {

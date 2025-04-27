@@ -24,6 +24,7 @@ export default function CardPassword({ register, cardPasswordErrors }: CardPassw
           aria-label="비밀번호 앞 2자리"
           inputMode="numeric"
           autoComplete="current-password"
+          data-sequence="9"
           {...register('password', {
             inputRegex: /^[0-9]*$/,
             validation: {

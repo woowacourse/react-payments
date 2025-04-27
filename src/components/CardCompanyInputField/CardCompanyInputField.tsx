@@ -21,6 +21,7 @@ export default function CardCompany({ register }: CardCompanyProps) {
             errorMessage: '카드사를 선택해주세요.',
           },
         })}
+        data-sequence="5"
         options={CARD_COMPANIES}
         name="company"
         placeholder="카드사를 선택해주세요"

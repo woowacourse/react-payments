@@ -108,6 +108,26 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
+    const currentFocusedInput = document.activeElement as HTMLInputElement;
+    const currentSequenceNumber = Number(currentFocusedInput.getAttribute('data-sequence'));
+
+    if (currentFocusedInput.value?.length < currentFocusedInput?.maxLength) return;
+
+    const nextInput = document.querySelector(`[data-sequence="${currentSequenceNumber + 1}"]`) as
+      | HTMLInputElement
+      | HTMLSelectElement;
+
+    if (nextInput) nextInput.focus();
+  }, [cardNumber, cardExpirationDate, cardCVCNumber]);
+
+  useEffect(() => {
+    const firstInput = document.querySelector(`input[data-sequence="1"]`) as HTMLInputElement;
+    if (firstInput) {
+      firstInput.focus();
+    }
+  }, []);
+
+  useEffect(() => {
     if (!isCardNumberIsValid) setCurrentStep(1);
     else if (!isCardCompanyValid) setCurrentStep(2);
     else if (!isExpirationDateValid) setCurrentStep(3);

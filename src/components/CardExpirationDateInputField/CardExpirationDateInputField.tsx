@@ -11,15 +11,6 @@ interface CardExpirationDateProps {
 }
 
 export default function CardExpirationDate({ register, cardExpirationDateErrors }: CardExpirationDateProps) {
-  const handleCardExpirationInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length === 2 && event.target.dataset.expiry === 'month') {
-      const nextInput = document.querySelector(`input[data-expiry="year"]`) as HTMLInputElement;
-      if (nextInput) {
-        nextInput.focus();
-      }
-    }
-  };
-
   return (
     <div>
       <Title description="월/년도(MMYY)를 순서대로 입력해 주세요.">카드 유효기간을 입력해 주세요</Title>
@@ -32,9 +23,9 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           maxLength={2}
           isError={cardExpirationDateErrors.month !== ''}
           data-expiry="month"
+          data-sequence="6"
           inputMode="numeric"
           {...register('month', {
-            onChange: handleCardExpirationInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -49,6 +40,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           maxLength={2}
           isError={cardExpirationDateErrors.year !== ''}
           data-expiry="year"
+          data-sequence="7"
           inputMode="numeric"
           {...register('year', {
             inputRegex: /^[0-9]*$/,

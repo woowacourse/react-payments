@@ -2,7 +2,6 @@ import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { RegisterType } from '@/hooks';
 import { CardNumberInputType } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
-import { ChangeEvent } from 'react';
 import * as S from './CardNumberInputField.styles';
 
 interface CardNumberProps {
@@ -11,18 +10,6 @@ interface CardNumberProps {
 }
 
 export default function CardNumber({ register, cardNumberErrors }: CardNumberProps) {
-  const handleCardNumberInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    if (value.length < 4) return;
-
-    const currentSequenceNumber = Number(document.activeElement?.getAttribute('data-sequence'));
-    const nextInput = document.querySelector(`input[data-sequence="${currentSequenceNumber + 1}"]`) as HTMLInputElement;
-    if (nextInput) {
-      nextInput.focus();
-    }
-  };
-
   return (
     <div>
       <Title description="본인 명의의 카드만 결제 가능합니다.">결제할 카드 번호를 입력해 주세요</Title>
@@ -38,7 +25,6 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="1"
           {...register('first', {
-            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -55,7 +41,6 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="2"
           {...register('second', {
-            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -72,7 +57,6 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="3"
           {...register('third', {
-            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
@@ -89,7 +73,6 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
           inputMode="numeric"
           data-sequence="4"
           {...register('fourth', {
-            onChange: handleCardNumberInputChange,
             inputRegex: /^[0-9]*$/,
             validation: {
               required: true,
