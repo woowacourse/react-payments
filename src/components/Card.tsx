@@ -70,8 +70,6 @@ function Card({ setNewCard }: CardProps) {
     errorMessage: cardPasswordErrorMessage,
   } = useCardPassword();
 
-  const { cardOwnerName, handleCardOwnerNameChange } = useCardOwnerName();
-
   const isFulledForm =
     isFulledInput(cardNumbers, 4) &&
     isFulledInput(cardExpirationDate, 2) &&
@@ -84,7 +82,6 @@ function Card({ setNewCard }: CardProps) {
       cardExpirationDate,
       cardCompany,
       cardPassword,
-      cardOwnerName,
     });
   };
 
@@ -96,7 +93,6 @@ function Card({ setNewCard }: CardProps) {
         <CardDisplay
           cardNumbers={cardNumbers}
           cardExpirationDate={cardExpirationDate}
-          cardOwnerName={cardOwnerName}
           backgroundColor={extractCardCompanyColor(cardCompany)}
         />
 
