@@ -19,11 +19,9 @@ const preview: Preview = {
 
 export default preview;
 
-const GlobalStyles = () => <Global styles={global} />;
-
 export const decorators = [
   withThemeFromJSXProvider({
-    GlobalStyles, // Adds your GlobalStyles component to all stories
+    GlobalStyles: () => <Global styles={global} />,
     themes: {
       light: theme,
       dark: theme,
