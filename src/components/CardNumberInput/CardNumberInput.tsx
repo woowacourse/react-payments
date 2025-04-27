@@ -4,7 +4,7 @@ import { HandleInputParams } from '../../pages/CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import { inputValidation } from '../../validators/inputValidator';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { InputProps } from '../../types/input';
 
 const StyledCardNumberInput = styled.div`
@@ -30,10 +30,12 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
+const INITIAL_ERROR_STATES = Array.from({ length: 4 }, () => false);
+
 const validationCallback = (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 4);
 const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
   const { errorState, errorMessage, validate } = useInputValidation(
-    Array.from({ length: 4 }, () => false),
+    INITIAL_ERROR_STATES,
     validationCallback
   );
 

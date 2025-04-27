@@ -3,7 +3,7 @@ import Input from '../Input/Input';
 import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { InputProps } from '../../types/input';
 import { HandleInputParams } from '../../pages/CardPage/CardPage';
 
@@ -31,9 +31,11 @@ const StyledHelperTextWrapper = styled.div`
 
 const validationCallback = (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 2);
 
+const INITIAL_ERROR_STATES = [false];
+
 const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
   const { errorState, errorMessage, validate } = useInputValidation(
-    [false, false],
+    INITIAL_ERROR_STATES,
     validationCallback
   );
 
