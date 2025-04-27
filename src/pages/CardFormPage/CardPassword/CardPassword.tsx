@@ -48,6 +48,10 @@ export default function CardPassword({
   );
 }
 
-function canGoToNextStep(step: number, value: string, errorMessage: string) {
-  return step === 4 && value.length === 2 && errorMessage === "";
+function canGoToNextStep(
+  currentStep: number,
+  value: string,
+  errorMessage: string
+) {
+  return currentStep === 4 && value.length === 2 && errorMessage === "";
 }

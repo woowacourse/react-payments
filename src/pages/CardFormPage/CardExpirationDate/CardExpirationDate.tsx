@@ -79,13 +79,13 @@ export default function CardExpirationDate({
 }
 
 function canGoToNextStep(
-  step: number,
+  currentStep: number,
   index: number,
   value: string,
   errorMessage: string
 ) {
   return (
-    step === 2 &&
+    currentStep === 2 &&
     index === EXPIRATION_FIELDS.length - 1 &&
     value.length === 2 &&
     errorMessage === ""

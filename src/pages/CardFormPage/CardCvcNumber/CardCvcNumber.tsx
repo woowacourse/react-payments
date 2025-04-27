@@ -46,6 +46,10 @@ export default function CardCvcNumber({
   );
 }
 
-function canGoToNextStep(step: number, value: string, errorMessage: string) {
-  return step === 3 && value.length === 3 && errorMessage === "";
+function canGoToNextStep(
+  currentStep: number,
+  value: string,
+  errorMessage: string
+) {
+  return currentStep === 3 && value.length === 3 && errorMessage === "";
 }

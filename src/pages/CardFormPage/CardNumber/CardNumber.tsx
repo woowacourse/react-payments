@@ -71,13 +71,13 @@ export default function CardNumber({
 }
 
 const canGoToNextStep = (
-  step: number,
+  currentStep: number,
   index: number,
   value: string,
   errorMessage: string
 ) => {
   return (
-    step === 1 &&
+    currentStep === 1 &&
     index === CARD_NUMBER_FIELDS.length - 1 &&
     value.length === 4 &&
     errorMessage === ""
