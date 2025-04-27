@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './RegisterPage.styles';
+import { $ } from '@/utils';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -113,18 +114,14 @@ export default function RegisterPage() {
 
     if (currentFocusedInput.value?.length < currentFocusedInput?.maxLength) return;
 
-    const nextInput = document.querySelector(`[data-sequence="${currentSequenceNumber + 1}"]`) as
-      | HTMLInputElement
-      | HTMLSelectElement;
+    const nextInput = $<HTMLInputElement | HTMLSelectElement>(`[data-sequence="${currentSequenceNumber + 1}"]`);
 
     if (nextInput) nextInput.focus();
   }, [cardNumber, cardExpirationDate, cardCVCNumber]);
 
   useEffect(() => {
-    const firstInput = document.querySelector(`input[data-sequence="1"]`) as HTMLInputElement;
-    if (firstInput) {
-      firstInput.focus();
-    }
+    const firstInput = $<HTMLInputElement>('input[data-sequence="1"]');
+    if (firstInput) firstInput.focus();
   }, []);
 
   useEffect(() => {
