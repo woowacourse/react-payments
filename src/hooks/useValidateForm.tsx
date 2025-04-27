@@ -7,6 +7,7 @@ function useValidateForm() {
     true,
     true,
   ]);
+  const [isIssuerValid, setIsIssuerValid] = useState(false);
   const [isExpiryDateValid, setIsExpiryDateValid] = useState({
     month: true,
     year: true,
@@ -22,6 +23,7 @@ function useValidateForm() {
       isExpiryDateValid.month && isExpiryDateValid.year;
     const isTotalDataValid =
       isTotalNumbersValid &&
+      isIssuerValid &&
       isTotalExpiryDateValid &&
       isCVCValid &&
       isPasswordValid;
@@ -29,6 +31,7 @@ function useValidateForm() {
     setIsDataValid(isTotalDataValid);
   }, [
     isCardNumberValid,
+    isIssuerValid,
     isExpiryDateValid,
     isCVCValid,
     isPasswordValid,
@@ -38,6 +41,8 @@ function useValidateForm() {
   return {
     isCardNumberValid,
     setIsCardNumberValid,
+    isIssuerValid,
+    setIsIssuerValid,
     isExpiryDateValid,
     setIsExpiryDateValid,
     isCVCValid,

@@ -6,6 +6,10 @@ import { CardProvider } from '../../../../contexts/CardContext';
 const meta = {
   title: 'CardIssuerSelector',
   component: CardIssuerSelector,
+  args: {
+    isValid: true,
+    setIsValid: () => {},
+  },
   decorators: [
     (Story) => (
       <CardProvider>
@@ -20,6 +24,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    isValid: false,
+  },
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

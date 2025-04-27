@@ -13,8 +13,24 @@ export const ISSUER_LIST = new Map([
   ['국민카드', 'kb'],
 ]);
 
-function CardIssuerSelector() {
+export interface CardIssuerSelectorProps {
+  isValid: boolean;
+  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
   const { cardIssuer, setCardIssuer } = useCard();
+
+  function validateIssuerChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target;
+    const value = target.value;
+
+    if (!ISSUER_LIST.has(value)) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  }
 
   return (
     <>
@@ -28,6 +44,7 @@ function CardIssuerSelector() {
           optionList={Array.from(ISSUER_LIST.keys())}
           selectedValue={cardIssuer}
           setSelectedValue={setCardIssuer}
+          handleSelectedInputChange={validateIssuerChange}
           isRequired={true}
         />
       </InputForm>
