@@ -12,7 +12,9 @@ export type FormContainerProps = {
   validation: validationFieldType;
   /** 단계별 step */
   step: number;
-};
+  /** 버튼 여부 띄우기 */
+  complete: boolean;
+} & ComponentProps<"form">;
 
 export type InputFormSectionProps<T extends Exclude<keyof CardInformationType, "company">> = {
   /** 섹션 제목 */

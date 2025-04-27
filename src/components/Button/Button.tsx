@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 import { ButtonProps } from "../../types/componentPropsType";
 
-const Button = ({ text, onClick }: ButtonProps) => {
+const Button = ({ type = "button", text, onClick }: ButtonProps) => {
   return (
-    <button css={buttonStyle} onClick={onClick}>
+    <button type={type} css={buttonStyle} onClick={onClick}>
       {text}
     </button>
   );

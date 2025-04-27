@@ -5,7 +5,6 @@ import useStep from "../../hooks/useStep";
 import useAllComplete from "../../hooks/useAllComplete";
 import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import FormContainer from "../../components/FormContainer/FormContainer";
-import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router";
 
 const AddCard = () => {
@@ -19,6 +18,13 @@ const AddCard = () => {
   // 2. 카드번호 상태 + 유효성 검증 완료 되었을때, 버튼 띄우기
   const complete = useAllComplete(isStateCompletes, isErrorCompletes);
 
+  const handleComplete = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate("/complete", {
+      state: { uniqueNumber: cardInformationState.uniqueNumber[0], company: cardInformationState.company },
+    });
+  };
+
   return (
     <div css={ContainerStyle}>
       <PreviewCard cardInformationState={cardInformationState} />
@@ -27,19 +33,9 @@ const AddCard = () => {
         setCardInformationState={setCardInformationState}
         validation={validation}
         step={step}
+        complete={complete}
+        onSubmit={handleComplete}
       />
-      <div css={ButtonWrapperStyle}>
-        {complete && (
-          <Button
-            text="완료"
-            onClick={() =>
-              navigate("/complete", {
-                state: { uniqueNumber: cardInformationState.uniqueNumber[0], company: cardInformationState.company },
-              })
-            }
-          />
-        )}
-      </div>
     </div>
   );
 };
@@ -58,11 +54,4 @@ const ContainerStyle = css`
   align-items: center;
   gap: 45px;
   border-radius: 20px;
-`;
-
-const ButtonWrapperStyle = css`
-  position: absolute;
-  width: 100%;
-  bottom: 20px;
-  z-index: 99;
 `;

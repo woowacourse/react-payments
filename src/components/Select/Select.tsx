@@ -46,7 +46,7 @@ const Select = <T extends Extract<keyof CardInformationType, "company">>({
 
   return (
     <div css={selectStyle} ref={selectRef}>
-      <button css={labelStyle(isOpen, isSelect)} onClick={() => setIsOpen((prev) => !prev)}>
+      <button type="button" css={labelStyle(isOpen, isSelect)} onClick={() => setIsOpen((prev) => !prev)}>
         {selected}
         <img src={arrow[isOpen ? "down" : "up"]} alt="" />
       </button>

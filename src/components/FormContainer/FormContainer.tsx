@@ -4,10 +4,18 @@ import formUIControllerData from "../../constants/formUIControllerData";
 import FormSectionSelect from "../FormSection/FormSectionSelect";
 import FormSectionInput from "../FormSection/FormSectionInput";
 import { CardInformationType } from "../../types/CardInformationType";
+import Button from "../Button/Button";
 
-const FormContainer = ({ cardInformationState, setCardInformationState, validation, step }: FormContainerProps) => {
+const FormContainer = ({
+  cardInformationState,
+  setCardInformationState,
+  validation,
+  step,
+  complete,
+  onSubmit,
+}: FormContainerProps) => {
   return (
-    <div css={FormContainerStyle}>
+    <form css={FormContainerStyle} onSubmit={onSubmit}>
       {formUIControllerData
         .slice(0, step + 1)
         .reverse()
@@ -50,7 +58,8 @@ const FormContainer = ({ cardInformationState, setCardInformationState, validati
             );
           }
         })}
-    </div>
+      <div css={ButtonWrapperStyle}>{complete && <Button type="submit" text="완료" />}</div>
+    </form>
   );
 };
 
@@ -63,4 +72,11 @@ const FormContainerStyle = css`
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
+`;
+
+const ButtonWrapperStyle = css`
+  position: absolute;
+  width: calc(100% - 60px);
+  bottom: 20px;
+  z-index: 99;
 `;
