@@ -65,7 +65,7 @@ function Input({
       autoFocus={autoFocus}
       required={isRequired}
       className={`${styles.input} tx-md ${
-        !isValidInput ? styles.isNotValid : ''
+        !isValidInput && value !== '' ? styles.isNotValid : ''
       }`}
       data-input-id={dataInputId}
       ref={ref}
