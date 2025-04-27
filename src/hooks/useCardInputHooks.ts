@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, createRef, RefObject } from 'react';
 import { InputFieldState } from '../types/models';
 
 type FieldValidationFunction = (value: string) => {
@@ -47,7 +47,8 @@ function useMultipleInputFields(
   validationFunction: MultipleFieldValidationFunction
 ): [
   InputFieldState[],
-  (event: ChangeEvent<HTMLInputElement>, index: number) => void
+  (event: ChangeEvent<HTMLInputElement>, index: number) => void,
+  RefObject<HTMLInputElement | null>[]
 ] {
   const [fieldStates, setFieldStates] = useState<InputFieldState[]>(() =>
     initialValues.map((value, idx) => ({
@@ -59,6 +60,10 @@ function useMultipleInputFields(
     }))
   );
 
+  const inputRefs = useRef<RefObject<HTMLInputElement | null>[]>(
+    initialValues.map(() => createRef<HTMLInputElement>())
+  ).current;
+
   const handleChange = (
     event: ChangeEvent<HTMLInputElement>,
     index: number
@@ -69,6 +74,7 @@ function useMultipleInputFields(
       index,
       maximumLength
     );
+
     setFieldStates((prev) =>
       prev.map((state, i) =>
         i === index
@@ -81,14 +87,16 @@ function useMultipleInputFields(
           : state
       )
     );
+
+    if (isValid && inputValue.length === maximumLength) {
+      const nextRef = inputRefs[index + 1];
+      if (nextRef && nextRef.current) {
+        nextRef.current.focus();
+      }
+    }
   };
 
-  return [fieldStates, handleChange];
+  return [fieldStates, handleChange, inputRefs];
 }
 
-export type {
-  InputFieldState,
-  FieldValidationFunction,
-  MultipleFieldValidationFunction,
-};
 export { useInputField, useMultipleInputFields };
