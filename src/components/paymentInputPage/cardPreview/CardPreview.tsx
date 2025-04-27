@@ -1,19 +1,14 @@
 import useCard from '../../../hooks/useCard';
 import { ISSUER_LIST } from '../cardInputForm/cardInput/CardIssuerSelector';
-import { ExpiryDateType } from '../PaymentInputPage';
 import styles from './CardPreview.module.css';
-
-export type CardInformationType = {
-  expiryDate: ExpiryDateType;
-};
 
 export const BRAND_IMAGE = {
   visa: './Visa.png',
   master: './Mastercard.png',
 };
 
-function CardPreview({ expiryDate }: CardInformationType) {
-  const { cardNumbers, cardIssuer } = useCard();
+function CardPreview() {
+  const { cardNumbers, cardIssuer, expiryDate } = useCard();
   const issuerClassName = ISSUER_LIST.get(cardIssuer);
   const inputCardNumber = cardNumbers[0];
   const brand = determineBrand(inputCardNumber);

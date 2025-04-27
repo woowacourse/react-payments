@@ -1,20 +1,16 @@
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { precise } from '../../../../utils/precise';
+import useCard from '../../../../hooks/useCard';
 
 export interface CardCVCInputProps {
-  cardCVC: string;
-  setCardCVC: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardCVCInput({
-  cardCVC,
-  setCardCVC,
-  isValid,
-  setIsValid,
-}: CardCVCInputProps) {
+function CardCVCInput({ isValid, setIsValid }: CardCVCInputProps) {
+  const { cardCVC, setCardCVC } = useCard();
+
   function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
     const value = target.value;

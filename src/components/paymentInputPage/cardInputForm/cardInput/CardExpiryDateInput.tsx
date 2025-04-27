@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { ExpiryDateType } from '../../PaymentInputPage';
 import { validate } from '../../../../utils/validate';
+import useCard from '../../../../hooks/useCard';
 
 export interface IsValidType {
   month: boolean;
@@ -10,18 +10,15 @@ export interface IsValidType {
 }
 
 export interface CardExpiryDateInputProps {
-  expiryDate: ExpiryDateType;
-  setExpiryDate: React.Dispatch<React.SetStateAction<ExpiryDateType>>;
   isValid: IsValidType;
   setIsValid: React.Dispatch<React.SetStateAction<IsValidType>>;
 }
 
 function CardExpiryDateInput({
-  expiryDate,
-  setExpiryDate,
   isValid,
   setIsValid,
 }: CardExpiryDateInputProps) {
+  const { expiryDate, setExpiryDate } = useCard();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
