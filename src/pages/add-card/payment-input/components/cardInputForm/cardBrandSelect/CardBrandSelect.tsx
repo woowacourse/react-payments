@@ -1,21 +1,23 @@
 import SelectBox from "../../../../../../components/common/selectForm/SelectBox";
 import { TCardBrand } from "../../cardPreview/constants/DisplayData";
-import CARD from "./constants/Card";
+import CARD from "../constants/Card";
 
 interface CardBrandSelectProps {
-  handleBrandNameChange: (brandName: string) => void;
+  handleBrandNameChange: (brnad: TCardBrand) => void;
+  onSuccessValidate: (isValid: boolean) => void;
+  onSuccessNextInput: () => void;
 }
 
 const CardBrandSelect = ({
   handleBrandNameChange,
-  setValidState,
+  onSuccessValidate,
+  onSuccessNextInput,
 }: CardBrandSelectProps) => {
   function onSelectHandler(value: TCardBrand) {
     handleBrandNameChange(value);
-    if (value !== "") {
-      setValidState((prev) => {
-        return { ...prev, cardBrandSelect: true };
-      });
+    if (value) {
+      onSuccessValidate(true);
+      onSuccessNextInput();
     }
   }
 

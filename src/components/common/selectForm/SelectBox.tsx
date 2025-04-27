@@ -8,7 +8,7 @@ interface SelectBoxProps<T> {
   description?: string;
   placeholder: string;
   options: T[];
-  onSelectHandler?: (value: string) => void;
+  onSelectHandler?: (value: T) => void;
 }
 
 interface SelectState {

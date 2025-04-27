@@ -6,14 +6,14 @@ import { TCardBrand } from "./components/cardPreview/constants/DisplayData";
 export interface CardInfo {
   cardNumbers: string[];
   expirationDate: string[];
-  brandName: TCardBrand | null;
+  brandName: TCardBrand | "";
 }
 
 function PaymentInputPage() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: [],
     expirationDate: [],
-    brandName: null,
+    brandName: "",
   });
 
   const handleCardNumbersChange = (newCardNumbers: string[]) => {
@@ -29,7 +29,7 @@ function PaymentInputPage() {
       expirationDate: newExpirationDate,
     }));
   };
-  const handleBrandNameChange = (newBrandName: TCardBrand | null) => {
+  const handleBrandNameChange = (newBrandName: TCardBrand | "") => {
     setCardInfo((prev) => ({
       ...prev,
       brandName: newBrandName,

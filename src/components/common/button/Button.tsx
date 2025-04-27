@@ -1,7 +1,7 @@
 import styles from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onClickHandler: () => void;
+  onClickHandler?: () => void;
   backgroundColor?: string;
   type?: "button" | "submit" | "reset";
 }

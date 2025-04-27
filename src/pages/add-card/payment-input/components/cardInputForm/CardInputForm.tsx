@@ -1,19 +1,22 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import CardCVCInput from "./cardInput/CardCVCInput";
-import CardExpirationDateInput from "./cardInput/CardExpirationDateInput";
-import CardNumberInput from "./cardInput/CardNumberInput";
+import CardCVCInput from "./cardCVCInput/CardCVCInput";
+import CardExpirationDateInput from "./cardExpirationDateInput/CardExpirationDateInput";
+import CardNumberInput from "./cardNumberInput/CardNumberInput";
 import styles from "./cardInputForm.module.css";
-import CardBrandSelect from "./cardInput/CardBrandSelect";
-import CardPasswordInput from "./cardInput/CardPasswordInput";
-import { CARD_BACKGROUND_COLOR } from "../cardPreview/constants/DisplayData";
+import CardBrandSelect from "./cardBrandSelect/CardBrandSelect";
+import CardPasswordInput from "./cardPasswordInput/CardPasswordInput";
+import {
+  CARD_BACKGROUND_COLOR,
+  TCardBrand,
+} from "../cardPreview/constants/DisplayData";
 import { CardInfo } from "../../PaymentInputPage";
 import { useNavigate } from "react-router";
 import Button from "../../../../../components/common/button/Button";
+import { useFormState } from "./hooks/useFormState";
 interface CardInputFormProps {
   cardInfo: CardInfo;
   handleCardNumbersChange: (cardNumbers: string[]) => void;
   handleExpirationDateChange: (expirationDate: string[]) => void;
-  handleBrandNameChange: (brandName: string) => void;
+  handleBrandNameChange: (brandName: TCardBrand | "") => void;
 }
 
 function CardInputForm({
@@ -22,60 +25,69 @@ function CardInputForm({
   handleExpirationDateChange,
   handleBrandNameChange,
 }: CardInputFormProps) {
-  const { brandName } = cardInfo;
-  const [validState, setValidState] = useState<Record<string, boolean>>({
-    cardNumberInput: false,
-    cardBrandSelect: false,
-    cardExpirationDateInput: false,
-    cardCVCInput: false,
-    cardPasswordInput: false,
-  });
-  const [isVisibleSubmitButton, setIsVisibleSubmitButton] = useState(false);
-
+  const { cardNumbers, brandName } = cardInfo;
+  const {
+    activatedInputs,
+    isVisibleSubmitButton,
+    handleActivateCardBrandSelect,
+    handleActivateExpirationDateInput,
+    handleActivateCVCInput,
+    handleActivatePasswordInput,
+    handleSetValidCardNumberInput,
+    handleSetValidCardBrandSelect,
+    handleSetValidExpirationDateInput,
+    handleSetValidCVCInput,
+    handleSetValidPasswordInput,
+  } = useFormState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const isAllValid = Object.values(validState).every(
-      (condition) => condition
-    );
-    setIsVisibleSubmitButton(isAllValid);
-  }, [validState]);
-
-  const onSubmitHandler = (e: React.FormEvent) => {
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("/add-card/success", {
       state: {
-        firstCardNumber: cardInfo.cardNumbers[0],
-        brandName: cardInfo.brandName,
+        firstCardNumber: cardNumbers[0],
+        brandName: brandName,
       },
     });
   };
 
   return (
-    <form className={styles.cardInputForm}>
+    <form className={styles.cardInputForm} onSubmit={onSubmitHandler}>
       <div className={styles.inputBoxWrapper}>
         <div className={styles.inputBox}>
-          {validState.cardCVCInput && (
-            <CardPasswordInput setValidState={setValidState} />
+          {activatedInputs.cardPasswordInput && (
+            <CardPasswordInput
+              onSuccessValidate={handleSetValidPasswordInput}
+            />
           )}
-          {validState.cardExpirationDateInput && (
-            <CardCVCInput setValidState={setValidState} />
+
+          {activatedInputs.cardCVCInput && (
+            <CardCVCInput
+              onSuccessValidate={handleSetValidCVCInput}
+              onSuccessNextInput={handleActivatePasswordInput}
+            />
           )}
-          {validState.cardBrandSelect && (
+
+          {activatedInputs.cardExpirationDateInput && (
             <CardExpirationDateInput
-              setValidState={setValidState}
               handleExpirationDateChange={handleExpirationDateChange}
+              onSuccessValidate={handleSetValidExpirationDateInput}
+              onSuccessNextInput={handleActivateCVCInput}
             />
           )}
-          {validState.cardNumberInput && (
+
+          {activatedInputs.cardBrandSelect && (
             <CardBrandSelect
-              setValidState={setValidState}
               handleBrandNameChange={handleBrandNameChange}
+              onSuccessValidate={handleSetValidCardBrandSelect}
+              onSuccessNextInput={handleActivateExpirationDateInput}
             />
           )}
+
           <CardNumberInput
-            setValidState={setValidState}
             handleCardNumbersChange={handleCardNumbersChange}
+            onSuccessValidate={handleSetValidCardNumberInput}
+            onSuccessNextInput={handleActivateCardBrandSelect}
           />
         </div>
         <div className={styles.fadeBottom}></div>
@@ -84,7 +96,6 @@ function CardInputForm({
       {isVisibleSubmitButton && (
         <Button
           type="submit"
-          onClickHandler={onSubmitHandler}
           backgroundColor={CARD_BACKGROUND_COLOR[brandName]}
         >
           확인

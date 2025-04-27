@@ -1,4 +1,4 @@
-import { validatorUtils } from "../../../../../../../utils/validationUtils";
+import { validatorUtils } from "../../../../../../utils/validationUtils";
 
 export function validateExpirationDateMonth(month: string, year: string) {
   const errorResult = {
