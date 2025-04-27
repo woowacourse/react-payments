@@ -22,7 +22,7 @@ const cardInputConfig = [
 function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
   const errorMessage = cardNumberError.getErrorMessage();
 
-  const { inputRefs, handleKeyDown } = useAutoFocus({
+  const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: cardInputConfig.length,
     inputMaxLength: CARD_NUMBER_LENGTH,
   });
@@ -35,7 +35,6 @@ function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
           <Input
             key={position}
             ref={inputRefs[idx]}
-            onKeyDown={(e) => handleKeyDown(e, idx)}
             value={cardNumber.values[position]}
             onChange={(e) => {
               cardNumberError.checkValidation({
@@ -44,6 +43,7 @@ function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
                 type: position,
               });
               cardNumber.changeValues(position, e.target?.value);
+              handleAutoFocus(e, idx);
             }}
             width="25%"
             maxLength={CARD_NUMBER_LENGTH}

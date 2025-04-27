@@ -20,7 +20,7 @@ function CardExpirationPeriodInputs({
   const errorMessage =
     monthError.getErrorMessage() || yearError.getErrorMessage();
 
-  const { inputRefs, handleKeyDown } = useAutoFocus({
+  const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: 2,
     inputMaxLength: EXPIRATION_PERIOD_LENGTH,
   });
@@ -31,7 +31,6 @@ function CardExpirationPeriodInputs({
       <StyledInputWrap>
         <Input
           ref={inputRefs[0]}
-          onKeyDown={(e) => handleKeyDown(e, 0)}
           value={expirationPeriod.values.month}
           onChange={(e) => {
             monthError.checkValidation({
@@ -43,6 +42,7 @@ function CardExpirationPeriodInputs({
               EXPIRATION_PERIOD.MONTH,
               e.target.value
             );
+            handleAutoFocus(e, 0);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
@@ -51,7 +51,6 @@ function CardExpirationPeriodInputs({
         ></Input>
         <Input
           ref={inputRefs[1]}
-          onKeyDown={(e) => handleKeyDown(e, 1)}
           value={expirationPeriod.values.year}
           onChange={(e) => {
             yearError.checkValidation({
@@ -63,6 +62,7 @@ function CardExpirationPeriodInputs({
               EXPIRATION_PERIOD.YEAR,
               e.target.value
             );
+            handleAutoFocus(e, 1);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}

@@ -14,7 +14,7 @@ function CardCVCNumberInputs({
 }: CardCVCNumberSectionProps) {
   const errorMessage = CVCError.getErrorMessage();
 
-  const { inputRefs, handleKeyDown } = useAutoFocus({
+  const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: 1,
     inputMaxLength: CVC_NUMBER_LENGTH,
   });
@@ -25,9 +25,6 @@ function CardCVCNumberInputs({
       <StyledInputWrap>
         <Input
           ref={inputRefs[0]}
-          onKeyDown={(e) => {
-            handleKeyDown(e, 0);
-          }}
           value={CVCNumber.values.CVCNumber}
           onChange={(e) => {
             CVCNumber.changeValues("CVCNumber", e.target.value);
@@ -36,6 +33,7 @@ function CardCVCNumberInputs({
               value: e.target.value,
               type: "CVCNumber",
             });
+            handleAutoFocus(e, 0);
           }}
           isError={CVCError.isError()}
           width="100%"

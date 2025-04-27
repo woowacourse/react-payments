@@ -17,8 +17,8 @@ export default function useAutoFocus({
     inputRefs[0].current?.focus();
   }, []);
 
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
+  const handleAutoFocus = (
+    event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     if (
@@ -29,5 +29,5 @@ export default function useAutoFocus({
     }
   };
 
-  return { inputRefs, handleKeyDown };
+  return { inputRefs, handleAutoFocus };
 }
