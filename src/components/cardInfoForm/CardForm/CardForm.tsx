@@ -9,6 +9,7 @@ import { CARD_COMPANY_NAME } from '../../constants/cardCompany';
 import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
 import CardPasswordField from '../CardPasswordField/CardPasswordField';
 import useCardValidationError from '../../../hooks/useCardValidationError';
+import { useNavigate } from 'react-router-dom';
 
 interface CardFormProps {
   cardNumber: string[];
@@ -107,12 +108,18 @@ function CardForm({
     validatePassword(value);
   };
 
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isValid = checkIsValid();
 
     if (isValid) {
-      // 페이지 이동
+      navigate('/Completion', {
+        state: {
+          startCardNumber: cardNumber[0],
+          cardCompany: cardCompany,
+        },
+      });
     }
   };
 
