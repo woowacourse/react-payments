@@ -19,7 +19,11 @@ export default function CardExpirationDateSection({
     error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleRef = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const createInputRef = (index: number) => (el: HTMLInputElement | null) => {
+    inputRefs.current[index] = el;
+  };
+
+  const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 2 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -39,10 +43,8 @@ export default function CardExpirationDateSection({
               key={`cardExpirationDate-custom-input-${index}`}
               {...input}
               onBlur={onBlur}
-              handleRef={(e: React.ChangeEvent<HTMLInputElement>) => handleRef(e, index)}
-              ref={(el: HTMLInputElement | null) => {
-                inputRefs.current[index] = el;
-              }}
+              handleRef={handleRef(index)}
+              ref={createInputRef(index)}
               maxLength={2}
               error={isError && error['cardExpirationDateError'].errorIndex === index}
             />

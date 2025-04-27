@@ -20,7 +20,11 @@ export default function CardNumberSection({
   const isError = error && error['cardNumberError'].errorIndex !== -1 && error['cardNumberError'].errorMessage !== '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleRef = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const createInputRef = (index: number) => (el: HTMLInputElement | null) => {
+    inputRefs.current[index] = el;
+  };
+
+  const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 4 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -40,12 +44,10 @@ export default function CardNumberSection({
               key={`cardNumber-custom-input-${index}`}
               {...input}
               onBlur={onBlur}
-              handleRef={(e: React.ChangeEvent<HTMLInputElement>) => handleRef(e, index)}
+              handleRef={handleRef(index)}
               maxLength={4}
               error={isError && error['cardNumberError'].errorIndex === index}
-              ref={(el: HTMLInputElement | null) => {
-                inputRefs.current[index] = el;
-              }}
+              ref={createInputRef(index)}
             />
           ))}
         </S.CardInfoInputContainer>
