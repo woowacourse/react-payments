@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { CARD_INFO } from "../constants/CardInfo";
 import styles from "./CardPreview.module.css";
 import { CARD_BACKGROUND_COLOR } from "./constants/DisplayData";
-import { CardInfo } from "../../../paymentInput/PaymentInputPage";
+import { CardInfo } from "../../PaymentInputPage";
 
 interface CardPreviewProps {
   cardInfo: CardInfo;

@@ -1,5 +1,5 @@
 import "./App.css";
-import PaymentInputPage from "./pages/addCard/paymentInput/PaymentInputPage";
+import PaymentInputPage from "./pages/add-card/paymentInput/PaymentInputPage";
 function App() {
   return <PaymentInputPage />;
 }

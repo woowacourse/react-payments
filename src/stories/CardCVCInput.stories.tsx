@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "@storybook/test";
 import styles from "../components/common/inputForm/input/Input.module.css";
-import CardCVCInput from "../pages/addCard/components/paymentInputPage/cardInputForm/cardInput/CardCVCInput";
+import CardCVCInput from "../pages/add-card/components/paymentInputPage/cardInputForm/cardInput/CardCVCInput";
 
 const meta = {
   title: "CardCVCInput",

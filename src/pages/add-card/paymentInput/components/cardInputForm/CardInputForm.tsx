@@ -7,7 +7,7 @@ import CardBrandSelect from "./cardInput/CardBrandSelect";
 import CardPasswordInput from "./cardInput/CardPasswordInput";
 import SubmitButton from "../../../../../components/common/inputForm/button/SubmitButton";
 import { CARD_BACKGROUND_COLOR } from "../cardPreview/constants/DisplayData";
-import { CardInfo } from "../../../paymentInput/PaymentInputPage";
+import { CardInfo } from "../../PaymentInputPage";
 interface CardInputFormProps {
   cardInfo: CardInfo;
   setCardInfo: Dispatch<SetStateAction<CardInfo>>;

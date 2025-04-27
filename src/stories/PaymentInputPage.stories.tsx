@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PaymentInputPage from "../pages/addCard/paymentInput/PaymentInputPage";
+import PaymentInputPage from "../pages/add-card/paymentInput/PaymentInputPage";
 
 const meta = {
   title: "PaymentInputPage",
