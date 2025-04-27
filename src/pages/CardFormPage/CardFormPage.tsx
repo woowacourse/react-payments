@@ -39,6 +39,16 @@ export default function CardFormPage() {
     });
   };
 
+  const allErrorMessages = [
+    ...Object.values(cardNumbersError),
+    ...Object.values(cardExpirationDateError),
+    cvcNumbersError,
+    cardBrandError,
+    passwordError,
+  ];
+
+  const hasError = allErrorMessages.some((msg) => msg !== "");
+
   return (
     <div className={styles["card-form-page"]}>
       <PreviewCardLayout
@@ -90,7 +100,7 @@ export default function CardFormPage() {
           errorMessage={cardBrandError}
         />
       </form>
-      {step > 4 && <Button text="확인" onClick={handleSubmit} />}
+      {step > 4 && !hasError && <Button text="확인" onClick={handleSubmit} />}
     </div>
   );
 }
