@@ -1,4 +1,5 @@
 .selectBox {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -37,9 +38,13 @@
 }
 
 .optionBox {
+  position: absolute;
+  top: 110%;
+
   width: 100%;
   border: 1px solid var(--grey);
   border-radius: 4px;
+  background-color: var(--white);
   color: var(--grey-2);
   &::placeholder {
     color: var(--grey);
