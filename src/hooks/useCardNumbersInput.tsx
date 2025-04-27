@@ -54,12 +54,7 @@ export default function useCardNumbersInput() {
     const key = indexToCardNumberKey(index);
     if (!validateCardNumbers(value, key)) return;
 
-    const trimmedValue = value.slice(
-      0,
-      CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH
-    );
-
-    const newCardNumbers = { ...cardNumbers, [key]: trimmedValue };
+    const newCardNumbers = { ...cardNumbers, [key]: value };
     setCardNumbers(newCardNumbers);
   };
 
