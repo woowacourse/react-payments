@@ -17,7 +17,8 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^7.5.2"
   },
   "homepage": "https://kimyou1102.github.io/react-payments",
   "devDependencies": {
