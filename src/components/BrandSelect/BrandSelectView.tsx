@@ -1,10 +1,11 @@
+import { ChangeEvent } from 'react';
 import InputAreaHeader from '../common/InputAreaHeader';
 import InputSelect from '../common/InputSelect';
 import { Container, ErrorMessage } from '../common/Styled';
 
 interface BrandSelectViewProps {
   brand: string;
-  handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const BrandSelectView = ({

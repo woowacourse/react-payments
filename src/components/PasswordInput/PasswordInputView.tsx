@@ -3,10 +3,11 @@ import InputTexts from '../common/InputTexts';
 import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
+import { ChangeEvent } from 'react';
 
 interface PasswordInputViewProps {
   passwordInfo: InputFieldState;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PasswordInputView = ({

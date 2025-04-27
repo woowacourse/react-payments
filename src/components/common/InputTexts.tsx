@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
-import { useCallback } from 'react';
+import { ChangeEvent, FocusEvent, RefObject, useCallback } from 'react';
 import { InputFieldState } from '../../types/models';
 
 interface InputTextsProps {
   label: string;
   dataModels: InputFieldState | InputFieldState[];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   type?: string;
+  inputRefs?: RefObject<HTMLInputElement | null>[];
 }
 
 const InputTexts = ({
@@ -18,9 +19,10 @@ const InputTexts = ({
   onFocus,
   onBlur,
   type = 'text',
+  inputRefs,
 }: InputTextsProps) => {
   const onChangeAt = useCallback(
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       onChange(e, index);
     },
     []
@@ -34,6 +36,7 @@ const InputTexts = ({
           dataModels.map((data, index) => (
             <Input
               key={index}
+              ref={inputRefs ? inputRefs[index] : null}
               type={type}
               placeholder={data.placeholder}
               maxLength={data.maximumLength}

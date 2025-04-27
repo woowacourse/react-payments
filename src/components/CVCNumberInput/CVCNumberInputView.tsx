@@ -3,10 +3,11 @@ import InputTexts from '../common/InputTexts';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
 import { InputFieldState } from '../../types/models';
+import { ChangeEvent } from 'react';
 
 interface CVCNumberInputViewProps {
   cvcNumberInfo: InputFieldState;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CVCNumberInputView = ({

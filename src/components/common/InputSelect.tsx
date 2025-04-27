@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { ChangeEvent } from 'react';
 
 interface InputSelectProps {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const InputSelect = ({ value, onChange }: InputSelectProps) => {
