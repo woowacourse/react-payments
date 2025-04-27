@@ -1,20 +1,70 @@
 import { useState } from "react";
-import { isValidateExpirationDate } from "../utils/validation";
+import { EXPIRATION_MAX_LENGTH, isNumberWithinRange, isValidateExpirationDate, isValidMonth, isValidYear } from "../utils/validation";
+import { MESSAGE } from "../components/form/constants/error";
 
-export interface ExpirationDate {
+export interface ExpirationDateType {
 	month: string;
 	year: string;
 }
 
 const useExpirationDate = () => {
-	const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
+	const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
 		month: "",
 		year: "",
 	});
 	const [error, setError] = useState({ month: "", year: "" });
 	const isComplete = isValidateExpirationDate(expirationDate);
+	const CURRENT_YEAR = new Date().getFullYear() % 100;
 
-	return { expirationDate, setExpirationDate, error, setError, isComplete };
+	const updateExpirationDate = (order: keyof ExpirationDateType, value: string) => {
+		setExpirationDate((prev) => ({ ...prev, [order]: value }));
+	};
+
+	const validateInputFormat = (order: keyof ExpirationDateType, value: string): boolean => {
+		if (!isNumberWithinRange(value, EXPIRATION_MAX_LENGTH)) {
+			setError((prev) => ({ ...prev, [order]: MESSAGE.INVALID_NUMBER }));
+			return false;
+		}
+		return true;
+	};
+
+	const validateMonthRange = (value: string): boolean => {
+		if (!isValidMonth(value)) {
+			setError((prev) => ({ ...prev, month: MESSAGE.MONTH_RANGE }));
+			return false;
+		}
+		return true;
+	};
+
+	const validateYearRange = (value: string): boolean => {
+		if (!isValidYear(value)) {
+			setError((prev) => ({ ...prev, year: MESSAGE.YEAR_RANGE(CURRENT_YEAR) }));
+			return false;
+		}
+		return true;
+	};
+
+	const clearError = (order: keyof ExpirationDateType) => {
+		setError((prev) => ({ ...prev, [order]: "" }));
+	};
+
+	const onChange = (order: keyof ExpirationDateType, value: string) => {
+		updateExpirationDate(order, value);
+
+		if (!validateInputFormat(order, value)) return;
+
+		if (order === "month" && !validateMonthRange(value)) return;
+
+		if (order === "year" && !validateYearRange(value)) return;
+
+		clearError(order);
+	};
+
+	const onBlur = (order: keyof ExpirationDateType, value: string) => {
+		if (value.length < EXPIRATION_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
+	};
+
+	return { expirationDate, setExpirationDate, error, setError, isComplete, onChange, onBlur };
 };
 
 export default useExpirationDate;
