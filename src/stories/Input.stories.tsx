@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import Input from "../components/common/inputField/input/Input";
 import { validatorUtils } from "../utils/validationUtils";
 import { userEvent, within, expect, waitFor } from "@storybook/test";
-import styles from "../components/common/inputForm/input/Input.module.css";
+import styles from "../components/common/inputField/input/Input.module.css";
 
 function onChangeHandler(
   e: React.ChangeEvent<HTMLInputElement>,
@@ -17,10 +18,10 @@ function onChangeHandler(
 }
 
 const meta = {
-  title: "Input",
+  title: "Components/Input",
   component: Input,
-  args: {
-    onChange: () => {},
+  parameters: {
+    layout: "centered",
   },
 } satisfies Meta<typeof Input>;
 
@@ -30,12 +31,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => {
+    const [isValid, setIsValid] = useState(true);
+
     return (
       <Input
-        type="test"
+        type="text"
         placeholder="숫자를 입력하세요"
         maxLength={3}
-        onChange={onChangeHandler}
+        onChange={(e) => onChangeHandler(e, setIsValid)}
+        isValid={isValid}
       />
     );
   },
@@ -43,12 +47,15 @@ export const Default: Story = {
 
 export const ErrorInput: Story = {
   render: () => {
+    const [isValid, setIsValid] = useState(true);
+
     return (
       <Input
         type="text"
         placeholder="숫자를 입력하세요"
         maxLength={3}
-        onChange={onChangeHandler}
+        onChange={(e) => onChangeHandler(e, setIsValid)}
+        isValid={isValid}
       />
     );
   },
@@ -61,8 +68,8 @@ export const ErrorInput: Story = {
 
     await userEvent.clear(input);
     await userEvent.type(input, "123");
-    await waitFor(() =>
-      expect(input.className).not.toContain(styles.isNotValid)
-    );
+    await waitFor(() => {
+      expect(input.className).not.toContain(styles.isNotValid);
+    });
   },
 };

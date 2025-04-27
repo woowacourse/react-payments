@@ -36,7 +36,7 @@ function CardPreview({ cardInfo }: CardPreviewProps) {
   return (
     <div
       style={
-        brandName === null
+        brandName === ""
           ? {}
           : { backgroundColor: CARD_BACKGROUND_COLOR[brandName] }
       }
