@@ -1,7 +1,7 @@
 import React from 'react';
 import Description from '../Description';
-import Input from '../Input';
-import InputGroup from '../InputGroup';
+import Input from '../Input'; // 수정된 Input 컴포넌트 사용
+import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { CardInputProps } from '../../types/CardInputTypes';
 
@@ -33,6 +33,7 @@ export const CVCInput: React.FC<CVCInputProps> = ({
             }));
           }}
           handleErrorMessage={message => handleErrorMessages('CVC', message)}
+          name="cvcNumber"
         />
       </InputGroup>
     </>

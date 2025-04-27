@@ -19,7 +19,6 @@ import { SubmitButton } from '../component/SubmitButton';
 import {
   isCardNumberComplete,
   isCardBrandComplete,
-  isSecretNumberComplete,
   isExpiryDateComplete,
   isCVCComplete,
   isFormComplete,

@@ -2,8 +2,8 @@ import { CardInputProps } from '../../types/CardInputTypes';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { validateCardSecretNumber } from '../../validation/validation';
 import Description from '../Description';
-import Input from '../Input';
-import InputGroup from '../InputGroup';
+import Input from '../Input'; // 수정된 Input 컴포넌트 사용
+import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
 
 interface SecretNumberInputProps {
   errorMessages: ErrorMessagesType;
@@ -40,6 +40,7 @@ export const SecretNumberInput = ({
             handleErrorMessages('secretNumber', message)
           }
           type="password"
+          name="secretNumber"
         />
       </InputGroup>
     </>

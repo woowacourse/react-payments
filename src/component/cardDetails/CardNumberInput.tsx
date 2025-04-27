@@ -1,8 +1,8 @@
 import React from 'react';
 import { validateCardNumber } from '../../validation/validation';
 import Description from '../Description';
-import Input from '../Input';
-import InputGroup from '../InputGroup';
+import Input from '../Input'; // 수정된 Input 컴포넌트 사용
+import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
 import { CardInputProps } from '../../types/CardInputTypes';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 
@@ -40,6 +40,7 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
               first: value === '' ? null : Number(value),
             }));
           }}
+          name="cardNumber1"
         />
         <Input
           maxLength={4}
@@ -52,6 +53,7 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
               second: value === '' ? null : Number(value),
             }));
           }}
+          name="cardNumber2"
         />
         <Input
           maxLength={4}
@@ -64,6 +66,7 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
               third: value === '' ? null : Number(value),
             }));
           }}
+          name="cardNumber3"
         />
         <Input
           maxLength={4}
@@ -76,6 +79,7 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
               fourth: value === '' ? null : Number(value),
             }));
           }}
+          name="cardNumber4"
         />
       </InputGroup>
     </>

@@ -1,13 +1,20 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 
-interface InputProps {
+export interface InputProps {
   maxLength: number;
   placeholder: string;
   validate: (value: string) => string | undefined;
   handleErrorMessage: (input: string) => void;
   onChange: (value: string) => void;
   type?: string;
+  onComplete?: () => void; // 입력이 완료되었을 때 호출될 콜백
+  name?: string; // 식별을 위한 이름 추가
+}
+
+export interface InputRef {
+  focus: () => void;
+  getValue: () => string;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -25,41 +32,69 @@ const InputField = styled.input<{ $isError: boolean }>`
   }
 `;
 
-const Input = ({
-  maxLength,
-  placeholder,
-  validate,
-  handleErrorMessage,
-  onChange,
-  type = 'text',
-}: InputProps) => {
-  const [isError, setIsError] = useState(false);
+const Input = forwardRef<InputRef, InputProps>(
+  (
+    {
+      maxLength,
+      placeholder,
+      validate,
+      handleErrorMessage,
+      onChange,
+      onComplete,
+      type = 'text',
+      name,
+    },
+    ref,
+  ) => {
+    const [isError, setIsError] = useState(false);
+    const [value, setValue] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    const errorMessage = validate(inputValue);
-    if (errorMessage && errorMessage.length > 0) {
-      handleErrorMessage(errorMessage);
-      setIsError(true);
-      return;
-    }
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        inputRef.current?.focus();
+      },
+      getValue: () => value,
+    }));
 
-    handleErrorMessage('');
-    setIsError(false);
-    onChange(inputValue);
-  };
+    const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = e.target.value;
 
-  return (
-    <InputField
-      placeholder={placeholder}
-      maxLength={maxLength}
-      onChange={handleCardNumber}
-      inputMode="numeric"
-      pattern="[0-9]*"
-      $isError={isError}
-      type={type}
-    />
-  );
-};
+      const errorMessage = validate(inputValue);
+      if (errorMessage && errorMessage.length > 0) {
+        handleErrorMessage(errorMessage);
+        setIsError(true);
+        setValue(inputValue);
+        return;
+      }
+
+      handleErrorMessage('');
+      setIsError(false);
+      setValue(inputValue);
+      onChange(inputValue);
+
+      if (inputValue.length === maxLength) {
+        if (onComplete) {
+          onComplete();
+        }
+      }
+    };
+
+    return (
+      <InputField
+        ref={inputRef}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        onChange={handleCardNumber}
+        value={value}
+        inputMode="numeric"
+        pattern="[0-9]*"
+        $isError={isError}
+        type={type}
+        name={name}
+      />
+    );
+  },
+);
 
 export default Input;
