@@ -1,6 +1,6 @@
-# react-payments
+# 💸 react-payments
 
-## `Step1` 기능 요구사항
+## 📌 `Step1` 기능 요구사항
 
 ### UI
 
@@ -19,7 +19,7 @@
 - [x] 카드 식별 로직 구현
 - [x] 입력 값에 따라 카드 프리뷰에 동적으로 추가
 
-## `Step2` 기능 요구사항
+## 📌 `Step2` 기능 요구사항
 
 ### UI
 
@@ -52,18 +52,19 @@
 - [x] 확인 버튼을 클릭하면 사용자는 카드 등록 완료 페이지로 이동한다.
 - [x] 카드 등록 완료 페이지에서는 카드 등록이 성공적으로 완료되었다는 메시지와 함께, 다시 카드 등록 페이지로 돌아갈 수 있는 확인 버튼을 제공한다.
 
-## CSS Library
+## 📌 CSS Library
 
 - styled-components
 
-## UI Test
+## 📌 UI Test
 
 - Storybook
 
-## 컴포넌트 관계도
+## 📌 컴포넌트 관계도
+
+### ✔️ CardForm 페이지 (path: "/")
 
 ```
-<CardForm> (path: "/")
 ├── <CardPreview> (카드 프리뷰)
 ├── <CardFormScrollStyles> (하위 컴포넌트는 조건부 렌더링)
 │   ├── <CardFormSection type="password"> (비밀번호)
@@ -102,8 +103,11 @@
 │       └── <Error>
 │
 └── <Button type="submit"> (카드 등록 버튼: 조건부 렌더링 - isFormComplete일 때만)
+```
 
-<RegisterComplete> (path: "/register-complete")
+### ✔️ RegisterComplete 페이지 (path: "/register-complete")
+
+```
 ├── <CheckImgStyles>
 ├── <CompletionMessageStyles>
 │   ├── <CompletionTitleStyles> (카드번호 첫 부분)
