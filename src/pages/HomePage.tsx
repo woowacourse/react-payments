@@ -1,7 +1,7 @@
 import Preview from '../components/Preview';
 import BrandSelect from '../components/BrandSelect';
 import NumberInputs from '../components/NumberInputs';
-import ExpirationPeriodInputs from '../components/ExpirationPeriodInputs';
+import ExpiryDateInputs from '../components/ExpiryDateInputs';
 import CVCNumberInput from '../components/CVCNumberInput';
 import PasswordInput from '../components/PasswordInput';
 import styled from '@emotion/styled';
@@ -31,7 +31,7 @@ const HomePage = () => {
         <Column>
           <PasswordInput />
           <CVCNumberInput />
-          <ExpirationPeriodInputs />
+          <ExpiryDateInputs />
           <BrandSelect />
           <NumberInputs />
         </Column>

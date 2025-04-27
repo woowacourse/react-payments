@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import ExpirationPeriodInputs from '../components/ExpirationPeriodInputs';
+import ExpiryDateInputs from '../components/ExpiryDateInputs';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
 
-const meta: Meta<typeof ExpirationPeriodInputs> = {
-  title: 'Components/ExpirationPeriod Container',
-  component: ExpirationPeriodInputs,
+const meta: Meta<typeof ExpiryDateInputs> = {
+  title: 'Components/ExpiryDate Container',
+  component: ExpiryDateInputs,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof ExpirationPeriodInputs>;
+type Story = StoryObj<typeof ExpiryDateInputs>;
 
 const Wrapper = () => {
   const [period, setPeriod] = useState<string[]>(['', '']);
@@ -22,7 +22,7 @@ const Wrapper = () => {
 
   return (
     <>
-      <ExpirationPeriodInputs
+      <ExpiryDateInputs
         period={period}
         handlePeriodChange={handlePeriodChange}
         showPeriodSeparator={() => setIsPeriodSeparatorShowing(true)}

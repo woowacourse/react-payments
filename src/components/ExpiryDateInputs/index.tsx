@@ -1,7 +1,7 @@
 import { useCardForm } from '../../contexts/CardFormContext';
-import ExpirationPeriodInputsView from './ExpirationPeriodInputsView';
+import ExpiryDateInputsView from './ExpiryDateInputsView';
 
-const ExpirationPeriodInputs = () => {
+const ExpiryDateInputs = () => {
   const {
     expiryFields,
     handleExpiryFieldChange,
@@ -11,7 +11,7 @@ const ExpirationPeriodInputs = () => {
   } = useCardForm();
 
   return (
-    <ExpirationPeriodInputsView
+    <ExpiryDateInputsView
       expiryDateInfo={expiryFields}
       handleInputChange={handleExpiryFieldChange}
       expiryInputRefs={expiryInputRefs}
@@ -21,4 +21,4 @@ const ExpirationPeriodInputs = () => {
   );
 };
 
-export default ExpirationPeriodInputs;
+export default ExpiryDateInputs;

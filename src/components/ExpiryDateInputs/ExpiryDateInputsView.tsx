@@ -4,7 +4,7 @@ import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ChangeEvent, FocusEvent, RefObject } from 'react';
 
-interface ExpirationPeriodInputsViewProps {
+interface ExpiryDateInputsViewProps {
   expiryDateInfo: InputFieldState[];
   handleInputChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
   expiryInputRefs: RefObject<HTMLInputElement | null>[];
@@ -12,13 +12,13 @@ interface ExpirationPeriodInputsViewProps {
   onBlur: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
-const ExpirationPeriodInputsView = ({
+const ExpiryDateInputsView = ({
   expiryDateInfo,
   handleInputChange,
   expiryInputRefs,
   onFocus,
   onBlur,
-}: ExpirationPeriodInputsViewProps) => {
+}: ExpiryDateInputsViewProps) => {
   const errorMessage =
     expiryDateInfo.find((info) => info.hasError)?.errorMessage ?? '';
 
@@ -41,4 +41,4 @@ const ExpirationPeriodInputsView = ({
   );
 };
 
-export default ExpirationPeriodInputsView;
+export default ExpiryDateInputsView;
