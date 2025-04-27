@@ -3,7 +3,7 @@ import { CARD_COMPANIES } from '@/constants';
 import Select from './Select';
 
 const meta = {
-  title: 'Components/Select',
+  title: 'Components/Common/Select',
   component: Select,
   parameters: {
     layout: 'centered',
