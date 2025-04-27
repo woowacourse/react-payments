@@ -18,25 +18,20 @@ const useCardForm = () => {
 
   const canSubmit = (): boolean => {
     const canCardNumbersSubmit =
-      Object.values(cardNumbersForm.cardNumbers).every(
-        (cardNumber) => cardNumber.length === 4
-      ) && Object.values(cardNumbersForm.isError).every((isError) => !isError);
+      canSubmitByLength(cardNumbersForm.cardNumbers, 4) &&
+      isErrorFree(cardNumbersForm.isError);
 
     const canCardCVCNumberSubmit =
-      cardCVCNumberForm.cardCVCNumber.length === 3 &&
-      Object.values(cardCVCNumberForm.isError).every((isError) => !isError);
+      canSubmitByLength(cardCVCNumberForm.cardCVCNumber, 3) &&
+      isErrorFree(cardCVCNumberForm.isError);
 
     const canCardExpirationDateSubmit =
-      Object.values(cardExpirationDateForm.cardExpirationDate).every(
-        (date) => date.length === 2
-      ) &&
-      Object.values(cardExpirationDateForm.isError).every(
-        (isError) => !isError
-      );
+      canSubmitByLength(cardExpirationDateForm.cardExpirationDate, 2) &&
+      isErrorFree(cardExpirationDateForm.isError);
 
     const canCardPasswordSubmit =
-      cardPasswordForm.cardPassword.length === 2 &&
-      Object.values(cardPasswordForm.isError).every((isError) => !isError);
+      canSubmitByLength(cardPasswordForm.cardPassword, 2) &&
+      isErrorFree(cardPasswordForm.isError);
 
     return (
       canCardNumbersSubmit &&
@@ -65,3 +60,17 @@ const useCardForm = () => {
 };
 
 export default useCardForm;
+
+const canSubmitByLength = (
+  value: string | Record<string, string>,
+  expectedLength: number
+) => {
+  if (typeof value === 'string') {
+    return value.length === expectedLength;
+  }
+  return Object.values(value).every((v) => v.length === expectedLength);
+};
+
+const isErrorFree = (errors: Record<string, boolean>) => {
+  return Object.values(errors).every((isError) => !isError);
+};
