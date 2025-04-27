@@ -1,16 +1,17 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import InputForm from "../../../common/inputForm/InputForm";
-import Input from "../../../common/inputForm/input/Input";
+import InputForm from "../../../../../../components/common/inputForm/InputForm";
+import Input from "../../../../../../components/common/inputForm/input/Input";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validateNumberString } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardNumberInput({
   setCardInfo,
   setValidState,
 }: {
-  setCardInfo: Dispatch<SetStateAction<string[]>>;
-  setValidState: Dispatch<SetStateAction<{}>>;
+  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
+  setValidState: Dispatch<SetStateAction<Record<string, boolean>>>;
 }) {
   const [cardNumberInfo, setCardNumberInfo] = useState({
     cardNumbers: ["", "", "", ""],

@@ -1,13 +1,19 @@
-import CardPreview from "./cardPreview/CardPreview";
-import CardInputForm from "./cardInputForm/CardInputForm";
+import CardPreview from "./components/cardPreview/CardPreview";
+import CardInputForm from "./components/cardInputForm/CardInputForm";
 import styles from "./PaymentInputPage.module.css";
 import { useState } from "react";
+import { TCardBrand } from "./components/cardPreview/constants/DisplayData";
+export interface CardInfo {
+  cardNumbers: string[];
+  expirationDate: string[];
+  brandName: TCardBrand | null;
+}
 
 function PaymentInputPage() {
-  const [cardInfo, setCardInfo] = useState({
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: [],
     expirationDate: [],
-    brandName: "",
+    brandName: null,
   });
 
   return (

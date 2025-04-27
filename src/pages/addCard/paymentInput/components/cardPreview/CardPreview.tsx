@@ -2,13 +2,13 @@ import { useMemo } from "react";
 import { CARD_INFO } from "../constants/CardInfo";
 import styles from "./CardPreview.module.css";
 import { CARD_BACKGROUND_COLOR } from "./constants/DisplayData";
+import { CardInfo } from "../../../paymentInput/PaymentInputPage";
 
-export type CardInformationType = {
-  cardNumbers: string[];
-  expirationDate: string[];
-};
+interface CardPreviewProps {
+  cardInfo: CardInfo;
+}
 
-function CardPreview({ cardInfo }: CardInformationType) {
+function CardPreview({ cardInfo }: CardPreviewProps) {
   const { cardNumbers, expirationDate, brandName } = cardInfo;
   const { cardType } = useMemo(() => {
     const firstNumber = cardNumbers[0] ?? "";
@@ -36,7 +36,7 @@ function CardPreview({ cardInfo }: CardInformationType) {
   return (
     <div
       style={
-        brandName === ""
+        brandName === null
           ? {}
           : { backgroundColor: CARD_BACKGROUND_COLOR[brandName] }
       }

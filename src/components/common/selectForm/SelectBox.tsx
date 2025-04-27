@@ -3,22 +3,27 @@ import styles from "./SelectBox.module.css";
 import ArrowSvg from "./assets/ArrowSvg";
 import { useEffect, useState } from "react";
 
-interface SelectBoxProps {
+interface SelectBoxProps<T> {
   title: string;
   description?: string;
   placeholder: string;
-  options: string[];
+  options: T[];
   onSelectHandler?: (value: string) => void;
 }
 
-const SelectBox = ({
+interface SelectState {
+  selectedOption: string;
+  isOpened: boolean;
+}
+
+const SelectBox = <T extends {}>({
   onSelectHandler,
   placeholder,
   title,
   description,
   ...props
-}: SelectBoxProps) => {
-  const [selectState, setSelectState] = useState({
+}: SelectBoxProps<T>) => {
+  const [selectState, setSelectState] = useState<SelectState>({
     isOpened: false,
     selectedOption: "",
   });
@@ -42,7 +47,11 @@ const SelectBox = ({
           <p className={`${styles.description} tx-md`}>{description}</p>
         )}
       </div>
-      <button onClick={onClickHandler} className={styles.selector}>
+      <button
+        type="button"
+        onClick={onClickHandler}
+        className={styles.selector}
+      >
         <span>
           {selectState.selectedOption === ""
             ? placeholder

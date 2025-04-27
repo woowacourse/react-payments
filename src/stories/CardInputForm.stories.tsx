@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import CardInputForm from '../components/paymentInputPage/cardInputForm/CardInputForm';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import CardInputForm from "../pages/addCard/components/paymentInputPage/cardInputForm/CardInputForm";
 
 const meta = {
-  title: 'CardInputForm',
+  title: "CardInputForm",
   component: CardInputForm,
   args: {
     setCardNumbers: () => {},

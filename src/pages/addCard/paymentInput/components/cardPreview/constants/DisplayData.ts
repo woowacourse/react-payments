@@ -7,4 +7,6 @@ export const CARD_BACKGROUND_COLOR = {
   롯데카드: "#ED1C24",
   하나카드: "#009490",
   국민카드: "#6A6056",
-};
+} as const;
+
+export type TCardBrand = keyof typeof CARD_BACKGROUND_COLOR;

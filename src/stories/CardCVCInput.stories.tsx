@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from '@storybook/test';
-import styles from '../components/common/inputForm/input/Input.module.css';
-import CardCVCInput from '../components/paymentInputPage/cardInputForm/cardInput/CardCVCInput';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
+import styles from "../components/common/inputForm/input/Input.module.css";
+import CardCVCInput from "../pages/addCard/components/paymentInputPage/cardInputForm/cardInput/CardCVCInput";
 
 const meta = {
-  title: 'CardCVCInput',
+  title: "CardCVCInput",
   component: CardCVCInput,
 } satisfies Meta<typeof CardCVCInput>;
 
@@ -17,11 +17,11 @@ export const Default: Story = {};
 export const Error: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const firstInput = canvas.getByPlaceholderText('123');
+    const firstInput = canvas.getByPlaceholderText("123");
 
-    await userEvent.type(firstInput, 'abc');
+    await userEvent.type(firstInput, "abc");
     expect(firstInput.className).toContain(styles.isNotValid);
 
-    expect(canvas.getByText('숫자만 입력 가능합니다.')).toBeVisible();
+    expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeVisible();
   },
 };

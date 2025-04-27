@@ -1,12 +1,15 @@
 import styles from "./SelectOption.module.css";
 
-interface ISelectOption {
-  options: string[];
-  setSelectState: (state: object) => void;
+interface ISelectOption<T> {
+  options: T[];
+  setSelectState: React.Dispatch<React.SetStateAction<T>>;
 }
 
-const SelectOption = ({ options, setSelectState }: ISelectOption) => {
-  function onClickHandler(option: string) {
+const SelectOption = <T extends {}>({
+  options,
+  setSelectState,
+}: ISelectOption<T>) => {
+  function onClickHandler(option: T) {
     setSelectState({
       selectedOption: option,
       isOpened: false,

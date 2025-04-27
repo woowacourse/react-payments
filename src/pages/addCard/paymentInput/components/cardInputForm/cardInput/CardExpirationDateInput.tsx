@@ -1,19 +1,20 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import Input from "../../../common/inputForm/input/Input";
-import InputForm from "../../../common/inputForm/InputForm";
+import Input from "../../../../../../components/common/inputForm/input/Input";
+import InputForm from "../../../../../../components/common/inputForm/InputForm";
 import { CARD_INFO } from "../../constants/CardInfo";
 import {
   validateExpirationDateMonth,
   validateExpirationDateYear,
 } from "./validator/validateCardInput";
 import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardExpirationDateInput({
   setCardInfo,
   setValidState,
 }: {
-  setCardInfo: Dispatch<SetStateAction<string[]>>;
-  setValidState: Dispatch<SetStateAction<{}>>;
+  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
+  setValidState: Dispatch<SetStateAction<Record<string, boolean>>>;
 }) {
   const [expiration, setExpiration] = useState({
     month: "",
@@ -24,9 +25,14 @@ function CardExpirationDateInput({
     },
   });
 
-  const inputRefs = useRef([null, null, null, null]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([
+    null,
+    null,
+    null,
+    null,
+  ]);
 
-  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>, i) {
+  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>, i: number) {
     const { name, value } = e.target;
 
     const next = {
@@ -59,7 +65,7 @@ function CardExpirationDateInput({
     });
 
     if (value.length === 2 && i !== 1) {
-      inputRefs.current[i + 1].focus();
+      inputRefs.current[i + 1]?.focus();
     } else if (
       value.length === 2 &&
       i === 1 &&
@@ -90,7 +96,9 @@ function CardExpirationDateInput({
 
         return (
           <Input
-            ref={(el) => (inputRefs.current[i] = el)}
+            ref={(el) => {
+              if (el) inputRefs.current[i] = el;
+            }}
             key={name}
             type="tel"
             name={name}

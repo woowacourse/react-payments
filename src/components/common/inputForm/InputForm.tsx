@@ -1,4 +1,4 @@
-import styles from './InputForm.module.css';
+import styles from "./InputForm.module.css";
 
 export interface InputFormProps {
   title: string;
@@ -8,23 +8,27 @@ export interface InputFormProps {
   children: React.ReactNode;
 }
 
-function InputForm(props: InputFormProps) {
-  const { title, label, description, feedbackMessage } = props;
-
+function InputForm({
+  title,
+  label,
+  description,
+  feedbackMessage,
+  children,
+}: InputFormProps) {
   return (
     <div className={styles.container}>
       <div className={styles.titleBox}>
-        <h3 className='tx-xl'>{title}</h3>
-        {description && <p className='tx-md'>{description}</p>}
+        <h3 className="tx-xl">{title}</h3>
+        {description && <p className="tx-md">{description}</p>}
       </div>
       <div className={styles.inputBox}>
-        <label className='tx-lg'>{label}</label>
-        <div className={styles.inputContainer}>{props.children}</div>
+        <label className="tx-lg">{label}</label>
+        <div className={styles.inputContainer}>{children}</div>
         <p
           style={
             feedbackMessage
-              ? { visibility: 'visible' }
-              : { visibility: 'hidden' }
+              ? { visibility: "visible" }
+              : { visibility: "hidden" }
           }
           className={`${styles.feedbackMessage}`}
         >

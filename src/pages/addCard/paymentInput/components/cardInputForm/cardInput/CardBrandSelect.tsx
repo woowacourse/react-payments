@@ -1,8 +1,9 @@
-import SelectBox from "../../../common/selectForm/SelectBox";
+import SelectBox from "../../../../../../components/common/selectForm/SelectBox";
+import { TCardBrand } from "../../cardPreview/constants/DisplayData";
 import CARD from "./constants/Card";
 
 const CardBrandSelect = ({ setCardInfo, setValidState }) => {
-  function onSelectHandler(value: string) {
+  function onSelectHandler(value: TCardBrand) {
     setCardInfo((prev) => {
       return { ...prev, brandName: value };
     });

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import PaymentInputPage from '../components/paymentInputPage/PaymentInputPage';
+import type { Meta, StoryObj } from "@storybook/react";
+import PaymentInputPage from "../pages/addCard/paymentInput/PaymentInputPage";
 
 const meta = {
-  title: 'PaymentInputPage',
+  title: "PaymentInputPage",
   component: PaymentInputPage,
   args: {},
 } satisfies Meta<typeof PaymentInputPage>;
