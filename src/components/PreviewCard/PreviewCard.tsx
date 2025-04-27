@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import useCardTypeImage from '../../hooks/useCardTypeImage';
+import getCardTypeImage from './getCardTypeImage';
 
 type PreviewCardProps = {
   cardNumber: string[];
@@ -76,7 +76,7 @@ const StyledExpirationDate = styled.div`
 `;
 
 const PreviewCard = ({ cardNumber, expirationDate, cardCompany }: PreviewCardProps) => {
-  const cardType = useCardTypeImage(cardNumber[0]);
+  const cardType = getCardTypeImage(cardNumber[0]);
 
   return (
     <StyledPreviewCard cardCompany={cardCompany}>
