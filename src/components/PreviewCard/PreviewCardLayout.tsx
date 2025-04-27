@@ -1,8 +1,8 @@
-import type { CardType } from "../../hooks/useCardNumbers";
+import { CardType } from "../../hooks/useCardNumber/useCardNumberState";
 import styles from "./PreviewCardLayout.module.css";
 import PreviewCardLogo from "./PreviewCardLogo";
 import PreviewCardNumber from "./PreviewCardNumber";
-import { CARD_COMPANY_INFO } from "../../hooks/useCardCompany";
+import { CARD_COMPANY_INFO } from "../../hooks/useCardCompany/useCardCompanyState";
 
 interface PreviewCardLayoutProps {
   selectedCompany: string;

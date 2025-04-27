@@ -1,5 +1,9 @@
-import { CARD_COMPANY_INFO, CardCompanyType } from "../hooks/useCardCompany";
-import { useState } from "react";
+import {
+  CARD_COMPANY_INFO,
+  CardCompanyType,
+} from "../hooks/useCardCompany/useCardCompanyState";
+import useCardCompanyState from "../hooks/useCardCompany/useCardCompanyState";
+import useCardCompanyInputHandler from "../hooks/useCardCompany/useCardCompanyInputHandler";
 import InputText from "../components/InputText/InputText";
 import inputStyles from "../components/Input/CardNumberInput.module.css";
 import styles from "./CardCompany.module.css";
@@ -22,17 +26,12 @@ export default function CardCompanyPicker({
   selectCompany,
   onComplete,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const handleSelect = (company: CardCompanyType) => {
-    selectCompany(company);
-    setIsOpen(false);
-    onComplete();
-  };
+  const { isOpen, toggleDropdown } = useCardCompanyState();
+  const { handleSelect } = useCardCompanyInputHandler(
+    selectCompany,
+    toggleDropdown,
+    onComplete
+  );
 
   return (
     <section className={styles["card-company"]}>

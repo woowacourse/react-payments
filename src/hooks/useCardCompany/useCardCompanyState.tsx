@@ -13,16 +13,23 @@ export const CARD_COMPANY_INFO = [
 
 export type CardCompanyType = (typeof CARD_COMPANY_INFO)[number];
 
-export default function useCardCompany() {
+export default function useCardCompanyState() {
   const [selectedCompany, setSelectedCompany] =
     useState<CardCompanyType | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const selectCompany = (company: CardCompanyType) => {
     setSelectedCompany(company);
   };
 
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return {
     selectedCompany,
+    isOpen,
     selectCompany,
+    toggleDropdown,
   };
 }
