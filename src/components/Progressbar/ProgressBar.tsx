@@ -6,7 +6,7 @@ import { STEP_ORDER } from "@/AddCard/constants";
 interface ProgressBarProps {
   currentStep: FlowStep;
   allValid: boolean;
-  stepLabels: string[];
+  stepLabels: Record<Exclude<FlowStep, "COMPLETE">, string>;
 }
 
 const ProgressBar = ({
@@ -20,8 +20,9 @@ const ProgressBar = ({
   return (
     <div className={styles.progressBarContainer}>
       <div className={styles.stepsIndicator}>
-        {stepLabels.map((label, index) => {
+        {STEP_ORDER.filter((step) => step !== "COMPLETE").map((step, index) => {
           const stepNumber = index + 1;
+          const label = stepLabels[step as Exclude<FlowStep, "COMPLETE">];
 
           return (
             <div
