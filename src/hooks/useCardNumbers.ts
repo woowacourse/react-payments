@@ -71,12 +71,17 @@ const useCardNumbers = (): CardNumbersOptions => {
     clearError(target);
   };
 
+  const resetCardNumbers = () => {
+    setCardNumbers(INITIAL_CARD_NUMBER);
+  };
+
   return {
     cardNumbers,
     setCardNumbers: handleCardNumbersChange,
     handleCardNumbersBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
+    resetCardNumbers,
   };
 };
 export default useCardNumbers;

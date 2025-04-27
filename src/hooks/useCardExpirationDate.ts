@@ -141,12 +141,17 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     clearError(target);
   };
 
+  const resetCardExpirationDate = () => {
+    setCardExpirationDate(INITIAL_CARD_EXPIRATION_DATE);
+  };
+
   return {
     cardExpirationDate,
     setCardExpirationDate: handleCardExpirationDateChange,
     handleCardExpirationDateBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
+    resetCardExpirationDate,
   };
 };
 export default useCardExpirationDate;

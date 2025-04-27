@@ -11,6 +11,7 @@ type useCardCVCNumberOptions = {
   handleCardCVCBlur: () => void;
   isError: IsError;
   errorMessage: string;
+  resetCardCVCNumber: () => void;
 };
 
 type IsError = {
@@ -60,12 +61,17 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     clearError('cvcNumber');
   };
 
+  const resetCardCVCNumber = () => {
+    setCardCVCNumber('');
+  };
+
   return {
     cardCVCNumber: cardCVCNumber,
     setCardCVCNumber: handleCardCVCNumberChange,
     handleCardCVCBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
+    resetCardCVCNumber,
   };
 };
 
