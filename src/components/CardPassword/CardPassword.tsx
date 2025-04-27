@@ -3,9 +3,9 @@ import NumberInput from "../Input/CardNumberInput";
 import InputErrorMessage from "../Input/InputErrorMessage";
 import InputText from "../InputText/InputText";
 import { isValidLength } from "../../validation/validate";
+
 interface CardPasswordProps {
-  password: string;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  setCompleted: React.Dispatch<React.SetStateAction<boolean>>;
   onComplete: () => void;
 }
 
@@ -19,13 +19,13 @@ const CARD_PASSWORD = {
 const PASSWORD_RULE = {
   INVALID_LENGTH_ERROR: "카드 비밀번호는 2자리 숫자여야 합니다.",
   MAX_LENGTH: 2,
-};
+} as const;
 
 export default function CardPassword({
-  password,
-  setPassword,
+  setCompleted,
   onComplete,
 }: CardPasswordProps) {
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const passwordValidate = (value: string): string => {
@@ -36,19 +36,23 @@ export default function CardPassword({
   };
 
   const handleCardPasswordChange = (value: string) => {
+    // 2자리 넘으면 입력 무시
     if (value.length > PASSWORD_RULE.MAX_LENGTH) {
-      return; // 2자리 넘으면 입력 막기
+      return;
     }
 
+    // validation
     const validationError = passwordValidate(value);
-
     setPassword(value);
     setError(validationError);
 
-    const isCompleteLength = value.length === PASSWORD_RULE.MAX_LENGTH;
-    const isNoError = validationError === "";
+    // 완료 여부 업데이트
+    const isComplete =
+      value.length === PASSWORD_RULE.MAX_LENGTH && validationError === "";
+    setCompleted(isComplete);
 
-    if (isCompleteLength && isNoError) {
+    // 완성되면 onComplete 호출
+    if (isComplete) {
       onComplete();
     }
   };

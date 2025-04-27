@@ -16,14 +16,23 @@ function App() {
     useCardNumbersState();
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
     useExpirationDateState();
-  const [cvcNumbers, setCvcNumbers] = useState("");
   const { selectedCompany, selectCompany } = useCardCompanyState();
-  const [password, setPassword] = useState("");
-  const [step, setStep] = useState(1);
 
+  // TODO: 이 형식대로 위에것들도 맞추기
+  const [cvcCompleted, setCvcCompleted] = useState(false);
+  const [passwordCompleted, setPasswordCompleted] = useState(false);
+
+  const [step, setStep] = useState(1);
   const goToStep = (targetStep: number) => {
     setStep(targetStep);
   };
+
+  const isAllCompleted =
+    cardNumbersError.every((e) => e === "") &&
+    cardExpirationDateError.every((e) => e === "") &&
+    cvcCompleted &&
+    passwordCompleted &&
+    selectedCompany !== null;
 
   return (
     <div className="App">
@@ -62,22 +71,20 @@ function App() {
         )}
         {step >= 4 && (
           <CardCvcNumber
-            numbers={cvcNumbers}
-            setNumbers={setCvcNumbers}
+            setCompleted={setCvcCompleted}
             onComplete={() => goToStep(5)}
           />
         )}
 
         {step >= 5 && (
           <CardPassword
-            password={password}
-            setPassword={setPassword}
+            setCompleted={setPasswordCompleted}
             onComplete={() => goToStep(6)}
           />
         )}
       </div>
       <div className="checkButton-container">
-        {step >= 6 && <CheckButton />}
+        {isAllCompleted && <CheckButton />}
       </div>
     </div>
   );

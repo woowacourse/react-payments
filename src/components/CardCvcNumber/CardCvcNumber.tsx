@@ -4,8 +4,7 @@ import InputErrorMessage from "../Input/InputErrorMessage";
 import InputText from "../InputText/InputText";
 
 interface CardCvcNumberProps {
-  numbers: string;
-  setNumbers: React.Dispatch<React.SetStateAction<string>>;
+  setCompleted: React.Dispatch<React.SetStateAction<boolean>>;
   onComplete: () => void;
 }
 
@@ -21,38 +20,30 @@ const CVC_RULE = {
 } as const;
 
 export default function CardCvcNumber({
-  numbers,
-  setNumbers,
+  setCompleted,
   onComplete,
 }: CardCvcNumberProps) {
+  const [numbers, setNumbers] = useState("");
   const [error, setError] = useState("");
 
-  const cvcNumbersValidate = (value: string): string => {
-    if (value.length > CVC_RULE.MAX_LENGTH) {
-      return error; // 무시하고 기존 error 유지
-    }
-
-    if (value.length < CVC_RULE.MAX_LENGTH) {
-      return CVC_RULE.INVALID_LENGTH_ERROR;
-    }
-
-    return ""; // 정확히 3자리면 에러 없음
-  };
-
   const handleCardCvcNumberChange = (value: string) => {
-    if (value.length > CVC_RULE.MAX_LENGTH) {
-      return; // 4자리 넘어가면 입력 아예 무시
-    }
+    // 4자리 이상 입력 시도는 무시
+    if (value.length > CVC_RULE.MAX_LENGTH) return;
 
-    const validationError = cvcNumbersValidate(value);
+    // validation
+    const validationError =
+      value.length < CVC_RULE.MAX_LENGTH ? CVC_RULE.INVALID_LENGTH_ERROR : "";
 
     setNumbers(value);
     setError(validationError);
 
-    const isCompleteLength = value.length === CVC_RULE.MAX_LENGTH;
-    const isNoError = validationError === "";
+    // 완료 여부 업데이트
+    const isComplete =
+      value.length === CVC_RULE.MAX_LENGTH && validationError === "";
+    setCompleted(isComplete);
 
-    if (isCompleteLength && isNoError) {
+    // 완성됐을 때만 onComplete 호출
+    if (isComplete) {
       onComplete();
     }
   };
