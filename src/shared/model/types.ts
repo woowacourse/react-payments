@@ -1,4 +1,5 @@
 export interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  handleRef?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
 }
 
