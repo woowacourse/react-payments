@@ -1,4 +1,5 @@
 export const PREVIEW_CLASS_NAMES = {
+  WRAPPER: 'card-preview-wrapper',
   CONTAINER: 'card-background',
   PREVIEW_CONTAINER: 'card-preview-container',
   CARD_PREVIEW: 'card-preview',
