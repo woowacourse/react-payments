@@ -1,25 +1,35 @@
-import { useMemo } from 'react';
+import { ChangeEvent, useMemo } from 'react';
 import '../../styles/index.css';
 import styles from './CardRegistrationPage.module.css';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from '../../components/CardExpirationSection/CardExpirationSection';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CvcSection from '../../components/CvcSection/CvcSection';
-import { CardLogo } from '../../types/card';
+import { CardCompany, CardLogo, CardNumber } from '../../types/card';
 import CardCompanySection from '../../components/CardCompanySection/CardCompanySection';
 import CardPasswordSection from '../../components/CardPasswordSection/CardPasswordSection';
-import { useCardNumberInput } from '../../hooks/useCardNumberInput';
 import { useCardExpirationInput } from '../../hooks/useCardExpirationInput';
 import { useCvcInput } from '../../hooks/useCvcInput';
 import { handleCardLogoChange } from '../../utils/cardLogoUtils.ts';
 import { useCardPasswordInput } from '../../hooks/useCardPasswordInput.ts';
-import { useCardCompanySelect } from '../../hooks/useCardCompanySelect.ts';
 import Button from '../../components/common/Button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 
-export default function CardRegistrationPage() {
-  const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
-  const { cardCompany, handleSelectChange } = useCardCompanySelect();
+type Props = {
+  cardNumbers: CardNumber;
+  handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
+  cardNumberError: string;
+  cardCompany: CardCompany;
+  handleSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export default function CardRegistrationPage({
+  cardNumbers,
+  handleCardNumberChange,
+  cardNumberError,
+  cardCompany,
+  handleSelectChange
+}: Props) {
   const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
   const { cvc, handleCvcChange, cvcError } = useCvcInput();
   const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();
