@@ -4,6 +4,7 @@ import * as S from './CardPage.styles';
 import { confirmButtonValidator } from '../../features/cardInfo/validation/cardInfoValidator';
 import { css } from '@emotion/react';
 import CustomLinkButton from '../../shared/ui/CustomLinkButton';
+import { ROUTES } from '../../shared/constants/routes';
 
 function CardPage() {
   return (
@@ -13,7 +14,7 @@ function CardPage() {
         <CardInfoContainer />
         {confirmButtonValidator() && (
           <CustomLinkButton
-            path='register'
+            path={ROUTES.REGISTER}
             css={css`
               position: fixed;
               bottom: 0;

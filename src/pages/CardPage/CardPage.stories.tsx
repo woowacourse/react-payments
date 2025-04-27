@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPage from './CardPage';
 import { CardInfoProvider } from '../../features/cardInfo/context/CardInfoContext';
 import { MemoryRouter } from 'react-router';
+import { ROUTES } from '../../shared/constants/routes';
 
 function CardPageWithContext() {
   return <CardPage />;
@@ -12,7 +13,7 @@ const meta: Meta<typeof CardPageWithContext> = {
   component: CardPageWithContext,
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={[ROUTES.CARD]}>
         <CardInfoProvider>
           <Story />
         </CardInfoProvider>

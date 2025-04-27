@@ -6,7 +6,7 @@ export default function CustomLinkButton({ path, css }: { path: string; css?: Se
   const navigate = useNavigate();
 
   const handleLinkClick = () => {
-    navigate(`/${path}`);
+    navigate(`${path}`);
   };
   return (
     <S.CustomLinkButton onClick={handleLinkClick} css={css} type='button'>
