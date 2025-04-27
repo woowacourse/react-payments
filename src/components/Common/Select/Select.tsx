@@ -1,4 +1,4 @@
-import React, { SelectHTMLAttributes } from "react";
+import { ComponentProps } from "react";
 import { OptionStyles, SelectStyles } from "./Select.styled";
 
 interface Option {
@@ -6,11 +6,10 @@ interface Option {
   text: string;
 }
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends ComponentProps<"select"> {
   isError: boolean;
   placeholder?: string;
   options: Option[];
-  ref?: React.Ref<HTMLSelectElement>;
 }
 
 export default function Select({

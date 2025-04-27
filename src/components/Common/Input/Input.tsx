@@ -1,9 +1,8 @@
-import { InputHTMLAttributes } from "react";
+import { ComponentProps } from "react";
 import { InputStyles } from "./Input.styled";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends ComponentProps<"input"> {
   isError: boolean;
-  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function Input({ isError = false, ref, ...props }: InputProps) {
