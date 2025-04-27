@@ -14,18 +14,6 @@ import useCardCvc from "../../hooks/useCardCvc";
 import useFormStepControl from "../../hooks/useFormStepControl";
 import styled from "styled-components";
 
-export interface cardNumber {
-	first: string;
-	second: string;
-	third: string;
-	fourth: string;
-}
-
-export interface date {
-	month: string;
-	year: string;
-}
-
 const RENDERING_STEP = {
 	cardNumber: 0,
 	company: 1,
@@ -49,24 +37,20 @@ function App() {
 		password: cardPasswordHook.isComplete,
 	});
 
-	const onClick = () => {
-		navigate("/addSuccess", { state: cardNumberHook.cardNumber.first });
-	};
-
 	return (
 		<MainContainer>
 			<form>
 				<Card cardNumbers={cardNumberHook.cardNumber} cardCompany={cardCompanyHook.cardCompany} expirationDate={expirationDateHook.expirationDate} />
 
-				{maxStep >= RENDERING_STEP.password && <CardPassword cardPassword={cardPasswordHook.cardPassword} setCardPassword={cardPasswordHook.setCardPassword} />}
-				{maxStep >= RENDERING_STEP.cvc && <CardCvc cvcNumber={cardCvcHook.cvcNumber} setCvcNumber={cardCvcHook.setCvcNumber} />}
-				{maxStep >= RENDERING_STEP.expirationDate && <ExpirationDate expirationDate={expirationDateHook.expirationDate} setExpirationDate={expirationDateHook.setExpirationDate} />}
-				{maxStep >= RENDERING_STEP.company && <CardCompany cardCompany={cardCompanyHook.cardCompany} setCardCompany={cardCompanyHook.setCardCompany} />}
-				{maxStep >= RENDERING_STEP.cardNumber && <CardNumber cardNumber={cardNumberHook.cardNumber} setCardNumber={cardNumberHook.setCardNumber} />}
+				{maxStep >= RENDERING_STEP.password && <CardPassword {...cardPasswordHook} />}
+				{maxStep >= RENDERING_STEP.cvc && <CardCvc {...cardCvcHook} />}
+				{maxStep >= RENDERING_STEP.expirationDate && <ExpirationDate {...expirationDateHook} />}
+				{maxStep >= RENDERING_STEP.company && <CardCompany {...cardCompanyHook} />}
+				{maxStep >= RENDERING_STEP.cardNumber && <CardNumber {...cardNumberHook} />}
 
 				{step === 5 && (
 					<ButtonWrap>
-						<Button type="button" onClick={onClick}>
+						<Button type="button" onClick={() => navigate("/addSuccess", { state: { firstCardNumber: cardNumberHook.cardNumber.first, cardCompany: cardCompanyHook.cardCompany } })}>
 							확인
 						</Button>
 					</ButtonWrap>

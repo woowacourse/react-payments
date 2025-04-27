@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 const CardAddSuccess = () => {
 	const navigate = useNavigate();
-	const firstCardNumber = useLocation().state;
+	const { firstCardNumber, cardCompany } = useLocation().state;
 
 	return (
 		<Container>
 			<img src="./images/Success.svg" alt="success Adding Card" />
 			<AddText>
 				{firstCardNumber}로 시작하는
-				<br /> BC카드가 등록되었어요.
+				<br /> {cardCompany}가 등록되었어요.
 			</AddText>
 			<Button type="button" onClick={() => navigate("/")}>
 				확인
