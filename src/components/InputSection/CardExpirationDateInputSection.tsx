@@ -17,6 +17,7 @@ const CardExpirationDateInputSection = ({
   isError,
   errorMessage,
   inputRef,
+  handleMouseDown,
 }: CardExpirationDateInputSectionProps) => {
   useEffect(() => {
     if (cardExpirationDate.month.length === 2) {
@@ -40,6 +41,7 @@ const CardExpirationDateInputSection = ({
           placeholder="MM"
           onBlur={() => handleCardExpirationDateBlur('month')}
           ref={inputRef.month}
+          onMouseDown={handleMouseDown}
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
@@ -49,6 +51,7 @@ const CardExpirationDateInputSection = ({
           placeholder="YY"
           onBlur={() => handleCardExpirationDateBlur('year')}
           ref={inputRef.year}
+          onMouseDown={handleMouseDown}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

@@ -19,6 +19,7 @@ export type CardExpirationDateInputSectionProps = {
     month: React.RefObject<HTMLInputElement | null>;
     year: React.RefObject<HTMLInputElement | null>;
   };
+  handleMouseDown: (event: React.MouseEventHandler<HTMLInputElement>) => void;
 };
 
 export type CardExpirationDateOptions = CardExpirationDateInputSectionProps & {

@@ -16,6 +16,7 @@ const CardPasswordInputSection = ({
   isError,
   errorMessage,
   inputRef,
+  handleMouseDown,
 }: CardPasswordInputSectionProps) => {
   return (
     <>
@@ -33,6 +34,7 @@ const CardPasswordInputSection = ({
           placeholder="12"
           onBlur={handleCardPasswordBlur}
           ref={inputRef}
+          onMouseDown={handleMouseDown}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

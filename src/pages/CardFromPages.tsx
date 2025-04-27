@@ -36,6 +36,7 @@ const CardFormPages = ({
     useError({
       cardCompany: false,
     });
+  const [isUserFocusing, setIsUserFocusing] = useState(false);
 
   const isFieldCompletetion = useFieldCompletion({
     cardNumbersForm,
@@ -65,6 +66,10 @@ const CardFormPages = ({
   const cardPasswordInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (isUserFocusing) {
+      return;
+    }
+
     if (isFieldCompletetion[3]) {
       cardPasswordInputRef.current?.focus();
       return;
@@ -85,7 +90,6 @@ const CardFormPages = ({
       cardNumbersInputRef.fourthNumber.current?.blur();
       return;
     }
-    //cardNumers의 각 자리가 4길이가 되면 다음으로 포커스
     if (cardNumbersForm.cardNumbers.thirdNumber.length === 4) {
       cardNumbersInputRef.fourthNumber.current?.focus();
       return;
@@ -99,12 +103,11 @@ const CardFormPages = ({
       return;
     }
     cardNumbersInputRef.firstNumber.current?.focus();
-
-    // cardNumbersInputRef.firstNumber.current?.focus();
   }, [
     isFieldCompletetion,
     cardNumbersForm.cardNumbers,
     cardExpirationDateForm.cardExpirationDate,
+    isUserFocusing,
   ]);
 
   return (
@@ -120,6 +123,7 @@ const CardFormPages = ({
           <CardPasswordInputSection
             {...cardPasswordForm}
             inputRef={cardPasswordInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
 
@@ -127,12 +131,14 @@ const CardFormPages = ({
           <CardCVCNumberInputSection
             {...cardCVCNumberForm}
             inputRef={cardCVCInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
         {isFieldCompletetion[1] && (
           <CardExpirationDateInputSection
             {...cardExpirationDateForm}
             inputRef={cardExpirationDateInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
         {isFieldCompletetion[0] && (
@@ -147,6 +153,7 @@ const CardFormPages = ({
         <CardNumbersInputSection
           {...cardNumbersForm}
           inputRef={cardNumbersInputRef}
+          handleMouseDown={() => setIsUserFocusing(true)}
         />
       </div>
       {canSubmit() && (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import useError from './useError';
 import isNumber from './validate/isNumber';
 import isInteger from './validate/isInteger';
@@ -29,6 +29,7 @@ export type CardPasswordInputSectionProps = {
   isError: IsError;
   errorMessage: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
+  handleMouseDown: MouseEventHandler<HTMLInputElement>;
 };
 
 type IsError = {

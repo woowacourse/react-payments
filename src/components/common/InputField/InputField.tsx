@@ -7,14 +7,23 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
   (props, ref) => {
-    const { value, name, onChange, onBlur, isError, placeholder, ...rest } =
-      props;
+    const {
+      value,
+      name,
+      onChange,
+      onBlur,
+      onMouseDown,
+      isError,
+      placeholder,
+      ...rest
+    } = props;
     return (
       <input
         value={value}
         name={name}
         onChange={onChange}
         onBlur={onBlur}
+        onMouseDown={onMouseDown}
         className={`${styles.input} ${isError ? styles.error : styles.basic}`}
         placeholder={placeholder}
         {...rest}

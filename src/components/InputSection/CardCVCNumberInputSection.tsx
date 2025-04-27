@@ -1,6 +1,7 @@
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
+import { MouseEventHandler } from 'react';
 
 const CARD_CVC_NUMBER_TEXT = {
   title: '카드 CVC 번호를 입력해 주세요',
@@ -15,6 +16,7 @@ type CardCVCNumberInputSectionProps = {
   isError: { cvcNumber: boolean };
   errorMessage: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
+  handleMouseDown: MouseEventHandler<HTMLInputElement>;
 };
 
 const CardCVCNumberInputSection = ({
@@ -24,6 +26,7 @@ const CardCVCNumberInputSection = ({
   isError,
   errorMessage,
   inputRef,
+  handleMouseDown,
 }: CardCVCNumberInputSectionProps) => {
   return (
     <>
@@ -39,6 +42,7 @@ const CardCVCNumberInputSection = ({
           isError={isError.cvcNumber}
           placeholder="123"
           onBlur={handleCardCVCBlur}
+          onMouseDown={handleMouseDown}
           ref={inputRef}
         ></InputField>
       </InputSection>

@@ -1,3 +1,5 @@
+import { MouseEventHandler } from 'react';
+
 export type CardNumbersInputSectionProps = {
   cardNumbers: CardNumbers;
   setCardNumbers: (
@@ -12,6 +14,7 @@ export type CardNumbersInputSectionProps = {
     thirdNumber: React.RefObject<HTMLInputElement | null>;
     fourthNumber: React.RefObject<HTMLInputElement | null>;
   };
+  handleMouseDown: MouseEventHandler<HTMLInputElement>;
 };
 
 export type CardNumbersOptions = {

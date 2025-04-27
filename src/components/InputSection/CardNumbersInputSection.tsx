@@ -16,6 +16,7 @@ const CardNumbersInputSection = ({
   isError,
   errorMessage,
   inputRef,
+  handleMouseDown,
 }: CardNumbersInputSectionProps) => {
   return (
     <>
@@ -41,6 +42,7 @@ const CardNumbersInputSection = ({
             isError={isError[key]}
             placeholder="1234"
             ref={inputRef[key]}
+            onMouseDown={handleMouseDown}
           />
         ))}
       </InputSection>
