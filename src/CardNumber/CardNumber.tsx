@@ -2,7 +2,7 @@ import NumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import InputErrorMessage from "../components/Input/InputErrorMessage";
 import styles from "./CardNumber.module.css";
-import { useRef } from "react";
+import useCardNumberInputHandler from "../hooks/useCardNumber/useCardNumberInputHandler";
 
 interface Props {
   handleChange: (value: string, index: number) => void;
@@ -24,28 +24,11 @@ export default function CardNumber({
   errorMessage,
   onComplete,
 }: Props) {
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  const handleCardNumberInputNextFocus = (value: string, index: number) => {
-    if (value.length === CARD_NUMBER.MAX_LENGTH && index < 3) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  const handleCardNumberChange = (value: string, index: number) => {
-    handleChange(value, index);
-    handleCardNumberInputNextFocus(value, index);
-
-    const updatedNumbers = [...cardNumbers];
-    updatedNumbers[index] = value;
-    const isComplete = updatedNumbers.every(
-      (v) => v.length === CARD_NUMBER.MAX_LENGTH
-    );
-
-    if (isComplete) {
-      onComplete();
-    }
-  };
+  const { inputRefs, handleCardNumberChange } = useCardNumberInputHandler(
+    cardNumbers,
+    handleChange,
+    onComplete
+  );
 
   return (
     <section className="card-company">

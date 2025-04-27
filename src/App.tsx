@@ -6,15 +6,15 @@ import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
 import useExpirationDate from "./hooks/useExpirationDate";
 import useCvcNumber from "./hooks/useCvcNumber";
-import useCardNumbers from "./hooks/useCardNumbers";
+import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import CardCompanyPicker from "./CardCompany/CardCompany";
 import useCardCompany from "./hooks/useCardCompany";
 import useCardPassword from "./hooks/useCardPassword";
 import CardPassword from "./CardPassword/CardPassword";
 
 function App() {
-  const { cardNumbers, cardType, cardNumbersError, handleCardNumbersChange } =
-    useCardNumbers();
+  const { cardNumbers, cardType, cardNumbersError, handleChange } =
+    useCardNumbersState();
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
     useExpirationDate();
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
@@ -41,7 +41,7 @@ function App() {
       />
       <div className="card-input">
         <CardNumber
-          handleChange={handleCardNumbersChange}
+          handleChange={handleChange}
           cardNumbers={cardNumbers}
           errorMessage={cardNumbersError}
           onComplete={goToNextStep}
