@@ -1,0 +1,41 @@
+.card-complete-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-complete-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+  gap: 2.3rem;
+}
+
+.icon-check {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.complete-message-content p {
+  color: #353c49;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.confirm-button {
+  width: 100%;
+  max-width: 20rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+}

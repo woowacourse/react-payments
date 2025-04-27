@@ -1,24 +1,16 @@
-import './App.css';
-import Preview from '../features/preview/ui/Preview';
-import CardInfoContainer from '../features/cardInfo/ui/CardInfoContainer';
-import useCardInfo from '../features/cardInfo/hooks/useCardInfo';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CardRegistration from '../features/cardRegistration/ui/CardRegistration';
+import CardComplete from '../features/cardComplete/ui/CardComplete';
+import { ROUTES } from './routes';
 
 function App() {
-  const { cardInfo, handleCardInfoChange, error, currentSection, isAllSectionsCompleted } =
-    useCardInfo();
-
   return (
-    <div className="app-container">
-      <main className="card-container">
-        <Preview cardInfo={cardInfo} />
-        <CardInfoContainer
-          onChange={handleCardInfoChange}
-          error={error}
-          currentSection={currentSection}
-        />
-        {isAllSectionsCompleted && <button className="submit-button">확인</button>}
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path={ROUTES.CARD_REGISTRATION} element={<CardRegistration />} />
+        <Route path={ROUTES.CARD_COMPLETE} element={<CardComplete />} />
+      </Routes>
+    </Router>
   );
 }
 
