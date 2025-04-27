@@ -1,16 +1,15 @@
-import "./App.css";
 import { useState } from "react";
-import CardNumber from "./components/CardNumber/CardNumber";
-import CardExpirationDate from "./components/CardExpirationDate/CardExpirationDate";
-import CardCvcNumber from "./components/CardCvcNumber/CardCvcNumber";
-import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
+import "./App.css";
 import CardCompanyPicker from "./components/CardCompany/CardCompany";
+import CardCvcNumber from "./components/CardCvcNumber/CardCvcNumber";
+import CardExpirationDate from "./components/CardExpirationDate/CardExpirationDate";
+import CardNumber from "./components/CardNumber/CardNumber";
 import CardPassword from "./components/CardPassword/CardPassword";
+import CheckButton from "./components/CheckButton";
+import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
+import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
 import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
-import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
-import useCardPasswordState from "./hooks/useCardPassword/useCardPasswordState";
-import CheckButton from "./components/CheckButton";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, handleChange } =
@@ -19,7 +18,7 @@ function App() {
     useExpirationDateState();
   const [cvcNumbers, setCvcNumbers] = useState("");
   const { selectedCompany, selectCompany } = useCardCompanyState();
-  const { password, passwordError, passwordValidate } = useCardPasswordState();
+  const [password, setPassword] = useState("");
   const [step, setStep] = useState(1);
 
   const goToStep = (targetStep: number) => {
@@ -71,9 +70,8 @@ function App() {
 
         {step >= 5 && (
           <CardPassword
-            handleChange={passwordValidate}
             password={password}
-            errorMessage={passwordError}
+            setPassword={setPassword}
             onComplete={() => goToStep(6)}
           />
         )}

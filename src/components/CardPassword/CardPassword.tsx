@@ -1,11 +1,11 @@
-import InputText from "../InputText/InputText";
+import { useState } from "react";
 import NumberInput from "../Input/CardNumberInput";
 import InputErrorMessage from "../Input/InputErrorMessage";
-import useCardPasswordInputHandler from "../../hooks/useCardPassword/useCardPasswordInputHandler";
+import InputText from "../InputText/InputText";
+import { isValidLength } from "../../validation/validate";
 interface CardPasswordProps {
-  handleChange: (value: string) => void;
   password: string;
-  errorMessage: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
   onComplete: () => void;
 }
 
@@ -16,16 +16,42 @@ const CARD_PASSWORD = {
   PLACEHOLDER: "",
 } as const;
 
+const PASSWORD_RULE = {
+  INVALID_LENGTH_ERROR: "카드 비밀번호는 2자리 숫자여야 합니다.",
+  MAX_LENGTH: 2,
+};
+
 export default function CardPassword({
-  handleChange,
   password,
-  errorMessage,
+  setPassword,
   onComplete,
 }: CardPasswordProps) {
-  const { handleCardPasswordChange } = useCardPasswordInputHandler(
-    handleChange,
-    onComplete
-  );
+  const [error, setError] = useState("");
+
+  const passwordValidate = (value: string): string => {
+    if (!isValidLength(value.length, PASSWORD_RULE.MAX_LENGTH)) {
+      return PASSWORD_RULE.INVALID_LENGTH_ERROR;
+    }
+    return "";
+  };
+
+  const handleCardPasswordChange = (value: string) => {
+    if (value.length > PASSWORD_RULE.MAX_LENGTH) {
+      return; // 2자리 넘으면 입력 막기
+    }
+
+    const validationError = passwordValidate(value);
+
+    setPassword(value);
+    setError(validationError);
+
+    const isCompleteLength = value.length === PASSWORD_RULE.MAX_LENGTH;
+    const isNoError = validationError === "";
+
+    if (isCompleteLength && isNoError) {
+      onComplete();
+    }
+  };
 
   return (
     <section>
@@ -36,10 +62,53 @@ export default function CardPassword({
         onChange={handleCardPasswordChange}
         placeholder={CARD_PASSWORD.PLACEHOLDER}
         value={password}
-        errorMessage={errorMessage}
+        errorMessage={error}
         type="password"
       />
-      <InputErrorMessage message={errorMessage} />
+      <InputErrorMessage message={error} />
     </section>
   );
 }
+
+// export default function CardPassword({
+//   password,
+//   setPassword,
+//   onComplete,
+// }: CardPasswordProps) {
+//   const [error, setError] = useState("");
+
+//   const passwordValidate = (value: string) => {
+//     if (!isValidLength(value.length, PASSWORD_RULE.MAX_LENGTH)) {
+//       setError(PASSWORD_RULE.IMVALID_LENGTH_ERROR);
+//       return;
+//     }
+
+//     setPassword(value.slice(0, PASSWORD_RULE.MAX_LENGTH));
+//     setError("");
+//   };
+
+//   const handleCardPasswordChange = (value: string) => {
+//     passwordValidate(value);
+
+//     if (value.length === 2) {
+//       onComplete();
+//       console.log("finished");
+//     }
+//   };
+
+//   return (
+//     <section>
+//       <InputText inputValue={CARD_PASSWORD.TITLE} variant="title" />
+//       <InputText inputValue={CARD_PASSWORD.DESCRIPTION} variant="description" />
+//       <InputText inputValue={CARD_PASSWORD.SUBTITLE} variant="subtitle" />
+//       <NumberInput
+//         onChange={handleCardPasswordChange}
+//         placeholder={CARD_PASSWORD.PLACEHOLDER}
+//         value={password}
+//         errorMessage={error}
+//         type="password"
+//       />
+//       <InputErrorMessage message={error} />
+//     </section>
+//   );
+// }
