@@ -16,7 +16,7 @@ export default function CardNumberSection() {
       <div className={styles.inputSection}>
         <InputSection.Label text="카드번호" />
         <div className={styles.inputWrapper}>
-          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey) => (
+          {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
             <Input
               key={inputKey}
               value={cardNumbers[inputKey].value}
@@ -25,6 +25,7 @@ export default function CardNumberSection() {
               onChange={(e) => {
                 onCardNumbersChange(inputKey, e.target.value);
               }}
+              autoFocus={index === 0 && cardNumbers[inputKey].value.length === 0}
               ref={cardInputRefs[inputKey]}
               maxLength={4}
             />

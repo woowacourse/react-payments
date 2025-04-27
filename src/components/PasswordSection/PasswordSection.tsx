@@ -15,6 +15,7 @@ export default function PasswordSection() {
         <InputSection.Label text="비밀번호 앞 2자리" />
 
         <Input
+          autoFocus={password.value === ''}
           onChange={(e) => handlePasswordChange(e.target.value)}
           value={password.value}
           isError={Boolean(password.errorMessage)}

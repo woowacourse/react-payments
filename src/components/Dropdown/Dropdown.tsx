@@ -21,7 +21,12 @@ export default function Dropdown({
 
   return (
     <div className={styles.wrapper} ref={ref}>
-      <button type="button" className={`${styles.selectBox} ${isOpen && styles.open} ${value ? styles.selected : styles.unSelected}`} onClick={handleToggle}>
+      <button
+        type="button"
+        autoFocus={value === ''}
+        className={`${styles.selectBox} ${isOpen && styles.open} ${value ? styles.selected : styles.unSelected}`}
+        onClick={handleToggle}
+      >
         {value || placeholder}
       </button>
       {isOpen && (

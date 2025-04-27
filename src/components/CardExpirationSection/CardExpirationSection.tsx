@@ -20,6 +20,7 @@ export default function CardExpirationSection() {
 
         <div className={styles.inputWrapper}>
           <Input
+            autoFocus={expiration.month.value == '' && expiration.year.value == ''}
             value={expiration.month.value}
             placeholder="MM"
             isError={Boolean(expiration.month.errorMessage)}
