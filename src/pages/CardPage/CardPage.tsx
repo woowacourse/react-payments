@@ -3,14 +3,13 @@ import CVCInput from '../../components/CVCInput/CVCInput';
 import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
 import ExpirationDateInput from '../../components/ExpirationDateInput/ExpirationDateInput';
 import PreviewCard from '../../components/PreviewCard/PreviewCard';
-import Text from '../../components/Text/Text';
 import { CARD_PAGE_TEXT } from './cardPageText';
-import useInputArrayState from '../../hooks/useInputArrayState';
 import PasswordInput from '../../components/PasswordInput/PasswordInput';
 import Dropdown from '../../components/Dropdown/Dropdown';
-import { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import FormSection from '../../components/FormSection/FormSection';
+import useCardForm from '../../hooks/useCardForm';
 
 export type HandleInputParams = {
   e: React.ChangeEvent<HTMLInputElement>;
@@ -20,7 +19,7 @@ export type HandleInputParams = {
 const StyledCardPage = styled.div`
   width: 40%;
   min-width: 400px;
-  /* min-height: 100vh; */
+  min-height: 100vh; // TODO: 이걸 주석처리했을 때 드랍다운이 가려져보이는 문제 해결하기
   display: flex;
   height: auto;
   margin: 0 auto;
@@ -32,123 +31,105 @@ const StyledCardPage = styled.div`
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
 `;
 
-const CardNumberSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-const PasswordSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-const CVCSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-const ExpirationDateSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-const DropdownSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
 const CardPage = () => {
-  const [cardNumber, handleCardNumberInput] = useInputArrayState(4);
-  const [expirationDate, handleExpirationDateInput] = useInputArrayState(2);
-  const [cvc, handleCVCInput] = useInputArrayState(1);
-  const [password, handlePasswordInput] = useInputArrayState(1);
-  const [cardCompany, setCardCompany] = useState<string>('');
-
-  const [cardNumberValid, setCardNumberValid] = useState<boolean>(false);
-  const [expirationValid, setExpirationValid] = useState<boolean>(false);
-  const [cvcValid, setCvcValid] = useState<boolean>(false);
-  const [passwordValid, setPasswordValid] = useState<boolean>(false);
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const {
+    cardNumber,
+    expirationDate,
+    cvc,
+    password,
+    cardCompany,
+    handleCardCompanySelect,
+    isFormValid,
+  } = useCardForm();
 
   const navigate = useNavigate();
-
-  const handleCardCompanySelect = (value: string) => {
-    setCardCompany(value);
-  };
 
   const navigateToSuccessPage = () => {
     navigate(`/registered`, {
       state: {
-        cardNumber: `${cardNumber[0]}`,
+        cardNumber: `${cardNumber.values[0]}`,
         cardCompany: `${cardCompany}`,
       },
     });
   };
 
-  useEffect(() => {
-    if (passwordValid && cvcValid && expirationValid && cardNumberValid) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
-  }, [cardNumberValid, cvcValid, expirationValid, passwordValid]);
+  const formSteps = [
+    {
+      id: 'cardNumber',
+      title: CARD_PAGE_TEXT.CARD_NUMBER_TITLE,
+      subtitle: CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE,
+      shouldShow: () => true,
+      component: (
+        <CardNumberInput
+          values={cardNumber.values}
+          onChange={cardNumber.handleInput}
+          onValidChange={cardNumber.setIsValid}
+        />
+      ),
+    },
+    {
+      id: 'cardCompany',
+      title: CARD_PAGE_TEXT.CARD_COMPANY_TITLE,
+      subtitle: CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE,
+      shouldShow: () => cardNumber.isValid,
+      component: <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />,
+    },
+    {
+      id: 'expirationDate',
+      title: CARD_PAGE_TEXT.EXPIRATION_TITLE,
+      subtitle: CARD_PAGE_TEXT.EXPIRATION_SUBTITLE,
+      shouldShow: () => cardNumber.isValid && cardCompany !== '',
+      component: (
+        <ExpirationDateInput
+          values={expirationDate.values}
+          onChange={expirationDate.handleInput}
+          onValidChange={expirationDate.setIsValid}
+        />
+      ),
+    },
+    {
+      id: 'cvc',
+      title: CARD_PAGE_TEXT.CVC_TITLE,
+      subtitle: '',
+      shouldShow: () => cardNumber.isValid && cardCompany !== '' && expirationDate.isValid,
+      component: (
+        <CVCInput values={cvc.values} onChange={cvc.handleInput} onValidChange={cvc.setIsValid} />
+      ),
+    },
+    {
+      id: 'password',
+      title: CARD_PAGE_TEXT.PASSWORD_TITLE,
+      subtitle: CARD_PAGE_TEXT.PASSWORD_SUBTITLE,
+      shouldShow: () =>
+        cardNumber.isValid && cardCompany !== '' && expirationDate.isValid && cvc.isValid,
+      component: (
+        <PasswordInput
+          values={password.values}
+          onChange={password.handleInput}
+          onValidChange={password.setIsValid}
+        />
+      ),
+    },
+  ];
 
   return (
     <StyledCardPage>
       <PreviewCard
-        cardNumber={cardNumber}
-        expirationDate={expirationDate}
+        cardNumber={cardNumber.values}
+        expirationDate={expirationDate.values}
         cardCompany={cardCompany}
       />
 
-      {cardNumberValid && cardCompany !== '' && expirationValid && cvcValid && (
-        <PasswordSection>
-          <Text type="title" text={CARD_PAGE_TEXT.PASSWORD_TITLE} />
-          <Text type="subTitle" text={CARD_PAGE_TEXT.PASSWORD_SUBTITLE} />
-          <PasswordInput
-            values={password}
-            onChange={handlePasswordInput}
-            onValidChange={setPasswordValid}
-          />
-        </PasswordSection>
-      )}
+      {formSteps.map((step) => {
+        if (!step.shouldShow()) return null;
 
-      {cardNumberValid && cardCompany !== '' && expirationValid && (
-        <CVCSection>
-          <Text type="title" text={CARD_PAGE_TEXT.CVC_TITLE} />
-          <CVCInput values={cvc} onChange={handleCVCInput} onValidChange={setCvcValid} />
-        </CVCSection>
-      )}
+        return (
+          <FormSection key={step.id} title={step.title} subtitle={step.subtitle}>
+            {step.component}
+          </FormSection>
+        );
+      })}
 
-      {cardNumberValid && cardCompany !== '' && (
-        <ExpirationDateSection>
-          <Text type="title" text={CARD_PAGE_TEXT.EXPIRATION_TITLE} />
-          <Text type="subTitle" text={CARD_PAGE_TEXT.EXPIRATION_SUBTITLE} />
-          <ExpirationDateInput
-            values={expirationDate}
-            onChange={handleExpirationDateInput}
-            onValidChange={setExpirationValid}
-          />
-        </ExpirationDateSection>
-      )}
-
-      {cardNumberValid && (
-        <DropdownSection>
-          <Text type="title" text={CARD_PAGE_TEXT.CARD_COMPANY_TITLE} />
-          <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE} />
-          <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />
-        </DropdownSection>
-      )}
-      <CardNumberSection>
-        <Text type="title" text={CARD_PAGE_TEXT.CARD_NUMBER_TITLE} />
-        <Text type="subTitle" text={CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE} />
-        <CardNumberInput
-          values={cardNumber}
-          onChange={handleCardNumberInput}
-          onValidChange={setCardNumberValid}
-        />
-      </CardNumberSection>
       {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK} onClick={navigateToSuccessPage}></Button>}
     </StyledCardPage>
   );
