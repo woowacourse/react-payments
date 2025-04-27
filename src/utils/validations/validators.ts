@@ -19,7 +19,7 @@ export const isErrorCardCompany = (value: string): string | null => {
 const validateMonth = (value: string): string | null => {
   const monthNumber = parseInt(value, 10);
   if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
-    return ERROR_MESSAGES.INVALID_DATE;
+    return ERROR_MESSAGES.INVALID_MONTH;
   }
   return null;
 };
@@ -28,7 +28,7 @@ const validateYear = (value: string): string | null => {
   const yearNumber = parseInt(value, 10);
   const currentYear = new Date().getFullYear() % 100;
   if (isNaN(yearNumber) || yearNumber < currentYear) {
-    return ERROR_MESSAGES.INVALID_DATE;
+    return ERROR_MESSAGES.INVALID_YEAR;
   }
   return null;
 };
