@@ -29,13 +29,12 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
+const validationCallback = (values: string[], params: HandleInputParams, validLength: number) =>
+  expirationDateValidation(values, params, validLength);
+
 const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) => {
   const placeHolders = ['MM', 'YY'];
-  const validationCallback = useCallback(
-    (values: string[], params: HandleInputParams, validLength: number) =>
-      expirationDateValidation(values, params, validLength),
-    []
-  );
+
   const { errorState, errorMessage, validateExpirationDate } = useExpDateValidation(
     [false, false],
     values,

@@ -30,12 +30,8 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
+const validationCallback = (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 4);
 const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
-  const validationCallback = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 4),
-    []
-  );
-
   const { errorState, errorMessage, validate } = useInputValidation(
     Array.from({ length: 4 }, () => false),
     validationCallback
