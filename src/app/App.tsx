@@ -1,6 +1,6 @@
 import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
-import CardPreview from "../features/cardPreview/CardPreview";
+import CardPreview from "../features/cardPreview/ui/CardPreview.tsx";
 import CardInfoForm from "../features/cardInfoForm/CardInfoForm.tsx";
 import useAllCardInfo from "./hooks/useAllCardInfo.ts";
 
