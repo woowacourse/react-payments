@@ -10,6 +10,7 @@ export const buttonContainer = css`
     position: relative;
     width: 100%;
     gap: 16px;
+    z-index: 100;
 `;
 
 export const defaultButton = css`

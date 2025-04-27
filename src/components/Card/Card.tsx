@@ -2,6 +2,7 @@
 import { MasterCard, Visa } from '../../asset/image';
 import {
   cardContainer,
+  cardSection,
   cardContent,
   cardContentContainer,
   cardContentText,
@@ -22,7 +23,7 @@ type CardProps = {
 function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
   const theme = useTheme();
 
-  const { first, second, third, forth } = cardNumber;
+  const {first, second, third, forth} = cardNumber;
 
   const firstString = first?.toString();
 
@@ -49,27 +50,29 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
 
   return (
     <section css={[cardLayout, brandBackground]}>
-      <div css={cardContainer}>
-        <div css={cardFrame}></div>
-        {checkCardType() && (
-          <div>
-            <img css={cardType} src={checkCardType() ?? ''} alt="카드 타입" />
-          </div>
-        )}
-      </div>
-      <div css={cardContentContainer}>
-        <div css={cardContent}>
-          <span css={cardContentText}>{first}</span>
-          <span css={cardContentText}>{second}</span>
-          <span css={cardContentText}>{third}</span>
-          <span css={cardContentText}>{forth}</span>
+      <div css={cardSection}>
+        <div css={cardContainer}>
+          <div css={cardFrame}></div>
+          {checkCardType() && (
+            <div>
+              <img css={cardType} src={checkCardType() ?? ''} alt="카드 타입"/>
+            </div>
+          )}
         </div>
-        <div css={cardContent}>
-          {hasFilledExpirationField && (
-            <span css={cardContentText}>
+        <div css={cardContentContainer}>
+          <div css={cardContent}>
+            <span css={cardContentText}>{first}</span>
+            <span css={cardContentText}>{second}</span>
+            <span css={cardContentText}>{third}</span>
+            <span css={cardContentText}>{forth}</span>
+          </div>
+          <div css={cardContent}>
+            {hasFilledExpirationField && (
+              <span css={cardContentText}>
               {cardExpirationDate.month}/{cardExpirationDate.year}
             </span>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </section>
