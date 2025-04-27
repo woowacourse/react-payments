@@ -29,6 +29,7 @@ function CardPasswordForm({ cardInfo, handleCardInfo, maxLength }: CardPasswordP
           placeholder="**"
           isHidden={true}
           isError={isCardPasswordError}
+          autoFocus={true}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>

@@ -8,6 +8,7 @@ interface NumberInputProps {
   isError: boolean;
   isHidden?: boolean;
   inputRef?: (element: HTMLInputElement | null) => void;
+  autoFocus?: boolean;
 }
 
 function NumberInput({
@@ -18,6 +19,7 @@ function NumberInput({
   isError,
   isHidden = false,
   inputRef,
+  autoFocus = false,
 }: NumberInputProps) {
   function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
     const isNumeric = /^[0-9]*$/.test(e.target.value);
@@ -36,6 +38,7 @@ function NumberInput({
       isError={isError}
       onChange={handleValue}
       type={isHidden ? 'password' : 'text'}
+      autoFocus={autoFocus}
     />
   );
 }

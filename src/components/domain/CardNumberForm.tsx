@@ -26,6 +26,7 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
     {
       value: cardInfo.number.first,
       setValue: (value: string) => handleCardInfo('number', value, 'first'),
+      autoFocus: true,
     },
     {
       value: cardInfo.number.second,
@@ -63,6 +64,7 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
             placeholder="1234"
             isError={isCardNumberError[index]}
             inputRef={(element) => (inputRefs.current[index] = element)}
+            autoFocus={inputInfo.autoFocus}
           />
         ))}
       </NumberInputContainer>

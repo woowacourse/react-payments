@@ -27,6 +27,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
       value: cardInfo.expiration.month,
       setValue: (value: string) => handleCardInfo('expiration', value, 'month'),
       placeholder: 'MM',
+      autoFocus: true,
     },
     {
       value: cardInfo.expiration.year,
@@ -57,6 +58,7 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
             placeholder={inputInfo.placeholder}
             isError={isCardExpirationError[index]}
             inputRef={(element) => (inputRefs.current[index] = element)}
+            autoFocus={inputInfo.autoFocus}
           />
         ))}
       </NumberInputContainer>

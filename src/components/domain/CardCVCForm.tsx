@@ -28,6 +28,7 @@ function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) 
           maxLength={maxLength}
           placeholder="123"
           isError={isCardCVCError}
+          autoFocus={true}
         />
       </NumberInputContainer>
       <ErrorText>{errorText}</ErrorText>
