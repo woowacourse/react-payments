@@ -1,7 +1,8 @@
 import Input from '../@common/Input/Input';
 import Title from "../@common/Title/Title";
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { CardExpirationDate, CardExpirationDateError } from "../../types";
+import { useAutoFocus } from "../../hooks";
 import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
 import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
@@ -22,6 +23,26 @@ function CardPeriodInput({
   getMonthErrorMessage,
   getYearErrorMessage,
 }: CardPeriodInputProps) {
+  const { refs, focusNext } = useAutoFocus(2);
+
+  const handleMonthChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+
+    if(e.target.value.length === CARD_EXPIRATION.monthLength) {
+      focusNext(0);
+    }
+  }
+
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+  };
+
+  const handleYearKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && cardExpirationDate.year.length === 0) {
+      refs[0].current?.focus();
+    }
+  }
+
   const getMonthError =
     getMonthErrorMessage ||
     (() => {
@@ -66,21 +87,24 @@ function CardPeriodInput({
           <article css={inputSection}>
             <Input.Group id="card-expiration">
               <Input
+                ref={refs[0]}
                 type="text"
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
                 value={cardExpirationDate.month}
-                onChange={onChange}
+                onChange={handleMonthChange}
                 css={errorState.month ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-expiration-year">
               <Input
+                ref={refs[1]}
                 type="text"
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
                 value={cardExpirationDate.year}
-                onChange={onChange}
+                onChange={handleYearChange}
+                onKeyDown={handleYearKeyDown}
                 css={errorState.year ? errorInputStyle : undefined}
               />
             </Input.Group>
