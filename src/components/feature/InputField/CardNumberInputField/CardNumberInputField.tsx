@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import {
   CARD_NUMBER_INPUT_TYPE,
@@ -15,29 +16,31 @@ interface onCardNumberChangeProps {
   value: string;
 }
 
-const MAX_CARD_LENGTH = 4;
-
 function CardNumberInputField({
   inputValue,
   setInputValue,
   cardType,
   onComplete,
 }: InputFieldProps<CardNumberInputType>) {
-  const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError({ inputValue, completeCondition: MAX_CARD_LENGTH });
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const { errorTypes, errorMessage, validateInputError } = useInputError({
+    inputValue,
+  });
 
   const { onChange, onBlur } = useInputFieldHandler({
+    hasError: Boolean(errorMessage),
+    fieldName: 'cardNumber',
+    inputRefs,
     validateInputError,
     setInputValue,
-    inputErrorType: 'shortCardSegment',
-    maxLength: MAX_CARD_LENGTH,
   });
 
   useFieldCompletion({
-    onComplete,
-    isComplete,
-    errorMessage,
     fieldName: 'cardNumber',
+    errorMessage,
+    inputValue,
+    onComplete,
   });
 
   const onCardNumberChange = ({ name, value }: onCardNumberChangeProps) => {
@@ -52,10 +55,13 @@ function CardNumberInputField({
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      {CARD_NUMBER_INPUT_TYPE.map((inputType) => (
-        <div key={inputType}>
+      {CARD_NUMBER_INPUT_TYPE.map((inputType, index) => (
+        <InputWrapper key={inputType}>
           <Label htmlFor={`card-number-input-${inputType}`} />
           <Input
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             id={`card-number-input-${inputType}`}
             inputType="number"
             placeholder="1234"
@@ -65,11 +71,15 @@ function CardNumberInputField({
             name={inputType}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </div>
+        </InputWrapper>
       ))}
     </BaseInputField>
   );
 }
+
+const InputWrapper = styled.div`
+  width: 100%;
+`;
 
 const Label = styled.label`
   position: absolute;

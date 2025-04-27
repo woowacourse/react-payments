@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import styled from 'styled-components';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
@@ -9,45 +9,27 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
-
-const MAX_DATE_LENGTH = 2;
-const MAX_MONTH_VALUE = 12;
+import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 
 function ExpirationDateInputField({
   inputValue,
   setInputValue,
   onComplete,
 }: InputFieldProps<ExpirationDateInputType>) {
-  const isComplete = !Boolean(
-    Object.values(inputValue).filter(
-      (cardNumberValue) => cardNumberValue.length !== MAX_DATE_LENGTH
-    ).length
-  );
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useFieldCompletion({
+    fieldName: 'expirationDate',
+    inputValue,
     onComplete,
-    isComplete,
-    fieldName: 'expirationDate',
   });
 
-  onComplete?.({
-    isComplete,
+  const { onChange } = useInputFieldHandler({
+    hasError: false,
     fieldName: 'expirationDate',
+    inputRefs,
+    setInputValue,
   });
-
-  const onExpirationDateChange = ({
-    name,
-    value,
-  }: {
-    name: string;
-    value: string;
-  }) => {
-    if (value.length <= MAX_DATE_LENGTH) {
-      if (name === 'expirationDatePart1' && Number(value) > MAX_MONTH_VALUE)
-        return;
-      setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
-    }
-  };
 
   const onExpirationDateBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
@@ -57,23 +39,30 @@ function ExpirationDateInputField({
 
   return (
     <BaseInputField label="유효기간">
-      {EXPIRATION_DATE_INPUT_TYPE.map((inputType) => (
-        <div key={inputType}>
+      {EXPIRATION_DATE_INPUT_TYPE.map((inputType, index) => (
+        <InputWrapper key={inputType}>
           <Label htmlFor={`expiration-date-${inputType}`} />
           <Input
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             id={`expiration-date-${inputType}`}
             inputType="number"
             placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
             value={inputValue[inputType]}
-            onChange={onExpirationDateChange}
+            onChange={onChange}
             name={inputType}
             onBlur={onExpirationDateBlur}
           />
-        </div>
+        </InputWrapper>
       ))}
     </BaseInputField>
   );
 }
+
+const InputWrapper = styled.div`
+  width: 100%;
+`;
 
 const Label = styled.label`
   position: absolute;

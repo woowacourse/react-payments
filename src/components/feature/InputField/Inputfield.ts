@@ -6,11 +6,5 @@ export interface InputFieldProps<T extends InputFieldType> {
   inputValue: Record<T, string>;
   setInputValue: Dispatch<SetStateAction<Record<T, string>>>;
   cardType?: CardType;
-  onComplete: ({
-    isComplete,
-    fieldName,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-  }) => void;
+  onComplete: (props: { isComplete: boolean; fieldName: FieldName }) => void;
 }

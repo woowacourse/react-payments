@@ -1,6 +1,7 @@
+import { ComponentProps } from 'react';
 import styled from 'styled-components';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentProps<'button'> {
   buttonText: string;
   buttonType: 'default';
 }
@@ -13,7 +14,6 @@ function Button({ buttonText, buttonType, onClick }: ButtonProps) {
     color = '#fff';
     background = '#333333';
   }
-
   return (
     <StyledButton $color={color} $background={background} onClick={onClick}>
       {buttonText}

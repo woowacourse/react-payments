@@ -9,37 +9,43 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
-
-const MAX_CVC_LENGTH = 3;
+import { useRef } from 'react';
 
 function CVCInputField({
   inputValue,
   setInputValue,
   onComplete,
 }: InputFieldProps<CVCInputValueType>) {
-  const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError({ inputValue, completeCondition: MAX_CVC_LENGTH });
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const { errorTypes, errorMessage, validateInputError } = useInputError({
+    inputValue,
+  });
 
   const { onChange, onBlur } = useInputFieldHandler({
+    hasError: Boolean(errorMessage),
+    fieldName: 'CVC',
+    inputRefs,
     validateInputError,
     setInputValue,
-    maxLength: MAX_CVC_LENGTH,
-    inputErrorType: 'shortCVCSegment',
   });
 
   useFieldCompletion({
-    onComplete,
-    isComplete,
-    errorMessage,
     fieldName: 'CVC',
+    errorMessage,
+    inputValue,
+    onComplete,
   });
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>
-      {CVC_INPUT_TYPE.map((inputType) => (
-        <div key={inputType}>
+      {CVC_INPUT_TYPE.map((inputType, index) => (
+        <InputWrapper key={inputType}>
           <Label htmlFor="CVC-input" />
           <Input
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             id="CVC-input"
             inputType="number"
             placeholder="123"
@@ -49,11 +55,15 @@ function CVCInputField({
             onBlur={onBlur}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </div>
+        </InputWrapper>
       ))}
     </BaseInputField>
   );
 }
+
+const InputWrapper = styled.div`
+  width: 100%;
+`;
 
 const Label = styled.label`
   position: absolute;

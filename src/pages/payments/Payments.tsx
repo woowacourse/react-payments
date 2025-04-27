@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import styled from 'styled-components';
 import {
@@ -92,6 +92,8 @@ function Payments() {
     Object.values(isFieldComplete).filter((isComplete) => isComplete === false)
       .length
   );
+
+  const test = useRef<HTMLButtonElement>(null);
 
   return (
     <PaymentsLayout>

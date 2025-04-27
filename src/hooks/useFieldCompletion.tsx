@@ -1,19 +1,33 @@
-import { useEffect } from 'react';
-import { FieldName } from '../config/inputField';
+import { useEffect, useMemo } from 'react';
+import {
+  FieldName,
+  INPUT_FIELD_MAX_LENGTH,
+  InputFieldType,
+} from '../config/inputField';
 
-interface useFieldCompletionProps {
-  isComplete: boolean;
+interface useFieldCompletionProps<T extends InputFieldType> {
   errorMessage?: string;
   fieldName: FieldName;
+  inputValue: Record<T, string>;
   onComplete: (params: { isComplete: boolean; fieldName: FieldName }) => void;
 }
 
-export function useFieldCompletion({
-  isComplete,
+export function useFieldCompletion<T extends InputFieldType>({
   errorMessage,
   fieldName,
+  inputValue,
   onComplete,
-}: useFieldCompletionProps) {
+}: useFieldCompletionProps<T>) {
+  const maxLength = INPUT_FIELD_MAX_LENGTH[fieldName];
+
+  const isComplete = useMemo(() => {
+    return !Boolean(
+      (Object.values(inputValue) as string[]).filter(
+        (value) => value.length !== maxLength
+      ).length
+    );
+  }, [inputValue]);
+
   useEffect(() => {
     if (!onComplete) return;
 

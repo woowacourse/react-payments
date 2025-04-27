@@ -9,37 +9,43 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
-
-const MAX_PASSWORD_LENGTH = 2;
+import { useRef } from 'react';
 
 function PasswordInputField({
   inputValue,
   setInputValue,
   onComplete,
 }: InputFieldProps<PasswordInputType>) {
-  const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError({ inputValue, completeCondition: MAX_PASSWORD_LENGTH });
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const { errorTypes, errorMessage, validateInputError } = useInputError({
+    inputValue,
+  });
 
   const { onChange, onBlur } = useInputFieldHandler({
-    validateInputError,
+    hasError: Boolean(errorMessage),
+    fieldName: 'password',
+    inputRefs,
     setInputValue,
-    inputErrorType: 'shortPasswordSegment',
-    maxLength: MAX_PASSWORD_LENGTH,
+    validateInputError,
   });
 
   useFieldCompletion({
-    onComplete,
-    isComplete,
-    errorMessage,
     fieldName: 'password',
+    inputValue,
+    errorMessage,
+    onComplete,
   });
 
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
-      {PASSWORD_INPUT_TYPE.map((inputType) => (
-        <div key={inputType}>
+      {PASSWORD_INPUT_TYPE.map((inputType, index) => (
+        <InputWrapper key={inputType}>
           <Label htmlFor="password-input" />
           <Input
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             id="password-input"
             inputType="password"
             placeholder="비밀번호 앞 2자리"
@@ -49,11 +55,15 @@ function PasswordInputField({
             onBlur={onBlur}
             isError={Boolean(errorTypes[inputType].length)}
           />
-        </div>
+        </InputWrapper>
       ))}
     </BaseInputField>
   );
 }
+
+const InputWrapper = styled.div`
+  width: 100%;
+`;
 
 const Label = styled.label`
   position: absolute;

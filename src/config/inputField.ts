@@ -46,3 +46,10 @@ export type InputFieldType =
   | CVCInputValueType
   | ExpirationDateInputType
   | PasswordInputType;
+
+export const INPUT_FIELD_MAX_LENGTH: Record<FieldName, number> = {
+  cardNumber: 4,
+  CVC: 3,
+  expirationDate: 2,
+  password: 2,
+};

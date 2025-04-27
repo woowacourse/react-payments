@@ -4,12 +4,10 @@ import { InputFieldType } from '../config/inputField';
 
 interface useInputErrorProps<T extends InputFieldType> {
   inputValue: Record<T, string>;
-  completeCondition: number;
 }
 
 export function useInputError<T extends InputFieldType>({
   inputValue,
-  completeCondition,
 }: useInputErrorProps<T>) {
   const [errorTypes, setErrorTypes] = useState<Record<T, ErrorType[]>>(
     (Object.keys(inputValue) as T[]).reduce(
@@ -30,14 +28,6 @@ export function useInputError<T extends InputFieldType>({
 
     return currentErrorType ? ERROR_TYPE_TO_MESSAGE[currentErrorType] : '';
   }, [errorTypes]);
-
-  const isComplete = useMemo(() => {
-    return !Boolean(
-      (Object.values(inputValue) as string[]).filter(
-        (value) => value.length !== completeCondition
-      ).length
-    );
-  }, [inputValue, completeCondition]);
 
   const validateInputError = (
     inputName: T,
@@ -63,5 +53,5 @@ export function useInputError<T extends InputFieldType>({
     });
   };
 
-  return { errorTypes, errorMessage, isComplete, validateInputError };
+  return { errorTypes, errorMessage, validateInputError };
 }

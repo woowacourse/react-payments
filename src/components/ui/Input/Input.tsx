@@ -1,8 +1,7 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
 
-interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   isError?: boolean;
   inputType: 'number' | 'text' | 'password';
   onChange: ({ name, value }: { name: string; value: string }) => void;
@@ -17,6 +16,7 @@ function Input({
   inputType,
   onChange,
   onBlur,
+  ref,
 }: InputProps) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
@@ -31,6 +31,7 @@ function Input({
 
   return (
     <StyledInput
+      ref={ref}
       id={id}
       placeholder={placeholder}
       value={value}
