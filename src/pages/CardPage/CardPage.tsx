@@ -10,6 +10,7 @@ import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import FormSection from '../../components/FormSection/FormSection';
 import useCardForm from '../../hooks/useCardForm';
+import { useRef } from 'react';
 
 const StyledCardPage = styled.div`
   width: 40%;
@@ -24,6 +25,29 @@ const StyledCardPage = styled.div`
   padding: 30px;
   overflow-y: auto;
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
+`;
+
+const StyledFloatingButton = styled.button`
+  position: fixed;
+  bottom: 20px;
+  right: 200px;
+  background: #fff;
+  background-color: #ffffff;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 100%;
+  font-size: 18px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+`;
+
+const StyledArrowImage = styled.img`
+  position: absolute;
+  width: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const CardPage = () => {
@@ -46,6 +70,12 @@ const CardPage = () => {
         cardCompany: `${cardCompany}`,
       },
     });
+  };
+
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleScrollToConfirm = () => {
+    confirmButtonRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const formSteps = [
@@ -128,7 +158,18 @@ const CardPage = () => {
           );
         })}
 
-      {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK} onClick={navigateToSuccessPage}></Button>}
+      {isFormValid && (
+        <>
+          <StyledFloatingButton onClick={handleScrollToConfirm}>
+            <StyledArrowImage src="./arrow.png"></StyledArrowImage>
+          </StyledFloatingButton>
+          <Button
+            ref={confirmButtonRef}
+            text={CARD_PAGE_TEXT.CHECK}
+            onClick={navigateToSuccessPage}
+          ></Button>
+        </>
+      )}
     </StyledCardPage>
   );
 };

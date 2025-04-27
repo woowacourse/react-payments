@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { forwardRef } from 'react';
 
-type buttonProps = {
+type ButtonProps = {
   text: string;
   onClick: () => void;
 };
@@ -16,8 +17,12 @@ const StyledButton = styled.button`
   cursor: pointer;
   margin-top: 20px;
 `;
-const Button = (props: buttonProps) => {
-  return <StyledButton onClick={props.onClick}>{props.text}</StyledButton>;
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ text, onClick }, ref) => {
+  return (
+    <StyledButton ref={ref} onClick={onClick}>
+      {text}
+    </StyledButton>
+  );
+});
 
 export default Button;
