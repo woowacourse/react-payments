@@ -1,6 +1,7 @@
 import Button from "../components/@common/Button/Button";
-import { Complete } from "../asset/image";
-import { completeImage, pageContainer, title } from "./CardRegistrationCompletePage.style";
+import {Complete} from "../asset/image";
+import {completeImage, pageContainer, title} from "./CardRegistrationCompletePage.style";
+import {Link} from "react-router-dom";
 
 function CardRegistrationCompletePage() {
   return (
@@ -11,7 +12,9 @@ function CardRegistrationCompletePage() {
         <br/>
         BC카드가 등록되었어요.
       </h1>
-      <Button content='확인' style="default"/>
+      <Link to="/">
+        <Button content='확인' style="default"/>
+      </Link>
     </div>
   );
 }
