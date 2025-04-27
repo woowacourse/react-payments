@@ -2,49 +2,11 @@ import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
 import CardInfoForm from "../features/cardInfoForm/CardInfoForm.tsx";
-import { CardTypeList } from "../types/index.types.ts";
-import { INITIALIZE_VALUE } from "../shared/constants/constant";
-import useCardInfo from "./hooks/useCardInfo.ts";
+import useAllCardInfo from "./hooks/useAllCardInfo.ts";
 
 function App() {
-  const cardNumber = useCardInfo(
-    {
-      first: INITIALIZE_VALUE,
-      second: INITIALIZE_VALUE,
-      third: INITIALIZE_VALUE,
-      fourth: INITIALIZE_VALUE,
-    },
-    4
-  );
-
-  const expirationPeriod = useCardInfo(
-    {
-      month: INITIALIZE_VALUE,
-      year: INITIALIZE_VALUE,
-    },
-    2
-  );
-
-  const CVCNumber = useCardInfo(
-    {
-      CVCNumber: INITIALIZE_VALUE,
-    },
-    3
-  );
-
-  const password = useCardInfo(
-    {
-      password: INITIALIZE_VALUE,
-    },
-    2
-  );
-
-  const cardType = useCardInfo<{ cardType: keyof CardTypeList | "" }>(
-    {
-      cardType: INITIALIZE_VALUE,
-    },
-    2
-  );
+  const { cardNumber, expirationPeriod, CVCNumber, password, cardType } =
+    useAllCardInfo();
 
   return (
     <StyledApp>
