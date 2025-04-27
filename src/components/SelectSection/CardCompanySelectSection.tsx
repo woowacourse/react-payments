@@ -1,6 +1,5 @@
 import InputSection from '../common/InputSection/InputSection';
 import SelectField from '../common/SelectField/SelectField';
-import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import { MouseEventHandler } from 'react';
 
 const CARD_COMPANY_SELECT_TEXT = {

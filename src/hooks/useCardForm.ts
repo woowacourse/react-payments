@@ -3,7 +3,6 @@ import useCardCVCNumber from './useCardCVCNumber';
 import useCardExpirationDate from './useCardExpirationDate';
 import useCardNumbers from './useCardNumbers';
 import useCardPassword from './useCardPassword';
-import useError from './useError';
 
 const useCardForm = () => {
   const cardNumbersForm = useCardNumbers();
@@ -14,6 +13,7 @@ const useCardForm = () => {
   const cardCompanyForm = {
     cardCompany,
     setCardCompany,
+    resetCardCompany: () => setCardCompany(''),
   };
 
   const getCardInfo = () => ({
@@ -54,6 +54,7 @@ const useCardForm = () => {
     cardCVCNumberForm.resetCardCVCNumber();
     cardExpirationDateForm.resetCardExpirationDate();
     cardPasswordForm.resetCardPassword();
+    cardCompanyForm.resetCardCompany();
   };
 
   return {

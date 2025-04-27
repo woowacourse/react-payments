@@ -2,6 +2,7 @@ import { CardExpirationDateOptions } from '@/types/CardExpirationDateOptions';
 import { CardNumbersOptions } from '@/types/CardNumbers';
 import { useEffect, useState } from 'react';
 import { useCardCVCNumberOptions } from './useCardCVCNumber';
+
 type UseFieldCompletionProps = {
   cardNumbersForm: CardNumbersOptions;
   cardCompanyForm: {
@@ -70,7 +71,11 @@ const useFieldCompletion = ({
     cardNumbersForm,
   ]);
 
-  return isFieldCompletetion;
+  const resetFieldCompletetion = () => {
+    setIsFieldCompletetion([false, false, false, false]);
+  };
+
+  return { isFieldCompletetion, resetFieldCompletetion };
 };
 
 export default useFieldCompletion;

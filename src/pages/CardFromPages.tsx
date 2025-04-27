@@ -6,7 +6,6 @@ import styles from './cardForm.module.css';
 import { useEffect, useRef, useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
-import useError from '@/hooks/useError';
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
 import { CardNumbersOptions } from '@/types/CardNumbers';
@@ -39,7 +38,7 @@ const CardFormPages = ({
 }: CardFormPagesProps) => {
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
-  const isFieldCompletetion = useFieldCompletion({
+  const { isFieldCompletetion, resetFieldCompletetion } = useFieldCompletion({
     cardNumbersForm,
     cardCompanyForm,
     cardExpirationDateForm,
@@ -48,6 +47,8 @@ const CardFormPages = ({
 
   const nav = useNavigate();
   const handleSubmit = () => {
+    setIsUserFocusing(false);
+    resetFieldCompletetion();
     nav('/complete');
   };
 
@@ -57,12 +58,10 @@ const CardFormPages = ({
     thirdNumber: useRef<HTMLInputElement>(null),
     fourthNumber: useRef<HTMLInputElement>(null),
   };
-
   const cardExpirationDateInputRef = {
     month: useRef<HTMLInputElement>(null),
     year: useRef<HTMLInputElement>(null),
   };
-
   const cardCVCInputRef = useRef<HTMLInputElement>(null);
   const cardPasswordInputRef = useRef<HTMLInputElement>(null);
 
@@ -108,6 +107,7 @@ const CardFormPages = ({
     isFieldCompletetion,
     cardNumbersForm.cardNumbers,
     cardExpirationDateForm.cardExpirationDate,
+    cardCVCNumberForm.cardCVCNumber,
     isUserFocusing,
   ]);
 
