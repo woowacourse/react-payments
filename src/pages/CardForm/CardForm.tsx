@@ -8,7 +8,7 @@ import { CardFormScrollStyles, CardFormStyles } from "./CardForm.styled";
 
 export default function CardForm() {
   const { handleSubmit, isFormComplete } = useCardSubmit();
-  const shouldShowField = useSequentialForm();
+  const { shouldShowField } = useSequentialForm();
 
   return (
     <CardFormStyles onSubmit={handleSubmit}>

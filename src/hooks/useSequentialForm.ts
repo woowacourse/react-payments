@@ -108,5 +108,5 @@ export default function useSequentialForm() {
 
   const shouldShowField = (type: CardFormType): boolean => visibleFields[type];
 
-  return shouldShowField;
+  return { shouldShowField };
 }
