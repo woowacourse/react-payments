@@ -2,23 +2,40 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CardFormPages from './pages/CardFromPages';
 import CardRegistrationComplete from './pages/CardRegistrationComplete';
 import styles from './css/main.module.css';
-import useCardNumbers from './hooks/useCardNumbers';
 import './css/index.css';
+import useCardForm from './hooks/useCardForm';
 
 function App() {
-  const cardNumbersProps = useCardNumbers();
+  const {
+    cardNumbersForm,
+    cardCVCNumberForm,
+    cardExpirationDateForm,
+    canSubmit,
+    resetForm,
+  } = useCardForm();
 
   return (
     <>
       <BrowserRouter basename="/react-payments">
         <div className={styles.main}>
           <Routes>
-            <Route path="/" element={<CardFormPages {...cardNumbersProps} />} />
+            <Route
+              path="/"
+              element={
+                <CardFormPages
+                  cardNumbersForm={cardNumbersForm}
+                  cardCVCNumberForm={cardCVCNumberForm}
+                  cardExpirationDateForm={cardExpirationDateForm}
+                  canSubmit={canSubmit}
+                />
+              }
+            />
             <Route
               path="/complete"
               element={
                 <CardRegistrationComplete
-                  firstNumber={cardNumbersProps.cardNumbers.firstNumber}
+                  firstNumber={cardNumbersForm.cardNumbers.firstNumber}
+                  resetForm={resetForm}
                 />
               }
             />

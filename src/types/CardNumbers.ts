@@ -1,3 +1,13 @@
+export type CardNumbersInputSectionProps = {
+  cardNumbers: CardNumbers;
+  setCardNumbers: (
+    target: CardNumbersKeys
+  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardNumbersBlur: (target: CardNumbersKeys) => void;
+  isError: IsError;
+  errorMessage: string;
+};
+
 export type CardNumbersOptions = {
   errorMessage: string;
 } & CardNumbersOptionsWithoutErrormessage;
@@ -9,6 +19,7 @@ export type CardNumbersOptionsWithoutErrormessage = {
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleCardNumbersBlur: (target: CardNumbersKeys) => void;
   isError: IsError;
+  resetCardNumbers: () => void;
 };
 
 export type CardNumbers = {

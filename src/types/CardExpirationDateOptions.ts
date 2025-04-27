@@ -7,7 +7,7 @@ export type IsError = {
   year: boolean;
 };
 
-export type CardExpirationDateOptions = {
+export type CardExpirationDateInputSectionProps = {
   cardExpirationDate: CardExpirationDate;
   setCardExpirationDate: (
     target: CardExpirationDateKeys
@@ -15,4 +15,8 @@ export type CardExpirationDateOptions = {
   handleCardExpirationDateBlur: (target: CardExpirationDateKeys) => void;
   isError: IsError;
   errorMessage: string;
+};
+
+export type CardExpirationDateOptions = CardExpirationDateInputSectionProps & {
+  resetCardExpirationDate: () => void;
 };

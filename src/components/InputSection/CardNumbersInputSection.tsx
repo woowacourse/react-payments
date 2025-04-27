@@ -1,4 +1,7 @@
-import { CardNumbersOptions } from '../../types/CardNumbers';
+import {
+  CardNumbersInputSectionProps,
+  CardNumbersOptions,
+} from '../../types/CardNumbers';
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
@@ -15,7 +18,7 @@ const CardNumbersInputSection = ({
   handleCardNumbersBlur,
   isError,
   errorMessage,
-}: CardNumbersOptions) => {
+}: CardNumbersInputSectionProps) => {
   return (
     <>
       <InputSection

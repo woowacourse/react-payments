@@ -2,7 +2,21 @@ import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import CheckIcon from '@assets/CheckIcon.png';
 import buttonStyle from '../css/button.module.css';
 import styles from './cardRegistrationComplete.module.css';
-const CardRegistrationComplete = ({ firstNumber }: { firstNumber: string }) => {
+import { useNavigate } from 'react-router-dom';
+const CardRegistrationComplete = ({
+  firstNumber,
+  resetForm,
+}: {
+  firstNumber: string;
+  resetForm: () => void;
+}) => {
+  const nav = useNavigate();
+
+  const clickConfirmButton = () => {
+    resetForm();
+    nav('/');
+  };
+
   return (
     <div className={styles.container}>
       <img src={CheckIcon} alt="체크 아이콘" className={styles.checkIcon} />
@@ -14,7 +28,7 @@ const CardRegistrationComplete = ({ firstNumber }: { firstNumber: string }) => {
         <ConfirmButton
           type="button"
           text="확인"
-          onClick={() => {}}
+          onClick={clickConfirmButton}
           className={buttonStyle.finish}
         />
       </div>

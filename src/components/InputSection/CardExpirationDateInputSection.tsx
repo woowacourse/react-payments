@@ -1,7 +1,10 @@
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
-import { CardExpirationDateOptions } from '../../types/CardExpirationDateOptions';
+import {
+  CardExpirationDateInputSectionProps,
+  CardExpirationDateOptions,
+} from '../../types/CardExpirationDateOptions';
 
 export const CARD_EXPIRATION_DATE_TEXT = {
   title: '카드 유효기간을 입력해 주세요',
@@ -15,7 +18,7 @@ const CardExpirationDateInputSection = ({
   handleCardExpirationDateBlur,
   isError,
   errorMessage,
-}: CardExpirationDateOptions) => {
+}: CardExpirationDateInputSectionProps) => {
   return (
     <>
       <InputSection
