@@ -30,12 +30,12 @@ const StyledHelperTextWrapper = styled.div`
 `;
 
 const INITIAL_ERROR_STATES = Array.from({ length: 4 }, () => false);
+const VALID_LENGTH = 4;
 
-const validationCallback = (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 4);
 const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
   const { errorState, errorMessage, validate } = useInputValidation(
     INITIAL_ERROR_STATES,
-    validationCallback
+    VALID_LENGTH
   );
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);

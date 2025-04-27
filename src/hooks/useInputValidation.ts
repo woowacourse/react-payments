@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import useErrorArrayState from './useErrorStateUpdate';
 import { HandleInputParams } from '../types/input';
+import { inputValidation } from '../validators/inputValidator';
 
-function useInputValidation(
-  initialErrorState: boolean[],
-  validationFn: (e: React.ChangeEvent<HTMLInputElement>) => void
-) {
+function useInputValidation(initialErrorState: boolean[], validLength: number) {
   const { errorState, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
     setErrorMessage('')
   );
@@ -13,7 +11,7 @@ function useInputValidation(
 
   const validate = ({ e, idx }: HandleInputParams) => {
     try {
-      validationFn(e);
+      inputValidation(e, validLength);
       updateErrorState(idx, false);
     } catch (error) {
       updateErrorState(idx, true);

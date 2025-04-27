@@ -28,14 +28,13 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
-const validationCallback = (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 2);
-
 const INITIAL_ERROR_STATES = [false];
+const VALID_LENGTH = 2;
 
 const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
   const { errorState, errorMessage, validate } = useInputValidation(
     INITIAL_ERROR_STATES,
-    validationCallback
+    VALID_LENGTH
   );
 
   useEffect(() => {
