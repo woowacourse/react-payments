@@ -19,9 +19,12 @@ const AddCard = () => {
   const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, isError });
 
   const handleSubmit = () => {
-    sessionStorage.setItem('firstCardNumber', JSON.stringify(cardInput.first));
-    sessionStorage.setItem('cardBrand', JSON.stringify(cardInput.cardBrand));
-    navigate('/success');
+    navigate('/success', {
+      state: {
+        cardFirstNumber: cardInput.first,
+        cardBrand: cardInput.cardBrand,
+      },
+    });
   };
 
   useEffect(() => {
