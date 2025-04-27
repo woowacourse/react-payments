@@ -136,5 +136,5 @@ const isValidMonth = (month: string, year: string) => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear().toString().slice(-2);
   const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-  return year >= currentYear && month >= currentMonth;
+  return year > currentYear || (year === currentYear && month >= currentMonth);
 };
