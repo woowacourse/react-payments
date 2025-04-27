@@ -49,7 +49,9 @@ function Select({
         />
         <img
           src={
-            isOpenOptions ? './SelectBox-visible.png' : './SelectBox-hidden.png'
+            isOpenOptions
+              ? `${import.meta.env.BASE_URL}/SelectBox-visible.png`
+              : `${import.meta.env.BASE_URL}/SelectBox-hidden.png`
           }
           alt='Selected 드롭다운 아이콘'
           className={styles.selectedIcon}

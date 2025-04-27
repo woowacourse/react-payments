@@ -3,8 +3,8 @@ import { ISSUER_LIST } from '../cardInputForm/cardInput/IssuerSelector';
 import styles from './CardPreview.module.css';
 
 export const BRAND_IMAGE = {
-  visa: './Visa.png',
-  master: './Mastercard.png',
+  visa: `${import.meta.env.BASE_URL}/Visa.png`,
+  master: `${import.meta.env.BASE_URL}/Mastercard.png`,
 };
 
 function CardPreview() {
