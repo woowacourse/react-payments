@@ -7,7 +7,7 @@ function useExpDateValidation(
   values: string[],
   validationFn: (values: string[], params: HandleInputParams, validLength: number) => void
 ) {
-  const { isError, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
+  const { errorState, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
     setErrorMessage('')
   );
 
@@ -26,7 +26,7 @@ function useExpDateValidation(
   };
 
   return {
-    isError,
+    errorState,
     errorMessage,
     validateExpirationDate,
   };

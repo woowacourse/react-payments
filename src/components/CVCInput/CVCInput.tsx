@@ -34,13 +34,13 @@ const CVCInput = ({ values, onChange, onValidChange }: InputProps) => {
     (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 3),
     []
   );
-  const { isError, errorMessage, validate } = useInputValidation([false], validationCallback);
+  const { errorState, errorMessage, validate } = useInputValidation([false], validationCallback);
 
   useEffect(() => {
     const isValid =
-      isError.every((error) => error === false) && values.every((value) => value.length === 3);
+      errorState.every((error) => error === false) && values.every((value) => value.length === 3);
     onValidChange(isValid);
-  }, [isError, values, onValidChange]);
+  }, [errorState, values, onValidChange]);
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
@@ -58,7 +58,7 @@ const CVCInput = ({ values, onChange, onValidChange }: InputProps) => {
             onChange={(e) => handleChange({ e, idx })}
             maxLength={3}
             placeholder={'123'}
-            isError={isError[idx]}
+            errorState={errorState[idx]}
           />
         ))}
       </StyledInputWrapper>

@@ -34,16 +34,16 @@ const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
     (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 2),
     []
   );
-  const { isError, errorMessage, validate } = useInputValidation(
+  const { errorState, errorMessage, validate } = useInputValidation(
     [false, false],
     validationCallback
   );
 
   useEffect(() => {
     const isValid =
-      isError.every((error) => error === false) && values.every((value) => value.length === 2);
+      errorState.every((error) => error === false) && values.every((value) => value.length === 2);
     onValidChange(isValid);
-  }, [isError, values, onValidChange]);
+  }, [errorState, values, onValidChange]);
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
@@ -61,7 +61,7 @@ const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
             onChange={(e) => handleChange({ e, idx })}
             maxLength={2}
             placeholder={'**'}
-            isError={isError[idx]}
+            errorState={errorState[idx]}
             type="password"
           />
         ))}

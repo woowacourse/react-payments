@@ -36,7 +36,7 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
     []
   );
 
-  const { isError, errorMessage, validate } = useInputValidation(
+  const { errorState, errorMessage, validate } = useInputValidation(
     Array.from({ length: 4 }, () => false),
     validationCallback
   );
@@ -45,9 +45,9 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
 
   useEffect(() => {
     const isValid =
-      isError.every((error) => error === false) && values.every((value) => value.length === 4);
+      errorState.every((error) => error === false) && values.every((value) => value.length === 4);
     onValidChange(isValid);
-  }, [isError, values, onValidChange]);
+  }, [errorState, values, onValidChange]);
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
@@ -68,7 +68,7 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
             onChange={(e) => handleChange({ e, idx })}
             maxLength={4}
             placeholder={'1234'}
-            isError={isError[idx]}
+            errorState={errorState[idx]}
             ref={(el) => {
               inputRefs.current[idx] = el;
             }}

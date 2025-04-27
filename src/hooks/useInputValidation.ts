@@ -6,7 +6,7 @@ function useInputValidation(
   initialErrorState: boolean[],
   validationFn: (e: React.ChangeEvent<HTMLInputElement>) => void
 ) {
-  const { isError, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
+  const { errorState, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
     setErrorMessage('')
   );
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,7 +24,7 @@ function useInputValidation(
   };
 
   return {
-    isError,
+    errorState,
     errorMessage,
     validate,
   };

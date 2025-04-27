@@ -36,7 +36,7 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
       expirationDateValidation(values, params, validLength),
     []
   );
-  const { isError, errorMessage, validateExpirationDate } = useExpDateValidation(
+  const { errorState, errorMessage, validateExpirationDate } = useExpDateValidation(
     [false, false],
     values,
     validationCallback
@@ -46,9 +46,9 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
 
   useEffect(() => {
     const isValid =
-      isError.every((error) => error === false) && values.every((value) => value.length === 2);
+      errorState.every((error) => error === false) && values.every((value) => value.length === 2);
     onValidChange(isValid);
-  }, [isError, values, onValidChange]);
+  }, [errorState, values, onValidChange]);
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
@@ -69,7 +69,7 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
             onChange={(e) => handleChange({ e, idx })}
             maxLength={2}
             placeholder={placeHolders[idx]}
-            isError={isError[idx]}
+            errorState={errorState[idx]}
             ref={(el) => {
               inputRefs.current[idx] = el;
             }}
