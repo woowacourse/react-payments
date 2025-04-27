@@ -6,19 +6,17 @@ import useAllComplete from "../../hooks/useAllComplete";
 import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router";
 
 const AddCard = () => {
+  const navigate = useNavigate();
   const { cardInformationState, setCardInformationState, isStateCompletes } = useCardInformation();
   const { validation, isErrorCompletes } = useValidation();
-
-  // useStep 훅 안에서 에러+상태를 확인해서 step을 업데이트 한다.
-  // step은 상태여야한다. useMemo를 이용하여 일반 변수로 사용하려 했으나, 상태값이 변경, 즉 재수정이 일어났을 때, 상태가 바뀌어 버려 렌더링 상태가 꼬일 수 있다.
 
   // 1. 카드번호 상태 + 유효성 검증
   const step = useStep(isStateCompletes, isErrorCompletes);
 
   // 2. 카드번호 상태 + 유효성 검증 완료 되었을때, 버튼 띄우기
-
   const complete = useAllComplete(isStateCompletes, isErrorCompletes);
 
   return (
@@ -30,7 +28,18 @@ const AddCard = () => {
         validation={validation}
         step={step}
       />
-      <div css={ButtonWrapperStyle}>{complete && <Button text="완료" />}</div>
+      <div css={ButtonWrapperStyle}>
+        {complete && (
+          <Button
+            text="완료"
+            onClick={() =>
+              navigate("/complete", {
+                state: { uniqueNumber: cardInformationState.uniqueNumber[0], company: cardInformationState.company },
+              })
+            }
+          />
+        )}
+      </div>
     </div>
   );
 };

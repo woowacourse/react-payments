@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import { CompanyType } from ".";
 import { CardInformationType, setCardInformationType } from "./CardInformationType";
 import { useEachValidationType, validationFieldType } from "./useValidationType";
@@ -107,4 +108,4 @@ export type SelectProps<T extends Extract<keyof CardInformationType, "company">>
 export type ButtonProps = {
   /** 버튼에 들어갈 텍스트 내용 */
   text: string;
-};
+} & ComponentProps<"button">;

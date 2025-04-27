@@ -1,13 +1,18 @@
 import { css } from "@emotion/react";
 import Text from "../../components/Text/Text";
 import Button from "../../components/Button/Button";
+import { useLocation, useNavigate } from "react-router";
 
 const CompleteCard = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const { uniqueNumber, company } = state;
+
   return (
     <div css={ContainerStyle}>
       <img src="completeIcon.svg" alt="complete" />
-      <Text type="complete" text={"5511로 시작하는\nBC카드가 등록되었어요."} />
-      <Button text="확인" />
+      <Text type="complete" text={`${uniqueNumber}로 시작하는\n${company}가 등록되었어요.`} />
+      <Button text="확인" onClick={() => navigate("/")} />
     </div>
   );
 };
