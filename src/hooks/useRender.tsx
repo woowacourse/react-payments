@@ -6,15 +6,9 @@ export interface RenderItemProps {
   setIsValid: React.Dispatch<React.SetStateAction<isValidType>>;
 }
 
-export interface BaseProps {
-  isValid: boolean | boolean[];
-  setIsValid: React.Dispatch<React.SetStateAction<any>>;
-  [key: string]: any; // 추가 속성을 허용하기 위한 인덱스 시그니처
-}
-
 export interface RenderItem {
-  Component: ComponentType<any>;
-  props: BaseProps;
+  Component: ComponentType;
+  props: RenderItemProps;
   formRef: React.RefObject<HTMLFormElement>;
 }
 
