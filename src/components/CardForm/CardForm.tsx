@@ -18,7 +18,7 @@ export function CardForm() {
 
   const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
 
-  useStepFlow({ formState: useFormContext(), setStep });
+  useStepFlow({ setStep });
 
   const navigate = useNavigate();
 

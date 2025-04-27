@@ -1,11 +1,11 @@
-import { CardFormProps } from '../contexts/useFormContext';
-import { STEPS } from './../constants';
 import { useEffect } from 'react';
+import { useFormContext } from '../contexts/useFormContext';
+import { STEPS } from './../constants';
 
 type StepName = (typeof STEPS)[number];
 
-export function useStepFlow({ formState, setStep }: { formState: CardFormProps; setStep: (step: StepName) => void }) {
-  const { cardNumbers, expiration, company, cvc } = formState;
+export function useStepFlow({ setStep }: { setStep: (step: StepName) => void }) {
+  const { cardNumbers, expiration, company, cvc } = useFormContext();
 
   const isCardNumbersValid = Object.values(cardNumbers).every(({ value, isError }) => value.length === 4 && !isError);
   const isExpirationValid = Object.values(expiration).every(({ value, errorMessage }) => value.length === 2 && errorMessage === '');
@@ -17,12 +17,12 @@ export function useStepFlow({ formState, setStep }: { formState: CardFormProps; 
   }, [isCardNumbersValid]);
 
   useEffect(() => {
-    if (isExpirationValid) setStep('CVC');
-  }, [isExpirationValid]);
-
-  useEffect(() => {
     if (isCompanyValid) setStep('유효기간');
   }, [isCompanyValid]);
+
+  useEffect(() => {
+    if (isExpirationValid) setStep('CVC');
+  }, [isExpirationValid]);
 
   useEffect(() => {
     if (isCvcValid) setStep('비밀번호');
