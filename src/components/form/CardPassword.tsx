@@ -1,36 +1,19 @@
+import React from "react";
 import Title from "../title/Title";
 import InputField from "../inputField/InputField";
 import Input from "../input/Input";
 import Description from "../description/Description";
-import React, { Dispatch, SetStateAction, useState } from "react";
-import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { PASSWORD_MAX_LENGTH } from "../../utils/validation";
-import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
 
 interface CardPasswordProps {
 	cardPassword: string;
-	setCardPassword: Dispatch<SetStateAction<string>>;
+	onChange: (value: string) => void;
+	onBlur: (value: string) => void;
+	error: string;
 }
 
-const CardPassword = React.memo(({ cardPassword, setCardPassword }: CardPasswordProps) => {
-	const [error, setError] = useState("");
-
-	const onChange = (value: string) => {
-		setCardPassword(value);
-
-		if (!isNumberWithinRange(value, PASSWORD_MAX_LENGTH)) {
-			setError(MESSAGE.INVALID_NUMBER);
-			return;
-		}
-
-		setError("");
-	};
-
-	const onBlur = (value: string) => {
-		if (value.length < PASSWORD_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(PASSWORD_MAX_LENGTH));
-	};
-
+const CardPassword = React.memo(({ cardPassword, onChange, onBlur, error }: CardPasswordProps) => {
 	return (
 		<CardNumberWrap>
 			<Title>비밀번호를 입력해 주세요</Title>
