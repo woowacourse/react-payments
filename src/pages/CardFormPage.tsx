@@ -10,6 +10,7 @@ import CardIssuerForm from "../components/feature/CardIssuerForm/CardIssuerForm.
 import Button from "../components/common/Button/Button.tsx";
 import useOpenForm from "../hooks/useOpenForm.tsx";
 import useCardError from "../hooks/useCardError.tsx";
+import { useNavigate } from "react-router";
 
 function CardFormPage() {
   const { cardState, dispatch, uniqueNumberComplete, expirationDateComplete, cvcNumberComplete, cardIssuerComplete } =
@@ -28,6 +29,11 @@ function CardFormPage() {
     expirationDateClear,
     cvcNumberClear,
   });
+
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate("/complete");
+  };
 
   return (
     <div>
@@ -77,7 +83,7 @@ function CardFormPage() {
         </div>
         {isFormOpen("password") && allClear() && (
           <div css={ButtonContainerStyle}>
-            <Button text={"확인"} />
+            <Button text={"확인"} onClick={handleButtonClick} />
           </div>
         )}
       </div>
