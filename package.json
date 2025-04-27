@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist  && cp 404.html ./dist/404.html"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "homepage": "https://wo-o29.github.io/react-payments",
   "dependencies": {
