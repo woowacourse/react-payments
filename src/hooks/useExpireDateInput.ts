@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { validateInputChange } from '@/validations/validateCardNumbers';
 import { validateExpireDate } from '@/validations/validateExpireDate';
 
 type ExpireDateInputValueType = {
@@ -22,9 +23,17 @@ export const useExpireDateInput = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
+    const inputValue = e.target.value;
+    const { isValid, errorMessage } = validateInputChange(inputValue);
+
+    if (!isValid) {
+      setErrorMessage(errorMessage);
+      return isValid;
+    }
+
     setValue((prev) => {
       const newDateObj = { ...prev };
-      newDateObj[key].value = e.target.value;
+      newDateObj[key].value = inputValue;
       return newDateObj;
     });
   };

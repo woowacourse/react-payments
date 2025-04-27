@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
-import { validateCardNumbers } from '@/validations/validateCardNumbers';
+import { validateCardNumbers, validateInputChange } from '@/validations/validateCardNumbers';
 
 export type CardInputType = {
   value: string;
@@ -35,11 +35,28 @@ export const useCardInput = (type: CardFormFiledType) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const inputValue = e.target.value;
+    const { isValid, errorMessage } = validateInputChange(inputValue);
+
+    if (!isValid) {
+      setErrorMessage(errorMessage);
+
+      setValue((prev) => {
+        const newArr = [...prev];
+        newArr[index].isValid = isValid;
+        return newArr;
+      });
+
+      return;
+    }
+
     setValue((prev) => {
       const newArr = [...prev];
-      newArr[index].value = e.target.value;
+      newArr[index].value = inputValue;
       return newArr;
     });
+
+    setErrorMessage(null);
   };
 
   const validateInput = (value: string) => {

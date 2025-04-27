@@ -15,3 +15,14 @@ export const validateCardNumbers = (value: string, type: CardFormFiledType): Val
 
   return { isValid: true, errorMessage: null };
 };
+
+export const validateInputChange = (value: string) => {
+  if (isNaN(Number(value))) {
+    return {
+      isValid: false,
+      errorMessage: '숫자를 입력하세요.',
+    };
+  }
+
+  return { isValid: true, errorMessage: null };
+};
