@@ -13,21 +13,19 @@ export default function CardInfoContainer() {
 
   return (
     <S.CardInfoWrapper>
-      <S.AnimatedSection className={cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR ? 'visible' : ''}>
+      <S.AnimatedSection visible={cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR}>
         <CardPasswordSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
-      <S.AnimatedSection
-        className={cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR ? 'visible' : ''}
-      >
+      <S.AnimatedSection visible={cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR}>
         <CardCVCSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
-      <S.AnimatedSection className={cardInfo.cardIssuer !== '' ? 'visible' : ''}>
+      <S.AnimatedSection visible={cardInfo.cardIssuer !== ''}>
         <CardExpirationDateSection error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 
-      <S.AnimatedSection className={cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR ? 'visible' : ''}>
+      <S.AnimatedSection visible={cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR}>
         <CardSelection cardIssuer={cardInfo.cardIssuer} error={error} onBlur={updateCardInfo} />
       </S.AnimatedSection>
 

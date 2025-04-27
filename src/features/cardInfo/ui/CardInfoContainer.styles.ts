@@ -8,16 +8,10 @@ export const CardInfoWrapper = styled.div`
   margin: 45px 0;
 `;
 
-export const AnimatedSection = styled.div`
+export const AnimatedSection = styled.section<{ visible: boolean }>`
   overflow: hidden;
-  opacity: 0;
-  max-height: 0;
-  transform: translateY(10px);
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  max-height: ${({ visible }) => (visible ? '200px' : '0')};
+  transform: ${({ visible }) => (visible ? 'translateY(0)' : 'translateY(10px)')};
   transition: opacity 0.4s ease, max-height 0.4s ease, transform 0.4s ease;
-
-  &.visible {
-    opacity: 1;
-    max-height: 200px;
-    transform: translateY(0);
-  }
 `;
