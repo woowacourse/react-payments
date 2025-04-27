@@ -13,6 +13,7 @@ import {
 import { CARD_TYPE } from '../../constants';
 import { CardBrandType, CardExpirationDate, CardNumber } from "../../types";
 import { css, useTheme } from "@emotion/react";
+import Dot from '../@common/Dot/Dot';
 
 type CardProps = {
   cardNumber: CardNumber;
@@ -49,8 +50,8 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
   const brandBackground = brand ? css`background-color: ${theme.color.cardBrand[brand]};` : undefined;
 
   return (
-    <section css={[cardLayout, brandBackground]}>
-      <div css={cardSection}>
+    <section css={cardLayout}>
+      <div css={[cardSection, brandBackground]}>
         <div css={cardContainer}>
           <div css={cardFrame}></div>
           {checkCardType() && (
@@ -63,8 +64,8 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
           <div css={cardContent}>
             <span css={cardContentText}>{first}</span>
             <span css={cardContentText}>{second}</span>
-            <span css={cardContentText}>{third}</span>
-            <span css={cardContentText}>{forth}</span>
+            <Dot value={third} css={cardContentText} />
+            <Dot value={forth} css={cardContentText} />
           </div>
           <div css={cardContent}>
             {hasFilledExpirationField && (
