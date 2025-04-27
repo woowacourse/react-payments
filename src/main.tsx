@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { basePath } from "./config/router";
+import { basePath } from "./configs/router";
 import { CardProvider } from "./contexts/CardContext";
 import { CardValidationProvider } from "./contexts/CardValidationContext";
 import CardForm from "./pages/CardForm/CardForm";

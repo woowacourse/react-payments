@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Button from "../../components/Common/Button/Button";
-import { basePath } from "../../config/router";
+import { basePath } from "../../configs/router";
 import {
   CheckImgStyles,
   CompletionMessageStyles,
