@@ -6,7 +6,7 @@ export enum ErrorKey {
   CARD_CVC = 'cardCVCError',
 }
 
-export const ERROR_MESSAGES = {
+export const ERROR_MESSAGES = Object.freeze({
   CARD_NUMBER: {
     NOT_NUMERIC: '카드 번호는 숫자만 입력 가능합니다.',
     NOT_FOUR_DIGIT: '카드 번호는 4자리어야 합니다.',
@@ -23,4 +23,4 @@ export const ERROR_MESSAGES = {
     NOT_NUMERIC: 'CVC는 숫자만 입력 가능합니다.',
     NOT_THREE_DIGIT: 'CVC는 3자리어야 합니다.',
   },
-};
+});
