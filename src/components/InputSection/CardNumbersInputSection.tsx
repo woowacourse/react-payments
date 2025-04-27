@@ -1,14 +1,14 @@
-import { CardNumbersOptions } from "../../types/CardNumbers";
+import { CardNumbersKeys, CardNumbersOptions } from "../../types/CardNumbers";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 
-interface CardNumbersInputSectionProps extends CardNumbersOptions {
+type CardNumbersInputSectionProps = {
   setRef: (
     index: number
   ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
   moveFocus: (index: number) => void;
-}
+} & CardNumbersOptions;
 
 const CardNumbersInputSection = ({
   cardNumbers,
@@ -18,12 +18,13 @@ const CardNumbersInputSection = ({
   setRef,
   moveFocus,
 }: CardNumbersInputSectionProps) => {
-  const handleChange = (field: string, index: number) => (value: string) => {
-    handleCardNumbersChange(field)(value);
-    if (cardNumbers[field].length === 4) {
-      moveFocus(index);
-    }
-  };
+  const handleChange =
+    (field: CardNumbersKeys, index: number) => (value: string) => {
+      handleCardNumbersChange(field)(value);
+      if (cardNumbers[field].length === 4) {
+        moveFocus(index);
+      }
+    };
 
   return (
     <>
@@ -41,9 +42,9 @@ const CardNumbersInputSection = ({
           <InputField
             key={index}
             id={index}
-            value={cardNumbers[field]}
-            onChange={handleChange(field, index)}
-            isError={isError[field]}
+            value={cardNumbers[field as CardNumbersKeys]}
+            onChange={handleChange(field as CardNumbersKeys, index)}
+            isError={isError[field as CardNumbersKeys]}
             placeholder="1234"
             setRef={setRef}
           />

@@ -4,7 +4,6 @@ import CardCVCNumberInputSection from "./InputSection/CardCVCNumberInputSection"
 import CardDisplay from "./CardDisplay/CardDisplay";
 import CardCompanyInputSection from "./InputSection/CardCompanyInputSection";
 import CardPasswordInputSection from "./InputSection/CardPasswordInputSection";
-import CardOwnerNameInputSection from "./InputSection/CardOwnerNameInputSection";
 import useCardNumbers from "../hooks/useCardNumbers";
 import useCardExpirationDate from "../hooks/useCardExpirationDate";
 import useCardCompany from "../hooks/useCardCompany";
@@ -109,7 +108,6 @@ function Card({ setNewCard }: CardProps) {
               isError={isCardPasswordError}
               errorMessage={cardPasswordErrorMessage}
               setRef={setRef}
-              moveFocus={moveFocus}
             />
           )}
           {isFulledInput(cardExpirationDate, 2) && (

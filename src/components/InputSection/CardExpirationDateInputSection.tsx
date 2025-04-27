@@ -3,6 +3,13 @@ import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 import { CardExpirationDateOptions } from "../../types/CardExpirationDateOptions";
 
+type CardExpirationDateInputSectionProps = {
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
+} & CardExpirationDateOptions;
+
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
   handleCardExpirationDateChange,
@@ -10,7 +17,7 @@ const CardExpirationDateInputSection = ({
   errorMessage,
   setRef,
   moveFocus,
-}: CardExpirationDateOptions) => {
+}: CardExpirationDateInputSectionProps) => {
   return (
     <>
       <InputSection

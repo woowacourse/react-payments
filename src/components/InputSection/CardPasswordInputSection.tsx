@@ -10,6 +10,9 @@ type CardPasswordInputSectionProps = {
     cardPassword: boolean;
   };
   errorMessage: string;
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
 };
 
 const CardPasswordInputSection = ({

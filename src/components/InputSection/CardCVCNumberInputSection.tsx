@@ -3,7 +3,17 @@ import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 
-const CardCVCNumberInputSection = ({ setRef, moveFocus }) => {
+type CardCVCNumberInputSectionProps = {
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
+};
+
+const CardCVCNumberInputSection = ({
+  setRef,
+  moveFocus,
+}: CardCVCNumberInputSectionProps) => {
   const { cardCVCNumber, handleCardCVCNumberChange, isError, errorMessage } =
     useCardCVCNumber();
 
