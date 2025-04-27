@@ -12,7 +12,11 @@ const CardRegistration = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(ROUTES.CARD_COMPLETE);
+    navigate(ROUTES.CARD_COMPLETE, {
+      state: {
+        cardNumber: cardInfo.cardNumber[0],
+      },
+    });
   };
 
   return (
