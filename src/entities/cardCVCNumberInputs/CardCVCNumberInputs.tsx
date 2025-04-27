@@ -4,8 +4,8 @@ import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
-} from "../inputs.css";
-import useAutoFocus from "../../features/hooks/useAutoFocus";
+} from "../css/inputs.css";
+import useAutoFocus from "../hooks/useAutoFocus";
 
 export type CardCVCNumberSectionProps = {
   CVCNumber: {

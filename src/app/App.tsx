@@ -8,7 +8,7 @@ import {
   CardTypeList,
 } from "../types/index.types.ts";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
-import useCardInfo from "./useCardInfo.ts";
+import useCardInfo from "./hooks/useCardInfo.ts";
 
 type CardNumberState = Record<CardNumberPosition, string>;
 

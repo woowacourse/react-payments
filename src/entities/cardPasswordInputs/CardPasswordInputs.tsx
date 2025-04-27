@@ -2,9 +2,9 @@ import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
-} from "../inputs.css";
+} from "../css/inputs.css";
 import Input from "../../shared/input/Input";
-import useAutoFocus from "../../features/hooks/useAutoFocus";
+import useAutoFocus from "../hooks/useAutoFocus";
 
 type CardPasswordInputsProps = {
   password: {

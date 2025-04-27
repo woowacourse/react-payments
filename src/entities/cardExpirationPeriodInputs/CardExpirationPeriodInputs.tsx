@@ -9,8 +9,8 @@ import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
-} from "../inputs.css";
-import useAutoFocus from "../../features/hooks/useAutoFocus.ts";
+} from "../css/inputs.css";
+import useAutoFocus from "../hooks/useAutoFocus.ts";
 
 type ExpirationPeriodProps = {
   expirationPeriod: {
