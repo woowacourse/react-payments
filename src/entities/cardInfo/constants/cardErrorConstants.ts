@@ -18,8 +18,10 @@ export const ERROR_MESSAGES = Object.freeze({
     MONTH_NOT_NUMERIC: '유효 월은 숫자만 입력 가능합니다.',
     MONTH_INVALID_RANGE: '유효 월은 1월과 12월 사이만 입력 가능합니다.',
     MONTH_NOT_TWO_DIGIT: '유효 월은 2자리 숫자여야 합니다.',
+    MONTH_INVALID: '유효 월은 현재 월 이후여야 합니다.',
     YEAR_NOT_NUMERIC: '유효 연도는 숫자만 입력 가능합니다.',
     YEAR_NOT_TWO_DIGIT: '유효 연도는 2자리 숫자여야 합니다.',
+    YEAR_INVALID: '유효 연도는 현재 연도 이후여야 합니다.',
   },
   CARD_CVC: {
     NOT_NUMERIC: 'CVC는 숫자만 입력 가능합니다.',

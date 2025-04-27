@@ -67,6 +67,16 @@ export const cardExpirationDateValidator = (date: { month: string; year: string 
       index: 1,
       message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.YEAR_NOT_TWO_DIGIT,
     },
+    {
+      check: () => !isValidYear(date.year),
+      index: 1,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.YEAR_INVALID,
+    },
+    {
+      check: () => !isValidMonth(date.month, date.year),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.MONTH_INVALID,
+    },
   ];
 
   const failedValidation = validations.find((validation) => validation.check());
@@ -114,4 +124,17 @@ const isExactDigitLength = (input: string, length: number) => {
 const isValidExpirationMonth = (month: string) => {
   const num = Number(month);
   return num >= 1 && num <= 12;
+};
+
+const isValidYear = (year: string) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear().toString().slice(-2);
+  return year >= currentYear;
+};
+
+const isValidMonth = (month: string, year: string) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear().toString().slice(-2);
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  return year === currentYear && month >= currentMonth;
 };
