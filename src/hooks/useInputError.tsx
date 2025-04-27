@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import { InputFieldType } from '../config/inputField';
 
-export function useInputError<T extends InputFieldType>(
-  inputValue: Record<T, string>,
-  completeCondition: number
-) {
+interface useInputErrorProps<T extends InputFieldType> {
+  inputValue: Record<T, string>;
+  completeCondition: number;
+}
+
+export function useInputError<T extends InputFieldType>({
+  inputValue,
+  completeCondition,
+}: useInputErrorProps<T>) {
   const [errorTypes, setErrorTypes] = useState<Record<T, ErrorType[]>>(
     (Object.keys(inputValue) as T[]).reduce(
       (acc, key) => {

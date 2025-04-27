@@ -18,7 +18,7 @@ function CVCInputField({
   onComplete,
 }: InputFieldProps<CVCInputValueType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError(inputValue, MAX_CVC_LENGTH);
+    useInputError({ inputValue, completeCondition: MAX_CVC_LENGTH });
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,

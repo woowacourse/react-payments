@@ -18,7 +18,7 @@ function PasswordInputField({
   onComplete,
 }: InputFieldProps<PasswordInputType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputError(inputValue, MAX_PASSWORD_LENGTH);
+    useInputError({ inputValue, completeCondition: MAX_PASSWORD_LENGTH });
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,
