@@ -1,4 +1,5 @@
-import { cardNumber, date } from "../components/page/CardInfo";
+import { CardNumberType } from "../hooks/useCardNumber";
+import { ExpirationDateType } from "../hooks/useExpirationDate";
 
 export const EXPIRATION_MAX_LENGTH = 2;
 export const CVC_MAX_LENGTH = 3;
@@ -29,11 +30,11 @@ export const isValidExpirationDate = (date: { month: string; year: string }) => 
 	return isValidMonth(date.month) && isValidYear(date.year);
 };
 
-export const isValidCardNumber = (cardNumber: cardNumber) => {
+export const isValidCardNumber = (cardNumber: CardNumberType) => {
 	return Object.values(cardNumber).every((value) => value.length === CARD_MAX_LENGTH && isNumberWithinRange(value, 4));
 };
 
-export const isValidateExpirationDate = (expirationDate: date) => {
+export const isValidateExpirationDate = (expirationDate: ExpirationDateType) => {
 	return expirationDate.month.length === EXPIRATION_MAX_LENGTH && expirationDate.year.length === EXPIRATION_MAX_LENGTH && isValidExpirationDate(expirationDate);
 };
 
