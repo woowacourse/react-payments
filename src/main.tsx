@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
-import PaymentInputPage from "./pages/add-card/paymentInput/PaymentInputPage.tsx";
+import PaymentInputPage from "./pages/add-card/payment-input/PaymentInputPage.tsx";
 import { PAGE_URL } from "./constants/pageUrl.ts";
 import AddCardSuccessPage from "./pages/add-card/success/AddCardSuccessPage.tsx";
 import NotFoundPage from "./pages/not-found/NotFoundPage.tsx";

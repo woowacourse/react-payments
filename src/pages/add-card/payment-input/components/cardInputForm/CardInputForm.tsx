@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CardCVCInput from "./cardInput/CardCVCInput";
 import CardExpirationDateInput from "./cardInput/CardExpirationDateInput";
 import CardNumberInput from "./cardInput/CardNumberInput";
@@ -22,6 +22,16 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
     cardCVCInput: false,
     cardPasswordInput: false,
   });
+  const [isVisibleSubmitButton, setIsVisibleSubmitButton] = useState(false);
+  console.log("condition 모두 체크 -> ", validState);
+
+  useEffect(() => {
+    const isAllValid = Object.values(validState).every(
+      (condition) => condition
+    );
+    setIsVisibleSubmitButton(isAllValid);
+    console.log("isVisibleSubmitButton", isVisibleSubmitButton);
+  }, [validState]);
 
   return (
     <form className={styles.cardInputForm}>
@@ -49,7 +59,7 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
           setCardInfo={setCardInfo}
         />
       </div>
-      {Object.values(validState).every((valid) => valid === true) && (
+      {isVisibleSubmitButton && (
         <SubmitButton backgroundColor={CARD_BACKGROUND_COLOR[brandName]}>
           확인
         </SubmitButton>

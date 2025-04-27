@@ -1,11 +1,12 @@
 .section {
   display: flex;
   width: 100%;
+
+  height: 100vh;
   justify-content: center;
 }
 .container {
   width: 390px;
-  height: 740px;
   display: flex;
   flex-direction: column;
   align-items: center;

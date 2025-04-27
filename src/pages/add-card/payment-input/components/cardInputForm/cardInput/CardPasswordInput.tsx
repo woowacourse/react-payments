@@ -20,7 +20,7 @@ function CardPasswordInput({ setValidState }) {
           cardPasswordInput: true,
         };
       });
-    } else if (errorMessage !== "") {
+    } else if (errorMessage !== "" || password.length < 2) {
       setValidState((prev) => {
         return {
           ...prev,

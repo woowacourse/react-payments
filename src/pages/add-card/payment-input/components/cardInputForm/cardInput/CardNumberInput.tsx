@@ -43,18 +43,31 @@ function CardNumberInput({
       return { ...prev, cardNumbers: updatedNumbers };
     });
 
-    if (value.length === 4 && index < 3) {
+    if (
+      value.length === 4 &&
+      index < 3 &&
+      updatedNumbers.some((number) => number.length !== 4)
+    ) {
       inputRefs.current[index + 1].focus();
     } else if (
-      value.length === 4 &&
-      index === 3 &&
-      cardNumberInfo.feedbackMessages.some((message) => message === "")
+      updatedNumbers.every((number) => number.length === 4) &&
+      updatedMessages.every((message) => message === "")
     ) {
       setValidState((prev) => {
         console.log("prev -> ", prev);
         return {
           ...prev,
           cardNumberInput: true,
+        };
+      });
+    } else if (
+      value.length < 4 ||
+      updatedMessages.some((message) => message !== "")
+    ) {
+      setValidState((prev) => {
+        return {
+          ...prev,
+          cardNumberInput: false,
         };
       });
     }
