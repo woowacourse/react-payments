@@ -1,33 +1,12 @@
 import Input from "../../shared/input/Input";
 import { CVC_NUMBER_LENGTH } from "./CardCVCNumberInputs.constant";
+import { CardCVCNumberSectionProps } from "./types/CardCVCNumber.types";
 import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
 } from "../css/inputs.css";
 import useAutoFocus from "../hooks/useAutoFocus";
-
-export type CardCVCNumberSectionProps = {
-  CVCNumber: {
-    values: { CVCNumber: string };
-    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
-    isFullFilled: () => boolean;
-  };
-  CVCError: {
-    error: Record<"CVCNumber", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "CVCNumber";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 function CardCVCNumberInputs({
   CVCNumber,

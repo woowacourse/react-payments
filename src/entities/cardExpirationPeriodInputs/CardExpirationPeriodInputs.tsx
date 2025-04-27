@@ -1,52 +1,16 @@
 import Input from "../../shared/input/Input";
-import { ExpirationPeriod } from "../../types/index.types.ts";
 import { NO_ERROR } from "../../shared/constants/constant";
 import {
   EXPIRATION_PERIOD,
   EXPIRATION_PERIOD_LENGTH,
 } from "./CardExpirationPeriodInputs.constant.ts";
+import { ExpirationPeriodProps } from "./types/CardExpirationPeriod.types.ts";
 import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
 } from "../css/inputs.css";
 import useAutoFocus from "../hooks/useAutoFocus.ts";
-
-type ExpirationPeriodProps = {
-  expirationPeriod: {
-    values: Record<ExpirationPeriod, string>;
-    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
-    isFullFilled: () => boolean;
-  };
-  monthError: {
-    error: Record<"month", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "month";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-  yearError: {
-    error: Record<"year", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "year";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 function CardExpirationPeriodInputs({
   expirationPeriod,

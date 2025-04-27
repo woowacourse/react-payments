@@ -1,43 +1,7 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardExpirationPeriodInputs from "../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs";
+import { ExpirationPeriodProps } from "./types/CardExpirationPeriod.types";
 import { StyledContainer } from "./CardExpirationPeriodSection.css";
-import { ExpirationPeriod } from "../../types/index.types";
-
-export type ExpirationPeriodProps = {
-  expirationPeriod: {
-    values: Record<ExpirationPeriod, string>;
-    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
-    isFullFilled: () => boolean;
-  };
-  monthError: {
-    error: Record<"month", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "month";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-  yearError: {
-    error: Record<"year", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "year";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 function CardExpirationPeriodSection({
   expirationPeriod,

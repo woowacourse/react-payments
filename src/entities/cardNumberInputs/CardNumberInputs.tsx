@@ -1,41 +1,16 @@
 import Input from "../../shared/input/Input";
-import { CardNumberPosition } from "../../types/index.types";
 import { NO_ERROR } from "../../shared/constants/constant";
 import {
   CARD_NUMBER_LENGTH,
   CARD_NUMBER_POSITION,
 } from "./CardNumberInputs.constant";
+import { CardNumberProps } from "./types/CardNumberInputs.types";
 import {
   StyledContainer,
   StyledInputWrap,
   StyledErrorMessage,
 } from "../css/inputs.css";
 import useAutoFocus from "../hooks/useAutoFocus";
-
-type CardNumberProps = {
-  cardNumber: {
-    values: Record<CardNumberPosition, string>;
-    changeValues: (
-      cardNumberPosition: CardNumberPosition,
-      cardNumber: string
-    ) => void;
-    isFullFilled: () => boolean;
-  };
-  cardNumberError: {
-    error: Record<CardNumberPosition, string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: CardNumberPosition;
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 const cardInputConfig = [
   CARD_NUMBER_POSITION.FIRST,

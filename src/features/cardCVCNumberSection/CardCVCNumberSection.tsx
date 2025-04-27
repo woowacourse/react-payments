@@ -1,28 +1,7 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardCVCNumberInputs from "../../entities/cardCVCNumberInputs/CardCVCNumberInputs";
+import { CardCVCNumberSectionProps } from "./types/CardCVCNumber.types";
 import { StyledContainer } from "./CardCVCNumberSection.css";
-
-export type CardCVCNumberSectionProps = {
-  CVCNumber: {
-    values: { CVCNumber: string };
-    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
-    isFullFilled: () => boolean;
-  };
-  CVCError: {
-    error: Record<"CVCNumber", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "CVCNumber";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 function CardCVCNumberSection({
   CVCNumber,

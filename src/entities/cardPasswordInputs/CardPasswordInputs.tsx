@@ -3,30 +3,9 @@ import {
   StyledInputWrap,
   StyledErrorMessage,
 } from "../css/inputs.css";
+import { CardPasswordInputsProps } from "./types/CardPasswordInputs.types";
 import Input from "../../shared/input/Input";
 import useAutoFocus from "../hooks/useAutoFocus";
-
-type CardPasswordInputsProps = {
-  password: {
-    values: { password: string };
-    changeValues: (type: "password", password: string) => void;
-    isFullFilled: () => boolean;
-  };
-  passwordError: {
-    error: Record<"password", string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: "password";
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 export default function CardPasswordInputs({
   password,

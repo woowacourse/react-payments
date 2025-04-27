@@ -1,8 +1,4 @@
-import {
-  CardNumberPosition,
-  CardTypeList,
-  ExpirationPeriod,
-} from "../../types/index.types";
+import { CardNumberPosition } from "../../types/index.types";
 import CardNumberSection from "../cardNumberSection/CardNumberSection";
 import CardExpirationPeriodSection from "../cardExpirationPeriodSection/CardExpirationPeriodSection";
 import CardCVCNumberSection from "../cardCVCNumberSection/CardCVCNumberSection";
@@ -19,38 +15,8 @@ import CardPasswordSection from "../cardPasswordSection/CardPasswordSection";
 import CardSubmitButton from "../cardSubmitButton/CardSubmitButton";
 import useStep from "./hooks/useStep";
 import { getPasswordValidationFns } from "../../entities/cardPasswordInputs/CardPasswordInputs.domain";
+import { CardInfoFormProps } from "./types/CardInfoForm.types";
 import { StyledForm } from "./CardInfoForm.css";
-
-type CardInfoFormProps = {
-  cardNumber: {
-    values: Record<CardNumberPosition, string>;
-    changeValues: (
-      cardNumberPosition: CardNumberPosition,
-      cardNumber: string
-    ) => void;
-    isFullFilled: () => boolean;
-  };
-  expirationPeriod: {
-    values: Record<ExpirationPeriod, string>;
-    changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
-    isFullFilled: () => boolean;
-  };
-  CVCNumber: {
-    values: { CVCNumber: string };
-    changeValues: (type: "CVCNumber", CVCNumber: string) => void;
-    isFullFilled: () => boolean;
-  };
-  password: {
-    values: { password: string };
-    changeValues: (type: "password", password: string) => void;
-    isFullFilled: () => boolean;
-  };
-  cardType: {
-    values: { cardType: keyof CardTypeList | "" };
-    changeValues: (type: "cardType", cardType: string) => void;
-    isFullFilled: () => boolean;
-  };
-};
 
 export default function CardInfoForm({
   cardNumber,
@@ -69,14 +35,14 @@ export default function CardInfoForm({
     getCardNumberValidationFns
   );
 
-  const month = useError<Record<"month", string>>(
+  const monthError = useError<Record<"month", string>>(
     {
       month: NO_ERROR,
     },
     getMonthValidationFns
   );
 
-  const year = useError<Record<"year", string>>(
+  const yearError = useError<Record<"year", string>>(
     {
       year: NO_ERROR,
     },
@@ -104,8 +70,8 @@ export default function CardInfoForm({
     password,
     cardType,
     cardNumberError,
-    year,
-    month,
+    yearError,
+    monthError,
     CVCError,
     passwordError,
   });
@@ -124,8 +90,8 @@ export default function CardInfoForm({
       {step >= 2 && (
         <CardExpirationPeriodSection
           expirationPeriod={expirationPeriod}
-          monthError={month}
-          yearError={year}
+          monthError={monthError}
+          yearError={yearError}
         />
       )}
       {step >= 1 && <CardTypeSection cardType={cardType} />}

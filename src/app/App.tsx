@@ -2,20 +2,12 @@ import "./App.css";
 import { StyledApp, StyledFrame } from "./App.style.ts";
 import CardPreview from "../features/cardPreview/CardPreview";
 import CardInfoForm from "../features/cardInfoForm/CardInfoForm.tsx";
-import {
-  ExpirationPeriod,
-  CardNumberPosition,
-  CardTypeList,
-} from "../types/index.types.ts";
+import { CardTypeList } from "../types/index.types.ts";
 import { INITIALIZE_VALUE } from "../shared/constants/constant";
 import useCardInfo from "./hooks/useCardInfo.ts";
 
-type CardNumberState = Record<CardNumberPosition, string>;
-
-type ExpirationPeriodState = Record<ExpirationPeriod, string>;
-
 function App() {
-  const cardNumber = useCardInfo<CardNumberState>(
+  const cardNumber = useCardInfo(
     {
       first: INITIALIZE_VALUE,
       second: INITIALIZE_VALUE,
@@ -25,7 +17,7 @@ function App() {
     4
   );
 
-  const expirationPeriod = useCardInfo<ExpirationPeriodState>(
+  const expirationPeriod = useCardInfo(
     {
       month: INITIALIZE_VALUE,
       year: INITIALIZE_VALUE,

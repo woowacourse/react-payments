@@ -12,3 +12,20 @@ export type CardTypeList = {
   하나카드: "하나카드";
   국민카드: "국민카드";
 };
+
+export type State<KeyType extends string, ValueType> = {
+  values: Record<KeyType, ValueType>;
+  changeValues: (key: KeyType, value: ValueType) => void;
+  isFullFilled: () => boolean;
+};
+
+export type Error<KeyType extends string> = {
+  error: Record<KeyType, string>;
+  checkValidation: (args: {
+    length: number;
+    value: string;
+    type: KeyType;
+  }) => void;
+  getErrorMessage: () => string | undefined;
+  isError: () => boolean;
+};

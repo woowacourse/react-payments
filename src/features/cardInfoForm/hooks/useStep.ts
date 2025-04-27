@@ -37,11 +37,11 @@ type CardInfoFormProps = {
     error: Record<CardNumberPosition, string>;
     isError: () => boolean;
   };
-  year: {
+  yearError: {
     error: Record<"year", string>;
     isError: () => boolean;
   };
-  month: {
+  monthError: {
     error: Record<"month", string>;
     isError: () => boolean;
   };
@@ -62,15 +62,15 @@ export default function useStep({
   password,
   cardType,
   cardNumberError,
-  year,
-  month,
+  yearError,
+  monthError,
   CVCError,
   passwordError,
 }: CardInfoFormProps) {
   const calculatedStep = useMemo(() => {
     if (!isCardNumberOk(cardNumber, cardNumberError)) return 0;
     if (!isCardTypeOk(cardType)) return 1;
-    if (!isExpirationOk(expirationPeriod, year, month)) return 2;
+    if (!isExpirationOk(expirationPeriod, yearError, monthError)) return 2;
     if (!isCVCNumberOk(CVCNumber, CVCError)) return 3;
     if (!isPasswordOk(password, passwordError)) return 4;
     return 5;
@@ -79,8 +79,8 @@ export default function useStep({
     cardNumberError.error,
     cardType,
     expirationPeriod,
-    month.error,
-    year.error,
+    monthError.error,
+    yearError.error,
     CVCNumber,
     CVCError.error,
     password,

@@ -1,32 +1,7 @@
 import SectionTitle from "../../entities/sectionTitle/SectionTitle";
 import CardNumberInputs from "../../entities/cardNumberInputs/CardNumberInputs";
+import { CardNumberProps } from "./types/CardNumberSection.types";
 import { StyledContainer } from "./cardNumberSection.css";
-import { CardNumberPosition } from "../../types/index.types";
-
-type CardNumberProps = {
-  cardNumber: {
-    values: Record<CardNumberPosition, string>;
-    changeValues: (
-      cardNumberPosition: CardNumberPosition,
-      cardNumber: string
-    ) => void;
-    isFullFilled: () => boolean;
-  };
-  cardNumberError: {
-    error: Record<CardNumberPosition, string>;
-    checkValidation: ({
-      length,
-      value,
-      type,
-    }: {
-      length: number;
-      value: string;
-      type: CardNumberPosition;
-    }) => void;
-    getErrorMessage: () => string | undefined;
-    isError: () => boolean;
-  };
-};
 
 function CardNumberSection({ cardNumber, cardNumberError }: CardNumberProps) {
   return (
