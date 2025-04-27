@@ -1,11 +1,13 @@
 import {ComponentProps} from 'react';
 import styled from 'styled-components';
 
-type Props = ComponentProps<'button'>;
+type Props = {
+  bgColor?: string;
+} & ComponentProps<'button'>;
 
-const Button = ({children, onClick, style}: Props) => {
+const Button = ({children, bgColor = '#333', onClick, style}: Props) => {
   return (
-    <Container onClick={onClick} style={style}>
+    <Container onClick={onClick} bgColor={bgColor} style={style}>
       {children}
     </Container>
   );
@@ -13,8 +15,9 @@ const Button = ({children, onClick, style}: Props) => {
 
 export default Button;
 
-const Container = styled.button`
-  background-color: #333;
+const Container = styled.button<{bgColor: string}>`
+  background-color: ${(props) => props.bgColor};
+  border: none;
   width: 100%;
   color: white;
   font-weight: bold;

@@ -35,13 +35,7 @@ const INIT_FORM_DATA = {
 };
 
 const Main = () => {
-  const {formData, onChange} = useInput({
-    cardNumber: INIT_CARD_NUMBER,
-    expirationDate: INIT_EXPIRATION_DATE,
-    cvcNumber: '',
-    cardCompany: '',
-    password: '',
-  });
+  const {formData, onChange} = useInput(INIT_FORM_DATA);
   const {isErrors, errorMessages, onValidate, onFocusout} = useErrors(
     {
       cardNumber: false,

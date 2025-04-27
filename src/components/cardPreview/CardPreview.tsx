@@ -5,7 +5,7 @@ import {CARD_COMPANY} from '../constants/card';
 type Props = {
   cardNumbers: CardNumber;
   expirationDate: ExpirationDate;
-  cardCompany: CardCompany | '';
+  cardCompany: CardCompany | string;
 };
 
 const BADGE_BRAND = {
@@ -55,11 +55,7 @@ const CardPreview = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   );
 
   return (
-    <Container
-      background={
-        cardCompany !== '' ? CARD_COMPANY[cardCompany]?.color : cardCompany
-      }
-    >
+    <Container background={CARD_COMPANY[cardCompany as CardCompany]?.color}>
       <Wrap>
         <Chip />
         <BrandBadge
