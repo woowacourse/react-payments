@@ -3,8 +3,11 @@ import { useState } from "react";
 const useCardCompany = () => {
 	const [cardCompany, setCardCompany] = useState<string>("");
 	const isComplete = cardCompany !== "";
+	const onChange = (value: string): void => {
+		setCardCompany(value);
+	};
 
-	return { cardCompany, setCardCompany, isComplete };
+	return { cardCompany, setCardCompany, isComplete, onChange };
 };
 
 export default useCardCompany;
