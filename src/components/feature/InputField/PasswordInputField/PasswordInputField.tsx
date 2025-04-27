@@ -8,6 +8,7 @@ import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
+import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 
 const MAX_PASSWORD_LENGTH = 2;
 
@@ -26,8 +27,10 @@ function PasswordInputField({
     maxLength: MAX_PASSWORD_LENGTH,
   });
 
-  onComplete?.({
-    isComplete: isComplete && !Boolean(errorMessage),
+  useFieldCompletion({
+    onComplete,
+    isComplete,
+    errorMessage,
     fieldName: 'password',
   });
 

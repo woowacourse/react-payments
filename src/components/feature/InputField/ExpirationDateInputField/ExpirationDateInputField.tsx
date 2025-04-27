@@ -8,6 +8,7 @@ import {
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
+import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 
 const MAX_DATE_LENGTH = 2;
 const MAX_MONTH_VALUE = 12;
@@ -22,6 +23,12 @@ function ExpirationDateInputField({
       (cardNumberValue) => cardNumberValue.length !== MAX_DATE_LENGTH
     ).length
   );
+
+  useFieldCompletion({
+    onComplete,
+    isComplete,
+    fieldName: 'expirationDate',
+  });
 
   onComplete?.({
     isComplete,

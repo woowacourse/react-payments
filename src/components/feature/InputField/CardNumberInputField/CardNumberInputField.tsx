@@ -3,6 +3,7 @@ import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
 } from '../../../../config/inputField';
+import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
@@ -32,8 +33,10 @@ function CardNumberInputField({
     maxLength: MAX_CARD_LENGTH,
   });
 
-  onComplete?.({
-    isComplete: isComplete && !Boolean(errorMessage),
+  useFieldCompletion({
+    onComplete,
+    isComplete,
+    errorMessage,
     fieldName: 'cardNumber',
   });
 

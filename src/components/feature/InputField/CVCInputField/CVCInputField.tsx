@@ -8,6 +8,7 @@ import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../Inputfield';
+import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 
 const MAX_CVC_LENGTH = 3;
 
@@ -26,8 +27,10 @@ function CVCInputField({
     inputErrorType: 'shortCVCSegment',
   });
 
-  onComplete?.({
-    isComplete: isComplete && !Boolean(errorMessage),
+  useFieldCompletion({
+    onComplete,
+    isComplete,
+    errorMessage,
     fieldName: 'CVC',
   });
 
