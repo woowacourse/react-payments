@@ -21,5 +21,6 @@ export const ERROR_MESSAGES = {
   },
   CARD_CVC: {
     NOT_NUMERIC: 'CVC는 숫자만 입력 가능합니다.',
+    NOT_THREE_DIGIT: 'CVC는 3자리어야 합니다.',
   },
 };
