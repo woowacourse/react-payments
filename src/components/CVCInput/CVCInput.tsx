@@ -51,7 +51,7 @@ const CVCInput = ({ values, onChange, onValidChange }: InputProps) => {
     <StyledCVCInput>
       <StyledLabel>CVC</StyledLabel>
       <StyledInputWrapper>
-        {values.map((value: string, idx: number) => (
+        {values.map((value, idx) => (
           <Input
             key={idx}
             value={value}

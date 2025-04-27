@@ -62,7 +62,7 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
     <StyledExpirationDateInput>
       <StyledLabel>유효기간</StyledLabel>
       <StyledInputWrapper>
-        {values.map((value: string, idx: number) => (
+        {values.map((value, idx) => (
           <Input
             key={idx}
             value={value}

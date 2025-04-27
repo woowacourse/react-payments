@@ -54,7 +54,7 @@ const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
     <StyledPasswordInput>
       <StyledLabel>비밀번호 앞 2자리</StyledLabel>
       <StyledInputWrapper>
-        {values.map((value: string, idx: number) => (
+        {values.map((value, idx) => (
           <Input
             key={idx}
             value={value}

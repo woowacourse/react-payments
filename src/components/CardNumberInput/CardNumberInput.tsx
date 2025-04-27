@@ -61,7 +61,7 @@ const CardNumberInput = ({ values, onChange, onValidChange }: InputProps) => {
     <StyledCardNumberInput>
       <StyledLabel>카드 번호</StyledLabel>
       <StyledInputWrapper>
-        {values.map((value: string, idx: number) => (
+        {values.map((value, idx) => (
           <Input
             key={idx}
             value={value}
