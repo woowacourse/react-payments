@@ -21,9 +21,9 @@ export const Default: Story = {
             pathname: '/payments/complete',
             state: {
               cardNumber: '1234',
-              cardIssuer: 'shinhanCard', // 여기 Mock 데이터로 전달
+              cardIssuer: 'shinhanCard',
             },
-          } as any, // 타입 에러 방지를 위해 as any
+          } as any,
         ]}
       >
         <Routes>
