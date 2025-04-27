@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from '@emotion/styled';
 import CardInputSection from '../CardInputSection/CardInputSection';
 import CardNumberField from '../CardNumberField/CardNumberField';
 import CardCVCField from '../CardCVCField/CardCVCField';
@@ -106,8 +107,40 @@ function CardForm({
     validatePassword(value);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isValid = checkIsValid();
+
+    if (isValid) {
+      // 페이지 이동
+    }
+  };
+
+  const checkIsValid = () => {
+    const errorMessages = [
+      state.cardCVCErrorMessage,
+      state.cardNumberErrorMessage,
+      state.cardPasswordErrorMessage,
+      state.cardValidityMessage,
+    ];
+    const isError = errorMessages.some((e) => e !== '');
+
+    const values = [
+      ...cardNumber,
+      cardCompany,
+      cardValidityPeriod.month,
+      cardValidityPeriod.year,
+      cardCVC,
+      cardPassword,
+    ];
+
+    const isNoneValue = values.some((e) => !e);
+
+    return !isError && !isNoneValue;
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {show.password && (
         <CardInputSection
           title="비밀번호를 입력해 주세요"
@@ -168,8 +201,24 @@ function CardForm({
           onChange={onChangeCardNumber}
         />
       </CardInputSection>
+      <SubmitButton disabled={!checkIsValid()} isError={!checkIsValid()}>
+        확인
+      </SubmitButton>
     </form>
   );
 }
 
 export default CardForm;
+
+const SubmitButton = styled.button<{ isError: boolean }>`
+  width: 100%;
+  height: 52px;
+  left: 0px;
+  bottom: 0px;
+  background: #333333;
+  color: white;
+  position: absolute;
+  font-weight: 700;
+  cursor: ${(props) => (props.isError ? 'auto' : 'pointer')};
+  opacity: ${(props) => (props.isError ? 0.4 : 1)};
+`;

@@ -65,7 +65,7 @@ export default App;
 
 const AppLayout = styled.main`
   width: 376px;
-
+  height: 100%;
   display: flex;
   flex-direction: column;
 
