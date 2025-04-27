@@ -78,6 +78,8 @@ export type InputProps = {
   onChange: (value: string) => void;
   /** 입력값이 마스킹 처리가 되어야하는 경우 */
   masking?: boolean;
+  /** 자동 포커스 처리 */
+  autoFocus: boolean;
 };
 
 export type errorMessageProps = {

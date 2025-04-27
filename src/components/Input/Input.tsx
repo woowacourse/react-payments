@@ -1,19 +1,24 @@
 import { css } from "@emotion/react";
 import { InputProps } from "../../types/componentPropsType";
+import { forwardRef } from "react";
 
 /** input 컴포넌트 */
-const Input = ({ placeholder, maxLength, value, error, onChange, masking }: InputProps) => {
-  return (
-    <input
-      type={masking ? "password" : "text"}
-      css={inputStyle(error)}
-      onChange={(e) => onChange(e.target.value)}
-      value={value}
-      placeholder={placeholder}
-      maxLength={maxLength}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ placeholder, maxLength, value, error, onChange, masking, autoFocus }, ref) => {
+    return (
+      <input
+        ref={ref}
+        type={masking ? "password" : "text"}
+        css={inputStyle(error)}
+        onChange={(e) => onChange(e.target.value)}
+        value={value}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        autoFocus={autoFocus}
+      />
+    );
+  },
+);
 
 const inputStyle = (error: boolean) => css`
   width: 100%;
