@@ -7,6 +7,7 @@ const CardComplete = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const cardNumber = location.state?.cardNumber || '0000';
+  const cardCompany = location.state?.cardCompany || 'BC카드';
 
   const handleConfirm = () => {
     navigate(ROUTES.CARD_REGISTRATION);
@@ -20,7 +21,7 @@ const CardComplete = () => {
         </div>
         <div className="complete-message-content">
           <p>{`${cardNumber}로 시작하는`}</p>
-          <p>{`BC카드가 등록되었어요.`}</p>
+          <p>{`${cardCompany}가 등록되었어요.`}</p>
         </div>
         <button className="confirm-button" onClick={handleConfirm}>
           확인

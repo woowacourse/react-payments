@@ -15,6 +15,7 @@ const CardRegistration = () => {
     navigate(ROUTES.CARD_COMPLETE, {
       state: {
         cardNumber: cardInfo.cardNumber[0],
+        cardCompany: cardInfo.cardCompany,
       },
     });
   };
