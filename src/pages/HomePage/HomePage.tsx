@@ -11,7 +11,21 @@ import '../../App.css';
 import { useCardFormContext } from '../../context/CardFormContext';
 
 const HomePage = () => {
-  const { cardNumbers, brand, resetForm } = useCardFormContext();
+  const {
+    cardNumbers,
+    brand,
+    resetForm,
+    cardNumberComplete,
+    brandComplete,
+    expireComplete,
+    CVCComplete,
+    passwordComplete,
+    cardBrandDisplay,
+    cardExpiryDisplay,
+    cardCVCDisplay,
+    cardPasswordDisplay,
+  } = useCardFormContext();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,16 +42,23 @@ const HomePage = () => {
     resetForm();
   }, [location.state]);
 
+  const isFormComplete =
+    cardNumberComplete &&
+    brandComplete &&
+    expireComplete &&
+    CVCComplete &&
+    passwordComplete;
+
   return (
     <div className="app">
       <CardPreview />
       <form onSubmit={handleSubmit}>
-        <CardPasswordInput />
-        <CVCInput />
-        <CardExpiryInput />
-        <CardBrandInput />
+        {cardPasswordDisplay ? <CardPasswordInput /> : ''}
+        {cardCVCDisplay ? <CVCInput /> : ''}
+        {cardExpiryDisplay ? <CardExpiryInput /> : ''}
+        {cardBrandDisplay ? <CardBrandInput /> : ''}
         <CardNumbersInput />
-        <Button text="확인" />
+        {isFormComplete ? <Button text="확인" /> : ''}
       </form>
     </div>
   );

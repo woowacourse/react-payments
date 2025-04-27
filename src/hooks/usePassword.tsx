@@ -9,17 +9,21 @@ export const usePassword = (): {
   updatePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isError: boolean;
   errorMessage: string;
+  isComplete: boolean;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const [password, setPassword] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isComplete, setIsComplete] = useState<boolean>(false);
 
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPassword(value);
     validate(value);
-    // const isValid = value.length === 2;
-    // updateInputState('password', { isComplete: isValid });
+
+    const isValid = value.length === 2;
+    setIsComplete(isValid);
   };
 
   const validate = (value: string) => {
@@ -39,5 +43,13 @@ export const usePassword = (): {
     }
   };
 
-  return { password, setPassword, updatePassword, isError, errorMessage };
+  return {
+    password,
+    setPassword,
+    updatePassword,
+    isError,
+    errorMessage,
+    isComplete,
+    setIsComplete,
+  };
 };

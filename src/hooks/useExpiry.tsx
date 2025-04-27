@@ -12,12 +12,18 @@ export const useExpiry = (): {
   expiryRef: React.RefObject<HTMLInputElement[]>;
   isErrors: boolean[];
   errorMessage: string;
+  isComplete: boolean;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  isDisplay: boolean;
+  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [isErrors, setIsErrors] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
   const expiryRef = useRef<HTMLInputElement[]>([]);
+  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState<boolean>(false);
 
   const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,19 +33,18 @@ export const useExpiry = (): {
       setYear(value);
     }
     validate(name, value);
-    // const isMonthValid =
-    //   (name === 'month' ? value : month).length ===
-    //   CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
-    // const isYearValid =
-    //   (name === 'year' ? value : year).length ===
-    //   CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
+    const isMonthValid =
+      (name === 'month' ? value : month).length ===
+      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
+    const isYearValid =
+      (name === 'year' ? value : year).length ===
+      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
 
-    // const isExpiryComplete = isMonthValid && isYearValid;
+    const isExpiryComplete = isMonthValid && isYearValid;
 
-    // updateInputState('expiry', { isComplete: isExpiryComplete });
-    // if (isExpiryComplete) {
-    //   updateInputState('CVC', { isVisible: true });
-    // }
+    setIsComplete(isExpiryComplete);
+    if (isExpiryComplete) setIsDisplay(true);
+
     if (e.target.value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH) {
       expiryRef.current[1]?.focus();
     }
@@ -87,5 +92,9 @@ export const useExpiry = (): {
     expiryRef,
     isErrors,
     errorMessage,
+    isComplete,
+    setIsComplete,
+    isDisplay,
+    setIsDisplay,
   };
 };

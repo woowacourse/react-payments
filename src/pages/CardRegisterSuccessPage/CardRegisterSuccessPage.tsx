@@ -2,10 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import styles from './CardRegisterSuccessPage.module.css';
 import { CARD_BRANDS } from '../../constants/cardBrand';
-// import { useConfirmButton } from '../../context/ConfirmButtonContext';
 
 export const CardRegisterSuccessPage = () => {
-  // const { resetConfirm } = useConfirmButton();
   const navigate = useNavigate();
   const location = useLocation();
   const { cardNumbers, brand } = location.state as {
@@ -15,7 +13,6 @@ export const CardRegisterSuccessPage = () => {
   const firstCardNumbers = cardNumbers[0];
 
   const handleClick = () => {
-    // resetConfirm();
     navigate('/react-payments/');
   };
 

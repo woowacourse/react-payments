@@ -17,11 +17,17 @@ export const useCardNumbers = (): {
   cardNumbersRef: React.RefObject<HTMLInputElement[]>;
   isErrors: boolean[];
   errorMessage: string;
+  isComplete: boolean;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  isDisplay: boolean;
+  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [isErrors, setIsErrors] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState('');
   const cardNumbersRef = useRef<HTMLInputElement[]>([]);
+  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState<boolean>(false);
 
   const updateCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -33,11 +39,11 @@ export const useCardNumbers = (): {
 
     validate(newCardNumbers, index);
 
-    // const isValid = newCardNumbers.every(
-    //   (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
-    // );
-    // updateInputState('cardNumbers', { isComplete: isValid });
-    // if (isValid) updateInputState('brand', { isVisible: true });
+    const isValid = newCardNumbers.every(
+      (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+    );
+    setIsComplete(isValid);
+    if (isValid) setIsDisplay(true);
 
     if (e.target.value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH) {
       cardNumbersRef.current[index + 1]?.focus();
@@ -78,5 +84,9 @@ export const useCardNumbers = (): {
     cardNumbersRef,
     isErrors,
     errorMessage,
+    isComplete,
+    setIsComplete,
+    isDisplay,
+    setIsDisplay,
   };
 };

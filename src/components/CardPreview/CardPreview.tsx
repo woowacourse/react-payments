@@ -8,7 +8,6 @@ const HIDDEN_CARD_NUMBER_INDEX = [2, 3];
 
 const CardPreview = () => {
   const { cardNumbers, month, year, brand } = useCardFormContext();
-  console.log('CardPreview', cardNumbers, month, year, brand);
 
   const isVisaCard = () => {
     return VALID_VISA_CARD_START_NUMBER === Number(cardNumbers[0][0]);

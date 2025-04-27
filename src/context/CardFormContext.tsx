@@ -18,6 +18,7 @@ type CardFormContextType = {
   setBrand: React.Dispatch<React.SetStateAction<string>>;
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
+
   resetForm: () => void;
 
   updateCardNumber: (
@@ -41,6 +42,28 @@ type CardFormContextType = {
   expireErrorMessage?: string;
   CVCErrorMessage?: string;
   passwordErrorMessage?: string;
+
+  cardNumberComplete: boolean;
+  expireComplete: boolean;
+  brandComplete: boolean;
+  CVCComplete: boolean;
+  passwordComplete: boolean;
+
+  setCardNumbersComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setExpireComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setBrandComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setCVCComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setPasswordComplete: React.Dispatch<React.SetStateAction<boolean>>;
+
+  cardBrandDisplay: boolean;
+  cardExpiryDisplay: boolean;
+  cardCVCDisplay: boolean;
+  cardPasswordDisplay: boolean;
+
+  setCardBrandDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+  setCardExpirySetDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+  setCardCVCDisplay: React.Dispatch<React.SetStateAction<boolean>>;
+  setCardPasswordDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CardFormContext = createContext<CardFormContextType | null>(null);
@@ -57,6 +80,10 @@ export const CardFormProvider = ({
     cardNumbersRef,
     isErrors: cardNumbersErrors,
     errorMessage: cardNumbersErrorMessage,
+    isComplete: cardNumberComplete,
+    setIsComplete: setCardNumbersComplete,
+    isDisplay: cardBrandDisplay,
+    setIsDisplay: setCardBrandDisplay,
   } = useCardNumbers();
   const {
     month,
@@ -67,6 +94,10 @@ export const CardFormProvider = ({
     expiryRef,
     isErrors: expireErrors,
     errorMessage: expireErrorMessage,
+    isComplete: expireComplete,
+    setIsComplete: setExpireComplete,
+    isDisplay: cardCVCDisplay,
+    setIsDisplay: setCardCVCDisplay,
   } = useExpiry();
   const {
     CVC,
@@ -74,14 +105,28 @@ export const CardFormProvider = ({
     updateCVC,
     isErrors: CVCErrors,
     errorMessage: CVCErrorMessage,
+    isComplete: CVCComplete,
+    setIsComplete: setCVCComplete,
+    isDisplay: cardPasswordDisplay,
+    setIsDisplay: setCardPasswordDisplay,
   } = useCVC();
-  const { brand, setBrand, updateBrand } = useBrand();
+  const {
+    brand,
+    setBrand,
+    updateBrand,
+    isComplete: brandComplete,
+    setIsComplete: setBrandComplete,
+    isDisplay: cardExpiryDisplay,
+    setIsDisplay: setCardExpirySetDisplay,
+  } = useBrand();
   const {
     password,
     setPassword,
     updatePassword,
     isError: passwordError,
     errorMessage: passwordErrorMessage,
+    isComplete: passwordComplete,
+    setIsComplete: setPasswordComplete,
   } = usePassword();
 
   const resetForm = () => {
@@ -91,6 +136,17 @@ export const CardFormProvider = ({
     setCVC('');
     setBrand('');
     setPassword('');
+
+    setCardBrandDisplay(false);
+    setCardExpirySetDisplay(false);
+    setCardCVCDisplay(false);
+    setCardPasswordDisplay(false);
+
+    setCardNumbersComplete(false);
+    setExpireComplete(false);
+    setBrandComplete(false);
+    setCVCComplete(false);
+    setPasswordComplete(false);
   };
 
   const value = {
@@ -106,6 +162,7 @@ export const CardFormProvider = ({
     setBrand,
     password,
     setPassword,
+
     resetForm,
 
     updateCardNumber,
@@ -126,6 +183,28 @@ export const CardFormProvider = ({
     expireErrorMessage,
     CVCErrorMessage,
     passwordErrorMessage,
+
+    cardNumberComplete,
+    expireComplete,
+    brandComplete,
+    CVCComplete,
+    passwordComplete,
+
+    cardBrandDisplay,
+    cardExpiryDisplay,
+    cardCVCDisplay,
+    cardPasswordDisplay,
+
+    setCardNumbersComplete,
+    setExpireComplete,
+    setBrandComplete,
+    setCVCComplete,
+    setPasswordComplete,
+
+    setCardBrandDisplay,
+    setCardExpirySetDisplay,
+    setCardCVCDisplay,
+    setCardPasswordDisplay,
   };
 
   return (

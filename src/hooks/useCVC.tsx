@@ -8,18 +8,25 @@ export const useCVC = (): {
   updateCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isErrors: boolean;
   errorMessage: string;
+  isComplete: boolean;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  isDisplay: boolean;
+  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 } => {
   const [CVC, setCVC] = useState<string>('');
   const [isErrors, setIsErrors] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const [isDisplay, setIsDisplay] = useState<boolean>(false);
 
   const updateCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setCVC(value);
     validate(e.target.value);
-    // const isValid = value.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH;
-    // updateInputState('CVC', { isComplete: isValid });
-    // if (isValid) updateInputState('password', { isVisible: true });
+
+    const isValid = value.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH;
+    setIsComplete(isValid);
+    if (isValid) setIsDisplay(true);
   };
 
   const validate = (value: string) => {
@@ -39,5 +46,15 @@ export const useCVC = (): {
     }
   };
 
-  return { CVC, setCVC, updateCVC, isErrors, errorMessage };
+  return {
+    CVC,
+    setCVC,
+    updateCVC,
+    isErrors,
+    errorMessage,
+    isComplete,
+    setIsComplete,
+    isDisplay,
+    setIsDisplay,
+  };
 };
