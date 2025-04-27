@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { validateCardNumber } from '../../validation/validation';
 import Description from '../Description';
 import Input from '../Input';
@@ -15,17 +15,48 @@ interface CardNumberInputProps {
 }
 
 export const CardNumberInput: React.FC<CardNumberInputProps> = ({
-  handleCardNumberErrorMessages,
+  cardInput,
   setCardInput,
+  errorMessages,
   handleErrorMessages,
+  handleCardNumberErrorMessages,
 }) => {
-  // 카드 번호 입력 필드 정의
+  const [cardNumberValues, setCardNumberValues] = useState({
+    first: cardInput.first?.toString() || '',
+    second: cardInput.second?.toString() || '',
+    third: cardInput.third?.toString() || '',
+    fourth: cardInput.fourth?.toString() || '',
+  });
+
   const cardNumberFields = [
     { key: 'first', placeholder: '1234' },
     { key: 'second', placeholder: '1234' },
     { key: 'third', placeholder: '1234' },
     { key: 'fourth', placeholder: '1234' },
   ] as const;
+
+  const handleCardNumberChange = useCallback(
+    (fieldKey: keyof typeof cardNumberValues, value: string) => {
+      setCardNumberValues(prev => ({
+        ...prev,
+        [fieldKey]: value,
+      }));
+
+      const errorMessage = validateCardNumber(value);
+      if (errorMessage) {
+        handleErrorMessages(fieldKey as keyof ErrorMessagesType, errorMessage);
+        return;
+      }
+
+      handleErrorMessages(fieldKey as keyof ErrorMessagesType, '');
+
+      setCardInput(prev => ({
+        ...prev,
+        [fieldKey]: value === '' ? null : Number(value),
+      }));
+    },
+    [setCardInput, handleErrorMessages],
+  );
 
   return (
     <>
@@ -42,16 +73,15 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
             key={key}
             maxLength={4}
             placeholder={placeholder}
-            validate={validateCardNumber}
-            handleErrorMessage={message =>
-              handleErrorMessages(key as keyof ErrorMessagesType, message)
+            value={cardNumberValues[key as keyof typeof cardNumberValues]}
+            onChange={value =>
+              handleCardNumberChange(
+                key as keyof typeof cardNumberValues,
+                value,
+              )
             }
-            onChange={value => {
-              setCardInput((prev: CardInputProps) => ({
-                ...prev,
-                [key]: value === '' ? null : Number(value),
-              }));
-            }}
+            isError={!!errorMessages[key as keyof ErrorMessagesType]}
+            onComplete={() => {}}
             name={`cardNumber-${key}`}
           />
         ))}

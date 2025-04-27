@@ -4,12 +4,13 @@ import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 export interface InputProps {
   maxLength: number;
   placeholder: string;
-  validate: (value: string) => string | undefined;
-  handleErrorMessage: (input: string) => void;
+  value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   type?: string;
-  onComplete?: () => void; // 입력이 완료되었을 때 호출될 콜백
-  name?: string; // 식별을 위한 이름 추가
+  name?: string;
+  isError?: boolean;
+  onComplete?: () => void;
 }
 
 export interface InputRef {
@@ -37,17 +38,16 @@ const Input = forwardRef<InputRef, InputProps>(
     {
       maxLength,
       placeholder,
-      validate,
-      handleErrorMessage,
+      value,
       onChange,
+      onBlur,
       onComplete,
       type = 'text',
       name,
+      isError = false,
     },
     ref,
   ) => {
-    const [isError, setIsError] = useState(false);
-    const [value, setValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -57,26 +57,12 @@ const Input = forwardRef<InputRef, InputProps>(
       getValue: () => value,
     }));
 
-    const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = e.target.value;
-
-      const errorMessage = validate(inputValue);
-      if (errorMessage && errorMessage.length > 0) {
-        handleErrorMessage(errorMessage);
-        setIsError(true);
-        setValue(inputValue);
-        return;
-      }
-
-      handleErrorMessage('');
-      setIsError(false);
-      setValue(inputValue);
       onChange(inputValue);
 
-      if (inputValue.length === maxLength) {
-        if (onComplete) {
-          onComplete();
-        }
+      if (inputValue.length === maxLength && onComplete) {
+        onComplete();
       }
     };
 
@@ -85,8 +71,9 @@ const Input = forwardRef<InputRef, InputProps>(
         ref={inputRef}
         placeholder={placeholder}
         maxLength={maxLength}
-        onChange={handleCardNumber}
+        onChange={handleChange}
         value={value}
+        onBlur={onBlur}
         inputMode="numeric"
         pattern="[0-9]*"
         $isError={isError}

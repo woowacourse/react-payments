@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import Description from '../Description';
-import Input from '../Input'; // 수정된 Input 컴포넌트 사용
-import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
+import Input from '../Input';
+import InputGroup from '../InputGroup';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { CardInputProps } from '../../types/CardInputTypes';
 
@@ -10,6 +10,7 @@ interface CVCInputProps {
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   errorMessages: ErrorMessagesType;
+  cardInput: CardInputProps;
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({
@@ -17,7 +18,30 @@ export const CVCInput: React.FC<CVCInputProps> = ({
   handleErrorMessages,
   errorMessages,
   setCardInput,
+  cardInput,
 }) => {
+  const [cvcValue, setCvcValue] = useState(cardInput.CVC?.toString() || '');
+
+  const handleCVCChange = useCallback(
+    (value: string) => {
+      setCvcValue(value);
+
+      const errorMessage = validateCardCVC(value);
+      if (errorMessage) {
+        handleErrorMessages('CVC', errorMessage);
+        return;
+      }
+
+      handleErrorMessages('CVC', '');
+
+      setCardInput(prev => ({
+        ...prev,
+        CVC: value === '' ? null : Number(value),
+      }));
+    },
+    [setCardInput, handleErrorMessages, validateCardCVC],
+  );
+
   return (
     <>
       <Description headText="CVC 번호를 입력해 주세요" />
@@ -25,14 +49,9 @@ export const CVCInput: React.FC<CVCInputProps> = ({
         <Input
           maxLength={3}
           placeholder="123"
-          validate={validateCardCVC}
-          onChange={value => {
-            setCardInput((prev: CardInputProps) => ({
-              ...prev,
-              CVC: value === '' ? null : Number(value),
-            }));
-          }}
-          handleErrorMessage={message => handleErrorMessages('CVC', message)}
+          value={cvcValue}
+          onChange={handleCVCChange}
+          isError={!!errorMessages.CVC}
           name="cvcNumber"
         />
       </InputGroup>

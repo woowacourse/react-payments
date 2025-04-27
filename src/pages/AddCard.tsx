@@ -161,6 +161,8 @@ const AddCard = () => {
         isCardBrandComplete(cardInput, errorMessages),
       component: (
         <ExpiryDateInput
+          cardInput={cardInput}
+          errorMessages={errorMessages}
           handlePeriodErrorMessages={handlePeriodErrorMessages}
           validateCardExpirationDateMM={validateCardExpirationDateMM}
           validateCardExpirationDateYY={validateCardExpirationDateYY}
@@ -177,10 +179,11 @@ const AddCard = () => {
         isExpiryDateComplete(cardInput, errorMessages),
       component: (
         <CVCInput
+          cardInput={cardInput}
+          errorMessages={errorMessages}
           validateCardCVC={validateCardCVC}
           setCardInput={setCardInput}
           handleErrorMessages={handleErrorMessages}
-          errorMessages={errorMessages}
         />
       ),
     },
@@ -193,6 +196,7 @@ const AddCard = () => {
         isCVCComplete(cardInput, errorMessages),
       component: (
         <SecretNumberInput
+          cardInput={cardInput}
           errorMessages={errorMessages}
           setCardInput={setCardInput}
           handleErrorMessages={handleErrorMessages}

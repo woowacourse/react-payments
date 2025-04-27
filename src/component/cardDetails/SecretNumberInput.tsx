@@ -1,21 +1,48 @@
+import React, { useState, useCallback } from 'react';
 import { CardInputProps } from '../../types/CardInputTypes';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { validateCardSecretNumber } from '../../validation/validation';
 import Description from '../Description';
-import Input from '../Input'; // 수정된 Input 컴포넌트 사용
-import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
+import Input from '../Input';
+import InputGroup from '../InputGroup';
 
 interface SecretNumberInputProps {
   errorMessages: ErrorMessagesType;
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
+  cardInput: CardInputProps;
 }
 
-export const SecretNumberInput = ({
+export const SecretNumberInput: React.FC<SecretNumberInputProps> = ({
   errorMessages,
   setCardInput,
   handleErrorMessages,
-}: SecretNumberInputProps) => {
+  cardInput,
+}) => {
+  const [secretValue, setSecretValue] = useState(
+    cardInput.secretNumber?.toString() || '',
+  );
+
+  const handleSecretNumberChange = useCallback(
+    (value: string) => {
+      setSecretValue(value);
+
+      const errorMessage = validateCardSecretNumber(value);
+      if (errorMessage) {
+        handleErrorMessages('secretNumber', errorMessage);
+        return;
+      }
+
+      handleErrorMessages('secretNumber', '');
+
+      setCardInput(prev => ({
+        ...prev,
+        secretNumber: value === '' ? null : Number(value),
+      }));
+    },
+    [setCardInput, handleErrorMessages],
+  );
+
   return (
     <>
       <Description
@@ -29,16 +56,9 @@ export const SecretNumberInput = ({
         <Input
           maxLength={2}
           placeholder="비밀번호를 입력해주세요"
-          validate={validateCardSecretNumber}
-          onChange={value => {
-            setCardInput((prev: CardInputProps) => ({
-              ...prev,
-              secretNumber: value === '' ? null : Number(value),
-            }));
-          }}
-          handleErrorMessage={message =>
-            handleErrorMessages('secretNumber', message)
-          }
+          value={secretValue}
+          onChange={handleSecretNumberChange}
+          isError={!!errorMessages.secretNumber}
           type="password"
           name="secretNumber"
         />
