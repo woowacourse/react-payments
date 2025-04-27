@@ -1,4 +1,4 @@
-import { cardNumber, date } from "../App";
+import { cardNumber, date } from "../components/page/CardInfo";
 
 const EXPIRATION_MAX_LENGTH = 2;
 
