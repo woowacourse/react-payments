@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Completion() {
   const location = useLocation();
+  const navigate = useNavigate();
   const companyName = location.state.cardCompany || '';
   const companyNameEnd = companyName.slice(-2);
   const cardType =
     companyNameEnd === '카드' ? companyName : `${companyName}카드`;
+
+  const handleClick = () => {
+    navigate('/', { replace: true });
+  };
 
   return (
     <Container>
@@ -16,7 +21,7 @@ function Completion() {
         <br />
         {cardType}가 등록되었어요.
       </Text>
-      <Button>확인</Button>
+      <Button onClick={handleClick}>확인</Button>
     </Container>
   );
 }
