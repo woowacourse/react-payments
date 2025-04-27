@@ -6,6 +6,12 @@ export type CardNumbersInputSectionProps = {
   handleCardNumbersBlur: (target: CardNumbersKeys) => void;
   isError: IsError;
   errorMessage: string;
+  inputRef: {
+    firstNumber: React.RefObject<HTMLInputElement | null>;
+    secondNumber: React.RefObject<HTMLInputElement | null>;
+    thirdNumber: React.RefObject<HTMLInputElement | null>;
+    fourthNumber: React.RefObject<HTMLInputElement | null>;
+  };
 };
 
 export type CardNumbersOptions = {

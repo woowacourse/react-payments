@@ -14,6 +14,7 @@ type CardCVCNumberInputSectionProps = {
   handleCardCVCBlur: () => void;
   isError: { cvcNumber: boolean };
   errorMessage: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
 const CardCVCNumberInputSection = ({
@@ -22,6 +23,7 @@ const CardCVCNumberInputSection = ({
   handleCardCVCBlur,
   isError,
   errorMessage,
+  inputRef,
 }: CardCVCNumberInputSectionProps) => {
   return (
     <>
@@ -37,6 +39,7 @@ const CardCVCNumberInputSection = ({
           isError={isError.cvcNumber}
           placeholder="123"
           onBlur={handleCardCVCBlur}
+          ref={inputRef}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

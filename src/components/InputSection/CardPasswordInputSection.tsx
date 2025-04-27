@@ -15,6 +15,7 @@ const CardPasswordInputSection = ({
   handleCardPasswordBlur,
   isError,
   errorMessage,
+  inputRef,
 }: CardPasswordInputSectionProps) => {
   return (
     <>
@@ -31,6 +32,7 @@ const CardPasswordInputSection = ({
           isError={isError.password}
           placeholder="12"
           onBlur={handleCardPasswordBlur}
+          ref={inputRef}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

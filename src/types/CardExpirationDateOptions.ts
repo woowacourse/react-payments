@@ -15,6 +15,10 @@ export type CardExpirationDateInputSectionProps = {
   handleCardExpirationDateBlur: (target: CardExpirationDateKeys) => void;
   isError: IsError;
   errorMessage: string;
+  inputRef: {
+    month: React.RefObject<HTMLInputElement | null>;
+    year: React.RefObject<HTMLInputElement | null>;
+  };
 };
 
 export type CardExpirationDateOptions = CardExpirationDateInputSectionProps & {

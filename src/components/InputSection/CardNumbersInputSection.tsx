@@ -15,6 +15,7 @@ const CardNumbersInputSection = ({
   handleCardNumbersBlur,
   isError,
   errorMessage,
+  inputRef,
 }: CardNumbersInputSectionProps) => {
   return (
     <>
@@ -39,6 +40,7 @@ const CardNumbersInputSection = ({
             onBlur={() => handleCardNumbersBlur(key)}
             isError={isError[key]}
             placeholder="1234"
+            ref={inputRef[key]}
           />
         ))}
       </InputSection>

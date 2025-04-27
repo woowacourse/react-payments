@@ -28,6 +28,7 @@ export type CardPasswordInputSectionProps = {
   handleCardPasswordBlur: () => void;
   isError: IsError;
   errorMessage: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
 type IsError = {

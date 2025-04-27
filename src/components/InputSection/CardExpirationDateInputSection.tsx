@@ -2,6 +2,7 @@ import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
 import { CardExpirationDateInputSectionProps } from '../../types/CardExpirationDateOptions';
+import { useEffect } from 'react';
 
 export const CARD_EXPIRATION_DATE_TEXT = {
   title: '카드 유효기간을 입력해 주세요',
@@ -15,7 +16,15 @@ const CardExpirationDateInputSection = ({
   handleCardExpirationDateBlur,
   isError,
   errorMessage,
+  inputRef,
 }: CardExpirationDateInputSectionProps) => {
+  useEffect(() => {
+    if (cardExpirationDate.month.length === 2) {
+      console.log('month', cardExpirationDate.month);
+      inputRef.year.current?.focus();
+    }
+  }, [cardExpirationDate.month]);
+
   return (
     <>
       <InputSection
@@ -30,6 +39,7 @@ const CardExpirationDateInputSection = ({
           isError={isError.month}
           placeholder="MM"
           onBlur={() => handleCardExpirationDateBlur('month')}
+          ref={inputRef.month}
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
@@ -38,6 +48,7 @@ const CardExpirationDateInputSection = ({
           isError={isError.year}
           placeholder="YY"
           onBlur={() => handleCardExpirationDateBlur('year')}
+          ref={inputRef.year}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

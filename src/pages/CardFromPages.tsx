@@ -3,7 +3,7 @@ import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSec
 import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
 import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './cardForm.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
 import useError from '@/hooks/useError';
@@ -49,6 +49,64 @@ const CardFormPages = ({
     nav('/complete');
   };
 
+  const cardNumbersInputRef = {
+    firstNumber: useRef<HTMLInputElement>(null),
+    secondNumber: useRef<HTMLInputElement>(null),
+    thirdNumber: useRef<HTMLInputElement>(null),
+    fourthNumber: useRef<HTMLInputElement>(null),
+  };
+
+  const cardExpirationDateInputRef = {
+    month: useRef<HTMLInputElement>(null),
+    year: useRef<HTMLInputElement>(null),
+  };
+
+  const cardCVCInputRef = useRef<HTMLInputElement>(null);
+  const cardPasswordInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isFieldCompletetion[3]) {
+      cardPasswordInputRef.current?.focus();
+      return;
+    }
+    if (isFieldCompletetion[2]) {
+      cardCVCInputRef.current?.focus();
+      return;
+    }
+    if (isFieldCompletetion[1]) {
+      if (cardExpirationDateForm.cardExpirationDate.month.length < 2) {
+        cardExpirationDateInputRef.month.current?.focus();
+      } else {
+        cardExpirationDateInputRef.year.current?.focus();
+      }
+      return;
+    }
+    if (isFieldCompletetion[0]) {
+      cardNumbersInputRef.fourthNumber.current?.blur();
+      return;
+    }
+    //cardNumers의 각 자리가 4길이가 되면 다음으로 포커스
+    if (cardNumbersForm.cardNumbers.thirdNumber.length === 4) {
+      cardNumbersInputRef.fourthNumber.current?.focus();
+      return;
+    }
+    if (cardNumbersForm.cardNumbers.secondNumber.length === 4) {
+      cardNumbersInputRef.thirdNumber.current?.focus();
+      return;
+    }
+    if (cardNumbersForm.cardNumbers.firstNumber.length === 4) {
+      cardNumbersInputRef.secondNumber.current?.focus();
+      return;
+    }
+    cardNumbersInputRef.firstNumber.current?.focus();
+
+    // cardNumbersInputRef.firstNumber.current?.focus();
+  }, [
+    isFieldCompletetion,
+    cardNumbersForm.cardNumbers,
+    cardExpirationDateForm.cardExpirationDate,
+  ]);
+
   return (
     <>
       <CardDisplay
@@ -59,14 +117,23 @@ const CardFormPages = ({
 
       <div className={styles.cardForm}>
         {isFieldCompletetion[3] && (
-          <CardPasswordInputSection {...cardPasswordForm} />
+          <CardPasswordInputSection
+            {...cardPasswordForm}
+            inputRef={cardPasswordInputRef}
+          />
         )}
 
         {isFieldCompletetion[2] && (
-          <CardCVCNumberInputSection {...cardCVCNumberForm} />
+          <CardCVCNumberInputSection
+            {...cardCVCNumberForm}
+            inputRef={cardCVCInputRef}
+          />
         )}
         {isFieldCompletetion[1] && (
-          <CardExpirationDateInputSection {...cardExpirationDateForm} />
+          <CardExpirationDateInputSection
+            {...cardExpirationDateForm}
+            inputRef={cardExpirationDateInputRef}
+          />
         )}
         {isFieldCompletetion[0] && (
           <CardCompanySelectSection
@@ -77,7 +144,10 @@ const CardFormPages = ({
             clearError={() => clearCardCompanyError('cardCompany')}
           />
         )}
-        <CardNumbersInputSection {...cardNumbersForm} />
+        <CardNumbersInputSection
+          {...cardNumbersForm}
+          inputRef={cardNumbersInputRef}
+        />
       </div>
       {canSubmit() && (
         <ConfirmButton
