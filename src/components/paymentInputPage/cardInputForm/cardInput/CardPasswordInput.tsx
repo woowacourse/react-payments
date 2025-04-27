@@ -1,22 +1,16 @@
 import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { precise } from '../../../../utils/precise';
+import { validate } from '../../../../utils/validate';
 
 export interface CardPasswordInputProps {
-  password: string;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardPasswordInput({
-  password,
-  setPassword,
-  isValid,
-  setIsValid,
-}: CardPasswordInputProps) {
+function CardPasswordInput({ isValid, setIsValid }: CardPasswordInputProps) {
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [password, setPassword] = useState('');
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
@@ -27,10 +21,9 @@ function CardPasswordInput({
   }
 
   function checkIsValidType(passwordInput: string) {
-    if (!precise.isNumber(passwordInput)) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
-      setIsValid(false);
-    }
+    const { isValid, message } = validate.checkNumberInput(passwordInput);
+    setFeedbackMessage(message);
+    setIsValid(isValid);
   }
 
   return (
@@ -42,7 +35,7 @@ function CardPasswordInput({
         label='비밀번호 앞 2자리'
       >
         <Input
-          type='tel'
+          type='password'
           name='password'
           value={password}
           handleInputChange={handlePasswordChange}

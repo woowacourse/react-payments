@@ -8,6 +8,7 @@ import CardSubmitButton from './CardSubmitButton';
 import { ROUTER } from '../../../global/constants';
 import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
+import CardPasswordInput from './cardInput/CardPasswordInput';
 
 interface CardInputFormProps {
   expiryDate: ExpiryDateType;
@@ -29,6 +30,8 @@ function CardInputForm({
     setIsExpiryDateValid,
     isCVCValid,
     setIsCVCValid,
+    isPasswordValid,
+    setIsPasswordValid,
     isFormValid,
     ref,
   } = useValidateForm();
@@ -60,6 +63,10 @@ function CardInputForm({
         setCardCVC={setCardCVC}
         isValid={isCVCValid}
         setIsValid={setIsCVCValid}
+      />
+      <CardPasswordInput
+        isValid={isPasswordValid}
+        setIsValid={setIsPasswordValid}
       />
       {isFormValid() && <CardSubmitButton />}
     </form>

@@ -11,13 +11,17 @@ function useValidateForm() {
     month: true,
     year: true,
   });
-  const [isCVCValid, setIsCVCValid] = useState<boolean>(true);
+  const [isCVCValid, setIsCVCValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const isTotalNumbersValid = isCardNumberValid.every((valid) => valid);
   const isTotalExpiryDateValid =
     isExpiryDateValid.month && isExpiryDateValid.year;
   const isTotalDataValid =
-    isTotalNumbersValid && isTotalExpiryDateValid && isCVCValid;
+    isTotalNumbersValid &&
+    isTotalExpiryDateValid &&
+    isCVCValid &&
+    isPasswordValid;
 
   const ref = useRef<HTMLFormElement>(null);
   function isFormValid() {
@@ -31,6 +35,8 @@ function useValidateForm() {
     setIsExpiryDateValid,
     isCVCValid,
     setIsCVCValid,
+    isPasswordValid,
+    setIsPasswordValid,
     isFormValid,
     ref,
   };
