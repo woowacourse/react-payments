@@ -1,47 +1,22 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
-import { useCardExpiryValidation } from '../../hooks/useExpiryInputValidation';
-import { useConfirmButton } from '../../context/ConfirmButtonContext';
 import { useCardFormContext } from '../../context/CardFormContext';
-import { useRef } from 'react';
 
 const CardExpiryInput = () => {
-  const { month, setMonth, year, setYear } = useCardFormContext();
-  const [isErrors, errorMessage, validate] = useCardExpiryValidation();
-  const [isMonthError, isYearError] = isErrors;
-  const { updateInputState, inputsState } = useConfirmButton();
-  const expiryRef = useRef<HTMLInputElement[]>([]);
+  const {
+    month,
+    year,
+    updateDate,
+    expiryRef,
+    expireErrors,
+    expireErrorMessage,
+  } = useCardFormContext();
+  const [isMonthError, isYearError] = expireErrors;
 
-  const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (name === 'month') {
-      setMonth(value);
-    } else if (name === 'year') {
-      setYear(value);
-    }
-    validate(name, value);
-    const isMonthValid =
-      (name === 'month' ? value : month).length ===
-      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
-    const isYearValid =
-      (name === 'year' ? value : year).length ===
-      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH;
-
-    const isExpiryComplete = isMonthValid && isYearValid;
-
-    updateInputState('expiry', { isComplete: isExpiryComplete });
-    if (isExpiryComplete) {
-      updateInputState('CVC', { isVisible: true });
-    }
-    if (e.target.value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH) {
-      expiryRef.current[1]?.focus();
-    }
-  };
-
-  if (!inputsState.expiry.isVisible) {
-    return;
-  }
+  // if (!inputsState.expiry.isVisible) {
+  //   return;
+  // }
   return (
     <InputContainer
       title={INPUT_CONTAINER.EXPIRE.TITLE}
@@ -79,7 +54,7 @@ const CardExpiryInput = () => {
         />
       </div>
       <p className="helperText" data-testid="helper-text">
-        {errorMessage}
+        {expireErrorMessage}
       </p>
     </InputContainer>
   );

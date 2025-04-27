@@ -2,19 +2,20 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import styles from './CardRegisterSuccessPage.module.css';
 import { CARD_BRANDS } from '../../constants/cardBrand';
-import { useConfirmButton } from '../../context/ConfirmButtonContext';
+// import { useConfirmButton } from '../../context/ConfirmButtonContext';
 
 export const CardRegisterSuccessPage = () => {
-  const { resetConfirm } = useConfirmButton();
+  // const { resetConfirm } = useConfirmButton();
   const navigate = useNavigate();
   const location = useLocation();
   const { cardNumbers, brand } = location.state as {
     cardNumbers: string[];
     brand: keyof typeof CARD_BRANDS;
   };
+  const firstCardNumbers = cardNumbers[0];
 
   const handleClick = () => {
-    resetConfirm();
+    // resetConfirm();
     navigate('/react-payments/');
   };
 
@@ -27,7 +28,9 @@ export const CardRegisterSuccessPage = () => {
           alt="체크 아이콘"
         />
         <p className={styles.text}>
-          {cardNumbers[0]}로 시작하는 {CARD_BRANDS[brand]}카드가 등록되었어요.
+          {firstCardNumbers}로 시작하는
+          <br />
+          {CARD_BRANDS[brand]}카드가 등록되었어요.
         </p>
         <Button text="확인" onClick={handleClick} />
       </div>

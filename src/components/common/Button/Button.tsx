@@ -1,4 +1,3 @@
-import { useConfirmButton } from '../../../context/ConfirmButtonContext';
 import styles from './Button.module.css';
 
 type ButtonProps = {
@@ -7,14 +6,11 @@ type ButtonProps = {
 };
 
 const Button = ({ text, onClick = () => {} }: ButtonProps) => {
-  const { isActive } = useConfirmButton();
+  // const { isActive } = useConfirmButton();
+  // ${isActive ? styles.active : ''}
 
   return (
-    <button
-      className={`${styles.button} ${isActive ? styles.active : ''}`}
-      type="submit"
-      onClick={onClick}
-    >
+    <button className={`${styles.button} `} type="submit" onClick={onClick}>
       {text}
     </button>
   );

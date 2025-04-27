@@ -12,7 +12,6 @@ const App = () => {
           path="/react-payments/complete"
           element={<CardRegisterSuccessPage />}
         />
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
     </BrowserRouter>
   );
