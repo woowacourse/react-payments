@@ -1,4 +1,4 @@
-import { isValidCardType } from './cardType';
+import { isValidCardType } from '../utils/cardTypeUtils';
 import {
   CARD_INFO_VALID_RULE,
   CardInfoType,

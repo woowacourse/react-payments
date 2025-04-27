@@ -1,6 +1,7 @@
 import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 import { getCardImagePath } from '../../../entities/cardInfo/model/cardType';
 import { PREVIEW_CLASS_NAMES } from '../constants/previewClassName';
+import { getCardImagePath } from '../../../entities/cardInfo/utils/cardTypeUtils';
 import './preview.css';
 
 export default function Preview({ cardInfo }: { cardInfo: CardInfo }) {
