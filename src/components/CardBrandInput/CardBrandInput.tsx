@@ -2,25 +2,22 @@ import React from 'react';
 import InputContainer from '../InputContainer/InputContainer';
 import { CARD_BRANDS, OPTION_MESSAGE } from '../../constants/cardBrand';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { useConfirmButton } from '../../hooks/confirmButtonContext';
+import { useConfirmButton } from '../../context/ConfirmButtonContext';
+import { useCardFormContext } from '../../context/CardFormContext';
 
-type CardBrandInputProps = {
-  brand: string;
-  setBrand: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CardBrandInput = ({ brand, setBrand }: CardBrandInputProps) => {
-  const { checkInputsComplete, updateDisplayInputs, displayInputs } =
-    useConfirmButton();
+const CardBrandInput = () => {
+  const { brand, setBrand } = useCardFormContext();
+  const { updateInputState, inputsState } = useConfirmButton();
 
   const updateBrand = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setBrand(e.target.value);
-    const isValid = e.target.value !== '';
-    checkInputsComplete('brand', isValid);
-    if (isValid) updateDisplayInputs('expiry', isValid);
+    const { value } = e.target;
+    setBrand(value);
+    const isValid = value !== '';
+    updateInputState('brand', { isComplete: isValid });
+    if (isValid) updateInputState('expiry', { isVisible: true });
   };
 
-  if (!displayInputs.brand) {
+  if (!inputsState.brand.isVisible) {
     return;
   }
   return (

@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CardNumbersInput from '../../components/CardNumbersInput/CardNumbersInput';
 import CardExpiryInput from '../../components/CardExpiryInput/CardExpiryInput';
 import CVCInput from '../../components/CVCInput/CVCInput';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
 import Button from '../../components/common/Button/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../App.css';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const HomePage = () => {
-  const [cardNumbers, setCardNumbers] = useState(
-    Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill('')
-  );
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [CVC, setCVC] = useState('');
-  const [brand, setBrand] = useState('');
-  const [password, setPassword] = useState('');
+  const { cardNumbers, brand, resetForm } = useCardFormContext();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,22 +19,9 @@ const HomePage = () => {
     e.preventDefault();
     const formData = {
       cardNumbers,
-      month,
-      year,
-      CVC,
       brand,
-      password,
     };
     navigate('/react-payments/complete', { state: formData });
-  };
-
-  const resetForm = () => {
-    setCardNumbers(['', '', '', '']);
-    setMonth('');
-    setYear('');
-    setCVC('');
-    setBrand('');
-    setPassword('');
   };
 
   useEffect(() => {
@@ -50,26 +30,13 @@ const HomePage = () => {
 
   return (
     <div className="app">
-      <CardPreview
-        cardNumbers={cardNumbers}
-        month={month}
-        year={year}
-        brand={brand}
-      />
+      <CardPreview />
       <form onSubmit={handleSubmit}>
-        <CardPasswordInput password={password} setPassword={setPassword} />
-        <CVCInput CVC={CVC} setCVC={setCVC} />
-        <CardExpiryInput
-          month={month}
-          setMonth={setMonth}
-          year={year}
-          setYear={setYear}
-        />
-        <CardBrandInput brand={brand} setBrand={setBrand} />
-        <CardNumbersInput
-          cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
-        />
+        <CardPasswordInput />
+        <CVCInput />
+        <CardExpiryInput />
+        <CardBrandInput />
+        <CardNumbersInput />
         <Button text="확인" />
       </form>
     </div>

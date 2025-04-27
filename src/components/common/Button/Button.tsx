@@ -1,4 +1,4 @@
-import { useConfirmButton } from '../../../hooks/confirmButtonContext';
+import { useConfirmButton } from '../../../context/ConfirmButtonContext';
 import styles from './Button.module.css';
 
 type ButtonProps = {

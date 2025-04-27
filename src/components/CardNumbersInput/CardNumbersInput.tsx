@@ -2,19 +2,13 @@ import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import { useCardNumbersValidation } from '../../hooks/useCardNumbersValidation';
-import { useConfirmButton } from '../../hooks/confirmButtonContext';
+import { useCardFormContext } from '../../context/CardFormContext';
+import { useConfirmButton } from '../../context/ConfirmButtonContext';
 
-type CardNumbersInputProps = {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-};
-
-const CardNumbersInput = ({
-  cardNumbers,
-  setCardNumbers,
-}: CardNumbersInputProps) => {
+const CardNumbersInput = () => {
+  const { cardNumbers, setCardNumbers } = useCardFormContext();
   const [isErrors, errorMessage, validate] = useCardNumbersValidation();
-  const { checkInputsComplete, updateDisplayInputs } = useConfirmButton();
+  const { updateInputState } = useConfirmButton();
 
   const updateCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -27,8 +21,9 @@ const CardNumbersInput = ({
     const isValid = newCardNumbers.every(
       (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
     );
-    checkInputsComplete('cardNumbers', isValid);
-    if (isValid) updateDisplayInputs('brand', true);
+    updateInputState('cardNumbers', { isComplete: isValid });
+    console.log('isValid', isValid);
+    if (isValid) updateInputState('brand', { isVisible: true });
   };
 
   const isDisabled = (index: number) => {

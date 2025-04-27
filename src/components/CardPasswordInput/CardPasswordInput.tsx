@@ -1,28 +1,22 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { useCardPasswordValidation } from '../../hooks/useCardPasswordValidation';
-import { useConfirmButton } from '../../hooks/confirmButtonContext';
+import { useConfirmButton } from '../../context/ConfirmButtonContext';
+import { useCardFormContext } from '../../context/CardFormContext';
 
-type CardPasswordInputProps = {
-  password: string;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const CardPasswordInput = ({
-  password,
-  setPassword,
-}: CardPasswordInputProps) => {
+const CardPasswordInput = () => {
+  const { password, setPassword } = useCardFormContext();
   const [isError, errorMessage, validate] = useCardPasswordValidation();
-  const { checkInputsComplete, displayInputs } = useConfirmButton();
+  const { updateInputState, inputsState } = useConfirmButton();
 
   const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPassword(value);
     validate(value);
     const isValid = value.length === 2;
-    checkInputsComplete('password', isValid);
+    updateInputState('password', { isComplete: isValid });
   };
 
-  if (!displayInputs.password) {
+  if (!inputsState.password.isVisible) {
     return;
   }
   return (
