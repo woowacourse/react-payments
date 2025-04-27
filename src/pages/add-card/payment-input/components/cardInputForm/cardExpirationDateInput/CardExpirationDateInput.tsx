@@ -45,6 +45,7 @@ function CardExpirationDateInput({
             placeholder={field === "MONTH" ? "MM" : "YY"}
             onChange={(e) => onChangeHandler(e, i)}
             maxLength={2}
+            autoFocus={i === 0}
           />
         );
       })}

@@ -8,6 +8,7 @@ interface SelectBoxProps<T> {
   description?: string;
   placeholder: string;
   options: T[];
+  autoFocus?: boolean;
   onSelectHandler?: (value: T) => void;
 }
 
@@ -22,6 +23,7 @@ const SelectBox = <T extends {}>({
   title,
   description,
   options,
+  autoFocus,
 }: SelectBoxProps<T>) => {
   const [selectState, setSelectState] = useState<SelectState<T>>({
     isOpened: false,
@@ -53,6 +55,7 @@ const SelectBox = <T extends {}>({
         type="button"
         onClick={onClickHandler}
         className={styles.selector}
+        autoFocus={autoFocus}
       >
         <span>
           {selectState.selectedOption === null

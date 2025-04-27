@@ -28,6 +28,7 @@ const CardBrandSelect = ({
       description="현재 국내 카드사만 가능합니다."
       placeholder="카드를 선택해주세요"
       options={CARD.BRAND}
+      autoFocus={true}
     />
   );
 };

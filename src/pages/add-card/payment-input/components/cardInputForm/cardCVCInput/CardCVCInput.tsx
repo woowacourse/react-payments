@@ -24,6 +24,7 @@ function CardCVCInput({
       feedbackMessage={feedbackMessage}
     >
       <Input
+        autoFocus
         type="tel"
         name="cardCVC"
         placeholder="123"

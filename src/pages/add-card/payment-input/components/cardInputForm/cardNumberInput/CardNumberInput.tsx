@@ -40,6 +40,7 @@ function CardNumberInput({
           maxLength={CARD_INFO.NUMBER_LENGTH_PART}
           onChange={onChangeHandler}
           isValid={cardNumberInfo.feedbackMessages[i] === ""}
+          autoFocus={i === 0}
         />
       ))}
     </InputField>

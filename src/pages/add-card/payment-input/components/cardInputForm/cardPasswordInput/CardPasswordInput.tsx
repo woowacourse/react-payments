@@ -23,6 +23,7 @@ function CardPasswordInput({
         maxLength={CARD_INFO.PASSWORD_LENGTH}
         onChange={onChangeHandler}
         isValid={feedbackMessage === ""}
+        autoFocus
       />
     </InputField>
   );
