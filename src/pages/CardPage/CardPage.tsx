@@ -19,7 +19,7 @@ export type HandleInputParams = {
 const StyledCardPage = styled.div`
   width: 40%;
   min-width: 400px;
-  min-height: 100vh; // TODO: 이걸 주석처리했을 때 드랍다운이 가려져보이는 문제 해결하기
+  min-height: 100vh;
   display: flex;
   height: auto;
   margin: 0 auto;
@@ -120,15 +120,18 @@ const CardPage = () => {
         cardCompany={cardCompany}
       />
 
-      {formSteps.map((step) => {
-        if (!step.shouldShow()) return null;
+      {formSteps
+        .slice()
+        .reverse()
+        .map((step) => {
+          if (!step.shouldShow()) return null;
 
-        return (
-          <FormSection key={step.id} title={step.title} subtitle={step.subtitle}>
-            {step.component}
-          </FormSection>
-        );
-      })}
+          return (
+            <FormSection key={step.id} title={step.title} subtitle={step.subtitle}>
+              {step.component}
+            </FormSection>
+          );
+        })}
 
       {isFormValid && <Button text={CARD_PAGE_TEXT.CHECK} onClick={navigateToSuccessPage}></Button>}
     </StyledCardPage>
