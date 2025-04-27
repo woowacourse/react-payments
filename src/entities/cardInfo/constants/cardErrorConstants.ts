@@ -2,6 +2,7 @@ export const NO_ERROR: [number, string] = [-1, ''];
 
 export enum ErrorKey {
   CARD_NUMBER = 'cardNumberError',
+  CARD_COMPANY = 'cardCompanyError',
   CARD_EXPIRATION_DATE = 'cardExpirationDateError',
   CARD_CVC = 'cardCVCError',
   CARD_PASSWORD = 'cardPasswordError',

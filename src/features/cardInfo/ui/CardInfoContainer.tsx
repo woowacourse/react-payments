@@ -9,7 +9,7 @@ export default function CardInfoContainer({
   error,
   currentSection,
 }: {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   error?: InputValidationResultProps;
   currentSection: CardInfoType;
 }) {

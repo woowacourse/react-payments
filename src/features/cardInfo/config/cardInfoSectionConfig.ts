@@ -4,16 +4,24 @@ import {
   cardCVCValidator,
   cardPasswordValidator,
 } from '../../../entities/cardInfo/model/cardInfoValidator';
-import { ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
+import { ErrorKey, NO_ERROR } from '../../../entities/cardInfo/constants/cardErrorConstants';
 import {
   CardInfoType,
   CARD_INFO_VALID_RULE,
 } from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
+import { CARD_COMPANIES_ARRAY } from '../../../entities/cardInfo/constants/cardCompanyConstants';
+
+export enum InputType {
+  TEXT = 'text',
+  PASSWORD = 'password',
+  SELECT = 'select',
+}
 
 type InputConfig = {
   type: string;
   placeholder: string;
   name: string;
+  options?: string[];
 };
 
 type CardInfoSectionConfig = {
@@ -25,6 +33,7 @@ type CardInfoSectionConfig = {
   maxLength: number;
   validator: any;
   errorKey: string;
+  inputType: InputType;
 };
 
 export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
@@ -42,6 +51,25 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     maxLength: CARD_INFO_VALID_RULE[CardInfoType.NUMBER].MAX_LENGTH,
     validator: cardNumberValidator,
     errorKey: ErrorKey.CARD_NUMBER,
+    inputType: InputType.TEXT,
+  },
+  {
+    id: CardInfoType.COMPANY,
+    title: '카드사를 선택해 주세요',
+    description: '현재 국내 카드사만 가능합니다.',
+    subTitle: '',
+    inputArr: [
+      {
+        type: 'select',
+        placeholder: '카드사를 선택해주세요',
+        name: CardInfoType.COMPANY,
+        options: CARD_COMPANIES_ARRAY,
+      },
+    ],
+    maxLength: 0,
+    validator: () => NO_ERROR,
+    errorKey: ErrorKey.CARD_COMPANY,
+    inputType: InputType.SELECT,
   },
   {
     id: CardInfoType.EXPDATE,
@@ -55,6 +83,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     maxLength: CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH,
     validator: cardExpirationDateValidator,
     errorKey: ErrorKey.CARD_EXPIRATION_DATE,
+    inputType: InputType.TEXT,
   },
   {
     id: CardInfoType.CVC,
@@ -65,6 +94,7 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     maxLength: CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH,
     validator: cardCVCValidator,
     errorKey: ErrorKey.CARD_CVC,
+    inputType: InputType.TEXT,
   },
   {
     id: CardInfoType.PASSWORD,
@@ -75,5 +105,6 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     maxLength: CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH,
     validator: cardPasswordValidator,
     errorKey: ErrorKey.CARD_PASSWORD,
+    inputType: InputType.PASSWORD,
   },
 ];

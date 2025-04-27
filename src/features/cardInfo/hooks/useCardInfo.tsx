@@ -12,6 +12,7 @@ import {
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     [CardInfoType.NUMBER]: Array(CARD_INFO_VALID_RULE[CardInfoType.NUMBER].TOTAL_SECTIONS).fill(''),
+    [CardInfoType.COMPANY]: '',
     [CardInfoType.EXPDATE]: { month: '', year: '' },
     [CardInfoType.CVC]: '',
     [CardInfoType.PASSWORD]: '',
@@ -19,6 +20,7 @@ export default function useCardInfo() {
 
   const [error, setError] = useState<InputValidationResultProps>({
     [ErrorKey.CARD_NUMBER]: NO_ERROR,
+    [ErrorKey.CARD_COMPANY]: NO_ERROR,
     [ErrorKey.CARD_EXPIRATION_DATE]: NO_ERROR,
     [ErrorKey.CARD_CVC]: NO_ERROR,
     [ErrorKey.CARD_PASSWORD]: NO_ERROR,
@@ -28,6 +30,7 @@ export default function useCardInfo() {
 
   const [completedSections, setCompletedSections] = useState<Record<CardInfoType, boolean>>({
     [CardInfoType.NUMBER]: false,
+    [CardInfoType.COMPANY]: false,
     [CardInfoType.EXPDATE]: false,
     [CardInfoType.CVC]: false,
     [CardInfoType.PASSWORD]: false,
@@ -38,6 +41,15 @@ export default function useCardInfo() {
       const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
       validateCardNumber(updatedNumbers);
       return { ...prev, cardNumber: updatedNumbers };
+    });
+  };
+
+  const handleCardCompanyChange = (value: string) => {
+    setCardInfo((prev) => {
+      if (value) {
+        completeSection(CardInfoType.COMPANY);
+      }
+      return { ...prev, cardCompany: value };
     });
   };
 
@@ -63,12 +75,17 @@ export default function useCardInfo() {
     });
   };
 
-  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith(CardInfoType.NUMBER)) {
       const index = Number(name[name.length - 1]);
       handleCardNumberChange(index, value);
+      return;
+    }
+
+    if (name === CardInfoType.COMPANY) {
+      handleCardCompanyChange(value);
       return;
     }
 

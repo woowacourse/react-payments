@@ -1,5 +1,6 @@
 export enum CardInfoType {
   NUMBER = 'cardNumber',
+  COMPANY = 'cardCompany',
   EXPDATE = 'cardExpirationDate',
   CVC = 'cardCVC',
   PASSWORD = 'cardPassword',
@@ -23,6 +24,7 @@ export const CARD_INFO_VALID_RULE = Object.freeze({
 
 export const SECTION_ORDER = [
   CardInfoType.NUMBER,
+  CardInfoType.COMPANY,
   CardInfoType.EXPDATE,
   CardInfoType.CVC,
   CardInfoType.PASSWORD,
