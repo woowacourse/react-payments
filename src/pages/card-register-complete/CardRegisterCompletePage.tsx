@@ -25,7 +25,7 @@ const CardRegisterCompletePage = () => {
 
   if (!cardInfo) return null;
 
-  const completeIconSrc = `/images/checkIcon.svg`;
+  const completeIconSrc = `${import.meta.env.BASE_URL}images/checkIcon.svg`;
 
   return (
     <Main>
