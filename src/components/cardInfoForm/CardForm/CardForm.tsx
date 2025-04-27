@@ -147,7 +147,7 @@ function CardForm({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       {show.password && (
         <CardInputSection
           title="비밀번호를 입력해 주세요"
@@ -211,11 +211,20 @@ function CardForm({
       <SubmitButton disabled={!checkIsValid()} isError={!checkIsValid()}>
         확인
       </SubmitButton>
-    </form>
+    </Form>
   );
 }
 
 export default CardForm;
+
+const Form = styled.form`
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 45px;
+  overflow: auto;
+`;
 
 const SubmitButton = styled.button<{ isError: boolean }>`
   width: 100%;
