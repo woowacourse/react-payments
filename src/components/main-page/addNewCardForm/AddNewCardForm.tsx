@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CardPreview from '../cardPreview/CardPreview';
 import CardSelectSection from '../cardSelectSection/CardSelectSection';
 import CardNumberSection from '../cardNumberSection/CardNumberSection';
@@ -56,20 +56,18 @@ function AddNewCardForm() {
 
   const navigate = useNavigate();
 
-  const [openButton, setOpenButton] = useState(false);
-
-  useEffect(() => {
-    const isCardNumberComplete = Object.values(cardNumber).every((num) => num.length === 4);
-    const isExpirationComplete = expirationPeriod.month.length === 2 && expirationPeriod.year.length === 2;
-    const isCVCComplete = CVCNumber.length === 3;
-    const isPasswordComplete = password.length === 2;
-
-    if (isCardNumberComplete && isExpirationComplete && isCVCComplete && isPasswordComplete) {
-      setOpenButton(true);
-    } else {
-      setOpenButton(false);
-    }
-  }, [cardNumber, expirationPeriod, CVCNumber, password]);
+  const isValidForm = () => {
+    return (
+      !isInvalid('cardNumber', cardNumber.first) &&
+      !isInvalid('cardNumber', cardNumber.second) &&
+      !isInvalid('cardNumber', cardNumber.third) &&
+      !isInvalid('cardNumber', cardNumber.fourth) &&
+      !isInvalid('expirationMonth', expirationPeriod.month) &&
+      !isInvalid('expirationYear', expirationPeriod.year) &&
+      !isInvalid('CVC', CVCNumber) &&
+      !isInvalid('password', password)
+    );
+  };
 
   function changeCardNumber(position: Position, number: string) {
     setCardNumber({
@@ -150,7 +148,7 @@ function AddNewCardForm() {
           />
         )}
       </StepContainer>
-      {openButton && <Button onClick={handleSubmit} />}
+      {isValidForm() && <Button onClick={handleSubmit} />}
     </StyledFrame>
   );
 }
