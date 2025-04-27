@@ -4,11 +4,7 @@ import { CardInfoProvider } from '../../features/cardInfo/context/CardInfoContex
 import { MemoryRouter } from 'react-router';
 
 function CardPageWithContext() {
-  return (
-    <CardInfoProvider>
-      <CardPage />
-    </CardInfoProvider>
-  );
+  return <CardPage />;
 }
 
 const meta: Meta<typeof CardPageWithContext> = {
@@ -16,9 +12,11 @@ const meta: Meta<typeof CardPageWithContext> = {
   component: CardPageWithContext,
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/']}>
-        <Story />
-      </MemoryRouter>
+      <CardInfoProvider>
+        <MemoryRouter initialEntries={['/']}>
+          <Story />
+        </MemoryRouter>
+      </CardInfoProvider>
     ),
   ],
 };
