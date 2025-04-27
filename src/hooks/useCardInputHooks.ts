@@ -11,7 +11,11 @@ function useInputField(
   placeholder: string,
   maximumLength: number,
   validationFunction: FieldValidationFunction
-): [InputFieldState, (event: ChangeEvent<HTMLInputElement>) => void] {
+): [
+  InputFieldState,
+  (event: ChangeEvent<HTMLInputElement>) => void,
+  RefObject<HTMLInputElement | null>
+] {
   const [fieldState, setFieldState] = useState<InputFieldState>({
     value: initialValue,
     hasError: false,
@@ -19,6 +23,8 @@ function useInputField(
     maximumLength,
     errorMessage: '',
   });
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = event.target.value;
@@ -31,7 +37,7 @@ function useInputField(
     }));
   };
 
-  return [fieldState, handleChange];
+  return [fieldState, handleChange, inputRef];
 }
 
 type MultipleFieldValidationFunction = (

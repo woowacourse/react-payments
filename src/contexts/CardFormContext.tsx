@@ -6,6 +6,7 @@ import {
   ReactNode,
   RefObject,
   ChangeEvent,
+  useRef,
 } from 'react';
 import {
   useMultipleInputFields,
@@ -37,12 +38,15 @@ interface CardFormContextValue {
 
   cvcField: InputFieldState;
   handleCvcFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  cvcInputRef: RefObject<HTMLInputElement | null>;
 
   passwordField: InputFieldState;
   handlePasswordFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  passwordInputRef: RefObject<HTMLInputElement | null>;
 
   brand: string;
   handleBrandSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  brandSelectRef: RefObject<HTMLSelectElement | null>;
 
   isPeriodSeparatorShowing: boolean;
   showPeriodSeparator: () => void;
@@ -65,6 +69,7 @@ export const CardFormProvider = ({ children }: CardFormProviderProps) => {
     },
     []
   );
+  const brandSelectRef = useRef<HTMLSelectElement | null>(null);
 
   const [numberFields, handleNumberFieldChange, numberInputRefs] =
     useMultipleInputFields(
@@ -77,19 +82,15 @@ export const CardFormProvider = ({ children }: CardFormProviderProps) => {
   const [expiryFields, handleExpiryFieldChange, expiryInputRefs] =
     useMultipleInputFields(['', ''], ['MM', 'YY'], 2, isValidExpirationSegment);
 
-  const [cvcField, handleCvcFieldChange] = useInputField(
+  const [cvcField, handleCvcFieldChange, cvcInputRef] = useInputField(
     '',
     '123',
     3,
     validateCvcNumber
   );
 
-  const [passwordField, handlePasswordFieldChange] = useInputField(
-    '',
-    '**',
-    2,
-    validatePasswordSegment
-  );
+  const [passwordField, handlePasswordFieldChange, passwordInputRef] =
+    useInputField('', '**', 2, validatePasswordSegment);
 
   const [isPeriodSeparatorShowing, setIsPeriodSeparatorShowing] =
     useState<boolean>(false);
@@ -121,10 +122,13 @@ export const CardFormProvider = ({ children }: CardFormProviderProps) => {
         expiryInputRefs,
         cvcField,
         handleCvcFieldChange,
+        cvcInputRef,
         passwordField,
         handlePasswordFieldChange,
+        passwordInputRef,
         brand,
         handleBrandSelectChange,
+        brandSelectRef,
         isPeriodSeparatorShowing,
         showPeriodSeparator,
         hidePeriodSeparator,
