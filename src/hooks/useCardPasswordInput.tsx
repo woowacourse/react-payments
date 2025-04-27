@@ -5,7 +5,7 @@ const PASSWORD_LIMIT = {
   MAX_LENGTH: 2,
 } as const;
 
-export default function useCardPassword() {
+export default function useCardPasswordInput() {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 

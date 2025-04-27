@@ -9,26 +9,43 @@ const meta: Meta<typeof PreviewCardLayout> = {
 export default meta;
 type Story = StoryObj<typeof PreviewCardLayout>;
 
+const cardNumbers = {
+  FIRST: "4234",
+  SECOND: "5678",
+  THIRD: "1234",
+  FOURTH: "5678",
+};
+
+const cardExpirationDate = {
+  MONTH: "12",
+  YEAR: "25",
+};
+
 export const DEFAULT: Story = {
   args: {
-    cardNumbers: ["4234", "5678", "1234", "5678"],
-    cardType: "default",
-    cardExpirationDate: ["12", "25"],
+    cardNumbers,
+    cardBrand: "",
+    cardExpirationDate,
   },
 };
 
 export const VISA: Story = {
   args: {
-    cardNumbers: ["4234", "5678", "1234", "5678"],
-    cardType: "visa",
-    cardExpirationDate: ["12", "25"],
+    cardNumbers,
+    cardBrand: "신한카드",
+    cardExpirationDate,
   },
 };
 
 export const MASTER: Story = {
   args: {
-    cardNumbers: ["5034", "5678", "1234", "5678"],
-    cardType: "master",
-    cardExpirationDate: ["12", "25"],
+    cardNumbers: {
+      FIRST: "5134",
+      SECOND: "5678",
+      THIRD: "1234",
+      FOURTH: "5678",
+    },
+    cardBrand: "우리카드",
+    cardExpirationDate,
   },
 };

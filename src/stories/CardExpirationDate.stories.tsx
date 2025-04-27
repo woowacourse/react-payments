@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardExpirationDate from "../CardExpirationDate/CardExpirationDate";
+import CardExpirationDate from "../pages/CardFormPage/CardExpirationDate/CardExpirationDate";
 
 const meta: Meta<typeof CardExpirationDate> = {
   title: "Example/CardExpirationDate",
@@ -9,18 +9,38 @@ const meta: Meta<typeof CardExpirationDate> = {
 export default meta;
 type Story = StoryObj<typeof CardExpirationDate>;
 
+const cardExpirationDate = {
+  MONTH: "12",
+  YEAR: "29",
+};
+
+const errorMessage = {
+  MONTH: "",
+  YEAR: "",
+};
+
 export const Primary: Story = {
   args: {
     handleChange: () => {},
-    cardExpirationDate: ["", ""],
-    errorMessage: ["", ""],
+    handleStep: () => {},
+    step: 2,
+    cardExpirationDate,
+    errorMessage,
   },
 };
 
 export const Error: Story = {
   args: {
     handleChange: () => {},
-    cardExpirationDate: ["dd", ""],
-    errorMessage: ["숫자만 입력 가능합니다.", ""],
+    handleStep: () => {},
+    step: 2,
+    cardExpirationDate: {
+      MONTH: "dd",
+      YEAR: "",
+    },
+    errorMessage: {
+      MONTH: "숫자만 입력 가능합니다.",
+      YEAR: "",
+    },
   },
 };

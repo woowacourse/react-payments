@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter } from "react-router-dom";
 import App from "../App";
 
 const meta = {
   title: "App",
   component: App,
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 } satisfies Meta<typeof App>;
 
 export default meta;
