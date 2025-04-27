@@ -61,6 +61,7 @@ function Selector<T extends CardIssuerSelectorType>({
         <DropDownContainer onClick={(e) => handleSelectedOption(e)}>
           {dropDownOptions.map((option, index) => (
             <DropDownOptions
+              key={index}
               id={option}
               tabIndex={-1}
               ref={(el) => {

@@ -21,7 +21,6 @@ function CardIssuerSelector({
   useEffect(() => {
     if (isFocused) {
       inputRef.current?.focus();
-      // inputRef.current?.click();
     }
   });
 
