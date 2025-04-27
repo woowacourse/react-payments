@@ -1,4 +1,4 @@
-import { CARD_IMAGE_PATH } from '../../../shared/assets/constants/cardImagePaths';
+import { CARD_IMAGE_PATH } from '../../../shared/constants/cardImagePaths';
 import { CARD_TYPE_RULE, CardType } from '../constants/cardTypeConstants';
 import { isInRange } from '../../../shared/lib/utils';
 
