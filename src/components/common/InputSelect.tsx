@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject } from 'react';
 
 interface InputSelectProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  inputRef: RefObject<HTMLSelectElement | null>;
 }
 
-const InputSelect = ({ value, onChange }: InputSelectProps) => {
+const InputSelect = ({ value, onChange, inputRef }: InputSelectProps) => {
   return (
     <InputSelectContainer>
       <Row>
-        <Select value={value} onChange={onChange}>
+        <Select value={value} onChange={onChange} ref={inputRef}>
           <option value="" disabled hidden>
             카드사를 선택해주세요
           </option>
@@ -50,4 +51,8 @@ const Select = styled.select`
   border-radius: 2px;
   font-size: ${({ theme }) => theme.fontSizes.label};
   outline: none;
+
+  &:focus {
+    outline: 2px solid skyblue;
+  }
 `;

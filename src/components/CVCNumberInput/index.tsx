@@ -2,11 +2,12 @@ import { useCardForm } from '../../contexts/CardFormContext';
 import CVCNumberInputView from './CVCNumberInputView';
 
 const CVCNumberInput = () => {
-  const { cvcField, handleCvcFieldChange } = useCardForm();
+  const { cvcField, handleCvcFieldChange, cvcInputRef } = useCardForm();
   return (
     <CVCNumberInputView
       cvcNumberInfo={cvcField}
       handleInputChange={handleCvcFieldChange}
+      inputRef={cvcInputRef}
     />
   );
 };

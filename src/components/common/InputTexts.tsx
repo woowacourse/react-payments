@@ -5,21 +5,21 @@ import { InputFieldState } from '../../types/models';
 interface InputTextsProps {
   label: string;
   dataModels: InputFieldState | InputFieldState[];
+  inputRefs: RefObject<HTMLInputElement | null>[];
   onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   type?: string;
-  inputRefs?: RefObject<HTMLInputElement | null>[];
 }
 
 const InputTexts = ({
   label,
   dataModels,
+  inputRefs,
   onChange,
   onFocus,
   onBlur,
   type = 'text',
-  inputRefs,
 }: InputTextsProps) => {
   const onChangeAt = useCallback(
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +52,7 @@ const InputTexts = ({
           <Input
             type={type}
             placeholder={dataModels.placeholder}
+            ref={inputRefs ? inputRefs[0] : null}
             maxLength={dataModels.maximumLength}
             value={dataModels.value}
             onChange={onChangeAt(0)}
