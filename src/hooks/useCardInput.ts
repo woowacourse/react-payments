@@ -34,6 +34,10 @@ export const useCardInput = (type: CardFormFiledType) => {
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const isAllValid = value.every(
+    (item) => item.isValid && item.value.length === CardInputTypeOptions[type].valueLength
+  );
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
     const { isValid, errorMessage } = validateInputChange(inputValue);
@@ -82,5 +86,5 @@ export const useCardInput = (type: CardFormFiledType) => {
     });
   };
 
-  return { value, errorMessage, handleChange, handleBlur };
+  return { value, errorMessage, handleChange, handleBlur, isAllValid };
 };
