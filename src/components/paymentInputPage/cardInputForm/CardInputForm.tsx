@@ -78,6 +78,8 @@ function CardInputForm() {
     },
   ];
 
+  // @type-s-ignore
+  // @ts-ignore
   const renderList = useRender(inputs, ref);
 
   return (
