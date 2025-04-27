@@ -4,6 +4,7 @@ import Input from "../../../common/inputForm/input/Input";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validateNumberString } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardNumberInput({
   setCardNumbers,

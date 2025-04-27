@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Input from "../../../common/inputForm/input/Input";
-import InputForm from "../../../common/inputForm/InputForm";
+import Input from "../../../../../../components/common/inputForm/input/Input";
+import InputForm from "../../../../../../components/common/inputForm/InputForm";
 import { CARD_INFO } from "../../constants/CardInfo";
 import { validateCVC } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";

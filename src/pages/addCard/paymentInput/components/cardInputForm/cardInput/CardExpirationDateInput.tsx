@@ -7,6 +7,7 @@ import {
   validateExpirationDateYear,
 } from "./validator/validateCardInput";
 import { getExpirationFirstErrorMessage } from "./validator/getFirstErrorMessage";
+import { CardInfo } from "../../../../paymentInput/PaymentInputPage";
 
 function CardExpirationDateInput({
   setExpirationDate,

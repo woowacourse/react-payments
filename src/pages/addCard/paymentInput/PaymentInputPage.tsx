@@ -1,7 +1,7 @@
-import CardPreview from './cardPreview/CardPreview';
-import CardInputForm from './cardInputForm/CardInputForm';
-import styles from './PaymentInputPage.module.css';
-import { useState } from 'react';
+import CardPreview from "./cardPreview/CardPreview";
+import CardInputForm from "./cardInputForm/CardInputForm";
+import styles from "./PaymentInputPage.module.css";
+import { useState } from "react";
 
 function PaymentInputPage() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
