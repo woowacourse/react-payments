@@ -1,21 +1,12 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
-import { CardNumberKey, CardNumberType } from '../../types';
+import { CardNumberKey } from '../../types';
+import { useFormContext } from '../../contexts/useFormContext';
 
-export type CardNumberSectionProps = {
-  cardNumbers: CardNumberType;
-  onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
-  inputRefs: {
-    first: React.RefObject<HTMLInputElement | null>;
-    second: React.RefObject<HTMLInputElement | null>;
-    third: React.RefObject<HTMLInputElement | null>;
-    fourth: React.RefObject<HTMLInputElement | null>;
-  };
-  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
-};
+export default function CardNumberSection() {
+  const { cardNumbers, onCardNumbersChange, cardInputRefs, getCardNumberErrorMessage } = useFormContext();
 
-export default function CardNumberSection({ cardNumbers, onCardNumbersChange, inputRefs, getCardNumberErrorMessage }: CardNumberSectionProps) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>
@@ -34,7 +25,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, in
               onChange={(e) => {
                 onCardNumbersChange(inputKey, e.target.value);
               }}
-              ref={inputRefs[inputKey]}
+              ref={cardInputRefs[inputKey]}
               maxLength={4}
             />
           ))}

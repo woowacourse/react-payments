@@ -1,6 +1,6 @@
+import { CardFormProps } from '../contexts/useFormContext';
 import { STEPS } from './../constants';
 import { useEffect } from 'react';
-import { CardFormProps } from '../components/CardForm/CardForm';
 
 type StepName = (typeof STEPS)[number];
 
@@ -13,15 +13,15 @@ export function useStepFlow({ formState, setStep }: { formState: CardFormProps; 
   const isCvcValid = cvc.value.length === 3 && cvc.errorMessage === '';
 
   useEffect(() => {
-    if (isCardNumbersValid) setStep('유효기간');
+    if (isCardNumbersValid) setStep('카드사');
   }, [isCardNumbersValid]);
 
   useEffect(() => {
-    if (isExpirationValid) setStep('카드사');
+    if (isExpirationValid) setStep('CVC');
   }, [isExpirationValid]);
 
   useEffect(() => {
-    if (isCompanyValid) setStep('CVC');
+    if (isCompanyValid) setStep('유효기간');
   }, [isCompanyValid]);
 
   useEffect(() => {

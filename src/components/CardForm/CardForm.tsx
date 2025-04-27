@@ -14,21 +14,8 @@ import styles from '../../../src/pages/HomePage/HomePage.module.css';
 import { useFormContext } from '../../contexts/useFormContext';
 
 export function CardForm() {
-  const {
-    cardNumbers,
-    onCardNumbersChange,
-    cardInputRefs,
-    getCardNumberErrorMessage,
-    expiration,
-    handleExpirationChange,
-    expirationRef,
-    company,
-    handleCompanySelect,
-    cvc,
-    handleCvcChange,
-    password,
-    handlePasswordChange
-  } = useFormContext();
+  const { cardNumbers, expiration, handleExpirationChange, expirationRef, company, handleCompanySelect, cvc, handleCvcChange, password, handlePasswordChange } =
+    useFormContext();
 
   const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
 
@@ -58,22 +45,16 @@ export function CardForm() {
     <form className={styles.inputSectionWrapper} onSubmit={handleGoCompletePage}>
       <Stack>
         <Stack.Step name="카드번호">
-          <CardNumberSection
-            cardNumbers={cardNumbers}
-            onCardNumbersChange={onCardNumbersChange}
-            inputRefs={cardInputRefs}
-            getCardNumberErrorMessage={getCardNumberErrorMessage}
-          />
-        </Stack.Step>
-
-        <Stack.Step name="유효기간">
-          <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={expirationRef} />
+          <CardNumberSection />
         </Stack.Step>
 
         <Stack.Step name="카드사">
           <CardCompanySection value={company} onSelect={handleCompanySelect} />
         </Stack.Step>
 
+        <Stack.Step name="유효기간">
+          <CardExpirationSection expiration={expiration} onExpirationChange={handleExpirationChange} ref={expirationRef} />
+        </Stack.Step>
         <Stack.Step name="CVC">
           <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} />
         </Stack.Step>

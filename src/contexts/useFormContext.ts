@@ -1,9 +1,21 @@
 import { createContext, useContext } from 'react';
-import { CardNumberSectionProps } from '../components/CardNumberSection/CardNumberSection';
 import { CardExpirationSectionProps } from '../components/CardExpirationSection/CardExpirationSection';
 import { CardCompanySectionProps } from '../components/CardCompanySection/CardCompanySection';
 import { CvcSectionProps } from '../components/CvcSection/CvcSection';
 import { PasswordSectionProps } from '../components/PasswordSection/PasswordSection';
+import { CardNumberType } from '../types';
+
+export type CardNumberSectionProps = {
+  cardNumbers: CardNumberType;
+  onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
+  inputRefs: {
+    first: React.RefObject<HTMLInputElement | null>;
+    second: React.RefObject<HTMLInputElement | null>;
+    third: React.RefObject<HTMLInputElement | null>;
+    fourth: React.RefObject<HTMLInputElement | null>;
+  };
+  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
+};
 
 export type CardFormProps = {
   cardNumbers: CardNumberSectionProps['cardNumbers'];

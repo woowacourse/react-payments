@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { isNumber } from '../utils/isNumber';
 import { INITIAL_PASSWORD } from '../constants';
 
@@ -16,7 +16,8 @@ const usePassword = () => {
     }));
   };
 
-  return { password, handlePasswordChange };
+  const passwordRef = useRef<HTMLInputElement>(null);
+  return { password, handlePasswordChange, passwordRef };
 };
 
 export default usePassword;

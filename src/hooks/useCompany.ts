@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const useCompany = () => {
   const [company, setCompany] = useState<string>('');
@@ -7,7 +7,9 @@ const useCompany = () => {
     setCompany(value);
   };
 
-  return { company, handleCompanySelect };
+  const companyRef = useRef<HTMLInputElement>(null);
+
+  return { company, handleCompanySelect, companyRef };
 };
 
 export default useCompany;

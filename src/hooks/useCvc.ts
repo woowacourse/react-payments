@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { CvcType } from '../types';
 import { INITIAL_CVC } from '../constants';
 import { isNumber } from '../utils/isNumber';
@@ -14,7 +14,8 @@ const useCvc = () => {
     setCvc({ errorMessage, value });
   };
 
-  return { cvc, handleCvcChange };
+  const cvcRef = useRef<HTMLButtonElement>(null);
+  return { cvc, handleCvcChange, cvcRef };
 };
 
 const getCvcErrorMessage = (value: string) => {
