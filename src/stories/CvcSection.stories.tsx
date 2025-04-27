@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-
-import CvcSection from './CvcSection';
+import CvcSection from '../components/CvcSection/CvcSection';
 
 const meta: Meta<typeof CvcSection> = {
   title: 'CvcSection',

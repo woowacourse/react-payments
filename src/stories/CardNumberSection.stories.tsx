@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-
-import CardNumberSection from './CardNumberSection';
+import CardNumberSection from '../components/CardNumberSection/CardNumberSection';
 
 const meta: Meta<typeof CardNumberSection> = {
   title: 'CardNumberSection',
