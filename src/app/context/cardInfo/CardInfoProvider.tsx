@@ -2,12 +2,12 @@ import { createContext, useState, useContext, ReactNode } from 'react';
 import { CardInfoProps, ErrorProps } from '../../../shared/model/types';
 import { NO_ERROR } from '../../../shared/constants/errorConstants';
 import {
-  cardCVCValidator,
-  cardExpirationDateValidator,
-  cardIssuerValidator,
-  cardNumberValidator,
-  cardPasswordValidator,
-} from '../../../features/cardInfo/validation/cardInfoValidator';
+  handleCardCVCChange,
+  handleCardExpirationDateChange,
+  handleCardIssuerChange,
+  handleCardNumberChange,
+  handleCardPasswordChange,
+} from './cardInfoHandlers';
 
 const CardInfoContext = createContext<CardInfoProps | null>(null);
 
@@ -31,34 +31,15 @@ export const CardInfoProvider = ({ children }: { children: ReactNode }) => {
   const updateCardInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     if (name.startsWith('cardNumber')) {
-      const index = Number(name[name.length - 1]);
-      setCardNumber((prev) => {
-        const updatedNumbers = prev.map((num, i) => (i === index ? value : num));
-        validateAndSetError('cardNumber', updatedNumbers, setError);
-        return updatedNumbers;
-      });
+      handleCardNumberChange(name, value, setCardNumber, setError);
     } else if (name.startsWith('cardExpirationDate')) {
-      const key = name.split('-')[1] as 'month' | 'year';
-      setCardExpirationDate((prev) => {
-        const updateDate = { ...prev, [key]: value };
-        validateAndSetError('cardExpirationDate', updateDate, setError);
-        return updateDate;
-      });
+      handleCardExpirationDateChange(name, value, setCardExpirationDate, setError);
     } else if (name.startsWith('cardCVC')) {
-      setCardCVC(() => {
-        validateAndSetError('cardCVC', value, setError);
-        return value;
-      });
+      handleCardCVCChange(value, setCardCVC, setError);
     } else if (name.startsWith('cardIssuer')) {
-      setCardIssuer(() => {
-        validateAndSetError('cardIssuer', value, setError);
-        return value;
-      });
+      handleCardIssuerChange(value, setCardIssuer, setError);
     } else if (name.startsWith('cardPassword')) {
-      setCardPassword(() => {
-        validateAndSetError('cardPassword', value, setError);
-        return value;
-      });
+      handleCardPasswordChange(value, setCardPassword, setError);
     }
   };
 
@@ -79,33 +60,4 @@ export const useCardInfoContext = () => {
     throw new Error('useCardInfoContext must be used within a CardInfoProvider');
   }
   return context;
-};
-
-const VALIDATORS = {
-  cardNumber: cardNumberValidator,
-  cardExpirationDate: cardExpirationDateValidator,
-  cardCVC: cardCVCValidator,
-  cardIssuer: cardIssuerValidator,
-  cardPassword: cardPasswordValidator,
-};
-
-const ERROR_KEYS = {
-  cardNumber: 'cardNumberError',
-  cardExpirationDate: 'cardExpirationDateError',
-  cardCVC: 'cardCVCError',
-  cardIssuer: 'cardIssuerError',
-  cardPassword: 'cardPasswordError',
-};
-
-const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {
-  const validator = VALIDATORS[key];
-  const errorKey = ERROR_KEYS[key] as keyof ErrorProps;
-  const [errorIndex, errorMessage] = validator(value);
-  setError(
-    (prevError: any) =>
-      ({
-        ...prevError,
-        [errorKey]: errorIndex !== NO_ERROR ? { errorIndex, errorMessage } : { errorIndex: NO_ERROR, errorMessage: '' },
-      } as ErrorProps)
-  );
 };
