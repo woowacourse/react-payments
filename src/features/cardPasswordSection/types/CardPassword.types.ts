@@ -1,4 +1,4 @@
-import { State, Error } from "../../../types/index.types";
+import { State, Error } from "../../../shared/types/index.types";
 
 export type CardPasswordSectionProps = {
   password: State<"password", string>;

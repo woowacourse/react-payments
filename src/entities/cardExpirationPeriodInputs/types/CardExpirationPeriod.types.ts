@@ -1,4 +1,8 @@
-import { ExpirationPeriod, State, Error } from "../../../types/index.types";
+import {
+  ExpirationPeriod,
+  State,
+  Error,
+} from "../../../shared/types/index.types";
 
 export type ExpirationPeriodProps = {
   expirationPeriod: State<ExpirationPeriod, string>;

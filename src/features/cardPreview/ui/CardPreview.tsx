@@ -6,7 +6,7 @@ import {
   StyledCardNumberWrap,
   StyledCardNumber,
   StyledExpirationPeriod,
-} from "../styles/CardPreview.css";
+} from "../css/CardPreview.css";
 import { CardPreviewProps } from "../types/CardPreview.types";
 import { INITIALIZE_VALUE } from "../../../shared/constants/constant";
 import useLogoSrc from "../hooks/useLogoSrc";

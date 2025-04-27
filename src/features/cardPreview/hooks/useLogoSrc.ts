@@ -1,4 +1,4 @@
-import { CardNumberPosition } from "./../../../types/index.types";
+import { CardNumberPosition } from "../../../shared/types/index.types";
 import { useMemo } from "react";
 import { getIdentifyFns } from "../domains/CardPreview.domain";
 import { INITIALIZE_VALUE } from "../../../shared/constants/constant";

@@ -1,6 +1,6 @@
 import useCardInfo from "./useCardInfo";
 import { INITIALIZE_VALUE } from "../../shared/constants/constant";
-import { CardTypeList } from "../../types/index.types";
+import { CardTypeList } from "../../shared/types/index.types";
 
 export default function useAllCardInfo() {
   const cardNumber = useCardInfo(

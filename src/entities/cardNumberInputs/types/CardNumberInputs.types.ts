@@ -1,4 +1,8 @@
-import { State, Error, CardNumberPosition } from "../../../types/index.types";
+import {
+  State,
+  Error,
+  CardNumberPosition,
+} from "../../../shared/types/index.types";
 
 export type CardNumberProps = {
   cardNumber: State<CardNumberPosition, string>;

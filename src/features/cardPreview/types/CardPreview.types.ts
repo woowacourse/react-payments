@@ -2,7 +2,7 @@ import {
   CardNumberPosition,
   ExpirationPeriod,
   CardTypeList,
-} from "../../../types/index.types";
+} from "../../../shared/types/index.types";
 
 export type CardPreviewProps = {
   cardNumber: Record<CardNumberPosition, string>;

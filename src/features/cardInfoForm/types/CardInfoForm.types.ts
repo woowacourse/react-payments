@@ -3,7 +3,7 @@ import {
   CardTypeList,
   ExpirationPeriod,
   State,
-} from "../../../types/index.types";
+} from "../../../shared/types/index.types";
 
 export type CardInfoFormProps = {
   cardNumber: State<CardNumberPosition, string>;

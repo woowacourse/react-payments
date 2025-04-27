@@ -1,13 +1,13 @@
-import { CardNumberPosition } from "./../../../types/index.types";
+import { CardNumberPosition } from "../../../shared/types/index.types";
 import { NO_ERROR } from "../../../shared/constants/constant";
 import useError from "./useError";
-import { getCardNumberValidationFns } from "../../../entities/cardNumberInputs/CardNumberInputs.domain";
+import { getCardNumberValidationFns } from "../../../entities/cardNumberInputs/domains/CardNumberInputs.domain";
 import {
   getMonthValidationFns,
   getYearValidationFns,
-} from "../../../entities/cardExpirationPeriodInputs/CardExpirationPeriodInputs.domain";
-import { getCVCValidationFns } from "../../../entities/cardCVCNumberInputs/CardCVCNumberInputs.domain";
-import { getPasswordValidationFns } from "../../../entities/cardPasswordInputs/CardPasswordInputs.domain";
+} from "../../../entities/cardExpirationPeriodInputs/domains/CardExpirationPeriodInputs.domain";
+import { getCVCValidationFns } from "../../../entities/cardCVCNumberInputs/domains/CardCVCNumberInputs.domain";
+import { getPasswordValidationFns } from "../../../entities/cardPasswordInputs/domains/CardPasswordInputs.domain";
 
 export function useAllError() {
   const cardNumberError = useError<Record<CardNumberPosition, string>>({

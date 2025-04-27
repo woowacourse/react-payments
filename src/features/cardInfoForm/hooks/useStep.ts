@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   CardNumberPosition,
   ExpirationPeriod,
-} from "../../../types/index.types";
+} from "../../../shared/types/index.types";
 
 type CardInfoFormProps = {
   cardNumber: {
