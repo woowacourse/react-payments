@@ -26,22 +26,28 @@ export function useFocusControl(
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const addCardButtonRef = useRef<HTMLButtonElement>(null);
 
+  const focusMap: Record<
+    Exclude<FlowStep, "COMPLETE">,
+    React.RefObject<HTMLElement | null>
+  > = {
+    CARD_NUMBER: firstCardNumberInputRef,
+    CARD_BRAND: brandDropdownRef,
+    EXPIRE_DATE: expireMonthInputRef,
+    CVC: cvcInputRef,
+    PASSWORD: passwordInputRef,
+  };
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (!isFlowStep(currentStep)) return;
 
-      if (currentStep === "CARD_NUMBER") {
-        firstCardNumberInputRef.current?.focus();
-      } else if (currentStep === "CARD_BRAND") {
-        brandDropdownRef.current?.focus();
-      } else if (currentStep === "EXPIRE_DATE") {
-        expireMonthInputRef.current?.focus();
-      } else if (currentStep === "CVC") {
-        cvcInputRef.current?.focus();
-      } else if (currentStep === "PASSWORD") {
-        passwordInputRef.current?.focus();
-      } else if (allValid) {
+      if (allValid) {
         addCardButtonRef.current?.focus();
+        return;
+      }
+
+      if (currentStep !== "COMPLETE") {
+        focusMap[currentStep]?.current?.focus();
       }
     }, 0);
 
