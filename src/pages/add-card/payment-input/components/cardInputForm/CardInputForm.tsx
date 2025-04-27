@@ -5,10 +5,10 @@ import CardNumberInput from "./cardInput/CardNumberInput";
 import styles from "./cardInputForm.module.css";
 import CardBrandSelect from "./cardInput/CardBrandSelect";
 import CardPasswordInput from "./cardInput/CardPasswordInput";
-import SubmitButton from "../../../../../components/common/inputForm/button/SubmitButton";
 import { CARD_BACKGROUND_COLOR } from "../cardPreview/constants/DisplayData";
 import { CardInfo } from "../../PaymentInputPage";
 import { useNavigate } from "react-router";
+import Button from "../../../../../components/common/button/Button";
 interface CardInputFormProps {
   cardInfo: CardInfo;
   setCardInfo: Dispatch<SetStateAction<CardInfo>>;
@@ -33,6 +33,16 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
     );
     setIsVisibleSubmitButton(isAllValid);
   }, [validState]);
+
+  const onSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate("/add-card/success", {
+      state: {
+        firstCardNumber: cardInfo.cardNumbers[0],
+        brandName: cardInfo.brandName,
+      },
+    });
+  };
 
   return (
     <form className={styles.cardInputForm}>
@@ -65,9 +75,13 @@ function CardInputForm({ cardInfo, setCardInfo }: CardInputFormProps) {
       </div>
 
       {isVisibleSubmitButton && (
-        <SubmitButton backgroundColor={CARD_BACKGROUND_COLOR[brandName]}>
+        <Button
+          type="submit"
+          onClickHandler={onSubmitHandler}
+          backgroundColor={CARD_BACKGROUND_COLOR[brandName]}
+        >
           확인
-        </SubmitButton>
+        </Button>
       )}
     </form>
   );

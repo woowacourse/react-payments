@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import styles from "./AddCardSuccessPage.module.css";
 import CheckCircleIcon from "../../../components/common/icon/CheckCircleIcon";
 import { CARD_BACKGROUND_COLOR } from "../payment-input/components/cardPreview/constants/DisplayData";
@@ -9,11 +9,10 @@ interface AddCardSuccessPageProps {
   brandName: string;
 }
 
-function AddCardSuccessPage({
-  cardNumber = "5511",
-  brandName = "BC카드",
-}: AddCardSuccessPageProps) {
+function AddCardSuccessPage({}: AddCardSuccessPageProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { firstCardNumber, brandName } = location.state || {};
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -23,9 +22,9 @@ function AddCardSuccessPage({
 
         <div className={styles.messageContainer}>
           <p className={`${styles.message} tx-xl`}>
-            {cardNumber}로 시작하는
+            {firstCardNumber}로 시작하는
             <br />
-            BC카드가 등록되었어요.
+            {brandName}가 등록되었어요.
           </p>
         </div>
 
