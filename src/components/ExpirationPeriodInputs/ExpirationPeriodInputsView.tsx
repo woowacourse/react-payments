@@ -2,20 +2,20 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
+import { ChangeEvent, FocusEvent, RefObject } from 'react';
 
 interface ExpirationPeriodInputsViewProps {
   expiryDateInfo: InputFieldState[];
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  expiryInputRefs: RefObject<HTMLInputElement | null>[];
+  onFocus: (e: FocusEvent<HTMLInputElement>) => void;
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
 const ExpirationPeriodInputsView = ({
   expiryDateInfo,
   handleInputChange,
+  expiryInputRefs,
   onFocus,
   onBlur,
 }: ExpirationPeriodInputsViewProps) => {
@@ -32,6 +32,7 @@ const ExpirationPeriodInputsView = ({
         label="유효기간"
         dataModels={expiryDateInfo}
         onChange={handleInputChange}
+        inputRefs={expiryInputRefs}
         onFocus={onFocus}
         onBlur={onBlur}
       />

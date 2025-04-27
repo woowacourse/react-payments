@@ -3,18 +3,18 @@ import InputTexts from '../common/InputTexts';
 import { InputFieldState } from '../../types/models';
 import { Container, ErrorMessage } from '../common/Styled';
 import { ERROR_MESSAGE } from '../../utils/cardValidation';
+import { ChangeEvent, RefObject } from 'react';
 
 interface NumberInputsViewProps {
   numbersInfo: InputFieldState[];
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  numberInputRefs: RefObject<HTMLInputElement | null>[];
 }
 
 const NumberInputsView = ({
   numbersInfo,
   handleInputChange,
+  numberInputRefs,
 }: NumberInputsViewProps) => {
   return (
     <Container data-testid="numbers-component">
@@ -26,6 +26,7 @@ const NumberInputsView = ({
         label="카드 번호"
         dataModels={numbersInfo}
         onChange={handleInputChange}
+        inputRefs={numberInputRefs}
       />
       <ErrorMessage>
         {numbersInfo.some((data) => data.hasError)

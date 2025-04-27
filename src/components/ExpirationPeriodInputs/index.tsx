@@ -5,6 +5,7 @@ const ExpirationPeriodInputs = () => {
   const {
     expiryFields,
     handleExpiryFieldChange,
+    expiryInputRefs,
     showPeriodSeparator,
     hidePeriodSeparator,
   } = useCardForm();
@@ -13,6 +14,7 @@ const ExpirationPeriodInputs = () => {
     <ExpirationPeriodInputsView
       expiryDateInfo={expiryFields}
       handleInputChange={handleExpiryFieldChange}
+      expiryInputRefs={expiryInputRefs}
       onFocus={showPeriodSeparator}
       onBlur={hidePeriodSeparator}
     />
