@@ -87,6 +87,21 @@ export const cardCVCValidator = (input: string) => {
   return failedValidation ? [failedValidation.index, failedValidation.message] : NO_ERROR;
 };
 
+export const cardPasswordValidator = (input: string) => {
+  const validations = [
+    { check: () => !isNumeric(input), index: 0, message: ERROR_MESSAGES.CARD_PASSWORD.NOT_NUMERIC },
+    {
+      check: () =>
+        !isExactDigitLength(input, CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_PASSWORD.NOT_TWO_DIGIT,
+    },
+  ];
+
+  const failedValidation = validations.find((validation) => validation.check());
+  return failedValidation ? [failedValidation.index, failedValidation.message] : NO_ERROR;
+};
+
 const isNumeric = (input: string) => {
   const numericRegex = /^\d+$/;
   return numericRegex.test(input);

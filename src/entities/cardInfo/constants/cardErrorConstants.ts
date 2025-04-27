@@ -4,6 +4,7 @@ export enum ErrorKey {
   CARD_NUMBER = 'cardNumberError',
   CARD_EXPIRATION_DATE = 'cardExpirationDateError',
   CARD_CVC = 'cardCVCError',
+  CARD_PASSWORD = 'cardPasswordError',
 }
 
 export const ERROR_MESSAGES = Object.freeze({
@@ -22,5 +23,9 @@ export const ERROR_MESSAGES = Object.freeze({
   CARD_CVC: {
     NOT_NUMERIC: 'CVC는 숫자만 입력 가능합니다.',
     NOT_THREE_DIGIT: 'CVC는 3자리어야 합니다.',
+  },
+  CARD_PASSWORD: {
+    NOT_NUMERIC: '비밀번호는 숫자만 입력 가능합니다.',
+    NOT_TWO_DIGIT: '비밀번호는 2자리어야 합니다.',
   },
 });

@@ -2,6 +2,7 @@ import {
   cardNumberValidator,
   cardExpirationDateValidator,
   cardCVCValidator,
+  cardPasswordValidator,
 } from '../../../entities/cardInfo/model/cardInfoValidator';
 import { ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
 import {
@@ -64,5 +65,15 @@ export const cardInfoSectionConfig: CardInfoSectionConfig[] = [
     maxLength: CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH,
     validator: cardCVCValidator,
     errorKey: ErrorKey.CARD_CVC,
+  },
+  {
+    id: CardInfoType.PASSWORD,
+    title: '비밀번호를 입력해 주세요',
+    description: '앞의 2자리를 입력해주세요',
+    subTitle: '비밀번호 앞 2자리',
+    inputArr: [{ type: 'password', placeholder: '**', name: CardInfoType.PASSWORD }],
+    maxLength: CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH,
+    validator: cardPasswordValidator,
+    errorKey: ErrorKey.CARD_PASSWORD,
   },
 ];
