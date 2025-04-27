@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
 import { useEffect } from 'react';
