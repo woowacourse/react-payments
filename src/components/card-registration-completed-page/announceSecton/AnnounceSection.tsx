@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../common/button/Button';
-import { useCardInfo } from '../main-page/CardInfoContext';
+import Button from '../../common/button/Button';
+import { useCardInfo } from '../../main-page/CardInfoContext';
 import { useNavigate } from 'react-router-dom';
 
 const StyledContainer = styled.div`

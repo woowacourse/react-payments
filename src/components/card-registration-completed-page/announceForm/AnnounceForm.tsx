@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AnnounceSection from './AnnounceSection';
+import AnnounceSection from '../announceSecton/AnnounceSection';
 
 const StyledFrame = styled.div`
   display: inline-flex;
