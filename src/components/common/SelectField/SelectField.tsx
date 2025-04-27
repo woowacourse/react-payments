@@ -13,6 +13,7 @@ const SelectField = ({
   onChange,
   onBlur,
   isError = false,
+  onMouseDown,
   placeholder,
   options,
   ...rest
@@ -23,6 +24,7 @@ const SelectField = ({
       value={value}
       onChange={onChange}
       onBlur={onBlur}
+      onMouseDown={onMouseDown}
       className={`${styles.select} ${isError ? styles.error : styles.basic}`}
       {...rest}
     >

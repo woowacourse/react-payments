@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react';
 import { useCardCVCNumberOptions } from './useCardCVCNumber';
 type UseFieldCompletionProps = {
   cardNumbersForm: CardNumbersOptions;
-  cardCompany: string;
+  cardCompanyForm: {
+    cardCompany: string;
+    setCardCompany: (company: string) => void;
+  };
   cardExpirationDateForm: CardExpirationDateOptions;
   cardCVCNumberForm: useCardCVCNumberOptions;
 };
 
 const useFieldCompletion = ({
   cardNumbersForm,
-  cardCompany,
+  cardCompanyForm,
   cardExpirationDateForm,
   cardCVCNumberForm,
 }: UseFieldCompletionProps) => {
@@ -35,7 +38,7 @@ const useFieldCompletion = ({
       });
     }
 
-    if (cardCompany !== '') {
+    if (cardCompanyForm.cardCompany !== '') {
       setIsFieldCompletetion((prev) => {
         const newArray = [...prev];
         newArray[1] = true;
@@ -60,7 +63,12 @@ const useFieldCompletion = ({
         return newArray;
       });
     }
-  }, [cardCVCNumberForm, cardCompany, cardExpirationDateForm, cardNumbersForm]);
+  }, [
+    cardCVCNumberForm,
+    cardCompanyForm,
+    cardExpirationDateForm,
+    cardNumbersForm,
+  ]);
 
   return isFieldCompletetion;
 };

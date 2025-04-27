@@ -1,6 +1,7 @@
 import InputSection from '../common/InputSection/InputSection';
 import SelectField from '../common/SelectField/SelectField';
 import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
+import { MouseEventHandler } from 'react';
 
 const CARD_COMPANY_SELECT_TEXT = {
   title: '카드사를 선택해주세요',
@@ -24,17 +25,13 @@ const CARD_COMPANY = [
 type CardCompanySelectSectionProps = {
   cardCompany: string;
   setCardCompany: (value: string) => void;
-  isError: boolean;
-  errorMessage: string;
-  clearError: () => void;
+  handleMouseDown: MouseEventHandler<HTMLSelectElement>;
 };
 
 const CardCompanySelectSection = ({
   cardCompany,
   setCardCompany,
-  isError,
-  errorMessage,
-  clearError,
+  handleMouseDown,
 }: CardCompanySelectSectionProps) => {
   return (
     <>
@@ -48,15 +45,12 @@ const CardCompanySelectSection = ({
           value={cardCompany}
           onChange={(e) => {
             setCardCompany(e.target.value);
-            clearError();
           }}
-          onBlur={() => {}}
-          isError={isError}
+          onMouseDown={handleMouseDown}
           placeholder="카드사를 선택해주세요"
           options={CARD_COMPANY}
         />
       </InputSection>
-      <ErrorMessage message={errorMessage} />
     </>
   );
 };

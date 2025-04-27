@@ -9,6 +9,7 @@ function App() {
   const {
     cardNumbersForm,
     cardCVCNumberForm,
+    cardCompanyForm,
     cardExpirationDateForm,
     cardPasswordForm,
     canSubmit,
@@ -26,6 +27,7 @@ function App() {
                 <CardFormPages
                   cardNumbersForm={cardNumbersForm}
                   cardCVCNumberForm={cardCVCNumberForm}
+                  cardCompanyForm={cardCompanyForm}
                   cardExpirationDateForm={cardExpirationDateForm}
                   cardPasswordForm={cardPasswordForm}
                   canSubmit={canSubmit}

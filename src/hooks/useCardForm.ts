@@ -1,16 +1,24 @@
+import { useState } from 'react';
 import useCardCVCNumber from './useCardCVCNumber';
 import useCardExpirationDate from './useCardExpirationDate';
 import useCardNumbers from './useCardNumbers';
 import useCardPassword from './useCardPassword';
+import useError from './useError';
 
 const useCardForm = () => {
   const cardNumbersForm = useCardNumbers();
   const cardCVCNumberForm = useCardCVCNumber();
   const cardExpirationDateForm = useCardExpirationDate();
-  const cardPasswordForm = useCardPassword(); // Assuming you have a useCardPassword hook
+  const cardPasswordForm = useCardPassword();
+  const [cardCompany, setCardCompany] = useState('');
+  const cardCompanyForm = {
+    cardCompany,
+    setCardCompany,
+  };
 
   const getCardInfo = () => ({
     cardNumbers: cardNumbersForm.cardNumbers,
+    cardCompany: cardCompanyForm,
     cardCVCNumber: cardCVCNumberForm.cardCVCNumber,
     cardExpirationDate: cardExpirationDateForm.cardExpirationDate,
     cardPassword: cardPasswordForm.cardPassword,
@@ -51,6 +59,7 @@ const useCardForm = () => {
   return {
     cardNumbersForm,
     cardCVCNumberForm,
+    cardCompanyForm,
     cardExpirationDateForm,
     cardPasswordForm,
     getCardInfo,

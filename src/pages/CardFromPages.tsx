@@ -19,6 +19,11 @@ import CardPasswordInputSection from '@/components/InputSection/CardPasswordInpu
 type CardFormPagesProps = {
   cardNumbersForm: CardNumbersOptions;
   cardCVCNumberForm: useCardCVCNumberOptions;
+  cardCompanyForm: {
+    cardCompany: string;
+    setCardCompany: (company: string) => void;
+  };
+
   cardExpirationDateForm: CardExpirationDateOptions;
   cardPasswordForm: CardPasswordOptions;
   canSubmit: () => boolean;
@@ -27,20 +32,16 @@ type CardFormPagesProps = {
 const CardFormPages = ({
   cardNumbersForm,
   cardCVCNumberForm,
+  cardCompanyForm,
   cardExpirationDateForm,
   cardPasswordForm,
   canSubmit,
 }: CardFormPagesProps) => {
-  const [cardCompany, setCardCompany] = useState('');
-  const { error: cardCompanyError, clearError: clearCardCompanyError } =
-    useError({
-      cardCompany: false,
-    });
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
   const isFieldCompletetion = useFieldCompletion({
     cardNumbersForm,
-    cardCompany,
+    cardCompanyForm,
     cardExpirationDateForm,
     cardCVCNumberForm,
   });
@@ -115,7 +116,7 @@ const CardFormPages = ({
       <CardDisplay
         cardNumbers={cardNumbersForm.cardNumbers}
         cardExpirationDate={cardExpirationDateForm.cardExpirationDate}
-        cardCompany={cardCompany}
+        cardCompany={cardCompanyForm.cardCompany}
       />
 
       <div className={styles.cardForm}>
@@ -143,11 +144,8 @@ const CardFormPages = ({
         )}
         {isFieldCompletetion[0] && (
           <CardCompanySelectSection
-            cardCompany={cardCompany}
-            setCardCompany={setCardCompany}
-            isError={cardCompanyError.isError.cardCompany}
-            errorMessage={cardCompanyError.errorMessage}
-            clearError={() => clearCardCompanyError('cardCompany')}
+            {...cardCompanyForm}
+            handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
         <CardNumbersInputSection
