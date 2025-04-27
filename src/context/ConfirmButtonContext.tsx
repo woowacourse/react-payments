@@ -9,6 +9,7 @@ type ConfirmButtonContextType = {
   isActive: boolean;
   updateInputState: (input: string, updates: Partial<InputState>) => void;
   inputsState: Record<string, InputState>;
+  resetConfirm: () => void;
 };
 
 const ConfirmButtonContext = createContext<ConfirmButtonContextType | null>(
@@ -28,6 +29,17 @@ export const ConfirmButtonProvider = ({
     brand: { isComplete: false, isVisible: false },
     password: { isComplete: false, isVisible: false },
   });
+
+  const resetConfirm = () => {
+    setIsActive(false);
+    setInputsState({
+      cardNumbers: { isComplete: false, isVisible: true },
+      expiry: { isComplete: false, isVisible: false },
+      CVC: { isComplete: false, isVisible: false },
+      brand: { isComplete: false, isVisible: false },
+      password: { isComplete: false, isVisible: false },
+    });
+  };
 
   const updateInputState = (input: string, updates: Partial<InputState>) => {
     setInputsState((prev) => {
@@ -54,6 +66,7 @@ export const ConfirmButtonProvider = ({
         isActive,
         updateInputState,
         inputsState,
+        resetConfirm,
       }}
     >
       {children}
