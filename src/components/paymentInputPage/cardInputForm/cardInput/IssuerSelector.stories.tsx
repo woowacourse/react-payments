@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
-import CardIssuerSelector from './CardIssuerSelector';
+import CardIssuerSelector from './IssuerSelector';
 import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {

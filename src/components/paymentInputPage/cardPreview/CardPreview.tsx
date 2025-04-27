@@ -1,5 +1,5 @@
 import useCard from '../../../hooks/useCard';
-import { ISSUER_LIST } from '../cardInputForm/cardInput/CardIssuerSelector';
+import { ISSUER_LIST } from '../cardInputForm/cardInput/IssuerSelector';
 import styles from './CardPreview.module.css';
 
 export const BRAND_IMAGE = {

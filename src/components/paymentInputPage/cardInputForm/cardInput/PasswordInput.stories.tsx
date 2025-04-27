@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardPasswordInput from './CardPasswordInput';
+import CardPasswordInput from './PasswordInput';
 import { userEvent, expect, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpiryDateInput from './CardExpiryDateInput';
+import CardExpiryDateInput from './ExpiryDateInput';
 import { expect, userEvent, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 import { useState } from 'react';

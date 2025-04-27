@@ -1,13 +1,13 @@
-import CardCVCInput from './cardInput/CardCVCInput';
-import CardExpiryDateInput from './cardInput/CardExpiryDateInput';
-import CardNumberInput from './cardInput/CardNumberInput';
+import CardCVCInput from './cardInput/CVCInput';
+import CardExpiryDateInput from './cardInput/ExpiryDateInput';
+import CardNumberInput from './cardInput/NumberInput';
 import styles from './cardInputForm.module.css';
-import CardIssuerSelector from './cardInput/CardIssuerSelector';
+import CardIssuerSelector from './cardInput/IssuerSelector';
 import CardSubmitButton from './CardSubmitButton';
 import { ROUTER } from '../../../global/constants';
 import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
-import CardPasswordInput from './cardInput/CardPasswordInput';
+import CardPasswordInput from './cardInput/PasswordInput';
 import { useState } from 'react';
 
 function CardInputForm() {
