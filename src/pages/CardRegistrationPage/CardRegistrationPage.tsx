@@ -32,7 +32,7 @@ export default function CardRegistrationPage() {
   };
 
   return (
-    <div className={styles.appContainer}>
+    <div className={styles.container}>
       <CardPreview
         numbers={cardNumbers}
         cardLogo={cardLogo}
