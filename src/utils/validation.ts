@@ -1,6 +1,9 @@
 import { cardNumber, date } from "../components/page/CardInfo";
 
-const EXPIRATION_MAX_LENGTH = 2;
+export const EXPIRATION_MAX_LENGTH = 2;
+export const CVC_MAX_LENGTH = 3;
+export const CARD_MAX_LENGTH = 4;
+export const PASSWORD_MAX_LENGTH = 2;
 
 export const getCurrentYear = () => new Date().getFullYear() % 100;
 
@@ -27,13 +30,13 @@ export const isValidExpirationDate = (date: { month: string; year: string }) => 
 };
 
 export const isValidCardNumber = (cardNumber: cardNumber) => {
-	return Object.values(cardNumber).every((value) => value.length === 4 && isNumberWithinRange(value, 4));
+	return Object.values(cardNumber).every((value) => value.length === CARD_MAX_LENGTH && isNumberWithinRange(value, 4));
 };
 
 export const isValidateExpirationDate = (expirationDate: date) => {
-	return expirationDate.month.length === 2 && expirationDate.year.length === 2 && isValidExpirationDate(expirationDate);
+	return expirationDate.month.length === EXPIRATION_MAX_LENGTH && expirationDate.year.length === EXPIRATION_MAX_LENGTH && isValidExpirationDate(expirationDate);
 };
 
 export const isValidateCvc = (cvcNumber: string) => {
-	return cvcNumber.length === 3 && isNumberWithinRange(cvcNumber, 3);
+	return cvcNumber.length === CVC_MAX_LENGTH && isNumberWithinRange(cvcNumber, 3);
 };

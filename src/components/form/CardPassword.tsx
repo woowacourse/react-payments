@@ -4,10 +4,9 @@ import Input from "../input/Input";
 import Description from "../description/Description";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
+import { PASSWORD_MAX_LENGTH } from "../../utils/validation";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
-
-const INPUT_MAX_LENGTH = 2;
 
 interface CardPasswordProps {
 	cardPassword: string;
@@ -20,7 +19,7 @@ const CardPassword = React.memo(({ cardPassword, setCardPassword }: CardPassword
 	const onChange = (value: string) => {
 		setCardPassword(value);
 
-		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
+		if (!isNumberWithinRange(value, PASSWORD_MAX_LENGTH)) {
 			setError(MESSAGE.INVALID_NUMBER);
 			return;
 		}
@@ -29,7 +28,7 @@ const CardPassword = React.memo(({ cardPassword, setCardPassword }: CardPassword
 	};
 
 	const onBlur = (value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
+		if (value.length < PASSWORD_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(PASSWORD_MAX_LENGTH));
 	};
 
 	return (
@@ -37,7 +36,7 @@ const CardPassword = React.memo(({ cardPassword, setCardPassword }: CardPassword
 			<Title>비밀번호를 입력해 주세요</Title>
 			<Description>앞의 2자리를 입력해주세요</Description>
 			<InputField label="비밀번호 앞 2자리" errorMessage={error}>
-				<Input type="password" maxLength={INPUT_MAX_LENGTH} isError={!!error} value={cardPassword} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />
+				<Input type="password" maxLength={PASSWORD_MAX_LENGTH} isError={!!error} value={cardPassword} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />
 			</InputField>
 		</CardNumberWrap>
 	);

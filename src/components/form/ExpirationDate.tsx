@@ -5,12 +5,10 @@ import InputField from "../inputField/InputField";
 import Title from "../title/Title";
 import Input from "../input/Input";
 import findErrorOrder from "../../utils/findErrorOrder";
+import { EXPIRATION_MAX_LENGTH, isValidMonth, isValidYear } from "../../utils/validation";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
-import { isValidMonth, isValidYear } from "../../utils/validation";
-
-const INPUT_MAX_LENGTH = 2;
 
 interface ExpirationDateProps {
 	expirationDate: date;
@@ -35,7 +33,7 @@ const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: Expira
 	};
 
 	const validateInputFormat = (order: keyof date, value: string): boolean => {
-		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
+		if (!isNumberWithinRange(value, EXPIRATION_MAX_LENGTH)) {
 			setError((prev) => ({ ...prev, [order]: MESSAGE.INVALID_NUMBER }));
 			return false;
 		}
@@ -75,7 +73,7 @@ const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: Expira
 	};
 
 	const onBlur = (order: keyof date, value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
+		if (value.length < EXPIRATION_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
 	return (
@@ -90,7 +88,7 @@ const ExpirationDate = React.memo(({ expirationDate, setExpirationDate }: Expira
 							isError={!!error[label]}
 							placeholder={placeholderMap[label]}
 							value={expirationDate[label]}
-							maxLength={INPUT_MAX_LENGTH}
+							maxLength={EXPIRATION_MAX_LENGTH}
 							onChange={(numbers) => onChange(label, numbers)}
 							onBlur={(numbers) => onBlur(label, numbers)}
 						/>

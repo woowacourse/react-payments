@@ -6,10 +6,9 @@ import Title from "../title/Title";
 import findErrorOrder from "../../utils/findErrorOrder";
 import { cardNumber } from "../page/CardInfo";
 import isNumberWithinRange from "../../utils/isNumberWithinRange";
+import { CARD_MAX_LENGTH } from "../../utils/validation";
 import { MESSAGE } from "./constants/error";
 import styled from "styled-components";
-
-const INPUT_MAX_LENGTH = 4;
 
 type CardNumberProps = {
 	cardNumber: cardNumber;
@@ -28,7 +27,7 @@ const CardNumber = React.memo(({ cardNumber, setCardNumber }: CardNumberProps) =
 	const onChange = (order: keyof cardNumber, value: string) => {
 		setCardNumber({ ...cardNumber, [order]: value });
 
-		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
+		if (!isNumberWithinRange(value, CARD_MAX_LENGTH)) {
 			setError({ ...error, [order]: MESSAGE.INVALID_NUMBER });
 			return;
 		}
@@ -37,7 +36,7 @@ const CardNumber = React.memo(({ cardNumber, setCardNumber }: CardNumberProps) =
 	};
 
 	const onBlur = (order: keyof cardNumber, value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH) });
+		if (value.length < CARD_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(CARD_MAX_LENGTH) });
 	};
 
 	return (
@@ -51,7 +50,7 @@ const CardNumber = React.memo(({ cardNumber, setCardNumber }: CardNumberProps) =
 						isError={!!error[label]}
 						placeholder="1234"
 						value={cardNumber[label]}
-						maxLength={INPUT_MAX_LENGTH}
+						maxLength={CARD_MAX_LENGTH}
 						onChange={(numbers) => onChange(label, numbers)}
 						onBlur={(numbers) => onBlur(label, numbers)}
 					/>
