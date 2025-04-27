@@ -10,46 +10,24 @@ import CardIssuerForm from "./components/feature/CardIssuerForm/CardIssuerForm.t
 import Button from "./components/common/Button/Button.tsx";
 import useOpenForm from "./hooks/useOpenForm.tsx";
 import useCardError from "./hooks/useCardError.tsx";
-import { useEffect } from "react";
 
 function App() {
-  const {
-    cardState,
-    dispatch,
-    allComplete,
-    uniqueNumberComplete,
-    expirationDateomplete,
-    cvcNumberComplete,
-    cardIssuerComplete,
-  } = useCardInformation();
+  const { cardState, dispatch, uniqueNumberComplete, expirationDateComplete, cvcNumberComplete, cardIssuerComplete } =
+    useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
-  const { openNextForm, isFormOpen, checkNextFormOpen } = useOpenForm();
   const { cardErrorState, dispatchError, allClear, uniqueNumberClear, expirationDateClear, cvcNumberClear } =
     useCardError();
-
-  useEffect(() => {
-    if (!checkNextFormOpen("cvcNumber") && cvcNumberClear() && cvcNumberComplete()) {
-      openNextForm("cvcNumber");
-    }
-  }, [cardErrorState.cvcNumber]);
-
-  useEffect(() => {
-    if (!checkNextFormOpen("cardIssuer") && cardIssuerComplete()) {
-      openNextForm("cardIssuer");
-    }
-  }, [cardState.cardIssuer]);
-
-  useEffect(() => {
-    if (!checkNextFormOpen("expirationDate") && expirationDateClear() && expirationDateomplete()) {
-      openNextForm("expirationDate");
-    }
-  }, [cardErrorState.expirationDate]);
-
-  useEffect(() => {
-    if (!checkNextFormOpen("uniqueNumber") && uniqueNumberClear() && uniqueNumberComplete()) {
-      openNextForm("uniqueNumber");
-    }
-  }, [cardErrorState.uniqueNumber]);
+  const { openNextForm, isFormOpen } = useOpenForm({
+    cardState,
+    cardErrorState,
+    uniqueNumberComplete,
+    expirationDateComplete,
+    cvcNumberComplete,
+    cardIssuerComplete,
+    uniqueNumberClear,
+    expirationDateClear,
+    cvcNumberClear,
+  });
 
   return (
     <div>
@@ -97,7 +75,7 @@ function App() {
             dispatchError={dispatchError}
           />
         </div>
-        {isFormOpen("password") && allComplete() && allClear() && (
+        {isFormOpen("password") && allClear() && (
           <div css={ButtonContainerStyle}>
             <Button text={"확인"} />
           </div>
