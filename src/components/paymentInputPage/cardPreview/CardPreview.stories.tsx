@@ -13,17 +13,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    expiryDate: { month: '12', year: '25' },
-  },
-
   decorators: [
     (Story) => {
       const cardContextValue = {
         cardNumbers: ['1234', '5678', '9012', '3456'],
         cardIssuer: '',
+        expiryDate: { month: '12', year: '25' },
+        cardCVC: '',
+        password: '',
         setCardNumbers: () => {},
         setCardIssuer: () => {},
+        setExpiryDate: () => {},
+        setCardCVC: () => {},
+        setPassword: () => {},
       };
 
       return (
@@ -36,17 +38,19 @@ export const Default: Story = {
 };
 
 export const VisaUI: Story = {
-  args: {
-    expiryDate: { month: '12', year: '25' },
-  },
-
   decorators: [
     (Story) => {
       const cardContextValue = {
         cardNumbers: ['4134', '5678', '9012', '3456'],
         cardIssuer: '',
+        expiryDate: { month: '12', year: '25' },
+        cardCVC: '',
+        password: '',
         setCardNumbers: () => {},
         setCardIssuer: () => {},
+        setExpiryDate: () => {},
+        setCardCVC: () => {},
+        setPassword: () => {},
       };
       return (
         <CardContext.Provider value={cardContextValue}>
@@ -67,17 +71,19 @@ export const VisaUI: Story = {
 };
 
 export const MasterUI: Story = {
-  args: {
-    expiryDate: { month: '12', year: '25' },
-  },
-
   decorators: [
     (Story) => {
       const cardContextValue = {
         cardNumbers: ['5111', '1234', '1234', '1234'],
         cardIssuer: '',
+        expiryDate: { month: '12', year: '25' },
+        cardCVC: '',
+        password: '',
         setCardNumbers: () => {},
         setCardIssuer: () => {},
+        setExpiryDate: () => {},
+        setCardCVC: () => {},
+        setPassword: () => {},
       };
       return (
         <CardContext.Provider value={cardContextValue}>

@@ -2,30 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardExpiryDateInput from './ExpiryDateInput';
 import { expect, userEvent, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
-import { useState } from 'react';
+import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
   title: 'CardExpiryDateInput',
   component: CardExpiryDateInput,
   args: {
-    expiryDate: { month: '', year: '' },
     isValid: { month: true, year: true },
-    setExpiryDate: () => {},
     setIsValid: () => {},
   },
-
-  render: () => {
-    const [expiryDate, setExpiryDate] = useState({ month: '', year: '' });
-    const [isValid, setIsValid] = useState({ month: true, year: true });
-    return (
-      <CardExpiryDateInput
-        expiryDate={expiryDate}
-        setExpiryDate={setExpiryDate}
-        isValid={isValid}
-        setIsValid={setIsValid}
-      />
-    );
-  },
+  decorators: [
+    (Story) => (
+      <CardProvider>
+        <Story />
+      </CardProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardExpiryDateInput>;
 
 export default meta;
@@ -47,6 +39,10 @@ export const Default: Story = {
 };
 
 export const ErrorMonth: Story = {
+  args: {
+    isValid: { month: false, year: true },
+  },
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstInput = canvas.getByPlaceholderText('MM');
@@ -59,6 +55,10 @@ export const ErrorMonth: Story = {
 };
 
 export const ErrorYear: Story = {
+  args: {
+    isValid: { month: true, year: false },
+  },
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstInput = canvas.getByPlaceholderText('MM');
@@ -73,6 +73,10 @@ export const ErrorYear: Story = {
 };
 
 export const ErrorDuration: Story = {
+  args: {
+    isValid: { month: false, year: false },
+  },
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstInput = canvas.getByPlaceholderText('MM');
@@ -80,11 +84,6 @@ export const ErrorDuration: Story = {
 
     await userEvent.type(firstInput, '04');
     await userEvent.type(secondInput, '20');
-    ErrorDuration.args = {
-      ...ErrorDuration.args,
-      expiryDate: { month: '04', year: '20' },
-      isValid: { month: false, year: false },
-    };
 
     expect(firstInput.className).toContain(styles.isNotValid);
     expect(secondInput.className).toContain(styles.isNotValid);

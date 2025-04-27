@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPasswordInput from './PasswordInput';
 import { userEvent, expect, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
+import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
   title: 'CardPasswordInput',
@@ -10,6 +11,13 @@ const meta = {
     isValid: true,
     setIsValid: () => {},
   },
+  decorators: [
+    (Story) => (
+      <CardProvider>
+        <Story />
+      </CardProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardPasswordInput>;
 
 export default meta;

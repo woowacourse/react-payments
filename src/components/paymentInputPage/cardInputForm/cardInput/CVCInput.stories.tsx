@@ -2,16 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 import CardCVCInput from './CVCInput';
+import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
   title: 'CardCVCInput',
   component: CardCVCInput,
   args: {
-    cardCVC: '',
-    setCardCVC: () => {},
     isValid: true,
     setIsValid: () => {},
   },
+  decorators: [
+    (Story) => (
+      <CardProvider>
+        <Story />
+      </CardProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;
