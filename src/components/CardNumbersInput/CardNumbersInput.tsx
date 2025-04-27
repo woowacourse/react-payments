@@ -4,11 +4,13 @@ import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import { useCardNumbersValidation } from '../../hooks/useCardNumbersValidation';
 import { useCardFormContext } from '../../context/CardFormContext';
 import { useConfirmButton } from '../../context/ConfirmButtonContext';
+import { useRef } from 'react';
 
 const CardNumbersInput = () => {
   const { cardNumbers, setCardNumbers } = useCardFormContext();
   const [isErrors, errorMessage, validate] = useCardNumbersValidation();
   const { updateInputState } = useConfirmButton();
+  const cardNumbersRef = useRef<HTMLInputElement[]>([]);
 
   const updateCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -22,14 +24,10 @@ const CardNumbersInput = () => {
       (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
     );
     updateInputState('cardNumbers', { isComplete: isValid });
-    console.log('isValid', isValid);
     if (isValid) updateInputState('brand', { isVisible: true });
-  };
-
-  const isDisabled = (index: number) => {
-    const errorIndex = isErrors.findIndex((error) => error === true);
-    if (errorIndex === -1) return false;
-    if (errorIndex < index) return true;
+    if (e.target.value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH) {
+      cardNumbersRef.current[index + 1]?.focus();
+    }
   };
 
   return (
@@ -48,7 +46,11 @@ const CardNumbersInput = () => {
             onChange={(e) => updateCardNumber(e, index)}
             className={`input ${isErrors[index] && 'errorInput'}`}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
-            disabled={isDisabled(index)}
+            ref={(element) => {
+              if (element) {
+                cardNumbersRef.current[index] = element;
+              }
+            }}
           />
         ))}
       </div>

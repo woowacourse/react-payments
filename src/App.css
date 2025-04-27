@@ -60,6 +60,10 @@ body {
   min-height: 20px;
 }
 
+.errorInput {
+  outline: 1px solid red;
+}
+
 .errorInput:focus {
   outline: 1px solid red;
 }

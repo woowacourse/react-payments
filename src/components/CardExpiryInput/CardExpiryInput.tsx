@@ -4,12 +4,14 @@ import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
 import { useCardExpiryValidation } from '../../hooks/useExpiryInputValidation';
 import { useConfirmButton } from '../../context/ConfirmButtonContext';
 import { useCardFormContext } from '../../context/CardFormContext';
+import { useRef } from 'react';
 
 const CardExpiryInput = () => {
   const { month, setMonth, year, setYear } = useCardFormContext();
   const [isErrors, errorMessage, validate] = useCardExpiryValidation();
   const [isMonthError, isYearError] = isErrors;
   const { updateInputState, inputsState } = useConfirmButton();
+  const expiryRef = useRef<HTMLInputElement[]>([]);
 
   const updateDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,6 +34,9 @@ const CardExpiryInput = () => {
     if (isExpiryComplete) {
       updateInputState('CVC', { isVisible: true });
     }
+    if (e.target.value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH) {
+      expiryRef.current[1]?.focus();
+    }
   };
 
   if (!inputsState.expiry.isVisible) {
@@ -52,7 +57,11 @@ const CardExpiryInput = () => {
           onChange={updateDate}
           className={`input ${isMonthError ? 'errorInput' : ''}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
-          disabled={isYearError}
+          ref={(element) => {
+            if (element) {
+              expiryRef.current[0] = element;
+            }
+          }}
         />
         <input
           type="text"
@@ -62,7 +71,11 @@ const CardExpiryInput = () => {
           onChange={updateDate}
           className={`input ${isYearError ? 'errorInput' : ''}`}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
-          disabled={isMonthError}
+          ref={(element) => {
+            if (element) {
+              expiryRef.current[1] = element;
+            }
+          }}
         />
       </div>
       <p className="helperText" data-testid="helper-text">
