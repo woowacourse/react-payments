@@ -6,7 +6,6 @@ import { StyledContainer } from "./CardTypeSection.css";
 
 export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
   const options = [
-    { value: "", label: "카드사를 선택해주세요", default: true },
     ...Object.entries(CARD_TYPES).map(([key, value]) => ({
       value: key,
       label: value,
@@ -24,6 +23,7 @@ export default function CardTypeSection({ cardType }: CardTypeSectionProps) {
         value={cardType.values.cardType}
         width="100%"
         options={options}
+        placeholder="카드사를 선택해주세요"
       />
     </StyledContainer>
   );

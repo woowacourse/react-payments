@@ -21,7 +21,6 @@ export const StyledSelect = styled.select<{ width?: string }>`
   }
 `;
 
-export const StyledOption = styled.option<{ isDefault?: boolean }>`
-  color: ${(props) => (props.isDefault ? "red" : "black")};
+export const StyledOption = styled.option`
   font-size: 14px;
 `;
