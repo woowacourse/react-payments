@@ -14,7 +14,7 @@ interface CardExpirationDateProps {
 }
 
 const EXPIRATION_DATE = {
-  TITLE: "카드 유효기간을",
+  TITLE: "카드 유효기간을 입력해 주세요.",
   DESCRIPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
   SUBTITLE: "유효기간",
   PLACEHOLDER_YEAR: "YY",

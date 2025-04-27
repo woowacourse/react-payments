@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CARD_NUMBER = {
-  TITLE: "결제할 카드 번호를",
+  TITLE: "결제할 카드 번호를 입력해 주세요.",
   DESCRIPTION: "본인 명의의 카드만 결제 가능합니다.",
   SUBTITLE: "카드 번호",
   MAX_LENGTH: 4,

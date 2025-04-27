@@ -10,7 +10,7 @@ interface CardCvcNumberProps {
 }
 
 const CARD_CVC_NUMBER = {
-  TITLE: "CVC 번호를",
+  TITLE: "CVC 번호를 입력해 주세요.",
   SUBTITLE: "CVC",
   PLACEHOLDER: "123",
 } as const;
