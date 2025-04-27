@@ -10,13 +10,14 @@ const CardRegistration = () => {
     useCardInfo();
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     navigate(ROUTES.CARD_COMPLETE);
   };
 
   return (
     <div className="card-container">
-      <main className="card-content">
+      <form onSubmit={handleSubmit} className="card-content">
         <Preview cardInfo={cardInfo} />
         <CardInfoContainer
           onChange={handleCardInfoChange}
@@ -24,11 +25,11 @@ const CardRegistration = () => {
           currentSection={currentSection}
         />
         {isAllSectionsCompleted && (
-          <button className="submit-button" onClick={handleSubmit}>
+          <button type="submit" className="submit-button">
             확인
           </button>
         )}
-      </main>
+      </form>
     </div>
   );
 };
