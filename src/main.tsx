@@ -7,7 +7,7 @@ import CardForm from "./pages/CardForm/CardForm";
 import { GlobalStyles } from "./styles/Global.styled";
 import { CardProvider } from "./contexts/CardContext";
 import { CardValidationProvider } from "./contexts/CardValidationContext";
-import { basePath } from "./constants/router";
+import { basePath } from "./config/router";
 
 function Layout() {
   return (

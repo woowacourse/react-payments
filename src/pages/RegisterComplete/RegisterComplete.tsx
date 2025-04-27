@@ -6,7 +6,7 @@ import {
   CompletionTitleStyles,
   RegisterCompleteStyles,
 } from "./RegisterComplete.styled";
-import { basePath } from "../../constants/router";
+import { basePath } from "../../config/router";
 
 export default function RegisterComplete() {
   const { state } = useLocation();
