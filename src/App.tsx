@@ -6,7 +6,7 @@ import { CardProvider } from './contexts/CardContext';
 function App() {
   return (
     <>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <CardProvider>
           <Routes>
             <Route path={ROUTER.main} element={<PaymentInputPage />} />
