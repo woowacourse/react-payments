@@ -4,11 +4,12 @@ import {
   useState,
   useCallback,
   ReactNode,
+  RefObject,
+  ChangeEvent,
 } from 'react';
 import {
   useMultipleInputFields,
   useInputField,
-  InputFieldState,
 } from '../hooks/useCardInputHooks';
 import {
   isValidNumberSegment,
@@ -17,28 +18,31 @@ import {
   validatePasswordSegment,
 } from '../utils/cardValidation';
 import useFormValidation from '../hooks/useFormValidation';
+import { InputFieldState } from '../types/models';
 
 interface CardFormContextValue {
   numberFields: InputFieldState[];
   handleNumberFieldChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
+  numberInputRefs: RefObject<HTMLInputElement | null>[];
 
   expiryFields: InputFieldState[];
   handleExpiryFieldChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
+  expiryInputRefs: RefObject<HTMLInputElement | null>[];
 
   cvcField: InputFieldState;
-  handleCvcFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCvcFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
 
   passwordField: InputFieldState;
-  handlePasswordFieldChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
 
   brand: string;
-  handleBrandSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleBrandSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 
   isPeriodSeparatorShowing: boolean;
   showPeriodSeparator: () => void;
@@ -56,25 +60,22 @@ interface CardFormProviderProps {
 export const CardFormProvider = ({ children }: CardFormProviderProps) => {
   const [brand, setBrand] = useState<string>('');
   const handleBrandSelectChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (e: ChangeEvent<HTMLSelectElement>) => {
       setBrand(e.target.value);
     },
     []
   );
 
-  const [numberFields, handleNumberFieldChange] = useMultipleInputFields(
-    ['', '', '', ''],
-    ['1234', '1234', '1234', '1234'],
-    4,
-    isValidNumberSegment
-  );
+  const [numberFields, handleNumberFieldChange, numberInputRefs] =
+    useMultipleInputFields(
+      ['', '', '', ''],
+      ['1234', '1234', '1234', '1234'],
+      4,
+      isValidNumberSegment
+    );
 
-  const [expiryFields, handleExpiryFieldChange] = useMultipleInputFields(
-    ['', ''],
-    ['MM', 'YY'],
-    2,
-    isValidExpirationSegment
-  );
+  const [expiryFields, handleExpiryFieldChange, expiryInputRefs] =
+    useMultipleInputFields(['', ''], ['MM', 'YY'], 2, isValidExpirationSegment);
 
   const [cvcField, handleCvcFieldChange] = useInputField(
     '',
@@ -114,8 +115,10 @@ export const CardFormProvider = ({ children }: CardFormProviderProps) => {
       value={{
         numberFields,
         handleNumberFieldChange,
+        numberInputRefs,
         expiryFields,
         handleExpiryFieldChange,
+        expiryInputRefs,
         cvcField,
         handleCvcFieldChange,
         passwordField,
