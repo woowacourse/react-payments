@@ -21,14 +21,7 @@ export default function CardPasswordSection({
       <S.CardInfoSubSection>
         <S.CardInfoSubTitle>비밀번호 앞 2자리</S.CardInfoSubTitle>
         <S.CardInfoInputContainer>
-          <CustomInput
-            key={`password-custom-input`}
-            type='password'
-            name='cardPassword'
-            onBlur={onBlur}
-            maxLength={2}
-            error={isError}
-          />
+          <CustomInput type='password' name='cardPassword' onBlur={onBlur} maxLength={2} error={isError} />
         </S.CardInfoInputContainer>
         <S.CardInfoError>{isError && error['cardPasswordError'].errorMessage}</S.CardInfoError>
       </S.CardInfoSubSection>
