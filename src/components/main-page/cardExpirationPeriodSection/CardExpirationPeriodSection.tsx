@@ -16,6 +16,8 @@ function CardExpirationPeriodSection({
   expirationPeriod,
   changeExpirationPeriod,
   viewNextInput,
+  getErrorMessage,
+  isInvalid,
 }: ExpirationPeriodProps) {
   return (
     <StyledContainer>
@@ -23,6 +25,8 @@ function CardExpirationPeriodSection({
       <CardExpirationPeriodInputs
         expirationPeriod={expirationPeriod}
         changeExpirationPeriod={changeExpirationPeriod}
+        getErrorMessage={getErrorMessage}
+        isInvalid={isInvalid}
         viewNextInput={viewNextInput}
       />
     </StyledContainer>

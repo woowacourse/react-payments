@@ -12,11 +12,23 @@ const StyledContainer = styled.div`
   width: 100%;
 `;
 
-function CardCVCNumberSection({ CVCNumber, changeCVCNumber, viewNextInput }: CardCVCNumberSectionProps) {
+function CardCVCNumberSection({
+  CVCNumber,
+  changeCVCNumber,
+  viewNextInput,
+  getErrorMessage,
+  isInvalid,
+}: CardCVCNumberSectionProps) {
   return (
     <StyledContainer>
       <SectionTitle title="CVC 번호를 입력해 주세요" />
-      <CardCVCNumberInputs CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
+      <CardCVCNumberInputs
+        CVCNumber={CVCNumber}
+        changeCVCNumber={changeCVCNumber}
+        getErrorMessage={getErrorMessage}
+        isInvalid={isInvalid}
+        viewNextInput={viewNextInput}
+      />
     </StyledContainer>
   );
 }

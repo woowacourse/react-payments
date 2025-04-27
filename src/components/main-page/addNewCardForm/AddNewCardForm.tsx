@@ -11,6 +11,7 @@ import { ExpirationPeriod, Position } from '../../../types/index.types';
 import Button from '../../common/button/Button';
 import { useCardInfo } from '../CardInfoContext';
 import { useNavigate } from 'react-router-dom';
+import { useValidation } from '../../../hooks/useValidation';
 
 const StyledFrame = styled.div`
   display: inline-flex;
@@ -50,6 +51,8 @@ function AddNewCardForm() {
   const [CVCNumber, setCVCNumber] = useState(INITIALIZE_VALUE);
   const [password, setPassword] = useState(INITIALIZE_VALUE);
   const [cardColor, setCardColor] = useState('#333333');
+
+  const { getErrorMessage, isInvalid } = useValidation();
 
   const navigate = useNavigate();
 
@@ -98,16 +101,31 @@ function AddNewCardForm() {
     <StyledFrame>
       <CardPreview cardNumber={cardNumber} expirationPeriod={expirationPeriod} backgroundColor={cardColor} />
       <StepContainer>
-        {step >= 4 && <CardPasswordSection password={password} changePassword={changePassword} />}
+        {step >= 4 && (
+          <CardPasswordSection
+            password={password}
+            changePassword={changePassword}
+            getErrorMessage={getErrorMessage}
+            isInvalid={isInvalid}
+          />
+        )}
 
         {step >= 3 && (
-          <CardCVCNumberSection CVCNumber={CVCNumber} changeCVCNumber={changeCVCNumber} viewNextInput={viewNextInput} />
+          <CardCVCNumberSection
+            CVCNumber={CVCNumber}
+            changeCVCNumber={changeCVCNumber}
+            getErrorMessage={getErrorMessage}
+            isInvalid={isInvalid}
+            viewNextInput={viewNextInput}
+          />
         )}
 
         {step >= 2 && (
           <CardExpirationPeriodSection
             expirationPeriod={expirationPeriod}
             changeExpirationPeriod={changeExpirationPeriod}
+            getErrorMessage={getErrorMessage}
+            isInvalid={isInvalid}
             viewNextInput={viewNextInput}
           />
         )}
@@ -126,6 +144,8 @@ function AddNewCardForm() {
           <CardNumberSection
             cardNumber={cardNumber}
             changeCardNumber={changeCardNumber}
+            getErrorMessage={getErrorMessage}
+            isInvalid={isInvalid}
             viewNextInput={viewNextInput}
           />
         )}

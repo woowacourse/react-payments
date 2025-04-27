@@ -1,40 +1,18 @@
 import Input from '../../common/input/Input';
-import { CardNumber, CardNumberProps } from '../../../types/index.types';
-import { isValidLength, isValidNumber } from '../../../util/validation';
+import { CardNumberProps } from '../../../types/index.types';
+import { isValidNumber } from '../../../util/validation';
 import { NO_ERROR } from '../../../constants/constant';
 import { StyledContainer, StyledInputWrap, StyledErrorMessage } from '../../../styled-component/inputs';
 import autoFocusToNext from '../../../util/autoFocus';
+import { ValidationProps } from '../../../hooks/useValidation';
 
-const CARD_NUMBER_LENGTH = 4;
-
-const errorMessages = {
-  length: '4자리만 입력 가능합니다.',
-  number: '숫자만 입력 가능합니다.',
-};
-
-const isCardNumberInvalid = (cardNumber: string): boolean => {
-  if (cardNumber === '') return false;
-  if (!isValidLength(cardNumber, CARD_NUMBER_LENGTH)) return true;
-  if (!isValidNumber(cardNumber)) return true;
-  return false;
-};
-
-const getErrorMessage = (cardNumbers: CardNumber) => {
-  let errorMessage = NO_ERROR;
-  Object.values(cardNumbers).forEach((cardNumber) => {
-    if (cardNumber === NO_ERROR) return;
-    if (!isValidLength(cardNumber, CARD_NUMBER_LENGTH)) {
-      errorMessage = errorMessages.length;
-    }
-    if (!isValidNumber(cardNumber)) {
-      errorMessage = errorMessages.number;
-    }
-  });
-  return errorMessage;
-};
-
-function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber, viewNextInput }: CardNumberProps) {
-  const errorMessage = getErrorMessage(cardNumbers);
+function CardNumberInputs({
+  cardNumber: cardNumbers,
+  changeCardNumber,
+  viewNextInput,
+  getErrorMessage,
+  isInvalid,
+}: CardNumberProps & ValidationProps) {
   const inputKeys: (keyof typeof cardNumbers)[] = ['first', 'second', 'third', 'fourth'];
 
   return (
@@ -48,25 +26,29 @@ function CardNumberInputs({ cardNumber: cardNumbers, changeCardNumber, viewNextI
               value={cardNumbers[key]}
               onChange={(e) => {
                 changeCardNumber(key, e.target?.value);
-                autoFocusToNext(e, CARD_NUMBER_LENGTH);
+                autoFocusToNext(e, 4);
 
                 const isLast = key === 'fourth';
-                const isComplete = e.target.value.length === CARD_NUMBER_LENGTH && isValidNumber(e.target.value);
+                const isComplete = e.target.value.length === 4 && isValidNumber(e.target.value);
 
                 if (isLast && isComplete) {
                   viewNextInput();
                 }
               }}
               width="25%"
-              maxLength={CARD_NUMBER_LENGTH}
+              maxLength={4}
               placeholder="1234"
-              isError={isCardNumberInvalid(cardNumbers[key])}
+              isError={isInvalid('cardNumber', cardNumbers[key])}
               isPassword={false}
             />
           ))}
         </StyledInputWrap>
       </form>
-      <StyledErrorMessage>{errorMessage ?? ''}</StyledErrorMessage>
+      <StyledErrorMessage>
+        {Object.values(cardNumbers)
+          .map((num) => getErrorMessage('cardNumber', num))
+          .find((msg) => msg !== NO_ERROR) ?? ''}
+      </StyledErrorMessage>
     </StyledContainer>
   );
 }
