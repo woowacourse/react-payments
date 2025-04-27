@@ -5,16 +5,23 @@ import CardBrand from "./components/CardBrand/CardBrand";
 import CardNumberInput from './components/CardNumberInput/CardNumberInput';
 import CardPeriodInput from './components/CardPeriod/CardPeriodInput';
 import CardCVCInput from './components/CardCVCInput/CardCVCInput';
-import CardPassword from "./components/CardPassword/CardPassword";
+import CardPasswordInput from "./components/CardPassword/CardPasswordInput.tsx";
 import Button from "./components/@common/Button/Button";
+import {useMemo, useState} from "react";
 import {appLayout, cardLayout, mainLayout} from './App.style';
 import {Global, ThemeProvider} from '@emotion/react';
-import {useCardNumber, useCardExpiration, useCardCVC} from './hooks';
-import {useMemo, useState} from "react";
+import {useCardNumber, useCardExpiration, useCardCVC, useCardPassword} from './hooks';
 import {CardBrandType} from "./types";
 
 function App() {
   const [brand, setBrand] = useState<CardBrandType | null>(null);
+
+  const {
+    cardPassword,
+    cardPasswordError,
+    handleCardPasswordChange,
+    getCardPasswordErrorMessage,
+  } = useCardPassword();
 
   const {
     cardNumber,
@@ -34,7 +41,6 @@ function App() {
   const {cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage} =
     useCardCVC();
 
-  // Usememo나 변수로 마지막인풋 글자수 확인
   const isAllInputFilled = useMemo(() => {
     return (
       cardNumber.first !== null &&
@@ -43,9 +49,10 @@ function App() {
       cardNumber.forth !== null &&
       cardExpirationDate.month !== null &&
       cardExpirationDate.year !== null &&
-      cardCVC !== null
+      cardCVC !== null &&
+      cardPassword !== null
     );
-  }, [cardNumber, cardExpirationDate, cardCVC]);
+  }, [cardNumber, cardExpirationDate, cardCVC, cardPassword]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -54,7 +61,12 @@ function App() {
         <main css={mainLayout}>
           <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} brand={brand}/>
           <section css={cardLayout}>
-            <CardPassword/>
+            <CardPasswordInput
+              cardPassword={cardPassword}
+              onChange={handleCardPasswordChange}
+              hasError={cardPasswordError}
+              getCardPasswordErrorMessage={getCardPasswordErrorMessage}
+            />
             <CardCVCInput
               cardCVC={cardCVC}
               onChange={handleCardCVCChange}
@@ -76,9 +88,9 @@ function App() {
               getCardNumberErrorMessage={getCardNumberErrorMessage}
             />
           </section>
-            {isAllInputFilled && (
-              <Button content='확인' style="bottom"/>
-            )}
+          {isAllInputFilled && (
+            <Button content='확인' style="bottom"/>
+          )}
         </main>
       </div>
     </ThemeProvider>

@@ -22,7 +22,9 @@ export type CardExpirationDateError = {
   year: boolean;
 };
 
-export type CardCVC = number | null;
+export type CardCVC = string | null;
+
+export type CardPassword = string | null;
 
 export enum CardBrands {
   BC카드 = 'BC카드',
