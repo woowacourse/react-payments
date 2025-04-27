@@ -4,19 +4,19 @@ import CardNumber from "./CardNumber/CardNumber";
 import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
 import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
 import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import useExpirationDate from "./hooks/useExpirationDate";
 import useCvcNumber from "./hooks/useCvcNumber";
 import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import CardCompanyPicker from "./CardCompany/CardCompany";
 import useCardCompany from "./hooks/useCardCompany";
 import useCardPassword from "./hooks/useCardPassword";
 import CardPassword from "./CardPassword/CardPassword";
+import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
 
 function App() {
   const { cardNumbers, cardType, cardNumbersError, handleChange } =
     useCardNumbersState();
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
-    useExpirationDate();
+    useExpirationDateState();
   const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
   const { selectedCompany, selectCompany } = useCardCompany();
   const { password, passwordError, passwordValidate } = useCardPassword();

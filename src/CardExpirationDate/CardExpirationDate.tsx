@@ -2,10 +2,7 @@ import InputErrorMessage from "../components/Input/InputErrorMessage";
 import NumberInput from "../components/Input/CardNumberInput";
 import InputText from "../components/InputText/InputText";
 import styles from "./CardExpirationDate.module.css";
-import {
-  USE_EXPIRATION_DATE,
-  getExpirationErrorMessage,
-} from "../hooks/useExpirationDate";
+import useExpirationDateInputHandler from "../hooks/useExpirationDate/useExpirationDateInputHandler";
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
   cardExpirationDate: string[];
@@ -27,45 +24,15 @@ export default function CardExpirationDate({
   errorMessage,
   onComplete,
 }: CardExpirationDateProps) {
+  const { handleCardExpirationDateChange } = useExpirationDateInputHandler(
+    cardExpirationDate,
+    errorMessage,
+    handleChange,
+    onComplete
+  );
+
   const [monthValue, yearValue] = cardExpirationDate;
   const [monthErrorMessage, yearErrorMessage] = errorMessage;
-
-  const checkNextStep = ({
-    monthValue,
-    yearValue,
-    monthErrorMessage,
-    yearErrorMessage,
-  }: Record<string, string>) => {
-    if (
-      monthValue.length !== USE_EXPIRATION_DATE.MAX_LENGTH ||
-      yearValue.length !== USE_EXPIRATION_DATE.MAX_LENGTH
-    ) {
-      return;
-    }
-
-    // console.log(monthErrorMessage, yearErrorMessage);
-    if (monthErrorMessage !== "" || yearErrorMessage !== "") {
-      return;
-    }
-    onComplete();
-  };
-
-  const handleCardExpirationDateChange = (value: string, index: number) => {
-    handleChange(value, index);
-
-    const updatedExpirationDate = [...cardExpirationDate];
-    updatedExpirationDate[index] = value;
-
-    const updatedErrorMessages = [...errorMessage];
-    updatedErrorMessages[index] = getExpirationErrorMessage(value, index);
-
-    checkNextStep({
-      monthValue: updatedExpirationDate[0],
-      yearValue: updatedExpirationDate[1],
-      monthErrorMessage: updatedErrorMessages[0],
-      yearErrorMessage: updatedErrorMessages[1],
-    });
-  };
 
   return (
     <section className="card-expiration-date">
