@@ -8,7 +8,6 @@ import CardCompanyPicker from "./components/CardCompany/CardCompany";
 import CardPassword from "./components/CardPassword/CardPassword";
 import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
 import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
-import useCvcNumberState from "./hooks/useCvcNumber/useCvcNumberState";
 import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
 import useCardPasswordState from "./hooks/useCardPassword/useCardPasswordState";
 import CheckButton from "./components/CheckButton";
@@ -18,8 +17,7 @@ function App() {
     useCardNumbersState();
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
     useExpirationDateState();
-  const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } =
-    useCvcNumberState();
+  const [cvcNumbers, setCvcNumbers] = useState("");
   const { selectedCompany, selectCompany } = useCardCompanyState();
   const { password, passwordError, passwordValidate } = useCardPasswordState();
   const [step, setStep] = useState(1);
@@ -65,9 +63,8 @@ function App() {
         )}
         {step >= 4 && (
           <CardCvcNumber
-            handleChange={cvcNumbersValidate}
-            cvcNumbers={cvcNumbers}
-            errorMessage={cvcNumbersError}
+            numbers={cvcNumbers}
+            setNumbers={setCvcNumbers}
             onComplete={() => goToStep(5)}
           />
         )}
