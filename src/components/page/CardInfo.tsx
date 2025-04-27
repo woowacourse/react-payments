@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Card from "../card/Card";
 import CardNumber from "../form/CardNumber";
@@ -6,8 +5,13 @@ import ExpirationDate from "../form/ExpirationDate";
 import CardCvc from "../form/CardCvc";
 import CardCompany from "../form/CardCompany";
 import CardPassword from "../form/CardPassword";
-import useCardForm from "../../hooks/useCardForm";
 import Button from "../button/Button";
+import useCardNumber from "../../hooks/useCardNumber";
+import useCardCompany from "../../hooks/useCardCompany";
+import useExpirationDate from "../../hooks/useExpirationDate";
+import useCardPassword from "../../hooks/useCardPassword";
+import useCardCvc from "../../hooks/useCardCvc";
+import useFormStepControl from "../../hooks/useFormStepControl";
 import styled from "styled-components";
 
 export interface cardNumber {
@@ -22,37 +26,43 @@ export interface date {
 	year: string;
 }
 
+const RENDERING_STEP = {
+	cardNumber: 0,
+	company: 1,
+	expirationDate: 2,
+	cvc: 3,
+	password: 4,
+};
+
 function App() {
 	const navigate = useNavigate();
-	const { cardNumber, ...cardForm } = useCardForm();
-	const [maxStep, setMaxStep] = useState(0);
-	const RENDERING_STEP = {
-		cardNumber: 0,
-		company: 1,
-		expirationDate: 2,
-		cvc: 3,
-		password: 4,
-	};
-	const step = Object.values(cardForm.isComplete).filter(Boolean).length;
+	const cardNumberHook = useCardNumber();
+	const cardCompanyHook = useCardCompany();
+	const expirationDateHook = useExpirationDate();
+	const cardCvcHook = useCardCvc();
+	const cardPasswordHook = useCardPassword();
+	const { step, maxStep } = useFormStepControl({
+		cardNumber: cardNumberHook.isComplete,
+		company: cardCompanyHook.isComplete,
+		expirationDate: expirationDateHook.isComplete,
+		cvc: cardCvcHook.isComplete,
+		password: cardPasswordHook.isComplete,
+	});
 
 	const onClick = () => {
-		navigate("/addSuccess", { state: cardNumber.first });
+		navigate("/addSuccess", { state: cardNumberHook.cardNumber.first });
 	};
-
-	useEffect(() => {
-		setMaxStep((prev) => Math.max(prev, step));
-	}, [step]);
 
 	return (
 		<MainContainer>
 			<form>
-				<Card cardNumbers={cardNumber} cardCompany={cardForm.cardCompany} expirationDate={cardForm.expirationDate} />
+				<Card cardNumbers={cardNumberHook.cardNumber} cardCompany={cardCompanyHook.cardCompany} expirationDate={expirationDateHook.expirationDate} />
 
-				{maxStep >= RENDERING_STEP.password && <CardPassword cardPassword={cardForm.cardPassword} setCardPassword={cardForm.setCardPassword} />}
-				{maxStep >= RENDERING_STEP.cvc && <CardCvc cvcNumber={cardForm.cvcNumber} setCvcNumber={cardForm.setCvcNumber} />}
-				{maxStep >= RENDERING_STEP.expirationDate && <ExpirationDate expirationDate={cardForm.expirationDate} setExpirationDate={cardForm.setExpirationDate} />}
-				{maxStep >= RENDERING_STEP.company && <CardCompany cardCompany={cardForm.cardCompany} setCardCompany={cardForm.setCardCompany} />}
-				{maxStep >= RENDERING_STEP.cardNumber && <CardNumber cardNumber={cardNumber} setCardNumber={cardForm.setCardNumber} />}
+				{maxStep >= RENDERING_STEP.password && <CardPassword cardPassword={cardPasswordHook.cardPassword} setCardPassword={cardPasswordHook.setCardPassword} />}
+				{maxStep >= RENDERING_STEP.cvc && <CardCvc cvcNumber={cardCvcHook.cvcNumber} setCvcNumber={cardCvcHook.setCvcNumber} />}
+				{maxStep >= RENDERING_STEP.expirationDate && <ExpirationDate expirationDate={expirationDateHook.expirationDate} setExpirationDate={expirationDateHook.setExpirationDate} />}
+				{maxStep >= RENDERING_STEP.company && <CardCompany cardCompany={cardCompanyHook.cardCompany} setCardCompany={cardCompanyHook.setCardCompany} />}
+				{maxStep >= RENDERING_STEP.cardNumber && <CardNumber cardNumber={cardNumberHook.cardNumber} setCardNumber={cardNumberHook.setCardNumber} />}
 
 				{step === 5 && (
 					<ButtonWrap>
