@@ -50,10 +50,7 @@ function CardExpiryDateInput({
     );
 
     setFeedbackMessage(message);
-    setIsValid((prev) => ({
-      ...prev,
-      [name]: isValid,
-    }));
+    setIsValid(isValid);
   }
 
   return (
