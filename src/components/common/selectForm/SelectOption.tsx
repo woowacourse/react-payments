@@ -1,9 +1,11 @@
 import styles from "./SelectOption.module.css";
+
 interface SelectState<T> {
-  selectedOption: T;
+  selectedOption: T | null;
   isOpened: boolean;
 }
-interface ISelectOption<T> {
+
+interface SelectOptionProps<T> {
   options: T[];
   setSelectState: React.Dispatch<React.SetStateAction<SelectState<T>>>;
 }
@@ -11,7 +13,7 @@ interface ISelectOption<T> {
 const SelectOption = <T extends {}>({
   options,
   setSelectState,
-}: ISelectOption<T>) => {
+}: SelectOptionProps<T>) => {
   function onClickHandler(option: T) {
     setSelectState({
       selectedOption: option,
@@ -21,16 +23,15 @@ const SelectOption = <T extends {}>({
 
   return (
     <ul className={styles.container}>
-      {options.map((option) => {
-        return (
-          <li
-            onClick={() => onClickHandler(option)}
-            className={`${styles.item} tx-md`}
-          >
-            {String(option)}
-          </li>
-        );
-      })}
+      {options.map((option, index) => (
+        <li
+          key={index}
+          onClick={() => onClickHandler(option)}
+          className={`${styles.item} tx-md`}
+        >
+          {String(option)}
+        </li>
+      ))}
     </ul>
   );
 };

@@ -96,7 +96,11 @@ function CardInputForm({
       {isVisibleSubmitButton && (
         <Button
           type="submit"
-          backgroundColor={CARD_BACKGROUND_COLOR[brandName]}
+          backgroundColor={
+            brandName !== ""
+              ? CARD_BACKGROUND_COLOR[brandName]
+              : "var(--light-black)"
+          }
         >
           확인
         </Button>

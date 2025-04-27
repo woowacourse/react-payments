@@ -2,16 +2,15 @@ import { useLocation, useNavigate } from "react-router";
 import styles from "./AddCardSuccessPage.module.css";
 import CheckCircleIcon from "../../../components/common/icon/CheckCircleIcon";
 import { CARD_BACKGROUND_COLOR } from "../payment-input/components/cardPreview/constants/DisplayData";
+import { TCardBrand } from "../payment-input/components/cardPreview/constants/DisplayData";
 
-interface AddCardSuccessPageProps {
-  cardNumber: string;
-  brandName: string;
-}
-
-function AddCardSuccessPage({}: AddCardSuccessPageProps) {
+function AddCardSuccessPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { firstCardNumber, brandName } = location.state || {};
+  const {
+    firstCardNumber,
+    brandName,
+  }: { firstCardNumber: string; brandName: TCardBrand } = location.state || {};
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -30,9 +29,7 @@ function AddCardSuccessPage({}: AddCardSuccessPageProps) {
         <button
           className={`${styles.confirmButton} tx-lg`}
           onClick={() => navigate("/add-card")}
-          style={{
-            backgroundColor: CARD_BACKGROUND_COLOR[brandName],
-          }}
+          style={{ backgroundColor: CARD_BACKGROUND_COLOR[brandName] }}
         >
           확인
         </button>

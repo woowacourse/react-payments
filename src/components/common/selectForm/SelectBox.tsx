@@ -11,8 +11,8 @@ interface SelectBoxProps<T> {
   onSelectHandler?: (value: T) => void;
 }
 
-interface SelectState {
-  selectedOption: string;
+interface SelectState<T> {
+  selectedOption: T | null;
   isOpened: boolean;
 }
 
@@ -21,22 +21,24 @@ const SelectBox = <T extends {}>({
   placeholder,
   title,
   description,
-  ...props
+  options,
 }: SelectBoxProps<T>) => {
-  const [selectState, setSelectState] = useState<SelectState>({
+  const [selectState, setSelectState] = useState<SelectState<T>>({
     isOpened: false,
-    selectedOption: "",
+    selectedOption: null,
   });
 
   function onClickHandler() {
-    setSelectState({
-      ...selectState,
-      isOpened: !selectState.isOpened,
-    });
+    setSelectState((prev) => ({
+      ...prev,
+      isOpened: !prev.isOpened,
+    }));
   }
 
   useEffect(() => {
-    if (onSelectHandler) onSelectHandler(selectState.selectedOption);
+    if (onSelectHandler && selectState.selectedOption !== null) {
+      onSelectHandler(selectState.selectedOption);
+    }
   }, [selectState.selectedOption]);
 
   return (
@@ -53,17 +55,17 @@ const SelectBox = <T extends {}>({
         className={styles.selector}
       >
         <span>
-          {selectState.selectedOption === ""
+          {selectState.selectedOption === null
             ? placeholder
-            : selectState.selectedOption}
+            : String(selectState.selectedOption)}
         </span>
         <ArrowSvg
-          color={selectState.selectedOption === "" ? "#acacac" : "black"}
+          color={selectState.selectedOption === null ? "#acacac" : "black"}
           isOpened={selectState.isOpened}
         />
       </button>
       {selectState.isOpened && (
-        <SelectOption setSelectState={setSelectState} {...props} />
+        <SelectOption options={options} setSelectState={setSelectState} />
       )}
     </div>
   );

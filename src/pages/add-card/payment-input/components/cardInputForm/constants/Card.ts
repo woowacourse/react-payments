@@ -1,3 +1,5 @@
+import { TCardBrand } from "../../cardPreview/constants/DisplayData";
+
 const CARD = {
   BRAND: [
     "BC카드",
@@ -8,7 +10,7 @@ const CARD = {
     "롯데카드",
     "하나카드",
     "국민카드",
-  ],
+  ] as TCardBrand[],
 };
 
 export default CARD;

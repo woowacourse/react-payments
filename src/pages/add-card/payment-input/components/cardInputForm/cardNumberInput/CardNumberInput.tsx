@@ -29,7 +29,9 @@ function CardNumberInput({
     >
       {cardNumberInfo.cardNumbers.map((number, i) => (
         <Input
-          ref={(el) => (inputRefs.current[i] = el)}
+          ref={(el) => {
+            inputRefs.current[i] = el;
+          }}
           key={i}
           type="tel"
           name={`cardNumber-${i}`}
