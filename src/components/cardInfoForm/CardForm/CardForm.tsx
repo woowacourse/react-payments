@@ -56,82 +56,53 @@ const initialState: FormState = {
   cardPasswordErrorMessage: '',
 };
 
-const validateYearErrorMessage = (month: string, year: string) => {
-  const invalidInput = checkValideDate(month, year);
-  if (invalidInput !== null) {
-    return {
-      message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-      type: invalidInput,
-    };
+type ExpiryField = 'month' | 'year';
+
+interface ValidationResult {
+  message: string;
+  field: ExpiryField | null;
+}
+
+const validateExpiry = (
+  monthStr: string,
+  yearStr: string,
+  focueType: ExpiryField,
+): ValidationResult => {
+  const INVALID_DATE_MSG = '현재보다 이전값을 유효기간으로 선택할 수 없습니다.';
+  const FORMAT_MSG = 'MM형식으로 입력해주세요. (ex. 01)';
+  const MONTH_RANGE_MSG = '1~12사이의 올바른 월을 입력해 주세요.';
+
+  const month = Number(monthStr);
+  const year = Number(yearStr);
+  const currentYear = Number(new Date().getFullYear().toString().slice(2));
+
+  if (focueType === 'month') {
+    if (monthStr.length < 2) return { message: FORMAT_MSG, field: 'month' };
+    if (month < 1 || month > 12)
+      return { message: MONTH_RANGE_MSG, field: 'month' };
+  }
+  if (focueType === 'year') {
+    if (yearStr.length < 2) return { message: FORMAT_MSG, field: 'year' };
+    if (year < currentYear) return { message: INVALID_DATE_MSG, field: 'year' };
   }
 
-  const currentYear = Number.parseInt(
-    new Date().getFullYear().toString().slice(2),
-    10,
-  );
-  const yearNumber = Number(year);
-
-  if (currentYear > yearNumber) {
-    return {
-      message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-      type: 'year',
-    };
+  const invalidField = checkValideDate(monthStr, yearStr);
+  if (invalidField) {
+    return { message: INVALID_DATE_MSG, field: invalidField };
   }
 
-  if (year.length < VALIDITY_PERIOD.MAX_LENGTH)
-    return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'year' };
-
-  const monthNumber = Number(month);
-  if (monthNumber > 12 || monthNumber < 1) {
-    return {
-      message: '1~12사이의 올바른 월을 입력해 주세요.',
-      type: 'month',
-    };
+  if (focueType === 'month') {
+    if (year < currentYear) return { message: INVALID_DATE_MSG, field: 'year' };
+    if (yearStr.length < 2) return { message: FORMAT_MSG, field: 'year' };
   }
 
-  if (month.length < VALIDITY_PERIOD.MAX_LENGTH)
-    return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
-
-  return { message: '', type: null };
-};
-
-const validateMonthErrorMessage = (month: string, year: string) => {
-  const monthNumber = Number(month);
-  if (monthNumber > 12 || monthNumber < 1) {
-    return {
-      message: '1~12사이의 올바른 월을 입력해 주세요.',
-      type: 'month',
-    };
+  if (focueType === 'year') {
+    if (month < 1 || month > 12)
+      return { message: MONTH_RANGE_MSG, field: 'month' };
+    if (monthStr.length < 2) return { message: FORMAT_MSG, field: 'month' };
   }
 
-  if (month.length < 2)
-    return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
-
-  const invalidInput = checkValideDate(month, year);
-  if (invalidInput !== null) {
-    return {
-      message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-      type: invalidInput,
-    };
-  }
-
-  const currentYear = Number.parseInt(
-    new Date().getFullYear().toString().slice(2),
-    10,
-  );
-  const yearNumber = Number(year);
-
-  if (currentYear > yearNumber) {
-    return {
-      message: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
-      type: 'year',
-    };
-  }
-
-  if (year.length < VALIDITY_PERIOD.MAX_LENGTH)
-    return { message: 'MM형식으로 입력해주세요. (ex. 01)', type: 'month' };
-
-  return { message: '', type: null };
+  return { message: '', field: null };
 };
 
 function formReducer(state: FormState, action: Action): FormState {
@@ -162,59 +133,20 @@ function formReducer(state: FormState, action: Action): FormState {
     case 'VALIDATE_CARD_VALIDITY_PERIOD': {
       const { type, month, year } = action.payload.cardValidityPeriod!;
 
-      if (type === 'month') {
-        const { message, type: dateType } = validateMonthErrorMessage(
-          month,
-          year,
-        );
+      const { message, field } = validateExpiry(month, year, type);
 
-        const isError =
-          message !== ''
-            ? {
-                month: false,
-                year: false,
-                [dateType!]: true,
-              }
-            : {
-                year: false,
-                month: false,
-              };
-        return {
-          ...state,
-          isErrorCardValidityPeriod: isError,
-          cardValidityMessage: message,
-        };
-      }
-      if (type === 'year') {
-        const { message, type: dateType } = validateYearErrorMessage(
-          month,
-          year,
-        );
-        // eslint-disable-next-line max-depth
-        if (message !== '') {
-          return {
-            ...state,
-            isErrorCardValidityPeriod: {
-              month: false,
-              year: false,
-              [dateType!]: true,
-            },
-            cardValidityMessage: message,
-          };
-        } else {
-          return {
-            ...state,
-            isErrorCardValidityPeriod: {
-              month: false,
-              year: false,
-            },
-            cardValidityMessage: message,
-          };
-        }
-      }
+      const isError = field
+        ? {
+            month: type === 'month' ? false : false,
+            year: false,
+            [field]: true,
+          }
+        : { month: false, year: false };
 
       return {
         ...state,
+        isErrorCardValidityPeriod: isError,
+        cardValidityMessage: message,
       };
     }
     case 'VALIDATE_CARD_PASSWORD': {
