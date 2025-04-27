@@ -40,7 +40,31 @@ const useCardError = () => {
     return Object.values(cardErrorState).every((field) => field.every((value) => value === false));
   };
 
-  return { cardErrorState, dispatchError, allClear };
+  const uniqueNumberClear = () => {
+    return cardErrorState.uniqueNumber.every((value) => value === false);
+  };
+
+  const expirationDateClear = () => {
+    return cardErrorState.expirationDate.every((value) => value === false);
+  };
+
+  const cvcNumberClear = () => {
+    return cardErrorState.cvcNumber.every((value) => value === false);
+  };
+
+  const passwordClear = () => {
+    return cardErrorState.password.every((value) => value === false);
+  };
+
+  return {
+    cardErrorState,
+    dispatchError,
+    allClear,
+    uniqueNumberClear,
+    expirationDateClear,
+    cvcNumberClear,
+    passwordClear,
+  };
 };
 
 export default useCardError;

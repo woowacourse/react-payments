@@ -44,7 +44,33 @@ const useCardInformation = () => {
     return Object.values(cardState).every((field) => field.every((value) => value !== ""));
   };
 
-  return { cardState, dispatch, allComplete };
+  const uniqueNumberComplete = () => {
+    return cardState.uniqueNumber.every((value) => value !== "");
+  };
+  const expirationDateomplete = () => {
+    return cardState.expirationDate.every((value) => value !== "");
+  };
+
+  const cvcNumberComplete = () => {
+    return cardState.cvcNumber[0] !== "";
+  };
+  const passwordComplete = () => {
+    return cardState.password[0] !== "";
+  };
+  const cardIssuerComplete = () => {
+    return cardState.cardIssuer[0] !== null;
+  };
+
+  return {
+    cardState,
+    dispatch,
+    allComplete,
+    uniqueNumberComplete,
+    expirationDateomplete,
+    cvcNumberComplete,
+    passwordComplete,
+    cardIssuerComplete,
+  };
 };
 
 export default useCardInformation;

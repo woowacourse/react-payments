@@ -1,24 +1,17 @@
 import passwordSpec from "./PasswordSpec";
 import Text from "../../common/Text/Text";
 import Input from "../../common/Input/Input";
-import useError from "../../../hooks/useError";
 import { PasswordStateType } from "../../../types/CardInformationType";
 import { css } from "@emotion/react";
+import useInputFocus from "../../../hooks/useInputFocus";
+import usePassword from "../../../hooks/usePassword";
 
 const PasswordForm = ({ passwordState, dispatch, errorState, dispatchError }: PasswordStateType) => {
-  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_PASSWORD_ERROR");
   const { title, description, inputFieldData } = passwordSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
-
-  const handleChange = (v: string, index: number) => {
-    if (!validateInputType(v, index)) {
-      return;
-    }
-
-    validateLength(v, index, maxLength);
-    dispatch({ type: "SET_PASSWORD", value: v });
-  };
+  const inputRefs = useInputFocus();
+  const { errorMessage, handleChange } = usePassword({ dispatch, dispatchError });
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -34,9 +27,12 @@ const PasswordForm = ({ passwordState, dispatch, errorState, dispatchError }: Pa
             placeholder={placeholder[0]}
             maxLength={maxLength}
             value={passwordState[0]}
-            onChange={(v) => handleChange(v, 0)}
+            onChange={(v) => handleChange(v)}
             error={errorState[0]}
             type="password"
+            ref={(el) => {
+              inputRefs.current[0] = el;
+            }}
           />
         </div>
         <div css={errorTextWrapperStyle(errorState[0])}>

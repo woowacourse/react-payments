@@ -2,30 +2,16 @@ import { css } from "@emotion/react";
 import Input from "../../common/Input/Input";
 import Text from "../../common/Text/Text";
 import { CvcNumberStateType } from "../../../types/CardInformationType";
-import useError from "../../../hooks/useError";
 import cvcNumberSpec from "./cvcNumberSpec";
-import { useEffect } from "react";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useCvcNumber from "../../../hooks/useCvcNumber";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm, errorState, dispatchError }: CvcNumberStateType) => {
-  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_CVC_NUMBER_ERROR");
+const CvcNumberForm = ({ cvcNumberState, dispatch, errorState, dispatchError }: CvcNumberStateType) => {
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
-
-  const handleChange = (value: string) => {
-    if (!validateInputType(value, 0)) {
-      return;
-    }
-
-    validateLength(value, 0, maxLength);
-    dispatch({ type: "SET_CVC_NUMBER", value: value });
-  };
-
-  useEffect(() => {
-    if (errorState[0] === false && cvcNumberState[0] !== "") {
-      openNextForm("cvcNumber");
-    }
-  }, [errorState]);
+  const { errorMessage, handleChange } = useCvcNumber({ dispatch, dispatchError });
+  const inputRefs = useInputFocus();
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -43,6 +29,9 @@ const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm, errorState, dis
             value={cvcNumberState[0]}
             onChange={(v) => handleChange(v)}
             error={errorState[0]}
+            ref={(el) => {
+              inputRefs.current[0] = el;
+            }}
           />
         </div>
         <div css={errorTextWrapperStyle(errorState[0])}>

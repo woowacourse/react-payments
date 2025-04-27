@@ -16,7 +16,13 @@ const useOpenForm = () => {
     return openForm[sequence];
   };
 
-  return { openNextForm, isFormOpen };
+  const checkNextFormOpen = (currentForm: string) => {
+    const nextFormSequence = OPEN_SEQUENCE.indexOf(currentForm) + 1;
+
+    return openForm[nextFormSequence];
+  };
+
+  return { openNextForm, isFormOpen, checkNextFormOpen };
 };
 
 export default useOpenForm;

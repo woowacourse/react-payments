@@ -2,52 +2,15 @@ import { css } from "@emotion/react";
 import Input from "../../common/Input/Input";
 import Text from "../../common/Text/Text";
 import { ExpirationDateStateType } from "../../../types/CardInformationType";
-import useError from "../../../hooks/useError";
 import expirationDateSpec from "./expirationDateSpec";
-import { useRef, useEffect } from "react";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useExpirationDate from "../../../hooks/useExpirationDate";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({
-  expirationDateState,
-  dispatch,
-  openNextForm,
-  errorState,
-  dispatchError,
-}: ExpirationDateStateType) => {
-  const { errorMessage, validateInputType, validateMonth, validateLength } = useError(
-    dispatchError,
-    "SET_EXPIRATION_DATE_ERROR",
-  );
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  const handleChange = (v: string, index: number) => {
-    if (!validateInputType(v, index)) {
-      return;
-    }
-
-    if (index === 0 && !validateMonth(v)) {
-      dispatch({ type: "SET_EXPIRATION_DATE", index: 0, value: v });
-      return;
-    }
-
-    if (index === 1 && !validateLength(v, index, inputFieldData.inputProps.maxLength)) {
-      dispatch({ type: "SET_EXPIRATION_DATE", index: 1, value: v });
-      return;
-    }
-
-    dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
-    if (v.length === expirationDateSpec.inputFieldData.inputProps.maxLength && index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1]?.focus();
-    }
-    return;
-  };
-
-  useEffect(() => {
-    if (errorState.every((e) => e === false) && expirationDateState.every((e) => e !== "")) {
-      openNextForm("expirationDate");
-    }
-  }, [errorState]);
+const ExpirationDateForm = ({ expirationDateState, dispatch, errorState, dispatchError }: ExpirationDateStateType) => {
+  const inputRefs = useInputFocus();
+  const { errorMessage, handleChange } = useExpirationDate({ dispatch, dispatchError, inputRefs });
 
   return (
     <div css={FormSectionWrapperStyle}>

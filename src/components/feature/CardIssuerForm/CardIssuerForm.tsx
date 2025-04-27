@@ -3,16 +3,9 @@ import Text from "../../common/Text/Text";
 import cardIssuerSpec from "./CardIssuerSpec";
 import Select from "../../common/Select/Select";
 import { CardIssuerStateType } from "../../../types/CardInformationType";
-import { useEffect } from "react";
 
-const CardIssuerForm = ({ cardIssuerState, dispatch, openNextForm }: CardIssuerStateType) => {
+const CardIssuerForm = ({ cardIssuerState, dispatch }: CardIssuerStateType) => {
   const { title, description, optionList } = cardIssuerSpec;
-
-  useEffect(() => {
-    if (cardIssuerState[0]) {
-      openNextForm("cardIssuer");
-    }
-  }, [cardIssuerState]);
 
   return (
     <div css={FormSectionWrapperStyle}>

@@ -2,45 +2,19 @@ import { css } from "@emotion/react";
 import Input from "../../common/Input/Input";
 import Text from "../../common/Text/Text";
 import { UniqueNumberStateType } from "../../../types/CardInformationType";
-import useError from "../../../hooks/useError";
 import uniqueNumberSpec from "./uniqueNumberSpec";
-import { useRef, useEffect } from "react";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useUniqueNumber from "../../../hooks/useUniqueNumber";
 
-const UniqueNumberForm = ({
-  uniqueNumberState,
-  dispatch,
-  openNextForm,
-  errorState,
-  dispatchError,
-}: UniqueNumberStateType) => {
+const UniqueNumberForm = ({ uniqueNumberState, dispatch, errorState, dispatchError }: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
-  const { errorMessage, validateInputType, validateLength } = useError(dispatchError, "SET_UNIQUE_NUMBER_ERROR");
-
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  useEffect(() => {
-    inputRefs.current[0]?.focus();
-  }, []);
-
-  const handleChange = (v: string, index: number) => {
-    if (!validateInputType(v, index)) {
-      return;
-    }
-
-    validateLength(v, index, inputProps.maxLength);
-
-    dispatch({ type: "SET_UNIQUE_NUMBER", index: index, value: v });
-    if (v.length === inputProps.maxLength && index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  useEffect(() => {
-    if (errorState.every((e) => e === false) && uniqueNumberState.every((e) => e !== "")) {
-      openNextForm("uniqueNumber");
-    }
-  }, [errorState]);
+  const inputRefs = useInputFocus();
+  const { errorMessage, handleChange } = useUniqueNumber({
+    dispatch,
+    dispatchError,
+    inputRefs,
+  });
 
   return (
     <div css={FormSectionWrapperStyle}>
