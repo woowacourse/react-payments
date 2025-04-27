@@ -22,7 +22,7 @@ const AddCard = () => {
   const complete = useAllComplete(isStateCompletes, isErrorCompletes);
 
   return (
-    <div css={AddCardStyle}>
+    <div css={ContainerStyle}>
       <PreviewCard cardInformationState={cardInformationState} />
       <FormContainer
         cardInformationState={cardInformationState}
@@ -37,7 +37,7 @@ const AddCard = () => {
 
 export default AddCard;
 
-const AddCardStyle = css`
+const ContainerStyle = css`
   box-sizing: border-box;
   height: calc(100% - 70px);
   position: relative;

@@ -84,7 +84,7 @@ export type errorMessageProps = {
   message: string;
 };
 
-type TextType = "title" | "description" | "label" | "error";
+type TextType = "title" | "description" | "label" | "error" | "complete";
 export type TextProps = {
   /** 텍스트 유형 */
   type: TextType;
