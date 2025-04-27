@@ -12,11 +12,11 @@ const meta: Meta<typeof CardPageWithContext> = {
   component: CardPageWithContext,
   decorators: [
     (Story) => (
-      <CardInfoProvider>
-        <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']}>
+        <CardInfoProvider>
           <Story />
-        </MemoryRouter>
-      </CardInfoProvider>
+        </CardInfoProvider>
+      </MemoryRouter>
     ),
   ],
 };
