@@ -80,11 +80,14 @@ const AddCard = () => {
     secretNumber: '',
   });
 
-  const cardNumberRef = useRef<HTMLDivElement>(null);
-  const cardBrandRef = useRef<HTMLDivElement>(null);
-  const secretNumberRef = useRef<HTMLDivElement>(null);
-  const expiryDateRef = useRef<HTMLDivElement>(null);
-  const cvcRef = useRef<HTMLDivElement>(null);
+  // 각 섹션에 대한 ref를 객체로 관리
+  const sectionRefs = {
+    cardNumber: useRef<HTMLDivElement>(null),
+    cardBrand: useRef<HTMLDivElement>(null),
+    expiryDate: useRef<HTMLDivElement>(null),
+    cvc: useRef<HTMLDivElement>(null),
+    secretNumber: useRef<HTMLDivElement>(null),
+  };
 
   const [visibleSteps, setVisibleSteps] = useState({
     cardNumber: true,
@@ -121,52 +124,108 @@ const AddCard = () => {
     return filterErrorMessage[0];
   };
 
+  const formSteps = [
+    {
+      key: 'cardNumber',
+      condition: () => true,
+      component: (
+        <CardNumberInput
+          cardInput={cardInput}
+          setCardInput={setCardInput}
+          errorMessages={errorMessages}
+          handleErrorMessages={handleErrorMessages}
+          handleCardNumberErrorMessages={handleCardNumberErrorMessages}
+        />
+      ),
+    },
+    {
+      key: 'cardBrand',
+      condition: () => isCardNumberComplete(cardInput, errorMessages),
+      component: (
+        <CardBrandSelect
+          setCardInput={setCardInput}
+          onColorChange={(color, brand) => {
+            setCardInput(prev => ({
+              ...prev,
+              cardBrand: color,
+            }));
+            setSelectedCardBrand(brand);
+          }}
+        />
+      ),
+    },
+    {
+      key: 'expiryDate',
+      condition: () =>
+        isCardNumberComplete(cardInput, errorMessages) &&
+        isCardBrandComplete(cardInput, errorMessages),
+      component: (
+        <ExpiryDateInput
+          handlePeriodErrorMessages={handlePeriodErrorMessages}
+          validateCardExpirationDateMM={validateCardExpirationDateMM}
+          validateCardExpirationDateYY={validateCardExpirationDateYY}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
+        />
+      ),
+    },
+    {
+      key: 'cvc',
+      condition: () =>
+        isCardNumberComplete(cardInput, errorMessages) &&
+        isCardBrandComplete(cardInput, errorMessages) &&
+        isExpiryDateComplete(cardInput, errorMessages),
+      component: (
+        <CVCInput
+          validateCardCVC={validateCardCVC}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
+          errorMessages={errorMessages}
+        />
+      ),
+    },
+    {
+      key: 'secretNumber',
+      condition: () =>
+        isCardNumberComplete(cardInput, errorMessages) &&
+        isCardBrandComplete(cardInput, errorMessages) &&
+        isExpiryDateComplete(cardInput, errorMessages) &&
+        isCVCComplete(cardInput, errorMessages),
+      component: (
+        <SecretNumberInput
+          errorMessages={errorMessages}
+          setCardInput={setCardInput}
+          handleErrorMessages={handleErrorMessages}
+        />
+      ),
+    },
+  ];
+
   useEffect(() => {
-    if (
-      isCardNumberComplete(cardInput, errorMessages) &&
-      !visibleSteps.cardBrand
-    ) {
-      setVisibleSteps(prev => ({ ...prev, cardBrand: true }));
-      setTimeout(() => {
-        cardBrandRef.current?.querySelector('select')?.focus();
-      }, 300);
-    }
+    formSteps.forEach(({ key, condition }) => {
+      if (condition() && !visibleSteps[key as keyof typeof visibleSteps]) {
+        setVisibleSteps(prev => ({ ...prev, [key]: true }));
 
-    if (
-      isCardBrandComplete(cardInput, errorMessages) &&
-      isCardNumberComplete(cardInput, errorMessages) &&
-      !visibleSteps.expiryDate
-    ) {
-      setVisibleSteps(prev => ({ ...prev, expiryDate: true }));
-      setTimeout(() => {
-        expiryDateRef.current?.querySelector('input')?.focus();
-      }, 300);
-    }
-    if (
-      isExpiryDateComplete(cardInput, errorMessages) &&
-      isCardBrandComplete(cardInput, errorMessages) &&
-      isCardNumberComplete(cardInput, errorMessages) &&
-      !visibleSteps.cvc
-    ) {
-      setVisibleSteps(prev => ({ ...prev, cvc: true }));
-      setTimeout(() => {
-        cvcRef.current?.querySelector('input')?.focus();
-      }, 300);
-    }
-
-    if (
-      isCVCComplete(cardInput, errorMessages) &&
-      isExpiryDateComplete(cardInput, errorMessages) &&
-      isCardBrandComplete(cardInput, errorMessages) &&
-      isCardNumberComplete(cardInput, errorMessages) &&
-      !visibleSteps.secretNumber
-    ) {
-      setVisibleSteps(prev => ({ ...prev, secretNumber: true }));
-      setTimeout(() => {
-        secretNumberRef.current?.querySelector('input')?.focus();
-      }, 300);
-    }
+        setTimeout(() => {
+          const input =
+            sectionRefs[key as keyof typeof sectionRefs].current?.querySelector(
+              'input, select',
+            );
+          if (input) {
+            (input as HTMLElement).focus();
+          }
+        }, 300);
+      }
+    });
   }, [cardInput, errorMessages, visibleSteps]);
+
+  const renderOrder = [
+    'secretNumber',
+    'cvc',
+    'expiryDate',
+    'cardBrand',
+    'cardNumber',
+  ];
 
   return (
     <>
@@ -179,63 +238,20 @@ const AddCard = () => {
           cardColor={cardInput.cardBrand}
         />
         <Form>
-          {visibleSteps.secretNumber && (
-            <FormSection isVisible={true} ref={secretNumberRef}>
-              <SecretNumberInput
-                errorMessages={errorMessages}
-                setCardInput={setCardInput}
-                handleErrorMessages={handleErrorMessages}
-              />
-            </FormSection>
-          )}
+          {renderOrder.map(stepKey => {
+            const step = formSteps.find(s => s.key === stepKey);
+            if (!step) return null;
 
-          {visibleSteps.cvc && (
-            <FormSection isVisible={true} ref={cvcRef}>
-              <CVCInput
-                validateCardCVC={validateCardCVC}
-                setCardInput={setCardInput}
-                handleErrorMessages={handleErrorMessages}
-                errorMessages={errorMessages}
-              />
-            </FormSection>
-          )}
-
-          {visibleSteps.expiryDate && (
-            <FormSection isVisible={true} ref={expiryDateRef}>
-              <ExpiryDateInput
-                handlePeriodErrorMessages={handlePeriodErrorMessages}
-                validateCardExpirationDateMM={validateCardExpirationDateMM}
-                validateCardExpirationDateYY={validateCardExpirationDateYY}
-                setCardInput={setCardInput}
-                handleErrorMessages={handleErrorMessages}
-              />
-            </FormSection>
-          )}
-
-          {visibleSteps.cardBrand && (
-            <FormSection isVisible={true} ref={cardBrandRef}>
-              <CardBrandSelect
-                setCardInput={setCardInput}
-                onColorChange={(color, brand) => {
-                  setCardInput(prev => ({
-                    ...prev,
-                    cardBrand: color,
-                  }));
-                  setSelectedCardBrand(brand);
-                }}
-              />
-            </FormSection>
-          )}
-
-          <FormSection isVisible={visibleSteps.cardNumber} ref={cardNumberRef}>
-            <CardNumberInput
-              cardInput={cardInput}
-              setCardInput={setCardInput}
-              errorMessages={errorMessages}
-              handleErrorMessages={handleErrorMessages}
-              handleCardNumberErrorMessages={handleCardNumberErrorMessages}
-            />
-          </FormSection>
+            return (
+              <FormSection
+                key={step.key}
+                isVisible={visibleSteps[step.key as keyof typeof visibleSteps]}
+                ref={sectionRefs[step.key as keyof typeof sectionRefs]}
+              >
+                {step.component}
+              </FormSection>
+            );
+          })}
         </Form>
       </Wrap>
       {isFormComplete(cardInput, errorMessages) && (

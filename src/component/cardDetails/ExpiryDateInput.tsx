@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Description from '../Description';
-import InputGroup from '../InputGroup'; // 수정된 InputGroup 컴포넌트 사용
-import Input from '../Input'; // 수정된 Input 컴포넌트 사용
+import InputGroup from '../InputGroup';
+import Input from '../Input';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { CardInputProps } from '../../types/CardInputTypes';
-import { useState } from 'react';
 
 interface ExpiryDateInputProps {
   handlePeriodErrorMessages: () => string;
@@ -25,6 +24,35 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
   handleErrorMessages,
 }) => {
   const [mmValue, setMmValue] = useState<string>('');
+
+  const expiryDateFields = [
+    {
+      key: 'MM',
+      placeholder: 'MM',
+      maxLength: 2,
+      validate: validateCardExpirationDateMM,
+      onChange: (value: string) => {
+        setMmValue(value);
+        setCardInput((prev: CardInputProps) => ({
+          ...prev,
+          MM: value === '' ? null : Number(value),
+        }));
+      },
+    },
+    {
+      key: 'YY',
+      placeholder: 'YY',
+      maxLength: 2,
+      validate: (value: string) => validateCardExpirationDateYY(value, mmValue),
+      onChange: (value: string) => {
+        setCardInput((prev: CardInputProps) => ({
+          ...prev,
+          YY: value === '' ? null : Number(value),
+        }));
+      },
+    },
+  ] as const;
+
   return (
     <>
       <Description
@@ -32,33 +60,21 @@ export const ExpiryDateInput: React.FC<ExpiryDateInputProps> = ({
         detailText="월/년도(MMYY)를 순서대로 입력해 주세요."
       />
       <InputGroup label="유효기간" errorMessages={handlePeriodErrorMessages()}>
-        <Input
-          maxLength={2}
-          placeholder="MM"
-          validate={validateCardExpirationDateMM}
-          handleErrorMessage={message => handleErrorMessages('MM', message)}
-          onChange={value => {
-            setMmValue(value);
-            setCardInput((prev: CardInputProps) => ({
-              ...prev,
-              MM: value === '' ? null : Number(value),
-            }));
-          }}
-          name="expiryMonth"
-        />
-        <Input
-          maxLength={2}
-          placeholder="YY"
-          validate={value => validateCardExpirationDateYY(value, mmValue)}
-          handleErrorMessage={message => handleErrorMessages('YY', message)}
-          onChange={value => {
-            setCardInput((prev: CardInputProps) => ({
-              ...prev,
-              YY: value === '' ? null : Number(value),
-            }));
-          }}
-          name="expiryYear"
-        />
+        {expiryDateFields.map(
+          ({ key, placeholder, maxLength, validate, onChange }) => (
+            <Input
+              key={key}
+              maxLength={maxLength}
+              placeholder={placeholder}
+              validate={validate}
+              handleErrorMessage={message =>
+                handleErrorMessages(key as keyof ErrorMessagesType, message)
+              }
+              onChange={onChange}
+              name={`expiry-${key}`}
+            />
+          ),
+        )}
       </InputGroup>
     </>
   );
