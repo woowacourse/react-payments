@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 import { InputFieldType } from '../config/inputField';
 
-export function useInputErrorHandler<T extends InputFieldType>(
+export function useInputError<T extends InputFieldType>(
   inputValue: Record<T, string>,
   completeCondition: number
 ) {

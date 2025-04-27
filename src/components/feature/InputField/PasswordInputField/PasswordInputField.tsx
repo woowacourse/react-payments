@@ -3,7 +3,7 @@ import {
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
-import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
@@ -17,7 +17,7 @@ function PasswordInputField({
   onComplete,
 }: InputFieldProps<PasswordInputType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputErrorHandler(inputValue, MAX_PASSWORD_LENGTH);
+    useInputError(inputValue, MAX_PASSWORD_LENGTH);
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,

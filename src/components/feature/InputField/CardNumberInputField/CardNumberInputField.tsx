@@ -3,7 +3,7 @@ import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
 } from '../../../../config/inputField';
-import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
@@ -23,7 +23,7 @@ function CardNumberInputField({
   onComplete,
 }: InputFieldProps<CardNumberInputType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputErrorHandler(inputValue, MAX_CARD_LENGTH);
+    useInputError(inputValue, MAX_CARD_LENGTH);
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,

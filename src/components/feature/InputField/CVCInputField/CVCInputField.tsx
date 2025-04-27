@@ -3,7 +3,7 @@ import {
   CVC_INPUT_TYPE,
   CVCInputValueType,
 } from '../../../../config/inputField';
-import { useInputErrorHandler } from '../../../../hooks/useInputErrorHandler';
+import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
@@ -17,7 +17,7 @@ function CVCInputField({
   onComplete,
 }: InputFieldProps<CVCInputValueType>) {
   const { errorTypes, errorMessage, isComplete, validateInputError } =
-    useInputErrorHandler(inputValue, MAX_CVC_LENGTH);
+    useInputError(inputValue, MAX_CVC_LENGTH);
 
   const { onChange, onBlur } = useInputFieldHandler({
     validateInputError,
