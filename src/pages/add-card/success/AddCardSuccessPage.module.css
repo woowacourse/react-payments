@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: white;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  width: 390px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 40px;
+}
+
+.checkIcon {
+  color: white;
+  width: 40px;
+  height: 40px;
+  stroke-width: 3;
+}
+
+.messageContainer {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.message {
+  color: var(--light-black);
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+}
+
+.confirmButton {
+  width: 100%;
+  padding: 16px;
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.confirmButton:hover {
+  background-color: #444444;
+}
