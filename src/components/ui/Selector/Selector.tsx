@@ -8,7 +8,7 @@ interface SelectorProps<T> extends ComponentProps<'button'> {
   onSelectChange: (value: T) => void;
 }
 
-function Selector<T extends CardIssuerSelectorType>({
+function Selector<T extends CardIssuerSelectorType | string>({
   dropDownOptions,
   placeholder,
   onSelectChange,

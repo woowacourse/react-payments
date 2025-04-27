@@ -22,6 +22,7 @@ export const Default: Story = {
       expirationDatePart2: '',
     },
     cardType: null,
+    cardIssuer: null,
   },
   render: function Render(args) {
     return <CardPreview {...args} />;
@@ -41,6 +42,7 @@ export const Visa: Story = {
       expirationDatePart2: '25',
     },
     cardType: 'visa',
+    cardIssuer: null,
   },
   render: function Render(args) {
     return <CardPreview {...args} />;

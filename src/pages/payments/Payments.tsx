@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import styled from 'styled-components';
 import {
@@ -7,7 +7,6 @@ import {
   CVCInputValueType,
   ExpirationDateInputType,
   FieldName,
-  InputFieldType,
   PasswordInputType,
 } from '../../config/inputField';
 

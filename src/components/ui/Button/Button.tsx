@@ -42,7 +42,6 @@ function Button({ isFocused, buttonText, buttonType, onClick }: ButtonProps) {
 const StyledButton = styled.button<{ $color: string; $background: string }>`
   width: 100%;
   padding: 10px;
-
   color: ${(props) => props.$color};
   text-align: center;
   font-weight: 700;
