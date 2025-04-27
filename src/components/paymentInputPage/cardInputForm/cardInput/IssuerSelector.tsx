@@ -21,11 +21,10 @@ export interface CardIssuerSelectorProps {
 function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
   const { cardIssuer, setCardIssuer } = useCard();
 
-  function validateIssuerChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const target = e.target;
-    const value = target.value;
+  function validateIssuerChange(e: React.MouseEvent<HTMLLIElement>) {
+    const targetIssuer = e.currentTarget.textContent as string;
 
-    if (!ISSUER_LIST.has(value)) {
+    if (!ISSUER_LIST.has(targetIssuer)) {
       setIsValid(false);
     } else {
       setIsValid(true);
@@ -44,7 +43,7 @@ function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
           optionList={Array.from(ISSUER_LIST.keys())}
           selectedValue={cardIssuer}
           setSelectedValue={setCardIssuer}
-          handleSelectedInputChange={validateIssuerChange}
+          handleOptionClick={validateIssuerChange}
           isRequired={true}
         />
       </InputForm>

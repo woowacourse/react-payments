@@ -7,9 +7,7 @@ export interface SelectProps {
   optionList: string[];
   selectedValue: string;
   setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
-  handleSelectedInputChange: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
+  handleOptionClick: (event: React.MouseEvent<HTMLLIElement>) => void;
   isRequired?: boolean;
 }
 
@@ -19,7 +17,7 @@ function Select({
   optionList,
   selectedValue,
   setSelectedValue,
-  handleSelectedInputChange,
+  handleOptionClick,
   isRequired,
 }: SelectProps) {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
@@ -32,6 +30,7 @@ function Select({
     const newSelectedValue = e.currentTarget.textContent as string;
     setSelectedValue(newSelectedValue);
     setIsOpenOptions(false);
+    handleOptionClick(e);
   }
 
   return (
@@ -45,7 +44,6 @@ function Select({
           placeholder={placeholder}
           value={selectedValue}
           onClick={handleSelectClick}
-          onChange={handleSelectedInputChange}
           required={isRequired}
           readOnly
         />
