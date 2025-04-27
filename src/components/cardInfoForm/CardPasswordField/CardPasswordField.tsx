@@ -23,6 +23,8 @@ function CardPasswordField({
           id="cardPassword"
           value={cardPassword}
           onChange={onChange}
+          maxLength={2}
+          regexString={/^\d*$/}
         />
       </InputWrapper>
     </div>

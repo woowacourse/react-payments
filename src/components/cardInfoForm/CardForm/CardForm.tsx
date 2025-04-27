@@ -18,17 +18,13 @@ interface CardFormProps {
     year: string;
   };
   cardPassword: string;
-  handleChangeCardNumber: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    i: number,
-  ) => void;
+  setCardNumber: (cardNumber: string[]) => void;
   handleChangeCardCompany: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleChangeValidityPeriod: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'month' | 'year',
-  ) => void;
-  handleChangeCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChangeCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setCardValidityPeriod: React.Dispatch<
+    React.SetStateAction<{ month: string; year: string }>
+  >;
+  setCardCVC: (cvc: string) => void;
+  setCardPassword: (password: string) => void;
 }
 
 function CardForm({
@@ -37,11 +33,11 @@ function CardForm({
   cardCompany,
   cardValidityPeriod,
   cardPassword,
-  handleChangeCardNumber,
-  handleChangeCVC,
+  setCardNumber,
+  setCardCVC,
   handleChangeCardCompany,
-  handleChangeValidityPeriod,
-  handleChangeCardPassword,
+  setCardValidityPeriod,
+  setCardPassword,
 }: CardFormProps) {
   const [show, setShow] = useState({
     cardCompany: false,
@@ -72,33 +68,42 @@ function CardForm({
     e: React.ChangeEvent<HTMLInputElement>,
     i: number,
   ) => {
-    handleChangeCardNumber(e, i);
     const copy = [...cardNumber];
     copy[i] = e.target.value;
+
+    setCardNumber(copy);
     validateCardNumber(copy);
   };
 
   const onChangeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeCVC(e);
-    validateCardCVC(e.target.value);
+    const { value } = e.target;
+
+    setCardCVC(value);
+    validateCardCVC(value);
   };
 
   const onChangeCardValidityPeriod = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: 'month' | 'year',
   ) => {
-    handleChangeValidityPeriod(e, type);
     const copy = { ...cardValidityPeriod };
+    const { value } = e.target;
 
-    if (type === 'month') copy.month = e.target.value;
-    if (type === 'year') copy.year = e.target.value;
+    if (type === 'month') copy.month = value;
+    if (type === 'year') copy.year = value;
 
+    setCardValidityPeriod((prev) => ({
+      ...prev,
+      [type]: value,
+    }));
     validatePeriod(copy.year, copy.month, type);
   };
 
   const onChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeCardPassword(e);
-    validatePassword(e.target.value);
+    const { value } = e.target;
+
+    setCardPassword(value);
+    validatePassword(value);
   };
 
   return (

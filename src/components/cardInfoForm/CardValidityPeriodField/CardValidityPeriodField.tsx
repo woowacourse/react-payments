@@ -43,8 +43,8 @@ function CardValidityPeriodField({
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'month')}
           placeholder="MM"
-          min={0}
-          max={99}
+          maxLength={2}
+          regexString={/^\d*$/}
         />
         <Input
           isError={isErrorYear}
@@ -55,8 +55,8 @@ function CardValidityPeriodField({
           aria-labelledby="cardValidityPeriod"
           onChange={(e) => onChange(e, 'year')}
           placeholder="YY"
-          min={0}
-          max={99}
+          maxLength={2}
+          regexString={/^\d*$/}
         />
       </InputWrapper>
     </div>

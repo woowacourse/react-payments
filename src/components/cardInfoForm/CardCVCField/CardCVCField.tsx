@@ -21,8 +21,8 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
           aria-labelledby="CardCVC"
           onChange={onChange}
           placeholder="123"
-          min={0}
-          max={999}
+          maxLength={3}
+          regexString={/^\d*$/}
         />
       </InputWrapper>
     </div>
