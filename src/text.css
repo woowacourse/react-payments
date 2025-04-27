@@ -1,3 +1,13 @@
+.tx-3xl {
+  font-size: 64px;
+  font-weight: 800;
+}
+
+.tx-2xl {
+  font-size: 32px;
+  font-weight: 600;
+}
+
 .tx-xl {
   font-size: 24px;
   font-weight: 700;
