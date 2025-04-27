@@ -104,6 +104,7 @@ function AddNewCardForm() {
             password={password}
             changePassword={changePassword}
             getErrorMessage={getErrorMessage}
+            viewNextInput={viewNextInput}
             isInvalid={isInvalid}
           />
         )}
@@ -148,7 +149,7 @@ function AddNewCardForm() {
           />
         )}
       </StepContainer>
-      {step >= 4 && isValidForm() && <Button onClick={handleSubmit} />}
+      {step >= 5 && isValidForm() && <Button onClick={handleSubmit} />}
     </StyledFrame>
   );
 }

@@ -14,6 +14,7 @@ export const Default: Story = {
   args: {
     password: '12',
     changePassword: () => alert('변경'),
+    viewNextInput: () => alert('변경'),
     getErrorMessage: (field, value) => {
       if (value === '') return 'NO_ERROR';
       switch (field) {

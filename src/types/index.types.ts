@@ -41,6 +41,7 @@ export type CardCVCNumberSectionProps = {
 export type CardPasswordSectionProps = {
   password: string;
   changePassword: (CVCNumber: string) => void;
+  viewNextInput: () => void;
   getErrorMessage: (field: ValidationType, value: string) => string;
   isInvalid: (field: ValidationType, value: string) => boolean;
 };
