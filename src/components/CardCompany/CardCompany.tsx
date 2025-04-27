@@ -1,11 +1,9 @@
-import {
+import useCardCompanyState, {
   CARD_COMPANY_INFO,
   CardCompanyType,
 } from "../../hooks/useCardCompany/useCardCompanyState";
-import useCardCompanyState from "../../hooks/useCardCompany/useCardCompanyState";
-import useCardCompanyInputHandler from "../../hooks/useCardCompany/useCardCompanyInputHandler";
-import InputText from "../InputText/InputText";
 import inputStyles from "../Input/CardNumberInput.module.css";
+import InputText from "../InputText/InputText";
 import styles from "./CardCompany.module.css";
 import ChevronUp from "/chevron-up.svg";
 
@@ -27,11 +25,12 @@ export default function CardCompanyPicker({
   onComplete,
 }: Props) {
   const { isOpen, toggleDropdown } = useCardCompanyState();
-  const { handleSelect } = useCardCompanyInputHandler(
-    selectCompany,
-    toggleDropdown,
-    onComplete
-  );
+
+  const handleSelect = (company: CardCompanyType) => {
+    selectCompany(company);
+    toggleDropdown();
+    onComplete();
+  };
 
   return (
     <section className={styles["card-company"]}>
