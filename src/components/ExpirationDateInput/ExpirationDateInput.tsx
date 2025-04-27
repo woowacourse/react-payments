@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../../pages/CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import useExpDateValidation from '../../hooks/useExpDateValidation';
 import { expirationDateValidation } from '../../validators/expirationDateValidator';
 import { useEffect, useRef } from 'react';
-import { InputProps } from '../../types/input';
+import { HandleInputParams, InputProps } from '../../types/input';
 
 const StyledExpirationDateInput = styled.div`
   width: 100%;

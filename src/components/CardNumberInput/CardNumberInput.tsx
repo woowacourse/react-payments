@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../../pages/CardPage/CardPage';
 import HelperText from '../HelperText/HelperText';
 import { inputValidation } from '../../validators/inputValidator';
 import useInputValidation from '../../hooks/useInputValidation';
 import { useEffect, useRef } from 'react';
-import { InputProps } from '../../types/input';
+import { HandleInputParams, InputProps } from '../../types/input';
 
 const StyledCardNumberInput = styled.div`
   width: 100%;

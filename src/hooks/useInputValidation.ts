@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { HandleInputParams } from '../pages/CardPage/CardPage';
 import useErrorArrayState from './useErrorStateUpdate';
+import { HandleInputParams } from '../types/input';
 
 function useInputValidation(
   initialErrorState: boolean[],

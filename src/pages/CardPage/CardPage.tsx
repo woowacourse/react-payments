@@ -11,11 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import FormSection from '../../components/FormSection/FormSection';
 import useCardForm from '../../hooks/useCardForm';
 
-export type HandleInputParams = {
-  e: React.ChangeEvent<HTMLInputElement>;
-  idx: number;
-};
-
 const StyledCardPage = styled.div`
   width: 40%;
   min-width: 400px;

@@ -3,3 +3,8 @@ export type InputProps = {
   onChange: ({ e, idx }: HandleInputParams) => void;
   onValidChange: (isValid: boolean) => void;
 };
+
+export type HandleInputParams = {
+  e: React.ChangeEvent<HTMLInputElement>;
+  idx: number;
+};

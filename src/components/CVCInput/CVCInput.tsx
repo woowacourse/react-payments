@@ -4,8 +4,7 @@ import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
 import useInputValidation from '../../hooks/useInputValidation';
 import { useEffect } from 'react';
-import { InputProps } from '../../types/input';
-import { HandleInputParams } from '../../pages/CardPage/CardPage';
+import { HandleInputParams, InputProps } from '../../types/input';
 
 const StyledCVCInput = styled.div`
   width: 100%;
