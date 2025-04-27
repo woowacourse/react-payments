@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { validatorUtils } from '../../../../utils/validationUtils';
+import { precise } from '../../../../utils/precise';
 
 export interface CardPasswordInputProps {
   password: string;
@@ -27,7 +27,7 @@ function CardPasswordInput({
   }
 
   function checkIsValidType(passwordInput: string) {
-    if (!validatorUtils.isNumber(passwordInput)) {
+    if (!precise.isNumber(passwordInput)) {
       setFeedbackMessage('숫자만 입력 가능합니다.');
       setIsValid(false);
     }

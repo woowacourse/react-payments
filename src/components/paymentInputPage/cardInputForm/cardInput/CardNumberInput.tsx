@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
-import { validatorUtils } from '../../../../utils/validationUtils';
+import { precise } from '../../../../utils/precise';
 import useCard from '../../../../hooks/useCard';
 
 export interface CardNumberInputProps {
@@ -31,7 +31,7 @@ function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
   }
 
   function validateCardNumber(inputCardNumber: string, dataInputId: number) {
-    if (!validatorUtils.isNumber(inputCardNumber)) {
+    if (!precise.isNumber(inputCardNumber)) {
       isValid[dataInputId] = false;
       setIsValid([...isValid]);
     } else {

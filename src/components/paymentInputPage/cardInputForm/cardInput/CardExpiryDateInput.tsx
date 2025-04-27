@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { validatorUtils } from '../../../../utils/validationUtils';
 import { ExpiryDateType } from '../../PaymentInputPage';
+import { validate } from '../../../../utils/validate';
 
 export interface IsValidType {
   month: boolean;
@@ -29,65 +29,31 @@ function CardExpiryDateInput({
     const { name, value } = target;
 
     setExpiryDate({ ...expiryDate, [name]: value });
-    checkIsValidExpiry(name, value);
     checkIsValidType(name, value);
+    checkIsValidExpiry(name, value);
   }
 
-  function checkIsValidType(name: string, expiryValue: string) {
-    if (!validatorUtils.isNumber(expiryValue)) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
-      setIsValid((prev) => {
-        return { ...prev, [name]: false };
-      });
-    }
+  function checkIsValidType(name: string, value: string) {
+    const { isValid, message } = validate.checkNumberInput(value);
+
+    setFeedbackMessage(message);
+    setIsValid((prev) => ({ ...prev, [name]: isValid }));
   }
 
   function checkIsValidExpiry(name: string, value: string) {
     const { month, year } = expiryDate;
-    if (
-      name === 'month' &&
-      value.length === 2 &&
-      !validatorUtils.isValidNumberRange({
-        value: Number(value),
-        min: 1,
-        max: 12,
-      })
-    ) {
-      setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValid((prev) => {
-        return { ...prev, [name]: false };
-      });
-      return;
-    }
+    const targetMonth = name === 'month' ? value : month;
+    const targetYear = name === 'year' ? value : year;
+    const { isValid, message } = validate.checkExpiryDate(
+      targetMonth,
+      targetYear
+    );
 
-    if (
-      name === 'year' &&
-      value.length === 2 &&
-      !validatorUtils.isValidNumberRange({ value: Number(value), min: 25 })
-    ) {
-      setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValid((prev) => {
-        return { ...prev, [name]: false };
-      });
-      return;
-    }
-
-    if (
-      month.length === 2 &&
-      year.length === 2 &&
-      !validatorUtils.isValidExpiryDate(expiryDate)
-    ) {
-      setFeedbackMessage('유효하지 않은 카드입니다. 유효 기간을 확인해주세요.');
-      setIsValid((prev) => {
-        return { ...prev, [name]: false };
-      });
-      return;
-    }
-
-    setFeedbackMessage('');
-    setIsValid((prev) => {
-      return { ...prev, [name]: true };
-    });
+    setFeedbackMessage(message);
+    setIsValid((prev) => ({
+      ...prev,
+      [name]: isValid,
+    }));
   }
 
   return (

@@ -1,6 +1,6 @@
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { validatorUtils } from '../../../../utils/validationUtils';
+import { precise } from '../../../../utils/precise';
 
 export interface CardCVCInputProps {
   cardCVC: string;
@@ -32,7 +32,7 @@ function CardCVCInput({
   }
 
   function checkIsValidCVC(cvcNumber: string) {
-    return validatorUtils.isNumber(cvcNumber);
+    return precise.isNumber(cvcNumber);
   }
 
   return (
