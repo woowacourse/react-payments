@@ -13,15 +13,6 @@
     "chromatic": "npx chromatic --project-token=chpt_cb017c6c00b839e",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/woowacourse/react-payments.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/woowacourse/react-payments.git/issues"
-  },
-  "homepage": "https://jeongyou.github.io/react-payments",
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
