@@ -63,5 +63,50 @@
 ## 컴포넌트 관계도
 
 ```
+<CardForm> (path: "/")
+├── <CardPreview> (카드 프리뷰)
+├── <CardFormScrollStyles> (하위 컴포넌트는 조건부 렌더링)
+│   ├── <CardFormSection type="password"> (비밀번호)
+│   │   ├── <Title>
+│   │   ├── <Description>
+│   │   ├── <Subtitle>
+│   │   ├── <CardPasswordInput autoFocus/>
+│   │   └── <Error>
+│   │
+│   ├── <CardFormSection type="cvcNumber"> (CVC 번호)
+│   │   ├── <Title>
+│   │   ├── <Description>
+│   │   ├── <Subtitle>
+│   │   ├── <CardCvcInput autoFocus/>
+│   │   └── <Error>
+│   │
+│   ├── <CardFormSection type="expirationPeriod"> (유효 기간)
+│   │   ├── <Title>
+│   │   ├── <Description>
+│   │   ├── <Subtitle>
+│   │   ├── <CardExpirationPeriodInput autoFocus/>
+│   │   └── <Error>
+│   │
+│   ├── <CardFormSection type="cardCompany"> (카드사)
+│   │   ├── <Title>
+│   │   ├── <Description>
+│   │   ├── <Subtitle>
+│   │   ├── <CardCompanySelect autoFocus/>
+│   │   └── <Error>
+│   │
+│   └── <CardFormSection type="cardNumber"> (카드 번호)
+│       ├── <Title>
+│       ├── <Description>
+│       ├── <Subtitle>
+│       ├── <CardNumberInput autoFocus/>
+│       └── <Error>
+│
+└── <Button type="submit"> (카드 등록 버튼: 조건부 렌더링 - isFormComplete일 때만)
 
+<RegisterComplete> (path: "/register-complete")
+├── <CheckImgStyles>
+├── <CompletionMessageStyles>
+│   ├── <CompletionTitleStyles> (카드번호 첫 부분)
+│   └── <CompletionTitleStyles> (카드사 이름)
+└── <Button onClick={handleConfirm}> (초기 화면 이동 버튼)
 ```
