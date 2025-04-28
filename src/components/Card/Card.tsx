@@ -47,6 +47,7 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
 
   const hasFilledExpirationField = Boolean(cardExpirationDate.month || cardExpirationDate.year);
 
+  const fontColor = brand === '카카오뱅크' ? css`color: ${theme.color.black};` : undefined;
   const brandBackground = brand ? css`background-color: ${theme.color.cardBrand[brand]};` : undefined;
 
   return (
@@ -62,10 +63,10 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
         </div>
         <div css={cardContentContainer}>
           <div css={cardContent}>
-            <span css={cardContentText}>{first}</span>
-            <span css={cardContentText}>{second}</span>
-            <Dot value={third} css={cardContentText} />
-            <Dot value={forth} css={cardContentText} />
+            <span css={[cardContentText, fontColor]}>{first}</span>
+            <span css={[cardContentText, fontColor]}>{second}</span>
+            <Dot value={third} className={[cardContentText, fontColor]} />
+            <Dot value={forth} className={[cardContentText, fontColor]} />
           </div>
           <div css={cardContent}>
             {hasFilledExpirationField && (
