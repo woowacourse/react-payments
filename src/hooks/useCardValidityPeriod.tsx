@@ -27,10 +27,7 @@ function useCardValidityPeriod() {
     }
   };
 
-  const onChangeCardValidityPeriod = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'month' | 'year',
-  ) => {
+  const onChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -42,29 +39,52 @@ function useCardValidityPeriod() {
       return;
     }
 
-    const nextMonth = type === 'month' ? value : cardValidityPeriod.month;
-    const nextYear = type === 'year' ? value : cardValidityPeriod.year;
-
-    setCardValidityPeriod({
-      month: nextMonth,
-      year: nextYear,
-    });
+    setCardValidityPeriod((prev) => ({
+      ...prev,
+      month: value,
+    }));
 
     const newErrorMessage = validateCardValidityPeriod({
-      month: nextMonth,
-      year: nextYear,
+      month: value,
+      year: cardValidityPeriod.year,
     });
 
     setErrorMessage(newErrorMessage);
 
-    if (nextMonth !== '' && newErrorMessage.month === '') {
+    if (value !== '' && newErrorMessage.month === '') {
       focusNextInput(0);
     }
   };
 
+  const onChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    const isNumeric = value === '' || /^[0-9]+$/.test(value);
+    if (!isNumeric) {
+      return;
+    }
+
+    if (value.length > PARSE_RULE.length) {
+      return;
+    }
+
+    setCardValidityPeriod((prev) => ({
+      ...prev,
+      year: value,
+    }));
+
+    const newErrorMessage = validateCardValidityPeriod({
+      month: cardValidityPeriod.month,
+      year: value,
+    });
+
+    setErrorMessage(newErrorMessage);
+  };
+
   return {
     cardValidityPeriod,
-    onChangeCardValidityPeriod,
+    onChangeMonth,
+    onChangeYear,
     errorMessage,
     setInputRef,
   };

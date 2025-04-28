@@ -7,7 +7,6 @@ import CardCVCField from '../components/CardInfoForm/CardCVCField/CardCVCField';
 import CardCompanyField from '../components/CardInfoForm/CardCompanyField/CardCompanyField';
 import CardPasswordField from '../components/CardInfoForm/CardPasswordField/CardPasswordField';
 import styled from '@emotion/styled';
-
 import useCardForm from '../hooks/useCardForm';
 
 function AddCard() {
@@ -30,7 +29,8 @@ function AddCard() {
 
   const {
     onChangeCardNumber,
-    onChangeCardValidityPeriod,
+    onChangeMonth,
+    onChangeYear,
     onChangeCVC,
     onClickCardCompany,
     onChangeCardPassword,
@@ -109,7 +109,8 @@ function AddCard() {
               month: Boolean(cardValidityPeriodErrorMessage.month),
               year: Boolean(cardValidityPeriodErrorMessage.year),
             }}
-            onChange={onChangeCardValidityPeriod}
+            onChangeMonth={onChangeMonth}
+            onChangeYear={onChangeYear}
             setCardValidityPeriodInputRef={setCardValidityPeriodInputRef}
           />
         </CardInputSection>

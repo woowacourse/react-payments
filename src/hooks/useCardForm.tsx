@@ -15,7 +15,8 @@ const useCardForm = () => {
 
   const {
     cardValidityPeriod,
-    onChangeCardValidityPeriod,
+    onChangeMonth,
+    onChangeYear,
     errorMessage: cardValidityPeriodErrorMessage,
     setInputRef: setCardValidityPeriodInputRef,
   } = useCardValidityPeriod();
@@ -90,7 +91,8 @@ const useCardForm = () => {
 
     eventHandlers: {
       onChangeCardNumber,
-      onChangeCardValidityPeriod,
+      onChangeMonth,
+      onChangeYear,
       onChangeCVC,
       onClickCardCompany,
       onChangeCardPassword,

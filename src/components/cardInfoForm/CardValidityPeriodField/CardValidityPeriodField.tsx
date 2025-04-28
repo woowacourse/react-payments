@@ -14,10 +14,8 @@ type IsErrorType = {
 interface CardValidityPeriodFieldProps {
   cardValidityPeriod: CardValidityPeriodType;
   isError: IsErrorType;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: 'month' | 'year',
-  ) => void;
+  onChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setCardValidityPeriodInputRef: (
     el: HTMLInputElement | null,
     index: number,
@@ -27,7 +25,8 @@ interface CardValidityPeriodFieldProps {
 function CardValidityPeriodField({
   cardValidityPeriod,
   isError,
-  onChange,
+  onChangeMonth,
+  onChangeYear,
   setCardValidityPeriodInputRef,
 }: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
@@ -46,7 +45,7 @@ function CardValidityPeriodField({
           id="cardValidityPeriod-month"
           value={month}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'month')}
+          onChange={onChangeMonth}
           placeholder="MM"
           min={0}
           max={99}
@@ -60,7 +59,7 @@ function CardValidityPeriodField({
           id="cardValidityPeriod-year"
           value={year}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'year')}
+          onChange={onChangeYear}
           placeholder="YY"
           min={0}
           max={99}
