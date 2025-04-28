@@ -13,33 +13,54 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cvc: ''
+    cvc: '',
+    cvcError: ''
   },
-  render: ({ cvc: initialNumbers }) => {
-    const [cvc, setCvc] = useState(initialNumbers);
+  render: ({ cvc: initialCvc }) => {
+    const [cvc, setCvc] = useState(initialCvc);
+    const [cvcError, setCvcError] = useState('');
 
-    return <CvcSection cvc={cvc} setCvc={setCvc} />;
+    const handleCvcChange = (key: string, value: string) => {
+      setCvc(value);
+      setCvcError('');
+    };
+
+    return <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />;
   }
 };
 
 export const Valid: Story = {
   args: {
-    cvc: '314'
+    cvc: '314',
+    cvcError: ''
   },
-  render: ({ cvc: initialNumbers }) => {
-    const [cvc, setCvc] = useState(initialNumbers);
+  render: ({ cvc: initialCvc }) => {
+    const [cvc, setCvc] = useState(initialCvc);
+    const [cvcError, setCvcError] = useState('');
 
-    return <CvcSection cvc={cvc} setCvc={setCvc} />;
+    const handleCvcChange = (key: string, value: string) => {
+      setCvc(value);
+      setCvcError('');
+    };
+
+    return <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />;
   }
 };
 
 export const InValid: Story = {
   args: {
-    cvc: 'a2'
+    cvc: 'a2',
+    cvcError: '숫자만 입력해 주세요.'
   },
-  render: ({ cvc: initialNumbers }) => {
-    const [cvc, setCvc] = useState(initialNumbers);
+  render: ({ cvc: initialCvc, cvcError: initialError }) => {
+    const [cvc, setCvc] = useState(initialCvc);
+    const [cvcError, setCvcError] = useState(initialError);
 
-    return <CvcSection cvc={cvc} setCvc={setCvc} />;
+    const handleCvcChange = (key: string, value: string) => {
+      setCvc(value);
+      setCvcError('');
+    };
+
+    return <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />;
   }
 };
