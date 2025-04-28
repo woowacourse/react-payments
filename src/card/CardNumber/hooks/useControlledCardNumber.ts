@@ -5,6 +5,7 @@ import {
   CARD_NUMBER_INPUT_KEYS,
   INITIAL_CARD_NUMBER_STATE,
 } from "../constants";
+import { handleNextInputFocus } from "@/utils/handleNextInputFocus";
 
 const useControlledCardNumber = () => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
@@ -17,31 +18,14 @@ const useControlledCardNumber = () => {
     fourth: useRef<HTMLInputElement>(null),
   };
 
-  const handleNextInputFocus = (
-    key: CardNumberInputKey,
-    value: string,
-    isValid: boolean
-  ) => {
-    if (value.length !== 4 || isValid || key === "fourth") {
-      return;
-    }
-
-    const index = CARD_NUMBER_INPUT_KEYS.indexOf(key);
-    const nextKey = CARD_NUMBER_INPUT_KEYS[index + 1] as CardNumberInputKey;
-    const nextInputRef = cardNumberInputRefs[nextKey];
-    if (nextInputRef.current) {
-      nextInputRef.current.focus();
-    }
-  };
-
   const handleCardNumberChange = useCallback(
     (key: CardNumberInputKey, value: string) => {
       if (value.length > 4) {
         return;
       }
 
-      const isValidLength = value.length === 0 || value.length === 4;
-      const isValid = isNaN(Number(value)) || !isValidLength;
+      const isInvalidLength = value.length === 0 || value.length === 4;
+      const isValid = isNaN(Number(value)) || !isInvalidLength;
       setCardNumberState((prevState) => ({
         ...prevState,
         [key]: {
@@ -49,7 +33,16 @@ const useControlledCardNumber = () => {
           isError: isValid,
         },
       }));
-      handleNextInputFocus(key, value, isValid);
+
+      if (value.length !== 4 || isValid) {
+        return;
+      }
+
+      handleNextInputFocus({
+        key,
+        keys: CARD_NUMBER_INPUT_KEYS,
+        refs: cardNumberInputRefs,
+      });
     },
     []
   );

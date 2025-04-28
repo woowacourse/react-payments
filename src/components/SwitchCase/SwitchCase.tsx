@@ -1,6 +1,5 @@
+import { ObjectKey } from "@/types";
 import { ReactElement } from "react";
-
-type ObjectKey = string | number | symbol;
 
 interface SwitchCaseProps<T extends ObjectKey> {
   value: T;

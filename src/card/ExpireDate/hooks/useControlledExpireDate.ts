@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { EXPIRE_DATE_KEYS, INITIAL_EXPIRE_DATE_STATE } from "../constants";
 import { ExpireDateInputKey, ExpireDateState } from "../types";
 import { validateMonth, validateYear } from "../validation";
+import { handleNextInputFocus } from "@/utils/handleNextInputFocus";
 
 const useControlledExpireDate = () => {
   const [expireDate, setExpireDate] = useState<ExpireDateState>(
@@ -10,21 +11,6 @@ const useControlledExpireDate = () => {
   const expireDateInputRefs = {
     MM: useRef<HTMLInputElement>(null),
     YY: useRef<HTMLInputElement>(null),
-  };
-
-  const handleNextInputFocus = (
-    key: ExpireDateInputKey,
-    value: string,
-    isValid: boolean
-  ) => {
-    if (value.length !== 2 || isValid) {
-      return;
-    }
-
-    const index = EXPIRE_DATE_KEYS.indexOf(key);
-    const nextKey = EXPIRE_DATE_KEYS[index + 1] as ExpireDateInputKey;
-    const nextInputRef = expireDateInputRefs[nextKey];
-    nextInputRef.current?.focus();
   };
 
   const handleExpireChange = useCallback(
@@ -43,7 +29,15 @@ const useControlledExpireDate = () => {
         },
       }));
 
-      handleNextInputFocus(key, value, Boolean(errorMessage));
+      if (value.length !== 2 || errorMessage) {
+        return;
+      }
+
+      handleNextInputFocus({
+        key,
+        keys: EXPIRE_DATE_KEYS,
+        refs: expireDateInputRefs,
+      });
     },
     []
   );
