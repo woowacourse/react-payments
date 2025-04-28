@@ -32,10 +32,8 @@ function CardValidityPeriodField({
 
   const id = useId();
 
-  const { inputRef } = useInputFocus<CardValidityPeriodType>({
-    inputCount: 2,
+  const { inputRef, handleChange } = useInputFocus({
     inputValueLength: 2,
-    changeValue: cardValidityPeriod,
   });
 
   return (
@@ -49,7 +47,10 @@ function CardValidityPeriodField({
           id={`cardValidityPeriod-${id}-${month}`}
           value={month}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'month')}
+          onChange={(e) => {
+            onChange(e, 'month');
+            handleChange(0);
+          }}
           placeholder="MM"
           maxLength={2}
           regexString={/^\d*$/}
@@ -67,7 +68,10 @@ function CardValidityPeriodField({
           id={`cardValidityPeriod-${id}-${year}`}
           value={year}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'year')}
+          onChange={(e) => {
+            onChange(e, 'year');
+            handleChange(1);
+          }}
           placeholder="YY"
           maxLength={2}
           regexString={/^\d*$/}

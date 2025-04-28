@@ -13,10 +13,8 @@ function CardNumberField({
   isError,
   onChange,
 }: CardNumberFieldProps) {
-  const { inputRef } = useInputFocus<string[]>({
-    inputCount: 4,
+  const { inputRef, handleChange } = useInputFocus({
     inputValueLength: 4,
-    changeValue: cardNumber,
   });
 
   return (
@@ -39,7 +37,10 @@ function CardNumberField({
             value={v}
             key={index}
             aria-labelledby="cardNumber"
-            onChange={(e) => onChange(e, index)}
+            onChange={(e) => {
+              onChange(e, index);
+              handleChange(index);
+            }}
             placeholder="1234"
             maxLength={4}
             regexString={/^\d*$/}

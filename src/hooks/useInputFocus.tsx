@@ -1,29 +1,21 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
-interface useInputFocusProps<T> {
-  inputCount: number;
+interface useInputFocusProps {
   inputValueLength: number;
-  changeValue: T;
 }
 
-function useInputFocus<T>({
-  inputCount,
-  inputValueLength,
-  changeValue,
-}: useInputFocusProps<T>) {
+function useInputFocus({ inputValueLength }: useInputFocusProps) {
   const inputRef = useRef<null[] | HTMLInputElement[]>([]);
 
-  useEffect(() => {
-    for (let i = 0; i < inputCount - 1; i++) {
-      const inputLength = inputRef.current[i]?.value.length;
+  const handleChange = (i: number) => {
+    const inputLength = inputRef.current[i]?.value.length;
 
-      if (inputLength === inputValueLength) {
-        inputRef.current[i + 1]?.focus();
-      }
+    if (inputLength === inputValueLength) {
+      inputRef.current[i + 1]?.focus();
     }
-  }, [changeValue, inputCount, inputValueLength]);
+  };
 
-  return { inputRef: inputRef };
+  return { inputRef: inputRef, handleChange };
 }
 
 export default useInputFocus;
