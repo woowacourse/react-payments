@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CustomLinkButton from './CustomLinkButton';
-import { BrowserRouter } from 'react-router';
+import { MemoryRouter } from 'react-router';
 
 const meta: Meta<typeof CustomLinkButton> = {
   title: 'Shared/CustomLinkButton',
@@ -8,9 +8,9 @@ const meta: Meta<typeof CustomLinkButton> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/card']}>
         <Story />
-      </BrowserRouter>
+      </MemoryRouter>
     ),
   ],
 };
