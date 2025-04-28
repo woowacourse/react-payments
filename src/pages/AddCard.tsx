@@ -61,7 +61,12 @@ function AddCard() {
         cardValidityPeriod={cardValidityPeriod}
         CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}
       />
-      <CardInfoForm canSubmit={canSubmit} step={step}>
+      <CardInfoForm
+        canSubmit={canSubmit}
+        step={step}
+        cardNumber={cardNumber}
+        selectedCard={selectedCard}
+      >
         <CardInputSection
           title="결제할 카드 번호 입력"
           description="본인 명의의 카드만 결제 가능합니다."

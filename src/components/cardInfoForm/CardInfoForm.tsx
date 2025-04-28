@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
 import Button from '../common/Button/Button';
 import { StepType } from '../../constants/step';
+import { useNavigate } from 'react-router';
+import { PAGE_URL } from '../../constants/pageUrl';
+import { CardCompanyName } from '../../hooks/useCardCompany';
 
 interface CardInfoFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   canSubmit: boolean;
   children: React.ReactElement<{ name: StepType }>[];
   step: Record<StepType, boolean>;
+  cardNumber: string[];
+  selectedCard: CardCompanyName | null;
 }
 
 function CardInfoForm(props: CardInfoFormProps) {
-  const { canSubmit, children, step } = props;
+  const { canSubmit, children, step, cardNumber, selectedCard } = props;
 
   const completedSteps = new Set(
     Object.entries(step)
@@ -26,12 +31,25 @@ function CardInfoForm(props: CardInfoFormProps) {
     .filter((child) => completedSteps.has(child.props.name))
     .reverse();
 
+  const navigate = useNavigate();
+
+  const handleAddCardFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    navigate(PAGE_URL.ADD_CARD_SUCCESS, {
+      state: {
+        firstCardNumber: cardNumber[0],
+        selectedCard,
+      },
+    });
+  };
+
   return (
-    <CardForm>
+    <CardForm onSubmit={handleAddCardFormSubmit}>
       {filteredChildren}
       {canSubmit && (
         <CardFormButtonWrapper>
-          <Button customStyle={cardFormButtonStyle} text="확인" />
+          <Button customStyle={cardFormButtonStyle} text="확인" type="submit" />
         </CardFormButtonWrapper>
       )}
     </CardForm>
