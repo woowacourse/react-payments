@@ -25,7 +25,7 @@ function CardFormPage() {
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
   const { cardErrorState, dispatchError, allClear, uniqueNumberClear, expirationDateClear, cvcNumberClear } =
     useCardError();
-  const { openNextForm, isFormOpen } = useOpenForm({
+  const { isFormOpen } = useOpenForm({
     cardState,
     cardErrorState,
     uniqueNumberComplete,
@@ -63,7 +63,6 @@ function CardFormPage() {
             <CvcNumberForm
               cvcNumberState={cvcNumber}
               dispatch={dispatch}
-              openNextForm={openNextForm}
               errorState={cardErrorState.cvcNumber}
               dispatchError={dispatchError}
             />
@@ -72,18 +71,14 @@ function CardFormPage() {
             <ExpirationDateForm
               expirationDateState={expirationDate}
               dispatch={dispatch}
-              openNextForm={openNextForm}
               errorState={cardErrorState.expirationDate}
               dispatchError={dispatchError}
             />
           )}
-          {isFormOpen("cardIssuer") && (
-            <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} openNextForm={openNextForm} />
-          )}
+          {isFormOpen("cardIssuer") && <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />}
           <UniqueNumberForm
             uniqueNumberState={uniqueNumber}
             dispatch={dispatch}
-            openNextForm={openNextForm}
             errorState={cardErrorState.uniqueNumber}
             dispatchError={dispatchError}
           />

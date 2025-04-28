@@ -70,7 +70,7 @@ const useOpenForm = ({
     }, [dependency]);
   });
 
-  return { openNextForm, isFormOpen };
+  return { isFormOpen };
 };
 
 export default useOpenForm;

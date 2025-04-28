@@ -10,7 +10,6 @@ export type CardStateType = {
 export type CvcNumberStateType = {
   cvcNumberState: string[];
   dispatch: Dispatch<Action>;
-  openNextForm: (currentForm: string) => void;
   errorState: boolean[];
   dispatchError: Dispatch<ErrorAction>;
 };
@@ -18,7 +17,6 @@ export type CvcNumberStateType = {
 export type ExpirationDateStateType = {
   expirationDateState: string[];
   dispatch: Dispatch<Action>;
-  openNextForm: (currentForm: string) => void;
   errorState: boolean[];
   dispatchError: Dispatch<ErrorAction>;
 };
@@ -26,7 +24,6 @@ export type ExpirationDateStateType = {
 export type UniqueNumberStateType = {
   uniqueNumberState: string[];
   dispatch: Dispatch<Action>;
-  openNextForm: (currentForm: string) => void;
   errorState: boolean[];
   dispatchError: Dispatch<ErrorAction>;
 };
@@ -41,7 +38,6 @@ export type PasswordStateType = {
 export type CardIssuerStateType = {
   cardIssuerState: (string | null)[];
   dispatch: Dispatch<Action>;
-  openNextForm: (currentForm: string) => void;
 };
 
 export type Action =

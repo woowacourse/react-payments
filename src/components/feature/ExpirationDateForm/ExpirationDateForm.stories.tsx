@@ -19,7 +19,6 @@ export const Primary: Story = {
         dispatch={() => {}}
         errorState={[false, false]}
         dispatchError={() => {}}
-        openNextForm={() => {}}
       />
     );
   },

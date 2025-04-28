@@ -21,14 +21,6 @@ export const Cvc: Story = {
   render: (args: any) => {
     const [value, setValue] = useState(args.cvcNumberState);
 
-    return (
-      <CvcNumberForm
-        cvcNumberState={value}
-        dispatch={setValue}
-        errorState={[false]}
-        dispatchError={() => {}}
-        openNextForm={() => {}}
-      />
-    );
+    return <CvcNumberForm cvcNumberState={value} dispatch={setValue} errorState={[false]} dispatchError={() => {}} />;
   },
 };
