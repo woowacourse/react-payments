@@ -37,7 +37,7 @@ export const ExpireDateForm = ({ context, onNext }: Props<CardForm['expireDate']
               key={`expire-${index}`}
               value={date.value}
               maxLength={2}
-              onChange={(e) => handleChange(index, e)}
+              onChange={(e) => handleChange(e, index)}
               isValid={date.isValid}
               placeholder={ExpireDatePlaceholder[index]}
               ref={(el) => {

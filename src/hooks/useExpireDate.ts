@@ -34,7 +34,7 @@ export const useExpireDate = ({ expireDates, setExpireDates, onValid }: Props) =
   );
 
   const handleChange = useCallback(
-    (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       const newValue = e.target.value;
       const updatedCardNumbers = [...expireDates];
       updatedCardNumbers[index].value = newValue;
