@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Preview from "./Preview";
-import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
 
 const meta = {
   title: "Preview",
@@ -13,12 +13,12 @@ export default meta;
 type Story = StoryObj<typeof Preview>;
 
 export const Empty: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [withCardProviders({})],
 };
 
 export const VisaCard: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "4111",
         second: "1111",
@@ -35,7 +35,7 @@ export const VisaCard: Story = {
 
 export const MasterCard: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "5111",
         second: "2222",
@@ -52,7 +52,7 @@ export const MasterCard: Story = {
 
 export const PartiallyMaskedCard: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "1234",
         second: "5678",

@@ -1,36 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Input from "./Input";
 import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
+import PasswordInput from "./PasswordInput";
 
 const meta = {
-  title: "Input",
-  component: Input,
+  title: "PasswordInput",
+  component: PasswordInput,
   tags: ["autodocs"],
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof PasswordInput>;
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
-
-const defaultArgs = {
-  placeholder: "1234",
-  maxLength: 4,
-  value: "1234",
-  onChange: () => {},
-};
+type Story = StoryObj<typeof PasswordInput>;
 
 export const Default: Story = {
   args: {
-    ...defaultArgs,
-    isError: false,
+    value: "01",
+    error: false,
   },
   decorators: [withCardProviders({})],
 };
 
 export const WithError: Story = {
   args: {
-    ...defaultArgs,
-    isError: true,
+    value: "as",
+    error: true,
   },
   decorators: [withCardProviders({})],
 };

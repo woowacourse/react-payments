@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const InputCSS = styled.input<{ $isError?: boolean }>`
+export const InputCSS = styled.input<{ $isError?: string | null }>`
   width: 100%;
   height: 40px;
   border-radius: 4px;

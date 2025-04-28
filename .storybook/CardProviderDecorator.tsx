@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../src/styles/theme";
 import { CardContext, CardContextType } from "../src/contexts/CardContext";
 
 interface CardProviderProps {
@@ -6,7 +8,7 @@ interface CardProviderProps {
   value: Partial<CardContextType>;
 }
 
-const CustomCardProvider = ({ children, value }: CardProviderProps) => {
+const CardProvider = ({ children, value }: CardProviderProps) => {
   const defaultValue: CardContextType = {
     cardNumbers: {
       first: "",
@@ -22,6 +24,11 @@ const CustomCardProvider = ({ children, value }: CardProviderProps) => {
     updateExpirationPeriod: () => {},
     cvcNumber: "",
     updateCvcNumber: () => {},
+    cardBrand: "",
+    updateCardBrand: () => {},
+    password: "",
+    updatePassword: () => {},
+    resetCard: () => {},
   };
 
   const contextValue = { ...defaultValue, ...value };
@@ -31,10 +38,12 @@ const CustomCardProvider = ({ children, value }: CardProviderProps) => {
   );
 };
 
-export const withCustomCardProvider = (value: Partial<CardContextType>) => {
+export const withCardProviders = (cardValue: Partial<CardContextType> = {}) => {
   return (Story: () => ReactNode) => (
-    <CustomCardProvider value={value}>
-      <Story />
-    </CustomCardProvider>
+    <ThemeProvider theme={theme}>
+      <CardProvider value={cardValue}>
+        <Story />
+      </CardProvider>
+    </ThemeProvider>
   );
 };

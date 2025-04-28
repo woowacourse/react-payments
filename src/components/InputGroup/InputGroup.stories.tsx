@@ -1,27 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputGroup from "./InputGroup";
 import { INPUT_TYPE } from "../../constants/constants";
-import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
 
 const defaultError = {
   cardNumbers: {
-    first: false,
-    second: false,
-    third: false,
-    fourth: false,
+    first: null,
+    second: null,
+    third: null,
+    fourth: null,
   },
   expirationPeriod: {
-    month: false,
-    year: false,
+    month: null,
+    year: null,
   },
-  cvcNumber: false,
+  cvcNumber: null,
+  cardBrand: null,
+  password: null,
 };
 
 const meta = {
   title: "InputGroup",
   component: InputGroup,
   tags: ["autodocs"],
-  decorators: [withCustomCardProvider({})],
+  decorators: [withCardProviders({})],
 } satisfies Meta<typeof InputGroup>;
 
 export default meta;
@@ -30,7 +32,7 @@ type Story = StoryObj<typeof InputGroup>;
 
 export const CardNumber: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "1111",
         second: "2222",
@@ -47,7 +49,7 @@ export const CardNumber: Story = {
 
 export const ExpirationPeriod: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       expirationPeriod: {
         month: "03",
         year: "28",
@@ -62,7 +64,7 @@ export const ExpirationPeriod: Story = {
 
 export const CvcNumber: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cvcNumber: "111",
     }),
   ],
@@ -74,7 +76,7 @@ export const CvcNumber: Story = {
 
 export const WithCardNumberError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cardNumbers: {
         first: "123a",
         second: "4567",
@@ -87,23 +89,25 @@ export const WithCardNumberError: Story = {
     type: INPUT_TYPE.cardNumbers,
     error: {
       cardNumbers: {
-        first: true,
-        second: false,
-        third: false,
-        fourth: false,
+        first: "숫자를 입력해주세요",
+        second: null,
+        third: null,
+        fourth: null,
       },
       expirationPeriod: {
-        month: false,
-        year: false,
+        month: null,
+        year: null,
       },
-      cvcNumber: false,
+      cvcNumber: null,
+      cardBrand: null,
+      password: null,
     },
   },
 };
 
 export const WithExpirationPeriodError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       expirationPeriod: {
         month: "ab",
         year: "25",
@@ -114,23 +118,25 @@ export const WithExpirationPeriodError: Story = {
     type: INPUT_TYPE.expirationPeriod,
     error: {
       cardNumbers: {
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
+        first: null,
+        second: null,
+        third: null,
+        fourth: null,
       },
       expirationPeriod: {
-        month: true, // 월 입력에 에러 표시
-        year: false,
+        month: "숫자를 입력해주세요", // 월 입력에 에러 표시
+        year: null,
       },
-      cvcNumber: false,
+      cvcNumber: null,
+      cardBrand: null,
+      password: null,
     },
   },
 };
 
 export const WithCvcNumberError: Story = {
   decorators: [
-    withCustomCardProvider({
+    withCardProviders({
       cvcNumber: "12a", // 숫자가 아닌 값 포함
     }),
   ],
@@ -138,16 +144,18 @@ export const WithCvcNumberError: Story = {
     type: INPUT_TYPE.cvcNumber,
     error: {
       cardNumbers: {
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
+        first: null,
+        second: null,
+        third: null,
+        fourth: null,
       },
       expirationPeriod: {
-        month: false,
-        year: false,
+        month: null,
+        year: null,
       },
-      cvcNumber: true, // CVC 입력에 에러 표시
+      cvcNumber: "숫자를 입력해주세요", // CVC 입력에 에러 표시
+      cardBrand: null,
+      password: null,
     },
   },
 };

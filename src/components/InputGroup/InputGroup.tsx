@@ -1,15 +1,12 @@
 import {
   CardPositionType,
-  INPUT_TYPE,
   InputType,
   PeriodPositionType,
 } from "../../constants/constants";
 import { useCard } from "../../hooks/useCard";
 import { InputGroupCSS } from "./InputGroup.styled";
 import { InputErrorType } from "../../hooks/useInputError";
-import ExpirationPeriodInputs from "../ExpirationPeriodInputs/ExpirationPeriodInputs";
-import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
-import CvcInput from "../CvcInput/CvcInput";
+import InputFieldRenderer from "../InputRenderer/InputRenderer";
 
 export interface InputGroupProps {
   type: InputType;
@@ -20,6 +17,7 @@ export interface InputGroupProps {
     position: PeriodPositionType
   ) => void;
   validateCvcNumber: (value: string) => void;
+  validatePassword: (value: string) => void;
 }
 
 function InputGroup({
@@ -28,6 +26,7 @@ function InputGroup({
   validateCardNumber,
   validateExpirationPeriod,
   validateCvcNumber,
+  validatePassword,
 }: InputGroupProps) {
   const {
     cardNumbers,
@@ -36,6 +35,10 @@ function InputGroup({
     updateExpirationPeriod,
     cvcNumber,
     updateCvcNumber,
+    cardBrand,
+    updateCardBrand,
+    password,
+    updatePassword,
   } = useCard();
 
   const handleCardNumberChange = (
@@ -59,29 +62,33 @@ function InputGroup({
     updateCvcNumber(value);
   };
 
+  const handleCardBrandChange = (value: string) => {
+    updateCardBrand(value);
+  };
+
+  const handlePasswordChange = (value: string) => {
+    validatePassword(value);
+    updatePassword(value);
+  };
+
   return (
     <InputGroupCSS>
-      {type === INPUT_TYPE.cardNumbers && (
-        <CardNumberInputs
-          cardNumbers={cardNumbers}
-          error={error}
-          handleCardNumberChange={handleCardNumberChange}
-        />
-      )}
-      {type === INPUT_TYPE.expirationPeriod && (
-        <ExpirationPeriodInputs
-          expirationPeriod={expirationPeriod}
-          error={error.expirationPeriod}
-          handleExpirationPeriodChange={handleExpirationPeriodChange}
-        />
-      )}
-      {type === INPUT_TYPE.cvcNumber && (
-        <CvcInput
-          value={cvcNumber}
-          error={error.cvcNumber}
-          handleCvcNumberChange={handleCvcNumberChange}
-        />
-      )}
+      <InputFieldRenderer
+        type={type}
+        error={error}
+        cardNumbers={cardNumbers}
+        expirationPeriod={expirationPeriod}
+        cvcNumber={cvcNumber}
+        cardBrand={cardBrand}
+        password={password}
+        handlers={{
+          handleCardNumberChange,
+          handleExpirationPeriodChange,
+          handleCvcNumberChange,
+          handleCardBrandChange,
+          handlePasswordChange,
+        }}
+      />
     </InputGroupCSS>
   );
 }

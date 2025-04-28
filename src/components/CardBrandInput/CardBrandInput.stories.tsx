@@ -1,20 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Description from "./Description";
 import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
+import CardBrandInput from "./CardBrandInput";
 
 const meta = {
-  title: "Description",
-  component: Description,
+  title: "CardBrandInput",
+  component: CardBrandInput,
   tags: ["autodocs"],
-} satisfies Meta<typeof Description>;
+} satisfies Meta<typeof CardBrandInput>;
 
 export default meta;
 
-type Story = StoryObj<typeof Description>;
+type Story = StoryObj<typeof CardBrandInput>;
 
 export const Default: Story = {
   args: {
-    description: "본인 명의의 카드만 결제 가능합니다.",
+    value: "신한카드",
+    handleCardBrandChange: () => {},
   },
   decorators: [withCardProviders({})],
 };

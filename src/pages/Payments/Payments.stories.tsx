@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Payments from "./Payments";
-import { withCustomCardProvider } from "../../../.storybook/CardProviderDecorator";
-
+import { withCardProviders } from "../../../.storybook/CardProviderDecorator";
+import { withRouter } from "../../../.storybook/withRouter";
 const meta = {
   title: "Payments",
   component: Payments,
@@ -13,5 +13,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  decorators: [withCustomCardProvider({})],
+  decorators: [withRouter, withCardProviders({})],
 };
