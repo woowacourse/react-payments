@@ -1,5 +1,5 @@
 import GlobalStyles from './styles/GlobalStyles';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import CardPage from './pages/CardPage/CardPage';
 import CardCompletePage from './pages/CardCompletePage/CardCompletePage';
 
@@ -8,8 +8,9 @@ function App() {
     <BrowserRouter>
       <GlobalStyles />
       <Routes>
-        <Route path="/" element={<CardPage />} />
-        <Route path="/card/complete" element={<CardCompletePage />} />
+        <Route path="/" element={<Navigate to="/react-payments/" replace />} />
+        <Route path="/react-payments/" element={<CardPage />} />
+        <Route path="/react-payments/complete" element={<CardCompletePage />} />
       </Routes>
     </BrowserRouter>
   );
