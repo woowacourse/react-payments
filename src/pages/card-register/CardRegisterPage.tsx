@@ -71,7 +71,7 @@ const CardRegisterPage = () => {
             passwordNumbers={passwordNumbers}
             setPasswordNumbers={setPasswordNumbers}
             setPasswordError={setPasswordError}
-          ></CardPassword>
+          />
         )}
         {isPeriodFilled && (
           <CVCNumbers
