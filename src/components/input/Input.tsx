@@ -6,18 +6,9 @@ interface InputProps extends ComponentProps<"input"> {
 	isError?: boolean;
 }
 
-const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur, type = "text", ref }: InputProps) => {
+const Input = ({ isError = false, onChange, onBlur, ref, ...rest }: InputProps) => {
 	return (
-		<TextInput
-			ref={ref}
-			type={type}
-			maxLength={maxLength}
-			value={value}
-			placeholder={placeholder}
-			onChange={onChange && ((e: ChangeEvent<HTMLInputElement>) => onChange(e))}
-			onBlur={onBlur && ((e: FocusEvent<HTMLInputElement>) => onBlur(e))}
-			$isError={isError}
-		/>
+		<TextInput ref={ref} onChange={onChange && ((e: ChangeEvent<HTMLInputElement>) => onChange(e))} onBlur={onBlur && ((e: FocusEvent<HTMLInputElement>) => onBlur(e))} $isError={isError} {...rest} />
 	);
 };
 
