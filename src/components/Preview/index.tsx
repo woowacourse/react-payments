@@ -1,7 +1,7 @@
 import { useBrandContext } from '../../contexts/BrandContext';
 import { useExpiryDateContext } from '../../contexts/ExpiryDateContext';
 import { useNumbersContext } from '../../contexts/NumbersContext';
-import { useFormUiLogic } from '../../hooks/useFormUiLogic';
+import useFormUiLogic from '../../hooks/useFormUiLogic';
 import { theme } from '../../styles/theme';
 import PreviewView from './PreviewView';
 

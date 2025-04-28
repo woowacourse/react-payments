@@ -10,7 +10,7 @@ import PasswordInput from '../components/PasswordInput';
 import SubmitButton from '../components/common/SubmitButton';
 import { useNumbersContext } from '../contexts/NumbersContext';
 import { useBrandContext } from '../contexts/BrandContext';
-import { useFormUiLogic } from '../hooks/useFormUiLogic';
+import useFormUiLogic from '../hooks/useFormUiLogic';
 
 const HomePage = () => {
   const navigate = useNavigate();

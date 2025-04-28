@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { InputFieldState } from '../types/models';
 
-export interface FormValidationParams {
+interface FormValidationParams {
   numberFields: InputFieldState[];
   expiryFields: InputFieldState[];
   cvcField: InputFieldState;
@@ -9,7 +9,7 @@ export interface FormValidationParams {
   selectedBrand: string;
 }
 
-export default function useFormValidation({
+function useFormValidation({
   numberFields,
   expiryFields,
   cvcField,
@@ -29,3 +29,5 @@ export default function useFormValidation({
     );
   }, [numberFields, expiryFields, cvcField, passwordField, selectedBrand]);
 }
+
+export default useFormValidation;

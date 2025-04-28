@@ -2,7 +2,7 @@ import InputAreaHeader from '../common/InputAreaHeader';
 import InputTexts from '../common/InputTexts';
 import { Container, ErrorMessage } from '../common/Styled';
 import { useExpiryDateContext } from '../../contexts/ExpiryDateContext';
-import { useFormUiLogic } from '../../hooks/useFormUiLogic';
+import useFormUiLogic from '../../hooks/useFormUiLogic';
 
 const ExpiryDateInputs = () => {
   const { expiryFields, handleExpiryChange, expiryInputRefs } =

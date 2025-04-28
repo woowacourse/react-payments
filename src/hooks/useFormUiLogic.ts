@@ -1,4 +1,3 @@
-// src/hooks/useFormUiLogic.ts
 import { useState, useCallback, useLayoutEffect, useRef } from 'react';
 import useSequentialReveal from './useSequentialReveal';
 import useFormValidation from './useFormValidation';
@@ -8,7 +7,7 @@ import { useExpiryDateContext } from '../contexts/ExpiryDateContext';
 import { useCvcContext } from '../contexts/CvcContext';
 import { usePasswordContext } from '../contexts/PasswordContext';
 
-export function useFormUiLogic() {
+function useFormUiLogic() {
   const { numberFields, numberInputRefs } = useNumbersContext();
   const { expiryFields, expiryInputRefs } = useExpiryDateContext();
   const { cvcField, cvcInputRef } = useCvcContext();
@@ -78,3 +77,5 @@ export function useFormUiLogic() {
     revealFlags,
   };
 }
+
+export default useFormUiLogic;

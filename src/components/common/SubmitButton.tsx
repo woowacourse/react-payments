@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Button } from './Styled';
-import { useFormUiLogic } from '../../hooks/useFormUiLogic';
+import useFormUiLogic from '../../hooks/useFormUiLogic';
 
 const SubmitButton = () => {
   const { isFormValid } = useFormUiLogic();
