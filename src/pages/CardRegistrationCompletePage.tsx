@@ -19,7 +19,7 @@ function CardRegistrationCompletePage() {
 
   return (
     <div css={pageContainer}>
-      <img src={Complete} css={completeImage}/>
+      <img src="/image/Complete.png" alt="완료" css={completeImage} />
       <h1 css={title}>
         {cardNumber.first}로 시작하는
         <br/>
