@@ -27,15 +27,15 @@ export const CardForm = () => {
     isFilledAndValid(formData.password) &&
     formData.brand !== null;
 
-  const handleSubmit = () => {
-    if (allValid) {
-      navigate('/card/confirm', {
-        state: {
-          cardNumber: formData.cardNumber[0],
-          brand: formData.brand,
-        },
-      });
-    }
+  const handleCardFormSubmit = () => {
+    if (!allValid) return;
+
+    navigate('/card/confirm', {
+      state: {
+        cardNumber: formData.cardNumber[0],
+        brand: formData.brand,
+      },
+    });
   };
 
   return (
@@ -48,7 +48,7 @@ export const CardForm = () => {
         />
       </Flex>
 
-      <CardFormLayout disabled={!allValid} onSubmit={handleSubmit}>
+      <CardFormLayout disabled={!allValid} onSubmit={handleCardFormSubmit}>
         <Stack>
           <Stack.Step name="카드번호">
             <CardNumberForm
