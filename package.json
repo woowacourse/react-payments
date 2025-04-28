@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
-    "chromatic": "npx chromatic --project-token=chpt_aec3ee29112cdf3"
+    "chromatic": "npx chromatic --project-token=chpt_aec3ee29112cdf3",
+    "deploy-storybook": "npx gh-pages -d storybook-static"
   },
   "dependencies": {
     "react": "^19.1.0",

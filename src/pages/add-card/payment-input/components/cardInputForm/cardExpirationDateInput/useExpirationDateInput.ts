@@ -47,17 +47,26 @@ export function useExpirationDateInput(
 
     onExpirationDateChange([nextMonth, nextYear]);
 
-    if (value.length === 2 && i !== 1) {
-      inputRefs.current[i + 1]?.focus();
-    } else if (
-      value.length === 2 &&
-      i === 1 &&
+    console.log("nextMonth", nextMonth.length);
+
+    if (
+      nextMonth.length === 2 &&
+      nextYear.length === 2 &&
       monthError === "" &&
       yearError === ""
     ) {
       onSuccessValidate(true);
       onSuccessNextInput();
-    } else if (value.length < 2 || (monthError !== "" && yearError !== "")) {
+    } else if (value.length === 2 && i === 0) {
+      inputRefs.current[i + 1]?.focus();
+    } else if (value.length === 2 && i === 1) {
+      inputRefs.current[i - 1]?.focus();
+    } else if (
+      nextMonth.length !== 2 ||
+      nextYear.length !== 2 ||
+      monthError !== "" ||
+      yearError !== ""
+    ) {
       onSuccessValidate(false);
     }
   }

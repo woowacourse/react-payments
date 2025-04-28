@@ -18,7 +18,7 @@ export function useCVCInput(
     if (value.length === 3 && errorMessage === "") {
       onSuccessValidate(true);
       onSuccessNextInput();
-    } else if (errorMessage !== "") {
+    } else if (errorMessage !== "" || value.length !== 3) {
       onSuccessValidate(false);
     }
   }
