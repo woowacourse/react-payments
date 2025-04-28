@@ -83,7 +83,7 @@ function useCardNumberValidation() {
     handleFocusNextInput(name, value);
   };
 
-  const onBlur = (e: ChangeEvent) => {
+  const handleBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
     updateCardError(name as CardNumberInputType, {
@@ -109,7 +109,7 @@ function useCardNumberValidation() {
     cardType,
     isInputComplete,
     handleValue,
-    onBlur,
+    handleBlur,
   };
 }
 

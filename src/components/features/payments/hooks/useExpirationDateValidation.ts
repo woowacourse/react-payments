@@ -47,7 +47,7 @@ function useExpirationDateValidation() {
     handleFocusNextInput(name, value);
   };
 
-  const onBlur = (e: ChangeEvent) => {
+  const handleBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
     if (value.length === EXPIRATION_DATE.padLeftThreshold)
@@ -64,7 +64,13 @@ function useExpirationDateValidation() {
     focusNextInput(key, inputRefs);
   };
 
-  return { inputValues, inputRefs, isInputComplete, handleInputValue, onBlur };
+  return {
+    inputValues,
+    inputRefs,
+    isInputComplete,
+    handleInputValue,
+    handleBlur,
+  };
 }
 
 export default useExpirationDateValidation;

@@ -32,7 +32,7 @@ function useCardPasswordValidation() {
     setIsInputComplete(value.length === CARD_PASSWORD.length.max);
   };
 
-  const onBlur = (e: ChangeEvent) => {
+  const handleBlur = (e: ChangeEvent) => {
     const { value } = e.target as HTMLInputElement;
 
     updateCardError({
@@ -49,7 +49,7 @@ function useCardPasswordValidation() {
     errorType,
     isInputComplete,
     handleInputValue,
-    onBlur,
+    handleBlur,
   };
 }
 

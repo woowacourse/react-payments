@@ -31,7 +31,7 @@ function useCVCValidation() {
     setIsInputComplete(value.length === CVC.length.max);
   };
 
-  const onBlur = (e: ChangeEvent) => {
+  const handleBlur = (e: ChangeEvent) => {
     const { value } = e.target as HTMLInputElement;
 
     updateCardError({
@@ -46,7 +46,7 @@ function useCVCValidation() {
     errorType,
     isInputComplete,
     handleInputValue,
-    onBlur,
+    handleBlur,
   };
 }
 
