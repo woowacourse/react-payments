@@ -14,6 +14,8 @@ import { useCardCVCNumberOptions } from '@/hooks/useCardCVCNumber';
 import useFieldCompletion from '@/hooks/useFieldCompletion';
 import { CardPasswordOptions } from '@/hooks/useCardPassword';
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
+import useCardForm from '@/hooks/useCardForm';
+import useCardFormFlow from '@/hooks/useCardFormFlow';
 
 type CardFormPagesProps = {
   cardNumbersForm: CardNumbersOptions;
@@ -52,67 +54,18 @@ const CardFormPages = ({
     nav('/complete');
   };
 
-  const cardNumbersInputRef = {
-    firstNumber: useRef<HTMLInputElement>(null),
-    secondNumber: useRef<HTMLInputElement>(null),
-    thirdNumber: useRef<HTMLInputElement>(null),
-    fourthNumber: useRef<HTMLInputElement>(null),
-  };
-  const cardExpirationDateInputRef = {
-    month: useRef<HTMLInputElement>(null),
-    year: useRef<HTMLInputElement>(null),
-  };
-  const cardCVCInputRef = useRef<HTMLInputElement>(null);
-  const cardPasswordInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (isUserFocusing) {
-      return;
-    }
-
-    if (isFieldCompletetion[3]) {
-      cardPasswordInputRef.current?.focus();
-      return;
-    }
-    if (isFieldCompletetion[2]) {
-      console.log('cardExpiration 입력');
-      cardCVCInputRef.current?.focus();
-      return;
-    }
-
-    if (isFieldCompletetion[1]) {
-      console.log('cardCompany 입력!');
-      if (cardExpirationDateForm.cardExpirationDate.month.length < 2) {
-        cardExpirationDateInputRef.month.current?.focus();
-      } else {
-        cardExpirationDateInputRef.year.current?.focus();
-      }
-      return;
-    }
-    if (isFieldCompletetion[0]) {
-      cardNumbersInputRef.fourthNumber.current?.blur();
-      return;
-    }
-    if (cardNumbersForm.cardNumbers.thirdNumber.length === 4) {
-      cardNumbersInputRef.fourthNumber.current?.focus();
-      return;
-    }
-    if (cardNumbersForm.cardNumbers.secondNumber.length === 4) {
-      cardNumbersInputRef.thirdNumber.current?.focus();
-      return;
-    }
-    if (cardNumbersForm.cardNumbers.firstNumber.length === 4) {
-      cardNumbersInputRef.secondNumber.current?.focus();
-      return;
-    }
-    cardNumbersInputRef.firstNumber.current?.focus();
-  }, [
+  const {
+    cardNumbersInputRef,
+    cardExpirationDateInputRef,
+    cardCVCInputRef,
+    cardPasswordInputRef,
+  } = useCardFormFlow({
     isFieldCompletetion,
-    cardNumbersForm.cardNumbers,
-    cardExpirationDateForm.cardExpirationDate,
-    cardCVCNumberForm.cardCVCNumber,
+    cardNumbersForm,
+    cardExpirationDateForm,
+    cardCVCNumberForm,
     isUserFocusing,
-  ]);
+  });
 
   return (
     <>

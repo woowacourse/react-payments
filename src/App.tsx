@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CardFormPages from './pages/CardFromPages';
+import CardFormPages from './pages/CardFormPages';
 import CardRegistrationComplete from './pages/CardRegistrationComplete';
 import styles from './css/main.module.css';
 import './css/index.css';
