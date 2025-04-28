@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-payments/">
+    <BrowserRouter basename={import.meta.env.VITE_PUBLIC_URL}>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
