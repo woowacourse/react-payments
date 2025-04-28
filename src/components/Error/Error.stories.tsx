@@ -15,7 +15,6 @@ type Story = StoryObj<typeof Error>;
 export const WithError: Story = {
   args: {
     errorMessage: "숫자만 입력 가능합니다.",
-    isVisible: true,
   },
   decorators: [withCardProviders({})],
 };
