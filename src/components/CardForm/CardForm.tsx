@@ -56,6 +56,7 @@ export function CardForm(props: CardFormProps) {
         <Stack.Step name="유효기간">
           <CardExpirationSection {...expiration} />
         </Stack.Step>
+
         <Stack.Step name="CVC">
           <CvcSection {...cvc} />
         </Stack.Step>

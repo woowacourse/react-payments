@@ -23,6 +23,8 @@ export default function CardExpirationSection({ expiration, expirationRef, handl
 
         <div className={styles.inputWrapper}>
           <Input
+            pattern="[0-9]{2}"
+            required
             autoFocus={expiration.month.value == '' && expiration.year.value == ''}
             value={expiration.month.value}
             placeholder="MM"
@@ -32,6 +34,8 @@ export default function CardExpirationSection({ expiration, expirationRef, handl
             ref={expirationRef.month}
           />
           <Input
+            pattern="[0-9]{2}"
+            required
             value={expiration.year.value}
             placeholder="YY"
             isError={Boolean(expiration.year.errorMessage)}

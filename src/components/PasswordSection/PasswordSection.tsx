@@ -16,6 +16,8 @@ export default function PasswordSection({ handlePasswordChange, password }: Pass
         <InputSection.Label text="비밀번호 앞 2자리" />
 
         <Input
+          pattern="[0-9]{2}"
+          required
           autoFocus={password.value === ''}
           onChange={(e) => handlePasswordChange(e.target.value)}
           value={password.value}
