@@ -36,22 +36,18 @@ export default function CardPassword({
   };
 
   const handleCardPasswordChange = (value: string) => {
-    // 2자리 넘으면 입력 무시
     if (value.length > PASSWORD_RULE.MAX_LENGTH) {
       return;
     }
 
-    // validation
     const validationError = passwordValidate(value);
     setPassword(value);
     setError(validationError);
 
-    // 완료 여부 업데이트
     const isComplete =
       value.length === PASSWORD_RULE.MAX_LENGTH && validationError === "";
     setCompleted(isComplete);
 
-    // 완성되면 onComplete 호출
     if (isComplete) {
       onComplete();
     }

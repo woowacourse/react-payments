@@ -19,7 +19,6 @@ function AddCardPage() {
     useExpirationDateState();
   const { selectedCompany, selectCompany } = useCardCompanyState();
 
-  // TODO: 이 형식대로 위에것들도 맞추기
   const [cvcCompleted, setCvcCompleted] = useState(false);
   const [passwordCompleted, setPasswordCompleted] = useState(false);
 

@@ -27,22 +27,18 @@ export default function CardCvcNumber({
   const [error, setError] = useState("");
 
   const handleCardCvcNumberChange = (value: string) => {
-    // 4자리 이상 입력 시도는 무시
     if (value.length > CVC_RULE.MAX_LENGTH) return;
 
-    // validation
     const validationError =
       value.length < CVC_RULE.MAX_LENGTH ? CVC_RULE.INVALID_LENGTH_ERROR : "";
 
     setNumbers(value);
     setError(validationError);
 
-    // 완료 여부 업데이트
     const isComplete =
       value.length === CVC_RULE.MAX_LENGTH && validationError === "";
     setCompleted(isComplete);
 
-    // 완성됐을 때만 onComplete 호출
     if (isComplete) {
       onComplete();
     }

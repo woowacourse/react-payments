@@ -19,7 +19,6 @@ export default function NumberInput({
     const isNumberValue = /^\d*$/.test(e.target.value);
 
     if (isNumberValue) {
-      // onChange = (value) => handleCardNumberChange(value, index)임.
       onChange?.(e.target.value);
     }
   };
