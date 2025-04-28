@@ -3,12 +3,18 @@ import { PAGE_URL } from '../constants/pageUrl';
 import Button from '../components/common/Button/Button';
 import styled from '@emotion/styled';
 import check from '/check.png';
+import { useEffect } from 'react';
 
 function AddCardSuccess() {
   const navigate = useNavigate();
-  const { state } = useLocation();
+  const location = useLocation();
 
-  const { firstCardNumber, selectedCard } = state;
+  useEffect(() => {
+    if (!location.state) {
+      navigate(PAGE_URL.NOT_FOUND);
+      return;
+    }
+  }, []);
 
   const navigateToAddCard = () => {
     navigate(PAGE_URL.ADD_CARD);
@@ -19,8 +25,8 @@ function AddCardSuccess() {
       <Wrapper>
         <img src={check} alt="카드 등록 완료" />
         <Title>
-          <p>{firstCardNumber}로 시작하는</p>
-          <p>{selectedCard}가 등록되었어요.</p>
+          <p>{location.state?.firstCardNumber}로 시작하는</p>
+          <p>{location.state?.selectedCard}가 등록되었어요.</p>
         </Title>
         <Button
           customStyle={addCardSuccessButtonStyle}
