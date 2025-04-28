@@ -4,6 +4,7 @@ import {
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
 } from '../config/inputField';
+import { focusNextInput } from '../utils/focus';
 
 function useExpirationDateValidation() {
   const [inputValues, setInputValues] = useState<
@@ -43,7 +44,7 @@ function useExpirationDateValidation() {
     )
       setIsInputComplete(true);
     else setIsInputComplete(false);
-    handleNextInputFocus(name, value);
+    handleFocusNextInput(name, value);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -53,23 +54,14 @@ function useExpirationDateValidation() {
       setInputValues((prev) => ({ ...prev, [name]: `0${value}` }));
   };
 
-  const handleNextInputFocus = (
+  const handleFocusNextInput = (
     key: ExpirationDateInputType,
     value: string
   ) => {
-    if (value.length !== EXPIRATION_DATE.length || key === 'year') {
-      return;
-    }
-    const keyArray = Object.keys(EXPIRATION_DATE_INPUT_TYPE);
+    if (value.length !== EXPIRATION_DATE.length) return;
+    if (key === EXPIRATION_DATE_INPUT_TYPE.year) return;
 
-    const currentKeyIndex = keyArray.indexOf(key);
-    const nextInputKey = keyArray[
-      currentKeyIndex + 1
-    ] as ExpirationDateInputType;
-    const nextInputRef = inputRefs[nextInputKey];
-    if (nextInputRef.current) {
-      nextInputRef.current.focus();
-    }
+    focusNextInput(key, inputRefs);
   };
 
   return { inputValues, inputRefs, isInputComplete, handleInputValue, onBlur };
