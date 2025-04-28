@@ -7,10 +7,12 @@ import { theme } from "./styles/theme";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Success from "./pages/Success/Success";
 
+const basename = import.meta.env.DEV ? "/" : "/react-payments";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter basename="/react-payments">
+      <BrowserRouter basename={basename}>
         <CardProvider>
           <Routes>
             <Route path="/" element={<Payments />} />
