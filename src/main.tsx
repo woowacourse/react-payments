@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
+import "./global/index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PaymentInputPage from "./pages/add-card/payment-input/PaymentInputPage.tsx";
 import { PAGE_URL } from "./constants/pageUrl.ts";

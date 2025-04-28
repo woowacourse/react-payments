@@ -47,8 +47,6 @@ export function useExpirationDateInput(
 
     onExpirationDateChange([nextMonth, nextYear]);
 
-    console.log("nextMonth", nextMonth.length);
-
     if (
       nextMonth.length === 2 &&
       nextYear.length === 2 &&

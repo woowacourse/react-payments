@@ -37,11 +37,11 @@ export const ErrorYear: Story = {
     const monthInput = canvas.getByPlaceholderText("MM");
     const yearInput = canvas.getByPlaceholderText("YY");
 
-    await userEvent.type(monthInput, "04");
-    await userEvent.type(yearInput, "숫자");
+    await userEvent.type(monthInput, "가나");
+    await userEvent.type(yearInput, "26");
     expect(yearInput.className).toContain(styles.isNotValid);
 
-    expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeVisible();
+    expect(canvas.getByText("숫자를 입력해주세요")).toBeVisible();
   },
 };
 
@@ -55,8 +55,6 @@ export const ErrorDuration: Story = {
     await userEvent.type(yearInput, "20");
     expect(yearInput.className).toContain(styles.isNotValid);
 
-    expect(
-      canvas.getByText("유효하지 않은 카드입니다. 유효 기간을 확인해주세요.")
-    ).toBeVisible();
+    expect(canvas.getByText("유효기간을 다시 확인해주세요")).toBeVisible();
   },
 };
