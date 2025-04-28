@@ -31,7 +31,7 @@ const useControlledExpireDate = () => {
         },
       }));
 
-      if (value.length !== 2 || errorMessage) {
+      if (value.length !== 2 || errorMessage || key === "YY") {
         return;
       }
 

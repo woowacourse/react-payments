@@ -34,7 +34,7 @@ const useControlledCardNumber = () => {
         },
       }));
 
-      if (value.length !== 4 || isValid) {
+      if (value.length !== 4 || isValid || key === "fourth") {
         return;
       }
 
