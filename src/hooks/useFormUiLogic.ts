@@ -1,4 +1,4 @@
-import { useState, useCallback, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import useSequentialReveal from './useSequentialReveal';
 import useFormValidation from './useFormValidation';
 import { useBrandContext } from '../contexts/BrandContext';
@@ -13,13 +13,6 @@ function useFormUiLogic() {
   const { cvcField, cvcInputRef } = useCvcContext();
   const { passwordField, passwordInputRef } = usePasswordContext();
   const { brand, brandSelectRef } = useBrandContext();
-
-  const [showSep, setShowSep] = useState(false);
-  const showPeriodSeparator = useCallback(() => setShowSep(true), []);
-  const hidePeriodSeparator = useCallback(
-    () => setShowSep(expiryFields.some((f) => f.value !== '')),
-    [expiryFields]
-  );
 
   const isFormValid = useFormValidation({
     numberFields,
@@ -70,9 +63,6 @@ function useFormUiLogic() {
   }, [revealFlags, expiryFields, numberFields]);
 
   return {
-    showSep,
-    showPeriodSeparator,
-    hidePeriodSeparator,
     isFormValid,
     revealFlags,
   };

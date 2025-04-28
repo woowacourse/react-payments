@@ -56,8 +56,6 @@ const InputTexts = ({
             maxLength={dataModels.maximumLength}
             value={dataModels.value}
             onChange={onChangeAt(0)}
-            onFocus={onFocus}
-            onBlur={onBlur}
             isError={dataModels.hasError}
             autoComplete="off"
           />

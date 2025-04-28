@@ -4,6 +4,8 @@ import React, {
   ReactNode,
   ChangeEvent,
   RefObject,
+  useState,
+  useCallback,
 } from 'react';
 import { InputFieldState } from '../types/models';
 import { useMultipleInputFields } from '../hooks/useCardInputHooks';
@@ -11,7 +13,10 @@ import { isValidExpirationSegment } from '../utils/cardValidation';
 
 interface ExpiryDateContextValue {
   expiryFields: InputFieldState[];
+  showSep: boolean;
   handleExpiryChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  showPeriodSeparator: () => void;
+  hidePeriodSeparator: () => void;
   expiryInputRefs: RefObject<HTMLInputElement | null>[];
 }
 
@@ -31,9 +36,25 @@ export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
       validationFunction: isValidExpirationSegment,
     });
 
+  const [showSep, setShowSep] = useState<boolean>(false);
+  const showPeriodSeparator = useCallback(() => {
+    setShowSep(true);
+  }, []);
+  const hidePeriodSeparator = useCallback(
+    () => setShowSep(expiryFields.some((f) => f.value !== '')),
+    [expiryFields]
+  );
+
   return (
     <ExpiryDateContext.Provider
-      value={{ expiryFields, handleExpiryChange, expiryInputRefs }}
+      value={{
+        expiryFields,
+        handleExpiryChange,
+        expiryInputRefs,
+        showSep,
+        showPeriodSeparator,
+        hidePeriodSeparator,
+      }}
     >
       {children}
     </ExpiryDateContext.Provider>
@@ -42,9 +63,11 @@ export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
 
 export function useExpiryDateContext(): ExpiryDateContextValue {
   const ctx = useContext(ExpiryDateContext);
-  if (!ctx)
-    throw new Error(
+  if (!ctx) {
+    alert(
       'useExpiryDateContext는 ExpiryDateContextProvider 내에서 사용되어야 합니다.'
     );
+    return {} as ExpiryDateContextValue;
+  }
   return ctx;
 }
