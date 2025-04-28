@@ -2,8 +2,6 @@ import { css } from '@emotion/react';
 import theme from '../../styles/theme';
 
 export const cardLayout = css`
-  position: relative;
-  top: 77px;
   display: flex;
   flex-direction: column;
   justify-content: center;

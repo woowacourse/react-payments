@@ -22,7 +22,7 @@ function HomePage() {
   } = useProgressForm();
 
   const {
-    value: cardNumber,
+    cardNumber,
     error: cardNumberError,
     inputRefs,
     onChange: handleCardNumberChange,
@@ -81,8 +81,6 @@ function HomePage() {
   const showConfirmButton = (
     isCardNumberValid && isCardBrandValid && isCardExpirationValid && isCardCVCValid && isCardPasswordValid
   );
-
-  console.log(showConfirmButton);
 
   return (
     <main css={mainLayout}>
@@ -143,7 +141,7 @@ function HomePage() {
         />
       </section>
       {showConfirmButton && (
-        <Link to='/complete'>
+        <Link to='/complete' state={{cardNumber, brand}}>
           <Button content='확인' style="bottom"/>
         </Link>
       )}

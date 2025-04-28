@@ -70,7 +70,7 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
           </div>
           <div css={cardContent}>
             {hasFilledExpirationField && (
-              <span css={cardContentText}>
+              <span css={[cardContentText, fontColor]}>
               {cardExpirationDate.month}/{cardExpirationDate.year}
             </span>
             )}

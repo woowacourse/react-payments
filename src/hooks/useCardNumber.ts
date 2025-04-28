@@ -154,7 +154,7 @@ export const useCardNumber = (onComplete?: () => void) => {
   };
 
   return {
-    value: cardNumber,
+    cardNumber,
     error,
     inputRefs,
     onChange,

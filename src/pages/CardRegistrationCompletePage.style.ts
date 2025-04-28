@@ -7,6 +7,7 @@ export const pageContainer = css`
   align-items: center;
 
   width: 100%;
+  height: 100%;
   padding: 0 3.1rem 0 3.1rem;
 `;
 
