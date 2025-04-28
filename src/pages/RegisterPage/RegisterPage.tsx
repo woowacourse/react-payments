@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import CustomLinkButton from '../../shared/ui/CustomLinkButton';
 import * as S from './RegisterPage.styles';
 import { useCardInfoContext } from '../../features/cardInfo/context/CardInfoContext';
+import { ROUTES } from '../../shared/constants/routeConstants';
 
 export default function RegisterPage() {
   const { cardInfo } = useCardInfoContext();
@@ -18,7 +19,7 @@ export default function RegisterPage() {
         <span>{cardInfo.cardIssuer}가 등록되었어요.</span>
       </S.RegisterMainContainer>
       <CustomLinkButton
-        path=''
+        path={ROUTES.CARD}
         css={css`
           width: 80%;
           margin: 50px 0;
