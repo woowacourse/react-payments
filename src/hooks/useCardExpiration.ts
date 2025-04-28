@@ -1,24 +1,37 @@
-import { useState, ChangeEvent } from 'react';
-import { CardExpirationDate, CardExpirationDateError } from '../types';
-import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../constants';
+import {useState, ChangeEvent, FocusEvent, useRef, KeyboardEvent} from 'react';
+import {CardExpirationDate, CardExpirationDateError} from '../types';
+import {isOnlyDigits} from '../utils/validateNumber';
+import {CARD_EXPIRATION_ERROR, CARD_EXPIRATION} from '../constants';
 
-export const useCardExpiration = () => {
-  const [cardExpirationDate, setCardExpirationDate] =
-    useState<CardExpirationDate>({
-      month: '',
-      year: '',
-    });
+const initialCardExpirationDate: CardExpirationDate = {
+  month: '',
+  year: '',
+}
 
-  const [cardExpirationDateError, setCardExpirationDateError] =
-    useState<CardExpirationDateError>({
-      month: false,
-      year: false,
-    });
+const initialCardExpirationDateError: CardExpirationDateError = {
+  month: '',
+  year: '',
+};
 
-  const handleCardExpirationChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+export const useCardExpiration = (onComplete: () => void) => {
+  const [cardExpirationDate, setCardExpirationDate] = useState<CardExpirationDate>(initialCardExpirationDate);
+  const [error, setError] = useState<CardExpirationDateError>(initialCardExpirationDateError);
+
+  const monthRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+
     const isNumber = isOnlyDigits(value);
+
+    if (!isNumber && value !== '') {
+      setError({
+        ...error,
+        [name]: CARD_EXPIRATION_ERROR.onlyNumbers,
+      });
+      return;
+    }
 
     if (isNumber) {
       if (name === 'month' && value.length > 0) {
@@ -27,9 +40,9 @@ export const useCardExpiration = () => {
           monthValue < CARD_EXPIRATION.minMonth ||
           monthValue > CARD_EXPIRATION.maxMonth
         ) {
-          setCardExpirationDateError({
-            ...cardExpirationDateError,
-            month: true,
+          setError({
+            ...error,
+            month: CARD_EXPIRATION_ERROR.invalidMonth,
           });
           setCardExpirationDate({
             ...cardExpirationDate,
@@ -37,12 +50,14 @@ export const useCardExpiration = () => {
           });
           return;
         }
-      } else if (name === 'year' && value.length > 0) {
+      }
+
+      if (name === 'year' && value.length === CARD_EXPIRATION.monthLength) {
         const yearValue = Number(value);
         if (yearValue < CARD_EXPIRATION.minYear) {
-          setCardExpirationDateError({
-            ...cardExpirationDateError,
-            year: true,
+          setError({
+            ...error,
+            year: CARD_EXPIRATION_ERROR.invalidYear,
           });
           setCardExpirationDate({
             ...cardExpirationDate,
@@ -57,31 +72,58 @@ export const useCardExpiration = () => {
         [name]: value,
       });
 
-      setCardExpirationDateError({
-        ...cardExpirationDateError,
-        [name]: false,
+      setError({
+        ...error,
+        [name]: '',
       });
-    } else {
-      setCardExpirationDateError({
-        ...cardExpirationDateError,
-        [name]: true,
+    }
+
+    if (value.length === CARD_EXPIRATION.monthLength) {
+      yearRef.current?.focus();
+      return;
+    }
+  };
+
+  const onYearKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !cardExpirationDate.year) {
+      monthRef.current?.focus();
+    }
+  };
+
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+
+    if (value === '') {
+      return;
+    }
+
+    if (value.length < CARD_EXPIRATION.maxLength) {
+      setError({
+        ...error,
+        [name]: CARD_EXPIRATION_ERROR.invalidFormat,
+      });
+    }
+  }
+
+  const onFocus = (e: FocusEvent<HTMLInputElement>) => {
+    const {name} = e.target;
+
+    if (error[name as keyof CardExpirationDateError]) {
+      setError({
+        ...error,
+        [name]: ''
       });
     }
   };
 
   const resetCardExpiration = () => {
-    setCardExpirationDate({
-      month: '',
-      year: '',
-    });
-    setCardExpirationDateError({
-      month: false,
-      year: false,
-    });
-  };
+    setCardExpirationDate(initialCardExpirationDate);
+    setError(initialCardExpirationDateError);
+  }
 
   const isCardExpirationValid = () => {
-    const { month, year } = cardExpirationDate;
+    const {month, year} = cardExpirationDate;
+
     const monthValue = Number(month);
     const yearValue = Number(year);
 
@@ -91,53 +133,21 @@ export const useCardExpiration = () => {
       monthValue >= CARD_EXPIRATION.minMonth &&
       monthValue <= CARD_EXPIRATION.maxMonth &&
       yearValue >= CARD_EXPIRATION.minYear &&
-      !cardExpirationDateError.month &&
-      !cardExpirationDateError.year
+      !error.month &&
+      !error.year
     );
-  };
-
-  const getMonthErrorMessage = (): string | null => {
-    if (!cardExpirationDateError.month) return null;
-
-    const monthValue = Number(cardExpirationDate.month);
-
-    if (!cardExpirationDate.month || isNaN(monthValue)) {
-      return CARD_EXPIRATION_ERROR.onlyNumbers;
-    }
-
-    if (
-      monthValue < CARD_EXPIRATION.minMonth ||
-      monthValue > CARD_EXPIRATION.maxMonth
-    ) {
-      return CARD_EXPIRATION_ERROR.invalidMonth;
-    }
-
-    return null;
-  };
-
-  const getYearErrorMessage = (): string | null => {
-    if (!cardExpirationDateError.year) return null;
-
-    const yearValue = Number(cardExpirationDate.year);
-
-    if (!cardExpirationDate.year || isNaN(yearValue)) {
-      return CARD_EXPIRATION_ERROR.onlyNumbers;
-    }
-
-    if (yearValue < CARD_EXPIRATION.minYear) {
-      return CARD_EXPIRATION_ERROR.invalidYear;
-    }
-
-    return null;
-  };
+  }
 
   return {
-    cardExpirationDate,
-    cardExpirationDateError,
-    handleCardExpirationChange,
+    value: cardExpirationDate,
+    error,
+    monthRef,
+    yearRef,
+    onChange,
+    onYearKeyDown,
+    onBlur,
+    onFocus,
     resetCardExpiration,
-    isCardExpirationValid,
-    getMonthErrorMessage,
-    getYearErrorMessage,
+    isValid: isCardExpirationValid(),
   };
 };

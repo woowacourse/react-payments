@@ -1,18 +1,12 @@
 export type CardNumberKey = 'first' | 'second' | 'third' | 'forth';
 
-export type CardNumber = Record<CardNumberKey, string>;
+export type CardPeriodKey = 'month' | 'year';
 
+export type CardNumber = Record<CardNumberKey, string>;
 export type CardNumberError = Record<CardNumberKey, string>;
 
-export type CardExpirationDate = {
-  month: string;
-  year: string;
-};
-
-export type CardExpirationDateError = {
-  month: string;
-  year: string;
-};
+export type CardExpirationDate = Record<CardPeriodKey, string>
+export type CardExpirationDateError = Record<CardPeriodKey, string>
 
 export type CardCVC = number | null;
 

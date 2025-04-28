@@ -86,6 +86,7 @@ export const useCardNumber = (onComplete: () => void) => {
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const {name, value} = e.target as HTMLInputElement;
+
     if (e.key === 'Backspace' && value.length === 0) {
       const index = getIndexFromName(name);
 

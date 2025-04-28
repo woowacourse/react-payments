@@ -28,16 +28,17 @@ function HomePage() {
     onChange: handleCardNumberChange,
     onKeyDown: handleCardNumberKeyDown,
     onBlur: handleCardNumberBlur,
-    isValid: cardNumberValid,
   } = useCardNumber({});
 
   const {
-    cardExpirationDate,
-    cardExpirationDateError,
-    handleCardExpirationChange,
-    getMonthErrorMessage,
-    getYearErrorMessage,
-  } = useCardExpiration();
+    value: cardExpirationDate,
+    error: cardExpirationDateError,
+    monthRef,
+    yearRef,
+    onChange: handleCardExpirationChange,
+    onYearKeyDown: handleCardExpirationKeyDown,
+    onBlur: handleCardExpirationBlur,
+  } = useCardExpiration({});
 
   const {cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage} =
     useCardCVC();
@@ -74,10 +75,14 @@ function HomePage() {
         />
         <CardPeriodInput
           cardExpirationDate={cardExpirationDate}
+          error={cardExpirationDateError}
           onChange={handleCardExpirationChange}
-          errorState={cardExpirationDateError}
-          getMonthErrorMessage={getMonthErrorMessage}
-          getYearErrorMessage={getYearErrorMessage}
+          monthRef={monthRef}
+          yearRef={yearRef}
+          onKeyDown={handleCardExpirationKeyDown}
+          onBlur={handleCardExpirationBlur}
+          tabIndex={6}
+          autoFocus
         />
         <CardBrand
           value={brand}

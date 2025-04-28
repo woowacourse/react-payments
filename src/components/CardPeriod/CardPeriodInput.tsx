@@ -2,81 +2,34 @@ import Input from '../@common/Input/Input';
 import Title from "../@common/Title/Title";
 import React, { ChangeEvent } from 'react';
 import { CardExpirationDate, CardExpirationDateError } from "../../types";
-import { useAutoFocus } from "../../hooks";
 import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
 import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 import { cardPeriodInputLayout } from './CardPeriodInput.style';
-import { CARD_EXPIRATION_ERROR, CARD_EXPIRATION } from '../../constants';
+import { CARD_EXPIRATION } from '../../constants';
 
 type CardPeriodInputProps = {
   cardExpirationDate: CardExpirationDate;
+  error: CardExpirationDateError;
+  monthRef: React.RefObject<HTMLInputElement | null>;
+  yearRef: React.RefObject<HTMLInputElement | null>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorState: CardExpirationDateError;
-  getMonthErrorMessage?: () => string | null | undefined;
-  getYearErrorMessage?: () => string | null | undefined;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  tabIndex?: number;
+  autoFocus?: boolean;
 };
 
 function CardPeriodInput({
   cardExpirationDate,
+  error,
+  monthRef,
+  yearRef,
   onChange,
-  errorState,
-  getMonthErrorMessage,
-  getYearErrorMessage,
+  onKeyDown,
+  tabIndex,
+  autoFocus
 }: CardPeriodInputProps) {
-  const { refs, focusNext } = useAutoFocus(2);
-
-  const handleMonthChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-
-    if(e.target.value.length === CARD_EXPIRATION.monthLength) {
-      focusNext(0);
-    }
-  }
-
-  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-  };
-
-  const handleYearKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && cardExpirationDate.year.length === 0) {
-      refs[0].current?.focus();
-    }
-  }
-
-  const getMonthError =
-    getMonthErrorMessage ||
-    (() => {
-      if (!errorState.month) return null;
-      const monthValue = Number(cardExpirationDate.month);
-      if (!cardExpirationDate.month || isNaN(monthValue)) {
-        return CARD_EXPIRATION_ERROR.onlyNumbers;
-      }
-      if (
-        monthValue < CARD_EXPIRATION.minMonth ||
-        monthValue > CARD_EXPIRATION.maxMonth
-      ) {
-        return CARD_EXPIRATION_ERROR.invalidMonth;
-      }
-      return null;
-    });
-
-  const getYearError =
-    getYearErrorMessage ||
-    (() => {
-      if (!errorState.year) return null;
-
-      const yearValue = Number(cardExpirationDate.year);
-
-      if (!cardExpirationDate.year || isNaN(yearValue)) {
-        return CARD_EXPIRATION_ERROR.onlyNumbers;
-      }
-
-      if (yearValue < CARD_EXPIRATION.minYear) {
-        return CARD_EXPIRATION_ERROR.invalidYear;
-      }
-
-      return null;
-    });
+  const errorMessage = error.month || error.year;
 
   return (
     <div css={cardPeriodInputLayout}>
@@ -87,34 +40,36 @@ function CardPeriodInput({
           <article css={inputSection}>
             <Input.Group id="card-expiration">
               <Input
-                ref={refs[0]}
+                ref={monthRef}
                 type="text"
                 name="month"
-                maxLength={CARD_EXPIRATION.monthLength}
                 value={cardExpirationDate.month}
-                onChange={handleMonthChange}
-                css={errorState.month ? errorInputStyle : undefined}
+                maxLength={CARD_EXPIRATION.monthLength}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.month ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 1: undefined}
+                autoFocus={autoFocus}
               />
             </Input.Group>
             <Input.Group id="card-expiration-year">
               <Input
-                ref={refs[1]}
+                ref={yearRef}
                 type="text"
                 name="year"
-                maxLength={CARD_EXPIRATION.yearLength}
                 value={cardExpirationDate.year}
-                onChange={handleYearChange}
-                onKeyDown={handleYearKeyDown}
-                css={errorState.year ? errorInputStyle : undefined}
+                maxLength={CARD_EXPIRATION.yearLength}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.year ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 2: undefined}
               />
             </Input.Group>
           </article>
-          {errorState.month && (
-            <div css={errorMessageStyle}>{getMonthError()}</div>
-          )}
-          {errorState.year && !errorState.month && (
-            <div css={errorMessageStyle}>{getYearError()}</div>
-          )}
+          {
+            errorMessage && (
+            <div css={errorMessageStyle}>{errorMessage}</div>)
+          }
         </div>
       </Input.Group>
     </div>
