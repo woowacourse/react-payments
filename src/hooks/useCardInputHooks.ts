@@ -1,21 +1,30 @@
 import { useState, useRef, ChangeEvent, createRef, RefObject } from 'react';
 import { InputFieldState } from '../types/models';
 
-type FieldValidationFunction = (value: string) => {
+interface ValidationResult {
   isValid: boolean;
   errorMessage: string;
-};
+}
 
-function useInputField(
-  initialValue: string,
-  placeholder: string,
-  maximumLength: number,
-  validationFunction: FieldValidationFunction
-): [
+interface UseInputFieldParams {
+  initialValue: string;
+  placeholder: string;
+  maximumLength: number;
+  validationFunction: (value: string) => ValidationResult;
+}
+
+type UseInputFieldReturn = [
   InputFieldState,
   (event: ChangeEvent<HTMLInputElement>) => void,
   RefObject<HTMLInputElement | null>
-] {
+];
+
+function useInputField({
+  initialValue,
+  placeholder,
+  maximumLength,
+  validationFunction,
+}: UseInputFieldParams): UseInputFieldReturn {
   const [fieldState, setFieldState] = useState<InputFieldState>({
     value: initialValue,
     hasError: false,
@@ -40,22 +49,34 @@ function useInputField(
   return [fieldState, handleChange, inputRef];
 }
 
-type MultipleFieldValidationFunction = (
-  value: string,
-  index: number,
-  maximumLength: number
-) => { isValid: boolean; errorMessage: string };
+interface ValidationResult {
+  isValid: boolean;
+  errorMessage: string;
+}
 
-function useMultipleInputFields(
-  initialValues: string[],
-  placeholders: string[],
-  maximumLength: number,
-  validationFunction: MultipleFieldValidationFunction
-): [
+interface UseInputFieldsParams {
+  initialValues: string[];
+  placeholders: string[];
+  maximumLength: number;
+  validationFunction: (
+    value: string,
+    index: number,
+    maximumLength: number
+  ) => ValidationResult;
+}
+
+type UseInputFieldsReturn = [
   InputFieldState[],
   (event: ChangeEvent<HTMLInputElement>, index: number) => void,
   RefObject<HTMLInputElement | null>[]
-] {
+];
+
+function useMultipleInputFields({
+  initialValues,
+  placeholders,
+  maximumLength,
+  validationFunction,
+}: UseInputFieldsParams): UseInputFieldsReturn {
   const [fieldStates, setFieldStates] = useState<InputFieldState[]>(() =>
     initialValues.map((value, idx) => ({
       value,

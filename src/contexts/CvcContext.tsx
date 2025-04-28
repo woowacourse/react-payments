@@ -23,12 +23,12 @@ const CVC_MAX_LENGTH = 3;
 export const CvcProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cvcField, handleCvcChange, cvcInputRef] = useInputField(
-    '',
-    CVC_PLACEHOLDER,
-    CVC_MAX_LENGTH,
-    validateCvcNumber
-  );
+  const [cvcField, handleCvcChange, cvcInputRef] = useInputField({
+    initialValue: '',
+    placeholder: CVC_PLACEHOLDER,
+    maximumLength: CVC_MAX_LENGTH,
+    validationFunction: validateCvcNumber,
+  });
 
   return (
     <CvcContext.Provider value={{ cvcField, handleCvcChange, cvcInputRef }}>

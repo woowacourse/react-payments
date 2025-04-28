@@ -24,10 +24,12 @@ export const PasswordProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [passwordField, handlePasswordChange, passwordInputRef] = useInputField(
-    '',
-    PASSWORD_PLACEHOLDER,
-    PASSWORD_MAX_LENGTH,
-    validatePasswordSegment
+    {
+      initialValue: '',
+      placeholder: PASSWORD_PLACEHOLDER,
+      maximumLength: PASSWORD_MAX_LENGTH,
+      validationFunction: validatePasswordSegment,
+    }
   );
 
   return (

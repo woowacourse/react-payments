@@ -24,12 +24,12 @@ export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [expiryFields, handleExpiryChange, expiryInputRefs] =
-    useMultipleInputFields(
-      ['', ''],
-      EXPIRY_PLACEHOLDERS as unknown as string[],
-      EXPIRY_SEGMENT_LENGTH,
-      isValidExpirationSegment
-    );
+    useMultipleInputFields({
+      initialValues: ['', ''],
+      placeholders: EXPIRY_PLACEHOLDERS as unknown as string[],
+      maximumLength: EXPIRY_SEGMENT_LENGTH,
+      validationFunction: isValidExpirationSegment,
+    });
 
   return (
     <ExpiryDateContext.Provider

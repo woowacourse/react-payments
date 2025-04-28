@@ -27,12 +27,12 @@ export const NumbersProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [numberFields, handleNumbersChange, numberInputRefs] =
-    useMultipleInputFields(
-      ['', '', '', ''],
-      NUMBER_PLACEHOLDERS as unknown as string[],
-      NUMBER_SEGMENT_LENGTH,
-      isValidNumberSegment
-    );
+    useMultipleInputFields({
+      initialValues: ['', '', '', ''],
+      placeholders: NUMBER_PLACEHOLDERS as unknown as string[],
+      maximumLength: NUMBER_SEGMENT_LENGTH,
+      validationFunction: isValidNumberSegment,
+    });
 
   return (
     <NumbersContext.Provider
