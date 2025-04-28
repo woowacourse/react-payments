@@ -3,7 +3,7 @@ import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSec
 import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
 import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './cardForm.module.css';
-import { useEffect, useRef, useState } from 'react';
+import {  useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
@@ -14,7 +14,6 @@ import { useCardCVCNumberOptions } from '@/hooks/useCardCVCNumber';
 import useFieldCompletion from '@/hooks/useFieldCompletion';
 import { CardPasswordOptions } from '@/hooks/useCardPassword';
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
-import useCardForm from '@/hooks/useCardForm';
 import useCardFormFlow from '@/hooks/useCardFormFlow';
 
 type CardFormPagesProps = {
