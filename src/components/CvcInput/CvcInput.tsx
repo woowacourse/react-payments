@@ -4,7 +4,7 @@ import { MAGIC_NUMBER } from "../../constants/constants";
 
 interface CvcInputProps {
   value: string;
-  error: boolean;
+  error: string | null;
   handleCvcNumberChange: (value: string) => void;
 }
 

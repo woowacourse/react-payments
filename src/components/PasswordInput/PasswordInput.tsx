@@ -4,7 +4,7 @@ import { MAGIC_NUMBER } from "../../constants/constants";
 
 interface PasswordProps {
   value: string;
-  error: boolean;
+  error: string | null;
   handlePasswordChange: (value: string) => void;
 }
 
