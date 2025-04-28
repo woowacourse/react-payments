@@ -1,31 +1,45 @@
 import styles from "./CardNumberInputs.module.css";
+import type { CardNumberInputKey, CardNumberState } from "../../types";
+import type { Ref } from "react";
+import { CARD_NUMBER_LENGTH, CARD_NUMBER_INPUT_KEYS } from "../../constants";
 import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
-
-import type { CardNumberInputKey, CardNumberState } from "../../types";
-import { CARD_NUMBER_LENGTH, CARD_NUMBER_INPUT_KEYS } from "../../constants";
+import { useAutoFocus } from "../../../../../../hooks/useAutoFocus";
 
 export interface CardNumberInputsProps {
   cardNumberState: CardNumberState;
   handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
+  ref?: Ref<HTMLInputElement>;
 }
 
 function CardNumberInputs({
   cardNumberState,
   handleCardNumberChange,
+  ref,
 }: CardNumberInputsProps) {
   const { first, second, third, fourth } = cardNumberState;
+
+  const { inputRefs, handleAutoFocus } = useAutoFocus<CardNumberInputKey>(
+    CARD_NUMBER_INPUT_KEYS
+  );
 
   const errorMessages = [
     first.errorMessage,
     second.errorMessage,
     third.errorMessage,
     fourth.errorMessage,
-  ].filter((msg): msg is string => !!msg);
-  //sick hack
+    // `!!msg`로 null, undefined, 빈 문자열, 0, NaN 같은 falsy 값을 걸러내고,
+    // `msg.trim() !== ''`로 공백만 있는 문자열까지 모두 필터링합니다.
+  ].filter((msg): msg is string => !!msg && msg.trim() !== "");
+
   const latestErrorMessage = errorMessages.length
     ? errorMessages[errorMessages.length - 1]
     : "";
+
+  const handleInputChange = (key: CardNumberInputKey, value: string) => {
+    handleCardNumberChange(key, value);
+    handleAutoFocus(key, value, CARD_NUMBER_INPUT_KEYS, CARD_NUMBER_LENGTH);
+  };
 
   return (
     <div className={styles.container}>
@@ -45,7 +59,11 @@ function CardNumberInputs({
               placeholder="1234"
               isError={Boolean(cardNumberState[inputKey].errorMessage)}
               value={cardNumberState[inputKey].value}
-              onChange={(e) => handleCardNumberChange(inputKey, e.target.value)}
+              onChange={(e) => handleInputChange(inputKey, e.target.value)}
+              ref={idx === 0 ? ref : inputRefs[inputKey]}
+              aria-describedby={
+                latestErrorMessage ? "card-number-error-message" : undefined
+              }
             />
           </p>
         ))}

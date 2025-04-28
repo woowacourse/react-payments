@@ -4,8 +4,9 @@ import { expect, userEvent } from "@storybook/test";
 import CVCInputs from "./CVCInputs";
 
 const meta = {
-  title: "Component/CVCInput",
+  title: "Components/AddCard/CVCInput",
   component: CVCInputs,
+  tags: ["autodocs"],
   args: {
     CVCState: { errorMessage: "", value: "" },
     handleCVCChange: () => {},
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
     CVCState: {
       value: "0",

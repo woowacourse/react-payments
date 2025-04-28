@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 399px;
+  min-height: 800px;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.details {
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.detailsSpan {
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+}

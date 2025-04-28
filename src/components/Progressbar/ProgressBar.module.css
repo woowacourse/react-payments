@@ -1,0 +1,109 @@
+.progressBarContainer {
+  width: 80%;
+  max-width: 600px;
+  padding: 20px 0;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.stepsIndicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+}
+
+.step:last-child .stepBar {
+  display: none;
+}
+
+.stepCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #888;
+  z-index: 2;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+}
+
+.step.active .stepCircle {
+  background-color: #2563eb;
+  color: white;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+}
+
+.step.error .stepCircle {
+  background-color: #ef4444;
+  color: white;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.stepBar {
+  height: 4px;
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 18px; /* 원의 가운데에 위치 */
+  left: calc(50% + 18px); /* 원의 오른쪽 끝에서 시작 */
+  width: calc(100% - 36px); /* 양쪽 원의 너비를 제외한 너비 */
+  z-index: 1;
+}
+
+.stepBarFill {
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background-color: #2563eb;
+  transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+.stepBarFill.active {
+  width: 100%;
+  background-color: #2563eb;
+}
+
+.stepBarFill.error {
+  background-color: #ef4444;
+}
+
+.stepBarFill.completed {
+  width: 100%;
+}
+
+.stepLabel {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.errorMessage {
+  display: block;
+  width: 100%;
+  color: #ef5555;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.8rem;
+}

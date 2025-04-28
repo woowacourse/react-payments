@@ -1,7 +1,15 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  width: 650px;
-  margin: 3rem auto 0;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+
+  box-shadow: 0 -4px 12px -4px rgba(0, 0, 0, 0.1),
+    4px 0 12px -4px rgba(0, 0, 0, 0.1), -4px 0 12px -4px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }

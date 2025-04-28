@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Input from "./Input";
 
 const meta = {
-  title: "Component/Input",
+  title: "Components/Input",
   component: Input,
   args: {
     type: "text",
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
     isError: true,
   },

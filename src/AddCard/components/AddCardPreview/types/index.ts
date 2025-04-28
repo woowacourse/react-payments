@@ -1,5 +1,8 @@
-export type CardBrand = "VISA" | "MASTERCARD" | "DEFAULT";
+export type OverseaCardBrand = "VISA" | "MASTERCARD" | "DEFAULT";
 
-type CardBrandImageSrc = string;
+type OverseaCardBrandImageSrc = string;
 
-export type CardBrandImages = Record<CardBrand, CardBrandImageSrc>;
+export type OverseaCardBrandImages = Record<
+  OverseaCardBrand,
+  OverseaCardBrandImageSrc
+>;

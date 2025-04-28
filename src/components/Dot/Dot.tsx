@@ -1,7 +1,9 @@
+import type { ComponentProps } from "react";
 import styles from "./Dot.module.css";
 
-function Dot() {
-  return <span className={styles.dot} />;
+interface DotProps extends ComponentProps<"span"> {}
+function Dot({ style }: DotProps) {
+  return <span className={styles.dot} style={style} />;
 }
 
 export default Dot;

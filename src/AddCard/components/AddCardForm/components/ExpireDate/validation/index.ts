@@ -14,9 +14,9 @@ export const validateMonth = (month: string) => {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_MONTH_RANGE;
   }
 
-  const isInvalidLength =
+  const isValidLength =
     month.length === 0 || month.length === EXPIRE_DATE_LENGTH;
-  if (!isInvalidLength) {
+  if (!isValidLength) {
     return EXPIRE_DATE_ERROR_MESSAGE.INVALID_MONTH_LENGTH;
   }
 

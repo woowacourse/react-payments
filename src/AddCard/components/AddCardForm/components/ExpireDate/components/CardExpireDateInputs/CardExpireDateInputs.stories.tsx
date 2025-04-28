@@ -7,7 +7,7 @@ import { userEvent, expect, within } from "@storybook/test";
 import useControlledExpireDate from "../../hooks/useControlledExpireDate";
 
 const meta = {
-  title: "Component/CardExpireDateInputs",
+  title: "Components/AddCard/CardExpireDateInputs",
   component: CardExpireDateInputs,
   args: {
     expireDate: INITIAL_EXPIRE_DATE_STATE,
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Error: Story = {
+export const WithError: Story = {
   args: {
     expireDate: {
       ...INITIAL_EXPIRE_DATE_STATE,
