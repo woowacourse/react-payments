@@ -71,6 +71,30 @@ function InputSection({
   const { cardNumbers, cardBrand } = useCard();
   const navigate = useNavigate();
 
+  const getErrorMessage = (type: InputType) => {
+    if (type === INPUT_TYPE.cardNumbers) {
+      return (
+        Object.values(error.cardNumbers).find((message) => message !== null) ||
+        null
+      );
+    }
+    if (type === INPUT_TYPE.expirationPeriod) {
+      return (
+        error.expirationPeriod.month || error.expirationPeriod.year || null
+      );
+    }
+    if (type === INPUT_TYPE.cvcNumber) {
+      return error.cvcNumber || null;
+    }
+    if (type === INPUT_TYPE.password) {
+      return error.password || null;
+    }
+    if (type === INPUT_TYPE.cardBrand) {
+      return error.cardBrand || null;
+    }
+    return null;
+  };
+
   const handleClick = () => {
     navigate("/success", {
       state: {
@@ -95,7 +119,7 @@ function InputSection({
       error.cvcNumber,
       error.cardBrand,
       error.password,
-    ].every((v) => v === false);
+    ].every((v) => v === null);
 
     if (isAllComplete && isAllErrorFree) {
       setShowButton(true);
@@ -103,25 +127,6 @@ function InputSection({
       setShowButton(false);
     }
   }, [type, isComplete, error]);
-  const getErrorVisible = (type: InputType) => {
-    if (type === INPUT_TYPE.cvcNumber) {
-      return error.cvcNumber;
-    }
-    if (type === INPUT_TYPE.password) {
-      return error.password;
-    }
-    return Object.values(error[type] ?? {}).some((value: boolean) => value);
-  };
-
-  const getErrorType = () => {
-    if (error.expirationPeriod.month === true) {
-      return "month";
-    }
-    if (error.expirationPeriod.year === true) {
-      return "year";
-    }
-    return "default";
-  };
 
   return (
     <>
@@ -137,10 +142,7 @@ function InputSection({
         validatePassword={validators.validatePassword}
         onComplete={onComplete}
       />
-      <Error
-        errorMessage={ERROR_MESSAGE[getErrorType()]}
-        isVisible={getErrorVisible(type)}
-      />
+      <Error errorMessage={getErrorMessage(type)} />
       {showButton && <Button variant="home" onClick={handleClick} />}
     </>
   );
