@@ -1,24 +1,36 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/theme';
-import { CardFormProvider } from './contexts/CardFormContext';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CompletePage from './pages/CompletePage';
 import styled from '@emotion/styled';
+import { NumbersProvider } from './contexts/NumbersContext';
+import { ExpiryDateProvider } from './contexts/ExpiryDateContext';
+import { BrandProvider } from './contexts/BrandContext';
+import { CvcProvider } from './contexts/CvcContext';
+import { PasswordProvider } from './contexts/PasswordContext';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <CardFormProvider>
-        <Main>
-          <Router>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/complete" element={<CompletePage />} />
-            </Routes>
-          </Router>
-        </Main>
-      </CardFormProvider>
+      <NumbersProvider>
+        <BrandProvider>
+          <ExpiryDateProvider>
+            <CvcProvider>
+              <PasswordProvider>
+                <Main>
+                  <Router>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/complete" element={<CompletePage />} />
+                    </Routes>
+                  </Router>
+                </Main>
+              </PasswordProvider>
+            </CvcProvider>
+          </ExpiryDateProvider>
+        </BrandProvider>
+      </NumbersProvider>
     </ThemeProvider>
   );
 };
