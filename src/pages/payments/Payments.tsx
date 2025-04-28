@@ -111,7 +111,7 @@ function Payments() {
           cardBank={cardBankValue}
         />
         <PaymentsInputForm>
-          {inputStep >= 5 ? (
+          {inputStep >= 5 && (
             <InputSection
               title="비밀번호를 입력해 주세요"
               caption="앞의 2자리를 입력해주세요"
@@ -123,9 +123,9 @@ function Payments() {
                 onBlur={onCardPasswordInputBlur}
               />
             </InputSection>
-          ) : null}
+          )}
 
-          {inputStep >= 4 ? (
+          {inputStep >= 4 && (
             <InputSection title="CVC 번호를 입력해 주세요">
               <CVCInputField
                 inputValue={CVCInputValue}
@@ -134,9 +134,9 @@ function Payments() {
                 onBlur={onCVCInputBlur}
               />
             </InputSection>
-          ) : null}
+          )}
 
-          {inputStep >= 3 ? (
+          {inputStep >= 3 && (
             <InputSection
               title="카드 유효기간을 입력해 주세요"
               caption="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -148,9 +148,9 @@ function Payments() {
                 onBlur={onExpirationDateBlur}
               />
             </InputSection>
-          ) : null}
+          )}
 
-          {inputStep >= 2 ? (
+          {inputStep >= 2 && (
             <InputSection
               title="카드사를 선택해 주세요"
               caption="현재 국내 카드사만 가능합니다."
@@ -165,7 +165,7 @@ function Payments() {
                 placeholder="카드사를 선택해주세요"
               />
             </InputSection>
-          ) : null}
+          )}
 
           <InputSection
             title="결제할 카드 번호를 입력해 주세요"
@@ -180,13 +180,13 @@ function Payments() {
             />
           </InputSection>
 
-          {allInputComplete ? (
+          {allInputComplete && (
             <SubmitButtonWrapper>
               <FooterButton size="large" onClick={handleSubmit}>
                 확인
               </FooterButton>
             </SubmitButtonWrapper>
-          ) : null}
+          )}
         </PaymentsInputForm>
       </PaymentsContainer>
     </MobileLayoutContainer>
