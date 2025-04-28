@@ -97,3 +97,59 @@ export const cvcNumber: Story = {
     },
   },
 };
+
+export const password: Story = {
+  decorators: [withRouter, withCardProviders({})],
+  args: {
+    type: INPUT_TYPE.password,
+    validators: {
+      validateCardNumber: () => {},
+      validateExpirationPeriod: () => {},
+      validateCvcNumber: () => {},
+      validatePassword: () => {},
+    },
+    onComplete: () => {},
+    isComplete: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
+    error: {
+      cardNumbers: { first: null, second: null, third: null, fourth: null },
+      expirationPeriod: { month: null, year: null },
+      cvcNumber: null,
+      cardBrand: null,
+      password: null,
+    },
+  },
+};
+
+export const cardBrand: Story = {
+  decorators: [withRouter, withCardProviders({})],
+  args: {
+    type: INPUT_TYPE.cardBrand,
+    validators: {
+      validateCardNumber: () => {},
+      validateExpirationPeriod: () => {},
+      validateCvcNumber: () => {},
+      validatePassword: () => {},
+    },
+    onComplete: () => {},
+    isComplete: {
+      cardNumbers: { first: false, second: false, third: false, fourth: false },
+      expirationPeriod: { month: false, year: false },
+      cvcNumber: false,
+      cardBrand: false,
+      password: false,
+    },
+    error: {
+      cardNumbers: { first: null, second: null, third: null, fourth: null },
+      expirationPeriod: { month: null, year: null },
+      cvcNumber: null,
+      cardBrand: null,
+      password: null,
+    },
+  },
+};
