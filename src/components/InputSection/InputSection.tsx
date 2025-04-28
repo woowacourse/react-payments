@@ -12,7 +12,7 @@ import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
 import Button from "../Button/Button";
 import { CompletionState } from "../../hooks/useCompletion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { InputErrorType } from "../../hooks/useInputError";
 import { useCard } from "../../hooks/useCard";
 import { useNavigate } from "react-router-dom";
@@ -103,23 +103,24 @@ function InputSection({
     });
   };
 
-  const isAllComplete =
-    Object.values(isComplete.cardNumbers).every(Boolean) &&
-    isComplete.cardBrand &&
-    Object.values(isComplete.expirationPeriod).every(Boolean) &&
-    isComplete.cvcNumber &&
-    isComplete.password;
+  const isButtonShowing = useMemo(() => {
+    const isAllComplete =
+      Object.values(isComplete.cardNumbers).every(Boolean) &&
+      isComplete.cardBrand &&
+      Object.values(isComplete.expirationPeriod).every(Boolean) &&
+      isComplete.cvcNumber &&
+      isComplete.password;
+    const isAllErrorFree = [
+      ...Object.values(error.cardNumbers),
+      ...Object.values(error.expirationPeriod),
+      error.cvcNumber,
+      error.cardBrand,
+      error.password,
+    ].every((v) => v === null);
+    return isAllComplete && isAllErrorFree;
+  }, [isComplete, error]);
 
-  const isAllErrorFree = [
-    ...Object.values(error.cardNumbers),
-    ...Object.values(error.expirationPeriod),
-    error.cvcNumber,
-    error.cardBrand,
-    error.password,
-  ].every((v) => v === null);
-
-  const showButton =
-    isAllComplete && isAllErrorFree && type === INPUT_TYPE.password;
+  const showButton = isButtonShowing && type === INPUT_TYPE.password;
 
   return (
     <>
