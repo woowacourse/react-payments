@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTER } from '../constants/router';
 
 type CardInfo = {
   cardNumber?: string[];
@@ -11,11 +12,11 @@ export const useCardRouter = () => {
   const cardInfo = (location.state as CardInfo) || {};
 
   const navigateToCardComplete = (info: CardInfo) => {
-    navigate('/complete', { state: info });
+    navigate(ROUTER.COMPLETE, { state: info });
   };
 
   const navigateToHome = () => {
-    navigate('/');
+    navigate(ROUTER.DEFAULT);
   };
 
   return {
