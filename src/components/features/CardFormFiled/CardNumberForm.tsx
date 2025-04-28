@@ -7,6 +7,7 @@ import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
+import { useFocus } from '@/hooks/useFocus';
 
 type Props = {
   cardNumbers: CardInputType[];
@@ -18,6 +19,8 @@ export const CardNumberForm = ({
   onCardInputChange,
   onCardInputBlur,
 }: Props) => {
+  const { refs } = useFocus(cardNumbers.length);
+
   return (
     <CardInputLayout
       headerText="결제할 카드 번호를 입력해 주세요."
@@ -34,6 +37,7 @@ export const CardNumberForm = ({
               onBlur={(e) => onCardInputBlur(e, index)}
               isValid={cardNumber.isValid}
               placeholder="1234"
+              ref={refs[index]}
             />
           ))}
         </Flex>

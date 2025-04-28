@@ -7,12 +7,15 @@ import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
+import { useFocus } from '@/hooks/useFocus';
 
 type Props = {
   cvcNumber: CardInputType[];
 } & CardFormFiledProps;
 
 export const CVCForm = ({ cvcNumber, errorMessage, onCardInputChange, onCardInputBlur }: Props) => {
+  const { refs } = useFocus(cvcNumber.length);
+
   return (
     <CardInputLayout headerText="CVC 번호를 입력해 주세요." label="CVC">
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
@@ -25,6 +28,7 @@ export const CVCForm = ({ cvcNumber, errorMessage, onCardInputChange, onCardInpu
             isValid={cvc.isValid}
             onChange={(e) => onCardInputChange(e, index)}
             onBlur={(e) => onCardInputBlur(e, index)}
+            ref={refs[index]}
           />
         ))}
         <Text

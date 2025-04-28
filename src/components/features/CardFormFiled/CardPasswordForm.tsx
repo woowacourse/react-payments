@@ -7,6 +7,7 @@ import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
+import { useFocus } from '@/hooks/useFocus';
 
 type Props = {
   password: CardInputType[];
@@ -18,6 +19,8 @@ export const CardPasswordForm = ({
   onCardInputChange,
   onCardInputBlur,
 }: Props) => {
+  const { refs } = useFocus(password.length);
+
   return (
     <CardInputLayout
       headerText="비밀번호를 입력해 주세요."
@@ -34,6 +37,7 @@ export const CardPasswordForm = ({
             onChange={(e) => onCardInputChange(e, index)}
             onBlur={(e) => onCardInputBlur(e, index)}
             isValid={password.isValid}
+            ref={refs[index]}
           />
         ))}
         <Text
