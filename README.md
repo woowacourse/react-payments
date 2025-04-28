@@ -63,9 +63,7 @@
   - [x] CvcNumberForm 컴포넌트 구현
   - [x] CvcNumberForm 스토리북 생성
   - [x] PasswordForm 컴포넌트 구현
-  - [ ] PasswordForm 스토리북 생성
   - [x] CardIssuerForm 컴포넌트 구현
-  - [ ] CardIssuerForm 스토리북 생성
   - [x] Select 컴포넌트 구현
   - [x] Select 스토리북 생성
   - [x] PreviewComponent 컴포넌트 퍼블리싱
@@ -75,7 +73,7 @@
   - [x] 카드 타입 판별 기능 구현
   - [x] text 컴포넌트 구현
   - [x] Button 컴포넌트 구현
-  - [ ] Button 스토리북 생성
+  - [x] Button 스토리북 생성
 - [x] domain 상태 관리 (preview, form 상태 동기화)
 - [x] text 컴포넌트 스토리북 생성
 - [x] 입력 완료 시 다음 필드로 이동

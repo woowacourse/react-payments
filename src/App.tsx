@@ -1,20 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import CardFormPage from "./pages/CardFormPage";
 import CardResistrationCompletePage from "./pages/CardResistrationCompletePage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <CardFormPage />,
-  },
-  {
-    path: "/complete",
-    element: <CardResistrationCompletePage />,
-  },
-]);
-
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<CardFormPage />} />
+        <Route path="/complete" element={<CardResistrationCompletePage />} />
+      </Routes>
+    </HashRouter>
+  );
 }
 
 export default App;
