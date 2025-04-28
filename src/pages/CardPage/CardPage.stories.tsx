@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPage from './CardPage';
 import { CardInfoProvider } from '../../features/cardInfo/context/CardInfoContext';
 import { MemoryRouter } from 'react-router';
-import { ROUTES } from '../../shared/constants/routes';
+import { ROUTES } from '../../shared/constants/routeConstants';
 
 function CardPageWithContext() {
   return <CardPage />;

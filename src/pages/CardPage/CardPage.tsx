@@ -4,7 +4,7 @@ import * as S from './CardPage.styles';
 import { confirmButtonValidator } from '../../features/cardInfo/validation/cardInfoValidator';
 import { css } from '@emotion/react';
 import CustomLinkButton from '../../shared/ui/CustomLinkButton';
-import { ROUTES } from '../../shared/constants/routes';
+import { ROUTES } from '../../shared/constants/routeConstants';
 
 function CardPage() {
   return (
