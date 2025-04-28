@@ -19,7 +19,7 @@ const App = () => {
             <CvcProvider>
               <PasswordProvider>
                 <Main>
-                  <Router>
+                  <Router basename={import.meta.env.VITE_BASE_URL}>
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/complete" element={<CompletePage />} />
