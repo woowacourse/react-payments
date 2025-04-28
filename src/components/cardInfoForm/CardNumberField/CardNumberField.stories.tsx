@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardNumberField from './CardNumberField';
-import React, { useState } from 'react';
+import useCardNumber from '../../../hooks/useCardNumber';
 
 const meta = {
   title: 'CardNumberField',
@@ -16,71 +16,38 @@ export const Default: Story = {
     cardNumber: ['', '', '', ''],
     isError: [false, false, false, false],
     onChange: () => {},
+    setInputRef: () => {},
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState([
-      '1234',
-      '5678',
-      '9012',
-      '3456',
-    ]);
-    const [isError, setIsError] = useState([false, false, false, false]);
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-      const { value } = e.target;
-
-      // 유효성 검사 setIsError
-      const isValid = value.length < 4;
-      const copyError = [...isError];
-      copyError[n] = isValid;
-      setIsError(copyError);
-
-      const copy = [...cardNumber];
-      copy[n] = value;
-      setCardNumber(copy);
-    };
+    const {
+      cardNumber,
+      onChangeCardNumber,
+      errorMessage: cardNumberErrorMessage,
+      setInputRef,
+    } = useCardNumber();
 
     return (
       <CardNumberField
         {...args}
         cardNumber={cardNumber}
-        isError={isError}
-        onChange={onChange}
+        isError={cardNumberErrorMessage.map((errorMessage) =>
+          Boolean(errorMessage),
+        )}
+        onChange={onChangeCardNumber}
+        setInputRef={setInputRef}
       />
     );
   },
 };
+
 export const Error: Story = {
   args: {
     cardNumber: ['', '', '', ''],
-    isError: [false, false, false, false],
+    isError: [true, true, true, true],
     onChange: () => {},
+    setInputRef: () => {},
   },
   render: (args) => {
-    const [cardNumber, setCardNumber] = useState(['123', '567', '901', '3456']);
-    const [isError, setIsError] = useState([true, true, true, false]);
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
-      const { value } = e.target;
-
-      // 유효성 검사 setIsError
-      const isValid = value.length < 4;
-      const copyError = [...isError];
-      copyError[n] = isValid;
-      setIsError(copyError);
-
-      const copy = [...cardNumber];
-      copy[n] = value;
-      setCardNumber(copy);
-    };
-
-    return (
-      <CardNumberField
-        {...args}
-        cardNumber={cardNumber}
-        isError={isError}
-        onChange={onChange}
-      />
-    );
+    return <CardNumberField {...args} />;
   },
 };
