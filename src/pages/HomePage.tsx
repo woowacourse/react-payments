@@ -22,11 +22,14 @@ function HomePage() {
   } = useCardPassword();
 
   const {
-    cardNumber,
-    cardNumberError,
-    handleCardNumberChange,
-    getCardNumberErrorMessage,
-  } = useCardNumber();
+    value: cardNumber,
+    error: cardNumberError,
+    inputRefs,
+    onChange: handleCardNumberChange,
+    onKeyDown: handleCardNumberKeyDown,
+    onBlur: handleCardNumberBlur,
+    isValid: cardNumberValid,
+  } = useCardNumber({});
 
   const {
     cardExpirationDate,
@@ -76,12 +79,19 @@ function HomePage() {
           getMonthErrorMessage={getMonthErrorMessage}
           getYearErrorMessage={getYearErrorMessage}
         />
-        <CardBrand value={brand} onChange={(newBrand) => setBrand(newBrand)}/>
+        <CardBrand
+          value={brand}
+          onChange={(newBrand) => setBrand(newBrand)}
+        />
         <CardNumberInput
           cardNumber={cardNumber}
+          error={cardNumberError}
+          inputRefs={inputRefs}
           onChange={handleCardNumberChange}
-          errorState={cardNumberError}
-          getCardNumberErrorMessage={getCardNumberErrorMessage}
+          onKeyDown={handleCardNumberKeyDown}
+          onBlur={handleCardNumberBlur}
+          tabIndex={1}
+          autoFocus
         />
       </section>
       {isAllInputFilled && (

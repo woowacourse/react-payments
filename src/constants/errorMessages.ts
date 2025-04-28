@@ -2,6 +2,7 @@ import { CARD_EXPIRATION } from './cardConfig';
 
 export const CARD_NUMBER_ERROR = {
   onlyNumbers: '숫자만 입력 가능합니다.',
+  invalidFormat: '카드 번호 형식이 올바르지 않습니다.',
 };
 
 export const CARD_EXPIRATION_ERROR = {

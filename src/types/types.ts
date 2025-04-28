@@ -1,16 +1,8 @@
-export type CardNumber = {
-  first: number | null;
-  second: number | null;
-  third: number | null;
-  forth: number | null;
-};
+export type CardNumberKey = 'first' | 'second' | 'third' | 'forth';
 
-export type CardNumberError = {
-  first: boolean;
-  second: boolean;
-  third: boolean;
-  forth: boolean;
-};
+export type CardNumber = Record<CardNumberKey, string>;
+
+export type CardNumberError = Record<CardNumberKey, string>;
 
 export type CardExpirationDate = {
   month: string;
@@ -18,13 +10,13 @@ export type CardExpirationDate = {
 };
 
 export type CardExpirationDateError = {
-  month: boolean;
-  year: boolean;
+  month: string;
+  year: string;
 };
 
-export type CardCVC = string | null;
+export type CardCVC = number | null;
 
-export type CardPassword = string | null;
+export type CardPassword = number | null;
 
 export enum CardBrands {
   BC카드 = 'BC카드',

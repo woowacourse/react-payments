@@ -2,47 +2,31 @@ import Input from '../@common/Input/Input';
 import Title from "../@common/Title/Title";
 import React, { ChangeEvent } from 'react';
 import { CardNumber, CardNumberError } from "../../types";
-import { useAutoFocus } from "../../hooks";
 import { cardNumberInputLayout } from './CardNumberInput.style';
-import { CARD_NUMBER_ERROR, CARD_NUMBER } from '../../constants';
+import { CARD_NUMBER } from '../../constants';
 import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
 import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
+  error: CardNumberError;
+  inputRefs: Array<React.RefObject<HTMLInputElement>>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorState: CardNumberError;
-  getCardNumberErrorMessage?: () => string | null;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  tabIndex?: number;
+  autoFocus?: boolean;
 };
 
 function CardNumberInput({
   cardNumber,
+  error,
+  inputRefs,
   onChange,
-  errorState,
-  getCardNumberErrorMessage,
+  onKeyDown,
+  tabIndex,
+  autoFocus,
 }: CardNumberInputProps) {
-  const { refs, focusNext } = useAutoFocus(4);
-
-  const handleCardNumberChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-
-    if (e.target.value.length === CARD_NUMBER.maxLength) {
-      focusNext(index);
-    }
-  }
-
-  const handleBackspaceKeyDown = (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && e.currentTarget.value.length === 0 && index > 0) {
-      refs[index - 1].current?.focus();
-    }
-  };
-
-  const getErrorMessage = (): string => {
-    if (getCardNumberErrorMessage) {
-      return getCardNumberErrorMessage() || CARD_NUMBER_ERROR.onlyNumbers;
-    }
-    return CARD_NUMBER_ERROR.onlyNumbers;
-  };
+ const errorMessage = error.first || error.second || error.third || error.forth;
 
   return (
     <div css={cardNumberInputLayout}>
@@ -53,56 +37,61 @@ function CardNumberInput({
           <article css={inputSection}>
             <Input.Group id="card-number">
               <Input
-                ref={refs[0]}
+                ref={inputRefs?.[0]}
                 type="text"
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.first?.toString()}
-                onChange={handleCardNumberChange(0)}
-                onKeyDown={handleBackspaceKeyDown(0)}
-                css={errorState.first ? errorInputStyle : undefined}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.first ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 1: undefined}
+                autoFocus={autoFocus}
               />
             </Input.Group>
             <Input.Group id="card-number-second">
               <Input
-                ref={refs[1]}
+                ref={inputRefs?.[1]}
                 type="text"
                 name="second"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.second?.toString()}
-                onChange={handleCardNumberChange(1)}
-                onKeyDown={handleBackspaceKeyDown(1)}
-                css={errorState.second ? errorInputStyle : undefined}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.second ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 2: undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-third">
               <Input
-                ref={refs[2]}
+                ref={inputRefs?.[2]}
                 type="text"
                 name="third"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.third?.toString()}
-                onChange={handleCardNumberChange(2)}
-                onKeyDown={handleBackspaceKeyDown(2)}
-                css={errorState.third ? errorInputStyle : undefined}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.third ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 3: undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-forth">
               <Input
-                ref={refs[3]}
+                ref={inputRefs?.[3]}
                 type="text"
                 name="forth"
                 maxLength={CARD_NUMBER.maxLength}
                 value={cardNumber.forth?.toString()}
-                onChange={handleCardNumberChange(4)}
-                onKeyDown={handleBackspaceKeyDown(3)}
-                css={errorState.forth ? errorInputStyle : undefined}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+                css={error.forth ? errorInputStyle : undefined}
+                tabIndex={tabIndex ? tabIndex + 4: undefined}
               />
             </Input.Group>
           </article>
           {
-            Object.values(errorState).some(Boolean) && (
-            <div css={errorMessageStyle}>{getErrorMessage()}</div>
+            errorMessage && (
+            <div css={errorMessageStyle}>{errorMessage}</div>
           )}
         </div>
       </Input.Group>
