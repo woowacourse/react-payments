@@ -11,7 +11,7 @@ export const useCardRouter = () => {
   const cardInfo = (location.state as CardInfo) || {};
 
   const navigateToCardComplete = (info: CardInfo) => {
-    navigate('/react-payments/complete', { state: info });
+    navigate('/complete', { state: info });
   };
 
   const navigateToHome = () => {
