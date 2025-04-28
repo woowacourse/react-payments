@@ -39,7 +39,17 @@ function CardExpirationForm({ cardInfo, handleCardInfo, maxLength }: CardExpirat
   function handleChange(value: string, index: number) {
     ExpirationInputInfo[index].setValue(value);
 
-    if (value.length === maxLength) {
+    const updatedExpiration = {
+      ...cardInfo.expiration,
+      [['month', 'year'][index]]: value,
+    };
+
+    const { isCardExpirationError } = useCardExpirationValidation(
+      { ...cardInfo, expiration: updatedExpiration },
+      maxLength
+    );
+
+    if (value.length === maxLength && !isCardExpirationError[index]) {
       if (index === inputRefs.current.length - 1) inputRefs.current[index]?.blur();
       else inputRefs.current[index + 1]?.focus();
     }

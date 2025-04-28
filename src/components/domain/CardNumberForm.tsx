@@ -45,7 +45,17 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
   function handleChange(value: string, index: number) {
     NumberInputInfo[index].setValue(value);
 
-    if (value.length === maxLength) {
+    const updatedCardNumber = {
+      ...cardInfo.number,
+      [['first', 'second', 'third', 'fourth'][index]]: value,
+    };
+
+    const { isCardNumberError } = useCardNumberValidation(
+      { ...cardInfo, number: updatedCardNumber },
+      maxLength
+    );
+
+    if (value.length === maxLength && !isCardNumberError[index]) {
       if (index === inputRefs.current.length - 1) inputRefs.current[index]?.blur();
       else inputRefs.current[index + 1]?.focus();
     }
