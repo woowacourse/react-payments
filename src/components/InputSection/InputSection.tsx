@@ -67,7 +67,6 @@ function InputSection({
   error,
   validators,
 }: InputSectionProps) {
-  const [showButton, setShowButton] = useState(false);
   const { cardNumbers, cardBrand } = useCard();
   const navigate = useNavigate();
 
@@ -104,29 +103,23 @@ function InputSection({
     });
   };
 
-  useEffect(() => {
-    if (type !== INPUT_TYPE.password) return;
-    const isAllComplete =
-      Object.values(isComplete.cardNumbers).every(Boolean) &&
-      isComplete.cardBrand &&
-      Object.values(isComplete.expirationPeriod).every(Boolean) &&
-      isComplete.cvcNumber &&
-      isComplete.password;
+  const isAllComplete =
+    Object.values(isComplete.cardNumbers).every(Boolean) &&
+    isComplete.cardBrand &&
+    Object.values(isComplete.expirationPeriod).every(Boolean) &&
+    isComplete.cvcNumber &&
+    isComplete.password;
 
-    const isAllErrorFree = [
-      ...Object.values(error.cardNumbers),
-      ...Object.values(error.expirationPeriod),
-      error.cvcNumber,
-      error.cardBrand,
-      error.password,
-    ].every((v) => v === null);
+  const isAllErrorFree = [
+    ...Object.values(error.cardNumbers),
+    ...Object.values(error.expirationPeriod),
+    error.cvcNumber,
+    error.cardBrand,
+    error.password,
+  ].every((v) => v === null);
 
-    if (isAllComplete && isAllErrorFree) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
-  }, [type, isComplete, error]);
+  const showButton =
+    isAllComplete && isAllErrorFree && type === INPUT_TYPE.password;
 
   return (
     <>
