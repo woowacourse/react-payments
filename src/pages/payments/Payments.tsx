@@ -18,6 +18,7 @@ import ExpirationDateInputField from '../../components/features/payments/InputFi
 import InputSection from '../../components/features/payments/InputSection/InputSection';
 import { DropdownOptionType } from '../../types/dropdown';
 import { isAllTrue } from '../../utils/array';
+import ConditionalRender from '../../components/common/ConditionalRender/ConditionalRender';
 
 function Payments() {
   const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
@@ -111,7 +112,7 @@ function Payments() {
           cardBank={cardBankValue}
         />
         <PaymentsInputForm>
-          {inputStep >= 5 && (
+          <ConditionalRender condition={inputStep >= 5}>
             <InputSection
               title="비밀번호를 입력해 주세요"
               caption="앞의 2자리를 입력해주세요"
@@ -123,9 +124,9 @@ function Payments() {
                 onBlur={onCardPasswordInputBlur}
               />
             </InputSection>
-          )}
+          </ConditionalRender>
 
-          {inputStep >= 4 && (
+          <ConditionalRender condition={inputStep >= 4}>
             <InputSection title="CVC 번호를 입력해 주세요">
               <CVCInputField
                 inputValue={CVCInputValue}
@@ -134,9 +135,9 @@ function Payments() {
                 onBlur={onCVCInputBlur}
               />
             </InputSection>
-          )}
+          </ConditionalRender>
 
-          {inputStep >= 3 && (
+          <ConditionalRender condition={inputStep >= 3}>
             <InputSection
               title="카드 유효기간을 입력해 주세요"
               caption="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -148,9 +149,9 @@ function Payments() {
                 onBlur={onExpirationDateBlur}
               />
             </InputSection>
-          )}
+          </ConditionalRender>
 
-          {inputStep >= 2 && (
+          <ConditionalRender condition={inputStep >= 2}>
             <InputSection
               title="카드사를 선택해 주세요"
               caption="현재 국내 카드사만 가능합니다."
@@ -165,7 +166,7 @@ function Payments() {
                 placeholder="카드사를 선택해주세요"
               />
             </InputSection>
-          )}
+          </ConditionalRender>
 
           <InputSection
             title="결제할 카드 번호를 입력해 주세요"
@@ -180,13 +181,13 @@ function Payments() {
             />
           </InputSection>
 
-          {allInputComplete && (
+          <ConditionalRender condition={allInputComplete}>
             <SubmitButtonWrapper>
               <FooterButton size="large" onClick={handleSubmit}>
                 확인
               </FooterButton>
             </SubmitButtonWrapper>
-          )}
+          </ConditionalRender>
         </PaymentsInputForm>
       </PaymentsContainer>
     </MobileLayoutContainer>
