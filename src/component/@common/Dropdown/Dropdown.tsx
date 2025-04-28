@@ -11,12 +11,14 @@ import {
   dropdownOption,
   dropdownSelect,
 } from './Dropdown.styles';
-import { CardBrand, useCard } from '../../../context/CardContext';
 
-interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface DropdownProps
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
   defaultValue?: string;
   placeholder?: string;
   onNext?: () => void;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 interface DropdownOptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
@@ -27,25 +29,22 @@ interface DropdownOptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
 const Dropdown = ({
   children,
   defaultValue = '',
-  placeholder = '카드사를 선택해주세요',
+  placeholder = '선택해주세요',
   onNext,
+  value,
+  onChange,
   ...props
 }: PropsWithChildren<DropdownProps>) => {
-  const { selectedCardBrand, setSelectedCardBrand } = useCard();
-
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value as CardBrand;
-    setSelectedCardBrand(value);
-  };
-
-  if (selectedCardBrand) {
+    const newValue = event.target.value;
+    onChange?.(newValue);
     onNext?.();
-  }
+  };
 
   return (
     <div css={dropdownContainer}>
       <select
-        value={selectedCardBrand ?? ''}
+        value={value ?? ''}
         onChange={handleChange}
         css={dropdownSelect}
         {...props}
