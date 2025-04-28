@@ -8,7 +8,8 @@ export type CardNumberError = Record<CardNumberKey, string>;
 export type CardExpirationDate = Record<CardPeriodKey, string>
 export type CardExpirationDateError = Record<CardPeriodKey, string>
 
-export type CardCVC = number | null;
+export type CardCVC = string | null;
+export type CardCVCError = string;
 
 export type CardPassword = number | null;
 

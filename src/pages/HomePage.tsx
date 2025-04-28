@@ -40,8 +40,7 @@ function HomePage() {
     onBlur: handleCardExpirationBlur,
   } = useCardExpiration({});
 
-  const {cardCVC, cardCVCError, handleCardCVCChange, getCardCVCErrorMessage} =
-    useCardCVC();
+  const {cardCVC, error, cvcRef, handleCardCVCChange} = useCardCVC({});
 
   const isAllInputFilled = useMemo(() => {
     return (
@@ -69,9 +68,10 @@ function HomePage() {
         />
         <CardCVCInput
           cardCVC={cardCVC}
+          error={error}
+          cvcRef={cvcRef}
           onChange={handleCardCVCChange}
-          hasError={cardCVCError}
-          getCardCVCErrorMessage={getCardCVCErrorMessage}
+          tabIndex={8}
         />
         <CardPeriodInput
           cardExpirationDate={cardExpirationDate}

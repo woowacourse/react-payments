@@ -13,7 +13,7 @@ const initialCardExpirationDateError: CardExpirationDateError = {
   year: '',
 };
 
-export const useCardExpiration = (onComplete: () => void) => {
+export const useCardExpiration = (onComplete?: () => void) => {
   const [cardExpirationDate, setCardExpirationDate] = useState<CardExpirationDate>(initialCardExpirationDate);
   const [error, setError] = useState<CardExpirationDateError>(initialCardExpirationDateError);
 

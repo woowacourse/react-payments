@@ -1,31 +1,36 @@
 import Input from '../@common/Input/Input';
 import Title from "../@common/Title/Title";
-import { ChangeEvent } from 'react';
-import { cardPeriodInputLayout } from '../CardPeriod/CardPeriodInput.style';
-import { CARD_CVC_ERROR, CARD_CVC } from '../../constants';
-import { errorInputStyle, errorMessageStyle } from '../../styles/@common/text.style';
-import { inputContainer, inputSection } from '../../styles/@common/inputContainer.style';
-import { CardCVC } from "../../types";
+import {ChangeEvent} from 'react';
+import {cardPeriodInputLayout} from '../CardPeriod/CardPeriodInput.style';
+import {CARD_CVC_ERROR, CARD_CVC} from '../../constants';
+import {errorInputStyle, errorMessageStyle} from '../../styles/@common/text.style';
+import {inputContainer, inputSection} from '../../styles/@common/inputContainer.style';
+import {CardCVC, CardCVCError} from "../../types";
 
 type CardCVCInputProps = {
   cardCVC: CardCVC;
+  error: CardCVCError;
+  cvcRef: React.RefObject<HTMLInputElement | null>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  hasError: boolean;
-  getCardCVCErrorMessage?: () => string | null;
+  tabIndex: number;
 };
 
 function CardCVCInput({
   cardCVC,
+  error,
+  cvcRef,
   onChange,
-  hasError,
-  getCardCVCErrorMessage,
+  tabIndex,
 }: CardCVCInputProps) {
-  const getErrorMessage = (): string => {
-    if (getCardCVCErrorMessage) {
-      return getCardCVCErrorMessage() || CARD_CVC_ERROR.onlyNumbers;
+  const errorMessage = () => {
+    if (error === CARD_CVC_ERROR.onlyNumbers) {
+      return CARD_CVC_ERROR.onlyNumbers;
     }
-    return CARD_CVC_ERROR.onlyNumbers;
-  };
+    if (error === CARD_CVC_ERROR.invalidFormat) {
+      return CARD_CVC_ERROR.invalidFormat;
+    }
+    return '';
+  }
 
   return (
     <div css={cardPeriodInputLayout}>
@@ -35,15 +40,17 @@ function CardCVCInput({
           <Input.Label>CVC</Input.Label>
           <article css={inputSection}>
             <Input
+              ref={cvcRef}
               type="text"
               name="cvc"
               maxLength={CARD_CVC.maxLength}
               value={cardCVC?.toString()}
               onChange={onChange}
-              css={hasError ? errorInputStyle : undefined}
+              css={error ? errorInputStyle : undefined}
+              tabIndex={tabIndex}
             />
           </article>
-          {hasError && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
+          {error && <div css={errorMessageStyle}>{errorMessage()}</div>}
         </div>
       </Input.Group>
     </div>

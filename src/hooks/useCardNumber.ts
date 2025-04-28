@@ -17,7 +17,7 @@ const initialError: CardNumberError = {
   forth: '',
 }
 
-export const useCardNumber = (onComplete: () => void) => {
+export const useCardNumber = (onComplete?: () => void) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
   const [error, setError] = useState<CardNumberError>(initialError);
 

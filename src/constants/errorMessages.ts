@@ -14,6 +14,7 @@ export const CARD_EXPIRATION_ERROR = {
 
 export const CARD_CVC_ERROR = {
   onlyNumbers: '숫자만 입력 가능합니다.',
+  invalidFormat: '3자리 이상 입력해 주세요.',
 };
 
 export const CARD_PASSWORD_ERROR = {
