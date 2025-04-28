@@ -1,5 +1,5 @@
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
-import CheckIcon from '@assets/CheckIcon.png';
+import CheckIcon from '@assets/checkIcon.png';
 import buttonStyle from '../css/button.module.css';
 import styles from './cardRegistrationComplete.module.css';
 import { useNavigate } from 'react-router-dom';
