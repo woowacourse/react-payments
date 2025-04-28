@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import { useEffect, useState } from 'react';
 
 const meta: Meta<typeof BaseInputField> = {
+  title: 'Components/BaseInputField',
   component: BaseInputField,
   tags: ['autodocs'],
 };
