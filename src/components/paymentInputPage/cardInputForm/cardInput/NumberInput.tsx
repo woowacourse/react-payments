@@ -2,7 +2,7 @@ import { useState } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
 import { precise } from '../../../../utils/precise';
-import useCard from '../../../../hooks/useCard';
+import useCardContext from '../../../../hooks/useCardContext';
 
 export interface CardNumberInputProps {
   isValid: boolean[];
@@ -10,7 +10,7 @@ export interface CardNumberInputProps {
 }
 
 function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
-  const { cardNumbers, setCardNumbers } = useCard();
+  const { cardNumbers, setCardNumbers } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {

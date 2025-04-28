@@ -1,4 +1,4 @@
-import useCard from '../../../../hooks/useCard';
+import useCardContext from '../../../../hooks/useCardContext';
 import InputForm from '../../../common/inputForm/InputForm';
 import Select from '../../../common/select/Select';
 
@@ -19,7 +19,7 @@ export interface CardIssuerSelectorProps {
 }
 
 function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
-  const { cardIssuer, setCardIssuer } = useCard();
+  const { cardIssuer, setCardIssuer } = useCardContext();
 
   function validateIssuerChange(e: React.MouseEvent<HTMLLIElement>) {
     const targetIssuer = e.currentTarget.textContent as string;

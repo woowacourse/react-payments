@@ -1,4 +1,4 @@
-import useCard from '../../../hooks/useCard';
+import useCardContext from '../../../hooks/useCardContext';
 import { ISSUER_LIST } from '../cardInputForm/cardInput/IssuerSelector';
 import styles from './CardPreview.module.css';
 
@@ -8,7 +8,7 @@ export const BRAND_IMAGE = {
 };
 
 function CardPreview() {
-  const { cardNumbers, cardIssuer, expiryDate } = useCard();
+  const { cardNumbers, cardIssuer, expiryDate } = useCardContext();
   const issuerClassName = ISSUER_LIST.get(cardIssuer);
   const inputCardNumber = cardNumbers[0];
   const brand = determineBrand(inputCardNumber);

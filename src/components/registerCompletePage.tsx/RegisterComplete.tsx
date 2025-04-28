@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../common/button/Button';
 import { INITIAL_CARD, ROUTER } from '../../global/constants';
 import styles from './RegisterComplete.module.css';
-import useCard from '../../hooks/useCard';
+import useCardContext from '../../hooks/useCardContext';
 
 function RegisterComplete() {
   const {
@@ -13,7 +13,7 @@ function RegisterComplete() {
     setExpiryDate,
     setCardCVC,
     setPassword,
-  } = useCard();
+  } = useCardContext();
   const navigate = useNavigate();
 
   function navigateMainPage(e: React.MouseEvent<HTMLButtonElement>) {

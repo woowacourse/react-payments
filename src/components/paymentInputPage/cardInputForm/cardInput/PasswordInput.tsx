@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
 import { validate } from '../../../../utils/validate';
-import useCard from '../../../../hooks/useCard';
+import useCardContext from '../../../../hooks/useCardContext';
 
 export interface CardPasswordInputProps {
   isValid: boolean;
@@ -10,7 +10,7 @@ export interface CardPasswordInputProps {
 }
 
 function CardPasswordInput({ isValid, setIsValid }: CardPasswordInputProps) {
-  const { password, setPassword } = useCard();
+  const { password, setPassword } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
