@@ -111,9 +111,5 @@ function canMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
   const isAllValid = isAllValidInput(value);
   const isAllFilled = isAllFilledInput(value, type);
 
-  if (isAllValid && isAllFilled) {
-    return true;
-  }
-
-  return false;
+  return isAllValid && isAllFilled;
 }
