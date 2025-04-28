@@ -17,15 +17,9 @@ interface CardCVCInputProps {
 
 function CardCVCInput(props: CardCVCInputProps) {
   const { onNext } = props;
-  const {
-    cardCVC,
-    handleCardCVCChange,
-    cardCVCError: hasError,
-    getCardCVCErrorMessage,
-    isCardCVCValid,
-  } = useCard();
+  const { cardCVC } = useCard();
 
-  if (isCardCVCValid()) {
+  if (cardCVC.isValid()) {
     onNext?.();
   }
 
@@ -43,13 +37,13 @@ function CardCVCInput(props: CardCVCInputProps) {
               name="cvc"
               maxLength={CARD_LENGTH.cvc}
               autoFocus
-              value={cardCVC?.toString()}
-              onChange={(e) => handleCardCVCChange(e.target.value)}
-              css={hasError ? errorInputStyle : undefined}
+              value={cardCVC.value?.toString()}
+              onChange={(e) => cardCVC.onChange(e.target.value)}
+              css={cardCVC.error ? errorInputStyle : undefined}
             />
           </article>
-          {hasError && (
-            <div css={errorMessageStyle}>{getCardCVCErrorMessage()}</div>
+          {cardCVC.error && (
+            <div css={errorMessageStyle}>{cardCVC.getErrorMessage()}</div>
           )}
         </div>
       </Input.Group>

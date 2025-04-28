@@ -17,24 +17,18 @@ import useEasyNavigate from '../../hooks/useEasyNavigate';
 function CardPasswordInput() {
   const id = useId();
   const { goPage } = useEasyNavigate();
-  const {
-    cardPassword,
-    handleCardPasswordChange,
-    cardPasswordError: hasError,
-    getCardPasswordErrorMessage,
-    isCardPasswordValid,
-    selectedCardBrand,
-    cardNumber,
-  } = useCard();
+  const { cardPassword, cardNumber, cardBrand } = useCard();
 
   const handlePaymentComplete = useCallback(() => {
-    const cardNumberFirst = cardNumber.first?.toString();
-    const cardBrand = selectedCardBrand;
+    const cardNumberFirst = cardNumber.value.first?.toString();
+    const cardBrandValue = cardBrand.selected;
 
-    goPage(`/complete?cardNumber=${cardNumberFirst}&cardBrand=${cardBrand}`);
-  }, [goPage, cardNumber, selectedCardBrand]);
+    goPage(
+      `/complete?cardNumber=${cardNumberFirst}&cardBrand=${cardBrandValue}`
+    );
+  }, [goPage, cardNumber, cardBrand]);
 
-  const isCompleteForm = cardPassword?.length === CARD_LENGTH.password;
+  const isCompleteForm = cardPassword.value?.length === CARD_LENGTH.password;
 
   return (
     <>
@@ -51,15 +45,15 @@ function CardPasswordInput() {
               type="password"
               name="password"
               maxLength={CARD_LENGTH.password}
-              value={cardPassword?.toString()}
+              value={cardPassword.value?.toString()}
               autoFocus
-              onChange={(e) => handleCardPasswordChange(e.target.value)}
-              css={hasError ? errorInputStyle : undefined}
+              onChange={(e) => cardPassword.onChange(e.target.value)}
+              css={cardPassword.error ? errorInputStyle : undefined}
               placeholder="앞 2자리"
             />
           </article>
-          {hasError && (
-            <div css={errorMessageStyle}>{getCardPasswordErrorMessage()}</div>
+          {cardPassword.error && (
+            <div css={errorMessageStyle}>{cardPassword.getErrorMessage()}</div>
           )}
         </div>
       </Input.Group>
@@ -67,7 +61,7 @@ function CardPasswordInput() {
         <Button
           variant="large"
           onClick={handlePaymentComplete}
-          disabled={!isCardPasswordValid || !isCardPasswordValid()}
+          disabled={!cardPassword.isValid()}
         >
           확인
         </Button>

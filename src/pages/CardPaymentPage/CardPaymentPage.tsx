@@ -19,7 +19,7 @@ const CardPaymentPage = () => {
     step: STEPS[0],
   });
 
-  const { selectedCardBrand, setSelectedCardBrand } = useCard();
+  const { cardBrand } = useCard();
 
   return (
     <div css={cardPaymentLayout}>
@@ -37,8 +37,8 @@ const CardPaymentPage = () => {
             <Dropdown
               placeholder="카드사를 선택해주세요"
               onNext={() => setStep(STEPS[2])}
-              value={selectedCardBrand ?? ''}
-              onChange={(value) => setSelectedCardBrand(value as CardBrand)}
+              value={cardBrand.selected ?? ''}
+              onChange={(value) => cardBrand.setSelected(value as CardBrand)}
             >
               <Dropdown.Option value="bc">BC카드</Dropdown.Option>
               <Dropdown.Option value="shinhan">신한카드</Dropdown.Option>

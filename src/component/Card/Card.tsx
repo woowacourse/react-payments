@@ -13,9 +13,9 @@ import { identifyCardType } from '../../utils/cardTypeUtils';
 import { maskCardValue } from '../../utils';
 
 function Card() {
-  const { cardNumber, cardExpirationDate, cardBrandColor } = useCard();
+  const { cardNumber, cardExpiration, cardBrand } = useCard();
 
-  const cardTypeId = identifyCardType(cardNumber);
+  const cardTypeId = identifyCardType(cardNumber.value);
 
   const getCardTypeImage = () => {
     if (cardTypeId === 'mastercard') return MasterCard;
@@ -26,7 +26,7 @@ function Card() {
   const cardTypeImage = getCardTypeImage();
 
   const hasCardExpirationDate =
-    cardExpirationDate.month || cardExpirationDate.year;
+    cardExpiration.value.month || cardExpiration.value.year;
 
   const getDisplayCardValue = (
     value: string | undefined,
@@ -37,7 +37,7 @@ function Card() {
   };
 
   return (
-    <section css={dynamicCardStyle(cardBrandColor)}>
+    <section css={dynamicCardStyle(cardBrand.color)}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
         {cardTypeImage && (
@@ -48,7 +48,7 @@ function Card() {
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          {Object.entries(cardNumber).map(([fieldName, value], index) => (
+          {Object.entries(cardNumber.value).map(([fieldName, value], index) => (
             <span key={index} css={cardContentText}>
               {getDisplayCardValue(value?.toString(), fieldName)}
             </span>
@@ -57,7 +57,7 @@ function Card() {
         <div css={cardContent}>
           {hasCardExpirationDate && (
             <span css={cardContentText}>
-              {cardExpirationDate.month}/{cardExpirationDate.year}
+              {cardExpiration.value.month}/{cardExpiration.value.year}
             </span>
           )}
         </div>

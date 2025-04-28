@@ -19,22 +19,15 @@ interface CardPeriodInputProps {
 
 function CardPeriodInput(props: CardPeriodInputProps) {
   const { onNext } = props;
-  const {
-    cardExpirationDate,
-    handleCardExpirationChange,
-    cardExpirationDateError: errorState,
-    getMonthErrorMessage,
-    getYearErrorMessage,
-    isCardExpirationValid,
-  } = useCard();
+  const { cardExpiration } = useCard();
 
-  if (isCardExpirationValid()) {
+  if (cardExpiration.isValid()) {
     onNext?.();
   }
 
   // 월(month) 입력 핸들러
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleCardExpirationChange.month(e.target.value);
+    cardExpiration.onChange.month(e.target.value);
     const fieldMappings = {
       month: 'year',
     };
@@ -57,9 +50,9 @@ function CardPeriodInput(props: CardPeriodInputProps) {
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
                 autoFocus
-                value={cardExpirationDate.month}
+                value={cardExpiration.value.month}
                 onChange={handleMonthChange}
-                css={errorState.month ? errorInputStyle : undefined}
+                css={cardExpiration.error.month ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-expiration-year">
@@ -67,19 +60,21 @@ function CardPeriodInput(props: CardPeriodInputProps) {
                 type="text"
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
-                value={cardExpirationDate.year}
-                onChange={(e) =>
-                  handleCardExpirationChange.year(e.target.value)
-                }
-                css={errorState.year ? errorInputStyle : undefined}
+                value={cardExpiration.value.year}
+                onChange={(e) => cardExpiration.onChange.year(e.target.value)}
+                css={cardExpiration.error.year ? errorInputStyle : undefined}
               />
             </Input.Group>
           </article>
-          {errorState.month && (
-            <div css={errorMessageStyle}>{getMonthErrorMessage()}</div>
+          {cardExpiration.error.month && (
+            <div css={errorMessageStyle}>
+              {cardExpiration.getMonthErrorMessage()}
+            </div>
           )}
-          {errorState.year && !errorState.month && (
-            <div css={errorMessageStyle}>{getYearErrorMessage()}</div>
+          {cardExpiration.error.year && !cardExpiration.error.month && (
+            <div css={errorMessageStyle}>
+              {cardExpiration.getYearErrorMessage()}
+            </div>
           )}
         </div>
       </Input.Group>

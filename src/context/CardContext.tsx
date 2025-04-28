@@ -41,38 +41,54 @@ const cardBrandNames: Record<CardBrand, string> = {
   kb: '국민카드',
 };
 
-interface CardContextType {
-  cardNumber: CardNumber;
-  cardNumberError: CardNumberError;
-  handleCardNumberChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  getCardNumberErrorMessage: () => string | null;
-  isCardNumberValid: () => boolean;
+interface CardNumberContext {
+  value: CardNumber;
+  error: CardNumberError;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  getErrorMessage: () => string | null;
+  isValid: () => boolean;
+}
 
-  cardExpirationDate: CardExpirationDate;
-  cardExpirationDateError: CardExpirationDateError;
-  handleCardExpirationChange: {
+interface CardExpirationContext {
+  value: CardExpirationDate;
+  error: CardExpirationDateError;
+  onChange: {
     month: (value: string) => void;
     year: (value: string) => void;
   };
   getMonthErrorMessage: () => string | null | undefined;
   getYearErrorMessage: () => string | null | undefined;
-  isCardExpirationValid: () => boolean;
+  isValid: () => boolean;
+}
 
-  cardCVC: CardCVC;
-  cardCVCError: boolean;
-  handleCardCVCChange: (value: string) => void;
-  getCardCVCErrorMessage: () => string | null;
-  isCardCVCValid: () => boolean;
+interface CardCVCContext {
+  value: CardCVC;
+  error: boolean;
+  onChange: (value: string) => void;
+  getErrorMessage: () => string | null;
+  isValid: () => boolean;
+}
 
-  cardPassword: string;
-  cardPasswordError: boolean;
-  handleCardPasswordChange: (value: string) => void;
-  getCardPasswordErrorMessage: () => string | null;
-  isCardPasswordValid: () => boolean;
+interface CardPasswordContext {
+  value: string;
+  error: boolean;
+  onChange: (value: string) => void;
+  getErrorMessage: () => string | null;
+  isValid: () => boolean;
+}
 
-  selectedCardBrand: CardBrand | null;
-  setSelectedCardBrand: (brand: CardBrand) => void;
-  cardBrandColor: string;
+interface CardBrandContext {
+  selected: CardBrand | null;
+  setSelected: (brand: CardBrand) => void;
+  color: string;
+}
+
+interface CardContextType {
+  cardNumber: CardNumberContext;
+  cardExpiration: CardExpirationContext;
+  cardCVC: CardCVCContext;
+  cardPassword: CardPasswordContext;
+  cardBrand: CardBrandContext;
 }
 
 const CardContext = createContext<CardContextType | null>(null);
@@ -121,35 +137,41 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
       ] || theme.color.cardBlack
     : theme.color.cardBlack;
 
-  const value = {
-    cardNumber,
-    cardNumberError,
-    handleCardNumberChange,
-    getCardNumberErrorMessage,
-    isCardNumberValid,
-
-    cardExpirationDate,
-    cardExpirationDateError,
-    handleCardExpirationChange,
-    getMonthErrorMessage,
-    getYearErrorMessage,
-    isCardExpirationValid,
-
-    cardCVC,
-    cardCVCError,
-    handleCardCVCChange,
-    getCardCVCErrorMessage,
-    isCardCVCValid,
-
-    cardPassword,
-    cardPasswordError,
-    handleCardPasswordChange,
-    getCardPasswordErrorMessage,
-    isCardPasswordValid,
-
-    selectedCardBrand,
-    setSelectedCardBrand,
-    cardBrandColor,
+  const value: CardContextType = {
+    cardNumber: {
+      value: cardNumber,
+      error: cardNumberError,
+      onChange: handleCardNumberChange,
+      getErrorMessage: getCardNumberErrorMessage,
+      isValid: isCardNumberValid,
+    },
+    cardExpiration: {
+      value: cardExpirationDate,
+      error: cardExpirationDateError,
+      onChange: handleCardExpirationChange,
+      getMonthErrorMessage,
+      getYearErrorMessage,
+      isValid: isCardExpirationValid,
+    },
+    cardCVC: {
+      value: cardCVC,
+      error: cardCVCError,
+      onChange: handleCardCVCChange,
+      getErrorMessage: getCardCVCErrorMessage,
+      isValid: isCardCVCValid,
+    },
+    cardPassword: {
+      value: cardPassword,
+      error: cardPasswordError,
+      onChange: handleCardPasswordChange,
+      getErrorMessage: getCardPasswordErrorMessage,
+      isValid: isCardPasswordValid,
+    },
+    cardBrand: {
+      selected: selectedCardBrand,
+      setSelected: setSelectedCardBrand,
+      color: cardBrandColor,
+    },
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

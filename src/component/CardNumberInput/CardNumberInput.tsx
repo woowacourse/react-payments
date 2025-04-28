@@ -18,26 +18,20 @@ interface CardNumberInputProps {
 
 function CardNumberInput(props: CardNumberInputProps) {
   const { onNext } = props;
-  const {
-    cardNumber,
-    handleCardNumberChange,
-    cardNumberError: errorState,
-    getCardNumberErrorMessage,
-    isCardNumberValid,
-  } = useCard();
+  const { cardNumber } = useCard();
 
   const hasError =
-    errorState.first ||
-    errorState.second ||
-    errorState.third ||
-    errorState.forth;
+    cardNumber.error.first ||
+    cardNumber.error.second ||
+    cardNumber.error.third ||
+    cardNumber.error.forth;
 
-  if (isCardNumberValid()) {
+  if (cardNumber.isValid()) {
     onNext();
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleCardNumberChange(e);
+    cardNumber.onChange(e);
 
     const fieldMappings = {
       first: 'second',
@@ -63,10 +57,10 @@ function CardNumberInput(props: CardNumberInputProps) {
                 type="text"
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.first?.toString()}
+                value={cardNumber.value.first?.toString()}
                 autoFocus
                 onChange={handleInputChange}
-                css={errorState.first ? errorInputStyle : undefined}
+                css={cardNumber.error.first ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-second">
@@ -74,9 +68,9 @@ function CardNumberInput(props: CardNumberInputProps) {
                 type="text"
                 name="second"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.second?.toString()}
+                value={cardNumber.value.second?.toString()}
                 onChange={handleInputChange}
-                css={errorState.second ? errorInputStyle : undefined}
+                css={cardNumber.error.second ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-third">
@@ -84,9 +78,9 @@ function CardNumberInput(props: CardNumberInputProps) {
                 type="text"
                 name="third"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.third?.toString()}
+                value={cardNumber.value.third?.toString()}
                 onChange={handleInputChange}
-                css={errorState.third ? errorInputStyle : undefined}
+                css={cardNumber.error.third ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-forth">
@@ -94,14 +88,14 @@ function CardNumberInput(props: CardNumberInputProps) {
                 type="text"
                 name="forth"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.forth?.toString()}
+                value={cardNumber.value.forth?.toString()}
                 onChange={handleInputChange}
-                css={errorState.forth ? errorInputStyle : undefined}
+                css={cardNumber.error.forth ? errorInputStyle : undefined}
               />
             </Input.Group>
           </article>
           {hasError && (
-            <div css={errorMessageStyle}>{getCardNumberErrorMessage()}</div>
+            <div css={errorMessageStyle}>{cardNumber.getErrorMessage()}</div>
           )}
         </div>
       </Input.Group>
