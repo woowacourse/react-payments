@@ -164,10 +164,10 @@ select {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  background-image: url(./icon_arrow_down.svg);
   background-size: 1rem;
   background-position: right 0.5rem center;
   background-repeat: no-repeat;
+  background-image: url('../public/icon_arrow_down.svg');
 }
 
 select:focus {
