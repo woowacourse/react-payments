@@ -3,13 +3,9 @@ import { CustomInputProps } from '../model/types';
 import * as S from './customInput.styles';
 
 const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ type, placeholder, name, onBlur, handleRef, maxLength, error }: CustomInputProps, ref) => {
+  ({ onBlur, handleRef, error, ...props }, ref) => {
     return (
       <S.CustomInput
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        maxLength={maxLength}
         error={error}
         ref={ref}
         onChange={(e) => {
@@ -18,9 +14,9 @@ const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
         onBlur={(e) => {
           onBlur?.(e);
         }}
+        {...props}
       />
     );
   }
 );
-
 export default CustomInput;
