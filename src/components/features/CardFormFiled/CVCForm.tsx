@@ -33,7 +33,7 @@ export const CVCForm = ({ context, onNext }: Props<CardForm['cvc']>) => {
           maxLength={3}
           placeholder="CVC 번호(카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리)"
           isValid={CVCNumber.isValid}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
         />
         <Text
           variant="Caption"

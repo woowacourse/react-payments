@@ -38,7 +38,7 @@ export const PassWordForm = ({ context, onNext }: Props<CardForm['cvc']>) => {
           maxLength={2}
           placeholder="비밀번호 앞 2자리를 입력해주세요"
           isValid={passWord.isValid}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
         />
         <Text
           variant="Caption"
