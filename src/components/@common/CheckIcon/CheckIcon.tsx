@@ -1,4 +1,6 @@
-export function CheckIcon({ fill = "#333" }) {
+import { ComponentProps } from "react";
+
+export function CheckIcon({ fill = "#333" }: ComponentProps<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
