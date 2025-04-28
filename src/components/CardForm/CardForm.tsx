@@ -11,7 +11,7 @@ import { useStepFlow } from '../../hooks/useStepFlow';
 import { isFormValid } from '../../validation/isFormValid';
 import { STEPS } from '../../constants';
 import styles from '../../../src/pages/HomePage/HomePage.module.css';
-import { useValues } from '../../pages/HomePage/HomePage';
+import useValues from '../../hooks/useValues';
 
 type CardFormProps = ReturnType<typeof useValues>['cardForm'];
 
