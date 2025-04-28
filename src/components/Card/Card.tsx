@@ -65,8 +65,8 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
           <div css={cardContent}>
             <span css={[cardContentText, fontColor]}>{first}</span>
             <span css={[cardContentText, fontColor]}>{second}</span>
-            <Dot value={third} className={[cardContentText, fontColor]} />
-            <Dot value={forth} className={[cardContentText, fontColor]} />
+            <Dot value={third} css={[cardContentText, fontColor]} />
+            <Dot value={forth} css={[cardContentText, fontColor]} />
           </div>
           <div css={cardContent}>
             {hasFilledExpirationField && (

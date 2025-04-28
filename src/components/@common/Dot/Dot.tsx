@@ -1,19 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { css, SerializedStyles } from '@emotion/react';
+import {css, Interpolation, Theme} from '@emotion/react';
 import theme from "../../../styles/theme";
 
 type DotProps = {
   value?: string | number | null;
-  css?: SerializedStyles;
-  className?: string;
+  css?: Interpolation<Theme> | Interpolation<Theme>[];
 }
 
-function Dot({value, css: customCss, className}: DotProps) {
+function Dot({value, css: customCss}: DotProps) {
   const length = value?.toString().length || 0;
 
   const masked = '*'.repeat(length);
 
-  return <span css={[dotStyle, customCss, className]}>{masked}</span>;
+  return <span css={[dotStyle, customCss]}>{masked}</span>;
 }
 
 const dotStyle = css`
