@@ -1,5 +1,4 @@
 import {
-  createContext,
   ReactNode,
   PropsWithChildren,
   ChangeEvent,
@@ -14,11 +13,6 @@ import {
 } from './Dropdown.styles';
 import { CardBrand, useCard } from '../../../context/CardContext';
 
-interface DropdownContextType {
-  selectedOption: string;
-  handleChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-}
-
 interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
   defaultValue?: string;
   placeholder?: string;
@@ -29,11 +23,6 @@ interface DropdownOptionProps extends OptionHTMLAttributes<HTMLOptionElement> {
   value: string;
   children: ReactNode;
 }
-
-export const DropdownContext = createContext<DropdownContextType>({
-  selectedOption: '',
-  handleChange: () => {},
-});
 
 const Dropdown = ({
   children,
