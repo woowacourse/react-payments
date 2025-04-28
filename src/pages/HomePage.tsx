@@ -126,7 +126,7 @@ function HomePage() {
             onChange={onChange}
             brandRef={brandRef}
             error={cardNumberError}
-            tabIndex={2}
+            tabIndex={5}
           />
         }
         <CardNumberInput
