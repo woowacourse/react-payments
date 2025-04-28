@@ -1,92 +1,17 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router";
 import "./App.css";
-import CardCompanyPicker from "./components/CardCompany/CardCompany";
-import CardCvcNumber from "./components/CardCvcNumber/CardCvcNumber";
-import CardExpirationDate from "./components/CardExpirationDate/CardExpirationDate";
-import CardNumber from "./components/CardNumber/CardNumber";
-import CardPassword from "./components/CardPassword/CardPassword";
-import CheckButton from "./components/CheckButton";
-import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import useCardCompanyState from "./hooks/useCardCompany/useCardCompanyState";
-import useCardNumbersState from "./hooks/useCardNumber/useCardNumberState";
-import useExpirationDateState from "./hooks/useExpirationDate/useExpirationDateState";
+import AddCardPage from "./pages/AddCardPage/AddCardPage";
+import AddCardSuccessPage from "./pages/AddCardSuccessPage/AddCardSuccessPage";
+import { BrowserRouter } from "react-router";
 
 function App() {
-  const { cardNumbers, cardType, cardNumbersError, handleChange } =
-    useCardNumbersState();
-  const { cardExpirationDate, cardExpirationDateError, dateValidate } =
-    useExpirationDateState();
-  const { selectedCompany, selectCompany } = useCardCompanyState();
-
-  // TODO: 이 형식대로 위에것들도 맞추기
-  const [cvcCompleted, setCvcCompleted] = useState(false);
-  const [passwordCompleted, setPasswordCompleted] = useState(false);
-
-  const [step, setStep] = useState(1);
-  const goToStep = (targetStep: number) => {
-    setStep(targetStep);
-  };
-
-  const isAllCompleted =
-    cardNumbersError.every((e) => e === "") &&
-    cardExpirationDateError.every((e) => e === "") &&
-    cvcCompleted &&
-    passwordCompleted &&
-    selectedCompany !== null;
-
   return (
-    <div className="App">
-      <PreviewCardLayout
-        selectedCompany={selectedCompany?.value ?? ""}
-        cardNumbers={{
-          first: cardNumbers[0],
-          second: cardNumbers[1],
-          third: cardNumbers[2],
-          fourth: cardNumbers[3],
-        }}
-        cardType={cardType}
-        cardExpirationDate={cardExpirationDate}
-      />
-      <div className="card-input">
-        <CardNumber
-          handleChange={handleChange}
-          cardNumbers={cardNumbers}
-          errorMessage={cardNumbersError}
-          onComplete={() => goToStep(2)}
-        />
-        {step >= 2 && (
-          <CardCompanyPicker
-            selectedCompany={selectedCompany}
-            selectCompany={selectCompany}
-            onComplete={() => goToStep(3)}
-          />
-        )}
-        {step >= 3 && (
-          <CardExpirationDate
-            handleChange={dateValidate}
-            cardExpirationDate={cardExpirationDate}
-            errorMessage={cardExpirationDateError}
-            onComplete={() => goToStep(4)}
-          />
-        )}
-        {step >= 4 && (
-          <CardCvcNumber
-            setCompleted={setCvcCompleted}
-            onComplete={() => goToStep(5)}
-          />
-        )}
-
-        {step >= 5 && (
-          <CardPassword
-            setCompleted={setPasswordCompleted}
-            onComplete={() => goToStep(6)}
-          />
-        )}
-      </div>
-      <div className="checkButton-container">
-        {isAllCompleted && <CheckButton />}
-      </div>
-    </div>
+    <BrowserRouter basename="/react-payments">
+      <Routes>
+        <Route path="/" element={<AddCardPage />} />
+        <Route path="/success" element={<AddCardSuccessPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

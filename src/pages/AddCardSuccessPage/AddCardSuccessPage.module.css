@@ -1,0 +1,42 @@
+.AddCardSuccessPage {
+  max-width: 300px;
+  width: 100%;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  height: 500px;
+  text-align: center;
+  gap: 35px;
+}
+
+.img {
+  width: 76px;
+  height: 76px;
+  top: 188px;
+  left: 150px;
+}
+
+.description {
+  font-size: 25px;
+  width: 338px;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.checkButton-container {
+  padding: 18px 0 8px 0;
+}
+
+.check-button {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  width: 320px;
+  height: 44px;
+  top: 414px;
+  left: 28px;
+  border-radius: 5px;
+}
