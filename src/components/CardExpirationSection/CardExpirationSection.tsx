@@ -1,11 +1,14 @@
 import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
-import { useFormContext } from '../../contexts/useFormContext';
+import { ExpirationKey, ExpirationType } from '../../types';
 
-export default function CardExpirationSection() {
-  const { expiration, expirationRef, handleExpirationChange } = useFormContext();
-
+type CardExpirationSectionProps = {
+  expiration: ExpirationType;
+  expirationRef: { month: React.RefObject<HTMLInputElement | null>; year: React.RefObject<HTMLInputElement | null> };
+  handleExpirationChange: (field: ExpirationKey, value: string) => void;
+};
+export default function CardExpirationSection({ expiration, expirationRef, handleExpirationChange }: CardExpirationSectionProps) {
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
   return (

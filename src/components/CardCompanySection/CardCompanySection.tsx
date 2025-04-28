@@ -1,10 +1,12 @@
 import { CARD_COMPANY } from '../../constants';
-import { useFormContext } from '../../contexts/useFormContext';
 import Dropdown from '../Dropdown/Dropdown';
 import { InputSection } from '../InputSection/InputSection';
 
-export default function CardCompanySection() {
-  const { company, handleCompanySelect } = useFormContext();
+type CardCompanySection = {
+  company: string;
+  handleCompanySelect: (value: string) => void;
+};
+export default function CardCompanySection({ company, handleCompanySelect }: CardCompanySection) {
   return (
     <div>
       <InputSection.TitleWrapper>

@@ -1,11 +1,9 @@
 import { CARD_BRANDS } from '../../constants';
-import { useFormContext } from '../../contexts/useFormContext';
+import { CardNumberType, ExpirationType } from '../../types';
 import Dot from '../Dot/Dot';
 import styles from './CardPreview.module.css';
 
-export default function CardPreview() {
-  const { cardNumbers, company, expiration } = useFormContext();
-
+export default function CardPreview({ cardNumbers, expiration, company }: { cardNumbers: CardNumberType; expiration: ExpirationType; company: string }) {
   const cardLogo = getCardBrand(cardNumbers.first.value);
   return (
     <div className={`${styles.card} ${styles[getCardColorClass(company)]}`}>

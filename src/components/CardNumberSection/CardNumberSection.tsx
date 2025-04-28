@@ -1,12 +1,22 @@
 import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
-import { CardNumberKey } from '../../types';
-import { useFormContext } from '../../contexts/useFormContext';
+import { CardNumberKey, CardNumberType } from '../../types';
+import { RefObject } from 'react';
 
-export default function CardNumberSection() {
-  const { cardNumbers, onCardNumbersChange, cardInputRefs, getCardNumberErrorMessage } = useFormContext();
+export type CardNumberSectionProp = {
+  cardNumbers: CardNumberType;
+  onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
+  cardInputRefs: {
+    first: RefObject<HTMLInputElement | null>;
+    second: RefObject<HTMLInputElement | null>;
+    third: RefObject<HTMLInputElement | null>;
+    fourth: RefObject<HTMLInputElement | null>;
+  };
+  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
+};
 
+export default function CardNumberSection({ cardNumbers, onCardNumbersChange, cardInputRefs, getCardNumberErrorMessage }: CardNumberSectionProp) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

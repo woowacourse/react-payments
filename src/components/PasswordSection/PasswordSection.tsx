@@ -1,10 +1,11 @@
-import { useFormContext } from '../../contexts/useFormContext';
+import { PasswordType } from '../../types';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
 import styles from './PasswordSection.module.css';
 
-export default function PasswordSection() {
-  const { handlePasswordChange, password } = useFormContext();
+type PasswordSectionProps = { handlePasswordChange: (value: string) => void; password: PasswordType };
+
+export default function PasswordSection({ handlePasswordChange, password }: PasswordSectionProps) {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

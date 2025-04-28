@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { CvcType } from '../types';
 import { INITIAL_CVC } from '../constants';
 import { isNumber } from '../utils/isNumber';

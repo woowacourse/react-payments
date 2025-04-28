@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { isNumber } from '../utils/isNumber';
 import { INITIAL_PASSWORD } from '../constants';
 
