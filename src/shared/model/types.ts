@@ -12,6 +12,7 @@ export interface CardInfoProps {
     cardPassword: string;
   };
   updateCardInfo: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  resetCardInfo: () => void;
   error: ErrorProps;
 }
 

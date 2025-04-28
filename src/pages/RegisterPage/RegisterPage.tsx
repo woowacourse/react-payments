@@ -5,7 +5,11 @@ import { useCardInfoContext } from '../../features/cardInfo/context/CardInfoCont
 import { ROUTES } from '../../shared/constants/routeConstants';
 
 export default function RegisterPage() {
-  const { cardInfo } = useCardInfoContext();
+  const { cardInfo, resetCardInfo } = useCardInfoContext();
+
+  const onClickHandle = () => {
+    resetCardInfo();
+  };
 
   return (
     <>
@@ -19,6 +23,7 @@ export default function RegisterPage() {
         <span>{cardInfo.cardIssuer}가 등록되었어요.</span>
       </S.RegisterMainContainer>
       <CustomLinkButton
+        onClick={onClickHandle}
         path={ROUTES.CARD}
         css={css`
           width: 80%;

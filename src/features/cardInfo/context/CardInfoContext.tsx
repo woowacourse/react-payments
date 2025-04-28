@@ -43,6 +43,14 @@ export const CardInfoProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const resetCardInfo = () => {
+    setCardNumber(['', '', '', '']);
+    setCardExpirationDate({ month: '', year: '' });
+    setCardCVC('');
+    setCardIssuer('');
+    setCardPassword('');
+  };
+
   const cardInfo = {
     cardNumber,
     cardExpirationDate,
@@ -51,7 +59,11 @@ export const CardInfoProvider = ({ children }: { children: ReactNode }) => {
     cardPassword,
   };
 
-  return <CardInfoContext.Provider value={{ cardInfo, updateCardInfo, error }}>{children}</CardInfoContext.Provider>;
+  return (
+    <CardInfoContext.Provider value={{ cardInfo, updateCardInfo, resetCardInfo, error }}>
+      {children}
+    </CardInfoContext.Provider>
+  );
 };
 
 export const useCardInfoContext = () => {
