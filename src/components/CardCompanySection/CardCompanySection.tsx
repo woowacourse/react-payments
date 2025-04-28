@@ -18,7 +18,7 @@ export default function CardCompanySection({ cardCompany, handleSelectChange }: 
       <div>
         <FieldGroup.Label text="카드사" hidden />
         <div className={styles.selectWrapper}>
-          <select className={styles.select} defaultValue="default" onChange={handleSelectChange}>
+          <select className={styles.select} value={cardCompany || 'default'} onChange={handleSelectChange}>
             <option value="default" disabled hidden>
               카드를 선택해주세요
             </option>
