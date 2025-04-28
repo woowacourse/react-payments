@@ -25,13 +25,20 @@ type CardCompanySelectSectionProps = {
   cardCompany: string;
   setCardCompany: (value: string) => void;
   handleMouseDown: MouseEventHandler<HTMLSelectElement>;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const CardCompanySelectSection = ({
   cardCompany,
   setCardCompany,
   handleMouseDown,
+  onChange,
 }: CardCompanySelectSectionProps) => {
+  const changeCardCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCardCompany(e.target.value);
+    onChange(e);
+  };
+
   return (
     <>
       <InputSection
@@ -42,9 +49,7 @@ const CardCompanySelectSection = ({
         <SelectField
           name="CardCompany"
           value={cardCompany}
-          onChange={(e) => {
-            setCardCompany(e.target.value);
-          }}
+          onChange={changeCardCompany}
           onMouseDown={handleMouseDown}
           placeholder="카드사를 선택해주세요"
           options={CARD_COMPANY}

@@ -65,10 +65,10 @@ const useFieldCompletion = ({
       });
     }
   }, [
-    cardCVCNumberForm,
-    cardCompanyForm,
-    cardExpirationDateForm,
-    cardNumbersForm,
+    cardCVCNumberForm.cardCVCNumber,
+    cardCompanyForm.cardCompany,
+    cardExpirationDateForm.cardExpirationDate,
+    cardNumbersForm.cardNumbers,
   ]);
 
   const resetFieldCompletetion = () => {

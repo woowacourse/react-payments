@@ -75,10 +75,13 @@ const CardFormPages = ({
       return;
     }
     if (isFieldCompletetion[2]) {
+      console.log('cardExpiration 입력');
       cardCVCInputRef.current?.focus();
       return;
     }
+
     if (isFieldCompletetion[1]) {
+      console.log('cardCompany 입력!');
       if (cardExpirationDateForm.cardExpirationDate.month.length < 2) {
         cardExpirationDateInputRef.month.current?.focus();
       } else {
@@ -146,6 +149,7 @@ const CardFormPages = ({
           <CardCompanySelectSection
             {...cardCompanyForm}
             handleMouseDown={() => setIsUserFocusing(true)}
+            onChange={() => setIsUserFocusing(false)}
           />
         )}
         <CardNumbersInputSection
