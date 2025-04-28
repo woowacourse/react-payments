@@ -4,8 +4,10 @@ import CardPage from './pages/CardPage/CardPage';
 import CardCompletePage from './pages/CardCompletePage/CardCompletePage';
 
 function App() {
+  const basename = import.meta.env.MODE === 'production' ? '/react-payments' : '/';
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<CardPage />} />
