@@ -98,3 +98,54 @@ export const CVCInput: Story = {
     );
   },
 };
+
+export const PasswordInput: Story = {
+  args: {
+    placeholder: '비밀번호를 입력하세요',
+    maxLength: 2,
+    type: 'text',
+  },
+  render: function Render(args) {
+    const [{ value }, updateArgs] = useArgs();
+    const [error, setError] = useState('');
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+
+      if (newValue === '' || /^[0-9]+$/.test(newValue)) {
+        updateArgs({ value: newValue });
+
+        if (newValue.length > 0 && newValue.length < 2) {
+          setError('2자리를 모두 입력해주세요');
+        } else {
+          setError('');
+        }
+      }
+      args.onChange?.(e);
+    };
+
+    const handleBlur = () => {
+      if (value && value.length < 2) {
+        setError('2자리를 모두 입력해주세요');
+      }
+    };
+
+    return (
+      <div>
+        <Input
+          {...args}
+          value={value || ''}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          style={{ borderColor: error ? 'red' : undefined }}
+        />
+        {error && (
+          <div style={{ color: 'red', marginTop: '5px' }}>
+            {error}
+          </div>
+        )}
+      </div>
+    );
+  },
+};
+

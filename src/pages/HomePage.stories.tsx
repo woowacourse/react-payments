@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import App from './App';
+import HomePage from "./HomePage.tsx";
 
 const meta = {
-  title: 'App/App',
-  component: App,
-} satisfies Meta<typeof App>;
+  title: 'Page/HomePage',
+  component: HomePage,
+} satisfies Meta<typeof HomePage>;
 
 export default meta;
 

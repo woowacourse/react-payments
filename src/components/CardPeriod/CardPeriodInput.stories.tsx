@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CardPeriodInput from './CardPeriodInput';
+import {CARD_EXPIRATION_ERROR} from "../../constants";
 
 const meta = {
   title: 'Components/CardPeriodInput',
@@ -36,9 +37,9 @@ export const Default: Story = {
       month: '',
       year: '',
     },
-    errorState: {
-      month: false,
-      year: false,
+    error: {
+      month: '',
+      year: '',
     },
   },
 };
@@ -49,9 +50,9 @@ export const ErrorMonth: Story = {
       month: '22',
       year: '26',
     },
-    errorState: {
-      month: true,
-      year: false,
+    error: {
+      month: CARD_EXPIRATION_ERROR.invalidMonth,
+      year: '',
     },
   },
 };
@@ -62,9 +63,9 @@ export const ErrorYear: Story = {
       month: '12',
       year: '22',
     },
-    errorState: {
-      month: false,
-      year: true,
+    error: {
+      month: '',
+      year: CARD_EXPIRATION_ERROR.invalidYear,
     },
   },
 };

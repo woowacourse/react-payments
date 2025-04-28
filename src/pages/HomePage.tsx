@@ -1,0 +1,152 @@
+import Card from "../components/Card/Card";
+import CardPasswordInput from "../components/CardPassword/CardPasswordInput";
+import CardCVCInput from "../components/CardCVCInput/CardCVCInput";
+import CardPeriodInput from "../components/CardPeriod/CardPeriodInput";
+import CardBrand from "../components/CardBrand/CardBrand";
+import CardNumberInput from "../components/CardNumberInput/CardNumberInput";
+import Button from "../components/@common/Button/Button";
+import {Link} from "react-router-dom";
+import {useCardBrand, useCardCVC, useCardExpiration, useCardNumber, useCardPassword, useProgressForm} from "../hooks";
+import {cardLayout, mainLayout} from "../App.style";
+
+function HomePage() {
+  const {
+    showCardBrand,
+    showCardPeriod,
+    showCardCVC,
+    showCardPassword,
+    showBrandStep,
+    showPeriodStep,
+    showCVCStep,
+    showPasswordStep
+  } = useProgressForm();
+
+  const {
+    cardNumber,
+    error: cardNumberError,
+    inputRefs,
+    onChange: handleCardNumberChange,
+    onKeyDown: handleCardNumberKeyDown,
+    onBlur: handleCardNumberBlur,
+    isValid: isCardNumberValid,
+  } = useCardNumber(() => {
+    showBrandStep();
+    setTimeout(() => brandRef.current?.focus(), 100);
+  });
+
+  const {
+    brand,
+    brandRef,
+    options,
+    onChange,
+    isValid: isCardBrandValid,
+  } = useCardBrand(() => {
+    showPeriodStep();
+    setTimeout(() => monthRef.current?.focus(), 100);
+  });
+
+  const {
+    value: cardExpirationDate,
+    cardExpirationDateError: cardExpirationDateError,
+    monthRef,
+    yearRef,
+    onChange: handleCardExpirationChange,
+    onYearKeyDown: handleCardExpirationKeyDown,
+    onBlur: handleCardExpirationBlur,
+    isValid: isCardExpirationValid,
+  } = useCardExpiration(() => {
+    showCVCStep();
+    setTimeout(() => cvcRef.current?.focus(), 100);
+  });
+
+  const {
+    cardCVC,
+    cardCVCError,
+    cvcRef,
+    handleCardCVCChange,
+    isValid: isCardCVCValid,
+  } = useCardCVC(() => {
+    showPasswordStep();
+    setTimeout(() => passwordRef.current?.focus(), 100);
+  });
+
+  const {
+    cardPassword,
+    cardPasswordError,
+    passwordRef,
+    handleCardPasswordChange,
+    isValid: isCardPasswordValid,
+  } = useCardPassword();
+
+  const showConfirmButton = (
+    isCardNumberValid && isCardBrandValid && isCardExpirationValid && isCardCVCValid && isCardPasswordValid
+  );
+
+  return (
+    <main css={mainLayout}>
+      <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} brand={brand}/>
+      <section css={cardLayout}>
+        {showCardPassword &&
+          <CardPasswordInput
+            cardPassword={cardPassword}
+            error={cardPasswordError}
+            passwordRef={passwordRef}
+            onChange={handleCardPasswordChange}
+            tabIndex={9}
+          />
+        }
+        {
+          showCardCVC &&
+          <CardCVCInput
+            cardCVC={cardCVC}
+            error={cardCVCError}
+            cvcRef={cvcRef}
+            onChange={handleCardCVCChange}
+            tabIndex={8}
+          />
+        }
+        {
+          showCardPeriod &&
+          <CardPeriodInput
+            cardExpirationDate={cardExpirationDate}
+            error={cardExpirationDateError}
+            onChange={handleCardExpirationChange}
+            monthRef={monthRef}
+            yearRef={yearRef}
+            onKeyDown={handleCardExpirationKeyDown}
+            onBlur={handleCardExpirationBlur}
+            tabIndex={6}
+            autoFocus
+          />
+        }
+        {
+          showCardBrand &&
+          <CardBrand
+            value={brand}
+            onChange={onChange}
+            options={options}
+            brandRef={brandRef}
+            tabIndex={5}
+          />
+        }
+        <CardNumberInput
+          cardNumber={cardNumber}
+          error={cardNumberError}
+          inputRefs={inputRefs}
+          onChange={handleCardNumberChange}
+          onKeyDown={handleCardNumberKeyDown}
+          onBlur={handleCardNumberBlur}
+          tabIndex={1}
+          autoFocus
+        />
+      </section>
+      {showConfirmButton && (
+        <Link to='/complete' state={{cardNumber, brand}}>
+          <Button content='확인' style="bottom"/>
+        </Link>
+      )}
+    </main>
+  );
+}
+
+export default HomePage;
