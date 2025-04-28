@@ -53,12 +53,7 @@ function Payments() {
   }, [cardNumbers, cardBrand, expirationPeriod, cvcNumber, password, error]);
 
   const handleClick = () => {
-    navigate("/success", {
-      state: {
-        cardNumber: `${cardNumbers.first}`,
-        cardBrand: `${cardBrand}`,
-      },
-    });
+    navigate("/success");
   };
 
   return (
